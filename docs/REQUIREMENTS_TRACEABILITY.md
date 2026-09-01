@@ -60,11 +60,11 @@ Columns: ID · Requirement · Governing source · Implementation · API · UI ·
 | NFR-001 | Reproducible from frozen files and config | Core 01 §7 | hashed data, lru-cached config | integrity + golden | IMPLEMENTED | S01 |
 | NFR-002 | Every derived metric has deterministic formula and source pointer | Core 01 §7 | rules/capability/economics metrics | formula tests | IMPLEMENTED | S01 |
 | NFR-003 | Fail-closed: unknown hard gates reduce permission | Core 01 §7 | `evaluate_capability` | `test_public_steel_dstar_is_withheld...` | IMPLEMENTED | S01 |
-| NFR-004 | Offline demo, no API key | Core 01 §7 | no network calls | frontend CDN test | IMPLEMENTED | S01 |
+| NFR-004 | Offline demo, no API key | Core 01 §7 | no network calls | frontend CDN test; CI run 33569855956 (PR #1, head b0b2ab4): uv 3.12, uv 3.14, pip 3.12, Docker all pass | TESTED | S01 |
 | NFR-005 | Local API responses normally < 250 ms | Core 01 §7 | in-memory JSON | **no test** | IMPLEMENTED (unmeasured) | S05 |
 | NFR-006 | Accessibility: semantic controls, contrast, keyboard | Core 01 §7 | `index.html` buttons/labels | static test | IMPLEMENTED | S01 |
 | NFR-007 | Arabic RTL without corruption | Core 01 §7 | `dir="rtl"` in cards, dossier | `test_frontend_contains_evidence_mode_and_arabic_support` | IMPLEMENTED | S01 |
-| NFR-008 | Runs in WSL, Linux, Docker | Core 01 §7 | scripts, Dockerfile | CI (S01) | IMPLEMENTED | S01 |
+| NFR-008 | Runs in WSL, Linux, Docker | Core 01 §7 | scripts, Dockerfile | WSL `make ci` (S01 evidence); CI run 33569855956 (PR #1, head b0b2ab4): uv 3.12, uv 3.14, pip 3.12, Docker all pass | TESTED | S01 |
 | NFR-009 | Domain calculations callable without web layer | Core 01 §7 | `decision_engine.analyze` | unit tests | IMPLEMENTED | S01 |
 | NFR-010 | No uploaded Ministry data included | Core 01 §7 | synthetic only | leakage tests | IMPLEMENTED | S01 |
 
@@ -81,7 +81,7 @@ Columns: ID · Requirement · Governing source · Implementation · API · UI ·
 | INV-07 | Thresholds from versioned config, no hidden constants | Manifest §6.7; AGENTS #7 | partial | partial | IMPLEMENTED (partial) | S02 |
 | INV-08 | Unit value never proves grade | Manifest §6.8; AGENTS #6 | R4-D text | `test_degraded_uv_never_claims_grade` | IMPLEMENTED | S01 |
 | INV-09 | Lower-cost routes precede supported greenfield | Manifest §6.9; AGENTS #5 | route 5 selection; no route 7 | golden | IMPLEMENTED | S01 |
-| INV-10 | Golden tests on hashed snapshots only, never live | Manifest §6.10; AGENTS #8 | repository loaders | integrity | IMPLEMENTED | S01 |
+| INV-10 | Golden tests on hashed snapshots only, never live | Manifest §6.10; AGENTS #8 | repository loaders | integrity; CI run 33569855956 (PR #1, head b0b2ab4): uv 3.12, uv 3.14, pip 3.12, Docker all pass | TESTED | S01 |
 | INV-11 | Steel public INVESTIGATE; PP public REJECT preserved | Manifest §6.11; AGENTS #9 | golden fixtures | `test_golden_cases` | IMPLEMENTED | S01 |
 | INV-12 | Computation autonomous, authorization not anonymous | Manifest §6.12; AGENTS #10 | governance screen; no approval endpoint | — | IMPLEMENTED | S01 |
 
@@ -89,12 +89,12 @@ Columns: ID · Requirement · Governing source · Implementation · API · UI ·
 
 | ID | Gate / layer | Source | Present in v0.1.0 | Status | Slice |
 |---|---|---|---|---|---|
-| TL-01 | Integrity layer (hashes, no synthetic in public, mandatory metadata) | Core 09 §2.1 | `verify_integrity.py`, `test_integrity_contract`, `test_synthetic_isolation` | IMPLEMENTED | S01 |
-| TL-02 | Formula unit tests | Core 09 §2.2 | `test_capability_economics`, `test_rules` | IMPLEMENTED | S01 |
-| TL-03 | Rule tests (R1-D boundary, R2, R3, R4-F disabled, R4-D, R11) | Core 09 §2.3 | partial — no R1-D boundary, no R3 explicit, no R4-F explicit | IMPLEMENTED (partial) | S02 |
-| TL-04 | Golden A, A-S, B, B-S | Core 09 §2.4 | `test_golden_cases` | IMPLEMENTED | S01 |
-| TL-05 | Extraction golden (4 fields exact, spans retained) | Core 09 §2.5 | `test_extraction` | IMPLEMENTED | S01 |
-| TL-06 | API tests | Core 09 §2.6 | `test_api` | IMPLEMENTED | S01 |
+| TL-01 | Integrity layer (hashes, no synthetic in public, mandatory metadata) | Core 09 §2.1 | `verify_integrity.py`, `test_integrity_contract`, `test_synthetic_isolation`; CI run 33569855956 (PR #1, head b0b2ab4): uv 3.12, uv 3.14, pip 3.12, Docker all pass | TESTED | S01 |
+| TL-02 | Formula unit tests | Core 09 §2.2 | `test_capability_economics`, `test_rules`; CI run 33569855956 (PR #1, head b0b2ab4): uv 3.12, uv 3.14, pip 3.12, Docker all pass | TESTED | S01 |
+| TL-03 | Rule tests (R1-D boundary, R2, R3, R4-F disabled, R4-D, R11) | Core 09 §2.3 | existing cases executed in CI (CI run 33569855956 (PR #1, head b0b2ab4): uv 3.12, uv 3.14, pip 3.12, Docker all pass); R1-D boundary, R3 explicit and R4-F explicit tests remain S02 | TESTED (partial; existing cases executed in CI; R1-D boundary, R3 explicit and R4-F explicit tests remain S02) | S02 |
+| TL-04 | Golden A, A-S, B, B-S | Core 09 §2.4 | `test_golden_cases`; CI run 33569855956 (PR #1, head b0b2ab4): uv 3.12, uv 3.14, pip 3.12, Docker all pass | TESTED | S01 |
+| TL-05 | Extraction golden (4 fields exact, spans retained) | Core 09 §2.5 | `test_extraction`; CI run 33569855956 (PR #1, head b0b2ab4): uv 3.12, uv 3.14, pip 3.12, Docker all pass | TESTED | S01 |
+| TL-06 | API tests | Core 09 §2.6 | `test_api`; CI run 33569855956 (PR #1, head b0b2ab4): uv 3.12, uv 3.14, pip 3.12, Docker all pass | TESTED | S01 |
 | TL-07 | Frontend contract tests | Core 09 §2.7 | `test_static_frontend` (no "states display together" or "dossier action" check) | IMPLEMENTED (partial) | S04 |
 | TL-08 | Threshold boundary tests below/equal/above | Core 09 §3 | **absent** | NOT_STARTED | S02 |
 | TL-09 | Synthetic leakage assertions 1–7 | Core 09 §4 | 1,2,3,4,5,7 present; **6 (real dossier has no disclosure) absent** | IMPLEMENTED (partial) | S03 |
@@ -105,16 +105,16 @@ Columns: ID · Requirement · Governing source · Implementation · API · UI ·
 | GATE-E | Economics unsupported first, S\* minimal, PP no support | Core 09 §6 | yes | IMPLEMENTED | S01 |
 | GATE-F | Zero leakage, dual states, labelled rows | Core 09 §6 | yes | IMPLEMENTED | S01 |
 | GATE-G | Product: frontend, toggle, adaptive manifest, dossier, Arabic | Core 09 §6 | yes (manual) | IMPLEMENTED | S05 |
-| GATE-H | Release: build_manifests (approved only), verify, pytest, smoke all pass | Core 09 §6 | manual only; **no CI** | NOT_STARTED | S01 |
+| GATE-H | Release: build_manifests (approved only), verify, pytest, smoke all pass | Core 09 §6 | `.github/workflows/ci.yml`, `Makefile` `ci`; `build_manifests.py` not run because S01 has no governed change; CI run 33569855956 (PR #1, head b0b2ab4): uv 3.12, uv 3.14, pip 3.12, Docker all pass | TESTED | S01 |
 
 ## E. Build-control requirements (owner mandate 2026-09-02)
 
 | ID | Requirement | Implementation | Status | Slice |
 |---|---|---|---|---|
 | BC-01 | Git repository with default branch `main` on `baramiSG/Industrial_mvp` | S00 | PLANNED | S00 |
-| BC-02 | No secrets, private data or prohibited files in Git; `.env.example` placeholders only | `.gitignore`, prohibited-file scan | PLANNED | S00/S01 |
+| BC-02 | No secrets, private data or prohibited files in Git; `.env.example` placeholders only | `.gitignore`, `scripts/check_prohibited_files.py`, `tests/test_prohibited_files.py`, S01 test evidence | TESTED | S00/S01 |
 | BC-03 | Durable state: `.workflow/state.json`, slice records, control docs | created 2026-09-02 | IMPLEMENTED | S00 |
-| BC-04 | CI on PR/push executing integrity, tests, smoke, scans | `.github/workflows/ci.yml` | NOT_STARTED | S01 |
+| BC-04 | CI on PR/push executing integrity, tests, smoke, scans | `.github/workflows/ci.yml`, `tests/test_ci_contract.py`; CI run 33569855956 (PR #1, head b0b2ab4): uv 3.12, uv 3.14, pip 3.12, Docker all pass | TESTED | S01 |
 | BC-05 | Every slice: branch → plan → review → implement → review → independent review → gates → PR → CI → merge | slice records | PLANNED | all |
 | BC-06 | Model separation (Implementer ≠ Supervisor; Reviewer ≠ Implementer) | ADR-002 | PLANNED | all |
 | BC-07 | Requirements traceability maintained | this file | IMPLEMENTED | all |

@@ -15,11 +15,11 @@
     "default_branch": "main",
     "auth": "gh CLI, account baramiSG, scopes repo+workflow"
   },
-  "current_slice": "S00-baseline-import",
-  "state": "DISCOVERING",
+  "current_slice": "S01-ci-and-toolchain",
+  "state": "READY_TO_MERGE",
   "slices": {
-    "S00-baseline-import": {"state": "IN_PROGRESS", "branch": "main", "pr": null, "merge_commit": null},
-    "S01-ci-and-toolchain": {"state": "NOT_STARTED", "branch": "slice/S01-ci-and-toolchain", "pr": null, "merge_commit": null},
+    "S00-baseline-import": {"state": "MERGED", "branch": "main", "pr": null, "merge_commit": "0731ae546f79c9ac3bfd92612a01f07da67937ed"},
+    "S01-ci-and-toolchain": {"state": "READY_TO_MERGE", "zero_finding_gate": "2026-09-02 supervisor 0 / reviewer 0 (APPROVE)", "local_gates": "72 passed, INTEGRITY PASS, SMOKE PASS", "ci": "run 33569855956 green 4/4 on b0b2ab4", "branch": "slice/S01-ci-and-toolchain", "pr": "https://github.com/baramiSG/Industrial_mvp/pull/1", "merge_commit": null, "base": "0731ae546f79c9ac3bfd92612a01f07da67937ed", "plan_approved": "2026-09-02", "planner_model": "gpt-5.6-sol-max", "implementer_model": "gpt-5.6-sol-max", "reviewer_model": "cursor-grok-4.6-xhigh"},
     "S02-threshold-governance": {"state": "NOT_STARTED", "branch": "slice/S02-threshold-governance", "pr": null, "merge_commit": null},
     "S03-evidence-isolation-hardening": {"state": "NOT_STARTED", "branch": "slice/S03-evidence-isolation-hardening", "pr": null, "merge_commit": null},
     "S04-simulation-fidelity": {"state": "NOT_STARTED", "branch": "slice/S04-simulation-fidelity", "pr": null, "merge_commit": null},
