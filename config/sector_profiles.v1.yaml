@@ -1,0 +1,43 @@
+metadata:
+  version: "1.0.0"
+  effective_date: "2026-08-31"
+  authority: "Industrial Opportunity Resolution Methodology, Section 6.3"
+  status: frozen_for_demo_cycle
+
+profiles:
+  coated_steel:
+    label: Coated steel
+    weights:
+      feedstock_chemistry: 0.05
+      core_process_route: 0.20
+      equipment_envelope: 0.20
+      finishing_spec_control: 0.15
+      qa_lab_metrology: 0.10
+      certification_customer_qualification: 0.10
+      capacity_time_window: 0.10
+      utilities_ehs_permitting: 0.05
+      skills_market_integration: 0.05
+    hard_gates:
+      - substrate_range
+      - width_thickness_envelope
+      - coating_route_and_mass
+      - surface_treatment
+      - mandatory_or_customer_standard
+  technical_plastics:
+    label: Technical plastics
+    weights:
+      feedstock_chemistry: 0.15
+      core_process_route: 0.20
+      equipment_envelope: 0.15
+      finishing_spec_control: 0.10
+      qa_lab_metrology: 0.10
+      certification_customer_qualification: 0.15
+      capacity_time_window: 0.05
+      utilities_ehs_permitting: 0.05
+      skills_market_integration: 0.05
+    hard_gates:
+      - polymer_additive_compatibility
+      - conversion_route
+      - tooling
+      - performance_requirement
+      - application_qualification

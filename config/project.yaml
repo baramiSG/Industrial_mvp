@@ -1,0 +1,24 @@
+project:
+  id: ior-mvp
+  name: Industrial Opportunity Resolution Engine — Ministry Demonstration
+  version: "0.1.0"
+  as_of_date: "2026-08-31"
+  confidentiality: confidential_demo
+  modes:
+    - public
+    - simulated
+  public_mode_definition: "Only frozen, attributable public evidence contributes to the real decision."
+  simulated_mode_definition: "Synthetic Ministry-grade fields are evaluated in an isolated branch to demonstrate the route that confirmed internal evidence could support."
+
+external_build_authority:
+  flight_control_env: FLIGHT_CONTROL_HOME
+  universal_project_guide_env: UNIVERSAL_NEW_PROJECT_GUIDE
+  rule: "Reusable orchestration and task-state machinery is referenced, not copied into this repository."
+
+golden_cases:
+  - opportunity_id: SAU-H0-721049
+    public_expected_state: INVESTIGATE
+    simulated_expected_state: ADVANCE
+  - opportunity_id: SAU-H0-390210
+    public_expected_state: REJECT
+    simulated_expected_state: REJECT

@@ -1,0 +1,14 @@
+---
+description: Industrial decision and synthetic evidence guardrails
+globs: "src/**/*.py,data/**/*.json,config/**/*.yaml"
+alwaysApply: true
+---
+
+- `real_decision` uses public evidence only.
+- Synthetic records require `synthetic_flag=true`, `scenario_id`, `source=DEMO_GENERATOR`, Class D and a visible warning label.
+- Never ADVANCE the real case past unresolved hard gates.
+- Unknown capability states do not improve D*.
+- Keep thresholds in versioned YAML, not code.
+- Unit-value dispersion never proves a grade.
+- Brownfield and no-action precede supported greenfield.
+- Preserve the two public golden outcomes exactly unless the governing methodology and frozen snapshot are formally changed.

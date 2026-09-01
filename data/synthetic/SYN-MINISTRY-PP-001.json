@@ -1,0 +1,65 @@
+{
+  "scenario_id": "SYN-MINISTRY-PP-001",
+  "opportunity_id": "SAU-H0-390210",
+  "synthetic_flag": true,
+  "display_label": "SIMULATED — NOT MINISTRY EVIDENCE",
+  "seed_basis": "Public 2024 imports and public producer capacity; synthetic grade allocation is constrained to remain below public producer totals.",
+  "evidence_class": "D",
+  "source": "DEMO_GENERATOR",
+  "synthetic_inputs": {
+    "target_specification": {
+      "name": "Generic injection-grade polypropylene",
+      "application": "general rigid packaging",
+      "customer_qualification_required": false
+    },
+    "demand": {
+      "target_spec_demand_kt": 56.0,
+      "downside_demand_kt": 51.0,
+      "committed_demand_kt": 0.0,
+      "announced_demand_kt": 0.0
+    },
+    "plant_line": {
+      "nameplate_kt": 1170.0,
+      "availability": 0.93,
+      "yield": 0.97,
+      "qualification_share": 0.18,
+      "market_allocation_share": 0.55,
+      "current_utilisation": 0.78
+    },
+    "equivalence": {
+      "domestic_grade_equivalent": true,
+      "qualified_available_kt": 80.0,
+      "binding_market_failure": "none verified"
+    },
+    "capability_states": {
+      "feedstock_chemistry": 0,
+      "core_process_route": 0,
+      "equipment_envelope": 0,
+      "finishing_spec_control": 0,
+      "qa_lab_metrology": 0,
+      "certification_customer_qualification": 0,
+      "capacity_time_window": 0,
+      "utilities_ehs_permitting": 0,
+      "skills_market_integration": 0
+    },
+    "hard_gates": {
+      "polymer_additive_compatibility": "resolved",
+      "conversion_route": "resolved",
+      "tooling": "not applicable to resin production",
+      "performance_requirement": "resolved",
+      "application_qualification": "resolved"
+    },
+    "economics": {
+      "currency": "SAR_m",
+      "support_required": 0.0,
+      "reason": "No verified specification-adjusted gap; capacity support is non-additional."
+    },
+    "evsi": {
+      "route_change_probability": 0.08,
+      "value_difference_m_sar": 25.0,
+      "evidence_cost_m_sar": 3.0,
+      "delay_cost_m_sar": 1.0,
+      "next_fact": "Obtain named specialty-grade exception only if a buyer identifies one"
+    }
+  }
+}

@@ -1,0 +1,39 @@
+metadata:
+  version: "1.0.0"
+  effective_date: "2026-08-31"
+  authority: "Industrial Opportunity Resolution Methodology, Sections 2.1, 10 and 11"
+
+classes:
+  A: "Official, current, product-specific and validated against the responsible authority or owner."
+  B: "Authoritative but aggregated, lagged, transformed or awaiting minor validation."
+  C: "Credible technical/public evidence or company disclosure not yet confirmed by the responsible authority."
+  D: "Proxy, inference, model assumption or incomplete mapping."
+  E: "Missing, contradictory, unusable or outside the classification boundary."
+
+advance_gate:
+  blocked_if_D_or_E:
+    - product_identity
+    - demand_at_required_specification
+    - domestic_supply_or_capability
+    - hard_regulatory_or_process_gate
+
+synthetic_isolation:
+  invariant: "Synthetic evidence can never change the real decision state."
+  required_fields:
+    - synthetic_flag
+    - scenario_id
+    - seed_basis
+    - evidence_class
+    - source
+  allowed_decision_field: simulation_decision
+  forbidden_decision_field: real_decision
+  display_label: "SIMULATED — NOT MINISTRY EVIDENCE"
+
+source_statuses:
+  - observed
+  - calculated
+  - model_estimated
+  - inferred
+  - assumption
+  - unresolved
+  - synthetic

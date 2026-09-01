@@ -1,0 +1,99 @@
+{
+  "scenario_id": "SYN-MINISTRY-STEEL-001",
+  "opportunity_id": "SAU-H0-721049",
+  "synthetic_flag": true,
+  "display_label": "SIMULATED — NOT MINISTRY EVIDENCE",
+  "seed_basis": "Public 2024 import quantity and UNICOIL published nameplate capacity; synthetic line allocations reconcile within those public marginals.",
+  "evidence_class": "D",
+  "source": "DEMO_GENERATOR",
+  "synthetic_inputs": {
+    "target_specification": {
+      "name": "Z275 structural galvanized coil for coastal construction",
+      "standard": "SASO-ASTM A653/A653M",
+      "coating_mass_g_m2": 275,
+      "thickness_mm": [
+        0.7,
+        1.5
+      ],
+      "width_mm": [
+        1000,
+        1250
+      ],
+      "application": "coastal construction panels",
+      "customer_qualification_required": true
+    },
+    "demand": {
+      "target_spec_demand_kt": 104.0,
+      "downside_demand_kt": 100.0,
+      "committed_demand_kt": 74.0,
+      "announced_demand_kt": 22.0
+    },
+    "plant_line": {
+      "nameplate_kt": 250.0,
+      "availability": 0.92,
+      "yield": 0.94,
+      "qualification_share": 0.38,
+      "market_allocation_share": 0.7,
+      "current_utilisation": 0.89
+    },
+    "capability_states": {
+      "feedstock_chemistry": 0,
+      "core_process_route": 0,
+      "equipment_envelope": 1,
+      "finishing_spec_control": 2,
+      "qa_lab_metrology": 0,
+      "certification_customer_qualification": 2,
+      "capacity_time_window": 1,
+      "utilities_ehs_permitting": 0,
+      "skills_market_integration": 0
+    },
+    "hard_gates": {
+      "substrate_range": "resolved",
+      "width_thickness_envelope": "resolved",
+      "coating_route_and_mass": "resolved with upgrade",
+      "surface_treatment": "resolved with upgrade",
+      "mandatory_or_customer_standard": "resolved with qualification programme"
+    },
+    "upgrade": {
+      "incremental_capacity_kt": 50.0,
+      "schedule_months": 18,
+      "description": "Brownfield finishing-control, coating-mass stability and customer-qualification package"
+    },
+    "economics": {
+      "currency": "SAR_m",
+      "cash_flows_without_support": [
+        -179.8009204232,
+        28.6362006614,
+        28.6362006614,
+        28.6362006614,
+        28.6362006614,
+        28.6362006614,
+        28.6362006614,
+        28.6362006614,
+        28.6362006614,
+        28.6362006614,
+        28.6362006614
+      ],
+      "hurdle_rate": 0.12,
+      "support_instrument": "conditional capex and qualification package",
+      "national_value": {
+        "domestic_value_added": 126.0,
+        "exports": 24.0,
+        "resilience_value": 62.0,
+        "knowledge_skills": 18.0,
+        "fiscal_receipts": 21.0,
+        "government_cost": 18.0,
+        "displacement": 12.0,
+        "resource_environment": 8.0,
+        "risk_allowance": 15.0
+      }
+    },
+    "evsi": {
+      "route_change_probability": 0.72,
+      "value_difference_m_sar": 190.0,
+      "evidence_cost_m_sar": 2.5,
+      "delay_cost_m_sar": 5.0,
+      "next_fact": "Confirm line-level qualification share and customer acceptance test"
+    }
+  }
+}

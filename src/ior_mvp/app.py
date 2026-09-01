@@ -1,0 +1,111 @@
+from __future__ import annotations
+
+from pathlib import Path
+from typing import Literal
+
+from fastapi import FastAPI, HTTPException, Query
+from fastapi.responses import FileResponse, HTMLResponse
+from fastapi.staticfiles import StaticFiles
+
+from . import __version__
+from .ai_extraction import run_extraction_golden_set
+from .config import PROJECT_ROOT, project_config, thresholds_config
+from .data_repository import RepositoryError
+from .decision_engine import analyze, list_opportunities
+from .dossier import build_dossier, render_dossier_html
+from .genui import build_ui_manifest
+
+
+STATIC_DIR = Path(__file__).resolve().parent / "static"
+
+app = FastAPI(
+    title="Industrial Opportunity Resolution Engine MVP",
+    description="Public-evidence decision resolution with an isolated synthetic Ministry demonstration layer.",
+    version=__version__,
+)
+app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
+
+
+def _safe_analysis(opportunity_id: str, mode: Literal["public", "simulated"]):
+    try:
+        return analyze(opportunity_id, mode)
+    except (RepositoryError, ValueError) as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from exc
+
+
+@app.get("/api/health")
+def health() -> dict:
+    return {
+        "status": "ok",
+        "version": __version__,
+        "project_root": str(PROJECT_ROOT),
+        "evidence_boundary": "public real decision / isolated synthetic simulation",
+    }
+
+
+@app.get("/api/project")
+def project() -> dict:
+    return project_config()
+
+
+@app.get("/api/thresholds")
+def thresholds() -> dict:
+    return thresholds_config()
+
+
+@app.get("/api/opportunities")
+def opportunities(
+    mode: Literal["public", "simulated"] = Query(default="public")
+) -> list[dict]:
+    return list_opportunities(mode)
+
+
+@app.get("/api/opportunities/{opportunity_id}")
+def opportunity(
+    opportunity_id: str,
+    mode: Literal["public", "simulated"] = Query(default="public"),
+) -> dict:
+    return _safe_analysis(opportunity_id, mode)
+
+
+@app.get("/api/opportunities/{opportunity_id}/ui-manifest")
+def ui_manifest(
+    opportunity_id: str,
+    mode: Literal["public", "simulated"] = Query(default="public"),
+) -> dict:
+    return build_ui_manifest(_safe_analysis(opportunity_id, mode))
+
+
+@app.get("/api/opportunities/{opportunity_id}/dossier")
+def dossier(
+    opportunity_id: str,
+    mode: Literal["public", "simulated"] = Query(default="public"),
+) -> dict:
+    return build_dossier(_safe_analysis(opportunity_id, mode))
+
+
+@app.get("/api/opportunities/{opportunity_id}/dossier.html", response_class=HTMLResponse)
+def dossier_html(
+    opportunity_id: str,
+    mode: Literal["public", "simulated"] = Query(default="public"),
+) -> HTMLResponse:
+    dossier_value = build_dossier(_safe_analysis(opportunity_id, mode))
+    return HTMLResponse(render_dossier_html(dossier_value))
+
+
+@app.get("/api/extraction-demo")
+def extraction_demo() -> dict:
+    return run_extraction_golden_set()
+
+
+@app.get("/", include_in_schema=False)
+def index() -> FileResponse:
+    return FileResponse(STATIC_DIR / "index.html")
+
+
+@app.get("/{path:path}", include_in_schema=False)
+def spa_fallback(path: str) -> FileResponse:
+    candidate = STATIC_DIR / path
+    if candidate.exists() and candidate.is_file():
+        return FileResponse(candidate)
+    return FileResponse(STATIC_DIR / "index.html")

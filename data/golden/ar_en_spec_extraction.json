@@ -1,0 +1,51 @@
+{
+  "golden_set_id": "AR-EN-SPEC-001",
+  "authority": "Industrial Opportunity Resolution Methodology, Section 5.1.1",
+  "records": [
+    {
+      "field": "standard",
+      "text_ar": "اعتمدت الهيئة السعودية للمواصفات والمقاييس ASTM A653 / A653M",
+      "text_en": "SASO has adopted ASTM A653/A653M",
+      "expected": {
+        "standard": "SASO-ASTM A653/A653M"
+      }
+    },
+    {
+      "field": "mandatory_minimum_coating",
+      "text_ar": "الحد الأدنى الإلزامي لطبقة الزنك هو 60 جم / م2",
+      "text_en": "The mandatory minimum zinc coating is 60 gsm",
+      "expected": {
+        "coating_mass_g_m2": 60,
+        "basis": "total both sides"
+      }
+    },
+    {
+      "field": "exposure_condition",
+      "text_ar": "التطبيقات القريبة من البحر تتطلب طلاءًا أثقل",
+      "text_en": "Applications closer to the sea or offshore require a heavier zinc coating",
+      "expected": {
+        "environment": "coastal_or_offshore",
+        "requirement": "heavier coating may be required"
+      }
+    },
+    {
+      "field": "product_envelope",
+      "text_ar": "السماكة 0.18–3.00 مم؛ العرض 600–1300 مم؛ طبقة الزنك 45–350 جم/م2",
+      "text_en": "Thickness 0.18–3.00 mm; width 600–1300 mm; zinc coating 45–350 g/m2",
+      "expected": {
+        "thickness_mm": [
+          0.18,
+          3.0
+        ],
+        "width_mm": [
+          600,
+          1300
+        ],
+        "coating_mass_g_m2": [
+          45,
+          350
+        ]
+      }
+    }
+  ]
+}

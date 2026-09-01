@@ -1,0 +1,13 @@
+---
+description: Required proof before implementation is reviewable
+globs: "src/**/*.py,tests/**/*.py,config/**/*.yaml,data/**/*.json"
+alwaysApply: true
+---
+
+Run:
+
+1. `PYTHONPATH=src python3 scripts/verify_integrity.py`
+2. `PYTHONPATH=src pytest -q`
+3. `PYTHONPATH=src python3 scripts/demo_smoke.py`
+
+Do not weaken tests or regenerate hashes merely to make a failing change pass. Explain and obtain the applicable authority change first.

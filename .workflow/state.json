@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0",
+  "project": "industrial-opportunity-resolution-mvp",
+  "supervisor_model": "claude-fable-5-1-thinking-max",
+  "model_separation": {
+    "planner_implementer_model": "gpt-5.6-sol-max",
+    "reviewer_model": "cursor-grok-4.6-xhigh",
+    "rule": "IMPLEMENTER_MODEL != SUPERVISOR_MODEL and REVIEWER_MODEL != IMPLEMENTER_MODEL (reviewer also != supervisor)"
+  },
+  "execution_note": "Supervisor's direct shell tool is unavailable this session; all shell execution is delegated to shell subagents and verified by reading files / gh API output.",
+  "github": {
+    "remote": "https://github.com/baramiSG/Industrial_mvp",
+    "owner": "baramiSG",
+    "visibility": "PRIVATE",
+    "default_branch": "main",
+    "auth": "gh CLI, account baramiSG, scopes repo+workflow"
+  },
+  "current_slice": "S00-baseline-import",
+  "state": "DISCOVERING",
+  "slices": {
+    "S00-baseline-import": {"state": "IN_PROGRESS", "branch": "main", "pr": null, "merge_commit": null},
+    "S01-ci-and-toolchain": {"state": "NOT_STARTED", "branch": "slice/S01-ci-and-toolchain", "pr": null, "merge_commit": null},
+    "S02-threshold-governance": {"state": "NOT_STARTED", "branch": "slice/S02-threshold-governance", "pr": null, "merge_commit": null},
+    "S03-evidence-isolation-hardening": {"state": "NOT_STARTED", "branch": "slice/S03-evidence-isolation-hardening", "pr": null, "merge_commit": null},
+    "S04-simulation-fidelity": {"state": "NOT_STARTED", "branch": "slice/S04-simulation-fidelity", "pr": null, "merge_commit": null},
+    "S05-final-acceptance": {"state": "NOT_STARTED", "branch": "slice/S05-final-acceptance", "pr": null, "merge_commit": null}
+  },
+  "last_updated": "2026-09-02T01:05:00+03:00",
+  "history": [
+    {"at": "2026-09-02T01:05:00+03:00", "event": "Build control established; repository read end to end; GitHub destination verified (private, empty)."}
+  ]
+}

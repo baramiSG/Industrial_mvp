@@ -1,0 +1,108 @@
+metadata:
+  artifact: industrial-opportunity-thresholds
+  version: "1.0.0"
+  effective_date: "2026-08-31"
+  authority: "Industrial Opportunity Resolution Methodology, Appendix B"
+  status: frozen_for_demo_cycle
+  change_gate: "methodology-owner approval + golden-case regression"
+
+rules:
+  R1_F:
+    months_positive: 30
+    window_months: 36
+    consecutive_complete_years: 3
+    materiality_percentile_within_nis_cluster: 0.75
+    rationale: "Persistent retained exposure; full execution path."
+    sector_scope: all
+    revision_date: "2026-08-31"
+  R1_D:
+    positive_observed_years: 3
+    window_years: 4
+    allow_interpolation: false
+    confidence_cap: C
+    may_support_advance: false
+    rationale: "Degraded persistence signal when continuity is incomplete."
+    sector_scope: all
+    revision_date: "2026-08-31"
+  R2:
+    minimum_quantity_contribution_share: 0.60
+    minimum_quantity_cagr: 0.05
+    require_positive_quantity_growth: true
+    rationale: "Separate structural volume growth from price-only growth."
+    sector_scope: all
+    revision_date: "2026-08-31"
+  R3:
+    supplier_hhi: 0.25
+    largest_supplier_share: 0.50
+    rationale: "Generate resilience review, not automatic localisation."
+    sector_scope: all
+    revision_date: "2026-08-31"
+  R4_F:
+    minimum_valid_value_coverage: 0.70
+    minimum_partner_month_tariff_cells: 5
+    minimum_bic_improvement: 10
+    minimum_median_separation_ratio: 1.50
+    minimum_cluster_share: 0.10
+    rationale: "Full unit-value cluster evidence."
+    sector_scope: all
+    revision_date: "2026-08-31"
+  R4_D:
+    claim_clusters: false
+    claim_grades: false
+    permitted_result: INVESTIGATE
+    rationale: "Annual/partner dispersion is descriptive only."
+    sector_scope: all
+    revision_date: "2026-08-31"
+  R5:
+    retained_import_share_of_apparent_consumption: 0.20
+    rationale: "Domestic supply plus continued imports opens mismatch testing."
+    sector_scope: all
+    revision_date: "2026-08-31"
+  R6:
+    minimum_effective_utilisation: 0.85
+    minimum_spec_matched_shortage: 0.10
+    rationale: "Capacity-pressure trigger."
+    sector_scope: all
+    revision_date: "2026-08-31"
+  R7:
+    maximum_effective_utilisation: 0.70
+    require_specification_equivalence: true
+    rationale: "Latent qualified capacity trigger."
+    sector_scope: all
+    revision_date: "2026-08-31"
+  R8:
+    minimum_probability_adjusted_demand_addition: 0.20
+    minimum_mes_fill: 0.25
+    rationale: "Committed future demand timing trigger."
+    sector_scope: all
+    revision_date: "2026-08-31"
+  R11:
+    downside_cost_premium_over_import_parity: 0.25
+    rationale: "Economic exclusion absent verified strategic externality."
+    sector_scope: all
+    revision_date: "2026-08-31"
+
+capability:
+  unknown_penalty_lambda: 0.50
+  minimum_known_weight_coverage: 0.70
+  all_unknown_policy: INVESTIGATE
+  route_bands:
+    immediate_adjacency_max: 0.20
+    incremental_upgrade_max: 0.40
+    major_line_or_jv_max: 0.65
+    greenfield_likely_above: 0.65
+  rationale: "Unknowns can never improve adjacency; hard gates must be resolved."
+  revision_date: "2026-08-31"
+
+competition:
+  post_entry_capacity_to_downside_demand_warning: 1.25
+  rationale: "Default warning unless credible export demand or exceptional strategic rationale exists."
+  revision_date: "2026-08-31"
+
+economics:
+  support_search_step_m_sar: 1.0
+  support_search_max_m_sar: 250.0
+  npv_tolerance_m_sar: 0.05
+  irr_tolerance: 0.0005
+  rationale: "Deterministic minimum-effective-support search for the demo."
+  revision_date: "2026-08-31"

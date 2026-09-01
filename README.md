@@ -1,0 +1,160 @@
+# Industrial Opportunity Resolution Engine — MVP / POC
+
+A runnable Ministry demonstration of the **Industrial Opportunity Resolution Methodology**. The repository converts frozen HS-based public evidence into evidence-bounded decisions and then shows, in a strictly isolated simulation branch, how Ministry-grade line-level records can make the same case decisive.
+
+The MVP is intentionally not a generic opportunity-ranking dashboard. Its decision object is:
+
+> **Product × Specification × Application × Capability × Demand × Route**
+
+## What the demo proves
+
+| Case | Public evidence result | Isolated Ministry simulation |
+|---|---|---|
+| HS 721049 — zinc-coated flat steel | `INVESTIGATE`; brownfield tested before greenfield; exact missing facts named | `SIMULATED ADVANCE`; conditional brownfield specification upgrade, effective capacity, D\*, NPV/IRR, S\*, national value, competition and kill conditions calculated |
+| HS 390210 — polypropylene | `REJECT` generic capacity support; investigate only named grade/application exceptions | `SIMULATED REJECT`; equivalent qualified supply exceeds target demand, so support remains zero |
+
+The real decision state is immutable. Synthetic evidence is separately flagged, separately displayed and can only create a `simulation_decision`.
+
+## Included
+
+- Original final methodology as the governing domain authority.
+- Ten-document frozen implementation core.
+- Versioned threshold, sector-profile and evidence-policy configuration.
+- Two hashed public golden-case snapshots.
+- Two Ministry-grade synthetic scenarios seeded from public marginals.
+- Deterministic R0–R12 execution ledger.
+- Price–quantity decomposition, concentration, effective capacity, K/U/D\*, NPV, IRR, S\*, incremental national value, competition ratio and EVSI.
+- Schema-driven GenUI decision workspace assembled from an approved component library.
+- Arabic–English specification extraction golden gate with preserved source spans.
+- One-page decision dossier in JSON and printable HTML.
+- FastAPI backend, offline frontend, tests, integrity manifests, Docker support and WSL startup scripts.
+
+## Start in WSL
+
+```bash
+cd ~/projects
+unzip Industrial_Opportunity_Resolution_MVP_POC.zip
+cd industrial-opportunity-resolution-mvp
+chmod +x START_DEMO_WSL.sh
+./START_DEMO_WSL.sh
+```
+
+Then open:
+
+```text
+http://127.0.0.1:8000
+```
+
+API documentation:
+
+```text
+http://127.0.0.1:8000/docs
+```
+
+## Faster start when dependencies already exist
+
+```bash
+cd industrial-opportunity-resolution-mvp
+export PYTHONPATH="$PWD/src"
+python3 scripts/verify_integrity.py
+pytest -q
+uvicorn ior_mvp.app:app --host 127.0.0.1 --port 8000 --reload
+```
+
+## Docker
+
+```bash
+docker compose up --build
+```
+
+## Integrity and tests
+
+```bash
+make verify
+```
+
+The integrity gate verifies:
+
+1. the original methodology and frozen implementation documents;
+2. threshold, sector-profile and evidence-policy configuration;
+3. every public snapshot, synthetic scenario and extraction golden fixture.
+
+Golden CI invariants include:
+
+- steel/public → `INVESTIGATE`;
+- steel/simulated → `ADVANCE` while steel/real remains `INVESTIGATE`;
+- polypropylene/public → `REJECT` generic capacity support;
+- synthetic evidence cannot enter the public evidence set;
+- threshold values are loaded from versioned configuration rather than embedded in rule code;
+- Arabic–English extraction passes the labeled golden set.
+
+## Evidence modes
+
+### Public evidence
+
+Only frozen, attributable public records contribute to `real_decision`. Missing line-level facts remain unresolved. Public cases may end in `REJECT`, `MONITOR` or `INVESTIGATE`; they do not receive a false `ADVANCE` merely because the user switches screens.
+
+### Ministry simulation
+
+The simulation branch introduces explicit demo records such as line availability, yield, target-specification qualification share, customer acceptance, tariff-line allocation and economics. Every such record carries:
+
+```yaml
+synthetic_flag: true
+scenario_id: ...
+source: DEMO_GENERATOR
+evidence_class: D
+display_label: SIMULATED — NOT MINISTRY EVIDENCE
+```
+
+The simulation branch is intended to demonstrate the **value of connecting and cleaning Ministry data**, not to impersonate that data.
+
+## GenUI approach
+
+The backend emits a constrained UI manifest based on the decision context. It selects only approved components such as:
+
+- evidence-boundary banner;
+- decision hero;
+- trade chart;
+- R-rule ledger;
+- capability matrix;
+- economics and EVSI panel;
+- evidence passport table;
+- data-unlock queue;
+- dossier actions.
+
+The model does not generate executable browser code at runtime. This preserves auditability while allowing the interface to adapt to the decision state and available evidence.
+
+## Repository map
+
+```text
+.
+├── AGENTS.md                         # Thin domain overlay; reusable Flight Control is external
+├── config/                           # Versioned thresholds, profiles and evidence policy
+├── data/
+│   ├── snapshots/public/             # Frozen public golden cases
+│   ├── synthetic/                    # Explicitly synthetic Ministry-grade scenarios
+│   ├── golden/                       # AR/EN extraction fixture
+│   └── manifests/                    # Snapshot hashes
+├── docs/
+│   ├── authority/                    # Original methodology, extracted mirror and hashes
+│   ├── core/                         # Ten-document frozen implementation core
+│   └── implementation/               # Build overlay, UI/API/runbook and later-binding notes
+├── src/ior_mvp/                      # Deterministic engine, API, dossier, GenUI and frontend
+├── tests/                            # Unit, golden, API, leakage and integrity tests
+└── scripts/                          # Run, verify, smoke, manifest and package helpers
+```
+
+## Autonomous Cursor workflow
+
+This repository does **not** copy Flight Control or the Universal New-Project Guide. Set their locations if your supervisor needs them:
+
+```bash
+export FLIGHT_CONTROL_HOME=~/projects/salim-autonomous-build
+export UNIVERSAL_NEW_PROJECT_GUIDE=~/projects/<path>/Universal-New-Project-Guide.md
+```
+
+`AGENTS.md`, `.cursor/rules/` and `docs/implementation/BUILD_OVERLAY.md` provide only the project-specific reading list, methodology map and industrial-decision guardrails.
+
+## Deliberate MVP boundary
+
+This POC runs from frozen data and requires no external API key. It demonstrates end-to-end decision logic, evidence governance and interface behavior. Production expansion would add live or scheduled connectors for Saudi customs/tariff lines, GASTAT, Ministry licences and plants, Etimad/SABER, standards, approved-deal records and controlled LLM extraction, all behind the same schemas and gates.
