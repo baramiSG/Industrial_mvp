@@ -1,0 +1,95 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  uv-gates:
+    name: uv / Python ${{ matrix.python-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version:
+          - "3.12"
+          - "3.14"
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+      - name: Sync locked development environment
+        run: uv sync --locked --extra dev --python "${{ matrix.python-version }}"
+      - name: Scan prohibited files and secret patterns
+        run: uv run --locked --extra dev python scripts/check_prohibited_files.py
+      - name: Compile Python
+        run: uv run --locked --extra dev python -m compileall -q src scripts tests
+      - name: Check JavaScript syntax
+        run: node --check src/ior_mvp/static/app.js
+      - name: Verify integrity
+        run: PYTHONPATH=src uv run --locked --extra dev python scripts/verify_integrity.py
+      - name: Run test suite
+        run: PYTHONPATH=src uv run --locked --extra dev pytest -q
+      - name: Run demo smoke
+        run: PYTHONPATH=src uv run --locked --extra dev python scripts/demo_smoke.py
+
+  pip-gates:
+    name: pip / Python 3.12
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: pyproject.toml
+      - name: Install documented pip development path
+        run: python -m pip install -e ".[dev]"
+      - name: Scan prohibited files and secret patterns
+        run: python scripts/check_prohibited_files.py
+      - name: Compile Python
+        run: python -m compileall -q src scripts tests
+      - name: Check JavaScript syntax
+        run: node --check src/ior_mvp/static/app.js
+      - name: Verify integrity
+        run: PYTHONPATH=src python scripts/verify_integrity.py
+      - name: Run test suite
+        run: PYTHONPATH=src pytest -q
+      - name: Run demo smoke
+        run: PYTHONPATH=src python scripts/demo_smoke.py
+
+  docker-build:
+    name: Docker image build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Build image
+        run: docker build --file Dockerfile --tag industrial-opportunity-resolution-mvp:ci .

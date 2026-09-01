@@ -88,6 +88,18 @@ Golden CI invariants include:
 - threshold values are loaded from versioned configuration rather than embedded in rule code;
 - Arabic–English extraction passes the labeled golden set.
 
+## CI and local gates
+
+GitHub Actions runs the prohibited-file scan, Python compile check, JavaScript syntax check, integrity verification, full test suite and demo smoke on uv/Python 3.12, uv/Python 3.14 and the documented pip path; it also builds the Docker image.
+
+After installing uv as described in `docs/DEVELOPMENT_GUIDE.md`, reproduce the required gates locally with:
+
+```bash
+make ci
+```
+
+The existing `pip install -e ".[dev]"`, `START_DEMO_WSL.sh` and Docker paths remain supported.
+
 ## Evidence modes
 
 ### Public evidence

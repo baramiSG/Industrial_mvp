@@ -105,16 +105,16 @@ Columns: ID · Requirement · Governing source · Implementation · API · UI ·
 | GATE-E | Economics unsupported first, S\* minimal, PP no support | Core 09 §6 | yes | IMPLEMENTED | S01 |
 | GATE-F | Zero leakage, dual states, labelled rows | Core 09 §6 | yes | IMPLEMENTED | S01 |
 | GATE-G | Product: frontend, toggle, adaptive manifest, dossier, Arabic | Core 09 §6 | yes (manual) | IMPLEMENTED | S05 |
-| GATE-H | Release: build_manifests (approved only), verify, pytest, smoke all pass | Core 09 §6 | manual only; **no CI** | NOT_STARTED | S01 |
+| GATE-H | Release: build_manifests (approved only), verify, pytest, smoke all pass | Core 09 §6 | `.github/workflows/ci.yml`, `Makefile` `ci`; `build_manifests.py` not run because S01 has no governed change | IMPLEMENTED | S01 |
 
 ## E. Build-control requirements (owner mandate 2026-09-02)
 
 | ID | Requirement | Implementation | Status | Slice |
 |---|---|---|---|---|
 | BC-01 | Git repository with default branch `main` on `baramiSG/Industrial_mvp` | S00 | PLANNED | S00 |
-| BC-02 | No secrets, private data or prohibited files in Git; `.env.example` placeholders only | `.gitignore`, prohibited-file scan | PLANNED | S00/S01 |
+| BC-02 | No secrets, private data or prohibited files in Git; `.env.example` placeholders only | `.gitignore`, `scripts/check_prohibited_files.py`, `tests/test_prohibited_files.py`, S01 test evidence | TESTED | S00/S01 |
 | BC-03 | Durable state: `.workflow/state.json`, slice records, control docs | created 2026-09-02 | IMPLEMENTED | S00 |
-| BC-04 | CI on PR/push executing integrity, tests, smoke, scans | `.github/workflows/ci.yml` | NOT_STARTED | S01 |
+| BC-04 | CI on PR/push executing integrity, tests, smoke, scans | `.github/workflows/ci.yml`, `tests/test_ci_contract.py` | IMPLEMENTED | S01 |
 | BC-05 | Every slice: branch → plan → review → implement → review → independent review → gates → PR → CI → merge | slice records | PLANNED | all |
 | BC-06 | Model separation (Implementer ≠ Supervisor; Reviewer ≠ Implementer) | ADR-002 | PLANNED | all |
 | BC-07 | Requirements traceability maintained | this file | IMPLEMENTED | all |

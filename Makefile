@@ -1,4 +1,8 @@
-.PHONY: install test verify run smoke package
+UV ?= $(HOME)/.local/bin/uv
+NODE ?= node
+UV_RUN = $(UV) run --locked --extra dev
+
+.PHONY: install test verify run smoke package uv-sync lock ci
 
 install:
 	python3 -m pip install -e ".[dev]"
@@ -18,3 +22,17 @@ smoke:
 
 package:
 	bash scripts/package_project.sh
+
+uv-sync:
+	$(UV) sync --locked --extra dev
+
+lock:
+	$(UV) lock
+
+ci: uv-sync
+	$(UV_RUN) python scripts/check_prohibited_files.py
+	$(UV_RUN) python -m compileall -q src scripts tests
+	$(NODE) --check src/ior_mvp/static/app.js
+	PYTHONPATH=src $(UV_RUN) python scripts/verify_integrity.py
+	PYTHONPATH=src $(UV_RUN) pytest -q
+	PYTHONPATH=src $(UV_RUN) python scripts/demo_smoke.py
