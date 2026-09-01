@@ -117,6 +117,21 @@ The warning is the pre-existing Starlette `httpx` test-client deprecation record
 - Full staged scanner → `PROHIBITED FILE SCAN PASS (100 tracked files)`, exit 0.
 - Deterministic secret-pattern workspace search → no match.
 
+## GitHub Actions evidence (recorded by the Supervisor from `.workflow/logs/ci_watch_pr1.log`)
+
+- PR: https://github.com/baramiSG/Industrial_mvp/pull/1 — head `b0b2ab4787b3da75c1cb7d8c223d16f5c1d68c80`, base `main`.
+- Workflow run: https://github.com/baramiSG/Industrial_mvp/actions/runs/33569855956
+- `gh pr checks 1 --watch` exit 0. Jobs on the PR head:
+
+| Job | Result | Duration |
+|---|---|---|
+| uv / Python 3.12 | pass | 15s |
+| uv / Python 3.14 | pass | 13s |
+| pip / Python 3.12 | pass | 18s |
+| Docker image build | pass | 23s |
+
+- A second CI run is required on the evidence-promotion commit (traceability, KL-09, this section) and must also be green before merge; it is recorded below when it completes.
+
 ## Governance
 
 - `scripts/build_manifests.py`: NOT RUN — no governed change; prohibited by S01 scope.

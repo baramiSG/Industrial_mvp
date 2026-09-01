@@ -14,7 +14,12 @@ Updated by the Supervisor at every slice completion. Items marked *pre-existing*
 | KL-06 | Analysis response does not expose methodology/config versions per case (*pre-existing*). | FR-001 | S03 |
 | KL-07 | Simulated ledger repeats the public R6/R7/R8 `DISABLED` rows rather than re-evaluating with labelled synthetic inputs (*pre-existing*). | Core 02 §3 | S04 |
 | KL-08 | Steel conditions/kill conditions and the steel/PP branch dispatch are hard-coded in engine code; scenarios carry no explicit ground truth (*pre-existing*). | Core 06 §5.3, §10.4–10.5; Core 07 §7.3–7.4 | S04 |
-| KL-09 | No CI workflow; proof commands run manually only (*pre-existing*). | Core 09 Gate H | S01 |
+
+## Closed by completion slices
+
+| ID | Limitation | Resolution | Evidence | Closure |
+|---|---|---|---|---|
+| KL-09 | No CI workflow; proof commands run manually only (*pre-existing*). | `.github/workflows/ci.yml` (uv 3.12/3.14, pip 3.12, Docker build) running scan → compile → node → integrity → pytest → smoke; local `make ci`. | `.workflow/slices/S01-ci-and-toolchain/test_evidence.md`; CI run 33569855956 on PR #1 — all four jobs pass. | Effective on squash merge of S01 (PR #1). |
 
 ## Accepted for this MVP (recorded, not scheduled)
 
