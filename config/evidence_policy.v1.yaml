@@ -1,6 +1,6 @@
 metadata:
-  version: "1.0.0"
-  effective_date: "2026-08-31"
+  version: "1.1.0"
+  effective_date: "2026-09-02"
   authority: "Industrial Opportunity Resolution Methodology, Sections 2.1, 10 and 11"
 
 classes:
@@ -22,9 +22,14 @@ synthetic_isolation:
   required_fields:
     - synthetic_flag
     - scenario_id
+    - opportunity_id
+    - display_label
     - seed_basis
     - evidence_class
     - source
+    - synthetic_inputs
+  required_evidence_class: D
+  required_source: DEMO_GENERATOR
   allowed_decision_field: simulation_decision
   forbidden_decision_field: real_decision
   display_label: "SIMULATED — NOT MINISTRY EVIDENCE"

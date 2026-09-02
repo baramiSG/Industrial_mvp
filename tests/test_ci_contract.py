@@ -8,6 +8,7 @@ import yaml
 from ior_mvp.config import PROJECT_ROOT
 
 WORKFLOW = PROJECT_ROOT / ".github" / "workflows" / "ci.yml"
+MAKEFILE = PROJECT_ROOT / "Makefile"
 
 
 def _workflow() -> dict[str, Any]:
@@ -74,6 +75,7 @@ def test_each_python_job_runs_every_required_gate(job_name: str) -> None:
         "python -m compileall -q src scripts tests",
         "node --check src/ior_mvp/static/app.js",
         "python scripts/verify_integrity.py",
+        "python scripts/validate_scenarios.py",
         "pytest -q",
         "python scripts/demo_smoke.py",
     )
@@ -86,6 +88,8 @@ def test_each_python_job_runs_every_required_gate(job_name: str) -> None:
         required_proof_commands = (
             "PYTHONPATH=src uv run --locked --extra dev "
             "python scripts/verify_integrity.py",
+            "PYTHONPATH=src uv run --locked --extra dev "
+            "python scripts/validate_scenarios.py",
             "PYTHONPATH=src uv run --locked --extra dev pytest -q",
             "PYTHONPATH=src uv run --locked --extra dev "
             "python scripts/demo_smoke.py",
@@ -98,6 +102,7 @@ def test_each_python_job_runs_every_required_gate(job_name: str) -> None:
     else:
         required_proof_commands = (
             "PYTHONPATH=src python scripts/verify_integrity.py",
+            "PYTHONPATH=src python scripts/validate_scenarios.py",
             "PYTHONPATH=src pytest -q",
             "PYTHONPATH=src python scripts/demo_smoke.py",
         )
@@ -134,6 +139,58 @@ def test_threshold_literal_scan_immediately_follows_prohibited_scan(
         "name": "Reject embedded threshold literals",
         "run": expected_command,
     }
+
+
+@pytest.mark.parametrize(
+    ("job_name", "expected_command"),
+    [
+        (
+            "uv-gates",
+            "PYTHONPATH=src uv run --locked --extra dev "
+            "python scripts/validate_scenarios.py",
+        ),
+        (
+            "pip-gates",
+            "PYTHONPATH=src python scripts/validate_scenarios.py",
+        ),
+    ],
+)
+def test_scenario_validation_immediately_follows_integrity(
+    job_name: str,
+    expected_command: str,
+) -> None:
+    steps = _workflow()["jobs"][job_name]["steps"]
+    integrity_index = next(
+        index
+        for index, step in enumerate(steps)
+        if step.get("name") == "Verify integrity"
+    )
+
+    assert steps[integrity_index + 1] == {
+        "name": (
+            "Validate synthetic scenarios against public marginals"
+        ),
+        "run": expected_command,
+    }
+
+
+def test_make_ci_runs_scenario_validation_after_integrity() -> None:
+    makefile = MAKEFILE.read_text(encoding="utf-8")
+    text = makefile.split("\nci: uv-sync\n", maxsplit=1)[1]
+    fragments = (
+        "python scripts/verify_integrity.py",
+        "python scripts/validate_scenarios.py",
+        "pytest -q",
+    )
+
+    assert all(fragment in text for fragment in fragments)
+    assert [
+        text.index(fragment)
+        for fragment in fragments
+    ] == sorted(
+        text.index(fragment)
+        for fragment in fragments
+    )
 
 
 def test_docker_build_job_builds_the_repository_dockerfile() -> None:

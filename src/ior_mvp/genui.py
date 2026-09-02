@@ -24,6 +24,7 @@ def build_ui_manifest(analysis: dict[str, Any]) -> dict[str, Any]:
                 "real_state": real["state"],
                 "active_state": active["state"],
                 "synthetic_label": (analysis.get("simulation_scenario") or {}).get("display_label"),
+                "authority": analysis["authority"],
             },
         },
         {

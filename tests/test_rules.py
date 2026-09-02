@@ -127,3 +127,29 @@ def test_quantity_contribution_zero_denominator() -> None:
 def test_log_change_rejects_non_positive() -> None:
     with pytest.raises(ValueError):
         log_change(0, 1)
+
+
+def test_r5_exposes_not_calculable_ratio_reason_and_threshold() -> None:
+    threshold = thresholds_config()["rules"]["R5"][
+        "retained_import_share_of_apparent_consumption"
+    ]
+    for opportunity_id in (
+        "SAU-H0-721049",
+        "SAU-H0-390210",
+    ):
+        r5 = by_id(
+            evaluate_rules(get_public_case(opportunity_id)),
+            "R5",
+        )
+
+        assert r5["metrics"] == {
+            "retained_import_share_of_apparent_consumption": (
+                "NOT_CALCULABLE"
+            ),
+            "reason": (
+                "Domestic production quantity and retained-import "
+                "flow are absent from the frozen public snapshot; "
+                "gross imports cannot establish apparent consumption."
+            ),
+            "threshold": threshold,
+        }

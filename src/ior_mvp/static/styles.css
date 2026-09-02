@@ -194,6 +194,10 @@ select { min-width: 320px; border: 1px solid var(--line-strong); padding: 10px 3
 .integrity-banner .card-body { display: flex; justify-content: space-between; gap: 20px; align-items: center; }
 .integrity-banner strong { font-size: 14px; }
 .integrity-banner p { margin: 4px 0 0; color: #a9c2d3; font-size: 12px; }
+.integrity-banner .integrity-authority {
+  color: var(--teal-soft);
+  overflow-wrap: anywhere;
+}
 .integrity-states { display: flex; gap: 10px; align-items: center; }
 .integrity-arrow { color: #76d8ca; }
 .synthetic-warning { background: #ffefbf; color: #6f4c0a; border: 1px solid #e6bd4d; padding: 8px 11px; border-radius: 8px; font-size: 10px; font-weight: 850; }

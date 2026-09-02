@@ -51,6 +51,8 @@ jobs:
         run: node --check src/ior_mvp/static/app.js
       - name: Verify integrity
         run: PYTHONPATH=src uv run --locked --extra dev python scripts/verify_integrity.py
+      - name: Validate synthetic scenarios against public marginals
+        run: PYTHONPATH=src uv run --locked --extra dev python scripts/validate_scenarios.py
       - name: Run test suite
         run: PYTHONPATH=src uv run --locked --extra dev pytest -q
       - name: Run demo smoke
@@ -82,6 +84,8 @@ jobs:
         run: node --check src/ior_mvp/static/app.js
       - name: Verify integrity
         run: PYTHONPATH=src python scripts/verify_integrity.py
+      - name: Validate synthetic scenarios against public marginals
+        run: PYTHONPATH=src python scripts/validate_scenarios.py
       - name: Run test suite
         run: PYTHONPATH=src pytest -q
       - name: Run demo smoke

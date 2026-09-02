@@ -155,7 +155,7 @@ The machine-readable source of truth is `authority_hashes.json`. The table below
 | `docs/authority/Industrial_Opportunity_Resolution_Methodology_Final_KSA.docx` | `5717cbd42acc9947ce5e450013719275acb7ed1470847b21fb2cc547c8ac4ce9` | 224,257 |
 | `config/thresholds.v1.yaml` | `32d868f9506f325e980f3363079031a75534d3829b30131548c2e6d36a23d261` | 3,700 |
 | `config/sector_profiles.v1.yaml` | `59db0489a7f46c2a42fbaf834531acc897ebbfcbff311d2ee7caacd41d7aeefe` | 1,256 |
-| `config/evidence_policy.v1.yaml` | `20dbcf06bccd76989f32e45f8083b9fc7aa38f0d2b2c40b12028bd3a2dd70d01` | 1,246 |
+| `config/evidence_policy.v1.yaml` | `f2778c39649fa8d39e3a3311d3639de085cc9b6574ea31dadf259bb8f006cdb2` | 1,373 |
 | `docs/core/01_PRODUCT_AND_REQUIREMENTS.md` | `3b642450edf3686cc7cbf92529a8b710d583a1b96f95c0211e5196b985a867e4` | 11,554 |
 | `docs/core/02_METHODOLOGY_IMPLEMENTATION_MAP.md` | `b7fc67f2910b9f7e7a8678fceba7a02c6768d81cc052129c974e7fc44bd1c665` | 10,653 |
 | `docs/core/03_SYSTEM_ARCHITECTURE.md` | `33cfb90b3e394413855144c70abfdf79c6c41584caa0ad1b73dfb044281cac66` | 9,337 |

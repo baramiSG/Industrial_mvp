@@ -1,8 +1,13 @@
 from __future__ import annotations
 
+from copy import deepcopy
+
+import pytest
 from fastapi.testclient import TestClient
 
+import ior_mvp.decision_engine as decision_engine
 from ior_mvp.app import app
+from ior_mvp.data_repository import get_synthetic_scenario
 
 
 client = TestClient(app)
@@ -62,3 +67,71 @@ def test_extraction_endpoint() -> None:
 def test_unknown_opportunity_returns_404() -> None:
     response = client.get("/api/opportunities/DOES-NOT-EXIST")
     assert response.status_code == 404
+
+
+@pytest.mark.parametrize(
+    "endpoint",
+    [
+        (
+            "/api/opportunities/SAU-H0-721049"
+            "?mode=simulated"
+        ),
+        "/api/opportunities?mode=simulated",
+    ],
+)
+def test_evidence_integrity_failure_returns_422_json(
+    monkeypatch: pytest.MonkeyPatch,
+    endpoint: str,
+) -> None:
+    scenario = get_synthetic_scenario("SAU-H0-721049")
+    assert scenario is not None
+    invalid = deepcopy(scenario)
+    invalid["synthetic_inputs"]["demand"][
+        "target_spec_demand_kt"
+    ] = 288.0
+    monkeypatch.setattr(
+        decision_engine,
+        "get_synthetic_scenario",
+        lambda opportunity_id: invalid,
+    )
+
+    integrity_client = TestClient(
+        app,
+        raise_server_exceptions=False,
+    )
+    response = integrity_client.get(endpoint)
+
+    assert response.status_code == 422
+    assert response.json() == {
+        "detail": {
+            "code": "EVIDENCE_INTEGRITY_ERROR",
+            "message": (
+                "Synthetic scenario reconciliation failed for "
+                "SYN-MINISTRY-STEEL-001: "
+                "target_spec_demand_within_public_imports"
+            ),
+        }
+    }
+
+
+def test_missing_scenario_in_simulated_mode_returns_404(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(
+        decision_engine,
+        "get_synthetic_scenario",
+        lambda opportunity_id: None,
+    )
+
+    response = client.get(
+        "/api/opportunities/SAU-H0-721049"
+        "?mode=simulated"
+    )
+
+    assert response.status_code == 404
+    assert response.json() == {
+        "detail": (
+            "No synthetic scenario is available for "
+            "SAU-H0-721049"
+        )
+    }

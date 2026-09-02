@@ -53,6 +53,7 @@ def build_dossier(analysis: dict[str, Any]) -> dict[str, Any]:
             "synthetic_records": synthetic_count,
             "snapshot_id": analysis["snapshot_id"],
             "as_of_date": analysis["as_of_date"],
+            "authority": analysis["authority"],
             "integrity": analysis["integrity"],
         },
         "conditions": decision.get("conditions", []),
@@ -77,6 +78,18 @@ def render_dossier_html(dossier: dict[str, Any]) -> str:
         disclosure_html = f"""
         <div class="warning"><strong>{e(disclosure['display_label'])}</strong><br>{e(disclosure['seed_basis'])}</div>
         """
+
+    authority = dossier["evidence_summary"]["authority"]
+    methodology = authority["methodology"]
+    versions = authority["config_versions"]
+    authority_html = f"""
+<p><strong>Methodology</strong><br>{e(methodology['file'])}</p>
+<p class="small">SHA-256 {e(methodology['sha256'])}</p>
+<p class="small">Project {e(authority['project_version'])}
+ · Thresholds {e(versions['thresholds'])}
+ · Sector profiles {e(versions['sector_profiles'])}
+ · Evidence policy {e(versions['evidence_policy'])}</p>
+"""
 
     return f"""<!doctype html>
 <html lang="en">
@@ -107,6 +120,7 @@ h1{{font-size:30px;margin:0 0 6px}} h2{{font-size:16px;text-transform:uppercase;
 <section class="box"><h2>Kill conditions</h2><ul>{kills or '<li>None</li>'}</ul></section>
 <section class="box"><h2>Next evidence actions</h2><ul>{evidence_actions or '<li>None</li>'}</ul></section>
 <section class="box"><h2>Evidence boundary</h2><p>{e(dossier['evidence_summary']['public_records'])} public records; {e(dossier['evidence_summary']['synthetic_records'])} synthetic records.</p><p class="small">Snapshot {e(dossier['evidence_summary']['snapshot_id'])} · As of {e(dossier['evidence_summary']['as_of_date'])}</p></section>
+<section class="box"><h2>Authority and versions</h2>{authority_html}</section>
 </div>
 </main>
 </body></html>"""
