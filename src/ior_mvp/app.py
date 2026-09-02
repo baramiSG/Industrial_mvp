@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Literal
+from typing import Any, Literal
 
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.responses import FileResponse, HTMLResponse
@@ -13,6 +13,7 @@ from .config import PROJECT_ROOT, project_config, thresholds_config
 from .data_repository import RepositoryError
 from .decision_engine import analyze, list_opportunities
 from .dossier import build_dossier, render_dossier_html
+from .evidence import EvidenceIntegrityError
 from .genui import build_ui_manifest
 
 
@@ -26,11 +27,31 @@ app = FastAPI(
 app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
 
-def _safe_analysis(opportunity_id: str, mode: Literal["public", "simulated"]):
+def _evidence_integrity_http_exception(
+    exc: EvidenceIntegrityError,
+) -> HTTPException:
+    return HTTPException(
+        status_code=422,
+        detail={
+            "code": "EVIDENCE_INTEGRITY_ERROR",
+            "message": str(exc),
+        },
+    )
+
+
+def _safe_analysis(
+    opportunity_id: str,
+    mode: Literal["public", "simulated"],
+) -> dict[str, Any]:
     try:
         return analyze(opportunity_id, mode)
+    except EvidenceIntegrityError as exc:
+        raise _evidence_integrity_http_exception(exc) from exc
     except (RepositoryError, ValueError) as exc:
-        raise HTTPException(status_code=404, detail=str(exc)) from exc
+        raise HTTPException(
+            status_code=404,
+            detail=str(exc),
+        ) from exc
 
 
 @app.get("/api/health")
@@ -57,7 +78,10 @@ def thresholds() -> dict:
 def opportunities(
     mode: Literal["public", "simulated"] = Query(default="public")
 ) -> list[dict]:
-    return list_opportunities(mode)
+    try:
+        return list_opportunities(mode)
+    except EvidenceIntegrityError as exc:
+        raise _evidence_integrity_http_exception(exc) from exc
 
 
 @app.get("/api/opportunities/{opportunity_id}")

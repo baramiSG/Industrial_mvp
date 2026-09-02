@@ -3,7 +3,11 @@ from __future__ import annotations
 from typing import Any, Literal
 
 from .capability import effective_qualified_capacity, evaluate_capability
-from .config import project_config, thresholds_config
+from .config import (
+    authority_summary,
+    project_config,
+    thresholds_config,
+)
 from .data_repository import get_public_case, get_synthetic_scenario, public_cases
 from .economics import (
     approximate_evsi,
@@ -13,9 +17,10 @@ from .economics import (
 from .evidence import (
     assert_real_decision_unchanged,
     isolated_copy,
+    reconcile_synthetic_scenario,
+    require_scenario_reconciliation,
     synthetic_evidence_rows,
     validate_public_evidence,
-    validate_synthetic_scenario,
 )
 from .rules import evaluate_rules
 
@@ -72,6 +77,7 @@ def analyze_public(opportunity_id: str) -> dict[str, Any]:
         "opportunity": case["opportunity"],
         "snapshot_id": case["snapshot_id"],
         "as_of_date": case["as_of_date"],
+        "authority": authority_summary(),
         "mode": "public",
         "real_decision": decision,
         "simulation_decision": None,
@@ -92,6 +98,7 @@ def analyze_public(opportunity_id: str) -> dict[str, Any]:
         "integrity": {
             "real_decision_uses_public_only": True,
             "synthetic_isolation": True,
+            "scenario_reconciliation": None,
             "latest_imports_usd_m": latest.get("imports_usd_m"),
             "latest_imports_kt": latest.get("imports_kt"),
         },
@@ -282,7 +289,12 @@ def analyze_simulated(opportunity_id: str) -> dict[str, Any]:
     scenario = get_synthetic_scenario(opportunity_id)
     if scenario is None:
         raise ValueError(f"No synthetic scenario is available for {opportunity_id}")
-    validate_synthetic_scenario(scenario)
+
+    reconciliation = reconcile_synthetic_scenario(
+        scenario,
+        public,
+    )
+    require_scenario_reconciliation(reconciliation)
     real_before = isolated_copy(public["real_decision"])
 
     if opportunity_id == "SAU-H0-721049":
@@ -309,6 +321,7 @@ def analyze_simulated(opportunity_id: str) -> dict[str, Any]:
     }
     assert_real_decision_unchanged(real_before, public["real_decision"])
     public["integrity"]["real_decision_unchanged_after_simulation"] = True
+    public["integrity"]["scenario_reconciliation"] = reconciliation
     return public
 
 

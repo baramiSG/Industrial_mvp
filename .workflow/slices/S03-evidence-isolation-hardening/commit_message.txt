@@ -1,0 +1,25 @@
+S03: fail-closed scenario policy, public-marginal reconciliation, authority disclosure
+
+Synthetic scenarios are validated against evidence_policy 1.1.0 (all Core
+06 s4 fields, Class D, DEMO_GENERATOR, exact label) with typed
+EvidenceIntegrityError, then reconciled to the public marginals of their
+opportunity (target demand <= latest public imports; nameplate <=
+disclosed producer total; factors in [0,1]; qualified availability <=
+physical ceiling; demand layers INFORMATIONAL; allocation
+NOT_APPLICABLE) before any simulation arithmetic; FAIL blocks with a
+422 EVIDENCE_INTEGRITY_ERROR (absent scenario stays 404). Gate B script
+scripts/validate_scenarios.py runs after integrity in CI and make ci.
+
+Every analysis, GenUI banner and dossier now disclose the methodology
+file/SHA-256 and thresholds/sector-profile/evidence-policy/project
+versions read from authority_hashes.json and config metadata (FR-001).
+R5 reports its retained-import-share threshold as NOT_CALCULABLE with
+the reason. Core 09 s4 leakage assertion 6 (real dossier has no
+disclosure) is now tested.
+
+Authority change (Manifest s7.3, ADR-008): evidence_policy 1.0.0 ->
+1.1.0; build_manifests.py run once after full regression; hash
+f2778c39649fa8d39e3a3311d3639de085cc9b6574ea31dadf259bb8f006cdb2,
+1,373 bytes (sha256sum verified). No data file changed; golden
+outcomes unchanged. 191 tests pass. Plan approved (2 rounds);
+Supervisor review 0 findings; independent Grok review APPROVE.

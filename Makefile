@@ -35,5 +35,6 @@ ci: uv-sync
 	$(UV_RUN) python -m compileall -q src scripts tests
 	$(NODE) --check src/ior_mvp/static/app.js
 	PYTHONPATH=src $(UV_RUN) python scripts/verify_integrity.py
+	PYTHONPATH=src $(UV_RUN) python scripts/validate_scenarios.py
 	PYTHONPATH=src $(UV_RUN) pytest -q
 	PYTHONPATH=src $(UV_RUN) python scripts/demo_smoke.py

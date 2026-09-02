@@ -153,12 +153,16 @@ function renderComponent(component) {
 
 function renderIntegrityBanner(props) {
   const simulated = props.mode === "simulated";
+  const methodology = props.authority.methodology;
+  const versions = props.authority.config_versions;
+  const methodologyFile = methodology.file.split("/").at(-1);
   return `
     <article class="workspace-card integrity-banner">
       <div class="card-body">
         <div>
           <strong>Evidence boundary enforced</strong>
           <p>Real state is calculated from frozen public evidence. ${simulated ? "The active surface below is a sealed simulation." : "No synthetic record is active."}</p>
+          <p class="integrity-authority">Methodology ${escapeHtml(methodologyFile)} · SHA-256 ${escapeHtml(methodology.sha256_prefix)} · Project ${escapeHtml(props.authority.project_version)} · Thresholds ${escapeHtml(versions.thresholds)} · Sector profiles ${escapeHtml(versions.sector_profiles)} · Evidence policy ${escapeHtml(versions.evidence_policy)}</p>
         </div>
         <div class="integrity-states">
           ${stateChip(props.real_state)}

@@ -275,15 +275,42 @@ def evaluate_rules(case: dict[str, Any]) -> list[dict[str, Any]]:
         )
     )
 
-    r5 = bool(context.get("domestic_production_exists") and context.get("material_imports_exist"))
+    r5 = bool(
+        context.get("domestic_production_exists")
+        and context.get("material_imports_exist")
+    )
+    r5_config = thresholds["R5"]
     results.append(
         _rule(
             "R5",
             "Domestic supply plus continued imports",
             "DEGRADED",
             r5,
-            "Verified domestic capability coexists with material gross imports." if r5 else "Coexistence condition not met.",
-            "Test specification, qualification, capacity, price, application and allocation mismatch.",
+            (
+                "Verified domestic capability coexists with material "
+                "gross imports."
+                if r5
+                else "Coexistence condition not met."
+            ),
+            (
+                "Test specification, qualification, capacity, price, "
+                "application and allocation mismatch."
+            ),
+            {
+                "retained_import_share_of_apparent_consumption": (
+                    NOT_CALCULABLE
+                ),
+                "reason": (
+                    "Domestic production quantity and retained-import "
+                    "flow are absent from the frozen public snapshot; "
+                    "gross imports cannot establish apparent consumption."
+                ),
+                "threshold": float(
+                    r5_config[
+                        "retained_import_share_of_apparent_consumption"
+                    ]
+                ),
+            },
         )
     )
 

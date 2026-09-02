@@ -6,6 +6,7 @@ from pathlib import Path
 from typing import Any
 
 from .config import DATA_DIR
+from .evidence import validate_synthetic_scenario
 
 
 class RepositoryError(RuntimeError):
@@ -48,11 +49,8 @@ def synthetic_scenarios() -> dict[str, dict[str, Any]]:
     directory = DATA_DIR / "synthetic"
     for path in sorted(directory.glob("*.json")):
         record = _read_json(path)
-        opportunity_id = record.get("opportunity_id")
-        if not opportunity_id:
-            raise RepositoryError(f"Synthetic scenario lacks opportunity_id: {path}")
-        if record.get("synthetic_flag") is not True:
-            raise RepositoryError(f"Synthetic scenario is not explicitly flagged: {path}")
+        validate_synthetic_scenario(record)
+        opportunity_id = record["opportunity_id"]
         scenarios[opportunity_id] = record
     return scenarios
 

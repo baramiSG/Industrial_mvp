@@ -74,5 +74,6 @@ Runs the offline AR/EN extraction golden set and returns accuracy, expected fiel
 
 - unknown opportunity: HTTP 404;
 - missing synthetic scenario in simulated mode: HTTP 404;
+- evidence-integrity failure in simulated mode (policy or public-marginal reconciliation): HTTP 422 with {"detail": {"code": "EVIDENCE_INTEGRITY_ERROR", "message": ...}}; no partial analysis is returned.
 - malformed governed data: fail closed with a clear error;
 - static frontend paths: served by the SPA fallback.
