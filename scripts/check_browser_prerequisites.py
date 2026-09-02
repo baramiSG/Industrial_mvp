@@ -9,6 +9,7 @@ import sys
 from collections.abc import Callable, Sequence
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Any
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -18,6 +19,35 @@ AXE_ROOT = (
     / "vendor"
     / "axe-core-4.13.0"
 )
+FONT_ROOT = ROOT / "src" / "ior_mvp" / "static" / "assets" / "fonts"
+EXPECTED_FONT_ASSETS = {
+    "IOR Noto Sans": {
+        "path": (
+            FONT_ROOT
+            / "noto-sans"
+            / "noto-sans-latin-wght-normal.woff2"
+        ),
+        "source": FONT_ROOT / "noto-sans" / "SOURCE.json",
+        "license": FONT_ROOT / "noto-sans" / "LICENSE",
+        "sha256": (
+            "51ca196f49a33e79e7870ff88ebd2829a3f627a51e7d690986618f0e7ad2b52d"
+        ),
+        "bytes": 35820,
+    },
+    "IOR Noto Sans Arabic": {
+        "path": (
+            FONT_ROOT
+            / "noto-sans-arabic"
+            / "noto-sans-arabic-arabic-wght-normal.woff2"
+        ),
+        "source": FONT_ROOT / "noto-sans-arabic" / "SOURCE.json",
+        "license": FONT_ROOT / "noto-sans-arabic" / "LICENSE",
+        "sha256": (
+            "ce85091f020920b65762b387b194ef59457ea5b25b760f2dcc35240a94bb8669"
+        ),
+        "bytes": 165960,
+    },
+}
 EXPECTED_VERSIONS = {
     "playwright": "1.62.0",
     "pytest-playwright": "0.9.0",
@@ -53,6 +83,7 @@ class PreflightReport:
     axe_sha256: str
     font_family: str
     font_file: Path
+    product_fonts: tuple[str, ...]
 
 
 def check_axe_assets(axe_root: Path) -> str:
@@ -88,7 +119,48 @@ def check_axe_assets(axe_root: Path) -> str:
     return digest
 
 
+def check_product_fonts(
+    assets: dict[str, dict[str, Any]] = EXPECTED_FONT_ASSETS,
+) -> tuple[str, ...]:
+    """Verify the exact local product-font bytes and provenance."""
+    verified: list[str] = []
+    for family, expected in assets.items():
+        try:
+            font_path = Path(expected["path"])
+            payload = font_path.read_bytes()
+            source = json.loads(
+                Path(expected["source"]).read_text(encoding="utf-8")
+            )
+            license_text = Path(expected["license"]).read_text(
+                encoding="utf-8"
+            )
+        except (OSError, UnicodeError, json.JSONDecodeError) as exc:
+            raise PrerequisiteError(
+                f"Vendored product font is unavailable: {family}"
+            ) from exc
+        if len(payload) != expected["bytes"]:
+            raise PrerequisiteError(
+                f"Vendored product font byte count mismatch: {family}"
+            )
+        digest = hashlib.sha256(payload).hexdigest()
+        if digest != expected["sha256"]:
+            raise PrerequisiteError(
+                f"Vendored product font SHA-256 mismatch: {family}"
+            )
+        if source.get("font_sha256") != digest:
+            raise PrerequisiteError(
+                f"Vendored product font SOURCE.json mismatch: {family}"
+            )
+        if "SIL OPEN FONT LICENSE Version 1.1" not in license_text:
+            raise PrerequisiteError(
+                f"Vendored product font OFL-1.1 licence is missing: {family}"
+            )
+        verified.append(family)
+    return tuple(verified)
+
+
 def check_arabic_font(command_runner: CommandRunner) -> tuple[str, Path]:
+    """Return host fontconfig information for diagnostics only."""
     command = [
         "fc-match",
         "-f",
@@ -217,6 +289,7 @@ def run_preflight(
         )
 
     axe_sha256 = check_axe_assets(axe_root)
+    product_fonts = check_product_fonts()
     font_family, font_file = check_arabic_font(command_runner)
     return PreflightReport(
         playwright_version=versions["playwright"],
@@ -225,6 +298,7 @@ def run_preflight(
         axe_sha256=axe_sha256,
         font_family=font_family,
         font_file=font_file,
+        product_fonts=product_fonts,
     )
 
 
@@ -253,6 +327,7 @@ def main(
     print(f"axe_sha256={report.axe_sha256}")
     print(f"font_family={report.font_family}")
     print(f"font_file={report.font_file}")
+    print(f"product_fonts={','.join(report.product_fonts)}")
     return 0
 
 

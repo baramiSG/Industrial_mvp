@@ -1,86 +1,81 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Industrial Opportunity Resolution Engine — public evidence and isolated Ministry simulation." />
-  <title>Industrial Opportunity Resolution Engine</title>
+  <meta name="description" content="" data-i18n-attr="content:app.description" />
+  <title></title>
   <link rel="icon" href="/static/assets/logo.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="/static/styles.css" />
 </head>
-<body>
-  <span class="sr-only" lang="ar" dir="rtl">واجهة تدعم النص العربي من اليمين إلى اليسار</span>
+<body class="app-loading" aria-busy="true">
   <div class="app-shell">
     <aside class="sidebar">
       <div class="brand">
-        <img src="/static/assets/logo.svg" alt="IOR" />
+        <img src="/static/assets/logo.svg" alt="" data-i18n-attr="alt:brand.logo_alt" />
         <div>
-          <strong>IOR Engine</strong>
-          <span>Industrial Decision Science</span>
+          <strong data-i18n="brand.name"></strong>
+          <span data-i18n="brand.tagline"></span>
         </div>
       </div>
 
-      <nav class="nav" aria-label="Primary navigation">
-        <button class="nav-item active" data-target="overview"><span>01</span> Executive overview</button>
-        <button class="nav-item" data-target="workspace"><span>02</span> Decision workspace</button>
-        <button class="nav-item" data-target="methodology"><span>03</span> Methodology ledger</button>
-        <button class="nav-item" data-target="extraction"><span>04</span> Bilingual extraction</button>
-        <button class="nav-item" data-target="governance"><span>05</span> Evidence governance</button>
+      <nav class="nav" aria-label="" data-i18n-attr="aria-label:nav.primary_label">
+        <button class="nav-item active" data-target="overview"><span>01</span><b data-i18n="nav.overview"></b></button>
+        <button class="nav-item" data-target="workspace"><span>02</span><b data-i18n="nav.workspace"></b></button>
+        <button class="nav-item" data-target="methodology"><span>03</span><b data-i18n="nav.methodology"></b></button>
+        <button class="nav-item" data-target="extraction"><span>04</span><b data-i18n="nav.extraction"></b></button>
+        <button class="nav-item" data-target="governance"><span>05</span><b data-i18n="nav.governance"></b></button>
       </nav>
 
       <div class="sidebar-footer">
-        <div class="status-dot"><i></i> Frozen demo snapshot</div>
-        <small>As of 31 August 2026</small>
+        <div class="status-dot"><i></i><span data-i18n="snapshot.status"></span></div>
+        <small data-i18n="snapshot.as_of"></small>
       </div>
     </aside>
 
     <main class="main">
       <header class="topbar">
         <div>
-          <p class="eyebrow">Kingdom of Saudi Arabia · Industrial Incentives</p>
-          <h1>Opportunity Resolution Engine</h1>
+          <p class="eyebrow" data-i18n="topbar.eyebrow"></p>
+          <h1 data-i18n="topbar.title"></h1>
         </div>
         <div class="topbar-actions">
-          <div class="mode-control" role="group" aria-label="Evidence mode">
-            <button class="mode-button active" data-mode="public">Public evidence</button>
-            <button class="mode-button" data-mode="simulated">Ministry simulation</button>
+          <div class="mode-control" role="group" aria-label="" data-i18n-attr="aria-label:mode.group_label">
+            <button class="mode-button active" data-mode="public" data-i18n="mode.public"></button>
+            <button class="mode-button" data-mode="simulated" data-i18n="mode.simulated"></button>
           </div>
-          <a class="ghost-button" href="/docs" target="_blank" rel="noreferrer">API</a>
+          <button id="locale-switch" class="locale-button" data-locale-switch data-i18n="locale.switch" data-i18n-attr="aria-label:locale.switch_aria"></button>
         </div>
       </header>
 
       <section id="overview" class="page-section hero-section">
         <div class="hero-copy">
-          <p class="eyebrow">Resolve the product before ranking the opportunity</p>
-          <h2>From HS-code signal to an accountable industrial route.</h2>
-          <p>
-            The engine combines frozen public evidence, deterministic rules, specification resolution,
-            plant-capability testing, economics and evidence-value logic. Synthetic Ministry-grade records
-            are evaluated in a sealed simulation branch and never alter the real decision.
-          </p>
+          <p class="eyebrow" data-i18n="overview.eyebrow"></p>
+          <h2 data-i18n="overview.title"></h2>
+          <p data-i18n="overview.body"></p>
           <div class="hero-actions">
-            <button class="primary-button" id="open-first-case">Open the steel case</button>
-            <button class="secondary-button" id="view-methodology">Inspect rule coverage</button>
+            <button class="primary-button" id="open-first-case" data-i18n="overview.open_steel"></button>
+            <button class="secondary-button" id="view-methodology" data-i18n="overview.inspect_rules"></button>
           </div>
         </div>
-        <div class="decision-flow" aria-label="Decision flow">
-          <div class="flow-node"><span>01</span><b>Signal</b><small>Trade and demand</small></div>
+        <div class="decision-flow" aria-label="" data-i18n-attr="aria-label:flow.aria">
+          <div class="flow-node"><span>01</span><b data-i18n="flow.signal"></b><small data-i18n="flow.signal_detail"></small></div>
           <div class="flow-line"></div>
-          <div class="flow-node"><span>02</span><b>Resolve</b><small>Spec and application</small></div>
+          <div class="flow-node"><span>02</span><b data-i18n="flow.resolve"></b><small data-i18n="flow.resolve_detail"></small></div>
           <div class="flow-line"></div>
-          <div class="flow-node"><span>03</span><b>Test</b><small>Incumbent capability</small></div>
+          <div class="flow-node"><span>03</span><b data-i18n="flow.test"></b><small data-i18n="flow.test_detail"></small></div>
           <div class="flow-line"></div>
-          <div class="flow-node"><span>04</span><b>Decide</b><small>Smallest intervention</small></div>
+          <div class="flow-node"><span>04</span><b data-i18n="flow.decide"></b><small data-i18n="flow.decide_detail"></small></div>
         </div>
       </section>
 
       <section class="page-section compact-section" aria-labelledby="portfolio-title">
         <div class="section-heading">
           <div>
-            <p class="eyebrow">Frozen demonstration portfolio</p>
-            <h2 id="portfolio-title">Public facts first. Simulation only where internal evidence is missing.</h2>
+            <p class="eyebrow" data-i18n="portfolio.eyebrow"></p>
+            <h2 id="portfolio-title" data-i18n="portfolio.title"></h2>
           </div>
-          <span class="snapshot-chip">2 golden cases · 15 rule paths</span>
+          <span class="snapshot-chip" data-i18n="portfolio.chip"></span>
         </div>
         <div id="kpi-grid" class="kpi-grid loading-block"></div>
         <div id="opportunity-grid" class="opportunity-grid loading-block"></div>
@@ -89,15 +84,15 @@
       <section id="workspace" class="page-section workspace-section">
         <div class="section-heading workspace-heading">
           <div>
-            <p class="eyebrow">Schema-driven GenUI decision surface</p>
-            <h2 id="workspace-title">Decision workspace</h2>
+            <p class="eyebrow" data-i18n="workspace.eyebrow"></p>
+            <h2 id="workspace-title" data-i18n="workspace.title"></h2>
           </div>
           <div class="workspace-tools">
-            <label class="select-label" for="opportunity-select">Opportunity</label>
-            <select id="opportunity-select" aria-label="Select opportunity"></select>
+            <label class="select-label" for="opportunity-select" data-i18n="workspace.opportunity"></label>
+            <select id="opportunity-select" aria-label="" data-i18n-attr="aria-label:workspace.select_aria"></select>
           </div>
         </div>
-        <div id="workspace-manifest" class="workspace-grid loading-block" role="region" aria-label="Decision analysis and authority provenance">
+        <div id="workspace-manifest" class="workspace-grid loading-block" role="region" aria-label="" data-i18n-attr="aria-label:workspace.region_aria">
           <div class="skeleton tall"></div>
           <div class="skeleton"></div>
         </div>
@@ -106,10 +101,10 @@
       <section id="methodology" class="page-section">
         <div class="section-heading">
           <div>
-            <p class="eyebrow">Methodology conformance</p>
-            <h2>Every rule has an execution state, evidence effect and decision boundary.</h2>
+            <p class="eyebrow" data-i18n="methodology.eyebrow"></p>
+            <h2 data-i18n="methodology.title"></h2>
           </div>
-          <span class="snapshot-chip">R0–R12 · deterministic</span>
+          <span class="snapshot-chip" data-i18n="methodology.chip"></span>
         </div>
         <div id="methodology-summary" class="methodology-summary loading-block"></div>
       </section>
@@ -117,10 +112,10 @@
       <section id="extraction" class="page-section">
         <div class="section-heading">
           <div>
-            <p class="eyebrow">Arabic–English specification control</p>
-            <h2>Source spans stay attached to normalized technical fields.</h2>
+            <p class="eyebrow" data-i18n="extraction.eyebrow"></p>
+            <h2 data-i18n="extraction.title"></h2>
           </div>
-          <span id="extraction-score" class="snapshot-chip">Loading gate…</span>
+          <span id="extraction-score" class="snapshot-chip" data-i18n="extraction.loading"></span>
         </div>
         <div id="extraction-grid" class="extraction-grid loading-block"></div>
       </section>
@@ -128,40 +123,41 @@
       <section id="governance" class="page-section governance-section">
         <div class="section-heading">
           <div>
-            <p class="eyebrow">Evidence and authority boundary</p>
-            <h2>Autonomous computation. Accountable authorization.</h2>
+            <p class="eyebrow" data-i18n="governance.eyebrow"></p>
+            <h2 data-i18n="governance.title"></h2>
           </div>
         </div>
         <div class="governance-grid">
           <article class="governance-card">
-            <span class="governance-icon">P</span>
-            <h3>Public evidence</h3>
-            <p>Frozen, attributable observations determine the real decision state.</p>
-            <ul><li>Hashed snapshots</li><li>Evidence classes</li><li>Source lineage</li></ul>
+            <span class="governance-icon" aria-hidden="true"></span>
+            <h3 data-i18n="governance.public_title"></h3>
+            <p data-i18n="governance.public_body"></p>
+            <ul><li data-i18n="governance.public_item1"></li><li data-i18n="governance.public_item2"></li><li data-i18n="governance.public_item3"></li></ul>
           </article>
           <article class="governance-card synthetic-card">
-            <span class="governance-icon">S</span>
-            <h3>Synthetic Ministry layer</h3>
-            <p>Illustrative line-level records demonstrate what confirmed internal data would unlock.</p>
-            <ul><li>Separate scenario ID</li><li>Visible warning label</li><li>Cannot mutate real state</li></ul>
+            <span class="governance-icon" aria-hidden="true"></span>
+            <h3 data-i18n="governance.simulated_title"></h3>
+            <p data-i18n="governance.simulated_body"></p>
+            <div class="synthetic-labels" data-policy-labels="governance"></div>
+            <ul><li data-i18n="governance.simulated_item1"></li><li data-i18n="governance.simulated_item2"></li><li data-i18n="governance.simulated_item3"></li></ul>
           </article>
           <article class="governance-card">
-            <span class="governance-icon">D</span>
-            <h3>Decision authority</h3>
-            <p>The engine proposes a route, conditions, sunset and kill condition; accountable officials authorize action.</p>
-            <ul><li>Fail-closed hard gates</li><li>Immutable base result</li><li>Named override authority</li></ul>
+            <span class="governance-icon" aria-hidden="true"></span>
+            <h3 data-i18n="governance.authority_title"></h3>
+            <p data-i18n="governance.authority_body"></p>
+            <ul><li data-i18n="governance.authority_item1"></li><li data-i18n="governance.authority_item2"></li><li data-i18n="governance.authority_item3"></li></ul>
           </article>
         </div>
       </section>
 
       <footer class="footer">
-        <span>Industrial Opportunity Resolution Engine MVP · Strategic Gears</span>
-        <span>Confidential demonstration</span>
+        <span data-i18n="footer.product"></span>
+        <span data-i18n="footer.confidential"></span>
       </footer>
     </main>
   </div>
 
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
-  <script src="/static/app.js" defer></script>
+  <script type="module" src="/static/app.js"></script>
 </body>
 </html>

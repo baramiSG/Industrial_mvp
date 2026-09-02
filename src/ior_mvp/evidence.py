@@ -48,6 +48,26 @@ def _required_policy_value(
     return policy[field]
 
 
+def synthetic_display_labels() -> dict[str, str]:
+    """Return the two validated policy-owned synthetic warnings."""
+    policy = _synthetic_policy()
+    labels = {
+        "en": _required_policy_value(policy, "display_label"),
+        "ar": _required_policy_value(policy, "display_label_ar"),
+    }
+    for locale, value in labels.items():
+        if (
+            not isinstance(value, str)
+            or not value
+            or value.strip() != value
+        ):
+            raise EvidenceIntegrityError(
+                "Evidence policy synthetic_isolation "
+                f"display_label_{locale} must be a non-empty string"
+            )
+    return labels
+
+
 def validate_synthetic_scenario(scenario: dict[str, Any]) -> None:
     policy = _synthetic_policy()
     required_fields = _required_policy_value(policy, "required_fields")
@@ -95,7 +115,7 @@ def validate_synthetic_scenario(scenario: dict[str, Any]) -> None:
             f"required_source={required_source}"
         )
 
-    required_label = _required_policy_value(policy, "display_label")
+    required_label = synthetic_display_labels()["en"]
     if scenario.get("display_label") != required_label:
         raise EvidenceIntegrityError(
             "Synthetic scenario display_label must equal policy "
@@ -717,6 +737,7 @@ def assert_real_decision_unchanged(
 def synthetic_evidence_rows(scenario: dict[str, Any]) -> list[dict[str, Any]]:
     validate_synthetic_scenario(scenario)
     inputs = scenario["synthetic_inputs"]
+    labels = synthetic_display_labels()
     rows: list[dict[str, Any]] = []
     for key in sorted(inputs):
         rows.append(
@@ -730,6 +751,7 @@ def synthetic_evidence_rows(scenario: dict[str, Any]) -> list[dict[str, Any]]:
                 "scenario_id": scenario["scenario_id"],
                 "supports": [f"Simulation branch input: {key}"],
                 "display_label": scenario["display_label"],
+                "display_labels": labels,
             }
         )
     return rows

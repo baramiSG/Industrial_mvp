@@ -20,6 +20,7 @@ dev = [
   "httpx>=0.27,<1"
 ]
 e2e = [
+  "Pillow==12.3.0",
   "playwright==1.62.0",
   "pytest-playwright==0.9.0"
 ]
@@ -41,5 +42,6 @@ pythonpath = ["src", "."]
 testpaths = ["tests"]
 addopts = "-ra"
 markers = [
-  "e2e: real-Chromium acceptance tests; excluded from default testpaths"
+  "e2e: real-Chromium acceptance tests; excluded from default testpaths",
+  "visual: governed visual-regression matrix"
 ]

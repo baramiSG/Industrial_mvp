@@ -1,0 +1,105 @@
+.dossier-body {
+  margin: var(--space-0);
+  color: var(--color-navy-900);
+  background: var(--color-workspace);
+  font-family: var(--font-family-interface);
+}
+
+:root[dir="rtl"],
+[lang="ar"] {
+  font-family: var(--font-family-arabic);
+}
+
+.source-language-island,
+code {
+  font-family: var(--font-family-interface);
+}
+
+.page {
+  max-inline-size: var(--size-dossier-max);
+  margin: var(--space-28) auto;
+  background: var(--color-surface);
+  padding: var(--space-42);
+  box-shadow: var(--shadow-panel);
+}
+
+.page h1 {
+  font-size: var(--font-size-28);
+  margin: var(--space-0) var(--space-0) var(--space-6);
+}
+
+.page h2 {
+  font-size: var(--font-size-16);
+  text-transform: uppercase;
+  letter-spacing: var(--font-track-label);
+  color: var(--color-muted);
+  border-block-end: var(--border-hairline) solid var(--color-line);
+  padding-block-end: var(--space-8);
+}
+
+.meta {
+  color: var(--color-muted);
+  margin-block-end: var(--space-24);
+}
+
+.state {
+  display: inline-block;
+  padding: var(--space-7) var(--space-11);
+  border-radius: var(--radius-round);
+  background: var(--color-navy-850);
+  color: var(--color-surface);
+  font-weight: var(--font-weight-medium);
+}
+
+.dossier-grid {
+  display: grid;
+  grid-template-columns: var(--layout-dossier-columns);
+  gap: var(--space-24);
+}
+
+.box {
+  border: var(--border-hairline) solid var(--color-line);
+  border-radius: var(--radius-card);
+  padding: var(--space-18);
+}
+
+.warning {
+  background: var(--color-warning-soft);
+  border: var(--border-hairline) solid var(--color-warning);
+  padding: var(--space-14);
+  border-radius: var(--radius-md);
+  margin: var(--space-18) var(--space-0);
+}
+
+.small {
+  font-size: var(--font-size-12);
+  color: var(--color-muted);
+}
+
+.page ul {
+  padding-inline-start: var(--space-20);
+}
+
+.dossier-source-caption {
+  font-size: var(--font-size-11);
+  color: var(--color-muted);
+  border-inline-start: var(--border-accent) solid var(--color-warning);
+  padding-inline-start: var(--space-8);
+}
+
+@media print {
+  @page {
+    size: A4;
+    margin: var(--space-0);
+  }
+
+  .dossier-body {
+    background: var(--color-surface);
+  }
+
+  .page {
+    box-shadow: var(--shadow-none);
+    margin: var(--space-0);
+    max-inline-size: none;
+  }
+}

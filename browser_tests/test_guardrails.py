@@ -10,20 +10,28 @@ from browser_tests.harness import (
     AppServer,
     BrowserFailureCollector,
     DESKTOP,
+    LOCALES,
+    Locale,
 )
 
 
 pytestmark = pytest.mark.e2e
 
 
+@pytest.mark.parametrize(
+    "locale",
+    LOCALES,
+    ids=[locale.code for locale in LOCALES],
+)
 def test_failure_collector_observes_all_required_channels(
     new_context: Any,
     app_server: AppServer,
     artifact_dir: Path,
+    locale: Locale,
 ) -> None:
     context = new_context(
         base_url=app_server.base_url,
-        locale="en-US",
+        locale=locale.bcp47,
         permissions=["clipboard-read", "clipboard-write"],
         reduced_motion="reduce",
         viewport=DESKTOP.as_dict(),
@@ -40,7 +48,8 @@ def test_failure_collector_observes_all_required_channels(
     )
     page = context.new_page()
     collector.attach_page(page)
-    page.goto("/")
+    page.goto(f"/?locale={locale.code}")
+    page.locator("[data-open-id]").first.wait_for()
 
     page.evaluate("console.error('s06-console-probe')")
     with page.expect_event("pageerror"):
@@ -78,12 +87,16 @@ def test_failure_collector_observes_all_required_channels(
         "s06-external-probe",
     ):
         assert probe in rendered
-    (artifact_dir / "failure-collector-summary.json").write_text(
+    (
+        artifact_dir
+        / f"failure-collector-summary-{locale.code}.json"
+    ).write_text(
         json.dumps(
             {
                 "categories": sorted(categories),
                 "observation_only": True,
                 "ordinary_collector_exclusions": 0,
+                "locale": locale.code,
             },
             indent=2,
             sort_keys=True,

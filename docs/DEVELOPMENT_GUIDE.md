@@ -6,7 +6,7 @@ Development uses repository code, frozen public evidence, and explicitly synthet
 
 ## Prerequisites
 
-Use WSL or native Linux with Python 3.11 or newer, Git, Make, Node, and `uv`. Docker is required for image/runtime compatibility checks. Real-browser acceptance additionally uses Python 3.12, `playwright==1.62.0`, `pytest-playwright==0.9.0`, matching Playwright Chromium, fontconfig, and an Arabic-capable font.
+Use WSL or native Linux with Python 3.11 or newer, Git, Make, Node, and `uv`. Docker is required for image/runtime compatibility checks and canonical visual-baseline updates. Real-browser acceptance additionally uses Python 3.12, `playwright==1.62.0`, `pytest-playwright==0.9.0`, `Pillow==12.3.0`, matching Playwright Chromium, and the exact vendored Noto Sans/Noto Sans Arabic assets. Host `fc-match` output is diagnostic only; product-font bytes and actual browser rendering are the gate.
 
 The Makefile defaults to `NODE ?= node`. If Node is user-scoped:
 
@@ -43,13 +43,14 @@ The target executes:
 1. locked development-environment sync;
 2. prohibited tracked-file and deterministic credential-pattern scan;
 3. configured-threshold comparison-literal scan;
-4. Python compilation;
-5. JavaScript syntax;
-6. governed-file integrity;
-7. Gate B scenario policy/reconciliation/ground-truth back-test;
-8. full pytest;
-9. domain/extraction smoke;
-10. real-Chromium prerequisite validation and the 62-node browser suite.
+4. bilingual catalogue, token, copy, and logical-direction contracts;
+5. Python compilation;
+6. recursive ES-module syntax;
+7. governed-file integrity;
+8. Gate B scenario policy/reconciliation/ground-truth back-test;
+9. full pytest;
+10. domain/extraction smoke;
+11. real-Chromium prerequisite validation, 118 functional nodes, and four visual nodes comparing 40 governed baselines.
 
 Any nonzero exit blocks review. Manifest generation is not a routine gate.
 
@@ -62,11 +63,10 @@ Install the separate browser-test environment without changing the preserved
 uv sync --locked --extra dev --extra e2e --python "3.12"
 uv run --locked --extra dev --extra e2e \
   python -m playwright install chromium
-fc-match -f '%{family}|%{file}\n' ':lang=ar'
 make e2e
 ```
 
-The `uv-sync-e2e` target installs the locked `dev` and `e2e` extras used by `make e2e`.
+The `uv-sync-e2e` target installs the locked `dev` and `e2e` extras used by `make e2e`. Use `make e2e-functional` for the 118 nonvisual nodes and `make e2e-visual` for the four comparison nodes. Ordinary comparison is Docker-free.
 
 On a Linux host where package installation is authorized, Playwright can
 install its system dependencies with:
@@ -78,8 +78,8 @@ uv run --locked --extra dev --extra e2e \
 
 Do not use `--with-deps` where `sudo` is unavailable or unauthorized. The
 host must instead provide Playwright's documented Chromium libraries and an
-Arabic-capable font. CI installs `fonts-noto-core` and runs the authorized
-`--with-deps` command on Ubuntu 24.04.
+Arabic-capable browser libraries. CI runs the authorized `--with-deps`
+command on Ubuntu 24.04; the application supplies its own SHA-verified fonts.
 
 `make e2e` starts the application on a kernel-assigned `127.0.0.1` port,
 waits for `/api/health`, runs headless Chromium, and terminates the child
@@ -92,9 +92,63 @@ The browser suite is top-level `browser_tests/`, outside the default
 `testpaths = ["tests"]`, so the normal pytest and `.[dev]` paths remain
 browser-independent. Runtime output is ignored under `.artifacts/e2e/`:
 server logs, retained-on-failure traces/screenshots, axe diagnostics, PDFs,
-and ordinary reference captures. The 40 tracked v0.2.0 WebPs under the S06
-slice record are documentary references only; no test compares them. S07
-owns governed visual-regression baselines.
+and visual diffs. The 40 tracked v0.2.0 WebPs under the S06 slice record are
+documentary references only and remain untouched. The executable oracle is
+the 40-image v0.3.0 matrix under `browser_tests/baselines/v0.3.0/`.
+
+## Bilingual interface contracts
+
+`config/ui_strings.v1.yaml` is a hashed operating artifact. English and
+Arabic key and placeholder sets must remain identical, values must be
+non-empty NFC strings, and policy warning labels must not be duplicated
+there. `GET /api/ui-strings/{locale}` serves one complete validated bundle;
+invalid locale returns `UI_LOCALE_NOT_FOUND`, while catalogue corruption
+fails closed without a partial bundle.
+
+The browser locale precedence is URL `locale` → `localStorage["ior.locale"]`
+→ `en`. The switch updates the document `lang`/`dir`, URL, storage, static
+chrome, and cached dynamic content atomically. Normalized analytical values
+use Western digits and Gregorian dates in both locales; original source spans
+remain verbatim. Engine-authored English narrative remains visibly captioned
+and isolated with `lang="en" dir="ltr"` in Arabic UI.
+
+`src/ior_mvp/static/styles.css` is an import façade. Raw colours, dimensions,
+font values, shadows, radii, motion, z-index values, and breakpoints live only
+in `css/tokens.css`; component CSS uses variables and logical properties.
+Run:
+
+```bash
+.venv/bin/python scripts/check_ui_contracts.py
+.venv/bin/python scripts/check_es_modules.py --node node
+```
+
+Every production JavaScript file is a named-export ES module with at most 199
+physical lines. The recursive syntax checker parses every module through
+Node's module grammar.
+
+## Governed visual baselines
+
+The fixed matrix is ten principal screens × English/Arabic × 1440×900 and
+1024×768. Baselines are opaque RGB, lossless WebP, SHA-256 indexed, at most
+600 KiB each and 12 MiB in aggregate. A pixel is significant only when its
+maximum channel delta is greater than 8; both significant-pixel ratio ≤0.001
+and mean absolute channel error ≤0.20 must pass. Mismatches write normalized
+actual, amplified diff, and JSON metrics under
+`.artifacts/e2e/visual-diffs/`.
+
+Updates are never run in CI or on the host renderer:
+
+```bash
+make e2e-functional
+IOR_UPDATE_VISUAL_BASELINES=1 \
+IOR_BASELINE_CHANGE_REF="<review-reference>" \
+make e2e-update-baselines
+make e2e
+```
+
+The update target uses the digest-pinned Playwright 1.62.0 Noble image,
+asserts `chromium-1234`, mounts only allow-listed project paths, and runs with
+`--network=none`. Inspect every image and manifest change before review.
 
 Focused examples:
 
@@ -134,8 +188,9 @@ source .venv/bin/activate
 python -m pip install -e ".[dev]"
 python scripts/check_prohibited_files.py
 python scripts/check_threshold_literals.py
+python scripts/check_ui_contracts.py
 python -m compileall -q src scripts tests
-node --check src/ior_mvp/static/app.js
+python scripts/check_es_modules.py --node node
 PYTHONPATH=src python scripts/verify_integrity.py
 PYTHONPATH=src python scripts/validate_scenarios.py
 PYTHONPATH=src pytest -q
@@ -145,8 +200,9 @@ PYTHONPATH=src python scripts/demo_smoke.py
 ## Lock maintenance
 
 `pyproject.toml` is the dependency and package-metadata source. The `dev`
-extra remains pytest/httpx only; Playwright belongs to the separate exact-pinned
-`e2e` extra. Regenerate `uv.lock` only after an intentional change:
+extra remains pytest/httpx only; Pillow, Playwright, and pytest-playwright
+belong to the separate exact-pinned `e2e` extra. Regenerate `uv.lock` only
+after an intentional change:
 
 ```bash
 "$HOME/.local/bin/uv" lock
@@ -205,7 +261,7 @@ The S05 edit to `config/project.yaml project.version` is an approved unhashed re
 
 ## CI topology
 
-GitHub Actions runs locked `uv` gates on Python 3.12 and 3.14, the documented pip path on Python 3.12, an independent Docker image build, and `browser / Chromium / Python 3.12` on Ubuntu 24.04. The browser job installs `fonts-noto-core`, the matching Chromium and system dependencies, caches Playwright by `uv.lock`, and uploads `.artifacts/e2e/` only when the job fails. Workflow permissions are read-only for repository contents and checkout credentials are not persisted. Cancelled or skipped jobs are not green.
+GitHub Actions runs locked `uv` gates on Python 3.12 and 3.14, the documented pip path on Python 3.12, an independent Docker image build, and `browser / Chromium / Python 3.12` on Ubuntu 24.04. The browser job installs matching Chromium system dependencies, verifies the vendored fonts, compares all governed baselines, caches Playwright by `uv.lock`, and uploads `.artifacts/e2e/` only when the job fails. It contains no baseline-update command. Workflow permissions are read-only for repository contents and checkout credentials are not persisted. Cancelled or skipped jobs are not green.
 
 ## Failure interpretation
 

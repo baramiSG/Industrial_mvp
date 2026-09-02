@@ -116,6 +116,29 @@ def test_load_tracked_files_fails_closed_for_a_missing_file(tmp_path: Path) -> N
         scanner.load_tracked_files(tmp_path, ("missing.txt",))
 
 
+def test_scan_repository_allows_git_recorded_worktree_deletions(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    (tmp_path / "safe.txt").write_text("safe", encoding="utf-8")
+    monkeypatch.setattr(
+        scanner,
+        "git_tracked_paths",
+        lambda _root: ("deleted.txt", "safe.txt"),
+    )
+    monkeypatch.setattr(
+        scanner,
+        "git_deleted_paths",
+        lambda _root: ("deleted.txt",),
+        raising=False,
+    )
+
+    findings, count = scanner.scan_repository(tmp_path)
+
+    assert findings == ()
+    assert count == 1
+
+
 def test_main_returns_one_for_a_planted_zone_identifier(
     monkeypatch: pytest.MonkeyPatch,
     capsys: pytest.CaptureFixture[str],

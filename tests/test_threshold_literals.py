@@ -203,7 +203,13 @@ def test_repository_has_no_embedded_threshold_comparison_literals() -> None:
 
 def test_frontend_hhi_caption_uses_payload_threshold() -> None:
     source = (
-        PROJECT_ROOT / "src" / "ior_mvp" / "static" / "app.js"
+        PROJECT_ROOT
+        / "src"
+        / "ior_mvp"
+        / "static"
+        / "modules"
+        / "renderers"
+        / "decision.js"
     ).read_text(encoding="utf-8")
     assert "Resilience review threshold: 0.25" not in source
     assert "props.supplier_concentration?.hhi_threshold" in source

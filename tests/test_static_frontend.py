@@ -6,12 +6,34 @@ from pathlib import Path
 from ior_mvp.config import PROJECT_ROOT
 
 
+STATIC_ROOT = PROJECT_ROOT / "src" / "ior_mvp" / "static"
+CSS_ROOT = STATIC_ROOT / "css"
+
+
+def _module_source(relative: str) -> str:
+    return (STATIC_ROOT / relative).read_text(encoding="utf-8")
+
+
+def _css_source(relative: str) -> str:
+    return (CSS_ROOT / relative).read_text(encoding="utf-8")
+
+
+def _token(name: str) -> str:
+    match = re.search(
+        rf"--{re.escape(name)}:\s*(#[0-9a-fA-F]{{6}})",
+        _css_source("tokens.css"),
+    )
+    assert match is not None
+    return match.group(1)
+
+
 def test_frontend_contains_evidence_mode_and_arabic_support() -> None:
     html = (PROJECT_ROOT / "src" / "ior_mvp" / "static" / "index.html").read_text(encoding="utf-8")
-    assert "Public evidence" in html
-    assert "Ministry simulation" in html
-    assert 'dir="rtl"' in html
-    assert "Decision workspace" in html
+    assert 'data-i18n="mode.public"' in html
+    assert 'data-i18n="mode.simulated"' in html
+    assert '<html lang="en" dir="ltr">' in html
+    assert 'data-i18n="workspace.title"' in html
+    assert "data-locale-switch" in html
 
 
 def test_frontend_has_no_external_cdn_dependency() -> None:
@@ -22,8 +44,15 @@ def test_frontend_has_no_external_cdn_dependency() -> None:
     assert "fonts.googleapis" not in html
 
 
+def test_demo_shell_has_no_engineer_docs_anchor() -> None:
+    html = (STATIC_ROOT / "index.html").read_text(encoding="utf-8")
+
+    assert 'href="/docs"' not in html
+    assert "data-locale-switch" in html
+
+
 def test_synthetic_warning_style_exists() -> None:
-    css = (PROJECT_ROOT / "src" / "ior_mvp" / "static" / "styles.css").read_text(encoding="utf-8")
+    css = _css_source("workspace.css")
     assert ".synthetic-warning" in css
     assert ".synthetic-row" in css
 
@@ -55,13 +84,7 @@ def _contrast_ratio(first: str, second: str) -> float:
 
 
 def test_integrity_banner_renders_authority_provenance_safely() -> None:
-    app_js = (
-        PROJECT_ROOT
-        / "src"
-        / "ior_mvp"
-        / "static"
-        / "app.js"
-    ).read_text(encoding="utf-8")
+    app_js = _module_source("modules/renderers/integrity.js")
     for expression in (
         "props.authority.methodology",
         "methodology.sha256_prefix",
@@ -71,8 +94,9 @@ def test_integrity_banner_renders_authority_provenance_safely() -> None:
         "versions.evidence_policy",
     ):
         assert expression in app_js
-    assert "escapeHtml(methodology.sha256_prefix)" in app_js
-    assert "escapeHtml(versions.evidence_policy)" in app_js
+    assert "technical(methodology.sha256_prefix)" in app_js
+    assert "technical(versions.evidence_policy)" in app_js
+    assert "technical(versions.ui_strings)" in app_js
 
 
 def test_workspace_region_names_authority_provenance() -> None:
@@ -84,54 +108,34 @@ def test_workspace_region_names_authority_provenance() -> None:
         / "index.html"
     ).read_text(encoding="utf-8")
     assert (
-        'role="region" aria-label="Decision analysis and '
-        'authority provenance"'
+        'role="region" aria-label="" '
+        'data-i18n-attr="aria-label:workspace.region_aria"'
     ) in html
 
 
 def test_authority_caption_uses_design_token_only() -> None:
-    css = (
-        PROJECT_ROOT
-        / "src"
-        / "ior_mvp"
-        / "static"
-        / "styles.css"
-    ).read_text(encoding="utf-8")
+    css = _css_source("workspace.css")
     block = css.split(
         ".integrity-banner .integrity-authority",
         maxsplit=1,
     )[1].split("}", maxsplit=1)[0]
 
-    assert "var(--teal-soft)" in block
+    assert "var(--color-accent-soft)" in block
     assert "#" not in block
 
 
 def test_authority_caption_meets_text_contrast_on_banner() -> None:
-    css = (
-        PROJECT_ROOT
-        / "src"
-        / "ior_mvp"
-        / "static"
-        / "styles.css"
-    ).read_text(encoding="utf-8")
-    foreground_match = re.search(
-        r"--teal-soft:\s*(#[0-9a-fA-F]{6})",
-        css,
+    foreground = _token("color-accent-soft")
+    gradient = re.search(
+        r"--gradient-banner:\s*([^;]+);",
+        _css_source("tokens.css"),
     )
-    assert foreground_match is not None
-    banner = css.split(
-        ".integrity-banner {",
-        maxsplit=1,
-    )[1].split("}", maxsplit=1)[0]
-    backgrounds = re.findall(
-        r"#[0-9a-fA-F]{6}",
-        banner,
-    )
-
+    assert gradient is not None
+    backgrounds = re.findall(r"#[0-9a-fA-F]{6}", gradient.group(1))
     assert len(backgrounds) == 2
     assert all(
         _contrast_ratio(
-            foreground_match.group(1),
+            foreground,
             background,
         )
         >= 4.5
@@ -148,34 +152,38 @@ def _app_function(source: str, name: str) -> str:
 
 
 def test_rule_ledger_visibly_labels_synthetic_rows() -> None:
-    app_js = (
-        PROJECT_ROOT
-        / "src"
-        / "ior_mvp"
-        / "static"
-        / "app.js"
-    ).read_text(encoding="utf-8")
-    helper = _app_function(app_js, "ruleBoundaryChip")
-    ledger = _app_function(app_js, "renderRuleLedger")
-    methodology = _app_function(app_js, "renderMethodology")
+    helper = _app_function(
+        _module_source("modules/dom.js"),
+        "ruleBoundaryChip",
+    )
+    ledger = _app_function(
+        _module_source("modules/renderers/rules.js"),
+        "renderRuleLedger",
+    )
+    methodology = _app_function(
+        _module_source("modules/methodology.js"),
+        "renderMethodology",
+    )
 
     assert "row.synthetic_flag" in helper
-    assert "escapeHtml(row.display_label)" in helper
+    assert "syntheticLabels(row.display_labels" in helper
     assert "exec-chip exec-DEGRADED" in helper
-    assert "SYNTHETIC" in helper
     for block in (ledger, methodology):
         assert '"synthetic-row"' in block
         assert "ruleBoundaryChip(row)" in block
 
 
+def test_governance_synthetic_disclosure_uses_policy_bundle() -> None:
+    html = (STATIC_ROOT / "index.html").read_text(encoding="utf-8")
+    i18n = _module_source("modules/i18n.js")
+
+    assert 'data-policy-labels="governance"' in html
+    assert "bundle.synthetic_labels" in i18n
+    assert "applyPolicyLabels" in i18n
+
+
 def test_integrity_banner_displays_public_and_active_states_together() -> None:
-    app_js = (
-        PROJECT_ROOT
-        / "src"
-        / "ior_mvp"
-        / "static"
-        / "app.js"
-    ).read_text(encoding="utf-8")
+    app_js = _module_source("modules/renderers/integrity.js")
     banner = _app_function(app_js, "renderIntegrityBanner")
 
     assert "stateChip(props.real_state)" in banner
@@ -184,72 +192,38 @@ def test_integrity_banner_displays_public_and_active_states_together() -> None:
 
 
 def test_decision_actions_exposes_dossier_html_action() -> None:
-    app_js = (
-        PROJECT_ROOT
-        / "src"
-        / "ior_mvp"
-        / "static"
-        / "app.js"
-    ).read_text(encoding="utf-8")
+    app_js = _module_source("modules/renderers/evidence.js")
     actions = _app_function(app_js, "renderDecisionActions")
 
     assert "data-dossier-html" in actions
-    assert "Open dossier" in actions
+    assert 't("actions.open_dossier")' in actions
     assert "<button" in actions
 
 
 def test_accessibility_text_tokens_meet_wcag_aa_on_used_surfaces() -> None:
-    css = (
-        PROJECT_ROOT
-        / "src"
-        / "ior_mvp"
-        / "static"
-        / "styles.css"
-    ).read_text(encoding="utf-8")
-
-    def token(name: str) -> str:
-        match = re.search(
-            rf"--{re.escape(name)}:\s*(#[0-9a-fA-F]{{6}})",
-            css,
-        )
-        assert match is not None
-        return match.group(1)
-
     pairs = (
-        (token("teal-text"), "#edf3f6"),
-        (token("teal-text"), "#ffffff"),
-        (token("ink-600"), "#e8eef2"),
-        (token("ink-600"), "#f4f7f9"),
-        (token("ink-500"), "#f5f8fa"),
-        (token("ink-500"), "#ffffff"),
-        (token("gold-text"), "#ffffff"),
-        (token("teal-on-dark"), "#071726"),
+        (_token("color-accent-text"), _token("color-workspace")),
+        (_token("color-accent-text"), _token("color-surface")),
+        (_token("color-muted"), _token("color-control-bg")),
+        (_token("color-muted"), _token("color-paper")),
+        (_token("color-muted-strong"), _token("color-soft")),
+        (_token("color-muted-strong"), _token("color-surface")),
+        (_token("color-warning-text"), _token("color-surface")),
+        (_token("color-on-dark"), _token("color-navy-950")),
     )
     assert all(
         _contrast_ratio(foreground, background) >= 4.5
         for foreground, background in pairs
     )
-    assert (
-        ".exec-DISABLED { background: #edf1f4; "
-        "color: var(--ink-700); }"
-        in css
-    )
-    assert ".fire-na { color: var(--gold-text); }" in css
-    assert (
-        ".hero-section .eyebrow, .governance-section .eyebrow "
-        "{ color: var(--teal-on-dark); }"
-        in css
-    )
+    workspace = _css_source("workspace.css")
+    overview = _css_source("overview.css")
+    assert "color: var(--color-navy-700);" in workspace
+    assert "color: var(--color-warning-text);" in workspace
+    assert "color: var(--color-on-dark);" in overview
 
 
 def test_workspace_heading_can_wrap_without_page_overflow() -> None:
-    css = (
-        PROJECT_ROOT
-        / "src"
-        / "ior_mvp"
-        / "static"
-        / "styles.css"
-    ).read_text(encoding="utf-8")
+    css = _css_source("workspace.css")
     heading = css.split(
         ".workspace-heading {",
         maxsplit=1,
@@ -258,7 +232,7 @@ def test_workspace_heading_can_wrap_without_page_overflow() -> None:
         ".workspace-tools {",
         maxsplit=1,
     )[1].split("}", maxsplit=1)[0]
-    tablet = css.split(
+    tablet = _css_source("tokens.css").split(
         "@media (max-width: 1180px) {",
         maxsplit=1,
     )[1].split(
@@ -267,28 +241,51 @@ def test_workspace_heading_can_wrap_without_page_overflow() -> None:
     )[0]
 
     assert "flex-wrap: wrap" in heading
-    assert "min-width: 0" in tools
-    assert "max-width: 100%" in tools
-    assert ".workspace-heading" in tablet
-    assert "flex-direction: column" in tablet
-    assert ".workspace-tools { width: 100%;" in tablet
-    assert "select { width: 100%;" in tablet
+    assert "min-inline-size: var(--space-0)" in tools
+    assert "max-inline-size: var(--size-full)" in tools
+    assert "--layout-heading-direction: column" in tablet
+    assert "--layout-workspace-tools-width: var(--size-full)" in tablet
+    assert "--layout-select-width: var(--size-full)" in tablet
+
+
+def test_bidi_state_chips_and_sticky_section_anchors_use_tokens() -> None:
+    workspace = _css_source("workspace.css")
+    overview = _css_source("overview.css")
+    tokens = _css_source("tokens.css")
+
+    state_chip = workspace.split(
+        ".state-chip {",
+        maxsplit=1,
+    )[1].split("}", maxsplit=1)[0]
+    assert "gap: var(--space-4)" in state_chip
+    assert "scroll-margin-block-start: var(--size-topbar-min)" in overview
+    assert ':root[dir="rtl"] .transition-icon' in workspace
+    assert "transform: var(--motion-rtl-flip)" in workspace
+    assert "--motion-rtl-flip: scaleX(-1)" in tokens
+
+
+def test_source_language_code_islands_use_vendored_interface_font() -> None:
+    base = _css_source("base.css")
+    dossier = _css_source("dossier.css")
+
+    assert (
+        ".source-language-island,\ncode {\n"
+        "  font-family: var(--font-family-interface);"
+    ) in base
+    assert (
+        ".source-language-island,\ncode {\n"
+        "  font-family: var(--font-family-interface);"
+    ) in dossier
 
 
 def test_reduced_motion_context_disables_transient_colour_states() -> None:
-    css = (
-        PROJECT_ROOT
-        / "src"
-        / "ior_mvp"
-        / "static"
-        / "styles.css"
-    ).read_text(encoding="utf-8")
+    css = _css_source("tokens.css")
 
     assert "@media (prefers-reduced-motion: reduce)" in css
     block = css.split(
         "@media (prefers-reduced-motion: reduce)",
         maxsplit=1,
     )[1]
-    assert "transition-duration: 0s !important" in block
-    assert "animation-duration: 0s !important" in block
-    assert "scroll-behavior: auto !important" in block
+    assert "--motion-duration: 0s" in block
+    assert "--motion-shimmer: none" in block
+    assert "--motion-scroll: auto" in block

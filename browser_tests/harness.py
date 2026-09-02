@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import hashlib
 import json
 import os
 import signal
@@ -12,7 +11,6 @@ import urllib.error
 import urllib.request
 from collections.abc import Mapping
 from dataclasses import dataclass
-from importlib.metadata import version
 from pathlib import Path
 from typing import Any, Literal
 from urllib.parse import parse_qsl, urlencode, urlsplit
@@ -25,8 +23,6 @@ from scripts.check_browser_prerequisites import (
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SYNTHETIC_LABEL = "SIMULATED — NOT MINISTRY EVIDENCE"
-V0_2_0_RELEASE_SHA = "ce5786b423f2b5de81e13a73c1fbe57da2a8f5e6"
 SERVER_START_TIMEOUT_SECONDS = 15.0
 SERVER_STOP_TIMEOUT_SECONDS = 10.0
 ASSERTION_TIMEOUT_MS = 10_000
@@ -40,6 +36,19 @@ FailureCategory = Literal[
     "app-http-error",
     "external-request",
 ]
+
+
+@dataclass(frozen=True)
+class Locale:
+    code: str
+    bcp47: str
+    direction: str
+
+
+EN = Locale("en", "en-US", "ltr")
+AR = Locale("ar", "ar-SA", "rtl")
+LOCALES = (EN, AR)
+LOCALE_BY_CODE = {locale.code: locale for locale in LOCALES}
 
 
 @dataclass(frozen=True)
@@ -74,7 +83,6 @@ POLYPROPYLENE = Case(
     simulated_active_state="REJECT",
 )
 CASES = (STEEL, POLYPROPYLENE)
-CASE_BY_ID = {case.id: case for case in CASES}
 MODES: tuple[Mode, ...] = ("public", "simulated")
 
 
@@ -106,22 +114,6 @@ VIEWPORTS = (
     PRESENTATION_1080,
     PRESENTATION_1440,
 )
-REFERENCE_STATES = (
-    "journey-a-portfolio-public",
-    "journey-a-portfolio-simulated",
-    "journey-b-steel-public-workspace",
-    "journey-c-steel-simulated-workspace",
-    "journey-d-polypropylene-public-workspace",
-    "journey-d-polypropylene-simulated-workspace",
-    "journey-e-steel-public-dossier",
-    "journey-e-steel-simulated-dossier",
-    "journey-e-polypropylene-public-dossier",
-    "journey-e-polypropylene-simulated-dossier",
-)
-REFERENCE_MAX_FILE_BYTES = 512 * 1024
-REFERENCE_MAX_TOTAL_BYTES = 8 * 1024 * 1024
-
-
 @dataclass(frozen=True)
 class AppServer:
     base_url: str
@@ -136,6 +128,7 @@ class BrowserSession:
     collector: BrowserFailureCollector
     app_server: AppServer
     artifact_dir: Path
+    locale: Locale
 
 
 @dataclass(frozen=True)
@@ -179,260 +172,13 @@ class KeyboardFocusReport:
 class ArabicRenderReport:
     visible_rtl_nodes: int
     font_family: str
+    document_direction: str
+    intended_font_loaded: bool
     arabic_width: float
     replacement_width: float
     arabic_pixel_signature: str
     replacement_pixel_signature: str
     distinct_arabic_glyph_signatures: int
-
-
-@dataclass(frozen=True)
-class ReferenceEntry:
-    path: Path
-    viewport: Viewport
-    state: str
-    journey: str
-    mode: Mode
-    case_id: str | None
-    real_state: str
-    active_state: str
-    size: int
-    sha256: str
-
-
-class ReferenceRecorder:
-    def __init__(
-        self,
-        root: Path,
-        *,
-        browser_version: str,
-        font_family: str,
-        font_file: Path,
-        capture_command: str,
-        base_sha: str,
-        release_sha: str,
-    ) -> None:
-        self.root = root
-        self.browser_version = browser_version
-        self.font_family = font_family
-        self.font_file = font_file
-        self.capture_command = capture_command
-        self.base_sha = base_sha
-        self.release_sha = release_sha
-        self._entries: dict[str, ReferenceEntry] = {}
-
-    @property
-    def entries(self) -> tuple[ReferenceEntry, ...]:
-        return tuple(self._entries.values())
-
-    def path_for(self, viewport: Viewport, state: str) -> Path:
-        if state not in REFERENCE_STATES:
-            raise ValueError(f"unknown reference state: {state}")
-        return self.root / f"{viewport.name}__{state}.webp"
-
-    def record(
-        self,
-        path: Path,
-        *,
-        viewport: Viewport,
-        state: str,
-        journey: str,
-        mode: str,
-        case_id: str | None,
-    ) -> None:
-        if mode not in MODES:
-            raise ValueError(f"unknown evidence mode: {mode}")
-        typed_mode: Mode = mode
-        expected_path = self.path_for(viewport, state)
-        if path != expected_path:
-            raise AssertionError(
-                f"reference path mismatch: {path} != {expected_path}"
-            )
-        key = path.name
-        if key in self._entries:
-            raise AssertionError(f"duplicate reference capture: {key}")
-        payload = path.read_bytes()
-        if not payload:
-            raise AssertionError(f"empty reference capture: {key}")
-        if len(payload) > REFERENCE_MAX_FILE_BYTES:
-            raise AssertionError(
-                f"reference capture exceeds 512 KiB: {key}"
-            )
-        if case_id is None:
-            real_state = (
-                "steel=INVESTIGATE; polypropylene=REJECT"
-            )
-            active_state = (
-                "steel="
-                f"{STEEL.active_state(typed_mode)}; polypropylene=REJECT"
-            )
-        else:
-            case = CASE_BY_ID[case_id]
-            real_state = case.real_state
-            active_state = case.active_state(typed_mode)
-        self._entries[key] = ReferenceEntry(
-            path=path,
-            viewport=viewport,
-            state=state,
-            journey=journey,
-            mode=typed_mode,
-            case_id=case_id,
-            real_state=real_state,
-            active_state=active_state,
-            size=len(payload),
-            sha256=hashlib.sha256(payload).hexdigest(),
-        )
-
-    def finalize(self) -> Path:
-        expected_count = len(VIEWPORTS) * len(REFERENCE_STATES)
-        if len(self._entries) != expected_count:
-            raise AssertionError(
-                "reference matrix is incomplete: "
-                f"{len(self._entries)} of {expected_count}"
-            )
-        expected_names = {
-            f"{viewport.name}__{state}.webp"
-            for viewport in VIEWPORTS
-            for state in REFERENCE_STATES
-        }
-        actual_names = {
-            path.name
-            for path in self.root.glob("*.webp")
-        }
-        if actual_names != expected_names:
-            raise AssertionError(
-                "reference directory file set does not match the matrix"
-            )
-        total_bytes = sum(
-            entry.size for entry in self._entries.values()
-        )
-        if total_bytes > REFERENCE_MAX_TOTAL_BYTES:
-            raise AssertionError(
-                "reference captures exceed the 8 MiB aggregate budget"
-            )
-
-        ui_files = (
-            ROOT / "src" / "ior_mvp" / "static" / "index.html",
-            ROOT / "src" / "ior_mvp" / "static" / "app.js",
-            ROOT / "src" / "ior_mvp" / "static" / "styles.css",
-            ROOT / "src" / "ior_mvp" / "dossier.py",
-        )
-        lines = [
-            "# v0.2.0 documentary browser references",
-            "",
-            (
-                "**DOCUMENTARY REFERENCE ONLY — NOT A "
-                "VISUAL-REGRESSION ORACLE.**"
-            ),
-            "",
-            (
-                "No test compares these images. Governed visual-regression "
-                "baselines begin in S07 under owner ruling R-4."
-            ),
-            "",
-            "## Provenance",
-            "",
-            f"- Product release: `v0.2.0` (`{self.release_sha}`)",
-            f"- S06 base commit: `{self.base_sha}`",
-            f"- Playwright package: `{version("playwright")}`",
-            (
-                "- pytest-playwright package: "
-                f"`{version("pytest-playwright")}`"
-            ),
-            f"- Chromium: `{self.browser_version}`",
-            (
-                f"- Arabic fontconfig match: `{self.font_family}` "
-                f"(`{self.font_file}`)"
-            ),
-            f"- Capture command: `{self.capture_command}`",
-            "- Format: WebP quality 55; scoped element captures",
-            (
-                f"- Matrix: {len(self._entries)} files; "
-                f"{total_bytes} aggregate bytes"
-            ),
-            "",
-            "## Captured UI source hashes",
-            "",
-        ]
-        for path in ui_files:
-            digest = hashlib.sha256(path.read_bytes()).hexdigest()
-            lines.append(
-                f"- `{path.relative_to(ROOT)}`: `{digest}`"
-            )
-        lines.extend(
-            [
-                "",
-                "## Journey matrix",
-                "",
-                (
-                    "| Viewport | Journey state | Mode | Case | "
-                    "Real state | Active state | File | Bytes | SHA-256 |"
-                ),
-                (
-                    "|---|---|---|---|---|---|---|---:|---|"
-                ),
-            ]
-        )
-        viewport_order = {
-            viewport.name: index
-            for index, viewport in enumerate(VIEWPORTS)
-        }
-        state_order = {
-            state: index
-            for index, state in enumerate(REFERENCE_STATES)
-        }
-        entries = sorted(
-            self._entries.values(),
-            key=lambda entry: (
-                viewport_order[entry.viewport.name],
-                state_order[entry.state],
-            ),
-        )
-        for entry in entries:
-            lines.append(
-                f"| {entry.viewport.name} "
-                f"({entry.viewport.width}×{entry.viewport.height}) "
-                f"| {entry.journey}: {entry.state} "
-                f"| {entry.mode} "
-                f"| {entry.case_id or 'portfolio'} "
-                f"| {entry.real_state} "
-                f"| {entry.active_state} "
-                f"| `{entry.path.name}` "
-                f"| {entry.size} "
-                f"| `{entry.sha256}` |"
-            )
-        index_path = self.root / "index.md"
-        index_path.write_text(
-            "\n".join(lines) + "\n",
-            encoding="utf-8",
-        )
-        return index_path
-
-
-def git_revision(revision: str) -> str:
-    result = subprocess.run(
-        ["git", "rev-parse", revision],
-        cwd=ROOT,
-        check=False,
-        capture_output=True,
-        text=True,
-    )
-    if result.returncode != 0:
-        raise RuntimeError(f"unable to resolve Git revision: {revision}")
-    return result.stdout.strip()
-
-
-def reference_capture_command(reference_root: Path) -> str:
-    relative = reference_root.relative_to(ROOT)
-    tracked_root = Path(
-        ".workflow/slices/S06-browser-acceptance-harness/"
-        "reference-screenshots/v0.2.0"
-    )
-    if relative == tracked_root:
-        return (
-            f"E2E_REFERENCE_DIR={tracked_root.as_posix()} make e2e"
-        )
-    return "make e2e"
 
 
 def url_origin(url: str) -> str | None:
@@ -455,7 +201,13 @@ def sanitized_url(url: str, app_origin: str) -> str:
                 parsed.query,
                 keep_blank_values=True,
             )
-            if key == "mode" and value in MODES
+            if (
+                (key == "mode" and value in MODES)
+                or (
+                    key == "locale"
+                    and value in LOCALE_BY_CODE
+                )
+            )
         ]
         query = urlencode(safe_pairs)
     suffix = parsed.path or "/"
@@ -667,6 +419,10 @@ def verify_arabic_rendering(page: Any) -> ArabicRenderReport:
             });
           const fontFamily = nodes[0]?.fontFamily || "sans-serif";
           const sample = "المملكة العربية السعودية";
+          const intendedFontLoaded = document.fonts.check(
+            '48px "IOR Noto Sans Arabic"',
+            sample
+          );
           const replacement = "\uFFFD".repeat(Array.from(sample).length);
           const render = (text) => {
             const canvas = document.createElement("canvas");
@@ -715,6 +471,10 @@ def verify_arabic_rendering(page: Any) -> ArabicRenderReport:
           return {
             nodes,
             fontFamily,
+            documentDirection: getComputedStyle(
+              document.documentElement
+            ).direction,
+            intendedFontLoaded,
             arabic,
             tofu,
             distinctGlyphs: new Set(glyphSignatures).size,
@@ -743,9 +503,22 @@ def verify_arabic_rendering(page: Any) -> ArabicRenderReport:
             "RTL node direction, Arabic text, or dimensions are invalid: "
             f"{json.dumps(invalid_nodes, ensure_ascii=False)}"
         )
+    if result["intendedFontLoaded"] is not True:
+        raise AssertionError(
+            "IOR Noto Sans Arabic did not load for the Arabic sample"
+        )
+    if not str(result["fontFamily"]).lstrip('"').startswith(
+        "IOR Noto Sans Arabic"
+    ):
+        raise AssertionError(
+            "Arabic content did not select IOR Noto Sans Arabic: "
+            f"{result['fontFamily']}"
+        )
     return ArabicRenderReport(
         visible_rtl_nodes=len(nodes),
         font_family=result["fontFamily"],
+        document_direction=result["documentDirection"],
+        intended_font_loaded=bool(result["intendedFontLoaded"]),
         arabic_width=float(result["arabic"]["width"]),
         replacement_width=float(result["tofu"]["width"]),
         arabic_pixel_signature=result["arabic"]["signature"],

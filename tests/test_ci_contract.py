@@ -72,8 +72,9 @@ def test_each_python_job_runs_every_required_gate(job_name: str) -> None:
     required_fragments = (
         "python scripts/check_prohibited_files.py",
         "python scripts/check_threshold_literals.py",
+        "python scripts/check_ui_contracts.py",
         "python -m compileall -q src scripts tests",
-        "node --check src/ior_mvp/static/app.js",
+        "python scripts/check_es_modules.py --node node",
         "python scripts/verify_integrity.py",
         "python scripts/validate_scenarios.py",
         "pytest -q",
@@ -137,6 +138,36 @@ def test_threshold_literal_scan_immediately_follows_prohibited_scan(
     threshold_step = steps[prohibited_index + 1]
     assert threshold_step == {
         "name": "Reject embedded threshold literals",
+        "run": expected_command,
+    }
+
+
+@pytest.mark.parametrize(
+    ("job_name", "expected_command"),
+    [
+        (
+            "uv-gates",
+            "uv run --locked --extra dev "
+            "python scripts/check_ui_contracts.py",
+        ),
+        (
+            "pip-gates",
+            "python scripts/check_ui_contracts.py",
+        ),
+    ],
+)
+def test_ui_contract_gate_immediately_follows_threshold_scan(
+    job_name: str,
+    expected_command: str,
+) -> None:
+    steps = _workflow()["jobs"][job_name]["steps"]
+    threshold_index = next(
+        index
+        for index, step in enumerate(steps)
+        if step.get("name") == "Reject embedded threshold literals"
+    )
+    assert steps[threshold_index + 1] == {
+        "name": "Validate UI catalogue, token and copy contracts",
         "run": expected_command,
     }
 
@@ -238,13 +269,17 @@ def test_browser_job_is_independent_locked_and_fail_closed() -> None:
         'uv sync --locked --extra dev --extra e2e --python "3.12"'
         in commands
     )
-    assert "sudo apt-get install --yes --no-install-recommends fonts-noto-core" in commands
+    assert "fonts-noto-core" not in commands
     assert (
         "uv run --locked --extra dev --extra e2e "
         "python -m playwright install --with-deps chromium"
         in commands
     )
     assert "make UV=uv e2e" in commands
+    assert any(
+        step.get("name") == "Run bilingual real-browser and visual gates"
+        for step in job["steps"]
+    )
 
     cache_step = next(
         step

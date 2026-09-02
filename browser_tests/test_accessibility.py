@@ -9,10 +9,12 @@ import pytest
 from browser_tests.harness import (
     AXE_TAGS,
     CASES,
+    LOCALES,
     MODES,
     VIEWPORTS,
     BrowserSession,
     Case,
+    Locale,
     Mode,
     Viewport,
     format_axe_violations,
@@ -28,34 +30,28 @@ from browser_tests.pages import (
 
 
 pytestmark = pytest.mark.e2e
-CASE_MODES = tuple(
-    (mode, case)
-    for mode, case in product(MODES, CASES)
-)
-MODE_VIEWPORTS = tuple(
-    (mode, viewport)
-    for mode, viewport in product(MODES, VIEWPORTS)
-)
+CASE_MODE_LOCALES = tuple(product(MODES, CASES, LOCALES))
+MODE_VIEWPORT_LOCALES = tuple(product(MODES, VIEWPORTS, LOCALES))
+MODE_LOCALES = tuple(product(MODES, LOCALES))
 
 
 @pytest.mark.parametrize(
-    ("mode", "viewport"),
-    MODE_VIEWPORTS,
+    ("mode", "viewport", "locale"),
+    MODE_VIEWPORT_LOCALES,
     ids=[
-        f"{mode}-{viewport.name}"
-        for mode, viewport in MODE_VIEWPORTS
+        f"{mode}-{viewport.name}-{locale.code}"
+        for mode, viewport, locale in MODE_VIEWPORT_LOCALES
     ],
 )
 def test_keyboard_tab_order_reaches_every_interactive_control_with_visible_focus(
     browser_session: BrowserSession,
     mode: Mode,
     viewport: Viewport,
+    locale: Locale,
 ) -> None:
     page = browser_session.page
-    goto_portfolio(page, mode)
-
+    goto_portfolio(page, mode, locale)
     report = keyboard_focus_report(page)
-
     expected = (
         "nav:overview",
         "nav:workspace",
@@ -64,7 +60,7 @@ def test_keyboard_tab_order_reaches_every_interactive_control_with_visible_focus
         "nav:governance",
         "mode:public",
         "mode:simulated",
-        "href:/docs",
+        "id:locale-switch",
         "id:open-first-case",
         "id:view-methodology",
         f"open:{CASES[0].id}",
@@ -81,27 +77,21 @@ def test_keyboard_tab_order_reaches_every_interactive_control_with_visible_focus
         item.before_signature != item.focused_signature
         for item in report.records
     )
-    assert "/docs" not in page.url
+    assert "/docs" not in page.locator("body").inner_html()
     assert viewport.width == page.viewport_size["width"]
     output = (
         browser_session.artifact_dir
         / "focus"
-        / f"{mode}-{viewport.name}.json"
+        / f"{mode}-{viewport.name}-{locale.code}.json"
     )
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(
         json.dumps(
             {
+                "locale": locale.code,
                 "mode": mode,
+                "records": [asdict(item) for item in report.records],
                 "viewport": viewport.as_dict(),
-                "expected_count": len(expected),
-                "reached_count": len(report.records),
-                "focus_visible": all(
-                    item.focus_visible for item in report.records
-                ),
-                "records": [
-                    asdict(item) for item in report.records
-                ],
             },
             indent=2,
             sort_keys=True,
@@ -111,123 +101,103 @@ def test_keyboard_tab_order_reaches_every_interactive_control_with_visible_focus
     )
 
 
+def _assert_axe_clean(
+    result: dict,
+    output: object,
+) -> None:
+    violations = result["violations"]
+    if violations:
+        output.write_text(
+            format_axe_violations(violations),
+            encoding="utf-8",
+        )
+    assert violations == [], format_axe_violations(violations)
+
+
 @pytest.mark.parametrize(
-    ("mode", "case"),
-    CASE_MODES,
-    ids=[f"{mode}-{case.slug}" for mode, case in CASE_MODES],
+    ("mode", "case", "locale"),
+    CASE_MODE_LOCALES,
+    ids=[
+        f"{mode}-{case.slug}-{locale.code}"
+        for mode, case, locale in CASE_MODE_LOCALES
+    ],
 )
 def test_workspace_has_zero_wcag_21_aa_axe_violations(
     browser_session: BrowserSession,
     mode: Mode,
     case: Case,
+    locale: Locale,
 ) -> None:
     page = browser_session.page
-    goto_portfolio(page, mode)
-    select_case(page, case, mode)
-
-    result = run_axe(page)
-    violations = result["violations"]
-    summary = (
+    goto_portfolio(page, mode, locale)
+    select_case(page, case, mode, locale)
+    output = (
         browser_session.artifact_dir
         / "axe"
-        / f"workspace-{case.slug}-{mode}-summary.json"
+        / f"workspace-{case.slug}-{mode}-{locale.code}.txt"
     )
-    summary.parent.mkdir(parents=True, exist_ok=True)
-    summary.write_text(
-        json.dumps(
-            {
-                "tags": list(AXE_TAGS),
-                "violations": len(violations),
-            },
-            indent=2,
-            sort_keys=True,
-        )
-        + "\n",
-        encoding="utf-8",
-    )
-    if violations:
-        output = (
-            browser_session.artifact_dir
-            / "axe"
-            / f"workspace-{case.slug}-{mode}.json"
-        )
-        output.parent.mkdir(parents=True, exist_ok=True)
-        output.write_text(
-            format_axe_violations(violations),
-            encoding="utf-8",
-        )
-    assert violations == [], format_axe_violations(violations)
+    output.parent.mkdir(parents=True, exist_ok=True)
+    _assert_axe_clean(run_axe(page), output)
 
 
 @pytest.mark.parametrize(
-    ("mode", "case"),
-    CASE_MODES,
-    ids=[f"{mode}-{case.slug}" for mode, case in CASE_MODES],
+    ("mode", "case", "locale"),
+    CASE_MODE_LOCALES,
+    ids=[
+        f"{mode}-{case.slug}-{locale.code}"
+        for mode, case, locale in CASE_MODE_LOCALES
+    ],
 )
 def test_dossier_has_zero_wcag_21_aa_axe_violations(
     browser_session: BrowserSession,
     mode: Mode,
     case: Case,
+    locale: Locale,
 ) -> None:
     page = browser_session.page
-    goto_portfolio(page, mode)
-    select_case(page, case, mode)
-    popup = open_dossier_popup(page, case, mode)
-
-    result = run_axe(popup)
-    violations = result["violations"]
-    summary = (
+    goto_portfolio(page, mode, locale)
+    select_case(page, case, mode, locale)
+    popup = open_dossier_popup(page, case, mode, locale)
+    output = (
         browser_session.artifact_dir
         / "axe"
-        / f"dossier-{case.slug}-{mode}-summary.json"
+        / f"dossier-{case.slug}-{mode}-{locale.code}.txt"
     )
-    summary.parent.mkdir(parents=True, exist_ok=True)
-    summary.write_text(
-        json.dumps(
-            {
-                "tags": list(AXE_TAGS),
-                "violations": len(violations),
-            },
-            indent=2,
-            sort_keys=True,
-        )
-        + "\n",
-        encoding="utf-8",
-    )
-    if violations:
-        output = (
-            browser_session.artifact_dir
-            / "axe"
-            / f"dossier-{case.slug}-{mode}.json"
-        )
-        output.parent.mkdir(parents=True, exist_ok=True)
-        output.write_text(
-            format_axe_violations(violations),
-            encoding="utf-8",
-        )
-    assert violations == [], format_axe_violations(violations)
+    output.parent.mkdir(parents=True, exist_ok=True)
+    _assert_axe_clean(run_axe(popup), output)
 
 
-@pytest.mark.parametrize("mode", MODES, ids=MODES)
+@pytest.mark.parametrize(
+    ("mode", "locale"),
+    MODE_LOCALES,
+    ids=[f"{mode}-{locale.code}" for mode, locale in MODE_LOCALES],
+)
 def test_workspace_rtl_elements_render_real_arabic_glyphs(
     browser_session: BrowserSession,
     mode: Mode,
+    locale: Locale,
 ) -> None:
     page = browser_session.page
-    goto_portfolio(page, mode)
-
+    goto_portfolio(page, mode, locale)
     report = verify_arabic_rendering(page)
-
-    assert report.visible_rtl_nodes >= 1
+    assert report.document_direction == locale.direction
+    assert report.intended_font_loaded is True
     assert report.arabic_width != report.replacement_width
-    assert report.arabic_pixel_signature != (
-        report.replacement_pixel_signature
-    )
+    assert report.arabic_pixel_signature != report.replacement_pixel_signature
     assert report.distinct_arabic_glyph_signatures >= 2
+    if locale.code == "ar":
+        islands = page.locator(".source-language-island")
+        assert islands.count() >= 10
+        assert all(
+            island.evaluate(
+                "(node) => getComputedStyle(node).direction"
+            ) == "ltr"
+            for island in islands.all()
+        )
     output = (
         browser_session.artifact_dir
         / "rtl"
-        / f"workspace-{mode}.json"
+        / f"workspace-{mode}-{locale.code}.json"
     )
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(
@@ -237,32 +207,35 @@ def test_workspace_rtl_elements_render_real_arabic_glyphs(
 
 
 @pytest.mark.parametrize(
-    ("mode", "case"),
-    CASE_MODES,
-    ids=[f"{mode}-{case.slug}" for mode, case in CASE_MODES],
+    ("mode", "case", "locale"),
+    CASE_MODE_LOCALES,
+    ids=[
+        f"{mode}-{case.slug}-{locale.code}"
+        for mode, case, locale in CASE_MODE_LOCALES
+    ],
 )
 def test_dossier_rtl_element_renders_real_arabic_glyphs(
     browser_session: BrowserSession,
     mode: Mode,
     case: Case,
+    locale: Locale,
 ) -> None:
     page = browser_session.page
-    goto_portfolio(page, mode)
-    select_case(page, case, mode)
-    popup = open_dossier_popup(page, case, mode)
-
+    goto_portfolio(page, mode, locale)
+    select_case(page, case, mode, locale)
+    popup = open_dossier_popup(page, case, mode, locale)
     report = verify_arabic_rendering(popup)
-
-    assert report.visible_rtl_nodes == 1
+    assert report.document_direction == locale.direction
+    assert report.intended_font_loaded is True
     assert report.arabic_width != report.replacement_width
-    assert report.arabic_pixel_signature != (
-        report.replacement_pixel_signature
-    )
+    assert report.arabic_pixel_signature != report.replacement_pixel_signature
     assert report.distinct_arabic_glyph_signatures >= 2
+    if locale.code == "ar":
+        assert popup.locator(".source-language-island").count() >= 8
     output = (
         browser_session.artifact_dir
         / "rtl"
-        / f"dossier-{case.slug}-{mode}.json"
+        / f"dossier-{case.slug}-{mode}-{locale.code}.json"
     )
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(

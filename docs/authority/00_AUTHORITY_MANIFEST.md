@@ -155,14 +155,15 @@ The machine-readable source of truth is `authority_hashes.json`. The table below
 | `docs/authority/Industrial_Opportunity_Resolution_Methodology_Final_KSA.docx` | `5717cbd42acc9947ce5e450013719275acb7ed1470847b21fb2cc547c8ac4ce9` | 224,257 |
 | `config/thresholds.v1.yaml` | `32d868f9506f325e980f3363079031a75534d3829b30131548c2e6d36a23d261` | 3,700 |
 | `config/sector_profiles.v1.yaml` | `59db0489a7f46c2a42fbaf834531acc897ebbfcbff311d2ee7caacd41d7aeefe` | 1,256 |
-| `config/evidence_policy.v1.yaml` | `f2778c39649fa8d39e3a3311d3639de085cc9b6574ea31dadf259bb8f006cdb2` | 1,373 |
-| `docs/core/01_PRODUCT_AND_REQUIREMENTS.md` | `3b642450edf3686cc7cbf92529a8b710d583a1b96f95c0211e5196b985a867e4` | 11,554 |
-| `docs/core/02_METHODOLOGY_IMPLEMENTATION_MAP.md` | `b7fc67f2910b9f7e7a8678fceba7a02c6768d81cc052129c974e7fc44bd1c665` | 10,653 |
+| `config/evidence_policy.v1.yaml` | `30018295a801cbcffa0681fc634982b2601e87f8756d1350ef37d9c67e327081` | 1,479 |
+| `config/ui_strings.v1.yaml` | `59ccb67a882ee4fa70390a4588873724074a2e689a17b7bcc6dc850cb1602f41` | 23,183 |
+| `docs/core/01_PRODUCT_AND_REQUIREMENTS.md` | `8c8cea8fc58db821b4bc151a2170bd74188085526419e62b7e2752eb62fa8080` | 11,942 |
+| `docs/core/02_METHODOLOGY_IMPLEMENTATION_MAP.md` | `4352f990e9ef146be8312fa932ba2f9b8383e098cdfca1286fdc59f02617104c` | 11,416 |
 | `docs/core/03_SYSTEM_ARCHITECTURE.md` | `33cfb90b3e394413855144c70abfdf79c6c41584caa0ad1b73dfb044281cac66` | 9,337 |
 | `docs/core/04_CANONICAL_DATA_MODEL.md` | `6742eec2c502145c9e6daaa47da7a071de9c9fa3c2bf88c17b415a5dbc580d36` | 9,518 |
 | `docs/core/05_DATA_SOURCES_AND_INGESTION.md` | `d47823ae761996faf3f67a14850a75ddb4a37a3e8dd3a160ad54afacca8548ad` | 9,259 |
 | `docs/core/06_SYNTHETIC_MINISTRY_DATA_SPEC.md` | `5c930ea5756aea802325a26ab94066353f59fd73dc9a04b1496f88dd6ba0863e` | 6,562 |
 | `docs/core/07_DETERMINISTIC_ENGINE_SPEC.md` | `02e8d9cacb7590668dac2287042a08e72016e6613e236ca2e5ce7d2738591cc5` | 8,567 |
 | `docs/core/08_AI_EXTRACTION_AND_EVIDENCE_SPEC.md` | `875f30b1a597f94548cf1cdb8315c753dc0fe9d780674b36a7bd8653e9e56f58` | 5,564 |
-| `docs/core/09_TEST_ACCEPTANCE_AND_GOLDEN_CASES.md` | `a6a35026d5b542fbb47ee3cad35c8c3ea537ea3fefe2579b010657627c69f09d` | 6,296 |
+| `docs/core/09_TEST_ACCEPTANCE_AND_GOLDEN_CASES.md` | `81b221b5e715ca5c0a5318c1d42e15c9942b863a17f4c4e7854a45aa69420559` | 6,671 |
 <!-- HASH_TABLE_END -->

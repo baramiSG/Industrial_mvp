@@ -99,9 +99,27 @@ Benefits:
 
 ## 8. Arabic support
 
-- Arabic names and source spans use `dir=rtl`;
-- no transliteration replaces the original source;
-- normalized English fields do not hide the Arabic evidence span.
+- All interface chrome and governed labels have Arabic/English catalogue
+  parity. `?locale=en` sets `<html lang="en" dir="ltr">`; `?locale=ar` sets
+  `<html lang="ar" dir="rtl">`, and logical CSS properties mirror the shell.
+- The visible topbar switch fetches and validates the target bundle before an
+  atomic document, URL, local-storage and rendered-content update.
+- IDs, HS codes, hashes, standards, currencies, quantities and dates are
+  directionally isolated as LTR technical values. Arabic names and original
+  Arabic source spans retain `lang="ar" dir="rtl"`.
+- Engine-emitted analytical narrative remains English in this release. Arabic
+  UI visibly captions each affected group and renders every governed source
+  value as a `lang="en" dir="ltr"` source-language island; it does not claim a
+  translation.
+- Every simulated surface repeats both warning labels from evidence policy
+  1.2.0. Neither label is duplicated in the UI catalogue.
+- Western (`latn`) digits, Gregorian dates and verbatim source spans are the
+  Supervisor-approved S07 presentation defaults. They are owner-amendable
+  through the applicable authority change; implementation may not silently
+  vary them.
+- Exact local Noto Sans and Noto Sans Arabic assets are SHA-verified and
+  rendered without a runtime CDN. Symbols outside their vendored Unicode
+  ranges use catalogue-labelled inline SVG or CSS glyphs.
 
 ## 9. Responsive behavior
 

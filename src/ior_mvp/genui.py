@@ -24,6 +24,9 @@ def build_ui_manifest(analysis: dict[str, Any]) -> dict[str, Any]:
                 "real_state": real["state"],
                 "active_state": active["state"],
                 "synthetic_label": (analysis.get("simulation_scenario") or {}).get("display_label"),
+                "synthetic_labels": (analysis.get("simulation_scenario") or {}).get(
+                    "display_labels"
+                ),
                 "authority": analysis["authority"],
             },
         },
@@ -36,6 +39,8 @@ def build_ui_manifest(analysis: dict[str, Any]) -> dict[str, Any]:
                 "route": active["route_label"],
                 "rationale": active["rationale"],
                 "confidence": active["confidence"],
+                "conditions": active.get("conditions", []),
+                "kill_conditions": active.get("kill_conditions", []),
             },
         },
         {
@@ -90,6 +95,9 @@ def build_ui_manifest(analysis: dict[str, Any]) -> dict[str, Any]:
                 "props": {
                     "missing_facts": analysis["data_unlocks"],
                     "synthetic_inputs_used": analysis["synthetic_inputs_used"],
+                    "synthetic_labels": (
+                        analysis.get("simulation_scenario") or {}
+                    ).get("display_labels"),
                 },
             },
             {

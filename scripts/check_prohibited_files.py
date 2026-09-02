@@ -121,6 +121,32 @@ def git_tracked_paths(root: Path) -> tuple[str, ...]:
     return parse_git_ls_files(result.stdout)
 
 
+def git_deleted_paths(root: Path) -> tuple[str, ...]:
+    """Return tracked paths Git identifies as deleted in the worktree."""
+    try:
+        result = subprocess.run(
+            [
+                "git",
+                "diff",
+                "--name-only",
+                "-z",
+                "--diff-filter=D",
+            ],
+            cwd=root,
+            check=False,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+    except FileNotFoundError as error:
+        raise ScannerError("git executable not found") from error
+    if result.returncode != 0:
+        raise ScannerError(
+            "git diff for deleted paths failed with "
+            f"exit code {result.returncode}"
+        )
+    return parse_git_ls_files(result.stdout)
+
+
 def load_tracked_files(root: Path, paths: Sequence[str]) -> dict[str, bytes]:
     files: dict[str, bytes] = {}
     for path in paths:
@@ -137,8 +163,10 @@ def load_tracked_files(root: Path, paths: Sequence[str]) -> dict[str, bytes]:
 
 def scan_repository(root: Path) -> tuple[tuple[Finding, ...], int]:
     paths = git_tracked_paths(root)
-    files = load_tracked_files(root, paths)
-    return scan_tracked_files(files), len(paths)
+    deleted = set(git_deleted_paths(root))
+    readable_paths = tuple(path for path in paths if path not in deleted)
+    files = load_tracked_files(root, readable_paths)
+    return scan_tracked_files(files), len(readable_paths)
 
 
 def main(root: Path = ROOT) -> int:

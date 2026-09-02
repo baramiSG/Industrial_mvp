@@ -10,101 +10,126 @@ from playwright.sync_api import expect
 
 from browser_tests.harness import (
     CASES,
+    LOCALES,
     MODES,
-    SYNTHETIC_LABEL,
     BrowserSession,
     Case,
+    Locale,
     Mode,
 )
 from browser_tests.pages import (
     goto_portfolio,
+    locale_bundle,
     open_dossier_popup,
     select_case,
 )
 
 
 pytestmark = pytest.mark.e2e
-CASE_MODES = tuple(
-    (mode, case)
-    for mode, case in product(MODES, CASES)
-)
+CASE_MODE_LOCALES = tuple(product(MODES, CASES, LOCALES))
 
 
 @pytest.mark.parametrize(
-    ("mode", "case"),
-    CASE_MODES,
-    ids=[f"{mode}-{case.slug}" for mode, case in CASE_MODES],
+    ("mode", "case", "locale"),
+    CASE_MODE_LOCALES,
+    ids=[
+        f"{mode}-{case.slug}-{locale.code}"
+        for mode, case, locale in CASE_MODE_LOCALES
+    ],
 )
 def test_open_dossier_popup_matches_case_and_mode(
     browser_session: BrowserSession,
     mode: Mode,
     case: Case,
+    locale: Locale,
 ) -> None:
     page = browser_session.page
-    goto_portfolio(page, mode)
-    select_case(page, case, mode)
-
-    popup = open_dossier_popup(page, case, mode)
+    goto_portfolio(page, mode, locale)
+    select_case(page, case, mode, locale)
+    popup = open_dossier_popup(page, case, mode, locale)
 
     parsed = urlsplit(popup.url)
-    assert parsed.path == (
-        f"/api/opportunities/{case.id}/dossier.html"
+    assert parsed.path == f"/api/opportunities/{case.id}/dossier.html"
+    assert parse_qs(parsed.query) == {
+        "mode": [mode],
+        "locale": [locale.code],
+    }
+    strings = locale_bundle(locale)["strings"]
+    assert popup.title().strip().startswith(
+        strings["dossier.document_title"].split("{state}")[0]
     )
-    assert parse_qs(parsed.query) == {"mode": [mode]}
-    decision_headline = popup.locator("h1").inner_text().strip()
-    assert decision_headline
-    assert popup.title().strip() == decision_headline
     expect(popup.locator("main.page")).to_be_visible()
-    expect(popup.locator(".state")).to_have_text(
-        case.active_state(mode)
-    )
+    expect(popup.locator(".state")).to_contain_text(case.active_state(mode))
     expect(popup.locator(".meta")).to_contain_text(case.id)
-    expect(popup.locator(".meta")).to_contain_text(
-        f"Mode: {mode}"
+    state_words = re.findall(
+        r"[\w-]+",
+        popup.locator(".state").inner_text().casefold(),
     )
-    rtl = popup.locator('[dir="rtl"]')
-    expect(rtl).to_have_count(1)
-    expect(rtl).not_to_have_text("")
+    assert all(
+        current != following
+        for current, following in zip(
+            state_words,
+            state_words[1:],
+            strict=False,
+        )
+    )
+    if locale.code == "ar":
+        hs_token = popup.locator(
+            "bdi.technical-token",
+            has_text=f"HS H0 / {case.hs6}",
+        )
+        expect(hs_token).to_have_count(1)
+        token_detail = hs_token.evaluate(
+            """node => ({
+              text: node.textContent,
+              direction: getComputedStyle(node).direction,
+              unicodeBidi: getComputedStyle(node).unicodeBidi,
+            })"""
+        )
+        assert token_detail == {
+            "text": f"HS H0 / {case.hs6}",
+            "direction": "ltr",
+            "unicodeBidi": "isolate",
+        }
+    labels = locale_bundle(locale)["synthetic_labels"]
     if mode == "simulated":
-        expect(popup.locator(".warning")).to_contain_text(
-            SYNTHETIC_LABEL
-        )
+        for label in labels.values():
+            expect(popup.locator(".warning")).to_contain_text(label)
     else:
-        expect(popup.locator("body")).not_to_contain_text(
-            SYNTHETIC_LABEL
-        )
+        for label in labels.values():
+            expect(popup.locator("body")).not_to_contain_text(label)
 
 
 @pytest.mark.parametrize(
-    ("mode", "case"),
-    CASE_MODES,
-    ids=[f"{mode}-{case.slug}" for mode, case in CASE_MODES],
+    ("mode", "case", "locale"),
+    CASE_MODE_LOCALES,
+    ids=[
+        f"{mode}-{case.slug}-{locale.code}"
+        for mode, case, locale in CASE_MODE_LOCALES
+    ],
 )
 def test_copy_decision_json_writes_expected_clipboard_payload(
     browser_session: BrowserSession,
     mode: Mode,
     case: Case,
+    locale: Locale,
 ) -> None:
     page = browser_session.page
-    goto_portfolio(page, mode)
-    select_case(page, case, mode)
-
+    goto_portfolio(page, mode, locale)
+    select_case(page, case, mode, locale)
     page.locator(f'[data-copy-json="{case.id}"]').click()
     expect(page.locator("#toast")).to_have_text(
-        "Decision dossier JSON copied"
+        locale_bundle(locale)["strings"]["actions.copied"]
     )
-    clipboard = page.evaluate(
-        "() => navigator.clipboard.readText()"
+    payload = json.loads(
+        page.evaluate("() => navigator.clipboard.readText()")
     )
-    payload = json.loads(clipboard)
-
     assert payload["opportunity_id"] == case.id
     assert payload["mode"] == mode
     assert payload["decision_state"] == case.active_state(mode)
     if mode == "simulated":
-        assert (
-            payload["synthetic_disclosure"]["display_label"]
-            == SYNTHETIC_LABEL
+        assert payload["synthetic_disclosure"]["display_labels"] == (
+            locale_bundle(locale)["synthetic_labels"]
         )
     else:
         assert payload["synthetic_disclosure"] is None
@@ -112,20 +137,23 @@ def test_copy_decision_json_writes_expected_clipboard_payload(
 
 
 @pytest.mark.parametrize(
-    ("mode", "case"),
-    CASE_MODES,
-    ids=[f"{mode}-{case.slug}" for mode, case in CASE_MODES],
+    ("mode", "case", "locale"),
+    CASE_MODE_LOCALES,
+    ids=[
+        f"{mode}-{case.slug}-{locale.code}"
+        for mode, case, locale in CASE_MODE_LOCALES
+    ],
 )
 def test_dossier_print_media_and_pdf_are_valid(
     browser_session: BrowserSession,
     mode: Mode,
     case: Case,
+    locale: Locale,
 ) -> None:
     page = browser_session.page
-    goto_portfolio(page, mode)
-    select_case(page, case, mode)
-    popup = open_dossier_popup(page, case, mode)
-
+    goto_portfolio(page, mode, locale)
+    select_case(page, case, mode, locale)
+    popup = open_dossier_popup(page, case, mode, locale)
     popup.emulate_media(media="print")
     styles = popup.evaluate(
         """() => {
@@ -159,7 +187,6 @@ def test_dossier_print_media_and_pdf_are_valid(
         "maxWidth": "none",
         "overflow": True,
     }
-
     pdf = popup.pdf(
         format="A4",
         print_background=True,
@@ -167,27 +194,25 @@ def test_dossier_print_media_and_pdf_are_valid(
     )
     pdf_dir = browser_session.artifact_dir / "pdf"
     pdf_dir.mkdir(parents=True, exist_ok=True)
-    pdf_path = pdf_dir / f"{case.slug}-{mode}.pdf"
+    pdf_path = pdf_dir / f"{case.slug}-{mode}-{locale.code}.pdf"
     pdf_path.write_bytes(pdf)
-
     assert pdf.startswith(b"%PDF-")
     assert pdf.rstrip().endswith(b"%%EOF")
     assert len(pdf) >= 10_240
     page_objects = len(re.findall(rb"/Type\s*/Page\b", pdf))
     assert page_objects >= 1
     summary_path = (
-        pdf_dir / f"{case.slug}-{mode}-summary.json"
+        pdf_dir / f"{case.slug}-{mode}-{locale.code}-summary.json"
     )
     summary_path.write_text(
         json.dumps(
             {
                 "bytes": len(pdf),
-                "eof": pdf.rstrip().endswith(b"%%EOF"),
-                "header": pdf.startswith(b"%PDF-"),
+                "locale": locale.code,
                 "page_objects": page_objects,
-                "path": str(pdf_path.relative_to(
-                    browser_session.artifact_dir
-                )),
+                "path": str(
+                    pdf_path.relative_to(browser_session.artifact_dir)
+                ),
             },
             indent=2,
             sort_keys=True,
