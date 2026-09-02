@@ -14,7 +14,7 @@ Interactive OpenAPI:
 
 ## GET `/api/health`
 
-Returns runtime status, version and evidence boundary.
+Returns runtime status, release version `0.2.0` and evidence boundary.
 
 ## GET `/api/project`
 
@@ -75,7 +75,7 @@ Runs the offline AR/EN extraction golden set and returns accuracy, expected fiel
 ## Error behavior
 
 - unknown opportunity: HTTP 404;
-- missing synthetic scenario in simulated mode: HTTP 404;
+- missing synthetic scenario in simulated list or detail mode: HTTP 404 with the unavailable opportunity in `detail`;
 - evidence-integrity failure in simulated mode (policy, public-marginal reconciliation, scenario contract or ground-truth back-test): HTTP 422 with {"detail": {"code": "EVIDENCE_INTEGRITY_ERROR", "message": ...}}; no partial analysis is returned.
 - malformed governed data: fail closed with a clear error;
-- static frontend paths: served by the SPA fallback.
+- static frontend paths: the catch-all resolves a candidate and serves it only when it is a file contained by the resolved `src/ior_mvp/static` directory; traversal and unknown paths return the SPA `index.html` and cannot expose project files.

@@ -4,6 +4,7 @@ import pytest
 
 from ior_mvp.capability import effective_qualified_capacity, evaluate_capability
 from ior_mvp.data_repository import get_public_case, get_synthetic_scenario
+from ior_mvp.decision_engine import analyze
 from ior_mvp.economics import approximate_evsi, incremental_national_value, minimum_effective_support, npv
 
 
@@ -53,6 +54,48 @@ def test_simulated_steel_capability_is_incremental_upgrade() -> None:
     assert result["route_band"]["code"] == "incremental_upgrade"
 
 
+@pytest.mark.parametrize(
+    ("gate_value", "expected_unresolved"),
+    [
+        ("resolved", []),
+        ("resolved with upgrade", []),
+        ("not applicable", []),
+        ("not applicable to resin production", []),
+        ("NOT_APPLICABLE", []),
+        ("pending", ["gate"]),
+        ("unresolved", ["gate"]),
+        ("", ["gate"]),
+    ],
+)
+def test_hard_gate_status_prefixes(
+    gate_value: str,
+    expected_unresolved: list[str],
+) -> None:
+    scenario = get_synthetic_scenario("SAU-H0-721049")
+    assert scenario is not None
+
+    result = evaluate_capability(
+        "coated_steel",
+        scenario["synthetic_inputs"]["capability_states"],
+        {"gate": gate_value},
+    )
+
+    assert result["unresolved_hard_gates"] == expected_unresolved
+
+
+def test_polypropylene_not_applicable_gate_publishes_capability() -> None:
+    result = analyze("SAU-H0-390210", "simulated")
+
+    assert result["capability"]["unresolved_hard_gates"] == []
+    assert result["capability"]["route_publishable"] is True
+    assert result["capability"]["d_star"] == 0.0
+    assert result["capability"]["route_band"]["code"] == (
+        "immediate_adjacency"
+    )
+    assert result["simulation_decision"]["state"] == "REJECT"
+    assert result["simulation_decision"]["route_code"] == 0
+
+
 def test_minimum_effective_support_is_18m() -> None:
     scenario = get_synthetic_scenario("SAU-H0-721049")
     assert scenario is not None
@@ -74,6 +117,31 @@ def test_national_value_and_evsi() -> None:
     assert national_value["positive"] is True
     assert evsi["approximate_evsi_m_sar"] == pytest.approx(129.3)
     assert evsi["positive"] is True
+
+
+def test_national_value_requires_all_components() -> None:
+    scenario = get_synthetic_scenario("SAU-H0-721049")
+    assert scenario is not None
+    components = dict(
+        scenario["synthetic_inputs"]["economics"]["national_value"]
+    )
+    del components["displacement"]
+
+    with pytest.raises(ValueError, match="displacement"):
+        incremental_national_value(components)
+
+
+def test_evsi_requires_all_inputs() -> None:
+    scenario = get_synthetic_scenario("SAU-H0-721049")
+    assert scenario is not None
+    evsi_inputs = dict(scenario["synthetic_inputs"]["evsi"])
+    del evsi_inputs["route_change_probability"]
+
+    with pytest.raises(
+        ValueError,
+        match="route_change_probability",
+    ):
+        approximate_evsi(evsi_inputs)
 
 
 def test_npv_rejects_invalid_rate() -> None:

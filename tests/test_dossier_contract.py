@@ -34,7 +34,13 @@ def test_real_dossier_has_no_disclosure_and_zero_synthetic_rows(
 
     assert html_response.status_code == 200
     assert DISCLOSURE not in html_response.text
-    assert "0 synthetic records" in html_response.text
+    expected_evidence_paragraph = (
+        "<p>"
+        f"{dossier['evidence_summary']['public_records']} "
+        "public records; 0 synthetic records."
+        "</p>"
+    )
+    assert expected_evidence_paragraph in html_response.text
     assert "Simulated R6–R8 ledger" not in html_response.text
 
 

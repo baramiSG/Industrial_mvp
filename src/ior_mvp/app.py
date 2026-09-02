@@ -82,6 +82,11 @@ def opportunities(
         return list_opportunities(mode)
     except EvidenceIntegrityError as exc:
         raise _evidence_integrity_http_exception(exc) from exc
+    except (RepositoryError, ValueError) as exc:
+        raise HTTPException(
+            status_code=404,
+            detail=str(exc),
+        ) from exc
 
 
 @app.get("/api/opportunities/{opportunity_id}")
@@ -129,7 +134,8 @@ def index() -> FileResponse:
 
 @app.get("/{path:path}", include_in_schema=False)
 def spa_fallback(path: str) -> FileResponse:
-    candidate = STATIC_DIR / path
-    if candidate.exists() and candidate.is_file():
+    static_root = STATIC_DIR.resolve()
+    candidate = (STATIC_DIR / path).resolve()
+    if candidate.is_file() and candidate.is_relative_to(static_root):
         return FileResponse(candidate)
     return FileResponse(STATIC_DIR / "index.html")

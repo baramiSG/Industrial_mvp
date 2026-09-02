@@ -6,7 +6,7 @@ import pytest
 from fastapi.testclient import TestClient
 
 import ior_mvp.decision_engine as decision_engine
-from ior_mvp.app import app
+from ior_mvp.app import STATIC_DIR, app, spa_fallback
 from ior_mvp.data_repository import get_synthetic_scenario
 
 
@@ -16,7 +16,24 @@ client = TestClient(app)
 def test_health() -> None:
     response = client.get("/api/health")
     assert response.status_code == 200
-    assert response.json()["status"] == "ok"
+    payload = response.json()
+    assert payload["status"] == "ok"
+    assert payload["version"] == "0.2.0"
+
+
+def test_release_version_matches_analysis_authority() -> None:
+    health_response = client.get("/api/health")
+    analysis_response = client.get(
+        "/api/opportunities/SAU-H0-721049?mode=public"
+    )
+
+    assert health_response.status_code == 200
+    assert analysis_response.status_code == 200
+    assert (
+        health_response.json()["version"]
+        == analysis_response.json()["authority"]["project_version"]
+        == "0.2.0"
+    )
 
 
 def test_opportunity_list_modes() -> None:
@@ -67,6 +84,39 @@ def test_extraction_endpoint() -> None:
 def test_unknown_opportunity_returns_404() -> None:
     response = client.get("/api/opportunities/DOES-NOT-EXIST")
     assert response.status_code == 404
+
+
+def test_spa_fallback_does_not_serve_file_outside_static_dir() -> None:
+    response = spa_fallback("../../../pyproject.toml")
+
+    assert response.path == STATIC_DIR / "index.html"
+
+
+@pytest.mark.parametrize(
+    "path",
+    [
+        "/..%2F..%2F..%2Fpyproject.toml",
+        "/%2e%2e/%2e%2e/%2e%2e/pyproject.toml",
+    ],
+)
+def test_encoded_spa_traversal_returns_index(path: str) -> None:
+    response = client.get(path)
+
+    assert response.status_code == 200
+    assert (
+        "<title>Industrial Opportunity Resolution Engine</title>"
+        in response.text
+    )
+    assert "[project]" not in response.text
+    assert 'name = "industrial-opportunity-resolution-mvp"' not in response.text
+
+
+@pytest.mark.parametrize("path", ["/static/app.js", "/app.js"])
+def test_legitimate_static_file_is_served(path: str) -> None:
+    response = client.get(path)
+
+    assert response.status_code == 200
+    assert "async function getJSON" in response.text
 
 
 @pytest.mark.parametrize(
@@ -137,6 +187,29 @@ def test_missing_scenario_in_simulated_mode_returns_404(
     }
 
 
+def test_missing_scenario_in_simulated_list_returns_404(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(
+        decision_engine,
+        "get_synthetic_scenario",
+        lambda opportunity_id: None,
+    )
+
+    response = TestClient(
+        app,
+        raise_server_exceptions=False,
+    ).get("/api/opportunities?mode=simulated")
+
+    assert response.status_code == 404
+    assert response.json() == {
+        "detail": (
+            "No synthetic scenario is available for "
+            "SAU-H0-721049"
+        )
+    }
+
+
 @pytest.mark.parametrize(
     "endpoint",
     [
@@ -186,3 +259,44 @@ def test_ground_truth_mismatch_returns_422_without_partial_analysis(
             ),
         }
     }
+
+
+@pytest.mark.parametrize(
+    ("block", "missing_key"),
+    [
+        ("national_value", "displacement"),
+        ("evsi", "route_change_probability"),
+    ],
+)
+def test_missing_economics_input_returns_422(
+    monkeypatch: pytest.MonkeyPatch,
+    block: str,
+    missing_key: str,
+) -> None:
+    scenario = get_synthetic_scenario("SAU-H0-721049")
+    assert scenario is not None
+    invalid = deepcopy(scenario)
+    if block == "national_value":
+        del invalid["synthetic_inputs"]["economics"][
+            "national_value"
+        ][missing_key]
+    else:
+        del invalid["synthetic_inputs"][block][missing_key]
+    monkeypatch.setattr(
+        decision_engine,
+        "get_synthetic_scenario",
+        lambda opportunity_id: invalid,
+    )
+
+    response = TestClient(
+        app,
+        raise_server_exceptions=False,
+    ).get(
+        "/api/opportunities/SAU-H0-721049"
+        "?mode=simulated"
+    )
+
+    assert response.status_code == 422
+    payload = response.json()
+    assert payload["detail"]["code"] == "EVIDENCE_INTEGRITY_ERROR"
+    assert missing_key in payload["detail"]["message"]

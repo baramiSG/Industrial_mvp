@@ -88,7 +88,7 @@ def scan_repository(
     root: Path,
 ) -> tuple[list[Finding], int, int]:
     threshold_values = load_threshold_values(threshold_path)
-    source_paths = sorted(source_dir.glob("*.py"))
+    source_paths = sorted(source_dir.rglob("*.py"))
     findings: list[Finding] = []
     for source_path in source_paths:
         display_path = (

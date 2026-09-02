@@ -367,8 +367,10 @@ def _capacity_projection(
     )
 
     equivalence = inputs.get("equivalence")
-    has_equivalence = equivalence is not None
-    if has_equivalence and not isinstance(equivalence, dict):
+    if equivalence is not None and not isinstance(
+        equivalence,
+        dict,
+    ):
         raise EvidenceIntegrityError(
             "scenario.synthetic_inputs.equivalence must be a mapping"
         )
@@ -537,9 +539,15 @@ def _simulation_economics(
                 )
                 for key, value in national_components.items()
             }
-            national_value = incremental_national_value(
-                checked_components
-            )
+            try:
+                national_value = incremental_national_value(
+                    checked_components
+                )
+            except ValueError as exc:
+                raise EvidenceIntegrityError(
+                    "scenario.synthetic_inputs.economics."
+                    f"national_value is invalid: {exc}"
+                ) from exc
         else:
             national_value = {
                 "incremental_national_value_m_sar": (
@@ -656,7 +664,8 @@ def _simulate(
         evsi = approximate_evsi(evsi_inputs)
     except (TypeError, ValueError) as exc:
         raise EvidenceIntegrityError(
-            "scenario.synthetic_inputs.evsi contains an invalid value"
+            "scenario.synthetic_inputs.evsi contains an invalid "
+            f"value: {exc}"
         ) from exc
 
     incremental_upgrade_max = float(

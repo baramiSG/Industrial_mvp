@@ -329,6 +329,25 @@ def test_metric_grid_receives_r3_threshold_metrics() -> None:
     assert metric_grid["props"]["supplier_concentration"] == r3["metrics"]
 
 
+def test_pp_metric_grid_receives_empty_supplier_concentration() -> None:
+    analysis = analyze("SAU-H0-390210", "public")
+    r3 = next(
+        row
+        for row in analysis["rules"]
+        if row["rule_id"] == "R3"
+    )
+    manifest = build_ui_manifest(analysis)
+    metric_grid = next(
+        component
+        for component in manifest["components"]
+        if component["type"] == "metric_grid"
+    )
+
+    assert r3["execution"] == "DISABLED"
+    assert r3["metrics"] == {}
+    assert metric_grid["props"]["supplier_concentration"] == {}
+
+
 def _synthetic_rule(
     scenario: dict,
     capacity: dict,

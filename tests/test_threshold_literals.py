@@ -160,6 +160,36 @@ def test_main_returns_two_for_python_parse_error(
     assert "SyntaxError" in capsys.readouterr().err
 
 
+def test_scan_repository_recurses_into_python_subpackages(
+    tmp_path: Path,
+) -> None:
+    source_dir = tmp_path / "src"
+    nested = source_dir / "engine"
+    nested.mkdir(parents=True)
+    threshold_path = tmp_path / "thresholds.yaml"
+    _write_thresholds(threshold_path)
+    (nested / "probe.py").write_text(
+        "result = value <= 0.40\n",
+        encoding="utf-8",
+    )
+
+    findings, source_count, threshold_count = scan_repository(
+        source_dir,
+        threshold_path,
+        root=tmp_path,
+    )
+
+    assert source_count == 1
+    assert threshold_count == 1
+    assert findings == [
+        Finding(
+            path="src/engine/probe.py",
+            line=1,
+            value=0.4,
+        )
+    ]
+
+
 def test_repository_has_no_embedded_threshold_comparison_literals() -> None:
     findings, source_count, threshold_count = scan_repository(
         SOURCE_DIR,
