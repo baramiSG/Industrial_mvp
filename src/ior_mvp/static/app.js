@@ -187,9 +187,15 @@ function renderMetricGrid(props) {
   const cap = props.capacity;
   const econ = props.economics;
   const hhi = props.supplier_metrics?.partner_value_hhi;
+  const hhiThreshold = props.supplier_concentration?.hhi_threshold;
+  const hhiNote = hhi == null
+    ? "Not available in this snapshot"
+    : hhiThreshold == null
+      ? "Configured resilience threshold unavailable"
+      : `Resilience review threshold: ${hhiThreshold.toFixed(2)}`;
   const metrics = [
     ["Latest imports", usd(latest.imports_usd_m), `${fmt.format(latest.imports_kt)} kt in ${latest.year}`],
-    ["Supplier HHI", hhi == null ? "—" : hhi.toFixed(2), hhi == null ? "Not available in this snapshot" : "Resilience review threshold: 0.25"],
+    ["Supplier HHI", hhi == null ? "—" : hhi.toFixed(2), hhiNote],
     [cap ? "Specification gap" : "Evidence class", cap ? `${fmt.format(cap.specification_adjusted_gap_kt)} kt` : state.analysis.real_decision.confidence, cap ? "Target demand minus qualified supply" : "Public decision confidence cap"],
     [econ ? "Minimum support" : "Decision object", econ?.minimum_effective_support_m != null ? money(econ.minimum_effective_support_m) : "—", econ ? (econ.passes ? "Passes NPV and IRR hurdle" : econ.reason || "No support case") : state.analysis.opportunity.decision_object_status.replaceAll("_", " ")],
   ];

@@ -18,6 +18,21 @@ def effective_qualified_capacity(
     return nameplate * availability * yield_rate * qualification_share * market_allocation_share
 
 
+def publication_allowed(
+    d_star: float | None,
+    known_weight_coverage: float,
+    minimum_known_weight_coverage: float,
+    unresolved_hard_gates: list[str],
+    has_known_state_three: bool,
+) -> bool:
+    return (
+        d_star is not None
+        and known_weight_coverage >= minimum_known_weight_coverage
+        and not unresolved_hard_gates
+        and not has_known_state_three
+    )
+
+
 def route_band(distance: float, bands: dict[str, float]) -> dict[str, Any]:
     if distance <= bands["immediate_adjacency_max"]:
         return {"code": "immediate_adjacency", "label": "Immediate adjacency", "route_hint": "Existing capacity, linkage or simple debottlenecking"}
@@ -75,11 +90,12 @@ def evaluate_capability(
     else:
         unresolved = list(hard_gates)
 
-    route_publishable = (
-        d_star is not None
-        and known_weight >= kmin
-        and not unresolved
-        and not any(row["state"] == 3 for row in dimensions if row["known"])
+    route_publishable = publication_allowed(
+        d_star,
+        known_weight,
+        kmin,
+        unresolved,
+        any(row["state"] == 3 for row in dimensions if row["known"]),
     )
     band = route_band(d_star, capability_cfg["route_bands"]) if route_publishable else None
 

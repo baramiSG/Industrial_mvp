@@ -1,7 +1,7 @@
 metadata:
   artifact: industrial-opportunity-thresholds
-  version: "1.0.0"
-  effective_date: "2026-08-31"
+  version: "1.1.0"
+  effective_date: "2026-09-02"
   authority: "Industrial Opportunity Resolution Methodology, Appendix B"
   status: frozen_for_demo_cycle
   change_gate: "methodology-owner approval + golden-case regression"
@@ -77,10 +77,11 @@ rules:
     sector_scope: all
     revision_date: "2026-08-31"
   R11:
+    generic_capacity_export_import_value_ratio: 50
     downside_cost_premium_over_import_parity: 0.25
-    rationale: "Economic exclusion absent verified strategic externality."
+    rationale: "Economic exclusion absent verified strategic externality; established exports above the configured import ratio warn against generic capacity support."
     sector_scope: all
-    revision_date: "2026-08-31"
+    revision_date: "2026-09-02"
 
 capability:
   unknown_penalty_lambda: 0.50
