@@ -101,3 +101,44 @@ jobs:
           persist-credentials: false
       - name: Build image
         run: docker build --file Dockerfile --tag industrial-opportunity-resolution-mvp:ci .
+
+  browser-gates:
+    name: browser / Chromium / Python 3.12
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+      - name: Sync locked browser-test environment
+        run: uv sync --locked --extra dev --extra e2e --python "3.12"
+      - name: Cache Playwright Chromium
+        uses: actions/cache@v6.1.0
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('uv.lock') }}
+      - name: Install Chromium dependencies and Arabic font
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes --no-install-recommends fonts-noto-core
+          uv run --locked --extra dev --extra e2e python -m playwright install --with-deps chromium
+      - name: Run real-browser acceptance gate
+        run: make UV=uv e2e
+      - name: Upload browser diagnostics on failure
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v7.0.1
+        with:
+          name: browser-failure-${{ github.run_id }}-${{ github.run_attempt }}
+          path: .artifacts/e2e/
+          include-hidden-files: true
+          if-no-files-found: warn
+          retention-days: 14

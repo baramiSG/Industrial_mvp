@@ -920,6 +920,7 @@ step_final_gate_b() {
 }
 
 step_keyword_scan() {
+  require_step "make_ci" || return $?
   python3 - <<'PY'
 from __future__ import annotations
 
@@ -1002,6 +1003,10 @@ for path in sorted(paths):
             )
             if path.startswith(".workflow/"):
                 disposition = "LEGITIMATE — historical governance record"
+            elif path == "browser_tests/vendor/axe-core-4.13.0/axe.min.js":
+                disposition = (
+                    "LEGITIMATE — SHA-verified vendored third-party source"
+                )
             elif lexical:
                 disposition = "LEGITIMATE — lexical substring"
             elif token.lower() == "disabled" and (
@@ -1113,7 +1118,7 @@ required = {
         "DOD-10",
         "SC-01",
         "SC-06",
-        "No Playwright/real-browser interaction",
+        "Real Chromium interaction",
     ),
     "docs/implementation/API_REFERENCE.md": (
         "GET `/api/opportunities?mode=public|simulated`",
@@ -1388,7 +1393,9 @@ lines.extend(
         "",
         "The live matrix covers both list modes and all steel/PP public and "
         "simulated detail, approved manifest, dossier JSON, and printable "
-        "HTML contracts. Browser paint or interaction was not executed.",
+        "HTML contracts.",
+        "The real-browser gate ran through `make ci` and is recorded in "
+        "`.workflow/slices/S06-browser-acceptance-harness/test_evidence.md`.",
         "",
         "## NFR-005 live medians",
         "",
@@ -1459,10 +1466,10 @@ lines.extend(
         "explicit Class-D demo fixtures were used.",
         "- Docker, curl, Node, Git, Python, uv, ports 8001/8010, and localhost "
         "process control are required by this run.",
-        "- KL-20–KL-30 remain the accepted MVP limitations. KL-22 limits "
-        "product proof to live HTTP/API plus static contracts; KL-29 requires "
+        "- KL-22 has provisional S06 local real-browser evidence and closes "
+        "only after approved merge with a green browser check. KL-29 requires "
         "restart after approved file changes; KL-30 records the stable R1-D "
-        "confidence-cap result string.",
+        "confidence-cap result string; KL-31 tracks offline `/docs` assets.",
         "",
         "## Repository keyword dispositions",
         "",

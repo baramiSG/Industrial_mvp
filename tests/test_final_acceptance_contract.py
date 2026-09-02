@@ -90,3 +90,32 @@ def test_keyword_classifier_handles_governed_and_fixture_hits() -> None:
         '"placeholder",',
     ):
         assert fragment in source
+
+
+def test_runner_reports_real_browser_proof_and_exact_axe_disposition() -> None:
+    source = RUNNER.read_text(encoding="utf-8")
+
+    assert "Browser paint or interaction was not executed" not in source
+    assert "KL-22 limits product proof" not in source
+    assert (
+        "The real-browser gate ran through `make ci`"
+        in source
+    )
+    assert (
+        'path == "browser_tests/vendor/axe-core-4.13.0/axe.min.js"'
+        in source
+    )
+    assert (
+        "LEGITIMATE — SHA-verified vendored third-party source"
+        in source
+    )
+    assert 'path.startswith("browser_tests/")' not in source
+    keyword_function = source.split(
+        "step_keyword_scan() {",
+        maxsplit=1,
+    )[1].split(
+        "step_docs_audit() {",
+        maxsplit=1,
+    )[0]
+    assert 'require_step "make_ci"' in keyword_function
+    assert 'if [[ "$STEP_NUMBER" -ne 42 ]]' in source

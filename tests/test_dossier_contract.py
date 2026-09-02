@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import re
+
 import pytest
 from fastapi.testclient import TestClient
 
@@ -76,3 +78,43 @@ def test_simulated_dossier_retains_disclosure_and_synthetic_rows() -> None:
     assert "Simulated R6–R8 ledger" in html_response.text
     for rule_id in ("R6", "R7", "R8"):
         assert rule_id in html_response.text
+
+
+def test_dossier_metadata_uses_a_wcag_aa_design_token() -> None:
+    response = client.get(
+        "/api/opportunities/SAU-H0-721049/dossier.html"
+        "?mode=public"
+    )
+
+    assert response.status_code == 200
+    match = re.search(
+        r":root\{--dossier-muted:(#[0-9a-fA-F]{6})\}",
+        response.text,
+    )
+    assert match is not None
+    assert ".meta{color:var(--dossier-muted);" in response.text
+
+    def luminance(color: str) -> float:
+        channels = [
+            int(color[index : index + 2], 16) / 255
+            for index in (1, 3, 5)
+        ]
+        linear = [
+            channel / 12.92
+            if channel <= 0.04045
+            else ((channel + 0.055) / 1.055) ** 2.4
+            for channel in channels
+        ]
+        return (
+            0.2126 * linear[0]
+            + 0.7152 * linear[1]
+            + 0.0722 * linear[2]
+        )
+
+    foreground = luminance(match.group(1))
+    background = luminance("#ffffff")
+    assert (
+        max(foreground, background) + 0.05
+    ) / (
+        min(foreground, background) + 0.05
+    ) >= 4.5

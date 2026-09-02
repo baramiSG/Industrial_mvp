@@ -196,3 +196,99 @@ def test_decision_actions_exposes_dossier_html_action() -> None:
     assert "data-dossier-html" in actions
     assert "Open dossier" in actions
     assert "<button" in actions
+
+
+def test_accessibility_text_tokens_meet_wcag_aa_on_used_surfaces() -> None:
+    css = (
+        PROJECT_ROOT
+        / "src"
+        / "ior_mvp"
+        / "static"
+        / "styles.css"
+    ).read_text(encoding="utf-8")
+
+    def token(name: str) -> str:
+        match = re.search(
+            rf"--{re.escape(name)}:\s*(#[0-9a-fA-F]{{6}})",
+            css,
+        )
+        assert match is not None
+        return match.group(1)
+
+    pairs = (
+        (token("teal-text"), "#edf3f6"),
+        (token("teal-text"), "#ffffff"),
+        (token("ink-600"), "#e8eef2"),
+        (token("ink-600"), "#f4f7f9"),
+        (token("ink-500"), "#f5f8fa"),
+        (token("ink-500"), "#ffffff"),
+        (token("gold-text"), "#ffffff"),
+        (token("teal-on-dark"), "#071726"),
+    )
+    assert all(
+        _contrast_ratio(foreground, background) >= 4.5
+        for foreground, background in pairs
+    )
+    assert (
+        ".exec-DISABLED { background: #edf1f4; "
+        "color: var(--ink-700); }"
+        in css
+    )
+    assert ".fire-na { color: var(--gold-text); }" in css
+    assert (
+        ".hero-section .eyebrow, .governance-section .eyebrow "
+        "{ color: var(--teal-on-dark); }"
+        in css
+    )
+
+
+def test_workspace_heading_can_wrap_without_page_overflow() -> None:
+    css = (
+        PROJECT_ROOT
+        / "src"
+        / "ior_mvp"
+        / "static"
+        / "styles.css"
+    ).read_text(encoding="utf-8")
+    heading = css.split(
+        ".workspace-heading {",
+        maxsplit=1,
+    )[1].split("}", maxsplit=1)[0]
+    tools = css.split(
+        ".workspace-tools {",
+        maxsplit=1,
+    )[1].split("}", maxsplit=1)[0]
+    tablet = css.split(
+        "@media (max-width: 1180px) {",
+        maxsplit=1,
+    )[1].split(
+        "@media (max-width: 900px) {",
+        maxsplit=1,
+    )[0]
+
+    assert "flex-wrap: wrap" in heading
+    assert "min-width: 0" in tools
+    assert "max-width: 100%" in tools
+    assert ".workspace-heading" in tablet
+    assert "flex-direction: column" in tablet
+    assert ".workspace-tools { width: 100%;" in tablet
+    assert "select { width: 100%;" in tablet
+
+
+def test_reduced_motion_context_disables_transient_colour_states() -> None:
+    css = (
+        PROJECT_ROOT
+        / "src"
+        / "ior_mvp"
+        / "static"
+        / "styles.css"
+    ).read_text(encoding="utf-8")
+
+    assert "@media (prefers-reduced-motion: reduce)" in css
+    block = css.split(
+        "@media (prefers-reduced-motion: reduce)",
+        maxsplit=1,
+    )[1]
+    assert "transition-duration: 0s !important" in block
+    assert "animation-duration: 0s !important" in block
+    assert "scroll-behavior: auto !important" in block

@@ -19,6 +19,10 @@ dev = [
   "pytest>=8,<9",
   "httpx>=0.27,<1"
 ]
+e2e = [
+  "playwright==1.62.0",
+  "pytest-playwright==0.9.0"
+]
 
 [project.scripts]
 ior-demo = "ior_mvp.cli:main"
@@ -36,3 +40,6 @@ ior_mvp = ["static/**/*"]
 pythonpath = ["src", "."]
 testpaths = ["tests"]
 addopts = "-ra"
+markers = [
+  "e2e: real-Chromium acceptance tests; excluded from default testpaths"
+]

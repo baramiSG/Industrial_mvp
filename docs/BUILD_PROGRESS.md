@@ -31,9 +31,12 @@ Authoritative machine state: `.workflow/state.json` → `milestones.v0.3.0`. Pla
 
 | Slice | State | Branch | PR | Merge commit | CI | Notes |
 |---|---|---|---|---|---|---|
-| M3-P0 Planning baseline (docs only) | PR_OPEN | milestone/v0.3.0-planning | pending | pending | pending | Gap analysis, slice graph, ADR-010 (OD-1/OD-2 approved with amendments), roadmap, this ledger, state block |
+| M3-P0 Planning baseline (docs only) | MERGED | milestone/v0.3.0-planning (deleted) | [#7](https://github.com/baramiSG/Industrial_mvp/pull/7) | d338f5d | PR run 33593648213 green (4/4); main run 33593703368 success | Gap analysis, slice graph, ADR-010 (OD-1/OD-2 approved with amendments), roadmap, this ledger, state block |
+| S06 Real-browser acceptance harness | LOCAL_GATES | slice/S06-browser-acceptance-harness | pending | pending | pending | Planner Sol (2 rounds; PR-01..03, RI-01); implementer Sol; Supervisor SR-01..02 fixed; Grok RV-01 BLOCKER (tag peel on shallow CI) fixed → re-review APPROVE 0; 309 default tests (3.12/3.14) + 62 Chromium nodes; 4 UI defects fixed; 40 documentary references; KL-22 provisional closure; KL-31 opened |
 
 ## Log
 
 - 2026-09-02 07:38 — Owner accepted v0.2.0 as the frozen two-case technical demonstration baseline and opened v0.3.0. Supervisor read the methodology mirror in full, Core 01–09, final report, limitations, traceability, complete S05 reviewer findings and implementation docs; verified baseline gates on `main` at `ce5786b` (integrity PASS, Gate B PASS, 280 passed, smoke PASS); wrote the gap analysis and 17-slice graph on `milestone/v0.3.0-planning`.
 - 2026-09-02 08:02 — Owner approved OD-1 and OD-2 with amendments (I1, I5 amended; rulings R-1..R-6). Documents amended; ADR-010 recorded; M3-P0 docs-only PR prepared. S06 implementation gated on M3-P0 merge with green default-branch CI.
+- 2026-09-02 08:20 — M3-P0 PR #7 (head `e6d6677`) CI run 33593648213 green 4/4; squash-merged to `main` as `d338f5d`; default-branch run 33593703368 success. S06 started (base `d338f5d`).
+- 2026-09-02 10:20 — S06 planned (Sol, 2 rounds), implemented (Sol), Supervisor-reviewed (SR-01 version literal, SR-02 e2e sync target — fixed), independently reviewed (Grok: RV-01 BLOCKER — `git rev-parse v0.2.0^{}` at fixture setup would fail on the shallow tag-less CI checkout — fixed with a tracked-index-locked release SHA; re-review APPROVE, zero unresolved). Local gates: 309 default tests on 3.12 and 3.14, `make ci` incl. 62 Chromium nodes green; negative contrast probe fails the axe gate as required. Four browser-revealed UI defects fixed (contrast tokens, dossier `.meta` token, 1,538 px overflow at 1,440 px, reduced-motion transient). Ready for PR.
