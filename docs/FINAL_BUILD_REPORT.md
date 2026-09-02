@@ -151,4 +151,22 @@ Before merge, remove only S05-created files and apply reviewed inverse patches t
 
 ## Final commit, tag, and release state
 
-The final S05 implementation merge SHA and default-branch CI, release-state PR and merge SHA, final default-branch CI, durable `COMPLETE` promotions, and annotated tag `v0.2.0` are **recorded by the Supervisor in the release-state PR** after direct observation. No value is pre-populated on this branch.
+Recorded by the Supervisor from direct observation of `gh` output and git metadata.
+
+| Item | Value |
+|---|---|
+| S05 implementation PR | https://github.com/baramiSG/Industrial_mvp/pull/5 (head `80f4b1d`; PR CI run 33589765172, 4/4 pass) |
+| S05 implementation merge commit on `main` | `55304dbfbd49f69d567406faddcc308aea65c804` |
+| Default-branch CI for that merge | run 33589819341 — `conclusion: success`, `event: push` |
+| Post-merge integrity on `main` | `INTEGRITY PASS` |
+| Release-state PR | PR #6 (this branch `slice/S05-release-state`): docs/state-only — traceability `TESTED` → `COMPLETE`, `.workflow/state.json` `COMPLETE`, progress, S05 completion and PR records, this section |
+| Final commit | the squash-merge commit of PR #6 on `main` (verify with `git rev-parse main` / `git show --no-patch v0.2.0`) |
+| Release tag | `v0.2.0`, annotated, created by the Supervisor on the PR #6 merge commit after its four checks and default-branch CI are green |
+| Release identity | package/API/`config/project.yaml` version `0.2.0`; thresholds 1.1.0; sector profiles 1.0.0; evidence policy 1.1.0; scenarios 1.1.0 |
+
+Merged completion slices: S00 `0731ae5` (baseline import), S01 `432af8a` (PR #1), S02 `c438370` (PR #2), S03 `ddf905d` (PR #3), S04 `98c1a40` (PR #4), S05 `55304db` (PR #5). All PR CI runs green 4/4 (33569855956, 33570112914, 33573669072, 33579923763, 33584437086, 33589765172).
+
+### Owner action items
+
+- Rotate any credentials present in the local, git-ignored workspace `.env` as a precaution. It was never tracked, never packaged (packaging now archives tracked files only) and never read or printed by the Supervisor; an implementer reported it contains live-looking keys while verifying the packaging exclusion.
+- Consider a GitHub plan with rulesets so the four CI checks become required checks (ADR-007 currently enforces the gate procedurally).

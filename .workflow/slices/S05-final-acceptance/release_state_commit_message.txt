@@ -1,0 +1,10 @@
+S05 release state: promote traceability to COMPLETE, record final facts, state COMPLETE
+
+Docs/state-only follow-up to the S05 implementation merge (55304db; PR #5;
+PR CI 33589765172 and default-branch CI 33589819341 green). Promotes every
+TESTED traceability row to COMPLETE (BC-08 with final-review evidence),
+records the final commit/CI/tag facts in FINAL_BUILD_REPORT, updates
+BUILD_PROGRESS and the S05 completion record, and sets .workflow/state.json
+to COMPLETE effective on this merge. Tag v0.2.0 is placed on this merge
+commit by the Supervisor after its checks are green. No code, test, config
+or data change.

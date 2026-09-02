@@ -1,0 +1,11 @@
+# Completion — S05 Final Acceptance
+
+- State: **MERGED** (implementation PR); release-state PR #6 carries the durable `COMPLETE` promotions; tag `v0.2.0` placed on the PR #6 merge commit by the Supervisor after its checks and default-branch CI are green.
+- Implementation PR: https://github.com/baramiSG/Industrial_mvp/pull/5 (squash) → `main` `55304dbfbd49f69d567406faddcc308aea65c804`. PR CI run 33589765172 4/4 pass; default-branch CI run 33589819341 success; post-merge integrity PASS.
+- Acceptance: run `20260902T040100Z-95877` — 42/42 steps exit 0 (`make ci`; clean-pip eight gates; Docker build/run/health/stop; uvicorn start → health → journeys A–E both cases/modes → NFR-005 medians < 2 ms → 404/422/SPA failure paths → planted 422 (TestClient) → stop/restart/health; isolated `git revert --no-commit 98c1a40` + abort; fresh scans; keyword scan 0 unresolved; docs audit; source archive audit; protected-diff empty). 280 tests on uv and clean pip.
+- Reviews: plan 2 rounds → PLAN_APPROVED (rulings: two-PR release-state route; `config/project.yaml` version 0.2.0). Supervisor implementation review 0 findings. Final holistic review (agent a458ec49, cursor-grok-4.6-xhigh; full methodology mirror + Core 01–09 re-read): REJECT with RV-01 HIGH (SPA path traversal), RV-02 HIGH (packaging would zip `.env`/`.git`), RV-03/04/05 MEDIUM → all fixed test-first → mandatory full rerun → re-review **APPROVE — zero unresolved findings**.
+- Residual notes from S02–S04 closed with tests (list-route 404; recursive threshold scan; PP GenUI `{}`; exact zero-synthetic HTML; cached-scenario immutability; dead local; FR-044 pointer).
+- Release 0.2.0: `pyproject.toml`, `src/ior_mvp/__init__.py`, `config/project.yaml` (unhashed), `CHANGELOG.md`; `uv.lock` root version only. No hashed config/data/core/DOCX change; no generator run.
+- Documents: FINAL_BUILD_REPORT, OPERATOR_RUNBOOK, DEPLOYMENT_GUIDE (new); DEVELOPMENT_GUIDE replaced; KNOWN_LIMITATIONS (KL-29/30), ARCHITECTURE_DECISIONS (ADR-009), REQUIREMENTS_TRACEABILITY, API_REFERENCE, README updated.
+- Models: planner `gpt-5.6-sol-max` (6f19d842); implementer `gpt-5.6-sol-max` (15bfa326); final reviewer `cursor-grok-4.6-xhigh` (a458ec49); supervisor `claude-fable-5-1-thinking-max`.
+- Owner action: rotate credentials in the local git-ignored `.env` (never tracked/packaged/read by the Supervisor).
