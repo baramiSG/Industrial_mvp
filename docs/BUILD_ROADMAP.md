@@ -39,3 +39,43 @@ Slices may be split before implementation if the Planner shows a slice is too la
 ## Slice record location
 
 Each slice keeps its persona, context, plan, plan review, implementation log, implementation review, reviewer findings, test evidence, PR record and completion record in `.workflow/slices/SXX-<slug>/`.
+
+---
+
+# Milestone v0.3.0 — Ministerial Demonstration Readiness
+
+Opened by the owner on 2026-09-02 after acceptance of v0.2.0 (`ce5786b`, tag `v0.2.0`) as the frozen two-case technical demonstration baseline. Governing planning documents, approved with amendments under ADR-010:
+
+- `docs/milestones/v0.3.0/GAP_ANALYSIS.md` — owner objective vs v0.2.0, gap register A–G, uncovered normative statements, authority-change inventory, interpretations I1–I8 and owner rulings R-1..R-6.
+- `docs/milestones/v0.3.0/SLICE_GRAPH.md` — slices S06–S22, dependencies, execution order, release-acceptance mapping, known-limitation disposition and the routes 0–8 coverage matrix.
+
+## Approved execution order
+
+```text
+M3-P0 → S06 → S07 → S08 → S09 → S10 → S11 → S12 → S13 → S14 → S15 → S16 → S17 → S18 → S19 → S20 → S21 → S22
+```
+
+| ID | Slice | Objective (one line) | Merge gate |
+|---|---|---|---|
+| M3-P0 | Planning baseline (docs only) | Gap analysis, slice graph, ADR-010, roadmap/progress/state updates on `main` before S06. | PR + CI green; Supervisor merge |
+| S06 | Real-browser acceptance harness | Chromium/Playwright gates for console, network, accessibility, keyboard, widths, print/PDF; reference screenshots of v0.2.0. | PR + CI green + zero findings |
+| S07 | Bilingual interface foundation | AR/EN switch, RTL, design tokens, module decomposition, governed visual-regression baselines. | PR + CI green + zero findings |
+| S08 | Snapshot schema v2 and computed rule ledger | Rules computed from evidence; goldens re-expressed with identical outcomes; contradictions in dossier. | PR + CI green + zero findings |
+| S09 | Generalized public decision and five profiles | Evidence-gated ADVANCE, MONITOR, hard exclusions, gap taxonomy, route hypotheses, five sector profiles. | PR + CI green + zero findings |
+| S10 | Generalized simulation branch | Routes 0–7, route-8 contract (`GRAPH_REQUIRED`), R8, allocation/expansion schemas, amended I5 selection. | PR + CI green + zero findings |
+| S11 | Acquisition I | Connector framework, raw store, trade sources, tariff hierarchy, reconstruction proof. | PR + CI green + zero findings |
+| S12 | Acquisition II | Institutional and document sources with passports; `UNAVAILABLE` recorded, never fabricated. | PR + CI green + zero findings |
+| S13 | Universe screening and queues | Cheap rules across the Saudi HS6 universe; five queues; screening dispositions. | PR + CI green + zero findings |
+| S14 | Deep cases A | ≥5 cases: coated steel, fabricated aluminium, technical plastics; route matrix rows. | PR + CI green + zero findings |
+| S15 | Deep cases B | Remaining cases to ≥10 across five profiles: pharma/API, fertilizers; route matrix rows. | PR + CI green + zero findings |
+| S16 | Neo4j graph backend | Project-owned provisioned graph as governed projection; graph-fed results; route 8 activated. | PR + CI green + zero findings |
+| S17 | Interactive graph view | Four governed graph views, bilingual, keyboard-operable. | PR + CI green + zero findings |
+| S18 | Executive Mode | Eight-step narrative, side-by-side states, "What Ministry data unlocks", claim drill-down. | PR + CI green + zero findings |
+| S19 | Bilingual dossier and PDF | All §15 blocks, AR/EN, print and Chromium PDF. | PR + CI green + zero findings |
+| S20 | Extraction corpus and adapter | Real labelled AR/EN corpus, metrics, adapter contract, optional LM Studio adapter. | PR + CI green + zero findings |
+| S21 | Demonstration experience | `make demo-up` / `make demo-reset`, bilingual 5- and 15-minute journeys. | PR + CI green + zero findings |
+| S22 | Final acceptance and release | Full re-read, traceability and route-matrix audit, holistic review, tag `v0.3.0`. | Supervisor after zero findings and green default-branch CI |
+
+## Explicit non-goals for v0.3.0
+
+Authentication, role-based approval, official override workflow, confidential Ministry connectors, live customs transactions, paid-data acquisition, model training on Ministry applications, causal incentive-effect claims, generic AI chat, CRM, document management, any change to the methodology DOCX, and any alteration of the v0.2.0 tag, release records or frozen v1 golden snapshot files.
