@@ -8,6 +8,20 @@ from .evidence import (
     EvidenceIntegrityError,
     synthetic_display_labels,
 )
+from .public_snapshot import has_known_hard_gate_failure
+from .trade_metrics import (
+    UNAVAILABLE,
+    _concentration_predicate_values,
+    _domestic_penetration_full_precision,
+    _export_import_ratio_full_precision,
+    compound_annual_growth,
+    concentration_metrics,
+    degraded_dispersion_metrics,
+    domestic_flow_metrics,
+    established_domestic_nameplate,
+    export_import_value_ratio,
+    latest_usable_trade_pair,
+)
 
 
 def _rule(
@@ -423,318 +437,624 @@ def r3_fires(
 
 
 def r11_generic_capacity_fires(
-    generic_capacity_reject: bool,
+    established_domestic_capability: bool,
     export_import_value_ratio: float | None,
     rule_config: dict[str, Any],
 ) -> bool:
     return bool(
-        generic_capacity_reject
+        established_domestic_capability
         and export_import_value_ratio is not None
         and export_import_value_ratio
         > float(rule_config["generic_capacity_export_import_value_ratio"])
     )
 
 
-def evaluate_rules(case: dict[str, Any]) -> list[dict[str, Any]]:
-    thresholds = thresholds_config()["rules"]
-    trade = sorted(case["trade"], key=lambda row: row["year"])
-    quality = case["trade_quality"]
-    context = case["rule_context"]
-    results: list[dict[str, Any]] = []
+def _r1d_rule(
+    case: dict[str, Any],
+    rule_config: dict[str, Any],
+) -> dict[str, Any]:
+    trade = case.get("trade")
+    rows = trade if isinstance(trade, list) else []
+    positive_years = [
+        row["year"]
+        for row in rows
+        if isinstance(row, dict)
+        and isinstance(row.get("year"), int)
+        and (_numeric_or_none(row.get("imports_usd_m")) or 0) > 0
+    ]
+    fired = r1d_fires(positive_years, rule_config)
+    confidence_cap = rule_config["confidence_cap"]
+    return _rule(
+        "R1-D",
+        "Persistence signal — degraded",
+        "DEGRADED",
+        fired,
+        (
+            f"{len(positive_years)} positive observed years within the "
+            "configured window; no interpolation used."
+        ),
+        (
+            "Generate INVESTIGATE only; confidence capped at "
+            f"{confidence_cap}."
+        ),
+        {
+            "positive_years": positive_years,
+            "confidence_cap": confidence_cap,
+        },
+    )
 
-    results.append(
+
+def _r2_rule(
+    case: dict[str, Any],
+    rule_config: dict[str, Any],
+) -> dict[str, Any]:
+    trade = case.get("trade")
+    pair = latest_usable_trade_pair(
+        trade if isinstance(trade, list) else []
+    )
+    if pair is None:
+        return _rule(
+            "R2",
+            "Quantity-led expansion",
+            "DISABLED",
+            None,
+            "Comparable value and quantity observations are unavailable.",
+            "No inference.",
+        )
+    previous, latest = pair
+    previous_value = float(previous["imports_usd_m"])
+    latest_value = float(latest["imports_usd_m"])
+    previous_quantity = float(previous["imports_kt"])
+    latest_quantity = float(latest["imports_kt"])
+    delta_v = log_change(latest_value, previous_value)
+    delta_q = log_change(latest_quantity, previous_quantity)
+    latest_uv = _numeric_or_none(latest.get("import_uv_usd_t"))
+    previous_uv = _numeric_or_none(previous.get("import_uv_usd_t"))
+    if latest_uv is None or latest_uv <= 0:
+        latest_uv = latest_value * 1000 / latest_quantity
+    if previous_uv is None or previous_uv <= 0:
+        previous_uv = previous_value * 1000 / previous_quantity
+    delta_uv = log_change(latest_uv, previous_uv)
+    share = quantity_contribution_share(delta_q, delta_uv)
+    years = int(latest["year"]) - int(previous["year"])
+    quantity_cagr = compound_annual_growth(
+        latest_quantity,
+        previous_quantity,
+        years,
+    )
+    fired = r2_fires(
+        delta_q,
+        share,
+        quantity_cagr,
+        rule_config,
+    )
+    return _rule(
+        "R2",
+        "Quantity-led expansion",
+        "FULL",
+        fired,
+        (
+            "Quantity-led expansion signal fires."
+            if fired
+            else "Value movement is not quantity-led under the configured test."
+        ),
+        "Separate structural volume growth from price movement.",
+        {
+            "from_year": previous["year"],
+            "to_year": latest["year"],
+            "observed_span_years": years,
+            "delta_ln_value": round(delta_v, 4),
+            "delta_ln_quantity": round(delta_q, 4),
+            "delta_ln_unit_value": round(delta_uv, 4),
+            "quantity_contribution_share": round(share, 4),
+            "quantity_cagr": round(quantity_cagr, 4),
+        },
+    )
+
+
+def _r3_rule(
+    case: dict[str, Any],
+    rule_config: dict[str, Any],
+) -> dict[str, Any]:
+    value_metrics = concentration_metrics(case, "value")
+    quantity_metrics = concentration_metrics(case, "quantity")
+    value_hhi, value_largest = _concentration_predicate_values(
+        case,
+        "value",
+        value_metrics,
+    )
+    quantity_hhi, quantity_largest = _concentration_predicate_values(
+        case,
+        "quantity",
+        quantity_metrics,
+    )
+    value_full = value_metrics["status"] == "FULL"
+    quantity_full = quantity_metrics["status"] == "FULL"
+    value_fired = (
+        r3_fires(
+            value_hhi,
+            value_largest,
+            rule_config,
+        )
+        if value_full
+        else False
+    )
+    quantity_fired = (
+        r3_fires(
+            quantity_hhi,
+            quantity_largest,
+            rule_config,
+        )
+        if quantity_full
+        else False
+    )
+    if not value_full and not quantity_full:
+        execution = "DISABLED"
+        fired: bool | None = None
+        result = (
+            "Value- and quantity-basis partner concentration are "
+            "NOT_CALCULABLE."
+        )
+    else:
+        execution = "FULL"
+        fired = value_fired or quantity_fired
+        if value_fired and not quantity_full:
+            result = (
+                "External supply is concentrated on the value basis; "
+                "quantity concentration is NOT_CALCULABLE."
+            )
+        elif quantity_fired and not value_full:
+            result = (
+                "External supply is concentrated on the quantity basis; "
+                "value concentration is NOT_CALCULABLE."
+            )
+        elif fired:
+            result = (
+                "External supply is concentrated on at least one calculable "
+                "basis."
+            )
+        else:
+            result = (
+                "Concentration thresholds are not met on the calculable "
+                "basis or bases."
+            )
+    return _rule(
+        "R3",
+        "Supplier concentration",
+        execution,
+        fired,
+        result,
+        (
+            "No concentration inference."
+            if execution == "DISABLED"
+            else (
+                "Generate a resilience/diversification review, not an "
+                "automatic localisation recommendation."
+            )
+        ),
+        {
+            "hhi": value_metrics["hhi"],
+            "largest_supplier_share": value_metrics[
+                "largest_supplier_share"
+            ],
+            "top_two_share": value_metrics["top_two_share"],
+            "hhi_threshold": float(rule_config["supplier_hhi"]),
+            "largest_supplier_threshold": float(
+                rule_config["largest_supplier_share"]
+            ),
+            "value": value_metrics,
+            "quantity": quantity_metrics,
+        },
+    )
+
+
+def _r4d_rule(
+    case: dict[str, Any],
+    rule_config: dict[str, Any],
+) -> dict[str, Any]:
+    minimum = float(rule_config["minimum_valid_value_coverage"])
+    metrics = degraded_dispersion_metrics(case, minimum)
+    if metrics["status"] == "CALCULABLE":
+        execution = "DEGRADED"
+        fired: bool | None = True
+        result = (
+            "Comparable annual partner unit values show descriptive "
+            "dispersion; no cluster or grade conclusion."
+        )
+    elif metrics["status"] == "DISCLOSED":
+        execution = "DEGRADED"
+        fired = True
+        result = (
+            "A source-attributed annual unit-value dispersion summary "
+            "supports a descriptive product-mix signal; no cluster or "
+            "grade conclusion."
+        )
+    else:
+        execution = "DISABLED"
+        fired = None
+        result = (
+            "Comparable annual partner coverage is insufficient; "
+            "R4-D is not calculable."
+        )
+    return _rule(
+        "R4-D",
+        "Unit-value dispersion — degraded",
+        execution,
+        fired,
+        result,
+        "Open specification research only; no grade conclusion.",
+        metrics,
+    )
+
+
+def _latest_trade_row(case: dict[str, Any]) -> dict[str, Any]:
+    trade = case.get("trade")
+    if not isinstance(trade, list) or not trade:
+        return {}
+    dated = [
+        row
+        for row in trade
+        if isinstance(row, dict)
+        and isinstance(row.get("year"), int)
+        and not isinstance(row.get("year"), bool)
+    ]
+    return max(dated, key=lambda row: row["year"]) if dated else {}
+
+
+def _r5_rule(
+    case: dict[str, Any],
+    rule_config: dict[str, Any],
+) -> dict[str, Any]:
+    latest = _latest_trade_row(case)
+    flows = domestic_flow_metrics(latest, case["domestic_flows"])
+    threshold = float(
+        rule_config["retained_import_share_of_apparent_consumption"]
+    )
+    penetration = _domestic_penetration_full_precision(
+        latest,
+        case["domestic_flows"],
+    )
+    capability = case.get("domestic_capability")
+    verified = (
+        capability.get("verified_present")
+        if isinstance(capability, dict)
+        else UNAVAILABLE
+    )
+    imports_quantity = _numeric_or_none(latest.get("imports_kt"))
+    imports_value = _numeric_or_none(latest.get("imports_usd_m"))
+    positive_imports = (
+        (imports_quantity is not None and imports_quantity > 0)
+        or (imports_value is not None and imports_value > 0)
+    )
+    if penetration is not None:
+        execution = "FULL"
+        fired: bool | None = (
+            verified is True and penetration >= threshold
+        )
+        result = (
+            "Retained import penetration meets the configured mismatch test."
+            if fired
+            else "The configured retained-import penetration test does not fire."
+        )
+    elif verified is True and positive_imports:
+        execution = "DEGRADED"
+        fired = True
+        result = (
+            "Verified domestic capability coexists with material gross imports."
+        )
+    elif isinstance(verified, bool) and (
+        imports_quantity is not None or imports_value is not None
+    ):
+        execution = "DEGRADED"
+        fired = False
+        result = "Coexistence condition not met."
+    else:
+        execution = "DISABLED"
+        fired = None
+        result = "Domestic capability or a usable import measure is unavailable."
+    metrics = {
+        **flows,
+        "threshold": threshold,
+        "reason": (
+            None
+            if penetration is not None
+            else (
+                "Domestic production quantity and retained-import flow are "
+                "absent from the frozen public snapshot; gross imports "
+                "cannot establish apparent consumption."
+            )
+        ),
+    }
+    return _rule(
+        "R5",
+        "Domestic supply plus continued imports",
+        execution,
+        fired,
+        result,
+        (
+            "Test specification, qualification, capacity, price, "
+            "application and allocation mismatch."
+        ),
+        metrics,
+    )
+
+
+def _r9s_rule(capability: dict[str, Any]) -> dict[str, Any]:
+    same_family = capability.get("same_process_family")
+    signals = capability.get("coarse_adjacency_signals")
+    qualifying_count = (
+        sum(
+            1
+            for signal in signals
+            if isinstance(signal, dict)
+            and signal.get("signal_type")
+            in {
+                "matching_feedstock",
+                "core_process",
+                "equipment",
+                "adjacent_output",
+                "relevant_certification",
+                "imported_inputs",
+            }
+            and isinstance(signal.get("evidence_ids"), list)
+            and bool(signal["evidence_ids"])
+        )
+        if isinstance(signals, list)
+        else 0
+    )
+    known_failure = has_known_hard_gate_failure(capability)
+    if same_family == UNAVAILABLE:
+        execution = "DISABLED"
+        fired: bool | None = None
+    else:
+        execution = "FULL"
+        fired = (
+            same_family is True
+            and qualifying_count > 0
+            and not known_failure
+        )
+    return _rule(
+        "R9-S",
+        "Coarse incumbent adjacency screen",
+        execution,
+        fired,
+        (
+            "A verified Saudi plant is in the same process family with "
+            "additional capability signals."
+            if fired
+            else "No defensible coarse adjacency signal."
+        ),
+        (
+            "Open the full line-level capability assessment; do not "
+            "publish D* from screening alone."
+        ),
+        {
+            "same_process_family": (
+                same_family
+                if isinstance(same_family, bool)
+                else NOT_CALCULABLE
+            ),
+            "qualifying_signal_count": qualifying_count,
+            "known_hard_gate_failure": known_failure,
+        },
+    )
+
+
+def _r10_rule(
+    case: dict[str, Any],
+    r3: dict[str, Any],
+) -> dict[str, Any]:
+    designation = case.get("criticality_designation")
+    if isinstance(designation, dict):
+        execution = "FULL"
+        fired: bool | None = True
+        result = (
+            "A responsible-authority criticality designation is present."
+        )
+        status = "DESIGNATED"
+        evidence_id = designation.get("evidence_id")
+    elif r3.get("fired") is True:
+        execution = "DEGRADED"
+        fired = True
+        result = (
+            "A resilience review is warranted by concentration; formal "
+            "criticality still requires authority confirmation."
+        )
+        status = NOT_CALCULABLE
+        evidence_id = None
+    else:
+        execution = "DISABLED"
+        fired = None
+        result = (
+            "No responsible-authority criticality designation is present "
+            "in the demo snapshot."
+        )
+        status = NOT_CALCULABLE
+        evidence_id = None
+    return _rule(
+        "R10",
+        "Strategic criticality",
+        execution,
+        fired,
+        result,
+        "Keep commercial viability and strategic value separate.",
+        {
+            "criticality_status": status,
+            "criticality_evidence_id": evidence_id,
+        },
+    )
+
+
+def _r11_rule(
+    case: dict[str, Any],
+    rule_config: dict[str, Any],
+) -> dict[str, Any]:
+    ratio = export_import_value_ratio(_latest_trade_row(case))
+    capability = established_domestic_nameplate(
+        case["domestic_capability"]
+    )
+    computed = _export_import_ratio_full_precision(
+        _latest_trade_row(case)
+    )
+    computed_display = ratio["computed_export_import_value_ratio"]
+    threshold = float(
+        rule_config["generic_capacity_export_import_value_ratio"]
+    )
+    established = capability["established"] is True
+    fired = r11_generic_capacity_fires(
+        established,
+        computed,
+        rule_config,
+    )
+    execution = (
+        "FULL"
+        if ratio["status"] == "CALCULABLE" and established
+        else "DEGRADED"
+    )
+    compatibility_ratio = ratio["export_import_value_ratio"]
+    if fired:
+        assert isinstance(compatibility_ratio, (int, float))
+        result = (
+            f"Gross exports are {compatibility_ratio:.1f}× imports; "
+            "generic new capacity cannot be justified from HS6 imports alone."
+        )
+    elif ratio["status"] == "CALCULABLE" and established:
+        assert computed is not None
+        result = (
+            f"Gross exports are {computed:.4f}× imports; the configured "
+            "generic-capacity warning threshold is not met."
+        )
+    else:
+        result = (
+            "Export/import ratio or established nameplate capability is "
+            "NOT_CALCULABLE; no generic-capacity exclusion fires."
+        )
+    return _rule(
+        "R11",
+        "Economic exclusion / generic-capacity warning",
+        execution,
+        fired,
+        result,
+        (
+            "Reject generic support or move only a named specialty "
+            "exception to investigation."
+        ),
+        {
+            "export_import_value_ratio": compatibility_ratio,
+            "export_import_value_ratio_threshold": threshold,
+            "computed_export_import_value_ratio": computed_display,
+            "disclosed_export_import_value_ratio": ratio[
+                "disclosed_export_import_value_ratio"
+            ],
+            "disclosed_ratio_consistent": ratio[
+                "disclosed_ratio_consistent"
+            ],
+            "ratio_basis": ratio["ratio_basis"],
+            "ratio_status": ratio["status"],
+            "ratio_reason": ratio["reason"],
+            "established_nameplate": capability,
+        },
+    )
+
+
+def _evaluate_rules_v2(case: dict[str, Any]) -> list[dict[str, Any]]:
+    thresholds = thresholds_config()["rules"]
+    quality = case["trade_quality"]
+    results: list[dict[str, Any]] = [
         _rule(
             "R0",
             "Identity gate",
             "FULL",
             True,
-            f"HS revision {case['opportunity']['hs_revision']} and HS6 {case['opportunity']['hs6']} are frozen in the snapshot; specification/application remains separately gated.",
-            "Continue to screening while preserving the unresolved decision object.",
-        )
-    )
-
-    results.append(
+            (
+                f"HS revision {case['opportunity']['hs_revision']} and HS6 "
+                f"{case['opportunity']['hs6']} are frozen in the snapshot; "
+                "specification/application remains separately gated."
+            ),
+            (
+                "Continue to screening while preserving the unresolved "
+                "decision object."
+            ),
+        ),
         _rule(
             "R1-F",
             "Persistent retained exposure — full",
             "DISABLED" if quality.get("missing_years") else "FULL",
             None if quality.get("missing_years") else False,
-            "Full continuity is unavailable and gross flows are not retained imports."
-            if quality.get("missing_years")
-            else "Full persistence test did not fire.",
+            (
+                "Full continuity is unavailable and gross flows are not "
+                "retained imports."
+                if quality.get("missing_years")
+                else "Full persistence test did not fire."
+            ),
             "Do not claim the full persistence rule.",
             {"missing_years": quality.get("missing_years", [])},
-        )
-    )
-
-    positive_years = [
-        row["year"] for row in trade if row.get("imports_usd_m", 0) > 0
+        ),
+        _r1d_rule(case, thresholds["R1_D"]),
+        _r2_rule(case, thresholds["R2"]),
     ]
-    r1d_fired = r1d_fires(positive_years, thresholds["R1_D"])
-    results.append(
-        _rule(
-            "R1-D",
-            "Persistence signal — degraded",
-            "DEGRADED",
-            r1d_fired,
-            f"{len(positive_years)} positive observed years within the configured window; no interpolation used.",
-            "Generate INVESTIGATE only; confidence capped at C.",
-            {"positive_years": positive_years, "confidence_cap": "C"},
-        )
-    )
-
-    if len(trade) >= 2 and all(
-        trade[-1].get(key) is not None and trade[-2].get(key) is not None
-        for key in ("imports_usd_m", "imports_kt")
-    ):
-        previous, latest = trade[-2], trade[-1]
-        delta_v = log_change(latest["imports_usd_m"], previous["imports_usd_m"])
-        delta_q = log_change(latest["imports_kt"], previous["imports_kt"])
-        uv_latest = latest.get("import_uv_usd_t") or (
-            latest["imports_usd_m"] * 1000 / latest["imports_kt"]
-        )
-        uv_previous = previous.get("import_uv_usd_t") or (
-            previous["imports_usd_m"] * 1000 / previous["imports_kt"]
-        )
-        delta_uv = log_change(uv_latest, uv_previous)
-        share = quantity_contribution_share(delta_q, delta_uv)
-        quantity_growth = latest["imports_kt"] / previous["imports_kt"] - 1
-        r2_fired = r2_fires(
-            delta_q,
-            share,
-            quantity_growth,
-            thresholds["R2"],
-        )
-        r2_result = (
-            "Quantity-led expansion signal fires."
-            if r2_fired
-            else "Value movement is not quantity-led under the configured test."
-        )
-        results.append(
+    r3 = _r3_rule(case, thresholds["R3"])
+    results.extend(
+        [
+            r3,
             _rule(
-                "R2",
-                "Quantity-led expansion",
-                "FULL",
-                r2_fired,
-                r2_result,
-                "Separate structural volume growth from price movement.",
-                {
-                    "from_year": previous["year"],
-                    "to_year": latest["year"],
-                    "delta_ln_value": round(delta_v, 4),
-                    "delta_ln_quantity": round(delta_q, 4),
-                    "delta_ln_unit_value": round(delta_uv, 4),
-                    "quantity_contribution_share": round(share, 4),
-                },
-            )
-        )
-    else:
-        results.append(
-            _rule(
-                "R2",
-                "Quantity-led expansion",
+                "R4-F",
+                "Product-tier heterogeneity — full",
                 "DISABLED",
                 None,
-                "Comparable value and quantity observations are unavailable.",
-                "No inference.",
-            )
-        )
-
-    supplier = case.get("supplier_metrics_2024")
-    if supplier:
-        r3_config = thresholds["R3"]
-        hhi = supplier.get("partner_value_hhi")
-        largest_supplier_share = supplier.get("largest_supplier_share")
-        r3_fired = r3_fires(
-            hhi,
-            largest_supplier_share,
-            r3_config,
-        )
-        results.append(
+                "Partner-month × tariff-line cells are unavailable.",
+                "Do not fit clusters or claim grades.",
+            ),
+            _r4d_rule(case, thresholds["R4_D"]),
+            _r5_rule(case, thresholds["R5"]),
             _rule(
-                "R3",
-                "Supplier concentration",
-                "FULL",
-                r3_fired,
-                "External supply is concentrated."
-                if r3_fired
-                else "Concentration threshold not met.",
-                "Generate a resilience/diversification review, not an automatic localisation recommendation.",
-                {
-                    "hhi": hhi,
-                    "hhi_threshold": float(r3_config["supplier_hhi"]),
-                    "largest_supplier_share": (
-                        largest_supplier_share
-                        if largest_supplier_share is not None
-                        else NOT_CALCULABLE
-                    ),
-                    "largest_supplier_threshold": float(
-                        r3_config["largest_supplier_share"]
-                    ),
-                    "top_two_share": supplier.get("top_two_value_share"),
-                },
-            )
-        )
-    else:
-        results.append(
-            _rule(
-                "R3",
-                "Supplier concentration",
+                "R6",
+                "Capacity pressure",
                 "DISABLED",
                 None,
-                "Partner concentration metrics are absent from the frozen case snapshot.",
-                "No concentration inference.",
-            )
-        )
-
-    results.append(
-        _rule(
-            "R4-F",
-            "Product-tier heterogeneity — full",
-            "DISABLED",
-            None,
-            "Partner-month × tariff-line cells are unavailable.",
-            "Do not fit clusters or claim grades.",
-        )
-    )
-    r4d = bool(context.get("r4_degraded_dispersion_signal"))
-    results.append(
-        _rule(
-            "R4-D",
-            "Unit-value dispersion — degraded",
-            "DEGRADED",
-            r4d,
-            "Annual/partner product-mix signal is visible." if r4d else "No material degraded dispersion signal recorded.",
-            "Open specification research only; no grade conclusion.",
-        )
-    )
-
-    r5 = bool(
-        context.get("domestic_production_exists")
-        and context.get("material_imports_exist")
-    )
-    r5_config = thresholds["R5"]
-    results.append(
-        _rule(
-            "R5",
-            "Domestic supply plus continued imports",
-            "DEGRADED",
-            r5,
-            (
-                "Verified domestic capability coexists with material "
-                "gross imports."
-                if r5
-                else "Coexistence condition not met."
+                (
+                    "Effective utilisation and target-specification "
+                    "shortage are not public."
+                ),
+                (
+                    "Obtain line-level availability, yield, qualification "
+                    "share and allocation."
+                ),
             ),
-            (
-                "Test specification, qualification, capacity, price, "
-                "application and allocation mismatch."
+            _rule(
+                "R7",
+                "Latent domestic capacity",
+                "DISABLED",
+                None,
+                (
+                    "Idle qualified capacity and specification equivalence "
+                    "are not established publicly."
+                ),
+                "Do not assume latent capacity.",
             ),
-            {
-                "retained_import_share_of_apparent_consumption": (
-                    NOT_CALCULABLE
+            _rule(
+                "R8",
+                "Committed future demand",
+                "DISABLED",
+                None,
+                (
+                    "Awarded/financed demand at the target specification "
+                    "is unavailable."
                 ),
-                "reason": (
-                    "Domestic production quantity and retained-import "
-                    "flow are absent from the frozen public snapshot; "
-                    "gross imports cannot establish apparent consumption."
+                (
+                    "Keep base, committed and announced demand separate "
+                    "when provided."
                 ),
-                "threshold": float(
-                    r5_config[
-                        "retained_import_share_of_apparent_consumption"
-                    ]
-                ),
-            },
-        )
-    )
-
-    results.append(
-        _rule(
-            "R6",
-            "Capacity pressure",
-            "DISABLED",
-            None,
-            "Effective utilisation and target-specification shortage are not public.",
-            "Obtain line-level availability, yield, qualification share and allocation.",
-        )
-    )
-    results.append(
-        _rule(
-            "R7",
-            "Latent domestic capacity",
-            "DISABLED",
-            None,
-            "Idle qualified capacity and specification equivalence are not established publicly.",
-            "Do not assume latent capacity.",
-        )
-    )
-    results.append(
-        _rule(
-            "R8",
-            "Committed future demand",
-            "DISABLED",
-            None,
-            "Awarded/financed demand at the target specification is unavailable.",
-            "Keep base, committed and announced demand separate when provided.",
-        )
-    )
-
-    r9 = bool(context.get("same_process_family_plus_signal"))
-    results.append(
-        _rule(
-            "R9-S",
-            "Coarse incumbent adjacency screen",
-            "FULL",
-            r9,
-            "A verified Saudi plant is in the same process family with additional capability signals." if r9 else "No defensible coarse adjacency signal.",
-            "Open the full line-level capability assessment; do not publish D* from screening alone.",
-        )
-    )
-
-    r10 = bool(context.get("strategic_resilience_review"))
-    results.append(
-        _rule(
-            "R10",
-            "Strategic criticality",
-            "DEGRADED" if r10 else "DISABLED",
-            r10 if r10 else None,
-            "A resilience review is warranted by concentration; formal criticality still requires authority confirmation."
-            if r10
-            else "No responsible-authority criticality designation is present in the demo snapshot.",
-            "Keep commercial viability and strategic value separate.",
-        )
-    )
-
-    latest = trade[-1]
-    export_import_ratio = latest.get("export_import_value_ratio")
-    r11_config = thresholds["R11"]
-    r11 = r11_generic_capacity_fires(
-        bool(context.get("generic_capacity_reject")),
-        export_import_ratio,
-        r11_config,
-    )
-    results.append(
-        _rule(
-            "R11",
-            "Economic exclusion / generic-capacity warning",
-            "FULL" if export_import_ratio is not None else "DEGRADED",
-            r11,
-            (
-                f"Gross exports are {export_import_ratio:.1f}× imports; generic new capacity cannot be justified from HS6 imports alone."
-                if r11
-                else "No public-data generic-capacity exclusion fires."
             ),
-            "Reject generic support or move only a named specialty exception to investigation.",
-            {
-                "export_import_value_ratio": export_import_ratio,
-                "export_import_value_ratio_threshold": float(
-                    r11_config["generic_capacity_export_import_value_ratio"]
-                ),
-            },
-        )
+            _r9s_rule(case["domestic_capability"]),
+            _r10_rule(case, r3),
+            _r11_rule(case, thresholds["R11"]),
+        ]
     )
-
-    missing_facts = case["public_decision_contract"].get("missing_facts", [])
+    missing_facts = case["public_decision_contract"].get(
+        "missing_facts",
+        [],
+    )
     results.append(
         _rule(
             "R12",
@@ -742,9 +1062,15 @@ def evaluate_rules(case: dict[str, Any]) -> list[dict[str, Any]]:
             "DEGRADED",
             bool(missing_facts),
             f"{len(missing_facts)} named facts could change the route.",
-            "Prioritise the smallest evidence request with a plausible route effect; quantify EVSI when cost and value inputs exist.",
+            (
+                "Prioritise the smallest evidence request with a plausible "
+                "route effect; quantify EVSI when cost and value inputs exist."
+            ),
             {"named_missing_facts": missing_facts},
         )
     )
-
     return results
+
+
+def evaluate_rules(case: dict[str, Any]) -> list[dict[str, Any]]:
+    return _evaluate_rules_v2(case)

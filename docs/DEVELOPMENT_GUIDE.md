@@ -4,6 +4,32 @@
 
 Development uses repository code, frozen public evidence, and explicitly synthetic Class-D fixtures. No API key or live industrial source is required. Never run the manifest generator outside an approved Authority Manifest §7 change. The active slice ADR and PR must identify the exact governed bytes, approval basis, sensitivity/golden proof, and permitted generated diff before one controlled run.
 
+## PublicSnapshot schema 2.0.0
+
+Production discovery is deliberately non-recursive over
+`data/snapshots/public/*.json` and accepts only validated schema `2.0.0`.
+Historical schema-v1 files remain byte-identical under
+`data/snapshots/public/historical/v1/`; they are integrity-manifest inputs,
+not runtime cases. A representation-only migration keeps snapshot ID and
+as-of date and uses `supersedes`; a real evidence refresh receives a new ID
+and date.
+
+Schema-v2 public records contain typed trade quality, optional partner rows or
+source-attributed disclosed concentration/dispersion, domestic flows,
+criticality designation, producer evidence, typed hard gates, and complete
+evidence passports. Exact `UNAVAILABLE` is the only unknown sentinel in new
+blocks. Authored outcomes (`rule_context`, `fired`, `execution`, or equivalent)
+are rejected. R3, R4-D, R5, R9-S, R10, and R11 are computed from evidence;
+R5 public production/re-export inputs remain `UNAVAILABLE` until a governed
+acquisition supplies them.
+
+For an approved schema/config/Core update, complete every governed hand edit
+and all functional regression first. Run
+`PYTHONPATH=src .venv/bin/python scripts/build_manifests.py` once, audit the
+exact machine diff, copy machine rows into Manifest §11, then rerun integrity,
+goldens, Gate B, smoke, and the full suites. Historical files are never
+rewritten to make hashes pass.
+
 ## Prerequisites
 
 Use WSL or native Linux with Python 3.11 or newer, Git, Make, Node, and `uv`. Docker is required for image/runtime compatibility checks and canonical visual-baseline updates. Real-browser acceptance additionally uses Python 3.12, `playwright==1.62.0`, `pytest-playwright==0.9.0`, `Pillow==12.3.0`, matching Playwright Chromium, and the exact vendored Noto Sans/Noto Sans Arabic assets. Host `fc-match` output is diagnostic only; product-font bytes and actual browser rendering are the gate.
@@ -148,7 +174,22 @@ make e2e
 
 The update target uses the digest-pinned Playwright 1.62.0 Noble image,
 asserts `chromium-1234`, mounts only allow-listed project paths, and runs with
-`--network=none`. Inspect every image and manifest change before review.
+`--network=none` as the host UID/GID. It sets its home/cache under `/tmp`,
+uses `/ms-playwright`, asserts the effective container identity, and rejects
+an update if any written baseline/artifact path is not owned by the host user.
+Inspect every image and manifest change before review.
+
+For S08, after all 118 functional nodes are green, the governed update is:
+
+```bash
+export LD_LIBRARY_PATH=/tmp/ior-s06-browser-libs
+IOR_UPDATE_VISUAL_BASELINES=1 \
+IOR_BASELINE_CHANGE_REF="S08-computed-rules-dossier-contradictions" \
+make e2e-update-baselines
+
+PYTHONPATH=src .venv/bin/python -c 'import os; from pathlib import Path; roots=(Path("browser_tests/baselines/v0.3.0"), Path(".artifacts/e2e")); bad=[str(p) for root in roots for p in (root, *root.rglob("*")) if p.exists() and os.stat(p, follow_symlinks=False).st_uid != os.getuid()]; assert not bad, bad'
+make e2e
+```
 
 Focused examples:
 

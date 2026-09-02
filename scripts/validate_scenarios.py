@@ -18,6 +18,9 @@ from ior_mvp.evidence import (
     reconcile_synthetic_scenario,
     validate_synthetic_scenario,
 )
+from ior_mvp.public_snapshot import (
+    validate_public_snapshot,
+)
 
 
 SYNTHETIC_DIR = DATA_DIR / "synthetic"
@@ -49,6 +52,11 @@ def _index_public_cases(
     cases: dict[str, dict[str, Any]] = {}
     for path in paths:
         case = _read_json_object(path)
+        validate_public_snapshot(
+            case,
+            path=path,
+            root=public_dir.parents[2],
+        )
         opportunity = case.get("opportunity")
         opportunity_id = (
             opportunity.get("id")
@@ -185,6 +193,7 @@ def main(
         OSError,
         UnicodeError,
         json.JSONDecodeError,
+        EvidenceIntegrityError,
         ScenarioValidationExecutionError,
         TypeError,
         ValueError,

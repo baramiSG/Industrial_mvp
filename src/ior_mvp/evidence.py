@@ -285,7 +285,7 @@ def _public_nameplate_total(
             if isinstance(producer, dict)
             else None
         )
-        if raw is None:
+        if raw is None or raw == "UNAVAILABLE":
             disclosed.append(None)
             continue
         capacity = _finite_number(raw)

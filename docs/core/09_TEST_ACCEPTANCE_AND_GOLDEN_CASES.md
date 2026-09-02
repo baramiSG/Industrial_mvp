@@ -172,6 +172,25 @@ A source refresh process creates a new candidate snapshot and runs comparison te
 
 Tests are not loosened merely because a live source changed.
 
+### Public snapshot schema-migration proof
+
+Golden schema migrations retain the historical bytes and compare a test-only
+legacy evaluation with the live schema result. For every migrated golden the
+proof deep-compares every ordered rule and response identity/state field,
+failing on any difference outside an exact old/new allow-list. The allow-list
+contains steel R11 execution `DEGRADED` to `FULL`, steel compatibility ratio
+`null` to `0.1144`, individually named additive metric keys, and the exact
+approved changed result-text paths. Fired values, snapshot identity, and
+public state remain identical. The production loader is non-recursive and
+accepts only the current live schema; historical paths are manifested but never loaded
+at runtime.
+
+R2 tests cover one- and multi-year observed spans and missing-year
+non-interpolation. R3 boundaries run on value and quantity. R4-D tests cover
+coverage and no-grade wording. R5 tests cover numeric and UNAVAILABLE flows.
+R9-S, R10, and R11 tests prove evidence-derived predicates and the absence of
+author flags. Dossier tests prove public/synthetic contradiction separation.
+
 ## 6. Acceptance gates by subsystem
 
 ### Gate A — Authority

@@ -41,7 +41,7 @@ def test_ui_catalogue_metadata_locales_and_version_are_exact() -> None:
 
     assert payload["metadata"] == {
         "artifact": "industrial-opportunity-ui-strings",
-        "version": "1.0.0",
+        "version": "1.1.0",
         "effective_date": "2026-09-02",
         "authority": (
             "Core 01 NFR-006/NFR-007 and UX GenUI Demo Specification"
@@ -54,6 +54,65 @@ def test_ui_catalogue_metadata_locales_and_version_are_exact() -> None:
         "ar": {"bcp47": "ar-SA", "direction": "rtl"},
     }
     assert getattr(config, "SUPPORTED_UI_LOCALES", None) == ("en", "ar")
+
+
+def test_ui_catalogue_has_exact_s08_contradiction_copy() -> None:
+    strings = _catalogue()["strings"]
+
+    assert {
+        key: strings["en"][key]
+        for key in (
+            "dossier.contradiction_register",
+            "dossier.public_contradictions",
+            "dossier.synthetic_contradictions",
+            "dossier.no_public_contradictions",
+            "dossier.synthetic_not_applicable",
+            "dossier.no_synthetic_contradictions",
+        )
+    } == {
+        "dossier.contradiction_register": "Contradiction register",
+        "dossier.public_contradictions": (
+            "Public evidence contradictions"
+        ),
+        "dossier.synthetic_contradictions": (
+            "Synthetic evidence contradictions"
+        ),
+        "dossier.no_public_contradictions": (
+            "No public contradictions recorded."
+        ),
+        "dossier.synthetic_not_applicable": (
+            "Synthetic evidence is not active in public mode."
+        ),
+        "dossier.no_synthetic_contradictions": (
+            "No synthetic contradictions are recorded for this simulation."
+        ),
+    }
+    assert {
+        key: strings["ar"][key]
+        for key in (
+            "dossier.contradiction_register",
+            "dossier.public_contradictions",
+            "dossier.synthetic_contradictions",
+            "dossier.no_public_contradictions",
+            "dossier.synthetic_not_applicable",
+            "dossier.no_synthetic_contradictions",
+        )
+    } == {
+        "dossier.contradiction_register": "سجل التناقضات",
+        "dossier.public_contradictions": "تناقضات الأدلة العامة",
+        "dossier.synthetic_contradictions": (
+            "تناقضات الأدلة الاصطناعية"
+        ),
+        "dossier.no_public_contradictions": (
+            "لا توجد تناقضات مسجلة في الأدلة العامة."
+        ),
+        "dossier.synthetic_not_applicable": (
+            "الأدلة الاصطناعية غير نشطة في وضع الأدلة العامة."
+        ),
+        "dossier.no_synthetic_contradictions": (
+            "لا توجد تناقضات اصطناعية مسجلة لهذه المحاكاة."
+        ),
+    }
 
 
 def test_ui_catalogue_locale_keys_and_placeholders_match() -> None:
@@ -139,7 +198,7 @@ def test_ui_strings_endpoint_returns_valid_en_and_ar_bundles(
     payload = response.json()
     catalogue = _catalogue()
     assert payload == {
-        "catalogue_version": "1.0.0",
+        "catalogue_version": "1.1.0",
         "locale": locale,
         **catalogue["locales"][locale],
         "strings": catalogue["strings"][locale],

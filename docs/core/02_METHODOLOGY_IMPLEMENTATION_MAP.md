@@ -46,23 +46,36 @@ An autonomous agent may refactor implementation, but it may not remove a mapped 
 |---|---|---|---|---|
 | R0 | Identity and classification gate | `rules.evaluate_rules`; snapshot opportunity identity | none | both demo cases retain HS revision and unresolved product boundary |
 | R1-F | Full persistence | currently reports DISABLED where continuity/retained flow is absent | `R1_F` | no case falsely claims full persistence |
-| R1-D | Degraded persistence | positive observed years within a four-year window, no interpolation | `R1_D` | fires for both cases; confidence C |
-| R2 | Quantity-led expansion | `log_change`, `quantity_contribution_share` | `R2` | steel fires; PP does not fire |
-| R3 | Supplier concentration | HHI / supplier-share check | `R3` | steel fires at HHI 0.36 |
+| R1-D | Degraded persistence | `rules._r1d_rule`; positive observed years within a four-year window, no interpolation, configured confidence cap | `R1_D` | fires for both cases; confidence C |
+| R2 | Quantity-led expansion | `trade_metrics.compound_annual_growth`, `latest_usable_trade_pair`; log decomposition over the two latest usable observed years | `R2` | steel fires; PP does not fire |
+| R3 | Supplier concentration | `trade_metrics.concentration_metrics`; independent HHI / largest-share checks on value and quantity | `R3` | steel value basis fires at HHI 0.36; quantity is not calculable |
 | R4-F | Full UV clusters | explicitly DISABLED in current annual snapshots | `R4_F` | no grade claim |
-| R4-D | Descriptive UV dispersion | snapshot signal + protected interpretation | `R4_D` | opens specification research only |
-| R5 | Domestic supply plus imports | domestic capability and material import coexistence | `R5` | fires as mismatch test for both |
+| R4-D | Descriptive UV dispersion | `trade_metrics.degraded_dispersion_metrics`; row coverage/weighted dispersion or source-attributed disclosure | `R4_D` | opens specification research only |
+| R5 | Domestic supply plus imports | `trade_metrics.domestic_flow_metrics`; retained imports, net exposure, apparent consumption, penetration, plus degraded coexistence proxy | `R5` | fires as mismatch test for both while public flow inputs remain unavailable |
 | R6 | Capacity pressure | requires synthetic or future internal utilisation and shortage | `R6` | public disabled; steel simulation resolves capacity gap |
 | R7 | Latent qualified capacity | requires equivalence and availability | `R7` | public disabled; PP simulation confirms no gap |
 | R8 | Committed future demand | requires awarded/financed target-spec demand | `R8` | public disabled; steel simulation provides separate demand layers |
-| R9-S | Coarse incumbent adjacency | same process family plus another signal | none | opens capability assessment for both |
-| R10 | Strategic criticality | authority-confirmed criticality or resilience review | none | steel shows resilience review but not formal designation |
-| R11 | Economic exclusion | structural uncompetitiveness or generic-capacity warning | `R11` | PP public rejects generic capacity support |
+| R9-S | Coarse incumbent adjacency | typed same-process-family, methodology signal and known-failure gate via `rules._r9s_rule` | none | opens capability assessment for both |
+| R10 | Strategic criticality | typed responsible-authority designation or computed R3 resilience review | none | steel shows resilience review but not formal designation |
+| R11 | Economic exclusion | `trade_metrics.export_import_value_ratio`, `established_domestic_nameplate`; computed gross ratio plus observed A/B/C nameplate | `R11` | PP public rejects generic capacity support; steel computes 0.1144 and does not fire |
 | R12 | Evidence-value trigger | named missing facts and EVSI | none | public names facts; simulation quantifies EVSI |
 
 ## 4. Formula map
 
-### 4.1 Price–quantity decomposition
+### 4.1 Core trade-flow measures
+
+```text
+Retained imports = Gross imports − Verified re-exports
+Net import exposure = Retained imports − Domestic-origin exports
+Apparent consumption = Domestic production + Retained imports − Domestic-origin exports
+Import penetration = Retained imports ÷ Apparent consumption
+```
+
+Implementation: `trade_metrics.domestic_flow_metrics`. Each dependent measure
+remains `NOT_CALCULABLE` with named missing inputs when its physical evidence
+is `UNAVAILABLE`; gross imports are never relabelled retained demand.
+
+### 4.2 Price–quantity decomposition
 
 ```text
 ΔlnV = ΔlnQ + ΔlnUV
@@ -80,7 +93,7 @@ Steel golden result:
 quantity contribution ≈ 65.8%
 ```
 
-### 4.2 Effective qualified capacity
+### 4.3 Effective qualified capacity
 
 ```text
 Nameplate × Availability × Yield × Qualification share × Market allocation
@@ -94,7 +107,7 @@ Steel simulation result:
 250 × 0.92 × 0.94 × 0.38 × 0.70 = 57.509 kt
 ```
 
-### 4.3 Capability uncertainty
+### 4.4 Capability uncertainty
 
 ```text
 K = sum known weights
@@ -112,7 +125,7 @@ Publication controls:
 - no hard gate state 3;
 - K=0 → no D\*, `INVESTIGATE`.
 
-### 4.4 Economics
+### 4.5 Economics
 
 ```text
 NPV = Σ FCFt/(1+h)^t
@@ -131,7 +144,7 @@ Supported NPV = 0
 Supported IRR = 12%
 ```
 
-### 4.5 Incremental national value
+### 4.6 Incremental national value
 
 ```text
 Domestic value added + exports + resilience + knowledge/skills + fiscal receipts
@@ -140,7 +153,7 @@ Domestic value added + exports + resilience + knowledge/skills + fiscal receipts
 
 Implementation: `economics.incremental_national_value`
 
-### 4.6 EVSI
+### 4.7 EVSI
 
 ```text
 P(route changes) × value difference − evidence cost − delay cost
@@ -201,3 +214,15 @@ The response contract contains:
 ## 9. Traceability maintenance rule
 
 Any new domain function must be added to this map before implementation review can close. Any removal must identify the methodology requirement that has been formally retired. “Not used by the current UI” is not a valid reason to remove a governing behavior.
+
+| Domain behavior | Implementation | Authority | Primary tests | Visible output |
+|---|---|---|---|---|
+| Public snapshot v2 validation | `public_snapshot.validate_public_snapshot` | Core 04 PublicSnapshot v2; Core 05 §§5–7 | `test_public_snapshot_schema.py` | snapshot/schema identity and fail-closed loader |
+| Observed-span CAGR | `trade_metrics.compound_annual_growth`, `trade_metrics.latest_usable_trade_pair` | Methodology §4 R2; I3 | `test_trade_metrics.py`, `test_threshold_boundaries.py` | R2 ledger metrics |
+| Dual-basis concentration | `trade_metrics.concentration_metrics` | Methodology §3.3/R3; I2 | rule/boundary/migration tests | R3 ledger and HHI card |
+| Degraded dispersion | `trade_metrics.degraded_dispersion_metrics` | Methodology §5.2.2 | rule/boundary tests | R4-D ledger |
+| Domestic flow formulas | `trade_metrics.domestic_flow_metrics` | Methodology §3.3/Appendix A | formula/rule tests | R5 ledger metrics |
+| Gross export/import ratio | `trade_metrics.export_import_value_ratio` | Methodology §14.1/R11 | metric/rule/migration tests | R11 computed and disclosed ratio metrics |
+| Established nameplate | `trade_metrics.established_domestic_nameplate` | Methodology R9-S/R11; worked case §14 | rule tests | R9-S/R11 ledger |
+| Supplier compatibility projection | `trade_metrics.build_supplier_metrics` | Aggregate response contract | API/GenUI tests | metric grid |
+| Hard-gate normalization | `public_snapshot.capability_hard_gate_names`, `public_snapshot.has_known_hard_gate_failure` | Core 04/07 v2 | schema/R9 tests | capability and R9-S |

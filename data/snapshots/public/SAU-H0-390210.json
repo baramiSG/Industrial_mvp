@@ -1,17 +1,21 @@
 {
+  "schema_version": "2.0.0",
   "snapshot_id": "PUBLIC-SAU-H0-390210-2026-08-31",
   "as_of_date": "2026-08-31",
+  "supersedes": "data/snapshots/public/historical/v1/SAU-H0-390210.json",
   "source_boundary": "public",
   "authority_note": "Frozen from the public worked case in the Industrial Opportunity Resolution Methodology. Gross WITS/UN Comtrade flows; not retained domestic demand.",
   "opportunity": {
     "id": "SAU-H0-390210",
     "hs_revision": "H0",
     "hs6": "390210",
+    "national_tariff_line": "UNAVAILABLE",
     "sector_profile": "technical_plastics",
     "commercial_name_en": "Polypropylene, in primary forms",
     "commercial_name_ar": "بولي بروبيلين بأشكاله الأولية",
     "decision_object_status": "generic_hs6_only",
-    "application_boundary": "Generic capacity case; narrow grade/application exceptions remain unresolved."
+    "application_boundary": "Generic capacity case; narrow grade/application exceptions remain unresolved.",
+    "as_of_date": "2026-08-31"
   },
   "trade": [
     {
@@ -52,31 +56,106 @@
     "quantity_comparable": true,
     "execution_cap": "DEGRADED where continuity or grade resolution is required"
   },
+  "partner_observations": "UNAVAILABLE",
+  "disclosed_concentration": {
+    "value": "UNAVAILABLE",
+    "quantity": "UNAVAILABLE"
+  },
+  "disclosed_dispersion": {
+    "year": 2024,
+    "basis": "annual_gross_flow_average",
+    "flow_basis": "gross",
+    "unit": "USD/t",
+    "valid_value_coverage": "UNAVAILABLE",
+    "valid_quantity_coverage": "UNAVAILABLE",
+    "weighted_median_usd_t": "UNAVAILABLE",
+    "iqr_usd_t": "UNAVAILABLE",
+    "bulk_band_usd_t": "UNAVAILABLE",
+    "outlier_observation": "UNAVAILABLE",
+    "comparison_observations": [
+      {
+        "flow": "imports",
+        "unit_value_usd_t": 1649
+      },
+      {
+        "flow": "exports",
+        "unit_value_usd_t": 1097
+      }
+    ],
+    "coverage_note": "Gross-flow average unit values are a product-mix, grade, origin, or distribution research signal; they do not establish a specialty-grade gap.",
+    "source_evidence_id": "P-WITS-390210",
+    "status": "calculated"
+  },
+  "domestic_flows": {
+    "period_year": 2024,
+    "domestic_production_kt": "UNAVAILABLE",
+    "retained_imports_kt": "UNAVAILABLE",
+    "domestic_origin_exports_kt": "UNAVAILABLE",
+    "reexports_kt": "UNAVAILABLE",
+    "source_evidence_ids": []
+  },
+  "criticality_designation": "UNAVAILABLE",
   "domestic_capability": {
     "verified_present": true,
     "same_process_family": true,
     "coarse_adjacency_signals": [
-      "large established Saudi polypropylene production",
-      "broad producer grade portfolios",
-      "gross exports above 50 times import value"
+      {
+        "signal_type": "core_process",
+        "description": "large established Saudi polypropylene production",
+        "evidence_ids": [
+          "P-ADVANCED",
+          "P-TASNEE"
+        ]
+      },
+      {
+        "signal_type": "adjacent_output",
+        "description": "broad producer grade portfolios",
+        "evidence_ids": [
+          "P-SABIC"
+        ]
+      }
     ],
     "producer_evidence": [
       {
         "producer": "SABIC",
+        "process_family": "polypropylene",
+        "process_route": "UNAVAILABLE",
+        "published_standards": "UNAVAILABLE",
         "portfolio": "homo, random and impact products and compounds",
-        "installed_capacity_tpy": null,
-        "evidence_class": "C"
+        "installed_capacity_tpy": "UNAVAILABLE",
+        "nameplate_status": "unresolved",
+        "nameplate_source_evidence_id": "UNAVAILABLE",
+        "evidence_class": "C",
+        "evidence_ids": [
+          "P-SABIC"
+        ]
       },
       {
         "producer": "Advanced Petrochemical",
-        "installed_capacity_tpy": 450000,
+        "process_family": "polypropylene",
+        "process_route": "UNAVAILABLE",
+        "published_standards": "UNAVAILABLE",
         "public_note": "Jubail complex exceeded nameplate in Q1 2026",
-        "evidence_class": "C"
+        "installed_capacity_tpy": 450000,
+        "nameplate_status": "observed",
+        "nameplate_source_evidence_id": "P-ADVANCED",
+        "evidence_class": "C",
+        "evidence_ids": [
+          "P-ADVANCED"
+        ]
       },
       {
         "producer": "Tasnee",
+        "process_family": "polypropylene",
+        "process_route": "UNAVAILABLE",
+        "published_standards": "UNAVAILABLE",
         "installed_capacity_tpy": 720000,
-        "evidence_class": "C"
+        "nameplate_status": "observed",
+        "nameplate_source_evidence_id": "P-TASNEE",
+        "evidence_class": "C",
+        "evidence_ids": [
+          "P-TASNEE"
+        ]
       }
     ],
     "public_dimension_states": {
@@ -91,18 +170,19 @@
       "skills_market_integration": 0
     },
     "unresolved_hard_gates": [
-      "named imported grade",
-      "buyer application and qualification",
-      "local grade availability in required volume and timing"
+      {
+        "name": "named imported grade",
+        "state": "unresolved"
+      },
+      {
+        "name": "buyer application and qualification",
+        "state": "unresolved"
+      },
+      {
+        "name": "local grade availability in required volume and timing",
+        "state": "unresolved"
+      }
     ]
-  },
-  "rule_context": {
-    "domestic_production_exists": true,
-    "material_imports_exist": true,
-    "same_process_family_plus_signal": true,
-    "r4_degraded_dispersion_signal": true,
-    "strategic_resilience_review": false,
-    "generic_capacity_reject": true
   },
   "public_decision_contract": {
     "expected_state": "REJECT",
@@ -125,6 +205,8 @@
       "title": "WITS/UN Comtrade Saudi trade rows for HS 390210",
       "source": "WITS/UN Comtrade",
       "url": "https://wits.worldbank.org/trade/comtrade/en/country/SAU/year/2024/tradeflow/Imports/partner/ALL/product/390210",
+      "period": "2021/2023/2024",
+      "retrieved_at": "2026-08-31",
       "status": "observed",
       "evidence_class": "B",
       "synthetic_flag": false,
@@ -132,43 +214,61 @@
         "trade value",
         "trade quantity",
         "export/import ratio"
-      ]
+      ],
+      "transformation": "Frozen annual world rows; export/import ratios and 2024 average unit values are disclosed calculations from the methodology worked case.",
+      "reviewer_status": "unconfirmed_by_responsible_authority",
+      "contradiction": null
     },
     {
       "evidence_id": "P-SABIC",
       "title": "SABIC polypropylene portfolio",
       "source": "SABIC",
       "url": "https://www.sabic.com/en/products/polymers/polypropylene-pp",
+      "period": "UNAVAILABLE",
+      "retrieved_at": "2026-08-31",
       "status": "observed",
       "evidence_class": "C",
       "synthetic_flag": false,
       "supports": [
         "broad domestic-linked polypropylene family portfolio"
-      ]
+      ],
+      "transformation": "UNAVAILABLE",
+      "reviewer_status": "unconfirmed_by_responsible_authority",
+      "contradiction": null
     },
     {
       "evidence_id": "P-ADVANCED",
       "title": "Advanced Petrochemical company information",
       "source": "Advanced Petrochemical",
       "url": "https://advancedpetrochem.com/about/",
+      "period": "UNAVAILABLE",
+      "retrieved_at": "2026-08-31",
       "status": "observed",
       "evidence_class": "C",
       "synthetic_flag": false,
       "supports": [
         "450,000 t/y nameplate capacity"
-      ]
+      ],
+      "transformation": "UNAVAILABLE",
+      "reviewer_status": "unconfirmed_by_responsible_authority",
+      "contradiction": null
     },
     {
       "evidence_id": "P-TASNEE",
       "title": "Tasnee petrochemicals page",
       "source": "Tasnee",
       "url": "https://www.tasnee.com/en/products/petrochemicals",
+      "period": "UNAVAILABLE",
+      "retrieved_at": "2026-08-31",
       "status": "observed",
       "evidence_class": "C",
       "synthetic_flag": false,
       "supports": [
         "720,000 t/y Saudi polypropylene capacity"
-      ]
+      ],
+      "transformation": "UNAVAILABLE",
+      "reviewer_status": "unconfirmed_by_responsible_authority",
+      "contradiction": null
     }
   ]
 }

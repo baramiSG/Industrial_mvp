@@ -8,6 +8,7 @@ from fastapi.testclient import TestClient
 import ior_mvp.decision_engine as decision_engine
 from ior_mvp.app import STATIC_DIR, app, spa_fallback
 from ior_mvp.data_repository import get_synthetic_scenario
+from ior_mvp.public_snapshot import PublicSnapshotIntegrityError
 
 
 client = TestClient(app)
@@ -42,6 +43,48 @@ def test_opportunity_list_modes() -> None:
     simulated = client.get("/api/opportunities?mode=simulated")
     assert public.status_code == simulated.status_code == 200
     assert len(public.json()) == len(simulated.json()) == 2
+
+
+@pytest.mark.parametrize(
+    ("opportunity_id", "expected_hhi"),
+    [
+        ("SAU-H0-721049", 0.36),
+        ("SAU-H0-390210", None),
+    ],
+)
+def test_detailed_analysis_exposes_additive_public_snapshot_v2_contract(
+    opportunity_id: str,
+    expected_hhi: float | None,
+) -> None:
+    response = client.get(
+        f"/api/opportunities/{opportunity_id}?mode=public"
+    )
+
+    assert response.status_code == 200
+    payload = response.json()
+    assert payload["schema_version"] == "2.0.0"
+    assert set(payload["domestic_flows"]) == {
+        "period_year",
+        "domestic_production_kt",
+        "retained_imports_kt",
+        "domestic_origin_exports_kt",
+        "reexports_kt",
+        "source_evidence_ids",
+    }
+    assert payload["criticality_designation"] == "UNAVAILABLE"
+    r3 = next(
+        row for row in payload["rules"] if row["rule_id"] == "R3"
+    )
+    assert set(r3["metrics"]) >= {"value", "quantity"}
+    if expected_hhi is None:
+        assert payload["supplier_metrics"] is None
+    else:
+        assert payload["supplier_metrics"][
+            "partner_value_hhi"
+        ] == pytest.approx(expected_hhi)
+        assert r3["metrics"]["value"]["hhi"] == pytest.approx(
+            expected_hhi
+        )
 
 
 def test_steel_ui_manifest_uses_approved_components() -> None:
@@ -196,6 +239,47 @@ def test_evidence_integrity_failure_returns_422_json(
                 "SYN-MINISTRY-STEEL-001: "
                 "target_spec_demand_within_public_imports"
             ),
+        }
+    }
+
+
+@pytest.mark.parametrize(
+    "endpoint",
+    [
+        "/api/opportunities/SAU-H0-721049?mode=public",
+        "/api/opportunities?mode=public",
+    ],
+)
+def test_public_snapshot_integrity_failure_returns_422_without_partial_result(
+    monkeypatch: pytest.MonkeyPatch,
+    endpoint: str,
+) -> None:
+    def fail_public_case(opportunity_id: str) -> dict:
+        del opportunity_id
+        raise PublicSnapshotIntegrityError("schema probe")
+
+    monkeypatch.setattr(
+        decision_engine,
+        "get_public_case",
+        fail_public_case,
+    )
+    if endpoint.startswith("/api/opportunities?"):
+        monkeypatch.setattr(
+            decision_engine,
+            "public_cases",
+            lambda: {"SAU-H0-721049": {}},
+        )
+
+    response = TestClient(
+        app,
+        raise_server_exceptions=False,
+    ).get(endpoint)
+
+    assert response.status_code == 422
+    assert response.json() == {
+        "detail": {
+            "code": "EVIDENCE_INTEGRITY_ERROR",
+            "message": "schema probe",
         }
     }
 

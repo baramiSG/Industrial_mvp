@@ -1,5 +1,7 @@
 # 07 — Deterministic Rule, Capability, Economics and Decision Engine
 
+<!-- core_version: 2.0.0; supersedes: 1.0.0; effective_date: 2026-09-02 -->
+
 ## 1. Scope
 
 This specification governs all calculations and state transitions in the MVP. It combines the rulebook, capability test, economics, intervention logic and EVSI because they form one deterministic decision engine.
@@ -97,6 +99,52 @@ Rejects or monitors structurally uncompetitive or generic-capacity propositions.
 ### R12 — Evidence value
 
 Names missing facts and, where inputs exist, calculates EVSI.
+
+### S08 computed public-rule semantics
+
+R1-D emits the configured `confidence_cap`.
+
+R2 compares the two latest usable observed years and computes quantity CAGR
+over their observed span:
+`(Q_latest / Q_previous)^(1 / (year_latest - year_previous)) - 1`.
+Missing years are not interpolated.
+
+R3 computes HHI and largest-supplier share independently on value and
+quantity. A basis without complete partner rows or a source-attributed
+calculated disclosure is `NOT_CALCULABLE`. The rule fires when either
+calculable basis meets either configured test. The frozen steel calculated
+value disclosure executes FULL; its quantity basis is NOT_CALCULABLE.
+
+R4-D computes valid comparable coverage against its dedicated configured
+`minimum_valid_value_coverage`, quantity-weighted median and quartiles, IQR,
+and a descriptive farthest-observation candidate from annual partner rows,
+or uses a source-attributed calculated disclosure. It remains DEGRADED and
+may open only product-mix/specification research. It never claims a cluster,
+grade, quality, or localization case.
+
+R5 computes retained imports, net import exposure, apparent consumption, and
+import penetration when their physical inputs exist. Missing inputs remain
+`NOT_CALCULABLE` with named reasons. Verified domestic capability plus
+positive imports is a DEGRADED coexistence proxy; the FULL rule applies the
+configured penetration threshold.
+
+R9-S requires verified same process family, at least one typed methodology
+signal, and no known hard-gate failure. Unresolved gates still block route
+publication but do not prevent the coarse screen.
+
+R10 is FULL when a responsible-authority criticality designation exists,
+DEGRADED when computed R3 alone opens a resilience review, and DISABLED
+otherwise.
+
+R11 computes gross `export_import_value_ratio = exports_usd_m / imports_usd_m`
+from the latest row whenever both operands are positive and numeric. A
+disclosed ratio is retained and reported separately and, when present, must
+be consistent with the computed value within absolute tolerance `0.05`.
+The public generic-capacity warning requires the computed ratio to exceed the
+configured strict threshold and established domestic capability evidenced by
+at least one positive observed A/B/C producer nameplate. Missing exports or
+imports produce DEGRADED/false; a calculable ratio with established capability
+executes FULL whether the predicate is true or false. Product IDs, disclosed ratios, and authored flags never determine the predicate.
 
 ## 4. Capability engine
 
@@ -282,6 +330,8 @@ Changing a threshold requires a new version, rationale, sector scope and full re
 - no IRR sign change → null;
 - missing synthetic scenario → error in simulated mode;
 - malformed scenario → evidence-integrity error.
+- malformed public schema, an unsafe historical link, an invalid concentration
+  domain, or contradictory domestic-flow arithmetic → evidence-integrity error.
 
 ## 11. Determinism requirement
 

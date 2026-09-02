@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import re
 import subprocess
 import sys
@@ -240,6 +241,87 @@ def test_container_runner_mounts_only_the_exact_allow_list() -> None:
         ".artifacts/e2e",
     }
     assert all(".env" not in mount.relative for mount in mounts)
+
+
+def test_container_command_maps_host_user_and_safe_runtime_directories() -> None:
+    from scripts import run_visual_baseline_container as runner
+
+    command = runner.build_command(
+        docker="docker",
+        image="image",
+        mode="update",
+        change_ref="S08-test",
+        uid=123,
+        gid=456,
+        root=PROJECT_ROOT,
+    )
+
+    assert command[command.index("--user") + 1] == "123:456"
+    for value in (
+        "HOME=/tmp",
+        "XDG_CACHE_HOME=/tmp/.cache",
+        "PLAYWRIGHT_BROWSERS_PATH=/ms-playwright",
+        "IOR_HOST_UID=123",
+        "IOR_HOST_GID=456",
+    ):
+        assert value in command
+
+
+def test_ownership_sweep_accepts_host_owned_tree_and_reports_first_violation(
+    tmp_path: Path,
+) -> None:
+    from scripts import run_visual_baseline_container as runner
+
+    first = tmp_path / "first"
+    second = tmp_path / "second"
+    first.mkdir()
+    second.mkdir()
+    (first / "owned.txt").write_text("owned", encoding="utf-8")
+    wrong = second / "wrong.txt"
+    wrong.write_text("wrong", encoding="utf-8")
+
+    assert runner.first_non_owned_path(
+        (first,),
+        expected_uid=os.getuid(),
+    ) is None
+
+    real_stat = os.stat
+
+    def fake_stat(path: Path, *, follow_symlinks: bool) -> object:
+        result = real_stat(path, follow_symlinks=follow_symlinks)
+        if Path(path) == wrong:
+            values = list(result)
+            values[4] = os.getuid() + 1
+            return os.stat_result(values)
+        return result
+
+    assert runner.first_non_owned_path(
+        (first, second),
+        expected_uid=os.getuid(),
+        stat_func=fake_stat,
+    ) == wrong
+
+
+def test_container_identity_mismatch_fails_before_visual_pytest(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from browser_tests import visual_container
+
+    monkeypatch.setenv("IOR_HOST_UID", "123")
+    monkeypatch.setenv("IOR_HOST_GID", "456")
+    monkeypatch.setattr(visual_container.os, "geteuid", lambda: 999)
+    monkeypatch.setattr(visual_container.os, "getegid", lambda: 456)
+
+    with pytest.raises(RuntimeError, match="UID/GID"):
+        visual_container.assert_container_identity()
+
+
+def test_visual_container_disables_read_only_workspace_pytest_cache() -> None:
+    source = (
+        PROJECT_ROOT / "browser_tests" / "visual_container.py"
+    ).read_text(encoding="utf-8")
+
+    assert '"-p",\n            "no:cacheprovider",' in source
 
 
 def test_container_runner_requires_chromium_1234_and_records_browser_metadata() -> None:
