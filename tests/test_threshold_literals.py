@@ -196,9 +196,19 @@ def test_repository_has_no_embedded_threshold_comparison_literals() -> None:
         THRESHOLDS_PATH,
         root=PROJECT_ROOT,
     )
-    assert source_count > 0
+    assert source_count >= 15
     assert threshold_count > 0
     assert findings == []
+    rules_source = (
+        PROJECT_ROOT / "src" / "ior_mvp" / "rules.py"
+    ).read_text(encoding="utf-8")
+    assert 'rule_config["minimum_valid_value_coverage"]' in rules_source
+    assert (
+        PROJECT_ROOT / "src" / "ior_mvp" / "public_snapshot.py"
+    ).is_file()
+    assert (
+        PROJECT_ROOT / "src" / "ior_mvp" / "trade_metrics.py"
+    ).is_file()
 
 
 def test_frontend_hhi_caption_uses_payload_threshold() -> None:

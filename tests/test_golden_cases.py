@@ -21,6 +21,15 @@ def test_steel_public_golden_case() -> None:
     assert fired["R3"] is True
     assert fired["R4-D"] is True
     assert fired["R9-S"] is True
+    r2 = next(row for row in result["rules"] if row["rule_id"] == "R2")
+    r11 = next(row for row in result["rules"] if row["rule_id"] == "R11")
+    assert r2["metrics"]["observed_span_years"] == 1
+    assert r2["metrics"]["quantity_cagr"] == pytest.approx(0.6565)
+    assert r11["execution"] == "FULL"
+    assert r11["fired"] is False
+    assert r11["metrics"][
+        "computed_export_import_value_ratio"
+    ] == pytest.approx(0.1144)
 
 
 def test_steel_simulated_golden_case() -> None:
@@ -75,6 +84,16 @@ def test_polypropylene_public_golden_case() -> None:
     assert fired["R1-D"] is True
     assert fired["R2"] is False
     assert fired["R11"] is True
+    r2 = next(row for row in result["rules"] if row["rule_id"] == "R2")
+    r11 = next(row for row in result["rules"] if row["rule_id"] == "R11")
+    assert r2["metrics"]["quantity_cagr"] == pytest.approx(-0.1642)
+    assert r11["execution"] == "FULL"
+    assert r11["metrics"][
+        "computed_export_import_value_ratio"
+    ] == pytest.approx(50.6013)
+    assert r11["metrics"][
+        "disclosed_export_import_value_ratio"
+    ] == pytest.approx(50.6)
 
 
 def test_polypropylene_simulation_still_rejects_support() -> None:

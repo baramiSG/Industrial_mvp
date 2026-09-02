@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+- Added validated PublicSnapshot schema 2.0.0 with byte-identical schema-v1
+  history, explicit unknowns, complete evidence passports, and no authored
+  rule outcomes.
+- Derived R1-D, observed-span R2 CAGR, dual-basis R3, R4-D, R5 physical-flow
+  formulas, R9-S, R10, and computed/disclosed R11 metrics from typed evidence
+  while preserving all four golden decisions.
+- Added a bilingual, escaped Decision Dossier contradiction register with
+  public/synthetic separation and catalogue 1.1.0.
+- Made canonical visual updates run as the host UID/GID with fail-closed
+  identity/ownership checks, then regenerated the 40 governed baselines for
+  the computed-rule and dossier changes.
 - Added a governed Arabic/English catalogue and locale API, atomic topbar
   switch, persisted URL/local-storage preference, RTL mirroring, Western-digit
   formatting, bidi isolates, and honest English source-language islands.

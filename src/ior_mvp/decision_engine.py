@@ -26,6 +26,8 @@ from .evidence import (
     validate_public_evidence,
 )
 from .rules import evaluate_rules, evaluate_simulated_rules
+from .public_snapshot import capability_hard_gate_names
+from .trade_metrics import build_supplier_metrics
 
 
 Mode = Literal["public", "simulated"]
@@ -38,7 +40,7 @@ def _latest_trade(case: dict[str, Any]) -> dict[str, Any]:
 def _public_decision(case: dict[str, Any], rules: list[dict[str, Any]]) -> dict[str, Any]:
     contract = case["public_decision_contract"]
     r11 = next(row for row in rules if row["rule_id"] == "R11")
-    if case["rule_context"].get("generic_capacity_reject") and r11["fired"]:
+    if r11["fired"]:
         return {
             "state": "REJECT",
             "route_code": 0,
@@ -72,11 +74,14 @@ def analyze_public(opportunity_id: str) -> dict[str, Any]:
     capability = evaluate_capability(
         case["opportunity"]["sector_profile"],
         case["domestic_capability"]["public_dimension_states"],
-        case["domestic_capability"]["unresolved_hard_gates"],
+        capability_hard_gate_names(case["domestic_capability"]),
     )
     decision = _public_decision(case, rules)
     latest = _latest_trade(case)
+    r3 = next(row for row in rules if row["rule_id"] == "R3")
+    r4d = next(row for row in rules if row["rule_id"] == "R4-D")
     return {
+        "schema_version": case["schema_version"],
         "opportunity": case["opportunity"],
         "snapshot_id": case["snapshot_id"],
         "as_of_date": case["as_of_date"],
@@ -93,7 +98,13 @@ def analyze_public(opportunity_id: str) -> dict[str, Any]:
         "evsi": None,
         "trade": case["trade"],
         "trade_quality": case["trade_quality"],
-        "supplier_metrics": case.get("supplier_metrics_2024"),
+        "supplier_metrics": build_supplier_metrics(
+            case,
+            r3["metrics"],
+            r4d["metrics"],
+        ),
+        "domestic_flows": case["domestic_flows"],
+        "criticality_designation": case["criticality_designation"],
         "domestic_capability": case["domestic_capability"],
         "evidence": case["evidence"],
         "data_unlocks": decision["missing_facts"],

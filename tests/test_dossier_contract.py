@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import re
+from copy import deepcopy
 from pathlib import Path
 
 import pytest
@@ -9,6 +10,8 @@ from fastapi.testclient import TestClient
 
 from ior_mvp.app import app
 from ior_mvp.config import PROJECT_ROOT
+from ior_mvp.decision_engine import analyze
+from ior_mvp.dossier import build_dossier, render_dossier_html
 
 
 client = TestClient(app)
@@ -251,3 +254,127 @@ def test_public_dossier_contains_neither_policy_label(
     assert response.status_code == 200
     assert DISCLOSURE not in response.text
     assert ARABIC_DISCLOSURE not in response.text
+
+
+def test_public_dossier_v11_projects_only_public_contradictions() -> None:
+    steel = build_dossier(analyze("SAU-H0-721049", "public"))
+    polypropylene = build_dossier(
+        analyze("SAU-H0-390210", "public")
+    )
+
+    assert steel["dossier_version"] == "1.1"
+    assert steel["contradiction_register"] == {
+        "public": [
+            {
+                "evidence_id": "S-UNICOIL-SPEC",
+                "source": "UNICOIL",
+                "contradiction": (
+                    "Published coating range differs from EPD and is "
+                    "retained for confirmation."
+                ),
+                "synthetic_flag": False,
+            }
+        ],
+        "synthetic": [],
+        "synthetic_status": "NOT_APPLICABLE",
+    }
+    assert polypropylene["contradiction_register"] == {
+        "public": [],
+        "synthetic": [],
+        "synthetic_status": "NOT_APPLICABLE",
+    }
+
+
+def test_simulated_dossier_separates_public_and_synthetic_contradictions(
+) -> None:
+    analysis = analyze("SAU-H0-721049", "simulated")
+    dossier = build_dossier(analysis)
+    assert len(dossier["contradiction_register"]["public"]) == 1
+    assert dossier["contradiction_register"]["synthetic"] == []
+    assert (
+        dossier["contradiction_register"]["synthetic_status"]
+        == "NONE_RECORDED"
+    )
+
+    planted = deepcopy(analysis)
+    synthetic = next(
+        row
+        for row in planted["evidence"]
+        if row["synthetic_flag"] is True
+    )
+    synthetic["contradiction"] = "Synthetic contradiction probe."
+    dossier = build_dossier(planted)
+    assert dossier["contradiction_register"]["synthetic"] == [
+        {
+            "evidence_id": synthetic["evidence_id"],
+            "source": "DEMO_GENERATOR",
+            "contradiction": "Synthetic contradiction probe.",
+            "synthetic_flag": True,
+            "scenario_id": synthetic["scenario_id"],
+            "display_labels": synthetic["display_labels"],
+        }
+    ]
+    assert (
+        dossier["contradiction_register"]["synthetic_status"]
+        == "PRESENT"
+    )
+
+
+@pytest.mark.parametrize("locale", ["en", "ar"])
+def test_contradiction_register_html_uses_exact_catalogue_copy(
+    locale: str,
+) -> None:
+    strings = _ui_strings(locale)
+    steel = client.get(
+        "/api/opportunities/SAU-H0-721049/dossier.html"
+        f"?mode=public&locale={locale}"
+    )
+    polypropylene = client.get(
+        "/api/opportunities/SAU-H0-390210/dossier.html"
+        f"?mode=public&locale={locale}"
+    )
+    simulated = client.get(
+        "/api/opportunities/SAU-H0-721049/dossier.html"
+        f"?mode=simulated&locale={locale}"
+    )
+
+    assert steel.status_code == 200
+    assert polypropylene.status_code == 200
+    assert simulated.status_code == 200
+    for response in (steel, polypropylene, simulated):
+        assert strings["dossier.contradiction_register"] in response.text
+        assert strings["dossier.public_contradictions"] in response.text
+        assert strings["dossier.synthetic_contradictions"] in response.text
+    assert (
+        strings["dossier.synthetic_not_applicable"]
+        in steel.text
+    )
+    assert (
+        strings["dossier.no_public_contradictions"]
+        in polypropylene.text
+    )
+    assert (
+        strings["dossier.no_synthetic_contradictions"]
+        in simulated.text
+    )
+    assert (
+        "Published coating range differs from EPD and is retained "
+        "for confirmation."
+    ) in steel.text
+    if locale == "ar":
+        assert (
+            'class="source-language-island" lang="en" dir="ltr">'
+            "Published coating range differs"
+        ) in steel.text
+
+
+def test_contradiction_html_escapes_untrusted_passport_text() -> None:
+    analysis = deepcopy(analyze("SAU-H0-721049", "public"))
+    analysis["evidence"][0]["contradiction"] = (
+        '<script data-probe="x">alert(1)</script>'
+    )
+
+    rendered = render_dossier_html(build_dossier(analysis), locale="en")
+
+    assert "<script data-probe" not in rendered
+    assert "&lt;script data-probe=&quot;x&quot;&gt;" in rendered

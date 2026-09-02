@@ -1,6 +1,6 @@
 metadata:
   artifact: industrial-opportunity-thresholds
-  version: "1.1.0"
+  version: "1.2.0"
   effective_date: "2026-09-02"
   authority: "Industrial Opportunity Resolution Methodology, Appendix B"
   status: frozen_for_demo_cycle
@@ -47,12 +47,13 @@ rules:
     sector_scope: all
     revision_date: "2026-08-31"
   R4_D:
+    minimum_valid_value_coverage: 0.70
     claim_clusters: false
     claim_grades: false
     permitted_result: INVESTIGATE
-    rationale: "Annual/partner dispersion is descriptive only."
+    rationale: "Methodology §5.2.2 disables the degraded diagnostic when comparable coverage is inadequate but states no figure; the R4-F comparable-quantity coverage floor is adopted as the initial R4-D gate."
     sector_scope: all
-    revision_date: "2026-08-31"
+    revision_date: "2026-09-02"
   R5:
     retained_import_share_of_apparent_consumption: 0.20
     rationale: "Domestic supply plus continued imports opens mismatch testing."

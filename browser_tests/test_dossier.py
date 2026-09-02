@@ -92,12 +92,33 @@ def test_open_dossier_popup_matches_case_and_mode(
             "unicodeBidi": "isolate",
         }
     labels = locale_bundle(locale)["synthetic_labels"]
+    for key in (
+        "dossier.contradiction_register",
+        "dossier.public_contradictions",
+        "dossier.synthetic_contradictions",
+    ):
+        expect(popup.locator("body")).to_contain_text(strings[key])
+    if case.id == "SAU-H0-721049":
+        expect(popup.locator("body")).to_contain_text(
+            "Published coating range differs from EPD and is retained "
+            "for confirmation."
+        )
+    else:
+        expect(popup.locator("body")).to_contain_text(
+            strings["dossier.no_public_contradictions"]
+        )
     if mode == "simulated":
         for label in labels.values():
             expect(popup.locator(".warning")).to_contain_text(label)
+        expect(popup.locator("body")).to_contain_text(
+            strings["dossier.no_synthetic_contradictions"]
+        )
     else:
         for label in labels.values():
             expect(popup.locator("body")).not_to_contain_text(label)
+        expect(popup.locator("body")).to_contain_text(
+            strings["dossier.synthetic_not_applicable"]
+        )
 
 
 @pytest.mark.parametrize(

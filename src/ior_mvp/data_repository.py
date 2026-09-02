@@ -7,7 +7,10 @@ from typing import Any
 
 from .config import DATA_DIR
 from .evidence import validate_synthetic_scenario
-
+from .public_snapshot import (
+    PublicSnapshotIntegrityError,
+    validate_public_snapshot,
+)
 
 class RepositoryError(RuntimeError):
     pass
@@ -32,11 +35,21 @@ def public_cases() -> dict[str, dict[str, Any]]:
     directory = DATA_DIR / "snapshots" / "public"
     for path in sorted(directory.glob("*.json")):
         record = _read_json(path)
+        validate_public_snapshot(
+            record,
+            path=path,
+            root=directory.parents[2],
+        )
         opportunity_id = record.get("opportunity", {}).get("id")
         if not opportunity_id:
             raise RepositoryError(f"Public snapshot lacks opportunity.id: {path}")
         if record.get("source_boundary") != "public":
             raise RepositoryError(f"Public snapshot has an invalid boundary: {path}")
+        if opportunity_id in cases:
+            raise PublicSnapshotIntegrityError(
+                "Duplicate public opportunity.id="
+                f"{opportunity_id}: {path}"
+            )
         cases[opportunity_id] = record
     if not cases:
         raise RepositoryError("No public opportunity snapshots were found")

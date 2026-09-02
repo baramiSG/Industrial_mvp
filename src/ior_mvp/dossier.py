@@ -37,6 +37,49 @@ def build_dossier(analysis: dict[str, Any]) -> dict[str, Any]:
         for row in analysis.get("rules", [])
         if row.get("synthetic_flag") is True
     ]
+    public_contradictions = [
+        {
+            "evidence_id": row["evidence_id"],
+            "source": row["source"],
+            "contradiction": row["contradiction"],
+            "synthetic_flag": False,
+        }
+        for row in evidence
+        if row.get("synthetic_flag") is False
+        and isinstance(row.get("contradiction"), str)
+        and row["contradiction"]
+    ]
+    synthetic_contradictions = (
+        [
+            {
+                "evidence_id": row["evidence_id"],
+                "source": row["source"],
+                "contradiction": row["contradiction"],
+                "synthetic_flag": True,
+                "scenario_id": row["scenario_id"],
+                "display_labels": row["display_labels"],
+            }
+            for row in evidence
+            if row.get("synthetic_flag") is True
+            and isinstance(row.get("contradiction"), str)
+            and row["contradiction"]
+        ]
+        if analysis["mode"] == "simulated"
+        else []
+    )
+    contradiction_register = {
+        "public": public_contradictions,
+        "synthetic": synthetic_contradictions,
+        "synthetic_status": (
+            "NOT_APPLICABLE"
+            if analysis["mode"] == "public"
+            else (
+                "PRESENT"
+                if synthetic_contradictions
+                else "NONE_RECORDED"
+            )
+        ),
+    }
     demand_conclusion = (
         f"Latest frozen public imports: USD "
         f"{latest.get('imports_usd_m', 0):,.1f}m and "
@@ -50,7 +93,7 @@ def build_dossier(analysis: dict[str, Any]) -> dict[str, Any]:
             f"{capacity.get('specification_adjusted_gap_kt', 0):,.1f} kt."
         )
     return {
-        "dossier_version": "1.0",
+        "dossier_version": "1.1",
         "opportunity_id": opportunity["id"],
         "mode": analysis["mode"],
         "decision_headline": decision["headline"],
@@ -82,6 +125,7 @@ def build_dossier(analysis: dict[str, Any]) -> dict[str, Any]:
             "authority": analysis["authority"],
             "integrity": analysis["integrity"],
         },
+        "contradiction_register": contradiction_register,
         "conditions": decision.get("conditions", []),
         "kill_conditions": decision.get("kill_conditions", []),
         "next_evidence_actions": analysis.get("data_unlocks", []),
@@ -245,6 +289,56 @@ def render_dossier_html(
         ensure_ascii=False,
         sort_keys=True,
     )
+    contradiction_register = dossier["contradiction_register"]
+
+    def contradiction_items(rows: list[dict[str, Any]]) -> str:
+        return "".join(
+            (
+                "<li>"
+                f"{technical(row['evidence_id'])} · "
+                f"{island(row['source'])}"
+                f"<br>{island(row['contradiction'])}"
+                + (
+                    (
+                        f"<br>{e(row['display_labels']['en'])}"
+                        f'<br><span lang="ar" dir="rtl">'
+                        f"{e(row['display_labels']['ar'])}</span>"
+                    )
+                    if row.get("synthetic_flag") is True
+                    else ""
+                )
+                + "</li>"
+            )
+            for row in rows
+        )
+
+    public_rows = contradiction_register["public"]
+    synthetic_rows = contradiction_register["synthetic"]
+    public_contradictions_html = (
+        f"<ul>{contradiction_items(public_rows)}</ul>"
+        if public_rows
+        else f"<p>{text('dossier.no_public_contradictions')}</p>"
+    )
+    if contradiction_register["synthetic_status"] == "NOT_APPLICABLE":
+        synthetic_contradictions_html = (
+            f"<p>{text('dossier.synthetic_not_applicable')}</p>"
+        )
+    elif synthetic_rows:
+        synthetic_contradictions_html = (
+            f"<ul>{contradiction_items(synthetic_rows)}</ul>"
+        )
+    else:
+        synthetic_contradictions_html = (
+            f"<p>{text('dossier.no_synthetic_contradictions')}</p>"
+        )
+    contradictions_html = (
+        '<section class="box contradiction-register">'
+        f'<h2>{text("dossier.contradiction_register")}</h2>'
+        f'<h3>{text("dossier.public_contradictions")}</h3>'
+        f"{caption()}{public_contradictions_html}"
+        f'<h3>{text("dossier.synthetic_contradictions")}</h3>'
+        f"{synthetic_contradictions_html}</section>"
+    )
     return f"""<!doctype html>
 <html lang="{locale}" dir="{direction}">
 <head>
@@ -265,6 +359,7 @@ def render_dossier_html(
 <section class="box"><h2>{text("dossier.demand_conclusion")}</h2>{caption()}<p>{island(dossier["demand_conclusion"])}</p></section>
 <section class="box"><h2>{text("dossier.supply_conclusion")}</h2>{caption()}<p>{island(supply_json, "code")}</p></section>
 {simulated_rules_html}
+{contradictions_html}
 <section class="box"><h2>{text("dossier.decision_conditions")}</h2>{caption()}<ul>{source_list(dossier["conditions"])}</ul></section>
 <section class="box"><h2>{text("dossier.kill_conditions")}</h2>{caption()}<ul>{source_list(dossier["kill_conditions"])}</ul></section>
 <section class="box"><h2>{text("dossier.next_actions")}</h2>{caption()}<ul>{source_list(dossier["next_evidence_actions"])}</ul></section>

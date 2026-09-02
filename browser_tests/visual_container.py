@@ -13,6 +13,26 @@ ROOT = Path(__file__).resolve().parents[1]
 EXPECTED_REVISION = "chromium-1234"
 
 
+def assert_container_identity() -> tuple[int, int]:
+    """Assert the canonical container runs as the declared host user."""
+    try:
+        expected_uid = int(os.environ["IOR_HOST_UID"])
+        expected_gid = int(os.environ["IOR_HOST_GID"])
+    except (KeyError, ValueError) as exc:
+        raise RuntimeError(
+            "canonical container requires numeric IOR_HOST_UID/GID"
+        ) from exc
+    actual = (os.geteuid(), os.getegid())
+    expected = (expected_uid, expected_gid)
+    if actual != expected:
+        raise RuntimeError(
+            "canonical container UID/GID mismatch: "
+            f"actual={actual[0]}:{actual[1]} "
+            f"expected={expected[0]}:{expected[1]}"
+        )
+    return actual
+
+
 def assert_container_chromium() -> Path:
     """Assert the canonical image contains Playwright chromium-1234."""
     if importlib.metadata.version("playwright") != "1.62.0":
@@ -57,6 +77,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--change-ref", default="")
     args = parser.parse_args(argv)
     try:
+        uid, gid = assert_container_identity()
         executable = assert_container_chromium()
     except (OSError, RuntimeError) as exc:
         print(f"CANONICAL CHROMIUM ASSERTION FAIL: {exc}", file=sys.stderr)
@@ -72,13 +93,16 @@ def main(argv: Sequence[str] | None = None) -> int:
     )
     print(
         "CANONICAL CHROMIUM ASSERTION PASS "
-        f"revision={EXPECTED_REVISION} executable={executable}"
+        f"revision={EXPECTED_REVISION} executable={executable} "
+        f"uid={uid} gid={gid}"
     )
     result = subprocess.run(
         [
             sys.executable,
             "-m",
             "pytest",
+            "-p",
+            "no:cacheprovider",
             "-q",
             "browser_tests",
             "-m",

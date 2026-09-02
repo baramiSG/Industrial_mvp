@@ -1,5 +1,7 @@
 # 04 — Canonical Data Model
 
+<!-- core_version: 2.0.0; supersedes: 1.0.0; effective_date: 2026-09-02 -->
+
 ## 1. Modeling principle
 
 The primary entity is not an HS code. An HS code is one coordinate used to locate evidence. The canonical decision object is:
@@ -61,6 +63,45 @@ The public steel case leaves the exact imported target specification unresolved.
 ```
 
 Value, weight, supplementary quantity and unit are never collapsed into one field.
+
+### PublicSnapshot v2
+
+A live public snapshot shall set `schema_version: "2.0.0"`. A schema-only
+re-expression of identical frozen facts retains `snapshot_id` and
+`as_of_date` and sets `supersedes` to the byte-identical historical v1 path.
+An evidence refresh instead receives a new snapshot ID and date under the
+Authority Manifest §7.5 process.
+
+Aggregate `trade` rows remain the frozen world series. Optional
+`partner_observations` retain year × partner × flow value, net weight,
+quantity unit, gross-flow status, source evidence ID, and independent value,
+weight, and comparability validity flags. Where the frozen authority
+discloses only an aggregate calculation, `disclosed_concentration` and
+`disclosed_dispersion` retain that calculation, status, period, basis, source
+evidence ID, coverage note, and explicit `UNAVAILABLE` fields. A disclosed
+aggregate is evidence, never an authored rule result.
+
+For each aggregate trade row with positive numeric imports and exports, the
+system computes export/import value ratio from those flows. A disclosed
+one-decimal ratio is retained separately and must be within `0.05` of the
+computed value; both are reported.
+
+`domestic_flows` contains domestic production, retained imports,
+domestic-origin exports, and re-exports in kt; each value is numeric or exact
+`UNAVAILABLE`. `criticality_designation` is either exact `UNAVAILABLE` or a
+responsible-authority record with authority, reference, date, and evidence
+ID. Producer evidence retains process family, process route, typed adjacency
+signals, standards, observed nameplate and unit, evidence class, and passport
+references. Hard-gate evidence distinguishes unresolved from known failure.
+
+Every public EvidencePassport includes period, retrieved_at, status,
+evidence_class, synthetic_flag=false, supports, transformation,
+reviewer_status, and contradiction. Contradiction is retained; it is not
+silently harmonised away.
+
+A valid public snapshot contains no `rule_context`, `fired`, `execution`, or
+other authored rule outcome. `public_decision_contract` is retained
+temporarily for the S09 selector migration.
 
 ### 2.4 Plant and ProductionLine
 

@@ -1,0 +1,174 @@
+{
+  "snapshot_id": "PUBLIC-SAU-H0-390210-2026-08-31",
+  "as_of_date": "2026-08-31",
+  "source_boundary": "public",
+  "authority_note": "Frozen from the public worked case in the Industrial Opportunity Resolution Methodology. Gross WITS/UN Comtrade flows; not retained domestic demand.",
+  "opportunity": {
+    "id": "SAU-H0-390210",
+    "hs_revision": "H0",
+    "hs6": "390210",
+    "sector_profile": "technical_plastics",
+    "commercial_name_en": "Polypropylene, in primary forms",
+    "commercial_name_ar": "بولي بروبيلين بأشكاله الأولية",
+    "decision_object_status": "generic_hs6_only",
+    "application_boundary": "Generic capacity case; narrow grade/application exceptions remain unresolved."
+  },
+  "trade": [
+    {
+      "year": 2021,
+      "imports_usd_m": 91.2,
+      "imports_kt": 50.5,
+      "exports_usd_m": 6827.8,
+      "exports_kt": null,
+      "export_import_value_ratio": 74.9
+    },
+    {
+      "year": 2023,
+      "imports_usd_m": 91.0,
+      "imports_kt": 67.0,
+      "exports_usd_m": 4806.3,
+      "exports_kt": 3666.6,
+      "export_import_value_ratio": 52.8
+    },
+    {
+      "year": 2024,
+      "imports_usd_m": 92.3,
+      "imports_kt": 56.0,
+      "exports_usd_m": 4670.5,
+      "exports_kt": 4257.9,
+      "export_import_value_ratio": 50.6,
+      "import_uv_usd_t": 1649.0,
+      "export_uv_usd_t": 1097.0
+    }
+  ],
+  "trade_quality": {
+    "flow_basis": "gross",
+    "reexports_separated": false,
+    "domestic_origin_exports_separated": false,
+    "missing_years": [
+      2022
+    ],
+    "monthly_partner_tariff_line_available": false,
+    "quantity_comparable": true,
+    "execution_cap": "DEGRADED where continuity or grade resolution is required"
+  },
+  "domestic_capability": {
+    "verified_present": true,
+    "same_process_family": true,
+    "coarse_adjacency_signals": [
+      "large established Saudi polypropylene production",
+      "broad producer grade portfolios",
+      "gross exports above 50 times import value"
+    ],
+    "producer_evidence": [
+      {
+        "producer": "SABIC",
+        "portfolio": "homo, random and impact products and compounds",
+        "installed_capacity_tpy": null,
+        "evidence_class": "C"
+      },
+      {
+        "producer": "Advanced Petrochemical",
+        "installed_capacity_tpy": 450000,
+        "public_note": "Jubail complex exceeded nameplate in Q1 2026",
+        "evidence_class": "C"
+      },
+      {
+        "producer": "Tasnee",
+        "installed_capacity_tpy": 720000,
+        "evidence_class": "C"
+      }
+    ],
+    "public_dimension_states": {
+      "feedstock_chemistry": 0,
+      "core_process_route": 0,
+      "equipment_envelope": 0,
+      "finishing_spec_control": "U",
+      "qa_lab_metrology": "U",
+      "certification_customer_qualification": "U",
+      "capacity_time_window": "U",
+      "utilities_ehs_permitting": 0,
+      "skills_market_integration": 0
+    },
+    "unresolved_hard_gates": [
+      "named imported grade",
+      "buyer application and qualification",
+      "local grade availability in required volume and timing"
+    ]
+  },
+  "rule_context": {
+    "domestic_production_exists": true,
+    "material_imports_exist": true,
+    "same_process_family_plus_signal": true,
+    "r4_degraded_dispersion_signal": true,
+    "strategic_resilience_review": false,
+    "generic_capacity_reject": true
+  },
+  "public_decision_contract": {
+    "expected_state": "REJECT",
+    "route_restriction": "Reject generic polypropylene capacity support; investigate only explicitly defined grade/application exceptions.",
+    "missing_facts": [
+      "Saudi tariff-line and invoice description",
+      "Importer/offtaker application and qualification",
+      "Producer grade and local-availability matrix",
+      "Plant allocation and utilisation",
+      "Delivered economics for a named niche"
+    ],
+    "kill_conditions": [
+      "Imported and domestic products are shown equivalent and qualified",
+      "No specification-adjusted gap exists"
+    ]
+  },
+  "evidence": [
+    {
+      "evidence_id": "P-WITS-390210",
+      "title": "WITS/UN Comtrade Saudi trade rows for HS 390210",
+      "source": "WITS/UN Comtrade",
+      "url": "https://wits.worldbank.org/trade/comtrade/en/country/SAU/year/2024/tradeflow/Imports/partner/ALL/product/390210",
+      "status": "observed",
+      "evidence_class": "B",
+      "synthetic_flag": false,
+      "supports": [
+        "trade value",
+        "trade quantity",
+        "export/import ratio"
+      ]
+    },
+    {
+      "evidence_id": "P-SABIC",
+      "title": "SABIC polypropylene portfolio",
+      "source": "SABIC",
+      "url": "https://www.sabic.com/en/products/polymers/polypropylene-pp",
+      "status": "observed",
+      "evidence_class": "C",
+      "synthetic_flag": false,
+      "supports": [
+        "broad domestic-linked polypropylene family portfolio"
+      ]
+    },
+    {
+      "evidence_id": "P-ADVANCED",
+      "title": "Advanced Petrochemical company information",
+      "source": "Advanced Petrochemical",
+      "url": "https://advancedpetrochem.com/about/",
+      "status": "observed",
+      "evidence_class": "C",
+      "synthetic_flag": false,
+      "supports": [
+        "450,000 t/y nameplate capacity"
+      ]
+    },
+    {
+      "evidence_id": "P-TASNEE",
+      "title": "Tasnee petrochemicals page",
+      "source": "Tasnee",
+      "url": "https://www.tasnee.com/en/products/petrochemicals",
+      "status": "observed",
+      "evidence_class": "C",
+      "synthetic_flag": false,
+      "supports": [
+        "720,000 t/y Saudi polypropylene capacity"
+      ]
+    }
+  ]
+}

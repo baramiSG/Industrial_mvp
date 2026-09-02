@@ -136,6 +136,43 @@ def test_opportunity_select_loads_each_case(
         == f"/api/opportunities/{case.id}/ui-manifest?mode={mode}"
     )
     assert detail.status == manifest.status == 200
+    payload = detail.json()
+    by_rule = {
+        row["rule_id"]: row["result"]
+        for row in payload["rules"]
+        if row.get("synthetic_flag") is not True
+    }
+    if case == STEEL:
+        expected_results = {
+            "R3": (
+                "External supply is concentrated on the value basis; "
+                "quantity concentration is NOT_CALCULABLE."
+            ),
+            "R4-D": (
+                "A source-attributed annual unit-value dispersion summary "
+                "supports a descriptive product-mix signal; no cluster or "
+                "grade conclusion."
+            ),
+            "R11": (
+                "Gross exports are 0.1144× imports; the configured "
+                "generic-capacity warning threshold is not met."
+            ),
+        }
+    else:
+        expected_results = {
+            "R3": (
+                "Value- and quantity-basis partner concentration are "
+                "NOT_CALCULABLE."
+            ),
+            "R4-D": (
+                "A source-attributed annual unit-value dispersion summary "
+                "supports a descriptive product-mix signal; no cluster or "
+                "grade conclusion."
+            ),
+        }
+    for rule_id, expected in expected_results.items():
+        assert by_rule[rule_id] == expected
+        expect(page.locator("#workspace")).to_contain_text(expected)
 
 
 @pytest.mark.parametrize(

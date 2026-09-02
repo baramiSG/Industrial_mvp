@@ -1,17 +1,21 @@
 {
+  "schema_version": "2.0.0",
   "snapshot_id": "PUBLIC-SAU-H0-721049-2026-08-31",
   "as_of_date": "2026-08-31",
+  "supersedes": "data/snapshots/public/historical/v1/SAU-H0-721049.json",
   "source_boundary": "public",
   "authority_note": "Frozen from the public worked case in the Industrial Opportunity Resolution Methodology. Gross WITS/UN Comtrade flows; not retained domestic demand.",
   "opportunity": {
     "id": "SAU-H0-721049",
     "hs_revision": "H0",
     "hs6": "721049",
+    "national_tariff_line": "UNAVAILABLE",
     "sector_profile": "coated_steel",
     "commercial_name_en": "Non-corrugated zinc-coated flat-rolled iron or non-alloy steel, width 600 mm or more",
     "commercial_name_ar": "منتجات مسطحة مدرفلة من حديد أو صلب غير مخلوط، مطلية بالزنك، بعرض 600 مم أو أكثر، غير مموجة",
     "decision_object_status": "partially_resolved",
-    "application_boundary": "Multiple applications; target customer/application remains unresolved in public evidence."
+    "application_boundary": "Multiple applications; target customer/application remains unresolved in public evidence.",
+    "as_of_date": "2026-08-31"
   },
   "trade": [
     {
@@ -56,38 +60,96 @@
     "quantity_comparable": true,
     "execution_cap": "DEGRADED where continuity or tariff-line detail is required"
   },
-  "supplier_metrics_2024": {
-    "top_two_suppliers": [
-      "China",
-      "Korea, Rep."
-    ],
-    "top_two_value_share": 0.763,
-    "partner_value_hhi": 0.36,
-    "bulk_uv_range_usd_t": [
+  "partner_observations": "UNAVAILABLE",
+  "disclosed_concentration": {
+    "value": {
+      "year": 2024,
+      "flow": "imports",
+      "flow_basis": "gross",
+      "basis": "value",
+      "hhi": 0.36,
+      "largest_supplier_share": "UNAVAILABLE",
+      "top_two_share": 0.763,
+      "top_two_suppliers": [
+        "China",
+        "Korea, Rep."
+      ],
+      "source_evidence_id": "S-WITS-721049",
+      "status": "calculated"
+    },
+    "quantity": "UNAVAILABLE"
+  },
+  "disclosed_dispersion": {
+    "year": 2024,
+    "basis": "annual_partner",
+    "flow_basis": "gross",
+    "unit": "USD/t",
+    "valid_value_coverage": "UNAVAILABLE",
+    "valid_quantity_coverage": "UNAVAILABLE",
+    "weighted_median_usd_t": "UNAVAILABLE",
+    "iqr_usd_t": "UNAVAILABLE",
+    "bulk_band_usd_t": [
       776,
       864
     ],
-    "small_high_uv_observation": {
+    "outlier_observation": {
       "partner": "Austria",
-      "quantity_kt": 1.0,
-      "uv_usd_t": 4179
+      "net_weight_kt": 1.0,
+      "unit_value_usd_t": 4179
     },
-    "interpretation": "Concentration and product-mix investigation signal only; the high unit value is not treated as proof of grade."
+    "comparison_observations": "UNAVAILABLE",
+    "coverage_note": "Annual partner data permit only the degraded R4-D path; complete row-level value and comparable-quantity coverage are not present in the frozen fixture.",
+    "source_evidence_id": "S-WITS-721049",
+    "status": "calculated"
   },
+  "domestic_flows": {
+    "period_year": 2024,
+    "domestic_production_kt": "UNAVAILABLE",
+    "retained_imports_kt": "UNAVAILABLE",
+    "domestic_origin_exports_kt": "UNAVAILABLE",
+    "reexports_kt": "UNAVAILABLE",
+    "source_evidence_ids": []
+  },
+  "criticality_designation": "UNAVAILABLE",
   "domestic_capability": {
     "verified_present": true,
     "same_process_family": true,
     "coarse_adjacency_signals": [
-      "continuous hot-dip galvanising",
-      "cold rolling and pickling",
-      "published ASTM/SASO grades",
-      "ISO/IEC 17025 laboratory"
+      {
+        "signal_type": "core_process",
+        "description": "continuous hot-dip galvanising",
+        "evidence_ids": [
+          "S-UNICOIL-EPD"
+        ]
+      },
+      {
+        "signal_type": "core_process",
+        "description": "cold rolling and pickling",
+        "evidence_ids": [
+          "S-UNICOIL-EPD"
+        ]
+      },
+      {
+        "signal_type": "adjacent_output",
+        "description": "published ASTM/SASO grades",
+        "evidence_ids": [
+          "S-UNICOIL-EPD",
+          "S-UNICOIL-SPEC"
+        ]
+      },
+      {
+        "signal_type": "relevant_certification",
+        "description": "ISO/IEC 17025 laboratory",
+        "evidence_ids": [
+          "S-UNICOIL-EPD"
+        ]
+      }
     ],
     "producer_evidence": [
       {
         "producer": "UNICOIL",
-        "installed_capacity_tpy": 250000,
-        "process": "continuous hot-dip galvanising",
+        "process_family": "coated_steel",
+        "process_route": "continuous hot-dip galvanising",
         "published_standards": [
           "SASO-ASTM A653/A653M"
         ],
@@ -95,13 +157,28 @@
           45,
           350
         ],
-        "evidence_class": "C"
+        "installed_capacity_tpy": 250000,
+        "nameplate_status": "observed",
+        "nameplate_source_evidence_id": "S-UNICOIL-EPD",
+        "evidence_class": "C",
+        "evidence_ids": [
+          "S-UNICOIL-EPD",
+          "S-UNICOIL-SPEC"
+        ]
       },
       {
         "producer": "Hadeed",
-        "process": "cold-rolled galvanised and colour-coated coil publicly listed",
-        "installed_capacity_tpy": null,
-        "evidence_class": "C"
+        "process_family": "coated_steel",
+        "process_route": "cold-rolled galvanised and colour-coated coil publicly listed",
+        "published_standards": "UNAVAILABLE",
+        "published_coating_range_g_m2": "UNAVAILABLE",
+        "installed_capacity_tpy": "UNAVAILABLE",
+        "nameplate_status": "unresolved",
+        "nameplate_source_evidence_id": "UNAVAILABLE",
+        "evidence_class": "C",
+        "evidence_ids": [
+          "S-HADEED"
+        ]
       }
     ],
     "public_dimension_states": {
@@ -116,18 +193,19 @@
       "skills_market_integration": 1
     },
     "unresolved_hard_gates": [
-      "exact imported specification",
-      "customer/application qualification",
-      "effective spare capacity and allocation"
+      {
+        "name": "exact imported specification",
+        "state": "unresolved"
+      },
+      {
+        "name": "customer/application qualification",
+        "state": "unresolved"
+      },
+      {
+        "name": "effective spare capacity and allocation",
+        "state": "unresolved"
+      }
     ]
-  },
-  "rule_context": {
-    "domestic_production_exists": true,
-    "material_imports_exist": true,
-    "same_process_family_plus_signal": true,
-    "r4_degraded_dispersion_signal": true,
-    "strategic_resilience_review": true,
-    "generic_capacity_reject": false
   },
   "public_decision_contract": {
     "expected_state": "INVESTIGATE",
@@ -150,6 +228,8 @@
       "title": "WITS/UN Comtrade Saudi trade rows for HS 721049",
       "source": "WITS/UN Comtrade",
       "url": "https://wits.worldbank.org/trade/comtrade/en/country/SAU/year/2024/tradeflow/Imports/partner/ALL/product/721049",
+      "period": "2021/2023/2024",
+      "retrieved_at": "2026-08-31",
       "status": "observed",
       "evidence_class": "B",
       "synthetic_flag": false,
@@ -157,13 +237,18 @@
         "trade value",
         "trade quantity",
         "partner concentration"
-      ]
+      ],
+      "transformation": "Frozen annual world rows; concentration and dispersion are disclosed aggregates from the methodology worked case.",
+      "reviewer_status": "unconfirmed_by_responsible_authority",
+      "contradiction": null
     },
     {
       "evidence_id": "S-UNICOIL-EPD",
       "title": "UNICOIL 2024 Environmental Product Declaration",
       "source": "UNICOIL",
       "url": "https://www.unicoil.com.sa/wp-content/uploads/2026/05/EPD-Report_GS_Unicoil_Rev02-1_1.pdf",
+      "period": "2023/2024",
+      "retrieved_at": "2026-08-31",
       "status": "observed",
       "evidence_class": "C",
       "synthetic_flag": false,
@@ -172,13 +257,18 @@
         "process route",
         "published specification envelope",
         "laboratory accreditation"
-      ]
+      ],
+      "transformation": "UNAVAILABLE",
+      "reviewer_status": "unconfirmed_by_responsible_authority",
+      "contradiction": null
     },
     {
       "evidence_id": "S-UNICOIL-SPEC",
       "title": "UNICOIL Arabic and English galvanized product specifications",
       "source": "UNICOIL",
       "url": "https://www.unicoil.com.sa/products%26services/gi-product-brands-specifications-2/",
+      "period": "UNAVAILABLE",
+      "retrieved_at": "2026-08-31",
       "status": "observed",
       "evidence_class": "C",
       "synthetic_flag": false,
@@ -186,6 +276,8 @@
         "bilingual specification extraction",
         "published coating and dimension envelope"
       ],
+      "transformation": "UNAVAILABLE",
+      "reviewer_status": "unconfirmed_by_responsible_authority",
       "contradiction": "Published coating range differs from EPD and is retained for confirmation."
     },
     {
@@ -193,12 +285,17 @@
       "title": "Hadeed flat-products catalogue",
       "source": "Hadeed",
       "url": "https://hadeed.com.sa/products?group-category=cold-rolled-galvanized&main-category=flat-products",
+      "period": "UNAVAILABLE",
+      "retrieved_at": "2026-08-31",
       "status": "observed",
       "evidence_class": "C",
       "synthetic_flag": false,
       "supports": [
         "additional incumbent process-family evidence"
-      ]
+      ],
+      "transformation": "UNAVAILABLE",
+      "reviewer_status": "unconfirmed_by_responsible_authority",
+      "contradiction": null
     }
   ]
 }

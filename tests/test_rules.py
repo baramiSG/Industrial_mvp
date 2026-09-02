@@ -1,12 +1,27 @@
 from __future__ import annotations
 
 from copy import deepcopy
+from pathlib import Path
 
 import pytest
 
 from ior_mvp.config import thresholds_config
 from ior_mvp.data_repository import get_public_case
-from ior_mvp.rules import evaluate_rules, log_change, quantity_contribution_share
+from ior_mvp.rules import (
+    _evaluate_rules_v2,
+    _r1d_rule,
+    _r2_rule,
+    _r3_rule,
+    _r4d_rule,
+    _r5_rule,
+    _r9s_rule,
+    _r10_rule,
+    _r11_rule,
+    evaluate_rules,
+    log_change,
+    quantity_contribution_share,
+)
+from tests.legacy_snapshot_v1 import candidate_v2_from_legacy
 
 
 def by_id(rules: list[dict], rule_id: str) -> dict:
@@ -46,8 +61,10 @@ def test_pp_generic_capacity_warning_fires() -> None:
 
 
 def test_r11_missing_ratio_is_degraded_and_does_not_fire() -> None:
+    case = deepcopy(get_public_case("SAU-H0-721049"))
+    case["trade"][-1]["exports_usd_m"] = "UNAVAILABLE"
     r11 = by_id(
-        evaluate_rules(get_public_case("SAU-H0-721049")),
+        evaluate_rules(case),
         "R11",
     )
     assert r11["execution"] == "DEGRADED"
@@ -68,10 +85,10 @@ def test_r3_hhi_path_fires_when_largest_supplier_is_not_calculable() -> None:
 
 def test_r3_does_not_substitute_top_two_share_for_largest_supplier() -> None:
     case = deepcopy(get_public_case("SAU-H0-721049"))
-    supplier = case["supplier_metrics_2024"]
-    supplier["partner_value_hhi"] = 0.2499
-    supplier["top_two_value_share"] = 0.9999
-    supplier.pop("largest_supplier_share", None)
+    supplier = case["disclosed_concentration"]["value"]
+    supplier["hhi"] = 0.2499
+    supplier["top_two_share"] = 0.9999
+    supplier["largest_supplier_share"] = "UNAVAILABLE"
 
     r3 = by_id(evaluate_rules(case), "R3")
 
@@ -81,8 +98,8 @@ def test_r3_does_not_substitute_top_two_share_for_largest_supplier() -> None:
 
 def test_r3_largest_supplier_path_uses_largest_supplier_metric() -> None:
     case = deepcopy(get_public_case("SAU-H0-721049"))
-    supplier = case["supplier_metrics_2024"]
-    supplier["partner_value_hhi"] = 0.2499
+    supplier = case["disclosed_concentration"]["value"]
+    supplier["hhi"] = 0.2499
     supplier["largest_supplier_share"] = 0.5000
 
     r3 = by_id(evaluate_rules(case), "R3")
@@ -109,7 +126,7 @@ def test_degraded_uv_never_claims_grade() -> None:
 
 def test_threshold_is_loaded_from_versioned_config() -> None:
     config = thresholds_config()
-    assert config["metadata"]["version"] == "1.1.0"
+    assert config["metadata"]["version"] == "1.2.0"
     assert config["metadata"]["effective_date"] == "2026-09-02"
     assert config["rules"]["R2"][
         "minimum_quantity_contribution_share"
@@ -117,6 +134,9 @@ def test_threshold_is_loaded_from_versioned_config() -> None:
     assert config["rules"]["R11"][
         "generic_capacity_export_import_value_ratio"
     ] == 50
+    assert config["rules"]["R4_D"][
+        "minimum_valid_value_coverage"
+    ] == pytest.approx(0.70)
     assert config["metadata"]["status"] == "frozen_for_demo_cycle"
 
 
@@ -142,14 +162,348 @@ def test_r5_exposes_not_calculable_ratio_reason_and_threshold() -> None:
             "R5",
         )
 
-        assert r5["metrics"] == {
-            "retained_import_share_of_apparent_consumption": (
-                "NOT_CALCULABLE"
-            ),
-            "reason": (
-                "Domestic production quantity and retained-import "
-                "flow are absent from the frozen public snapshot; "
-                "gross imports cannot establish apparent consumption."
-            ),
-            "threshold": threshold,
+        assert r5["metrics"][
+            "retained_import_share_of_apparent_consumption"
+        ] == "NOT_CALCULABLE"
+        assert r5["metrics"]["reason"] == (
+            "Domestic production quantity and retained-import "
+            "flow are absent from the frozen public snapshot; "
+            "gross imports cannot establish apparent consumption."
+        )
+        assert r5["metrics"]["threshold"] == threshold
+        assert r5["metrics"]["retained_imports_kt"] == (
+            "NOT_CALCULABLE"
+        )
+        assert set(r5["metrics"]["unavailable_inputs"]) == {
+            "domestic_production_kt",
+            "retained_imports_kt",
+            "domestic_origin_exports_kt",
+            "reexports_kt",
         }
+
+
+def _v2_case(opportunity_id: str) -> dict:
+    return candidate_v2_from_legacy(get_public_case(opportunity_id))
+
+
+def test_v2_r1d_confidence_cap_is_projected_from_injected_config() -> None:
+    config = deepcopy(thresholds_config()["rules"]["R1_D"])
+    config["confidence_cap"] = "B"
+
+    row = _r1d_rule(_v2_case("SAU-H0-721049"), config)
+
+    assert row["metrics"]["confidence_cap"] == "B"
+    assert row["decision_effect"].endswith("confidence capped at B.")
+
+
+@pytest.mark.parametrize(
+    ("opportunity_id", "expected"),
+    [
+        (
+            "SAU-H0-721049",
+            {
+                "from_year": 2023,
+                "to_year": 2024,
+                "observed_span_years": 1,
+                "delta_ln_value": 0.2419,
+                "delta_ln_quantity": 0.5047,
+                "delta_ln_unit_value": -0.2625,
+                "quantity_contribution_share": 0.6579,
+                "quantity_cagr": 0.6565,
+            },
+        ),
+        (
+            "SAU-H0-390210",
+            {
+                "from_year": 2023,
+                "to_year": 2024,
+                "observed_span_years": 1,
+                "delta_ln_value": 0.0142,
+                "delta_ln_quantity": -0.1793,
+                "delta_ln_unit_value": 0.194,
+                "quantity_contribution_share": 0.4804,
+                "quantity_cagr": -0.1642,
+            },
+        ),
+    ],
+)
+def test_v2_r2_uses_latest_observed_pair_and_cagr(
+    opportunity_id: str,
+    expected: dict,
+) -> None:
+    row = _r2_rule(
+        _v2_case(opportunity_id),
+        thresholds_config()["rules"]["R2"],
+    )
+
+    assert row["metrics"] == expected
+
+
+def test_v2_r3_reports_both_bases_and_exact_golden_text() -> None:
+    config = thresholds_config()["rules"]["R3"]
+    steel = _r3_rule(_v2_case("SAU-H0-721049"), config)
+    polypropylene = _r3_rule(_v2_case("SAU-H0-390210"), config)
+
+    assert steel["execution"] == "FULL"
+    assert steel["fired"] is True
+    assert steel["result"] == (
+        "External supply is concentrated on the value basis; "
+        "quantity concentration is NOT_CALCULABLE."
+    )
+    assert steel["metrics"]["value"]["hhi"] == pytest.approx(0.36)
+    assert steel["metrics"]["quantity"]["status"] == "NOT_CALCULABLE"
+    assert polypropylene["execution"] == "DISABLED"
+    assert polypropylene["fired"] is None
+    assert polypropylene["result"] == (
+        "Value- and quantity-basis partner concentration are "
+        "NOT_CALCULABLE."
+    )
+
+
+def test_v2_r3_can_fire_from_quantity_basis_only() -> None:
+    case = _v2_case("SAU-H0-721049")
+    case["trade"][-1]["imports_usd_m"] = 100.0
+    case["trade"][-1]["imports_kt"] = 100.0
+    quantities = (60.0, 10.0, 10.0, 10.0, 10.0)
+    case["partner_observations"] = [
+        {
+            "year": 2024,
+            "partner": f"P{index}",
+            "flow": "imports",
+            "trade_value_usd_m": 20.0,
+            "net_weight_kt": quantity,
+            "quantity_unit": "kt",
+            "validity_flags": {
+                "value_valid": True,
+                "net_weight_valid": True,
+                "quantity_comparable": True,
+            },
+            "gross_flow": True,
+            "source_evidence_id": "S-WITS-721049",
+        }
+        for index, quantity in enumerate(quantities, start=1)
+    ]
+
+    row = _r3_rule(case, thresholds_config()["rules"]["R3"])
+
+    assert row["metrics"]["value"]["hhi"] == pytest.approx(0.2)
+    assert row["metrics"]["quantity"]["hhi"] == pytest.approx(0.4)
+    assert row["fired"] is True
+
+
+def test_v2_computed_golden_rule_states_are_evidence_derived() -> None:
+    steel = {
+        row["rule_id"]: row
+        for row in _evaluate_rules_v2(_v2_case("SAU-H0-721049"))
+    }
+    polypropylene = {
+        row["rule_id"]: row
+        for row in _evaluate_rules_v2(_v2_case("SAU-H0-390210"))
+    }
+
+    assert list(steel) == [
+        "R0",
+        "R1-F",
+        "R1-D",
+        "R2",
+        "R3",
+        "R4-F",
+        "R4-D",
+        "R5",
+        "R6",
+        "R7",
+        "R8",
+        "R9-S",
+        "R10",
+        "R11",
+        "R12",
+    ]
+    assert (steel["R4-D"]["execution"], steel["R4-D"]["fired"]) == (
+        "DEGRADED",
+        True,
+    )
+    assert (steel["R5"]["execution"], steel["R5"]["fired"]) == (
+        "DEGRADED",
+        True,
+    )
+    assert (steel["R9-S"]["execution"], steel["R9-S"]["fired"]) == (
+        "FULL",
+        True,
+    )
+    assert (steel["R10"]["execution"], steel["R10"]["fired"]) == (
+        "DEGRADED",
+        True,
+    )
+    assert (steel["R11"]["execution"], steel["R11"]["fired"]) == (
+        "FULL",
+        False,
+    )
+    assert steel["R11"]["metrics"][
+        "computed_export_import_value_ratio"
+    ] == pytest.approx(0.1144)
+    assert steel["R11"]["result"] == (
+        "Gross exports are 0.1144× imports; the configured "
+        "generic-capacity warning threshold is not met."
+    )
+
+    assert (
+        polypropylene["R4-D"]["execution"],
+        polypropylene["R4-D"]["fired"],
+    ) == ("DEGRADED", True)
+    assert (
+        polypropylene["R5"]["execution"],
+        polypropylene["R5"]["fired"],
+    ) == ("DEGRADED", True)
+    assert (
+        polypropylene["R9-S"]["execution"],
+        polypropylene["R9-S"]["fired"],
+    ) == ("FULL", True)
+    assert (
+        polypropylene["R10"]["execution"],
+        polypropylene["R10"]["fired"],
+    ) == ("DISABLED", None)
+    assert (
+        polypropylene["R11"]["execution"],
+        polypropylene["R11"]["fired"],
+    ) == ("FULL", True)
+    assert polypropylene["R11"]["metrics"][
+        "computed_export_import_value_ratio"
+    ] == pytest.approx(50.6013)
+    assert polypropylene["R11"]["metrics"][
+        "disclosed_export_import_value_ratio"
+    ] == pytest.approx(50.6)
+    assert polypropylene["R11"]["metrics"][
+        "disclosed_ratio_consistent"
+    ] is True
+
+
+def test_r4d_row_and_disabled_result_texts_are_exact() -> None:
+    case = _v2_case("SAU-H0-721049")
+    case["trade"][-1]["imports_usd_m"] = 100.0
+    case["trade"][-1]["imports_kt"] = 100.0
+    case["disclosed_dispersion"] = "UNAVAILABLE"
+    case["partner_observations"] = [
+        {
+            "year": 2024,
+            "partner": partner,
+            "flow": "imports",
+            "trade_value_usd_m": value,
+            "net_weight_kt": quantity,
+            "quantity_unit": "kt",
+            "validity_flags": {
+                "value_valid": True,
+                "net_weight_valid": True,
+                "quantity_comparable": True,
+            },
+            "gross_flow": True,
+            "source_evidence_id": "S-WITS-721049",
+        }
+        for partner, value, quantity in (
+            ("A", 40.0, 50.0),
+            ("B", 60.0, 50.0),
+        )
+    ]
+    config = thresholds_config()["rules"]["R4_D"]
+
+    row = _r4d_rule(case, config)
+    assert row["result"] == (
+        "Comparable annual partner unit values show descriptive "
+        "dispersion; no cluster or grade conclusion."
+    )
+
+    case["partner_observations"][1]["trade_value_usd_m"] = 20.0
+    disabled = _r4d_rule(case, config)
+    assert disabled["execution"] == "DISABLED"
+    assert disabled["fired"] is None
+    assert disabled["result"] == (
+        "Comparable annual partner coverage is insufficient; "
+        "R4-D is not calculable."
+    )
+
+
+def test_r5_full_path_applies_configured_penetration_threshold() -> None:
+    case = _v2_case("SAU-H0-721049")
+    case["trade"][-1]["imports_kt"] = 100.0
+    case["domestic_flows"].update(
+        {
+            "domestic_production_kt": 50.0,
+            "retained_imports_kt": 80.0,
+            "domestic_origin_exports_kt": 10.0,
+            "reexports_kt": 20.0,
+        }
+    )
+
+    row = _r5_rule(case, thresholds_config()["rules"]["R5"])
+
+    assert row["execution"] == "FULL"
+    assert row["fired"] is True
+    assert row["metrics"]["retained_imports_kt"] == pytest.approx(80.0)
+    assert row["metrics"]["net_import_exposure_kt"] == pytest.approx(
+        70.0
+    )
+    assert row["metrics"]["apparent_consumption_kt"] == pytest.approx(
+        120.0
+    )
+
+
+def test_r9s_uses_typed_signals_and_known_failure_gate() -> None:
+    case = _v2_case("SAU-H0-721049")
+    capability = case["domestic_capability"]
+    assert _r9s_rule(capability)["fired"] is True
+
+    capability["unresolved_hard_gates"][0][
+        "state"
+    ] = "known_failure"
+    assert _r9s_rule(capability)["fired"] is False
+
+    capability["same_process_family"] = "UNAVAILABLE"
+    disabled = _r9s_rule(capability)
+    assert disabled["execution"] == "DISABLED"
+    assert disabled["fired"] is None
+
+
+def test_r10_requires_designation_or_computed_concentration() -> None:
+    case = _v2_case("SAU-H0-390210")
+    r3 = _r3_rule(case, thresholds_config()["rules"]["R3"])
+    assert _r10_rule(case, r3)["execution"] == "DISABLED"
+
+    case["criticality_designation"] = {
+        "authority": "Responsible authority",
+        "reference": "REF-1",
+        "date": "2026-08-31",
+        "evidence_id": "P-WITS-390210",
+    }
+    designated = _r10_rule(case, r3)
+    assert designated["execution"] == "FULL"
+    assert designated["fired"] is True
+    assert designated["metrics"]["criticality_evidence_id"] == (
+        "P-WITS-390210"
+    )
+
+
+def test_r11_missing_exports_is_degraded_and_does_not_fire() -> None:
+    case = _v2_case("SAU-H0-721049")
+    case["trade"][-1]["exports_usd_m"] = "UNAVAILABLE"
+
+    row = _r11_rule(case, thresholds_config()["rules"]["R11"])
+
+    assert row["execution"] == "DEGRADED"
+    assert row["fired"] is False
+    assert row["metrics"]["export_import_value_ratio"] is None
+    assert row["result"] == (
+        "Export/import ratio or established nameplate capability is "
+        "NOT_CALCULABLE; no generic-capacity exclusion fires."
+    )
+
+
+def test_public_rule_engine_has_no_authored_context_or_product_dispatch() -> None:
+    source = (
+        Path(__file__).resolve().parents[1]
+        / "src"
+        / "ior_mvp"
+        / "rules.py"
+    ).read_text(encoding="utf-8")
+
+    assert "rule_context" not in source
+    assert "SAU-H0-721049" not in source
+    assert "SAU-H0-390210" not in source

@@ -21,6 +21,7 @@ from ior_mvp.evidence import (
     validate_public_evidence,
     validate_synthetic_scenario,
 )
+from ior_mvp.public_snapshot import validate_public_snapshot
 
 
 MANDATORY_SCENARIO_FIELDS = [
@@ -48,6 +49,9 @@ def test_public_snapshots_contain_no_synthetic_rows() -> None:
         "SAU-H0-390210",
     ):
         case = get_public_case(opportunity_id)
+        validate_public_snapshot(case)
+        assert case["schema_version"] == "2.0.0"
+        assert "rule_context" not in case
         validate_public_evidence(case["evidence"])
         assert all(
             row["synthetic_flag"] is False

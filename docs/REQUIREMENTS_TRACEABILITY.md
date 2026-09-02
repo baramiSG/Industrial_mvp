@@ -15,7 +15,9 @@ Statuses used on this branch are `NOT_STARTED`, `PLANNED`, `IMPLEMENTED`, `TESTE
 - **S05-REVIEW/CI/MERGE:** `reviewer_findings.md`, `pr_record.md`, and `completion.md`; cited only after those external events are observed.
 - **S06-CI:** PR #8 run `33602331107` (head `8c56a71`) and default-branch run `33602662668` (merge `6d00e27`), five jobs green each, including `browser / Chromium / Python 3.12` with 62 Chromium nodes passed.
 - **S06-LOCAL:** `.workflow/slices/S06-browser-acceptance-harness/test_evidence.md` and `implementation_log.md`; local `make e2e` observed 17 named tests / 62 Chromium nodes passed, with zero ordinary-journey collector errors, zero axe violations after focused UI defect fixes, four valid PDFs in the case/mode matrix, and 40 indexed documentary references. This entry is local implementation evidence only; it does not claim review, hosted CI, merge, closure, or release.
+- **S07-CI:** PR #9 run `33622991390` (head `104dbac`) and default-branch run `33623528164` (merge `9f045a4`), five jobs green each, including `browser / Chromium / Python 3.12` with 118 functional + 4 visual Chromium nodes passed against the canonical baselines.
 - **S07-LOCAL:** `.workflow/slices/S07-bilingual-interface-foundation/test_evidence.md` and `implementation_log.md`; local evidence covers catalogue/policy parity, token and ES-module scanners, exact vendored-font provenance, 118 bilingual functional Chromium nodes, four visual nodes comparing 40 canonical lossless WebPs, both Python versions, integrity/Gate B/smoke, and unchanged public/simulated goldens. This is implementation evidence only; it does not claim independent approval, hosted CI, PR, merge, closure, or release.
+- **S08-LOCAL:** `.workflow/slices/S08-snapshot-v2-computed-rules/test_evidence.md` and `implementation_log.md`; local evidence covers schema 2.0.0 validation/history, exact migration equivalence, computed R1-D/R2/R3/R4-D/R5/R9-S/R10/R11 behavior and boundaries, contradiction-register isolation/localization, host-owned canonical baseline regeneration, both Python versions, integrity/Gate B/smoke, and unchanged public/simulated goldens. This is implementation evidence only; it does not claim independent approval, hosted CI, PR, merge, effective limitation closure, or release.
 
 The Gate G/TL-07 proof scope now combines the preserved live HTTP/API and static contracts with Real Chromium interaction: case cards/select/hero, both evidence modes, adaptive manifests, dossier popup and clipboard, print media and PDF bytes, 15-control Tab order with visible focus, zero axe WCAG 2.1 A/AA violations, Arabic RTL/non-tofu rendering, and overflow/actionability at 1440×900, 1024×768, 1920×1080, and 2560×1440. S06 screenshots are documentary references only and are never compared; governed visual-regression oracles begin in S07 under ruling R-4.
 
@@ -34,12 +36,12 @@ The Gate G/TL-07 proof scope now combines the preserved live HTTP/API and static
 | FR-013 | Synthetic records carry flag, scenario ID, Class D, and generator source. | Policy validator and `synthetic_evidence_rows`; isolation/fidelity tests; CI-ALL. | COMPLETE | S01/S03/S04 |
 | FR-014 | UI visually distinguishes public and synthetic rows. | `app.js` ledgers and `.synthetic-row`; static tests; CI-ALL. | COMPLETE | S01 |
 | FR-015 | Retain contradictions rather than harmonising them away. | Steel evidence contradiction retained in analysis and S05 live-journey contract; CI-ALL, S05-LOCAL after observed. | COMPLETE | S01/S05 |
-| FR-020 | Evaluate and display the complete R0–R12 contract. | Public ledger plus labelled simulated R6–R8; fidelity and boundary tests; CI-S04. | COMPLETE | S01/S04 |
-| FR-021 | Every rule returns execution, fired, result, metrics, and effect. | `_rule`, synthetic row schema, live contract; fidelity tests; CI-S04. | COMPLETE | S01/S04 |
-| FR-022 | Calculate R2 log changes and quantity contribution deterministically. | `rules.log_change`, `quantity_contribution_share`; worked-case tests; CI-ALL. | COMPLETE | S01 |
-| FR-023 | R4-D never claims a cluster or grade. | R4-D result/effect; anti-grade test; CI-ALL. | COMPLETE | S01 |
-| FR-024 | R9-S opens capability assessment but does not publish D*. | R9-S ledger and steel public golden; CI-ALL. | COMPLETE | S01 |
-| FR-025 | R11 can reject unsupported generic-capacity claims. | Configured R11 predicate; boundary and PP golden tests; CI-S02–CI-S04. | COMPLETE | S02 |
+| FR-020 | Evaluate and display the complete R0–R12 contract. | Public ledger plus labelled simulated R6–R8; S08 replaces authored public flags with schema-v2 evidence derivation; fidelity, migration and boundary tests; CI-S04, S08-LOCAL. | COMPLETE | S01/S04/S08 |
+| FR-021 | Every rule returns execution, fired, result, metrics, and effect. | `_rule`, synthetic row schema, live v2 contract and complete ordered migration diff; fidelity tests; CI-S04, S08-LOCAL. | COMPLETE | S01/S04/S08 |
+| FR-022 | Calculate R2 log changes and quantity contribution deterministically. | `rules.log_change`, `quantity_contribution_share`, observed-span `compound_annual_growth`; one/two-year, missing-year and worked-case tests; CI-ALL, S08-LOCAL. | COMPLETE | S01/S08 |
+| FR-023 | R4-D never claims a cluster or grade. | Typed row/disclosure dispersion, dedicated coverage gate, protected result/effect text and anti-grade tests; CI-ALL, S08-LOCAL. | COMPLETE | S01/S08 |
+| FR-024 | R9-S opens capability assessment but does not publish D*. | Typed process-family/signal/known-failure derivation and steel public golden; CI-ALL, S08-LOCAL. | COMPLETE | S01/S08 |
+| FR-025 | R11 can reject unsupported generic-capacity claims. | Computed gross ratio plus observed A/B/C nameplate predicate, strict boundaries, PP/steel/unavailable tests and computed selector; CI-S02–CI-S04, S08-LOCAL. | COMPLETE | S02/S08 |
 | FR-030 | Effective qualified capacity equals the five-factor product. | `effective_qualified_capacity`; exact formula test; CI-ALL. | COMPLETE | S01 |
 | FR-031 | Capability uses sector-specific weights. | `sector_profiles.v1.yaml`, `evaluate_capability`; route tests; CI-ALL. | COMPLETE | S01 |
 | FR-032 | Unknown dimensions contribute U and receive λ penalty. | `evaluate_capability`; unknown-adjacency test; CI-ALL. | COMPLETE | S01 |
@@ -92,7 +94,7 @@ The Gate G/TL-07 proof scope now combines the preserved live HTTP/API and static
 | INV-05 | Decision-critical D/E evidence blocks real `ADVANCE`. | Public selector and goldens; CI-ALL. | COMPLETE | S01 |
 | INV-06 | Unknown capability cannot improve adjacency. | λ/U implementation and test; CI-ALL. | COMPLETE | S01 |
 | INV-07 | Thresholds are versioned configuration, not hidden constants. | Config predicates, recursive scanner and boundaries; CI-S02–CI-S04, S05-FOCUSED. | COMPLETE | S02/S05 |
-| INV-08 | Unit-value dispersion never proves grade. | R4-D wording and anti-grade test; CI-ALL. | COMPLETE | S01 |
+| INV-08 | Unit-value dispersion never proves grade. | R4-D row/disclosure wording, non-confirmed outlier candidate and anti-grade tests; CI-ALL, S08-LOCAL. | COMPLETE | S01/S08 |
 | INV-09 | Lower-cost/no-action routes precede supported greenfield. | Route order/no route 7 tests; CI-S04. | COMPLETE | S01/S04 |
 | INV-10 | Goldens use hashed local snapshots only. | Repository loaders/integrity; CI-ALL. | COMPLETE | S01 |
 | INV-11 | Steel public `INVESTIGATE` and PP public `REJECT` remain exact. | `test_golden_cases.py`; CI-ALL. | COMPLETE | S01 |
@@ -102,15 +104,15 @@ The Gate G/TL-07 proof scope now combines the preserved live HTTP/API and static
 
 | ID | Requirement | Implementation and execution evidence | Status | Slice |
 |---|---|---|---|---|
-| TL-01 | Integrity layer. | Integrity, mandatory metadata, isolation and scenario validators; CI-ALL. | COMPLETE | S01/S03 |
-| TL-02 | Formula unit tests. | Rules/capability/economics suites; CI-ALL. | COMPLETE | S01 |
-| TL-03 | Rule tests. | R1-D/R2/R3/R4/R11 and boundary suites; CI-S02–CI-S04. | COMPLETE | S02 |
-| TL-04 | Four golden decision combinations. | Golden and ground-truth tests; CI-ALL. | COMPLETE | S01/S04 |
+| TL-01 | Integrity layer. | Integrity, PublicSnapshot v2 schema/history/passports, mandatory metadata, isolation and scenario validators; CI-ALL, S08-LOCAL. | COMPLETE | S01/S03/S08 |
+| TL-02 | Formula unit tests. | Rules/capability/economics plus S08 CAGR/concentration/dispersion/domestic-flow/ratio/nameplate suites; CI-ALL, S08-LOCAL. | COMPLETE | S01/S08 |
+| TL-03 | Rule tests. | Evidence-derived R1-D/R2/R3/R4-D/R5/R9-S/R10/R11, migration and boundary suites; CI-S02–CI-S04, S08-LOCAL. | COMPLETE | S02/S08 |
+| TL-04 | Four golden decision combinations. | Golden, ground-truth and schema-migration equality tests; CI-ALL, S08-LOCAL. | COMPLETE | S01/S04/S08 |
 | TL-05 | Four-field bilingual extraction golden. | Extraction suite; CI-ALL. | COMPLETE | S01 |
 | TL-06 | API tests. | `test_api.py`, including list 404 and integrity 422; CI-ALL, S05-FOCUSED. | COMPLETE | S01/S05 |
 | TL-07 | Frontend contract checks. | Scope statement above; preserved static/live contracts plus S06-LOCAL real-Chromium interaction, accessibility, network, RTL, responsive, print/PDF, and documentary-reference proof. | COMPLETE | S04/S05/S06 |
-| TL-08 | Below/equal/above threshold boundaries. | `test_threshold_boundaries.py`; CI-S02–CI-S04. | COMPLETE | S02 |
-| TL-09 | Synthetic leakage assertions 1–7. | Isolation, dossier, API, and fidelity suites; CI-S03, CI-S04. | COMPLETE | S03/S04 |
+| TL-08 | Below/equal/above threshold boundaries. | `test_threshold_boundaries.py`: S08 adds both R3 bases, observed-span CAGR, R4-D coverage, R5 penetration and R11 capability conjunction; CI-S02–CI-S04, S08-LOCAL. | COMPLETE | S02/S08 |
+| TL-09 | Synthetic leakage assertions 1–7. | Isolation, dossier, API, fidelity and contradiction-register separation suites; CI-S03, CI-S04, S08-LOCAL. | COMPLETE | S03/S04/S08 |
 | GATE-A | Authority/core present; hashes pass. | Integrity and protected-byte audit; CI-ALL, S05-LOCAL after observed. | COMPLETE | S01/S05 |
 | GATE-B | Data/scenarios validate, reconcile, and back-test. | `validate_scenarios.py`; CI-S03, CI-S04. | COMPLETE | S03/S04 |
 | GATE-C | Rules visible; thresholds config-sourced; goldens exact. | Rule/golden suites and recursive scanner; CI-S02–CI-S04. | COMPLETE | S02/S05 |
@@ -171,9 +173,20 @@ The complete S05 local harness run `20260902T033607Z-17501` observed the associa
 | V3-A4 | Keyboard/focus, Arabic RTL/non-tofu, print media, and PDF bytes are browser-observed. | S06-LOCAL tests #9–#10 and #13–#14; 15-control order, four case/mode print/PDF nodes, and six RTL nodes/matrices. | COMPLETE | S06 |
 | V3-A5 | Browser console, page, request, HTTP, external-origin, accessibility, and action failures fail the gate. | S06-LOCAL tests #11–#12 and #17; ordinary collectors expose no exclusion API; observation-only self-test records all five failure categories. | COMPLETE | S06 |
 | V3-A6 | Every principal state/width has compact indexed reference evidence without becoming an oracle. | `reference-screenshots/v0.2.0/index.md`: 40 SHA-256-indexed WebPs, 4,650,022 bytes total, explicit non-oracle warning; source contract forbids screenshot comparisons. S07-LOCAL adds a separate 40-image v0.3.0 lossless-WebP oracle for 10 screens × 2 locales × 2 viewports with a hashed manifest and fixed comparator; the S06 set remains documentary and untouched. | COMPLETE | S06/S07 |
-| V3-A8 | Complete Arabic/English switching for interface chrome and governed labels. | Governed catalogue/API, URL→storage→English precedence, atomic switch, `lang`/`dir`, Western-digit formatting, source-language islands, and two-direction Playwright switch journeys; S07-LOCAL. | TESTED | S07 |
-| V3-A10 | Token-only styling, named ES modules under 200 lines, keyboard/contrast and verified bidi layout. | `check_ui_contracts.py`, `check_es_modules.py`, browserless negative fixtures, 16 keyboard nodes, 16 responsive/mirroring nodes, and 16 axe nodes; S07-LOCAL. | TESTED | S07 |
-| V3-G7 | Synthetic evidence is never described as observed, official, or Ministry-provided in either language. | Evidence policy 1.2.0 owns both labels; evidence/rules/decision/GenUI/dossier projections and every simulated browser surface display both; public surfaces display neither; S07-LOCAL. | TESTED | S07 |
+| V3-A8 | Complete Arabic/English switching for interface chrome and governed labels. | Governed catalogue/API, URL→storage→English precedence, atomic switch, `lang`/`dir`, Western-digit formatting, source-language islands, and two-direction Playwright switch journeys; S07-LOCAL. | COMPLETE | S07 |
+| V3-A10 | Token-only styling, named ES modules under 200 lines, keyboard/contrast and verified bidi layout. | `check_ui_contracts.py`, `check_es_modules.py`, browserless negative fixtures, 16 keyboard nodes, 16 responsive/mirroring nodes, and 16 axe nodes; S07-LOCAL. | COMPLETE | S07 |
+| V3-G7 | Synthetic evidence is never described as observed, official, or Ministry-provided in either language. | Evidence policy 1.2.0 owns both labels; evidence/rules/decision/GenUI/dossier projections and every simulated browser surface display both; public surfaces display neither; S07-LOCAL. | COMPLETE | S07 |
+
+## I. Milestone v0.3.0 — S08 computed public evidence
+
+| ID | Observable acceptance | Implementation and local execution evidence | Status | Slice |
+|---|---|---|---|---|
+| V3-C2-partial | Any conforming PublicSnapshot v2 executes the public R-rule ledger without Python/product-ID dispatch; generalized public decision selection remains S09. | `public_snapshot.validate_public_snapshot`, non-recursive v2-only repository, evidence-derived `rules.evaluate_rules`, schema/loader/migration/API tests; S08-LOCAL. | TESTED | S08 |
+| V3-D2 | R3 computes HHI and largest supplier independently on value and quantity, fires on either basis, and leaves absent bases `NOT_CALCULABLE`. | `trade_metrics.concentration_metrics`; both-basis below/equal/above tests; quantity-only firing test; steel value HHI 0.36; S08-LOCAL. | TESTED | S08 |
+| V3-D4 | Decision Dossier JSON/HTML retains and separates contradictory public and synthetic evidence without public leakage. | Dossier 1.1 contradiction register, catalogue 1.1.0, escaped/localized unit and 16 existing browser dossier nodes; S08-LOCAL. | TESTED | S08 |
+| V3-D7 | R5 calculates retained imports, net exposure, apparent consumption, and import penetration when inputs exist, and names every unavailable input otherwise. | `trade_metrics.domestic_flow_metrics`; numeric/unknown/penetration-boundary tests; public inputs remain unavailable pending S12; S08-LOCAL. | TESTED | S08 |
+| V3-D12 | R1-D confidence cap is configuration-sourced. | Injected-cap rule test, thresholds 1.2.0, recursive literal scan; S08-LOCAL. | TESTED | S08 |
+| V3-KL32 | Canonical baseline updates run as the host user and reject non-host-owned output. | `--user uid:gid`, identity assertion, ownership sweep tests, one 40-WebP S08 update with recursive UID 1000 proof, and green compare; S08-LOCAL. | TESTED | S08 |
 
 ## Branch and release-state rules
 

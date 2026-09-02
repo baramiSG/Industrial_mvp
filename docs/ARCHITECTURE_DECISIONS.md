@@ -103,3 +103,113 @@ S07 establishes 40 lossless WebP baselines: ten principal screens across English
 
 Core revision markers are per-document during v0.3.0: changed Core 01, 02 and 09 documents open their 2.0.0 contract with the marker authorized by ADR-010; untouched Core files remain on the frozen prior contract until their owning slice changes them. After all pre-generation regression passes, `scripts/build_manifests.py` runs once; a second, recorded run is permitted only when a later governed catalogue edit within the same slice changes the catalogue hash (S07 ran it twice: the initial governed set, then the Supervisor-review fix that added the label/value catalogue pattern). The permitted generated diff is limited to the evidence-policy row, new UI-catalogue row, Core 01/02/09 rows and `generated_on` in `authority_hashes.json`; `snapshot_manifest.json` may change only in `generated_on`. The Authority Manifest §11 rows are copied from the generated JSON after each run.
 **Consequences:** Locale switching and RTL behavior become testable application contracts without translating or altering decision semantics. Synthetic disclosures remain policy-sourced in both languages. Visual changes gain a deterministic reviewer-governed oracle; host-specific fonts and baseline auto-acceptance are not permitted. The steel public `INVESTIGATE`, polypropylene public `REJECT`, and both simulated outcomes remain unchanged. The authority edits are implementation evidence under ADR-010 and the approved S07 plan; they are not self-approval, owner approval of the Arabic wording, or delivery.
+
+---
+
+## ADR-012 — PublicSnapshot v2, computed public rules, and host-owned visual updates
+
+**Status:** Proposed 2026-09-02; implementation evidence pending independent review and delivery.
+**Context:** ADR-010 authorizes the milestone Core v2 revision. S08 removes the
+schema-v1 `rule_context` flags that authored R4-D, R5, R9-S, R10, and R11
+outcomes, implements the missing §3.3 physical-flow formulas and I2/I3
+interpretations, and must preserve the two public and two simulated golden
+outcomes. Supervisor decisions SD-1, SD-2, and SD-3 require byte-identical v1
+history, no empirical value beyond methodology §§13–14, and correction of the
+root-owned visual-update container before this slice regenerates its rendered
+oracle. Plan-review rulings PR-01–PR-04 additionally fix computed R11
+semantics, the R4-D coverage calibration, six catalogue strings, and one
+post-regression manifest-generator run.
+
+**Decision:** Classify Core 02/04/07/09 changes under Manifest §7.4. Treat the
+two live snapshot rewrites as a representation migration adjacent to §7.5,
+not an evidence refresh: the facts, source rows, `snapshot_id`, and
+`as_of_date` remain unchanged; each schema `2.0.0` record points through
+`supersedes` to a byte-identical v1 file under
+`data/snapshots/public/historical/v1/`. The steel v1 file remains SHA-256
+`10efb192d7643c5a9f60bb526cc2f9281d62e755e18978194d8ce151bf8f22f7`
+at 6,850 bytes, and the polypropylene v1 file remains
+`cc28e77dd3b9b85af4dedb864d1371809167f9242a1b4c1101ace6af8402a948`
+at 5,572 bytes. A true evidence refresh still requires a new identity and date.
+The production loader is non-recursive, accepts only live schema 2.0.0, and
+fails on unsafe history links, duplicate IDs, authored rule outcomes, invalid
+domains, unresolved evidence references, or contradictory flow arithmetic.
+
+Only methodology and frozen worked-case numbers enter v2. Missing partner
+rows, quantity concentration, domestic production/retained/re-export flows,
+and criticality remain exact `UNAVAILABLE`. Source-attributed calculated
+concentration/dispersion disclosures are valid evidence inputs but never
+rule outcomes. R2 uses the two latest usable observations and quantity CAGR
+over their observed span. R3 calculates value and quantity independently.
+R4-D calculates quantity-weighted quartiles, IQR, coverage, and a farthest
+log-distance non-confirmed `outlier_candidate`, or uses an attributed
+disclosure. R5 calculates retained imports, net exposure, apparent
+consumption, and penetration per methodology §3.3 while naming every unknown.
+R9-S uses typed process-family signals and known-failure gates. R10 uses a
+responsible-authority designation or a degraded computed-R3 resilience review.
+R11 always computes gross exports/imports from positive numeric row values,
+retains any disclosed one-decimal ratio separately, and requires absolute
+consistency within `0.05`. It fires only when the computed ratio strictly
+exceeds configuration and a positive observed A/B/C producer nameplate
+establishes domestic capability. Thus steel executes `FULL`/false at `0.1144`;
+polypropylene executes `FULL`/true at computed `50.6013`, disclosed `50.6`,
+consistent.
+
+The dedicated R4-D operating calibration is Manifest §7.3:
+`rules.R4_D.minimum_valid_value_coverage: 0.70`; thresholds metadata moves
+1.1.0 → 1.2.0. Its exact rationale is: “Methodology §5.2.2 disables the
+degraded diagnostic when comparable coverage is inadequate but states no
+figure; the R4-F comparable-quantity coverage floor is adopted as the initial
+R4-D gate.” Scope is `all`, revision/effective date is 2026-09-02, and
+0.6999/0.7000/0.7001 plus recursive literal-scanner tests bind the change.
+
+The additive contradiction-register catalogue change is Manifest §7.3:
+`ui_strings.v1.yaml` 1.0.0 → 1.1.0. The six English/Arabic pairs for the
+register heading, public subsection, synthetic subsection, public empty
+state, public-mode synthetic state, and simulated synthetic empty state are
+Supervisor-approved, owner-amendable defaults under PR-03; they are not
+represented as owner-approved wording. Dossier JSON moves 1.0 → 1.1 and
+separates public/synthetic contradictions. Public mode never scans an inactive
+scenario.
+
+The migration proof deep-compares all 15 ordered rule rows, fired/execution
+values, response identity, and public state. Its explicit differences are the
+steel R11 execution `DEGRADED` → `FULL`, steel compatibility ratio `null` →
+`0.1144`, individually named additive R2/R3/R4-D/R5/R9-S/R10/R11 metric
+keys, and the exact approved R3/R4-D/steel-R11 result text. No broad key filter
+is used. `public_decision_contract` remains only because S09 owns generalized
+state/route selection; S08 replaces its selector guard with computed
+`R11.fired`.
+
+For KL-32, the canonical baseline container runs with
+`--user <host-uid>:<host-gid>`, `HOME=/tmp`,
+`XDG_CACHE_HOME=/tmp/.cache`, and
+`PLAYWRIGHT_BROWSERS_PATH=/ms-playwright`; it asserts effective identity and
+the host runner rejects any update output not owned by the host user.
+Functional browser tests must be green before canonical update with change
+reference `S08-computed-rules-dossier-contradictions`, followed by ownership,
+image, manifest, and compare checks. The Implementer ran an initial update,
+then a full-precision self-audit found that R3, R5, and R11 predicates consumed
+rounded display metrics at near-threshold values. New RED tests proved the
+defect; predicates were corrected to consume unrounded intermediates while
+their public metrics remained four-decimal. Because the visual manifest hashes
+all engine modules, a second corrective update under the same reference was
+required after another 118-node functional pass. The rendered golden output
+did not change; both update executions and the final ownership/compare evidence
+are recorded rather than represented as one.
+
+All governed hand edits precede one planned
+`PYTHONPATH=src .venv/bin/python scripts/build_manifests.py` run after full
+regression. The allowed generated diff is: two v1 snapshot rows moved to
+historical paths with unchanged hashes/bytes; two new live v2 rows; changed
+authority rows only for thresholds, catalogue, Core 02/04/07/09; and
+`generated_on` only if the date changes. A later second run is allowed only
+for a separately justified governed fix recorded before execution. The
+visual-baseline updates are separate oracle generations, not manifest runs.
+
+**Consequences:** Public rule outcomes are evidence-derived without product-ID
+dispatch or authored flags; unavailable inputs remain unknown; unit values
+remain descriptive; steel remains public `INVESTIGATE` and simulated
+`ADVANCE` route 5; polypropylene remains public/simulated `REJECT` route 0.
+The S12 acquisition slice still owns real public production and retained-flow
+inputs, and S09 still owns generalized public decision selection. This ADR and
+local green evidence are implementation evidence, not approval.

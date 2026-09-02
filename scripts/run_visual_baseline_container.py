@@ -6,7 +6,7 @@ import subprocess
 import sys
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Sequence
+from typing import Callable, Sequence
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -55,6 +55,8 @@ def build_command(
     image: str,
     mode: str,
     change_ref: str,
+    uid: int,
+    gid: int,
     root: Path = ROOT,
 ) -> list[str]:
     """Build one shell-free Docker command from allow-listed values."""
@@ -64,6 +66,18 @@ def build_command(
         "--rm",
         "--network=none",
         "--ipc=host",
+        "--user",
+        f"{uid}:{gid}",
+        "--env",
+        "HOME=/tmp",
+        "--env",
+        "XDG_CACHE_HOME=/tmp/.cache",
+        "--env",
+        "PLAYWRIGHT_BROWSERS_PATH=/ms-playwright",
+        "--env",
+        f"IOR_HOST_UID={uid}",
+        "--env",
+        f"IOR_HOST_GID={gid}",
         "--env",
         "IOR_E2E_EXPLICIT=1",
         "--env",
@@ -98,6 +112,24 @@ def build_command(
     if change_ref:
         command.extend(["--change-ref", change_ref])
     return command
+
+
+def first_non_owned_path(
+    roots: Sequence[Path],
+    *,
+    expected_uid: int,
+    stat_func: Callable[..., os.stat_result] = os.stat,
+) -> Path | None:
+    """Return the first written path not owned by the expected host UID."""
+    for root in roots:
+        paths = [root, *sorted(root.rglob("*"))] if root.exists() else []
+        for path in paths:
+            if (
+                stat_func(path, follow_symlinks=False).st_uid
+                != expected_uid
+            ):
+                return path
+    return None
 
 
 def main(argv: Sequence[str] | None = None) -> int:
@@ -142,15 +174,46 @@ def main(argv: Sequence[str] | None = None) -> int:
             return 2
         if not mount.read_only:
             path.mkdir(parents=True, exist_ok=True)
+    uid = os.getuid()
+    gid = os.getgid()
     result = subprocess.run(
         build_command(
             docker=args.docker,
             image=args.image,
             mode=args.mode,
             change_ref=args.change_ref,
+            uid=uid,
+            gid=gid,
         ),
         check=False,
     )
+    if result.returncode != 0:
+        return result.returncode
+    if args.mode == "update":
+        writable_roots = tuple(
+            ROOT / mount.relative
+            for mount in mount_specs(ROOT)
+            if not mount.read_only
+        )
+        wrong_owner = first_non_owned_path(
+            writable_roots,
+            expected_uid=uid,
+        )
+        if wrong_owner is not None:
+            try:
+                display = wrong_owner.relative_to(ROOT)
+            except ValueError:
+                display = wrong_owner
+            actual_uid = os.stat(
+                wrong_owner,
+                follow_symlinks=False,
+            ).st_uid
+            print(
+                "VISUAL BASELINE CONTAINER ERROR: "
+                f"{display} owner uid={actual_uid}, expected uid={uid}",
+                file=sys.stderr,
+            )
+            return 2
     return result.returncode
 
 

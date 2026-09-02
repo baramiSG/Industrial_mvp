@@ -322,17 +322,26 @@ def _write_temp_fixture_pair(
     scenario: dict,
     public_case: dict,
 ) -> tuple[Path, Path]:
-    synthetic_dir = root / "synthetic"
-    public_dir = root / "public"
-    synthetic_dir.mkdir()
-    public_dir.mkdir()
+    synthetic_dir = root / "data" / "synthetic"
+    public_dir = root / "data" / "snapshots" / "public"
+    synthetic_dir.mkdir(parents=True)
+    public_dir.mkdir(parents=True)
     (synthetic_dir / "scenario.json").write_text(
         json.dumps(scenario),
         encoding="utf-8",
     )
-    (public_dir / "public.json").write_text(
+    live_name = Path(public_case["supersedes"]).name
+    (public_dir / live_name).write_text(
         json.dumps(public_case),
         encoding="utf-8",
+    )
+    historical = root / public_case["supersedes"]
+    historical.parent.mkdir(parents=True, exist_ok=True)
+    historical.write_bytes(
+        (
+            Path(__file__).resolve().parents[1]
+            / public_case["supersedes"]
+        ).read_bytes()
     )
     return synthetic_dir, public_dir
 
@@ -444,17 +453,26 @@ def test_validator_returns_two_for_invalid_json(
     tmp_path: Path,
     capsys: pytest.CaptureFixture[str],
 ) -> None:
-    synthetic_dir = tmp_path / "synthetic"
-    public_dir = tmp_path / "public"
-    synthetic_dir.mkdir()
-    public_dir.mkdir()
+    synthetic_dir = tmp_path / "data" / "synthetic"
+    public_dir = tmp_path / "data" / "snapshots" / "public"
+    synthetic_dir.mkdir(parents=True)
+    public_dir.mkdir(parents=True)
     (synthetic_dir / "broken.json").write_text(
         "{",
         encoding="utf-8",
     )
-    (public_dir / "public.json").write_text(
-        json.dumps(get_public_case("SAU-H0-721049")),
+    public_case = get_public_case("SAU-H0-721049")
+    (public_dir / "SAU-H0-721049.json").write_text(
+        json.dumps(public_case),
         encoding="utf-8",
+    )
+    historical = tmp_path / public_case["supersedes"]
+    historical.parent.mkdir(parents=True, exist_ok=True)
+    historical.write_bytes(
+        (
+            Path(__file__).resolve().parents[1]
+            / public_case["supersedes"]
+        ).read_bytes()
     )
 
     status = main(synthetic_dir, public_dir)
@@ -464,3 +482,21 @@ def test_validator_returns_two_for_invalid_json(
         "SCENARIO VALIDATION ERROR: JSONDecodeError"
         in capsys.readouterr().err
     )
+
+
+def test_validator_returns_two_for_invalid_public_snapshot(
+    tmp_path: Path,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    public_case = deepcopy(get_public_case("SAU-H0-721049"))
+    public_case["evidence"][0]["reviewer_status"] = ""
+    synthetic_dir, public_dir = _write_temp_fixture_pair(
+        tmp_path,
+        _scenario("SAU-H0-721049"),
+        public_case,
+    )
+
+    status = main(synthetic_dir, public_dir)
+
+    assert status == 2
+    assert "PublicSnapshotIntegrityError" in capsys.readouterr().err
