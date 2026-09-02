@@ -203,17 +203,96 @@ def test_docker_build_job_builds_the_repository_dockerfile() -> None:
     ) in _run_commands(job)
 
 
+def test_browser_job_is_independent_locked_and_fail_closed() -> None:
+    job = _workflow()["jobs"]["browser-gates"]
+    commands = _run_commands(job)
+    actions = _used_actions(job)
+
+    assert job["name"] == "browser / Chromium / Python 3.12"
+    assert job["runs-on"] == "ubuntu-24.04"
+    assert "needs" not in job
+    assert "if" not in job
+    assert "actions/checkout@v4" in actions
+    assert "actions/setup-python@v5" in actions
+    assert "astral-sh/setup-uv@v6" in actions
+    assert "actions/cache@v6.1.0" in actions
+    assert "actions/upload-artifact@v7.0.1" in actions
+
+    setup_python = next(
+        step
+        for step in job["steps"]
+        if step.get("uses") == "actions/setup-python@v5"
+    )
+    assert setup_python["with"]["python-version"] == "3.12"
+    setup_uv = next(
+        step
+        for step in job["steps"]
+        if step.get("uses") == "astral-sh/setup-uv@v6"
+    )
+    assert setup_uv["with"] == {
+        "enable-cache": "true",
+        "cache-dependency-glob": "uv.lock",
+    }
+
+    assert (
+        'uv sync --locked --extra dev --extra e2e --python "3.12"'
+        in commands
+    )
+    assert "sudo apt-get install --yes --no-install-recommends fonts-noto-core" in commands
+    assert (
+        "uv run --locked --extra dev --extra e2e "
+        "python -m playwright install --with-deps chromium"
+        in commands
+    )
+    assert "make UV=uv e2e" in commands
+
+    cache_step = next(
+        step
+        for step in job["steps"]
+        if step.get("uses") == "actions/cache@v6.1.0"
+    )
+    assert cache_step["with"]["path"] == "~/.cache/ms-playwright"
+    assert "runner.os" in cache_step["with"]["key"]
+    assert "runner.arch" in cache_step["with"]["key"]
+    assert "hashFiles('uv.lock')" in cache_step["with"]["key"]
+
+    upload = next(
+        step
+        for step in job["steps"]
+        if step.get("uses") == "actions/upload-artifact@v7.0.1"
+    )
+    assert upload["if"] == "${{ failure() }}"
+    assert upload["with"]["path"] == ".artifacts/e2e/"
+    assert upload["with"]["include-hidden-files"] == "true"
+    assert upload["with"]["if-no-files-found"] == "warn"
+    assert upload["with"]["retention-days"] == "14"
+
+
 def test_ci_workflow_contains_no_optional_failure_escape() -> None:
     text = WORKFLOW.read_text(encoding="utf-8")
     assert "continue-on-error" not in text
     assert "|| true" not in text
     workflow = _workflow()
-    assert set(workflow["jobs"]) == {"uv-gates", "pip-gates", "docker-build"}
-    for job in workflow["jobs"].values():
+    assert set(workflow["jobs"]) == {
+        "uv-gates",
+        "pip-gates",
+        "docker-build",
+        "browser-gates",
+    }
+    for job_name, job in workflow["jobs"].items():
         assert "if" not in job
         assert "needs" not in job
+        conditional_steps = [
+            step
+            for step in job["steps"]
+            if "if" in step
+        ]
+        if job_name == "browser-gates":
+            assert len(conditional_steps) == 1
+            assert conditional_steps[0]["if"] == "${{ failure() }}"
+        else:
+            assert conditional_steps == []
         for step in job["steps"]:
-            assert "if" not in step
             assert "continue-on-error" not in step
             if "uses" in step and step["uses"] == "actions/checkout@v4":
                 assert step["with"]["persist-credentials"] == "false"

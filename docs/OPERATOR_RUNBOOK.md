@@ -97,6 +97,34 @@ The repository `docker compose up --build` path also remains supported on port 8
 
 Never describe a simulated value as observed, official, Ministry-provided, or Class A/B/C.
 
+## Real-browser acceptance
+
+Prepare the separate pinned browser environment:
+
+```bash
+uv sync --locked --extra dev --extra e2e --python "3.12"
+uv run --locked --extra dev --extra e2e \
+  python -m playwright install chromium
+fc-match -f '%{family}|%{file}\n' ':lang=ar'
+make e2e
+```
+
+On an authorized Linux host, use Playwright's
+`python -m playwright install --with-deps chromium` form to install operating
+system dependencies. Do not use that form where `sudo` is unavailable or
+unauthorized. Hosted CI performs the authorized dependency install and adds
+`fonts-noto-core`.
+
+The command owns a kernel-assigned localhost socket, waits for the exact
+health contract, runs all 62 Chromium nodes, and sends SIGTERM to its uvicorn
+child. An explicit gate never skips missing prerequisites. Diagnostics,
+failure screenshots/traces, PDFs, axe output, and ordinary references stay
+under ignored `.artifacts/e2e/`.
+
+The tracked S06 reference set contains 40 compact WebPs covering ten states at
+four viewports. It documents the v0.2.0 surface and is not a comparison
+oracle; governed visual baselines begin in S07.
+
 ## Demonstration sequence
 
 Follow `docs/implementation/MINISTRY_DEMO_SCRIPT.md`:
@@ -114,7 +142,7 @@ make ci
 bash scripts/final_acceptance.sh
 ```
 
-`make ci` runs locked sync, prohibited and credential-pattern scan, recursive threshold-literal scan, Python compile, JavaScript syntax, integrity, Gate B scenario validation/back-test, pytest, and smoke. `final_acceptance.sh` additionally proves the clean pip path, container runtime, live journeys, performance, failures, restart, reversal, documents, archive, and repository keyword dispositions.
+`make ci` runs locked sync, prohibited and credential-pattern scan, recursive threshold-literal scan, Python compile (including `browser_tests`), JavaScript syntax, integrity, Gate B scenario validation/back-test, pytest, smoke, browser preflight, and all 62 real-Chromium nodes. `final_acceptance.sh` additionally proves the clean pip path, container runtime, live HTTP journeys, performance, failures, restart, reversal, documents, archive, and repository keyword dispositions.
 
 Do not run the manifest generator unless an approved authority change identifies the exact governed bytes and passes Authority Manifest §7.
 
@@ -129,6 +157,13 @@ Do not run the manifest generator unless an approved authority change identifies
 - Prohibited scan failure: a tracked path or configured credential pattern violates policy.
 - NFR-005 failure: preserve samples and endpoint and reproduce before optimization.
 - Docker/health failure: inspect container logs, port occupancy, image build, and process exit.
+- Browser preflight failure: install the exact e2e pins and matching Chromium,
+  verify the vendored axe SHA-256/licence, and check `fc-match :lang=ar`.
+- Browser launch shared-library failure: use an authorized supported Linux
+  environment with Playwright's documented system dependencies.
+- Browser journey failure: inspect `.artifacts/e2e/` for collector records,
+  retained traces/screenshots, axe details, PDF output, and server logs. Never
+  add an external-origin exception, axe exclusion, retry, or fixed wait.
 
 Do not weaken a test, change a golden result, or regenerate hashes to clear a failure.
 

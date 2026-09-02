@@ -51,8 +51,8 @@ The owner's 2026-09-02 completion-build mandate is the methodology-owner approva
 
 **Status:** Accepted 2026-09-02.
 **Context:** `baramiSG/Industrial_mvp` is a private repository on a GitHub plan where branch-protection rules and rulesets are not available. The owner mandate forbids merging past red checks and forbids administrative overrides.
-**Decision:** Before any merge the Supervisor runs `gh pr checks <pr>` and requires every job (`uv / Python 3.12`, `uv / Python 3.14`, `pip / Python 3.12`, `Docker image build`) to be green on the current PR head, zero Supervisor findings and zero independent-reviewer findings, then merges with `gh pr merge --squash`. Cancelled or skipped jobs are not green. The PR record in `.workflow/slices/*/pr_record.md` captures the checks output.
-**Consequences:** Enforcement is procedural and auditable through the slice records; if the repository later moves to a plan with rulesets, the same four checks become required checks.
+**Decision:** Before any merge the Supervisor runs `gh pr checks <pr>` and requires every job (`uv / Python 3.12`, `uv / Python 3.14`, `pip / Python 3.12`, `Docker image build`, `browser / Chromium / Python 3.12`) to be green on the current PR head, zero Supervisor findings and zero independent-reviewer findings, then merges with `gh pr merge --squash`. Cancelled or skipped jobs are not green. The PR record in `.workflow/slices/*/pr_record.md` captures the checks output.
+**Consequences:** Enforcement is procedural and auditable through the slice records; if the repository later moves to a plan with rulesets, the same five checks become required checks.
 
 ## ADR-008 — Evidence-policy validation, public-marginal reconciliation and authority disclosure fail closed
 

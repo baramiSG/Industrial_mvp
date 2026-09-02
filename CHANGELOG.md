@@ -1,5 +1,18 @@
 # Changelog
 
+## Unreleased
+
+- Added exact-pinned Playwright/Chromium journeys for both evidence modes,
+  both golden cases, every existing selection path, dossier popup, and real
+  clipboard output.
+- Added fail-closed console, page-error, request, app-HTTP, external-origin,
+  keyboard/focus, WCAG 2.1 A/AA, Arabic RTL/non-tofu, and responsive gates.
+- Added print-media and Chromium PDF proof for all four case/mode states.
+- Captured 40 compact v0.2.0 documentary reference screenshots without
+  introducing a visual-regression oracle.
+- Added an independent Ubuntu 24.04 browser CI job and appended the same
+  browser gate to local `make ci`.
+
 ## 0.2.0 — 2026-09-02
 
 - Added multi-version GitHub CI and reproducible `uv`/pip/Docker quality gates.

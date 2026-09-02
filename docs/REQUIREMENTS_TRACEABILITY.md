@@ -13,8 +13,9 @@ Statuses used on this branch are `NOT_STARTED`, `PLANNED`, `IMPLEMENTED`, `TESTE
 - **S05-FOCUSED:** `.workflow/slices/S05-final-acceptance/implementation_log.md` and `test_evidence.md`; includes observed RED→GREEN and characterization/NFR runs.
 - **S05-LOCAL:** `.workflow/slices/S05-final-acceptance/acceptance_results.md` and `test_evidence.md`; cited only after the complete 42-step runner is observed.
 - **S05-REVIEW/CI/MERGE:** `reviewer_findings.md`, `pr_record.md`, and `completion.md`; cited only after those external events are observed.
+- **S06-LOCAL:** `.workflow/slices/S06-browser-acceptance-harness/test_evidence.md` and `implementation_log.md`; local `make e2e` observed 17 named tests / 62 Chromium nodes passed, with zero ordinary-journey collector errors, zero axe violations after focused UI defect fixes, four valid PDFs in the case/mode matrix, and 40 indexed documentary references. This entry is local implementation evidence only; it does not claim review, hosted CI, merge, closure, or release.
 
-The Gate G/TL-07 proof scope is: live HTTP/API contracts plus static HTML/CSS/JavaScript checks for case selection and mode controls, dual states, adaptive approved-component manifest, dossier action and printable HTML, RTL markup, semantic native controls, responsive media rules, disclosure, and offline assets. No Playwright/real-browser interaction, paint, keyboard traversal, or print-render run is claimed; see KL-22.
+The Gate G/TL-07 proof scope now combines the preserved live HTTP/API and static contracts with Real Chromium interaction: case cards/select/hero, both evidence modes, adaptive manifests, dossier popup and clipboard, print media and PDF bytes, 15-control Tab order with visible focus, zero axe WCAG 2.1 A/AA violations, Arabic RTL/non-tofu rendering, and overflow/actionability at 1440×900, 1024×768, 1920×1080, and 2560×1440. S06 screenshots are documentary references only and are never compared; governed visual-regression oracles begin in S07 under ruling R-4.
 
 ## A. Functional requirements — Core 01 §6
 
@@ -72,8 +73,8 @@ The Gate G/TL-07 proof scope is: live HTTP/API contracts plus static HTML/CSS/Ja
 | NFR-003 | Unknown hard gates reduce permission. | Capability publication conjunction; hard-gate test; CI-ALL. | COMPLETE | S01 |
 | NFR-004 | Packaged demo runs without API keys or live data calls. | Offline loaders/static assets; CDN test and CI-ALL. | COMPLETE | S01 |
 | NFR-005 | Warm loaded-case API responses normally complete below 250 ms. | `tests/test_performance.py`: one excluded warm-up and median of five real TestClient calls on all 18 routes; S05-FOCUSED. Live localhost medians are added by S05-LOCAL. | COMPLETE | S05 |
-| NFR-006 | Semantic, high-contrast, keyboard-reachable interface. | Native buttons/select/labels and contrast/static contracts; CI-ALL. Real traversal is outside KL-22. | COMPLETE | S01/S05 |
-| NFR-007 | Arabic text renders RTL without corruption. | RTL markup and source spans; static test; CI-ALL. | COMPLETE | S01 |
+| NFR-006 | Semantic, high-contrast, keyboard-reachable interface. | Native controls and static contrast contracts; S06-LOCAL observes all 15 controls in DOM Tab order with `:focus-visible` and changed focus signatures at eight mode/viewport combinations, plus zero workspace/dossier axe violations. | COMPLETE | S01/S05/S06 |
+| NFR-007 | Arabic text renders RTL without corruption. | RTL markup/source spans plus S06-LOCAL computed `direction: rtl`, non-empty/non-zero nodes, `document.fonts.ready`, fontconfig, canvas Arabic-vs-U+FFFD differentiation, and distinct glyph signatures. | COMPLETE | S01/S06 |
 | NFR-008 | Demo runs in WSL, native Linux, and Docker. | Run scripts, pip/uv paths, Dockerfile; CI-ALL. | COMPLETE | S01 |
 | NFR-009 | Domain calculations are callable without web layer. | `decision_engine.analyze` and direct unit callers; CI-ALL. | COMPLETE | S01 |
 | NFR-010 | No uploaded Ministry data is packaged. | Public and explicit synthetic-only artifacts; isolation/prohibited tests; CI-ALL. | COMPLETE | S01 |
@@ -105,7 +106,7 @@ The Gate G/TL-07 proof scope is: live HTTP/API contracts plus static HTML/CSS/Ja
 | TL-04 | Four golden decision combinations. | Golden and ground-truth tests; CI-ALL. | COMPLETE | S01/S04 |
 | TL-05 | Four-field bilingual extraction golden. | Extraction suite; CI-ALL. | COMPLETE | S01 |
 | TL-06 | API tests. | `test_api.py`, including list 404 and integrity 422; CI-ALL, S05-FOCUSED. | COMPLETE | S01/S05 |
-| TL-07 | Frontend contract checks. | Scope statement above; static suite and live payload contracts; CI-S04, S05-LOCAL after observed; KL-22. | COMPLETE | S04/S05 |
+| TL-07 | Frontend contract checks. | Scope statement above; preserved static/live contracts plus S06-LOCAL real-Chromium interaction, accessibility, network, RTL, responsive, print/PDF, and documentary-reference proof. | COMPLETE | S04/S05/S06 |
 | TL-08 | Below/equal/above threshold boundaries. | `test_threshold_boundaries.py`; CI-S02–CI-S04. | COMPLETE | S02 |
 | TL-09 | Synthetic leakage assertions 1–7. | Isolation, dossier, API, and fidelity suites; CI-S03, CI-S04. | COMPLETE | S03/S04 |
 | GATE-A | Authority/core present; hashes pass. | Integrity and protected-byte audit; CI-ALL, S05-LOCAL after observed. | COMPLETE | S01/S05 |
@@ -114,7 +115,7 @@ The Gate G/TL-07 proof scope is: live HTTP/API contracts plus static HTML/CSS/Ja
 | GATE-D | Capacity/unknown/D* gates are exact. | Capability suites; CI-ALL. | COMPLETE | S01 |
 | GATE-E | Unsupported economics first; S* minimal; PP gets no support. | Economics and golden suites; CI-ALL. | COMPLETE | S01 |
 | GATE-F | Zero leakage, dual states, labelled synthetic rows. | Isolation/fidelity/dossier suites; CI-S03, CI-S04. | COMPLETE | S03/S04 |
-| GATE-G | Product controls, adaptive manifest, dossier, Arabic, responsiveness. | Exact API/static scope statement above; CI-S04, S05-LOCAL after observed; KL-22. | COMPLETE | S04/S05 |
+| GATE-G | Product controls, adaptive manifest, dossier, Arabic, responsiveness. | Exact combined scope statement above; S06-LOCAL observes every existing control path, adaptive states, popup/clipboard, axe/focus, Arabic glyphs, print/PDF, and four widths in Chromium. | COMPLETE | S04/S05/S06 |
 | GATE-H | Authorized release gates only. | Authorized generators ran only in S02–S04. S05 has no governed change and does not run a generator; make/clean-pip/integrity/Gate B/pytest/smoke/Docker are S05-LOCAL evidence after observed. | COMPLETE | S01–S05 |
 
 ## E. Build-control requirements
@@ -143,8 +144,8 @@ The complete S05 local harness run `20260902T033607Z-17501` observed the associa
 | DOD-05 | Two public golden outcomes are exact. | Golden suite and live HTTP states; S05-LOCAL steps 02, 11, 20. | COMPLETE | S05 |
 | DOD-06 | Steel simulated transition is exact and disclosed. | Live detail/manifest/dossier contracts; S05-LOCAL step 20. | COMPLETE | S05 |
 | DOD-07 | PP simulation still rejects support. | Live state/route/no-support contracts; S05-LOCAL step 20. | COMPLETE | S05 |
-| DOD-08 | Interface is usable at desktop/tablet widths. | API/static scoped proof only; KL-22; S05-LOCAL steps 02, 11, 20. | COMPLETE | S05 |
-| DOD-09 | Dossier exists in JSON and printable HTML. | Four case/mode live contracts; S05-LOCAL step 20. | COMPLETE | S05 |
+| DOD-08 | Interface is usable at desktop/tablet widths. | S05 static/live contracts plus S06-LOCAL real rendering, 15-control keyboard traversal, no page overflow, and actionability at desktop, tablet, and two presentation widths. | COMPLETE | S05/S06 |
+| DOD-09 | Dossier exists in JSON and printable HTML. | Four case/mode live contracts plus S06-LOCAL real popup/clipboard, print computed styles, and four Chromium PDFs with valid header/trailer/page object and non-trivial bytes. | COMPLETE | S05/S06 |
 | DOD-10 | Documentation and source are included in one zip. | CRC/member/prohibited-artifact archive audit; S05-LOCAL steps 38–40. | COMPLETE | S05 |
 
 ## G. MVP success criteria — Core 01 §9
@@ -157,6 +158,17 @@ The complete S05 local harness run `20260902T033607Z-17501` observed the associa
 | SC-04 | Synthetic evidence is honest and controlled. | Class/source/flag/label/disclosure and fingerprint tests; CI-S03, CI-S04. | COMPLETE | S03/S04 |
 | SC-05 | Calculations, thresholds, and evidence are inspectable. | Threshold endpoint, rule ledger, authority and evidence objects; CI-ALL. | COMPLETE | S01–S04 |
 | SC-06 | Output is a route and Decision Dossier, not a ranking. | Decision route plus JSON/HTML dossier contracts; CI-ALL. | COMPLETE | S01 |
+
+## H. Milestone v0.3.0 — Real-browser acceptance
+
+| ID | Observable acceptance | Implementation and local execution evidence | Status | Slice |
+|---|---|---|---|---|
+| V3-A1 | Real Chromium Playwright end-to-end tests run in a dedicated gate. | Exact-pinned `e2e` extra, top-level `browser_tests/`, `make e2e`, and independent `browser-gates` workflow job; S06-LOCAL 62/62. | TESTED | S06 |
+| V3-A2 | Every existing selector, evidence-mode, navigation, dossier, and clipboard path is exercised. | S06-LOCAL tests #1–#8 cover both cards, both select values, steel hero, both mode directions, five navigation buttons, methodology hero, four popups, and four real clipboard payloads. | TESTED | S06 |
+| V3-A3 | Desktop, tablet, and presentation widths have no page overflow and retain actionable primary controls. | S06-LOCAL test #15 covers both modes at all four approved viewports with visible/enabled/trial-click checks. | TESTED | S06 |
+| V3-A4 | Keyboard/focus, Arabic RTL/non-tofu, print media, and PDF bytes are browser-observed. | S06-LOCAL tests #9–#10 and #13–#14; 15-control order, four case/mode print/PDF nodes, and six RTL nodes/matrices. | TESTED | S06 |
+| V3-A5 | Browser console, page, request, HTTP, external-origin, accessibility, and action failures fail the gate. | S06-LOCAL tests #11–#12 and #17; ordinary collectors expose no exclusion API; observation-only self-test records all five failure categories. | TESTED | S06 |
+| V3-A6 | Every principal state/width has compact indexed reference evidence without becoming an oracle. | `reference-screenshots/v0.2.0/index.md`: 40 SHA-256-indexed WebPs, 4,650,022 bytes total, explicit non-oracle warning; source contract forbids screenshot comparisons. | TESTED | S06 |
 
 ## Branch and release-state rules
 

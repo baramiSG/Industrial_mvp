@@ -6,7 +6,7 @@ Development uses repository code, frozen public evidence, and explicitly synthet
 
 ## Prerequisites
 
-Use WSL or native Linux with Python 3.11 or newer, Git, Make, Node, and `uv`. Docker is required for image/runtime compatibility checks.
+Use WSL or native Linux with Python 3.11 or newer, Git, Make, Node, and `uv`. Docker is required for image/runtime compatibility checks. Real-browser acceptance additionally uses Python 3.12, `playwright==1.62.0`, `pytest-playwright==0.9.0`, matching Playwright Chromium, fontconfig, and an Arabic-capable font.
 
 The Makefile defaults to `NODE ?= node`. If Node is user-scoped:
 
@@ -48,9 +48,65 @@ The target executes:
 6. governed-file integrity;
 7. Gate B scenario policy/reconciliation/ground-truth back-test;
 8. full pytest;
-9. domain/extraction smoke.
+9. domain/extraction smoke;
+10. real-Chromium prerequisite validation and the 62-node browser suite.
 
 Any nonzero exit blocks review. Manifest generation is not a routine gate.
+
+## Real-browser acceptance
+
+Install the separate browser-test environment without changing the preserved
+`dev` extra:
+
+```bash
+uv sync --locked --extra dev --extra e2e --python "3.12"
+uv run --locked --extra dev --extra e2e \
+  python -m playwright install chromium
+fc-match -f '%{family}|%{file}\n' ':lang=ar'
+make e2e
+```
+
+The `uv-sync-e2e` target installs the locked `dev` and `e2e` extras used by `make e2e`.
+
+On a Linux host where package installation is authorized, Playwright can
+install its system dependencies with:
+
+```bash
+uv run --locked --extra dev --extra e2e \
+  python -m playwright install --with-deps chromium
+```
+
+Do not use `--with-deps` where `sudo` is unavailable or unauthorized. The
+host must instead provide Playwright's documented Chromium libraries and an
+Arabic-capable font. CI installs `fonts-noto-core` and runs the authorized
+`--with-deps` command on Ubuntu 24.04.
+
+`make e2e` starts the application on a kernel-assigned `127.0.0.1` port,
+waits for `/api/health`, runs headless Chromium, and terminates the child
+server. It fails rather than skipping when packages, Chromium, vendored
+axe-core, its MPL-2.0 licence, asset integrity, or Arabic font coverage is
+missing. Direct diagnostic `pytest browser_tests` may skip at session scope
+when prerequisites are absent; it is not an acceptance gate.
+
+The browser suite is top-level `browser_tests/`, outside the default
+`testpaths = ["tests"]`, so the normal pytest and `.[dev]` paths remain
+browser-independent. Runtime output is ignored under `.artifacts/e2e/`:
+server logs, retained-on-failure traces/screenshots, axe diagnostics, PDFs,
+and ordinary reference captures. The 40 tracked v0.2.0 WebPs under the S06
+slice record are documentary references only; no test compares them. S07
+owns governed visual-regression baselines.
+
+Focused examples:
+
+```bash
+IOR_E2E_EXPLICIT=1 PYTHONPATH=src \
+  uv run --locked --extra dev --extra e2e pytest -q \
+  browser_tests/test_dossier.py --browser chromium
+
+IOR_E2E_EXPLICIT=1 PYTHONPATH=src \
+  uv run --locked --extra dev --extra e2e pytest -q \
+  browser_tests/test_accessibility.py --browser chromium
+```
 
 ## Final acceptance
 
@@ -88,7 +144,9 @@ PYTHONPATH=src python scripts/demo_smoke.py
 
 ## Lock maintenance
 
-`pyproject.toml` is the dependency and package-metadata source. Regenerate `uv.lock` only after an intentional change:
+`pyproject.toml` is the dependency and package-metadata source. The `dev`
+extra remains pytest/httpx only; Playwright belongs to the separate exact-pinned
+`e2e` extra. Regenerate `uv.lock` only after an intentional change:
 
 ```bash
 "$HOME/.local/bin/uv" lock
@@ -147,7 +205,7 @@ The S05 edit to `config/project.yaml project.version` is an approved unhashed re
 
 ## CI topology
 
-GitHub Actions runs locked `uv` gates on Python 3.12 and 3.14, the documented pip path on Python 3.12, and an independent Docker image build. Workflow permissions are read-only for repository contents and checkout credentials are not persisted. Cancelled or skipped jobs are not green.
+GitHub Actions runs locked `uv` gates on Python 3.12 and 3.14, the documented pip path on Python 3.12, an independent Docker image build, and `browser / Chromium / Python 3.12` on Ubuntu 24.04. The browser job installs `fonts-noto-core`, the matching Chromium and system dependencies, caches Playwright by `uv.lock`, and uploads `.artifacts/e2e/` only when the job fails. Workflow permissions are read-only for repository contents and checkout credentials are not persisted. Cancelled or skipped jobs are not green.
 
 ## Failure interpretation
 
@@ -162,6 +220,14 @@ GitHub Actions runs locked `uv` gates on Python 3.12 and 3.14, the documented pi
 - Gate B 2: execution/input error;
 - pytest/smoke failure: implementation or frozen behavior is nonconformant;
 - Docker/health failure: image/runtime compatibility issue;
+- browser preflight failure: inspect exact package versions, matching Chromium
+  executable, axe SHA-256/licence, and `fc-match :lang=ar`;
+- Chromium shared-library failure: install Playwright's documented Linux
+  dependencies in an authorized environment; do not bypass the gate;
+- console/page/request/HTTP/external-origin failure: inspect the retained trace,
+  server log, and sanitized collector records;
+- axe, focus, overflow, RTL/tofu, print, or PDF failure: reproduce the named
+  node and fix the product defect; exclusions and fixed waits are prohibited;
 - final acceptance nonzero: inspect every step code and its full log.
 
 ## Evidence and detached execution

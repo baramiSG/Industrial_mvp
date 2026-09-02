@@ -18,3 +18,9 @@ dist/
 # Local agent scratch and detached-run logs
 .superpowers/
 .workflow/logs/
+
+# Real-browser acceptance runtime artifacts (tracked references live in the S06 slice record)
+.artifacts/e2e/
+test-results/
+playwright-report/
+node_modules/

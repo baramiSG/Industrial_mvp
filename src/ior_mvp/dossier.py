@@ -133,10 +133,11 @@ def render_dossier_html(dossier: dict[str, Any]) -> str:
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{e(dossier['decision_headline'])}</title>
 <style>
+:root{{--dossier-muted:#5f7389}}
 body{{font-family:Inter,Arial,sans-serif;color:#13233a;margin:0;background:#eef3f7}}
 .page{{max-width:1050px;margin:28px auto;background:white;padding:44px;box-shadow:0 12px 40px rgba(12,32,56,.12)}}
 h1{{font-size:30px;margin:0 0 6px}} h2{{font-size:16px;text-transform:uppercase;letter-spacing:.08em;color:#53677f;border-bottom:1px solid #dce5ed;padding-bottom:8px}}
-.meta{{color:#667a91;margin-bottom:24px}} .state{{display:inline-block;padding:7px 11px;border-radius:999px;background:#102a43;color:white;font-weight:700}}
+.meta{{color:var(--dossier-muted);margin-bottom:24px}} .state{{display:inline-block;padding:7px 11px;border-radius:999px;background:#102a43;color:white;font-weight:700}}
 .grid{{display:grid;grid-template-columns:1fr 1fr;gap:24px}} .box{{border:1px solid #dce5ed;border-radius:12px;padding:18px}}
 .warning{{background:#fff5d6;border:1px solid #e7b93e;padding:14px;border-radius:10px;margin:18px 0}}
 .small{{font-size:12px;color:#65768a}} ul{{padding-left:20px}} @media print{{body{{background:white}}.page{{box-shadow:none;margin:0;max-width:none}}}}

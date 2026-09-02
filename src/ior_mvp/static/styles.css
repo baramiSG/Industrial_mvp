@@ -4,15 +4,18 @@
   --ink-850: #102a43;
   --ink-800: #173b5e;
   --ink-700: #36556f;
-  --ink-600: #60758a;
-  --ink-500: #8091a3;
+  --ink-600: #52677b;
+  --ink-500: #576b7f;
   --paper: #f4f7f9;
   --surface: #ffffff;
   --line: #dce5ec;
   --line-strong: #c7d3dd;
   --teal: #0f9f91;
+  --teal-text: #08766d;
+  --teal-on-dark: #2dd4bf;
   --teal-soft: #ddf7f2;
   --gold: #c79435;
+  --gold-text: #76510d;
   --gold-soft: #fff5dc;
   --red: #bd3d45;
   --red-soft: #fde8ea;
@@ -106,7 +109,8 @@ button { cursor: pointer; }
   z-index: 15;
 }
 .topbar h1 { font-size: 22px; margin: 1px 0 0; line-height: 1.2; }
-.eyebrow { margin: 0; color: var(--teal); text-transform: uppercase; letter-spacing: .12em; font-size: 10px; font-weight: 800; }
+.eyebrow { margin: 0; color: var(--teal-text); text-transform: uppercase; letter-spacing: .12em; font-size: 10px; font-weight: 800; }
+.hero-section .eyebrow, .governance-section .eyebrow { color: var(--teal-on-dark); }
 .topbar-actions { display: flex; align-items: center; gap: 12px; }
 .mode-control { padding: 4px; background: #e8eef2; border: 1px solid #d6e0e8; border-radius: 12px; display: flex; }
 .mode-button { border: 0; background: transparent; color: var(--ink-600); padding: 9px 13px; border-radius: 9px; font-size: 12px; font-weight: 700; transition: .2s; }
@@ -165,7 +169,7 @@ button { cursor: pointer; }
 .opportunity-card::after { content: ""; position: absolute; inset: auto -60px -80px auto; width: 170px; height: 170px; border-radius: 50%; background: rgba(15,159,145,.055); }
 .opportunity-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
 .opportunity-top { display: flex; justify-content: space-between; gap: 14px; align-items: start; }
-.opportunity-code { font-size: 11px; font-weight: 850; letter-spacing: .08em; color: var(--teal); }
+.opportunity-code { font-size: 11px; font-weight: 850; letter-spacing: .08em; color: var(--teal-text); }
 .opportunity-card h3 { margin: 8px 0 6px; font-size: 20px; max-width: 600px; }
 .opportunity-card .arabic { color: var(--ink-600); margin: 0 0 20px; font-family: "Segoe UI", Tahoma, sans-serif; }
 .opportunity-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; border-top: 1px solid var(--line); padding-top: 16px; }
@@ -179,10 +183,10 @@ button { cursor: pointer; }
 .state-MONITOR { background: var(--blue-soft); color: #285d92; }
 
 .workspace-section { background: #edf3f6; }
-.workspace-heading { align-items: center; }
-.workspace-tools { display: flex; align-items: center; gap: 10px; }
+.workspace-heading { align-items: center; flex-wrap: wrap; }
+.workspace-tools { display: flex; align-items: center; gap: 10px; min-width: 0; max-width: 100%; }
 .select-label { font-size: 11px; font-weight: 800; text-transform: uppercase; color: var(--ink-600); letter-spacing: .08em; }
-select { min-width: 320px; border: 1px solid var(--line-strong); padding: 10px 35px 10px 12px; border-radius: 10px; background: #fff; color: var(--ink-850); }
+select { min-width: 320px; max-width: 100%; border: 1px solid var(--line-strong); padding: 10px 35px 10px 12px; border-radius: 10px; background: #fff; color: var(--ink-850); }
 .workspace-grid { display: grid; grid-template-columns: minmax(0, 1.28fr) minmax(320px, .72fr); gap: 18px; align-items: start; }
 .workspace-card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); box-shadow: var(--shadow-soft); overflow: hidden; }
 .workspace-card.full { grid-column: 1 / -1; }
@@ -231,11 +235,11 @@ select { min-width: 320px; border: 1px solid var(--line-strong); padding: 10px 3
 .exec-chip { padding: 4px 7px; border-radius: 999px; font-size: 9px; font-weight: 850; display: inline-flex; }
 .exec-FULL { background: var(--teal-soft); color: #076f63; }
 .exec-DEGRADED { background: var(--gold-soft); color: #876016; }
-.exec-DISABLED { background: #edf1f4; color: #718194; }
+.exec-DISABLED { background: #edf1f4; color: var(--ink-700); }
 .rule-fire { font-weight: 850; }
-.fire-yes { color: var(--teal); }
+.fire-yes { color: var(--teal-text); }
 .fire-no { color: var(--ink-500); }
-.fire-na { color: var(--gold); }
+.fire-na { color: var(--gold-text); }
 .capability-summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
 .capability-summary div { background: #f5f8fa; border: 1px solid var(--line); border-radius: 12px; padding: 12px; }
 .capability-summary small { display: block; color: var(--ink-500); font-size: 9px; text-transform: uppercase; }
@@ -270,7 +274,7 @@ select { min-width: 320px; border: 1px solid var(--line-strong); padding: 10px 3
 .extraction-card h3 { margin: 0 0 12px; text-transform: capitalize; font-size: 15px; }
 .language-block { background: #f6f9fb; border: 1px solid var(--line); padding: 11px; border-radius: 10px; margin-top: 8px; font-size: 12px; }
 .normalized-block { margin-top: 12px; padding: 11px; border-radius: 10px; background: var(--teal-soft); color: #075f56; font-size: 11px; }
-.pass-mark { color: var(--teal); font-weight: 900; }
+.pass-mark { color: var(--teal-text); font-weight: 900; }
 .fail-mark { color: var(--red); font-weight: 900; }
 
 .governance-section { background: #071827; color: #fff; }
@@ -293,10 +297,22 @@ select { min-width: 320px; border: 1px solid var(--line-strong); padding: 10px 3
 .toast.show { opacity: 1; transform: translateY(0); }
 .empty-state { padding: 30px; text-align: center; color: var(--ink-600); }
 
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto !important; }
+  *, *::before, *::after {
+    animation-duration: 0s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0s !important;
+  }
+}
+
 @media (max-width: 1180px) {
   :root { --sidebar: 220px; }
   .sidebar { padding: 24px 15px; }
   .hero-section { grid-template-columns: 1fr; }
+  .workspace-heading { align-items: flex-start; flex-direction: column; }
+  .workspace-tools { width: 100%; }
+  .workspace-tools select { width: 100%; }
   .decision-flow { grid-template-columns: repeat(4,1fr); align-items: stretch; }
   .flow-line { width: 100%; height: 1px; margin: auto; }
   .flow-node { grid-template-columns: 1fr; text-align: center; }
