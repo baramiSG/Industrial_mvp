@@ -7,7 +7,7 @@
     "reviewer_model": "cursor-grok-4.6-xhigh",
     "rule": "IMPLEMENTER_MODEL != SUPERVISOR_MODEL and REVIEWER_MODEL != IMPLEMENTER_MODEL (reviewer also != supervisor)"
   },
-  "execution_note": "Supervisor's direct shell tool is unavailable this session; all shell execution is delegated to shell subagents via detached scripts under .workflow/runs/ with logs under .workflow/logs/ (ignored), verified by the Supervisor reading files and gh output. Implementer agents must use the detached-script + log-read protocol for every command; an agent whose shell backend dies is replaced by a fresh agent on the same approved plan.",
+  "execution_note": "Supervisor's direct shell tool was unavailable this session; all shell execution was delegated to shell subagents via detached scripts under .workflow/runs/ with logs under .workflow/logs/ (ignored), verified by the Supervisor reading files and gh output.",
   "github": {
     "remote": "https://github.com/baramiSG/Industrial_mvp",
     "owner": "baramiSG",
@@ -16,26 +16,39 @@
     "auth": "gh CLI, account baramiSG, scopes repo+workflow",
     "merge_policy": "squash; ADR-007 Supervisor gate (gh pr checks all pass)"
   },
-  "current_slice": "S05-final-acceptance",
-  "state": "IMPLEMENTING",
-  "main_head": "98c1a40225a94090238867bc9861e8c6544b5839",
+  "current_slice": "S05-release-state",
+  "state": "COMPLETE",
+  "state_note": "COMPLETE is effective on the squash merge of release-state PR #6 with its four checks and default-branch CI green; the annotated tag v0.2.0 is placed on that merge commit by the Supervisor. If PR #6 is not merged, the project state is READY_TO_MERGE.",
+  "main_head_before_release_state": "55304dbfbd49f69d567406faddcc308aea65c804",
+  "release": {"version": "0.2.0", "tag": "v0.2.0", "tag_commit": "squash merge of PR #6 (see git show --no-patch v0.2.0)"},
   "slices": {
     "S00-baseline-import": {"state": "MERGED", "branch": "main", "pr": null, "merge_commit": "0731ae546f79c9ac3bfd92612a01f07da67937ed"},
-    "S01-ci-and-toolchain": {"state": "MERGED", "branch": "slice/S01-ci-and-toolchain", "pr": "https://github.com/baramiSG/Industrial_mvp/pull/1", "merge_commit": "432af8af1fa88a2258a0fd8d825a6855e408270f", "base": "0731ae546f79c9ac3bfd92612a01f07da67937ed", "ci_runs": ["33569855956", "33570112914"], "tests": 72, "planner_model": "gpt-5.6-sol-max", "implementer_model": "gpt-5.6-sol-max", "reviewer_model": "cursor-grok-4.6-xhigh"},
-    "S02-threshold-governance": {"state": "MERGED", "branch": "slice/S02-threshold-governance", "pr": "https://github.com/baramiSG/Industrial_mvp/pull/2", "merge_commit": "c43837054c5581e68cfe7ed87d914a89cd4f63a3", "base": "432af8af1fa88a2258a0fd8d825a6855e408270f", "ci_runs": ["33573669072"], "tests": 136, "authority_change": "thresholds.v1.yaml 1.0.0 -> 1.1.0 (ADR-005)", "planner_model": "gpt-5.6-sol-max", "implementer_model": "gpt-5.6-sol-max", "reviewer_model": "cursor-grok-4.6-xhigh"},
-    "S03-evidence-isolation-hardening": {"state": "MERGED", "branch": "slice/S03-evidence-isolation-hardening", "pr": "https://github.com/baramiSG/Industrial_mvp/pull/3", "merge_commit": "ddf905d5051fe3b4468bdcd793a8a640f5040048", "base": "c43837054c5581e68cfe7ed87d914a89cd4f63a3", "ci_runs": ["33579923763"], "tests": 191, "authority_change": "evidence_policy.v1.yaml 1.0.0 -> 1.1.0 (ADR-008)", "planner_model": "gpt-5.6-sol-max", "implementer_model": "gpt-5.6-sol-max (agent 03f26fc4; 9fe6340e replaced after shell-backend failure)", "reviewer_model": "cursor-grok-4.6-xhigh"},
-    "S04-simulation-fidelity": {"state": "MERGED", "plan_approved": "2026-09-02 (2 rounds)", "planner_model": "gpt-5.6-sol-max", "implementer_model": "gpt-5.6-sol-max", "reviewer_model": "cursor-grok-4.6-xhigh", "ci_runs": ["33584437086"], "tests": 231, "branch": "slice/S04-simulation-fidelity", "pr": "https://github.com/baramiSG/Industrial_mvp/pull/4", "merge_commit": "98c1a40225a94090238867bc9861e8c6544b5839", "base": "ddf905d5051fe3b4468bdcd793a8a640f5040048", "authority_change": "data/synthetic/*.json ground_truth + decision_narrative (ADR-006); snapshot_manifest regenerated once"},
-    "S05-final-acceptance": {"state": "IMPLEMENTING", "branch": "slice/S05-final-acceptance", "pr": null, "merge_commit": null, "base": "98c1a40225a94090238867bc9861e8c6544b5839", "plan_approved": "2026-09-02 (2 rounds; rulings OQ-01 release-state PR, project.yaml version 0.2.0)", "planner_model": "gpt-5.6-sol-max", "implementer_model": "gpt-5.6-sol-max", "reviewer_model": "cursor-grok-4.6-xhigh"}
+    "S01-ci-and-toolchain": {"state": "MERGED", "pr": "https://github.com/baramiSG/Industrial_mvp/pull/1", "merge_commit": "432af8af1fa88a2258a0fd8d825a6855e408270f", "ci_runs": ["33569855956", "33570112914"], "tests": 72},
+    "S02-threshold-governance": {"state": "MERGED", "pr": "https://github.com/baramiSG/Industrial_mvp/pull/2", "merge_commit": "c43837054c5581e68cfe7ed87d914a89cd4f63a3", "ci_runs": ["33573669072"], "tests": 136, "authority_change": "thresholds.v1.yaml 1.0.0 -> 1.1.0 (ADR-005)"},
+    "S03-evidence-isolation-hardening": {"state": "MERGED", "pr": "https://github.com/baramiSG/Industrial_mvp/pull/3", "merge_commit": "ddf905d5051fe3b4468bdcd793a8a640f5040048", "ci_runs": ["33579923763"], "tests": 191, "authority_change": "evidence_policy.v1.yaml 1.0.0 -> 1.1.0 (ADR-008)"},
+    "S04-simulation-fidelity": {"state": "MERGED", "pr": "https://github.com/baramiSG/Industrial_mvp/pull/4", "merge_commit": "98c1a40225a94090238867bc9861e8c6544b5839", "ci_runs": ["33584437086"], "tests": 231, "authority_change": "synthetic scenarios 1.1.0 ground_truth + decision_narrative (ADR-006)"},
+    "S05-final-acceptance": {"state": "MERGED", "pr": "https://github.com/baramiSG/Industrial_mvp/pull/5", "merge_commit": "55304dbfbd49f69d567406faddcc308aea65c804", "ci_runs": ["33589765172", "33589819341"], "tests": 280, "acceptance_run": "20260902T040100Z-95877 42/42", "final_review": "cursor-grok-4.6-xhigh APPROVE after one fix round (RV-01..05)"},
+    "S05-release-state": {"state": "PR_OPEN", "branch": "slice/S05-release-state", "pr": "#6", "merge_commit": null, "content": "docs/state only: traceability TESTED->COMPLETE, BC-08 COMPLETE, final report facts, progress, S05 completion, state.json"}
   },
-  "last_updated": "2026-09-02T04:40:00+03:00",
+  "models_used": {
+    "supervisor": "claude-fable-5-1-thinking-max",
+    "planners_implementers": "gpt-5.6-sol-max (agents 8d536d85, 3c1e305b, 9fe6340e/03f26fc4, 08cc9197/7c3e692c, 6f19d842/15bfa326)",
+    "reviewers": "cursor-grok-4.6-xhigh (agents 48645d66, 080a70fa, 5aef4c24, 1194ea8b, a458ec49)",
+    "shell_launchers": "composer-2.5-fast"
+  },
+  "owner_action_items": [
+    "Rotate any credentials in the local git-ignored .env (never tracked, never packaged, never read by the Supervisor).",
+    "Optionally move the repository to a GitHub plan with rulesets so the four CI checks become required checks (ADR-007)."
+  ],
+  "last_updated": "2026-09-02T07:15:00+03:00",
   "history": [
     {"at": "2026-09-02T01:05:00+03:00", "event": "Build control established; repository read end to end; GitHub destination verified (private, empty)."},
     {"at": "2026-09-02T01:13:00+03:00", "event": "S00 baseline imported to main (0731ae5); integrity/35 tests/smoke pass."},
     {"at": "2026-09-02T02:15:20+03:00", "event": "S01 merged (432af8a) via PR #1; CI green 4/4 twice; 72 tests."},
     {"at": "2026-09-02T03:05:10+03:00", "event": "S02 merged (c438370) via PR #2; CI green 4/4; 136 tests; thresholds 1.1.0."},
     {"at": "2026-09-02T04:36:47+03:00", "event": "S03 merged (ddf905d) via PR #3; CI green 4/4; 191 tests; evidence_policy 1.1.0; Gate B in CI."},
-    {"at": "2026-09-02T04:40:00+03:00", "event": "S04 simulation fidelity started; branch created from ddf905d."},
     {"at": "2026-09-02T05:46:39+03:00", "event": "S04 merged (98c1a40) via PR #4; CI green 4/4; 231 tests; scenarios 1.1.0 with ground truth."},
-    {"at": "2026-09-02T05:50:00+03:00", "event": "S05 final acceptance started; branch created from 98c1a40."}
+    {"at": "2026-09-02T07:11:06+03:00", "event": "S05 implementation merged (55304db) via PR #5; PR CI 4/4; main CI success; acceptance 42/42; 280 tests; final review APPROVE."},
+    {"at": "2026-09-02T07:15:00+03:00", "event": "Release-state PR #6 opened; COMPLETE effective on its merge; tag v0.2.0 to follow."}
   ]
 }
