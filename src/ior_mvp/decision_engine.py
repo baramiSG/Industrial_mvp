@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Any, Literal
 
 from .capability import effective_qualified_capacity, evaluate_capability
-from .config import project_config
+from .config import project_config, thresholds_config
 from .data_repository import get_public_case, get_synthetic_scenario, public_cases
 from .economics import (
     approximate_evsi,
@@ -98,8 +98,29 @@ def analyze_public(opportunity_id: str) -> dict[str, Any]:
     }
 
 
+def competition_warning(
+    post_entry_capacity_to_downside_demand: float,
+    competition_config: dict[str, Any],
+) -> bool:
+    return post_entry_capacity_to_downside_demand > float(
+        competition_config[
+            "post_entry_capacity_to_downside_demand_warning"
+        ]
+    )
+
+
 def _simulate_steel(public: dict[str, Any], scenario: dict[str, Any]) -> dict[str, Any]:
     inputs = scenario["synthetic_inputs"]
+    thresholds = thresholds_config()
+    competition_config = thresholds["competition"]
+    warning_threshold = float(
+        competition_config[
+            "post_entry_capacity_to_downside_demand_warning"
+        ]
+    )
+    incremental_upgrade_max = float(
+        thresholds["capability"]["route_bands"]["incremental_upgrade_max"]
+    )
     line = inputs["plant_line"]
     capacity = effective_qualified_capacity(
         line["nameplate_kt"],
@@ -125,11 +146,15 @@ def _simulate_steel(public: dict[str, Any], scenario: dict[str, Any]) -> dict[st
     ratio = (
         capacity + inputs["upgrade"]["incremental_capacity_kt"]
     ) / demand["downside_demand_kt"]
+    warning_fires = competition_warning(ratio, competition_config)
     competition = {
         "post_entry_capacity_to_downside_demand": round(ratio, 4),
-        "warning_threshold": 1.25,
-        "passes_default_warning": ratio <= 1.25,
-        "displacement_m_sar": inputs["economics"]["national_value"]["displacement"],
+        "warning_threshold": warning_threshold,
+        "warning_fires": warning_fires,
+        "passes_default_warning": not warning_fires,
+        "displacement_m_sar": inputs["economics"]["national_value"][
+            "displacement"
+        ],
     }
     evsi = approximate_evsi(inputs["evsi"])
 
@@ -137,7 +162,7 @@ def _simulate_steel(public: dict[str, Any], scenario: dict[str, Any]) -> dict[st
         gap > 0
         and capability["route_publishable"]
         and capability["d_star"] is not None
-        and capability["d_star"] <= 0.40
+        and capability["d_star"] <= incremental_upgrade_max
         and economics["passes"]
         and national_value["positive"]
         and competition["passes_default_warning"]

@@ -34,5 +34,8 @@ Plan: 2 rounds → PLAN_APPROVED (Supervisor). Implementation review: 1 LOW (IR-
 ## SCREENSHOTS
 Not applicable (no UI change).
 
+## OUTCOME (appended after merge)
+PR #1 https://github.com/baramiSG/Industrial_mvp/pull/1 — heads `b0b2ab4` (run 33569855956, 4/4 pass) and `030dbfe` (run 33570112914, 4/4 pass). `gh pr checks 1`: 4 pass / 4 total. Squash-merged to `main` as `432af8af1fa88a2258a0fd8d825a6855e408270f` at 2026-09-01T23:15:14Z; branch deleted.
+
 ## EXPLICIT NON-GOALS
 No engine/threshold/data/core changes; no hash regeneration; no new runtime dependency; no live connectors; no branch-protection configuration (unavailable on this plan — ADR-007); no change to Dockerfile, START_DEMO_WSL.sh, docker-compose.yml, requirements.txt, .env.example or .gitignore.

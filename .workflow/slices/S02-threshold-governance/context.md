@@ -1,0 +1,21 @@
+# Context — S02 Threshold Governance
+
+## Base and branch
+- Base: `main` after S01 squash merge (record SHA in plan Task 0). Branch: `slice/S02-threshold-governance`.
+- Toolchain: `~/.local/bin/uv` (0.11.31), `make ci` green at 72 tests on S01 head. CI: `.github/workflows/ci.yml` (uv 3.12/3.14, pip 3.12, Docker).
+
+## Exact defects to close (Supervisor findings from the full read, 2026-09-02)
+1. `src/ior_mvp/decision_engine.py` `_simulate_steel`: `capability["d_star"] <= 0.40` (route band edge) and `ratio <= 1.25` plus `"warning_threshold": 1.25` (competition). Both values already exist in `config/thresholds.v1.yaml`: `capability.route_bands.incremental_upgrade_max` and `competition.post_entry_capacity_to_downside_demand_warning`.
+2. `src/ior_mvp/rules.py` R11: `export_import_ratio > 50`. Not in config. Methodology §14.2: "exporting more than 50× the import value" → strictly greater. New key required: `rules.R11.generic_capacity_export_import_value_ratio: 50` (with `rationale`, `sector_scope: all`, `revision_date`), `metadata.version` 1.0.0 → 1.1.0, `metadata.effective_date`/`revision_date` updated to the change date. The existing `R11.downside_cost_premium_over_import_parity: 0.25` is a different test (Appendix B "Economic exclusion") and stays.
+3. `src/ior_mvp/rules.py` R3: `supplier.get("top_two_value_share", 0) >= thresholds["R3"]["largest_supplier_share"]` compares top-two share against a largest-supplier threshold (methodology §4: "HHI ≥0.25 or top supplier ≥50%"). Public snapshots carry `top_two_value_share` and `partner_value_hhi`, not `largest_supplier_share`. Steel fires on HHI 0.36 regardless. Fix: apply the largest-supplier test only when `largest_supplier_share` is present; otherwise record it as NOT_CALCULABLE in metrics; never compare top-two to the largest threshold.
+4. `src/ior_mvp/static/app.js` `renderMetricGrid`: literal caption `"Resilience review threshold: 0.25"`. Must come from the analysis payload (e.g. R3 rule metrics carrying the threshold used), not the UI.
+5. No boundary tests (Core 09 §3). No validator prevents literals returning.
+
+## Constraints
+- Golden outcomes must not change: steel/public INVESTIGATE (R1-D, R2, R3, R4-D, R9-S fire; D\* None); steel/simulated ADVANCE route 5 (57.509 kt, 46.491 kt gap, D\* 0.2667, S\* 18m, ΔNV 198m, ratio < 1.25); PP/public REJECT route 0 (R2 not fired, R11 fired, ratio 50.6); PP/simulated REJECT.
+- `config/thresholds.v1.yaml` is the ONLY governed file that may change; `sector_profiles.v1.yaml`, `evidence_policy.v1.yaml`, `data/**`, `docs/core/**`, DOCX unchanged. After the change and full regression, run `python3 scripts/build_manifests.py` once (regenerates BOTH manifests — verify `snapshot_manifest.json` shows no diff except `generated_on`; if `generated_on` changes for the snapshot manifest, that is acceptable and must be stated) and update the `<!-- HASH_TABLE -->` row for `config/thresholds.v1.yaml` in `docs/authority/00_AUTHORITY_MANIFEST.md` §11 (this file is not hashed).
+- `tests/test_rules.py::test_threshold_is_loaded_from_versioned_config` asserts version `"1.0.0"` → becomes `"1.1.0"`; this expected-value change is the authorised consequence of ADR-005 and must be called out in the PR.
+- Validator design constraint: must catch `0.40`, `1.25`, `50` (and any value present in thresholds YAML) used as a comparison literal in `src/ior_mvp/*.py`; must not flag formula constants (`state / 3`, `0 <= state <= 3`, `* 1000`, IRR bracketing `-0.9999`, `1.0`, `1024`, `250`, tolerances `1e-9`), nor `0`, `1`, `2`, `3` used as bounds. Suggested rule: Compare-node comparators that are numeric `ast.Constant` whose float value is in the set of numeric values found anywhere in `thresholds.v1.yaml`, excluding {0, 1, 2, 3}. Must include a red test on a temporary module.
+- Prefer extracting small pure predicate functions (e.g. `r2_fires(...)`, `r3_fires(...)`, `competition_warning(...)`, `publication_allowed(...)`) that receive metrics and the config so boundary tests can hit exact below/equal/above values; `evaluate_rules` keeps its contract.
+- SG-TR-007: type hints on every public function; no bare except. SG-TR-008: any CSS change uses tokens (none expected).
+- Execution: shell channel drops long commands; use detached scripts under `.workflow/logs/` (ignored) and read logs. Commit/push/PR/merge are Supervisor-controlled.

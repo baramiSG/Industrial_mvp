@@ -6,9 +6,9 @@ Updated by the Supervisor at every slice completion. Items marked *pre-existing*
 
 | ID | Limitation | Source of requirement | Closing slice |
 |---|---|---|---|
-| KL-01 | Threshold literals `0.40`, `1.25` in `decision_engine._simulate_steel` and `50` in `rules.py` R11 duplicate or bypass `thresholds.v1.yaml` (*pre-existing*). | AGENTS.md #7; Core 07 §9 | S02 |
-| KL-02 | R3 compares `top_two_value_share` with `largest_supplier_share` (*pre-existing*). | Methodology §4 R3 | S02 |
-| KL-03 | No threshold boundary tests (below/equal/above) exist (*pre-existing*). | Core 09 §3 | S02 |
+| KL-01 | S02 implementation removes the pre-existing threshold literals and adds an AST guard; closure remains pending independent review, CI and merge. | AGENTS.md #7; Core 07 §9 | S02 |
+| KL-02 | S02 implementation compares like-for-like R3 measures and reports missing largest-supplier share as `NOT_CALCULABLE`; closure remains pending independent review, CI and merge. | Methodology §4 R3 | S02 |
+| KL-03 | S02 implementation adds below/equal/above threshold tests; closure remains pending independent review, CI and merge. | Core 09 §3 | S02 |
 | KL-04 | `evidence_policy.v1.yaml` does not list `display_label` as required; a scenario missing it raises `KeyError`, not `EvidenceIntegrityError` (*pre-existing*). | Core 06 §4 | S03 |
 | KL-05 | No validator reconciles synthetic scenarios to public marginals (*pre-existing*). | Core 06 §5.1, §10.2; Core 09 Gate B | S03 |
 | KL-06 | Analysis response does not expose methodology/config versions per case (*pre-existing*). | FR-001 | S03 |

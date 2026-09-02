@@ -39,6 +39,68 @@ def quantity_contribution_share(delta_ln_q: float, delta_ln_uv: float) -> float:
     return abs(delta_ln_q) / denominator
 
 
+NOT_CALCULABLE = "NOT_CALCULABLE"
+
+
+def r1d_fires(
+    positive_years: list[int],
+    rule_config: dict[str, Any],
+) -> bool:
+    if not positive_years:
+        return False
+    window_span_years = max(positive_years) - min(positive_years)
+    return (
+        len(positive_years) >= int(rule_config["positive_observed_years"])
+        and window_span_years < int(rule_config["window_years"])
+    )
+
+
+def r2_fires(
+    delta_ln_quantity: float,
+    contribution_share: float,
+    quantity_growth: float,
+    rule_config: dict[str, Any],
+) -> bool:
+    positive_quantity_required = bool(
+        rule_config["require_positive_quantity_growth"]
+    )
+    return (
+        (not positive_quantity_required or delta_ln_quantity > 0)
+        and contribution_share
+        >= float(rule_config["minimum_quantity_contribution_share"])
+        and quantity_growth >= float(rule_config["minimum_quantity_cagr"])
+    )
+
+
+def r3_fires(
+    hhi: float | None,
+    largest_supplier_share: float | None,
+    rule_config: dict[str, Any],
+) -> bool:
+    hhi_fires = (
+        hhi is not None and hhi >= float(rule_config["supplier_hhi"])
+    )
+    largest_supplier_fires = (
+        largest_supplier_share is not None
+        and largest_supplier_share
+        >= float(rule_config["largest_supplier_share"])
+    )
+    return hhi_fires or largest_supplier_fires
+
+
+def r11_generic_capacity_fires(
+    generic_capacity_reject: bool,
+    export_import_value_ratio: float | None,
+    rule_config: dict[str, Any],
+) -> bool:
+    return bool(
+        generic_capacity_reject
+        and export_import_value_ratio is not None
+        and export_import_value_ratio
+        > float(rule_config["generic_capacity_export_import_value_ratio"])
+    )
+
+
 def evaluate_rules(case: dict[str, Any]) -> list[dict[str, Any]]:
     thresholds = thresholds_config()["rules"]
     trade = sorted(case["trade"], key=lambda row: row["year"])
@@ -71,14 +133,10 @@ def evaluate_rules(case: dict[str, Any]) -> list[dict[str, Any]]:
         )
     )
 
-    positive_years = [row["year"] for row in trade if row.get("imports_usd_m", 0) > 0]
-    window_ok = bool(positive_years) and max(positive_years) - min(positive_years) <= (
-        thresholds["R1_D"]["window_years"] - 1
-    )
-    r1d_fired = (
-        len(positive_years) >= thresholds["R1_D"]["positive_observed_years"]
-        and window_ok
-    )
+    positive_years = [
+        row["year"] for row in trade if row.get("imports_usd_m", 0) > 0
+    ]
+    r1d_fired = r1d_fires(positive_years, thresholds["R1_D"])
     results.append(
         _rule(
             "R1-D",
@@ -106,11 +164,12 @@ def evaluate_rules(case: dict[str, Any]) -> list[dict[str, Any]]:
         )
         delta_uv = log_change(uv_latest, uv_previous)
         share = quantity_contribution_share(delta_q, delta_uv)
-        r2_fired = (
-            delta_q > 0
-            and share >= thresholds["R2"]["minimum_quantity_contribution_share"]
-            and (latest["imports_kt"] / previous["imports_kt"] - 1)
-            >= thresholds["R2"]["minimum_quantity_cagr"]
+        quantity_growth = latest["imports_kt"] / previous["imports_kt"] - 1
+        r2_fired = r2_fires(
+            delta_q,
+            share,
+            quantity_growth,
+            thresholds["R2"],
         )
         r2_result = (
             "Quantity-led expansion signal fires."
@@ -149,9 +208,13 @@ def evaluate_rules(case: dict[str, Any]) -> list[dict[str, Any]]:
 
     supplier = case.get("supplier_metrics_2024")
     if supplier:
-        r3_fired = (
-            supplier.get("partner_value_hhi", 0) >= thresholds["R3"]["supplier_hhi"]
-            or supplier.get("top_two_value_share", 0) >= thresholds["R3"]["largest_supplier_share"]
+        r3_config = thresholds["R3"]
+        hhi = supplier.get("partner_value_hhi")
+        largest_supplier_share = supplier.get("largest_supplier_share")
+        r3_fired = r3_fires(
+            hhi,
+            largest_supplier_share,
+            r3_config,
         )
         results.append(
             _rule(
@@ -159,10 +222,21 @@ def evaluate_rules(case: dict[str, Any]) -> list[dict[str, Any]]:
                 "Supplier concentration",
                 "FULL",
                 r3_fired,
-                "External supply is concentrated." if r3_fired else "Concentration threshold not met.",
+                "External supply is concentrated."
+                if r3_fired
+                else "Concentration threshold not met.",
                 "Generate a resilience/diversification review, not an automatic localisation recommendation.",
                 {
-                    "hhi": supplier.get("partner_value_hhi"),
+                    "hhi": hhi,
+                    "hhi_threshold": float(r3_config["supplier_hhi"]),
+                    "largest_supplier_share": (
+                        largest_supplier_share
+                        if largest_supplier_share is not None
+                        else NOT_CALCULABLE
+                    ),
+                    "largest_supplier_threshold": float(
+                        r3_config["largest_supplier_share"]
+                    ),
                     "top_two_share": supplier.get("top_two_value_share"),
                 },
             )
@@ -272,8 +346,11 @@ def evaluate_rules(case: dict[str, Any]) -> list[dict[str, Any]]:
 
     latest = trade[-1]
     export_import_ratio = latest.get("export_import_value_ratio")
-    r11 = bool(context.get("generic_capacity_reject")) and bool(
-        export_import_ratio is not None and export_import_ratio > 50
+    r11_config = thresholds["R11"]
+    r11 = r11_generic_capacity_fires(
+        bool(context.get("generic_capacity_reject")),
+        export_import_ratio,
+        r11_config,
     )
     results.append(
         _rule(
@@ -287,7 +364,12 @@ def evaluate_rules(case: dict[str, Any]) -> list[dict[str, Any]]:
                 else "No public-data generic-capacity exclusion fires."
             ),
             "Reject generic support or move only a named specialty exception to investigation.",
-            {"export_import_value_ratio": export_import_ratio},
+            {
+                "export_import_value_ratio": export_import_ratio,
+                "export_import_value_ratio_threshold": float(
+                    r11_config["generic_capacity_export_import_value_ratio"]
+                ),
+            },
         )
     )
 

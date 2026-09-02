@@ -6,6 +6,14 @@ from typing import Any
 def build_ui_manifest(analysis: dict[str, Any]) -> dict[str, Any]:
     active = analysis["active_decision"]
     real = analysis["real_decision"]
+    r3_metrics = next(
+        (
+            row["metrics"]
+            for row in analysis["rules"]
+            if row["rule_id"] == "R3"
+        ),
+        {},
+    )
     components: list[dict[str, Any]] = [
         {
             "type": "integrity_banner",
@@ -37,6 +45,7 @@ def build_ui_manifest(analysis: dict[str, Any]) -> dict[str, Any]:
                 "supplier_metrics": analysis.get("supplier_metrics"),
                 "capacity": analysis.get("capacity"),
                 "economics": analysis.get("economics"),
+                "supplier_concentration": r3_metrics,
             },
         },
         {

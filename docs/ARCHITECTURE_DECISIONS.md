@@ -34,9 +34,9 @@ Decisions below are subordinate to the methodology DOCX, `docs/core/*` and `AGEN
 
 ## ADR-005 — Threshold values live only in versioned configuration; config edits go through the §7.3 gate with owner authority
 
-**Status:** Proposed for S02.
+**Status:** Accepted 2026-09-02.
 **Context:** `AGENTS.md` #7 and Core 07 §9 forbid threshold duplicates in code. The v0.1.0 engine embeds `0.40` (route band), `1.25` (competition warning) and `50` (R11 export/import ratio, stated in methodology §14.2). The first two already exist as keys in `thresholds.v1.yaml`; the third does not.
-**Decision:** Engine code reads existing keys for `0.40` and `1.25`. The R11 export/import ratio is added as a new key under `rules.R11` with rationale, sector scope and revision date; `metadata.version` moves 1.0.0 → 1.1.0 (file name `thresholds.v1.yaml` retained as the v1 major line). Authority hashes are regenerated only through `scripts/build_manifests.py` inside the reviewed PR, with the golden regression proving both public outcomes unchanged. The owner's 2026-09-02 mandate is recorded as the methodology-owner approval for this operating-configuration change. An AST-based validator test fails the build if a threshold-bearing literal reappears in engine code.
+**Decision:** Engine code reads existing keys for `0.40` and `1.25`. The R11 export/import ratio is added as `rules.R11.generic_capacity_export_import_value_ratio` with rationale, sector scope and revision date; `metadata.version` moves 1.0.0 → 1.1.0 (file name `thresholds.v1.yaml` retained as the v1 major line). Authority hashes are regenerated only through `scripts/build_manifests.py` inside the reviewed PR, with strict-boundary sensitivity tests and the golden regression proving both public outcomes and the steel simulated outcome unchanged. The owner's 2026-09-02 mandate is recorded as the methodology-owner approval for this operating-configuration change. An AST-based validator test fails the build if a threshold-bearing literal reappears in engine code.
 **Consequences:** `test_threshold_is_loaded_from_versioned_config` asserts the new version string; the change is an explicit, reviewed authority update rather than a silent regeneration.
 
 ## ADR-006 — Simulated-state selection is data-driven from scenario content, not opportunity IDs

@@ -1,0 +1,22 @@
+S02: externalise thresholds to config, fix R3 semantics, add AST guard and boundary tests
+
+Engine and frontend no longer embed threshold values: the D* route gate,
+competition warning and R11 export/import ratio read keys from
+config/thresholds.v1.yaml; R3 compares largest-supplier share only with
+the largest-supplier threshold (absent -> NOT_CALCULABLE) and never
+substitutes top-two share; the UI resilience caption renders the
+configured HHI threshold from the payload.
+
+Authority change (Manifest s7.3, ADR-005): thresholds 1.0.0 -> 1.1.0 adds
+rules.R11.generic_capacity_export_import_value_ratio = 50 (methodology
+s14.2 "more than 50x", strictly greater). No existing value changed.
+scripts/build_manifests.py run once after full regression;
+authority_hashes.json and Manifest s11 updated
+(32d868f9506f325e980f3363079031a75534d3829b30131548c2e6d36a23d261,
+3,700 bytes; sha256sum verified). snapshot_manifest.json: generated_on only.
+
+Adds scripts/check_threshold_literals.py (AST comparison-literal guard,
+wired into CI and make ci) and Core 09 s3 boundary tests for R1-D, R2,
+R3, R11, Kmin, D* bands and the competition ratio. 136 tests pass;
+integrity and smoke pass; golden outcomes unchanged. Plan approved
+(2 rounds); Supervisor review 0 findings; independent Grok review APPROVE.

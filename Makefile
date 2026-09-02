@@ -31,6 +31,7 @@ lock:
 
 ci: uv-sync
 	$(UV_RUN) python scripts/check_prohibited_files.py
+	$(UV_RUN) python scripts/check_threshold_literals.py
 	$(UV_RUN) python -m compileall -q src scripts tests
 	$(NODE) --check src/ior_mvp/static/app.js
 	PYTHONPATH=src $(UV_RUN) python scripts/verify_integrity.py

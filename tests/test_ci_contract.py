@@ -70,6 +70,7 @@ def test_each_python_job_runs_every_required_gate(job_name: str) -> None:
     commands = _run_commands(_workflow()["jobs"][job_name])
     required_fragments = (
         "python scripts/check_prohibited_files.py",
+        "python scripts/check_threshold_literals.py",
         "python -m compileall -q src scripts tests",
         "node --check src/ior_mvp/static/app.js",
         "python scripts/verify_integrity.py",
@@ -102,6 +103,37 @@ def test_each_python_job_runs_every_required_gate(job_name: str) -> None:
         )
         for command in required_proof_commands:
             assert command in commands.splitlines()
+
+
+@pytest.mark.parametrize(
+    ("job_name", "expected_command"),
+    [
+        (
+            "uv-gates",
+            "uv run --locked --extra dev "
+            "python scripts/check_threshold_literals.py",
+        ),
+        (
+            "pip-gates",
+            "python scripts/check_threshold_literals.py",
+        ),
+    ],
+)
+def test_threshold_literal_scan_immediately_follows_prohibited_scan(
+    job_name: str,
+    expected_command: str,
+) -> None:
+    steps = _workflow()["jobs"][job_name]["steps"]
+    prohibited_index = next(
+        index
+        for index, step in enumerate(steps)
+        if step.get("name") == "Scan prohibited files and secret patterns"
+    )
+    threshold_step = steps[prohibited_index + 1]
+    assert threshold_step == {
+        "name": "Reject embedded threshold literals",
+        "run": expected_command,
+    }
 
 
 def test_docker_build_job_builds_the_repository_dockerfile() -> None:
