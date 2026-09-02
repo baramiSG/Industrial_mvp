@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from copy import deepcopy
+
 import pytest
 
 from ior_mvp.capability import (
@@ -8,9 +10,14 @@ from ior_mvp.capability import (
     route_band,
 )
 from ior_mvp.config import thresholds_config
+from ior_mvp.data_repository import (
+    get_public_case,
+    get_synthetic_scenario,
+)
 from ior_mvp.decision_engine import analyze, competition_warning
 from ior_mvp.genui import build_ui_manifest
 from ior_mvp.rules import (
+    evaluate_simulated_rules,
     r1d_fires,
     r2_fires,
     r3_fires,
@@ -320,3 +327,118 @@ def test_metric_grid_receives_r3_threshold_metrics() -> None:
     )
     r3 = next(row for row in analysis["rules"] if row["rule_id"] == "R3")
     assert metric_grid["props"]["supplier_concentration"] == r3["metrics"]
+
+
+def _synthetic_rule(
+    scenario: dict,
+    capacity: dict,
+    rule_id: str,
+) -> dict:
+    rows = evaluate_simulated_rules(
+        scenario,
+        get_public_case(scenario["opportunity_id"]),
+        capacity,
+        thresholds_config(),
+    )
+    return next(row for row in rows if row["rule_id"] == rule_id)
+
+
+@pytest.mark.parametrize(
+    ("utilisation", "expected"),
+    [
+        (0.8499, False),
+        (0.8500, True),
+        (0.8501, True),
+    ],
+)
+def test_r6_effective_utilisation_boundary(
+    utilisation: float,
+    expected: bool,
+) -> None:
+    loaded = get_synthetic_scenario("SAU-H0-721049")
+    assert loaded is not None
+    scenario = deepcopy(loaded)
+    scenario["synthetic_inputs"]["plant_line"][
+        "current_utilisation"
+    ] = utilisation
+    scenario["synthetic_inputs"]["demand"][
+        "target_spec_demand_kt"
+    ] = 110.0
+
+    row = _synthetic_rule(
+        scenario,
+        {
+            "effective_qualified_capacity_kt": 100.0,
+            "target_spec_demand_kt": 110.0,
+        },
+        "R6",
+    )
+
+    assert row["fired"] is expected
+
+
+@pytest.mark.parametrize(
+    ("target_demand", "expected"),
+    [
+        (109.99, False),
+        (110.00, True),
+        (110.01, True),
+    ],
+)
+def test_r6_specification_shortage_boundary(
+    target_demand: float,
+    expected: bool,
+) -> None:
+    loaded = get_synthetic_scenario("SAU-H0-721049")
+    assert loaded is not None
+    scenario = deepcopy(loaded)
+    scenario["synthetic_inputs"]["plant_line"][
+        "current_utilisation"
+    ] = 0.85
+    scenario["synthetic_inputs"]["demand"][
+        "target_spec_demand_kt"
+    ] = target_demand
+
+    row = _synthetic_rule(
+        scenario,
+        {
+            "effective_qualified_capacity_kt": 100.0,
+            "target_spec_demand_kt": target_demand,
+        },
+        "R6",
+    )
+
+    assert row["fired"] is expected
+
+
+@pytest.mark.parametrize(
+    ("utilisation", "expected"),
+    [
+        (0.6999, True),
+        (0.7000, True),
+        (0.7001, False),
+    ],
+)
+def test_r7_effective_utilisation_boundary(
+    utilisation: float,
+    expected: bool,
+) -> None:
+    loaded = get_synthetic_scenario("SAU-H0-390210")
+    assert loaded is not None
+    scenario = deepcopy(loaded)
+    scenario["synthetic_inputs"]["plant_line"][
+        "current_utilisation"
+    ] = utilisation
+
+    row = _synthetic_rule(
+        scenario,
+        {
+            "formula_capacity_kt": 104.49,
+            "qualified_available_kt": 80.0,
+            "target_spec_demand_kt": 56.0,
+        },
+        "R7",
+    )
+
+    assert row["execution"] == "FULL"
+    assert row["fired"] is expected

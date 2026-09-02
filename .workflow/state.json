@@ -7,7 +7,7 @@
     "reviewer_model": "cursor-grok-4.6-xhigh",
     "rule": "IMPLEMENTER_MODEL != SUPERVISOR_MODEL and REVIEWER_MODEL != IMPLEMENTER_MODEL (reviewer also != supervisor)"
   },
-  "execution_note": "Supervisor's direct shell tool is unavailable this session; all shell execution is delegated to shell subagents via detached scripts under .workflow/runs/ with logs under .workflow/logs/ (ignored), verified by the Supervisor reading files and gh output.",
+  "execution_note": "Supervisor's direct shell tool is unavailable this session; all shell execution is delegated to shell subagents via detached scripts under .workflow/runs/ with logs under .workflow/logs/ (ignored), verified by the Supervisor reading files and gh output. Implementer agents must use the detached-script + log-read protocol for every command; an agent whose shell backend dies is replaced by a fresh agent on the same approved plan.",
   "github": {
     "remote": "https://github.com/baramiSG/Industrial_mvp",
     "owner": "baramiSG",
@@ -16,24 +16,24 @@
     "auth": "gh CLI, account baramiSG, scopes repo+workflow",
     "merge_policy": "squash; ADR-007 Supervisor gate (gh pr checks all pass)"
   },
-  "current_slice": "S03-evidence-isolation-hardening",
+  "current_slice": "S04-simulation-fidelity",
   "state": "IMPLEMENTING",
-  "main_head": "c43837054c5581e68cfe7ed87d914a89cd4f63a3",
+  "main_head": "ddf905d5051fe3b4468bdcd793a8a640f5040048",
   "slices": {
     "S00-baseline-import": {"state": "MERGED", "branch": "main", "pr": null, "merge_commit": "0731ae546f79c9ac3bfd92612a01f07da67937ed"},
     "S01-ci-and-toolchain": {"state": "MERGED", "branch": "slice/S01-ci-and-toolchain", "pr": "https://github.com/baramiSG/Industrial_mvp/pull/1", "merge_commit": "432af8af1fa88a2258a0fd8d825a6855e408270f", "base": "0731ae546f79c9ac3bfd92612a01f07da67937ed", "ci_runs": ["33569855956", "33570112914"], "tests": 72, "planner_model": "gpt-5.6-sol-max", "implementer_model": "gpt-5.6-sol-max", "reviewer_model": "cursor-grok-4.6-xhigh"},
-    "S02-threshold-governance": {"state": "MERGED", "zero_finding_gate": "2026-09-02 supervisor 0 / reviewer 0 (APPROVE, agent 080a70fa)", "local_gates": "136 passed, INTEGRITY PASS, SMOKE PASS, validator PASS, docker PASS", "ci_runs": ["33573669072"], "tests": 136, "branch": "slice/S02-threshold-governance", "pr": "https://github.com/baramiSG/Industrial_mvp/pull/2", "merge_commit": "c43837054c5581e68cfe7ed87d914a89cd4f63a3", "base": "432af8af1fa88a2258a0fd8d825a6855e408270f", "plan_approved": "2026-09-02 (2 rounds)", "planner_model": "gpt-5.6-sol-max", "implementer_model": "gpt-5.6-sol-max", "reviewer_model": "cursor-grok-4.6-xhigh", "authority_change": "thresholds.v1.yaml 1.0.0 -> 1.1.0 (ADR-005), single build_manifests.py run pre-authorised"},
-    "S03-evidence-isolation-hardening": {"state": "IMPLEMENTING", "plan_approved": "2026-09-02 (2 rounds)", "planner_model": "gpt-5.6-sol-max", "implementer_model": "gpt-5.6-sol-max", "reviewer_model": "cursor-grok-4.6-xhigh", "branch": "slice/S03-evidence-isolation-hardening", "pr": null, "merge_commit": null, "base": "c43837054c5581e68cfe7ed87d914a89cd4f63a3", "authority_change": "evidence_policy.v1.yaml 1.0.0 -> 1.1.0 (Core 06 s4 mandatory fields), single build_manifests.py run"},
-    "S04-simulation-fidelity": {"state": "NOT_STARTED", "branch": "slice/S04-simulation-fidelity", "pr": null, "merge_commit": null},
+    "S02-threshold-governance": {"state": "MERGED", "branch": "slice/S02-threshold-governance", "pr": "https://github.com/baramiSG/Industrial_mvp/pull/2", "merge_commit": "c43837054c5581e68cfe7ed87d914a89cd4f63a3", "base": "432af8af1fa88a2258a0fd8d825a6855e408270f", "ci_runs": ["33573669072"], "tests": 136, "authority_change": "thresholds.v1.yaml 1.0.0 -> 1.1.0 (ADR-005)", "planner_model": "gpt-5.6-sol-max", "implementer_model": "gpt-5.6-sol-max", "reviewer_model": "cursor-grok-4.6-xhigh"},
+    "S03-evidence-isolation-hardening": {"state": "MERGED", "branch": "slice/S03-evidence-isolation-hardening", "pr": "https://github.com/baramiSG/Industrial_mvp/pull/3", "merge_commit": "ddf905d5051fe3b4468bdcd793a8a640f5040048", "base": "c43837054c5581e68cfe7ed87d914a89cd4f63a3", "ci_runs": ["33579923763"], "tests": 191, "authority_change": "evidence_policy.v1.yaml 1.0.0 -> 1.1.0 (ADR-008)", "planner_model": "gpt-5.6-sol-max", "implementer_model": "gpt-5.6-sol-max (agent 03f26fc4; 9fe6340e replaced after shell-backend failure)", "reviewer_model": "cursor-grok-4.6-xhigh"},
+    "S04-simulation-fidelity": {"state": "IMPLEMENTING", "plan_approved": "2026-09-02 (2 rounds)", "planner_model": "gpt-5.6-sol-max", "implementer_model": "gpt-5.6-sol-max", "reviewer_model": "cursor-grok-4.6-xhigh", "branch": "slice/S04-simulation-fidelity", "pr": null, "merge_commit": null, "base": "ddf905d5051fe3b4468bdcd793a8a640f5040048", "authority_change": "data/synthetic/*.json ground_truth + decision_narrative (ADR-006); snapshot_manifest regenerated once"},
     "S05-final-acceptance": {"state": "NOT_STARTED", "branch": "slice/S05-final-acceptance", "pr": null, "merge_commit": null}
   },
-  "last_updated": "2026-09-02T02:17:00+03:00",
+  "last_updated": "2026-09-02T04:40:00+03:00",
   "history": [
     {"at": "2026-09-02T01:05:00+03:00", "event": "Build control established; repository read end to end; GitHub destination verified (private, empty)."},
     {"at": "2026-09-02T01:13:00+03:00", "event": "S00 baseline imported to main (0731ae5); integrity/35 tests/smoke pass."},
     {"at": "2026-09-02T02:15:20+03:00", "event": "S01 merged (432af8a) via PR #1; CI green 4/4 twice; 72 tests."},
-    {"at": "2026-09-02T02:17:00+03:00", "event": "S02 threshold governance started; persona and context written."},
     {"at": "2026-09-02T03:05:10+03:00", "event": "S02 merged (c438370) via PR #2; CI green 4/4; 136 tests; thresholds 1.1.0."},
-    {"at": "2026-09-02T03:10:00+03:00", "event": "S03 evidence-isolation hardening started; branch created from c438370."}
+    {"at": "2026-09-02T04:36:47+03:00", "event": "S03 merged (ddf905d) via PR #3; CI green 4/4; 191 tests; evidence_policy 1.1.0; Gate B in CI."},
+    {"at": "2026-09-02T04:40:00+03:00", "event": "S04 simulation fidelity started; branch created from ddf905d."}
   ]
 }

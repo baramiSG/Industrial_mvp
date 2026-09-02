@@ -8,6 +8,11 @@ from typing import Any
 import yaml
 
 from ior_mvp.config import DATA_DIR
+from ior_mvp.decision_engine import (
+    _simulate,
+    evaluate_ground_truth_backtest,
+    ground_truth_backtest_error,
+)
 from ior_mvp.evidence import (
     EvidenceIntegrityError,
     reconcile_synthetic_scenario,
@@ -62,6 +67,35 @@ def _index_public_cases(
     return cases
 
 
+def _ground_truth_check(
+    scenario: dict[str, Any],
+    backtest: dict[str, Any],
+) -> dict[str, Any]:
+    match = backtest["match"] is True
+    return {
+        "rule_id": "ground_truth_backtest",
+        "source": (
+            "Core 06 §5.3 and §10 item 5; "
+            "Core 07 §7.3-§7.4"
+        ),
+        "formula": (
+            "(actual state, actual route_code) == "
+            "(expected state, expected route_code)"
+        ),
+        "result": "PASS" if match else "FAIL",
+        "blocking": True,
+        "inputs": backtest,
+        "detail": (
+            "Engine state and route match planted ground truth."
+            if match
+            else ground_truth_backtest_error(
+                scenario,
+                backtest,
+            )
+        ),
+    }
+
+
 def validate_scenario_directories(
     synthetic_dir: Path = SYNTHETIC_DIR,
     public_dir: Path = PUBLIC_DIR,
@@ -85,10 +119,26 @@ def validate_scenario_directories(
                     "No public case matches scenario "
                     f"opportunity_id={opportunity_id}"
                 )
+            public_case = public_cases[opportunity_id]
             report = reconcile_synthetic_scenario(
                 scenario,
-                public_cases[opportunity_id],
+                public_case,
             )
+            if report["status"] != "FAIL":
+                branch = _simulate(public_case, scenario)
+                backtest = evaluate_ground_truth_backtest(
+                    scenario,
+                    branch["simulation_decision"],
+                )
+                check = _ground_truth_check(
+                    scenario,
+                    backtest,
+                )
+                report["checks"].append(check)
+                report["ground_truth_backtest"] = backtest
+                if check["result"] == "FAIL":
+                    report["status"] = "FAIL"
+                    report["error"] = check["detail"]
             reports.append({"file": path.name, **report})
         except EvidenceIntegrityError as exc:
             reports.append(

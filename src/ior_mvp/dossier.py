@@ -13,6 +13,11 @@ def build_dossier(analysis: dict[str, Any]) -> dict[str, Any]:
     evidence = analysis.get("evidence", [])
     public_count = sum(1 for row in evidence if row.get("synthetic_flag") is False)
     synthetic_count = sum(1 for row in evidence if row.get("synthetic_flag") is True)
+    simulated_rules = [
+        row
+        for row in analysis.get("rules", [])
+        if row.get("synthetic_flag") is True
+    ]
 
     demand_conclusion = (
         f"Latest frozen public imports: USD {latest.get('imports_usd_m', 0):,.1f}m and "
@@ -44,6 +49,7 @@ def build_dossier(analysis: dict[str, Any]) -> dict[str, Any]:
             "public_state": analysis["real_decision"]["state"],
             "active_state": decision["state"],
             "capacity": capacity,
+            "simulated_rules": simulated_rules,
         },
         "capability_route": analysis["capability"],
         "economics": economics,
@@ -78,6 +84,35 @@ def render_dossier_html(dossier: dict[str, Any]) -> str:
         disclosure_html = f"""
         <div class="warning"><strong>{e(disclosure['display_label'])}</strong><br>{e(disclosure['seed_basis'])}</div>
         """
+
+    def fired_label(value: bool | None) -> str:
+        if value is True:
+            return "FIRES"
+        if value is False:
+            return "DOES NOT FIRE"
+        return "NOT EVALUABLE"
+
+    simulated_rules = dossier["gap_diagnosis"].get(
+        "simulated_rules",
+        [],
+    )
+    simulated_rules_html = ""
+    if simulated_rules:
+        items = "".join(
+            (
+                "<li>"
+                f"<strong>{e(row['rule_id'])}</strong> "
+                f"· {e(row['execution'])} "
+                f"· {e(fired_label(row['fired']))}"
+                f"<br><span class=\"small\">{e(row['result'])}</span>"
+                f"<br><span class=\"small\">{e(row['display_label'])}</span>"
+                "</li>"
+            )
+            for row in simulated_rules
+        )
+        simulated_rules_html = f"""
+<section class="box"><h2>Simulated R6–R8 ledger</h2><ul>{items}</ul></section>
+"""
 
     authority = dossier["evidence_summary"]["authority"]
     methodology = authority["methodology"]
@@ -116,6 +151,7 @@ h1{{font-size:30px;margin:0 0 6px}} h2{{font-size:16px;text-transform:uppercase;
 <div class="grid">
 <section class="box"><h2>Product identity</h2><p><strong>{e(dossier['product_identity']['commercial_name_en'])}</strong></p><p dir="rtl">{e(dossier['product_identity']['commercial_name_ar'])}</p><p class="small">HS {e(dossier['product_identity']['hs_revision'])} / {e(dossier['product_identity']['hs6'])}</p></section>
 <section class="box"><h2>Demand conclusion</h2><p>{e(dossier['demand_conclusion'])}</p></section>
+{simulated_rules_html}
 <section class="box"><h2>Decision conditions</h2><ul>{conditions or '<li>None</li>'}</ul></section>
 <section class="box"><h2>Kill conditions</h2><ul>{kills or '<li>None</li>'}</ul></section>
 <section class="box"><h2>Next evidence actions</h2><ul>{evidence_actions or '<li>None</li>'}</ul></section>

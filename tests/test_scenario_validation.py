@@ -20,6 +20,7 @@ from scripts.validate_scenarios import (
     PUBLIC_DIR,
     SYNTHETIC_DIR,
     main,
+    validate_scenario_directories,
 )
 
 
@@ -348,6 +349,66 @@ def test_repository_scenario_validator_passes_current_fixtures(
     assert (
         "tariff_line_or_buyer_allocations_reconcile: "
         "NOT_APPLICABLE"
+    ) in output
+    assert output.count("ground_truth_backtest: PASS") == 2
+
+
+def test_validator_reports_exact_ground_truth_for_both_scenarios() -> None:
+    reports = validate_scenario_directories(
+        SYNTHETIC_DIR,
+        PUBLIC_DIR,
+    )
+    by_scenario = {
+        report["scenario_id"]: report
+        for report in reports
+    }
+
+    assert by_scenario[
+        "SYN-MINISTRY-STEEL-001"
+    ]["ground_truth_backtest"] == {
+        "expected": {"state": "ADVANCE", "route_code": 5},
+        "actual": {"state": "ADVANCE", "route_code": 5},
+        "match": True,
+    }
+    assert by_scenario[
+        "SYN-MINISTRY-PP-001"
+    ]["ground_truth_backtest"] == {
+        "expected": {"state": "REJECT", "route_code": 0},
+        "actual": {"state": "REJECT", "route_code": 0},
+        "match": True,
+    }
+
+
+def test_validator_returns_one_for_ground_truth_mismatch(
+    tmp_path: Path,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    scenario = _scenario("SAU-H0-721049")
+    scenario["ground_truth"][
+        "expected_simulation_state"
+    ] = "REJECT"
+    scenario["ground_truth"]["expected_route_code"] = 0
+    scenario["decision_narrative"]["REJECT"] = deepcopy(
+        _scenario("SAU-H0-390210")["decision_narrative"]["REJECT"]
+    )
+    synthetic_dir, public_dir = _write_temp_fixture_pair(
+        tmp_path,
+        scenario,
+        get_public_case("SAU-H0-721049"),
+    )
+
+    status = main(synthetic_dir, public_dir)
+
+    assert status == 1
+    output = capsys.readouterr().out
+    assert (
+        "SCENARIO VALIDATION FAIL (1/1 scenarios failed)"
+        in output
+    )
+    assert "ground_truth_backtest: FAIL" in output
+    assert (
+        "expected state=REJECT, route_code=0; "
+        "actual state=ADVANCE, route_code=5"
     ) in output
 
 

@@ -186,3 +186,19 @@ def test_repository_propagates_policy_failure_as_integrity_error(
             data_repository.synthetic_scenarios()
     finally:
         data_repository.clear_repository_caches()
+
+
+@pytest.mark.parametrize(
+    "opportunity_id",
+    ["SAU-H0-721049", "SAU-H0-390210"],
+)
+def test_policy_validation_accepts_additive_s04_metadata(
+    opportunity_id: str,
+) -> None:
+    scenario = get_synthetic_scenario(opportunity_id)
+    assert scenario is not None
+    assert scenario["scenario_version"] == "1.1.0"
+    assert isinstance(scenario["ground_truth"], dict)
+    assert isinstance(scenario["decision_narrative"], dict)
+
+    validate_synthetic_scenario(scenario)

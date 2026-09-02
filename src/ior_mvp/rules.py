@@ -4,6 +4,7 @@ import math
 from typing import Any
 
 from .config import thresholds_config
+from .evidence import EvidenceIntegrityError
 
 
 def _rule(
@@ -24,6 +25,335 @@ def _rule(
         "decision_effect": decision_effect,
         "metrics": metrics or {},
     }
+
+
+def _synthetic_rule(
+    scenario: dict[str, Any],
+    rule_id: str,
+    name: str,
+    execution: str,
+    fired: bool | None,
+    result: str,
+    decision_effect: str,
+    metrics: dict[str, Any],
+) -> dict[str, Any]:
+    row = _rule(
+        rule_id,
+        name,
+        execution,
+        fired,
+        result,
+        decision_effect,
+        metrics,
+    )
+    row.update(
+        {
+            "synthetic_flag": True,
+            "scenario_id": scenario["scenario_id"],
+            "source": scenario["source"],
+            "evidence_class": scenario["evidence_class"],
+            "display_label": scenario["display_label"],
+            "basis": "synthetic",
+        }
+    )
+    return row
+
+
+def _numeric_or_none(value: Any) -> float | None:
+    if isinstance(value, bool) or not isinstance(value, (int, float)):
+        return None
+    number = float(value)
+    return number if math.isfinite(number) else None
+
+
+def evaluate_simulated_rules(
+    scenario: dict[str, Any],
+    public_case: dict[str, Any],
+    capacity: dict[str, Any],
+    thresholds: dict[str, Any],
+) -> list[dict[str, Any]]:
+    opportunity = public_case.get("opportunity")
+    public_opportunity_id = (
+        opportunity.get("id")
+        if isinstance(opportunity, dict)
+        else None
+    )
+    if scenario.get("opportunity_id") != public_opportunity_id:
+        raise EvidenceIntegrityError(
+            "Synthetic rule evaluation opportunity_id does not match "
+            "the public case"
+        )
+
+    inputs = scenario["synthetic_inputs"]
+    demand = inputs.get("demand")
+    line = inputs.get("plant_line")
+    if not isinstance(demand, dict) or not isinstance(line, dict):
+        raise EvidenceIntegrityError(
+            "Synthetic rule evaluation requires demand and plant_line "
+            "mappings"
+        )
+
+    rule_config = thresholds["rules"]
+    target_demand = _numeric_or_none(
+        demand.get("target_spec_demand_kt")
+    )
+    utilisation = _numeric_or_none(
+        line.get("current_utilisation")
+    )
+    capacity_key = "effective_qualified_capacity_kt"
+    effective_capacity = _numeric_or_none(
+        capacity.get(capacity_key)
+    )
+    if effective_capacity is None:
+        capacity_key = "formula_capacity_kt"
+        effective_capacity = _numeric_or_none(
+            capacity.get(capacity_key)
+        )
+
+    r6_config = rule_config["R6"]
+    shortage_ratio = (
+        (target_demand - effective_capacity) / effective_capacity
+        if target_demand is not None
+        and effective_capacity is not None
+        and effective_capacity > 0
+        else None
+    )
+    r6_fired = (
+        utilisation
+        >= float(r6_config["minimum_effective_utilisation"])
+        and shortage_ratio
+        >= float(r6_config["minimum_spec_matched_shortage"])
+        if utilisation is not None and shortage_ratio is not None
+        else None
+    )
+    r6_execution = (
+        "DEGRADED" if r6_fired is not None else "DISABLED"
+    )
+    if r6_fired is True:
+        r6_result = (
+            "Synthetic utilisation and shortage proxy meet the "
+            "configured R6 thresholds; sustained period is "
+            "NOT_CALCULABLE."
+        )
+    elif r6_fired is False:
+        r6_result = (
+            "Synthetic R6 utilisation/shortage proxy does not meet "
+            "both configured thresholds; sustained period is "
+            "NOT_CALCULABLE."
+        )
+    else:
+        r6_result = (
+            "Synthetic utilisation or effective qualified capacity "
+            "is unavailable; R6 is not calculable."
+        )
+    rows = [
+        _synthetic_rule(
+            scenario,
+            "R6",
+            "Capacity pressure",
+            r6_execution,
+            r6_fired,
+            r6_result,
+            (
+                "Use as a DEGRADED capacity-pressure signal only; "
+                "it cannot by itself support ADVANCE without a "
+                "sustained period."
+            ),
+            {
+                "effective_utilisation": (
+                    utilisation
+                    if utilisation is not None
+                    else NOT_CALCULABLE
+                ),
+                "minimum_effective_utilisation": float(
+                    r6_config["minimum_effective_utilisation"]
+                ),
+                "target_spec_demand_kt": (
+                    target_demand
+                    if target_demand is not None
+                    else NOT_CALCULABLE
+                ),
+                "effective_qualified_capacity_kt": (
+                    effective_capacity
+                    if effective_capacity is not None
+                    else NOT_CALCULABLE
+                ),
+                "effective_capacity_source_key": capacity_key,
+                "shortage_ratio": (
+                    round(shortage_ratio, 4)
+                    if shortage_ratio is not None
+                    else NOT_CALCULABLE
+                ),
+                "shortage_denominator": (
+                    "effective_qualified_capacity_kt"
+                ),
+                "minimum_spec_matched_shortage": float(
+                    r6_config["minimum_spec_matched_shortage"]
+                ),
+                "sustained_period": NOT_CALCULABLE,
+            },
+        )
+    ]
+
+    r7_config = rule_config["R7"]
+    maximum_utilisation = float(
+        r7_config["maximum_effective_utilisation"]
+    )
+    equivalence = inputs.get("equivalence")
+    equivalence_value = (
+        equivalence.get("domestic_grade_equivalent")
+        if isinstance(equivalence, dict)
+        else None
+    )
+    equivalence_known = isinstance(equivalence_value, bool)
+    equivalence_required = bool(
+        r7_config["require_specification_equivalence"]
+    )
+    if utilisation is None:
+        r7_fired: bool | None = None
+    elif utilisation > maximum_utilisation:
+        r7_fired = False
+    elif equivalence_required and not equivalence_known:
+        r7_fired = None
+    else:
+        r7_fired = (
+            utilisation <= maximum_utilisation
+            and (
+                not equivalence_required
+                or equivalence_value is True
+            )
+        )
+    if utilisation is None:
+        r7_execution = "DISABLED"
+    elif equivalence_known:
+        r7_execution = "FULL"
+    else:
+        r7_execution = "DEGRADED"
+    if r7_fired is True:
+        r7_result = (
+            "Synthetic utilisation and specification equivalence "
+            "meet the configured latent-capacity test."
+        )
+    elif r7_fired is False:
+        r7_result = (
+            "Synthetic utilisation/equivalence does not meet the "
+            "configured latent-capacity test."
+        )
+    else:
+        r7_result = (
+            "Synthetic latent capacity is not calculable because a "
+            "required utilisation or equivalence input is absent."
+        )
+    rows.append(
+        _synthetic_rule(
+            scenario,
+            "R7",
+            "Latent domestic capacity",
+            r7_execution,
+            r7_fired,
+            r7_result,
+            (
+                "Test no-support, market linkage, procurement, or "
+                "barrier removal only when equivalence and latent "
+                "capacity are established."
+            ),
+            {
+                "effective_utilisation": (
+                    utilisation
+                    if utilisation is not None
+                    else NOT_CALCULABLE
+                ),
+                "maximum_effective_utilisation": maximum_utilisation,
+                "specification_equivalence": (
+                    equivalence_value
+                    if equivalence_known
+                    else NOT_CALCULABLE
+                ),
+                "qualified_available_kt": (
+                    equivalence.get("qualified_available_kt")
+                    if isinstance(equivalence, dict)
+                    and _numeric_or_none(
+                        equivalence.get("qualified_available_kt")
+                    )
+                    is not None
+                    else NOT_CALCULABLE
+                ),
+            },
+        )
+    )
+
+    r8_config = rule_config["R8"]
+    rows.append(
+        _synthetic_rule(
+            scenario,
+            "R8",
+            "Committed future demand",
+            "DISABLED",
+            None,
+            (
+                "Committed and announced layers are disclosed, but "
+                "base demand, commitment probability, and minimum "
+                "efficient scale are absent."
+            ),
+            (
+                "Do not infer probability-adjusted demand addition "
+                "or MES fill; keep committed and announced demand "
+                "separate."
+            ),
+            {
+                "base_demand_kt": NOT_CALCULABLE,
+                "committed_demand_kt": (
+                    demand.get("committed_demand_kt")
+                    if _numeric_or_none(
+                        demand.get("committed_demand_kt")
+                    )
+                    is not None
+                    else NOT_CALCULABLE
+                ),
+                "announced_demand_kt": (
+                    demand.get("announced_demand_kt")
+                    if _numeric_or_none(
+                        demand.get("announced_demand_kt")
+                    )
+                    is not None
+                    else NOT_CALCULABLE
+                ),
+                "target_spec_demand_kt": (
+                    target_demand
+                    if target_demand is not None
+                    else NOT_CALCULABLE
+                ),
+                "downside_demand_kt": (
+                    demand.get("downside_demand_kt")
+                    if _numeric_or_none(
+                        demand.get("downside_demand_kt")
+                    )
+                    is not None
+                    else NOT_CALCULABLE
+                ),
+                "commitment_probability": NOT_CALCULABLE,
+                "probability_adjusted_committed_demand_kt": (
+                    NOT_CALCULABLE
+                ),
+                "probability_adjusted_demand_addition": (
+                    NOT_CALCULABLE
+                ),
+                "minimum_probability_adjusted_demand_addition": (
+                    float(
+                        r8_config[
+                            "minimum_probability_adjusted_demand_addition"
+                        ]
+                    )
+                ),
+                "minimum_efficient_scale_kt": NOT_CALCULABLE,
+                "mes_fill": NOT_CALCULABLE,
+                "minimum_mes_fill": float(
+                    r8_config["minimum_mes_fill"]
+                ),
+            },
+        )
+    )
+    return rows
 
 
 def log_change(new: float, old: float) -> float:

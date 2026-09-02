@@ -30,22 +30,43 @@ def test_real_dossier_has_no_disclosure_and_zero_synthetic_rows(
     dossier = json_response.json()
     assert dossier["synthetic_disclosure"] is None
     assert dossier["evidence_summary"]["synthetic_records"] == 0
+    assert dossier["gap_diagnosis"]["simulated_rules"] == []
 
     assert html_response.status_code == 200
     assert DISCLOSURE not in html_response.text
     assert "0 synthetic records" in html_response.text
+    assert "Simulated R6–R8 ledger" not in html_response.text
 
 
 def test_simulated_dossier_retains_disclosure_and_synthetic_rows() -> None:
-    response = client.get(
+    json_response = client.get(
         "/api/opportunities/SAU-H0-721049/dossier"
         "?mode=simulated"
     )
+    html_response = client.get(
+        "/api/opportunities/SAU-H0-721049/dossier.html"
+        "?mode=simulated"
+    )
 
-    assert response.status_code == 200
-    dossier = response.json()
+    assert json_response.status_code == 200
+    dossier = json_response.json()
     assert (
         dossier["synthetic_disclosure"]["display_label"]
         == DISCLOSURE
     )
     assert dossier["evidence_summary"]["synthetic_records"] > 0
+    rows = dossier["gap_diagnosis"]["simulated_rules"]
+    assert [row["rule_id"] for row in rows] == [
+        "R6",
+        "R7",
+        "R8",
+    ]
+    assert all(row["synthetic_flag"] is True for row in rows)
+    assert all(row["evidence_class"] == "D" for row in rows)
+    assert all(row["display_label"] == DISCLOSURE for row in rows)
+
+    assert html_response.status_code == 200
+    assert DISCLOSURE in html_response.text
+    assert "Simulated R6–R8 ledger" in html_response.text
+    for rule_id in ("R6", "R7", "R8"):
+        assert rule_id in html_response.text

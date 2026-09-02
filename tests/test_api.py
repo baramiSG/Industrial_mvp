@@ -135,3 +135,54 @@ def test_missing_scenario_in_simulated_mode_returns_404(
             "SAU-H0-721049"
         )
     }
+
+
+@pytest.mark.parametrize(
+    "endpoint",
+    [
+        (
+            "/api/opportunities/SAU-H0-721049"
+            "?mode=simulated"
+        ),
+        "/api/opportunities?mode=simulated",
+    ],
+)
+def test_ground_truth_mismatch_returns_422_without_partial_analysis(
+    monkeypatch: pytest.MonkeyPatch,
+    endpoint: str,
+) -> None:
+    scenario = get_synthetic_scenario("SAU-H0-721049")
+    assert scenario is not None
+    invalid = deepcopy(scenario)
+    invalid["ground_truth"][
+        "expected_simulation_state"
+    ] = "REJECT"
+    invalid["ground_truth"]["expected_route_code"] = 0
+    pp_scenario = get_synthetic_scenario("SAU-H0-390210")
+    assert pp_scenario is not None
+    invalid["decision_narrative"]["REJECT"] = deepcopy(
+        pp_scenario["decision_narrative"]["REJECT"]
+    )
+    monkeypatch.setattr(
+        decision_engine,
+        "get_synthetic_scenario",
+        lambda opportunity_id: invalid,
+    )
+
+    response = TestClient(
+        app,
+        raise_server_exceptions=False,
+    ).get(endpoint)
+
+    assert response.status_code == 422
+    assert response.json() == {
+        "detail": {
+            "code": "EVIDENCE_INTEGRITY_ERROR",
+            "message": (
+                "Synthetic scenario ground-truth back-test failed "
+                "for SYN-MINISTRY-STEEL-001: "
+                "expected state=REJECT, route_code=0; "
+                "actual state=ADVANCE, route_code=5"
+            ),
+        }
+    }
