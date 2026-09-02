@@ -22,3 +22,18 @@ Authoritative machine state: `.workflow/state.json`. This file is the human-read
 - 2026-09-02 04:37 — S03 squash-merged to `main` as `ddf905d` after run 33579923763 green 4/4 (PR #3). Authority change evidence_policy 1.1.0 executed under ADR-008. Gate B validator in CI. First implementer agent replaced after shell-backend failure (no edits lost). Traceability promoted; KL-04..06 closed; ADR-008 Accepted. S04 started (base `ddf905d`).
 - 2026-09-02 05:47 — S04 squash-merged to `main` as `98c1a40` after run 33584437086 green 4/4 (PR #4). Scenario authority change executed under ADR-006; generic §7.4/§7.3 selection; synthetic R6–R8 ledger. Traceability promoted; KL-07/08 closed. S05 final acceptance started (base `98c1a40`).
 - 2026-09-02 07:11 — S05 implementation squash-merged to `main` as `55304db` after PR run 33589765172 green 4/4 (PR #5); default-branch run 33589819341 success; post-merge integrity PASS. Final holistic review APPROVE after one fix round (2 HIGH, 3 MEDIUM fixed: SPA path containment, tracked-files-only packaging, hard-gate N/A prefix, README claim, no unknown→0). Acceptance 42/42; 280 tests. Release-state PR #6 opened for COMPLETE promotions; tag v0.2.0 follows its merge.
+
+---
+
+# Milestone v0.3.0 — Ministerial Demonstration Readiness
+
+Authoritative machine state: `.workflow/state.json` → `milestones.v0.3.0`. Planning documents: `docs/milestones/v0.3.0/`.
+
+| Slice | State | Branch | PR | Merge commit | CI | Notes |
+|---|---|---|---|---|---|---|
+| M3-P0 Planning baseline (docs only) | PR_OPEN | milestone/v0.3.0-planning | pending | pending | pending | Gap analysis, slice graph, ADR-010 (OD-1/OD-2 approved with amendments), roadmap, this ledger, state block |
+
+## Log
+
+- 2026-09-02 07:38 — Owner accepted v0.2.0 as the frozen two-case technical demonstration baseline and opened v0.3.0. Supervisor read the methodology mirror in full, Core 01–09, final report, limitations, traceability, complete S05 reviewer findings and implementation docs; verified baseline gates on `main` at `ce5786b` (integrity PASS, Gate B PASS, 280 passed, smoke PASS); wrote the gap analysis and 17-slice graph on `milestone/v0.3.0-planning`.
+- 2026-09-02 08:02 — Owner approved OD-1 and OD-2 with amendments (I1, I5 amended; rulings R-1..R-6). Documents amended; ADR-010 recorded; M3-P0 docs-only PR prepared. S06 implementation gated on M3-P0 merge with green default-branch CI.

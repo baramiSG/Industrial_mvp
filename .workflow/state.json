@@ -49,6 +49,27 @@
     {"at": "2026-09-02T04:36:47+03:00", "event": "S03 merged (ddf905d) via PR #3; CI green 4/4; 191 tests; evidence_policy 1.1.0; Gate B in CI."},
     {"at": "2026-09-02T05:46:39+03:00", "event": "S04 merged (98c1a40) via PR #4; CI green 4/4; 231 tests; scenarios 1.1.0 with ground truth."},
     {"at": "2026-09-02T07:11:06+03:00", "event": "S05 implementation merged (55304db) via PR #5; PR CI 4/4; main CI success; acceptance 42/42; 280 tests; final review APPROVE."},
-    {"at": "2026-09-02T07:15:00+03:00", "event": "Release-state PR #6 opened; COMPLETE effective on its merge; tag v0.2.0 to follow."}
-  ]
+    {"at": "2026-09-02T07:15:00+03:00", "event": "Release-state PR #6 opened; COMPLETE effective on its merge; tag v0.2.0 to follow."},
+    {"at": "2026-09-02T07:38:00+03:00", "event": "Owner accepted v0.2.0 as the frozen two-case technical demonstration baseline (main ce5786b = tag v0.2.0) and opened milestone v0.3.0. The COMPLETE state above refers to the v0.2.0 release contract only."},
+    {"at": "2026-09-02T08:02:00+03:00", "event": "v0.3.0 gap analysis and slice graph approved with amendments (OD-1, OD-2; ADR-010). M3-P0 docs-only planning-baseline PR prepared on milestone/v0.3.0-planning."}
+  ],
+  "active_milestone": "v0.3.0",
+  "milestones": {
+    "v0.2.0": {"state": "COMPLETE", "tag": "v0.2.0", "tag_commit": "ce5786b423f2b5de81e13a73c1fbe57da2a8f5e6", "note": "Frozen two-case technical demonstration baseline. Records above are historical and are not rewritten."},
+    "v0.3.0": {
+      "name": "Ministerial Demonstration Readiness",
+      "state": "PLANNING_BASELINE_PR",
+      "current_slice": "M3-P0",
+      "next_slice": "S06-browser-acceptance-harness",
+      "planning_documents": ["docs/milestones/v0.3.0/GAP_ANALYSIS.md", "docs/milestones/v0.3.0/SLICE_GRAPH.md"],
+      "owner_decisions": {"OD-1": "APPROVED_WITH_AMENDMENTS 2026-09-02 (I1, I5 amended; R-1..R-6)", "OD-2": "APPROVED_WITH_AMENDMENTS 2026-09-02", "adr": "ADR-010"},
+      "seat_models": {"supervisor": "claude-fable-5-1-thinking-max", "planner_implementer": "gpt-5.6-sol-max", "reviewer": "cursor-grok-4.6-xhigh", "ladders": "4 plans / 8 implementation candidates per slice, then BLOCKED_FOR_OWNER"},
+      "execution_order": ["M3-P0", "S06", "S07", "S08", "S09", "S10", "S11", "S12", "S13", "S14", "S15", "S16", "S17", "S18", "S19", "S20", "S21", "S22"],
+      "slices": {
+        "M3-P0": {"state": "PR_OPEN", "branch": "milestone/v0.3.0-planning", "pr": null, "merge_commit": null, "content": "docs only"}
+      },
+      "route_coverage_matrix": "docs/milestones/v0.3.0/SLICE_GRAPH.md#9",
+      "last_updated": "2026-09-02T08:02:00+03:00"
+    }
+  }
 }
