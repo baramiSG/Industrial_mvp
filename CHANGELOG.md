@@ -2,6 +2,20 @@
 
 ## Unreleased
 
+- Added a governed Arabic/English catalogue and locale API, atomic topbar
+  switch, persisted URL/local-storage preference, RTL mirroring, Western-digit
+  formatting, bidi isolates, and honest English source-language islands.
+- Added policy-owned bilingual synthetic warnings on every simulation
+  projection and kept public surfaces free of both labels.
+- Replaced the frontend monolith with 19 named-export ES modules and moved all
+  visual literals into an enforced token layer using logical properties.
+- Vendored exact OFL-1.1 Noto Sans and Noto Sans Arabic assets with hashes,
+  provenance, Unicode ranges, and browser rendering checks.
+- Added 40 canonical lossless-WebP visual baselines with a fixed Pillow
+  comparator, diff artifacts, guarded Noble-container updates, and
+  compare-only CI.
+- Localized printable dossier chrome, retained English analytical islands, and
+  removed the demo `/docs` link while preserving the engineer route.
 - Added exact-pinned Playwright/Chromium journeys for both evidence modes,
   both golden cases, every existing selection path, dossier popup, and real
   clipboard output.

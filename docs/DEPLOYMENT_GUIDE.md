@@ -10,7 +10,8 @@ The supported MVP targets are WSL, native Linux, and Docker. The package is an o
 - annotated source tag after acceptance: `v0.2.0`;
 - demo project contract: `config/project.yaml` version `0.2.0`;
 - threshold configuration: `1.1.0`;
-- evidence policy: `1.1.0`;
+- evidence policy: `1.2.0`;
+- UI strings catalogue: `1.0.0`;
 - sector profiles: `1.0.0`;
 - packaged synthetic scenario contract: `1.1.0`.
 
@@ -43,8 +44,9 @@ source .venv/bin/activate
 python -m pip install -e ".[dev]"
 python scripts/check_prohibited_files.py
 python scripts/check_threshold_literals.py
+python scripts/check_ui_contracts.py
 python -m compileall -q src scripts tests
-node --check src/ior_mvp/static/app.js
+python scripts/check_es_modules.py --node node
 PYTHONPATH=src python scripts/verify_integrity.py
 PYTHONPATH=src python scripts/validate_scenarios.py
 PYTHONPATH=src pytest -q
@@ -90,6 +92,12 @@ The compose file publishes port 8000 on the host. Use it only on an approved loc
 
 There is no `IOR_DATA_DIR` runtime override. Do not invent one to alter hashed inputs.
 
+The deployed frontend serves the catalogue, ES modules, CSS token layers, and
+exact Noto Sans/Noto Sans Arabic fonts from the same origin. It requires no
+runtime CDN. Use `?locale=en` or `?locale=ar`; only the locale choice is stored
+in browser local storage. The demo navigation intentionally omits `/docs`,
+while engineers may still navigate to that route directly.
+
 ## Security posture
 
 For the first demonstration, bind to `127.0.0.1`. If a shared host is unavoidable, place the container behind an approved reverse proxy, restrict source networks, and terminate TLS. Do not expose the application directly to the public Internet.
@@ -114,7 +122,10 @@ curl --fail --silent --show-error http://127.0.0.1:8000/api/health
 PYTHONPATH=src python scripts/demo_smoke.py
 ```
 
-Health must report `status=ok` and `version=0.2.0`. Smoke must retain steel public `INVESTIGATE`, steel simulated `ADVANCE` with unchanged real state, PP public `REJECT`, and 4/4 extraction.
+Health must report `status=ok` and `version=0.2.0`. Detailed authority output
+must report evidence policy `1.2.0` and UI strings `1.0.0`. Smoke must retain
+steel public `INVESTIGATE`, steel simulated `ADVANCE` with unchanged real
+state, PP public `REJECT`, and 4/4 extraction.
 
 ## Persistence, migration, backup, and restore
 

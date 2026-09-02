@@ -13,12 +13,10 @@ from browser_tests.harness import (
     BrowserFailureCollector,
     BrowserSession,
     DESKTOP,
-    ReferenceRecorder,
+    EN,
+    Locale,
     ROOT,
-    V0_2_0_RELEASE_SHA,
     Viewport,
-    git_revision,
-    reference_capture_command,
     start_app_server,
     stop_app_server,
 )
@@ -27,6 +25,10 @@ from scripts.check_browser_prerequisites import (
     PreflightReport,
     PrerequisiteError,
     run_preflight,
+)
+from browser_tests.visual_baselines import (
+    LAUNCH_FLAGS,
+    VisualBaselineSession,
 )
 
 
@@ -41,6 +43,10 @@ def pytest_configure(config: pytest.Config) -> None:
     config.addinivalue_line(
         "markers",
         "e2e: real-Chromium acceptance tests; excluded from default testpaths",
+    )
+    config.addinivalue_line(
+        "markers",
+        "visual: governed visual-regression matrix",
     )
 
 
@@ -81,10 +87,19 @@ def pytest_sessionfinish(
             }
         ),
     }
-    (output_root / "run-summary.json").write_text(
+    mark_expression = session.config.getoption("-m") or ""
+    summary_name = (
+        "run-summary-visual.json"
+        if mark_expression.strip() == "visual"
+        else "run-summary-functional.json"
+    )
+    summary_path = output_root / summary_name
+    temporary_path = output_root / f".{summary_name}.tmp"
+    temporary_path.write_text(
         json.dumps(summary, indent=2, sort_keys=True) + "\n",
         encoding="utf-8",
     )
+    temporary_path.replace(summary_path)
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -98,6 +113,17 @@ def browser_prerequisites() -> PreflightReport:
                 pytrace=False,
             )
         pytest.skip(f"{DIRECT_SKIP_REASON} ({exc})")
+
+
+@pytest.fixture(scope="session")
+def browser_type_launch_args(
+    browser_type_launch_args: dict[str, Any],
+) -> dict[str, Any]:
+    existing = list(browser_type_launch_args.get("args", []))
+    return {
+        **browser_type_launch_args,
+        "args": [*existing, *LAUNCH_FLAGS],
+    }
 
 
 def _configured_directory(
@@ -116,16 +142,6 @@ def artifact_dir() -> Path:
     path = _configured_directory(
         "IOR_E2E_ARTIFACT_DIR",
         ROOT / ".artifacts" / "e2e",
-    )
-    path.mkdir(parents=True, exist_ok=True)
-    return path
-
-
-@pytest.fixture(scope="session")
-def reference_dir(artifact_dir: Path) -> Path:
-    path = _configured_directory(
-        "IOR_E2E_REFERENCE_DIR",
-        artifact_dir / "reference",
     )
     path.mkdir(parents=True, exist_ok=True)
     return path
@@ -151,6 +167,16 @@ def _requested_viewport(request: pytest.FixtureRequest) -> Viewport:
     return candidate
 
 
+def _requested_locale(request: pytest.FixtureRequest) -> Locale:
+    callspec = getattr(request.node, "callspec", None)
+    if callspec is None:
+        return EN
+    candidate = callspec.params.get("locale", EN)
+    if not isinstance(candidate, Locale):
+        raise TypeError("locale parameter must be a Locale")
+    return candidate
+
+
 @pytest.fixture
 def browser_session(
     request: pytest.FixtureRequest,
@@ -159,9 +185,10 @@ def browser_session(
     artifact_dir: Path,
 ) -> Generator[BrowserSession, None, None]:
     viewport = _requested_viewport(request)
+    locale = _requested_locale(request)
     context = new_context(
         base_url=app_server.base_url,
-        locale="en-US",
+        locale=locale.bcp47,
         permissions=["clipboard-read", "clipboard-write"],
         reduced_motion="reduce",
         viewport=viewport.as_dict(),
@@ -180,6 +207,7 @@ def browser_session(
         collector=collector,
         app_server=app_server,
         artifact_dir=artifact_dir,
+        locale=locale,
     )
 
     yield session
@@ -190,24 +218,18 @@ def browser_session(
 
 
 @pytest.fixture(scope="session")
-def reference_recorder(
+def visual_session(
     browser: Any,
-    browser_prerequisites: PreflightReport,
-    reference_dir: Path,
-) -> Generator[ReferenceRecorder, None, None]:
-    for path in reference_dir.glob("*.webp"):
-        path.unlink()
-    index_path = reference_dir / "index.md"
-    if index_path.exists():
-        index_path.unlink()
-    recorder = ReferenceRecorder(
-        reference_dir,
+    artifact_dir: Path,
+) -> Generator[VisualBaselineSession, None, None]:
+    mode = os.environ.get("IOR_VISUAL_MODE", "compare")
+    if mode not in {"compare", "update"}:
+        pytest.fail(f"invalid IOR_VISUAL_MODE={mode}", pytrace=False)
+    session = VisualBaselineSession(
+        mode=mode,
         browser_version=browser.version,
-        font_family=browser_prerequisites.font_family,
-        font_file=browser_prerequisites.font_file,
-        capture_command=reference_capture_command(reference_dir),
-        base_sha=git_revision("HEAD"),
-        release_sha=V0_2_0_RELEASE_SHA,
+        artifact_root=artifact_dir,
+        change_ref=os.environ.get("IOR_BASELINE_CHANGE_REF", ""),
     )
-    yield recorder
-    recorder.finalize()
+    yield session
+    session.finalize()

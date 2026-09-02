@@ -119,3 +119,41 @@ def test_runner_reports_real_browser_proof_and_exact_axe_disposition() -> None:
     )[0]
     assert 'require_step "make_ci"' in keyword_function
     assert 'if [[ "$STEP_NUMBER" -ne 42 ]]' in source
+
+
+def test_runner_checks_every_frontend_es_module() -> None:
+    source = RUNNER.read_text(encoding="utf-8")
+    node_function = source.split(
+        "step_clean_node() {",
+        maxsplit=1,
+    )[1].split(
+        "step_clean_integrity() {",
+        maxsplit=1,
+    )[0]
+
+    assert (
+        '"$PIP_PYTHON" scripts/check_es_modules.py --node node'
+        in node_function
+    )
+    assert "node --check src/ior_mvp/static/app.js" not in node_function
+
+
+def test_runner_checks_ui_contracts_before_compilation() -> None:
+    source = RUNNER.read_text(encoding="utf-8")
+    compile_function = source.split(
+        "step_clean_compile() {",
+        maxsplit=1,
+    )[1].split(
+        "step_clean_node() {",
+        maxsplit=1,
+    )[0]
+
+    assert (
+        '"$PIP_PYTHON" scripts/check_ui_contracts.py'
+        in compile_function
+    )
+    assert (
+        compile_function.index("scripts/check_ui_contracts.py")
+        < compile_function.index("-m compileall")
+    )
+    assert 'if [[ "$STEP_NUMBER" -ne 42 ]]' in source

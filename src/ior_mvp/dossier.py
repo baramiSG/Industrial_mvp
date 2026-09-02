@@ -1,7 +1,22 @@
 from __future__ import annotations
 
 import html
+import json
+from pathlib import Path
 from typing import Any
+
+from .config import ui_text
+
+
+STATIC_DIR = Path(__file__).resolve().parent / "static"
+
+
+def _dossier_styles() -> str:
+    parts = (
+        STATIC_DIR / "css" / "tokens.css",
+        STATIC_DIR / "css" / "dossier.css",
+    )
+    return "\n".join(path.read_text(encoding="utf-8") for path in parts)
 
 
 def build_dossier(analysis: dict[str, Any]) -> dict[str, Any]:
@@ -11,24 +26,29 @@ def build_dossier(analysis: dict[str, Any]) -> dict[str, Any]:
     capacity = analysis.get("capacity") or {}
     economics = analysis.get("economics") or {}
     evidence = analysis.get("evidence", [])
-    public_count = sum(1 for row in evidence if row.get("synthetic_flag") is False)
-    synthetic_count = sum(1 for row in evidence if row.get("synthetic_flag") is True)
+    public_count = sum(
+        1 for row in evidence if row.get("synthetic_flag") is False
+    )
+    synthetic_count = sum(
+        1 for row in evidence if row.get("synthetic_flag") is True
+    )
     simulated_rules = [
         row
         for row in analysis.get("rules", [])
         if row.get("synthetic_flag") is True
     ]
-
     demand_conclusion = (
-        f"Latest frozen public imports: USD {latest.get('imports_usd_m', 0):,.1f}m and "
+        f"Latest frozen public imports: USD "
+        f"{latest.get('imports_usd_m', 0):,.1f}m and "
         f"{latest.get('imports_kt', 0):,.1f} kt in {latest['year']}."
     )
     if capacity:
         demand_conclusion += (
-            f" Simulation target demand is {capacity.get('target_spec_demand_kt', 0):,.1f} kt; "
-            f"the specification-adjusted gap is {capacity.get('specification_adjusted_gap_kt', 0):,.1f} kt."
+            " Simulation target demand is "
+            f"{capacity.get('target_spec_demand_kt', 0):,.1f} kt; "
+            "the specification-adjusted gap is "
+            f"{capacity.get('specification_adjusted_gap_kt', 0):,.1f} kt."
         )
-
     return {
         "dossier_version": "1.0",
         "opportunity_id": opportunity["id"],
@@ -69,95 +89,187 @@ def build_dossier(analysis: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def render_dossier_html(dossier: dict[str, Any]) -> str:
+def _state_text(state: str, locale: str) -> str:
+    keys = {
+        "ADVANCE": "state.advance",
+        "REJECT": "state.reject",
+        "INVESTIGATE": "state.investigate",
+        "MONITOR": "state.monitor",
+    }
+    key = keys.get(state)
+    return ui_text(key, locale) if key else state
+
+
+def _execution_text(execution: str, locale: str) -> str:
+    keys = {
+        "FULL": "execution.full",
+        "DEGRADED": "execution.degraded",
+        "DISABLED": "execution.disabled",
+    }
+    key = keys.get(execution)
+    return ui_text(key, locale) if key else execution
+
+
+def render_dossier_html(
+    dossier: dict[str, Any],
+    locale: str = "en",
+) -> str:
+    """Render localized dossier chrome around unchanged analytical content."""
+
     def e(value: Any) -> str:
         return html.escape(str(value))
 
-    conditions = "".join(f"<li>{e(item)}</li>" for item in dossier["conditions"])
-    kills = "".join(f"<li>{e(item)}</li>" for item in dossier["kill_conditions"])
-    evidence_actions = "".join(
-        f"<li>{e(item)}</li>" for item in dossier["next_evidence_actions"]
+    def text(key: str, **values: Any) -> str:
+        return e(ui_text(key, locale, **values))
+
+    def island(value: Any, tag: str = "span") -> str:
+        return (
+            f'<{tag} class="source-language-island" '
+            f'lang="en" dir="ltr">{e(value)}</{tag}>'
+        )
+
+    def technical(value: Any) -> str:
+        return (
+            '<bdi class="ltr-isolate technical-token" '
+            f'dir="ltr">{e(value)}</bdi>'
+        )
+
+    def localized_code(label: str, value: str) -> str:
+        if locale == "en":
+            return technical(value)
+        return f"{e(label)} {technical(value)}"
+
+    def caption() -> str:
+        if locale != "ar":
+            return ""
+        return (
+            '<p class="dossier-source-caption">'
+            f'{text("source_language.caption")}</p>'
+        )
+
+    def source_list(values: list[Any]) -> str:
+        if not values:
+            return f"<li>{text('dossier.none')}</li>"
+        return "".join(f"<li>{island(item)}</li>" for item in values)
+
+    def fired_label(value: bool | None) -> str:
+        if value is True:
+            return ui_text("fire.yes", locale)
+        if value is False:
+            return ui_text("fire.no", locale)
+        return ui_text("fire.na", locale)
+
+    direction = "rtl" if locale == "ar" else "ltr"
+    state_text = _state_text(dossier["decision_state"], locale)
+    mode_text = ui_text(
+        "mode.simulated" if dossier["mode"] == "simulated" else "mode.public",
+        locale,
     )
     disclosure = dossier.get("synthetic_disclosure")
     disclosure_html = ""
     if disclosure:
-        disclosure_html = f"""
-        <div class="warning"><strong>{e(disclosure['display_label'])}</strong><br>{e(disclosure['seed_basis'])}</div>
-        """
-
-    def fired_label(value: bool | None) -> str:
-        if value is True:
-            return "FIRES"
-        if value is False:
-            return "DOES NOT FIRE"
-        return "NOT EVALUABLE"
-
-    simulated_rules = dossier["gap_diagnosis"].get(
-        "simulated_rules",
-        [],
-    )
+        labels = disclosure["display_labels"]
+        order = ("ar", "en") if locale == "ar" else ("en", "ar")
+        rendered_labels = "<br>".join(
+            (
+                f'<strong lang="ar" dir="rtl">{e(labels[key])}</strong>'
+                if key == "ar"
+                else f'<strong lang="en" dir="ltr">{e(labels[key])}</strong>'
+            )
+            for key in order
+        )
+        disclosure_html = (
+            f'<div class="warning">{rendered_labels}<br>'
+            f"{caption()}{island(disclosure['seed_basis'])}</div>"
+        )
+    simulated_rules = dossier["gap_diagnosis"].get("simulated_rules", [])
     simulated_rules_html = ""
     if simulated_rules:
         items = "".join(
             (
                 "<li>"
-                f"<strong>{e(row['rule_id'])}</strong> "
-                f"· {e(row['execution'])} "
-                f"· {e(fired_label(row['fired']))}"
-                f"<br><span class=\"small\">{e(row['result'])}</span>"
-                f"<br><span class=\"small\">{e(row['display_label'])}</span>"
+                f"{technical(row['rule_id'])} · "
+                f"{localized_code(_execution_text(row['execution'], locale), row['execution'])} · "
+                f"{e(fired_label(row['fired']))}"
+                f"<br>{island(row['result'])}"
+                f"<br>{e(row['display_labels']['en'])}"
+                f'<br><span lang="ar" dir="rtl">'
+                f"{e(row['display_labels']['ar'])}</span>"
                 "</li>"
             )
             for row in simulated_rules
         )
-        simulated_rules_html = f"""
-<section class="box"><h2>Simulated R6–R8 ledger</h2><ul>{items}</ul></section>
-"""
-
+        simulated_rules_html = (
+            f'<section class="box"><h2>{text("dossier.simulated_ledger")}'
+            f"</h2>{caption()}<ul>{items}</ul></section>"
+        )
+    identity = dossier["product_identity"]
+    if locale == "ar" and identity["commercial_name_ar"]:
+        product_names = (
+            f'<p lang="ar" dir="rtl"><strong>'
+            f"{e(identity['commercial_name_ar'])}</strong></p>"
+            f"<p>{island(identity['commercial_name_en'])}</p>"
+        )
+    else:
+        product_names = (
+            f"<p><strong>{island(identity['commercial_name_en'])}</strong></p>"
+            f'<p lang="ar" dir="rtl">{e(identity["commercial_name_ar"])}</p>'
+        )
     authority = dossier["evidence_summary"]["authority"]
     methodology = authority["methodology"]
     versions = authority["config_versions"]
-    authority_html = f"""
-<p><strong>Methodology</strong><br>{e(methodology['file'])}</p>
-<p class="small">SHA-256 {e(methodology['sha256'])}</p>
-<p class="small">Project {e(authority['project_version'])}
- · Thresholds {e(versions['thresholds'])}
- · Sector profiles {e(versions['sector_profiles'])}
- · Evidence policy {e(versions['evidence_policy'])}</p>
-"""
-
+    authority_html = (
+        f'<p><strong>{text("integrity.methodology")}</strong><br>'
+        f"{technical(methodology['file'])}</p>"
+        f'<p class="small">{text("technical.sha256")} '
+        f"{technical(methodology['sha256'])}</p>"
+        f'<p class="small">{text("integrity.project")} '
+        f"{technical(authority['project_version'])} · "
+        f'{text("integrity.thresholds")} {technical(versions["thresholds"])} · '
+        f'{text("integrity.sector_profiles")} '
+        f'{technical(versions["sector_profiles"])} · '
+        f'{text("integrity.evidence_policy")} '
+        f'{technical(versions["evidence_policy"])} · '
+        f'{text("integrity.ui_strings")} '
+        f'{technical(versions["ui_strings"])}</p>'
+    )
+    evidence = dossier["evidence_summary"]
+    evidence_counts = text(
+        "dossier.evidence_counts",
+        public=evidence["public_records"],
+        synthetic=evidence["synthetic_records"],
+    )
+    title = text("dossier.document_title", state=state_text)
+    supply_json = json.dumps(
+        dossier["supply_conclusion"],
+        ensure_ascii=False,
+        sort_keys=True,
+    )
     return f"""<!doctype html>
-<html lang="en">
+<html lang="{locale}" dir="{direction}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{e(dossier['decision_headline'])}</title>
-<style>
-:root{{--dossier-muted:#5f7389}}
-body{{font-family:Inter,Arial,sans-serif;color:#13233a;margin:0;background:#eef3f7}}
-.page{{max-width:1050px;margin:28px auto;background:white;padding:44px;box-shadow:0 12px 40px rgba(12,32,56,.12)}}
-h1{{font-size:30px;margin:0 0 6px}} h2{{font-size:16px;text-transform:uppercase;letter-spacing:.08em;color:#53677f;border-bottom:1px solid #dce5ed;padding-bottom:8px}}
-.meta{{color:var(--dossier-muted);margin-bottom:24px}} .state{{display:inline-block;padding:7px 11px;border-radius:999px;background:#102a43;color:white;font-weight:700}}
-.grid{{display:grid;grid-template-columns:1fr 1fr;gap:24px}} .box{{border:1px solid #dce5ed;border-radius:12px;padding:18px}}
-.warning{{background:#fff5d6;border:1px solid #e7b93e;padding:14px;border-radius:10px;margin:18px 0}}
-.small{{font-size:12px;color:#65768a}} ul{{padding-left:20px}} @media print{{body{{background:white}}.page{{box-shadow:none;margin:0;max-width:none}}}}
-</style>
+<title>{title}</title>
+<style>{_dossier_styles()}</style>
 </head>
-<body>
-<main class="page">
-<div class="state">{e(dossier['decision_state'])}</div>
-<h1>{e(dossier['decision_headline'])}</h1>
-<div class="meta">{e(dossier['opportunity_id'])} · {e(dossier['route'])} · Mode: {e(dossier['mode'])}</div>
+<body class="dossier-body">
+<main class="page" aria-label="{text("dossier.print_aria")}">
+<div class="state">{localized_code(state_text, dossier["decision_state"])}</div>
+{caption()}
+<h1>{island(dossier["decision_headline"])}</h1>
+<div class="meta">{technical(dossier["opportunity_id"])} · {island(dossier["route"])} · {text("dossier.mode")}: {e(mode_text)}</div>
 {disclosure_html}
-<div class="grid">
-<section class="box"><h2>Product identity</h2><p><strong>{e(dossier['product_identity']['commercial_name_en'])}</strong></p><p dir="rtl">{e(dossier['product_identity']['commercial_name_ar'])}</p><p class="small">HS {e(dossier['product_identity']['hs_revision'])} / {e(dossier['product_identity']['hs6'])}</p></section>
-<section class="box"><h2>Demand conclusion</h2><p>{e(dossier['demand_conclusion'])}</p></section>
+<div class="dossier-grid">
+<section class="box"><h2>{text("dossier.product_identity")}</h2>{product_names}<p class="small">{technical(f"HS {identity['hs_revision']} / {identity['hs6']}")}</p><h3>{text("dossier.application_boundary")}</h3>{caption()}<p>{island(identity["application_boundary"])}</p></section>
+<section class="box"><h2>{text("dossier.demand_conclusion")}</h2>{caption()}<p>{island(dossier["demand_conclusion"])}</p></section>
+<section class="box"><h2>{text("dossier.supply_conclusion")}</h2>{caption()}<p>{island(supply_json, "code")}</p></section>
 {simulated_rules_html}
-<section class="box"><h2>Decision conditions</h2><ul>{conditions or '<li>None</li>'}</ul></section>
-<section class="box"><h2>Kill conditions</h2><ul>{kills or '<li>None</li>'}</ul></section>
-<section class="box"><h2>Next evidence actions</h2><ul>{evidence_actions or '<li>None</li>'}</ul></section>
-<section class="box"><h2>Evidence boundary</h2><p>{e(dossier['evidence_summary']['public_records'])} public records; {e(dossier['evidence_summary']['synthetic_records'])} synthetic records.</p><p class="small">Snapshot {e(dossier['evidence_summary']['snapshot_id'])} · As of {e(dossier['evidence_summary']['as_of_date'])}</p></section>
-<section class="box"><h2>Authority and versions</h2>{authority_html}</section>
+<section class="box"><h2>{text("dossier.decision_conditions")}</h2>{caption()}<ul>{source_list(dossier["conditions"])}</ul></section>
+<section class="box"><h2>{text("dossier.kill_conditions")}</h2>{caption()}<ul>{source_list(dossier["kill_conditions"])}</ul></section>
+<section class="box"><h2>{text("dossier.next_actions")}</h2>{caption()}<ul>{source_list(dossier["next_evidence_actions"])}</ul></section>
+<section class="box"><h2>{text("dossier.evidence_boundary")}</h2><p>{evidence_counts}</p><p class="small">{text("dossier.snapshot")} {technical(evidence["snapshot_id"])} · {text("dossier.as_of")} {technical(evidence["as_of_date"])}</p></section>
+<section class="box"><h2>{text("dossier.authority")}</h2>{authority_html}</section>
 </div>
 </main>
 </body></html>"""

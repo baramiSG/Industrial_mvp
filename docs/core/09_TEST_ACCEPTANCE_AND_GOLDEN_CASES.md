@@ -1,5 +1,7 @@
 # 09 — Test Strategy, Acceptance Gates and Golden Cases
 
+<!-- core_version: 2.0.0; supersedes: 1.0.0; effective_date: 2026-09-02 -->
+
 ## 1. Objective
 
 Testing must prove methodological fidelity, not merely code coverage. The highest-risk defects are:
@@ -120,18 +122,15 @@ support = 0
 - dossier JSON and HTML;
 - extraction endpoint.
 
-### 2.7 Frontend contract tests
+### 2.7 Frontend contract and real-browser visual tests
 
-At minimum, static checks confirm:
-
-- evidence-mode toggle exists;
-- synthetic warning styles exist;
-- public and simulated states can display together;
-- dossier action exists;
-- Arabic `dir=rtl` is present;
-- no external CDN is required.
-
-A production pipeline should add Playwright visual and interaction tests.
+Static contracts shall enforce the approved component registry, token-only styling,
+ES-module boundaries, catalogue parity, synthetic disclosure and offline assets.
+Real Chromium tests shall exercise every supported locale, evidence mode, primary
+control and approved viewport, including keyboard focus, WCAG 2.1 A/AA, bidirectional
+layout, intended-font rendering, dossier print/PDF, console and network failures.
+Post-redesign visual baselines are hashed test oracles: comparison is deterministic,
+updates require an explicit reviewer-approved procedure, and CI shall never update them.
 
 ## 3. Threshold boundary tests
 

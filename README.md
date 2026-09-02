@@ -44,10 +44,16 @@ chmod +x START_DEMO_WSL.sh
 Then open:
 
 ```text
-http://127.0.0.1:8000
+http://127.0.0.1:8000/?locale=en
+http://127.0.0.1:8000/?locale=ar
 ```
 
-API documentation:
+The topbar language control switches all interface chrome, sets the correct
+document direction, and persists only `ior.locale`. Engine-authored analytical
+text remains visibly marked English source-language content in Arabic UI.
+
+Engineer-only API documentation is available by direct navigation and is not
+linked from the offline Ministry surface:
 
 ```text
 http://127.0.0.1:8000/docs
@@ -92,7 +98,12 @@ Golden CI invariants include:
 
 ## CI and local gates
 
-GitHub Actions runs the prohibited-file scan, recursive threshold-literal scan, Python compile check, JavaScript syntax check, integrity verification, Gate B scenario reconciliation/back-test, full test suite and demo smoke on uv/Python 3.12, uv/Python 3.14 and the documented pip path; it also builds the Docker image.
+GitHub Actions runs the prohibited-file scan, recursive threshold-literal scan,
+bilingual catalogue/token/copy contracts, Python compilation, recursive
+ES-module syntax, integrity verification, Gate B scenario
+reconciliation/back-test, full test suite and demo smoke on uv/Python 3.12,
+uv/Python 3.14 and the documented pip path; it also builds the Docker image and
+compares 118 functional plus four governed visual Chromium nodes.
 
 After installing uv as described in `docs/DEVELOPMENT_GUIDE.md`, reproduce the required gates locally with:
 
@@ -127,6 +138,7 @@ scenario_id: ...
 source: DEMO_GENERATOR
 evidence_class: D
 display_label: SIMULATED — NOT MINISTRY EVIDENCE
+display_label_ar: محاكاة — ليست بيانات أو أدلة صادرة عن الوزارة
 ```
 
 The simulation branch is intended to demonstrate the **value of connecting and cleaning Ministry data**, not to impersonate that data.
@@ -152,7 +164,7 @@ The model does not generate executable browser code at runtime. This preserves a
 ```text
 .
 ├── AGENTS.md                         # Thin domain overlay; reusable Flight Control is external
-├── config/                           # Versioned thresholds, profiles and evidence policy
+├── config/                           # Versioned thresholds, profiles, evidence policy and UI catalogue
 ├── data/
 │   ├── snapshots/public/             # Frozen public golden cases
 │   ├── synthetic/                    # Explicitly synthetic Ministry-grade scenarios
@@ -163,6 +175,7 @@ The model does not generate executable browser code at runtime. This preserves a
 │   ├── core/                         # Ten-document frozen implementation core
 │   └── implementation/               # Build overlay, UI/API/runbook and later-binding notes
 ├── src/ior_mvp/                      # Deterministic engine, API, dossier, GenUI and frontend
+├── browser_tests/                    # Bilingual Chromium journeys and governed visual baselines
 ├── tests/                            # Unit, golden, API, leakage and integrity tests
 └── scripts/                          # Run, verify, smoke, manifest and package helpers
 ```

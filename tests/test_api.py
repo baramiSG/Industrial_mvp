@@ -11,6 +11,7 @@ from ior_mvp.data_repository import get_synthetic_scenario
 
 
 client = TestClient(app)
+ARABIC_DISCLOSURE = "محاكاة — ليست بيانات أو أدلة صادرة عن الوزارة"
 
 
 def test_health() -> None:
@@ -61,6 +62,15 @@ def test_steel_ui_manifest_uses_approved_components() -> None:
     }
     assert {row["type"] for row in payload["components"]} <= approved
     assert payload["guardrails"]["real_decision_never_uses_synthetic"] is True
+    banner = next(
+        row
+        for row in payload["components"]
+        if row["type"] == "integrity_banner"
+    )
+    assert banner["props"]["synthetic_labels"] == {
+        "en": "SIMULATED — NOT MINISTRY EVIDENCE",
+        "ar": ARABIC_DISCLOSURE,
+    }
 
 
 def test_public_manifest_omits_economics_panel() -> None:
@@ -86,6 +96,16 @@ def test_unknown_opportunity_returns_404() -> None:
     assert response.status_code == 404
 
 
+def test_demo_removes_docs_link_but_engineer_route_remains() -> None:
+    index_response = client.get("/")
+    docs_response = client.get("/docs")
+
+    assert index_response.status_code == 200
+    assert 'href="/docs"' not in index_response.text
+    assert docs_response.status_code == 200
+    assert "swagger-ui" in docs_response.text
+
+
 def test_spa_fallback_does_not_serve_file_outside_static_dir() -> None:
     response = spa_fallback("../../../pyproject.toml")
 
@@ -103,20 +123,36 @@ def test_encoded_spa_traversal_returns_index(path: str) -> None:
     response = client.get(path)
 
     assert response.status_code == 200
-    assert (
-        "<title>Industrial Opportunity Resolution Engine</title>"
-        in response.text
-    )
+    assert "<title></title>" in response.text
+    assert 'data-i18n="brand.name"' in response.text
+    assert '<script type="module" src="/static/app.js"></script>' in response.text
     assert "[project]" not in response.text
     assert 'name = "industrial-opportunity-resolution-mvp"' not in response.text
 
 
-@pytest.mark.parametrize("path", ["/static/app.js", "/app.js"])
-def test_legitimate_static_file_is_served(path: str) -> None:
+@pytest.mark.parametrize(
+    ("path", "expected"),
+    [
+        ("/static/app.js", "export async function init"),
+        ("/app.js", "export async function init"),
+        (
+            "/static/modules/api.js",
+            "export async function getJSON",
+        ),
+        (
+            "/modules/api.js",
+            "export async function getJSON",
+        ),
+    ],
+)
+def test_legitimate_static_file_is_served(
+    path: str,
+    expected: str,
+) -> None:
     response = client.get(path)
 
     assert response.status_code == 200
-    assert "async function getJSON" in response.text
+    assert expected in response.text
 
 
 @pytest.mark.parametrize(

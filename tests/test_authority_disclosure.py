@@ -53,6 +53,9 @@ def _expected_authority() -> dict:
     policy = _yaml(
         PROJECT_ROOT / "config" / "evidence_policy.v1.yaml"
     )
+    ui_strings = _yaml(
+        PROJECT_ROOT / "config" / "ui_strings.v1.yaml"
+    )
     project = _yaml(
         PROJECT_ROOT / "config" / "project.yaml"
     )
@@ -66,6 +69,7 @@ def _expected_authority() -> dict:
             "thresholds": thresholds["metadata"]["version"],
             "sector_profiles": sectors["metadata"]["version"],
             "evidence_policy": policy["metadata"]["version"],
+            "ui_strings": ui_strings["metadata"]["version"],
         },
         "project_version": project["project"]["version"],
     }
@@ -161,16 +165,13 @@ def test_dossier_json_and_html_project_the_same_authority(
     rendered = render_dossier_html(dossier)
     assert authority["methodology"]["file"] in rendered
     assert authority["methodology"]["sha256"] in rendered
-    assert (
-        f"Project {authority['project_version']}"
-        in rendered
-    )
+    assert "Project" in rendered
+    assert authority["project_version"] in rendered
     for label, key in (
         ("Thresholds", "thresholds"),
         ("Sector profiles", "sector_profiles"),
         ("Evidence policy", "evidence_policy"),
+        ("UI strings", "ui_strings"),
     ):
-        assert (
-            f"{label} {authority['config_versions'][key]}"
-            in rendered
-        )
+        assert label in rendered
+        assert authority["config_versions"][key] in rendered

@@ -191,11 +191,12 @@ step_clean_thresholds() {
 
 step_clean_compile() {
   require_step "clean_pip_install" || return $?
+  "$PIP_PYTHON" scripts/check_ui_contracts.py || return $?
   "$PIP_PYTHON" -m compileall -q src scripts tests
 }
 
 step_clean_node() {
-  node --check src/ior_mvp/static/app.js
+  "$PIP_PYTHON" scripts/check_es_modules.py --node node
 }
 
 step_clean_integrity() {

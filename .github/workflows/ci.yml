@@ -45,10 +45,12 @@ jobs:
         run: uv run --locked --extra dev python scripts/check_prohibited_files.py
       - name: Reject embedded threshold literals
         run: uv run --locked --extra dev python scripts/check_threshold_literals.py
+      - name: Validate UI catalogue, token and copy contracts
+        run: uv run --locked --extra dev python scripts/check_ui_contracts.py
       - name: Compile Python
         run: uv run --locked --extra dev python -m compileall -q src scripts tests
-      - name: Check JavaScript syntax
-        run: node --check src/ior_mvp/static/app.js
+      - name: Check JavaScript ES-module syntax
+        run: uv run --locked --extra dev python scripts/check_es_modules.py --node node
       - name: Verify integrity
         run: PYTHONPATH=src uv run --locked --extra dev python scripts/verify_integrity.py
       - name: Validate synthetic scenarios against public marginals
@@ -78,10 +80,12 @@ jobs:
         run: python scripts/check_prohibited_files.py
       - name: Reject embedded threshold literals
         run: python scripts/check_threshold_literals.py
+      - name: Validate UI catalogue, token and copy contracts
+        run: python scripts/check_ui_contracts.py
       - name: Compile Python
         run: python -m compileall -q src scripts tests
-      - name: Check JavaScript syntax
-        run: node --check src/ior_mvp/static/app.js
+      - name: Check JavaScript ES-module syntax
+        run: python scripts/check_es_modules.py --node node
       - name: Verify integrity
         run: PYTHONPATH=src python scripts/verify_integrity.py
       - name: Validate synthetic scenarios against public marginals
@@ -126,12 +130,11 @@ jobs:
         with:
           path: ~/.cache/ms-playwright
           key: playwright-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('uv.lock') }}
-      - name: Install Chromium dependencies and Arabic font
+      - name: Install Chromium dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install --yes --no-install-recommends fonts-noto-core
           uv run --locked --extra dev --extra e2e python -m playwright install --with-deps chromium
-      - name: Run real-browser acceptance gate
+      - name: Run bilingual real-browser and visual gates
         run: make UV=uv e2e
       - name: Upload browser diagnostics on failure
         if: ${{ failure() }}

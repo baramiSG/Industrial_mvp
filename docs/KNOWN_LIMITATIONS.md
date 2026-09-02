@@ -2,12 +2,6 @@
 
 Updated by the Supervisor at every slice completion. Items marked *pre-existing* were present in the v0.1.0 package before this build.
 
-## Open (to be closed by a roadmap slice)
-
-| ID | Limitation | Source of requirement | Closing slice |
-|---|---|---|---|
-| KL-31 | The topbar `/docs` page uses FastAPI's default public-CDN Swagger assets. The S06 keyboard gate focuses but deliberately does not activate the link because an offline Ministry demonstration must make no external request. | Core 01 NFR-004; UX specification §11; S06 plan PR-03 ruling. | S07 — vendor offline API-doc assets or remove the link. |
-
 ## Closed by completion slices
 
 | ID | Limitation | Resolution | Evidence | Closure |
@@ -22,18 +16,19 @@ Updated by the Supervisor at every slice completion. Items marked *pre-existing*
 | KL-08 | Steel/PP branch dispatch and decision narrative hard-coded in engine code; scenarios carried no ground truth (*pre-existing*). | Generic `_simulate` (Core 07 §7.4 → §7.3 → INVESTIGATE); scenarios 1.1.0 carry `ground_truth` and `decision_narrative`; runtime and Gate B back-test fail closed. | Same evidence as KL-07; Gate B back-tests PASS for both scenarios. | Squash merge of S04 (PR #4, `98c1a40`). |
 | KL-09 | No CI workflow; proof commands run manually only (*pre-existing*). | `.github/workflows/ci.yml` (uv 3.12/3.14, pip 3.12, Docker build) running scan → compile → node → integrity → pytest → smoke; local `make ci`. | `.workflow/slices/S01-ci-and-toolchain/test_evidence.md`; CI run 33569855956 on PR #1 — all four jobs pass. | Effective on squash merge of S01 (PR #1). |
 
-## Milestone v0.3.0 provisional closure records
+## Closed by milestone v0.3.0 slices
 
-| ID | Limitation | Resolution | Local evidence | Closure |
+| ID | Limitation | Resolution | Evidence | Closure |
 |---|---|---|---|---|
-| KL-22 | No Playwright or real-browser interaction/visual test was part of v0.2.0 final acceptance. | S06 adds 17 named Playwright tests / 62 Chromium nodes for journeys, keyboard/focus, axe WCAG 2.1 A/AA, RTL glyphs, four viewports, print/PDF, console/page/network/HTTP guardrails, and 40 non-oracle documentary references. | `.workflow/slices/S06-browser-acceptance-harness/test_evidence.md`; local `make e2e` observed 62 passed. | Provisional on the uncommitted S06 candidate. Effective only after Supervisor and independent review, green PR browser check, and approved S06 merge. |
+| KL-22 | No Playwright or real-browser interaction/visual test was part of v0.2.0 final acceptance. | S06 adds 17 named Playwright tests / 62 Chromium nodes for journeys, keyboard/focus, axe WCAG 2.1 A/AA, RTL glyphs, four viewports, print/PDF, console/page/network/HTTP guardrails, and 40 non-oracle documentary references. | `.workflow/slices/S06-browser-acceptance-harness/test_evidence.md`; local `make e2e` observed 62 passed. | Closed on the squash merge of S06 (PR #8, `6d00e27`); PR CI run 33602331107 and default-branch run 33602662668 each ran `browser / Chromium / Python 3.12` green (62 passed); Grok re-review APPROVE zero unresolved. |
+| KL-21 | Raw visual literals outside a complete token layer and one monolithic browser module. | S07 introduces an enforced token-only CSS layer, logical properties, 19 named-export ES modules at no more than 199 lines, recursive syntax checking, and bilingual browser regression. | `.workflow/slices/S07-bilingual-interface-foundation/test_evidence.md`; local implementation evidence only. | Provisional S07 closure; effective only after independent approval, PR merge, and green current-head/default-branch CI. |
+| KL-31 | The demo topbar exposed FastAPI `/docs`, whose default Swagger UI loads public-CDN assets. | S07 removes the topbar link while retaining `/docs` as an engineer-only direct route; keyboard inventory remains 15 controls through the locale switch. | Static/API contracts and the 16-node bilingual keyboard matrix in `.workflow/slices/S07-bilingual-interface-foundation/test_evidence.md`. | Provisional S07 closure; effective only after independent approval, PR merge, and green current-head/default-branch CI. |
 
 ## Accepted for this MVP (recorded, not scheduled)
 
 | ID | Limitation | Rationale |
 |---|---|---|
 | KL-20 | `sector_profiles.v1.yaml` implements 2 of the 5 methodology §6.3 profiles. | Only two golden cases exist; adding profiles without cases would be untested configuration. |
-| KL-21 | `styles.css` contains pre-existing hard-coded hex colours outside `:root` tokens and `app.js` remains a single module of about 450 lines. | S05 does not edit the frontend. Full tokenisation and module decomposition are post-acceptance polish and cannot justify domain/release drift. |
 | KL-23 | `MONITOR` is supported by the contract but is not produced by either packaged golden case. | Core 02 §5 records this explicitly; inventing a third case or route trigger is outside the frozen evidence. |
 | KL-24 | The public branch does not reach the complete-route-sequence else branch of Core 07 §7.1 because both fixtures stop at `REJECT`/`INVESTIGATE`. | Implementing untested public route selection without evidence would invent behavior. |
 | KL-25 | R8 simulation is explicitly `DISABLED`/`NOT_CALCULABLE`: packaged scenarios disclose committed and announced layers but contain no governed base-demand, commitment-probability, or minimum-efficient-scale field. | Values are absent from authority; raw layers remain separate and cannot fire R8. |

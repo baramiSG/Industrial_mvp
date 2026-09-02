@@ -4,7 +4,10 @@ import math
 from typing import Any
 
 from .config import thresholds_config
-from .evidence import EvidenceIntegrityError
+from .evidence import (
+    EvidenceIntegrityError,
+    synthetic_display_labels,
+)
 
 
 def _rule(
@@ -53,6 +56,7 @@ def _synthetic_rule(
             "source": scenario["source"],
             "evidence_class": scenario["evidence_class"],
             "display_label": scenario["display_label"],
+            "display_labels": synthetic_display_labels(),
             "basis": "synthetic",
         }
     )

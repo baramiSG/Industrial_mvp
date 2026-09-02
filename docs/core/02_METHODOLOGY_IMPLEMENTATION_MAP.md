@@ -1,5 +1,7 @@
 # 02 — Methodology-to-Implementation Map
 
+<!-- core_version: 2.0.0; supersedes: 1.0.0; effective_date: 2026-09-02 -->
+
 ## 1. Purpose
 
 This is the anti-drift document. Every material methodology requirement is mapped to:
@@ -31,6 +33,8 @@ An autonomous agent may refactor implementation, but it may not remove a mapped 
 | 14 — PP worked case | Reject generic capacity support | `SAU-H0-390210.json` | PP public golden | PP decision workspace |
 | 15 — Decision Dossier | One-page decision backed by evidence pack | `dossier.py` | dossier API tests | printable dossier |
 | 16 — Outcome Learning | Freeze predicted values; compare actuals later | data-model extension point | deferred production tests | documented production extension |
+| 5 / 10 — Bilingual presentation boundary | Interface chrome is localized from a governed catalogue; engine analytical text remains marked source-language content until a governed narrative exists | `config.ui_strings_bundle`, `app.ui_strings`, static ES modules | catalogue/API/browser parity tests | whole-interface AR/EN switch |
+| 2.1 / 10 / 11 — Synthetic disclosure language | English and Arabic warning labels are policy controls and every synthetic projection uses them without changing evidence class or real decision | `evidence.synthetic_display_labels`, `rules`, `genui`, `dossier` | isolation, dossier, API and browser disclosure tests | bilingual synthetic warning |
 | Appendix A | Formula reference | `rules.py`, `capability.py`, `economics.py` | formula tests | metric cards |
 | Appendix B | Versioned thresholds and calibration | `thresholds.v1.yaml` | config and boundary tests | rule ledger metadata |
 | Appendix C | Minimum data dictionary | `04_CANONICAL_DATA_MODEL.md` and snapshots | repository tests | evidence and opportunity views |

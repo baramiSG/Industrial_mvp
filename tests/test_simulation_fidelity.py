@@ -17,6 +17,8 @@ from ior_mvp.rules import (
     evaluate_simulated_rules,
 )
 
+ARABIC_DISCLOSURE = "محاكاة — ليست بيانات أو أدلة صادرة عن الوزارة"
+
 
 def _scenario(opportunity_id: str) -> dict:
     scenario = get_synthetic_scenario(opportunity_id)
@@ -198,6 +200,10 @@ def test_public_has_zero_synthetic_rule_rows_and_simulated_has_three() -> None:
             assert row["display_label"] == (
                 "SIMULATED — NOT MINISTRY EVIDENCE"
             )
+            assert row["display_labels"] == {
+                "en": row["display_label"],
+                "ar": ARABIC_DISCLOSURE,
+            }
             assert row["basis"] == "synthetic"
             assert set(
                 (
@@ -209,6 +215,15 @@ def test_public_has_zero_synthetic_rule_rows_and_simulated_has_three() -> None:
                     "metrics",
                 )
             ) <= set(row)
+
+        assert simulated["simulation_decision"]["display_labels"] == {
+            "en": "SIMULATED — NOT MINISTRY EVIDENCE",
+            "ar": ARABIC_DISCLOSURE,
+        }
+        assert simulated["simulation_scenario"]["display_labels"] == {
+            "en": "SIMULATED — NOT MINISTRY EVIDENCE",
+            "ar": ARABIC_DISCLOSURE,
+        }
 
 
 def test_steel_simulated_r6_r7_r8_are_evidence_faithful() -> None:

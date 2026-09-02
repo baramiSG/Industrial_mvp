@@ -59,18 +59,19 @@
     "v0.3.0": {
       "name": "Ministerial Demonstration Readiness",
       "state": "LOCAL_GATES",
-      "current_slice": "S06-browser-acceptance-harness",
-      "next_slice": "S07-bilingual-interface-foundation",
+      "current_slice": "S07-bilingual-interface-foundation",
+      "next_slice": "S08-snapshot-v2-computed-rules",
       "planning_documents": ["docs/milestones/v0.3.0/GAP_ANALYSIS.md", "docs/milestones/v0.3.0/SLICE_GRAPH.md"],
       "owner_decisions": {"OD-1": "APPROVED_WITH_AMENDMENTS 2026-09-02 (I1, I5 amended; R-1..R-6)", "OD-2": "APPROVED_WITH_AMENDMENTS 2026-09-02", "adr": "ADR-010"},
       "seat_models": {"supervisor": "claude-fable-5-1-thinking-max", "planner_implementer": "gpt-5.6-sol-max", "reviewer": "cursor-grok-4.6-xhigh", "ladders": "4 plans / 8 implementation candidates per slice, then BLOCKED_FOR_OWNER"},
       "execution_order": ["M3-P0", "S06", "S07", "S08", "S09", "S10", "S11", "S12", "S13", "S14", "S15", "S16", "S17", "S18", "S19", "S20", "S21", "S22"],
       "slices": {
         "M3-P0": {"state": "MERGED", "branch": "milestone/v0.3.0-planning (deleted)", "pr": "https://github.com/baramiSG/Industrial_mvp/pull/7", "pr_head": "e6d667762576ad740d593cd0600b2379be5e11a3", "pr_ci_run": "33593648213", "merge_commit": "d338f5d9ed49457d3a595b2d1e6b4f0bb7683efc", "main_ci_run": "33593703368", "content": "docs only"},
-        "S06-browser-acceptance-harness": {"state": "LOCAL_GATES", "branch": "slice/S06-browser-acceptance-harness", "base": "d338f5d9ed49457d3a595b2d1e6b4f0bb7683efc", "pr": null, "merge_commit": null, "planner": "gpt-5.6-sol-max (agent e60f0b0d)", "implementer": "gpt-5.6-sol-max (agent 25e87e27)", "reviewer": "cursor-grok-4.6-xhigh (agent f2929876)", "plan_rounds": 2, "supervisor_findings": "PR-01..03 + RI-01 (plan), SR-01..02 (implementation) — all resolved", "reviewer_findings": "RV-01 BLOCKER (tag peel on shallow CI checkout) resolved; re-review APPROVE zero unresolved", "tests": "309 default (3.12 and 3.14) + 62 Chromium nodes", "ui_defects_fixed": ["S06-UI-01 workspace contrast tokens", "S06-UI-02 dossier .meta contrast token", "S06-UI-03 workspace horizontal overflow at 1440/1024", "S06-UI-04 reduced-motion transient"], "closes": ["KL-22"], "opens": ["KL-31"]}
+        "S06-browser-acceptance-harness": {"state": "MERGED", "branch": "slice/S06-browser-acceptance-harness (deleted)", "base": "d338f5d9ed49457d3a595b2d1e6b4f0bb7683efc", "pr": "https://github.com/baramiSG/Industrial_mvp/pull/8", "pr_head": "8c56a7191385d7b1f95d2696b1317a3117b3d6b7", "pr_ci_run": "33602331107", "merge_commit": "6d00e27ff156e1342d488495c7b48e68eeefe100", "main_ci_run": "33602662668", "planner": "gpt-5.6-sol-max (agent e60f0b0d)", "implementer": "gpt-5.6-sol-max (agent 25e87e27)", "reviewer": "cursor-grok-4.6-xhigh (agent f2929876)", "plan_rounds": 2, "supervisor_findings": "PR-01..03 + RI-01 (plan), SR-01..02 (implementation) — all resolved", "reviewer_findings": "RV-01 BLOCKER (tag peel on shallow CI checkout) resolved; re-review APPROVE zero unresolved", "tests": "309 default (3.12 and 3.14) + 62 Chromium nodes", "ui_defects_fixed": ["S06-UI-01 workspace contrast tokens", "S06-UI-02 dossier .meta contrast token", "S06-UI-03 workspace horizontal overflow at 1440/1024", "S06-UI-04 reduced-motion transient"], "closes": ["KL-22"], "opens": ["KL-31"]},
+        "S07-bilingual-interface-foundation": {"state": "LOCAL_GATES", "branch": "slice/S07-bilingual-interface-foundation", "base": "6d00e27ff156e1342d488495c7b48e68eeefe100", "pr": null, "merge_commit": null, "planner": "gpt-5.6-sol-max (agent 398bdb6f)", "implementer": "gpt-5.6-sol-max (agent ffdeb9c4)", "reviewer": "cursor-grok-4.6-xhigh (agent 0d169f00)", "plan_rounds": 2, "supervisor_findings": "PR-01..05 + RI-01 (plan); SR-01 a-f HIGH (six visual/bidi/layout defects captured in first baselines) + SR-02 (implementation) — all resolved; baselines regenerated via canonical container", "reviewer_findings": "APPROVE zero unresolved; 8 residuals carried; ADR-011 generator wording corrected and re-confirmed", "authority_changes": "evidence_policy 1.1.0->1.2.0 (display_label_ar); new config/ui_strings.v1.yaml 1.0.0 (hashed); Core 01/02/09 v2 markers; ADR-011; build_manifests.py run twice (justified)", "tests": "377 default (3.12 and 3.14) + 118 functional + 4 visual Chromium nodes (122)", "closes": ["KL-21", "KL-31"]}
       },
       "route_coverage_matrix": "docs/milestones/v0.3.0/SLICE_GRAPH.md#9",
-      "last_updated": "2026-09-02T10:20:00+03:00"
+      "last_updated": "2026-09-02T13:10:00+03:00"
     }
   }
 }

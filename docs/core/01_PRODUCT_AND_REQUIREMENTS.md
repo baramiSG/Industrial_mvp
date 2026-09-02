@@ -1,5 +1,7 @@
 # 01 — Product Charter and Functional Requirements
 
+<!-- core_version: 2.0.0; supersedes: 1.0.0; effective_date: 2026-09-02 -->
+
 ## 1. Product statement
 
 The Industrial Opportunity Resolution Engine is an evidence-governed decision system that converts an HS-based industrial signal into a specification-level route:
@@ -218,7 +220,7 @@ The user opens or prints a one-page dossier containing:
 - **NFR-004 Offline demo:** the packaged POC shall run without API keys or live data calls.
 - **NFR-005 Responsiveness:** local API responses should normally complete below 250 ms for the loaded demo cases.
 - **NFR-006 Accessibility:** the interface shall use semantic controls, high contrast and keyboard-accessible navigation.
-- **NFR-007 Arabic support:** Arabic source text and product names shall display right-to-left without corruption.
+- **NFR-007 Bilingual interface and Arabic support:** All interface chrome and governed labels shall have Arabic/English content parity; the document language and direction shall switch correctly; Arabic and mixed-direction content shall render without corruption. Until governed bilingual engine narratives exist, English analytical text shall remain visibly identified and directionally isolated as source-language content.
 - **NFR-008 Portability:** the demo shall run in WSL, native Linux and Docker.
 - **NFR-009 Testability:** all domain calculations shall be callable independently of the web layer.
 - **NFR-010 Security boundary:** no uploaded Ministry data is included in this package.

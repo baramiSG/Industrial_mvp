@@ -22,7 +22,11 @@ PYTHONPATH=src "$HOME/.local/bin/uv" run --locked --extra dev \
   uvicorn ior_mvp.app:app --host 127.0.0.1 --port 8000
 ```
 
-Open `http://127.0.0.1:8000`. OpenAPI is at `http://127.0.0.1:8000/docs`.
+Open `http://127.0.0.1:8000/?locale=en` or
+`http://127.0.0.1:8000/?locale=ar`. The visible topbar language control
+switches the complete interface chrome and persists only `ior.locale`.
+OpenAPI remains an engineer-only route at `http://127.0.0.1:8000/docs`; the
+offline Ministry interface does not link to it.
 
 ## Preserved clean pip path
 
@@ -33,8 +37,9 @@ source .venv/bin/activate
 python -m pip install -e ".[dev]"
 python scripts/check_prohibited_files.py
 python scripts/check_threshold_literals.py
+python scripts/check_ui_contracts.py
 python -m compileall -q src scripts tests
-node --check src/ior_mvp/static/app.js
+python scripts/check_es_modules.py --node node
 PYTHONPATH=src python scripts/verify_integrity.py
 PYTHONPATH=src python scripts/validate_scenarios.py
 PYTHONPATH=src pytest -q
@@ -96,6 +101,23 @@ The repository `docker compose up --build` path also remains supported on port 8
 - `simulated`: the public result stays visible and unchanged; Class-D scenario rows affect only `simulation_decision` and the active demonstration surface.
 
 Never describe a simulated value as observed, official, Ministry-provided, or Class A/B/C.
+Every simulated surface shows both policy labels:
+`SIMULATED — NOT MINISTRY EVIDENCE` and
+`محاكاة — ليست بيانات أو أدلة صادرة عن الوزارة`.
+
+## Interface locale
+
+- `?locale=en` sets `lang=en` and `dir=ltr`.
+- `?locale=ar` sets `lang=ar` and `dir=rtl`.
+- A valid URL locale overrides the stored choice; otherwise the stored
+  `ior.locale` value is used, then English.
+- To reset the choice, remove only `ior.locale` from browser local storage or
+  navigate explicitly to `?locale=en`.
+- Western digits and Gregorian dates are intentional presentation defaults in
+  both locales. Original evidence spans remain unchanged.
+- English analytical narrative in Arabic UI is a visibly captioned,
+  directionally isolated source-language island; it is not presented as an
+  Arabic translation.
 
 ## Real-browser acceptance
 
@@ -105,25 +127,28 @@ Prepare the separate pinned browser environment:
 uv sync --locked --extra dev --extra e2e --python "3.12"
 uv run --locked --extra dev --extra e2e \
   python -m playwright install chromium
-fc-match -f '%{family}|%{file}\n' ':lang=ar'
 make e2e
 ```
 
 On an authorized Linux host, use Playwright's
 `python -m playwright install --with-deps chromium` form to install operating
 system dependencies. Do not use that form where `sudo` is unavailable or
-unauthorized. Hosted CI performs the authorized dependency install and adds
-`fonts-noto-core`.
+unauthorized. Hosted CI performs the authorized dependency install. The
+product uses exact local Noto Sans and Noto Sans Arabic bytes; `fc-match` is
+diagnostic only.
 
 The command owns a kernel-assigned localhost socket, waits for the exact
-health contract, runs all 62 Chromium nodes, and sends SIGTERM to its uvicorn
+health contract, runs 118 functional and four visual Chromium nodes, and sends SIGTERM to its uvicorn
 child. An explicit gate never skips missing prerequisites. Diagnostics,
 failure screenshots/traces, PDFs, axe output, and ordinary references stay
 under ignored `.artifacts/e2e/`.
 
-The tracked S06 reference set contains 40 compact WebPs covering ten states at
-four viewports. It documents the v0.2.0 surface and is not a comparison
-oracle; governed visual baselines begin in S07.
+The tracked S06 reference set remains documentary evidence only. The governed
+v0.3.0 oracle contains 40 lossless WebPs covering ten states, two locales, and
+the 1440×900 and 1024×768 viewports. Normal `make e2e` only compares.
+Baseline updates require an explicit reviewed change reference and the
+canonical container procedure documented in `docs/DEVELOPMENT_GUIDE.md`;
+operators never update baselines to clear an unexplained failure.
 
 ## Demonstration sequence
 
@@ -142,7 +167,7 @@ make ci
 bash scripts/final_acceptance.sh
 ```
 
-`make ci` runs locked sync, prohibited and credential-pattern scan, recursive threshold-literal scan, Python compile (including `browser_tests`), JavaScript syntax, integrity, Gate B scenario validation/back-test, pytest, smoke, browser preflight, and all 62 real-Chromium nodes. `final_acceptance.sh` additionally proves the clean pip path, container runtime, live HTTP journeys, performance, failures, restart, reversal, documents, archive, and repository keyword dispositions.
+`make ci` runs locked sync, prohibited and credential-pattern scan, recursive threshold-literal scan, UI contracts, Python compile (including `browser_tests`), recursive ES-module syntax, integrity, Gate B scenario validation/back-test, pytest, smoke, browser preflight, and all 122 real-Chromium nodes. `final_acceptance.sh` additionally proves the clean pip path, container runtime, live HTTP journeys, performance, failures, restart, reversal, documents, archive, and repository keyword dispositions.
 
 Do not run the manifest generator unless an approved authority change identifies the exact governed bytes and passes Authority Manifest §7.
 
@@ -164,6 +189,9 @@ Do not run the manifest generator unless an approved authority change identifies
 - Browser journey failure: inspect `.artifacts/e2e/` for collector records,
   retained traces/screenshots, axe details, PDF output, and server logs. Never
   add an external-origin exception, axe exclusion, retry, or fixed wait.
+- Visual mismatch: inspect the normalized actual, amplified diff, and metrics
+  under `.artifacts/e2e/visual-diffs/`; do not loosen the global tolerance,
+  mask a region, or update from CI.
 
 Do not weaken a test, change a golden result, or regenerate hashes to clear a failure.
 

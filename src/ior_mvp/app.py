@@ -9,7 +9,14 @@ from fastapi.staticfiles import StaticFiles
 
 from . import __version__
 from .ai_extraction import run_extraction_golden_set
-from .config import PROJECT_ROOT, project_config, thresholds_config
+from .config import (
+    PROJECT_ROOT,
+    UIStringConfigurationError,
+    UnsupportedUILocaleError,
+    project_config,
+    thresholds_config,
+    ui_strings_bundle,
+)
 from .data_repository import RepositoryError
 from .decision_engine import analyze, list_opportunities
 from .dossier import build_dossier, render_dossier_html
@@ -74,6 +81,25 @@ def thresholds() -> dict:
     return thresholds_config()
 
 
+@app.get("/api/ui-strings/{locale}")
+def ui_strings(locale: str) -> dict[str, Any]:
+    try:
+        return ui_strings_bundle(locale)
+    except UnsupportedUILocaleError as exc:
+        raise HTTPException(
+            status_code=404,
+            detail={
+                "code": "UI_LOCALE_NOT_FOUND",
+                "locale": locale,
+            },
+        ) from exc
+    except UIStringConfigurationError as exc:
+        raise HTTPException(
+            status_code=500,
+            detail={"code": "UI_CATALOGUE_INTEGRITY_ERROR"},
+        ) from exc
+
+
 @app.get("/api/opportunities")
 def opportunities(
     mode: Literal["public", "simulated"] = Query(default="public")
@@ -117,9 +143,12 @@ def dossier(
 def dossier_html(
     opportunity_id: str,
     mode: Literal["public", "simulated"] = Query(default="public"),
+    locale: Literal["en", "ar"] = Query(default="en"),
 ) -> HTMLResponse:
     dossier_value = build_dossier(_safe_analysis(opportunity_id, mode))
-    return HTMLResponse(render_dossier_html(dossier_value))
+    return HTMLResponse(
+        render_dossier_html(dossier_value, locale=locale)
+    )
 
 
 @app.get("/api/extraction-demo")

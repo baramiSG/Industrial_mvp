@@ -8,6 +8,7 @@ import pytest
 
 import ior_mvp.data_repository as data_repository
 import ior_mvp.decision_engine as decision_engine
+import ior_mvp.evidence as evidence_module
 from ior_mvp.config import evidence_policy_config
 from ior_mvp.data_repository import (
     get_public_case,
@@ -32,6 +33,7 @@ MANDATORY_SCENARIO_FIELDS = [
     "source",
     "synthetic_inputs",
 ]
+ARABIC_DISCLOSURE = "محاكاة — ليست بيانات أو أدلة صادرة عن الوزارة"
 
 
 def _steel_scenario() -> dict:
@@ -78,12 +80,16 @@ def test_every_synthetic_row_is_labeled() -> None:
             row["display_label"]
             == "SIMULATED — NOT MINISTRY EVIDENCE"
         )
+        assert row["display_labels"] == {
+            "en": "SIMULATED — NOT MINISTRY EVIDENCE",
+            "ar": ARABIC_DISCLOSURE,
+        }
 
 
 def test_evidence_policy_declares_the_core_06_metadata_contract() -> None:
     policy = evidence_policy_config()
     isolation = policy["synthetic_isolation"]
-    assert policy["metadata"]["version"] == "1.1.0"
+    assert policy["metadata"]["version"] == "1.2.0"
     assert policy["metadata"]["effective_date"] == "2026-09-02"
     assert isolation["required_fields"] == MANDATORY_SCENARIO_FIELDS
     assert isolation["required_evidence_class"] == "D"
@@ -92,6 +98,17 @@ def test_evidence_policy_declares_the_core_06_metadata_contract() -> None:
         isolation["display_label"]
         == "SIMULATED — NOT MINISTRY EVIDENCE"
     )
+    assert isolation["display_label_ar"] == ARABIC_DISCLOSURE
+    resolver = getattr(
+        evidence_module,
+        "synthetic_display_labels",
+        None,
+    )
+    assert resolver is not None
+    assert resolver() == {
+        "en": isolation["display_label"],
+        "ar": isolation["display_label_ar"],
+    }
 
 
 @pytest.mark.parametrize("field", MANDATORY_SCENARIO_FIELDS)
@@ -153,6 +170,29 @@ def test_false_synthetic_flag_raises_integrity_error() -> None:
         match="synthetic_flag=true",
     ):
         validate_synthetic_scenario(scenario)
+
+
+def test_missing_arabic_policy_label_fails_closed(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    policy = deepcopy(evidence_policy_config())
+    del policy["synthetic_isolation"]["display_label_ar"]
+    monkeypatch.setattr(
+        evidence_module,
+        "evidence_policy_config",
+        lambda: policy,
+    )
+    resolver = getattr(
+        evidence_module,
+        "synthetic_display_labels",
+        lambda: {},
+    )
+
+    with pytest.raises(
+        EvidenceIntegrityError,
+        match="display_label_ar",
+    ):
+        resolver()
 
 
 def test_missing_display_label_never_leaks_a_key_error() -> None:

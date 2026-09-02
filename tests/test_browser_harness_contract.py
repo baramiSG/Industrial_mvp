@@ -27,14 +27,31 @@ def test_browser_dependencies_are_isolated_in_exact_e2e_extra() -> None:
 
     assert extras["dev"] == ["pytest>=8,<9", "httpx>=0.27,<1"]
     assert extras["e2e"] == [
+        "Pillow==12.3.0",
         "playwright==1.62.0",
         "pytest-playwright==0.9.0",
     ]
     pytest_options = project["tool"]["pytest"]["ini_options"]
     assert pytest_options["testpaths"] == ["tests"]
     assert pytest_options["markers"] == [
-        "e2e: real-Chromium acceptance tests; excluded from default testpaths"
+        "e2e: real-Chromium acceptance tests; excluded from default testpaths",
+        "visual: governed visual-regression matrix",
     ]
+
+
+def test_browser_harness_defines_bilingual_locale_matrix() -> None:
+    locales = getattr(harness, "LOCALES", ())
+
+    assert tuple(
+        (locale.code, locale.bcp47, locale.direction)
+        for locale in locales
+    ) == (
+        ("en", "en-US", "ltr"),
+        ("ar", "ar-SA", "rtl"),
+    )
+    conftest = (BROWSER_TESTS / "conftest.py").read_text(encoding="utf-8")
+    assert "locale.bcp47" in conftest
+    assert "_requested_locale" in conftest
 
 
 def test_browser_suite_has_the_approved_top_level_shape() -> None:
@@ -52,8 +69,10 @@ def test_browser_suite_has_the_approved_top_level_shape() -> None:
         "test_dossier.py",
         "test_guardrails.py",
         "test_journeys.py",
-        "test_reference_screenshots.py",
         "test_responsive.py",
+        "test_visual_baselines.py",
+        "visual_baselines.py",
+        "visual_container.py",
     }
 
 
@@ -65,10 +84,16 @@ def test_makefile_keeps_legacy_runner_and_adds_explicit_browser_gate() -> None:
         "UV_RUN_E2E = $(UV) run --locked --extra dev --extra e2e\n"
         in source
     )
-    assert source.count("$(E2E_PREFLIGHT)") == 2
+    assert source.count("$(E2E_PREFLIGHT)") == 3
     assert source.count("$(E2E_TESTS)") == 2
     assert "IOR_E2E_EXPLICIT=1" in source
     assert "python -m compileall -q src scripts tests browser_tests" in source
+    assert (
+        'python scripts/check_es_modules.py --node "$(NODE)"'
+        in source
+    )
+    assert "$(UV_RUN) python scripts/check_ui_contracts.py" in source
+    assert "node --check src/ior_mvp/static/app.js" not in source
 
 
 def test_makefile_syncs_e2e_dependencies_for_explicit_browser_gate() -> None:
@@ -78,20 +103,30 @@ def test_makefile_syncs_e2e_dependencies_for_explicit_browser_gate() -> None:
         "uv-sync-e2e:\n"
         "\t$(UV) sync --locked --extra dev --extra e2e\n"
     ) in source
-    assert "e2e: uv-sync-e2e\n" in source
+    assert "e2e-functional: uv-sync-e2e\n" in source
+    assert "e2e-visual: uv-sync-e2e\n" in source
+    assert "e2e: e2e-functional e2e-visual\n" in source
     assert "ci: uv-sync\n" in source
 
 
-def test_harness_uses_runtime_versions_without_application_literals() -> None:
-    source = (BROWSER_TESTS / "harness.py").read_text(encoding="utf-8")
+def test_browser_provenance_uses_runtime_versions_without_application_literals() -> None:
+    harness_source = (BROWSER_TESTS / "harness.py").read_text(
+        encoding="utf-8"
+    )
+    visual_source = (BROWSER_TESTS / "visual_baselines.py").read_text(
+        encoding="utf-8"
+    )
 
-    assert re.search(r"""["']0\.\d+\.\d+["']""", source) is None
-    assert "from ior_mvp import __version__" in source
-    assert 'version("playwright")' in source
-    assert 'version("pytest-playwright")' in source
+    assert re.search(
+        r"""["']0\.\d+\.\d+["']""",
+        harness_source,
+    ) is None
+    assert "from ior_mvp import __version__" in harness_source
+    assert 'version("playwright")' in visual_source
+    assert 'version("pytest-playwright")' in visual_source
 
 
-def test_reference_fixture_does_not_require_the_release_tag() -> None:
+def test_visual_runtime_is_separate_from_s06_documentary_references() -> None:
     conftest_source = (BROWSER_TESTS / "conftest.py").read_text(
         encoding="utf-8"
     )
@@ -101,26 +136,9 @@ def test_reference_fixture_does_not_require_the_release_tag() -> None:
     combined_source = conftest_source + harness_source
 
     assert "v0.2.0^{}" not in combined_source
-    assert re.findall(
-        r"git_revision\(([^)]*)\)",
-        conftest_source,
-    ) == ['"HEAD"']
-
-    index_source = (
-        PROJECT_ROOT
-        / ".workflow"
-        / "slices"
-        / "S06-browser-acceptance-harness"
-        / "reference-screenshots"
-        / "v0.2.0"
-        / "index.md"
-    ).read_text(encoding="utf-8")
-    release_match = re.search(
-        r"- Product release: `v0\.2\.0` \(`([0-9a-f]{40})`\)",
-        index_source,
-    )
-    assert release_match is not None
-    assert harness.V0_2_0_RELEASE_SHA == release_match.group(1)
+    assert "git_revision(" not in conftest_source
+    assert "ReferenceRecorder" not in conftest_source
+    assert "reference-screenshots" not in combined_source
 
 
 def test_vendored_axe_source_and_licence_are_exact_and_hash_verified() -> None:
@@ -429,7 +447,7 @@ def test_server_teardown_accepts_clean_exit_or_requested_sigterm() -> None:
     assert harness.is_expected_server_return_code(1) is False
 
 
-def test_browser_inventory_has_exactly_17_named_tests() -> None:
+def test_browser_inventory_has_exactly_18_named_tests() -> None:
     expected = {
         "test_portfolio_loads_expected_cases_and_states",
         "test_opportunity_card_opens_selected_workspace",
@@ -452,7 +470,11 @@ def test_browser_inventory_has_exactly_17_named_tests() -> None:
             "test_layout_has_no_horizontal_overflow_and_primary_"
             "controls_are_actionable"
         ),
-        "test_capture_documentary_reference_set",
+        "test_governed_visual_baselines_match",
+        (
+            "test_locale_switch_updates_document_url_storage_and_"
+            "preserves_state"
+        ),
         "test_failure_collector_observes_all_required_channels",
     }
     actual: set[str] = set()
@@ -508,12 +530,18 @@ def test_axe_and_failure_collector_have_no_exclusion_api() -> None:
     )
 
 
-def test_pdf_and_reference_contracts_are_nontrivial_and_non_oracle() -> None:
+def test_pdf_and_visual_contracts_are_nontrivial_and_governed() -> None:
     dossier_source = (
         BROWSER_TESTS / "test_dossier.py"
     ).read_text(encoding="utf-8")
-    reference_source = (
-        BROWSER_TESTS / "test_reference_screenshots.py"
+    visual_test = (
+        BROWSER_TESTS / "test_visual_baselines.py"
+    ).read_text(encoding="utf-8")
+    visual_source = (
+        BROWSER_TESTS / "visual_baselines.py"
+    ).read_text(encoding="utf-8")
+    metrics_source = (
+        PROJECT_ROOT / "scripts" / "visual_metrics.py"
     ).read_text(encoding="utf-8")
 
     for fragment in (
@@ -526,9 +554,11 @@ def test_pdf_and_reference_contracts_are_nontrivial_and_non_oracle() -> None:
         'rb"/Type\\s*/Page\\b"',
     ):
         assert fragment in dossier_source
-    assert 'type="webp"' in reference_source
-    assert "quality=55" in reference_source
-    assert "to_have_screenshot" not in reference_source
+    assert "test_governed_visual_baselines_match" in visual_test
+    assert "full_page=False" in visual_source
+    assert "lossless=True" in visual_source
+    assert "significant_pixel_ratio" in metrics_source
+    assert "quality=55" not in visual_source
 
 
 def test_browser_session_writes_a_deterministic_run_summary() -> None:
@@ -537,7 +567,8 @@ def test_browser_session_writes_a_deterministic_run_summary() -> None:
     )
 
     assert "def pytest_sessionfinish(" in source
-    assert '"run-summary.json"' in source
+    assert '"run-summary-functional.json"' in source
+    assert '"run-summary-visual.json"' in source
     assert '"collected"' in source
     assert '"passed"' in source
     assert '"failed"' in source

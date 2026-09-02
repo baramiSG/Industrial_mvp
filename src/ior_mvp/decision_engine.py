@@ -21,6 +21,7 @@ from .evidence import (
     isolated_copy,
     reconcile_synthetic_scenario,
     require_scenario_reconciliation,
+    synthetic_display_labels,
     synthetic_evidence_rows,
     validate_public_evidence,
 )
@@ -707,6 +708,7 @@ def _simulate(
         ),
         "synthetic_flag": True,
         "display_label": scenario["display_label"],
+        "display_labels": synthetic_display_labels(),
     }
     if state == "ADVANCE":
         decision["minimum_effective_support_m_sar"] = (
@@ -768,6 +770,7 @@ def analyze_simulated(opportunity_id: str) -> dict[str, Any]:
         "scenario_id": scenario["scenario_id"],
         "scenario_version": scenario["scenario_version"],
         "display_label": scenario["display_label"],
+        "display_labels": synthetic_display_labels(),
         "seed_basis": scenario["seed_basis"],
     }
     assert_real_decision_unchanged(real_before, public["real_decision"])
