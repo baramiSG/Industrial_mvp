@@ -86,7 +86,18 @@ def evaluate_capability(
     )
 
     if isinstance(hard_gates, dict):
-        unresolved = [name for name, value in hard_gates.items() if not str(value).startswith("resolved") and value not in {"not applicable", "not_applicable"}]
+        resolved_prefixes = (
+            "resolved",
+            "not applicable",
+            "not_applicable",
+        )
+        unresolved = [
+            name
+            for name, value in hard_gates.items()
+            if not str(value).casefold().startswith(
+                resolved_prefixes
+            )
+        ]
     else:
         unresolved = list(hard_gates)
 

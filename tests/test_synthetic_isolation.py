@@ -7,6 +7,7 @@ from pathlib import Path
 import pytest
 
 import ior_mvp.data_repository as data_repository
+import ior_mvp.decision_engine as decision_engine
 from ior_mvp.config import evidence_policy_config
 from ior_mvp.data_repository import (
     get_public_case,
@@ -202,3 +203,20 @@ def test_policy_validation_accepts_additive_s04_metadata(
     assert isinstance(scenario["decision_narrative"], dict)
 
     validate_synthetic_scenario(scenario)
+
+
+@pytest.mark.parametrize(
+    "opportunity_id",
+    ["SAU-H0-721049", "SAU-H0-390210"],
+)
+def test_cached_scenario_is_unchanged_after_analyze_simulated(
+    opportunity_id: str,
+) -> None:
+    cached = get_synthetic_scenario(opportunity_id)
+    assert cached is not None
+    before = deepcopy(cached)
+
+    decision_engine.analyze_simulated(opportunity_id)
+
+    assert get_synthetic_scenario(opportunity_id) is cached
+    assert cached == before

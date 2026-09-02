@@ -1,121 +1,167 @@
 # Requirements Traceability
 
-Statuses: `NOT_STARTED` · `PLANNED` · `IMPLEMENTED` (code and test exist; not yet executed under this build's CI) · `TESTED` (executed with recorded evidence) · `VALIDATED` (independent review passed) · `COMPLETE` (merged, CI green, evidence recorded) · `BLOCKED` · `NOT_APPLICABLE`.
+Statuses used on this branch are `NOT_STARTED`, `PLANNED`, `IMPLEMENTED`, `TESTED`, `BLOCKED`, and `NOT_APPLICABLE`. `COMPLETE` is reserved for the Supervisor’s release-state PR after the S05 implementation merge and its default-branch CI are observed. A file or test existing is not execution evidence.
 
-Code existing is never sufficient for `COMPLETE`. Evidence lives in `.workflow/slices/*/test_evidence.md`.
+## Evidence registry
 
-Columns: ID · Requirement · Governing source · Implementation · API · UI · Test · Validator · Status · Slice
+- **CI-S01-A:** run `33569855956`, PR #1, head `b0b2ab4`, four jobs green.
+- **CI-S01-B:** run `33570112914`, PR #1 promotion head `030dbfe`, four jobs green.
+- **CI-S02:** run `33573669072`, PR #2 head `1da6a0e`, four jobs green.
+- **CI-S03:** run `33579923763`, PR #3 head `f6ef33b`, four jobs green.
+- **CI-S04:** run `33584437086`, PR #4 head `bd72207`, four jobs green.
+- **CI-ALL:** CI-S01-A, CI-S01-B, CI-S02, CI-S03, and CI-S04; these five runs repeatedly executed the full then-current pytest suite and required uv/pip/Docker jobs.
+- **S05-FOCUSED:** `.workflow/slices/S05-final-acceptance/implementation_log.md` and `test_evidence.md`; includes observed RED→GREEN and characterization/NFR runs.
+- **S05-LOCAL:** `.workflow/slices/S05-final-acceptance/acceptance_results.md` and `test_evidence.md`; cited only after the complete 42-step runner is observed.
+- **S05-REVIEW/CI/MERGE:** `reviewer_findings.md`, `pr_record.md`, and `completion.md`; cited only after those external events are observed.
 
-## A. Functional requirements (Core 01 §6)
+The Gate G/TL-07 proof scope is: live HTTP/API contracts plus static HTML/CSS/JavaScript checks for case selection and mode controls, dual states, adaptive approved-component manifest, dossier action and printable HTML, RTL markup, semantic native controls, responsive media rules, disclosure, and offline assets. No Playwright/real-browser interaction, paint, keyboard traversal, or print-render run is claimed; see KL-22.
 
-| ID | Requirement | Source | Implementation | API | UI | Test | Validator | Status | Slice |
-|---|---|---|---|---|---|---|---|---|---|
-| FR-001 | Methodology version, snapshot ID, as-of date exposed for every case | Core 01 §6.1 | `config.authority_summary`; `decision_engine.analyze_public`; `genui.build_ui_manifest`; `dossier.build_dossier` / `render_dossier_html`; `app.js renderIntegrityBanner`; CI run 33579923763 (PR #3, head f6ef33b): uv 3.12, uv 3.14, pip 3.12, Docker all pass; merged ddf905d | `/api/opportunities/{id}` and dossier routes | integrity banner and printable dossier | `test_authority_disclosure.py`, `test_static_frontend.py` | authority hashes and integrity verifier | TESTED | S03 |
-| FR-002 | R-rule thresholds loaded from versioned YAML | Core 01 §6.1 | `config.thresholds_config`, `rules.py`, `decision_engine.py`, `thresholds.v1.yaml` 1.1.0; CI run 33573669072 (PR #2, head 1da6a0e): uv 3.12, uv 3.14, pip 3.12, Docker all pass; merged c438370 | `/api/thresholds` | configured R3 metric caption | `test_threshold_boundaries.py`, `test_rules.test_threshold_is_loaded_from_versioned_config` | `scripts/check_threshold_literals.py` | TESTED | S02 |
-| FR-003 | Sector weights and hard gates from versioned YAML | Core 01 §6.1 | `capability.evaluate_capability` | — | capability matrix | `test_capability_economics` | — | IMPLEMENTED | S01 |
-| FR-004 | Evidence classes and synthetic isolation from versioned policy | Core 01 §6.1 | `evidence_policy.v1.yaml` 1.1.0; `evidence.validate_synthetic_scenario`; repository policy delegation; CI run 33579923763 (PR #3, head f6ef33b): uv 3.12, uv 3.14, pip 3.12, Docker all pass; merged ddf905d | simulated analysis/list fail closed with typed 422 | exact synthetic warning | `test_synthetic_isolation.py`, `test_api.py` | `scripts/validate_scenarios.py` | TESTED | S03 |
-| FR-005 | Integrity verification fails on missing/changed governed file | Core 01 §6.1 | `scripts/verify_integrity.py` | — | — | `test_integrity_contract` | `verify_integrity.py` | IMPLEMENTED | S01 |
-| FR-010 | Opportunity represented independently of HS code | Core 01 §6.2 | snapshot `opportunity` block | `/api/opportunities` | cards | `test_golden_cases` | — | IMPLEMENTED | S01 |
-| FR-011 | Each public evidence record states source, status, class, synthetic flag | Core 01 §6.2 | snapshots `evidence[]` | analysis `evidence` | evidence ledger | `test_public_snapshots_contain_no_synthetic_rows` | `validate_public_evidence` | IMPLEMENTED | S01 |
-| FR-012 | Public records set `synthetic_flag=false` explicitly | Core 01 §6.2 | `evidence.validate_public_evidence` | — | — | `test_synthetic_isolation` | yes | IMPLEMENTED | S01 |
-| FR-013 | Synthetic records set flag, scenario ID, Class D, DEMO_GENERATOR | Core 01 §6.2 | `evidence.validate_synthetic_scenario`, `synthetic_evidence_rows` | — | — | `test_every_synthetic_row_is_labeled` | yes | IMPLEMENTED | S01 |
-| FR-014 | UI distinguishes public and synthetic rows | Core 01 §6.2 | `app.js renderEvidenceLedger`, `.synthetic-row` | — | yes | `test_static_frontend` | — | IMPLEMENTED | S01 |
-| FR-015 | Contradictions retained | Core 01 §6.2 | snapshot `evidence[].contradiction` | yes | ledger | — | — | IMPLEMENTED | S01 |
-| FR-020 | Engine evaluates and displays R0–R12 (15 public rules plus simulated R6/R7/R8 evaluations) | Core 01 §6.3 | `rules.evaluate_rules`; `rules.evaluate_simulated_rules` | yes | rule ledger | public-zero/simulated-exact R6/R7/R8 assertions in `test_simulation_fidelity.py`; R6/R7 boundaries | — | IMPLEMENTED | S01/S04 |
-| FR-021 | Every rule returns execution, fired, result, metrics, effect | Core 01 §6.3 | `rules._rule` plus additive synthetic row metadata | yes | yes | exact synthetic row schema in `test_simulation_fidelity.py` | — | IMPLEMENTED | S01/S04 |
-| FR-022 | R2 log changes and contribution share deterministic | Core 01 §6.3 | `rules.log_change`, `quantity_contribution_share` | yes | yes | `test_log_decomposition_steel_matches_worked_case` | — | IMPLEMENTED | S01 |
-| FR-023 | R4-D never claims cluster or grade | Core 01 §6.3 | `rules.py` R4-D | yes | yes | `test_degraded_uv_never_claims_grade` | — | IMPLEMENTED | S01 |
-| FR-024 | R9-S opens capability but does not publish D\* | Core 01 §6.3 | `rules.py` R9-S | yes | yes | golden (R9-S fires; d_star None) | — | IMPLEMENTED | S01 |
-| FR-025 | R11 supports rejection of generic capacity | Core 01 §6.3 | `rules.r11_generic_capacity_fires`; configured ratio key; CI run 33573669072 (PR #2, head 1da6a0e): uv 3.12, uv 3.14, pip 3.12, Docker all pass; merged c438370 | yes | yes | R11 49.99/50.00/50.01 boundary; PP golden | `scripts/check_threshold_literals.py` | TESTED | S02 |
-| FR-030 | Effective capacity formula | Core 01 §6.4 | `capability.effective_qualified_capacity` | simulated `capacity` | metric grid | `test_effective_qualified_capacity_formula` | — | IMPLEMENTED | S01 |
-| FR-031 | Sector-specific weights | Core 01 §6.4 | `sector_profiles.v1.yaml` | — | matrix | `test_simulated_steel_capability_is_incremental_upgrade` | — | IMPLEMENTED | S01 |
-| FR-032 | Unknown dimensions → U and λ penalty | Core 01 §6.4 | `capability.evaluate_capability` | — | matrix | `test_unknowns_cannot_improve_adjacency` | — | IMPLEMENTED | S01 |
-| FR-033 | D\* not published below Kmin or with unresolved hard gate | Core 01 §6.4 | `capability.publication_allowed`, `evaluate_capability`; CI run 33573669072 (PR #2, head 1da6a0e): uv 3.12, uv 3.14, pip 3.12, Docker all pass; merged c438370 | — | "GATED" | exact Kmin predicate and profile integration in `test_threshold_boundaries.py` | — | TESTED | S02 |
-| FR-034 | Route bands (4) | Core 01 §6.4 | `capability.route_band` with configured bands; CI run 33573669072 (PR #2, head 1da6a0e): uv 3.12, uv 3.14, pip 3.12, Docker all pass; merged c438370 | — | matrix | three below/equal/above band-edge matrices | — | TESTED | S02 |
-| FR-040 | Unsupported economics before intervention | Core 01 §6.5 | `economics.minimum_effective_support` | simulated `economics` | economics panel | `test_minimum_effective_support_is_18m` | — | IMPLEMENTED | S01 |
-| FR-041 | NPV and IRR deterministic | Core 01 §6.5 | `economics.npv`, `irr` | yes | yes | same | — | IMPLEMENTED | S01 |
-| FR-042 | S\* minimum support step satisfying NPV and IRR | Core 01 §6.5 | `economics.minimum_effective_support` | yes | yes | same | — | IMPLEMENTED | S01 |
-| FR-043 | Incremental national value relative to no action | Core 01 §6.5 | `economics.incremental_national_value` | yes | yes | `test_national_value_and_evsi` | — | IMPLEMENTED | S01 |
-| FR-044 | Post-entry capacity/downside ratio visible | Core 01 §6.5 | `decision_engine.competition_warning`, `_simulate_steel`; CI run 33573669072 (PR #2, head 1da6a0e): uv 3.12, uv 3.14, pip 3.12, Docker all pass; merged c438370 | `competition` with configured threshold and warning | panel | 1.2499/1.2500/1.2501 boundary and payload provenance | `scripts/check_threshold_literals.py` | TESTED | S02 |
-| FR-045 | EVSI identifies whether evidence action is worth obtaining | Core 01 §6.5 | `economics.approximate_evsi` | `evsi` | panel | `test_national_value_and_evsi` | — | IMPLEMENTED | S01 |
-| FR-050 | Public decisions use public evidence only | Core 01 §6.6 | `analyze_public` + `validate_public_evidence` | yes | banner | `test_public_snapshots_contain_no_synthetic_rows` | yes | IMPLEMENTED | S01 |
-| FR-051 | Simulation does not mutate public decision | Core 01 §6.6 | `assert_real_decision_unchanged`, deep copy | `integrity` | banner | `test_simulated_analysis_keeps_real_decision_identical` | fingerprint | IMPLEMENTED | S01 |
-| FR-052 | Every decision includes state, route, rationale, confidence, conditions, kill conditions | Core 01 §6.6 | `_public_decision`; scenario-derived `_decision_narrative` | yes | hero + dossier | narrative equality and exact goldens | — | IMPLEMENTED | S04 |
-| FR-053 | Real ADVANCE blocked by D/E decision-critical evidence | Core 01 §6.6 | public branch never emits ADVANCE | yes | — | golden | — | IMPLEMENTED | S01 |
-| FR-054 | Brownfield and no-action precede supported greenfield | Core 01 §6.6 | generic `_simulate`: Core 07 §7.4 route 0 before §7.3 route 5 | yes | hero | equivalence equality and complete ADVANCE-conjunction tests | — | IMPLEMENTED | S01/S04 |
-| FR-060 | Backend emits constrained UI manifest | Core 01 §6.7 | `genui.build_ui_manifest` | `/ui-manifest` | `renderManifest` | `test_steel_ui_manifest_uses_approved_components` | — | IMPLEMENTED | S01 |
-| FR-061 | Manifest uses approved component types only | Core 01 §6.7 | `genui.py` | yes | renderer map | same | — | IMPLEMENTED | S01 |
-| FR-062 | Economics panel absent when unavailable | Core 01 §6.7 | `genui.py` conditional | yes | yes | `test_public_manifest_omits_economics_panel` | — | IMPLEMENTED | S01 |
-| FR-063 | No runtime model-generated executable code | Core 01 §6.7 | static renderer registry | guardrails | yes | manifest test | — | IMPLEMENTED | S01 |
-| FR-064 | Dossier JSON and printable HTML | Core 01 §6.7 | `dossier.py` | `/dossier`, `/dossier.html` | actions | `test_dossier_html_discloses_simulation` | — | IMPLEMENTED | S01 |
-| FR-070 | AR/EN spans attached to normalized fields | Core 01 §6.8 | `ai_extraction.extract_specification` | `/api/extraction-demo` | extraction cards | `test_ar_en_golden_set_is_exact` | — | IMPLEMENTED | S01 |
-| FR-071 | Contract supports standard, coating, dimensions, environment | Core 01 §6.8 | same | yes | yes | same | — | IMPLEMENTED | S01 |
-| FR-072 | Offline extractor passes golden set | Core 01 §6.8 | `run_extraction_golden_set` | yes | score chip | same (4/4) | — | IMPLEMENTED | S01 |
-| FR-073 | Future LLM adapter must pass same gate | Core 01 §6.8 | control note; Core 08 §7 | yes | note | — | — | NOT_APPLICABLE (production) | — |
+## A. Functional requirements — Core 01 §6
 
-## B. Non-functional requirements (Core 01 §7)
-
-| ID | Requirement | Source | Implementation | Test | Status | Slice |
-|---|---|---|---|---|---|---|
-| NFR-001 | Reproducible from frozen files and config | Core 01 §7 | hashed data, lru-cached config | integrity + golden | IMPLEMENTED | S01 |
-| NFR-002 | Every derived metric has deterministic formula and source pointer | Core 01 §7 | rules/capability/economics metrics | formula tests | IMPLEMENTED | S01 |
-| NFR-003 | Fail-closed: unknown hard gates reduce permission | Core 01 §7 | `evaluate_capability` | `test_public_steel_dstar_is_withheld...` | IMPLEMENTED | S01 |
-| NFR-004 | Offline demo, no API key | Core 01 §7 | no network calls | frontend CDN test; CI run 33569855956 (PR #1, head b0b2ab4): uv 3.12, uv 3.14, pip 3.12, Docker all pass | TESTED | S01 |
-| NFR-005 | Local API responses normally < 250 ms | Core 01 §7 | in-memory JSON | **no test** | IMPLEMENTED (unmeasured) | S05 |
-| NFR-006 | Accessibility: semantic controls, contrast, keyboard | Core 01 §7 | `index.html` buttons/labels | static test | IMPLEMENTED | S01 |
-| NFR-007 | Arabic RTL without corruption | Core 01 §7 | `dir="rtl"` in cards, dossier | `test_frontend_contains_evidence_mode_and_arabic_support` | IMPLEMENTED | S01 |
-| NFR-008 | Runs in WSL, Linux, Docker | Core 01 §7 | scripts, Dockerfile | WSL `make ci` (S01 evidence); CI run 33569855956 (PR #1, head b0b2ab4): uv 3.12, uv 3.14, pip 3.12, Docker all pass | TESTED | S01 |
-| NFR-009 | Domain calculations callable without web layer | Core 01 §7 | `decision_engine.analyze` | unit tests | IMPLEMENTED | S01 |
-| NFR-010 | No uploaded Ministry data included | Core 01 §7 | synthetic only | leakage tests | IMPLEMENTED | S01 |
-
-## C. Authority-manifest invariants (Manifest §6) and AGENTS.md non-negotiables
-
-| ID | Invariant | Source | Implementation | Test | Status | Slice |
-|---|---|---|---|---|---|---|
-| INV-01 | Real branch uses public evidence only | Manifest §6.1; AGENTS #1 | `analyze_public` | leakage tests | IMPLEMENTED | S01 |
-| INV-02 | Synthetic affects only `simulation_decision` | Manifest §6.2; AGENTS #1 | fingerprint assertion plus `evaluate_ground_truth_backtest` | unchanged-public fingerprint and runtime mismatch tests | IMPLEMENTED | S01/S04 |
-| INV-03 | Synthetic always Class D, DEMO_GENERATOR, flagged, disclosed | Manifest §6.3; AGENTS #2 | policy-driven flag/class/source/label validation and `synthetic_evidence_rows`; CI run 33579923763 (PR #3, head f6ef33b): uv 3.12, uv 3.14, pip 3.12, Docker all pass; merged ddf905d | exact missing/mismatch matrix, ledger and API tests | TESTED | S03 |
-| INV-04 | Missing evidence stays unresolved in real branch | Manifest §6.4 | public branch remains immutable; reconciliation cannot populate real unknowns; CI run 33579923763 (PR #3, head f6ef33b): uv 3.12, uv 3.14, pip 3.12, Docker all pass; merged ddf905d | public goldens, fingerprint and public dossier tests | TESTED | S01/S03 |
-| INV-05 | ADVANCE blocked while identity/spec-demand/capability/hard gate is D/E | Manifest §6.5; AGENTS #3 | public branch | golden | IMPLEMENTED | S01 |
-| INV-06 | Unknown capability never improves adjacency | Manifest §6.6; AGENTS #4 | λ penalty | `test_unknowns_cannot_improve_adjacency` | IMPLEMENTED | S01 |
-| INV-07 | Thresholds from versioned config, no hidden constants | Manifest §6.7; AGENTS #7 | configured predicates plus GenUI threshold payload; CI run 33573669072 (PR #2, head 1da6a0e): uv 3.12, uv 3.14, pip 3.12, Docker all pass; merged c438370 | `test_threshold_literals.py`; local/hosted validator wiring | TESTED | S02 |
-| INV-08 | Unit value never proves grade | Manifest §6.8; AGENTS #6 | R4-D text | `test_degraded_uv_never_claims_grade` | IMPLEMENTED | S01 |
-| INV-09 | Lower-cost routes precede supported greenfield | Manifest §6.9; AGENTS #5 | route 5 selection; no route 7 | golden | IMPLEMENTED | S01 |
-| INV-10 | Golden tests on hashed snapshots only, never live | Manifest §6.10; AGENTS #8 | repository loaders | integrity; CI run 33569855956 (PR #1, head b0b2ab4): uv 3.12, uv 3.14, pip 3.12, Docker all pass | TESTED | S01 |
-| INV-11 | Steel public INVESTIGATE; PP public REJECT preserved | Manifest §6.11; AGENTS #9 | golden fixtures | `test_golden_cases` | IMPLEMENTED | S01 |
-| INV-12 | Computation autonomous, authorization not anonymous | Manifest §6.12; AGENTS #10 | governance screen; no approval endpoint | — | IMPLEMENTED | S01 |
-
-## D. Test and acceptance gates (Core 09)
-
-| ID | Gate / layer | Source | Present in v0.1.0 | Status | Slice |
-|---|---|---|---|---|---|
-| TL-01 | Integrity layer (hashes, no synthetic in public, mandatory metadata) | Core 09 §2.1 | `verify_integrity.py`, `test_integrity_contract`, complete policy matrix in `test_synthetic_isolation.py`, and repository scenario validator; retain S01 CI evidence run 33569855956 (PR #1, head b0b2ab4) | TESTED | S01/S03 |
-| TL-02 | Formula unit tests | Core 09 §2.2 | `test_capability_economics`, `test_rules`; CI run 33569855956 (PR #1, head b0b2ab4): uv 3.12, uv 3.14, pip 3.12, Docker all pass | TESTED | S01 |
-| TL-03 | Rule tests (R1-D boundary, R2, R3, R4-F disabled, R4-D, R11) | Core 09 §2.3 | `test_threshold_boundaries.py`, explicit R3/R4-F/R11 tests in `test_rules.py`; evidence in `.workflow/slices/S02-threshold-governance/test_evidence.md`; CI run 33573669072 (PR #2, head 1da6a0e): uv 3.12, uv 3.14, pip 3.12, Docker all pass; merged c438370 | TESTED | S02 |
-| TL-04 | Golden A, A-S, B, B-S | Core 09 §2.4 | expanded numeric golden and ground-truth back-test assertions in `test_golden_cases`; prior CI run 33569855956 (PR #1, head b0b2ab4): uv 3.12, uv 3.14, pip 3.12, Docker all pass | TESTED | S01/S04 |
-| TL-05 | Extraction golden (4 fields exact, spans retained) | Core 09 §2.5 | `test_extraction`; CI run 33569855956 (PR #1, head b0b2ab4): uv 3.12, uv 3.14, pip 3.12, Docker all pass | TESTED | S01 |
-| TL-06 | API tests | Core 09 §2.6 | `test_api`; CI run 33569855956 (PR #1, head b0b2ab4): uv 3.12, uv 3.14, pip 3.12, Docker all pass | TESTED | S01 |
-| TL-07 | Frontend contract tests | Core 09 §2.7 | `test_static_frontend` includes states-together, dossier-action, and labelled synthetic-rule checks | IMPLEMENTED | S04 |
-| TL-08 | Threshold boundary tests below/equal/above | Core 09 §3 | complete S02 matrix in `test_threshold_boundaries.py`; evidence in `.workflow/slices/S02-threshold-governance/test_evidence.md`; CI run 33573669072 (PR #2, head 1da6a0e): uv 3.12, uv 3.14, pip 3.12, Docker all pass; merged c438370 | TESTED | S02 |
-| TL-09 | Synthetic leakage assertions 1–7 | Core 09 §4 | `test_synthetic_isolation.py` plus real/simulated endpoint assertions in `test_dossier_contract.py` cover all seven, including public disclosure absence; CI run 33579923763 (PR #3, head f6ef33b): uv 3.12, uv 3.14, pip 3.12, Docker all pass; merged ddf905d | TESTED | S03 |
-| GATE-A | Authority: methodology present, core complete, hashes pass | Core 09 §6 | yes | IMPLEMENTED | S01 |
-| GATE-B | Data: snapshots validate; scenarios reconcile to public marginals and back-test planted ground truth | Core 09 §6 | evidence-guard reconciliation plus `scripts/validate_scenarios.py` ground-truth back-test, wired after integrity in CI and `make ci` | IMPLEMENTED | S03/S04 |
-| GATE-C | Rules visible; thresholds from config | Core 09 §6 | configured predicates, unchanged goldens, AST validator; S02 evidence; CI run 33573669072 (PR #2, head 1da6a0e): uv 3.12, uv 3.14, pip 3.12, Docker all pass; merged c438370 | TESTED | S02 |
-| GATE-D | Capability exact, unknown penalty, D\* gated | Core 09 §6 | yes | IMPLEMENTED | S01 |
-| GATE-E | Economics unsupported first, S\* minimal, PP no support | Core 09 §6 | yes | IMPLEMENTED | S01 |
-| GATE-F | Zero leakage, dual states, labelled rows | Core 09 §6 | synthetic rule-row isolation, dossier/frontend labels, golden and exact API-error suites | IMPLEMENTED | S01/S03/S04 |
-| GATE-G | Product: frontend, toggle, adaptive manifest, dossier, Arabic | Core 09 §6 | yes (manual) | IMPLEMENTED | S05 |
-| GATE-H | Release: build_manifests (approved only), verify, pytest, smoke all pass | Core 09 §6 | `.github/workflows/ci.yml`, `Makefile` `ci`; `build_manifests.py` not run because S01 has no governed change; CI run 33569855956 (PR #1, head b0b2ab4): uv 3.12, uv 3.14, pip 3.12, Docker all pass | TESTED | S01 |
-
-## E. Build-control requirements (owner mandate 2026-09-02)
-
-| ID | Requirement | Implementation | Status | Slice |
+| ID | Requirement | Implementation and execution evidence | Status | Slice |
 |---|---|---|---|---|
-| BC-01 | Git repository with default branch `main` on `baramiSG/Industrial_mvp` | S00 | PLANNED | S00 |
-| BC-02 | No secrets, private data or prohibited files in Git; `.env.example` placeholders only | `.gitignore`, `scripts/check_prohibited_files.py`, `tests/test_prohibited_files.py`, S01 test evidence | TESTED | S00/S01 |
-| BC-03 | Durable state: `.workflow/state.json`, slice records, control docs | created 2026-09-02 | IMPLEMENTED | S00 |
-| BC-04 | CI on PR/push executing integrity, tests, smoke, scans | `.github/workflows/ci.yml`, `tests/test_ci_contract.py`; CI run 33569855956 (PR #1, head b0b2ab4): uv 3.12, uv 3.14, pip 3.12, Docker all pass | TESTED | S01 |
-| BC-05 | Every slice: branch → plan → review → implement → review → independent review → gates → PR → CI → merge | slice records | PLANNED | all |
-| BC-06 | Model separation (Implementer ≠ Supervisor; Reviewer ≠ Implementer) | ADR-002 | PLANNED | all |
-| BC-07 | Requirements traceability maintained | this file | IMPLEMENTED | all |
-| BC-08 | Final acceptance with different-model final reviewer and final documents | S05 | NOT_STARTED | S05 |
+| FR-001 | Expose methodology version, snapshot ID, and as-of date for every case. | `config.authority_summary`, analysis, banner, dossier; `test_authority_disclosure.py`; CI-S03, CI-S04. | TESTED | S03 |
+| FR-002 | Load R-rule thresholds from versioned YAML. | `config.thresholds_config`, rules/engine, `/api/thresholds`, recursive scanner; threshold tests; CI-S02–CI-S04. | TESTED | S02/S05 |
+| FR-003 | Load sector weights and hard gates from versioned YAML. | `capability.evaluate_capability`; capability tests; CI-ALL. | TESTED | S01 |
+| FR-004 | Load evidence classes and synthetic-isolation rules from policy. | `evidence_policy.v1.yaml` 1.1.0, typed validation and 422 mapping; isolation/API tests; CI-S03, CI-S04. | TESTED | S03 |
+| FR-005 | Fail integrity verification on missing or changed governed files. | `scripts/verify_integrity.py`, `test_integrity_contract.py`; CI-ALL. | TESTED | S01 |
+| FR-010 | Represent an opportunity independently of HS code. | Snapshot opportunity object and repository key; API/golden tests; CI-ALL. | TESTED | S01 |
+| FR-011 | Public evidence states source, status, class, and synthetic flag. | Public evidence schema and ledger; isolation tests; CI-ALL. | TESTED | S01 |
+| FR-012 | Public records explicitly set `synthetic_flag=false`. | `validate_public_evidence`; isolation tests; CI-ALL. | TESTED | S01 |
+| FR-013 | Synthetic records carry flag, scenario ID, Class D, and generator source. | Policy validator and `synthetic_evidence_rows`; isolation/fidelity tests; CI-ALL. | TESTED | S01/S03/S04 |
+| FR-014 | UI visually distinguishes public and synthetic rows. | `app.js` ledgers and `.synthetic-row`; static tests; CI-ALL. | TESTED | S01 |
+| FR-015 | Retain contradictions rather than harmonising them away. | Steel evidence contradiction retained in analysis and S05 live-journey contract; CI-ALL, S05-LOCAL after observed. | TESTED | S01/S05 |
+| FR-020 | Evaluate and display the complete R0–R12 contract. | Public ledger plus labelled simulated R6–R8; fidelity and boundary tests; CI-S04. | TESTED | S01/S04 |
+| FR-021 | Every rule returns execution, fired, result, metrics, and effect. | `_rule`, synthetic row schema, live contract; fidelity tests; CI-S04. | TESTED | S01/S04 |
+| FR-022 | Calculate R2 log changes and quantity contribution deterministically. | `rules.log_change`, `quantity_contribution_share`; worked-case tests; CI-ALL. | TESTED | S01 |
+| FR-023 | R4-D never claims a cluster or grade. | R4-D result/effect; anti-grade test; CI-ALL. | TESTED | S01 |
+| FR-024 | R9-S opens capability assessment but does not publish D*. | R9-S ledger and steel public golden; CI-ALL. | TESTED | S01 |
+| FR-025 | R11 can reject unsupported generic-capacity claims. | Configured R11 predicate; boundary and PP golden tests; CI-S02–CI-S04. | TESTED | S02 |
+| FR-030 | Effective qualified capacity equals the five-factor product. | `effective_qualified_capacity`; exact formula test; CI-ALL. | TESTED | S01 |
+| FR-031 | Capability uses sector-specific weights. | `sector_profiles.v1.yaml`, `evaluate_capability`; route tests; CI-ALL. | TESTED | S01 |
+| FR-032 | Unknown dimensions contribute U and receive λ penalty. | `evaluate_capability`; unknown-adjacency test; CI-ALL. | TESTED | S01 |
+| FR-033 | D* is withheld below Kmin or with unresolved hard gates. | `publication_allowed`; Kmin/hard-gate boundary tests; CI-S02–CI-S04. | TESTED | S02 |
+| FR-034 | Publish the four configured capability route bands. | `route_band`; below/equal/above matrix; CI-S02–CI-S04. | TESTED | S02 |
+| FR-040 | Calculate unsupported economics before intervention. | `minimum_effective_support`; economics/golden tests; CI-ALL. | TESTED | S01 |
+| FR-041 | Calculate NPV and IRR deterministically. | `economics.npv` and `irr`; exact economics tests; CI-ALL. | TESTED | S01 |
+| FR-042 | S* is the minimum configured support step satisfying hurdles. | Support search and SAR 18m exact test; CI-ALL. | TESTED | S01 |
+| FR-043 | Incremental national value is relative to no action. | `incremental_national_value`; component/value tests; CI-ALL. | TESTED | S01 |
+| FR-044 | Show post-entry capacity/downside-demand ratio. | `decision_engine.competition_warning`, `_simulation_economics`, `_simulate`; configured boundary and payload tests; CI-S02, CI-S04, S05-LOCAL after observed. | TESTED | S02/S04/S05 |
+| FR-045 | EVSI identifies whether a named evidence action is worth obtaining. | `approximate_evsi`; national-value/EVSI test; CI-ALL. | TESTED | S01 |
+| FR-050 | Public decisions use public evidence only. | `analyze_public`, public repository, validation; isolation/golden tests; CI-ALL. | TESTED | S01 |
+| FR-051 | Simulation does not mutate public decisions. | fingerprint guard and isolated public copy; isolation tests; CI-ALL. | TESTED | S01 |
+| FR-052 | Decisions include state, route, rationale, confidence, conditions, and kill conditions. | public selector and scenario narratives; fidelity/golden tests; CI-S04. | TESTED | S04 |
+| FR-053 | Real `ADVANCE` is blocked by decision-critical D/E evidence. | Public selector emits only `REJECT`/`INVESTIGATE`; goldens; CI-ALL. | TESTED | S01 |
+| FR-054 | No-action and brownfield routes precede supported greenfield. | `_simulate` route 0 before route 5; no route 7; conjunction tests; CI-S04. | TESTED | S01/S04 |
+| FR-060 | Backend emits a constrained UI manifest. | `build_ui_manifest`, `/ui-manifest`; API tests; CI-ALL. | TESTED | S01 |
+| FR-061 | Manifest uses approved component types only. | Fixed registry and guardrails; approved-set test; CI-ALL. | TESTED | S01 |
+| FR-062 | Omit economics panels when economics is unavailable. | Conditional manifest component; public omission test; CI-ALL. | TESTED | S01 |
+| FR-063 | Runtime model output cannot generate executable browser code. | Fixed renderer registry and guardrail; API/static tests; CI-ALL. | TESTED | S01 |
+| FR-064 | Export machine-readable and printable dossiers. | `dossier.py` and JSON/HTML routes; exact dossier tests; CI-ALL, S05-FOCUSED. | TESTED | S01/S05 |
+| FR-070 | Keep Arabic/English source spans on normalized fields. | Extraction contract; 4/4 test; CI-ALL. | TESTED | S01 |
+| FR-071 | Support standard, coating, dimensions, and environment fields. | Offline extractor schema; golden test; CI-ALL. | TESTED | S01 |
+| FR-072 | Offline extractor passes the labelled golden set. | `run_extraction_golden_set`; exact 4/4 test; CI-ALL. | TESTED | S01 |
+| FR-073 | Future production LLM adapter passes the same gate. | No production adapter exists; control note and Core 08 boundary retained. | NOT_APPLICABLE (production) | — |
+
+## B. Non-functional requirements — Core 01 §7
+
+| ID | Requirement | Implementation and execution evidence | Status | Slice |
+|---|---|---|---|---|
+| NFR-001 | Reproducible from frozen files and configuration. | Hashed snapshots/config, integrity and goldens; CI-ALL. | TESTED | S01 |
+| NFR-002 | Derived metrics have deterministic formulas and source pointers. | Rules/capability/economics modules and formula tests; CI-ALL. | TESTED | S01 |
+| NFR-003 | Unknown hard gates reduce permission. | Capability publication conjunction; hard-gate test; CI-ALL. | TESTED | S01 |
+| NFR-004 | Packaged demo runs without API keys or live data calls. | Offline loaders/static assets; CDN test and CI-ALL. | TESTED | S01 |
+| NFR-005 | Warm loaded-case API responses normally complete below 250 ms. | `tests/test_performance.py`: one excluded warm-up and median of five real TestClient calls on all 18 routes; S05-FOCUSED. Live localhost medians are added by S05-LOCAL. | TESTED | S05 |
+| NFR-006 | Semantic, high-contrast, keyboard-reachable interface. | Native buttons/select/labels and contrast/static contracts; CI-ALL. Real traversal is outside KL-22. | TESTED | S01/S05 |
+| NFR-007 | Arabic text renders RTL without corruption. | RTL markup and source spans; static test; CI-ALL. | TESTED | S01 |
+| NFR-008 | Demo runs in WSL, native Linux, and Docker. | Run scripts, pip/uv paths, Dockerfile; CI-ALL. | TESTED | S01 |
+| NFR-009 | Domain calculations are callable without web layer. | `decision_engine.analyze` and direct unit callers; CI-ALL. | TESTED | S01 |
+| NFR-010 | No uploaded Ministry data is packaged. | Public and explicit synthetic-only artifacts; isolation/prohibited tests; CI-ALL. | TESTED | S01 |
+
+## C. Authority invariants
+
+| ID | Invariant | Implementation and execution evidence | Status | Slice |
+|---|---|---|---|---|
+| INV-01 | Real branch uses public evidence only. | Public loader/analysis and isolation tests; CI-ALL. | TESTED | S01 |
+| INV-02 | Synthetic evidence affects only simulation state. | fingerprint/back-test guards; fidelity tests; CI-S04. | TESTED | S01/S04 |
+| INV-03 | Synthetic records are Class D, generator-sourced, flagged, and disclosed. | Policy validation and exact ledger tests; CI-S03, CI-S04. | TESTED | S03 |
+| INV-04 | Missing real evidence remains unresolved. | Public D* gate/data unlocks and dossier; CI-S03, CI-S04. | TESTED | S03 |
+| INV-05 | Decision-critical D/E evidence blocks real `ADVANCE`. | Public selector and goldens; CI-ALL. | TESTED | S01 |
+| INV-06 | Unknown capability cannot improve adjacency. | λ/U implementation and test; CI-ALL. | TESTED | S01 |
+| INV-07 | Thresholds are versioned configuration, not hidden constants. | Config predicates, recursive scanner and boundaries; CI-S02–CI-S04, S05-FOCUSED. | TESTED | S02/S05 |
+| INV-08 | Unit-value dispersion never proves grade. | R4-D wording and anti-grade test; CI-ALL. | TESTED | S01 |
+| INV-09 | Lower-cost/no-action routes precede supported greenfield. | Route order/no route 7 tests; CI-S04. | TESTED | S01/S04 |
+| INV-10 | Goldens use hashed local snapshots only. | Repository loaders/integrity; CI-ALL. | TESTED | S01 |
+| INV-11 | Steel public `INVESTIGATE` and PP public `REJECT` remain exact. | `test_golden_cases.py`; CI-ALL. | TESTED | S01 |
+| INV-12 | Calculation is autonomous; authorization is accountable. | Read-only GET API and governance copy; static/API tests; CI-ALL. | TESTED | S01 |
+
+## D. Test layers and acceptance gates — Core 09
+
+| ID | Requirement | Implementation and execution evidence | Status | Slice |
+|---|---|---|---|---|
+| TL-01 | Integrity layer. | Integrity, mandatory metadata, isolation and scenario validators; CI-ALL. | TESTED | S01/S03 |
+| TL-02 | Formula unit tests. | Rules/capability/economics suites; CI-ALL. | TESTED | S01 |
+| TL-03 | Rule tests. | R1-D/R2/R3/R4/R11 and boundary suites; CI-S02–CI-S04. | TESTED | S02 |
+| TL-04 | Four golden decision combinations. | Golden and ground-truth tests; CI-ALL. | TESTED | S01/S04 |
+| TL-05 | Four-field bilingual extraction golden. | Extraction suite; CI-ALL. | TESTED | S01 |
+| TL-06 | API tests. | `test_api.py`, including list 404 and integrity 422; CI-ALL, S05-FOCUSED. | TESTED | S01/S05 |
+| TL-07 | Frontend contract checks. | Scope statement above; static suite and live payload contracts; CI-S04, S05-LOCAL after observed; KL-22. | TESTED | S04/S05 |
+| TL-08 | Below/equal/above threshold boundaries. | `test_threshold_boundaries.py`; CI-S02–CI-S04. | TESTED | S02 |
+| TL-09 | Synthetic leakage assertions 1–7. | Isolation, dossier, API, and fidelity suites; CI-S03, CI-S04. | TESTED | S03/S04 |
+| GATE-A | Authority/core present; hashes pass. | Integrity and protected-byte audit; CI-ALL, S05-LOCAL after observed. | TESTED | S01/S05 |
+| GATE-B | Data/scenarios validate, reconcile, and back-test. | `validate_scenarios.py`; CI-S03, CI-S04. | TESTED | S03/S04 |
+| GATE-C | Rules visible; thresholds config-sourced; goldens exact. | Rule/golden suites and recursive scanner; CI-S02–CI-S04. | TESTED | S02/S05 |
+| GATE-D | Capacity/unknown/D* gates are exact. | Capability suites; CI-ALL. | TESTED | S01 |
+| GATE-E | Unsupported economics first; S* minimal; PP gets no support. | Economics and golden suites; CI-ALL. | TESTED | S01 |
+| GATE-F | Zero leakage, dual states, labelled synthetic rows. | Isolation/fidelity/dossier suites; CI-S03, CI-S04. | TESTED | S03/S04 |
+| GATE-G | Product controls, adaptive manifest, dossier, Arabic, responsiveness. | Exact API/static scope statement above; CI-S04, S05-LOCAL after observed; KL-22. | TESTED | S04/S05 |
+| GATE-H | Authorized release gates only. | Authorized generators ran only in S02–S04. S05 has no governed change and does not run a generator; make/clean-pip/integrity/Gate B/pytest/smoke/Docker are S05-LOCAL evidence after observed. | TESTED | S01–S05 |
+
+## E. Build-control requirements
+
+| ID | Requirement | Implementation and execution evidence | Status | Slice |
+|---|---|---|---|---|
+| BC-01 | Git repository with default `main` at `baramiSG/Industrial_mvp`. | S00 commit `0731ae5`; subsequent PR/merge records and CI registry. | TESTED | S00 |
+| BC-02 | No secrets, private data, or prohibited files in Git. | Scanner/tests and CI-ALL. | TESTED | S00/S01 |
+| BC-03 | Durable machine/slice/control state. | `.workflow/state.json`, slice records, control documents; S00–S04 records audited. | TESTED | S00–S05 |
+| BC-04 | PR/push CI executes all required gates. | Workflow contract and CI-ALL. | TESTED | S01 |
+| BC-05 | Each slice follows plan, review, independent review, gates, PR, CI, merge. | S01–S04 completion/review/PR records; S05 lifecycle remains in progress. | TESTED | all |
+| BC-06 | Implementer, Supervisor, and Reviewer model separation. | ADR-002 and S01–S05 state/slice assignments. | TESTED | all |
+| BC-07 | Requirements traceability is maintained. | This row-level document and S05 docs audit. | TESTED | all |
+| BC-08 | Final acceptance, final documents, and different-model holistic review. | Runner/tests/docs are implemented; final reviewer, hosted CI, merge, and release-state facts remain Supervisor-controlled. | IMPLEMENTED | S05 |
+
+## F. Packaged MVP definition of done — Core 09 §7
+
+The complete S05 local harness run `20260902T033607Z-17501` observed the associated steps with all 42 exit codes zero. These rows are promoted no higher than `TESTED`; external review, hosted CI, merge, and release-state promotion remain separate.
+
+| ID | Requirement | Implementation / required evidence | Status | Slice |
+|---|---|---|---|---|
+| DOD-01 | Starts from a clean Python environment with documented commands. | Clean venv create/install/gates and operator/deployment guides; S05-LOCAL steps 03–12. | TESTED | S05 |
+| DOD-02 | No external key is required. | Offline package/install/runtime proof; S05-LOCAL steps 03–27. | TESTED | S05 |
+| DOD-03 | All tests pass. | `make ci` and clean-pip pytest, each 260 passed; S05-LOCAL steps 02 and 11. | TESTED | S05 |
+| DOD-04 | Integrity passes. | Locked and clean-pip integrity plus final protected audit; S05-LOCAL steps 09, 34–36, 41. | TESTED | S05 |
+| DOD-05 | Two public golden outcomes are exact. | Golden suite and live HTTP states; S05-LOCAL steps 02, 11, 20. | TESTED | S05 |
+| DOD-06 | Steel simulated transition is exact and disclosed. | Live detail/manifest/dossier contracts; S05-LOCAL step 20. | TESTED | S05 |
+| DOD-07 | PP simulation still rejects support. | Live state/route/no-support contracts; S05-LOCAL step 20. | TESTED | S05 |
+| DOD-08 | Interface is usable at desktop/tablet widths. | API/static scoped proof only; KL-22; S05-LOCAL steps 02, 11, 20. | TESTED | S05 |
+| DOD-09 | Dossier exists in JSON and printable HTML. | Four case/mode live contracts; S05-LOCAL step 20. | TESTED | S05 |
+| DOD-10 | Documentation and source are included in one zip. | CRC/member/prohibited-artifact archive audit; S05-LOCAL steps 38–40. | TESTED | S05 |
+
+## G. MVP success criteria — Core 01 §9
+
+| ID | Observable success criterion | Implementation and execution evidence | Status | Slice |
+|---|---|---|---|---|
+| SC-01 | Refuses unsupported factory recommendation. | PP public/simulated `REJECT`, route 0, no support; CI-ALL. | TESTED | S01/S04 |
+| SC-02 | Public evidence produces meaningful decisions and precise evidence requests. | Steel public `INVESTIGATE`, `data_unlocks`, dossier; CI-ALL. | TESTED | S01 |
+| SC-03 | Ministry-shaped inputs change named gates, not a generic score. | Dual state, capacity, D*, economics, rule and reconciliation outputs; CI-S04. | TESTED | S04 |
+| SC-04 | Synthetic evidence is honest and controlled. | Class/source/flag/label/disclosure and fingerprint tests; CI-S03, CI-S04. | TESTED | S03/S04 |
+| SC-05 | Calculations, thresholds, and evidence are inspectable. | Threshold endpoint, rule ledger, authority and evidence objects; CI-ALL. | TESTED | S01–S04 |
+| SC-06 | Output is a route and Decision Dossier, not a ranking. | Decision route plus JSON/HTML dossier contracts; CI-ALL. | TESTED | S01 |
+
+## Branch and release-state rules
+
+1. No row on the S05 implementation branch is promoted above `TESTED`.
+2. DOD-01–DOD-10 move to `TESTED` only after the matching first complete S05 local harness steps are observed.
+3. BC-08 moves to `TESTED` only after the different-model final reviewer reports zero unresolved findings and the required final documents exist.
+4. `FR-073` remains `NOT_APPLICABLE (production)`.
+5. After the S05 implementation PR merges and default-branch CI for that merge is green, the Supervisor opens the narrow release-state PR. Only that PR may promote eligible rows to `COMPLETE`, record final CI/merge facts, and update durable project state.

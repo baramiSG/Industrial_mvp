@@ -1,0 +1,23 @@
+S05: final acceptance harness, residual and final-review fixes, release 0.2.0 documents
+
+Adds scripts/final_acceptance.sh (42 ordered steps: make ci, clean-pip
+gates, Docker build/run/health, uvicorn journeys A-E in both modes,
+NFR-005 timings, failure paths, restart, isolated revert dry-run, scans,
+docs/archive audits, protected-diff) with per-step evidence, plus
+contract, packaging and performance tests.
+
+Fixes from the S02-S04 residual notes and the different-model holistic
+final review: SPA fallback path containment (resolve + is_relative_to),
+packaging from tracked files only, hard-gate "not applicable" prefix
+handling, no unknown->0 in economics helpers (named ValueError -> 422),
+list-route 404 mapping, recursive threshold scan, dead local removed,
+README simulation description corrected.
+
+Release 0.2.0 (pyproject, __init__, unhashed config/project.yaml
+project.version, CHANGELOG, uv.lock root version). New FINAL_BUILD_REPORT,
+OPERATOR_RUNBOOK, DEPLOYMENT_GUIDE; DEVELOPMENT_GUIDE replaced;
+KNOWN_LIMITATIONS, ADR-009, traceability and API reference updated.
+
+No hashed config, data, core or DOCX change; integrity PASS; goldens
+unchanged. Acceptance run 42/42; 280 tests; final review APPROVE after
+one fix round. COMPLETE statuses and tag follow in the release-state PR.

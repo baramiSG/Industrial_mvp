@@ -8,8 +8,8 @@ Authoritative machine state: `.workflow/state.json`. This file is the human-read
 | S01 CI pipeline, local gates and toolchain | MERGED | slice/S01-ci-and-toolchain (deleted) | [#1](https://github.com/baramiSG/Industrial_mvp/pull/1) | 432af8a | runs 33569855956, 33570112914 green (4/4) | 72 tests; reviewer APPROVE after 1 fix round |
 | S02 Threshold governance | MERGED | slice/S02-threshold-governance (deleted) | [#2](https://github.com/baramiSG/Industrial_mvp/pull/2) | c438370 | run 33573669072 green (4/4) | 136 tests; thresholds 1.1.0; reviewer APPROVE 0 findings |
 | S03 Evidence-isolation hardening | MERGED | slice/S03-evidence-isolation-hardening (deleted) | [#3](https://github.com/baramiSG/Industrial_mvp/pull/3) | ddf905d | run 33579923763 green (4/4) | 191 tests; evidence_policy 1.1.0; Gate B; reviewer APPROVE 0 findings |
-| S04 Simulation-branch fidelity | PLAN_DRAFT | slice/S04-simulation-fidelity | — | — | — | base ddf905d |
-| S05 Final acceptance | NOT_STARTED | slice/S05-final-acceptance | — | — | — | |
+| S04 Simulation-branch fidelity | MERGED | slice/S04-simulation-fidelity (deleted) | [#4](https://github.com/baramiSG/Industrial_mvp/pull/4) | 98c1a40 | run 33584437086 green (4/4) | 231 tests; scenarios 1.1.0; generic selection; reviewer APPROVE 0 findings |
+| S05 Final acceptance | PLAN_DRAFT | slice/S05-final-acceptance | — | — | — | base 98c1a40 |
 
 ## Log
 
@@ -19,3 +19,4 @@ Authoritative machine state: `.workflow/state.json`. This file is the human-read
 - 2026-09-02 02:15 — S01 squash-merged to `main` as `432af8a` after run 33570112914 green 4/4. S02 started (base `432af8a`).
 - 2026-09-02 03:05 — S02 squash-merged to `main` as `c438370` after run 33573669072 green 4/4 (PR #2). Authority change thresholds 1.1.0 executed under ADR-005. Post-merge integrity PASS. Traceability promoted; KL-01..03 closed. S03 started (base `c438370`).
 - 2026-09-02 04:37 — S03 squash-merged to `main` as `ddf905d` after run 33579923763 green 4/4 (PR #3). Authority change evidence_policy 1.1.0 executed under ADR-008. Gate B validator in CI. First implementer agent replaced after shell-backend failure (no edits lost). Traceability promoted; KL-04..06 closed; ADR-008 Accepted. S04 started (base `ddf905d`).
+- 2026-09-02 05:47 — S04 squash-merged to `main` as `98c1a40` after run 33584437086 green 4/4 (PR #4). Scenario authority change executed under ADR-006; generic §7.4/§7.3 selection; synthetic R6–R8 ledger. Traceability promoted; KL-07/08 closed. S05 final acceptance started (base `98c1a40`).

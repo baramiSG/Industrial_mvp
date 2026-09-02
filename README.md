@@ -2,6 +2,8 @@
 
 A runnable Ministry demonstration of the **Industrial Opportunity Resolution Methodology**. The repository converts frozen HS-based public evidence into evidence-bounded decisions and then shows, in a strictly isolated simulation branch, how Ministry-grade line-level records can make the same case decisive.
 
+Application and demonstration project release: `0.2.0`.
+
 The MVP is intentionally not a generic opportunity-ranking dashboard. Its decision object is:
 
 > **Product × Specification × Application × Capability × Demand × Route**
@@ -90,15 +92,24 @@ Golden CI invariants include:
 
 ## CI and local gates
 
-GitHub Actions runs the prohibited-file scan, Python compile check, JavaScript syntax check, integrity verification, full test suite and demo smoke on uv/Python 3.12, uv/Python 3.14 and the documented pip path; it also builds the Docker image.
+GitHub Actions runs the prohibited-file scan, recursive threshold-literal scan, Python compile check, JavaScript syntax check, integrity verification, Gate B scenario reconciliation/back-test, full test suite and demo smoke on uv/Python 3.12, uv/Python 3.14 and the documented pip path; it also builds the Docker image.
 
 After installing uv as described in `docs/DEVELOPMENT_GUIDE.md`, reproduce the required gates locally with:
 
 ```bash
 make ci
+bash scripts/final_acceptance.sh
 ```
 
 The existing `pip install -e ".[dev]"`, `START_DEMO_WSL.sh` and Docker paths remain supported.
+
+Create the reviewable source package from Git-tracked files only:
+
+```bash
+make package
+```
+
+The packaging command must run at the root of a Git working tree. Untracked and ignored workspace files, including `.env`, `.venv`, `.git`, and `.workflow/logs`, are not archive inputs.
 
 ## Evidence modes
 
@@ -108,7 +119,7 @@ Only frozen, attributable public records contribute to `real_decision`. Missing 
 
 ### Ministry simulation
 
-The simulation branch introduces explicit demo records such as line availability, yield, target-specification qualification share, customer acceptance, tariff-line allocation and economics. Every such record carries:
+The packaged simulation scenarios contain line availability, yield, qualification share, market allocation, target specification, demand layers, equivalence, economics, EVSI, hard gates, and capability states. They do not contain tariff-line or buyer-allocation blocks; see KL-28 in `docs/KNOWN_LIMITATIONS.md`. Every synthetic record carries:
 
 ```yaml
 synthetic_flag: true

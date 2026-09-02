@@ -5,6 +5,39 @@ from typing import Any
 from .config import thresholds_config
 
 
+NATIONAL_VALUE_KEYS = (
+    "domestic_value_added",
+    "exports",
+    "resilience_value",
+    "knowledge_skills",
+    "fiscal_receipts",
+    "government_cost",
+    "displacement",
+    "resource_environment",
+    "risk_allowance",
+)
+EVSI_KEYS = (
+    "route_change_probability",
+    "value_difference_m_sar",
+    "evidence_cost_m_sar",
+    "delay_cost_m_sar",
+)
+
+
+def _require_keys(
+    values: dict[str, Any],
+    required_keys: tuple[str, ...],
+    label: str,
+) -> None:
+    missing = [
+        key for key in required_keys if key not in values
+    ]
+    if missing:
+        raise ValueError(
+            f"{label} missing required keys: {', '.join(missing)}"
+        )
+
+
 def npv(rate: float, cash_flows: list[float]) -> float:
     if rate <= -1:
         raise ValueError("Discount rate must be greater than -100%")
@@ -85,18 +118,23 @@ def minimum_effective_support(
 
 
 def incremental_national_value(components: dict[str, float]) -> dict[str, Any]:
+    _require_keys(
+        components,
+        NATIONAL_VALUE_KEYS,
+        "national value",
+    )
     benefits = (
-        components.get("domestic_value_added", 0)
-        + components.get("exports", 0)
-        + components.get("resilience_value", 0)
-        + components.get("knowledge_skills", 0)
-        + components.get("fiscal_receipts", 0)
+        components["domestic_value_added"]
+        + components["exports"]
+        + components["resilience_value"]
+        + components["knowledge_skills"]
+        + components["fiscal_receipts"]
     )
     costs = (
-        components.get("government_cost", 0)
-        + components.get("displacement", 0)
-        + components.get("resource_environment", 0)
-        + components.get("risk_allowance", 0)
+        components["government_cost"]
+        + components["displacement"]
+        + components["resource_environment"]
+        + components["risk_allowance"]
     )
     value = benefits - costs
     return {
@@ -109,10 +147,11 @@ def incremental_national_value(components: dict[str, float]) -> dict[str, Any]:
 
 
 def approximate_evsi(evsi_inputs: dict[str, float | str]) -> dict[str, Any]:
-    probability = float(evsi_inputs.get("route_change_probability", 0))
-    value_difference = float(evsi_inputs.get("value_difference_m_sar", 0))
-    evidence_cost = float(evsi_inputs.get("evidence_cost_m_sar", 0))
-    delay_cost = float(evsi_inputs.get("delay_cost_m_sar", 0))
+    _require_keys(evsi_inputs, EVSI_KEYS, "EVSI")
+    probability = float(evsi_inputs["route_change_probability"])
+    value_difference = float(evsi_inputs["value_difference_m_sar"])
+    evidence_cost = float(evsi_inputs["evidence_cost_m_sar"])
+    delay_cost = float(evsi_inputs["delay_cost_m_sar"])
     value = probability * value_difference - evidence_cost - delay_cost
     return {
         "route_change_probability": probability,
