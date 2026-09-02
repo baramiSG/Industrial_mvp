@@ -1,0 +1,24 @@
+S04: generic scenario-driven simulation, ground-truth back-test, synthetic R6-R8 ledger
+
+The simulated state is now selected by one generic engine path from
+scenario content per Core 07 s7.4 (equivalent qualified availability >=
+target demand -> REJECT route 0) then s7.3 (strict conjunction -> ADVANCE
+route 5; otherwise INVESTIGATE); opportunity-ID dispatch and embedded
+narrative literals are removed. Scenarios carry scenario_version,
+ground_truth and state-keyed decision_narrative; the engine result is
+back-tested against ground truth at request time (typed
+EvidenceIntegrityError -> 422 on mismatch) and in Gate B.
+
+R6/R7/R8 are re-evaluated in simulated mode from labelled synthetic
+inputs (Class D, DEMO_GENERATOR, visible label) with FULL/DEGRADED/
+DISABLED execution and NOT_CALCULABLE metrics where inputs are absent;
+public mode carries no synthetic rule rows. UI ledger and dossier
+disclose the synthetic rows. Core 09 s2.7 frontend contract checks added.
+
+Authority change (Manifest s7.3, ADR-006): additive keys only in the two
+synthetic scenario files (narrative verbatim; no numeric change);
+build_manifests.py run once after full regression; snapshot manifest
+updated for the two synthetic entries (sha256sum verified);
+authority_hashes.json unchanged. Golden outcomes and numbers unchanged;
+231 tests pass. Plan approved (2 rounds); Supervisor review 0 findings;
+independent Grok review APPROVE.

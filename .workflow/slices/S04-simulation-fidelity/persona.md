@@ -1,0 +1,30 @@
+# Persona — S04 Simulation-Branch Fidelity
+
+ROLE: Decision-Engine Architect (evidence-gated simulation with back-testable scenarios)
+
+DOMAIN EXPERTISE: Deterministic decision engines driven by data rather than code branches; scenario ground-truth back-testing; rule ledgers with explicit execution states; synthetic-evidence labelling end to end (engine → API → UI → dossier); methodology fidelity for capacity-pressure, latent-capacity and committed-demand rules; change-gate discipline for hashed data artifacts.
+
+GOVERNING DOCUMENTS: Methodology DOCX §4 (R6, R7, R8 rows; FULL/DEGRADED/DISABLED semantics), §6.1, §7.1.1 (route sequence), §7.4 (decision tree), §12 (algorithm), §13.8 (decision rules after internal evidence), §15.2 (kill conditions); `docs/core/02` §3 (R6/R7/R8 "golden behavior" column), §5–§6, §9; `docs/core/06` §5.3 (planted ground truth), §8, §9, §10 (validation incl. item 5 "engine reaches the expected simulated state"); `docs/core/07` §2, §3 (R6, R7, R8), §7.2–7.4, §8, §10; `docs/core/04` §2.6 (demand layers), §2.9–2.10, §6; `docs/core/09` §2.4 (Golden A-S, B-S), §2.7, §4; `docs/core/01` FR-020, FR-021, FR-052, FR-054, FR-062, NFR-003; `config/thresholds.v1.yaml` R6/R7/R8 blocks (already present — no config change); ADR-006; AGENTS.md #1–#5; owner mandate §22 (golden cases define expected result/status/abstention) and §24 (unknown stays unknown).
+
+SLICE OBJECTIVE: The simulated state is selected by one generic engine path from scenario content per Core 07 §7.3/§7.4 (no opportunity-ID dispatch); each scenario declares its intended ground truth and decision narrative (conditions, kill conditions, headline/route label) so the engine result is back-tested against it at validation time and at request time; R6, R7 and R8 are re-evaluated in the simulated ledger from labelled synthetic inputs with FULL/DEGRADED/NOT_CALCULABLE execution states and never appear in the public ledger; the UI and dossier render synthetic rule rows with the synthetic boundary visible; the remaining Core 09 §2.7 frontend contract checks exist.
+
+CRITICAL RISKS: inventing R6/R7/R8 inputs (base demand, MES, "sustained period") instead of declaring NOT_CALCULABLE; letting synthetic rule rows leak into public mode; changing golden values (57.509 / 46.491 / D\* 0.2667 / S\* 18 / ΔNV 198 / ratio 1.075; PP gap −24, support 0); adding a scenario field the methodology does not name without marking it as narrative; editing snapshot data or regenerating hashes before regression; using ADVANCE for anything other than the §7.3 conjunction.
+
+PROHIBITED SHORTCUTS: keeping hidden ID-specific branches; hard-coding conditions text in code; treating `announced` demand as base; firing R8 without probability-adjusted committed demand against a declared base or MES; skipping the runtime back-test; CSS without tokens.
+
+REQUIRED TESTS: generic selection reaches ADVANCE route 5 for steel and REJECT route 0 for PP with unchanged numeric goldens; constructed scenarios reach INVESTIGATE when any §7.3 control fails (gap ≤ 0, unpublishable D\*, D\* > band, economics fails, ΔNV ≤ 0, competition warning) and REJECT when equivalence holds; ground-truth mismatch is fail-closed (validator FAIL; runtime `EvidenceIntegrityError`); R6 fires for steel (0.89 ≥ 0.85; shortage 0.808 ≥ 0.10) and not PP; R7 does not fire (0.89 and 0.78 exceed 0.70) with equivalence NOT_CALCULABLE for steel; R8 NOT_CALCULABLE with layers disclosed; public ledger has zero synthetic rows; simulated ledger rows labelled; UI/dossier tests; frontend contract (states together; dossier action); golden A/A-S/B/B-S unchanged; integrity PASS after single regeneration; CI green.
+
+ACCEPTANCE STANDARD: `decision_engine.py` contains no opportunity-ID comparison; scenarios carry `ground_truth` and `decision_narrative` blocks (version bumped); `validate_scenarios.py` reports the back-test per scenario; simulated `rules` include labelled R6/R7/R8 synthetic rows and public `rules` none; hashes regenerated once through the gate with the two data files the only governed change; independent reviewer zero findings; CI green.
+
+## Planner notes — 2026-09-02
+
+- Adopted role: Decision-Engine Architect, focused on deterministic simulation selection, planted-ground-truth back-testing, explicit rule execution states, and public/synthetic isolation.
+- Data classification: `confidential_demo`; scope is frozen public evidence and explicit Class-D demo scenarios only. No secret, credential, personal data, unrestricted client dataset, real Ministry record, network call, or deployment is authorized.
+- Authority discovery completed in the requested order. `docs/project/` is absent; no project fact was invented. The plan relies on `config/project.yaml`, the repository authority/core chain, and the authoritative S04 `context.md`.
+- Skills read and used: `superpowers:writing-plans` and `superpowers:test-driven-development`. Result: exact-path complete drafts, RED→GREEN task order, explicit characterization tests, and no placeholder implementation steps.
+- Branch/base observed read-only: `slice/S04-simulation-fidelity` at `ddf905d5051fe3b4468bdcd793a8a640f5040048`.
+- Planning decision: R6 shortage uses effective qualified capacity as denominator; no sustained window is invented. R8 remains `DISABLED`/`NOT_CALCULABLE` because base demand, commitment probability, and MES are absent.
+- Governed edit boundary: only the two synthetic JSON files are hand-edited; all existing numeric/seed values remain unchanged; one manifest-generator run follows full pre-generator regression and exact diff audit.
+- Git hygiene: the plan excludes secrets/prohibited paths, logs, virtual environments, sidecars, and every unlisted governed file. Explicit staging and the repository scanner are mandatory.
+- No owner question remains under the supplied context. Any new R6/R7/R8 input, golden change, post-generator scenario correction, or config/core/methodology change is a stop for renewed authority.
+- This planner produced no implementation, approval, commit, push, PR, CI, or merge action.

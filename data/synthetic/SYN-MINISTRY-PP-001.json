@@ -1,5 +1,32 @@
 {
   "scenario_id": "SYN-MINISTRY-PP-001",
+  "scenario_version": "1.1.0",
+  "ground_truth": {
+    "expected_simulation_state": "REJECT",
+    "expected_route_code": 0,
+    "basis": "Core 06 §5.3 planted ground truth; Core 07 §7.4 selects REJECT route 0 when equivalent qualified availability is at least target demand."
+  },
+  "decision_narrative": {
+    "REJECT": {
+      "headline": "SIMULATED REJECT — no generic specification-adjusted gap",
+      "route_label": "No intervention",
+      "rationale": "The simulated internal grade matrix shows equivalent qualified supply above target demand; generic capacity support would be non-additional.",
+      "conditions": [
+        "Reopen only for a named specialty-grade exception supported by buyer evidence."
+      ],
+      "kill_conditions": [
+        "Any proposed generic-capacity support is stopped while equivalent qualified capacity is available."
+      ],
+      "competition_finding": "No new capacity is proposed; redundant support is avoided."
+    },
+    "INVESTIGATE": {
+      "headline": "SIMULATED INVESTIGATE — one or more gates remain unresolved",
+      "route_label": "Simulation controls did not all pass",
+      "rationale": "The simulated branch did not satisfy every hard gate.",
+      "conditions": [],
+      "kill_conditions": []
+    }
+  },
   "opportunity_id": "SAU-H0-390210",
   "synthetic_flag": true,
   "display_label": "SIMULATED — NOT MINISTRY EVIDENCE",

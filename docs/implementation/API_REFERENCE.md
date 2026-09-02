@@ -48,11 +48,11 @@ Returns the complete analysis contract:
 
 - opportunity and snapshot;
 - real, simulation and active decisions;
-- R-rule ledger;
+- R-rule ledger; simulated mode appends labelled Class-D R6/R7/R8 rows while retaining the public rows;
 - capability;
 - capacity/economics/competition/EVSI where available;
 - trade, evidence and data unlocks;
-- integrity assertions.
+- integrity assertions, including `ground_truth_backtest` (`expected`, `actual`, `match`) on successful simulated responses.
 
 ## GET `/api/opportunities/{opportunity_id}/ui-manifest?mode=...`
 
@@ -66,6 +66,8 @@ Returns the structured Decision Dossier as JSON.
 
 Returns a printable one-page HTML dossier. Simulated mode includes the synthetic disclosure.
 
+Simulated dossier JSON and HTML include the labelled synthetic R6/R7/R8 evaluations; public dossier output contains none.
+
 ## GET `/api/extraction-demo`
 
 Runs the offline AR/EN extraction golden set and returns accuracy, expected fields, actual fields and source spans.
@@ -74,6 +76,6 @@ Runs the offline AR/EN extraction golden set and returns accuracy, expected fiel
 
 - unknown opportunity: HTTP 404;
 - missing synthetic scenario in simulated mode: HTTP 404;
-- evidence-integrity failure in simulated mode (policy or public-marginal reconciliation): HTTP 422 with {"detail": {"code": "EVIDENCE_INTEGRITY_ERROR", "message": ...}}; no partial analysis is returned.
+- evidence-integrity failure in simulated mode (policy, public-marginal reconciliation, scenario contract or ground-truth back-test): HTTP 422 with {"detail": {"code": "EVIDENCE_INTEGRITY_ERROR", "message": ...}}; no partial analysis is returned.
 - malformed governed data: fail closed with a clear error;
 - static frontend paths: served by the SPA fallback.

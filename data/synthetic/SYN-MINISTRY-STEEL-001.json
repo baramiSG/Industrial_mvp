@@ -1,5 +1,35 @@
 {
   "scenario_id": "SYN-MINISTRY-STEEL-001",
+  "scenario_version": "1.1.0",
+  "ground_truth": {
+    "expected_simulation_state": "ADVANCE",
+    "expected_route_code": 5,
+    "basis": "Core 06 §5.3 planted ground truth; Core 07 §7.3 requires the positive gap, publishable D* within the incremental-upgrade band, passing minimum-support economics, positive incremental national value, and no competition warning supplied by this scenario."
+  },
+  "decision_narrative": {
+    "ADVANCE": {
+      "headline": "SIMULATED ADVANCE — brownfield specification upgrade",
+      "route_label": "Conditional brownfield debottlenecking / line expansion",
+      "rationale": "The simulated Ministry-grade evidence resolves a sustained target-specification gap, establishes incremental adjacency, and passes minimum-support, national-value and competition controls.",
+      "conditions": [
+        "Achieve customer acceptance for the named target specification.",
+        "Deliver 50 kt of incremental qualified capacity within 18 months.",
+        "Support is milestone-based, sunset-bound and subject to clawback."
+      ],
+      "kill_conditions": [
+        "Committed target-specification demand falls below 72 kt.",
+        "Incumbent output or another expansion closes the gap before award.",
+        "Customer qualification is not achieved by the contractual milestone."
+      ]
+    },
+    "INVESTIGATE": {
+      "headline": "SIMULATED INVESTIGATE — one or more gates remain unresolved",
+      "route_label": "Simulation controls did not all pass",
+      "rationale": "The simulated branch did not satisfy every hard gate.",
+      "conditions": [],
+      "kill_conditions": []
+    }
+  },
   "opportunity_id": "SAU-H0-721049",
   "synthetic_flag": true,
   "display_label": "SIMULATED — NOT MINISTRY EVIDENCE",

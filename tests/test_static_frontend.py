@@ -137,3 +137,62 @@ def test_authority_caption_meets_text_contrast_on_banner() -> None:
         >= 4.5
         for background in backgrounds
     )
+
+
+def _app_function(source: str, name: str) -> str:
+    assert f"function {name}" in source
+    return source.split(
+        f"function {name}",
+        maxsplit=1,
+    )[1].split("\n}", maxsplit=1)[0]
+
+
+def test_rule_ledger_visibly_labels_synthetic_rows() -> None:
+    app_js = (
+        PROJECT_ROOT
+        / "src"
+        / "ior_mvp"
+        / "static"
+        / "app.js"
+    ).read_text(encoding="utf-8")
+    helper = _app_function(app_js, "ruleBoundaryChip")
+    ledger = _app_function(app_js, "renderRuleLedger")
+    methodology = _app_function(app_js, "renderMethodology")
+
+    assert "row.synthetic_flag" in helper
+    assert "escapeHtml(row.display_label)" in helper
+    assert "exec-chip exec-DEGRADED" in helper
+    assert "SYNTHETIC" in helper
+    for block in (ledger, methodology):
+        assert '"synthetic-row"' in block
+        assert "ruleBoundaryChip(row)" in block
+
+
+def test_integrity_banner_displays_public_and_active_states_together() -> None:
+    app_js = (
+        PROJECT_ROOT
+        / "src"
+        / "ior_mvp"
+        / "static"
+        / "app.js"
+    ).read_text(encoding="utf-8")
+    banner = _app_function(app_js, "renderIntegrityBanner")
+
+    assert "stateChip(props.real_state)" in banner
+    assert "stateChip(props.active_state)" in banner
+    assert "props.mode === \"simulated\"" in banner
+
+
+def test_decision_actions_exposes_dossier_html_action() -> None:
+    app_js = (
+        PROJECT_ROOT
+        / "src"
+        / "ior_mvp"
+        / "static"
+        / "app.js"
+    ).read_text(encoding="utf-8")
+    actions = _app_function(app_js, "renderDecisionActions")
+
+    assert "data-dossier-html" in actions
+    assert "Open dossier" in actions
+    assert "<button" in actions

@@ -252,14 +252,19 @@ function fireText(value) {
   return `<span class="rule-fire fire-na">NOT EVALUABLE</span>`;
 }
 
+function ruleBoundaryChip(row) {
+  if (!row.synthetic_flag) return "";
+  return `<span class="exec-chip exec-DEGRADED" aria-label="${escapeHtml(row.display_label)}">SYNTHETIC</span>`;
+}
+
 function renderRuleLedger(props) {
   return `
     <article class="workspace-card full">
       <div class="card-header"><div><h3>R0–R12 execution ledger</h3><p>Thresholds are versioned configuration, never hidden in code</p></div></div>
       <div class="card-body" style="overflow-x:auto">
         <table class="rule-table"><thead><tr><th>Rule</th><th>Execution</th><th>Result</th><th>Decision effect</th></tr></thead><tbody>
-          ${props.rules.map((row) => `<tr>
-            <td><b>${escapeHtml(row.rule_id)}</b><br><span>${escapeHtml(row.name)}</span></td>
+          ${props.rules.map((row) => `<tr class="${row.synthetic_flag ? "synthetic-row" : ""}">
+            <td><b>${escapeHtml(row.rule_id)}</b> ${ruleBoundaryChip(row)}<br><span>${escapeHtml(row.name)}</span></td>
             <td><span class="exec-chip exec-${escapeHtml(row.execution)}">${escapeHtml(row.execution)}</span><br>${fireText(row.fired)}</td>
             <td>${escapeHtml(row.result)}</td>
             <td>${escapeHtml(row.decision_effect)}</td>
@@ -401,7 +406,7 @@ function renderMethodology() {
     </div>
     <div class="methodology-table-wrap">
       <table class="rule-table"><thead><tr><th>Rule</th><th>Execution</th><th>Fired</th><th>Result</th></tr></thead><tbody>
-        ${rules.map((row) => `<tr><td><b>${escapeHtml(row.rule_id)}</b> · ${escapeHtml(row.name)}</td><td><span class="exec-chip exec-${escapeHtml(row.execution)}">${escapeHtml(row.execution)}</span></td><td>${fireText(row.fired)}</td><td>${escapeHtml(row.result)}</td></tr>`).join("")}
+        ${rules.map((row) => `<tr class="${row.synthetic_flag ? "synthetic-row" : ""}"><td><b>${escapeHtml(row.rule_id)}</b> ${ruleBoundaryChip(row)} · ${escapeHtml(row.name)}</td><td><span class="exec-chip exec-${escapeHtml(row.execution)}">${escapeHtml(row.execution)}</span></td><td>${fireText(row.fired)}</td><td>${escapeHtml(row.result)}</td></tr>`).join("")}
       </tbody></table>
     </div>
   `;
