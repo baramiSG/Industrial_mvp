@@ -9,7 +9,7 @@ from ior_mvp.capability import (
     publication_allowed,
     route_band,
 )
-from ior_mvp.config import thresholds_config
+from ior_mvp.config import sector_profiles_config, thresholds_config
 from ior_mvp.data_repository import (
     get_public_case,
     get_synthetic_scenario,
@@ -28,7 +28,7 @@ from ior_mvp.rules import (
     r11_generic_capacity_fires,
 )
 from ior_mvp.trade_metrics import compound_annual_growth
-from tests.legacy_snapshot_v1 import candidate_v2_from_legacy
+from tests.legacy_snapshot_v1 import candidate_v21_from_legacy
 
 
 @pytest.mark.parametrize(
@@ -236,7 +236,7 @@ def test_r3_largest_share_boundary_applies_to_each_basis(
 
 
 def test_r3_orchestrator_compares_unrounded_hhi_below_boundary() -> None:
-    case = candidate_v2_from_legacy(
+    case = candidate_v21_from_legacy(
         get_public_case("SAU-H0-721049")
     )
     case["trade"][-1]["imports_usd_m"] = 100.0
@@ -294,7 +294,7 @@ def test_r4d_dedicated_value_coverage_boundary(
     coverage: float,
     expected: bool | None,
 ) -> None:
-    case = candidate_v2_from_legacy(
+    case = candidate_v21_from_legacy(
         get_public_case("SAU-H0-721049")
     )
     case["trade"][-1]["imports_usd_m"] = 100.0
@@ -343,7 +343,7 @@ def test_r5_penetration_boundary(
     expected: bool,
 ) -> None:
     retained = penetration * 100
-    case = candidate_v2_from_legacy(
+    case = candidate_v21_from_legacy(
         get_public_case("SAU-H0-721049")
     )
     case["trade"][-1]["imports_kt"] = retained
@@ -364,7 +364,7 @@ def test_r5_penetration_boundary(
 
 def test_r5_orchestrator_compares_unrounded_penetration_below_boundary(
 ) -> None:
-    case = candidate_v2_from_legacy(
+    case = candidate_v21_from_legacy(
         get_public_case("SAU-H0-721049")
     )
     retained = 19.996
@@ -400,7 +400,7 @@ def test_r11_ratio_and_nameplate_conjunction(
     has_nameplate: bool,
     expected: bool,
 ) -> None:
-    case = candidate_v2_from_legacy(
+    case = candidate_v21_from_legacy(
         get_public_case("SAU-H0-390210")
     )
     case["trade"][-1].pop("export_import_value_ratio", None)
@@ -420,7 +420,7 @@ def test_r11_ratio_and_nameplate_conjunction(
 
 
 def test_r11_orchestrator_compares_unrounded_ratio_above_boundary() -> None:
-    case = candidate_v2_from_legacy(
+    case = candidate_v21_from_legacy(
         get_public_case("SAU-H0-390210")
     )
     case["trade"][-1].pop("export_import_value_ratio", None)
@@ -456,7 +456,7 @@ def test_publication_allowed_kmin_boundary(
                 capability_config["minimum_known_weight_coverage"]
             ),
             unresolved_hard_gates=[],
-            has_known_state_three=False,
+            has_known_hard_gate_failure=False,
         )
         is expected
     )
@@ -505,7 +505,16 @@ def test_evaluate_capability_integrates_kmin_with_profile_weights(
     expected_coverage: float,
     expected_publishable: bool,
 ) -> None:
-    result = evaluate_capability("coated_steel", states, [])
+    gates = {
+        gate: {
+            "status": "RESOLVED",
+            "evidence_ids": ["E-GATE"],
+        }
+        for gate in sector_profiles_config()["profiles"][
+            "coated_steel"
+        ]["hard_gates"]
+    }
+    result = evaluate_capability("coated_steel", states, gates)
     assert result["known_weight_coverage"] == pytest.approx(expected_coverage)
     assert result["route_publishable"] is expected_publishable
 

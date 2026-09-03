@@ -28,6 +28,90 @@ def validate_public_evidence(evidence: Iterable[dict[str, Any]]) -> None:
             )
 
 
+def evaluate_advance_gate(
+    assessments: dict[str, dict[str, Any]],
+    advance_policy: dict[str, Any],
+) -> dict[str, Any]:
+    fields = advance_policy.get("decision_critical_fields")
+    blocked_classes = advance_policy.get("blocked_classes")
+    blocked_statuses = advance_policy.get(
+        "blocked_resolution_statuses"
+    )
+    if (
+        not isinstance(fields, list)
+        or not fields
+        or not all(isinstance(field, str) for field in fields)
+        or len(fields) != len(set(fields))
+        or set(fields) != set(assessments)
+    ):
+        raise EvidenceIntegrityError(
+            "Evidence advance gate decision_critical_fields are invalid"
+        )
+    if (
+        not isinstance(blocked_classes, list)
+        or not blocked_classes
+        or not all(
+            value in {"A", "B", "C", "D", "E"}
+            for value in blocked_classes
+        )
+    ):
+        raise EvidenceIntegrityError(
+            "Evidence advance gate blocked_classes are invalid"
+        )
+    allowed_statuses = {
+        "RESOLVED",
+        "PARTIAL",
+        "UNRESOLVED",
+        "CONTRADICTORY",
+        "MISSING",
+    }
+    if (
+        not isinstance(blocked_statuses, list)
+        or not blocked_statuses
+        or not all(value in allowed_statuses for value in blocked_statuses)
+    ):
+        raise EvidenceIntegrityError(
+            "Evidence advance gate blocked_resolution_statuses are invalid"
+        )
+    blocked_fields: list[dict[str, Any]] = []
+    for field in fields:
+        assessment = assessments.get(field)
+        if not isinstance(assessment, dict):
+            raise EvidenceIntegrityError(
+                "Evidence advance gate assessment must be a mapping"
+            )
+        evidence_class = assessment.get("evidence_class")
+        resolution = assessment.get("resolution_status")
+        if evidence_class not in {"A", "B", "C", "D", "E"}:
+            raise EvidenceIntegrityError(
+                "Evidence advance gate assessment class is invalid"
+            )
+        if resolution not in allowed_statuses:
+            raise EvidenceIntegrityError(
+                "Evidence advance gate assessment status is invalid"
+            )
+        reasons: list[str] = []
+        if evidence_class in blocked_classes:
+            reasons.append("BLOCKED_CLASS")
+        if resolution in blocked_statuses:
+            reasons.append("BLOCKED_RESOLUTION")
+        if reasons:
+            blocked_fields.append(
+                {
+                    "field": field,
+                    "evidence_class": evidence_class,
+                    "resolution_status": resolution,
+                    "reasons": reasons,
+                }
+            )
+    return {
+        "passes": not blocked_fields,
+        "blocked_classes": list(blocked_classes),
+        "blocked_resolution_statuses": list(blocked_statuses),
+        "blocked_fields": blocked_fields,
+    }
+
+
 def _synthetic_policy() -> dict[str, Any]:
     policy = evidence_policy_config().get("synthetic_isolation")
     if not isinstance(policy, dict):

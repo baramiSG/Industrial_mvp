@@ -5,7 +5,11 @@ from copy import deepcopy
 from pathlib import Path
 from typing import Any
 
-from ior_mvp.config import PROJECT_ROOT, thresholds_config
+from ior_mvp.config import (
+    PROJECT_ROOT,
+    sector_profiles_config,
+    thresholds_config,
+)
 from ior_mvp.rules import (
     NOT_CALCULABLE,
     log_change,
@@ -18,6 +22,33 @@ from ior_mvp.rules import (
 
 LIVE_PUBLIC_ROOT = PROJECT_ROOT / "data" / "snapshots" / "public"
 HISTORICAL_V1_ROOT = LIVE_PUBLIC_ROOT / "historical" / "v1"
+GOLDEN_SUPPORT_CODES = {
+    "S-WITS-721049": [
+        "TRADE_VALUE",
+        "TRADE_QUANTITY",
+        "SUPPLIER_CONCENTRATION",
+    ],
+    "S-UNICOIL-EPD": [
+        "DOMESTIC_NAMEPLATE_CAPACITY",
+        "DOMESTIC_PROCESS_ROUTE",
+        "DOMESTIC_SPECIFICATION_ENVELOPE",
+        "DOMESTIC_LABORATORY_METROLOGY",
+    ],
+    "S-UNICOIL-SPEC": [
+        "BILINGUAL_SPECIFICATION_EXTRACTION",
+        "DOMESTIC_SPECIFICATION_ENVELOPE",
+        "DOMESTIC_DIMENSION_ENVELOPE",
+    ],
+    "S-HADEED": ["DOMESTIC_PROCESS_FAMILY"],
+    "P-WITS-390210": [
+        "TRADE_VALUE",
+        "TRADE_QUANTITY",
+        "EXPORT_IMPORT_RATIO",
+    ],
+    "P-SABIC": ["DOMESTIC_PRODUCT_PORTFOLIO"],
+    "P-ADVANCED": ["DOMESTIC_NAMEPLATE_CAPACITY"],
+    "P-TASNEE": ["DOMESTIC_NAMEPLATE_CAPACITY"],
+}
 
 
 def load_legacy_snapshot(path: Path) -> dict[str, Any]:
@@ -459,17 +490,86 @@ def legacy_public_decision(
     }
 
 
-def candidate_v2_from_legacy(case: dict[str, Any]) -> dict[str, Any]:
-    """Return the exact S08 schema-v2 representation for a frozen v1 case."""
+def candidate_v21_from_legacy(case: dict[str, Any]) -> dict[str, Any]:
+    """Return the exact S09 schema-2.1 representation for a frozen v1 case."""
     case = deepcopy(case)
-    if case.get("schema_version") == "2.0.0":
+    if case.get("schema_version") == "2.1.0":
         return case
+    if case.get("schema_version") == "2.0.0":
+        return _upgrade_v2_candidate(case)
     hs6 = case["opportunity"]["hs6"]
     if hs6 == "721049":
         return _steel_candidate(case)
     if hs6 == "390210":
         return _polypropylene_candidate(case)
     raise ValueError(f"No approved S08 migration oracle for HS {hs6}")
+
+
+def _unknown_hard_exclusion_inputs() -> dict[str, Any]:
+    return {
+        "heterogeneous_residual_code": {
+            "commercial_product_separable": "UNAVAILABLE",
+            "product_level_evidence_available": "UNAVAILABLE",
+            "evidence_ids": [],
+        },
+        "downside_market_below_mes": {
+            "sustainable_downside_demand_kt": "UNAVAILABLE",
+            "minimum_efficient_scale_kt": "UNAVAILABLE",
+            "credible_export_contract": "UNAVAILABLE",
+            "evidence_ids": [],
+        },
+        "unsatisfiable_hard_gate": {
+            "gate_domain": "UNAVAILABLE",
+            "gate_satisfiability": "UNAVAILABLE",
+            "evidence_ids": [],
+        },
+        "idle_equivalent_domestic_capacity": {
+            "domestic_specification_equivalent": "UNAVAILABLE",
+            "qualified_idle_capacity_kt": "UNAVAILABLE",
+            "target_specification_demand_kt": "UNAVAILABLE",
+            "binding_market_failure": "UNAVAILABLE",
+            "evidence_ids": [],
+        },
+        "transitory_or_measurement_gap": {
+            "dominant_cause": "UNAVAILABLE",
+            "evidence_ids": [],
+        },
+        "redundancy_or_crowd_out": {
+            "competition_finding": "UNAVAILABLE",
+            "evidence_ids": [],
+        },
+    }
+
+
+def _unknown_decision_inputs() -> dict[str, str]:
+    return {
+        "target_specification_demand": "UNAVAILABLE",
+        "specification_equivalence": "UNAVAILABLE",
+        "route_evidence": "UNAVAILABLE",
+        "monitor_trigger": "UNAVAILABLE",
+    }
+
+
+def _upgrade_v2_candidate(case: dict[str, Any]) -> dict[str, Any]:
+    case["schema_version"] = "2.1.0"
+    profile = case["opportunity"]["sector_profile"]
+    hard_gates = sector_profiles_config()["profiles"][profile][
+        "hard_gates"
+    ]
+    case["domestic_capability"]["profile_hard_gates"] = {
+        gate: {"status": "UNAVAILABLE", "evidence_ids": []}
+        for gate in hard_gates
+    }
+    for gate in case["domestic_capability"]["unresolved_hard_gates"]:
+        gate["evidence_ids"] = []
+    for passport in case["evidence"]:
+        passport["supports"] = GOLDEN_SUPPORT_CODES[
+            passport["evidence_id"]
+        ]
+    case["hard_exclusion_inputs"] = _unknown_hard_exclusion_inputs()
+    case["decision_inputs"] = _unknown_decision_inputs()
+    case.pop("public_decision_contract", None)
+    return case
 
 
 def _base_candidate(
@@ -483,7 +583,7 @@ def _base_candidate(
 ) -> dict[str, Any]:
     filename = f"{case['opportunity']['id']}.json"
     return {
-        "schema_version": "2.0.0",
+        "schema_version": "2.1.0",
         "snapshot_id": case["snapshot_id"],
         "as_of_date": case["as_of_date"],
         "supersedes": (
@@ -508,7 +608,8 @@ def _base_candidate(
         },
         "criticality_designation": "UNAVAILABLE",
         "domestic_capability": domestic_capability,
-        "public_decision_contract": case["public_decision_contract"],
+        "hard_exclusion_inputs": _unknown_hard_exclusion_inputs(),
+        "decision_inputs": _unknown_decision_inputs(),
         "evidence": evidence,
     }
 
@@ -545,7 +646,7 @@ def _passport(
         "status": old["status"],
         "evidence_class": old["evidence_class"],
         "synthetic_flag": False,
-        "supports": old["supports"],
+        "supports": GOLDEN_SUPPORT_CODES[old["evidence_id"]],
         "transformation": transformation,
         "reviewer_status": "unconfirmed_by_responsible_authority",
         "contradiction": old.get("contradiction"),
@@ -645,8 +746,18 @@ def _steel_candidate(case: dict[str, Any]) -> dict[str, Any]:
         "public_dimension_states": old_capability[
             "public_dimension_states"
         ],
+        "profile_hard_gates": {
+            gate: {"status": "UNAVAILABLE", "evidence_ids": []}
+            for gate in sector_profiles_config()["profiles"][
+                "coated_steel"
+            ]["hard_gates"]
+        },
         "unresolved_hard_gates": [
-            {"name": name, "state": "unresolved"}
+            {
+                "name": name,
+                "state": "unresolved",
+                "evidence_ids": [],
+            }
             for name in old_capability["unresolved_hard_gates"]
         ],
     }
@@ -787,8 +898,18 @@ def _polypropylene_candidate(case: dict[str, Any]) -> dict[str, Any]:
         "public_dimension_states": old_capability[
             "public_dimension_states"
         ],
+        "profile_hard_gates": {
+            gate: {"status": "UNAVAILABLE", "evidence_ids": []}
+            for gate in sector_profiles_config()["profiles"][
+                "technical_plastics"
+            ]["hard_gates"]
+        },
         "unresolved_hard_gates": [
-            {"name": name, "state": "unresolved"}
+            {
+                "name": name,
+                "state": "unresolved",
+                "evidence_ids": [],
+            }
             for name in old_capability["unresolved_hard_gates"]
         ],
     }

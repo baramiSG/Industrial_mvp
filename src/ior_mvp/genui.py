@@ -41,6 +41,19 @@ def build_ui_manifest(analysis: dict[str, Any]) -> dict[str, Any]:
                 "confidence": active["confidence"],
                 "conditions": active.get("conditions", []),
                 "kill_conditions": active.get("kill_conditions", []),
+                "localized_narrative": active.get(
+                    "localized_narrative"
+                ),
+                "screening_disposition": analysis[
+                    "screening_disposition"
+                ],
+                "gap_class": analysis["gap_class"],
+                "preferred_hypothesis": analysis[
+                    "preferred_hypothesis"
+                ],
+                "narrative_version": analysis[
+                    "narrative_version"
+                ],
             },
         },
         {
@@ -98,6 +111,16 @@ def build_ui_manifest(analysis: dict[str, Any]) -> dict[str, Any]:
                     "synthetic_labels": (
                         analysis.get("simulation_scenario") or {}
                     ).get("display_labels"),
+                    "localized_missing_facts": (
+                        {
+                            locale: real["localized_narrative"][
+                                locale
+                            ]["missing_facts"]
+                            for locale in ("en", "ar")
+                        }
+                        if analysis["mode"] == "public"
+                        else None
+                    ),
                 },
             },
             {

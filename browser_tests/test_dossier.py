@@ -47,6 +47,12 @@ def test_open_dossier_popup_matches_case_and_mode(
     goto_portfolio(page, mode, locale)
     select_case(page, case, mode, locale)
     popup = open_dossier_popup(page, case, mode, locale)
+    analysis_response = page.request.get(
+        f"{browser_session.app_server.base_url}/api/opportunities/"
+        f"{case.id}?mode={mode}"
+    )
+    assert analysis_response.status == 200
+    analysis = analysis_response.json()
 
     parsed = urlsplit(popup.url)
     assert parsed.path == f"/api/opportunities/{case.id}/dossier.html"
@@ -113,11 +119,50 @@ def test_open_dossier_popup_matches_case_and_mode(
         expect(popup.locator("body")).to_contain_text(
             strings["dossier.no_synthetic_contradictions"]
         )
+        decision = analysis["simulation_decision"]
+        for field in ("headline", "route_label", "rationale"):
+            expect(
+                popup.locator(".decision-narrative")
+            ).to_contain_text(decision[field])
+        assert (
+            popup.locator(
+                ".decision-narrative .source-language-island"
+            ).count()
+            >= 3
+        )
     else:
         for label in labels.values():
             expect(popup.locator("body")).not_to_contain_text(label)
         expect(popup.locator("body")).to_contain_text(
             strings["dossier.synthetic_not_applicable"]
+        )
+        narrative = analysis["real_decision"][
+            "localized_narrative"
+        ][locale.code]
+        for field in ("headline", "route_label", "rationale"):
+            expect(
+                popup.locator(".decision-narrative")
+            ).to_contain_text(narrative[field]["text"])
+        for field, selector in (
+            ("conditions", ".decision-conditions"),
+            ("kill_conditions", ".kill-conditions"),
+            ("missing_facts", ".next-actions"),
+        ):
+            for item in narrative[field]:
+                expect(popup.locator(selector)).to_contain_text(
+                    item["text"]
+                )
+            assert (
+                popup.locator(
+                    f"{selector} .source-language-island"
+                ).count()
+                == 0
+            )
+        assert (
+            popup.locator(
+                ".decision-narrative .source-language-island"
+            ).count()
+            == 0
         )
 
 

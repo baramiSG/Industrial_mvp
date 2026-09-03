@@ -191,6 +191,55 @@ coverage and no-grade wording. R5 tests cover numeric and UNAVAILABLE flows.
 R9-S, R10, and R11 tests prove evidence-derived predicates and the absence of
 author flags. Dossier tests prove public/synthetic contradiction separation.
 
+### Public decision generalization proof
+
+Tests use synthetic-free PublicSnapshot 2.1 fixtures under `tests/fixtures/`;
+they never add demonstration data. One fixture with resolved A/B/C
+decision-critical evidence and every route/economics/policy gate passing must
+reach real ADVANCE. Downgrading each critical field independently to D and E
+must block ADVANCE.
+
+The proof covers all six hard exclusions, unknown exclusion inputs, exactly
+one primary gap class, MONITOR with a named trigger, screening dispositions,
+evidenced REJECT conditions, route order 0–8, lower-route precedence,
+maximum-ΔNV selection, lower-route tie resolution, and route 8
+GRAPH_REQUIRED.
+
+The proof includes FULL-vs-degraded API coverage: a conforming fixture with
+two observed trade years reaches ADVANCE with `ALL_ADVANCE_GATES_PASS`;
+degrading to a single year yields INVESTIGATE with
+`ADVANCE_SUPPORT_SIGNAL_DEGRADED`.
+
+Route-determination INVESTIGATE is proven through a mocked-loader
+missing-economics proof that omits downside cash flows while bypassing the
+PublicSnapshot validator; the API returns HTTP 200 with
+`ROUTE_DETERMINATION_UNRESOLVED` instead of the prior 422
+`Admitted deep case has no legal branch`.
+
+typed rejection narratives are proven for every producible REJECT reason code,
+including `UNECONOMIC_AT_EFFICIENT_SCALE`, `FALSE_OR_MEASUREMENT_GAP`, and
+`STRUCTURAL_OVERCAPACITY`.
+
+The fired-rule confidence cap is proven: R1-D caps decision confidence at C
+even when all four fields are Class B.
+
+Exact-Arabic catalogue proofs assert the 16 new EN/AR literals, 110/110 key
+parity, and Arabic public decision text rather than English source-language
+islands.
+
+An AST contract fails if gate or selector functions reference `source`,
+`synthetic_flag`, producer names, opportunity IDs, or scenario IDs.
+
+The two public goldens retain their states, routes, fired rules, and all
+English compatibility narrative fields except the ten legacy missing-fact
+sentences, whose substance remains five needs per golden under generic
+predicate-selected wording. Both packaged simulation narratives, outcomes,
+and exact numeric values remain unchanged. Public EN/AR catalogue keys and
+placeholders have exact parity, and browser tests prove that Arabic public
+decision narratives are Arabic text rather than English source-language
+islands. Simulation narrative fields remain English source-language islands
+in locale `ar` until S10.
+
 ## 6. Acceptance gates by subsystem
 
 ### Gate A — Authority
@@ -211,12 +260,14 @@ author flags. Dossier tests prove public/synthetic contradiction separation.
 
 - every R-rule visible;
 - thresholds loaded from config;
+- taxonomy, hard exclusions, and total public-state selection are deterministic;
 - steel and PP rule expectations pass.
 
 ### Gate D — Capability
 
 - effective capacity exact;
 - unknown penalty exact;
+- all five profiles and complete profile gates are validated;
 - public D\* gated;
 - simulated D\* published only after hard gates resolve.
 
@@ -224,6 +275,7 @@ author flags. Dossier tests prove public/synthetic contradiction separation.
 
 - unsupported case calculated;
 - S\* minimal and reproducible;
+- route hypotheses preserve order, lower-route precedence, and maximum-ΔNV selection;
 - national value and competition controls visible;
 - PP does not receive support merely because economics is available.
 
@@ -239,6 +291,7 @@ author flags. Dossier tests prove public/synthetic contradiction separation.
 - case selection and mode toggle function;
 - GenUI manifest adapts panels;
 - dossier opens and prints;
+- public decision narratives render from the governed active-locale catalogue;
 - Arabic text renders correctly.
 
 ### Gate H — Release

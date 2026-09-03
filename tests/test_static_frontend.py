@@ -289,3 +289,28 @@ def test_reduced_motion_context_disables_transient_colour_states() -> None:
     assert "--motion-duration: 0s" in block
     assert "--motion-shimmer: none" in block
     assert "--motion-scroll: auto" in block
+
+
+def test_public_decision_renderer_uses_structured_localized_segments() -> None:
+    dom = _module_source("modules/dom.js")
+    decision = _module_source("modules/renderers/decision.js")
+    evidence = _module_source("modules/renderers/evidence.js")
+
+    assert "export function narrativeEntry" in dom
+    assert "ltr_isolate" in dom
+    assert 'lang="en" dir="ltr"' in dom
+    assert "props.localized_narrative?.[state.locale]" in decision
+    assert "narrativeEntry(localized.headline" in decision
+    assert "sourceCaption()" in decision
+    assert "props.localized_missing_facts?.[state.locale]" in evidence
+    assert "narrativeEntry(item)" in evidence
+
+
+def test_public_localization_does_not_change_simulation_source_islands() -> None:
+    decision = _module_source("modules/renderers/decision.js")
+    evidence = _module_source("modules/renderers/evidence.js")
+
+    assert "sourceIsland(props.headline)" in decision
+    assert "sourceIsland(props.rationale)" in decision
+    assert "sourceIsland(props.route" in decision
+    assert "sourceIsland(item)" in evidence

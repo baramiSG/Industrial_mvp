@@ -97,8 +97,25 @@ def build_dossier(analysis: dict[str, Any]) -> dict[str, Any]:
         "opportunity_id": opportunity["id"],
         "mode": analysis["mode"],
         "decision_headline": decision["headline"],
+        "decision_rationale": decision["rationale"],
         "decision_state": decision["state"],
         "route": decision["route_label"],
+        "localized_narrative": decision.get(
+            "localized_narrative"
+        ),
+        "narrative_version": decision.get("narrative_version"),
+        "screening_disposition": analysis[
+            "screening_disposition"
+        ],
+        "gap_class": analysis["gap_class"],
+        "route_hypotheses": analysis["route_hypotheses"],
+        "preferred_hypothesis": analysis["preferred_hypothesis"],
+        "evidence_class_assessment": analysis[
+            "evidence_class_assessment"
+        ],
+        "advance_gate": analysis["advance_gate"],
+        "hard_exclusions": analysis["hard_exclusions"],
+        "rejection_conditions": analysis["rejection_conditions"],
         "product_identity": {
             "hs_revision": opportunity["hs_revision"],
             "hs6": opportunity["hs6"],
@@ -111,6 +128,7 @@ def build_dossier(analysis: dict[str, Any]) -> dict[str, Any]:
         "gap_diagnosis": {
             "public_state": analysis["real_decision"]["state"],
             "active_state": decision["state"],
+            "gap_class": analysis["gap_class"],
             "capacity": capacity,
             "simulated_rules": simulated_rules,
         },
@@ -172,6 +190,30 @@ def render_dossier_html(
             f'lang="en" dir="ltr">{e(value)}</{tag}>'
         )
 
+    def structured(
+        entry: dict[str, Any],
+        tag: str = "span",
+    ) -> str:
+        segments = entry.get("segments")
+        if not isinstance(segments, list):
+            raise ValueError(
+                "localized narrative entry requires segments"
+            )
+        rendered: list[str] = []
+        for segment in segments:
+            if not isinstance(segment, dict):
+                raise ValueError(
+                    "localized narrative segment must be a mapping"
+                )
+            escaped = e(segment.get("text", ""))
+            if segment.get("ltr_isolate") is True:
+                escaped = (
+                    '<bdi class="ltr-isolate" lang="en" '
+                    f'dir="ltr">{escaped}</bdi>'
+                )
+            rendered.append(escaped)
+        return f"<{tag}>{''.join(rendered)}</{tag}>"
+
     def technical(value: Any) -> str:
         return (
             '<bdi class="ltr-isolate technical-token" '
@@ -195,6 +237,13 @@ def render_dossier_html(
         if not values:
             return f"<li>{text('dossier.none')}</li>"
         return "".join(f"<li>{island(item)}</li>" for item in values)
+
+    def structured_list(values: list[dict[str, Any]]) -> str:
+        if not values:
+            return f"<li>{text('dossier.none')}</li>"
+        return "".join(
+            f"<li>{structured(item)}</li>" for item in values
+        )
 
     def fired_label(value: bool | None) -> str:
         if value is True:
@@ -339,6 +388,48 @@ def render_dossier_html(
         f'<h3>{text("dossier.synthetic_contradictions")}</h3>'
         f"{synthetic_contradictions_html}</section>"
     )
+    narrative_by_locale = dossier.get("localized_narrative")
+    localized_narrative = (
+        narrative_by_locale.get(locale)
+        if dossier["mode"] == "public"
+        and isinstance(narrative_by_locale, dict)
+        else None
+    )
+    if isinstance(localized_narrative, dict):
+        headline_html = structured(
+            localized_narrative["headline"],
+            "h1",
+        )
+        rationale_html = structured(
+            localized_narrative["rationale"],
+            "p",
+        )
+        route_html = structured(
+            localized_narrative["route_label"],
+            "span",
+        )
+        conditions_html = structured_list(
+            localized_narrative["conditions"]
+        )
+        kills_html = structured_list(
+            localized_narrative["kill_conditions"]
+        )
+        next_actions_html = structured_list(
+            localized_narrative["missing_facts"]
+        )
+        narrative_caption = ""
+    else:
+        headline_html = f"<h1>{island(dossier['decision_headline'])}</h1>"
+        rationale_html = (
+            f"<p>{island(dossier['decision_rationale'])}</p>"
+        )
+        route_html = island(dossier["route"], "span")
+        conditions_html = source_list(dossier["conditions"])
+        kills_html = source_list(dossier["kill_conditions"])
+        next_actions_html = source_list(
+            dossier["next_evidence_actions"]
+        )
+        narrative_caption = caption()
     return f"""<!doctype html>
 <html lang="{locale}" dir="{direction}">
 <head>
@@ -350,9 +441,12 @@ def render_dossier_html(
 <body class="dossier-body">
 <main class="page" aria-label="{text("dossier.print_aria")}">
 <div class="state">{localized_code(state_text, dossier["decision_state"])}</div>
-{caption()}
-<h1>{island(dossier["decision_headline"])}</h1>
-<div class="meta">{technical(dossier["opportunity_id"])} · {island(dossier["route"])} · {text("dossier.mode")}: {e(mode_text)}</div>
+<section class="decision-narrative">
+{narrative_caption}
+{headline_html}
+{rationale_html}
+<div class="meta">{technical(dossier["opportunity_id"])} · {route_html} · {text("dossier.mode")}: {e(mode_text)}</div>
+</section>
 {disclosure_html}
 <div class="dossier-grid">
 <section class="box"><h2>{text("dossier.product_identity")}</h2>{product_names}<p class="small">{technical(f"HS {identity['hs_revision']} / {identity['hs6']}")}</p><h3>{text("dossier.application_boundary")}</h3>{caption()}<p>{island(identity["application_boundary"])}</p></section>
@@ -360,9 +454,9 @@ def render_dossier_html(
 <section class="box"><h2>{text("dossier.supply_conclusion")}</h2>{caption()}<p>{island(supply_json, "code")}</p></section>
 {simulated_rules_html}
 {contradictions_html}
-<section class="box"><h2>{text("dossier.decision_conditions")}</h2>{caption()}<ul>{source_list(dossier["conditions"])}</ul></section>
-<section class="box"><h2>{text("dossier.kill_conditions")}</h2>{caption()}<ul>{source_list(dossier["kill_conditions"])}</ul></section>
-<section class="box"><h2>{text("dossier.next_actions")}</h2>{caption()}<ul>{source_list(dossier["next_evidence_actions"])}</ul></section>
+<section class="box decision-conditions"><h2>{text("dossier.decision_conditions")}</h2>{narrative_caption}<ul>{conditions_html}</ul></section>
+<section class="box kill-conditions"><h2>{text("dossier.kill_conditions")}</h2>{narrative_caption}<ul>{kills_html}</ul></section>
+<section class="box next-actions"><h2>{text("dossier.next_actions")}</h2>{narrative_caption}<ul>{next_actions_html}</ul></section>
 <section class="box"><h2>{text("dossier.evidence_boundary")}</h2><p>{evidence_counts}</p><p class="small">{text("dossier.snapshot")} {technical(evidence["snapshot_id"])} · {text("dossier.as_of")} {technical(evidence["as_of_date"])}</p></section>
 <section class="box"><h2>{text("dossier.authority")}</h2>{authority_html}</section>
 </div>

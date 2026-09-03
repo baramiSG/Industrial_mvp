@@ -4,24 +4,34 @@
 
 Development uses repository code, frozen public evidence, and explicitly synthetic Class-D fixtures. No API key or live industrial source is required. Never run the manifest generator outside an approved Authority Manifest §7 change. The active slice ADR and PR must identify the exact governed bytes, approval basis, sensitivity/golden proof, and permitted generated diff before one controlled run.
 
-## PublicSnapshot schema 2.0.0
+## PublicSnapshot schema 2.1.0
 
 Production discovery is deliberately non-recursive over
-`data/snapshots/public/*.json` and accepts only validated schema `2.0.0`.
+`data/snapshots/public/*.json` and accepts only validated schema `2.1.0`.
 Historical schema-v1 files remain byte-identical under
 `data/snapshots/public/historical/v1/`; they are integrity-manifest inputs,
 not runtime cases. A representation-only migration keeps snapshot ID and
-as-of date and uses `supersedes`; a real evidence refresh receives a new ID
-and date.
+as-of date and uses the safe historical `supersedes` path. A new snapshot
+without history uses exact `UNAVAILABLE`; a real evidence refresh receives a
+new ID and date.
 
-Schema-v2 public records contain typed trade quality, optional partner rows or
+Schema-2.1 public records contain typed trade quality, optional partner rows or
 source-attributed disclosed concentration/dispersion, domestic flows,
-criticality designation, producer evidence, typed hard gates, and complete
-evidence passports. Exact `UNAVAILABLE` is the only unknown sentinel in new
-blocks. Authored outcomes (`rule_context`, `fired`, `execution`, or equivalent)
-are rejected. R3, R4-D, R5, R9-S, R10, and R11 are computed from evidence;
-R5 public production/re-export inputs remain `UNAVAILABLE` until a governed
-acquisition supplies them.
+criticality designation, producer evidence, every selected-profile hard gate,
+decision-specific hard gates, six typed exclusion-input blocks, typed decision
+inputs, and complete evidence passports. Passport `supports` entries must use
+the controlled Core 07 §7.2 vocabulary; free-text support claims fail closed.
+Exact `UNAVAILABLE` is the only unknown sentinel in new blocks. Authored rule
+or decision outcomes, including `public_decision_contract`, are rejected.
+R0–R12, field classes, the ADVANCE gate, exclusions, taxonomy, rejection
+conditions, route hypotheses, state and narrative are computed.
+
+Each profile-hard-gate key must exactly match the selected profile. `RESOLVED`
+and `KNOWN_FAILURE` require referenced A/B/C evidence; `UNAVAILABLE` requires
+an empty evidence list. Route evidence may describe routes 1–7 only and
+contains analytical findings, cash flows, national-value components and
+competition inputs, never derived feasibility, route status or selection.
+Route 8 is graph-owned and rejected in a snapshot.
 
 For an approved schema/config/Core update, complete every governed hand edit
 and all functional regression first. Run
@@ -29,6 +39,27 @@ and all functional regression first. Run
 exact machine diff, copy machine rows into Manifest §11, then rerun integrity,
 goldens, Gate B, smoke, and the full suites. Historical files are never
 rewritten to make hashes pass.
+
+## Generalized public decision and narrative catalogue
+
+`config/sector_profiles.v1.yaml` 1.1.0 contains all five methodology §6.3
+profiles. Every profile uses the same nine ordered dimensions, weights that
+sum to 1.0 and a complete profile-specific hard-gate set. Profiles are frozen
+per sector cycle and are never adjusted per case.
+
+`config/decision_narratives.v1.yaml` 1.0.0 is a separately hashed governed
+catalogue. English and Arabic key sets and placeholder sets must be exact,
+trimmed and NFC-normalized. Evidence-need templates are selected only by
+controlled need code and evidence-state predicate. Scenario-specific
+simulation narratives remain in `data/synthetic/*` and are not duplicated in
+the catalogue.
+
+Public analysis exposes English compatibility fields plus
+`localized_narrative` structured segments. Presentation code escapes every
+segment; only computed placeholders inside Arabic templates receive an LTR
+isolate. Public decision hero, unlock list and dossier use the active locale
+without an English source-language caption. Scenario-authored simulation
+narratives remain English source-language islands until S10.
 
 ## Prerequisites
 
@@ -190,6 +221,29 @@ make e2e-update-baselines
 PYTHONPATH=src .venv/bin/python -c 'import os; from pathlib import Path; roots=(Path("browser_tests/baselines/v0.3.0"), Path(".artifacts/e2e")); bad=[str(p) for root in roots for p in (root, *root.rglob("*")) if p.exists() and os.stat(p, follow_symlinks=False).st_uid != os.getuid()]; assert not bad, bad'
 make e2e
 ```
+
+For S09, after all 118 functional nodes are green, the governed update
+command is:
+
+```bash
+export LD_LIBRARY_PATH=/tmp/ior-s06-browser-libs
+IOR_UPDATE_VISUAL_BASELINES=1 \
+IOR_BASELINE_CHANGE_REF="S09-generalized-public-decision-corrections" \
+make e2e-update-baselines
+make e2e
+```
+
+The first S09 capture exposed collapsed route-pill spacing during mandatory
+visual inspection. After a DOM regression test and the complete 118-node
+functional suite passed, a corrective recapture used the same reference. Two
+later methodology self-audit fixes changed source-tree provenance without
+changing rendered golden output; each followed another complete 118-node
+functional pass and refreshed the provenance through the same canonical
+command. A fifth correction-round execution under
+`S09-generalized-public-decision-corrections` followed the plan-7 signal
+guard, typed narratives and route-determination fixes with zero WebP drift.
+All five executions are recorded in the slice evidence. None was an
+acceptance of unexplained visual drift.
 
 Focused examples:
 

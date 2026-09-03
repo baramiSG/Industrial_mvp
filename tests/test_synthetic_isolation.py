@@ -50,8 +50,9 @@ def test_public_snapshots_contain_no_synthetic_rows() -> None:
     ):
         case = get_public_case(opportunity_id)
         validate_public_snapshot(case)
-        assert case["schema_version"] == "2.0.0"
+        assert case["schema_version"] == "2.1.0"
         assert "rule_context" not in case
+        assert "public_decision_contract" not in case
         validate_public_evidence(case["evidence"])
         assert all(
             row["synthetic_flag"] is False
@@ -93,7 +94,7 @@ def test_every_synthetic_row_is_labeled() -> None:
 def test_evidence_policy_declares_the_core_06_metadata_contract() -> None:
     policy = evidence_policy_config()
     isolation = policy["synthetic_isolation"]
-    assert policy["metadata"]["version"] == "1.2.0"
+    assert policy["metadata"]["version"] == "1.3.0"
     assert policy["metadata"]["effective_date"] == "2026-09-02"
     assert isolation["required_fields"] == MANDATORY_SCENARIO_FIELDS
     assert isolation["required_evidence_class"] == "D"

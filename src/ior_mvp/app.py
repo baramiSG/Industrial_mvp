@@ -22,6 +22,7 @@ from .decision_engine import analyze, list_opportunities
 from .dossier import build_dossier, render_dossier_html
 from .evidence import EvidenceIntegrityError
 from .genui import build_ui_manifest
+from .narratives import NarrativeCatalogueError
 
 
 STATIC_DIR = Path(__file__).resolve().parent / "static"
@@ -35,7 +36,7 @@ app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
 
 def _evidence_integrity_http_exception(
-    exc: EvidenceIntegrityError,
+    exc: EvidenceIntegrityError | NarrativeCatalogueError,
 ) -> HTTPException:
     return HTTPException(
         status_code=422,
@@ -52,7 +53,7 @@ def _safe_analysis(
 ) -> dict[str, Any]:
     try:
         return analyze(opportunity_id, mode)
-    except EvidenceIntegrityError as exc:
+    except (EvidenceIntegrityError, NarrativeCatalogueError) as exc:
         raise _evidence_integrity_http_exception(exc) from exc
     except (RepositoryError, ValueError) as exc:
         raise HTTPException(
@@ -106,7 +107,7 @@ def opportunities(
 ) -> list[dict]:
     try:
         return list_opportunities(mode)
-    except EvidenceIntegrityError as exc:
+    except (EvidenceIntegrityError, NarrativeCatalogueError) as exc:
         raise _evidence_integrity_http_exception(exc) from exc
     except (RepositoryError, ValueError) as exc:
         raise HTTPException(

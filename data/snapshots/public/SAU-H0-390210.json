@@ -1,5 +1,5 @@
 {
-  "schema_version": "2.0.0",
+  "schema_version": "2.1.0",
   "snapshot_id": "PUBLIC-SAU-H0-390210-2026-08-31",
   "as_of_date": "2026-08-31",
   "supersedes": "data/snapshots/public/historical/v1/SAU-H0-390210.json",
@@ -169,35 +169,84 @@
       "utilities_ehs_permitting": 0,
       "skills_market_integration": 0
     },
+    "profile_hard_gates": {
+      "polymer_additive_compatibility": {
+        "status": "UNAVAILABLE",
+        "evidence_ids": []
+      },
+      "conversion_route": {
+        "status": "UNAVAILABLE",
+        "evidence_ids": []
+      },
+      "tooling": {
+        "status": "UNAVAILABLE",
+        "evidence_ids": []
+      },
+      "performance_requirement": {
+        "status": "UNAVAILABLE",
+        "evidence_ids": []
+      },
+      "application_qualification": {
+        "status": "UNAVAILABLE",
+        "evidence_ids": []
+      }
+    },
     "unresolved_hard_gates": [
       {
         "name": "named imported grade",
-        "state": "unresolved"
+        "state": "unresolved",
+        "evidence_ids": []
       },
       {
         "name": "buyer application and qualification",
-        "state": "unresolved"
+        "state": "unresolved",
+        "evidence_ids": []
       },
       {
         "name": "local grade availability in required volume and timing",
-        "state": "unresolved"
+        "state": "unresolved",
+        "evidence_ids": []
       }
     ]
   },
-  "public_decision_contract": {
-    "expected_state": "REJECT",
-    "route_restriction": "Reject generic polypropylene capacity support; investigate only explicitly defined grade/application exceptions.",
-    "missing_facts": [
-      "Saudi tariff-line and invoice description",
-      "Importer/offtaker application and qualification",
-      "Producer grade and local-availability matrix",
-      "Plant allocation and utilisation",
-      "Delivered economics for a named niche"
-    ],
-    "kill_conditions": [
-      "Imported and domestic products are shown equivalent and qualified",
-      "No specification-adjusted gap exists"
-    ]
+  "hard_exclusion_inputs": {
+    "heterogeneous_residual_code": {
+      "commercial_product_separable": "UNAVAILABLE",
+      "product_level_evidence_available": "UNAVAILABLE",
+      "evidence_ids": []
+    },
+    "downside_market_below_mes": {
+      "sustainable_downside_demand_kt": "UNAVAILABLE",
+      "minimum_efficient_scale_kt": "UNAVAILABLE",
+      "credible_export_contract": "UNAVAILABLE",
+      "evidence_ids": []
+    },
+    "unsatisfiable_hard_gate": {
+      "gate_domain": "UNAVAILABLE",
+      "gate_satisfiability": "UNAVAILABLE",
+      "evidence_ids": []
+    },
+    "idle_equivalent_domestic_capacity": {
+      "domestic_specification_equivalent": "UNAVAILABLE",
+      "qualified_idle_capacity_kt": "UNAVAILABLE",
+      "target_specification_demand_kt": "UNAVAILABLE",
+      "binding_market_failure": "UNAVAILABLE",
+      "evidence_ids": []
+    },
+    "transitory_or_measurement_gap": {
+      "dominant_cause": "UNAVAILABLE",
+      "evidence_ids": []
+    },
+    "redundancy_or_crowd_out": {
+      "competition_finding": "UNAVAILABLE",
+      "evidence_ids": []
+    }
+  },
+  "decision_inputs": {
+    "target_specification_demand": "UNAVAILABLE",
+    "specification_equivalence": "UNAVAILABLE",
+    "route_evidence": "UNAVAILABLE",
+    "monitor_trigger": "UNAVAILABLE"
   },
   "evidence": [
     {
@@ -211,9 +260,9 @@
       "evidence_class": "B",
       "synthetic_flag": false,
       "supports": [
-        "trade value",
-        "trade quantity",
-        "export/import ratio"
+        "TRADE_VALUE",
+        "TRADE_QUANTITY",
+        "EXPORT_IMPORT_RATIO"
       ],
       "transformation": "Frozen annual world rows; export/import ratios and 2024 average unit values are disclosed calculations from the methodology worked case.",
       "reviewer_status": "unconfirmed_by_responsible_authority",
@@ -230,7 +279,7 @@
       "evidence_class": "C",
       "synthetic_flag": false,
       "supports": [
-        "broad domestic-linked polypropylene family portfolio"
+        "DOMESTIC_PRODUCT_PORTFOLIO"
       ],
       "transformation": "UNAVAILABLE",
       "reviewer_status": "unconfirmed_by_responsible_authority",
@@ -247,7 +296,7 @@
       "evidence_class": "C",
       "synthetic_flag": false,
       "supports": [
-        "450,000 t/y nameplate capacity"
+        "DOMESTIC_NAMEPLATE_CAPACITY"
       ],
       "transformation": "UNAVAILABLE",
       "reviewer_status": "unconfirmed_by_responsible_authority",
@@ -264,7 +313,7 @@
       "evidence_class": "C",
       "synthetic_flag": false,
       "supports": [
-        "720,000 t/y Saudi polypropylene capacity"
+        "DOMESTIC_NAMEPLATE_CAPACITY"
       ],
       "transformation": "UNAVAILABLE",
       "reviewer_status": "unconfirmed_by_responsible_authority",

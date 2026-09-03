@@ -1,6 +1,7 @@
 import {
   escapeHtml,
   labelValue,
+  narrativeEntry,
   sourceCaption,
   sourceIsland,
   stateChip,
@@ -11,26 +12,40 @@ import { t } from "../i18n.js";
 import { state } from "../state.js";
 
 export function renderDecisionHero(props) {
+  const localized = props.localized_narrative?.[state.locale];
+  const conditions = localized?.conditions || props.conditions;
+  const killConditions = (
+    localized?.kill_conditions || props.kill_conditions
+  );
+  const headline = localized
+    ? narrativeEntry(localized.headline, "h3")
+    : `<h3>${sourceIsland(props.headline)}</h3>`;
+  const rationale = localized
+    ? narrativeEntry(localized.rationale, "p")
+    : `<p>${sourceIsland(props.rationale)}</p>`;
+  const route = localized
+    ? narrativeEntry(localized.route_label, "bdi")
+    : sourceIsland(props.route, "bdi");
   return `
     <article class="workspace-card decision-hero">
       <div class="decision-state-large state-${escapeHtml(props.state)}">${stateChip(props.state)}</div>
       <div>
-        ${sourceCaption()}
-        <h3>${sourceIsland(props.headline)}</h3>
-        <p>${sourceIsland(props.rationale)}</p>
+        ${localized ? "" : sourceCaption()}
+        ${headline}
+        ${rationale}
         <div class="decision-lists">
           <div>
             <b>${escapeHtml(t("decision.conditions"))}</b>
-            <ul>${props.conditions.map((item) => `<li>${sourceIsland(item)}</li>`).join("")}</ul>
+            <ul>${conditions.map((item) => `<li>${localized ? narrativeEntry(item) : sourceIsland(item)}</li>`).join("")}</ul>
           </div>
           <div>
             <b>${escapeHtml(t("decision.kill_conditions"))}</b>
-            <ul>${props.kill_conditions.map((item) => `<li>${sourceIsland(item)}</li>`).join("")}</ul>
+            <ul>${killConditions.map((item) => `<li>${localized ? narrativeEntry(item) : sourceIsland(item)}</li>`).join("")}</ul>
           </div>
         </div>
       </div>
       <span class="route-pill">
-        ${labelValue(t("decision.route"), sourceIsland(props.route, "bdi"))}
+        ${labelValue(t("decision.route"), route)}
       </span>
     </article>
   `;

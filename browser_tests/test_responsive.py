@@ -139,7 +139,7 @@ def test_layout_has_no_horizontal_overflow_and_primary_controls_are_actionable(
         )
         assert not intersects, dimensions
     route_text = page.locator(".route-pill").inner_text()
-    assert ":" in route_text
+    assert ": " in route_text
     if locale.code == "ar":
         expected_tokens = {f"HS {case.hs6}" for case in CASES}
         token_details = page.locator(

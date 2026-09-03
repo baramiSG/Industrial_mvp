@@ -1,6 +1,6 @@
 metadata:
-  version: "1.0.0"
-  effective_date: "2026-08-31"
+  version: "1.1.0"
+  effective_date: "2026-09-02"
   authority: "Industrial Opportunity Resolution Methodology, Section 6.3"
   status: frozen_for_demo_cycle
 
@@ -41,3 +41,62 @@ profiles:
       - tooling
       - performance_requirement
       - application_qualification
+  pharma_api:
+    label: Pharma/API
+    weights:
+      feedstock_chemistry: 0.10
+      core_process_route: 0.20
+      equipment_envelope: 0.10
+      finishing_spec_control: 0.10
+      qa_lab_metrology: 0.15
+      certification_customer_qualification: 0.15
+      capacity_time_window: 0.05
+      utilities_ehs_permitting: 0.10
+      skills_market_integration: 0.05
+    hard_gates:
+      - named_molecule_and_synthesis_route
+      - gmp
+      - containment
+      - impurity_control
+      - analytical_validation
+      - effluent
+      - ip_fto
+
+  fertilizers:
+    label: Fertilizers
+    weights:
+      feedstock_chemistry: 0.15
+      core_process_route: 0.20
+      equipment_envelope: 0.15
+      finishing_spec_control: 0.10
+      qa_lab_metrology: 0.05
+      certification_customer_qualification: 0.05
+      capacity_time_window: 0.10
+      utilities_ehs_permitting: 0.15
+      skills_market_integration: 0.05
+    hard_gates:
+      - feedstock_route
+      - formulation_granulation
+      - nutrient_basis
+      - agronomic_performance
+      - emissions_and_safe_handling
+
+  fabricated_aluminium:
+    label: Fabricated aluminium
+    weights:
+      feedstock_chemistry: 0.10
+      core_process_route: 0.15
+      equipment_envelope: 0.15
+      finishing_spec_control: 0.15
+      qa_lab_metrology: 0.10
+      certification_customer_qualification: 0.15
+      capacity_time_window: 0.10
+      utilities_ehs_permitting: 0.05
+      skills_market_integration: 0.05
+    hard_gates:
+      - alloy
+      - forming_fabrication
+      - heat_treatment
+      - joining_finishing
+      - engineering_certification
+      - customer_liability

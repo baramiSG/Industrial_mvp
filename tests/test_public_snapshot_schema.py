@@ -8,6 +8,7 @@ from typing import Any
 import pytest
 
 import ior_mvp.data_repository as data_repository
+from ior_mvp.config import PROJECT_ROOT
 from ior_mvp.public_snapshot import (
     PUBLIC_SNAPSHOT_SCHEMA_VERSION,
     PublicSnapshotIntegrityError,
@@ -19,7 +20,7 @@ from scripts.validate_scenarios import _index_public_cases
 from tests.legacy_snapshot_v1 import (
     HISTORICAL_V1_ROOT,
     LIVE_PUBLIC_ROOT,
-    candidate_v2_from_legacy,
+    candidate_v21_from_legacy,
     load_legacy_snapshot,
 )
 
@@ -35,13 +36,9 @@ def _candidate(
     filename: str = "SAU-H0-721049.json",
 ) -> tuple[dict[str, Any], Path, Path]:
     source = LIVE_PUBLIC_ROOT / filename
-    loaded = load_legacy_snapshot(source)
-    legacy = (
-        load_legacy_snapshot(HISTORICAL_V1_ROOT / filename)
-        if loaded.get("schema_version") == "2.0.0"
-        else loaded
-    )
-    candidate = candidate_v2_from_legacy(legacy)
+    assert source.is_file()
+    legacy = load_legacy_snapshot(HISTORICAL_V1_ROOT / filename)
+    candidate = candidate_v21_from_legacy(legacy)
     root = tmp_path / "project"
     historical = root / candidate["supersedes"]
     historical.parent.mkdir(parents=True, exist_ok=True)
@@ -74,8 +71,221 @@ def test_live_v2_is_exact_field_for_field_approved_migration(
     legacy = load_legacy_snapshot(HISTORICAL_V1_ROOT / filename)
     live = load_legacy_snapshot(LIVE_PUBLIC_ROOT / filename)
 
-    assert live == candidate_v2_from_legacy(legacy)
+    assert live == candidate_v21_from_legacy(legacy)
     validate_public_snapshot(live, path=LIVE_PUBLIC_ROOT / filename)
+
+
+@pytest.mark.parametrize(
+    "filename",
+    [
+        "advance-route-3.json",
+        "monitor-r3-only.json",
+        "reject-hard-exclusion.json",
+        "reject-equivalence.json",
+    ],
+)
+def test_synthetic_free_public_decision_fixtures_validate(
+    filename: str,
+) -> None:
+    path = (
+        PROJECT_ROOT
+        / "tests"
+        / "fixtures"
+        / "public_decision"
+        / filename
+    )
+    payload = load_legacy_snapshot(path)
+
+    validate_public_snapshot(payload)
+
+
+@pytest.mark.parametrize(
+    ("key", "value"),
+    [
+        ("public_decision_contract", {}),
+        ("state", "ADVANCE"),
+        ("route_code", 3),
+        ("screening_disposition", "CANDIDATE"),
+        ("gap_class", {"primary": "quantity"}),
+        ("narrative", {}),
+        ("missing_facts", []),
+        ("conditions", []),
+        ("kill_conditions", []),
+        ("route_hypotheses", []),
+    ],
+)
+def test_schema_rejects_every_authored_decision_output(
+    tmp_path: Path,
+    key: str,
+    value: Any,
+) -> None:
+    candidate, root, live = _candidate(tmp_path)
+    candidate[key] = value
+
+    with pytest.raises(
+        PublicSnapshotIntegrityError,
+        match="authored decision outcome",
+    ):
+        validate_public_snapshot(candidate, path=live, root=root)
+
+
+def test_schema_rejects_free_text_or_unknown_support_codes(
+    tmp_path: Path,
+) -> None:
+    candidate, root, live = _candidate(tmp_path)
+    candidate["evidence"][0]["supports"] = ["trade value"]
+
+    with pytest.raises(PublicSnapshotIntegrityError, match="support code"):
+        validate_public_snapshot(candidate, path=live, root=root)
+
+
+def test_profile_hard_gate_set_status_and_evidence_are_fail_closed(
+    tmp_path: Path,
+) -> None:
+    candidate, root, live = _candidate(tmp_path)
+    gates = candidate["domestic_capability"]["profile_hard_gates"]
+    removed = next(iter(gates))
+    del gates[removed]
+    with pytest.raises(PublicSnapshotIntegrityError, match="hard gate"):
+        validate_public_snapshot(candidate, path=live, root=root)
+
+    candidate, root, live = _candidate(tmp_path)
+    gate = next(
+        iter(
+            candidate["domestic_capability"][
+                "profile_hard_gates"
+            ].values()
+        )
+    )
+    gate["status"] = "RESOLVED"
+    with pytest.raises(PublicSnapshotIntegrityError, match="evidence_ids"):
+        validate_public_snapshot(candidate, path=live, root=root)
+
+    candidate, root, live = _candidate(tmp_path)
+    gate = next(
+        iter(
+            candidate["domestic_capability"][
+                "profile_hard_gates"
+            ].values()
+        )
+    )
+    gate["status"] = "KNOWN_FAILURE"
+    with pytest.raises(PublicSnapshotIntegrityError, match="evidence_ids"):
+        validate_public_snapshot(candidate, path=live, root=root)
+
+
+def test_hard_exclusion_and_decision_input_domains_are_validated(
+    tmp_path: Path,
+) -> None:
+    candidate, root, live = _candidate(tmp_path)
+    candidate["hard_exclusion_inputs"]["unsatisfiable_hard_gate"][
+        "gate_domain"
+    ] = "invented"
+    with pytest.raises(PublicSnapshotIntegrityError, match="gate_domain"):
+        validate_public_snapshot(candidate, path=live, root=root)
+
+    candidate, root, live = _candidate(tmp_path)
+    candidate["hard_exclusion_inputs"][
+        "transitory_or_measurement_gap"
+    ]["dominant_cause"] = "PERMANENT"
+    with pytest.raises(PublicSnapshotIntegrityError, match="dominant_cause"):
+        validate_public_snapshot(candidate, path=live, root=root)
+
+    candidate = load_legacy_snapshot(
+        PROJECT_ROOT
+        / "tests"
+        / "fixtures"
+        / "public_decision"
+        / "advance-route-3.json"
+    )
+    candidate["decision_inputs"]["route_evidence"][0][
+        "binding_constraint"
+    ] = "invented"
+    with pytest.raises(
+        PublicSnapshotIntegrityError,
+        match="binding_constraint",
+    ):
+        validate_public_snapshot(candidate)
+
+
+def test_route_eight_is_forbidden_in_snapshot_route_evidence() -> None:
+    candidate = load_legacy_snapshot(
+        PROJECT_ROOT
+        / "tests"
+        / "fixtures"
+        / "public_decision"
+        / "advance-route-3.json"
+    )
+    candidate["decision_inputs"]["route_evidence"][0]["route_code"] = 8
+
+    with pytest.raises(PublicSnapshotIntegrityError, match="route_code"):
+        validate_public_snapshot(candidate)
+
+
+@pytest.mark.parametrize(
+    "mutation",
+    [
+        lambda candidate: next(
+            item
+            for item in candidate["evidence"]
+            if item["evidence_id"] == "E-ROUTE"
+        ).__setitem__("evidence_class", "D"),
+        lambda candidate: next(
+            item
+            for item in candidate["evidence"]
+            if item["evidence_id"] == "E-ROUTE"
+        ).__setitem__(
+            "supports",
+            ["ROUTE_ECONOMICS", "ROUTE_COMPETITION"],
+        ),
+    ],
+)
+def test_route_evidence_requires_abc_covering_passports(mutation) -> None:
+    candidate = load_legacy_snapshot(
+        PROJECT_ROOT
+        / "tests"
+        / "fixtures"
+        / "public_decision"
+        / "advance-route-3.json"
+    )
+    mutation(candidate)
+
+    with pytest.raises(
+        PublicSnapshotIntegrityError,
+        match="route evidence",
+    ):
+        validate_public_snapshot(candidate)
+
+
+def test_monitor_trigger_requires_covering_monitor_evidence() -> None:
+    candidate = load_legacy_snapshot(
+        PROJECT_ROOT
+        / "tests"
+        / "fixtures"
+        / "public_decision"
+        / "monitor-r3-only.json"
+    )
+    candidate["decision_inputs"]["monitor_trigger"][
+        "evidence_ids"
+    ] = ["E-ID"]
+
+    with pytest.raises(
+        PublicSnapshotIntegrityError,
+        match="MONITOR_TRIGGER",
+    ):
+        validate_public_snapshot(candidate)
+
+
+def test_new_snapshot_may_use_exact_unavailable_supersedes() -> None:
+    candidate = load_legacy_snapshot(
+        PROJECT_ROOT
+        / "tests"
+        / "fixtures"
+        / "public_decision"
+        / "advance-route-3.json"
+    )
+
+    validate_public_snapshot(candidate)
 
 
 @pytest.mark.parametrize(
@@ -351,7 +561,19 @@ def test_typed_signals_nameplates_and_hard_gates_validate(
     ]
     assert has_known_hard_gate_failure(capability) is False
 
+    profile_gate = next(
+        iter(capability["profile_hard_gates"].values())
+    )
+    profile_gate["status"] = "KNOWN_FAILURE"
+    profile_gate["evidence_ids"] = ["S-UNICOIL-EPD"]
+    assert has_known_hard_gate_failure(capability) is True
+    profile_gate["status"] = "UNAVAILABLE"
+    profile_gate["evidence_ids"] = []
+
     capability["unresolved_hard_gates"][0]["state"] = "known_failure"
+    capability["unresolved_hard_gates"][0]["evidence_ids"] = [
+        "S-UNICOIL-EPD"
+    ]
     assert has_known_hard_gate_failure(capability) is True
     validate_public_snapshot(candidate, path=live, root=root)
 
@@ -413,7 +635,7 @@ def test_repository_loads_only_direct_v2_files_and_ignores_history(
     try:
         cases = data_repository.public_cases()
         assert list(cases) == ["SAU-H0-721049"]
-        assert cases["SAU-H0-721049"]["schema_version"] == "2.0.0"
+        assert cases["SAU-H0-721049"]["schema_version"] == "2.1.0"
     finally:
         data_repository.clear_repository_caches()
 

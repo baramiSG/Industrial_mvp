@@ -138,6 +138,7 @@ def _source_hashes() -> dict[str, str]:
         *sorted((static / "modules").rglob("*.js")),
         ROOT / "config" / "ui_strings.v1.yaml",
         ROOT / "config" / "evidence_policy.v1.yaml",
+        ROOT / "config" / "decision_narratives.v1.yaml",
     ]
     return {
         path.relative_to(ROOT).as_posix(): sha256(path)

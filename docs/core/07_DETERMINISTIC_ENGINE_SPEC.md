@@ -150,169 +150,387 @@ executes FULL whether the predicate is true or false. Product IDs, disclosed rat
 
 ### 4.1 Effective capacity
 
-```text
-Qeffective = Nameplate × Availability × Yield × Qualification share × Market allocation
-```
-
-All factors are within [0,1]. A public nameplate without the other factors does not establish supply.
+`Qeffective = Nameplate × Availability × Yield × Qualification share × Market allocation`.
+All factors are within `[0,1]`. A public nameplate without the other factors
+does not establish effective qualified supply.
 
 ### 4.2 Dimension states
 
-```text
-0 present
-1 minor known upgrade
-2 major specialist line / technology / JV but material site advantage
-3 fundamentally absent
-U unknown
-```
+Capability states are `0`, `1`, `2`, `3`, and `U` with the meanings fixed by
+methodology §6.4. `U` is unknown evidence, never zero distance.
 
 ### 4.3 K, U and D\*
 
-```text
-K = Σ known weights
-U = 1 − K
-Dknown = Σ(w × d/3) / K
-D* = min(1, Dknown + λU)
-```
+`K = Σ known weights`; `U = 1 − K`;
+`Dknown = Σ(w × d/3) / K`; and
+`D* = min(1, Dknown + λU)`.
 
-D\* publication requires:
+The engine loads the nine weights and the complete hard-gate identifier set
+from the selected sector profile. A profile is one of `coated_steel`,
+`technical_plastics`, `pharma_api`, `fertilizers`, or
+`fabricated_aluminium`. Unknown profiles fail closed.
 
-- K ≥ Kmin;
-- no unresolved hard gate;
-- no hard gate at state 3.
+D* publication requires all of the following:
 
-An internal pre-gate value may be returned for diagnostics, but the public `d_star` field remains null.
+1. `K >= Kmin`;
+2. every configured profile hard gate is present and resolved;
+3. every decision-specific hard gate is resolved;
+4. no hard gate is a known failure/state `3`.
+
+An internal pre-gate value may be returned for diagnostics. The public
+`d_star` and route band remain null whenever a publication condition fails.
+A state `3` on a non-hard-gate dimension remains part of D* and does not by
+itself suppress a greenfield-likely band.
 
 ### 4.4 Route bands
 
-Loaded from configuration:
+The four route bands are loaded from versioned threshold configuration. A
+published band is a technical hypothesis and never an authorization.
 
-- ≤0.20 immediate adjacency;
-- ≤0.40 incremental upgrade;
-- ≤0.65 major line/JV;
-- >0.65 greenfield likely.
+### 4.5 Sector profiles
 
-A route band is a technical route hypothesis, not public authorization.
+Every profile contains the same nine dimension identifiers, weights that sum
+to `1.0`, and the exact hard-gate identifiers derived from methodology §6.3.
+Profiles are frozen per sector cycle and are never altered per case. Profile
+weights and hard gates are operating configuration under Authority Manifest
+§7.3.
 
-## 5. Economics engine
+## 5. Economics and route-evidence engine
 
 ### 5.1 Unsupported case first
 
-The engine first calculates the route without financial support. If NPV and IRR already pass and no market failure remains, financial intervention is zero.
+Every public route hypothesis is evaluated against no action on the same
+auditable basis. Unsupported use of existing capacity, unsupported
+brownfield, and unsupported greenfield are evaluated before financial
+support. A non-financial route is evaluated before a financial route that
+addresses the same constraint.
 
-### 5.2 NPV
+### 5.2 Route evidence
 
-```text
-NPV = Σ FCFt/(1+h)^t
-```
+For routes 1–7, a route-evidence record may supply evidence-backed findings
+about technical feasibility, full removal of the binding constraint, whether
+the investment is already approved/financed or would proceed without the
+intervention, whether a policy prohibition exists, whether distortion is
+unacceptable, whether the intervention is proportionate, downside cash
+flows, national-value components, and competition inputs. Every record
+carries public evidence IDs. Missing values remain `UNAVAILABLE`; derived
+feasibility, additionality, permissibility, route status, and selection remain
+`NOT_CALCULABLE`.
 
-Cash flows are annual in the MVP. Production can introduce dated cash flows while preserving the same contract.
+Route-evidence fields are analytical inputs, not authored decisions. State,
+route status, precedence, and selection are calculated by code.
 
-### 5.3 IRR
+### 5.3 Economics
 
-IRR is solved deterministically by bracketing and bisection. A cash-flow series without both negative and positive values returns null.
+`NPV = Σ FCFt/(1+h)^t`. IRR is solved deterministically by bracketing and
+bisection and is null without a sign change. `S*` is the minimum configured
+support step for which NPV and IRR meet their configured tolerances; no passing
+support below the configured maximum means the route does not pass economics.
 
-### 5.4 Minimum effective support
+Incremental national value is domestic value added + exports + resilience
+value + knowledge/skills + fiscal receipts − government cost − displacement
+− resource/environment cost − risk allowance. The competition ratio is
+`(existing effective target capacity + proposed incremental capacity) /
+downside demand`; its configured boundary remains a warning rather than an
+automatic hard exclusion.
 
-The MVP searches support in configured increments, applied to the initial cash flow:
+Threshold predicates use full-precision intermediates; rounded values are
+presentation only.
 
-```text
-S* = first S where NPV(S) ≥ tolerance and IRR(S) ≥ h − tolerance
-```
+A route can be `passes` only when its required downside economics, positive
+incremental national value, competition, additionality, distortion,
+proportionality, and policy gates pass. An explicit failed gate yields
+`fails`; any required unavailable gate yields `NOT_CALCULABLE`.
 
-If no support below the configured maximum passes, `passes=false` and the route cannot `ADVANCE` on that economics case.
+## 6. Missing facts and value of information
 
-### 5.5 Incremental national value
+The public engine derives evidence needs from unresolved decision-critical
+fields, unknown capability dimensions, unresolved profile and
+decision-specific hard gates, unavailable retained-flow decomposition, and
+unavailable route economics. It does not read a missing-fact list from the
+snapshot.
 
-Benefits and costs remain explicit. Positive project NPV does not by itself justify public support.
+Each evidence need has a controlled code, the blocked field or route, the
+public evidence IDs already available, and a plausible route effect. A need
+has positive decision value for state selection only when the named fact can
+change a state or route. Numerical EVSI remains `NOT_CALCULABLE` unless
+probability, value-difference, evidence-cost, and delay-cost inputs exist.
+When they exist, the practical calculation remains
+`P(route changes) × |value difference| − evidence cost − delay cost`.
 
-### 5.6 Competition
+When a material trigger exists but route determination is unresolved
+(route economics unavailable or no passing route-evidence record), the engine
+emits a route-economics evidence need with positive decision value.
 
-The MVP exposes:
+When only DEGRADED material signals fire and no FULL
+configuration-permitted supporting signal exists, the engine emits a
+re-export/origin decomposition need.
 
-```text
-(existing effective target capacity + proposed incremental capacity) / downside demand
-```
-
-A ratio above 1.25 is a warning requiring export demand or exceptional strategic rationale.
-
-## 6. EVSI
-
-The practical approximation is:
-
-```text
-P(route changes) × |value difference| − evidence cost − delay cost
-```
-
-The next evidence fact is shown only when it has a plausible route effect.
+The engine renders evidence needs from the governed bilingual decision
+narrative catalogue. The two public goldens retain five substantive needs
+each; catalogue wording is selected only by controlled need code and
+evidence-state predicate, so exact legacy missing-fact sentences are not a
+compatibility requirement.
 
 ## 7. Decision algorithm
 
 ### 7.1 Public branch
 
-```text
-load frozen public case
-validate every public evidence row is non-synthetic
-evaluate R0-R12
-evaluate public capability states
-if generic-capacity exclusion is proven:
-    REJECT route 0
-else if decision-critical facts or hard gates unresolved:
-    INVESTIGATE
-else:
-    evaluate complete route sequence
-```
+The public branch performs the following ordered steps:
 
-The current public fixtures deliberately exercise `INVESTIGATE` and `REJECT`.
+1. validate PublicSnapshot 2.1.0 and reject authored outcomes;
+2. evaluate R0–R12 from public evidence;
+3. evaluate capability K, U, D*, route publication, and every configured hard
+   gate;
+4. assess the four decision-critical fields from covering evidence passports;
+5. execute the evidence-policy ADVANCE gate;
+6. execute all six typed methodology §4.2 hard exclusions;
+7. classify exactly one primary methodology §5.3 gap class and ordered
+   secondary classes;
+8. derive evidenced rejection conditions;
+9. evaluate route hypotheses 0→8 and apply precedence;
+10. select the preferred hypothesis;
+11. derive missing facts, conditions, kill conditions, and bilingual
+    narrative; and
+12. select the formal state under §7.6.
 
-### 7.2 Simulation branch
+No public state, route, narrative, missing fact, kill condition, rule result,
+or gap class is accepted from a snapshot.
 
-```text
-public = analyze_public(case)
-fingerprint = fingerprint(public.real_decision)
-validate synthetic scenario
-calculate target-spec demand and effective capacity
-calculate specification-adjusted gap
-calculate capability and route band
-calculate unsupported economics, S*, national value and competition
-calculate EVSI
-select simulated state
-assert fingerprint(public.real_decision) unchanged
-return both states
-```
+### 7.2 Decision-critical field assessment
 
-### 7.3 Steel simulation selection
+The four fields are:
 
-`SIMULATED ADVANCE` requires all of:
+1. `product_identity`;
+2. `demand_at_required_specification`;
+3. `domestic_supply_or_capability`; and
+4. `hard_regulatory_or_process_gate`.
 
-- positive specification-adjusted gap;
-- route publication control passes;
-- D\* ≤ 0.40;
-- economics passes with minimum effective support;
-- incremental national value positive;
-- competition warning does not fire.
+Evidence passports use a controlled `supports` vocabulary. A passport covers
+a field only through the governed support-code map. The assessment never
+chooses an unrelated "best passport in the file".
 
-Selected route: code 5, conditional brownfield debottlenecking/line expansion.
+For each field, the engine emits covering support codes and passport IDs,
+the best evidence class among non-contradictory covering passports, and one
+resolution status: `RESOLVED`, `PARTIAL`, `UNRESOLVED`, `CONTRADICTORY`, or
+`MISSING`. Absent coverage is Class E and `MISSING`. A non-null contradiction
+on a covering passport whose reviewer status is not
+`confirmed_by_responsible_authority` makes the field `CONTRADICTORY` for the
+gate even when another covering passport has Class A, B, or C.
 
-### 7.4 PP simulation selection
+Identity is `RESOLVED` only when the decision object is resolved. Demand is
+`RESOLVED` only when target-specification quantity and its passport
+references are present. Capability is `RESOLVED` only when its evidence
+class is A/B/C and capability route publication passes. The hard-gate field
+is `RESOLVED` only when every configured profile gate and every
+decision-specific gate is resolved with covering A/B/C evidence.
 
-If equivalent qualified availability exceeds target demand, generic capacity support remains `REJECT`, route 0, regardless of the availability of synthetic detail.
+### 7.3 ADVANCE gate
+
+The gate loads `decision_critical_fields`, `blocked_classes`, and
+`blocked_resolution_statuses` from `evidence_policy.advance_gate`.
+
+The gate consumes only field name, evidence class, and resolution status. It
+must not inspect `source`, `synthetic_flag`, producer name, opportunity ID, or
+scenario ID.
+
+A field in a blocked class or blocked resolution status blocks ADVANCE. A
+real public case may reach ADVANCE when all four fields pass and every
+methodology route, economics, national-value, competition, additionality,
+distortion, proportionality, and hard-exclusion gate passes. Public evidence
+is not categorically barred from ADVANCE.
+
+Synthetic records remain actual Class D and may affect only
+`simulation_decision`. S10 supplies the separate declared
+`class_if_confirmed` projection required to reuse this gate for a simulated
+ADVANCE; S09 does not infer such a class.
+
+### 7.4 Hard exclusions
+
+The engine executes all six methodology §4.2 exclusions before state
+selection. Each check returns `SATISFIED`, `NOT_SATISFIED`, or
+`NOT_CALCULABLE`, reason code, named inputs, and evidence IDs.
+
+`UNAVAILABLE` input yields `NOT_CALCULABLE`; it never means pass and never
+means reject. A `SATISFIED` exclusion yields formal REJECT route 0 before deep
+route selection. ADVANCE requires all six checks to be `NOT_SATISFIED`.
+
+### 7.5 Gap taxonomy
+
+The primary class is exactly one of `false_or_measurement`, `quantity`,
+`specification_or_quality`, `application`, `timing`, `resilience`, or
+`evidence`. Ordered secondary classes use the same vocabulary and exclude the
+primary.
+
+`evidence` is primary whenever a decision-critical field is not resolved.
+Otherwise the deterministic order is false/measurement, quantity,
+specification/quality, application, timing, then resilience. Unit-value
+dispersion may support only an evidence need or secondary research signal;
+it never proves a specification/quality class.
+
+An optional `constraint_class` refines the operational constraint as
+`specification_or_grade`, `capacity_or_availability`,
+`cost_or_competitiveness`, `capability_or_technology`,
+`qualification_or_certification`, or `commercial_or_relationship`. It does
+not replace the methodology primary class.
+
+### 7.6 Formal state and screening disposition
+
+Formal states are `REJECT`, `MONITOR`, `INVESTIGATE`, and `ADVANCE`.
+`screening_disposition` is separate and is one of `CANDIDATE`,
+`NO_CANDIDATE`, or `SCREENED_OUT`.
+
+For an admitted deep-resolution case, `screening_disposition` remains
+`CANDIDATE`, including a case that ultimately reaches REJECT. The separate
+screening helper used by S13 emits `NO_CANDIDATE` when no candidate trigger
+exists and `SCREENED_OUT` when an evidenced screen exclusion applies; it
+does not assign a formal deep state.
+
+Deep state selection is ordered:
+
+1. a satisfied hard exclusion yields REJECT route 0 with
+   `decision_reason_code` `HARD_EXCLUSION_SATISFIED`;
+2. another satisfied evidenced rejection condition yields REJECT route 0 with
+   its typed reason code (`FALSE_OR_MEASUREMENT_GAP`,
+   `EQUIVALENT_QUALIFIED_SUPPLY`, `UNECONOMIC_AT_EFFICIENT_SCALE`,
+   `STRUCTURAL_OVERCAPACITY`, or `GENERIC_CAPACITY_CONTRADICTED`);
+3. a selected route greater than 0 with all ADVANCE gates passing and at
+   least one fired FULL configuration-permitted candidate signal yields
+   ADVANCE with `decision_reason_code` `ALL_ADVANCE_GATES_PASS`;
+4. a selected route greater than 0 with all ADVANCE gates passing but no
+   fired FULL configuration-permitted candidate signal yields INVESTIGATE
+   with null `route_code` and `decision_reason_code`
+   `ADVANCE_SUPPORT_SIGNAL_DEGRADED`;
+5. an unresolved or contradictory decision-critical fact with positive
+   decision value yields INVESTIGATE with null `route_code` and
+   `decision_reason_code` `ROUTE_CHANGING_EVIDENCE_UNRESOLVED`;
+6. when no rejection condition exists, at least one candidate signal exists,
+   no material trigger exists, and a named observable future trigger exists,
+   the state is MONITOR route 0 with `decision_reason_code`
+   `NAMED_TRIGGER_MONITOR`;
+7. when material triggers exist but no determinable passing route exists,
+   the state is INVESTIGATE with null `route_code` and
+   `decision_reason_code` `ROUTE_DETERMINATION_UNRESOLVED`; and
+8. an admitted deep case that satisfies none of these branches fails closed
+   with a decision-integrity error rather than being silently called REJECT or
+   MONITOR.
+
+Registered public `decision_reason_code` values are:
+`HARD_EXCLUSION_SATISFIED`, `FALSE_OR_MEASUREMENT_GAP`,
+`EQUIVALENT_QUALIFIED_SUPPLY`, `UNECONOMIC_AT_EFFICIENT_SCALE`,
+`STRUCTURAL_OVERCAPACITY`, `GENERIC_CAPACITY_CONTRADICTED`,
+`ALL_ADVANCE_GATES_PASS`, `ADVANCE_SUPPORT_SIGNAL_DEGRADED`,
+`ROUTE_CHANGING_EVIDENCE_UNRESOLVED`, `NAMED_TRIGGER_MONITOR`, and
+`ROUTE_DETERMINATION_UNRESOLVED`.
+
+MONITOR always names one of demand, regulation, technology, supplier
+concentration, or capacity state as an observable trigger.
+
+### 7.7 Route hypotheses and selection
+
+The engine emits exactly nine ordered records, route codes 0 through 8. Each
+record has `status` (`passes`, `fails`, or `NOT_CALCULABLE`), feasibility,
+constraint-resolution, additionality, policy, economics, national value,
+competition, evidence IDs, reason codes, and any lower-route blocker.
+
+A lower-cost route that passes and fully resolves the binding constraint
+blocks escalation to every more interventionist route. Passing route 0 with
+basis `MONITOR_NO_IMMEDIATE_ACTION` blocks higher routes exactly as
+`EVIDENCED_NO_INTERVENTION` does. Financial support is not evaluated as
+selectable until unsupported and applicable non-financial routes fail.
+
+Among the remaining feasible, additional, policy-permissible routes with
+defensible economics and national value, select the greatest unrounded
+incremental national value. An exact tie selects the lower route code. This
+tie rule preserves the mandatory lower-intervention ordering and does not
+replace the maximum-value comparison.
+
+When economics is unavailable, the engine may emit a
+`preferred_hypothesis` from evidenced gap/capability logic, but `route_code`
+remains null unless a REJECT/MONITOR route 0 or an ADVANCE route is formally
+selected.
+
+Route 7 additionally requires D* > the configured major-line/JV maximum,
+demand at least minimum efficient scale, and passing competition controls.
+Route 8 always returns `NOT_CALCULABLE` with reason `GRAPH_REQUIRED` until
+S16 supplies a graph-identified shared enabler and positive UnlockValue from
+the governed Neo4j projection. Snapshot or in-memory substitutes are
+forbidden.
+
+### 7.8 Golden public outcomes
+
+For the frozen steel snapshot, decision-critical demand and hard gates remain
+unresolved; the state is INVESTIGATE, `route_code` is null, and route 5 is the
+preferred brownfield hypothesis. For the frozen polypropylene snapshot, the
+computed generic-capacity rejection condition is satisfied; the state is
+REJECT and route 0 is selected. Both results are computed, not read from
+data.
+
+### 7.9 Simulation branch
+
+S09 does not generalize simulation selection. `_simulate` retains its S08
+state/route logic and exact numeric outputs.
+
+The packaged steel simulation continues to require a positive
+specification-adjusted gap, publishable D*, D* within the configured
+incremental-upgrade band, passing minimum-support economics, positive
+incremental national value, and no competition warning before selecting
+ADVANCE route 5. The packaged polypropylene simulation continues to select
+REJECT route 0 when equivalent qualified availability is at least target
+demand.
+
+S09 does not localize or replace simulation narratives. After `_simulate`
+returns, `analyze_simulated` continues to render the selected state entry from
+the scenario's existing `decision_narrative` exactly as today. In locale `ar`,
+those English fields remain explicit source-language islands. This
+presentation must not participate in simulation state, route selection, or
+ground-truth back-testing. S10 owns bilingual scenario narratives,
+class-if-confirmed gating, and generalized routes 0–7 in scenario contract
+2.0.0.
 
 ## 8. Conditions and kill conditions
 
-A decision is incomplete without observable conditions and kill conditions.
+Every formal decision emits conditions, kill conditions, and evidence needs
+from controlled reason codes rendered through
+`config/decision_narratives.v1.yaml`.
 
-Steel simulation conditions:
+No condition or kill condition is copied from PublicSnapshot 2.1.0. A hard
+exclusion uses its exclusion-specific rejection rationale. INVESTIGATE names
+the route-changing fact. MONITOR names the observable future trigger.
+ADVANCE names continuation conditions and a gate-failure kill condition.
 
-- customer acceptance for the named target specification;
-- 50 kt incremental qualified capacity within 18 months;
-- milestone-based, sunset-bound support with clawback.
+REJECT branches render through `REJECTION_NARRATIVE_KEYS`: each producible
+REJECT reason code maps to governed headline, route, rationale, condition and
+kill keys (`decision.public.reject_uneconomic.*`,
+`decision.public.reject_false_gap.*`,
+`decision.public.reject_overcapacity.*`, plus the existing generic,
+equivalence and exclusion keys). An unregistered REJECT reason code raises a
+decision-integrity error.
 
-Steel kill conditions:
+INVESTIGATE selects route label and rationale by preferred hypothesis:
+when `preferred_hypothesis` is null or `preferred.route_code` is 0, the
+engine uses `decision.public.investigate.route.unresolved` and
+`decision.public.investigate.rationale.route_unresolved`; when
+`preferred.selection_basis` is `EVIDENCE_PRIORITY_WITH_ECONOMICS_UNAVAILABLE`
+and `preferred.route_code` is the brownfield route code, the engine uses
+the legacy brownfield route label and
+`decision.public.investigate.rationale`; otherwise the engine uses
+`route.hypothesis.priority` with
+`decision.public.investigate.rationale.preferred`.
 
-- committed demand below 72 kt;
-- another incumbent expansion closes the gap;
-- customer qualification misses the contractual milestone.
+The packaged steel simulation retains customer acceptance, 50 kt within 18
+months, milestone/sunset/clawback conditions, and the existing 72 kt,
+incumbent-expansion, and customer-qualification kill conditions. The
+packaged polypropylene simulation retains its equivalent-capacity no-support
+condition and kill condition.
+
+The public decision compatibility fields remain English, with the approved
+predicate-driven evidence-need wording changes. The public decision also
+carries a bilingual structured narrative and
+`narrative_version`. Presentation code escapes every literal and placeholder
+value. Only engine-computed placeholder segments receive LTR source-language
+isolation inside an Arabic template; the Arabic template itself is not
+wrapped as English source text.
 
 ## 9. Threshold enforcement
 
@@ -322,24 +540,32 @@ Changing a threshold requires a new version, rationale, sector scope and full re
 
 ## 10. Error and boundary handling
 
-- non-positive log inputs → error;
-- invalid capacity factors → error;
-- K=0 → no D\*;
-- unknown hard gate → no published route band;
-- NPV rate ≤ −100% → error;
-- no IRR sign change → null;
-- missing synthetic scenario → error in simulated mode;
-- malformed scenario → evidence-integrity error.
-- malformed public schema, an unsafe historical link, an invalid concentration
-  domain, or contradictory domestic-flow arithmetic → evidence-integrity error.
+- malformed PublicSnapshot 2.1.0, unknown support code, unknown sector
+  profile, missing configured profile gate, unresolved evidence reference,
+  authored outcome, or invalid route-evidence domain → evidence-integrity
+  error;
+- absent decision-critical support → Class E / `MISSING`;
+- contradictory covering passport not confirmed by the responsible authority
+  → `CONTRADICTORY` and ADVANCE blocked;
+- unknown hard-exclusion input → `NOT_CALCULABLE`, never reject;
+- zero or multiple primary gap classes → decision-integrity error;
+- MONITOR without a named allowed trigger → decision-integrity error;
+- unavailable required route input → `NOT_CALCULABLE`;
+- route 8 before graph activation → `NOT_CALCULABLE` / `GRAPH_REQUIRED`;
+- unknown profile → fail closed;
+- malformed narrative catalogue, locale-key mismatch, placeholder mismatch,
+  or unescaped rendering attempt → narrative-integrity error;
+- non-boolean `may_support_advance` → evidence-integrity error;
+- unregistered REJECT reason code → decision-integrity error;
+- the existing formula and scenario-integrity errors remain unchanged.
 
-## 11. Determinism requirement
+## 11. Determinism and independence
 
-Given identical:
+Given identical snapshots, configuration, code, and as-of date, the ordered
+field assessments, exclusions, gap classes, rejection conditions, route
+hypotheses, preferred hypothesis, state, conditions, kill conditions, and
+bilingual narratives are byte-stable apart from JSON object ordering.
 
-- source snapshots;
-- configuration versions;
-- code version;
-- as-of date;
-
-all calculations and decision outputs must be byte-for-byte stable apart from non-semantic JSON ordering.
+No gate or selector may contain an opportunity ID, source name, producer name,
+`source` branch, or `synthetic_flag` branch. Tests inspect the relevant ASTs.
+The public selector consumes evidence semantics, never source type.

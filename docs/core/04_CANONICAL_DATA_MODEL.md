@@ -64,44 +64,27 @@ The public steel case leaves the exact imported target specification unresolved.
 
 Value, weight, supplementary quantity and unit are never collapsed into one field.
 
-### PublicSnapshot v2
+### PublicSnapshot 2.1
 
-A live public snapshot shall set `schema_version: "2.0.0"`. A schema-only
-re-expression of identical frozen facts retains `snapshot_id` and
-`as_of_date` and sets `supersedes` to the byte-identical historical v1 path.
-An evidence refresh instead receives a new snapshot ID and date under the
-Authority Manifest §7.5 process.
+A live public snapshot sets `schema_version: "2.1.0"`. The two frozen golden
+files retain their snapshot IDs, as-of dates, and historical-v1 `supersedes`
+links. A new snapshot with no predecessor may set `supersedes:
+"UNAVAILABLE"`; an evidence refresh still follows Authority Manifest §7.5.
 
-Aggregate `trade` rows remain the frozen world series. Optional
-`partner_observations` retain year × partner × flow value, net weight,
-quantity unit, gross-flow status, source evidence ID, and independent value,
-weight, and comparability validity flags. Where the frozen authority
-discloses only an aggregate calculation, `disclosed_concentration` and
-`disclosed_dispersion` retain that calculation, status, period, basis, source
-evidence ID, coverage note, and explicit `UNAVAILABLE` fields. A disclosed
-aggregate is evidence, never an authored rule result.
+Evidence passports use the controlled support-code vocabulary defined by
+Core 07 §7.2. Free-text support claims are invalid. `domestic_capability`
+contains all configured `profile_hard_gates` with typed status and evidence
+references, plus decision-specific unresolved gates.
 
-For each aggregate trade row with positive numeric imports and exports, the
-system computes export/import value ratio from those flows. A disclosed
-one-decimal ratio is retained separately and must be within `0.05` of the
-computed value; both are reported.
+`hard_exclusion_inputs` carries the six typed methodology §4.2 input blocks.
+`decision_inputs` may carry target-specification demand, specification
+equivalence, route evidence for routes 1–7, and a named monitor trigger.
+Missing facts remain exact `UNAVAILABLE`.
 
-`domestic_flows` contains domestic production, retained imports,
-domestic-origin exports, and re-exports in kt; each value is numeric or exact
-`UNAVAILABLE`. `criticality_designation` is either exact `UNAVAILABLE` or a
-responsible-authority record with authority, reference, date, and evidence
-ID. Producer evidence retains process family, process route, typed adjacency
-signals, standards, observed nameplate and unit, evidence class, and passport
-references. Hard-gate evidence distinguishes unresolved from known failure.
-
-Every public EvidencePassport includes period, retrieved_at, status,
-evidence_class, synthetic_flag=false, supports, transformation,
-reviewer_status, and contradiction. Contradiction is retained; it is not
-silently harmonised away.
-
-A valid public snapshot contains no `rule_context`, `fired`, `execution`, or
-other authored rule outcome. `public_decision_contract` is retained
-temporarily for the S09 selector migration.
+The snapshot contains no `public_decision_contract`, authored state, route,
+screening disposition, gap class, rule result, route-hypothesis result,
+narrative, missing-fact list, condition, or kill-condition list. All are
+computed.
 
 ### 2.4 Plant and ProductionLine
 
@@ -208,13 +191,22 @@ The scenario is not inserted into the public opportunity record. It is loaded th
 {
   "state": "INVESTIGATE",
   "route_code": null,
+  "screening_disposition": "CANDIDATE",
   "route_label": "Brownfield priority to test",
   "headline": "INVESTIGATE — binding constraint unresolved",
   "rationale": "...",
   "confidence": "C",
+  "gap_class": {},
+  "evidence_class_assessment": {},
+  "hard_exclusions": [],
+  "route_hypotheses": [],
+  "preferred_hypothesis": {},
+  "narrative_version": "1.0.0",
   "conditions": [],
   "kill_conditions": [],
   "missing_facts": [],
+  "decision_reason_code": "ROUTE_CHANGING_EVIDENCE_UNRESOLVED",
+  "advance_support_signal_rule_ids": ["R2", "R3", "R9-S"],
   "synthetic_flag": false
 }
 ```
@@ -231,6 +223,13 @@ Simulation creates a second `DecisionRecord` with `synthetic_flag=true`. The pub
   "real_decision": {},
   "simulation_decision": {},
   "active_decision": {},
+  "screening_disposition": "CANDIDATE",
+  "gap_class": {},
+  "evidence_class_assessment": {},
+  "hard_exclusions": [],
+  "route_hypotheses": [],
+  "preferred_hypothesis": {},
+  "narrative_version": "1.0.0",
   "rules": [],
   "capacity": {},
   "capability": {},

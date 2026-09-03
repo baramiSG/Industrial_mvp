@@ -1,5 +1,5 @@
 {
-  "schema_version": "2.0.0",
+  "schema_version": "2.1.0",
   "snapshot_id": "PUBLIC-SAU-H0-721049-2026-08-31",
   "as_of_date": "2026-08-31",
   "supersedes": "data/snapshots/public/historical/v1/SAU-H0-721049.json",
@@ -192,35 +192,84 @@
       "utilities_ehs_permitting": "U",
       "skills_market_integration": 1
     },
+    "profile_hard_gates": {
+      "substrate_range": {
+        "status": "UNAVAILABLE",
+        "evidence_ids": []
+      },
+      "width_thickness_envelope": {
+        "status": "UNAVAILABLE",
+        "evidence_ids": []
+      },
+      "coating_route_and_mass": {
+        "status": "UNAVAILABLE",
+        "evidence_ids": []
+      },
+      "surface_treatment": {
+        "status": "UNAVAILABLE",
+        "evidence_ids": []
+      },
+      "mandatory_or_customer_standard": {
+        "status": "UNAVAILABLE",
+        "evidence_ids": []
+      }
+    },
     "unresolved_hard_gates": [
       {
         "name": "exact imported specification",
-        "state": "unresolved"
+        "state": "unresolved",
+        "evidence_ids": []
       },
       {
         "name": "customer/application qualification",
-        "state": "unresolved"
+        "state": "unresolved",
+        "evidence_ids": []
       },
       {
         "name": "effective spare capacity and allocation",
-        "state": "unresolved"
+        "state": "unresolved",
+        "evidence_ids": []
       }
     ]
   },
-  "public_decision_contract": {
-    "expected_state": "INVESTIGATE",
-    "route_restriction": "Test brownfield first; greenfield is not justified from public evidence.",
-    "missing_facts": [
-      "Line-level production by grade, coating mass, dimensions, application and destination",
-      "Availability, yield, qualification share, utilisation, backlog and planned outages",
-      "Importer/offtaker specifications and reason local supply was not selected",
-      "Re-export and domestic-origin flow decomposition",
-      "Delivered local cost, import parity and unsupported brownfield economics"
-    ],
-    "kill_conditions": [
-      "Demand is temporary, re-exported or below efficient scale",
-      "Incumbent expansion already closes the specification-adjusted gap"
-    ]
+  "hard_exclusion_inputs": {
+    "heterogeneous_residual_code": {
+      "commercial_product_separable": "UNAVAILABLE",
+      "product_level_evidence_available": "UNAVAILABLE",
+      "evidence_ids": []
+    },
+    "downside_market_below_mes": {
+      "sustainable_downside_demand_kt": "UNAVAILABLE",
+      "minimum_efficient_scale_kt": "UNAVAILABLE",
+      "credible_export_contract": "UNAVAILABLE",
+      "evidence_ids": []
+    },
+    "unsatisfiable_hard_gate": {
+      "gate_domain": "UNAVAILABLE",
+      "gate_satisfiability": "UNAVAILABLE",
+      "evidence_ids": []
+    },
+    "idle_equivalent_domestic_capacity": {
+      "domestic_specification_equivalent": "UNAVAILABLE",
+      "qualified_idle_capacity_kt": "UNAVAILABLE",
+      "target_specification_demand_kt": "UNAVAILABLE",
+      "binding_market_failure": "UNAVAILABLE",
+      "evidence_ids": []
+    },
+    "transitory_or_measurement_gap": {
+      "dominant_cause": "UNAVAILABLE",
+      "evidence_ids": []
+    },
+    "redundancy_or_crowd_out": {
+      "competition_finding": "UNAVAILABLE",
+      "evidence_ids": []
+    }
+  },
+  "decision_inputs": {
+    "target_specification_demand": "UNAVAILABLE",
+    "specification_equivalence": "UNAVAILABLE",
+    "route_evidence": "UNAVAILABLE",
+    "monitor_trigger": "UNAVAILABLE"
   },
   "evidence": [
     {
@@ -234,9 +283,9 @@
       "evidence_class": "B",
       "synthetic_flag": false,
       "supports": [
-        "trade value",
-        "trade quantity",
-        "partner concentration"
+        "TRADE_VALUE",
+        "TRADE_QUANTITY",
+        "SUPPLIER_CONCENTRATION"
       ],
       "transformation": "Frozen annual world rows; concentration and dispersion are disclosed aggregates from the methodology worked case.",
       "reviewer_status": "unconfirmed_by_responsible_authority",
@@ -253,10 +302,10 @@
       "evidence_class": "C",
       "synthetic_flag": false,
       "supports": [
-        "installed capacity",
-        "process route",
-        "published specification envelope",
-        "laboratory accreditation"
+        "DOMESTIC_NAMEPLATE_CAPACITY",
+        "DOMESTIC_PROCESS_ROUTE",
+        "DOMESTIC_SPECIFICATION_ENVELOPE",
+        "DOMESTIC_LABORATORY_METROLOGY"
       ],
       "transformation": "UNAVAILABLE",
       "reviewer_status": "unconfirmed_by_responsible_authority",
@@ -273,8 +322,9 @@
       "evidence_class": "C",
       "synthetic_flag": false,
       "supports": [
-        "bilingual specification extraction",
-        "published coating and dimension envelope"
+        "BILINGUAL_SPECIFICATION_EXTRACTION",
+        "DOMESTIC_SPECIFICATION_ENVELOPE",
+        "DOMESTIC_DIMENSION_ENVELOPE"
       ],
       "transformation": "UNAVAILABLE",
       "reviewer_status": "unconfirmed_by_responsible_authority",
@@ -291,7 +341,7 @@
       "evidence_class": "C",
       "synthetic_flag": false,
       "supports": [
-        "additional incumbent process-family evidence"
+        "DOMESTIC_PROCESS_FAMILY"
       ],
       "transformation": "UNAVAILABLE",
       "reviewer_status": "unconfirmed_by_responsible_authority",

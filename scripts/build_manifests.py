@@ -44,6 +44,7 @@ def main() -> None:
         ROOT / "config" / "sector_profiles.v1.yaml",
         ROOT / "config" / "evidence_policy.v1.yaml",
         ROOT / "config" / "ui_strings.v1.yaml",
+        ROOT / "config" / "decision_narratives.v1.yaml",
     ]
     authority_paths += sorted((ROOT / "docs" / "core").glob("*.md"))
     authority_manifest = {

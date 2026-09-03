@@ -56,6 +56,9 @@ def _expected_authority() -> dict:
     ui_strings = _yaml(
         PROJECT_ROOT / "config" / "ui_strings.v1.yaml"
     )
+    decision_narratives = _yaml(
+        PROJECT_ROOT / "config" / "decision_narratives.v1.yaml"
+    )
     project = _yaml(
         PROJECT_ROOT / "config" / "project.yaml"
     )
@@ -70,6 +73,9 @@ def _expected_authority() -> dict:
             "sector_profiles": sectors["metadata"]["version"],
             "evidence_policy": policy["metadata"]["version"],
             "ui_strings": ui_strings["metadata"]["version"],
+            "decision_narratives": decision_narratives[
+                "metadata"
+            ]["version"],
         },
         "project_version": project["project"]["version"],
     }
@@ -94,6 +100,9 @@ def test_every_detailed_analysis_exposes_source_derived_authority(
     assert response.json()["authority"] == _expected_authority()
     assert result["authority"]["config_versions"]["thresholds"] == "1.2.0"
     assert result["authority"]["config_versions"]["ui_strings"] == "1.1.0"
+    assert result["authority"]["config_versions"][
+        "decision_narratives"
+    ] == "1.0.0"
     assert len(
         result["authority"]["methodology"]["sha256_prefix"]
     ) == 12

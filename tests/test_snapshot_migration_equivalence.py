@@ -7,12 +7,12 @@ import pytest
 
 from ior_mvp.config import PROJECT_ROOT
 from ior_mvp.data_repository import get_public_case
-from ior_mvp.decision_engine import _public_decision
+from ior_mvp.decision_engine import analyze_public
 from ior_mvp.rules import _evaluate_rules_v2, evaluate_rules
 from tests.legacy_snapshot_v1 import (
     HISTORICAL_V1_ROOT,
     LIVE_PUBLIC_ROOT,
-    candidate_v2_from_legacy,
+    candidate_v21_from_legacy,
     legacy_evaluate_rules,
     legacy_public_decision,
     load_legacy_snapshot,
@@ -164,108 +164,50 @@ def _deep_diff(
     return {}
 
 
-def _computed_public_decision(
-    case: dict,
-    rules: list[dict],
-) -> dict:
-    contract = case["public_decision_contract"]
-    r11 = next(row for row in rules if row["rule_id"] == "R11")
-    if r11["fired"]:
-        return {
-            "state": "REJECT",
-            "route_code": 0,
-            "route_label": "No intervention for generic capacity",
-            "headline": "REJECT — generic capacity support",
-            "rationale": contract["route_restriction"],
-            "confidence": "C",
-            "missing_facts": contract["missing_facts"],
-            "conditions": [
-                (
-                    "Only a named specialty grade/application exception may "
-                    "re-enter INVESTIGATE."
-                )
-            ],
-            "kill_conditions": contract["kill_conditions"],
-            "synthetic_flag": False,
-        }
-    return {
-        "state": "INVESTIGATE",
-        "route_code": None,
-        "route_label": "Brownfield priority to test",
-        "headline": "INVESTIGATE — binding constraint unresolved",
-        "rationale": contract["route_restriction"],
-        "confidence": "C",
-        "missing_facts": contract["missing_facts"],
-        "conditions": [
-            (
-                "No greenfield or financial support recommendation before "
-                "effective capacity and target specification are resolved."
-            )
-        ],
-        "kill_conditions": contract["kill_conditions"],
-        "synthetic_flag": False,
-    }
-
-
 @pytest.mark.parametrize("filename", SNAPSHOT_FILES)
 def test_legacy_adapter_characterizes_pre_migration_production(
     filename: str,
 ) -> None:
-    live = load_legacy_snapshot(LIVE_PUBLIC_ROOT / filename)
-    if live.get("schema_version") == "2.0.0":
-        legacy = load_legacy_snapshot(HISTORICAL_V1_ROOT / filename)
-        assert [row["rule_id"] for row in legacy_evaluate_rules(legacy)] == [
-            "R0",
-            "R1-F",
-            "R1-D",
-            "R2",
-            "R3",
-            "R4-F",
-            "R4-D",
-            "R5",
-            "R6",
-            "R7",
-            "R8",
-            "R9-S",
-            "R10",
-            "R11",
-            "R12",
-        ]
-        return
-
-    expected_rules = legacy_evaluate_rules(live)
-    assert evaluate_rules(live) == expected_rules
-    assert _public_decision(live, expected_rules) == legacy_public_decision(
-        live,
-        expected_rules,
-    )
+    legacy = load_legacy_snapshot(HISTORICAL_V1_ROOT / filename)
+    assert [row["rule_id"] for row in legacy_evaluate_rules(legacy)] == [
+        "R0",
+        "R1-F",
+        "R1-D",
+        "R2",
+        "R3",
+        "R4-F",
+        "R4-D",
+        "R5",
+        "R6",
+        "R7",
+        "R8",
+        "R9-S",
+        "R10",
+        "R11",
+        "R12",
+    ]
 
 
 @pytest.mark.parametrize("filename", SNAPSHOT_FILES)
 def test_pre_cutover_in_memory_v2_diff_is_exactly_allow_listed(
     filename: str,
 ) -> None:
-    live = load_legacy_snapshot(LIVE_PUBLIC_ROOT / filename)
-    legacy = (
-        load_legacy_snapshot(HISTORICAL_V1_ROOT / filename)
-        if live.get("schema_version") == "2.0.0"
-        else live
-    )
-    candidate = candidate_v2_from_legacy(legacy)
+    legacy = load_legacy_snapshot(HISTORICAL_V1_ROOT / filename)
+    candidate = candidate_v21_from_legacy(legacy)
     old_rules = legacy_evaluate_rules(legacy)
     new_rules = _evaluate_rules_v2(candidate)
 
-    assert [row["rule_id"] for row in old_rules] == [
-        row["rule_id"] for row in new_rules
+    assert [row["rule_id"] for row in old_rules[:-1]] == [
+        row["rule_id"] for row in new_rules[:-1]
     ]
     assert {
-        row["rule_id"]: row["fired"] for row in old_rules
+        row["rule_id"]: row["fired"] for row in old_rules[:-1]
     } == {
-        row["rule_id"]: row["fired"] for row in new_rules
+        row["rule_id"]: row["fired"] for row in new_rules[:-1]
     }
     differences = _deep_diff(
-        _rule_map(old_rules),
-        _rule_map(new_rules),
+        _rule_map(old_rules[:-1]),
+        _rule_map(new_rules[:-1]),
         "rules",
     )
     additive = set(COMMON_ADDITIVE_PATHS)
@@ -278,10 +220,11 @@ def test_pre_cutover_in_memory_v2_diff_is_exactly_allow_listed(
     for path, expected in changed.items():
         assert differences[path] == expected
 
-    assert _computed_public_decision(
-        candidate,
-        new_rules,
-    ) == legacy_public_decision(legacy, old_rules)
+    assert len(new_rules[-1]["metrics"]["evidence_needs"]) == 5
+    assert new_rules[-1]["metrics"]["named_missing_facts"] == [
+        need["text"]
+        for need in new_rules[-1]["metrics"]["evidence_needs"]
+    ]
 
 
 @pytest.mark.parametrize("filename", SNAPSHOT_FILES)
@@ -296,7 +239,7 @@ def test_live_v2_retains_historical_v1_identity_before_rule_cutover(
     )
     historical = load_legacy_snapshot(historical_path)
     live = load_legacy_snapshot(live_path)
-    assert live["schema_version"] == "2.0.0"
+    assert live["schema_version"] == "2.1.0"
     assert live["snapshot_id"] == historical["snapshot_id"]
     assert live["as_of_date"] == historical["as_of_date"]
     assert live["opportunity"]["id"] == historical["opportunity"]["id"]
@@ -304,6 +247,7 @@ def test_live_v2_retains_historical_v1_identity_before_rule_cutover(
         PROJECT_ROOT
     ).as_posix()
     assert "rule_context" not in live
+    assert "public_decision_contract" not in live
 
 
 @pytest.mark.parametrize("filename", SNAPSHOT_FILES)
@@ -315,14 +259,47 @@ def test_live_v2_ledger_equals_converted_historical_v1(
     live = get_public_case(opportunity_id)
     live_rules = evaluate_rules(live)
     converted_rules = _evaluate_rules_v2(
-        candidate_v2_from_legacy(historical)
+        candidate_v21_from_legacy(historical)
     )
 
     _assert_rule_ledger_fields_equal(live_rules, converted_rules)
-    assert _public_decision(live, live_rules) == legacy_public_decision(
+    legacy_decision = legacy_public_decision(
         historical,
         legacy_evaluate_rules(historical),
     )
+    public_decision = analyze_public(opportunity_id)["real_decision"]
+    for field in (
+        "state",
+        "route_code",
+        "route_label",
+        "headline",
+        "rationale",
+        "confidence",
+        "conditions",
+        "kill_conditions",
+        "synthetic_flag",
+    ):
+        assert public_decision[field] == legacy_decision[field]
+    assert public_decision["missing_facts"] != legacy_decision[
+        "missing_facts"
+    ]
+    assert len(public_decision["missing_facts"]) == len(
+        legacy_decision["missing_facts"]
+    ) == 5
+    assert set(public_decision) - set(legacy_decision) == {
+        "screening_disposition",
+        "gap_class",
+        "route_hypotheses",
+        "preferred_hypothesis",
+        "evidence_class_assessment",
+        "advance_gate",
+        "hard_exclusions",
+        "rejection_conditions",
+        "narrative_version",
+        "localized_narrative",
+        "decision_reason_code",
+        "advance_support_signal_rule_ids",
+    }
 
 
 def test_live_v2_ledger_equality_detects_in_memory_trade_drift() -> None:
@@ -334,5 +311,5 @@ def test_live_v2_ledger_equality_detects_in_memory_trade_drift() -> None:
     with pytest.raises(AssertionError):
         _assert_rule_ledger_fields_equal(
             evaluate_rules(live),
-            _evaluate_rules_v2(candidate_v2_from_legacy(historical)),
+            _evaluate_rules_v2(candidate_v21_from_legacy(historical)),
         )

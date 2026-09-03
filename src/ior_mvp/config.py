@@ -20,6 +20,9 @@ AUTHORITY_HASHES_PATH = (
     DOCS_DIR / "authority" / "authority_hashes.json"
 )
 UI_STRINGS_PATH = CONFIG_DIR / "ui_strings.v1.yaml"
+DECISION_NARRATIVES_PATH = (
+    CONFIG_DIR / "decision_narratives.v1.yaml"
+)
 SUPPORTED_UI_LOCALES: tuple[str, ...] = ("en", "ar")
 UI_KEY_PATTERN = re.compile(
     r"^[a-z][a-z0-9]*(?:[._-][a-z0-9]+)*$"
@@ -93,6 +96,31 @@ def sector_profiles_config() -> dict[str, Any]:
 @lru_cache(maxsize=1)
 def evidence_policy_config() -> dict[str, Any]:
     return _load_yaml(CONFIG_DIR / "evidence_policy.v1.yaml")
+
+
+@lru_cache(maxsize=1)
+def decision_narratives_config() -> dict[str, Any]:
+    from .narratives import (
+        NarrativeCatalogueError,
+        validate_decision_narratives,
+    )
+
+    try:
+        payload = _load_yaml(DECISION_NARRATIVES_PATH)
+        validate_decision_narratives(payload)
+    except NarrativeCatalogueError:
+        raise
+    except (
+        OSError,
+        UnicodeError,
+        TypeError,
+        ValueError,
+        yaml.YAMLError,
+    ) as exc:
+        raise NarrativeCatalogueError(
+            "Decision narrative catalogue could not be loaded"
+        ) from exc
+    return payload
 
 
 def _placeholders(value: str) -> set[str]:
@@ -334,6 +362,10 @@ def authority_summary() -> dict[str, Any]:
                 ui_strings_config(),
                 "ui_strings",
             ),
+            "decision_narratives": _metadata_version(
+                decision_narratives_config(),
+                "decision_narratives",
+            ),
         },
         "project_version": project_version,
     }
@@ -344,5 +376,6 @@ def clear_config_caches() -> None:
     thresholds_config.cache_clear()
     sector_profiles_config.cache_clear()
     evidence_policy_config.cache_clear()
+    decision_narratives_config.cache_clear()
     ui_strings_config.cache_clear()
     authority_hashes_config.cache_clear()

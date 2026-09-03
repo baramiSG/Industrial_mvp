@@ -34,7 +34,14 @@ An autonomous agent may refactor implementation, but it may not remove a mapped 
 | 15 — Decision Dossier | One-page decision backed by evidence pack | `dossier.py` | dossier API tests | printable dossier |
 | 16 — Outcome Learning | Freeze predicted values; compare actuals later | data-model extension point | deferred production tests | documented production extension |
 | 5 / 10 — Bilingual presentation boundary | Interface chrome is localized from a governed catalogue; engine analytical text remains marked source-language content until a governed narrative exists | `config.ui_strings_bundle`, `app.ui_strings`, static ES modules | catalogue/API/browser parity tests | whole-interface AR/EN switch |
+| 2 / 12 — Signal execution and ADVANCE support | fired FULL configuration-permitted candidate signals; DEGRADED never supports ADVANCE | `signals.advance_supporting_signal_rule_ids`, `thresholds.rules.<rule>.may_support_advance` | FULL-vs-degraded unit and API tests | decision reason code and supporting signal list |
 | 2.1 / 10 / 11 — Synthetic disclosure language | English and Arabic warning labels are policy controls and every synthetic projection uses them without changing evidence class or real decision | `evidence.synthetic_display_labels`, `rules`, `genui`, `dossier` | isolation, dossier, API and browser disclosure tests | bilingual synthetic warning |
+| 2.1 / 12 — Decision-critical evidence gate | Four field assessments from controlled passport support codes; configured class/status gate; no source-type predicate | `public_decision.assess_decision_critical_fields`, `evidence.evaluate_advance_gate`, `evidence_policy.v1.yaml` | field-class, source-independence, positive/downgrade ADVANCE tests | evidence assessment and gate diagnostics |
+| 4.2 — Hard exclusions | Six typed checks; unknown is NOT_CALCULABLE; satisfied exclusion rejects before deep routes | `public_decision.evaluate_hard_exclusions` | six-check truth tables and unknown tests | hard-exclusion diagnostics |
+| 5.3 — Gap taxonomy | Exactly one primary methodology class and ordered secondary classes | `public_decision.classify_gap` | taxonomy table tests | gap class |
+| 7.1.1 / 7.4 / 12 — Public routes | Ordered 0–8 hypotheses; precedence then maximum defensible ΔNV; route 8 GRAPH_REQUIRED | `route_hypotheses.py` | order, precedence, max-ΔNV, tie and graph tests | route hypotheses and preferred hypothesis |
+| 6.3 — Five sector profiles | Five frozen profiles, nine weights each, complete profile hard gates | `capability.py`, `sector_profiles.v1.yaml` | per-profile weight/Kmin/band/gate tests | capability matrix |
+| 9 / 15 — Evidence needs and narrative | Computed evidence needs, conditions, kill conditions and governed EN/AR narrative | `evidence_needs.py`, `narratives.py`, `decision_narratives.v1.yaml` | exact golden copy, parity, escaping and browser tests | hero, unlocks, dossier |
 | Appendix A | Formula reference | `rules.py`, `capability.py`, `economics.py` | formula tests | metric cards |
 | Appendix B | Versioned thresholds and calibration | `thresholds.v1.yaml` | config and boundary tests | rule ledger metadata |
 | Appendix C | Minimum data dictionary | `04_CANONICAL_DATA_MODEL.md` and snapshots | repository tests | evidence and opportunity views |
@@ -165,10 +172,12 @@ Implementation: `economics.approximate_evsi`
 
 | State | Engine condition in MVP | UI treatment |
 |---|---|---|
-| REJECT | no genuine gap, generic capacity contradicted, or equivalent qualified supply is sufficient | red decision state and no-intervention route |
-| MONITOR | supported by engine contract but not used by current golden cases | blue state |
-| INVESTIGATE | material case but decision-critical evidence or hard gate unresolved | gold state and named data unlocks |
-| ADVANCE | only in isolated steel simulation when capability, economics, national value and competition controls all pass | teal simulated state with visible warning |
+| REJECT | a typed hard exclusion or another evidenced rejection condition is satisfied | red decision state and no-intervention route |
+| MONITOR | no rejection exists, at least one signal exists, the material trigger is absent, and a named observable trigger is present | blue state with the named trigger |
+| INVESTIGATE | a route-changing decision-critical fact is unresolved or contradictory and has positive evidence value; route determination is unresolved with a material trigger; or all ADVANCE gates pass but no fired FULL configuration-permitted candidate signal exists (`ADVANCE_SUPPORT_SIGNAL_DEGRADED`) | gold state and named data unlocks |
+| ADVANCE | actual A/B/C decision-critical evidence, all capability, route, economics, national-value, competition, additionality and policy gates pass, at least one fired FULL configuration-permitted candidate signal, and public evidence is not categorically barred | teal state; simulated results retain the visible warning |
+
+Screening dispositions `CANDIDATE`, `NO_CANDIDATE`, and `SCREENED_OUT` are separate from these four formal states.
 
 ## 6. Route map
 
@@ -182,7 +191,7 @@ Implementation: `economics.approximate_evsi`
 | 5 | Debottlenecking/incremental expansion | steel simulated route |
 | 6 | Technology licence/JV | capability route band support |
 | 7 | Targeted greenfield | deliberately not selected in golden cases |
-| 8 | Shared enabling infrastructure | future portfolio extension |
+| 8 | Shared enabling infrastructure | contract emitted as `GRAPH_REQUIRED`; graph activation deferred to S16 |
 
 ## 7. Quality-gate map
 
@@ -226,3 +235,6 @@ Any new domain function must be added to this map before implementation review c
 | Established nameplate | `trade_metrics.established_domestic_nameplate` | Methodology R9-S/R11; worked case §14 | rule tests | R9-S/R11 ledger |
 | Supplier compatibility projection | `trade_metrics.build_supplier_metrics` | Aggregate response contract | API/GenUI tests | metric grid |
 | Hard-gate normalization | `public_snapshot.capability_hard_gate_names`, `public_snapshot.has_known_hard_gate_failure` | Core 04/07 v2 | schema/R9 tests | capability and R9-S |
+| Public evidence needs | `evidence_needs.derive_evidence_needs` | Methodology §9; Core 07 v2 §6 | need-code/predicate/golden tests | missing facts and data unlocks |
+| Public narrative catalogue | `narratives.render_catalogue_entry` | Methodology §§1.2/15; Core 07 v2 §8 | parity/escaping/browser tests | localized hero and dossier |
+| Candidate-signal execution and ADVANCE support | `signals.py` | Methodology §4 execution states; Core 07 §7.6 | `tests/test_signals.py`, FULL-vs-degraded API tests | decision reason code and supporting signal list |
