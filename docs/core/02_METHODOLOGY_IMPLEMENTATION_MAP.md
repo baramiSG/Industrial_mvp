@@ -238,3 +238,8 @@ Any new domain function must be added to this map before implementation review c
 | Public evidence needs | `evidence_needs.derive_evidence_needs` | Methodology §9; Core 07 v2 §6 | need-code/predicate/golden tests | missing facts and data unlocks |
 | Public narrative catalogue | `narratives.render_catalogue_entry` | Methodology §§1.2/15; Core 07 v2 §8 | parity/escaping/browser tests | localized hero and dossier |
 | Candidate-signal execution and ADVANCE support | `signals.py` | Methodology §4 execution states; Core 07 §7.6 | `tests/test_signals.py`, FULL-vs-degraded API tests | decision reason code and supporting signal list |
+| Scenario contract validation | `scenario_contract.validate_simulation_contract` | Core 06 v2 §12 | `tests/test_scenario_contract.py` | HTTP 422 on malformed 2.0.0 scenarios |
+| Scenario projection | `scenario_contract.project_simulated_case` | Core 06 v2 §12; Core 07 §7.9 | contract/generalized tests | composite case for public engine reuse |
+| Simulated decision assembly | `simulation.compute_simulated_decision` | Core 07 §7.9 | `tests/test_simulation_generalized.py` | `simulation_decision` aggregate |
+| Shared-enabler contract | `route_hypotheses.evaluate_shared_enabler_route` | Core 07 §7.7 | route hypothesis tests | route 8 `GRAPH_REQUIRED` |
+| Shared-enabler unlock helper | `route_hypotheses.shared_enabler_unlock_value` | ADR-014 | route hypothesis tests | deterministic unlock value only |

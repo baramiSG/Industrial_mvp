@@ -297,6 +297,7 @@ def test_live_v2_ledger_equals_converted_historical_v1(
         "rejection_conditions",
         "narrative_version",
         "localized_narrative",
+        "localized_missing_facts",
         "decision_reason_code",
         "advance_support_signal_rule_ids",
     }

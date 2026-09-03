@@ -320,6 +320,21 @@ The MVP is complete when:
 - the Decision Dossier is available in JSON and printable HTML;
 - documentation and source are included in one zip.
 
+### Generalized simulation proof
+
+Golden simulated steel remains ADVANCE route 5 with exact numeric pins.
+Golden simulated polypropylene remains REJECT route 0 with
+`HARD_EXCLUSION_SATISFIED`. Fixture scenarios prove routes 1–4, 6, 7, MONITOR,
+partial resolution, lower-route blocking, class-if-confirmed both directions,
+and route-8 `GRAPH_REQUIRED` refusal without synthetic leakage into
+`real_decision`.
+
+### Scenario contract migration proof
+
+Byte-identical 1.1.0 scenarios under `data/synthetic/historical/v1_1/` remain
+manifested and rejected at runtime. Live 2.0.0 scenarios preserve every 1.1.0
+`synthetic_inputs` leaf and English narrative string.
+
 ## 8. Reviewer anti-gaming rule
 
 A failing golden test is evidence of one of three things:

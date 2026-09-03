@@ -62,7 +62,7 @@ def test_steel_simulated_golden_case() -> None:
     ] == pytest.approx(1.0751)
     assert result["competition"]["warning_fires"] is False
     assert result["simulation_scenario"]["scenario_version"] == (
-        "1.1.0"
+        "2.0.0"
     )
     assert result["integrity"]["ground_truth_backtest"] == {
         "expected": {"state": "ADVANCE", "route_code": 5},

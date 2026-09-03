@@ -331,3 +331,30 @@ def test_golden_gap_taxonomy_is_exact(
     } == expected
     assert result["label"] == result["localized_label"]["en"]
     assert result["localized_label"]["ar"]
+
+
+def test_simulated_steel_gap_includes_timing_from_capability_dimensions() -> None:
+    from ior_mvp.decision_engine import analyze
+
+    result = analyze("SAU-H0-721049", "simulated")["gap_class"]
+    assert result["secondary"] == ["timing", "resilience"]
+
+
+def test_classify_gap_uses_capability_timing_when_public_states_unknown() -> None:
+    case = _case()
+    capability = {
+        "dimensions": [
+            {
+                "dimension": "capacity_time_window",
+                "state": 1,
+            }
+        ]
+    }
+    result = classify_gap(
+        case,
+        _rules(R3=True),
+        _assessments(),
+        _exclusions(),
+        capability,
+    )
+    assert result["primary"] == "timing"

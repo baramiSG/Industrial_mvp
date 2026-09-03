@@ -468,25 +468,23 @@ data.
 
 ### 7.9 Simulation branch
 
-S09 does not generalize simulation selection. `_simulate` retains its S08
-state/route logic and exact numeric outputs.
+S10 generalizes simulation selection on scenario contract 2.0.0 through
+`simulation.simulate` → `simulation.compute_simulated_decision`, reusing the
+public selector on a projected composite case from
+`scenario_contract.project_simulated_case`.
 
-The packaged steel simulation continues to require a positive
-specification-adjusted gap, publishable D*, D* within the configured
-incremental-upgrade band, passing minimum-support economics, positive
-incremental national value, and no competition warning before selecting
-ADVANCE route 5. The packaged polypropylene simulation continues to select
-REJECT route 0 when equivalent qualified availability is at least target
-demand.
+Advance gating uses basis `CLASS_IF_CONFIRMED`: declared confirmed classes may
+unlock simulated ADVANCE while actual synthetic assessments remain Class D.
+Route evaluation adds `PARTIAL_RESOLUTION`, `CONSTRAINT_CLASS_NOT_APPLICABLE`,
+`CAPABILITY_BAND_FAILED`, and `FEASIBILITY_FAILED` reason codes. Route 8 always
+returns `NOT_CALCULABLE` with `GRAPH_REQUIRED`; no in-memory substitute is
+permitted.
 
-S09 does not localize or replace simulation narratives. After `_simulate`
-returns, `analyze_simulated` continues to render the selected state entry from
-the scenario's existing `decision_narrative` exactly as today. In locale `ar`,
-those English fields remain explicit source-language islands. This
-presentation must not participate in simulation state, route selection, or
-ground-truth back-testing. S10 owns bilingual scenario narratives,
-class-if-confirmed gating, and generalized routes 0–7 in scenario contract
-2.0.0.
+Packaged steel still reaches ADVANCE route 5 with frozen public goldens
+unchanged. Packaged polypropylene still reaches REJECT route 0 with
+`HARD_EXCLUSION_SATISFIED` when the idle-capacity exclusion is satisfied.
+Simulated R5/R8 ledger rows follow configured thresholds with FULL/DEGRADED/
+DISABLED execution states.
 
 ## 8. Conditions and kill conditions
 

@@ -43,27 +43,28 @@ def test_public_unlocks_receive_localized_missing_fact_segments() -> None:
     unlocks = _component(manifest, "data_unlocks")
 
     assert unlocks["props"]["localized_missing_facts"] == {
-        locale: analysis["real_decision"]["localized_narrative"][
+        locale: analysis["real_decision"]["localized_missing_facts"][
             locale
-        ]["missing_facts"]
+        ]
         for locale in ("en", "ar")
     }
     assert unlocks["props"]["missing_facts"] == analysis["data_unlocks"]
 
 
-def test_simulated_hero_keeps_scenario_narrative_without_catalogue_projection(
+def test_simulated_hero_carries_bilingual_localized_narrative_from_scenario(
 ) -> None:
     analysis = analyze("SAU-H0-721049", "simulated")
     manifest = build_ui_manifest(analysis)
     hero = _component(manifest, "decision_hero")
     unlocks = _component(manifest, "data_unlocks")
 
-    assert "localized_narrative" not in analysis["simulation_decision"]
-    assert hero["props"]["localized_narrative"] is None
-    assert hero["props"]["headline"] == (
-        analysis["simulation_decision"]["headline"]
+    assert hero["props"]["localized_narrative"] == (
+        analysis["simulation_decision"]["localized_narrative"]
     )
-    assert unlocks["props"]["localized_missing_facts"] is None
+    assert hero["props"]["localized_narrative"]["ar"]["headline"]["text"]
+    assert unlocks["props"]["localized_missing_facts"] == (
+        analysis["real_decision"]["localized_missing_facts"]
+    )
 
 
 def test_genui_component_registry_remains_unchanged() -> None:

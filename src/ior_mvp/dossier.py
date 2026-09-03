@@ -146,7 +146,12 @@ def build_dossier(analysis: dict[str, Any]) -> dict[str, Any]:
         "contradiction_register": contradiction_register,
         "conditions": decision.get("conditions", []),
         "kill_conditions": decision.get("kill_conditions", []),
-        "next_evidence_actions": analysis.get("data_unlocks", []),
+        "next_evidence_actions": decision.get("missing_facts", []),
+        "counterfactual": (
+            analysis.get("simulation_decision", {}).get("counterfactual")
+            if analysis["mode"] == "simulated"
+            else None
+        ),
         "synthetic_disclosure": analysis.get("simulation_scenario"),
     }
 
@@ -194,10 +199,12 @@ def render_dossier_html(
         entry: dict[str, Any],
         tag: str = "span",
     ) -> str:
+        if isinstance(entry.get("text"), str) and "segments" not in entry:
+            return f"<{tag}>{e(entry['text'])}</{tag}>"
         segments = entry.get("segments")
         if not isinstance(segments, list):
             raise ValueError(
-                "localized narrative entry requires segments"
+                "localized narrative entry requires segments or text"
             )
         rendered: list[str] = []
         for segment in segments:
@@ -391,8 +398,7 @@ def render_dossier_html(
     narrative_by_locale = dossier.get("localized_narrative")
     localized_narrative = (
         narrative_by_locale.get(locale)
-        if dossier["mode"] == "public"
-        and isinstance(narrative_by_locale, dict)
+        if isinstance(narrative_by_locale, dict)
         else None
     )
     if isinstance(localized_narrative, dict):
@@ -414,9 +420,16 @@ def render_dossier_html(
         kills_html = structured_list(
             localized_narrative["kill_conditions"]
         )
-        next_actions_html = structured_list(
-            localized_narrative["missing_facts"]
-        )
+        missing = localized_narrative.get("missing_facts")
+        if isinstance(missing, list) and missing:
+            next_actions_html = structured_list(missing)
+        elif dossier["next_evidence_actions"]:
+            next_actions_html = "".join(
+                f"<li>{e(item)}</li>"
+                for item in dossier["next_evidence_actions"]
+            )
+        else:
+            next_actions_html = f"<li>{text('dossier.none')}</li>"
         narrative_caption = ""
     else:
         headline_html = f"<h1>{island(dossier['decision_headline'])}</h1>"

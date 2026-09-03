@@ -123,6 +123,7 @@ def test_steel_reconciliation_arithmetic_is_exact() -> None:
         "target_spec_demand_kt": 104.0,
         "downside_demand_kt": 100.0,
         "committed_demand_kt": 74.0,
+        "base_demand_kt": None,
         "downside_within_target": True,
         "committed_within_target": True,
     }
@@ -299,7 +300,7 @@ def test_absent_allocation_block_is_reported_not_applicable(
         get_public_case(opportunity_id),
     )
     allocation = _checks(report)[
-        "tariff_line_or_buyer_allocations_reconcile"
+        "tariff_line_allocation_sums_to_public_hs6_total"
     ]
 
     assert allocation["result"] == "NOT_APPLICABLE"
@@ -356,7 +357,7 @@ def test_repository_scenario_validator_passes_current_fixtures(
     assert "SCENARIO VALIDATION PASS (2 scenarios)" in output
     assert "status=PASS" in output
     assert (
-        "tariff_line_or_buyer_allocations_reconcile: "
+        "tariff_line_allocation_sums_to_public_hs6_total: "
         "NOT_APPLICABLE"
     ) in output
     assert output.count("ground_truth_backtest: PASS") == 2
@@ -500,3 +501,106 @@ def test_validator_returns_two_for_invalid_public_snapshot(
 
     assert status == 2
     assert "PublicSnapshotIntegrityError" in capsys.readouterr().err
+
+
+FIXTURE_ROOT = Path(__file__).resolve().parent / "fixtures" / "simulation"
+
+
+def _load_reconciliation_fixture() -> dict:
+    return json.loads(
+        (FIXTURE_ROOT / "sim-reconciliation-blocks.json").read_text(
+            encoding="utf-8"
+        )
+    )
+
+
+def test_reconciliation_fixture_passes_all_ten_checks() -> None:
+    scenario = _load_reconciliation_fixture()
+    report = reconcile_synthetic_scenario(
+        scenario,
+        get_public_case("SAU-H0-721049"),
+    )
+    assert report["status"] == "PASS"
+    assert [check["rule_id"] for check in report["checks"]] == [
+        "target_spec_demand_within_public_imports",
+        "line_nameplate_within_disclosed_public_capacity",
+        "capacity_factors_within_unit_interval",
+        "qualified_availability_within_physical_output",
+        "demand_layers_remain_separate",
+        "tariff_line_allocation_sums_to_public_hs6_total",
+        "buyer_allocation_within_public_imports",
+        "expansion_assumption_disclosed_and_bounded",
+        "retained_flows_reconcile_to_public_trade",
+        "base_demand_and_commitment_probability_valid",
+    ]
+
+
+@pytest.mark.parametrize(
+    ("mutation", "failed_rule"),
+    [
+        (
+            lambda scenario: scenario["synthetic_inputs"][
+                "tariff_line_allocation"
+            ]["lines"][0].__setitem__("quantity_kt", 287.8),
+            "tariff_line_allocation_sums_to_public_hs6_total",
+        ),
+        (
+            lambda scenario: scenario["synthetic_inputs"][
+                "buyer_allocation"
+            ]["buyers"].append(
+                {
+                    "buyer_id": "B3",
+                    "segment": "extra",
+                    "quantity_kt": 1.0,
+                }
+            ),
+            "buyer_allocation_within_public_imports",
+        ),
+        (
+            lambda scenario: scenario["synthetic_inputs"][
+                "expansion_assumption"
+            ].__setitem__("commissioning_year", 2025),
+            "expansion_assumption_disclosed_and_bounded",
+        ),
+        (
+            lambda scenario: scenario["synthetic_inputs"][
+                "tariff_line_allocation"
+            ]["lines"][0].__setitem__("quantity_kt", 288.0),
+            "tariff_line_allocation_sums_to_public_hs6_total",
+        ),
+        (
+            lambda scenario: scenario["synthetic_inputs"][
+                "production_and_retained_flows"
+            ].__setitem__("retained_imports_kt", 288.0),
+            "retained_flows_reconcile_to_public_trade",
+        ),
+        (
+            lambda scenario: scenario["synthetic_inputs"]["demand"].__setitem__(
+                "commitment_probability", 1.001
+            ),
+            "base_demand_and_commitment_probability_valid",
+        ),
+    ],
+)
+def test_reconciliation_fixture_mutations_fail_exactly_one_check(
+    mutation: object,
+    failed_rule: str,
+) -> None:
+    scenario = _load_reconciliation_fixture()
+    mutation(scenario)
+    report = reconcile_synthetic_scenario(
+        scenario,
+        get_public_case("SAU-H0-721049"),
+    )
+    assert report["status"] == "FAIL"
+    failed = [
+        check["rule_id"]
+        for check in report["checks"]
+        if check["result"] == "FAIL"
+    ]
+    assert failed == [failed_rule]
+    with pytest.raises(
+        EvidenceIntegrityError,
+        match=failed_rule,
+    ):
+        require_scenario_reconciliation(report)

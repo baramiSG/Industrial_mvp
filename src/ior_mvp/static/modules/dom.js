@@ -40,14 +40,19 @@ export function sourceCaption() {
 }
 
 export function narrativeEntry(entry, tag = "span") {
+  if (typeof entry === "string") {
+    return `<${tag}>${escapeHtml(entry)}</${tag}>`;
+  }
   const segments = Array.isArray(entry?.segments) ? entry.segments : [];
-  const content = segments.map((segment) => {
-    const escaped = escapeHtml(segment?.text);
-    if (segment?.ltr_isolate === true) {
-      return `<bdi class="ltr-isolate" lang="en" dir="ltr">${escaped}</bdi>`;
-    }
-    return escaped;
-  }).join("");
+  const content = segments.length
+    ? segments.map((segment) => {
+      const escaped = escapeHtml(segment?.text);
+      if (segment?.ltr_isolate === true) {
+        return `<bdi class="ltr-isolate" lang="en" dir="ltr">${escaped}</bdi>`;
+      }
+      return escaped;
+    }).join("")
+    : escapeHtml(entry?.text || "");
   return `<${tag}>${content}</${tag}>`;
 }
 

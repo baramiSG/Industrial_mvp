@@ -1,0 +1,266 @@
+{
+  "scenario_id": "SIM-RECON-STEEL",
+  "scenario_version": "2.0.0",
+  "ground_truth": {
+    "expected_simulation_state": "ADVANCE",
+    "expected_route_code": 5,
+    "basis": "Core 06 §5.3 planted ground truth; Core 07 §7.3 requires the positive gap, publishable D* within the incremental-upgrade band, passing minimum-support economics, positive incremental national value, and no competition warning supplied by this scenario."
+  },
+  "decision_narrative": {
+    "ADVANCE": {
+      "headline": {
+        "en": "SIMULATED ADVANCE — brownfield specification upgrade",
+        "ar": "تقدّم مُحاكى — تحديث المواصفة في المنشأة القائمة"
+      },
+      "route_label": {
+        "en": "Conditional brownfield debottlenecking / line expansion",
+        "ar": "إزالة اختناقات مشروطة أو توسعة خط في المنشأة القائمة"
+      },
+      "rationale": {
+        "en": "The simulated Ministry-grade evidence resolves a sustained target-specification gap, establishes incremental adjacency, and passes minimum-support, national-value and competition controls.",
+        "ar": "تحسم أدلة المحاكاة بمستوى الوزارة فجوة مستدامة في المواصفة المستهدفة، وتثبت تقارباً تدريجياً، وتجتاز ضوابط الحد الأدنى من الدعم والقيمة الوطنية والمنافسة."
+      },
+      "conditions": [
+        {
+          "en": "Achieve customer acceptance for the named target specification.",
+          "ar": "تحقيق قبول العملاء للمواصفة المستهدفة المسماة."
+        },
+        {
+          "en": "Deliver 50 kt of incremental qualified capacity within 18 months.",
+          "ar": "توفير 50 ألف طن من الطاقة المؤهلة الإضافية خلال 18 شهراً."
+        },
+        {
+          "en": "Support is milestone-based, sunset-bound and subject to clawback.",
+          "ar": "الدعم مرتبط بمعالم إنجاز ومحدد بأجل انتهاء وخاضع للاسترداد."
+        }
+      ],
+      "kill_conditions": [
+        {
+          "en": "Committed target-specification demand falls below 72 kt.",
+          "ar": "انخفاض الطلب الملتزم به على المواصفة المستهدفة إلى أقل من 72 ألف طن."
+        },
+        {
+          "en": "Incumbent output or another expansion closes the gap before award.",
+          "ar": "إغلاق الفجوة بإنتاج المنشأة القائمة أو بتوسعة أخرى قبل الترسية."
+        },
+        {
+          "en": "Customer qualification is not achieved by the contractual milestone.",
+          "ar": "عدم تحقيق تأهيل العملاء بحلول المعلم التعاقدي."
+        }
+      ]
+    },
+    "INVESTIGATE": {
+      "headline": {
+        "en": "SIMULATED INVESTIGATE — one or more gates remain unresolved",
+        "ar": "تحقّق مُحاكى — ما زالت بوابة واحدة أو أكثر غير محسومة"
+      },
+      "route_label": {
+        "en": "Simulation controls did not all pass",
+        "ar": "لم تجتز المحاكاة جميع الضوابط"
+      },
+      "rationale": {
+        "en": "The simulated branch did not satisfy every hard gate.",
+        "ar": "لم يستوف فرع المحاكاة جميع البوابات الصلبة."
+      },
+      "conditions": [],
+      "kill_conditions": []
+    }
+  },
+  "opportunity_id": "SAU-H0-721049",
+  "synthetic_flag": true,
+  "display_label": "SIMULATED — NOT MINISTRY EVIDENCE",
+  "seed_basis": "Steel reconciliation fixture with allocation, expansion and flow blocks.",
+  "evidence_class": "D",
+  "source": "DEMO_GENERATOR",
+  "synthetic_inputs": {
+    "target_specification": {
+      "name": "Z275 structural galvanized coil for coastal construction",
+      "standard": "SASO-ASTM A653/A653M",
+      "coating_mass_g_m2": 275,
+      "thickness_mm": [
+        0.7,
+        1.5
+      ],
+      "width_mm": [
+        1000,
+        1250
+      ],
+      "application": "coastal construction panels",
+      "customer_qualification_required": true
+    },
+    "demand": {
+      "target_spec_demand_kt": 104.0,
+      "downside_demand_kt": 100.0,
+      "committed_demand_kt": 74.0,
+      "announced_demand_kt": 22.0,
+      "base_demand_kt": 100.0,
+      "commitment_probability": 0.8
+    },
+    "plant_line": {
+      "nameplate_kt": 280.0,
+      "availability": 0.92,
+      "yield": 0.94,
+      "qualification_share": 0.38,
+      "market_allocation_share": 0.7,
+      "current_utilisation": 0.89
+    },
+    "capability_states": {
+      "feedstock_chemistry": 0,
+      "core_process_route": 0,
+      "equipment_envelope": 1,
+      "finishing_spec_control": 2,
+      "qa_lab_metrology": 0,
+      "certification_customer_qualification": 2,
+      "capacity_time_window": 1,
+      "utilities_ehs_permitting": 0,
+      "skills_market_integration": 0
+    },
+    "hard_gates": {
+      "substrate_range": "resolved",
+      "width_thickness_envelope": "resolved",
+      "coating_route_and_mass": "resolved with upgrade",
+      "surface_treatment": "resolved with upgrade",
+      "mandatory_or_customer_standard": "resolved with qualification programme"
+    },
+    "upgrade": {
+      "incremental_capacity_kt": 50.0,
+      "schedule_months": 18,
+      "description": "Brownfield finishing-control, coating-mass stability and customer-qualification package"
+    },
+    "economics": {
+      "currency": "SAR_m",
+      "cash_flows_without_support": [
+        -179.8009204232,
+        28.6362006614,
+        28.6362006614,
+        28.6362006614,
+        28.6362006614,
+        28.6362006614,
+        28.6362006614,
+        28.6362006614,
+        28.6362006614,
+        28.6362006614,
+        28.6362006614
+      ],
+      "hurdle_rate": 0.12,
+      "support_instrument": "conditional capex and qualification package",
+      "national_value": {
+        "domestic_value_added": 126.0,
+        "exports": 24.0,
+        "resilience_value": 62.0,
+        "knowledge_skills": 18.0,
+        "fiscal_receipts": 21.0,
+        "government_cost": 18.0,
+        "displacement": 12.0,
+        "resource_environment": 8.0,
+        "risk_allowance": 15.0
+      },
+      "minimum_efficient_scale_kt": 50.0
+    },
+    "evsi": {
+      "route_change_probability": 0.72,
+      "value_difference_m_sar": 190.0,
+      "evidence_cost_m_sar": 2.5,
+      "delay_cost_m_sar": 5.0,
+      "next_fact": "Confirm line-level qualification share and customer acceptance test"
+    },
+    "equivalence": {
+      "domestic_grade_equivalent": true,
+      "basis": "Synthetic line-level qualification records: the incumbent's qualified share of output meets the target specification; qualified supply available to the target market equals the effective qualified capacity computed from plant_line."
+    },
+    "class_if_confirmed": {
+      "product_identity": "A",
+      "demand_at_required_specification": "A",
+      "domestic_supply_or_capability": "A",
+      "hard_regulatory_or_process_gate": "B",
+      "basis": "Ministry administrative customs, production and qualification records if confirmed; hard gates remain awaiting qualification-programme validation."
+    },
+    "decision_specific_hard_gates": {
+      "exact imported specification": "resolved by the synthetic target specification",
+      "customer/application qualification": "resolved with qualification programme",
+      "effective spare capacity and allocation": "resolved by synthetic line allocation"
+    },
+    "hard_exclusion_inputs": {
+      "heterogeneous_residual_code": {
+        "commercial_product_separable": true,
+        "product_level_evidence_available": true
+      },
+      "downside_market_below_mes": {
+        "credible_export_contract": "UNAVAILABLE"
+      },
+      "unsatisfiable_hard_gate": {
+        "gate_domain": "customer_qualification",
+        "gate_satisfiability": "SATISFIABLE"
+      },
+      "idle_equivalent_domestic_capacity": {
+        "qualified_idle_capacity_kt": "UNAVAILABLE",
+        "binding_market_failure": true
+      },
+      "transitory_or_measurement_gap": {
+        "dominant_cause": "OTHER"
+      },
+      "redundancy_or_crowd_out": {
+        "competition_finding": "ACCEPTABLE"
+      }
+    },
+    "route_evidence": [
+      {
+        "route_code": 5,
+        "binding_constraint": "capacity_or_availability",
+        "technical_feasibility_confirmed": true,
+        "binding_constraint_fully_removed": true,
+        "investment_already_approved_or_financed": false,
+        "proceeds_without_intervention": false,
+        "policy_prohibition_identified": false,
+        "distortion_unacceptable": false,
+        "intervention_proportionate_to_constraint": true,
+        "basis": "Brownfield finishing-control, coating-mass stability and customer-qualification package; downside economics, national value and competition inherited from the economics, upgrade and demand blocks."
+      }
+    ],
+    "counterfactual": {
+      "q1_incumbent_meets_specification_without_capital": false,
+      "q4_downside_demand_supports_incumbent_and_new_entrant": false,
+      "q5_new_entry_displaces_efficient_domestic_production": true,
+      "q6_technology_jv_superior_to_expansion_or_greenfield": false
+    },
+    "tariff_line_allocation": {
+      "basis": "Fixture HS6 allocation reconciling to public imports.",
+      "lines": [
+        {
+          "national_tariff_line": "721049000",
+          "description_en": "Flat-rolled zinc-coated steel",
+          "quantity_kt": 287.9
+        }
+      ]
+    },
+    "buyer_allocation": {
+      "basis": "Fixture buyer split within public imports.",
+      "buyers": [
+        {
+          "buyer_id": "B1",
+          "segment": "construction",
+          "quantity_kt": 200.0
+        },
+        {
+          "buyer_id": "B2",
+          "segment": "infrastructure",
+          "quantity_kt": 87.9
+        }
+      ]
+    },
+    "expansion_assumption": {
+      "planned_nameplate_kt": 300.0,
+      "commissioning_year": 2027,
+      "disclosed": true,
+      "basis": "Fixture disclosed expansion ceiling."
+    },
+    "production_and_retained_flows": {
+      "period_year": 2024,
+      "basis": "Fixture flow decomposition.",
+      "domestic_production_kt": 800.0,
+      "retained_imports_kt": 200.0,
+      "domestic_origin_exports_kt": 0.0,
+      "reexports_kt": "UNAVAILABLE"
+    }
+  }
+}

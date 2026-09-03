@@ -1,0 +1,221 @@
+{
+  "scenario_id": "SIM-LOWER-BLOCK",
+  "scenario_version": "2.0.0",
+  "ground_truth": {
+    "expected_simulation_state": "ADVANCE",
+    "expected_route_code": 3,
+    "basis": "fixture"
+  },
+  "decision_narrative": {
+    "ADVANCE": {
+      "headline": {
+        "en": "SIMULATED ADVANCE — route 3",
+        "ar": "تقدّم — 3"
+      },
+      "route_label": {
+        "en": "R",
+        "ar": "م"
+      },
+      "rationale": {
+        "en": "r",
+        "ar": "م"
+      },
+      "conditions": [
+        {
+          "en": "c",
+          "ar": "ش"
+        }
+      ],
+      "kill_conditions": [
+        {
+          "en": "k",
+          "ar": "إ"
+        }
+      ]
+    }
+  },
+  "opportunity_id": "FIX-PUBLIC-ADVANCE-ROUTE-3",
+  "synthetic_flag": true,
+  "display_label": "SIMULATED — NOT MINISTRY EVIDENCE",
+  "seed_basis": "Lower block fixture.",
+  "evidence_class": "D",
+  "source": "DEMO_GENERATOR",
+  "synthetic_inputs": {
+    "target_specification": {
+      "name": "Fixture product",
+      "standard": "TEST-STD",
+      "application": "fixture test"
+    },
+    "demand": {
+      "target_spec_demand_kt": 10.0,
+      "downside_demand_kt": 100.0,
+      "committed_demand_kt": 5.0
+    },
+    "plant_line": {
+      "nameplate_kt": 20.0,
+      "availability": 0.9,
+      "yield": 0.95,
+      "qualification_share": 0.5,
+      "market_allocation_share": 0.8,
+      "current_utilisation": 0.7
+    },
+    "capability_states": {
+      "feedstock_chemistry": 0,
+      "core_process_route": 0,
+      "equipment_envelope": 0,
+      "finishing_spec_control": 0,
+      "qa_lab_metrology": 0,
+      "certification_customer_qualification": 0,
+      "capacity_time_window": 0,
+      "utilities_ehs_permitting": 0,
+      "skills_market_integration": 0
+    },
+    "hard_gates": {
+      "polymer_additive_compatibility": "resolved",
+      "conversion_route": "resolved",
+      "tooling": "resolved",
+      "performance_requirement": "resolved",
+      "application_qualification": "resolved"
+    },
+    "economics": {
+      "currency": "SAR_m",
+      "cash_flows_without_support": [
+        -10.0,
+        6.0,
+        6.0
+      ],
+      "hurdle_rate": 0.1,
+      "support_instrument": "fixture",
+      "national_value": {
+        "domestic_value_added": 50.0,
+        "exports": 10.0,
+        "resilience_value": 5.0,
+        "knowledge_skills": 5.0,
+        "fiscal_receipts": 5.0,
+        "government_cost": 5.0,
+        "displacement": 1.0,
+        "resource_environment": 1.0,
+        "risk_allowance": 2.0
+      },
+      "minimum_efficient_scale_kt": 50.0
+    },
+    "equivalence": {
+      "domestic_grade_equivalent": false,
+      "basis": "Fixture equivalence declaration."
+    },
+    "evsi": {
+      "route_change_probability": 0.5,
+      "value_difference_m_sar": 10.0,
+      "evidence_cost_m_sar": 1.0,
+      "delay_cost_m_sar": 1.0,
+      "next_fact": "Fixture EVSI."
+    },
+    "class_if_confirmed": {
+      "product_identity": "A",
+      "demand_at_required_specification": "A",
+      "domestic_supply_or_capability": "A",
+      "hard_regulatory_or_process_gate": "B",
+      "basis": "Fixture class-if-confirmed."
+    },
+    "decision_specific_hard_gates": {},
+    "hard_exclusion_inputs": {
+      "heterogeneous_residual_code": {
+        "commercial_product_separable": true,
+        "product_level_evidence_available": true
+      },
+      "downside_market_below_mes": {
+        "sustainable_downside_demand_kt": 100.0,
+        "minimum_efficient_scale_kt": 50.0,
+        "credible_export_contract": false
+      },
+      "unsatisfiable_hard_gate": {
+        "gate_domain": "customer_qualification",
+        "gate_satisfiability": "SATISFIABLE"
+      },
+      "idle_equivalent_domestic_capacity": {
+        "domestic_specification_equivalent": false,
+        "qualified_idle_capacity_kt": 0.0,
+        "binding_market_failure": true
+      },
+      "transitory_or_measurement_gap": {
+        "dominant_cause": "OTHER"
+      },
+      "redundancy_or_crowd_out": {
+        "competition_finding": "ACCEPTABLE"
+      }
+    },
+    "counterfactual": {
+      "q1_incumbent_meets_specification_without_capital": false
+    },
+    "route_evidence": [
+      {
+        "route_code": 3,
+        "binding_constraint": "qualification_or_certification",
+        "technical_feasibility_confirmed": true,
+        "binding_constraint_fully_removed": true,
+        "investment_already_approved_or_financed": false,
+        "proceeds_without_intervention": false,
+        "policy_prohibition_identified": false,
+        "distortion_unacceptable": false,
+        "intervention_proportionate_to_constraint": true,
+        "basis": "Class-D simulation fixture.",
+        "downside_cash_flows_m_sar": [
+          -10.0,
+          6.0,
+          6.0
+        ],
+        "hurdle_rate": 0.1,
+        "national_value": {
+          "domestic_value_added": 24.0,
+          "exports": 10.0,
+          "resilience_value": 5.0,
+          "knowledge_skills": 5.0,
+          "fiscal_receipts": 5.0,
+          "government_cost": 5.0,
+          "displacement": 1.0,
+          "resource_environment": 1.0,
+          "risk_allowance": 2.0
+        },
+        "competition": {
+          "existing_effective_capacity_kt": 80.0,
+          "proposed_incremental_capacity_kt": 0.0,
+          "downside_demand_kt": 100.0
+        }
+      },
+      {
+        "route_code": 4,
+        "binding_constraint": "demand_fragmentation_or_offtake",
+        "technical_feasibility_confirmed": true,
+        "binding_constraint_fully_removed": true,
+        "investment_already_approved_or_financed": false,
+        "proceeds_without_intervention": false,
+        "policy_prohibition_identified": false,
+        "distortion_unacceptable": false,
+        "intervention_proportionate_to_constraint": true,
+        "basis": "Class-D simulation fixture.",
+        "downside_cash_flows_m_sar": [
+          -10.0,
+          6.0,
+          6.0
+        ],
+        "hurdle_rate": 0.1,
+        "national_value": {
+          "domestic_value_added": 44.0,
+          "exports": 10.0,
+          "resilience_value": 5.0,
+          "knowledge_skills": 5.0,
+          "fiscal_receipts": 5.0,
+          "government_cost": 5.0,
+          "displacement": 1.0,
+          "resource_environment": 1.0,
+          "risk_allowance": 2.0
+        },
+        "competition": {
+          "existing_effective_capacity_kt": 80.0,
+          "proposed_incremental_capacity_kt": 0.0,
+          "downside_demand_kt": 100.0
+        }
+      }
+    ]
+  }
+}

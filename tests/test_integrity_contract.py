@@ -52,6 +52,8 @@ def test_s08_snapshot_manifest_retains_live_and_historical_public_rows(
         ),
         "data/synthetic/SYN-MINISTRY-STEEL-001.json",
         "data/synthetic/SYN-MINISTRY-PP-001.json",
+        "data/synthetic/historical/v1_1/SYN-MINISTRY-STEEL-001.json",
+        "data/synthetic/historical/v1_1/SYN-MINISTRY-PP-001.json",
         "data/golden/ar_en_spec_extraction.json",
     } == paths
 
@@ -223,6 +225,62 @@ def test_s09_core_v2_contracts_define_the_generalized_public_engine() -> None:
     assert "typed rejection narratives" in normalized_core_09
     assert "fired-rule confidence cap" in normalized_core_09
     assert "Exact-Arabic catalogue proofs" in normalized_core_09
+
+
+def test_s10_core_v2_contracts_define_the_generalized_simulation() -> None:
+    marker = (
+        "<!-- core_version: 2.0.0; supersedes: 1.0.0; "
+        "effective_date: 2026-09-02 -->"
+    )
+    core = {
+        number: (
+            PROJECT_ROOT / "docs" / "core" / filename
+        ).read_text(encoding="utf-8")
+        for number, filename in {
+            "01": "01_PRODUCT_AND_REQUIREMENTS.md",
+            "02": "02_METHODOLOGY_IMPLEMENTATION_MAP.md",
+            "04": "04_CANONICAL_DATA_MODEL.md",
+            "06": "06_SYNTHETIC_MINISTRY_DATA_SPEC.md",
+            "07": "07_DETERMINISTIC_ENGINE_SPEC.md",
+            "09": "09_TEST_ACCEPTANCE_AND_GOLDEN_CASES.md",
+        }.items()
+    }
+    snapshot_manifest = json.loads(
+        (
+            PROJECT_ROOT / "data" / "manifests" / "snapshot_manifest.json"
+        ).read_text(encoding="utf-8")
+    )
+    synthetic_paths = {
+        row["path"]
+        for row in snapshot_manifest["files"]
+        if row["path"].startswith("data/synthetic/")
+    }
+
+    assert all(text.splitlines()[2] == marker for text in core.values())
+    for requirement in range(55, 60):
+        assert f"**FR-0{requirement}**" in core["01"]
+    for symbol in (
+        "simulation.compute_simulated_decision",
+        "scenario_contract.project_simulated_case",
+        "scenario_contract.validate_simulation_contract",
+        "route_hypotheses.evaluate_shared_enabler_route",
+        "route_hypotheses.shared_enabler_unlock_value",
+    ):
+        assert symbol in core["02"]
+    assert "class_if_confirmed" in core["04"]
+    for token in (
+        "historical/v1_1",
+        "tariff_line_allocation",
+        "CLASS_IF_CONFIRMED",
+    ):
+        assert token in core["06"]
+    assert "### Generalized simulation proof" in core["09"]
+    assert "data/synthetic/historical/v1_1/SYN-MINISTRY-STEEL-001.json" in (
+        synthetic_paths
+    )
+    assert "data/synthetic/historical/v1_1/SYN-MINISTRY-PP-001.json" in (
+        synthetic_paths
+    )
 
 
 def test_manifest_generator_includes_the_governed_ui_catalogue() -> None:

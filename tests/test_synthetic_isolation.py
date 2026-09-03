@@ -94,8 +94,14 @@ def test_every_synthetic_row_is_labeled() -> None:
 def test_evidence_policy_declares_the_core_06_metadata_contract() -> None:
     policy = evidence_policy_config()
     isolation = policy["synthetic_isolation"]
-    assert policy["metadata"]["version"] == "1.3.0"
-    assert policy["metadata"]["effective_date"] == "2026-09-02"
+    assert policy["metadata"]["version"] == "1.4.0"
+    assert policy["metadata"]["effective_date"] == "2026-09-03"
+    assert policy["simulation_gate"] == {
+        "basis": "CLASS_IF_CONFIRMED",
+        "declared_class_block": "class_if_confirmed",
+        "undeclared_field_class": "D",
+        "actual_synthetic_evidence_class": "D",
+    }
     assert isolation["required_fields"] == MANDATORY_SCENARIO_FIELDS
     assert isolation["required_evidence_class"] == "D"
     assert isolation["required_source"] == "DEMO_GENERATOR"
@@ -243,7 +249,7 @@ def test_policy_validation_accepts_additive_s04_metadata(
 ) -> None:
     scenario = get_synthetic_scenario(opportunity_id)
     assert scenario is not None
-    assert scenario["scenario_version"] == "1.1.0"
+    assert scenario["scenario_version"] == "2.0.0"
     assert isinstance(scenario["ground_truth"], dict)
     assert isinstance(scenario["decision_narrative"], dict)
 

@@ -1,7 +1,7 @@
 metadata:
   artifact: industrial-opportunity-decision-narratives
-  version: "1.0.0"
-  effective_date: "2026-09-02"
+  version: "1.1.0"
+  effective_date: "2026-09-03"
   authority: "Industrial Opportunity Resolution Methodology §§1.2, 4.2, 5.3, 7.1.1, 7.4, 9, 12 and 15; Core 07 v2"
   status: frozen_for_demo_cycle
   default_locale: en
@@ -74,6 +74,23 @@ templates:
     decision.simulated.investigate.headline: "SIMULATED INVESTIGATE — one or more gates remain unresolved"
     decision.simulated.investigate.route: "Simulation controls did not all pass"
     decision.simulated.investigate.rationale: "The simulated branch did not satisfy every hard gate."
+
+    decision.simulated.advance.headline: "SIMULATED ADVANCE — route {route_code}"
+    decision.simulated.advance.rationale: "If the displayed Ministry-grade facts are confirmed, the evidence supports the selected route and every hard gate is satisfied."
+    decision.simulated.advance.condition: "Confirm every simulated decision-critical fact with Ministry-grade evidence before any public action."
+    decision.simulated.advance.kill: "Stop or reroute if any confirmed fact fails an ADVANCE gate."
+    decision.simulated.reject.headline: "SIMULATED REJECT — no defensible intervention"
+    decision.simulated.reject.rationale: "The simulated evidence satisfies an evidenced rejection condition; capacity support would be non-additional."
+    decision.simulated.reject.condition: "Reopen only if confirmed Ministry-grade evidence removes the rejection condition."
+    decision.simulated.reject.kill: "Stop any capacity support while the rejection condition remains satisfied."
+    decision.simulated.monitor.headline: "SIMULATED MONITOR — no immediate intervention"
+    decision.simulated.monitor.route: "No intervention; watch the named trigger"
+    decision.simulated.monitor.rationale: "No rejection condition is evidenced in the simulated branch; the material trigger is absent."
+    route.reason.partial_resolution: "The route passes its gates but does not fully remove the binding constraint; it does not block higher routes."
+    route.reason.feasibility_failed: "The route is not technically feasible on the available evidence."
+    route.reason.constraint_class_not_applicable: "The detected binding constraint is outside this route's intervention class."
+    route.reason.capability_band_failed: "The published capability distance is outside this route's configured band."
+    route.reason.capability_unpublished: "D* is not published, so the route's capability band cannot be tested."
 
     need.identity.tariff_line: "Saudi tariff-line and invoice description"
     need.specification.line_production: "Line-level production by specification, application and destination"
@@ -199,6 +216,23 @@ templates:
     decision.simulated.investigate.headline: "تحقّق مُحاكى — ما زالت بوابة واحدة أو أكثر غير محسومة"
     decision.simulated.investigate.route: "لم تجتز المحاكاة جميع الضوابط"
     decision.simulated.investigate.rationale: "لم يستوف فرع المحاكاة جميع البوابات الصلبة."
+
+    decision.simulated.advance.headline: "تقدّم مُحاكى — المسار {route_code}"
+    decision.simulated.advance.rationale: "إذا تأكدت الحقائق المعروضة بمستوى الوزارة، تدعم الأدلة المسار المختار وتكون جميع البوابات الصلبة مستوفاة."
+    decision.simulated.advance.condition: "أكّد كل حقيقة محاكاة حاسمة للقرار بأدلة بمستوى الوزارة قبل أي إجراء عام."
+    decision.simulated.advance.kill: "أوقف المسار أو غيّره إذا أخفقت أي حقيقة مؤكدة في بوابة من بوابات التقدّم."
+    decision.simulated.reject.headline: "رفض مُحاكى — لا تدخل يمكن الدفاع عنه"
+    decision.simulated.reject.rationale: "تستوفي أدلة المحاكاة شرط رفض مُثبتاً؛ ولن يحقق دعم الطاقة إضافية."
+    decision.simulated.reject.condition: "أعد الفتح فقط إذا أزالت أدلة مؤكدة بمستوى الوزارة شرط الرفض."
+    decision.simulated.reject.kill: "أوقف أي دعم للطاقة ما دام شرط الرفض متحققاً."
+    decision.simulated.monitor.headline: "مراقبة مُحاكاة — لا تدخل فوري"
+    decision.simulated.monitor.route: "لا تدخل؛ راقب المحفّز المسمى"
+    decision.simulated.monitor.rationale: "لم يثبت شرط رفض في فرع المحاكاة، والمحفّز المادي غير متحقق."
+    route.reason.partial_resolution: "يجتاز المسار بواباته لكنه لا يزيل القيد الملزم بالكامل؛ ولا يحجب المسارات الأعلى."
+    route.reason.feasibility_failed: "المسار غير مجدٍ تقنياً بحسب الأدلة المتاحة."
+    route.reason.constraint_class_not_applicable: "القيد الملزم المكتشف يقع خارج فئة التدخل لهذا المسار."
+    route.reason.capability_band_failed: "مسافة القدرة المنشورة تقع خارج النطاق المُهيّأ لهذا المسار."
+    route.reason.capability_unpublished: "لم تُنشر D*، ولذلك لا يمكن اختبار نطاق القدرة لهذا المسار."
 
     need.identity.tariff_line: "بند التعرفة السعودي ووصف الفاتورة"
     need.specification.line_production: "الإنتاج على مستوى الخط حسب المواصفة والتطبيق والوجهة"

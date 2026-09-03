@@ -1,6 +1,6 @@
 {
   "scenario_id": "SYN-MINISTRY-PP-001",
-  "scenario_version": "1.1.0",
+  "scenario_version": "2.0.0",
   "ground_truth": {
     "expected_simulation_state": "REJECT",
     "expected_route_code": 0,
@@ -8,21 +8,48 @@
   },
   "decision_narrative": {
     "REJECT": {
-      "headline": "SIMULATED REJECT — no generic specification-adjusted gap",
-      "route_label": "No intervention",
-      "rationale": "The simulated internal grade matrix shows equivalent qualified supply above target demand; generic capacity support would be non-additional.",
+      "headline": {
+        "en": "SIMULATED REJECT — no generic specification-adjusted gap",
+        "ar": "رفض مُحاكى — لا فجوة عامة معدّلة بالمواصفة"
+      },
+      "route_label": {
+        "en": "No intervention",
+        "ar": "لا تدخل"
+      },
+      "rationale": {
+        "en": "The simulated internal grade matrix shows equivalent qualified supply above target demand; generic capacity support would be non-additional.",
+        "ar": "تُظهر مصفوفة الدرجات الداخلية المحاكاة عرضاً مؤهلاً مكافئاً يفوق الطلب المستهدف؛ ولن يحقق دعم الطاقة العامة إضافية."
+      },
       "conditions": [
-        "Reopen only for a named specialty-grade exception supported by buyer evidence."
+        {
+          "en": "Reopen only for a named specialty-grade exception supported by buyer evidence.",
+          "ar": "أعد الفتح فقط لاستثناء درجة متخصصة مسماة تدعمه أدلة من المشترين."
+        }
       ],
       "kill_conditions": [
-        "Any proposed generic-capacity support is stopped while equivalent qualified capacity is available."
+        {
+          "en": "Any proposed generic-capacity support is stopped while equivalent qualified capacity is available.",
+          "ar": "يُوقف أي دعم مقترح للطاقة العامة ما دامت الطاقة المؤهلة المكافئة متاحة."
+        }
       ],
-      "competition_finding": "No new capacity is proposed; redundant support is avoided."
+      "competition_finding": {
+        "en": "No new capacity is proposed; redundant support is avoided.",
+        "ar": "لا تُقترح طاقة جديدة؛ ويُتجنّب الدعم الزائد."
+      }
     },
     "INVESTIGATE": {
-      "headline": "SIMULATED INVESTIGATE — one or more gates remain unresolved",
-      "route_label": "Simulation controls did not all pass",
-      "rationale": "The simulated branch did not satisfy every hard gate.",
+      "headline": {
+        "en": "SIMULATED INVESTIGATE — one or more gates remain unresolved",
+        "ar": "تحقّق مُحاكى — ما زالت بوابة واحدة أو أكثر غير محسومة"
+      },
+      "route_label": {
+        "en": "Simulation controls did not all pass",
+        "ar": "لم تجتز المحاكاة جميع الضوابط"
+      },
+      "rationale": {
+        "en": "The simulated branch did not satisfy every hard gate.",
+        "ar": "لم يستوف فرع المحاكاة جميع البوابات الصلبة."
+      },
       "conditions": [],
       "kill_conditions": []
     }
@@ -87,6 +114,30 @@
       "evidence_cost_m_sar": 3.0,
       "delay_cost_m_sar": 1.0,
       "next_fact": "Obtain named specialty-grade exception only if a buyer identifies one"
+    },
+    "class_if_confirmed": {
+      "product_identity": "A",
+      "demand_at_required_specification": "A",
+      "domestic_supply_or_capability": "A",
+      "hard_regulatory_or_process_gate": "A",
+      "basis": "Ministry customs tariff-line descriptions, producer grade matrix and buyer qualification records if confirmed."
+    },
+    "decision_specific_hard_gates": {
+      "named imported grade": "resolved by the synthetic grade matrix",
+      "buyer application and qualification": "resolved by synthetic buyer qualification records",
+      "local grade availability in required volume and timing": "resolved by the synthetic availability matrix"
+    },
+    "hard_exclusion_inputs": {
+      "idle_equivalent_domestic_capacity": {
+        "qualified_idle_capacity_kt": "UNAVAILABLE",
+        "binding_market_failure": false
+      }
+    },
+    "counterfactual": {
+      "q1_incumbent_meets_specification_without_capital": true,
+      "q4_downside_demand_supports_incumbent_and_new_entrant": false,
+      "q5_new_entry_displaces_efficient_domestic_production": true,
+      "q6_technology_jv_superior_to_expansion_or_greenfield": false
     }
   }
 }
