@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import math
 from typing import Any
 
 from .config import sector_profiles_config, thresholds_config
@@ -23,13 +24,13 @@ def publication_allowed(
     known_weight_coverage: float,
     minimum_known_weight_coverage: float,
     unresolved_hard_gates: list[str],
-    has_known_state_three: bool,
+    has_known_hard_gate_failure: bool,
 ) -> bool:
     return (
         d_star is not None
         and known_weight_coverage >= minimum_known_weight_coverage
         and not unresolved_hard_gates
-        and not has_known_state_three
+        and not has_known_hard_gate_failure
     )
 
 
@@ -46,25 +47,38 @@ def route_band(distance: float, bands: dict[str, float]) -> dict[str, Any]:
 def evaluate_capability(
     sector_profile: str,
     states: dict[str, int | str],
-    hard_gates: list[str] | dict[str, str],
+    hard_gates: list[str] | dict[str, Any],
+    decision_specific_hard_gates: list[str] | None = None,
 ) -> dict[str, Any]:
     profiles = sector_profiles_config()["profiles"]
     if sector_profile not in profiles:
         raise ValueError(f"Unknown sector profile: {sector_profile}")
     profile = profiles[sector_profile]
     weights: dict[str, float] = profile["weights"]
+    if (
+        len(weights) != 9
+        or not math.isclose(
+            math.fsum(float(value) for value in weights.values()),
+            1.0,
+            rel_tol=0,
+            abs_tol=1e-12,
+        )
+    ):
+        raise ValueError(
+            f"Invalid sector profile weights: {sector_profile}"
+        )
     capability_cfg = thresholds_config()["capability"]
     lambda_unknown = float(capability_cfg["unknown_penalty_lambda"])
     kmin = float(capability_cfg["minimum_known_weight_coverage"])
 
-    known_weight = 0.0
+    known_weights: list[float] = []
     weighted_distance_numerator = 0.0
     dimensions: list[dict[str, Any]] = []
     for dimension, weight in weights.items():
         state = states.get(dimension, "U")
         known = isinstance(state, int) and 0 <= state <= 3
         if known:
-            known_weight += weight
+            known_weights.append(float(weight))
             weighted_distance_numerator += weight * (state / 3)
         dimensions.append(
             {
@@ -75,6 +89,7 @@ def evaluate_capability(
             }
         )
 
+    known_weight = math.fsum(known_weights)
     unknown_weight = max(0.0, 1.0 - known_weight)
     d_known = (
         weighted_distance_numerator / known_weight if known_weight > 0 else None
@@ -85,28 +100,71 @@ def evaluate_capability(
         else None
     )
 
+    expected_profile_gates = list(profile["hard_gates"])
+    unresolved_profile: list[str] = []
+    known_failures: list[str] = []
+    profile_gate_status: dict[str, str] = {}
     if isinstance(hard_gates, dict):
+        extras = sorted(set(hard_gates) - set(expected_profile_gates))
+        if extras:
+            raise ValueError(
+                "Unknown configured profile hard gate(s): "
+                + ", ".join(extras)
+            )
         resolved_prefixes = (
             "resolved",
             "not applicable",
             "not_applicable",
         )
-        unresolved = [
-            name
-            for name, value in hard_gates.items()
-            if not str(value).casefold().startswith(
+        for name in expected_profile_gates:
+            value = hard_gates.get(name)
+            if isinstance(value, dict):
+                status = value.get("status")
+                if status == "RESOLVED":
+                    profile_gate_status[name] = "RESOLVED"
+                elif status == "KNOWN_FAILURE":
+                    profile_gate_status[name] = "KNOWN_FAILURE"
+                    known_failures.append(name)
+                else:
+                    profile_gate_status[name] = "UNAVAILABLE"
+                    unresolved_profile.append(name)
+            elif value is not None and str(value).casefold().startswith(
                 resolved_prefixes
-            )
-        ]
+            ):
+                profile_gate_status[name] = "RESOLVED"
+            elif (
+                value is not None
+                and str(value).casefold().startswith("known_failure")
+            ):
+                profile_gate_status[name] = "KNOWN_FAILURE"
+                known_failures.append(name)
+            else:
+                profile_gate_status[name] = "UNAVAILABLE"
+                unresolved_profile.append(name)
+        unresolved_decision = list(
+            decision_specific_hard_gates or []
+        )
     else:
-        unresolved = list(hard_gates)
+        profile_gate_status = {
+            name: "UNAVAILABLE"
+            for name in expected_profile_gates
+        }
+        unresolved_profile = list(expected_profile_gates)
+        unresolved_decision = [
+            *hard_gates,
+            *(decision_specific_hard_gates or []),
+        ]
+    unresolved = [
+        *unresolved_profile,
+        *unresolved_decision,
+    ]
 
     route_publishable = publication_allowed(
         d_star,
         known_weight,
         kmin,
         unresolved,
-        any(row["state"] == 3 for row in dimensions if row["known"]),
+        bool(known_failures),
     )
     band = route_band(d_star, capability_cfg["route_bands"]) if route_publishable else None
 
@@ -122,6 +180,10 @@ def evaluate_capability(
         "internal_d_star_before_gate": round(d_star, 4) if d_star is not None else None,
         "minimum_known_coverage": kmin,
         "unresolved_hard_gates": unresolved,
+        "unresolved_profile_hard_gates": unresolved_profile,
+        "unresolved_decision_specific_hard_gates": unresolved_decision,
+        "known_hard_gate_failures": known_failures,
+        "profile_hard_gates": profile_gate_status,
         "route_publishable": route_publishable,
         "route_band": band,
         "control_message": (

@@ -8,6 +8,7 @@ from .evidence import (
     EvidenceIntegrityError,
     synthetic_display_labels,
 )
+from .evidence_needs import derive_evidence_needs
 from .public_snapshot import has_known_hard_gate_failure
 from .trade_metrics import (
     UNAVAILABLE,
@@ -1051,10 +1052,10 @@ def _evaluate_rules_v2(case: dict[str, Any]) -> list[dict[str, Any]]:
             _r11_rule(case, thresholds["R11"]),
         ]
     )
-    missing_facts = case["public_decision_contract"].get(
-        "missing_facts",
-        [],
-    )
+    evidence_needs = derive_evidence_needs(case, results)
+    missing_facts = [
+        need["text"] for need in evidence_needs
+    ]
     results.append(
         _rule(
             "R12",
@@ -1066,7 +1067,10 @@ def _evaluate_rules_v2(case: dict[str, Any]) -> list[dict[str, Any]]:
                 "Prioritise the smallest evidence request with a plausible "
                 "route effect; quantify EVSI when cost and value inputs exist."
             ),
-            {"named_missing_facts": missing_facts},
+            {
+                "named_missing_facts": missing_facts,
+                "evidence_needs": evidence_needs,
+            },
         )
     )
     return results

@@ -6,11 +6,12 @@ from datetime import date
 from pathlib import Path, PurePosixPath
 from typing import Any
 
-from .config import PROJECT_ROOT
+from .config import PROJECT_ROOT, sector_profiles_config
 from .evidence import EvidenceIntegrityError
+from .public_decision import SUPPORT_CODES
 
 
-PUBLIC_SNAPSHOT_SCHEMA_VERSION = "2.0.0"
+PUBLIC_SNAPSHOT_SCHEMA_VERSION = "2.1.0"
 UNAVAILABLE = "UNAVAILABLE"
 HISTORICAL_V1_DIRECTORY = PurePosixPath(
     "data/snapshots/public/historical/v1"
@@ -30,6 +31,27 @@ _FORBIDDEN_RULE_KEYS = frozenset(
         "decision_effect",
     }
 )
+_FORBIDDEN_DECISION_KEYS = frozenset(
+    {
+        "public_decision_contract",
+        "screening_disposition",
+        "gap_class",
+        "narrative",
+        "localized_narrative",
+        "narrative_version",
+        "missing_facts",
+        "conditions",
+        "kill_conditions",
+        "route_hypotheses",
+        "preferred_hypothesis",
+        "rejection_conditions",
+    }
+)
+_ROOT_DECISION_KEYS = _FORBIDDEN_DECISION_KEYS | {
+    "state",
+    "route_code",
+    "route_label",
+}
 _EVIDENCE_CLASSES = frozenset({"A", "B", "C", "D", "E"})
 _EVIDENCE_STATUSES = frozenset(
     {
@@ -86,7 +108,7 @@ def _exact_keys(
     return mapping
 
 
-def _reject_authored_rule_outcomes(value: Any, field: str = "snapshot") -> None:
+def _reject_authored_outcomes(value: Any, field: str = "snapshot") -> None:
     if isinstance(value, dict):
         for key, nested in value.items():
             if key in _FORBIDDEN_RULE_KEYS:
@@ -94,10 +116,15 @@ def _reject_authored_rule_outcomes(value: Any, field: str = "snapshot") -> None:
                     f"{field}.{key}",
                     "authored rule outcome keys are forbidden",
                 )
-            _reject_authored_rule_outcomes(nested, f"{field}.{key}")
+            if key in _FORBIDDEN_DECISION_KEYS:
+                _fail(
+                    f"{field}.{key}",
+                    "authored decision outcome keys are forbidden",
+                )
+            _reject_authored_outcomes(nested, f"{field}.{key}")
     elif isinstance(value, list):
         for index, nested in enumerate(value):
-            _reject_authored_rule_outcomes(
+            _reject_authored_outcomes(
                 nested,
                 f"{field}[{index}]",
             )
@@ -244,11 +271,20 @@ def _evidence_passports(
             _fail(f"{field}.evidence_class", "must be A, B, C, D, or E")
         if passport["synthetic_flag"] is not False:
             _fail(f"{field}.synthetic_flag", "must be false")
-        _string_list(
+        supports = _string_list(
             passport["supports"],
             f"{field}.supports",
             nonempty=True,
         )
+        if len(supports) != len(set(supports)):
+            _fail(f"{field}.supports", "contains a duplicate support code")
+        unknown_supports = sorted(set(supports) - SUPPORT_CODES)
+        if unknown_supports:
+            _fail(
+                f"{field}.supports",
+                "contains unknown controlled support code(s): "
+                + ", ".join(unknown_supports),
+            )
         _nonempty_string(
             passport["transformation"],
             f"{field}.transformation",
@@ -877,6 +913,7 @@ def _validate_criticality(
 def _validate_capability(
     value: Any,
     evidence_by_id: dict[str, dict[str, Any]],
+    sector_profile: str,
 ) -> dict[str, Any]:
     capability = _exact_keys(
         value,
@@ -887,6 +924,7 @@ def _validate_capability(
             "coarse_adjacency_signals",
             "producer_evidence",
             "public_dimension_states",
+            "profile_hard_gates",
             "unresolved_hard_gates",
         },
     )
@@ -1053,6 +1091,79 @@ def _validate_capability(
                 "must be 0, 1, 2, 3, or U",
             )
 
+    profiles = sector_profiles_config().get("profiles")
+    if (
+        not isinstance(profiles, dict)
+        or sector_profile not in profiles
+        or not isinstance(profiles[sector_profile], dict)
+    ):
+        _fail(
+            "opportunity.sector_profile",
+            f"unknown sector profile {sector_profile}",
+        )
+    expected_dimensions = set(
+        profiles[sector_profile].get("weights", {})
+    )
+    if set(states) != expected_dimensions:
+        _fail(
+            "domestic_capability.public_dimension_states",
+            "must exactly match the selected profile dimensions",
+        )
+    expected_profile_gates = list(
+        profiles[sector_profile].get("hard_gates", [])
+    )
+    profile_gates = _mapping(
+        capability["profile_hard_gates"],
+        "domestic_capability.profile_hard_gates",
+    )
+    if set(profile_gates) != set(expected_profile_gates):
+        _fail(
+            "domestic_capability.profile_hard_gates",
+            "must exactly match the selected profile hard gate set",
+        )
+    for name in expected_profile_gates:
+        field = f"domestic_capability.profile_hard_gates.{name}"
+        gate = _exact_keys(
+            profile_gates[name],
+            field,
+            required={"status", "evidence_ids"},
+        )
+        status = gate["status"]
+        if status not in {
+            "RESOLVED",
+            "UNAVAILABLE",
+            "KNOWN_FAILURE",
+        }:
+            _fail(
+                f"{field}.status",
+                "must be RESOLVED, UNAVAILABLE, or KNOWN_FAILURE",
+            )
+        references = _evidence_references(
+            gate["evidence_ids"],
+            f"{field}.evidence_ids",
+            evidence_ids,
+        )
+        if status == "UNAVAILABLE" and references:
+            _fail(
+                f"{field}.evidence_ids",
+                "must be empty when status is UNAVAILABLE",
+            )
+        if status in {"RESOLVED", "KNOWN_FAILURE"}:
+            if not references:
+                _fail(
+                    f"{field}.evidence_ids",
+                    f"must not be empty when status is {status}",
+                )
+            if any(
+                evidence_by_id[evidence_id]["evidence_class"]
+                not in {"A", "B", "C"}
+                for evidence_id in references
+            ):
+                _fail(
+                    f"{field}.evidence_ids",
+                    "must resolve to Class A, B, or C evidence",
+                )
+
     gates = capability["unresolved_hard_gates"]
     if not isinstance(gates, list):
         _fail(
@@ -1065,7 +1176,7 @@ def _validate_capability(
         gate = _exact_keys(
             item,
             field,
-            required={"name", "state"},
+            required={"name", "state", "evidence_ids"},
         )
         name = _nonempty_string(gate["name"], f"{field}.name")
         if name in names:
@@ -1076,42 +1187,476 @@ def _validate_capability(
                 f"{field}.state",
                 "must be unresolved or known_failure",
             )
+        references = _evidence_references(
+            gate["evidence_ids"],
+            f"{field}.evidence_ids",
+            evidence_ids,
+        )
+        if gate["state"] == "known_failure":
+            if not references:
+                _fail(
+                    f"{field}.evidence_ids",
+                    "known_failure requires evidence",
+                )
+            if any(
+                evidence_by_id[evidence_id]["evidence_class"]
+                not in {"A", "B", "C"}
+                for evidence_id in references
+            ):
+                _fail(
+                    f"{field}.evidence_ids",
+                    "known_failure requires Class A, B, or C evidence",
+                )
     return capability
 
 
-def _validate_public_decision_contract(value: Any) -> None:
-    contract = _exact_keys(
+def _boolean_or_unavailable(value: Any, field: str) -> None:
+    if value != UNAVAILABLE and not isinstance(value, bool):
+        _fail(field, f"must be boolean or {UNAVAILABLE}")
+
+
+def _validate_hard_exclusion_inputs(
+    value: Any,
+    evidence_ids: set[str],
+) -> None:
+    blocks = _exact_keys(
         value,
-        "public_decision_contract",
+        "hard_exclusion_inputs",
         required={
-            "expected_state",
-            "route_restriction",
-            "missing_facts",
-            "kill_conditions",
+            "heterogeneous_residual_code",
+            "downside_market_below_mes",
+            "unsatisfiable_hard_gate",
+            "idle_equivalent_domestic_capacity",
+            "transitory_or_measurement_gap",
+            "redundancy_or_crowd_out",
         },
     )
-    if contract["expected_state"] not in {
-        "REJECT",
-        "MONITOR",
-        "INVESTIGATE",
-        "ADVANCE",
+
+    def block(
+        name: str,
+        fields: set[str],
+    ) -> dict[str, Any]:
+        item = _exact_keys(
+            blocks[name],
+            f"hard_exclusion_inputs.{name}",
+            required={*fields, "evidence_ids"},
+        )
+        _evidence_references(
+            item["evidence_ids"],
+            f"hard_exclusion_inputs.{name}.evidence_ids",
+            evidence_ids,
+        )
+        return item
+
+    heterogeneous = block(
+        "heterogeneous_residual_code",
+        {
+            "commercial_product_separable",
+            "product_level_evidence_available",
+        },
+    )
+    for key in (
+        "commercial_product_separable",
+        "product_level_evidence_available",
+    ):
+        _boolean_or_unavailable(
+            heterogeneous[key],
+            f"hard_exclusion_inputs.heterogeneous_residual_code.{key}",
+        )
+
+    market = block(
+        "downside_market_below_mes",
+        {
+            "sustainable_downside_demand_kt",
+            "minimum_efficient_scale_kt",
+            "credible_export_contract",
+        },
+    )
+    for key in (
+        "sustainable_downside_demand_kt",
+        "minimum_efficient_scale_kt",
+    ):
+        _number(
+            market[key],
+            f"hard_exclusion_inputs.downside_market_below_mes.{key}",
+            minimum=0,
+            unavailable=True,
+        )
+    _boolean_or_unavailable(
+        market["credible_export_contract"],
+        (
+            "hard_exclusion_inputs.downside_market_below_mes."
+            "credible_export_contract"
+        ),
+    )
+
+    gate = block(
+        "unsatisfiable_hard_gate",
+        {"gate_domain", "gate_satisfiability"},
+    )
+    if gate["gate_domain"] not in {
+        "legal",
+        "safety",
+        "environmental",
+        "ip",
+        "customer_qualification",
+        UNAVAILABLE,
     }:
         _fail(
-            "public_decision_contract.expected_state",
-            "must be a decision state",
+            "hard_exclusion_inputs.unsatisfiable_hard_gate.gate_domain",
+            "is not an allowed gate_domain",
         )
-    _nonempty_string(
-        contract["route_restriction"],
-        "public_decision_contract.route_restriction",
+    if gate["gate_satisfiability"] not in {
+        "SATISFIABLE",
+        "UNSATISFIABLE",
+        UNAVAILABLE,
+    }:
+        _fail(
+            (
+                "hard_exclusion_inputs.unsatisfiable_hard_gate."
+                "gate_satisfiability"
+            ),
+            "is not an allowed gate_satisfiability",
+        )
+
+    idle = block(
+        "idle_equivalent_domestic_capacity",
+        {
+            "domestic_specification_equivalent",
+            "qualified_idle_capacity_kt",
+            "target_specification_demand_kt",
+            "binding_market_failure",
+        },
     )
-    _string_list(
-        contract["missing_facts"],
-        "public_decision_contract.missing_facts",
+    for key in (
+        "domestic_specification_equivalent",
+        "binding_market_failure",
+    ):
+        _boolean_or_unavailable(
+            idle[key],
+            (
+                "hard_exclusion_inputs.idle_equivalent_domestic_capacity."
+                f"{key}"
+            ),
+        )
+    for key in (
+        "qualified_idle_capacity_kt",
+        "target_specification_demand_kt",
+    ):
+        _number(
+            idle[key],
+            (
+                "hard_exclusion_inputs.idle_equivalent_domestic_capacity."
+                f"{key}"
+            ),
+            minimum=0,
+            unavailable=True,
+        )
+
+    transitory = block(
+        "transitory_or_measurement_gap",
+        {"dominant_cause"},
     )
-    _string_list(
-        contract["kill_conditions"],
-        "public_decision_contract.kill_conditions",
+    if transitory["dominant_cause"] not in {
+        "REEXPORT",
+        "ONE_OFF_PROJECT",
+        "TEMPORARY_PRICE_ARBITRAGE",
+        "CLASSIFICATION_DISCONTINUITY",
+        "OTHER",
+        UNAVAILABLE,
+    }:
+        _fail(
+            (
+                "hard_exclusion_inputs.transitory_or_measurement_gap."
+                "dominant_cause"
+            ),
+            "is not an allowed dominant_cause",
+        )
+
+    competition = block(
+        "redundancy_or_crowd_out",
+        {"competition_finding"},
     )
+    if competition["competition_finding"] not in {
+        "ACCEPTABLE",
+        "UNACCEPTABLE_REDUNDANT_CAPACITY",
+        "UNACCEPTABLE_CROWD_OUT",
+        UNAVAILABLE,
+    }:
+        _fail(
+            (
+                "hard_exclusion_inputs.redundancy_or_crowd_out."
+                "competition_finding"
+            ),
+            "is not an allowed competition_finding",
+        )
+
+
+def _validate_decision_inputs(
+    value: Any,
+    evidence_by_id: dict[str, dict[str, Any]],
+) -> None:
+    evidence_ids = set(evidence_by_id)
+    inputs = _exact_keys(
+        value,
+        "decision_inputs",
+        required={
+            "target_specification_demand",
+            "specification_equivalence",
+            "route_evidence",
+            "monitor_trigger",
+        },
+    )
+    target = inputs["target_specification_demand"]
+    if target != UNAVAILABLE:
+        item = _exact_keys(
+            target,
+            "decision_inputs.target_specification_demand",
+            required={
+                "quantity_kt",
+                "downside_quantity_kt",
+                "evidence_ids",
+            },
+        )
+        for key in ("quantity_kt", "downside_quantity_kt"):
+            _number(
+                item[key],
+                f"decision_inputs.target_specification_demand.{key}",
+                minimum=0,
+            )
+        _evidence_references(
+            item["evidence_ids"],
+            "decision_inputs.target_specification_demand.evidence_ids",
+            evidence_ids,
+            nonempty=True,
+        )
+
+    equivalence = inputs["specification_equivalence"]
+    if equivalence != UNAVAILABLE:
+        item = _exact_keys(
+            equivalence,
+            "decision_inputs.specification_equivalence",
+            required={
+                "domestic_product_equivalent",
+                "qualified_available_kt",
+                "evidence_ids",
+            },
+        )
+        if not isinstance(item["domestic_product_equivalent"], bool):
+            _fail(
+                (
+                    "decision_inputs.specification_equivalence."
+                    "domestic_product_equivalent"
+                ),
+                "must be boolean",
+            )
+        _number(
+            item["qualified_available_kt"],
+            (
+                "decision_inputs.specification_equivalence."
+                "qualified_available_kt"
+            ),
+            minimum=0,
+        )
+        _evidence_references(
+            item["evidence_ids"],
+            "decision_inputs.specification_equivalence.evidence_ids",
+            evidence_ids,
+            nonempty=True,
+        )
+
+    route_evidence = inputs["route_evidence"]
+    if route_evidence != UNAVAILABLE:
+        if not isinstance(route_evidence, list) or not route_evidence:
+            _fail(
+                "decision_inputs.route_evidence",
+                f"must be {UNAVAILABLE} or a non-empty list",
+            )
+        route_codes: set[int] = set()
+        allowed_constraints = {
+            "specification_or_grade",
+            "capacity_or_availability",
+            "cost_or_competitiveness",
+            "capability_or_technology",
+            "qualification_or_certification",
+            "commercial_or_relationship",
+            "administrative_or_regulatory",
+            "information_or_market_linkage",
+            "demand_fragmentation_or_offtake",
+        }
+        required = {
+            "route_code",
+            "binding_constraint",
+            "technical_feasibility_confirmed",
+            "binding_constraint_fully_removed",
+            "investment_already_approved_or_financed",
+            "proceeds_without_intervention",
+            "policy_prohibition_identified",
+            "distortion_unacceptable",
+            "intervention_proportionate_to_constraint",
+            "downside_cash_flows_m_sar",
+            "hurdle_rate",
+            "national_value",
+            "competition",
+            "evidence_ids",
+        }
+        for index, route_value in enumerate(route_evidence):
+            field = f"decision_inputs.route_evidence[{index}]"
+            route = _exact_keys(
+                route_value,
+                field,
+                required=required,
+            )
+            route_code = _integer(
+                route["route_code"],
+                f"{field}.route_code",
+                minimum=1,
+            )
+            if route_code > 7 or route_code in route_codes:
+                _fail(
+                    f"{field}.route_code",
+                    "must be a unique route code from 1 through 7",
+                )
+            route_codes.add(route_code)
+            if route["binding_constraint"] not in allowed_constraints:
+                _fail(
+                    f"{field}.binding_constraint",
+                    "is not an allowed binding_constraint",
+                )
+            for key in (
+                "technical_feasibility_confirmed",
+                "binding_constraint_fully_removed",
+                "investment_already_approved_or_financed",
+                "proceeds_without_intervention",
+                "policy_prohibition_identified",
+                "distortion_unacceptable",
+                "intervention_proportionate_to_constraint",
+            ):
+                _boolean_or_unavailable(
+                    route[key],
+                    f"{field}.{key}",
+                )
+            flows = route["downside_cash_flows_m_sar"]
+            if not isinstance(flows, list) or not flows:
+                _fail(
+                    f"{field}.downside_cash_flows_m_sar",
+                    "must be a non-empty list",
+                )
+            for flow_index, flow in enumerate(flows):
+                _number(
+                    flow,
+                    (
+                        f"{field}.downside_cash_flows_m_sar"
+                        f"[{flow_index}]"
+                    ),
+                )
+            _number(
+                route["hurdle_rate"],
+                f"{field}.hurdle_rate",
+                minimum=0,
+            )
+            national_value = _exact_keys(
+                route["national_value"],
+                f"{field}.national_value",
+                required={
+                    "domestic_value_added",
+                    "exports",
+                    "resilience_value",
+                    "knowledge_skills",
+                    "fiscal_receipts",
+                    "government_cost",
+                    "displacement",
+                    "resource_environment",
+                    "risk_allowance",
+                },
+            )
+            for key, amount in national_value.items():
+                _number(amount, f"{field}.national_value.{key}")
+            competition = _exact_keys(
+                route["competition"],
+                f"{field}.competition",
+                required={
+                    "existing_effective_capacity_kt",
+                    "proposed_incremental_capacity_kt",
+                    "downside_demand_kt",
+                },
+            )
+            for key, amount in competition.items():
+                _number(
+                    amount,
+                    f"{field}.competition.{key}",
+                    minimum=0,
+                    positive=key == "downside_demand_kt",
+                )
+            references = _evidence_references(
+                route["evidence_ids"],
+                f"{field}.evidence_ids",
+                evidence_ids,
+                nonempty=True,
+            )
+            if any(
+                evidence_by_id[evidence_id]["evidence_class"]
+                not in {"A", "B", "C"}
+                for evidence_id in references
+            ):
+                _fail(
+                    f"{field}.evidence_ids",
+                    "public route evidence must be Class A, B, or C",
+                )
+            route_supports = {
+                support
+                for evidence_id in references
+                for support in evidence_by_id[evidence_id]["supports"]
+            }
+            required_supports = {
+                "ROUTE_ECONOMICS",
+                "ROUTE_NATIONAL_VALUE",
+                "ROUTE_COMPETITION",
+            }
+            if not required_supports <= route_supports:
+                _fail(
+                    f"{field}.evidence_ids",
+                    "public route evidence must cover economics, "
+                    "national value, and competition",
+                )
+
+    trigger = inputs["monitor_trigger"]
+    if trigger != UNAVAILABLE:
+        item = _exact_keys(
+            trigger,
+            "decision_inputs.monitor_trigger",
+            required={"domain", "condition_code", "evidence_ids"},
+        )
+        if item["domain"] not in {
+            "demand",
+            "regulation",
+            "technology",
+            "supplier_concentration",
+            "capacity_state",
+        }:
+            _fail(
+                "decision_inputs.monitor_trigger.domain",
+                "is not an allowed monitor domain",
+            )
+        _nonempty_string(
+            item["condition_code"],
+            "decision_inputs.monitor_trigger.condition_code",
+        )
+        references = _evidence_references(
+            item["evidence_ids"],
+            "decision_inputs.monitor_trigger.evidence_ids",
+            evidence_ids,
+            nonempty=True,
+        )
+        if any(
+            "MONITOR_TRIGGER"
+            not in evidence_by_id[evidence_id]["supports"]
+            for evidence_id in references
+        ):
+            _fail(
+                "decision_inputs.monitor_trigger.evidence_ids",
+                "must resolve to evidence supporting MONITOR_TRIGGER",
+            )
 
 
 def _validate_supersedes(
@@ -1122,6 +1667,8 @@ def _validate_supersedes(
     root: Path,
 ) -> None:
     raw = _nonempty_string(record["supersedes"], "supersedes")
+    if raw == UNAVAILABLE:
+        return
     if "\\" in raw:
         _fail("supersedes", "must be a relative POSIX path")
     relative = PurePosixPath(raw)
@@ -1179,14 +1726,20 @@ def validate_public_snapshot(
     path: Path | None = None,
     root: Path = PROJECT_ROOT,
 ) -> None:
-    """Validate one live PublicSnapshot v2 without mutating or coercing it."""
+    """Validate one live PublicSnapshot 2.1 without mutating or coercing it."""
     _mapping(record, "snapshot")
     if record.get("schema_version") != PUBLIC_SNAPSHOT_SCHEMA_VERSION:
         _fail(
             "schema_version",
             f"must equal {PUBLIC_SNAPSHOT_SCHEMA_VERSION}",
         )
-    _reject_authored_rule_outcomes(record)
+    root_outcomes = sorted(set(record) & _ROOT_DECISION_KEYS)
+    if root_outcomes:
+        _fail(
+            f"snapshot.{root_outcomes[0]}",
+            "authored decision outcome keys are forbidden",
+        )
+    _reject_authored_outcomes(record)
     snapshot = _exact_keys(
         record,
         "snapshot",
@@ -1203,7 +1756,8 @@ def validate_public_snapshot(
             "domestic_flows",
             "criticality_designation",
             "domestic_capability",
-            "public_decision_contract",
+            "hard_exclusion_inputs",
+            "decision_inputs",
             "evidence",
         },
         optional={
@@ -1252,9 +1806,15 @@ def validate_public_snapshot(
     _validate_capability(
         snapshot["domestic_capability"],
         evidence_by_id,
+        opportunity["sector_profile"],
     )
-    _validate_public_decision_contract(
-        snapshot["public_decision_contract"]
+    _validate_hard_exclusion_inputs(
+        snapshot["hard_exclusion_inputs"],
+        evidence_ids,
+    )
+    _validate_decision_inputs(
+        snapshot["decision_inputs"],
+        evidence_by_id,
     )
     _validate_supersedes(
         snapshot,
@@ -1304,7 +1864,18 @@ def has_known_hard_gate_failure(
         raise PublicSnapshotIntegrityError(
             "domestic_capability.unresolved_hard_gates: must be a list"
         )
-    return any(
+    decision_failure = any(
         isinstance(item, dict) and item.get("state") == "known_failure"
         for item in gates
     )
+    profile_gates = capability.get("profile_hard_gates")
+    profile_failure = (
+        any(
+            isinstance(item, dict)
+            and item.get("status") == "KNOWN_FAILURE"
+            for item in profile_gates.values()
+        )
+        if isinstance(profile_gates, dict)
+        else False
+    )
+    return decision_failure or profile_failure

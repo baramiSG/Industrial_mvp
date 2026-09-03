@@ -2,6 +2,31 @@
 
 ## Unreleased
 
+- Generalized the public selector over PublicSnapshot 2.1.0: four
+  evidence-class assessments, a configured source-independent ADVANCE gate,
+  six typed hard exclusions, one-primary gap taxonomy, evidenced rejection
+  conditions, MONITOR with a named trigger, and fail-closed state selection.
+- Added ordered route hypotheses 0–8 with lower-route precedence,
+  maximum-unrounded-national-value selection, lower-code tie resolution,
+  financial-support sequencing, evidence-priority hypotheses, and route 8
+  `GRAPH_REQUIRED`.
+- Expanded sector profiles to all five methodology §6.3 profiles in
+  `sector_profiles.v1.yaml` 1.1.0 with complete hard-gate and boundary tests.
+- Removed `public_decision_contract` from the two live snapshots without
+  changing IDs, dates or facts; normalized controlled passport support codes
+  while retaining byte-identical historical-v1 files.
+- Added governed `decision_narratives.v1.yaml` 1.0.0, predicate-selected
+  evidence needs, bilingual structured public narratives, localized GenUI and
+  dossier rendering, and preserved scenario-authored simulation narratives.
+- Preserved the steel public `INVESTIGATE`/preferred route-5 hypothesis,
+  polypropylene public `REJECT` route 0, and every packaged simulation state,
+  route and exact numeric output.
+- Correction round (2026-09-03): signals module and ADVANCE support guard,
+  typed rejection narratives, route-determination INVESTIGATE with mocked-loader
+  proof, MONITOR route-0 consistency, fired-rule confidence cap, 16 catalogue
+  keys (94→110), second justified generator run, and fifth canonical visual
+  execution under `S09-generalized-public-decision-corrections` with zero WebP
+  drift.
 - Added validated PublicSnapshot schema 2.0.0 with byte-identical schema-v1
   history, explicit unknowns, complete evidence passports, and no authored
   rule outcomes.

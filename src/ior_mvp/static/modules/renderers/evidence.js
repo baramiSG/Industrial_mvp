@@ -1,11 +1,13 @@
 import {
   escapeHtml,
+  narrativeEntry,
   sourceCaption,
   sourceIsland,
   syntheticLabels,
   technical,
 } from "../dom.js";
 import { t } from "../i18n.js";
+import { state } from "../state.js";
 
 export function renderEvidenceLedger(props) {
   const rows = props.evidence.map((row) => `
@@ -53,6 +55,8 @@ export function renderEvidenceLedger(props) {
 
 export function renderDataUnlocks(props) {
   const synthetic = props.synthetic_inputs_used || [];
+  const localized = props.localized_missing_facts?.[state.locale];
+  const missingFacts = localized || props.missing_facts;
   return `
     <article class="workspace-card">
       <div class="card-header">
@@ -62,10 +66,10 @@ export function renderDataUnlocks(props) {
         </div>
       </div>
       <div class="card-body">
-        ${sourceCaption()}
+        ${localized ? "" : sourceCaption()}
         <ul class="unlock-list">
-          ${props.missing_facts.map(
-            (item, index) => `<li><b>${technical(index + 1)}</b>${sourceIsland(item)}</li>`,
+          ${missingFacts.map(
+            (item, index) => `<li><b>${technical(index + 1)}</b>${localized ? narrativeEntry(item) : sourceIsland(item)}</li>`,
           ).join("")}
         </ul>
         ${synthetic.length

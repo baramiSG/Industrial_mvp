@@ -174,6 +174,51 @@ def test_opportunity_select_loads_each_case(
         assert by_rule[rule_id] == expected
         expect(page.locator("#workspace")).to_contain_text(expected)
 
+    hero = page.locator(".decision-hero")
+    unlocks = page.locator(".unlock-list li")
+    if mode == "public":
+        narrative = payload["active_decision"][
+            "localized_narrative"
+        ][locale.code]
+        for field in ("headline", "route_label", "rationale"):
+            expect(hero).to_contain_text(narrative[field]["text"])
+        for field in ("conditions", "kill_conditions"):
+            for item in narrative[field]:
+                expect(hero).to_contain_text(item["text"])
+        expect(unlocks).to_have_count(5)
+        assert [item.inner_text().split(" ", maxsplit=1)[-1] for item in unlocks.all()]
+        for item in narrative["missing_facts"]:
+            expect(page.locator(".unlock-list")).to_contain_text(
+                item["text"]
+            )
+        assert hero.locator(".source-language-island").count() == 0
+        assert (
+            page.locator(".unlock-list .source-language-island").count()
+            == 0
+        )
+        if case == STEEL and locale == EN:
+            expect(hero).to_contain_text(
+                "Brownfield priority to test"
+            )
+    else:
+        decision = payload["simulation_decision"]
+        assert "localized_narrative" not in decision
+        for field in ("headline", "route_label", "rationale"):
+            expect(hero).to_contain_text(decision[field])
+        for field in ("conditions", "kill_conditions"):
+            for item in decision[field]:
+                expect(hero).to_contain_text(item)
+        finding = payload.get("competition", {}).get("finding")
+        if finding:
+            expect(page.locator("#workspace")).to_contain_text(
+                finding
+            )
+        if locale == AR:
+            assert hero.locator(".source-language-island").count() >= 3
+            expect(hero.locator(".source-language-caption")).to_have_count(
+                1
+            )
+
 
 @pytest.mark.parametrize(
     ("mode", "locale"),

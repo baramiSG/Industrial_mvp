@@ -213,3 +213,79 @@ remain descriptive; steel remains public `INVESTIGATE` and simulated
 The S12 acquisition slice still owns real public production and retained-flow
 inputs, and S09 still owns generalized public decision selection. This ADR and
 local green evidence are implementation evidence, not approval.
+
+---
+
+## ADR-013 — Generalized public decision engine and five sector profiles
+
+**Status:** Proposed 2026-09-02; implementation evidence pending independent
+review and delivery.
+
+**Context:** S09 executes owner-approved amended I1 and I5, I6 and I7, and
+rulings R-1 and R-2 (`GAP_ANALYSIS.md` §7/§7A; ADR-010). It removes the
+temporary authored `public_decision_contract` while preserving the two public
+and two simulated frozen outcomes. The governing basis is methodology §§1.2,
+2.1, 4.2, 5.3, 6.3–6.6, 7.1–7.5, 8.2, 9, 12–15; Core 01/02/04/06/07/09; and
+the Supervisor-approved S09 plan and plan review.
+
+**Decision:** PublicSnapshot advances to 2.1.0 in place as a representation
+migration: the frozen snapshot IDs, dates, empirical facts and historical-v1
+bytes remain unchanged. The schema removes `public_decision_contract`, uses
+controlled passport support codes, adds complete typed profile-hard-gate,
+hard-exclusion and decision-input blocks, and rejects authored decision
+outputs. The public engine computes four evidence-class assessments, executes
+evidence-policy 1.3.0, all six typed exclusions, one primary §5.3 gap class,
+typed rejection conditions, and the total amended-I1 state table. Missing
+exclusion inputs remain `NOT_CALCULABLE` and never pass or reject.
+
+Routes 0–8 are emitted as ordered hypotheses. A fully resolving lower route
+blocks escalation; otherwise selection uses greatest unrounded incremental
+national value with an exact tie resolved to the lower code. Financial
+support follows unsupported and applicable non-financial routes. Route 8 is
+always `NOT_CALCULABLE` / `GRAPH_REQUIRED` until S16 supplies the governed
+Neo4j projection. Where economics are absent, the engine may emit an
+evidence-grounded preferred hypothesis without selecting a formal route.
+
+Evidence needs are selected by controlled need code and evidence-state
+predicate, never by case, producer or profile identity. Public decision text
+is rendered from `decision_narratives.v1.yaml` 1.0.0 with exact English/Arabic
+key and placeholder parity and structured escaping boundaries. The Arabic
+decision narratives are Supervisor-approved, owner-amendable defaults under
+the S09 plan review. They are not represented as owner-approved or as official
+Ministry wording. Scenario-specific simulation narratives remain exclusively
+in each scenario's `decision_narrative`; `_simulate` state, route and numeric
+semantics are unchanged.
+
+`sector_profiles.v1.yaml` advances to 1.1.0 with the methodology §6.3
+pharma/API, fertilizers and fabricated-aluminium profiles. Every profile has
+the same nine dimensions, weights summing to 1.0 and its complete frozen
+hard-gate set. A non-hard-gate dimension at state 3 contributes to D* but does
+not itself suppress publication; unresolved or failed configured hard gates
+do.
+
+The governed visual baseline reference is
+`S09-generalized-public-decision`. After all governed hand edits, 118
+functional browser nodes, four visual nodes and the complete pre-generation
+browser-independent regression passed, the Implementer ran
+`scripts/build_manifests.py` exactly once. The snapshot manifest changed only
+the two live public rows. The authority manifest changed only Core
+01/02/04/07/09, evidence policy, sector profiles, and the new decision
+narrative catalogue row. Historical public snapshots, both synthetic
+scenarios, extraction golden data, thresholds, UI strings, methodology and
+Core 03/05/06/08 remained byte-identical. The complete hashes and byte counts
+are recorded in Authority Manifest §11 and the S09 test evidence.
+
+**Consequences:** Steel remains public `INVESTIGATE`, with null formal route
+and route 5 as the preferred hypothesis; polypropylene remains public
+`REJECT` route 0. The packaged steel simulation remains `ADVANCE` route 5 with
+all frozen calculations unchanged, and the polypropylene simulation remains
+`REJECT` route 0. A synthetic-free test fixture proves that actual A/B/C
+public evidence can reach real `ADVANCE`; it is proof of technical capability,
+not a demonstration evidence artifact or public authorization. Generalized
+simulation, screening-universe dispositions and graph activation remain S10,
+S13 and S16 respectively. This ADR and local evidence are implementation
+evidence, not approval.
+
+### Correction round 2026-09-03
+
+Under approved plan `.autonomous-workflow/plans/s09-public-decision-and-profiles/plan-7.json` (owner-delegated ruling 2026-09-03T05:25Z): added `signals.py` with `may_support_advance` configuration guard; eight-step deep-state order with `ADVANCE_SUPPORT_SIGNAL_DEGRADED` and `ROUTE_DETERMINATION_UNRESOLVED`; typed rejection narratives and 16 reviewer-gated catalogue keys (94→110); route-determination INVESTIGATE including mocked-loader missing-economics proof with unchanged PublicSnapshot validator boundary (KL-36); MONITOR route-0 consistency; fired-rule confidence cap; second justified `build_manifests.py` run; fifth canonical visual execution `S09-generalized-public-decision-corrections` with zero WebP drift.

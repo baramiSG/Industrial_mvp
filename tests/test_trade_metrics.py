@@ -16,7 +16,7 @@ from ior_mvp.trade_metrics import (
 )
 from tests.legacy_snapshot_v1 import (
     LIVE_PUBLIC_ROOT,
-    candidate_v2_from_legacy,
+    candidate_v21_from_legacy,
     load_legacy_snapshot,
 )
 
@@ -195,7 +195,7 @@ def test_disclosed_concentration_is_full_only_when_rows_are_unavailable(
     legacy = load_legacy_snapshot(
         LIVE_PUBLIC_ROOT / "SAU-H0-721049.json"
     )
-    case = candidate_v2_from_legacy(legacy)
+    case = candidate_v21_from_legacy(legacy)
 
     value = concentration_metrics(case, "value")
     quantity = concentration_metrics(case, "quantity")
@@ -218,7 +218,7 @@ def test_disclosed_concentration_preserves_source_precision() -> None:
             / "SAU-H0-721049.json"
         )
     )
-    case = candidate_v2_from_legacy(legacy)
+    case = candidate_v21_from_legacy(legacy)
     case["disclosed_concentration"]["value"]["hhi"] = 0.24995
 
     result = concentration_metrics(case, "value")
@@ -337,7 +337,7 @@ def test_degraded_dispersion_value_coverage_boundary(
 
 
 def test_degraded_dispersion_falls_back_to_source_disclosure() -> None:
-    case = candidate_v2_from_legacy(
+    case = candidate_v21_from_legacy(
         load_legacy_snapshot(
             LIVE_PUBLIC_ROOT / "SAU-H0-721049.json"
         )
@@ -531,7 +531,7 @@ def test_export_import_ratio_missing_input_remains_not_calculable() -> None:
 
 def test_established_nameplate_requires_observed_positive_abc_evidence(
 ) -> None:
-    case = candidate_v2_from_legacy(
+    case = candidate_v21_from_legacy(
         load_legacy_snapshot(
             LIVE_PUBLIC_ROOT / "SAU-H0-390210.json"
         )
@@ -556,7 +556,7 @@ def test_established_nameplate_requires_observed_positive_abc_evidence(
 
 
 def test_supplier_compatibility_projection_preserves_steel_hhi() -> None:
-    case = candidate_v2_from_legacy(
+    case = candidate_v21_from_legacy(
         load_legacy_snapshot(
             LIVE_PUBLIC_ROOT / "SAU-H0-721049.json"
         )
@@ -586,7 +586,7 @@ def test_supplier_compatibility_projection_preserves_steel_hhi() -> None:
 
 def test_supplier_compatibility_projection_is_null_without_concentration(
 ) -> None:
-    case = candidate_v2_from_legacy(
+    case = candidate_v21_from_legacy(
         load_legacy_snapshot(
             LIVE_PUBLIC_ROOT / "SAU-H0-390210.json"
         )

@@ -306,3 +306,10 @@ Populated by S14, S15 and S16 as routes are truthfully demonstrated; audited in 
 | 6 | Technology licensing, specialist line or joint venture | — | — | — | — | — | — | NOT DEMONSTRATED |
 | 7 | Targeted greenfield entry | — | — | — | — | — | — | NOT DEMONSTRATED |
 | 8 | Shared enabling infrastructure serving several opportunities | — (requires S16 real graph; `GRAPH_REQUIRED` until then) | — | — | — | — | — | NOT DEMONSTRATED |
+
+**S09 local-candidate note (implementation evidence, not route-matrix
+approval):** Route 0 is re-proven by computed public selection for the frozen
+polypropylene case. The frozen steel public case remains `INVESTIGATE` with
+null `route_code`; route 5 is only its evidence-priority hypothesis and is not
+a newly demonstrated public route. Routes 1–7 await governed deep cases in
+S14/S15, and route 8 remains `NOT_CALCULABLE` / `GRAPH_REQUIRED` until S16.

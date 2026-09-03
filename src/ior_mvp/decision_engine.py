@@ -27,6 +27,7 @@ from .evidence import (
 )
 from .rules import evaluate_rules, evaluate_simulated_rules
 from .public_snapshot import capability_hard_gate_names
+from .public_decision import compute_public_decision
 from .trade_metrics import build_supplier_metrics
 
 
@@ -37,36 +38,6 @@ def _latest_trade(case: dict[str, Any]) -> dict[str, Any]:
     return max(case["trade"], key=lambda row: row["year"])
 
 
-def _public_decision(case: dict[str, Any], rules: list[dict[str, Any]]) -> dict[str, Any]:
-    contract = case["public_decision_contract"]
-    r11 = next(row for row in rules if row["rule_id"] == "R11")
-    if r11["fired"]:
-        return {
-            "state": "REJECT",
-            "route_code": 0,
-            "route_label": "No intervention for generic capacity",
-            "headline": "REJECT — generic capacity support",
-            "rationale": contract["route_restriction"],
-            "confidence": "C",
-            "missing_facts": contract["missing_facts"],
-            "conditions": ["Only a named specialty grade/application exception may re-enter INVESTIGATE."],
-            "kill_conditions": contract["kill_conditions"],
-            "synthetic_flag": False,
-        }
-    return {
-        "state": "INVESTIGATE",
-        "route_code": None,
-        "route_label": "Brownfield priority to test",
-        "headline": "INVESTIGATE — binding constraint unresolved",
-        "rationale": contract["route_restriction"],
-        "confidence": "C",
-        "missing_facts": contract["missing_facts"],
-        "conditions": ["No greenfield or financial support recommendation before effective capacity and target specification are resolved."],
-        "kill_conditions": contract["kill_conditions"],
-        "synthetic_flag": False,
-    }
-
-
 def analyze_public(opportunity_id: str) -> dict[str, Any]:
     case = isolated_copy(get_public_case(opportunity_id))
     validate_public_evidence(case["evidence"])
@@ -74,9 +45,10 @@ def analyze_public(opportunity_id: str) -> dict[str, Any]:
     capability = evaluate_capability(
         case["opportunity"]["sector_profile"],
         case["domestic_capability"]["public_dimension_states"],
+        case["domestic_capability"]["profile_hard_gates"],
         capability_hard_gate_names(case["domestic_capability"]),
     )
-    decision = _public_decision(case, rules)
+    decision = compute_public_decision(case, rules, capability)
     latest = _latest_trade(case)
     r3 = next(row for row in rules if row["rule_id"] == "R3")
     r4d = next(row for row in rules if row["rule_id"] == "R4-D")
@@ -90,6 +62,23 @@ def analyze_public(opportunity_id: str) -> dict[str, Any]:
         "real_decision": decision,
         "simulation_decision": None,
         "active_decision": decision,
+        "screening_disposition": decision[
+            "screening_disposition"
+        ],
+        "gap_class": decision["gap_class"],
+        "route_hypotheses": decision["route_hypotheses"],
+        "preferred_hypothesis": decision[
+            "preferred_hypothesis"
+        ],
+        "evidence_class_assessment": decision[
+            "evidence_class_assessment"
+        ],
+        "advance_gate": decision["advance_gate"],
+        "hard_exclusions": decision["hard_exclusions"],
+        "rejection_conditions": decision[
+            "rejection_conditions"
+        ],
+        "narrative_version": decision["narrative_version"],
         "rules": rules,
         "capability": capability,
         "capacity": None,

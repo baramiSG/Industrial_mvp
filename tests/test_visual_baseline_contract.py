@@ -87,6 +87,10 @@ def test_visual_manifest_and_every_webp_hash_size_dimensions_and_rgb_decode_matc
     assert hashlib.sha256(manifest_bytes).hexdigest() == (
         expected_manifest_hash
     )
+    assert (
+        "config/decision_narratives.v1.yaml"
+        in payload["source_tree"]
+    )
     for path, digest in payload["source_tree"].items():
         assert hashlib.sha256(
             (PROJECT_ROOT / path).read_bytes()

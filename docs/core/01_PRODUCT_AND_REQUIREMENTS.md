@@ -64,7 +64,7 @@ Requirements:
 - use only frozen, attributable public snapshots;
 - preserve source, date, period, classification, measurement and transformation;
 - show FULL, DEGRADED or DISABLED execution for every rule;
-- stop at `INVESTIGATE` when decision-critical evidence is unavailable;
+- stop at `INVESTIGATE` when route-changing decision-critical evidence is unavailable; permit `ADVANCE` when actual A/B/C evidence and every methodology gate pass.
 - reject generic support when public evidence is already sufficient to show no defensible gap;
 - never fabricate line-level facts.
 
@@ -179,6 +179,11 @@ The user opens or prints a one-page dossier containing:
 - **FR-032** Unknown dimensions shall contribute to U and receive the configured λ penalty.
 - **FR-033** D\* shall not be published below Kmin or while a hard gate is unresolved.
 - **FR-034** Published route bands shall be immediate adjacency, incremental upgrade, major line/JV and greenfield likely.
+- **FR-035** The engine shall load all five methodology §6.3 sector profiles, require weights that sum to 1.0, require each configured hard gate, and fail closed on an unknown profile.
+- **FR-036** Public capability shall distinguish configured profile hard gates from decision-specific gates; either unresolved set shall withhold D* and a route band.
+- **FR-037** The public engine shall assess product identity, target-specification demand, domestic supply/capability, and hard regulatory/process gates from covering evidence passports.
+- **FR-038** The ADVANCE gate shall use configured blocked evidence classes and resolution statuses and shall not branch on evidence source type.
+- **FR-039** The engine shall execute all six typed methodology §4.2 hard exclusions and emit exactly one primary methodology §5.3 gap class.
 
 ### 6.5 Economics and policy
 
@@ -188,6 +193,10 @@ The user opens or prints a one-page dossier containing:
 - **FR-043** Incremental national value shall be relative to no action and include benefits, fiscal cost, displacement, resource cost and risk.
 - **FR-044** The post-entry capacity/downside-demand ratio shall be visible.
 - **FR-045** EVSI shall identify whether a named evidence action is worth obtaining.
+- **FR-046** The public branch shall emit ordered route hypotheses 0–8 with pass, fail, or NOT_CALCULABLE status and evidence-backed reasons.
+- **FR-047** A fully resolving lower route shall block escalation; otherwise the engine shall select maximum defensible incremental national value among feasible, additional, permissible alternatives.
+- **FR-048** Route 8 shall remain NOT_CALCULABLE with GRAPH_REQUIRED until a governed dependency graph supplies the shared-enabler calculation.
+- **FR-049** Missing facts, conditions, kill conditions, and decision narratives shall be computed and rendered from a versioned bilingual catalogue rather than authored in a public snapshot.
 
 ### 6.6 Decisions
 

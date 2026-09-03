@@ -21,7 +21,7 @@ from ior_mvp.rules import (
     log_change,
     quantity_contribution_share,
 )
-from tests.legacy_snapshot_v1 import candidate_v2_from_legacy
+from tests.legacy_snapshot_v1 import candidate_v21_from_legacy
 
 
 def by_id(rules: list[dict], rule_id: str) -> dict:
@@ -183,7 +183,7 @@ def test_r5_exposes_not_calculable_ratio_reason_and_threshold() -> None:
 
 
 def _v2_case(opportunity_id: str) -> dict:
-    return candidate_v2_from_legacy(get_public_case(opportunity_id))
+    return candidate_v21_from_legacy(get_public_case(opportunity_id))
 
 
 def test_v2_r1d_confidence_cap_is_projected_from_injected_config() -> None:
@@ -507,3 +507,51 @@ def test_public_rule_engine_has_no_authored_context_or_product_dispatch() -> Non
     assert "rule_context" not in source
     assert "SAU-H0-721049" not in source
     assert "SAU-H0-390210" not in source
+    assert "public_decision_contract" not in source
+
+
+@pytest.mark.parametrize(
+    ("opportunity_id", "expected_keys"),
+    [
+        (
+            "SAU-H0-721049",
+            [
+                "need.specification.line_production",
+                "need.capacity.availability_allocation",
+                "need.demand.importer_specification",
+                "need.flows.reexport_origin_decomposition",
+                "need.economics.route_delivered_cost",
+            ],
+        ),
+        (
+            "SAU-H0-390210",
+            [
+                "need.identity.tariff_line",
+                "need.demand.importer_application_qualification",
+                "need.specification.producer_grade_matrix",
+                "need.capacity.availability_allocation",
+                "need.economics.named_exception_delivered_cost",
+            ],
+        ),
+    ],
+)
+def test_r12_uses_computed_predicate_selected_evidence_needs(
+    opportunity_id: str,
+    expected_keys: list[str],
+) -> None:
+    row = by_id(
+        evaluate_rules(get_public_case(opportunity_id)),
+        "R12",
+    )
+
+    assert row["execution"] == "DEGRADED"
+    assert row["fired"] is True
+    assert row["result"] == "5 named facts could change the route."
+    assert [
+        need["template_key"]
+        for need in row["metrics"]["evidence_needs"]
+    ] == expected_keys
+    assert row["metrics"]["named_missing_facts"] == [
+        need["text"]
+        for need in row["metrics"]["evidence_needs"]
+    ]

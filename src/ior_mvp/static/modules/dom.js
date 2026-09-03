@@ -39,6 +39,18 @@ export function sourceCaption() {
     : "";
 }
 
+export function narrativeEntry(entry, tag = "span") {
+  const segments = Array.isArray(entry?.segments) ? entry.segments : [];
+  const content = segments.map((segment) => {
+    const escaped = escapeHtml(segment?.text);
+    if (segment?.ltr_isolate === true) {
+      return `<bdi class="ltr-isolate" lang="en" dir="ltr">${escaped}</bdi>`;
+    }
+    return escaped;
+  }).join("");
+  return `<${tag}>${content}</${tag}>`;
+}
+
 export function stateLabel(value) {
   const labels = {
     ADVANCE: () => t("state.advance"),
@@ -76,12 +88,13 @@ export function executionChip(value) {
 export function labelValue(label, valueHtml) {
   const labelMarker = "__IOR_LABEL__";
   const valueMarker = "__IOR_VALUE__";
-  return escapeHtml(t("common.label_value", {
+  const rendered = escapeHtml(t("common.label_value", {
     label: labelMarker,
     value: valueMarker,
   }))
-    .replace(labelMarker, `<bdi>${escapeHtml(label)}</bdi>`)
+    .replace(labelMarker, escapeHtml(label))
     .replace(valueMarker, valueHtml);
+  return `<bdi>${rendered}</bdi>`;
 }
 
 export function fireText(value) {

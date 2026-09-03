@@ -10,9 +10,20 @@ def main() -> None:
     pp_public = analyze("SAU-H0-390210", "public")
 
     assert steel_public["active_decision"]["state"] == "INVESTIGATE"
+    assert steel_public["gap_class"]["primary"] == "evidence"
+    assert steel_public["preferred_hypothesis"]["route_code"] == 5
+    assert steel_public["narrative_version"] == "1.0.0"
+    assert steel_public["real_decision"]["localized_narrative"]["ar"][
+        "headline"
+    ]["text"]
     assert steel_sim["real_decision"]["state"] == "INVESTIGATE"
     assert steel_sim["active_decision"]["state"] == "ADVANCE"
     assert pp_public["active_decision"]["state"] == "REJECT"
+    assert pp_public["gap_class"]["primary"] == "evidence"
+    assert pp_public["preferred_hypothesis"]["route_code"] == 0
+    assert pp_public["real_decision"]["headline"] == (
+        "REJECT — generic capacity support"
+    )
     assert run_extraction_golden_set()["accuracy"] == 1.0
 
     print("SMOKE PASS")

@@ -231,7 +231,11 @@ def test_dossier_rtl_element_renders_real_arabic_glyphs(
     assert report.arabic_pixel_signature != report.replacement_pixel_signature
     assert report.distinct_arabic_glyph_signatures >= 2
     if locale.code == "ar":
-        assert popup.locator(".source-language-island").count() >= 8
+        minimum_islands = 8 if mode == "simulated" else 4
+        assert (
+            popup.locator(".source-language-island").count()
+            >= minimum_islands
+        )
     output = (
         browser_session.artifact_dir
         / "rtl"

@@ -73,14 +73,19 @@ def test_hard_gate_status_prefixes(
 ) -> None:
     scenario = get_synthetic_scenario("SAU-H0-721049")
     assert scenario is not None
+    hard_gates = dict(scenario["synthetic_inputs"]["hard_gates"])
+    gate_name = next(iter(hard_gates))
+    hard_gates[gate_name] = gate_value
 
     result = evaluate_capability(
         "coated_steel",
         scenario["synthetic_inputs"]["capability_states"],
-        {"gate": gate_value},
+        hard_gates,
     )
 
-    assert result["unresolved_hard_gates"] == expected_unresolved
+    assert result["unresolved_hard_gates"] == [
+        gate_name for _ in expected_unresolved
+    ]
 
 
 def test_polypropylene_not_applicable_gate_publishes_capability() -> None:

@@ -378,3 +378,109 @@ def test_contradiction_html_escapes_untrusted_passport_text() -> None:
 
     assert "<script data-probe" not in rendered
     assert "&lt;script data-probe=&quot;x&quot;&gt;" in rendered
+
+
+def test_public_dossier_projects_generalized_decision_diagnostics() -> None:
+    analysis = analyze("SAU-H0-721049", "public")
+    dossier = build_dossier(analysis)
+
+    assert dossier["decision_rationale"] == (
+        analysis["real_decision"]["rationale"]
+    )
+    assert dossier["localized_narrative"] == (
+        analysis["real_decision"]["localized_narrative"]
+    )
+    assert dossier["narrative_version"] == "1.0.0"
+    assert dossier["screening_disposition"] == "CANDIDATE"
+    assert dossier["gap_class"] == analysis["gap_class"]
+    assert dossier["route_hypotheses"] == analysis["route_hypotheses"]
+    assert dossier["preferred_hypothesis"] == (
+        analysis["preferred_hypothesis"]
+    )
+    assert dossier["evidence_class_assessment"] == (
+        analysis["evidence_class_assessment"]
+    )
+    assert dossier["hard_exclusions"] == analysis["hard_exclusions"]
+
+
+@pytest.mark.parametrize(
+    ("locale", "headline", "rationale"),
+    [
+        (
+            "en",
+            "INVESTIGATE — binding constraint unresolved",
+            (
+                "Test brownfield first; greenfield is not justified "
+                "from public evidence."
+            ),
+        ),
+        (
+            "ar",
+            "تحقّق — القيد الملزم غير محسوم",
+            (
+                "اختبر المسار القائم أولاً؛ فلا تبرر الأدلة العامة "
+                "إنشاء مشروع جديد مستقل."
+            ),
+        ),
+    ],
+)
+def test_public_dossier_renders_active_locale_without_source_islands(
+    locale: str,
+    headline: str,
+    rationale: str,
+) -> None:
+    rendered = render_dossier_html(
+        build_dossier(analyze("SAU-H0-721049", "public")),
+        locale=locale,
+    )
+
+    assert headline in rendered
+    assert rationale in rendered
+    decision_block = rendered.split(
+        '<section class="decision-narrative">',
+        maxsplit=1,
+    )[1].split("</section>", maxsplit=1)[0]
+    assert "source-language-island" not in decision_block
+    if locale == "ar":
+        assert (
+            "INVESTIGATE — binding constraint unresolved"
+            not in decision_block
+        )
+
+
+def test_simulated_dossier_keeps_scenario_narrative_as_english_island() -> None:
+    analysis = analyze("SAU-H0-721049", "simulated")
+    rendered = render_dossier_html(
+        build_dossier(analysis),
+        locale="ar",
+    )
+    block = rendered.split(
+        '<section class="decision-narrative">',
+        maxsplit=1,
+    )[1].split("</section>", maxsplit=1)[0]
+
+    assert analysis["simulation_decision"]["rationale"] in block
+    assert 'class="source-language-island"' in block
+    assert _ui_strings("ar")["source_language.caption"] in block
+
+
+def test_public_dossier_escapes_every_structured_narrative_segment() -> None:
+    dossier = build_dossier(analyze("SAU-H0-721049", "public"))
+    malicious = '<script data-probe="narrative">x</script>'
+    entry = dossier["localized_narrative"]["en"]["headline"]
+    entry["text"] = malicious
+    entry["segments"] = [
+        {
+            "kind": "computed",
+            "text": malicious,
+            "ltr_isolate": False,
+        }
+    ]
+
+    rendered = render_dossier_html(dossier, locale="en")
+
+    assert malicious not in rendered
+    assert (
+        "&lt;script data-probe=&quot;narrative&quot;&gt;"
+        in rendered
+    )
