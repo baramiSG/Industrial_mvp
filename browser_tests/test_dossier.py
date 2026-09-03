@@ -120,15 +120,24 @@ def test_open_dossier_popup_matches_case_and_mode(
             strings["dossier.no_synthetic_contradictions"]
         )
         decision = analysis["simulation_decision"]
+        narrative = decision["localized_narrative"][locale.code]
         for field in ("headline", "route_label", "rationale"):
             expect(
                 popup.locator(".decision-narrative")
-            ).to_contain_text(decision[field])
+            ).to_contain_text(narrative[field]["text"])
+        for field, selector in (
+            ("conditions", ".decision-conditions"),
+            ("kill_conditions", ".kill-conditions"),
+        ):
+            for item in narrative[field]:
+                expect(popup.locator(selector)).to_contain_text(
+                    item["text"]
+                )
         assert (
             popup.locator(
                 ".decision-narrative .source-language-island"
             ).count()
-            >= 3
+            == 0
         )
     else:
         for label in labels.values():

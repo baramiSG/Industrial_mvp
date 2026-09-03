@@ -98,6 +98,77 @@ def _weak_support(
     )
 
 
+def render_need(
+    *,
+    need_code: str,
+    variant: str,
+    template_key: str,
+    blocked_field: str,
+    evidence_ids: list[str],
+    route_code: int | None = None,
+) -> dict[str, Any]:
+    return _render_need(
+        need_code=need_code,
+        variant=variant,
+        template_key=template_key,
+        blocked_field=blocked_field,
+        evidence_ids=evidence_ids,
+        route_code=route_code,
+    )
+
+
+EXCLUSION_NEED_FALLBACKS = (
+    {
+        "exclusion_code": "EX-01_HETEROGENEOUS_RESIDUAL",
+        "block_name": "heterogeneous_residual_code",
+        "need_code": "identity/tariff-line",
+        "variant": "exclusion_ex01",
+        "template_key": "need.identity.tariff_line",
+        "blocked_field": "heterogeneous_residual_code",
+    },
+    {
+        "exclusion_code": "EX-02_MARKET_BELOW_MES",
+        "block_name": "downside_market_below_mes",
+        "need_code": "target specification/application",
+        "variant": "exclusion_ex02",
+        "template_key": "need.demand.importer_specification",
+        "blocked_field": "downside_market_below_mes",
+    },
+    {
+        "exclusion_code": "EX-03_UNSATISFIABLE_HARD_GATE",
+        "block_name": "unsatisfiable_hard_gate",
+        "need_code": "qualification/profile hard gates",
+        "variant": "exclusion_ex03",
+        "template_key": "need.demand.importer_application_qualification",
+        "blocked_field": "hard_regulatory_or_process_gate",
+    },
+    {
+        "exclusion_code": "EX-04_IDLE_EQUIVALENT_CAPACITY",
+        "block_name": "idle_equivalent_domestic_capacity",
+        "need_code": "capacity/availability/allocation",
+        "variant": "exclusion_ex04",
+        "template_key": "need.capacity.availability_allocation",
+        "blocked_field": "idle_equivalent_domestic_capacity",
+    },
+    {
+        "exclusion_code": "EX-05_TRANSITORY_OR_MEASUREMENT",
+        "block_name": "transitory_or_measurement_gap",
+        "need_code": "re-export/origin decomposition",
+        "variant": "exclusion_ex05",
+        "template_key": "need.flows.reexport_origin_decomposition",
+        "blocked_field": "transitory_or_measurement_gap",
+    },
+    {
+        "exclusion_code": "EX-06_REDUNDANCY_OR_CROWD_OUT",
+        "block_name": "redundancy_or_crowd_out",
+        "need_code": "route economics",
+        "variant": "exclusion_ex06",
+        "template_key": "need.economics.named_exception_delivered_cost",
+        "blocked_field": "route_economics",
+    },
+)
+
+
 def _render_need(
     *,
     need_code: str,

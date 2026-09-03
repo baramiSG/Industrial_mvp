@@ -52,8 +52,8 @@ def test_decision_catalogue_metadata_and_locale_contract_are_exact() -> None:
 
     assert payload["metadata"] == {
         "artifact": "industrial-opportunity-decision-narratives",
-        "version": "1.0.0",
-        "effective_date": "2026-09-02",
+        "version": "1.1.0",
+        "effective_date": "2026-09-03",
         "authority": (
             "Industrial Opportunity Resolution Methodology §§1.2, 4.2, "
             "5.3, 7.1.1, 7.4, 9, 12 and 15; Core 07 v2"
@@ -132,6 +132,17 @@ def test_catalogue_has_generic_needs_routes_and_no_case_specific_keys() -> None:
         "decision.simulated.investigate.headline",
         "decision.simulated.investigate.route",
         "decision.simulated.investigate.rationale",
+        "decision.simulated.advance.headline",
+        "decision.simulated.advance.rationale",
+        "decision.simulated.advance.condition",
+        "decision.simulated.advance.kill",
+        "decision.simulated.reject.headline",
+        "decision.simulated.reject.rationale",
+        "decision.simulated.reject.condition",
+        "decision.simulated.reject.kill",
+        "decision.simulated.monitor.headline",
+        "decision.simulated.monitor.route",
+        "decision.simulated.monitor.rationale",
     }
 
 
@@ -156,7 +167,7 @@ def test_generic_simulated_investigate_wrapper_matches_both_scenarios() -> None:
         assert scenario is not None
         actual = scenario["decision_narrative"]["INVESTIGATE"]
         assert {
-            key: actual[key] for key in expected
+            key: actual[key]["en"] for key in expected
         } == expected
 
 
@@ -456,13 +467,88 @@ def test_correction_round_keys_have_exact_english_and_arabic_literals() -> None:
         assert templates["ar"][key] == ar_text, key
 
 
-def test_catalogue_has_110_keys_with_parity_and_validator_pass() -> None:
+def test_catalogue_has_126_keys_with_parity_and_validator_pass() -> None:
     payload = _catalogue()
     en = payload["templates"]["en"]
     ar = payload["templates"]["ar"]
-    assert len(en) == len(ar) == 110
+    assert len(en) == len(ar) == 126
     assert set(en) == set(ar)
     validate_decision_narratives(payload)
+
+
+S10_CATALOGUE_ADDITIONS = {
+    "decision.simulated.advance.headline": (
+        "SIMULATED ADVANCE — route {route_code}",
+        "تقدّم مُحاكى — المسار {route_code}",
+    ),
+    "decision.simulated.advance.rationale": (
+        "If the displayed Ministry-grade facts are confirmed, the evidence supports the selected route and every hard gate is satisfied.",
+        "إذا تأكدت الحقائق المعروضة بمستوى الوزارة، تدعم الأدلة المسار المختار وتكون جميع البوابات الصلبة مستوفاة.",
+    ),
+    "decision.simulated.advance.condition": (
+        "Confirm every simulated decision-critical fact with Ministry-grade evidence before any public action.",
+        "أكّد كل حقيقة محاكاة حاسمة للقرار بأدلة بمستوى الوزارة قبل أي إجراء عام.",
+    ),
+    "decision.simulated.advance.kill": (
+        "Stop or reroute if any confirmed fact fails an ADVANCE gate.",
+        "أوقف المسار أو غيّره إذا أخفقت أي حقيقة مؤكدة في بوابة من بوابات التقدّم.",
+    ),
+    "decision.simulated.reject.headline": (
+        "SIMULATED REJECT — no defensible intervention",
+        "رفض مُحاكى — لا تدخل يمكن الدفاع عنه",
+    ),
+    "decision.simulated.reject.rationale": (
+        "The simulated evidence satisfies an evidenced rejection condition; capacity support would be non-additional.",
+        "تستوفي أدلة المحاكاة شرط رفض مُثبتاً؛ ولن يحقق دعم الطاقة إضافية.",
+    ),
+    "decision.simulated.reject.condition": (
+        "Reopen only if confirmed Ministry-grade evidence removes the rejection condition.",
+        "أعد الفتح فقط إذا أزالت أدلة مؤكدة بمستوى الوزارة شرط الرفض.",
+    ),
+    "decision.simulated.reject.kill": (
+        "Stop any capacity support while the rejection condition remains satisfied.",
+        "أوقف أي دعم للطاقة ما دام شرط الرفض متحققاً.",
+    ),
+    "decision.simulated.monitor.headline": (
+        "SIMULATED MONITOR — no immediate intervention",
+        "مراقبة مُحاكاة — لا تدخل فوري",
+    ),
+    "decision.simulated.monitor.route": (
+        "No intervention; watch the named trigger",
+        "لا تدخل؛ راقب المحفّز المسمى",
+    ),
+    "decision.simulated.monitor.rationale": (
+        "No rejection condition is evidenced in the simulated branch; the material trigger is absent.",
+        "لم يثبت شرط رفض في فرع المحاكاة، والمحفّز المادي غير متحقق.",
+    ),
+    "route.reason.partial_resolution": (
+        "The route passes its gates but does not fully remove the binding constraint; it does not block higher routes.",
+        "يجتاز المسار بواباته لكنه لا يزيل القيد الملزم بالكامل؛ ولا يحجب المسارات الأعلى.",
+    ),
+    "route.reason.feasibility_failed": (
+        "The route is not technically feasible on the available evidence.",
+        "المسار غير مجدٍ تقنياً بحسب الأدلة المتاحة.",
+    ),
+    "route.reason.constraint_class_not_applicable": (
+        "The detected binding constraint is outside this route's intervention class.",
+        "القيد الملزم المكتشف يقع خارج فئة التدخل لهذا المسار.",
+    ),
+    "route.reason.capability_band_failed": (
+        "The published capability distance is outside this route's configured band.",
+        "مسافة القدرة المنشورة تقع خارج النطاق المُهيّأ لهذا المسار.",
+    ),
+    "route.reason.capability_unpublished": (
+        "D* is not published, so the route's capability band cannot be tested.",
+        "لم تُنشر D*، ولذلك لا يمكن اختبار نطاق القدرة لهذا المسار.",
+    ),
+}
+
+
+def test_s10_catalogue_additions_have_exact_literals() -> None:
+    templates = _catalogue()["templates"]
+    for key, (en_text, ar_text) in S10_CATALOGUE_ADDITIONS.items():
+        assert templates["en"][key] == en_text, key
+        assert templates["ar"][key] == ar_text, key
 
 
 def test_preferred_rationale_renders_route_short_label_in_both_locales() -> None:

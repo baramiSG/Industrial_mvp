@@ -404,8 +404,14 @@ def _passing_assessments() -> dict[str, dict]:
 def test_evidence_policy_13_advance_gate_is_directly_executable() -> None:
     policy = evidence_policy_config()
 
-    assert policy["metadata"]["version"] == "1.3.0"
-    assert policy["metadata"]["effective_date"] == "2026-09-02"
+    assert policy["metadata"]["version"] == "1.4.0"
+    assert policy["metadata"]["effective_date"] == "2026-09-03"
+    assert policy["simulation_gate"] == {
+        "basis": "CLASS_IF_CONFIRMED",
+        "declared_class_block": "class_if_confirmed",
+        "undeclared_field_class": "D",
+        "actual_synthetic_evidence_class": "D",
+    }
     assert policy["advance_gate"] == {
         "decision_critical_fields": list(DECISION_CRITICAL_FIELDS),
         "blocked_classes": ["D", "E"],

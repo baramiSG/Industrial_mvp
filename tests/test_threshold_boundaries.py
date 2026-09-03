@@ -733,3 +733,88 @@ def test_r7_effective_utilisation_boundary(
 
     assert row["execution"] == "FULL"
     assert row["fired"] is expected
+
+
+def test_r8_addition_and_mes_fill_boundaries() -> None:
+    import ior_mvp.simulation as simulation
+
+    scenario = deepcopy(get_synthetic_scenario("SAU-H0-721049"))
+    assert scenario is not None
+    public = get_public_case("SAU-H0-721049")
+    thresholds = thresholds_config()
+
+    def r8(
+        base: float | None,
+        mes: float,
+        probability: float | None,
+    ) -> tuple[str, bool | None]:
+        case = deepcopy(scenario)
+        demand = case["synthetic_inputs"]["demand"]
+        economics = case["synthetic_inputs"]["economics"]
+        if base is not None:
+            demand["base_demand_kt"] = base
+        if probability is not None:
+            demand["commitment_probability"] = probability
+        economics["minimum_efficient_scale_kt"] = mes
+        capacity, _, _, _ = simulation.capacity_projection(
+            case["synthetic_inputs"]
+        )
+        row = next(
+            item
+            for item in evaluate_simulated_rules(
+                case,
+                public,
+                capacity,
+                thresholds,
+            )
+            if item["rule_id"] == "R8"
+        )
+        return row["execution"], row["fired"]
+
+    assert r8(370.0, 1000.0, 1.0) == ("FULL", True)
+    assert r8(370.001, 1000.0, 1.0) == ("FULL", False)
+    assert r8(1000.0, 296.0, 1.0) == ("FULL", True)
+    assert r8(1000.0, 296.001, 1.0) == ("FULL", False)
+    assert r8(None, 296.0, 1.0) == ("DEGRADED", True)
+    assert r8(None, 50.0, None) == ("DISABLED", None)
+
+
+@pytest.mark.parametrize(
+    ("retained", "expected"),
+    [
+        (199.9, False),
+        (200.0, True),
+        (200.1, True),
+    ],
+)
+def test_r5_penetration_boundary_via_simulated_rules(
+    retained: float,
+    expected: bool,
+) -> None:
+    import ior_mvp.simulation as simulation
+
+    scenario = deepcopy(get_synthetic_scenario("SAU-H0-721049"))
+    assert scenario is not None
+    scenario["synthetic_inputs"]["production_and_retained_flows"] = {
+        "period_year": 2024,
+        "domestic_production_kt": 800.0,
+        "retained_imports_kt": retained,
+        "domestic_origin_exports_kt": 0.0,
+        "reexports_kt": "UNAVAILABLE",
+        "basis": "boundary test",
+    }
+    capacity, _, _, _ = simulation.capacity_projection(
+        scenario["synthetic_inputs"]
+    )
+    row = next(
+        item
+        for item in evaluate_simulated_rules(
+            scenario,
+            get_public_case("SAU-H0-721049"),
+            capacity,
+            thresholds_config(),
+        )
+        if item["rule_id"] == "R5"
+    )
+    assert row["execution"] == "FULL"
+    assert row["fired"] is expected

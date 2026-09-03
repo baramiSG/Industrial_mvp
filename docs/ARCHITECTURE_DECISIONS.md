@@ -289,3 +289,55 @@ evidence, not approval.
 ### Correction round 2026-09-03
 
 Under approved plan `.autonomous-workflow/plans/s09-public-decision-and-profiles/plan-7.json` (owner-delegated ruling 2026-09-03T05:25Z): added `signals.py` with `may_support_advance` configuration guard; eight-step deep-state order with `ADVANCE_SUPPORT_SIGNAL_DEGRADED` and `ROUTE_DETERMINATION_UNRESOLVED`; typed rejection narratives and 16 reviewer-gated catalogue keys (94→110); route-determination INVESTIGATE including mocked-loader missing-economics proof with unchanged PublicSnapshot validator boundary (KL-36); MONITOR route-0 consistency; fired-rule confidence cap; second justified `build_manifests.py` run; fifth canonical visual execution `S09-generalized-public-decision-corrections` with zero WebP drift.
+
+## ADR-014 — Generalized simulation branch and scenario contract 2.0.0
+
+**Status:** Proposed
+
+**Context:** S10 generalizes simulated route evaluation on scenario contract
+2.0.0 while preserving frozen public goldens and byte-identical historical 1.1.0
+scenarios under `data/synthetic/historical/v1_1/`.
+
+**Decision:** Accept owner-amendable defaults for Arabic catalogue strings and
+`minimum_efficient_scale_kt: 50.0` on the steel packaged scenario. Runtime
+supports only 2.0.0 scenarios with bilingual narratives, ten Gate B reconciliation
+checks, simulated R5/R8 ledger semantics, route-8 `GRAPH_REQUIRED`, and
+`CLASS_IF_CONFIRMED` advance gating. Manifest regeneration uses
+`scripts/build_manifests.py` with recursive synthetic JSON discovery.
+
+**Authority classes (Manifest §7):**
+
+- **§7.3 operating configuration:** synthetic scenario parameters advance to
+  contract 2.0.0 (`data/synthetic/SYN-MINISTRY-STEEL-001.json` and
+  `SYN-MINISTRY-PP-001.json`); `decision_narratives.v1.yaml` 1.1.0;
+  `evidence_policy.v1.yaml` 1.4.0.
+- **§7.4 methodology/core text:** Core 01/02/04/06/07/09 v2 edits under
+  ADR-010/ADR-014; Core 06 opens with the standard v2 marker on line 3.
+- **§7.2 implementation-preserving refactors:** route evaluation and
+  `classify_gap` refactors with unchanged public goldens.
+
+**Permitted generated diff:** `authority_hashes.json` rows for
+`docs/core/01_PRODUCT_AND_REQUIREMENTS.md`,
+`docs/core/02_METHODOLOGY_IMPLEMENTATION_MAP.md`,
+`docs/core/04_CANONICAL_DATA_MODEL.md`,
+`docs/core/06_SYNTHETIC_MINISTRY_DATA_SPEC.md`,
+`docs/core/07_DETERMINISTIC_ENGINE_SPEC.md`,
+`docs/core/09_TEST_ACCEPTANCE_AND_GOLDEN_CASES.md`,
+`config/decision_narratives.v1.yaml`, `config/evidence_policy.v1.yaml`, and
+`generated_on`; `snapshot_manifest.json` rows for the two live synthetic files,
+two new rows `data/synthetic/historical/v1_1/SYN-MINISTRY-PP-001.json`
+(sha256 `06517bb9…`, 3,433 bytes) and
+`data/synthetic/historical/v1_1/SYN-MINISTRY-STEEL-001.json`
+(sha256 `8867f083…`, 4,711 bytes), and `generated_on`. Every other manifested
+file remains byte-identical.
+
+**Manifest regeneration:** Candidate 2 (T13) ran
+`scripts/build_manifests.py` once after all governed engine/config/core edits.
+Candidate 3 runs it once more because T12 corrected
+`docs/core/01_PRODUCT_AND_REQUIREMENTS.md`; the second generated diff is
+restricted to that Core 01 authority row and `generated_on` unless another
+manifested file changed in the same correction.
+
+**Consequences:** Public decisions remain unchanged. Simulated surfaces mirror
+`simulation_decision` including bilingual narratives and counterfactual blocks.
+Further graph activation remains deferred to S16.

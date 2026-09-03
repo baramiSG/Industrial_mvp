@@ -85,6 +85,7 @@ def test_simulated_dossier_retains_disclosure_and_synthetic_rows() -> None:
     assert dossier["evidence_summary"]["synthetic_records"] > 0
     rows = dossier["gap_diagnosis"]["simulated_rules"]
     assert [row["rule_id"] for row in rows] == [
+        "R5",
         "R6",
         "R7",
         "R8",
@@ -104,7 +105,7 @@ def test_simulated_dossier_retains_disclosure_and_synthetic_rows() -> None:
     assert DISCLOSURE in html_response.text
     assert ARABIC_DISCLOSURE in html_response.text
     assert "Simulated R6–R8 ledger" in html_response.text
-    for rule_id in ("R6", "R7", "R8"):
+    for rule_id in ("R5", "R6", "R7", "R8"):
         assert rule_id in html_response.text
 
 
@@ -196,22 +197,27 @@ def test_dossier_html_localizes_chrome_and_document_direction(
     assert ARABIC_DISCLOSURE in response.text
 
 
-def test_arabic_dossier_marks_engine_text_as_source_language_islands() -> None:
-    strings = _ui_strings("ar")
+def test_arabic_simulated_dossier_uses_localized_narrative_without_islands() -> None:
     response = client.get(
         "/api/opportunities/SAU-H0-721049/dossier.html"
         "?mode=simulated&locale=ar"
     )
+    analysis = analyze("SAU-H0-721049", "simulated")
+    block = response.text.split(
+        '<section class="decision-narrative">',
+        maxsplit=1,
+    )[1].split("</section>", maxsplit=1)[0]
 
     assert response.status_code == 200
-    assert strings["source_language.caption"] in response.text
-    assert response.text.count(
-        'class="source-language-island" lang="en" dir="ltr"'
-    ) >= 12
     assert (
-        "SIMULATED ADVANCE — brownfield specification upgrade"
-        in response.text
+        analysis["simulation_decision"]["localized_narrative"]["ar"][
+            "headline"
+        ]["text"]
+        in block
     )
+    assert 'class="source-language-island"' not in block
+    assert DISCLOSURE in response.text
+    assert ARABIC_DISCLOSURE in response.text
 
 
 def test_dossier_locale_defaults_to_english_and_rejects_unknown() -> None:
@@ -448,7 +454,27 @@ def test_public_dossier_renders_active_locale_without_source_islands(
         )
 
 
-def test_simulated_dossier_keeps_scenario_narrative_as_english_island() -> None:
+def test_simulated_dossier_localized_narrative_and_counterfactual() -> None:
+    analysis = analyze("SAU-H0-721049", "simulated")
+    dossier = build_dossier(analysis)
+
+    assert dossier["localized_narrative"] == (
+        analysis["simulation_decision"]["localized_narrative"]
+    )
+    assert dossier["next_evidence_actions"] == (
+        analysis["simulation_decision"]["missing_facts"]
+    )
+    assert dossier["counterfactual"] == (
+        analysis["simulation_decision"]["counterfactual"]
+    )
+
+
+def test_public_dossier_counterfactual_is_null() -> None:
+    dossier = build_dossier(analyze("SAU-H0-721049", "public"))
+    assert dossier["counterfactual"] is None
+
+
+def test_simulated_dossier_renders_arabic_narrative_without_islands() -> None:
     analysis = analyze("SAU-H0-721049", "simulated")
     rendered = render_dossier_html(
         build_dossier(analysis),
@@ -459,9 +485,13 @@ def test_simulated_dossier_keeps_scenario_narrative_as_english_island() -> None:
         maxsplit=1,
     )[1].split("</section>", maxsplit=1)[0]
 
-    assert analysis["simulation_decision"]["rationale"] in block
-    assert 'class="source-language-island"' in block
-    assert _ui_strings("ar")["source_language.caption"] in block
+    assert (
+        analysis["simulation_decision"]["localized_narrative"]["ar"][
+            "headline"
+        ]["text"]
+        in block
+    )
+    assert 'class="source-language-island"' not in block
 
 
 def test_public_dossier_escapes_every_structured_narrative_segment() -> None:

@@ -111,15 +111,8 @@ def build_ui_manifest(analysis: dict[str, Any]) -> dict[str, Any]:
                     "synthetic_labels": (
                         analysis.get("simulation_scenario") or {}
                     ).get("display_labels"),
-                    "localized_missing_facts": (
-                        {
-                            locale: real["localized_narrative"][
-                                locale
-                            ]["missing_facts"]
-                            for locale in ("en", "ar")
-                        }
-                        if analysis["mode"] == "public"
-                        else None
+                    "localized_missing_facts": real.get(
+                        "localized_missing_facts"
                     ),
                 },
             },

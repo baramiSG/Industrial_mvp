@@ -1,6 +1,6 @@
 {
   "scenario_id": "SYN-MINISTRY-STEEL-001",
-  "scenario_version": "1.1.0",
+  "scenario_version": "2.0.0",
   "ground_truth": {
     "expected_simulation_state": "ADVANCE",
     "expected_route_code": 5,
@@ -8,24 +8,60 @@
   },
   "decision_narrative": {
     "ADVANCE": {
-      "headline": "SIMULATED ADVANCE — brownfield specification upgrade",
-      "route_label": "Conditional brownfield debottlenecking / line expansion",
-      "rationale": "The simulated Ministry-grade evidence resolves a sustained target-specification gap, establishes incremental adjacency, and passes minimum-support, national-value and competition controls.",
+      "headline": {
+        "en": "SIMULATED ADVANCE — brownfield specification upgrade",
+        "ar": "تقدّم مُحاكى — تحديث المواصفة في المنشأة القائمة"
+      },
+      "route_label": {
+        "en": "Conditional brownfield debottlenecking / line expansion",
+        "ar": "إزالة اختناقات مشروطة أو توسعة خط في المنشأة القائمة"
+      },
+      "rationale": {
+        "en": "The simulated Ministry-grade evidence resolves a sustained target-specification gap, establishes incremental adjacency, and passes minimum-support, national-value and competition controls.",
+        "ar": "تحسم أدلة المحاكاة بمستوى الوزارة فجوة مستدامة في المواصفة المستهدفة، وتثبت تقارباً تدريجياً، وتجتاز ضوابط الحد الأدنى من الدعم والقيمة الوطنية والمنافسة."
+      },
       "conditions": [
-        "Achieve customer acceptance for the named target specification.",
-        "Deliver 50 kt of incremental qualified capacity within 18 months.",
-        "Support is milestone-based, sunset-bound and subject to clawback."
+        {
+          "en": "Achieve customer acceptance for the named target specification.",
+          "ar": "تحقيق قبول العملاء للمواصفة المستهدفة المسماة."
+        },
+        {
+          "en": "Deliver 50 kt of incremental qualified capacity within 18 months.",
+          "ar": "توفير 50 ألف طن من الطاقة المؤهلة الإضافية خلال 18 شهراً."
+        },
+        {
+          "en": "Support is milestone-based, sunset-bound and subject to clawback.",
+          "ar": "الدعم مرتبط بمعالم إنجاز ومحدد بأجل انتهاء وخاضع للاسترداد."
+        }
       ],
       "kill_conditions": [
-        "Committed target-specification demand falls below 72 kt.",
-        "Incumbent output or another expansion closes the gap before award.",
-        "Customer qualification is not achieved by the contractual milestone."
+        {
+          "en": "Committed target-specification demand falls below 72 kt.",
+          "ar": "انخفاض الطلب الملتزم به على المواصفة المستهدفة إلى أقل من 72 ألف طن."
+        },
+        {
+          "en": "Incumbent output or another expansion closes the gap before award.",
+          "ar": "إغلاق الفجوة بإنتاج المنشأة القائمة أو بتوسعة أخرى قبل الترسية."
+        },
+        {
+          "en": "Customer qualification is not achieved by the contractual milestone.",
+          "ar": "عدم تحقيق تأهيل العملاء بحلول المعلم التعاقدي."
+        }
       ]
     },
     "INVESTIGATE": {
-      "headline": "SIMULATED INVESTIGATE — one or more gates remain unresolved",
-      "route_label": "Simulation controls did not all pass",
-      "rationale": "The simulated branch did not satisfy every hard gate.",
+      "headline": {
+        "en": "SIMULATED INVESTIGATE — one or more gates remain unresolved",
+        "ar": "تحقّق مُحاكى — ما زالت بوابة واحدة أو أكثر غير محسومة"
+      },
+      "route_label": {
+        "en": "Simulation controls did not all pass",
+        "ar": "لم تجتز المحاكاة جميع الضوابط"
+      },
+      "rationale": {
+        "en": "The simulated branch did not satisfy every hard gate.",
+        "ar": "لم يستوف فرع المحاكاة جميع البوابات الصلبة."
+      },
       "conditions": [],
       "kill_conditions": []
     }
@@ -116,7 +152,8 @@
         "displacement": 12.0,
         "resource_environment": 8.0,
         "risk_allowance": 15.0
-      }
+      },
+      "minimum_efficient_scale_kt": 50.0
     },
     "evsi": {
       "route_change_probability": 0.72,
@@ -124,6 +161,65 @@
       "evidence_cost_m_sar": 2.5,
       "delay_cost_m_sar": 5.0,
       "next_fact": "Confirm line-level qualification share and customer acceptance test"
+    },
+    "equivalence": {
+      "domestic_grade_equivalent": true,
+      "basis": "Synthetic line-level qualification records: the incumbent's qualified share of output meets the target specification; qualified supply available to the target market equals the effective qualified capacity computed from plant_line."
+    },
+    "class_if_confirmed": {
+      "product_identity": "A",
+      "demand_at_required_specification": "A",
+      "domestic_supply_or_capability": "A",
+      "hard_regulatory_or_process_gate": "B",
+      "basis": "Ministry administrative customs, production and qualification records if confirmed; hard gates remain awaiting qualification-programme validation."
+    },
+    "decision_specific_hard_gates": {
+      "exact imported specification": "resolved by the synthetic target specification",
+      "customer/application qualification": "resolved with qualification programme",
+      "effective spare capacity and allocation": "resolved by synthetic line allocation"
+    },
+    "hard_exclusion_inputs": {
+      "heterogeneous_residual_code": {
+        "commercial_product_separable": true,
+        "product_level_evidence_available": true
+      },
+      "downside_market_below_mes": {
+        "credible_export_contract": "UNAVAILABLE"
+      },
+      "unsatisfiable_hard_gate": {
+        "gate_domain": "customer_qualification",
+        "gate_satisfiability": "SATISFIABLE"
+      },
+      "idle_equivalent_domestic_capacity": {
+        "qualified_idle_capacity_kt": "UNAVAILABLE",
+        "binding_market_failure": true
+      },
+      "transitory_or_measurement_gap": {
+        "dominant_cause": "OTHER"
+      },
+      "redundancy_or_crowd_out": {
+        "competition_finding": "ACCEPTABLE"
+      }
+    },
+    "route_evidence": [
+      {
+        "route_code": 5,
+        "binding_constraint": "capacity_or_availability",
+        "technical_feasibility_confirmed": true,
+        "binding_constraint_fully_removed": true,
+        "investment_already_approved_or_financed": false,
+        "proceeds_without_intervention": false,
+        "policy_prohibition_identified": false,
+        "distortion_unacceptable": false,
+        "intervention_proportionate_to_constraint": true,
+        "basis": "Brownfield finishing-control, coating-mass stability and customer-qualification package; downside economics, national value and competition inherited from the economics, upgrade and demand blocks."
+      }
+    ],
+    "counterfactual": {
+      "q1_incumbent_meets_specification_without_capital": false,
+      "q4_downside_demand_supports_incumbent_and_new_entrant": false,
+      "q5_new_entry_displaces_efficient_domestic_production": true,
+      "q6_technology_jv_superior_to_expansion_or_greenfield": false
     }
   }
 }

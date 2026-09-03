@@ -66,7 +66,98 @@ _REASON_KEYS = {
     "ADDITIONALITY_FAILED": "route.reason.additionality_failed",
     "POLICY_FAILED": "route.reason.policy_failed",
     "MAX_NV_SELECTED": "route.reason.max_nv_selected",
+    "PARTIAL_RESOLUTION": "route.reason.partial_resolution",
+    "FEASIBILITY_FAILED": "route.reason.feasibility_failed",
+    "CONSTRAINT_CLASS_NOT_APPLICABLE": (
+        "route.reason.constraint_class_not_applicable"
+    ),
+    "CAPABILITY_BAND_FAILED": "route.reason.capability_band_failed",
+    "CAPABILITY_UNPUBLISHED": "route.reason.capability_unpublished",
 }
+
+
+SHARED_ENABLER_CONTRACT_FIELDS = (
+    "enabler_id",
+    "dependent_opportunity_ids",
+    "unlock_probabilities",
+    "dependent_incremental_national_values_m_sar",
+    "dependency_shares",
+    "enabler_cost_m_sar",
+    "graph_projection_id",
+)
+
+
+def shared_enabler_unlock_value(
+    probabilities: list[float],
+    incremental_national_values_m_sar: list[float],
+    dependency_shares: list[float],
+    enabler_cost_m_sar: float,
+) -> float:
+    if not (
+        len(probabilities)
+        == len(incremental_national_values_m_sar)
+        == len(dependency_shares)
+    ):
+        raise ValueError("Shared enabler input lists must have equal length")
+    return sum(
+        probability * value * share
+        for probability, value, share in zip(
+            probabilities,
+            incremental_national_values_m_sar,
+            dependency_shares,
+            strict=True,
+        )
+    ) - enabler_cost_m_sar
+
+
+def evaluate_shared_enabler_route(
+    inputs: dict[str, Any] | None,
+) -> dict[str, Any]:
+    route = _base_route(8)
+    if inputs is None:
+        route["status"] = NOT_CALCULABLE
+        route["reason_codes"] = ["GRAPH_REQUIRED"]
+        route["reasons"], route["localized_reasons"] = _reason_payload(
+            ["GRAPH_REQUIRED"],
+            8,
+        )
+        return route
+    raise EvidenceIntegrityError(
+        "Route 8 inputs must originate from the governed Neo4j "
+        "projection (S16)"
+    )
+
+
+def _capability_band_gate(
+    route_code: int,
+    route: dict[str, Any],
+    capability: dict[str, Any],
+) -> None:
+    if route["status"] != "passes":
+        return
+    bands = thresholds_config()["capability"]["route_bands"]
+    incremental_max = float(bands["incremental_upgrade_max"])
+    major_max = float(bands["major_line_or_jv_max"])
+    distance = _known_number(capability.get("d_star"))
+    if route_code == BROWNFIELD_ROUTE_CODE:
+        if distance is None:
+            route["status"] = NOT_CALCULABLE
+            route["reason_codes"].append("CAPABILITY_UNPUBLISHED")
+        elif distance > incremental_max:
+            route["status"] = "fails"
+            route["reason_codes"].append("CAPABILITY_BAND_FAILED")
+    elif route_code == 6:
+        if distance is None:
+            route["status"] = NOT_CALCULABLE
+            route["reason_codes"].append("CAPABILITY_UNPUBLISHED")
+        elif distance <= incremental_max or distance > major_max:
+            route["status"] = "fails"
+            route["reason_codes"].append("CAPABILITY_BAND_FAILED")
+    if route["reason_codes"]:
+        route["reasons"], route["localized_reasons"] = _reason_payload(
+            route["reason_codes"],
+            route_code,
+        )
 
 
 def _known_number(value: Any) -> float | None:
@@ -460,24 +551,28 @@ def _evaluate_record(
     competition, competition_status = _competition(
         record.get("competition")
     )
-    components = {
+    pass_components = {
         feasibility,
-        resolution,
         additionality,
         policy,
         economics_status,
         national_status,
         competition_status,
     }
-    if "fails" in components:
+    if "fails" in pass_components:
         status = "fails"
-    elif components == {"passes"}:
+    elif pass_components == {"passes"}:
         status = "passes"
     else:
         status = NOT_CALCULABLE
     reason_codes: list[str] = []
-    if feasibility == NOT_CALCULABLE or resolution == NOT_CALCULABLE:
+    if feasibility == NOT_CALCULABLE:
         reason_codes.append("INPUT_UNAVAILABLE")
+    elif feasibility == "fails":
+        reason_codes.append("FEASIBILITY_FAILED")
+    if resolution == NOT_CALCULABLE and status == NOT_CALCULABLE:
+        if "INPUT_UNAVAILABLE" not in reason_codes:
+            reason_codes.append("INPUT_UNAVAILABLE")
     if additionality == "fails":
         reason_codes.append("ADDITIONALITY_FAILED")
     if policy == "fails":
@@ -490,6 +585,8 @@ def _evaluate_record(
         reason_codes.append("NATIONAL_VALUE_NONPOSITIVE")
     if competition_status == "fails":
         reason_codes.append("COMPETITION_FAILED")
+    if status == "passes" and resolution == "fails":
+        reason_codes.append("PARTIAL_RESOLUTION")
     route.update(
         {
             "status": status,
@@ -606,7 +703,15 @@ def evaluate_route_hypotheses(
     capability: dict[str, Any],
     gap_class: dict[str, Any],
     rejection_conditions: list[dict[str, Any]],
+    *,
+    detected_constraint: str | None = None,
+    shared_enabler: dict[str, Any] | None = None,
 ) -> list[dict[str, Any]]:
+    if shared_enabler is not None:
+        raise EvidenceIntegrityError(
+            "Route 8 inputs must originate from the governed Neo4j "
+            "projection (S16)"
+        )
     evidence = _route_evidence(case)
     hypotheses = [
         _route_zero(
@@ -624,28 +729,38 @@ def evaluate_route_hypotheses(
             )
         else:
             route = _base_route(route_code)
-            route["reason_codes"] = ["ROUTE_EVIDENCE_REQUIRED"]
             if (
-                route_code == BROWNFIELD_ROUTE_CODE
-                and any(
-                    row.get("rule_id") == "R9-S"
-                    and row.get("fired") is True
-                    for row in rules
-                )
-                and gap_class.get("constraint_class")
-                == "capacity_or_availability"
+                detected_constraint is not None
+                and detected_constraint
+                not in ROUTE_CONSTRAINTS.get(route_code, set())
             ):
-                route["priority"] = True
-                route["reason_codes"] = [
-                    "INCUMBENT_ADJACENCY_PRIORITY",
-                    "ECONOMICS_UNAVAILABLE",
-                ]
+                route["status"] = "fails"
+                route["reason_codes"] = ["CONSTRAINT_CLASS_NOT_APPLICABLE"]
+            else:
+                route["reason_codes"] = ["ROUTE_EVIDENCE_REQUIRED"]
+                if (
+                    route_code == BROWNFIELD_ROUTE_CODE
+                    and any(
+                        row.get("rule_id") == "R9-S"
+                        and row.get("fired") is True
+                        for row in rules
+                    )
+                    and gap_class.get("constraint_class")
+                    == "capacity_or_availability"
+                ):
+                    route["priority"] = True
+                    route["reason_codes"] = [
+                        "INCUMBENT_ADJACENCY_PRIORITY",
+                        "ECONOMICS_UNAVAILABLE",
+                    ]
             route["reasons"], route[
                 "localized_reasons"
             ] = _reason_payload(
                 route["reason_codes"],
                 route_code,
             )
+        if route_code in {5, 6}:
+            _capability_band_gate(route_code, route, capability)
         hypotheses.append(route)
     route_seven = hypotheses[7]
     _route_seven_gates(route_seven, case, capability)
@@ -678,11 +793,7 @@ def evaluate_route_hypotheses(
             brownfield["reason_codes"],
             5,
         )
-    graph_route = _base_route(8)
-    graph_route["reason_codes"] = ["GRAPH_REQUIRED"]
-    graph_route["reasons"], graph_route[
-        "localized_reasons"
-    ] = _reason_payload(["GRAPH_REQUIRED"], 8)
+    graph_route = evaluate_shared_enabler_route(None)
     hypotheses.append(graph_route)
     return apply_precedence(hypotheses)
 

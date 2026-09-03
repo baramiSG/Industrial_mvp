@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from copy import deepcopy
+import math
 from math import isfinite
 from typing import Any, Iterable, Literal
 
@@ -453,7 +454,16 @@ def _nameplate_check(
                 "not a finite, non-negative number."
             ),
         )
-    if public_total is None:
+    expansion = inputs.get("expansion_assumption")
+    expansion_applied = False
+    ceiling = public_total
+    if isinstance(expansion, dict):
+        planned = _finite_number(expansion.get("planned_nameplate_kt"))
+        if planned is not None and planned > 0:
+            ceiling = planned
+            expansion_applied = True
+    check_inputs["expansion_assumption_applied"] = expansion_applied
+    if ceiling is None:
         return _check(
             "line_nameplate_within_disclosed_public_capacity",
             source,
@@ -466,7 +476,7 @@ def _nameplate_check(
             ),
         )
 
-    passes = nameplate <= public_total
+    passes = nameplate <= ceiling
     return _check(
         "line_nameplate_within_disclosed_public_capacity",
         source,
@@ -475,9 +485,9 @@ def _nameplate_check(
         blocking=True,
         inputs=check_inputs,
         detail=(
-            f"{nameplate:g} kt <= {public_total:g} kt."
+            f"{nameplate:g} kt <= {ceiling:g} kt."
             if passes
-            else f"{nameplate:g} kt exceeds {public_total:g} kt."
+            else f"{nameplate:g} kt exceeds {ceiling:g} kt."
         ),
     )
 
@@ -688,6 +698,7 @@ def _demand_layer_observation(
     committed = _finite_number(
         demand.get("committed_demand_kt")
     )
+    base_demand = _finite_number(demand.get("base_demand_kt"))
     return _check(
         "demand_layers_remain_separate",
         source,
@@ -698,6 +709,7 @@ def _demand_layer_observation(
             "target_spec_demand_kt": target,
             "downside_demand_kt": downside,
             "committed_demand_kt": committed,
+            "base_demand_kt": base_demand,
             "downside_within_target": (
                 None
                 if target is None or downside is None
@@ -716,24 +728,438 @@ def _demand_layer_observation(
     )
 
 
-def _allocation_check() -> dict[str, Any]:
+def _latest_public_trade(public_case: dict[str, Any]) -> dict[str, Any]:
+    trade = public_case.get("trade", [])
+    dated = [
+        row
+        for row in trade
+        if isinstance(row, dict)
+        and isinstance(row.get("year"), int)
+        and not isinstance(row.get("year"), bool)
+    ]
+    return max(dated, key=lambda row: row["year"]) if dated else {}
+
+
+def _tariff_line_allocation_check(
+    inputs: dict[str, Any],
+    public_case: dict[str, Any],
+) -> dict[str, Any]:
+    source = "Core 06 §5.1 lines 92-101; Core 05 §8 lines 182-195"
+    formula = (
+        "sum(tariff_line_allocation.lines.quantity_kt) == "
+        "latest public imports_kt"
+    )
+    block = inputs.get("tariff_line_allocation")
+    if not isinstance(block, dict):
+        return _check(
+            "tariff_line_allocation_sums_to_public_hs6_total",
+            source,
+            formula,
+            "NOT_APPLICABLE",
+            blocking=True,
+            inputs={},
+            detail="No tariff_line_allocation block is declared.",
+        )
+    lines = block.get("lines")
+    if not isinstance(lines, list) or not lines:
+        return _check(
+            "tariff_line_allocation_sums_to_public_hs6_total",
+            source,
+            formula,
+            "FAIL",
+            blocking=True,
+            inputs={},
+            detail="tariff_line_allocation.lines must be a non-empty list.",
+        )
+    quantities: list[float] = []
+    values: list[float] = []
+    has_value = False
+    for index, line in enumerate(lines):
+        if not isinstance(line, dict):
+            return _check(
+                "tariff_line_allocation_sums_to_public_hs6_total",
+                source,
+                formula,
+                "FAIL",
+                blocking=True,
+                inputs={},
+                detail=f"tariff_line_allocation.lines[{index}] must be a mapping.",
+            )
+        qty = _finite_number(line.get("quantity_kt"))
+        if qty is None or qty < 0:
+            return _check(
+                "tariff_line_allocation_sums_to_public_hs6_total",
+                source,
+                formula,
+                "FAIL",
+                blocking=True,
+                inputs={},
+                detail=(
+                    f"tariff_line_allocation.lines[{index}].quantity_kt "
+                    "must be finite and non-negative."
+                ),
+            )
+        quantities.append(qty)
+        if "value_usd_m" in line:
+            has_value = True
+            val = _finite_number(line.get("value_usd_m"))
+            if val is None or val < 0:
+                return _check(
+                    "tariff_line_allocation_sums_to_public_hs6_total",
+                    source,
+                    formula,
+                    "FAIL",
+                    blocking=True,
+                    inputs={},
+                    detail=(
+                        f"tariff_line_allocation.lines[{index}].value_usd_m "
+                        "must be finite and non-negative."
+                    ),
+                )
+            values.append(val)
+    latest = _latest_public_trade(public_case)
+    imports_kt = _finite_number(latest.get("imports_kt"))
+    if imports_kt is None:
+        return _check(
+            "tariff_line_allocation_sums_to_public_hs6_total",
+            source,
+            formula,
+            "FAIL",
+            blocking=True,
+            inputs={"sum_quantity_kt": sum(quantities)},
+            detail="Latest public imports_kt is unavailable.",
+        )
+    total_qty = sum(quantities)
+    qty_passes = math.isclose(
+        total_qty,
+        imports_kt,
+        rel_tol=0.0,
+        abs_tol=1e-9,
+    )
+    value_passes = True
+    if has_value:
+        imports_usd = _finite_number(latest.get("imports_usd_m"))
+        if imports_usd is None:
+            value_passes = False
+        else:
+            value_passes = math.isclose(
+                sum(values),
+                imports_usd,
+                rel_tol=0.0,
+                abs_tol=1e-9,
+            )
+    passes = qty_passes and value_passes
     return _check(
-        "tariff_line_or_buyer_allocations_reconcile",
-        (
-            "Core 06 §5.1 lines 92-101; "
-            "Core 05 §8 lines 182-195"
-        ),
-        (
-            "sum(buyer quantities) <= public HS6 imports; "
-            "sum(tariff-line transactions) == parent HS6 total "
-            "when a governed compatible block exists"
-        ),
-        "NOT_APPLICABLE",
+        "tariff_line_allocation_sums_to_public_hs6_total",
+        source,
+        formula,
+        "PASS" if passes else "FAIL",
         blocking=True,
-        inputs={},
+        inputs={
+            "sum_quantity_kt": total_qty,
+            "latest_public_imports_kt": imports_kt,
+            "sum_value_usd_m": sum(values) if has_value else None,
+            "latest_public_imports_usd_m": latest.get("imports_usd_m"),
+        },
         detail=(
-            "No governed tariff-line or buyer allocation block is "
-            "present; no allocation sum was evaluated."
+            f"Tariff-line quantities sum to {total_qty:g} kt against "
+            f"public imports {imports_kt:g} kt."
+            if passes
+            else "Tariff-line allocation does not reconcile to public HS6 totals."
+        ),
+    )
+
+
+def _buyer_allocation_check(
+    inputs: dict[str, Any],
+    public_case: dict[str, Any],
+) -> dict[str, Any]:
+    source = "Core 06 §5.1 lines 92-101"
+    formula = "sum(buyer_allocation.buyers.quantity_kt) <= latest public imports_kt"
+    block = inputs.get("buyer_allocation")
+    if not isinstance(block, dict):
+        return _check(
+            "buyer_allocation_within_public_imports",
+            source,
+            formula,
+            "NOT_APPLICABLE",
+            blocking=True,
+            inputs={},
+            detail="No buyer_allocation block is declared.",
+        )
+    buyers = block.get("buyers")
+    if not isinstance(buyers, list) or not buyers:
+        return _check(
+            "buyer_allocation_within_public_imports",
+            source,
+            formula,
+            "FAIL",
+            blocking=True,
+            inputs={},
+            detail="buyer_allocation.buyers must be a non-empty list.",
+        )
+    total = 0.0
+    for index, buyer in enumerate(buyers):
+        if not isinstance(buyer, dict):
+            return _check(
+                "buyer_allocation_within_public_imports",
+                source,
+                formula,
+                "FAIL",
+                blocking=True,
+                inputs={},
+                detail=f"buyer_allocation.buyers[{index}] must be a mapping.",
+            )
+        qty = _finite_number(buyer.get("quantity_kt"))
+        if qty is None or qty < 0:
+            return _check(
+                "buyer_allocation_within_public_imports",
+                source,
+                formula,
+                "FAIL",
+                blocking=True,
+                inputs={},
+                detail=(
+                    f"buyer_allocation.buyers[{index}].quantity_kt "
+                    "must be finite and non-negative."
+                ),
+            )
+        total += qty
+    latest = _latest_public_trade(public_case)
+    imports_kt = _finite_number(latest.get("imports_kt"))
+    if imports_kt is None:
+        return _check(
+            "buyer_allocation_within_public_imports",
+            source,
+            formula,
+            "FAIL",
+            blocking=True,
+            inputs={"sum_quantity_kt": total},
+            detail="Latest public imports_kt is unavailable.",
+        )
+    passes = total <= imports_kt
+    return _check(
+        "buyer_allocation_within_public_imports",
+        source,
+        formula,
+        "PASS" if passes else "FAIL",
+        blocking=True,
+        inputs={
+            "sum_quantity_kt": total,
+            "latest_public_imports_kt": imports_kt,
+        },
+        detail=(
+            f"Buyer quantities sum to {total:g} kt within public "
+            f"imports {imports_kt:g} kt."
+            if passes
+            else "Buyer allocation exceeds public HS6 imports."
+        ),
+    )
+
+
+_MIN_ISO_DATE_PREFIX_LEN = 4
+
+
+def _expansion_assumption_check(
+    inputs: dict[str, Any],
+    public_case: dict[str, Any],
+) -> dict[str, Any]:
+    source = "Core 06 §5.1 lines 92-101; KL-38"
+    formula = (
+        "planned_nameplate_kt >= disclosed public nameplate; "
+        "commissioning_year >= public as_of year; "
+        "plant_line.nameplate_kt <= planned_nameplate_kt"
+    )
+    block = inputs.get("expansion_assumption")
+    if not isinstance(block, dict):
+        return _check(
+            "expansion_assumption_disclosed_and_bounded",
+            source,
+            formula,
+            "NOT_APPLICABLE",
+            blocking=True,
+            inputs={},
+            detail="No expansion_assumption block is declared.",
+        )
+    planned = _finite_number(block.get("planned_nameplate_kt"))
+    year = block.get("commissioning_year")
+    disclosed = block.get("disclosed")
+    line = inputs.get("plant_line")
+    line_nameplate = (
+        _finite_number(line.get("nameplate_kt"))
+        if isinstance(line, dict)
+        else None
+    )
+    public_total, _, _invalid = _public_nameplate_total(public_case)
+    as_of_year = None
+    as_of = public_case.get("as_of_date")
+    if isinstance(as_of, str) and len(as_of) >= _MIN_ISO_DATE_PREFIX_LEN:
+        try:
+            as_of_year = int(as_of[:4])
+        except ValueError:
+            as_of_year = None
+    checks = [
+        planned is not None and planned > 0,
+        isinstance(year, int) and not isinstance(year, bool),
+        disclosed is True,
+        public_total is None or planned >= public_total,
+        as_of_year is None or year >= as_of_year,
+        line_nameplate is None or planned >= line_nameplate,
+    ]
+    passes = all(checks)
+    return _check(
+        "expansion_assumption_disclosed_and_bounded",
+        source,
+        formula,
+        "PASS" if passes else "FAIL",
+        blocking=True,
+        inputs={
+            "planned_nameplate_kt": planned,
+            "commissioning_year": year,
+            "disclosed": disclosed,
+            "line_nameplate_kt": line_nameplate,
+            "disclosed_public_nameplate_kt": public_total,
+            "public_as_of_year": as_of_year,
+        },
+        detail=(
+            "Expansion assumption is disclosed and bounded."
+            if passes
+            else "Expansion assumption is not disclosed and bounded."
+        ),
+    )
+
+
+def _retained_flows_check(
+    inputs: dict[str, Any],
+    public_case: dict[str, Any],
+) -> dict[str, Any]:
+    source = "Core 06 §5.1; methodology §3.3"
+    formula = (
+        "retained_imports_kt <= imports_kt; "
+        "retained + reexports == imports when reexports numeric; "
+        "domestic_origin_exports_kt <= public exports_kt"
+    )
+    block = inputs.get("production_and_retained_flows")
+    if not isinstance(block, dict):
+        return _check(
+            "retained_flows_reconcile_to_public_trade",
+            source,
+            formula,
+            "NOT_APPLICABLE",
+            blocking=True,
+            inputs={},
+            detail="No production_and_retained_flows block is declared.",
+        )
+    retained = _finite_number(block.get("retained_imports_kt"))
+    reexports = block.get("reexports_kt")
+    reexport_qty = (
+        _finite_number(reexports)
+        if reexports != "UNAVAILABLE"
+        else None
+    )
+    domestic_exports = _finite_number(
+        block.get("domestic_origin_exports_kt")
+    )
+    latest = _latest_public_trade(public_case)
+    imports_kt = _finite_number(latest.get("imports_kt"))
+    public_exports = _finite_number(latest.get("exports_kt"))
+    passes = True
+    if retained is not None and imports_kt is not None:
+        passes = passes and retained <= imports_kt
+    if (
+        retained is not None
+        and reexport_qty is not None
+        and imports_kt is not None
+    ):
+        passes = passes and math.isclose(
+            retained + reexport_qty,
+            imports_kt,
+            rel_tol=0.0,
+            abs_tol=1e-9,
+        )
+    if domestic_exports is not None and public_exports is not None:
+        passes = passes and domestic_exports <= public_exports
+    return _check(
+        "retained_flows_reconcile_to_public_trade",
+        source,
+        formula,
+        "PASS" if passes else "FAIL",
+        blocking=True,
+        inputs={
+            "retained_imports_kt": retained,
+            "reexports_kt": reexports,
+            "domestic_origin_exports_kt": domestic_exports,
+            "latest_public_imports_kt": imports_kt,
+            "latest_public_exports_kt": public_exports,
+        },
+        detail=(
+            "Retained flows reconcile to public trade marginals."
+            if passes
+            else "Retained flows do not reconcile to public trade marginals."
+        ),
+    )
+
+
+def _base_demand_probability_check(
+    inputs: dict[str, Any],
+) -> dict[str, Any]:
+    source = "Core 06 §5.2; Core 07 §3 R8"
+    formula = (
+        "0 <= commitment_probability <= 1; "
+        "base_demand_kt > 0; minimum_efficient_scale_kt > 0 when declared"
+    )
+    demand = inputs.get("demand")
+    economics = inputs.get("economics")
+    base = (
+        _finite_number(demand.get("base_demand_kt"))
+        if isinstance(demand, dict)
+        else None
+    )
+    probability = (
+        _finite_number(demand.get("commitment_probability"))
+        if isinstance(demand, dict)
+        else None
+    )
+    mes = (
+        _finite_number(economics.get("minimum_efficient_scale_kt"))
+        if isinstance(economics, dict)
+        else None
+    )
+    if base is None and probability is None and mes is None:
+        return _check(
+            "base_demand_and_commitment_probability_valid",
+            source,
+            formula,
+            "NOT_APPLICABLE",
+            blocking=True,
+            inputs={},
+            detail=(
+                "No base demand, commitment probability or MES block "
+                "is declared."
+            ),
+        )
+    passes = True
+    if base is not None:
+        passes = passes and base > 0
+    if probability is not None:
+        passes = passes and 0 <= probability <= 1
+    if mes is not None:
+        passes = passes and mes > 0
+    return _check(
+        "base_demand_and_commitment_probability_valid",
+        source,
+        formula,
+        "PASS" if passes else "FAIL",
+        blocking=True,
+        inputs={
+            "base_demand_kt": base,
+            "commitment_probability": probability,
+            "minimum_efficient_scale_kt": mes,
+        },
+        detail=(
+            "Base demand, commitment probability and MES inputs are valid."
+            if passes
+            else "Base demand, commitment probability or MES inputs are invalid."
         ),
     )
 
@@ -762,7 +1188,11 @@ def reconcile_synthetic_scenario(
         _capacity_factor_check(inputs),
         _qualified_availability_check(inputs),
         _demand_layer_observation(inputs),
-        _allocation_check(),
+        _tariff_line_allocation_check(inputs, public_case),
+        _buyer_allocation_check(inputs, public_case),
+        _expansion_assumption_check(inputs, public_case),
+        _retained_flows_check(inputs, public_case),
+        _base_demand_probability_check(inputs),
     ]
     blocking_results = [
         check["result"]

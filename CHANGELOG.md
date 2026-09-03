@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Generalized simulated route evaluation on scenario contract 2.0.0 with
+  bilingual narratives, ten Gate B reconciliation checks, simulated R5/R8
+  ledger semantics, route-8 `GRAPH_REQUIRED`, and `CLASS_IF_CONFIRMED`
+  advance gating while preserving frozen public goldens.
 - Generalized the public selector over PublicSnapshot 2.1.0: four
   evidence-class assessments, a configured source-independent ADVANCE gate,
   six typed hard exclusions, one-primary gap taxonomy, evidenced rejection

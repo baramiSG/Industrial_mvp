@@ -19,7 +19,9 @@ Statuses used on this branch are `NOT_STARTED`, `PLANNED`, `IMPLEMENTED`, `TESTE
 - **S07-LOCAL:** `.workflow/slices/S07-bilingual-interface-foundation/test_evidence.md` and `implementation_log.md`; local evidence covers catalogue/policy parity, token and ES-module scanners, exact vendored-font provenance, 118 bilingual functional Chromium nodes, four visual nodes comparing 40 canonical lossless WebPs, both Python versions, integrity/Gate B/smoke, and unchanged public/simulated goldens. This is implementation evidence only; it does not claim independent approval, hosted CI, PR, merge, closure, or release.
 - **S08-CI:** PR #10 (head `38f033a`) five checks green incl. `browser / Chromium / Python 3.12`; default-branch run `33637594756` (merge `8b6d55c`) five jobs green.
 - **S08-LOCAL:** `.workflow/slices/S08-snapshot-v2-computed-rules/test_evidence.md` and `implementation_log.md`; local evidence covers schema 2.0.0 validation/history, exact migration equivalence, computed R1-D/R2/R3/R4-D/R5/R9-S/R10/R11 behavior and boundaries, contradiction-register isolation/localization, host-owned canonical baseline regeneration, both Python versions, integrity/Gate B/smoke, and unchanged public/simulated goldens. This is implementation evidence only; it does not claim independent approval, hosted CI, PR, merge, effective limitation closure, or release.
-- **S09-LOCAL:** `.workflow/slices/S09-public-decision-and-profiles/test_evidence.md` and `implementation_log.md`; local evidence covers PublicSnapshot 2.1.0 and contract removal, four evidence-class assessments and the source-independent ADVANCE gate, six exclusions, one-primary gap taxonomy, amended-I1 state branches, routes 0–8 hypotheses and amended-I5 selection, five sector profiles, predicate-selected evidence needs, bilingual public narratives, signals module and ADVANCE support guard, typed rejection narratives, route-determination INVESTIGATE, confidence cap, and unchanged scenario-authored simulation narratives/numbers. Five host-owned canonical baseline executions are recorded: the initial capture; one route-spacing defect correction; two provenance refreshes after methodology self-audit; and the correction-round refresh under `S09-generalized-public-decision-corrections`, each preceded by a complete 118-node functional pass. This is uncommitted implementation evidence only; it does not claim independent approval, hosted CI, PR, merge, effective limitation closure, or milestone completion.
+- **S09-LOCAL:** `.workflow/slices/S09-public-decision-and-profiles/test_evidence.md` and `implementation_log.md`; local evidence covers PublicSnapshot 2.1.0 and contract removal, four evidence-class assessments and the source-independent ADVANCE gate, six exclusions, one-primary gap taxonomy, amended-I1 state branches, routes 0–8 hypotheses and amended-I5 selection, five sector profiles, predicate-selected evidence needs, bilingual public narratives, signals module and ADVANCE support guard, typed rejection narratives, route-determination INVESTIGATE, confidence cap, and unchanged scenario-authored simulation narratives/numbers. Five host-owned canonical baseline executions are recorded: the initial capture; one route-spacing defect correction; two provenance refreshes after methodology self-audit; and the correction-round refresh under `S09-generalized-public-decision-corrections`, each preceded by a complete 118-node functional pass. This registry item remains local execution evidence; independent approval and delivery are recorded separately in S09-CI.
+- **S09-CI:** PR #12 head `f772da6d4f23d3e1c4263e577fbc5a756b35a7ad`, run `33754472700`, and default-branch merge `66d4835d8c13b0421de271222e2422aff0cb5eb7`, run `33755119710`; all five jobs green on both exact SHAs. Independent Grok approval had zero findings on tree `313edc480668d4e1201ba0c5a46525ed0000feb5`; post-merge integrity passed.
+- **S10-LOCAL:** `.workflow/slices/S10-generalized-simulation/test_evidence.md` and `implementation_log.md`; local evidence covers scenario contract 2.0.0, generalized simulated routes 0–7 and MONITOR, route-8 `GRAPH_REQUIRED` contract, simulated R5/R8 ledger semantics, ten Gate B reconciliation checks, bilingual simulated narratives, `class_if_confirmed` ADVANCE gating, ten fixture proofs, migration equivalence with byte-identical historical 1.1.0 files, unchanged four frozen outcomes/numbers, and canonical visual baseline refresh `S10-generalized-simulation` with public workspace oracles restored byte-identical to base `66d4835`. Two justified `build_manifests.py` runs are recorded: candidate 2 (T13 initial) and candidate 3 (Core 01 T12 correction). This registry item remains local execution evidence; independent approval and delivery are recorded separately in S10-CI.
 
 The Gate G/TL-07 proof scope now combines the preserved live HTTP/API and static contracts with Real Chromium interaction: case cards/select/hero, both evidence modes, adaptive manifests, dossier popup and clipboard, print media and PDF bytes, 15-control Tab order with visible focus, zero axe WCAG 2.1 A/AA violations, Arabic RTL/non-tofu rendering, and overflow/actionability at 1440×900, 1024×768, 1920×1080, and 2560×1440. S06 screenshots are documentary references only and are never compared; governed visual-regression oracles begin in S07 under ruling R-4.
 
@@ -93,11 +95,11 @@ The Gate G/TL-07 proof scope now combines the preserved live HTTP/API and static
 | INV-02 | Synthetic evidence affects only simulation state. | fingerprint/back-test guards; fidelity tests; CI-S04. | COMPLETE | S01/S04 |
 | INV-03 | Synthetic records are Class D, generator-sourced, flagged, and disclosed. | Policy validation and exact ledger tests; CI-S03, CI-S04. | COMPLETE | S03 |
 | INV-04 | Missing real evidence remains unresolved. | Public D* gate/data unlocks and dossier; CI-S03, CI-S04. | COMPLETE | S03 |
-| INV-05 | Decision-critical D/E evidence blocks real `ADVANCE`. | Public selector and goldens; CI-ALL. | COMPLETE | S01 |
+| INV-05 | Decision-critical D/E evidence blocks real `ADVANCE`. | Public selector, class-if-confirmed simulated gate and goldens; `tests/test_simulation_generalized.py`; CI-ALL, S10-LOCAL. | COMPLETE | S01/S10 |
 | INV-06 | Unknown capability cannot improve adjacency. | λ/U implementation and test; CI-ALL. | COMPLETE | S01 |
 | INV-07 | Thresholds are versioned configuration, not hidden constants. | Config predicates, recursive scanner and boundaries; CI-S02–CI-S04, S05-FOCUSED. | COMPLETE | S02/S05 |
 | INV-08 | Unit-value dispersion never proves grade. | R4-D row/disclosure wording, non-confirmed outlier candidate and anti-grade tests; CI-ALL, S08-LOCAL. | COMPLETE | S01/S08 |
-| INV-09 | Lower-cost/no-action routes precede supported greenfield. | Route order/no route 7 tests; CI-S04. | COMPLETE | S01/S04 |
+| INV-09 | Lower-cost/no-action routes precede supported greenfield. | Route order/no route 7 tests; simulated route-selection fixtures; CI-S04, S10-LOCAL. | COMPLETE | S01/S04/S10 |
 | INV-10 | Goldens use hashed local snapshots only. | Repository loaders/integrity; CI-ALL. | COMPLETE | S01 |
 | INV-11 | Steel public `INVESTIGATE` and PP public `REJECT` remain exact. | `test_golden_cases.py`; CI-ALL. | COMPLETE | S01 |
 | INV-12 | Calculation is autonomous; authorization is accountable. | Read-only GET API and governance copy; static/API tests; CI-ALL. | COMPLETE | S01 |
@@ -194,23 +196,45 @@ The complete S05 local harness run `20260902T033607Z-17501` observed the associa
 
 | ID | Observable acceptance | Implementation and local execution evidence | Status | Slice |
 |---|---|---|---|---|
-| V3-C1 | Public state, route, gap, needs and narrative are computed without an authored decision contract or case-ID dispatch. | `public_decision.py`, `evidence_needs.py`, `narratives.py`; schema 2.1 removes `public_decision_contract`; source-independence and fixture tests; S09-LOCAL. | TESTED | S09 |
-| V3-C2 | Any conforming PublicSnapshot 2.1.0 is validated and analysable without Python changes. | `public_snapshot.py`; four synthetic-free complete fixtures; schema/migration/API tests; S09-LOCAL. | TESTED | S09 |
-| V3-C4-public | Public `ADVANCE`, `INVESTIGATE`, `MONITOR`, and evidenced `REJECT` branches are executable. | Advance, monitor, exclusion-reject and equivalence-reject fixtures; per-field D/E downgrades; S09-LOCAL. | TESTED | S09 |
-| V3-C5-public | Public analysis emits ordered route hypotheses with precedence and maximum-defensible-national-value selection. | `route_hypotheses.py`; order, max-ΔNV, tie, lower-route, support-sequence and route-7 tests; S09-LOCAL. | TESTED | S09 |
-| V3-C8 | No product/opportunity ID, producer name or evidence source type determines a public decision or route. | Full passport-source mutation and AST predicate audit over six engine modules; S09-LOCAL. | TESTED | S09 |
-| V3-D1 | All five methodology §6.3 sector profiles are loaded with complete gates and boundary proof. | `sector_profiles.v1.yaml` 1.1.0; 82 profile tests; S09-LOCAL. | TESTED | S09 |
-| V3-D3 | The configured four-field ADVANCE gate executes on evidence class and resolution status. | `evidence.evaluate_advance_gate`; evidence policy 1.3.0; positive A/B/C and eight D/E downgrade tests; S09-LOCAL. | TESTED | S09 |
-| V3-D9-public | Routes 0–8 are exercised as public hypotheses; route 8 remains graph-required. | PP route 0, steel route-5 preference, route-3 positive fixture, pure route-selection matrix, route-8 rejection/GRAPH_REQUIRED tests; S09-LOCAL. | TESTED | S09 |
+| V3-C1 | Public state, route, gap, needs and narrative are computed without an authored decision contract or case-ID dispatch. | `public_decision.py`, `evidence_needs.py`, `narratives.py`; schema 2.1 removes `public_decision_contract`; source-independence and fixture tests; S09-LOCAL and S09-CI. | COMPLETE | S09 |
+| V3-C2 | Any conforming PublicSnapshot 2.1.0 is validated and analysable without Python changes. | `public_snapshot.py`; four synthetic-free complete fixtures; schema/migration/API tests; S09-LOCAL and S09-CI. | COMPLETE | S09 |
+| V3-C4-public | Public `ADVANCE`, `INVESTIGATE`, `MONITOR`, and evidenced `REJECT` branches are executable. | Advance, monitor, exclusion-reject and equivalence-reject fixtures; per-field D/E downgrades; S09-LOCAL and S09-CI. | COMPLETE | S09 |
+| V3-C5-public | Public analysis emits ordered route hypotheses with precedence and maximum-defensible-national-value selection. | `route_hypotheses.py`; order, max-ΔNV, tie, lower-route, support-sequence and route-7 tests; S09-LOCAL and S09-CI. | COMPLETE | S09 |
+| V3-C8 | No product/opportunity ID, producer name or evidence source type determines a public decision or route. | Full passport-source mutation and AST predicate audit over six engine modules; S09-LOCAL and S09-CI. | COMPLETE | S09 |
+| V3-D1 | All five methodology §6.3 sector profiles are loaded with complete gates and boundary proof. | `sector_profiles.v1.yaml` 1.1.0; 82 profile tests; S09-LOCAL and S09-CI. | COMPLETE | S09 |
+| V3-D3 | The configured four-field ADVANCE gate executes on evidence class and resolution status. | `evidence.evaluate_advance_gate`; evidence policy 1.3.0; positive A/B/C and eight D/E downgrade tests; S09-LOCAL and S09-CI. | COMPLETE | S09 |
+| V3-D9-public | Routes 0–8 are exercised as public hypotheses; route 8 remains graph-required. | PP route 0, steel route-5 preference, route-3 positive fixture, pure route-selection matrix, route-8 rejection/GRAPH_REQUIRED tests; S09-LOCAL and S09-CI. | COMPLETE | S09 |
 
 ### S09 Core 01 FR-030–FR-049 evidence
 
 | IDs | S09 local evidence | Status |
 |---|---|---|
-| FR-030–FR-034 | Existing effective-capacity/K/U/D*/band formulas re-proven across five profiles; ordinary state 3 no longer impersonates a hard-gate failure. | TESTED |
-| FR-035–FR-039 | Five-profile validation, profile/decision gate separation, four field assessments, configured source-independent ADVANCE gate, six exclusions and one-primary taxonomy. | TESTED |
-| FR-040–FR-045 | Existing unsupported economics, NPV/IRR/S*, national value, competition and EVSI exacts preserved; route-evidence fixture adds public route economics. | TESTED |
-| FR-046–FR-049 | Nine route hypotheses, lower-route precedence/max-ΔNV, route-8 GRAPH_REQUIRED, computed needs/conditions/kills and governed EN/AR narratives. | TESTED |
+| FR-030–FR-034 | Existing effective-capacity/K/U/D*/band formulas re-proven across five profiles; ordinary state 3 no longer impersonates a hard-gate failure. | COMPLETE |
+| FR-035–FR-039 | Five-profile validation, profile/decision gate separation, four field assessments, configured source-independent ADVANCE gate, six exclusions and one-primary taxonomy. | COMPLETE |
+| FR-040–FR-045 | Existing unsupported economics, NPV/IRR/S*, national value, competition and EVSI exacts preserved; route-evidence fixture adds public route economics. | COMPLETE |
+| FR-046–FR-049 | Nine route hypotheses, lower-route precedence/max-ΔNV, route-8 GRAPH_REQUIRED, computed needs/conditions/kills and governed EN/AR narratives. | COMPLETE |
+
+## K. Milestone v0.3.0 — S10 generalized simulation branch
+
+| ID | Observable acceptance | Implementation and local execution evidence | Status | Slice |
+|---|---|---|---|---|
+| V3-C3-schemas | Scenario contract 2.0.0 governs bilingual narratives, allocation/expansion/flow blocks and `class_if_confirmed`. | `scenario_contract.py`; Core 06 v2; migration and validation tests; S10-LOCAL. | TESTED | S10 |
+| V3-C5-simulated | Simulated analysis emits ordered route hypotheses 0–7 with amended-I5 selection and route-8 refusal. | `simulation.py`, `route_hypotheses.py`; per-route fixtures; S10-LOCAL. | TESTED | S10 |
+| V3-C7 | Every 2.0.0 scenario reconciles to public marginals and carries planted ground truth. | `evidence.reconcile_synthetic_scenario`; Gate B ten checks; ground-truth back-tests; S10-LOCAL. | TESTED | S10 |
+| V3-D5 | Governed tariff-line and buyer-allocation scenario schemas reconcile to public imports. | Contract 2.0.0 blocks; reconciliation PASS/FAIL tests; S10-LOCAL. | TESTED | S10 |
+| V3-D6 | Governed expansion-assumption schema is disclosed and bounded against public nameplate. | Contract 2.0.0 `expansion_assumption`; reconciliation test; S10-LOCAL. | TESTED | S10 |
+| V3-D8 | R8 is calculable when base demand, commitment probability and MES exist. | `rules.evaluate_simulated_rules`; steel MES 50.0; boundary tests; S10-LOCAL. | TESTED | S10 |
+| V3-D9-simulated | Routes 0–7 and MONITOR are exercised in simulation; route 8 remains graph-required. | Ten fixture matrix; route-8 refusal; MONITOR trigger gate; S10-LOCAL. | TESTED | S10 |
+
+### S10 Core 01 FR-055–FR-059 evidence
+
+| ID | Requirement | Implementation and execution evidence | Status | Slice |
+|---|---|---|---|---|
+| FR-055 | Simulated route hypotheses evaluate routes 0–7 plus route-8 contract without graph activation. | `simulation.compute_simulated_decision`; route-8 `GRAPH_REQUIRED` tests; S10-LOCAL. | TESTED | S10 |
+| FR-056 | Scenario contract 2.0.0 validates bilingual narratives and optional blocks with public gate pairing. | `scenario_contract.validate_simulation_contract`; fail-closed tests; S10-LOCAL. | TESTED | S10 |
+| FR-057 | Simulated reconciliation compares declared blocks to public marginals. | Ten Gate B checks; reconciliation tests; S10-LOCAL. | TESTED | S10 |
+| FR-058 | Simulated narratives render bilingually from scenario or catalogue 1.1.0. | `narratives.py`; browser/dossier/API tests; S10-LOCAL. | TESTED | S10 |
+| FR-059 | UI and dossier mirror `simulation_decision` without mutating `real_decision`. | `genui.py`, `dossier.py`, `dom.js`; isolation and contract tests; S10-LOCAL. | TESTED | S10 |
 
 ## Branch and release-state rules
 

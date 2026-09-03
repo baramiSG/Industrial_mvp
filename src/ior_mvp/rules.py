@@ -129,6 +129,83 @@ def evaluate_simulated_rules(
             capacity.get(capacity_key)
         )
 
+    rows: list[dict[str, Any]] = []
+
+    r5_config = rule_config["R5"]
+    flows = inputs.get("production_and_retained_flows")
+    latest_trade = max(public_case.get("trade", []), key=lambda row: row["year"])
+    flow_block: dict[str, Any] = {}
+    if isinstance(flows, dict):
+        flow_block = {
+            "domestic_production_kt": flows.get("domestic_production_kt"),
+            "retained_imports_kt": flows.get("retained_imports_kt"),
+            "domestic_origin_exports_kt": flows.get(
+                "domestic_origin_exports_kt"
+            ),
+            "reexports_kt": flows.get("reexports_kt"),
+        }
+    flow_metrics = domestic_flow_metrics(latest_trade, flow_block)
+    penetration = _domestic_penetration_full_precision(
+        latest_trade,
+        flow_block,
+    )
+    production_kt = _numeric_or_none(flows.get("domestic_production_kt")) if isinstance(flows, dict) else None
+    retained_kt = _numeric_or_none(flows.get("retained_imports_kt")) if isinstance(flows, dict) else None
+    imports_kt = _numeric_or_none(latest_trade.get("imports_kt"))
+    verified_present = bool(
+        public_case.get("domestic_capability", {}).get("verified_present")
+    )
+    r5_threshold = float(
+        r5_config["retained_import_share_of_apparent_consumption"]
+    )
+    if penetration is None:
+        r5_fired: bool | None = None
+        r5_execution = "DISABLED"
+        r5_result = (
+            "Synthetic retained-flow inputs are absent; R5 is not calculable."
+        )
+    else:
+        r5_fired = verified_present and penetration >= r5_threshold
+        r5_execution = "FULL"
+        r5_result = (
+            "Synthetic retained-import penetration meets the configured R5 "
+            "threshold."
+            if r5_fired
+            else "Synthetic retained-import penetration does not meet the "
+            "configured R5 threshold."
+        )
+    rows.append(
+        _synthetic_rule(
+            scenario,
+            "R5",
+            "Retained import penetration",
+            r5_execution,
+            r5_fired,
+            r5_result,
+            "Use only when production and retained-flow blocks are declared.",
+            {
+                "retained_imports_kt": (
+                    retained_kt if retained_kt is not None else NOT_CALCULABLE
+                ),
+                "domestic_production_kt": (
+                    production_kt if production_kt is not None else NOT_CALCULABLE
+                ),
+                "imports_kt": (
+                    imports_kt if imports_kt is not None else NOT_CALCULABLE
+                ),
+                "retained_import_penetration": (
+                    penetration
+                    if penetration is not None
+                    else NOT_CALCULABLE
+                ),
+                "apparent_consumption_kt": flow_metrics.get(
+                    "apparent_consumption_kt"
+                ),
+                "minimum_retained_import_penetration": r5_threshold,
+            },
+        )
+    )
+
     r6_config = rule_config["R6"]
     shortage_ratio = (
         (target_demand - effective_capacity) / effective_capacity
@@ -165,7 +242,7 @@ def evaluate_simulated_rules(
             "Synthetic utilisation or effective qualified capacity "
             "is unavailable; R6 is not calculable."
         )
-    rows = [
+    rows.append(
         _synthetic_rule(
             scenario,
             "R6",
@@ -212,7 +289,7 @@ def evaluate_simulated_rules(
                 "sustained_period": NOT_CALCULABLE,
             },
         )
-    ]
+    )
 
     r7_config = rule_config["R7"]
     maximum_utilisation = float(
@@ -302,17 +379,72 @@ def evaluate_simulated_rules(
     )
 
     r8_config = rule_config["R8"]
+    economics = inputs.get("economics")
+    base_demand = (
+        _numeric_or_none(demand.get("base_demand_kt"))
+        if isinstance(demand, dict)
+        else None
+    )
+    commitment_probability = (
+        _numeric_or_none(demand.get("commitment_probability"))
+        if isinstance(demand, dict)
+        else None
+    )
+    committed = _numeric_or_none(demand.get("committed_demand_kt"))
+    mes = (
+        _numeric_or_none(economics.get("minimum_efficient_scale_kt"))
+        if isinstance(economics, dict)
+        else None
+    )
+    probability_adjusted = (
+        committed * commitment_probability
+        if committed is not None and commitment_probability is not None
+        else None
+    )
+    addition = (
+        probability_adjusted / base_demand
+        if probability_adjusted is not None
+        and base_demand is not None
+        and base_demand > 0
+        else None
+    )
+    mes_fill = (
+        probability_adjusted / mes
+        if probability_adjusted is not None
+        and mes is not None
+        and mes > 0
+        else None
+    )
+    min_addition = float(
+        r8_config["minimum_probability_adjusted_demand_addition"]
+    )
+    min_mes_fill = float(r8_config["minimum_mes_fill"])
+    addition_computable = addition is not None
+    mes_computable = mes_fill is not None
+    if addition_computable and mes_computable:
+        r8_execution = "FULL"
+        r8_fired = addition >= min_addition or mes_fill >= min_mes_fill
+    elif addition_computable or mes_computable:
+        r8_execution = "DEGRADED"
+        r8_fired = (
+            (addition is not None and addition >= min_addition)
+            if addition_computable
+            else (mes_fill is not None and mes_fill >= min_mes_fill)
+        )
+    else:
+        r8_execution = "DISABLED"
+        r8_fired = None
     rows.append(
         _synthetic_rule(
             scenario,
             "R8",
             "Committed future demand",
-            "DISABLED",
-            None,
+            r8_execution,
+            r8_fired,
             (
                 "Committed and announced layers are disclosed, but "
                 "base demand, commitment probability, and minimum "
-                "efficient scale are absent."
+                "efficient scale govern R8 calculability."
             ),
             (
                 "Do not infer probability-adjusted demand addition "
@@ -320,55 +452,52 @@ def evaluate_simulated_rules(
                 "separate."
             ),
             {
-                "base_demand_kt": NOT_CALCULABLE,
+                "base_demand_kt": (
+                    base_demand if base_demand is not None else NOT_CALCULABLE
+                ),
                 "committed_demand_kt": (
-                    demand.get("committed_demand_kt")
-                    if _numeric_or_none(
-                        demand.get("committed_demand_kt")
-                    )
-                    is not None
-                    else NOT_CALCULABLE
+                    committed if committed is not None else NOT_CALCULABLE
                 ),
                 "announced_demand_kt": (
                     demand.get("announced_demand_kt")
-                    if _numeric_or_none(
-                        demand.get("announced_demand_kt")
-                    )
+                    if _numeric_or_none(demand.get("announced_demand_kt"))
                     is not None
                     else NOT_CALCULABLE
                 ),
                 "target_spec_demand_kt": (
-                    target_demand
-                    if target_demand is not None
-                    else NOT_CALCULABLE
+                    target_demand if target_demand is not None else NOT_CALCULABLE
                 ),
                 "downside_demand_kt": (
                     demand.get("downside_demand_kt")
-                    if _numeric_or_none(
-                        demand.get("downside_demand_kt")
-                    )
+                    if _numeric_or_none(demand.get("downside_demand_kt"))
                     is not None
                     else NOT_CALCULABLE
                 ),
-                "commitment_probability": NOT_CALCULABLE,
+                "commitment_probability": (
+                    commitment_probability
+                    if commitment_probability is not None
+                    else NOT_CALCULABLE
+                ),
                 "probability_adjusted_committed_demand_kt": (
-                    NOT_CALCULABLE
+                    round(probability_adjusted, 6)
+                    if probability_adjusted is not None
+                    else NOT_CALCULABLE
                 ),
                 "probability_adjusted_demand_addition": (
-                    NOT_CALCULABLE
+                    round(addition, 6)
+                    if addition is not None
+                    else NOT_CALCULABLE
                 ),
-                "minimum_probability_adjusted_demand_addition": (
-                    float(
-                        r8_config[
-                            "minimum_probability_adjusted_demand_addition"
-                        ]
-                    )
+                "minimum_probability_adjusted_demand_addition": min_addition,
+                "minimum_efficient_scale_kt": (
+                    mes if mes is not None else NOT_CALCULABLE
                 ),
-                "minimum_efficient_scale_kt": NOT_CALCULABLE,
-                "mes_fill": NOT_CALCULABLE,
-                "minimum_mes_fill": float(
-                    r8_config["minimum_mes_fill"]
+                "mes_fill": (
+                    round(mes_fill, 6)
+                    if mes_fill is not None
+                    else NOT_CALCULABLE
                 ),
+                "minimum_mes_fill": min_mes_fill,
             },
         )
     )

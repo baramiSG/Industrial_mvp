@@ -54,17 +54,19 @@ Returns the complete analysis contract:
 - trade, evidence and data unlocks;
 - integrity assertions, including `ground_truth_backtest` (`expected`, `actual`, `match`) on successful simulated responses.
 
+In simulated mode the top-level aggregate mirrors `simulation_decision` for route hypotheses, gap class, hard exclusions, advance gate and preferred hypothesis while `real_decision` remains the public branch unchanged. `active_decision` equals `simulation_decision`. Simulated decisions expose bilingual `localized_narrative` from the scenario contract; `data_unlocks.localized_missing_facts` always reflects the five public evidence needs in both modes.
+
 ## GET `/api/opportunities/{opportunity_id}/ui-manifest?mode=...`
 
 Returns the approved GenUI component manifest.
 
 ## GET `/api/opportunities/{opportunity_id}/dossier?mode=...`
 
-Returns the structured Decision Dossier as JSON.
+Returns the structured Decision Dossier as JSON. Simulated mode sets `next_evidence_actions` to the active decision `missing_facts`, includes `counterfactual` from `simulation_decision`, and projects the scenario bilingual narrative. Public mode returns `counterfactual: null`.
 
 ## GET `/api/opportunities/{opportunity_id}/dossier.html?mode=...`
 
-Returns a printable one-page HTML dossier. Simulated mode includes the synthetic disclosure.
+Returns a printable one-page HTML dossier. Simulated mode includes the synthetic disclosure and renders the localized scenario narrative without source-language islands in Arabic.
 
 Simulated dossier JSON and HTML include the labelled synthetic R6/R7/R8 evaluations; public dossier output contains none.
 

@@ -26,7 +26,7 @@ def entry(path: Path) -> dict[str, str | int]:
 
 def main() -> None:
     snapshot_paths = sorted((ROOT / "data" / "snapshots").rglob("*.json"))
-    snapshot_paths += sorted((ROOT / "data" / "synthetic").glob("*.json"))
+    snapshot_paths += sorted((ROOT / "data" / "synthetic").rglob("*.json"))
     snapshot_paths += sorted((ROOT / "data" / "golden").glob("*.json"))
     snapshot_manifest = {
         "manifest_version": "1.0",

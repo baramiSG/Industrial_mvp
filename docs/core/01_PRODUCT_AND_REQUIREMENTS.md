@@ -118,7 +118,10 @@ The user switches to Ministry Simulation and sees:
 - unsupported NPV/IRR and minimum effective support S\*;
 - incremental national value, competition ratio and EVSI;
 - `SIMULATED ADVANCE — brownfield specification upgrade`;
-- conditions and kill conditions.
+- conditions and kill conditions;
+- bilingual simulated narrative rendered from scenario text or catalogue 1.1.0 keys in both locales without English source-language islands in Arabic mode;
+- simulated route hypotheses for routes 0–7 with the same precedence and maximum-defensible-ΔNV selection semantics as the public branch;
+- visible `class_if_confirmed` disclosure showing assumed classes separate from the actual Class-D synthetic records.
 
 ### Journey D — Public polypropylene rejection
 
@@ -206,6 +209,14 @@ The user opens or prints a one-page dossier containing:
 - **FR-053** A real `ADVANCE` shall be blocked by D/E evidence in a decision-critical field.
 - **FR-054** Brownfield and no-action routes shall precede supported greenfield.
 
+### 6.9 Simulation branch
+
+- **FR-055** Simulated route hypotheses evaluate routes 0–7 plus a route-8 `GRAPH_REQUIRED` contract without activating graph selection.
+- **FR-056** Scenario contract 2.0.0 validates bilingual narratives, optional allocation/expansion/flow blocks, and fail-closed pairing with public unresolved gates.
+- **FR-057** Simulated reconciliation compares tariff-line sums, buyer totals, expansion assumptions, retained flows, and base-demand probability inputs to public marginals.
+- **FR-058** Simulated narratives render from scenario text when declared, otherwise from catalogue 1.1.0 keys, in both English and Arabic.
+- **FR-059** UI and dossier surfaces mirror `simulation_decision` in simulated mode while `real_decision` and public `data_unlocks` remain unchanged.
+
 ### 6.7 GenUI and dossier
 
 - **FR-060** The backend shall emit a constrained UI manifest based on the active decision context.
@@ -229,7 +240,7 @@ The user opens or prints a one-page dossier containing:
 - **NFR-004 Offline demo:** the packaged POC shall run without API keys or live data calls.
 - **NFR-005 Responsiveness:** local API responses should normally complete below 250 ms for the loaded demo cases.
 - **NFR-006 Accessibility:** the interface shall use semantic controls, high contrast and keyboard-accessible navigation.
-- **NFR-007 Bilingual interface and Arabic support:** All interface chrome and governed labels shall have Arabic/English content parity; the document language and direction shall switch correctly; Arabic and mixed-direction content shall render without corruption. Until governed bilingual engine narratives exist, English analytical text shall remain visibly identified and directionally isolated as source-language content.
+- **NFR-007 Bilingual interface and Arabic support:** All interface chrome and governed labels shall have Arabic/English content parity; the document language and direction shall switch correctly; Arabic and mixed-direction content shall render without corruption. Public and simulated engine narratives render from the governed bilingual catalogue or scenario-declared bilingual text; any remaining English-only analytical source spans outside those surfaces shall remain visibly identified and directionally isolated as source-language content.
 - **NFR-008 Portability:** the demo shall run in WSL, native Linux and Docker.
 - **NFR-009 Testability:** all domain calculations shall be callable independently of the web layer.
 - **NFR-010 Security boundary:** no uploaded Ministry data is included in this package.

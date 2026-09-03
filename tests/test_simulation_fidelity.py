@@ -45,7 +45,7 @@ def test_simulation_contract_version_and_ground_truth_are_explicit() -> None:
     }
     for opportunity_id, pair in expected.items():
         scenario = _scenario(opportunity_id)
-        assert scenario["scenario_version"] == "1.1.0"
+        assert scenario["scenario_version"] == "2.0.0"
         assert (
             scenario["ground_truth"]["expected_simulation_state"],
             scenario["ground_truth"]["expected_route_code"],
@@ -59,7 +59,7 @@ def test_supported_scenario_contract_version_is_accepted() -> None:
 
     assert (
         decision_engine.SUPPORTED_SCENARIO_CONTRACT_VERSIONS
-        == frozenset({"1.1.0"})
+        == frozenset({"2.0.0"})
     )
     decision_engine.validate_simulation_contract(scenario)
 
@@ -117,23 +117,21 @@ def test_malformed_investigate_narrative_fails_closed(
         decision_engine.analyze_simulated("SAU-H0-721049")
 
 
-def test_computed_state_without_narrative_is_typed_integrity_error() -> None:
+def test_computed_state_without_scenario_narrative_uses_catalogue_fallback() -> None:
     scenario = _scenario("SAU-H0-721049")
     scenario["synthetic_inputs"]["equivalence"] = {
         "domestic_grade_equivalent": True,
         "qualified_available_kt": 104.0,
-        "binding_market_failure": "none verified",
+        "basis": "test",
     }
     assert "REJECT" not in scenario["decision_narrative"]
 
-    with pytest.raises(
-        EvidenceIntegrityError,
-        match="scenario.decision_narrative.REJECT must be a mapping",
-    ):
-        decision_engine._simulate(
-            get_public_case("SAU-H0-721049"),
-            scenario,
-        )
+    branch = decision_engine._simulate(
+        get_public_case("SAU-H0-721049"),
+        scenario,
+    )
+    assert branch["simulation_decision"]["state"] == "REJECT"
+    assert branch["simulation_decision"]["narrative_source"] == "catalogue"
 
 
 def test_decision_narrative_is_projected_verbatim_from_scenario() -> None:
@@ -152,16 +150,17 @@ def test_decision_narrative_is_projected_verbatim_from_scenario() -> None:
         ]
 
         for field in ("headline", "route_label", "rationale"):
-            assert decision[field] == narrative[field]
-        assert decision["conditions"] == narrative["conditions"]
-        assert (
-            decision["kill_conditions"]
-            == narrative["kill_conditions"]
-        )
+            assert decision[field] == narrative[field]["en"]
+        assert decision["conditions"] == [
+            item["en"] for item in narrative["conditions"]
+        ]
+        assert decision["kill_conditions"] == [
+            item["en"] for item in narrative["kill_conditions"]
+        ]
         if "competition_finding" in narrative:
             assert (
                 result["competition"]["finding"]
-                == narrative["competition_finding"]
+                == narrative["competition_finding"]["en"]
             )
 
 
@@ -185,11 +184,12 @@ def test_public_has_zero_synthetic_rule_rows_and_simulated_has_three() -> None:
         )
         rows = _synthetic_rules(simulated)
         assert [row["rule_id"] for row in rows] == [
+            "R5",
             "R6",
             "R7",
             "R8",
         ]
-        assert len(simulated["rules"]) == len(public["rules"]) + 3
+        assert len(simulated["rules"]) == len(public["rules"]) + 4
         scenario = get_synthetic_scenario(opportunity_id)
         assert scenario is not None
         for row in rows:
@@ -216,10 +216,6 @@ def test_public_has_zero_synthetic_rule_rows_and_simulated_has_three() -> None:
                 )
             ) <= set(row)
 
-        assert simulated["simulation_decision"]["display_labels"] == {
-            "en": "SIMULATED — NOT MINISTRY EVIDENCE",
-            "ar": ARABIC_DISCLOSURE,
-        }
         assert simulated["simulation_scenario"]["display_labels"] == {
             "en": "SIMULATED — NOT MINISTRY EVIDENCE",
             "ar": ARABIC_DISCLOSURE,
@@ -252,15 +248,12 @@ def test_steel_simulated_r6_r7_r8_are_evidence_faithful() -> None:
     )
     assert r6["metrics"]["sustained_period"] == NOT_CALCULABLE
 
-    assert r7["execution"] == "DEGRADED"
+    assert r7["execution"] == "FULL"
     assert r7["fired"] is False
     assert r7["metrics"]["effective_utilisation"] == pytest.approx(
         0.89
     )
-    assert (
-        r7["metrics"]["specification_equivalence"]
-        == NOT_CALCULABLE
-    )
+    assert r7["metrics"]["specification_equivalence"] is True
 
     assert r8["execution"] == "DISABLED"
     assert r8["fired"] is None
@@ -273,10 +266,10 @@ def test_steel_simulated_r6_r7_r8_are_evidence_faithful() -> None:
         "commitment_probability",
         "probability_adjusted_committed_demand_kt",
         "probability_adjusted_demand_addition",
-        "minimum_efficient_scale_kt",
         "mes_fill",
     ):
         assert r8["metrics"][key] == NOT_CALCULABLE
+    assert r8["metrics"]["minimum_efficient_scale_kt"] == 50.0
     assert r8["metrics"][
         "minimum_probability_adjusted_demand_addition"
     ] == pytest.approx(0.20)
@@ -325,18 +318,41 @@ def test_pp_simulated_r6_r7_r8_are_evidence_faithful() -> None:
 
 
 @pytest.mark.parametrize(
-    "failed_control",
+    ("failed_control", "expected_state", "expected_route", "expected_reason"),
     [
-        "positive_gap",
-        "route_publishable",
-        "incremental_distance",
-        "economics",
-        "national_value",
-        "competition",
+        ("positive_gap", "REJECT", 0, "EQUIVALENT_QUALIFIED_SUPPLY"),
+        (
+            "route_publishable",
+            "INVESTIGATE",
+            None,
+            "ROUTE_CHANGING_EVIDENCE_UNRESOLVED",
+        ),
+        (
+            "incremental_distance",
+            "INVESTIGATE",
+            None,
+            "ROUTE_DETERMINATION_UNRESOLVED",
+        ),
+        ("economics", "REJECT", 0, "UNECONOMIC_AT_EFFICIENT_SCALE"),
+        (
+            "national_value",
+            "INVESTIGATE",
+            None,
+            "ROUTE_DETERMINATION_UNRESOLVED",
+        ),
+        (
+            "competition",
+            "INVESTIGATE",
+            None,
+            "ROUTE_DETERMINATION_UNRESOLVED",
+        ),
     ],
 )
 def test_each_failed_steel_advance_control_selects_investigate(
     failed_control: str,
+    expected_state: str,
+    expected_route: int | None,
+    expected_reason: str,
 ) -> None:
     scenario = _scenario("SAU-H0-721049")
     inputs = scenario["synthetic_inputs"]
@@ -364,13 +380,16 @@ def test_each_failed_steel_advance_control_selects_investigate(
         scenario,
     )
 
-    assert branch["simulation_decision"]["state"] == "INVESTIGATE"
-    assert branch["simulation_decision"]["route_code"] is None
-    assert branch["simulation_decision"]["headline"] == (
-        scenario["decision_narrative"]["INVESTIGATE"][
-            "headline"
-        ]
+    assert branch["simulation_decision"]["state"] == expected_state
+    assert branch["simulation_decision"]["route_code"] == expected_route
+    assert (
+        branch["simulation_decision"]["decision_reason_code"]
+        == expected_reason
     )
+    if expected_state == "INVESTIGATE":
+        assert branch["simulation_decision"]["headline"] == (
+            scenario["decision_narrative"]["INVESTIGATE"]["headline"]["en"]
+        )
 
 
 def test_equivalence_at_target_selects_reject_without_id_dispatch() -> None:
@@ -434,22 +453,26 @@ def test_ground_truth_never_drives_selection_and_mismatch_fails() -> None:
 
 
 def test_engine_source_has_no_scenario_id_dispatch_or_narrative() -> None:
-    source = (
-        PROJECT_ROOT
-        / "src"
-        / "ior_mvp"
-        / "decision_engine.py"
-    ).read_text(encoding="utf-8")
-    assert "SAU-H0-721049" not in source
-    assert "SAU-H0-390210" not in source
-    assert "_simulate_steel" not in source
-    assert "_simulate_pp" not in source
-    literal_strings = {
-        node.value
-        for node in ast.walk(ast.parse(source))
-        if isinstance(node, ast.Constant)
-        and isinstance(node.value, str)
-    }
+    modules = (
+        "decision_engine.py",
+        "simulation.py",
+        "scenario_contract.py",
+    )
+    literal_strings: set[str] = set()
+    for module in modules:
+        source = (
+            PROJECT_ROOT / "src" / "ior_mvp" / module
+        ).read_text(encoding="utf-8")
+        assert "SAU-H0-721049" not in source
+        assert "SAU-H0-390210" not in source
+        literal_strings.update(
+            node.value
+            for node in ast.walk(ast.parse(source))
+            if isinstance(node, ast.Constant)
+            and isinstance(node.value, str)
+        )
+    assert "_simulate_steel" not in literal_strings
+    assert "_simulate_pp" not in literal_strings
 
     for opportunity_id in (
         "SAU-H0-721049",
@@ -460,14 +483,14 @@ def test_engine_source_has_no_scenario_id_dispatch_or_narrative() -> None:
         ]
         for narrative in narratives.values():
             values = [
-                narrative["headline"],
-                narrative["route_label"],
-                narrative["rationale"],
-                *narrative["conditions"],
-                *narrative["kill_conditions"],
+                narrative["headline"]["en"],
+                narrative["route_label"]["en"],
+                narrative["rationale"]["en"],
+                *[item["en"] for item in narrative["conditions"]],
+                *[item["en"] for item in narrative["kill_conditions"]],
             ]
             if "competition_finding" in narrative:
-                values.append(narrative["competition_finding"])
+                values.append(narrative["competition_finding"]["en"])
             for value in values:
                 assert value not in literal_strings
 

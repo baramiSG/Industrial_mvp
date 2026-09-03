@@ -352,6 +352,45 @@ def test_steel_ui_manifest_uses_approved_components() -> None:
     }
 
 
+def test_simulated_detail_mirrors_simulation_decision_branch() -> None:
+    response = client.get(
+        "/api/opportunities/SAU-H0-721049?mode=simulated"
+    )
+    assert response.status_code == 200
+    payload = response.json()
+    simulated = payload["simulation_decision"]
+    assert payload["active_decision"] == simulated
+    assert payload["preferred_hypothesis"] == simulated["preferred_hypothesis"]
+    assert payload["route_hypotheses"] == simulated["route_hypotheses"]
+    assert payload["real_decision"]["synthetic_flag"] is False
+    assert simulated["synthetic_flag"] is True
+    assert simulated["localized_narrative"]["ar"]["headline"]["text"]
+    manifest = client.get(
+        "/api/opportunities/SAU-H0-721049/ui-manifest?mode=simulated"
+    ).json()
+    hero = next(
+        row for row in manifest["components"] if row["type"] == "decision_hero"
+    )
+    unlocks = next(
+        row for row in manifest["components"] if row["type"] == "data_unlocks"
+    )
+    assert (
+        hero["props"]["localized_narrative"]["ar"]["headline"]["text"]
+        == simulated["localized_narrative"]["ar"]["headline"]["text"]
+    )
+    assert len(unlocks["props"]["localized_missing_facts"]["ar"]) == 5
+    dossier = client.get(
+        "/api/opportunities/SAU-H0-721049/dossier?mode=simulated"
+    ).json()
+    assert dossier["next_evidence_actions"] == simulated["missing_facts"]
+    assert dossier["counterfactual"] == simulated["counterfactual"]
+    html = client.get(
+        "/api/opportunities/SAU-H0-721049/dossier.html?mode=simulated&locale=ar"
+    )
+    assert html.status_code == 200
+    assert simulated["localized_narrative"]["ar"]["headline"]["text"] in html.text
+
+
 def test_public_manifest_omits_economics_panel() -> None:
     response = client.get("/api/opportunities/SAU-H0-721049/ui-manifest?mode=public")
     types = {row["type"] for row in response.json()["components"]}

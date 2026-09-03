@@ -1,5 +1,7 @@
 # 06 — Synthetic Ministry Data Specification
 
+<!-- core_version: 2.0.0; supersedes: 1.0.0; effective_date: 2026-09-02 -->
+
 ## 1. Purpose
 
 The synthetic layer exists to demonstrate the complete power of the methodology before Ministry data is connected. It is not a substitute for Ministry evidence and is not used to make a real recommendation.
@@ -238,3 +240,11 @@ A scenario passes when:
 ## 11. Replacement by real Ministry data
 
 Production connectors should map actual internal records into the same canonical fields. The synthetic adapter is then disabled for official use. The engine, formulas, UI manifest and dossier contract remain unchanged.
+
+## 12. Scenario contract 2.0.0 (S10)
+
+Runtime accepts only `scenario_version: 2.0.0`. Historical byte-identical 1.1.0 copies live under `data/synthetic/historical/v1_1/` and are manifested but never loaded.
+
+Optional governed blocks include `class_if_confirmed`, `tariff_line_allocation`, `buyer_allocation`, `expansion_assumption`, `production_and_retained_flows`, and `economics.minimum_efficient_scale_kt`. Gate B reconciliation emits ten ordered checks including allocation sums, expansion bounds, retained-flow reconcile, and `base_demand_and_commitment_probability_valid`.
+
+Simulated ADVANCE uses the `CLASS_IF_CONFIRMED` advance-gate basis: declared confirmed classes gate publication while actual synthetic rows remain Class D.

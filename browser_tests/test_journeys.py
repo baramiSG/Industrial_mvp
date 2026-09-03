@@ -137,6 +137,7 @@ def test_opportunity_select_loads_each_case(
     )
     assert detail.status == manifest.status == 200
     payload = detail.json()
+    manifest_payload = manifest.json()
     by_rule = {
         row["rule_id"]: row["result"]
         for row in payload["rules"]
@@ -202,22 +203,33 @@ def test_opportunity_select_loads_each_case(
             )
     else:
         decision = payload["simulation_decision"]
-        assert "localized_narrative" not in decision
+        narrative = decision["localized_narrative"][locale.code]
         for field in ("headline", "route_label", "rationale"):
-            expect(hero).to_contain_text(decision[field])
+            expect(hero).to_contain_text(narrative[field]["text"])
         for field in ("conditions", "kill_conditions"):
-            for item in decision[field]:
-                expect(hero).to_contain_text(item)
+            for item in narrative[field]:
+                expect(hero).to_contain_text(item["text"])
+        expect(unlocks).to_have_count(5)
+        unlock_props = next(
+            row
+            for row in manifest_payload["components"]
+            if row["type"] == "data_unlocks"
+        )["props"]["localized_missing_facts"][locale.code]
+        for item in unlock_props:
+            text = item["text"] if isinstance(item, dict) else item
+            expect(page.locator(".unlock-list")).to_contain_text(text)
         finding = payload.get("competition", {}).get("finding")
         if finding:
             expect(page.locator("#workspace")).to_contain_text(
                 finding
             )
+        assert hero.locator(".source-language-island").count() == 0
         if locale == AR:
-            assert hero.locator(".source-language-island").count() >= 3
-            expect(hero.locator(".source-language-caption")).to_have_count(
-                1
+            assert (
+                page.locator(".unlock-list .source-language-island").count()
+                == 0
             )
+            assert hero.locator(".source-language-caption").count() == 0
 
 
 @pytest.mark.parametrize(

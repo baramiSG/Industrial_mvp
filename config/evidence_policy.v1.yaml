@@ -1,6 +1,6 @@
 metadata:
-  version: "1.3.0"
-  effective_date: "2026-09-02"
+  version: "1.4.0"
+  effective_date: "2026-09-03"
   authority: "Industrial Opportunity Resolution Methodology, Sections 2.1, 10 and 11"
 
 classes:
@@ -43,6 +43,12 @@ synthetic_isolation:
   forbidden_decision_field: real_decision
   display_label: "SIMULATED — NOT MINISTRY EVIDENCE"
   display_label_ar: "محاكاة — ليست بيانات أو أدلة صادرة عن الوزارة"
+
+simulation_gate:
+  basis: CLASS_IF_CONFIRMED
+  declared_class_block: class_if_confirmed
+  undeclared_field_class: D
+  actual_synthetic_evidence_class: D
 
 source_statuses:
   - observed

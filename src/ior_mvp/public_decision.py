@@ -650,11 +650,27 @@ def _quantity_gap(case: dict[str, Any]) -> bool:
     )
 
 
-def _timing_gap(case: dict[str, Any]) -> bool:
-    capability = case.get("domestic_capability")
+def _timing_gap(
+    case: dict[str, Any],
+    capability: dict[str, Any] | None = None,
+) -> bool:
+    if capability is not None:
+        dimensions = capability.get("dimensions")
+        if isinstance(dimensions, list):
+            for row in dimensions:
+                if (
+                    isinstance(row, dict)
+                    and (row.get("dimension") or row.get("identifier"))
+                    == "capacity_time_window"
+                    and isinstance(row.get("state"), int)
+                    and not isinstance(row.get("state"), bool)
+                    and row["state"] > 0
+                ):
+                    return True
+    capability_block = case.get("domestic_capability")
     states = (
-        capability.get("public_dimension_states")
-        if isinstance(capability, dict)
+        capability_block.get("public_dimension_states")
+        if isinstance(capability_block, dict)
         else None
     )
     state = (
@@ -674,6 +690,7 @@ def classify_gap(
     rules: list[dict[str, Any]],
     assessments: dict[str, dict[str, Any]],
     exclusions: list[dict[str, Any]],
+    capability: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     unresolved = any(
         assessment.get("resolution_status") != "RESOLVED"
@@ -705,7 +722,7 @@ def classify_gap(
             mismatch
             and "qualification_or_certification" in constraints
         ),
-        "timing": _timing_gap(case),
+        "timing": _timing_gap(case, capability),
         "resilience": (
             _rule_fired(rules, "R3")
             or _rule_fired(rules, "R10")
@@ -1587,6 +1604,13 @@ def _render_public_narrative(
         "missing_facts": [
             item["text"] for item in english["missing_facts"]
         ],
+        "localized_missing_facts": {
+            locale: [
+                item["text"]
+                for item in localized[locale]["missing_facts"]
+            ]
+            for locale in ("en", "ar")
+        },
         "narrative_version": "1.0.0",
         "localized_narrative": localized,
     }
@@ -1646,6 +1670,7 @@ def compute_public_decision(
         rules,
         assessments,
         exclusions,
+        capability,
     )
     rejections = derive_rejection_conditions(
         case,

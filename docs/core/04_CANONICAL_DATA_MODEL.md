@@ -179,7 +179,14 @@ Every decision-relevant fact must carry:
   "seed_basis": "Public import and nameplate marginals",
   "evidence_class": "D",
   "source": "DEMO_GENERATOR",
-  "synthetic_inputs": {}
+  "synthetic_inputs": {
+    "class_if_confirmed": {
+      "product_identity": "A",
+      "demand_at_required_specification": "A",
+      "domestic_supply_or_capability": "A",
+      "hard_regulatory_or_process_gate": "B"
+    }
+  }
 }
 ```
 
