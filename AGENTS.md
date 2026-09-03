@@ -61,3 +61,15 @@ Every slice runs on branch `slice/SXX-<slug>` and passes: planner subagent (mode
 Start-of-slice ritual: read this file, `docs/authority/00_AUTHORITY_MANIFEST.md`, the mapped `docs/core/*` documents, the five control documents, `.workflow/state.json`, prior slice records, the affected code and tests; discover and use applicable skills; write `persona.md`; confirm branch and base commit; confirm no secrets or prohibited files will enter Git.
 
 Any change to `config/*.yaml`, `data/**`, `docs/core/**` or a golden expectation is an authority change under manifest §7. It must be justified in the slice ADR and PR before `scripts/build_manifests.py` is run, and the two public golden outcomes must be shown unchanged.
+
+## Adopted autonomous workflow (from 2026-09-03)
+
+From the setup PR onward, orchestration for this repository follows the installed external **salim-autonomous-workflow** Cursor plugin: its `autonomous-operation` rule and `autonomous-delivery` skill are the external Flight Control authority referenced above. Do not copy that machinery into this repository. Where the historical **Build-control records** section above differs on seats, branch names, or protocol, the external plugin authority controls.
+
+**Governed seats (by name):** `flight-supervisor` (orchestration and delivery); `planner-fable` (plans); `reviewer-grok` (sole approving reviewer); `implementer-composer` → `implementer-fable` → `implementer-sol` (implementation ladder order); `advisor-sol` (single ruling per decision path). No seat approves its own work.
+
+**Adopted-workflow branches** use the pattern `slice/<task_id>` with **lowercase** task ids—for example `slice/setup` and `slice/s09-public-decision-and-profiles`. Historical `slice/SXX-<slug>` branches and their `.workflow/slices/**` records remain as recorded under the completion build. The in-progress S09 candidate was carried onto `slice/s09-public-decision-and-profiles` at adoption.
+
+**Recovery context** lives in `.autonomous-workflow/` (local only; kept untracked by `.git/info/exclude` and `.gitignore`). Legacy records—`.workflow/state.json`, `docs/BUILD_PROGRESS.md`, and `.workflow/slices/**`—describe the historical protocol under which they were written. Each domain slice still maintains the five control documents, `.workflow/state.json`, and its slice record.
+
+Domain non-negotiables, mandatory authority order, required proof commands, and Manifest §7 change gates in this file are unchanged.
