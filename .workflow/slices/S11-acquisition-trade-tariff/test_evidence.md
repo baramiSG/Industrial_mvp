@@ -26,3 +26,14 @@ Evidence under `.autonomous-workflow/evidence/s11-acquisition-trade-tariff/1/`:
 - **GREEN:** DD-24 guard in `connectors/base.py`; DD-23 `stored_evidence_problems()` + 13 detector meta-tests; transport sentinel proofs (1)–(4) regression pins; repository assertion `test_repository_raw_store_has_no_stored_evidence_problems` GREEN on inherited `data/raw`.
 - **verification[26]:** DD-23 semantic command — exit 0 (STORED-EVIDENCE SEMANTICS PASS).
 - **Immutability:** `data/raw/**`, `data/snapshots/**`, manifests, config, docs/core, browser baselines byte-identical to candidate 4; no acquire-* run; no generator run.
+
+## Candidate 6 (implementer-composer, plan-6, 2026-09-04)
+
+Evidence under `.autonomous-workflow/evidence/s11-acquisition-trade-tariff/6/`:
+
+- **Supersession:** plan-5 → owner ruling 4 → plan-6; P5-F01 = verification[35] ignored-artifact false positive (no product obligation changed).
+- **CI-F-01:** run 33828693267 on `acc00092`; CI result JSON SHA-256 `f32fdb168aeeab0bc961e309d1d46b4fd35f9541ea533dc47a424e5dddc63a38`; sibling log SHA-256 `3f4e9abbd502097f37ff8334b465e7c55aefab35fd7c1c539214b505c15c7652`; failure log SHA-256 `0ea19e464aa76407c1cd63dc81a09684752aebc01a6b4f6d4547ebbfa8b6ab67` (`fatal: bad object a610b49…` in three Python jobs; frozen bytes unchanged).
+- **RED:** `red-0-shallow-clone-inherited-module` (verification[36], inherited module, 2 failed); `red-1-detectors-before-checker` (detectors without checker, 12 failed).
+- **GREEN:** `green-1-module-contract` (verification[37], 17 tests); `green-2-shallow-clone-candidate-module` (verification[36], depth-1 clone, 17 passed, base absent).
+- **Module:** `frozen_tree_problems` + eleven DD-26 detectors; PINS and visual-provenance checks preserved; no runtime `a610b49` dependency in checker or production tests.
+- **Immutability:** no byte under `data/**`, `config/**`, `docs/core/**`, `docs/authority/**`, `browser_tests/**`, `src/**`, `scripts/**`, `.github/**` or `Makefile` changed; no acquire-* or `build_manifests.py` run.
