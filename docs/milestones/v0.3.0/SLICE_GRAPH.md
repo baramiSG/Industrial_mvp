@@ -297,12 +297,12 @@ Populated by S14, S15 and S16 as routes are truthfully demonstrated; audited in 
 
 | Route | Intervention (methodology §1.2) | Case / scenario | Binding constraint | Why lower routes failed | Evidence (snapshot / scenario IDs, passports) | Expected state | Actual state | Status |
 |---:|---|---|---|---|---|---|---|---|
-| 0 | No intervention | `SAU-H0-390210` / `SYN-MINISTRY-PP-001` (existing) | none — equivalent qualified supply exceeds demand | n/a (lowest route) | frozen PP snapshot and scenario | REJECT (public and simulated) | REJECT | DEMONSTRATED (v0.2.0, to be re-proven by computation in S09/S10) |
+| 0 | No intervention | `SAU-H0-390210` / `SYN-MINISTRY-PP-001` (existing) | none — equivalent qualified supply exceeds demand | n/a (lowest route) | frozen PP snapshot and scenario | REJECT (public and simulated) | REJECT | DEMONSTRATED; re-proven by computed S09 public and S10 simulated selection (PRs #12–#13) |
 | 1 | Remove administrative, classification or regulatory barrier | — | — | — | — | — | — | NOT DEMONSTRATED |
 | 2 | Information, market linkage or investor/technology matching | — | — | — | — | — | — | NOT DEMONSTRATED |
 | 3 | Certification, testing, metrology or quality-system support | — | — | — | — | — | — | NOT DEMONSTRATED |
 | 4 | Demand aggregation, procurement commitment or conditional offtake | — | — | — | — | — | — | NOT DEMONSTRATED |
-| 5 | Debottlenecking, yield improvement or incremental line expansion | `SAU-H0-721049` / `SYN-MINISTRY-STEEL-001` (existing) | incumbent capacity/process binding, D\* 0.2667 | unsupported brownfield fails hurdle (NPV −18, IRR 9.5%); non-financial routes do not resolve capacity | frozen steel snapshot and scenario | SIMULATED ADVANCE | ADVANCE (route 5) | DEMONSTRATED (v0.2.0, to be re-proven through the amended I5 rule in S10) |
+| 5 | Debottlenecking, yield improvement or incremental line expansion | `SAU-H0-721049` / `SYN-MINISTRY-STEEL-001` (existing) | incumbent capacity/process binding, D\* 0.2667 | unsupported brownfield fails hurdle (NPV −18, IRR 9.5%); non-financial routes do not resolve capacity | frozen steel snapshot and scenario | SIMULATED ADVANCE | ADVANCE (route 5) | DEMONSTRATED; re-proven through amended-I5 computed S10 selection (PR #13) |
 | 6 | Technology licensing, specialist line or joint venture | — | — | — | — | — | — | NOT DEMONSTRATED |
 | 7 | Targeted greenfield entry | — | — | — | — | — | — | NOT DEMONSTRATED |
 | 8 | Shared enabling infrastructure serving several opportunities | — (requires S16 real graph; `GRAPH_REQUIRED` until then) | — | — | — | — | — | NOT DEMONSTRATED |
@@ -313,3 +313,10 @@ polypropylene case. The frozen steel public case remains `INVESTIGATE` with
 null `route_code`; route 5 is only its evidence-priority hypothesis and is not
 a newly demonstrated public route. Routes 1–7 await governed deep cases in
 S14/S15, and route 8 remains `NOT_CALCULABLE` / `GRAPH_REQUIRED` until S16.
+
+**S10 completion note (PR #13, merge `a610b49`):** Route 0 was re-proven by
+computed simulated selection for polypropylene and route 5 by computed
+amended-I5 selection for steel, with both packaged outcomes and exact values
+unchanged. Routes 1–4, 6 and 7 remain fixture capability proofs rather than
+governed demonstration rows; S14/S15 still own their demonstration. Route 8
+remains `NOT_CALCULABLE` / `GRAPH_REQUIRED` until S16.

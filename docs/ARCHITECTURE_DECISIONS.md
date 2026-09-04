@@ -341,3 +341,33 @@ manifested file changed in the same correction.
 **Consequences:** Public decisions remain unchanged. Simulated surfaces mirror
 `simulation_decision` including bilingual narratives and counterfactual blocks.
 Further graph activation remains deferred to S16.
+
+## ADR-015 — Public acquisition framework, raw evidence store and reconstruction proof
+
+**Status:** Proposed
+
+**Context:** S11 implements operator-only public acquisition for trade, tariff and BACI sources with deterministic raw storage, source-partitioned snapshots, acquired evidence passports, and offline reconstruction proof, without changing frozen public goldens.
+
+**Decision:** Adopt the locked engineering defaults DD-20 (1)–(9):
+
+1. `raw_store.max_artifact_bytes_compressed` = 16777216 and `max_store_bytes_compressed` = 100663296 in hashed YAML only.
+2. Default evidence class B and reviewer status `unconfirmed_by_responsible_authority` for all configured sources.
+3. Live guard env var `IOR_ACQUISITION_LIVE` must equal `1` for any fetch.
+4. Reconstruction with zero snapshots exits 1 before manifest checks; missing manifest rows exit 2; hash mismatch exits 1.
+5. `--years` required on `acquire-universe`, `acquire-partners` and `acquire-baci`; `--max-requests` required on every acquire command; `acquire-tariff` takes no `--years` because the tariff tree is one period-free contract (DD-5/DD-19); rationale recorded in implementation log (no code defaults).
+6. Rate-limit floor from source config `min_interval_seconds`.
+7. Selection rule `LATEST_RUN_PER_SOURCE_STAGE_UNIT` (DD-21).
+8. BACI BULK raw-only — no analytical snapshot kind (DD-22).
+9. Completeness accounting per DD-18; truncated pagination never writes universe/tariff snapshots.
+
+**Reconstruction exits (DD-11):** default `--all` checks every snapshot and referenced raw artifact path against `snapshot_manifest.json`; library `reconstruct()` returns `SELECTION_CHANGED` when latest store run differs from snapshot coverage.
+
+**Stop conditions (DD-17):** Stop A when zero real artifacts exist; Stop B when zero normalized analytical snapshots exist after parsers.
+
+**Module placement (recorded plan-3 deviation, DELIVERY-F-01):** the acquisition configuration loader (`acquisition/source_config.py`: `ACQUISITION_SOURCES_PATH`, `acquisition_sources_config()`) and the three read-only acquired-snapshot loaders (`acquisition/repository.py`: `universe_snapshots()`, `tariff_snapshots()`, `partner_snapshots()`, `clear_acquisition_caches()`) live inside `src/ior_mvp/acquisition/` instead of `config.py` and `data_repository.py`, where plan-3 `files.modify`/DD-15 placed them. The governed visual oracle (`browser_tests/visual_baselines.validate_manifest`) pins the SHA-256 of every top-level `src/ior_mvp/*.py` module in `browser_tests/baselines/v0.3.0/manifest.json` `source_tree` and fails closed on drift, while the same plan freezes `browser_tests/baselines` byte-identical to base `a610b49` (verification[4], AC7, T12, non-goals). Both hold only when `config.py` and `data_repository.py` remain byte-identical to base. DD-15 semantics are preserved (`lru_cache`, fail-closed validators, test-double rejection, cache clearing); no byte under `browser_tests/baselines/` changes in S11, and `tests/test_frozen_public_evidence_pins.py` pins that tree and runs `validate_manifest()` directly in the pytest gate.
+
+**Manifest regeneration:** candidate 1 ran `build_manifests.py` prematurely before T10 authority artifacts; the final justified run follows T10 completion and updates Core 02/03/04/05/09 hashes only from governed doc edits plus acquisition config.
+
+**Consequences:** Acquired snapshots are not consumed by the engine until S13/S14. Frozen public and synthetic outcomes remain exact.
+
+**Verification contract for stored evidence (plan-4, owner ruling 2):** Under `.autonomous-workflow/owner-decisions/s11-acquisition-trade-tariff-2.json` (SHA-256 `1c52d3dbdc44b3c908fb35b9caf499bb010a07cf57887264df7d674507eb0b86`), production raw evidence is never required to carry a redaction marker. DD-23 defines the stored-evidence verification contract: source partition, header hygiene against `offline_guard` allow/deny lists, honest credential field names, and CREDENTIAL_ABSENT semantics (null `observed_response`, zero requests, sibling `coverage.json` equality, no page artifacts). Redaction is proven in-memory with a deterministic non-secret sentinel in tests only; a marker appears only where a credentialed request actually occurred. DD-24 adds a credential-echo fail-closed guard in `BaseConnector._fetch`: if a response body contains a non-empty secret value, the connector records `OUT_OF_SCOPE_CONTENT` with `error_type` `CredentialEchoed` and stores no page. Existing CREDENTIAL_ABSENT records in `data/raw/**` are the honest absence path and are never edited.

@@ -1,0 +1,176 @@
+metadata:
+  version: "1.0.0"
+  effective_date: "2026-09-04"
+  authority: "Methodology §3.2, §11, §11.3; Core 05 v2 §4-§6, §10-§11"
+
+raw_store:
+  root: data/raw
+  compression: gzip
+  compresslevel: 9
+  mtime: 0
+  max_artifact_bytes_compressed: 16777216
+  max_store_bytes_compressed: 100663296
+
+offline_guard:
+  live_env_var: IOR_ACQUISITION_LIVE
+  header_allowlist:
+    - content-type
+    - content-length
+    - last-modified
+    - etag
+    - date
+    - retry-after
+  header_denylist:
+    - authorization
+    - cookie
+    - set-cookie
+    - proxy-authorization
+  user_agent: industrial-opportunity-resolution-mvp/0.2.0 (public-data acquisition; offline runtime)
+
+rate_limit_defaults:
+  undocumented_min_interval_seconds: 2.0
+
+sources:
+  wits_trade:
+    authority: World Bank WITS
+    access_classification: public_open
+    documentation_reference: https://wits.worldbank.org/wits/wits/witshelp/content/codes/about_api.htm
+    terms_reference: https://www.worldbank.org/en/about/legal/terms-of-use-for-datasets
+    endpoint_templates:
+      UNIVERSE: "https://wits.worldbank.org/trade/comtrade/en/country/SAU/year/{period}/tradeflow/{flow_label}/partner/WLD/product/{product}"
+      PARTNERS: "https://wits.worldbank.org/trade/comtrade/en/country/SAU/year/{period}/tradeflow/{flow_label}/partner/ALL/product/{product}"
+      TERMS: "https://www.worldbank.org/en/about/legal/terms-of-use-for-datasets"
+    parameters:
+      product_all_token: Total
+      partner_world_token: WLD
+      reporter_token: SAU
+      flow_tokens:
+        imports: Imports
+        exports: Exports
+    pagination:
+      kind: NONE
+      documentation_reference: https://wits.worldbank.org/wits/wits/witshelp/content/codes/about_api.htm
+      parameters: {}
+    nomenclature: H0
+    reporter_code: SAU
+    credential_env_var: null
+    rate_limit:
+      documented_policy: UNAVAILABLE
+      min_interval_seconds: 2.0
+      max_attempts: 3
+      timeout_seconds: 60
+    license_capture_required: true
+    default_evidence_class: B
+    default_reviewer_status: unconfirmed_by_responsible_authority
+    expected_content_types:
+      - text/html
+      - application/json
+      - text/json
+    user_agent: industrial-opportunity-resolution-mvp/0.2.0 (public-data acquisition; offline runtime)
+    recorded_on: "2026-09-04"
+
+  un_comtrade:
+    authority: UN Comtrade
+    access_classification: public_registered
+    documentation_reference: https://comtradeplus.un.org/
+    terms_reference: https://comtradeplus.un.org/
+    endpoint_templates:
+      UNIVERSE: "https://comtradeplus.un.org/api/get/v1/commodity?reporterCode=682&period={period}&flowCode={flow_code}&cmdCode=ALL&partnerCode=0&motCode=0&customsCode=C00&includeDesc=true"
+      PARTNERS: "https://comtradeplus.un.org/api/get/v1/commodity?reporterCode=682&period={period}&flowCode={flow_code}&cmdCode={product}&partnerCode=0&motCode=0&customsCode=C00&includeDesc=true"
+      TERMS: "https://comtradeplus.un.org/"
+    parameters:
+      product_all_token: ALL
+      partner_world_token: "0"
+      reporter_token: "682"
+      flow_tokens:
+        imports: M
+        exports: X
+    pagination:
+      kind: NEXT_TOKEN
+      documentation_reference: https://comtradeplus.un.org/
+      parameters:
+        next_token_field: next
+    nomenclature: HS2017
+    reporter_code: SAU
+    credential_env_var: IOR_COMTRADE_SUBSCRIPTION_KEY
+    rate_limit:
+      documented_policy: UNAVAILABLE
+      min_interval_seconds: 2.0
+      max_attempts: 3
+      timeout_seconds: 60
+    license_capture_required: true
+    default_evidence_class: B
+    default_reviewer_status: unconfirmed_by_responsible_authority
+    expected_content_types:
+      - application/json
+    user_agent: industrial-opportunity-resolution-mvp/0.2.0 (public-data acquisition; offline runtime)
+    recorded_on: "2026-09-04"
+
+  baci_cepii:
+    authority: CEPII BACI
+    access_classification: public_terms_restricted
+    documentation_reference: http://www.cepii.fr/CEPII/en/bdd_modele/presentation.asp?id=37
+    terms_reference: http://www.cepii.fr/CEPII/en/bdd_modele/presentation.asp?id=37
+    endpoint_templates:
+      BULK: "http://www.cepii.fr/CEPII/en/bdd_modele/data/download/baci/baci_hs22_{year}.zip"
+      TERMS: "http://www.cepii.fr/CEPII/en/bdd_modele/presentation.asp?id=37"
+    parameters:
+      product_all_token: UNAVAILABLE
+      partner_world_token: UNAVAILABLE
+      reporter_token: UNAVAILABLE
+      flow_tokens: {}
+    pagination:
+      kind: NONE
+      documentation_reference: http://www.cepii.fr/CEPII/en/bdd_modele/presentation.asp?id=37
+      parameters: {}
+    nomenclature: HS2022
+    reporter_code: SAU
+    credential_env_var: null
+    rate_limit:
+      documented_policy: UNAVAILABLE
+      min_interval_seconds: 2.0
+      max_attempts: 3
+      timeout_seconds: 120
+    license_capture_required: true
+    default_evidence_class: B
+    default_reviewer_status: unconfirmed_by_responsible_authority
+    expected_content_types:
+      - application/zip
+      - application/octet-stream
+    user_agent: industrial-opportunity-resolution-mvp/0.2.0 (public-data acquisition; offline runtime)
+    recorded_on: "2026-09-04"
+
+  zatca_tariff:
+    authority: ZATCA
+    access_classification: public_open
+    documentation_reference: https://zatca.gov.sa/en/RulesRegulations/Taxes/Pages/Tariff.aspx
+    terms_reference: UNAVAILABLE
+    endpoint_templates:
+      TARIFF: "https://zatca.gov.sa/en/RulesRegulations/Taxes/Pages/Tariff.aspx"
+      TERMS: UNAVAILABLE
+    parameters:
+      product_all_token: UNAVAILABLE
+      partner_world_token: UNAVAILABLE
+      reporter_token: SAU
+      flow_tokens: {}
+    pagination:
+      kind: INDEX_ENUMERATION
+      documentation_reference: https://zatca.gov.sa/en/RulesRegulations/Taxes/Pages/Tariff.aspx
+      parameters:
+        index_field: sections
+    nomenclature: SA12
+    reporter_code: SAU
+    credential_env_var: null
+    rate_limit:
+      documented_policy: UNAVAILABLE
+      min_interval_seconds: 2.0
+      max_attempts: 3
+      timeout_seconds: 60
+    license_capture_required: false
+    default_evidence_class: B
+    default_reviewer_status: unconfirmed_by_responsible_authority
+    expected_content_types:
+      - text/html
+      - application/json
+    user_agent: industrial-opportunity-resolution-mvp/0.2.0 (public-data acquisition; offline runtime)
+    recorded_on: "2026-09-04"

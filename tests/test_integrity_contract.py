@@ -39,7 +39,7 @@ def test_s08_snapshot_manifest_retains_live_and_historical_public_rows(
     )
     paths = {item["path"] for item in manifest["files"]}
 
-    assert {
+    frozen = {
         "data/snapshots/public/SAU-H0-721049.json",
         "data/snapshots/public/SAU-H0-390210.json",
         (
@@ -55,7 +55,140 @@ def test_s08_snapshot_manifest_retains_live_and_historical_public_rows(
         "data/synthetic/historical/v1_1/SYN-MINISTRY-STEEL-001.json",
         "data/synthetic/historical/v1_1/SYN-MINISTRY-PP-001.json",
         "data/golden/ar_en_spec_extraction.json",
-    } == paths
+    }
+    assert frozen <= paths
+    allowed_extra_prefixes = (
+        "data/raw/",
+        "data/snapshots/universe/",
+        "data/snapshots/tariff/",
+        "data/snapshots/partners/",
+    )
+    extra = paths - frozen
+    assert all(
+        any(path.startswith(prefix) for prefix in allowed_extra_prefixes)
+        for path in extra
+    )
+
+
+def _partition_valid(paths: set[str]) -> bool:
+    frozen = {
+        "data/snapshots/public/SAU-H0-721049.json",
+        "data/snapshots/public/SAU-H0-390210.json",
+        "data/snapshots/public/historical/v1/SAU-H0-721049.json",
+        "data/snapshots/public/historical/v1/SAU-H0-390210.json",
+        "data/synthetic/SYN-MINISTRY-STEEL-001.json",
+        "data/synthetic/SYN-MINISTRY-PP-001.json",
+        "data/synthetic/historical/v1_1/SYN-MINISTRY-STEEL-001.json",
+        "data/synthetic/historical/v1_1/SYN-MINISTRY-PP-001.json",
+        "data/golden/ar_en_spec_extraction.json",
+    }
+    if not frozen <= paths:
+        return False
+    allowed_extra_prefixes = (
+        "data/raw/",
+        "data/snapshots/universe/",
+        "data/snapshots/tariff/",
+        "data/snapshots/partners/",
+    )
+    extra = paths - frozen
+    return all(
+        any(path.startswith(prefix) for prefix in allowed_extra_prefixes)
+        for path in extra
+    )
+
+
+def test_s11_snapshot_manifest_rejects_public_partition_leak() -> None:
+    manifest = json.loads(
+        (
+            PROJECT_ROOT / "data" / "manifests" / "snapshot_manifest.json"
+        ).read_text(encoding="utf-8")
+    )
+    paths = {item["path"] for item in manifest["files"]}
+    assert _partition_valid(paths)
+    assert not _partition_valid(paths | {"data/snapshots/public/extra.json"})
+
+
+def test_s11_core_03_and_05_v2_markers_on_line_three() -> None:
+    marker = (
+        "<!-- core_version: 2.0.0; supersedes: 1.0.0; "
+        "effective_date: 2026-09-02 -->"
+    )
+    for name in ("03_SYSTEM_ARCHITECTURE.md", "05_DATA_SOURCES_AND_INGESTION.md"):
+        text = (PROJECT_ROOT / "docs" / "core" / name).read_text(encoding="utf-8")
+        assert text.splitlines()[2] == marker
+        assert text.count(marker) == 1
+
+
+def test_authority_manifest_lists_acquisition_config() -> None:
+    authority = json.loads(
+        (PROJECT_ROOT / "docs" / "authority" / "authority_hashes.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    paths = {item["path"] for item in authority["files"]}
+    assert "config/acquisition_sources.v1.yaml" in paths
+
+
+def test_build_manifests_includes_acquisition_config_and_raw_files() -> None:
+    source = (PROJECT_ROOT / "scripts" / "build_manifests.py").read_text(
+        encoding="utf-8"
+    )
+    assert 'ROOT / "config" / "acquisition_sources.v1.yaml"' in source
+    assert '"data"' in source and "raw" in source
+
+
+def test_missing_snapshot_kinds_cited_in_known_limitations() -> None:
+    from ior_mvp.acquisition.connectors.base import default_registry
+    from ior_mvp.acquisition.snapshots import SNAPSHOT_ROOTS
+
+    kl_text = (PROJECT_ROOT / "docs" / "KNOWN_LIMITATIONS.md").read_text(
+        encoding="utf-8"
+    )
+    registry = default_registry()
+    raw_root = PROJECT_ROOT / "data" / "raw"
+    stage_for_kind = {"universe": "UNIVERSE", "tariff": "TARIFF", "partners": "PARTNERS"}
+
+    for kind, rel_root in SNAPSHOT_ROOTS.items():
+        snap_dir = PROJECT_ROOT / rel_root
+        stage_value = stage_for_kind[kind]
+        for source_id in registry.ids():
+            if kind not in registry.snapshot_kinds(source_id):
+                continue
+            has_snapshot = False
+            if snap_dir.exists():
+                for snap_path in snap_dir.glob("*.json"):
+                    record = json.loads(snap_path.read_text(encoding="utf-8"))
+                    if record.get("source_id") == source_id:
+                        has_snapshot = True
+                        break
+            if has_snapshot:
+                continue
+            source_raw = raw_root / source_id
+            assert source_raw.is_dir(), f"missing raw dir for {source_id}"
+            latest_marker = None
+            for attempt_path in sorted(source_raw.rglob("attempt.json")):
+                attempt = json.loads(attempt_path.read_text(encoding="utf-8"))
+                stage = attempt.get("coverage", {}).get("stage")
+                if stage != stage_value:
+                    continue
+                latest_marker = attempt.get("query_hash") or str(
+                    attempt_path.relative_to(PROJECT_ROOT)
+                )
+            if latest_marker is None:
+                for cov_path in sorted(source_raw.rglob("coverage.json")):
+                    cov = json.loads(cov_path.read_text(encoding="utf-8"))
+                    if cov.get("stage") != stage_value:
+                        continue
+                    if cov.get("status") == "COMPLETE":
+                        continue
+                    latest_marker = cov.get("query_hash") or str(
+                        cov_path.relative_to(PROJECT_ROOT)
+                    )
+            if latest_marker is None:
+                continue
+            assert latest_marker in kl_text or source_id in kl_text, (
+                f"({kind}, {source_id}) missing KL citation for {latest_marker}"
+            )
 
 
 def test_s07_core_v2_markers_and_minimal_contract_text_are_exact() -> None:

@@ -64,6 +64,28 @@ The public steel case leaves the exact imported target specification unresolved.
 
 Value, weight, supplementary quantity and unit are never collapsed into one field.
 
+§2.8 note: acquired analytical snapshots use source-qualified IDs (`UNIVERSE-SAU-<TAG>-…`, `TARIFF-SAU-<TAG>-…`, `PARTNERS-SAU-<TAG>-…`) and are never spliced into frozen public goldens. `PublicSnapshot 2.1` and `SUPPORT_CODES` are unchanged in S11. `NATIONAL_TARIFF_LINE_MAPPING` is acquisition-only until a later governed projection. No BACI snapshot kind exists in S11.
+
+### AcquiredEvidencePassport 1.0.0
+
+Eight §11 groups: `passport_id`, `source_id`, `synthetic_flag`, `status`, `evidence_class`, `reviewer_status`, `supports`, `source_identity`, `query_contract`, `retrieval`, `coverage`, `transformation_record`, `observation_context`, `measurement`, `contradiction_record`.
+
+### 2.11 TariffLine
+
+| Field | Meaning |
+|---|---|
+| `national_code` | 12-digit Saudi tariff line |
+| `description` | Line description when present |
+| `duty_rate` | Observed duty rate text |
+
+### Acquisition snapshots 1.0.0
+
+Kinds: `UniverseTradeSnapshot`, `TariffHierarchySnapshot`, `PartnerDetailSnapshot` at schema version `1.0.0`.
+
+Mandatory keys include: `schema_version`, `snapshot_id`, `source_id`, `as_of_date`, `source_boundary`, `kind`, `nomenclature`, `coverage` (with `selection_rule`, `selected_run_id`, `superseded_run_ids`), `raw_artifact_refs` (with `path`, `sha256`, `unit_key`), `transformation_record`, `quality_summary`, `evidence`.
+
+Universe snapshots carry `product_scope: ALL_HS6` sentinel. Partner snapshots carry `coverage.units_excluded` aligned with transformation exclusions.
+
 ### PublicSnapshot 2.1
 
 A live public snapshot sets `schema_version: "2.1.0"`. The two frozen golden

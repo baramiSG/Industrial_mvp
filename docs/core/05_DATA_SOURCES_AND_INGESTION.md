@@ -1,5 +1,7 @@
 # 05 — Public Data Sources, Snapshots and Ingestion
 
+<!-- core_version: 2.0.0; supersedes: 1.0.0; effective_date: 2026-09-02 -->
+
 ## 1. Objective
 
 The MVP must run end to end without live dependencies while preserving a production-ready data contract. Public sources identify signals, products, incumbent capability and strategic context. Ministry data later resolves the line-level facts that public evidence cannot defend.
@@ -24,11 +26,11 @@ These records are stored locally, hashed and never refreshed during runtime.
 
 | Source | Use | Grain / caution | MVP status |
 |---|---|---|---|
-| UN Comtrade / WITS | HS6 value, quantity, partner and time series | Reporter record; gross flows; quantity quality varies | frozen worked-case rows implemented |
-| BACI (CEPII) | reconciled bilateral HS6 and cross-country consistency | annual; release-version pinning required | connector planned |
+| UN Comtrade / WITS | HS6 value, quantity, partner and time series | Reporter record; gross flows; quantity quality varies | connector implemented (S11); availability and coverage recorded per run |
+| BACI (CEPII) | reconciled bilateral HS6 and cross-country consistency | annual; release-version pinning required | connector implemented (S11); raw evidence only, no analytical kind |
 | ITC Trade Map | monthly and mirror diagnostics | registration/licensing conditions; not a substitute for Saudi administrative data | connector planned |
 | GASTAT foreign trade and open data | official domestic aggregate anchor | reconcile definitions and revisions | connector planned |
-| ZATCA integrated tariff | Saudi 12-digit line tree and duties | classification tree is needed even when transactions are not public | schema planned |
+| ZATCA integrated tariff | Saudi 12-digit line tree and duties | classification tree is needed even when transactions are not public | connector implemented (S11) |
 | Reporter-country mirror flows | gap and anomaly diagnostic | mirror statistics do not replace the reporter record | planned diagnostic |
 
 Mirror data may help explain a missing year or partner anomaly. It must not be silently spliced into a Saudi reporter series as if it were the same measurement.
@@ -216,16 +218,32 @@ Effective target-spec capacity = 57.509 kt
 | Contradictory product ranges | retain contradiction and request confirmation |
 | Live source changed | create new snapshot; do not mutate golden fixture |
 
-## 10. Ingestion implementation plan
+## 10. Ingestion implementation (S11)
 
-Production connectors should implement a shared interface:
+Production connectors implement `acquisition.connectors.base.SourceConnector`:
 
 ```python
 class SourceConnector:
-    def acquire(self, query_contract) -> RawArtifact: ...
+    def acquire(self, query_contract, *, max_requests) -> RawArtifact | UnavailableRecord: ...
     def validate(self, raw) -> QualityReport: ...
     def normalize(self, raw) -> list[Observation]: ...
     def snapshot(self, observations, as_of_date) -> Snapshot: ...
 ```
 
-The current POC begins at the snapshot stage because its objective is to demonstrate the decision engine, not to depend on unstable live access.
+Raw store layout: `data/raw/<source_id>/<query_hash>/<run_id>/` holds one `page-<NNNN>.payload.<ext>.gz` + `page-<NNNN>.contract.json` pair per response, plus `coverage.json` or `attempt.json` per planned unit run.
+
+Unit-level two-stage acquisition: UNIVERSE (ALL HS6), PARTNERS (explicit HS6 list), TARIFF (national tree), BULK (BACI raw-only). UNAVAILABLE reasons are enumerated in `UnavailableReason`. Offline guard blocks socket connect unless explicit live flag and env var are set. Reconstruction proof re-derives snapshots byte-for-byte from stored artifacts under default manifest checking.
+
+## 11. Acquisition run governance
+
+- Operator-invoked only; `--years` is required on `acquire-universe`, `acquire-partners` and `acquire-baci`, and `--max-requests` on every acquire command, with rationale recorded in the slice implementation log (no suggested defaults in runbook or code); `acquire-tariff` takes no `--years` because the tariff tree is acquired as one period-free contract whose as-of date comes from retrieval.
+- Credentials referenced by environment variable name only; absence recorded as `CREDENTIAL_ABSENT`.
+- Licence capture boundary: terms must be captured when `license_capture_required` is true or run fails `LICENSE_UNRECORDED`.
+- Size budget enforced by `RawStore` (`max_artifact_bytes_compressed`, `max_store_bytes_compressed` in hashed YAML).
+- Rate-limit floor: `min_interval_seconds` from source config between requests.
+- Completeness accounting (DD-18): every planned unit receives coverage with `pages_fetched`, `pages_expected`, and `status`; truncated pagination never becomes a universe/tariff snapshot.
+- Source partition and selection (DD-21): one analytical snapshot per `(kind, source_id)`; latest run per source/stage/unit key; superseded runs retained; a universe with any INCOMPLETE selected unit is never written as the Saudi HS6 universe.
+- BACI raw-only (DD-22): BULK stored as evidence; never spliced into reporter universe.
+- Re-run discipline: higher `MAX_REQUESTS` may produce a new run_id; latest selection may change and trigger `SELECTION_CHANGED` on reconstruction.
+- History retention: all runs remain under `data/raw/`; manifest lists every regular file.
+- Stop conditions: (A) zero real artifacts across all sources → halt before snapshot build; (B) zero normalized analytical snapshots after parsers → halt before reconstruction CI wiring.

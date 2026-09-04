@@ -162,6 +162,8 @@ Required assertions:
 
 Golden cases never pull live Comtrade, WITS, BACI, company pages or standards.
 
+Acquired snapshots receive their own source-qualified IDs and are never spliced into goldens or across sources.
+
 A source refresh process creates a new candidate snapshot and runs comparison tests. If the result changes, reviewers determine whether the change reflects:
 
 - a legitimate data revision;
@@ -240,6 +242,20 @@ decision narratives are Arabic text rather than English source-language
 islands. Simulation narrative fields remain English source-language islands
 in locale `ar` until S10.
 
+### Public acquisition and reconstruction proof
+
+Connector tests run only against stored raw artifacts or `tests/acquisition_doubles.py` helpers; never live network.
+
+Reconstruction is byte-exact for every acquired snapshot under the same latest-run selection. `scripts/reconstruct_snapshot.py --all` exits 1 when no snapshots exist, exit 2 when a manifest row is missing under default checking, exit 1 on hash mismatch. Manifest checking is switchable off only via `--no-check-manifest` before manifests exist.
+
+Truncated page sets (FakeTransport page-1-of-2 with `max_requests=1`) never become universe/tariff snapshots.
+
+Source-partition proofs: (a) superseded run retained but not selected; (b) sibling-source isolation; (c) two source-qualified snapshot IDs; (d) BACI never spliced into universe; (e) `SELECTION_CHANGED` when latest run_id differs.
+
+Size budget, passport completeness, no-network guard, and every configured source having a contract or attempt record are tested. The `ZERO_NORMALIZED_SNAPSHOTS` gate requires at least one analytical snapshot before reconstruction CI wiring.
+
+Acquired snapshots receive their own source-qualified IDs and are never spliced into goldens or across sources.
+
 ## 6. Acceptance gates by subsystem
 
 ### Gate A — Authority
@@ -254,7 +270,8 @@ in locale `ar` until S10.
 - snapshots validate;
 - units and gross-flow boundary visible;
 - source records and hashes present;
-- synthetic scenarios reconcile to public marginals.
+- synthetic scenarios reconcile to public marginals;
+- raw artifacts hashed, contract-complete, coverage-recorded and reconstructible.
 
 ### Gate C — Rules
 
@@ -299,6 +316,7 @@ in locale `ar` until S10.
 ```bash
 python3 scripts/build_manifests.py   # only after approved changes
 python3 scripts/verify_integrity.py
+python3 scripts/reconstruct_snapshot.py --all
 pytest -q
 python3 scripts/demo_smoke.py
 ```
