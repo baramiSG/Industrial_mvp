@@ -28,6 +28,13 @@ def main() -> None:
     snapshot_paths = sorted((ROOT / "data" / "snapshots").rglob("*.json"))
     snapshot_paths += sorted((ROOT / "data" / "synthetic").rglob("*.json"))
     snapshot_paths += sorted((ROOT / "data" / "golden").glob("*.json"))
+    raw_root = ROOT / "data" / "raw"
+    if raw_root.exists():
+        snapshot_paths += sorted(
+            p
+            for p in raw_root.rglob("*")
+            if p.is_file()
+        )
     snapshot_manifest = {
         "manifest_version": "1.0",
         "generated_on": str(date.today()),
@@ -45,6 +52,7 @@ def main() -> None:
         ROOT / "config" / "evidence_policy.v1.yaml",
         ROOT / "config" / "ui_strings.v1.yaml",
         ROOT / "config" / "decision_narratives.v1.yaml",
+        ROOT / "config" / "acquisition_sources.v1.yaml",
     ]
     authority_paths += sorted((ROOT / "docs" / "core").glob("*.md"))
     authority_manifest = {

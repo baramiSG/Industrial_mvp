@@ -150,21 +150,24 @@ Stop the change and raise an owner decision when:
 The machine-readable source of truth is `authority_hashes.json`. The table below is regenerated when the approved authority set changes.
 
 <!-- HASH_TABLE_START -->
-| Governed file | SHA-256 | Bytes |
-|---|---|---:|
+
+| Path | SHA-256 | Bytes |
+| --- | --- | --- |
 | `docs/authority/Industrial_Opportunity_Resolution_Methodology_Final_KSA.docx` | `5717cbd42acc9947ce5e450013719275acb7ed1470847b21fb2cc547c8ac4ce9` | 224,257 |
 | `config/thresholds.v1.yaml` | `4e891b9706408f6a661565e09609d0d663e1a00a17bda4e283a4b2ee63d3c47a` | 3,887 |
 | `config/sector_profiles.v1.yaml` | `9765e84dc32297d624f72644a436f5aac15fe600df5536d717f3600b05708e3e` | 2,879 |
 | `config/evidence_policy.v1.yaml` | `667d4def45fd11a85f852c8b16c922d781bfc171c46e0f822dd8202d4318de73` | 1,835 |
 | `config/ui_strings.v1.yaml` | `cb1881fdfbbbd757c83a01f5ad489ab6587a39a28c387522d982e08338d4a08b` | 24,254 |
 | `config/decision_narratives.v1.yaml` | `98704e6fffc1ab735bf95a885fb7acd80c8c05fb53d70148316ad372eac876d4` | 30,139 |
+| `config/acquisition_sources.v1.yaml` | `106ebfd8c4172fb8707789b61e6501c5254f41a58b1b8e524d54d26129a9d9f2` | 6,336 |
 | `docs/core/01_PRODUCT_AND_REQUIREMENTS.md` | `59139b9e9d407753742139187428cbc5a20b87fe1dc14f91edf7d6ca4a57e84a` | 14,878 |
-| `docs/core/02_METHODOLOGY_IMPLEMENTATION_MAP.md` | `4b6d8c187110d604552dc3ebac0edae962d7645f118c32cfb58ade59ffc83d66` | 18,009 |
-| `docs/core/03_SYSTEM_ARCHITECTURE.md` | `33cfb90b3e394413855144c70abfdf79c6c41584caa0ad1b73dfb044281cac66` | 9,337 |
-| `docs/core/04_CANONICAL_DATA_MODEL.md` | `1c528516356451ccc1514eeda444600e12dc1520a03aec67ba66706b4dfc1bb1` | 11,431 |
-| `docs/core/05_DATA_SOURCES_AND_INGESTION.md` | `d47823ae761996faf3f67a14850a75ddb4a37a3e8dd3a160ad54afacca8548ad` | 9,259 |
+| `docs/core/02_METHODOLOGY_IMPLEMENTATION_MAP.md` | `11caeee09179b8a88d148454386082fb94d2e820a21d6eacd9d1db85354d4c3e` | 19,477 |
+| `docs/core/03_SYSTEM_ARCHITECTURE.md` | `70871d9f7042e06016fc684e7e04e2be040a3ae39c300b16ef2591467210ac8f` | 10,753 |
+| `docs/core/04_CANONICAL_DATA_MODEL.md` | `2f39c72f3f9d77ff80a905cfb4ab4a0182da3273186300913c0d69b37b84d575` | 12,928 |
+| `docs/core/05_DATA_SOURCES_AND_INGESTION.md` | `21bf334d74a3d19d39c39ff981e3f598cc1fd9c85f81704dce8857306a00332f` | 11,752 |
 | `docs/core/06_SYNTHETIC_MINISTRY_DATA_SPEC.md` | `3575c5b178cd195884c151bcaf8fa4188847250ba3aed3e2df7d02b7449b24cb` | 7,376 |
 | `docs/core/07_DETERMINISTIC_ENGINE_SPEC.md` | `5dcb987e9aa6e23a879e44e9b507ca0120e97bf9e568cebaf29b1a5e085e64a6` | 26,140 |
 | `docs/core/08_AI_EXTRACTION_AND_EVIDENCE_SPEC.md` | `875f30b1a597f94548cf1cdb8315c753dc0fe9d780674b36a7bd8653e9e56f58` | 5,564 |
-| `docs/core/09_TEST_ACCEPTANCE_AND_GOLDEN_CASES.md` | `b48c854120949d489530f35d756ecd358fccee5110e84a19684307b1a7b3f61d` | 11,187 |
+| `docs/core/09_TEST_ACCEPTANCE_AND_GOLDEN_CASES.md` | `e5d9befd2df2cd4ae82a27026b1dca2a00cac5b46b5753e278a95cae054d26b7` | 12,639 |
+
 <!-- HASH_TABLE_END -->

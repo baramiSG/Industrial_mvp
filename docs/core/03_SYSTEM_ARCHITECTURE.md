@@ -1,5 +1,7 @@
 # 03 — System Architecture
 
+<!-- core_version: 2.0.0; supersedes: 1.0.0; effective_date: 2026-09-02 -->
+
 ## 1. Architectural objective
 
 The architecture must demonstrate the complete reasoning chain without requiring live Ministry connectivity:
@@ -55,6 +57,10 @@ flowchart LR
     H[Integrity manifests] --> R
     H --> S
     H --> CI[Golden CI]
+
+    OP[Operator acquisition commands] --> RAW[Raw evidence store]
+    RAW --> ACQ[Per-source analytical snapshots]
+    ACQ --> H
 ```
 
 ## 4. Runtime components
@@ -183,6 +189,21 @@ Responsibilities:
 - serve the offline frontend;
 - provide OpenAPI documentation.
 
+### 4.11 Acquisition module
+
+Package: `src/ior_mvp/acquisition/`
+
+Responsibilities:
+
+- explicit operator-only live fetch through `transport.assert_live_permitted`;
+- deterministic raw store with query hash, run id, page contracts and coverage records;
+- latest-run-per-source-stage-unit selection (`LATEST_RUN_PER_SOURCE_STAGE_UNIT`);
+- per-source analytical snapshot builders for universe, tariff and partners kinds;
+- acquired evidence passports with eight §11 groups;
+- offline reconstruction proof via `scripts/reconstruct_snapshot.py`.
+
+BACI BULK is raw-only in S11: stored as hashed evidence with no analytical snapshot kind.
+
 ## 5. Public analysis sequence
 
 ```mermaid
@@ -260,6 +281,8 @@ Context rules include:
 
 ## 8. Deployment architecture
 
+No external API call occurs at runtime. Public acquisition runs only through explicit operator commands (`ior_mvp.acquisition` CLI or Makefile acquire targets) with `IOR_ACQUISITION_LIVE=1`; tests and CI never invoke live fetch.
+
 ### 8.1 POC
 
 - one Python process;
@@ -288,7 +311,7 @@ The MVP does not lock the Ministry into a particular cloud or data platform.
 
 | Boundary | Control |
 |---|---|
-| Public source → snapshot | source metadata, as-of date, raw file and hash |
+| Public source → raw store → snapshot | query hash, deterministic compression, SHA-256, coverage record, latest-run selection per source, offline guard |
 | Snapshot → rule engine | schema validation and immutable load |
 | Synthetic directory → simulation | explicit flag, Class D, scenario ID and source restriction |
 | Simulation → real decision | deep copy, fingerprint and post-run assertion |
@@ -304,7 +327,10 @@ The MVP does not lock the Ministry into a particular cloud or data platform.
 - missing synthetic metadata → fail closed;
 - unresolved capability hard gate → D\* not published;
 - support search cannot satisfy hurdle → no S\* and no ADVANCE;
-- hash mismatch → integrity failure before demo/release.
+- hash mismatch → integrity failure before demo/release;
+- UNAVAILABLE attempt record persisted with reason and observed response;
+- INCOMPLETE latest-run coverage → no universe/tariff snapshot for that source;
+- reconstruction mismatch or changed latest-run selection → integrity failure (exit 1 / SELECTION_CHANGED).
 
 ## 11. Scaling path
 

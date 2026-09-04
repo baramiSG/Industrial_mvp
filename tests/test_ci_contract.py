@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import hashlib
+import json
 from typing import Any
 
 import pytest
@@ -77,6 +79,7 @@ def test_each_python_job_runs_every_required_gate(job_name: str) -> None:
         "python scripts/check_es_modules.py --node node",
         "python scripts/verify_integrity.py",
         "python scripts/validate_scenarios.py",
+        "python scripts/reconstruct_snapshot.py --all",
         "pytest -q",
         "python scripts/demo_smoke.py",
     )
@@ -211,6 +214,7 @@ def test_make_ci_runs_scenario_validation_after_integrity() -> None:
     fragments = (
         "python scripts/verify_integrity.py",
         "python scripts/validate_scenarios.py",
+        "python scripts/reconstruct_snapshot.py --all",
         "pytest -q",
     )
 
@@ -222,6 +226,29 @@ def test_make_ci_runs_scenario_validation_after_integrity() -> None:
         text.index(fragment)
         for fragment in fragments
     )
+
+
+def test_visual_webp_hashes_unchanged_from_head() -> None:
+    import subprocess
+
+    manifest = json.loads(
+        (
+            PROJECT_ROOT
+            / "browser_tests"
+            / "baselines"
+            / "v0.3.0"
+            / "manifest.json"
+        ).read_text(encoding="utf-8")
+    )
+    for entry in manifest["entries"]:
+        if not str(entry["path"]).endswith(".webp"):
+            continue
+        rel = f"browser_tests/baselines/v0.3.0/{entry['path']}"
+        blob = subprocess.check_output(
+            ["git", "show", f"HEAD:{rel}"],
+            cwd=PROJECT_ROOT,
+        )
+        assert hashlib.sha256(blob).hexdigest() == entry["sha256"]
 
 
 def test_docker_build_job_builds_the_repository_dockerfile() -> None:
@@ -331,3 +358,24 @@ def test_ci_workflow_contains_no_optional_failure_escape() -> None:
             assert "continue-on-error" not in step
             if "uses" in step and step["uses"] == "actions/checkout@v4":
                 assert step["with"]["persist-credentials"] == "false"
+
+
+def test_reconstruct_step_follows_scenario_validation() -> None:
+    for job_name in ("uv-gates", "pip-gates"):
+        steps = _workflow()["jobs"][job_name]["steps"]
+        scenario_index = next(
+            i
+            for i, step in enumerate(steps)
+            if step.get("name")
+            == "Validate synthetic scenarios against public marginals"
+        )
+        reconstruct_step = steps[scenario_index + 1]
+        assert reconstruct_step["name"] == (
+            "Reconstruct acquired snapshots from the raw store"
+        )
+        assert "reconstruct_snapshot.py --all" in reconstruct_step["run"]
+
+
+def test_no_check_manifest_not_in_ci_or_makefile() -> None:
+    assert "--no-check-manifest" not in WORKFLOW.read_text(encoding="utf-8")
+    assert "--no-check-manifest" not in MAKEFILE.read_text(encoding="utf-8")

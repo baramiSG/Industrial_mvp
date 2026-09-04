@@ -22,6 +22,7 @@ Statuses used on this branch are `NOT_STARTED`, `PLANNED`, `IMPLEMENTED`, `TESTE
 - **S09-LOCAL:** `.workflow/slices/S09-public-decision-and-profiles/test_evidence.md` and `implementation_log.md`; local evidence covers PublicSnapshot 2.1.0 and contract removal, four evidence-class assessments and the source-independent ADVANCE gate, six exclusions, one-primary gap taxonomy, amended-I1 state branches, routes 0–8 hypotheses and amended-I5 selection, five sector profiles, predicate-selected evidence needs, bilingual public narratives, signals module and ADVANCE support guard, typed rejection narratives, route-determination INVESTIGATE, confidence cap, and unchanged scenario-authored simulation narratives/numbers. Five host-owned canonical baseline executions are recorded: the initial capture; one route-spacing defect correction; two provenance refreshes after methodology self-audit; and the correction-round refresh under `S09-generalized-public-decision-corrections`, each preceded by a complete 118-node functional pass. This registry item remains local execution evidence; independent approval and delivery are recorded separately in S09-CI.
 - **S09-CI:** PR #12 head `f772da6d4f23d3e1c4263e577fbc5a756b35a7ad`, run `33754472700`, and default-branch merge `66d4835d8c13b0421de271222e2422aff0cb5eb7`, run `33755119710`; all five jobs green on both exact SHAs. Independent Grok approval had zero findings on tree `313edc480668d4e1201ba0c5a46525ed0000feb5`; post-merge integrity passed.
 - **S10-LOCAL:** `.workflow/slices/S10-generalized-simulation/test_evidence.md` and `implementation_log.md`; local evidence covers scenario contract 2.0.0, generalized simulated routes 0–7 and MONITOR, route-8 `GRAPH_REQUIRED` contract, simulated R5/R8 ledger semantics, ten Gate B reconciliation checks, bilingual simulated narratives, `class_if_confirmed` ADVANCE gating, ten fixture proofs, migration equivalence with byte-identical historical 1.1.0 files, unchanged four frozen outcomes/numbers, and canonical visual baseline refresh `S10-generalized-simulation` with public workspace oracles restored byte-identical to base `66d4835`. Two justified `build_manifests.py` runs are recorded: candidate 2 (T13 initial) and candidate 3 (Core 01 T12 correction). This registry item remains local execution evidence; independent approval and delivery are recorded separately in S10-CI.
+- **S10-CI:** PR #13 head `4b8a689ab36d65a8ff79864d236272b047eab8f2`, run `33794229014`, and default-branch merge `a610b49b1f9a34ffb6430e92b7a6cb7fafb82ca4`, run `33794894041`; all five jobs green on both exact SHAs. Independent Grok approval had zero findings on tree `4b43fda352910f5d5f056a0f603d7ec907b8cb35`; post-merge integrity, 62 focused regressions and smoke passed.
 
 The Gate G/TL-07 proof scope now combines the preserved live HTTP/API and static contracts with Real Chromium interaction: case cards/select/hero, both evidence modes, adaptive manifests, dossier popup and clipboard, print media and PDF bytes, 15-control Tab order with visible focus, zero axe WCAG 2.1 A/AA violations, Arabic RTL/non-tofu rendering, and overflow/actionability at 1440×900, 1024×768, 1920×1080, and 2560×1440. S06 screenshots are documentary references only and are never compared; governed visual-regression oracles begin in S07 under ruling R-4.
 
@@ -218,23 +219,36 @@ The complete S05 local harness run `20260902T033607Z-17501` observed the associa
 
 | ID | Observable acceptance | Implementation and local execution evidence | Status | Slice |
 |---|---|---|---|---|
-| V3-C3-schemas | Scenario contract 2.0.0 governs bilingual narratives, allocation/expansion/flow blocks and `class_if_confirmed`. | `scenario_contract.py`; Core 06 v2; migration and validation tests; S10-LOCAL. | TESTED | S10 |
-| V3-C5-simulated | Simulated analysis emits ordered route hypotheses 0–7 with amended-I5 selection and route-8 refusal. | `simulation.py`, `route_hypotheses.py`; per-route fixtures; S10-LOCAL. | TESTED | S10 |
-| V3-C7 | Every 2.0.0 scenario reconciles to public marginals and carries planted ground truth. | `evidence.reconcile_synthetic_scenario`; Gate B ten checks; ground-truth back-tests; S10-LOCAL. | TESTED | S10 |
-| V3-D5 | Governed tariff-line and buyer-allocation scenario schemas reconcile to public imports. | Contract 2.0.0 blocks; reconciliation PASS/FAIL tests; S10-LOCAL. | TESTED | S10 |
-| V3-D6 | Governed expansion-assumption schema is disclosed and bounded against public nameplate. | Contract 2.0.0 `expansion_assumption`; reconciliation test; S10-LOCAL. | TESTED | S10 |
-| V3-D8 | R8 is calculable when base demand, commitment probability and MES exist. | `rules.evaluate_simulated_rules`; steel MES 50.0; boundary tests; S10-LOCAL. | TESTED | S10 |
-| V3-D9-simulated | Routes 0–7 and MONITOR are exercised in simulation; route 8 remains graph-required. | Ten fixture matrix; route-8 refusal; MONITOR trigger gate; S10-LOCAL. | TESTED | S10 |
+| V3-C3-schemas | Scenario contract 2.0.0 governs bilingual narratives, allocation/expansion/flow blocks and `class_if_confirmed`. | `scenario_contract.py`; Core 06 v2; migration and validation tests; S10-LOCAL and S10-CI. | COMPLETE | S10 |
+| V3-C5-simulated | Simulated analysis emits ordered route hypotheses 0–7 with amended-I5 selection and route-8 refusal. | `simulation.py`, `route_hypotheses.py`; per-route fixtures; S10-LOCAL and S10-CI. | COMPLETE | S10 |
+| V3-C7 | Every 2.0.0 scenario reconciles to public marginals and carries planted ground truth. | `evidence.reconcile_synthetic_scenario`; Gate B ten checks; ground-truth back-tests; S10-LOCAL and S10-CI. | COMPLETE | S10 |
+| V3-D5 | Governed tariff-line and buyer-allocation scenario schemas reconcile to public imports. | Contract 2.0.0 blocks; reconciliation PASS/FAIL tests; S10-LOCAL and S10-CI. | COMPLETE | S10 |
+| V3-D6 | Governed expansion-assumption schema is disclosed and bounded against public nameplate. | Contract 2.0.0 `expansion_assumption`; reconciliation test; S10-LOCAL and S10-CI. | COMPLETE | S10 |
+| V3-D8 | R8 is calculable when base demand, commitment probability and MES exist. | `rules.evaluate_simulated_rules`; steel MES 50.0; boundary tests; S10-LOCAL and S10-CI. | COMPLETE | S10 |
+| V3-D9-simulated | Routes 0–7 and MONITOR are exercised in simulation; route 8 remains graph-required. | Ten fixture matrix; route-8 refusal; MONITOR trigger gate; S10-LOCAL and S10-CI. | COMPLETE | S10 |
 
 ### S10 Core 01 FR-055–FR-059 evidence
 
 | ID | Requirement | Implementation and execution evidence | Status | Slice |
 |---|---|---|---|---|
-| FR-055 | Simulated route hypotheses evaluate routes 0–7 plus route-8 contract without graph activation. | `simulation.compute_simulated_decision`; route-8 `GRAPH_REQUIRED` tests; S10-LOCAL. | TESTED | S10 |
-| FR-056 | Scenario contract 2.0.0 validates bilingual narratives and optional blocks with public gate pairing. | `scenario_contract.validate_simulation_contract`; fail-closed tests; S10-LOCAL. | TESTED | S10 |
-| FR-057 | Simulated reconciliation compares declared blocks to public marginals. | Ten Gate B checks; reconciliation tests; S10-LOCAL. | TESTED | S10 |
-| FR-058 | Simulated narratives render bilingually from scenario or catalogue 1.1.0. | `narratives.py`; browser/dossier/API tests; S10-LOCAL. | TESTED | S10 |
-| FR-059 | UI and dossier mirror `simulation_decision` without mutating `real_decision`. | `genui.py`, `dossier.py`, `dom.js`; isolation and contract tests; S10-LOCAL. | TESTED | S10 |
+| FR-055 | Simulated route hypotheses evaluate routes 0–7 plus route-8 contract without graph activation. | `simulation.compute_simulated_decision`; route-8 `GRAPH_REQUIRED` tests; S10-LOCAL and S10-CI. | COMPLETE | S10 |
+| FR-056 | Scenario contract 2.0.0 validates bilingual narratives and optional blocks with public gate pairing. | `scenario_contract.validate_simulation_contract`; fail-closed tests; S10-LOCAL and S10-CI. | COMPLETE | S10 |
+| FR-057 | Simulated reconciliation compares declared blocks to public marginals. | Ten Gate B checks; reconciliation tests; S10-LOCAL and S10-CI. | COMPLETE | S10 |
+| FR-058 | Simulated narratives render bilingually from scenario or catalogue 1.1.0. | `narratives.py`; browser/dossier/API tests; S10-LOCAL and S10-CI. | COMPLETE | S10 |
+| FR-059 | UI and dossier mirror `simulation_decision` without mutating `real_decision`. | `genui.py`, `dossier.py`, `dom.js`; isolation and contract tests; S10-LOCAL and S10-CI. | COMPLETE | S10 |
+
+## L. Milestone v0.3.0 — S11 public acquisition I
+
+| ID | Observable acceptance | Implementation and local execution evidence | Status | Slice |
+|---|---|---|---|---|
+| V3-B1 | Operator-only acquisition with offline guard and explicit run parameters. | `acquisition/transport.py`, CLI/Makefile acquire targets; S11-LOCAL. | TESTED | S11 |
+| V3-B2 | Deterministic raw store with coverage and attempt records per source. | `acquisition/raw_store.py`, `data/raw/**`; S11-LOCAL. | TESTED | S11 |
+| V3-B3-trade-tariff | WITS partners snapshot with passports; other sources honestly UNAVAILABLE/INCOMPLETE. | `data/snapshots/partners/PARTNERS-SAU-WITS-TRADE-2026-09-03.json`; KL-42–44; S11-LOCAL. | TESTED | S11 |
+| V3-B4 | Offline reconstruction proof with manifest partition. | `scripts/reconstruct_snapshot.py`, integrity partition tests; S11-LOCAL. | TESTED | S11 |
+| V3-§11-passports | Acquired evidence passports with eight §11 groups on normalized snapshots. | `acquisition/passports.py`, partner snapshot evidence array; S11-LOCAL. | TESTED | S11 |
+| V3-RECON | Byte-exact reconstruction and SELECTION_CHANGED detection. | `tests/test_acquisition_reconstruction.py`; S11-LOCAL. | TESTED | S11 |
+
+- **S11-LOCAL:** `.workflow/slices/S11-acquisition-trade-tariff/test_evidence.md` and `implementation_log.md`.
 
 ## Branch and release-state rules
 

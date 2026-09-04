@@ -19,7 +19,8 @@ VISUAL_BASELINE_IMAGE = ior-visual-baselines:playwright-1.62.0-noble
 
 .PHONY: install test verify run smoke package uv-sync uv-sync-e2e lock \
 	e2e e2e-functional e2e-visual e2e-visual-canonical \
-	e2e-update-baselines visual-baseline-image ci
+	e2e-update-baselines visual-baseline-image ci \
+	acquire-universe acquire-partners acquire-tariff acquire-baci build-snapshots reconstruct
 
 install:
 	python3 -m pip install -e ".[dev]"
@@ -88,8 +89,45 @@ ci: uv-sync
 	$(ES_MODULE_CHECK)
 	PYTHONPATH=src $(UV_RUN) python scripts/verify_integrity.py
 	PYTHONPATH=src $(UV_RUN) python scripts/validate_scenarios.py
+	PYTHONPATH=src $(UV_RUN) python scripts/reconstruct_snapshot.py --all
 	PYTHONPATH=src $(UV_RUN) pytest -q
 	PYTHONPATH=src $(UV_RUN) python scripts/demo_smoke.py
 	$(E2E_PREFLIGHT)
 	$(E2E_FUNCTIONAL_TESTS)
 	$(E2E_VISUAL_TESTS)
+
+acquire-universe:
+	@test "$(IOR_ACQUISITION_LIVE)" = "1" || (echo "IOR_ACQUISITION_LIVE=1 required" >&2; exit 2)
+	@test -z "$(CI)" || (echo "CI may not acquire" >&2; exit 2)
+	@test -n "$(SOURCE)" || (echo "SOURCE required" >&2; exit 2)
+	@test -n "$(YEARS)" || (echo "YEARS required" >&2; exit 2)
+	@test -n "$(MAX_REQUESTS)" || (echo "MAX_REQUESTS required" >&2; exit 2)
+	PYTHONPATH=src $(UV_RUN) python -m ior_mvp.acquisition acquire-universe --source $(SOURCE) --years $(YEARS) --max-requests $(MAX_REQUESTS) $(if $(FLOWS),--flows $(FLOWS),)
+
+acquire-partners:
+	@test "$(IOR_ACQUISITION_LIVE)" = "1" || (echo "IOR_ACQUISITION_LIVE=1 required" >&2; exit 2)
+	@test -z "$(CI)" || (echo "CI may not acquire" >&2; exit 2)
+	@test -n "$(SOURCE)" || (echo "SOURCE required" >&2; exit 2)
+	@test -n "$(CANDIDATES)" || (echo "CANDIDATES required" >&2; exit 2)
+	@test -n "$(YEARS)" || (echo "YEARS required" >&2; exit 2)
+	@test -n "$(MAX_REQUESTS)" || (echo "MAX_REQUESTS required" >&2; exit 2)
+	PYTHONPATH=src $(UV_RUN) python -m ior_mvp.acquisition acquire-partners --source $(SOURCE) --candidates $(CANDIDATES) --years $(YEARS) --max-requests $(MAX_REQUESTS) $(if $(FLOWS),--flows $(FLOWS),)
+
+acquire-tariff:
+	@test "$(IOR_ACQUISITION_LIVE)" = "1" || (echo "IOR_ACQUISITION_LIVE=1 required" >&2; exit 2)
+	@test -z "$(CI)" || (echo "CI may not acquire" >&2; exit 2)
+	@test -n "$(MAX_REQUESTS)" || (echo "MAX_REQUESTS required" >&2; exit 2)
+	PYTHONPATH=src $(UV_RUN) python -m ior_mvp.acquisition acquire-tariff --source $(or $(SOURCE),zatca_tariff) --max-requests $(MAX_REQUESTS)
+
+acquire-baci:
+	@test "$(IOR_ACQUISITION_LIVE)" = "1" || (echo "IOR_ACQUISITION_LIVE=1 required" >&2; exit 2)
+	@test -z "$(CI)" || (echo "CI may not acquire" >&2; exit 2)
+	@test -n "$(YEARS)" || (echo "YEARS required" >&2; exit 2)
+	@test -n "$(MAX_REQUESTS)" || (echo "MAX_REQUESTS required" >&2; exit 2)
+	PYTHONPATH=src $(UV_RUN) python -m ior_mvp.acquisition acquire-baci --years $(YEARS) --max-requests $(MAX_REQUESTS)
+
+build-snapshots:
+	PYTHONPATH=src $(UV_RUN) python -m ior_mvp.acquisition build-snapshots --kind $(or $(KIND),all) $(if $(SOURCE),--source $(SOURCE),)
+
+reconstruct:
+	PYTHONPATH=src $(UV_RUN) python scripts/reconstruct_snapshot.py --all

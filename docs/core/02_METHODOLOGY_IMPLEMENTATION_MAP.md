@@ -19,7 +19,7 @@ An autonomous agent may refactor implementation, but it may not remove a mapped 
 |---|---|---|---|---|
 | 1 — Decision Object and Governing Principles | Resolve identity before economics; brownfield before greenfield; intervention residual; uncertainty changes state | `decision_engine.py`, `models/data JSON`, `AGENTS.md` | golden cases, synthetic isolation | decision hero, route restriction, data-unlock queue |
 | 2 — Canonical Opportunity Record | Structured record for identity, specification, application, demand, supply, capability, economics, policy, evidence and decision | `04_CANONICAL_DATA_MODEL.md`, snapshots, dossier | schema and repository tests | opportunity workspace and dossier |
-| 3 — Data Contract and Harmonisation | Preserve revision, tariff line, units, valuation, origin, entity, document and as-of date | `data_repository.py`, snapshot schema, `05_DATA_SOURCES...` | integrity and data-contract tests | snapshot ID, evidence ledger |
+| 3 — Data Contract and Harmonisation | Preserve revision, tariff line, units, valuation, origin, entity, document and as-of date | `data_repository.py`, `acquisition/*`, snapshot schema, `05_DATA_SOURCES...` | integrity, acquisition and data-contract tests | snapshot ID, evidence ledger |
 | 4 — Candidate Rulebook | R0–R12; FULL/DEGRADED/DISABLED; falsifiable thresholds | `rules.py`, `thresholds.v1.yaml` | rule and boundary tests | R-rule ledger |
 | 5 — Test 1 Genuine Gap | Bilingual extraction, UV full/degraded controls, gap taxonomy | `ai_extraction.py`, `rules.py`, public snapshots | extraction golden, R4-D guard | extraction panel, gap statement |
 | 6 — Test 2 Capability | Effective capacity, sector profiles, K/U/D\*, hard gates, route bands | `capability.py`, `sector_profiles.v1.yaml` | capability tests | capability matrix |
@@ -27,7 +27,7 @@ An autonomous agent may refactor implementation, but it may not remove a mapped 
 | 8 — Strategic Value and Portfolio | Keep strategic value separate; avoid one ordinal list | decision output fields; future portfolio adapter | state/route tests | resilience rule and separate metrics |
 | 9 — EVSI | Research only when it can change a material decision | `economics.approximate_evsi` | EVSI unit test | highest-value next fact |
 | 10 — AI and Authority | AI for language/ambiguity; code calculates; experts authorize | `ai_extraction.py`, GenUI guardrails, evidence policy | extraction and API tests | control note and governance screen |
-| 11 — Evidence Governance | Passport, quality gates, frozen snapshots and reproducibility | evidence JSON, manifests, `evidence.py` | integrity tests | evidence ledger and boundary banner |
+| 11 — Evidence Governance | Passport, quality gates, frozen snapshots and reproducibility | evidence JSON, manifests, `evidence.py`, `acquisition/passports.py` | integrity and passport tests | evidence ledger and boundary banner |
 | 12 — End-to-End Algorithm | Ordered deterministic/evidence-gated workflow | `decision_engine.py` | golden end-to-end tests | complete case surface |
 | 13 — Steel worked case | Public `INVESTIGATE`, greenfield blocked, brownfield priority | `SAU-H0-721049.json` | steel public golden | steel public workspace |
 | 14 — PP worked case | Reject generic capacity support | `SAU-H0-390210.json` | PP public golden | PP decision workspace |
@@ -243,3 +243,12 @@ Any new domain function must be added to this map before implementation review c
 | Simulated decision assembly | `simulation.compute_simulated_decision` | Core 07 §7.9 | `tests/test_simulation_generalized.py` | `simulation_decision` aggregate |
 | Shared-enabler contract | `route_hypotheses.evaluate_shared_enabler_route` | Core 07 §7.7 | route hypothesis tests | route 8 `GRAPH_REQUIRED` |
 | Shared-enabler unlock helper | `route_hypotheses.shared_enabler_unlock_value` | ADR-014 | route hypothesis tests | deterministic unlock value only |
+| Source connector protocol | `acquisition.connectors.base.SourceConnector` | Core 05 §10–§11; ADR-015 | `tests/test_acquisition_connectors.py` | RunReport per source |
+| Raw evidence store | `acquisition.raw_store.RawStore` | Core 05 §10; DD-3 | `tests/test_acquisition_raw_store.py` | hashed page contracts |
+| Completeness accounting | `acquisition.coverage.evaluate_coverage` | Core 05 §11; DD-18 | `tests/test_acquisition_coverage.py` | coverage.json per unit |
+| Latest-run source-partitioned selection | `acquisition.coverage.select_latest_units` | Core 05 §11; DD-21 | snapshot/coverage tests | selected_run_id in snapshots |
+| Offline guard | `acquisition.transport.assert_live_permitted`, `tests/conftest.py` | Core 03 §8; DD-2 | `tests/test_offline_guard.py` | CI socket block |
+| Harmonisation | `acquisition.harmonise` | Methodology §3.2; Core 05 §6 | `tests/test_acquisition_harmonise.py` | normalized rows |
+| Acquired passports | `acquisition.passports.build_acquired_passport` | Methodology §11; Core 04 | `tests/test_acquisition_passports.py` | eight-group passports |
+| Acquisition snapshots | `acquisition.snapshots` | Core 04 acquisition snapshots | `tests/test_acquisition_snapshots.py` | source-qualified IDs |
+| Reconstruction proof | `scripts/reconstruct_snapshot.py` | Core 09 Gate H; DD-11 | `tests/test_acquisition_reconstruction.py` | RECONSTRUCTION PASS |

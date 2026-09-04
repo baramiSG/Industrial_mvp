@@ -1,0 +1,75 @@
+{
+  "attempted_at": "2026-09-03T21:29:17Z",
+  "coverage": {
+    "completeness_basis": "UNAVAILABLE",
+    "missing_pages": [],
+    "observed_stop": null,
+    "pages_expected": 1,
+    "pages_fetched": 5,
+    "query_hash": "2313f849d81350144819375ec3500af867f452ad2ca58f9680b2fe28fc95ee5c",
+    "requests_made": 5,
+    "run_id": "20260903T212901Z",
+    "source_id": "zatca_tariff",
+    "stage": "TARIFF",
+    "status": "INCOMPLETE",
+    "stop_reason": "MAX_REQUESTS_EXHAUSTED",
+    "unit": {
+      "flow": "UNAVAILABLE",
+      "hs6": null,
+      "period": "2024",
+      "product_scope": "ALL_TARIFF_LINES",
+      "stage": "TARIFF"
+    },
+    "unit_key": [
+      "ALL_TARIFF_LINES"
+    ]
+  },
+  "credential_env_var": null,
+  "credential_present": false,
+  "endpoint_or_document": "https://zatca.gov.sa/en/RulesRegulations/Taxes/Pages/Tariff.aspx",
+  "observed_response": {
+    "body_byte_count": 252025,
+    "body_sha256": "9d3e1678d3c272164613b3da5db4ce8d15218396dcc966021e9c29439376567f",
+    "error_message_redacted": null,
+    "error_type": null,
+    "headers_subset": [
+      {
+        "name": "content-length",
+        "value": "252025"
+      },
+      {
+        "name": "content-type",
+        "value": "text/html; charset=utf-8"
+      },
+      {
+        "name": "date",
+        "value": "Thu, 03 Sep 2026 21:29:15 GMT"
+      },
+      {
+        "name": "last-modified",
+        "value": "Thu, 03 Sep 2026 21:29:15 GMT"
+      }
+    ],
+    "http_status": 200
+  },
+  "query_contract": {
+    "flow": "UNAVAILABLE",
+    "nomenclature": "SA12",
+    "parameters": [],
+    "partner": "UNAVAILABLE",
+    "periods": [
+      "2024"
+    ],
+    "product_codes": [
+      "ALL"
+    ],
+    "product_scope": "ALL_TARIFF_LINES",
+    "reporter": "SAU",
+    "source_id": "zatca_tariff",
+    "stage": "TARIFF"
+  },
+  "query_hash": "2313f849d81350144819375ec3500af867f452ad2ca58f9680b2fe28fc95ee5c",
+  "reason": "MAX_REQUESTS_EXHAUSTED",
+  "run_id": "20260903T212901Z",
+  "source_id": "zatca_tariff"
+}

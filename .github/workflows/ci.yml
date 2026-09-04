@@ -55,6 +55,8 @@ jobs:
         run: PYTHONPATH=src uv run --locked --extra dev python scripts/verify_integrity.py
       - name: Validate synthetic scenarios against public marginals
         run: PYTHONPATH=src uv run --locked --extra dev python scripts/validate_scenarios.py
+      - name: Reconstruct acquired snapshots from the raw store
+        run: PYTHONPATH=src uv run --locked --extra dev python scripts/reconstruct_snapshot.py --all
       - name: Run test suite
         run: PYTHONPATH=src uv run --locked --extra dev pytest -q
       - name: Run demo smoke
@@ -90,6 +92,8 @@ jobs:
         run: PYTHONPATH=src python scripts/verify_integrity.py
       - name: Validate synthetic scenarios against public marginals
         run: PYTHONPATH=src python scripts/validate_scenarios.py
+      - name: Reconstruct acquired snapshots from the raw store
+        run: PYTHONPATH=src python scripts/reconstruct_snapshot.py --all
       - name: Run test suite
         run: PYTHONPATH=src pytest -q
       - name: Run demo smoke
