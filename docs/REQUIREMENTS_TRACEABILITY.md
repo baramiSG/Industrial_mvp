@@ -308,8 +308,11 @@ Delivered on the squash merge of S13a (PR #21, `834ba60`) after reviewer-grok ro
 
 S13b evidence is in
 `.workflow/slices/S13b-bilingual-screening-surface/{implementation_log,test_evidence}.md`
-and ADR-020. These rows are local implementation evidence only until
-independent review, PR, hosted CI and merge; parent S13 remains in progress.
+and ADR-020. Delivered on the squash merge of S13b (PR #23, `cdf6ab0`) after
+reviewer-grok implementation APPROVE (zero findings) on `8fb01e4d…` with
+independent visual inspection, Arabic parity probe and both-locale journeys,
+and hosted CI 5/5 on the exact head `2cc18f1` (run 34720051770). Parent S13 is
+COMPLETE (s13a #21, s13b #23).
 
 ## Branch and release-state rules
 
