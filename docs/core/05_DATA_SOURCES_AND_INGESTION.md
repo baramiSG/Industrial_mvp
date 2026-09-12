@@ -42,8 +42,8 @@ Mirror data may help explain a missing year or partner anomaly. It must not be s
 | GASTAT economic census and industrial surveys | sector/establishment anchor | B/C until product-line reconciliation; connector implemented (S12a); availability and coverage recorded per run |
 | Ministry of Industry open data | licences and activity | B/C; licence is not production; connector implemented (S12a); availability and coverage recorded per run |
 | MODON directories | plant/entity discovery | C; connector implemented (S12a); availability and coverage recorded per run |
-| Tadawul filings and annual reports | nameplate, expansion and financial context | C |
-| EPDs and product sheets | process, range, standards and certifications | C |
+| Tadawul filings and annual reports | nameplate, expansion and financial context | C; connector implemented (S12b); availability and coverage recorded per run |
+| EPDs and product sheets | process, range, standards and certifications | C; connector implemented (S12b); availability and coverage recorded per run |
 | GPCA / sector associations | sector capacity context | B/C |
 
 Public nameplate capacity does not establish current effective capacity, qualification share, allocation or availability.
@@ -53,10 +53,11 @@ Public nameplate capacity does not establish current effective capacity, qualifi
 | Source | Use | Control |
 |---|---|---|
 | SASO catalogue | standard identity and scope | title/scope does not prove compliance; connector implemented (S12a); availability and coverage recorded per run |
+| SASO public technical regulations | mandatory requirement documents as published | title/scope does not prove compliance; connector implemented (S12b); availability and coverage recorded per run |
 | Purchased anchor standards | detailed requirement extraction | copyright and access controls |
-| Etimad tenders and awards | real bilingual demand specifications | exact document/page span required |
+| Etimad tenders and awards | real bilingual demand specifications | exact document/page span required; connector implemented (S12b); availability and coverage recorded per run |
 | SABER registry | conformity evidence | registration does not prove every buyer qualification; connector implemented (S12a); availability and coverage recorded per run |
-| Producer catalogues / certificates | published product envelope | confirm current edition and contradiction |
+| Producer catalogues / certificates | published product envelope | confirm current edition and contradiction; connector implemented (S12b); availability and coverage recorded per run |
 
 ### 3.4 Economics
 
@@ -156,6 +157,8 @@ license_or_usage_note:
 - normalize numerals, units, symbols, transliterations and standard references;
 - retain contradiction rather than selecting the convenient value.
 
+S12b stores the original span layer verbatim; normalisation remains S20.
+
 ## 7. Current frozen public snapshots
 
 ### 7.1 Steel HS 721049
@@ -252,6 +255,8 @@ Failed selected-format parsing is an unknown shape, not a reason to try another 
 
 Refusal is `OUT_OF_SCOPE_CONTENT` with `PersonalDataFields` for matched labels or `UninspectableTextPayload` for uninspectable bodies. Only hash-based response metadata is retained (status, filtered headers, byte count, SHA-256, constant safe message/error type), never the refused body or matched values/labels; prior pages and records remain intact. Refusal overrides apparent pagination completeness with INCOMPLETE coverage and stop reason OUT_OF_SCOPE_CONTENT, and embedded attempt coverage equals its sibling coverage. Unknown but inspectable text may be stored UNPARSED. The DD-15(b) offline-parser path is limited to retained text: PDF/XLSX and non-UTF-8/legacy-encoded bodies are outside it; a later parser cannot recover an unstored body. Format/encoding support needs a separate governed change. Such policy refusals must not be called FORMAT_NOT_PARSEABLE, which describes stored-UNPARSED build refusal. S11 stages and TERMS remain outside this new guard.
 
+**DOCUMENT stage (S12b):** `Stage.DOCUMENT` adds one contract per recorded document URL with parameters `(document_url, …)`. Acquisition is list-driven: operator-authored DocumentList 1.0.0 entries define publisher metadata, expected envelope, evidence-class target and allowed support codes before any live window. The **DOCUMENT_ENVELOPE** policy stores exactly `application/pdf`, `text/html`, `application/xhtml+xml` and `text/plain`; anything else is refused before storage as `OUT_OF_SCOPE_CONTENT` / `UnsupportedDocumentEnvelope` with hash-only metadata. There is no prose personal-data screening on document bodies; bounded schema restrictions apply only to DIRECTORY/REGISTRY rows as above. Derivation uses `PDF_TEXT_LAYER_PYPDF_LAYOUT` (layout mode, dev-only `pypdf==6.16.1`), `HTML_TEXT_LAYER_STDLIB`, `PLAIN_TEXT_LAYER_STDLIB` and `LINE_SEGMENTATION_V1`, preserving verbatim Arabic/English lines in PDF content-stream order without normalisation (where a publisher PDF paints Arabic in visual order, the stored lines are visual-order; `COMPLETE` / `PASS` denotes an extracted text layer, not logical reading order — Core 04 DocumentRecord 1.0.0). Every parseable PDF page is retained at its physical 1-based page number, including empty-text pages; `page_count` equals the physical PDF page count and each page hash is `sha256("\n".join(lines))`. `text_layer.status` is `COMPLETE` only when any page contains a non-whitespace line, otherwise `UNAVAILABLE` (`FORMAT_NOT_PARSEABLE` with `NO_TEXT_LAYER`, `PARSER_ERROR` or `NOT_UTF8`); `RAW_ONLY` records retain stored bytes and, for a parseable textless PDF, its empty physical page entries. Layout: raw bytes under `data/raw/<source_id>/<query_hash>/<run_id>/`; derived **DocumentRecord** JSON under `data/documents/<source_id>/records/` with list hashes under `lists/`. Reconstruction re-derives records byte-for-byte from pinned raw artifacts and list rows.
+
 ## 11. Acquisition run governance
 
 - Operator-invoked only; `--years` is required on `acquire-universe`, `acquire-partners` and `acquire-baci`, and `--max-requests` on every acquire command, with rationale recorded in the slice implementation log (no suggested defaults in runbook or code); `acquire-tariff` takes no `--years` because the tariff tree is acquired as one period-free contract whose as-of date comes from retrieval.
@@ -269,3 +274,4 @@ Refusal is `OUT_OF_SCOPE_CONTENT` with `PersonalDataFields` for matched labels o
 - S12a commands require explicit `--source` and `--max-requests`; `acquire-aggregates` also requires `--years`, whereas `acquire-directory` and `acquire-registry` are period-free and take no years or flows. Make targets retain explicit live-intent and not-CI guards; runtime and CI remain offline. `parameters.units` and request tokens are recorded only from observed official documentation; unknown values remain `UNAVAILABLE`, never guessed from portal names or borrowed from trade sources. An unverified endpoint/unit fails before terms capture or budget use. Only observed credential-variable names can require a credential; the `UNAVAILABLE` sentinel causes no lookup or Authorization header.
 - DIRECTORY/REGISTRY operators apply the §10 pre-storage policy: `PersonalDataFields` or `UninspectableTextPayload` means OUT_OF_SCOPE_CONTENT with no refused body retained, not a recoverable stored-UNPARSED payload; preserve the safe attempt metadata, INCOMPLETE coverage and prior pages, and cite the actual refusal without values or matched labels.
 - The five S12a implemented status cells in §3.2/§3.3 describe connector code coverage, not source availability or validated production/compliance facts. The accepted T7 operator records in `.workflow/slices/S12a-acquisition-framework-institutional-sources/implementation_log.md` record five zero-request ENDPOINT_UNVERIFIED attempts with INCOMPLETE coverage and no institutional pages or snapshots; the existing S11 partner snapshot remains the reconstruction oracle. Per-run facts and outstanding limitations belong in the RunReports, ADR and Known Limitations, without promoting unavailable evidence or test-double rows into observations.
+- S12b `acquire-documents` requires explicit `--source`, `--list-id` and `--max-requests`; it takes no `--years` or flow parameters. Document lists are authored and hashed before the live window; a list is never edited after a run (corrections use a new `list_id`). Each list entry is an independent DOCUMENT unit and contributes to the minimum request bound; per-entry COMPLETE, RAW_ONLY or honest INCOMPLETE outcomes are acceptable terminal evidence. `build-documents` selects only the latest stored run per source/stage/unit and records sorted prior run ids as superseded before deriving DocumentRecord JSON offline. Size budgets, rate-limit floors and licence-capture rules are unchanged from S11/S12a.

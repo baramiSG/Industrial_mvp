@@ -90,7 +90,49 @@ def registry_snapshots() -> dict[str, dict[str, Any]]:
     return acquired_snapshots("registry")
 
 
+@lru_cache(maxsize=None)
+def _cached_document_records() -> dict[str, dict[str, Any]]:
+    return _load_document_records(DATA_ROOT)
+
+
+def _load_document_records(
+    data_root: Path,
+    *,
+    allow_test_double: bool = False,
+) -> dict[str, dict[str, Any]]:
+    from .documents.store import DocumentStore, validate_document_record
+
+    doc_store = DocumentStore(data_root / "documents")
+    records: dict[str, dict[str, Any]] = {}
+    for path, record in doc_store.iter_records():
+        validate_document_record(record, allow_test_double=allow_test_double)
+        doc_id = str(record["document_id"])
+        source_id = str(record["source_id"])
+        if path.stem != doc_id:
+            raise ValueError(
+                f"Document record file name must equal document_id: {path}"
+            )
+        if path.parent.parent.name != source_id:
+            raise ValueError(
+                f"Document record partition must match source_id: {path}"
+            )
+        records[doc_id] = record
+    return records
+
+
+def document_records(
+    *,
+    data_root: Path | None = None,
+    allow_test_double: bool = False,
+) -> dict[str, dict[str, Any]]:
+    if data_root is not None or allow_test_double:
+        root = data_root if data_root is not None else DATA_ROOT
+        return _load_document_records(root, allow_test_double=allow_test_double)
+    return _cached_document_records()
+
+
 def clear_acquisition_caches() -> None:
     """Clear config and every default kind cache; injected loads are uncached."""
     acquisition_sources_config.cache_clear()
     _cached_acquired_snapshots.cache_clear()
+    _cached_document_records.cache_clear()

@@ -27,7 +27,12 @@ from tests.acquisition_doubles import DoubleConnector, FakeTransport, seed_unit
 
 def test_default_registry_ids() -> None:
     reg = default_registry()
-    assert reg.ids() == ("baci_cepii", "gastat", "ministry_of_industry", "modon", "saber_registry", "saso_catalogue", "un_comtrade", "wits_trade", "zatca_tariff")
+    assert reg.ids() == (
+        "baci_cepii", "etimad_tenders", "gastat", "ministry_of_industry", "modon",
+        "producer_advanced_petrochemical", "producer_sabic", "producer_tasnee", "producer_unicoil",
+        "saber_registry", "saso_catalogue", "saso_documents", "tadawul_disclosures",
+        "un_comtrade", "wits_trade", "zatca_tariff",
+    )
 
 
 def test_snapshot_kinds_per_dd22() -> None:
@@ -37,6 +42,11 @@ def test_snapshot_kinds_per_dd22() -> None:
     assert reg.snapshot_kinds("baci_cepii") == frozenset()
     for source, kind in [("gastat", "production"), ("ministry_of_industry", "directory"), ("modon", "directory"), ("saso_catalogue", "registry"), ("saber_registry", "registry")]:
         assert reg.snapshot_kinds(source) == frozenset({kind})
+    for source in (
+        "tadawul_disclosures", "etimad_tenders", "saso_documents", "producer_unicoil",
+        "producer_sabic", "producer_advanced_petrochemical", "producer_tasnee",
+    ):
+        assert reg.snapshot_kinds(source) == frozenset({"document"})
 
 
 def _test_store(tmp_path: Path) -> RawStore:

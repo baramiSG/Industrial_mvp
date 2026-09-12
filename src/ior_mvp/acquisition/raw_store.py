@@ -31,11 +31,15 @@ def deterministic_gzip(payload: bytes) -> bytes:
 
 
 def _content_extension(content_type: str) -> str:
-    lowered = content_type.lower()
+    lowered = content_type.lower().split(";", 1)[0].strip()
     if "json" in lowered:
         return "json"
+    if "pdf" in lowered:
+        return "pdf"
     if "html" in lowered:
         return "html"
+    if lowered == "text/plain":
+        return "txt"
     if "zip" in lowered:
         return "zip"
     if "csv" in lowered:

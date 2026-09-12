@@ -1,0 +1,126 @@
+{
+  "schema_version": "1.0.0",
+  "list_id": "saso_documents-v4",
+  "source_id": "saso_documents",
+  "recorded_on": "2026-09-12",
+  "recorded_by_seat": "implementer-fable",
+  "consultation_summary_text": "Declaration correction of saso_documents-v3 (S12B-IR3-F01, OD-11): after inspecting the derived text of the six DocumentRecords built from run 20260912T053622Z, the v3 'languages' declarations (['en'] for /ar/ PDFs whose stored lines are predominantly Arabic) were found factually wrong. v4 keeps the same six document_url values in the same entry order and the same verbatim title_text, document_date_text and source_reference_text as v3, and corrects 'languages' to ['ar'] or ['ar','en'] from the Arabic and Latin line content of each record (E-001, E-003, E-004, E-006 carry English standard titles in annex tables; E-002 and E-005 carry only the publisher name, footer URL and parenthetical English equivalents of Arabic terms). No new consultation and no new acquisition were performed; records are rebuilt offline from the same stored run. The v3 consultation text was: T7-v3 consultation (2026-09-12 UTC): six industrially relevant technical regulation PDF links verified on https://www.saso.gov.sa/en/Laws-And-Regulations/Technical_regulations/Pages/default.aspx with displayed link text recorded verbatim.",
+  "documentation_urls_observed": [
+    "https://www.saso.gov.sa/en/Laws-And-Regulations/Technical_regulations/Pages/default.aspx",
+    "https://www.saso.gov.sa/en/acceptable_use_policy/Pages/default.aspx"
+  ],
+  "entries": [
+    {
+      "entry_id": "E-001",
+      "document_url": "https://www.saso.gov.sa/ar/Laws-And-Regulations/Technical_regulations/Documents/TR-Requirements-Machinery-Safety.pdf",
+      "publisher_text": "SASO DOCUMENTS — publisher page link",
+      "publisher_kind": "standards_authority",
+      "document_kind": "technical_regulation",
+      "languages": [
+        "ar",
+        "en"
+      ],
+      "expected_content_type": "application/pdf",
+      "evidence_class_target": "B",
+      "supports": [
+        "HARD_REGULATORY_PROCESS_GATES"
+      ],
+      "title_text": "Technical Regulation for General Requirements for Machinery Safety",
+      "document_date_text": "UNAVAILABLE",
+      "source_reference_text": "UNAVAILABLE"
+    },
+    {
+      "entry_id": "E-002",
+      "document_url": "https://www.saso.gov.sa/ar/Laws-And-Regulations/Technical_regulations/Documents/TR-General-Regulation-for-Conformity-Models.pdf",
+      "publisher_text": "SASO DOCUMENTS — publisher page link",
+      "publisher_kind": "standards_authority",
+      "document_kind": "technical_regulation",
+      "languages": [
+        "ar"
+      ],
+      "expected_content_type": "application/pdf",
+      "evidence_class_target": "B",
+      "supports": [
+        "HARD_REGULATORY_PROCESS_GATES"
+      ],
+      "title_text": "General Regulation for Conformity Models",
+      "document_date_text": "UNAVAILABLE",
+      "source_reference_text": "UNAVAILABLE"
+    },
+    {
+      "entry_id": "E-003",
+      "document_url": "https://www.saso.gov.sa/ar/Laws-And-Regulations/Technical_regulations/Documents/TR-Equipment-and-Protective-Systems-Intended-for-Use-in-Potentially-Explosive-Atmospheres.pdf",
+      "publisher_text": "SASO DOCUMENTS — publisher page link",
+      "publisher_kind": "standards_authority",
+      "document_kind": "technical_regulation",
+      "languages": [
+        "ar",
+        "en"
+      ],
+      "expected_content_type": "application/pdf",
+      "evidence_class_target": "B",
+      "supports": [
+        "HARD_REGULATORY_PROCESS_GATES"
+      ],
+      "title_text": "Technical Regulation for Equipment and Protective Systems Intended for Use in Potentially Explosive Atmospheres",
+      "document_date_text": "UNAVAILABLE",
+      "source_reference_text": "UNAVAILABLE"
+    },
+    {
+      "entry_id": "E-004",
+      "document_url": "https://www.saso.gov.sa/ar/Laws-And-Regulations/Technical_regulations/Documents/TR-Electromagnetic-Compatibility.pdf",
+      "publisher_text": "SASO DOCUMENTS — publisher page link",
+      "publisher_kind": "standards_authority",
+      "document_kind": "technical_regulation",
+      "languages": [
+        "ar",
+        "en"
+      ],
+      "expected_content_type": "application/pdf",
+      "evidence_class_target": "B",
+      "supports": [
+        "HARD_REGULATORY_PROCESS_GATES"
+      ],
+      "title_text": "Technical Regulation for Electromagnetic Compatibility",
+      "document_date_text": "UNAVAILABLE",
+      "source_reference_text": "UNAVAILABLE"
+    },
+    {
+      "entry_id": "E-005",
+      "document_url": "https://www.saso.gov.sa/ar/Laws-And-Regulations/Technical_regulations/Documents/TR-Requirements-Electrical-Electronic-Equipment.pdf",
+      "publisher_text": "SASO DOCUMENTS — publisher page link",
+      "publisher_kind": "standards_authority",
+      "document_kind": "technical_regulation",
+      "languages": [
+        "ar"
+      ],
+      "expected_content_type": "application/pdf",
+      "evidence_class_target": "B",
+      "supports": [
+        "HARD_REGULATORY_PROCESS_GATES"
+      ],
+      "title_text": "Technical Regulation of the Requirements for Standby, off Mode Electric Power Consumption and Standby, off Mode Electric Power Consumption of Electrical and Electronic Equipment",
+      "document_date_text": "UNAVAILABLE",
+      "source_reference_text": "UNAVAILABLE"
+    },
+    {
+      "entry_id": "E-006",
+      "document_url": "https://www.saso.gov.sa/ar/Laws-And-Regulations/Technical_regulations/Documents/TR-Communications-and-Information-Technology-Devices.pdf",
+      "publisher_text": "SASO DOCUMENTS — publisher page link",
+      "publisher_kind": "standards_authority",
+      "document_kind": "technical_regulation",
+      "languages": [
+        "ar",
+        "en"
+      ],
+      "expected_content_type": "application/pdf",
+      "evidence_class_target": "B",
+      "supports": [
+        "HARD_REGULATORY_PROCESS_GATES"
+      ],
+      "title_text": "Technical Regulation for Communications and Information Technology Devices",
+      "document_date_text": "UNAVAILABLE",
+      "source_reference_text": "UNAVAILABLE"
+    }
+  ]
+}

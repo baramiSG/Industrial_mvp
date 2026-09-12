@@ -19,7 +19,13 @@ from ior_mvp.config import PROJECT_ROOT
 
 EXPECTED_SOURCE_IDS = frozenset(
     {"wits_trade", "un_comtrade", "baci_cepii", "zatca_tariff", "gastat",
-     "ministry_of_industry", "modon", "saso_catalogue", "saber_registry"}
+     "ministry_of_industry", "modon", "saso_catalogue", "saber_registry",
+     "tadawul_disclosures", "etimad_tenders", "saso_documents", "producer_unicoil",
+     "producer_sabic", "producer_advanced_petrochemical", "producer_tasnee"}
+)
+DOCUMENT_SOURCE_IDS = frozenset(
+    {"tadawul_disclosures", "etimad_tenders", "saso_documents", "producer_unicoil",
+     "producer_sabic", "producer_advanced_petrochemical", "producer_tasnee"}
 )
 
 
@@ -267,7 +273,10 @@ def test_detector_meta_credential_absent_credential_env_var_changed(tmp_path: Pa
     # W1 permits only the exact missing-directory baseline until T7. Every
     # additional problem below must still be caused by this credential mutation.
     missing = set(config["sources"]) - {p.name for p in raw.iterdir() if p.is_dir()}
-    assert missing <= {"gastat", "ministry_of_industry", "modon", "saso_catalogue", "saber_registry"}
+    assert missing <= {
+        "gastat", "ministry_of_industry", "modon", "saso_catalogue", "saber_registry",
+        *DOCUMENT_SOURCE_IDS,
+    }
     baseline = {f"sources without artifact or attempt record: {sorted(missing)}"} if missing else set()
     assert set(stored_evidence_problems(raw, config)) == baseline
     attempt = next(
@@ -306,7 +315,10 @@ def test_detector_sentinel_configured_source_is_uncredentialed(tmp_path: Path) -
     config = copy.deepcopy(_config())
     config["sources"]["wits_trade"]["credential_env_var"] = "UNAVAILABLE"
     missing = set(config["sources"]) - {p.name for p in raw.iterdir() if p.is_dir()}
-    assert missing <= {"gastat", "ministry_of_industry", "modon", "saso_catalogue", "saber_registry"}
+    assert missing <= {
+        "gastat", "ministry_of_industry", "modon", "saso_catalogue", "saber_registry",
+        *DOCUMENT_SOURCE_IDS,
+    }
     baseline = {f"sources without artifact or attempt record: {sorted(missing)}"} if missing else set()
     assert set(stored_evidence_problems(raw, config)) == baseline
     attempt = next((raw / "wits_trade").rglob("attempt.json"))

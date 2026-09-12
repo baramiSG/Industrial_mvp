@@ -27,6 +27,7 @@ def test_build_parser_required_args() -> None:
         "acquire-aggregates",
         "acquire-directory",
         "acquire-registry",
+        "acquire-documents",
     }
     for name in ("acquire-universe", "acquire-partners", "acquire-baci"):
         years = next(

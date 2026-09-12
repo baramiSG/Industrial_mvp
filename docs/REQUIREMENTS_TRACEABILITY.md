@@ -261,6 +261,16 @@ The complete S05 local harness run `20260902T033607Z-17501` observed the associa
 
 S12a evidence: `.workflow/slices/S12a-acquisition-framework-institutional-sources/implementation_log.md` and `test_evidence.md`; ADR-016; KL-47–51. T12 full pytest: 1755 passed, one existing warning; integrity/reconstruction/smoke and local make ci pass, including 118 functional + 4 visual browser nodes. Exactly one manifest generation retained all S11/frozen rows. Delivered on the squash merge of S12a (PR #15, `cc85cbc`) after independent implementation APPROVE (zero defects) and hosted CI 5/5 on the exact head (run 34669143106) and on the merge SHA (run 34669431254). The two BLOCKED rows remain BLOCKED: merge delivers the framework and honest attempt records, not live institutional data. Historical S11 §L TESTED rows remain unchanged. S12b documents and S12c entity IDs are separate approved children, not delivered here.
 
+## N. Milestone v0.3.0 — S12b document store
+
+| ID | Observable acceptance | Implementation and local execution evidence | Status | Slice |
+|---|---|---|---|---|
+| V3-B3-documents | Acquire public documents (disclosures, producer sheets/EPDs, tenders, SASO regulations) with span-addressable DocumentRecords where obtainable; otherwise retain honest per-source attempts. | Twelve COMPLETE DocumentRecords (`saso_documents` 6, `producer_unicoil` 6) from T7-v3; five sources remain ENDPOINT_UNVERIFIED / empty-list (KL-56–60). | PARTIAL | s12b |
+| V3-DOC-store | Governed `data/documents/**` lists and records with verbatim text layer, reconstruction and manifest partition. | `documents/store.py`, `documents/textlayer.py`, `documents/lists.py`, reconstruct script document rows; doubles and fixture proofs. | TESTED | s12b |
+| V3-DOC-framework | DOCUMENT stage on generalized pipeline without altering S11/S12a raw/snapshot bytes. | `Stage.DOCUMENT`, `connectors/documents.py`, frozen-root gates [6]–[8]; institutional connector pin tests byte-identical. | TESTED | s12b |
+
+S12b evidence: `.workflow/slices/S12b-document-store-disclosures-tenders/implementation_log.md` and `test_evidence.md`; ADR-017; KL-54–55 resolved slot 3; KL-56–65 open. T7-v3 built twelve records; the independent review REJECTED candidate `87084ed2…` (S12B-IR3-F01 visual-order Arabic / wrong `languages`; F02 aggregate-count wording) and the slot-4 correction round rebuilt the six SASO records from `saso_documents-v4` against the same stored run (OD-11) with the text-order disclosure (OD-12, KL-64) and the artefact named (KL-65). The OR-3 slot-5 sweep found three further record-contract defects; OD-13 authorized and slot 5 test-first corrected page hashing, physical PDF page addressing and latest-run supersession, then rebuilt all twelve records offline with unchanged ids. Four manifest runs are recorded and exhausted (T11 05:26:47Z, OD-9 05:43:02Z, OD-10 06:37:37Z, OD-13 07:30:41Z), each with immediate [14] PASS; no fifth run is authorized. Independent Fable review of the final candidate, PR, CI and merge remain pending.
+
 ## Branch and release-state rules
 
 1. No row on the S05 implementation branch is promoted above `TESTED`.

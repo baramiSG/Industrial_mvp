@@ -40,6 +40,73 @@ def _manifest_paths_for_snapshot(
     return paths
 
 
+def _reconstruct_documents(
+    data_root: Path,
+    *,
+    check_manifest: bool,
+    manifest_rows: dict[str, tuple[str, int]],
+) -> tuple[int, int]:
+    from ior_mvp.acquisition.documents.store import DocumentStore, reconstruct_document
+    from ior_mvp.acquisition.raw_store import RawStore
+    from ior_mvp.acquisition.source_config import acquisition_sources_config
+
+    documents_root = data_root / "documents"
+    doc_store = DocumentStore(documents_root)
+    records = list(doc_store.iter_records())
+    if not records:
+        return 0, 0
+
+    config = acquisition_sources_config()
+    raw_cfg = config["raw_store"]
+    store = RawStore(
+        data_root / "raw",
+        max_artifact_bytes=raw_cfg["max_artifact_bytes_compressed"],
+        max_store_bytes=raw_cfg["max_store_bytes_compressed"],
+    )
+    verified = 0
+    for path, _ in records:
+        rel = path.relative_to(data_root.parent).as_posix()
+        record = json.loads(path.read_text(encoding="utf-8"))
+        if check_manifest:
+            manifest_refs = [rel]
+            list_ref = record.get("list_ref", {})
+            list_id = list_ref.get("list_id")
+            if list_id:
+                manifest_refs.append(
+                    f"data/documents/{record['source_id']}/lists/{list_id}.json"
+                )
+            raw_ref = record.get("raw_artifact_ref", {})
+            raw_path = raw_ref.get("path")
+            if raw_path:
+                if str(raw_path).startswith("data/"):
+                    manifest_refs.append(str(raw_path))
+                else:
+                    try:
+                        manifest_refs.append(
+                            Path(str(raw_path)).resolve().relative_to(
+                                data_root.parent.resolve()
+                            ).as_posix()
+                        )
+                    except ValueError:
+                        manifest_refs.append(str(raw_path))
+            for manifest_ref in manifest_refs:
+                if manifest_ref not in manifest_rows:
+                    print(f"RECONSTRUCTION FAIL: manifest row missing for {manifest_ref}")
+                    sys.exit(2)
+            expected_hash, expected_bytes = manifest_rows[rel]
+            actual = path.read_bytes()
+            if _sha256_file(path) != expected_hash or len(actual) != expected_bytes:
+                print(f"RECONSTRUCTION FAIL: manifest hash mismatch for {rel}")
+                sys.exit(1)
+        result = reconstruct_document(path, store, config, doc_store)
+        verified += result.artifacts_verified
+        if not result.match:
+            detail = result.detail.get("reason", "BYTE_MISMATCH")
+            print(f"RECONSTRUCTION FAIL: {result.snapshot_id} ({detail})")
+            sys.exit(1)
+    return len(records), verified
+
+
 def main() -> None:
     _install_socket_block()
     import argparse
@@ -64,7 +131,12 @@ def main() -> None:
         if kind_dir.exists():
             snapshots.extend(sorted(kind_dir.glob("*.json")))
 
-    if not snapshots:
+    from ior_mvp.acquisition.documents.store import DocumentStore
+
+    doc_store = DocumentStore(data_root / "documents")
+    has_documents = bool(list(doc_store.iter_records()))
+
+    if not snapshots and not has_documents:
         print("RECONSTRUCTION FAIL: no acquired snapshots")
         sys.exit(1)
 
@@ -119,8 +191,18 @@ def main() -> None:
             )
             sys.exit(1)
 
+    doc_records, doc_artifacts = _reconstruct_documents(
+        data_root,
+        check_manifest=not args.no_check_manifest,
+        manifest_rows=manifest_rows,
+    )
+
+    if snapshots or doc_records:
+        print(
+            f"RECONSTRUCTION PASS ({len(snapshots)} snapshots, {verified} artifacts)"
+        )
     print(
-        f"RECONSTRUCTION PASS ({len(snapshots)} snapshots, {verified} artifacts)"
+        f"DOCUMENT RECONSTRUCTION PASS ({doc_records} records, {doc_artifacts} artifacts)"
     )
     sys.exit(0)
 

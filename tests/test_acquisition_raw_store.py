@@ -111,6 +111,20 @@ def test_redact_text() -> None:
     assert "<REDACTED:KEY>" in result
 
 
+def test_content_extension_mapping() -> None:
+    from ior_mvp.acquisition.raw_store import _content_extension
+
+    assert _content_extension("application/pdf") == "pdf"
+    assert _content_extension("application/x-pdf") == "pdf"
+    assert _content_extension("text/plain") == "txt"
+    assert _content_extension("text/plain; charset=utf-8") == "txt"
+    assert _content_extension("application/json") == "json"
+    assert _content_extension("text/html") == "html"
+    assert _content_extension("application/zip") == "zip"
+    assert _content_extension("text/csv") == "csv"
+    assert _content_extension("application/octet-stream") == "bin"
+
+
 def test_latest_runs_selects_greatest_run_id(tmp_path: Path) -> None:
     root = tmp_path / "raw"
     store = RawStore(root, max_artifact_bytes=1024, max_store_bytes=4096)

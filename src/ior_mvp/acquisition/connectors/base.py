@@ -316,7 +316,10 @@ class BaseConnector:
             **self._page_tokens(page_index, page_token),
         }
         parameter_names = [key for key, _ in contract.parameters]
-        if len(set(parameter_names)) != len(parameter_names) or set(parameter_names) & set(tokens):
+        reserved_overlap = set(parameter_names) & set(tokens)
+        if contract.stage is Stage.DOCUMENT:
+            reserved_overlap.discard("document_url")
+        if len(set(parameter_names)) != len(parameter_names) or reserved_overlap:
             raise AcquisitionUnavailable(UnavailableReason.ENDPOINT_UNVERIFIED)
         tokens.update(dict(contract.parameters))
         try:
@@ -427,6 +430,20 @@ class BaseConnector:
             return True
         except (NetworkError, BudgetExhausted, SizeBudgetExceeded, CredentialEchoed):
             return False
+
+    def _pre_storage_refusal(
+        self, result: FetchResult, stage: Stage
+    ) -> tuple[str, str] | None:
+        if stage in {Stage.DIRECTORY, Stage.REGISTRY}:
+            privacy_error = _institutional_privacy_error(
+                result.body, self._content_type(result)
+            )
+            if privacy_error:
+                return (
+                    privacy_error,
+                    "Response refused by institutional text-only privacy policy; body not stored",
+                )
+        return None
 
     def _fetch(self, url: str) -> FetchResult:
         env_var, _ = self._credential_info()
@@ -648,19 +665,19 @@ class BaseConnector:
                 )
                 break
 
-            if query_contract.stage in {Stage.DIRECTORY, Stage.REGISTRY}:
-                privacy_error = _institutional_privacy_error(result.body, self._content_type(result))
-                if privacy_error:
-                    stop_reason = UnavailableReason.OUT_OF_SCOPE_CONTENT
-                    observed_stop = ObservedResponse(
-                        http_status=result.http_status,
-                        headers_subset=result.headers_subset,
-                        body_sha256=sha256_bytes(result.body),
-                        body_byte_count=len(result.body),
-                        error_type=privacy_error,
-                        error_message_redacted="Response refused by institutional text-only privacy policy; body not stored",
-                    )
-                    break
+            refusal = self._pre_storage_refusal(result, query_contract.stage)
+            if refusal:
+                error_type, error_message = refusal
+                stop_reason = UnavailableReason.OUT_OF_SCOPE_CONTENT
+                observed_stop = ObservedResponse(
+                    http_status=result.http_status,
+                    headers_subset=result.headers_subset,
+                    body_sha256=sha256_bytes(result.body),
+                    body_byte_count=len(result.body),
+                    error_type=error_type,
+                    error_message_redacted=error_message,
+                )
+                break
 
             last_result = result
             status, reason = self.classify_page(result.body, self._content_type(result), query_contract.stage)
@@ -839,6 +856,15 @@ def default_registry() -> ConnectorRegistry:
     from .modon import ModonConnector
     from .saso_catalogue import SasoCatalogueConnector
     from .saber_registry import SaberRegistryConnector
+    from .documents import (
+        EtimadTendersConnector,
+        ProducerAdvancedPetrochemicalConnector,
+        ProducerSabicConnector,
+        ProducerTasneeConnector,
+        ProducerUnicoilConnector,
+        SasoDocumentsConnector,
+        TadawulDisclosuresConnector,
+    )
 
     return ConnectorRegistry(
         {
@@ -851,5 +877,12 @@ def default_registry() -> ConnectorRegistry:
             "modon": ModonConnector,
             "saso_catalogue": SasoCatalogueConnector,
             "saber_registry": SaberRegistryConnector,
+            "tadawul_disclosures": TadawulDisclosuresConnector,
+            "etimad_tenders": EtimadTendersConnector,
+            "saso_documents": SasoDocumentsConnector,
+            "producer_unicoil": ProducerUnicoilConnector,
+            "producer_sabic": ProducerSabicConnector,
+            "producer_advanced_petrochemical": ProducerAdvancedPetrochemicalConnector,
+            "producer_tasnee": ProducerTasneeConnector,
         }
     )

@@ -11,16 +11,19 @@ from pathlib import Path
 
 from ..config import PROJECT_ROOT
 from .connectors.base import default_registry
-from .contracts import OfflineGuardViolation, canonical_dumps
+from .contracts import AcquisitionConfigurationError, OfflineGuardViolation, canonical_dumps
+from .documents.store import validate_list_id
 from .pipeline import (
     PipelineDeps,
     acquire_aggregates,
     acquire_baci,
     acquire_directory,
+    acquire_documents,
     acquire_partners,
     acquire_registry,
     acquire_tariff,
     acquire_universe,
+    build_documents,
     build_snapshots,
     load_candidate_list,
 )
@@ -63,6 +66,16 @@ def build_parser() -> argparse.ArgumentParser:
     add_acquire("acquire-aggregates", years=True, source_required=True, flows=False)
     add_acquire("acquire-directory", years=False, source_required=True, flows=False)
     add_acquire("acquire-registry", years=False, source_required=True, flows=False)
+    docs = sub.add_parser("acquire-documents")
+    docs.add_argument("--source", required=True)
+    docs.add_argument("--list-id", required=True)
+    docs.add_argument("--max-requests", type=int, required=True)
+    docs.add_argument("--data-root", default=None)
+
+    build_docs = sub.add_parser("build-documents")
+    build_docs.add_argument("--source", required=True)
+    build_docs.add_argument("--list-id", required=True)
+    build_docs.add_argument("--data-root", default=None)
 
     build_cmd = sub.add_parser("build-snapshots")
     build_cmd.add_argument("--kind", default="all")
@@ -73,7 +86,8 @@ def build_parser() -> argparse.ArgumentParser:
 
 def _data_root(args: argparse.Namespace) -> Path:
     if args.data_root:
-        return Path(args.data_root)
+        root = Path(args.data_root)
+        return root / "raw" if args.command == "build-documents" else root
     config = acquisition_sources_config()
     return PROJECT_ROOT / config["raw_store"]["root"]
 
@@ -119,12 +133,19 @@ def main(argv: list[str] | None = None) -> None:
         if args.max_requests is None:
             print("error: --max-requests is required", file=sys.stderr)
             sys.exit(2)
-        if args.command not in {"acquire-tariff", "acquire-directory", "acquire-registry"} and getattr(args, "years", None) is None:
+        if args.command not in {
+            "acquire-tariff", "acquire-directory", "acquire-registry", "acquire-documents",
+        } and getattr(args, "years", None) is None:
             print("error: --years is required", file=sys.stderr)
             sys.exit(2)
         if args.command in {"acquire-universe", "acquire-partners"} and not args.source:
             print("error: --source is required", file=sys.stderr)
             sys.exit(2)
+    if args.command in {"acquire-documents", "build-documents"}:
+        try:
+            validate_list_id(args.list_id)
+        except AcquisitionConfigurationError as exc:
+            parser.error(str(exc))
     try:
         deps = _deps(args, explicit_live=args.command.startswith("acquire-"))
     except OfflineGuardViolation as exc:
@@ -197,6 +218,25 @@ def main(argv: list[str] | None = None) -> None:
             report = acquire_registry(args.source, deps=deps, max_requests=args.max_requests)
             print(canonical_dumps(report.__dict__))
             sys.exit(report.exit_code)
+
+        if args.command == "acquire-documents":
+            report = acquire_documents(
+                args.source,
+                list_id=args.list_id,
+                deps=deps,
+                max_requests=args.max_requests,
+            )
+            print(canonical_dumps(report.__dict__))
+            sys.exit(report.exit_code)
+
+        if args.command == "build-documents":
+            report = build_documents(
+                args.source,
+                list_id=args.list_id,
+                deps=deps,
+            )
+            print(canonical_dumps(report.__dict__))
+            sys.exit(0)
 
         if args.command == "build-snapshots":
             data_root = Path(args.data_root) if args.data_root else PROJECT_ROOT / "data"

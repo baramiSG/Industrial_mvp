@@ -21,7 +21,8 @@ VISUAL_BASELINE_IMAGE = ior-visual-baselines:playwright-1.62.0-noble
 	e2e e2e-functional e2e-visual e2e-visual-canonical \
 	e2e-update-baselines visual-baseline-image ci \
 	acquire-universe acquire-partners acquire-tariff acquire-baci \
-	acquire-aggregates acquire-directory acquire-registry build-snapshots reconstruct
+	acquire-aggregates acquire-directory acquire-registry build-snapshots reconstruct \
+	acquire-documents build-documents
 
 install:
 	python3 -m pip install -e ".[dev]"
@@ -151,6 +152,19 @@ acquire-registry:
 
 build-snapshots:
 	PYTHONPATH=src $(UV_RUN) python -m ior_mvp.acquisition build-snapshots --kind $(or $(KIND),all) $(if $(SOURCE),--source $(SOURCE),)
+
+acquire-documents:
+	@test "$(IOR_ACQUISITION_LIVE)" = "1" || (echo "IOR_ACQUISITION_LIVE=1 required" >&2; exit 2)
+	@test -z "$(CI)" || (echo "CI may not acquire" >&2; exit 2)
+	@test -n "$(SOURCE)" || (echo "SOURCE required" >&2; exit 2)
+	@test -n "$(LIST_ID)" || (echo "LIST_ID required" >&2; exit 2)
+	@test -n "$(MAX_REQUESTS)" || (echo "MAX_REQUESTS required" >&2; exit 2)
+	PYTHONPATH=src $(UV_RUN) python -m ior_mvp.acquisition acquire-documents --source $(SOURCE) --list-id $(LIST_ID) --max-requests $(MAX_REQUESTS)
+
+build-documents:
+	@test -n "$(SOURCE)" || (echo "SOURCE required" >&2; exit 2)
+	@test -n "$(LIST_ID)" || (echo "LIST_ID required" >&2; exit 2)
+	PYTHONPATH=src $(UV_RUN) python -m ior_mvp.acquisition build-documents --source $(SOURCE) --list-id $(LIST_ID)
 
 reconstruct:
 	PYTHONPATH=src $(UV_RUN) python scripts/reconstruct_snapshot.py --all

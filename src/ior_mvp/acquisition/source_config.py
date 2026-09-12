@@ -27,8 +27,37 @@ INSTITUTIONAL_SOURCE_STAGES = {
     "saso_catalogue": Stage.REGISTRY,
     "saber_registry": Stage.REGISTRY,
 }
+DOCUMENT_SOURCE_STAGES = {
+    "tadawul_disclosures": Stage.DOCUMENT,
+    "etimad_tenders": Stage.DOCUMENT,
+    "saso_documents": Stage.DOCUMENT,
+    "producer_unicoil": Stage.DOCUMENT,
+    "producer_sabic": Stage.DOCUMENT,
+    "producer_advanced_petrochemical": Stage.DOCUMENT,
+    "producer_tasnee": Stage.DOCUMENT,
+}
 INSTITUTIONAL_SOURCE_IDS = frozenset(INSTITUTIONAL_SOURCE_STAGES)
-SOURCE_IDS = frozenset({"wits_trade", "un_comtrade", "baci_cepii", "zatca_tariff"}) | INSTITUTIONAL_SOURCE_IDS
+DOCUMENT_SOURCE_IDS = frozenset(DOCUMENT_SOURCE_STAGES)
+SOURCE_IDS = (
+    frozenset({"wits_trade", "un_comtrade", "baci_cepii", "zatca_tariff"})
+    | INSTITUTIONAL_SOURCE_IDS
+    | DOCUMENT_SOURCE_IDS
+)
+DOCUMENT_OBSERVED_FACT_FIELDS = (
+    "access_classification",
+    "documentation_reference",
+    "terms_reference",
+    "endpoint_templates.TERMS",
+    "parameters.product_all_token",
+    "parameters.partner_world_token",
+    "parameters.reporter_token",
+    "parameters.flow_tokens",
+    "pagination.documentation_reference",
+    "nomenclature",
+    "credential_env_var",
+    "rate_limit.documented_policy",
+    "expected_content_types",
+)
 CREDENTIAL_PATTERN = re.compile(r"^[A-Z][A-Z0-9_]+$")
 NOMENCLATURE_PATTERN = re.compile(r"^[A-Za-z0-9]+$")
 ACCESS_CLASSES = frozenset(
@@ -106,12 +135,14 @@ def _fact_value(source: dict[str, Any], path: str) -> Any:
 
 
 def observed_fact_values(source_id: str, source: dict[str, Any]) -> dict[str, Any]:
-    """Return the seventeen source facts; only institutional IDs have this phase."""
-    if source_id not in INSTITUTIONAL_SOURCE_IDS:
-        raise AcquisitionConfigurationError(f"No observation phase for source {source_id}")
-    stage = INSTITUTIONAL_SOURCE_STAGES[source_id].value
-    paths = [path.format(stage=stage) for path in OBSERVED_FACT_FIELDS]
-    return {path: _fact_value(source, path) for path in paths}
+    """Return observed source facts for institutional or document sources."""
+    if source_id in INSTITUTIONAL_SOURCE_IDS:
+        stage = INSTITUTIONAL_SOURCE_STAGES[source_id].value
+        paths = [path.format(stage=stage) for path in OBSERVED_FACT_FIELDS]
+        return {path: _fact_value(source, path) for path in paths}
+    if source_id in DOCUMENT_SOURCE_IDS:
+        return {path: _fact_value(source, path) for path in DOCUMENT_OBSERVED_FACT_FIELDS}
+    raise AcquisitionConfigurationError(f"No observation phase for source {source_id}")
 
 
 def observation_state(source_id: str, source: dict[str, Any]) -> str:
@@ -188,9 +219,9 @@ def validate_acquisition_sources(payload: dict[str, Any]) -> None:
     metadata = payload.get("metadata")
     if not isinstance(metadata, dict):
         raise AcquisitionConfigurationError("metadata must be a mapping")
-    if metadata.get("version") != "1.1.0":
+    if metadata.get("version") != "1.2.0":
         raise AcquisitionConfigurationError(
-            "metadata.version must be 1.1.0"
+            "metadata.version must be 1.2.0"
         )
 
     raw_store = payload.get("raw_store")
@@ -263,7 +294,8 @@ def _validate_source(
             )
 
     institutional = source_id in INSTITUTIONAL_SOURCE_IDS
-    _validate_source_facts(source_id, source, institutional=institutional)
+    document = source_id in DOCUMENT_SOURCE_IDS
+    _validate_source_facts(source_id, source, institutional=institutional, document=document)
     access = source["access_classification"]
 
     evidence_class = source["default_evidence_class"]
@@ -331,16 +363,33 @@ def _validate_source(
         raise AcquisitionConfigurationError(
             f"sources.{source_id}.recorded_on required"
         )
-    if institutional and (
+    if (institutional or document) and (
         (recorded_on != UNAVAILABLE and not _iso_date(recorded_on))
         or (observation_state(source_id, source) == "OBSERVED" and not _iso_date(recorded_on))
     ):
         raise AcquisitionConfigurationError(
             f"sources.{source_id}.recorded_on must be an ISO date once any fact is observed"
         )
+    if document:
+        if source["endpoint_templates"]["DOCUMENT"] != "{document_url}":
+            raise AcquisitionConfigurationError(
+                f"sources.{source_id}.endpoint_templates.DOCUMENT must be '{{document_url}}'"
+            )
+        if source["pagination"]["kind"] != "NONE":
+            raise AcquisitionConfigurationError(
+                f"sources.{source_id}.pagination.kind must be NONE"
+            )
+        if source["pagination"]["parameters"] != {}:
+            raise AcquisitionConfigurationError(
+                f"sources.{source_id}.pagination.parameters must be empty"
+            )
+        if "units" in source.get("parameters", {}):
+            raise AcquisitionConfigurationError(
+                f"sources.{source_id}.parameters must not include units"
+            )
 
 def _validate_source_facts(
-    source_id: str, source: dict[str, Any], *, institutional: bool
+    source_id: str, source: dict[str, Any], *, institutional: bool, document: bool = False
 ) -> None:
     prefix = f"sources.{source_id}"
     nested_keys = {
@@ -353,16 +402,26 @@ def _validate_source_facts(
             raise AcquisitionConfigurationError(f"{prefix} keys must be exactly {sorted(SOURCE_KEYS)}")
         nested_keys["parameters"].add("units")
         nested_keys["endpoint_templates"] = {INSTITUTIONAL_SOURCE_STAGES[source_id].value, "TERMS"}
+    elif document:
+        if set(source) != SOURCE_KEYS:
+            raise AcquisitionConfigurationError(f"{prefix} keys must be exactly {sorted(SOURCE_KEYS)}")
+        nested_keys["endpoint_templates"] = {"DOCUMENT", "TERMS"}
     else:
         nested_keys["endpoint_templates"] = set()
     for key, required in nested_keys.items():
         value = source[key]
         if not isinstance(value, dict):
             raise AcquisitionConfigurationError(f"{prefix}.{key} must be a mapping")
-        if (institutional and set(value) != required) or not required <= set(value):
-            raise AcquisitionConfigurationError(f"{prefix}.{key} keys must include {sorted(required)}")
+        if (
+            ((institutional or document) and set(value) != required)
+            or not required <= set(value)
+        ):
+            qualifier = "exactly" if institutional or document else "include"
+            raise AcquisitionConfigurationError(
+                f"{prefix}.{key} keys must {qualifier} {sorted(required)}"
+            )
 
-    if institutional:
+    if institutional or document:
         facts = observed_fact_values(source_id, source)
     else:
         paths = [path for path in OBSERVED_FACT_FIELDS
@@ -370,7 +429,7 @@ def _validate_source_facts(
         facts = {path: _fact_value(source, path) for path in paths}
         facts.update({f"endpoint_templates.{key}": value for key, value in source["endpoint_templates"].items()})
     for path, value in facts.items():
-        if institutional and value == UNAVAILABLE:
+        if (institutional or document) and value == UNAVAILABLE:
             continue
         if not _valid_fact(path, value):
             raise AcquisitionConfigurationError(f"{prefix}.{path} invalid")

@@ -258,6 +258,8 @@ Acquired snapshots receive their own source-qualified IDs and are never spliced 
 
 S12a institutional acquisition proof uses test-only parsers and an injected kind-registry double to demonstrate openness, store-time classification, privacy refusals, and production/directory/registry build-load-reconstruction with tamper and source-isolation checks; these doubles do not establish real source availability. Stored attempts and honest UNAVAILABLE citations account for sources without analytical snapshots, while the existing partner reconstruction and frozen golden boundaries remain enforced.
 
+S12b document acquisition proof uses fixture PDFs/HTML/plain text and FakeTransport doubles for connector, store, CLI and reconstruction tests; live T7 outcomes are cited in Known Limitations when no DocumentRecord is built. Golden cases never pull live publisher pages; document lists and reconstruction oracles enforce verbatim line retention, envelope refusal, write-once list/record rules and manifest partition under `data/documents/**` without altering frozen public snapshots.
+
 ## 6. Acceptance gates by subsystem
 
 ### Gate A — Authority
