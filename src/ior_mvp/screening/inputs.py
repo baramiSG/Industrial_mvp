@@ -118,10 +118,33 @@ def write_family_links(record: dict[str, Any], root: Path) -> Path:
     return path
 
 
-def _identity(path: Path, *, identity: str) -> dict[str, str]:
+def _identity(
+    path: Path,
+    *,
+    identity: str,
+    repo_root: Path,
+) -> dict[str, str]:
+    resolved_root = repo_root.resolve()
+    resolved_path = path.resolve()
+    try:
+        relative = resolved_path.relative_to(resolved_root)
+    except ValueError as exc:
+        raise ValueError(
+            f"screening input path outside repository root: {path}"
+        ) from exc
+    manifest_path = relative.as_posix()
+    if (
+        relative.is_absolute()
+        or ".." in relative.parts
+        or not relative.parts
+        or relative.parts[0] not in {"data", "config"}
+    ):
+        raise ValueError(
+            f"screening input path is not a manifest key: {manifest_path}"
+        )
     return {
-        "path": path.as_posix(),
-        "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+        "path": manifest_path,
+        "sha256": hashlib.sha256(resolved_path.read_bytes()).hexdigest(),
         "id": identity,
     }
 
@@ -143,7 +166,8 @@ def latest_universe_attempt_reason(data_root: Path, source_id: str) -> str:
 def assemble_inputs(data_root: Path, *, source_id: str) -> ScreeningInputs:
     """Load newest governed inputs for the offline builder."""
     from ior_mvp.acquisition import repository
-    from ior_mvp.config import PROJECT_ROOT
+
+    repo_root = data_root.resolve().parent
 
     universe_values = repository.acquired_snapshots(
         "universe", data_root=data_root
@@ -203,7 +227,13 @@ def assemble_inputs(data_root: Path, *, source_id: str) -> ScreeningInputs:
         if record is None:
             return []
         path = data_root / "snapshots" / kind / f"{record['snapshot_id']}.json"
-        return [_identity(path, identity=record["snapshot_id"])]
+        return [
+            _identity(
+                path,
+                identity=record["snapshot_id"],
+                repo_root=repo_root,
+            )
+        ]
 
     config_paths = (
         ("config/screening.v1.yaml", "1.0.0"),
@@ -216,18 +246,28 @@ def assemble_inputs(data_root: Path, *, source_id: str) -> ScreeningInputs:
         "partner_snapshots": snapshot_identity("partners", partners),
         "tariff_snapshots": snapshot_identity("tariff", tariff),
         "entity_artifacts": (
-            [_identity(entity_path, identity=entities.get("artifact_id", entity_path.stem))]
+            [
+                _identity(
+                    entity_path,
+                    identity=entities.get("artifact_id", entity_path.stem),
+                    repo_root=repo_root,
+                )
+            ]
             if entity_path is not None and entities is not None
             else []
         ),
         "plant_family_links": [
-            _identity(links_path, identity=links["list_id"])
+            _identity(
+                links_path,
+                identity=links["list_id"],
+                repo_root=repo_root,
+            )
         ] if links_path.exists() else [],
         "configs": [
             {
                 "path": relative,
                 "sha256": hashlib.sha256(
-                    (PROJECT_ROOT / relative).read_bytes()
+                    (repo_root / relative).read_bytes()
                 ).hexdigest(),
                 "version": version,
             }

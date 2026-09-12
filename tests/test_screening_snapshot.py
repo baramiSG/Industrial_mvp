@@ -79,6 +79,174 @@ def test_snapshot_id_scheme_from_inputs_hash():
     assert len(value.rsplit("-", 1)[-1]) == 12
 
 
+def _portable_inputs(repo_root: Path) -> ScreeningInputs:
+    from ior_mvp.screening.inputs import _identity
+
+    entity = repo_root / "data" / "entities" / "resolution" / "ENTITY.json"
+    links = (
+        repo_root
+        / "data"
+        / "screening"
+        / "lists"
+        / "plant-family-links-v1.json"
+    )
+    config = repo_root / "config" / "screening.v1.yaml"
+    for path, content in (
+        (entity, b'{"artifact_id":"ENTITY"}\n'),
+        (links, b'{"list_id":"plant-family-links-v1"}\n'),
+        (config, b"metadata:\n  version: 1.0.0\n"),
+    ):
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(content)
+    return ScreeningInputs(
+        universe=None,
+        partners=None,
+        tariff=None,
+        entities=None,
+        family_links={
+            "schema_version": "1.0.0",
+            "list_id": "plant-family-links-v1",
+            "recorded_on": "2026-09-12",
+            "entries": [],
+        },
+        inputs_block={
+            "universe_snapshots": [],
+            "partner_snapshots": [],
+            "tariff_snapshots": [],
+            "entity_artifacts": [
+                _identity(entity, identity="ENTITY", repo_root=repo_root)
+            ],
+            "plant_family_links": [
+                _identity(
+                    links,
+                    identity="plant-family-links-v1",
+                    repo_root=repo_root,
+                )
+            ],
+            "configs": [
+                _identity(config, identity="1.0.0", repo_root=repo_root)
+            ],
+        },
+        unavailable_reasons=("NO_UNIVERSE_SNAPSHOT",),
+    )
+
+
+def test_snapshot_build_records_manifest_key_paths_from_tmp_repo(tmp_path):
+    from ior_mvp.screening.config import screening_config
+    from ior_mvp.screening.snapshot import build_screening_snapshot
+
+    record = build_screening_snapshot(
+        _portable_inputs(tmp_path), screening_config()
+    )
+    paths = [
+        item["path"]
+        for group in record["inputs"].values()
+        for item in group
+    ]
+    assert paths == [
+        "data/entities/resolution/ENTITY.json",
+        "data/screening/lists/plant-family-links-v1.json",
+        "config/screening.v1.yaml",
+    ]
+    assert all(not Path(path).is_absolute() for path in paths)
+    assert all(".." not in Path(path).parts for path in paths)
+
+
+def test_snapshot_identity_is_portable_across_absolute_repo_roots(tmp_path):
+    from ior_mvp.screening.config import screening_config
+    from ior_mvp.screening.snapshot import build_screening_snapshot
+
+    first = build_screening_snapshot(
+        _portable_inputs(tmp_path / "checkout-a"), screening_config()
+    )
+    second = build_screening_snapshot(
+        _portable_inputs(tmp_path / "checkout-b"), screening_config()
+    )
+    assert first["inputs"] == second["inputs"]
+    assert first["snapshot_id"] == second["snapshot_id"]
+
+
+def test_identity_rejects_path_outside_repo_root(tmp_path):
+    from ior_mvp.screening.inputs import _identity
+
+    repo_root = tmp_path / "repo"
+    repo_root.mkdir()
+    outside = tmp_path / "outside.json"
+    outside.write_text("{}\n", encoding="utf-8")
+    with pytest.raises(ValueError, match="outside repository root"):
+        _identity(outside, identity="OUTSIDE", repo_root=repo_root)
+
+
+def test_validator_rejects_absolute_screening_input_path():
+    from ior_mvp.screening.config import screening_config
+    from ior_mvp.screening.snapshot import (
+        snapshot_id,
+        validate_screening_snapshot,
+    )
+
+    record = _record()
+    record["inputs"]["entity_artifacts"] = [
+        {
+            "path": "/machine-specific/data/entities/ENTITY.json",
+            "sha256": "a" * 64,
+            "id": "ENTITY",
+        }
+    ]
+    record["snapshot_id"] = snapshot_id(
+        record["inputs"], record["as_of_date"]
+    )
+    with pytest.raises(
+        ValueError,
+        match="screening input path must be repository-relative manifest key",
+    ):
+        validate_screening_snapshot(record, config=screening_config())
+
+
+def test_reconstruct_script_rejects_absolute_screening_input_path(
+    tmp_path, capsys
+):
+    from scripts import reconstruct_snapshot
+    from ior_mvp.screening.snapshot import (
+        snapshot_id,
+        write_screening_snapshot,
+    )
+
+    data_root = tmp_path / "data"
+    path = write_screening_snapshot(
+        _record(), data_root / "screening" / "snapshots"
+    )
+    summary_path = path / "summary.json"
+    summary = json.loads(summary_path.read_text(encoding="utf-8"))
+    summary["inputs"]["entity_artifacts"] = [
+        {
+            "path": "/machine-specific/data/entities/ENTITY.json",
+            "sha256": "a" * 64,
+            "id": "ENTITY",
+        }
+    ]
+    summary["snapshot_id"] = snapshot_id(
+        summary["inputs"], summary["as_of_date"]
+    )
+    summary_path.write_text(
+        json.dumps(summary, ensure_ascii=False, sort_keys=True, indent=2)
+        + "\n",
+        encoding="utf-8",
+    )
+    renamed = path.with_name(summary["snapshot_id"])
+    path.rename(renamed)
+    with pytest.raises(SystemExit) as stopped:
+        reconstruct_snapshot._reconstruct_screening(
+            data_root,
+            check_manifest=False,
+            manifest_rows={},
+        )
+    assert stopped.value.code == 1
+    assert (
+        "SCREENING RECONSTRUCTION FAIL: screening input path must be "
+        "repository-relative manifest key"
+    ) in capsys.readouterr().out
+
+
 def test_canonical_bytes_and_write_once_conflict(tmp_path):
     from ior_mvp.screening.snapshot import write_screening_snapshot
 

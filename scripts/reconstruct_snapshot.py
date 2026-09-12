@@ -186,6 +186,15 @@ def _reconstruct_screening(
     )
     for path in paths:
         record = load_screening_summary_directory(path)
+        try:
+            validate_screening_snapshot_directory(
+                path,
+                config=screening_config(),
+                check_inputs=False,
+            )
+        except ValueError as exc:
+            print(f"SCREENING RECONSTRUCTION FAIL: {exc}")
+            sys.exit(1)
         refs = [
             item.relative_to(data_root.parent).as_posix()
             for item in path.rglob("*")
@@ -193,11 +202,7 @@ def _reconstruct_screening(
         ]
         for group in record.get("inputs", {}).values():
             refs.extend(
-                (
-                    str(item["path"])
-                    if str(item["path"]).startswith(("data/", "config/", "docs/"))
-                    else _manifest_path(str(item["path"]), data_root)
-                )
+                str(item["path"])
                 for item in group
                 if item.get("path")
             )

@@ -727,3 +727,37 @@ their §11 human mirror for the authorized Core 01/Core 05 corrections, then
 immediately passed `INTEGRITY PASS` and all 20 manifest-contract tests. S13a
 manifest run count is **4**; authorization is exhausted and no fifth run is
 permitted.
+
+**CI-F-01 / OD-15 portability correction:** hosted PR #21 run `34703729335`
+failed because ScreeningSnapshot `311f105c4ccf` persisted this checkout's
+absolute paths for its universe, entity and plant-family-link inputs.
+Reconstruction on another checkout could not map the absolute entity path to
+the manifest. OD-15 treats this as a portability and local-path-leakage defect,
+not a flaky check. Screening input identities are now repository-relative
+POSIX manifest keys under `data/` or `config/`; input assembly fails when a
+path resolves outside the repository; validation and reconstruction reject
+absolute or parent-traversing input paths without fallback.
+
+The never-merged snapshot
+`SCREENING-SAU-2026-09-12-311f105c4ccf` and its 25 candidate batches are
+superseded by `SCREENING-SAU-2026-09-12-9b6b22032fd8` and 25 rebuilt batches.
+All 96 record shards and `queues.json` are byte-identical; logical snapshot
+differences are limited to `snapshot_id` and the three corrected input-path
+fields. Dispositions remain 4,996/447/0, queue counts remain
+119/0/0/4,727/15 and 135 candidates remain unqueued.
+
+S13a manifest-run history and reasons: (1) planned T11 on `2026-09-12`
+(the original log did not capture an exact UTC time), after initial governed
+text/data generation; (2) OD-10 at `2026-09-12T14:21:10Z`, after corrective
+configuration and W1-bis evidence; (3) OD-12 at
+`2026-09-12T15:01:37Z`, after OD-11 completeness and AM-2 sharding; (4) OD-13
+at `2026-09-12T15:36:59Z`, after review corrections to authority-hashed Core
+text; (5) OD-15 authorizes exactly one final generation after the portable
+snapshot rebuild and regression. Its receipt is appended after execution.
+
+**OD-15 execution receipt:** the fifth and final invocation ran at
+`2026-09-12T16:06:31Z`, exited 0, and was followed immediately by
+`INTEGRITY PASS`, all 20 manifest-contract tests, and the manifest delta
+oracle. All 216 pre-S13 base rows remain byte-identical; all 246 changed rows
+relative to `e72eb57` are under `data/screening/`. S13a manifest run count is
+**5**; authorization is exhausted and no sixth run is permitted.

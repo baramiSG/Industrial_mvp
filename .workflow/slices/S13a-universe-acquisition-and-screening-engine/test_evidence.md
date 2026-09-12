@@ -776,3 +776,121 @@ Manifest receipts:
 4. OD-13, `2026-09-12T15:36:59Z`: exit 0; immediate oracle PASS.
 
 Manifest authorization is exhausted; no fifth run occurred.
+
+## OD-15 RED/GREEN and rebuild evidence
+
+```text
+RED 5 failed in 0.13s
+GREEN 5 passed in 0.04s
+VALIDATE_DEFECTIVE_EXIT 1
+screening input path must be repository-relative manifest key
+RECONSTRUCT_DEFECTIVE_EXIT 1
+SCREENING RECONSTRUCTION FAIL: screening input path must be repository-relative manifest key
+
+SUPERSEDED_SNAPSHOT SCREENING-SAU-2026-09-12-311f105c4ccf
+SUPERSEDED_FILE_COUNT 98
+SUPERSEDED_TREE_SHA256 c0ece2746fd82848a115fb1777113bcc043d8dae5bf8f202f0ad5f9caf5bed25
+SUPERSEDED_CANDIDATE_COUNT 25
+REBUILT_SNAPSHOT SCREENING-SAU-2026-09-12-9b6b22032fd8
+
+FIELD_LEVEL_DIFF_PASS
+LOGICAL_DIFF_PATHS $.inputs.entity_artifacts[0].path,$.inputs.plant_family_links[0].path,$.inputs.universe_snapshots[0].path,$.snapshot_id
+RECORD_SHARDS_BYTE_IDENTICAL 96
+QUEUES_BYTE_IDENTICAL
+CANDIDATE_BATCHES_EQUIVALENT 25 $.inputs.entity_artifacts[0].path,$.inputs.plant_family_links[0].path,$.inputs.universe_snapshots[0].path
+DISPOSITIONS 4996 447 0
+QUEUES 119 0 0 4727 15
+UNQUEUED 135
+```
+
+The original summary is retained only at
+`/tmp/SCREENING-SAU-2026-09-12-311f105c4ccf-summary.json`; no superseded copy
+was written inside the repository.
+
+```text
+PRE_MANIFEST_SCREENING 90 passed, 1 warning in 0.46s
+PRE_MANIFEST_ACQUISITION 1108 passed in 18.03s
+PRE_MANIFEST_GOLDEN_FROZEN_OFFLINE 24 passed in 2.51s
+RECONSTRUCTION PASS (2 snapshots, 20 artifacts)
+DOCUMENT RECONSTRUCTION PASS (12 records, 12 artifacts)
+ENTITY RECONSTRUCTION PASS (1 artifacts, 38 links)
+SCREENING RECONSTRUCTION PASS (1 snapshots)
+MANIFEST_RUN_5 2026-09-12T16:06:31Z EXIT_0
+MANIFEST_RUN_5_IMMEDIATE_ORACLE INTEGRITY PASS
+MANIFEST_RUN_5_CONTRACT 20 passed in 0.27s
+MANIFEST_BASE_ROWS_IDENTICAL 216
+MANIFEST_DELTA_SCREENING_ONLY 246
+```
+
+## OD-15 cross-checkout portability proof
+
+The literal `git ls-files -z | xargs ... cp` precursor returned 123 because
+the clean index still names the 123 intentionally deleted superseded output
+files while OD-15 requires this handoff to remain unstaged. The approved
+working-tree `rsync` alternative then copied the actual candidate.
+
+```text
+INTEGRITY PASS
+- data/manifests/snapshot_manifest.json
+- docs/authority/authority_hashes.json
+RECONSTRUCTION PASS (2 snapshots, 20 artifacts)
+DOCUMENT RECONSTRUCTION PASS (12 records, 12 artifacts)
+ENTITY RECONSTRUCTION PASS (1 artifacts, 38 links)
+SCREENING RECONSTRUCTION PASS (1 snapshots)
+PORTABILITY_COPY_REMOVED
+```
+
+Final gates:
+
+```text
+FINAL_PYTEST 2197 passed, 1 warning in 25.34s
+INTEGRITY PASS
+SMOKE PASS
+SCENARIO VALIDATION PASS (2 scenarios)
+RECONSTRUCTION PASS (2 snapshots, 20 artifacts)
+DOCUMENT RECONSTRUCTION PASS (12 records, 12 artifacts)
+ENTITY RECONSTRUCTION PASS (1 artifacts, 38 links)
+SCREENING RECONSTRUCTION PASS (1 snapshots)
+GOLDEN_FROZEN_OFFLINE 24 passed in 2.47s
+IAC13_SNAPSHOTS_BYTE_IDENTICAL_PASS
+VISUAL_MANIFEST_OK
+MAKE_CI_EXIT 0
+MAKE_CI_PYTEST 2197 passed, 1 warning in 25.05s
+MAKE_CI_BROWSER_FUNCTIONAL 118 passed, 4 deselected in 129.46s
+MAKE_CI_BROWSER_VISUAL 4 passed, 118 deselected in 26.15s
+ONLY_SUPERSEDED_SUMMARY_RETAINED
+```
+
+Delta from base `e72eb57` excluding both S13 slice-record folders:
+
+```text
+MODIFIED data/manifests/snapshot_manifest.json
+MODIFIED docs/ARCHITECTURE_DECISIONS.md
+MODIFIED docs/KNOWN_LIMITATIONS.md
+MODIFIED scripts/reconstruct_snapshot.py
+MODIFIED src/ior_mvp/screening/inputs.py
+MODIFIED src/ior_mvp/screening/snapshot.py
+MODIFIED tests/test_screening_snapshot.py
+DELETED data/screening/candidates/CANDIDATES-*-311f105c4ccf-batch-*.json (25)
+DELETED data/screening/snapshots/SCREENING-SAU-2026-09-12-311f105c4ccf/** (98)
+ADDED data/screening/candidates/CANDIDATES-*-9b6b22032fd8-batch-*.json (25)
+ADDED data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/** (98)
+```
+
+## Final OD-15 candidate identity
+
+Deleted paths are represented in the canonical `files` array with
+`sha256:null` and `bytes:0`; present files retain path/SHA-256/byte records.
+The payload includes top-level `base`, canonical JSON and trailing LF.
+
+```text
+IAC6_BASE e72eb57699d797ef3af6499a9fb1cfb7154493a3
+IAC6_IDENTITY 402ff348dd0a11d148a825aa3e2bcdd27b197f2df773dfa41d5f35771a193558
+IAC6_FILE_COUNT 253
+IAC6_DELETED_COUNT 123
+IAC6_PRESENT_COUNT 130
+INDEX_EMPTY_PASS
+AUTONOMOUS_WORKFLOW_UNCHANGED_PASS
+```
+
+Both S13 slice-record folders are excluded from this identity.

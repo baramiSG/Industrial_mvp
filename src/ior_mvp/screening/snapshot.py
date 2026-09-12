@@ -5,10 +5,10 @@ from __future__ import annotations
 import hashlib
 import json
 from dataclasses import dataclass
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 from typing import Any
 
-from ior_mvp.config import thresholds_config
+from ior_mvp.config import PROJECT_ROOT, thresholds_config
 
 from .config import (
     DISPOSITIONS,
@@ -336,6 +336,27 @@ def _walk(value: Any) -> None:
             _walk(child)
 
 
+def _validate_input_paths(inputs: dict[str, Any]) -> None:
+    for group in inputs.values():
+        for identity in group:
+            raw_path = identity.get("path")
+            if not isinstance(raw_path, str) or not raw_path:
+                raise ValueError(
+                    "screening input path must be repository-relative manifest key"
+                )
+            path = PurePosixPath(raw_path)
+            if (
+                path.is_absolute()
+                or path.as_posix() != raw_path
+                or ".." in path.parts
+                or not path.parts
+                or path.parts[0] not in {"data", "config"}
+            ):
+                raise ValueError(
+                    "screening input path must be repository-relative manifest key"
+                )
+
+
 def validate_screening_snapshot(
     record: dict[str, Any],
     *,
@@ -353,6 +374,7 @@ def validate_screening_snapshot(
         raise ValueError("screening snapshot identity mismatch")
     if record["snapshot_id"] != snapshot_id(record["inputs"], record["as_of_date"]):
         raise ValueError("screening snapshot id mismatch")
+    _validate_input_paths(record["inputs"])
     _walk(record)
     records = record["records"]
     if [row["hs6"] for row in records] != sorted(
@@ -386,7 +408,7 @@ def validate_screening_snapshot(
     if check_inputs:
         for group in record["inputs"].values():
             for identity in group:
-                path = Path(identity["path"])
+                path = PROJECT_ROOT / identity["path"]
                 if not path.exists() or hashlib.sha256(path.read_bytes()).hexdigest() != identity["sha256"]:
                     raise ValueError("INPUTS_CHANGED")
 

@@ -1187,3 +1187,78 @@ is permitted.
   deprecation and PDF-parser diagnostics remain non-failing known output.
   Implementer self-review is not approval; reviewer-grok must review this new
   identity.
+
+## OD-15 hosted-CI portability correction
+
+Owner decision OD-15 was read before correction. No network window was opened,
+`.env` was not read, and no universe, entity, family-link or configuration
+input changed.
+
+- **RED:** all five portability tests failed on the committed implementation:
+  `_identity` did not accept a repository-root boundary, snapshot validation
+  accepted an absolute input path, and reconstruction did not emit the
+  required explicit path-contract refusal. The actual committed snapshot also
+  failed both `validate-screening` and full reconstruction with the new tests'
+  explicit absolute-path condition.
+- **GREEN:** five focused tests passed in `0.04s`. Input identities are
+  repository-relative POSIX manifest keys; paths outside the repository fail
+  fast; two different absolute checkout roots produce identical input blocks
+  and snapshot ids; snapshot validation and reconstruction reject absolute
+  paths explicitly.
+- Preserved pre-removal receipt:
+  `SCREENING-SAU-2026-09-12-311f105c4ccf`, 98 files, tree SHA-256
+  `c0ece2746fd82848a115fb1777113bcc043d8dae5bf8f202f0ad5f9caf5bed25`;
+  25 candidate batches. Its summary remains only at
+  `/tmp/SCREENING-SAU-2026-09-12-311f105c4ccf-summary.json`.
+- Offline rebuild through `make build-screening`, `make validate-screening`
+  and `make screen-candidates ... BATCH_SIZE=59` produced portable snapshot
+  `SCREENING-SAU-2026-09-12-9b6b22032fd8` and 25 batches.
+- **Field-level proof PASS:** all 96 record shards and `queues.json` are
+  byte-identical. Logical differences are only `snapshot_id` and the universe,
+  entity and family-link input paths. Candidate payload differences are only
+  those three input paths. Dispositions remain 4,996/447/0; queue counts
+  remain 119/0/0/4,727/15; unqueued remains 135.
+
+OD-15 authorizes exactly one fifth and final manifest generation after
+regression, followed immediately by the manifest oracle. No sixth run is
+authorized.
+
+Pre-manifest regression passed: 90 screening tests, 1,108 acquisition tests,
+24 frozen/golden/offline tests, threshold/prohibited-file scans, scenario
+validation and all four reconstruction passes. The fifth and final manifest
+run started at `2026-09-12T16:06:31Z`, exited 0, and its chained immediate
+oracle passed integrity, all 20 manifest-contract tests, 216/216 unchanged
+base rows and a 246-row delta confined to `data/screening/`. No sixth run is
+permitted.
+
+The first portability-copy precursor using the literal `git ls-files | cp`
+command returned 123 because the unstaged index still names the deliberately
+deleted superseded outputs. OD-15's approved `rsync` alternative copied the
+actual working tree to `/tmp/ior-portability-check`; from that different
+absolute checkout, integrity and all four reconstruction passes succeeded.
+The temporary checkout was then deleted.
+
+## OD-15 muhasib self-audit
+
+- Scope stayed within OD-15: path identity/validation/reconstruction, derived
+  screening replacement, manifest refresh, ADR/KL and slice evidence only.
+- No network, `.env`, credential, universe/entity/family/config input, frozen
+  public/golden/browser artifact, or acquisition `snapshots.py` changed.
+- The replacement proof compares every logical field, all 96 record shards,
+  queues and all 25 candidate batches; no screening outcome changed.
+- The fifth manifest run at `2026-09-12T16:06:31Z` passed its immediate oracle;
+  no sixth run occurred. All 216 base rows are unchanged and the manifest
+  delta from `e72eb57` is screening-only.
+- The different-checkout proof passed integrity and all four reconstruction
+  lines. Final pytest passed 2,197 tests; `make ci` passed 2,197 tests, 118
+  functional browser tests and 4 visual tests.
+- Mechanical review: `git diff --check` and IDE diagnostics are clean;
+  IAC-13, goldens, visual manifest, integrity, smoke and scenarios pass.
+- Candidate identity is
+  `402ff348dd0a11d148a825aa3e2bcdd27b197f2df773dfa41d5f35771a193558`
+  over 253 paths on base `e72eb57699d797ef3af6499a9fb1cfb7154493a3`;
+  123 deleted paths are explicit null-hash records and 130 paths are present.
+- Stop conditions: none. The literal tracked-file copy precursor failed only
+  because the required unstaged deletions remain named in the index; the
+  approved rsync working-tree copy passed. The tree remains uncommitted and
+  unstaged. Implementer self-review is not independent approval.
