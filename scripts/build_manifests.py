@@ -24,6 +24,30 @@ def entry(path: Path) -> dict[str, str | int]:
     }
 
 
+def update_human_authority_table(rows: list[dict[str, str | int]]) -> None:
+    path = ROOT / "docs" / "authority" / "00_AUTHORITY_MANIFEST.md"
+    if not path.exists():
+        return
+    text = path.read_text(encoding="utf-8")
+    start = "<!-- HASH_TABLE_START -->"
+    end = "<!-- HASH_TABLE_END -->"
+    table = [
+        start,
+        "",
+        "| Path | SHA-256 | Bytes |",
+        "| --- | --- | --- |",
+        *[
+            f"| `{row['path']}` | `{row['sha256']}` | {int(row['bytes']):,} |"
+            for row in rows
+        ],
+        "",
+        end,
+    ]
+    before, remainder = text.split(start, 1)
+    _, after = remainder.split(end, 1)
+    path.write_text(before + "\n".join(table) + after, encoding="utf-8")
+
+
 def main() -> None:
     snapshot_paths = sorted((ROOT / "data" / "snapshots").rglob("*.json"))
     snapshot_paths += sorted((ROOT / "data" / "synthetic").rglob("*.json"))
@@ -45,6 +69,11 @@ def main() -> None:
         snapshot_paths += sorted(
             p for p in entities_root.rglob("*") if p.is_file()
         )
+    screening_root = ROOT / "data" / "screening"
+    if screening_root.exists():
+        snapshot_paths += sorted(
+            p for p in screening_root.rglob("*") if p.is_file()
+        )
     snapshot_manifest = {
         "manifest_version": "1.0",
         "generated_on": str(date.today()),
@@ -64,6 +93,8 @@ def main() -> None:
         ROOT / "config" / "decision_narratives.v1.yaml",
         ROOT / "config" / "acquisition_sources.v1.yaml",
         ROOT / "config" / "entity_resolution.v1.yaml",
+        ROOT / "config" / "screening.v1.yaml",
+        ROOT / "config" / "product_families.v1.yaml",
     ]
     authority_paths += sorted((ROOT / "docs" / "core").glob("*.md"))
     authority_manifest = {
@@ -74,6 +105,7 @@ def main() -> None:
     (ROOT / "docs" / "authority" / "authority_hashes.json").write_text(
         json.dumps(authority_manifest, indent=2) + "\n", encoding="utf-8"
     )
+    update_human_authority_table(authority_manifest["files"])
 
 
 if __name__ == "__main__":

@@ -250,7 +250,7 @@ The user opens or prints a one-page dossier containing:
 - live Ministry integration;
 - live customs transactions;
 - production authentication and role-based approval;
-- full 1,300-product universe;
+- full-universe deep resolution beyond the acquired-universe screen;
 - automated paid-data acquisition;
 - arbitrary AI chat over decisions;
 - investor CRM;
@@ -274,3 +274,25 @@ The POC is successful when a Ministry audience can observe, without explanation 
 ## 10. Demonstration headline
 
 > **Public data tells us where the decision is blocked. Your line-level records make the same decision decisive.**
+
+## 11. S13a public-universe screening requirements
+
+- **FR-080 — Public-universe screening dispositions.** Every acquired HS6 is
+  assigned `CANDIDATE`, `SCREENED_OUT`, or `NO_CANDIDATE` with a governed
+  reason code. Screening never emits `ADVANCE` or a formal DecisionRecord.
+- **FR-081 — Five route-specific queues without an ordinal master list.**
+  Candidates may enter multiple owner-named queues; ordering is Pareto rank
+  within each queue and deterministic HS6 tie order only.
+- **FR-082 — Hashed reconstructible ScreeningSnapshot and API.** The offline
+  engine writes a versioned input-hashed snapshot; runtime loaders and
+  `/api/screening` expose summaries, queues, and drill-down without importing
+  acquisition transport.
+- **FR-083 — Fail-closed universe acceptance and honest UNAVAILABLE.** A Saudi
+  HS6 universe exists only when every planned unit proves dataset shape,
+  provider count, reporter/period/flow/partner scope, six-digit identity,
+  classification continuity and duplicate absence. Otherwise the engine emits
+  a zero-record typed unavailable snapshot.
+
+The earlier MVP exclusion is limited to **deep resolution** of the full HS6
+universe. S13a screens the acquired universe; deep cases remain a governed
+subset.

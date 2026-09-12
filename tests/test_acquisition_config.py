@@ -37,6 +37,7 @@ DOCUMENT = {
     "producer_tasnee": ("Tasnee public disclosures", "C"),
 }
 S11 = {"wits_trade", "un_comtrade", "baci_cepii", "zatca_tariff"}
+UNCHANGED_S11 = {"wits_trade", "baci_cepii", "zatca_tariff"}
 
 
 def _head_config() -> dict:
@@ -48,7 +49,7 @@ def _head_config() -> dict:
 @pytest.fixture
 def phased_config() -> dict:
     cfg = _head_config()
-    cfg["metadata"]["version"] = "1.2.0"
+    cfg["metadata"]["version"] = "1.3.0"
     for sid, (stage, authority, _) in INSTITUTIONAL.items():
         cfg["sources"][sid] = pre_observation_source_config(sid, stage=stage, authority=authority)
     for sid, (authority, evidence_class) in DOCUMENT.items():
@@ -84,7 +85,7 @@ def valid_config() -> dict:
 
 
 def test_loads_yaml_version_and_sixteen_sources(valid_config: dict) -> None:
-    assert valid_config["metadata"]["version"] == "1.2.0"
+    assert valid_config["metadata"]["version"] == "1.3.0"
     assert set(valid_config["sources"]) == S11 | set(INSTITUTIONAL) | set(DOCUMENT)
 
 
@@ -157,7 +158,7 @@ def test_config_loader_lives_in_acquisition_package_and_caches() -> None:
     )
     acquisition_sources_config.cache_clear()
     cfg = acquisition_sources_config()
-    assert cfg["metadata"]["version"] == "1.2.0"
+    assert cfg["metadata"]["version"] == "1.3.0"
     assert acquisition_sources_config() is cfg
 
 
@@ -182,11 +183,10 @@ def test_config_loader_fails_closed_on_invalid_yaml(
 @pytest.mark.parametrize("field", ["access_classification", "expected_content_types", "credential_env_var"])
 def test_s11_mappings_unchanged_and_strict(valid_config: dict, phased_config: dict, field: str) -> None:
     head = _head_config()
-    assert {sid: valid_config["sources"][sid] for sid in S11} == {
-        sid: head["sources"][sid] for sid in S11
+    assert {sid: valid_config["sources"][sid] for sid in UNCHANGED_S11} == {
+        sid: head["sources"][sid] for sid in UNCHANGED_S11
     }
-    validate_acquisition_sources(phased_config)
-    for sid in S11:
+    for sid in UNCHANGED_S11:
         bad = copy.deepcopy(phased_config)
         bad["sources"][sid][field] = UNAVAILABLE
         with pytest.raises(AcquisitionConfigurationError):
@@ -376,8 +376,87 @@ def test_document_structural_pins_exact(valid_config: dict) -> None:
 def test_s11_and_s12a_mappings_unchanged_and_strict(valid_config: dict) -> None:
     head = _head_config()
     for sid in head["sources"]:
+        if sid == "un_comtrade":
+            continue
         assert valid_config["sources"][sid] == head["sources"][sid]
     assert valid_config["raw_store"] == head["raw_store"]
+
+
+def test_metadata_version_pinned_to_1_3_0(valid_config: dict) -> None:
+    assert valid_config["metadata"]["version"] == "1.3.0"
+    validate_acquisition_sources(valid_config)
+
+
+def test_credential_header_optional_only_with_credential_env_var(
+    valid_config: dict,
+) -> None:
+    source = valid_config["sources"]["un_comtrade"]
+    assert source["credential_header"] == "Ocp-Apim-Subscription-Key"
+    assert source_config.configured_credential_header(source) == (
+        "Ocp-Apim-Subscription-Key",
+        None,
+    )
+
+    without_header = copy.deepcopy(valid_config)
+    del without_header["sources"]["un_comtrade"]["credential_header"]
+    validate_acquisition_sources(without_header)
+    assert source_config.configured_credential_header(
+        without_header["sources"]["un_comtrade"]
+    ) == ("Authorization", "Bearer")
+
+    without_env_var = copy.deepcopy(valid_config)
+    without_env_var["sources"]["un_comtrade"]["credential_env_var"] = None
+    with pytest.raises(AcquisitionConfigurationError, match="credential_header"):
+        validate_acquisition_sources(without_env_var)
+
+
+@pytest.mark.parametrize(
+    "value",
+    ["", "9Invalid", "Invalid Header", "Invalid_Header", "Invalid:Header", 1],
+)
+def test_credential_header_rejects_invalid_name(
+    valid_config: dict,
+    value: object,
+) -> None:
+    bad = copy.deepcopy(valid_config)
+    bad["sources"]["un_comtrade"]["credential_header"] = value
+    with pytest.raises(AcquisitionConfigurationError, match="credential_header"):
+        validate_acquisition_sources(bad)
+
+
+@pytest.mark.parametrize(
+    "source_id",
+    [*sorted(INSTITUTIONAL), *sorted(DOCUMENT)],
+)
+def test_institutional_and_document_sources_reject_credential_header(
+    valid_config: dict,
+    source_id: str,
+) -> None:
+    bad = copy.deepcopy(valid_config)
+    bad["sources"][source_id]["credential_header"] = "X-Test-Key"
+    with pytest.raises(AcquisitionConfigurationError, match="keys"):
+        validate_acquisition_sources(bad)
+
+
+def test_denylist_includes_ocp_apim_subscription_key(valid_config: dict) -> None:
+    assert (
+        "ocp-apim-subscription-key"
+        in valid_config["offline_guard"]["header_denylist"]
+    )
+
+
+def test_un_comtrade_single_response_cap_policy_pinned(valid_config: dict) -> None:
+    source = valid_config["sources"]["un_comtrade"]
+    assert source["pagination"] == {
+        "kind": "NONE",
+        "documentation_reference": "https://uncomtrade.org/docs/subscriptions/",
+        "parameters": {},
+    }
+    policy = source["rate_limit"]["documented_policy"]
+    assert '"max 100K records per call"' in policy
+    assert '"500 calls/day"' in policy
+    assert '"5 calls per second"' in policy
+    assert "https://uncomtrade.org/docs/subscriptions/" in policy
 
 
 @pytest.mark.parametrize("value,expected", [(None, None), ("", None), (UNAVAILABLE, None), ("IOR_X", "IOR_X")])

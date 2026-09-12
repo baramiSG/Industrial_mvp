@@ -103,6 +103,32 @@ Approved assessment identities (local recovery records, never source evidence): 
 
 S12a is MERGED (PR #15, `cc85cbc`) with five honest unavailable-source attempts. S12b is MERGED (PR #17, `9a9d5c7`) with twelve COMPLETE DocumentRecords and five honest unavailable sources. S12c is MERGED (PR #19, `78c002f`): deterministic bilingual entity resolution with a governed, hashed, reconstructible artifact — 5 COMPANY and 2 PLANT entities from verbatim spans and frozen-snapshot labels, 0 LINE, 0 LICENCE_HOLDER, 0 deterministic identifiers, three mentions pending review, six SASO passports out of scope (KL-67–73). The parent S12 is complete. Downstream screening/engine consumption, extraction metrics and graph work remain in their later slices. No parent obligation is closed by test-double rows alone.
 
+## S13 split (SLICE_GRAPH §5)
+
+The approved decomposition
+`.autonomous-workflow/plans/s13-public-universe-screening/cycle-1/decomposition-1.json`
+(SHA-256 `93ba2443455aa368ed83814f49795a0a04f59a66d3c5d7006125afe5b27793a8`)
+partitions S13 into:
+
+1. `s13a-universe-acquisition-and-screening-engine` — official-source
+   acquisition contract, fail-closed universe, screening engine, five queues,
+   hashed snapshot and mounted-ready runtime API; depends on completed S12.
+2. `s13b-bilingual-screening-surface` — application mount, bilingual analyst
+   surface, KL-34/UX-01 and browser/visual acceptance; depends on s13a.
+
+The parent completes only after both children merge. S13a does not edit
+`app.py`, browser tests, visual-pinned config or baselines. Its approved plan is
+`plan-1-s13a.json` (`9d1f8134…`) plus AM-1 (`d562ddca…`) and
+AM-2 (`88abbab2…`).
+
+S13a implementation evidence remains unmerged. OD-11/W1-ter proved all eight
+universe units and built the 5,443-HS6 universe. AM-2 stores the resulting
+4,996-candidate screening output as a validated write-once directory with
+lazy HS2 shards and governed per-file/total limits. W0-ter observed no
+all-partners token, so partner coverage remains 0/1,471 and W2 was not
+repeated. Parent S13 and child s13b remain incomplete pending S13a's final
+manifest, review and delivery gates.
+
 ## Explicit non-goals for v0.3.0
 
 Authentication, role-based approval, official override workflow, confidential Ministry connectors, live customs transactions, paid-data acquisition, model training on Ministry applications, causal incentive-effect claims, generic AI chat, CRM, document management, any change to the methodology DOCX, and any alteration of the v0.2.0 tag, release records or frozen v1 golden snapshot files.

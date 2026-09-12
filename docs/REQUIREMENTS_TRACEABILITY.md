@@ -284,6 +284,21 @@ Delivered on the squash merge of S12b (PR #17, `9a9d5c7`) after Fable independen
 S12c evidence: `.workflow/slices/S12c-entity-resolution-bilingual-ids/implementation_log.md` and `test_evidence.md`; ADR-018; KL-67–73. At T7, implementation evidence only: manifest run count 0, independent implementation review/PR/CI/merge pending, and no engine consumption before S13/S14.
 Delivered on the squash merge of S12c (PR #19, `78c002f`) after the T9 single manifest run (2026-09-12T11:25:47Z) and T10 gates, reviewer-grok independent APPROVE (zero findings) and hosted CI 5/5 on the exact head (run 34692240675); statuses above are unchanged by the merge — `V3-ENTITY-ids` and `V3-ENTITY-normalisation` TESTED; `V3-ENTITY-links-real` and `V3-RECON-entities` remain PARTIAL as their Status cells state (real links limited to the five short-label companies, unresolved legal names and pending mentions; generated-manifest reconstruction proof recorded in ADR-018/`test_evidence.md`, the row's own evidence cell not rewritten by this records PR).
 
+## P. Milestone v0.3.0 — S13a universe screening engine
+
+| ID | Observable acceptance | Implementation evidence | Status | Slice |
+|---|---|---|---|---|
+| V3-UNIVERSE | Saudi HS6 universe accepted only on complete provider count/content/scope/classification proof. | Connector/kind negative tests; OD-11 mapping; W1-ter `20260912T143742Z` 8/8 COMPLETE; 5,443-HS6 universe snapshot. | TESTED | s13a |
+| V3-SCREEN | Deterministic screening projection, governed rule reuse, typed dispositions and no formal ADVANCE/D*. | Projection/rule/disposition tests, four-year-window availability test and real 5,443-record sharded screening snapshot with 4,996 candidates. | TESTED | s13a |
+| V3-QUEUES | Five route-specific queues with Pareto ordering and §8.2(c) not calculable. | Queue parameter injection and known-frontier tests. | TESTED | s13a |
+| V3-SCREEN-RECON | Screening snapshot hashes inputs and reconstructs with manifest coverage. | AM-2 directory/index/hash/count/tamper/byte-exact tests; 98 files, 52,798,074 bytes; final manifest integrity pending. | PARTIAL | s13a |
+| V3-SCREEN-API | Mounted-ready summary/queue/record API is runtime-offline and within NFR-005. | Test-composed FastAPI contracts/import boundary/performance; lazy HS2 shard test; app mount deferred to s13b. | TESTED | s13a |
+
+S13a statuses are implementation evidence only. Independent review, final
+generated integrity, PR, hosted CI and merge remain separate gates. Partner
+detail is 0/1,471 because W0-ter did not expose an official all-partners
+token; W3 was not opened.
+
 ## Branch and release-state rules
 
 1. No row on the S05 implementation branch is promoted above `TESTED`.

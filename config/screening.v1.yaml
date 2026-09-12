@@ -1,0 +1,68 @@
+metadata:
+  version: "1.0.0"
+  effective_date: "2026-09-12"
+  authority: "Methodology §8.2 and §12; Core 07 screening-grain execution"
+
+vocabularies:
+  dispositions: [CANDIDATE, SCREENED_OUT, NO_CANDIDATE]
+  indicated_states: [INVESTIGATE, MONITOR, REJECT]
+  reason_codes:
+    - MATERIAL_TRIGGER_FIRED
+    - NON_MATERIAL_SIGNAL_ONLY
+    - HARD_EXCLUSION_SATISFIED
+    - GENERIC_CAPACITY_CONTRADICTED
+    - IDENTITY_UNRESOLVED
+    - NO_IMPORT_OBSERVATIONS
+    - NO_TRIGGER_FIRED
+    - NO_UNIVERSE_SNAPSHOT
+    - LICENSE_UNRECORDED
+    - CREDENTIAL_ABSENT
+    - HTTP_ERROR
+    - COVERAGE_INDETERMINATE
+    - PARTNER_DETAIL_NOT_ACQUIRED
+    - TARIFF_TREE_NOT_ACQUIRED
+    - PRODUCTION_AGGREGATES_NOT_ACQUIRED
+    - ENTITY_ARTIFACT_AVAILABLE
+    - D_STAR_NOT_ASSIGNED_AT_SCREENING
+    - PERSISTENCE_ONLY
+    - ROUTE_CHANGING_EVIDENCE_UNRESOLVED
+  evidence_need_codes:
+    - identity/tariff-line
+    - target specification/application
+    - line-level production or producer-grade matrix
+    - re-export/origin decomposition
+    - capacity/availability/allocation
+
+queues:
+  robust_public_finding:
+    minimum_fired_material_signals: 2
+    require_full_signal: true
+    ordering_metrics: [imports_usd_m_latest, quantity_cagr]
+    methodology_ref: "§8.2(a)"
+  incumbent_upgrade_investigation:
+    minimum_other_material_signals: 1
+    ordering_metrics: [imports_usd_m_latest, qualifying_signal_count]
+    methodology_ref: "§8.2(b)"
+  resilience_case:
+    ordering_metrics: [largest_supplier_share_value, imports_usd_m_latest]
+    methodology_ref: "§8.2(d)"
+  likely_false_positive:
+    ordering_metrics: [export_import_value_ratio, imports_usd_m_latest]
+    methodology_ref: "§8.2(e)"
+  high_evsi_evidence_investigation:
+    ordering_metrics: [imports_usd_m_latest, fired_signal_count]
+    methodology_ref: "screening evidence investigation"
+
+monitor_trigger:
+  condition_code: SUPPLIER_CONCENTRATION_SIGNAL_FIRED
+
+api:
+  page_size_default: 50
+  page_size_max: 200
+
+budgets:
+  max_governed_file_bytes: 50331648
+  screening_snapshot_total_max_bytes: 104857600
+
+rules_not_evaluated_at_screening: [R4-F, R6, R7, R8, R12]
+rules_not_evaluated_reason: INPUTS_NOT_PUBLIC_AT_SCREENING_GRAIN

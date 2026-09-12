@@ -36,7 +36,7 @@ def test_default_registry_views_ids_and_pipeline_default(tmp_path):
     assert kinds.ids() == ("directory", "partners", "production", "registry", "tariff", "universe")
     assert snapshots.SNAPSHOT_ROOTS == kinds.roots()
     assert snapshots.KIND_STAGE == {kind: kinds.stage_for(kind) for kind in kinds.ids()}
-    assert {kind: kinds.get(kind).config_version for kind in kinds.ids()} == {"universe": "1.0.0", "tariff": "1.0.0", "partners": "1.0.0", "production": "1.1.0", "directory": "1.1.0", "registry": "1.1.0"}
+    assert {kind: kinds.get(kind).config_version for kind in kinds.ids()} == {"universe": "1.3.0", "tariff": "1.0.0", "partners": "1.0.0", "production": "1.1.0", "directory": "1.1.0", "registry": "1.1.0"}
     assert kinds.snapshot_id("partners", source_id="wits_trade", nomenclature="H0", as_of_date=date(2026, 9, 3)) == "PARTNERS-SAU-WITS-TRADE-2026-09-03"
     deps = PipelineDeps({}, _temp_store(tmp_path), FakeTransport({}, []), default_registry(), "run", {}, lambda _: None)
     assert deps.kinds.ids() == kinds.ids()
@@ -62,8 +62,8 @@ def test_connector_snapshot_helper_cannot_leak_live_config_version(tmp_path):
     config, store = seed(tmp_path, source_id="wits_trade", stage=Stage.UNIVERSE, payload=payload)
     connector = WitsTradeConnector(source_config=config["sources"]["wits_trade"], store=store, transport=None, run_id="", environ={}, config_version="1.1.0")
     record = connector.snapshot([], date(2099, 1, 1))
-    assert record["transformation_record"]["config_version"] == "1.0.0"
-    assert all(p["transformation_record"]["config_version"] == "1.0.0" for p in record["evidence"])
+    assert record["transformation_record"]["config_version"] == "1.3.0"
+    assert all(p["transformation_record"]["config_version"] == "1.3.0" for p in record["evidence"])
 
 
 def test_registry_only_kind_build_write_load_reconstruct_and_cache_isolation(tmp_path):
@@ -97,6 +97,44 @@ def test_builder_refuses_connector_validation_failure(tmp_path):
             return replace(super().validate(raw), status="FAIL")
     with pytest.raises(AcquisitionUnavailable):
         snapshots.build_partner_snapshot(store, config, ConnectorRegistry({"TEST-FIXTURE": RejectingConnector}), source_id="TEST-FIXTURE")
+
+
+def _universe_validator_record(rows):
+    return {
+        "product_scope": "ALL_HS6",
+        "rows": rows,
+        "coverage": {
+            "status": "COMPLETE",
+            "units": [
+                {
+                    "status": "COMPLETE",
+                    "completeness_basis": "PROVIDER_COUNT",
+                }
+            ],
+        },
+    }
+
+
+def test_universe_validator_requires_one_hs_revision_per_unit():
+    validator = kinds_module().default_kind_registry().get("universe").validator_extra
+    record = _universe_validator_record([
+        {"year": 2024, "flow": "imports", "hs_revision": "H5"},
+        {"year": 2024, "flow": "imports", "hs_revision": "H6"},
+    ])
+
+    with pytest.raises(ValueError, match="one classification"):
+        validator(record)
+
+
+@pytest.mark.parametrize("revision", [None, "", 6])
+def test_universe_validator_requires_hs_revision_on_every_row(revision):
+    validator = kinds_module().default_kind_registry().get("universe").validator_extra
+    record = _universe_validator_record([
+        {"year": 2024, "flow": "imports", "hs_revision": revision},
+    ])
+
+    with pytest.raises(ValueError, match="hs_revision"):
+        validator(record)
 
 
 @pytest.mark.parametrize("row", [{}, {"year": 2024, "hs6": "BAD", "reporter": "SAU", "flow": "imports"}, {"year": 2024, "hs6": "721049", "reporter": "USA", "flow": "imports"}])

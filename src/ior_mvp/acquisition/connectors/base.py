@@ -18,6 +18,7 @@ from typing import Any, Callable, Mapping, Protocol, Type
 from ..contracts import (
     AcquisitionError,
     AcquisitionUnavailable,
+    CompletenessBasis,
     CoverageRecord,
     ObservedResponse,
     PageMeta,
@@ -39,7 +40,10 @@ from ..contracts import (
 )
 from ..coverage import evaluate_coverage, not_attempted_coverage
 from ..raw_store import RawStore
-from ..source_config import configured_credential_env_var
+from ..source_config import (
+    configured_credential_env_var,
+    configured_credential_header,
+)
 from ..transport import FetchResult, NetworkError, SizeBudgetExceeded, Transport
 
 
@@ -259,6 +263,16 @@ class BaseConnector:
         self._license_note = UNAVAILABLE
         self._terms_done = False
 
+    def coverage_stop_reason(
+        self, raw: RawArtifact
+    ) -> UnavailableReason | None:
+        """Return a source-specific reason that prevents page completeness."""
+        return None
+
+    def single_response_completeness_basis(self) -> CompletenessBasis:
+        """Return the governed basis for a one-response non-paginated unit."""
+        return CompletenessBasis.SINGLE_RESPONSE_NO_PAGINATION
+
     def _resolve_template(
         self,
         contract: QueryContract,
@@ -453,7 +467,12 @@ class BaseConnector:
             value = self.environ.get(env_var)
             if value:
                 secrets.append((env_var, value))
-                headers["Authorization"] = f"Bearer {value}"
+                header_name, scheme = configured_credential_header(
+                    self.source_config
+                )
+                headers[header_name] = (
+                    f"{scheme} {value}" if scheme else value
+                )
         min_interval = self.source_config["rate_limit"]["min_interval_seconds"]
         self.sleeper(min_interval)
         result = self.transport.fetch(
@@ -684,6 +703,10 @@ class BaseConnector:
             artifact = self._store_page(query_contract, result, page_index=page_index,
                                         normalization_status=status, normalization_reason=reason)
             artifacts.append(artifact)
+            page_stop_reason = self.coverage_stop_reason(artifact)
+            if page_stop_reason is not None:
+                stop_reason = page_stop_reason
+                break
             meta = artifact.contract.page_meta
             if kind == "NONE":
                 break
@@ -719,14 +742,25 @@ class BaseConnector:
             observed_stop=observed_stop,
             contract=query_contract,
             run_id=self.run_id,
+            single_response_basis=self.single_response_completeness_basis(),
         )
         self.store.write_coverage(coverage)
         if coverage.status != "COMPLETE":
+            observed = observed_stop
+            if observed is None and last_result is not None:
+                observed = ObservedResponse(
+                    http_status=last_result.http_status,
+                    headers_subset=last_result.headers_subset,
+                    body_sha256=sha256_bytes(last_result.body),
+                    body_byte_count=len(last_result.body),
+                    error_type=None,
+                    error_message_redacted=None,
+                )
             return self._unavailable(
                 query_contract,
                 stop_reason or UnavailableReason.COVERAGE_INCOMPLETE,
                 endpoint=template,
-                observed=observed_stop,
+                observed=observed,
                 coverage=coverage,
             )
         return artifacts, coverage

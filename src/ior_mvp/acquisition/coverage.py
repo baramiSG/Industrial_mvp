@@ -59,11 +59,22 @@ def evaluate_coverage(
     observed_stop: ObservedResponse | None,
     contract: QueryContract,
     run_id: str,
+    single_response_basis: CompletenessBasis = (
+        CompletenessBasis.SINGLE_RESPONSE_NO_PAGINATION
+    ),
 ) -> CoverageRecord:
     """Derive coverage record from stored pages per DD-18."""
     key = unit_key(contract)
     pages_fetched = len(pages)
     missing_pages: tuple[int, ...] = ()
+    if (
+        contract.source_id == "un_comtrade"
+        and single_response_basis
+        == CompletenessBasis.SINGLE_RESPONSE_NO_PAGINATION
+    ):
+        single_response_basis = (
+            CompletenessBasis.PROVIDER_COUNT_MATCH_BELOW_DOCUMENTED_CAP_100000
+        )
 
     # Institutional privacy refusals dominate every apparent complete-page case,
     # including a first response refused before any payload can be retained.
@@ -139,6 +150,24 @@ def evaluate_coverage(
             observed_stop=observed_stop,
         )
 
+    if stop_reason is not None:
+        return CoverageRecord(
+            source_id=contract.source_id,
+            stage=contract.stage,
+            query_hash=contract.query_hash(),
+            run_id=run_id,
+            unit_key=key,
+            unit=_unit_dict(contract),
+            pages_fetched=pages_fetched,
+            pages_expected=pages_expected,
+            requests_made=requests_made,
+            status="INCOMPLETE",
+            completeness_basis=CompletenessBasis.UNAVAILABLE,
+            stop_reason=stop_reason,
+            missing_pages=missing_pages,
+            observed_stop=observed_stop,
+        )
+
     basis = CompletenessBasis.UNAVAILABLE
     status = "INCOMPLETE"
     final_stop = stop_reason
@@ -155,7 +184,7 @@ def evaluate_coverage(
                 if idx not in fetched_indices
             )
         elif pages_fetched == 1 and pages[0].http_status == 200:
-            basis = CompletenessBasis.SINGLE_RESPONSE_NO_PAGINATION
+            basis = single_response_basis
             status = "COMPLETE"
             final_stop = None
     elif pagination_kind == "PAGE_NUMBER":

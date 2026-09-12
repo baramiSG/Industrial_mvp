@@ -252,3 +252,11 @@ Any new domain function must be added to this map before implementation review c
 | Acquired passports | `acquisition.passports.build_acquired_passport` | Methodology §11; Core 04 | `tests/test_acquisition_passports.py` | eight-group passports |
 | Acquisition snapshots | `acquisition.snapshots` | Core 04 acquisition snapshots | `tests/test_acquisition_snapshots.py` | source-qualified IDs |
 | Reconstruction proof | `scripts/reconstruct_snapshot.py` | Core 09 Gate H; DD-11 | `tests/test_acquisition_reconstruction.py` | RECONSTRUCTION PASS |
+| Screening case projection | `screening.projection.project_case` | Methodology §§3.2–3.3 | `tests/test_screening_projection.py` | typed per-HS6 case |
+| Screening rule ledger | `screening.rules.screening_ledger` | Methodology §§4–5 | `tests/test_screening_rules.py` | coded ledger |
+| Screening dispositions | `screening.dispositions.classify` | Methodology §12; Core 07 §7.6 | `tests/test_screening_dispositions.py` | typed disposition |
+| Route-specific queues | `screening.queues.assign_queues` | Methodology §8.2 | `tests/test_screening_queues.py` | five Pareto queues |
+| Screening snapshot | `screening.snapshot.build_screening_snapshot` | Manifest §7.5 | `tests/test_screening_snapshot.py` | hashed artifact |
+| Screening loader | `screening.repository.screening_snapshot` | Core 03 runtime boundary | `tests/test_screening_repository_and_api.py` | newest valid snapshot |
+| Screening API | `screening.api.router` | Core 03 API contract | `tests/test_screening_repository_and_api.py` | summary/queue/record |
+| Candidate emission | `screening.cli.emit_candidates` | Methodology §12 stage two | `tests/test_screening_candidates.py` | hashed HS6 batches |

@@ -61,6 +61,7 @@ def test_s08_snapshot_manifest_retains_live_and_historical_public_rows(
         "data/raw/",
         "data/documents/",
         "data/entities/",
+        "data/screening/",
         "data/snapshots/universe/",
         "data/snapshots/tariff/",
         "data/snapshots/partners/",
@@ -93,6 +94,7 @@ def _partition_valid(paths: set[str]) -> bool:
         "data/raw/",
         "data/documents/",
         "data/entities/",
+        "data/screening/",
         "data/snapshots/universe/",
         "data/snapshots/tariff/",
         "data/snapshots/partners/",
@@ -123,6 +125,8 @@ def test_s11_snapshot_manifest_rejects_public_partition_leak() -> None:
     assert not _partition_valid(paths | {"data/documents-other/extra.json"})
     assert _partition_valid(paths | {"data/entities/resolution/extra.json"})
     assert not _partition_valid(paths | {"data/entities-other/extra.json"})
+    assert _partition_valid(paths | {"data/screening/snapshots/extra.json"})
+    assert not _partition_valid(paths | {"data/screening-other/extra.json"})
     assert not _partition_valid(paths | {"data/snapshots/unknown/extra.json"})
 
 
@@ -224,6 +228,83 @@ def test_build_manifests_includes_acquisition_config_and_raw_files() -> None:
     )
     assert 'ROOT / "config" / "acquisition_sources.v1.yaml"' in source
     assert '"data"' in source and "raw" in source
+
+
+def test_build_manifests_includes_screening_roots_and_configs() -> None:
+    source = (PROJECT_ROOT / "scripts" / "build_manifests.py").read_text(
+        encoding="utf-8"
+    )
+    assert 'ROOT / "data" / "screening"' in source
+    assert 'ROOT / "config" / "screening.v1.yaml"' in source
+    assert 'ROOT / "config" / "product_families.v1.yaml"' in source
+
+
+def test_s13a_core_v2_screening_contracts() -> None:
+    core = {
+        number: (
+            PROJECT_ROOT / "docs" / "core" / name
+        ).read_text(encoding="utf-8")
+        for number, name in {
+            "01": "01_PRODUCT_AND_REQUIREMENTS.md",
+            "02": "02_METHODOLOGY_IMPLEMENTATION_MAP.md",
+            "03": "03_SYSTEM_ARCHITECTURE.md",
+            "04": "04_CANONICAL_DATA_MODEL.md",
+            "05": "05_DATA_SOURCES_AND_INGESTION.md",
+            "07": "07_DETERMINISTIC_ENGINE_SPEC.md",
+            "09": "09_TEST_ACCEPTANCE_AND_GOLDEN_CASES.md",
+        }.items()
+    }
+    assert "FR-080 — Public-universe screening dispositions" in core["01"]
+    assert "FR-081 — Five route-specific queues without an ordinal master list" in core["01"]
+    assert "FR-082 — Hashed reconstructible ScreeningSnapshot and API" in core["01"]
+    assert "FR-083 — Fail-closed universe acceptance and honest UNAVAILABLE" in core["01"]
+    for function in (
+        "screening.projection.project_case",
+        "screening.rules.screening_ledger",
+        "screening.dispositions.classify",
+        "screening.queues.assign_queues",
+        "screening.snapshot.build_screening_snapshot",
+        "screening.repository.screening_snapshot",
+        "screening.api.router",
+        "screening.cli.emit_candidates",
+    ):
+        assert function in core["02"]
+    assert "S13a screening runtime boundary" in core["03"]
+    assert "ScreeningSnapshot 1.0.0" in core["04"]
+    assert "W0–W3 operator-window discipline" in core["05"]
+    assert (
+        "| UN Comtrade / WITS | HS6 value, quantity, partner and time series | "
+        "Reporter record; gross flows; quantity quality varies | official v1 "
+        "Comtrade universe COMPLETE (2021–2024; imports and exports; 5,443 "
+        "HS6); frozen S11 WITS partner snapshot retained separately; "
+        "Comtrade partner detail and ZATCA tariff tree UNAVAILABLE |"
+    ) in core["05"]
+    assert "- full 1,300-product universe;" not in core["01"]
+    assert (
+        "full-universe deep resolution beyond the acquired-universe screen"
+        in core["01"]
+    )
+    assert "S13a screening-grain execution" in core["07"]
+    assert "Screening reconstruction gate" in core["09"]
+    limitations = (
+        PROJECT_ROOT / "docs" / "KNOWN_LIMITATIONS.md"
+    ).read_text(encoding="utf-8")
+    assert (
+        "Methodology §8.2(c) greenfield candidates are NOT_CALCULABLE at "
+        "screening grain because R9-S assigns no D* and route 7 requires "
+        "D* > 0.65."
+    ) in limitations
+    assert (
+        "Persistence-only CANDIDATEs are counted unqueued (135 in the current "
+        "snapshot) with no invented materiality floor."
+    ) in limitations
+    adr = (
+        PROJECT_ROOT / "docs" / "ARCHITECTURE_DECISIONS.md"
+    ).read_text(encoding="utf-8")
+    assert (
+        "owner-approved amendments AM-1 (`d562ddca…`) and AM-2 "
+        "(`88abbab2…`)"
+    ) in adr
 
 
 def test_missing_snapshot_kinds_cited_in_known_limitations() -> None:

@@ -1,0 +1,120 @@
+{
+  "batch": {
+    "batch_size": 59,
+    "index": 6,
+    "total": 25
+  },
+  "candidate_source": "SCREENING_CHEAP_RULES_V1",
+  "hs6_codes": [
+    "283319",
+    "283322",
+    "283340",
+    "283421",
+    "283510",
+    "283539",
+    "283911",
+    "284011",
+    "284020",
+    "284130",
+    "284169",
+    "284190",
+    "284290",
+    "290122",
+    "290211",
+    "290244",
+    "290250",
+    "290290",
+    "290313",
+    "290319",
+    "290322",
+    "290342",
+    "290344",
+    "290345",
+    "290346",
+    "290347",
+    "290348",
+    "290351",
+    "290379",
+    "290389",
+    "290391",
+    "290432",
+    "290522",
+    "290532",
+    "290541",
+    "290542",
+    "290559",
+    "290612",
+    "290621",
+    "290719",
+    "290729",
+    "290811",
+    "290919",
+    "290949",
+    "291260",
+    "291411",
+    "291423",
+    "291429",
+    "291450",
+    "291462",
+    "291479",
+    "291512",
+    "291513",
+    "291521",
+    "291524",
+    "291533",
+    "291590",
+    "291632",
+    "291712"
+  ],
+  "inputs": {
+    "configs": [
+      {
+        "path": "config/screening.v1.yaml",
+        "sha256": "21ec2ff6893d3a52a79a5dc91a72c8a54c68adedffa4962c5b1323ca32de8d3e",
+        "version": "1.0.0"
+      },
+      {
+        "path": "config/product_families.v1.yaml",
+        "sha256": "841bc5ac732b9f9348495d3594926dea84dd4df7aab134092f81d06b4de7ecd4",
+        "version": "1.0.0"
+      },
+      {
+        "path": "config/thresholds.v1.yaml",
+        "sha256": "4e891b9706408f6a661565e09609d0d663e1a00a17bda4e283a4b2ee63d3c47a",
+        "version": "1.2.0"
+      },
+      {
+        "path": "config/acquisition_sources.v1.yaml",
+        "sha256": "fbe061496bc6c9b5ddd039b25536d78fb24c22ba3d84650fcd2c9374977673cc",
+        "version": "1.3.0"
+      }
+    ],
+    "entity_artifacts": [
+      {
+        "id": "ENTITIES-2026-09-12-a12e24c31b02",
+        "path": "data/entities/resolution/ENTITIES-2026-09-12-a12e24c31b02.json",
+        "sha256": "97e68dd3e79b0ec1acb01bcdb5c5695296ba3d917f639afbd4079702d052f701"
+      }
+    ],
+    "partner_snapshots": [],
+    "plant_family_links": [
+      {
+        "id": "plant-family-links-v1",
+        "path": "data/screening/lists/plant-family-links-v1.json",
+        "sha256": "d1c619d3ea69887e7375e9ca59ca8b2811573cb9fe79947340468e87d50d3396"
+      }
+    ],
+    "tariff_snapshots": [],
+    "universe_snapshots": [
+      {
+        "id": "UNIVERSE-SAU-UN-COMTRADE-HS-2026-09-12",
+        "path": "data/snapshots/universe/UNIVERSE-SAU-UN-COMTRADE-HS-2026-09-12.json",
+        "sha256": "758acdb41c5759e5be2c6215405e9c6829bc527b73850d8c4b54327c61b0c78d"
+      }
+    ]
+  },
+  "recorded_on": "2026-09-12",
+  "schema_version": "1.0.0",
+  "selection_rule": "R2_FULL_FIRED_ON_UNIVERSE",
+  "sha256_of_hs6_codes": "22e73fe58f751749da5309965c285b3ec5f96c5a3918e3b8e4938d439f041afb"
+}

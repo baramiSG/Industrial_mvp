@@ -567,3 +567,19 @@ bilingual narratives are byte-stable apart from JSON object ordering.
 No gate or selector may contain an opportunity ID, source name, producer name,
 `source` branch, or `synthetic_flag` branch. Tests inspect the relevant ASTs.
 The public selector consumes evidence semantics, never source type.
+
+## 12. S13a screening-grain execution
+
+The screening engine projects acquired universe rows into the existing rule
+input shape and calls the governed R1-D, R2, R3, R4-D, R5, R9-S, R10 and R11
+builders with versioned thresholds. R0 is FULL only with a valid tariff-tree
+mapping, DEGRADED when the tree is unavailable, and DISABLED for malformed
+identity. R1-F is disabled across missing years. R4-F, R6, R7, R8 and R12 are
+recorded `INPUTS_NOT_PUBLIC_AT_SCREENING_GRAIN`.
+
+The engine assigns a typed screening disposition and optional **indicated**
+state, never a formal decision. R3-only candidates may indicate MONITOR only
+with the named `supplier_concentration` trigger. Material triggers indicate
+INVESTIGATE; satisfied exclusions or FULL-fired R11 indicate REJECT. Unknown
+capability does not improve adjacency and no screening record emits D* or
+ADVANCE.

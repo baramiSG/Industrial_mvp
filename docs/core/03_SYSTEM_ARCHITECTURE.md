@@ -339,3 +339,16 @@ The MVP does not lock the Ministry into a particular cloud or data platform.
 ## 11. Scaling path
 
 The engine is stateless at request time and can be separated into services when data volume grows. The first production bottleneck will not be arithmetic; it will be evidence acquisition, entity resolution and specification review. The architecture therefore preserves evidence passports and hard-gate status as first-class objects rather than optimizing prematurely for model throughput.
+
+## 12. S13a screening runtime boundary
+
+The offline builder under `ior_mvp.screening` may read acquired snapshots,
+documents and entity artifacts. The runtime loader, snapshot validator,
+configuration reader and API router do not import
+`ior_mvp.acquisition.transport`. `/api/screening` has summary, queue and record
+routes; mounting it in the primary application is deferred to S13b so every
+top-level application module and visual baseline remains unchanged in S13a.
+
+An unavailable universe is a successful typed runtime condition: the summary
+returns HTTP 200 with `universe_status=UNAVAILABLE`, empty queues and the latest
+recorded reason. Unknown queue and HS6 identifiers return typed 404 responses.

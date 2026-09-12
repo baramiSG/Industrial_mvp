@@ -1,0 +1,52 @@
+{
+  "attempted_at": "2026-09-12T13:40:09Z",
+  "coverage": {
+    "completeness_basis": "UNAVAILABLE",
+    "missing_pages": [],
+    "observed_stop": null,
+    "pages_expected": 0,
+    "pages_fetched": 0,
+    "query_hash": "5bc875b4a56b8315a3e943f2b1c0f0d9834a6cad624578dbcd50b633181d2860",
+    "requests_made": 0,
+    "run_id": "20260912T134009Z",
+    "source_id": "un_comtrade",
+    "stage": "UNIVERSE",
+    "status": "INCOMPLETE",
+    "stop_reason": "LICENSE_UNRECORDED",
+    "unit": {
+      "flow": "imports",
+      "hs6": null,
+      "period": "2023",
+      "product_scope": "ALL_HS6",
+      "stage": "UNIVERSE"
+    },
+    "unit_key": [
+      "imports",
+      "2023"
+    ]
+  },
+  "credential_env_var": "IOR_COMTRADE_SUBSCRIPTION_KEY",
+  "credential_present": true,
+  "endpoint_or_document": "https://comtradeapi.un.org/data/v1/get/C/A/HS?reporterCode={reporter}&period={period}&flowCode={flow_code}&cmdCode={product}&partnerCode={partner}&motCode=0&customsCode=C00",
+  "observed_response": null,
+  "query_contract": {
+    "flow": "imports",
+    "nomenclature": "HS",
+    "parameters": [],
+    "partner": "0",
+    "periods": [
+      "2023"
+    ],
+    "product_codes": [
+      "ALL"
+    ],
+    "product_scope": "ALL_HS6",
+    "reporter": "SAU",
+    "source_id": "un_comtrade",
+    "stage": "UNIVERSE"
+  },
+  "query_hash": "5bc875b4a56b8315a3e943f2b1c0f0d9834a6cad624578dbcd50b633181d2860",
+  "reason": "LICENSE_UNRECORDED",
+  "run_id": "20260912T134009Z",
+  "source_id": "un_comtrade"
+}
