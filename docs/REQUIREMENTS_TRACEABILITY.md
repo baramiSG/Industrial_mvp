@@ -291,13 +291,10 @@ Delivered on the squash merge of S12c (PR #19, `78c002f`) after the T9 single ma
 | V3-UNIVERSE | Saudi HS6 universe accepted only on complete provider count/content/scope/classification proof. | Connector/kind negative tests; OD-11 mapping; W1-ter `20260912T143742Z` 8/8 COMPLETE; 5,443-HS6 universe snapshot. | TESTED | s13a |
 | V3-SCREEN | Deterministic screening projection, governed rule reuse, typed dispositions and no formal ADVANCE/D*. | Projection/rule/disposition tests, four-year-window availability test and real 5,443-record sharded screening snapshot with 4,996 candidates. | TESTED | s13a |
 | V3-QUEUES | Five route-specific queues with Pareto ordering and §8.2(c) not calculable. | Queue parameter injection and known-frontier tests. | TESTED | s13a |
-| V3-SCREEN-RECON | Screening snapshot hashes inputs and reconstructs with manifest coverage. | AM-2 directory/index/hash/count/tamper/byte-exact tests; 98 files, 52,798,074 bytes; final manifest integrity pending. | PARTIAL | s13a |
+| V3-SCREEN-RECON | Screening snapshot hashes inputs and reconstructs with manifest coverage from any checkout path. | AM-2 directory/index/hash/count/tamper/byte-exact tests; repository-relative input keys with fail-closed rejection of absolute paths (CI-F-01/OD-15) and a portability test; `SCREENING RECONSTRUCTION PASS (1 snapshots)` on hosted CI run 34706125468 and from a copied tree at a different absolute path. | TESTED | s13a |
 | V3-SCREEN-API | Mounted-ready summary/queue/record API is runtime-offline and within NFR-005. | Test-composed FastAPI contracts/import boundary/performance; lazy HS2 shard test; app mount deferred to s13b. | TESTED | s13a |
 
-S13a statuses are implementation evidence only. Independent review, final
-generated integrity, PR, hosted CI and merge remain separate gates. Partner
-detail is 0/1,471 because W0-ter did not expose an official all-partners
-token; W3 was not opened.
+Delivered on the squash merge of S13a (PR #21, `834ba60`) after reviewer-grok rounds 2/3/4 APPROVE (zero findings) on `e73aeba9…`, `402ff348…` and `f7af7f75…`, five owner-authorized manifest runs (ADR-019) and hosted CI 5/5 on the exact head `0dfbae9` (run 34706125468). Hosted CI corrections CI-F-01 (absolute screening input paths) and CI-F-02 (order-dependent detector test) are recorded in the slice `pr_record.md`. Core 01 §11 FR-080…FR-083 are covered by V3-SCREEN (FR-080), V3-QUEUES (FR-081), V3-SCREEN-RECON and V3-SCREEN-API (FR-082) and V3-UNIVERSE (FR-083). Partner detail is 0/1,471 because W0-ter did not expose an official all-partners token; W3 was not opened. Analyst surface, app mount and UX-01 parity are s13b.
 
 ## Branch and release-state rules
 
