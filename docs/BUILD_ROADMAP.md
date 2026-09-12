@@ -121,13 +121,14 @@ The parent completes only after both children merge. S13a does not edit
 `plan-1-s13a.json` (`9d1f8134…`) plus AM-1 (`d562ddca…`) and
 AM-2 (`88abbab2…`).
 
-S13a implementation evidence remains unmerged. OD-11/W1-ter proved all eight
-universe units and built the 5,443-HS6 universe. AM-2 stores the resulting
-4,996-candidate screening output as a validated write-once directory with
-lazy HS2 shards and governed per-file/total limits. W0-ter observed no
-all-partners token, so partner coverage remains 0/1,471 and W2 was not
-repeated. Parent S13 and child s13b remain incomplete pending S13a's final
-manifest, review and delivery gates.
+S13a is MERGED (PR #21, squash `834ba60`, 2026-09-12). OD-11/W1-ter proved all
+eight universe units and built the 5,443-HS6 universe. AM-2 stores the
+4,996-candidate screening output as a validated write-once directory
+(`SCREENING-SAU-2026-09-12-9b6b22032fd8`, rebuilt under OD-15 with
+repository-relative input paths after hosted CI-F-01; 96/96 shards identical
+to the superseded `311f105c4ccf`). W0-ter observed no all-partners token, so
+partner coverage remains 0/1,471 and W2 was not repeated. Child s13b is READY;
+the parent S13 completes only when s13b merges.
 
 ## Explicit non-goals for v0.3.0
 
