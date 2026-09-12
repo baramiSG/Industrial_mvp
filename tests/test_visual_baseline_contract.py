@@ -57,6 +57,7 @@ def test_pillow_is_an_exact_e2e_only_dependency() -> None:
     assert project["project"]["optional-dependencies"]["dev"] == [
         "pytest>=8,<9",
         "httpx>=0.27,<1",
+        "pypdf==6.16.1",
     ]
     assert project["project"]["optional-dependencies"]["e2e"] == [
         "Pillow==12.3.0",

@@ -59,6 +59,7 @@ def test_s08_snapshot_manifest_retains_live_and_historical_public_rows(
     assert frozen <= paths
     allowed_extra_prefixes = (
         "data/raw/",
+        "data/documents/",
         "data/snapshots/universe/",
         "data/snapshots/tariff/",
         "data/snapshots/partners/",
@@ -89,6 +90,7 @@ def _partition_valid(paths: set[str]) -> bool:
         return False
     allowed_extra_prefixes = (
         "data/raw/",
+        "data/documents/",
         "data/snapshots/universe/",
         "data/snapshots/tariff/",
         "data/snapshots/partners/",
@@ -115,6 +117,8 @@ def test_s11_snapshot_manifest_rejects_public_partition_leak() -> None:
     for kind in ("production", "directory", "registry"):
         assert _partition_valid(paths | {f"data/snapshots/{kind}/extra.json"})
         assert not _partition_valid(paths | {f"data/snapshots/{kind}-other/extra.json"})
+    assert _partition_valid(paths | {"data/documents/producer_unicoil/records/extra.json"})
+    assert not _partition_valid(paths | {"data/documents-other/extra.json"})
     assert not _partition_valid(paths | {"data/snapshots/unknown/extra.json"})
 
 
@@ -149,21 +153,24 @@ def test_s12a_core_v2_institutional_contracts() -> None:
         "| GASTAT economic census and industrial surveys | sector/establishment anchor | B/C until product-line reconciliation; connector implemented (S12a); availability and coverage recorded per run |",
         "| Ministry of Industry open data | licences and activity | B/C; licence is not production; connector implemented (S12a); availability and coverage recorded per run |",
         "| MODON directories | plant/entity discovery | C; connector implemented (S12a); availability and coverage recorded per run |",
-        "| Tadawul filings and annual reports | nameplate, expansion and financial context | C |",
-        "| EPDs and product sheets | process, range, standards and certifications | C |",
+        "| Tadawul filings and annual reports | nameplate, expansion and financial context | C; connector implemented (S12b); availability and coverage recorded per run |",
+        "| EPDs and product sheets | process, range, standards and certifications | C; connector implemented (S12b); availability and coverage recorded per run |",
         "| GPCA / sector associations | sector capacity context | B/C |",
     ]
     assert supply.count("connector implemented (S12a)") == 3
+    assert supply.count("connector implemented (S12b)") == 2
     assert [line for line in qualification.splitlines() if line.startswith("|")] == [
         "| Source | Use | Control |",
         "|---|---|---|",
         "| SASO catalogue | standard identity and scope | title/scope does not prove compliance; connector implemented (S12a); availability and coverage recorded per run |",
+        "| SASO public technical regulations | mandatory requirement documents as published | title/scope does not prove compliance; connector implemented (S12b); availability and coverage recorded per run |",
         "| Purchased anchor standards | detailed requirement extraction | copyright and access controls |",
-        "| Etimad tenders and awards | real bilingual demand specifications | exact document/page span required |",
+        "| Etimad tenders and awards | real bilingual demand specifications | exact document/page span required; connector implemented (S12b); availability and coverage recorded per run |",
         "| SABER registry | conformity evidence | registration does not prove every buyer qualification; connector implemented (S12a); availability and coverage recorded per run |",
-        "| Producer catalogues / certificates | published product envelope | confirm current edition and contradiction |",
+        "| Producer catalogues / certificates | published product envelope | confirm current edition and contradiction; connector implemented (S12b); availability and coverage recorded per run |",
     ]
     assert qualification.count("connector implemented (S12a)") == 2
+    assert qualification.count("connector implemented (S12b)") == 3
 
     acquisition = core_04.split("### Acquisition snapshots 1.0.0\n", 1)[1].split(
         "### PublicSnapshot 2.1\n", 1
@@ -504,6 +511,67 @@ def test_manifest_generator_includes_the_governed_ui_catalogue() -> None:
         'ROOT / "config" / "decision_narratives.v1.yaml"'
         in source
     )
+
+
+def test_s12b_core_v2_document_contracts() -> None:
+    core_04 = (
+        PROJECT_ROOT / "docs" / "core" / "04_CANONICAL_DATA_MODEL.md"
+    ).read_text(encoding="utf-8")
+    core_05 = (
+        PROJECT_ROOT / "docs" / "core" / "05_DATA_SOURCES_AND_INGESTION.md"
+    ).read_text(encoding="utf-8")
+    assert "### DocumentRecord 1.0.0" in core_04
+    assert core_04.index("### DocumentRecord 1.0.0") < core_04.index("### 2.4 Plant and ProductionLine")
+    section_10 = core_05.split("## 10.", 1)[1].split("## 11.", 1)[0]
+    section_11 = core_05.split("## 11.", 1)[1].split("## 12.", 1)[0]
+    assert "DOCUMENT_ENVELOPE" in section_10
+    assert "DocumentRecord" in section_10
+    assert "acquire-documents" in section_11
+    assert "--list-id" in section_11
+    # OD-12 (S12B-IR3-F01): the PDF text-order disclosure is part of the DocumentRecord contract
+    document_section = core_04.split("### DocumentRecord 1.0.0", 1)[1].split(
+        "### 2.4 Plant and ProductionLine", 1
+    )[0]
+    assert "content-stream text order verbatim" in document_section
+    assert "visual-order Arabic" in document_section
+    assert "not logical reading order" in document_section
+    assert "No bidi reordering or reshaping is applied" in document_section
+    assert "PDF content-stream order" in section_10
+    assert "not logical reading order" in section_10
+
+
+def test_document_sources_without_records_cited_in_known_limitations() -> None:
+    from ior_mvp.acquisition.connectors.base import default_registry
+
+    kl_text = (PROJECT_ROOT / "docs" / "KNOWN_LIMITATIONS.md").read_text(encoding="utf-8")
+    raw_root = PROJECT_ROOT / "data" / "raw"
+    documents_root = PROJECT_ROOT / "data" / "documents"
+    document_sources = (
+        "tadawul_disclosures",
+        "etimad_tenders",
+        "saso_documents",
+        "producer_unicoil",
+        "producer_sabic",
+        "producer_advanced_petrochemical",
+        "producer_tasnee",
+    )
+    for source_id in document_sources:
+        assert (raw_root / source_id).is_dir(), f"missing raw dir for {source_id}"
+        records_dir = documents_root / source_id / "records"
+        if records_dir.exists() and any(records_dir.glob("*.json")):
+            continue
+        latest_marker = None
+        for attempt_path in sorted((raw_root / source_id).rglob("attempt.json")):
+            attempt = json.loads(attempt_path.read_text(encoding="utf-8"))
+            if attempt.get("coverage", {}).get("stage") != "DOCUMENT":
+                continue
+            latest_marker = attempt.get("query_hash") or str(
+                attempt_path.relative_to(PROJECT_ROOT)
+            )
+        assert latest_marker is not None, f"no DOCUMENT attempt for {source_id}"
+        assert latest_marker in kl_text or source_id in kl_text, (
+            f"{source_id} missing KL citation for {latest_marker}"
+        )
 
 
 def test_human_authority_table_matches_machine_manifest_exactly() -> None:

@@ -338,6 +338,66 @@ def acquire_directory(
     )
 
 
+def acquire_documents(
+    source_id: str,
+    *,
+    list_id: str,
+    deps: PipelineDeps,
+    max_requests: int,
+) -> RunReport:
+    from .documents.lists import load_document_list
+    from .documents.store import DocumentStore, validate_list_id
+
+    validate_list_id(list_id)
+    source_cfg = deps.config["sources"][source_id]
+    doc_store = DocumentStore(deps.store.root.parent / "documents")
+    document_list = load_document_list(
+        doc_store.list_path(source_id, list_id),
+        source_id=source_id,
+        default_evidence_class=source_cfg["default_evidence_class"],
+    )
+    units = plan_units(
+        Stage.DOCUMENT,
+        source_id=source_id,
+        years=(),
+        flows=(),
+        candidates=document_list,
+        config=deps.config,
+    )
+    return _run_units(
+        deps,
+        source_id=source_id,
+        stage=Stage.DOCUMENT,
+        units=units,
+        max_requests=max_requests,
+        candidates=document_list,
+    )
+
+
+def build_documents(
+    source_id: str,
+    *,
+    list_id: str,
+    deps: PipelineDeps,
+) -> "DocumentBuildReport":
+    from .documents.store import (
+        DocumentStore,
+        build_document_records,
+        validate_list_id,
+    )
+
+    validate_list_id(list_id)
+    doc_store = DocumentStore(deps.store.root.parent / "documents")
+    return build_document_records(
+        deps.store,
+        deps.config,
+        deps.registry,
+        doc_store,
+        source_id=source_id,
+        list_id=list_id,
+    )
+
+
 def acquire_registry(
     source_id: str,
     *,

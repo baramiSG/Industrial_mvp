@@ -205,6 +205,7 @@ Responsibilities:
 BACI BULK is raw-only in S11: stored as hashed evidence with no analytical snapshot kind.
 
 - S12a uses stage and kind registries for acquisition, validation, per-source snapshot building, loading and reconstruction, adding production, directory and registry kinds without integrating them into the public decision engine.
+- S12b adds `Stage.DOCUMENT`, DocumentList/DocumentRecord stores under `data/documents/**`, text-layer derivation (dev-only `pypdf`) and document reconstruction on the same raw-store and passport machinery without integrating documents into the public decision engine.
 
 ## 5. Public analysis sequence
 

@@ -35,6 +35,11 @@ def main() -> None:
             for p in raw_root.rglob("*")
             if p.is_file()
         )
+    documents_root = ROOT / "data" / "documents"
+    if documents_root.exists():
+        snapshot_paths += sorted(
+            p for p in documents_root.rglob("*") if p.is_file()
+        )
     snapshot_manifest = {
         "manifest_version": "1.0",
         "generated_on": str(date.today()),

@@ -17,7 +17,7 @@ from ior_mvp.acquisition.source_config import (
     validate_acquisition_sources,
 )
 from ior_mvp.config import PROJECT_ROOT
-from tests.acquisition_doubles import pre_observation_source_config
+from tests.acquisition_doubles import pre_observation_document_source_config, pre_observation_source_config
 
 
 INSTITUTIONAL = {
@@ -26,6 +26,15 @@ INSTITUTIONAL = {
     "modon": (Stage.DIRECTORY, "MODON directories", "C"),
     "saso_catalogue": (Stage.REGISTRY, "SASO catalogue", "B"),
     "saber_registry": (Stage.REGISTRY, "SABER registry", "C"),
+}
+DOCUMENT = {
+    "tadawul_disclosures": ("Tadawul filings and annual reports", "C"),
+    "etimad_tenders": ("Etimad tenders and awards", "B"),
+    "saso_documents": ("SASO public technical regulations", "B"),
+    "producer_unicoil": ("UNICOIL public disclosures", "C"),
+    "producer_sabic": ("SABIC (incl. Hadeed) public disclosures", "C"),
+    "producer_advanced_petrochemical": ("Advanced Petrochemical public disclosures", "C"),
+    "producer_tasnee": ("Tasnee public disclosures", "C"),
 }
 S11 = {"wits_trade", "un_comtrade", "baci_cepii", "zatca_tariff"}
 
@@ -39,9 +48,13 @@ def _head_config() -> dict:
 @pytest.fixture
 def phased_config() -> dict:
     cfg = _head_config()
-    cfg["metadata"]["version"] = "1.1.0"
+    cfg["metadata"]["version"] = "1.2.0"
     for sid, (stage, authority, _) in INSTITUTIONAL.items():
         cfg["sources"][sid] = pre_observation_source_config(sid, stage=stage, authority=authority)
+    for sid, (authority, evidence_class) in DOCUMENT.items():
+        cfg["sources"][sid] = pre_observation_document_source_config(
+            sid, authority=authority, evidence_class=evidence_class,
+        )
     return cfg
 
 
@@ -70,9 +83,9 @@ def valid_config() -> dict:
     return yaml.safe_load(path.read_text(encoding="utf-8"))
 
 
-def test_loads_yaml_version_and_nine_sources(valid_config: dict) -> None:
-    assert valid_config["metadata"]["version"] == "1.1.0"
-    assert set(valid_config["sources"]) == S11 | set(INSTITUTIONAL)
+def test_loads_yaml_version_and_sixteen_sources(valid_config: dict) -> None:
+    assert valid_config["metadata"]["version"] == "1.2.0"
+    assert set(valid_config["sources"]) == S11 | set(INSTITUTIONAL) | set(DOCUMENT)
 
 
 def test_locked_literals(valid_config: dict) -> None:
@@ -86,9 +99,12 @@ def test_locked_literals(valid_config: dict) -> None:
     )
     for sid in valid_config["sources"]:
         src = valid_config["sources"][sid]
-        assert src["default_evidence_class"] == (
-            INSTITUTIONAL[sid][2] if sid in INSTITUTIONAL else "B"
-        )
+        if sid in INSTITUTIONAL:
+            assert src["default_evidence_class"] == INSTITUTIONAL[sid][2]
+        elif sid in DOCUMENT:
+            assert src["default_evidence_class"] == DOCUMENT[sid][1]
+        else:
+            assert src["default_evidence_class"] == "B"
         assert (
             src["default_reviewer_status"]
             == "unconfirmed_by_responsible_authority"
@@ -141,7 +157,7 @@ def test_config_loader_lives_in_acquisition_package_and_caches() -> None:
     )
     acquisition_sources_config.cache_clear()
     cfg = acquisition_sources_config()
-    assert cfg["metadata"]["version"] == "1.1.0"
+    assert cfg["metadata"]["version"] == "1.2.0"
     assert acquisition_sources_config() is cfg
 
 
@@ -286,17 +302,82 @@ def test_forbidden_keys_still_rejected(phased_config: dict, key: str, location: 
         validate_acquisition_sources(phased_config)
 
 
-@pytest.mark.parametrize("change", ["version", "eight", "ten"])
+@pytest.mark.parametrize("change", ["version", "fifteen", "seventeen"])
 def test_version_and_id_set_exact(phased_config: dict, change: str) -> None:
     validate_acquisition_sources(phased_config)
     if change == "version":
-        phased_config["metadata"]["version"] = "1.0.0"
-    elif change == "eight":
+        phased_config["metadata"]["version"] = "1.1.0"
+    elif change == "fifteen":
         del phased_config["sources"]["gastat"]
     else:
         phased_config["sources"]["unknown"] = phased_config["sources"]["gastat"]
     with pytest.raises(AcquisitionConfigurationError):
         validate_acquisition_sources(phased_config)
+
+
+@pytest.mark.parametrize("sid", DOCUMENT)
+def test_document_pre_observation_entry_accepted(phased_config: dict, sid: str) -> None:
+    validate_acquisition_sources(phased_config)
+    src = phased_config["sources"][sid]
+    assert source_config.observation_state(sid, src) == "PRE_OBSERVATION"
+    assert src["recorded_on"] == UNAVAILABLE
+
+
+@pytest.mark.parametrize(
+    "field,value",
+    [
+        ("access_classification", "public_whatever"),
+        ("documentation_reference", ""),
+        ("terms_reference", None),
+        ("endpoint_templates.TERMS", []),
+        ("parameters.product_all_token", ""),
+        ("parameters.partner_world_token", 1),
+        ("parameters.reporter_token", None),
+        ("parameters.flow_tokens", {"imports": ""}),
+        ("pagination.documentation_reference", ""),
+        ("nomenclature", "TEST-HS"),
+        ("credential_env_var", "lowercase_name"),
+        ("rate_limit.documented_policy", ""),
+        ("expected_content_types", []),
+    ],
+)
+def test_document_observed_values_must_satisfy_shared_rules(
+    phased_config: dict, field: str, value: object
+) -> None:
+    source = phased_config["sources"]["producer_unicoil"]
+    source["recorded_on"] = "2026-09-12"
+    _set_fact(source, field, value)
+    with pytest.raises(AcquisitionConfigurationError, match=field):
+        validate_acquisition_sources(phased_config)
+
+
+@pytest.mark.parametrize(
+    "container", ["", "parameters", "pagination", "rate_limit", "endpoint_templates"]
+)
+def test_unknown_source_key_rejected_for_document(
+    phased_config: dict, container: str
+) -> None:
+    source = phased_config["sources"]["producer_unicoil"]
+    target = source[container] if container else source
+    target["unknown_key"] = "TEST"
+    with pytest.raises(AcquisitionConfigurationError, match="keys"):
+        validate_acquisition_sources(phased_config)
+
+
+def test_document_structural_pins_exact(valid_config: dict) -> None:
+    for sid in DOCUMENT:
+        src = valid_config["sources"][sid]
+        assert src["endpoint_templates"]["DOCUMENT"] == "{document_url}"
+        assert src["pagination"]["kind"] == "NONE"
+        assert src["pagination"]["parameters"] == {}
+        assert "units" not in src["parameters"]
+
+
+def test_s11_and_s12a_mappings_unchanged_and_strict(valid_config: dict) -> None:
+    head = _head_config()
+    for sid in head["sources"]:
+        assert valid_config["sources"][sid] == head["sources"][sid]
+    assert valid_config["raw_store"] == head["raw_store"]
 
 
 @pytest.mark.parametrize("value,expected", [(None, None), ("", None), (UNAVAILABLE, None), ("IOR_X", "IOR_X")])
@@ -306,7 +387,16 @@ def test_configured_credential_env_var_helper(value: str | None, expected: str |
 
 def test_live_yaml_loads_without_invented_enums() -> None:
     cfg = acquisition_sources_config()
-    assert set(cfg["sources"]) == S11 | set(INSTITUTIONAL)
+    assert set(cfg["sources"]) == S11 | set(INSTITUTIONAL) | set(DOCUMENT)
+    for sid, (authority, evidence_class) in DOCUMENT.items():
+        src = cfg["sources"][sid]
+        assert src["authority"] == authority
+        assert src["default_evidence_class"] == evidence_class
+        state = source_config.observation_state(sid, src)
+        if src["recorded_on"] == UNAVAILABLE:
+            assert state == "PRE_OBSERVATION"
+        else:
+            assert state == "OBSERVED"
     for sid, (stage, authority, _) in INSTITUTIONAL.items():
         src = cfg["sources"][sid]
         assert src["authority"] == authority

@@ -77,6 +77,7 @@ class Stage(StrEnum):
     AGGREGATE = "AGGREGATE"
     DIRECTORY = "DIRECTORY"
     REGISTRY = "REGISTRY"
+    DOCUMENT = "DOCUMENT"
 
 
 class ProductScope(StrEnum):
@@ -322,6 +323,62 @@ def _institutional_url_tokens(contract: QueryContract, parameters: Mapping[str, 
     return {"partner": contract.partner}
 
 
+def _document_invariants(contract: QueryContract) -> None:
+    _institutional_invariants(contract, period_scoped=False)
+    keys = {key for key, _ in contract.parameters}
+    if keys != {"document_url"}:
+        raise AcquisitionConfigurationError("DOCUMENT units require exactly document_url parameter")
+
+
+def _plan_documents(
+    *,
+    source_id: str,
+    config: dict[str, Any],
+    candidates: Any | None = None,
+    **_: Any,
+) -> tuple[QueryContract, ...]:
+    cfg = config["sources"][source_id]
+    if candidates is None or not getattr(candidates, "entries", None):
+        return (
+            QueryContract(
+                source_id,
+                Stage.DOCUMENT,
+                cfg["reporter_code"],
+                UNAVAILABLE,
+                UNAVAILABLE,
+                ProductScope.NOT_APPLICABLE,
+                (),
+                cfg["nomenclature"],
+                (),
+                (("document_url", UNAVAILABLE),),
+            ),
+        )
+    contracts: list[QueryContract] = []
+    for entry in candidates.entries:
+        contracts.append(
+            QueryContract(
+                source_id,
+                Stage.DOCUMENT,
+                cfg["reporter_code"],
+                UNAVAILABLE,
+                UNAVAILABLE,
+                ProductScope.NOT_APPLICABLE,
+                (),
+                cfg["nomenclature"],
+                (),
+                (("document_url", entry.document_url),),
+            )
+        )
+    return tuple(contracts)
+
+
+def _document_url_tokens(contract: QueryContract, parameters: Mapping[str, Any]) -> dict[str, Any]:
+    url = dict(contract.parameters).get("document_url", UNAVAILABLE)
+    if not isinstance(url, str) or not url.startswith(("http://", "https://")):
+        raise AcquisitionUnavailable(UnavailableReason.ENDPOINT_UNVERIFIED)
+    return {"document_url": url}
+
+
 STAGE_SPECS: Mapping[Stage, StageSpec] = MappingProxyType({
     Stage.UNIVERSE: StageSpec(Stage.UNIVERSE, lambda c: (c.flow, c.periods[0]), _s11_unit_dict, _universe_invariants, _plan_universe, True, _world_partner_token),
     Stage.PARTNERS: StageSpec(Stage.PARTNERS, lambda c: (c.product_codes[0], c.flow, c.periods[0]), _s11_unit_dict, _partners_invariants, _plan_partners, True, _explicit_partner_token),
@@ -337,6 +394,15 @@ STAGE_SPECS: Mapping[Stage, StageSpec] = MappingProxyType({
     Stage.REGISTRY: StageSpec(Stage.REGISTRY, _institutional_unit_key, _institutional_unit_dict,
         lambda c: _institutional_invariants(c, period_scoped=False),
         lambda **kwargs: _plan_institutional(stage=Stage.REGISTRY, **kwargs), False, _institutional_url_tokens),
+    Stage.DOCUMENT: StageSpec(
+        Stage.DOCUMENT,
+        _institutional_unit_key,
+        _institutional_unit_dict,
+        _document_invariants,
+        _plan_documents,
+        False,
+        _document_url_tokens,
+    ),
 })
 
 

@@ -153,6 +153,94 @@ def double_registry() -> ConnectorRegistry:
     return ConnectorRegistry({"TEST-FIXTURE": DoubleConnector})
 
 
+def pre_observation_document_source_config(
+    source_id: str,
+    *,
+    authority: str,
+    evidence_class: str,
+) -> dict[str, Any]:
+    """PRE_OBSERVATION document source recipe — no invented facts."""
+    return {
+        "authority": authority,
+        "access_classification": UNAVAILABLE,
+        "documentation_reference": UNAVAILABLE,
+        "terms_reference": UNAVAILABLE,
+        "endpoint_templates": {"DOCUMENT": "{document_url}", "TERMS": UNAVAILABLE},
+        "parameters": {
+            "product_all_token": UNAVAILABLE,
+            "partner_world_token": UNAVAILABLE,
+            "reporter_token": UNAVAILABLE,
+            "flow_tokens": UNAVAILABLE,
+        },
+        "pagination": {
+            "kind": "NONE",
+            "documentation_reference": UNAVAILABLE,
+            "parameters": {},
+        },
+        "nomenclature": UNAVAILABLE,
+        "reporter_code": "SAU",
+        "credential_env_var": UNAVAILABLE,
+        "rate_limit": {
+            "documented_policy": UNAVAILABLE,
+            "min_interval_seconds": 2.0,
+            "max_attempts": 3,
+            "timeout_seconds": 60,
+        },
+        "license_capture_required": True,
+        "default_evidence_class": evidence_class,
+        "default_reviewer_status": "unconfirmed_by_responsible_authority",
+        "expected_content_types": UNAVAILABLE,
+        "user_agent": "industrial-opportunity-resolution-mvp/0.2.0 (public-data acquisition; offline runtime)",
+        "recorded_on": UNAVAILABLE,
+    }
+
+
+def document_list_payload(
+    source_id: str,
+    *,
+    entries: list[dict[str, Any]] | None = None,
+    **overrides: Any,
+) -> dict[str, Any]:
+    """Class-D document list double for tests."""
+    default_entry = {
+        "entry_id": "E-001",
+        "document_url": "https://example.test/doc.pdf",
+        "publisher_text": "TEST DOUBLE — NOT REAL EVIDENCE",
+        "publisher_kind": "producer",
+        "document_kind": "product_sheet",
+        "languages": ["en"],
+        "expected_content_type": "application/pdf",
+        "evidence_class_target": "C",
+        "supports": ["DOMESTIC_PRODUCT_PORTFOLIO"],
+        "title_text": "TEST DOUBLE title",
+        "document_date_text": "UNAVAILABLE",
+        "source_reference_text": "UNAVAILABLE",
+    }
+    payload = {
+        "schema_version": "1.0.0",
+        "list_id": f"{source_id}-v1",
+        "source_id": source_id,
+        "recorded_on": "2026-09-12",
+        "recorded_by_seat": "implementer-composer",
+        "consultation_summary_text": "TEST DOUBLE list — not real evidence",
+        "documentation_urls_observed": ["https://example.test/docs"],
+        "entries": entries if entries is not None else [default_entry],
+    }
+    payload.update(overrides)
+    return payload
+
+
+def document_fetch_result(body: bytes, content_type: str) -> FetchResult:
+    return FetchResult(
+        http_status=200,
+        headers_subset=(("content-type", content_type),),
+        body=body,
+        final_url_redacted="https://example.test/doc",
+        fetched_at="2026-09-12T00:00:00Z",
+        content_length_header=len(body),
+    )
+
+
 def pre_observation_source_config(
     source_id: str, *, stage: Stage, authority: str
 ) -> dict[str, Any]:

@@ -86,6 +86,54 @@ def test_aggregate_empty_years_refused_instead_of_silent_no_units(units):
         plan_units(Stage.AGGREGATE, source_id="TEST-FIXTURE", years=(), flows=(), candidates=None, config=config)
 
 
+def test_document_stage_spec_units_and_round_trip():
+    from ior_mvp.acquisition.contracts import AcquisitionUnavailable, UnavailableReason
+    from ior_mvp.acquisition.documents.lists import DocumentEntry, DocumentList
+    from ior_mvp.acquisition.pipeline import plan_units
+
+    config = {"sources": {"TEST-FIXTURE": {
+        "reporter_code": "SAU", "nomenclature": "TEST",
+    }}}
+    empty = plan_units(
+        Stage.DOCUMENT, source_id="TEST-FIXTURE", years=(), flows=(), candidates=None, config=config,
+    )
+    assert len(empty) == 1
+    assert empty[0].parameters == (("document_url", "UNAVAILABLE"),)
+    doc_list = DocumentList(
+        schema_version="1.0.0", list_id="test-v1", source_id="TEST-FIXTURE",
+        recorded_on="2026-09-12", recorded_by_seat="test",
+        consultation_summary_text="test", documentation_urls_observed=(),
+        entries=(DocumentEntry(
+            "E-001", "https://example.test/a.pdf", "pub", "producer", "product_sheet",
+            ("en",), "application/pdf", "C", ("DOMESTIC_PRODUCT_PORTFOLIO",),
+            "title", "UNAVAILABLE", "UNAVAILABLE",
+        ),),
+    )
+    planned = plan_units(
+        Stage.DOCUMENT, source_id="TEST-FIXTURE", years=(), flows=(), candidates=doc_list, config=config,
+    )
+    assert len(planned) == 1
+    assert planned[0].parameters == (("document_url", "https://example.test/a.pdf"),)
+    with pytest.raises(AcquisitionUnavailable) as exc:
+        contracts.stage_spec(Stage.DOCUMENT).url_tokens(empty[0], {})
+    assert exc.value.reason == UnavailableReason.ENDPOINT_UNVERIFIED
+
+
+def test_document_url_tokens_fail_closed():
+    from ior_mvp.acquisition.contracts import AcquisitionUnavailable, UnavailableReason
+
+    contract = QueryContract(
+        "TEST-FIXTURE", Stage.DOCUMENT, "SAU", "UNAVAILABLE", "UNAVAILABLE",
+        ProductScope.NOT_APPLICABLE, (), "TEST", (), (("document_url", "UNAVAILABLE"),),
+    )
+    with pytest.raises(AcquisitionUnavailable) as exc:
+        contracts.stage_spec(Stage.DOCUMENT).url_tokens(contract, {})
+    assert exc.value.reason == UnavailableReason.ENDPOINT_UNVERIFIED
+    good = replace(contract, parameters=(("document_url", "https://example.test/x.pdf"),))
+    tokens = contracts.stage_spec(Stage.DOCUMENT).url_tokens(good, {})
+    assert tokens == {"document_url": "https://example.test/x.pdf"}
+
+
 def test_connector_row_interface_includes_all_five_governed_row_types():
     from typing import get_args, get_type_hints
     from ior_mvp.acquisition.connectors.base import BaseConnector, SourceConnector

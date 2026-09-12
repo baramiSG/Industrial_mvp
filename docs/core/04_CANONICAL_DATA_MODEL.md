@@ -64,7 +64,7 @@ The public steel case leaves the exact imported target specification unresolved.
 
 Value, weight, supplementary quantity and unit are never collapsed into one field.
 
-§2.8 note: acquired analytical snapshots use source-qualified IDs (`UNIVERSE-SAU-<TAG>-…`, `TARIFF-SAU-<TAG>-…`, `PARTNERS-SAU-<TAG>-…`) and are never spliced into frozen public goldens. `PublicSnapshot 2.1` and `SUPPORT_CODES` are unchanged in S11. `NATIONAL_TARIFF_LINE_MAPPING` is acquisition-only until a later governed projection. No BACI snapshot kind exists in S11. S12a adds `DOMESTIC_PRODUCTION_AGGREGATE`, `ESTABLISHMENT_LICENCE_DIRECTORY` and `STANDARD_CONFORMITY_REGISTRY` only to `ACQUIRED_SUPPORT_CODES`; these do not extend the public decision support vocabulary or authorize a decision projection.
+§2.8 note: acquired analytical snapshots use source-qualified IDs (`UNIVERSE-SAU-<TAG>-…`, `TARIFF-SAU-<TAG>-…`, `PARTNERS-SAU-<TAG>-…`) and are never spliced into frozen public goldens. `PublicSnapshot 2.1` and `SUPPORT_CODES` are unchanged in S11. `NATIONAL_TARIFF_LINE_MAPPING` is acquisition-only until a later governed projection. No BACI snapshot kind exists in S11. S12a adds `DOMESTIC_PRODUCTION_AGGREGATE`, `ESTABLISHMENT_LICENCE_DIRECTORY` and `STANDARD_CONFORMITY_REGISTRY` only to `ACQUIRED_SUPPORT_CODES`; these do not extend the public decision support vocabulary or authorize a decision projection. S12b adds no support codes; document passports use existing codes only.
 
 ### AcquiredEvidencePassport 1.0.0
 
@@ -127,6 +127,32 @@ The snapshot contains no `public_decision_contract`, authored state, route,
 screening disposition, gap class, rule result, route-hypothesis result,
 narrative, missing-fact list, condition, or kill-condition list. All are
 computed.
+
+### DocumentRecord 1.0.0
+
+S12b stores span-addressable public documents as a parallel derived-record store under `data/documents/<source_id>/{lists,records}/`, separate from analytical snapshot kinds. Each record is one stored document URL (`Stage.DOCUMENT`), one raw page artifact and one derived text layer. Operator-authored **DocumentList 1.0.0** files under `data/documents/<source_id>/lists/` enumerate bounded entries before a live window; lists are hashed, validated fail-closed and never edited after a run.
+
+**Identity:** `document_id_scheme` is `DOCUMENT_ID_V1`: `DOC-<SOURCE>-<query_hash[:12]>-<raw_sha256[:12]>`. Identical bytes report `ALREADY_STORED`; changed bytes retain history under a new id.
+
+**Exact record keys:** `schema_version` (`1.0.0`), `document_id`, `document_id_scheme`, `source_id`, `source_boundary` (`public`), `kind` (`document`), `as_of_date` (retrieval date), `list_ref` (`path`, `sha256`, `list_id`, `entry_id`), `declared` (publisher/kind/language/type/class/support/title/date/reference copied verbatim from the list entry), `raw_artifact_ref` (source/stage/unit/query/run/artifact/path/sha256/compressed_sha256/byte_count/content_type/http_status/retrieved_at/endpoint_or_document), `coverage` (`LATEST_RUN_PER_SOURCE_STAGE_UNIT`, unit key, query hash, selected run, superseded runs, `COMPLETE` status), `text_layer`, `segmentation`, `page_count`, `line_count`, `pages`, `transformation_record`, `quality_summary`, `evidence` (one acquired passport).
+
+**Text layer derivation (dev-only dependency `pypdf==6.16.1`; runtime image free of pypdf):**
+
+| Content type | method_id | extraction |
+|---|---|---|
+| `application/pdf` | `PDF_TEXT_LAYER_PYPDF_LAYOUT` | layout mode; verbatim lines per page |
+| `text/html`, `application/xhtml+xml` | `HTML_TEXT_LAYER_STDLIB` | stdlib block-tag extraction; script/style/template/noscript excluded |
+| `text/plain` | `PLAIN_TEXT_LAYER_STDLIB` | strict UTF-8 |
+
+Segmentation uses `LINE_SEGMENTATION_V1` / `1.0.0`: CRLF and lone CR become LF boundaries, exactly one trailing empty segment is dropped when text ends in LF, and all other lines remain verbatim. Each page carries `page_index`, `line_count`, `text_sha256 = sha256("\n".join(lines))` and `lines`. Every PDF page is retained in physical order with its 1-based PDF page number, including empty-text pages (`lines: []`, `line_count: 0`); `page_count` equals the physical PDF page count when the PDF is parseable. No OCR, normalisation or translation is applied.
+
+**Text order (PDF):** `PDF_TEXT_LAYER_PYPDF_LAYOUT 1.0.0` stores the PDF content-stream text order verbatim. Where a publisher PDF paints Arabic in visual (left-to-right glyph) order, the stored lines are visual-order Arabic; `quality_summary: PASS` denotes a COMPLETE extracted text layer, not logical reading order. Logical order is guaranteed only where the PDF's ToUnicode mapping yields it (the CID fixture case pinned by `test_arabic_cid_pdf_preserves_logical_order_verbatim`). No bidi reordering or reshaping is applied; logical-order recovery is S20 normalisation. Stored records affected by visual order are named in KNOWN_LIMITATIONS.
+
+**Statuses:** `text_layer.status` is `COMPLETE` when at least one non-whitespace line exists on any page; otherwise `UNAVAILABLE` with `reason` `FORMAT_NOT_PARSEABLE` and `detail` in `{NO_TEXT_LAYER, PARSER_ERROR, NOT_UTF8}`. A parseable PDF with no text still retains all physical page entries for stable addressing. `quality_summary` is `PASS` for `COMPLETE` text layers and `RAW_ONLY` when the text layer is unavailable but the raw envelope was stored. `FORMAT_NOT_PARSEABLE` describes stored-body parse refusal at build time, not pre-storage policy refusals.
+
+**Envelope policy (`DOCUMENT_ENVELOPE`):** exactly `application/pdf`, `text/html`, `application/xhtml+xml` and `text/plain` may be stored; other declared types are refused before storage as `OUT_OF_SCOPE_CONTENT` / `UnsupportedDocumentEnvelope` with hash-only metadata. Oversize bodies are honest `UNAVAILABLE` under unchanged raw-store budgets.
+
+`transformation_record.config_version` for documents is `1.2.0` (acquisition config semantics); `pipeline_version` remains `1.0.0`. The builder selects the latest run per source/stage/unit and records every sorted prior run id in `coverage.superseded_run_ids`; records then pin that selected raw run and re-derive byte-for-byte under document reconstruction. No numeric, normalised capacity/compliance or personal-data fields appear in the record contract.
 
 ### 2.4 Plant and ProductionLine
 

@@ -25,7 +25,7 @@ def test_browser_dependencies_are_isolated_in_exact_e2e_extra() -> None:
     project = tomllib.loads(PYPROJECT.read_text(encoding="utf-8"))
     extras = project["project"]["optional-dependencies"]
 
-    assert extras["dev"] == ["pytest>=8,<9", "httpx>=0.27,<1"]
+    assert extras["dev"] == ["pytest>=8,<9", "httpx>=0.27,<1", "pypdf==6.16.1"]
     assert extras["e2e"] == [
         "Pillow==12.3.0",
         "playwright==1.62.0",
