@@ -282,6 +282,7 @@ Delivered on the squash merge of S12b (PR #17, `9a9d5c7`) after Fable independen
 | V3-RECON-entities | Mention list, rule table, every input and entity artifact reconstruct byte-for-byte under manifest coverage. | Temp-root tamper/missing-row tests and pre-generation repository reconstruction `ENTITY RECONSTRUCTION PASS (1 artifacts, 38 links)`; generated-manifest proof remains T9/T10. | PARTIAL | s12c |
 
 S12c evidence: `.workflow/slices/S12c-entity-resolution-bilingual-ids/implementation_log.md` and `test_evidence.md`; ADR-018; KL-67–73. At T7, implementation evidence only: manifest run count 0, independent implementation review/PR/CI/merge pending, and no engine consumption before S13/S14.
+Delivered on the squash merge of S12c (PR #19, `78c002f`) after the T9 single manifest run (2026-09-12T11:25:47Z) and T10 gates, reviewer-grok independent APPROVE (zero findings) and hosted CI 5/5 on the exact head (run 34692240675); statuses above are unchanged by the merge — `V3-ENTITY-ids` and `V3-ENTITY-normalisation` TESTED; `V3-ENTITY-links-real` and `V3-RECON-entities` remain PARTIAL as their Status cells state (real links limited to the five short-label companies, unresolved legal names and pending mentions; generated-manifest reconstruction proof recorded in ADR-018/`test_evidence.md`, the row's own evidence cell not rewritten by this records PR).
 
 ## Branch and release-state rules
 
