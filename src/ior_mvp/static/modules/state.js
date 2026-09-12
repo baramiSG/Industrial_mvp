@@ -8,6 +8,16 @@ export const state = {
   manifest: null,
   extraction: null,
   requestEpoch: 0,
+  screening: {
+    summary: null,
+    evidence: null,
+    view: "summary",
+    queueId: null,
+    offset: 0,
+    page: null,
+    record: null,
+    requestEpoch: 0,
+  },
 };
 
 export function nextRequestEpoch() {

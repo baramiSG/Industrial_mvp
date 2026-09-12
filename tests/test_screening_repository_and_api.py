@@ -20,6 +20,26 @@ def _client():
     return TestClient(app)
 
 
+@pytest.fixture(autouse=True)
+def _isolate_repository_caches():
+    from ior_mvp.screening import repository
+
+    cached_names = (
+        "_screening_directory",
+        "screening_snapshot",
+        "_screening_shard",
+    )
+    for name in cached_names:
+        clear = getattr(getattr(repository, name), "cache_clear", None)
+        if clear is not None:
+            clear()
+    yield
+    for name in cached_names:
+        clear = getattr(getattr(repository, name), "cache_clear", None)
+        if clear is not None:
+            clear()
+
+
 def test_loader_lru_cache_and_fail_closed_on_invalid_snapshot(tmp_path, monkeypatch):
     from ior_mvp.screening import repository
 
@@ -188,3 +208,136 @@ def test_screening_api_records_endpoint_reads_shard_lazily(
     assert response.status_code == 200
     assert "records/72.json" in opened
     assert "records/39.json" not in opened
+
+
+def _frozen_summary() -> dict:
+    from ior_mvp.config import PROJECT_ROOT
+
+    path = (
+        PROJECT_ROOT
+        / "data"
+        / "screening"
+        / "snapshots"
+        / "SCREENING-SAU-2026-09-12-9b6b22032fd8"
+        / "summary.json"
+    )
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def test_evidence_route_returns_eight_universe_passports_verbatim():
+    expected = _frozen_summary()
+    response = _client().get("/api/screening/evidence")
+
+    assert response.status_code == 200
+    payload = response.json()
+    assert set(payload) == {
+        "snapshot_id",
+        "as_of_date",
+        "source_boundary",
+        "synthetic_flag",
+        "evidence_passports",
+        "universe_units",
+        "authority",
+    }
+    assert payload["snapshot_id"] == "SCREENING-SAU-2026-09-12-9b6b22032fd8"
+    assert payload["source_boundary"] == "public"
+    assert payload["synthetic_flag"] is False
+    assert payload["evidence_passports"] == expected["evidence_passports"]
+    assert payload["universe_units"] == expected["universe_status"]["units"]
+    assert [list(row) for row in payload["evidence_passports"]] == [
+        list(row) for row in expected["evidence_passports"]
+    ]
+    assert [list(row) for row in payload["universe_units"]] == [
+        list(row) for row in expected["universe_status"]["units"]
+    ]
+    assert [row["passport_id"] for row in payload["evidence_passports"]] == [
+        "un_comtrade-37d131466dff-20260912T143742Z",
+        "un_comtrade-3f892bf254a9-20260912T143742Z",
+        "un_comtrade-464c4f670ca8-20260912T143742Z",
+        "un_comtrade-5bc875b4a56b-20260912T143742Z",
+        "un_comtrade-6b9efd5f68db-20260912T143742Z",
+        "un_comtrade-7a7ebf8cf5ab-20260912T143742Z",
+        "un_comtrade-a3cc3f1befa0-20260912T143742Z",
+        "un_comtrade-ceec907cc0b6-20260912T143742Z",
+    ]
+    assert payload["authority"] == {
+        "screening_config_version": "1.0.0",
+        "thresholds_version": "1.2.0",
+        "product_families_version": "1.0.0",
+        "acquisition_config_version": "1.3.0",
+    }
+
+
+def test_evidence_route_without_snapshot_is_explicit(monkeypatch):
+    from ior_mvp.screening import api
+
+    monkeypatch.setattr(api.repository, "screening_snapshot", lambda: None)
+    response = _client().get("/api/screening/evidence")
+
+    assert response.status_code == 200
+    assert response.json() == {
+        "snapshot_id": None,
+        "as_of_date": None,
+        "source_boundary": "public",
+        "synthetic_flag": False,
+        "evidence_passports": [],
+        "universe_units": [],
+        "reason_codes": ["NO_SCREENING_SNAPSHOT"],
+        "authority": {
+            "screening_config_version": "1.0.0",
+            "thresholds_version": "1.2.0",
+            "product_families_version": "1.0.0",
+            "acquisition_config_version": "1.3.0",
+        },
+    }
+
+
+def test_evidence_route_ignores_mode_and_carries_no_synthetic_flag_true():
+    client = _client()
+    public = client.get("/api/screening/evidence")
+    simulated = client.get("/api/screening/evidence?mode=simulated")
+
+    assert public.status_code == simulated.status_code == 200
+    assert simulated.json() == public.json()
+    for forbidden in (
+        '"synthetic_flag":true',
+        "DEMO_GENERATOR",
+        "SYN-MINISTRY",
+        "scenario_id",
+    ):
+        assert forbidden not in public.text
+
+
+def test_existing_three_route_key_sets_are_unchanged():
+    from ior_mvp.screening import repository
+
+    client = _client()
+    summary_payload = client.get("/api/screening").json()
+    queue_payload = client.get(
+        "/api/screening/queues/robust_public_finding?offset=0&limit=1"
+    ).json()
+    record_payload = client.get("/api/screening/records/030579").json()
+    loaded_record = repository.screening_record("030579")
+
+    assert set(summary_payload) == {
+        "snapshot_id",
+        "as_of_date",
+        "universe_status",
+        "coverage_accounting",
+        "counts",
+        "queues",
+        "methodology_queue_mapping",
+        "unqueued_candidates",
+        "authority",
+        "synthetic_flag",
+    }
+    assert set(queue_payload) == {
+        "queue_id",
+        "total",
+        "offset",
+        "limit",
+        "ordering_basis",
+        "entries",
+    }
+    assert loaded_record is not None
+    assert set(record_payload) == set(loaded_record) | {"evidence_passports"}

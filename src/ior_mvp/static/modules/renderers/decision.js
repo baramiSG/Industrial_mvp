@@ -1,10 +1,10 @@
 import {
+  decisionChip,
   escapeHtml,
   labelValue,
   narrativeEntry,
   sourceCaption,
   sourceIsland,
-  stateChip,
   technical,
 } from "../dom.js";
 import { integer, money, number, usd } from "../formatters.js";
@@ -28,7 +28,7 @@ export function renderDecisionHero(props) {
     : sourceIsland(props.route, "bdi");
   return `
     <article class="workspace-card decision-hero">
-      <div class="decision-state-large state-${escapeHtml(props.state)}">${stateChip(props.state)}</div>
+      <div class="decision-state-large state-${escapeHtml(props.state ?? props.screening_disposition)}">${decisionChip(props.state, props.screening_disposition)}</div>
       <div>
         ${localized ? "" : sourceCaption()}
         ${headline}

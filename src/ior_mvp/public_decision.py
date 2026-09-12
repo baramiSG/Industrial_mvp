@@ -22,6 +22,9 @@ class DecisionIntegrityError(EvidenceIntegrityError):
     """The evidence is valid but no lawful decision result exists."""
 
 
+NO_CANDIDATE_REASON_CODE = "NO_TRIGGER_FIRED"
+
+
 DECISION_REASON_CODES = frozenset(
     {
         "HARD_EXCLUSION_SATISFIED",
@@ -35,6 +38,7 @@ DECISION_REASON_CODES = frozenset(
         "ROUTE_CHANGING_EVIDENCE_UNRESOLVED",
         "NAMED_TRIGGER_MONITOR",
         "ROUTE_DETERMINATION_UNRESOLVED",
+        NO_CANDIDATE_REASON_CODE,
     }
 )
 
@@ -1159,6 +1163,19 @@ def _deep_state_result(
     return result
 
 
+def _no_candidate_result() -> dict[str, Any]:
+    if NO_CANDIDATE_REASON_CODE not in DECISION_REASON_CODES:
+        raise DecisionIntegrityError(
+            f"Unregistered decision reason code: {NO_CANDIDATE_REASON_CODE}"
+        )
+    return {
+        "state": None,
+        "route_code": None,
+        "screening_disposition": "NO_CANDIDATE",
+        "decision_reason_code": NO_CANDIDATE_REASON_CODE,
+    }
+
+
 def select_deep_state(
     *,
     case: dict[str, Any],
@@ -1279,6 +1296,8 @@ def select_deep_state(
             route_code=None,
             decision_reason_code="ROUTE_DETERMINATION_UNRESOLVED",
         )
+    if not fired:
+        return _no_candidate_result()
     raise DecisionIntegrityError(
         "Admitted deep case has no legal branch"
     )
@@ -1359,6 +1378,16 @@ def _decision_narrative_keys(
 ) -> tuple[str, str | None, str]:
     state = state_result["state"]
     reason = state_result["decision_reason_code"]
+    if (
+        state is None
+        and state_result.get("screening_disposition") == "NO_CANDIDATE"
+        and reason == NO_CANDIDATE_REASON_CODE
+    ):
+        return (
+            "decision.public.no_candidate.headline",
+            "decision.public.no_candidate.route",
+            "decision.public.no_candidate.rationale",
+        )
     if state == "INVESTIGATE":
         if preferred is None or preferred.get("route_code") == 0:
             return (
@@ -1412,6 +1441,12 @@ def _condition_keys(
 ) -> tuple[list[str], list[str]]:
     state = state_result["state"]
     reason = state_result["decision_reason_code"]
+    if (
+        state is None
+        and state_result.get("screening_disposition") == "NO_CANDIDATE"
+        and reason == NO_CANDIDATE_REASON_CODE
+    ):
+        return (["decision.public.no_candidate.condition"], [])
     if state == "INVESTIGATE":
         return (
             [

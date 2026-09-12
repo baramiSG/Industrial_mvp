@@ -289,6 +289,14 @@ _FOCUS_INVENTORY_SCRIPT = """() => {
   const identity = (element) => {
     if (element.dataset.target) return `nav:${element.dataset.target}`;
     if (element.dataset.mode) return `mode:${element.dataset.mode}`;
+    if (element.dataset.queueId) return `queue:${element.dataset.queueId}`;
+    if (element.dataset.hs6) return `record:${element.dataset.hs6}`;
+    if (element.dataset.screeningBack) {
+      return `screening-back:${element.dataset.screeningBack}`;
+    }
+    if (element.dataset.screeningPage) {
+      return `page:${element.dataset.screeningPage}`;
+    }
     if (element.getAttribute("href")) {
       return `href:${element.getAttribute("href")}`;
     }
@@ -322,6 +330,14 @@ _FOCUSED_CONTROL_SCRIPT = """() => {
   const identity = (() => {
     if (element.dataset.target) return `nav:${element.dataset.target}`;
     if (element.dataset.mode) return `mode:${element.dataset.mode}`;
+    if (element.dataset.queueId) return `queue:${element.dataset.queueId}`;
+    if (element.dataset.hs6) return `record:${element.dataset.hs6}`;
+    if (element.dataset.screeningBack) {
+      return `screening-back:${element.dataset.screeningBack}`;
+    }
+    if (element.dataset.screeningPage) {
+      return `page:${element.dataset.screeningPage}`;
+    }
     if (element.getAttribute("href")) {
       return `href:${element.getAttribute("href")}`;
     }

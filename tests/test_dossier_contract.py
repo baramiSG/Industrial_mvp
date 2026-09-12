@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import re
 from copy import deepcopy
 from pathlib import Path
@@ -8,6 +9,7 @@ import pytest
 import yaml
 from fastapi.testclient import TestClient
 
+import ior_mvp.decision_engine as decision_engine
 from ior_mvp.app import app
 from ior_mvp.config import PROJECT_ROOT
 from ior_mvp.decision_engine import analyze
@@ -407,6 +409,39 @@ def test_public_dossier_projects_generalized_decision_diagnostics() -> None:
         analysis["evidence_class_assessment"]
     )
     assert dossier["hard_exclusions"] == analysis["hard_exclusions"]
+
+
+def test_dossier_renders_no_candidate_disposition_label_instead_of_none(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    case = json.loads(
+        (
+            PROJECT_ROOT
+            / "tests"
+            / "fixtures"
+            / "public_decision"
+            / "no-candidate-no-fired-signal.json"
+        ).read_text(encoding="utf-8")
+    )
+    monkeypatch.setattr(
+        decision_engine,
+        "get_public_case",
+        lambda opportunity_id: deepcopy(case),
+    )
+    analysis = decision_engine.analyze(case["opportunity"]["id"], "public")
+    dossier = build_dossier(analysis)
+
+    assert dossier["decision_state"] is None
+    assert dossier["screening_disposition"] == "NO_CANDIDATE"
+    for locale in ("en", "ar"):
+        rendered = render_dossier_html(dossier, locale=locale)
+        state_block = rendered.split(
+            '<div class="state">',
+            maxsplit=1,
+        )[1].split("</div>", maxsplit=1)[0]
+        assert _ui_strings(locale)["disposition.no_candidate"] in rendered
+        assert "NO_CANDIDATE" in state_block
+        assert not re.search(r"(?:None|null)", state_block)
 
 
 @pytest.mark.parametrize(

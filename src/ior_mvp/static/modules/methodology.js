@@ -1,15 +1,22 @@
 import {
   escapeHtml,
-  executionChip,
+  executionLabel,
   fireText,
+  narrativeEntry,
   ruleBoundaryChip,
-  sourceCaption,
   sourceIsland,
   technical,
 } from "./dom.js";
 import { integer } from "./formatters.js";
 import { t } from "./i18n.js";
 import { state } from "./state.js";
+
+function localizedField(row, field) {
+  const localized = row.localized?.[state.locale];
+  return localized?.[field]
+    ? narrativeEntry(localized[field])
+    : sourceIsland(row[field]);
+}
 
 export function renderMethodology() {
   if (!state.analysis) return;
@@ -27,7 +34,6 @@ export function renderMethodology() {
       `).join("")}
     </div>
     <div class="methodology-table-wrap">
-      ${sourceCaption()}
       <table class="rule-table">
         <thead>
           <tr>
@@ -40,10 +46,10 @@ export function renderMethodology() {
         <tbody>
           ${rules.map((row) => `
             <tr class="${row.synthetic_flag ? "synthetic-row" : ""}">
-              <td><b>${technical(row.rule_id)}</b> ${ruleBoundaryChip(row)} · ${sourceIsland(row.name)}</td>
-              <td>${executionChip(row.execution)}</td>
+              <td><b>${technical(row.rule_id)}</b> ${ruleBoundaryChip(row)} · ${localizedField(row, "name")}</td>
+              <td>${escapeHtml(executionLabel(row.execution))}</td>
               <td>${fireText(row.fired)}</td>
-              <td>${sourceIsland(row.result)}</td>
+              <td>${localizedField(row, "result")}</td>
             </tr>
           `).join("")}
         </tbody>

@@ -170,6 +170,9 @@
     --layout-full-span: 1 / -1;
     --layout-flow-span: 1 / 3;
     --layout-dossier-columns: repeat(2, minmax(0, 1fr));
+    --layout-screening-columns: repeat(2, minmax(0, 1fr));
+    --layout-screening-direction: row;
+    --layout-screening-align: center;
 
     --breakpoint-wide: 1180px;
     --breakpoint-tablet: 900px;
@@ -284,6 +287,9 @@
       --layout-kpi-columns: repeat(2, minmax(0, 1fr));
       --layout-metric-columns: repeat(2, minmax(0, 1fr));
       --layout-decision-columns: minmax(0, 1fr);
+      --layout-screening-columns: minmax(0, 1fr);
+      --layout-screening-direction: column;
+      --layout-screening-align: stretch;
     }
   }
 
@@ -291,7 +297,7 @@
     :root {
       --layout-sidebar-position: static;
       --layout-sidebar-width: auto;
-      --layout-nav-columns: repeat(5, minmax(0, 1fr));
+      --layout-nav-columns: repeat(6, minmax(0, 1fr));
       --layout-nav-overflow: auto;
       --layout-main-offset: 0;
       --layout-topbar-position: static;

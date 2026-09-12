@@ -296,3 +296,25 @@ The POC is successful when a Ministry audience can observe, without explanation 
 The earlier MVP exclusion is limited to **deep resolution** of the full HS6
 universe. S13a screens the acquired universe; deep cases remain a governed
 subset.
+
+## 12. S13b bilingual screening-surface requirements
+
+- **FR-084 — Bilingual route-specific analyst surface.** The primary
+  application mounts the public screening API and renders the universe
+  summary, five route-specific Pareto queues and record drill-down in Arabic
+  and English. UNAVAILABLE, PARTIAL and empty-queue states remain explicit;
+  no ordinal master list is introduced.
+- **FR-085 — Governed Arabic analytical parity.** In Arabic mode, rule names,
+  results, decision effects, screening codes and decision boundaries render
+  from the versioned Arabic catalogues. English engine prose remains
+  byte-identical to the corresponding English catalogue templates. Verbatim
+  source spans and technical values are visibly isolated and do not satisfy
+  the catalogue-parity obligation.
+- **FR-086 — Null formal state for no trigger.** An admitted deep case with no
+  fired candidate signal returns `screening_disposition=NO_CANDIDATE`, null
+  formal state and registered reason `NO_TRIGGER_FIRED`; it does not raise an
+  HTTP 422 response or imply `ADVANCE`.
+- **FR-087 — Governed visual-matrix extension.** The visual oracle covers the
+  four screening views in both locales and approved viewports, extending the
+  matrix from 40 to 56 entries through the Manifest §7 change gate while
+  retaining exact frozen public outcomes.

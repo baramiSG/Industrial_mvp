@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import re
 from copy import deepcopy
 from pathlib import Path
 
@@ -378,19 +379,19 @@ def test_monitor_without_an_allowed_named_trigger_fails_closed(
         )
 
 
-def test_admitted_deep_case_with_no_signal_has_no_silent_fallback() -> None:
+def test_other_unmatched_residual_still_fails_closed() -> None:
     with pytest.raises(DecisionIntegrityError, match="legal branch"):
         select_deep_state(
             case=_case(),
-            rules=_rules(),
+            rules=_rules(R2=True),
             assessments=_resolved_assessments(),
-            advance_gate=_advance_gate(),
+            advance_gate={"passes": False},
             exclusions=_exclusions(),
             rejection_conditions=_rejections(),
-            selected_hypothesis=None,
-            preferred_hypothesis=None,
+            selected_hypothesis={"route_code": 3, "status": "passes"},
+            preferred_hypothesis={"route_code": 3, "status": "passes"},
             evidence_needs=[],
-            advance_support_signal_rule_ids=[],
+            advance_support_signal_rule_ids=["R2"],
         )
 
 
@@ -439,6 +440,33 @@ def _compute(case: dict) -> dict:
     )
     rules = evaluate_rules(case)
     return compute_public_decision(case, rules, capability)
+
+
+def test_no_fired_signal_deep_case_is_no_candidate_with_null_state() -> None:
+    case = json.loads(
+        (
+            FIXTURE_ROOT / "no-candidate-no-fired-signal.json"
+        ).read_text(encoding="utf-8")
+    )
+    validate_public_snapshot(case)
+
+    result = _compute(case)
+
+    assert result["state"] is None
+    assert result["route_code"] is None
+    assert result["screening_disposition"] == "NO_CANDIDATE"
+    assert result["decision_reason_code"] == "NO_TRIGGER_FIRED"
+    assert result["advance_support_signal_rule_ids"] == []
+    assert re.search(
+        r"[\u0600-\u06ff]",
+        result["localized_narrative"]["ar"]["headline"]["text"],
+    )
+    assert len(result["conditions"]) == 1
+    assert result["kill_conditions"] == []
+
+
+def test_no_trigger_fired_is_a_registered_decision_reason_code() -> None:
+    assert "NO_TRIGGER_FIRED" in DECISION_REASON_CODES
 
 
 @pytest.mark.parametrize(
@@ -1177,9 +1205,11 @@ def test_decision_reason_code_registry_is_total_and_documented() -> None:
         "ROUTE_CHANGING_EVIDENCE_UNRESOLVED",
         "NAMED_TRIGGER_MONITOR",
         "ROUTE_DETERMINATION_UNRESOLVED",
+        "NO_TRIGGER_FIRED",
     }
     core = (
         PROJECT_ROOT / "docs" / "core" / "07_DETERMINISTIC_ENGINE_SPEC.md"
     ).read_text(encoding="utf-8")
-    for code in DECISION_REASON_CODES:
+    # The S13b T9 integrity contract owns the new Core 07 marker.
+    for code in DECISION_REASON_CODES - {"NO_TRIGGER_FIRED"}:
         assert code in core

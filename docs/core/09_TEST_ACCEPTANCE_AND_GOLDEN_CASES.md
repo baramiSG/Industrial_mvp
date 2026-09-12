@@ -131,6 +131,21 @@ control and approved viewport, including keyboard focus, WCAG 2.1 A/AA, bidirect
 layout, intended-font rendering, dossier print/PDF, console and network failures.
 Post-redesign visual baselines are hashed test oracles: comparison is deterministic,
 updates require an explicit reviewer-approved procedure, and CI shall never update them.
+The S13b matrix has 56 entries: fourteen screens in two locales and two
+viewports. Baseline regeneration records per-entry pixel drift against the
+pre-existing 40-entry set and requires every changed pixel to be confined to
+the approved sidebar or integrity-authority regions.
+
+Arabic analytical parity has two parts. First, governed prose and code labels
+must come from the Arabic catalogues; verbatim source spans and classified
+technical values are the only permitted LTR islands. Second, outside those
+islands an Arabic container must have no run of three or more alphabetic Latin
+words. Each island must match the technical-value grammar or be a verbatim
+source span marked `lang=en` with a catalogue caption. Tests also reject any
+catalogue label disguised as a `code_token`, `catalogue_key`, or `governed_id`.
+The grammar can admit ALL-CAPS English words, snake/dotted lowercase English
+and Title-Case-plus-digit strings; content parity therefore also requires
+English-template equality and the catalogue-label leak check.
 
 ## 3. Threshold boundary tests
 
@@ -156,7 +171,16 @@ Required assertions:
 4. public-decision fingerprint before and after simulation is identical;
 5. simulated dossier includes disclosure;
 6. real dossier does not include a synthetic disclosure;
-7. a malformed synthetic scenario fails closed.
+7. a malformed synthetic scenario fails closed;
+8. all four mounted screening routes are public-only: their JSON contains no
+   synthetic marker, the summary and evidence payloads are unchanged by
+   `?mode=simulated`, and the route does not accept a mode contract; and
+9. every screening DOM view remains free of both evidence-policy synthetic
+   warning labels while simulated opportunity mode is active, and screening
+   requests carry no `mode` query parameter.
+
+TL-09 assertions 8 and 9 extend the synthetic-isolation boundary to the
+summary, queue, record and evidence-passport screening surfaces.
 
 ## 5. Snapshot test policy
 
@@ -382,3 +406,14 @@ snapshot bytes, identities, counts, queue references or inputs fail closed.
 The steel public fixture remains INVESTIGATE and the polypropylene public
 fixture remains REJECT for generic capacity support; screening acceptance
 cannot alter either golden.
+
+The KL-34 fixture `no-candidate-no-fired-signal.json` is accepted by the
+PublicSnapshot validator and must return HTTP 200 with null formal state,
+null route, `screening_disposition=NO_CANDIDATE`, reason
+`NO_TRIGGER_FIRED`, bilingual catalogue narrative and a null-safe dossier.
+Another unmatched residual with a fired candidate signal must still raise the
+decision-integrity error.
+
+The visual acceptance matrix contains 56 entries. The canonical update,
+manifest validation, host comparison, ownership check and measured 40-entry
+drift review are distinct required proofs.

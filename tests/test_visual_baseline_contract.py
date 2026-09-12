@@ -42,6 +42,10 @@ SCREENS = (
     "journey-e-steel-simulated-dossier",
     "journey-e-polypropylene-public-dossier",
     "journey-e-polypropylene-simulated-dossier",
+    "journey-f-screening-summary",
+    "journey-f-screening-queue-robust",
+    "journey-f-screening-queue-empty",
+    "journey-f-screening-record",
 )
 
 
@@ -66,7 +70,7 @@ def test_pillow_is_an_exact_e2e_only_dependency() -> None:
     ]
 
 
-def test_visual_manifest_has_exact_40_entry_locale_viewport_screen_matrix() -> None:
+def test_visual_manifest_has_exact_56_entry_locale_viewport_screen_matrix() -> None:
     entries = _manifest()["entries"]
     actual = {
         (entry["locale"], entry["viewport"], entry["screen"])
@@ -74,7 +78,7 @@ def test_visual_manifest_has_exact_40_entry_locale_viewport_screen_matrix() -> N
     }
     expected = set(product(LOCALES, VIEWPORTS, SCREENS))
 
-    assert len(entries) == 40
+    assert len(entries) == 56
     assert actual == expected
     assert len(actual) == len(entries)
 
@@ -123,7 +127,7 @@ def test_visual_manifest_and_every_webp_hash_size_dimensions_and_rgb_decode_matc
 def test_visual_baseline_files_are_lossless_webp_with_600_kib_and_12_mib_budgets() -> None:
     files = sorted(BASELINE_ROOT.glob("*/*/*.webp"))
 
-    assert len(files) == 40
+    assert len(files) == 56
     assert all(path.read_bytes()[12:16] == b"VP8L" for path in files)
     assert all(path.stat().st_size <= 600 * 1024 for path in files)
     assert sum(path.stat().st_size for path in files) <= 12 * 1024 * 1024
@@ -187,6 +191,56 @@ def test_visual_code_never_reads_s06_documentary_references() -> None:
 
     assert "reference-screenshots/v0.2.0" not in sources
     assert "S06-browser-acceptance-harness" not in sources
+
+
+def test_screening_visual_anchor_quantizes_scroll_before_capture() -> None:
+    source = (
+        PROJECT_ROOT / "browser_tests" / "test_visual_baselines.py"
+    ).read_text(encoding="utf-8")
+
+    assert "def _anchor_screening" in source
+    assert "Math.round" in source
+    assert "requestAnimationFrame" in source
+    assert "page.screenshot(" in source
+
+
+def test_screening_visual_anchor_waits_for_fonts_before_measuring_layout() -> None:
+    source = (
+        PROJECT_ROOT / "browser_tests" / "test_visual_baselines.py"
+    ).read_text(encoding="utf-8")
+    helper = source.split("def _anchor_screening", 1)[1].split(
+        "@pytest.mark.parametrize", 1
+    )[0]
+
+    assert "await document.fonts.ready" in helper
+    assert helper.index("await document.fonts.ready") < helper.index(
+        "getBoundingClientRect"
+    )
+
+
+def test_screening_visual_anchor_cancels_smooth_scroll_before_capture() -> None:
+    source = (
+        PROJECT_ROOT / "browser_tests" / "test_visual_baselines.py"
+    ).read_text(encoding="utf-8")
+    helper = source.split("def _anchor_screening", 1)[1].split(
+        "@pytest.mark.parametrize", 1
+    )[0]
+
+    assert 'root.style.scrollBehavior = "auto"' in helper
+    assert 'behavior: "auto"' in helper
+    assert "SCREENING_ANCHOR_NOT_SETTLED" in helper
+
+
+def test_screening_visual_anchor_waits_for_navigation_scroll_to_settle() -> None:
+    source = (
+        PROJECT_ROOT / "browser_tests" / "test_visual_baselines.py"
+    ).read_text(encoding="utf-8")
+    helper = source.split("def _anchor_screening", 1)[1].split(
+        "@pytest.mark.parametrize", 1
+    )[0]
+
+    assert "stableFrames < 3" in helper
+    assert "NAVIGATION_SCROLL_NOT_SETTLED" in helper
 
 
 def test_update_requires_explicit_flag_reason_non_ci_and_canonical_image() -> None:

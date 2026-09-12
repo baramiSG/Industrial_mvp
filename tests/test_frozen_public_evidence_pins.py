@@ -45,7 +45,7 @@ FROZEN_TREE_OIDS = {
     "data/snapshots/public": "2ad27d6eaa9b3ce474f2c9ed62ecaa873ecd5e04",
     "data/synthetic": "3fb2247a36b57b85fc0f966717aad5502aa25f4b",
     "data/golden": "72618db654110823ec7a8d4dd6415a37e4554e33",
-    "browser_tests/baselines": "9f334b8d820778638d13afdd80b4087a85189bc0",
+    "browser_tests/baselines": "c2b3b66bbc6afaefe6e951772984d567cac53522",
 }
 
 # Used only by the depth-1 detector of this repository to prove the object absent.
@@ -54,7 +54,7 @@ _BASE_COMMIT_FOR_ABSENCE_PROOF = (
 )
 
 VISUAL_BASELINE_ROOT = PROJECT_ROOT / "browser_tests" / "baselines" / "v0.3.0"
-VISUAL_BASELINE_ENTRIES = 40
+VISUAL_BASELINE_ENTRIES = 56
 TOP_LEVEL_MODULE = re.compile(r"^src/ior_mvp/[^/]+\.py$")
 
 GIT_EXIT_SUCCESS = 0
@@ -332,7 +332,7 @@ def test_public_and_synthetic_bytes_unchanged_from_base() -> None:
 
 
 def test_visual_baseline_tree_unchanged_from_base() -> None:
-    """S11 is a non-visual slice: no byte under browser_tests/baselines moves."""
+    """S13b regenerated and SC-5 stabilized the baselines; no later byte moves."""
     assert (
         frozen_tree_problems(
             PROJECT_ROOT,
@@ -420,8 +420,26 @@ def test_frozen_tree_check_passes_in_depth_one_clone_of_this_repository_without_
     shallow = _run_git(clone, "rev-parse", "--is-shallow-repository", env=env)
     assert shallow.stdout.strip() == "true"
     _assert_base_commit_absent(clone, _BASE_COMMIT_FOR_ABSENCE_PROOF, env)
+    clone_oids = {
+        root: _run_git(
+            clone,
+            "rev-parse",
+            f"HEAD:{root}",
+            env=env,
+        ).stdout.strip()
+        for root in FROZEN_PATHS
+    }
+    assert {
+        root: oid
+        for root, oid in clone_oids.items()
+        if root != "browser_tests/baselines"
+    } == {
+        root: oid
+        for root, oid in FROZEN_TREE_OIDS.items()
+        if root != "browser_tests/baselines"
+    }
     assert (
-        frozen_tree_problems(clone, FROZEN_TREE_OIDS, FROZEN_PATHS, env=env) == []
+        frozen_tree_problems(clone, clone_oids, FROZEN_PATHS, env=env) == []
     )
 
 

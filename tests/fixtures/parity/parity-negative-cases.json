@@ -1,0 +1,38 @@
+[
+  {
+    "id": "prose-island",
+    "kind": "island",
+    "html": "<span dir=\"ltr\">Evidence not acquired for this line</span>",
+    "expect": {"island_failures": 1, "class": "unclassified"}
+  },
+  {
+    "id": "hyphenated-english-island",
+    "kind": "island",
+    "html": "<span dir=\"ltr\">re-export</span>",
+    "expect": {"island_failures": 1, "class": "unclassified"}
+  },
+  {
+    "id": "empty-island",
+    "kind": "island",
+    "html": "<span dir=\"ltr\"></span>",
+    "expect": {"island_failures": 1, "class": "empty"}
+  },
+  {
+    "id": "bare-prose",
+    "kind": "text",
+    "text": "Evidence not acquired for this line",
+    "expect": {"latin_prose_runs": 1, "latin_runs": ">=1"}
+  },
+  {
+    "id": "two-word-bare",
+    "kind": "text",
+    "text": "Not acquired",
+    "expect": {"latin_prose_runs": 0, "latin_runs": ">=1"}
+  },
+  {
+    "id": "label-as-code-island",
+    "kind": "island",
+    "html": "<span dir=\"ltr\">NOT_CALCULABLE</span>",
+    "expect": {"label_leaks": ">=1"}
+  }
+]

@@ -3,9 +3,9 @@ import {
   opportunityListEndpoint,
 } from "./api.js";
 import {
+  decisionChip,
   escapeHtml,
   sourceIsland,
-  stateChip,
   syntheticLabels,
   technical,
   technicalToken,
@@ -73,13 +73,13 @@ export function renderOpportunityCards() {
               <span class="opportunity-code">${technicalToken(`${t("technical.hs")} ${item.hs6}`)} · ${sourceIsland(item.sector_profile.replaceAll("_", " "))}</span>
               <h3 ${arabicPrimary ? 'lang="ar" dir="rtl"' : 'lang="en" dir="ltr"'}>${escapeHtml(displayName(item))}</h3>
             </div>
-            ${stateChip(item.active_state)}
+            ${decisionChip(item.active_state, item.screening_disposition)}
           </div>
           ${arabicPrimary
             ? sourceIsland(item.name_en, "p")
             : `<p class="arabic" lang="ar" dir="rtl">${escapeHtml(item.name_ar)}</p>`}
           <div class="opportunity-stats">
-            <div><small>${escapeHtml(t("opportunity.public_state"))}</small><b>${stateChip(item.real_state)}</b></div>
+            <div><small>${escapeHtml(t("opportunity.public_state"))}</small><b>${decisionChip(item.real_state, item.screening_disposition)}</b></div>
             <div><small>${escapeHtml(t("opportunity.imports", { year: integer(item.latest_year) }))}</small><b>${technical(usd(item.latest_imports_usd_m))}</b></div>
             <div><small>${escapeHtml(t("opportunity.quantity"))}</small><b>${technical(`${number(item.latest_imports_kt)} ${t("unit.kt")}`)}</b></div>
           </div>

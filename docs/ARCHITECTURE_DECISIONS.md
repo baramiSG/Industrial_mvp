@@ -761,3 +761,118 @@ snapshot rebuild and regression. Its receipt is appended after execution.
 oracle. All 216 pre-S13 base rows remain byte-identical; all 246 changed rows
 relative to `e72eb57` are under `data/screening/`. S13a manifest run count is
 **5**; authorization is exhausted and no sixth run is permitted.
+
+## ADR-020 — Bilingual screening surface and governed analytical parity (S13b)
+
+**Status:** implementation candidate under approved plan
+`plan-1-s13b.json`
+(`560695023cd626e4e6e936d7fc7d9b67465e0062d168a16eaec55597cad9f14e`),
+AM-1
+(`341d813f6988e9ac4621b047c9762220e0f4831f290a7a66814ce12b108105d9`)
+and AM-2
+(`fae4ec0276077609bbb049472470a682b36a55ada43b5633bda2b6ceca46a58a`);
+precedence is AM-2 > AM-1 > base. Owner decisions OD-1…OD-16 and IAC-1…IAC-7 /
+IAC-G1…IAC-G5 apply. Independent implementation review and delivery remain
+separate gates.
+
+| DD | Adopted contract |
+|---|---|
+| DD-1 | Mount the S13a router before the SPA fallback; OD-12 permits exactly one additive public-only evidence route and leaves the existing three route contracts unchanged. |
+| DD-2 | CLI snapshot selection matches runtime ordering by `(as_of_date, snapshot_id)` and fails closed on an invalid candidate summary. |
+| DD-3 | Every rule row carries typed result/effect codes and value maps without changing its existing English prose. |
+| DD-4 | Decision narratives 1.2.0 localize rule name, result and decision effect from governed EN/AR templates; computed values remain typed LTR segments. |
+| DD-5 | A deep case with no fired candidate signal has null formal state, `NO_CANDIDATE` and `NO_TRIGGER_FIRED`; another unmatched residual still raises. |
+| DD-6 | UI strings 1.2.0 owns screening chrome and every displayed screening vocabulary label in EN/AR. |
+| DD-7 | Screening is section 06 with summary, five route-specific queues, record drill-down and one persistent eight-passport evidence region. |
+| DD-8 | Queue order is API-provided Pareto order; pagination never creates an ordinal master rank. |
+| DD-9 | Arabic parity requires catalogue prose, a classified technical/source-island grammar, no Latin prose outside islands and `label_leaks == []`. |
+| DD-10 | TL-09 covers all four screening routes and summary/queue/record/passport DOM in simulated opportunity mode. |
+| DD-11 | The visual matrix adds four screening scenes per locale/viewport; measured drift of the old 40 entries must remain inside approved regions. |
+| DD-12 | Visual provenance is pinned by the baseline subtree OID and 56-entry count; the owner-lead WIP commit resolves the intentionally transient pin state. |
+| DD-13 | Canonical regeneration requires the pinned Docker image; host regeneration and hand-edited baselines are prohibited. |
+| DD-14 | Before hand-off, an rsync copy at another absolute path must pass integrity, all four reconstruction lines and screening validation. |
+| DD-15 | Expected inventory, navigation, screenshot and catalogue changes are explicit contract changes, never weakened tests. |
+| DD-16 | Core 01/03/07/09, the UX specification, limitations and control records describe the delivered boundary before manifest generation. |
+
+**Governed code tables:** `decision_narratives.v1.yaml` 1.2.0 contains 213
+EN/AR keys. `ui_strings.v1.yaml` 1.2.0 contains 434 EN/AR keys and labels the
+three dispositions, four indication states, five queue ids, seven queue
+reason codes, five evidence-need codes, six exclusions, three exclusion
+statuses, three exclusion reason codes, ten screening rules, 29 result codes,
+ten effect codes, eight ordering metrics, continuity/status vocabularies and
+the not-evaluated reason. Unknown codes fail closed; no label equals its raw
+code token.
+
+The additive `GET /api/screening/evidence` route returns all eight UNIVERSE
+Class-B passports verbatim and coverage units from the selected public
+snapshot. Record-level `evidence_ids` remain empty on all 5,443 records; record
+anchors resolve to the persistent passport region. Access classification and
+terms observations remain registry metadata outside the runtime passport
+contract (KL-86).
+
+**Visual regeneration receipt:** `make visual-baseline-image` completed, but
+its rebuilt dependency layer reported package downloads; this is disclosed
+against the general no-network instruction. The canonical update itself ran
+with the prescribed isolated container. A first attempt stopped during
+collection because the canonical mount excludes `tests/fixtures/parity/**`;
+no baseline was finalized. Runtime-only fixture loading then enabled the
+first completed canonical update: Chromium revision `chromium-1234`, four
+visual nodes passed in 52.34 s. Host comparison exposed first-frame Screening
+raster instability. Integer scroll quantization, two animation frames and a
+discarded warm-up screenshot were contract-pinned, and the second completed
+canonical update passed four nodes in 52.80 s under the same change reference.
+
+The accepted manifest records 56 WebPs, browser
+`151.0.7922.34` / `chromium-1234`, Playwright `1.62.0`, comparator `0.9.0`,
+7,171,852 image bytes and 7,203,443 bytes for the complete baseline directory.
+The subtree OID is
+`3297e2f8d75fcdc03e072788d96d44be559b186d`. Of the 40 pre-existing entries,
+24 changed: eight sidebar-only and sixteen sidebar plus
+`.integrity-authority`; all sixteen dossier entries were unchanged and no
+changed pixel lay outside `aside.sidebar` ∪ `.integrity-authority`. OD-15
+accepted the measured table, crops, provenance and ownership, then the owner
+created WIP commit `d1d1462` with exactly the 45 changed/added files in the
+four T8 path groups. Its parent is `ab4add6`; the implementer did not mutate
+git state.
+
+**OD-16 capture-stability correction:** the residual summary drift was caused
+by the nav-06 smooth scroll remaining active while the screenshot anchor was
+measured and applied. The correction waits for three stable navigation-scroll
+frames, disables smooth scrolling, performs an integer scroll and asserts
+settlement before capture. The assertion precursor failed
+`SCREENING_ANCHOR_NOT_SETTLED` (4 failed, 1 error in 44.72 s) and finalized
+nothing. The three canonical SC-5 executions then ran under the unchanged
+change reference: two inadvertently overlapping stable-frame invocations
+passed four nodes in 57.46 s and 57.14 s; their race left a finalized root
+missing 38 expected paths, so that root was rejected. The isolated recovery
+invocation passed four nodes in 56.42 s and produced the complete 56-entry
+root; host comparison passed four nodes in 43.33 s.
+
+The corrected baseline directory is 7,196,180 bytes and its tree OID is
+`c2b3b66bbc6afaefe6e951772984d567cac53522`. Only the four new Screening
+summary WebPs, `manifest.json` and `manifest.sha256` changed from the OD-15
+baseline set; all 40 pre-S13b entries and the other twelve new Screening
+entries remained byte-identical, so the accepted drift and mask table remains
+exact. The owner created second WIP commit `f9fec2d` (parent `d1d1462`) with
+the six baseline files and two pin/harness files. The T12 identity therefore
+uses base `f9fec2d`, `wip_parent` `ab4add6` and both WIP commits.
+
+**Authority change classes:** Manifest §7.2 covers implementation and tests,
+including the one additive API route. §7.3 changes only
+`ui_strings.v1.yaml` and `decision_narratives.v1.yaml` from 1.1.0 to 1.2.0;
+both changes are additive labels with no decision sensitivity. §7.4 changes
+only Core 01/03/07/09. §7.5 adds no evidence: `data/**` and the seven frozen
+domain configurations remain byte-identical. Both public golden outcomes
+remain exact.
+
+**Manifest execution receipt:** before T10, S13b manifest run count was
+**0**. At `2026-09-12T20:53:47Z`, after the pre-generation regression and the
+two owner WIP commits, the implementer ran
+`PYTHONPATH=src .venv/bin/python scripts/build_manifests.py` exactly once; it
+exited 0. The authority path set remained 19 rows and the snapshot path set
+remained 535 rows. Six authority rows changed exactly:
+`config/ui_strings.v1.yaml`, `config/decision_narratives.v1.yaml` and Core
+01/03/07/09; snapshot row changes were zero. The generator mirrored all 19
+machine rows into Manifest §11. Immediate verification returned
+`INTEGRITY PASS` and all 21 integrity-contract tests passed. S13b manifest run
+count is **1** and its single-run authorization is exhausted.

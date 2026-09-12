@@ -23,6 +23,9 @@ def build_ui_manifest(analysis: dict[str, Any]) -> dict[str, Any]:
                 "public_snapshot": analysis["snapshot_id"],
                 "real_state": real["state"],
                 "active_state": active["state"],
+                "screening_disposition": analysis[
+                    "screening_disposition"
+                ],
                 "synthetic_label": (analysis.get("simulation_scenario") or {}).get("display_label"),
                 "synthetic_labels": (analysis.get("simulation_scenario") or {}).get(
                     "display_labels"

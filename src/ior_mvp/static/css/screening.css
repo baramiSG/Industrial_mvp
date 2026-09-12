@@ -1,0 +1,207 @@
+.screening-section {
+  background: var(--color-paper);
+}
+
+body:has(.nav-item[data-target="screening"].active) .topbar .eyebrow {
+  color: var(--color-navy-700);
+}
+
+.screening-section > .section-heading > div > p:last-child {
+  color: var(--color-muted);
+  max-inline-size: var(--size-content-wide);
+}
+
+#screening-view,
+.screening-evidence {
+  min-inline-size: var(--space-0);
+}
+
+.screening-evidence {
+  margin-block-start: var(--space-28);
+  padding-block-start: var(--space-24);
+  border-block-start: var(--border-hairline) solid var(--color-line-strong);
+}
+
+.screening-view > h2,
+.screening-evidence > h3 {
+  margin-block-start: var(--space-0);
+}
+
+.screening-summary-grid,
+.coverage-grid,
+.queue-grid,
+.passport-grid {
+  display: grid;
+  grid-template-columns: var(--layout-screening-columns);
+  gap: var(--space-16);
+}
+
+.screening-summary-grid,
+.coverage-accounting,
+.queue-grid,
+.record-block {
+  margin-block-end: var(--space-24);
+}
+
+.screening-card,
+.coverage-card,
+.queue-card,
+.passport-card,
+.unit-card,
+.record-block,
+.record-evidence-basis {
+  background: var(--color-surface);
+  border: var(--border-hairline) solid var(--color-line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+}
+
+.screening-card,
+.queue-card,
+.passport-card,
+.unit-card,
+.record-block,
+.record-evidence-basis {
+  padding: var(--space-20);
+}
+
+.coverage-card {
+  padding: var(--space-14);
+}
+
+.screening-card h3,
+.screening-card h4,
+.coverage-card h5,
+.queue-card h4,
+.passport-card h4,
+.passport-card h5,
+.record-block h3,
+.record-evidence-basis h3 {
+  margin-block-start: var(--space-0);
+}
+
+.record-facts,
+.passport-fields {
+  display: grid;
+  gap: var(--space-10);
+  margin: var(--space-0);
+}
+
+.record-facts div,
+.passport-fields div {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr);
+  gap: var(--space-12);
+  border-block-end: var(--border-hairline) solid var(--color-line);
+  padding-block: var(--space-8);
+}
+
+.record-facts dt,
+.passport-fields dt {
+  color: var(--color-muted-strong);
+  font-size: var(--font-size-10);
+}
+
+.record-facts dd,
+.passport-fields dd {
+  margin: var(--space-0);
+  overflow-wrap: anywhere;
+}
+
+.coverage-accounting > h4,
+.screening-summary > h3 {
+  margin-block-end: var(--space-12);
+}
+
+.screening-view-header {
+  display: flex;
+  flex-direction: var(--layout-screening-direction);
+  align-items: var(--layout-screening-align);
+  gap: var(--space-18);
+  margin-block-end: var(--space-20);
+}
+
+.screening-view-header h2,
+.screening-view-header p {
+  margin-block: var(--space-0) var(--space-5);
+}
+
+.screening-section button,
+.screening-section a {
+  border: var(--border-hairline) solid var(--color-line-strong);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-navy-800);
+  padding: var(--space-8) var(--space-11);
+  font-weight: var(--font-weight-strong);
+}
+
+.screening-section a {
+  display: inline-flex;
+  text-decoration: none;
+}
+
+.screening-table {
+  inline-size: var(--size-full);
+  border-collapse: collapse;
+  font-size: var(--font-size-11);
+}
+
+.screening-table th,
+.screening-table td {
+  padding: var(--space-10);
+  border-block-end: var(--border-hairline) solid var(--color-line);
+  text-align: start;
+  vertical-align: top;
+}
+
+.screening-table th {
+  color: var(--color-muted-strong);
+}
+
+.screening-table ul,
+.record-list,
+.record-evidence-basis ul {
+  margin: var(--space-0);
+  padding-inline-start: var(--space-18);
+}
+
+.record-list {
+  display: grid;
+  gap: var(--space-8);
+}
+
+.record-list li {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.screening-pagination {
+  display: flex;
+  align-items: var(--layout-screening-align);
+  flex-direction: var(--layout-screening-direction);
+  justify-content: space-between;
+  gap: var(--space-12);
+  margin-block-start: var(--space-16);
+}
+
+.explicit-state {
+  padding: var(--space-12);
+  border-inline-start: var(--border-accent) solid var(--color-warning);
+  background: var(--color-warning-soft);
+  color: var(--color-warning-text);
+}
+
+.passport-card {
+  min-inline-size: var(--space-0);
+  scroll-margin-block: var(--size-topbar-min);
+}
+
+.passport-card:focus {
+  outline: var(--border-accent) solid var(--color-info);
+  outline-offset: var(--space-2);
+}
+
+.passport-card .technical-token {
+  overflow-wrap: anywhere;
+}

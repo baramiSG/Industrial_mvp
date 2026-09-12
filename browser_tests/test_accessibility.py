@@ -5,6 +5,7 @@ from dataclasses import asdict
 from itertools import product
 
 import pytest
+from playwright.sync_api import expect
 
 from browser_tests.harness import (
     AXE_TAGS,
@@ -51,6 +52,10 @@ def test_keyboard_tab_order_reaches_every_interactive_control_with_visible_focus
 ) -> None:
     page = browser_session.page
     goto_portfolio(page, mode, locale)
+    expect(page.locator("[data-queue-id]")).to_have_count(
+        5,
+        timeout=10_000,
+    )
     report = keyboard_focus_report(page)
     expected = (
         "nav:overview",
@@ -58,6 +63,7 @@ def test_keyboard_tab_order_reaches_every_interactive_control_with_visible_focus
         "nav:methodology",
         "nav:extraction",
         "nav:governance",
+        "nav:screening",
         "mode:public",
         "mode:simulated",
         "id:locale-switch",
@@ -68,6 +74,11 @@ def test_keyboard_tab_order_reaches_every_interactive_control_with_visible_focus
         "id:opportunity-select",
         f"dossier:{CASES[0].id}",
         f"copy:{CASES[0].id}",
+        "queue:high_evsi_evidence_investigation",
+        "queue:incumbent_upgrade_investigation",
+        "queue:likely_false_positive",
+        "queue:resilience_case",
+        "queue:robust_public_finding",
     )
     assert report.dom_order == expected
     assert report.focused_order == expected

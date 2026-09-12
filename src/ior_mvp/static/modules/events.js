@@ -23,6 +23,12 @@ import {
   loadOpportunity,
   rerenderWorkspace,
 } from "./workspace.js";
+import {
+  openQueue,
+  openRecord,
+  rerenderScreening,
+  screeningBack,
+} from "./screening/index.js";
 
 export function scrollToSection(id) {
   document.getElementById(id)?.scrollIntoView({
@@ -50,6 +56,7 @@ export function rerenderLocaleState() {
   populateSelect();
   rerenderWorkspace();
   renderExtraction();
+  rerenderScreening();
 }
 
 export async function switchLocale() {
@@ -66,7 +73,9 @@ export async function switchLocale() {
 async function handleClick(event) {
   const target = event.target.closest(
     "[data-mode],[data-target],[data-open-id],[data-dossier-html],"
-    + "[data-copy-json],[data-locale-switch],#open-first-case,#view-methodology",
+    + "[data-copy-json],[data-locale-switch],[data-queue-id],[data-hs6],"
+    + "[data-screening-back],[data-screening-page],[data-passport-ref],"
+    + "#open-first-case,#view-methodology",
   );
   if (!target) return;
   if (target.dataset.localeSwitch !== undefined) {
@@ -84,6 +93,26 @@ async function handleClick(event) {
     document.getElementById("opportunity-select").value = state.selectedId;
     await loadOpportunity(state.selectedId);
     scrollToSection("workspace");
+  } else if (target.dataset.queueId) {
+    await openQueue(target.dataset.queueId);
+  } else if (target.dataset.hs6) {
+    await openRecord(target.dataset.hs6);
+  } else if (target.dataset.screeningBack) {
+    screeningBack(target.dataset.screeningBack);
+  } else if (target.dataset.screeningPage) {
+    const page = state.screening.page;
+    const direction = target.dataset.screeningPage;
+    const offset = direction === "next"
+      ? page.offset + page.limit
+      : Math.max(0, page.offset - page.limit);
+    await openQueue(state.screening.queueId, offset);
+  } else if (target.dataset.passportRef !== undefined) {
+    event.preventDefault();
+    const reference = target.getAttribute("href") || "";
+    const card = document.getElementById(reference.replace(/^#/, ""));
+    if (!card) return;
+    card.focus({ preventScroll: true });
+    card.scrollIntoView({ behavior: "smooth", block: "center" });
   } else if (target.dataset.dossierHtml) {
     window.open(
       dossierHtmlEndpoint(

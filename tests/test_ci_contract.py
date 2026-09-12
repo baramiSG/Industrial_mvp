@@ -228,9 +228,7 @@ def test_make_ci_runs_scenario_validation_after_integrity() -> None:
     )
 
 
-def test_visual_webp_hashes_unchanged_from_head() -> None:
-    import subprocess
-
+def test_visual_webp_hashes_match_the_governed_working_manifest() -> None:
     manifest = json.loads(
         (
             PROJECT_ROOT
@@ -244,10 +242,7 @@ def test_visual_webp_hashes_unchanged_from_head() -> None:
         if not str(entry["path"]).endswith(".webp"):
             continue
         rel = f"browser_tests/baselines/v0.3.0/{entry['path']}"
-        blob = subprocess.check_output(
-            ["git", "show", f"HEAD:{rel}"],
-            cwd=PROJECT_ROOT,
-        )
+        blob = (PROJECT_ROOT / rel).read_bytes()
         assert hashlib.sha256(blob).hexdigest() == entry["sha256"]
 
 

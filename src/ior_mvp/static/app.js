@@ -5,6 +5,7 @@ import {
   resolveInitialLocale,
 } from "./modules/i18n.js";
 import { loadPortfolio } from "./modules/portfolio.js";
+import { loadScreening } from "./modules/screening/index.js";
 
 export async function init() {
   await loadLocale(resolveInitialLocale());
@@ -12,6 +13,7 @@ export async function init() {
   await Promise.all([
     loadPortfolio(),
     loadExtractionDemo(),
+    loadScreening(),
     document.fonts.ready,
   ]);
   document.body.classList.remove("app-loading");

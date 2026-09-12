@@ -17,8 +17,13 @@ from browser_tests.harness import (
     Viewport,
 )
 from browser_tests.pages import (
+    first_queue_entry_hs6,
     goto_portfolio,
     open_dossier_popup,
+    open_queue,
+    open_record,
+    open_screening,
+    screening_back,
     select_case,
     select_mode,
 )
@@ -32,6 +37,48 @@ VISUAL_MATRIX = tuple(product((EN, AR), (DESKTOP, TABLET)))
 def _anchor(page: Any, selector: str) -> None:
     page.locator(selector).evaluate(
         "(node) => node.scrollIntoView({block: 'start'})"
+    )
+
+
+def _anchor_screening(page: Any) -> None:
+    page.locator("#screening").evaluate(
+        """async (node) => {
+          await document.fonts.ready;
+          let previousScrollY = window.scrollY;
+          let stableFrames = 0;
+          for (let frame = 0; frame < 60 && stableFrames < 3; frame += 1) {
+            await new Promise(requestAnimationFrame);
+            const currentScrollY = window.scrollY;
+            stableFrames = Math.abs(currentScrollY - previousScrollY) <= 0.5
+              ? stableFrames + 1
+              : 0;
+            previousScrollY = currentScrollY;
+          }
+          if (stableFrames < 3) {
+            throw new Error("NAVIGATION_SCROLL_NOT_SETTLED");
+          }
+          const root = document.documentElement;
+          const previousBehavior = root.style.scrollBehavior;
+          root.style.scrollBehavior = "auto";
+          const margin = parseFloat(
+            getComputedStyle(node).scrollMarginBlockStart
+          ) || 0;
+          const target = Math.round(
+            node.getBoundingClientRect().top + window.scrollY - margin
+          );
+          window.scrollTo({top: target, left: 0, behavior: "auto"});
+          await new Promise(requestAnimationFrame);
+          await new Promise(requestAnimationFrame);
+          if (Math.abs(window.scrollY - target) > 0.5) {
+            throw new Error("SCREENING_ANCHOR_NOT_SETTLED");
+          }
+          root.style.scrollBehavior = previousBehavior;
+        }"""
+    )
+    page.screenshot(
+        full_page=False,
+        animations="disabled",
+        caret="hide",
     )
 
 
@@ -139,3 +186,49 @@ def test_governed_visual_baselines_match(
             mode=mode,
         )
         popup.close()
+
+    goto_portfolio(page, "public", locale)
+    open_screening(page, locale)
+    _anchor_screening(page)
+    visual_session.capture(
+        page,
+        locale=locale.code,
+        viewport=viewport.name,
+        screen="journey-f-screening-summary",
+        case_id=None,
+        mode="public",
+    )
+    open_queue(page, "robust_public_finding", locale)
+    _anchor_screening(page)
+    visual_session.capture(
+        page,
+        locale=locale.code,
+        viewport=viewport.name,
+        screen="journey-f-screening-queue-robust",
+        case_id=None,
+        mode="public",
+    )
+    screening_back(page, "summary", locale)
+    open_queue(page, "resilience_case", locale)
+    _anchor_screening(page)
+    visual_session.capture(
+        page,
+        locale=locale.code,
+        viewport=viewport.name,
+        screen="journey-f-screening-queue-empty",
+        case_id=None,
+        mode="public",
+    )
+    screening_back(page, "summary", locale)
+    open_queue(page, "robust_public_finding", locale)
+    hs6 = first_queue_entry_hs6(page)
+    open_record(page, hs6, locale)
+    _anchor_screening(page)
+    visual_session.capture(
+        page,
+        locale=locale.code,
+        viewport=viewport.name,
+        screen="journey-f-screening-record",
+        case_id=hs6,
+        mode="public",
+    )

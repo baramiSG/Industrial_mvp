@@ -155,3 +155,28 @@ def record(hs6: str) -> dict[str, Any]:
         if passport["passport_id"] in ids
     ]
     return {**selected, "evidence_passports": passports}
+
+
+@router.get("/evidence")
+def evidence() -> dict[str, Any]:
+    snapshot = repository.screening_snapshot()
+    if snapshot is None:
+        return {
+            "snapshot_id": None,
+            "as_of_date": None,
+            "source_boundary": "public",
+            "synthetic_flag": False,
+            "evidence_passports": [],
+            "universe_units": [],
+            "reason_codes": ["NO_SCREENING_SNAPSHOT"],
+            "authority": _authority(),
+        }
+    return {
+        "snapshot_id": snapshot["snapshot_id"],
+        "as_of_date": snapshot["as_of_date"],
+        "source_boundary": "public",
+        "synthetic_flag": False,
+        "evidence_passports": snapshot["evidence_passports"],
+        "universe_units": snapshot["universe_status"]["units"],
+        "authority": _authority(),
+    }

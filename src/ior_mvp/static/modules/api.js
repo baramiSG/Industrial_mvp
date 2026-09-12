@@ -31,3 +31,20 @@ export function dossierHtmlEndpoint(id, mode, locale) {
   const query = new URLSearchParams({ mode, locale });
   return `/api/opportunities/${encodeURIComponent(id)}/dossier.html?${query}`;
 }
+
+export function screeningSummaryEndpoint() {
+  return "/api/screening";
+}
+
+export function screeningEvidenceEndpoint() {
+  return "/api/screening/evidence";
+}
+
+export function screeningQueueEndpoint(queueId, offset = 0, limit = 50) {
+  const query = new URLSearchParams({ offset, limit });
+  return `/api/screening/queues/${encodeURIComponent(queueId)}?${query}`;
+}
+
+export function screeningRecordEndpoint(hs6) {
+  return `/api/screening/records/${encodeURIComponent(hs6)}`;
+}

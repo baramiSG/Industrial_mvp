@@ -59,3 +59,37 @@ def test_warm_analysis_endpoint_median_is_below_250_ms(
         f"from samples {elapsed_ms!r} "
         f"must be below {MAX_MEDIAN_MS:.1f} ms"
     )
+
+
+def test_warm_mounted_screening_endpoints_median_below_250_ms() -> None:
+    summary = client.get("/api/screening")
+    assert summary.status_code == 200
+    assert summary.headers["content-type"].startswith("application/json")
+    queue = client.get(
+        "/api/screening/queues/robust_public_finding?offset=0&limit=1"
+    )
+    assert queue.status_code == 200
+    first_hs6 = queue.json()["entries"][0]["hs6"]
+    paths = (
+        "/api/screening",
+        "/api/screening/queues/likely_false_positive?offset=0&limit=50",
+        f"/api/screening/records/{first_hs6}",
+        "/api/screening/evidence",
+    )
+
+    for path in paths:
+        warmup = client.get(path)
+        assert warmup.status_code == 200
+        assert warmup.headers["content-type"].startswith("application/json")
+        elapsed_ms: list[float] = []
+        for _ in range(WARM_MEASUREMENTS):
+            started = perf_counter()
+            response = client.get(path)
+            elapsed_ms.append((perf_counter() - started) * 1000)
+            assert response.status_code == 200
+        measured_median = median(elapsed_ms)
+        assert measured_median < MAX_MEDIAN_MS, (
+            f"{path} median {measured_median:.3f} ms "
+            f"from samples {elapsed_ms!r} "
+            f"must be below {MAX_MEDIAN_MS:.1f} ms"
+        )

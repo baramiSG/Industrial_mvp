@@ -28,6 +28,7 @@ from .evidence import (
 from .rules import evaluate_rules, evaluate_simulated_rules
 from .public_snapshot import capability_hard_gate_names
 from .public_decision import compute_public_decision
+from .narratives import localize_rule_rows
 from .trade_metrics import build_supplier_metrics
 
 
@@ -52,6 +53,7 @@ def analyze_public(opportunity_id: str) -> dict[str, Any]:
     latest = _latest_trade(case)
     r3 = next(row for row in rules if row["rule_id"] == "R3")
     r4d = next(row for row in rules if row["rule_id"] == "R4-D")
+    localized_rules = localize_rule_rows(rules)
     return {
         "schema_version": case["schema_version"],
         "opportunity": case["opportunity"],
@@ -79,7 +81,7 @@ def analyze_public(opportunity_id: str) -> dict[str, Any]:
             "rejection_conditions"
         ],
         "narrative_version": decision["narrative_version"],
-        "rules": rules,
+        "rules": localized_rules,
         "capability": capability,
         "capacity": None,
         "economics": None,
@@ -155,7 +157,9 @@ def analyze_simulated(opportunity_id: str) -> dict[str, Any]:
     public["hard_exclusions"] = branch["hard_exclusions"]
     public["rejection_conditions"] = branch["rejection_conditions"]
     public["narrative_version"] = decision["narrative_version"]
-    public["rules"] = public["rules"] + branch["synthetic_rules"]
+    public["rules"] = localize_rule_rows(
+        public["rules"] + branch["synthetic_rules"]
+    )
     public["capacity"] = branch["capacity"]
     public["capability"] = branch["capability"]
     public["economics"] = branch["economics"]
@@ -206,6 +210,9 @@ def list_opportunities(mode: Mode = "public") -> list[dict[str, Any]]:
                 "sector_profile": result["opportunity"]["sector_profile"],
                 "real_state": result["real_decision"]["state"],
                 "active_state": result["active_decision"]["state"],
+                "screening_disposition": result[
+                    "screening_disposition"
+                ],
                 "headline": result["active_decision"]["headline"],
                 "latest_year": latest["year"],
                 "latest_imports_usd_m": latest.get("imports_usd_m"),

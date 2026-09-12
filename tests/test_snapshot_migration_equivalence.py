@@ -63,6 +63,31 @@ COMMON_ADDITIVE_PATHS = {
     "rules.R11.metrics.ratio_reason",
     "rules.R11.metrics.ratio_status",
 }
+COMMON_ADDITIVE_PATHS |= {
+    f"rules.{rule_id}.{field}"
+    for rule_id in (
+        "R0",
+        "R1-F",
+        "R1-D",
+        "R2",
+        "R3",
+        "R4-F",
+        "R4-D",
+        "R5",
+        "R6",
+        "R7",
+        "R8",
+        "R9-S",
+        "R10",
+        "R11",
+    )
+    for field in (
+        "result_code",
+        "decision_effect_code",
+        "result_values",
+        "effect_values",
+    )
+}
 PP_R3_ADDITIVE_PATHS = {
     "rules.R3.metrics.hhi",
     "rules.R3.metrics.hhi_threshold",

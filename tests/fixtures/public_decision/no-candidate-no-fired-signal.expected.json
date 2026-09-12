@@ -1,0 +1,5243 @@
+{
+  "analysis": {
+    "active_decision": {
+      "advance_gate": {
+        "blocked_classes": [
+          "D",
+          "E"
+        ],
+        "blocked_fields": [],
+        "blocked_resolution_statuses": [
+          "PARTIAL",
+          "UNRESOLVED",
+          "CONTRADICTORY",
+          "MISSING"
+        ],
+        "passes": true
+      },
+      "advance_support_signal_rule_ids": [],
+      "conditions": [
+        "Re-screen when a candidate signal fires on the public series."
+      ],
+      "confidence": "C",
+      "decision_reason_code": "NO_TRIGGER_FIRED",
+      "evidence_class_assessment": {
+        "demand_at_required_specification": {
+          "contradiction_evidence_ids": [],
+          "evidence_class": "B",
+          "evidence_ids": [
+            "E-DEMAND"
+          ],
+          "field": "demand_at_required_specification",
+          "resolution_status": "RESOLVED",
+          "support_codes": [
+            "TARGET_SPECIFICATION_DEMAND"
+          ]
+        },
+        "domestic_supply_or_capability": {
+          "contradiction_evidence_ids": [],
+          "evidence_class": "C",
+          "evidence_ids": [
+            "E-CAP"
+          ],
+          "field": "domestic_supply_or_capability",
+          "resolution_status": "RESOLVED",
+          "support_codes": [
+            "DOMESTIC_CAPABILITY_ASSESSMENT"
+          ]
+        },
+        "hard_regulatory_or_process_gate": {
+          "contradiction_evidence_ids": [],
+          "evidence_class": "C",
+          "evidence_ids": [
+            "E-GATE"
+          ],
+          "field": "hard_regulatory_or_process_gate",
+          "resolution_status": "RESOLVED",
+          "support_codes": [
+            "HARD_REGULATORY_PROCESS_GATES"
+          ]
+        },
+        "product_identity": {
+          "contradiction_evidence_ids": [],
+          "evidence_class": "B",
+          "evidence_ids": [
+            "E-ID"
+          ],
+          "field": "product_identity",
+          "resolution_status": "RESOLVED",
+          "support_codes": [
+            "TARGET_PRODUCT_IDENTITY"
+          ]
+        }
+      },
+      "gap_class": {
+        "constraint_class": "qualification_or_certification",
+        "label": "Application gap",
+        "localized_label": {
+          "ar": "فجوة تطبيق",
+          "en": "Application gap"
+        },
+        "primary": "application",
+        "reason_codes": [],
+        "secondary": []
+      },
+      "hard_exclusions": [
+        {
+          "code": "EX-01_HETEROGENEOUS_RESIDUAL",
+          "evidence_ids": [
+            "E-ID"
+          ],
+          "inputs": {
+            "commercial_product_separable": true,
+            "product_level_evidence_available": true
+          },
+          "localized_narrative": {
+            "ar": "يتعذر فصل المنتج التجاري عن رمز متبق شديد التباين، ولا يتوافر دليل على مستوى المنتج.",
+            "en": "The commercial product cannot be separated from a highly heterogeneous residual code and no product-level evidence is available."
+          },
+          "narrative": "The commercial product cannot be separated from a highly heterogeneous residual code and no product-level evidence is available.",
+          "reason_code": "EXCLUSION_NOT_SATISFIED",
+          "status": "NOT_SATISFIED"
+        },
+        {
+          "code": "EX-02_MARKET_BELOW_MES",
+          "evidence_ids": [
+            "E-DEMAND"
+          ],
+          "inputs": {
+            "credible_export_contract": false,
+            "minimum_efficient_scale_kt": 50.0,
+            "sustainable_downside_demand_kt": 100.0
+          },
+          "localized_narrative": {
+            "ar": "السوق المستدام في سيناريو الطلب المتحفظ أدنى من الحد الأدنى للكفاءة، ولا يوجد عقد تصدير موثوق.",
+            "en": "The sustainable downside market is below minimum efficient scale and no credible export contract exists."
+          },
+          "narrative": "The sustainable downside market is below minimum efficient scale and no credible export contract exists.",
+          "reason_code": "EXCLUSION_NOT_SATISFIED",
+          "status": "NOT_SATISFIED"
+        },
+        {
+          "code": "EX-03_UNSATISFIABLE_HARD_GATE",
+          "evidence_ids": [
+            "E-GATE"
+          ],
+          "inputs": {
+            "gate_domain": "customer_qualification",
+            "gate_satisfiability": "SATISFIABLE"
+          },
+          "localized_narrative": {
+            "ar": "يتعذر استيفاء بوابة إلزامية قانونية أو متعلقة بالسلامة أو البيئة أو الملكية الفكرية أو تأهيل العميل.",
+            "en": "A legal, safety, environmental, IP or customer-qualification hard gate cannot be satisfied."
+          },
+          "narrative": "A legal, safety, environmental, IP or customer-qualification hard gate cannot be satisfied.",
+          "reason_code": "EXCLUSION_NOT_SATISFIED",
+          "status": "NOT_SATISFIED"
+        },
+        {
+          "code": "EX-04_IDLE_EQUIVALENT_CAPACITY",
+          "evidence_ids": [
+            "E-CAP"
+          ],
+          "inputs": {
+            "binding_market_failure": true,
+            "domestic_specification_equivalent": false,
+            "qualified_idle_capacity_kt": 0.0,
+            "target_specification_demand_kt": 100.0
+          },
+          "localized_narrative": {
+            "ar": "يلبي الإنتاج المحلي المواصفة المطلوبة بطاقة عاطلة مؤثرة، ولم يثبت وجود إخفاق سوقي ملزم.",
+            "en": "Domestic production meets the required specification with material idle capacity and no binding market failure is evidenced."
+          },
+          "narrative": "Domestic production meets the required specification with material idle capacity and no binding market failure is evidenced.",
+          "reason_code": "EXCLUSION_NOT_SATISFIED",
+          "status": "NOT_SATISFIED"
+        },
+        {
+          "code": "EX-05_TRANSITORY_OR_MEASUREMENT",
+          "evidence_ids": [
+            "E-ID"
+          ],
+          "inputs": {
+            "dominant_cause": "OTHER"
+          },
+          "localized_narrative": {
+            "ar": "تهيمن على الفجوة الظاهرة إعادة التصدير أو طلب مشروع لمرة واحدة أو موازنة سعرية مؤقتة أو انقطاع في التصنيف.",
+            "en": "The apparent gap is dominated by re-export, one-off project demand, temporary price arbitrage or classification discontinuity."
+          },
+          "narrative": "The apparent gap is dominated by re-export, one-off project demand, temporary price arbitrage or classification discontinuity.",
+          "reason_code": "EXCLUSION_NOT_SATISFIED",
+          "status": "NOT_SATISFIED"
+        },
+        {
+          "code": "EX-06_REDUNDANCY_OR_CROWD_OUT",
+          "evidence_ids": [
+            "E-ROUTE"
+          ],
+          "inputs": {
+            "competition_finding": "ACCEPTABLE"
+          },
+          "localized_narrative": {
+            "ar": "سيؤدي التدخل إلى طاقة فائضة غير مقبولة أو إلى مزاحمة منتج قائم أكثر كفاءة.",
+            "en": "The intervention would create unacceptable redundant capacity or crowd out a more efficient incumbent."
+          },
+          "narrative": "The intervention would create unacceptable redundant capacity or crowd out a more efficient incumbent.",
+          "reason_code": "EXCLUSION_NOT_SATISFIED",
+          "status": "NOT_SATISFIED"
+        }
+      ],
+      "headline": "NO CANDIDATE — no candidate signal fired",
+      "kill_conditions": [],
+      "localized_missing_facts": {
+        "ar": [],
+        "en": []
+      },
+      "localized_narrative": {
+        "ar": {
+          "conditions": [
+            {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "أعد الفرز عندما ينطلق محفّز للترشيح في السلسلة العامة."
+                }
+              ],
+              "text": "أعد الفرز عندما ينطلق محفّز للترشيح في السلسلة العامة."
+            }
+          ],
+          "headline": {
+            "segments": [
+              {
+                "kind": "literal",
+                "text": "لا مرشح — لم ينطلق أي محفّز للترشيح"
+              }
+            ],
+            "text": "لا مرشح — لم ينطلق أي محفّز للترشيح"
+          },
+          "kill_conditions": [],
+          "missing_facts": [],
+          "rationale": {
+            "segments": [
+              {
+                "kind": "literal",
+                "text": "لم ينطلق أي محفّز للترشيح من الأدلة العامة؛ لذلك لا تدخل الحالة التحليل المتعمق ولا تُسند إليها حالة رسمية."
+              }
+            ],
+            "text": "لم ينطلق أي محفّز للترشيح من الأدلة العامة؛ لذلك لا تدخل الحالة التحليل المتعمق ولا تُسند إليها حالة رسمية."
+          },
+          "route_label": {
+            "segments": [
+              {
+                "kind": "literal",
+                "text": "لا مسار للتحليل المتعمق؛ تصرف الفرز فقط"
+              }
+            ],
+            "text": "لا مسار للتحليل المتعمق؛ تصرف الفرز فقط"
+          }
+        },
+        "en": {
+          "conditions": [
+            {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "Re-screen when a candidate signal fires on the public series."
+                }
+              ],
+              "text": "Re-screen when a candidate signal fires on the public series."
+            }
+          ],
+          "headline": {
+            "segments": [
+              {
+                "kind": "literal",
+                "text": "NO CANDIDATE — no candidate signal fired"
+              }
+            ],
+            "text": "NO CANDIDATE — no candidate signal fired"
+          },
+          "kill_conditions": [],
+          "missing_facts": [],
+          "rationale": {
+            "segments": [
+              {
+                "kind": "literal",
+                "text": "No candidate trigger fired on public evidence; the case is not admitted to deep resolution and no formal state is assigned."
+              }
+            ],
+            "text": "No candidate trigger fired on public evidence; the case is not admitted to deep resolution and no formal state is assigned."
+          },
+          "route_label": {
+            "segments": [
+              {
+                "kind": "literal",
+                "text": "No deep-resolution route; screening disposition only"
+              }
+            ],
+            "text": "No deep-resolution route; screening disposition only"
+          }
+        }
+      },
+      "missing_facts": [],
+      "narrative_version": "1.0.0",
+      "preferred_hypothesis": null,
+      "rationale": "No candidate trigger fired on public evidence; the case is not admitted to deep resolution and no formal state is assigned.",
+      "rejection_conditions": [
+        {
+          "code": "hard_exclusion",
+          "evidence_ids": [
+            "E-CAP",
+            "E-DEMAND",
+            "E-GATE",
+            "E-ID",
+            "E-ROUTE"
+          ],
+          "reason_code": "HARD_EXCLUSION_NOT_SATISFIED",
+          "status": "NOT_SATISFIED"
+        },
+        {
+          "code": "false_or_measurement_gap",
+          "evidence_ids": [
+            "E-CAP",
+            "E-DEMAND",
+            "E-GATE",
+            "E-ID",
+            "E-ROUTE"
+          ],
+          "reason_code": "FALSE_OR_MEASUREMENT_NOT_ESTABLISHED",
+          "status": "NOT_SATISFIED"
+        },
+        {
+          "code": "equivalent_idle_qualified_supply",
+          "evidence_ids": [
+            "E-CAP",
+            "E-DEMAND"
+          ],
+          "reason_code": "EQUIVALENT_QUALIFIED_SUPPLY_NOT_ESTABLISHED",
+          "status": "NOT_SATISFIED"
+        },
+        {
+          "code": "uneconomic_at_efficient_scale",
+          "evidence_ids": [],
+          "reason_code": "EFFICIENT_SCALE_ECONOMICS_UNAVAILABLE",
+          "status": "NOT_CALCULABLE"
+        },
+        {
+          "code": "structural_overcapacity",
+          "evidence_ids": [
+            "E-ROUTE"
+          ],
+          "reason_code": "STRUCTURAL_OVERCAPACITY_NOT_ESTABLISHED",
+          "status": "NOT_SATISFIED"
+        },
+        {
+          "code": "generic_capacity_contradicted",
+          "evidence_ids": [],
+          "reason_code": "GENERIC_CAPACITY_NOT_CONTRADICTED",
+          "status": "NOT_SATISFIED"
+        }
+      ],
+      "route_code": null,
+      "route_hypotheses": [
+        {
+          "additionality": "passes",
+          "competition": "passes",
+          "economics": {
+            "minimum_effective_support_m": "NOT_CALCULABLE",
+            "unsupported_irr": "NOT_CALCULABLE",
+            "unsupported_npv_m": "NOT_CALCULABLE"
+          },
+          "evidence_ids": [],
+          "feasibility": "passes",
+          "incremental_national_value_m_sar": "NOT_CALCULABLE",
+          "localized_reasons": {
+            "ar": [
+              "عدم التدخل هو أساس المقارنة ويُختار عندما يحسم شرط رفض مثبت المقترح بالكامل."
+            ],
+            "en": [
+              "No action is the comparator and is selected when an evidenced rejection condition fully resolves the proposition."
+            ]
+          },
+          "policy_permissibility": "passes",
+          "precedence": {
+            "blocked_by_lower_route": null
+          },
+          "reason_codes": [
+            "ROUTE_0_GAP_REQUIRES_ACTION"
+          ],
+          "reasons": [
+            "No action is the comparator and is selected when an evidenced rejection condition fully resolves the proposition."
+          ],
+          "resolves_binding_constraint": "fails",
+          "route_code": 0,
+          "route_key": "no_intervention",
+          "status": "fails",
+          "unrounded_incremental_national_value_m_sar": "NOT_CALCULABLE"
+        },
+        {
+          "additionality": "NOT_CALCULABLE",
+          "competition": "NOT_CALCULABLE",
+          "economics": {
+            "minimum_effective_support_m": "NOT_CALCULABLE",
+            "unsupported_irr": "NOT_CALCULABLE",
+            "unsupported_npv_m": "NOT_CALCULABLE"
+          },
+          "evidence_ids": [],
+          "feasibility": "NOT_CALCULABLE",
+          "incremental_national_value_m_sar": "NOT_CALCULABLE",
+          "localized_reasons": {
+            "ar": [
+              "يلزم دليل على عائق إداري أو تصنيفي أو تنظيمي."
+            ],
+            "en": [
+              "Administrative, classification or regulatory barrier evidence is required."
+            ]
+          },
+          "policy_permissibility": "NOT_CALCULABLE",
+          "precedence": {
+            "blocked_by_lower_route": null
+          },
+          "reason_codes": [
+            "ROUTE_EVIDENCE_REQUIRED"
+          ],
+          "reasons": [
+            "Administrative, classification or regulatory barrier evidence is required."
+          ],
+          "resolves_binding_constraint": "NOT_CALCULABLE",
+          "route_code": 1,
+          "route_key": "administrative_barrier_removal",
+          "status": "NOT_CALCULABLE",
+          "unrounded_incremental_national_value_m_sar": "NOT_CALCULABLE"
+        },
+        {
+          "additionality": "NOT_CALCULABLE",
+          "competition": "NOT_CALCULABLE",
+          "economics": {
+            "minimum_effective_support_m": "NOT_CALCULABLE",
+            "unsupported_irr": "NOT_CALCULABLE",
+            "unsupported_npv_m": "NOT_CALCULABLE"
+          },
+          "evidence_ids": [],
+          "feasibility": "NOT_CALCULABLE",
+          "incremental_national_value_m_sar": "NOT_CALCULABLE",
+          "localized_reasons": {
+            "ar": [
+              "يلزم قيد مثبت في المعلومات أو الربط أو المواءمة."
+            ],
+            "en": [
+              "A verified information, linkage or matching constraint is required."
+            ]
+          },
+          "policy_permissibility": "NOT_CALCULABLE",
+          "precedence": {
+            "blocked_by_lower_route": null
+          },
+          "reason_codes": [
+            "ROUTE_EVIDENCE_REQUIRED"
+          ],
+          "reasons": [
+            "A verified information, linkage or matching constraint is required."
+          ],
+          "resolves_binding_constraint": "NOT_CALCULABLE",
+          "route_code": 2,
+          "route_key": "information_market_linkage",
+          "status": "NOT_CALCULABLE",
+          "unrounded_incremental_national_value_m_sar": "NOT_CALCULABLE"
+        },
+        {
+          "additionality": "passes",
+          "competition": {
+            "capacity_ratio": 1.0,
+            "passes": true,
+            "warning_threshold": 1.25
+          },
+          "economics": {
+            "minimum_effective_support_m": 0.0,
+            "unsupported_irr": 0.13066,
+            "unsupported_npv_m": 0.413
+          },
+          "evidence_ids": [
+            "E-ROUTE"
+          ],
+          "feasibility": "fails",
+          "incremental_national_value_m_sar": 66.0,
+          "localized_reasons": {
+            "ar": [
+              "المسار غير مجدٍ تقنياً بحسب الأدلة المتاحة."
+            ],
+            "en": [
+              "The route is not technically feasible on the available evidence."
+            ]
+          },
+          "policy_permissibility": "passes",
+          "precedence": {
+            "blocked_by_lower_route": null
+          },
+          "reason_codes": [
+            "FEASIBILITY_FAILED"
+          ],
+          "reasons": [
+            "The route is not technically feasible on the available evidence."
+          ],
+          "resolves_binding_constraint": "passes",
+          "route_code": 3,
+          "route_key": "certification_testing_quality",
+          "status": "fails",
+          "unrounded_incremental_national_value_m_sar": 66.0
+        },
+        {
+          "additionality": "NOT_CALCULABLE",
+          "competition": "NOT_CALCULABLE",
+          "economics": {
+            "minimum_effective_support_m": "NOT_CALCULABLE",
+            "unsupported_irr": "NOT_CALCULABLE",
+            "unsupported_npv_m": "NOT_CALCULABLE"
+          },
+          "evidence_ids": [],
+          "feasibility": "NOT_CALCULABLE",
+          "incremental_national_value_m_sar": "NOT_CALCULABLE",
+          "localized_reasons": {
+            "ar": [
+              "يلزم قيد مثبت في تجزؤ الطلب أو الشراء."
+            ],
+            "en": [
+              "A verified demand-fragmentation or offtake constraint is required."
+            ]
+          },
+          "policy_permissibility": "NOT_CALCULABLE",
+          "precedence": {
+            "blocked_by_lower_route": null
+          },
+          "reason_codes": [
+            "ROUTE_EVIDENCE_REQUIRED"
+          ],
+          "reasons": [
+            "A verified demand-fragmentation or offtake constraint is required."
+          ],
+          "resolves_binding_constraint": "NOT_CALCULABLE",
+          "route_code": 4,
+          "route_key": "demand_aggregation_offtake",
+          "status": "NOT_CALCULABLE",
+          "unrounded_incremental_national_value_m_sar": "NOT_CALCULABLE"
+        },
+        {
+          "additionality": "NOT_CALCULABLE",
+          "competition": "NOT_CALCULABLE",
+          "economics": {
+            "minimum_effective_support_m": "NOT_CALCULABLE",
+            "unsupported_irr": "NOT_CALCULABLE",
+            "unsupported_npv_m": "NOT_CALCULABLE"
+          },
+          "evidence_ids": [],
+          "feasibility": "NOT_CALCULABLE",
+          "incremental_national_value_m_sar": "NOT_CALCULABLE",
+          "localized_reasons": {
+            "ar": [
+              "يجعل التجاور المثبت للمنتج القائم المسار القائم هو الفرضية ذات الأولوية؛ وتظل الطاقة الفعلية والاقتصاديات مطلوبة."
+            ],
+            "en": [
+              "Verified incumbent adjacency makes brownfield the priority hypothesis; effective capacity and economics remain required."
+            ]
+          },
+          "policy_permissibility": "NOT_CALCULABLE",
+          "precedence": {
+            "blocked_by_lower_route": null
+          },
+          "reason_codes": [
+            "ROUTE_EVIDENCE_REQUIRED"
+          ],
+          "reasons": [
+            "Verified incumbent adjacency makes brownfield the priority hypothesis; effective capacity and economics remain required."
+          ],
+          "resolves_binding_constraint": "NOT_CALCULABLE",
+          "route_code": 5,
+          "route_key": "brownfield_incremental_expansion",
+          "status": "NOT_CALCULABLE",
+          "unrounded_incremental_national_value_m_sar": "NOT_CALCULABLE"
+        },
+        {
+          "additionality": "NOT_CALCULABLE",
+          "competition": "NOT_CALCULABLE",
+          "economics": {
+            "minimum_effective_support_m": "NOT_CALCULABLE",
+            "unsupported_irr": "NOT_CALCULABLE",
+            "unsupported_npv_m": "NOT_CALCULABLE"
+          },
+          "evidence_ids": [],
+          "feasibility": "NOT_CALCULABLE",
+          "incremental_national_value_m_sar": "NOT_CALCULABLE",
+          "localized_reasons": {
+            "ar": [
+              "يلزم قيد تقني مثبت وتجاور لخط رئيسي أو مشروع مشترك."
+            ],
+            "en": [
+              "A verified technology constraint and major-line/JV adjacency are required."
+            ]
+          },
+          "policy_permissibility": "NOT_CALCULABLE",
+          "precedence": {
+            "blocked_by_lower_route": null
+          },
+          "reason_codes": [
+            "ROUTE_EVIDENCE_REQUIRED"
+          ],
+          "reasons": [
+            "A verified technology constraint and major-line/JV adjacency are required."
+          ],
+          "resolves_binding_constraint": "NOT_CALCULABLE",
+          "route_code": 6,
+          "route_key": "technology_or_jv",
+          "status": "NOT_CALCULABLE",
+          "unrounded_incremental_national_value_m_sar": "NOT_CALCULABLE"
+        },
+        {
+          "additionality": "NOT_CALCULABLE",
+          "competition": "NOT_CALCULABLE",
+          "economics": {
+            "minimum_effective_support_m": "NOT_CALCULABLE",
+            "unsupported_irr": "NOT_CALCULABLE",
+            "unsupported_npv_m": "NOT_CALCULABLE"
+          },
+          "evidence_ids": [],
+          "feasibility": "NOT_CALCULABLE",
+          "incremental_national_value_m_sar": "NOT_CALCULABLE",
+          "localized_reasons": {
+            "ar": [
+              "يتطلب المشروع الجديد فشل المسارات الأدنى، ومسافة قدرة أعلى من النطاق المحدد، وطلباً عند الحد الأدنى للكفاءة، واجتياز بوابات المنافسة."
+            ],
+            "en": [
+              "Greenfield requires failed lower routes, D* above the configured band, demand at MES, and passing competition gates."
+            ]
+          },
+          "policy_permissibility": "NOT_CALCULABLE",
+          "precedence": {
+            "blocked_by_lower_route": null
+          },
+          "reason_codes": [
+            "ROUTE_EVIDENCE_REQUIRED"
+          ],
+          "reasons": [
+            "Greenfield requires failed lower routes, D* above the configured band, demand at MES, and passing competition gates."
+          ],
+          "resolves_binding_constraint": "NOT_CALCULABLE",
+          "route_code": 7,
+          "route_key": "targeted_greenfield",
+          "status": "NOT_CALCULABLE",
+          "unrounded_incremental_national_value_m_sar": "NOT_CALCULABLE"
+        },
+        {
+          "additionality": "NOT_CALCULABLE",
+          "competition": "NOT_CALCULABLE",
+          "economics": {
+            "minimum_effective_support_m": "NOT_CALCULABLE",
+            "unsupported_irr": "NOT_CALCULABLE",
+            "unsupported_npv_m": "NOT_CALCULABLE"
+          },
+          "evidence_ids": [],
+          "feasibility": "NOT_CALCULABLE",
+          "incremental_national_value_m_sar": "NOT_CALCULABLE",
+          "localized_reasons": {
+            "ar": [
+              "يتطلب المسار 8 الرسم البياني المحكوم وقيمة فتح موجبة؛ الرسم البياني مطلوب."
+            ],
+            "en": [
+              "GRAPH_REQUIRED: route 8 requires the governed dependency graph and a positive UnlockValue."
+            ]
+          },
+          "policy_permissibility": "NOT_CALCULABLE",
+          "precedence": {
+            "blocked_by_lower_route": null
+          },
+          "reason_codes": [
+            "GRAPH_REQUIRED"
+          ],
+          "reasons": [
+            "GRAPH_REQUIRED: route 8 requires the governed dependency graph and a positive UnlockValue."
+          ],
+          "resolves_binding_constraint": "NOT_CALCULABLE",
+          "route_code": 8,
+          "route_key": "shared_enabler",
+          "status": "NOT_CALCULABLE",
+          "unrounded_incremental_national_value_m_sar": "NOT_CALCULABLE"
+        }
+      ],
+      "route_label": "No deep-resolution route; screening disposition only",
+      "screening_disposition": "NO_CANDIDATE",
+      "state": null,
+      "synthetic_flag": false
+    },
+    "advance_gate": {
+      "blocked_classes": [
+        "D",
+        "E"
+      ],
+      "blocked_fields": [],
+      "blocked_resolution_statuses": [
+        "PARTIAL",
+        "UNRESOLVED",
+        "CONTRADICTORY",
+        "MISSING"
+      ],
+      "passes": true
+    },
+    "as_of_date": "2026-09-02",
+    "authority": {
+      "config_versions": {
+        "decision_narratives": "1.2.0",
+        "evidence_policy": "1.4.0",
+        "sector_profiles": "1.1.0",
+        "thresholds": "1.2.0",
+        "ui_strings": "1.2.0"
+      },
+      "methodology": {
+        "file": "docs/authority/Industrial_Opportunity_Resolution_Methodology_Final_KSA.docx",
+        "sha256": "5717cbd42acc9947ce5e450013719275acb7ed1470847b21fb2cc547c8ac4ce9",
+        "sha256_prefix": "5717cbd42acc"
+      },
+      "project_version": "0.2.0"
+    },
+    "capability": {
+      "control_message": "Route band published: coverage and hard-gate controls pass.",
+      "d_known": 0.05,
+      "d_star": 0.05,
+      "dimensions": [
+        {
+          "dimension": "feedstock_chemistry",
+          "known": true,
+          "state": 0,
+          "weight": 0.15
+        },
+        {
+          "dimension": "core_process_route",
+          "known": true,
+          "state": 0,
+          "weight": 0.2
+        },
+        {
+          "dimension": "equipment_envelope",
+          "known": true,
+          "state": 0,
+          "weight": 0.15
+        },
+        {
+          "dimension": "finishing_spec_control",
+          "known": true,
+          "state": 0,
+          "weight": 0.1
+        },
+        {
+          "dimension": "qa_lab_metrology",
+          "known": true,
+          "state": 0,
+          "weight": 0.1
+        },
+        {
+          "dimension": "certification_customer_qualification",
+          "known": true,
+          "state": 1,
+          "weight": 0.15
+        },
+        {
+          "dimension": "capacity_time_window",
+          "known": true,
+          "state": 0,
+          "weight": 0.05
+        },
+        {
+          "dimension": "utilities_ehs_permitting",
+          "known": true,
+          "state": 0,
+          "weight": 0.05
+        },
+        {
+          "dimension": "skills_market_integration",
+          "known": true,
+          "state": 0,
+          "weight": 0.05
+        }
+      ],
+      "internal_d_star_before_gate": 0.05,
+      "known_hard_gate_failures": [],
+      "known_weight_coverage": 1.0,
+      "minimum_known_coverage": 0.7,
+      "profile_hard_gates": {
+        "application_qualification": "RESOLVED",
+        "conversion_route": "RESOLVED",
+        "performance_requirement": "RESOLVED",
+        "polymer_additive_compatibility": "RESOLVED",
+        "tooling": "RESOLVED"
+      },
+      "profile_label": "Technical plastics",
+      "route_band": {
+        "code": "immediate_adjacency",
+        "label": "Immediate adjacency",
+        "route_hint": "Existing capacity, linkage or simple debottlenecking"
+      },
+      "route_publishable": true,
+      "sector_profile": "technical_plastics",
+      "unknown_penalty_lambda": 0.5,
+      "unknown_weight": 0.0,
+      "unresolved_decision_specific_hard_gates": [],
+      "unresolved_hard_gates": [],
+      "unresolved_profile_hard_gates": []
+    },
+    "capacity": null,
+    "competition": null,
+    "criticality_designation": "UNAVAILABLE",
+    "data_unlocks": [],
+    "domestic_capability": {
+      "coarse_adjacency_signals": [],
+      "producer_evidence": [],
+      "profile_hard_gates": {
+        "application_qualification": {
+          "evidence_ids": [
+            "E-GATE"
+          ],
+          "status": "RESOLVED"
+        },
+        "conversion_route": {
+          "evidence_ids": [
+            "E-GATE"
+          ],
+          "status": "RESOLVED"
+        },
+        "performance_requirement": {
+          "evidence_ids": [
+            "E-GATE"
+          ],
+          "status": "RESOLVED"
+        },
+        "polymer_additive_compatibility": {
+          "evidence_ids": [
+            "E-GATE"
+          ],
+          "status": "RESOLVED"
+        },
+        "tooling": {
+          "evidence_ids": [
+            "E-GATE"
+          ],
+          "status": "RESOLVED"
+        }
+      },
+      "public_dimension_states": {
+        "capacity_time_window": 0,
+        "certification_customer_qualification": 1,
+        "core_process_route": 0,
+        "equipment_envelope": 0,
+        "feedstock_chemistry": 0,
+        "finishing_spec_control": 0,
+        "qa_lab_metrology": 0,
+        "skills_market_integration": 0,
+        "utilities_ehs_permitting": 0
+      },
+      "same_process_family": false,
+      "unresolved_hard_gates": [],
+      "verified_present": true
+    },
+    "domestic_flows": {
+      "domestic_origin_exports_kt": 0.0,
+      "domestic_production_kt": 100.0,
+      "period_year": 2026,
+      "reexports_kt": 0.0,
+      "retained_imports_kt": 10.0,
+      "source_evidence_ids": [
+        "E-CAP"
+      ]
+    },
+    "economics": null,
+    "evidence": [
+      {
+        "contradiction": null,
+        "evidence_class": "B",
+        "evidence_id": "E-ID",
+        "period": "2026",
+        "retrieved_at": "2026-09-02",
+        "reviewer_status": "confirmed_by_responsible_authority",
+        "source": "TEST_FIXTURE",
+        "status": "observed",
+        "supports": [
+          "TARGET_PRODUCT_IDENTITY"
+        ],
+        "synthetic_flag": false,
+        "title": "Target product identity fixture",
+        "transformation": "No transformation; synthetic-free test fixture.",
+        "url": "https://example.invalid/e-id"
+      },
+      {
+        "contradiction": null,
+        "evidence_class": "B",
+        "evidence_id": "E-DEMAND",
+        "period": "2026",
+        "retrieved_at": "2026-09-02",
+        "reviewer_status": "confirmed_by_responsible_authority",
+        "source": "TEST_FIXTURE",
+        "status": "observed",
+        "supports": [
+          "TARGET_SPECIFICATION_DEMAND"
+        ],
+        "synthetic_flag": false,
+        "title": "Target-specification demand fixture",
+        "transformation": "No transformation; synthetic-free test fixture.",
+        "url": "https://example.invalid/e-demand"
+      },
+      {
+        "contradiction": null,
+        "evidence_class": "C",
+        "evidence_id": "E-CAP",
+        "period": "2026",
+        "retrieved_at": "2026-09-02",
+        "reviewer_status": "confirmed_by_responsible_authority",
+        "source": "TEST_FIXTURE",
+        "status": "observed",
+        "supports": [
+          "DOMESTIC_CAPABILITY_ASSESSMENT"
+        ],
+        "synthetic_flag": false,
+        "title": "Domestic capability fixture",
+        "transformation": "No transformation; synthetic-free test fixture.",
+        "url": "https://example.invalid/e-cap"
+      },
+      {
+        "contradiction": null,
+        "evidence_class": "C",
+        "evidence_id": "E-GATE",
+        "period": "2026",
+        "retrieved_at": "2026-09-02",
+        "reviewer_status": "confirmed_by_responsible_authority",
+        "source": "TEST_FIXTURE",
+        "status": "observed",
+        "supports": [
+          "HARD_REGULATORY_PROCESS_GATES"
+        ],
+        "synthetic_flag": false,
+        "title": "Hard-gate resolution fixture",
+        "transformation": "No transformation; synthetic-free test fixture.",
+        "url": "https://example.invalid/e-gate"
+      },
+      {
+        "contradiction": null,
+        "evidence_class": "B",
+        "evidence_id": "E-ROUTE",
+        "period": "2026",
+        "retrieved_at": "2026-09-02",
+        "reviewer_status": "confirmed_by_responsible_authority",
+        "source": "TEST_FIXTURE",
+        "status": "observed",
+        "supports": [
+          "ROUTE_ECONOMICS",
+          "ROUTE_NATIONAL_VALUE",
+          "ROUTE_COMPETITION"
+        ],
+        "synthetic_flag": false,
+        "title": "Route economics and policy fixture",
+        "transformation": "No transformation; synthetic-free test fixture.",
+        "url": "https://example.invalid/e-route"
+      }
+    ],
+    "evidence_class_assessment": {
+      "demand_at_required_specification": {
+        "contradiction_evidence_ids": [],
+        "evidence_class": "B",
+        "evidence_ids": [
+          "E-DEMAND"
+        ],
+        "field": "demand_at_required_specification",
+        "resolution_status": "RESOLVED",
+        "support_codes": [
+          "TARGET_SPECIFICATION_DEMAND"
+        ]
+      },
+      "domestic_supply_or_capability": {
+        "contradiction_evidence_ids": [],
+        "evidence_class": "C",
+        "evidence_ids": [
+          "E-CAP"
+        ],
+        "field": "domestic_supply_or_capability",
+        "resolution_status": "RESOLVED",
+        "support_codes": [
+          "DOMESTIC_CAPABILITY_ASSESSMENT"
+        ]
+      },
+      "hard_regulatory_or_process_gate": {
+        "contradiction_evidence_ids": [],
+        "evidence_class": "C",
+        "evidence_ids": [
+          "E-GATE"
+        ],
+        "field": "hard_regulatory_or_process_gate",
+        "resolution_status": "RESOLVED",
+        "support_codes": [
+          "HARD_REGULATORY_PROCESS_GATES"
+        ]
+      },
+      "product_identity": {
+        "contradiction_evidence_ids": [],
+        "evidence_class": "B",
+        "evidence_ids": [
+          "E-ID"
+        ],
+        "field": "product_identity",
+        "resolution_status": "RESOLVED",
+        "support_codes": [
+          "TARGET_PRODUCT_IDENTITY"
+        ]
+      }
+    },
+    "evsi": null,
+    "gap_class": {
+      "constraint_class": "qualification_or_certification",
+      "label": "Application gap",
+      "localized_label": {
+        "ar": "فجوة تطبيق",
+        "en": "Application gap"
+      },
+      "primary": "application",
+      "reason_codes": [],
+      "secondary": []
+    },
+    "hard_exclusions": [
+      {
+        "code": "EX-01_HETEROGENEOUS_RESIDUAL",
+        "evidence_ids": [
+          "E-ID"
+        ],
+        "inputs": {
+          "commercial_product_separable": true,
+          "product_level_evidence_available": true
+        },
+        "localized_narrative": {
+          "ar": "يتعذر فصل المنتج التجاري عن رمز متبق شديد التباين، ولا يتوافر دليل على مستوى المنتج.",
+          "en": "The commercial product cannot be separated from a highly heterogeneous residual code and no product-level evidence is available."
+        },
+        "narrative": "The commercial product cannot be separated from a highly heterogeneous residual code and no product-level evidence is available.",
+        "reason_code": "EXCLUSION_NOT_SATISFIED",
+        "status": "NOT_SATISFIED"
+      },
+      {
+        "code": "EX-02_MARKET_BELOW_MES",
+        "evidence_ids": [
+          "E-DEMAND"
+        ],
+        "inputs": {
+          "credible_export_contract": false,
+          "minimum_efficient_scale_kt": 50.0,
+          "sustainable_downside_demand_kt": 100.0
+        },
+        "localized_narrative": {
+          "ar": "السوق المستدام في سيناريو الطلب المتحفظ أدنى من الحد الأدنى للكفاءة، ولا يوجد عقد تصدير موثوق.",
+          "en": "The sustainable downside market is below minimum efficient scale and no credible export contract exists."
+        },
+        "narrative": "The sustainable downside market is below minimum efficient scale and no credible export contract exists.",
+        "reason_code": "EXCLUSION_NOT_SATISFIED",
+        "status": "NOT_SATISFIED"
+      },
+      {
+        "code": "EX-03_UNSATISFIABLE_HARD_GATE",
+        "evidence_ids": [
+          "E-GATE"
+        ],
+        "inputs": {
+          "gate_domain": "customer_qualification",
+          "gate_satisfiability": "SATISFIABLE"
+        },
+        "localized_narrative": {
+          "ar": "يتعذر استيفاء بوابة إلزامية قانونية أو متعلقة بالسلامة أو البيئة أو الملكية الفكرية أو تأهيل العميل.",
+          "en": "A legal, safety, environmental, IP or customer-qualification hard gate cannot be satisfied."
+        },
+        "narrative": "A legal, safety, environmental, IP or customer-qualification hard gate cannot be satisfied.",
+        "reason_code": "EXCLUSION_NOT_SATISFIED",
+        "status": "NOT_SATISFIED"
+      },
+      {
+        "code": "EX-04_IDLE_EQUIVALENT_CAPACITY",
+        "evidence_ids": [
+          "E-CAP"
+        ],
+        "inputs": {
+          "binding_market_failure": true,
+          "domestic_specification_equivalent": false,
+          "qualified_idle_capacity_kt": 0.0,
+          "target_specification_demand_kt": 100.0
+        },
+        "localized_narrative": {
+          "ar": "يلبي الإنتاج المحلي المواصفة المطلوبة بطاقة عاطلة مؤثرة، ولم يثبت وجود إخفاق سوقي ملزم.",
+          "en": "Domestic production meets the required specification with material idle capacity and no binding market failure is evidenced."
+        },
+        "narrative": "Domestic production meets the required specification with material idle capacity and no binding market failure is evidenced.",
+        "reason_code": "EXCLUSION_NOT_SATISFIED",
+        "status": "NOT_SATISFIED"
+      },
+      {
+        "code": "EX-05_TRANSITORY_OR_MEASUREMENT",
+        "evidence_ids": [
+          "E-ID"
+        ],
+        "inputs": {
+          "dominant_cause": "OTHER"
+        },
+        "localized_narrative": {
+          "ar": "تهيمن على الفجوة الظاهرة إعادة التصدير أو طلب مشروع لمرة واحدة أو موازنة سعرية مؤقتة أو انقطاع في التصنيف.",
+          "en": "The apparent gap is dominated by re-export, one-off project demand, temporary price arbitrage or classification discontinuity."
+        },
+        "narrative": "The apparent gap is dominated by re-export, one-off project demand, temporary price arbitrage or classification discontinuity.",
+        "reason_code": "EXCLUSION_NOT_SATISFIED",
+        "status": "NOT_SATISFIED"
+      },
+      {
+        "code": "EX-06_REDUNDANCY_OR_CROWD_OUT",
+        "evidence_ids": [
+          "E-ROUTE"
+        ],
+        "inputs": {
+          "competition_finding": "ACCEPTABLE"
+        },
+        "localized_narrative": {
+          "ar": "سيؤدي التدخل إلى طاقة فائضة غير مقبولة أو إلى مزاحمة منتج قائم أكثر كفاءة.",
+          "en": "The intervention would create unacceptable redundant capacity or crowd out a more efficient incumbent."
+        },
+        "narrative": "The intervention would create unacceptable redundant capacity or crowd out a more efficient incumbent.",
+        "reason_code": "EXCLUSION_NOT_SATISFIED",
+        "status": "NOT_SATISFIED"
+      }
+    ],
+    "integrity": {
+      "latest_imports_kt": 10.0,
+      "latest_imports_usd_m": 10.0,
+      "real_decision_uses_public_only": true,
+      "scenario_reconciliation": null,
+      "synthetic_isolation": true
+    },
+    "mode": "public",
+    "narrative_version": "1.0.0",
+    "opportunity": {
+      "application_boundary": "Named test specification and application.",
+      "as_of_date": "2026-09-02",
+      "commercial_name_ar": "منتج اختباري",
+      "commercial_name_en": "Test product",
+      "decision_object_status": "resolved",
+      "hs6": "999999",
+      "hs_revision": "H0",
+      "id": "FIX-PUBLIC-NO-CANDIDATE",
+      "national_tariff_line": "UNAVAILABLE",
+      "sector_profile": "technical_plastics"
+    },
+    "preferred_hypothesis": null,
+    "real_decision": {
+      "advance_gate": {
+        "blocked_classes": [
+          "D",
+          "E"
+        ],
+        "blocked_fields": [],
+        "blocked_resolution_statuses": [
+          "PARTIAL",
+          "UNRESOLVED",
+          "CONTRADICTORY",
+          "MISSING"
+        ],
+        "passes": true
+      },
+      "advance_support_signal_rule_ids": [],
+      "conditions": [
+        "Re-screen when a candidate signal fires on the public series."
+      ],
+      "confidence": "C",
+      "decision_reason_code": "NO_TRIGGER_FIRED",
+      "evidence_class_assessment": {
+        "demand_at_required_specification": {
+          "contradiction_evidence_ids": [],
+          "evidence_class": "B",
+          "evidence_ids": [
+            "E-DEMAND"
+          ],
+          "field": "demand_at_required_specification",
+          "resolution_status": "RESOLVED",
+          "support_codes": [
+            "TARGET_SPECIFICATION_DEMAND"
+          ]
+        },
+        "domestic_supply_or_capability": {
+          "contradiction_evidence_ids": [],
+          "evidence_class": "C",
+          "evidence_ids": [
+            "E-CAP"
+          ],
+          "field": "domestic_supply_or_capability",
+          "resolution_status": "RESOLVED",
+          "support_codes": [
+            "DOMESTIC_CAPABILITY_ASSESSMENT"
+          ]
+        },
+        "hard_regulatory_or_process_gate": {
+          "contradiction_evidence_ids": [],
+          "evidence_class": "C",
+          "evidence_ids": [
+            "E-GATE"
+          ],
+          "field": "hard_regulatory_or_process_gate",
+          "resolution_status": "RESOLVED",
+          "support_codes": [
+            "HARD_REGULATORY_PROCESS_GATES"
+          ]
+        },
+        "product_identity": {
+          "contradiction_evidence_ids": [],
+          "evidence_class": "B",
+          "evidence_ids": [
+            "E-ID"
+          ],
+          "field": "product_identity",
+          "resolution_status": "RESOLVED",
+          "support_codes": [
+            "TARGET_PRODUCT_IDENTITY"
+          ]
+        }
+      },
+      "gap_class": {
+        "constraint_class": "qualification_or_certification",
+        "label": "Application gap",
+        "localized_label": {
+          "ar": "فجوة تطبيق",
+          "en": "Application gap"
+        },
+        "primary": "application",
+        "reason_codes": [],
+        "secondary": []
+      },
+      "hard_exclusions": [
+        {
+          "code": "EX-01_HETEROGENEOUS_RESIDUAL",
+          "evidence_ids": [
+            "E-ID"
+          ],
+          "inputs": {
+            "commercial_product_separable": true,
+            "product_level_evidence_available": true
+          },
+          "localized_narrative": {
+            "ar": "يتعذر فصل المنتج التجاري عن رمز متبق شديد التباين، ولا يتوافر دليل على مستوى المنتج.",
+            "en": "The commercial product cannot be separated from a highly heterogeneous residual code and no product-level evidence is available."
+          },
+          "narrative": "The commercial product cannot be separated from a highly heterogeneous residual code and no product-level evidence is available.",
+          "reason_code": "EXCLUSION_NOT_SATISFIED",
+          "status": "NOT_SATISFIED"
+        },
+        {
+          "code": "EX-02_MARKET_BELOW_MES",
+          "evidence_ids": [
+            "E-DEMAND"
+          ],
+          "inputs": {
+            "credible_export_contract": false,
+            "minimum_efficient_scale_kt": 50.0,
+            "sustainable_downside_demand_kt": 100.0
+          },
+          "localized_narrative": {
+            "ar": "السوق المستدام في سيناريو الطلب المتحفظ أدنى من الحد الأدنى للكفاءة، ولا يوجد عقد تصدير موثوق.",
+            "en": "The sustainable downside market is below minimum efficient scale and no credible export contract exists."
+          },
+          "narrative": "The sustainable downside market is below minimum efficient scale and no credible export contract exists.",
+          "reason_code": "EXCLUSION_NOT_SATISFIED",
+          "status": "NOT_SATISFIED"
+        },
+        {
+          "code": "EX-03_UNSATISFIABLE_HARD_GATE",
+          "evidence_ids": [
+            "E-GATE"
+          ],
+          "inputs": {
+            "gate_domain": "customer_qualification",
+            "gate_satisfiability": "SATISFIABLE"
+          },
+          "localized_narrative": {
+            "ar": "يتعذر استيفاء بوابة إلزامية قانونية أو متعلقة بالسلامة أو البيئة أو الملكية الفكرية أو تأهيل العميل.",
+            "en": "A legal, safety, environmental, IP or customer-qualification hard gate cannot be satisfied."
+          },
+          "narrative": "A legal, safety, environmental, IP or customer-qualification hard gate cannot be satisfied.",
+          "reason_code": "EXCLUSION_NOT_SATISFIED",
+          "status": "NOT_SATISFIED"
+        },
+        {
+          "code": "EX-04_IDLE_EQUIVALENT_CAPACITY",
+          "evidence_ids": [
+            "E-CAP"
+          ],
+          "inputs": {
+            "binding_market_failure": true,
+            "domestic_specification_equivalent": false,
+            "qualified_idle_capacity_kt": 0.0,
+            "target_specification_demand_kt": 100.0
+          },
+          "localized_narrative": {
+            "ar": "يلبي الإنتاج المحلي المواصفة المطلوبة بطاقة عاطلة مؤثرة، ولم يثبت وجود إخفاق سوقي ملزم.",
+            "en": "Domestic production meets the required specification with material idle capacity and no binding market failure is evidenced."
+          },
+          "narrative": "Domestic production meets the required specification with material idle capacity and no binding market failure is evidenced.",
+          "reason_code": "EXCLUSION_NOT_SATISFIED",
+          "status": "NOT_SATISFIED"
+        },
+        {
+          "code": "EX-05_TRANSITORY_OR_MEASUREMENT",
+          "evidence_ids": [
+            "E-ID"
+          ],
+          "inputs": {
+            "dominant_cause": "OTHER"
+          },
+          "localized_narrative": {
+            "ar": "تهيمن على الفجوة الظاهرة إعادة التصدير أو طلب مشروع لمرة واحدة أو موازنة سعرية مؤقتة أو انقطاع في التصنيف.",
+            "en": "The apparent gap is dominated by re-export, one-off project demand, temporary price arbitrage or classification discontinuity."
+          },
+          "narrative": "The apparent gap is dominated by re-export, one-off project demand, temporary price arbitrage or classification discontinuity.",
+          "reason_code": "EXCLUSION_NOT_SATISFIED",
+          "status": "NOT_SATISFIED"
+        },
+        {
+          "code": "EX-06_REDUNDANCY_OR_CROWD_OUT",
+          "evidence_ids": [
+            "E-ROUTE"
+          ],
+          "inputs": {
+            "competition_finding": "ACCEPTABLE"
+          },
+          "localized_narrative": {
+            "ar": "سيؤدي التدخل إلى طاقة فائضة غير مقبولة أو إلى مزاحمة منتج قائم أكثر كفاءة.",
+            "en": "The intervention would create unacceptable redundant capacity or crowd out a more efficient incumbent."
+          },
+          "narrative": "The intervention would create unacceptable redundant capacity or crowd out a more efficient incumbent.",
+          "reason_code": "EXCLUSION_NOT_SATISFIED",
+          "status": "NOT_SATISFIED"
+        }
+      ],
+      "headline": "NO CANDIDATE — no candidate signal fired",
+      "kill_conditions": [],
+      "localized_missing_facts": {
+        "ar": [],
+        "en": []
+      },
+      "localized_narrative": {
+        "ar": {
+          "conditions": [
+            {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "أعد الفرز عندما ينطلق محفّز للترشيح في السلسلة العامة."
+                }
+              ],
+              "text": "أعد الفرز عندما ينطلق محفّز للترشيح في السلسلة العامة."
+            }
+          ],
+          "headline": {
+            "segments": [
+              {
+                "kind": "literal",
+                "text": "لا مرشح — لم ينطلق أي محفّز للترشيح"
+              }
+            ],
+            "text": "لا مرشح — لم ينطلق أي محفّز للترشيح"
+          },
+          "kill_conditions": [],
+          "missing_facts": [],
+          "rationale": {
+            "segments": [
+              {
+                "kind": "literal",
+                "text": "لم ينطلق أي محفّز للترشيح من الأدلة العامة؛ لذلك لا تدخل الحالة التحليل المتعمق ولا تُسند إليها حالة رسمية."
+              }
+            ],
+            "text": "لم ينطلق أي محفّز للترشيح من الأدلة العامة؛ لذلك لا تدخل الحالة التحليل المتعمق ولا تُسند إليها حالة رسمية."
+          },
+          "route_label": {
+            "segments": [
+              {
+                "kind": "literal",
+                "text": "لا مسار للتحليل المتعمق؛ تصرف الفرز فقط"
+              }
+            ],
+            "text": "لا مسار للتحليل المتعمق؛ تصرف الفرز فقط"
+          }
+        },
+        "en": {
+          "conditions": [
+            {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "Re-screen when a candidate signal fires on the public series."
+                }
+              ],
+              "text": "Re-screen when a candidate signal fires on the public series."
+            }
+          ],
+          "headline": {
+            "segments": [
+              {
+                "kind": "literal",
+                "text": "NO CANDIDATE — no candidate signal fired"
+              }
+            ],
+            "text": "NO CANDIDATE — no candidate signal fired"
+          },
+          "kill_conditions": [],
+          "missing_facts": [],
+          "rationale": {
+            "segments": [
+              {
+                "kind": "literal",
+                "text": "No candidate trigger fired on public evidence; the case is not admitted to deep resolution and no formal state is assigned."
+              }
+            ],
+            "text": "No candidate trigger fired on public evidence; the case is not admitted to deep resolution and no formal state is assigned."
+          },
+          "route_label": {
+            "segments": [
+              {
+                "kind": "literal",
+                "text": "No deep-resolution route; screening disposition only"
+              }
+            ],
+            "text": "No deep-resolution route; screening disposition only"
+          }
+        }
+      },
+      "missing_facts": [],
+      "narrative_version": "1.0.0",
+      "preferred_hypothesis": null,
+      "rationale": "No candidate trigger fired on public evidence; the case is not admitted to deep resolution and no formal state is assigned.",
+      "rejection_conditions": [
+        {
+          "code": "hard_exclusion",
+          "evidence_ids": [
+            "E-CAP",
+            "E-DEMAND",
+            "E-GATE",
+            "E-ID",
+            "E-ROUTE"
+          ],
+          "reason_code": "HARD_EXCLUSION_NOT_SATISFIED",
+          "status": "NOT_SATISFIED"
+        },
+        {
+          "code": "false_or_measurement_gap",
+          "evidence_ids": [
+            "E-CAP",
+            "E-DEMAND",
+            "E-GATE",
+            "E-ID",
+            "E-ROUTE"
+          ],
+          "reason_code": "FALSE_OR_MEASUREMENT_NOT_ESTABLISHED",
+          "status": "NOT_SATISFIED"
+        },
+        {
+          "code": "equivalent_idle_qualified_supply",
+          "evidence_ids": [
+            "E-CAP",
+            "E-DEMAND"
+          ],
+          "reason_code": "EQUIVALENT_QUALIFIED_SUPPLY_NOT_ESTABLISHED",
+          "status": "NOT_SATISFIED"
+        },
+        {
+          "code": "uneconomic_at_efficient_scale",
+          "evidence_ids": [],
+          "reason_code": "EFFICIENT_SCALE_ECONOMICS_UNAVAILABLE",
+          "status": "NOT_CALCULABLE"
+        },
+        {
+          "code": "structural_overcapacity",
+          "evidence_ids": [
+            "E-ROUTE"
+          ],
+          "reason_code": "STRUCTURAL_OVERCAPACITY_NOT_ESTABLISHED",
+          "status": "NOT_SATISFIED"
+        },
+        {
+          "code": "generic_capacity_contradicted",
+          "evidence_ids": [],
+          "reason_code": "GENERIC_CAPACITY_NOT_CONTRADICTED",
+          "status": "NOT_SATISFIED"
+        }
+      ],
+      "route_code": null,
+      "route_hypotheses": [
+        {
+          "additionality": "passes",
+          "competition": "passes",
+          "economics": {
+            "minimum_effective_support_m": "NOT_CALCULABLE",
+            "unsupported_irr": "NOT_CALCULABLE",
+            "unsupported_npv_m": "NOT_CALCULABLE"
+          },
+          "evidence_ids": [],
+          "feasibility": "passes",
+          "incremental_national_value_m_sar": "NOT_CALCULABLE",
+          "localized_reasons": {
+            "ar": [
+              "عدم التدخل هو أساس المقارنة ويُختار عندما يحسم شرط رفض مثبت المقترح بالكامل."
+            ],
+            "en": [
+              "No action is the comparator and is selected when an evidenced rejection condition fully resolves the proposition."
+            ]
+          },
+          "policy_permissibility": "passes",
+          "precedence": {
+            "blocked_by_lower_route": null
+          },
+          "reason_codes": [
+            "ROUTE_0_GAP_REQUIRES_ACTION"
+          ],
+          "reasons": [
+            "No action is the comparator and is selected when an evidenced rejection condition fully resolves the proposition."
+          ],
+          "resolves_binding_constraint": "fails",
+          "route_code": 0,
+          "route_key": "no_intervention",
+          "status": "fails",
+          "unrounded_incremental_national_value_m_sar": "NOT_CALCULABLE"
+        },
+        {
+          "additionality": "NOT_CALCULABLE",
+          "competition": "NOT_CALCULABLE",
+          "economics": {
+            "minimum_effective_support_m": "NOT_CALCULABLE",
+            "unsupported_irr": "NOT_CALCULABLE",
+            "unsupported_npv_m": "NOT_CALCULABLE"
+          },
+          "evidence_ids": [],
+          "feasibility": "NOT_CALCULABLE",
+          "incremental_national_value_m_sar": "NOT_CALCULABLE",
+          "localized_reasons": {
+            "ar": [
+              "يلزم دليل على عائق إداري أو تصنيفي أو تنظيمي."
+            ],
+            "en": [
+              "Administrative, classification or regulatory barrier evidence is required."
+            ]
+          },
+          "policy_permissibility": "NOT_CALCULABLE",
+          "precedence": {
+            "blocked_by_lower_route": null
+          },
+          "reason_codes": [
+            "ROUTE_EVIDENCE_REQUIRED"
+          ],
+          "reasons": [
+            "Administrative, classification or regulatory barrier evidence is required."
+          ],
+          "resolves_binding_constraint": "NOT_CALCULABLE",
+          "route_code": 1,
+          "route_key": "administrative_barrier_removal",
+          "status": "NOT_CALCULABLE",
+          "unrounded_incremental_national_value_m_sar": "NOT_CALCULABLE"
+        },
+        {
+          "additionality": "NOT_CALCULABLE",
+          "competition": "NOT_CALCULABLE",
+          "economics": {
+            "minimum_effective_support_m": "NOT_CALCULABLE",
+            "unsupported_irr": "NOT_CALCULABLE",
+            "unsupported_npv_m": "NOT_CALCULABLE"
+          },
+          "evidence_ids": [],
+          "feasibility": "NOT_CALCULABLE",
+          "incremental_national_value_m_sar": "NOT_CALCULABLE",
+          "localized_reasons": {
+            "ar": [
+              "يلزم قيد مثبت في المعلومات أو الربط أو المواءمة."
+            ],
+            "en": [
+              "A verified information, linkage or matching constraint is required."
+            ]
+          },
+          "policy_permissibility": "NOT_CALCULABLE",
+          "precedence": {
+            "blocked_by_lower_route": null
+          },
+          "reason_codes": [
+            "ROUTE_EVIDENCE_REQUIRED"
+          ],
+          "reasons": [
+            "A verified information, linkage or matching constraint is required."
+          ],
+          "resolves_binding_constraint": "NOT_CALCULABLE",
+          "route_code": 2,
+          "route_key": "information_market_linkage",
+          "status": "NOT_CALCULABLE",
+          "unrounded_incremental_national_value_m_sar": "NOT_CALCULABLE"
+        },
+        {
+          "additionality": "passes",
+          "competition": {
+            "capacity_ratio": 1.0,
+            "passes": true,
+            "warning_threshold": 1.25
+          },
+          "economics": {
+            "minimum_effective_support_m": 0.0,
+            "unsupported_irr": 0.13066,
+            "unsupported_npv_m": 0.413
+          },
+          "evidence_ids": [
+            "E-ROUTE"
+          ],
+          "feasibility": "fails",
+          "incremental_national_value_m_sar": 66.0,
+          "localized_reasons": {
+            "ar": [
+              "المسار غير مجدٍ تقنياً بحسب الأدلة المتاحة."
+            ],
+            "en": [
+              "The route is not technically feasible on the available evidence."
+            ]
+          },
+          "policy_permissibility": "passes",
+          "precedence": {
+            "blocked_by_lower_route": null
+          },
+          "reason_codes": [
+            "FEASIBILITY_FAILED"
+          ],
+          "reasons": [
+            "The route is not technically feasible on the available evidence."
+          ],
+          "resolves_binding_constraint": "passes",
+          "route_code": 3,
+          "route_key": "certification_testing_quality",
+          "status": "fails",
+          "unrounded_incremental_national_value_m_sar": 66.0
+        },
+        {
+          "additionality": "NOT_CALCULABLE",
+          "competition": "NOT_CALCULABLE",
+          "economics": {
+            "minimum_effective_support_m": "NOT_CALCULABLE",
+            "unsupported_irr": "NOT_CALCULABLE",
+            "unsupported_npv_m": "NOT_CALCULABLE"
+          },
+          "evidence_ids": [],
+          "feasibility": "NOT_CALCULABLE",
+          "incremental_national_value_m_sar": "NOT_CALCULABLE",
+          "localized_reasons": {
+            "ar": [
+              "يلزم قيد مثبت في تجزؤ الطلب أو الشراء."
+            ],
+            "en": [
+              "A verified demand-fragmentation or offtake constraint is required."
+            ]
+          },
+          "policy_permissibility": "NOT_CALCULABLE",
+          "precedence": {
+            "blocked_by_lower_route": null
+          },
+          "reason_codes": [
+            "ROUTE_EVIDENCE_REQUIRED"
+          ],
+          "reasons": [
+            "A verified demand-fragmentation or offtake constraint is required."
+          ],
+          "resolves_binding_constraint": "NOT_CALCULABLE",
+          "route_code": 4,
+          "route_key": "demand_aggregation_offtake",
+          "status": "NOT_CALCULABLE",
+          "unrounded_incremental_national_value_m_sar": "NOT_CALCULABLE"
+        },
+        {
+          "additionality": "NOT_CALCULABLE",
+          "competition": "NOT_CALCULABLE",
+          "economics": {
+            "minimum_effective_support_m": "NOT_CALCULABLE",
+            "unsupported_irr": "NOT_CALCULABLE",
+            "unsupported_npv_m": "NOT_CALCULABLE"
+          },
+          "evidence_ids": [],
+          "feasibility": "NOT_CALCULABLE",
+          "incremental_national_value_m_sar": "NOT_CALCULABLE",
+          "localized_reasons": {
+            "ar": [
+              "يجعل التجاور المثبت للمنتج القائم المسار القائم هو الفرضية ذات الأولوية؛ وتظل الطاقة الفعلية والاقتصاديات مطلوبة."
+            ],
+            "en": [
+              "Verified incumbent adjacency makes brownfield the priority hypothesis; effective capacity and economics remain required."
+            ]
+          },
+          "policy_permissibility": "NOT_CALCULABLE",
+          "precedence": {
+            "blocked_by_lower_route": null
+          },
+          "reason_codes": [
+            "ROUTE_EVIDENCE_REQUIRED"
+          ],
+          "reasons": [
+            "Verified incumbent adjacency makes brownfield the priority hypothesis; effective capacity and economics remain required."
+          ],
+          "resolves_binding_constraint": "NOT_CALCULABLE",
+          "route_code": 5,
+          "route_key": "brownfield_incremental_expansion",
+          "status": "NOT_CALCULABLE",
+          "unrounded_incremental_national_value_m_sar": "NOT_CALCULABLE"
+        },
+        {
+          "additionality": "NOT_CALCULABLE",
+          "competition": "NOT_CALCULABLE",
+          "economics": {
+            "minimum_effective_support_m": "NOT_CALCULABLE",
+            "unsupported_irr": "NOT_CALCULABLE",
+            "unsupported_npv_m": "NOT_CALCULABLE"
+          },
+          "evidence_ids": [],
+          "feasibility": "NOT_CALCULABLE",
+          "incremental_national_value_m_sar": "NOT_CALCULABLE",
+          "localized_reasons": {
+            "ar": [
+              "يلزم قيد تقني مثبت وتجاور لخط رئيسي أو مشروع مشترك."
+            ],
+            "en": [
+              "A verified technology constraint and major-line/JV adjacency are required."
+            ]
+          },
+          "policy_permissibility": "NOT_CALCULABLE",
+          "precedence": {
+            "blocked_by_lower_route": null
+          },
+          "reason_codes": [
+            "ROUTE_EVIDENCE_REQUIRED"
+          ],
+          "reasons": [
+            "A verified technology constraint and major-line/JV adjacency are required."
+          ],
+          "resolves_binding_constraint": "NOT_CALCULABLE",
+          "route_code": 6,
+          "route_key": "technology_or_jv",
+          "status": "NOT_CALCULABLE",
+          "unrounded_incremental_national_value_m_sar": "NOT_CALCULABLE"
+        },
+        {
+          "additionality": "NOT_CALCULABLE",
+          "competition": "NOT_CALCULABLE",
+          "economics": {
+            "minimum_effective_support_m": "NOT_CALCULABLE",
+            "unsupported_irr": "NOT_CALCULABLE",
+            "unsupported_npv_m": "NOT_CALCULABLE"
+          },
+          "evidence_ids": [],
+          "feasibility": "NOT_CALCULABLE",
+          "incremental_national_value_m_sar": "NOT_CALCULABLE",
+          "localized_reasons": {
+            "ar": [
+              "يتطلب المشروع الجديد فشل المسارات الأدنى، ومسافة قدرة أعلى من النطاق المحدد، وطلباً عند الحد الأدنى للكفاءة، واجتياز بوابات المنافسة."
+            ],
+            "en": [
+              "Greenfield requires failed lower routes, D* above the configured band, demand at MES, and passing competition gates."
+            ]
+          },
+          "policy_permissibility": "NOT_CALCULABLE",
+          "precedence": {
+            "blocked_by_lower_route": null
+          },
+          "reason_codes": [
+            "ROUTE_EVIDENCE_REQUIRED"
+          ],
+          "reasons": [
+            "Greenfield requires failed lower routes, D* above the configured band, demand at MES, and passing competition gates."
+          ],
+          "resolves_binding_constraint": "NOT_CALCULABLE",
+          "route_code": 7,
+          "route_key": "targeted_greenfield",
+          "status": "NOT_CALCULABLE",
+          "unrounded_incremental_national_value_m_sar": "NOT_CALCULABLE"
+        },
+        {
+          "additionality": "NOT_CALCULABLE",
+          "competition": "NOT_CALCULABLE",
+          "economics": {
+            "minimum_effective_support_m": "NOT_CALCULABLE",
+            "unsupported_irr": "NOT_CALCULABLE",
+            "unsupported_npv_m": "NOT_CALCULABLE"
+          },
+          "evidence_ids": [],
+          "feasibility": "NOT_CALCULABLE",
+          "incremental_national_value_m_sar": "NOT_CALCULABLE",
+          "localized_reasons": {
+            "ar": [
+              "يتطلب المسار 8 الرسم البياني المحكوم وقيمة فتح موجبة؛ الرسم البياني مطلوب."
+            ],
+            "en": [
+              "GRAPH_REQUIRED: route 8 requires the governed dependency graph and a positive UnlockValue."
+            ]
+          },
+          "policy_permissibility": "NOT_CALCULABLE",
+          "precedence": {
+            "blocked_by_lower_route": null
+          },
+          "reason_codes": [
+            "GRAPH_REQUIRED"
+          ],
+          "reasons": [
+            "GRAPH_REQUIRED: route 8 requires the governed dependency graph and a positive UnlockValue."
+          ],
+          "resolves_binding_constraint": "NOT_CALCULABLE",
+          "route_code": 8,
+          "route_key": "shared_enabler",
+          "status": "NOT_CALCULABLE",
+          "unrounded_incremental_national_value_m_sar": "NOT_CALCULABLE"
+        }
+      ],
+      "route_label": "No deep-resolution route; screening disposition only",
+      "screening_disposition": "NO_CANDIDATE",
+      "state": null,
+      "synthetic_flag": false
+    },
+    "rejection_conditions": [
+      {
+        "code": "hard_exclusion",
+        "evidence_ids": [
+          "E-CAP",
+          "E-DEMAND",
+          "E-GATE",
+          "E-ID",
+          "E-ROUTE"
+        ],
+        "reason_code": "HARD_EXCLUSION_NOT_SATISFIED",
+        "status": "NOT_SATISFIED"
+      },
+      {
+        "code": "false_or_measurement_gap",
+        "evidence_ids": [
+          "E-CAP",
+          "E-DEMAND",
+          "E-GATE",
+          "E-ID",
+          "E-ROUTE"
+        ],
+        "reason_code": "FALSE_OR_MEASUREMENT_NOT_ESTABLISHED",
+        "status": "NOT_SATISFIED"
+      },
+      {
+        "code": "equivalent_idle_qualified_supply",
+        "evidence_ids": [
+          "E-CAP",
+          "E-DEMAND"
+        ],
+        "reason_code": "EQUIVALENT_QUALIFIED_SUPPLY_NOT_ESTABLISHED",
+        "status": "NOT_SATISFIED"
+      },
+      {
+        "code": "uneconomic_at_efficient_scale",
+        "evidence_ids": [],
+        "reason_code": "EFFICIENT_SCALE_ECONOMICS_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "structural_overcapacity",
+        "evidence_ids": [
+          "E-ROUTE"
+        ],
+        "reason_code": "STRUCTURAL_OVERCAPACITY_NOT_ESTABLISHED",
+        "status": "NOT_SATISFIED"
+      },
+      {
+        "code": "generic_capacity_contradicted",
+        "evidence_ids": [],
+        "reason_code": "GENERIC_CAPACITY_NOT_CONTRADICTED",
+        "status": "NOT_SATISFIED"
+      }
+    ],
+    "route_hypotheses": [
+      {
+        "additionality": "passes",
+        "competition": "passes",
+        "economics": {
+          "minimum_effective_support_m": "NOT_CALCULABLE",
+          "unsupported_irr": "NOT_CALCULABLE",
+          "unsupported_npv_m": "NOT_CALCULABLE"
+        },
+        "evidence_ids": [],
+        "feasibility": "passes",
+        "incremental_national_value_m_sar": "NOT_CALCULABLE",
+        "localized_reasons": {
+          "ar": [
+            "عدم التدخل هو أساس المقارنة ويُختار عندما يحسم شرط رفض مثبت المقترح بالكامل."
+          ],
+          "en": [
+            "No action is the comparator and is selected when an evidenced rejection condition fully resolves the proposition."
+          ]
+        },
+        "policy_permissibility": "passes",
+        "precedence": {
+          "blocked_by_lower_route": null
+        },
+        "reason_codes": [
+          "ROUTE_0_GAP_REQUIRES_ACTION"
+        ],
+        "reasons": [
+          "No action is the comparator and is selected when an evidenced rejection condition fully resolves the proposition."
+        ],
+        "resolves_binding_constraint": "fails",
+        "route_code": 0,
+        "route_key": "no_intervention",
+        "status": "fails",
+        "unrounded_incremental_national_value_m_sar": "NOT_CALCULABLE"
+      },
+      {
+        "additionality": "NOT_CALCULABLE",
+        "competition": "NOT_CALCULABLE",
+        "economics": {
+          "minimum_effective_support_m": "NOT_CALCULABLE",
+          "unsupported_irr": "NOT_CALCULABLE",
+          "unsupported_npv_m": "NOT_CALCULABLE"
+        },
+        "evidence_ids": [],
+        "feasibility": "NOT_CALCULABLE",
+        "incremental_national_value_m_sar": "NOT_CALCULABLE",
+        "localized_reasons": {
+          "ar": [
+            "يلزم دليل على عائق إداري أو تصنيفي أو تنظيمي."
+          ],
+          "en": [
+            "Administrative, classification or regulatory barrier evidence is required."
+          ]
+        },
+        "policy_permissibility": "NOT_CALCULABLE",
+        "precedence": {
+          "blocked_by_lower_route": null
+        },
+        "reason_codes": [
+          "ROUTE_EVIDENCE_REQUIRED"
+        ],
+        "reasons": [
+          "Administrative, classification or regulatory barrier evidence is required."
+        ],
+        "resolves_binding_constraint": "NOT_CALCULABLE",
+        "route_code": 1,
+        "route_key": "administrative_barrier_removal",
+        "status": "NOT_CALCULABLE",
+        "unrounded_incremental_national_value_m_sar": "NOT_CALCULABLE"
+      },
+      {
+        "additionality": "NOT_CALCULABLE",
+        "competition": "NOT_CALCULABLE",
+        "economics": {
+          "minimum_effective_support_m": "NOT_CALCULABLE",
+          "unsupported_irr": "NOT_CALCULABLE",
+          "unsupported_npv_m": "NOT_CALCULABLE"
+        },
+        "evidence_ids": [],
+        "feasibility": "NOT_CALCULABLE",
+        "incremental_national_value_m_sar": "NOT_CALCULABLE",
+        "localized_reasons": {
+          "ar": [
+            "يلزم قيد مثبت في المعلومات أو الربط أو المواءمة."
+          ],
+          "en": [
+            "A verified information, linkage or matching constraint is required."
+          ]
+        },
+        "policy_permissibility": "NOT_CALCULABLE",
+        "precedence": {
+          "blocked_by_lower_route": null
+        },
+        "reason_codes": [
+          "ROUTE_EVIDENCE_REQUIRED"
+        ],
+        "reasons": [
+          "A verified information, linkage or matching constraint is required."
+        ],
+        "resolves_binding_constraint": "NOT_CALCULABLE",
+        "route_code": 2,
+        "route_key": "information_market_linkage",
+        "status": "NOT_CALCULABLE",
+        "unrounded_incremental_national_value_m_sar": "NOT_CALCULABLE"
+      },
+      {
+        "additionality": "passes",
+        "competition": {
+          "capacity_ratio": 1.0,
+          "passes": true,
+          "warning_threshold": 1.25
+        },
+        "economics": {
+          "minimum_effective_support_m": 0.0,
+          "unsupported_irr": 0.13066,
+          "unsupported_npv_m": 0.413
+        },
+        "evidence_ids": [
+          "E-ROUTE"
+        ],
+        "feasibility": "fails",
+        "incremental_national_value_m_sar": 66.0,
+        "localized_reasons": {
+          "ar": [
+            "المسار غير مجدٍ تقنياً بحسب الأدلة المتاحة."
+          ],
+          "en": [
+            "The route is not technically feasible on the available evidence."
+          ]
+        },
+        "policy_permissibility": "passes",
+        "precedence": {
+          "blocked_by_lower_route": null
+        },
+        "reason_codes": [
+          "FEASIBILITY_FAILED"
+        ],
+        "reasons": [
+          "The route is not technically feasible on the available evidence."
+        ],
+        "resolves_binding_constraint": "passes",
+        "route_code": 3,
+        "route_key": "certification_testing_quality",
+        "status": "fails",
+        "unrounded_incremental_national_value_m_sar": 66.0
+      },
+      {
+        "additionality": "NOT_CALCULABLE",
+        "competition": "NOT_CALCULABLE",
+        "economics": {
+          "minimum_effective_support_m": "NOT_CALCULABLE",
+          "unsupported_irr": "NOT_CALCULABLE",
+          "unsupported_npv_m": "NOT_CALCULABLE"
+        },
+        "evidence_ids": [],
+        "feasibility": "NOT_CALCULABLE",
+        "incremental_national_value_m_sar": "NOT_CALCULABLE",
+        "localized_reasons": {
+          "ar": [
+            "يلزم قيد مثبت في تجزؤ الطلب أو الشراء."
+          ],
+          "en": [
+            "A verified demand-fragmentation or offtake constraint is required."
+          ]
+        },
+        "policy_permissibility": "NOT_CALCULABLE",
+        "precedence": {
+          "blocked_by_lower_route": null
+        },
+        "reason_codes": [
+          "ROUTE_EVIDENCE_REQUIRED"
+        ],
+        "reasons": [
+          "A verified demand-fragmentation or offtake constraint is required."
+        ],
+        "resolves_binding_constraint": "NOT_CALCULABLE",
+        "route_code": 4,
+        "route_key": "demand_aggregation_offtake",
+        "status": "NOT_CALCULABLE",
+        "unrounded_incremental_national_value_m_sar": "NOT_CALCULABLE"
+      },
+      {
+        "additionality": "NOT_CALCULABLE",
+        "competition": "NOT_CALCULABLE",
+        "economics": {
+          "minimum_effective_support_m": "NOT_CALCULABLE",
+          "unsupported_irr": "NOT_CALCULABLE",
+          "unsupported_npv_m": "NOT_CALCULABLE"
+        },
+        "evidence_ids": [],
+        "feasibility": "NOT_CALCULABLE",
+        "incremental_national_value_m_sar": "NOT_CALCULABLE",
+        "localized_reasons": {
+          "ar": [
+            "يجعل التجاور المثبت للمنتج القائم المسار القائم هو الفرضية ذات الأولوية؛ وتظل الطاقة الفعلية والاقتصاديات مطلوبة."
+          ],
+          "en": [
+            "Verified incumbent adjacency makes brownfield the priority hypothesis; effective capacity and economics remain required."
+          ]
+        },
+        "policy_permissibility": "NOT_CALCULABLE",
+        "precedence": {
+          "blocked_by_lower_route": null
+        },
+        "reason_codes": [
+          "ROUTE_EVIDENCE_REQUIRED"
+        ],
+        "reasons": [
+          "Verified incumbent adjacency makes brownfield the priority hypothesis; effective capacity and economics remain required."
+        ],
+        "resolves_binding_constraint": "NOT_CALCULABLE",
+        "route_code": 5,
+        "route_key": "brownfield_incremental_expansion",
+        "status": "NOT_CALCULABLE",
+        "unrounded_incremental_national_value_m_sar": "NOT_CALCULABLE"
+      },
+      {
+        "additionality": "NOT_CALCULABLE",
+        "competition": "NOT_CALCULABLE",
+        "economics": {
+          "minimum_effective_support_m": "NOT_CALCULABLE",
+          "unsupported_irr": "NOT_CALCULABLE",
+          "unsupported_npv_m": "NOT_CALCULABLE"
+        },
+        "evidence_ids": [],
+        "feasibility": "NOT_CALCULABLE",
+        "incremental_national_value_m_sar": "NOT_CALCULABLE",
+        "localized_reasons": {
+          "ar": [
+            "يلزم قيد تقني مثبت وتجاور لخط رئيسي أو مشروع مشترك."
+          ],
+          "en": [
+            "A verified technology constraint and major-line/JV adjacency are required."
+          ]
+        },
+        "policy_permissibility": "NOT_CALCULABLE",
+        "precedence": {
+          "blocked_by_lower_route": null
+        },
+        "reason_codes": [
+          "ROUTE_EVIDENCE_REQUIRED"
+        ],
+        "reasons": [
+          "A verified technology constraint and major-line/JV adjacency are required."
+        ],
+        "resolves_binding_constraint": "NOT_CALCULABLE",
+        "route_code": 6,
+        "route_key": "technology_or_jv",
+        "status": "NOT_CALCULABLE",
+        "unrounded_incremental_national_value_m_sar": "NOT_CALCULABLE"
+      },
+      {
+        "additionality": "NOT_CALCULABLE",
+        "competition": "NOT_CALCULABLE",
+        "economics": {
+          "minimum_effective_support_m": "NOT_CALCULABLE",
+          "unsupported_irr": "NOT_CALCULABLE",
+          "unsupported_npv_m": "NOT_CALCULABLE"
+        },
+        "evidence_ids": [],
+        "feasibility": "NOT_CALCULABLE",
+        "incremental_national_value_m_sar": "NOT_CALCULABLE",
+        "localized_reasons": {
+          "ar": [
+            "يتطلب المشروع الجديد فشل المسارات الأدنى، ومسافة قدرة أعلى من النطاق المحدد، وطلباً عند الحد الأدنى للكفاءة، واجتياز بوابات المنافسة."
+          ],
+          "en": [
+            "Greenfield requires failed lower routes, D* above the configured band, demand at MES, and passing competition gates."
+          ]
+        },
+        "policy_permissibility": "NOT_CALCULABLE",
+        "precedence": {
+          "blocked_by_lower_route": null
+        },
+        "reason_codes": [
+          "ROUTE_EVIDENCE_REQUIRED"
+        ],
+        "reasons": [
+          "Greenfield requires failed lower routes, D* above the configured band, demand at MES, and passing competition gates."
+        ],
+        "resolves_binding_constraint": "NOT_CALCULABLE",
+        "route_code": 7,
+        "route_key": "targeted_greenfield",
+        "status": "NOT_CALCULABLE",
+        "unrounded_incremental_national_value_m_sar": "NOT_CALCULABLE"
+      },
+      {
+        "additionality": "NOT_CALCULABLE",
+        "competition": "NOT_CALCULABLE",
+        "economics": {
+          "minimum_effective_support_m": "NOT_CALCULABLE",
+          "unsupported_irr": "NOT_CALCULABLE",
+          "unsupported_npv_m": "NOT_CALCULABLE"
+        },
+        "evidence_ids": [],
+        "feasibility": "NOT_CALCULABLE",
+        "incremental_national_value_m_sar": "NOT_CALCULABLE",
+        "localized_reasons": {
+          "ar": [
+            "يتطلب المسار 8 الرسم البياني المحكوم وقيمة فتح موجبة؛ الرسم البياني مطلوب."
+          ],
+          "en": [
+            "GRAPH_REQUIRED: route 8 requires the governed dependency graph and a positive UnlockValue."
+          ]
+        },
+        "policy_permissibility": "NOT_CALCULABLE",
+        "precedence": {
+          "blocked_by_lower_route": null
+        },
+        "reason_codes": [
+          "GRAPH_REQUIRED"
+        ],
+        "reasons": [
+          "GRAPH_REQUIRED: route 8 requires the governed dependency graph and a positive UnlockValue."
+        ],
+        "resolves_binding_constraint": "NOT_CALCULABLE",
+        "route_code": 8,
+        "route_key": "shared_enabler",
+        "status": "NOT_CALCULABLE",
+        "unrounded_incremental_national_value_m_sar": "NOT_CALCULABLE"
+      }
+    ],
+    "rules": [
+      {
+        "decision_effect": "Continue to screening while preserving the unresolved decision object.",
+        "decision_effect_code": "CONTINUE_SCREENING",
+        "effect_values": {},
+        "execution": "FULL",
+        "fired": true,
+        "localized": {
+          "ar": {
+            "decision_effect": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "واصل الفرز مع إبقاء موضوع القرار غير المحسوم ظاهراً."
+                }
+              ],
+              "text": "واصل الفرز مع إبقاء موضوع القرار غير المحسوم ظاهراً."
+            },
+            "name": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "بوابة الهوية"
+                }
+              ],
+              "text": "بوابة الهوية"
+            },
+            "result": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "تُثبّت مراجعة النظام المنسق "
+                },
+                {
+                  "kind": "computed",
+                  "ltr_isolate": true,
+                  "text": "H0"
+                },
+                {
+                  "kind": "literal",
+                  "text": " والرمز السداسي "
+                },
+                {
+                  "kind": "computed",
+                  "ltr_isolate": true,
+                  "text": "999999"
+                },
+                {
+                  "kind": "literal",
+                  "text": " في اللقطة؛ وتظل المواصفة والتطبيق خاضعين لحسم مستقل."
+                }
+              ],
+              "text": "تُثبّت مراجعة النظام المنسق H0 والرمز السداسي 999999 في اللقطة؛ وتظل المواصفة والتطبيق خاضعين لحسم مستقل."
+            }
+          },
+          "en": {
+            "decision_effect": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "Continue to screening while preserving the unresolved decision object."
+                }
+              ],
+              "text": "Continue to screening while preserving the unresolved decision object."
+            },
+            "name": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "Identity gate"
+                }
+              ],
+              "text": "Identity gate"
+            },
+            "result": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "HS revision "
+                },
+                {
+                  "kind": "computed",
+                  "ltr_isolate": false,
+                  "text": "H0"
+                },
+                {
+                  "kind": "literal",
+                  "text": " and HS6 "
+                },
+                {
+                  "kind": "computed",
+                  "ltr_isolate": false,
+                  "text": "999999"
+                },
+                {
+                  "kind": "literal",
+                  "text": " are frozen in the snapshot; specification/application remains separately gated."
+                }
+              ],
+              "text": "HS revision H0 and HS6 999999 are frozen in the snapshot; specification/application remains separately gated."
+            }
+          }
+        },
+        "metrics": {},
+        "name": "Identity gate",
+        "result": "HS revision H0 and HS6 999999 are frozen in the snapshot; specification/application remains separately gated.",
+        "result_code": "IDENTITY_FROZEN",
+        "result_values": {
+          "hs6": "999999",
+          "hs_revision": "H0"
+        },
+        "rule_id": "R0"
+      },
+      {
+        "decision_effect": "Do not claim the full persistence rule.",
+        "decision_effect_code": "DO_NOT_CLAIM_FULL_PERSISTENCE",
+        "effect_values": {},
+        "execution": "FULL",
+        "fired": false,
+        "localized": {
+          "ar": {
+            "decision_effect": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "لا تدّع تحقق قاعدة الاستمرارية الكاملة."
+                }
+              ],
+              "text": "لا تدّع تحقق قاعدة الاستمرارية الكاملة."
+            },
+            "name": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "التعرض المحتجز المستمر — كامل"
+                }
+              ],
+              "text": "التعرض المحتجز المستمر — كامل"
+            },
+            "result": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "لم ينطلق اختبار الاستمرارية الكامل."
+                }
+              ],
+              "text": "لم ينطلق اختبار الاستمرارية الكامل."
+            }
+          },
+          "en": {
+            "decision_effect": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "Do not claim the full persistence rule."
+                }
+              ],
+              "text": "Do not claim the full persistence rule."
+            },
+            "name": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "Persistent retained exposure — full"
+                }
+              ],
+              "text": "Persistent retained exposure — full"
+            },
+            "result": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "Full persistence test did not fire."
+                }
+              ],
+              "text": "Full persistence test did not fire."
+            }
+          }
+        },
+        "metrics": {
+          "missing_years": []
+        },
+        "name": "Persistent retained exposure — full",
+        "result": "Full persistence test did not fire.",
+        "result_code": "NOT_FIRED",
+        "result_values": {},
+        "rule_id": "R1-F"
+      },
+      {
+        "decision_effect": "Generate INVESTIGATE only; confidence capped at C.",
+        "decision_effect_code": "INVESTIGATE_ONLY_CONFIDENCE_CAPPED",
+        "effect_values": {
+          "confidence_cap": "C"
+        },
+        "execution": "DEGRADED",
+        "fired": false,
+        "localized": {
+          "ar": {
+            "decision_effect": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "أنشئ حالة تحقق فقط؛ وحد الثقة الأقصى هو "
+                },
+                {
+                  "kind": "computed",
+                  "ltr_isolate": true,
+                  "text": "C"
+                },
+                {
+                  "kind": "literal",
+                  "text": "."
+                }
+              ],
+              "text": "أنشئ حالة تحقق فقط؛ وحد الثقة الأقصى هو C."
+            },
+            "name": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "إشارة الاستمرارية — متدهورة"
+                }
+              ],
+              "text": "إشارة الاستمرارية — متدهورة"
+            },
+            "result": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "رُصدت واردات موجبة في "
+                },
+                {
+                  "kind": "computed",
+                  "ltr_isolate": true,
+                  "text": "2"
+                },
+                {
+                  "kind": "literal",
+                  "text": " سنوات ضمن النافذة المهيأة؛ ولم يُستخدم الاستيفاء."
+                }
+              ],
+              "text": "رُصدت واردات موجبة في 2 سنوات ضمن النافذة المهيأة؛ ولم يُستخدم الاستيفاء."
+            }
+          },
+          "en": {
+            "decision_effect": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "Generate INVESTIGATE only; confidence capped at "
+                },
+                {
+                  "kind": "computed",
+                  "ltr_isolate": false,
+                  "text": "C"
+                },
+                {
+                  "kind": "literal",
+                  "text": "."
+                }
+              ],
+              "text": "Generate INVESTIGATE only; confidence capped at C."
+            },
+            "name": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "Persistence signal — degraded"
+                }
+              ],
+              "text": "Persistence signal — degraded"
+            },
+            "result": {
+              "segments": [
+                {
+                  "kind": "computed",
+                  "ltr_isolate": false,
+                  "text": "2"
+                },
+                {
+                  "kind": "literal",
+                  "text": " positive observed years within the configured window; no interpolation used."
+                }
+              ],
+              "text": "2 positive observed years within the configured window; no interpolation used."
+            }
+          }
+        },
+        "metrics": {
+          "confidence_cap": "C",
+          "positive_years": [
+            2025,
+            2026
+          ]
+        },
+        "name": "Persistence signal — degraded",
+        "result": "2 positive observed years within the configured window; no interpolation used.",
+        "result_code": "POSITIVE_YEARS_OBSERVED",
+        "result_values": {
+          "positive_year_count": "2"
+        },
+        "rule_id": "R1-D"
+      },
+      {
+        "decision_effect": "Separate structural volume growth from price movement.",
+        "decision_effect_code": "SEPARATE_VOLUME_FROM_PRICE",
+        "effect_values": {},
+        "execution": "FULL",
+        "fired": false,
+        "localized": {
+          "ar": {
+            "decision_effect": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "افصل نمو الحجم البنيوي عن حركة السعر."
+                }
+              ],
+              "text": "افصل نمو الحجم البنيوي عن حركة السعر."
+            },
+            "name": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "التوسع المدفوع بالكمية"
+                }
+              ],
+              "text": "التوسع المدفوع بالكمية"
+            },
+            "result": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "حركة القيمة ليست مدفوعة بالكمية وفق الاختبار المهيأ."
+                }
+              ],
+              "text": "حركة القيمة ليست مدفوعة بالكمية وفق الاختبار المهيأ."
+            }
+          },
+          "en": {
+            "decision_effect": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "Separate structural volume growth from price movement."
+                }
+              ],
+              "text": "Separate structural volume growth from price movement."
+            },
+            "name": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "Quantity-led expansion"
+                }
+              ],
+              "text": "Quantity-led expansion"
+            },
+            "result": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "Value movement is not quantity-led under the configured test."
+                }
+              ],
+              "text": "Value movement is not quantity-led under the configured test."
+            }
+          }
+        },
+        "metrics": {
+          "delta_ln_quantity": 0.0,
+          "delta_ln_unit_value": 0.0,
+          "delta_ln_value": 0.0,
+          "from_year": 2025,
+          "observed_span_years": 1,
+          "quantity_cagr": 0.0,
+          "quantity_contribution_share": 0.0,
+          "to_year": 2026
+        },
+        "name": "Quantity-led expansion",
+        "result": "Value movement is not quantity-led under the configured test.",
+        "result_code": "NOT_QUANTITY_LED",
+        "result_values": {},
+        "rule_id": "R2"
+      },
+      {
+        "decision_effect": "No concentration inference.",
+        "decision_effect_code": "NO_CONCENTRATION_INFERENCE",
+        "effect_values": {},
+        "execution": "DISABLED",
+        "fired": null,
+        "localized": {
+          "ar": {
+            "decision_effect": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "لا استنتاج بشأن التركز."
+                }
+              ],
+              "text": "لا استنتاج بشأن التركز."
+            },
+            "name": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "تركز الموردين"
+                }
+              ],
+              "text": "تركز الموردين"
+            },
+            "result": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "لا يمكن حساب تركز الشركاء على أساس القيمة أو الكمية."
+                }
+              ],
+              "text": "لا يمكن حساب تركز الشركاء على أساس القيمة أو الكمية."
+            }
+          },
+          "en": {
+            "decision_effect": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "No concentration inference."
+                }
+              ],
+              "text": "No concentration inference."
+            },
+            "name": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "Supplier concentration"
+                }
+              ],
+              "text": "Supplier concentration"
+            },
+            "result": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "Value- and quantity-basis partner concentration are NOT_CALCULABLE."
+                }
+              ],
+              "text": "Value- and quantity-basis partner concentration are NOT_CALCULABLE."
+            }
+          }
+        },
+        "metrics": {
+          "hhi": "NOT_CALCULABLE",
+          "hhi_threshold": 0.25,
+          "largest_supplier_share": "NOT_CALCULABLE",
+          "largest_supplier_threshold": 0.5,
+          "quantity": {
+            "basis": "quantity",
+            "eligible_partner_count": "NOT_CALCULABLE",
+            "flow_basis": "gross",
+            "hhi": "NOT_CALCULABLE",
+            "largest_supplier_share": "NOT_CALCULABLE",
+            "reason": "No partner rows or source-attributed quantity concentration disclosure are available.",
+            "source": "none",
+            "status": "NOT_CALCULABLE",
+            "top_two_share": "NOT_CALCULABLE",
+            "valid_coverage": "NOT_CALCULABLE",
+            "year": 2026
+          },
+          "top_two_share": "NOT_CALCULABLE",
+          "value": {
+            "basis": "value",
+            "eligible_partner_count": "NOT_CALCULABLE",
+            "flow_basis": "gross",
+            "hhi": "NOT_CALCULABLE",
+            "largest_supplier_share": "NOT_CALCULABLE",
+            "reason": "No partner rows or source-attributed value concentration disclosure are available.",
+            "source": "none",
+            "status": "NOT_CALCULABLE",
+            "top_two_share": "NOT_CALCULABLE",
+            "valid_coverage": "NOT_CALCULABLE",
+            "year": 2026
+          }
+        },
+        "name": "Supplier concentration",
+        "result": "Value- and quantity-basis partner concentration are NOT_CALCULABLE.",
+        "result_code": "BOTH_BASES_NOT_CALCULABLE",
+        "result_values": {},
+        "rule_id": "R3"
+      },
+      {
+        "decision_effect": "Do not fit clusters or claim grades.",
+        "decision_effect_code": "NO_CLUSTERS_OR_GRADES",
+        "effect_values": {},
+        "execution": "DISABLED",
+        "fired": null,
+        "localized": {
+          "ar": {
+            "decision_effect": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "لا تلائم عناقيد ولا تدّع درجات."
+                }
+              ],
+              "text": "لا تلائم عناقيد ولا تدّع درجات."
+            },
+            "name": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "تباين فئات المنتج — كامل"
+                }
+              ],
+              "text": "تباين فئات المنتج — كامل"
+            },
+            "result": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "خلايا الشريك والشهر وبند التعرفة غير متاحة."
+                }
+              ],
+              "text": "خلايا الشريك والشهر وبند التعرفة غير متاحة."
+            }
+          },
+          "en": {
+            "decision_effect": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "Do not fit clusters or claim grades."
+                }
+              ],
+              "text": "Do not fit clusters or claim grades."
+            },
+            "name": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "Product-tier heterogeneity — full"
+                }
+              ],
+              "text": "Product-tier heterogeneity — full"
+            },
+            "result": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "Partner-month × tariff-line cells are unavailable."
+                }
+              ],
+              "text": "Partner-month × tariff-line cells are unavailable."
+            }
+          }
+        },
+        "metrics": {},
+        "name": "Product-tier heterogeneity — full",
+        "result": "Partner-month × tariff-line cells are unavailable.",
+        "result_code": "CELLS_UNAVAILABLE",
+        "result_values": {},
+        "rule_id": "R4-F"
+      },
+      {
+        "decision_effect": "Open specification research only; no grade conclusion.",
+        "decision_effect_code": "SPECIFICATION_RESEARCH_ONLY",
+        "effect_values": {},
+        "execution": "DISABLED",
+        "fired": null,
+        "localized": {
+          "ar": {
+            "decision_effect": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "افتح بحث المواصفة فقط؛ دون استنتاج عن الدرجة."
+                }
+              ],
+              "text": "افتح بحث المواصفة فقط؛ دون استنتاج عن الدرجة."
+            },
+            "name": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "تشتت قيمة الوحدة — متدهور"
+                }
+              ],
+              "text": "تشتت قيمة الوحدة — متدهور"
+            },
+            "result": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "تغطية الشركاء السنوية القابلة للمقارنة غير كافية؛ ولا يمكن حساب قاعدة التشتت."
+                }
+              ],
+              "text": "تغطية الشركاء السنوية القابلة للمقارنة غير كافية؛ ولا يمكن حساب قاعدة التشتت."
+            }
+          },
+          "en": {
+            "decision_effect": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "Open specification research only; no grade conclusion."
+                }
+              ],
+              "text": "Open specification research only; no grade conclusion."
+            },
+            "name": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "Unit-value dispersion — degraded"
+                }
+              ],
+              "text": "Unit-value dispersion — degraded"
+            },
+            "result": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "Comparable annual partner coverage is insufficient; R4-D is not calculable."
+                }
+              ],
+              "text": "Comparable annual partner coverage is insufficient; R4-D is not calculable."
+            }
+          }
+        },
+        "metrics": {
+          "bulk_band_usd_t": "NOT_CALCULABLE",
+          "calculation_basis": "none",
+          "iqr_usd_t": "NOT_CALCULABLE",
+          "minimum_valid_value_coverage": 0.7,
+          "outlier_candidate": "NOT_CALCULABLE",
+          "reason": "No comparable partner rows or source-attributed dispersion disclosure are available.",
+          "status": "NOT_CALCULABLE",
+          "valid_quantity_coverage": "NOT_CALCULABLE",
+          "valid_value_coverage": "NOT_CALCULABLE",
+          "weighted_median_usd_t": "NOT_CALCULABLE",
+          "weighted_q1_usd_t": "NOT_CALCULABLE",
+          "weighted_q3_usd_t": "NOT_CALCULABLE"
+        },
+        "name": "Unit-value dispersion — degraded",
+        "result": "Comparable annual partner coverage is insufficient; R4-D is not calculable.",
+        "result_code": "COVERAGE_INSUFFICIENT",
+        "result_values": {},
+        "rule_id": "R4-D"
+      },
+      {
+        "decision_effect": "Test specification, qualification, capacity, price, application and allocation mismatch.",
+        "decision_effect_code": "TEST_MISMATCH_DIMENSIONS",
+        "effect_values": {},
+        "execution": "FULL",
+        "fired": false,
+        "localized": {
+          "ar": {
+            "decision_effect": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "اختبر عدم التطابق في المواصفة والتأهيل والطاقة والسعر والتطبيق والتخصيص."
+                }
+              ],
+              "text": "اختبر عدم التطابق في المواصفة والتأهيل والطاقة والسعر والتطبيق والتخصيص."
+            },
+            "name": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "العرض المحلي مع استمرار الواردات"
+                }
+              ],
+              "text": "العرض المحلي مع استمرار الواردات"
+            },
+            "result": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "لم ينطلق اختبار اختراق الواردات المحتجزة المهيأ."
+                }
+              ],
+              "text": "لم ينطلق اختبار اختراق الواردات المحتجزة المهيأ."
+            }
+          },
+          "en": {
+            "decision_effect": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "Test specification, qualification, capacity, price, application and allocation mismatch."
+                }
+              ],
+              "text": "Test specification, qualification, capacity, price, application and allocation mismatch."
+            },
+            "name": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "Domestic supply plus continued imports"
+                }
+              ],
+              "text": "Domestic supply plus continued imports"
+            },
+            "result": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "The configured retained-import penetration test does not fire."
+                }
+              ],
+              "text": "The configured retained-import penetration test does not fire."
+            }
+          }
+        },
+        "metrics": {
+          "apparent_consumption_kt": 110.0,
+          "calculation_basis": "reported_verified_retained_imports",
+          "net_import_exposure_kt": 10.0,
+          "reason": null,
+          "retained_import_share_of_apparent_consumption": 0.0909,
+          "retained_imports_kt": 10.0,
+          "threshold": 0.2,
+          "unavailable_inputs": [],
+          "unavailable_reasons": {}
+        },
+        "name": "Domestic supply plus continued imports",
+        "result": "The configured retained-import penetration test does not fire.",
+        "result_code": "PENETRATION_NOT_FIRED",
+        "result_values": {},
+        "rule_id": "R5"
+      },
+      {
+        "decision_effect": "Obtain line-level availability, yield, qualification share and allocation.",
+        "decision_effect_code": "OBTAIN_LINE_LEVEL_INPUTS",
+        "effect_values": {},
+        "execution": "DISABLED",
+        "fired": null,
+        "localized": {
+          "ar": {
+            "decision_effect": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "احصل على الإتاحة والمردود وحصة التأهيل والتخصيص على مستوى الخط."
+                }
+              ],
+              "text": "احصل على الإتاحة والمردود وحصة التأهيل والتخصيص على مستوى الخط."
+            },
+            "name": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "ضغط الطاقة"
+                }
+              ],
+              "text": "ضغط الطاقة"
+            },
+            "result": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "الاستغلال الفعلي ونقص المواصفة المستهدفة غير متاحين للعامة."
+                }
+              ],
+              "text": "الاستغلال الفعلي ونقص المواصفة المستهدفة غير متاحين للعامة."
+            }
+          },
+          "en": {
+            "decision_effect": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "Obtain line-level availability, yield, qualification share and allocation."
+                }
+              ],
+              "text": "Obtain line-level availability, yield, qualification share and allocation."
+            },
+            "name": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "Capacity pressure"
+                }
+              ],
+              "text": "Capacity pressure"
+            },
+            "result": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "Effective utilisation and target-specification shortage are not public."
+                }
+              ],
+              "text": "Effective utilisation and target-specification shortage are not public."
+            }
+          }
+        },
+        "metrics": {},
+        "name": "Capacity pressure",
+        "result": "Effective utilisation and target-specification shortage are not public.",
+        "result_code": "NOT_PUBLIC",
+        "result_values": {},
+        "rule_id": "R6"
+      },
+      {
+        "decision_effect": "Do not assume latent capacity.",
+        "decision_effect_code": "DO_NOT_ASSUME_LATENT_CAPACITY",
+        "effect_values": {},
+        "execution": "DISABLED",
+        "fired": null,
+        "localized": {
+          "ar": {
+            "decision_effect": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "لا تفترض وجود طاقة كامنة."
+                }
+              ],
+              "text": "لا تفترض وجود طاقة كامنة."
+            },
+            "name": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "الطاقة المحلية الكامنة"
+                }
+              ],
+              "text": "الطاقة المحلية الكامنة"
+            },
+            "result": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "لم تثبت علناً الطاقة المؤهلة العاطلة ولا تكافؤ المواصفة."
+                }
+              ],
+              "text": "لم تثبت علناً الطاقة المؤهلة العاطلة ولا تكافؤ المواصفة."
+            }
+          },
+          "en": {
+            "decision_effect": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "Do not assume latent capacity."
+                }
+              ],
+              "text": "Do not assume latent capacity."
+            },
+            "name": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "Latent domestic capacity"
+                }
+              ],
+              "text": "Latent domestic capacity"
+            },
+            "result": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "Idle qualified capacity and specification equivalence are not established publicly."
+                }
+              ],
+              "text": "Idle qualified capacity and specification equivalence are not established publicly."
+            }
+          }
+        },
+        "metrics": {},
+        "name": "Latent domestic capacity",
+        "result": "Idle qualified capacity and specification equivalence are not established publicly.",
+        "result_code": "NOT_ESTABLISHED_PUBLICLY",
+        "result_values": {},
+        "rule_id": "R7"
+      },
+      {
+        "decision_effect": "Keep base, committed and announced demand separate when provided.",
+        "decision_effect_code": "KEEP_DEMAND_LAYERS_SEPARATE",
+        "effect_values": {},
+        "execution": "DISABLED",
+        "fired": null,
+        "localized": {
+          "ar": {
+            "decision_effect": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "أبقِ الطلب الأساسي والملتزم والمعلن منفصلاً عند تقديمه."
+                }
+              ],
+              "text": "أبقِ الطلب الأساسي والملتزم والمعلن منفصلاً عند تقديمه."
+            },
+            "name": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "الطلب المستقبلي الملتزم"
+                }
+              ],
+              "text": "الطلب المستقبلي الملتزم"
+            },
+            "result": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "الطلب الممنوح أو الممول عند المواصفة المستهدفة غير متاح."
+                }
+              ],
+              "text": "الطلب الممنوح أو الممول عند المواصفة المستهدفة غير متاح."
+            }
+          },
+          "en": {
+            "decision_effect": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "Keep base, committed and announced demand separate when provided."
+                }
+              ],
+              "text": "Keep base, committed and announced demand separate when provided."
+            },
+            "name": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "Committed future demand"
+                }
+              ],
+              "text": "Committed future demand"
+            },
+            "result": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "Awarded/financed demand at the target specification is unavailable."
+                }
+              ],
+              "text": "Awarded/financed demand at the target specification is unavailable."
+            }
+          }
+        },
+        "metrics": {},
+        "name": "Committed future demand",
+        "result": "Awarded/financed demand at the target specification is unavailable.",
+        "result_code": "COMMITTED_DEMAND_UNAVAILABLE",
+        "result_values": {},
+        "rule_id": "R8"
+      },
+      {
+        "decision_effect": "Open the full line-level capability assessment; do not publish D* from screening alone.",
+        "decision_effect_code": "OPEN_LINE_LEVEL_ASSESSMENT",
+        "effect_values": {},
+        "execution": "FULL",
+        "fired": false,
+        "localized": {
+          "ar": {
+            "decision_effect": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "افتح تقييم القدرة الكامل على مستوى الخط؛ ولا تنشر مسافة القدرة من الفرز وحده."
+                }
+              ],
+              "text": "افتح تقييم القدرة الكامل على مستوى الخط؛ ولا تنشر مسافة القدرة من الفرز وحده."
+            },
+            "name": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "فرز أولي لتجاور المنتج القائم"
+                }
+              ],
+              "text": "فرز أولي لتجاور المنتج القائم"
+            },
+            "result": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "لا توجد إشارة أولية للتجاور يمكن الدفاع عنها."
+                }
+              ],
+              "text": "لا توجد إشارة أولية للتجاور يمكن الدفاع عنها."
+            }
+          },
+          "en": {
+            "decision_effect": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "Open the full line-level capability assessment; do not publish D* from screening alone."
+                }
+              ],
+              "text": "Open the full line-level capability assessment; do not publish D* from screening alone."
+            },
+            "name": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "Coarse incumbent adjacency screen"
+                }
+              ],
+              "text": "Coarse incumbent adjacency screen"
+            },
+            "result": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "No defensible coarse adjacency signal."
+                }
+              ],
+              "text": "No defensible coarse adjacency signal."
+            }
+          }
+        },
+        "metrics": {
+          "known_hard_gate_failure": false,
+          "qualifying_signal_count": 0,
+          "same_process_family": false
+        },
+        "name": "Coarse incumbent adjacency screen",
+        "result": "No defensible coarse adjacency signal.",
+        "result_code": "NO_DEFENSIBLE_SIGNAL",
+        "result_values": {},
+        "rule_id": "R9-S"
+      },
+      {
+        "decision_effect": "Keep commercial viability and strategic value separate.",
+        "decision_effect_code": "SEPARATE_VIABILITY_FROM_STRATEGY",
+        "effect_values": {},
+        "execution": "DISABLED",
+        "fired": null,
+        "localized": {
+          "ar": {
+            "decision_effect": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "افصل الجدوى التجارية عن القيمة الاستراتيجية."
+                }
+              ],
+              "text": "افصل الجدوى التجارية عن القيمة الاستراتيجية."
+            },
+            "name": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "الأهمية الاستراتيجية"
+                }
+              ],
+              "text": "الأهمية الاستراتيجية"
+            },
+            "result": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "لا يوجد تصنيف للأهمية صادر عن جهة مسؤولة في لقطة العرض."
+                }
+              ],
+              "text": "لا يوجد تصنيف للأهمية صادر عن جهة مسؤولة في لقطة العرض."
+            }
+          },
+          "en": {
+            "decision_effect": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "Keep commercial viability and strategic value separate."
+                }
+              ],
+              "text": "Keep commercial viability and strategic value separate."
+            },
+            "name": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "Strategic criticality"
+                }
+              ],
+              "text": "Strategic criticality"
+            },
+            "result": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "No responsible-authority criticality designation is present in the demo snapshot."
+                }
+              ],
+              "text": "No responsible-authority criticality designation is present in the demo snapshot."
+            }
+          }
+        },
+        "metrics": {
+          "criticality_evidence_id": null,
+          "criticality_status": "NOT_CALCULABLE"
+        },
+        "name": "Strategic criticality",
+        "result": "No responsible-authority criticality designation is present in the demo snapshot.",
+        "result_code": "NO_DESIGNATION",
+        "result_values": {},
+        "rule_id": "R10"
+      },
+      {
+        "decision_effect": "Reject generic support or move only a named specialty exception to investigation.",
+        "decision_effect_code": "REJECT_GENERIC_OR_NAMED_EXCEPTION",
+        "effect_values": {},
+        "execution": "DEGRADED",
+        "fired": false,
+        "localized": {
+          "ar": {
+            "decision_effect": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "ارفض الدعم العام أو انقل فقط استثناءً مسمى لتخصص معين إلى التحقق."
+                }
+              ],
+              "text": "ارفض الدعم العام أو انقل فقط استثناءً مسمى لتخصص معين إلى التحقق."
+            },
+            "name": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "الاستبعاد الاقتصادي وتحذير الطاقة العامة"
+                }
+              ],
+              "text": "الاستبعاد الاقتصادي وتحذير الطاقة العامة"
+            },
+            "result": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "لا يمكن حساب نسبة الصادرات إلى الواردات أو القدرة المثبتة بالطاقة الاسمية؛ ولا ينطلق استبعاد الطاقة العامة."
+                }
+              ],
+              "text": "لا يمكن حساب نسبة الصادرات إلى الواردات أو القدرة المثبتة بالطاقة الاسمية؛ ولا ينطلق استبعاد الطاقة العامة."
+            }
+          },
+          "en": {
+            "decision_effect": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "Reject generic support or move only a named specialty exception to investigation."
+                }
+              ],
+              "text": "Reject generic support or move only a named specialty exception to investigation."
+            },
+            "name": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "Economic exclusion / generic-capacity warning"
+                }
+              ],
+              "text": "Economic exclusion / generic-capacity warning"
+            },
+            "result": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "Export/import ratio or established nameplate capability is NOT_CALCULABLE; no generic-capacity exclusion fires."
+                }
+              ],
+              "text": "Export/import ratio or established nameplate capability is NOT_CALCULABLE; no generic-capacity exclusion fires."
+            }
+          }
+        },
+        "metrics": {
+          "computed_export_import_value_ratio": 0.1,
+          "disclosed_export_import_value_ratio": null,
+          "disclosed_ratio_consistent": null,
+          "established_nameplate": {
+            "established": false,
+            "evidence_ids": [],
+            "producers": [],
+            "reason": "No positive observed A/B/C producer nameplate exists.",
+            "total_observed_nameplate_tpy": "NOT_CALCULABLE"
+          },
+          "export_import_value_ratio": 0.1,
+          "export_import_value_ratio_threshold": 50.0,
+          "ratio_basis": "gross_trade_value",
+          "ratio_reason": null,
+          "ratio_status": "CALCULABLE"
+        },
+        "name": "Economic exclusion / generic-capacity warning",
+        "result": "Export/import ratio or established nameplate capability is NOT_CALCULABLE; no generic-capacity exclusion fires.",
+        "result_code": "NOT_CALCULABLE",
+        "result_values": {},
+        "rule_id": "R11"
+      },
+      {
+        "decision_effect": "Prioritise the smallest evidence request with a plausible route effect; quantify EVSI when cost and value inputs exist.",
+        "decision_effect_code": "PRIORITISE_SMALLEST_REQUEST",
+        "effect_values": {},
+        "execution": "DEGRADED",
+        "fired": false,
+        "localized": {
+          "ar": {
+            "decision_effect": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "أعط الأولوية لأصغر طلب أدلة ذي أثر معقول على المسار؛ واحسب القيمة المتوقعة للمعلومة عند توافر مدخلات التكلفة والقيمة."
+                }
+              ],
+              "text": "أعط الأولوية لأصغر طلب أدلة ذي أثر معقول على المسار؛ واحسب القيمة المتوقعة للمعلومة عند توافر مدخلات التكلفة والقيمة."
+            },
+            "name": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "محفّز قيمة الأدلة"
+                }
+              ],
+              "text": "محفّز قيمة الأدلة"
+            },
+            "result": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "يمكن أن تغيّر "
+                },
+                {
+                  "kind": "computed",
+                  "ltr_isolate": true,
+                  "text": "0"
+                },
+                {
+                  "kind": "literal",
+                  "text": " حقائق مسماة المسار."
+                }
+              ],
+              "text": "يمكن أن تغيّر 0 حقائق مسماة المسار."
+            }
+          },
+          "en": {
+            "decision_effect": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "Prioritise the smallest evidence request with a plausible route effect; quantify EVSI when cost and value inputs exist."
+                }
+              ],
+              "text": "Prioritise the smallest evidence request with a plausible route effect; quantify EVSI when cost and value inputs exist."
+            },
+            "name": {
+              "segments": [
+                {
+                  "kind": "literal",
+                  "text": "Evidence-value trigger"
+                }
+              ],
+              "text": "Evidence-value trigger"
+            },
+            "result": {
+              "segments": [
+                {
+                  "kind": "computed",
+                  "ltr_isolate": false,
+                  "text": "0"
+                },
+                {
+                  "kind": "literal",
+                  "text": " named facts could change the route."
+                }
+              ],
+              "text": "0 named facts could change the route."
+            }
+          }
+        },
+        "metrics": {
+          "evidence_needs": [],
+          "named_missing_facts": []
+        },
+        "name": "Evidence-value trigger",
+        "result": "0 named facts could change the route.",
+        "result_code": "NAMED_FACTS_COULD_CHANGE_ROUTE",
+        "result_values": {
+          "named_fact_count": "0"
+        },
+        "rule_id": "R12"
+      }
+    ],
+    "schema_version": "2.1.0",
+    "screening_disposition": "NO_CANDIDATE",
+    "simulation_decision": null,
+    "snapshot_id": "FIX-PUBLIC-NO-CANDIDATE",
+    "supplier_metrics": null,
+    "synthetic_inputs_used": [],
+    "trade": [
+      {
+        "exports_kt": 1.0,
+        "exports_usd_m": 1.0,
+        "imports_kt": 10.0,
+        "imports_usd_m": 10.0,
+        "year": 2025
+      },
+      {
+        "exports_kt": 1.0,
+        "exports_usd_m": 1.0,
+        "imports_kt": 10.0,
+        "imports_usd_m": 10.0,
+        "year": 2026
+      }
+    ],
+    "trade_quality": {
+      "domestic_origin_exports_separated": true,
+      "execution_cap": "FULL for the supplied test grain",
+      "flow_basis": "gross",
+      "missing_years": [],
+      "monthly_partner_tariff_line_available": false,
+      "quantity_comparable": true,
+      "reexports_separated": true
+    }
+  },
+  "list_entry": {
+    "active_state": null,
+    "headline": "NO CANDIDATE — no candidate signal fired",
+    "hs6": "999999",
+    "id": "FIX-PUBLIC-NO-CANDIDATE",
+    "latest_imports_kt": 10.0,
+    "latest_imports_usd_m": 10.0,
+    "latest_year": 2026,
+    "mode": "public",
+    "name_ar": "منتج اختباري",
+    "name_en": "Test product",
+    "real_state": null,
+    "screening_disposition": "NO_CANDIDATE",
+    "sector_profile": "technical_plastics"
+  },
+  "ui_manifest": {
+    "components": [
+      {
+        "id": "evidence-boundary",
+        "props": {
+          "active_state": null,
+          "authority": {
+            "config_versions": {
+              "decision_narratives": "1.2.0",
+              "evidence_policy": "1.4.0",
+              "sector_profiles": "1.1.0",
+              "thresholds": "1.2.0",
+              "ui_strings": "1.2.0"
+            },
+            "methodology": {
+              "file": "docs/authority/Industrial_Opportunity_Resolution_Methodology_Final_KSA.docx",
+              "sha256": "5717cbd42acc9947ce5e450013719275acb7ed1470847b21fb2cc547c8ac4ce9",
+              "sha256_prefix": "5717cbd42acc"
+            },
+            "project_version": "0.2.0"
+          },
+          "mode": "public",
+          "public_snapshot": "FIX-PUBLIC-NO-CANDIDATE",
+          "real_state": null,
+          "screening_disposition": "NO_CANDIDATE",
+          "synthetic_label": null,
+          "synthetic_labels": null
+        },
+        "type": "integrity_banner"
+      },
+      {
+        "id": "decision",
+        "props": {
+          "conditions": [
+            "Re-screen when a candidate signal fires on the public series."
+          ],
+          "confidence": "C",
+          "gap_class": {
+            "constraint_class": "qualification_or_certification",
+            "label": "Application gap",
+            "localized_label": {
+              "ar": "فجوة تطبيق",
+              "en": "Application gap"
+            },
+            "primary": "application",
+            "reason_codes": [],
+            "secondary": []
+          },
+          "headline": "NO CANDIDATE — no candidate signal fired",
+          "kill_conditions": [],
+          "localized_narrative": {
+            "ar": {
+              "conditions": [
+                {
+                  "segments": [
+                    {
+                      "kind": "literal",
+                      "text": "أعد الفرز عندما ينطلق محفّز للترشيح في السلسلة العامة."
+                    }
+                  ],
+                  "text": "أعد الفرز عندما ينطلق محفّز للترشيح في السلسلة العامة."
+                }
+              ],
+              "headline": {
+                "segments": [
+                  {
+                    "kind": "literal",
+                    "text": "لا مرشح — لم ينطلق أي محفّز للترشيح"
+                  }
+                ],
+                "text": "لا مرشح — لم ينطلق أي محفّز للترشيح"
+              },
+              "kill_conditions": [],
+              "missing_facts": [],
+              "rationale": {
+                "segments": [
+                  {
+                    "kind": "literal",
+                    "text": "لم ينطلق أي محفّز للترشيح من الأدلة العامة؛ لذلك لا تدخل الحالة التحليل المتعمق ولا تُسند إليها حالة رسمية."
+                  }
+                ],
+                "text": "لم ينطلق أي محفّز للترشيح من الأدلة العامة؛ لذلك لا تدخل الحالة التحليل المتعمق ولا تُسند إليها حالة رسمية."
+              },
+              "route_label": {
+                "segments": [
+                  {
+                    "kind": "literal",
+                    "text": "لا مسار للتحليل المتعمق؛ تصرف الفرز فقط"
+                  }
+                ],
+                "text": "لا مسار للتحليل المتعمق؛ تصرف الفرز فقط"
+              }
+            },
+            "en": {
+              "conditions": [
+                {
+                  "segments": [
+                    {
+                      "kind": "literal",
+                      "text": "Re-screen when a candidate signal fires on the public series."
+                    }
+                  ],
+                  "text": "Re-screen when a candidate signal fires on the public series."
+                }
+              ],
+              "headline": {
+                "segments": [
+                  {
+                    "kind": "literal",
+                    "text": "NO CANDIDATE — no candidate signal fired"
+                  }
+                ],
+                "text": "NO CANDIDATE — no candidate signal fired"
+              },
+              "kill_conditions": [],
+              "missing_facts": [],
+              "rationale": {
+                "segments": [
+                  {
+                    "kind": "literal",
+                    "text": "No candidate trigger fired on public evidence; the case is not admitted to deep resolution and no formal state is assigned."
+                  }
+                ],
+                "text": "No candidate trigger fired on public evidence; the case is not admitted to deep resolution and no formal state is assigned."
+              },
+              "route_label": {
+                "segments": [
+                  {
+                    "kind": "literal",
+                    "text": "No deep-resolution route; screening disposition only"
+                  }
+                ],
+                "text": "No deep-resolution route; screening disposition only"
+              }
+            }
+          },
+          "narrative_version": "1.0.0",
+          "preferred_hypothesis": null,
+          "rationale": "No candidate trigger fired on public evidence; the case is not admitted to deep resolution and no formal state is assigned.",
+          "route": "No deep-resolution route; screening disposition only",
+          "screening_disposition": "NO_CANDIDATE",
+          "state": null
+        },
+        "type": "decision_hero"
+      },
+      {
+        "id": "public-metrics",
+        "props": {
+          "capacity": null,
+          "economics": null,
+          "supplier_concentration": {
+            "hhi": "NOT_CALCULABLE",
+            "hhi_threshold": 0.25,
+            "largest_supplier_share": "NOT_CALCULABLE",
+            "largest_supplier_threshold": 0.5,
+            "quantity": {
+              "basis": "quantity",
+              "eligible_partner_count": "NOT_CALCULABLE",
+              "flow_basis": "gross",
+              "hhi": "NOT_CALCULABLE",
+              "largest_supplier_share": "NOT_CALCULABLE",
+              "reason": "No partner rows or source-attributed quantity concentration disclosure are available.",
+              "source": "none",
+              "status": "NOT_CALCULABLE",
+              "top_two_share": "NOT_CALCULABLE",
+              "valid_coverage": "NOT_CALCULABLE",
+              "year": 2026
+            },
+            "top_two_share": "NOT_CALCULABLE",
+            "value": {
+              "basis": "value",
+              "eligible_partner_count": "NOT_CALCULABLE",
+              "flow_basis": "gross",
+              "hhi": "NOT_CALCULABLE",
+              "largest_supplier_share": "NOT_CALCULABLE",
+              "reason": "No partner rows or source-attributed value concentration disclosure are available.",
+              "source": "none",
+              "status": "NOT_CALCULABLE",
+              "top_two_share": "NOT_CALCULABLE",
+              "valid_coverage": "NOT_CALCULABLE",
+              "year": 2026
+            }
+          },
+          "supplier_metrics": null,
+          "trade": [
+            {
+              "exports_kt": 1.0,
+              "exports_usd_m": 1.0,
+              "imports_kt": 10.0,
+              "imports_usd_m": 10.0,
+              "year": 2025
+            },
+            {
+              "exports_kt": 1.0,
+              "exports_usd_m": 1.0,
+              "imports_kt": 10.0,
+              "imports_usd_m": 10.0,
+              "year": 2026
+            }
+          ]
+        },
+        "type": "metric_grid"
+      },
+      {
+        "id": "trade-series",
+        "props": {
+          "trade": [
+            {
+              "exports_kt": 1.0,
+              "exports_usd_m": 1.0,
+              "imports_kt": 10.0,
+              "imports_usd_m": 10.0,
+              "year": 2025
+            },
+            {
+              "exports_kt": 1.0,
+              "exports_usd_m": 1.0,
+              "imports_kt": 10.0,
+              "imports_usd_m": 10.0,
+              "year": 2026
+            }
+          ]
+        },
+        "type": "trade_chart"
+      },
+      {
+        "id": "rules",
+        "props": {
+          "rules": [
+            {
+              "decision_effect": "Continue to screening while preserving the unresolved decision object.",
+              "decision_effect_code": "CONTINUE_SCREENING",
+              "effect_values": {},
+              "execution": "FULL",
+              "fired": true,
+              "localized": {
+                "ar": {
+                  "decision_effect": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "واصل الفرز مع إبقاء موضوع القرار غير المحسوم ظاهراً."
+                      }
+                    ],
+                    "text": "واصل الفرز مع إبقاء موضوع القرار غير المحسوم ظاهراً."
+                  },
+                  "name": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "بوابة الهوية"
+                      }
+                    ],
+                    "text": "بوابة الهوية"
+                  },
+                  "result": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "تُثبّت مراجعة النظام المنسق "
+                      },
+                      {
+                        "kind": "computed",
+                        "ltr_isolate": true,
+                        "text": "H0"
+                      },
+                      {
+                        "kind": "literal",
+                        "text": " والرمز السداسي "
+                      },
+                      {
+                        "kind": "computed",
+                        "ltr_isolate": true,
+                        "text": "999999"
+                      },
+                      {
+                        "kind": "literal",
+                        "text": " في اللقطة؛ وتظل المواصفة والتطبيق خاضعين لحسم مستقل."
+                      }
+                    ],
+                    "text": "تُثبّت مراجعة النظام المنسق H0 والرمز السداسي 999999 في اللقطة؛ وتظل المواصفة والتطبيق خاضعين لحسم مستقل."
+                  }
+                },
+                "en": {
+                  "decision_effect": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "Continue to screening while preserving the unresolved decision object."
+                      }
+                    ],
+                    "text": "Continue to screening while preserving the unresolved decision object."
+                  },
+                  "name": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "Identity gate"
+                      }
+                    ],
+                    "text": "Identity gate"
+                  },
+                  "result": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "HS revision "
+                      },
+                      {
+                        "kind": "computed",
+                        "ltr_isolate": false,
+                        "text": "H0"
+                      },
+                      {
+                        "kind": "literal",
+                        "text": " and HS6 "
+                      },
+                      {
+                        "kind": "computed",
+                        "ltr_isolate": false,
+                        "text": "999999"
+                      },
+                      {
+                        "kind": "literal",
+                        "text": " are frozen in the snapshot; specification/application remains separately gated."
+                      }
+                    ],
+                    "text": "HS revision H0 and HS6 999999 are frozen in the snapshot; specification/application remains separately gated."
+                  }
+                }
+              },
+              "metrics": {},
+              "name": "Identity gate",
+              "result": "HS revision H0 and HS6 999999 are frozen in the snapshot; specification/application remains separately gated.",
+              "result_code": "IDENTITY_FROZEN",
+              "result_values": {
+                "hs6": "999999",
+                "hs_revision": "H0"
+              },
+              "rule_id": "R0"
+            },
+            {
+              "decision_effect": "Do not claim the full persistence rule.",
+              "decision_effect_code": "DO_NOT_CLAIM_FULL_PERSISTENCE",
+              "effect_values": {},
+              "execution": "FULL",
+              "fired": false,
+              "localized": {
+                "ar": {
+                  "decision_effect": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "لا تدّع تحقق قاعدة الاستمرارية الكاملة."
+                      }
+                    ],
+                    "text": "لا تدّع تحقق قاعدة الاستمرارية الكاملة."
+                  },
+                  "name": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "التعرض المحتجز المستمر — كامل"
+                      }
+                    ],
+                    "text": "التعرض المحتجز المستمر — كامل"
+                  },
+                  "result": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "لم ينطلق اختبار الاستمرارية الكامل."
+                      }
+                    ],
+                    "text": "لم ينطلق اختبار الاستمرارية الكامل."
+                  }
+                },
+                "en": {
+                  "decision_effect": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "Do not claim the full persistence rule."
+                      }
+                    ],
+                    "text": "Do not claim the full persistence rule."
+                  },
+                  "name": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "Persistent retained exposure — full"
+                      }
+                    ],
+                    "text": "Persistent retained exposure — full"
+                  },
+                  "result": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "Full persistence test did not fire."
+                      }
+                    ],
+                    "text": "Full persistence test did not fire."
+                  }
+                }
+              },
+              "metrics": {
+                "missing_years": []
+              },
+              "name": "Persistent retained exposure — full",
+              "result": "Full persistence test did not fire.",
+              "result_code": "NOT_FIRED",
+              "result_values": {},
+              "rule_id": "R1-F"
+            },
+            {
+              "decision_effect": "Generate INVESTIGATE only; confidence capped at C.",
+              "decision_effect_code": "INVESTIGATE_ONLY_CONFIDENCE_CAPPED",
+              "effect_values": {
+                "confidence_cap": "C"
+              },
+              "execution": "DEGRADED",
+              "fired": false,
+              "localized": {
+                "ar": {
+                  "decision_effect": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "أنشئ حالة تحقق فقط؛ وحد الثقة الأقصى هو "
+                      },
+                      {
+                        "kind": "computed",
+                        "ltr_isolate": true,
+                        "text": "C"
+                      },
+                      {
+                        "kind": "literal",
+                        "text": "."
+                      }
+                    ],
+                    "text": "أنشئ حالة تحقق فقط؛ وحد الثقة الأقصى هو C."
+                  },
+                  "name": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "إشارة الاستمرارية — متدهورة"
+                      }
+                    ],
+                    "text": "إشارة الاستمرارية — متدهورة"
+                  },
+                  "result": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "رُصدت واردات موجبة في "
+                      },
+                      {
+                        "kind": "computed",
+                        "ltr_isolate": true,
+                        "text": "2"
+                      },
+                      {
+                        "kind": "literal",
+                        "text": " سنوات ضمن النافذة المهيأة؛ ولم يُستخدم الاستيفاء."
+                      }
+                    ],
+                    "text": "رُصدت واردات موجبة في 2 سنوات ضمن النافذة المهيأة؛ ولم يُستخدم الاستيفاء."
+                  }
+                },
+                "en": {
+                  "decision_effect": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "Generate INVESTIGATE only; confidence capped at "
+                      },
+                      {
+                        "kind": "computed",
+                        "ltr_isolate": false,
+                        "text": "C"
+                      },
+                      {
+                        "kind": "literal",
+                        "text": "."
+                      }
+                    ],
+                    "text": "Generate INVESTIGATE only; confidence capped at C."
+                  },
+                  "name": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "Persistence signal — degraded"
+                      }
+                    ],
+                    "text": "Persistence signal — degraded"
+                  },
+                  "result": {
+                    "segments": [
+                      {
+                        "kind": "computed",
+                        "ltr_isolate": false,
+                        "text": "2"
+                      },
+                      {
+                        "kind": "literal",
+                        "text": " positive observed years within the configured window; no interpolation used."
+                      }
+                    ],
+                    "text": "2 positive observed years within the configured window; no interpolation used."
+                  }
+                }
+              },
+              "metrics": {
+                "confidence_cap": "C",
+                "positive_years": [
+                  2025,
+                  2026
+                ]
+              },
+              "name": "Persistence signal — degraded",
+              "result": "2 positive observed years within the configured window; no interpolation used.",
+              "result_code": "POSITIVE_YEARS_OBSERVED",
+              "result_values": {
+                "positive_year_count": "2"
+              },
+              "rule_id": "R1-D"
+            },
+            {
+              "decision_effect": "Separate structural volume growth from price movement.",
+              "decision_effect_code": "SEPARATE_VOLUME_FROM_PRICE",
+              "effect_values": {},
+              "execution": "FULL",
+              "fired": false,
+              "localized": {
+                "ar": {
+                  "decision_effect": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "افصل نمو الحجم البنيوي عن حركة السعر."
+                      }
+                    ],
+                    "text": "افصل نمو الحجم البنيوي عن حركة السعر."
+                  },
+                  "name": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "التوسع المدفوع بالكمية"
+                      }
+                    ],
+                    "text": "التوسع المدفوع بالكمية"
+                  },
+                  "result": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "حركة القيمة ليست مدفوعة بالكمية وفق الاختبار المهيأ."
+                      }
+                    ],
+                    "text": "حركة القيمة ليست مدفوعة بالكمية وفق الاختبار المهيأ."
+                  }
+                },
+                "en": {
+                  "decision_effect": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "Separate structural volume growth from price movement."
+                      }
+                    ],
+                    "text": "Separate structural volume growth from price movement."
+                  },
+                  "name": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "Quantity-led expansion"
+                      }
+                    ],
+                    "text": "Quantity-led expansion"
+                  },
+                  "result": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "Value movement is not quantity-led under the configured test."
+                      }
+                    ],
+                    "text": "Value movement is not quantity-led under the configured test."
+                  }
+                }
+              },
+              "metrics": {
+                "delta_ln_quantity": 0.0,
+                "delta_ln_unit_value": 0.0,
+                "delta_ln_value": 0.0,
+                "from_year": 2025,
+                "observed_span_years": 1,
+                "quantity_cagr": 0.0,
+                "quantity_contribution_share": 0.0,
+                "to_year": 2026
+              },
+              "name": "Quantity-led expansion",
+              "result": "Value movement is not quantity-led under the configured test.",
+              "result_code": "NOT_QUANTITY_LED",
+              "result_values": {},
+              "rule_id": "R2"
+            },
+            {
+              "decision_effect": "No concentration inference.",
+              "decision_effect_code": "NO_CONCENTRATION_INFERENCE",
+              "effect_values": {},
+              "execution": "DISABLED",
+              "fired": null,
+              "localized": {
+                "ar": {
+                  "decision_effect": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "لا استنتاج بشأن التركز."
+                      }
+                    ],
+                    "text": "لا استنتاج بشأن التركز."
+                  },
+                  "name": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "تركز الموردين"
+                      }
+                    ],
+                    "text": "تركز الموردين"
+                  },
+                  "result": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "لا يمكن حساب تركز الشركاء على أساس القيمة أو الكمية."
+                      }
+                    ],
+                    "text": "لا يمكن حساب تركز الشركاء على أساس القيمة أو الكمية."
+                  }
+                },
+                "en": {
+                  "decision_effect": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "No concentration inference."
+                      }
+                    ],
+                    "text": "No concentration inference."
+                  },
+                  "name": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "Supplier concentration"
+                      }
+                    ],
+                    "text": "Supplier concentration"
+                  },
+                  "result": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "Value- and quantity-basis partner concentration are NOT_CALCULABLE."
+                      }
+                    ],
+                    "text": "Value- and quantity-basis partner concentration are NOT_CALCULABLE."
+                  }
+                }
+              },
+              "metrics": {
+                "hhi": "NOT_CALCULABLE",
+                "hhi_threshold": 0.25,
+                "largest_supplier_share": "NOT_CALCULABLE",
+                "largest_supplier_threshold": 0.5,
+                "quantity": {
+                  "basis": "quantity",
+                  "eligible_partner_count": "NOT_CALCULABLE",
+                  "flow_basis": "gross",
+                  "hhi": "NOT_CALCULABLE",
+                  "largest_supplier_share": "NOT_CALCULABLE",
+                  "reason": "No partner rows or source-attributed quantity concentration disclosure are available.",
+                  "source": "none",
+                  "status": "NOT_CALCULABLE",
+                  "top_two_share": "NOT_CALCULABLE",
+                  "valid_coverage": "NOT_CALCULABLE",
+                  "year": 2026
+                },
+                "top_two_share": "NOT_CALCULABLE",
+                "value": {
+                  "basis": "value",
+                  "eligible_partner_count": "NOT_CALCULABLE",
+                  "flow_basis": "gross",
+                  "hhi": "NOT_CALCULABLE",
+                  "largest_supplier_share": "NOT_CALCULABLE",
+                  "reason": "No partner rows or source-attributed value concentration disclosure are available.",
+                  "source": "none",
+                  "status": "NOT_CALCULABLE",
+                  "top_two_share": "NOT_CALCULABLE",
+                  "valid_coverage": "NOT_CALCULABLE",
+                  "year": 2026
+                }
+              },
+              "name": "Supplier concentration",
+              "result": "Value- and quantity-basis partner concentration are NOT_CALCULABLE.",
+              "result_code": "BOTH_BASES_NOT_CALCULABLE",
+              "result_values": {},
+              "rule_id": "R3"
+            },
+            {
+              "decision_effect": "Do not fit clusters or claim grades.",
+              "decision_effect_code": "NO_CLUSTERS_OR_GRADES",
+              "effect_values": {},
+              "execution": "DISABLED",
+              "fired": null,
+              "localized": {
+                "ar": {
+                  "decision_effect": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "لا تلائم عناقيد ولا تدّع درجات."
+                      }
+                    ],
+                    "text": "لا تلائم عناقيد ولا تدّع درجات."
+                  },
+                  "name": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "تباين فئات المنتج — كامل"
+                      }
+                    ],
+                    "text": "تباين فئات المنتج — كامل"
+                  },
+                  "result": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "خلايا الشريك والشهر وبند التعرفة غير متاحة."
+                      }
+                    ],
+                    "text": "خلايا الشريك والشهر وبند التعرفة غير متاحة."
+                  }
+                },
+                "en": {
+                  "decision_effect": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "Do not fit clusters or claim grades."
+                      }
+                    ],
+                    "text": "Do not fit clusters or claim grades."
+                  },
+                  "name": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "Product-tier heterogeneity — full"
+                      }
+                    ],
+                    "text": "Product-tier heterogeneity — full"
+                  },
+                  "result": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "Partner-month × tariff-line cells are unavailable."
+                      }
+                    ],
+                    "text": "Partner-month × tariff-line cells are unavailable."
+                  }
+                }
+              },
+              "metrics": {},
+              "name": "Product-tier heterogeneity — full",
+              "result": "Partner-month × tariff-line cells are unavailable.",
+              "result_code": "CELLS_UNAVAILABLE",
+              "result_values": {},
+              "rule_id": "R4-F"
+            },
+            {
+              "decision_effect": "Open specification research only; no grade conclusion.",
+              "decision_effect_code": "SPECIFICATION_RESEARCH_ONLY",
+              "effect_values": {},
+              "execution": "DISABLED",
+              "fired": null,
+              "localized": {
+                "ar": {
+                  "decision_effect": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "افتح بحث المواصفة فقط؛ دون استنتاج عن الدرجة."
+                      }
+                    ],
+                    "text": "افتح بحث المواصفة فقط؛ دون استنتاج عن الدرجة."
+                  },
+                  "name": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "تشتت قيمة الوحدة — متدهور"
+                      }
+                    ],
+                    "text": "تشتت قيمة الوحدة — متدهور"
+                  },
+                  "result": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "تغطية الشركاء السنوية القابلة للمقارنة غير كافية؛ ولا يمكن حساب قاعدة التشتت."
+                      }
+                    ],
+                    "text": "تغطية الشركاء السنوية القابلة للمقارنة غير كافية؛ ولا يمكن حساب قاعدة التشتت."
+                  }
+                },
+                "en": {
+                  "decision_effect": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "Open specification research only; no grade conclusion."
+                      }
+                    ],
+                    "text": "Open specification research only; no grade conclusion."
+                  },
+                  "name": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "Unit-value dispersion — degraded"
+                      }
+                    ],
+                    "text": "Unit-value dispersion — degraded"
+                  },
+                  "result": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "Comparable annual partner coverage is insufficient; R4-D is not calculable."
+                      }
+                    ],
+                    "text": "Comparable annual partner coverage is insufficient; R4-D is not calculable."
+                  }
+                }
+              },
+              "metrics": {
+                "bulk_band_usd_t": "NOT_CALCULABLE",
+                "calculation_basis": "none",
+                "iqr_usd_t": "NOT_CALCULABLE",
+                "minimum_valid_value_coverage": 0.7,
+                "outlier_candidate": "NOT_CALCULABLE",
+                "reason": "No comparable partner rows or source-attributed dispersion disclosure are available.",
+                "status": "NOT_CALCULABLE",
+                "valid_quantity_coverage": "NOT_CALCULABLE",
+                "valid_value_coverage": "NOT_CALCULABLE",
+                "weighted_median_usd_t": "NOT_CALCULABLE",
+                "weighted_q1_usd_t": "NOT_CALCULABLE",
+                "weighted_q3_usd_t": "NOT_CALCULABLE"
+              },
+              "name": "Unit-value dispersion — degraded",
+              "result": "Comparable annual partner coverage is insufficient; R4-D is not calculable.",
+              "result_code": "COVERAGE_INSUFFICIENT",
+              "result_values": {},
+              "rule_id": "R4-D"
+            },
+            {
+              "decision_effect": "Test specification, qualification, capacity, price, application and allocation mismatch.",
+              "decision_effect_code": "TEST_MISMATCH_DIMENSIONS",
+              "effect_values": {},
+              "execution": "FULL",
+              "fired": false,
+              "localized": {
+                "ar": {
+                  "decision_effect": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "اختبر عدم التطابق في المواصفة والتأهيل والطاقة والسعر والتطبيق والتخصيص."
+                      }
+                    ],
+                    "text": "اختبر عدم التطابق في المواصفة والتأهيل والطاقة والسعر والتطبيق والتخصيص."
+                  },
+                  "name": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "العرض المحلي مع استمرار الواردات"
+                      }
+                    ],
+                    "text": "العرض المحلي مع استمرار الواردات"
+                  },
+                  "result": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "لم ينطلق اختبار اختراق الواردات المحتجزة المهيأ."
+                      }
+                    ],
+                    "text": "لم ينطلق اختبار اختراق الواردات المحتجزة المهيأ."
+                  }
+                },
+                "en": {
+                  "decision_effect": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "Test specification, qualification, capacity, price, application and allocation mismatch."
+                      }
+                    ],
+                    "text": "Test specification, qualification, capacity, price, application and allocation mismatch."
+                  },
+                  "name": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "Domestic supply plus continued imports"
+                      }
+                    ],
+                    "text": "Domestic supply plus continued imports"
+                  },
+                  "result": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "The configured retained-import penetration test does not fire."
+                      }
+                    ],
+                    "text": "The configured retained-import penetration test does not fire."
+                  }
+                }
+              },
+              "metrics": {
+                "apparent_consumption_kt": 110.0,
+                "calculation_basis": "reported_verified_retained_imports",
+                "net_import_exposure_kt": 10.0,
+                "reason": null,
+                "retained_import_share_of_apparent_consumption": 0.0909,
+                "retained_imports_kt": 10.0,
+                "threshold": 0.2,
+                "unavailable_inputs": [],
+                "unavailable_reasons": {}
+              },
+              "name": "Domestic supply plus continued imports",
+              "result": "The configured retained-import penetration test does not fire.",
+              "result_code": "PENETRATION_NOT_FIRED",
+              "result_values": {},
+              "rule_id": "R5"
+            },
+            {
+              "decision_effect": "Obtain line-level availability, yield, qualification share and allocation.",
+              "decision_effect_code": "OBTAIN_LINE_LEVEL_INPUTS",
+              "effect_values": {},
+              "execution": "DISABLED",
+              "fired": null,
+              "localized": {
+                "ar": {
+                  "decision_effect": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "احصل على الإتاحة والمردود وحصة التأهيل والتخصيص على مستوى الخط."
+                      }
+                    ],
+                    "text": "احصل على الإتاحة والمردود وحصة التأهيل والتخصيص على مستوى الخط."
+                  },
+                  "name": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "ضغط الطاقة"
+                      }
+                    ],
+                    "text": "ضغط الطاقة"
+                  },
+                  "result": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "الاستغلال الفعلي ونقص المواصفة المستهدفة غير متاحين للعامة."
+                      }
+                    ],
+                    "text": "الاستغلال الفعلي ونقص المواصفة المستهدفة غير متاحين للعامة."
+                  }
+                },
+                "en": {
+                  "decision_effect": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "Obtain line-level availability, yield, qualification share and allocation."
+                      }
+                    ],
+                    "text": "Obtain line-level availability, yield, qualification share and allocation."
+                  },
+                  "name": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "Capacity pressure"
+                      }
+                    ],
+                    "text": "Capacity pressure"
+                  },
+                  "result": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "Effective utilisation and target-specification shortage are not public."
+                      }
+                    ],
+                    "text": "Effective utilisation and target-specification shortage are not public."
+                  }
+                }
+              },
+              "metrics": {},
+              "name": "Capacity pressure",
+              "result": "Effective utilisation and target-specification shortage are not public.",
+              "result_code": "NOT_PUBLIC",
+              "result_values": {},
+              "rule_id": "R6"
+            },
+            {
+              "decision_effect": "Do not assume latent capacity.",
+              "decision_effect_code": "DO_NOT_ASSUME_LATENT_CAPACITY",
+              "effect_values": {},
+              "execution": "DISABLED",
+              "fired": null,
+              "localized": {
+                "ar": {
+                  "decision_effect": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "لا تفترض وجود طاقة كامنة."
+                      }
+                    ],
+                    "text": "لا تفترض وجود طاقة كامنة."
+                  },
+                  "name": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "الطاقة المحلية الكامنة"
+                      }
+                    ],
+                    "text": "الطاقة المحلية الكامنة"
+                  },
+                  "result": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "لم تثبت علناً الطاقة المؤهلة العاطلة ولا تكافؤ المواصفة."
+                      }
+                    ],
+                    "text": "لم تثبت علناً الطاقة المؤهلة العاطلة ولا تكافؤ المواصفة."
+                  }
+                },
+                "en": {
+                  "decision_effect": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "Do not assume latent capacity."
+                      }
+                    ],
+                    "text": "Do not assume latent capacity."
+                  },
+                  "name": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "Latent domestic capacity"
+                      }
+                    ],
+                    "text": "Latent domestic capacity"
+                  },
+                  "result": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "Idle qualified capacity and specification equivalence are not established publicly."
+                      }
+                    ],
+                    "text": "Idle qualified capacity and specification equivalence are not established publicly."
+                  }
+                }
+              },
+              "metrics": {},
+              "name": "Latent domestic capacity",
+              "result": "Idle qualified capacity and specification equivalence are not established publicly.",
+              "result_code": "NOT_ESTABLISHED_PUBLICLY",
+              "result_values": {},
+              "rule_id": "R7"
+            },
+            {
+              "decision_effect": "Keep base, committed and announced demand separate when provided.",
+              "decision_effect_code": "KEEP_DEMAND_LAYERS_SEPARATE",
+              "effect_values": {},
+              "execution": "DISABLED",
+              "fired": null,
+              "localized": {
+                "ar": {
+                  "decision_effect": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "أبقِ الطلب الأساسي والملتزم والمعلن منفصلاً عند تقديمه."
+                      }
+                    ],
+                    "text": "أبقِ الطلب الأساسي والملتزم والمعلن منفصلاً عند تقديمه."
+                  },
+                  "name": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "الطلب المستقبلي الملتزم"
+                      }
+                    ],
+                    "text": "الطلب المستقبلي الملتزم"
+                  },
+                  "result": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "الطلب الممنوح أو الممول عند المواصفة المستهدفة غير متاح."
+                      }
+                    ],
+                    "text": "الطلب الممنوح أو الممول عند المواصفة المستهدفة غير متاح."
+                  }
+                },
+                "en": {
+                  "decision_effect": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "Keep base, committed and announced demand separate when provided."
+                      }
+                    ],
+                    "text": "Keep base, committed and announced demand separate when provided."
+                  },
+                  "name": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "Committed future demand"
+                      }
+                    ],
+                    "text": "Committed future demand"
+                  },
+                  "result": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "Awarded/financed demand at the target specification is unavailable."
+                      }
+                    ],
+                    "text": "Awarded/financed demand at the target specification is unavailable."
+                  }
+                }
+              },
+              "metrics": {},
+              "name": "Committed future demand",
+              "result": "Awarded/financed demand at the target specification is unavailable.",
+              "result_code": "COMMITTED_DEMAND_UNAVAILABLE",
+              "result_values": {},
+              "rule_id": "R8"
+            },
+            {
+              "decision_effect": "Open the full line-level capability assessment; do not publish D* from screening alone.",
+              "decision_effect_code": "OPEN_LINE_LEVEL_ASSESSMENT",
+              "effect_values": {},
+              "execution": "FULL",
+              "fired": false,
+              "localized": {
+                "ar": {
+                  "decision_effect": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "افتح تقييم القدرة الكامل على مستوى الخط؛ ولا تنشر مسافة القدرة من الفرز وحده."
+                      }
+                    ],
+                    "text": "افتح تقييم القدرة الكامل على مستوى الخط؛ ولا تنشر مسافة القدرة من الفرز وحده."
+                  },
+                  "name": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "فرز أولي لتجاور المنتج القائم"
+                      }
+                    ],
+                    "text": "فرز أولي لتجاور المنتج القائم"
+                  },
+                  "result": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "لا توجد إشارة أولية للتجاور يمكن الدفاع عنها."
+                      }
+                    ],
+                    "text": "لا توجد إشارة أولية للتجاور يمكن الدفاع عنها."
+                  }
+                },
+                "en": {
+                  "decision_effect": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "Open the full line-level capability assessment; do not publish D* from screening alone."
+                      }
+                    ],
+                    "text": "Open the full line-level capability assessment; do not publish D* from screening alone."
+                  },
+                  "name": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "Coarse incumbent adjacency screen"
+                      }
+                    ],
+                    "text": "Coarse incumbent adjacency screen"
+                  },
+                  "result": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "No defensible coarse adjacency signal."
+                      }
+                    ],
+                    "text": "No defensible coarse adjacency signal."
+                  }
+                }
+              },
+              "metrics": {
+                "known_hard_gate_failure": false,
+                "qualifying_signal_count": 0,
+                "same_process_family": false
+              },
+              "name": "Coarse incumbent adjacency screen",
+              "result": "No defensible coarse adjacency signal.",
+              "result_code": "NO_DEFENSIBLE_SIGNAL",
+              "result_values": {},
+              "rule_id": "R9-S"
+            },
+            {
+              "decision_effect": "Keep commercial viability and strategic value separate.",
+              "decision_effect_code": "SEPARATE_VIABILITY_FROM_STRATEGY",
+              "effect_values": {},
+              "execution": "DISABLED",
+              "fired": null,
+              "localized": {
+                "ar": {
+                  "decision_effect": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "افصل الجدوى التجارية عن القيمة الاستراتيجية."
+                      }
+                    ],
+                    "text": "افصل الجدوى التجارية عن القيمة الاستراتيجية."
+                  },
+                  "name": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "الأهمية الاستراتيجية"
+                      }
+                    ],
+                    "text": "الأهمية الاستراتيجية"
+                  },
+                  "result": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "لا يوجد تصنيف للأهمية صادر عن جهة مسؤولة في لقطة العرض."
+                      }
+                    ],
+                    "text": "لا يوجد تصنيف للأهمية صادر عن جهة مسؤولة في لقطة العرض."
+                  }
+                },
+                "en": {
+                  "decision_effect": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "Keep commercial viability and strategic value separate."
+                      }
+                    ],
+                    "text": "Keep commercial viability and strategic value separate."
+                  },
+                  "name": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "Strategic criticality"
+                      }
+                    ],
+                    "text": "Strategic criticality"
+                  },
+                  "result": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "No responsible-authority criticality designation is present in the demo snapshot."
+                      }
+                    ],
+                    "text": "No responsible-authority criticality designation is present in the demo snapshot."
+                  }
+                }
+              },
+              "metrics": {
+                "criticality_evidence_id": null,
+                "criticality_status": "NOT_CALCULABLE"
+              },
+              "name": "Strategic criticality",
+              "result": "No responsible-authority criticality designation is present in the demo snapshot.",
+              "result_code": "NO_DESIGNATION",
+              "result_values": {},
+              "rule_id": "R10"
+            },
+            {
+              "decision_effect": "Reject generic support or move only a named specialty exception to investigation.",
+              "decision_effect_code": "REJECT_GENERIC_OR_NAMED_EXCEPTION",
+              "effect_values": {},
+              "execution": "DEGRADED",
+              "fired": false,
+              "localized": {
+                "ar": {
+                  "decision_effect": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "ارفض الدعم العام أو انقل فقط استثناءً مسمى لتخصص معين إلى التحقق."
+                      }
+                    ],
+                    "text": "ارفض الدعم العام أو انقل فقط استثناءً مسمى لتخصص معين إلى التحقق."
+                  },
+                  "name": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "الاستبعاد الاقتصادي وتحذير الطاقة العامة"
+                      }
+                    ],
+                    "text": "الاستبعاد الاقتصادي وتحذير الطاقة العامة"
+                  },
+                  "result": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "لا يمكن حساب نسبة الصادرات إلى الواردات أو القدرة المثبتة بالطاقة الاسمية؛ ولا ينطلق استبعاد الطاقة العامة."
+                      }
+                    ],
+                    "text": "لا يمكن حساب نسبة الصادرات إلى الواردات أو القدرة المثبتة بالطاقة الاسمية؛ ولا ينطلق استبعاد الطاقة العامة."
+                  }
+                },
+                "en": {
+                  "decision_effect": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "Reject generic support or move only a named specialty exception to investigation."
+                      }
+                    ],
+                    "text": "Reject generic support or move only a named specialty exception to investigation."
+                  },
+                  "name": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "Economic exclusion / generic-capacity warning"
+                      }
+                    ],
+                    "text": "Economic exclusion / generic-capacity warning"
+                  },
+                  "result": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "Export/import ratio or established nameplate capability is NOT_CALCULABLE; no generic-capacity exclusion fires."
+                      }
+                    ],
+                    "text": "Export/import ratio or established nameplate capability is NOT_CALCULABLE; no generic-capacity exclusion fires."
+                  }
+                }
+              },
+              "metrics": {
+                "computed_export_import_value_ratio": 0.1,
+                "disclosed_export_import_value_ratio": null,
+                "disclosed_ratio_consistent": null,
+                "established_nameplate": {
+                  "established": false,
+                  "evidence_ids": [],
+                  "producers": [],
+                  "reason": "No positive observed A/B/C producer nameplate exists.",
+                  "total_observed_nameplate_tpy": "NOT_CALCULABLE"
+                },
+                "export_import_value_ratio": 0.1,
+                "export_import_value_ratio_threshold": 50.0,
+                "ratio_basis": "gross_trade_value",
+                "ratio_reason": null,
+                "ratio_status": "CALCULABLE"
+              },
+              "name": "Economic exclusion / generic-capacity warning",
+              "result": "Export/import ratio or established nameplate capability is NOT_CALCULABLE; no generic-capacity exclusion fires.",
+              "result_code": "NOT_CALCULABLE",
+              "result_values": {},
+              "rule_id": "R11"
+            },
+            {
+              "decision_effect": "Prioritise the smallest evidence request with a plausible route effect; quantify EVSI when cost and value inputs exist.",
+              "decision_effect_code": "PRIORITISE_SMALLEST_REQUEST",
+              "effect_values": {},
+              "execution": "DEGRADED",
+              "fired": false,
+              "localized": {
+                "ar": {
+                  "decision_effect": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "أعط الأولوية لأصغر طلب أدلة ذي أثر معقول على المسار؛ واحسب القيمة المتوقعة للمعلومة عند توافر مدخلات التكلفة والقيمة."
+                      }
+                    ],
+                    "text": "أعط الأولوية لأصغر طلب أدلة ذي أثر معقول على المسار؛ واحسب القيمة المتوقعة للمعلومة عند توافر مدخلات التكلفة والقيمة."
+                  },
+                  "name": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "محفّز قيمة الأدلة"
+                      }
+                    ],
+                    "text": "محفّز قيمة الأدلة"
+                  },
+                  "result": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "يمكن أن تغيّر "
+                      },
+                      {
+                        "kind": "computed",
+                        "ltr_isolate": true,
+                        "text": "0"
+                      },
+                      {
+                        "kind": "literal",
+                        "text": " حقائق مسماة المسار."
+                      }
+                    ],
+                    "text": "يمكن أن تغيّر 0 حقائق مسماة المسار."
+                  }
+                },
+                "en": {
+                  "decision_effect": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "Prioritise the smallest evidence request with a plausible route effect; quantify EVSI when cost and value inputs exist."
+                      }
+                    ],
+                    "text": "Prioritise the smallest evidence request with a plausible route effect; quantify EVSI when cost and value inputs exist."
+                  },
+                  "name": {
+                    "segments": [
+                      {
+                        "kind": "literal",
+                        "text": "Evidence-value trigger"
+                      }
+                    ],
+                    "text": "Evidence-value trigger"
+                  },
+                  "result": {
+                    "segments": [
+                      {
+                        "kind": "computed",
+                        "ltr_isolate": false,
+                        "text": "0"
+                      },
+                      {
+                        "kind": "literal",
+                        "text": " named facts could change the route."
+                      }
+                    ],
+                    "text": "0 named facts could change the route."
+                  }
+                }
+              },
+              "metrics": {
+                "evidence_needs": [],
+                "named_missing_facts": []
+              },
+              "name": "Evidence-value trigger",
+              "result": "0 named facts could change the route.",
+              "result_code": "NAMED_FACTS_COULD_CHANGE_ROUTE",
+              "result_values": {
+                "named_fact_count": "0"
+              },
+              "rule_id": "R12"
+            }
+          ]
+        },
+        "type": "rule_ledger"
+      },
+      {
+        "id": "capability",
+        "props": {
+          "control_message": "Route band published: coverage and hard-gate controls pass.",
+          "d_known": 0.05,
+          "d_star": 0.05,
+          "dimensions": [
+            {
+              "dimension": "feedstock_chemistry",
+              "known": true,
+              "state": 0,
+              "weight": 0.15
+            },
+            {
+              "dimension": "core_process_route",
+              "known": true,
+              "state": 0,
+              "weight": 0.2
+            },
+            {
+              "dimension": "equipment_envelope",
+              "known": true,
+              "state": 0,
+              "weight": 0.15
+            },
+            {
+              "dimension": "finishing_spec_control",
+              "known": true,
+              "state": 0,
+              "weight": 0.1
+            },
+            {
+              "dimension": "qa_lab_metrology",
+              "known": true,
+              "state": 0,
+              "weight": 0.1
+            },
+            {
+              "dimension": "certification_customer_qualification",
+              "known": true,
+              "state": 1,
+              "weight": 0.15
+            },
+            {
+              "dimension": "capacity_time_window",
+              "known": true,
+              "state": 0,
+              "weight": 0.05
+            },
+            {
+              "dimension": "utilities_ehs_permitting",
+              "known": true,
+              "state": 0,
+              "weight": 0.05
+            },
+            {
+              "dimension": "skills_market_integration",
+              "known": true,
+              "state": 0,
+              "weight": 0.05
+            }
+          ],
+          "internal_d_star_before_gate": 0.05,
+          "known_hard_gate_failures": [],
+          "known_weight_coverage": 1.0,
+          "minimum_known_coverage": 0.7,
+          "profile_hard_gates": {
+            "application_qualification": "RESOLVED",
+            "conversion_route": "RESOLVED",
+            "performance_requirement": "RESOLVED",
+            "polymer_additive_compatibility": "RESOLVED",
+            "tooling": "RESOLVED"
+          },
+          "profile_label": "Technical plastics",
+          "route_band": {
+            "code": "immediate_adjacency",
+            "label": "Immediate adjacency",
+            "route_hint": "Existing capacity, linkage or simple debottlenecking"
+          },
+          "route_publishable": true,
+          "sector_profile": "technical_plastics",
+          "unknown_penalty_lambda": 0.5,
+          "unknown_weight": 0.0,
+          "unresolved_decision_specific_hard_gates": [],
+          "unresolved_hard_gates": [],
+          "unresolved_profile_hard_gates": []
+        },
+        "type": "capability_matrix"
+      },
+      {
+        "id": "evidence",
+        "props": {
+          "evidence": [
+            {
+              "contradiction": null,
+              "evidence_class": "B",
+              "evidence_id": "E-ID",
+              "period": "2026",
+              "retrieved_at": "2026-09-02",
+              "reviewer_status": "confirmed_by_responsible_authority",
+              "source": "TEST_FIXTURE",
+              "status": "observed",
+              "supports": [
+                "TARGET_PRODUCT_IDENTITY"
+              ],
+              "synthetic_flag": false,
+              "title": "Target product identity fixture",
+              "transformation": "No transformation; synthetic-free test fixture.",
+              "url": "https://example.invalid/e-id"
+            },
+            {
+              "contradiction": null,
+              "evidence_class": "B",
+              "evidence_id": "E-DEMAND",
+              "period": "2026",
+              "retrieved_at": "2026-09-02",
+              "reviewer_status": "confirmed_by_responsible_authority",
+              "source": "TEST_FIXTURE",
+              "status": "observed",
+              "supports": [
+                "TARGET_SPECIFICATION_DEMAND"
+              ],
+              "synthetic_flag": false,
+              "title": "Target-specification demand fixture",
+              "transformation": "No transformation; synthetic-free test fixture.",
+              "url": "https://example.invalid/e-demand"
+            },
+            {
+              "contradiction": null,
+              "evidence_class": "C",
+              "evidence_id": "E-CAP",
+              "period": "2026",
+              "retrieved_at": "2026-09-02",
+              "reviewer_status": "confirmed_by_responsible_authority",
+              "source": "TEST_FIXTURE",
+              "status": "observed",
+              "supports": [
+                "DOMESTIC_CAPABILITY_ASSESSMENT"
+              ],
+              "synthetic_flag": false,
+              "title": "Domestic capability fixture",
+              "transformation": "No transformation; synthetic-free test fixture.",
+              "url": "https://example.invalid/e-cap"
+            },
+            {
+              "contradiction": null,
+              "evidence_class": "C",
+              "evidence_id": "E-GATE",
+              "period": "2026",
+              "retrieved_at": "2026-09-02",
+              "reviewer_status": "confirmed_by_responsible_authority",
+              "source": "TEST_FIXTURE",
+              "status": "observed",
+              "supports": [
+                "HARD_REGULATORY_PROCESS_GATES"
+              ],
+              "synthetic_flag": false,
+              "title": "Hard-gate resolution fixture",
+              "transformation": "No transformation; synthetic-free test fixture.",
+              "url": "https://example.invalid/e-gate"
+            },
+            {
+              "contradiction": null,
+              "evidence_class": "B",
+              "evidence_id": "E-ROUTE",
+              "period": "2026",
+              "retrieved_at": "2026-09-02",
+              "reviewer_status": "confirmed_by_responsible_authority",
+              "source": "TEST_FIXTURE",
+              "status": "observed",
+              "supports": [
+                "ROUTE_ECONOMICS",
+                "ROUTE_NATIONAL_VALUE",
+                "ROUTE_COMPETITION"
+              ],
+              "synthetic_flag": false,
+              "title": "Route economics and policy fixture",
+              "transformation": "No transformation; synthetic-free test fixture.",
+              "url": "https://example.invalid/e-route"
+            }
+          ]
+        },
+        "type": "evidence_ledger"
+      },
+      {
+        "id": "unlocks",
+        "props": {
+          "localized_missing_facts": {
+            "ar": [],
+            "en": []
+          },
+          "missing_facts": [],
+          "synthetic_inputs_used": [],
+          "synthetic_labels": null
+        },
+        "type": "data_unlocks"
+      },
+      {
+        "id": "actions",
+        "props": {
+          "mode": "public",
+          "opportunity_id": "FIX-PUBLIC-NO-CANDIDATE"
+        },
+        "type": "decision_actions"
+      }
+    ],
+    "context": {
+      "decision_state": null,
+      "mode": "public",
+      "opportunity_id": "FIX-PUBLIC-NO-CANDIDATE"
+    },
+    "guardrails": {
+      "approved_component_library_only": true,
+      "no_executable_model_generated_code": true,
+      "real_decision_never_uses_synthetic": true
+    },
+    "manifest_version": "1.0",
+    "surface": "industrial_decision_workspace",
+    "title": "Test product"
+  }
+}

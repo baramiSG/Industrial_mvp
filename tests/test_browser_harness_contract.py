@@ -64,12 +64,14 @@ def test_browser_suite_has_the_approved_top_level_shape() -> None:
         "THIRD_PARTY_NOTICES.md",
         "conftest.py",
         "harness.py",
+        "parity_grammar.py",
         "pages.py",
         "test_accessibility.py",
         "test_dossier.py",
         "test_guardrails.py",
         "test_journeys.py",
         "test_responsive.py",
+        "test_screening.py",
         "test_visual_baselines.py",
         "visual_baselines.py",
         "visual_container.py",
@@ -447,7 +449,7 @@ def test_server_teardown_accepts_clean_exit_or_requested_sigterm() -> None:
     assert harness.is_expected_server_return_code(1) is False
 
 
-def test_browser_inventory_has_exactly_18_named_tests() -> None:
+def test_browser_inventory_has_exactly_31_named_tests() -> None:
     expected = {
         "test_portfolio_loads_expected_cases_and_states",
         "test_opportunity_card_opens_selected_workspace",
@@ -476,6 +478,25 @@ def test_browser_inventory_has_exactly_18_named_tests() -> None:
             "preserves_state"
         ),
         "test_failure_collector_observes_all_required_channels",
+        "test_screening_summary_renders_status_coverage_counts_and_five_queues",
+        "test_screening_journey_queue_record_passport_anchor_back",
+        "test_screening_empty_queue_renders_explicit_state",
+        "test_screening_queue_pagination_shows_pareto_rank_without_ordinal_list",
+        "test_screening_surface_is_public_only_when_simulation_mode_is_active",
+        (
+            "test_screening_unavailable_and_partial_universe_render_"
+            "explicit_states"
+        ),
+        "test_screening_views_keyboard_traversal_with_visible_focus",
+        "test_screening_views_have_zero_wcag_21_aa_axe_violations",
+        "test_screening_surface_rtl_direction_and_arabic_glyphs",
+        "test_screening_surface_has_no_english_catalogue_prose_in_arabic",
+        "test_arabic_parity_predicate_fails_on_injected_english",
+        "test_no_candidate_deep_case_renders_disposition_label_not_null",
+        (
+            "test_workspace_and_methodology_ledgers_have_no_english_"
+            "catalogue_prose_in_arabic"
+        ),
     }
     actual: set[str] = set()
     for path in BROWSER_TESTS.glob("test_*.py"):

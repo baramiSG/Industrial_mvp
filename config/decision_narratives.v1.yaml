@@ -1,7 +1,7 @@
 metadata:
   artifact: industrial-opportunity-decision-narratives
-  version: "1.1.0"
-  effective_date: "2026-09-03"
+  version: "1.2.0"
+  effective_date: "2026-09-12"
   authority: "Industrial Opportunity Resolution Methodology §§1.2, 4.2, 5.3, 7.1.1, 7.4, 9, 12 and 15; Core 07 v2"
   status: frozen_for_demo_cycle
   default_locale: en
@@ -20,6 +20,12 @@ placeholder_kinds:
   product_name: localized
   route_label: localized
   route_short_label: localized
+  hs_revision: computed
+  hs6: computed
+  positive_year_count: computed
+  confidence_cap: computed
+  ratio: computed
+  named_fact_count: computed
 
 templates:
   en:
@@ -164,6 +170,109 @@ templates:
     gap.resilience: "Resilience gap"
     gap.evidence: "Evidence gap"
 
+    decision.public.no_candidate.headline: "NO CANDIDATE — no candidate signal fired"
+    decision.public.no_candidate.route: "No deep-resolution route; screening disposition only"
+    decision.public.no_candidate.rationale: "No candidate trigger fired on public evidence; the case is not admitted to deep resolution and no formal state is assigned."
+    decision.public.no_candidate.condition: "Re-screen when a candidate signal fires on the public series."
+
+    rule.r0.name: "Identity gate"
+    rule.r0.result.identity_frozen: "HS revision {hs_revision} and HS6 {hs6} are frozen in the snapshot; specification/application remains separately gated."
+    rule.r0.effect.continue_screening: "Continue to screening while preserving the unresolved decision object."
+
+    rule.r1-f.name: "Persistent retained exposure — full"
+    rule.r1-f.result.continuity_unavailable: "Full continuity is unavailable and gross flows are not retained imports."
+    rule.r1-f.result.not_fired: "Full persistence test did not fire."
+    rule.r1-f.effect.do_not_claim_full_persistence: "Do not claim the full persistence rule."
+
+    rule.r1-d.name: "Persistence signal — degraded"
+    rule.r1-d.result.positive_years_observed: "{positive_year_count} positive observed years within the configured window; no interpolation used."
+    rule.r1-d.effect.investigate_only_confidence_capped: "Generate INVESTIGATE only; confidence capped at {confidence_cap}."
+
+    rule.r2.name: "Quantity-led expansion"
+    rule.r2.result.inputs_unavailable: "Comparable value and quantity observations are unavailable."
+    rule.r2.result.fired: "Quantity-led expansion signal fires."
+    rule.r2.result.not_quantity_led: "Value movement is not quantity-led under the configured test."
+    rule.r2.effect.no_inference: "No inference."
+    rule.r2.effect.separate_volume_from_price: "Separate structural volume growth from price movement."
+
+    rule.r3.name: "Supplier concentration"
+    rule.r3.result.both_bases_not_calculable: "Value- and quantity-basis partner concentration are NOT_CALCULABLE."
+    rule.r3.result.value_concentrated_quantity_not_calculable: "External supply is concentrated on the value basis; quantity concentration is NOT_CALCULABLE."
+    rule.r3.result.quantity_concentrated_value_not_calculable: "External supply is concentrated on the quantity basis; value concentration is NOT_CALCULABLE."
+    rule.r3.result.concentrated_on_calculable_basis: "External supply is concentrated on at least one calculable basis."
+    rule.r3.result.thresholds_not_met: "Concentration thresholds are not met on the calculable basis or bases."
+    rule.r3.effect.no_concentration_inference: "No concentration inference."
+    rule.r3.effect.resilience_review: "Generate a resilience/diversification review, not an automatic localisation recommendation."
+
+    rule.r4-f.name: "Product-tier heterogeneity — full"
+    rule.r4-f.result.cells_unavailable: "Partner-month × tariff-line cells are unavailable."
+    rule.r4-f.effect.no_clusters_or_grades: "Do not fit clusters or claim grades."
+
+    rule.r4-d.name: "Unit-value dispersion — degraded"
+    rule.r4-d.result.descriptive_dispersion: "Comparable annual partner unit values show descriptive dispersion; no cluster or grade conclusion."
+    rule.r4-d.result.disclosed_dispersion: "A source-attributed annual unit-value dispersion summary supports a descriptive product-mix signal; no cluster or grade conclusion."
+    rule.r4-d.result.coverage_insufficient: "Comparable annual partner coverage is insufficient; R4-D is not calculable."
+    rule.r4-d.effect.specification_research_only: "Open specification research only; no grade conclusion."
+
+    rule.r5.name: "Domestic supply plus continued imports"
+    rule.r5.name.synthetic: "Retained import penetration"
+    rule.r5.result.penetration_fired: "Retained import penetration meets the configured mismatch test."
+    rule.r5.result.penetration_not_fired: "The configured retained-import penetration test does not fire."
+    rule.r5.result.coexistence_fired: "Verified domestic capability coexists with material gross imports."
+    rule.r5.result.coexistence_not_met: "Coexistence condition not met."
+    rule.r5.result.inputs_unavailable: "Domestic capability or a usable import measure is unavailable."
+    rule.r5.result.synthetic_inputs_absent: "Synthetic retained-flow inputs are absent; R5 is not calculable."
+    rule.r5.result.synthetic_penetration_fired: "Synthetic retained-import penetration meets the configured R5 threshold."
+    rule.r5.result.synthetic_penetration_not_fired: "Synthetic retained-import penetration does not meet the configured R5 threshold."
+    rule.r5.effect.test_mismatch_dimensions: "Test specification, qualification, capacity, price, application and allocation mismatch."
+    rule.r5.effect.synthetic_declared_blocks_only: "Use only when production and retained-flow blocks are declared."
+
+    rule.r6.name: "Capacity pressure"
+    rule.r6.name.synthetic: "Capacity pressure"
+    rule.r6.result.not_public: "Effective utilisation and target-specification shortage are not public."
+    rule.r6.result.synthetic_pressure_fired: "Synthetic utilisation and shortage proxy meet the configured R6 thresholds; sustained period is NOT_CALCULABLE."
+    rule.r6.result.synthetic_pressure_not_fired: "Synthetic R6 utilisation/shortage proxy does not meet both configured thresholds; sustained period is NOT_CALCULABLE."
+    rule.r6.result.synthetic_inputs_unavailable: "Synthetic utilisation or effective qualified capacity is unavailable; R6 is not calculable."
+    rule.r6.effect.obtain_line_level_inputs: "Obtain line-level availability, yield, qualification share and allocation."
+    rule.r6.effect.synthetic_degraded_signal_only: "Use as a DEGRADED capacity-pressure signal only; it cannot by itself support ADVANCE without a sustained period."
+
+    rule.r7.name: "Latent domestic capacity"
+    rule.r7.name.synthetic: "Latent domestic capacity"
+    rule.r7.result.not_established_publicly: "Idle qualified capacity and specification equivalence are not established publicly."
+    rule.r7.result.synthetic_latent_fired: "Synthetic utilisation and specification equivalence meet the configured latent-capacity test."
+    rule.r7.result.synthetic_latent_not_fired: "Synthetic utilisation/equivalence does not meet the configured latent-capacity test."
+    rule.r7.result.synthetic_latent_not_calculable: "Synthetic latent capacity is not calculable because a required utilisation or equivalence input is absent."
+    rule.r7.effect.do_not_assume_latent_capacity: "Do not assume latent capacity."
+    rule.r7.effect.synthetic_test_routes_when_established: "Test no-support, market linkage, procurement, or barrier removal only when equivalence and latent capacity are established."
+
+    rule.r8.name: "Committed future demand"
+    rule.r8.name.synthetic: "Committed future demand"
+    rule.r8.result.committed_demand_unavailable: "Awarded/financed demand at the target specification is unavailable."
+    rule.r8.result.synthetic_layers_disclosed: "Committed and announced layers are disclosed, but base demand, commitment probability, and minimum efficient scale govern R8 calculability."
+    rule.r8.effect.keep_demand_layers_separate: "Keep base, committed and announced demand separate when provided."
+    rule.r8.effect.synthetic_do_not_infer_addition: "Do not infer probability-adjusted demand addition or MES fill; keep committed and announced demand separate."
+
+    rule.r9-s.name: "Coarse incumbent adjacency screen"
+    rule.r9-s.result.adjacent_plant_with_signals: "A verified Saudi plant is in the same process family with additional capability signals."
+    rule.r9-s.result.no_defensible_signal: "No defensible coarse adjacency signal."
+    rule.r9-s.effect.open_line_level_assessment: "Open the full line-level capability assessment; do not publish D* from screening alone."
+
+    rule.r10.name: "Strategic criticality"
+    rule.r10.result.designated: "A responsible-authority criticality designation is present."
+    rule.r10.result.resilience_review_warranted: "A resilience review is warranted by concentration; formal criticality still requires authority confirmation."
+    rule.r10.result.no_designation: "No responsible-authority criticality designation is present in the demo snapshot."
+    rule.r10.effect.separate_viability_from_strategy: "Keep commercial viability and strategic value separate."
+
+    rule.r11.name: "Economic exclusion / generic-capacity warning"
+    rule.r11.result.generic_capacity_fired: "Gross exports are {ratio}× imports; generic new capacity cannot be justified from HS6 imports alone."
+    rule.r11.result.warning_threshold_not_met: "Gross exports are {ratio}× imports; the configured generic-capacity warning threshold is not met."
+    rule.r11.result.not_calculable: "Export/import ratio or established nameplate capability is NOT_CALCULABLE; no generic-capacity exclusion fires."
+    rule.r11.effect.reject_generic_or_named_exception: "Reject generic support or move only a named specialty exception to investigation."
+
+    rule.r12.name: "Evidence-value trigger"
+    rule.r12.result.named_facts_could_change_route: "{named_fact_count} named facts could change the route."
+    rule.r12.effect.prioritise_smallest_request: "Prioritise the smallest evidence request with a plausible route effect; quantify EVSI when cost and value inputs exist."
+
   ar:
     decision.public.investigate.headline: "تحقّق — القيد الملزم غير محسوم"
     decision.public.investigate.rationale: "اختبر المسار القائم أولاً؛ فلا تبرر الأدلة العامة إنشاء مشروع جديد مستقل."
@@ -305,3 +414,106 @@ templates:
     gap.timing: "فجوة توقيت"
     gap.resilience: "فجوة مرونة"
     gap.evidence: "فجوة أدلة"
+
+    decision.public.no_candidate.headline: "لا مرشح — لم ينطلق أي محفّز للترشيح"
+    decision.public.no_candidate.route: "لا مسار للتحليل المتعمق؛ تصرف الفرز فقط"
+    decision.public.no_candidate.rationale: "لم ينطلق أي محفّز للترشيح من الأدلة العامة؛ لذلك لا تدخل الحالة التحليل المتعمق ولا تُسند إليها حالة رسمية."
+    decision.public.no_candidate.condition: "أعد الفرز عندما ينطلق محفّز للترشيح في السلسلة العامة."
+
+    rule.r0.name: "بوابة الهوية"
+    rule.r0.result.identity_frozen: "تُثبّت مراجعة النظام المنسق {hs_revision} والرمز السداسي {hs6} في اللقطة؛ وتظل المواصفة والتطبيق خاضعين لحسم مستقل."
+    rule.r0.effect.continue_screening: "واصل الفرز مع إبقاء موضوع القرار غير المحسوم ظاهراً."
+
+    rule.r1-f.name: "التعرض المحتجز المستمر — كامل"
+    rule.r1-f.result.continuity_unavailable: "الاستمرارية الكاملة غير متاحة، والتدفقات الإجمالية لا تمثل واردات محتجزة."
+    rule.r1-f.result.not_fired: "لم ينطلق اختبار الاستمرارية الكامل."
+    rule.r1-f.effect.do_not_claim_full_persistence: "لا تدّع تحقق قاعدة الاستمرارية الكاملة."
+
+    rule.r1-d.name: "إشارة الاستمرارية — متدهورة"
+    rule.r1-d.result.positive_years_observed: "رُصدت واردات موجبة في {positive_year_count} سنوات ضمن النافذة المهيأة؛ ولم يُستخدم الاستيفاء."
+    rule.r1-d.effect.investigate_only_confidence_capped: "أنشئ حالة تحقق فقط؛ وحد الثقة الأقصى هو {confidence_cap}."
+
+    rule.r2.name: "التوسع المدفوع بالكمية"
+    rule.r2.result.inputs_unavailable: "لا تتوافر مشاهدات قابلة للمقارنة للقيمة والكمية."
+    rule.r2.result.fired: "انطلقت إشارة التوسع المدفوع بالكمية."
+    rule.r2.result.not_quantity_led: "حركة القيمة ليست مدفوعة بالكمية وفق الاختبار المهيأ."
+    rule.r2.effect.no_inference: "لا استنتاج."
+    rule.r2.effect.separate_volume_from_price: "افصل نمو الحجم البنيوي عن حركة السعر."
+
+    rule.r3.name: "تركز الموردين"
+    rule.r3.result.both_bases_not_calculable: "لا يمكن حساب تركز الشركاء على أساس القيمة أو الكمية."
+    rule.r3.result.value_concentrated_quantity_not_calculable: "العرض الخارجي متركز على أساس القيمة؛ ولا يمكن حساب تركز الكمية."
+    rule.r3.result.quantity_concentrated_value_not_calculable: "العرض الخارجي متركز على أساس الكمية؛ ولا يمكن حساب تركز القيمة."
+    rule.r3.result.concentrated_on_calculable_basis: "العرض الخارجي متركز على أساس واحد قابل للحساب على الأقل."
+    rule.r3.result.thresholds_not_met: "لم تتحقق حدود التركز على الأساس أو الأسس القابلة للحساب."
+    rule.r3.effect.no_concentration_inference: "لا استنتاج بشأن التركز."
+    rule.r3.effect.resilience_review: "افتح مراجعة للمرونة والتنويع، لا توصية آلية بالتوطين."
+
+    rule.r4-f.name: "تباين فئات المنتج — كامل"
+    rule.r4-f.result.cells_unavailable: "خلايا الشريك والشهر وبند التعرفة غير متاحة."
+    rule.r4-f.effect.no_clusters_or_grades: "لا تلائم عناقيد ولا تدّع درجات."
+
+    rule.r4-d.name: "تشتت قيمة الوحدة — متدهور"
+    rule.r4-d.result.descriptive_dispersion: "تُظهر قيم الوحدة السنوية القابلة للمقارنة بين الشركاء تشتتاً وصفياً؛ دون استنتاج عن عنقود أو درجة."
+    rule.r4-d.result.disclosed_dispersion: "يدعم ملخص منسوب إلى مصدر لتشتت قيمة الوحدة السنوية إشارة وصفية لمزيج المنتجات؛ دون استنتاج عن عنقود أو درجة."
+    rule.r4-d.result.coverage_insufficient: "تغطية الشركاء السنوية القابلة للمقارنة غير كافية؛ ولا يمكن حساب قاعدة التشتت."
+    rule.r4-d.effect.specification_research_only: "افتح بحث المواصفة فقط؛ دون استنتاج عن الدرجة."
+
+    rule.r5.name: "العرض المحلي مع استمرار الواردات"
+    rule.r5.name.synthetic: "اختراق الواردات المحتجزة"
+    rule.r5.result.penetration_fired: "يحقق اختراق الواردات المحتجزة اختبار عدم التطابق المهيأ."
+    rule.r5.result.penetration_not_fired: "لم ينطلق اختبار اختراق الواردات المحتجزة المهيأ."
+    rule.r5.result.coexistence_fired: "تتعايش قدرة محلية مثبتة مع واردات إجمالية مؤثرة."
+    rule.r5.result.coexistence_not_met: "لم يتحقق شرط التعايش."
+    rule.r5.result.inputs_unavailable: "القدرة المحلية أو مقياس واردات صالح غير متاح."
+    rule.r5.result.synthetic_inputs_absent: "مدخلات التدفقات المحتجزة المحاكية غائبة؛ ولا يمكن حساب القاعدة."
+    rule.r5.result.synthetic_penetration_fired: "يحقق اختراق الواردات المحتجزة المحاكي الحد المهيأ."
+    rule.r5.result.synthetic_penetration_not_fired: "لا يحقق اختراق الواردات المحتجزة المحاكي الحد المهيأ."
+    rule.r5.effect.test_mismatch_dimensions: "اختبر عدم التطابق في المواصفة والتأهيل والطاقة والسعر والتطبيق والتخصيص."
+    rule.r5.effect.synthetic_declared_blocks_only: "استخدم النتيجة فقط عند التصريح بكتل الإنتاج والتدفقات المحتجزة."
+
+    rule.r6.name: "ضغط الطاقة"
+    rule.r6.name.synthetic: "ضغط الطاقة"
+    rule.r6.result.not_public: "الاستغلال الفعلي ونقص المواصفة المستهدفة غير متاحين للعامة."
+    rule.r6.result.synthetic_pressure_fired: "يحقق بديل الاستغلال والنقص المحاكي الحدود المهيأة؛ ولا يمكن حساب مدة الاستمرار."
+    rule.r6.result.synthetic_pressure_not_fired: "لا يحقق بديل الاستغلال والنقص المحاكي كلا الحدين المهيأين؛ ولا يمكن حساب مدة الاستمرار."
+    rule.r6.result.synthetic_inputs_unavailable: "الاستغلال المحاكي أو الطاقة الفعلية المؤهلة غير متاح؛ ولا يمكن حساب القاعدة."
+    rule.r6.effect.obtain_line_level_inputs: "احصل على الإتاحة والمردود وحصة التأهيل والتخصيص على مستوى الخط."
+    rule.r6.effect.synthetic_degraded_signal_only: "استخدم النتيجة كإشارة متدهورة لضغط الطاقة فقط؛ ولا يمكنها وحدها دعم التقدّم دون مدة مستمرة."
+
+    rule.r7.name: "الطاقة المحلية الكامنة"
+    rule.r7.name.synthetic: "الطاقة المحلية الكامنة"
+    rule.r7.result.not_established_publicly: "لم تثبت علناً الطاقة المؤهلة العاطلة ولا تكافؤ المواصفة."
+    rule.r7.result.synthetic_latent_fired: "يحقق الاستغلال المحاكي وتكافؤ المواصفة اختبار الطاقة الكامنة المهيأ."
+    rule.r7.result.synthetic_latent_not_fired: "لا يحقق الاستغلال أو التكافؤ المحاكي اختبار الطاقة الكامنة المهيأ."
+    rule.r7.result.synthetic_latent_not_calculable: "لا يمكن حساب الطاقة الكامنة المحاكية لغياب مدخل مطلوب للاستغلال أو التكافؤ."
+    rule.r7.effect.do_not_assume_latent_capacity: "لا تفترض وجود طاقة كامنة."
+    rule.r7.effect.synthetic_test_routes_when_established: "اختبر عدم الدعم أو الربط بالسوق أو المشتريات أو إزالة العوائق فقط عند إثبات التكافؤ والطاقة الكامنة."
+
+    rule.r8.name: "الطلب المستقبلي الملتزم"
+    rule.r8.name.synthetic: "الطلب المستقبلي الملتزم"
+    rule.r8.result.committed_demand_unavailable: "الطلب الممنوح أو الممول عند المواصفة المستهدفة غير متاح."
+    rule.r8.result.synthetic_layers_disclosed: "أُفصح عن طبقتي الطلب الملتزم والمعلن، لكن الطلب الأساسي واحتمال الالتزام والحد الأدنى للكفاءة تحكم قابلية الحساب."
+    rule.r8.effect.keep_demand_layers_separate: "أبقِ الطلب الأساسي والملتزم والمعلن منفصلاً عند تقديمه."
+    rule.r8.effect.synthetic_do_not_infer_addition: "لا تستنتج إضافة الطلب المعدلة بالاحتمال أو ملء الحد الأدنى للكفاءة؛ وأبقِ الطلب الملتزم والمعلن منفصلين."
+
+    rule.r9-s.name: "فرز أولي لتجاور المنتج القائم"
+    rule.r9-s.result.adjacent_plant_with_signals: "يوجد مصنع سعودي مثبت ضمن عائلة العملية نفسها مع إشارات قدرة إضافية."
+    rule.r9-s.result.no_defensible_signal: "لا توجد إشارة أولية للتجاور يمكن الدفاع عنها."
+    rule.r9-s.effect.open_line_level_assessment: "افتح تقييم القدرة الكامل على مستوى الخط؛ ولا تنشر مسافة القدرة من الفرز وحده."
+
+    rule.r10.name: "الأهمية الاستراتيجية"
+    rule.r10.result.designated: "يوجد تصنيف للأهمية صادر عن جهة مسؤولة."
+    rule.r10.result.resilience_review_warranted: "يبرر التركز مراجعة المرونة؛ وما زال التصنيف الرسمي للأهمية يتطلب تأكيد الجهة."
+    rule.r10.result.no_designation: "لا يوجد تصنيف للأهمية صادر عن جهة مسؤولة في لقطة العرض."
+    rule.r10.effect.separate_viability_from_strategy: "افصل الجدوى التجارية عن القيمة الاستراتيجية."
+
+    rule.r11.name: "الاستبعاد الاقتصادي وتحذير الطاقة العامة"
+    rule.r11.result.generic_capacity_fired: "تبلغ الصادرات الإجمالية {ratio} ضعف الواردات؛ ولا يمكن تبرير طاقة إنتاجية عامة جديدة من واردات الرمز السداسي وحدها."
+    rule.r11.result.warning_threshold_not_met: "تبلغ الصادرات الإجمالية {ratio} ضعف الواردات؛ ولم يتحقق حد تحذير الطاقة العامة المهيأ."
+    rule.r11.result.not_calculable: "لا يمكن حساب نسبة الصادرات إلى الواردات أو القدرة المثبتة بالطاقة الاسمية؛ ولا ينطلق استبعاد الطاقة العامة."
+    rule.r11.effect.reject_generic_or_named_exception: "ارفض الدعم العام أو انقل فقط استثناءً مسمى لتخصص معين إلى التحقق."
+
+    rule.r12.name: "محفّز قيمة الأدلة"
+    rule.r12.result.named_facts_could_change_route: "يمكن أن تغيّر {named_fact_count} حقائق مسماة المسار."
+    rule.r12.effect.prioritise_smallest_request: "أعط الأولوية لأصغر طلب أدلة ذي أثر معقول على المسار؛ واحسب القيمة المتوقعة للمعلومة عند توافر مدخلات التكلفة والقيمة."

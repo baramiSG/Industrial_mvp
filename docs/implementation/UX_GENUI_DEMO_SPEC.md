@@ -3,6 +3,10 @@
 ## 1. Product surface
 
 The MVP has one primary product: an adaptive **Decision Workspace**. The executive overview is an entry point, not a separate analytical product.
+The bilingual Screening section is a public-evidence sibling region within
+that workspace: summary, five route-specific queues, record drill-down and
+one persistent evidence-passport area. It is not a ranked opportunity
+dashboard or a separate product.
 
 The interface must make the evidence boundary legible before it makes the analysis impressive.
 
@@ -35,6 +39,9 @@ Benefits:
 | `evidence_ledger` | always | source, class, status and boundary |
 | `data_unlocks` | always | exact missing facts and active synthetic blocks |
 | `decision_actions` | always | dossier and JSON output |
+| `screening_summary` | Screening summary | universe, coverage, disposition and route-specific queue counts |
+| `screening_queue` | a selected screening queue | Pareto-ordered entries and pagination without an ordinal master list |
+| `screening_record` | a selected HS6 record | governed ledger, exclusions, needs, adjacency and evidence-basis anchors |
 
 ## 4. Context rules
 
@@ -95,6 +102,11 @@ Benefits:
 - Dossier opens in a printable new window.
 - Decision JSON can be copied.
 - Navigation scrolls to page sections.
+- Screening navigation opens the summary; every queue entry drills into its
+  record and each evidence-basis anchor focuses a passport card in the
+  persistent evidence region.
+- UNAVAILABLE, PARTIAL and empty-queue states remain labelled and actionable
+  without fabricated counts.
 - All controls are keyboard reachable.
 
 ## 8. Arabic support
@@ -107,10 +119,11 @@ Benefits:
 - IDs, HS codes, hashes, standards, currencies, quantities and dates are
   directionally isolated as LTR technical values. Arabic names and original
   Arabic source spans retain `lang="ar" dir="rtl"`.
-- Engine-emitted analytical narrative remains English in this release. Arabic
-  UI visibly captions each affected group and renders every governed source
-  value as a `lang="en" dir="ltr"` source-language island; it does not claim a
-  translation.
+- Governed rule names, results, decision effects, decision boundaries and
+  screening vocabulary render from the active-locale catalogues. In Arabic,
+  those values contain Arabic catalogue prose rather than English
+  source-language islands. Only verbatim source spans and classified
+  technical values remain directionally isolated LTR islands.
 - Every simulated surface repeats both warning labels from evidence policy
   1.2.0. Neither label is duplicated in the UI catalogue.
 - Western (`latn`) digits, Gregorian dates and verbatim source spans are the
