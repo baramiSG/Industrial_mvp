@@ -368,3 +368,17 @@ A failing golden test is evidence of one of three things:
 3. the governing methodology changed.
 
 The reviewer must identify which one. Changing the expected result without an authority change is prohibited.
+
+## 9. Screening reconstruction gate
+
+Acceptance requires connector count/content/coverage negatives, threshold
+injection tests, five-queue/Pareto tests, unavailable-universe output,
+synthetic/formal-decision leakage refusal, runtime import isolation and warm API
+performance. `scripts/reconstruct_snapshot.py --all` must print
+`SCREENING RECONSTRUCTION PASS` only after acquired snapshots, documents,
+entities and every screening snapshot and input hash have passed. Tampered
+snapshot bytes, identities, counts, queue references or inputs fail closed.
+
+The steel public fixture remains INVESTIGATE and the polypropylene public
+fixture remains REJECT for generic capacity support; screening acceptance
+cannot alter either golden.

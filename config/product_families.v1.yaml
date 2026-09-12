@@ -1,0 +1,31 @@
+metadata:
+  version: "1.0.0"
+  effective_date: "2026-09-12"
+  authority: "Methodology §13 and §14; owner decision OD-6"
+
+families:
+  coated_steel:
+    sector_profile: coated_steel
+    hs4_headings: ["7210"]
+    status: AVAILABLE
+    basis: "Methodology §13 worked case 721049 and frozen public opportunity"
+  polypropylene_primary_forms:
+    sector_profile: technical_plastics
+    hs4_headings: ["3902"]
+    status: AVAILABLE
+    basis: "Methodology §14 worked case and frozen public opportunity"
+  pharma_api:
+    sector_profile: pharma_api
+    hs4_headings: []
+    status: MEMBERSHIP_UNAVAILABLE
+    basis: "Owner/analyst mapping pending under OD-6"
+  fertilizers:
+    sector_profile: fertilizers
+    hs4_headings: []
+    status: MEMBERSHIP_UNAVAILABLE
+    basis: "Owner/analyst mapping pending under OD-6"
+  fabricated_aluminium:
+    sector_profile: fabricated_aluminium
+    hs4_headings: []
+    status: MEMBERSHIP_UNAVAILABLE
+    basis: "Owner/analyst mapping pending under OD-6"

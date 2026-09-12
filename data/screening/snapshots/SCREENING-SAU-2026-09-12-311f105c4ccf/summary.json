@@ -1,0 +1,996 @@
+{
+  "as_of_date": "2026-09-12",
+  "common_record_fields": {
+    "rules_not_evaluated_at_screening": [
+      "R4-F",
+      "R6",
+      "R7",
+      "R8",
+      "R12"
+    ],
+    "rules_not_evaluated_reason": "INPUTS_NOT_PUBLIC_AT_SCREENING_GRAIN"
+  },
+  "counts": {
+    "by_queue": {
+      "high_evsi_evidence_investigation": 15,
+      "incumbent_upgrade_investigation": 0,
+      "likely_false_positive": 4727,
+      "resilience_case": 0,
+      "robust_public_finding": 119
+    },
+    "by_reason_code": {
+      "MATERIAL_TRIGGER_FIRED": 4996,
+      "NO_IMPORT_OBSERVATIONS": 43,
+      "NO_TRIGGER_FIRED": 404
+    },
+    "dispositions": {
+      "CANDIDATE": 4996,
+      "NO_CANDIDATE": 447,
+      "SCREENED_OUT": 0
+    },
+    "indicated_states": {
+      "INVESTIGATE": 4996,
+      "MONITOR": 0,
+      "REJECT": 0
+    },
+    "unqueued_candidates": 135
+  },
+  "coverage_accounting": {
+    "entity_artifact": {
+      "reason_codes": [
+        "ENTITY_ARTIFACT_AVAILABLE"
+      ],
+      "status": "AVAILABLE"
+    },
+    "partner_detail": {
+      "batches": [],
+      "covered_hs6_count": 0,
+      "reason_codes": [
+        "PARTNER_DETAIL_NOT_ACQUIRED"
+      ],
+      "requested_hs6_count": 0
+    },
+    "production_aggregates": {
+      "reason_codes": [
+        "PRODUCTION_AGGREGATES_NOT_ACQUIRED"
+      ],
+      "status": "NOT_CALCULABLE"
+    },
+    "tariff_tree": {
+      "reason_codes": [
+        "TARIFF_TREE_NOT_ACQUIRED"
+      ],
+      "status": "NOT_CALCULABLE"
+    }
+  },
+  "evidence_passports": [
+    {
+      "coverage_status": "COMPLETE",
+      "evidence_class": "B",
+      "passport_id": "un_comtrade-37d131466dff-20260912T143742Z",
+      "retrieval": {
+        "endpoint_or_document": "https://comtradeapi.un.org/data/v1/get/C/A/HS?reporterCode=682&period=2021&flowCode=M&cmdCode=AG6&partnerCode=0&motCode=0&customsCode=C00",
+        "retrieved_at": "2026-09-12T14:37:52Z"
+      },
+      "source_id": "un_comtrade",
+      "stage": "UNIVERSE",
+      "status": "unconfirmed_by_responsible_authority",
+      "unit_key": [
+        "imports",
+        "2021"
+      ]
+    },
+    {
+      "coverage_status": "COMPLETE",
+      "evidence_class": "B",
+      "passport_id": "un_comtrade-3f892bf254a9-20260912T143742Z",
+      "retrieval": {
+        "endpoint_or_document": "https://comtradeapi.un.org/data/v1/get/C/A/HS?reporterCode=682&period=2021&flowCode=X&cmdCode=AG6&partnerCode=0&motCode=0&customsCode=C00",
+        "retrieved_at": "2026-09-12T14:37:57Z"
+      },
+      "source_id": "un_comtrade",
+      "stage": "UNIVERSE",
+      "status": "unconfirmed_by_responsible_authority",
+      "unit_key": [
+        "exports",
+        "2021"
+      ]
+    },
+    {
+      "coverage_status": "COMPLETE",
+      "evidence_class": "B",
+      "passport_id": "un_comtrade-464c4f670ca8-20260912T143742Z",
+      "retrieval": {
+        "endpoint_or_document": "https://comtradeapi.un.org/data/v1/get/C/A/HS?reporterCode=682&period=2023&flowCode=X&cmdCode=AG6&partnerCode=0&motCode=0&customsCode=C00",
+        "retrieved_at": "2026-09-12T14:38:17Z"
+      },
+      "source_id": "un_comtrade",
+      "stage": "UNIVERSE",
+      "status": "unconfirmed_by_responsible_authority",
+      "unit_key": [
+        "exports",
+        "2023"
+      ]
+    },
+    {
+      "coverage_status": "COMPLETE",
+      "evidence_class": "B",
+      "passport_id": "un_comtrade-5bc875b4a56b-20260912T143742Z",
+      "retrieval": {
+        "endpoint_or_document": "https://comtradeapi.un.org/data/v1/get/C/A/HS?reporterCode=682&period=2023&flowCode=M&cmdCode=AG6&partnerCode=0&motCode=0&customsCode=C00",
+        "retrieved_at": "2026-09-12T14:38:12Z"
+      },
+      "source_id": "un_comtrade",
+      "stage": "UNIVERSE",
+      "status": "unconfirmed_by_responsible_authority",
+      "unit_key": [
+        "imports",
+        "2023"
+      ]
+    },
+    {
+      "coverage_status": "COMPLETE",
+      "evidence_class": "B",
+      "passport_id": "un_comtrade-6b9efd5f68db-20260912T143742Z",
+      "retrieval": {
+        "endpoint_or_document": "https://comtradeapi.un.org/data/v1/get/C/A/HS?reporterCode=682&period=2022&flowCode=M&cmdCode=AG6&partnerCode=0&motCode=0&customsCode=C00",
+        "retrieved_at": "2026-09-12T14:38:02Z"
+      },
+      "source_id": "un_comtrade",
+      "stage": "UNIVERSE",
+      "status": "unconfirmed_by_responsible_authority",
+      "unit_key": [
+        "imports",
+        "2022"
+      ]
+    },
+    {
+      "coverage_status": "COMPLETE",
+      "evidence_class": "B",
+      "passport_id": "un_comtrade-7a7ebf8cf5ab-20260912T143742Z",
+      "retrieval": {
+        "endpoint_or_document": "https://comtradeapi.un.org/data/v1/get/C/A/HS?reporterCode=682&period=2024&flowCode=M&cmdCode=AG6&partnerCode=0&motCode=0&customsCode=C00",
+        "retrieved_at": "2026-09-12T14:38:22Z"
+      },
+      "source_id": "un_comtrade",
+      "stage": "UNIVERSE",
+      "status": "unconfirmed_by_responsible_authority",
+      "unit_key": [
+        "imports",
+        "2024"
+      ]
+    },
+    {
+      "coverage_status": "COMPLETE",
+      "evidence_class": "B",
+      "passport_id": "un_comtrade-a3cc3f1befa0-20260912T143742Z",
+      "retrieval": {
+        "endpoint_or_document": "https://comtradeapi.un.org/data/v1/get/C/A/HS?reporterCode=682&period=2024&flowCode=X&cmdCode=AG6&partnerCode=0&motCode=0&customsCode=C00",
+        "retrieved_at": "2026-09-12T14:38:27Z"
+      },
+      "source_id": "un_comtrade",
+      "stage": "UNIVERSE",
+      "status": "unconfirmed_by_responsible_authority",
+      "unit_key": [
+        "exports",
+        "2024"
+      ]
+    },
+    {
+      "coverage_status": "COMPLETE",
+      "evidence_class": "B",
+      "passport_id": "un_comtrade-ceec907cc0b6-20260912T143742Z",
+      "retrieval": {
+        "endpoint_or_document": "https://comtradeapi.un.org/data/v1/get/C/A/HS?reporterCode=682&period=2022&flowCode=X&cmdCode=AG6&partnerCode=0&motCode=0&customsCode=C00",
+        "retrieved_at": "2026-09-12T14:38:07Z"
+      },
+      "source_id": "un_comtrade",
+      "stage": "UNIVERSE",
+      "status": "unconfirmed_by_responsible_authority",
+      "unit_key": [
+        "exports",
+        "2022"
+      ]
+    }
+  ],
+  "inputs": {
+    "configs": [
+      {
+        "path": "config/screening.v1.yaml",
+        "sha256": "21ec2ff6893d3a52a79a5dc91a72c8a54c68adedffa4962c5b1323ca32de8d3e",
+        "version": "1.0.0"
+      },
+      {
+        "path": "config/product_families.v1.yaml",
+        "sha256": "841bc5ac732b9f9348495d3594926dea84dd4df7aab134092f81d06b4de7ecd4",
+        "version": "1.0.0"
+      },
+      {
+        "path": "config/thresholds.v1.yaml",
+        "sha256": "4e891b9706408f6a661565e09609d0d663e1a00a17bda4e283a4b2ee63d3c47a",
+        "version": "1.2.0"
+      },
+      {
+        "path": "config/acquisition_sources.v1.yaml",
+        "sha256": "fbe061496bc6c9b5ddd039b25536d78fb24c22ba3d84650fcd2c9374977673cc",
+        "version": "1.3.0"
+      }
+    ],
+    "entity_artifacts": [
+      {
+        "id": "ENTITIES-2026-09-12-a12e24c31b02",
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/data/entities/resolution/ENTITIES-2026-09-12-a12e24c31b02.json",
+        "sha256": "97e68dd3e79b0ec1acb01bcdb5c5695296ba3d917f639afbd4079702d052f701"
+      }
+    ],
+    "partner_snapshots": [],
+    "plant_family_links": [
+      {
+        "id": "plant-family-links-v1",
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/data/screening/lists/plant-family-links-v1.json",
+        "sha256": "d1c619d3ea69887e7375e9ca59ca8b2811573cb9fe79947340468e87d50d3396"
+      }
+    ],
+    "tariff_snapshots": [],
+    "universe_snapshots": [
+      {
+        "id": "UNIVERSE-SAU-UN-COMTRADE-HS-2026-09-12",
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/data/snapshots/universe/UNIVERSE-SAU-UN-COMTRADE-HS-2026-09-12.json",
+        "sha256": "758acdb41c5759e5be2c6215405e9c6829bc527b73850d8c4b54327c61b0c78d"
+      }
+    ]
+  },
+  "kind": "screening",
+  "methodology_queue_mapping": {
+    "§8.2(a)": {
+      "queue_id": "robust_public_finding",
+      "status": "CALCULATED"
+    },
+    "§8.2(b)": {
+      "queue_id": "incumbent_upgrade_investigation",
+      "status": "CALCULATED"
+    },
+    "§8.2(c)": {
+      "queue_id": null,
+      "reason_code": "D_STAR_NOT_ASSIGNED_AT_SCREENING",
+      "status": "NOT_CALCULABLE"
+    },
+    "§8.2(d)": {
+      "queue_id": "resilience_case",
+      "status": "CALCULATED"
+    },
+    "§8.2(e)": {
+      "queue_id": "likely_false_positive",
+      "status": "CALCULATED"
+    }
+  },
+  "quality_summary": "PASS",
+  "record_shards": [
+    {
+      "hs2": "01",
+      "path": "records/01.json",
+      "record_count": 27,
+      "sha256": "cca899a070ad55d054e45021f922cfd5a45baa3f479f22bf2dccd50f472d49d2"
+    },
+    {
+      "hs2": "02",
+      "path": "records/02.json",
+      "record_count": 41,
+      "sha256": "7e8943b100b5e72bf9ffb65a0effd12249d4a6d80bbafda1276e88f4c156848e"
+    },
+    {
+      "hs2": "03",
+      "path": "records/03.json",
+      "record_count": 183,
+      "sha256": "f2f5c420be34e8302b677c1378695e9b6a721057c82d66bde678bb16081e6b82"
+    },
+    {
+      "hs2": "04",
+      "path": "records/04.json",
+      "record_count": 34,
+      "sha256": "70516e45210de5ae84893e7a89e0ca0cf777e60410a3e880d012ce56fb73790c"
+    },
+    {
+      "hs2": "05",
+      "path": "records/05.json",
+      "record_count": 11,
+      "sha256": "e34ecbdd9ac5cd20a4862eb309ae1c95c320d02f2603dbef332113ce74fe9246"
+    },
+    {
+      "hs2": "06",
+      "path": "records/06.json",
+      "record_count": 16,
+      "sha256": "c0718b97c154ab209d92d617561672b7961c9464295d9ebb81968fd728d79f9c"
+    },
+    {
+      "hs2": "07",
+      "path": "records/07.json",
+      "record_count": 72,
+      "sha256": "c2a0b061108fecb0864e8eec768b8b599ceaad5c97e019c8f081732fd00b19ae"
+    },
+    {
+      "hs2": "08",
+      "path": "records/08.json",
+      "record_count": 70,
+      "sha256": "db72ffe6e766a28039578aa0893828c9a5a01cd303de5285fdb4f4cd81d5f6ac"
+    },
+    {
+      "hs2": "09",
+      "path": "records/09.json",
+      "record_count": 36,
+      "sha256": "9ffde73a6fdfd7fa2a4794722196f33ef2ad77a1c5565bac222b727cf2e5c3c3"
+    },
+    {
+      "hs2": "10",
+      "path": "records/10.json",
+      "record_count": 22,
+      "sha256": "3ff4c2c2907ef7fb7776992a766ebddd08084a48eb81414362ff7ef7596051c8"
+    },
+    {
+      "hs2": "11",
+      "path": "records/11.json",
+      "record_count": 27,
+      "sha256": "5e004397434d4c1bf656ee4292f15a8d294bd632334963296fa9fdb712f3c276"
+    },
+    {
+      "hs2": "12",
+      "path": "records/12.json",
+      "record_count": 45,
+      "sha256": "76a253bf3da2d587f404f667edcef1fdb0330b61800e720da7d3b13a992d0863"
+    },
+    {
+      "hs2": "13",
+      "path": "records/13.json",
+      "record_count": 10,
+      "sha256": "4725fe8fed2b8e78b3e126a920d92f1ca475e1c8b42b24789e8b98352584d798"
+    },
+    {
+      "hs2": "14",
+      "path": "records/14.json",
+      "record_count": 5,
+      "sha256": "0acd243346a3cde20973ea6c295e7e426c885c18f5e3d31328fe941d2a08edfc"
+    },
+    {
+      "hs2": "15",
+      "path": "records/15.json",
+      "record_count": 53,
+      "sha256": "8adf2a03450d52186c0eadbb14c0a374bc1c04205fe8cb675eac17a0cfb019c6"
+    },
+    {
+      "hs2": "16",
+      "path": "records/16.json",
+      "record_count": 36,
+      "sha256": "b49d4a874cf920d108073f92beb8cf792d9b5f22631178512a420637919491ef"
+    },
+    {
+      "hs2": "17",
+      "path": "records/17.json",
+      "record_count": 17,
+      "sha256": "b34289db0187be87ee537a59b9ee710ab3f25c9e7f7c36d298ce9dbc01732982"
+    },
+    {
+      "hs2": "18",
+      "path": "records/18.json",
+      "record_count": 11,
+      "sha256": "8a20652c433886b92578b9a8b028634cb2030f25e6aa4ed1ec5f9d6361893c0c"
+    },
+    {
+      "hs2": "19",
+      "path": "records/19.json",
+      "record_count": 19,
+      "sha256": "04bfb84616efa7bfb2a0423122eec6d7f9af87d55acbd2658abd73a4735aea30"
+    },
+    {
+      "hs2": "20",
+      "path": "records/20.json",
+      "record_count": 52,
+      "sha256": "4a4295683d583c5d8461f1c60474241e8031b2571dbaf76ed548939d4fa95cb0"
+    },
+    {
+      "hs2": "21",
+      "path": "records/21.json",
+      "record_count": 16,
+      "sha256": "eb60e91d5dfeb656ccdb319525e5302e1f7ae635c4ea50b8ff92037fae07e9be"
+    },
+    {
+      "hs2": "22",
+      "path": "records/22.json",
+      "record_count": 9,
+      "sha256": "5db2f40d3935450364102eb32da3bb876cabb5d1bbba51fe090add37f55aaca3"
+    },
+    {
+      "hs2": "23",
+      "path": "records/23.json",
+      "record_count": 22,
+      "sha256": "c4517654b6aff570acdf4954793cca2da152b6883c388f87c8b2ec1786349600"
+    },
+    {
+      "hs2": "24",
+      "path": "records/24.json",
+      "record_count": 16,
+      "sha256": "95b991eb5638732a3877abaa64df939d7b4dc5d847a448c1cae5b9c38615b491"
+    },
+    {
+      "hs2": "25",
+      "path": "records/25.json",
+      "record_count": 66,
+      "sha256": "32255e92defc43e47a3a4fbff04cace3a499b5333aae18c2a606dd71fa08956d"
+    },
+    {
+      "hs2": "26",
+      "path": "records/26.json",
+      "record_count": 32,
+      "sha256": "4a4a14e0d174a640d01895d94dc5f6e31ece8c9d4c70731b10a37f32ae1c44d3"
+    },
+    {
+      "hs2": "27",
+      "path": "records/27.json",
+      "record_count": 42,
+      "sha256": "aa5964b4cc867df2954e21892bdcc314c7b1cf69b8622fc2fea629f25d42ee9d"
+    },
+    {
+      "hs2": "28",
+      "path": "records/28.json",
+      "record_count": 172,
+      "sha256": "89950411e517fca66f00b1a78e97a778fc86d95b9eb5ae8e5ed61d82e57ee29a"
+    },
+    {
+      "hs2": "29",
+      "path": "records/29.json",
+      "record_count": 347,
+      "sha256": "148d37c4798f7f273756fcb9ff72938031d705d8186b948c3764c0f1b5f77eba"
+    },
+    {
+      "hs2": "30",
+      "path": "records/30.json",
+      "record_count": 49,
+      "sha256": "aca0609e932a2b1a151fb36049375626829d27df39a48b70ca847808854dab31"
+    },
+    {
+      "hs2": "31",
+      "path": "records/31.json",
+      "record_count": 24,
+      "sha256": "2f238f5ef5125620c275bdbd65bd00fccb47a89958d8c2899cd4acef9f6e165b"
+    },
+    {
+      "hs2": "32",
+      "path": "records/32.json",
+      "record_count": 45,
+      "sha256": "95e6dac09f7eb1681e8494f6b24df75ce3542d2fba3e94765de057ba5e364a2e"
+    },
+    {
+      "hs2": "33",
+      "path": "records/33.json",
+      "record_count": 29,
+      "sha256": "d028808dd4b017368ae36319a0cb0db0be930695bd60ae4aeb9ebde708b8d867"
+    },
+    {
+      "hs2": "34",
+      "path": "records/34.json",
+      "record_count": 29,
+      "sha256": "cd27e1e28a688c7e2fe18eb20cd6297e3e384adf4c72bb4a5738af7f507f24e3"
+    },
+    {
+      "hs2": "35",
+      "path": "records/35.json",
+      "record_count": 15,
+      "sha256": "573bb7b465c8e8d83b9531434e021d5d1ade6bb5ff95efd290898adc5aa17c00"
+    },
+    {
+      "hs2": "36",
+      "path": "records/36.json",
+      "record_count": 14,
+      "sha256": "b28c299dda4eb1c36c489dff84c76811a6c221606bc30b507ed50095dfd15ab2"
+    },
+    {
+      "hs2": "37",
+      "path": "records/37.json",
+      "record_count": 30,
+      "sha256": "bd5e407f3f93d87454a5b23de1babb516aadd7b8b2699a820e7cfacf4a6570f1"
+    },
+    {
+      "hs2": "38",
+      "path": "records/38.json",
+      "record_count": 103,
+      "sha256": "a8bd12c3d23818cbd523025cee71913ba70efc17ae29d133688618e843ad47a6"
+    },
+    {
+      "hs2": "39",
+      "path": "records/39.json",
+      "record_count": 132,
+      "sha256": "b39b99ac381ff25064338286aa2f8d8a0a7249932df01f7465cbc827043a99b9"
+    },
+    {
+      "hs2": "40",
+      "path": "records/40.json",
+      "record_count": 80,
+      "sha256": "8a5fba5813f097eff1b43b4219b0f93b93f41c47b25a1ac11819a4fe517444b2"
+    },
+    {
+      "hs2": "41",
+      "path": "records/41.json",
+      "record_count": 30,
+      "sha256": "a55436c24411e5a621fca37fc62e32194e7befb664b5c9da3af8633f15b6783d"
+    },
+    {
+      "hs2": "42",
+      "path": "records/42.json",
+      "record_count": 20,
+      "sha256": "47e98381518ef7151eba97bd8eb0cc9d4b34010c435881fb2d248591fec4e4cb"
+    },
+    {
+      "hs2": "43",
+      "path": "records/43.json",
+      "record_count": 11,
+      "sha256": "8d0c2c68646a8050cb8f7ed4d4539809b4c44fb47ce1823bbcb02814a652bc49"
+    },
+    {
+      "hs2": "44",
+      "path": "records/44.json",
+      "record_count": 132,
+      "sha256": "f85d6920a60c979d26e5a9a326d55f3388334c1741e6f7dfc14209b1786ee9ae"
+    },
+    {
+      "hs2": "45",
+      "path": "records/45.json",
+      "record_count": 7,
+      "sha256": "051443ea8a3e29c4edc27667f32c72595bbabaf05c49507c3f70d3a7327c90eb"
+    },
+    {
+      "hs2": "46",
+      "path": "records/46.json",
+      "record_count": 10,
+      "sha256": "b2420a4d66758febb0fc70b3f37a5fa77161680324401f80c2e358d46778b362"
+    },
+    {
+      "hs2": "47",
+      "path": "records/47.json",
+      "record_count": 20,
+      "sha256": "957795ac0fd3492afa8055d12cc4894674494d47a8c3c68028ccf726d36f2deb"
+    },
+    {
+      "hs2": "48",
+      "path": "records/48.json",
+      "record_count": 101,
+      "sha256": "0d78f1b20a372d2af27f6010fc474a398ee7fc6eb12c08df8b3b2c993b728f4a"
+    },
+    {
+      "hs2": "49",
+      "path": "records/49.json",
+      "record_count": 21,
+      "sha256": "5ff2c27b85f9214e93f66f1446d6f9a4cba5d465e99ad15e38928e1e67f95bae"
+    },
+    {
+      "hs2": "50",
+      "path": "records/50.json",
+      "record_count": 9,
+      "sha256": "61633232d67ae341bda709dd06598d6cf8f4e5d71e8f01fe50accc215a5ed6fb"
+    },
+    {
+      "hs2": "51",
+      "path": "records/51.json",
+      "record_count": 37,
+      "sha256": "d8def7e4716e49330c59769c4d0670305ccc748a8a7d1d9a388d5bd67fe665e6"
+    },
+    {
+      "hs2": "52",
+      "path": "records/52.json",
+      "record_count": 101,
+      "sha256": "2099f1a93776a18789e87057deee7b29506f23b3aefa765016e5917a346026fa"
+    },
+    {
+      "hs2": "53",
+      "path": "records/53.json",
+      "record_count": 22,
+      "sha256": "846fa87cc438bbf4993b2d6661c2967e4ef2464589ee13e97518dd83c2093a7c"
+    },
+    {
+      "hs2": "54",
+      "path": "records/54.json",
+      "record_count": 71,
+      "sha256": "c463f38fe2c9a06a251651879766cfb67c19ac22253e7efacfab049a7a4aa64d"
+    },
+    {
+      "hs2": "55",
+      "path": "records/55.json",
+      "record_count": 109,
+      "sha256": "be180e966e2f2213304be0aaa981974cb2f74f57692c0d4456bb62d2f14020c1"
+    },
+    {
+      "hs2": "56",
+      "path": "records/56.json",
+      "record_count": 30,
+      "sha256": "59fbdf7855500eb4530f6928d0cdfab7402c8b08445e13735c12e7c3a2337ce5"
+    },
+    {
+      "hs2": "57",
+      "path": "records/57.json",
+      "record_count": 26,
+      "sha256": "22f2cc00ee9c0f132d1a13f9936abf5d2c6bcf6874eaeb0ffef439f627850a8a"
+    },
+    {
+      "hs2": "58",
+      "path": "records/58.json",
+      "record_count": 39,
+      "sha256": "00078166ea4b02cec61f3b3f1d74866937e7d8c4e70e09bc0d2ef1a81f229066"
+    },
+    {
+      "hs2": "59",
+      "path": "records/59.json",
+      "record_count": 24,
+      "sha256": "74fbd4c27e62d532730c5dcbd9428fb4a13c327b5742bb61fdfca69284f456df"
+    },
+    {
+      "hs2": "60",
+      "path": "records/60.json",
+      "record_count": 43,
+      "sha256": "bc8f3938339410fc8225594bb18d74223437908f9289adb8f49673f73f75fddd"
+    },
+    {
+      "hs2": "61",
+      "path": "records/61.json",
+      "record_count": 106,
+      "sha256": "f57797a9d55a01228a9dd2b385880c7e2e0b7072fbb7b2439ebb7f4656e6900d"
+    },
+    {
+      "hs2": "62",
+      "path": "records/62.json",
+      "record_count": 120,
+      "sha256": "69da0eb9134fd400fecef8f0985315d64c643a4010ed9d335a02980fcc66d54f"
+    },
+    {
+      "hs2": "63",
+      "path": "records/63.json",
+      "record_count": 52,
+      "sha256": "a2e1c38b6fc298de814cd3be4b6d0a75c39d7249640355aa7e1ba7bb3eca2d96"
+    },
+    {
+      "hs2": "64",
+      "path": "records/64.json",
+      "record_count": 25,
+      "sha256": "990ddf82dc1da8e032d5c6c493d02c15f4236b302bd30d5c7e04c58d281c4099"
+    },
+    {
+      "hs2": "65",
+      "path": "records/65.json",
+      "record_count": 8,
+      "sha256": "e292311719b7f91141de75aa6b35535ec496576a020d38b3e23e2900aa1a996d"
+    },
+    {
+      "hs2": "66",
+      "path": "records/66.json",
+      "record_count": 6,
+      "sha256": "a8d1c8ff674b9bded3d446912d777cd3b442f08d880a594b24f0f2d5f1575334"
+    },
+    {
+      "hs2": "67",
+      "path": "records/67.json",
+      "record_count": 8,
+      "sha256": "c5f101dcc25589aa9abd03b183ef29f70e0f63ad4e46d7550d9f703e9f81b0b6"
+    },
+    {
+      "hs2": "68",
+      "path": "records/68.json",
+      "record_count": 49,
+      "sha256": "e3e390a7aa60a82d308833b3e43ef2267db6953923e2e79038d810bfbe4b46b4"
+    },
+    {
+      "hs2": "69",
+      "path": "records/69.json",
+      "record_count": 30,
+      "sha256": "cc99551891f0b52c06c2572f42d8abf13dad2781d600002f1488507bea00bcae"
+    },
+    {
+      "hs2": "70",
+      "path": "records/70.json",
+      "record_count": 78,
+      "sha256": "57f15afc352f72fb2f16e536cfeaa574f481fbea1319d5c79e2f7d4a7e97b46f"
+    },
+    {
+      "hs2": "71",
+      "path": "records/71.json",
+      "record_count": 55,
+      "sha256": "7b830fc675793cfe0fa8ff738dcdd33ac829722b0df6269410fe715ade18f3e3"
+    },
+    {
+      "hs2": "72",
+      "path": "records/72.json",
+      "record_count": 167,
+      "sha256": "a2d457d8756f00580213d9280528a5640673bb6b7d4fbb7252dd3179cd9b1d12"
+    },
+    {
+      "hs2": "73",
+      "path": "records/73.json",
+      "record_count": 124,
+      "sha256": "3d8595a129b9ebdb42d306af08d8ff5f3077d2a1ef61a22aad353e85e0f473c3"
+    },
+    {
+      "hs2": "74",
+      "path": "records/74.json",
+      "record_count": 52,
+      "sha256": "897fd627b8cedc27e27dbf5057761ecc101727e6210d46f04f9393eed66a0b30"
+    },
+    {
+      "hs2": "75",
+      "path": "records/75.json",
+      "record_count": 17,
+      "sha256": "6fac1032ac5242254ff929ec70832c83d0e8fee9b43787dd7548dede7d76a8ea"
+    },
+    {
+      "hs2": "76",
+      "path": "records/76.json",
+      "record_count": 35,
+      "sha256": "0e5998bb26f9a6bc5a7e9b915a627f4444e7a143f00d6da623aa083274f0c9cb"
+    },
+    {
+      "hs2": "78",
+      "path": "records/78.json",
+      "record_count": 8,
+      "sha256": "a155e29d84ec1d9ec976a03e572bd9b8e42ba591087fdc7af554161cbdf8e5c5"
+    },
+    {
+      "hs2": "79",
+      "path": "records/79.json",
+      "record_count": 9,
+      "sha256": "15915663a03888f46867c5355065b7c9f133d3e48144e7c4e73b9348afa8eca6"
+    },
+    {
+      "hs2": "80",
+      "path": "records/80.json",
+      "record_count": 5,
+      "sha256": "1686d01662bfbe27eda5fb97beae8874caa5ef2ee80513514f09c0ce141ea97b"
+    },
+    {
+      "hs2": "81",
+      "path": "records/81.json",
+      "record_count": 55,
+      "sha256": "a58633995e7188e72700622e931ee8cfd01ab67c32430a9ac7fc8be238f9c380"
+    },
+    {
+      "hs2": "82",
+      "path": "records/82.json",
+      "record_count": 64,
+      "sha256": "8d0dbc68e8e01a927c811d48a23b599d9ce4683d6a3314a97aad02902e65c180"
+    },
+    {
+      "hs2": "83",
+      "path": "records/83.json",
+      "record_count": 36,
+      "sha256": "da4c6ea718e84678fb5a0360103664d0b0b5081bc8d3ce600d04586e087f1f1c"
+    },
+    {
+      "hs2": "84",
+      "path": "records/84.json",
+      "record_count": 545,
+      "sha256": "5b9c56283ee7a3ecd9de6fe6de01d0bb4207e9c10370f6a33b38661c2b566bcb"
+    },
+    {
+      "hs2": "85",
+      "path": "records/85.json",
+      "record_count": 305,
+      "sha256": "079396982e8079306c54ef312c6131e60c3910fa99e588e2ce25be25f5f92ffd"
+    },
+    {
+      "hs2": "86",
+      "path": "records/86.json",
+      "record_count": 23,
+      "sha256": "b864cd3648c98591c5505484b5c005d137e017a24f05a1014c290118853a009d"
+    },
+    {
+      "hs2": "87",
+      "path": "records/87.json",
+      "record_count": 95,
+      "sha256": "a6c1b3b3ee30751e02e17e09254fa4bb72259354deeb1c3294e0759398b33d66"
+    },
+    {
+      "hs2": "88",
+      "path": "records/88.json",
+      "record_count": 29,
+      "sha256": "60a0eb95f0e6c4f364b242c88d0d5057c7fdc813301aa9aef6b024860ae2cfa8"
+    },
+    {
+      "hs2": "89",
+      "path": "records/89.json",
+      "record_count": 27,
+      "sha256": "76c657871cf4ec021424d674fda4d11534c009c76da1b23d79920fe196021cb8"
+    },
+    {
+      "hs2": "90",
+      "path": "records/90.json",
+      "record_count": 146,
+      "sha256": "3c5c95eebd72158925ad8ce6ee7b30f1cbe21d53ba536fbd6fcecd53fa171355"
+    },
+    {
+      "hs2": "91",
+      "path": "records/91.json",
+      "record_count": 49,
+      "sha256": "e634252ee60286d107a95319f6790e0a4688f07569c300ae7e30e7f61312ee26"
+    },
+    {
+      "hs2": "92",
+      "path": "records/92.json",
+      "record_count": 17,
+      "sha256": "aed994314012c2ed1601d1aea65bd2d4f3675a7a2a1509901f2c49785216ec04"
+    },
+    {
+      "hs2": "94",
+      "path": "records/94.json",
+      "record_count": 63,
+      "sha256": "980e79bba82d5034b1e8c3cac63dd49096d7632b2963fc235ada0430dad340d3"
+    },
+    {
+      "hs2": "95",
+      "path": "records/95.json",
+      "record_count": 40,
+      "sha256": "22d58203df6be65ac39dc1a34b22b66cdb4fc1abb52f8aeae746a8b22fe411c9"
+    },
+    {
+      "hs2": "96",
+      "path": "records/96.json",
+      "record_count": 49,
+      "sha256": "59eaff19ded52e5d4cf23bd473ba8f395f920d90b1e8fc631e005eab496d4913"
+    },
+    {
+      "hs2": "97",
+      "path": "records/97.json",
+      "record_count": 23,
+      "sha256": "3026c4c80c659af9a5ed3cc63d6a4f5ba15f7e1781cc7ebe7965c2892425540d"
+    },
+    {
+      "hs2": "99",
+      "path": "records/99.json",
+      "record_count": 1,
+      "sha256": "9e3333f60c727eaff99b1625d6529bb785599d1422b75b93f48e5ca27d9f2876"
+    }
+  ],
+  "schema_version": "1.0.0",
+  "snapshot_id": "SCREENING-SAU-2026-09-12-311f105c4ccf",
+  "snapshot_id_scheme": "SCREENING_SNAPSHOT_ID_V1",
+  "source_boundary": "public",
+  "synthetic_flag": false,
+  "transformation_record": {
+    "config_version": "1.0.0",
+    "exclusions": [
+      "PARTNER_WORLD_ROW"
+    ],
+    "formula": "SCREENING_V1",
+    "parameters": {
+      "kg_to_kt": 1000000,
+      "projection_formula": "SCREENING_PROJECTION_V1",
+      "usd_to_usd_m": 1000000
+    },
+    "pipeline_version": "1.0.0"
+  },
+  "universe_status": {
+    "flows_present": [
+      "exports",
+      "imports"
+    ],
+    "hs6_count": 5443,
+    "reason_codes": [],
+    "source_id": "un_comtrade",
+    "status": "AVAILABLE",
+    "units": [
+      {
+        "completeness_basis": "PROVIDER_COUNT_MATCH_BELOW_DOCUMENTED_CAP_100000",
+        "query_hash": "3f892bf254a9c9c141cc413a24a9c82a771a56aff8d883c53b53c59b46283859",
+        "selected_run_id": "20260912T143742Z",
+        "status": "COMPLETE",
+        "superseded_run_ids": [
+          "20260912T134009Z",
+          "20260912T141128Z"
+        ],
+        "unit_key": [
+          "exports",
+          "2021"
+        ]
+      },
+      {
+        "completeness_basis": "PROVIDER_COUNT_MATCH_BELOW_DOCUMENTED_CAP_100000",
+        "query_hash": "ceec907cc0b6960ab732607c809567d966ce0fe1ede2e3a12d619091a52751a2",
+        "selected_run_id": "20260912T143742Z",
+        "status": "COMPLETE",
+        "superseded_run_ids": [
+          "20260912T134009Z",
+          "20260912T141128Z"
+        ],
+        "unit_key": [
+          "exports",
+          "2022"
+        ]
+      },
+      {
+        "completeness_basis": "PROVIDER_COUNT_MATCH_BELOW_DOCUMENTED_CAP_100000",
+        "query_hash": "464c4f670ca848ae2c726269cfbcab48a248cbd196e7fee554a5dc50f0194191",
+        "selected_run_id": "20260912T143742Z",
+        "status": "COMPLETE",
+        "superseded_run_ids": [
+          "20260912T134009Z",
+          "20260912T141128Z"
+        ],
+        "unit_key": [
+          "exports",
+          "2023"
+        ]
+      },
+      {
+        "completeness_basis": "PROVIDER_COUNT_MATCH_BELOW_DOCUMENTED_CAP_100000",
+        "query_hash": "a3cc3f1befa0ff85d4d9e3299d163e09a89bd28b7403997052907503a55aefd0",
+        "selected_run_id": "20260912T143742Z",
+        "status": "COMPLETE",
+        "superseded_run_ids": [
+          "20260912T134009Z",
+          "20260912T141128Z"
+        ],
+        "unit_key": [
+          "exports",
+          "2024"
+        ]
+      },
+      {
+        "completeness_basis": "PROVIDER_COUNT_MATCH_BELOW_DOCUMENTED_CAP_100000",
+        "query_hash": "37d131466dff0ad656675f21603dfbd2d2fe1b711602a1fd2b147634ff0ab830",
+        "selected_run_id": "20260912T143742Z",
+        "status": "COMPLETE",
+        "superseded_run_ids": [
+          "20260912T134009Z",
+          "20260912T141128Z"
+        ],
+        "unit_key": [
+          "imports",
+          "2021"
+        ]
+      },
+      {
+        "completeness_basis": "PROVIDER_COUNT_MATCH_BELOW_DOCUMENTED_CAP_100000",
+        "query_hash": "6b9efd5f68dbc6a70a42be36c6286eba215814182bc47a7b594a8b264f70a136",
+        "selected_run_id": "20260912T143742Z",
+        "status": "COMPLETE",
+        "superseded_run_ids": [
+          "20260912T134009Z",
+          "20260912T141128Z"
+        ],
+        "unit_key": [
+          "imports",
+          "2022"
+        ]
+      },
+      {
+        "completeness_basis": "PROVIDER_COUNT_MATCH_BELOW_DOCUMENTED_CAP_100000",
+        "query_hash": "5bc875b4a56b8315a3e943f2b1c0f0d9834a6cad624578dbcd50b633181d2860",
+        "selected_run_id": "20260912T143742Z",
+        "status": "COMPLETE",
+        "superseded_run_ids": [
+          "20260912T134009Z",
+          "20260912T141128Z"
+        ],
+        "unit_key": [
+          "imports",
+          "2023"
+        ]
+      },
+      {
+        "completeness_basis": "PROVIDER_COUNT_MATCH_BELOW_DOCUMENTED_CAP_100000",
+        "query_hash": "7a7ebf8cf5ab36e7a54249a8cdbc6f517a83a7016a8a07706b012a29907986da",
+        "selected_run_id": "20260912T143742Z",
+        "status": "COMPLETE",
+        "superseded_run_ids": [
+          "20260903T212859Z",
+          "20260903T212901Z",
+          "20260912T134009Z",
+          "20260912T141128Z"
+        ],
+        "unit_key": [
+          "imports",
+          "2024"
+        ]
+      }
+    ],
+    "years_present": [
+      2021,
+      2022,
+      2023,
+      2024
+    ]
+  }
+}

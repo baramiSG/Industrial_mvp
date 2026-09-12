@@ -443,3 +443,34 @@ The Decision Dossier is a projection, not a separate source of truth. It is gene
 ## 10. Evolution rule
 
 A new field may be added when it is required by the methodology or a source contract. A field may not be repurposed to carry a different concept merely because it is convenient. Version the schema when meaning changes.
+
+## 11. ScreeningSnapshot 1.0.0
+
+`ScreeningSnapshot` is public, synthetic-free and write-once under
+`data/screening/snapshots/`. Its identity is
+`SCREENING-SAU-<as_of_date>-<sha256(canonical inputs)[:12]>`. It contains
+input paths/hashes/versions; typed universe status; coverage accounting;
+HS6-sorted screening records; five route-specific queues; recomputable counts;
+the methodology §8.2 mapping; compact evidence passports; and a versioned
+transformation record.
+
+Records carry coded rule execution, warnings, exclusions, dispositions,
+indicated states, monitor triggers and evidence needs. They never carry formal
+`state`, `route_code`, `d_star`, `public_decision_contract`, or synthetic data.
+An unavailable universe requires zero records and empty queues. Per-row
+`hs_revision` is preserved from the acquired source; each `(year, flow)` unit
+must have exactly one revision. No snapshot-level revision list is required.
+
+The unchanged logical schema version `1.0.0` is stored as a write-once
+directory:
+`data/screening/snapshots/<snapshot_id>/summary.json`,
+optional `queues.json`, and `records/<hs2>.json` shards. `summary.json`
+contains every top-level field except `records`, a sorted `record_shards`
+index (`path`, `hs2`, `record_count`, `sha256`), and
+`common_record_fields`. Fields identical across all records are omitted from
+the shards and restored by the loader. `queues.json` is used when the queue
+block exceeds 1 MiB; otherwise queues remain inline in `summary.json`.
+Every file is canonical JSON and write-once. Validation checks the complete
+directory, shard hashes/counts, logical record schema, forbidden fields,
+per-file and total budgets, and exact file-set reconstruction. Runtime record
+lookups load only the indexed HS2 shard; summary and queue metadata are eager.

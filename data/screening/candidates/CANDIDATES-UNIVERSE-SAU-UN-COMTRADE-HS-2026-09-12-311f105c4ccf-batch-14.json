@@ -1,0 +1,120 @@
+{
+  "batch": {
+    "batch_size": 59,
+    "index": 14,
+    "total": 25
+  },
+  "candidate_source": "SCREENING_CHEAP_RULES_V1",
+  "hs6_codes": [
+    "620329",
+    "620331",
+    "620411",
+    "620449",
+    "620451",
+    "620462",
+    "620469",
+    "620829",
+    "621020",
+    "621139",
+    "621149",
+    "621230",
+    "621440",
+    "630110",
+    "630240",
+    "630533",
+    "640319",
+    "640399",
+    "640411",
+    "640510",
+    "640610",
+    "650200",
+    "660110",
+    "660191",
+    "660199",
+    "660390",
+    "670100",
+    "670290",
+    "680210",
+    "680291",
+    "680292",
+    "680293",
+    "680422",
+    "680710",
+    "680911",
+    "680919",
+    "681019",
+    "681099",
+    "681189",
+    "681291",
+    "681299",
+    "681410",
+    "681490",
+    "681511",
+    "681519",
+    "690100",
+    "690390",
+    "690600",
+    "690911",
+    "691390",
+    "700220",
+    "700521",
+    "700530",
+    "700800",
+    "700991",
+    "701110",
+    "701310",
+    "701322",
+    "701333"
+  ],
+  "inputs": {
+    "configs": [
+      {
+        "path": "config/screening.v1.yaml",
+        "sha256": "21ec2ff6893d3a52a79a5dc91a72c8a54c68adedffa4962c5b1323ca32de8d3e",
+        "version": "1.0.0"
+      },
+      {
+        "path": "config/product_families.v1.yaml",
+        "sha256": "841bc5ac732b9f9348495d3594926dea84dd4df7aab134092f81d06b4de7ecd4",
+        "version": "1.0.0"
+      },
+      {
+        "path": "config/thresholds.v1.yaml",
+        "sha256": "4e891b9706408f6a661565e09609d0d663e1a00a17bda4e283a4b2ee63d3c47a",
+        "version": "1.2.0"
+      },
+      {
+        "path": "config/acquisition_sources.v1.yaml",
+        "sha256": "fbe061496bc6c9b5ddd039b25536d78fb24c22ba3d84650fcd2c9374977673cc",
+        "version": "1.3.0"
+      }
+    ],
+    "entity_artifacts": [
+      {
+        "id": "ENTITIES-2026-09-12-a12e24c31b02",
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/data/entities/resolution/ENTITIES-2026-09-12-a12e24c31b02.json",
+        "sha256": "97e68dd3e79b0ec1acb01bcdb5c5695296ba3d917f639afbd4079702d052f701"
+      }
+    ],
+    "partner_snapshots": [],
+    "plant_family_links": [
+      {
+        "id": "plant-family-links-v1",
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/data/screening/lists/plant-family-links-v1.json",
+        "sha256": "d1c619d3ea69887e7375e9ca59ca8b2811573cb9fe79947340468e87d50d3396"
+      }
+    ],
+    "tariff_snapshots": [],
+    "universe_snapshots": [
+      {
+        "id": "UNIVERSE-SAU-UN-COMTRADE-HS-2026-09-12",
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/data/snapshots/universe/UNIVERSE-SAU-UN-COMTRADE-HS-2026-09-12.json",
+        "sha256": "758acdb41c5759e5be2c6215405e9c6829bc527b73850d8c4b54327c61b0c78d"
+      }
+    ]
+  },
+  "recorded_on": "2026-09-12",
+  "schema_version": "1.0.0",
+  "selection_rule": "R2_FULL_FIRED_ON_UNIVERSE",
+  "sha256_of_hs6_codes": "64e2f6ce5788018fc7090f168937e3a1a72c9b7d76ccc5e589635a0e21cd30f9"
+}

@@ -166,6 +166,74 @@ def _reconstruct_entities(
     return len(artifacts), links
 
 
+def _reconstruct_screening(
+    data_root: Path,
+    *,
+    check_manifest: bool,
+    manifest_rows: dict[str, tuple[str, int]],
+) -> int:
+    from ior_mvp.screening.config import screening_config
+    from ior_mvp.screening.snapshot import (
+        load_screening_summary_directory,
+        reconstruct_screening_snapshot,
+        validate_screening_snapshot_directory,
+    )
+
+    paths = sorted(
+        path
+        for path in (data_root / "screening" / "snapshots").glob("SCREENING-*")
+        if path.is_dir()
+    )
+    for path in paths:
+        record = load_screening_summary_directory(path)
+        refs = [
+            item.relative_to(data_root.parent).as_posix()
+            for item in path.rglob("*")
+            if item.is_file()
+        ]
+        for group in record.get("inputs", {}).values():
+            refs.extend(
+                (
+                    str(item["path"])
+                    if str(item["path"]).startswith(("data/", "config/", "docs/"))
+                    else _manifest_path(str(item["path"]), data_root)
+                )
+                for item in group
+                if item.get("path")
+            )
+        if check_manifest:
+            for ref in refs:
+                if ref not in manifest_rows:
+                    print(f"SCREENING RECONSTRUCTION FAIL: manifest row missing for {ref}")
+                    sys.exit(2)
+                expected_hash, expected_bytes = manifest_rows[ref]
+                absolute = data_root.parent / ref
+                if (
+                    not absolute.exists()
+                    or _sha256_file(absolute) != expected_hash
+                    or absolute.stat().st_size != expected_bytes
+                ):
+                    print(f"SCREENING RECONSTRUCTION FAIL: manifest hash mismatch for {ref}")
+                    sys.exit(1)
+        try:
+            validate_screening_snapshot_directory(
+                path,
+                config=screening_config(),
+                check_inputs=True,
+            )
+        except ValueError as exc:
+            print(f"SCREENING RECONSTRUCTION FAIL: {path.name} ({exc})")
+            sys.exit(1)
+        result = reconstruct_screening_snapshot(path, data_root)
+        if not result.match:
+            print(
+                f"SCREENING RECONSTRUCTION FAIL: {path.name} "
+                f"({result.reason or 'BYTE_MISMATCH'})"
+            )
+            sys.exit(1)
+    return len(paths)
+
+
 def main() -> None:
     _install_socket_block()
     import argparse
@@ -222,6 +290,19 @@ def main() -> None:
             row["path"]: (row["sha256"], row["bytes"])
             for row in manifest["files"]
         }
+        authority_path = (
+            data_root.parent / "docs" / "authority" / "authority_hashes.json"
+        )
+        if authority_path.exists():
+            authority = json.loads(
+                authority_path.read_text(encoding="utf-8")
+            )
+            manifest_rows.update(
+                {
+                    row["path"]: (row["sha256"], row["bytes"])
+                    for row in authority["files"]
+                }
+            )
 
     verified = 0
     for snap_path in snapshots:
@@ -263,6 +344,11 @@ def main() -> None:
         check_manifest=not args.no_check_manifest,
         manifest_rows=manifest_rows,
     )
+    screening_snapshots = _reconstruct_screening(
+        data_root,
+        check_manifest=not args.no_check_manifest,
+        manifest_rows=manifest_rows,
+    )
 
     if snapshots or doc_records or entity_artifacts:
         print(
@@ -274,6 +360,10 @@ def main() -> None:
     print(
         f"ENTITY RECONSTRUCTION PASS ({entity_artifacts} artifacts, {entity_links} links)"
     )
+    if screening_snapshots:
+        print(
+            f"SCREENING RECONSTRUCTION PASS ({screening_snapshots} snapshots)"
+        )
     sys.exit(0)
 
 

@@ -59,6 +59,7 @@ DOCUMENT_OBSERVED_FACT_FIELDS = (
     "expected_content_types",
 )
 CREDENTIAL_PATTERN = re.compile(r"^[A-Z][A-Z0-9_]+$")
+CREDENTIAL_HEADER_PATTERN = re.compile(r"^[A-Za-z][A-Za-z0-9-]*$")
 NOMENCLATURE_PATTERN = re.compile(r"^[A-Za-z0-9]+$")
 ACCESS_CLASSES = frozenset(
     {"public_open", "public_registered", "public_terms_restricted"}
@@ -76,6 +77,7 @@ SOURCE_KEYS = frozenset({
     "credential_env_var", "rate_limit", "license_capture_required", "default_evidence_class",
     "default_reviewer_status", "expected_content_types", "user_agent", "recorded_on",
 })
+OPTIONAL_TRADE_SOURCE_KEYS = frozenset({"credential_header"})
 OBSERVED_FACT_FIELDS = (
     "access_classification", "documentation_reference", "terms_reference",
     "endpoint_templates.{stage}", "endpoint_templates.TERMS",
@@ -162,6 +164,22 @@ def configured_credential_env_var(source: dict[str, Any]) -> str | None:
     return value
 
 
+def configured_credential_header(
+    source: dict[str, Any],
+) -> tuple[str, str | None]:
+    """Return request header name and optional credential scheme."""
+    header = source.get("credential_header")
+    if header is None:
+        return "Authorization", "Bearer"
+    if (
+        not isinstance(header, str)
+        or CREDENTIAL_HEADER_PATTERN.fullmatch(header) is None
+        or configured_credential_env_var(source) is None
+    ):
+        raise AcquisitionConfigurationError("credential_header invalid")
+    return header, None
+
+
 def _iso_date(value: Any) -> bool:
     if not isinstance(value, str) or re.fullmatch(r"[0-9]{4}-[0-9]{2}-[0-9]{2}", value) is None:
         return False
@@ -219,9 +237,9 @@ def validate_acquisition_sources(payload: dict[str, Any]) -> None:
     metadata = payload.get("metadata")
     if not isinstance(metadata, dict):
         raise AcquisitionConfigurationError("metadata must be a mapping")
-    if metadata.get("version") != "1.2.0":
+    if metadata.get("version") != "1.3.0":
         raise AcquisitionConfigurationError(
-            "metadata.version must be 1.2.0"
+            "metadata.version must be 1.3.0"
         )
 
     raw_store = payload.get("raw_store")
@@ -296,6 +314,12 @@ def _validate_source(
     institutional = source_id in INSTITUTIONAL_SOURCE_IDS
     document = source_id in DOCUMENT_SOURCE_IDS
     _validate_source_facts(source_id, source, institutional=institutional, document=document)
+    _validate_credential_header(
+        source_id,
+        source,
+        institutional=institutional,
+        document=document,
+    )
     access = source["access_classification"]
 
     evidence_class = source["default_evidence_class"]
@@ -433,3 +457,35 @@ def _validate_source_facts(
             continue
         if not _valid_fact(path, value):
             raise AcquisitionConfigurationError(f"{prefix}.{path} invalid")
+
+
+def _validate_credential_header(
+    source_id: str,
+    source: dict[str, Any],
+    *,
+    institutional: bool,
+    document: bool,
+) -> None:
+    prefix = f"sources.{source_id}"
+    if institutional or document:
+        return
+    allowed = SOURCE_KEYS | OPTIONAL_TRADE_SOURCE_KEYS
+    if set(source) not in {SOURCE_KEYS, allowed}:
+        raise AcquisitionConfigurationError(
+            f"{prefix} keys must be exactly {sorted(SOURCE_KEYS)} "
+            f"with optional {sorted(OPTIONAL_TRADE_SOURCE_KEYS)}"
+        )
+    if "credential_header" not in source:
+        return
+    header = source["credential_header"]
+    if (
+        not isinstance(header, str)
+        or CREDENTIAL_HEADER_PATTERN.fullmatch(header) is None
+    ):
+        raise AcquisitionConfigurationError(
+            f"{prefix}.credential_header invalid"
+        )
+    if configured_credential_env_var(source) is None:
+        raise AcquisitionConfigurationError(
+            f"{prefix}.credential_header requires credential_env_var"
+        )

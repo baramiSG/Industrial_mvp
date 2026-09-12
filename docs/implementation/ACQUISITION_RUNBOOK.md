@@ -105,3 +105,37 @@ The S12c implementation executed that exact command offline. Final report after 
 At T7 authoring, S12c manifest run count is **0**. ADR-018 authorizes one generator invocation only after the T8 regression, followed immediately by [14] and the seventeen-row Manifest §11 mirror. No second S12c run is authorized.
 
 Recorded T9 outcome: the single S12c generator invocation ran at `2026-09-12T11:25:47Z` and exited 0; immediate [14] printed `MANIFEST_S11_S12A_S12B_ROWS_UNCHANGED_ENTITIES_PRESENT 2`; the seventeen-row authority table was mirrored. S12c manifest run count is **1**, the authorization is exhausted, and this runbook authorizes no rerun.
+
+## S13a public-universe screening windows
+
+S13a separates four operator windows from the offline engine. Each window's
+parameters and rationale must be written to the slice implementation log before
+execution. Credentials are referenced by the configured environment-variable
+name only; values must never be printed or stored.
+
+| Window | Parameters recorded for 2026-09-12 | Outcome |
+|---|---|---|
+| W0 | Read-only observation of the UN Comtrade v1 developer page, one bounded public preview, and the ZATCA tariff page; no key | Developer page required sign-in. The preview exposed `count`, `data`, `elapsedTime`, `error` and returned `count=500` with 500 rows, but did not document a provider limit. No terms URL, pagination, all-partners token, or ZATCA data endpoint was observed. |
+| W0-bis | Read-only observation of the official policy, subscriptions and API-key Help Center pages; no key | Policy/terms and Basic Individual limits observed: 100K records/call, 500 calls/day, 5 calls/second. Partner-all token, pagination and comma-separated `cmdCode` batching were not observed. |
+| W0-ter | Fresh read-only Playwright/Chromium context on the official developer API details page; no key, sign-in or submission | Redirected to the sign-in page. No parameter descriptions, all-partners token, operation page, pagination/limit statement or terms link rendered; screenshot retained in the AM-2-authorized local evidence folder. |
+| W1 | `SOURCE=un_comtrade YEARS=2021,2022,2023,2024 FLOWS=imports,exports MAX_REQUESTS=9` | Historical run `20260912T134009Z`: eight `LICENSE_UNRECORDED` units, zero requests/artifacts; no universe snapshot. |
+| W1-bis | Same bounded parameters after W0-bis | Run `20260912T141128Z`: all eight responses normalized and each provider count matched stored rows, but all units remained `INCOMPLETE / COVERAGE_INDETERMINATE` because no official pagination/completeness mechanism was observed; no universe snapshot. |
+| W1-ter | Same bounded parameters under OD-11's documented single-response cap mapping | Run `20260912T143742Z`: all eight units COMPLETE, 5,443 HS6, both flows, universe snapshot 24,195,845 bytes. |
+| W2 | Conditional on candidates emitted from a proven universe; owner cap 60 | Historical run `20260912T144127Z`: 59 units `ENDPOINT_UNVERIFIED`, zero requests. W0-ter still exposed no partner token, so AM-2 prohibited a rerun; 0 covered / 1,471 uncovered. |
+| W3 | Conditional on a W0-documented ZATCA tariff-tree endpoint | Not opened: no endpoint was observed. |
+
+Offline commands:
+
+```bash
+make build-screening
+make validate-screening
+make screening-reconstruct
+make screen-candidates UNIVERSE=<snapshot-id> BATCH_SIZE=<documented-bound>
+```
+
+Screening output is a write-once directory containing `summary.json`,
+optional `queues.json`, and indexed `records/<hs2>.json` shards. Validate and
+reconstruct the directory before use; each file must remain below 48 MiB and
+the directory below 100 MiB. Runtime record lookup loads only its HS2 shard.
+A future W2 still requires an observed official partner endpoint/token and a
+new owner-authorized budget.

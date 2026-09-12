@@ -2,27 +2,42 @@
 
 from __future__ import annotations
 
+import copy
+import gzip
 import json
 from pathlib import Path
 
 import pytest
 
-from ior_mvp.acquisition.connectors.base import BaseConnector, default_registry
+from ior_mvp.acquisition.connectors.base import (
+    BaseConnector,
+    ConnectorRegistry,
+    default_registry,
+)
 from ior_mvp.acquisition.connectors.un_comtrade import UnComtradeConnector
 from ior_mvp.acquisition.contracts import (
+    CompletenessBasis,
     ProductScope,
     QueryContract,
+    RawArtifact,
     Stage,
     UnavailableReason,
     UnavailableRecord,
 )
 from ior_mvp.acquisition.pipeline import PipelineDeps, _run_units
 from ior_mvp.acquisition.raw_store import RawStore
+from ior_mvp.acquisition import snapshots
 from ior_mvp.acquisition.snapshots import build_universe_snapshot
 from ior_mvp.acquisition.transport import FetchResult
 from ior_mvp.acquisition.source_config import acquisition_sources_config
 from ior_mvp.config import PROJECT_ROOT
-from tests.acquisition_doubles import DoubleConnector, FakeTransport, seed_unit
+from tests.acquisition_doubles import (
+    DoubleConnector,
+    FakeTransport,
+    comtrade_envelope,
+    comtrade_row,
+    seed_unit,
+)
 
 
 def test_default_registry_ids() -> None:
@@ -99,6 +114,606 @@ def _fetch_result(body: bytes) -> FetchResult:
         fetched_at="2026-09-04T00:00:00Z",
         content_length_header=len(body),
     )
+
+
+def _credential_source_config(
+    source_id: str,
+    *,
+    custom_header: bool,
+) -> dict:
+    source = copy.deepcopy(
+        acquisition_sources_config()["sources"]["wits_trade"]
+    )
+    source.update(
+        {
+            "source_id": source_id,
+            "credential_env_var": "IOR_TEST_SUBSCRIPTION_KEY",
+            "license_capture_required": False,
+            "terms_reference": "UNAVAILABLE",
+            "endpoint_templates": {
+                "UNIVERSE": "http://fake.test/credential",
+                "TERMS": "UNAVAILABLE",
+            },
+            "pagination": {
+                "kind": "NONE",
+                "documentation_reference": "TEST DOUBLE",
+                "parameters": {},
+            },
+        }
+    )
+    if custom_header:
+        source["credential_header"] = "Ocp-Apim-Subscription-Key"
+    return source
+
+
+def _stored_bytes(root: Path) -> bytes:
+    chunks: list[bytes] = []
+    for path in sorted(root.rglob("*")):
+        if not path.is_file():
+            continue
+        content = path.read_bytes()
+        chunks.append(content)
+        if path.suffix == ".gz":
+            chunks.append(gzip.decompress(content))
+    return b"\n".join(chunks)
+
+
+def test_custom_credential_header_sent_and_never_stored(
+    tmp_path: Path,
+) -> None:
+    source_id = "TEST-CUSTOM-HEADER"
+    source = _credential_source_config(source_id, custom_header=True)
+    payload = b'{"pages_expected":1,"rows":[]}'
+    transport = FakeTransport(
+        responses={
+            "http://fake.test/credential": _fetch_result(payload),
+        },
+        calls=[],
+    )
+    connector = DoubleConnector(
+        source_config=source,
+        store=_test_store(tmp_path),
+        transport=transport,
+        run_id="20260912T120000Z",
+        environ={
+            "IOR_TEST_SUBSCRIPTION_KEY": "TEST-SENTINEL-NOT-A-SECRET"
+        },
+        sleeper=lambda _: None,
+    )
+
+    result = connector.acquire(
+        _universe_contract(source_id),
+        max_requests=1,
+    )
+
+    assert isinstance(result, tuple)
+    assert transport.request_headers == [
+        {
+            "Ocp-Apim-Subscription-Key": (
+                "TEST-SENTINEL-NOT-A-SECRET"
+            )
+        }
+    ]
+    assert "Authorization" not in transport.request_headers[0]
+    stored = _stored_bytes(tmp_path / "raw")
+    assert b"TEST-SENTINEL-NOT-A-SECRET" not in stored
+    contract_path = next((tmp_path / "raw").rglob("page-0001.contract.json"))
+    contract = json.loads(contract_path.read_text(encoding="utf-8"))
+    assert contract["credential_env_var"] == "IOR_TEST_SUBSCRIPTION_KEY"
+    assert contract["credential_used"] is True
+    assert "Ocp-Apim-Subscription-Key" not in contract_path.read_text(
+        encoding="utf-8"
+    )
+
+
+def test_bearer_default_unchanged_for_wits_trade(tmp_path: Path) -> None:
+    source_id = "TEST-BEARER-DEFAULT"
+    source = _credential_source_config(source_id, custom_header=False)
+    payload = b'{"pages_expected":1,"rows":[]}'
+    transport = FakeTransport(
+        responses={
+            "http://fake.test/credential": _fetch_result(payload),
+        },
+        calls=[],
+    )
+    connector = DoubleConnector(
+        source_config=source,
+        store=_test_store(tmp_path),
+        transport=transport,
+        run_id="20260912T120001Z",
+        environ={"IOR_TEST_SUBSCRIPTION_KEY": "TEST-BEARER-SENTINEL"},
+        sleeper=lambda _: None,
+    )
+
+    result = connector.acquire(
+        _universe_contract(source_id),
+        max_requests=1,
+    )
+
+    assert isinstance(result, tuple)
+    assert transport.request_headers == [
+        {"Authorization": "Bearer TEST-BEARER-SENTINEL"}
+    ]
+    assert b"TEST-BEARER-SENTINEL" not in _stored_bytes(
+        tmp_path / "raw"
+    )
+
+
+def test_401_records_http_error_with_sanitized_observed_response(
+    tmp_path: Path,
+) -> None:
+    source_id = "TEST-CUSTOM-401"
+    source = _credential_source_config(source_id, custom_header=True)
+    body = b'{"statusCode":401,"message":"Access denied"}'
+    response = FetchResult(
+        http_status=401,
+        headers_subset=(("content-type", "application/json"),),
+        body=body,
+        final_url_redacted="http://fake.test/credential",
+        fetched_at="2026-09-12T12:00:02Z",
+        content_length_header=len(body),
+    )
+    transport = FakeTransport(
+        responses={"http://fake.test/credential": response},
+        calls=[],
+    )
+    connector = DoubleConnector(
+        source_config=source,
+        store=_test_store(tmp_path),
+        transport=transport,
+        run_id="20260912T120002Z",
+        environ={"IOR_TEST_SUBSCRIPTION_KEY": "TEST-401-SENTINEL"},
+        sleeper=lambda _: None,
+    )
+
+    result = connector.acquire(
+        _universe_contract(source_id),
+        max_requests=1,
+    )
+
+    assert isinstance(result, UnavailableRecord)
+    assert result.reason == UnavailableReason.HTTP_ERROR
+    assert result.observed_response is not None
+    assert result.observed_response.http_status == 401
+    assert result.observed_response.body_byte_count == len(body)
+    assert result.observed_response.error_message_redacted == "HTTP 401"
+    assert not list((tmp_path / "raw").rglob("page-*.payload.*.gz"))
+    assert b"TEST-401-SENTINEL" not in _stored_bytes(tmp_path / "raw")
+
+
+def _comtrade_source_config() -> dict:
+    source = copy.deepcopy(
+        acquisition_sources_config()["sources"]["un_comtrade"]
+    )
+    source.update(
+        {
+            "access_classification": "public_open",
+            "credential_env_var": None,
+            "license_capture_required": False,
+            "terms_reference": "UNAVAILABLE",
+            "endpoint_templates": {
+                "UNIVERSE": "http://fake.test/comtrade-universe",
+                "PARTNERS": "http://fake.test/comtrade-partners",
+                "TERMS": "UNAVAILABLE",
+            },
+            "pagination": {
+                "kind": "NONE",
+                "documentation_reference": "TEST DOUBLE",
+                "parameters": {},
+            },
+        }
+    )
+    source.pop("credential_header", None)
+    return source
+
+
+def _comtrade_contract(
+    *,
+    stage: Stage = Stage.UNIVERSE,
+    hs6: str = "721049",
+    flow: str = "imports",
+    period: str = "2024",
+) -> QueryContract:
+    explicit = stage is Stage.PARTNERS
+    return QueryContract(
+        source_id="un_comtrade",
+        stage=stage,
+        reporter="SAU",
+        partner="ALL" if explicit else "0",
+        flow=flow,
+        product_scope=(
+            ProductScope.EXPLICIT
+            if explicit
+            else ProductScope.ALL_HS6
+        ),
+        product_codes=(hs6,) if explicit else ("ALL",),
+        nomenclature="HS",
+        periods=(period,),
+    )
+
+
+def _acquire_comtrade(
+    tmp_path: Path,
+    payload: bytes,
+    *,
+    contract: QueryContract | None = None,
+    content_type: str = "application/json",
+    source_config: dict | None = None,
+) -> tuple[UnComtradeConnector, object]:
+    query = contract or _comtrade_contract()
+    url = (
+        "http://fake.test/comtrade-partners"
+        if query.stage is Stage.PARTNERS
+        else "http://fake.test/comtrade-universe"
+    )
+    response = FetchResult(
+        http_status=200,
+        headers_subset=(("content-type", content_type),),
+        body=payload,
+        final_url_redacted=url,
+        fetched_at="2026-09-12T12:30:00Z",
+        content_length_header=len(payload),
+    )
+    connector = UnComtradeConnector(
+        source_config=source_config or _comtrade_source_config(),
+        store=_test_store(tmp_path),
+        transport=FakeTransport(
+            responses={url: response},
+            calls=[],
+        ),
+        run_id="20260912T123000Z",
+        environ={},
+        sleeper=lambda _: None,
+    )
+    return connector, connector.acquire(query, max_requests=1)
+
+
+def _stored_comtrade_artifact(
+    connector: UnComtradeConnector, contract: QueryContract
+) -> RawArtifact:
+    pages = connector.store.pages_for(
+        contract.source_id, contract.query_hash(), connector.run_id
+    )
+    assert len(pages) == 1
+    return RawArtifact(
+        contract=pages[0],
+        path=PROJECT_ROOT / pages[0].raw_file_path,
+    )
+
+
+def test_un_comtrade_universe_single_response_complete_when_count_matches(
+    tmp_path: Path,
+) -> None:
+    payload = comtrade_envelope(
+        [comtrade_row("721049"), comtrade_row("390210")]
+    )
+
+    connector, result = _acquire_comtrade(tmp_path, payload)
+
+    assert isinstance(result, tuple)
+    artifacts, coverage = result
+    assert coverage.status == "COMPLETE"
+    assert (
+        coverage.completeness_basis
+        == CompletenessBasis.PROVIDER_COUNT_MATCH_BELOW_DOCUMENTED_CAP_100000
+    )
+    assert coverage.pages_expected == 1
+    assert artifacts[0].contract.page_meta is not None
+    assert artifacts[0].contract.page_meta.rows_in_page == 2
+    assert connector.validate(artifacts[0]).status == "PASS"
+
+
+def test_un_comtrade_count_mismatch_is_incomplete_indeterminate(
+    tmp_path: Path,
+) -> None:
+    payload = comtrade_envelope([comtrade_row()], count=2)
+
+    _, result = _acquire_comtrade(tmp_path, payload)
+
+    assert isinstance(result, UnavailableRecord)
+    assert result.coverage is not None
+    assert result.coverage.status == "INCOMPLETE"
+    assert (
+        result.coverage.stop_reason
+        == UnavailableReason.COUNT_MISMATCH
+    )
+    assert result.coverage.pages_expected == "UNAVAILABLE"
+
+
+def test_un_comtrade_documented_record_cap_is_incomplete_truncation_risk(
+    tmp_path: Path,
+) -> None:
+    _, result = _acquire_comtrade(
+        tmp_path,
+        comtrade_envelope([comtrade_row()], count=100_000),
+    )
+
+    assert isinstance(result, UnavailableRecord)
+    assert result.coverage is not None
+    assert result.coverage.status == "INCOMPLETE"
+    assert result.coverage.stop_reason == UnavailableReason.RECORD_CAP_REACHED
+
+
+@pytest.mark.parametrize(
+    "rows,error,expected_reason",
+    [
+        ([comtrade_row()], {"code": "TEST_ERROR"}, UnavailableReason.COVERAGE_INDETERMINATE),
+        ([comtrade_row(reporter_code=840)], None, UnavailableReason.REPORTER_MISMATCH),
+        ([comtrade_row(period=2023)], None, UnavailableReason.COVERAGE_INDETERMINATE),
+        ([comtrade_row(flow_code="X")], None, UnavailableReason.COVERAGE_INDETERMINATE),
+        ([comtrade_row(partner_code=156)], None, UnavailableReason.COVERAGE_INDETERMINATE),
+        ([comtrade_row("7210")], None, UnavailableReason.COVERAGE_INDETERMINATE),
+        ([comtrade_row(classification_code="")], None, UnavailableReason.COVERAGE_INDETERMINATE),
+        ([comtrade_row(), comtrade_row()], None, UnavailableReason.COVERAGE_INDETERMINATE),
+    ],
+)
+def test_un_comtrade_each_completeness_predicate_fails_closed(
+    tmp_path: Path,
+    rows: list[dict],
+    error: object,
+    expected_reason: UnavailableReason,
+) -> None:
+    _, result = _acquire_comtrade(
+        tmp_path,
+        comtrade_envelope(rows, error=error),
+    )
+
+    assert isinstance(result, UnavailableRecord)
+    assert result.coverage is not None
+    assert result.coverage.status == "INCOMPLETE"
+    assert result.coverage.completeness_basis == CompletenessBasis.UNAVAILABLE
+    assert result.coverage.stop_reason == expected_reason
+
+
+def test_un_comtrade_partners_use_same_count_and_cap_completeness(
+    tmp_path: Path,
+) -> None:
+    contract = _comtrade_contract(stage=Stage.PARTNERS)
+    _, result = _acquire_comtrade(
+        tmp_path,
+        comtrade_envelope(
+            [comtrade_row(partner_code=156, partner_desc="China")]
+        ),
+        contract=contract,
+    )
+
+    assert isinstance(result, tuple)
+    _, coverage = result
+    assert coverage.status == "COMPLETE"
+    assert (
+        coverage.completeness_basis
+        == CompletenessBasis.PROVIDER_COUNT_MATCH_BELOW_DOCUMENTED_CAP_100000
+    )
+
+
+def test_un_comtrade_stored_page_preserves_observed_response_when_coverage_indeterminate(
+    tmp_path: Path,
+) -> None:
+    source = _comtrade_source_config()
+    source["pagination"] = {
+        "kind": "UNAVAILABLE",
+        "documentation_reference": "UNAVAILABLE",
+        "parameters": {},
+    }
+
+    _, result = _acquire_comtrade(
+        tmp_path,
+        comtrade_envelope([comtrade_row()]),
+        source_config=source,
+    )
+
+    assert isinstance(result, UnavailableRecord)
+    assert result.observed_response is not None
+    assert result.observed_response.http_status == 200
+    assert result.observed_response.body_byte_count > 0
+    assert result.observed_response.error_type is None
+    assert result.observed_response.error_message_redacted is None
+
+
+def test_un_comtrade_error_envelope_is_incomplete(tmp_path: Path) -> None:
+    payload = comtrade_envelope(
+        [comtrade_row()],
+        error={"code": "TEST_ERROR"},
+    )
+
+    _, result = _acquire_comtrade(tmp_path, payload)
+
+    assert isinstance(result, UnavailableRecord)
+    assert result.coverage is not None
+    assert result.coverage.status == "INCOMPLETE"
+    assert result.coverage.pages_expected == "UNAVAILABLE"
+
+
+def test_un_comtrade_html_landing_page_never_becomes_universe(
+    tmp_path: Path,
+) -> None:
+    _, result = _acquire_comtrade(
+        tmp_path,
+        b"<html><body>TEST LANDING PAGE</body></html>",
+        content_type="text/html",
+    )
+
+    assert isinstance(result, UnavailableRecord)
+    assert result.coverage is not None
+    assert result.coverage.status == "INCOMPLETE"
+    assert result.coverage.pages_expected == "UNAVAILABLE"
+
+
+def test_un_comtrade_reporter_mismatch_fails_validation(
+    tmp_path: Path,
+) -> None:
+    contract = _comtrade_contract()
+    connector, result = _acquire_comtrade(
+        tmp_path,
+        comtrade_envelope([comtrade_row(reporter_code=840)]),
+        contract=contract,
+    )
+
+    assert isinstance(result, UnavailableRecord)
+    assert result.coverage is not None
+    assert result.coverage.stop_reason == UnavailableReason.REPORTER_MISMATCH
+    report = connector.validate(_stored_comtrade_artifact(connector, contract))
+    assert report.status == "FAIL"
+    assert next(
+        check
+        for check in report.checks
+        if check.check_id == "reporter_682_all_rows"
+    ).result == "FAIL"
+
+
+def test_un_comtrade_mixed_classification_in_unit_fails_validation(
+    tmp_path: Path,
+) -> None:
+    contract = _comtrade_contract()
+    connector, result = _acquire_comtrade(
+        tmp_path,
+        comtrade_envelope(
+            [
+                comtrade_row("721049", classification_code="H5"),
+                comtrade_row("390210", classification_code="H6"),
+            ]
+        ),
+        contract=contract,
+    )
+
+    assert isinstance(result, UnavailableRecord)
+    report = connector.validate(_stored_comtrade_artifact(connector, contract))
+    assert report.status == "FAIL"
+    assert next(
+        check
+        for check in report.checks
+        if check.check_id == "single_classification_code_per_unit"
+    ).result == "FAIL"
+
+
+def test_un_comtrade_duplicate_hs6_in_unit_fails_validation(
+    tmp_path: Path,
+) -> None:
+    contract = _comtrade_contract()
+    connector, result = _acquire_comtrade(
+        tmp_path,
+        comtrade_envelope([comtrade_row(), comtrade_row()]),
+        contract=contract,
+    )
+
+    assert isinstance(result, UnavailableRecord)
+    report = connector.validate(_stored_comtrade_artifact(connector, contract))
+    assert report.status == "FAIL"
+    assert next(
+        check
+        for check in report.checks
+        if check.check_id == "no_duplicate_hs6_per_unit"
+    ).result == "FAIL"
+
+
+def test_universe_rows_carry_classification_code_verbatim(
+    tmp_path: Path,
+) -> None:
+    connector, result = _acquire_comtrade(
+        tmp_path,
+        comtrade_envelope(
+            [comtrade_row(classification_code="H6")]
+        ),
+    )
+
+    assert isinstance(result, tuple)
+    artifact = result[0][0]
+    parsed = connector.parse_rows(
+        connector.store.read_payload(artifact.contract),
+        artifact.contract.content_type,
+    )
+    observations = connector.normalize(artifact)
+    assert [row["classification_code"] for row in parsed] == ["H6"]
+    assert [row.hs_revision for row in observations] == ["H6"]
+
+
+def test_un_comtrade_partner_rows_keep_partner_desc_and_world_row(
+    tmp_path: Path,
+) -> None:
+    contract = _comtrade_contract(stage=Stage.PARTNERS)
+    connector, result = _acquire_comtrade(
+        tmp_path,
+        comtrade_envelope(
+            [
+                comtrade_row(),
+                comtrade_row(
+                    partner_code=156,
+                    partner_desc="China",
+                    primary_value=600_000,
+                    net_weight=700_000,
+                ),
+            ]
+        ),
+        contract=contract,
+    )
+
+    assert isinstance(result, UnavailableRecord)
+    artifact = _stored_comtrade_artifact(connector, contract)
+    report = connector.validate(artifact)
+    assert report.status == "FAIL"
+    assert next(
+        check
+        for check in report.checks
+        if check.check_id == "no_duplicate_hs6_per_unit"
+    ).result == "FAIL"
+    observations = connector.normalize(artifact)
+    assert [row.partner for row in observations] == ["World", "China"]
+
+
+def test_universe_snapshot_records_config_version_1_3_0(
+    tmp_path: Path,
+) -> None:
+    connector, result = _acquire_comtrade(
+        tmp_path,
+        comtrade_envelope(
+            [
+                comtrade_row("721049", classification_code="H6"),
+                comtrade_row("390210", classification_code="H6"),
+            ]
+        ),
+    )
+    assert isinstance(result, tuple)
+    config = copy.deepcopy(acquisition_sources_config())
+    config["sources"]["un_comtrade"] = connector.source_config
+
+    record = build_universe_snapshot(
+        connector.store,
+        config,
+        default_registry(),
+        source_id="un_comtrade",
+    )
+
+    assert record["transformation_record"]["config_version"] == "1.3.0"
+    assert all(
+        passport["transformation_record"]["config_version"] == "1.3.0"
+        for passport in record["evidence"]
+    )
+
+
+def test_partners_kind_config_version_unchanged_and_wits_snapshot_reconstructs(
+) -> None:
+    config = acquisition_sources_config()
+    kinds = snapshots.default_kind_registry()
+    assert kinds.get("partners").config_version == "1.0.0"
+    raw_cfg = config["raw_store"]
+    store = RawStore(
+        PROJECT_ROOT / "data" / "raw",
+        max_artifact_bytes=raw_cfg["max_artifact_bytes_compressed"],
+        max_store_bytes=raw_cfg["max_store_bytes_compressed"],
+    )
+    path = (
+        PROJECT_ROOT
+        / "data"
+        / "snapshots"
+        / "partners"
+        / "PARTNERS-SAU-WITS-TRADE-2026-09-03.json"
+    )
+    assert snapshots.reconstruct(
+        path,
+        store,
+        config,
+        default_registry(),
+    ).match
 
 
 def test_acquire_credential_absent_records_unavailable(tmp_path: Path) -> None:

@@ -70,12 +70,27 @@ def _universe_extra(selected: Mapping) -> dict[str, Any]:
 
 
 def _no_extra(selected: Mapping) -> dict[str, Any]:
+    del selected
     return {}
 
 
 def _validate_universe(record: dict[str, Any]) -> None:
     if record.get("product_scope") != "ALL_HS6":
         raise ValueError("universe product_scope must be ALL_HS6")
+    rows = record.get("rows")
+    if not isinstance(rows, list) or not rows:
+        raise ValueError("universe rows must be non-empty")
+    revisions_by_unit: dict[tuple[Any, Any], set[str]] = {}
+    for row in rows:
+        if not isinstance(row, dict):
+            raise ValueError("universe rows must be objects")
+        revision = row.get("hs_revision")
+        if not isinstance(revision, str) or not revision:
+            raise ValueError("universe row hs_revision must be non-empty")
+        unit = (row.get("year"), row.get("flow"))
+        revisions_by_unit.setdefault(unit, set()).add(revision)
+    if any(len(revisions) != 1 for revisions in revisions_by_unit.values()):
+        raise ValueError("universe unit must carry one classification")
     coverage = record["coverage"]
     if coverage.get("status") != "COMPLETE":
         raise ValueError("universe coverage must be COMPLETE")
@@ -129,7 +144,7 @@ def default_kind_registry() -> KindRegistry:
     return KindRegistry({
         "universe": KindSpec("universe", Stage.UNIVERSE, "data/snapshots/universe", "1.0.0", "UNIVERSE", True, "rows",
             lambda row: (row.get("year", 0), row.get("hs6", "")), "normalize_trade_rows", ("TRADE_VALUE", "TRADE_QUANTITY"),
-            "row_count", CompletenessPolicy.ALL_UNITS_COMPLETE, "1.0.0", _universe_extra, _validate_universe),
+            "row_count", CompletenessPolicy.ALL_UNITS_COMPLETE, "1.3.0", _universe_extra, _validate_universe),
         "tariff": KindSpec("tariff", Stage.TARIFF, "data/snapshots/tariff", "1.0.0", "TARIFF", False, "lines",
             lambda row: row.get("national_code", ""), "normalize_tariff_lines", ("NATIONAL_TARIFF_LINE_MAPPING",),
             "line_count", CompletenessPolicy.ALL_UNITS_COMPLETE, "1.0.0", _no_extra, _validate_tariff),

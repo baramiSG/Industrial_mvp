@@ -1,6 +1,6 @@
 metadata:
-  version: "1.2.0"
-  effective_date: "2026-09-04"
+  version: "1.3.0"
+  effective_date: "2026-09-12"
   authority: "Methodology §3.2, §11, §11.3; Core 05 v2 §4-§6, §10-§11"
 
 raw_store:
@@ -22,6 +22,7 @@ offline_guard:
     - retry-after
   header_denylist:
     - authorization
+    - ocp-apim-subscription-key
     - cookie
     - set-cookie
     - proxy-authorization
@@ -72,29 +73,32 @@ sources:
   un_comtrade:
     authority: UN Comtrade
     access_classification: public_registered
-    documentation_reference: https://comtradeplus.un.org/
-    terms_reference: https://comtradeplus.un.org/
+    documentation_reference: https://comtradedeveloper.un.org/api-details#api=comtrade-v1
+    terms_reference: https://uncomtrade.org/docs/policy-on-use-and-re-dissemination/
     endpoint_templates:
-      UNIVERSE: "https://comtradeplus.un.org/api/get/v1/commodity?reporterCode=682&period={period}&flowCode={flow_code}&cmdCode=ALL&partnerCode=0&motCode=0&customsCode=C00&includeDesc=true"
-      PARTNERS: "https://comtradeplus.un.org/api/get/v1/commodity?reporterCode=682&period={period}&flowCode={flow_code}&cmdCode={product}&partnerCode=0&motCode=0&customsCode=C00&includeDesc=true"
-      TERMS: "https://comtradeplus.un.org/"
+      UNIVERSE: "https://comtradeapi.un.org/data/v1/get/C/A/HS?reporterCode={reporter}&period={period}&flowCode={flow_code}&cmdCode={product}&partnerCode={partner}&motCode=0&customsCode=C00"
+      PARTNERS: UNAVAILABLE
+      TERMS: https://uncomtrade.org/docs/policy-on-use-and-re-dissemination/
     parameters:
-      product_all_token: ALL
+      product_all_token: AG6
       partner_world_token: "0"
       reporter_token: "682"
       flow_tokens:
         imports: M
         exports: X
     pagination:
-      kind: NEXT_TOKEN
-      documentation_reference: https://comtradeplus.un.org/
-      parameters:
-        next_token_field: next
-    nomenclature: HS2017
+      kind: NONE
+      documentation_reference: https://uncomtrade.org/docs/subscriptions/
+      parameters: {}
+    nomenclature: HS
     reporter_code: SAU
     credential_env_var: IOR_COMTRADE_SUBSCRIPTION_KEY
+    credential_header: Ocp-Apim-Subscription-Key
     rate_limit:
-      documented_policy: UNAVAILABLE
+      documented_policy: >-
+        Basic Individual: "max 100K records per call"; "500 calls/day";
+        "5 calls per second". Source:
+        https://uncomtrade.org/docs/subscriptions/
       min_interval_seconds: 2.0
       max_attempts: 3
       timeout_seconds: 60
@@ -104,7 +108,7 @@ sources:
     expected_content_types:
       - application/json
     user_agent: industrial-opportunity-resolution-mvp/0.2.0 (public-data acquisition; offline runtime)
-    recorded_on: "2026-09-04"
+    recorded_on: "2026-09-12"
 
   baci_cepii:
     authority: CEPII BACI

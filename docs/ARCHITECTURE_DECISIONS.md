@@ -579,3 +579,151 @@ The companies are Universal Metal Coating Company (alias UNICOIL), Hadeed, SABIC
 At T7 authoring, **S12c manifest run count = 0**. Exactly one `scripts/build_manifests.py` run is authorized only after ADR-018 and the T8 regression. The generated seventeen-row authority table is then mirrored into Manifest §11 and [14] runs immediately. A failure stops the slice without regeneration or hand editing; the actual UTC receipt is appended only after execution.
 
 **T9 execution receipt (2026-09-12T11:25:47Z):** after the T8 regression (`2008 passed, 1 deselected, 1 warning`) and exact [0]–[13]/[21]–[26] gates passed, `PATH=.venv/bin:$PATH PYTHONPATH=src python3 scripts/build_manifests.py` ran exactly once and exited 0. Immediate [14] passed: `MANIFEST_S11_S12A_S12B_ROWS_UNCHANGED_ENTITIES_PRESENT 2`. The snapshot manifest added only `data/entities/mentions/mentions-v1.json` and `data/entities/resolution/ENTITIES-2026-09-12-a12e24c31b02.json`; every prior row remained identical. The authority path set grew from 16 to 17 with `config/entity_resolution.v1.yaml`; only the four approved Core rows changed among prior authority paths. Manifest §11 mirrors all 17 generated rows. S12c manifest run count is **1**, authorization exhausted; no second run is permitted.
+
+## ADR-019 — Public-universe acquisition and screening engine (S13a)
+
+**Status:** implementation evidence under approved plan
+`plan-1-s13a.json` (`9d1f8134…`) and owner-approved amendments AM-1 (`d562ddca…`) and AM-2 (`88abbab2…`).
+Independent implementation review and delivery remain pending.
+
+**Decisions DD-1–DD-18:** acquisition config 1.3.0 introduces the optional
+validated custom credential-header name while storing no value; the official
+UN Comtrade v1 universe contract is accepted only on dataset/count/scope/
+classification/duplicate proof; AM-1 retains per-row `hs_revision` and one
+revision per `(year, flow)` without changing the pinned generic snapshot
+builder; W0–W3 are bounded operator windows; stage-two partner acquisition uses
+only engine-emitted R2 survivors; screening is an offline subpackage with a
+runtime transport-import boundary; per-HS6 projection preserves unknowns;
+governed rule builders and threshold YAML are reused; dispositions are typed
+and never formal decisions; the two cited product families are the only
+populated memberships and no unsupported plant link is authored; five queues
+use route-specific Pareto ordering with §8.2(c) `NOT_CALCULABLE`; the
+write-once ScreeningSnapshot hashes every input; API summary/queue/record
+contracts serve unavailable state without 500; AM-2 stores it as a directory
+with a 48 MiB per-file and 100 MiB total budget; reconstruction checks every
+file and input offline; controls preserve every frozen public/synthetic/golden/browser and
+S11/S12 byte; Core 01/02/03/04/05/07/09 record the contracts.
+
+**Observed windows:** W0 received the developer sign-in shell and a bounded
+public preview with `count=500`, 500 rows and top-level
+`count/data/elapsedTime/error`; it did not establish terms, pagination,
+provider limits, all-partners token or a ZATCA data endpoint. W1 run
+`20260912T134009Z` therefore recorded eight `LICENSE_UNRECORDED` units, zero
+requests and no universe. OD-10 then authorized one corrective round. W0-bis
+observed the official policy, subscription and key pages at
+`uncomtrade.org/docs/`: Basic Individual limits are 100K records per call,
+500 calls per day and 5 calls per second. Partner-all, pagination and
+comma-separated command-code batching remained unobserved. W1-bis run
+`20260912T141128Z` stored eight normalized responses; each provider `count`
+equalled its stored-row count (3,651–5,061 rows), with `H5` in 2021 and `H6`
+in 2022–2024. All eight units nevertheless remained
+`INCOMPLETE / COVERAGE_INDETERMINATE`, because count equality without an
+official pagination/completeness contract does not satisfy DD-3. No universe
+snapshot or candidate list was built; W2 remained closed at zero requests,
+and W3 remained closed. The corrected fallback snapshot is honestly
+`UNAVAILABLE` with reason `COVERAGE_INDETERMINATE`, zero records/queues, and
+5,279 bytes; the empty evidence-bound plant-family list is 118 bytes. W1-bis
+stored 1,094,392 compressed bytes across the policy page and eight universe
+responses; no universe or UN Comtrade partner snapshot file exists. OD-7 was
+not triggered.
+
+**Authority change classes:** Manifest §7.3 adds screening/product-family
+configuration and acquisition config 1.3.0; §7.4 changes the seven Core files;
+§7.5 adds W1/W1-bis raw and coverage records and screening artifacts. The
+planned T11 manifest generation ran once on 2026-09-12, exited 0 and passed
+the immediate integrity/20-test oracle. The implementer's later T12
+self-review correctly found invalid product-family profile IDs, incomplete
+four-year availability enforcement, wrong Make target names and wrong state
+nesting. OD-10 authorized one corrective round and exactly one second and
+final generation after those fixes, the W0-bis/W1-bis evidence, governed text
+and regression. That second run is required solely to hash the authorized
+corrections and new evidence; it must be followed immediately by the manifest
+oracle. **OD-10 execution receipt:** the second and final invocation ran at
+`2026-09-12T14:21:10Z`, exited 0, updated the generated manifests and §11
+mirror, then immediately passed `INTEGRITY PASS` and all 20 manifest-contract
+tests. S13a manifest run count was **2** at that gate: the first planned T11
+receipt on 2026-09-12 and this OD-10 corrective receipt.
+
+**OD-11 completeness correction:** official subscription documentation states
+verbatim “max 100K records per call”, “500 calls/day” and “5 calls per
+second”. `pagination.kind=NONE`; a unit is complete only when provider
+`count` equals stored rows and is below 100,000, with an empty error, reporter
+682, contract period/flow/partner, six-digit HS6, one classification and no
+duplicate HS6. Run `20260912T143742Z` proved all eight 2021–2024 import/export
+units complete (3,651–5,061 rows each; H5 in 2021, H6 thereafter), producing a
+24,195,845-byte universe with 5,443 HS6.
+
+The eight W1-bis `attempt.json` files in run `20260912T141128Z` were edited
+after the run to copy response metadata from immutable page contracts. OD-11
+retained the transparent correction as history, prohibited further edits and
+superseded the run with W1-ter. Original → repaired SHA-256:
+`9d511b9e6adeebf7fa154641864c375be1635d99afc9726c1a8e7abe23f0d32f`
+→ `ff49dbbc10921914b436e951c61dd0cdec9f4fdf7581e0dd4d04f33a7ea8d1f1`;
+`5d666a753c57c01e383a2e4435fabc96beea88d27d700242e183f50c7811c8be`
+→ `6d1b62add41ce0e715f6ec1e9aa89ddbd1972e8ff1478dd99985d7dd0e2ec162`;
+`1252e449a734955fd8ad75bd89cc1b2fde7a84c252cebb7194db7f80df1d998a`
+→ `c70b040d453cc178697ec0bdaf42ac70d353cc0fdaa251d488a3dfb83af7a243`;
+`e5a06a9c7f66e10a594db59763bb38b0cd33d3e9f938e8c252f3d5b134d399fe`
+→ `6953fa7070dc9ba8d8295b13cfbe0fac26841d9ae872a1847679dc1ba06ad10e`;
+`d21b9ab6256d2ca348a439200e983d7653a505d3169f905b8719420c750c7808`
+→ `1c46b0c727123935f70ef9ca045227c944434d7eeef406a369208675074f7662`;
+`d37c8c9e46c5d471676168b07e7f8eda5c1b1b4a7d28ebac2307a02e1bd7216e`
+→ `4ab3e46a326ffc828dc95843e56632045076e08ce6b5801ce22a6039c7a98538`;
+`d853b142e764d436f5e7616e0342bb2f56bf975e1af56f7838560a9bfce3aeeb`
+→ `e48cfaeb88f35ed0e5d3123e26eecbcaa89060969b149685fe90bddb18954ceb`;
+`cb209f9c94c59bcf04620de9192229fe4e1cc98f5c85519c29cfcfc2d795ccbb`
+→ `b9ad4665e35167b3a106854131100a4e099c3469fd1ee27a0348c84bd0790418`.
+RawStore tests prove
+`attempt.json` and `coverage.json` cannot be overwritten through its API.
+
+The proven-universe single-file screening result was 57,164,360 bytes and
+triggered OD-7. OD-12/AM-2 replaces only its storage representation:
+`summary.json`, external `queues.json` when over 1 MiB, and HS2 record shards,
+with repeated common record fields removed and restored by the loader. The
+logical `ScreeningSnapshot 1.0.0` contract and all 5,443 records remain
+unchanged. The replacement has 98 files totaling 52,798,074 bytes; largest
+file `records/84.json` is 5,125,636 bytes. This fits the 48 MiB per-file and
+100 MiB total limits. Each screening cycle still adds about 52.8 MB of
+governed repository content; deterministic compression is a candidate later
+§7.4 change and is not implemented here.
+
+W0-ter used a fresh read-only Chromium context without credentials. The
+developer page redirected to sign-in and rendered only “Products”, “Sign in”,
+“Welcome to UN Comtrade API portal!”, “Sign in to Comtrade Developer portal”
+and “Powered by Azure API Management.” No parameter, all-partners token,
+operation, record-limit statement or terms link was observed, so PARTNERS
+remains `UNAVAILABLE` and W2 was not repeated. Historical W2 run
+`20260912T144127Z` remains 59 `ENDPOINT_UNVERIFIED` units and zero requests;
+all 1,471 emitted R2-FULL survivors remain
+`PARTNER_DETAIL_NOT_ACQUIRED`.
+
+OD-11 authorized a third manifest run for its correction; OD-12 preserves
+that authorization and requires it only after AM-2, governed text and
+regression. It is the third and last S13a manifest run. Its UTC execution
+receipt and immediate oracle result are appended after execution; no fourth
+run is authorized.
+
+**OD-12 execution receipt:** the third and final invocation ran at
+`2026-09-12T15:01:37Z`, exited 0, enumerated every regular file under the
+sharded screening directory, updated both generated manifests and the §11
+human mirror, then immediately passed `INTEGRITY PASS` and all 20
+manifest-contract tests. S13a manifest run count was **3** at that gate.
+
+**OD-13 review correction:** reviewer-grok rejected candidate `612626ed…`
+because Core 05 §3.1 still described only the S11 connector state and the
+known-limitations register omitted the governed §8.2(c) and persistence-only
+outcomes. OD-13 also authorized the bounded A-01/A-03/A-04/A-05 corrections:
+the ADR header cites both amendments; Core 01 distinguishes acquired-universe
+screening from deep resolution; runtime selection orders snapshots by
+`(as_of_date, snapshot_id)`; and CLI exit-code/no-socket behavior is pinned.
+Because the two Core corrections are authority-hashed, OD-13 authorizes
+exactly one fourth and final manifest generation after regression, followed
+immediately by the manifest oracle. No data, snapshot or raw artifact may
+change in this round.
+
+**OD-13 execution receipt:** the fourth and final invocation ran at
+`2026-09-12T15:36:59Z`, exited 0, updated the generated authority hashes and
+their §11 human mirror for the authorized Core 01/Core 05 corrections, then
+immediately passed `INTEGRITY PASS` and all 20 manifest-contract tests. S13a
+manifest run count is **4**; authorization is exhausted and no fifth run is
+permitted.

@@ -1,0 +1,5564 @@
+[
+  {
+    "advance_supporting_signal_rule_ids": [],
+    "disposition_reason_code": "MATERIAL_TRIGGER_FIRED",
+    "evidence_needs": [
+      {
+        "code": "identity/tariff-line",
+        "evidence_ids": []
+      },
+      {
+        "code": "target specification/application",
+        "evidence_ids": []
+      },
+      {
+        "code": "line-level production or producer-grade matrix",
+        "evidence_ids": []
+      },
+      {
+        "code": "re-export/origin decomposition",
+        "evidence_ids": []
+      }
+    ],
+    "exclusions": [
+      {
+        "code": "EX-01_HETEROGENEOUS_RESIDUAL",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-02_MARKET_BELOW_MES",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-03_UNSATISFIABLE_HARD_GATE",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-04_IDLE_EQUIVALENT_CAPACITY",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-05_TRANSITORY_OR_MEASUREMENT",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-06_REDUNDANCY_OR_CROWD_OUT",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      }
+    ],
+    "fired_signal_rule_ids": [
+      "R1-D"
+    ],
+    "hs6": "190110",
+    "indicated_state": "INVESTIGATE",
+    "indication_reason_code": "ROUTE_CHANGING_EVIDENCE_UNRESOLVED",
+    "ledger": [
+      {
+        "decision_effect_code": "R0_EFFECT",
+        "execution": "DEGRADED",
+        "fired": true,
+        "metrics": {
+          "evidence_need_code": "identity/tariff-line",
+          "mapping_status": "NOT_CALCULABLE"
+        },
+        "result_code": "R0_DEGRADED_FIRED",
+        "rule_id": "R0"
+      },
+      {
+        "decision_effect_code": "R1_F_EFFECT",
+        "execution": "FULL",
+        "fired": false,
+        "metrics": {
+          "missing_years": []
+        },
+        "result_code": "R1_F_FULL_NOT_FIRED",
+        "rule_id": "R1-F"
+      },
+      {
+        "decision_effect_code": "R1_D_EFFECT",
+        "execution": "DEGRADED",
+        "fired": true,
+        "metrics": {
+          "confidence_cap": "C",
+          "positive_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ]
+        },
+        "result_code": "R1_D_DEGRADED_FIRED",
+        "rule_id": "R1-D"
+      },
+      {
+        "decision_effect_code": "R2_EFFECT",
+        "execution": "FULL",
+        "fired": false,
+        "metrics": {
+          "delta_ln_quantity": -0.4946,
+          "delta_ln_unit_value": 0.6528,
+          "delta_ln_value": 0.1582,
+          "from_year": 2023,
+          "observed_span_years": 1,
+          "quantity_cagr": -0.3902,
+          "quantity_contribution_share": 0.4311,
+          "to_year": 2024
+        },
+        "result_code": "R2_FULL_NOT_FIRED",
+        "rule_id": "R2"
+      },
+      {
+        "decision_effect_code": "R3_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "hhi": "NOT_CALCULABLE",
+          "hhi_threshold": 0.25,
+          "largest_supplier_share": "NOT_CALCULABLE",
+          "largest_supplier_threshold": 0.5,
+          "quantity": {
+            "basis": "quantity",
+            "eligible_partner_count": "NOT_CALCULABLE",
+            "flow_basis": "gross",
+            "hhi": "NOT_CALCULABLE",
+            "largest_supplier_share": "NOT_CALCULABLE",
+            "reason": "No partner rows or source-attributed quantity concentration disclosure are available.",
+            "source": "none",
+            "status": "NOT_CALCULABLE",
+            "top_two_share": "NOT_CALCULABLE",
+            "valid_coverage": "NOT_CALCULABLE",
+            "year": 2024
+          },
+          "top_two_share": "NOT_CALCULABLE",
+          "value": {
+            "basis": "value",
+            "eligible_partner_count": "NOT_CALCULABLE",
+            "flow_basis": "gross",
+            "hhi": "NOT_CALCULABLE",
+            "largest_supplier_share": "NOT_CALCULABLE",
+            "reason": "No partner rows or source-attributed value concentration disclosure are available.",
+            "source": "none",
+            "status": "NOT_CALCULABLE",
+            "top_two_share": "NOT_CALCULABLE",
+            "valid_coverage": "NOT_CALCULABLE",
+            "year": 2024
+          }
+        },
+        "result_code": "R3_DISABLED_NA",
+        "rule_id": "R3"
+      },
+      {
+        "decision_effect_code": "R4_D_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "bulk_band_usd_t": "NOT_CALCULABLE",
+          "calculation_basis": "none",
+          "iqr_usd_t": "NOT_CALCULABLE",
+          "minimum_valid_value_coverage": 0.7,
+          "outlier_candidate": "NOT_CALCULABLE",
+          "reason": "No comparable partner rows or source-attributed dispersion disclosure are available.",
+          "status": "NOT_CALCULABLE",
+          "valid_quantity_coverage": "NOT_CALCULABLE",
+          "valid_value_coverage": "NOT_CALCULABLE",
+          "weighted_median_usd_t": "NOT_CALCULABLE",
+          "weighted_q1_usd_t": "NOT_CALCULABLE",
+          "weighted_q3_usd_t": "NOT_CALCULABLE"
+        },
+        "result_code": "R4_D_DISABLED_NA",
+        "rule_id": "R4-D"
+      },
+      {
+        "decision_effect_code": "R5_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "apparent_consumption_kt": "NOT_CALCULABLE",
+          "calculation_basis": "NOT_CALCULABLE",
+          "net_import_exposure_kt": "NOT_CALCULABLE",
+          "reason": "Domestic production quantity and retained-import flow are absent from the frozen public snapshot; gross imports cannot establish apparent consumption.",
+          "retained_import_share_of_apparent_consumption": "NOT_CALCULABLE",
+          "retained_imports_kt": "NOT_CALCULABLE",
+          "threshold": 0.2,
+          "unavailable_inputs": [
+            "domestic_origin_exports_kt",
+            "domestic_production_kt",
+            "reexports_kt",
+            "retained_imports_kt"
+          ],
+          "unavailable_reasons": {
+            "apparent_consumption_kt": [
+              "domestic_origin_exports_kt",
+              "domestic_production_kt",
+              "retained_imports_kt"
+            ],
+            "net_import_exposure_kt": [
+              "domestic_origin_exports_kt",
+              "retained_imports_kt"
+            ],
+            "retained_import_share_of_apparent_consumption": [
+              "apparent_consumption_kt",
+              "retained_imports_kt"
+            ],
+            "retained_imports_kt": [
+              "reexports_kt",
+              "retained_imports_kt"
+            ]
+          }
+        },
+        "result_code": "R5_DISABLED_NA",
+        "rule_id": "R5"
+      },
+      {
+        "decision_effect_code": "R9_S_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "known_hard_gate_failure": false,
+          "qualifying_signal_count": 0,
+          "same_process_family": "NOT_CALCULABLE"
+        },
+        "result_code": "R9_S_DISABLED_NA",
+        "rule_id": "R9-S"
+      },
+      {
+        "decision_effect_code": "R10_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "criticality_evidence_id": null,
+          "criticality_status": "NOT_CALCULABLE"
+        },
+        "result_code": "R10_DISABLED_NA",
+        "rule_id": "R10"
+      },
+      {
+        "decision_effect_code": "R11_EFFECT",
+        "execution": "DEGRADED",
+        "fired": false,
+        "metrics": {
+          "computed_export_import_value_ratio": 0.0675,
+          "disclosed_export_import_value_ratio": null,
+          "disclosed_ratio_consistent": null,
+          "established_nameplate": {
+            "established": false,
+            "evidence_ids": [],
+            "producers": [],
+            "reason": "Verified domestic capability is not established.",
+            "total_observed_nameplate_tpy": "NOT_CALCULABLE"
+          },
+          "export_import_value_ratio": 0.0675,
+          "export_import_value_ratio_threshold": 50.0,
+          "ratio_basis": "gross_trade_value",
+          "ratio_reason": null,
+          "ratio_status": "CALCULABLE"
+        },
+        "result_code": "R11_DEGRADED_NOT_FIRED",
+        "rule_id": "R11"
+      }
+    ],
+    "material_trigger_rule_ids": [
+      "R1-D"
+    ],
+    "metrics": {
+      "delta_ln_value": 0.1582,
+      "export_import_value_ratio": 0.0675,
+      "fired_signal_count": 2,
+      "hhi_value": "NOT_CALCULABLE",
+      "imports_usd_m_latest": 722.331700342,
+      "largest_supplier_share_value": "NOT_CALCULABLE",
+      "qualifying_signal_count": 0,
+      "quantity_cagr": -0.3902
+    },
+    "screening_disposition": "CANDIDATE",
+    "warnings": {
+      "classification_continuity": {
+        "pattern": "ABSENT_BEFORE_REVISION_CHANGE",
+        "status": "REVISION_CHANGE_IN_WINDOW"
+      },
+      "export_import_ratio_warning": false,
+      "export_import_value_ratio": 0.06750914548663983,
+      "price_led_growth": true
+    }
+  },
+  {
+    "advance_supporting_signal_rule_ids": [
+      "R2"
+    ],
+    "disposition_reason_code": "MATERIAL_TRIGGER_FIRED",
+    "evidence_needs": [
+      {
+        "code": "identity/tariff-line",
+        "evidence_ids": []
+      },
+      {
+        "code": "target specification/application",
+        "evidence_ids": []
+      },
+      {
+        "code": "line-level production or producer-grade matrix",
+        "evidence_ids": []
+      }
+    ],
+    "exclusions": [
+      {
+        "code": "EX-01_HETEROGENEOUS_RESIDUAL",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-02_MARKET_BELOW_MES",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-03_UNSATISFIABLE_HARD_GATE",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-04_IDLE_EQUIVALENT_CAPACITY",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-05_TRANSITORY_OR_MEASUREMENT",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-06_REDUNDANCY_OR_CROWD_OUT",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      }
+    ],
+    "fired_signal_rule_ids": [
+      "R1-D",
+      "R2"
+    ],
+    "hs6": "190120",
+    "indicated_state": "INVESTIGATE",
+    "indication_reason_code": "ROUTE_CHANGING_EVIDENCE_UNRESOLVED",
+    "ledger": [
+      {
+        "decision_effect_code": "R0_EFFECT",
+        "execution": "DEGRADED",
+        "fired": true,
+        "metrics": {
+          "evidence_need_code": "identity/tariff-line",
+          "mapping_status": "NOT_CALCULABLE"
+        },
+        "result_code": "R0_DEGRADED_FIRED",
+        "rule_id": "R0"
+      },
+      {
+        "decision_effect_code": "R1_F_EFFECT",
+        "execution": "FULL",
+        "fired": false,
+        "metrics": {
+          "missing_years": []
+        },
+        "result_code": "R1_F_FULL_NOT_FIRED",
+        "rule_id": "R1-F"
+      },
+      {
+        "decision_effect_code": "R1_D_EFFECT",
+        "execution": "DEGRADED",
+        "fired": true,
+        "metrics": {
+          "confidence_cap": "C",
+          "positive_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ]
+        },
+        "result_code": "R1_D_DEGRADED_FIRED",
+        "rule_id": "R1-D"
+      },
+      {
+        "decision_effect_code": "R2_EFFECT",
+        "execution": "FULL",
+        "fired": true,
+        "metrics": {
+          "delta_ln_quantity": 0.3621,
+          "delta_ln_unit_value": -0.0014,
+          "delta_ln_value": 0.3607,
+          "from_year": 2023,
+          "observed_span_years": 1,
+          "quantity_cagr": 0.4363,
+          "quantity_contribution_share": 0.9962,
+          "to_year": 2024
+        },
+        "result_code": "R2_FULL_FIRED",
+        "rule_id": "R2"
+      },
+      {
+        "decision_effect_code": "R3_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "hhi": "NOT_CALCULABLE",
+          "hhi_threshold": 0.25,
+          "largest_supplier_share": "NOT_CALCULABLE",
+          "largest_supplier_threshold": 0.5,
+          "quantity": {
+            "basis": "quantity",
+            "eligible_partner_count": "NOT_CALCULABLE",
+            "flow_basis": "gross",
+            "hhi": "NOT_CALCULABLE",
+            "largest_supplier_share": "NOT_CALCULABLE",
+            "reason": "No partner rows or source-attributed quantity concentration disclosure are available.",
+            "source": "none",
+            "status": "NOT_CALCULABLE",
+            "top_two_share": "NOT_CALCULABLE",
+            "valid_coverage": "NOT_CALCULABLE",
+            "year": 2024
+          },
+          "top_two_share": "NOT_CALCULABLE",
+          "value": {
+            "basis": "value",
+            "eligible_partner_count": "NOT_CALCULABLE",
+            "flow_basis": "gross",
+            "hhi": "NOT_CALCULABLE",
+            "largest_supplier_share": "NOT_CALCULABLE",
+            "reason": "No partner rows or source-attributed value concentration disclosure are available.",
+            "source": "none",
+            "status": "NOT_CALCULABLE",
+            "top_two_share": "NOT_CALCULABLE",
+            "valid_coverage": "NOT_CALCULABLE",
+            "year": 2024
+          }
+        },
+        "result_code": "R3_DISABLED_NA",
+        "rule_id": "R3"
+      },
+      {
+        "decision_effect_code": "R4_D_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "bulk_band_usd_t": "NOT_CALCULABLE",
+          "calculation_basis": "none",
+          "iqr_usd_t": "NOT_CALCULABLE",
+          "minimum_valid_value_coverage": 0.7,
+          "outlier_candidate": "NOT_CALCULABLE",
+          "reason": "No comparable partner rows or source-attributed dispersion disclosure are available.",
+          "status": "NOT_CALCULABLE",
+          "valid_quantity_coverage": "NOT_CALCULABLE",
+          "valid_value_coverage": "NOT_CALCULABLE",
+          "weighted_median_usd_t": "NOT_CALCULABLE",
+          "weighted_q1_usd_t": "NOT_CALCULABLE",
+          "weighted_q3_usd_t": "NOT_CALCULABLE"
+        },
+        "result_code": "R4_D_DISABLED_NA",
+        "rule_id": "R4-D"
+      },
+      {
+        "decision_effect_code": "R5_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "apparent_consumption_kt": "NOT_CALCULABLE",
+          "calculation_basis": "NOT_CALCULABLE",
+          "net_import_exposure_kt": "NOT_CALCULABLE",
+          "reason": "Domestic production quantity and retained-import flow are absent from the frozen public snapshot; gross imports cannot establish apparent consumption.",
+          "retained_import_share_of_apparent_consumption": "NOT_CALCULABLE",
+          "retained_imports_kt": "NOT_CALCULABLE",
+          "threshold": 0.2,
+          "unavailable_inputs": [
+            "domestic_origin_exports_kt",
+            "domestic_production_kt",
+            "reexports_kt",
+            "retained_imports_kt"
+          ],
+          "unavailable_reasons": {
+            "apparent_consumption_kt": [
+              "domestic_origin_exports_kt",
+              "domestic_production_kt",
+              "retained_imports_kt"
+            ],
+            "net_import_exposure_kt": [
+              "domestic_origin_exports_kt",
+              "retained_imports_kt"
+            ],
+            "retained_import_share_of_apparent_consumption": [
+              "apparent_consumption_kt",
+              "retained_imports_kt"
+            ],
+            "retained_imports_kt": [
+              "reexports_kt",
+              "retained_imports_kt"
+            ]
+          }
+        },
+        "result_code": "R5_DISABLED_NA",
+        "rule_id": "R5"
+      },
+      {
+        "decision_effect_code": "R9_S_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "known_hard_gate_failure": false,
+          "qualifying_signal_count": 0,
+          "same_process_family": "NOT_CALCULABLE"
+        },
+        "result_code": "R9_S_DISABLED_NA",
+        "rule_id": "R9-S"
+      },
+      {
+        "decision_effect_code": "R10_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "criticality_evidence_id": null,
+          "criticality_status": "NOT_CALCULABLE"
+        },
+        "result_code": "R10_DISABLED_NA",
+        "rule_id": "R10"
+      },
+      {
+        "decision_effect_code": "R11_EFFECT",
+        "execution": "DEGRADED",
+        "fired": false,
+        "metrics": {
+          "computed_export_import_value_ratio": 0.1379,
+          "disclosed_export_import_value_ratio": null,
+          "disclosed_ratio_consistent": null,
+          "established_nameplate": {
+            "established": false,
+            "evidence_ids": [],
+            "producers": [],
+            "reason": "Verified domestic capability is not established.",
+            "total_observed_nameplate_tpy": "NOT_CALCULABLE"
+          },
+          "export_import_value_ratio": 0.1379,
+          "export_import_value_ratio_threshold": 50.0,
+          "ratio_basis": "gross_trade_value",
+          "ratio_reason": null,
+          "ratio_status": "CALCULABLE"
+        },
+        "result_code": "R11_DEGRADED_NOT_FIRED",
+        "rule_id": "R11"
+      }
+    ],
+    "material_trigger_rule_ids": [
+      "R1-D",
+      "R2"
+    ],
+    "metrics": {
+      "delta_ln_value": 0.3607,
+      "export_import_value_ratio": 0.1379,
+      "fired_signal_count": 3,
+      "hhi_value": "NOT_CALCULABLE",
+      "imports_usd_m_latest": 107.563597044,
+      "largest_supplier_share_value": "NOT_CALCULABLE",
+      "qualifying_signal_count": 0,
+      "quantity_cagr": 0.4363
+    },
+    "screening_disposition": "CANDIDATE",
+    "warnings": {
+      "classification_continuity": {
+        "pattern": "ABSENT_BEFORE_REVISION_CHANGE",
+        "status": "REVISION_CHANGE_IN_WINDOW"
+      },
+      "export_import_ratio_warning": false,
+      "export_import_value_ratio": 0.1379389313554723,
+      "price_led_growth": false
+    }
+  },
+  {
+    "advance_supporting_signal_rule_ids": [
+      "R2"
+    ],
+    "disposition_reason_code": "MATERIAL_TRIGGER_FIRED",
+    "evidence_needs": [
+      {
+        "code": "identity/tariff-line",
+        "evidence_ids": []
+      },
+      {
+        "code": "target specification/application",
+        "evidence_ids": []
+      },
+      {
+        "code": "line-level production or producer-grade matrix",
+        "evidence_ids": []
+      }
+    ],
+    "exclusions": [
+      {
+        "code": "EX-01_HETEROGENEOUS_RESIDUAL",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-02_MARKET_BELOW_MES",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-03_UNSATISFIABLE_HARD_GATE",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-04_IDLE_EQUIVALENT_CAPACITY",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-05_TRANSITORY_OR_MEASUREMENT",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-06_REDUNDANCY_OR_CROWD_OUT",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      }
+    ],
+    "fired_signal_rule_ids": [
+      "R1-D",
+      "R2"
+    ],
+    "hs6": "190190",
+    "indicated_state": "INVESTIGATE",
+    "indication_reason_code": "ROUTE_CHANGING_EVIDENCE_UNRESOLVED",
+    "ledger": [
+      {
+        "decision_effect_code": "R0_EFFECT",
+        "execution": "DEGRADED",
+        "fired": true,
+        "metrics": {
+          "evidence_need_code": "identity/tariff-line",
+          "mapping_status": "NOT_CALCULABLE"
+        },
+        "result_code": "R0_DEGRADED_FIRED",
+        "rule_id": "R0"
+      },
+      {
+        "decision_effect_code": "R1_F_EFFECT",
+        "execution": "FULL",
+        "fired": false,
+        "metrics": {
+          "missing_years": []
+        },
+        "result_code": "R1_F_FULL_NOT_FIRED",
+        "rule_id": "R1-F"
+      },
+      {
+        "decision_effect_code": "R1_D_EFFECT",
+        "execution": "DEGRADED",
+        "fired": true,
+        "metrics": {
+          "confidence_cap": "C",
+          "positive_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ]
+        },
+        "result_code": "R1_D_DEGRADED_FIRED",
+        "rule_id": "R1-D"
+      },
+      {
+        "decision_effect_code": "R2_EFFECT",
+        "execution": "FULL",
+        "fired": true,
+        "metrics": {
+          "delta_ln_quantity": 0.4629,
+          "delta_ln_unit_value": -0.2722,
+          "delta_ln_value": 0.1907,
+          "from_year": 2023,
+          "observed_span_years": 1,
+          "quantity_cagr": 0.5887,
+          "quantity_contribution_share": 0.6297,
+          "to_year": 2024
+        },
+        "result_code": "R2_FULL_FIRED",
+        "rule_id": "R2"
+      },
+      {
+        "decision_effect_code": "R3_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "hhi": "NOT_CALCULABLE",
+          "hhi_threshold": 0.25,
+          "largest_supplier_share": "NOT_CALCULABLE",
+          "largest_supplier_threshold": 0.5,
+          "quantity": {
+            "basis": "quantity",
+            "eligible_partner_count": "NOT_CALCULABLE",
+            "flow_basis": "gross",
+            "hhi": "NOT_CALCULABLE",
+            "largest_supplier_share": "NOT_CALCULABLE",
+            "reason": "No partner rows or source-attributed quantity concentration disclosure are available.",
+            "source": "none",
+            "status": "NOT_CALCULABLE",
+            "top_two_share": "NOT_CALCULABLE",
+            "valid_coverage": "NOT_CALCULABLE",
+            "year": 2024
+          },
+          "top_two_share": "NOT_CALCULABLE",
+          "value": {
+            "basis": "value",
+            "eligible_partner_count": "NOT_CALCULABLE",
+            "flow_basis": "gross",
+            "hhi": "NOT_CALCULABLE",
+            "largest_supplier_share": "NOT_CALCULABLE",
+            "reason": "No partner rows or source-attributed value concentration disclosure are available.",
+            "source": "none",
+            "status": "NOT_CALCULABLE",
+            "top_two_share": "NOT_CALCULABLE",
+            "valid_coverage": "NOT_CALCULABLE",
+            "year": 2024
+          }
+        },
+        "result_code": "R3_DISABLED_NA",
+        "rule_id": "R3"
+      },
+      {
+        "decision_effect_code": "R4_D_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "bulk_band_usd_t": "NOT_CALCULABLE",
+          "calculation_basis": "none",
+          "iqr_usd_t": "NOT_CALCULABLE",
+          "minimum_valid_value_coverage": 0.7,
+          "outlier_candidate": "NOT_CALCULABLE",
+          "reason": "No comparable partner rows or source-attributed dispersion disclosure are available.",
+          "status": "NOT_CALCULABLE",
+          "valid_quantity_coverage": "NOT_CALCULABLE",
+          "valid_value_coverage": "NOT_CALCULABLE",
+          "weighted_median_usd_t": "NOT_CALCULABLE",
+          "weighted_q1_usd_t": "NOT_CALCULABLE",
+          "weighted_q3_usd_t": "NOT_CALCULABLE"
+        },
+        "result_code": "R4_D_DISABLED_NA",
+        "rule_id": "R4-D"
+      },
+      {
+        "decision_effect_code": "R5_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "apparent_consumption_kt": "NOT_CALCULABLE",
+          "calculation_basis": "NOT_CALCULABLE",
+          "net_import_exposure_kt": "NOT_CALCULABLE",
+          "reason": "Domestic production quantity and retained-import flow are absent from the frozen public snapshot; gross imports cannot establish apparent consumption.",
+          "retained_import_share_of_apparent_consumption": "NOT_CALCULABLE",
+          "retained_imports_kt": "NOT_CALCULABLE",
+          "threshold": 0.2,
+          "unavailable_inputs": [
+            "domestic_origin_exports_kt",
+            "domestic_production_kt",
+            "reexports_kt",
+            "retained_imports_kt"
+          ],
+          "unavailable_reasons": {
+            "apparent_consumption_kt": [
+              "domestic_origin_exports_kt",
+              "domestic_production_kt",
+              "retained_imports_kt"
+            ],
+            "net_import_exposure_kt": [
+              "domestic_origin_exports_kt",
+              "retained_imports_kt"
+            ],
+            "retained_import_share_of_apparent_consumption": [
+              "apparent_consumption_kt",
+              "retained_imports_kt"
+            ],
+            "retained_imports_kt": [
+              "reexports_kt",
+              "retained_imports_kt"
+            ]
+          }
+        },
+        "result_code": "R5_DISABLED_NA",
+        "rule_id": "R5"
+      },
+      {
+        "decision_effect_code": "R9_S_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "known_hard_gate_failure": false,
+          "qualifying_signal_count": 0,
+          "same_process_family": "NOT_CALCULABLE"
+        },
+        "result_code": "R9_S_DISABLED_NA",
+        "rule_id": "R9-S"
+      },
+      {
+        "decision_effect_code": "R10_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "criticality_evidence_id": null,
+          "criticality_status": "NOT_CALCULABLE"
+        },
+        "result_code": "R10_DISABLED_NA",
+        "rule_id": "R10"
+      },
+      {
+        "decision_effect_code": "R11_EFFECT",
+        "execution": "DEGRADED",
+        "fired": false,
+        "metrics": {
+          "computed_export_import_value_ratio": 0.03,
+          "disclosed_export_import_value_ratio": null,
+          "disclosed_ratio_consistent": null,
+          "established_nameplate": {
+            "established": false,
+            "evidence_ids": [],
+            "producers": [],
+            "reason": "Verified domestic capability is not established.",
+            "total_observed_nameplate_tpy": "NOT_CALCULABLE"
+          },
+          "export_import_value_ratio": 0.03,
+          "export_import_value_ratio_threshold": 50.0,
+          "ratio_basis": "gross_trade_value",
+          "ratio_reason": null,
+          "ratio_status": "CALCULABLE"
+        },
+        "result_code": "R11_DEGRADED_NOT_FIRED",
+        "rule_id": "R11"
+      }
+    ],
+    "material_trigger_rule_ids": [
+      "R1-D",
+      "R2"
+    ],
+    "metrics": {
+      "delta_ln_value": 0.1907,
+      "export_import_value_ratio": 0.03,
+      "fired_signal_count": 3,
+      "hhi_value": "NOT_CALCULABLE",
+      "imports_usd_m_latest": 83.65408644200001,
+      "largest_supplier_share_value": "NOT_CALCULABLE",
+      "qualifying_signal_count": 0,
+      "quantity_cagr": 0.5887
+    },
+    "screening_disposition": "CANDIDATE",
+    "warnings": {
+      "classification_continuity": {
+        "pattern": "ABSENT_BEFORE_REVISION_CHANGE",
+        "status": "REVISION_CHANGE_IN_WINDOW"
+      },
+      "export_import_ratio_warning": false,
+      "export_import_value_ratio": 0.02998460658271735,
+      "price_led_growth": false
+    }
+  },
+  {
+    "advance_supporting_signal_rule_ids": [],
+    "disposition_reason_code": "MATERIAL_TRIGGER_FIRED",
+    "evidence_needs": [
+      {
+        "code": "identity/tariff-line",
+        "evidence_ids": []
+      },
+      {
+        "code": "target specification/application",
+        "evidence_ids": []
+      },
+      {
+        "code": "line-level production or producer-grade matrix",
+        "evidence_ids": []
+      }
+    ],
+    "exclusions": [
+      {
+        "code": "EX-01_HETEROGENEOUS_RESIDUAL",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-02_MARKET_BELOW_MES",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-03_UNSATISFIABLE_HARD_GATE",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-04_IDLE_EQUIVALENT_CAPACITY",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-05_TRANSITORY_OR_MEASUREMENT",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-06_REDUNDANCY_OR_CROWD_OUT",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      }
+    ],
+    "fired_signal_rule_ids": [
+      "R1-D"
+    ],
+    "hs6": "190211",
+    "indicated_state": "INVESTIGATE",
+    "indication_reason_code": "ROUTE_CHANGING_EVIDENCE_UNRESOLVED",
+    "ledger": [
+      {
+        "decision_effect_code": "R0_EFFECT",
+        "execution": "DEGRADED",
+        "fired": true,
+        "metrics": {
+          "evidence_need_code": "identity/tariff-line",
+          "mapping_status": "NOT_CALCULABLE"
+        },
+        "result_code": "R0_DEGRADED_FIRED",
+        "rule_id": "R0"
+      },
+      {
+        "decision_effect_code": "R1_F_EFFECT",
+        "execution": "FULL",
+        "fired": false,
+        "metrics": {
+          "missing_years": []
+        },
+        "result_code": "R1_F_FULL_NOT_FIRED",
+        "rule_id": "R1-F"
+      },
+      {
+        "decision_effect_code": "R1_D_EFFECT",
+        "execution": "DEGRADED",
+        "fired": true,
+        "metrics": {
+          "confidence_cap": "C",
+          "positive_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ]
+        },
+        "result_code": "R1_D_DEGRADED_FIRED",
+        "rule_id": "R1-D"
+      },
+      {
+        "decision_effect_code": "R2_EFFECT",
+        "execution": "FULL",
+        "fired": false,
+        "metrics": {
+          "delta_ln_quantity": -0.0562,
+          "delta_ln_unit_value": -0.3683,
+          "delta_ln_value": -0.4245,
+          "from_year": 2023,
+          "observed_span_years": 1,
+          "quantity_cagr": -0.0546,
+          "quantity_contribution_share": 0.1324,
+          "to_year": 2024
+        },
+        "result_code": "R2_FULL_NOT_FIRED",
+        "rule_id": "R2"
+      },
+      {
+        "decision_effect_code": "R3_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "hhi": "NOT_CALCULABLE",
+          "hhi_threshold": 0.25,
+          "largest_supplier_share": "NOT_CALCULABLE",
+          "largest_supplier_threshold": 0.5,
+          "quantity": {
+            "basis": "quantity",
+            "eligible_partner_count": "NOT_CALCULABLE",
+            "flow_basis": "gross",
+            "hhi": "NOT_CALCULABLE",
+            "largest_supplier_share": "NOT_CALCULABLE",
+            "reason": "No partner rows or source-attributed quantity concentration disclosure are available.",
+            "source": "none",
+            "status": "NOT_CALCULABLE",
+            "top_two_share": "NOT_CALCULABLE",
+            "valid_coverage": "NOT_CALCULABLE",
+            "year": 2024
+          },
+          "top_two_share": "NOT_CALCULABLE",
+          "value": {
+            "basis": "value",
+            "eligible_partner_count": "NOT_CALCULABLE",
+            "flow_basis": "gross",
+            "hhi": "NOT_CALCULABLE",
+            "largest_supplier_share": "NOT_CALCULABLE",
+            "reason": "No partner rows or source-attributed value concentration disclosure are available.",
+            "source": "none",
+            "status": "NOT_CALCULABLE",
+            "top_two_share": "NOT_CALCULABLE",
+            "valid_coverage": "NOT_CALCULABLE",
+            "year": 2024
+          }
+        },
+        "result_code": "R3_DISABLED_NA",
+        "rule_id": "R3"
+      },
+      {
+        "decision_effect_code": "R4_D_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "bulk_band_usd_t": "NOT_CALCULABLE",
+          "calculation_basis": "none",
+          "iqr_usd_t": "NOT_CALCULABLE",
+          "minimum_valid_value_coverage": 0.7,
+          "outlier_candidate": "NOT_CALCULABLE",
+          "reason": "No comparable partner rows or source-attributed dispersion disclosure are available.",
+          "status": "NOT_CALCULABLE",
+          "valid_quantity_coverage": "NOT_CALCULABLE",
+          "valid_value_coverage": "NOT_CALCULABLE",
+          "weighted_median_usd_t": "NOT_CALCULABLE",
+          "weighted_q1_usd_t": "NOT_CALCULABLE",
+          "weighted_q3_usd_t": "NOT_CALCULABLE"
+        },
+        "result_code": "R4_D_DISABLED_NA",
+        "rule_id": "R4-D"
+      },
+      {
+        "decision_effect_code": "R5_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "apparent_consumption_kt": "NOT_CALCULABLE",
+          "calculation_basis": "NOT_CALCULABLE",
+          "net_import_exposure_kt": "NOT_CALCULABLE",
+          "reason": "Domestic production quantity and retained-import flow are absent from the frozen public snapshot; gross imports cannot establish apparent consumption.",
+          "retained_import_share_of_apparent_consumption": "NOT_CALCULABLE",
+          "retained_imports_kt": "NOT_CALCULABLE",
+          "threshold": 0.2,
+          "unavailable_inputs": [
+            "domestic_origin_exports_kt",
+            "domestic_production_kt",
+            "reexports_kt",
+            "retained_imports_kt"
+          ],
+          "unavailable_reasons": {
+            "apparent_consumption_kt": [
+              "domestic_origin_exports_kt",
+              "domestic_production_kt",
+              "retained_imports_kt"
+            ],
+            "net_import_exposure_kt": [
+              "domestic_origin_exports_kt",
+              "retained_imports_kt"
+            ],
+            "retained_import_share_of_apparent_consumption": [
+              "apparent_consumption_kt",
+              "retained_imports_kt"
+            ],
+            "retained_imports_kt": [
+              "reexports_kt",
+              "retained_imports_kt"
+            ]
+          }
+        },
+        "result_code": "R5_DISABLED_NA",
+        "rule_id": "R5"
+      },
+      {
+        "decision_effect_code": "R9_S_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "known_hard_gate_failure": false,
+          "qualifying_signal_count": 0,
+          "same_process_family": "NOT_CALCULABLE"
+        },
+        "result_code": "R9_S_DISABLED_NA",
+        "rule_id": "R9-S"
+      },
+      {
+        "decision_effect_code": "R10_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "criticality_evidence_id": null,
+          "criticality_status": "NOT_CALCULABLE"
+        },
+        "result_code": "R10_DISABLED_NA",
+        "rule_id": "R10"
+      },
+      {
+        "decision_effect_code": "R11_EFFECT",
+        "execution": "DEGRADED",
+        "fired": false,
+        "metrics": {
+          "computed_export_import_value_ratio": 19.6711,
+          "disclosed_export_import_value_ratio": null,
+          "disclosed_ratio_consistent": null,
+          "established_nameplate": {
+            "established": false,
+            "evidence_ids": [],
+            "producers": [],
+            "reason": "Verified domestic capability is not established.",
+            "total_observed_nameplate_tpy": "NOT_CALCULABLE"
+          },
+          "export_import_value_ratio": 19.6711,
+          "export_import_value_ratio_threshold": 50.0,
+          "ratio_basis": "gross_trade_value",
+          "ratio_reason": null,
+          "ratio_status": "CALCULABLE"
+        },
+        "result_code": "R11_DEGRADED_NOT_FIRED",
+        "rule_id": "R11"
+      }
+    ],
+    "material_trigger_rule_ids": [
+      "R1-D"
+    ],
+    "metrics": {
+      "delta_ln_value": -0.4245,
+      "export_import_value_ratio": 19.6711,
+      "fired_signal_count": 2,
+      "hhi_value": "NOT_CALCULABLE",
+      "imports_usd_m_latest": 11.255986119000001,
+      "largest_supplier_share_value": "NOT_CALCULABLE",
+      "qualifying_signal_count": 0,
+      "quantity_cagr": -0.0546
+    },
+    "screening_disposition": "CANDIDATE",
+    "warnings": {
+      "classification_continuity": {
+        "pattern": "ABSENT_BEFORE_REVISION_CHANGE",
+        "status": "REVISION_CHANGE_IN_WINDOW"
+      },
+      "export_import_ratio_warning": false,
+      "export_import_value_ratio": 19.671140161078227,
+      "price_led_growth": false
+    }
+  },
+  {
+    "advance_supporting_signal_rule_ids": [
+      "R2"
+    ],
+    "disposition_reason_code": "MATERIAL_TRIGGER_FIRED",
+    "evidence_needs": [
+      {
+        "code": "identity/tariff-line",
+        "evidence_ids": []
+      },
+      {
+        "code": "target specification/application",
+        "evidence_ids": []
+      },
+      {
+        "code": "line-level production or producer-grade matrix",
+        "evidence_ids": []
+      }
+    ],
+    "exclusions": [
+      {
+        "code": "EX-01_HETEROGENEOUS_RESIDUAL",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-02_MARKET_BELOW_MES",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-03_UNSATISFIABLE_HARD_GATE",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-04_IDLE_EQUIVALENT_CAPACITY",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-05_TRANSITORY_OR_MEASUREMENT",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-06_REDUNDANCY_OR_CROWD_OUT",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      }
+    ],
+    "fired_signal_rule_ids": [
+      "R1-D",
+      "R2"
+    ],
+    "hs6": "190219",
+    "indicated_state": "INVESTIGATE",
+    "indication_reason_code": "ROUTE_CHANGING_EVIDENCE_UNRESOLVED",
+    "ledger": [
+      {
+        "decision_effect_code": "R0_EFFECT",
+        "execution": "DEGRADED",
+        "fired": true,
+        "metrics": {
+          "evidence_need_code": "identity/tariff-line",
+          "mapping_status": "NOT_CALCULABLE"
+        },
+        "result_code": "R0_DEGRADED_FIRED",
+        "rule_id": "R0"
+      },
+      {
+        "decision_effect_code": "R1_F_EFFECT",
+        "execution": "FULL",
+        "fired": false,
+        "metrics": {
+          "missing_years": []
+        },
+        "result_code": "R1_F_FULL_NOT_FIRED",
+        "rule_id": "R1-F"
+      },
+      {
+        "decision_effect_code": "R1_D_EFFECT",
+        "execution": "DEGRADED",
+        "fired": true,
+        "metrics": {
+          "confidence_cap": "C",
+          "positive_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ]
+        },
+        "result_code": "R1_D_DEGRADED_FIRED",
+        "rule_id": "R1-D"
+      },
+      {
+        "decision_effect_code": "R2_EFFECT",
+        "execution": "FULL",
+        "fired": true,
+        "metrics": {
+          "delta_ln_quantity": 0.7718,
+          "delta_ln_unit_value": -0.4312,
+          "delta_ln_value": 0.3406,
+          "from_year": 2023,
+          "observed_span_years": 1,
+          "quantity_cagr": 1.1637,
+          "quantity_contribution_share": 0.6416,
+          "to_year": 2024
+        },
+        "result_code": "R2_FULL_FIRED",
+        "rule_id": "R2"
+      },
+      {
+        "decision_effect_code": "R3_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "hhi": "NOT_CALCULABLE",
+          "hhi_threshold": 0.25,
+          "largest_supplier_share": "NOT_CALCULABLE",
+          "largest_supplier_threshold": 0.5,
+          "quantity": {
+            "basis": "quantity",
+            "eligible_partner_count": "NOT_CALCULABLE",
+            "flow_basis": "gross",
+            "hhi": "NOT_CALCULABLE",
+            "largest_supplier_share": "NOT_CALCULABLE",
+            "reason": "No partner rows or source-attributed quantity concentration disclosure are available.",
+            "source": "none",
+            "status": "NOT_CALCULABLE",
+            "top_two_share": "NOT_CALCULABLE",
+            "valid_coverage": "NOT_CALCULABLE",
+            "year": 2024
+          },
+          "top_two_share": "NOT_CALCULABLE",
+          "value": {
+            "basis": "value",
+            "eligible_partner_count": "NOT_CALCULABLE",
+            "flow_basis": "gross",
+            "hhi": "NOT_CALCULABLE",
+            "largest_supplier_share": "NOT_CALCULABLE",
+            "reason": "No partner rows or source-attributed value concentration disclosure are available.",
+            "source": "none",
+            "status": "NOT_CALCULABLE",
+            "top_two_share": "NOT_CALCULABLE",
+            "valid_coverage": "NOT_CALCULABLE",
+            "year": 2024
+          }
+        },
+        "result_code": "R3_DISABLED_NA",
+        "rule_id": "R3"
+      },
+      {
+        "decision_effect_code": "R4_D_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "bulk_band_usd_t": "NOT_CALCULABLE",
+          "calculation_basis": "none",
+          "iqr_usd_t": "NOT_CALCULABLE",
+          "minimum_valid_value_coverage": 0.7,
+          "outlier_candidate": "NOT_CALCULABLE",
+          "reason": "No comparable partner rows or source-attributed dispersion disclosure are available.",
+          "status": "NOT_CALCULABLE",
+          "valid_quantity_coverage": "NOT_CALCULABLE",
+          "valid_value_coverage": "NOT_CALCULABLE",
+          "weighted_median_usd_t": "NOT_CALCULABLE",
+          "weighted_q1_usd_t": "NOT_CALCULABLE",
+          "weighted_q3_usd_t": "NOT_CALCULABLE"
+        },
+        "result_code": "R4_D_DISABLED_NA",
+        "rule_id": "R4-D"
+      },
+      {
+        "decision_effect_code": "R5_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "apparent_consumption_kt": "NOT_CALCULABLE",
+          "calculation_basis": "NOT_CALCULABLE",
+          "net_import_exposure_kt": "NOT_CALCULABLE",
+          "reason": "Domestic production quantity and retained-import flow are absent from the frozen public snapshot; gross imports cannot establish apparent consumption.",
+          "retained_import_share_of_apparent_consumption": "NOT_CALCULABLE",
+          "retained_imports_kt": "NOT_CALCULABLE",
+          "threshold": 0.2,
+          "unavailable_inputs": [
+            "domestic_origin_exports_kt",
+            "domestic_production_kt",
+            "reexports_kt",
+            "retained_imports_kt"
+          ],
+          "unavailable_reasons": {
+            "apparent_consumption_kt": [
+              "domestic_origin_exports_kt",
+              "domestic_production_kt",
+              "retained_imports_kt"
+            ],
+            "net_import_exposure_kt": [
+              "domestic_origin_exports_kt",
+              "retained_imports_kt"
+            ],
+            "retained_import_share_of_apparent_consumption": [
+              "apparent_consumption_kt",
+              "retained_imports_kt"
+            ],
+            "retained_imports_kt": [
+              "reexports_kt",
+              "retained_imports_kt"
+            ]
+          }
+        },
+        "result_code": "R5_DISABLED_NA",
+        "rule_id": "R5"
+      },
+      {
+        "decision_effect_code": "R9_S_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "known_hard_gate_failure": false,
+          "qualifying_signal_count": 0,
+          "same_process_family": "NOT_CALCULABLE"
+        },
+        "result_code": "R9_S_DISABLED_NA",
+        "rule_id": "R9-S"
+      },
+      {
+        "decision_effect_code": "R10_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "criticality_evidence_id": null,
+          "criticality_status": "NOT_CALCULABLE"
+        },
+        "result_code": "R10_DISABLED_NA",
+        "rule_id": "R10"
+      },
+      {
+        "decision_effect_code": "R11_EFFECT",
+        "execution": "DEGRADED",
+        "fired": false,
+        "metrics": {
+          "computed_export_import_value_ratio": 1.3686,
+          "disclosed_export_import_value_ratio": null,
+          "disclosed_ratio_consistent": null,
+          "established_nameplate": {
+            "established": false,
+            "evidence_ids": [],
+            "producers": [],
+            "reason": "Verified domestic capability is not established.",
+            "total_observed_nameplate_tpy": "NOT_CALCULABLE"
+          },
+          "export_import_value_ratio": 1.3686,
+          "export_import_value_ratio_threshold": 50.0,
+          "ratio_basis": "gross_trade_value",
+          "ratio_reason": null,
+          "ratio_status": "CALCULABLE"
+        },
+        "result_code": "R11_DEGRADED_NOT_FIRED",
+        "rule_id": "R11"
+      }
+    ],
+    "material_trigger_rule_ids": [
+      "R1-D",
+      "R2"
+    ],
+    "metrics": {
+      "delta_ln_value": 0.3406,
+      "export_import_value_ratio": 1.3686,
+      "fired_signal_count": 3,
+      "hhi_value": "NOT_CALCULABLE",
+      "imports_usd_m_latest": 111.711117741,
+      "largest_supplier_share_value": "NOT_CALCULABLE",
+      "qualifying_signal_count": 0,
+      "quantity_cagr": 1.1637
+    },
+    "screening_disposition": "CANDIDATE",
+    "warnings": {
+      "classification_continuity": {
+        "pattern": "ABSENT_BEFORE_REVISION_CHANGE",
+        "status": "REVISION_CHANGE_IN_WINDOW"
+      },
+      "export_import_ratio_warning": false,
+      "export_import_value_ratio": 1.368575719853248,
+      "price_led_growth": false
+    }
+  },
+  {
+    "advance_supporting_signal_rule_ids": [
+      "R2"
+    ],
+    "disposition_reason_code": "MATERIAL_TRIGGER_FIRED",
+    "evidence_needs": [
+      {
+        "code": "identity/tariff-line",
+        "evidence_ids": []
+      },
+      {
+        "code": "target specification/application",
+        "evidence_ids": []
+      },
+      {
+        "code": "line-level production or producer-grade matrix",
+        "evidence_ids": []
+      }
+    ],
+    "exclusions": [
+      {
+        "code": "EX-01_HETEROGENEOUS_RESIDUAL",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-02_MARKET_BELOW_MES",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-03_UNSATISFIABLE_HARD_GATE",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-04_IDLE_EQUIVALENT_CAPACITY",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-05_TRANSITORY_OR_MEASUREMENT",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-06_REDUNDANCY_OR_CROWD_OUT",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      }
+    ],
+    "fired_signal_rule_ids": [
+      "R1-D",
+      "R2"
+    ],
+    "hs6": "190220",
+    "indicated_state": "INVESTIGATE",
+    "indication_reason_code": "ROUTE_CHANGING_EVIDENCE_UNRESOLVED",
+    "ledger": [
+      {
+        "decision_effect_code": "R0_EFFECT",
+        "execution": "DEGRADED",
+        "fired": true,
+        "metrics": {
+          "evidence_need_code": "identity/tariff-line",
+          "mapping_status": "NOT_CALCULABLE"
+        },
+        "result_code": "R0_DEGRADED_FIRED",
+        "rule_id": "R0"
+      },
+      {
+        "decision_effect_code": "R1_F_EFFECT",
+        "execution": "FULL",
+        "fired": false,
+        "metrics": {
+          "missing_years": []
+        },
+        "result_code": "R1_F_FULL_NOT_FIRED",
+        "rule_id": "R1-F"
+      },
+      {
+        "decision_effect_code": "R1_D_EFFECT",
+        "execution": "DEGRADED",
+        "fired": true,
+        "metrics": {
+          "confidence_cap": "C",
+          "positive_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ]
+        },
+        "result_code": "R1_D_DEGRADED_FIRED",
+        "rule_id": "R1-D"
+      },
+      {
+        "decision_effect_code": "R2_EFFECT",
+        "execution": "FULL",
+        "fired": true,
+        "metrics": {
+          "delta_ln_quantity": 0.3564,
+          "delta_ln_unit_value": -0.14,
+          "delta_ln_value": 0.2164,
+          "from_year": 2023,
+          "observed_span_years": 1,
+          "quantity_cagr": 0.4282,
+          "quantity_contribution_share": 0.7179,
+          "to_year": 2024
+        },
+        "result_code": "R2_FULL_FIRED",
+        "rule_id": "R2"
+      },
+      {
+        "decision_effect_code": "R3_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "hhi": "NOT_CALCULABLE",
+          "hhi_threshold": 0.25,
+          "largest_supplier_share": "NOT_CALCULABLE",
+          "largest_supplier_threshold": 0.5,
+          "quantity": {
+            "basis": "quantity",
+            "eligible_partner_count": "NOT_CALCULABLE",
+            "flow_basis": "gross",
+            "hhi": "NOT_CALCULABLE",
+            "largest_supplier_share": "NOT_CALCULABLE",
+            "reason": "No partner rows or source-attributed quantity concentration disclosure are available.",
+            "source": "none",
+            "status": "NOT_CALCULABLE",
+            "top_two_share": "NOT_CALCULABLE",
+            "valid_coverage": "NOT_CALCULABLE",
+            "year": 2024
+          },
+          "top_two_share": "NOT_CALCULABLE",
+          "value": {
+            "basis": "value",
+            "eligible_partner_count": "NOT_CALCULABLE",
+            "flow_basis": "gross",
+            "hhi": "NOT_CALCULABLE",
+            "largest_supplier_share": "NOT_CALCULABLE",
+            "reason": "No partner rows or source-attributed value concentration disclosure are available.",
+            "source": "none",
+            "status": "NOT_CALCULABLE",
+            "top_two_share": "NOT_CALCULABLE",
+            "valid_coverage": "NOT_CALCULABLE",
+            "year": 2024
+          }
+        },
+        "result_code": "R3_DISABLED_NA",
+        "rule_id": "R3"
+      },
+      {
+        "decision_effect_code": "R4_D_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "bulk_band_usd_t": "NOT_CALCULABLE",
+          "calculation_basis": "none",
+          "iqr_usd_t": "NOT_CALCULABLE",
+          "minimum_valid_value_coverage": 0.7,
+          "outlier_candidate": "NOT_CALCULABLE",
+          "reason": "No comparable partner rows or source-attributed dispersion disclosure are available.",
+          "status": "NOT_CALCULABLE",
+          "valid_quantity_coverage": "NOT_CALCULABLE",
+          "valid_value_coverage": "NOT_CALCULABLE",
+          "weighted_median_usd_t": "NOT_CALCULABLE",
+          "weighted_q1_usd_t": "NOT_CALCULABLE",
+          "weighted_q3_usd_t": "NOT_CALCULABLE"
+        },
+        "result_code": "R4_D_DISABLED_NA",
+        "rule_id": "R4-D"
+      },
+      {
+        "decision_effect_code": "R5_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "apparent_consumption_kt": "NOT_CALCULABLE",
+          "calculation_basis": "NOT_CALCULABLE",
+          "net_import_exposure_kt": "NOT_CALCULABLE",
+          "reason": "Domestic production quantity and retained-import flow are absent from the frozen public snapshot; gross imports cannot establish apparent consumption.",
+          "retained_import_share_of_apparent_consumption": "NOT_CALCULABLE",
+          "retained_imports_kt": "NOT_CALCULABLE",
+          "threshold": 0.2,
+          "unavailable_inputs": [
+            "domestic_origin_exports_kt",
+            "domestic_production_kt",
+            "reexports_kt",
+            "retained_imports_kt"
+          ],
+          "unavailable_reasons": {
+            "apparent_consumption_kt": [
+              "domestic_origin_exports_kt",
+              "domestic_production_kt",
+              "retained_imports_kt"
+            ],
+            "net_import_exposure_kt": [
+              "domestic_origin_exports_kt",
+              "retained_imports_kt"
+            ],
+            "retained_import_share_of_apparent_consumption": [
+              "apparent_consumption_kt",
+              "retained_imports_kt"
+            ],
+            "retained_imports_kt": [
+              "reexports_kt",
+              "retained_imports_kt"
+            ]
+          }
+        },
+        "result_code": "R5_DISABLED_NA",
+        "rule_id": "R5"
+      },
+      {
+        "decision_effect_code": "R9_S_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "known_hard_gate_failure": false,
+          "qualifying_signal_count": 0,
+          "same_process_family": "NOT_CALCULABLE"
+        },
+        "result_code": "R9_S_DISABLED_NA",
+        "rule_id": "R9-S"
+      },
+      {
+        "decision_effect_code": "R10_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "criticality_evidence_id": null,
+          "criticality_status": "NOT_CALCULABLE"
+        },
+        "result_code": "R10_DISABLED_NA",
+        "rule_id": "R10"
+      },
+      {
+        "decision_effect_code": "R11_EFFECT",
+        "execution": "DEGRADED",
+        "fired": false,
+        "metrics": {
+          "computed_export_import_value_ratio": 0.6518,
+          "disclosed_export_import_value_ratio": null,
+          "disclosed_ratio_consistent": null,
+          "established_nameplate": {
+            "established": false,
+            "evidence_ids": [],
+            "producers": [],
+            "reason": "Verified domestic capability is not established.",
+            "total_observed_nameplate_tpy": "NOT_CALCULABLE"
+          },
+          "export_import_value_ratio": 0.6518,
+          "export_import_value_ratio_threshold": 50.0,
+          "ratio_basis": "gross_trade_value",
+          "ratio_reason": null,
+          "ratio_status": "CALCULABLE"
+        },
+        "result_code": "R11_DEGRADED_NOT_FIRED",
+        "rule_id": "R11"
+      }
+    ],
+    "material_trigger_rule_ids": [
+      "R1-D",
+      "R2"
+    ],
+    "metrics": {
+      "delta_ln_value": 0.2164,
+      "export_import_value_ratio": 0.6518,
+      "fired_signal_count": 3,
+      "hhi_value": "NOT_CALCULABLE",
+      "imports_usd_m_latest": 2.895713528,
+      "largest_supplier_share_value": "NOT_CALCULABLE",
+      "qualifying_signal_count": 0,
+      "quantity_cagr": 0.4282
+    },
+    "screening_disposition": "CANDIDATE",
+    "warnings": {
+      "classification_continuity": {
+        "pattern": "ABSENT_BEFORE_REVISION_CHANGE",
+        "status": "REVISION_CHANGE_IN_WINDOW"
+      },
+      "export_import_ratio_warning": false,
+      "export_import_value_ratio": 0.6517512871183437,
+      "price_led_growth": false
+    }
+  },
+  {
+    "advance_supporting_signal_rule_ids": [
+      "R2"
+    ],
+    "disposition_reason_code": "MATERIAL_TRIGGER_FIRED",
+    "evidence_needs": [
+      {
+        "code": "identity/tariff-line",
+        "evidence_ids": []
+      },
+      {
+        "code": "target specification/application",
+        "evidence_ids": []
+      },
+      {
+        "code": "line-level production or producer-grade matrix",
+        "evidence_ids": []
+      }
+    ],
+    "exclusions": [
+      {
+        "code": "EX-01_HETEROGENEOUS_RESIDUAL",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-02_MARKET_BELOW_MES",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-03_UNSATISFIABLE_HARD_GATE",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-04_IDLE_EQUIVALENT_CAPACITY",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-05_TRANSITORY_OR_MEASUREMENT",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-06_REDUNDANCY_OR_CROWD_OUT",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      }
+    ],
+    "fired_signal_rule_ids": [
+      "R1-D",
+      "R2"
+    ],
+    "hs6": "190230",
+    "indicated_state": "INVESTIGATE",
+    "indication_reason_code": "ROUTE_CHANGING_EVIDENCE_UNRESOLVED",
+    "ledger": [
+      {
+        "decision_effect_code": "R0_EFFECT",
+        "execution": "DEGRADED",
+        "fired": true,
+        "metrics": {
+          "evidence_need_code": "identity/tariff-line",
+          "mapping_status": "NOT_CALCULABLE"
+        },
+        "result_code": "R0_DEGRADED_FIRED",
+        "rule_id": "R0"
+      },
+      {
+        "decision_effect_code": "R1_F_EFFECT",
+        "execution": "FULL",
+        "fired": false,
+        "metrics": {
+          "missing_years": []
+        },
+        "result_code": "R1_F_FULL_NOT_FIRED",
+        "rule_id": "R1-F"
+      },
+      {
+        "decision_effect_code": "R1_D_EFFECT",
+        "execution": "DEGRADED",
+        "fired": true,
+        "metrics": {
+          "confidence_cap": "C",
+          "positive_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ]
+        },
+        "result_code": "R1_D_DEGRADED_FIRED",
+        "rule_id": "R1-D"
+      },
+      {
+        "decision_effect_code": "R2_EFFECT",
+        "execution": "FULL",
+        "fired": true,
+        "metrics": {
+          "delta_ln_quantity": 0.1851,
+          "delta_ln_unit_value": 0.0576,
+          "delta_ln_value": 0.2427,
+          "from_year": 2023,
+          "observed_span_years": 1,
+          "quantity_cagr": 0.2033,
+          "quantity_contribution_share": 0.7626,
+          "to_year": 2024
+        },
+        "result_code": "R2_FULL_FIRED",
+        "rule_id": "R2"
+      },
+      {
+        "decision_effect_code": "R3_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "hhi": "NOT_CALCULABLE",
+          "hhi_threshold": 0.25,
+          "largest_supplier_share": "NOT_CALCULABLE",
+          "largest_supplier_threshold": 0.5,
+          "quantity": {
+            "basis": "quantity",
+            "eligible_partner_count": "NOT_CALCULABLE",
+            "flow_basis": "gross",
+            "hhi": "NOT_CALCULABLE",
+            "largest_supplier_share": "NOT_CALCULABLE",
+            "reason": "No partner rows or source-attributed quantity concentration disclosure are available.",
+            "source": "none",
+            "status": "NOT_CALCULABLE",
+            "top_two_share": "NOT_CALCULABLE",
+            "valid_coverage": "NOT_CALCULABLE",
+            "year": 2024
+          },
+          "top_two_share": "NOT_CALCULABLE",
+          "value": {
+            "basis": "value",
+            "eligible_partner_count": "NOT_CALCULABLE",
+            "flow_basis": "gross",
+            "hhi": "NOT_CALCULABLE",
+            "largest_supplier_share": "NOT_CALCULABLE",
+            "reason": "No partner rows or source-attributed value concentration disclosure are available.",
+            "source": "none",
+            "status": "NOT_CALCULABLE",
+            "top_two_share": "NOT_CALCULABLE",
+            "valid_coverage": "NOT_CALCULABLE",
+            "year": 2024
+          }
+        },
+        "result_code": "R3_DISABLED_NA",
+        "rule_id": "R3"
+      },
+      {
+        "decision_effect_code": "R4_D_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "bulk_band_usd_t": "NOT_CALCULABLE",
+          "calculation_basis": "none",
+          "iqr_usd_t": "NOT_CALCULABLE",
+          "minimum_valid_value_coverage": 0.7,
+          "outlier_candidate": "NOT_CALCULABLE",
+          "reason": "No comparable partner rows or source-attributed dispersion disclosure are available.",
+          "status": "NOT_CALCULABLE",
+          "valid_quantity_coverage": "NOT_CALCULABLE",
+          "valid_value_coverage": "NOT_CALCULABLE",
+          "weighted_median_usd_t": "NOT_CALCULABLE",
+          "weighted_q1_usd_t": "NOT_CALCULABLE",
+          "weighted_q3_usd_t": "NOT_CALCULABLE"
+        },
+        "result_code": "R4_D_DISABLED_NA",
+        "rule_id": "R4-D"
+      },
+      {
+        "decision_effect_code": "R5_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "apparent_consumption_kt": "NOT_CALCULABLE",
+          "calculation_basis": "NOT_CALCULABLE",
+          "net_import_exposure_kt": "NOT_CALCULABLE",
+          "reason": "Domestic production quantity and retained-import flow are absent from the frozen public snapshot; gross imports cannot establish apparent consumption.",
+          "retained_import_share_of_apparent_consumption": "NOT_CALCULABLE",
+          "retained_imports_kt": "NOT_CALCULABLE",
+          "threshold": 0.2,
+          "unavailable_inputs": [
+            "domestic_origin_exports_kt",
+            "domestic_production_kt",
+            "reexports_kt",
+            "retained_imports_kt"
+          ],
+          "unavailable_reasons": {
+            "apparent_consumption_kt": [
+              "domestic_origin_exports_kt",
+              "domestic_production_kt",
+              "retained_imports_kt"
+            ],
+            "net_import_exposure_kt": [
+              "domestic_origin_exports_kt",
+              "retained_imports_kt"
+            ],
+            "retained_import_share_of_apparent_consumption": [
+              "apparent_consumption_kt",
+              "retained_imports_kt"
+            ],
+            "retained_imports_kt": [
+              "reexports_kt",
+              "retained_imports_kt"
+            ]
+          }
+        },
+        "result_code": "R5_DISABLED_NA",
+        "rule_id": "R5"
+      },
+      {
+        "decision_effect_code": "R9_S_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "known_hard_gate_failure": false,
+          "qualifying_signal_count": 0,
+          "same_process_family": "NOT_CALCULABLE"
+        },
+        "result_code": "R9_S_DISABLED_NA",
+        "rule_id": "R9-S"
+      },
+      {
+        "decision_effect_code": "R10_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "criticality_evidence_id": null,
+          "criticality_status": "NOT_CALCULABLE"
+        },
+        "result_code": "R10_DISABLED_NA",
+        "rule_id": "R10"
+      },
+      {
+        "decision_effect_code": "R11_EFFECT",
+        "execution": "DEGRADED",
+        "fired": false,
+        "metrics": {
+          "computed_export_import_value_ratio": 0.2302,
+          "disclosed_export_import_value_ratio": null,
+          "disclosed_ratio_consistent": null,
+          "established_nameplate": {
+            "established": false,
+            "evidence_ids": [],
+            "producers": [],
+            "reason": "Verified domestic capability is not established.",
+            "total_observed_nameplate_tpy": "NOT_CALCULABLE"
+          },
+          "export_import_value_ratio": 0.2302,
+          "export_import_value_ratio_threshold": 50.0,
+          "ratio_basis": "gross_trade_value",
+          "ratio_reason": null,
+          "ratio_status": "CALCULABLE"
+        },
+        "result_code": "R11_DEGRADED_NOT_FIRED",
+        "rule_id": "R11"
+      }
+    ],
+    "material_trigger_rule_ids": [
+      "R1-D",
+      "R2"
+    ],
+    "metrics": {
+      "delta_ln_value": 0.2427,
+      "export_import_value_ratio": 0.2302,
+      "fired_signal_count": 3,
+      "hhi_value": "NOT_CALCULABLE",
+      "imports_usd_m_latest": 31.509669079,
+      "largest_supplier_share_value": "NOT_CALCULABLE",
+      "qualifying_signal_count": 0,
+      "quantity_cagr": 0.2033
+    },
+    "screening_disposition": "CANDIDATE",
+    "warnings": {
+      "classification_continuity": {
+        "pattern": "ABSENT_BEFORE_REVISION_CHANGE",
+        "status": "REVISION_CHANGE_IN_WINDOW"
+      },
+      "export_import_ratio_warning": false,
+      "export_import_value_ratio": 0.23020513271065446,
+      "price_led_growth": false
+    }
+  },
+  {
+    "advance_supporting_signal_rule_ids": [
+      "R2"
+    ],
+    "disposition_reason_code": "MATERIAL_TRIGGER_FIRED",
+    "evidence_needs": [
+      {
+        "code": "identity/tariff-line",
+        "evidence_ids": []
+      },
+      {
+        "code": "target specification/application",
+        "evidence_ids": []
+      },
+      {
+        "code": "line-level production or producer-grade matrix",
+        "evidence_ids": []
+      }
+    ],
+    "exclusions": [
+      {
+        "code": "EX-01_HETEROGENEOUS_RESIDUAL",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-02_MARKET_BELOW_MES",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-03_UNSATISFIABLE_HARD_GATE",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-04_IDLE_EQUIVALENT_CAPACITY",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-05_TRANSITORY_OR_MEASUREMENT",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-06_REDUNDANCY_OR_CROWD_OUT",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      }
+    ],
+    "fired_signal_rule_ids": [
+      "R1-D",
+      "R2"
+    ],
+    "hs6": "190240",
+    "indicated_state": "INVESTIGATE",
+    "indication_reason_code": "ROUTE_CHANGING_EVIDENCE_UNRESOLVED",
+    "ledger": [
+      {
+        "decision_effect_code": "R0_EFFECT",
+        "execution": "DEGRADED",
+        "fired": true,
+        "metrics": {
+          "evidence_need_code": "identity/tariff-line",
+          "mapping_status": "NOT_CALCULABLE"
+        },
+        "result_code": "R0_DEGRADED_FIRED",
+        "rule_id": "R0"
+      },
+      {
+        "decision_effect_code": "R1_F_EFFECT",
+        "execution": "FULL",
+        "fired": false,
+        "metrics": {
+          "missing_years": []
+        },
+        "result_code": "R1_F_FULL_NOT_FIRED",
+        "rule_id": "R1-F"
+      },
+      {
+        "decision_effect_code": "R1_D_EFFECT",
+        "execution": "DEGRADED",
+        "fired": true,
+        "metrics": {
+          "confidence_cap": "C",
+          "positive_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ]
+        },
+        "result_code": "R1_D_DEGRADED_FIRED",
+        "rule_id": "R1-D"
+      },
+      {
+        "decision_effect_code": "R2_EFFECT",
+        "execution": "FULL",
+        "fired": true,
+        "metrics": {
+          "delta_ln_quantity": 0.6253,
+          "delta_ln_unit_value": -0.2731,
+          "delta_ln_value": 0.3522,
+          "from_year": 2023,
+          "observed_span_years": 1,
+          "quantity_cagr": 0.8689,
+          "quantity_contribution_share": 0.696,
+          "to_year": 2024
+        },
+        "result_code": "R2_FULL_FIRED",
+        "rule_id": "R2"
+      },
+      {
+        "decision_effect_code": "R3_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "hhi": "NOT_CALCULABLE",
+          "hhi_threshold": 0.25,
+          "largest_supplier_share": "NOT_CALCULABLE",
+          "largest_supplier_threshold": 0.5,
+          "quantity": {
+            "basis": "quantity",
+            "eligible_partner_count": "NOT_CALCULABLE",
+            "flow_basis": "gross",
+            "hhi": "NOT_CALCULABLE",
+            "largest_supplier_share": "NOT_CALCULABLE",
+            "reason": "No partner rows or source-attributed quantity concentration disclosure are available.",
+            "source": "none",
+            "status": "NOT_CALCULABLE",
+            "top_two_share": "NOT_CALCULABLE",
+            "valid_coverage": "NOT_CALCULABLE",
+            "year": 2024
+          },
+          "top_two_share": "NOT_CALCULABLE",
+          "value": {
+            "basis": "value",
+            "eligible_partner_count": "NOT_CALCULABLE",
+            "flow_basis": "gross",
+            "hhi": "NOT_CALCULABLE",
+            "largest_supplier_share": "NOT_CALCULABLE",
+            "reason": "No partner rows or source-attributed value concentration disclosure are available.",
+            "source": "none",
+            "status": "NOT_CALCULABLE",
+            "top_two_share": "NOT_CALCULABLE",
+            "valid_coverage": "NOT_CALCULABLE",
+            "year": 2024
+          }
+        },
+        "result_code": "R3_DISABLED_NA",
+        "rule_id": "R3"
+      },
+      {
+        "decision_effect_code": "R4_D_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "bulk_band_usd_t": "NOT_CALCULABLE",
+          "calculation_basis": "none",
+          "iqr_usd_t": "NOT_CALCULABLE",
+          "minimum_valid_value_coverage": 0.7,
+          "outlier_candidate": "NOT_CALCULABLE",
+          "reason": "No comparable partner rows or source-attributed dispersion disclosure are available.",
+          "status": "NOT_CALCULABLE",
+          "valid_quantity_coverage": "NOT_CALCULABLE",
+          "valid_value_coverage": "NOT_CALCULABLE",
+          "weighted_median_usd_t": "NOT_CALCULABLE",
+          "weighted_q1_usd_t": "NOT_CALCULABLE",
+          "weighted_q3_usd_t": "NOT_CALCULABLE"
+        },
+        "result_code": "R4_D_DISABLED_NA",
+        "rule_id": "R4-D"
+      },
+      {
+        "decision_effect_code": "R5_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "apparent_consumption_kt": "NOT_CALCULABLE",
+          "calculation_basis": "NOT_CALCULABLE",
+          "net_import_exposure_kt": "NOT_CALCULABLE",
+          "reason": "Domestic production quantity and retained-import flow are absent from the frozen public snapshot; gross imports cannot establish apparent consumption.",
+          "retained_import_share_of_apparent_consumption": "NOT_CALCULABLE",
+          "retained_imports_kt": "NOT_CALCULABLE",
+          "threshold": 0.2,
+          "unavailable_inputs": [
+            "domestic_origin_exports_kt",
+            "domestic_production_kt",
+            "reexports_kt",
+            "retained_imports_kt"
+          ],
+          "unavailable_reasons": {
+            "apparent_consumption_kt": [
+              "domestic_origin_exports_kt",
+              "domestic_production_kt",
+              "retained_imports_kt"
+            ],
+            "net_import_exposure_kt": [
+              "domestic_origin_exports_kt",
+              "retained_imports_kt"
+            ],
+            "retained_import_share_of_apparent_consumption": [
+              "apparent_consumption_kt",
+              "retained_imports_kt"
+            ],
+            "retained_imports_kt": [
+              "reexports_kt",
+              "retained_imports_kt"
+            ]
+          }
+        },
+        "result_code": "R5_DISABLED_NA",
+        "rule_id": "R5"
+      },
+      {
+        "decision_effect_code": "R9_S_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "known_hard_gate_failure": false,
+          "qualifying_signal_count": 0,
+          "same_process_family": "NOT_CALCULABLE"
+        },
+        "result_code": "R9_S_DISABLED_NA",
+        "rule_id": "R9-S"
+      },
+      {
+        "decision_effect_code": "R10_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "criticality_evidence_id": null,
+          "criticality_status": "NOT_CALCULABLE"
+        },
+        "result_code": "R10_DISABLED_NA",
+        "rule_id": "R10"
+      },
+      {
+        "decision_effect_code": "R11_EFFECT",
+        "execution": "DEGRADED",
+        "fired": false,
+        "metrics": {
+          "computed_export_import_value_ratio": 0.0003,
+          "disclosed_export_import_value_ratio": null,
+          "disclosed_ratio_consistent": null,
+          "established_nameplate": {
+            "established": false,
+            "evidence_ids": [],
+            "producers": [],
+            "reason": "Verified domestic capability is not established.",
+            "total_observed_nameplate_tpy": "NOT_CALCULABLE"
+          },
+          "export_import_value_ratio": 0.0003,
+          "export_import_value_ratio_threshold": 50.0,
+          "ratio_basis": "gross_trade_value",
+          "ratio_reason": null,
+          "ratio_status": "CALCULABLE"
+        },
+        "result_code": "R11_DEGRADED_NOT_FIRED",
+        "rule_id": "R11"
+      }
+    ],
+    "material_trigger_rule_ids": [
+      "R1-D",
+      "R2"
+    ],
+    "metrics": {
+      "delta_ln_value": 0.3522,
+      "export_import_value_ratio": 0.0003,
+      "fired_signal_count": 3,
+      "hhi_value": "NOT_CALCULABLE",
+      "imports_usd_m_latest": 0.888005578,
+      "largest_supplier_share_value": "NOT_CALCULABLE",
+      "qualifying_signal_count": 0,
+      "quantity_cagr": 0.8689
+    },
+    "screening_disposition": "CANDIDATE",
+    "warnings": {
+      "classification_continuity": {
+        "pattern": "ABSENT_BEFORE_REVISION_CHANGE",
+        "status": "REVISION_CHANGE_IN_WINDOW"
+      },
+      "export_import_ratio_warning": false,
+      "export_import_value_ratio": 0.0003483457848279417,
+      "price_led_growth": false
+    }
+  },
+  {
+    "advance_supporting_signal_rule_ids": [],
+    "disposition_reason_code": "MATERIAL_TRIGGER_FIRED",
+    "evidence_needs": [
+      {
+        "code": "identity/tariff-line",
+        "evidence_ids": []
+      },
+      {
+        "code": "target specification/application",
+        "evidence_ids": []
+      },
+      {
+        "code": "line-level production or producer-grade matrix",
+        "evidence_ids": []
+      }
+    ],
+    "exclusions": [
+      {
+        "code": "EX-01_HETEROGENEOUS_RESIDUAL",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-02_MARKET_BELOW_MES",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-03_UNSATISFIABLE_HARD_GATE",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-04_IDLE_EQUIVALENT_CAPACITY",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-05_TRANSITORY_OR_MEASUREMENT",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-06_REDUNDANCY_OR_CROWD_OUT",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      }
+    ],
+    "fired_signal_rule_ids": [
+      "R1-D"
+    ],
+    "hs6": "190300",
+    "indicated_state": "INVESTIGATE",
+    "indication_reason_code": "ROUTE_CHANGING_EVIDENCE_UNRESOLVED",
+    "ledger": [
+      {
+        "decision_effect_code": "R0_EFFECT",
+        "execution": "DEGRADED",
+        "fired": true,
+        "metrics": {
+          "evidence_need_code": "identity/tariff-line",
+          "mapping_status": "NOT_CALCULABLE"
+        },
+        "result_code": "R0_DEGRADED_FIRED",
+        "rule_id": "R0"
+      },
+      {
+        "decision_effect_code": "R1_F_EFFECT",
+        "execution": "FULL",
+        "fired": false,
+        "metrics": {
+          "missing_years": []
+        },
+        "result_code": "R1_F_FULL_NOT_FIRED",
+        "rule_id": "R1-F"
+      },
+      {
+        "decision_effect_code": "R1_D_EFFECT",
+        "execution": "DEGRADED",
+        "fired": true,
+        "metrics": {
+          "confidence_cap": "C",
+          "positive_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ]
+        },
+        "result_code": "R1_D_DEGRADED_FIRED",
+        "rule_id": "R1-D"
+      },
+      {
+        "decision_effect_code": "R2_EFFECT",
+        "execution": "FULL",
+        "fired": false,
+        "metrics": {
+          "delta_ln_quantity": 0.1031,
+          "delta_ln_unit_value": -0.112,
+          "delta_ln_value": -0.0088,
+          "from_year": 2023,
+          "observed_span_years": 1,
+          "quantity_cagr": 0.1086,
+          "quantity_contribution_share": 0.4795,
+          "to_year": 2024
+        },
+        "result_code": "R2_FULL_NOT_FIRED",
+        "rule_id": "R2"
+      },
+      {
+        "decision_effect_code": "R3_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "hhi": "NOT_CALCULABLE",
+          "hhi_threshold": 0.25,
+          "largest_supplier_share": "NOT_CALCULABLE",
+          "largest_supplier_threshold": 0.5,
+          "quantity": {
+            "basis": "quantity",
+            "eligible_partner_count": "NOT_CALCULABLE",
+            "flow_basis": "gross",
+            "hhi": "NOT_CALCULABLE",
+            "largest_supplier_share": "NOT_CALCULABLE",
+            "reason": "No partner rows or source-attributed quantity concentration disclosure are available.",
+            "source": "none",
+            "status": "NOT_CALCULABLE",
+            "top_two_share": "NOT_CALCULABLE",
+            "valid_coverage": "NOT_CALCULABLE",
+            "year": 2024
+          },
+          "top_two_share": "NOT_CALCULABLE",
+          "value": {
+            "basis": "value",
+            "eligible_partner_count": "NOT_CALCULABLE",
+            "flow_basis": "gross",
+            "hhi": "NOT_CALCULABLE",
+            "largest_supplier_share": "NOT_CALCULABLE",
+            "reason": "No partner rows or source-attributed value concentration disclosure are available.",
+            "source": "none",
+            "status": "NOT_CALCULABLE",
+            "top_two_share": "NOT_CALCULABLE",
+            "valid_coverage": "NOT_CALCULABLE",
+            "year": 2024
+          }
+        },
+        "result_code": "R3_DISABLED_NA",
+        "rule_id": "R3"
+      },
+      {
+        "decision_effect_code": "R4_D_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "bulk_band_usd_t": "NOT_CALCULABLE",
+          "calculation_basis": "none",
+          "iqr_usd_t": "NOT_CALCULABLE",
+          "minimum_valid_value_coverage": 0.7,
+          "outlier_candidate": "NOT_CALCULABLE",
+          "reason": "No comparable partner rows or source-attributed dispersion disclosure are available.",
+          "status": "NOT_CALCULABLE",
+          "valid_quantity_coverage": "NOT_CALCULABLE",
+          "valid_value_coverage": "NOT_CALCULABLE",
+          "weighted_median_usd_t": "NOT_CALCULABLE",
+          "weighted_q1_usd_t": "NOT_CALCULABLE",
+          "weighted_q3_usd_t": "NOT_CALCULABLE"
+        },
+        "result_code": "R4_D_DISABLED_NA",
+        "rule_id": "R4-D"
+      },
+      {
+        "decision_effect_code": "R5_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "apparent_consumption_kt": "NOT_CALCULABLE",
+          "calculation_basis": "NOT_CALCULABLE",
+          "net_import_exposure_kt": "NOT_CALCULABLE",
+          "reason": "Domestic production quantity and retained-import flow are absent from the frozen public snapshot; gross imports cannot establish apparent consumption.",
+          "retained_import_share_of_apparent_consumption": "NOT_CALCULABLE",
+          "retained_imports_kt": "NOT_CALCULABLE",
+          "threshold": 0.2,
+          "unavailable_inputs": [
+            "domestic_origin_exports_kt",
+            "domestic_production_kt",
+            "reexports_kt",
+            "retained_imports_kt"
+          ],
+          "unavailable_reasons": {
+            "apparent_consumption_kt": [
+              "domestic_origin_exports_kt",
+              "domestic_production_kt",
+              "retained_imports_kt"
+            ],
+            "net_import_exposure_kt": [
+              "domestic_origin_exports_kt",
+              "retained_imports_kt"
+            ],
+            "retained_import_share_of_apparent_consumption": [
+              "apparent_consumption_kt",
+              "retained_imports_kt"
+            ],
+            "retained_imports_kt": [
+              "reexports_kt",
+              "retained_imports_kt"
+            ]
+          }
+        },
+        "result_code": "R5_DISABLED_NA",
+        "rule_id": "R5"
+      },
+      {
+        "decision_effect_code": "R9_S_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "known_hard_gate_failure": false,
+          "qualifying_signal_count": 0,
+          "same_process_family": "NOT_CALCULABLE"
+        },
+        "result_code": "R9_S_DISABLED_NA",
+        "rule_id": "R9-S"
+      },
+      {
+        "decision_effect_code": "R10_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "criticality_evidence_id": null,
+          "criticality_status": "NOT_CALCULABLE"
+        },
+        "result_code": "R10_DISABLED_NA",
+        "rule_id": "R10"
+      },
+      {
+        "decision_effect_code": "R11_EFFECT",
+        "execution": "DEGRADED",
+        "fired": false,
+        "metrics": {
+          "computed_export_import_value_ratio": null,
+          "disclosed_export_import_value_ratio": null,
+          "disclosed_ratio_consistent": null,
+          "established_nameplate": {
+            "established": false,
+            "evidence_ids": [],
+            "producers": [],
+            "reason": "Verified domestic capability is not established.",
+            "total_observed_nameplate_tpy": "NOT_CALCULABLE"
+          },
+          "export_import_value_ratio": null,
+          "export_import_value_ratio_threshold": 50.0,
+          "ratio_basis": "gross_trade_value",
+          "ratio_reason": "Positive numeric exports_usd_m are required.",
+          "ratio_status": "NOT_CALCULABLE"
+        },
+        "result_code": "R11_DEGRADED_NOT_FIRED",
+        "rule_id": "R11"
+      }
+    ],
+    "material_trigger_rule_ids": [
+      "R1-D"
+    ],
+    "metrics": {
+      "delta_ln_value": -0.0088,
+      "export_import_value_ratio": null,
+      "fired_signal_count": 2,
+      "hhi_value": "NOT_CALCULABLE",
+      "imports_usd_m_latest": 4.0543041650000005,
+      "largest_supplier_share_value": "NOT_CALCULABLE",
+      "qualifying_signal_count": 0,
+      "quantity_cagr": 0.1086
+    },
+    "screening_disposition": "CANDIDATE",
+    "warnings": {
+      "classification_continuity": {
+        "pattern": "ABSENT_BEFORE_REVISION_CHANGE",
+        "status": "REVISION_CHANGE_IN_WINDOW"
+      },
+      "export_import_ratio_warning": false,
+      "export_import_value_ratio": "UNAVAILABLE",
+      "price_led_growth": false
+    }
+  },
+  {
+    "advance_supporting_signal_rule_ids": [
+      "R2"
+    ],
+    "disposition_reason_code": "MATERIAL_TRIGGER_FIRED",
+    "evidence_needs": [
+      {
+        "code": "identity/tariff-line",
+        "evidence_ids": []
+      },
+      {
+        "code": "target specification/application",
+        "evidence_ids": []
+      },
+      {
+        "code": "line-level production or producer-grade matrix",
+        "evidence_ids": []
+      }
+    ],
+    "exclusions": [
+      {
+        "code": "EX-01_HETEROGENEOUS_RESIDUAL",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-02_MARKET_BELOW_MES",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-03_UNSATISFIABLE_HARD_GATE",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-04_IDLE_EQUIVALENT_CAPACITY",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-05_TRANSITORY_OR_MEASUREMENT",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-06_REDUNDANCY_OR_CROWD_OUT",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      }
+    ],
+    "fired_signal_rule_ids": [
+      "R1-D",
+      "R2"
+    ],
+    "hs6": "190410",
+    "indicated_state": "INVESTIGATE",
+    "indication_reason_code": "ROUTE_CHANGING_EVIDENCE_UNRESOLVED",
+    "ledger": [
+      {
+        "decision_effect_code": "R0_EFFECT",
+        "execution": "DEGRADED",
+        "fired": true,
+        "metrics": {
+          "evidence_need_code": "identity/tariff-line",
+          "mapping_status": "NOT_CALCULABLE"
+        },
+        "result_code": "R0_DEGRADED_FIRED",
+        "rule_id": "R0"
+      },
+      {
+        "decision_effect_code": "R1_F_EFFECT",
+        "execution": "FULL",
+        "fired": false,
+        "metrics": {
+          "missing_years": []
+        },
+        "result_code": "R1_F_FULL_NOT_FIRED",
+        "rule_id": "R1-F"
+      },
+      {
+        "decision_effect_code": "R1_D_EFFECT",
+        "execution": "DEGRADED",
+        "fired": true,
+        "metrics": {
+          "confidence_cap": "C",
+          "positive_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ]
+        },
+        "result_code": "R1_D_DEGRADED_FIRED",
+        "rule_id": "R1-D"
+      },
+      {
+        "decision_effect_code": "R2_EFFECT",
+        "execution": "FULL",
+        "fired": true,
+        "metrics": {
+          "delta_ln_quantity": 0.1002,
+          "delta_ln_unit_value": -0.0226,
+          "delta_ln_value": 0.0776,
+          "from_year": 2023,
+          "observed_span_years": 1,
+          "quantity_cagr": 0.1054,
+          "quantity_contribution_share": 0.8159,
+          "to_year": 2024
+        },
+        "result_code": "R2_FULL_FIRED",
+        "rule_id": "R2"
+      },
+      {
+        "decision_effect_code": "R3_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "hhi": "NOT_CALCULABLE",
+          "hhi_threshold": 0.25,
+          "largest_supplier_share": "NOT_CALCULABLE",
+          "largest_supplier_threshold": 0.5,
+          "quantity": {
+            "basis": "quantity",
+            "eligible_partner_count": "NOT_CALCULABLE",
+            "flow_basis": "gross",
+            "hhi": "NOT_CALCULABLE",
+            "largest_supplier_share": "NOT_CALCULABLE",
+            "reason": "No partner rows or source-attributed quantity concentration disclosure are available.",
+            "source": "none",
+            "status": "NOT_CALCULABLE",
+            "top_two_share": "NOT_CALCULABLE",
+            "valid_coverage": "NOT_CALCULABLE",
+            "year": 2024
+          },
+          "top_two_share": "NOT_CALCULABLE",
+          "value": {
+            "basis": "value",
+            "eligible_partner_count": "NOT_CALCULABLE",
+            "flow_basis": "gross",
+            "hhi": "NOT_CALCULABLE",
+            "largest_supplier_share": "NOT_CALCULABLE",
+            "reason": "No partner rows or source-attributed value concentration disclosure are available.",
+            "source": "none",
+            "status": "NOT_CALCULABLE",
+            "top_two_share": "NOT_CALCULABLE",
+            "valid_coverage": "NOT_CALCULABLE",
+            "year": 2024
+          }
+        },
+        "result_code": "R3_DISABLED_NA",
+        "rule_id": "R3"
+      },
+      {
+        "decision_effect_code": "R4_D_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "bulk_band_usd_t": "NOT_CALCULABLE",
+          "calculation_basis": "none",
+          "iqr_usd_t": "NOT_CALCULABLE",
+          "minimum_valid_value_coverage": 0.7,
+          "outlier_candidate": "NOT_CALCULABLE",
+          "reason": "No comparable partner rows or source-attributed dispersion disclosure are available.",
+          "status": "NOT_CALCULABLE",
+          "valid_quantity_coverage": "NOT_CALCULABLE",
+          "valid_value_coverage": "NOT_CALCULABLE",
+          "weighted_median_usd_t": "NOT_CALCULABLE",
+          "weighted_q1_usd_t": "NOT_CALCULABLE",
+          "weighted_q3_usd_t": "NOT_CALCULABLE"
+        },
+        "result_code": "R4_D_DISABLED_NA",
+        "rule_id": "R4-D"
+      },
+      {
+        "decision_effect_code": "R5_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "apparent_consumption_kt": "NOT_CALCULABLE",
+          "calculation_basis": "NOT_CALCULABLE",
+          "net_import_exposure_kt": "NOT_CALCULABLE",
+          "reason": "Domestic production quantity and retained-import flow are absent from the frozen public snapshot; gross imports cannot establish apparent consumption.",
+          "retained_import_share_of_apparent_consumption": "NOT_CALCULABLE",
+          "retained_imports_kt": "NOT_CALCULABLE",
+          "threshold": 0.2,
+          "unavailable_inputs": [
+            "domestic_origin_exports_kt",
+            "domestic_production_kt",
+            "reexports_kt",
+            "retained_imports_kt"
+          ],
+          "unavailable_reasons": {
+            "apparent_consumption_kt": [
+              "domestic_origin_exports_kt",
+              "domestic_production_kt",
+              "retained_imports_kt"
+            ],
+            "net_import_exposure_kt": [
+              "domestic_origin_exports_kt",
+              "retained_imports_kt"
+            ],
+            "retained_import_share_of_apparent_consumption": [
+              "apparent_consumption_kt",
+              "retained_imports_kt"
+            ],
+            "retained_imports_kt": [
+              "reexports_kt",
+              "retained_imports_kt"
+            ]
+          }
+        },
+        "result_code": "R5_DISABLED_NA",
+        "rule_id": "R5"
+      },
+      {
+        "decision_effect_code": "R9_S_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "known_hard_gate_failure": false,
+          "qualifying_signal_count": 0,
+          "same_process_family": "NOT_CALCULABLE"
+        },
+        "result_code": "R9_S_DISABLED_NA",
+        "rule_id": "R9-S"
+      },
+      {
+        "decision_effect_code": "R10_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "criticality_evidence_id": null,
+          "criticality_status": "NOT_CALCULABLE"
+        },
+        "result_code": "R10_DISABLED_NA",
+        "rule_id": "R10"
+      },
+      {
+        "decision_effect_code": "R11_EFFECT",
+        "execution": "DEGRADED",
+        "fired": false,
+        "metrics": {
+          "computed_export_import_value_ratio": 0.0035,
+          "disclosed_export_import_value_ratio": null,
+          "disclosed_ratio_consistent": null,
+          "established_nameplate": {
+            "established": false,
+            "evidence_ids": [],
+            "producers": [],
+            "reason": "Verified domestic capability is not established.",
+            "total_observed_nameplate_tpy": "NOT_CALCULABLE"
+          },
+          "export_import_value_ratio": 0.0035,
+          "export_import_value_ratio_threshold": 50.0,
+          "ratio_basis": "gross_trade_value",
+          "ratio_reason": null,
+          "ratio_status": "CALCULABLE"
+        },
+        "result_code": "R11_DEGRADED_NOT_FIRED",
+        "rule_id": "R11"
+      }
+    ],
+    "material_trigger_rule_ids": [
+      "R1-D",
+      "R2"
+    ],
+    "metrics": {
+      "delta_ln_value": 0.0776,
+      "export_import_value_ratio": 0.0035,
+      "fired_signal_count": 3,
+      "hhi_value": "NOT_CALCULABLE",
+      "imports_usd_m_latest": 106.015417616,
+      "largest_supplier_share_value": "NOT_CALCULABLE",
+      "qualifying_signal_count": 0,
+      "quantity_cagr": 0.1054
+    },
+    "screening_disposition": "CANDIDATE",
+    "warnings": {
+      "classification_continuity": {
+        "pattern": "ABSENT_BEFORE_REVISION_CHANGE",
+        "status": "REVISION_CHANGE_IN_WINDOW"
+      },
+      "export_import_ratio_warning": false,
+      "export_import_value_ratio": 0.003520474025314526,
+      "price_led_growth": false
+    }
+  },
+  {
+    "advance_supporting_signal_rule_ids": [],
+    "disposition_reason_code": "MATERIAL_TRIGGER_FIRED",
+    "evidence_needs": [
+      {
+        "code": "identity/tariff-line",
+        "evidence_ids": []
+      },
+      {
+        "code": "target specification/application",
+        "evidence_ids": []
+      },
+      {
+        "code": "line-level production or producer-grade matrix",
+        "evidence_ids": []
+      }
+    ],
+    "exclusions": [
+      {
+        "code": "EX-01_HETEROGENEOUS_RESIDUAL",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-02_MARKET_BELOW_MES",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-03_UNSATISFIABLE_HARD_GATE",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-04_IDLE_EQUIVALENT_CAPACITY",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-05_TRANSITORY_OR_MEASUREMENT",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-06_REDUNDANCY_OR_CROWD_OUT",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      }
+    ],
+    "fired_signal_rule_ids": [
+      "R1-D"
+    ],
+    "hs6": "190420",
+    "indicated_state": "INVESTIGATE",
+    "indication_reason_code": "ROUTE_CHANGING_EVIDENCE_UNRESOLVED",
+    "ledger": [
+      {
+        "decision_effect_code": "R0_EFFECT",
+        "execution": "DEGRADED",
+        "fired": true,
+        "metrics": {
+          "evidence_need_code": "identity/tariff-line",
+          "mapping_status": "NOT_CALCULABLE"
+        },
+        "result_code": "R0_DEGRADED_FIRED",
+        "rule_id": "R0"
+      },
+      {
+        "decision_effect_code": "R1_F_EFFECT",
+        "execution": "FULL",
+        "fired": false,
+        "metrics": {
+          "missing_years": []
+        },
+        "result_code": "R1_F_FULL_NOT_FIRED",
+        "rule_id": "R1-F"
+      },
+      {
+        "decision_effect_code": "R1_D_EFFECT",
+        "execution": "DEGRADED",
+        "fired": true,
+        "metrics": {
+          "confidence_cap": "C",
+          "positive_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ]
+        },
+        "result_code": "R1_D_DEGRADED_FIRED",
+        "rule_id": "R1-D"
+      },
+      {
+        "decision_effect_code": "R2_EFFECT",
+        "execution": "FULL",
+        "fired": false,
+        "metrics": {
+          "delta_ln_quantity": -0.2753,
+          "delta_ln_unit_value": 0.1064,
+          "delta_ln_value": -0.169,
+          "from_year": 2023,
+          "observed_span_years": 1,
+          "quantity_cagr": -0.2407,
+          "quantity_contribution_share": 0.7213,
+          "to_year": 2024
+        },
+        "result_code": "R2_FULL_NOT_FIRED",
+        "rule_id": "R2"
+      },
+      {
+        "decision_effect_code": "R3_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "hhi": "NOT_CALCULABLE",
+          "hhi_threshold": 0.25,
+          "largest_supplier_share": "NOT_CALCULABLE",
+          "largest_supplier_threshold": 0.5,
+          "quantity": {
+            "basis": "quantity",
+            "eligible_partner_count": "NOT_CALCULABLE",
+            "flow_basis": "gross",
+            "hhi": "NOT_CALCULABLE",
+            "largest_supplier_share": "NOT_CALCULABLE",
+            "reason": "No partner rows or source-attributed quantity concentration disclosure are available.",
+            "source": "none",
+            "status": "NOT_CALCULABLE",
+            "top_two_share": "NOT_CALCULABLE",
+            "valid_coverage": "NOT_CALCULABLE",
+            "year": 2024
+          },
+          "top_two_share": "NOT_CALCULABLE",
+          "value": {
+            "basis": "value",
+            "eligible_partner_count": "NOT_CALCULABLE",
+            "flow_basis": "gross",
+            "hhi": "NOT_CALCULABLE",
+            "largest_supplier_share": "NOT_CALCULABLE",
+            "reason": "No partner rows or source-attributed value concentration disclosure are available.",
+            "source": "none",
+            "status": "NOT_CALCULABLE",
+            "top_two_share": "NOT_CALCULABLE",
+            "valid_coverage": "NOT_CALCULABLE",
+            "year": 2024
+          }
+        },
+        "result_code": "R3_DISABLED_NA",
+        "rule_id": "R3"
+      },
+      {
+        "decision_effect_code": "R4_D_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "bulk_band_usd_t": "NOT_CALCULABLE",
+          "calculation_basis": "none",
+          "iqr_usd_t": "NOT_CALCULABLE",
+          "minimum_valid_value_coverage": 0.7,
+          "outlier_candidate": "NOT_CALCULABLE",
+          "reason": "No comparable partner rows or source-attributed dispersion disclosure are available.",
+          "status": "NOT_CALCULABLE",
+          "valid_quantity_coverage": "NOT_CALCULABLE",
+          "valid_value_coverage": "NOT_CALCULABLE",
+          "weighted_median_usd_t": "NOT_CALCULABLE",
+          "weighted_q1_usd_t": "NOT_CALCULABLE",
+          "weighted_q3_usd_t": "NOT_CALCULABLE"
+        },
+        "result_code": "R4_D_DISABLED_NA",
+        "rule_id": "R4-D"
+      },
+      {
+        "decision_effect_code": "R5_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "apparent_consumption_kt": "NOT_CALCULABLE",
+          "calculation_basis": "NOT_CALCULABLE",
+          "net_import_exposure_kt": "NOT_CALCULABLE",
+          "reason": "Domestic production quantity and retained-import flow are absent from the frozen public snapshot; gross imports cannot establish apparent consumption.",
+          "retained_import_share_of_apparent_consumption": "NOT_CALCULABLE",
+          "retained_imports_kt": "NOT_CALCULABLE",
+          "threshold": 0.2,
+          "unavailable_inputs": [
+            "domestic_origin_exports_kt",
+            "domestic_production_kt",
+            "reexports_kt",
+            "retained_imports_kt"
+          ],
+          "unavailable_reasons": {
+            "apparent_consumption_kt": [
+              "domestic_origin_exports_kt",
+              "domestic_production_kt",
+              "retained_imports_kt"
+            ],
+            "net_import_exposure_kt": [
+              "domestic_origin_exports_kt",
+              "retained_imports_kt"
+            ],
+            "retained_import_share_of_apparent_consumption": [
+              "apparent_consumption_kt",
+              "retained_imports_kt"
+            ],
+            "retained_imports_kt": [
+              "reexports_kt",
+              "retained_imports_kt"
+            ]
+          }
+        },
+        "result_code": "R5_DISABLED_NA",
+        "rule_id": "R5"
+      },
+      {
+        "decision_effect_code": "R9_S_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "known_hard_gate_failure": false,
+          "qualifying_signal_count": 0,
+          "same_process_family": "NOT_CALCULABLE"
+        },
+        "result_code": "R9_S_DISABLED_NA",
+        "rule_id": "R9-S"
+      },
+      {
+        "decision_effect_code": "R10_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "criticality_evidence_id": null,
+          "criticality_status": "NOT_CALCULABLE"
+        },
+        "result_code": "R10_DISABLED_NA",
+        "rule_id": "R10"
+      },
+      {
+        "decision_effect_code": "R11_EFFECT",
+        "execution": "DEGRADED",
+        "fired": false,
+        "metrics": {
+          "computed_export_import_value_ratio": 0.0791,
+          "disclosed_export_import_value_ratio": null,
+          "disclosed_ratio_consistent": null,
+          "established_nameplate": {
+            "established": false,
+            "evidence_ids": [],
+            "producers": [],
+            "reason": "Verified domestic capability is not established.",
+            "total_observed_nameplate_tpy": "NOT_CALCULABLE"
+          },
+          "export_import_value_ratio": 0.0791,
+          "export_import_value_ratio_threshold": 50.0,
+          "ratio_basis": "gross_trade_value",
+          "ratio_reason": null,
+          "ratio_status": "CALCULABLE"
+        },
+        "result_code": "R11_DEGRADED_NOT_FIRED",
+        "rule_id": "R11"
+      }
+    ],
+    "material_trigger_rule_ids": [
+      "R1-D"
+    ],
+    "metrics": {
+      "delta_ln_value": -0.169,
+      "export_import_value_ratio": 0.0791,
+      "fired_signal_count": 2,
+      "hhi_value": "NOT_CALCULABLE",
+      "imports_usd_m_latest": 9.032776041,
+      "largest_supplier_share_value": "NOT_CALCULABLE",
+      "qualifying_signal_count": 0,
+      "quantity_cagr": -0.2407
+    },
+    "screening_disposition": "CANDIDATE",
+    "warnings": {
+      "classification_continuity": {
+        "pattern": "ABSENT_BEFORE_REVISION_CHANGE",
+        "status": "REVISION_CHANGE_IN_WINDOW"
+      },
+      "export_import_ratio_warning": false,
+      "export_import_value_ratio": 0.07905083794382985,
+      "price_led_growth": false
+    }
+  },
+  {
+    "advance_supporting_signal_rule_ids": [],
+    "disposition_reason_code": "MATERIAL_TRIGGER_FIRED",
+    "evidence_needs": [
+      {
+        "code": "identity/tariff-line",
+        "evidence_ids": []
+      },
+      {
+        "code": "target specification/application",
+        "evidence_ids": []
+      },
+      {
+        "code": "line-level production or producer-grade matrix",
+        "evidence_ids": []
+      }
+    ],
+    "exclusions": [
+      {
+        "code": "EX-01_HETEROGENEOUS_RESIDUAL",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-02_MARKET_BELOW_MES",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-03_UNSATISFIABLE_HARD_GATE",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-04_IDLE_EQUIVALENT_CAPACITY",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-05_TRANSITORY_OR_MEASUREMENT",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-06_REDUNDANCY_OR_CROWD_OUT",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      }
+    ],
+    "fired_signal_rule_ids": [
+      "R1-D"
+    ],
+    "hs6": "190430",
+    "indicated_state": "INVESTIGATE",
+    "indication_reason_code": "ROUTE_CHANGING_EVIDENCE_UNRESOLVED",
+    "ledger": [
+      {
+        "decision_effect_code": "R0_EFFECT",
+        "execution": "DEGRADED",
+        "fired": true,
+        "metrics": {
+          "evidence_need_code": "identity/tariff-line",
+          "mapping_status": "NOT_CALCULABLE"
+        },
+        "result_code": "R0_DEGRADED_FIRED",
+        "rule_id": "R0"
+      },
+      {
+        "decision_effect_code": "R1_F_EFFECT",
+        "execution": "FULL",
+        "fired": false,
+        "metrics": {
+          "missing_years": []
+        },
+        "result_code": "R1_F_FULL_NOT_FIRED",
+        "rule_id": "R1-F"
+      },
+      {
+        "decision_effect_code": "R1_D_EFFECT",
+        "execution": "DEGRADED",
+        "fired": true,
+        "metrics": {
+          "confidence_cap": "C",
+          "positive_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ]
+        },
+        "result_code": "R1_D_DEGRADED_FIRED",
+        "rule_id": "R1-D"
+      },
+      {
+        "decision_effect_code": "R2_EFFECT",
+        "execution": "FULL",
+        "fired": false,
+        "metrics": {
+          "delta_ln_quantity": 0.2964,
+          "delta_ln_unit_value": -0.4798,
+          "delta_ln_value": -0.1833,
+          "from_year": 2023,
+          "observed_span_years": 1,
+          "quantity_cagr": 0.345,
+          "quantity_contribution_share": 0.3819,
+          "to_year": 2024
+        },
+        "result_code": "R2_FULL_NOT_FIRED",
+        "rule_id": "R2"
+      },
+      {
+        "decision_effect_code": "R3_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "hhi": "NOT_CALCULABLE",
+          "hhi_threshold": 0.25,
+          "largest_supplier_share": "NOT_CALCULABLE",
+          "largest_supplier_threshold": 0.5,
+          "quantity": {
+            "basis": "quantity",
+            "eligible_partner_count": "NOT_CALCULABLE",
+            "flow_basis": "gross",
+            "hhi": "NOT_CALCULABLE",
+            "largest_supplier_share": "NOT_CALCULABLE",
+            "reason": "No partner rows or source-attributed quantity concentration disclosure are available.",
+            "source": "none",
+            "status": "NOT_CALCULABLE",
+            "top_two_share": "NOT_CALCULABLE",
+            "valid_coverage": "NOT_CALCULABLE",
+            "year": 2024
+          },
+          "top_two_share": "NOT_CALCULABLE",
+          "value": {
+            "basis": "value",
+            "eligible_partner_count": "NOT_CALCULABLE",
+            "flow_basis": "gross",
+            "hhi": "NOT_CALCULABLE",
+            "largest_supplier_share": "NOT_CALCULABLE",
+            "reason": "No partner rows or source-attributed value concentration disclosure are available.",
+            "source": "none",
+            "status": "NOT_CALCULABLE",
+            "top_two_share": "NOT_CALCULABLE",
+            "valid_coverage": "NOT_CALCULABLE",
+            "year": 2024
+          }
+        },
+        "result_code": "R3_DISABLED_NA",
+        "rule_id": "R3"
+      },
+      {
+        "decision_effect_code": "R4_D_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "bulk_band_usd_t": "NOT_CALCULABLE",
+          "calculation_basis": "none",
+          "iqr_usd_t": "NOT_CALCULABLE",
+          "minimum_valid_value_coverage": 0.7,
+          "outlier_candidate": "NOT_CALCULABLE",
+          "reason": "No comparable partner rows or source-attributed dispersion disclosure are available.",
+          "status": "NOT_CALCULABLE",
+          "valid_quantity_coverage": "NOT_CALCULABLE",
+          "valid_value_coverage": "NOT_CALCULABLE",
+          "weighted_median_usd_t": "NOT_CALCULABLE",
+          "weighted_q1_usd_t": "NOT_CALCULABLE",
+          "weighted_q3_usd_t": "NOT_CALCULABLE"
+        },
+        "result_code": "R4_D_DISABLED_NA",
+        "rule_id": "R4-D"
+      },
+      {
+        "decision_effect_code": "R5_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "apparent_consumption_kt": "NOT_CALCULABLE",
+          "calculation_basis": "NOT_CALCULABLE",
+          "net_import_exposure_kt": "NOT_CALCULABLE",
+          "reason": "Domestic production quantity and retained-import flow are absent from the frozen public snapshot; gross imports cannot establish apparent consumption.",
+          "retained_import_share_of_apparent_consumption": "NOT_CALCULABLE",
+          "retained_imports_kt": "NOT_CALCULABLE",
+          "threshold": 0.2,
+          "unavailable_inputs": [
+            "domestic_origin_exports_kt",
+            "domestic_production_kt",
+            "reexports_kt",
+            "retained_imports_kt"
+          ],
+          "unavailable_reasons": {
+            "apparent_consumption_kt": [
+              "domestic_origin_exports_kt",
+              "domestic_production_kt",
+              "retained_imports_kt"
+            ],
+            "net_import_exposure_kt": [
+              "domestic_origin_exports_kt",
+              "retained_imports_kt"
+            ],
+            "retained_import_share_of_apparent_consumption": [
+              "apparent_consumption_kt",
+              "retained_imports_kt"
+            ],
+            "retained_imports_kt": [
+              "reexports_kt",
+              "retained_imports_kt"
+            ]
+          }
+        },
+        "result_code": "R5_DISABLED_NA",
+        "rule_id": "R5"
+      },
+      {
+        "decision_effect_code": "R9_S_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "known_hard_gate_failure": false,
+          "qualifying_signal_count": 0,
+          "same_process_family": "NOT_CALCULABLE"
+        },
+        "result_code": "R9_S_DISABLED_NA",
+        "rule_id": "R9-S"
+      },
+      {
+        "decision_effect_code": "R10_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "criticality_evidence_id": null,
+          "criticality_status": "NOT_CALCULABLE"
+        },
+        "result_code": "R10_DISABLED_NA",
+        "rule_id": "R10"
+      },
+      {
+        "decision_effect_code": "R11_EFFECT",
+        "execution": "DEGRADED",
+        "fired": false,
+        "metrics": {
+          "computed_export_import_value_ratio": 0.0423,
+          "disclosed_export_import_value_ratio": null,
+          "disclosed_ratio_consistent": null,
+          "established_nameplate": {
+            "established": false,
+            "evidence_ids": [],
+            "producers": [],
+            "reason": "Verified domestic capability is not established.",
+            "total_observed_nameplate_tpy": "NOT_CALCULABLE"
+          },
+          "export_import_value_ratio": 0.0423,
+          "export_import_value_ratio_threshold": 50.0,
+          "ratio_basis": "gross_trade_value",
+          "ratio_reason": null,
+          "ratio_status": "CALCULABLE"
+        },
+        "result_code": "R11_DEGRADED_NOT_FIRED",
+        "rule_id": "R11"
+      }
+    ],
+    "material_trigger_rule_ids": [
+      "R1-D"
+    ],
+    "metrics": {
+      "delta_ln_value": -0.1833,
+      "export_import_value_ratio": 0.0423,
+      "fired_signal_count": 2,
+      "hhi_value": "NOT_CALCULABLE",
+      "imports_usd_m_latest": 3.554284711,
+      "largest_supplier_share_value": "NOT_CALCULABLE",
+      "qualifying_signal_count": 0,
+      "quantity_cagr": 0.345
+    },
+    "screening_disposition": "CANDIDATE",
+    "warnings": {
+      "classification_continuity": {
+        "pattern": "ABSENT_BEFORE_REVISION_CHANGE",
+        "status": "REVISION_CHANGE_IN_WINDOW"
+      },
+      "export_import_ratio_warning": false,
+      "export_import_value_ratio": 0.04226192953398437,
+      "price_led_growth": false
+    }
+  },
+  {
+    "advance_supporting_signal_rule_ids": [
+      "R2"
+    ],
+    "disposition_reason_code": "MATERIAL_TRIGGER_FIRED",
+    "evidence_needs": [
+      {
+        "code": "identity/tariff-line",
+        "evidence_ids": []
+      },
+      {
+        "code": "target specification/application",
+        "evidence_ids": []
+      },
+      {
+        "code": "line-level production or producer-grade matrix",
+        "evidence_ids": []
+      }
+    ],
+    "exclusions": [
+      {
+        "code": "EX-01_HETEROGENEOUS_RESIDUAL",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-02_MARKET_BELOW_MES",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-03_UNSATISFIABLE_HARD_GATE",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-04_IDLE_EQUIVALENT_CAPACITY",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-05_TRANSITORY_OR_MEASUREMENT",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-06_REDUNDANCY_OR_CROWD_OUT",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      }
+    ],
+    "fired_signal_rule_ids": [
+      "R1-D",
+      "R2"
+    ],
+    "hs6": "190490",
+    "indicated_state": "INVESTIGATE",
+    "indication_reason_code": "ROUTE_CHANGING_EVIDENCE_UNRESOLVED",
+    "ledger": [
+      {
+        "decision_effect_code": "R0_EFFECT",
+        "execution": "DEGRADED",
+        "fired": true,
+        "metrics": {
+          "evidence_need_code": "identity/tariff-line",
+          "mapping_status": "NOT_CALCULABLE"
+        },
+        "result_code": "R0_DEGRADED_FIRED",
+        "rule_id": "R0"
+      },
+      {
+        "decision_effect_code": "R1_F_EFFECT",
+        "execution": "FULL",
+        "fired": false,
+        "metrics": {
+          "missing_years": []
+        },
+        "result_code": "R1_F_FULL_NOT_FIRED",
+        "rule_id": "R1-F"
+      },
+      {
+        "decision_effect_code": "R1_D_EFFECT",
+        "execution": "DEGRADED",
+        "fired": true,
+        "metrics": {
+          "confidence_cap": "C",
+          "positive_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ]
+        },
+        "result_code": "R1_D_DEGRADED_FIRED",
+        "rule_id": "R1-D"
+      },
+      {
+        "decision_effect_code": "R2_EFFECT",
+        "execution": "FULL",
+        "fired": true,
+        "metrics": {
+          "delta_ln_quantity": 0.6209,
+          "delta_ln_unit_value": 0.0627,
+          "delta_ln_value": 0.6836,
+          "from_year": 2023,
+          "observed_span_years": 1,
+          "quantity_cagr": 0.8606,
+          "quantity_contribution_share": 0.9083,
+          "to_year": 2024
+        },
+        "result_code": "R2_FULL_FIRED",
+        "rule_id": "R2"
+      },
+      {
+        "decision_effect_code": "R3_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "hhi": "NOT_CALCULABLE",
+          "hhi_threshold": 0.25,
+          "largest_supplier_share": "NOT_CALCULABLE",
+          "largest_supplier_threshold": 0.5,
+          "quantity": {
+            "basis": "quantity",
+            "eligible_partner_count": "NOT_CALCULABLE",
+            "flow_basis": "gross",
+            "hhi": "NOT_CALCULABLE",
+            "largest_supplier_share": "NOT_CALCULABLE",
+            "reason": "No partner rows or source-attributed quantity concentration disclosure are available.",
+            "source": "none",
+            "status": "NOT_CALCULABLE",
+            "top_two_share": "NOT_CALCULABLE",
+            "valid_coverage": "NOT_CALCULABLE",
+            "year": 2024
+          },
+          "top_two_share": "NOT_CALCULABLE",
+          "value": {
+            "basis": "value",
+            "eligible_partner_count": "NOT_CALCULABLE",
+            "flow_basis": "gross",
+            "hhi": "NOT_CALCULABLE",
+            "largest_supplier_share": "NOT_CALCULABLE",
+            "reason": "No partner rows or source-attributed value concentration disclosure are available.",
+            "source": "none",
+            "status": "NOT_CALCULABLE",
+            "top_two_share": "NOT_CALCULABLE",
+            "valid_coverage": "NOT_CALCULABLE",
+            "year": 2024
+          }
+        },
+        "result_code": "R3_DISABLED_NA",
+        "rule_id": "R3"
+      },
+      {
+        "decision_effect_code": "R4_D_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "bulk_band_usd_t": "NOT_CALCULABLE",
+          "calculation_basis": "none",
+          "iqr_usd_t": "NOT_CALCULABLE",
+          "minimum_valid_value_coverage": 0.7,
+          "outlier_candidate": "NOT_CALCULABLE",
+          "reason": "No comparable partner rows or source-attributed dispersion disclosure are available.",
+          "status": "NOT_CALCULABLE",
+          "valid_quantity_coverage": "NOT_CALCULABLE",
+          "valid_value_coverage": "NOT_CALCULABLE",
+          "weighted_median_usd_t": "NOT_CALCULABLE",
+          "weighted_q1_usd_t": "NOT_CALCULABLE",
+          "weighted_q3_usd_t": "NOT_CALCULABLE"
+        },
+        "result_code": "R4_D_DISABLED_NA",
+        "rule_id": "R4-D"
+      },
+      {
+        "decision_effect_code": "R5_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "apparent_consumption_kt": "NOT_CALCULABLE",
+          "calculation_basis": "NOT_CALCULABLE",
+          "net_import_exposure_kt": "NOT_CALCULABLE",
+          "reason": "Domestic production quantity and retained-import flow are absent from the frozen public snapshot; gross imports cannot establish apparent consumption.",
+          "retained_import_share_of_apparent_consumption": "NOT_CALCULABLE",
+          "retained_imports_kt": "NOT_CALCULABLE",
+          "threshold": 0.2,
+          "unavailable_inputs": [
+            "domestic_origin_exports_kt",
+            "domestic_production_kt",
+            "reexports_kt",
+            "retained_imports_kt"
+          ],
+          "unavailable_reasons": {
+            "apparent_consumption_kt": [
+              "domestic_origin_exports_kt",
+              "domestic_production_kt",
+              "retained_imports_kt"
+            ],
+            "net_import_exposure_kt": [
+              "domestic_origin_exports_kt",
+              "retained_imports_kt"
+            ],
+            "retained_import_share_of_apparent_consumption": [
+              "apparent_consumption_kt",
+              "retained_imports_kt"
+            ],
+            "retained_imports_kt": [
+              "reexports_kt",
+              "retained_imports_kt"
+            ]
+          }
+        },
+        "result_code": "R5_DISABLED_NA",
+        "rule_id": "R5"
+      },
+      {
+        "decision_effect_code": "R9_S_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "known_hard_gate_failure": false,
+          "qualifying_signal_count": 0,
+          "same_process_family": "NOT_CALCULABLE"
+        },
+        "result_code": "R9_S_DISABLED_NA",
+        "rule_id": "R9-S"
+      },
+      {
+        "decision_effect_code": "R10_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "criticality_evidence_id": null,
+          "criticality_status": "NOT_CALCULABLE"
+        },
+        "result_code": "R10_DISABLED_NA",
+        "rule_id": "R10"
+      },
+      {
+        "decision_effect_code": "R11_EFFECT",
+        "execution": "DEGRADED",
+        "fired": false,
+        "metrics": {
+          "computed_export_import_value_ratio": 0.0013,
+          "disclosed_export_import_value_ratio": null,
+          "disclosed_ratio_consistent": null,
+          "established_nameplate": {
+            "established": false,
+            "evidence_ids": [],
+            "producers": [],
+            "reason": "Verified domestic capability is not established.",
+            "total_observed_nameplate_tpy": "NOT_CALCULABLE"
+          },
+          "export_import_value_ratio": 0.0013,
+          "export_import_value_ratio_threshold": 50.0,
+          "ratio_basis": "gross_trade_value",
+          "ratio_reason": null,
+          "ratio_status": "CALCULABLE"
+        },
+        "result_code": "R11_DEGRADED_NOT_FIRED",
+        "rule_id": "R11"
+      }
+    ],
+    "material_trigger_rule_ids": [
+      "R1-D",
+      "R2"
+    ],
+    "metrics": {
+      "delta_ln_value": 0.6836,
+      "export_import_value_ratio": 0.0013,
+      "fired_signal_count": 3,
+      "hhi_value": "NOT_CALCULABLE",
+      "imports_usd_m_latest": 39.880350203,
+      "largest_supplier_share_value": "NOT_CALCULABLE",
+      "qualifying_signal_count": 0,
+      "quantity_cagr": 0.8606
+    },
+    "screening_disposition": "CANDIDATE",
+    "warnings": {
+      "classification_continuity": {
+        "pattern": "ABSENT_BEFORE_REVISION_CHANGE",
+        "status": "REVISION_CHANGE_IN_WINDOW"
+      },
+      "export_import_ratio_warning": false,
+      "export_import_value_ratio": 0.001267016581920561,
+      "price_led_growth": false
+    }
+  },
+  {
+    "advance_supporting_signal_rule_ids": [
+      "R2"
+    ],
+    "disposition_reason_code": "MATERIAL_TRIGGER_FIRED",
+    "evidence_needs": [
+      {
+        "code": "identity/tariff-line",
+        "evidence_ids": []
+      },
+      {
+        "code": "target specification/application",
+        "evidence_ids": []
+      },
+      {
+        "code": "line-level production or producer-grade matrix",
+        "evidence_ids": []
+      }
+    ],
+    "exclusions": [
+      {
+        "code": "EX-01_HETEROGENEOUS_RESIDUAL",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-02_MARKET_BELOW_MES",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-03_UNSATISFIABLE_HARD_GATE",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-04_IDLE_EQUIVALENT_CAPACITY",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-05_TRANSITORY_OR_MEASUREMENT",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-06_REDUNDANCY_OR_CROWD_OUT",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      }
+    ],
+    "fired_signal_rule_ids": [
+      "R1-D",
+      "R2"
+    ],
+    "hs6": "190510",
+    "indicated_state": "INVESTIGATE",
+    "indication_reason_code": "ROUTE_CHANGING_EVIDENCE_UNRESOLVED",
+    "ledger": [
+      {
+        "decision_effect_code": "R0_EFFECT",
+        "execution": "DEGRADED",
+        "fired": true,
+        "metrics": {
+          "evidence_need_code": "identity/tariff-line",
+          "mapping_status": "NOT_CALCULABLE"
+        },
+        "result_code": "R0_DEGRADED_FIRED",
+        "rule_id": "R0"
+      },
+      {
+        "decision_effect_code": "R1_F_EFFECT",
+        "execution": "FULL",
+        "fired": false,
+        "metrics": {
+          "missing_years": []
+        },
+        "result_code": "R1_F_FULL_NOT_FIRED",
+        "rule_id": "R1-F"
+      },
+      {
+        "decision_effect_code": "R1_D_EFFECT",
+        "execution": "DEGRADED",
+        "fired": true,
+        "metrics": {
+          "confidence_cap": "C",
+          "positive_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ]
+        },
+        "result_code": "R1_D_DEGRADED_FIRED",
+        "rule_id": "R1-D"
+      },
+      {
+        "decision_effect_code": "R2_EFFECT",
+        "execution": "FULL",
+        "fired": true,
+        "metrics": {
+          "delta_ln_quantity": 0.8589,
+          "delta_ln_unit_value": -0.2087,
+          "delta_ln_value": 0.6502,
+          "from_year": 2023,
+          "observed_span_years": 1,
+          "quantity_cagr": 1.3606,
+          "quantity_contribution_share": 0.8045,
+          "to_year": 2024
+        },
+        "result_code": "R2_FULL_FIRED",
+        "rule_id": "R2"
+      },
+      {
+        "decision_effect_code": "R3_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "hhi": "NOT_CALCULABLE",
+          "hhi_threshold": 0.25,
+          "largest_supplier_share": "NOT_CALCULABLE",
+          "largest_supplier_threshold": 0.5,
+          "quantity": {
+            "basis": "quantity",
+            "eligible_partner_count": "NOT_CALCULABLE",
+            "flow_basis": "gross",
+            "hhi": "NOT_CALCULABLE",
+            "largest_supplier_share": "NOT_CALCULABLE",
+            "reason": "No partner rows or source-attributed quantity concentration disclosure are available.",
+            "source": "none",
+            "status": "NOT_CALCULABLE",
+            "top_two_share": "NOT_CALCULABLE",
+            "valid_coverage": "NOT_CALCULABLE",
+            "year": 2024
+          },
+          "top_two_share": "NOT_CALCULABLE",
+          "value": {
+            "basis": "value",
+            "eligible_partner_count": "NOT_CALCULABLE",
+            "flow_basis": "gross",
+            "hhi": "NOT_CALCULABLE",
+            "largest_supplier_share": "NOT_CALCULABLE",
+            "reason": "No partner rows or source-attributed value concentration disclosure are available.",
+            "source": "none",
+            "status": "NOT_CALCULABLE",
+            "top_two_share": "NOT_CALCULABLE",
+            "valid_coverage": "NOT_CALCULABLE",
+            "year": 2024
+          }
+        },
+        "result_code": "R3_DISABLED_NA",
+        "rule_id": "R3"
+      },
+      {
+        "decision_effect_code": "R4_D_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "bulk_band_usd_t": "NOT_CALCULABLE",
+          "calculation_basis": "none",
+          "iqr_usd_t": "NOT_CALCULABLE",
+          "minimum_valid_value_coverage": 0.7,
+          "outlier_candidate": "NOT_CALCULABLE",
+          "reason": "No comparable partner rows or source-attributed dispersion disclosure are available.",
+          "status": "NOT_CALCULABLE",
+          "valid_quantity_coverage": "NOT_CALCULABLE",
+          "valid_value_coverage": "NOT_CALCULABLE",
+          "weighted_median_usd_t": "NOT_CALCULABLE",
+          "weighted_q1_usd_t": "NOT_CALCULABLE",
+          "weighted_q3_usd_t": "NOT_CALCULABLE"
+        },
+        "result_code": "R4_D_DISABLED_NA",
+        "rule_id": "R4-D"
+      },
+      {
+        "decision_effect_code": "R5_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "apparent_consumption_kt": "NOT_CALCULABLE",
+          "calculation_basis": "NOT_CALCULABLE",
+          "net_import_exposure_kt": "NOT_CALCULABLE",
+          "reason": "Domestic production quantity and retained-import flow are absent from the frozen public snapshot; gross imports cannot establish apparent consumption.",
+          "retained_import_share_of_apparent_consumption": "NOT_CALCULABLE",
+          "retained_imports_kt": "NOT_CALCULABLE",
+          "threshold": 0.2,
+          "unavailable_inputs": [
+            "domestic_origin_exports_kt",
+            "domestic_production_kt",
+            "reexports_kt",
+            "retained_imports_kt"
+          ],
+          "unavailable_reasons": {
+            "apparent_consumption_kt": [
+              "domestic_origin_exports_kt",
+              "domestic_production_kt",
+              "retained_imports_kt"
+            ],
+            "net_import_exposure_kt": [
+              "domestic_origin_exports_kt",
+              "retained_imports_kt"
+            ],
+            "retained_import_share_of_apparent_consumption": [
+              "apparent_consumption_kt",
+              "retained_imports_kt"
+            ],
+            "retained_imports_kt": [
+              "reexports_kt",
+              "retained_imports_kt"
+            ]
+          }
+        },
+        "result_code": "R5_DISABLED_NA",
+        "rule_id": "R5"
+      },
+      {
+        "decision_effect_code": "R9_S_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "known_hard_gate_failure": false,
+          "qualifying_signal_count": 0,
+          "same_process_family": "NOT_CALCULABLE"
+        },
+        "result_code": "R9_S_DISABLED_NA",
+        "rule_id": "R9-S"
+      },
+      {
+        "decision_effect_code": "R10_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "criticality_evidence_id": null,
+          "criticality_status": "NOT_CALCULABLE"
+        },
+        "result_code": "R10_DISABLED_NA",
+        "rule_id": "R10"
+      },
+      {
+        "decision_effect_code": "R11_EFFECT",
+        "execution": "DEGRADED",
+        "fired": false,
+        "metrics": {
+          "computed_export_import_value_ratio": 0.0785,
+          "disclosed_export_import_value_ratio": null,
+          "disclosed_ratio_consistent": null,
+          "established_nameplate": {
+            "established": false,
+            "evidence_ids": [],
+            "producers": [],
+            "reason": "Verified domestic capability is not established.",
+            "total_observed_nameplate_tpy": "NOT_CALCULABLE"
+          },
+          "export_import_value_ratio": 0.0785,
+          "export_import_value_ratio_threshold": 50.0,
+          "ratio_basis": "gross_trade_value",
+          "ratio_reason": null,
+          "ratio_status": "CALCULABLE"
+        },
+        "result_code": "R11_DEGRADED_NOT_FIRED",
+        "rule_id": "R11"
+      }
+    ],
+    "material_trigger_rule_ids": [
+      "R1-D",
+      "R2"
+    ],
+    "metrics": {
+      "delta_ln_value": 0.6502,
+      "export_import_value_ratio": 0.0785,
+      "fired_signal_count": 3,
+      "hhi_value": "NOT_CALCULABLE",
+      "imports_usd_m_latest": 3.760994573,
+      "largest_supplier_share_value": "NOT_CALCULABLE",
+      "qualifying_signal_count": 0,
+      "quantity_cagr": 1.3606
+    },
+    "screening_disposition": "CANDIDATE",
+    "warnings": {
+      "classification_continuity": {
+        "pattern": "ABSENT_BEFORE_REVISION_CHANGE",
+        "status": "REVISION_CHANGE_IN_WINDOW"
+      },
+      "export_import_ratio_warning": false,
+      "export_import_value_ratio": 0.07854305218110721,
+      "price_led_growth": false
+    }
+  },
+  {
+    "advance_supporting_signal_rule_ids": [],
+    "disposition_reason_code": "MATERIAL_TRIGGER_FIRED",
+    "evidence_needs": [
+      {
+        "code": "identity/tariff-line",
+        "evidence_ids": []
+      },
+      {
+        "code": "target specification/application",
+        "evidence_ids": []
+      },
+      {
+        "code": "line-level production or producer-grade matrix",
+        "evidence_ids": []
+      }
+    ],
+    "exclusions": [
+      {
+        "code": "EX-01_HETEROGENEOUS_RESIDUAL",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-02_MARKET_BELOW_MES",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-03_UNSATISFIABLE_HARD_GATE",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-04_IDLE_EQUIVALENT_CAPACITY",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-05_TRANSITORY_OR_MEASUREMENT",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-06_REDUNDANCY_OR_CROWD_OUT",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      }
+    ],
+    "fired_signal_rule_ids": [
+      "R1-D"
+    ],
+    "hs6": "190520",
+    "indicated_state": "INVESTIGATE",
+    "indication_reason_code": "ROUTE_CHANGING_EVIDENCE_UNRESOLVED",
+    "ledger": [
+      {
+        "decision_effect_code": "R0_EFFECT",
+        "execution": "DEGRADED",
+        "fired": true,
+        "metrics": {
+          "evidence_need_code": "identity/tariff-line",
+          "mapping_status": "NOT_CALCULABLE"
+        },
+        "result_code": "R0_DEGRADED_FIRED",
+        "rule_id": "R0"
+      },
+      {
+        "decision_effect_code": "R1_F_EFFECT",
+        "execution": "FULL",
+        "fired": false,
+        "metrics": {
+          "missing_years": []
+        },
+        "result_code": "R1_F_FULL_NOT_FIRED",
+        "rule_id": "R1-F"
+      },
+      {
+        "decision_effect_code": "R1_D_EFFECT",
+        "execution": "DEGRADED",
+        "fired": true,
+        "metrics": {
+          "confidence_cap": "C",
+          "positive_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ]
+        },
+        "result_code": "R1_D_DEGRADED_FIRED",
+        "rule_id": "R1-D"
+      },
+      {
+        "decision_effect_code": "R2_EFFECT",
+        "execution": "FULL",
+        "fired": false,
+        "metrics": {
+          "delta_ln_quantity": 0.3265,
+          "delta_ln_unit_value": -0.3296,
+          "delta_ln_value": -0.0032,
+          "from_year": 2023,
+          "observed_span_years": 1,
+          "quantity_cagr": 0.3861,
+          "quantity_contribution_share": 0.4976,
+          "to_year": 2024
+        },
+        "result_code": "R2_FULL_NOT_FIRED",
+        "rule_id": "R2"
+      },
+      {
+        "decision_effect_code": "R3_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "hhi": "NOT_CALCULABLE",
+          "hhi_threshold": 0.25,
+          "largest_supplier_share": "NOT_CALCULABLE",
+          "largest_supplier_threshold": 0.5,
+          "quantity": {
+            "basis": "quantity",
+            "eligible_partner_count": "NOT_CALCULABLE",
+            "flow_basis": "gross",
+            "hhi": "NOT_CALCULABLE",
+            "largest_supplier_share": "NOT_CALCULABLE",
+            "reason": "No partner rows or source-attributed quantity concentration disclosure are available.",
+            "source": "none",
+            "status": "NOT_CALCULABLE",
+            "top_two_share": "NOT_CALCULABLE",
+            "valid_coverage": "NOT_CALCULABLE",
+            "year": 2024
+          },
+          "top_two_share": "NOT_CALCULABLE",
+          "value": {
+            "basis": "value",
+            "eligible_partner_count": "NOT_CALCULABLE",
+            "flow_basis": "gross",
+            "hhi": "NOT_CALCULABLE",
+            "largest_supplier_share": "NOT_CALCULABLE",
+            "reason": "No partner rows or source-attributed value concentration disclosure are available.",
+            "source": "none",
+            "status": "NOT_CALCULABLE",
+            "top_two_share": "NOT_CALCULABLE",
+            "valid_coverage": "NOT_CALCULABLE",
+            "year": 2024
+          }
+        },
+        "result_code": "R3_DISABLED_NA",
+        "rule_id": "R3"
+      },
+      {
+        "decision_effect_code": "R4_D_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "bulk_band_usd_t": "NOT_CALCULABLE",
+          "calculation_basis": "none",
+          "iqr_usd_t": "NOT_CALCULABLE",
+          "minimum_valid_value_coverage": 0.7,
+          "outlier_candidate": "NOT_CALCULABLE",
+          "reason": "No comparable partner rows or source-attributed dispersion disclosure are available.",
+          "status": "NOT_CALCULABLE",
+          "valid_quantity_coverage": "NOT_CALCULABLE",
+          "valid_value_coverage": "NOT_CALCULABLE",
+          "weighted_median_usd_t": "NOT_CALCULABLE",
+          "weighted_q1_usd_t": "NOT_CALCULABLE",
+          "weighted_q3_usd_t": "NOT_CALCULABLE"
+        },
+        "result_code": "R4_D_DISABLED_NA",
+        "rule_id": "R4-D"
+      },
+      {
+        "decision_effect_code": "R5_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "apparent_consumption_kt": "NOT_CALCULABLE",
+          "calculation_basis": "NOT_CALCULABLE",
+          "net_import_exposure_kt": "NOT_CALCULABLE",
+          "reason": "Domestic production quantity and retained-import flow are absent from the frozen public snapshot; gross imports cannot establish apparent consumption.",
+          "retained_import_share_of_apparent_consumption": "NOT_CALCULABLE",
+          "retained_imports_kt": "NOT_CALCULABLE",
+          "threshold": 0.2,
+          "unavailable_inputs": [
+            "domestic_origin_exports_kt",
+            "domestic_production_kt",
+            "reexports_kt",
+            "retained_imports_kt"
+          ],
+          "unavailable_reasons": {
+            "apparent_consumption_kt": [
+              "domestic_origin_exports_kt",
+              "domestic_production_kt",
+              "retained_imports_kt"
+            ],
+            "net_import_exposure_kt": [
+              "domestic_origin_exports_kt",
+              "retained_imports_kt"
+            ],
+            "retained_import_share_of_apparent_consumption": [
+              "apparent_consumption_kt",
+              "retained_imports_kt"
+            ],
+            "retained_imports_kt": [
+              "reexports_kt",
+              "retained_imports_kt"
+            ]
+          }
+        },
+        "result_code": "R5_DISABLED_NA",
+        "rule_id": "R5"
+      },
+      {
+        "decision_effect_code": "R9_S_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "known_hard_gate_failure": false,
+          "qualifying_signal_count": 0,
+          "same_process_family": "NOT_CALCULABLE"
+        },
+        "result_code": "R9_S_DISABLED_NA",
+        "rule_id": "R9-S"
+      },
+      {
+        "decision_effect_code": "R10_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "criticality_evidence_id": null,
+          "criticality_status": "NOT_CALCULABLE"
+        },
+        "result_code": "R10_DISABLED_NA",
+        "rule_id": "R10"
+      },
+      {
+        "decision_effect_code": "R11_EFFECT",
+        "execution": "DEGRADED",
+        "fired": false,
+        "metrics": {
+          "computed_export_import_value_ratio": 0.0145,
+          "disclosed_export_import_value_ratio": null,
+          "disclosed_ratio_consistent": null,
+          "established_nameplate": {
+            "established": false,
+            "evidence_ids": [],
+            "producers": [],
+            "reason": "Verified domestic capability is not established.",
+            "total_observed_nameplate_tpy": "NOT_CALCULABLE"
+          },
+          "export_import_value_ratio": 0.0145,
+          "export_import_value_ratio_threshold": 50.0,
+          "ratio_basis": "gross_trade_value",
+          "ratio_reason": null,
+          "ratio_status": "CALCULABLE"
+        },
+        "result_code": "R11_DEGRADED_NOT_FIRED",
+        "rule_id": "R11"
+      }
+    ],
+    "material_trigger_rule_ids": [
+      "R1-D"
+    ],
+    "metrics": {
+      "delta_ln_value": -0.0032,
+      "export_import_value_ratio": 0.0145,
+      "fired_signal_count": 2,
+      "hhi_value": "NOT_CALCULABLE",
+      "imports_usd_m_latest": 0.704448782,
+      "largest_supplier_share_value": "NOT_CALCULABLE",
+      "qualifying_signal_count": 0,
+      "quantity_cagr": 0.3861
+    },
+    "screening_disposition": "CANDIDATE",
+    "warnings": {
+      "classification_continuity": {
+        "pattern": "ABSENT_BEFORE_REVISION_CHANGE",
+        "status": "REVISION_CHANGE_IN_WINDOW"
+      },
+      "export_import_ratio_warning": false,
+      "export_import_value_ratio": 0.01452748057984434,
+      "price_led_growth": false
+    }
+  },
+  {
+    "advance_supporting_signal_rule_ids": [],
+    "disposition_reason_code": "MATERIAL_TRIGGER_FIRED",
+    "evidence_needs": [
+      {
+        "code": "identity/tariff-line",
+        "evidence_ids": []
+      },
+      {
+        "code": "target specification/application",
+        "evidence_ids": []
+      },
+      {
+        "code": "line-level production or producer-grade matrix",
+        "evidence_ids": []
+      },
+      {
+        "code": "re-export/origin decomposition",
+        "evidence_ids": []
+      }
+    ],
+    "exclusions": [
+      {
+        "code": "EX-01_HETEROGENEOUS_RESIDUAL",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-02_MARKET_BELOW_MES",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-03_UNSATISFIABLE_HARD_GATE",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-04_IDLE_EQUIVALENT_CAPACITY",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-05_TRANSITORY_OR_MEASUREMENT",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-06_REDUNDANCY_OR_CROWD_OUT",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      }
+    ],
+    "fired_signal_rule_ids": [
+      "R1-D"
+    ],
+    "hs6": "190531",
+    "indicated_state": "INVESTIGATE",
+    "indication_reason_code": "ROUTE_CHANGING_EVIDENCE_UNRESOLVED",
+    "ledger": [
+      {
+        "decision_effect_code": "R0_EFFECT",
+        "execution": "DEGRADED",
+        "fired": true,
+        "metrics": {
+          "evidence_need_code": "identity/tariff-line",
+          "mapping_status": "NOT_CALCULABLE"
+        },
+        "result_code": "R0_DEGRADED_FIRED",
+        "rule_id": "R0"
+      },
+      {
+        "decision_effect_code": "R1_F_EFFECT",
+        "execution": "FULL",
+        "fired": false,
+        "metrics": {
+          "missing_years": []
+        },
+        "result_code": "R1_F_FULL_NOT_FIRED",
+        "rule_id": "R1-F"
+      },
+      {
+        "decision_effect_code": "R1_D_EFFECT",
+        "execution": "DEGRADED",
+        "fired": true,
+        "metrics": {
+          "confidence_cap": "C",
+          "positive_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ]
+        },
+        "result_code": "R1_D_DEGRADED_FIRED",
+        "rule_id": "R1-D"
+      },
+      {
+        "decision_effect_code": "R2_EFFECT",
+        "execution": "FULL",
+        "fired": false,
+        "metrics": {
+          "delta_ln_quantity": 0.2023,
+          "delta_ln_unit_value": -0.1651,
+          "delta_ln_value": 0.0372,
+          "from_year": 2023,
+          "observed_span_years": 1,
+          "quantity_cagr": 0.2242,
+          "quantity_contribution_share": 0.5506,
+          "to_year": 2024
+        },
+        "result_code": "R2_FULL_NOT_FIRED",
+        "rule_id": "R2"
+      },
+      {
+        "decision_effect_code": "R3_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "hhi": "NOT_CALCULABLE",
+          "hhi_threshold": 0.25,
+          "largest_supplier_share": "NOT_CALCULABLE",
+          "largest_supplier_threshold": 0.5,
+          "quantity": {
+            "basis": "quantity",
+            "eligible_partner_count": "NOT_CALCULABLE",
+            "flow_basis": "gross",
+            "hhi": "NOT_CALCULABLE",
+            "largest_supplier_share": "NOT_CALCULABLE",
+            "reason": "No partner rows or source-attributed quantity concentration disclosure are available.",
+            "source": "none",
+            "status": "NOT_CALCULABLE",
+            "top_two_share": "NOT_CALCULABLE",
+            "valid_coverage": "NOT_CALCULABLE",
+            "year": 2024
+          },
+          "top_two_share": "NOT_CALCULABLE",
+          "value": {
+            "basis": "value",
+            "eligible_partner_count": "NOT_CALCULABLE",
+            "flow_basis": "gross",
+            "hhi": "NOT_CALCULABLE",
+            "largest_supplier_share": "NOT_CALCULABLE",
+            "reason": "No partner rows or source-attributed value concentration disclosure are available.",
+            "source": "none",
+            "status": "NOT_CALCULABLE",
+            "top_two_share": "NOT_CALCULABLE",
+            "valid_coverage": "NOT_CALCULABLE",
+            "year": 2024
+          }
+        },
+        "result_code": "R3_DISABLED_NA",
+        "rule_id": "R3"
+      },
+      {
+        "decision_effect_code": "R4_D_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "bulk_band_usd_t": "NOT_CALCULABLE",
+          "calculation_basis": "none",
+          "iqr_usd_t": "NOT_CALCULABLE",
+          "minimum_valid_value_coverage": 0.7,
+          "outlier_candidate": "NOT_CALCULABLE",
+          "reason": "No comparable partner rows or source-attributed dispersion disclosure are available.",
+          "status": "NOT_CALCULABLE",
+          "valid_quantity_coverage": "NOT_CALCULABLE",
+          "valid_value_coverage": "NOT_CALCULABLE",
+          "weighted_median_usd_t": "NOT_CALCULABLE",
+          "weighted_q1_usd_t": "NOT_CALCULABLE",
+          "weighted_q3_usd_t": "NOT_CALCULABLE"
+        },
+        "result_code": "R4_D_DISABLED_NA",
+        "rule_id": "R4-D"
+      },
+      {
+        "decision_effect_code": "R5_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "apparent_consumption_kt": "NOT_CALCULABLE",
+          "calculation_basis": "NOT_CALCULABLE",
+          "net_import_exposure_kt": "NOT_CALCULABLE",
+          "reason": "Domestic production quantity and retained-import flow are absent from the frozen public snapshot; gross imports cannot establish apparent consumption.",
+          "retained_import_share_of_apparent_consumption": "NOT_CALCULABLE",
+          "retained_imports_kt": "NOT_CALCULABLE",
+          "threshold": 0.2,
+          "unavailable_inputs": [
+            "domestic_origin_exports_kt",
+            "domestic_production_kt",
+            "reexports_kt",
+            "retained_imports_kt"
+          ],
+          "unavailable_reasons": {
+            "apparent_consumption_kt": [
+              "domestic_origin_exports_kt",
+              "domestic_production_kt",
+              "retained_imports_kt"
+            ],
+            "net_import_exposure_kt": [
+              "domestic_origin_exports_kt",
+              "retained_imports_kt"
+            ],
+            "retained_import_share_of_apparent_consumption": [
+              "apparent_consumption_kt",
+              "retained_imports_kt"
+            ],
+            "retained_imports_kt": [
+              "reexports_kt",
+              "retained_imports_kt"
+            ]
+          }
+        },
+        "result_code": "R5_DISABLED_NA",
+        "rule_id": "R5"
+      },
+      {
+        "decision_effect_code": "R9_S_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "known_hard_gate_failure": false,
+          "qualifying_signal_count": 0,
+          "same_process_family": "NOT_CALCULABLE"
+        },
+        "result_code": "R9_S_DISABLED_NA",
+        "rule_id": "R9-S"
+      },
+      {
+        "decision_effect_code": "R10_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "criticality_evidence_id": null,
+          "criticality_status": "NOT_CALCULABLE"
+        },
+        "result_code": "R10_DISABLED_NA",
+        "rule_id": "R10"
+      },
+      {
+        "decision_effect_code": "R11_EFFECT",
+        "execution": "DEGRADED",
+        "fired": false,
+        "metrics": {
+          "computed_export_import_value_ratio": 0.4292,
+          "disclosed_export_import_value_ratio": null,
+          "disclosed_ratio_consistent": null,
+          "established_nameplate": {
+            "established": false,
+            "evidence_ids": [],
+            "producers": [],
+            "reason": "Verified domestic capability is not established.",
+            "total_observed_nameplate_tpy": "NOT_CALCULABLE"
+          },
+          "export_import_value_ratio": 0.4292,
+          "export_import_value_ratio_threshold": 50.0,
+          "ratio_basis": "gross_trade_value",
+          "ratio_reason": null,
+          "ratio_status": "CALCULABLE"
+        },
+        "result_code": "R11_DEGRADED_NOT_FIRED",
+        "rule_id": "R11"
+      }
+    ],
+    "material_trigger_rule_ids": [
+      "R1-D"
+    ],
+    "metrics": {
+      "delta_ln_value": 0.0372,
+      "export_import_value_ratio": 0.4292,
+      "fired_signal_count": 2,
+      "hhi_value": "NOT_CALCULABLE",
+      "imports_usd_m_latest": 205.71846419,
+      "largest_supplier_share_value": "NOT_CALCULABLE",
+      "qualifying_signal_count": 0,
+      "quantity_cagr": 0.2242
+    },
+    "screening_disposition": "CANDIDATE",
+    "warnings": {
+      "classification_continuity": {
+        "pattern": "ABSENT_BEFORE_REVISION_CHANGE",
+        "status": "REVISION_CHANGE_IN_WINDOW"
+      },
+      "export_import_ratio_warning": false,
+      "export_import_value_ratio": 0.42915597038708386,
+      "price_led_growth": true
+    }
+  },
+  {
+    "advance_supporting_signal_rule_ids": [],
+    "disposition_reason_code": "MATERIAL_TRIGGER_FIRED",
+    "evidence_needs": [
+      {
+        "code": "identity/tariff-line",
+        "evidence_ids": []
+      },
+      {
+        "code": "target specification/application",
+        "evidence_ids": []
+      },
+      {
+        "code": "line-level production or producer-grade matrix",
+        "evidence_ids": []
+      },
+      {
+        "code": "re-export/origin decomposition",
+        "evidence_ids": []
+      }
+    ],
+    "exclusions": [
+      {
+        "code": "EX-01_HETEROGENEOUS_RESIDUAL",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-02_MARKET_BELOW_MES",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-03_UNSATISFIABLE_HARD_GATE",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-04_IDLE_EQUIVALENT_CAPACITY",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-05_TRANSITORY_OR_MEASUREMENT",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-06_REDUNDANCY_OR_CROWD_OUT",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      }
+    ],
+    "fired_signal_rule_ids": [
+      "R1-D"
+    ],
+    "hs6": "190532",
+    "indicated_state": "INVESTIGATE",
+    "indication_reason_code": "ROUTE_CHANGING_EVIDENCE_UNRESOLVED",
+    "ledger": [
+      {
+        "decision_effect_code": "R0_EFFECT",
+        "execution": "DEGRADED",
+        "fired": true,
+        "metrics": {
+          "evidence_need_code": "identity/tariff-line",
+          "mapping_status": "NOT_CALCULABLE"
+        },
+        "result_code": "R0_DEGRADED_FIRED",
+        "rule_id": "R0"
+      },
+      {
+        "decision_effect_code": "R1_F_EFFECT",
+        "execution": "FULL",
+        "fired": false,
+        "metrics": {
+          "missing_years": []
+        },
+        "result_code": "R1_F_FULL_NOT_FIRED",
+        "rule_id": "R1-F"
+      },
+      {
+        "decision_effect_code": "R1_D_EFFECT",
+        "execution": "DEGRADED",
+        "fired": true,
+        "metrics": {
+          "confidence_cap": "C",
+          "positive_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ]
+        },
+        "result_code": "R1_D_DEGRADED_FIRED",
+        "rule_id": "R1-D"
+      },
+      {
+        "decision_effect_code": "R2_EFFECT",
+        "execution": "FULL",
+        "fired": false,
+        "metrics": {
+          "delta_ln_quantity": 0.058,
+          "delta_ln_unit_value": 0.1319,
+          "delta_ln_value": 0.1899,
+          "from_year": 2023,
+          "observed_span_years": 1,
+          "quantity_cagr": 0.0598,
+          "quantity_contribution_share": 0.3056,
+          "to_year": 2024
+        },
+        "result_code": "R2_FULL_NOT_FIRED",
+        "rule_id": "R2"
+      },
+      {
+        "decision_effect_code": "R3_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "hhi": "NOT_CALCULABLE",
+          "hhi_threshold": 0.25,
+          "largest_supplier_share": "NOT_CALCULABLE",
+          "largest_supplier_threshold": 0.5,
+          "quantity": {
+            "basis": "quantity",
+            "eligible_partner_count": "NOT_CALCULABLE",
+            "flow_basis": "gross",
+            "hhi": "NOT_CALCULABLE",
+            "largest_supplier_share": "NOT_CALCULABLE",
+            "reason": "No partner rows or source-attributed quantity concentration disclosure are available.",
+            "source": "none",
+            "status": "NOT_CALCULABLE",
+            "top_two_share": "NOT_CALCULABLE",
+            "valid_coverage": "NOT_CALCULABLE",
+            "year": 2024
+          },
+          "top_two_share": "NOT_CALCULABLE",
+          "value": {
+            "basis": "value",
+            "eligible_partner_count": "NOT_CALCULABLE",
+            "flow_basis": "gross",
+            "hhi": "NOT_CALCULABLE",
+            "largest_supplier_share": "NOT_CALCULABLE",
+            "reason": "No partner rows or source-attributed value concentration disclosure are available.",
+            "source": "none",
+            "status": "NOT_CALCULABLE",
+            "top_two_share": "NOT_CALCULABLE",
+            "valid_coverage": "NOT_CALCULABLE",
+            "year": 2024
+          }
+        },
+        "result_code": "R3_DISABLED_NA",
+        "rule_id": "R3"
+      },
+      {
+        "decision_effect_code": "R4_D_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "bulk_band_usd_t": "NOT_CALCULABLE",
+          "calculation_basis": "none",
+          "iqr_usd_t": "NOT_CALCULABLE",
+          "minimum_valid_value_coverage": 0.7,
+          "outlier_candidate": "NOT_CALCULABLE",
+          "reason": "No comparable partner rows or source-attributed dispersion disclosure are available.",
+          "status": "NOT_CALCULABLE",
+          "valid_quantity_coverage": "NOT_CALCULABLE",
+          "valid_value_coverage": "NOT_CALCULABLE",
+          "weighted_median_usd_t": "NOT_CALCULABLE",
+          "weighted_q1_usd_t": "NOT_CALCULABLE",
+          "weighted_q3_usd_t": "NOT_CALCULABLE"
+        },
+        "result_code": "R4_D_DISABLED_NA",
+        "rule_id": "R4-D"
+      },
+      {
+        "decision_effect_code": "R5_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "apparent_consumption_kt": "NOT_CALCULABLE",
+          "calculation_basis": "NOT_CALCULABLE",
+          "net_import_exposure_kt": "NOT_CALCULABLE",
+          "reason": "Domestic production quantity and retained-import flow are absent from the frozen public snapshot; gross imports cannot establish apparent consumption.",
+          "retained_import_share_of_apparent_consumption": "NOT_CALCULABLE",
+          "retained_imports_kt": "NOT_CALCULABLE",
+          "threshold": 0.2,
+          "unavailable_inputs": [
+            "domestic_origin_exports_kt",
+            "domestic_production_kt",
+            "reexports_kt",
+            "retained_imports_kt"
+          ],
+          "unavailable_reasons": {
+            "apparent_consumption_kt": [
+              "domestic_origin_exports_kt",
+              "domestic_production_kt",
+              "retained_imports_kt"
+            ],
+            "net_import_exposure_kt": [
+              "domestic_origin_exports_kt",
+              "retained_imports_kt"
+            ],
+            "retained_import_share_of_apparent_consumption": [
+              "apparent_consumption_kt",
+              "retained_imports_kt"
+            ],
+            "retained_imports_kt": [
+              "reexports_kt",
+              "retained_imports_kt"
+            ]
+          }
+        },
+        "result_code": "R5_DISABLED_NA",
+        "rule_id": "R5"
+      },
+      {
+        "decision_effect_code": "R9_S_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "known_hard_gate_failure": false,
+          "qualifying_signal_count": 0,
+          "same_process_family": "NOT_CALCULABLE"
+        },
+        "result_code": "R9_S_DISABLED_NA",
+        "rule_id": "R9-S"
+      },
+      {
+        "decision_effect_code": "R10_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "criticality_evidence_id": null,
+          "criticality_status": "NOT_CALCULABLE"
+        },
+        "result_code": "R10_DISABLED_NA",
+        "rule_id": "R10"
+      },
+      {
+        "decision_effect_code": "R11_EFFECT",
+        "execution": "DEGRADED",
+        "fired": false,
+        "metrics": {
+          "computed_export_import_value_ratio": 0.0258,
+          "disclosed_export_import_value_ratio": null,
+          "disclosed_ratio_consistent": null,
+          "established_nameplate": {
+            "established": false,
+            "evidence_ids": [],
+            "producers": [],
+            "reason": "Verified domestic capability is not established.",
+            "total_observed_nameplate_tpy": "NOT_CALCULABLE"
+          },
+          "export_import_value_ratio": 0.0258,
+          "export_import_value_ratio_threshold": 50.0,
+          "ratio_basis": "gross_trade_value",
+          "ratio_reason": null,
+          "ratio_status": "CALCULABLE"
+        },
+        "result_code": "R11_DEGRADED_NOT_FIRED",
+        "rule_id": "R11"
+      }
+    ],
+    "material_trigger_rule_ids": [
+      "R1-D"
+    ],
+    "metrics": {
+      "delta_ln_value": 0.1899,
+      "export_import_value_ratio": 0.0258,
+      "fired_signal_count": 2,
+      "hhi_value": "NOT_CALCULABLE",
+      "imports_usd_m_latest": 319.978903467,
+      "largest_supplier_share_value": "NOT_CALCULABLE",
+      "qualifying_signal_count": 0,
+      "quantity_cagr": 0.0598
+    },
+    "screening_disposition": "CANDIDATE",
+    "warnings": {
+      "classification_continuity": {
+        "pattern": "ABSENT_BEFORE_REVISION_CHANGE",
+        "status": "REVISION_CHANGE_IN_WINDOW"
+      },
+      "export_import_ratio_warning": false,
+      "export_import_value_ratio": 0.025766377213209905,
+      "price_led_growth": true
+    }
+  },
+  {
+    "advance_supporting_signal_rule_ids": [],
+    "disposition_reason_code": "MATERIAL_TRIGGER_FIRED",
+    "evidence_needs": [
+      {
+        "code": "identity/tariff-line",
+        "evidence_ids": []
+      },
+      {
+        "code": "target specification/application",
+        "evidence_ids": []
+      },
+      {
+        "code": "line-level production or producer-grade matrix",
+        "evidence_ids": []
+      },
+      {
+        "code": "re-export/origin decomposition",
+        "evidence_ids": []
+      }
+    ],
+    "exclusions": [
+      {
+        "code": "EX-01_HETEROGENEOUS_RESIDUAL",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-02_MARKET_BELOW_MES",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-03_UNSATISFIABLE_HARD_GATE",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-04_IDLE_EQUIVALENT_CAPACITY",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-05_TRANSITORY_OR_MEASUREMENT",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-06_REDUNDANCY_OR_CROWD_OUT",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      }
+    ],
+    "fired_signal_rule_ids": [
+      "R1-D"
+    ],
+    "hs6": "190540",
+    "indicated_state": "INVESTIGATE",
+    "indication_reason_code": "ROUTE_CHANGING_EVIDENCE_UNRESOLVED",
+    "ledger": [
+      {
+        "decision_effect_code": "R0_EFFECT",
+        "execution": "DEGRADED",
+        "fired": true,
+        "metrics": {
+          "evidence_need_code": "identity/tariff-line",
+          "mapping_status": "NOT_CALCULABLE"
+        },
+        "result_code": "R0_DEGRADED_FIRED",
+        "rule_id": "R0"
+      },
+      {
+        "decision_effect_code": "R1_F_EFFECT",
+        "execution": "FULL",
+        "fired": false,
+        "metrics": {
+          "missing_years": []
+        },
+        "result_code": "R1_F_FULL_NOT_FIRED",
+        "rule_id": "R1-F"
+      },
+      {
+        "decision_effect_code": "R1_D_EFFECT",
+        "execution": "DEGRADED",
+        "fired": true,
+        "metrics": {
+          "confidence_cap": "C",
+          "positive_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ]
+        },
+        "result_code": "R1_D_DEGRADED_FIRED",
+        "rule_id": "R1-D"
+      },
+      {
+        "decision_effect_code": "R2_EFFECT",
+        "execution": "FULL",
+        "fired": false,
+        "metrics": {
+          "delta_ln_quantity": 0.7643,
+          "delta_ln_unit_value": -0.6076,
+          "delta_ln_value": 0.1567,
+          "from_year": 2023,
+          "observed_span_years": 1,
+          "quantity_cagr": 1.1475,
+          "quantity_contribution_share": 0.5571,
+          "to_year": 2024
+        },
+        "result_code": "R2_FULL_NOT_FIRED",
+        "rule_id": "R2"
+      },
+      {
+        "decision_effect_code": "R3_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "hhi": "NOT_CALCULABLE",
+          "hhi_threshold": 0.25,
+          "largest_supplier_share": "NOT_CALCULABLE",
+          "largest_supplier_threshold": 0.5,
+          "quantity": {
+            "basis": "quantity",
+            "eligible_partner_count": "NOT_CALCULABLE",
+            "flow_basis": "gross",
+            "hhi": "NOT_CALCULABLE",
+            "largest_supplier_share": "NOT_CALCULABLE",
+            "reason": "No partner rows or source-attributed quantity concentration disclosure are available.",
+            "source": "none",
+            "status": "NOT_CALCULABLE",
+            "top_two_share": "NOT_CALCULABLE",
+            "valid_coverage": "NOT_CALCULABLE",
+            "year": 2024
+          },
+          "top_two_share": "NOT_CALCULABLE",
+          "value": {
+            "basis": "value",
+            "eligible_partner_count": "NOT_CALCULABLE",
+            "flow_basis": "gross",
+            "hhi": "NOT_CALCULABLE",
+            "largest_supplier_share": "NOT_CALCULABLE",
+            "reason": "No partner rows or source-attributed value concentration disclosure are available.",
+            "source": "none",
+            "status": "NOT_CALCULABLE",
+            "top_two_share": "NOT_CALCULABLE",
+            "valid_coverage": "NOT_CALCULABLE",
+            "year": 2024
+          }
+        },
+        "result_code": "R3_DISABLED_NA",
+        "rule_id": "R3"
+      },
+      {
+        "decision_effect_code": "R4_D_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "bulk_band_usd_t": "NOT_CALCULABLE",
+          "calculation_basis": "none",
+          "iqr_usd_t": "NOT_CALCULABLE",
+          "minimum_valid_value_coverage": 0.7,
+          "outlier_candidate": "NOT_CALCULABLE",
+          "reason": "No comparable partner rows or source-attributed dispersion disclosure are available.",
+          "status": "NOT_CALCULABLE",
+          "valid_quantity_coverage": "NOT_CALCULABLE",
+          "valid_value_coverage": "NOT_CALCULABLE",
+          "weighted_median_usd_t": "NOT_CALCULABLE",
+          "weighted_q1_usd_t": "NOT_CALCULABLE",
+          "weighted_q3_usd_t": "NOT_CALCULABLE"
+        },
+        "result_code": "R4_D_DISABLED_NA",
+        "rule_id": "R4-D"
+      },
+      {
+        "decision_effect_code": "R5_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "apparent_consumption_kt": "NOT_CALCULABLE",
+          "calculation_basis": "NOT_CALCULABLE",
+          "net_import_exposure_kt": "NOT_CALCULABLE",
+          "reason": "Domestic production quantity and retained-import flow are absent from the frozen public snapshot; gross imports cannot establish apparent consumption.",
+          "retained_import_share_of_apparent_consumption": "NOT_CALCULABLE",
+          "retained_imports_kt": "NOT_CALCULABLE",
+          "threshold": 0.2,
+          "unavailable_inputs": [
+            "domestic_origin_exports_kt",
+            "domestic_production_kt",
+            "reexports_kt",
+            "retained_imports_kt"
+          ],
+          "unavailable_reasons": {
+            "apparent_consumption_kt": [
+              "domestic_origin_exports_kt",
+              "domestic_production_kt",
+              "retained_imports_kt"
+            ],
+            "net_import_exposure_kt": [
+              "domestic_origin_exports_kt",
+              "retained_imports_kt"
+            ],
+            "retained_import_share_of_apparent_consumption": [
+              "apparent_consumption_kt",
+              "retained_imports_kt"
+            ],
+            "retained_imports_kt": [
+              "reexports_kt",
+              "retained_imports_kt"
+            ]
+          }
+        },
+        "result_code": "R5_DISABLED_NA",
+        "rule_id": "R5"
+      },
+      {
+        "decision_effect_code": "R9_S_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "known_hard_gate_failure": false,
+          "qualifying_signal_count": 0,
+          "same_process_family": "NOT_CALCULABLE"
+        },
+        "result_code": "R9_S_DISABLED_NA",
+        "rule_id": "R9-S"
+      },
+      {
+        "decision_effect_code": "R10_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "criticality_evidence_id": null,
+          "criticality_status": "NOT_CALCULABLE"
+        },
+        "result_code": "R10_DISABLED_NA",
+        "rule_id": "R10"
+      },
+      {
+        "decision_effect_code": "R11_EFFECT",
+        "execution": "DEGRADED",
+        "fired": false,
+        "metrics": {
+          "computed_export_import_value_ratio": 4.2278,
+          "disclosed_export_import_value_ratio": null,
+          "disclosed_ratio_consistent": null,
+          "established_nameplate": {
+            "established": false,
+            "evidence_ids": [],
+            "producers": [],
+            "reason": "Verified domestic capability is not established.",
+            "total_observed_nameplate_tpy": "NOT_CALCULABLE"
+          },
+          "export_import_value_ratio": 4.2278,
+          "export_import_value_ratio_threshold": 50.0,
+          "ratio_basis": "gross_trade_value",
+          "ratio_reason": null,
+          "ratio_status": "CALCULABLE"
+        },
+        "result_code": "R11_DEGRADED_NOT_FIRED",
+        "rule_id": "R11"
+      }
+    ],
+    "material_trigger_rule_ids": [
+      "R1-D"
+    ],
+    "metrics": {
+      "delta_ln_value": 0.1567,
+      "export_import_value_ratio": 4.2278,
+      "fired_signal_count": 2,
+      "hhi_value": "NOT_CALCULABLE",
+      "imports_usd_m_latest": 24.687527116000002,
+      "largest_supplier_share_value": "NOT_CALCULABLE",
+      "qualifying_signal_count": 0,
+      "quantity_cagr": 1.1475
+    },
+    "screening_disposition": "CANDIDATE",
+    "warnings": {
+      "classification_continuity": {
+        "pattern": "ABSENT_BEFORE_REVISION_CHANGE",
+        "status": "REVISION_CHANGE_IN_WINDOW"
+      },
+      "export_import_ratio_warning": false,
+      "export_import_value_ratio": 4.227752704172462,
+      "price_led_growth": true
+    }
+  },
+  {
+    "advance_supporting_signal_rule_ids": [],
+    "disposition_reason_code": "MATERIAL_TRIGGER_FIRED",
+    "evidence_needs": [
+      {
+        "code": "identity/tariff-line",
+        "evidence_ids": []
+      },
+      {
+        "code": "target specification/application",
+        "evidence_ids": []
+      },
+      {
+        "code": "line-level production or producer-grade matrix",
+        "evidence_ids": []
+      }
+    ],
+    "exclusions": [
+      {
+        "code": "EX-01_HETEROGENEOUS_RESIDUAL",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-02_MARKET_BELOW_MES",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-03_UNSATISFIABLE_HARD_GATE",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-04_IDLE_EQUIVALENT_CAPACITY",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-05_TRANSITORY_OR_MEASUREMENT",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      },
+      {
+        "code": "EX-06_REDUNDANCY_OR_CROWD_OUT",
+        "evidence_ids": [],
+        "reason_code": "EXCLUSION_INPUT_UNAVAILABLE",
+        "status": "NOT_CALCULABLE"
+      }
+    ],
+    "fired_signal_rule_ids": [
+      "R1-D"
+    ],
+    "hs6": "190590",
+    "indicated_state": "INVESTIGATE",
+    "indication_reason_code": "ROUTE_CHANGING_EVIDENCE_UNRESOLVED",
+    "ledger": [
+      {
+        "decision_effect_code": "R0_EFFECT",
+        "execution": "DEGRADED",
+        "fired": true,
+        "metrics": {
+          "evidence_need_code": "identity/tariff-line",
+          "mapping_status": "NOT_CALCULABLE"
+        },
+        "result_code": "R0_DEGRADED_FIRED",
+        "rule_id": "R0"
+      },
+      {
+        "decision_effect_code": "R1_F_EFFECT",
+        "execution": "FULL",
+        "fired": false,
+        "metrics": {
+          "missing_years": []
+        },
+        "result_code": "R1_F_FULL_NOT_FIRED",
+        "rule_id": "R1-F"
+      },
+      {
+        "decision_effect_code": "R1_D_EFFECT",
+        "execution": "DEGRADED",
+        "fired": true,
+        "metrics": {
+          "confidence_cap": "C",
+          "positive_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ]
+        },
+        "result_code": "R1_D_DEGRADED_FIRED",
+        "rule_id": "R1-D"
+      },
+      {
+        "decision_effect_code": "R2_EFFECT",
+        "execution": "FULL",
+        "fired": false,
+        "metrics": {
+          "delta_ln_quantity": -0.0605,
+          "delta_ln_unit_value": 0.0369,
+          "delta_ln_value": -0.0235,
+          "from_year": 2023,
+          "observed_span_years": 1,
+          "quantity_cagr": -0.0587,
+          "quantity_contribution_share": 0.6208,
+          "to_year": 2024
+        },
+        "result_code": "R2_FULL_NOT_FIRED",
+        "rule_id": "R2"
+      },
+      {
+        "decision_effect_code": "R3_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "hhi": "NOT_CALCULABLE",
+          "hhi_threshold": 0.25,
+          "largest_supplier_share": "NOT_CALCULABLE",
+          "largest_supplier_threshold": 0.5,
+          "quantity": {
+            "basis": "quantity",
+            "eligible_partner_count": "NOT_CALCULABLE",
+            "flow_basis": "gross",
+            "hhi": "NOT_CALCULABLE",
+            "largest_supplier_share": "NOT_CALCULABLE",
+            "reason": "No partner rows or source-attributed quantity concentration disclosure are available.",
+            "source": "none",
+            "status": "NOT_CALCULABLE",
+            "top_two_share": "NOT_CALCULABLE",
+            "valid_coverage": "NOT_CALCULABLE",
+            "year": 2024
+          },
+          "top_two_share": "NOT_CALCULABLE",
+          "value": {
+            "basis": "value",
+            "eligible_partner_count": "NOT_CALCULABLE",
+            "flow_basis": "gross",
+            "hhi": "NOT_CALCULABLE",
+            "largest_supplier_share": "NOT_CALCULABLE",
+            "reason": "No partner rows or source-attributed value concentration disclosure are available.",
+            "source": "none",
+            "status": "NOT_CALCULABLE",
+            "top_two_share": "NOT_CALCULABLE",
+            "valid_coverage": "NOT_CALCULABLE",
+            "year": 2024
+          }
+        },
+        "result_code": "R3_DISABLED_NA",
+        "rule_id": "R3"
+      },
+      {
+        "decision_effect_code": "R4_D_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "bulk_band_usd_t": "NOT_CALCULABLE",
+          "calculation_basis": "none",
+          "iqr_usd_t": "NOT_CALCULABLE",
+          "minimum_valid_value_coverage": 0.7,
+          "outlier_candidate": "NOT_CALCULABLE",
+          "reason": "No comparable partner rows or source-attributed dispersion disclosure are available.",
+          "status": "NOT_CALCULABLE",
+          "valid_quantity_coverage": "NOT_CALCULABLE",
+          "valid_value_coverage": "NOT_CALCULABLE",
+          "weighted_median_usd_t": "NOT_CALCULABLE",
+          "weighted_q1_usd_t": "NOT_CALCULABLE",
+          "weighted_q3_usd_t": "NOT_CALCULABLE"
+        },
+        "result_code": "R4_D_DISABLED_NA",
+        "rule_id": "R4-D"
+      },
+      {
+        "decision_effect_code": "R5_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "apparent_consumption_kt": "NOT_CALCULABLE",
+          "calculation_basis": "NOT_CALCULABLE",
+          "net_import_exposure_kt": "NOT_CALCULABLE",
+          "reason": "Domestic production quantity and retained-import flow are absent from the frozen public snapshot; gross imports cannot establish apparent consumption.",
+          "retained_import_share_of_apparent_consumption": "NOT_CALCULABLE",
+          "retained_imports_kt": "NOT_CALCULABLE",
+          "threshold": 0.2,
+          "unavailable_inputs": [
+            "domestic_origin_exports_kt",
+            "domestic_production_kt",
+            "reexports_kt",
+            "retained_imports_kt"
+          ],
+          "unavailable_reasons": {
+            "apparent_consumption_kt": [
+              "domestic_origin_exports_kt",
+              "domestic_production_kt",
+              "retained_imports_kt"
+            ],
+            "net_import_exposure_kt": [
+              "domestic_origin_exports_kt",
+              "retained_imports_kt"
+            ],
+            "retained_import_share_of_apparent_consumption": [
+              "apparent_consumption_kt",
+              "retained_imports_kt"
+            ],
+            "retained_imports_kt": [
+              "reexports_kt",
+              "retained_imports_kt"
+            ]
+          }
+        },
+        "result_code": "R5_DISABLED_NA",
+        "rule_id": "R5"
+      },
+      {
+        "decision_effect_code": "R9_S_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "known_hard_gate_failure": false,
+          "qualifying_signal_count": 0,
+          "same_process_family": "NOT_CALCULABLE"
+        },
+        "result_code": "R9_S_DISABLED_NA",
+        "rule_id": "R9-S"
+      },
+      {
+        "decision_effect_code": "R10_EFFECT",
+        "execution": "DISABLED",
+        "fired": null,
+        "metrics": {
+          "criticality_evidence_id": null,
+          "criticality_status": "NOT_CALCULABLE"
+        },
+        "result_code": "R10_DISABLED_NA",
+        "rule_id": "R10"
+      },
+      {
+        "decision_effect_code": "R11_EFFECT",
+        "execution": "DEGRADED",
+        "fired": false,
+        "metrics": {
+          "computed_export_import_value_ratio": 0.65,
+          "disclosed_export_import_value_ratio": null,
+          "disclosed_ratio_consistent": null,
+          "established_nameplate": {
+            "established": false,
+            "evidence_ids": [],
+            "producers": [],
+            "reason": "Verified domestic capability is not established.",
+            "total_observed_nameplate_tpy": "NOT_CALCULABLE"
+          },
+          "export_import_value_ratio": 0.65,
+          "export_import_value_ratio_threshold": 50.0,
+          "ratio_basis": "gross_trade_value",
+          "ratio_reason": null,
+          "ratio_status": "CALCULABLE"
+        },
+        "result_code": "R11_DEGRADED_NOT_FIRED",
+        "rule_id": "R11"
+      }
+    ],
+    "material_trigger_rule_ids": [
+      "R1-D"
+    ],
+    "metrics": {
+      "delta_ln_value": -0.0235,
+      "export_import_value_ratio": 0.65,
+      "fired_signal_count": 2,
+      "hhi_value": "NOT_CALCULABLE",
+      "imports_usd_m_latest": 374.73256023199997,
+      "largest_supplier_share_value": "NOT_CALCULABLE",
+      "qualifying_signal_count": 0,
+      "quantity_cagr": -0.0587
+    },
+    "screening_disposition": "CANDIDATE",
+    "warnings": {
+      "classification_continuity": {
+        "pattern": "ABSENT_BEFORE_REVISION_CHANGE",
+        "status": "REVISION_CHANGE_IN_WINDOW"
+      },
+      "export_import_ratio_warning": false,
+      "export_import_value_ratio": 0.6499783487194308,
+      "price_led_growth": false
+    }
+  }
+]

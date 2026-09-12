@@ -56,6 +56,50 @@ class FakeTransport(Transport):
         return outcome
 
 
+def comtrade_row(
+    hs6: str = "721049",
+    *,
+    period: int = 2024,
+    flow_code: str = "M",
+    reporter_code: int = 682,
+    partner_code: int = 0,
+    partner_desc: str = "World",
+    classification_code: str = "H6",
+    primary_value: float = 1_000_000.0,
+    net_weight: float | None = 1_000_000.0,
+) -> dict[str, Any]:
+    """Official-envelope-shaped Class-D row for connector tests."""
+    return {
+        "period": period,
+        "flowCode": flow_code,
+        "reporterCode": reporter_code,
+        "reporterDesc": "Saudi Arabia",
+        "partnerCode": partner_code,
+        "partnerDesc": partner_desc,
+        "cmdCode": hs6,
+        "classificationCode": classification_code,
+        "primaryValue": primary_value,
+        "netWgt": net_weight,
+    }
+
+
+def comtrade_envelope(
+    rows: list[dict[str, Any]],
+    *,
+    count: int | None = None,
+    error: Any = None,
+) -> bytes:
+    """Official-envelope-shaped Class-D response for connector tests."""
+    return json.dumps(
+        {
+            "count": len(rows) if count is None else count,
+            "data": rows,
+            "error": error,
+        },
+        sort_keys=True,
+    ).encode("utf-8")
+
+
 def seed_unit(
     store: RawStore,
     *,

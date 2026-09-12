@@ -1,0 +1,62 @@
+{
+  "access_classification": "public_registered",
+  "authority": "UN Comtrade",
+  "byte_count": 4580847,
+  "compressed_sha256": "13750b0b30e5dc054a44fc30aac5551b5bfdae9c5545178b60711495f3667ce9",
+  "content_type": "application/json",
+  "credential_env_var": "IOR_COMTRADE_SUBSCRIPTION_KEY",
+  "credential_used": true,
+  "endpoint_or_document": "https://comtradeapi.un.org/data/v1/get/C/A/HS?reporterCode=682&period=2022&flowCode=M&cmdCode=AG6&partnerCode=0&motCode=0&customsCode=C00",
+  "flow": "imports",
+  "http_status": 200,
+  "license_or_usage_note": "Terms captured from https://uncomtrade.org/docs/policy-on-use-and-re-dissemination/",
+  "nomenclature": "HS",
+  "normalization_reason": null,
+  "normalization_status": "NORMALIZED",
+  "page_index": 1,
+  "page_meta": {
+    "enumerated_children": null,
+    "next_page_token_present": false,
+    "page_index": 1,
+    "pages_expected": 1,
+    "rows_in_page": 5061
+  },
+  "partner": "0",
+  "period": "2022",
+  "product_code": "ALL",
+  "product_scope": "ALL_HS6",
+  "query_contract": {
+    "flow": "imports",
+    "nomenclature": "HS",
+    "parameters": [],
+    "partner": "0",
+    "periods": [
+      "2022"
+    ],
+    "product_codes": [
+      "ALL"
+    ],
+    "product_scope": "ALL_HS6",
+    "reporter": "SAU",
+    "source_id": "un_comtrade",
+    "stage": "UNIVERSE"
+  },
+  "query_hash": "6b9efd5f68dbc6a70a42be36c6286eba215814182bc47a7b594a8b264f70a136",
+  "raw_file_path": "data/raw/un_comtrade/6b9efd5f68dbc6a70a42be36c6286eba215814182bc47a7b594a8b264f70a136/20260912T141128Z/page-0001.payload.json.gz",
+  "reporter": "SAU",
+  "response_headers_subset": [
+    {
+      "name": "content-type",
+      "value": "application/json; charset=utf-8"
+    },
+    {
+      "name": "date",
+      "value": "Sat, 12 Sep 2026 14:11:46 GMT"
+    }
+  ],
+  "retrieved_at": "2026-09-12T14:11:49Z",
+  "run_id": "20260912T141128Z",
+  "sha256": "a94d81c10b07b89d8c99146f3b8b4bf23da9388ad34698baeaf83ae156907fc7",
+  "source_id": "un_comtrade",
+  "source_refresh_date": "2026-09-12"
+}

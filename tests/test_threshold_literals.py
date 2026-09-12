@@ -197,6 +197,8 @@ def test_repository_has_no_embedded_threshold_comparison_literals() -> None:
         root=PROJECT_ROOT,
     )
     assert source_count >= 15
+    assert any((SOURCE_DIR / "screening").glob("*.py"))
+    assert source_count == len(list(SOURCE_DIR.rglob("*.py")))
     assert threshold_count > 0
     assert findings == []
     rules_source = (

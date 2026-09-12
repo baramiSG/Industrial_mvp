@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from dataclasses import replace
 from pathlib import Path
 
 import pytest
@@ -160,3 +161,49 @@ def test_latest_runs_selects_greatest_run_id(tmp_path: Path) -> None:
     selected = store.latest_runs(source_id="wits_trade", stage="UNIVERSE")
     assert selected[("imports", "2024")][0].run_id == "20260904T010000Z"
     assert selected[("imports", "2024")][1] == ("20260904T000000Z",)
+
+
+def test_attempt_and_coverage_records_are_write_once(tmp_path: Path) -> None:
+    store = RawStore(
+        tmp_path / "raw", max_artifact_bytes=1024, max_store_bytes=4096
+    )
+    contract = _contract().query_contract
+    coverage = CoverageRecord(
+        source_id="wits_trade",
+        stage=Stage.UNIVERSE,
+        query_hash=contract.query_hash(),
+        run_id="20260904T000000Z",
+        unit_key=("imports", "2024"),
+        unit={},
+        pages_fetched=0,
+        pages_expected=0,
+        requests_made=0,
+        status="INCOMPLETE",
+        completeness_basis=CompletenessBasis.UNAVAILABLE,
+        stop_reason=UnavailableReason.COVERAGE_INDETERMINATE,
+        missing_pages=(),
+        observed_stop=None,
+    )
+    attempt = UnavailableRecord(
+        source_id="wits_trade",
+        query_contract=contract,
+        query_hash=contract.query_hash(),
+        run_id="20260904T000000Z",
+        attempted_at="2026-09-04T00:00:00Z",
+        reason=UnavailableReason.COVERAGE_INCOMPLETE,
+        observed_response=None,
+        endpoint_or_document="http://example.test",
+        credential_env_var=None,
+        credential_present=False,
+        coverage=coverage,
+    )
+
+    store.write_coverage(coverage)
+    store.write_unavailable(attempt)
+
+    with pytest.raises(RawStoreIntegrityError, match="Write-once conflict"):
+        store.write_coverage(replace(coverage, requests_made=1))
+    with pytest.raises(RawStoreIntegrityError, match="Write-once conflict"):
+        store.write_unavailable(
+            replace(attempt, reason=UnavailableReason.NETWORK_ERROR)
+        )

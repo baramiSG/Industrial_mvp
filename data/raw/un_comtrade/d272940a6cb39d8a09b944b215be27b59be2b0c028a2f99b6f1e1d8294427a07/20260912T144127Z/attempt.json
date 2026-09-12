@@ -1,0 +1,53 @@
+{
+  "attempted_at": "2026-09-12T14:41:27Z",
+  "coverage": {
+    "completeness_basis": "UNAVAILABLE",
+    "missing_pages": [],
+    "observed_stop": null,
+    "pages_expected": 0,
+    "pages_fetched": 0,
+    "query_hash": "d272940a6cb39d8a09b944b215be27b59be2b0c028a2f99b6f1e1d8294427a07",
+    "requests_made": 0,
+    "run_id": "20260912T144127Z",
+    "source_id": "un_comtrade",
+    "stage": "PARTNERS",
+    "status": "INCOMPLETE",
+    "stop_reason": "ENDPOINT_UNVERIFIED",
+    "unit": {
+      "flow": "imports",
+      "hs6": "030199",
+      "period": "2024",
+      "product_scope": "EXPLICIT",
+      "stage": "PARTNERS"
+    },
+    "unit_key": [
+      "030199",
+      "imports",
+      "2024"
+    ]
+  },
+  "credential_env_var": "IOR_COMTRADE_SUBSCRIPTION_KEY",
+  "credential_present": true,
+  "endpoint_or_document": "UNAVAILABLE",
+  "observed_response": null,
+  "query_contract": {
+    "flow": "imports",
+    "nomenclature": "HS",
+    "parameters": [],
+    "partner": "0",
+    "periods": [
+      "2024"
+    ],
+    "product_codes": [
+      "030199"
+    ],
+    "product_scope": "EXPLICIT",
+    "reporter": "SAU",
+    "source_id": "un_comtrade",
+    "stage": "PARTNERS"
+  },
+  "query_hash": "d272940a6cb39d8a09b944b215be27b59be2b0c028a2f99b6f1e1d8294427a07",
+  "reason": "ENDPOINT_UNVERIFIED",
+  "run_id": "20260912T144127Z",
+  "source_id": "un_comtrade"
+}

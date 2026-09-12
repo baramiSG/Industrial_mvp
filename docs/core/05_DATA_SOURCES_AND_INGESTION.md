@@ -26,7 +26,7 @@ These records are stored locally, hashed and never refreshed during runtime.
 
 | Source | Use | Grain / caution | MVP status |
 |---|---|---|---|
-| UN Comtrade / WITS | HS6 value, quantity, partner and time series | Reporter record; gross flows; quantity quality varies | connector implemented (S11); availability and coverage recorded per run |
+| UN Comtrade / WITS | HS6 value, quantity, partner and time series | Reporter record; gross flows; quantity quality varies | official v1 Comtrade universe COMPLETE (2021–2024; imports and exports; 5,443 HS6); frozen S11 WITS partner snapshot retained separately; Comtrade partner detail and ZATCA tariff tree UNAVAILABLE |
 | BACI (CEPII) | reconciled bilateral HS6 and cross-country consistency | annual; release-version pinning required | connector implemented (S11); raw evidence only, no analytical kind |
 | ITC Trade Map | monthly and mirror diagnostics | registration/licensing conditions; not a substitute for Saudi administrative data | connector planned |
 | GASTAT foreign trade and open data | official domestic aggregate anchor | reconcile definitions and revisions | connector planned |
@@ -278,3 +278,17 @@ Refusal is `OUT_OF_SCOPE_CONTENT` with `PersonalDataFields` for matched labels o
 - The five S12a implemented status cells in §3.2/§3.3 describe connector code coverage, not source availability or validated production/compliance facts. The accepted T7 operator records in `.workflow/slices/S12a-acquisition-framework-institutional-sources/implementation_log.md` record five zero-request ENDPOINT_UNVERIFIED attempts with INCOMPLETE coverage and no institutional pages or snapshots; the existing S11 partner snapshot remains the reconstruction oracle. Per-run facts and outstanding limitations belong in the RunReports, ADR and Known Limitations, without promoting unavailable evidence or test-double rows into observations.
 - S12b `acquire-documents` requires explicit `--source`, `--list-id` and `--max-requests`; it takes no `--years` or flow parameters. Document lists are authored and hashed before the live window; a list is never edited after a run (corrections use a new `list_id`). Each list entry is an independent DOCUMENT unit and contributes to the minimum request bound; per-entry COMPLETE, RAW_ONLY or honest INCOMPLETE outcomes are acceptable terminal evidence. `build-documents` selects only the latest stored run per source/stage/unit and records sorted prior run ids as superseded before deriving DocumentRecord JSON offline. Size budgets, rate-limit floors and licence-capture rules are unchanged from S11/S12a.
 - S12c `build-entities` is offline and requires `--mention-list-id`. Mention lists are operator-authored, validated and hashed before a build and are never edited after one (a correction uses a new `list_id`); every span is verified verbatim against its stored line or JSON value before the write-once entity artifact is emitted and reconstructed byte-for-byte.
+- **W0–W3 operator-window discipline (S13a):** W0 observes official
+  documentation without credentials and records every fact or `NOT OBSERVED`;
+  W1 attempts the complete year/flow universe with a fixed request bound; W2
+  requests partner detail only for engine-emitted R2 survivors and only within
+  a documented provider limit; W3 runs only when W0 establishes a documented
+  ZATCA tariff-tree endpoint. Parameters and rationale are logged before each
+  window. Unknown terms, limits, pagination or endpoint facts remain
+  `UNAVAILABLE`; no inferred value may enable a request.
+- UN Comtrade universe coverage is COMPLETE only for a JSON object with
+  `data`, integer `count == len(data)`, empty error, reporter 682, matching
+  period/flow/world partner, unique six-digit HS6 rows and one verbatim
+  `classificationCode` per unit. Any mismatch remains INCOMPLETE and cannot
+  become the Saudi universe. Stage-two partner rows and tariff schedules remain
+  distinct artifacts.

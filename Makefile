@@ -22,7 +22,8 @@ VISUAL_BASELINE_IMAGE = ior-visual-baselines:playwright-1.62.0-noble
 	e2e-update-baselines visual-baseline-image ci \
 	acquire-universe acquire-partners acquire-tariff acquire-baci \
 	acquire-aggregates acquire-directory acquire-registry build-snapshots reconstruct \
-	acquire-documents build-documents build-entities
+	acquire-documents build-documents build-entities build-screening \
+	validate-screening screening-reconstruct screen-candidates
 
 install:
 	python3 -m pip install -e ".[dev]"
@@ -172,3 +173,17 @@ build-entities:
 
 reconstruct:
 	PYTHONPATH=src $(UV_RUN) python scripts/reconstruct_snapshot.py --all
+
+build-screening:
+	PYTHONPATH=src $(UV_RUN) python -m ior_mvp.screening build
+
+validate-screening:
+	PYTHONPATH=src $(UV_RUN) python -m ior_mvp.screening validate --check-inputs
+
+screening-reconstruct:
+	PYTHONPATH=src $(UV_RUN) python -m ior_mvp.screening reconstruct
+
+screen-candidates:
+	@test -n "$(UNIVERSE)" || (echo "UNIVERSE required" >&2; exit 2)
+	PYTHONPATH=src $(UV_RUN) python -m ior_mvp.screening emit-candidates \
+		--universe $(UNIVERSE) $(if $(BATCH_SIZE),--batch-size $(BATCH_SIZE),)
