@@ -15,6 +15,7 @@ from .contracts import (
     Stage,
     UnavailableReason,
     unit_key,
+    stage_spec,
 )
 from .raw_store import RawStore
 
@@ -46,16 +47,7 @@ def not_attempted_coverage(
 
 
 def _unit_dict(contract: QueryContract) -> dict[str, Any]:
-    hs6 = None
-    if contract.product_scope.value == "EXPLICIT":
-        hs6 = contract.product_codes[0]
-    return {
-        "stage": contract.stage.value,
-        "flow": contract.flow,
-        "period": contract.periods[0] if contract.periods else None,
-        "product_scope": contract.product_scope.value,
-        "hs6": hs6,
-    }
+    return stage_spec(contract.stage).unit_dict(contract)
 
 
 def evaluate_coverage(
@@ -72,6 +64,25 @@ def evaluate_coverage(
     key = unit_key(contract)
     pages_fetched = len(pages)
     missing_pages: tuple[int, ...] = ()
+
+    # Institutional privacy refusals dominate every apparent complete-page case,
+    # including a first response refused before any payload can be retained.
+    if (contract.stage in {Stage.DIRECTORY, Stage.REGISTRY}
+            and stop_reason == UnavailableReason.OUT_OF_SCOPE_CONTENT
+            and observed_stop is not None
+            and observed_stop.error_type in {"PersonalDataFields", "UninspectableTextPayload"}):
+        expected = pages[0].page_meta.pages_expected if pages and pages[0].page_meta else "UNAVAILABLE"
+        if isinstance(expected, int):
+            fetched = {page.page_index for page in pages}
+            missing_pages = tuple(index for index in range(1, expected + 1) if index not in fetched)
+        return CoverageRecord(
+            source_id=contract.source_id, stage=contract.stage,
+            query_hash=contract.query_hash(), run_id=run_id, unit_key=key,
+            unit=_unit_dict(contract), pages_fetched=pages_fetched,
+            pages_expected=expected, requests_made=requests_made,
+            status="INCOMPLETE", completeness_basis=CompletenessBasis.UNAVAILABLE,
+            stop_reason=stop_reason, missing_pages=missing_pages, observed_stop=observed_stop,
+        )
 
     if not pages:
         return not_attempted_coverage(
@@ -263,11 +274,21 @@ def aggregate_partner_coverage(
     *,
     source_id: str,
 ) -> dict[str, Any]:
-    """Build partner snapshot coverage block with exclusions."""
+    """Retain the S11 partner coverage contract."""
+    return aggregate_exclusion_coverage(selected, source_id=source_id, stage=Stage.PARTNERS)
+
+
+def aggregate_exclusion_coverage(
+    selected: dict[tuple[str, ...], tuple[CoverageRecord, tuple[str, ...]]],
+    *,
+    source_id: str,
+    stage: Stage,
+) -> dict[str, Any]:
+    """Build coverage with exclusions for the selected stage."""
     base = aggregate_snapshot_coverage(
         selected,
         source_id=source_id,
-        stage=Stage.PARTNERS,
+        stage=stage,
     )
     excluded = [
         {

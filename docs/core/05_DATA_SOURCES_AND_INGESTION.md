@@ -39,9 +39,9 @@ Mirror data may help explain a missing year or partner anomaly. It must not be s
 
 | Source | Use | Evidence class expectation |
 |---|---|---|
-| GASTAT economic census and industrial surveys | sector/establishment anchor | B/C until product-line reconciliation |
-| Ministry of Industry open data | licences and activity | B/C; licence is not production |
-| MODON directories | plant/entity discovery | C |
+| GASTAT economic census and industrial surveys | sector/establishment anchor | B/C until product-line reconciliation; connector implemented (S12a); availability and coverage recorded per run |
+| Ministry of Industry open data | licences and activity | B/C; licence is not production; connector implemented (S12a); availability and coverage recorded per run |
+| MODON directories | plant/entity discovery | C; connector implemented (S12a); availability and coverage recorded per run |
 | Tadawul filings and annual reports | nameplate, expansion and financial context | C |
 | EPDs and product sheets | process, range, standards and certifications | C |
 | GPCA / sector associations | sector capacity context | B/C |
@@ -52,10 +52,10 @@ Public nameplate capacity does not establish current effective capacity, qualifi
 
 | Source | Use | Control |
 |---|---|---|
-| SASO catalogue | standard identity and scope | title/scope does not prove compliance |
+| SASO catalogue | standard identity and scope | title/scope does not prove compliance; connector implemented (S12a); availability and coverage recorded per run |
 | Purchased anchor standards | detailed requirement extraction | copyright and access controls |
 | Etimad tenders and awards | real bilingual demand specifications | exact document/page span required |
-| SABER registry | conformity evidence | registration does not prove every buyer qualification |
+| SABER registry | conformity evidence | registration does not prove every buyer qualification; connector implemented (S12a); availability and coverage recorded per run |
 | Producer catalogues / certificates | published product envelope | confirm current edition and contradiction |
 
 ### 3.4 Economics
@@ -234,6 +234,24 @@ Raw store layout: `data/raw/<source_id>/<query_hash>/<run_id>/` holds one `page-
 
 Unit-level two-stage acquisition: UNIVERSE (ALL HS6), PARTNERS (explicit HS6 list), TARIFF (national tree), BULK (BACI raw-only). UNAVAILABLE reasons are enumerated in `UnavailableReason`. Offline guard blocks socket connect unless explicit live flag and env var are set. Reconstruction proof re-derives snapshots byte-for-byte from stored artifacts under default manifest checking.
 
+S12a extends the registry-driven stage list with AGGREGATE (GASTAT production aggregates, period-scoped), DIRECTORY (Ministry of Industry and MODON establishment/licence directories, period-free) and REGISTRY (SASO catalogue and SABER conformity registry, period-free). `SourceConnector.normalize` returns the `Row` union, including the three Core 04 row contracts; optional `parse_rows` supplies store-time classification. A nonempty recognized parse is `NORMALIZED`; an absent parser is `PENDING`; an unknown or failed parse is `UNPARSED` with `no_rows_parsed`. Institutional connectors implement `parse_rows` and return an empty list for unobserved shapes, including test-fixture envelopes; production parsers are not inferred from doubles. TERMS behavior remains unchanged. Classification metadata is write-once: offline parser development against retained UNPARSED text cannot relabel the old run; a fresh acquisition is required for a new NORMALIZED run and snapshot proof.
+
+For DIRECTORY/REGISTRY data responses only, after HTTP-error handling and before classification or storage, the approved text-only guard uses the declared response content type from the existing header helper (first exact lowercase `content-type` header, parameters/outer whitespace stripped, missing header defaults to `application/octet-stream`); casefolding affects routing only, not the recorded type. `expected_content_types` never selects an envelope. Declared `application/pdf`, `application/zip`, `application/gzip`, or `image/`, `audio/`, `video/`, `font/` prefixes are refused. Remaining bodies must decode as strict UTF-8 (a leading UTF-8 BOM is accepted for inspection only) and contain none of U+0000–U+0008, U+000B–U+000C, U+000E–U+001F, U+007F; TAB/LF/CR, U+200F and tatweel are allowed. No charset override, replacement decoding, OCR or decompression is attempted. Stored payload bytes remain original.
+
+Exactly one envelope is selected; there is no body sniffing, retry or fallback:
+
+| Declared type | Field labels inspected |
+|---|---|
+| `application/json`, `text/json`, `application/<nonempty-subtype>+json` (subtype has no slash or whitespace) | Every object key recursively, including objects inside lists |
+| `text/csv` | Standard quoted comma-delimited CSV; first record with any non-whitespace cell supplies labels |
+| `text/tab-separated-values` | Standard quoted tab-delimited CSV; first record with any non-whitespace cell supplies labels |
+| `text/html`, `application/xhtml+xml` | Only `th` text and `name` attributes on `input`, `select`, `textarea`, `button`; script/style contents excluded |
+| All other declarations, including missing, empty, unknown and `application/octet-stream` | Opaque inspectable text, no inferred fields and no recognized rows |
+
+Failed selected-format parsing is an unknown shape, not a reason to try another envelope or refuse solely for unfamiliarity. HTML prose, links, IDs, placeholders and unrelated attributes are not inspected. Field-label normalization applies `([A-Z]+)([A-Z][a-z]) → group1_group2`, then `([a-z0-9])([A-Z]) → group1_group2`, then NFC, casefolding and replacement of whitespace/underscore/hyphen/slash/dot runs with `_`, trimming boundary underscores. English matching is underscore-boundary suffix matching, optionally followed by `_ar`, `_en` or `_text`, for: `phone`, `phone_number`, `phone_no`, `telephone`, `telephone_number`, `telephone_no`, `mobile`, `mobile_number`, `mobile_no`, `email`, `email_address`, `e_mail`, `e_mail_address`, `contact_person`, `contact_person_name`, `contact_name`, `person_name`, `national_id`, `national_id_number`, `national_id_no`; `contact_id` and `contact_id_number` are intentionally not aliases. Arabic matching is exact whole normalized label only, without prefix or language/text suffix, for: `هاتف`, `الهاتف`, `رقم_الهاتف`, `جوال`, `الجوال`, `رقم_الجوال`, `البريد_الإلكتروني`, `البريد_الالكتروني`, `بريد_إلكتروني`, `بريد_الكتروني`, `اسم_شخص_الاتصال`, `اسم_مسؤول_التواصل`, `الهوية_الوطنية`, `رقم_الهوية_الوطنية`. Labels are checked even for null values; values and free prose are not classified. This is bounded schema-label screening, not universal personal-data detection.
+
+Refusal is `OUT_OF_SCOPE_CONTENT` with `PersonalDataFields` for matched labels or `UninspectableTextPayload` for uninspectable bodies. Only hash-based response metadata is retained (status, filtered headers, byte count, SHA-256, constant safe message/error type), never the refused body or matched values/labels; prior pages and records remain intact. Refusal overrides apparent pagination completeness with INCOMPLETE coverage and stop reason OUT_OF_SCOPE_CONTENT, and embedded attempt coverage equals its sibling coverage. Unknown but inspectable text may be stored UNPARSED. The DD-15(b) offline-parser path is limited to retained text: PDF/XLSX and non-UTF-8/legacy-encoded bodies are outside it; a later parser cannot recover an unstored body. Format/encoding support needs a separate governed change. Such policy refusals must not be called FORMAT_NOT_PARSEABLE, which describes stored-UNPARSED build refusal. S11 stages and TERMS remain outside this new guard.
+
 ## 11. Acquisition run governance
 
 - Operator-invoked only; `--years` is required on `acquire-universe`, `acquire-partners` and `acquire-baci`, and `--max-requests` on every acquire command, with rationale recorded in the slice implementation log (no suggested defaults in runbook or code); `acquire-tariff` takes no `--years` because the tariff tree is acquired as one period-free contract whose as-of date comes from retrieval.
@@ -247,3 +265,7 @@ Unit-level two-stage acquisition: UNIVERSE (ALL HS6), PARTNERS (explicit HS6 lis
 - Re-run discipline: higher `MAX_REQUESTS` may produce a new run_id; latest selection may change and trigger `SELECTION_CHANGED` on reconstruction.
 - History retention: all runs remain under `data/raw/`; manifest lists every regular file.
 - Stop conditions: (A) zero real artifacts across all sources → halt before snapshot build; (B) zero normalized analytical snapshots after parsers → halt before reconstruction CI wiring.
+
+- S12a commands require explicit `--source` and `--max-requests`; `acquire-aggregates` also requires `--years`, whereas `acquire-directory` and `acquire-registry` are period-free and take no years or flows. Make targets retain explicit live-intent and not-CI guards; runtime and CI remain offline. `parameters.units` and request tokens are recorded only from observed official documentation; unknown values remain `UNAVAILABLE`, never guessed from portal names or borrowed from trade sources. An unverified endpoint/unit fails before terms capture or budget use. Only observed credential-variable names can require a credential; the `UNAVAILABLE` sentinel causes no lookup or Authorization header.
+- DIRECTORY/REGISTRY operators apply the §10 pre-storage policy: `PersonalDataFields` or `UninspectableTextPayload` means OUT_OF_SCOPE_CONTENT with no refused body retained, not a recoverable stored-UNPARSED payload; preserve the safe attempt metadata, INCOMPLETE coverage and prior pages, and cite the actual refusal without values or matched labels.
+- The five S12a implemented status cells in §3.2/§3.3 describe connector code coverage, not source availability or validated production/compliance facts. The accepted T7 operator records in `.workflow/slices/S12a-acquisition-framework-institutional-sources/implementation_log.md` record five zero-request ENDPOINT_UNVERIFIED attempts with INCOMPLETE coverage and no institutional pages or snapshots; the existing S11 partner snapshot remains the reconstruction oracle. Per-run facts and outstanding limitations belong in the RunReports, ADR and Known Limitations, without promoting unavailable evidence or test-double rows into observations.

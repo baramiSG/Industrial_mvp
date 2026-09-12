@@ -256,6 +256,8 @@ Size budget, passport completeness, no-network guard, and every configured sourc
 
 Acquired snapshots receive their own source-qualified IDs and are never spliced into goldens or across sources.
 
+S12a institutional acquisition proof uses test-only parsers and an injected kind-registry double to demonstrate openness, store-time classification, privacy refusals, and production/directory/registry build-load-reconstruction with tamper and source-isolation checks; these doubles do not establish real source availability. Stored attempts and honest UNAVAILABLE citations account for sources without analytical snapshots, while the existing partner reconstruction and frozen golden boundaries remain enforced.
+
 ## 6. Acceptance gates by subsystem
 
 ### Gate A — Authority

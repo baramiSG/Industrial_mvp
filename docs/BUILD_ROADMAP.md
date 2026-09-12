@@ -76,6 +76,33 @@ M3-P0 → S06 → S07 → S08 → S09 → S10 → S11 → S12 → S13 → S14 �
 | S21 | Demonstration experience | `make demo-up` / `make demo-reset`, bilingual 5- and 15-minute journeys. | PR + CI green + zero findings |
 | S22 | Final acceptance and release | Full re-read, traceability and route-matrix audit, holistic review, tag `v0.3.0`. | Supervisor after zero findings and green default-branch CI |
 
+
+## S12 split (SLICE_GRAPH §5)
+
+S12 is partitioned by contract/modality into the following approved children; the historical parent execution order above remains the original milestone record. Effective sequence: S11 → s12a → s12b → s12c → S13; the parent is not complete until every child is delivered. S12a is a leaf, not further decomposed. Child dependencies below are relative to the parent; S11 is the inherited parent prerequisite.
+
+### s12a-acquisition-framework-institutional-sources
+
+S12a: Generalize the S11 acquisition framework from trade/tariff units to institutional acquisition units and snapshot kinds without changing any S11 raw artifact, snapshot, passport or reconstruction result, and acquire GASTAT public aggregates (official production/industrial statistics that supply R5 production and retained-flow inputs where the source publishes them), Ministry of Industry open data and MODON public directories, and SASO catalogue / SABER registry public metadata into passported, hashed, reconstructible snapshots — recording every unobtainable source as UNAVAILABLE with the observed response and recording the S12 split in docs/BUILD_ROADMAP.md and .workflow/state.json.
+
+Depends on: none within S12 (inherits S11).
+
+### s12b-document-store-disclosures-tenders
+
+S12b: Establish the governed span-addressable public document store on the generalized pipeline — persistent document ID, page and line addressing, original Arabic/English text preserved, raw document and derived text hashed and reconstructible under data/documents/** with manifest coverage — and acquire Tadawul issuer disclosures, Saudi producer disclosures (annual reports, environmental product declarations, product sheets and catalogue pages), Etimad public tender/specification documents and SASO public documents into it with §11-complete passports, typing producer nameplate/expansion evidence as Class C, and recording blocked or unreachable sources as UNAVAILABLE with the observed response.
+
+Depends on: `s12a-acquisition-framework-institutional-sources`.
+
+### s12c-entity-resolution-bilingual-ids
+
+S12c: Resolve the companies, plants, production lines and licence holders named across the acquired institutional directories, registries, disclosures and documents into persistent bilingual entity IDs per Core 05 §6.5 and Core 08 §10 — Arabic/English name normalisation, deterministic linking rules with explicit precedence, time-versioned ownership and name changes, and the licence-holder / company / plant / line distinction — producing a governed, hashed, reconstructible entity-resolution artifact that links acquired passports and observations to persistent IDs, holding ambiguous links at a reviewer-pending status and never fabricating a match.
+
+Depends on: `s12a-acquisition-framework-institutional-sources`, `s12b-document-store-disclosures-tenders`.
+
+Approved assessment identities (local recovery records, never source evidence): parent `.autonomous-workflow/plans/s12-acquisition-institutional-documents/cycle-1/decomposition-1.json`, SHA-256 `ad234d819270e40b63ef2e12fff435379e9e412630feda3e0c5629dcd887dbd7` (required=true, three children); child `.autonomous-workflow/plans/s12a-acquisition-framework-institutional-sources/cycle-1/decomposition-1.json`, SHA-256 `158590b4e07f5f8d548adb0675e3a43d7172227a2962a8a73f21287026f722b8` (required=false, no children). S12a's owner-approved plan is `.autonomous-workflow/plans/s12a-acquisition-framework-institutional-sources/cycle-1/plan-5-owner-approved.json`, SHA-256 `b38981822fd139ce370245d8a2742d08179beb06997795958af33c8a38311a64`.
+
+S12a currently has implementation evidence and five honest unavailable-source attempts, not live institutional inputs; s12b/s12c have not started. Document spans, persistent entity IDs, downstream screening/engine consumption, extraction metrics and graph work remain in their approved children/later slices. No parent obligation is closed by test-double rows.
+
 ## Explicit non-goals for v0.3.0
 
 Authentication, role-based approval, official override workflow, confidential Ministry connectors, live customs transactions, paid-data acquisition, model training on Ministry applications, causal incentive-effect claims, generic AI chat, CRM, document management, any change to the methodology DOCX, and any alteration of the v0.2.0 tag, release records or frozen v1 golden snapshot files.

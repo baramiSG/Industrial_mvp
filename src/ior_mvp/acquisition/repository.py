@@ -14,30 +14,14 @@ from __future__ import annotations
 import json
 from functools import lru_cache
 from pathlib import Path
-from typing import Any, Callable
+from typing import Any
 
 from ..config import PROJECT_ROOT
-from .snapshots import (
-    SNAPSHOT_ROOTS,
-    validate_partner_snapshot,
-    validate_tariff_snapshot,
-    validate_universe_snapshot,
-)
+from .snapshots import _snapshot_directory, validate_snapshot
+from .kinds import KindRegistry, default_kind_registry
 from .source_config import acquisition_sources_config
 
 DATA_ROOT = PROJECT_ROOT / "data"
-
-_VALIDATORS: dict[str, Callable[..., None]] = {
-    "universe": validate_universe_snapshot,
-    "tariff": validate_tariff_snapshot,
-    "partners": validate_partner_snapshot,
-}
-
-
-def _kind_directory(kind: str) -> Path:
-    relative = SNAPSHOT_ROOTS[kind].removeprefix("data/")
-    return DATA_ROOT / relative
-
 
 def _read_record(path: Path) -> dict[str, Any]:
     with path.open("r", encoding="utf-8") as handle:
@@ -47,43 +31,66 @@ def _read_record(path: Path) -> dict[str, Any]:
     return value
 
 
-def _load_kind(kind: str) -> dict[str, dict[str, Any]]:
-    """Load every snapshot of one kind, validated, keyed by snapshot_id."""
-    validate = _VALIDATORS[kind]
-    directory = _kind_directory(kind)
+def _load_kind(kind: str, *, kinds: KindRegistry, data_root: Path,
+               allow_test_double: bool = False) -> dict[str, dict[str, Any]]:
+    """Read and validate an explicitly scoped kind without affecting caches."""
+    spec = kinds.get(kind)
+    directory = _snapshot_directory(data_root, spec.root)
     records: dict[str, dict[str, Any]] = {}
     if not directory.is_dir():
         return records
     for path in sorted(directory.glob("*.json")):
         record = _read_record(path)
-        validate(record)
+        if record.get("kind") != kind:
+            raise ValueError(f"kind mismatch: {kind}")
+        validate_snapshot(record, kinds=kinds, allow_test_double=allow_test_double)
         snapshot_id = record["snapshot_id"]
         if path.stem != snapshot_id:
-            raise ValueError(
-                f"Snapshot file name must equal snapshot_id: {path}"
-            )
+            raise ValueError(f"Snapshot file name must equal snapshot_id: {path}")
         records[snapshot_id] = record
     return records
 
 
-@lru_cache(maxsize=1)
+@lru_cache(maxsize=None)
+def _cached_acquired_snapshots(kind: str) -> dict[str, dict[str, Any]]:
+    return _load_kind(kind, kinds=default_kind_registry(), data_root=DATA_ROOT)
+
+
+def acquired_snapshots(kind: str, *, kinds: KindRegistry | None = None,
+                       data_root: Path | None = None,
+                       allow_test_double: bool = False) -> dict[str, dict[str, Any]]:
+    if kinds is not None or data_root is not None or allow_test_double:
+        return _load_kind(kind, kinds=kinds or default_kind_registry(),
+                          data_root=data_root if data_root is not None else DATA_ROOT,
+                          allow_test_double=allow_test_double)
+    return _cached_acquired_snapshots(kind)
+
+
 def universe_snapshots() -> dict[str, dict[str, Any]]:
-    return _load_kind("universe")
+    return acquired_snapshots("universe")
 
 
-@lru_cache(maxsize=1)
 def tariff_snapshots() -> dict[str, dict[str, Any]]:
-    return _load_kind("tariff")
+    return acquired_snapshots("tariff")
 
 
-@lru_cache(maxsize=1)
 def partner_snapshots() -> dict[str, dict[str, Any]]:
-    return _load_kind("partners")
+    return acquired_snapshots("partners")
+
+
+def production_snapshots() -> dict[str, dict[str, Any]]:
+    return acquired_snapshots("production")
+
+
+def directory_snapshots() -> dict[str, dict[str, Any]]:
+    return acquired_snapshots("directory")
+
+
+def registry_snapshots() -> dict[str, dict[str, Any]]:
+    return acquired_snapshots("registry")
 
 
 def clear_acquisition_caches() -> None:
-    """Clear the acquisition config cache and the three snapshot loaders."""
+    """Clear config and every default kind cache; injected loads are uncached."""
     acquisition_sources_config.cache_clear()
-    universe_snapshots.cache_clear()
-    tariff_snapshots.cache_clear()
-    partner_snapshots.cache_clear()
+    _cached_acquired_snapshots.cache_clear()

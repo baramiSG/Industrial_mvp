@@ -54,69 +54,48 @@ class ZatcaTariffConnector(BaseConnector):
             checks=checks,
         )
 
-    def normalize(
-        self, raw: RawArtifact
-    ) -> list[TradeObservation] | list[TariffLine]:
-        payload = self.store.read_payload(raw.contract)
+    def parse_rows(self, payload: bytes, content_type: str) -> list[dict[str, Any]]:
         text = payload.decode("utf-8", errors="replace")
-        evidence_id = f"{raw.contract.query_hash[:12]}-p{raw.contract.page_index:04d}"
-        lines: list[TariffLine] = []
+        rows: list[dict[str, Any]] = []
         for match in re.finditer(
             r'data-code="(\d{12})"[^>]*data-hs6="(\d{6})"[^>]*'
             r'data-desc-en="([^"]*)"[^>]*data-desc-ar="([^"]*)"',
             text,
         ):
             national_code, hs6, desc_en, desc_ar = match.groups()
-            try:
-                lines.append(
-                    tariff_line_from_row(
-                        {
-                            "national_code": national_code,
-                            "hs6": hs6,
-                            "description_en": desc_en,
-                            "description_ar": desc_ar,
-                            "duty_fields": {},
-                            "hs6_mapping_basis": "prefix_6",
-                        },
-                        field_map={
-                            "national_code": "national_code",
-                            "hs6": "hs6",
-                            "description_en": "description_en",
-                            "description_ar": "description_ar",
-                            "duty_fields": "duty_fields",
-                            "hs6_mapping_basis": "hs6_mapping_basis",
-                        },
-                        hs_revision=self.source_config["nomenclature"],
-                        source_evidence_id=evidence_id,
-                    )
-                )
-            except ValueError:
-                continue
-        if lines:
-            return lines
+            rows.append({
+                "national_code": national_code, "hs6": hs6,
+                "description_en": desc_en, "description_ar": desc_ar,
+                "duty_fields": {}, "hs6_mapping_basis": "prefix_6",
+            })
+        if rows:
+            return rows
         try:
             data = json.loads(text)
             if isinstance(data, list):
-                for item in data:
-                    if isinstance(item, dict):
-                        lines.append(
-                            tariff_line_from_row(
-                                item,
-                                field_map={
-                                    "national_code": "national_code",
-                                    "hs6": "hs6",
-                                    "description_en": "description_en",
-                                    "description_ar": "description_ar",
-                                    "duty_fields": "duty_fields",
-                                    "hs6_mapping_basis": "hs6_mapping_basis",
-                                },
-                                hs_revision=self.source_config["nomenclature"],
-                                source_evidence_id=evidence_id,
-                            )
-                        )
+                rows.extend(item for item in data if isinstance(item, dict))
         except (UnicodeError, json.JSONDecodeError):
             pass
-        return lines
+        return rows
+
+    def normalize(
+        self, raw: RawArtifact
+    ) -> list[TradeObservation] | list[TariffLine]:
+        payload = self.store.read_payload(raw.contract)
+        evidence_id = f"{raw.contract.query_hash[:12]}-p{raw.contract.page_index:04d}"
+        return [
+            tariff_line_from_row(
+                row,
+                field_map={
+                    "national_code": "national_code", "hs6": "hs6",
+                    "description_en": "description_en", "description_ar": "description_ar",
+                    "duty_fields": "duty_fields", "hs6_mapping_basis": "hs6_mapping_basis",
+                },
+                hs_revision=self.source_config["nomenclature"],
+                source_evidence_id=evidence_id,
+            )
+            for row in self.parse_rows(payload, raw.contract.content_type)
+        ]
 
     def snapshot(
         self,

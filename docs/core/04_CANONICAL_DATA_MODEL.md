@@ -64,7 +64,7 @@ The public steel case leaves the exact imported target specification unresolved.
 
 Value, weight, supplementary quantity and unit are never collapsed into one field.
 
-§2.8 note: acquired analytical snapshots use source-qualified IDs (`UNIVERSE-SAU-<TAG>-…`, `TARIFF-SAU-<TAG>-…`, `PARTNERS-SAU-<TAG>-…`) and are never spliced into frozen public goldens. `PublicSnapshot 2.1` and `SUPPORT_CODES` are unchanged in S11. `NATIONAL_TARIFF_LINE_MAPPING` is acquisition-only until a later governed projection. No BACI snapshot kind exists in S11.
+§2.8 note: acquired analytical snapshots use source-qualified IDs (`UNIVERSE-SAU-<TAG>-…`, `TARIFF-SAU-<TAG>-…`, `PARTNERS-SAU-<TAG>-…`) and are never spliced into frozen public goldens. `PublicSnapshot 2.1` and `SUPPORT_CODES` are unchanged in S11. `NATIONAL_TARIFF_LINE_MAPPING` is acquisition-only until a later governed projection. No BACI snapshot kind exists in S11. S12a adds `DOMESTIC_PRODUCTION_AGGREGATE`, `ESTABLISHMENT_LICENCE_DIRECTORY` and `STANDARD_CONFORMITY_REGISTRY` only to `ACQUIRED_SUPPORT_CODES`; these do not extend the public decision support vocabulary or authorize a decision projection.
 
 ### AcquiredEvidencePassport 1.0.0
 
@@ -85,6 +85,26 @@ Kinds: `UniverseTradeSnapshot`, `TariffHierarchySnapshot`, `PartnerDetailSnapsho
 Mandatory keys include: `schema_version`, `snapshot_id`, `source_id`, `as_of_date`, `source_boundary`, `kind`, `nomenclature`, `coverage` (with `selection_rule`, `selected_run_id`, `superseded_run_ids`), `raw_artifact_refs` (with `path`, `sha256`, `unit_key`), `transformation_record`, `quality_summary`, `evidence`.
 
 Universe snapshots carry `product_scope: ALL_HS6` sentinel. Partner snapshots carry `coverage.units_excluded` aligned with transformation exclusions.
+
+S12a adds the following acquisition contracts, all at schema version `1.0.0`; a registered kind describes supported structure, not the existence or completeness of acquired source data.
+
+| Snapshot type | Kind / stage | Source-qualified ID | Root |
+|---|---|---|---|
+| `ProductionAggregateSnapshot` | `production` / `AGGREGATE` | `PRODUCTION-SAU-GASTAT-<as_of>` | `data/snapshots/production/` |
+| `EstablishmentDirectorySnapshot` | `directory` / `DIRECTORY` | `DIRECTORY-SAU-MINISTRY-OF-INDUSTRY-<as_of>` or `DIRECTORY-SAU-MODON-<as_of>` | `data/snapshots/directory/` |
+| `StandardConformityRegistrySnapshot` | `registry` / `REGISTRY` | `REGISTRY-SAU-SASO-CATALOGUE-<as_of>` or `REGISTRY-SAU-SABER-REGISTRY-<as_of>` | `data/snapshots/registry/` |
+
+Each institutional snapshot retains every mandatory key above and adds a nonempty `rows` array: `source_boundary` is `public`, `nomenclature` remains present (possibly `UNAVAILABLE`) but is not an ID segment, and `<as_of>` is the stored retrieval-derived ISO date, not the build date. One snapshot belongs to one `(kind, source_id)`; latest-run-per-source-stage-unit selection retains superseded runs. At least one selected unit must be COMPLETE, `coverage.units_excluded` must equal `transformation_record.exclusions`, and actual connector validation must pass before `quality_summary: PASS`; nonempty rows alone are insufficient. Raw references and acquired passports preserve source identity, coverage and transformations without joining sources or changing frozen public goldens.
+
+Row contracts are field whitelists, with the original published text or `UNAVAILABLE` retained and no inferred product equivalence:
+
+- `ProductionObservation`: `period_text`, `period_type_text`, `geography_text`, `activity_code_text`, `activity_classification_text`, `product_code_text`, `product_classification_text`, `indicator_text`, `value_original_text`, `value` (float or null), `unit_text`, `currency_text`, `estimation_flags` (strings), `source_dataset_id`, `source_evidence_id`; only published numeric text is parsed into `value`, with no unit conversion or HS mapping.
+- `DirectoryRow`: `entity_name_ar`, `entity_name_en`, `record_type_text`, `licence_number_text`, `activity_description_ar`, `activity_description_en`, `activity_code_text`, `region_text`, `city_text`, `industrial_city_text`, `status_text`, `capacity_text`, `record_date_text`, `source_record_id`, `source_evidence_id`; capacity remains raw text, never a numeric nameplate or evidence of effective qualified supply.
+- `RegistryRow`: `registry` (`saso_catalogue` or `saber_registry`), `standard_reference_text`, `title_ar`, `title_en`, `edition_or_year_text`, `scope_text`, `status_text`, `product_or_certificate_reference_text`, `conformity_type_text`, `issued_to_text` (observed text only), `validity_text`, `source_record_id`, `source_evidence_id`; registration does not establish compliance, qualification or approval.
+
+Directory rows have no numeric capacity/nameplate fields; registry rows have no `compliance_confirmed`, `qualified` or `approved` flags; none of these row contracts admits person-name, phone or email fields. This schema restriction and the bounded store-time screening in Core 05 do not establish that arbitrary source values contain no personal data.
+
+`transformation_record.config_version` at snapshot and passport level comes from the kind's governing `KindSpec.config_version` (`1.0.0` for universe/tariff/partners; `1.1.0` for production/directory/registry), not the current config metadata version; it identifies the acquisition-config source-contract semantics governing that kind, changes only through a §7.3 change to that kind's source contract, never rewrites a stored snapshot (later evidence follows §7.5 with history retained), and is independent of `pipeline_version`, which remains `1.0.0`.
 
 ### PublicSnapshot 2.1
 

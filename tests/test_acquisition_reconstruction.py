@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -55,7 +56,7 @@ def test_reconstruct_script_no_snapshots_exits_1(tmp_path: Path) -> None:
             str(data_root),
         ],
         cwd=PROJECT_ROOT,
-        env={"PYTHONPATH": "src"},
+        env={**os.environ, "PYTHONPATH": "src"},
         capture_output=True,
         text=True,
     )
@@ -94,7 +95,7 @@ def test_reconstruct_script_no_snapshots_with_manifest_exits_1(tmp_path: Path) -
             str(data_root),
         ],
         cwd=PROJECT_ROOT,
-        env={"PYTHONPATH": "src"},
+        env={**os.environ, "PYTHONPATH": "src"},
         capture_output=True,
         text=True,
     )
@@ -120,7 +121,7 @@ def test_reconstruct_missing_manifest_row_exits_2(tmp_path: Path) -> None:
             str(data_root),
         ],
         cwd=PROJECT_ROOT,
-        env={"PYTHONPATH": "src"},
+        env={**os.environ, "PYTHONPATH": "src"},
         capture_output=True,
         text=True,
     )
@@ -156,7 +157,7 @@ def test_reconstruct_hash_mismatch_exits_1(tmp_path: Path) -> None:
             str(data_root),
         ],
         cwd=PROJECT_ROOT,
-        env={"PYTHONPATH": "src"},
+        env={**os.environ, "PYTHONPATH": "src"},
         capture_output=True,
         text=True,
     )
@@ -378,7 +379,7 @@ def test_reconstruct_script_matching_temp_root_exits_0(tmp_path: Path) -> None:
             str(data_root),
         ],
         cwd=PROJECT_ROOT,
-        env={"PYTHONPATH": "src"},
+        env={**os.environ, "PYTHONPATH": "src"},
         capture_output=True,
         text=True,
     )
@@ -406,7 +407,7 @@ def test_reconstruct_script_tampered_payload_exits_nonzero(tmp_path: Path) -> No
             str(data_root),
         ],
         cwd=PROJECT_ROOT,
-        env={"PYTHONPATH": "src"},
+        env={**os.environ, "PYTHONPATH": "src"},
         capture_output=True,
         text=True,
     )
@@ -433,7 +434,7 @@ def test_reconstruct_script_tampered_coverage_exits_nonzero(tmp_path: Path) -> N
             str(data_root),
         ],
         cwd=PROJECT_ROOT,
-        env={"PYTHONPATH": "src"},
+        env={**os.environ, "PYTHONPATH": "src"},
         capture_output=True,
         text=True,
     )
@@ -456,7 +457,7 @@ def test_reconstruct_script_tampered_snapshot_exits_nonzero(tmp_path: Path) -> N
             str(data_root),
         ],
         cwd=PROJECT_ROOT,
-        env={"PYTHONPATH": "src"},
+        env={**os.environ, "PYTHONPATH": "src"},
         capture_output=True,
         text=True,
     )
@@ -490,3 +491,80 @@ def test_same_run_id_incomplete_returns_coverage_incomplete(tmp_path: Path) -> N
     result = reconstruct(path, store, config, registry)
     assert not result.match
     assert result.detail.get("reason") == "COVERAGE_INCOMPLETE"
+
+
+@pytest.mark.parametrize("stage,expected_periods,expected_requests", [
+    (Stage.AGGREGATE, [("2023",), ("2024",), ("2023",), ("2024",)], 5),
+    (Stage.DIRECTORY, [(), ()], 3),
+    (Stage.REGISTRY, [(), ()], 3),
+])
+def test_institutional_planning_and_request_counts(stage, expected_periods, expected_requests):
+    from tests.acquisition_doubles import institutional_config
+
+    config = institutional_config("TEST-FIXTURE", stage)
+    cfg = config["sources"]["TEST-FIXTURE"]
+    cfg["license_capture_required"] = True
+    years = (2023, 2024) if stage == Stage.AGGREGATE else ()
+    units = plan_units(stage, source_id="TEST-FIXTURE", years=years, flows=(), candidates=None, config=config)
+    assert sorted(u.periods for u in units) == sorted(expected_periods)
+    assert {u.parameters for u in units} == {(("unit", "TEST-main"),), (("unit", "TEST-excluded"),)}
+    assert all(u.stage == stage and u.reporter == "SAU" and u.flow == "UNAVAILABLE" and u.product_codes == () for u in units)
+    assert plan_requests(stage, years=years, flows=(), candidates=None, source_config=cfg) == expected_requests
+    cfg["terms_reference"] = "UNAVAILABLE"
+    assert plan_requests(stage, years=years, flows=(), candidates=None, source_config=cfg) == expected_requests - 1
+    cfg["parameters"]["units"] = "UNAVAILABLE"
+    if stage == Stage.AGGREGATE:
+        years = (2024,)
+    units = plan_units(stage, source_id="TEST-FIXTURE", years=years, flows=(), candidates=None, config=config)
+    assert len(units) == 1 and units[0].parameters == (("unit", "UNAVAILABLE"),)
+    assert plan_requests(stage, years=years, flows=(), candidates=None, source_config=cfg) == 1
+
+
+@pytest.mark.parametrize("stage,kind", [(Stage.AGGREGATE, "production"), (Stage.DIRECTORY, "directory"), (Stage.REGISTRY, "registry")])
+@pytest.mark.parametrize("tamper", [None, "payload", "coverage", "snapshot"])
+def test_institutional_reconstruction_script_temp_root(tmp_path, stage, kind, tamper):
+    from tests.acquisition_doubles import InstitutionalDouble, institutional_config
+    from tests.test_acquisition_snapshots import _fixture, _temp_store
+    from ior_mvp.acquisition.snapshots import build_row_snapshot
+
+    root = tmp_path / "data"
+    config = institutional_config("TEST-FIXTURE", stage)
+    store = _temp_store(root)
+    registry = ConnectorRegistry({"TEST-FIXTURE": InstitutionalDouble})
+    contract = plan_units(stage, source_id="TEST-FIXTURE", years=(2024,) if stage == Stage.AGGREGATE else (), flows=(), candidates=None, config=config)[0]
+    seed_unit(store, contract=contract, run_id="20260904T120000Z", payload=_fixture(f"test_double_{kind}_rows.json"), source_config=config["sources"]["TEST-FIXTURE"])
+    record = build_row_snapshot(store, config, registry, source_id="TEST-FIXTURE", kind=kind)
+    snapshot = write_snapshot(record, root, allow_test_double=True)
+    if tamper == "snapshot":
+        record["as_of_date"] = "1999-01-01"
+        snapshot.write_text(json.dumps(record), encoding="utf-8")
+    elif tamper == "coverage":
+        path = next(store.root.rglob("coverage.json"))
+        data = json.loads(path.read_text())
+        data["status"] = "INCOMPLETE"
+        data["stop_reason"] = "HTTP_ERROR"
+        path.write_text(json.dumps(data), encoding="utf-8")
+    elif tamper == "payload":
+        path = next(store.root.rglob("page-*.gz"))
+        data = bytearray(path.read_bytes())
+        data[-1] ^= 1
+        path.write_bytes(data)
+    script = '''
+import runpy, sys
+from ior_mvp.acquisition import source_config
+from ior_mvp.acquisition.connectors import base
+from ior_mvp.acquisition.contracts import Stage
+from tests.acquisition_doubles import InstitutionalDouble, institutional_config
+config = source_config.acquisition_sources_config()
+config = {**config, **institutional_config('TEST-FIXTURE', Stage(sys.argv[1]))}
+source_config.acquisition_sources_config = lambda: config
+base.default_registry = lambda: base.ConnectorRegistry({'TEST-FIXTURE': InstitutionalDouble})
+sys.argv = ['scripts/reconstruct_snapshot.py', '--all', '--no-check-manifest', '--data-root', sys.argv[2]]
+runpy.run_path('scripts/reconstruct_snapshot.py', run_name='__main__')
+'''
+    result = subprocess.run([sys.executable, "-c", script, stage.value, str(root)], cwd=PROJECT_ROOT, env={**os.environ, "PYTHONPATH": "src"}, capture_output=True, text=True)
+    assert result.returncode == (1 if tamper else 0), result.stdout + result.stderr
+    if not tamper:
+        assert "RECONSTRUCTION PASS (1 snapshots, 2 artifacts)" in result.stdout
+    else:
+        assert "RECONSTRUCTION PASS" not in result.stdout
