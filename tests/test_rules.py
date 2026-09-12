@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import ast
+import re
 from copy import deepcopy
 from pathlib import Path
 
@@ -26,6 +28,49 @@ from tests.legacy_snapshot_v1 import candidate_v21_from_legacy
 
 def by_id(rules: list[dict], rule_id: str) -> dict:
     return next(row for row in rules if row["rule_id"] == rule_id)
+
+
+def test_every_rule_row_carries_typed_result_and_effect_codes() -> None:
+    from ior_mvp.decision_engine import analyze
+
+    for opportunity_id in ("SAU-H0-721049", "SAU-H0-390210"):
+        for mode in ("public", "simulated"):
+            for row in analyze(opportunity_id, mode)["rules"]:
+                assert re.fullmatch(
+                    r"^[A-Z][A-Z0-9_]+$",
+                    row["result_code"],
+                )
+                assert re.fullmatch(
+                    r"^[A-Z][A-Z0-9_]+$",
+                    row["decision_effect_code"],
+                )
+                assert isinstance(row["result_values"], dict)
+                assert isinstance(row["effect_values"], dict)
+                assert all(
+                    isinstance(key, str) and isinstance(value, str)
+                    for values in (row["result_values"], row["effect_values"])
+                    for key, value in values.items()
+                )
+
+
+def test_rule_builders_pass_codes_at_every_call_site() -> None:
+    path = Path(__file__).resolve().parents[1] / "src" / "ior_mvp" / "rules.py"
+    tree = ast.parse(path.read_text(encoding="utf-8"))
+    calls = [
+        node
+        for node in ast.walk(tree)
+        if isinstance(node, ast.Call)
+        and isinstance(node.func, ast.Name)
+        and node.func.id in {"_rule", "_synthetic_rule"}
+    ]
+
+    assert calls
+    for call in calls:
+        keywords = {keyword.arg: keyword.value for keyword in call.keywords}
+        for name in ("result_code", "decision_effect_code"):
+            assert name in keywords
+            assert isinstance(keywords[name], ast.Constant)
+            assert isinstance(keywords[name].value, str)
 
 
 def test_log_decomposition_steel_matches_worked_case() -> None:

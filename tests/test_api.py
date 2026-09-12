@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import re
 from copy import deepcopy
 
 import pytest
@@ -25,6 +26,32 @@ def _load_advance_fixture() -> dict:
             encoding="utf-8"
         )
     )
+
+
+def _load_no_candidate_fixture() -> dict:
+    return json.loads(
+        (
+            FIXTURE_ROOT / "no-candidate-no-fired-signal.json"
+        ).read_text(encoding="utf-8")
+    )
+
+
+def _mount_no_candidate_fixture(
+    monkeypatch: pytest.MonkeyPatch,
+) -> dict:
+    case = _load_no_candidate_fixture()
+    validate_public_snapshot(case)
+    monkeypatch.setattr(
+        decision_engine,
+        "get_public_case",
+        lambda opportunity_id: deepcopy(case),
+    )
+    monkeypatch.setattr(
+        decision_engine,
+        "public_cases",
+        lambda: {case["opportunity"]["id"]: deepcopy(case)},
+    )
+    return case
 
 
 def test_g1_fixture_returns_200_advance_route_3_with_supporting_signal(
@@ -243,6 +270,140 @@ def test_health() -> None:
     payload = response.json()
     assert payload["status"] == "ok"
     assert payload["version"] == "0.2.0"
+
+
+def test_screening_router_is_mounted_before_the_spa_fallback() -> None:
+    response = client.get("/api/screening")
+    assert response.status_code == 200
+    assert response.headers["content-type"].startswith("application/json")
+    payload = response.json()
+    assert payload["snapshot_id"] == "SCREENING-SAU-2026-09-12-9b6b22032fd8"
+    assert payload["universe_status"]["status"] == "AVAILABLE"
+    assert [row["queue_id"] for row in payload["queues"]] == [
+        "high_evsi_evidence_investigation",
+        "incumbent_upgrade_investigation",
+        "likely_false_positive",
+        "resilience_case",
+        "robust_public_finding",
+    ]
+    assert payload["synthetic_flag"] is False
+
+    queue = client.get("/api/screening/queues/not-a-queue")
+    assert queue.status_code == 404
+    assert queue.json() == {"detail": {"code": "QUEUE_NOT_FOUND"}}
+    record = client.get("/api/screening/records/000000")
+    assert record.status_code == 404
+    assert record.json() == {"detail": {"code": "RECORD_NOT_FOUND"}}
+    page = client.get(
+        "/api/screening/queues/robust_public_finding?offset=0&limit=5"
+    )
+    assert page.status_code == 200
+    assert page.json()["total"] == 119
+    assert len(page.json()["entries"]) == 5
+
+    evidence = client.get("/api/screening/evidence")
+    assert evidence.status_code == 200
+    assert evidence.headers["content-type"].startswith("application/json")
+    assert len(evidence.json()["evidence_passports"]) == 8
+
+
+def test_screening_mount_ignores_evidence_mode_query() -> None:
+    assert (
+        client.get("/api/screening?mode=simulated").json()
+        == client.get("/api/screening").json()
+    )
+    assert (
+        client.get("/api/screening/evidence?mode=simulated").json()
+        == client.get("/api/screening/evidence").json()
+    )
+
+
+def test_no_fired_signal_deep_case_returns_200_no_candidate_not_422(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    case = _mount_no_candidate_fixture(monkeypatch)
+    opportunity_id = case["opportunity"]["id"]
+    fixture_client = TestClient(app, raise_server_exceptions=False)
+
+    response = fixture_client.get(
+        f"/api/opportunities/{opportunity_id}?mode=public"
+    )
+    assert response.status_code == 200
+    payload = response.json()
+    assert payload["real_decision"]["state"] is None
+    assert payload["real_decision"]["route_code"] is None
+    assert payload["screening_disposition"] == "NO_CANDIDATE"
+    assert payload["real_decision"]["decision_reason_code"] == (
+        "NO_TRIGGER_FIRED"
+    )
+
+    manifest = fixture_client.get(
+        f"/api/opportunities/{opportunity_id}/ui-manifest?mode=public"
+    )
+    assert manifest.status_code == 200
+    hero = next(
+        row
+        for row in manifest.json()["components"]
+        if row["type"] == "decision_hero"
+    )
+    banner = next(
+        row
+        for row in manifest.json()["components"]
+        if row["type"] == "integrity_banner"
+    )
+    assert hero["props"]["state"] is None
+    assert hero["props"]["screening_disposition"] == "NO_CANDIDATE"
+    assert banner["props"]["screening_disposition"] == "NO_CANDIDATE"
+
+    dossier = fixture_client.get(
+        f"/api/opportunities/{opportunity_id}/dossier?mode=public"
+    )
+    html = fixture_client.get(
+        f"/api/opportunities/{opportunity_id}/dossier.html"
+        "?mode=public&locale=ar"
+    )
+    assert dossier.status_code == html.status_code == 200
+    assert dossier.json()["decision_state"] is None
+    assert "لا توجد حالة مرشحة" in html.text
+    assert not re.search(r">\s*(?:None|null)\s*<", html.text)
+
+    listing = fixture_client.get("/api/opportunities?mode=public")
+    assert listing.status_code == 200
+    assert listing.json() == [
+        {
+            **listing.json()[0],
+            "id": opportunity_id,
+            "real_state": None,
+            "active_state": None,
+            "screening_disposition": "NO_CANDIDATE",
+        }
+    ]
+
+
+def test_no_candidate_expected_payloads_match_engine_output(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    case = _mount_no_candidate_fixture(monkeypatch)
+    opportunity_id = case["opportunity"]["id"]
+    expected_path = (
+        FIXTURE_ROOT / "no-candidate-no-fired-signal.expected.json"
+    )
+    assert expected_path.is_file()
+    expected = json.loads(expected_path.read_text(encoding="utf-8"))
+    fixture_client = TestClient(app, raise_server_exceptions=False)
+
+    actual = {
+        "list_entry": fixture_client.get(
+            "/api/opportunities?mode=public"
+        ).json()[0],
+        "analysis": fixture_client.get(
+            f"/api/opportunities/{opportunity_id}?mode=public"
+        ).json(),
+        "ui_manifest": fixture_client.get(
+            f"/api/opportunities/{opportunity_id}/ui-manifest?mode=public"
+        ).json(),
+    }
+    assert actual == expected
 
 
 def test_release_version_matches_analysis_authority() -> None:

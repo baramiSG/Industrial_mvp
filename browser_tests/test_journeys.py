@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import re
 from itertools import product
 from urllib.parse import parse_qs, urlsplit
@@ -21,6 +22,8 @@ from browser_tests.harness import (
     Mode,
 )
 from browser_tests.pages import (
+    arabic_parity_report,
+    assert_arabic_parity,
     goto_portfolio,
     locale_bundle,
     open_case_card,
@@ -139,7 +142,7 @@ def test_opportunity_select_loads_each_case(
     payload = detail.json()
     manifest_payload = manifest.json()
     by_rule = {
-        row["rule_id"]: row["result"]
+        row["rule_id"]: row
         for row in payload["rules"]
         if row.get("synthetic_flag") is not True
     }
@@ -172,8 +175,12 @@ def test_opportunity_select_loads_each_case(
             ),
         }
     for rule_id, expected in expected_results.items():
-        assert by_rule[rule_id] == expected
-        expect(page.locator("#workspace")).to_contain_text(expected)
+        row = by_rule[rule_id]
+        assert row["result"] == expected
+        visible = row["localized"][locale.code]["result"]["text"]
+        expect(page.locator("#workspace")).to_contain_text(visible)
+        if locale == EN:
+            assert visible == expected
 
     hero = page.locator(".decision-hero")
     unlocks = page.locator(".unlock-list li")
@@ -298,6 +305,7 @@ def test_navigation_and_methodology_action_reach_sections(
         "methodology",
         "extraction",
         "governance",
+        "screening",
     ):
         button = page.locator(
             f'.nav-item[data-target="{section_id}"]'
@@ -308,6 +316,50 @@ def test_navigation_and_methodology_action_reach_sections(
     page.locator('.nav-item[data-target="overview"]').click()
     page.locator("#view-methodology").click()
     expect(page.locator("#methodology")).to_be_in_viewport()
+
+
+@pytest.mark.parametrize(
+    ("mode", "case"),
+    tuple(product(MODES, CASES)),
+    ids=[
+        f"{mode}-{case.slug}"
+        for mode, case in product(MODES, CASES)
+    ],
+)
+def test_workspace_and_methodology_ledgers_have_no_english_catalogue_prose_in_arabic(
+    browser_session: BrowserSession,
+    mode: Mode,
+    case: Case,
+) -> None:
+    page = browser_session.page
+    goto_portfolio(page, mode, AR)
+    detail, _ = select_case(page, case, mode, AR)
+    payload = detail.json()
+
+    workspace = page.locator("#workspace .rule-table")
+    methodology = page.locator("#methodology .rule-table")
+    for row in payload["rules"]:
+        localized = row["localized"]["ar"]
+        for field in ("name", "result", "decision_effect"):
+            expect(workspace).to_contain_text(localized[field]["text"])
+        expect(methodology).to_contain_text(localized["name"]["text"])
+        expect(methodology).to_contain_text(localized["result"]["text"])
+
+    for container, selector in (
+        ("workspace", "#workspace .rule-table"),
+        ("methodology", "#methodology .rule-table"),
+    ):
+        report = arabic_parity_report(page, selector)
+        assert_arabic_parity(report, expected_source_spans=0)
+        output = (
+            browser_session.artifact_dir
+            / f"parity-{container}-{case.slug}-{mode}-ar.json"
+        )
+        output.write_text(
+            json.dumps(report, ensure_ascii=False, indent=2, sort_keys=True)
+            + "\n",
+            encoding="utf-8",
+        )
 
 
 @pytest.mark.parametrize(

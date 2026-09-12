@@ -127,8 +127,19 @@ eight universe units and built the 5,443-HS6 universe. AM-2 stores the
 (`SCREENING-SAU-2026-09-12-9b6b22032fd8`, rebuilt under OD-15 with
 repository-relative input paths after hosted CI-F-01; 96/96 shards identical
 to the superseded `311f105c4ccf`). W0-ter observed no all-partners token, so
-partner coverage remains 0/1,471 and W2 was not repeated. Child s13b is READY;
-the parent S13 completes only when s13b merges.
+partner coverage remains 0/1,471 and W2 was not repeated.
+
+Child s13b is an **IMPLEMENTATION CANDIDATE** under plan
+`plan-1-s13b.json` (`560695023c…`), AM-1 (`341d813f…`) and AM-2
+(`fae4ec02…`, precedence AM-2 > AM-1 > base). It mounts the public screening
+router and additive evidence route, supplies bilingual summary/queue/record
+views, closes KL-34, resolves UX-01 on workspace/methodology/screening ledgers
+and extends the canonical matrix to 56 entries. OD-15 accepted the visual set
+and owner WIP commit `d1d1462`; the remaining candidate is uncommitted pending
+independent review. A T10 pre-generation SC-5 check then exposed intermittent
+smooth-scroll capture in the four new summary images; the test-first canonical
+correction has future tree `c2b3b66b…` and awaits an owner WIP/base ruling.
+The parent S13 completes only after s13b is reviewed, delivered and merged.
 
 ## Explicit non-goals for v0.3.0
 

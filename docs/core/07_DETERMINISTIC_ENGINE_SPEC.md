@@ -380,11 +380,12 @@ Formal states are `REJECT`, `MONITOR`, `INVESTIGATE`, and `ADVANCE`.
 `screening_disposition` is separate and is one of `CANDIDATE`,
 `NO_CANDIDATE`, or `SCREENED_OUT`.
 
-For an admitted deep-resolution case, `screening_disposition` remains
-`CANDIDATE`, including a case that ultimately reaches REJECT. The separate
-screening helper used by S13 emits `NO_CANDIDATE` when no candidate trigger
-exists and `SCREENED_OUT` when an evidenced screen exclusion applies; it
-does not assign a formal deep state.
+For an admitted deep-resolution case with at least one candidate trigger,
+`screening_disposition` remains `CANDIDATE`, including a case that ultimately
+reaches REJECT. If no candidate trigger fires, the deep selector uses the
+same `NO_CANDIDATE` disposition as screening and leaves formal state null.
+The separate screening helper used by S13 emits `SCREENED_OUT` when an
+evidenced screen exclusion applies; it does not assign a formal deep state.
 
 Deep state selection is ordered:
 
@@ -411,9 +412,10 @@ Deep state selection is ordered:
 7. when material triggers exist but no determinable passing route exists,
    the state is INVESTIGATE with null `route_code` and
    `decision_reason_code` `ROUTE_DETERMINATION_UNRESOLVED`; and
-8. an admitted deep case that satisfies none of these branches fails closed
-   with a decision-integrity error rather than being silently called REJECT or
-   MONITOR.
+8. an admitted deep case with no fired candidate signal yields the screening disposition `NO_CANDIDATE` with null formal state, null route and
+   `decision_reason_code` `NO_TRIGGER_FIRED`. Any other unmatched residual
+   fails closed with a decision-integrity error rather than being silently
+   called REJECT or MONITOR.
 
 Registered public `decision_reason_code` values are:
 `HARD_EXCLUSION_SATISFIED`, `FALSE_OR_MEASUREMENT_GAP`,
@@ -421,7 +423,7 @@ Registered public `decision_reason_code` values are:
 `STRUCTURAL_OVERCAPACITY`, `GENERIC_CAPACITY_CONTRADICTED`,
 `ALL_ADVANCE_GATES_PASS`, `ADVANCE_SUPPORT_SIGNAL_DEGRADED`,
 `ROUTE_CHANGING_EVIDENCE_UNRESOLVED`, `NAMED_TRIGGER_MONITOR`, and
-`ROUTE_DETERMINATION_UNRESOLVED`.
+`ROUTE_DETERMINATION_UNRESOLVED`, and `NO_TRIGGER_FIRED`.
 
 MONITOR always names one of demand, regulation, technology, supplier
 concentration, or capacity state as an observable trigger.

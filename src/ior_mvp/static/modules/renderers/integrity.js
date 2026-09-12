@@ -1,6 +1,6 @@
 import {
+  decisionChip,
   escapeHtml,
-  stateChip,
   syntheticLabels,
   technical,
 } from "../dom.js";
@@ -38,9 +38,9 @@ export function renderIntegrityBanner(props) {
           </p>
         </div>
         <div class="integrity-states">
-          ${stateChip(props.real_state)}
+          ${decisionChip(props.real_state, props.screening_disposition)}
           ${simulated
-            ? `${transitionIcon()}${stateChip(props.active_state)}${syntheticLabels(props.synthetic_labels, "synthetic-warning synthetic-labels")}`
+            ? `${transitionIcon()}${decisionChip(props.active_state, props.screening_disposition)}${syntheticLabels(props.synthetic_labels, "synthetic-warning synthetic-labels")}`
             : ""}
         </div>
       </div>

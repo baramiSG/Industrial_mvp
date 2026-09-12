@@ -296,6 +296,21 @@ Delivered on the squash merge of S12c (PR #19, `78c002f`) after the T9 single ma
 
 Delivered on the squash merge of S13a (PR #21, `834ba60`) after reviewer-grok rounds 2/3/4 APPROVE (zero findings) on `e73aeba9…`, `402ff348…` and `f7af7f75…`, five owner-authorized manifest runs (ADR-019) and hosted CI 5/5 on the exact head `0dfbae9` (run 34706125468). Hosted CI corrections CI-F-01 (absolute screening input paths) and CI-F-02 (order-dependent detector test) are recorded in the slice `pr_record.md`. Core 01 §11 FR-080…FR-083 are covered by V3-SCREEN (FR-080), V3-QUEUES (FR-081), V3-SCREEN-RECON and V3-SCREEN-API (FR-082) and V3-UNIVERSE (FR-083). Partner detail is 0/1,471 because W0-ter did not expose an official all-partners token; W3 was not opened. Analyst surface, app mount and UX-01 parity are s13b.
 
+## Q. Milestone v0.3.0 — S13b bilingual screening surface
+
+| ID | Observable acceptance | Implementation evidence | Status | Slice |
+|---|---|---|---|---|
+| V3-SURFACE / FR-084 | Public summary, five route-specific queues and record/evidence drill-down render in EN/AR with explicit UNAVAILABLE, PARTIAL and empty states and no ordinal master list. | Mounted four-route API, seven screening modules, fixture contracts and 152-node functional browser gate. | TESTED | s13b |
+| V3-UX01 / FR-085 | Workspace, methodology and screening analytical prose has governed Arabic parity; technical/source islands are classified and label leaks are rejected. | Decision narratives 1.2.0 (213 keys), UI strings 1.2.0 (434 keys), parity grammar/report, EN-template equality and browser parity counts. Dossier residual is KL-84. | TESTED | s13b |
+| V3-KL34 / FR-086 | A no-fired-signal deep case returns null formal state and `NO_CANDIDATE`, not HTTP 422; other unmatched residuals still fail closed. | Canonical fixture and expected payload; public-decision/API/GenUI/dossier/browser tests. | TESTED | s13b |
+| V3-VISUAL / FR-087 | Four screening scenes extend the governed visual matrix to 56 entries through canonical regeneration and frozen-tree pinning. | OD-15 accepted tree `3297e2f8…`: 24/40 old entries changed only in approved regions, 16 dossiers unchanged; owner WIP commit `d1d1462`. SC-5 later stabilized nav scrolling; the four new summary WebPs and manifest/digest now produce future tree `c2b3b66b…`, pending owner WIP/base handling. | PARTIAL | s13b |
+| V3-TL09-screening | Screening API and DOM remain public-only in simulated opportunity mode. | Four-route forbidden-token/mode-equality tests and summary/queue/record/passport DOM leakage journeys. | TESTED | s13b |
+
+S13b evidence is in
+`.workflow/slices/S13b-bilingual-screening-surface/{implementation_log,test_evidence}.md`
+and ADR-020. These rows are local implementation evidence only until
+independent review, PR, hosted CI and merge; parent S13 remains in progress.
+
 ## Branch and release-state rules
 
 1. No row on the S05 implementation branch is promoted above `TESTED`.

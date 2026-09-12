@@ -12,6 +12,7 @@ import pytest
 import yaml
 
 import ior_mvp.config as config_module
+import ior_mvp.narratives as narratives_module
 from ior_mvp.config import PROJECT_ROOT
 from ior_mvp.data_repository import get_synthetic_scenario
 from ior_mvp.data_repository import get_public_case
@@ -47,13 +48,41 @@ def _placeholders(value: str) -> set[str]:
     }
 
 
+def _rule_catalogue_keys_from_source() -> set[str]:
+    path = PROJECT_ROOT / "src" / "ior_mvp" / "rules.py"
+    tree = ast.parse(path.read_text(encoding="utf-8"))
+    keys: set[str] = set()
+    for call in ast.walk(tree):
+        if not (
+            isinstance(call, ast.Call)
+            and isinstance(call.func, ast.Name)
+            and call.func.id in {"_rule", "_synthetic_rule"}
+        ):
+            continue
+        offset = 1 if call.func.id == "_synthetic_rule" else 0
+        rule_id_node = call.args[offset]
+        assert isinstance(rule_id_node, ast.Constant)
+        rule_id = str(rule_id_node.value).lower()
+        suffix = ".synthetic" if call.func.id == "_synthetic_rule" else ""
+        keys.add(f"rule.{rule_id}.name{suffix}")
+        keywords = {keyword.arg: keyword.value for keyword in call.keywords}
+        assert {"result_code", "decision_effect_code"} <= set(keywords)
+        result = keywords["result_code"]
+        effect = keywords["decision_effect_code"]
+        assert isinstance(result, ast.Constant)
+        assert isinstance(effect, ast.Constant)
+        keys.add(f"rule.{rule_id}.result.{str(result.value).lower()}")
+        keys.add(f"rule.{rule_id}.effect.{str(effect.value).lower()}")
+    return keys
+
+
 def test_decision_catalogue_metadata_and_locale_contract_are_exact() -> None:
     payload = _catalogue()
 
     assert payload["metadata"] == {
         "artifact": "industrial-opportunity-decision-narratives",
-        "version": "1.1.0",
-        "effective_date": "2026-09-03",
+        "version": "1.2.0",
+        "effective_date": "2026-09-12",
         "authority": (
             "Industrial Opportunity Resolution Methodology §§1.2, 4.2, "
             "5.3, 7.1.1, 7.4, 9, 12 and 15; Core 07 v2"
@@ -71,6 +100,12 @@ def test_decision_catalogue_metadata_and_locale_contract_are_exact() -> None:
         "product_name": "localized",
         "route_label": "localized",
         "route_short_label": "localized",
+        "hs_revision": "computed",
+        "hs6": "computed",
+        "positive_year_count": "computed",
+        "confidence_cap": "computed",
+        "ratio": "computed",
+        "named_fact_count": "computed",
     }
 
 
@@ -91,6 +126,69 @@ def test_decision_catalogue_has_exact_key_and_placeholder_parity() -> None:
         assert _placeholders(templates["en"][key]) == _placeholders(
             templates["ar"][key]
         )
+
+
+def test_rule_ledger_catalogue_keys_cover_every_code_and_nothing_more() -> None:
+    expected = _rule_catalogue_keys_from_source()
+    actual = {
+        key
+        for key in _catalogue()["templates"]["en"]
+        if key.startswith("rule.")
+    }
+
+    assert actual == expected
+
+
+def test_english_rule_ledger_catalogue_equals_engine_prose() -> None:
+    assert hasattr(narratives_module, "localize_rule_rows")
+    localize_rule_rows = narratives_module.localize_rule_rows
+    from ior_mvp.decision_engine import analyze
+
+    row_sets = [
+        analyze(opportunity_id, mode)["rules"]
+        for opportunity_id in ("SAU-H0-721049", "SAU-H0-390210")
+        for mode in ("public", "simulated")
+    ]
+    fixture_root = PROJECT_ROOT / "tests" / "fixtures" / "public_decision"
+    for path in sorted(fixture_root.glob("*.json")):
+        if path.name.endswith(".expected.json"):
+            continue
+        case = json.loads(path.read_text(encoding="utf-8"))
+        row_sets.append(localize_rule_rows(evaluate_rules(case)))
+
+    for rows in row_sets:
+        for row in rows:
+            localized = row["localized"]["en"]
+            assert localized["name"]["text"] == row["name"]
+            assert localized["result"]["text"] == row["result"]
+            assert (
+                localized["decision_effect"]["text"]
+                == row["decision_effect"]
+            )
+
+
+def test_arabic_rule_ledger_entries_are_arabic_with_ltr_isolated_computed_values() -> None:
+    templates = _catalogue()["templates"]["ar"]
+    for key, value in templates.items():
+        if key.startswith("rule."):
+            assert re.search(r"[\u0600-\u06ff]", value), key
+
+    assert hasattr(narratives_module, "localize_rule_rows")
+    from ior_mvp.decision_engine import analyze
+
+    for opportunity_id in ("SAU-H0-721049", "SAU-H0-390210"):
+        for mode in ("public", "simulated"):
+            for row in analyze(opportunity_id, mode)["rules"]:
+                for entry in row["localized"]["ar"].values():
+                    assert re.search(r"[\u0600-\u06ff]", entry["text"])
+                    for segment in entry["segments"]:
+                        if segment["kind"] == "computed":
+                            assert segment["ltr_isolate"] is True
+                        else:
+                            assert not re.search(
+                                r"[A-Za-z]{2,}",
+                                segment["text"],
+                            )
 
 
 def test_catalogue_has_generic_needs_routes_and_no_case_specific_keys() -> None:
@@ -467,11 +565,11 @@ def test_correction_round_keys_have_exact_english_and_arabic_literals() -> None:
         assert templates["ar"][key] == ar_text, key
 
 
-def test_catalogue_has_126_keys_with_parity_and_validator_pass() -> None:
+def test_catalogue_has_213_keys_with_parity_and_validator_pass() -> None:
     payload = _catalogue()
     en = payload["templates"]["en"]
     ar = payload["templates"]["ar"]
-    assert len(en) == len(ar) == 126
+    assert len(en) == len(ar) == 213
     assert set(en) == set(ar)
     validate_decision_narratives(payload)
 

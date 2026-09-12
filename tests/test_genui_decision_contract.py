@@ -67,6 +67,26 @@ def test_simulated_hero_carries_bilingual_localized_narrative_from_scenario(
     )
 
 
+def test_rule_ledger_component_carries_localized_rows() -> None:
+    for mode in ("public", "simulated"):
+        analysis = analyze("SAU-H0-721049", mode)
+        ledger = _component(build_ui_manifest(analysis), "rule_ledger")
+
+        assert ledger["props"]["rules"] == analysis["rules"]
+        for row in ledger["props"]["rules"]:
+            assert set(row["localized"]) == {"en", "ar"}
+            assert set(row["localized"]["en"]) == {
+                "name",
+                "result",
+                "decision_effect",
+            }
+            assert set(row["localized"]["ar"]) == {
+                "name",
+                "result",
+                "decision_effect",
+            }
+
+
 def test_genui_component_registry_remains_unchanged() -> None:
     manifest = build_ui_manifest(
         analyze("SAU-H0-721049", "simulated")

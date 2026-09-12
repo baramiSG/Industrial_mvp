@@ -86,6 +86,19 @@ export function stateChip(value) {
   return `<span class="state-chip state-${escapeHtml(value)}">${localizedCode(stateLabel(value), value)}</span>`;
 }
 
+export function decisionChip(value, disposition) {
+  if (typeof value === "string") return stateChip(value);
+  if (disposition !== "NO_CANDIDATE") {
+    throw new Error(`UI_CATALOGUE_KEY_MISSING:disposition:${disposition}`);
+  }
+  return `
+    <span class="state-chip state-NO_CANDIDATE">
+      ${escapeHtml(t("disposition.no_candidate"))}
+      ${technicalToken("NO_CANDIDATE")}
+    </span>
+  `;
+}
+
 export function executionChip(value) {
   return `<span class="exec-chip exec-${escapeHtml(value)}">${localizedCode(executionLabel(value), value)}</span>`;
 }
@@ -125,5 +138,8 @@ export function syntheticLabels(labels, className = "synthetic-labels") {
 
 export function ruleBoundaryChip(row) {
   if (!row.synthetic_flag) return "";
+  if (state.locale === "ar") {
+    return `<span class="exec-chip exec-DEGRADED synthetic-labels">${escapeHtml(row.display_labels?.ar)}</span>`;
+  }
   return syntheticLabels(row.display_labels, "exec-chip exec-DEGRADED synthetic-labels");
 }

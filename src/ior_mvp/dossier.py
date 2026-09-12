@@ -156,7 +156,9 @@ def build_dossier(analysis: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def _state_text(state: str, locale: str) -> str:
+def _state_text(state: str | None, locale: str) -> str:
+    if state is None:
+        return ui_text("disposition.no_candidate", locale)
     keys = {
         "ADVANCE": "state.advance",
         "REJECT": "state.reject",
@@ -261,6 +263,11 @@ def render_dossier_html(
 
     direction = "rtl" if locale == "ar" else "ltr"
     state_text = _state_text(dossier["decision_state"], locale)
+    state_code = (
+        dossier["decision_state"]
+        if dossier["decision_state"] is not None
+        else "NO_CANDIDATE"
+    )
     mode_text = ui_text(
         "mode.simulated" if dossier["mode"] == "simulated" else "mode.public",
         locale,
@@ -453,7 +460,7 @@ def render_dossier_html(
 </head>
 <body class="dossier-body">
 <main class="page" aria-label="{text("dossier.print_aria")}">
-<div class="state">{localized_code(state_text, dossier["decision_state"])}</div>
+<div class="state">{localized_code(state_text, state_code)}</div>
 <section class="decision-narrative">
 {narrative_caption}
 {headline_html}

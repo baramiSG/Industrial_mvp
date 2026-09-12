@@ -186,6 +186,9 @@ Module: `app.py`
 Responsibilities:
 
 - expose health, project, threshold, opportunity, manifest, dossier and extraction endpoints;
+- mount four public-only screening reads before the SPA fallback:
+  `/api/screening`, `/api/screening/queues/{queue_id}`,
+  `/api/screening/records/{hs6}`, and `GET /api/screening/evidence`;
 - serve the offline frontend;
 - provide OpenAPI documentation.
 
@@ -274,6 +277,9 @@ The backend emits:
 ```
 
 The browser has renderers only for approved types. A model cannot inject scripts, arbitrary HTML or unreviewed controls.
+The S13b registry additionally owns `screening_summary`, `screening_queue` and
+`screening_record` renderers. A null deep-decision state is displayed through
+its governed screening disposition chip, not by inventing a formal state.
 
 Context rules include:
 
@@ -340,14 +346,18 @@ The MVP does not lock the Ministry into a particular cloud or data platform.
 
 The engine is stateless at request time and can be separated into services when data volume grows. The first production bottleneck will not be arithmetic; it will be evidence acquisition, entity resolution and specification review. The architecture therefore preserves evidence passports and hard-gate status as first-class objects rather than optimizing prematurely for model throughput.
 
-## 12. S13a screening runtime boundary
+## 12. S13a screening runtime boundary (mounted in S13b)
 
 The offline builder under `ior_mvp.screening` may read acquired snapshots,
 documents and entity artifacts. The runtime loader, snapshot validator,
 configuration reader and API router do not import
-`ior_mvp.acquisition.transport`. `/api/screening` has summary, queue and record
-routes; mounting it in the primary application is deferred to S13b so every
-top-level application module and visual baseline remains unchanged in S13a.
+`ior_mvp.acquisition.transport`. The summary, queue and record routes are
+mounted in S13b before the primary application's SPA fallback. The additive
+`GET /api/screening/evidence` route returns the snapshot's universe
+evidence passports verbatim, its universe-unit coverage, an explicit
+`source_boundary=public` and `synthetic_flag=false`; without a snapshot it
+returns an empty typed `NO_SCREENING_SNAPSHOT` payload. It accepts no evidence
+mode and does not alter the three S13a route contracts.
 
 An unavailable universe is a successful typed runtime condition: the summary
 returns HTTP 200 with `universe_status=UNAVAILABLE`, empty queues and the latest

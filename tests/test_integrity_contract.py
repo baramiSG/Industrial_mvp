@@ -735,3 +735,41 @@ def test_human_authority_table_matches_machine_manifest_exactly() -> None:
     }
 
     assert rows == expected
+
+
+def test_s13b_core_v2_surface_contracts() -> None:
+    core_01 = (
+        PROJECT_ROOT / "docs" / "core" / "01_PRODUCT_AND_REQUIREMENTS.md"
+    ).read_text(encoding="utf-8")
+    core_03 = (
+        PROJECT_ROOT / "docs" / "core" / "03_SYSTEM_ARCHITECTURE.md"
+    ).read_text(encoding="utf-8")
+    core_07 = (
+        PROJECT_ROOT / "docs" / "core" / "07_DETERMINISTIC_ENGINE_SPEC.md"
+    ).read_text(encoding="utf-8")
+    core_09 = (
+        PROJECT_ROOT
+        / "docs"
+        / "core"
+        / "09_TEST_ACCEPTANCE_AND_GOLDEN_CASES.md"
+    ).read_text(encoding="utf-8")
+    ux_spec = (
+        PROJECT_ROOT / "docs" / "implementation" / "UX_GENUI_DEMO_SPEC.md"
+    ).read_text(encoding="utf-8")
+    limitations = (PROJECT_ROOT / "docs" / "KNOWN_LIMITATIONS.md").read_text(
+        encoding="utf-8"
+    )
+
+    for requirement_id in ("FR-084", "FR-085", "FR-086", "FR-087"):
+        assert requirement_id in core_01
+    assert "`GET /api/screening/evidence`" in core_03
+    assert "mounted in S13b" in core_03
+    assert "`NO_TRIGGER_FIRED`" in core_07
+    assert (
+        "yields the screening disposition `NO_CANDIDATE` with null formal state"
+        in core_07
+    )
+    assert "TL-09 assertions 8" in core_09
+    assert "56 entries" in core_09
+    assert "Engine-emitted analytical narrative remains English in this release" not in ux_spec
+    assert "| KL-34 |" in limitations

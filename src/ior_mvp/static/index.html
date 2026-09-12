@@ -25,6 +25,7 @@
         <button class="nav-item" data-target="methodology"><span>03</span><b data-i18n="nav.methodology"></b></button>
         <button class="nav-item" data-target="extraction"><span>04</span><b data-i18n="nav.extraction"></b></button>
         <button class="nav-item" data-target="governance"><span>05</span><b data-i18n="nav.governance"></b></button>
+        <button class="nav-item" data-target="screening"><span>06</span><b data-i18n="nav.screening"></b></button>
       </nav>
 
       <div class="sidebar-footer">
@@ -148,6 +149,19 @@
             <ul><li data-i18n="governance.authority_item1"></li><li data-i18n="governance.authority_item2"></li><li data-i18n="governance.authority_item3"></li></ul>
           </article>
         </div>
+      </section>
+
+      <section id="screening" class="page-section screening-section" aria-labelledby="screening-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow" data-i18n="screening.eyebrow"></p>
+            <h2 id="screening-title" data-i18n="screening.title"></h2>
+            <p data-i18n="screening.subtitle"></p>
+          </div>
+          <span class="snapshot-chip" data-i18n="screening.boundary_public_only"></span>
+        </div>
+        <div id="screening-view" class="loading-block" role="region" aria-live="polite"></div>
+        <div id="screening-evidence" class="screening-evidence" role="region" aria-labelledby="screening-evidence-title" aria-live="polite"></div>
       </section>
 
       <footer class="footer">

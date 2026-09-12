@@ -16,6 +16,7 @@ from .inputs import assemble_inputs
 from .snapshot import (
     build_screening_snapshot,
     canonical_bytes,
+    load_screening_summary_directory,
     load_screening_snapshot_directory,
     reconstruct_screening_snapshot,
     validate_screening_snapshot_directory,
@@ -110,12 +111,24 @@ def _root(value: str | None) -> Path:
 
 
 def _latest_snapshot(root: Path) -> Path | None:
-    paths = sorted(
+    paths = [
         path
         for path in (root / "screening" / "snapshots").glob("SCREENING-*")
         if path.is_dir()
-    )
-    return paths[-1] if paths else None
+    ]
+    if not paths:
+        return None
+    summaries = [
+        (load_screening_summary_directory(path), path)
+        for path in paths
+    ]
+    return max(
+        summaries,
+        key=lambda item: (
+            item[0]["as_of_date"],
+            item[0]["snapshot_id"],
+        ),
+    )[1]
 
 
 def main(argv: list[str] | None = None) -> None:

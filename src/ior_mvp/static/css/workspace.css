@@ -237,6 +237,11 @@ select {
   color: var(--color-info-text);
 }
 
+.state-NO_CANDIDATE {
+  background: var(--color-info-soft);
+  color: var(--color-info-text);
+}
+
 .metric-panel {
   display: grid;
   grid-template-columns: var(--layout-metric-columns);

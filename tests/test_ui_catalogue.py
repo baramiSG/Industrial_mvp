@@ -20,6 +20,181 @@ from ior_mvp.config import PROJECT_ROOT
 CATALOGUE_PATH = PROJECT_ROOT / "config" / "ui_strings.v1.yaml"
 CHECKER = PROJECT_ROOT / "scripts" / "check_ui_contracts.py"
 EXPECTED_ARABIC_LABEL = "محاكاة — ليست بيانات أو أدلة صادرة عن الوزارة"
+NEED_SLUGS = {
+    "identity/tariff-line": "identity_tariff_line",
+    "target specification/application": "target_specification_application",
+    "line-level production or producer-grade matrix": (
+        "line_level_production_or_producer_grade_matrix"
+    ),
+    "re-export/origin decomposition": "re_export_origin_decomposition",
+    "capacity/availability/allocation": "capacity_availability_allocation",
+}
+QUEUE_REASON_CODES = {
+    "MULTIPLE_MATERIAL_SIGNALS",
+    "R9S_AND_OTHER_MATERIAL_TRIGGER",
+    "SUPPLIER_CONCENTRATION_SIGNAL",
+    "SCREENING_WARNING",
+    "R2_FULL_FIRED",
+    "EVSI_NOT_CALCULABLE",
+    "PERSISTENCE_ONLY",
+}
+EXCLUSION_CODES = {
+    "EX-01_HETEROGENEOUS_RESIDUAL",
+    "EX-02_MARKET_BELOW_MES",
+    "EX-03_UNSATISFIABLE_HARD_GATE",
+    "EX-04_IDLE_EQUIVALENT_CAPACITY",
+    "EX-05_TRANSITORY_OR_MEASUREMENT",
+    "EX-06_REDUNDANCY_OR_CROWD_OUT",
+}
+SCREENING_RESULT_CODES = {
+    "R0_DISABLED_NA",
+    "R0_FULL_FIRED",
+    "R0_DEGRADED_FIRED",
+    "R1_F_DISABLED_NA",
+    "R1_F_FULL_NOT_FIRED",
+    "R1_D_DEGRADED_FIRED",
+    "R1_D_DEGRADED_NOT_FIRED",
+    "R2_DISABLED_NA",
+    "R2_FULL_FIRED",
+    "R2_FULL_NOT_FIRED",
+    "R3_DISABLED_NA",
+    "R3_FULL_FIRED",
+    "R3_FULL_NOT_FIRED",
+    "R4_D_DISABLED_NA",
+    "R4_D_DEGRADED_FIRED",
+    "R5_DISABLED_NA",
+    "R5_FULL_FIRED",
+    "R5_FULL_NOT_FIRED",
+    "R5_DEGRADED_FIRED",
+    "R5_DEGRADED_NOT_FIRED",
+    "R9_S_DISABLED_NA",
+    "R9_S_FULL_FIRED",
+    "R9_S_FULL_NOT_FIRED",
+    "R10_DISABLED_NA",
+    "R10_FULL_FIRED",
+    "R10_DEGRADED_FIRED",
+    "R11_FULL_FIRED",
+    "R11_FULL_NOT_FIRED",
+    "R11_DEGRADED_NOT_FIRED",
+}
+SCREENING_EFFECT_CODES = {
+    "R0_EFFECT",
+    "R1_F_EFFECT",
+    "R1_D_EFFECT",
+    "R2_EFFECT",
+    "R3_EFFECT",
+    "R4_D_EFFECT",
+    "R5_EFFECT",
+    "R9_S_EFFECT",
+    "R10_EFFECT",
+    "R11_EFFECT",
+}
+SCREENING_CHROME_KEYS = {
+    "nav.screening",
+    "screening.eyebrow",
+    "screening.title",
+    "screening.subtitle",
+    "screening.boundary_public_only",
+    "screening.summary.title",
+    "screening.universe.title",
+    "screening.universe.status",
+    "screening.universe.reasons",
+    "screening.universe.hs6_count",
+    "screening.universe.years",
+    "screening.universe.flows",
+    "screening.universe.units",
+    "screening.universe.unavailable_body",
+    "screening.universe.partial_body",
+    "screening.coverage.title",
+    "screening.coverage.tariff_tree",
+    "screening.coverage.partner_detail",
+    "screening.coverage.partner_detail_counts",
+    "screening.coverage.production_aggregates",
+    "screening.coverage.entity_artifact",
+    "screening.counts.title",
+    "screening.counts.dispositions",
+    "screening.counts.indications",
+    "screening.counts.unqueued",
+    "screening.counts.unqueued_note",
+    "screening.mapping.title",
+    "screening.mapping.note",
+    "screening.queues.title",
+    "screening.queues.subtitle",
+    "screening.queue.count",
+    "screening.queue.ordering_basis",
+    "screening.queue.methodology_ref",
+    "screening.queue.open",
+    "screening.queue.back_to_summary",
+    "screening.queue.empty",
+    "screening.queue.empty_body",
+    "screening.queue.pareto_rank",
+    "screening.queue.pareto_note",
+    "screening.queue.hs6",
+    "screening.queue.disposition",
+    "screening.queue.indicated_state",
+    "screening.queue.reasons",
+    "screening.queue.metrics",
+    "screening.queue.open_record",
+    "screening.queue.showing",
+    "screening.queue.previous",
+    "screening.queue.next",
+    "screening.record.title",
+    "screening.record.back_to_queue",
+    "screening.record.disposition",
+    "screening.record.disposition_reason",
+    "screening.record.indicated_state",
+    "screening.record.indication_reason",
+    "screening.record.no_indication",
+    "screening.record.ledger",
+    "screening.record.not_evaluated",
+    "screening.record.exclusions",
+    "screening.record.exclusion",
+    "screening.record.exclusion_status",
+    "screening.record.exclusion_reason",
+    "screening.record.evidence_ids",
+    "screening.record.no_evidence_ids",
+    "screening.record.warnings",
+    "screening.record.ratio_warning",
+    "screening.record.ratio_value",
+    "screening.record.price_led_growth",
+    "screening.record.continuity",
+    "screening.record.needs",
+    "screening.record.adjacency",
+    "screening.record.same_process_family",
+    "screening.record.qualifying_signals",
+    "screening.record.known_gate_failure",
+    "screening.record.metrics",
+    "screening.record.evidence_basis_title",
+    "screening.record.evidence_basis_intro",
+    "screening.record.no_record_passports",
+    "screening.record.record_passports",
+    "screening.loading",
+    "screening.error",
+    "screening.evidence.title",
+    "screening.evidence.intro",
+    "screening.evidence.passport_id",
+    "screening.evidence.passport_source",
+    "screening.evidence.passport_stage",
+    "screening.evidence.passport_unit",
+    "screening.evidence.passport_class",
+    "screening.evidence.passport_status",
+    "screening.evidence.passport_coverage",
+    "screening.evidence.passport_endpoint",
+    "screening.evidence.passport_retrieved",
+    "screening.evidence.passport_reference",
+    "screening.evidence.completeness_basis",
+    "screening.evidence.query_hash",
+    "screening.evidence.selected_run",
+    "screening.evidence.superseded_runs",
+    "screening.evidence.no_superseded_runs",
+    "screening.evidence.passport_detail_not_exposed",
+    "screening.evidence.no_snapshot",
+    "screening.evidence.unit_without_passport",
+    "screening.flow.imports",
+    "screening.flow.exports",
+    "common.yes",
+    "common.no",
+}
 
 
 def _catalogue() -> dict:
@@ -41,8 +216,8 @@ def test_ui_catalogue_metadata_locales_and_version_are_exact() -> None:
 
     assert payload["metadata"] == {
         "artifact": "industrial-opportunity-ui-strings",
-        "version": "1.1.0",
-        "effective_date": "2026-09-02",
+        "version": "1.2.0",
+        "effective_date": "2026-09-12",
         "authority": (
             "Core 01 NFR-006/NFR-007 and UX GenUI Demo Specification"
         ),
@@ -139,6 +314,189 @@ def test_ui_catalogue_values_are_nonempty_nfc_strings() -> None:
             assert unicodedata.normalize("NFC", value) == value
 
 
+def _required_screening_keys() -> tuple[set[str], set[str]]:
+    screening = yaml.safe_load(
+        (
+            PROJECT_ROOT / "config" / "screening.v1.yaml"
+        ).read_text(encoding="utf-8")
+    )
+    vocab = screening["vocabularies"]
+    queue_ids = set(screening["queues"])
+    codes = (
+        set(vocab["dispositions"])
+        | set(vocab["reason_codes"])
+        | {"NO_SCREENING_SNAPSHOT"}
+        | queue_ids
+        | QUEUE_REASON_CODES
+        | EXCLUSION_CODES
+        | {"SATISFIED", "NOT_SATISFIED", "NOT_CALCULABLE"}
+        | {
+            "EXCLUSION_SATISFIED",
+            "EXCLUSION_NOT_SATISFIED",
+            "EXCLUSION_INPUT_UNAVAILABLE",
+        }
+        | {"CONTINUOUS", "GAP_YEARS", "REVISION_CHANGE_IN_WINDOW"}
+        | {
+            "NONE",
+            "GAP_YEARS",
+            "ABSENT_BEFORE_REVISION_CHANGE",
+            "ABSENT_AFTER_REVISION_CHANGE",
+        }
+        | {
+            "AVAILABLE",
+            "PARTIAL",
+            "UNAVAILABLE",
+            "NOT_CALCULABLE",
+            "CALCULATED",
+            "COMPLETE",
+        }
+        | SCREENING_RESULT_CODES
+        | SCREENING_EFFECT_CODES
+        | {
+            "R0",
+            "R1-F",
+            "R1-D",
+            "R2",
+            "R3",
+            "R4-D",
+            "R5",
+            "R9-S",
+            "R10",
+            "R11",
+        }
+        | {
+            "imports_usd_m_latest",
+            "quantity_cagr",
+            "export_import_value_ratio",
+            "largest_supplier_share_value",
+            "qualifying_signal_count",
+            "fired_signal_count",
+            "hhi_value",
+            "delta_ln_value",
+        }
+    )
+    required = set(SCREENING_CHROME_KEYS)
+    required |= {
+        f"disposition.{code.lower()}"
+        for code in vocab["dispositions"]
+    }
+    required |= {
+        f"reason.{code.lower()}"
+        for code in [*vocab["reason_codes"], "NO_SCREENING_SNAPSHOT"]
+    }
+    required |= {f"queue.{code}" for code in queue_ids}
+    required |= {
+        f"queue_reason.{code.lower()}"
+        for code in QUEUE_REASON_CODES
+    }
+    required |= {
+        f"need.{NEED_SLUGS[code]}"
+        for code in vocab["evidence_need_codes"]
+    }
+    required |= {
+        f"exclusion.{code.lower()}"
+        for code in EXCLUSION_CODES
+    }
+    required |= {
+        f"exclusion_status.{code.lower()}"
+        for code in ("SATISFIED", "NOT_SATISFIED", "NOT_CALCULABLE")
+    }
+    required |= {
+        f"exclusion_reason.{code.lower()}"
+        for code in (
+            "EXCLUSION_SATISFIED",
+            "EXCLUSION_NOT_SATISFIED",
+            "EXCLUSION_INPUT_UNAVAILABLE",
+        )
+    }
+    required |= {
+        f"continuity_status.{code.lower()}"
+        for code in ("CONTINUOUS", "GAP_YEARS", "REVISION_CHANGE_IN_WINDOW")
+    }
+    required |= {
+        f"continuity_pattern.{code.lower()}"
+        for code in (
+            "NONE",
+            "GAP_YEARS",
+            "ABSENT_BEFORE_REVISION_CHANGE",
+            "ABSENT_AFTER_REVISION_CHANGE",
+        )
+    }
+    required |= {
+        f"screening.status.{code.lower()}"
+        for code in (
+            "AVAILABLE",
+            "PARTIAL",
+            "UNAVAILABLE",
+            "NOT_CALCULABLE",
+            "CALCULATED",
+            "COMPLETE",
+        )
+    }
+    required |= {
+        f"screening.metric.{code}"
+        for code in (
+            "imports_usd_m_latest",
+            "quantity_cagr",
+            "export_import_value_ratio",
+            "largest_supplier_share_value",
+            "qualifying_signal_count",
+            "fired_signal_count",
+            "hhi_value",
+            "delta_ln_value",
+        )
+    }
+    required |= {
+        f"screening.rule.{code.lower().replace('-', '_')}"
+        for code in (
+            "R0",
+            "R1-F",
+            "R1-D",
+            "R2",
+            "R3",
+            "R4-D",
+            "R5",
+            "R9-S",
+            "R10",
+            "R11",
+        )
+    }
+    required |= {
+        f"screening.result.{code.lower()}"
+        for code in SCREENING_RESULT_CODES
+    }
+    required |= {
+        f"screening.effect.{code.lower()}"
+        for code in SCREENING_EFFECT_CODES
+    }
+    required.add(
+        "screening.not_evaluated_reason.inputs_not_public_at_screening_grain"
+    )
+    return required, codes
+
+
+def test_ui_catalogue_covers_every_screening_vocabulary_code() -> None:
+    required, _ = _required_screening_keys()
+    strings = _catalogue()["strings"]
+
+    assert required <= set(strings["en"])
+    assert required <= set(strings["ar"])
+
+
+def test_screening_labels_are_arabic_and_never_equal_a_code() -> None:
+    required, codes = _required_screening_keys()
+    strings = _catalogue()["strings"]
+
+    for key in required:
+        assert re.search(r"[\u0600-\u06ff]", strings["ar"][key]), key
+        assert strings["en"][key] not in codes, key
+        assert strings["ar"][key] not in codes, key
+    assert (
+        strings["en"]["reason.no_screening_snapshot"]
+        != "NO_SCREENING_SNAPSHOT"
+    )
+
+
 def test_ui_catalogue_excludes_policy_synthetic_labels() -> None:
     payload = _catalogue()
     policy = yaml.safe_load(
@@ -198,7 +556,7 @@ def test_ui_strings_endpoint_returns_valid_en_and_ar_bundles(
     payload = response.json()
     catalogue = _catalogue()
     assert payload == {
-        "catalogue_version": "1.1.0",
+        "catalogue_version": "1.2.0",
         "locale": locale,
         **catalogue["locales"][locale],
         "strings": catalogue["strings"][locale],

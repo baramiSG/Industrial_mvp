@@ -1,0 +1,13 @@
+# Persona — S13b Bilingual Screening Surface
+
+**Discipline stance:** interface engineering on a governed decision product (full-stack where the mount and KL-34 engine amendment require it), delivered under the adopted autonomous workflow.
+
+**Seats for this slice (fresh pair, configured order):** planner `planner-fable` → supervisor plan review → `reviewer-grok` plan review → implementer ladder starting at `implementer-composer` unless an owner ruling starts higher → supervisor implementation review → `reviewer-grok` implementation review (sole approving reviewer) → owner acceptance → delivery by the owner lead agent. No seat approves its own work.
+
+**What this slice is:** the first analyst-facing surface of milestone v0.3.0 — mounting the s13a `/api/screening` router in `app.py`, rendering the five route-specific queues (Pareto / route-specific ordering, no ordinal master list), drill-down from every entry to its screening record (rule ledger codes through the catalogue, exclusions, warnings, needs, adjacency, evidence-passport references), and truthful universe-unavailable / partial-coverage / empty-queue states — in Arabic and English, keyboard-operable, RTL-correct, token-only styling under the 200-line module rule; closing KL-34 (Core 07 §7.6 step-8 amendment: no fired candidate signal → screening disposition `NO_CANDIDATE` with a null formal state and a registered reason code, other unmatched residuals remain a decision-integrity error); satisfying UX-01 (engine/catalogue-sourced ledger prose in Arabic with full content parity, verified by a Playwright parity test on the decision-workspace ledger and the screening surface); extending and regenerating the governed visual-baseline matrix once in the canonical container with the tree-OID pin and visual `source_tree` updated.
+
+**What it is not:** no acquisition, engine rule, queue or snapshot semantics change (s13a contracts are consumed, not altered); no deep cases (S14/S15), graph (S16), executive mode (S18) or dossier redesign (S19); no GenUI redesign beyond what the screening surface needs; no live connectors.
+
+**Non-negotiables held:** synthetic evidence never changes `real_decision`; no `ADVANCE` from screening; unknown capability never improves adjacency; thresholds only from versioned YAML; both public goldens exact; visual baselines regenerated only in the canonical container with reviewer approval; every `UNAVAILABLE` rendered as an explicit labelled state, never blank or fabricated; write-once evidence.
+
+**Data classification:** public evidence only (official UN Comtrade universe, frozen public snapshots, governed catalogues); no personal data; the Comtrade key is never read by agents.

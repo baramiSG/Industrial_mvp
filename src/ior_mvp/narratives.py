@@ -82,9 +82,9 @@ def validate_decision_narratives(payload: dict[str, Any]) -> None:
     assert isinstance(locales, dict)
     assert isinstance(placeholder_kinds, dict)
     assert isinstance(templates, dict)
-    if metadata.get("version") != "1.1.0":
+    if metadata.get("version") != "1.2.0":
         raise NarrativeCatalogueError(
-            "Decision narrative metadata.version must be 1.1.0"
+            "Decision narrative metadata.version must be 1.2.0"
         )
     if metadata.get("default_locale") != "en":
         raise NarrativeCatalogueError(
@@ -223,3 +223,90 @@ def render_catalogue_entry(
         "text": "".join(segment["text"] for segment in segments),
         "segments": segments,
     }
+
+
+def _rule_key_part(value: Any, field: str) -> str:
+    if not isinstance(value, str) or not value:
+        raise NarrativeCatalogueError(
+            f"Rule ledger {field} must be a non-empty string"
+        )
+    return value.lower()
+
+
+def RULE_NAME_KEY(rule_id: str, synthetic: bool = False) -> str:
+    suffix = ".synthetic" if synthetic else ""
+    return f"rule.{_rule_key_part(rule_id, 'rule_id')}.name{suffix}"
+
+
+def RULE_RESULT_KEY(rule_id: str, code: str) -> str:
+    return (
+        f"rule.{_rule_key_part(rule_id, 'rule_id')}.result."
+        f"{_rule_key_part(code, 'result_code')}"
+    )
+
+
+def RULE_EFFECT_KEY(rule_id: str, code: str) -> str:
+    return (
+        f"rule.{_rule_key_part(rule_id, 'rule_id')}.effect."
+        f"{_rule_key_part(code, 'decision_effect_code')}"
+    )
+
+
+def _computed_rule_values(
+    row: dict[str, Any],
+    field: str,
+) -> dict[str, NarrativeValue]:
+    values = row.get(field)
+    if not isinstance(values, dict) or any(
+        not isinstance(key, str) or not isinstance(value, str)
+        for key, value in values.items()
+    ):
+        raise NarrativeCatalogueError(
+            f"Rule ledger {field} must map strings to strings"
+        )
+    return {
+        key: NarrativeValue.computed(value)
+        for key, value in values.items()
+    }
+
+
+def localize_rule_rows(
+    rows: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    localized_rows: list[dict[str, Any]] = []
+    for row in rows:
+        if not isinstance(row, dict):
+            raise NarrativeCatalogueError("Rule ledger row must be a mapping")
+        rule_id = _rule_key_part(row.get("rule_id"), "rule_id")
+        result_code = _rule_key_part(
+            row.get("result_code"),
+            "result_code",
+        )
+        effect_code = _rule_key_part(
+            row.get("decision_effect_code"),
+            "decision_effect_code",
+        )
+        localized = {
+            locale: {
+                "name": render_catalogue_entry(
+                    RULE_NAME_KEY(
+                        rule_id,
+                        synthetic=row.get("synthetic_flag") is True,
+                    ),
+                    locale,
+                ),
+                "result": render_catalogue_entry(
+                    RULE_RESULT_KEY(rule_id, result_code),
+                    locale,
+                    _computed_rule_values(row, "result_values"),
+                ),
+                "decision_effect": render_catalogue_entry(
+                    RULE_EFFECT_KEY(rule_id, effect_code),
+                    locale,
+                    _computed_rule_values(row, "effect_values"),
+                ),
+            }
+            for locale in SUPPORTED_LOCALES
+        }
+        localized_rows.append({**row, "localized": localized})
+    return localized_rows

@@ -1,0 +1,301 @@
+{
+  "schema_version": "2.1.0",
+  "snapshot_id": "FIX-PUBLIC-NO-CANDIDATE",
+  "as_of_date": "2026-09-02",
+  "supersedes": "UNAVAILABLE",
+  "source_boundary": "public",
+  "authority_note": "Synthetic-free deterministic test fixture; not a demonstration evidence artifact.",
+  "opportunity": {
+    "id": "FIX-PUBLIC-NO-CANDIDATE",
+    "hs_revision": "H0",
+    "hs6": "999999",
+    "national_tariff_line": "UNAVAILABLE",
+    "sector_profile": "technical_plastics",
+    "commercial_name_en": "Test product",
+    "commercial_name_ar": "منتج اختباري",
+    "decision_object_status": "resolved",
+    "application_boundary": "Named test specification and application.",
+    "as_of_date": "2026-09-02"
+  },
+  "trade": [
+    {
+      "year": 2025,
+      "imports_usd_m": 10.0,
+      "imports_kt": 10.0,
+      "exports_usd_m": 1.0,
+      "exports_kt": 1.0
+    },
+    {
+      "year": 2026,
+      "imports_usd_m": 10.0,
+      "imports_kt": 10.0,
+      "exports_usd_m": 1.0,
+      "exports_kt": 1.0
+    }
+  ],
+  "trade_quality": {
+    "flow_basis": "gross",
+    "reexports_separated": true,
+    "domestic_origin_exports_separated": true,
+    "missing_years": [],
+    "monthly_partner_tariff_line_available": false,
+    "quantity_comparable": true,
+    "execution_cap": "FULL for the supplied test grain"
+  },
+  "partner_observations": "UNAVAILABLE",
+  "disclosed_concentration": {
+    "value": "UNAVAILABLE",
+    "quantity": "UNAVAILABLE"
+  },
+  "disclosed_dispersion": "UNAVAILABLE",
+  "domestic_flows": {
+    "period_year": 2026,
+    "domestic_production_kt": 100.0,
+    "retained_imports_kt": 10.0,
+    "domestic_origin_exports_kt": 0.0,
+    "reexports_kt": 0.0,
+    "source_evidence_ids": [
+      "E-CAP"
+    ]
+  },
+  "criticality_designation": "UNAVAILABLE",
+  "domestic_capability": {
+    "verified_present": true,
+    "same_process_family": false,
+    "coarse_adjacency_signals": [],
+    "producer_evidence": [],
+    "public_dimension_states": {
+      "feedstock_chemistry": 0,
+      "core_process_route": 0,
+      "equipment_envelope": 0,
+      "finishing_spec_control": 0,
+      "qa_lab_metrology": 0,
+      "certification_customer_qualification": 1,
+      "capacity_time_window": 0,
+      "utilities_ehs_permitting": 0,
+      "skills_market_integration": 0
+    },
+    "profile_hard_gates": {
+      "polymer_additive_compatibility": {
+        "status": "RESOLVED",
+        "evidence_ids": [
+          "E-GATE"
+        ]
+      },
+      "conversion_route": {
+        "status": "RESOLVED",
+        "evidence_ids": [
+          "E-GATE"
+        ]
+      },
+      "tooling": {
+        "status": "RESOLVED",
+        "evidence_ids": [
+          "E-GATE"
+        ]
+      },
+      "performance_requirement": {
+        "status": "RESOLVED",
+        "evidence_ids": [
+          "E-GATE"
+        ]
+      },
+      "application_qualification": {
+        "status": "RESOLVED",
+        "evidence_ids": [
+          "E-GATE"
+        ]
+      }
+    },
+    "unresolved_hard_gates": []
+  },
+  "hard_exclusion_inputs": {
+    "heterogeneous_residual_code": {
+      "commercial_product_separable": true,
+      "product_level_evidence_available": true,
+      "evidence_ids": [
+        "E-ID"
+      ]
+    },
+    "downside_market_below_mes": {
+      "sustainable_downside_demand_kt": 100.0,
+      "minimum_efficient_scale_kt": 50.0,
+      "credible_export_contract": false,
+      "evidence_ids": [
+        "E-DEMAND"
+      ]
+    },
+    "unsatisfiable_hard_gate": {
+      "gate_domain": "customer_qualification",
+      "gate_satisfiability": "SATISFIABLE",
+      "evidence_ids": [
+        "E-GATE"
+      ]
+    },
+    "idle_equivalent_domestic_capacity": {
+      "domestic_specification_equivalent": false,
+      "qualified_idle_capacity_kt": 0.0,
+      "target_specification_demand_kt": 100.0,
+      "binding_market_failure": true,
+      "evidence_ids": [
+        "E-CAP"
+      ]
+    },
+    "transitory_or_measurement_gap": {
+      "dominant_cause": "OTHER",
+      "evidence_ids": [
+        "E-ID"
+      ]
+    },
+    "redundancy_or_crowd_out": {
+      "competition_finding": "ACCEPTABLE",
+      "evidence_ids": [
+        "E-ROUTE"
+      ]
+    }
+  },
+  "decision_inputs": {
+    "target_specification_demand": {
+      "quantity_kt": 100.0,
+      "downside_quantity_kt": 100.0,
+      "evidence_ids": [
+        "E-DEMAND"
+      ]
+    },
+    "specification_equivalence": {
+      "domestic_product_equivalent": false,
+      "qualified_available_kt": 100.0,
+      "evidence_ids": [
+        "E-CAP"
+      ]
+    },
+    "route_evidence": [
+      {
+        "route_code": 3,
+        "binding_constraint": "qualification_or_certification",
+        "technical_feasibility_confirmed": false,
+        "binding_constraint_fully_removed": true,
+        "investment_already_approved_or_financed": false,
+        "proceeds_without_intervention": false,
+        "policy_prohibition_identified": false,
+        "distortion_unacceptable": false,
+        "intervention_proportionate_to_constraint": true,
+        "downside_cash_flows_m_sar": [
+          -10.0,
+          6.0,
+          6.0
+        ],
+        "hurdle_rate": 0.1,
+        "national_value": {
+          "domestic_value_added": 50.0,
+          "exports": 10.0,
+          "resilience_value": 5.0,
+          "knowledge_skills": 5.0,
+          "fiscal_receipts": 5.0,
+          "government_cost": 5.0,
+          "displacement": 1.0,
+          "resource_environment": 1.0,
+          "risk_allowance": 2.0
+        },
+        "competition": {
+          "existing_effective_capacity_kt": 100.0,
+          "proposed_incremental_capacity_kt": 0.0,
+          "downside_demand_kt": 100.0
+        },
+        "evidence_ids": [
+          "E-ROUTE"
+        ]
+      }
+    ],
+    "monitor_trigger": "UNAVAILABLE"
+  },
+  "evidence": [
+    {
+      "evidence_id": "E-ID",
+      "title": "Target product identity fixture",
+      "source": "TEST_FIXTURE",
+      "url": "https://example.invalid/e-id",
+      "period": "2026",
+      "retrieved_at": "2026-09-02",
+      "status": "observed",
+      "evidence_class": "B",
+      "synthetic_flag": false,
+      "supports": [
+        "TARGET_PRODUCT_IDENTITY"
+      ],
+      "transformation": "No transformation; synthetic-free test fixture.",
+      "reviewer_status": "confirmed_by_responsible_authority",
+      "contradiction": null
+    },
+    {
+      "evidence_id": "E-DEMAND",
+      "title": "Target-specification demand fixture",
+      "source": "TEST_FIXTURE",
+      "url": "https://example.invalid/e-demand",
+      "period": "2026",
+      "retrieved_at": "2026-09-02",
+      "status": "observed",
+      "evidence_class": "B",
+      "synthetic_flag": false,
+      "supports": [
+        "TARGET_SPECIFICATION_DEMAND"
+      ],
+      "transformation": "No transformation; synthetic-free test fixture.",
+      "reviewer_status": "confirmed_by_responsible_authority",
+      "contradiction": null
+    },
+    {
+      "evidence_id": "E-CAP",
+      "title": "Domestic capability fixture",
+      "source": "TEST_FIXTURE",
+      "url": "https://example.invalid/e-cap",
+      "period": "2026",
+      "retrieved_at": "2026-09-02",
+      "status": "observed",
+      "evidence_class": "C",
+      "synthetic_flag": false,
+      "supports": [
+        "DOMESTIC_CAPABILITY_ASSESSMENT"
+      ],
+      "transformation": "No transformation; synthetic-free test fixture.",
+      "reviewer_status": "confirmed_by_responsible_authority",
+      "contradiction": null
+    },
+    {
+      "evidence_id": "E-GATE",
+      "title": "Hard-gate resolution fixture",
+      "source": "TEST_FIXTURE",
+      "url": "https://example.invalid/e-gate",
+      "period": "2026",
+      "retrieved_at": "2026-09-02",
+      "status": "observed",
+      "evidence_class": "C",
+      "synthetic_flag": false,
+      "supports": [
+        "HARD_REGULATORY_PROCESS_GATES"
+      ],
+      "transformation": "No transformation; synthetic-free test fixture.",
+      "reviewer_status": "confirmed_by_responsible_authority",
+      "contradiction": null
+    },
+    {
+      "evidence_id": "E-ROUTE",
+      "title": "Route economics and policy fixture",
+      "source": "TEST_FIXTURE",
+      "url": "https://example.invalid/e-route",
+      "period": "2026",
+      "retrieved_at": "2026-09-02",
+      "status": "observed",
+      "evidence_class": "B",
+      "synthetic_flag": false,
+      "supports": [
+        "ROUTE_ECONOMICS",
+        "ROUTE_NATIONAL_VALUE",
+        "ROUTE_COMPETITION"
+      ],
+      "transformation": "No transformation; synthetic-free test fixture.",
+      "reviewer_status": "confirmed_by_responsible_authority",
+      "contradiction": null
+    }
+  ]
+}

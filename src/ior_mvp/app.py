@@ -23,6 +23,7 @@ from .dossier import build_dossier, render_dossier_html
 from .evidence import EvidenceIntegrityError
 from .genui import build_ui_manifest
 from .narratives import NarrativeCatalogueError
+from .screening.api import router as screening_router
 
 
 STATIC_DIR = Path(__file__).resolve().parent / "static"
@@ -33,6 +34,7 @@ app = FastAPI(
     version=__version__,
 )
 app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
+app.include_router(screening_router)
 
 
 def _evidence_integrity_http_exception(

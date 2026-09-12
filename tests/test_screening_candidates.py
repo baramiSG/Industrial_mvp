@@ -67,6 +67,52 @@ def test_candidate_source_screening_cheap_rules_v1(tmp_path):
     assert payload["candidate_source"] == "SCREENING_CHEAP_RULES_V1"
 
 
+def test_cli_latest_snapshot_selects_by_as_of_date_then_snapshot_id_not_directory_order(
+    tmp_path, monkeypatch
+):
+    from ior_mvp.screening import cli
+
+    root = tmp_path / "data"
+    snapshots = root / "screening" / "snapshots"
+    older = snapshots / "SCREENING-Z-OLDER"
+    newer_a = snapshots / "SCREENING-A-NEWER"
+    newer_b = snapshots / "SCREENING-B-NEWER"
+    for path in (older, newer_a, newer_b):
+        path.mkdir(parents=True)
+    summaries = {
+        older: {"as_of_date": "2026-09-11", "snapshot_id": "SCREENING-Z"},
+        newer_a: {"as_of_date": "2026-09-12", "snapshot_id": "SCREENING-A"},
+        newer_b: {"as_of_date": "2026-09-12", "snapshot_id": "SCREENING-B"},
+    }
+    monkeypatch.setattr(
+        cli,
+        "load_screening_summary_directory",
+        lambda path: summaries[path],
+        raising=False,
+    )
+
+    assert cli._latest_snapshot(root) == newer_b
+
+
+def test_cli_and_repository_select_the_same_snapshot_on_the_committed_data_root():
+    from ior_mvp.screening import cli, repository
+
+    repository.clear_screening_caches()
+    assert cli._latest_snapshot(PROJECT_ROOT / "data") == repository._screening_directory()
+
+
+def test_cli_latest_snapshot_fails_closed_on_invalid_summary(tmp_path):
+    from ior_mvp.screening.cli import _latest_snapshot
+
+    root = tmp_path / "data"
+    snapshot = root / "screening" / "snapshots" / "SCREENING-BAD"
+    snapshot.mkdir(parents=True)
+    (snapshot / "summary.json").write_text("{}", encoding="utf-8")
+
+    with pytest.raises(ValueError):
+        _latest_snapshot(root)
+
+
 def test_screening_cli_main_exit_codes_and_no_socket(tmp_path, monkeypatch):
     from ior_mvp.screening import cli
 
@@ -78,6 +124,14 @@ def test_screening_cli_main_exit_codes_and_no_socket(tmp_path, monkeypatch):
 
     monkeypatch.setattr(socket, "socket", block_socket)
     monkeypatch.setattr(socket, "create_connection", block_socket)
+    monkeypatch.setattr(
+        cli,
+        "load_screening_summary_directory",
+        lambda path: {
+            "as_of_date": "2026-09-12",
+            "snapshot_id": path.name,
+        },
+    )
     monkeypatch.setattr(
         cli,
         "validate_screening_snapshot_directory",

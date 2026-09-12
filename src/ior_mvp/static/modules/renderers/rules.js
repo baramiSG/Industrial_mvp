@@ -1,27 +1,35 @@
 import {
   escapeHtml,
-  executionChip,
+  executionLabel,
   fireText,
+  narrativeEntry,
   ruleBoundaryChip,
-  sourceCaption,
   sourceIsland,
   technical,
 } from "../dom.js";
 import { t } from "../i18n.js";
+import { state } from "../state.js";
+
+function localizedField(row, field) {
+  const localized = row.localized?.[state.locale];
+  return localized?.[field]
+    ? narrativeEntry(localized[field])
+    : sourceIsland(row[field]);
+}
 
 export function renderRuleLedger(props) {
   const rows = props.rules.map((row) => `
     <tr class="${row.synthetic_flag ? "synthetic-row" : ""}">
       <td>
         <b>${technical(row.rule_id)}</b> ${ruleBoundaryChip(row)}
-        <br>${sourceIsland(row.name)}
+        <br>${localizedField(row, "name")}
       </td>
       <td>
-        ${executionChip(row.execution)}
+        ${escapeHtml(executionLabel(row.execution))}
         <br>${fireText(row.fired)}
       </td>
-      <td>${sourceIsland(row.result)}</td>
-      <td>${sourceIsland(row.decision_effect)}</td>
+      <td>${localizedField(row, "result")}</td>
+      <td>${localizedField(row, "decision_effect")}</td>
     </tr>
   `).join("");
   return `
@@ -33,7 +41,6 @@ export function renderRuleLedger(props) {
         </div>
       </div>
       <div class="card-body card-body-scroll">
-        ${sourceCaption()}
         <table class="rule-table">
           <thead>
             <tr>

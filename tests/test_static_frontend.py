@@ -186,8 +186,8 @@ def test_integrity_banner_displays_public_and_active_states_together() -> None:
     app_js = _module_source("modules/renderers/integrity.js")
     banner = _app_function(app_js, "renderIntegrityBanner")
 
-    assert "stateChip(props.real_state)" in banner
-    assert "stateChip(props.active_state)" in banner
+    assert "decisionChip(props.real_state" in banner
+    assert "decisionChip(props.active_state" in banner
     assert "props.mode === \"simulated\"" in banner
 
 
@@ -314,3 +314,116 @@ def test_public_localization_does_not_change_simulation_source_islands() -> None
     assert "sourceIsland(props.rationale)" in decision
     assert "sourceIsland(props.route" in decision
     assert "sourceIsland(item)" in evidence
+
+
+def test_shell_has_screening_nav_item_and_section() -> None:
+    html = _module_source("index.html")
+
+    assert 'data-target="screening"' in html
+    assert "<span>06</span>" in html
+    assert 'data-i18n="nav.screening"' in html
+    assert '<section id="screening"' in html
+    assert 'id="screening-view"' in html
+    assert 'id="screening-evidence"' in html
+    assert html.index('id="screening-view"') < html.index(
+        'id="screening-evidence"'
+    )
+    assert 'data-i18n="screening.boundary_public_only"' in html
+
+
+def test_screening_modules_render_explicit_states_and_no_ordinal() -> None:
+    queue = _module_source("modules/screening/queue.js")
+    summary = _module_source("modules/screening/summary.js")
+    record = _module_source("modules/screening/record.js")
+    record_evidence = _module_source("modules/screening/record-evidence.js")
+    evidence = _module_source("modules/screening/evidence.js")
+    api = _module_source("modules/api.js")
+    index = _module_source("modules/screening/index.js")
+    all_screening = "\n".join(
+        (queue, summary, record, record_evidence, evidence, index)
+    )
+
+    assert 't("screening.queue.empty")' in queue
+    assert "screening.queue.pareto_rank" in queue
+    assert "data-hs6=" in queue
+    assert "data-screening-page=" in queue
+    assert not re.search(r"index\s*\+\s*1", queue)
+    assert "screening.universe.unavailable_body" in summary
+    assert "screening.universe.partial_body" in summary
+    assert "data-queue-id=" in summary
+    assert "renderCoverageAccounting" in summary
+    assert "passport-" not in summary
+    assert "renderEvidenceBasis" in record
+    assert "screening.record.no_record_passports" in record_evidence
+    assert 'data-record-passports="none"' in record_evidence
+    assert 'data-passport-scope="record"' in record_evidence
+    assert '<a href="http' not in record_evidence
+    assert 'id="passport-' in evidence
+    assert 'tabindex="-1"' in evidence
+    assert "data-passport-ref" in evidence
+    assert 'data-passport-scope="universe"' in evidence
+    assert "screening.evidence.passport_detail_not_exposed" in evidence
+    assert "screening.evidence.no_snapshot" in evidence
+    assert "screening.evidence.unit_without_passport" in evidence
+    assert 'data-evidence-state="none"' in evidence
+    assert '<a href="http' not in evidence
+    assert "screeningEvidenceEndpoint" in api
+    assert "Promise.all" in index
+    assert "screeningEvidenceEndpoint()" in index
+    assert not re.search(
+        r"passport_id\s*[:=]\s*`?\$\{",
+        all_screening,
+    )
+
+
+def test_screening_need_codes_are_rendered_only_through_labels() -> None:
+    evidence = _module_source("modules/screening/record-evidence.js")
+
+    assert "screeningLabel(\"need\", need)" in evidence
+    assert "technicalToken(need)" not in evidence
+
+
+def test_screening_labels_fail_closed_on_unknown_codes() -> None:
+    labels = _module_source("modules/screening/labels.js")
+
+    assert "UI_CATALOGUE_KEY_MISSING" in labels
+    assert "throw new Error" in labels
+
+
+def test_rule_ledgers_render_localized_rows_not_english_islands() -> None:
+    rules = _module_source("modules/renderers/rules.js")
+    methodology = _module_source("modules/methodology.js")
+
+    for source in (rules, methodology):
+        assert "row.localized?.[state.locale]" in source
+        assert "narrativeEntry(" in source
+        assert "sourceIsland(row.result)" not in source
+        assert "sourceIsland(row.name)" not in source
+        assert "sourceIsland(row.decision_effect)" not in source
+
+
+def test_null_state_renders_disposition_chip() -> None:
+    dom = _module_source("modules/dom.js")
+    decision = _module_source("modules/renderers/decision.js")
+    integrity = _module_source("modules/renderers/integrity.js")
+    portfolio = _module_source("modules/portfolio.js")
+    workspace = _css_source("workspace.css")
+
+    assert "export function decisionChip" in dom
+    assert "props.state ?? props.screening_disposition" in decision
+    assert "decisionChip(" in integrity
+    assert "decisionChip(" in portfolio
+    state_block = workspace.split(
+        ".state-NO_CANDIDATE {",
+        maxsplit=1,
+    )[1].split("}", maxsplit=1)[0]
+    assert "var(--" in state_block
+    assert "#" not in state_block
+
+
+def test_screening_css_layer_is_imported_and_token_only() -> None:
+    styles = _module_source("styles.css")
+    screening = _css_source("screening.css")
+
+    assert '@import url("./css/screening.css") layer(screening);' in styles
+    assert screening

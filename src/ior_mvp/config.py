@@ -151,9 +151,9 @@ def validate_ui_strings(payload: dict[str, Any]) -> None:
     assert isinstance(metadata, dict)
     assert isinstance(locales, dict)
     assert isinstance(strings, dict)
-    if metadata.get("version") != "1.1.0":
+    if metadata.get("version") != "1.2.0":
         raise UIStringConfigurationError(
-            "UI catalogue metadata.version must be 1.1.0"
+            "UI catalogue metadata.version must be 1.2.0"
         )
     if metadata.get("default_locale") != "en":
         raise UIStringConfigurationError(
