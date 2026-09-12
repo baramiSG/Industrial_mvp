@@ -129,17 +129,16 @@ repository-relative input paths after hosted CI-F-01; 96/96 shards identical
 to the superseded `311f105c4ccf`). W0-ter observed no all-partners token, so
 partner coverage remains 0/1,471 and W2 was not repeated.
 
-Child s13b is an **IMPLEMENTATION CANDIDATE** under plan
+Child s13b is MERGED (PR #23, squash `cdf6ab0`, 2026-09-13) under plan
 `plan-1-s13b.json` (`560695023c…`), AM-1 (`341d813f…`) and AM-2
 (`fae4ec02…`, precedence AM-2 > AM-1 > base). It mounts the public screening
-router and additive evidence route, supplies bilingual summary/queue/record
-views, closes KL-34, resolves UX-01 on workspace/methodology/screening ledgers
-and extends the canonical matrix to 56 entries. OD-15 accepted the visual set
-and owner WIP commit `d1d1462`; the remaining candidate is uncommitted pending
-independent review. A T10 pre-generation SC-5 check then exposed intermittent
-smooth-scroll capture in the four new summary images; the test-first canonical
-correction has future tree `c2b3b66b…` and awaits an owner WIP/base ruling.
-The parent S13 completes only after s13b is reviewed, delivered and merged.
+router and the additive evidence route (OD-12), supplies bilingual
+summary/queue/record views with explicit states, closes KL-34, satisfies UX-01
+on the workspace/methodology/screening ledgers and extends the canonical visual
+matrix to 56 entries (owner-lead WIP commits `d1d1462` and `f9fec2d`; SC-5
+capture-stability correction recorded in ADR-020). Parent **S13 is COMPLETE**
+(s13a #21 `834ba60`, s13b #23 `cdf6ab0`). The routed multi-surface shell
+(UX-02, KL-85) is carried to a later frontend slice.
 
 ## Explicit non-goals for v0.3.0
 
