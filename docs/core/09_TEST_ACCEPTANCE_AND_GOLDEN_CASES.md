@@ -260,6 +260,8 @@ S12a institutional acquisition proof uses test-only parsers and an injected kind
 
 S12b document acquisition proof uses fixture PDFs/HTML/plain text and FakeTransport doubles for connector, store, CLI and reconstruction tests; live T7 outcomes are cited in Known Limitations when no DocumentRecord is built. Golden cases never pull live publisher pages; document lists and reconstruction oracles enforce verbatim line retention, envelope refusal, write-once list/record rules and manifest partition under `data/documents/**` without altering frozen public snapshots.
 
+S12c entity proof verifies every declared Arabic/English span against its exact DocumentRecord line or public-snapshot JSON value, pins deterministic IDs and ambiguity states, refuses test doubles under repository `data/entities/`, and reconstructs the mention list, rule table, every input and the write-once artifact byte-for-byte without engine consumption.
+
 ## 6. Acceptance gates by subsystem
 
 ### Gate A — Authority

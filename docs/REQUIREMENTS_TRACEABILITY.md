@@ -272,6 +272,17 @@ S12a evidence: `.workflow/slices/S12a-acquisition-framework-institutional-source
 S12b evidence: `.workflow/slices/S12b-document-store-disclosures-tenders/implementation_log.md` and `test_evidence.md`; ADR-017; KL-54–55 resolved slot 3; KL-56–65 open. T7-v3 built twelve records; the independent review REJECTED candidate `87084ed2…` (S12B-IR3-F01 visual-order Arabic / wrong `languages`; F02 aggregate-count wording) and the slot-4 correction round rebuilt the six SASO records from `saso_documents-v4` against the same stored run (OD-11) with the text-order disclosure (OD-12, KL-64) and the artefact named (KL-65). The OR-3 slot-5 sweep found three further record-contract defects; OD-13 authorized and slot 5 test-first corrected page hashing, physical PDF page addressing and latest-run supersession, then rebuilt all twelve records offline with unchanged ids. Four manifest runs are recorded and exhausted (T11 05:26:47Z, OD-9 05:43:02Z, OD-10 06:37:37Z, OD-13 07:30:41Z), each with immediate [14] PASS; no fifth run is authorized. Independent Fable review of the final candidate, PR, CI and merge remain pending.
 Delivered on the squash merge of S12b (PR #17, `9a9d5c7`) after Fable independent APPROVE (zero findings, owner ruling OR-3) and hosted CI 5/5 on the exact head (run 34683839745) and on the merge SHA (run 34684108497). Statuses above are unchanged by the merge: framework/store/reconstruction rows TESTED; the twelve acquired records are real public documents (SASO B, UNICOIL C); the five UNAVAILABLE sources remain BLOCKED for live data.
 
+## O. Milestone v0.3.0 — S12c entity resolution
+
+| ID | Observable acceptance | Implementation and local execution evidence | Status | Slice |
+|---|---|---|---|---|
+| V3-ENTITY-ids | Persistent IDs distinguish company, plant, line and licence holder without re-issue. | `entities/ids.py`; deterministic cross-process and parent/locality/designation tests; real artifact has five COMPANY and two PLANT ids. | TESTED | s12c |
+| V3-ENTITY-normalisation | Arabic/English exact and variant forms are versioned; original spans and visual text order remain visible. | `config/entity_resolution.v1.yaml`; `entities/normalisation.py`; 23 normalization tests including injected transliteration and no reversal. | TESTED | s12c |
+| V3-ENTITY-links-real | Acquired passports/observations link to persistent ids while ambiguity remains pending and unsupported types unresolved. | `mentions-v1` M-001…M-038 and artifact `ENTITIES-2026-09-12-a12e24c31b02`; five producer observations exact, three mention links pending, eight unresolved; no deterministic identifier/licence holder observed (KL-67–73). | PARTIAL | s12c |
+| V3-RECON-entities | Mention list, rule table, every input and entity artifact reconstruct byte-for-byte under manifest coverage. | Temp-root tamper/missing-row tests and pre-generation repository reconstruction `ENTITY RECONSTRUCTION PASS (1 artifacts, 38 links)`; generated-manifest proof remains T9/T10. | PARTIAL | s12c |
+
+S12c evidence: `.workflow/slices/S12c-entity-resolution-bilingual-ids/implementation_log.md` and `test_evidence.md`; ADR-018; KL-67–73. At T7, implementation evidence only: manifest run count 0, independent implementation review/PR/CI/merge pending, and no engine consumption before S13/S14.
+
 ## Branch and release-state rules
 
 1. No row on the S05 implementation branch is promoted above `TESTED`.

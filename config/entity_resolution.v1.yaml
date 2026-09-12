@@ -1,0 +1,137 @@
+metadata:
+  artifact: industrial-opportunity-entity-resolution
+  version: "1.0.0"
+  effective_date: "2026-09-12"
+  authority: "Methodology §3.2, §11; Core 04 §2.4/§4; Core 05 §6.5; Core 08 §10"
+  status: frozen_for_demo_cycle
+  change_gate: "Manifest §7.3 + ADR"
+
+id_scheme:
+  name: ENTITY_ID_V1
+  hash: sha256
+  hex_length: 16
+  entity_types:
+    - COMPANY
+    - PLANT
+    - LINE
+    - LICENCE_HOLDER
+
+normalisation:
+  method_id: NAME_NORMALISATION_V1
+  version: "1.0.0"
+  exact:
+    unicode_form: NFC
+    casefold: true
+    strip_arabic_tashkeel: true
+    strip_tatweel: true
+    fold_arabic_indic_digits: true
+    punctuation_to_space:
+      - "."
+      - ","
+      - ";"
+      - ":"
+      - "("
+      - ")"
+      - "["
+      - "]"
+      - "{"
+      - "}"
+      - '"'
+      - "'"
+      - "&"
+      - "-"
+      - "_"
+      - "/"
+      - "\\"
+      - "«"
+      - "»"
+      - "“"
+      - "”"
+      - "‘"
+      - "’"
+      - "،"
+      - "؛"
+    collapse_whitespace: true
+  variant:
+    arabic_letter_folds:
+      "أ": "ا"
+      "إ": "ا"
+      "آ": "ا"
+      "ٱ": "ا"
+      "ى": "ي"
+      "ة": "ه"
+    definite_article:
+      ar_prefix: "ال"
+      en_tokens:
+        - the
+        - al
+    legal_form_tokens_en:
+      - company
+      - co
+      - ltd
+      - limited
+      - llc
+      - inc
+      - corp
+      - corporation
+      - plc
+      - jsc
+      - cjsc
+      - sjsc
+      - establishment
+      - est
+    legal_form_tokens_ar:
+      - شركة
+      - المحدودة
+      - محدودة
+      - مساهمة
+      - مقفلة
+      - مؤسسة
+    transliteration_variants:
+      jubail industrial city: jubail
+
+linking:
+  precedence:
+    - DETERMINISTIC_IDENTIFIER
+    - EXACT_DOCUMENT_EVIDENCE
+    - PROPOSED_PENDING_REVIEW
+    - UNRESOLVED
+  resolved_statuses:
+    - DETERMINISTIC_IDENTIFIER
+    - EXACT_DOCUMENT_EVIDENCE
+  plant_subject_window_lines: 2
+  identifier_kinds:
+    - COMMERCIAL_REGISTRATION
+    - INDUSTRIAL_LICENCE_NUMBER
+    - TADAWUL_ISSUER_CODE
+  unresolved_reasons:
+    - OUT_OF_SCOPE_ENTITY_TYPE
+    - COUNT_ONLY_NO_IDENTITY
+    - NO_MENTION_RECORDED
+    - LOCALITY_NOT_IN_TABLE
+    - NO_SUBJECT_ENTITY
+    - OWNER_UNNAMED
+
+localities:
+  SAU-JUBAIL:
+    canonical_en: Al-Jubail
+    variants_en:
+      - Jubail
+      - Al-Jubail Industrial City
+      - Jubail Industrial City
+    variants_ar: []
+  SAU-JEDDAH:
+    canonical_en: Jeddah
+    variants_en: []
+    variants_ar: []
+
+span_screen:
+  forbidden_substrings_casefold:
+    - "@"
+    - contact name
+    - e-mail
+    - email
+    - phone
+    - mobile
+    - p.o.box
+    - p.o. box

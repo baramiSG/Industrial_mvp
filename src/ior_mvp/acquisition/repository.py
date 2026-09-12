@@ -131,8 +131,48 @@ def document_records(
     return _cached_document_records()
 
 
+def _load_entity_resolution_artifacts(
+    data_root: Path,
+    *,
+    allow_test_double: bool = False,
+) -> dict[str, dict[str, Any]]:
+    from .entities.store import EntityStore, validate_entity_artifact
+
+    records: dict[str, dict[str, Any]] = {}
+    for path, record in EntityStore(data_root / "entities").iter_artifacts():
+        validate_entity_artifact(record, allow_test_double=allow_test_double)
+        artifact_id = str(record["artifact_id"])
+        if path.stem != artifact_id:
+            raise ValueError(
+                f"Entity artifact file name must equal artifact_id: {path}"
+            )
+        if path.parent.name != "resolution":
+            raise ValueError(f"Entity artifact must be in resolution partition: {path}")
+        records[artifact_id] = record
+    return records
+
+
+@lru_cache(maxsize=None)
+def _cached_entity_resolution_artifacts() -> dict[str, dict[str, Any]]:
+    return _load_entity_resolution_artifacts(DATA_ROOT)
+
+
+def entity_resolution_artifacts(
+    *,
+    data_root: Path | None = None,
+    allow_test_double: bool = False,
+) -> dict[str, dict[str, Any]]:
+    if data_root is not None or allow_test_double:
+        root = data_root if data_root is not None else DATA_ROOT
+        return _load_entity_resolution_artifacts(
+            root, allow_test_double=allow_test_double
+        )
+    return _cached_entity_resolution_artifacts()
+
+
 def clear_acquisition_caches() -> None:
     """Clear config and every default kind cache; injected loads are uncached."""
     acquisition_sources_config.cache_clear()
     _cached_acquired_snapshots.cache_clear()
     _cached_document_records.cache_clear()
+    _cached_entity_resolution_artifacts.cache_clear()

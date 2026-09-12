@@ -170,6 +170,14 @@ Segmentation uses `LINE_SEGMENTATION_V1` / `1.0.0`: CRLF and lone CR become LF b
 | `utilisation` | Actual effective load, not assumed from nameplate |
 | `certifications` | Quality, lab, regulatory and customer approvals |
 
+**S12c entity identity — EntityResolutionArtifact 1.0.0 and EntityMentionList 1.0.0**
+
+`ENTITY_ID_V1` has separate `COMPANY`, `PLANT`, `LINE` and `LICENCE_HOLDER` namespaces. Company and licence-holder keys use the exact-normalised first-observed primary name; plant and line keys additionally use their parent id and locality token or designation. IDs are never re-issued, and jurisdiction is an observed attribute rather than a key component. `NAME_NORMALISATION_V1` retains every verbatim span beside exact and variant forms; visual-order Arabic is flagged and normalized character-for-character, never reversed or reshaped. Operator labels are never evidence.
+
+Resolution uses only the ordered statuses `DETERMINISTIC_IDENTIFIER`, `EXACT_DOCUMENT_EVIDENCE`, `PROPOSED_PENDING_REVIEW` and `UNRESOLVED`; only the first two are resolved. There is no fuzzy score or inferred identity. A plant supported only to locality granularity is `SITE_LOCALITY`, and a company name alone never mints a plant. Ownership, name-change and merger facts are dated records on persistent IDs.
+
+Operator-authored `EntityMentionList 1.0.0` inputs live under `data/entities/mentions/`; write-once `EntityResolutionArtifact 1.0.0` outputs live under `data/entities/resolution/`. Each artifact records the mention-list, rule-table, DocumentRecord and public-snapshot hashes, entity and link evidence, passport and observation links, unresolved states, and byte-reconstruction parameters.
+
 ### 2.5 CapabilityAssessment
 
 ```json
@@ -326,6 +334,7 @@ Simulation creates a second `DecisionRecord` with `synthetic_flag=true`. The pub
 - Evidence IDs are stable within a source contract.
 - Scenario IDs are unique and never reused for a different synthetic truth set.
 - A future production decision ID should include opportunity, as-of date and decision version.
+- `ENTITY_ID_V1` ids derive from type plus the exact-normalised first-observed primary name (and parent id plus locality/designation for plants and lines) and are never re-issued; later names, mergers and ownership changes are dated records on the same id.
 
 ## 5. State enums
 

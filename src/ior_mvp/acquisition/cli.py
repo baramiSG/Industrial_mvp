@@ -13,6 +13,9 @@ from ..config import PROJECT_ROOT
 from .connectors.base import default_registry
 from .contracts import AcquisitionConfigurationError, OfflineGuardViolation, canonical_dumps
 from .documents.store import validate_list_id
+from .entities.mentions import LIST_ID_PATTERN
+from .entities.rules import EntityResolutionError
+from .entities.store import build_entity_resolution
 from .pipeline import (
     PipelineDeps,
     acquire_aggregates,
@@ -81,6 +84,9 @@ def build_parser() -> argparse.ArgumentParser:
     build_cmd.add_argument("--kind", default="all")
     build_cmd.add_argument("--source", default=None)
     build_cmd.add_argument("--data-root", default=None)
+    build_entities = sub.add_parser("build-entities")
+    build_entities.add_argument("--mention-list-id", required=True)
+    build_entities.add_argument("--data-root", default=None)
     return parser
 
 
@@ -146,6 +152,20 @@ def main(argv: list[str] | None = None) -> None:
             validate_list_id(args.list_id)
         except AcquisitionConfigurationError as exc:
             parser.error(str(exc))
+    if args.command == "build-entities":
+        if LIST_ID_PATTERN.fullmatch(args.mention_list_id) is None:
+            parser.error(f"Invalid entity mention list_id: {args.mention_list_id!r}")
+        data_root = Path(args.data_root) if args.data_root else PROJECT_ROOT / "data"
+        try:
+            report = build_entity_resolution(
+                data_root,
+                mention_list_id=args.mention_list_id,
+            )
+        except EntityResolutionError as exc:
+            print(str(exc), file=sys.stderr)
+            sys.exit(3)
+        print(canonical_dumps(report.__dict__))
+        sys.exit(0)
     try:
         deps = _deps(args, explicit_live=args.command.startswith("acquire-"))
     except OfflineGuardViolation as exc:
