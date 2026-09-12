@@ -60,7 +60,7 @@ class WitsTradeConnector(BaseConnector):
             )
         )
         payload = self.store.read_payload(contract)
-        rows = self._parse_rows(payload, contract)
+        rows = self.parse_rows(payload, contract.content_type)
         checks.append(
             QualityCheck(
                 "rows_present",
@@ -68,6 +68,15 @@ class WitsTradeConnector(BaseConnector):
                 f"{len(rows)} rows",
             )
         )
+        for index, row in enumerate(rows):
+            try:
+                valid_year = int(row.get("year", 0)) > 0
+            except (ValueError, TypeError):
+                valid_year = False
+            hs6 = str(row.get("hs6", ""))
+            shape_valid = valid_year and len(hs6) == 6 and hs6.isdigit() and row.get("flow") in {"imports", "exports"}
+            checks.append(QualityCheck(f"row_{index}_shape", "PASS" if shape_valid else "FAIL", "year, HS6 and flow"))
+            checks.append(QualityCheck(f"row_{index}_reporter", "PASS" if row.get("reporter") == contract.reporter else "FAIL", "row reporter matches contract"))
         status = "PASS" if all(c.result == "PASS" for c in checks) else "FAIL"
         return QualityReport(
             source_id=contract.source_id,
@@ -81,7 +90,7 @@ class WitsTradeConnector(BaseConnector):
         self, raw: RawArtifact
     ) -> list[TradeObservation] | list[TariffLine]:
         payload = self.store.read_payload(raw.contract)
-        rows = self._parse_rows(payload, raw.contract)
+        rows = self.parse_rows(payload, raw.contract.content_type)
         if not rows:
             return []
         evidence_id = f"{raw.contract.query_hash[:12]}-p{raw.contract.page_index:04d}"
@@ -159,6 +168,9 @@ class WitsTradeConnector(BaseConnector):
                     if isinstance(item, dict):
                         rows.append(item)
         return rows
+
+    def parse_rows(self, payload: bytes, content_type: str) -> list[dict[str, Any]]:
+        return self._parse_rows(payload)
 
     def snapshot(
         self,

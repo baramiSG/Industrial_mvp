@@ -8,7 +8,8 @@ from dataclasses import dataclass, field
 from datetime import UTC, datetime
 from enum import StrEnum
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable, Mapping, Sequence
+from types import MappingProxyType
 
 UNAVAILABLE = "UNAVAILABLE"
 PRODUCT_SCOPE_ALL = "ALL"
@@ -73,6 +74,9 @@ class Stage(StrEnum):
     TARIFF = "TARIFF"
     TERMS = "TERMS"
     BULK = "BULK"
+    AGGREGATE = "AGGREGATE"
+    DIRECTORY = "DIRECTORY"
+    REGISTRY = "REGISTRY"
 
 
 class ProductScope(StrEnum):
@@ -136,60 +140,7 @@ class QueryContract:
     parameters: tuple[tuple[str, str], ...] = field(default_factory=tuple)
 
     def __post_init__(self) -> None:
-        if self.stage == Stage.UNIVERSE:
-            if self.product_scope != ProductScope.ALL_HS6:
-                raise AcquisitionConfigurationError(
-                    "UNIVERSE requires product_scope ALL_HS6"
-                )
-            if self.product_codes != (PRODUCT_SCOPE_ALL,):
-                raise AcquisitionConfigurationError(
-                    "UNIVERSE requires product_codes ('ALL',)"
-                )
-            if len(self.periods) != 1:
-                raise AcquisitionConfigurationError(
-                    "UNIVERSE requires exactly one period per contract"
-                )
-        elif self.stage == Stage.PARTNERS:
-            if self.product_scope != ProductScope.EXPLICIT:
-                raise AcquisitionConfigurationError(
-                    "PARTNERS requires product_scope EXPLICIT"
-                )
-            if PRODUCT_SCOPE_ALL in self.product_codes:
-                raise AcquisitionConfigurationError(
-                    "PARTNERS rejects product_codes containing 'ALL'"
-                )
-            for code in self.product_codes:
-                if len(code) != 6 or not code.isdigit():
-                    raise AcquisitionConfigurationError(
-                        f"PARTNERS requires 6-digit HS6 codes: {code!r}"
-                    )
-            if len(self.periods) != 1:
-                raise AcquisitionConfigurationError(
-                    "PARTNERS requires exactly one period per contract"
-                )
-        elif self.stage == Stage.TARIFF:
-            if self.product_scope != ProductScope.ALL_TARIFF_LINES:
-                raise AcquisitionConfigurationError(
-                    "TARIFF requires product_scope ALL_TARIFF_LINES"
-                )
-            if self.product_codes != (PRODUCT_SCOPE_ALL,):
-                raise AcquisitionConfigurationError(
-                    "TARIFF requires product_codes ('ALL',)"
-                )
-        elif self.stage == Stage.TERMS:
-            if self.product_scope != ProductScope.NOT_APPLICABLE:
-                raise AcquisitionConfigurationError(
-                    "TERMS requires product_scope NOT_APPLICABLE"
-                )
-            if self.product_codes != ():
-                raise AcquisitionConfigurationError(
-                    "TERMS requires empty product_codes"
-                )
-        elif self.stage == Stage.BULK:
-            if len(self.periods) != 1:
-                raise AcquisitionConfigurationError(
-                    "BULK requires exactly one period per contract"
-                )
+        stage_spec(self.stage).invariants(self)
 
     def canonical_json(self) -> str:
         """Return canonical JSON representation for hashing."""
@@ -215,19 +166,190 @@ class QueryContract:
         return sha256_bytes(self.canonical_json().encode("utf-8"))
 
 
+@dataclass(frozen=True)
+class StageSpec:
+    """Governed behavior of one acquisition stage family."""
+
+    stage: Stage
+    unit_key: Callable[[QueryContract], tuple[str, ...]]
+    unit_dict: Callable[[QueryContract], dict[str, Any]]
+    invariants: Callable[[QueryContract], None]
+    plan_units: Callable[..., tuple[QueryContract, ...]]
+    period_scoped: bool
+    url_tokens: Callable[[QueryContract, Mapping[str, Any]], dict[str, Any]]
+
+
+def _scope_invariants(contract: QueryContract, scope: ProductScope, codes: tuple[str, ...]) -> None:
+    if contract.product_scope != scope:
+        raise AcquisitionConfigurationError(f"{contract.stage.value} requires product_scope {scope.value}")
+    if contract.product_codes != codes:
+        raise AcquisitionConfigurationError(f"{contract.stage.value} requires product_codes {codes!r}")
+
+
+def _period_invariant(contract: QueryContract) -> None:
+    if len(contract.periods) != 1:
+        raise AcquisitionConfigurationError(f"{contract.stage.value} requires exactly one period per contract")
+
+
+def _universe_invariants(contract: QueryContract) -> None:
+    _scope_invariants(contract, ProductScope.ALL_HS6, (PRODUCT_SCOPE_ALL,))
+    _period_invariant(contract)
+
+
+def _partners_invariants(contract: QueryContract) -> None:
+    if contract.product_scope != ProductScope.EXPLICIT:
+        raise AcquisitionConfigurationError("PARTNERS requires product_scope EXPLICIT")
+    if PRODUCT_SCOPE_ALL in contract.product_codes:
+        raise AcquisitionConfigurationError("PARTNERS rejects product_codes containing 'ALL'")
+    for code in contract.product_codes:
+        if len(code) != 6 or not code.isdigit():
+            raise AcquisitionConfigurationError(f"PARTNERS requires 6-digit HS6 codes: {code!r}")
+    _period_invariant(contract)
+
+
+def _s11_unit_dict(contract: QueryContract) -> dict[str, Any]:
+    return {
+        "stage": contract.stage.value,
+        "flow": contract.flow,
+        "period": contract.periods[0] if contract.periods else None,
+        "product_scope": contract.product_scope.value,
+        "hs6": contract.product_codes[0] if contract.product_scope == ProductScope.EXPLICIT else None,
+    }
+
+
+def _planned_contract(source_id: str, config: dict[str, Any], *, stage: Stage,
+                      scope: ProductScope, codes: tuple[str, ...], flow: str,
+                      periods: tuple[str, ...]) -> QueryContract:
+    cfg = config["sources"][source_id]
+    return QueryContract(
+        source_id, stage, cfg["reporter_code"],
+        cfg["parameters"].get("partner_world_token", "WLD"), flow,
+        scope, codes, cfg["nomenclature"], periods,
+    )
+
+
+def _plan_universe(*, source_id: str, years: Sequence[int], flows: Sequence[str],
+                   candidates: Any, config: dict[str, Any]) -> tuple[QueryContract, ...]:
+    return tuple(_planned_contract(source_id, config, stage=Stage.UNIVERSE,
+                 scope=ProductScope.ALL_HS6, codes=(PRODUCT_SCOPE_ALL,),
+                 flow=flow, periods=(str(year),)) for year in years for flow in flows)
+
+
+def _plan_partners(*, source_id: str, years: Sequence[int], flows: Sequence[str],
+                   candidates: Any, config: dict[str, Any]) -> tuple[QueryContract, ...]:
+    if candidates is None:
+        raise AcquisitionConfigurationError("PARTNERS requires candidates")
+    return tuple(_planned_contract(source_id, config, stage=Stage.PARTNERS,
+                 scope=ProductScope.EXPLICIT, codes=(code,), flow=flow,
+                 periods=(str(year),)) for year in years for flow in flows for code in candidates.hs6_codes)
+
+
+def _plan_tariff(*, source_id: str, config: dict[str, Any], **_: Any) -> tuple[QueryContract, ...]:
+    return (_planned_contract(source_id, config, stage=Stage.TARIFF,
+            scope=ProductScope.ALL_TARIFF_LINES, codes=(PRODUCT_SCOPE_ALL,),
+            flow=UNAVAILABLE, periods=()),)
+
+
+def _plan_bulk(*, source_id: str, years: Sequence[int], config: dict[str, Any], **_: Any) -> tuple[QueryContract, ...]:
+    return tuple(_planned_contract(source_id, config, stage=Stage.BULK,
+                 scope=ProductScope.NOT_APPLICABLE, codes=(), flow=UNAVAILABLE,
+                 periods=(str(year),)) for year in years)
+
+
+def _world_partner_token(contract: QueryContract, parameters: Mapping[str, Any]) -> dict[str, Any]:
+    return {"partner": parameters.get("partner_world_token", "WLD")}
+
+
+def _explicit_partner_token(contract: QueryContract, parameters: Mapping[str, Any]) -> dict[str, Any]:
+    return {"partner": contract.partner}
+
+
+_RESERVED_UNIT_PARAMETERS = frozenset({
+    "reporter", "partner", "product", "flow", "flow_code", "flow_label",
+    "period", "year", "page", "page_token", "units", "reporter_token",
+    "partner_world_token", "product_all_token", "flow_tokens",
+})
+
+
+def _institutional_invariants(contract: QueryContract, *, period_scoped: bool) -> None:
+    _scope_invariants(contract, ProductScope.NOT_APPLICABLE, ())
+    if contract.reporter != "SAU" or contract.partner != UNAVAILABLE or contract.flow != UNAVAILABLE:
+        raise AcquisitionConfigurationError("Institutional units require SAU and unavailable partner/flow")
+    if period_scoped:
+        _period_invariant(contract)
+    elif contract.periods:
+        raise AcquisitionConfigurationError("Institutional directory/registry units reject periods")
+    keys = [key for key, _ in contract.parameters]
+    if (not keys or len(keys) != len(set(keys)) or set(keys) & _RESERVED_UNIT_PARAMETERS
+            or any(not isinstance(key, str) or not key or not isinstance(value, str)
+                   for key, value in contract.parameters)):
+        raise AcquisitionConfigurationError("Institutional parameters require unique non-reserved named strings")
+
+
+def _institutional_unit_key(contract: QueryContract) -> tuple[str, ...]:
+    # JSON pair framing preserves names, delimiters and Unicode without ambiguity.
+    return (json.dumps(sorted(contract.parameters), ensure_ascii=False, separators=(",", ":")), *contract.periods)
+
+
+def _institutional_unit_dict(contract: QueryContract) -> dict[str, Any]:
+    return {"stage": contract.stage.value, "period": contract.periods[0] if contract.periods else None,
+            "parameters": dict(sorted(contract.parameters))}
+
+
+def _plan_institutional(*, stage: Stage, source_id: str, years: Sequence[int],
+                        config: dict[str, Any], **_: Any) -> tuple[QueryContract, ...]:
+    if stage_spec(stage).period_scoped and not years:
+        raise AcquisitionConfigurationError(f"{stage.value} planning requires at least one period")
+    cfg = config["sources"][source_id]
+    parameters = cfg.get("parameters", UNAVAILABLE)
+    units = parameters.get("units", UNAVAILABLE) if isinstance(parameters, Mapping) else UNAVAILABLE
+    if units == UNAVAILABLE:
+        units = [{"unit": UNAVAILABLE}]
+    if not isinstance(units, list) or not units or any(not isinstance(unit, Mapping) for unit in units):
+        raise AcquisitionConfigurationError("Institutional units must be nonempty mappings or UNAVAILABLE")
+    periods = [(str(year),) for year in years] if stage_spec(stage).period_scoped else [()]
+    return tuple(QueryContract(source_id, stage, cfg["reporter_code"], UNAVAILABLE, UNAVAILABLE,
+                 ProductScope.NOT_APPLICABLE, (), cfg["nomenclature"], period, tuple(sorted(unit.items())))
+                 for period in periods for unit in units)
+
+
+def _institutional_url_tokens(contract: QueryContract, parameters: Mapping[str, Any]) -> dict[str, Any]:
+    units = parameters.get("units", UNAVAILABLE)
+    identity = dict(contract.parameters)
+    if (any(not value or value == UNAVAILABLE for value in identity.values())
+            or not isinstance(units, list) or identity not in units):
+        raise AcquisitionUnavailable(UnavailableReason.ENDPOINT_UNVERIFIED)
+    return {"partner": contract.partner}
+
+
+STAGE_SPECS: Mapping[Stage, StageSpec] = MappingProxyType({
+    Stage.UNIVERSE: StageSpec(Stage.UNIVERSE, lambda c: (c.flow, c.periods[0]), _s11_unit_dict, _universe_invariants, _plan_universe, True, _world_partner_token),
+    Stage.PARTNERS: StageSpec(Stage.PARTNERS, lambda c: (c.product_codes[0], c.flow, c.periods[0]), _s11_unit_dict, _partners_invariants, _plan_partners, True, _explicit_partner_token),
+    Stage.TARIFF: StageSpec(Stage.TARIFF, lambda c: ("ALL_TARIFF_LINES",), _s11_unit_dict, lambda c: _scope_invariants(c, ProductScope.ALL_TARIFF_LINES, (PRODUCT_SCOPE_ALL,)), _plan_tariff, False, _world_partner_token),
+    Stage.TERMS: StageSpec(Stage.TERMS, lambda c: ("TERMS",), _s11_unit_dict, lambda c: _scope_invariants(c, ProductScope.NOT_APPLICABLE, ()), lambda **_: (), False, _world_partner_token),
+    Stage.BULK: StageSpec(Stage.BULK, lambda c: (c.periods[0],), _s11_unit_dict, _period_invariant, _plan_bulk, True, _world_partner_token),
+    Stage.AGGREGATE: StageSpec(Stage.AGGREGATE, _institutional_unit_key, _institutional_unit_dict,
+        lambda c: _institutional_invariants(c, period_scoped=True),
+        lambda **kwargs: _plan_institutional(stage=Stage.AGGREGATE, **kwargs), True, _institutional_url_tokens),
+    Stage.DIRECTORY: StageSpec(Stage.DIRECTORY, _institutional_unit_key, _institutional_unit_dict,
+        lambda c: _institutional_invariants(c, period_scoped=False),
+        lambda **kwargs: _plan_institutional(stage=Stage.DIRECTORY, **kwargs), False, _institutional_url_tokens),
+    Stage.REGISTRY: StageSpec(Stage.REGISTRY, _institutional_unit_key, _institutional_unit_dict,
+        lambda c: _institutional_invariants(c, period_scoped=False),
+        lambda **kwargs: _plan_institutional(stage=Stage.REGISTRY, **kwargs), False, _institutional_url_tokens),
+})
+
+
+def stage_spec(stage: Stage) -> StageSpec:
+    try:
+        return STAGE_SPECS[Stage(stage)]
+    except (ValueError, KeyError, TypeError) as exc:
+        raise AcquisitionConfigurationError(f"Unknown stage: {stage}") from exc
+
+
 def unit_key(contract: QueryContract) -> tuple[str, ...]:
-    """Return the acquisition unit key per DD-21."""
-    if contract.stage == Stage.UNIVERSE:
-        return (contract.flow, contract.periods[0])
-    if contract.stage == Stage.PARTNERS:
-        return (contract.product_codes[0], contract.flow, contract.periods[0])
-    if contract.stage == Stage.TARIFF:
-        return ("ALL_TARIFF_LINES",)
-    if contract.stage == Stage.BULK:
-        return (contract.periods[0],)
-    if contract.stage == Stage.TERMS:
-        return ("TERMS",)
-    raise AcquisitionConfigurationError(f"Unknown stage for unit_key: {contract.stage}")
+    """Return the acquisition unit key per the governed stage specification."""
+    return stage_spec(contract.stage).unit_key(contract)
 
 
 @dataclass(frozen=True)
@@ -601,3 +723,59 @@ class TariffLine:
     duty_fields: tuple[tuple[str, str], ...]
     reported_nomenclature: str
     source_evidence_id: str
+
+
+@dataclass(frozen=True)
+class ProductionObservation:
+    period_text: str
+    period_type_text: str
+    geography_text: str
+    activity_code_text: str
+    activity_classification_text: str
+    product_code_text: str
+    product_classification_text: str
+    indicator_text: str
+    value_original_text: str
+    value: float|None
+    unit_text: str
+    currency_text: str
+    estimation_flags: tuple[str,...]
+    source_dataset_id: str
+    source_evidence_id: str
+
+@dataclass(frozen=True)
+class DirectoryRow:
+    entity_name_ar: str
+    entity_name_en: str
+    record_type_text: str
+    licence_number_text: str
+    activity_description_ar: str
+    activity_description_en: str
+    activity_code_text: str
+    region_text: str
+    city_text: str
+    industrial_city_text: str
+    status_text: str
+    capacity_text: str
+    record_date_text: str
+    source_record_id: str
+    source_evidence_id: str
+
+@dataclass(frozen=True)
+class RegistryRow:
+    registry: str
+    standard_reference_text: str
+    title_ar: str
+    title_en: str
+    edition_or_year_text: str
+    scope_text: str
+    status_text: str
+    product_or_certificate_reference_text: str
+    conformity_type_text: str
+    issued_to_text: str
+    validity_text: str
+    source_record_id: str
+    source_evidence_id: str
+
+
+Row = TradeObservation | TariffLine | ProductionObservation | DirectoryRow | RegistryRow

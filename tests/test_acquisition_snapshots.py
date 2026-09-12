@@ -19,6 +19,7 @@ from ior_mvp.acquisition.contracts import (
     UnavailableReason,
 )
 from ior_mvp.acquisition.coverage import evaluate_coverage, not_attempted_coverage
+from ior_mvp.acquisition.kinds import default_kind_registry
 from ior_mvp.acquisition.passports import assert_passport_complete
 from ior_mvp.acquisition.pipeline import build_snapshots
 from ior_mvp.acquisition.raw_store import RawStore
@@ -90,7 +91,11 @@ def test_acquired_snapshot_loaders_read_only_their_kind_and_validate() -> None:
         "universe": repository.universe_snapshots,
         "tariff": repository.tariff_snapshots,
         "partners": repository.partner_snapshots,
+        "production": repository.production_snapshots,
+        "directory": repository.directory_snapshots,
+        "registry": repository.registry_snapshots,
     }
+    assert set(loaders) == set(default_kind_registry().ids())
     for kind, loader in loaders.items():
         directory = PROJECT_ROOT / "data" / "snapshots" / kind
         expected_ids = {

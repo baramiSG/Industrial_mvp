@@ -7,7 +7,10 @@ from typing import Any, Sequence
 from ..public_decision import SUPPORT_CODES
 from .contracts import CoverageRecord, SourceContractRecord, UNAVAILABLE
 
-ACQUIRED_SUPPORT_CODES = SUPPORT_CODES | {"NATIONAL_TARIFF_LINE_MAPPING"}
+ACQUIRED_SUPPORT_CODES = SUPPORT_CODES | {
+    "NATIONAL_TARIFF_LINE_MAPPING", "DOMESTIC_PRODUCTION_AGGREGATE",
+    "ESTABLISHMENT_LICENCE_DIRECTORY", "STANDARD_CONFORMITY_REGISTRY",
+}
 
 
 def build_acquired_passport(

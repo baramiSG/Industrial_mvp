@@ -13,8 +13,7 @@ from ..public_snapshot import _reject_authored_outcomes
 from .connectors.base import ConnectorRegistry
 from .contracts import (
     AcquisitionUnavailable,
-    PRODUCT_SCOPE_ALL,
-    QueryContract,
+    RawArtifact,
     RawStoreIntegrityError,
     SELECTION_RULE,
     SnapshotWriteConflict,
@@ -24,34 +23,25 @@ from .contracts import (
     UnavailableReason,
     canonical_dumps,
     sha256_bytes,
-    source_tag,
 )
 from .coverage import (
-    aggregate_partner_coverage,
+    aggregate_exclusion_coverage,
     aggregate_snapshot_coverage,
     coverage_matches,
     evaluate_coverage,
     select_latest_units,
 )
-from .harmonise import PIPELINE_VERSION, transformation_record
+from .harmonise import transformation_record
 from .passports import assert_passport_complete, build_acquired_passport
 from .raw_store import RawStore, TEST_DOUBLE_CLASS, TEST_FIXTURE_SOURCE
+from .kinds import CompletenessPolicy, KindRegistry, default_kind_registry
 
 UNIVERSE_SCHEMA_VERSION = "1.0.0"
 TARIFF_SCHEMA_VERSION = "1.0.0"
 PARTNERS_SCHEMA_VERSION = "1.0.0"
 
-SNAPSHOT_ROOTS = {
-    "universe": "data/snapshots/universe",
-    "tariff": "data/snapshots/tariff",
-    "partners": "data/snapshots/partners",
-}
-
-KIND_STAGE = {
-    "universe": Stage.UNIVERSE,
-    "tariff": Stage.TARIFF,
-    "partners": Stage.PARTNERS,
-}
+SNAPSHOT_ROOTS = default_kind_registry().roots()
+KIND_STAGE = {kind: default_kind_registry().stage_for(kind) for kind in SNAPSHOT_ROOTS}
 
 
 @dataclass(frozen=True)
@@ -64,22 +54,10 @@ class ReconstructionResult:
     detail: dict[str, Any]
 
 
-def snapshot_id(
-    kind: str,
-    *,
-    source_id: str,
-    nomenclature: str,
-    as_of_date: date,
-) -> str:
-    tag = source_tag(source_id)
-    prefix = kind.upper()
-    if kind == "universe":
-        return f"UNIVERSE-SAU-{tag}-{nomenclature}-{as_of_date.isoformat()}"
-    if kind == "tariff":
-        return f"TARIFF-SAU-{tag}-{as_of_date.isoformat()}"
-    if kind == "partners":
-        return f"PARTNERS-SAU-{tag}-{as_of_date.isoformat()}"
-    raise ValueError(f"Unknown snapshot kind: {kind}")
+def snapshot_id(kind: str, *, source_id: str, nomenclature: str,
+                as_of_date: date, kinds: KindRegistry | None = None) -> str:
+    return (kinds or default_kind_registry()).snapshot_id(
+        kind, source_id=source_id, nomenclature=nomenclature, as_of_date=as_of_date)
 
 
 def _forbidden_keys_check(record: dict[str, Any]) -> None:
@@ -94,57 +72,42 @@ def _reject_test_double(record: dict[str, Any], *, allow_test_double: bool) -> N
     for ref in record.get("raw_artifact_refs", []):
         if ref.get("access_classification") == TEST_DOUBLE_CLASS:
             raise ValueError("test_double access_classification rejected")
+    for passport in record.get("evidence", []):
+        if passport.get("source_identity", {}).get("access_classification") == TEST_DOUBLE_CLASS:
+            raise ValueError("test_double passport access_classification rejected")
 
 
-def validate_universe_snapshot(
-    record: dict[str, Any],
-    *,
-    allow_test_double: bool = False,
-) -> None:
-    _validate_common(record, kind="universe", allow_test_double=allow_test_double)
-    if record.get("product_scope") != "ALL_HS6":
-        raise ValueError("universe product_scope must be ALL_HS6")
-    coverage = record["coverage"]
-    if coverage.get("status") != "COMPLETE":
-        raise ValueError("universe coverage must be COMPLETE")
-    for unit in coverage.get("units", []):
-        if unit.get("status") != "COMPLETE":
-            raise ValueError("universe unit must be COMPLETE")
-        if unit.get("completeness_basis") == "UNAVAILABLE":
-            raise ValueError("universe unit basis must not be UNAVAILABLE")
+def validate_snapshot(record: dict[str, Any], *, kinds: KindRegistry | None = None,
+                      allow_test_double: bool = False) -> None:
+    kinds = kinds or default_kind_registry()
+    spec = kinds.get(record["kind"])
+    _validate_common(record, kind=spec.kind, kinds=kinds, allow_test_double=allow_test_double)
+    spec.validator_extra(record)
 
 
-def validate_tariff_snapshot(
-    record: dict[str, Any],
-    *,
-    allow_test_double: bool = False,
-) -> None:
-    _validate_common(record, kind="tariff", allow_test_double=allow_test_double)
-    coverage = record["coverage"]
-    if coverage.get("status") != "COMPLETE":
-        raise ValueError("tariff coverage must be COMPLETE")
-    if len(coverage.get("units", [])) != 1:
-        raise ValueError("tariff snapshot requires exactly one unit")
+def _validate_named(record: dict[str, Any], kind: str, allow_test_double: bool) -> None:
+    if record.get("kind") != kind:
+        raise ValueError(f"kind mismatch: {kind}")
+    validate_snapshot(record, allow_test_double=allow_test_double)
 
 
-def validate_partner_snapshot(
-    record: dict[str, Any],
-    *,
-    allow_test_double: bool = False,
-) -> None:
-    _validate_common(record, kind="partners", allow_test_double=allow_test_double)
-    coverage = record["coverage"]
-    if coverage.get("units_complete", 0) < 1:
-        raise ValueError("partners requires units_complete >= 1")
-    exclusions = record.get("transformation_record", {}).get("exclusions", [])
-    if coverage.get("units_excluded") != exclusions:
-        raise ValueError("partners exclusions mismatch")
+def validate_universe_snapshot(record: dict[str, Any], *, allow_test_double: bool = False) -> None:
+    _validate_named(record, "universe", allow_test_double)
+
+
+def validate_tariff_snapshot(record: dict[str, Any], *, allow_test_double: bool = False) -> None:
+    _validate_named(record, "tariff", allow_test_double)
+
+
+def validate_partner_snapshot(record: dict[str, Any], *, allow_test_double: bool = False) -> None:
+    _validate_named(record, "partners", allow_test_double)
 
 
 def _validate_common(
     record: dict[str, Any],
     *,
     kind: str,
+    kinds: KindRegistry,
     allow_test_double: bool,
 ) -> None:
     _forbidden_keys_check(record)
@@ -179,10 +142,11 @@ def _validate_common(
         source_id=record["source_id"],
         nomenclature=record["nomenclature"],
         as_of_date=date.fromisoformat(record["as_of_date"]),
+        kinds=kinds,
     )
     if record["snapshot_id"] != expected_id:
         raise ValueError("snapshot_id mismatch")
-    stage = KIND_STAGE[kind]
+    stage = kinds.stage_for(kind)
     for ref in record["raw_artifact_refs"]:
         if ref["source_id"] != record["source_id"]:
             raise ValueError("mixed source_id in refs")
@@ -196,15 +160,31 @@ def snapshot_sha256(record: dict[str, Any]) -> str:
     return sha256_bytes(canonical_dumps(record).encode("utf-8"))
 
 
+def _snapshot_directory(root: Path, kind_root: str) -> Path:
+    """Resolve a registry path inside its data root and outside frozen evidence."""
+    relative = Path(kind_root)
+    if relative.is_absolute() or not kind_root.startswith("data/") or ".." in relative.parts:
+        raise SnapshotWriteConflict(f"Unsafe snapshot kind root: {kind_root}")
+    resolved_root = root.resolve()
+    directory = (resolved_root / kind_root.removeprefix("data/")).resolve()
+    if not directory.is_relative_to(resolved_root):
+        raise SnapshotWriteConflict(f"Snapshot directory escapes data root: {kind_root}")
+    for forbidden in (PROJECT_ROOT / "data" / "snapshots" / "public", PROJECT_ROOT / "data" / "synthetic"):
+        if directory.is_relative_to(forbidden.resolve()):
+            raise SnapshotWriteConflict(f"Snapshot directory may not be under {forbidden}")
+    return directory
+
+
 def write_snapshot(
     record: dict[str, Any],
     root: Path,
     *,
     allow_test_double: bool = False,
+    kinds: KindRegistry | None = None,
 ) -> Path:
     kind = record["kind"]
-    if kind not in SNAPSHOT_ROOTS:
-        raise ValueError(f"Unknown kind: {kind}")
+    kinds = kinds or default_kind_registry()
+    spec = kinds.get(kind)
     repo_data = PROJECT_ROOT / "data"
     resolved = root.resolve()
     for forbidden in (
@@ -219,14 +199,9 @@ def write_snapshot(
         except ValueError:
             pass
 
-    validators = {
-        "universe": validate_universe_snapshot,
-        "tariff": validate_tariff_snapshot,
-        "partners": validate_partner_snapshot,
-    }
-    validators[kind](record, allow_test_double=allow_test_double)
+    validate_snapshot(record, kinds=kinds, allow_test_double=allow_test_double)
 
-    out_dir = root / SNAPSHOT_ROOTS[kind].replace("data/", "")
+    out_dir = _snapshot_directory(root, spec.root)
     out_dir.mkdir(parents=True, exist_ok=True)
     path = out_dir / f"{record['snapshot_id']}.json"
     content = canonical_dumps(record)
@@ -322,386 +297,116 @@ def _build_refs(
 
 
 def _verify_selected_coverage(
-    store: RawStore,
-    registry: ConnectorRegistry,
-    *,
-    source_id: str,
+    store: RawStore, config: dict[str, Any], *, source_id: str,
     selected: dict[tuple[str, ...], tuple[Any, tuple[str, ...]]],
-    stage: Stage,
 ) -> None:
-    connector = registry.get(
-        source_id,
-        source_config={},
-        store=store,
-        transport=None,
-        run_id="",
-        environ={},
-    )
     for key, (coverage, _) in selected.items():
         pages = store.pages_for(source_id, coverage.query_hash, coverage.run_id)
-        pagination = "NONE"
-        sample_contract = QueryContract(
-            source_id=source_id,
-            stage=stage,
-            reporter="SAU",
-            partner="WLD",
-            flow=str(key[0]) if stage == Stage.UNIVERSE else "",
-            product_scope=__import__(
-                "ior_mvp.acquisition.contracts",
-                fromlist=["ProductScope"],
-            ).ProductScope.ALL_HS6,
-            product_codes=(PRODUCT_SCOPE_ALL,),
-            nomenclature="H0",
-            periods=(str(coverage.unit["period"]),),
-        )
+        if not pages:
+            raise RawStoreIntegrityError(f"Missing pages for complete unit {key}")
+        # RawStore reconstructs this complete QueryContract from the stored JSON.
+        contract = pages[0].query_contract
         derived = evaluate_coverage(
-            pages,
-            pagination_kind=pagination,
-            requests_made=coverage.requests_made,
-            stop_reason=coverage.stop_reason,
-            observed_stop=coverage.observed_stop,
-            contract=sample_contract,
-            run_id=coverage.run_id,
+            pages, pagination_kind=config["sources"][source_id]["pagination"]["kind"],
+            requests_made=coverage.requests_made, stop_reason=coverage.stop_reason,
+            observed_stop=coverage.observed_stop, contract=contract, run_id=coverage.run_id,
         )
         if not coverage_matches(coverage, derived):
-            raise RawStoreIntegrityError(
-                f"Coverage tampered for unit {key}"
-            )
+            raise RawStoreIntegrityError(f"Coverage tampered for unit {key}")
 
 
-def build_universe_snapshot(
-    store: RawStore,
-    config: dict[str, Any],
-    registry: ConnectorRegistry,
-    *,
-    source_id: str,
+def build_row_snapshot(
+    store: RawStore, config: dict[str, Any], registry: ConnectorRegistry, *,
+    kind: str, source_id: str, kinds: KindRegistry | None = None,
 ) -> dict[str, Any]:
-    if "universe" not in registry.snapshot_kinds(source_id):
-        raise AcquisitionUnavailable(
-            UnavailableReason.OUT_OF_SCOPE_CONTENT,
-            {"source_id": source_id},
-        )
-    selected = select_latest_units(
-        store, source_id=source_id, stage=Stage.UNIVERSE
-    )
-    incomplete = [
-        key
-        for key, (cov, _) in selected.items()
-        if cov.status != "COMPLETE"
-    ]
-    if incomplete:
-        raise AcquisitionUnavailable(
-            UnavailableReason.COVERAGE_INCOMPLETE,
-            {"unit_keys": incomplete},
-        )
-    _verify_selected_coverage(
-        store, registry, source_id=source_id, selected=selected, stage=Stage.UNIVERSE
-    )
+    kinds = kinds or default_kind_registry()
+    spec = kinds.get(kind)
+    if kind not in registry.snapshot_kinds(source_id):
+        raise AcquisitionUnavailable(UnavailableReason.OUT_OF_SCOPE_CONTENT, {"source_id": source_id})
+    selected = select_latest_units(store, source_id=source_id, stage=spec.stage)
+    complete = {key: value for key, value in selected.items() if value[0].status == "COMPLETE"}
+    incomplete = [key for key in selected if key not in complete]
+    if spec.completeness_policy == CompletenessPolicy.ALL_UNITS_COMPLETE:
+        if incomplete:
+            raise AcquisitionUnavailable(UnavailableReason.COVERAGE_INCOMPLETE, {"unit_keys": incomplete})
+        coverage_block = aggregate_snapshot_coverage(selected, source_id=source_id, stage=spec.stage)
+        exclusions = []
+    elif spec.completeness_policy == CompletenessPolicy.AT_LEAST_ONE_COMPLETE_WITH_EXCLUSIONS:
+        if not complete:
+            raise AcquisitionUnavailable(UnavailableReason.COVERAGE_INCOMPLETE, {"unit_keys": list(selected)})
+        coverage_block = aggregate_exclusion_coverage(selected, source_id=source_id, stage=spec.stage)
+        exclusions = coverage_block["units_excluded"]
+    else:
+        raise ValueError(f"Unknown completeness policy: {spec.completeness_policy}")
+    _verify_selected_coverage(store, config, source_id=source_id, selected=complete)
     source_cfg = config["sources"][source_id]
-    connector = registry.get(
-        source_id,
-        source_config=source_cfg,
-        store=store,
-        transport=None,
-        run_id="",
-        environ={},
-        config_version=config["metadata"]["version"],
-    )
+    connector = registry.get(source_id, source_config=source_cfg, store=store,
+                             transport=None, run_id="", environ={}, config_version=spec.config_version)
+    refs = _build_refs(store, source_id=source_id, stage=spec.stage, selected=complete)
     rows: list[dict[str, Any]] = []
     all_pages: list[SourceContractRecord] = []
-    refs = _build_refs(
-        store, source_id=source_id, stage=Stage.UNIVERSE, selected=selected
-    )
-    for key, (coverage, _) in sorted(selected.items()):
+    for _, (coverage, _) in sorted(complete.items()):
         pages = store.pages_for(source_id, coverage.query_hash, coverage.run_id)
         all_pages.extend(pages)
         for page in pages:
-            observations = connector.normalize(
-                __import__(
-                    "ior_mvp.acquisition.contracts",
-                    fromlist=["RawArtifact"],
-                ).RawArtifact(contract=page, path=Path("."))
-            )
-            for obs in observations:
-                rows.append(obs.__dict__)
-    as_of = _derive_as_of_date(all_pages)
+            raw = RawArtifact(contract=page, path=Path("."))
+            quality = connector.validate(raw)
+            if quality.status != "PASS" or any(check.result != "PASS" for check in quality.checks):
+                raise AcquisitionUnavailable(UnavailableReason.FORMAT_NOT_PARSEABLE,
+                                             {"source_id": source_id, "quality_status": quality.status})
+            rows.extend(obs.__dict__ for obs in connector.normalize(raw))
     if not rows:
-        raise AcquisitionUnavailable(
-            UnavailableReason.FORMAT_NOT_PARSEABLE,
-            {"source_id": source_id},
-        )
-    coverage_block = aggregate_snapshot_coverage(
-        selected, source_id=source_id, stage=Stage.UNIVERSE
-    )
-    record = {
-        "schema_version": UNIVERSE_SCHEMA_VERSION,
-        "snapshot_id": snapshot_id(
-            "universe",
-            source_id=source_id,
-            nomenclature=source_cfg["nomenclature"],
-            as_of_date=as_of,
-        ),
-        "source_id": source_id,
-        "as_of_date": as_of.isoformat(),
-        "source_boundary": "public",
-        "kind": "universe",
-        "nomenclature": source_cfg["nomenclature"],
-        "reporter": "SAU",
-        "partner": "WLD",
-        "product_scope": "ALL_HS6",
-        "flows": sorted({k[0] for k in selected}),
-        "periods": sorted({k[1] for k in selected}),
-        "coverage": coverage_block,
-        "raw_artifact_refs": refs,
-        "transformation_record": transformation_record(
-            formula="normalize_trade_rows",
-            parameters={"source_id": source_id},
-            exclusions=[],
-            config_version=config["metadata"]["version"],
-        ),
-        "quality_summary": "PASS",
-        "evidence": [
-            build_acquired_passport(
-                store.pages_for(source_id, cov.query_hash, cov.run_id),
-                cov,
-                source_config=source_cfg,
-                supports=["TRADE_VALUE", "TRADE_QUANTITY"],
-                transformation_record=transformation_record(
-                    formula="normalize_trade_rows",
-                    parameters={},
-                    exclusions=[],
-                    config_version=config["metadata"]["version"],
-                ),
-                observation_context={"stage": "UNIVERSE"},
-                measurement={"row_count": len(rows)},
-                contradiction_record=None,
-            )
-            for _, (cov, _) in sorted(selected.items())
-        ],
-        "rows": sorted(rows, key=lambda r: (r.get("year", 0), r.get("hs6", ""))),
-    }
-    return record
-
-
-def build_tariff_snapshot(
-    store: RawStore,
-    config: dict[str, Any],
-    registry: ConnectorRegistry,
-    *,
-    source_id: str,
-) -> dict[str, Any]:
-    if "tariff" not in registry.snapshot_kinds(source_id):
-        raise AcquisitionUnavailable(
-            UnavailableReason.OUT_OF_SCOPE_CONTENT,
-            {"source_id": source_id},
-        )
-    selected = select_latest_units(
-        store, source_id=source_id, stage=Stage.TARIFF
-    )
-    incomplete = [
-        key for key, (cov, _) in selected.items() if cov.status != "COMPLETE"
-    ]
-    if incomplete:
-        raise AcquisitionUnavailable(
-            UnavailableReason.COVERAGE_INCOMPLETE,
-            {"unit_keys": incomplete},
-        )
-    source_cfg = config["sources"][source_id]
-    connector = registry.get(
-        source_id,
-        source_config=source_cfg,
-        store=store,
-        transport=None,
-        run_id="",
-        environ={},
-        config_version=config["metadata"]["version"],
-    )
-    lines: list[dict[str, Any]] = []
-    all_pages: list[SourceContractRecord] = []
-    refs = _build_refs(
-        store, source_id=source_id, stage=Stage.TARIFF, selected=selected
-    )
-    for _, (coverage, _) in sorted(selected.items()):
-        pages = store.pages_for(source_id, coverage.query_hash, coverage.run_id)
-        all_pages.extend(pages)
-        for page in pages:
-            normalized = connector.normalize(
-                __import__(
-                    "ior_mvp.acquisition.contracts",
-                    fromlist=["RawArtifact"],
-                ).RawArtifact(contract=page, path=Path("."))
-            )
-            for line in normalized:
-                lines.append(line.__dict__)
+        raise AcquisitionUnavailable(UnavailableReason.FORMAT_NOT_PARSEABLE, {"source_id": source_id})
     as_of = _derive_as_of_date(all_pages)
-    if not lines:
-        raise AcquisitionUnavailable(
-            UnavailableReason.FORMAT_NOT_PARSEABLE,
-            {"source_id": source_id},
-        )
     record = {
-        "schema_version": TARIFF_SCHEMA_VERSION,
-        "snapshot_id": snapshot_id(
-            "tariff",
-            source_id=source_id,
-            nomenclature=source_cfg["nomenclature"],
-            as_of_date=as_of,
-        ),
-        "source_id": source_id,
-        "as_of_date": as_of.isoformat(),
-        "source_boundary": "public",
-        "kind": "tariff",
-        "nomenclature": source_cfg["nomenclature"],
-        "coverage": aggregate_snapshot_coverage(
-            selected, source_id=source_id, stage=Stage.TARIFF
-        ),
-        "raw_artifact_refs": refs,
+        "schema_version": spec.schema_version,
+        "snapshot_id": kinds.snapshot_id(kind, source_id=source_id, nomenclature=source_cfg["nomenclature"], as_of_date=as_of),
+        "source_id": source_id, "as_of_date": as_of.isoformat(),
+        "source_boundary": "public", "kind": kind, "nomenclature": source_cfg["nomenclature"],
+        **spec.extra_fields(selected),
+        "coverage": coverage_block, "raw_artifact_refs": refs,
         "transformation_record": transformation_record(
-            formula="normalize_tariff_lines",
-            parameters={"source_id": source_id},
-            exclusions=[],
-            config_version=config["metadata"]["version"],
-        ),
+            formula=spec.formula, parameters={"source_id": source_id},
+            exclusions=exclusions, config_version=spec.config_version),
         "quality_summary": "PASS",
         "evidence": [
             build_acquired_passport(
-                store.pages_for(source_id, cov.query_hash, cov.run_id),
-                cov,
-                source_config=source_cfg,
-                supports=["NATIONAL_TARIFF_LINE_MAPPING"],
+                store.pages_for(source_id, cov.query_hash, cov.run_id), cov,
+                source_config=source_cfg, supports=list(spec.supports),
                 transformation_record=transformation_record(
-                    formula="normalize_tariff_lines",
-                    parameters={},
-                    exclusions=[],
-                    config_version=config["metadata"]["version"],
-                ),
-                observation_context={"stage": "TARIFF"},
-                measurement={"line_count": len(lines)},
-                contradiction_record=None,
-            )
-            for _, (cov, _) in sorted(selected.items())
+                    formula=spec.formula, parameters={}, exclusions=exclusions,
+                    config_version=spec.config_version),
+                observation_context={"stage": spec.stage.value},
+                measurement={spec.measurement_key: len(rows)}, contradiction_record=None,
+            ) for _, (cov, _) in sorted(complete.items())
         ],
-        "lines": sorted(lines, key=lambda r: r.get("national_code", "")),
+        spec.rows_key: sorted(rows, key=spec.row_sort_key),
     }
+    validate_snapshot(record, kinds=kinds, allow_test_double=True)
     return record
 
 
-def build_partner_snapshot(
-    store: RawStore,
-    config: dict[str, Any],
-    registry: ConnectorRegistry,
-    *,
-    source_id: str,
-) -> dict[str, Any]:
-    if "partners" not in registry.snapshot_kinds(source_id):
-        raise AcquisitionUnavailable(
-            UnavailableReason.OUT_OF_SCOPE_CONTENT,
-            {"source_id": source_id},
-        )
-    selected = select_latest_units(
-        store, source_id=source_id, stage=Stage.PARTNERS
-    )
-    complete = {
-        k: v for k, v in selected.items() if v[0].status == "COMPLETE"
-    }
-    if not complete:
-        raise AcquisitionUnavailable(
-            UnavailableReason.COVERAGE_INCOMPLETE,
-            {"unit_keys": list(selected)},
-        )
-    exclusions = [
-        {
-            "unit_key": list(key),
-            "selected_run_id": cov.run_id,
-            "reason": cov.stop_reason.value if cov.stop_reason else "INCOMPLETE",
-        }
-        for key, (cov, _) in selected.items()
-        if cov.status != "COMPLETE"
-    ]
-    source_cfg = config["sources"][source_id]
-    connector = registry.get(
-        source_id,
-        source_config=source_cfg,
-        store=store,
-        transport=None,
-        run_id="",
-        environ={},
-        config_version=config["metadata"]["version"],
-    )
-    rows: list[dict[str, Any]] = []
-    all_pages: list[SourceContractRecord] = []
-    refs = _build_refs(
-        store, source_id=source_id, stage=Stage.PARTNERS, selected=complete
-    )
-    for key, (coverage, _) in sorted(complete.items()):
-        pages = store.pages_for(source_id, coverage.query_hash, coverage.run_id)
-        all_pages.extend(pages)
-        for page in pages:
-            observations = connector.normalize(
-                __import__(
-                    "ior_mvp.acquisition.contracts",
-                    fromlist=["RawArtifact"],
-                ).RawArtifact(contract=page, path=Path("."))
-            )
-            for obs in observations:
-                rows.append(obs.__dict__)
-    as_of = _derive_as_of_date(all_pages)
-    coverage_block = aggregate_partner_coverage(
-        selected, source_id=source_id
-    )
-    record = {
-        "schema_version": PARTNERS_SCHEMA_VERSION,
-        "snapshot_id": snapshot_id(
-            "partners",
-            source_id=source_id,
-            nomenclature=source_cfg["nomenclature"],
-            as_of_date=as_of,
-        ),
-        "source_id": source_id,
-        "as_of_date": as_of.isoformat(),
-        "source_boundary": "public",
-        "kind": "partners",
-        "nomenclature": source_cfg["nomenclature"],
-        "coverage": coverage_block,
-        "raw_artifact_refs": refs,
-        "transformation_record": transformation_record(
-            formula="normalize_partner_rows",
-            parameters={"source_id": source_id},
-            exclusions=exclusions,
-            config_version=config["metadata"]["version"],
-        ),
-        "quality_summary": "PASS",
-        "evidence": [
-            build_acquired_passport(
-                store.pages_for(source_id, cov.query_hash, cov.run_id),
-                cov,
-                source_config=source_cfg,
-                supports=["TRADE_VALUE", "TRADE_QUANTITY"],
-                transformation_record=transformation_record(
-                    formula="normalize_partner_rows",
-                    parameters={},
-                    exclusions=exclusions,
-                    config_version=config["metadata"]["version"],
-                ),
-                observation_context={"stage": "PARTNERS"},
-                measurement={"row_count": len(rows)},
-                contradiction_record=None,
-            )
-            for _, (cov, _) in sorted(complete.items())
-        ],
-        "rows": sorted(rows, key=lambda r: (r.get("hs6", ""), r.get("partner", ""))),
-    }
-    return record
+def build_universe_snapshot(store: RawStore, config: dict[str, Any], registry: ConnectorRegistry, *, source_id: str) -> dict[str, Any]:
+    return build_row_snapshot(store, config, registry, kind="universe", source_id=source_id)
+
+
+def build_tariff_snapshot(store: RawStore, config: dict[str, Any], registry: ConnectorRegistry, *, source_id: str) -> dict[str, Any]:
+    return build_row_snapshot(store, config, registry, kind="tariff", source_id=source_id)
+
+
+def build_partner_snapshot(store: RawStore, config: dict[str, Any], registry: ConnectorRegistry, *, source_id: str) -> dict[str, Any]:
+    return build_row_snapshot(store, config, registry, kind="partners", source_id=source_id)
 
 
 def _selection_changed(
     record: dict[str, Any],
     store: RawStore,
+    kinds: KindRegistry,
 ) -> bool:
     """Return True when latest store run differs from snapshot selection."""
     kind = record["kind"]
     source_id = record["source_id"]
-    stage = KIND_STAGE[kind]
+    stage = kinds.stage_for(kind)
     latest = store.latest_runs(source_id=source_id, stage=stage.value)
     stored_units = {
         tuple(unit["unit_key"]): unit["selected_run_id"]
@@ -719,12 +424,15 @@ def reconstruct(
     store: RawStore,
     config: dict[str, Any],
     registry: ConnectorRegistry,
+    kinds: KindRegistry | None = None,
 ) -> ReconstructionResult:
+    kinds = kinds or default_kind_registry()
     record = json.loads(snapshot_path.read_text(encoding="utf-8"))
     expected_sha = snapshot_sha256(record)
     kind = record["kind"]
     source_id = record["source_id"]
-    if _selection_changed(record, store):
+    kinds.get(kind)
+    if _selection_changed(record, store, kinds):
         return ReconstructionResult(
             match=False,
             expected_sha256=expected_sha,
@@ -736,13 +444,8 @@ def reconstruct(
                 "units": list(record["coverage"].get("units", [])),
             },
         )
-    builders = {
-        "universe": build_universe_snapshot,
-        "tariff": build_tariff_snapshot,
-        "partners": build_partner_snapshot,
-    }
     try:
-        rebuilt = builders[kind](store, config, registry, source_id=source_id)
+        rebuilt = build_row_snapshot(store, config, registry, kind=kind, source_id=source_id, kinds=kinds)
     except AcquisitionUnavailable as exc:
         if exc.reason == UnavailableReason.COVERAGE_INCOMPLETE:
             return ReconstructionResult(

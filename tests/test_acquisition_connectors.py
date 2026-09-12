@@ -27,7 +27,7 @@ from tests.acquisition_doubles import DoubleConnector, FakeTransport, seed_unit
 
 def test_default_registry_ids() -> None:
     reg = default_registry()
-    assert reg.ids() == ("baci_cepii", "un_comtrade", "wits_trade", "zatca_tariff")
+    assert reg.ids() == ("baci_cepii", "gastat", "ministry_of_industry", "modon", "saber_registry", "saso_catalogue", "un_comtrade", "wits_trade", "zatca_tariff")
 
 
 def test_snapshot_kinds_per_dd22() -> None:
@@ -35,6 +35,8 @@ def test_snapshot_kinds_per_dd22() -> None:
     assert reg.snapshot_kinds("wits_trade") == frozenset({"universe", "partners"})
     assert reg.snapshot_kinds("zatca_tariff") == frozenset({"tariff"})
     assert reg.snapshot_kinds("baci_cepii") == frozenset()
+    for source, kind in [("gastat", "production"), ("ministry_of_industry", "directory"), ("modon", "directory"), ("saso_catalogue", "registry"), ("saber_registry", "registry")]:
+        assert reg.snapshot_kinds(source) == frozenset({kind})
 
 
 def _test_store(tmp_path: Path) -> RawStore:

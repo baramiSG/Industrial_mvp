@@ -46,7 +46,7 @@ class UnComtradeConnector(BaseConnector):
     def validate(self, raw: RawArtifact) -> QualityReport:
         contract = raw.contract
         payload = self.store.read_payload(contract)
-        rows = self._parse_rows(payload)
+        rows = self.parse_rows(payload, contract.content_type)
         checks = (
             QualityCheck(
                 "reporter_is_SAU",
@@ -72,7 +72,7 @@ class UnComtradeConnector(BaseConnector):
         self, raw: RawArtifact
     ) -> list[TradeObservation] | list[TariffLine]:
         payload = self.store.read_payload(raw.contract)
-        rows = self._parse_rows(payload)
+        rows = self.parse_rows(payload, raw.contract.content_type)
         if not rows:
             return []
         evidence_id = f"{raw.contract.query_hash[:12]}-p{raw.contract.page_index:04d}"
@@ -127,6 +127,9 @@ class UnComtradeConnector(BaseConnector):
                         }
                     )
         return rows
+
+    def parse_rows(self, payload: bytes, content_type: str) -> list[dict[str, Any]]:
+        return self._parse_rows(payload)
 
     def snapshot(
         self,

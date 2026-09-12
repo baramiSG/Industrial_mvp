@@ -3,12 +3,18 @@
 from __future__ import annotations
 
 import json
+import csv
+import io
+import re
 import time
+import unicodedata
+from html.parser import HTMLParser
+from string import Formatter
+from types import MappingProxyType
 from dataclasses import dataclass
 from datetime import date
-from typing import Any, Callable, Mapping, Protocol, Sequence, Type
+from typing import Any, Callable, Mapping, Protocol, Type
 
-from ior_mvp.config import PROJECT_ROOT
 from ..contracts import (
     AcquisitionError,
     AcquisitionUnavailable,
@@ -20,25 +26,27 @@ from ..contracts import (
     QualityCheck,
     QualityReport,
     RawArtifact,
+    Row,
     SourceContractRecord,
     Stage,
-    TariffLine,
-    TradeObservation,
     UNAVAILABLE,
     UnavailableRecord,
     UnavailableReason,
-    new_run_id,
     sha256_bytes,
     utc_now_iso,
+    stage_spec,
+    unit_key,
 )
 from ..coverage import evaluate_coverage, not_attempted_coverage
 from ..raw_store import RawStore
+from ..source_config import configured_credential_env_var
 from ..transport import FetchResult, NetworkError, SizeBudgetExceeded, Transport
 
 
 class SourceConnector(Protocol):
     source_id: str
     snapshot_kinds: frozenset[str]
+    parse_rows: Callable[[bytes, str], list[dict[str, Any]]] | None
 
     def acquire(
         self,
@@ -56,7 +64,7 @@ class SourceConnector(Protocol):
 
     def normalize(
         self, raw: RawArtifact
-    ) -> list[TradeObservation] | list[TariffLine]:
+    ) -> list[Row]:
         ...
 
     def snapshot(
@@ -71,12 +79,122 @@ class BudgetExhausted(Exception):
     """Request budget exhausted."""
 
 
+class _ObservedTokenFormatter(Formatter):
+    """Reject unobserved values even through nested format specifications."""
+
+    def get_field(self, field_name: str, args: tuple, kwargs: dict) -> tuple[Any, Any]:
+        value, key = super().get_field(field_name, args, kwargs)
+        if value == UNAVAILABLE or value is None:
+            raise ValueError(f"Unobserved endpoint token: {field_name}")
+        return value, key
+
+
 class CredentialEchoed(AcquisitionError):
     """Response body contains a credential value; body must not be stored."""
 
     def __init__(self, result: FetchResult) -> None:
         super().__init__("credential value echoed in response body")
         self.result = result
+
+
+_PERSONAL_ENGLISH = (
+    "phone", "phone_number", "phone_no", "telephone", "telephone_number",
+    "telephone_no", "mobile", "mobile_number", "mobile_no", "email",
+    "email_address", "e_mail", "e_mail_address", "contact_person",
+    "contact_person_name", "contact_name", "person_name", "national_id",
+    "national_id_number", "national_id_no",
+)
+_PERSONAL_ARABIC = frozenset({
+    "هاتف", "الهاتف", "رقم_الهاتف", "جوال", "الجوال", "رقم_الجوال",
+    "البريد_الإلكتروني", "البريد_الالكتروني", "بريد_إلكتروني", "بريد_الكتروني",
+    "اسم_شخص_الاتصال", "اسم_مسؤول_التواصل", "الهوية_الوطنية", "رقم_الهوية_الوطنية",
+})
+_PERSONAL_SUFFIX = re.compile(
+    r"(?:^|_)(?:" + "|".join(_PERSONAL_ENGLISH) + r")(?:_ar|_en|_text)?$"
+)
+
+
+def _personal_field(label: str) -> bool:
+    label = re.sub(r"([A-Z]+)([A-Z][a-z])", r"\1_\2", label)
+    label = re.sub(r"([a-z0-9])([A-Z])", r"\1_\2", label)
+    label = unicodedata.normalize("NFC", label).casefold()
+    label = re.sub(r"[\s_\-/.]+", "_", label).strip("_")
+    return label in _PERSONAL_ARABIC or _PERSONAL_SUFFIX.search(label) is not None
+
+
+class _HTMLFieldLabels(HTMLParser):
+    """Extract only table headers and named form controls, excluding script/style."""
+
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=True)
+        self.labels: list[str] = []
+        self._header: list[str] | None = None
+        self._suppressed: str | None = None
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        if self._suppressed:
+            return
+        if tag in {"script", "style"}:
+            self._suppressed = tag
+        elif tag == "th":
+            self._finish_header()
+            self._header = []
+        elif tag in {"input", "select", "textarea", "button"}:
+            self.labels.extend(value for name, value in attrs if name == "name" and value is not None)
+
+    def handle_endtag(self, tag: str) -> None:
+        if self._suppressed:
+            if tag == self._suppressed:
+                self._suppressed = None
+        elif tag == "th":
+            self._finish_header()
+
+    def handle_data(self, data: str) -> None:
+        if self._header is not None and not self._suppressed:
+            self._header.append(data)
+
+    def _finish_header(self) -> None:
+        if self._header is not None:
+            self.labels.append("".join(self._header))
+            self._header = None
+
+    def close(self) -> None:
+        super().close()
+        self._finish_header()
+
+
+def _institutional_privacy_error(payload: bytes, declared: str) -> str | None:
+    """Approved text-only label screen; never sniff envelopes or inspect values."""
+    mime = declared.casefold()
+    if mime in {"application/pdf", "application/zip", "application/gzip"} or mime.startswith(("image/", "audio/", "video/", "font/")):
+        return "UninspectableTextPayload"
+    try:
+        text = payload.decode("utf-8-sig")
+    except UnicodeError:
+        return "UninspectableTextPayload"
+    if re.search(r"[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]", text):
+        return "UninspectableTextPayload"
+    labels: list[str] = []
+    try:
+        if mime in {"application/json", "text/json"} or re.fullmatch(r"application/[^/\s]+\+json", mime):
+            # object_pairs_hook sees every key, including duplicate-key objects
+            # that a normal dict conversion would otherwise discard.
+            def collect(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+                labels.extend(key for key, _ in pairs)
+                return dict(pairs)
+            json.loads(text, object_pairs_hook=collect)
+        elif mime in {"text/csv", "text/tab-separated-values"}:
+            reader = csv.reader(io.StringIO(text, newline=""), delimiter="\t" if mime == "text/tab-separated-values" else ",", strict=True)
+            labels = next((row for row in reader if any(cell.strip() for cell in row)), [])
+        elif mime in {"text/html", "application/xhtml+xml"}:
+            parser = _HTMLFieldLabels()
+            parser.feed(text)
+            parser.close()
+            labels = parser.labels
+        # Every other declaration is opaque text: no inferred fields.
+    except (ValueError, csv.Error, RecursionError):
+        return None  # Unknown selected-format shape, without another parser.
+    return "PersonalDataFields" if any(_personal_field(label) for label in labels) else None
 
 
 @dataclass
@@ -117,6 +235,7 @@ class BaseConnector:
 
     source_id: str = ""
     snapshot_kinds: frozenset[str] = frozenset()
+    parse_rows: Callable[[bytes, str], list[dict[str, Any]]] | None = None
 
     def __init__(
         self,
@@ -173,37 +292,66 @@ class BaseConnector:
         page_index: int = 1,
         page_token: str | None = None,
     ) -> str:
-        params = self.source_config.get("parameters", {})
-        flow_tokens = params.get("flow_tokens", {})
+        spec = stage_spec(contract.stage)
+        if any(not value or value == UNAVAILABLE for value in unit_key(contract)):
+            raise AcquisitionUnavailable(UnavailableReason.ENDPOINT_UNVERIFIED)
+        if spec.period_scoped and (len(contract.periods) != 1 or not contract.periods[0] or contract.periods[0] == UNAVAILABLE):
+            raise AcquisitionUnavailable(UnavailableReason.ENDPOINT_UNVERIFIED)
+        params = self._observed_mapping(self.source_config.get("parameters"))
+        flow_tokens = self._observed_mapping(params.get("flow_tokens"))
         flow_code = flow_tokens.get(contract.flow, contract.flow)
         product = (
             contract.product_codes[0]
             if contract.product_scope == ProductScope.EXPLICIT
             else params.get("product_all_token", "ALL")
         )
-        partner = (
-            contract.partner
-            if contract.stage == Stage.PARTNERS
-            else params.get("partner_world_token", "WLD")
-        )
         period = contract.periods[0] if contract.periods else ""
-        url = template.format(
-            reporter=params.get("reporter_token", contract.reporter),
-            partner=partner,
-            product=product,
-            flow=contract.flow,
-            flow_code=flow_code,
-            flow_label=flow_code,
-            period=period,
-            year=period,
-            page=page_index,
-            page_token=page_token or "",
-        )
-        return url
+        tokens = {
+            **params,
+            "reporter": params.get("reporter_token", contract.reporter),
+            "product": product, "flow": contract.flow,
+            "flow_code": flow_code, "flow_label": flow_code,
+            "period": period, "year": period,
+            **spec.url_tokens(contract, params),
+            **self._page_tokens(page_index, page_token),
+        }
+        parameter_names = [key for key, _ in contract.parameters]
+        if len(set(parameter_names)) != len(parameter_names) or set(parameter_names) & set(tokens):
+            raise AcquisitionUnavailable(UnavailableReason.ENDPOINT_UNVERIFIED)
+        tokens.update(dict(contract.parameters))
+        try:
+            return _ObservedTokenFormatter().vformat(template, (), tokens)
+        except (KeyError, IndexError, ValueError, AttributeError, TypeError) as exc:
+            raise AcquisitionUnavailable(UnavailableReason.ENDPOINT_UNVERIFIED) from exc
+
+    @staticmethod
+    def _observed_mapping(value: Any) -> Mapping:
+        if value is None or value == UNAVAILABLE:
+            return MappingProxyType({})
+        if not isinstance(value, Mapping):
+            raise ValueError("Observed value must be a mapping")
+        return value
+
+    def _page_tokens(self, page_index: int, page_token: str | None) -> dict[str, Any]:
+        return {"page": page_index, "page_token": page_token or ""}
+
+    def classify_page(self, payload: bytes, content_type: str, stage: Stage) -> tuple[str, str | None]:
+        if stage == Stage.TERMS:
+            return "UNPARSED", "no_rows_parsed"
+        if self.parse_rows is None:
+            return "PENDING", None
+        try:
+            if self.parse_rows(payload, content_type):
+                return "NORMALIZED", None
+        except (ValueError, TypeError, AttributeError, OverflowError):
+            # Preserve malformed responses as raw evidence. The parser's
+            # normalization behavior is unchanged; classification emits no rows.
+            return "UNPARSED", "no_rows_parsed"
+        return "UNPARSED", "no_rows_parsed"
 
     def _credential_info(self) -> tuple[str | None, bool]:
-        env_var = self.source_config.get("credential_env_var")
-        if not env_var:
+        env_var = configured_credential_env_var(self.source_config)
+        if env_var is None:
             return None, False
         value = self.environ.get(env_var)
         return env_var, bool(value)
@@ -273,7 +421,9 @@ class BaseConnector:
             if result.http_status != 200:
                 return False
             self._license_note = f"Terms captured from {terms_url}"
-            self._store_page(terms_contract, result, page_index=1)
+            status, reason = self.classify_page(result.body, self._content_type(result), Stage.TERMS)
+            self._store_page(terms_contract, result, page_index=1,
+                             normalization_status=status, normalization_reason=reason)
             return True
         except (NetworkError, BudgetExhausted, SizeBudgetExceeded, CredentialEchoed):
             return False
@@ -379,6 +529,13 @@ class BaseConnector:
         if isinstance(template_result, UnavailableRecord):
             return template_result
         template = template_result
+        try:
+            self._build_url(query_contract, template)
+        except AcquisitionUnavailable as exc:
+            return self._unavailable(query_contract, exc.reason, endpoint=template)
+
+        if self.source_config.get("access_classification") == UNAVAILABLE:
+            return self._unavailable(query_contract, UnavailableReason.LICENSE_UNRECORDED, endpoint=template)
 
         license_required = self.source_config.get(
             "license_capture_required", False
@@ -411,6 +568,11 @@ class BaseConnector:
 
         while True:
             try:
+                url = self._build_url(query_contract, template, page_index=page_index, page_token=page_token)
+            except AcquisitionUnavailable as exc:
+                stop_reason = exc.reason
+                break
+            try:
                 self.request_budget.take()
             except BudgetExhausted:
                 stop_reason = UnavailableReason.MAX_REQUESTS_EXHAUSTED
@@ -425,12 +587,6 @@ class BaseConnector:
                     )
                 break
 
-            url = self._build_url(
-                query_contract,
-                template,
-                page_index=page_index,
-                page_token=page_token,
-            )
             try:
                 result = self._fetch(url)
             except SizeBudgetExceeded as exc:
@@ -492,8 +648,24 @@ class BaseConnector:
                 )
                 break
 
+            if query_contract.stage in {Stage.DIRECTORY, Stage.REGISTRY}:
+                privacy_error = _institutional_privacy_error(result.body, self._content_type(result))
+                if privacy_error:
+                    stop_reason = UnavailableReason.OUT_OF_SCOPE_CONTENT
+                    observed_stop = ObservedResponse(
+                        http_status=result.http_status,
+                        headers_subset=result.headers_subset,
+                        body_sha256=sha256_bytes(result.body),
+                        body_byte_count=len(result.body),
+                        error_type=privacy_error,
+                        error_message_redacted="Response refused by institutional text-only privacy policy; body not stored",
+                    )
+                    break
+
             last_result = result
-            artifact = self._store_page(query_contract, result, page_index=page_index)
+            status, reason = self.classify_page(result.body, self._content_type(result), query_contract.stage)
+            artifact = self._store_page(query_contract, result, page_index=page_index,
+                                        normalization_status=status, normalization_reason=reason)
             artifacts.append(artifact)
             meta = artifact.contract.page_meta
             if kind == "NONE":
@@ -516,6 +688,8 @@ class BaseConnector:
                 if meta and meta.enumerated_children:
                     if page_index >= len(meta.enumerated_children):
                         break
+                elif not self._observed_mapping(pagination.get("parameters")):
+                    break
                 page_index += 1
                 continue
             break
@@ -545,11 +719,11 @@ class BaseConnector:
             data = json.loads(payload.decode("utf-8"))
         except (UnicodeError, json.JSONDecodeError):
             return None
-        token_field = (
-            self.source_config.get("pagination", {})
-            .get("parameters", {})
-            .get("next_token_field", "next")
-        )
+        token_field = self._observed_mapping(
+            self.source_config.get("pagination", {}).get("parameters")
+        ).get("next_token_field")
+        if not token_field or not isinstance(data, dict):
+            return None
         token = data.get(token_field)
         return str(token) if token else None
 
@@ -573,7 +747,7 @@ class BaseConnector:
 
     def normalize(
         self, raw: RawArtifact
-    ) -> list[TradeObservation] | list[TariffLine]:
+    ) -> list[Row]:
         return []
 
     def snapshot(
@@ -584,11 +758,87 @@ class BaseConnector:
         raise NotImplementedError
 
 
+class InstitutionalConnector(BaseConnector):
+    """Shared row validation for institutional sources with no observed parser yet."""
+
+    row_kind: str = ""
+
+    def snapshot(self, observations: list[Any], as_of_date: date) -> dict[str, Any]:
+        """Build from selected stored evidence, as with the existing S11 helpers."""
+        from ..snapshots import build_row_snapshot
+
+        return build_row_snapshot(
+            self.store,
+            {"sources": {self.source_id: self.source_config}, "metadata": {"version": self.config_version}},
+            default_registry(),
+            source_id=self.source_id,
+            kind=self.row_kind,
+        )
+
+    def parse_rows(self, payload: bytes, content_type: str) -> list[dict[str, Any]]:
+        # Implement a source parser only after an actual shape is observed.
+        return []
+
+    def page_meta(self, payload: bytes, content_type: str) -> PageMeta:
+        return PageMeta(
+            page_index=1,
+            pages_expected=1 if self.source_config.get("pagination", {}).get("kind") == "NONE" else UNAVAILABLE,
+            next_page_token_present=False,
+            rows_in_page=UNAVAILABLE,
+            enumerated_children=None,
+        )
+
+    def normalize(self, raw: RawArtifact) -> list[Row]:
+        from ..harmonise import directory_row_from_row, production_observation_from_row, registry_row_from_row
+
+        mapper = {"production": production_observation_from_row, "directory": directory_row_from_row, "registry": registry_row_from_row}[self.row_kind]
+        return [mapper(row, field_map={}, source_evidence_id=raw.contract.query_hash)
+                for row in self.parse_rows(self.store.read_payload(raw.contract), raw.contract.content_type)]
+
+    def validate(self, raw: RawArtifact) -> QualityReport:
+        contract = raw.contract
+        expected_stage = {"production": Stage.AGGREGATE, "directory": Stage.DIRECTORY, "registry": Stage.REGISTRY}[self.row_kind]
+        identity_ok = (
+            contract.source_id == self.source_id
+            and contract.query_contract.stage == expected_stage
+            and contract.reporter == contract.query_contract.reporter == self.source_config.get("reporter_code")
+        )
+        valid = False
+        try:
+            rows = self.normalize(raw)
+            def observed(value: Any) -> bool:
+                return isinstance(value, str) and bool(value.strip()) and value != UNAVAILABLE
+            if self.row_kind == "production":
+                valid = bool(rows) and all(
+                    row.geography_text == contract.reporter
+                    and row.period_text in contract.query_contract.periods
+                    and observed(row.indicator_text) and observed(row.source_dataset_id)
+                    for row in rows
+                )
+            elif self.row_kind == "directory":
+                valid = bool(rows) and all(observed(row.source_record_id) and (observed(row.entity_name_ar) or observed(row.entity_name_en)) for row in rows)
+            else:
+                valid = bool(rows) and all(observed(row.source_record_id) and row.registry == self.source_id and (observed(row.standard_reference_text) or observed(row.product_or_certificate_reference_text)) for row in rows)
+        except (ValueError, TypeError, AttributeError, OverflowError):
+            valid = False
+        checks = (
+            QualityCheck("source_stage_reporter", "PASS" if identity_ok else "FAIL", "Source identity, stage and reporter match the query and configuration"),
+            QualityCheck("institutional_row_shape", "PASS" if valid else "FAIL", "Published row types and kind-specific identities are valid"),
+        )
+        return QualityReport(contract.source_id, contract.query_hash, contract.run_id,
+                             "PASS" if identity_ok and valid else "FAIL", checks)
+
+
 def default_registry() -> ConnectorRegistry:
     from .wits_trade import WitsTradeConnector
     from .un_comtrade import UnComtradeConnector
     from .baci_cepii import BaciCepiiConnector
     from .zatca_tariff import ZatcaTariffConnector
+    from .gastat import GastatConnector
+    from .ministry_of_industry import MinistryOfIndustryConnector
+    from .modon import ModonConnector
+    from .saso_catalogue import SasoCatalogueConnector
+    from .saber_registry import SaberRegistryConnector
 
     return ConnectorRegistry(
         {
@@ -596,5 +846,10 @@ def default_registry() -> ConnectorRegistry:
             "un_comtrade": UnComtradeConnector,
             "baci_cepii": BaciCepiiConnector,
             "zatca_tariff": ZatcaTariffConnector,
+            "gastat": GastatConnector,
+            "ministry_of_industry": MinistryOfIndustryConnector,
+            "modon": ModonConnector,
+            "saso_catalogue": SasoCatalogueConnector,
+            "saber_registry": SaberRegistryConnector,
         }
     )

@@ -9,6 +9,7 @@ acquisition configuration is loaded here with the same ``lru_cache`` pattern.
 from __future__ import annotations
 
 import re
+from datetime import date
 from functools import lru_cache
 from pathlib import Path
 from typing import Any
@@ -16,10 +17,18 @@ from typing import Any
 import yaml
 
 from ..config import PROJECT_ROOT
-from .contracts import AcquisitionConfigurationError, UNAVAILABLE
+from .contracts import AcquisitionConfigurationError, Stage, UNAVAILABLE
 
 ACQUISITION_SOURCES_PATH = PROJECT_ROOT / "config" / "acquisition_sources.v1.yaml"
-SOURCE_IDS = frozenset({"wits_trade", "un_comtrade", "baci_cepii", "zatca_tariff"})
+INSTITUTIONAL_SOURCE_STAGES = {
+    "gastat": Stage.AGGREGATE,
+    "ministry_of_industry": Stage.DIRECTORY,
+    "modon": Stage.DIRECTORY,
+    "saso_catalogue": Stage.REGISTRY,
+    "saber_registry": Stage.REGISTRY,
+}
+INSTITUTIONAL_SOURCE_IDS = frozenset(INSTITUTIONAL_SOURCE_STAGES)
+SOURCE_IDS = frozenset({"wits_trade", "un_comtrade", "baci_cepii", "zatca_tariff"}) | INSTITUTIONAL_SOURCE_IDS
 CREDENTIAL_PATTERN = re.compile(r"^[A-Z][A-Z0-9_]+$")
 NOMENCLATURE_PATTERN = re.compile(r"^[A-Za-z0-9]+$")
 ACCESS_CLASSES = frozenset(
@@ -32,6 +41,104 @@ EVIDENCE_CLASSES = frozenset({"A", "B", "C", "D", "E"})
 FORBIDDEN_KEYS = frozenset(
     {"years", "default_years", "max_requests", "default_max_requests"}
 )
+SOURCE_KEYS = frozenset({
+    "authority", "access_classification", "documentation_reference", "terms_reference",
+    "endpoint_templates", "parameters", "pagination", "nomenclature", "reporter_code",
+    "credential_env_var", "rate_limit", "license_capture_required", "default_evidence_class",
+    "default_reviewer_status", "expected_content_types", "user_agent", "recorded_on",
+})
+OBSERVED_FACT_FIELDS = (
+    "access_classification", "documentation_reference", "terms_reference",
+    "endpoint_templates.{stage}", "endpoint_templates.TERMS",
+    "parameters.product_all_token", "parameters.partner_world_token",
+    "parameters.reporter_token", "parameters.flow_tokens", "parameters.units",
+    "pagination.kind", "pagination.documentation_reference", "pagination.parameters",
+    "nomenclature", "credential_env_var", "rate_limit.documented_policy", "expected_content_types",
+)
+
+
+def _nonempty_string(value: Any) -> bool:
+    return isinstance(value, str) and bool(value)
+
+
+def _string_mapping(value: Any, *, nonempty_values: bool = False) -> bool:
+    return isinstance(value, dict) and all(
+        _nonempty_string(key) and isinstance(item, str) and (bool(item) or not nonempty_values)
+        for key, item in value.items()
+    )
+
+
+def _credential_name(value: Any) -> bool:
+    return value is None or (
+        isinstance(value, str) and value != UNAVAILABLE
+        and CREDENTIAL_PATTERN.fullmatch(value) is not None
+    )
+
+
+def _valid_fact(path: str, value: Any) -> bool:
+    """One set of observed-value predicates for S11 and institutional sources."""
+    if path == "access_classification":
+        return isinstance(value, str) and value in ACCESS_CLASSES
+    if path == "nomenclature":
+        return isinstance(value, str) and NOMENCLATURE_PATTERN.fullmatch(value) is not None
+    if path == "credential_env_var":
+        return _credential_name(value)
+    if path == "pagination.kind":
+        return isinstance(value, str) and value in PAGINATION_KINDS
+    if path == "parameters.flow_tokens":
+        return _string_mapping(value, nonempty_values=True)
+    if path == "pagination.parameters":
+        return _string_mapping(value)
+    if path == "parameters.units":
+        return isinstance(value, list) and bool(value) and all(
+            _string_mapping(unit) and bool(unit) for unit in value
+        )
+    if path == "expected_content_types":
+        return isinstance(value, list) and bool(value) and all(_nonempty_string(item) for item in value)
+    return _nonempty_string(value)
+
+
+def _fact_value(source: dict[str, Any], path: str) -> Any:
+    value: Any = source
+    for key in path.split("."):
+        value = value[key]
+    return value
+
+
+def observed_fact_values(source_id: str, source: dict[str, Any]) -> dict[str, Any]:
+    """Return the seventeen source facts; only institutional IDs have this phase."""
+    if source_id not in INSTITUTIONAL_SOURCE_IDS:
+        raise AcquisitionConfigurationError(f"No observation phase for source {source_id}")
+    stage = INSTITUTIONAL_SOURCE_STAGES[source_id].value
+    paths = [path.format(stage=stage) for path in OBSERVED_FACT_FIELDS]
+    return {path: _fact_value(source, path) for path in paths}
+
+
+def observation_state(source_id: str, source: dict[str, Any]) -> str:
+    """Derive the phase without confusing an observed null or mapping with absence."""
+    return "PRE_OBSERVATION" if all(
+        value == UNAVAILABLE for value in observed_fact_values(source_id, source).values()
+    ) else "OBSERVED"
+
+
+def configured_credential_env_var(source: dict[str, Any]) -> str | None:
+    """Single credential interpretation for acquisition and stored-evidence checks."""
+    value = source.get("credential_env_var")
+    if value in (None, "", UNAVAILABLE):
+        return None
+    if not _credential_name(value):
+        raise AcquisitionConfigurationError("credential_env_var invalid")
+    return value
+
+
+def _iso_date(value: Any) -> bool:
+    if not isinstance(value, str) or re.fullmatch(r"[0-9]{4}-[0-9]{2}-[0-9]{2}", value) is None:
+        return False
+    try:
+        date.fromisoformat(value)
+    except ValueError:
+        return False
+    return True
 
 
 def _is_url(value: str) -> bool:
@@ -60,15 +167,18 @@ def acquisition_sources_config() -> dict[str, Any]:
     return payload
 
 
-def _check_no_forbidden_keys(payload: dict[str, Any], path: str = "") -> None:
-    for key, value in payload.items():
-        current = f"{path}.{key}" if path else key
-        if key in FORBIDDEN_KEYS:
-            raise AcquisitionConfigurationError(
-                f"Forbidden key in acquisition config: {current}"
-            )
-        if isinstance(value, dict):
+def _check_no_forbidden_keys(payload: Any, path: str = "") -> None:
+    if isinstance(payload, dict):
+        for key, value in payload.items():
+            current = f"{path}.{key}" if path else str(key)
+            if key in FORBIDDEN_KEYS:
+                raise AcquisitionConfigurationError(
+                    f"Forbidden key in acquisition config: {current}"
+                )
             _check_no_forbidden_keys(value, current)
+    elif isinstance(payload, list):
+        for index, value in enumerate(payload):
+            _check_no_forbidden_keys(value, f"{path}[{index}]")
 
 
 def validate_acquisition_sources(payload: dict[str, Any]) -> None:
@@ -78,9 +188,9 @@ def validate_acquisition_sources(payload: dict[str, Any]) -> None:
     metadata = payload.get("metadata")
     if not isinstance(metadata, dict):
         raise AcquisitionConfigurationError("metadata must be a mapping")
-    if metadata.get("version") != "1.0.0":
+    if metadata.get("version") != "1.1.0":
         raise AcquisitionConfigurationError(
-            "metadata.version must be 1.0.0"
+            "metadata.version must be 1.1.0"
         )
 
     raw_store = payload.get("raw_store")
@@ -146,47 +256,15 @@ def _validate_source(
             f"sources.{source_id} must be a mapping"
         )
 
-    for required in (
-        "authority",
-        "access_classification",
-        "documentation_reference",
-        "terms_reference",
-        "endpoint_templates",
-        "parameters",
-        "pagination",
-        "nomenclature",
-        "reporter_code",
-        "credential_env_var",
-        "rate_limit",
-        "license_capture_required",
-        "default_evidence_class",
-        "default_reviewer_status",
-        "expected_content_types",
-        "user_agent",
-        "recorded_on",
-    ):
+    for required in sorted(SOURCE_KEYS):
         if required not in source:
             raise AcquisitionConfigurationError(
                 f"sources.{source_id}.{required} is required"
             )
 
+    institutional = source_id in INSTITUTIONAL_SOURCE_IDS
+    _validate_source_facts(source_id, source, institutional=institutional)
     access = source["access_classification"]
-    if access not in ACCESS_CLASSES:
-        raise AcquisitionConfigurationError(
-            f"sources.{source_id}.access_classification invalid"
-        )
-
-    nomenclature = source["nomenclature"]
-    if NOMENCLATURE_PATTERN.fullmatch(nomenclature) is None:
-        raise AcquisitionConfigurationError(
-            f"sources.{source_id}.nomenclature must match ^[A-Za-z0-9]+$"
-        )
-
-    credential = source["credential_env_var"]
-    if credential is not None and CREDENTIAL_PATTERN.fullmatch(credential) is None:
-        raise AcquisitionConfigurationError(
-            f"sources.{source_id}.credential_env_var invalid"
-        )
 
     evidence_class = source["default_evidence_class"]
     if evidence_class not in EVIDENCE_CLASSES:
@@ -221,10 +299,6 @@ def _validate_source(
         )
 
     rate_limit = source["rate_limit"]
-    if not isinstance(rate_limit, dict):
-        raise AcquisitionConfigurationError(
-            f"sources.{source_id}.rate_limit must be a mapping"
-        )
     min_interval = rate_limit.get("min_interval_seconds")
     documented = rate_limit.get("documented_policy")
     if not isinstance(min_interval, (int, float)) or min_interval <= 0:
@@ -246,23 +320,6 @@ def _validate_source(
             f"sources.{source_id}.rate_limit.timeout_seconds > 0"
         )
 
-    pagination = source["pagination"]
-    if not isinstance(pagination, dict):
-        raise AcquisitionConfigurationError(
-            f"sources.{source_id}.pagination must be a mapping"
-        )
-    kind = pagination.get("kind")
-    if kind not in PAGINATION_KINDS:
-        raise AcquisitionConfigurationError(
-            f"sources.{source_id}.pagination.kind invalid"
-        )
-
-    content_types = source["expected_content_types"]
-    if not isinstance(content_types, list) or not content_types:
-        raise AcquisitionConfigurationError(
-            f"sources.{source_id}.expected_content_types required"
-        )
-
     user_agent = source["user_agent"]
     if not isinstance(user_agent, str) or not user_agent:
         raise AcquisitionConfigurationError(
@@ -274,25 +331,46 @@ def _validate_source(
         raise AcquisitionConfigurationError(
             f"sources.{source_id}.recorded_on required"
         )
-
-    endpoints = source["endpoint_templates"]
-    if not isinstance(endpoints, dict):
-        raise AcquisitionConfigurationError(
-            f"sources.{source_id}.endpoint_templates must be a mapping"
-        )
-
-    parameters = source["parameters"]
-    if not isinstance(parameters, dict):
-        raise AcquisitionConfigurationError(
-            f"sources.{source_id}.parameters must be a mapping"
-        )
-    for token_key in (
-        "product_all_token",
-        "partner_world_token",
-        "reporter_token",
-        "flow_tokens",
+    if institutional and (
+        (recorded_on != UNAVAILABLE and not _iso_date(recorded_on))
+        or (observation_state(source_id, source) == "OBSERVED" and not _iso_date(recorded_on))
     ):
-        if token_key not in parameters:
-            raise AcquisitionConfigurationError(
-                f"sources.{source_id}.parameters.{token_key} required"
-            )
+        raise AcquisitionConfigurationError(
+            f"sources.{source_id}.recorded_on must be an ISO date once any fact is observed"
+        )
+
+def _validate_source_facts(
+    source_id: str, source: dict[str, Any], *, institutional: bool
+) -> None:
+    prefix = f"sources.{source_id}"
+    nested_keys = {
+        "parameters": {"product_all_token", "partner_world_token", "reporter_token", "flow_tokens"},
+        "pagination": {"kind", "documentation_reference", "parameters"},
+        "rate_limit": {"documented_policy", "min_interval_seconds", "max_attempts", "timeout_seconds"},
+    }
+    if institutional:
+        if set(source) != SOURCE_KEYS:
+            raise AcquisitionConfigurationError(f"{prefix} keys must be exactly {sorted(SOURCE_KEYS)}")
+        nested_keys["parameters"].add("units")
+        nested_keys["endpoint_templates"] = {INSTITUTIONAL_SOURCE_STAGES[source_id].value, "TERMS"}
+    else:
+        nested_keys["endpoint_templates"] = set()
+    for key, required in nested_keys.items():
+        value = source[key]
+        if not isinstance(value, dict):
+            raise AcquisitionConfigurationError(f"{prefix}.{key} must be a mapping")
+        if (institutional and set(value) != required) or not required <= set(value):
+            raise AcquisitionConfigurationError(f"{prefix}.{key} keys must include {sorted(required)}")
+
+    if institutional:
+        facts = observed_fact_values(source_id, source)
+    else:
+        paths = [path for path in OBSERVED_FACT_FIELDS
+                 if not path.startswith("endpoint_templates.") and path != "parameters.units"]
+        facts = {path: _fact_value(source, path) for path in paths}
+        facts.update({f"endpoint_templates.{key}": value for key, value in source["endpoint_templates"].items()})
+    for path, value in facts.items():
+        if institutional and value == UNAVAILABLE:
+            continue
+        if not _valid_fact(path, value):
+            raise AcquisitionConfigurationError(f"{prefix}.{path} invalid")

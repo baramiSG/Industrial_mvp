@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import hashlib
+import copy
 import json
 import shutil
 from pathlib import Path
@@ -13,11 +14,12 @@ import yaml
 
 from ior_mvp.acquisition.contracts import SourceContractRecord
 from ior_mvp.acquisition.raw_store import RawStore
-from ior_mvp.acquisition.source_config import acquisition_sources_config
+from ior_mvp.acquisition.source_config import acquisition_sources_config, configured_credential_env_var
 from ior_mvp.config import PROJECT_ROOT
 
 EXPECTED_SOURCE_IDS = frozenset(
-    {"wits_trade", "un_comtrade", "baci_cepii", "zatca_tariff"}
+    {"wits_trade", "un_comtrade", "baci_cepii", "zatca_tariff", "gastat",
+     "ministry_of_industry", "modon", "saso_catalogue", "saber_registry"}
 )
 
 
@@ -44,7 +46,7 @@ def stored_evidence_problems(raw_root: Path, config: dict[str, Any]) -> list[str
 
     deny = {name.lower() for name in config["offline_guard"]["header_denylist"]}
     allow = {name.lower() for name in config["offline_guard"]["header_allowlist"]}
-    cred = {source_id: sources[source_id].get("credential_env_var") for source_id in source_ids}
+    cred = {source_id: configured_credential_env_var(sources[source_id]) for source_id in source_ids}
 
     if not raw_root.exists():
         problems.append("raw store root missing")
@@ -262,6 +264,12 @@ def test_detector_meta_credential_absent_credential_present_true(tmp_path: Path)
 def test_detector_meta_credential_absent_credential_env_var_changed(tmp_path: Path) -> None:
     raw = _copy_raw_tree(tmp_path)
     config = _config()
+    # W1 permits only the exact missing-directory baseline until T7. Every
+    # additional problem below must still be caused by this credential mutation.
+    missing = set(config["sources"]) - {p.name for p in raw.iterdir() if p.is_dir()}
+    assert missing <= {"gastat", "ministry_of_industry", "modon", "saso_catalogue", "saber_registry"}
+    baseline = {f"sources without artifact or attempt record: {sorted(missing)}"} if missing else set()
+    assert set(stored_evidence_problems(raw, config)) == baseline
     attempt = next(
         p for p in raw.rglob("attempt.json") if _load_json(p).get("reason") == "CREDENTIAL_ABSENT"
     )
@@ -278,7 +286,38 @@ def test_detector_meta_credential_absent_credential_env_var_changed(tmp_path: Pa
         ),
         f"{attempt}: CREDENTIAL_ABSENT credential_env_var mismatch",
     }
-    assert set(problems) == expected
+    assert set(problems) == expected | baseline
+
+
+def test_detector_meta_sentinel_credential_in_stored_record_flagged(tmp_path: Path) -> None:
+    raw = _copy_raw_tree(tmp_path)
+    attempt = next((raw / "wits_trade").rglob("attempt.json"))
+    payload = _load_json(attempt)
+    payload["credential_env_var"] = "UNAVAILABLE"
+    attempt.write_text(json.dumps(payload), encoding="utf-8")
+    assert (
+        f"{attempt}: credential_env_var 'UNAVAILABLE' differs from configured None"
+        in stored_evidence_problems(raw, _config())
+    )
+
+
+def test_detector_sentinel_configured_source_is_uncredentialed(tmp_path: Path) -> None:
+    raw = _copy_raw_tree(tmp_path)
+    config = copy.deepcopy(_config())
+    config["sources"]["wits_trade"]["credential_env_var"] = "UNAVAILABLE"
+    missing = set(config["sources"]) - {p.name for p in raw.iterdir() if p.is_dir()}
+    assert missing <= {"gastat", "ministry_of_industry", "modon", "saso_catalogue", "saber_registry"}
+    baseline = {f"sources without artifact or attempt record: {sorted(missing)}"} if missing else set()
+    assert set(stored_evidence_problems(raw, config)) == baseline
+    attempt = next((raw / "wits_trade").rglob("attempt.json"))
+    payload = _load_json(attempt)
+    assert payload["credential_env_var"] is None
+    assert payload["credential_present"] is False
+    payload["reason"] = "CREDENTIAL_ABSENT"
+    attempt.write_text(json.dumps(payload), encoding="utf-8")
+    assert set(stored_evidence_problems(raw, config)) == baseline | {
+        f"{attempt}: CREDENTIAL_ABSENT on source without credential_env_var"
+    }
 
 
 def test_detector_meta_credential_absent_observed_response_non_null(tmp_path: Path) -> None:

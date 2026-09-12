@@ -3,28 +3,25 @@
 from __future__ import annotations
 
 import json
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Callable, Mapping, Sequence
 
-from .connectors.base import ConnectorRegistry, RequestBudget, default_registry
+from .connectors.base import ConnectorRegistry, RequestBudget
 from .contracts import (
     AcquisitionConfigurationError,
     AcquisitionUnavailable,
-    PRODUCT_SCOPE_ALL,
-    ProductScope,
     QueryContract,
     Stage,
     UNAVAILABLE,
     UnavailableReason,
-    new_run_id,
+    stage_spec,
 )
 from .coverage import not_attempted_coverage
 from .raw_store import RawStore
+from .kinds import KindRegistry, default_kind_registry
 from .snapshots import (
-    build_partner_snapshot,
-    build_tariff_snapshot,
-    build_universe_snapshot,
+    build_row_snapshot,
     write_snapshot,
 )
 from .transport import Transport
@@ -46,6 +43,7 @@ class PipelineDeps:
     run_id: str
     environ: Mapping[str, str]
     sleeper: Callable[[float], None]
+    kinds: KindRegistry = field(default_factory=default_kind_registry)
 
 
 @dataclass(frozen=True)
@@ -94,82 +92,8 @@ def plan_units(
     candidates: CandidateList | None,
     config: dict[str, Any],
 ) -> tuple[QueryContract, ...]:
-    source_cfg = config["sources"][source_id]
-    nomenclature = source_cfg["nomenclature"]
-    reporter = source_cfg["reporter_code"]
-    partner = source_cfg["parameters"].get("partner_world_token", "WLD")
-    units: list[QueryContract] = []
-
-    if stage == Stage.UNIVERSE:
-        for year in years:
-            for flow in flows:
-                units.append(
-                    QueryContract(
-                        source_id=source_id,
-                        stage=Stage.UNIVERSE,
-                        reporter=reporter,
-                        partner=partner,
-                        flow=flow,
-                        product_scope=ProductScope.ALL_HS6,
-                        product_codes=(PRODUCT_SCOPE_ALL,),
-                        nomenclature=nomenclature,
-                        periods=(str(year),),
-                    )
-                )
-    elif stage == Stage.PARTNERS:
-        if candidates is None:
-            raise AcquisitionConfigurationError(
-                "PARTNERS requires candidates"
-            )
-        for year in years:
-            for flow in flows:
-                for hs6 in candidates.hs6_codes:
-                    units.append(
-                        QueryContract(
-                            source_id=source_id,
-                            stage=Stage.PARTNERS,
-                            reporter=reporter,
-                            partner=partner,
-                            flow=flow,
-                            product_scope=ProductScope.EXPLICIT,
-                            product_codes=(hs6,),
-                            nomenclature=nomenclature,
-                            periods=(str(year),),
-                        )
-                    )
-    elif stage == Stage.TARIFF:
-        # DD-5: one contract for the whole published tariff tree. The tree is
-        # not period-scoped (its as-of date comes from retrieval), so `years`
-        # is ignored and the contract carries no period.
-        units.append(
-            QueryContract(
-                source_id=source_id,
-                stage=Stage.TARIFF,
-                reporter=reporter,
-                partner=partner,
-                flow=UNAVAILABLE,
-                product_scope=ProductScope.ALL_TARIFF_LINES,
-                product_codes=(PRODUCT_SCOPE_ALL,),
-                nomenclature=nomenclature,
-                periods=(),
-            )
-        )
-    elif stage == Stage.BULK:
-        for year in years:
-            units.append(
-                QueryContract(
-                    source_id=source_id,
-                    stage=Stage.BULK,
-                    reporter=reporter,
-                    partner=partner,
-                    flow=UNAVAILABLE,
-                    product_scope=ProductScope.NOT_APPLICABLE,
-                    product_codes=(),
-                    nomenclature=nomenclature,
-                    periods=(str(year),),
-                )
-            )
-    return tuple(units)
+    return stage_spec(stage).plan_units(
+        source_id=source_id, years=years, flows=flows, candidates=candidates, config=config)
 
 
 def plan_requests(
@@ -381,6 +305,55 @@ def acquire_baci(
     )
 
 
+def acquire_aggregates(
+    source_id: str,
+    *,
+    years: Sequence[int],
+    deps: PipelineDeps,
+    max_requests: int,
+) -> RunReport:
+    units = plan_units(
+        Stage.AGGREGATE, source_id=source_id, years=years, flows=(),
+        candidates=None, config=deps.config,
+    )
+    return _run_units(
+        deps, source_id=source_id, stage=Stage.AGGREGATE,
+        units=units, max_requests=max_requests,
+    )
+
+
+def acquire_directory(
+    source_id: str,
+    *,
+    deps: PipelineDeps,
+    max_requests: int,
+) -> RunReport:
+    units = plan_units(
+        Stage.DIRECTORY, source_id=source_id, years=(), flows=(),
+        candidates=None, config=deps.config,
+    )
+    return _run_units(
+        deps, source_id=source_id, stage=Stage.DIRECTORY,
+        units=units, max_requests=max_requests,
+    )
+
+
+def acquire_registry(
+    source_id: str,
+    *,
+    deps: PipelineDeps,
+    max_requests: int,
+) -> RunReport:
+    units = plan_units(
+        Stage.REGISTRY, source_id=source_id, years=(), flows=(),
+        candidates=None, config=deps.config,
+    )
+    return _run_units(
+        deps, source_id=source_id, stage=Stage.REGISTRY,
+        units=units, max_requests=max_requests,
+    )
+
+
 def build_snapshots(
     kind: str,
     deps: PipelineDeps,
@@ -389,7 +362,7 @@ def build_snapshots(
     data_root: Path | None = None,
     allow_test_double: bool = False,
 ) -> BuildReport:
-    kinds = ("universe", "tariff", "partners") if kind == "all" else (kind,)
+    kinds = deps.kinds.ids() if kind == "all" else (deps.kinds.get(kind).kind,)
     built: list[str] = []
     unavailable: list[tuple[str, str, str]] = []
     raw_only: list[str] = []
@@ -405,19 +378,15 @@ def build_snapshots(
                 continue
             if snap_kind not in kinds_for_source:
                 continue
-            builders = {
-                "universe": build_universe_snapshot,
-                "tariff": build_tariff_snapshot,
-                "partners": build_partner_snapshot,
-            }
             try:
-                record = builders[snap_kind](
-                    deps.store, deps.config, deps.registry, source_id=sid
+                record = build_row_snapshot(
+                    deps.store, deps.config, deps.registry, kind=snap_kind, source_id=sid, kinds=deps.kinds
                 )
                 path = write_snapshot(
                     record,
                     root,
                     allow_test_double=allow_test_double,
+                    kinds=deps.kinds,
                 )
                 built.append(str(path))
             except AcquisitionUnavailable as exc:

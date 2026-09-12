@@ -1,5 +1,5 @@
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
   effective_date: "2026-09-04"
   authority: "Methodology §3.2, §11, §11.3; Core 05 v2 §4-§6, §10-§11"
 
@@ -174,3 +174,168 @@ sources:
       - application/json
     user_agent: industrial-opportunity-resolution-mvp/0.2.0 (public-data acquisition; offline runtime)
     recorded_on: "2026-09-04"
+
+  gastat:
+    authority: GASTAT economic census and industrial surveys
+    access_classification: public_open
+    documentation_reference: https://www.stats.gov.sa/en/w/methodology-and-quality-report-for-the-annual-industrial-production-index-ipi-statistics-2025
+    terms_reference: https://stats.gov.sa/en/use-policy
+    endpoint_templates:
+      AGGREGATE: UNAVAILABLE
+      TERMS: https://stats.gov.sa/en/use-policy
+    parameters:
+      product_all_token: UNAVAILABLE
+      partner_world_token: UNAVAILABLE
+      reporter_token: UNAVAILABLE
+      flow_tokens: UNAVAILABLE
+      units: UNAVAILABLE
+    pagination:
+      kind: UNAVAILABLE
+      documentation_reference: UNAVAILABLE
+      parameters: UNAVAILABLE
+    nomenclature: UNAVAILABLE
+    reporter_code: SAU
+    credential_env_var: UNAVAILABLE
+    rate_limit:
+      documented_policy: UNAVAILABLE
+      min_interval_seconds: 2.0
+      max_attempts: 3
+      timeout_seconds: 60
+    license_capture_required: true
+    default_evidence_class: B
+    default_reviewer_status: unconfirmed_by_responsible_authority
+    expected_content_types: UNAVAILABLE
+    user_agent: industrial-opportunity-resolution-mvp/0.2.0 (public-data acquisition; offline runtime)
+    recorded_on: "2026-09-11"
+
+  ministry_of_industry:
+    authority: Ministry of Industry open data
+    access_classification: UNAVAILABLE
+    documentation_reference: UNAVAILABLE
+    terms_reference: UNAVAILABLE
+    endpoint_templates:
+      DIRECTORY: UNAVAILABLE
+      TERMS: UNAVAILABLE
+    parameters:
+      product_all_token: UNAVAILABLE
+      partner_world_token: UNAVAILABLE
+      reporter_token: UNAVAILABLE
+      flow_tokens: UNAVAILABLE
+      units: UNAVAILABLE
+    pagination:
+      kind: UNAVAILABLE
+      documentation_reference: UNAVAILABLE
+      parameters: UNAVAILABLE
+    nomenclature: UNAVAILABLE
+    reporter_code: SAU
+    credential_env_var: UNAVAILABLE
+    rate_limit:
+      documented_policy: UNAVAILABLE
+      min_interval_seconds: 2.0
+      max_attempts: 3
+      timeout_seconds: 60
+    license_capture_required: true
+    default_evidence_class: B
+    default_reviewer_status: unconfirmed_by_responsible_authority
+    expected_content_types: UNAVAILABLE
+    user_agent: industrial-opportunity-resolution-mvp/0.2.0 (public-data acquisition; offline runtime)
+    recorded_on: "2026-09-11"
+
+  modon:
+    authority: MODON directories
+    access_classification: UNAVAILABLE
+    documentation_reference: UNAVAILABLE
+    terms_reference: UNAVAILABLE
+    endpoint_templates:
+      DIRECTORY: UNAVAILABLE
+      TERMS: UNAVAILABLE
+    parameters:
+      product_all_token: UNAVAILABLE
+      partner_world_token: UNAVAILABLE
+      reporter_token: UNAVAILABLE
+      flow_tokens: UNAVAILABLE
+      units: UNAVAILABLE
+    pagination:
+      kind: UNAVAILABLE
+      documentation_reference: UNAVAILABLE
+      parameters: UNAVAILABLE
+    nomenclature: UNAVAILABLE
+    reporter_code: SAU
+    credential_env_var: UNAVAILABLE
+    rate_limit:
+      documented_policy: UNAVAILABLE
+      min_interval_seconds: 2.0
+      max_attempts: 3
+      timeout_seconds: 60
+    license_capture_required: true
+    default_evidence_class: C
+    default_reviewer_status: unconfirmed_by_responsible_authority
+    expected_content_types: UNAVAILABLE
+    user_agent: industrial-opportunity-resolution-mvp/0.2.0 (public-data acquisition; offline runtime)
+    recorded_on: "2026-09-11"
+
+  saso_catalogue:
+    authority: SASO catalogue
+    access_classification: UNAVAILABLE
+    documentation_reference: https://www.saso.gov.sa/en/mediacenter/Pages/open_data.aspx
+    terms_reference: https://www.saso.gov.sa/en/mediacenter/Pages/open_data.aspx
+    endpoint_templates:
+      REGISTRY: UNAVAILABLE
+      TERMS: https://www.saso.gov.sa/en/mediacenter/Pages/open_data.aspx
+    parameters:
+      product_all_token: UNAVAILABLE
+      partner_world_token: UNAVAILABLE
+      reporter_token: UNAVAILABLE
+      flow_tokens: UNAVAILABLE
+      units: UNAVAILABLE
+    pagination:
+      kind: UNAVAILABLE
+      documentation_reference: UNAVAILABLE
+      parameters: UNAVAILABLE
+    nomenclature: UNAVAILABLE
+    reporter_code: SAU
+    credential_env_var: UNAVAILABLE
+    rate_limit:
+      documented_policy: "Portal prohibits unreasonable or disproportionate infrastructure load; no numeric API rate verified. https://www.saso.gov.sa/en/acceptable_use_policy/Pages/default.aspx"
+      min_interval_seconds: 2.0
+      max_attempts: 3
+      timeout_seconds: 60
+    license_capture_required: true
+    default_evidence_class: B
+    default_reviewer_status: unconfirmed_by_responsible_authority
+    expected_content_types: UNAVAILABLE
+    user_agent: industrial-opportunity-resolution-mvp/0.2.0 (public-data acquisition; offline runtime)
+    recorded_on: "2026-09-11"
+
+  saber_registry:
+    authority: SABER registry
+    access_classification: public_registered
+    documentation_reference: https://saber.sa/home/aboutsaber
+    terms_reference: https://saber.sa/Home/Terms
+    endpoint_templates:
+      REGISTRY: UNAVAILABLE
+      TERMS: https://saber.sa/Home/Terms
+    parameters:
+      product_all_token: UNAVAILABLE
+      partner_world_token: UNAVAILABLE
+      reporter_token: UNAVAILABLE
+      flow_tokens: UNAVAILABLE
+      units: UNAVAILABLE
+    pagination:
+      kind: UNAVAILABLE
+      documentation_reference: UNAVAILABLE
+      parameters: UNAVAILABLE
+    nomenclature: UNAVAILABLE
+    reporter_code: SAU
+    credential_env_var: UNAVAILABLE
+    rate_limit:
+      documented_policy: "Platform terms prohibit excessive or unreasonable infrastructure load; no numeric API rate verified. https://saber.sa/Home/Terms"
+      min_interval_seconds: 2.0
+      max_attempts: 3
+      timeout_seconds: 60
+    license_capture_required: true
+    default_evidence_class: C
+    default_reviewer_status: unconfirmed_by_responsible_authority
+    expected_content_types: UNAVAILABLE
+    user_agent: industrial-opportunity-resolution-mvp/0.2.0 (public-data acquisition; offline runtime)
+    recorded_on: "2026-09-11"

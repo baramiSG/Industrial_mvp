@@ -62,6 +62,9 @@ def test_s08_snapshot_manifest_retains_live_and_historical_public_rows(
         "data/snapshots/universe/",
         "data/snapshots/tariff/",
         "data/snapshots/partners/",
+        "data/snapshots/production/",
+        "data/snapshots/directory/",
+        "data/snapshots/registry/",
     )
     extra = paths - frozen
     assert all(
@@ -89,6 +92,9 @@ def _partition_valid(paths: set[str]) -> bool:
         "data/snapshots/universe/",
         "data/snapshots/tariff/",
         "data/snapshots/partners/",
+        "data/snapshots/production/",
+        "data/snapshots/directory/",
+        "data/snapshots/registry/",
     )
     extra = paths - frozen
     return all(
@@ -106,6 +112,78 @@ def test_s11_snapshot_manifest_rejects_public_partition_leak() -> None:
     paths = {item["path"] for item in manifest["files"]}
     assert _partition_valid(paths)
     assert not _partition_valid(paths | {"data/snapshots/public/extra.json"})
+    for kind in ("production", "directory", "registry"):
+        assert _partition_valid(paths | {f"data/snapshots/{kind}/extra.json"})
+        assert not _partition_valid(paths | {f"data/snapshots/{kind}-other/extra.json"})
+    assert not _partition_valid(paths | {"data/snapshots/unknown/extra.json"})
+
+
+def test_s12a_core_v2_institutional_contracts() -> None:
+    from ior_mvp.acquisition.passports import ACQUIRED_SUPPORT_CODES
+    from ior_mvp.public_decision import SUPPORT_CODES
+
+    core_04 = (
+        PROJECT_ROOT / "docs" / "core" / "04_CANONICAL_DATA_MODEL.md"
+    ).read_text(encoding="utf-8")
+    core_05 = (
+        PROJECT_ROOT / "docs" / "core" / "05_DATA_SOURCES_AND_INGESTION.md"
+    ).read_text(encoding="utf-8")
+    trade = core_05.split("### 3.1 Trade and demand\n", 1)[1].split(
+        "### 3.2 Supply and capability\n", 1
+    )[0]
+    assert trade.splitlines().count(
+        "| GASTAT foreign trade and open data | official domestic aggregate anchor | "
+        "reconcile definitions and revisions | connector planned |"
+    ) == 1
+    assert "S12a" not in trade
+
+    supply = core_05.split("### 3.2 Supply and capability\n", 1)[1].split(
+        "### 3.3 Specifications and qualification\n", 1
+    )[0]
+    qualification = core_05.split(
+        "### 3.3 Specifications and qualification\n", 1
+    )[1].split("### 3.4 Economics\n", 1)[0]
+    assert [line for line in supply.splitlines() if line.startswith("|")] == [
+        "| Source | Use | Evidence class expectation |",
+        "|---|---|---|",
+        "| GASTAT economic census and industrial surveys | sector/establishment anchor | B/C until product-line reconciliation; connector implemented (S12a); availability and coverage recorded per run |",
+        "| Ministry of Industry open data | licences and activity | B/C; licence is not production; connector implemented (S12a); availability and coverage recorded per run |",
+        "| MODON directories | plant/entity discovery | C; connector implemented (S12a); availability and coverage recorded per run |",
+        "| Tadawul filings and annual reports | nameplate, expansion and financial context | C |",
+        "| EPDs and product sheets | process, range, standards and certifications | C |",
+        "| GPCA / sector associations | sector capacity context | B/C |",
+    ]
+    assert supply.count("connector implemented (S12a)") == 3
+    assert [line for line in qualification.splitlines() if line.startswith("|")] == [
+        "| Source | Use | Control |",
+        "|---|---|---|",
+        "| SASO catalogue | standard identity and scope | title/scope does not prove compliance; connector implemented (S12a); availability and coverage recorded per run |",
+        "| Purchased anchor standards | detailed requirement extraction | copyright and access controls |",
+        "| Etimad tenders and awards | real bilingual demand specifications | exact document/page span required |",
+        "| SABER registry | conformity evidence | registration does not prove every buyer qualification; connector implemented (S12a); availability and coverage recorded per run |",
+        "| Producer catalogues / certificates | published product envelope | confirm current edition and contradiction |",
+    ]
+    assert qualification.count("connector implemented (S12a)") == 2
+
+    acquisition = core_04.split("### Acquisition snapshots 1.0.0\n", 1)[1].split(
+        "### PublicSnapshot 2.1\n", 1
+    )[0]
+    for kind in (
+        "ProductionAggregateSnapshot",
+        "EstablishmentDirectorySnapshot",
+        "StandardConformityRegistrySnapshot",
+    ):
+        assert acquisition.count(f"`{kind}`") == 1
+    acquisition_note = core_04.split("§2.8 note:", 1)[1].split("\n\n", 1)[0]
+    institutional_codes = {
+        "DOMESTIC_PRODUCTION_AGGREGATE",
+        "ESTABLISHMENT_LICENCE_DIRECTORY",
+        "STANDARD_CONFORMITY_REGISTRY",
+    }
+    for code in institutional_codes:
+        assert acquisition_note.count(f"`{code}`") == 1
+    assert institutional_codes <= ACQUIRED_SUPPORT_CODES
+    assert institutional_codes.isdisjoint(SUPPORT_CODES)
 
 
 def test_s11_core_03_and_05_v2_markers_on_line_three() -> None:
@@ -139,14 +217,14 @@ def test_build_manifests_includes_acquisition_config_and_raw_files() -> None:
 
 def test_missing_snapshot_kinds_cited_in_known_limitations() -> None:
     from ior_mvp.acquisition.connectors.base import default_registry
-    from ior_mvp.acquisition.snapshots import SNAPSHOT_ROOTS
+    from ior_mvp.acquisition.snapshots import KIND_STAGE, SNAPSHOT_ROOTS
 
     kl_text = (PROJECT_ROOT / "docs" / "KNOWN_LIMITATIONS.md").read_text(
         encoding="utf-8"
     )
     registry = default_registry()
     raw_root = PROJECT_ROOT / "data" / "raw"
-    stage_for_kind = {"universe": "UNIVERSE", "tariff": "TARIFF", "partners": "PARTNERS"}
+    stage_for_kind = {kind: stage.value for kind, stage in KIND_STAGE.items()}
 
     for kind, rel_root in SNAPSHOT_ROOTS.items():
         snap_dir = PROJECT_ROOT / rel_root

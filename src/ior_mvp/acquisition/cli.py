@@ -14,8 +14,11 @@ from .connectors.base import default_registry
 from .contracts import OfflineGuardViolation, canonical_dumps
 from .pipeline import (
     PipelineDeps,
+    acquire_aggregates,
     acquire_baci,
+    acquire_directory,
     acquire_partners,
+    acquire_registry,
     acquire_tariff,
     acquire_universe,
     build_snapshots,
@@ -23,7 +26,7 @@ from .pipeline import (
 )
 from .raw_store import RawStore
 from .source_config import acquisition_sources_config
-from .transport import UrllibTransport
+from .transport import UrllibTransport, assert_live_permitted
 
 
 def _parse_years(value: str) -> tuple[int, ...]:
@@ -40,13 +43,14 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="ior_mvp.acquisition")
     sub = parser.add_subparsers(dest="command", required=True)
 
-    def add_acquire(name: str, *, years: bool) -> argparse.ArgumentParser:
+    def add_acquire(name: str, *, years: bool, source_required: bool = False, flows: bool = True) -> argparse.ArgumentParser:
         cmd = sub.add_parser(name)
-        cmd.add_argument("--source", required=False)
+        cmd.add_argument("--source", required=source_required)
         if years:
             cmd.add_argument("--years", required=True, default=None)
         cmd.add_argument("--max-requests", type=int, required=True, default=None)
-        cmd.add_argument("--flows", default="imports,exports")
+        if flows:
+            cmd.add_argument("--flows", default="imports,exports")
         cmd.add_argument("--data-root", default=None)
         return cmd
 
@@ -56,6 +60,9 @@ def build_parser() -> argparse.ArgumentParser:
     # DD-19: the tariff tree is one period-free contract; no --years at all.
     add_acquire("acquire-tariff", years=False)
     add_acquire("acquire-baci", years=True)
+    add_acquire("acquire-aggregates", years=True, source_required=True, flows=False)
+    add_acquire("acquire-directory", years=False, source_required=True, flows=False)
+    add_acquire("acquire-registry", years=False, source_required=True, flows=False)
 
     build_cmd = sub.add_parser("build-snapshots")
     build_cmd.add_argument("--kind", default="all")
@@ -74,6 +81,9 @@ def _data_root(args: argparse.Namespace) -> Path:
 def _deps(args: argparse.Namespace, *, explicit_live: bool) -> PipelineDeps:
     acquisition_sources_config.cache_clear()
     config = acquisition_sources_config()
+    offline = config["offline_guard"]
+    if explicit_live:
+        assert_live_permitted(explicit_live, os.environ, offline["live_env_var"])
     raw_cfg = config["raw_store"]
     data_root = _data_root(args)
     store = RawStore(
@@ -81,7 +91,6 @@ def _deps(args: argparse.Namespace, *, explicit_live: bool) -> PipelineDeps:
         max_artifact_bytes=raw_cfg["max_artifact_bytes_compressed"],
         max_store_bytes=raw_cfg["max_store_bytes_compressed"],
     )
-    offline = config["offline_guard"]
     transport = UrllibTransport(
         user_agent=offline["user_agent"],
         timeout_seconds=60,
@@ -110,8 +119,11 @@ def main(argv: list[str] | None = None) -> None:
         if args.max_requests is None:
             print("error: --max-requests is required", file=sys.stderr)
             sys.exit(2)
-        if args.command != "acquire-tariff" and getattr(args, "years", None) is None:
+        if args.command not in {"acquire-tariff", "acquire-directory", "acquire-registry"} and getattr(args, "years", None) is None:
             print("error: --years is required", file=sys.stderr)
+            sys.exit(2)
+        if args.command in {"acquire-universe", "acquire-partners"} and not args.source:
+            print("error: --source is required", file=sys.stderr)
             sys.exit(2)
     try:
         deps = _deps(args, explicit_live=args.command.startswith("acquire-"))
@@ -121,9 +133,6 @@ def main(argv: list[str] | None = None) -> None:
 
     try:
         if args.command == "acquire-universe":
-            if not args.source:
-                print("error: --source is required", file=sys.stderr)
-                sys.exit(2)
             years = _parse_years(args.years)
             flows = tuple(args.flows.split(","))
             report = acquire_universe(
@@ -137,9 +146,6 @@ def main(argv: list[str] | None = None) -> None:
             sys.exit(report.exit_code)
 
         if args.command == "acquire-partners":
-            if not args.source:
-                print("error: --source is required", file=sys.stderr)
-                sys.exit(2)
             years = _parse_years(args.years)
             flows = tuple(args.flows.split(","))
             candidates = load_candidate_list(Path(args.candidates))
@@ -171,6 +177,24 @@ def main(argv: list[str] | None = None) -> None:
                 deps=deps,
                 max_requests=args.max_requests,
             )
+            print(canonical_dumps(report.__dict__))
+            sys.exit(report.exit_code)
+
+        if args.command == "acquire-aggregates":
+            report = acquire_aggregates(
+                args.source, years=_parse_years(args.years),
+                deps=deps, max_requests=args.max_requests,
+            )
+            print(canonical_dumps(report.__dict__))
+            sys.exit(report.exit_code)
+
+        if args.command == "acquire-directory":
+            report = acquire_directory(args.source, deps=deps, max_requests=args.max_requests)
+            print(canonical_dumps(report.__dict__))
+            sys.exit(report.exit_code)
+
+        if args.command == "acquire-registry":
+            report = acquire_registry(args.source, deps=deps, max_requests=args.max_requests)
             print(canonical_dumps(report.__dict__))
             sys.exit(report.exit_code)
 

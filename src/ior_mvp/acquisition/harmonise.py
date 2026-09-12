@@ -3,10 +3,67 @@
 from __future__ import annotations
 
 from typing import Any, Mapping
+from dataclasses import fields
+from math import isfinite
 
-from .contracts import UNAVAILABLE, TariffLine, TradeObservation
+from .contracts import UNAVAILABLE, DirectoryRow, ProductionObservation, RegistryRow, TariffLine, TradeObservation
 
 PIPELINE_VERSION = "1.0.0"
+
+
+def _published_fields(row: Mapping[str, Any], field_map: Mapping[str, str],
+                      row_type: type, source_evidence_id: str) -> dict[str, Any]:
+    result: dict[str, Any] = {}
+    for field in fields(row_type):
+        if field.name in {"value", "estimation_flags", "source_evidence_id"}:
+            continue
+        value = row.get(field_map.get(field.name, field.name))
+        if value is None:
+            value = UNAVAILABLE
+        if not isinstance(value, str):
+            raise ValueError(f"Published text must be a string: {field.name}")
+        result[field.name] = value
+    result["source_evidence_id"] = source_evidence_id
+    return result
+
+
+def production_observation_from_row(row: Mapping[str, Any], *, field_map: Mapping[str, str],
+                                    source_evidence_id: str) -> ProductionObservation:
+    """Preserve published production fields without conversion or HS mapping."""
+    values = _published_fields(row, field_map, ProductionObservation, source_evidence_id)
+    number = row.get(field_map.get("value", "value"))
+    if number is None:
+        try:
+            number = float(values["value_original_text"])
+        except ValueError:
+            number = None
+    if number is not None:
+        if isinstance(number, bool) or not isinstance(number, (str, int, float)):
+            raise ValueError("Production value must be an observed number")
+        number = float(number)
+        if not isfinite(number):
+            raise ValueError("Production value must be finite")
+    flags = row.get(field_map.get("estimation_flags", "estimation_flags"), ())
+    if flags is None:
+        flags = ()
+    if not isinstance(flags, (list, tuple)) or any(not isinstance(flag, str) for flag in flags):
+        raise ValueError("Estimation flags must be published strings")
+    return ProductionObservation(**values, value=number, estimation_flags=tuple(flags))
+
+
+def directory_row_from_row(row: Mapping[str, Any], *, field_map: Mapping[str, str],
+                           source_evidence_id: str) -> DirectoryRow:
+    """Retain organizational directory text; never infer numeric capacity."""
+    return DirectoryRow(**_published_fields(row, field_map, DirectoryRow, source_evidence_id))
+
+
+def registry_row_from_row(row: Mapping[str, Any], *, field_map: Mapping[str, str],
+                          source_evidence_id: str) -> RegistryRow:
+    """Retain registry metadata without asserting compliance or qualification."""
+    values = _published_fields(row, field_map, RegistryRow, source_evidence_id)
+    if values["registry"] not in {"saso_catalogue", "saber_registry"}:
+        raise ValueError("Unknown institutional registry")
+    return RegistryRow(**values)
 
 
 def unit_value_analysis_enabled(obs: TradeObservation) -> bool:

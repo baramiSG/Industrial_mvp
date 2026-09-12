@@ -250,6 +250,17 @@ The complete S05 local harness run `20260902T033607Z-17501` observed the associa
 
 - **S11-LOCAL:** `.workflow/slices/S11-acquisition-trade-tariff/test_evidence.md` and `implementation_log.md`.
 
+## M. Milestone v0.3.0 — S12a institutional framework
+
+| ID | Observable acceptance | Implementation and local execution evidence | Status | Slice |
+|---|---|---|---|---|
+| V3-B3-institutional | Acquire institutional aggregates, directories and registry metadata where obtainable; otherwise retain honest per-source attempts. | Nine-source connector framework implemented; all five institutional sources have zero-request ENDPOINT_UNVERIFIED / INCOMPLETE attempts (KL-47–51), no live rows or snapshots. | BLOCKED | S12a |
+| V3-D7-inputs | Public production/retained-flow inputs usable by R5 where published. | GASTAT 2025 IPI documentation is not relabelled physical production or retained-flow evidence; no institutional rows acquired, and engine projection remains S13/S14 (KL-45/47). | BLOCKED | S12a |
+| V3-FRAMEWORK-openness | A test-only kind plugs into generic build, validation, write, load and reconstruction without per-kind dispatch edits. | `tests/test_acquisition_kind_registry.py`, `test_acquisition_stage_specs.py`, `test_acquisition_normalization_status.py`; injected registry/cache isolation and S11 compatibility proofs. | TESTED | S12a |
+| V3-RECON-institutional | Three institutional kinds reconstruct from selected stored evidence with provenance, exclusions and tamper refusal. | `tests/test_acquisition_institutional_snapshots.py`, `test_acquisition_institutional_connectors.py`, `test_acquisition_reconstruction.py`; test-only parsers and temporary evidence. Existing S11 partner reconstruction remains 1 snapshot / 4 artifacts; no live institutional reconstruction claimed. | TESTED | S12a |
+
+S12a evidence: `.workflow/slices/S12a-acquisition-framework-institutional-sources/implementation_log.md` and `test_evidence.md`; ADR-016; KL-47–51. T12 full pytest: 1755 passed, one existing warning; integrity/reconstruction/smoke and local make ci pass, including 118 functional + 4 visual browser nodes. Exactly one manifest generation retained all S11/frozen rows. This is implementation evidence, not delivery/merge or live-data availability; session implementation review remains pending. Historical S11 §L TESTED rows remain unchanged. S12b documents and S12c entity IDs are separate approved children, not delivered here.
+
 ## Branch and release-state rules
 
 1. No row on the S05 implementation branch is promoted above `TESTED`.

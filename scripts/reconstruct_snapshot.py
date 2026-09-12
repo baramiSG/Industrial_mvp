@@ -46,7 +46,8 @@ def main() -> None:
 
     from ior_mvp.acquisition.connectors.base import default_registry
     from ior_mvp.acquisition.raw_store import RawStore
-    from ior_mvp.acquisition.snapshots import SNAPSHOT_ROOTS, reconstruct
+    from ior_mvp.acquisition.snapshots import reconstruct
+    from ior_mvp.acquisition.kinds import default_kind_registry
     from ior_mvp.acquisition.source_config import acquisition_sources_config
 
     parser = argparse.ArgumentParser()
@@ -58,7 +59,7 @@ def main() -> None:
 
     data_root = args.data_root
     snapshots: list[Path] = []
-    for kind, rel in SNAPSHOT_ROOTS.items():
+    for kind, rel in default_kind_registry().roots().items():
         kind_dir = data_root / rel.replace("data/", "")
         if kind_dir.exists():
             snapshots.extend(sorted(kind_dir.glob("*.json")))
