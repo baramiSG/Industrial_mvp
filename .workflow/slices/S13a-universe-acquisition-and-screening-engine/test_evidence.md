@@ -894,3 +894,56 @@ AUTONOMOUS_WORKFLOW_UNCHANGED_PASS
 ```
 
 Both S13 slice-record folders are excluded from this identity.
+
+## OD-17 CI-F-02 RED/GREEN evidence
+
+```text
+HOSTED_PYTHON_3_14_RED run=34705344246
+FAILED test_detector_meta_wrong_source_partition
+1 failed, 2196 passed, 1 warning in 35.85s
+
+EXPLICIT_UN_COMTRADE_PRE_FIX_GREEN 1 passed in 0.11s
+LOCAL_3_12_OLD_TEST_PRE_FIX_GREEN 1 passed in 0.08s
+FOCUSED_GREEN 2 passed in 0.16s
+MODULE_GREEN_3_12 93 passed in 1.52s
+MODULE_GREEN_3_14 93 passed in 1.48s
+```
+
+Order-independence proof from `/tmp/od17_order_proof.py`:
+
+```text
+PARTITION_ORDER_PROOF_PASS producer_unicoil producer_unicoil/70151205e3a47dcdeb36cffb2fd41134ea6e3a98f17749681b47212988c6758e/20260912T053955Z/page-0001.contract.json
+PARTITION_ORDER_PROOF_PASS saso_documents saso_documents/18648a57dbe3d071687e9c47ee0ee47415e30aedbbd20188a3d3d7cb6a26da91/20260912T053622Z/page-0001.contract.json
+PARTITION_ORDER_PROOF_PASS un_comtrade un_comtrade/37d131466dff0ad656675f21603dfbd2d2fe1b711602a1fd2b147634ff0ab830/20260912T141128Z/page-0001.contract.json
+PARTITION_ORDER_PROOF_PASS wits_trade wits_trade/508058a794887199ee60a843e6ba54e66a446e52fde1eb99df65e964324827c6/20260903T210941Z/page-0001.contract.json
+PARTITION_ORDER_PROOF_PASS zatca_tariff zatca_tariff/2313f849d81350144819375ec3500af867f452ad2ca58f9680b2fe28fc95ee5c/20260903T212901Z/page-0001.contract.json
+PARTITION_ORDER_PROOF_PASS zatca_tariff [reversed]
+PARTITION_ORDER_PROOF_PASS wits_trade [reversed]
+PARTITION_ORDER_PROOF_PASS un_comtrade [reversed]
+PARTITION_ORDER_PROOF_PASS saso_documents [reversed]
+PARTITION_ORDER_PROOF_PASS producer_unicoil [reversed]
+REVERSED_ITERATION_ORDER_PASS 5
+```
+
+Final OD-17 gates and identity:
+
+```text
+FINAL_PYTEST 2198 passed, 1 warning in 26.27s
+INTEGRITY PASS
+SMOKE PASS
+RECONSTRUCTION PASS (2 snapshots, 20 artifacts)
+DOCUMENT RECONSTRUCTION PASS (12 records, 12 artifacts)
+ENTITY RECONSTRUCTION PASS (1 artifacts, 38 links)
+SCREENING RECONSTRUCTION PASS (1 snapshots)
+GOVERNED_ARTIFACTS_UNCHANGED_PASS
+MAKE_CI_EXIT 0
+MAKE_CI_PYTEST 2198 passed, 1 warning in 25.49s
+MAKE_CI_BROWSER_FUNCTIONAL 118 passed, 4 deselected in 129.94s
+MAKE_CI_BROWSER_VISUAL 4 passed, 118 deselected in 25.47s
+IAC6_BASE c69e17fabb9c7a351699ae58abab989024e8e7a5
+IAC6_IDENTITY f7af7f75902e0fee75189906575103dcf83ce7ea8ba81bff77c01e4bed630cfc
+IAC6_FILE_COUNT 1
+IAC6_PATHS tests/test_acquisition_stored_artifacts.py
+INDEX_EMPTY_PASS
+AUTONOMOUS_WORKFLOW_UNCHANGED_PASS
+```

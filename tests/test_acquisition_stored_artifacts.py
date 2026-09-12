@@ -210,7 +210,7 @@ def _config() -> dict[str, Any]:
 
 def test_detector_meta_denylisted_header_in_attempt_observed_response(tmp_path: Path) -> None:
     raw = _copy_raw_tree(tmp_path)
-    attempt = next(raw.rglob("attempt.json"))
+    attempt = sorted(raw.rglob("attempt.json"))[0]
     payload = _load_json(attempt)
     if payload.get("observed_response") is None:
         payload["observed_response"] = {
@@ -231,7 +231,7 @@ def test_detector_meta_denylisted_header_in_attempt_observed_response(tmp_path: 
 
 def test_detector_meta_denylisted_header_in_page_contract(tmp_path: Path) -> None:
     raw = _copy_raw_tree(tmp_path)
-    contract = next(raw.rglob("page-*.contract.json"))
+    contract = sorted(raw.rglob("page-*.contract.json"))[0]
     payload = _load_json(contract)
     payload["response_headers_subset"] = [
         {"name": "authorization", "value": "Bearer secret"},
@@ -244,7 +244,7 @@ def test_detector_meta_denylisted_header_in_page_contract(tmp_path: Path) -> Non
 
 def test_detector_meta_non_allowlisted_header(tmp_path: Path) -> None:
     raw = _copy_raw_tree(tmp_path)
-    contract = next(raw.rglob("page-*.contract.json"))
+    contract = sorted(raw.rglob("page-*.contract.json"))[0]
     payload = _load_json(contract)
     payload["response_headers_subset"] = [
         {"name": "content-type", "value": "text/html"},
@@ -257,9 +257,9 @@ def test_detector_meta_non_allowlisted_header(tmp_path: Path) -> None:
 
 def test_detector_meta_credential_absent_credential_present_true(tmp_path: Path) -> None:
     raw = _copy_raw_tree(tmp_path)
-    attempt = next(
+    attempt = sorted(
         p for p in raw.rglob("attempt.json") if _load_json(p).get("reason") == "CREDENTIAL_ABSENT"
-    )
+    )[0]
     payload = _load_json(attempt)
     payload["credential_present"] = True
     attempt.write_text(json.dumps(payload, indent=2), encoding="utf-8")
@@ -279,9 +279,9 @@ def test_detector_meta_credential_absent_credential_env_var_changed(tmp_path: Pa
     }
     baseline = {f"sources without artifact or attempt record: {sorted(missing)}"} if missing else set()
     assert set(stored_evidence_problems(raw, config)) == baseline
-    attempt = next(
+    attempt = sorted(
         p for p in raw.rglob("attempt.json") if _load_json(p).get("reason") == "CREDENTIAL_ABSENT"
-    )
+    )[0]
     payload = _load_json(attempt)
     sid = payload["source_id"]
     configured = config["sources"][sid]["credential_env_var"]
@@ -300,7 +300,7 @@ def test_detector_meta_credential_absent_credential_env_var_changed(tmp_path: Pa
 
 def test_detector_meta_sentinel_credential_in_stored_record_flagged(tmp_path: Path) -> None:
     raw = _copy_raw_tree(tmp_path)
-    attempt = next((raw / "wits_trade").rglob("attempt.json"))
+    attempt = sorted((raw / "wits_trade").rglob("attempt.json"))[0]
     payload = _load_json(attempt)
     payload["credential_env_var"] = "UNAVAILABLE"
     attempt.write_text(json.dumps(payload), encoding="utf-8")
@@ -321,7 +321,7 @@ def test_detector_sentinel_configured_source_is_uncredentialed(tmp_path: Path) -
     }
     baseline = {f"sources without artifact or attempt record: {sorted(missing)}"} if missing else set()
     assert set(stored_evidence_problems(raw, config)) == baseline
-    attempt = next((raw / "wits_trade").rglob("attempt.json"))
+    attempt = sorted((raw / "wits_trade").rglob("attempt.json"))[0]
     payload = _load_json(attempt)
     assert payload["credential_env_var"] is None
     assert payload["credential_present"] is False
@@ -334,9 +334,9 @@ def test_detector_sentinel_configured_source_is_uncredentialed(tmp_path: Path) -
 
 def test_detector_meta_credential_absent_observed_response_non_null(tmp_path: Path) -> None:
     raw = _copy_raw_tree(tmp_path)
-    attempt = next(
+    attempt = sorted(
         p for p in raw.rglob("attempt.json") if _load_json(p).get("reason") == "CREDENTIAL_ABSENT"
-    )
+    )[0]
     payload = _load_json(attempt)
     payload["observed_response"] = {"http_status": 401, "headers_subset": []}
     attempt.write_text(json.dumps(payload, indent=2), encoding="utf-8")
@@ -346,9 +346,9 @@ def test_detector_meta_credential_absent_observed_response_non_null(tmp_path: Pa
 
 def test_detector_meta_credential_absent_coverage_requests_made(tmp_path: Path) -> None:
     raw = _copy_raw_tree(tmp_path)
-    attempt = next(
+    attempt = sorted(
         p for p in raw.rglob("attempt.json") if _load_json(p).get("reason") == "CREDENTIAL_ABSENT"
-    )
+    )[0]
     payload = _load_json(attempt)
     payload["coverage"]["requests_made"] = 1
     attempt.write_text(json.dumps(payload, indent=2), encoding="utf-8")
@@ -361,9 +361,9 @@ def test_detector_meta_credential_absent_coverage_requests_made(tmp_path: Path) 
 
 def test_detector_meta_credential_absent_sibling_coverage_mismatch(tmp_path: Path) -> None:
     raw = _copy_raw_tree(tmp_path)
-    attempt = next(
+    attempt = sorted(
         p for p in raw.rglob("attempt.json") if _load_json(p).get("reason") == "CREDENTIAL_ABSENT"
-    )
+    )[0]
     sibling = attempt.parent / "coverage.json"
     sibling_payload = _load_json(sibling)
     sibling_payload["pages_fetched"] = 99
@@ -374,9 +374,9 @@ def test_detector_meta_credential_absent_sibling_coverage_mismatch(tmp_path: Pat
 
 def test_detector_meta_credential_absent_page_artifact_present(tmp_path: Path) -> None:
     raw = _copy_raw_tree(tmp_path)
-    attempt = next(
+    attempt = sorted(
         p for p in raw.rglob("attempt.json") if _load_json(p).get("reason") == "CREDENTIAL_ABSENT"
-    )
+    )[0]
     fake_page = attempt.parent / "page-0001.contract.json"
     fake_page.write_text(json.dumps({"source_id": "un_comtrade"}), encoding="utf-8")
     problems = stored_evidence_problems(raw, _config())
@@ -399,7 +399,7 @@ def test_detector_meta_missing_source_directory(tmp_path: Path) -> None:
 
 def test_detector_meta_test_double_access_classification(tmp_path: Path) -> None:
     raw = _copy_raw_tree(tmp_path)
-    contract = next(raw.rglob("page-*.contract.json"))
+    contract = sorted(raw.rglob("page-*.contract.json"))[0]
     payload = _load_json(contract)
     payload["access_classification"] = "test_double"
     contract.write_text(json.dumps(payload, indent=2), encoding="utf-8")
@@ -409,17 +409,42 @@ def test_detector_meta_test_double_access_classification(tmp_path: Path) -> None
 
 def test_detector_meta_wrong_source_partition(tmp_path: Path) -> None:
     raw = _copy_raw_tree(tmp_path)
-    contract = next(raw.rglob("page-*.contract.json"))
+    contract = sorted(raw.rglob("page-*.contract.json"))[0]
     payload = _load_json(contract)
-    payload["source_id"] = "un_comtrade"
+    partition = contract.relative_to(raw).parts[0]
+    payload["source_id"] = [
+        source_id
+        for source_id in sorted(EXPECTED_SOURCE_IDS)
+        if source_id != partition
+    ][0]
     contract.write_text(json.dumps(payload, indent=2), encoding="utf-8")
     problems = stored_evidence_problems(raw, _config())
     assert any("outside partition" in problem for problem in problems)
 
 
+def test_detector_un_comtrade_partition_explicit(tmp_path: Path) -> None:
+    raw = _copy_raw_tree(tmp_path)
+    contract = sorted(
+        (raw / "un_comtrade").rglob("page-*.contract.json")
+    )[0]
+    payload = _load_json(contract)
+    assert payload["source_id"] == "un_comtrade"
+    assert not any(
+        "outside partition" in problem
+        for problem in stored_evidence_problems(raw, _config())
+    )
+
+    payload["source_id"] = "wits_trade"
+    contract.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+    assert any(
+        "outside partition 'un_comtrade'" in problem
+        for problem in stored_evidence_problems(raw, _config())
+    )
+
+
 def test_detector_meta_coverage_json_wrong_depth(tmp_path: Path) -> None:
     raw = _copy_raw_tree(tmp_path)
-    coverage = next(raw.rglob("coverage.json"))
+    coverage = sorted(raw.rglob("coverage.json"))[0]
     nested = coverage.parent / "nested" / "coverage.json"
     nested.parent.mkdir()
     nested.write_text(coverage.read_text(encoding="utf-8"), encoding="utf-8")

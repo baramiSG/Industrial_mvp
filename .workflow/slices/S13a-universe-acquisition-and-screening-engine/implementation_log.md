@@ -1262,3 +1262,54 @@ The temporary checkout was then deleted.
   because the required unstaged deletions remain named in the index; the
   approved rsync working-tree copy passed. The tree remains uncommitted and
   unstaged. Implementer self-review is not independent approval.
+
+## OD-17 Python 3.14 test-order correction
+
+Owner decision OD-17 classifies CI-F-02 as a pre-existing order-dependent test,
+not a detector defect. This round changes only
+`tests/test_acquisition_stored_artifacts.py`; no network, `.env`, data,
+configuration, Core, manifest or authority operation occurred.
+
+- Hosted RED: Python 3.14 run `34705344246` failed
+  `test_detector_meta_wrong_source_partition` because its unsorted first
+  contract was already in the `un_comtrade` partition.
+- The new explicit `un_comtrade` regression was GREEN before the selection
+  fix (`1 passed in 0.11s`): unchanged `source_id=un_comtrade` emits no
+  partition problem, while mutation to `wits_trade` emits `outside partition`.
+  This confirms the detector behavior was already correct.
+- Local pre-fix baseline for the old test was GREEN under Python 3.12
+  (`1 passed in 0.08s`), demonstrating interpreter/filesystem-order
+  sensitivity rather than reliable coverage.
+- GREEN correction: the wrong source is derived as a configured source unequal
+  to the selected contract's partition; all raw-tree first selections are
+  `sorted(...)[0]`. Focused tests passed `2 passed in 0.16s`; the module passed
+  `93 passed in 1.52s`.
+- A `/tmp` proof exercised the sorted-first contract in all five populated
+  page-contract partitions and with `Path.rglob` reversed: all ten checks
+  passed and `REVERSED_ITERATION_ORDER_PASS 5`.
+- Cached Python 3.14 was available; the complete module passed
+  `93 passed in 1.48s` under an isolated offline uv environment.
+
+No KL row is added: the order dependence was removed from the test and does
+not remain a product limitation.
+
+## OD-17 muhasib self-audit
+
+- Actual delta excluding the two S13 slice-record folders is exactly one file:
+  `tests/test_acquisition_stored_artifacts.py`.
+- The original hosted Python 3.14 failure is preserved as RED evidence. The
+  explicit regression proves both detector outcomes without changing the
+  detector or weakening the `outside partition` assertion.
+- Every raw-tree first selection in the module is now sorted; the dedicated
+  `/tmp` proof passed all five partitions in normal and reversed order, and
+  the full module passed on cached Python 3.14.
+- Full pytest, integrity, smoke, all four reconstruction lines and `make ci`
+  passed. Data, config, Core, authority and manifest paths are byte-identical
+  to base; no manifest generator ran.
+- No network, `.env`, credential, git index mutation or `.autonomous-workflow/`
+  edit occurred. The tree remains uncommitted and unstaged.
+- Candidate identity is
+  `f7af7f75902e0fee75189906575103dcf83ce7ea8ba81bff77c01e4bed630cfc`,
+  one file, base `c69e17fabb9c7a351699ae58abab989024e8e7a5`.
+- Stop conditions: none. Implementer self-review is not approval; reviewer-grok
+  round 4 remains required.
