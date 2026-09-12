@@ -550,3 +550,32 @@ Fable review of candidate `94eb2f4e…` found two defects. Under OD-14, slot 5 i
 - **A08:** DD-2's `{}` token shorthand has an implementation carve-out: `_document_url_tokens` returns the already validated `document_url` from the contract, and BaseConnector permits that reserved overlap only for `Stage.DOCUMENT` before the same contract parameter is applied. This preserves fail-closed URL validation while leaving every other stage's reserved-name rule unchanged.
 - **A09:** the CID test does not pin its third Arabic-only line; repository-loader renamed-file/wrong-partition negatives and a two-prior-run supersession test are also absent. Existing implementation paths and stored superseded lists were independently verified; these are accepted additional-test opportunities.
 - **A10:** the two successful public document sources retain the conservative hashed `credential_env_var: UNAVAILABLE` sentinel despite unauthenticated HTTP 200 observations. Recording `null` would require a later Manifest §7.3 authority change and is not authorized in OD-14.
+
+## ADR-018 — Deterministic bilingual entity resolution (S12c)
+
+**Status:** Implementation evidence under owner decision OD-9 and approved immutable plan `plan-1-dispatch1.json` (SHA-256 `6370547fc85f7124b658312681311063e485350edb2d3f80f864c2ffb82b10cd`). Independent implementation review, generated integrity, PR/CI and merge remain separate gates.
+
+| DD | Adopted contract |
+|---|---|
+| DD-1 | Separate `ENTITY_ID_V1` namespaces for `COMPANY`, `PLANT`, `LINE` and `LICENCE_HOLDER`; observed exact-name keys, parent/locality or designation for plant/line, and no id re-issue. |
+| DD-2 | Versioned `NAME_NORMALISATION_V1` exact/variant rules in `config/entity_resolution.v1.yaml`; verbatim spans retained and visual-order Arabic never reversed. |
+| DD-3 | First-match precedence: deterministic identifier, exact document evidence, pending review, unresolved; no fuzzy score or AI proposal. |
+| DD-4 | Ownership, name-change and merger statements become dated, deduplicated records; unnamed owners remain unresolved. |
+| DD-5 | `data/entities/{mentions,resolution}/` is a guarded write-once §7.5 root, not a snapshot kind; repository test doubles are refused. |
+| DD-6 | `EntityMentionList 1.0.0` records exact addresses and spans; all spans verify against stored lines or JSON values before writing. |
+| DD-7 | `EntityResolutionArtifact 1.0.0` records deterministic entities, links, input hashes, counts and transformation provenance. |
+| DD-8 | Document and addressed frozen-snapshot passports plus producer observations link only through governed mentions; exact URL equality alone records corroboration. |
+| DD-9 | Artifacts, mention lists, rules and inputs reconstruct byte-for-byte under manifest checking. |
+| DD-10 | Core 03/04/05/09 additions preserve markers and historical S12a/S12b blocks. |
+| DD-11 | Boundary tests use injected Class-D doubles outside repository evidence roots; defaults validate real inputs. |
+| DD-12 | Control records state observed facts and do not impersonate review or delivery approval. |
+| DD-13 | Offline `build-entities --mention-list-id` dispatches before acquisition dependencies; pipeline/document/connector modules stay unchanged. |
+| DD-14 | `mentions-v1` contains M-001…M-038. The real artifact has five companies, two SITE_LOCALITY plants, no lines/licence holders, 27 exact links, three pending and eight unresolved. |
+
+The companies are Universal Metal Coating Company (alias UNICOIL), Hadeed, SABIC, Advanced Petrochemical and Tasnee. Both plants belong to the first company at `SAU-JUBAIL` and `SAU-JEDDAH`. Pending links are M-009 `LOCALITY_VARIANT`, M-017 `SUBJECT_OUTSIDE_WINDOW` and M-020 `VARIANT_NAME_EQUALITY`; M-007 is count-only and M-021…M-027 are out-of-scope SASO mentions. One 2004 unnamed-owner record cites M-004/M-012. `DOC-PRODUCER-UNICOIL-7d21f605fc4e-6eb00a1886d0` and `DOC-PRODUCER-UNICOIL-9cf950950e95-6217c780a89a` have no readable mention. The 1997 founding-shareholder sentence and HPD page 20 lines 9–12 are deliberately excluded under OD-7 and the personal/contact-span boundary.
+
+**Change classes:** §7.2 adds offline modules/tests; §7.3 adds `config/entity_resolution.v1.yaml` and grows the authority path set 16 → 17; §7.4 adds approved Core text; §7.5 adds the mention list and resolution artifact. Frozen public/synthetic/golden/browser evidence, S11/S12a/S12b records and the methodology DOCX remain unchanged.
+
+At T7 authoring, **S12c manifest run count = 0**. Exactly one `scripts/build_manifests.py` run is authorized only after ADR-018 and the T8 regression. The generated seventeen-row authority table is then mirrored into Manifest §11 and [14] runs immediately. A failure stops the slice without regeneration or hand editing; the actual UTC receipt is appended only after execution.
+
+**T9 execution receipt (2026-09-12T11:25:47Z):** after the T8 regression (`2008 passed, 1 deselected, 1 warning`) and exact [0]–[13]/[21]–[26] gates passed, `PATH=.venv/bin:$PATH PYTHONPATH=src python3 scripts/build_manifests.py` ran exactly once and exited 0. Immediate [14] passed: `MANIFEST_S11_S12A_S12B_ROWS_UNCHANGED_ENTITIES_PRESENT 2`. The snapshot manifest added only `data/entities/mentions/mentions-v1.json` and `data/entities/resolution/ENTITIES-2026-09-12-a12e24c31b02.json`; every prior row remained identical. The authority path set grew from 16 to 17 with `config/entity_resolution.v1.yaml`; only the four approved Core rows changed among prior authority paths. Manifest §11 mirrors all 17 generated rows. S12c manifest run count is **1**, authorization exhausted; no second run is permitted.

@@ -2,10 +2,13 @@
 
 from __future__ import annotations
 
+import copy
 import json
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Callable
+
+import yaml
 
 from ior_mvp.acquisition.connectors.base import BaseConnector, ConnectorRegistry
 from ior_mvp.acquisition.contracts import (
@@ -324,3 +327,71 @@ class InstitutionalDouble(DoubleConnector):
         status = "PASS" if valid else "FAIL"
         return replace(super().validate(raw), status=status,
                        checks=(QualityCheck("TEST-row-shape-and-reporter", status, "Class D double only"),))
+
+
+def entity_document_double(
+    document_id: str = "DOC-TEST-FIXTURE-0123456789ab-0123456789ab",
+    pages: list[list[str]] | None = None,
+    *,
+    as_of_date: str = "2026-09-12",
+    url: str = "https://example.test/entity-double.pdf",
+) -> dict[str, Any]:
+    """Obviously synthetic DocumentRecord-shaped input for entity unit tests."""
+    page_lines = pages or [["TEST DOUBLE — NOT REAL EVIDENCE: Acme Company"]]
+    return {
+        "document_id": document_id,
+        "as_of_date": as_of_date,
+        "pages": [
+            {"page_index": index, "lines": list(lines)}
+            for index, lines in enumerate(page_lines, start=1)
+        ],
+        "raw_artifact_ref": {"endpoint_or_document": url},
+        "evidence": [{"passport_id": f"P-{document_id}"}],
+    }
+
+
+def entity_snapshot_double(
+    snapshot_id: str = "FIX-ENTITY-DOUBLE",
+    *,
+    sources: list[dict[str, Any]] | None = None,
+    producers: list[dict[str, Any]] | None = None,
+) -> dict[str, Any]:
+    """Obviously synthetic public-snapshot-shaped input for entity unit tests."""
+    return {
+        "snapshot_id": snapshot_id,
+        "as_of_date": "2026-09-12",
+        "evidence": sources or [],
+        "domestic_capability": {"producer_evidence": producers or []},
+    }
+
+
+def entity_mention_list_payload(
+    list_id: str = "test-double-mentions",
+    mentions: list[dict[str, Any]] | None = None,
+) -> dict[str, Any]:
+    """EntityMentionList payload marked unmistakably as a test double."""
+    return {
+        "schema_version": "1.0.0",
+        "list_id": list_id,
+        "recorded_on": "2026-09-12",
+        "recorded_by_seat": "TEST-DOUBLE",
+        "consultation_summary_text": "TEST DOUBLE — NOT REAL EVIDENCE.",
+        "mentions": mentions or [],
+    }
+
+
+def entity_rules_payload(**overrides: Any) -> dict[str, Any]:
+    """Copy the governed shape for temp-file tests, then deep-merge overrides."""
+    from ior_mvp.acquisition.entities.rules import ENTITY_RULES_PATH
+
+    payload = yaml.safe_load(ENTITY_RULES_PATH.read_text(encoding="utf-8"))
+
+    def merge(target: dict[str, Any], changes: dict[str, Any]) -> None:
+        for key, value in changes.items():
+            if isinstance(value, dict) and isinstance(target.get(key), dict):
+                merge(target[key], value)
+            else:
+                target[key] = copy.deepcopy(value)
+
+    merge(payload, overrides)
+    return payload

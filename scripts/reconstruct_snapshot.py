@@ -107,6 +107,65 @@ def _reconstruct_documents(
     return len(records), verified
 
 
+def _manifest_path(value: str, data_root: Path) -> str:
+    if value.startswith("data/"):
+        return value
+    path = Path(value)
+    if path.is_absolute():
+        try:
+            return path.resolve().relative_to(data_root.parent.resolve()).as_posix()
+        except ValueError:
+            return value
+    return f"data/{value}"
+
+
+def _reconstruct_entities(
+    data_root: Path,
+    *,
+    check_manifest: bool,
+    manifest_rows: dict[str, tuple[str, int]],
+) -> tuple[int, int]:
+    from ior_mvp.acquisition.entities.store import (
+        EntityStore,
+        reconstruct_entity_artifact,
+    )
+
+    artifacts = EntityStore(data_root / "entities").iter_artifacts()
+    links = 0
+    for path, artifact in artifacts:
+        rel_artifact = path.relative_to(data_root.parent).as_posix()
+        inputs = artifact.get("inputs", {})
+        refs = [rel_artifact]
+        mention_ref = inputs.get("mention_list", {})
+        if mention_ref.get("path"):
+            refs.append(_manifest_path(str(mention_ref["path"]), data_root))
+        for field in ("document_records", "public_snapshots"):
+            for row in inputs.get(field, []):
+                if row.get("path"):
+                    refs.append(_manifest_path(str(row["path"]), data_root))
+        if check_manifest:
+            for ref in refs:
+                if ref not in manifest_rows:
+                    print(f"RECONSTRUCTION FAIL: manifest row missing for {ref}")
+                    sys.exit(2)
+                expected_hash, expected_bytes = manifest_rows[ref]
+                absolute = data_root.parent / ref
+                if (
+                    not absolute.exists()
+                    or _sha256_file(absolute) != expected_hash
+                    or absolute.stat().st_size != expected_bytes
+                ):
+                    print(f"RECONSTRUCTION FAIL: manifest hash mismatch for {ref}")
+                    sys.exit(1)
+        result = reconstruct_entity_artifact(path, data_root=data_root)
+        if not result.match:
+            reason = result.detail.get("reason", "BYTE_MISMATCH")
+            print(f"RECONSTRUCTION FAIL: {result.snapshot_id} ({reason})")
+            sys.exit(1)
+        links += len(artifact.get("links", []))
+    return len(artifacts), links
+
+
 def main() -> None:
     _install_socket_block()
     import argparse
@@ -135,8 +194,11 @@ def main() -> None:
 
     doc_store = DocumentStore(data_root / "documents")
     has_documents = bool(list(doc_store.iter_records()))
+    from ior_mvp.acquisition.entities.store import EntityStore
 
-    if not snapshots and not has_documents:
+    has_entities = bool(EntityStore(data_root / "entities").iter_artifacts())
+
+    if not snapshots and not has_documents and not has_entities:
         print("RECONSTRUCTION FAIL: no acquired snapshots")
         sys.exit(1)
 
@@ -196,13 +258,21 @@ def main() -> None:
         check_manifest=not args.no_check_manifest,
         manifest_rows=manifest_rows,
     )
+    entity_artifacts, entity_links = _reconstruct_entities(
+        data_root,
+        check_manifest=not args.no_check_manifest,
+        manifest_rows=manifest_rows,
+    )
 
-    if snapshots or doc_records:
+    if snapshots or doc_records or entity_artifacts:
         print(
             f"RECONSTRUCTION PASS ({len(snapshots)} snapshots, {verified} artifacts)"
         )
     print(
         f"DOCUMENT RECONSTRUCTION PASS ({doc_records} records, {doc_artifacts} artifacts)"
+    )
+    print(
+        f"ENTITY RECONSTRUCTION PASS ({entity_artifacts} artifacts, {entity_links} links)"
     )
     sys.exit(0)
 

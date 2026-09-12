@@ -201,6 +201,7 @@ Responsibilities:
 - per-source analytical snapshot builders for universe, tariff and partners kinds;
 - acquired evidence passports with eight §11 groups;
 - offline reconstruction proof via `scripts/reconstruct_snapshot.py`.
+- S12c entity resolution is an offline acquisition subpackage: operator-authored verbatim mentions produce write-once, byte-reconstructible `data/entities/` artifacts; engine consumption remains deferred to S13/S14.
 
 BACI BULK is raw-only in S11: stored as hashed evidence with no analytical snapshot kind.
 

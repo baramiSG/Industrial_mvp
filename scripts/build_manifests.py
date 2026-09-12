@@ -40,6 +40,11 @@ def main() -> None:
         snapshot_paths += sorted(
             p for p in documents_root.rglob("*") if p.is_file()
         )
+    entities_root = ROOT / "data" / "entities"
+    if entities_root.exists():
+        snapshot_paths += sorted(
+            p for p in entities_root.rglob("*") if p.is_file()
+        )
     snapshot_manifest = {
         "manifest_version": "1.0",
         "generated_on": str(date.today()),
@@ -58,6 +63,7 @@ def main() -> None:
         ROOT / "config" / "ui_strings.v1.yaml",
         ROOT / "config" / "decision_narratives.v1.yaml",
         ROOT / "config" / "acquisition_sources.v1.yaml",
+        ROOT / "config" / "entity_resolution.v1.yaml",
     ]
     authority_paths += sorted((ROOT / "docs" / "core").glob("*.md"))
     authority_manifest = {

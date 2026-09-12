@@ -1,0 +1,1756 @@
+{
+  "artifact_id": "ENTITIES-2026-09-12-a12e24c31b02",
+  "artifact_id_scheme": "ENTITY_ARTIFACT_ID_V1",
+  "as_of_date": "2026-09-12",
+  "counts": {
+    "entities_by_type": {
+      "COMPANY": 5,
+      "LICENCE_HOLDER": 0,
+      "LINE": 0,
+      "PLANT": 2
+    },
+    "links_by_status": {
+      "DETERMINISTIC_IDENTIFIER": 0,
+      "EXACT_DOCUMENT_EVIDENCE": 27,
+      "PROPOSED_PENDING_REVIEW": 3,
+      "UNRESOLVED": 8
+    },
+    "observation_links_by_status": {
+      "DETERMINISTIC_IDENTIFIER": 0,
+      "EXACT_DOCUMENT_EVIDENCE": 5,
+      "PROPOSED_PENDING_REVIEW": 0,
+      "UNRESOLVED": 0
+    },
+    "passport_links_by_status": {
+      "DETERMINISTIC_IDENTIFIER": 0,
+      "EXACT_DOCUMENT_EVIDENCE": 10,
+      "PROPOSED_PENDING_REVIEW": 0,
+      "UNRESOLVED": 8
+    }
+  },
+  "documents_without_mentions": [
+    "DOC-PRODUCER-UNICOIL-7d21f605fc4e-6eb00a1886d0",
+    "DOC-PRODUCER-UNICOIL-9cf950950e95-6217c780a89a"
+  ],
+  "entities": [
+    {
+      "attributes_unresolved": [],
+      "canonical_key": "ENTITY_ID_V1|COMPANY|advanced petrochemical",
+      "entity_id": "COMPANY-0f8e69531f415144",
+      "entity_type": "COMPANY",
+      "evidence_mention_ids": [
+        "M-034",
+        "M-037"
+      ],
+      "first_observed_as_of": "2026-08-31",
+      "granularity": "LEGAL_ENTITY",
+      "identifiers": [],
+      "jurisdiction": "UNAVAILABLE",
+      "locality_token": null,
+      "merged_into": null,
+      "names": [
+        {
+          "established_by_mention_ids": [
+            "M-034"
+          ],
+          "language": "en",
+          "name_text": "Advanced Petrochemical",
+          "normalised_exact": "advanced petrochemical",
+          "normalised_variant": "advanced petrochemical",
+          "role": "PRIMARY",
+          "text_order": "logical"
+        }
+      ],
+      "parent": {
+        "company_entity_id": null,
+        "plant_entity_id": null
+      },
+      "primary_name_ar": "UNAVAILABLE",
+      "primary_name_en": "Advanced Petrochemical"
+    },
+    {
+      "attributes_unresolved": [],
+      "canonical_key": "ENTITY_ID_V1|COMPANY|hadeed",
+      "entity_id": "COMPANY-280abef66af82a6c",
+      "entity_type": "COMPANY",
+      "evidence_mention_ids": [
+        "M-030",
+        "M-032"
+      ],
+      "first_observed_as_of": "2026-08-31",
+      "granularity": "LEGAL_ENTITY",
+      "identifiers": [],
+      "jurisdiction": "UNAVAILABLE",
+      "locality_token": null,
+      "merged_into": null,
+      "names": [
+        {
+          "established_by_mention_ids": [
+            "M-030"
+          ],
+          "language": "en",
+          "name_text": "Hadeed",
+          "normalised_exact": "hadeed",
+          "normalised_variant": "hadeed",
+          "role": "PRIMARY",
+          "text_order": "logical"
+        }
+      ],
+      "parent": {
+        "company_entity_id": null,
+        "plant_entity_id": null
+      },
+      "primary_name_ar": "UNAVAILABLE",
+      "primary_name_en": "Hadeed"
+    },
+    {
+      "attributes_unresolved": [],
+      "canonical_key": "ENTITY_ID_V1|COMPANY|universal metal coating company",
+      "entity_id": "COMPANY-a0954792195adee5",
+      "entity_type": "COMPANY",
+      "evidence_mention_ids": [
+        "M-001",
+        "M-002",
+        "M-003",
+        "M-008",
+        "M-010",
+        "M-011",
+        "M-015",
+        "M-016",
+        "M-018",
+        "M-019",
+        "M-028",
+        "M-029",
+        "M-031"
+      ],
+      "first_observed_as_of": "2026-09-12",
+      "granularity": "LEGAL_ENTITY",
+      "identifiers": [],
+      "jurisdiction": "UNAVAILABLE",
+      "locality_token": null,
+      "merged_into": null,
+      "names": [
+        {
+          "established_by_mention_ids": [
+            "M-001"
+          ],
+          "language": "en",
+          "name_text": "Universal Metal Coating Company",
+          "normalised_exact": "universal metal coating company",
+          "normalised_variant": "universal metal coating",
+          "role": "PRIMARY",
+          "text_order": "logical"
+        },
+        {
+          "established_by_mention_ids": [
+            "M-002"
+          ],
+          "language": "en",
+          "name_text": "UNICOIL",
+          "normalised_exact": "unicoil",
+          "normalised_variant": "unicoil",
+          "role": "ALIAS",
+          "text_order": "logical"
+        }
+      ],
+      "parent": {
+        "company_entity_id": null,
+        "plant_entity_id": null
+      },
+      "primary_name_ar": "UNAVAILABLE",
+      "primary_name_en": "Universal Metal Coating Company"
+    },
+    {
+      "attributes_unresolved": [],
+      "canonical_key": "ENTITY_ID_V1|COMPANY|sabic",
+      "entity_id": "COMPANY-f2d406af94a8aac1",
+      "entity_type": "COMPANY",
+      "evidence_mention_ids": [
+        "M-033",
+        "M-036"
+      ],
+      "first_observed_as_of": "2026-08-31",
+      "granularity": "LEGAL_ENTITY",
+      "identifiers": [],
+      "jurisdiction": "UNAVAILABLE",
+      "locality_token": null,
+      "merged_into": null,
+      "names": [
+        {
+          "established_by_mention_ids": [
+            "M-033"
+          ],
+          "language": "en",
+          "name_text": "SABIC",
+          "normalised_exact": "sabic",
+          "normalised_variant": "sabic",
+          "role": "PRIMARY",
+          "text_order": "logical"
+        }
+      ],
+      "parent": {
+        "company_entity_id": null,
+        "plant_entity_id": null
+      },
+      "primary_name_ar": "UNAVAILABLE",
+      "primary_name_en": "SABIC"
+    },
+    {
+      "attributes_unresolved": [],
+      "canonical_key": "ENTITY_ID_V1|COMPANY|tasnee",
+      "entity_id": "COMPANY-f3a50c477f158420",
+      "entity_type": "COMPANY",
+      "evidence_mention_ids": [
+        "M-035",
+        "M-038"
+      ],
+      "first_observed_as_of": "2026-08-31",
+      "granularity": "LEGAL_ENTITY",
+      "identifiers": [],
+      "jurisdiction": "UNAVAILABLE",
+      "locality_token": null,
+      "merged_into": null,
+      "names": [
+        {
+          "established_by_mention_ids": [
+            "M-035"
+          ],
+          "language": "en",
+          "name_text": "Tasnee",
+          "normalised_exact": "tasnee",
+          "normalised_variant": "tasnee",
+          "role": "PRIMARY",
+          "text_order": "logical"
+        }
+      ],
+      "parent": {
+        "company_entity_id": null,
+        "plant_entity_id": null
+      },
+      "primary_name_ar": "UNAVAILABLE",
+      "primary_name_en": "Tasnee"
+    },
+    {
+      "attributes_unresolved": [],
+      "canonical_key": "ENTITY_ID_V1|PLANT|COMPANY-a0954792195adee5|SAU-JEDDAH",
+      "entity_id": "PLANT-75eeb641f4b66a9f",
+      "entity_type": "PLANT",
+      "evidence_mention_ids": [
+        "M-006",
+        "M-014"
+      ],
+      "first_observed_as_of": "2026-09-12",
+      "granularity": "SITE_LOCALITY",
+      "identifiers": [],
+      "jurisdiction": "UNAVAILABLE",
+      "locality_token": "SAU-JEDDAH",
+      "merged_into": null,
+      "names": [
+        {
+          "established_by_mention_ids": [
+            "M-006"
+          ],
+          "language": "en",
+          "name_text": "Jeddah",
+          "normalised_exact": "jeddah",
+          "normalised_variant": "jeddah",
+          "role": "PRIMARY",
+          "text_order": "logical"
+        }
+      ],
+      "parent": {
+        "company_entity_id": "COMPANY-a0954792195adee5",
+        "plant_entity_id": null
+      },
+      "primary_name_ar": "UNAVAILABLE",
+      "primary_name_en": "Jeddah"
+    },
+    {
+      "attributes_unresolved": [],
+      "canonical_key": "ENTITY_ID_V1|PLANT|COMPANY-a0954792195adee5|SAU-JUBAIL",
+      "entity_id": "PLANT-c7fa915ccd456349",
+      "entity_type": "PLANT",
+      "evidence_mention_ids": [
+        "M-005",
+        "M-013"
+      ],
+      "first_observed_as_of": "2026-09-12",
+      "granularity": "SITE_LOCALITY",
+      "identifiers": [],
+      "jurisdiction": "UNAVAILABLE",
+      "locality_token": "SAU-JUBAIL",
+      "merged_into": null,
+      "names": [
+        {
+          "established_by_mention_ids": [
+            "M-005"
+          ],
+          "language": "en",
+          "name_text": "Al-Jubail",
+          "normalised_exact": "al jubail",
+          "normalised_variant": "jubail",
+          "role": "PRIMARY",
+          "text_order": "logical"
+        }
+      ],
+      "parent": {
+        "company_entity_id": "COMPANY-a0954792195adee5",
+        "plant_entity_id": null
+      },
+      "primary_name_ar": "UNAVAILABLE",
+      "primary_name_en": "Al-Jubail"
+    }
+  ],
+  "id_scheme": {
+    "hash": "sha256",
+    "hex_length": 16,
+    "name": "ENTITY_ID_V1"
+  },
+  "inputs": {
+    "document_records": [
+      {
+        "document_id": "DOC-PRODUCER-UNICOIL-70151205e3a4-1762d53d6cab",
+        "path": "documents/producer_unicoil/records/DOC-PRODUCER-UNICOIL-70151205e3a4-1762d53d6cab.json",
+        "sha256": "3d1bc18c75bc9f87c215b402aedb1adeb4558ceb7f9a86ab3d2617fb2e0438f3"
+      },
+      {
+        "document_id": "DOC-PRODUCER-UNICOIL-7d21f605fc4e-6eb00a1886d0",
+        "path": "documents/producer_unicoil/records/DOC-PRODUCER-UNICOIL-7d21f605fc4e-6eb00a1886d0.json",
+        "sha256": "18a19cf639ee6c951e384f56e846c4a1f9591cd177f9df64f7b278fd565a1e57"
+      },
+      {
+        "document_id": "DOC-PRODUCER-UNICOIL-9cf950950e95-6217c780a89a",
+        "path": "documents/producer_unicoil/records/DOC-PRODUCER-UNICOIL-9cf950950e95-6217c780a89a.json",
+        "sha256": "9a91b7e75733b8054a416b4cc7a3a511be7803beb9b3a32ad4b6d6d49f021341"
+      },
+      {
+        "document_id": "DOC-PRODUCER-UNICOIL-cec488bffcda-3017de71d962",
+        "path": "documents/producer_unicoil/records/DOC-PRODUCER-UNICOIL-cec488bffcda-3017de71d962.json",
+        "sha256": "cb05df254482a7bf98e7544f4f6f50abfd612e6e1214af5bc18731f2829039c7"
+      },
+      {
+        "document_id": "DOC-PRODUCER-UNICOIL-d7302a241f7d-f35cfd06f777",
+        "path": "documents/producer_unicoil/records/DOC-PRODUCER-UNICOIL-d7302a241f7d-f35cfd06f777.json",
+        "sha256": "12b8468a9116bd5889a9003ff5354fb66e881f884e368accf2bed8baef83ef53"
+      },
+      {
+        "document_id": "DOC-PRODUCER-UNICOIL-ecb55cc26093-612efea9a835",
+        "path": "documents/producer_unicoil/records/DOC-PRODUCER-UNICOIL-ecb55cc26093-612efea9a835.json",
+        "sha256": "ec6bb5b4a862d1e39a3787659d917f1d7a2215240a238b231f6832209cb399c5"
+      },
+      {
+        "document_id": "DOC-SASO-DOCUMENTS-641a518f410a-1bfd6143aaa9",
+        "path": "documents/saso_documents/records/DOC-SASO-DOCUMENTS-641a518f410a-1bfd6143aaa9.json",
+        "sha256": "bbcbb428568efcd8608dd12295e56dd0b3cfbac2fc338f4a0e89d8fed57a2733"
+      },
+      {
+        "document_id": "DOC-SASO-DOCUMENTS-69ea78b9cd4e-000691d40661",
+        "path": "documents/saso_documents/records/DOC-SASO-DOCUMENTS-69ea78b9cd4e-000691d40661.json",
+        "sha256": "8ef6184c5b683ec2c9711dbccc16b498134c92c5ba953f912278090d06d80121"
+      },
+      {
+        "document_id": "DOC-SASO-DOCUMENTS-710bf26c140e-b25658901d54",
+        "path": "documents/saso_documents/records/DOC-SASO-DOCUMENTS-710bf26c140e-b25658901d54.json",
+        "sha256": "20f9ba9da6a65e542e41eaf9d1a5135534a9d7dc1c36c760fe29f75e7d3e0293"
+      },
+      {
+        "document_id": "DOC-SASO-DOCUMENTS-c778364b4087-b89ca084a45d",
+        "path": "documents/saso_documents/records/DOC-SASO-DOCUMENTS-c778364b4087-b89ca084a45d.json",
+        "sha256": "a92c209f425c8e6a99cdd4691b8aebced8696b81efbf630ffee11a8c83ec5129"
+      },
+      {
+        "document_id": "DOC-SASO-DOCUMENTS-d5e242b67294-9189ec73295b",
+        "path": "documents/saso_documents/records/DOC-SASO-DOCUMENTS-d5e242b67294-9189ec73295b.json",
+        "sha256": "f65999b530a8864f7e34a351d5bfc032f654ae80eac437276df5b096ba991a0c"
+      },
+      {
+        "document_id": "DOC-SASO-DOCUMENTS-e57d73b6e5b7-0e0d00cb00cf",
+        "path": "documents/saso_documents/records/DOC-SASO-DOCUMENTS-e57d73b6e5b7-0e0d00cb00cf.json",
+        "sha256": "16f674bb2d37761521e9e464e4fc238d26183fe0838c7c764893bb3f9809476d"
+      }
+    ],
+    "mention_list": {
+      "list_id": "mentions-v1",
+      "path": "entities/mentions/mentions-v1.json",
+      "sha256": "a12e24c31b02f11a0a7e116760b8a80814ddd97241716651c8cc60184ca1cc83"
+    },
+    "public_snapshots": [
+      {
+        "path": "snapshots/public/SAU-H0-390210.json",
+        "sha256": "edaeaabf82276f75a1887aa0869b9e3a4070c3338fa0e9f677c55607cd8d0ac4",
+        "snapshot_id": "PUBLIC-SAU-H0-390210-2026-08-31"
+      },
+      {
+        "path": "snapshots/public/SAU-H0-721049.json",
+        "sha256": "5c2ab676e5b68509e002eddff4f80107c0d2cc1b78c3b063e26f84d13355512e",
+        "snapshot_id": "PUBLIC-SAU-H0-721049-2026-08-31"
+      }
+    ],
+    "rule_table": {
+      "path": "config/entity_resolution.v1.yaml",
+      "sha256": "c320d2e8a92ad18786935f86366d2d826ffb33d413ebe493c11811f40da00bc9",
+      "version": "1.0.0"
+    }
+  },
+  "kind": "entity_resolution",
+  "links": [
+    {
+      "candidate_entity_ids": [],
+      "entity_id": "COMPANY-a0954792195adee5",
+      "entity_type": "COMPANY",
+      "evidence": {
+        "address": {
+          "document_id": "DOC-PRODUCER-UNICOIL-70151205e3a4-1762d53d6cab",
+          "line_index": 65,
+          "page_index": 1
+        },
+        "as_of_date": "2026-09-12",
+        "input_sha256": "3d1bc18c75bc9f87c215b402aedb1adeb4558ceb7f9a86ab3d2617fb2e0438f3",
+        "language": "en",
+        "source_kind": "DOCUMENT_RECORD",
+        "span_text": "Universal Metal Coating Company",
+        "text_order": "logical"
+      },
+      "link_id": "L-001",
+      "link_status": "EXACT_DOCUMENT_EVIDENCE",
+      "mention_id": "M-001",
+      "precedence_rank": 2,
+      "rule_applied": "MINTED_FROM_MENTION",
+      "unresolved_reason": null
+    },
+    {
+      "candidate_entity_ids": [],
+      "entity_id": "COMPANY-a0954792195adee5",
+      "entity_type": "COMPANY",
+      "evidence": {
+        "address": {
+          "document_id": "DOC-PRODUCER-UNICOIL-70151205e3a4-1762d53d6cab",
+          "line_index": 4,
+          "page_index": 4
+        },
+        "as_of_date": "2026-09-12",
+        "input_sha256": "3d1bc18c75bc9f87c215b402aedb1adeb4558ceb7f9a86ab3d2617fb2e0438f3",
+        "language": "en",
+        "source_kind": "DOCUMENT_RECORD",
+        "span_text": "UNICOIL (Universal Metal Coating Company)",
+        "text_order": "logical"
+      },
+      "link_id": "L-002",
+      "link_status": "EXACT_DOCUMENT_EVIDENCE",
+      "mention_id": "M-002",
+      "precedence_rank": 2,
+      "rule_applied": "ALIAS_STATEMENT",
+      "unresolved_reason": null
+    },
+    {
+      "candidate_entity_ids": [],
+      "entity_id": "COMPANY-a0954792195adee5",
+      "entity_type": "COMPANY",
+      "evidence": {
+        "address": {
+          "document_id": "DOC-PRODUCER-UNICOIL-70151205e3a4-1762d53d6cab",
+          "line_index": 12,
+          "page_index": 4
+        },
+        "as_of_date": "2026-09-12",
+        "input_sha256": "3d1bc18c75bc9f87c215b402aedb1adeb4558ceb7f9a86ab3d2617fb2e0438f3",
+        "language": "en",
+        "source_kind": "DOCUMENT_RECORD",
+        "span_text": "UNICOIL",
+        "text_order": "logical"
+      },
+      "link_id": "L-003",
+      "link_status": "EXACT_DOCUMENT_EVIDENCE",
+      "mention_id": "M-003",
+      "precedence_rank": 2,
+      "rule_applied": "EXACT_ALIAS_EQUALITY",
+      "unresolved_reason": null
+    },
+    {
+      "candidate_entity_ids": [],
+      "entity_id": "COMPANY-a0954792195adee5",
+      "entity_type": "COMPANY",
+      "evidence": {
+        "address": {
+          "document_id": "DOC-PRODUCER-UNICOIL-70151205e3a4-1762d53d6cab",
+          "line_index": 12,
+          "page_index": 4
+        },
+        "as_of_date": "2026-09-12",
+        "input_sha256": "3d1bc18c75bc9f87c215b402aedb1adeb4558ceb7f9a86ab3d2617fb2e0438f3",
+        "language": "en",
+        "source_kind": "DOCUMENT_RECORD",
+        "span_text": "UNICOIL then became a 100% Saudi-owned",
+        "text_order": "logical"
+      },
+      "link_id": "L-004",
+      "link_status": "EXACT_DOCUMENT_EVIDENCE",
+      "mention_id": "M-004",
+      "precedence_rank": 2,
+      "rule_applied": "SUBJECT_STATEMENT",
+      "unresolved_reason": null
+    },
+    {
+      "candidate_entity_ids": [],
+      "entity_id": "PLANT-c7fa915ccd456349",
+      "entity_type": "PLANT",
+      "evidence": {
+        "address": {
+          "document_id": "DOC-PRODUCER-UNICOIL-70151205e3a4-1762d53d6cab",
+          "line_index": 13,
+          "page_index": 4
+        },
+        "as_of_date": "2026-09-12",
+        "input_sha256": "3d1bc18c75bc9f87c215b402aedb1adeb4558ceb7f9a86ab3d2617fb2e0438f3",
+        "language": "en",
+        "source_kind": "DOCUMENT_RECORD",
+        "span_text": "Al-Jubail",
+        "text_order": "logical"
+      },
+      "link_id": "L-005",
+      "link_status": "EXACT_DOCUMENT_EVIDENCE",
+      "mention_id": "M-005",
+      "precedence_rank": 2,
+      "rule_applied": "EXACT_LOCALITY_WITHIN_WINDOW",
+      "unresolved_reason": null
+    },
+    {
+      "candidate_entity_ids": [],
+      "entity_id": "PLANT-75eeb641f4b66a9f",
+      "entity_type": "PLANT",
+      "evidence": {
+        "address": {
+          "document_id": "DOC-PRODUCER-UNICOIL-70151205e3a4-1762d53d6cab",
+          "line_index": 13,
+          "page_index": 4
+        },
+        "as_of_date": "2026-09-12",
+        "input_sha256": "3d1bc18c75bc9f87c215b402aedb1adeb4558ceb7f9a86ab3d2617fb2e0438f3",
+        "language": "en",
+        "source_kind": "DOCUMENT_RECORD",
+        "span_text": "Jeddah",
+        "text_order": "logical"
+      },
+      "link_id": "L-006",
+      "link_status": "EXACT_DOCUMENT_EVIDENCE",
+      "mention_id": "M-006",
+      "precedence_rank": 2,
+      "rule_applied": "EXACT_LOCALITY_WITHIN_WINDOW",
+      "unresolved_reason": null
+    },
+    {
+      "candidate_entity_ids": [],
+      "entity_id": null,
+      "entity_type": "LINE",
+      "evidence": {
+        "address": {
+          "document_id": "DOC-PRODUCER-UNICOIL-70151205e3a4-1762d53d6cab",
+          "line_index": 13,
+          "page_index": 4
+        },
+        "as_of_date": "2026-09-12",
+        "input_sha256": "3d1bc18c75bc9f87c215b402aedb1adeb4558ceb7f9a86ab3d2617fb2e0438f3",
+        "language": "en",
+        "source_kind": "DOCUMENT_RECORD",
+        "span_text": "five  production  lines",
+        "text_order": "logical"
+      },
+      "link_id": "L-007",
+      "link_status": "UNRESOLVED",
+      "mention_id": "M-007",
+      "precedence_rank": 4,
+      "rule_applied": "COUNT_ONLY_NO_IDENTITY",
+      "unresolved_reason": "COUNT_ONLY_NO_IDENTITY"
+    },
+    {
+      "candidate_entity_ids": [],
+      "entity_id": "COMPANY-a0954792195adee5",
+      "entity_type": "COMPANY",
+      "evidence": {
+        "address": {
+          "document_id": "DOC-PRODUCER-UNICOIL-d7302a241f7d-f35cfd06f777",
+          "line_index": 57,
+          "page_index": 1
+        },
+        "as_of_date": "2026-09-12",
+        "input_sha256": "12b8468a9116bd5889a9003ff5354fb66e881f884e368accf2bed8baef83ef53",
+        "language": "en",
+        "source_kind": "DOCUMENT_RECORD",
+        "span_text": "Universal Metal Coating Company",
+        "text_order": "logical"
+      },
+      "link_id": "L-008",
+      "link_status": "EXACT_DOCUMENT_EVIDENCE",
+      "mention_id": "M-008",
+      "precedence_rank": 2,
+      "rule_applied": "EXACT_NAME_EQUALITY",
+      "unresolved_reason": null
+    },
+    {
+      "candidate_entity_ids": [
+        "PLANT-c7fa915ccd456349"
+      ],
+      "entity_id": null,
+      "entity_type": "PLANT",
+      "evidence": {
+        "address": {
+          "document_id": "DOC-PRODUCER-UNICOIL-d7302a241f7d-f35cfd06f777",
+          "line_index": 59,
+          "page_index": 1
+        },
+        "as_of_date": "2026-09-12",
+        "input_sha256": "12b8468a9116bd5889a9003ff5354fb66e881f884e368accf2bed8baef83ef53",
+        "language": "en",
+        "source_kind": "DOCUMENT_RECORD",
+        "span_text": "Al-Jubail Industrial City",
+        "text_order": "logical"
+      },
+      "link_id": "L-009",
+      "link_status": "PROPOSED_PENDING_REVIEW",
+      "mention_id": "M-009",
+      "precedence_rank": 3,
+      "rule_applied": "LOCALITY_VARIANT",
+      "unresolved_reason": null
+    },
+    {
+      "candidate_entity_ids": [],
+      "entity_id": "COMPANY-a0954792195adee5",
+      "entity_type": "COMPANY",
+      "evidence": {
+        "address": {
+          "document_id": "DOC-PRODUCER-UNICOIL-d7302a241f7d-f35cfd06f777",
+          "line_index": 4,
+          "page_index": 4
+        },
+        "as_of_date": "2026-09-12",
+        "input_sha256": "12b8468a9116bd5889a9003ff5354fb66e881f884e368accf2bed8baef83ef53",
+        "language": "en",
+        "source_kind": "DOCUMENT_RECORD",
+        "span_text": "UNICOIL (Universal Metal Coating Company)",
+        "text_order": "logical"
+      },
+      "link_id": "L-010",
+      "link_status": "EXACT_DOCUMENT_EVIDENCE",
+      "mention_id": "M-010",
+      "precedence_rank": 2,
+      "rule_applied": "ALIAS_STATEMENT",
+      "unresolved_reason": null
+    },
+    {
+      "candidate_entity_ids": [],
+      "entity_id": "COMPANY-a0954792195adee5",
+      "entity_type": "COMPANY",
+      "evidence": {
+        "address": {
+          "document_id": "DOC-PRODUCER-UNICOIL-d7302a241f7d-f35cfd06f777",
+          "line_index": 12,
+          "page_index": 4
+        },
+        "as_of_date": "2026-09-12",
+        "input_sha256": "12b8468a9116bd5889a9003ff5354fb66e881f884e368accf2bed8baef83ef53",
+        "language": "en",
+        "source_kind": "DOCUMENT_RECORD",
+        "span_text": "UNICOIL",
+        "text_order": "logical"
+      },
+      "link_id": "L-011",
+      "link_status": "EXACT_DOCUMENT_EVIDENCE",
+      "mention_id": "M-011",
+      "precedence_rank": 2,
+      "rule_applied": "EXACT_ALIAS_EQUALITY",
+      "unresolved_reason": null
+    },
+    {
+      "candidate_entity_ids": [],
+      "entity_id": "COMPANY-a0954792195adee5",
+      "entity_type": "COMPANY",
+      "evidence": {
+        "address": {
+          "document_id": "DOC-PRODUCER-UNICOIL-d7302a241f7d-f35cfd06f777",
+          "line_index": 12,
+          "page_index": 4
+        },
+        "as_of_date": "2026-09-12",
+        "input_sha256": "12b8468a9116bd5889a9003ff5354fb66e881f884e368accf2bed8baef83ef53",
+        "language": "en",
+        "source_kind": "DOCUMENT_RECORD",
+        "span_text": "UNICOIL then became a 100% Saudi-owned company in 2004",
+        "text_order": "logical"
+      },
+      "link_id": "L-012",
+      "link_status": "EXACT_DOCUMENT_EVIDENCE",
+      "mention_id": "M-012",
+      "precedence_rank": 2,
+      "rule_applied": "SUBJECT_STATEMENT",
+      "unresolved_reason": null
+    },
+    {
+      "candidate_entity_ids": [],
+      "entity_id": "PLANT-c7fa915ccd456349",
+      "entity_type": "PLANT",
+      "evidence": {
+        "address": {
+          "document_id": "DOC-PRODUCER-UNICOIL-d7302a241f7d-f35cfd06f777",
+          "line_index": 13,
+          "page_index": 4
+        },
+        "as_of_date": "2026-09-12",
+        "input_sha256": "12b8468a9116bd5889a9003ff5354fb66e881f884e368accf2bed8baef83ef53",
+        "language": "en",
+        "source_kind": "DOCUMENT_RECORD",
+        "span_text": "Al-Jubail",
+        "text_order": "logical"
+      },
+      "link_id": "L-013",
+      "link_status": "EXACT_DOCUMENT_EVIDENCE",
+      "mention_id": "M-013",
+      "precedence_rank": 2,
+      "rule_applied": "EXACT_LOCALITY_WITHIN_WINDOW",
+      "unresolved_reason": null
+    },
+    {
+      "candidate_entity_ids": [],
+      "entity_id": "PLANT-75eeb641f4b66a9f",
+      "entity_type": "PLANT",
+      "evidence": {
+        "address": {
+          "document_id": "DOC-PRODUCER-UNICOIL-d7302a241f7d-f35cfd06f777",
+          "line_index": 13,
+          "page_index": 4
+        },
+        "as_of_date": "2026-09-12",
+        "input_sha256": "12b8468a9116bd5889a9003ff5354fb66e881f884e368accf2bed8baef83ef53",
+        "language": "en",
+        "source_kind": "DOCUMENT_RECORD",
+        "span_text": "Jeddah",
+        "text_order": "logical"
+      },
+      "link_id": "L-014",
+      "link_status": "EXACT_DOCUMENT_EVIDENCE",
+      "mention_id": "M-014",
+      "precedence_rank": 2,
+      "rule_applied": "EXACT_LOCALITY_WITHIN_WINDOW",
+      "unresolved_reason": null
+    },
+    {
+      "candidate_entity_ids": [],
+      "entity_id": "COMPANY-a0954792195adee5",
+      "entity_type": "COMPANY",
+      "evidence": {
+        "address": {
+          "document_id": "DOC-PRODUCER-UNICOIL-cec488bffcda-3017de71d962",
+          "line_index": 2,
+          "page_index": 1
+        },
+        "as_of_date": "2026-09-12",
+        "input_sha256": "cb05df254482a7bf98e7544f4f6f50abfd612e6e1214af5bc18731f2829039c7",
+        "language": "en",
+        "source_kind": "DOCUMENT_RECORD",
+        "span_text": "Universal Metal Coating Company",
+        "text_order": "logical"
+      },
+      "link_id": "L-015",
+      "link_status": "EXACT_DOCUMENT_EVIDENCE",
+      "mention_id": "M-015",
+      "precedence_rank": 2,
+      "rule_applied": "EXACT_NAME_EQUALITY",
+      "unresolved_reason": null
+    },
+    {
+      "candidate_entity_ids": [],
+      "entity_id": "COMPANY-a0954792195adee5",
+      "entity_type": "COMPANY",
+      "evidence": {
+        "address": {
+          "document_id": "DOC-PRODUCER-UNICOIL-cec488bffcda-3017de71d962",
+          "line_index": 8,
+          "page_index": 20
+        },
+        "as_of_date": "2026-09-12",
+        "input_sha256": "cb05df254482a7bf98e7544f4f6f50abfd612e6e1214af5bc18731f2829039c7",
+        "language": "en",
+        "source_kind": "DOCUMENT_RECORD",
+        "span_text": "Universal Metal Coating Company",
+        "text_order": "logical"
+      },
+      "link_id": "L-016",
+      "link_status": "EXACT_DOCUMENT_EVIDENCE",
+      "mention_id": "M-016",
+      "precedence_rank": 2,
+      "rule_applied": "EXACT_NAME_EQUALITY",
+      "unresolved_reason": null
+    },
+    {
+      "candidate_entity_ids": [
+        "PLANT-75eeb641f4b66a9f",
+        "PLANT-c7fa915ccd456349"
+      ],
+      "entity_id": null,
+      "entity_type": "PLANT",
+      "evidence": {
+        "address": {
+          "document_id": "DOC-PRODUCER-UNICOIL-cec488bffcda-3017de71d962",
+          "line_index": 13,
+          "page_index": 19
+        },
+        "as_of_date": "2026-09-12",
+        "input_sha256": "cb05df254482a7bf98e7544f4f6f50abfd612e6e1214af5bc18731f2829039c7",
+        "language": "en",
+        "source_kind": "DOCUMENT_RECORD",
+        "span_text": "Jubail",
+        "text_order": "logical"
+      },
+      "link_id": "L-017",
+      "link_status": "PROPOSED_PENDING_REVIEW",
+      "mention_id": "M-017",
+      "precedence_rank": 3,
+      "rule_applied": "SUBJECT_OUTSIDE_WINDOW",
+      "unresolved_reason": null
+    },
+    {
+      "candidate_entity_ids": [],
+      "entity_id": "COMPANY-a0954792195adee5",
+      "entity_type": "COMPANY",
+      "evidence": {
+        "address": {
+          "document_id": "DOC-PRODUCER-UNICOIL-ecb55cc26093-612efea9a835",
+          "line_index": 6,
+          "page_index": 7
+        },
+        "as_of_date": "2026-09-12",
+        "input_sha256": "ec6bb5b4a862d1e39a3787659d917f1d7a2215240a238b231f6832209cb399c5",
+        "language": "en",
+        "source_kind": "DOCUMENT_RECORD",
+        "span_text": "Universal Metal Coating Company (UNICOIL)",
+        "text_order": "logical"
+      },
+      "link_id": "L-018",
+      "link_status": "EXACT_DOCUMENT_EVIDENCE",
+      "mention_id": "M-018",
+      "precedence_rank": 2,
+      "rule_applied": "ALIAS_STATEMENT",
+      "unresolved_reason": null
+    },
+    {
+      "candidate_entity_ids": [],
+      "entity_id": "COMPANY-a0954792195adee5",
+      "entity_type": "COMPANY",
+      "evidence": {
+        "address": {
+          "document_id": "DOC-PRODUCER-UNICOIL-ecb55cc26093-612efea9a835",
+          "line_index": 6,
+          "page_index": 7
+        },
+        "as_of_date": "2026-09-12",
+        "input_sha256": "ec6bb5b4a862d1e39a3787659d917f1d7a2215240a238b231f6832209cb399c5",
+        "language": "en",
+        "source_kind": "DOCUMENT_RECORD",
+        "span_text": "Universal Metal Coating Company",
+        "text_order": "logical"
+      },
+      "link_id": "L-019",
+      "link_status": "EXACT_DOCUMENT_EVIDENCE",
+      "mention_id": "M-019",
+      "precedence_rank": 2,
+      "rule_applied": "EXACT_NAME_EQUALITY",
+      "unresolved_reason": null
+    },
+    {
+      "candidate_entity_ids": [
+        "COMPANY-a0954792195adee5"
+      ],
+      "entity_id": null,
+      "entity_type": "COMPANY",
+      "evidence": {
+        "address": {
+          "document_id": "DOC-PRODUCER-UNICOIL-ecb55cc26093-612efea9a835",
+          "line_index": 4,
+          "page_index": 4
+        },
+        "as_of_date": "2026-09-12",
+        "input_sha256": "ec6bb5b4a862d1e39a3787659d917f1d7a2215240a238b231f6832209cb399c5",
+        "language": "en",
+        "source_kind": "DOCUMENT_RECORD",
+        "span_text": "Universal   Metal   Coating   Company   Ltd.",
+        "text_order": "logical"
+      },
+      "link_id": "L-020",
+      "link_status": "PROPOSED_PENDING_REVIEW",
+      "mention_id": "M-020",
+      "precedence_rank": 3,
+      "rule_applied": "VARIANT_NAME_EQUALITY",
+      "unresolved_reason": null
+    },
+    {
+      "candidate_entity_ids": [],
+      "entity_id": null,
+      "entity_type": "STANDARDS_AUTHORITY",
+      "evidence": {
+        "address": {
+          "document_id": "DOC-SASO-DOCUMENTS-641a518f410a-1bfd6143aaa9",
+          "line_index": 14,
+          "page_index": 1
+        },
+        "as_of_date": "2026-09-12",
+        "input_sha256": "bbcbb428568efcd8608dd12295e56dd0b3cfbac2fc338f4a0e89d8fed57a2733",
+        "language": "ar",
+        "source_kind": "DOCUMENT_RECORD",
+        "span_text": "ةدوجلاو سيياقلماو تافصاوملل ةيدوعسلا ةئيهلا",
+        "text_order": "visual"
+      },
+      "link_id": "L-021",
+      "link_status": "UNRESOLVED",
+      "mention_id": "M-021",
+      "precedence_rank": 4,
+      "rule_applied": "OUT_OF_SCOPE_ENTITY_TYPE",
+      "unresolved_reason": "OUT_OF_SCOPE_ENTITY_TYPE"
+    },
+    {
+      "candidate_entity_ids": [],
+      "entity_id": null,
+      "entity_type": "STANDARDS_AUTHORITY",
+      "evidence": {
+        "address": {
+          "document_id": "DOC-SASO-DOCUMENTS-69ea78b9cd4e-000691d40661",
+          "line_index": 14,
+          "page_index": 1
+        },
+        "as_of_date": "2026-09-12",
+        "input_sha256": "8ef6184c5b683ec2c9711dbccc16b498134c92c5ba953f912278090d06d80121",
+        "language": "ar",
+        "source_kind": "DOCUMENT_RECORD",
+        "span_text": "ةدوجلاو سيياقلماو تافصاوملل ةيدوعسلا ةئيهلا",
+        "text_order": "visual"
+      },
+      "link_id": "L-022",
+      "link_status": "UNRESOLVED",
+      "mention_id": "M-022",
+      "precedence_rank": 4,
+      "rule_applied": "OUT_OF_SCOPE_ENTITY_TYPE",
+      "unresolved_reason": "OUT_OF_SCOPE_ENTITY_TYPE"
+    },
+    {
+      "candidate_entity_ids": [],
+      "entity_id": null,
+      "entity_type": "STANDARDS_AUTHORITY",
+      "evidence": {
+        "address": {
+          "document_id": "DOC-SASO-DOCUMENTS-710bf26c140e-b25658901d54",
+          "line_index": 12,
+          "page_index": 1
+        },
+        "as_of_date": "2026-09-12",
+        "input_sha256": "20f9ba9da6a65e542e41eaf9d1a5135534a9d7dc1c36c760fe29f75e7d3e0293",
+        "language": "ar",
+        "source_kind": "DOCUMENT_RECORD",
+        "span_text": "ةدوجلاو سيياقلماو تافصاوملل ةيدوعسلا ةئيهلا",
+        "text_order": "visual"
+      },
+      "link_id": "L-023",
+      "link_status": "UNRESOLVED",
+      "mention_id": "M-023",
+      "precedence_rank": 4,
+      "rule_applied": "OUT_OF_SCOPE_ENTITY_TYPE",
+      "unresolved_reason": "OUT_OF_SCOPE_ENTITY_TYPE"
+    },
+    {
+      "candidate_entity_ids": [],
+      "entity_id": null,
+      "entity_type": "STANDARDS_AUTHORITY",
+      "evidence": {
+        "address": {
+          "document_id": "DOC-SASO-DOCUMENTS-c778364b4087-b89ca084a45d",
+          "line_index": 14,
+          "page_index": 1
+        },
+        "as_of_date": "2026-09-12",
+        "input_sha256": "a92c209f425c8e6a99cdd4691b8aebced8696b81efbf630ffee11a8c83ec5129",
+        "language": "ar",
+        "source_kind": "DOCUMENT_RECORD",
+        "span_text": "ةدوجلاو سيياقلماو تافصاوملل ةيدوعسلا ةئيهلا",
+        "text_order": "visual"
+      },
+      "link_id": "L-024",
+      "link_status": "UNRESOLVED",
+      "mention_id": "M-024",
+      "precedence_rank": 4,
+      "rule_applied": "OUT_OF_SCOPE_ENTITY_TYPE",
+      "unresolved_reason": "OUT_OF_SCOPE_ENTITY_TYPE"
+    },
+    {
+      "candidate_entity_ids": [],
+      "entity_id": null,
+      "entity_type": "STANDARDS_AUTHORITY",
+      "evidence": {
+        "address": {
+          "document_id": "DOC-SASO-DOCUMENTS-d5e242b67294-9189ec73295b",
+          "line_index": 13,
+          "page_index": 1
+        },
+        "as_of_date": "2026-09-12",
+        "input_sha256": "f65999b530a8864f7e34a351d5bfc032f654ae80eac437276df5b096ba991a0c",
+        "language": "ar",
+        "source_kind": "DOCUMENT_RECORD",
+        "span_text": "ةدوجلاو سيياقلماو تافصاوملل ةيدوعسلا ةئيهلا",
+        "text_order": "visual"
+      },
+      "link_id": "L-025",
+      "link_status": "UNRESOLVED",
+      "mention_id": "M-025",
+      "precedence_rank": 4,
+      "rule_applied": "OUT_OF_SCOPE_ENTITY_TYPE",
+      "unresolved_reason": "OUT_OF_SCOPE_ENTITY_TYPE"
+    },
+    {
+      "candidate_entity_ids": [],
+      "entity_id": null,
+      "entity_type": "STANDARDS_AUTHORITY",
+      "evidence": {
+        "address": {
+          "document_id": "DOC-SASO-DOCUMENTS-e57d73b6e5b7-0e0d00cb00cf",
+          "line_index": 14,
+          "page_index": 1
+        },
+        "as_of_date": "2026-09-12",
+        "input_sha256": "16f674bb2d37761521e9e464e4fc238d26183fe0838c7c764893bb3f9809476d",
+        "language": "ar",
+        "source_kind": "DOCUMENT_RECORD",
+        "span_text": "ةدوجلاو سيياقلماو تافصاوملل ةيدوعسلا ةئيهلا",
+        "text_order": "visual"
+      },
+      "link_id": "L-026",
+      "link_status": "UNRESOLVED",
+      "mention_id": "M-026",
+      "precedence_rank": 4,
+      "rule_applied": "OUT_OF_SCOPE_ENTITY_TYPE",
+      "unresolved_reason": "OUT_OF_SCOPE_ENTITY_TYPE"
+    },
+    {
+      "candidate_entity_ids": [],
+      "entity_id": null,
+      "entity_type": "STANDARDS_AUTHORITY",
+      "evidence": {
+        "address": {
+          "document_id": "DOC-SASO-DOCUMENTS-710bf26c140e-b25658901d54",
+          "line_index": 13,
+          "page_index": 1
+        },
+        "as_of_date": "2026-09-12",
+        "input_sha256": "20f9ba9da6a65e542e41eaf9d1a5135534a9d7dc1c36c760fe29f75e7d3e0293",
+        "language": "en",
+        "source_kind": "DOCUMENT_RECORD",
+        "span_text": "SASO",
+        "text_order": "logical"
+      },
+      "link_id": "L-027",
+      "link_status": "UNRESOLVED",
+      "mention_id": "M-027",
+      "precedence_rank": 4,
+      "rule_applied": "OUT_OF_SCOPE_ENTITY_TYPE",
+      "unresolved_reason": "OUT_OF_SCOPE_ENTITY_TYPE"
+    },
+    {
+      "candidate_entity_ids": [],
+      "entity_id": "COMPANY-a0954792195adee5",
+      "entity_type": "COMPANY",
+      "evidence": {
+        "address": {
+          "json_pointer": "/evidence/1/source",
+          "snapshot_id": "PUBLIC-SAU-H0-721049-2026-08-31"
+        },
+        "as_of_date": "2026-08-31",
+        "input_sha256": "5c2ab676e5b68509e002eddff4f80107c0d2cc1b78c3b063e26f84d13355512e",
+        "language": "en",
+        "source_kind": "PUBLIC_SNAPSHOT",
+        "span_text": "UNICOIL",
+        "text_order": "logical"
+      },
+      "link_id": "L-028",
+      "link_status": "EXACT_DOCUMENT_EVIDENCE",
+      "mention_id": "M-028",
+      "precedence_rank": 2,
+      "rule_applied": "EXACT_ALIAS_EQUALITY",
+      "unresolved_reason": null
+    },
+    {
+      "candidate_entity_ids": [],
+      "entity_id": "COMPANY-a0954792195adee5",
+      "entity_type": "COMPANY",
+      "evidence": {
+        "address": {
+          "json_pointer": "/evidence/2/source",
+          "snapshot_id": "PUBLIC-SAU-H0-721049-2026-08-31"
+        },
+        "as_of_date": "2026-08-31",
+        "input_sha256": "5c2ab676e5b68509e002eddff4f80107c0d2cc1b78c3b063e26f84d13355512e",
+        "language": "en",
+        "source_kind": "PUBLIC_SNAPSHOT",
+        "span_text": "UNICOIL",
+        "text_order": "logical"
+      },
+      "link_id": "L-029",
+      "link_status": "EXACT_DOCUMENT_EVIDENCE",
+      "mention_id": "M-029",
+      "precedence_rank": 2,
+      "rule_applied": "EXACT_ALIAS_EQUALITY",
+      "unresolved_reason": null
+    },
+    {
+      "candidate_entity_ids": [],
+      "entity_id": "COMPANY-280abef66af82a6c",
+      "entity_type": "COMPANY",
+      "evidence": {
+        "address": {
+          "json_pointer": "/evidence/3/source",
+          "snapshot_id": "PUBLIC-SAU-H0-721049-2026-08-31"
+        },
+        "as_of_date": "2026-08-31",
+        "input_sha256": "5c2ab676e5b68509e002eddff4f80107c0d2cc1b78c3b063e26f84d13355512e",
+        "language": "en",
+        "source_kind": "PUBLIC_SNAPSHOT",
+        "span_text": "Hadeed",
+        "text_order": "logical"
+      },
+      "link_id": "L-030",
+      "link_status": "EXACT_DOCUMENT_EVIDENCE",
+      "mention_id": "M-030",
+      "precedence_rank": 2,
+      "rule_applied": "MINTED_FROM_MENTION",
+      "unresolved_reason": null
+    },
+    {
+      "candidate_entity_ids": [],
+      "entity_id": "COMPANY-a0954792195adee5",
+      "entity_type": "COMPANY",
+      "evidence": {
+        "address": {
+          "json_pointer": "/domestic_capability/producer_evidence/0/producer",
+          "snapshot_id": "PUBLIC-SAU-H0-721049-2026-08-31"
+        },
+        "as_of_date": "2026-08-31",
+        "input_sha256": "5c2ab676e5b68509e002eddff4f80107c0d2cc1b78c3b063e26f84d13355512e",
+        "language": "en",
+        "source_kind": "PUBLIC_SNAPSHOT",
+        "span_text": "UNICOIL",
+        "text_order": "logical"
+      },
+      "link_id": "L-031",
+      "link_status": "EXACT_DOCUMENT_EVIDENCE",
+      "mention_id": "M-031",
+      "precedence_rank": 2,
+      "rule_applied": "EXACT_ALIAS_EQUALITY",
+      "unresolved_reason": null
+    },
+    {
+      "candidate_entity_ids": [],
+      "entity_id": "COMPANY-280abef66af82a6c",
+      "entity_type": "COMPANY",
+      "evidence": {
+        "address": {
+          "json_pointer": "/domestic_capability/producer_evidence/1/producer",
+          "snapshot_id": "PUBLIC-SAU-H0-721049-2026-08-31"
+        },
+        "as_of_date": "2026-08-31",
+        "input_sha256": "5c2ab676e5b68509e002eddff4f80107c0d2cc1b78c3b063e26f84d13355512e",
+        "language": "en",
+        "source_kind": "PUBLIC_SNAPSHOT",
+        "span_text": "Hadeed",
+        "text_order": "logical"
+      },
+      "link_id": "L-032",
+      "link_status": "EXACT_DOCUMENT_EVIDENCE",
+      "mention_id": "M-032",
+      "precedence_rank": 2,
+      "rule_applied": "EXACT_NAME_EQUALITY",
+      "unresolved_reason": null
+    },
+    {
+      "candidate_entity_ids": [],
+      "entity_id": "COMPANY-f2d406af94a8aac1",
+      "entity_type": "COMPANY",
+      "evidence": {
+        "address": {
+          "json_pointer": "/evidence/1/source",
+          "snapshot_id": "PUBLIC-SAU-H0-390210-2026-08-31"
+        },
+        "as_of_date": "2026-08-31",
+        "input_sha256": "edaeaabf82276f75a1887aa0869b9e3a4070c3338fa0e9f677c55607cd8d0ac4",
+        "language": "en",
+        "source_kind": "PUBLIC_SNAPSHOT",
+        "span_text": "SABIC",
+        "text_order": "logical"
+      },
+      "link_id": "L-033",
+      "link_status": "EXACT_DOCUMENT_EVIDENCE",
+      "mention_id": "M-033",
+      "precedence_rank": 2,
+      "rule_applied": "MINTED_FROM_MENTION",
+      "unresolved_reason": null
+    },
+    {
+      "candidate_entity_ids": [],
+      "entity_id": "COMPANY-0f8e69531f415144",
+      "entity_type": "COMPANY",
+      "evidence": {
+        "address": {
+          "json_pointer": "/evidence/2/source",
+          "snapshot_id": "PUBLIC-SAU-H0-390210-2026-08-31"
+        },
+        "as_of_date": "2026-08-31",
+        "input_sha256": "edaeaabf82276f75a1887aa0869b9e3a4070c3338fa0e9f677c55607cd8d0ac4",
+        "language": "en",
+        "source_kind": "PUBLIC_SNAPSHOT",
+        "span_text": "Advanced Petrochemical",
+        "text_order": "logical"
+      },
+      "link_id": "L-034",
+      "link_status": "EXACT_DOCUMENT_EVIDENCE",
+      "mention_id": "M-034",
+      "precedence_rank": 2,
+      "rule_applied": "MINTED_FROM_MENTION",
+      "unresolved_reason": null
+    },
+    {
+      "candidate_entity_ids": [],
+      "entity_id": "COMPANY-f3a50c477f158420",
+      "entity_type": "COMPANY",
+      "evidence": {
+        "address": {
+          "json_pointer": "/evidence/3/source",
+          "snapshot_id": "PUBLIC-SAU-H0-390210-2026-08-31"
+        },
+        "as_of_date": "2026-08-31",
+        "input_sha256": "edaeaabf82276f75a1887aa0869b9e3a4070c3338fa0e9f677c55607cd8d0ac4",
+        "language": "en",
+        "source_kind": "PUBLIC_SNAPSHOT",
+        "span_text": "Tasnee",
+        "text_order": "logical"
+      },
+      "link_id": "L-035",
+      "link_status": "EXACT_DOCUMENT_EVIDENCE",
+      "mention_id": "M-035",
+      "precedence_rank": 2,
+      "rule_applied": "MINTED_FROM_MENTION",
+      "unresolved_reason": null
+    },
+    {
+      "candidate_entity_ids": [],
+      "entity_id": "COMPANY-f2d406af94a8aac1",
+      "entity_type": "COMPANY",
+      "evidence": {
+        "address": {
+          "json_pointer": "/domestic_capability/producer_evidence/0/producer",
+          "snapshot_id": "PUBLIC-SAU-H0-390210-2026-08-31"
+        },
+        "as_of_date": "2026-08-31",
+        "input_sha256": "edaeaabf82276f75a1887aa0869b9e3a4070c3338fa0e9f677c55607cd8d0ac4",
+        "language": "en",
+        "source_kind": "PUBLIC_SNAPSHOT",
+        "span_text": "SABIC",
+        "text_order": "logical"
+      },
+      "link_id": "L-036",
+      "link_status": "EXACT_DOCUMENT_EVIDENCE",
+      "mention_id": "M-036",
+      "precedence_rank": 2,
+      "rule_applied": "EXACT_NAME_EQUALITY",
+      "unresolved_reason": null
+    },
+    {
+      "candidate_entity_ids": [],
+      "entity_id": "COMPANY-0f8e69531f415144",
+      "entity_type": "COMPANY",
+      "evidence": {
+        "address": {
+          "json_pointer": "/domestic_capability/producer_evidence/1/producer",
+          "snapshot_id": "PUBLIC-SAU-H0-390210-2026-08-31"
+        },
+        "as_of_date": "2026-08-31",
+        "input_sha256": "edaeaabf82276f75a1887aa0869b9e3a4070c3338fa0e9f677c55607cd8d0ac4",
+        "language": "en",
+        "source_kind": "PUBLIC_SNAPSHOT",
+        "span_text": "Advanced Petrochemical",
+        "text_order": "logical"
+      },
+      "link_id": "L-037",
+      "link_status": "EXACT_DOCUMENT_EVIDENCE",
+      "mention_id": "M-037",
+      "precedence_rank": 2,
+      "rule_applied": "EXACT_NAME_EQUALITY",
+      "unresolved_reason": null
+    },
+    {
+      "candidate_entity_ids": [],
+      "entity_id": "COMPANY-f3a50c477f158420",
+      "entity_type": "COMPANY",
+      "evidence": {
+        "address": {
+          "json_pointer": "/domestic_capability/producer_evidence/2/producer",
+          "snapshot_id": "PUBLIC-SAU-H0-390210-2026-08-31"
+        },
+        "as_of_date": "2026-08-31",
+        "input_sha256": "edaeaabf82276f75a1887aa0869b9e3a4070c3338fa0e9f677c55607cd8d0ac4",
+        "language": "en",
+        "source_kind": "PUBLIC_SNAPSHOT",
+        "span_text": "Tasnee",
+        "text_order": "logical"
+      },
+      "link_id": "L-038",
+      "link_status": "EXACT_DOCUMENT_EVIDENCE",
+      "mention_id": "M-038",
+      "precedence_rank": 2,
+      "rule_applied": "EXACT_NAME_EQUALITY",
+      "unresolved_reason": null
+    }
+  ],
+  "merge_records": [],
+  "name_change_records": [],
+  "normalisation": {
+    "method_id": "NAME_NORMALISATION_V1",
+    "version": "1.0.0"
+  },
+  "observation_links": [
+    {
+      "candidate_entity_ids": [],
+      "entity_id": "COMPANY-f2d406af94a8aac1",
+      "link_status": "EXACT_DOCUMENT_EVIDENCE",
+      "observation_ref": {
+        "json_pointer": "/domestic_capability/producer_evidence/0/producer",
+        "snapshot_id": "PUBLIC-SAU-H0-390210-2026-08-31"
+      },
+      "unresolved_reason": null,
+      "via_mention_ids": [
+        "M-036"
+      ]
+    },
+    {
+      "candidate_entity_ids": [],
+      "entity_id": "COMPANY-0f8e69531f415144",
+      "link_status": "EXACT_DOCUMENT_EVIDENCE",
+      "observation_ref": {
+        "json_pointer": "/domestic_capability/producer_evidence/1/producer",
+        "snapshot_id": "PUBLIC-SAU-H0-390210-2026-08-31"
+      },
+      "unresolved_reason": null,
+      "via_mention_ids": [
+        "M-037"
+      ]
+    },
+    {
+      "candidate_entity_ids": [],
+      "entity_id": "COMPANY-f3a50c477f158420",
+      "link_status": "EXACT_DOCUMENT_EVIDENCE",
+      "observation_ref": {
+        "json_pointer": "/domestic_capability/producer_evidence/2/producer",
+        "snapshot_id": "PUBLIC-SAU-H0-390210-2026-08-31"
+      },
+      "unresolved_reason": null,
+      "via_mention_ids": [
+        "M-038"
+      ]
+    },
+    {
+      "candidate_entity_ids": [],
+      "entity_id": "COMPANY-a0954792195adee5",
+      "link_status": "EXACT_DOCUMENT_EVIDENCE",
+      "observation_ref": {
+        "json_pointer": "/domestic_capability/producer_evidence/0/producer",
+        "snapshot_id": "PUBLIC-SAU-H0-721049-2026-08-31"
+      },
+      "unresolved_reason": null,
+      "via_mention_ids": [
+        "M-031"
+      ]
+    },
+    {
+      "candidate_entity_ids": [],
+      "entity_id": "COMPANY-280abef66af82a6c",
+      "link_status": "EXACT_DOCUMENT_EVIDENCE",
+      "observation_ref": {
+        "json_pointer": "/domestic_capability/producer_evidence/1/producer",
+        "snapshot_id": "PUBLIC-SAU-H0-721049-2026-08-31"
+      },
+      "unresolved_reason": null,
+      "via_mention_ids": [
+        "M-032"
+      ]
+    }
+  ],
+  "ownership_records": [
+    {
+      "description_text": "100% Saudi-owned",
+      "effective_date_text": "2004",
+      "entity_id": "COMPANY-a0954792195adee5",
+      "evidence": [
+        {
+          "address": {
+            "document_id": "DOC-PRODUCER-UNICOIL-70151205e3a4-1762d53d6cab",
+            "line_index": 12,
+            "page_index": 4
+          },
+          "as_of_date": "2026-09-12",
+          "mention_id": "M-004",
+          "span_text": "UNICOIL then became a 100% Saudi-owned"
+        },
+        {
+          "address": {
+            "document_id": "DOC-PRODUCER-UNICOIL-d7302a241f7d-f35cfd06f777",
+            "line_index": 12,
+            "page_index": 4
+          },
+          "as_of_date": "2026-09-12",
+          "mention_id": "M-012",
+          "span_text": "UNICOIL then became a 100% Saudi-owned company in 2004"
+        }
+      ],
+      "owner_entity_id": null,
+      "owner_link_status": "UNRESOLVED",
+      "owner_span_text": null,
+      "record_id": "R-34a9fd95c1469f57",
+      "statement_kind": "OWNERSHIP_CHANGE"
+    }
+  ],
+  "passport_links": [
+    {
+      "candidate_entity_ids": [],
+      "corroboration": null,
+      "entity_id": "COMPANY-a0954792195adee5",
+      "link_status": "EXACT_DOCUMENT_EVIDENCE",
+      "passport_ref": {
+        "document_id": "DOC-PRODUCER-UNICOIL-70151205e3a4-1762d53d6cab",
+        "evidence_id": null,
+        "json_pointer": null,
+        "kind": "DOCUMENT_RECORD_PASSPORT",
+        "passport_id": "producer_unicoil-70151205e3a4-20260912T053955Z",
+        "snapshot_id": null
+      },
+      "unresolved_reason": null,
+      "via_mention_ids": [
+        "M-001"
+      ]
+    },
+    {
+      "candidate_entity_ids": [],
+      "corroboration": null,
+      "entity_id": null,
+      "link_status": "UNRESOLVED",
+      "passport_ref": {
+        "document_id": "DOC-PRODUCER-UNICOIL-7d21f605fc4e-6eb00a1886d0",
+        "evidence_id": null,
+        "json_pointer": null,
+        "kind": "DOCUMENT_RECORD_PASSPORT",
+        "passport_id": "producer_unicoil-7d21f605fc4e-20260912T053955Z",
+        "snapshot_id": null
+      },
+      "unresolved_reason": "NO_MENTION_RECORDED",
+      "via_mention_ids": []
+    },
+    {
+      "candidate_entity_ids": [],
+      "corroboration": null,
+      "entity_id": null,
+      "link_status": "UNRESOLVED",
+      "passport_ref": {
+        "document_id": "DOC-PRODUCER-UNICOIL-9cf950950e95-6217c780a89a",
+        "evidence_id": null,
+        "json_pointer": null,
+        "kind": "DOCUMENT_RECORD_PASSPORT",
+        "passport_id": "producer_unicoil-9cf950950e95-20260912T053955Z",
+        "snapshot_id": null
+      },
+      "unresolved_reason": "NO_MENTION_RECORDED",
+      "via_mention_ids": []
+    },
+    {
+      "candidate_entity_ids": [],
+      "corroboration": null,
+      "entity_id": "COMPANY-a0954792195adee5",
+      "link_status": "EXACT_DOCUMENT_EVIDENCE",
+      "passport_ref": {
+        "document_id": "DOC-PRODUCER-UNICOIL-cec488bffcda-3017de71d962",
+        "evidence_id": null,
+        "json_pointer": null,
+        "kind": "DOCUMENT_RECORD_PASSPORT",
+        "passport_id": "producer_unicoil-cec488bffcda-20260912T053955Z",
+        "snapshot_id": null
+      },
+      "unresolved_reason": null,
+      "via_mention_ids": [
+        "M-015",
+        "M-016"
+      ]
+    },
+    {
+      "candidate_entity_ids": [],
+      "corroboration": null,
+      "entity_id": "COMPANY-a0954792195adee5",
+      "link_status": "EXACT_DOCUMENT_EVIDENCE",
+      "passport_ref": {
+        "document_id": "DOC-PRODUCER-UNICOIL-d7302a241f7d-f35cfd06f777",
+        "evidence_id": null,
+        "json_pointer": null,
+        "kind": "DOCUMENT_RECORD_PASSPORT",
+        "passport_id": "producer_unicoil-d7302a241f7d-20260912T053955Z",
+        "snapshot_id": null
+      },
+      "unresolved_reason": null,
+      "via_mention_ids": [
+        "M-008"
+      ]
+    },
+    {
+      "candidate_entity_ids": [],
+      "corroboration": null,
+      "entity_id": "COMPANY-a0954792195adee5",
+      "link_status": "EXACT_DOCUMENT_EVIDENCE",
+      "passport_ref": {
+        "document_id": "DOC-PRODUCER-UNICOIL-ecb55cc26093-612efea9a835",
+        "evidence_id": null,
+        "json_pointer": null,
+        "kind": "DOCUMENT_RECORD_PASSPORT",
+        "passport_id": "producer_unicoil-ecb55cc26093-20260912T053955Z",
+        "snapshot_id": null
+      },
+      "unresolved_reason": null,
+      "via_mention_ids": [
+        "M-019"
+      ]
+    },
+    {
+      "candidate_entity_ids": [],
+      "corroboration": null,
+      "entity_id": null,
+      "link_status": "UNRESOLVED",
+      "passport_ref": {
+        "document_id": "DOC-SASO-DOCUMENTS-641a518f410a-1bfd6143aaa9",
+        "evidence_id": null,
+        "json_pointer": null,
+        "kind": "DOCUMENT_RECORD_PASSPORT",
+        "passport_id": "saso_documents-641a518f410a-20260912T053622Z",
+        "snapshot_id": null
+      },
+      "unresolved_reason": "OUT_OF_SCOPE_ENTITY_TYPE",
+      "via_mention_ids": [
+        "M-021"
+      ]
+    },
+    {
+      "candidate_entity_ids": [],
+      "corroboration": null,
+      "entity_id": null,
+      "link_status": "UNRESOLVED",
+      "passport_ref": {
+        "document_id": "DOC-SASO-DOCUMENTS-69ea78b9cd4e-000691d40661",
+        "evidence_id": null,
+        "json_pointer": null,
+        "kind": "DOCUMENT_RECORD_PASSPORT",
+        "passport_id": "saso_documents-69ea78b9cd4e-20260912T053622Z",
+        "snapshot_id": null
+      },
+      "unresolved_reason": "OUT_OF_SCOPE_ENTITY_TYPE",
+      "via_mention_ids": [
+        "M-022"
+      ]
+    },
+    {
+      "candidate_entity_ids": [],
+      "corroboration": null,
+      "entity_id": null,
+      "link_status": "UNRESOLVED",
+      "passport_ref": {
+        "document_id": "DOC-SASO-DOCUMENTS-710bf26c140e-b25658901d54",
+        "evidence_id": null,
+        "json_pointer": null,
+        "kind": "DOCUMENT_RECORD_PASSPORT",
+        "passport_id": "saso_documents-710bf26c140e-20260912T053622Z",
+        "snapshot_id": null
+      },
+      "unresolved_reason": "OUT_OF_SCOPE_ENTITY_TYPE",
+      "via_mention_ids": [
+        "M-023",
+        "M-027"
+      ]
+    },
+    {
+      "candidate_entity_ids": [],
+      "corroboration": null,
+      "entity_id": null,
+      "link_status": "UNRESOLVED",
+      "passport_ref": {
+        "document_id": "DOC-SASO-DOCUMENTS-c778364b4087-b89ca084a45d",
+        "evidence_id": null,
+        "json_pointer": null,
+        "kind": "DOCUMENT_RECORD_PASSPORT",
+        "passport_id": "saso_documents-c778364b4087-20260912T053622Z",
+        "snapshot_id": null
+      },
+      "unresolved_reason": "OUT_OF_SCOPE_ENTITY_TYPE",
+      "via_mention_ids": [
+        "M-024"
+      ]
+    },
+    {
+      "candidate_entity_ids": [],
+      "corroboration": null,
+      "entity_id": null,
+      "link_status": "UNRESOLVED",
+      "passport_ref": {
+        "document_id": "DOC-SASO-DOCUMENTS-d5e242b67294-9189ec73295b",
+        "evidence_id": null,
+        "json_pointer": null,
+        "kind": "DOCUMENT_RECORD_PASSPORT",
+        "passport_id": "saso_documents-d5e242b67294-20260912T053622Z",
+        "snapshot_id": null
+      },
+      "unresolved_reason": "OUT_OF_SCOPE_ENTITY_TYPE",
+      "via_mention_ids": [
+        "M-025"
+      ]
+    },
+    {
+      "candidate_entity_ids": [],
+      "corroboration": null,
+      "entity_id": null,
+      "link_status": "UNRESOLVED",
+      "passport_ref": {
+        "document_id": "DOC-SASO-DOCUMENTS-e57d73b6e5b7-0e0d00cb00cf",
+        "evidence_id": null,
+        "json_pointer": null,
+        "kind": "DOCUMENT_RECORD_PASSPORT",
+        "passport_id": "saso_documents-e57d73b6e5b7-20260912T053622Z",
+        "snapshot_id": null
+      },
+      "unresolved_reason": "OUT_OF_SCOPE_ENTITY_TYPE",
+      "via_mention_ids": [
+        "M-026"
+      ]
+    },
+    {
+      "candidate_entity_ids": [],
+      "corroboration": null,
+      "entity_id": "COMPANY-f2d406af94a8aac1",
+      "link_status": "EXACT_DOCUMENT_EVIDENCE",
+      "passport_ref": {
+        "document_id": null,
+        "evidence_id": "P-SABIC",
+        "json_pointer": "/evidence/1/source",
+        "kind": "PUBLIC_SNAPSHOT_PASSPORT",
+        "passport_id": null,
+        "snapshot_id": "PUBLIC-SAU-H0-390210-2026-08-31"
+      },
+      "unresolved_reason": null,
+      "via_mention_ids": [
+        "M-033"
+      ]
+    },
+    {
+      "candidate_entity_ids": [],
+      "corroboration": null,
+      "entity_id": "COMPANY-0f8e69531f415144",
+      "link_status": "EXACT_DOCUMENT_EVIDENCE",
+      "passport_ref": {
+        "document_id": null,
+        "evidence_id": "P-ADVANCED",
+        "json_pointer": "/evidence/2/source",
+        "kind": "PUBLIC_SNAPSHOT_PASSPORT",
+        "passport_id": null,
+        "snapshot_id": "PUBLIC-SAU-H0-390210-2026-08-31"
+      },
+      "unresolved_reason": null,
+      "via_mention_ids": [
+        "M-034"
+      ]
+    },
+    {
+      "candidate_entity_ids": [],
+      "corroboration": null,
+      "entity_id": "COMPANY-f3a50c477f158420",
+      "link_status": "EXACT_DOCUMENT_EVIDENCE",
+      "passport_ref": {
+        "document_id": null,
+        "evidence_id": "P-TASNEE",
+        "json_pointer": "/evidence/3/source",
+        "kind": "PUBLIC_SNAPSHOT_PASSPORT",
+        "passport_id": null,
+        "snapshot_id": "PUBLIC-SAU-H0-390210-2026-08-31"
+      },
+      "unresolved_reason": null,
+      "via_mention_ids": [
+        "M-035"
+      ]
+    },
+    {
+      "candidate_entity_ids": [],
+      "corroboration": {
+        "same_document_url_as": "DOC-PRODUCER-UNICOIL-70151205e3a4-1762d53d6cab"
+      },
+      "entity_id": "COMPANY-a0954792195adee5",
+      "link_status": "EXACT_DOCUMENT_EVIDENCE",
+      "passport_ref": {
+        "document_id": null,
+        "evidence_id": "S-UNICOIL-EPD",
+        "json_pointer": "/evidence/1/source",
+        "kind": "PUBLIC_SNAPSHOT_PASSPORT",
+        "passport_id": null,
+        "snapshot_id": "PUBLIC-SAU-H0-721049-2026-08-31"
+      },
+      "unresolved_reason": null,
+      "via_mention_ids": [
+        "M-028"
+      ]
+    },
+    {
+      "candidate_entity_ids": [],
+      "corroboration": null,
+      "entity_id": "COMPANY-a0954792195adee5",
+      "link_status": "EXACT_DOCUMENT_EVIDENCE",
+      "passport_ref": {
+        "document_id": null,
+        "evidence_id": "S-UNICOIL-SPEC",
+        "json_pointer": "/evidence/2/source",
+        "kind": "PUBLIC_SNAPSHOT_PASSPORT",
+        "passport_id": null,
+        "snapshot_id": "PUBLIC-SAU-H0-721049-2026-08-31"
+      },
+      "unresolved_reason": null,
+      "via_mention_ids": [
+        "M-029"
+      ]
+    },
+    {
+      "candidate_entity_ids": [],
+      "corroboration": null,
+      "entity_id": "COMPANY-280abef66af82a6c",
+      "link_status": "EXACT_DOCUMENT_EVIDENCE",
+      "passport_ref": {
+        "document_id": null,
+        "evidence_id": "S-HADEED",
+        "json_pointer": "/evidence/3/source",
+        "kind": "PUBLIC_SNAPSHOT_PASSPORT",
+        "passport_id": null,
+        "snapshot_id": "PUBLIC-SAU-H0-721049-2026-08-31"
+      },
+      "unresolved_reason": null,
+      "via_mention_ids": [
+        "M-030"
+      ]
+    }
+  ],
+  "quality_summary": "PASS",
+  "schema_version": "1.0.0",
+  "source_boundary": "public",
+  "synthetic_flag": false,
+  "transformation_record": {
+    "config_version": "1.0.0",
+    "exclusions": [],
+    "formula": "resolve_entities",
+    "parameters": {
+      "id_scheme": "ENTITY_ID_V1",
+      "mention_list_id": "mentions-v1",
+      "normalisation_method_id": "NAME_NORMALISATION_V1",
+      "normalisation_version": "1.0.0",
+      "rule_table_version": "1.0.0"
+    },
+    "pipeline_version": "1.0.0"
+  }
+}

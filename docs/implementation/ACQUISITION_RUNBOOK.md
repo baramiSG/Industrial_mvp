@@ -91,3 +91,17 @@ At T9 authoring, **S12b manifest run count is 0** (S12a already consumed its sin
 **Recorded T11/owner-authorized outcomes:** (1) slot 2 — generator exited 0 on 2026-09-12 at 05:26:47 UTC; five authority-table rows mirrored; immediate [14] passed; snapshot manifest +88 rows (lists and zero-request attempts). (2) slot 3 OD-9 — generator exited 0 at 05:43:02 UTC after the T7-v3 SR-06 re-runs produced twelve COMPLETE records; §11 mirrored and immediate [14] passed. (3) slot 4 OD-10 — generator exited 0 at 06:37:37 UTC after reviewer-driven F01/F02 corrections; §11 mirrored and immediate [14] passed. (4) slot 5 OD-13 — generator exited 0 at 07:30:41 UTC after the page-hash, physical-page, superseded-run and governed-text corrections, all twelve offline record rebuilds and corrected T10 regression; §11 was mirrored and immediate [14] passed. S12b's final manifest run count is **4**; all four authorizations are exhausted and no fifth run is authorized.
 
 **T7-v3 operator window (slot 3, SR-06):** closed 2026-09-12 05:40:21 UTC. Terms: SASO acceptable-use policy recorded for `saso_documents`; UNICOIL privacy policy consulted — no document reuse terms (`license_capture_required: false`). `-v3` lists and runs `20260912T053622Z` (saso, 6 COMPLETE units) and `20260912T053955Z` (unicoil, 6 COMPLETE units). Current records: the six `saso_documents` DocumentRecords are built from the declaration-corrected list `saso_documents-v4` against run `20260912T053622Z` (slot-4 correction round, OD-11 — the v3-built records were replaced before any commit; same `document_id`s); the six `producer_unicoil` records are built from `producer_unicoil-v3` against run `20260912T053955Z`. v1/v2/v3 lists and every prior run are retained as history; no list is edited after a run.
+
+## S12c offline entity build
+
+`build-entities` is offline and requires an operator-authored `MENTION_LIST_ID`. A list under `data/entities/mentions/` is validated and hashed before use; every span must equal its addressed JSON value or be a verbatim substring of its addressed DocumentRecord line. Never edit a list after a build; a correction to list content requires a new `list_id`. Artifacts under `data/entities/resolution/` are canonical write-once files and reconstruct against the mention list, rule table and every recorded input hash.
+
+```bash
+make build-entities MENTION_LIST_ID=mentions-v1
+```
+
+The S12c implementation executed that exact command offline. Final report after test-first resolver corrections: artifact `ENTITIES-2026-09-12-a12e24c31b02`; entities `COMPANY` 5, `PLANT` 2, `LINE` 0, `LICENCE_HOLDER` 0; mention links exact 27, pending 3, unresolved 8, deterministic-identifier 0; passport links exact 10 and unresolved 8; the two verification-statement document IDs are listed in KL-68. The list stayed unchanged and all 38 spans were builder-verified.
+
+At T7 authoring, S12c manifest run count is **0**. ADR-018 authorizes one generator invocation only after the T8 regression, followed immediately by [14] and the seventeen-row Manifest §11 mirror. No second S12c run is authorized.
+
+Recorded T9 outcome: the single S12c generator invocation ran at `2026-09-12T11:25:47Z` and exited 0; immediate [14] printed `MANIFEST_S11_S12A_S12B_ROWS_UNCHANGED_ENTITIES_PRESENT 2`; the seventeen-row authority table was mirrored. S12c manifest run count is **1**, the authorization is exhausted, and this runbook authorizes no rerun.

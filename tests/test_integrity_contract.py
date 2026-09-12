@@ -60,6 +60,7 @@ def test_s08_snapshot_manifest_retains_live_and_historical_public_rows(
     allowed_extra_prefixes = (
         "data/raw/",
         "data/documents/",
+        "data/entities/",
         "data/snapshots/universe/",
         "data/snapshots/tariff/",
         "data/snapshots/partners/",
@@ -91,6 +92,7 @@ def _partition_valid(paths: set[str]) -> bool:
     allowed_extra_prefixes = (
         "data/raw/",
         "data/documents/",
+        "data/entities/",
         "data/snapshots/universe/",
         "data/snapshots/tariff/",
         "data/snapshots/partners/",
@@ -119,6 +121,8 @@ def test_s11_snapshot_manifest_rejects_public_partition_leak() -> None:
         assert not _partition_valid(paths | {f"data/snapshots/{kind}-other/extra.json"})
     assert _partition_valid(paths | {"data/documents/producer_unicoil/records/extra.json"})
     assert not _partition_valid(paths | {"data/documents-other/extra.json"})
+    assert _partition_valid(paths | {"data/entities/resolution/extra.json"})
+    assert not _partition_valid(paths | {"data/entities-other/extra.json"})
     assert not _partition_valid(paths | {"data/snapshots/unknown/extra.json"})
 
 
@@ -538,6 +542,56 @@ def test_s12b_core_v2_document_contracts() -> None:
     assert "No bidi reordering or reshaping is applied" in document_section
     assert "PDF content-stream order" in section_10
     assert "not logical reading order" in section_10
+
+
+def test_s12c_core_v2_entity_contracts() -> None:
+    core_04 = (
+        PROJECT_ROOT / "docs" / "core" / "04_CANONICAL_DATA_MODEL.md"
+    ).read_text(encoding="utf-8")
+    core_05 = (
+        PROJECT_ROOT / "docs" / "core" / "05_DATA_SOURCES_AND_INGESTION.md"
+    ).read_text(encoding="utf-8")
+    required_04 = {
+        "EntityResolutionArtifact 1.0.0",
+        "EntityMentionList 1.0.0",
+        "ENTITY_ID_V1",
+        "NAME_NORMALISATION_V1",
+        "COMPANY",
+        "PLANT",
+        "LINE",
+        "LICENCE_HOLDER",
+        "DETERMINISTIC_IDENTIFIER",
+        "EXACT_DOCUMENT_EVIDENCE",
+        "PROPOSED_PENDING_REVIEW",
+        "UNRESOLVED",
+        "SITE_LOCALITY",
+        "data/entities/",
+        "visual",
+        "never re-issued",
+    }
+    required_05 = {
+        "ENTITY_ID_V1",
+        "NAME_NORMALISATION_V1",
+        "DETERMINISTIC_IDENTIFIER",
+        "EXACT_DOCUMENT_EVIDENCE",
+        "PROPOSED_PENDING_REVIEW",
+        "UNRESOLVED",
+        "data/entities/",
+        "S12c",
+        "config/entity_resolution.v1.yaml",
+        "build-entities",
+        "--mention-list-id",
+    }
+    assert not (required_04 - set(token for token in required_04 if token in core_04))
+    assert not (required_05 - set(token for token in required_05 if token in core_05))
+
+
+def test_build_manifests_includes_entity_rules_config() -> None:
+    source = (PROJECT_ROOT / "scripts" / "build_manifests.py").read_text(
+        encoding="utf-8"
+    )
+    assert 'ROOT / "config" / "entity_resolution.v1.yaml"' in source
+    assert '"entities"' in source
 
 
 def test_document_sources_without_records_cited_in_known_limitations() -> None:

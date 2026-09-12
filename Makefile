@@ -22,7 +22,7 @@ VISUAL_BASELINE_IMAGE = ior-visual-baselines:playwright-1.62.0-noble
 	e2e-update-baselines visual-baseline-image ci \
 	acquire-universe acquire-partners acquire-tariff acquire-baci \
 	acquire-aggregates acquire-directory acquire-registry build-snapshots reconstruct \
-	acquire-documents build-documents
+	acquire-documents build-documents build-entities
 
 install:
 	python3 -m pip install -e ".[dev]"
@@ -165,6 +165,10 @@ build-documents:
 	@test -n "$(SOURCE)" || (echo "SOURCE required" >&2; exit 2)
 	@test -n "$(LIST_ID)" || (echo "LIST_ID required" >&2; exit 2)
 	PYTHONPATH=src $(UV_RUN) python -m ior_mvp.acquisition build-documents --source $(SOURCE) --list-id $(LIST_ID)
+
+build-entities:
+	@test -n "$(MENTION_LIST_ID)" || (echo "MENTION_LIST_ID required" >&2; exit 2)
+	PYTHONPATH=src $(UV_RUN) python -m ior_mvp.acquisition build-entities --mention-list-id $(MENTION_LIST_ID)
 
 reconstruct:
 	PYTHONPATH=src $(UV_RUN) python scripts/reconstruct_snapshot.py --all
