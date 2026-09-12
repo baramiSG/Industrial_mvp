@@ -6,6 +6,7 @@ import json
 import os
 import shutil
 from dataclasses import dataclass
+from datetime import UTC, datetime
 from importlib.metadata import version
 from pathlib import Path
 from typing import Any, Literal
@@ -42,6 +43,10 @@ SCREENS = (
     "journey-e-steel-simulated-dossier",
     "journey-e-polypropylene-public-dossier",
     "journey-e-polypropylene-simulated-dossier",
+    "journey-f-screening-summary",
+    "journey-f-screening-queue-robust",
+    "journey-f-screening-queue-empty",
+    "journey-f-screening-record",
 )
 MAX_FILE_BYTES = 600 * 1024
 MAX_TOTAL_BYTES = 12 * 1024 * 1024
@@ -185,7 +190,7 @@ def validate_manifest(root: Path = BASELINE_ROOT) -> dict[str, Any]:
         (entry["locale"], entry["viewport"], entry["screen"])
         for entry in entries
     }
-    if len(entries) != 40 or matrix != _expected_matrix():
+    if len(entries) != len(_expected_matrix()) or matrix != _expected_matrix():
         raise ValueError("visual baseline matrix is incomplete")
     if payload.get("source_tree") != _source_hashes():
         raise ValueError("visual baseline source-tree provenance is stale")
@@ -318,7 +323,10 @@ class VisualBaselineSession:
             (entry["locale"], entry["viewport"], entry["screen"])
             for entry in self.entries
         }
-        if len(self.entries) != 40 or identities != _expected_matrix():
+        if (
+            len(self.entries) != len(_expected_matrix())
+            or identities != _expected_matrix()
+        ):
             raise ValueError("visual update matrix is incomplete")
         if any(entry["bytes"] > MAX_FILE_BYTES for entry in self.entries):
             raise ValueError("visual update file exceeds budget")
@@ -327,7 +335,7 @@ class VisualBaselineSession:
         payload = {
             "manifest_version": "1.0",
             "baseline_version": "v0.3.0",
-            "generated_on": "2026-09-02",
+            "generated_on": datetime.now(UTC).date().isoformat(),
             "change_ref": self.change_ref,
             "canonical_image": CANONICAL_IMAGE,
             "chromium_revision": CHROMIUM_REVISION,

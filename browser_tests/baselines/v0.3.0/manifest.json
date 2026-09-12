@@ -2,11 +2,11 @@
   "baseline_version": "v0.3.0",
   "browser_version": "151.0.7922.34",
   "canonical_image": "mcr.microsoft.com/playwright/python:v1.62.0-noble@sha256:aa81288e738725378becba5b3e06cb0f3a7f012a610e87e8d767a090ea3f740d",
-  "change_ref": "S10-generalized-simulation",
+  "change_ref": "S13b-bilingual-screening-surface:560695023cd626e4e6e936d7fc7d9b67465e0062d168a16eaec55597cad9f14e",
   "chromium_revision": "chromium-1234",
   "entries": [
     {
-      "bytes": 168796,
+      "bytes": 169722,
       "case_id": null,
       "dimensions": [
         1440,
@@ -16,11 +16,11 @@
       "mode": "public",
       "path": "ar/desktop-1440x900/journey-a-portfolio-public.webp",
       "screen": "journey-a-portfolio-public",
-      "sha256": "97490a35981f1e925f75499f5d27c01dbac735795befbd1cf03b950fc9379348",
+      "sha256": "9e51fc2c8bd88eeb88aabdd1b23489daa03a911511de6d0dc799e7d33b9f635f",
       "viewport": "desktop-1440x900"
     },
     {
-      "bytes": 172992,
+      "bytes": 174088,
       "case_id": null,
       "dimensions": [
         1440,
@@ -30,11 +30,11 @@
       "mode": "simulated",
       "path": "ar/desktop-1440x900/journey-a-portfolio-simulated.webp",
       "screen": "journey-a-portfolio-simulated",
-      "sha256": "c4a504a369a0d4284dceef84b327d49db716e551675f8d09a47f8d2b3944e645",
+      "sha256": "73205f8b98654e6c5d0eef98c6d77ee348c840eea5d6567d4f22dc47fc1ed072",
       "viewport": "desktop-1440x900"
     },
     {
-      "bytes": 220168,
+      "bytes": 221410,
       "case_id": "SAU-H0-721049",
       "dimensions": [
         1440,
@@ -44,11 +44,11 @@
       "mode": "public",
       "path": "ar/desktop-1440x900/journey-b-steel-public-workspace.webp",
       "screen": "journey-b-steel-public-workspace",
-      "sha256": "78e4f00f3b1c8874bb6641ad533112f6f67c2e19f5652e96e99a4c38155596b0",
+      "sha256": "a199784cb34c1b2d03d7f8c605b5e41f72701552829f7ed193a705d78c46f216",
       "viewport": "desktop-1440x900"
     },
     {
-      "bytes": 228152,
+      "bytes": 229334,
       "case_id": "SAU-H0-721049",
       "dimensions": [
         1440,
@@ -58,11 +58,11 @@
       "mode": "simulated",
       "path": "ar/desktop-1440x900/journey-c-steel-simulated-workspace.webp",
       "screen": "journey-c-steel-simulated-workspace",
-      "sha256": "0297111637bc97e08f103656e916601052c2db71df88f741968c2df375e03a64",
+      "sha256": "ec6bcc7023b48b833ba449fee87d3620b9ae1b30e1d7059d45e829f66c5aca11",
       "viewport": "desktop-1440x900"
     },
     {
-      "bytes": 209570,
+      "bytes": 210552,
       "case_id": "SAU-H0-390210",
       "dimensions": [
         1440,
@@ -72,11 +72,11 @@
       "mode": "public",
       "path": "ar/desktop-1440x900/journey-d-polypropylene-public-workspace.webp",
       "screen": "journey-d-polypropylene-public-workspace",
-      "sha256": "76d592f877e3567ec30f93d0d15696a240b7dfcaeedfe69fdb6999e3285e80a1",
+      "sha256": "8310ff1f01c56d98ce0867c65104851c36747821121f31b001b00566cadb17c1",
       "viewport": "desktop-1440x900"
     },
     {
-      "bytes": 216566,
+      "bytes": 217420,
       "case_id": "SAU-H0-390210",
       "dimensions": [
         1440,
@@ -86,7 +86,7 @@
       "mode": "simulated",
       "path": "ar/desktop-1440x900/journey-d-polypropylene-simulated-workspace.webp",
       "screen": "journey-d-polypropylene-simulated-workspace",
-      "sha256": "ac0466e58ddab3c043af0968824fcbe6f53a420b3a638792cefcf2c84ae31bfc",
+      "sha256": "28fec74bcb2a869496e0aa6a35b8ea8f46ca1f542fd6fc66ac7f1e6f9472f15a",
       "viewport": "desktop-1440x900"
     },
     {
@@ -146,7 +146,63 @@
       "viewport": "desktop-1440x900"
     },
     {
-      "bytes": 121770,
+      "bytes": 142316,
+      "case_id": null,
+      "dimensions": [
+        1440,
+        900
+      ],
+      "locale": "ar",
+      "mode": "public",
+      "path": "ar/desktop-1440x900/journey-f-screening-queue-empty.webp",
+      "screen": "journey-f-screening-queue-empty",
+      "sha256": "7333322ab032d0ddef33a73e9ebe2832443cba20d802878c6799e0137d270f73",
+      "viewport": "desktop-1440x900"
+    },
+    {
+      "bytes": 150670,
+      "case_id": null,
+      "dimensions": [
+        1440,
+        900
+      ],
+      "locale": "ar",
+      "mode": "public",
+      "path": "ar/desktop-1440x900/journey-f-screening-queue-robust.webp",
+      "screen": "journey-f-screening-queue-robust",
+      "sha256": "6df78bc89a46762df5ac256ffd95ec1535b636154ca0949a1bbea665efe94fc3",
+      "viewport": "desktop-1440x900"
+    },
+    {
+      "bytes": 151182,
+      "case_id": "030579",
+      "dimensions": [
+        1440,
+        900
+      ],
+      "locale": "ar",
+      "mode": "public",
+      "path": "ar/desktop-1440x900/journey-f-screening-record.webp",
+      "screen": "journey-f-screening-record",
+      "sha256": "b3aa201e57b4578c8bc896fb9aa0c9f625b5fbed1d1ba0955f1552f9ce305b41",
+      "viewport": "desktop-1440x900"
+    },
+    {
+      "bytes": 142690,
+      "case_id": null,
+      "dimensions": [
+        1440,
+        900
+      ],
+      "locale": "ar",
+      "mode": "public",
+      "path": "ar/desktop-1440x900/journey-f-screening-summary.webp",
+      "screen": "journey-f-screening-summary",
+      "sha256": "d85ec3885d23c2a1099a717050b62335818767df1da0dbcfdfc207a3fd150136",
+      "viewport": "desktop-1440x900"
+    },
+    {
+      "bytes": 122496,
       "case_id": null,
       "dimensions": [
         1024,
@@ -156,11 +212,11 @@
       "mode": "public",
       "path": "ar/tablet-1024x768/journey-a-portfolio-public.webp",
       "screen": "journey-a-portfolio-public",
-      "sha256": "292a7af0221b8bdbf7b6364c6bad718f8a4cc91212dee4946730a7d56ecd3951",
+      "sha256": "9abed68571d725e0c22491ce0cffa161ac6fcd7327c47e76cf0cf87bd7e29dce",
       "viewport": "tablet-1024x768"
     },
     {
-      "bytes": 119952,
+      "bytes": 121260,
       "case_id": null,
       "dimensions": [
         1024,
@@ -170,11 +226,11 @@
       "mode": "simulated",
       "path": "ar/tablet-1024x768/journey-a-portfolio-simulated.webp",
       "screen": "journey-a-portfolio-simulated",
-      "sha256": "8641856220c508f96d7fb2aa1b4de86af9b1043bd97f540924b8827ebacf63aa",
+      "sha256": "cd4f25ba0db6e81a337701089db465676e042841e8a705d8ef8b3196701d9833",
       "viewport": "tablet-1024x768"
     },
     {
-      "bytes": 166122,
+      "bytes": 166780,
       "case_id": "SAU-H0-721049",
       "dimensions": [
         1024,
@@ -184,11 +240,11 @@
       "mode": "public",
       "path": "ar/tablet-1024x768/journey-b-steel-public-workspace.webp",
       "screen": "journey-b-steel-public-workspace",
-      "sha256": "7a9abf06c870797a13d659f47a4e3b9031f76e9a5e11cd403666ad2f0f80b79d",
+      "sha256": "c87541adad1bf37731a91581d1853282cc366b458f7972d9d0fa796f51865ea2",
       "viewport": "tablet-1024x768"
     },
     {
-      "bytes": 174204,
+      "bytes": 174872,
       "case_id": "SAU-H0-721049",
       "dimensions": [
         1024,
@@ -198,11 +254,11 @@
       "mode": "simulated",
       "path": "ar/tablet-1024x768/journey-c-steel-simulated-workspace.webp",
       "screen": "journey-c-steel-simulated-workspace",
-      "sha256": "4b92e432f4db4455edfa504b4c324af58714f0acb905b8f84297a41b1a804377",
+      "sha256": "fcef9d268a1f21e4c1fc2deb208dcfd63b1915858fb4e1086061d6435fa5df59",
       "viewport": "tablet-1024x768"
     },
     {
-      "bytes": 160538,
+      "bytes": 161584,
       "case_id": "SAU-H0-390210",
       "dimensions": [
         1024,
@@ -212,11 +268,11 @@
       "mode": "public",
       "path": "ar/tablet-1024x768/journey-d-polypropylene-public-workspace.webp",
       "screen": "journey-d-polypropylene-public-workspace",
-      "sha256": "3b3f819b1309054053270462bfebb7411d4a4af4bd20e47c09cb700eb8f3459f",
+      "sha256": "8b568052f24c3eeccdc2afc0b054ed511909c41309dff5b8eeea0fd5dcd16eb6",
       "viewport": "tablet-1024x768"
     },
     {
-      "bytes": 165694,
+      "bytes": 166140,
       "case_id": "SAU-H0-390210",
       "dimensions": [
         1024,
@@ -226,7 +282,7 @@
       "mode": "simulated",
       "path": "ar/tablet-1024x768/journey-d-polypropylene-simulated-workspace.webp",
       "screen": "journey-d-polypropylene-simulated-workspace",
-      "sha256": "ad222592ebe722ca43995dc56273e8f39a177305367aeff852f9952257b39c08",
+      "sha256": "4863d53b203dce1e30af77a74a639b4cc95f32dd41245b66c407d3423134443a",
       "viewport": "tablet-1024x768"
     },
     {
@@ -286,7 +342,63 @@
       "viewport": "tablet-1024x768"
     },
     {
-      "bytes": 175430,
+      "bytes": 106184,
+      "case_id": null,
+      "dimensions": [
+        1024,
+        768
+      ],
+      "locale": "ar",
+      "mode": "public",
+      "path": "ar/tablet-1024x768/journey-f-screening-queue-empty.webp",
+      "screen": "journey-f-screening-queue-empty",
+      "sha256": "d352200a8a672b1576fdb29e4c8f68edfd754a4990131961dfc1f57a10f451e9",
+      "viewport": "tablet-1024x768"
+    },
+    {
+      "bytes": 114776,
+      "case_id": null,
+      "dimensions": [
+        1024,
+        768
+      ],
+      "locale": "ar",
+      "mode": "public",
+      "path": "ar/tablet-1024x768/journey-f-screening-queue-robust.webp",
+      "screen": "journey-f-screening-queue-robust",
+      "sha256": "16fbeeddae1d81e816d37ee691a97e5804c195e511f874860d0d17495335d94c",
+      "viewport": "tablet-1024x768"
+    },
+    {
+      "bytes": 108416,
+      "case_id": "030579",
+      "dimensions": [
+        1024,
+        768
+      ],
+      "locale": "ar",
+      "mode": "public",
+      "path": "ar/tablet-1024x768/journey-f-screening-record.webp",
+      "screen": "journey-f-screening-record",
+      "sha256": "bee70afee5b55545ac8ebf66501d1d23913818db2894c60412220786240d73bb",
+      "viewport": "tablet-1024x768"
+    },
+    {
+      "bytes": 100986,
+      "case_id": null,
+      "dimensions": [
+        1024,
+        768
+      ],
+      "locale": "ar",
+      "mode": "public",
+      "path": "ar/tablet-1024x768/journey-f-screening-summary.webp",
+      "screen": "journey-f-screening-summary",
+      "sha256": "fdd014cfe10146afcfed66b9190f17752d880f6a83d62c47fd0904b4de1d0870",
+      "viewport": "tablet-1024x768"
+    },
+    {
+      "bytes": 177088,
       "case_id": null,
       "dimensions": [
         1440,
@@ -296,11 +408,11 @@
       "mode": "public",
       "path": "en/desktop-1440x900/journey-a-portfolio-public.webp",
       "screen": "journey-a-portfolio-public",
-      "sha256": "9e760fb3d1835903649a0d28ad47bd8afa251c957c5097c109087275ff653d74",
+      "sha256": "2a398a0e3b9eff7ca15a3cda4050e872a0bfd85d3da7256a114c844f0602508c",
       "viewport": "desktop-1440x900"
     },
     {
-      "bytes": 179958,
+      "bytes": 181338,
       "case_id": null,
       "dimensions": [
         1440,
@@ -310,11 +422,11 @@
       "mode": "simulated",
       "path": "en/desktop-1440x900/journey-a-portfolio-simulated.webp",
       "screen": "journey-a-portfolio-simulated",
-      "sha256": "d6160d92cac9bc632623d70c4619e8f6b1b3f802f7560b42ef42c981c6255790",
+      "sha256": "320cf9b1e00450b44610031d5f9520fbc7047993867962c4473e0dfae55d3087",
       "viewport": "desktop-1440x900"
     },
     {
-      "bytes": 224708,
+      "bytes": 225804,
       "case_id": "SAU-H0-721049",
       "dimensions": [
         1440,
@@ -324,11 +436,11 @@
       "mode": "public",
       "path": "en/desktop-1440x900/journey-b-steel-public-workspace.webp",
       "screen": "journey-b-steel-public-workspace",
-      "sha256": "36bac69cf9b09ec0c9012ba6d54b241ac3eddff9e3e73be65bad58277e130a00",
+      "sha256": "86b83466d0c33008e016f2ead9619cd6f3cc2d620b7293a070bd9f3e632738cf",
       "viewport": "desktop-1440x900"
     },
     {
-      "bytes": 229630,
+      "bytes": 231028,
       "case_id": "SAU-H0-721049",
       "dimensions": [
         1440,
@@ -338,11 +450,11 @@
       "mode": "simulated",
       "path": "en/desktop-1440x900/journey-c-steel-simulated-workspace.webp",
       "screen": "journey-c-steel-simulated-workspace",
-      "sha256": "a89e7a4b06271ed9ea979308685652426cf005a8d52085cafae77b7d1e45dd3c",
+      "sha256": "7190c7e250f6301c4b5fd1037caaf870367cfdfa38d65a5cd778919152ffc6d0",
       "viewport": "desktop-1440x900"
     },
     {
-      "bytes": 218418,
+      "bytes": 219424,
       "case_id": "SAU-H0-390210",
       "dimensions": [
         1440,
@@ -352,11 +464,11 @@
       "mode": "public",
       "path": "en/desktop-1440x900/journey-d-polypropylene-public-workspace.webp",
       "screen": "journey-d-polypropylene-public-workspace",
-      "sha256": "11094e62d9690dd7d9c31e77cdde002f0091c5c50442839db93762c05ebd15d7",
+      "sha256": "c915723c923d637d3fd1515f4a79f6c327fbe088f8bc3310367fa10829228ea7",
       "viewport": "desktop-1440x900"
     },
     {
-      "bytes": 226618,
+      "bytes": 228116,
       "case_id": "SAU-H0-390210",
       "dimensions": [
         1440,
@@ -366,7 +478,7 @@
       "mode": "simulated",
       "path": "en/desktop-1440x900/journey-d-polypropylene-simulated-workspace.webp",
       "screen": "journey-d-polypropylene-simulated-workspace",
-      "sha256": "2753978ae5ab51e9df3a742f4a8ea0fb7fca94d99ca05be28f35ca11ee817bb7",
+      "sha256": "1a7a504dc936ec6baea2db18f3af659088b523541217d38460097ac58993379c",
       "viewport": "desktop-1440x900"
     },
     {
@@ -426,7 +538,63 @@
       "viewport": "desktop-1440x900"
     },
     {
-      "bytes": 131596,
+      "bytes": 155744,
+      "case_id": null,
+      "dimensions": [
+        1440,
+        900
+      ],
+      "locale": "en",
+      "mode": "public",
+      "path": "en/desktop-1440x900/journey-f-screening-queue-empty.webp",
+      "screen": "journey-f-screening-queue-empty",
+      "sha256": "e2fb9543dd032f25c1ae15c68fba06fdda9183471a3ccd9b3e6b2446999b4d2b",
+      "viewport": "desktop-1440x900"
+    },
+    {
+      "bytes": 166368,
+      "case_id": null,
+      "dimensions": [
+        1440,
+        900
+      ],
+      "locale": "en",
+      "mode": "public",
+      "path": "en/desktop-1440x900/journey-f-screening-queue-robust.webp",
+      "screen": "journey-f-screening-queue-robust",
+      "sha256": "7589d747dbf06a9b1aa0c09e81f3b155d575231f1ff5e79ddb027a126a394b0d",
+      "viewport": "desktop-1440x900"
+    },
+    {
+      "bytes": 161310,
+      "case_id": "030579",
+      "dimensions": [
+        1440,
+        900
+      ],
+      "locale": "en",
+      "mode": "public",
+      "path": "en/desktop-1440x900/journey-f-screening-record.webp",
+      "screen": "journey-f-screening-record",
+      "sha256": "a6d4904a8fd59685c931404616d142f48579de33190c9be85641edddcb7e0245",
+      "viewport": "desktop-1440x900"
+    },
+    {
+      "bytes": 154622,
+      "case_id": null,
+      "dimensions": [
+        1440,
+        900
+      ],
+      "locale": "en",
+      "mode": "public",
+      "path": "en/desktop-1440x900/journey-f-screening-summary.webp",
+      "screen": "journey-f-screening-summary",
+      "sha256": "17f05501afda6bd8358ebc585386f35c8fdbaa29351448ba803d0f5a1365adc4",
+      "viewport": "desktop-1440x900"
+    },
+    {
+      "bytes": 132944,
       "case_id": null,
       "dimensions": [
         1024,
@@ -436,11 +604,11 @@
       "mode": "public",
       "path": "en/tablet-1024x768/journey-a-portfolio-public.webp",
       "screen": "journey-a-portfolio-public",
-      "sha256": "507243b68564f7222fb3e21524a5869b27794360fe4a28f9a6d6c92db4e16ebe",
+      "sha256": "f59464f1c98862dbe6dff51ede5c26a31a4870cd92132807ce15c8ffd428af68",
       "viewport": "tablet-1024x768"
     },
     {
-      "bytes": 129988,
+      "bytes": 131012,
       "case_id": null,
       "dimensions": [
         1024,
@@ -450,11 +618,11 @@
       "mode": "simulated",
       "path": "en/tablet-1024x768/journey-a-portfolio-simulated.webp",
       "screen": "journey-a-portfolio-simulated",
-      "sha256": "3d525a5e76fe784f245b8d316acd6596f3a4c942a886cef55e89e10498053d9a",
+      "sha256": "ceecc2760e99cdf35c5bd91ddede9f259c1c0c62ff30fb24c7086c146322567a",
       "viewport": "tablet-1024x768"
     },
     {
-      "bytes": 174232,
+      "bytes": 175514,
       "case_id": "SAU-H0-721049",
       "dimensions": [
         1024,
@@ -464,11 +632,11 @@
       "mode": "public",
       "path": "en/tablet-1024x768/journey-b-steel-public-workspace.webp",
       "screen": "journey-b-steel-public-workspace",
-      "sha256": "bd365d2348baf55e8ac3305b0cf86ef7fdd4a4da1ba250e0c6c0f84fd109fcdb",
+      "sha256": "e659aef4b9e7434a5376240ae6ce4014dc468b9210825488a306cbf7fda90d86",
       "viewport": "tablet-1024x768"
     },
     {
-      "bytes": 180498,
+      "bytes": 181726,
       "case_id": "SAU-H0-721049",
       "dimensions": [
         1024,
@@ -478,11 +646,11 @@
       "mode": "simulated",
       "path": "en/tablet-1024x768/journey-c-steel-simulated-workspace.webp",
       "screen": "journey-c-steel-simulated-workspace",
-      "sha256": "45cbb16f36b5f8abd71a196e9db2efc6aacb4ac8e8a837e3699b175a17f199a0",
+      "sha256": "d713ec3bfcf5f347c3c95c0a621d2c4551a6dd1fab44b89cde003e0b2d9a747c",
       "viewport": "tablet-1024x768"
     },
     {
-      "bytes": 171312,
+      "bytes": 172658,
       "case_id": "SAU-H0-390210",
       "dimensions": [
         1024,
@@ -492,11 +660,11 @@
       "mode": "public",
       "path": "en/tablet-1024x768/journey-d-polypropylene-public-workspace.webp",
       "screen": "journey-d-polypropylene-public-workspace",
-      "sha256": "3dc01c2d48d6ef25e81aa2cc9f056d7462118ad208d1385f66521f2921f93dce",
+      "sha256": "39f8263817156c778c76e74b86aa71020d1af13ca874a37e514159a6259399f7",
       "viewport": "tablet-1024x768"
     },
     {
-      "bytes": 174500,
+      "bytes": 175760,
       "case_id": "SAU-H0-390210",
       "dimensions": [
         1024,
@@ -506,7 +674,7 @@
       "mode": "simulated",
       "path": "en/tablet-1024x768/journey-d-polypropylene-simulated-workspace.webp",
       "screen": "journey-d-polypropylene-simulated-workspace",
-      "sha256": "5da6fbd8c45552f108e1a31ad01faff46ce714ebbceb13ff5fc03b23dd4aacb1",
+      "sha256": "cf7871b4baad1ad0e09cb02407a6303c3531f918fcb9bd60c80fce64902cba74",
       "viewport": "tablet-1024x768"
     },
     {
@@ -564,13 +732,69 @@
       "screen": "journey-e-steel-simulated-dossier",
       "sha256": "957a104a1681ff5e8e8bd734184120a1f4377eb51fc75d1f429d72107e6885c0",
       "viewport": "tablet-1024x768"
+    },
+    {
+      "bytes": 120250,
+      "case_id": null,
+      "dimensions": [
+        1024,
+        768
+      ],
+      "locale": "en",
+      "mode": "public",
+      "path": "en/tablet-1024x768/journey-f-screening-queue-empty.webp",
+      "screen": "journey-f-screening-queue-empty",
+      "sha256": "7bc69b7c1f28dd83b299fd2737778b98f64232ad7958f9aea0012be2eb831dd4",
+      "viewport": "tablet-1024x768"
+    },
+    {
+      "bytes": 129626,
+      "case_id": null,
+      "dimensions": [
+        1024,
+        768
+      ],
+      "locale": "en",
+      "mode": "public",
+      "path": "en/tablet-1024x768/journey-f-screening-queue-robust.webp",
+      "screen": "journey-f-screening-queue-robust",
+      "sha256": "dfad5d187343c1ebc42fb49b4da97c8a0fb156a051a0340c7ed199c97e5829dd",
+      "viewport": "tablet-1024x768"
+    },
+    {
+      "bytes": 121662,
+      "case_id": "030579",
+      "dimensions": [
+        1024,
+        768
+      ],
+      "locale": "en",
+      "mode": "public",
+      "path": "en/tablet-1024x768/journey-f-screening-record.webp",
+      "screen": "journey-f-screening-record",
+      "sha256": "5a8635ffd3d928aeba5aaab9d344594a6d8d35766d4a0df57dc634f178232fbe",
+      "viewport": "tablet-1024x768"
+    },
+    {
+      "bytes": 112936,
+      "case_id": null,
+      "dimensions": [
+        1024,
+        768
+      ],
+      "locale": "en",
+      "mode": "public",
+      "path": "en/tablet-1024x768/journey-f-screening-summary.webp",
+      "screen": "journey-f-screening-summary",
+      "sha256": "93e55c6184695a896bb9df94c5b74afcf39a592f27bc431a346f0895588d5da2",
+      "viewport": "tablet-1024x768"
     }
   ],
   "font_hashes": {
     "src/ior_mvp/static/assets/fonts/noto-sans-arabic/noto-sans-arabic-arabic-wght-normal.woff2": "ce85091f020920b65762b387b194ef59457ea5b25b760f2dcc35240a94bb8669",
     "src/ior_mvp/static/assets/fonts/noto-sans/noto-sans-latin-wght-normal.woff2": "51ca196f49a33e79e7870ff88ebd2829a3f627a51e7d690986618f0e7ad2b52d"
   },
-  "generated_on": "2026-09-02",
+  "generated_on": "2026-09-12",
   "launch_flags": [
     "--font-render-hinting=none",
     "--disable-lcd-text",
@@ -580,59 +804,68 @@
   "playwright_version": "1.62.0",
   "pytest_playwright_version": "0.9.0",
   "source_tree": {
-    "config/decision_narratives.v1.yaml": "98704e6fffc1ab735bf95a885fb7acd80c8c05fb53d70148316ad372eac876d4",
+    "config/decision_narratives.v1.yaml": "0c9c60b8210ff4eaaa48d019777a977c199ee30b77116eef4741a7248ee0128a",
     "config/evidence_policy.v1.yaml": "667d4def45fd11a85f852c8b16c922d781bfc171c46e0f822dd8202d4318de73",
-    "config/ui_strings.v1.yaml": "cb1881fdfbbbd757c83a01f5ad489ab6587a39a28c387522d982e08338d4a08b",
+    "config/ui_strings.v1.yaml": "27b85e9e5ddbcc8fb6d27d91fe9183066ef3a61af730c6b23d84ca3680d67695",
     "src/ior_mvp/__init__.py": "c0c8a8f3084f4e62492a779bcba87116379429596acc3423e2e2758e5893664a",
     "src/ior_mvp/ai_extraction.py": "1c8463e6342fb195a4bb2f4a70bb3f1fd75d478117f86f3797691f724c170a7e",
-    "src/ior_mvp/app.py": "6f97f5f58e9cb12a4b584fd2acd663995ece6a1ff080584bfcb11ec2137887da",
+    "src/ior_mvp/app.py": "0d753b51032f4fb24c43d09d8016fea95d75af8e8a7193589d80b624f5a88861",
     "src/ior_mvp/capability.py": "df28e028a3a730703ef4d198a25dbaf3fe0fd041b0a7ad7b97718d00b9ee4112",
     "src/ior_mvp/cli.py": "8e06925d4ce2471f701063eff3e15d53acee66fb0af5856bb3c1b6e485457dd6",
-    "src/ior_mvp/config.py": "ab6c4621533dcbe0b36396d6b8346be441c04360a1c0b3c3c50ad5adfc709ff5",
+    "src/ior_mvp/config.py": "26e25770e5a5a8ccf436d3b3ebd5054583ca458c56e77c8f7912684e67b94295",
     "src/ior_mvp/data_repository.py": "74000975893642fb34d878ca1d2db0e8edcdfd92e42556a86d3cb82f8b9c5936",
-    "src/ior_mvp/decision_engine.py": "cdb5581cc07d18a213f30a5f49bc486b411f3e50628182dc7a55e7da3537b7ff",
-    "src/ior_mvp/dossier.py": "53e4f70852e907e1f57b27c1aabc421d211f29ee1a1a34eab7040aa615d5c317",
+    "src/ior_mvp/decision_engine.py": "153340580981b2cae3258bf3fcfa918664868e446715cf33d0a5a3c9a09544fb",
+    "src/ior_mvp/dossier.py": "fb3293ffa65e77830dad2540e7388a282f131d9c4077cd9e0aa237a2589ef8af",
     "src/ior_mvp/economics.py": "ad7c4ef859c323d536a683562d2756a20dc2ec26249f091108f24446a243c8cf",
     "src/ior_mvp/evidence.py": "c7ebe803db015d8c1f2ea89d7b2bb98648e61a1b336c943b7512d0120605fe90",
     "src/ior_mvp/evidence_needs.py": "876438ba069e544bb6662f91381a384578b70bbf2a329a8b673f3439dd1154f7",
-    "src/ior_mvp/genui.py": "dfc031a9caea00bcfb90e9929598a6c6db35a641cfc4db221d2a6bdd995562e1",
-    "src/ior_mvp/narratives.py": "8f4fc262b2475c4f5ac9418331d5a010a58b02c9b9d460127ffa19c959739385",
-    "src/ior_mvp/public_decision.py": "4ba8f1551bd621cb27f2efc2c5ad9988009642e2de19f0d6768b7c806444b146",
+    "src/ior_mvp/genui.py": "6f39c07d7996f2fbfee7510feb411376d53bfcce7c3ea047729f4dac1b9ce4d5",
+    "src/ior_mvp/narratives.py": "494243a532d959c4a06126d74badca2b27f1e5abd4ca6e686a2eeda9d8b4372b",
+    "src/ior_mvp/public_decision.py": "c77c77061fb5b44f6c179af5e6c4c8d88ea368c773e86415ceff815a2d98e417",
     "src/ior_mvp/public_snapshot.py": "d5fb64a31643add16dfe959159e57c633562c357fde94de3923f9d690e1056ae",
     "src/ior_mvp/route_hypotheses.py": "51911ae4a29ab2e658733b6aa89346c052a14500f776c9ef1681a30a5cbea75e",
-    "src/ior_mvp/rules.py": "8d40de7df41e4f9e584d2bd9d1aac5e567d3d58df3f83be3767c3f0e3fb93b86",
+    "src/ior_mvp/rules.py": "cba0aca54b0b70b4e0d6c063ea85534518dfa0a4f8ad9c5fec206a25b39aea9f",
     "src/ior_mvp/scenario_contract.py": "43dd67b35c826695d0e6d19e8c4373ffaac091f085998959dc0bb1471f91ec08",
     "src/ior_mvp/signals.py": "73aa4a9530340e693e7578745c33b37bcb9d4d4ccf98032de7f87cfa91bc587b",
     "src/ior_mvp/simulation.py": "a72bdef25512c2e69625967f51942e1af33ab97bc8da9f4e76e4cd1abade0a5a",
-    "src/ior_mvp/static/app.js": "283b9ef9f77e7bca44120cd737e66621c627ebed5bebe50a6287d8d2ba4aa5d3",
+    "src/ior_mvp/static/app.js": "501d0a2b980af5a0c29daa9d48142d809ee4af4ddbed6e375732e9e8ce19fe4b",
     "src/ior_mvp/static/css/base.css": "f6822f179a835d96b5c8d36fe56aaa1e594d31c83672ad63aa19f361ecdaf6b3",
     "src/ior_mvp/static/css/content.css": "611b5f280c3cc32f7189b2da6aeb063259c634a3bdef49e7ad74e974e7c3f26e",
     "src/ior_mvp/static/css/dossier.css": "022a5890c25b1605689401db308e73a411af10984ed32b4ee998231c772d6da3",
     "src/ior_mvp/static/css/overview.css": "1f66631c31536f61a4eded9b28f46c001894d6bac4cd06698f47706bbd9daa21",
     "src/ior_mvp/static/css/responsive.css": "deb2d808b3e87479a998869713f0006a2624f2169c2bdd6340358e65f3abc439",
+    "src/ior_mvp/static/css/screening.css": "afeefb22d9b4e0d482ffdacd76bc12d98d8a929964d0cac5f2c8c24d93035da6",
     "src/ior_mvp/static/css/shell.css": "544c081040f0785f6d120411f6b905d39107f846fa86d232407f4d9e6bb41cd6",
-    "src/ior_mvp/static/css/tokens.css": "fd475d0d4a719a7e4e9d5cb12c105e929f0acd6c59dfa4f920497f698d8229fb",
-    "src/ior_mvp/static/css/workspace.css": "7e1e04edf7c629138fdf8422f6dd42e20f7c37a733620dafac938f91f40d3a99",
-    "src/ior_mvp/static/index.html": "075f40ab8b5c49e0d788a1d52d7292302809812f6ab0acc5738b0db98ad2b0b3",
-    "src/ior_mvp/static/modules/api.js": "2dce244fdbe9d773d6dc35dbcec0429b3bc1be79069f90070b2c162d7ecda134",
-    "src/ior_mvp/static/modules/dom.js": "1584c6a09961a4ef3ab72b8e097f32aaf6bf65c914f1a8fd7afdd756bc7411a3",
-    "src/ior_mvp/static/modules/events.js": "a488a2a63af4f824f7cb14418d950a33a976f5ebcb3f898b8f90a4688ea2ebdf",
+    "src/ior_mvp/static/css/tokens.css": "aa84f68fa490533191e99bdc7f6348af028a9c26f1de12c73a77996a70be349a",
+    "src/ior_mvp/static/css/workspace.css": "e73bdd098529f16094b1815308beae9d198af965ca44c8541be71b71660d9d7e",
+    "src/ior_mvp/static/index.html": "f2e1549e714d50dca708baf0237d94c1a72807fa41aa78e1c0c4720af0a269e3",
+    "src/ior_mvp/static/modules/api.js": "46a62bdb3fa9c6781b39394d7b9e7f8e618ccb935a8cad0eb47a23f992815760",
+    "src/ior_mvp/static/modules/dom.js": "9db1bbe7cea3f2cfd5b20f5225f099959d2675c954fca8998e0d6b6ab4b11f70",
+    "src/ior_mvp/static/modules/events.js": "2704a69b03f0b6108d464c881457cdf37e7c98225520b44fd6c3f71b359d0bce",
     "src/ior_mvp/static/modules/extraction.js": "07d03830189e320f4659f08109c1c4bfdedab192b3f8d8af9f1c3a6a4aa9e657",
     "src/ior_mvp/static/modules/formatters.js": "97c72e08dfce700dd92e8fd1fc6a740ff2f6f6bd0d41e784e609be405e19cbc3",
     "src/ior_mvp/static/modules/i18n.js": "629a18b83254b7c8cfe6c0aba3fabe6e2770f9ef7a0f59d760cfcf6300975908",
-    "src/ior_mvp/static/modules/methodology.js": "c173629b5e40068c9267d9259122563d0a8b82b4589f91f83304fea44cdd8fe1",
-    "src/ior_mvp/static/modules/portfolio.js": "2f5969a8f2afd67f8276009ad8ad9d044791a290f2ecc5579648858ce8d1a687",
+    "src/ior_mvp/static/modules/methodology.js": "c135a5f834f8e5f058f94a6c6d457a4f4a0a015eeb567ab4d8e961f41d2cdd5e",
+    "src/ior_mvp/static/modules/portfolio.js": "950e7f4b34816ede2f9e18d49955ac41fa94146bdbf2856086f7342f540d88ab",
     "src/ior_mvp/static/modules/renderers/capability.js": "430b8204aafff3891859011d66bb8229301d05b26fb6366e70aa838a5d32db22",
-    "src/ior_mvp/static/modules/renderers/decision.js": "053aa8d3ae1b937df0173650088323b09f9c72e1aed11dce33289c33ebee5084",
+    "src/ior_mvp/static/modules/renderers/decision.js": "fdf06e13f58c006ddc752805a9f163f1108c3d4ee196f64fd427d77baf1c36a8",
     "src/ior_mvp/static/modules/renderers/economics.js": "03104d327392d12e44fe74bb33803a05deefb2b1ebedfc837ddf64a5a79bca06",
     "src/ior_mvp/static/modules/renderers/evidence.js": "bc7cede10536b0154ab6360273d02575bec8c86f9eaf119b82e4df1f74c88d91",
     "src/ior_mvp/static/modules/renderers/index.js": "4767f89006116a8aee5f87b5f1b8fd39c109723cedf43ccd442324bd28e2c9b2",
-    "src/ior_mvp/static/modules/renderers/integrity.js": "29dcdecddf1256472d399ca11bcd9ae49a28a68f173a0c31a5e93fe9c8004819",
-    "src/ior_mvp/static/modules/renderers/rules.js": "12d8ccbf1dc89b1168c8de4b86d89d6a2ce7a6a52f0daa107ca61c528cba07e2",
+    "src/ior_mvp/static/modules/renderers/integrity.js": "eca35891e22b475c528bd0c92991cd53c52a98f417742a6b8c9df62e96c21b18",
+    "src/ior_mvp/static/modules/renderers/rules.js": "9ca947c6292ded17cce7dc67245cc45f3e3d732bc71a8b038e5d8ec99a032e40",
     "src/ior_mvp/static/modules/renderers/trade.js": "23f5a4145f29f1b30efb48aecbb2ecd81dc4b69ab96897e6d6561e70ee416662",
-    "src/ior_mvp/static/modules/state.js": "fcd076f4ee13bfe286e7c015b8b49a596d433a581ffa04c22e9e59c19f9a3f44",
+    "src/ior_mvp/static/modules/screening/evidence.js": "3d3e8fe999a21177f22da66964cd4ce30d360efaa6ee8d6b6b4c369d5ec6a88b",
+    "src/ior_mvp/static/modules/screening/index.js": "86be3aeaf5a5f7e4e2d7fdf510aa431308233e06a2e1ea9d90a0dbf710125963",
+    "src/ior_mvp/static/modules/screening/labels.js": "f74147af90161c5726e9631a8b1fe2beebf7889fff47b7edc28b5940091d9e0f",
+    "src/ior_mvp/static/modules/screening/ledger-labels.js": "3ab34e831b2e26e3372dc334a67d5a7270e2244730c7150befbbd52efa08fcbe",
+    "src/ior_mvp/static/modules/screening/queue.js": "61c609d2c7d21d7682bca42e8708b81a90401b2641afe0c37de83222651342d3",
+    "src/ior_mvp/static/modules/screening/record-evidence.js": "1278b1a20f03487b80eb2ec5a161e556069cc7bfd56bf8bf94d702c275c0cede",
+    "src/ior_mvp/static/modules/screening/record.js": "18283308d13f8785ea5c18167999ef0ed49b35f2784df288561253c854084a23",
+    "src/ior_mvp/static/modules/screening/summary.js": "af465851653f98dccf57ff2565bf3d73cf47f0c220c7a11efbaaa8bd20ba7038",
+    "src/ior_mvp/static/modules/state.js": "320afca14e87da09b6840f6fe62c008af8415960b82f985c6fe5bd69ffe902e1",
     "src/ior_mvp/static/modules/workspace.js": "8f5c314eb299afe522cc800e76ed51ac8f04deec6b899de37213a198091d4f36",
-    "src/ior_mvp/static/styles.css": "93c6a9cd84c7024e6025ee00d7297c9469608ed29e729ccb5c9403f5cff7bff4",
+    "src/ior_mvp/static/styles.css": "fc045e8385ea3237e8533204985cfdf16b5e0a04669a07d1ed20c95eb847c170",
     "src/ior_mvp/trade_metrics.py": "ba215bb5d22c3f67fcd517bf93686afa3f881467d16a0b0f6752898f9cfcf1b5"
   },
   "tolerance": {
