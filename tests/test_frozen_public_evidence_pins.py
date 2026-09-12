@@ -45,7 +45,7 @@ FROZEN_TREE_OIDS = {
     "data/snapshots/public": "2ad27d6eaa9b3ce474f2c9ed62ecaa873ecd5e04",
     "data/synthetic": "3fb2247a36b57b85fc0f966717aad5502aa25f4b",
     "data/golden": "72618db654110823ec7a8d4dd6415a37e4554e33",
-    "browser_tests/baselines": "3297e2f8d75fcdc03e072788d96d44be559b186d",
+    "browser_tests/baselines": "c2b3b66bbc6afaefe6e951772984d567cac53522",
 }
 
 # Used only by the depth-1 detector of this repository to prove the object absent.
@@ -332,7 +332,7 @@ def test_public_and_synthetic_bytes_unchanged_from_base() -> None:
 
 
 def test_visual_baseline_tree_unchanged_from_base() -> None:
-    """S13b regenerated the governed baselines once (ADR-020); no later byte moves."""
+    """S13b regenerated and SC-5 stabilized the baselines; no later byte moves."""
     assert (
         frozen_tree_problems(
             PROJECT_ROOT,

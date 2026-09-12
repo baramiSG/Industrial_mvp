@@ -43,15 +43,36 @@ def _anchor(page: Any, selector: str) -> None:
 def _anchor_screening(page: Any) -> None:
     page.locator("#screening").evaluate(
         """async (node) => {
+          await document.fonts.ready;
+          let previousScrollY = window.scrollY;
+          let stableFrames = 0;
+          for (let frame = 0; frame < 60 && stableFrames < 3; frame += 1) {
+            await new Promise(requestAnimationFrame);
+            const currentScrollY = window.scrollY;
+            stableFrames = Math.abs(currentScrollY - previousScrollY) <= 0.5
+              ? stableFrames + 1
+              : 0;
+            previousScrollY = currentScrollY;
+          }
+          if (stableFrames < 3) {
+            throw new Error("NAVIGATION_SCROLL_NOT_SETTLED");
+          }
+          const root = document.documentElement;
+          const previousBehavior = root.style.scrollBehavior;
+          root.style.scrollBehavior = "auto";
           const margin = parseFloat(
             getComputedStyle(node).scrollMarginBlockStart
           ) || 0;
           const target = Math.round(
             node.getBoundingClientRect().top + window.scrollY - margin
           );
-          window.scrollTo({top: target, left: 0, behavior: "instant"});
+          window.scrollTo({top: target, left: 0, behavior: "auto"});
           await new Promise(requestAnimationFrame);
           await new Promise(requestAnimationFrame);
+          if (Math.abs(window.scrollY - target) > 0.5) {
+            throw new Error("SCREENING_ANCHOR_NOT_SETTLED");
+          }
+          root.style.scrollBehavior = previousBehavior;
         }"""
     )
     page.screenshot(
