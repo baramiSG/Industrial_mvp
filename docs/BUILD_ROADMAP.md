@@ -172,16 +172,18 @@ reconciliation), a second entity artifact, five validated CaseBrief 1.1.0
 records with tri-state partner coverage and five public INVESTIGATE/null-route
 engine proofs.
 
-S14b is an implementation candidate under approved plan `af5ae5d8…`, AM-1
-`8dc1b75d…` and OD-1…OD-17. Owner WIP commits are W1' `4068a80` (preparation
-rebased onto S14a records), W2 `ec2eae1` (five builder-derived snapshots, five
-Class-D scenarios and the first 76-entry visual set) and W2' `5354a6f`
-(OD-15 truth/parity corrections and the second canonical visual set). Computed
-simulations demonstrate routes 3, 7, 6, 4 and a second route-0 rejection; all
-five public cases remain INVESTIGATE/null and synthetic evidence leaves
-`real_decision` unchanged. MONITOR is not manufactured because every case
-fires material R1-D. Final regression, independent review, PR, CI and merge
-remain separate gates; parent S14 remains IN_PROGRESS.
+S14b is MERGED ([PR #27](https://github.com/baramiSG/Industrial_mvp/pull/27),
+squash `a8c4763`, 2026-09-13) under plan `af5ae5d8…`, AM-1 `8dc1b75d…` and
+OD-1…OD-20. Owner WIP commits were W1' `4068a80` (preparation rebased onto
+S14a records), W2 `ec2eae1` (five builder-derived snapshots, five Class-D
+scenarios and the first 76-entry visual set) and W2' `5354a6f` (truth/parity
+corrections and the second canonical visual set). Computed simulations
+demonstrate routes 3, 7, 6, 4 and a second route-0 rejection; all five public
+cases remain INVESTIGATE/null and synthetic evidence leaves `real_decision`
+unchanged. MONITOR is not manufactured because every case fires material R1-D.
+The reviewer found and the owner corrected Core 04's 2.2.0 exact-key names
+before a second/final S14b manifest generation. PR CI and merged-main CI both
+passed 5/5. Parent **S14 is COMPLETE**; S15 is next.
 
 ## Explicit non-goals for v0.3.0
 

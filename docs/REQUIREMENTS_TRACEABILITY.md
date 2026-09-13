@@ -348,9 +348,11 @@ list, route matrix and browser/visual coverage.
 
 S14b evidence is in
 `.workflow/slices/S14b-deep-case-portfolio/{implementation_log,test_evidence}.md`
-and ADR-022. Statuses are implementation-candidate claims only; independent
-review, PR, hosted CI and merge remain separate gates. Parent S14 remains
-IN_PROGRESS until S14b merges.
+and ADR-022. Delivered on the squash merge of
+[PR #27](https://github.com/baramiSG/Industrial_mvp/pull/27) (`a8c4763`) after
+reviewer-grok correction-round APPROVE with zero findings on candidate
+`24c3b3cc…`, PR CI 5/5 on exact head `19eef02` (run `34743000153`), and
+merged-main CI 5/5 (run `34743666297`). Parent S14 is COMPLETE; S15 follows.
 
 ## Branch and release-state rules
 

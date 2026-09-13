@@ -1,0 +1,14 @@
+# PR Record — S14b Deep-case Portfolio, Scenarios and Goldens
+
+- PR: [#27](https://github.com/baramiSG/Industrial_mvp/pull/27)
+- Integration parent: `1289e31e50c1d835760f6943e697d6d537ac0a18`; branch current integration was verified before delivery.
+- Branch commits: W1' `4068a80` (preparation rebased onto S14a), W2 `ec2eae1` (five builder-derived snapshots, five Class-D scenarios, first 76-entry visual set), W2' `5354a6f` (truthful portfolio-chip / Arabic-subject visual correction), candidate `19eef02166de95ab3c19f0fbda95538084e935a2`.
+- Full reviewed candidate identity: `24c3b3cc219168dae4b1d720f7913cc71a31217ff6eafc0dccd39172335c3a38` (121 paths; W2' base `5354a6f`; integration parent `1289e31`).
+- Independent review: initial review REJECT S14B-IR1-F01 (Core 04 exact-key names); correction round APPROVE with zero findings. Reviewer independently recomputed candidate identity, inputs, public/synthetic separation, case and scenario results, root pins, manifests, and inspected EN/AR visual changes.
+- Owner local gate on the exact candidate: `INTEGRITY PASS`; seven-scenario Gate B; `CASE RECONSTRUCTION PASS (5 snapshots, 5 briefs)`; 2,549 pytest tests; smoke preserving steel public `INVESTIGATE` / polypropylene public `REJECT`; 339 functional plus four visual Chromium tests.
+- CI-equivalent scratch clone (`CI=1`, Python 3.12) passed the exact candidate. The portability copy passed integrity, scenario validation, all reconstruction stages, smoke and absolute-path checks.
+- PR CI: run `34743000153`, all five jobs succeeded on exact head `19eef02166de95ab3c19f0fbda95538084e935a2`: uv Python 3.12, uv Python 3.14, pip Python 3.12, Docker image build, browser Chromium Python 3.12 (339 functional + 4 visual; 15m14s).
+- Merge: owner approval OD-20; squash merge `a8c47635d82e2851bba864d1631666b835f1424b`; merged tree equals the PR head tree. `gh pr merge --delete-branch` completed the remote merge but its local checkout cleanup failed because `main` was already checked out in the primary worktree; the remote branch was then explicitly deleted and verified absent.
+- Default-branch CI: run `34743666297` on `a8c47635d82e2851bba864d1631666b835f1424b`, all five jobs succeeded.
+- Post-merge local verification on `main`: `INTEGRITY PASS`; 2,549 pytest tests; smoke preserving frozen outcomes; `CASE RECONSTRUCTION PASS (5 snapshots, 5 briefs)`, `RECONSTRUCTION PASS (4 snapshots, 34 artifacts)`, `DOCUMENT RECONSTRUCTION PASS (20 records, 20 artifacts)`, `ENTITY RECONSTRUCTION PASS (2 artifacts, 44 links)`, `SCREENING RECONSTRUCTION PASS (1 snapshots)`.
+- Authority/evidence: two S14b manifest runs, the second reviewer-authorized for Core 04 exact-key correction; final manifest has 638 rows, with all 628 prior rows unchanged; authority set remains 19. The correction rehashed Core 04 only. The two original public snapshots and scenarios remain byte-identical.
