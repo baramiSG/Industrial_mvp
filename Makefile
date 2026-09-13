@@ -270,7 +270,7 @@ graph-tests:
 		-m "graph and not graph_unavailable"
 
 graph-down:
-	docker compose stop industrial-mvp-neo4j
+	docker compose down --remove-orphans
 
 graph-unavailable-test:
 	IOR_GRAPH_TEST_EXPLICIT=1 IOR_GRAPH_TARGET=compose \

@@ -82,6 +82,7 @@ def test_s08_snapshot_manifest_retains_live_and_historical_public_rows(
         "data/entities/",
         "data/cases/",
         "data/screening/",
+        "data/graph/",
         "config/history/",
         "data/snapshots/universe/",
         "data/snapshots/tariff/",
@@ -117,6 +118,7 @@ def _partition_valid(paths: set[str]) -> bool:
         "data/entities/",
         "data/cases/",
         "data/screening/",
+        "data/graph/",
         "config/history/",
         "data/snapshots/universe/",
         "data/snapshots/tariff/",
@@ -153,6 +155,8 @@ def test_s11_snapshot_manifest_rejects_public_partition_leak() -> None:
     assert not _partition_valid(paths | {"data/screening-other/extra.json"})
     assert _partition_valid(paths | {"data/cases/briefs/extra.json"})
     assert not _partition_valid(paths | {"data/cases-other/extra.json"})
+    assert _partition_valid(paths | {"data/graph/projections/extra.json"})
+    assert not _partition_valid(paths | {"data/graph-other/extra.json"})
     assert _partition_valid(paths | {"config/history/extra.yaml"})
     assert not _partition_valid(paths | {"config/history-other/extra.yaml"})
     assert not _partition_valid(paths | {"data/snapshots/unknown/extra.json"})
@@ -1082,10 +1086,17 @@ def test_ci_workflow_has_graph_gates_service_job_pinned_by_digest() -> None:
 
 def test_graph_gate_stops_on_failure_and_clears_only_with_confirmation() -> None:
     makefile = (PROJECT_ROOT / "Makefile").read_text(encoding="utf-8")
+    graph_down = makefile.split("graph-down:\n", maxsplit=1)[1].split(
+        "\ngraph-unavailable-test:",
+        maxsplit=1,
+    )[0]
     graph_gate = makefile.split("graph-gate:\n", maxsplit=1)[1].split(
         "\ngraph-aura-load:",
         maxsplit=1,
     )[0]
+    assert "docker compose down --remove-orphans" in graph_down
+    assert "--volumes" not in graph_down
+    assert " -v" not in graph_down
     assert "set -eu;" in graph_gate
     assert (
         "clear --target compose "

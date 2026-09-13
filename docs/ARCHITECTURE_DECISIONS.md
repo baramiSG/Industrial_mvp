@@ -1246,9 +1246,11 @@ oracle passed. The one-run authorization is exhausted.
 ## ADR-024 — Governed graph projection, provisioned mirrors and fail-closed loader
 
 **Status:** S16a implementation candidate under approved parent plan
-`plan-1-s16.json` (`7e888e7a…`) and owner decisions OD-1…OD-17. Preparation is
-against base `1289e31`; integration onto M16, manifest generation,
-independent review, Aura verification, delivery and approval remain pending.
+`plan-1-s16.json` (`7e888e7a…`) and owner decisions OD-1…OD-19. Owner W1
+`ade1a6c` was rebased onto M16
+`b81a7bd30261969c455915659eb083f35101c38d` as W1'
+`6567216ae5c5b95d994381499d48d590df6b1324`. Independent review, Aura
+verification, delivery and approval remain pending.
 
 **Authority and boundary.** Methodology §§8.2–8.3 requires evidence-backed,
 decision-relevant dependency edges and defines UnlockValue. ADR-010 rulings
@@ -1326,14 +1328,44 @@ The designated digest-pinned `graph-gates` service job uses a run-scoped
 credential, rebuild-checks, loads twice, verifies, runs live Cypher tests,
 stops the service and proves `GRAPH_UNAVAILABLE`.
 
-**Manifest §7 and current preparation state.** §7.2 covers implementation,
+**M16 integration delta.** OD-19 classified six conflicts as valid additive
+integration conflicts and required both slices to survive. The resolution:
+(1) unions S15 selection and S16 graph Make targets without changing recipes;
+(2) appends all seven graph mappings after the three S15 Core 02 mappings;
+(3) retains `_reconstruct_case_selections`, `_reconstruct_graph` and both
+`main()` calls; (4) preserves S14b/S15a KL-104…KL-117 and renumbers the six
+unchanged graph facts KL-118…KL-123; (5) preserves ADR-022/ADR-023 and assigns
+this graph decision ADR-024; and (6) retains every S14b/S15a integrity
+contract before the S16 contracts, whose identifier pins alone change to
+ADR-024/KL-118.
+
+M16 supplies seven committed public snapshots, seven top-level scenarios,
+nine CaseBriefs and two recorded selections. The old write-once projection
+`GRAPH-SAU-2026-09-12-941efbdf1e4a` remains historical evidence. Rebuilding
+from the merged governed inputs creates
+`GRAPH-SAU-2026-09-12-3ce241f08f7a` and moves only `current.json`: 740 nodes
+and 835 edges, up 381 and 422 respectively. Its 219-file input set adds 22
+paths, removes none and changes 34 common-path hashes relative to the
+pre-M16 projection. All five mandatory provenance properties remain present
+on every node and edge.
+
+The direct-authority design is also the cycle proof: `discover_inputs` hashes
+the methodology DOCX, live Core Markdown and live `config/*.v1.yaml` bytes;
+neither generated `docs/authority/authority_hashes.json` nor
+`data/manifests/snapshot_manifest.json` is an input. Therefore the projection
+is finalized before manifest generation, and a post-generation rebuild-check
+must preserve the same projection id and canonical bytes.
+
+**Manifest §7 and integrated authorization.** §7.2 covers implementation,
 loader, Compose, CI, tests and runbook. §7.3 adds only
 `config/graph_views.v1.yaml` 1.0.0. §7.4 changes Core 02/03/04/09. §7.5 adds
 `data/graph/**`. The methodology DOCX, existing config, public/synthetic/golden
-roots, top-level runtime modules and visual files are unchanged. Per the S16a
-preparation brief, manifest run count is **0**; `build_manifests.py` has not
-run. M16 integration and the single authorized manifest run occur only after
-the owner lead resumes this candidate.
+roots, top-level runtime modules and visual files are unchanged from M16.
+S16a enters integration with manifest run count **0**. Exactly one invocation
+is authorized after this text and the integrated graph artifact are final; it
+may add graph-artifact and graph-view rows and change only the four S16 Core
+hashes. The exact execution output and immediate §11/integrity oracle are
+recorded in the append-only S16 test evidence.
 
 **Recovery.** The graph artifact can be rebuilt from its recorded inputs. A
 development-only pre-handoff projection may be removed before commit after its

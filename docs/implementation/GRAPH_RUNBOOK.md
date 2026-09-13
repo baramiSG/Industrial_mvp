@@ -26,7 +26,7 @@ reconstruction.
 - container: `industrial-mvp-neo4j`;
 - host ports: Browser 7475, Bolt 7688;
 - dedicated network: `industrial-mvp-net`;
-- dedicated Compose volume: `s16a_industrial-mvp-neo4j-data`;
+- dedicated Compose volume: `industrial-mvp-neo4j-data`;
 - generated credential: `.secrets/neo4j_auth.txt`, mode 0600, ignored by Git;
 - environment-variable name: `NEO4J_AUTH_FILE`.
 

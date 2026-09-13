@@ -10,6 +10,7 @@ Statuses used on this branch are `NOT_STARTED`, `PLANNED`, `IMPLEMENTED`, `TESTE
 - **CI-S03:** run `33579923763`, PR #3 head `f6ef33b`, four jobs green.
 - **CI-S04:** run `33584437086`, PR #4 head `bd72207`, four jobs green.
 - **CI-ALL:** CI-S01-A, CI-S01-B, CI-S02, CI-S03, and CI-S04; these five runs repeatedly executed the full then-current pytest suite and required uv/pip/Docker jobs.
+- **S16A-LOCAL:** `.workflow/slices/S16-graph-backend/{implementation_log,test_evidence}.md`; M16/W1' integration, write-once graph history/current relation, one manifest run, reconstruction, loopback Compose equality/idempotence/unavailable tests, portability, 2,676 default tests and local `make ci` with 339 functional plus four visual browser nodes. This is implementation evidence only; it does not claim independent approval, hosted CI, Aura verification, PR or merge.
 - **S05-FOCUSED:** `.workflow/slices/S05-final-acceptance/implementation_log.md` and `test_evidence.md`; includes observed RED→GREEN and characterization/NFR runs.
 - **S05-LOCAL:** `.workflow/slices/S05-final-acceptance/acceptance_results.md` and `test_evidence.md`; cited only after the complete 42-step runner is observed.
 - **S05-REVIEW/CI/MERGE:** `reviewer_findings.md`, `pr_record.md`, and `completion.md`; cited only after those external events are observed.
@@ -373,6 +374,22 @@ diagnostic is not promoted. S15a was delivered on [PR #29](https://github.com/ba
 (`8053f2b`) after independent APPROVE with zero findings, PR CI 5/5 on
 `6413d04` (run `34748809072`), merged-main CI 5/5 (run `34749303450`) and clean-worktree post-merge verification.
 S15b remains required for parent completion.
+
+## U. Milestone v0.3.0 — S16a graph foundation
+
+| ID | Observable acceptance | Implementation evidence | Status | Slice |
+|---|---|---|---|---|
+| V3-S16-GRAPH | A canonical, input-derived graph projection uses the approved 19-label/15-edge vocabulary, complete provenance and public/Class-D partition while retaining prior projections write-once. | `GRAPH-SAU-2026-09-12-3ce241f08f7a` has 740 nodes/835 edges from 219 inputs; historical `941efbdf1e4a` remains byte-identical; deterministic build, validation, reconstruction and artifact tests. | TESTED | s16a |
+| V3-S16-MIRROR | The project-owned local Neo4j mirror is idempotent, count-equal and fail-closed. | Loopback Compose 7475/7688; first/second loads 740/835 then 0/0; 19 uniqueness constraints, provenance/partition and Cypher/artifact equality tests; stopped service returns `GRAPH_UNAVAILABLE`. | TESTED | s16a |
+| V3-S16-FEEDS | Adjacency, route-blocking, evidence-linkage and shared-enabler feeds are delivered without making live Neo4j an evidence source. | Artifact functions plus Cypher templates and equality tests; no GDS/APOC dependency; route 8 remains `GRAPH_REQUIRED` until s16b supplies governed enabler inputs. | TESTED | s16a |
+| V3-S16-AUTHORITY | The graph view catalogue, Core graph contracts and both manifest oracles are governed without a graph→manifest→graph cycle. | One 2026-09-13T10:24:10Z manifest invocation; snapshot 698→703 with five additions/no prior-row changes; authority 19→20 with one addition and only Core 02/03/04/09 changes; immediate integrity and human/machine mirror tests pass; post-generation graph build-check preserves `3ce241f08f7a`. | TESTED | s16a |
+| V3-S16-INTEGRATION | S14/S15 interfaces and all six OD-19 conflict resolutions survive the M16 integration. | W1' `6567216` on M16 `b81a7bd`; seven public snapshots/scenarios, nine briefs, two reconstructed selections, 76 visuals; Make/Core/reconstruction/KL/ADR/integrity unions recorded in ADR-024. | TESTED | s16a |
+| V3-S16-TOOLCHAIN | Graph dependency/provisioning participates in ordinary CI while the application image remains graph-driver-free. | Python 3.12/3.14 offline lock proof; digest-pinned CI service contract; local `make ci` passes 2,676 default, 339 functional and four visual tests. Exact scratch and hosted CI remain delivery gates, not implementation approval. | TESTED | s16a |
+
+S16a is stopped as an uncommitted implementation candidate for independent
+review. It does not mount the graph API or activate route 8; those remain
+s16b. Aura verification is an owner-led post-approval operator gate under
+OD-15 and was not attempted during this implementation.
 
 ## Branch and release-state rules
 
