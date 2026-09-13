@@ -326,9 +326,14 @@ COMPLETE (s13a #21, s13b #23).
 | V3-S14-ENGINE | Every built public case reports its honest computed state before any golden is authored. | Five engine proofs: INVESTIGATE, null route, `ROUTE_CHANGING_EVIDENCE_UNRESOLVED`; fired-rule sets in ADR-021 and slice log. | TESTED | s14a |
 | V3-S14-FROZEN | Original public/synthetic/golden/browser roots and top-level runtime modules remain exact. | T9 frozen diff/tree/hash, visual-manifest, golden and portability gates pending. | IMPLEMENTED | s14a |
 
-S14a does not close the parent S14 minimum portfolio requirement. S14b consumes
-the pinned list, commits snapshots and Class-D scenarios together, then adds
-goldens, project list, route matrix and browser/visual coverage.
+Delivered on the squash merge of S14a (PR #25, `ec859f7`) after reviewer-grok
+implementation APPROVE (zero findings) on `78c9b0c6…` and a bounded APPROVE on the
+CI-F-01 test-mechanism fix `89ad2d5c…`, three receipted manifest runs, and hosted
+CI 5/5 on the exact head `274e7df` (run 34733383228). 721061 partner detail is
+OBSERVED via the corrected Comtrade V3 window (AM-3/OD-18). S14a does not close
+the parent S14 minimum portfolio requirement. S14b consumes the pinned list,
+commits snapshots and Class-D scenarios together, then adds goldens, project
+list, route matrix and browser/visual coverage.
 
 ## Branch and release-state rules
 

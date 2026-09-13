@@ -161,15 +161,17 @@ The approved decomposition
    renders the state in ledger/dossier views, and proves the frozen
    721049/390210 snapshots and goldens byte-identical.
 
-The parent completes only after both children merge. S14a is governed by
-`plan-1-s14a.json` (`8fbfa4e6…`), AM-1 (`8c61a0a2…`) and OD-1…OD-11.
-OD-11 is a hashed identity exclusion for 392190; the ruled selected set is
-721061, 721012, 760711, 760429 and 392010. S14a's local implementation
-candidate has eight new COMPLETE DocumentRecords, one source-qualified WITS
-partner snapshot with 721061 excluded as `FORMAT_NOT_PARSEABLE`, a second
-entity artifact, five validated briefs and five public
-INVESTIGATE/null-route engine proofs. Review, PR, CI and merge remain separate
-gates.
+The parent completes only after both children merge. S14a is MERGED (PR #25,
+squash `ec859f7`, 2026-09-13) under `plan-1-s14a.json` (`8fbfa4e6…`), AM-1
+(`8c61a0a2…`), AM-2 (`5bccc8a5…`), AM-3 (`6e596932…`) and OD-1…OD-23. The ruled
+selected set is 721061, 721012, 760711, 760429 and 392010 (392190 excluded as a
+residual catch-all with verbatim WCO basis). It delivered eight COMPLETE
+DocumentRecords, a WITS partner snapshot (721061 `FORMAT_NOT_PARSEABLE`), a
+Comtrade partner snapshot for 721061 (seven observed partners, exact
+reconciliation), a second entity artifact, five validated CaseBrief 1.1.0
+records with tri-state partner coverage and five public INVESTIGATE/null-route
+engine proofs. s14b (portfolio, scenarios, goldens, visual matrix) integrates
+against this main next.
 
 ## Explicit non-goals for v0.3.0
 
