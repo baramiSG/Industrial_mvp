@@ -3,8 +3,8 @@
 from __future__ import annotations
 
 import copy
+import hashlib
 import json
-import subprocess
 from pathlib import Path
 
 import pytest
@@ -55,15 +55,20 @@ S11 = {"wits_trade", "un_comtrade", "baci_cepii", "zatca_tariff"}
 UNCHANGED_S11 = {"wits_trade", "baci_cepii", "zatca_tariff"}
 
 
-def _head_config() -> dict:
-    return yaml.safe_load(subprocess.check_output(
-        ["git", "show", "HEAD:config/acquisition_sources.v1.yaml"], cwd=PROJECT_ROOT
-    ))
+def _superseded_config() -> dict:
+    return yaml.safe_load(
+        (
+            PROJECT_ROOT
+            / "config"
+            / "history"
+            / "acquisition_sources.v1-1.3.0.yaml"
+        ).read_text(encoding="utf-8")
+    )
 
 
 @pytest.fixture
 def phased_config() -> dict:
-    cfg = _head_config()
+    cfg = _superseded_config()
     cfg["metadata"]["version"] = "1.4.0"
     for sid, (stage, authority, _) in INSTITUTIONAL.items():
         cfg["sources"][sid] = pre_observation_source_config(sid, stage=stage, authority=authority)
@@ -217,7 +222,7 @@ def test_config_loader_fails_closed_on_invalid_yaml(
 
 @pytest.mark.parametrize("field", ["access_classification", "expected_content_types", "credential_env_var"])
 def test_s11_mappings_unchanged_and_strict(valid_config: dict, phased_config: dict, field: str) -> None:
-    head = _head_config()
+    head = _superseded_config()
     assert {sid: valid_config["sources"][sid] for sid in UNCHANGED_S11} == {
         sid: head["sources"][sid] for sid in UNCHANGED_S11
     }
@@ -409,7 +414,7 @@ def test_document_structural_pins_exact(valid_config: dict) -> None:
 
 
 def test_s11_and_s12a_mappings_unchanged_and_strict(valid_config: dict) -> None:
-    head = _head_config()
+    head = _superseded_config()
     for sid in head["sources"]:
         if sid == "un_comtrade":
             continue
@@ -564,11 +569,11 @@ def test_1_3_0_history_copy_is_byte_identical_to_superseded_config() -> None:
         / "history"
         / "acquisition_sources.v1-1.3.0.yaml"
     )
-    expected = subprocess.check_output(
-        ["git", "show", "HEAD:config/acquisition_sources.v1.yaml"],
-        cwd=PROJECT_ROOT,
+    retained_bytes = retained.read_bytes()
+    assert hashlib.sha256(retained_bytes).hexdigest() == (
+        "fbe061496bc6c9b5ddd039b25536d78fb24c22ba3d84650fcd2c9374977673cc"
     )
-    assert retained.read_bytes() == expected
+    assert yaml.safe_load(retained_bytes)["metadata"]["version"] == "1.3.0"
 
 
 def test_wco_hs_nomenclature_document_source_declared_with_observed_facts_and_class_b(

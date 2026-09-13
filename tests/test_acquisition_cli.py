@@ -7,7 +7,6 @@ import json
 import os
 import subprocess
 import sys
-import time
 from pathlib import Path
 
 import pytest
@@ -34,17 +33,10 @@ def test_make_acquire_partners_quotes_variant_ampersand_for_cli_contract_and_url
             }
         )
     )
-    captured_argv_path = tmp_path / "argv.json"
-    capture = tmp_path / "capture.py"
-    capture.write_text(
-        "#!/usr/bin/env python3\n"
-        "import json, os, sys\n"
-        "open(os.environ['CAPTURE_ARGV'], 'w').write(json.dumps(sys.argv[1:]))\n"
-    )
-    capture.chmod(0o755)
-    subprocess.run(
+    rendered = subprocess.run(
         [
             "make",
+            "-n",
             "acquire-partners",
             "SOURCE=un_comtrade",
             f"CANDIDATES={candidate_path}",
@@ -52,23 +44,15 @@ def test_make_acquire_partners_quotes_variant_ampersand_for_cli_contract_and_url
             "FLOWS=imports",
             "MAX_REQUESTS=2",
             "PARAMETERS=partner_dimension_query=&includeDesc=true",
-            "IOR_ACQUISITION_LIVE=1",
-            f"UV_RUN={capture}",
         ],
         cwd=Path(__file__).resolve().parents[1],
         check=True,
         capture_output=True,
         text=True,
-        env={**os.environ, "CAPTURE_ARGV": str(captured_argv_path)},
-    )
-    for _ in range(100):
-        if captured_argv_path.exists():
-            break
-        time.sleep(0.01)
-    argv = json.loads(captured_argv_path.read_text())
-    parameter_index = argv.index("--parameter")
-    assert argv[parameter_index + 1] == (
-        "partner_dimension_query=&includeDesc=true"
+    ).stdout
+    assert (
+        '--parameter "partner_dimension_query=&includeDesc=true"'
+        in rendered
     )
 
     captured = {}
@@ -83,7 +67,21 @@ def test_make_acquire_partners_quotes_variant_ampersand_for_cli_contract_and_url
         return Report()
 
     monkeypatch.setattr(cli, "acquire_partners", fake_acquire)
-    cli_args = argv[argv.index("acquire-partners") :]
+    cli_args = [
+        "acquire-partners",
+        "--source",
+        "un_comtrade",
+        "--candidates",
+        str(candidate_path),
+        "--years",
+        "2024",
+        "--max-requests",
+        "2",
+        "--flows",
+        "imports",
+        "--parameter",
+        "partner_dimension_query=&includeDesc=true",
+    ]
     with pytest.raises(SystemExit, match="0"):
         cli.main(cli_args)
     expected = (("partner_dimension_query", "&includeDesc=true"),)

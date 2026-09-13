@@ -1432,6 +1432,50 @@ S14 record folders:
 `78c9b0c6c0085cdc89e303d159a56041b5923fd720b64637ff6829c5009fc6cb`,
 153 files. Index empty; frozen roots and top-level modules unchanged.
 
+## 2026-09-13T02:32:00Z — OD-21 hosted-CI correction
+
+Persona remains implementer-sol with test/delivery discipline; data
+classification remains confidential_demo. OD-21 authorizes test-only changes.
+
+RED and retained-history verification commands recorded before execution:
+
+```bash
+rm -rf /tmp/ior-s14a-scratch
+git clone -q . /tmp/ior-s14a-scratch
+(cd /tmp/ior-s14a-scratch && CI=1 UV_OFFLINE=1 PYTHONDONTWRITEBYTECODE=1 PYTHONPYCACHEPREFIX=/tmp/ior-s14a-pyc PATH=/home/barami/projects/industrial-opportunity-resolution-mvp/.venv/bin:$PATH PYTHONPATH=src pytest -q tests/test_acquisition_cli.py::test_make_acquire_partners_quotes_variant_ampersand_for_cli_contract_and_url tests/test_acquisition_config.py::test_1_3_0_history_copy_is_byte_identical_to_superseded_config)
+sha256sum config/history/acquisition_sources.v1-1.3.0.yaml
+git show ab6211f86307ad95a0e61f0597664023f09b7177:config/acquisition_sources.v1.yaml | sha256sum
+cmp config/history/acquisition_sources.v1-1.3.0.yaml <(git show ab6211f86307ad95a0e61f0597664023f09b7177:config/acquisition_sources.v1.yaml)
+```
+
+Repository-wide test search covers `git show HEAD:`, `HEAD:` and other
+HEAD-content dependencies. Synthetic frozen-tree tests intentionally exercise
+HEAD in repositories they construct and do not depend on a slice-changed file.
+
+GREEN: both corrected tests passed locally (`2 passed in 0.12s`) and in the
+scratch clone with the fixes committed over 13eeea1 and `CI=1`
+(`2 passed in 0.16s`). The Make test now uses `make -n`, asserts the rendered
+quoted argument and separately drives the Python CLI/QueryContract path. It
+does not set live acquisition permission or clear CI.
+
+Other HEAD-dependent search result: the only changed-file dependencies were
+the history test and helper in `test_acquisition_config.py`; all were replaced
+with the retained-file fixture and pinned SHA-256. Remaining HEAD references
+are deliberate synthetic frozen-tree tests over repositories created by those
+tests, not content comparisons to S14a-changed files.
+
+Full verification command recorded before execution:
+
+```bash
+UV_OFFLINE=1 PYTHONDONTWRITEBYTECODE=1 PYTHONPYCACHEPREFIX=/tmp/ior-s14a-pyc PATH=.venv/bin:$PATH PYTHONPATH=src pytest -q
+```
+
+Full suite: `2416 passed, 1 warning`. Final canonical identity against
+`13eeea1`: `38e1fed5c512756635435c3ec372dd04b615d76562745d63e0ec2790c6856ead`,
+2 files: `tests/test_acquisition_cli.py` and
+`tests/test_acquisition_config.py`. Candidate remains unstaged and
+uncommitted in the primary repository.
+
 ## 2026-09-13T02:10:00Z — OD-18 RED/GREEN and corrected V3 window
 
 The first dry-run-only assertion was discarded because tokenization with

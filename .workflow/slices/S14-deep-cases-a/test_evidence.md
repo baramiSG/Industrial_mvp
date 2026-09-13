@@ -23,6 +23,62 @@ ENTITY RECONSTRUCTION PASS (1 artifacts, 38 links)
 SCREENING RECONSTRUCTION PASS (1 snapshots)
 ```
 
+## 2026-09-13T02:35:00Z — OD-21 CI test correction
+
+Scratch RED at committed candidate HEAD `13eeea1`: `2 failed`. The Make test
+executed the guarded target under `CI=1` and correctly hit `CI may not acquire`;
+the history test compared retained 1.3.0 bytes to candidate HEAD's 1.4.0 file.
+
+Retained config SHA-256:
+`fbe061496bc6c9b5ddd039b25536d78fb24c22ba3d84650fcd2c9374977673cc`.
+The retained bytes equal
+`git show ab6211f86307ad95a0e61f0597664023f09b7177:config/acquisition_sources.v1.yaml`
+byte-for-byte and parse with `metadata.version == "1.3.0"`.
+
+GREEN commands recorded before execution:
+
+```bash
+UV_OFFLINE=1 PYTHONDONTWRITEBYTECODE=1 PYTHONPYCACHEPREFIX=/tmp/ior-s14a-pyc PATH=.venv/bin:$PATH PYTHONPATH=src pytest -q tests/test_acquisition_cli.py::test_make_acquire_partners_quotes_variant_ampersand_for_cli_contract_and_url tests/test_acquisition_config.py::test_1_3_0_history_copy_is_byte_identical_to_superseded_config
+git diff -- tests/test_acquisition_cli.py tests/test_acquisition_config.py | git -C /tmp/ior-s14a-scratch apply
+git -C /tmp/ior-s14a-scratch add tests/test_acquisition_cli.py tests/test_acquisition_config.py
+git -C /tmp/ior-s14a-scratch commit -q -m 'test: make S14a checks CI-stable'
+(cd /tmp/ior-s14a-scratch && CI=1 UV_OFFLINE=1 PYTHONDONTWRITEBYTECODE=1 PYTHONPYCACHEPREFIX=/tmp/ior-s14a-pyc PATH=/home/barami/projects/industrial-opportunity-resolution-mvp/.venv/bin:$PATH PYTHONPATH=src pytest -q tests/test_acquisition_cli.py::test_make_acquire_partners_quotes_variant_ampersand_for_cli_contract_and_url tests/test_acquisition_config.py::test_1_3_0_history_copy_is_byte_identical_to_superseded_config)
+```
+
+GREEN locally: `2 passed in 0.12s`. GREEN in the committed scratch clone with
+`CI=1`: `2 passed in 0.16s`.
+
+Full suite: `2416 passed, 1 warning`.
+
+Final commands recorded before execution:
+
+```bash
+git diff --cached --quiet && echo INDEX_EMPTY_PASS
+git diff --check && echo DIFF_CHECK_PASS
+git diff --name-only 13eeea1 -- .
+PYTHONDONTWRITEBYTECODE=1 PYTHONPYCACHEPREFIX=/tmp/ior-s14a-pyc PATH=.venv/bin:$PATH PYTHONPATH=src python3 - <<'PY'
+# Canonical identity against base 13eeea1; exclude both S14 record folders,
+# .autonomous-workflow and ignored roots; print identity, count and file list.
+PY
+```
+
+```text
+INDEX_EMPTY_PASS
+DIFF_CHECK_PASS
+CANDIDATE_IDENTITY 38e1fed5c512756635435c3ec372dd04b615d76562745d63e0ec2790c6856ead
+CANDIDATE_FILE_COUNT 2
+CANDIDATE_FILE tests/test_acquisition_cli.py
+CANDIDATE_FILE tests/test_acquisition_config.py
+```
+
+Muhasib: verified the hosted failure log, committed scratch RED, retained-file
+hash/base equality, local and committed-scratch GREEN, full pytest, exact
+two-file scope, empty index and canonical trailing-LF identity. No network,
+`.env`, product/config/data/Core/manifest edit, repository commit/stage/push,
+or CI-guard bypass occurred. The remaining HEAD usages were inspected and are
+synthetic-repository frozen-tree mechanics, not dependencies on slice-changed
+file content.
+
 ## 2026-09-13T02:05:00Z — AM-3 RED/GREEN command record
 
 The following command was recorded before execution. It covers the T-26
