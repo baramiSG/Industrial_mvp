@@ -1029,3 +1029,133 @@ Comtrade partner snapshot, OBSERVED 721061 brief, AM-3 predicates, Make quoting
 regression, Core 04/05/09, ADR-021 and KL-97/KL-102/KL-103. S14a manifest run
 count is **3** (owner-authorized third and last run under OD-16/OD-18 and AM-3
 Case C); no fourth run is authorized.
+
+## ADR-022 — Deep-case portfolio scenarios, routes and corrected visual truth
+
+**Status:** implementation candidate under approved `plan-1-s14b.json`
+(`af5ae5d…`) as amended by AM-1 (`8dc1b75d…`) and owner rulings OD-1…OD-16.
+Independent implementation review, CI and merge remain separate gates.
+
+**Context.** S14b turns the five S14a CaseBriefs into reproducible
+PublicSnapshot 2.2.0 records and adds five Class-D `DEMO_GENERATOR` scenarios.
+The two frozen 2.1.0 cases and their public outcomes remain unchanged.
+Public evidence leaves all five additions at `INVESTIGATE`; planted simulation
+facts demonstrate routes 3, 7, 6, 4 and 0 without changing `real_decision`.
+
+**Decision.** PublicSnapshot 2.1.0 and 2.2.0 coexist. Only the five derived
+S14 records use 2.2.0 `partner_detail`; the builder derives that block and its
+passport references from the validated brief. The five scenarios compute as:
+
+| Opportunity | Public result | Simulated result |
+|---|---|---|
+| SAU-H6-721061 | INVESTIGATE / null | ADVANCE / 3 |
+| SAU-H6-721012 | INVESTIGATE / null | ADVANCE / 7 |
+| SAU-H6-760711 | INVESTIGATE / null | ADVANCE / 6 |
+| SAU-H6-760429 | INVESTIGATE / null | ADVANCE / 4 |
+| SAU-H6-392010 | INVESTIGATE / null | REJECT / 0 |
+
+The seven-case visual matrix has 76 entries. OD-15 requires the portfolio chip
+to compute the loaded opportunity count and active rule-ledger length, and
+requires decision-object status text to come from the bilingual UI catalogue.
+OD-16 authorizes a second canonical regeneration under the original change
+reference because those corrections alter governed pixels.
+
+**Integration history.** S14a merged as `ec859f7`; its records landed in
+`1289e31`. Owner W1 `f0d3eef` was rebased to W1' `4068a80`. The sole additive
+conflict was in `tests/test_integrity_contract.py`; the owner retained S14a's
+appended function followed by S14b's appended function, as shown by
+`git diff 1289e31 4068a80 -- tests/test_integrity_contract.py`. Owner W2 is
+`ec2eae1`; owner W2' is `5354a6f230bfee24e3aed97ad8120f804e97f603`
+with the OD-16 baseline and pin update. The conflict-resolution diff contains
+only the appended S14b contract after S14a's function:
+
+```diff
+@@ -887,3 +887,26 @@ def test_s14a_core_v2_case_contracts() -> None:
+     assert "CASE RECONSTRUCTION PASS" in core_09
++
++def test_s14b_core_04_and_07_partner_detail_sentences() -> None:
++    # S14b assertions for PublicSnapshot 2.2.0 and partner-state semantics.
+```
+
+**Canonical execution 1 — T8, before OD-15 inspection.**
+
+```text
+PYTHONDONTWRITEBYTECODE=1 PYTHONPYCACHEPREFIX=/tmp/ior-s14b-pyc UV_OFFLINE=1 PATH=.venv/bin:$PATH PYTHONPATH=src IOR_UPDATE_VISUAL_BASELINES=1 IOR_BASELINE_CHANGE_REF="S14b-deep-case-portfolio-scenarios-and-goldens:af5ae5d870eeedb8383d5f71756a189dc30dfa3f78d11c1a7b5d42a0e97879f2" make e2e-update-baselines
+CANONICAL CHROMIUM ASSERTION PASS revision=chromium-1234 executable=/ms-playwright/chromium-1234/chrome-linux64/chrome uid=1000 gid=1000
+4 passed, 332 deselected in 78.61s (0:01:18)
+VISUAL_MANIFEST_OK 76
+VISUAL_TOTAL_BYTES 11116140 LIMIT 12582912
+VISUAL_MAX_FILE_BYTES 230892 LIMIT 614400
+```
+
+The first 56-entry comparison against S14a merge `ec859f7` recorded
+`DRIFT_FAILURES 0`; its full table and crops are in
+`.autonomous-workflow/evidence/s14-deep-cases-a/visual-s14b/drift.md`.
+The owner subsequently measured the complete W2 baseline root at 11,156,296
+bytes and identified the stale portfolio chip and Arabic decision-subject
+label.
+
+**Canonical execution 2 — T8b, OD-16 correction.**
+
+```text
+PYTHONDONTWRITEBYTECODE=1 PYTHONPYCACHEPREFIX=/tmp/ior-s14b-pyc UV_OFFLINE=1 PATH=.venv/bin:$PATH PYTHONPATH=src IOR_UPDATE_VISUAL_BASELINES=1 IOR_BASELINE_CHANGE_REF="S14b-deep-case-portfolio-scenarios-and-goldens:af5ae5d870eeedb8383d5f71756a189dc30dfa3f78d11c1a7b5d42a0e97879f2" make e2e-update-baselines
+CANONICAL CHROMIUM ASSERTION PASS revision=chromium-1234 executable=/ms-playwright/chromium-1234/chrome-linux64/chrome uid=1000 gid=1000
+4 passed, 339 deselected in 78.01s (0:01:18)
+VISUAL_MANIFEST_OK 76
+VISUAL_TOTAL_BYTES 11117096 LIMIT 12582912
+VISUAL_MAX_FILE_BYTES 230892 LIMIT 614400
+VISUAL_ROOT_BYTES 11157252
+VISUAL_OWNERSHIP_WRONG 0
+VISUAL_ABSOLUTE_PATHS 0
+```
+
+Comparison with W2 `ec2eae1` changed exactly eight portfolio images within
+the measured chip rectangles and seven Arabic desktop public-workspace images
+within the decision-subject card. Arabic tablet cards are below the captured
+viewport and do not change; English decision-subject bytes were deliberately
+preserved. All other images are pixel-identical, every changed mask has zero
+significant pixels outside its authorized region, and `DRIFT_FAILURES 0`.
+The 76-row table and before/after/diff crops are in
+`.autonomous-workflow/evidence/s14-deep-cases-a/visual-s14b/drift-t8b.md`
+and `crops-t8b/`.
+
+**Consequences.** The second run increases the complete baseline root by 956
+bytes from the owner-verified W2 root while remaining below both budgets. W2'
+changes only `browser_tests/baselines/v0.3.0/**` and the frozen-pin test; the four
+visual-pinned source changes remain in the implementation candidate. The
+future baseline tree OID is
+`0259f800dbcc4c3726549b3af2ed78cc570ef281`. The single S14b
+`build_manifests.py` authority run receipt was recorded before invocation at
+`2026-09-13T04:25:49Z`. Its authorized reason is the five builder-derived
+snapshots, five Class-D scenarios, finalized Core 04/07/09 text and the
+versioned UI/narrative catalogue changes under this ADR. Pre-run manifests
+contain 628 snapshot rows and 19 authority rows; the expected generated delta
+is ten added snapshot rows, zero changed prior snapshot rows and exactly five
+changed authority rows (Core 04, Core 07, Core 09, UI strings and decision
+narratives). The run exited 0 with exactly that delta: 628→638 snapshot rows,
+19→19 authority rows, the §11 human table exactly mirrored the machine file,
+and the immediate integrity oracle passed.
+
+**Reviewer correction S14B-IR1-F01 / OD-18.** Reviewer-grok round 1 rejected
+candidate `6307ccb3…` because Core 04 §12 named
+`source_snapshot_id`, `observed_row_count` and
+`calculated_passport_id`, which do not exist in the implemented exact-key
+PublicSnapshot 2.2.0 validator, while omitting required `source_id`,
+`partner_snapshot_id`, `unit_key`, `observed_partner_rows` and
+`observed_passport_id`. OD-18 adjudicated the finding VALID and authorized
+only a test-first correction of that Core paragraph and its contract pin.
+No implementation, data, scenario, visual, route or other authority content
+changes.
+
+Because the first S14b manifest run already hashed Core 04, OD-18 authorizes
+exactly one additional `scripts/build_manifests.py` execution after the
+correction. This is the second and final S14b run. Its permitted delta is:
+snapshot manifest byte-identical with 638 rows; authority manifest 19 rows
+with only `docs/core/04_CANONICAL_DATA_MODEL.md` changed relative to the
+pre-correction candidate; §11 mirrored exactly. No third S14b run is
+authorized. The second-run receipt was recorded before invocation at
+`2026-09-13T05:49:09Z`; the reason is solely to hash the OD-18 Core 04
+contract correction after its RED/GREEN and unchanged-product regression.
+The run exited 0. The 638-row snapshot manifest was byte-identical; the
+authority manifest remained 19 rows with only Core 04 changed; the §11 mirror
+matched exactly; and the immediate integrity oracle passed.

@@ -335,6 +335,23 @@ the parent S14 minimum portfolio requirement. S14b consumes the pinned list,
 commits snapshots and Class-D scenarios together, then adds goldens, project
 list, route matrix and browser/visual coverage.
 
+## S. Milestone v0.3.0 — S14b deep-case portfolio
+
+| ID | Observable acceptance | Implementation evidence | Status | Slice |
+|---|---|---|---|---|
+| V3-S14-PORTFOLIO | Seven cases load from the governed project list; five additions use builder-derived PublicSnapshot 2.2.0 and preserve the original two cases. | Snapshot/brief reconstruction, repository/API/golden tests and `CASES=7`. | TESTED | s14b |
+| V3-S14-SIM | Five Class-D scenarios reconcile to public marginals, pass Gate B and never alter `real_decision`. | Scenario validation plus public/simulated fingerprint tests; routes 3, 7, 6, 4 and 0 computed. | TESTED | s14b |
+| V3-S14-ROUTES | Governed demonstrations populate route-matrix rows with binding constraint, lower-route failures, evidence and actual/expected state. | `SLICE_GRAPH.md` §9; route-hypothesis assertions and Gate B. MONITOR remains truthfully undemonstrated because all five public cases fire material R1-D. | TESTED | s14b |
+| V3-S14-PARTNER | OBSERVED, MISSING and observed ZERO remain distinct through snapshot, rules, GenUI and dossier. | PublicSnapshot 2.2.0 contract; state-specific R3/R4-D and catalogue tests; 2.1.0 remains accepted unchanged. | TESTED | s14b |
+| V3-S14-VISUAL | Seven-case bilingual browser matrix has 76 pinned entries and the OD-15 truth/parity corrections. | Two OD-16-governed canonical executions; W2' baseline tree `0259f800…`; `DRIFT_FAILURES 0`; 339 functional plus 4 visual nodes. | TESTED | s14b |
+| V3-S14-PORTABLE | Candidate reconstructs and passes CI from different absolute paths without committed local paths. | Different-path copy passed integrity, Gate B, full reconstruction and smoke; committed scratch candidate on W2' passed `CI=1 make ci` with 2,549 Python, 339 functional and 4 visual nodes. | TESTED | s14b |
+
+S14b evidence is in
+`.workflow/slices/S14b-deep-case-portfolio/{implementation_log,test_evidence}.md`
+and ADR-022. Statuses are implementation-candidate claims only; independent
+review, PR, hosted CI and merge remain separate gates. Parent S14 remains
+IN_PROGRESS until S14b merges.
+
 ## Branch and release-state rules
 
 1. No row on the S05 implementation branch is promoted above `TESTED`.

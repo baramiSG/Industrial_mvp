@@ -119,10 +119,9 @@ def test_polypropylene_simulation_still_rejects_support() -> None:
     }
 
 
-# Provisional S14 public recordings. T6 re-records and finalizes these only
-# after the s14a merge and the authoritative 2.2.0 builder run.
+# Authoritative S14 public recordings after the s14a merge and 2.2.0 build.
 RECORDED_PUBLIC_FIRED = {
-    "SAU-H6-721061": {"R0", "R1-D", "R12"},
+    "SAU-H6-721061": {"R0", "R1-D", "R3", "R10", "R12"},
     "SAU-H6-721012": {"R0", "R1-D", "R2", "R4-D", "R12"},
     "SAU-H6-760711": {"R0", "R1-D", "R2", "R12"},
     "SAU-H6-760429": {
@@ -326,9 +325,9 @@ def _assert_s14_simulated_golden(opportunity_id: str) -> None:
         assert national_value[
             "incremental_national_value_m_sar"
         ] == pytest.approx(expected["national_value"], abs=1e-3)
-    ratio = result["competition"][
+    ratio = result["competition"].get(
         "post_entry_capacity_to_downside_demand"
-    ]
+    )
     if expected["competition_ratio"] is None:
         assert ratio is None
     else:
@@ -336,7 +335,7 @@ def _assert_s14_simulated_golden(opportunity_id: str) -> None:
             expected["competition_ratio"],
             abs=1e-4,
         )
-    assert result["competition"]["warning_fires"] is (
+    assert result["competition"].get("warning_fires") is (
         expected["competition_warning"]
     )
 

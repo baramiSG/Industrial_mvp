@@ -449,7 +449,7 @@ def test_server_teardown_accepts_clean_exit_or_requested_sigterm() -> None:
     assert harness.is_expected_server_return_code(1) is False
 
 
-def test_browser_inventory_has_exactly_32_named_tests() -> None:
+def test_browser_inventory_has_exactly_33_named_tests() -> None:
     expected = {
         "test_portfolio_loads_expected_cases_and_states",
         "test_opportunity_card_opens_selected_workspace",
@@ -498,6 +498,7 @@ def test_browser_inventory_has_exactly_32_named_tests() -> None:
             "test_workspace_and_methodology_ledgers_have_no_english_"
             "catalogue_prose_in_arabic"
         ),
+            "test_arabic_decision_subject_card_has_catalogue_parity",
     }
     actual: set[str] = set()
     for path in BROWSER_TESTS.glob("test_*.py"):

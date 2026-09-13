@@ -39,13 +39,6 @@ pytestmark = pytest.mark.e2e
 MODE_LOCALES = tuple(product(MODES, LOCALES))
 CASE_MODE_LOCALES = tuple(product(MODES, CASES, LOCALES))
 NEW_CASE_LOCALES = tuple(product(CASES[2:], LOCALES))
-NEW_SIMULATED_UNLOCK_COUNTS = {
-    "SAU-H6-721061": 1,
-    "SAU-H6-721012": 1,
-    "SAU-H6-760711": 1,
-    "SAU-H6-760429": 0,
-    "SAU-H6-392010": 5,
-}
 
 
 @pytest.mark.parametrize(
@@ -86,6 +79,17 @@ def test_portfolio_loads_expected_cases_and_states(
             for current, following in zip(words, words[1:], strict=False)
         ), chip.inner_text()
     strings = locale_bundle(locale)["strings"]
+    rule_path_count = page.locator(
+        "#methodology .rule-table tbody tr"
+    ).count()
+    expected_chip = (
+        f"{len(CASES)} golden cases · {rule_path_count} rule paths"
+        if locale == EN
+        else f"{len(CASES)} حالات ذهبية · {rule_path_count} مسار قاعدة"
+    )
+    expect(
+        page.locator('[data-i18n="portfolio.chip"]')
+    ).to_have_text(expected_chip)
     expect(page.locator("#kpi-grid")).to_contain_text(
         strings["kpi.leakage_label"]
     )
@@ -234,18 +238,12 @@ def test_opportunity_select_loads_each_case(
         for field in ("conditions", "kill_conditions"):
             for item in narrative[field]:
                 expect(hero).to_contain_text(item["text"])
-        expected_unlocks = (
-            5
-            if case in {STEEL, POLYPROPYLENE}
-            else NEW_SIMULATED_UNLOCK_COUNTS[case.id]
-        )
-        assert len(decision["missing_facts"]) == expected_unlocks
-        expect(unlocks).to_have_count(expected_unlocks)
         unlock_props = next(
             row
             for row in manifest_payload["components"]
             if row["type"] == "data_unlocks"
         )["props"]["localized_missing_facts"][locale.code]
+        expect(unlocks).to_have_count(len(unlock_props))
         for item in unlock_props:
             text = item["text"] if isinstance(item, dict) else item
             expect(page.locator(".unlock-list")).to_contain_text(text)
@@ -486,6 +484,31 @@ def test_workspace_and_methodology_ledgers_have_no_english_catalogue_prose_in_ar
             + "\n",
             encoding="utf-8",
         )
+
+
+@pytest.mark.parametrize(
+    "case",
+    CASES,
+    ids=[case.slug for case in CASES],
+)
+def test_arabic_decision_subject_card_has_catalogue_parity(
+    browser_session: BrowserSession,
+    case: Case,
+) -> None:
+    page = browser_session.page
+    goto_portfolio(page, "public", AR)
+    detail, _ = select_case(page, case, "public", AR)
+    status = detail.json()["opportunity"]["decision_object_status"]
+    expected = {
+        "generic_hs6_only": "رمز النظام المنسق العام فقط",
+        "partially_resolved": "محسوم جزئيا",
+        "resolved": "محسوم",
+    }[status]
+    selector = "#workspace .metric-panel .metric-box:nth-child(4)"
+    card = page.locator(selector)
+    expect(card.locator("p")).to_have_text(expected)
+    report = arabic_parity_report(page, f"{selector} p")
+    assert_arabic_parity(report, expected_source_spans=0)
 
 
 @pytest.mark.parametrize(

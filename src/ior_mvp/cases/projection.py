@@ -1,4 +1,4 @@
-"""Deterministic CaseBrief projection to PublicSnapshot 2.1.0."""
+"""Deterministic CaseBrief projection to PublicSnapshot 2.2.0."""
 
 from __future__ import annotations
 
@@ -709,9 +709,23 @@ def build_public_snapshot(
     trade_quality["execution_cap"] += (
         f" Partner detail: {detail_marker} ({passport_text})."
     )
+    evidence = derive_passports(
+        brief, universe, partner_source, documents, root=root
+    )
+    attempt_passport_ids = [
+        str(passport["evidence_id"])
+        for passport in evidence
+        if "-PARTNERS-ATTEMPT" in str(passport["evidence_id"])
+    ]
+    if state == "PARTNER_DETAIL_OBSERVED":
+        observed_passport_id: str | None = partner_passport_ids[0]
+    elif state == "PARTNER_TRADE_OBSERVED_ZERO":
+        observed_passport_id = partner_passport_ids[0]
+    else:
+        observed_passport_id = None
     as_of = str(universe["as_of_date"])
     record = {
-        "schema_version": "2.1.0",
+        "schema_version": "2.2.0",
         "snapshot_id": (
             f"PUBLIC-{brief['opportunity_id']}-{as_of}"
         ),
@@ -740,6 +754,16 @@ def build_public_snapshot(
         "trade": trade,
         "trade_quality": trade_quality,
         "partner_observations": partner_rows,
+        "partner_detail": {
+            "state": state,
+            "reason": detail["reason"],
+            "source_id": detail["source_id"],
+            "partner_snapshot_id": detail["partner_snapshot_id"],
+            "unit_key": list(detail["unit_key"]),
+            "observed_partner_rows": detail["observed_partner_rows"],
+            "attempt_passport_ids": attempt_passport_ids,
+            "observed_passport_id": observed_passport_id,
+        },
         "domestic_flows": {
             "period_year": max(row["year"] for row in trade),
             "domestic_production_kt": UNAVAILABLE,
@@ -757,9 +781,7 @@ def build_public_snapshot(
             "route_evidence": UNAVAILABLE,
             "monitor_trigger": UNAVAILABLE,
         },
-        "evidence": derive_passports(
-            brief, universe, partner_source, documents, root=root
-        ),
+        "evidence": evidence,
     }
     validate_public_snapshot(record, root=root)
     return record

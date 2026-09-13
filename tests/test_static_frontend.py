@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import re
+import subprocess
 from pathlib import Path
 
 from ior_mvp.config import PROJECT_ROOT
@@ -209,6 +210,28 @@ def test_metric_grid_hhi_note_uses_partner_detail_catalogue_keys_and_never_rende
         in grid
     )
     assert "hhi == null ? 0" not in grid
+
+
+def test_trade_chart_path_breaks_at_unavailable_points_instead_of_emitting_nan(
+) -> None:
+    source = _module_source("modules/renderers/trade.js")
+    executable = "\n".join(source.splitlines()[3:])
+    script = (
+        executable
+        + '\nconsole.log(chartPath([1, "UNAVAILABLE", 3], '
+        + "(index) => index, (value) => value));\n"
+    )
+
+    result = subprocess.run(
+        ["node", "--input-type=module"],
+        input=script,
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+
+    assert result.returncode == 0, result.stderr
+    assert result.stdout.strip() == "M0,1 M2,3"
 
 
 def test_decision_actions_exposes_dossier_html_action() -> None:

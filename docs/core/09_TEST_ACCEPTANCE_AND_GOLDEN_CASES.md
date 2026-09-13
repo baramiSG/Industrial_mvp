@@ -106,6 +106,42 @@ specification-adjusted gap < 0
 support = 0
 ```
 
+#### Golden C — Galvalume
+
+Public `SAU-H6-721061` computes INVESTIGATE/null. Scenario
+`SYN-MINISTRY-GALVALUME-001` computes ADVANCE route 3 for certification and
+customer qualification; `real_decision` remains INVESTIGATE.
+
+#### Golden D — Tinplate
+
+Public `SAU-H6-721012` computes INVESTIGATE/null. Scenario
+`SYN-MINISTRY-TINPLATE-001` computes ADVANCE route 7 only after routes 0–6
+fail or cannot fully resolve the constraint; `real_decision` is unchanged.
+
+#### Golden E — Aluminium foil
+
+Public `SAU-H6-760711` computes INVESTIGATE/null. Scenario
+`SYN-MINISTRY-ALU-FOIL-001` computes ADVANCE route 6 for technology licensing,
+a specialist line or joint venture; `real_decision` is unchanged.
+
+#### Golden F — Aluminium profiles
+
+Public `SAU-H6-760429` computes INVESTIGATE/null. Scenario
+`SYN-MINISTRY-ALU-PROFILES-001` computes ADVANCE route 4 with zero financial
+support because conditional offtake resolves the quantity gap;
+`real_decision` is unchanged.
+
+#### Golden G — PE film
+
+Public `SAU-H6-392010` computes INVESTIGATE/null. Scenario
+`SYN-MINISTRY-PE-FILM-001` computes REJECT route 0 because equivalent
+qualified availability exceeds target demand and no binding market failure
+remains; `real_decision` is unchanged.
+
+For Goldens C–G, Gate B independently computes and compares state and route
+with scenario ground truth. All five public snapshots are builder-derived
+2.2.0 records; no scenario field can alter a real decision.
+
 ### 2.5 Extraction golden tests
 
 - four labeled AR/EN fields;
@@ -131,10 +167,15 @@ control and approved viewport, including keyboard focus, WCAG 2.1 A/AA, bidirect
 layout, intended-font rendering, dossier print/PDF, console and network failures.
 Post-redesign visual baselines are hashed test oracles: comparison is deterministic,
 updates require an explicit reviewer-approved procedure, and CI shall never update them.
-The S13b matrix has 56 entries: fourteen screens in two locales and two
-viewports. Baseline regeneration records per-entry pixel drift against the
-pre-existing 40-entry set and requires every changed pixel to be confined to
-the approved sidebar or integrity-authority regions.
+The S14b matrix has 76 entries. Five public-workspace screens extend the
+S13b fourteen-screen matrix to nineteen screens in two locales and two
+viewports. Canonical regeneration round one records the 56-entry comparison
+against the S14a merge. OD-15 then corrects the portfolio count/rule chip and
+Arabic decision-subject label; OD-16 authorizes canonical regeneration round
+two. Its eight portfolio changes are confined to the chip bounding boxes and
+its seven Arabic desktop public-workspace changes are confined to the
+decision-subject card. All other baseline images remain byte-identical,
+ownership and budget gates pass, and CI only compares.
 
 Arabic analytical parity has two parts. First, governed prose and code labels
 must come from the Arabic catalogues; verbatim source spans and classified
@@ -361,9 +402,12 @@ The MVP is complete when:
 - no external key is required;
 - all tests pass;
 - integrity passes;
-- the two public golden outcomes are correct;
+- all seven public golden outcomes are correct, including the unchanged
+  original steel and polypropylene results;
 - the steel simulated transition is correct and visibly disclosed;
 - the PP simulation still rejects unnecessary support;
+- all five S14b scenarios pass reconciliation and Gate B with their computed
+  state/route equal to ground truth while leaving `real_decision` unchanged;
 - the interface is usable at desktop and tablet widths;
 - the Decision Dossier is available in JSON and printable HTML;
 - documentation and source are included in one zip.
@@ -480,3 +524,24 @@ authorizes one third-and-last run after corrected V3 evidence and governed
 records, again with the base-row oracle immediately after. Both original public
 goldens, their scenarios, frozen roots and the 56-entry visual manifest remain
 exact.
+
+### 10.1 S14b portfolio, route and reconstruction proof
+
+The merged S14a builder produces five committed PublicSnapshot 2.2.0 records
+from the five validated briefs; no snapshot is edited by hand.
+`scripts/reconstruct_snapshot.py --all` must print
+`CASE RECONSTRUCTION PASS (5 snapshots, 5 briefs)`. The two original public
+snapshots, scenarios and four historical outcomes remain byte-identical.
+
+Seven cases load through the repository, API and browser harness. Goldens C–G
+compute public INVESTIGATE/null and simulated routes 3, 7, 6, 4 and 0,
+respectively. `scripts/validate_scenarios.py` validates all seven scenario
+contracts, reconciliation checks and Gate B comparisons. Tests also prove
+that all five S14b public cases fire material R1-D, so MONITOR is not
+manufactured from this evidence.
+
+The visual proof consists of two owner-authorized canonical executions under
+the same S14b change reference, a 76-entry manifest, host comparison,
+recursive ownership and byte-budget checks, and measured drift tables. OD-15
+corrects the computed portfolio chip and catalogue-sourced Arabic decision
+subject before the second execution.

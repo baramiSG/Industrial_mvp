@@ -306,6 +306,26 @@ def test_ui_catalogue_locale_keys_and_placeholders_match() -> None:
         )
 
 
+def test_decision_object_status_preserves_english_pixels_and_localizes_arabic(
+) -> None:
+    strings = _catalogue()["strings"]
+    assert {
+        key: strings["en"][key]
+        for key in (
+            "decision_object.generic_hs6_only",
+            "decision_object.partially_resolved",
+            "decision_object.resolved",
+        )
+    } == {
+        "decision_object.generic_hs6_only": "generic hs6 only",
+        "decision_object.partially_resolved": "partially resolved",
+        "decision_object.resolved": "resolved",
+    }
+    assert strings["ar"]["decision_object.generic_hs6_only"] == (
+        "رمز النظام المنسق العام فقط"
+    )
+
+
 def test_partner_detail_metric_and_dossier_keys_exist_in_both_locales_and_are_used(
 ) -> None:
     strings = _catalogue()["strings"]

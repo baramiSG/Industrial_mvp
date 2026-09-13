@@ -2,9 +2,23 @@ import { escapeHtml } from "../dom.js";
 import { integer, number } from "../formatters.js";
 import { t } from "../i18n.js";
 
+function knownNumber(value) {
+  return typeof value === "number" && Number.isFinite(value);
+}
+
 export function chartPath(values, x, y) {
+  let penDown = false;
   return values
-    .map((value, index) => `${index === 0 ? "M" : "L"}${x(index)},${y(value)}`)
+    .map((value, index) => {
+      if (!knownNumber(value)) {
+        penDown = false;
+        return "";
+      }
+      const command = penDown ? "L" : "M";
+      penDown = true;
+      return `${command}${x(index)},${y(value)}`;
+    })
+    .filter(Boolean)
     .join(" ");
 }
 
@@ -13,8 +27,16 @@ export function renderTradeChart(props) {
   const width = 760;
   const height = 250;
   const pad = { l: 48, r: 25, t: 20, b: 38 };
-  const maxValue = Math.max(...trade.map((row) => row.imports_usd_m || 0)) * 1.12;
-  const maxQty = Math.max(...trade.map((row) => row.imports_kt || 0)) * 1.12;
+  const maxValue = Math.max(
+    1,
+    ...trade.filter((row) => knownNumber(row.imports_usd_m))
+      .map((row) => row.imports_usd_m),
+  ) * 1.12;
+  const maxQty = Math.max(
+    1,
+    ...trade.filter((row) => knownNumber(row.imports_kt))
+      .map((row) => row.imports_kt),
+  ) * 1.12;
   const x = (index) => pad.l + (
     trade.length === 1 ? 0 : index * ((width - pad.l - pad.r) / (trade.length - 1))
   );
@@ -32,10 +54,14 @@ export function renderTradeChart(props) {
     (row, index) => `<text class="chart-label" x="${x(index)}" y="${height - 12}" text-anchor="middle">${escapeHtml(integer(row.year))}</text>`,
   ).join("");
   const valuePoints = trade.map(
-    (row, index) => `<circle class="chart-point-value" cx="${x(index)}" cy="${yValue(row.imports_usd_m)}" r="4"><title>${escapeHtml(t("trade.value_point", { value: number(row.imports_usd_m) }))}</title></circle>`,
+    (row, index) => knownNumber(row.imports_usd_m)
+      ? `<circle class="chart-point-value" cx="${x(index)}" cy="${yValue(row.imports_usd_m)}" r="4"><title>${escapeHtml(t("trade.value_point", { value: number(row.imports_usd_m) }))}</title></circle>`
+      : "",
   ).join("");
   const qtyPoints = trade.map(
-    (row, index) => `<circle class="chart-point-quantity" cx="${x(index)}" cy="${yQty(row.imports_kt)}" r="4"><title>${escapeHtml(t("trade.quantity_point", { value: number(row.imports_kt) }))}</title></circle>`,
+    (row, index) => knownNumber(row.imports_kt)
+      ? `<circle class="chart-point-quantity" cx="${x(index)}" cy="${yQty(row.imports_kt)}" r="4"><title>${escapeHtml(t("trade.quantity_point", { value: number(row.imports_kt) }))}</title></circle>`
+      : "",
   ).join("");
   return `
     <article class="workspace-card full">

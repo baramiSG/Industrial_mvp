@@ -56,6 +56,18 @@ export function renderKPIs() {
   ).join("");
 }
 
+export function renderPortfolioChip() {
+  const rulePaths = state.analysis?.rules;
+  if (!Array.isArray(rulePaths)) return;
+  document.querySelector('[data-i18n="portfolio.chip"]').textContent = t(
+    "portfolio.chip",
+    {
+      cases: integer(state.opportunities.length),
+      rules: integer(rulePaths.length),
+    },
+  );
+}
+
 export function renderOpportunityCards() {
   const disclosure = state.mode === "simulated"
     ? `<div class="portfolio-synthetic-disclosure">${syntheticLabels(
@@ -110,5 +122,8 @@ export async function loadPortfolio() {
   renderKPIs();
   renderOpportunityCards();
   populateSelect();
-  if (state.selectedId) await loadOpportunity(state.selectedId);
+  if (state.selectedId) {
+    await loadOpportunity(state.selectedId);
+    renderPortfolioChip();
+  }
 }

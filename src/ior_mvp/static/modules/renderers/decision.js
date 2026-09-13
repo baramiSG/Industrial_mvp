@@ -65,6 +65,17 @@ export function hhiNote(hhi, threshold, partnerDetail) {
   return t("metric.hhi_threshold", { threshold: number(threshold, 2) });
 }
 
+export function decisionObjectStatus(status) {
+  const keys = {
+    generic_hs6_only: "decision_object.generic_hs6_only",
+    partially_resolved: "decision_object.partially_resolved",
+    resolved: "decision_object.resolved",
+  };
+  const key = keys[status];
+  if (!key) throw new Error(`DECISION_OBJECT_STATUS_UNKNOWN:${status}`);
+  return t(key);
+}
+
 export function renderMetricGrid(props) {
   const latest = [...props.trade].sort((a, b) => a.year - b.year).at(-1);
   const capacity = props.capacity;
@@ -108,7 +119,9 @@ export function renderMetricGrid(props) {
             ? t("metric.economics_pass")
             : economics.reason || t("metric.no_support")
         )
-        : state.analysis.opportunity.decision_object_status.replaceAll("_", " "),
+        : decisionObjectStatus(
+          state.analysis.opportunity.decision_object_status,
+        ),
       Boolean(economics && !economics.passes && economics.reason),
     ],
   ];

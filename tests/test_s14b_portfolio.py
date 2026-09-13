@@ -448,7 +448,10 @@ def test_s14_synthetic_rows_are_class_d_and_labelled_everywhere(
         for row in rows
     )
     assert all(
-        assessment["actual_evidence_class"] == "D"
+        assessment["evidence_class"] == "D"
+        and assessment["synthetic_flag"] is True
+        and assessment["display_label"]
+        == "SIMULATED — NOT MINISTRY EVIDENCE"
         for assessment in analysis["simulation_decision"][
             "evidence_class_assessment"
         ].values()
