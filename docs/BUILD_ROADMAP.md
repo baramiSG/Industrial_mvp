@@ -199,16 +199,16 @@ The approved decomposition
    S15a records, adds portfolio/scenario/golden/browser coverage and computes
    the owner-approved route demonstrations without changing real decisions.
 
-The parent completes only after both children merge. S15a preparation W1
-`697322e` was rebased onto M15
-`6dc966a9f210b47a94b96aaeffadcbcc6642415f` as W1'
-`7d4853e8d979d86a5fa932fbd4468bceacfb63b4`. The owner resolved the sole
-integration conflict to `CASE RECONSTRUCTION PASS (5 snapshots, 9 briefs)`.
-OD-16 retains recorded selection `CASE-SELECTION-S15-b96de36ff0ce`; its
+The parent completes only after both children merge. S15a is MERGED
+([PR #29](https://github.com/baramiSG/Industrial_mvp/pull/29), squash
+`8053f2b`, 2026-09-13). Preparation W1 `697322e` was rebased onto M15
+`6dc966a9f210b47a94b96aaeffadcbcc6642415f` as W1' `7d4853e`; its sole
+integration conflict correctly records five committed snapshots and nine
+briefs. OD-16 retains the write-once `CASE-SELECTION-S15-b96de36ff0ce`;
 recorded-input reconstruction passes after W-A15b even though a current-state
-diagnostic sees the later SABIC document and changes its digest without
-changing the selected set. S15a remains an unapproved local implementation
-candidate until independent review.
+diagnostic sees the later SABIC document and changes only its digest, not the
+selected set. PR CI was green 5/5 on its exact head. S15b is READY to add the
+portfolio/scenario/golden/browser layer; S15 remains in progress until then.
 
 ## Explicit non-goals for v0.3.0
 
