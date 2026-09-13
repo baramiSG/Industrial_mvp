@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import json
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from datetime import date
 from pathlib import Path
 from typing import Any, Sequence
@@ -318,30 +318,85 @@ def _verify_selected_coverage(
 def build_row_snapshot(
     store: RawStore, config: dict[str, Any], registry: ConnectorRegistry, *,
     kind: str, source_id: str, kinds: KindRegistry | None = None,
+    selected_override: dict[tuple[str, ...], tuple[Any, tuple[str, ...]]] | None = None,
 ) -> dict[str, Any]:
     kinds = kinds or default_kind_registry()
     spec = kinds.get(kind)
     if kind not in registry.snapshot_kinds(source_id):
         raise AcquisitionUnavailable(UnavailableReason.OUT_OF_SCOPE_CONTENT, {"source_id": source_id})
-    selected = select_latest_units(store, source_id=source_id, stage=spec.stage)
+    selected = selected_override or select_latest_units(
+        store, source_id=source_id, stage=spec.stage
+    )
     complete = {key: value for key, value in selected.items() if value[0].status == "COMPLETE"}
     incomplete = [key for key in selected if key not in complete]
+    source_cfg = config["sources"][source_id]
+    connector = registry.get(
+        source_id,
+        source_config=source_cfg,
+        store=store,
+        transport=None,
+        run_id="",
+        environ={},
+        config_version=spec.config_version,
+    )
     if spec.completeness_policy == CompletenessPolicy.ALL_UNITS_COMPLETE:
         if incomplete:
             raise AcquisitionUnavailable(UnavailableReason.COVERAGE_INCOMPLETE, {"unit_keys": incomplete})
         coverage_block = aggregate_snapshot_coverage(selected, source_id=source_id, stage=spec.stage)
         exclusions = []
     elif spec.completeness_policy == CompletenessPolicy.AT_LEAST_ONE_COMPLETE_WITH_EXCLUSIONS:
+        unparseable = {
+            key
+            for key, (coverage, _) in complete.items()
+            if not (
+                (pages := store.pages_for(
+                    source_id, coverage.query_hash, coverage.run_id
+                ))
+                and all(
+                    page.normalization_status not in {"PENDING", "UNPARSED"}
+                    for page in pages
+                )
+            )
+        }
+        effective_selected = {
+            key: (
+                replace(
+                    coverage,
+                    status="INCOMPLETE",
+                    stop_reason=UnavailableReason.FORMAT_NOT_PARSEABLE,
+                ),
+                superseded,
+            )
+            if key in unparseable
+            else (coverage, superseded)
+            for key, (coverage, superseded) in selected.items()
+        }
+        complete = {
+            key: value for key, value in complete.items() if key not in unparseable
+        }
         if not complete:
-            raise AcquisitionUnavailable(UnavailableReason.COVERAGE_INCOMPLETE, {"unit_keys": list(selected)})
-        coverage_block = aggregate_exclusion_coverage(selected, source_id=source_id, stage=spec.stage)
+            reason = (
+                UnavailableReason.FORMAT_NOT_PARSEABLE
+                if unparseable
+                else UnavailableReason.COVERAGE_INCOMPLETE
+            )
+            raise AcquisitionUnavailable(reason, {"unit_keys": list(selected)})
+        coverage_block = aggregate_exclusion_coverage(
+            effective_selected, source_id=source_id, stage=spec.stage
+        )
         exclusions = coverage_block["units_excluded"]
     else:
         raise ValueError(f"Unknown completeness policy: {spec.completeness_policy}")
-    _verify_selected_coverage(store, config, source_id=source_id, selected=complete)
-    source_cfg = config["sources"][source_id]
-    connector = registry.get(source_id, source_config=source_cfg, store=store,
-                             transport=None, run_id="", environ={}, config_version=spec.config_version)
+    _verify_selected_coverage(
+        store,
+        config,
+        source_id=source_id,
+        selected={
+            key: value
+            for key, value in selected.items()
+            if value[0].status == "COMPLETE"
+        },
+    )
     refs = _build_refs(store, source_id=source_id, stage=spec.stage, selected=complete)
     rows: list[dict[str, Any]] = []
     all_pages: list[SourceContractRecord] = []
@@ -417,6 +472,62 @@ def _selection_changed(
         if stored_run is None or stored_run != cov.run_id:
             return True
     return False
+
+
+def _recorded_selection(
+    record: dict[str, Any],
+    store: RawStore,
+) -> dict[tuple[str, ...], tuple[Any, tuple[str, ...]]]:
+    source_id = record["source_id"]
+    selected: dict[tuple[str, ...], tuple[Any, tuple[str, ...]]] = {}
+    for unit in record.get("coverage", {}).get("units", []):
+        key = tuple(unit["unit_key"])
+        coverage = store.read_coverage(
+            source_id,
+            str(unit["query_hash"]),
+            str(unit["selected_run_id"]),
+        )
+        if coverage.unit_key != key or coverage.source_id != source_id:
+            raise RawStoreIntegrityError("snapshot recorded selection mismatch")
+        selected[key] = (
+            coverage,
+            tuple(unit.get("superseded_run_ids", [])),
+        )
+    if not selected:
+        raise RawStoreIntegrityError("snapshot recorded selection is empty")
+    return selected
+
+
+def reconstruct_pinned(
+    snapshot_path: Path,
+    store: RawStore,
+    config: dict[str, Any],
+    registry: ConnectorRegistry,
+    kinds: KindRegistry | None = None,
+) -> ReconstructionResult:
+    """Rebuild a historical snapshot from its recorded raw-run selection."""
+    kinds = kinds or default_kind_registry()
+    record = json.loads(snapshot_path.read_text(encoding="utf-8"))
+    expected_sha = snapshot_sha256(record)
+    selected = _recorded_selection(record, store)
+    rebuilt = build_row_snapshot(
+        store,
+        config,
+        registry,
+        kind=record["kind"],
+        source_id=record["source_id"],
+        kinds=kinds,
+        selected_override=selected,
+    )
+    actual_sha = snapshot_sha256(rebuilt)
+    return ReconstructionResult(
+        match=actual_sha == expected_sha,
+        expected_sha256=expected_sha,
+        actual_sha256=actual_sha,
+        artifacts_verified=len(record.get("raw_artifact_refs", [])),
+        snapshot_id=record["snapshot_id"],
+        detail={},
+    )
 
 
 def reconstruct(

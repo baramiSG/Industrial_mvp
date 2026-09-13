@@ -91,9 +91,22 @@ def plan_units(
     flows: Sequence[str],
     candidates: CandidateList | None,
     config: dict[str, Any],
+    parameters: tuple[tuple[str, str], ...] = (),
 ) -> tuple[QueryContract, ...]:
-    return stage_spec(stage).plan_units(
-        source_id=source_id, years=years, flows=flows, candidates=candidates, config=config)
+    kwargs: dict[str, Any] = {
+        "source_id": source_id,
+        "years": years,
+        "flows": flows,
+        "candidates": candidates,
+        "config": config,
+    }
+    if parameters:
+        if stage is not Stage.PARTNERS:
+            raise AcquisitionConfigurationError(
+                "contract parameters are supported only for PARTNERS"
+            )
+        kwargs["parameters"] = parameters
+    return stage_spec(stage).plan_units(**kwargs)
 
 
 def plan_requests(
@@ -239,6 +252,7 @@ def acquire_partners(
     flows: Sequence[str],
     deps: PipelineDeps,
     max_requests: int,
+    parameters: tuple[tuple[str, str], ...] = (),
 ) -> RunReport:
     units = plan_units(
         Stage.PARTNERS,
@@ -247,6 +261,7 @@ def acquire_partners(
         flows=flows,
         candidates=candidates,
         config=deps.config,
+        parameters=parameters,
     )
     return _run_units(
         deps,

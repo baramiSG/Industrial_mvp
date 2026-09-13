@@ -199,3 +199,48 @@ def test_known_limitations_names_unmentioned_and_out_of_scope_documents() -> Non
         "DOC-SASO-DOCUMENTS-e57d73b6e5b7-0e0d00cb00cf",
     }
     assert not {value for value in required if value not in text}
+
+
+def test_s14_mentions_v2_spans_verified_and_second_artifact_reconstructs() -> None:
+    mention_path = (
+        PROJECT_ROOT
+        / "data"
+        / "entities"
+        / "mentions"
+        / "mentions-v2.json"
+    )
+    mention_list = load_mention_list(mention_path)
+    documents = default_document_loader(PROJECT_ROOT / "data")
+    snapshots = default_snapshot_loader(PROJECT_ROOT / "data")
+    verified = verify_mentions(
+        mention_list,
+        documents=documents,
+        snapshots=snapshots,
+    )
+    assert len(verified) == 6
+    assert {
+        item.mention.address["document_id"] for item in verified
+    } == {
+        "DOC-PRODUCER-ALTAISEER-TALCO-b68e0eef2440-b339b1ac8d87",
+        "DOC-PRODUCER-ALUPCO-135870d0e4c7-0261d54ca8a6",
+        "DOC-PRODUCER-HADEED-92ca24b2076f-253eed8b773e",
+        "DOC-PRODUCER-MAADEN-b1dd369ea0fe-dae44e050e70",
+    }
+
+    paths = sorted(
+        (
+            PROJECT_ROOT / "data" / "entities" / "resolution"
+        ).glob("ENTITIES-*.json")
+    )
+    assert len(paths) == 2
+    artifact = next(
+        record
+        for path in paths
+        if (
+            record := json.loads(path.read_text(encoding="utf-8"))
+        )["inputs"]["mention_list"]["list_id"]
+        == "mentions-v2"
+    )
+    validate_entity_artifact(artifact)
+    assert artifact["quality_summary"] == "PASS"
+    assert sum(artifact["counts"]["links_by_status"].values()) == 6

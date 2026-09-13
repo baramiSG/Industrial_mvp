@@ -876,3 +876,156 @@ remained 535 rows. Six authority rows changed exactly:
 machine rows into Manifest §11. Immediate verification returned
 `INTEGRITY PASS` and all 21 integrity-contract tests passed. S13b manifest run
 count is **1** and its single-run authorization is exhausted.
+
+## ADR-021 — S14a governed case selection, evidence and derived-case briefs
+
+**Status:** implementation candidate under approved `plan-1-s14a.json`
+(`8fbfa4e6…`) as amended by AM-1 (`8c61a0a2…`), AM-2 (`5bccc8a5…`) and
+AM-3 (`6e596932…`) under owner rulings OD-1…OD-18. Precedence is owner
+rulings > AM-3 > AM-2 > AM-1 >
+base plan > decomposition read-through. Independent plan reviews APPROVE and
+their IAC advisories bind the implementation.
+Independent implementation review and delivery remain separate gates.
+
+**Decision boundary.** S14 is split into evidence child S14a and portfolio
+child S14b. S14a changes no file under `data/snapshots/public`,
+`data/synthetic`, `data/golden` or `browser_tests/**`, no top-level
+`src/ior_mvp/*.py`, and no configuration other than product families and
+acquisition sources. The five derived snapshots exist only in a temporary
+directory. S14b alone may add snapshots/scenarios and update portfolio,
+golden and visual oracles.
+
+**DD-1 — deterministic ruled selection.** `S14-CS-1` applies profile-union
+family membership, PR-7 queue order, T3 continuity-only/T4 price-led/T5 ratio
+tiers, positive 2024 import weight, source-restricted disclosure coverage,
+then R2, imports and HS6 ordering. Frozen 721049/390210 are excluded. OD-11 is
+one hashed `identity_exclusions` row:
+`392190 / RESIDUAL_CATCH_ALL_SUBHEADING`, supported by WCO Chapter 39 page 8
+lines 36–41 and page 9 lines 3–4. It is neither a broad residual flag nor a
+hand edit and does not exclude 760429.
+
+| Profile | Selected | Runner-up | Other ruled exclusions |
+|---|---|---|---|
+| coated steel | 721061, 721012 | 721069 | 721070/721030/721050 lack positive 2024 net weight; frozen 721049 |
+| fabricated aluminium | 760711, 760429 | 761610 | 760820/760691/760611/760810 lack positive 2024 net weight |
+| technical plastics | 392010 | 391739 | identity-excluded 392190; frozen 390210 |
+
+Two post-WCO runs were byte-identical. Record
+`CASE-SELECTION-S14-250cd516de0a.json` has SHA-256
+`19cb6e4c9b70152089e3689a77faf8be6de4b5147188e7087483e3e69deda016`.
+Input hashes: screening inventory `231b8c3c…`; universe `758acdb4…`; product
+families `62fa9c29…`; terms `27b97683…`; identity exclusions `5e18dd7a…`;
+referenced producer documents `45be1d0e…`.
+
+**DD-2 — family authority and retained inputs.** Product families 1.1.0 adds
+PR-1 fabricated-aluminium headings 7604–7614 and 7616 (7615 boundary;
+7601–7603 feedstock excluded) and OD-3 conversion headings 3917/3920/3921
+while retaining 3902. Exact 1.0.0 bytes remain under `config/history/`
+(SHA-256 `841bc5ac…`). Screening validation resolves a changed config path only
+to one retained exact content hash; data inputs never use history; otherwise
+`INPUTS_CHANGED`.
+
+**DD-3 — acquisition authority and windows.** Acquisition sources 1.4.0 adds
+four Class-C producer sources plus Class-B `wco_hs_nomenclature`; exact 1.3.0
+bytes are retained (SHA-256 `fbe06149…`). `nomenclature_authority` is
+`TARGET_PRODUCT_IDENTITY`-only. No discovery-ledger figure became evidence.
+Every parameter and robots/terms fact preceded execution; verbatim RunReports
+are in the slice log.
+
+- WCO `20260912T233006Z`: Chapters 39/72/76 COMPLETE. A second disclosed
+  index read corrected a failed in-memory href predicate; no URL was guessed.
+- Hadeed `20260912T233102Z`, ALUPCO `20260912T233130Z`, TALCO
+  `20260912T233154Z`: one COMPLETE record each.
+- Ma'aden `20260912T233222Z`: two COMPLETE records.
+- W-T: Tasnee and SPIMACO each failed verified TLS once; no bypass or retry.
+- WITS `20260912T233403Z`: four selected HS6 normalized; 721061 redirected to
+  HTTP-200 `Error.aspx` and is a `FORMAT_NOT_PARSEABLE` exclusion.
+
+Compressed raw storage is 41,673,354 bytes across 65 artifacts; largest is
+9,837,279 bytes, within both configured budgets. RunReport request totals show
+the pre-existing KL-65 cumulative-count artefact; actual calls equal the
+recorded bounds.
+
+**DD-4 — acquired-history reconstruction.** Existing `reconstruct()` and its
+`SELECTION_CHANGED` diagnostic stay unchanged. Release reconstruction uses
+`reconstruct_pinned` and each snapshot's recorded run ids. For
+at-least-one-with-exclusions kinds only, transport-complete but
+`PENDING/UNPARSED` units become derived
+`INCOMPLETE / FORMAT_NOT_PARSEABLE` exclusions; all-unit kinds fail closed.
+
+**DD-5 — entities, briefs and engine proof.** `mentions-v2` has six verified,
+non-personal spans. `ENTITIES-2026-09-13-bebc9d15cbf1` resolves four
+companies, one plant, five exact links and one unresolved locality.
+`CaseBrief 1.1.0` requires verbatim spans for every non-`U` capability fact
+and carries a stored-unit-validated partner-detail tri-state.
+Five `SAU-H6-*` briefs project only H6 2022–2024 universe rows, covered WITS
+rows and cited documents. All unobserved inputs remain `UNAVAILABLE`; Arabic
+names are analyst translations.
+
+| Opportunity | State / route | Reason | Fired rules |
+|---|---|---|---|
+| SAU-H6-392010 | INVESTIGATE / null | ROUTE_CHANGING_EVIDENCE_UNRESOLVED | R0, R1-D, R2, R4-D, R12 |
+| SAU-H6-721012 | INVESTIGATE / null | ROUTE_CHANGING_EVIDENCE_UNRESOLVED | R0, R1-D, R2, R4-D, R12 |
+| SAU-H6-721061 | INVESTIGATE / null | ROUTE_CHANGING_EVIDENCE_UNRESOLVED | R0, R1-D, R3, R10, R12 |
+| SAU-H6-760429 | INVESTIGATE / null | ROUTE_CHANGING_EVIDENCE_UNRESOLVED | R0, R1-D, R2, R3, R4-D, R5, R9-S, R10, R12 |
+| SAU-H6-760711 | INVESTIGATE / null | ROUTE_CHANGING_EVIDENCE_UNRESOLVED | R0, R1-D, R2, R12 |
+
+The table records observations made before assertions. Public MONITOR and
+REJECT are not manufactured: every selected case has material R1-D, and no
+generic-capacity rejection is established. S14b re-derives simulations.
+
+**Correction round AM-2 (OD-12).** The prior brief/projection conflated a
+stored-but-unparsed partner attempt, a never-acquired unit and an observed
+zero. CaseBrief 1.1.0 now validates
+`PARTNER_DETAIL_OBSERVED`/`PARTNER_DETAIL_MISSING`/
+`PARTNER_TRADE_OBSERVED_ZERO` against contract hashes, coverage and partner
+snapshots. PublicSnapshot 2.1.0 carries the distinction through calculated
+partner passports, unresolved attempt passports or an observed ZERO passport.
+OD-13 defers the schema-level 2.2.0 block and R3/R4-D reason codes to S14b's
+single visual regeneration; KL-100 records the interim generic engine text.
+
+W-C used the official v1 API for 721061 / 2024 imports. The preflight
+`20260913T010344Z` attempt failed `ENDPOINT_UNVERIFIED` with zero requests
+because the CLI omitted the parameter tuple; its stored attempt remains
+immutable and the tested dispatch was corrected. V1 run
+`20260913T010452Z` then used two connector requests (terms plus data) and
+stored an HTTP-200 clear envelope with count 8: one World and seven non-World
+rows, reporter 682, flow M, HS6 721061 and classification H6. Every
+non-World row had a null partner description, so
+`partner_desc_present_for_non_world_rows` failed and coverage remained
+`COVERAGE_INDETERMINATE`. Secondary dimensions were single-valued
+(`partner2Code=0`, `motCode=0`, `customsCode=C00`), so V2 did not open.
+The aggregate value of non-World rows equals the universe value
+71,149,266.221; this reconciliation does not cure the missing partner names.
+No row was filtered or renamed and no Comtrade partner snapshot was built.
+AM-3 added `&includeDesc=true`, raw-Decimal aggregate reconciliation and the
+typed missing-description reason. The first command did not transmit V3
+because the Make recipe left `&` unquoted; immutable run
+`e71395bb…/20260913T014942Z` therefore repeated V1. OD-18 classified that as a
+tooling defect, authorized a test-first quote fix and one corrected request.
+The argv-capture test failed with the truncated parameter then passed after
+Make quoted it. Corrected V3 `050a03af…/20260913T015620Z` returned HTTP 200,
+8,425 bytes, one World and seven uniquely named non-World H6 rows. Their raw
+Decimal primary values sum to 71,149,266.221, exactly the universe reference
+(difference 0.000; tolerance 0.0035). The separate Comtrade partner snapshot
+selects V3 and preserves the defective repeat, original V1 and WITS page as
+superseded attempts. The brief is OBSERVED with seven rows. Its engine result
+remains INVESTIGATE/null; R3 and R10 are computed, not authored.
+
+**Manifest §7 mapping.** §7.2 covers code/tests/scripts; §7.3 only product
+families 1.1.0 and acquisition sources 1.4.0 with retained bytes; §7.4 Core
+02/04/05/09; §7.5 selection/brief/raw/document/partner/entity artifacts.
+Public goldens and frozen roots remain unchanged. Manifest run count is **0**
+at ADR authoring. First run receipt: `2026-09-13T00:25:27Z`, exit 0; reason:
+base S14a T9 after initial governed text, 535→607 snapshot rows and unchanged
+19-row authority path set. OD-12/AM-2 Case B authorizes exactly one second and
+final S14a run after this correction's governed text. Its receipt is recorded
+immediately before invocation so the ADR bytes themselves are governed:
+`2026-09-13T01:13:59Z`; reason: CaseBrief 1.1.0 tri-state, W-C immutable raw
+attempts and corrected Core 04/05/09, ADR/runbook/limitation/control records.
+Case C third-run receipt recorded before invocation:
+`2026-09-13T02:28:00Z`; reason: OD-18 corrected V3 raw evidence, separate
+Comtrade partner snapshot, OBSERVED 721061 brief, AM-3 predicates, Make quoting
+regression, Core 04/05/09, ADR-021 and KL-97/KL-102/KL-103. S14a manifest run
+count is **3** (owner-authorized third and last run under OD-16/OD-18 and AM-3
+Case C); no fourth run is authorized.

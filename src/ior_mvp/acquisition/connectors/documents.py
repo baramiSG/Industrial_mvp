@@ -128,3 +128,23 @@ class ProducerAdvancedPetrochemicalConnector(DocumentConnector):
 
 class ProducerTasneeConnector(DocumentConnector):
     source_id = "producer_tasnee"
+
+
+class ProducerHadeedConnector(DocumentConnector):
+    source_id = "producer_hadeed"
+
+
+class ProducerAlupcoConnector(DocumentConnector):
+    source_id = "producer_alupco"
+
+
+class ProducerAltaiseerTalcoConnector(DocumentConnector):
+    source_id = "producer_altaiseer_talco"
+
+
+class ProducerMaadenConnector(DocumentConnector):
+    source_id = "producer_maaden"
+
+
+class WcoHsNomenclatureConnector(DocumentConnector):
+    source_id = "wco_hs_nomenclature"

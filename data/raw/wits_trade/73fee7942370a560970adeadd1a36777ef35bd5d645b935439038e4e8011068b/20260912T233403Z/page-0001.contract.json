@@ -1,0 +1,62 @@
+{
+  "access_classification": "public_open",
+  "authority": "World Bank WITS",
+  "byte_count": 50950,
+  "compressed_sha256": "ed8a84e7a13047a1facb224f8c8dc1d7e2c54f7332de1d6ebd8d31271ad5bb2b",
+  "content_type": "text/html",
+  "credential_env_var": null,
+  "credential_used": false,
+  "endpoint_or_document": "https://wits.worldbank.org/trade/comtrade/en/country/SAU/year/2024/tradeflow/Imports/partner/ALL/product/392010",
+  "flow": "imports",
+  "http_status": 200,
+  "license_or_usage_note": "Terms captured from https://www.worldbank.org/en/about/legal/terms-of-use-for-datasets",
+  "nomenclature": "H0",
+  "normalization_reason": null,
+  "normalization_status": "NORMALIZED",
+  "page_index": 1,
+  "page_meta": {
+    "enumerated_children": null,
+    "next_page_token_present": false,
+    "page_index": 1,
+    "pages_expected": 1,
+    "rows_in_page": 43
+  },
+  "partner": "WLD",
+  "period": "2024",
+  "product_code": "392010",
+  "product_scope": "EXPLICIT",
+  "query_contract": {
+    "flow": "imports",
+    "nomenclature": "H0",
+    "parameters": [],
+    "partner": "WLD",
+    "periods": [
+      "2024"
+    ],
+    "product_codes": [
+      "392010"
+    ],
+    "product_scope": "EXPLICIT",
+    "reporter": "SAU",
+    "source_id": "wits_trade",
+    "stage": "PARTNERS"
+  },
+  "query_hash": "73fee7942370a560970adeadd1a36777ef35bd5d645b935439038e4e8011068b",
+  "raw_file_path": "data/raw/wits_trade/73fee7942370a560970adeadd1a36777ef35bd5d645b935439038e4e8011068b/20260912T233403Z/page-0001.payload.html.gz",
+  "reporter": "SAU",
+  "response_headers_subset": [
+    {
+      "name": "content-type",
+      "value": "text/html; charset=utf-8"
+    },
+    {
+      "name": "date",
+      "value": "Sat, 12 Sep 2026 23:34:05 GMT"
+    }
+  ],
+  "retrieved_at": "2026-09-12T23:34:07Z",
+  "run_id": "20260912T233403Z",
+  "sha256": "c412b6e8ef2f17e960a7b38045c33920cc1cf885fd2e63f9beff8b35cbbb4be0",
+  "source_id": "wits_trade",
+  "source_refresh_date": "2026-09-12"
+}

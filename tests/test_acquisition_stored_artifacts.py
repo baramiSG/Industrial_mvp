@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import copy
+import gzip
 import json
 import shutil
 from pathlib import Path
@@ -21,11 +22,15 @@ EXPECTED_SOURCE_IDS = frozenset(
     {"wits_trade", "un_comtrade", "baci_cepii", "zatca_tariff", "gastat",
      "ministry_of_industry", "modon", "saso_catalogue", "saber_registry",
      "tadawul_disclosures", "etimad_tenders", "saso_documents", "producer_unicoil",
-     "producer_sabic", "producer_advanced_petrochemical", "producer_tasnee"}
+     "producer_sabic", "producer_advanced_petrochemical", "producer_tasnee",
+     "producer_hadeed", "producer_alupco", "producer_altaiseer_talco",
+     "producer_maaden", "wco_hs_nomenclature"}
 )
 DOCUMENT_SOURCE_IDS = frozenset(
     {"tadawul_disclosures", "etimad_tenders", "saso_documents", "producer_unicoil",
-     "producer_sabic", "producer_advanced_petrochemical", "producer_tasnee"}
+     "producer_sabic", "producer_advanced_petrochemical", "producer_tasnee",
+     "producer_hadeed", "producer_alupco", "producer_altaiseer_talco",
+     "producer_maaden", "wco_hs_nomenclature"}
 )
 
 
@@ -196,6 +201,30 @@ def test_repository_raw_store_has_no_stored_evidence_problems() -> None:
     config = acquisition_sources_config()
     problems = stored_evidence_problems(PROJECT_ROOT / "data" / "raw", config)
     assert problems == []
+
+
+def test_no_stored_un_comtrade_artifact_or_log_contains_subscription_key_header_name() -> None:
+    forbidden = ("ocp-" + "apim-subscription-key").encode()
+    chunks: list[bytes] = []
+    for path in sorted(
+        (PROJECT_ROOT / "data" / "raw" / "un_comtrade").rglob("*")
+    ):
+        if not path.is_file():
+            continue
+        content = path.read_bytes()
+        chunks.append(content)
+        if path.suffix == ".gz":
+            chunks.append(gzip.decompress(content))
+    for path in sorted(
+        (
+            PROJECT_ROOT
+            / ".workflow"
+            / "slices"
+            / "S14-deep-cases-a"
+        ).glob("*.md")
+    ):
+        chunks.append(path.read_bytes())
+    assert forbidden not in b"\n".join(chunks).lower()
 
 
 def _copy_raw_tree(tmp_path: Path) -> Path:

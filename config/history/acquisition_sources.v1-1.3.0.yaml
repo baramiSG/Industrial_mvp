@@ -1,0 +1,574 @@
+metadata:
+  version: "1.3.0"
+  effective_date: "2026-09-12"
+  authority: "Methodology §3.2, §11, §11.3; Core 05 v2 §4-§6, §10-§11"
+
+raw_store:
+  root: data/raw
+  compression: gzip
+  compresslevel: 9
+  mtime: 0
+  max_artifact_bytes_compressed: 16777216
+  max_store_bytes_compressed: 100663296
+
+offline_guard:
+  live_env_var: IOR_ACQUISITION_LIVE
+  header_allowlist:
+    - content-type
+    - content-length
+    - last-modified
+    - etag
+    - date
+    - retry-after
+  header_denylist:
+    - authorization
+    - ocp-apim-subscription-key
+    - cookie
+    - set-cookie
+    - proxy-authorization
+  user_agent: industrial-opportunity-resolution-mvp/0.2.0 (public-data acquisition; offline runtime)
+
+rate_limit_defaults:
+  undocumented_min_interval_seconds: 2.0
+
+sources:
+  wits_trade:
+    authority: World Bank WITS
+    access_classification: public_open
+    documentation_reference: https://wits.worldbank.org/wits/wits/witshelp/content/codes/about_api.htm
+    terms_reference: https://www.worldbank.org/en/about/legal/terms-of-use-for-datasets
+    endpoint_templates:
+      UNIVERSE: "https://wits.worldbank.org/trade/comtrade/en/country/SAU/year/{period}/tradeflow/{flow_label}/partner/WLD/product/{product}"
+      PARTNERS: "https://wits.worldbank.org/trade/comtrade/en/country/SAU/year/{period}/tradeflow/{flow_label}/partner/ALL/product/{product}"
+      TERMS: "https://www.worldbank.org/en/about/legal/terms-of-use-for-datasets"
+    parameters:
+      product_all_token: Total
+      partner_world_token: WLD
+      reporter_token: SAU
+      flow_tokens:
+        imports: Imports
+        exports: Exports
+    pagination:
+      kind: NONE
+      documentation_reference: https://wits.worldbank.org/wits/wits/witshelp/content/codes/about_api.htm
+      parameters: {}
+    nomenclature: H0
+    reporter_code: SAU
+    credential_env_var: null
+    rate_limit:
+      documented_policy: UNAVAILABLE
+      min_interval_seconds: 2.0
+      max_attempts: 3
+      timeout_seconds: 60
+    license_capture_required: true
+    default_evidence_class: B
+    default_reviewer_status: unconfirmed_by_responsible_authority
+    expected_content_types:
+      - text/html
+      - application/json
+      - text/json
+    user_agent: industrial-opportunity-resolution-mvp/0.2.0 (public-data acquisition; offline runtime)
+    recorded_on: "2026-09-04"
+
+  un_comtrade:
+    authority: UN Comtrade
+    access_classification: public_registered
+    documentation_reference: https://comtradedeveloper.un.org/api-details#api=comtrade-v1
+    terms_reference: https://uncomtrade.org/docs/policy-on-use-and-re-dissemination/
+    endpoint_templates:
+      UNIVERSE: "https://comtradeapi.un.org/data/v1/get/C/A/HS?reporterCode={reporter}&period={period}&flowCode={flow_code}&cmdCode={product}&partnerCode={partner}&motCode=0&customsCode=C00"
+      PARTNERS: UNAVAILABLE
+      TERMS: https://uncomtrade.org/docs/policy-on-use-and-re-dissemination/
+    parameters:
+      product_all_token: AG6
+      partner_world_token: "0"
+      reporter_token: "682"
+      flow_tokens:
+        imports: M
+        exports: X
+    pagination:
+      kind: NONE
+      documentation_reference: https://uncomtrade.org/docs/subscriptions/
+      parameters: {}
+    nomenclature: HS
+    reporter_code: SAU
+    credential_env_var: IOR_COMTRADE_SUBSCRIPTION_KEY
+    credential_header: Ocp-Apim-Subscription-Key
+    rate_limit:
+      documented_policy: >-
+        Basic Individual: "max 100K records per call"; "500 calls/day";
+        "5 calls per second". Source:
+        https://uncomtrade.org/docs/subscriptions/
+      min_interval_seconds: 2.0
+      max_attempts: 3
+      timeout_seconds: 60
+    license_capture_required: true
+    default_evidence_class: B
+    default_reviewer_status: unconfirmed_by_responsible_authority
+    expected_content_types:
+      - application/json
+    user_agent: industrial-opportunity-resolution-mvp/0.2.0 (public-data acquisition; offline runtime)
+    recorded_on: "2026-09-12"
+
+  baci_cepii:
+    authority: CEPII BACI
+    access_classification: public_terms_restricted
+    documentation_reference: http://www.cepii.fr/CEPII/en/bdd_modele/presentation.asp?id=37
+    terms_reference: http://www.cepii.fr/CEPII/en/bdd_modele/presentation.asp?id=37
+    endpoint_templates:
+      BULK: "http://www.cepii.fr/CEPII/en/bdd_modele/data/download/baci/baci_hs22_{year}.zip"
+      TERMS: "http://www.cepii.fr/CEPII/en/bdd_modele/presentation.asp?id=37"
+    parameters:
+      product_all_token: UNAVAILABLE
+      partner_world_token: UNAVAILABLE
+      reporter_token: UNAVAILABLE
+      flow_tokens: {}
+    pagination:
+      kind: NONE
+      documentation_reference: http://www.cepii.fr/CEPII/en/bdd_modele/presentation.asp?id=37
+      parameters: {}
+    nomenclature: HS2022
+    reporter_code: SAU
+    credential_env_var: null
+    rate_limit:
+      documented_policy: UNAVAILABLE
+      min_interval_seconds: 2.0
+      max_attempts: 3
+      timeout_seconds: 120
+    license_capture_required: true
+    default_evidence_class: B
+    default_reviewer_status: unconfirmed_by_responsible_authority
+    expected_content_types:
+      - application/zip
+      - application/octet-stream
+    user_agent: industrial-opportunity-resolution-mvp/0.2.0 (public-data acquisition; offline runtime)
+    recorded_on: "2026-09-04"
+
+  zatca_tariff:
+    authority: ZATCA
+    access_classification: public_open
+    documentation_reference: https://zatca.gov.sa/en/RulesRegulations/Taxes/Pages/Tariff.aspx
+    terms_reference: UNAVAILABLE
+    endpoint_templates:
+      TARIFF: "https://zatca.gov.sa/en/RulesRegulations/Taxes/Pages/Tariff.aspx"
+      TERMS: UNAVAILABLE
+    parameters:
+      product_all_token: UNAVAILABLE
+      partner_world_token: UNAVAILABLE
+      reporter_token: SAU
+      flow_tokens: {}
+    pagination:
+      kind: INDEX_ENUMERATION
+      documentation_reference: https://zatca.gov.sa/en/RulesRegulations/Taxes/Pages/Tariff.aspx
+      parameters:
+        index_field: sections
+    nomenclature: SA12
+    reporter_code: SAU
+    credential_env_var: null
+    rate_limit:
+      documented_policy: UNAVAILABLE
+      min_interval_seconds: 2.0
+      max_attempts: 3
+      timeout_seconds: 60
+    license_capture_required: false
+    default_evidence_class: B
+    default_reviewer_status: unconfirmed_by_responsible_authority
+    expected_content_types:
+      - text/html
+      - application/json
+    user_agent: industrial-opportunity-resolution-mvp/0.2.0 (public-data acquisition; offline runtime)
+    recorded_on: "2026-09-04"
+
+  gastat:
+    authority: GASTAT economic census and industrial surveys
+    access_classification: public_open
+    documentation_reference: https://www.stats.gov.sa/en/w/methodology-and-quality-report-for-the-annual-industrial-production-index-ipi-statistics-2025
+    terms_reference: https://stats.gov.sa/en/use-policy
+    endpoint_templates:
+      AGGREGATE: UNAVAILABLE
+      TERMS: https://stats.gov.sa/en/use-policy
+    parameters:
+      product_all_token: UNAVAILABLE
+      partner_world_token: UNAVAILABLE
+      reporter_token: UNAVAILABLE
+      flow_tokens: UNAVAILABLE
+      units: UNAVAILABLE
+    pagination:
+      kind: UNAVAILABLE
+      documentation_reference: UNAVAILABLE
+      parameters: UNAVAILABLE
+    nomenclature: UNAVAILABLE
+    reporter_code: SAU
+    credential_env_var: UNAVAILABLE
+    rate_limit:
+      documented_policy: UNAVAILABLE
+      min_interval_seconds: 2.0
+      max_attempts: 3
+      timeout_seconds: 60
+    license_capture_required: true
+    default_evidence_class: B
+    default_reviewer_status: unconfirmed_by_responsible_authority
+    expected_content_types: UNAVAILABLE
+    user_agent: industrial-opportunity-resolution-mvp/0.2.0 (public-data acquisition; offline runtime)
+    recorded_on: "2026-09-11"
+
+  ministry_of_industry:
+    authority: Ministry of Industry open data
+    access_classification: UNAVAILABLE
+    documentation_reference: UNAVAILABLE
+    terms_reference: UNAVAILABLE
+    endpoint_templates:
+      DIRECTORY: UNAVAILABLE
+      TERMS: UNAVAILABLE
+    parameters:
+      product_all_token: UNAVAILABLE
+      partner_world_token: UNAVAILABLE
+      reporter_token: UNAVAILABLE
+      flow_tokens: UNAVAILABLE
+      units: UNAVAILABLE
+    pagination:
+      kind: UNAVAILABLE
+      documentation_reference: UNAVAILABLE
+      parameters: UNAVAILABLE
+    nomenclature: UNAVAILABLE
+    reporter_code: SAU
+    credential_env_var: UNAVAILABLE
+    rate_limit:
+      documented_policy: UNAVAILABLE
+      min_interval_seconds: 2.0
+      max_attempts: 3
+      timeout_seconds: 60
+    license_capture_required: true
+    default_evidence_class: B
+    default_reviewer_status: unconfirmed_by_responsible_authority
+    expected_content_types: UNAVAILABLE
+    user_agent: industrial-opportunity-resolution-mvp/0.2.0 (public-data acquisition; offline runtime)
+    recorded_on: "2026-09-11"
+
+  modon:
+    authority: MODON directories
+    access_classification: UNAVAILABLE
+    documentation_reference: UNAVAILABLE
+    terms_reference: UNAVAILABLE
+    endpoint_templates:
+      DIRECTORY: UNAVAILABLE
+      TERMS: UNAVAILABLE
+    parameters:
+      product_all_token: UNAVAILABLE
+      partner_world_token: UNAVAILABLE
+      reporter_token: UNAVAILABLE
+      flow_tokens: UNAVAILABLE
+      units: UNAVAILABLE
+    pagination:
+      kind: UNAVAILABLE
+      documentation_reference: UNAVAILABLE
+      parameters: UNAVAILABLE
+    nomenclature: UNAVAILABLE
+    reporter_code: SAU
+    credential_env_var: UNAVAILABLE
+    rate_limit:
+      documented_policy: UNAVAILABLE
+      min_interval_seconds: 2.0
+      max_attempts: 3
+      timeout_seconds: 60
+    license_capture_required: true
+    default_evidence_class: C
+    default_reviewer_status: unconfirmed_by_responsible_authority
+    expected_content_types: UNAVAILABLE
+    user_agent: industrial-opportunity-resolution-mvp/0.2.0 (public-data acquisition; offline runtime)
+    recorded_on: "2026-09-11"
+
+  saso_catalogue:
+    authority: SASO catalogue
+    access_classification: UNAVAILABLE
+    documentation_reference: https://www.saso.gov.sa/en/mediacenter/Pages/open_data.aspx
+    terms_reference: https://www.saso.gov.sa/en/mediacenter/Pages/open_data.aspx
+    endpoint_templates:
+      REGISTRY: UNAVAILABLE
+      TERMS: https://www.saso.gov.sa/en/mediacenter/Pages/open_data.aspx
+    parameters:
+      product_all_token: UNAVAILABLE
+      partner_world_token: UNAVAILABLE
+      reporter_token: UNAVAILABLE
+      flow_tokens: UNAVAILABLE
+      units: UNAVAILABLE
+    pagination:
+      kind: UNAVAILABLE
+      documentation_reference: UNAVAILABLE
+      parameters: UNAVAILABLE
+    nomenclature: UNAVAILABLE
+    reporter_code: SAU
+    credential_env_var: UNAVAILABLE
+    rate_limit:
+      documented_policy: "Portal prohibits unreasonable or disproportionate infrastructure load; no numeric API rate verified. https://www.saso.gov.sa/en/acceptable_use_policy/Pages/default.aspx"
+      min_interval_seconds: 2.0
+      max_attempts: 3
+      timeout_seconds: 60
+    license_capture_required: true
+    default_evidence_class: B
+    default_reviewer_status: unconfirmed_by_responsible_authority
+    expected_content_types: UNAVAILABLE
+    user_agent: industrial-opportunity-resolution-mvp/0.2.0 (public-data acquisition; offline runtime)
+    recorded_on: "2026-09-11"
+
+  saber_registry:
+    authority: SABER registry
+    access_classification: public_registered
+    documentation_reference: https://saber.sa/home/aboutsaber
+    terms_reference: https://saber.sa/Home/Terms
+    endpoint_templates:
+      REGISTRY: UNAVAILABLE
+      TERMS: https://saber.sa/Home/Terms
+    parameters:
+      product_all_token: UNAVAILABLE
+      partner_world_token: UNAVAILABLE
+      reporter_token: UNAVAILABLE
+      flow_tokens: UNAVAILABLE
+      units: UNAVAILABLE
+    pagination:
+      kind: UNAVAILABLE
+      documentation_reference: UNAVAILABLE
+      parameters: UNAVAILABLE
+    nomenclature: UNAVAILABLE
+    reporter_code: SAU
+    credential_env_var: UNAVAILABLE
+    rate_limit:
+      documented_policy: "Platform terms prohibit excessive or unreasonable infrastructure load; no numeric API rate verified. https://saber.sa/Home/Terms"
+      min_interval_seconds: 2.0
+      max_attempts: 3
+      timeout_seconds: 60
+    license_capture_required: true
+    default_evidence_class: C
+    default_reviewer_status: unconfirmed_by_responsible_authority
+    expected_content_types: UNAVAILABLE
+    user_agent: industrial-opportunity-resolution-mvp/0.2.0 (public-data acquisition; offline runtime)
+    recorded_on: "2026-09-11"
+
+
+  tadawul_disclosures:
+    authority: Tadawul filings and annual reports
+    access_classification: UNAVAILABLE
+    documentation_reference: https://www.saudiexchange.sa
+    terms_reference: UNAVAILABLE
+    endpoint_templates:
+      DOCUMENT: '{document_url}'
+      TERMS: UNAVAILABLE
+    parameters:
+      product_all_token: UNAVAILABLE
+      partner_world_token: UNAVAILABLE
+      reporter_token: UNAVAILABLE
+      flow_tokens: UNAVAILABLE
+    pagination:
+      kind: NONE
+      documentation_reference: UNAVAILABLE
+      parameters: {}
+    nomenclature: UNAVAILABLE
+    reporter_code: SAU
+    credential_env_var: UNAVAILABLE
+    rate_limit:
+      documented_policy: UNAVAILABLE
+      min_interval_seconds: 2.0
+      max_attempts: 3
+      timeout_seconds: 60
+    license_capture_required: true
+    default_evidence_class: C
+    default_reviewer_status: unconfirmed_by_responsible_authority
+    expected_content_types: UNAVAILABLE
+    user_agent: industrial-opportunity-resolution-mvp/0.2.0 (public-data acquisition;
+      offline runtime)
+    recorded_on: '2026-09-12'
+  etimad_tenders:
+    authority: Etimad tenders and awards
+    access_classification: public_open
+    documentation_reference: https://tenders.etimad.sa
+    terms_reference: UNAVAILABLE
+    endpoint_templates:
+      DOCUMENT: '{document_url}'
+      TERMS: UNAVAILABLE
+    parameters:
+      product_all_token: UNAVAILABLE
+      partner_world_token: UNAVAILABLE
+      reporter_token: UNAVAILABLE
+      flow_tokens: UNAVAILABLE
+    pagination:
+      kind: NONE
+      documentation_reference: UNAVAILABLE
+      parameters: {}
+    nomenclature: UNAVAILABLE
+    reporter_code: SAU
+    credential_env_var: UNAVAILABLE
+    rate_limit:
+      documented_policy: UNAVAILABLE
+      min_interval_seconds: 2.0
+      max_attempts: 3
+      timeout_seconds: 60
+    license_capture_required: true
+    default_evidence_class: B
+    default_reviewer_status: unconfirmed_by_responsible_authority
+    expected_content_types: UNAVAILABLE
+    user_agent: industrial-opportunity-resolution-mvp/0.2.0 (public-data acquisition;
+      offline runtime)
+    recorded_on: '2026-09-12'
+  saso_documents:
+    authority: SASO public technical regulations
+    access_classification: public_open
+    documentation_reference: https://www.saso.gov.sa/en
+    terms_reference: https://www.saso.gov.sa/en/acceptable_use_policy/Pages/default.aspx
+    endpoint_templates:
+      DOCUMENT: '{document_url}'
+      TERMS: https://www.saso.gov.sa/en/acceptable_use_policy/Pages/default.aspx
+    parameters:
+      product_all_token: UNAVAILABLE
+      partner_world_token: UNAVAILABLE
+      reporter_token: UNAVAILABLE
+      flow_tokens: UNAVAILABLE
+    pagination:
+      kind: NONE
+      documentation_reference: UNAVAILABLE
+      parameters: {}
+    nomenclature: UNAVAILABLE
+    reporter_code: SAU
+    credential_env_var: UNAVAILABLE
+    rate_limit:
+      documented_policy: "Portal prohibits unreasonable or disproportionate infrastructure load; no numeric API rate verified. https://www.saso.gov.sa/en/acceptable_use_policy/Pages/default.aspx"
+      min_interval_seconds: 2.0
+      max_attempts: 3
+      timeout_seconds: 60
+    license_capture_required: true
+    default_evidence_class: B
+    default_reviewer_status: unconfirmed_by_responsible_authority
+    expected_content_types:
+      - application/pdf
+      - text/html
+    user_agent: industrial-opportunity-resolution-mvp/0.2.0 (public-data acquisition;
+      offline runtime)
+    recorded_on: '2026-09-12'
+  producer_unicoil:
+    authority: UNICOIL public disclosures
+    access_classification: public_open
+    documentation_reference: https://www.unicoil.com.sa
+    terms_reference: UNAVAILABLE
+    endpoint_templates:
+      DOCUMENT: '{document_url}'
+      TERMS: UNAVAILABLE
+    parameters:
+      product_all_token: UNAVAILABLE
+      partner_world_token: UNAVAILABLE
+      reporter_token: UNAVAILABLE
+      flow_tokens: UNAVAILABLE
+    pagination:
+      kind: NONE
+      documentation_reference: UNAVAILABLE
+      parameters: {}
+    nomenclature: UNAVAILABLE
+    reporter_code: SAU
+    credential_env_var: UNAVAILABLE
+    rate_limit:
+      documented_policy: UNAVAILABLE
+      min_interval_seconds: 2.0
+      max_attempts: 3
+      timeout_seconds: 60
+    license_capture_required: false
+    default_evidence_class: C
+    default_reviewer_status: unconfirmed_by_responsible_authority
+    expected_content_types:
+      - application/pdf
+    user_agent: industrial-opportunity-resolution-mvp/0.2.0 (public-data acquisition;
+      offline runtime)
+    recorded_on: '2026-09-12'
+  producer_sabic:
+    authority: SABIC (incl. Hadeed) public disclosures
+    access_classification: public_open
+    documentation_reference: https://www.sabic.com/en
+    terms_reference: UNAVAILABLE
+    endpoint_templates:
+      DOCUMENT: '{document_url}'
+      TERMS: UNAVAILABLE
+    parameters:
+      product_all_token: UNAVAILABLE
+      partner_world_token: UNAVAILABLE
+      reporter_token: UNAVAILABLE
+      flow_tokens: UNAVAILABLE
+    pagination:
+      kind: NONE
+      documentation_reference: UNAVAILABLE
+      parameters: {}
+    nomenclature: UNAVAILABLE
+    reporter_code: SAU
+    credential_env_var: UNAVAILABLE
+    rate_limit:
+      documented_policy: UNAVAILABLE
+      min_interval_seconds: 2.0
+      max_attempts: 3
+      timeout_seconds: 60
+    license_capture_required: true
+    default_evidence_class: C
+    default_reviewer_status: unconfirmed_by_responsible_authority
+    expected_content_types: UNAVAILABLE
+    user_agent: industrial-opportunity-resolution-mvp/0.2.0 (public-data acquisition;
+      offline runtime)
+    recorded_on: '2026-09-12'
+  producer_advanced_petrochemical:
+    authority: Advanced Petrochemical public disclosures
+    access_classification: UNAVAILABLE
+    documentation_reference: https://www.advancedpetrochem.com
+    terms_reference: UNAVAILABLE
+    endpoint_templates:
+      DOCUMENT: '{document_url}'
+      TERMS: UNAVAILABLE
+    parameters:
+      product_all_token: UNAVAILABLE
+      partner_world_token: UNAVAILABLE
+      reporter_token: UNAVAILABLE
+      flow_tokens: UNAVAILABLE
+    pagination:
+      kind: NONE
+      documentation_reference: UNAVAILABLE
+      parameters: {}
+    nomenclature: UNAVAILABLE
+    reporter_code: SAU
+    credential_env_var: UNAVAILABLE
+    rate_limit:
+      documented_policy: UNAVAILABLE
+      min_interval_seconds: 2.0
+      max_attempts: 3
+      timeout_seconds: 60
+    license_capture_required: true
+    default_evidence_class: C
+    default_reviewer_status: unconfirmed_by_responsible_authority
+    expected_content_types: UNAVAILABLE
+    user_agent: industrial-opportunity-resolution-mvp/0.2.0 (public-data acquisition;
+      offline runtime)
+    recorded_on: '2026-09-12'
+  producer_tasnee:
+    authority: Tasnee public disclosures
+    access_classification: UNAVAILABLE
+    documentation_reference: https://www.tasnee.com
+    terms_reference: UNAVAILABLE
+    endpoint_templates:
+      DOCUMENT: '{document_url}'
+      TERMS: UNAVAILABLE
+    parameters:
+      product_all_token: UNAVAILABLE
+      partner_world_token: UNAVAILABLE
+      reporter_token: UNAVAILABLE
+      flow_tokens: UNAVAILABLE
+    pagination:
+      kind: NONE
+      documentation_reference: UNAVAILABLE
+      parameters: {}
+    nomenclature: UNAVAILABLE
+    reporter_code: SAU
+    credential_env_var: UNAVAILABLE
+    rate_limit:
+      documented_policy: UNAVAILABLE
+      min_interval_seconds: 2.0
+      max_attempts: 3
+      timeout_seconds: 60
+    license_capture_required: true
+    default_evidence_class: C
+    default_reviewer_status: unconfirmed_by_responsible_authority
+    expected_content_types: UNAVAILABLE
+    user_agent: industrial-opportunity-resolution-mvp/0.2.0 (public-data acquisition;
+      offline runtime)
+    recorded_on: '2026-09-12'

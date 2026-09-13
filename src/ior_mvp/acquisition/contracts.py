@@ -56,6 +56,7 @@ class UnavailableReason(StrEnum):
     RECORD_CAP_REACHED = "RECORD_CAP_REACHED"
     COVERAGE_INDETERMINATE = "COVERAGE_INDETERMINATE"
     COVERAGE_INCOMPLETE = "COVERAGE_INCOMPLETE"
+    PARTNER_DESCRIPTIONS_UNAVAILABLE = "PARTNER_DESCRIPTIONS_UNAVAILABLE"
     NO_UNITS_IN_STORE = "NO_UNITS_IN_STORE"
     REPORTER_MISMATCH = "REPORTER_MISMATCH"
     OUT_OF_SCOPE_CONTENT = "OUT_OF_SCOPE_CONTENT"
@@ -225,12 +226,13 @@ def _s11_unit_dict(contract: QueryContract) -> dict[str, Any]:
 
 def _planned_contract(source_id: str, config: dict[str, Any], *, stage: Stage,
                       scope: ProductScope, codes: tuple[str, ...], flow: str,
-                      periods: tuple[str, ...]) -> QueryContract:
+                      periods: tuple[str, ...],
+                      parameters: tuple[tuple[str, str], ...] = ()) -> QueryContract:
     cfg = config["sources"][source_id]
     return QueryContract(
         source_id, stage, cfg["reporter_code"],
         cfg["parameters"].get("partner_world_token", "WLD"), flow,
-        scope, codes, cfg["nomenclature"], periods,
+        scope, codes, cfg["nomenclature"], periods, parameters,
     )
 
 
@@ -242,12 +244,14 @@ def _plan_universe(*, source_id: str, years: Sequence[int], flows: Sequence[str]
 
 
 def _plan_partners(*, source_id: str, years: Sequence[int], flows: Sequence[str],
-                   candidates: Any, config: dict[str, Any]) -> tuple[QueryContract, ...]:
+                   candidates: Any, config: dict[str, Any],
+                   parameters: tuple[tuple[str, str], ...] = ()) -> tuple[QueryContract, ...]:
     if candidates is None:
         raise AcquisitionConfigurationError("PARTNERS requires candidates")
     return tuple(_planned_contract(source_id, config, stage=Stage.PARTNERS,
                  scope=ProductScope.EXPLICIT, codes=(code,), flow=flow,
-                 periods=(str(year),)) for year in years for flow in flows for code in candidates.hs6_codes)
+                 periods=(str(year),), parameters=parameters)
+                 for year in years for flow in flows for code in candidates.hs6_codes)
 
 
 def _plan_tariff(*, source_id: str, config: dict[str, Any], **_: Any) -> tuple[QueryContract, ...]:
@@ -270,7 +274,7 @@ def _explicit_partner_token(contract: QueryContract, parameters: Mapping[str, An
     return {"partner": contract.partner}
 
 
-_RESERVED_UNIT_PARAMETERS = frozenset({
+RESERVED_UNIT_PARAMETERS = frozenset({
     "reporter", "partner", "product", "flow", "flow_code", "flow_label",
     "period", "year", "page", "page_token", "units", "reporter_token",
     "partner_world_token", "product_all_token", "flow_tokens",
@@ -286,7 +290,7 @@ def _institutional_invariants(contract: QueryContract, *, period_scoped: bool) -
     elif contract.periods:
         raise AcquisitionConfigurationError("Institutional directory/registry units reject periods")
     keys = [key for key, _ in contract.parameters]
-    if (not keys or len(keys) != len(set(keys)) or set(keys) & _RESERVED_UNIT_PARAMETERS
+    if (not keys or len(keys) != len(set(keys)) or set(keys) & RESERVED_UNIT_PARAMETERS
             or any(not isinstance(key, str) or not key or not isinstance(value, str)
                    for key, value in contract.parameters)):
         raise AcquisitionConfigurationError("Institutional parameters require unique non-reserved named strings")

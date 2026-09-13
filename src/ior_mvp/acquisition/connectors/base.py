@@ -892,12 +892,17 @@ def default_registry() -> ConnectorRegistry:
     from .saber_registry import SaberRegistryConnector
     from .documents import (
         EtimadTendersConnector,
+        ProducerAlupcoConnector,
         ProducerAdvancedPetrochemicalConnector,
+        ProducerAltaiseerTalcoConnector,
+        ProducerHadeedConnector,
+        ProducerMaadenConnector,
         ProducerSabicConnector,
         ProducerTasneeConnector,
         ProducerUnicoilConnector,
         SasoDocumentsConnector,
         TadawulDisclosuresConnector,
+        WcoHsNomenclatureConnector,
     )
 
     return ConnectorRegistry(
@@ -918,5 +923,10 @@ def default_registry() -> ConnectorRegistry:
             "producer_sabic": ProducerSabicConnector,
             "producer_advanced_petrochemical": ProducerAdvancedPetrochemicalConnector,
             "producer_tasnee": ProducerTasneeConnector,
+            "producer_hadeed": ProducerHadeedConnector,
+            "producer_alupco": ProducerAlupcoConnector,
+            "producer_altaiseer_talco": ProducerAltaiseerTalcoConnector,
+            "producer_maaden": ProducerMaadenConnector,
+            "wco_hs_nomenclature": WcoHsNomenclatureConnector,
         }
     )

@@ -357,6 +357,51 @@ def _validate_input_paths(inputs: dict[str, Any]) -> None:
                 )
 
 
+def resolve_recorded_input(
+    identity: dict[str, Any],
+    *,
+    root: Path = PROJECT_ROOT,
+) -> Path:
+    """Resolve a recorded input against live or retained config bytes."""
+    raw_path = identity.get("path")
+    expected = identity.get("sha256")
+    if (
+        not isinstance(raw_path, str)
+        or not raw_path
+        or not isinstance(expected, str)
+        or len(expected) != 64
+    ):
+        raise ValueError("INPUTS_CHANGED")
+    relative = PurePosixPath(raw_path)
+    if (
+        relative.is_absolute()
+        or relative.as_posix() != raw_path
+        or ".." in relative.parts
+        or not relative.parts
+        or relative.parts[0] not in {"data", "config"}
+    ):
+        raise ValueError("INPUTS_CHANGED")
+    live = root / relative
+    if (
+        live.is_file()
+        and hashlib.sha256(live.read_bytes()).hexdigest() == expected
+    ):
+        return live
+    if relative.parts[0] == "config":
+        history_root = root / "config" / "history"
+        matches = [
+            path
+            for path in sorted(history_root.glob("*"))
+            if path.is_file()
+            and hashlib.sha256(path.read_bytes()).hexdigest() == expected
+        ]
+        if len(matches) == 1:
+            return matches[0]
+        if len(matches) > 1:
+            raise ValueError("INPUTS_CHANGED: ambiguous retained config")
+    raise ValueError("INPUTS_CHANGED")
+
+
 def validate_screening_snapshot(
     record: dict[str, Any],
     *,
@@ -408,9 +453,7 @@ def validate_screening_snapshot(
     if check_inputs:
         for group in record["inputs"].values():
             for identity in group:
-                path = PROJECT_ROOT / identity["path"]
-                if not path.exists() or hashlib.sha256(path.read_bytes()).hexdigest() != identity["sha256"]:
-                    raise ValueError("INPUTS_CHANGED")
+                resolve_recorded_input(identity)
 
 
 def _common_record_fields(records: list[dict[str, Any]]) -> dict[str, Any]:

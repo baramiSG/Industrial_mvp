@@ -47,3 +47,15 @@ def test_runtime_modules_do_not_import_acquisition_transport() -> None:
     import ior_mvp.data_repository  # noqa: F401
 
     assert "ior_mvp.acquisition.transport" not in sys.modules
+
+
+def test_runtime_app_does_not_import_cases_package() -> None:
+    for module_name in list(sys.modules):
+        if module_name.startswith("ior_mvp"):
+            del sys.modules[module_name]
+    import ior_mvp.app  # noqa: F401
+
+    assert not any(
+        module_name.startswith("ior_mvp.cases") for module_name in sys.modules
+    )
+    assert "ior_mvp.acquisition.transport" not in sys.modules

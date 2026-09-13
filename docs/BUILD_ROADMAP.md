@@ -140,6 +140,37 @@ capture-stability correction recorded in ADR-020). Parent **S13 is COMPLETE**
 (s13a #21 `834ba60`, s13b #23 `cdf6ab0`). The routed multi-surface shell
 (UX-02, KL-85) is carried to a later frontend slice.
 
+## S14 split (SLICE_GRAPH §5)
+
+The approved decomposition
+`.autonomous-workflow/plans/s14-deep-cases-a/cycle-1/decomposition-1.json`
+(`48741467…`) partitions S14 into:
+
+1. `s14a-case-selection-evidence-and-families` — deterministic selection from
+   the frozen S13 snapshot; product-family authority; bounded WCO/producer/WITS
+   acquisition; entity mentions v2; `CaseBrief 1.1.0`; temporary PublicSnapshot
+   builds and honest public-engine proof. It changes no portfolio, scenario,
+   golden or browser root.
+2. `s14b-deep-case-portfolio-scenarios-and-goldens` — consumes the pinned S14a
+   list and builder, adds five public snapshots with five Class-D scenarios,
+   golden/project lists, route-coverage rows and Playwright/visual oracles under
+   the owner-lead frozen-pin protocol. In the same single visual regeneration,
+   it upgrades new snapshots to PublicSnapshot 2.2.0 with a version-gated
+   `partner_detail` block, requires rows iff OBSERVED and UNAVAILABLE iff
+   MISSING/ZERO, adds MISSING/ZERO concentration and R3/R4-D result codes,
+   renders the state in ledger/dossier views, and proves the frozen
+   721049/390210 snapshots and goldens byte-identical.
+
+The parent completes only after both children merge. S14a is governed by
+`plan-1-s14a.json` (`8fbfa4e6…`), AM-1 (`8c61a0a2…`) and OD-1…OD-11.
+OD-11 is a hashed identity exclusion for 392190; the ruled selected set is
+721061, 721012, 760711, 760429 and 392010. S14a's local implementation
+candidate has eight new COMPLETE DocumentRecords, one source-qualified WITS
+partner snapshot with 721061 excluded as `FORMAT_NOT_PARSEABLE`, a second
+entity artifact, five validated briefs and five public
+INVESTIGATE/null-route engine proofs. Review, PR, CI and merge remain separate
+gates.
+
 ## Explicit non-goals for v0.3.0
 
 Authentication, role-based approval, official override workflow, confidential Ministry connectors, live customs transactions, paid-data acquisition, model training on Ministry applications, causal incentive-effect claims, generic AI chat, CRM, document management, any change to the methodology DOCX, and any alteration of the v0.2.0 tag, release records or frozen v1 golden snapshot files.

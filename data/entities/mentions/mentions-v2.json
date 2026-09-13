@@ -1,0 +1,123 @@
+{
+  "consultation_summary_text": "S14a producer mentions copied verbatim from eight new COMPLETE DocumentRecords. Four company/publisher names and two same-document site localities only; no contact, person, phone, email or identifier fields are included. ALUPCO and TALCO site labels were not added because no same-document company-name span occurs within the governed two-line subject window. Ras Al-Khair is outside the frozen locality table and remains unresolved.",
+  "list_id": "mentions-v2",
+  "mentions": [
+    {
+      "address": {
+        "document_id": "DOC-PRODUCER-HADEED-92ca24b2076f-253eed8b773e",
+        "line_index": 8,
+        "page_index": 22
+      },
+      "alias": null,
+      "designation_text": null,
+      "entity_type_observed": "COMPANY",
+      "identifier": null,
+      "language": "en",
+      "mention_id": "M-001",
+      "mention_kind": "PUBLISHER_NAME",
+      "source_kind": "DOCUMENT_RECORD",
+      "span_text": "Saudi Iron and Steel Company (HADEED)",
+      "statement": null,
+      "subject_mention_id": null,
+      "text_order": "logical"
+    },
+    {
+      "address": {
+        "document_id": "DOC-PRODUCER-HADEED-92ca24b2076f-253eed8b773e",
+        "line_index": 9,
+        "page_index": 22
+      },
+      "alias": null,
+      "designation_text": null,
+      "entity_type_observed": "PLANT",
+      "identifier": null,
+      "language": "en",
+      "mention_id": "M-002",
+      "mention_kind": "PLANT_LOCATION",
+      "source_kind": "DOCUMENT_RECORD",
+      "span_text": "Al-Jubail",
+      "statement": null,
+      "subject_mention_id": "M-001",
+      "text_order": "logical"
+    },
+    {
+      "address": {
+        "document_id": "DOC-PRODUCER-ALUPCO-135870d0e4c7-0261d54ca8a6",
+        "line_index": 473,
+        "page_index": 1
+      },
+      "alias": null,
+      "designation_text": null,
+      "entity_type_observed": "COMPANY",
+      "identifier": null,
+      "language": "en",
+      "mention_id": "M-003",
+      "mention_kind": "PUBLISHER_NAME",
+      "source_kind": "DOCUMENT_RECORD",
+      "span_text": "ALUPCO",
+      "statement": null,
+      "subject_mention_id": null,
+      "text_order": "logical"
+    },
+    {
+      "address": {
+        "document_id": "DOC-PRODUCER-ALTAISEER-TALCO-b68e0eef2440-b339b1ac8d87",
+        "line_index": 454,
+        "page_index": 1
+      },
+      "alias": null,
+      "designation_text": null,
+      "entity_type_observed": "COMPANY",
+      "identifier": null,
+      "language": "en",
+      "mention_id": "M-004",
+      "mention_kind": "PUBLISHER_NAME",
+      "source_kind": "DOCUMENT_RECORD",
+      "span_text": "Al Taiseer Group Talco Industrial Company",
+      "statement": null,
+      "subject_mention_id": null,
+      "text_order": "logical"
+    },
+    {
+      "address": {
+        "document_id": "DOC-PRODUCER-MAADEN-b1dd369ea0fe-dae44e050e70",
+        "line_index": 8,
+        "page_index": 120
+      },
+      "alias": null,
+      "designation_text": null,
+      "entity_type_observed": "COMPANY",
+      "identifier": null,
+      "language": "en",
+      "mention_id": "M-005",
+      "mention_kind": "PUBLISHER_NAME",
+      "source_kind": "DOCUMENT_RECORD",
+      "span_text": "Maaden",
+      "statement": null,
+      "subject_mention_id": null,
+      "text_order": "logical"
+    },
+    {
+      "address": {
+        "document_id": "DOC-PRODUCER-MAADEN-b1dd369ea0fe-dae44e050e70",
+        "line_index": 8,
+        "page_index": 120
+      },
+      "alias": null,
+      "designation_text": null,
+      "entity_type_observed": "PLANT",
+      "identifier": null,
+      "language": "en",
+      "mention_id": "M-006",
+      "mention_kind": "PLANT_LOCATION",
+      "source_kind": "DOCUMENT_RECORD",
+      "span_text": "Ras Al-Khair",
+      "statement": null,
+      "subject_mention_id": "M-005",
+      "text_order": "logical"
+    }
+  ],
+  "recorded_by_seat": "implementer-sol",
+  "recorded_on": "2026-09-13",
+  "schema_version": "1.0.0"
+}

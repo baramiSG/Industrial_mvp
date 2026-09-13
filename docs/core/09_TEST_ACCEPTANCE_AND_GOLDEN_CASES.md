@@ -417,3 +417,66 @@ decision-integrity error.
 The visual acceptance matrix contains 56 entries. The canonical update,
 manifest validation, host comparison, ownership check and measured 40-entry
 drift review are distinct required proofs.
+
+## 10. S14a case-selection and derivation proof
+
+Case-selection determinism is tested on doubles and against the frozen S13
+screening/universe inputs. `S14-CS-1` groups all configured families by sector
+profile, applies the ruled queue/warning tiers, excludes the two frozen
+opportunities, requires positive latest-year import net weight, applies
+source-restricted disclosure coverage, then orders by R2, latest imports and
+HS6. OD-11 is a hashed `identity_exclusions` row for 392190 with reason
+`RESIDUAL_CATCH_ALL_SUBHEADING`; it is not a flag or an edited result list.
+Two executions must produce equal bytes and the ruled output is pinned:
+721061/721012, 760711/760429 and 392010, with 391739 the plastics runner-up.
+
+`CaseBrief 1.1.0` tests reject a non-verbatim span, unsupported source claim,
+non-`U` capability state without a span, numeric nameplate without a span,
+resolved hard gate without Class A/B/C evidence, authored outcome and synthetic
+marker. Partner-detail tests enforce exact tri-state keys, equality with the
+complete `UnavailableReason` vocabulary plus `NOT_ACQUIRED` and
+`REVISION_MISMATCH`, resolvable contract/hash attempts, non-World observed-row
+counts, and mutual refusal between UNPARSED MISSING and well-formed
+`NORMALIZED_EMPTY` ZERO. PublicSnapshot 2.1.0 accepts an unreferenced typed
+attempt passport; projection tests require MISSING/OBSERVED/ZERO passport
+markers and retain the WITS attempt beside any substitute-source outcome.
+Projection tests rederive every trade value from the universe,
+preserve `LATEST_REVISION_ONLY`, exclude H5 2021, verify unit conversions and
+partner-World exclusion, and require byte-identical builds. The five real
+briefs are then built to a temporary directory and passed through the live
+public rule/capability/decision functions. Their honest S14a result is
+`INVESTIGATE`, null route and
+`ROUTE_CHANGING_EVIDENCE_UNRESOLVED`; a different result triggers SC-2b and is
+recorded rather than forced.
+
+AM-3/OD-18 adds a Make/CLI argv-capture test proving
+`partner_dimension_query=&includeDesc=true` survives shell parsing, remains in
+the QueryContract and enters the request URL. Partner completeness additionally
+tests Decimal-from-raw-text aggregate reconciliation, scale-derived tolerance,
+World/reference consistency, unique descriptions and exact typed-reason
+mapping. The corrected 721061 V3 unit is COMPLETE with seven named non-World
+rows; its computed engine proof remains INVESTIGATE/null and fires R3 naturally.
+
+`scripts/reconstruct_snapshot.py --all` prints
+`CASE RECONSTRUCTION PASS (0 snapshots, 5 briefs)` in S14a. After S14b commits
+case snapshots, the same pass rebuilds and byte-compares them. Acquired
+historical snapshots reconstruct from their recorded run ids while the
+existing `reconstruct()` latest-selection diagnostic continues to emit
+`SELECTION_CHANGED` when called for that purpose.
+
+Screening input checking first compares the live repository-relative path.
+An approved superseded `config/` hash may resolve to exactly one immutable file
+under `config/history/`; data inputs never use that path and any unknown or
+ambiguous hash remains `INPUTS_CHANGED`. Tests prove live match, retained match,
+unknown-hash refusal and non-config refusal.
+
+The manifest layer enumerates `data/cases/**`, `config/history/**`, new
+raw/document/entity/partner evidence and preserves every pre-existing row.
+The first authorized generator run followed the base S14a governed text.
+OD-12/AM-2 Case B authorized the second run after the
+tri-state, W-C records and corrected Core/ADR/control text; its immediate oracle
+preserved every row that existed at base `ab6211f`. OD-16/OD-18 Case C
+authorizes one third-and-last run after corrected V3 evidence and governed
+records, again with the base-row oracle immediately after. Both original public
+goldens, their scenarios, frozen roots and the 56-entry visual manifest remain
+exact.

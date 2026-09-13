@@ -15,10 +15,10 @@ def _module():
     return config
 
 
-def test_screening_config_loads_and_pins_version_1_0_0():
+def test_screening_config_loads_and_pins_versions():
     module = _module()
     assert module.screening_config()["metadata"]["version"] == "1.0.0"
-    assert module.product_families_config()["metadata"]["version"] == "1.0.0"
+    assert module.product_families_config()["metadata"]["version"] == "1.1.0"
 
 
 def test_five_queue_ids_exact_and_vocabularies_closed():
@@ -104,3 +104,98 @@ def test_family_lookup_by_hs4_prefix_unique_or_unavailable():
         == "polypropylene_primary_forms"
     )
     assert module.family_for_hs6("300001", families) is None
+
+
+def test_product_families_version_pinned_to_1_1_0():
+    assert _module().product_families_config()["metadata"]["version"] == "1.1.0"
+
+
+def test_fabricated_aluminium_core_headings_available_with_pr1_basis():
+    family = _module().product_families_config()["families"][
+        "fabricated_aluminium"
+    ]
+    assert family["hs4_headings"] == [
+        "7604",
+        "7605",
+        "7606",
+        "7607",
+        "7608",
+        "7609",
+        "7610",
+        "7611",
+        "7612",
+        "7613",
+        "7614",
+        "7616",
+    ]
+    assert family["status"] == "AVAILABLE"
+    assert "PR-1" in family["basis"]
+    assert "76.15" in family["basis"]
+    assert "76.01–76.03" in family["basis"]
+
+
+def test_technical_plastics_conversion_headings_3917_3920_3921_available_with_od3_basis():
+    family = _module().product_families_config()["families"][
+        "technical_plastics_conversion"
+    ]
+    assert family["hs4_headings"] == ["3917", "3920", "3921"]
+    assert family["status"] == "AVAILABLE"
+    assert family["sector_profile"] == "technical_plastics"
+    assert "OD-3" in family["basis"]
+    assert (
+        "Polymer/additive compatibility; conversion route; tooling; "
+        "barrier/performance; food, medical or automotive qualification"
+        in family["basis"]
+    )
+
+
+def test_polypropylene_primary_forms_unchanged_3902_only():
+    family = _module().product_families_config()["families"][
+        "polypropylene_primary_forms"
+    ]
+    assert family == {
+        "sector_profile": "technical_plastics",
+        "hs4_headings": ["3902"],
+        "status": "AVAILABLE",
+        "basis": "Methodology §14 worked case and frozen public opportunity",
+    }
+
+
+def test_pharma_and_fertilizers_remain_membership_unavailable():
+    families = _module().product_families_config()["families"]
+    for family_id in ("pharma_api", "fertilizers"):
+        assert families[family_id]["hs4_headings"] == []
+        assert families[family_id]["status"] == "MEMBERSHIP_UNAVAILABLE"
+
+
+def test_family_for_hs6_760429_is_fabricated_aluminium_and_761510_is_none():
+    module = _module()
+    families = module.product_families_config()
+    assert module.family_for_hs6("760429", families)["family_id"] == (
+        "fabricated_aluminium"
+    )
+    assert module.family_for_hs6("761510", families) is None
+
+
+def test_family_for_hs6_392190_is_technical_plastics_conversion_and_390220_is_primary():
+    module = _module()
+    families = module.product_families_config()
+    assert module.family_for_hs6("392190", families)["family_id"] == (
+        "technical_plastics_conversion"
+    )
+    assert module.family_for_hs6("390220", families)["family_id"] == (
+        "polypropylene_primary_forms"
+    )
+    assert module.family_for_hs6("391740", families)["sector_profile"] == (
+        "technical_plastics"
+    )
+    assert module.family_for_hs6("390000", families) is None
+
+
+def test_family_basis_titles_verified_against_stored_wco_record_or_flagged():
+    family = _module().product_families_config()["families"][
+        "technical_plastics_conversion"
+    ]
+    basis = family["basis"]
+    assert "WCO HS 2022 Chapter 39" in basis
+    assert "TITLE_VERIFICATION: " in basis

@@ -35,6 +35,11 @@ DOCUMENT_SOURCE_STAGES = {
     "producer_sabic": Stage.DOCUMENT,
     "producer_advanced_petrochemical": Stage.DOCUMENT,
     "producer_tasnee": Stage.DOCUMENT,
+    "producer_hadeed": Stage.DOCUMENT,
+    "producer_alupco": Stage.DOCUMENT,
+    "producer_altaiseer_talco": Stage.DOCUMENT,
+    "producer_maaden": Stage.DOCUMENT,
+    "wco_hs_nomenclature": Stage.DOCUMENT,
 }
 INSTITUTIONAL_SOURCE_IDS = frozenset(INSTITUTIONAL_SOURCE_STAGES)
 DOCUMENT_SOURCE_IDS = frozenset(DOCUMENT_SOURCE_STAGES)
@@ -237,9 +242,9 @@ def validate_acquisition_sources(payload: dict[str, Any]) -> None:
     metadata = payload.get("metadata")
     if not isinstance(metadata, dict):
         raise AcquisitionConfigurationError("metadata must be a mapping")
-    if metadata.get("version") != "1.3.0":
+    if metadata.get("version") != "1.4.0":
         raise AcquisitionConfigurationError(
-            "metadata.version must be 1.3.0"
+            "metadata.version must be 1.4.0"
         )
 
     raw_store = payload.get("raw_store")
@@ -443,6 +448,30 @@ def _validate_source_facts(
             qualifier = "exactly" if institutional or document else "include"
             raise AcquisitionConfigurationError(
                 f"{prefix}.{key} keys must {qualifier} {sorted(required)}"
+            )
+    if source_id == "un_comtrade" and (
+        "partner_dimension_variants" in source["parameters"]
+        or "{partner_dimension_query}"
+        in str(source["endpoint_templates"].get("PARTNERS", ""))
+    ):
+        variants = source["parameters"].get("partner_dimension_variants")
+        if (
+            not isinstance(variants, dict)
+                or set(variants) != {"V1", "V2", "V3"}
+            or any(
+                not isinstance(row, dict)
+                or set(row) != {"value", "observation_basis"}
+                or not isinstance(row["value"], str)
+                or not isinstance(row["observation_basis"], str)
+                or not row["observation_basis"]
+                for row in variants.values()
+            )
+            or variants["V1"]["value"] != ""
+            or variants["V2"]["value"] != "&partner2Code=0"
+                or variants["V3"]["value"] != "&includeDesc=true"
+        ):
+            raise AcquisitionConfigurationError(
+                f"{prefix}.parameters.partner_dimension_variants invalid"
             )
 
     if institutional or document:

@@ -1,8 +1,11 @@
 from __future__ import annotations
 
+import hashlib
 import json
 import re
 from pathlib import Path
+
+import yaml
 
 from ior_mvp.config import PROJECT_ROOT
 
@@ -61,7 +64,9 @@ def test_s08_snapshot_manifest_retains_live_and_historical_public_rows(
         "data/raw/",
         "data/documents/",
         "data/entities/",
+        "data/cases/",
         "data/screening/",
+        "config/history/",
         "data/snapshots/universe/",
         "data/snapshots/tariff/",
         "data/snapshots/partners/",
@@ -94,7 +99,9 @@ def _partition_valid(paths: set[str]) -> bool:
         "data/raw/",
         "data/documents/",
         "data/entities/",
+        "data/cases/",
         "data/screening/",
+        "config/history/",
         "data/snapshots/universe/",
         "data/snapshots/tariff/",
         "data/snapshots/partners/",
@@ -127,6 +134,10 @@ def test_s11_snapshot_manifest_rejects_public_partition_leak() -> None:
     assert not _partition_valid(paths | {"data/entities-other/extra.json"})
     assert _partition_valid(paths | {"data/screening/snapshots/extra.json"})
     assert not _partition_valid(paths | {"data/screening-other/extra.json"})
+    assert _partition_valid(paths | {"data/cases/briefs/extra.json"})
+    assert not _partition_valid(paths | {"data/cases-other/extra.json"})
+    assert _partition_valid(paths | {"config/history/extra.yaml"})
+    assert not _partition_valid(paths | {"config/history-other/extra.yaml"})
     assert not _partition_valid(paths | {"data/snapshots/unknown/extra.json"})
 
 
@@ -163,6 +174,10 @@ def test_s12a_core_v2_institutional_contracts() -> None:
         "| MODON directories | plant/entity discovery | C; connector implemented (S12a); availability and coverage recorded per run |",
         "| Tadawul filings and annual reports | nameplate, expansion and financial context | C; connector implemented (S12b); availability and coverage recorded per run |",
         "| EPDs and product sheets | process, range, standards and certifications | C; connector implemented (S12b); availability and coverage recorded per run |",
+        "| Hadeed public catalogue | coated-steel process/product envelope | C; S14a run `20260912T233102Z` COMPLETE; one span-addressable record |",
+        "| ALUPCO public profile | aluminium extrusion, sites and disclosed production envelope | C; S14a run `20260912T233130Z` COMPLETE; one span-addressable record |",
+        "| Al Taiseer Group TALCO profile | aluminium profile manufacture, extrusion and finishing | C; S14a run `20260912T233154Z` COMPLETE; one span-addressable record |",
+        "| Ma'aden annual report and results page | aluminium rolling and company production context | C; S14a run `20260912T233222Z` COMPLETE; two span-addressable records |",
         "| GPCA / sector associations | sector capacity context | B/C |",
     ]
     assert supply.count("connector implemented (S12a)") == 3
@@ -176,6 +191,7 @@ def test_s12a_core_v2_institutional_contracts() -> None:
         "| Etimad tenders and awards | real bilingual demand specifications | exact document/page span required; connector implemented (S12b); availability and coverage recorded per run |",
         "| SABER registry | conformity evidence | registration does not prove every buyer qualification; connector implemented (S12a); availability and coverage recorded per run |",
         "| Producer catalogues / certificates | published product envelope | confirm current edition and contradiction; connector implemented (S12b); availability and coverage recorded per run |",
+        "| WCO HS Nomenclature 2022 chapter texts | target-product classification identity only | B; source `wco_hs_nomenclature`; Chapters 39/72/76 COMPLETE in S14a; never capability/nameplate support |",
     ]
     assert qualification.count("connector implemented (S12a)") == 2
     assert qualification.count("connector implemented (S12b)") == 3
@@ -272,13 +288,16 @@ def test_s13a_core_v2_screening_contracts() -> None:
     assert "S13a screening runtime boundary" in core["03"]
     assert "ScreeningSnapshot 1.0.0" in core["04"]
     assert "W0–W3 operator-window discipline" in core["05"]
-    assert (
-        "| UN Comtrade / WITS | HS6 value, quantity, partner and time series | "
-        "Reporter record; gross flows; quantity quality varies | official v1 "
-        "Comtrade universe COMPLETE (2021–2024; imports and exports; 5,443 "
-        "HS6); frozen S11 WITS partner snapshot retained separately; "
-        "Comtrade partner detail and ZATCA tariff tree UNAVAILABLE |"
-    ) in core["05"]
+    trade_row = next(
+        line
+        for line in core["05"].splitlines()
+        if line.startswith("| UN Comtrade / WITS |")
+    )
+    assert "official v1 Comtrade universe COMPLETE" in trade_row
+    assert "5,443 HS6" in trade_row
+    assert "corrected W-C V3 Comtrade partner detail OBSERVED for 721061" in trade_row
+    assert "original WITS and Comtrade attempts retained" in trade_row
+    assert "ZATCA tariff tree UNAVAILABLE" in trade_row
     assert "- full 1,300-product universe;" not in core["01"]
     assert (
         "full-universe deep resolution beyond the acquired-universe screen"
@@ -675,6 +694,58 @@ def test_build_manifests_includes_entity_rules_config() -> None:
     assert '"entities"' in source
 
 
+def test_build_manifests_includes_cases_root_and_config_history() -> None:
+    source = (PROJECT_ROOT / "scripts" / "build_manifests.py").read_text(
+        encoding="utf-8"
+    )
+    assert 'ROOT / "data" / "cases"' in source
+    assert 'ROOT / "config" / "history"' in source
+    assert "retained superseded operating-configuration bytes" in source
+
+
+def test_reconstruct_script_prints_case_reconstruction_pass_line(
+    capsys,
+) -> None:
+    from scripts.reconstruct_snapshot import _reconstruct_cases
+
+    committed, briefs = _reconstruct_cases(
+        PROJECT_ROOT / "data",
+        check_manifest=False,
+        manifest_rows={},
+    )
+    assert (committed, briefs) == (0, 5)
+    assert (
+        "CASE RECONSTRUCTION PASS (0 snapshots, 5 briefs)"
+        in capsys.readouterr().out
+    )
+
+
+def test_config_history_files_are_superseded_versions_only() -> None:
+    history_root = PROJECT_ROOT / "config" / "history"
+    paths = sorted(history_root.glob("*.yaml"))
+    assert paths
+    recorded_hashes = {
+        identity["sha256"]
+        for summary_path in (
+            PROJECT_ROOT / "data" / "screening" / "snapshots"
+        ).glob("SCREENING-*/summary.json")
+        for group in json.loads(
+            summary_path.read_text(encoding="utf-8")
+        )["inputs"].values()
+        for identity in group
+    }
+    for path in paths:
+        match = re.fullmatch(r"(.+)-([0-9]+\.[0-9]+\.[0-9]+)\.yaml", path.name)
+        assert match is not None
+        live_path = PROJECT_ROOT / "config" / f"{match.group(1)}.yaml"
+        assert live_path.is_file()
+        retained = yaml.safe_load(path.read_text(encoding="utf-8"))
+        live = yaml.safe_load(live_path.read_text(encoding="utf-8"))
+        assert retained["metadata"]["version"] == match.group(2)
+        assert retained["metadata"]["version"] != live["metadata"]["version"]
+        assert hashlib.sha256(path.read_bytes()).hexdigest() in recorded_hashes
+
+
 def test_document_sources_without_records_cited_in_known_limitations() -> None:
     from ior_mvp.acquisition.connectors.base import default_registry
 
@@ -689,6 +760,11 @@ def test_document_sources_without_records_cited_in_known_limitations() -> None:
         "producer_sabic",
         "producer_advanced_petrochemical",
         "producer_tasnee",
+        "producer_hadeed",
+        "producer_alupco",
+        "producer_altaiseer_talco",
+        "producer_maaden",
+        "wco_hs_nomenclature",
     )
     for source_id in document_sources:
         assert (raw_root / source_id).is_dir(), f"missing raw dir for {source_id}"
@@ -773,3 +849,41 @@ def test_s13b_core_v2_surface_contracts() -> None:
     assert "56 entries" in core_09
     assert "Engine-emitted analytical narrative remains English in this release" not in ux_spec
     assert "| KL-34 |" in limitations
+
+
+def test_s14a_core_v2_case_contracts() -> None:
+    core_02 = (
+        PROJECT_ROOT / "docs" / "core" / "02_METHODOLOGY_IMPLEMENTATION_MAP.md"
+    ).read_text(encoding="utf-8")
+    core_04 = (
+        PROJECT_ROOT / "docs" / "core" / "04_CANONICAL_DATA_MODEL.md"
+    ).read_text(encoding="utf-8")
+    core_05 = (
+        PROJECT_ROOT / "docs" / "core" / "05_DATA_SOURCES_AND_INGESTION.md"
+    ).read_text(encoding="utf-8")
+    core_09 = (
+        PROJECT_ROOT
+        / "docs"
+        / "core"
+        / "09_TEST_ACCEPTANCE_AND_GOLDEN_CASES.md"
+    ).read_text(encoding="utf-8")
+    combined = "\n".join((core_02, core_04, core_05, core_09))
+    for token in (
+        "CaseBrief 1.1.0",
+        "LATEST_REVISION_ONLY",
+        "config/history/",
+        "INPUTS_CHANGED",
+        "SAU-H6-",
+        "CASE RECONSTRUCTION PASS",
+        "identity_exclusions",
+        "wco_hs_nomenclature",
+        "PARTNER_DETAIL_MISSING",
+        "NORMALIZED_EMPTY",
+        "source substitution",
+    ):
+        assert token in combined
+    assert "CaseBrief 1.1.0" in core_04
+    assert "LATEST_REVISION_ONLY" in core_04
+    assert "config/history/" in core_04
+    assert "INPUTS_CHANGED" in core_09
+    assert "CASE RECONSTRUCTION PASS" in core_09

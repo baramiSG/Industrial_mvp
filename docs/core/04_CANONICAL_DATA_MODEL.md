@@ -474,3 +474,83 @@ Every file is canonical JSON and write-once. Validation checks the complete
 directory, shard hashes/counts, logical record schema, forbidden fields,
 per-file and total budgets, and exact file-set reconstruction. Runtime record
 lookups load only the indexed HS2 shard; summary and queue metadata are eager.
+
+### 11.1 Superseded operating-configuration inputs
+
+A screening snapshot continues to identify the repository-relative
+configuration path and SHA-256 that governed its build. When the current file
+has a different approved version, validation may resolve that identity only
+against an exact content-hash match under `config/history/`. History files are
+immutable superseded bytes, separately manifested, and never substitute for
+`data/**` inputs. No matching retained file, an ambiguous match, or any
+non-config mismatch fails closed as `INPUTS_CHANGED`; the screening snapshot is
+not rebuilt merely to relabel an unchanged historical decision cycle.
+
+## 12. CaseBrief 1.1.0 and derived PublicSnapshot provenance
+
+`CaseBrief 1.1.0` is the governed analyst-to-code boundary for a selected deep
+case. It is public, synthetic-free and write-once under
+`data/cases/briefs/CASE-BRIEF-SAU-H6-<hs6>-v1.json`. The paired opportunity id
+is `SAU-H6-<hs6>`. A brief contains:
+
+- the HS6, H6 revision, sector profile and `LATEST_REVISION_ONLY` trade rule;
+- source snapshot ids plus an exact-key `partner_detail` block. Its state is
+  `PARTNER_DETAIL_OBSERVED`, `PARTNER_DETAIL_MISSING` or
+  `PARTNER_TRADE_OBSERVED_ZERO`; the missing reason is the complete
+  `UnavailableReason` vocabulary plus `NOT_ACQUIRED` and
+  `REVISION_MISMATCH`. Every stored attempt resolves a repo-relative contract
+  path and hash. OBSERVED requires non-World rows; ZERO requires a COMPLETE
+  `NORMALIZED_EMPTY` provider envelope with count zero; UNPARSED/PENDING can
+  only support MISSING and never proves zero.
+  `PARTNER_DESCRIPTIONS_UNAVAILABLE` means normalized rows whose only failed
+  completeness predicate is missing non-World descriptions. Superseded
+  attempts on an OBSERVED case use
+  `PARTNER_DETAIL_ATTEMPT_SUPERSEDED:`; an untransmitted governed variant is
+  described as `VARIANT_NOT_TRANSMITTED` in that transformation text rather
+  than as an API outcome;
+- English commercial identity tied to stored WCO legal-text spans (or an
+  explicitly flagged analyst description), with Arabic marked
+  `ANALYST_TRANSLATION`;
+- application and authority boundaries that do not impersonate a product-
+  specification decision;
+- document-evidence rows and exact one-based
+  `(document_id, page_index, line_index, span_text)` addresses;
+- capability booleans, process facts, standards, nameplates, dimension states
+  and resolved hard gates only when their `span_ids` resolve verbatim to a
+  COMPLETE Class A/B/C DocumentRecord; otherwise booleans/nameplates/gates are
+  `UNAVAILABLE` and dimensions are `U`; and
+- no authored state, route, rule result, screening disposition, synthetic
+  input or scenario truth.
+
+The deterministic projection builds `PublicSnapshot 2.1.0` with id
+`PUBLIC-SAU-H6-<hs6>-<universe_as_of>`. It retains only H6 rows for 2022–2024;
+the 2021 H5 row is excluded rather than concorded or spliced. Published USD is
+divided by 1,000,000 to `USD_m`; kilograms are divided by 1,000,000 to `kt`;
+unit value is calculated only when both positive operands exist. Partner rows
+come only from the named source-qualified partner snapshot and exclude the
+World aggregate. PublicSnapshot 2.1.0 carries OBSERVED as rows plus a
+source-qualified calculated passport, MISSING as `UNAVAILABLE` plus unresolved
+attempt passports, and ZERO as `UNAVAILABLE` plus an observed ZERO passport;
+the authority note and execution cap repeat the typed marker. The original
+attempt remains visible when a substitute source is tried. Every capability
+value maps cited spans to the corresponding public evidence passport. All
+unobserved domestic flows, hard-exclusion inputs, target-specification demand,
+equivalence, route evidence and monitor trigger remain exact `UNAVAILABLE`.
+
+The builder validates before writing and is byte-deterministic. In S14a the
+five outputs are built only to a temporary directory, so the portfolio roots
+remain unchanged. `CASE RECONSTRUCTION PASS (<committed> snapshots, <briefs>
+briefs)` validates every brief and, once S14b commits a derived snapshot,
+compares the committed bytes with a fresh brief + universe + partner +
+DocumentRecord projection.
+
+S14b will formalize this carrier as the version-gated PublicSnapshot 2.2.0
+`partner_detail` block and update concentration/R3/R4-D reason codes in the
+same change as its single visual regeneration. Until then, 2.1.0 passport
+markers distinguish missing evidence from zero while the engine reason strings
+remain generic.
+
+`DocumentList 1.0.0` publisher kinds additionally include
+`nomenclature_authority`, restricted to `wco_hs_nomenclature`, Class B and
+`TARGET_PRODUCT_IDENTITY`; it cannot support producer capability or nameplate
+facts.

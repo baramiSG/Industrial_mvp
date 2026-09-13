@@ -1,0 +1,373 @@
+{
+  "as_of_date": "2026-09-12",
+  "coverage": {
+    "completeness_basis": "SINGLE_RESPONSE_NO_PAGINATION",
+    "query_hash": "69bd7323c7aa1880a0872bc8da166ac85a0c25f2068a945b44250e6d7b033b6b",
+    "selected_run_id": "20260912T233006Z",
+    "selection_rule": "LATEST_RUN_PER_SOURCE_STAGE_UNIT",
+    "status": "COMPLETE",
+    "superseded_run_ids": [],
+    "unit_key": [
+      "[[\"document_url\",\"https://www.wcoomd.org/-/media/wco/public/global/pdf/topics/nomenclature/instruments-and-tools/hs-nomenclature-2022/2022/1576_2022e.pdf?la=en\"]]"
+    ]
+  },
+  "declared": {
+    "document_date_text": "2022",
+    "document_kind": "other_public_document",
+    "evidence_class_target": "B",
+    "expected_content_type": "application/pdf",
+    "languages": [
+      "en"
+    ],
+    "publisher_kind": "nomenclature_authority",
+    "publisher_text": "World Customs Organization",
+    "source_reference_text": "1576-2022E",
+    "supports": [
+      "TARGET_PRODUCT_IDENTITY"
+    ],
+    "title_text": "HS Nomenclature 2022 — Chapter 76"
+  },
+  "document_id": "DOC-WCO-HS-NOMENCLATURE-69bd7323c7aa-bd350605a78a",
+  "document_id_scheme": "DOCUMENT_ID_V1",
+  "evidence": [
+    {
+      "contradiction_record": null,
+      "coverage": {
+        "completeness_basis": "SINGLE_RESPONSE_NO_PAGINATION",
+        "missing_pages": [],
+        "observed_stop": null,
+        "pages_expected": 1,
+        "pages_fetched": 1,
+        "query_hash": "69bd7323c7aa1880a0872bc8da166ac85a0c25f2068a945b44250e6d7b033b6b",
+        "requests_made": 4,
+        "run_id": "20260912T233006Z",
+        "source_id": "wco_hs_nomenclature",
+        "stage": "DOCUMENT",
+        "status": "COMPLETE",
+        "stop_reason": null,
+        "unit": {
+          "parameters": {
+            "document_url": "https://www.wcoomd.org/-/media/wco/public/global/pdf/topics/nomenclature/instruments-and-tools/hs-nomenclature-2022/2022/1576_2022e.pdf?la=en"
+          },
+          "period": null,
+          "stage": "DOCUMENT"
+        },
+        "unit_key": [
+          "[[\"document_url\",\"https://www.wcoomd.org/-/media/wco/public/global/pdf/topics/nomenclature/instruments-and-tools/hs-nomenclature-2022/2022/1576_2022e.pdf?la=en\"]]"
+        ]
+      },
+      "evidence_class": "B",
+      "measurement": {
+        "byte_count": 150859,
+        "line_count": 163,
+        "page_count": 3
+      },
+      "observation_context": {
+        "document_id": "DOC-WCO-HS-NOMENCLATURE-69bd7323c7aa-bd350605a78a",
+        "document_kind": "other_public_document",
+        "languages": [
+          "en"
+        ],
+        "publisher_text": "World Customs Organization",
+        "stage": "DOCUMENT"
+      },
+      "passport_id": "wco_hs_nomenclature-69bd7323c7aa-20260912T233006Z",
+      "query_contract": {
+        "query_hash": "69bd7323c7aa1880a0872bc8da166ac85a0c25f2068a945b44250e6d7b033b6b",
+        "run_id": "20260912T233006Z",
+        "stage": "DOCUMENT",
+        "unit_key": [
+          "[[\"document_url\",\"https://www.wcoomd.org/-/media/wco/public/global/pdf/topics/nomenclature/instruments-and-tools/hs-nomenclature-2022/2022/1576_2022e.pdf?la=en\"]]"
+        ]
+      },
+      "retrieval": {
+        "endpoint_or_document": "https://www.wcoomd.org/-/media/wco/public/global/pdf/topics/nomenclature/instruments-and-tools/hs-nomenclature-2022/2022/1576_2022e.pdf?la=en",
+        "retrieved_at": "2026-09-12T23:30:22Z",
+        "source_refresh_date": "2026-09-12"
+      },
+      "reviewer_status": "unconfirmed_by_responsible_authority",
+      "source_id": "wco_hs_nomenclature",
+      "source_identity": {
+        "access_classification": "public_open",
+        "authority": "World Customs Organization — Harmonized System Nomenclature 2022 edition (public chapter legal texts)",
+        "documentation_reference": "https://www.wcoomd.org/en/topics/nomenclature/instrument-and-tools/hs-nomenclature-2022-edition/hs-nomenclature-2022-edition.aspx",
+        "license_or_usage_note": "Terms captured from https://www.wcoomd.org/en/about-us/legal-instruments/wco-standard-terms-and-conditions_council-decision-n331.aspx",
+        "source_id": "wco_hs_nomenclature",
+        "terms_reference": "https://www.wcoomd.org/en/about-us/legal-instruments/wco-standard-terms-and-conditions_council-decision-n331.aspx"
+      },
+      "status": "observed",
+      "supports": [
+        "TARGET_PRODUCT_IDENTITY"
+      ],
+      "synthetic_flag": false,
+      "transformation_record": {
+        "config_version": "1.2.0",
+        "exclusions": [],
+        "formula": "derive_document_text_layer",
+        "parameters": {
+          "dependency": {
+            "name": "pypdf",
+            "version": "6.16.1"
+          },
+          "segmentation_method_id": "LINE_SEGMENTATION_V1",
+          "segmentation_version": "1.0.0",
+          "source_id": "wco_hs_nomenclature",
+          "text_layer_method_id": "PDF_TEXT_LAYER_PYPDF_LAYOUT",
+          "text_layer_method_version": "1.0.0"
+        },
+        "pipeline_version": "1.0.0"
+      }
+    }
+  ],
+  "kind": "document",
+  "line_count": 163,
+  "list_ref": {
+    "entry_id": "E-003",
+    "list_id": "wco_hs_nomenclature-v1",
+    "path": "documents/wco_hs_nomenclature/lists/wco_hs_nomenclature-v1.json",
+    "sha256": "7df6cec1eaaa185bcfb49af7545652890637ef19c4859a53c609c17184c4c06d"
+  },
+  "page_count": 3,
+  "pages": [
+    {
+      "line_count": 54,
+      "lines": [
+        "                                                              Chapter 76",
+        "",
+        "                                             Aluminium and articles thereof",
+        "",
+        "    Subheading Notes.",
+        "    1.-  In this Chapter the following expressions have the meanings hereby assigned to them :",
+        "         (a)  Aluminium, not alloyed",
+        "              Metal containing by weight at least 99 % of aluminium, provided that the content by weight of any",
+        "              other element does not exceed the limit specified in the following table :",
+        "",
+        "                                                       TABLE - Other elements",
+        "                                         Element                                         Limiting content % by weight",
+        "                                     Fe + Si (iron plus silicon)                                          1",
+        "                                      Other elements (1), each                                               0.1 (2)",
+        "",
+        "",
+        "",
+        "                    (1)  Other elements are, for example Cr, Cu, Mg, Mn, Ni, Zn.",
+        "",
+        "                    (2)  Copper is permitted in a proportion greater than 0.1           % but not more than 0.2       %, provided",
+        "                           that neither the chromium nor manganese content exceeds 0.05                 %.",
+        "",
+        "         (b)  Aluminium alloys",
+        "             Metallic substances in which aluminium predominates by weight over each of the other elements,",
+        "             provided that :",
+        "             (i)    the content by weight of at least one of the other elements or of iron plus silicon taken together",
+        "                    is greater than the limit specified in the foregoing table; or",
+        "             (ii)   the total content by weight of such other elements exceeds 1 %.",
+        "    2.-  Notwithstanding the provisions of          Note 9 (c) to Section XV, for the purposes of subheading 7616.91",
+        "         the term “wire” applies only to products, whether or not in coils, of any cross-sectional shape, of which",
+        "         no cross-sectional dimension exceeds 6 mm.",
+        "                                                        _________________",
+        "       Heading             CodeH.S.",
+        "",
+        "        76.01                            Unwrought aluminium.",
+        "                         7601.10         - Aluminium, not alloyed",
+        "                         7601.20         - Aluminium alloys",
+        "",
+        "        76.02            7602.00         Aluminium waste and scrap.",
+        "",
+        "        76.03                            Aluminium powders and flakes.",
+        "                         7603.10         - Powders of non-lamellar structure",
+        "                         7603.20         - Powders of lamellar structure; flakes",
+        "",
+        "        76.04                            Aluminium bars, rods and profiles.",
+        "                         7604.10         - Of aluminium, not alloyed",
+        "                                         - Of aluminium alloys :",
+        "                         7604.21         --   Hollow profiles",
+        "                         7604.29         --   Other",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "page_index": 1,
+      "text_sha256": "9ef35b6a58900d6c63ee87190e2e2e3eac50f462a73530f431875fb55a2101d2"
+    },
+    {
+      "line_count": 53,
+      "lines": [
+        "Heading           CodeH.S.",
+        "",
+        " 76.05                         Aluminium wire.",
+        "                               - Of aluminium, not alloyed :",
+        "                 7605.11       --  Of which the maximum cross           -sectional dimension exceeds 7         mm",
+        "                 7605.19       --  Other",
+        "                               - Of aluminium alloys       :",
+        "                 7605.21       --  Of which the maximum cross           -sectional dimension exceeds 7         mm",
+        "                 7605.29       --  Other",
+        "",
+        " 76.06                         Aluminium  plates,  sheets  and  strip,  of  a  thickness  exceeding",
+        "                               0.2 mm.",
+        "                               - Rectangular (including square)         :",
+        "                 7606.11       --  Of aluminium, not alloyed",
+        "                 7606.12       --  Of aluminium alloys",
+        "                               - Other :",
+        "                 7606.91       --  Of aluminium, not alloyed",
+        "                 7606.92       --  Of aluminium alloys",
+        "",
+        " 76.07                         Aluminium foil (whether or not printed or backed with paper,",
+        "                               paperboard, plastics or similar backing materials) of a thickness",
+        "                               (excluding any backing) not          exceeding 0.2 mm.",
+        "                               - Not backed :",
+        "                 7607.11       --  Rolled but not further worked",
+        "                 7607.19       --  Other",
+        "                 7607.20       - Backed",
+        "",
+        " 76.08                         Aluminium tubes and pipes.",
+        "                 7608.10       - Of aluminium, not alloyed",
+        "                 7608.20       - Of aluminium alloys",
+        "",
+        " 76.09           7609.00       Aluminium       tube or pipe fittings (for example, couplings, elbows,",
+        "                               sleeves).",
+        "",
+        " 76.10                         Aluminium  structures  (excluding  prefabricated  buildings  of",
+        "                               heading 94.06) and parts of structures (for example, bridges and",
+        "                               bridge-sections, towers, lattice masts, roofs, roofing               frameworks,",
+        "                               doors and windows and their frames and thresholds for doors,",
+        "                               balustrades,   pillars   and   columns);   aluminium   plates,   rods,",
+        "                               profiles, tubes and the like, prepared for use in structures.",
+        "                 7610.10       - Doors, windows and their frames and thresholds for              doors",
+        "                 7610.90       - Other",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "page_index": 2,
+      "text_sha256": "746082ebc608348e8eb2e514f41d6a30a86d1e9ec40555a24ab6d7b70f18f2bb"
+    },
+    {
+      "line_count": 56,
+      "lines": [
+        "  Heading           CodeH.S.",
+        "",
+        "   76.11           7611.00       Aluminium reservoirs, tanks, vats and similar containers, for any",
+        "                                 material (other than compressed or liquefied gas), of a capacity",
+        "                                 exceeding 300 l, whether or not lined or heat-insulated, but not",
+        "                                 fitted with mechanical or thermal equipment.",
+        "",
+        "   76.12                         Aluminium  casks,  drums,  cans,  boxes  and  similar  containers",
+        "                                 (including  rigid  or  collapsible  tubular  containers),  for  any",
+        "                                 material (other than compressed or liquefied gas), of a capacity",
+        "                                 not exceedin     g 300 l, whether or not lined or heat            -insulated, but",
+        "                                 not fitted with mechanical or thermal equipment.",
+        "                   7612.10       - Collapsible tubular containers",
+        "                   7612.90       - Other",
+        "",
+        "   76.13           7613.00       Aluminium containers for compressed or liquefied gas.",
+        "",
+        "   76.14                         Stranded wire, cables, plaited bands and the like, of aluminium,",
+        "                                 not electrically insulated.",
+        "                   7614.10       - With steel core",
+        "                   7614.90       - Other",
+        "",
+        "   76.15                         Table, kitchen or other household articles and parts thereof, of",
+        "                                 aluminium; pot scourers and scouring or polishin                   g pads, gloves",
+        "                                 and the like, of aluminium; sanitary ware and parts thereof, of",
+        "                                 aluminium.",
+        "                   7615.10       - Table, kitchen or other household articles and parts thereof; pot scourers and scouring or polishing pads, gloves and the like",
+        "",
+        "                   7615.20       - Sanitary ware    and parts thereof",
+        "",
+        "   76.16                         Other articles of aluminium.",
+        "                   7616.10       - Nails, tacks, staples (other than those of headingbolts, nuts, screw hooks, rivets, cotters, cotter-pins, washers and  83.05), screws,",
+        "                                   similar articles",
+        "                                 - Other :",
+        "                   7616.91       --  Cloth, grill, netting and fencing, of aluminium wire",
+        "                   7616.99       --  Other",
+        "                                               _________________",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "page_index": 3,
+      "text_sha256": "adfd9b3a506c932ed729004055f7188d90eb0322a8f2831e53d4b92a3d918444"
+    }
+  ],
+  "quality_summary": "PASS",
+  "raw_artifact_ref": {
+    "artifact": "page-0001",
+    "byte_count": 150859,
+    "compressed_sha256": "5853f9883fe4116891c27a4488ccb34c3eb048951870f145ec648c7bbe3d6d2b",
+    "content_type": "application/pdf",
+    "endpoint_or_document": "https://www.wcoomd.org/-/media/wco/public/global/pdf/topics/nomenclature/instruments-and-tools/hs-nomenclature-2022/2022/1576_2022e.pdf?la=en",
+    "http_status": 200,
+    "path": "data/raw/wco_hs_nomenclature/69bd7323c7aa1880a0872bc8da166ac85a0c25f2068a945b44250e6d7b033b6b/20260912T233006Z/page-0001.payload.pdf.gz",
+    "query_hash": "69bd7323c7aa1880a0872bc8da166ac85a0c25f2068a945b44250e6d7b033b6b",
+    "retrieved_at": "2026-09-12T23:30:22Z",
+    "run_id": "20260912T233006Z",
+    "sha256": "bd350605a78a7e453a507077e4f3ec0d22b0fe2fdfbc09f36d46dc5fc78ba580",
+    "source_id": "wco_hs_nomenclature",
+    "stage": "DOCUMENT",
+    "unit_key": [
+      "[[\"document_url\",\"https://www.wcoomd.org/-/media/wco/public/global/pdf/topics/nomenclature/instruments-and-tools/hs-nomenclature-2022/2022/1576_2022e.pdf?la=en\"]]"
+    ]
+  },
+  "schema_version": "1.0.0",
+  "segmentation": {
+    "method_id": "LINE_SEGMENTATION_V1",
+    "version": "1.0.0"
+  },
+  "source_boundary": "public",
+  "source_id": "wco_hs_nomenclature",
+  "text_layer": {
+    "dependency": {
+      "name": "pypdf",
+      "version": "6.16.1"
+    },
+    "detail": null,
+    "detail_error_type": null,
+    "extraction_mode": "layout",
+    "method_id": "PDF_TEXT_LAYER_PYPDF_LAYOUT",
+    "method_version": "1.0.0",
+    "reason": null,
+    "status": "COMPLETE"
+  },
+  "transformation_record": {
+    "config_version": "1.2.0",
+    "exclusions": [],
+    "formula": "derive_document_text_layer",
+    "parameters": {
+      "dependency": {
+        "name": "pypdf",
+        "version": "6.16.1"
+      },
+      "segmentation_method_id": "LINE_SEGMENTATION_V1",
+      "segmentation_version": "1.0.0",
+      "source_id": "wco_hs_nomenclature",
+      "text_layer_method_id": "PDF_TEXT_LAYER_PYPDF_LAYOUT",
+      "text_layer_method_version": "1.0.0"
+    },
+    "pipeline_version": "1.0.0"
+  }
+}

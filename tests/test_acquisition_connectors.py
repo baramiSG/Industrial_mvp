@@ -4,7 +4,9 @@ from __future__ import annotations
 
 import copy
 import gzip
+import hashlib
 import json
+from decimal import Decimal
 from pathlib import Path
 
 import pytest
@@ -44,9 +46,11 @@ def test_default_registry_ids() -> None:
     reg = default_registry()
     assert reg.ids() == (
         "baci_cepii", "etimad_tenders", "gastat", "ministry_of_industry", "modon",
-        "producer_advanced_petrochemical", "producer_sabic", "producer_tasnee", "producer_unicoil",
+        "producer_advanced_petrochemical", "producer_altaiseer_talco",
+        "producer_alupco", "producer_hadeed", "producer_maaden",
+        "producer_sabic", "producer_tasnee", "producer_unicoil",
         "saber_registry", "saso_catalogue", "saso_documents", "tadawul_disclosures",
-        "un_comtrade", "wits_trade", "zatca_tariff",
+        "un_comtrade", "wco_hs_nomenclature", "wits_trade", "zatca_tariff",
     )
 
 
@@ -60,6 +64,8 @@ def test_snapshot_kinds_per_dd22() -> None:
     for source in (
         "tadawul_disclosures", "etimad_tenders", "saso_documents", "producer_unicoil",
         "producer_sabic", "producer_advanced_petrochemical", "producer_tasnee",
+        "producer_hadeed", "producer_alupco", "producer_altaiseer_talco",
+        "producer_maaden", "wco_hs_nomenclature",
     ):
         assert reg.snapshot_kinds(source) == frozenset({"document"})
 
@@ -339,6 +345,7 @@ def _acquire_comtrade(
     contract: QueryContract | None = None,
     content_type: str = "application/json",
     source_config: dict | None = None,
+    seed_universe: bool = True,
 ) -> tuple[UnComtradeConnector, object]:
     query = contract or _comtrade_contract()
     url = (
@@ -354,9 +361,51 @@ def _acquire_comtrade(
         fetched_at="2026-09-12T12:30:00Z",
         content_length_header=len(payload),
     )
+    store = _test_store(tmp_path)
+    source = source_config or _comtrade_source_config()
+    if query.stage is Stage.PARTNERS and seed_universe:
+        try:
+            envelope = json.loads(payload.decode("utf-8"))
+            rows = envelope.get("data", [])
+            reference = next(
+                (
+                    row.get("primaryValue")
+                    for row in rows
+                    if str(row.get("partnerCode")) == "0"
+                ),
+                sum(
+                    (
+                        Decimal(str(row.get("primaryValue")))
+                        for row in rows
+                        if str(row.get("partnerCode")) != "0"
+                        and row.get("primaryValue") is not None
+                    ),
+                    Decimal(0),
+                ),
+            )
+            seed_unit(
+                store,
+                contract=_comtrade_contract(
+                    hs6=query.product_codes[0],
+                    flow=query.flow,
+                    period=query.periods[0],
+                ),
+                run_id="20260912T120000Z",
+                payload=comtrade_envelope(
+                    [
+                        comtrade_row(
+                            query.product_codes[0],
+                            primary_value=float(reference),
+                        )
+                    ]
+                ),
+                source_config=source,
+            )
+        except (AttributeError, StopIteration, TypeError, ValueError):
+            pass
     connector = UnComtradeConnector(
-        source_config=source_config or _comtrade_source_config(),
-        store=_test_store(tmp_path),
+        source_config=source,
+        store=store,
         transport=FakeTransport(
             responses={url: response},
             calls=[],
@@ -635,7 +684,7 @@ def test_un_comtrade_partner_rows_keep_partner_desc_and_world_row(
         tmp_path,
         comtrade_envelope(
             [
-                comtrade_row(),
+                comtrade_row(primary_value=600_000),
                 comtrade_row(
                     partner_code=156,
                     partner_desc="China",
@@ -647,17 +696,323 @@ def test_un_comtrade_partner_rows_keep_partner_desc_and_world_row(
         contract=contract,
     )
 
-    assert isinstance(result, UnavailableRecord)
-    artifact = _stored_comtrade_artifact(connector, contract)
+    assert isinstance(result, tuple)
+    artifact = result[0][0]
     report = connector.validate(artifact)
-    assert report.status == "FAIL"
+    assert report.status == "PASS"
     assert next(
         check
         for check in report.checks
-        if check.check_id == "no_duplicate_hs6_per_unit"
-    ).result == "FAIL"
+        if check.check_id == "partner_rows_unique_per_unit"
+    ).result == "PASS"
     observations = connector.normalize(artifact)
     assert [row.partner for row in observations] == ["World", "China"]
+
+
+def test_un_comtrade_partners_validate_uses_partner_pair_uniqueness_and_single_valued_secondary_dimensions(
+    tmp_path: Path,
+) -> None:
+    contract = _comtrade_contract(stage=Stage.PARTNERS)
+    rows = [
+        comtrade_row(partner_code=156, partner_desc="China"),
+        comtrade_row(partner_code=840, partner_desc="United States"),
+    ]
+    rows[0].update({"partner2Code": 0, "motCode": 0, "customsCode": "C00"})
+    rows[1].update({"partner2Code": 1, "motCode": 0, "customsCode": "C00"})
+    connector, result = _acquire_comtrade(
+        tmp_path, comtrade_envelope(rows), contract=contract
+    )
+    assert isinstance(result, UnavailableRecord)
+    report = connector.validate(_stored_comtrade_artifact(connector, contract))
+    checks = {check.check_id: check.result for check in report.checks}
+    assert checks["partner_rows_unique_per_unit"] == "PASS"
+    assert checks["secondary_dimensions_single_valued"] == "FAIL"
+
+    rows[1]["partner2Code"] = 0
+    connector, result = _acquire_comtrade(
+        tmp_path / "single", comtrade_envelope(rows), contract=contract
+    )
+    assert isinstance(result, tuple)
+    report = connector.validate(result[0][0])
+    checks = {check.check_id: check.result for check in report.checks}
+    assert checks["partner_rows_unique_per_unit"] == "PASS"
+    assert checks["secondary_dimensions_single_valued"] == "PASS"
+    assert checks["partner_desc_present_for_non_world_rows"] == "PASS"
+
+
+def test_un_comtrade_partners_zero_row_envelope_is_complete_normalized_empty_not_format_not_parseable(
+    tmp_path: Path,
+) -> None:
+    contract = _comtrade_contract(stage=Stage.PARTNERS)
+    connector, result = _acquire_comtrade(
+        tmp_path, comtrade_envelope([]), contract=contract
+    )
+    assert isinstance(result, tuple)
+    artifacts, coverage = result
+    assert coverage.status == "COMPLETE"
+    assert coverage.stop_reason is None
+    assert artifacts[0].contract.normalization_status == "NORMALIZED_EMPTY"
+    assert (
+        artifacts[0].contract.normalization_reason
+        == "zero_rows_provider_count_0"
+    )
+    assert connector.validate(artifacts[0]).status == "PASS"
+
+
+@pytest.mark.parametrize(
+    "rows,error",
+    [
+        ([comtrade_row()], None),
+        (
+            [comtrade_row(partner_code=156, partner_desc="China")],
+            {"code": "TEST_ERROR"},
+        ),
+    ],
+)
+def test_un_comtrade_partners_only_world_rows_or_error_envelope_is_incomplete_coverage_indeterminate(
+    tmp_path: Path,
+    rows: list[dict],
+    error: object,
+) -> None:
+    contract = _comtrade_contract(stage=Stage.PARTNERS)
+    _, result = _acquire_comtrade(
+        tmp_path,
+        comtrade_envelope(rows, error=error),
+        contract=contract,
+    )
+    assert isinstance(result, UnavailableRecord)
+    assert result.coverage is not None
+    assert result.coverage.status == "INCOMPLETE"
+    assert result.coverage.stop_reason == UnavailableReason.COVERAGE_INDETERMINATE
+
+
+def _acquire_reconciled_partner_payload(
+    tmp_path: Path,
+    payload: bytes,
+    *,
+    universe_value: str = "10.000",
+) -> tuple[UnComtradeConnector, object]:
+    store = _test_store(tmp_path)
+    source = _comtrade_source_config()
+    universe = (
+        '{"count":1,"data":[{"period":2024,"flowCode":"M",'
+        '"reporterCode":682,"partnerCode":0,"cmdCode":"721049",'
+        '"classificationCode":"H6","primaryValue":'
+        + universe_value
+        + '}],"error":null}'
+    ).encode()
+    seed_unit(
+        store,
+        contract=_comtrade_contract(),
+        run_id="20260912T120000Z",
+        payload=universe,
+        source_config=source,
+    )
+    response = FetchResult(
+        http_status=200,
+        headers_subset=(("content-type", "application/json"),),
+        body=payload,
+        final_url_redacted="http://fake.test/comtrade-partners",
+        fetched_at="2026-09-12T12:30:00Z",
+        content_length_header=len(payload),
+    )
+    connector = UnComtradeConnector(
+        source_config=source,
+        store=store,
+        transport=FakeTransport(
+            responses={"http://fake.test/comtrade-partners": response},
+            calls=[],
+        ),
+        run_id="20260912T123000Z",
+        environ={},
+        sleeper=lambda _: None,
+    )
+    contract = _comtrade_contract(stage=Stage.PARTNERS)
+    return connector, connector.acquire(contract, max_requests=1)
+
+
+def _partner_payload(
+    values: tuple[str, str] = ("4.999", "5.001"),
+    *,
+    descs: tuple[str | None, str | None] = ("China", "Korea"),
+    world: str = "10.000",
+) -> bytes:
+    def desc(value: str | None) -> str:
+        return "null" if value is None else json.dumps(value)
+
+    return (
+        '{"count":3,"data":['
+        '{"period":2024,"flowCode":"M","reporterCode":682,'
+        '"partnerCode":0,"partnerDesc":"World","cmdCode":"721049",'
+        '"classificationCode":"H6","primaryValue":'
+        + world
+        + '},'
+        '{"period":2024,"flowCode":"M","reporterCode":682,'
+        '"partnerCode":156,"partnerDesc":'
+        + desc(descs[0])
+        + ',"cmdCode":"721049","classificationCode":"H6","primaryValue":'
+        + values[0]
+        + '},'
+        '{"period":2024,"flowCode":"M","reporterCode":682,'
+        '"partnerCode":410,"partnerDesc":'
+        + desc(descs[1])
+        + ',"cmdCode":"721049","classificationCode":"H6","primaryValue":'
+        + values[1]
+        + '}],"error":null}'
+    ).encode()
+
+
+@pytest.mark.parametrize(
+    ("values", "expected"),
+    [
+        (("4.999", "5.001"), "PASS"),
+        (("4.999", "5.002"), "PASS"),
+        (("4.999", "5.003"), "FAIL"),
+    ],
+)
+def test_un_comtrade_partners_aggregate_reconciles_uses_decimal_sum_and_stored_scale_tolerance(
+    tmp_path: Path,
+    values: tuple[str, str],
+    expected: str,
+) -> None:
+    connector, result = _acquire_reconciled_partner_payload(
+        tmp_path, _partner_payload(values)
+    )
+    artifact = (
+        result[0][0]
+        if isinstance(result, tuple)
+        else _stored_comtrade_artifact(
+            connector, _comtrade_contract(stage=Stage.PARTNERS)
+        )
+    )
+    check = next(
+        row
+        for row in connector.validate(artifact).checks
+        if row.check_id == "aggregate_reconciles"
+    )
+    assert check.result == expected
+    assert all(token in check.detail for token in ("S=", "R=", "diff=", "s=3", "tolerance=0.001"))
+
+
+def test_un_comtrade_partners_aggregate_reconciles_missing_reference_fails(
+    tmp_path: Path,
+) -> None:
+    connector, result = _acquire_comtrade(
+        tmp_path,
+        _partner_payload(),
+        contract=_comtrade_contract(stage=Stage.PARTNERS),
+        seed_universe=False,
+    )
+    assert isinstance(result, UnavailableRecord)
+    report = connector.validate(
+        _stored_comtrade_artifact(
+            connector, _comtrade_contract(stage=Stage.PARTNERS)
+        )
+    )
+    check = next(row for row in report.checks if row.check_id == "aggregate_reconciles")
+    assert check.result == "FAIL"
+    assert "reference unavailable" in check.detail
+
+
+def test_un_comtrade_partners_zero_envelope_fails_aggregate_reconciles_when_reference_positive(
+    tmp_path: Path,
+) -> None:
+    connector, result = _acquire_reconciled_partner_payload(
+        tmp_path, comtrade_envelope([])
+    )
+    assert isinstance(result, UnavailableRecord)
+    assert result.coverage is not None
+    assert result.coverage.stop_reason == UnavailableReason.COVERAGE_INDETERMINATE
+
+
+def test_un_comtrade_partners_world_row_must_match_reference_within_half_unit(
+    tmp_path: Path,
+) -> None:
+    connector, result = _acquire_reconciled_partner_payload(
+        tmp_path, _partner_payload(world="10.001")
+    )
+    assert isinstance(result, UnavailableRecord)
+    report = connector.validate(
+        _stored_comtrade_artifact(
+            connector, _comtrade_contract(stage=Stage.PARTNERS)
+        )
+    )
+    assert next(
+        row for row in report.checks if row.check_id == "aggregate_reconciles"
+    ).result == "FAIL"
+
+
+def test_un_comtrade_partners_duplicate_partner_desc_fails_unique_check(
+    tmp_path: Path,
+) -> None:
+    connector, result = _acquire_reconciled_partner_payload(
+        tmp_path, _partner_payload(descs=("Same", "Same"))
+    )
+    assert isinstance(result, UnavailableRecord)
+    report = connector.validate(
+        _stored_comtrade_artifact(
+            connector, _comtrade_contract(stage=Stage.PARTNERS)
+        )
+    )
+    assert next(
+        row
+        for row in report.checks
+        if row.check_id == "partner_desc_unique_for_non_world_rows"
+    ).result == "FAIL"
+
+
+def test_un_comtrade_partners_only_missing_descriptions_maps_to_typed_reason(
+    tmp_path: Path,
+) -> None:
+    connector, result = _acquire_reconciled_partner_payload(
+        tmp_path, _partner_payload(descs=(None, None))
+    )
+    assert isinstance(result, UnavailableRecord)
+    assert result.reason == UnavailableReason.PARTNER_DESCRIPTIONS_UNAVAILABLE
+    report = connector.validate(
+        _stored_comtrade_artifact(
+            connector, _comtrade_contract(stage=Stage.PARTNERS)
+        )
+    )
+    assert {
+        row.check_id for row in report.checks if row.result == "FAIL"
+    } == {"partner_desc_present_for_non_world_rows"}
+
+
+def test_stored_v1_coverage_bytes_are_unchanged() -> None:
+    path = PROJECT_ROOT / (
+        "data/raw/un_comtrade/"
+        "e71395bbc925e4fbb59435020937df3035c9470aae1e9fc44a5b5bc4026df184/"
+        "20260913T010452Z/coverage.json"
+    )
+    assert hashlib.sha256(path.read_bytes()).hexdigest() == (
+        "faa48dee5d066d9f26e6df4ec8f5973ed87ad672b5c728e62e6a429608351dc4"
+    )
+
+
+def test_un_comtrade_universe_validation_unchanged_by_partners_mapping(
+    tmp_path: Path,
+) -> None:
+    connector, result = _acquire_comtrade(
+        tmp_path, comtrade_envelope([comtrade_row()])
+    )
+    assert isinstance(result, tuple)
+    report = connector.validate(result[0][0])
+    assert report.status == "PASS"
+    assert [check.check_id for check in report.checks] == [
+        "content_type_json",
+        "envelope_shape",
+        "no_error_field",
+        "count_matches_rows",
+        "rows_present",
+        "reporter_682_all_rows",
+        "period_matches_contract",
+        "flow_matches_contract",
+        "partner_matches_stage",
+        "cmd_code_hs6_all_rows",
+        "single_classification_code_per_unit",
+        "no_duplicate_hs6_per_unit",
+    ]
 
 
 def test_universe_snapshot_records_config_version_1_3_0(
@@ -708,7 +1063,7 @@ def test_partners_kind_config_version_unchanged_and_wits_snapshot_reconstructs(
         / "partners"
         / "PARTNERS-SAU-WITS-TRADE-2026-09-03.json"
     )
-    assert snapshots.reconstruct(
+    assert snapshots.reconstruct_pinned(
         path,
         store,
         config,

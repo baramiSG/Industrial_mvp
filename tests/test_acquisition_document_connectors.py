@@ -107,13 +107,15 @@ def _pages(store: RawStore, contract: QueryContract, connector: DocumentConnecto
     return store.pages_for(contract.source_id, contract.query_hash(), connector.run_id)
 
 
-def test_default_registry_has_sixteen_ids_and_document_kinds() -> None:
+def test_default_registry_has_twenty_one_ids_and_document_kinds() -> None:
     reg = default_registry()
     assert reg.ids() == (
         "baci_cepii", "etimad_tenders", "gastat", "ministry_of_industry", "modon",
-        "producer_advanced_petrochemical", "producer_sabic", "producer_tasnee", "producer_unicoil",
+        "producer_advanced_petrochemical", "producer_altaiseer_talco",
+        "producer_alupco", "producer_hadeed", "producer_maaden",
+        "producer_sabic", "producer_tasnee", "producer_unicoil",
         "saber_registry", "saso_catalogue", "saso_documents", "tadawul_disclosures",
-        "un_comtrade", "wits_trade", "zatca_tariff",
+        "un_comtrade", "wco_hs_nomenclature", "wits_trade", "zatca_tariff",
     )
 
 
