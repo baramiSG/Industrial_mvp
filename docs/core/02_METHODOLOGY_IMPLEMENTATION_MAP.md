@@ -24,7 +24,7 @@ An autonomous agent may refactor implementation, but it may not remove a mapped 
 | 5 — Test 1 Genuine Gap | Bilingual extraction, UV full/degraded controls, gap taxonomy | `ai_extraction.py`, `rules.py`, public snapshots | extraction golden, R4-D guard | extraction panel, gap statement |
 | 6 — Test 2 Capability | Effective capacity, sector profiles, K/U/D\*, hard gates, route bands | `capability.py`, `sector_profiles.v1.yaml` | capability tests | capability matrix |
 | 7 — Test 3 Intervention | Unsupported case, route order, S\*, national value, competition gates | `economics.py`, `decision_engine.py` | economics and steel simulation | economics/EVSI panel |
-| 8 — Strategic Value and Portfolio | Keep strategic value separate; avoid one ordinal list | decision output fields; future portfolio adapter | state/route tests | resilience rule and separate metrics |
+| 8 — Strategic Value and Portfolio | Keep strategic value separate; avoid one ordinal list; project evidence-backed dependencies only | `graph.projection.build_repository_projection`, `graph.engine_feed`, decision output fields | graph artifact, Cypher-equality and state/route tests | four governed graph-view contracts and separate metrics |
 | 9 — EVSI | Research only when it can change a material decision | `economics.approximate_evsi` | EVSI unit test | highest-value next fact |
 | 10 — AI and Authority | AI for language/ambiguity; code calculates; experts authorize | `ai_extraction.py`, GenUI guardrails, evidence policy | extraction and API tests | control note and governance screen |
 | 11 — Evidence Governance | Passport, quality gates, frozen snapshots and reproducibility | evidence JSON, manifests, `evidence.py`, `acquisition/passports.py` | integrity and passport tests | evidence ledger and boundary banner |
@@ -191,7 +191,7 @@ Screening dispositions `CANDIDATE`, `NO_CANDIDATE`, and `SCREENED_OUT` are separ
 | 5 | Debottlenecking/incremental expansion | steel simulated route |
 | 6 | Technology licence/JV | capability route band support |
 | 7 | Targeted greenfield | deliberately not selected in golden cases |
-| 8 | Shared enabling infrastructure | contract emitted as `GRAPH_REQUIRED`; graph activation deferred to S16 |
+| 8 | Shared enabling infrastructure | governed projection/feed and real Cypher mirror delivered in S16a; the unchanged `GRAPH_REQUIRED` decision contract is activated only by the S16b Class-D enabler change |
 
 ## 7. Quality-gate map
 
@@ -269,3 +269,10 @@ Any new domain function must be added to this map before implementation review c
 | Same-day partner-snapshot coexistence | `acquisition.kinds.snapshot_id`, `acquisition.snapshots.write_snapshot` | Core 04 §13; S15 OD-13/OD-14 | `tests/test_acquisition_snapshots.py` | deterministic scoped id, disjoint `scope_units`, one-way `coexists_with` |
 | S15 public document sources | `acquisition.connectors.documents`, `acquisition.documents.lists` | Core 05 §§3.2, 11; S15 OD-12 | acquisition connector/list/stored-artifact tests | WCO 29/30/31, SPIMACO, SABIC Agri-Nutrients and SFDA records with `regulatory_authority` restricted to SFDA |
 | S15 entity mentions | `acquisition.entities.mentions`, `acquisition.entities.resolver` | Methodology §11; Core 05 §6.5 | `tests/test_entity_resolution_artifact.py` | third write-once entity artifact from verified publisher-name spans |
+| Governed graph projection | `graph.projection.build_repository_projection`, `graph.artifact.validate_projection` | Methodology §8.3; Core 04 §8 v2; R-3 | `tests/test_graph_projection.py`, `tests/test_graph_artifact.py` | write-once `data/graph/` projection |
+| R9-S adjacency explanation | `graph.engine_feed.adjacency_explanation` | Methodology R9-S; S17 view 1 | artifact/Cypher equality tests | fixed `adjacency` view |
+| Route-blocking capability | `graph.engine_feed.route_blocking_capability` | Core 07 §§4.3, 7.7; S17 view 2 | artifact/Cypher equality tests | fixed `route_blocking` view |
+| Evidence-to-change linkage | `graph.engine_feed.evidence_linkage` | Methodology §9; S17 view 4 | artifact/Cypher equality tests | fixed `evidence_to_change` view |
+| Shared-enabler projection feed | `graph.engine_feed.shared_enabler_inputs`, `graph.engine_feed.shared_enabler_queue_rows` | Methodology §§8.2–8.3; R-2 | public-empty, Class-D isolation and live equality tests | fixed `shared_enabler` view; route activation remains S16b |
+| Idempotent graph mirror | `graph.loader.load`, `graph.loader.verify` | R-3, R-6, OR-7 | `graph_tests/test_loader.py`, provenance/count tests | Compose/CI/Aura-safe mirror |
+| Fail-closed live graph service | `graph.service.GraphService`, `graph.api.router` | S16 objective; Core 03 §13 | stopped-service and offline API tests | typed `GRAPH_UNAVAILABLE` |

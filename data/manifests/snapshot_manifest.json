@@ -1,7 +1,7 @@
 {
   "manifest_version": "1.0",
   "generated_on": "2026-09-13",
-  "policy": "Golden cases and synthetic scenarios run only against pinned files in this manifest; case derivation inputs and retained superseded operating-configuration bytes are also hash-pinned.",
+  "policy": "Golden cases and synthetic scenarios run only against pinned files in this manifest; case derivation inputs and retained superseded operating-configuration bytes and the governed graph projection are also hash-pinned.",
   "files": [
     {
       "path": "data/snapshots/partners/PARTNERS-SAU-UN-COMTRADE-2026-09-13-edbd1926e196.json",
@@ -3477,6 +3477,31 @@
       "path": "data/cases/selection/wits-partners-s14-v1.json",
       "sha256": "f18b7eccf8dda38b6761f6ab190d7f8b7530b2fa8c95dfe0681537c39ec1d04c",
       "bytes": 173
+    },
+    {
+      "path": "data/graph/current.json",
+      "sha256": "f5346fdb42763f8492cbb4f3b641daabeb1e12bdf87a3991b0ba39ec0a7941a5",
+      "bytes": 139
+    },
+    {
+      "path": "data/graph/projections/GRAPH-SAU-2026-09-12-3ce241f08f7a/manifest.json",
+      "sha256": "91d021e47d5fc8952299667daef2ea2c1be15136a62f041a55de2bd0cf608641",
+      "bytes": 228
+    },
+    {
+      "path": "data/graph/projections/GRAPH-SAU-2026-09-12-3ce241f08f7a/projection.json",
+      "sha256": "b749db36715c56b9c077d5d10627a925845b9688ce57b678b26747a965440009",
+      "bytes": 1739788
+    },
+    {
+      "path": "data/graph/projections/GRAPH-SAU-2026-09-12-941efbdf1e4a/manifest.json",
+      "sha256": "b6af32cde2aef847c92b12e52246a8efc47c3fa97483a3a2b0241fdb0489dd29",
+      "bytes": 227
+    },
+    {
+      "path": "data/graph/projections/GRAPH-SAU-2026-09-12-941efbdf1e4a/projection.json",
+      "sha256": "795975c4b89bd4a4769da831a2f76917a5cc69075f2042597df51ed0b1c16f1e",
+      "bytes": 844574
     },
     {
       "path": "config/history/acquisition_sources.v1-1.3.0.yaml",

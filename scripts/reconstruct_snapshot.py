@@ -318,6 +318,53 @@ def _reconstruct_case_selections(data_root: Path) -> int:
     return count
 
 
+def _reconstruct_graph(
+    data_root: Path,
+    *,
+    check_manifest: bool,
+    manifest_rows: dict[str, tuple[str, int]],
+) -> tuple[int, int, int]:
+    from ior_mvp.graph.artifact import canonical_bytes, load_projection
+    from ior_mvp.graph.projection import build_repository_projection
+
+    graph_root = data_root / "graph"
+    current_path = graph_root / "current.json"
+    if not current_path.is_file():
+        return 0, 0, 0
+    refs = sorted(
+        path.relative_to(data_root.parent).as_posix()
+        for path in graph_root.rglob("*")
+        if path.is_file()
+    )
+    if check_manifest:
+        for ref in refs:
+            if ref not in manifest_rows:
+                print(f"GRAPH RECONSTRUCTION FAIL: manifest row missing for {ref}")
+                sys.exit(2)
+            expected_hash, expected_bytes = manifest_rows[ref]
+            path = data_root.parent / ref
+            if (
+                _sha256_file(path) != expected_hash
+                or path.stat().st_size != expected_bytes
+            ):
+                print(f"GRAPH RECONSTRUCTION FAIL: manifest hash mismatch for {ref}")
+                sys.exit(1)
+    stored = load_projection(graph_root)
+    rebuilt = build_repository_projection(data_root.parent)
+    if canonical_bytes(stored) != canonical_bytes(rebuilt):
+        print(
+            "GRAPH RECONSTRUCTION FAIL: "
+            f"{stored.projection_id} byte mismatch"
+        )
+        sys.exit(1)
+    print(
+        "GRAPH RECONSTRUCTION PASS "
+        f"(1 projections, {stored.counts['nodes']} nodes, "
+        f"{stored.counts['edges']} edges)"
+    )
+    return 1, stored.counts["nodes"], stored.counts["edges"]
+
+
 def main() -> None:
     _install_socket_block()
     import argparse
@@ -349,8 +396,9 @@ def main() -> None:
     from ior_mvp.acquisition.entities.store import EntityStore
 
     has_entities = bool(EntityStore(data_root / "entities").iter_artifacts())
+    has_graph = (data_root / "graph" / "current.json").is_file()
 
-    if not snapshots and not has_documents and not has_entities:
+    if not snapshots and not has_documents and not has_entities and not has_graph:
         print("RECONSTRUCTION FAIL: no acquired snapshots")
         sys.exit(1)
 
@@ -434,6 +482,11 @@ def main() -> None:
         manifest_rows=manifest_rows,
     )
     _reconstruct_cases(
+        data_root,
+        check_manifest=not args.no_check_manifest,
+        manifest_rows=manifest_rows,
+    )
+    _reconstruct_graph(
         data_root,
         check_manifest=not args.no_check_manifest,
         manifest_rows=manifest_rows,

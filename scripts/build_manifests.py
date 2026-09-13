@@ -79,6 +79,11 @@ def main() -> None:
         snapshot_paths += sorted(
             p for p in cases_root.rglob("*") if p.is_file()
         )
+    graph_root = ROOT / "data" / "graph"
+    if graph_root.exists():
+        snapshot_paths += sorted(
+            p for p in graph_root.rglob("*") if p.is_file()
+        )
     history_root = ROOT / "config" / "history"
     if history_root.exists():
         snapshot_paths += sorted(
@@ -90,7 +95,7 @@ def main() -> None:
         "policy": (
             "Golden cases and synthetic scenarios run only against pinned files "
             "in this manifest; case derivation inputs and retained superseded operating-configuration bytes "
-            "are also hash-pinned."
+            "and the governed graph projection are also hash-pinned."
         ),
         "files": [entry(path) for path in snapshot_paths],
     }
@@ -109,6 +114,7 @@ def main() -> None:
         ROOT / "config" / "entity_resolution.v1.yaml",
         ROOT / "config" / "screening.v1.yaml",
         ROOT / "config" / "product_families.v1.yaml",
+        ROOT / "config" / "graph_views.v1.yaml",
     ]
     authority_paths += sorted((ROOT / "docs" / "core").glob("*.md"))
     authority_manifest = {

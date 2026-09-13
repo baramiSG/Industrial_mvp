@@ -25,6 +25,7 @@ from scripts.check_prohibited_files import Finding, ScannerError
         ("certs/server.KEY", "path:*.key"),
         ("certs/server.P12", "path:*.p12"),
         (".workflow/logs/run.log", "path:.workflow/logs/"),
+        (".secrets/neo4j_auth.txt", "path:.secrets/"),
     ],
 )
 def test_scan_tracked_files_flags_every_prohibited_path(path: str, rule: str) -> None:
@@ -39,7 +40,12 @@ def test_scan_tracked_files_allows_env_example() -> None:
 
 @pytest.mark.parametrize(
     "path",
-    [".env.template", "foo.env", "src/ior_mvp/app.py"],
+    [
+        ".env.template",
+        "foo.env",
+        "src/ior_mvp/app.py",
+        ".secrets/neo4j_auth.example.txt",
+    ],
 )
 def test_scan_tracked_files_allows_non_prohibited_paths(path: str) -> None:
     assert scanner.scan_tracked_files({path: b"safe"}) == ()

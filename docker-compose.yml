@@ -6,3 +6,52 @@ services:
     environment:
       - PYTHONUNBUFFERED=1
     restart: unless-stopped
+
+  industrial-mvp-neo4j:
+    image: neo4j:5.26.30@sha256:037cf5756f0135cbfd66b739b6df7c7c4bb100f9ce11602f6f9538e17e02c74d
+    container_name: industrial-mvp-neo4j
+    ports:
+      - "7475:7474"
+      - "7688:7687"
+    environment:
+      NEO4J_AUTH_FILE: /run/secrets/neo4j_auth
+    secrets:
+      - source: neo4j_auth
+        target: /run/secrets-source/neo4j_auth
+    entrypoint:
+      - /bin/sh
+      - -c
+      - >-
+        install -m 0400 -o 7474 -g 7474
+        /run/secrets-source/neo4j_auth /run/secrets/neo4j_auth
+        && exec /startup/docker-entrypoint.sh neo4j
+    tmpfs:
+      - /run/secrets:mode=0750,uid=0,gid=7474
+    volumes:
+      - industrial-mvp-neo4j-data:/data
+    networks:
+      - industrial-mvp-net
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - >-
+          cypher-shell -a bolt://localhost:7687 -u neo4j
+          -p "$$(cut -d/ -f2- /run/secrets/neo4j_auth)"
+          "RETURN 1"
+      interval: 10s
+      timeout: 10s
+      retries: 18
+      start_period: 30s
+    restart: unless-stopped
+
+secrets:
+  neo4j_auth:
+    file: ./.secrets/neo4j_auth.txt
+
+volumes:
+  industrial-mvp-neo4j-data:
+    name: industrial-mvp-neo4j-data
+
+networks:
+  industrial-mvp-net:
+    name: industrial-mvp-net

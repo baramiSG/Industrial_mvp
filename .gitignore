@@ -28,3 +28,7 @@ node_modules/
 browser_tests/baselines/**/.candidate/
 browser_tests/baselines/**/.previous/
 .artifacts/
+
+# Generated graph credentials; only the non-secret template is reviewable.
+.secrets/*
+!.secrets/neo4j_auth.example.txt

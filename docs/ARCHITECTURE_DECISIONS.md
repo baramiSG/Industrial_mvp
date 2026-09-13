@@ -1240,3 +1240,136 @@ at `2026-09-13T07:43:54Z` and exited zero. Snapshot-manifest rows increased
 Authority rows remained 19 and only the six permitted configuration/Core rows
 changed. The §11 table mirrored the machine file and the immediate integrity
 oracle passed. The one-run authorization is exhausted.
+
+---
+
+## ADR-024 — Governed graph projection, provisioned mirrors and fail-closed loader
+
+**Status:** S16a implementation candidate under approved parent plan
+`plan-1-s16.json` (`7e888e7a…`) and owner decisions OD-1…OD-19. Owner W1
+`ade1a6c` was rebased onto M16
+`b81a7bd30261969c455915659eb083f35101c38d` as W1'
+`6567216ae5c5b95d994381499d48d590df6b1324`. Independent review, Aura
+verification, delivery and approval remain pending.
+
+**Authority and boundary.** Methodology §§8.2–8.3 requires evidence-backed,
+decision-relevant dependency edges and defines UnlockValue. ADR-010 rulings
+R-2/R-3/R-6 require the real Neo4j graph, a rebuildable projection rather than
+a second source of truth, and project-owned provisioning. PR-S16-1…12, OR-7,
+OD-1…17 and reviewer advisories ADV-1…11 specify the CI service, public/Class-D
+partition, driver extra, v1→v2 mapping, tariff marker, Compose secret,
+Aura-safety and equality tests. S16a does not activate route 8 or mount the
+graph API; those visual-pinned changes remain S16b.
+
+**DD-1 — artifact is authoritative; services are mirrors.** The write-once
+canonical artifact lives under `data/graph/projections/<projection_id>/` with
+`data/graph/current.json`. Its input block hashes every public snapshot,
+top-level scenario, entity artifact, CaseBrief and its required records,
+screening snapshot, tariff attempt, governing config and engine source used by
+the build. Nodes and relationships are sorted; identity uses the maximum
+public as-of date and canonical input hashes, never the build date. Compose,
+hosted CI and later Aura all load this artifact. The existing decision engine
+remains socket-free. The generated authority manifest is deliberately not an
+input: the projection hashes the live methodology/Core/config bytes directly,
+so the single authorized manifest run cannot create a
+graph→manifest→graph hash cycle.
+
+**DD-2 — Core 04 §8 v2 vocabulary and partition.** The projection enforces the
+owner-approved 19 labels, 15 edge types, endpoint rules and total v1→v2
+mapping. Every element has the five non-null provenance fields. Public
+elements use `scenario_id='PUBLIC'`; Class-D elements use the scenario id and
+both evidence-policy warning labels. Public relationships require two public
+endpoints. Decision, route, D* and graph explanation outputs are
+`derived=true`, tied to an engine run, and excluded from engine-input
+functions.
+
+**DD-3 — Community-compatible idempotent loader.** All 19 labels receive
+property-uniqueness constraints; filtered properties receive per-label
+indexes. The loader encodes only Neo4j primitives or homogeneous primitive
+arrays, using canonical JSON text for non-query nested values. Node and
+relationship loads use `MERGE` by governed id/key. A second identical load
+creates 0/0. A non-empty mirror with a different projection id is refused
+before any write and requires an explicit target-scoped clear.
+
+**DD-4 — targets and destructive-operation safety.** `compose` and `ci`
+resolve only to `bolt://localhost:7688` and ignore inherited URI values. Aura
+requires `neo4j+s`, matching URI host prefix, `AURA_INSTANCEID`, and explicit
+`--confirm-instance` before driver creation. Any clear requires exact
+`--confirm-clear`; ordinary load never deletes. Tests remove or reject Aura
+state. No Aura connection occurred in this preparation phase.
+
+**DD-5 — project-owned provisioning and secret handoff.** The Compose service
+is `industrial-mvp-neo4j`, image `neo4j:5.26.30` at digest
+`sha256:037cf575…`, ports 7475/7688, network
+`industrial-mvp-net`, volume `industrial-mvp-neo4j-data`, and a
+`cypher-shell` health check. The credential generator writes one mode-0600,
+git-ignored host file and prints only its state. Initial execution proved that
+Compose's bind-mounted 0600 file (host uid 1000) is unreadable by image uid
+7474. The corrected service bind-mounts that source read-only, stages a
+mode-0400 uid/gid-7474 copy in tmpfs, keeps
+`NEO4J_AUTH_FILE=/run/secrets/neo4j_auth`, then starts the vendor entrypoint.
+The service reached `GRAPH READY`.
+
+**DD-6 — fail-closed service and tests.** `GraphService` maps missing
+configuration, optional driver, connectivity, instance mismatch and
+projection mismatch to typed `GRAPH_UNAVAILABLE`; it never catches
+`OfflineGuardViolation` or supplies an artifact fallback to a failed live
+view. The separate loopback-only `graph_tests/` suite proves exact counts,
+constraints, provenance, partition and Cypher/artifact equality. A latency
+regression exposed the driver's default retry window (34.17 s); setting the
+graph-only connection/acquisition timeouts to 2 s and retry time to zero
+reduced the stopped-service proof to 0.50 s.
+
+**DD-7 — dependency and CI.** `neo4j>=5.28,<6` is an optional `graph` extra.
+The single S16a lock update resolved cached `neo4j==5.28.4` and
+`pytz==2026.3.post1` offline on Python 3.12.13 and 3.14.6. The application
+Dockerfile is unchanged and CI checks the runtime image contains no driver.
+The designated digest-pinned `graph-gates` service job uses a run-scoped
+credential, rebuild-checks, loads twice, verifies, runs live Cypher tests,
+stops the service and proves `GRAPH_UNAVAILABLE`.
+
+**M16 integration delta.** OD-19 classified six conflicts as valid additive
+integration conflicts and required both slices to survive. The resolution:
+(1) unions S15 selection and S16 graph Make targets without changing recipes;
+(2) appends all seven graph mappings after the three S15 Core 02 mappings;
+(3) retains `_reconstruct_case_selections`, `_reconstruct_graph` and both
+`main()` calls; (4) preserves S14b/S15a KL-104…KL-117 and renumbers the six
+unchanged graph facts KL-118…KL-123; (5) preserves ADR-022/ADR-023 and assigns
+this graph decision ADR-024; and (6) retains every S14b/S15a integrity
+contract before the S16 contracts, whose identifier pins alone change to
+ADR-024/KL-118.
+
+M16 supplies seven committed public snapshots, seven top-level scenarios,
+nine CaseBriefs and two recorded selections. The old write-once projection
+`GRAPH-SAU-2026-09-12-941efbdf1e4a` remains historical evidence. Rebuilding
+from the merged governed inputs creates
+`GRAPH-SAU-2026-09-12-3ce241f08f7a` and moves only `current.json`: 740 nodes
+and 835 edges, up 381 and 422 respectively. Its 219-file input set adds 22
+paths, removes none and changes 34 common-path hashes relative to the
+pre-M16 projection. All five mandatory provenance properties remain present
+on every node and edge.
+
+The direct-authority design is also the cycle proof: `discover_inputs` hashes
+the methodology DOCX, live Core Markdown and live `config/*.v1.yaml` bytes;
+neither generated `docs/authority/authority_hashes.json` nor
+`data/manifests/snapshot_manifest.json` is an input. Therefore the projection
+is finalized before manifest generation, and a post-generation rebuild-check
+must preserve the same projection id and canonical bytes.
+
+**Manifest §7 and integrated authorization.** §7.2 covers implementation,
+loader, Compose, CI, tests and runbook. §7.3 adds only
+`config/graph_views.v1.yaml` 1.0.0. §7.4 changes Core 02/03/04/09. §7.5 adds
+`data/graph/**`. The methodology DOCX, existing config, public/synthetic/golden
+roots, top-level runtime modules and visual files are unchanged from M16.
+S16a enters integration with manifest run count **0**. Exactly one invocation
+is authorized after this text and the integrated graph artifact are final; it
+may add graph-artifact and graph-view rows and change only the four S16 Core
+hashes. The exact execution output and immediate §11/integrity oracle are
+recorded in the append-only S16 test evidence.
+
+**Recovery.** The graph artifact can be rebuilt from its recorded inputs. A
+development-only pre-handoff projection may be removed before commit after its
+identity and hashes are logged; a committed correction receives a new
+projection id. The local service can be stopped without affecting offline
+analysis. Credential rotation or reset must explicitly recreate the dedicated
+volume because `NEO4J_AUTH_FILE` seeds only a new database.

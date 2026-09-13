@@ -406,25 +406,116 @@ decision_condition
 snapshot
 ```
 
-## 8. Graph production mapping
+## 8. Graph production mapping (v2)
 
-Useful nodes:
+The evidentiary system of record remains the canonical files governed by this
+document. `data/graph/` is a deterministic, idempotently rebuildable
+projection; Neo4j is a live mirror of that projection and is never a second
+source of truth. A node or edge enters the projection only from a named
+canonical record or a deterministic engine run over those records.
+
+### 8.1 Governed node vocabulary
+
+The exact 19 labels are:
 
 ```text
-Product, Specification, Application, Standard, Plant, ProductionLine,
-Process, Equipment, Certification, Buyer, Input, Utility, Technology,
-Opportunity, Intervention, Evidence, Decision
+Product, TariffLine, Specification, Application, Plant, ProductionLine,
+Process, Equipment, Capability, Standard, Certification, Input, Technology,
+Company, CustomerSegment, Evidence, Scenario, Decision, Intervention
 ```
 
-Useful edges:
+- `Product.id` is the persistent opportunity id.
+- `TariffLine` is created only from a COMPLETE tariff unit. Until one exists,
+  the graph carries the single `TARIFF-SA12-UNAVAILABLE` marker and no
+  `CLASSIFIED_AS` edge.
+- Public target specifications remain typed `UNAVAILABLE` markers when the
+  canonical snapshot does not resolve them. Synthetic target specifications
+  remain Class D and scenario-scoped.
+- `Plant` and `Company` use `ENTITY_ID_V1` where an exact governed entity link
+  exists. A snapshot producer without such a link receives a deterministic
+  `PRODUCER-<snapshot>-<index>` id with
+  `identity_basis=SNAPSHOT_PRODUCER_LABEL`; it is not asserted to be a legal
+  entity match.
+- `Decision`, route `Intervention`, D*, `ADJACENT_TO`, and route/evidence
+  constraints are derived engine outputs. They carry `derived=true` and an
+  `engine_run_id` and never feed an engine-input function.
+- `Input`, `Technology`, and `Equipment` remain valid types even when no
+  governed fact currently instantiates them.
+
+### 8.2 Governed edge vocabulary
+
+The exact 15 relationship types and allowed directions are:
+
+| Relationship | Allowed endpoints |
+|---|---|
+| `CLASSIFIED_AS` | Product → TariffLine |
+| `REQUIRES_SPECIFICATION` | Product or Application → Specification |
+| `USED_IN` | Product → Application |
+| `PRODUCED_BY` | Product → Plant, Company or ProductionLine |
+| `HAS_LINE` | Plant → ProductionLine |
+| `USES_PROCESS` | Plant, ProductionLine or Company → Process |
+| `HAS_CAPABILITY` | Product → Capability |
+| `REQUIRES_INPUT` | Process or ProductionLine → Input |
+| `CERTIFIED_TO` | Plant or Company → Certification or Standard |
+| `QUALIFIED_FOR` | Plant, ProductionLine or Company → Specification or Application; CustomerSegment → Application |
+| `DEPENDS_ON` | Product → Product/Input/Technology/Process; Process → Equipment; Decision → Intervention |
+| `ADJACENT_TO` | Plant or Company → Product |
+| `SUPPORTED_BY_EVIDENCE` | any governed node → Evidence |
+| `CONSTRAINED_BY` | Intervention/Decision/Specification/Product → the permitted blocking node |
+| `UNLOCKED_BY` | Product → shared-enabler Intervention |
+
+### 8.3 v1 → v2 mapping
+
+| v1 name | v2 meaning |
+|---|---|
+| `Opportunity` | `Product`, keyed by opportunity id |
+| `Buyer` | `CustomerSegment` |
+| `Utility` | `Input` with utility kind |
+| `HAS_SPECIFICATION` | `REQUIRES_SPECIFICATION` |
+| `REQUIRES_STANDARD` | `CONSTRAINED_BY` from Specification to Standard |
+| `REQUIRES_EQUIPMENT` | `DEPENDS_ON` from Process to Equipment |
+| `QUALIFIED_BY` | `CERTIFIED_TO` |
+| `DEMANDED_BY` | `USED_IN` plus the application/customer qualification relation |
+| `BLOCKED_BY` | `CONSTRAINED_BY` |
+| `ALTERNATIVE_TO` | retired; one Decision owns ordered Intervention route records through `DEPENDS_ON {role}` |
+
+The unchanged v1 labels and edges retain their v2 names. The mapping adds no
+sixteenth relationship type.
+
+### 8.4 Provenance and partition
+
+Every node and edge has non-null `evidence_id`, `as_of`, `evidence_class`,
+`synthetic_flag`, and `scenario_id`, plus `origin_kind`, `origin_ref`,
+`projection_id`, and `derived`. Public elements use the explicit
+`scenario_id='PUBLIC'` sentinel because Neo4j does not retain null
+properties. Synthetic elements use their scenario id, Class D,
+`source=DEMO_GENERATOR` through their Evidence origin, and both policy-owned
+warning labels.
+
+A synthetic edge may start at a public Product to attach a Class-D
+scenario declaration. A public edge may never end at or start from a
+synthetic node. Every public query filters both nodes and relationships on
+`synthetic_flag=false`.
+
+### 8.5 Artifact contract
+
+The write-once layout is:
 
 ```text
-HAS_SPECIFICATION, USED_IN, REQUIRES_STANDARD, PRODUCED_BY, HAS_LINE,
-USES_PROCESS, REQUIRES_EQUIPMENT, QUALIFIED_BY, DEMANDED_BY, DEPENDS_ON,
-SUPPORTED_BY_EVIDENCE, BLOCKED_BY, UNLOCKED_BY, ALTERNATIVE_TO
+data/graph/current.json
+data/graph/projections/<projection_id>/projection.json
+data/graph/projections/<projection_id>/manifest.json
 ```
 
-Only evidence-backed, decision-relevant edges enter the governed graph.
+`projection_id` is derived from the canonical governed input identities and
+the maximum public as-of date. Nodes are sorted by `(label,id)` and edges by
+`(type,source,target,key)`. The artifact retains rich JSON values; the Neo4j
+loader stores only primitives or homogeneous primitive arrays and encodes
+non-query nested values as canonical JSON text. Rebuilding identical inputs
+must produce identical bytes and `GRAPH RECONSTRUCTION PASS`. The original
+methodology, current Core/config bytes and engine sources are direct inputs;
+generated authority/snapshot manifests are integrity outputs, not projection
+inputs, which avoids a circular graph→manifest→graph identity.
 
 ## 9. Dossier projection
 

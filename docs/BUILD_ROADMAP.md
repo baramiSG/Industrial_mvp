@@ -210,6 +210,26 @@ diagnostic sees the later SABIC document and changes only its digest, not the
 selected set. PR CI was green 5/5 on its exact head. S15b is READY to add the
 portfolio/scenario/golden/browser layer; S15 remains in progress until then.
 
+## S16 split (SLICE_GRAPH §5)
+
+OD-1 under approved parent plan `plan-1-s16.json` (`7e888e7a…`) partitions
+S16 at the visual-pinned runtime boundary:
+
+1. `s16a-graph-projection-provisioning-loader` — canonical write-once graph
+   artifact, Core graph contracts, graph-view catalogue, safe Compose/CI/Aura
+   loader, fail-closed service, live loopback tests and unconditional graph
+   CI gate. It does not mount the API or activate route 8.
+2. `s16b-route-eight-activation-and-graph-api` — governed shared-enabler
+   scenario contract, route-8 engine activation, API mount and associated
+   visual-pinned configuration/baseline integration.
+
+S16a W1' `6567216` is integrated on M16 `b81a7bd` under OD-18/OD-19. Its
+current projection `GRAPH-SAU-2026-09-12-3ce241f08f7a` retains
+`GRAPH-SAU-2026-09-12-941efbdf1e4a` as history. Local implementation gates and
+the one manifest run have passed; independent review, PR, hosted CI, merge and
+the post-approval Aura operator verification remain pending. Parent S16 does
+not complete until both children deliver.
+
 ## Explicit non-goals for v0.3.0
 
 Authentication, role-based approval, official override workflow, confidential Ministry connectors, live customs transactions, paid-data acquisition, model training on Ministry applications, causal incentive-effect claims, generic AI chat, CRM, document management, any change to the methodology DOCX, and any alteration of the v0.2.0 tag, release records or frozen v1 golden snapshot files.
