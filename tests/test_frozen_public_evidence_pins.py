@@ -45,7 +45,7 @@ FROZEN_TREE_OIDS = {
     "data/snapshots/public": "a67a921c1909c20e1afe2647e6f41a792cecd08a",
     "data/synthetic": "7459beb8a8777fe33592c314bac54de0a1833f25",
     "data/golden": "72618db654110823ec7a8d4dd6415a37e4554e33",
-    "browser_tests/baselines": "709325b65f4fb567f10d3fa23a0139b1ef0de602",
+    "browser_tests/baselines": "0259f800dbcc4c3726549b3af2ed78cc570ef281",
 }
 
 # Used only by the depth-1 detector of this repository to prove the object absent.
@@ -320,7 +320,7 @@ def synthetic_depth_one_clone(tmp_path: Path) -> tuple[Path, dict[str, str], str
 
 
 def test_public_and_synthetic_bytes_unchanged_from_base() -> None:
-    """S14b added five derived snapshots and five scenarios and regenerated the governed baselines once (ADR-022)."""
+    """S14b added five snapshots/scenarios; OD-16 authorized baseline run two."""
     for rel, (expected_hash, expected_bytes) in PINS.items():
         path = PROJECT_ROOT / rel
         data = path.read_bytes()
@@ -333,7 +333,7 @@ def test_public_and_synthetic_bytes_unchanged_from_base() -> None:
 
 
 def test_visual_baseline_tree_unchanged_from_base() -> None:
-    """S14b regenerated and SC-5 stabilized the baselines; no later byte moves."""
+    """OD-16 authorized S14b's second SC-5-governed baseline regeneration."""
     assert (
         frozen_tree_problems(
             PROJECT_ROOT,
