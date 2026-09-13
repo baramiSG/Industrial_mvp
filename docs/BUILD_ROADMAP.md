@@ -223,12 +223,16 @@ S16 at the visual-pinned runtime boundary:
    scenario contract, route-8 engine activation, API mount and associated
    visual-pinned configuration/baseline integration.
 
-S16a W1' `6567216` is integrated on M16 `b81a7bd` under OD-18/OD-19. Its
+S16a W1' `6567216` was integrated on M16 `b81a7bd` under OD-18/OD-19. Its
 current projection `GRAPH-SAU-2026-09-12-3ce241f08f7a` retains
-`GRAPH-SAU-2026-09-12-941efbdf1e4a` as history. Local implementation gates and
-the one manifest run have passed; independent review, PR, hosted CI, merge and
-the post-approval Aura operator verification remain pending. Parent S16 does
-not complete until both children deliver.
+`GRAPH-SAU-2026-09-12-941efbdf1e4a` as history. [PR #31](https://github.com/baramiSG/Industrial_mvp/pull/31)
+received two independent APPROVEs with zero findings (the second covers
+Compose cleanup), passed all six exact-head CI jobs and squash-merged as
+`71ed558`. Clean-worktree integrity, pytest, smoke and all reconstruction
+passes are green. S16b may now integrate on this delivered foundation; its
+route-8 activation, API mount, visual regeneration and Aura operator
+verification remain pending. Parent S16 does not complete until both children
+deliver.
 
 ## Explicit non-goals for v0.3.0
 

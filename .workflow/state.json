@@ -62,8 +62,8 @@
     "v0.3.0": {
       "name": "Ministerial Demonstration Readiness",
       "state": "IN_PROGRESS",
-      "current_slice": "s16a-graph-projection-provisioning-loader",
-      "next_slice": "s15b-deep-case-portfolio-scenarios-and-goldens",
+      "current_slice": "s15b-deep-case-portfolio-scenarios-and-goldens",
+      "next_slice": "s16b-route-eight-activation-and-graph-api",
       "planning_documents": ["docs/milestones/v0.3.0/GAP_ANALYSIS.md", "docs/milestones/v0.3.0/SLICE_GRAPH.md"],
       "owner_decisions": {"OD-1": "APPROVED_WITH_AMENDMENTS 2026-09-02 (I1, I5 amended; R-1..R-6)", "OD-2": "APPROVED_WITH_AMENDMENTS 2026-09-02", "adr": "ADR-010"},
       "seat_models": {"supervisor": "claude-fable-5-1-thinking-max", "planner_implementer": "gpt-5.6-sol-max", "reviewer": "cursor-grok-4.6-xhigh", "ladders": "4 plans / 8 implementation candidates per slice, then BLOCKED_FOR_OWNER", "owner_lead_agent": "claude-fable-5.1 (Cursor) — delegated owner authority 2026-09-12; plugin ceremony cancelled 2026-09-07"},
@@ -84,8 +84,8 @@
       },
       "s16a_integration": {
         "task_id": "s16a-graph-projection-provisioning-loader",
-        "state": "IMPLEMENTATION_CANDIDATE",
-        "branch": "slice/s16a-graph-projection-provisioning-loader",
+        "state": "MERGED",
+        "branch": "slice/s16a-graph-projection-provisioning-loader (deleted)",
         "base": "6567216ae5c5b95d994381499d48d590df6b1324",
         "wip_parent": "b81a7bd30261969c455915659eb083f35101c38d",
         "wip_commits": [
@@ -95,7 +95,7 @@
           "path": ".autonomous-workflow/plans/s16-graph-backend/cycle-1/plan-1-s16.json",
           "sha256": "7e888e7a9b04d45579bfe799113a39066d4ea39e274aa2ceb5f573e0770d1b8d"
         },
-        "owner_rulings": "OD-1…OD-19",
+        "owner_rulings": "OD-1…OD-22",
         "integration_conflicts": [
           "Makefile S15/S16 target union",
           "Core 02 S15/S16 mapping union",
@@ -115,12 +115,27 @@
         },
         "manifest_runs": 1,
         "manifest_run_receipt": "2026-09-13T10:24:10Z; snapshot 698→703 (five additions, zero prior-row changes); authority 19→20 (graph_views added; Core 02/03/04/09 changed)",
-        "tests": "local make ci: 2676 default + 339 functional + 4 visual; graph first/second load 740/835 then 0/0; portability PASS",
-        "review": "pending independent implementation review",
-        "aura": "not attempted; post-approval owner operator gate"
+        "tests": "owner make ci: 2676 default + 339 functional + 4 visual; graph first/second load 740/835 then 0/0; portability PASS; clean merged-main integrity/pytest/smoke/reconstruction PASS",
+        "review": "reviewer-grok APPROVE zero findings on 040d442d…; OD-20 correction-round APPROVE zero findings on 79f469dc…",
+        "delivery": {
+          "pr": 31,
+          "merge_commit": "71ed5586d3ba5ace355ddca6bb679f4a3ae65c69",
+          "pr_head": "a9efd51d800b713f182731d71fff68ea36f49f61",
+          "pr_ci_run": 34754886672,
+          "main_ci_run": 34755573206,
+          "main_ci_status": "success (6/6)",
+          "merged_at": "2026-09-13T11:40:00Z"
+        },
+        "aura": "not attempted; s16b owner-led operator gate only",
+        "s16b": {
+          "task_id": "s16b-route-eight-activation-and-graph-api",
+          "state": "READY_FOR_PLAN",
+          "depends_on": ["s16a-graph-projection-provisioning-loader"],
+          "scope": "governed enabler contract, route-8 activation, mounted graph API, one visual regeneration and post-approval Aura verification"
+        }
       },
       "route_coverage_matrix": "docs/milestones/v0.3.0/SLICE_GRAPH.md#9",
-      "last_updated": "2026-09-13T10:39:00Z"
+      "last_updated": "2026-09-13T11:45:00Z"
     }
   }
 }

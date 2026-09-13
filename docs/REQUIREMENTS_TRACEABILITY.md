@@ -384,12 +384,14 @@ S15b remains required for parent completion.
 | V3-S16-FEEDS | Adjacency, route-blocking, evidence-linkage and shared-enabler feeds are delivered without making live Neo4j an evidence source. | Artifact functions plus Cypher templates and equality tests; no GDS/APOC dependency; route 8 remains `GRAPH_REQUIRED` until s16b supplies governed enabler inputs. | TESTED | s16a |
 | V3-S16-AUTHORITY | The graph view catalogue, Core graph contracts and both manifest oracles are governed without a graph→manifest→graph cycle. | One 2026-09-13T10:24:10Z manifest invocation; snapshot 698→703 with five additions/no prior-row changes; authority 19→20 with one addition and only Core 02/03/04/09 changes; immediate integrity and human/machine mirror tests pass; post-generation graph build-check preserves `3ce241f08f7a`. | TESTED | s16a |
 | V3-S16-INTEGRATION | S14/S15 interfaces and all six OD-19 conflict resolutions survive the M16 integration. | W1' `6567216` on M16 `b81a7bd`; seven public snapshots/scenarios, nine briefs, two reconstructed selections, 76 visuals; Make/Core/reconstruction/KL/ADR/integrity unions recorded in ADR-024. | TESTED | s16a |
-| V3-S16-TOOLCHAIN | Graph dependency/provisioning participates in ordinary CI while the application image remains graph-driver-free. | Python 3.12/3.14 offline lock proof; digest-pinned CI service contract; local `make ci` passes 2,676 default, 339 functional and four visual tests. Exact scratch and hosted CI remain delivery gates, not implementation approval. | TESTED | s16a |
+| V3-S16-TOOLCHAIN | Graph dependency/provisioning participates in ordinary CI while the application image remains graph-driver-free. | Python 3.12/3.14 offline lock proof; digest-pinned CI service contract; local `make ci` passes 2,676 default, 339 functional and four visual tests; exact scratch plus PR run 34754886672 and merged-main run 34755573206 each passed 6/6. | TESTED | s16a |
 
-S16a is stopped as an uncommitted implementation candidate for independent
-review. It does not mount the graph API or activate route 8; those remain
-s16b. Aura verification is an owner-led post-approval operator gate under
-OD-15 and was not attempted during this implementation.
+S16a was delivered through [PR #31](https://github.com/baramiSG/Industrial_mvp/pull/31)
+as squash `71ed558`: two independent approval rounds found zero defects, the
+six-job exact-head CI matrix passed and clean-worktree post-merge verification
+is recorded. It does not mount the graph API or activate route 8; those remain
+s16b. Aura verification is an owner-led s16b operator gate under OD-15 and was
+not attempted during this child.
 
 ## Branch and release-state rules
 
