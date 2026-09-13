@@ -1159,3 +1159,84 @@ contract correction after its RED/GREEN and unchanged-product regression.
 The run exited 0. The 638-row snapshot manifest was byte-identical; the
 authority manifest remained 19 rows with only Core 04 changed; the §11 mirror
 matched exactly; and the immediate integrity oracle passed.
+
+## ADR-023 — S15a recorded selection, evidence and scoped partner identity
+
+**Status:** implementation candidate under approved S15a plan
+`819e08fd…`, OD-12–OD-16. Independent review, CI and merge remain separate
+gates.
+
+**Context.** S15a extends deterministic deep-case preparation to pharma APIs
+and fertilisers. It must retain the two frozen public outcomes and the merged
+S14 portfolio, use public evidence only, treat unknown capability as unknown,
+and keep all S15 public decisions at their computed result. Product-family
+configuration moves to 1.2.0 with exact 1.1.0 history retained; acquisition
+configuration moves to 1.5.0 for WCO Chapters 29/30/31, SPIMACO, SABIC
+Agri-Nutrients and SFDA registers. The original methodology DOCX is unchanged.
+
+**Decision.** `S14-CS-1.1` applies `SERIES_GAP_YEARS` before tiering and permits
+residual identity exclusion only through a stored, verbatim WCO address. The
+write-once selection `CASE-SELECTION-S15-b96de36ff0ce` chooses 294110/294120
+and 310430/310510. Missing import years are not zero trade. Boundary headings
+3002/3003/3004 and 3101 remain shown exclusions from owner-defined scope, not
+cases. 310420 remains excluded because 2024 import net weight is unavailable;
+no quantity is inferred.
+
+The selection reconstruction contract resolves the identities recorded at T5,
+including its four-document inventory. OD-16 rules that a raw current-state
+diagnostic after W-A15b is a sensitivity observation only: adding the later
+SABIC Agri-Nutrients record changes disclosure coverage for non-selected
+310210 and changes the diagnostic id to `55869cad5a8c`, but leaves the four
+selected codes unchanged. That diagnostic is not written or promoted.
+
+OD-13/OD-14 extend partner-snapshot identity only for a same-day collision.
+The scoped record
+`PARTNERS-SAU-UN-COMTRADE-2026-09-13-edbd1926e196` contains exactly the four
+S15 units, stores `scope_units`, points one way through `coexists_with`, is
+disjoint from the unchanged S14a sibling, and carries no `supersedes` or
+copied exclusions. Both records reconstruct from their own recorded units.
+
+W-A15a stored three COMPLETE Class-B WCO records. W-A15b stored one COMPLETE
+SPIMACO unit, one COMPLETE SABIC Agri-Nutrients report and one COMPLETE SFDA
+page; SPIMACO's second listed document was not requested after the local parser
+dependency stop. W-P15 stored four COMPLETE Comtrade units within five actual
+HTTP requests. RunReport aggregate values that sum cumulative budget use are
+reported as such, not as transport counts.
+
+All four CaseBriefs use explicit `PARTNER_DETAIL_OBSERVED` with 10/4/11/11
+non-World rows. On merged PublicSnapshot 2.2.0, every capability dimension is
+`U`, every profile hard gate is `UNAVAILABLE`, and each public decision
+computes INVESTIGATE/null with
+`ROUTE_CHANGING_EVIDENCE_UNRESOLVED`, firing
+R0/R1-D/R2/R3/R4-D/R10/R12. `U` means not identified within the cited stored
+evidence, not absent. `NO_PUBLIC_TENDER_FOUND` is scoped only to the recorded
+public search. Class-D scenario designs are handed to S15b and do not enter
+these public records.
+
+**Integration history.** Preparation W1 `697322e` was rebased by the owner onto
+M15 `6dc966a9f210b47a94b96aaeffadcbcc6642415f` as W1'
+`7d4853e8d979d86a5fa932fbd4468bceacfb63b4`. The sole conflict was the
+`tests/test_integrity_contract.py` reconstruction count: M15's five committed
+snapshots/five briefs and preparation's zero snapshots/nine briefs were
+resolved to `CASE RECONSTRUCTION PASS (5 snapshots, 9 briefs)`. OD-16's
+recorded-input reconstruction then passed with two records. This conflict and
+the selection-sensitivity ruling are mandatory independent-review inputs.
+
+**Authority and generation.** Manifest §7.2 covers version-gated selection,
+recorded reconstruction and scoped identity; §7.3 covers the two configuration
+versions; §7.4 covers Core 02/04/05/09; §7.5 covers only the new S15 evidence,
+selection, entity, partner and brief artifacts. Exactly one S15a
+`build_manifests.py` invocation is authorized after pre-generation regression.
+It may add new snapshot-manifest rows while preserving every pre-existing row,
+and may change authority hashes only for product families, acquisition sources
+and Core 02/04/05/09. This paragraph records authorization, not execution.
+The retained-config resolver now covers screening + case-selection inputs.
+No governed record references acquisition_sources 1.4.0, so no
+`acquisition_sources.v1-1.4.0.yaml` history file is required: no history copy.
+
+**Generation receipt.** The sole S15a invocation was recorded before execution
+at `2026-09-13T07:43:54Z` and exited zero. Snapshot-manifest rows increased
+638→698 through 60 additions, with zero changed or removed prior rows.
+Authority rows remained 19 and only the six permitted configuration/Core rows
+changed. The §11 table mirrored the machine file and the immediate integrity
+oracle passed. The one-run authorization is exhausted.

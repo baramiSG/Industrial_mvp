@@ -48,6 +48,9 @@ Mirror data may help explain a missing year or partner anomaly. It must not be s
 | ALUPCO public profile | aluminium extrusion, sites and disclosed production envelope | C; S14a run `20260912T233130Z` COMPLETE; one span-addressable record |
 | Al Taiseer Group TALCO profile | aluminium profile manufacture, extrusion and finishing | C; S14a run `20260912T233154Z` COMPLETE; one span-addressable record |
 | Ma'aden annual report and results page | aluminium rolling and company production context | C; S14a run `20260912T233222Z` COMPLETE; two span-addressable records |
+| SPIMACO investor disclosures | publisher identity and disclosed pharmaceutical context only | C; S15 run `20260913T035150Z` stored one COMPLETE PDF unit; a second listed unit was not requested after the local parser dependency stop |
+| SABIC Agri-Nutrients annual report | publisher identity and disclosed fertiliser-company context only | C; S15 run `20260913T035235Z` COMPLETE; one span-addressable report |
+| SFDA drug-companies register | regulatory publisher/company-list observation | B; S15 run `20260913T035254Z` COMPLETE; `regulatory_authority` does not prove product manufacture, capacity or qualification |
 | GPCA / sector associations | sector capacity context | B/C |
 
 Public nameplate capacity does not establish current effective capacity, qualification share, allocation or availability.
@@ -63,6 +66,7 @@ Public nameplate capacity does not establish current effective capacity, qualifi
 | SABER registry | conformity evidence | registration does not prove every buyer qualification; connector implemented (S12a); availability and coverage recorded per run |
 | Producer catalogues / certificates | published product envelope | confirm current edition and contradiction; connector implemented (S12b); availability and coverage recorded per run |
 | WCO HS Nomenclature 2022 chapter texts | target-product classification identity only | B; source `wco_hs_nomenclature`; Chapters 39/72/76 COMPLETE in S14a; never capability/nameplate support |
+| WCO HS Nomenclature 2022 chapter texts, S15 extension | target-product classification identity only | B; Chapters 29/30/31 COMPLETE in run `20260913T033253Z`; residual `identity_exclusions` require verbatim stored addresses |
 
 ### 3.4 Economics
 
@@ -331,3 +335,22 @@ Refusal is `OUT_OF_SCOPE_CONTENT` with `PersonalDataFields` for matched labels o
   A clear JSON `count == 0 == len(data)` response would be
   `NORMALIZED_EMPTY`/ZERO; an error, only-World or unparseable response remains
   MISSING and never becomes zero.
+
+- **S15 W-A15a/W-A15b/W-P15 discipline:** robots/terms and request parameters
+  were recorded before each bounded window. W-A15a stored WCO Chapters
+  29/30/31 from observed index rows and built three Class-B identity records.
+  W-A15b stored one SPIMACO PDF unit, one SABIC Agri-Nutrients report and one
+  SFDA register page. The SPIMACO run stopped after the stored first unit when
+  local PDF parsing required an unavailable dependency; no retry or second
+  document request was made. W-P15 requested only 294110, 294120, 310430 and
+  310510 for 2024 Saudi imports. One terms request plus four data requests
+  produced four COMPLETE units; each reconciles its named non-World rows to
+  the stored World aggregate. The resulting scoped snapshot has those four
+  units only and coexists with, rather than supersedes or unions with, the
+  same-day S14a snapshot.
+- S15 capability and hard-gate values remain `U`/`UNAVAILABLE` unless a
+  CaseBrief cites a verified supporting span. Here `U` means not identified
+  within the named stored evidence and search boundary, never that capability
+  is absent. `NO_PUBLIC_TENDER_FOUND` is likewise limited to the recorded
+  public-evidence search; it is not proof that no tender or specification
+  exists. Missing trade years and unavailable values are never numeric zero.

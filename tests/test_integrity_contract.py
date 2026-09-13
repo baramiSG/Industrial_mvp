@@ -194,6 +194,9 @@ def test_s12a_core_v2_institutional_contracts() -> None:
         "| ALUPCO public profile | aluminium extrusion, sites and disclosed production envelope | C; S14a run `20260912T233130Z` COMPLETE; one span-addressable record |",
         "| Al Taiseer Group TALCO profile | aluminium profile manufacture, extrusion and finishing | C; S14a run `20260912T233154Z` COMPLETE; one span-addressable record |",
         "| Ma'aden annual report and results page | aluminium rolling and company production context | C; S14a run `20260912T233222Z` COMPLETE; two span-addressable records |",
+        "| SPIMACO investor disclosures | publisher identity and disclosed pharmaceutical context only | C; S15 run `20260913T035150Z` stored one COMPLETE PDF unit; a second listed unit was not requested after the local parser dependency stop |",
+        "| SABIC Agri-Nutrients annual report | publisher identity and disclosed fertiliser-company context only | C; S15 run `20260913T035235Z` COMPLETE; one span-addressable report |",
+        "| SFDA drug-companies register | regulatory publisher/company-list observation | B; S15 run `20260913T035254Z` COMPLETE; `regulatory_authority` does not prove product manufacture, capacity or qualification |",
         "| GPCA / sector associations | sector capacity context | B/C |",
     ]
     assert supply.count("connector implemented (S12a)") == 3
@@ -208,6 +211,7 @@ def test_s12a_core_v2_institutional_contracts() -> None:
         "| SABER registry | conformity evidence | registration does not prove every buyer qualification; connector implemented (S12a); availability and coverage recorded per run |",
         "| Producer catalogues / certificates | published product envelope | confirm current edition and contradiction; connector implemented (S12b); availability and coverage recorded per run |",
         "| WCO HS Nomenclature 2022 chapter texts | target-product classification identity only | B; source `wco_hs_nomenclature`; Chapters 39/72/76 COMPLETE in S14a; never capability/nameplate support |",
+        "| WCO HS Nomenclature 2022 chapter texts, S15 extension | target-product classification identity only | B; Chapters 29/30/31 COMPLETE in run `20260913T033253Z`; residual `identity_exclusions` require verbatim stored addresses |",
     ]
     assert qualification.count("connector implemented (S12a)") == 2
     assert qualification.count("connector implemented (S12b)") == 3
@@ -961,6 +965,40 @@ def test_s14b_core_04_and_07_partner_detail_sentences() -> None:
         "missing evidence is never rendered as zero",
     ):
         assert token in core_07
+
+
+def test_s15a_core_v2_contracts() -> None:
+    core_02 = (
+        PROJECT_ROOT / "docs" / "core" / "02_METHODOLOGY_IMPLEMENTATION_MAP.md"
+    ).read_text(encoding="utf-8")
+    core_04 = (
+        PROJECT_ROOT / "docs" / "core" / "04_CANONICAL_DATA_MODEL.md"
+    ).read_text(encoding="utf-8")
+    core_05 = (
+        PROJECT_ROOT / "docs" / "core" / "05_DATA_SOURCES_AND_INGESTION.md"
+    ).read_text(encoding="utf-8")
+    core_09 = (
+        PROJECT_ROOT
+        / "docs"
+        / "core"
+        / "09_TEST_ACCEPTANCE_AND_GOLDEN_CASES.md"
+    ).read_text(encoding="utf-8")
+
+    combined = "\n".join((core_02, core_04, core_05, core_09))
+    for token in (
+        "S14-CS-1.1",
+        "SERIES_GAP_YEARS",
+        "CASE SELECTION RECONSTRUCTION PASS",
+        "regulatory_authority",
+        "NO_PUBLIC_TENDER_FOUND",
+        "identity_exclusions",
+    ):
+        assert token in combined
+    assert "CASE-SELECTION-S15-b96de36ff0ce" in core_04
+    assert "coexists_with" in core_04
+    assert "scope_units" in core_04
+    assert "recorded four document identities" in core_09
+    assert "missing years are not zero trade" in core_09
 
 
 def test_s14b_governed_docs_record_portfolio_routes_and_limits() -> None:

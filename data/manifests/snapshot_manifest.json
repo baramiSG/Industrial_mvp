@@ -4,6 +4,11 @@
   "policy": "Golden cases and synthetic scenarios run only against pinned files in this manifest; case derivation inputs and retained superseded operating-configuration bytes are also hash-pinned.",
   "files": [
     {
+      "path": "data/snapshots/partners/PARTNERS-SAU-UN-COMTRADE-2026-09-13-edbd1926e196.json",
+      "sha256": "a4ca8f7df09e7b038dcf290e6d8eab01fd15042d63659155c615c0d48c4793e5",
+      "bytes": 44761
+    },
+    {
       "path": "data/snapshots/partners/PARTNERS-SAU-UN-COMTRADE-2026-09-13.json",
       "sha256": "e523c834e18193385f5f29c954c48b1c9e79023d401d560b5ddea78036cbe47b",
       "bytes": 68075
@@ -302,6 +307,46 @@
       "path": "data/raw/producer_sabic/9b661d9033f799e8a71ba1317746699a6873aabda620390ae028a81937c48322/20260912T052310Z/coverage.json",
       "sha256": "ca6c70c0132aea1af7951571fde8998530f3f72155361d3609977e605cbff8de",
       "bytes": 583
+    },
+    {
+      "path": "data/raw/producer_sabic_agrinutrients/5400291f0bd7736f82512fdd00ef61a7fe4e6ed4ebf8d5c9e0a3ed9e593cbb44/20260913T035235Z/page-0001.contract.json",
+      "sha256": "8e72810843918e5d41de3c5f833a59b682e20ddf3acd1b8f2ffcddfa36ba93ef",
+      "bytes": 2052
+    },
+    {
+      "path": "data/raw/producer_sabic_agrinutrients/5400291f0bd7736f82512fdd00ef61a7fe4e6ed4ebf8d5c9e0a3ed9e593cbb44/20260913T035235Z/page-0001.payload.html.gz",
+      "sha256": "92f3f9c1b4fc71e3a49acd968f58e87d717a102a3075b8474e66b7c8f0c08d28",
+      "bytes": 9028
+    },
+    {
+      "path": "data/raw/producer_sabic_agrinutrients/d853eeed63fac84dc43b5bb39203f34c3f8e2e6357cca1a8110bc1f9b418717b/20260913T035235Z/coverage.json",
+      "sha256": "335310bdf8d4a62bce55d83d97d22c5caf5ea98849b29b2f74cb3d6c1a40d267",
+      "bytes": 768
+    },
+    {
+      "path": "data/raw/producer_sabic_agrinutrients/d853eeed63fac84dc43b5bb39203f34c3f8e2e6357cca1a8110bc1f9b418717b/20260913T035235Z/page-0001.contract.json",
+      "sha256": "4d43d8a92d334aa65169351e3a4dd6839523f8bd01c06c9ff89ca9ac7a2d4691",
+      "bytes": 2363
+    },
+    {
+      "path": "data/raw/producer_sabic_agrinutrients/d853eeed63fac84dc43b5bb39203f34c3f8e2e6357cca1a8110bc1f9b418717b/20260913T035235Z/page-0001.payload.pdf.gz",
+      "sha256": "49ae9b6aa850676cd9ce3c63d4af5ed1df4e01e8757f677b996680bfabef13a3",
+      "bytes": 6550136
+    },
+    {
+      "path": "data/raw/producer_spimaco/1eb1608ff72ba3991b1542e2161ca614e27fcd200e68ee4cf0e41e0af57c1b5f/20260913T035150Z/coverage.json",
+      "sha256": "641345fcda2bccf3ad1d2293d7d0f15d531bf86e65b76c5907bd8ed52d941d97",
+      "bytes": 722
+    },
+    {
+      "path": "data/raw/producer_spimaco/1eb1608ff72ba3991b1542e2161ca614e27fcd200e68ee4cf0e41e0af57c1b5f/20260913T035150Z/page-0001.contract.json",
+      "sha256": "bb939a04e01525fe8ac7e3c98daa26bf59c2cdd9d3b37dc02677eca7925ad3dc",
+      "bytes": 2368
+    },
+    {
+      "path": "data/raw/producer_spimaco/1eb1608ff72ba3991b1542e2161ca614e27fcd200e68ee4cf0e41e0af57c1b5f/20260913T035150Z/page-0001.payload.pdf.gz",
+      "sha256": "a0ce4c7499c4a09ca9c17001486522683f2ccc621c12d15d4c5131ad6405d7a9",
+      "bytes": 283368
     },
     {
       "path": "data/raw/producer_tasnee/eb5a146ff3d871c07bc11b18f785de1c0ae6d194619601401d36e919eb89d9f3/20260912T050944Z/attempt.json",
@@ -794,6 +839,31 @@
       "bytes": 1871838
     },
     {
+      "path": "data/raw/sfda_registers/136176043b28949805d6df8fee9e8fadbc740460bacb2a5b50e7da5a2f47aca9/20260913T035254Z/page-0001.contract.json",
+      "sha256": "24906a6782293fff581e7ae778c6949a339b76c8559b18eb79f324d2e0854b54",
+      "bytes": 2018
+    },
+    {
+      "path": "data/raw/sfda_registers/136176043b28949805d6df8fee9e8fadbc740460bacb2a5b50e7da5a2f47aca9/20260913T035254Z/page-0001.payload.html.gz",
+      "sha256": "94d3737a21ba48c8036259bb7cfc516538762cf566e0582749feb281e84b6601",
+      "bytes": 12842
+    },
+    {
+      "path": "data/raw/sfda_registers/e4dc166154818550daa40849d1cbf5d7219e9606bf2d902f5c47f49f60f85a25/20260913T035254Z/coverage.json",
+      "sha256": "10388c074274b6480bdd5b9de8dabe922f04c0701f6cd0136d6ec77af19d2a8b",
+      "bytes": 642
+    },
+    {
+      "path": "data/raw/sfda_registers/e4dc166154818550daa40849d1cbf5d7219e9606bf2d902f5c47f49f60f85a25/20260913T035254Z/page-0001.contract.json",
+      "sha256": "827006e84dc4e282659cc2cf96f9ae7620b654e5c3817f5f9d17e2f58440c2d9",
+      "bytes": 2126
+    },
+    {
+      "path": "data/raw/sfda_registers/e4dc166154818550daa40849d1cbf5d7219e9606bf2d902f5c47f49f60f85a25/20260913T035254Z/page-0001.payload.html.gz",
+      "sha256": "7624ad55d5af2cf9d12888222b3f711ab76318d03f23cce75431b9aa2851d180",
+      "bytes": 13146
+    },
+    {
       "path": "data/raw/tadawul_disclosures/83faa784ed004c68dbb8a9784d5436ca7ba34a91c969aadbf14edab73b0935b6/20260912T050943Z/attempt.json",
       "sha256": "92cec2e9b6c5484ee1d3d9e8fb57bfacecd01fc9a7576e4a2db00a3efe2ec52c",
       "bytes": 1411
@@ -879,6 +949,36 @@
       "bytes": 593
     },
     {
+      "path": "data/raw/un_comtrade/17af727e7ff951dfc953531a605ba1da941925fb4660b6254f06ca3958742680/20260913T035527Z/coverage.json",
+      "sha256": "47c32ac51671b54e77d90d421b365bb60a7db47d7e4989bc9b1157a5a169fd4c",
+      "bytes": 611
+    },
+    {
+      "path": "data/raw/un_comtrade/17af727e7ff951dfc953531a605ba1da941925fb4660b6254f06ca3958742680/20260913T035527Z/page-0001.contract.json",
+      "sha256": "bcc7e8d862b6f4f10458a5e78b05a306a76bfe1175fa4bfceba4497063c5a2cf",
+      "bytes": 2121
+    },
+    {
+      "path": "data/raw/un_comtrade/17af727e7ff951dfc953531a605ba1da941925fb4660b6254f06ca3958742680/20260913T035527Z/page-0001.payload.json.gz",
+      "sha256": "bdabfa177642a0a7fc9468525a17fde4703c1fedb55190e24977c5dc139956af",
+      "bytes": 1098
+    },
+    {
+      "path": "data/raw/un_comtrade/1827a470893b856cc7ce7bee55ab13f63c3a958c85ac7fdffc599369ee38f78c/20260913T035527Z/coverage.json",
+      "sha256": "5ae5cb04b96319cfc461c4bdd189bab27f4fa483ae0099b57a0dde86dc110c82",
+      "bytes": 611
+    },
+    {
+      "path": "data/raw/un_comtrade/1827a470893b856cc7ce7bee55ab13f63c3a958c85ac7fdffc599369ee38f78c/20260913T035527Z/page-0001.contract.json",
+      "sha256": "dcdc6d3e78f32e50ae6e41225a3a5d422f4c1da31a98a229d364b83133fd1e6b",
+      "bytes": 2119
+    },
+    {
+      "path": "data/raw/un_comtrade/1827a470893b856cc7ce7bee55ab13f63c3a958c85ac7fdffc599369ee38f78c/20260913T035527Z/page-0001.payload.json.gz",
+      "sha256": "e6146f618347e163f4e7bd96e788768c653f1ed4e673b5df298ac39b78b86fcb",
+      "bytes": 739
+    },
+    {
       "path": "data/raw/un_comtrade/1d18b538747c145e21b1f47e0d87b7110e7b11f585def32b348c804825a1c5b9/20260912T144127Z/attempt.json",
       "sha256": "8cf7a6ef48ec6d63cd5f03b4070a96dda1466262d412bf3b6be040187b47deab",
       "bytes": 1353
@@ -946,6 +1046,16 @@
     {
       "path": "data/raw/un_comtrade/2756114817ce00e9ae7e36f3e728ad326375a58bc49a3d69fd1b10052fb10caf/20260913T015620Z/page-0001.payload.html.gz",
       "sha256": "7136a328cee1779b52526c2ee28d909ccfcbbc525fbdb0e2cf19275ad0a13e2d",
+      "bytes": 38159
+    },
+    {
+      "path": "data/raw/un_comtrade/2756114817ce00e9ae7e36f3e728ad326375a58bc49a3d69fd1b10052fb10caf/20260913T035527Z/page-0001.contract.json",
+      "sha256": "705cd6c596d04e33d938a9e18ebf22a414a80ce2b5235bbc1baf0a91204680b5",
+      "bytes": 1955
+    },
+    {
+      "path": "data/raw/un_comtrade/2756114817ce00e9ae7e36f3e728ad326375a58bc49a3d69fd1b10052fb10caf/20260913T035527Z/page-0001.payload.html.gz",
+      "sha256": "eb3cf2d4f63f868fef3ecdb51d7691ed7032fb58af9a2867083e231dc0c21061",
       "bytes": 38159
     },
     {
@@ -1489,6 +1599,21 @@
       "bytes": 593
     },
     {
+      "path": "data/raw/un_comtrade/87d94d8497e45ff7bbd95e2cd309a5235645aa0fd26c26f6804ff47d254f5915/20260913T035527Z/coverage.json",
+      "sha256": "a735f5f26962481ed21f758ecdd6c3b29e53fdc3b037edfe8199b645e9e5dfb0",
+      "bytes": 611
+    },
+    {
+      "path": "data/raw/un_comtrade/87d94d8497e45ff7bbd95e2cd309a5235645aa0fd26c26f6804ff47d254f5915/20260913T035527Z/page-0001.contract.json",
+      "sha256": "fdcbd719db3712dd7d440aa6235a4d0cd23be3e3071ba18b48b39e6400136653",
+      "bytes": 2121
+    },
+    {
+      "path": "data/raw/un_comtrade/87d94d8497e45ff7bbd95e2cd309a5235645aa0fd26c26f6804ff47d254f5915/20260913T035527Z/page-0001.payload.json.gz",
+      "sha256": "67cbd847dc2a0b50be9784c254efc807b3051bb0539dc4a245222b503163d434",
+      "bytes": 1140
+    },
+    {
       "path": "data/raw/un_comtrade/9321bf71a9ba03f71401ac02eff925a20d0208550a5d487841b0b5e058151100/20260912T144127Z/attempt.json",
       "sha256": "2ba17b5c03c5eaf9f4cf533f886d4c70faf3a87d9230aed0df0c2873dba23425",
       "bytes": 1353
@@ -1527,6 +1652,21 @@
       "path": "data/raw/un_comtrade/9a316d623d7ab65a70f95eba1f5176f39bc5c68a0ab495e5a16732f85ab7b5a2/20260912T144127Z/coverage.json",
       "sha256": "5fbeec62ff48ad5685a9a2537e21f12146641a4a5bc81cb36bb208bf22dbcc5f",
       "bytes": 593
+    },
+    {
+      "path": "data/raw/un_comtrade/9ce4df8e1e9083a916ae49cc448a2b08c86ff7b9c88d28d794a7bc938e5498d8/20260913T035527Z/coverage.json",
+      "sha256": "749c7eaa5a77298959caed9d4d9070f04343923a000eec1da91f808a0ec606ef",
+      "bytes": 611
+    },
+    {
+      "path": "data/raw/un_comtrade/9ce4df8e1e9083a916ae49cc448a2b08c86ff7b9c88d28d794a7bc938e5498d8/20260913T035527Z/page-0001.contract.json",
+      "sha256": "e5a454bee0dd90233461a254ea583cf14a7f43497eadbeedc2f08d20369d31dd",
+      "bytes": 2121
+    },
+    {
+      "path": "data/raw/un_comtrade/9ce4df8e1e9083a916ae49cc448a2b08c86ff7b9c88d28d794a7bc938e5498d8/20260913T035527Z/page-0001.payload.json.gz",
+      "sha256": "2787028c3227c99fa200b5690eca971f4b567d26f305132edec47194288dfef6",
+      "bytes": 1091
     },
     {
       "path": "data/raw/un_comtrade/9e35400dbe5ba3f4b239dfbdc7d755e5ab36445dffad1acc03b92437fea6f974/20260912T144127Z/attempt.json",
@@ -1909,6 +2049,21 @@
       "bytes": 593
     },
     {
+      "path": "data/raw/wco_hs_nomenclature/4e3dbeff29ba098bf702fbdd21f6195dc35dbde786c6b9d5b129c7dba4e68e0e/20260913T033253Z/coverage.json",
+      "sha256": "12dabc2e0a95e4bc9dc6fecaddb6bd64d96bdf935c8613c7c5bf5e628b5d33bb",
+      "bytes": 847
+    },
+    {
+      "path": "data/raw/wco_hs_nomenclature/4e3dbeff29ba098bf702fbdd21f6195dc35dbde786c6b9d5b129c7dba4e68e0e/20260913T033253Z/page-0001.contract.json",
+      "sha256": "cf30e78f86fb7add33173361e05ea9e3fd868819f9e7043b09df2f10c4eee48f",
+      "bytes": 2542
+    },
+    {
+      "path": "data/raw/wco_hs_nomenclature/4e3dbeff29ba098bf702fbdd21f6195dc35dbde786c6b9d5b129c7dba4e68e0e/20260913T033253Z/page-0001.payload.pdf.gz",
+      "sha256": "1c38cb4a19655ce260e32b2c3f4ffba585fb0b5d22200e22c32e6eb510485571",
+      "bytes": 146469
+    },
+    {
       "path": "data/raw/wco_hs_nomenclature/53d6f01ac0627b9cab0f1468634e00c587d7d0ed897035abc03da3541673aad4/20260912T233006Z/coverage.json",
       "sha256": "3bfdc19030447301e9c78cedbf832d0fa44f15f821893f0f937b50d150f280e6",
       "bytes": 847
@@ -1962,6 +2117,46 @@
       "path": "data/raw/wco_hs_nomenclature/931bd99007771bde5a445df36c3cddc3a4948d0f3fbcbf0b50709c4e108e7009/20260912T233006Z/page-0001.payload.html.gz",
       "sha256": "cc51447036905c431fe5dd22479998778b3e98cdfe6f8850aec2189c5b6f1f83",
       "bytes": 11129
+    },
+    {
+      "path": "data/raw/wco_hs_nomenclature/931bd99007771bde5a445df36c3cddc3a4948d0f3fbcbf0b50709c4e108e7009/20260913T033253Z/page-0001.contract.json",
+      "sha256": "27d895a393b2cb9ef537603f8470d3cca75fb2e5a6a1b7b97b0a0747d4a1a4dc",
+      "bytes": 2219
+    },
+    {
+      "path": "data/raw/wco_hs_nomenclature/931bd99007771bde5a445df36c3cddc3a4948d0f3fbcbf0b50709c4e108e7009/20260913T033253Z/page-0001.payload.html.gz",
+      "sha256": "cc51447036905c431fe5dd22479998778b3e98cdfe6f8850aec2189c5b6f1f83",
+      "bytes": 11129
+    },
+    {
+      "path": "data/raw/wco_hs_nomenclature/fd99902db1af76947dfb4e08ebb16df3114e0826cb5d2cf0620204cdc481a5a6/20260913T033253Z/coverage.json",
+      "sha256": "4eecf841cde7f0d1c9828a8e14605faa04a4f9f4515b453308671c569fe3026a",
+      "bytes": 847
+    },
+    {
+      "path": "data/raw/wco_hs_nomenclature/fd99902db1af76947dfb4e08ebb16df3114e0826cb5d2cf0620204cdc481a5a6/20260913T033253Z/page-0001.contract.json",
+      "sha256": "e02e42b2ca8fedd39567ade51b125d33c8898bf88bfad44cf2ba3bdc907518a7",
+      "bytes": 2542
+    },
+    {
+      "path": "data/raw/wco_hs_nomenclature/fd99902db1af76947dfb4e08ebb16df3114e0826cb5d2cf0620204cdc481a5a6/20260913T033253Z/page-0001.payload.pdf.gz",
+      "sha256": "71a2e59c8ea752416d91dc0356682352e6e6cbd8684438ad9ceddeafdd61f45e",
+      "bytes": 288910
+    },
+    {
+      "path": "data/raw/wco_hs_nomenclature/fe3ed4f5325a7f74b9864371286c3ad9d8fe32f4cff5c93ece0bf8a9551e1e11/20260913T033253Z/coverage.json",
+      "sha256": "f1ae09cb4d7159f0a42d1613e4465d409d378d804b41c4fe1059ecce54ed6a2b",
+      "bytes": 847
+    },
+    {
+      "path": "data/raw/wco_hs_nomenclature/fe3ed4f5325a7f74b9864371286c3ad9d8fe32f4cff5c93ece0bf8a9551e1e11/20260913T033253Z/page-0001.contract.json",
+      "sha256": "7e1a4a0a31bf2298b31ca78f6ee5a26e93302fce6ea5312f4f3b3137aef45f1e",
+      "bytes": 2542
+    },
+    {
+      "path": "data/raw/wco_hs_nomenclature/fe3ed4f5325a7f74b9864371286c3ad9d8fe32f4cff5c93ece0bf8a9551e1e11/20260913T033253Z/page-0001.payload.pdf.gz",
+      "sha256": "810c44ab504290c1feb64d85827ee63c53d25aab4dfd5b7a749bcf18da695dd4",
+      "bytes": 127164
     },
     {
       "path": "data/raw/wits_trade/27ed67ca6f2267ef904c9465f3990a9087fa6adebeb85b31f5545e549ce1d937/20260903T210859Z/attempt.json",
@@ -2359,6 +2554,26 @@
       "bytes": 425
     },
     {
+      "path": "data/documents/producer_sabic_agrinutrients/lists/producer_sabic_agrinutrients-v1.json",
+      "sha256": "a178b1e813fcc94a4647ef7dd8a0e844fe960840b6b762d9f6d863501f2a45c0",
+      "bytes": 1966
+    },
+    {
+      "path": "data/documents/producer_sabic_agrinutrients/records/DOC-PRODUCER-SABIC-AGRINUTRIENTS-d853eeed63fa-42fdc62825bc.json",
+      "sha256": "aaf9df26f90416450442c573be049b5029b12ab965a659340239c063346ce28d",
+      "bytes": 856445
+    },
+    {
+      "path": "data/documents/producer_spimaco/lists/producer_spimaco-v1.json",
+      "sha256": "4b8e164b365d1094b3528da8ade2a942d486f4efea978dbe81a3f2ff7021a1f7",
+      "bytes": 2565
+    },
+    {
+      "path": "data/documents/producer_spimaco/records/DOC-PRODUCER-SPIMACO-1eb1608ff72b-884197ccc5a7.json",
+      "sha256": "2064331f1d892c49baa17940bd092560c7dbdd6f6dee747a7fa68a9ae74989fd",
+      "bytes": 28596
+    },
+    {
       "path": "data/documents/producer_tasnee/lists/producer_tasnee-v1.json",
       "sha256": "b457eb06fc5eead7256b893896bd51d495b6c53576e94c669a83df73d9ea302c",
       "bytes": 422
@@ -2464,6 +2679,16 @@
       "bytes": 170915
     },
     {
+      "path": "data/documents/sfda_registers/lists/sfda_registers-v1.json",
+      "sha256": "6ff667a672d27df6e753883a89844405679104ee42a4eb13ec7b5488b2812f45",
+      "bytes": 1705
+    },
+    {
+      "path": "data/documents/sfda_registers/records/DOC-SFDA-REGISTERS-e4dc16615481-5f1b33b9c8fc.json",
+      "sha256": "9d142e62cdc79607d6e005c144d57505dd2caf12573e26453a662aff96256e91",
+      "bytes": 57776
+    },
+    {
       "path": "data/documents/tadawul_disclosures/lists/tadawul_disclosures-v1.json",
       "sha256": "0a1c8fa8a680dadc84f4119d14f010dae125f8391d42e458c6a66fff4e19f020",
       "bytes": 451
@@ -2477,6 +2702,16 @@
       "path": "data/documents/wco_hs_nomenclature/lists/wco_hs_nomenclature-v1.json",
       "sha256": "7df6cec1eaaa185bcfb49af7545652890637ef19c4859a53c609c17184c4c06d",
       "bytes": 3002
+    },
+    {
+      "path": "data/documents/wco_hs_nomenclature/lists/wco_hs_nomenclature-v2.json",
+      "sha256": "679d9043f1927214069da31461ebe151d535eb62940c13c94308f8912a24297f",
+      "bytes": 3131
+    },
+    {
+      "path": "data/documents/wco_hs_nomenclature/records/DOC-WCO-HS-NOMENCLATURE-4e3dbeff29ba-7ad8d2b476a9.json",
+      "sha256": "9d0cba7d3127b6dbc4aa715e667e7720ff60cbf5e2766926208e58b3a710dede",
+      "bytes": 24865
     },
     {
       "path": "data/documents/wco_hs_nomenclature/records/DOC-WCO-HS-NOMENCLATURE-53d6f01ac062-0926bf9934da.json",
@@ -2494,6 +2729,16 @@
       "bytes": 17654
     },
     {
+      "path": "data/documents/wco_hs_nomenclature/records/DOC-WCO-HS-NOMENCLATURE-fd99902db1af-d01a792902be.json",
+      "sha256": "b60762f9c60b9ee26e176f6e8cf4ebee683549743ace207ecaf72ec604e2f168",
+      "bytes": 83236
+    },
+    {
+      "path": "data/documents/wco_hs_nomenclature/records/DOC-WCO-HS-NOMENCLATURE-fe3ed4f5325a-88edcc1ee93d.json",
+      "sha256": "8073a7e800d16b30b7ba169e6de6cc213b6005d15699fd36c7a82267bc2238e4",
+      "bytes": 17820
+    },
+    {
       "path": "data/entities/mentions/mentions-v1.json",
       "sha256": "a12e24c31b02f11a0a7e116760b8a80814ddd97241716651c8cc60184ca1cc83",
       "bytes": 21091
@@ -2504,9 +2749,19 @@
       "bytes": 3914
     },
     {
+      "path": "data/entities/mentions/mentions-v3.json",
+      "sha256": "219b097bddda2af67d44ab56f2ade8562fa312f8c219b934fcf72707ba1e2f8c",
+      "bytes": 1823
+    },
+    {
       "path": "data/entities/resolution/ENTITIES-2026-09-12-a12e24c31b02.json",
       "sha256": "97e68dd3e79b0ec1acb01bcdb5c5695296ba3d917f639afbd4079702d052f701",
       "bytes": 57033
+    },
+    {
+      "path": "data/entities/resolution/ENTITIES-2026-09-13-219b097bddda.json",
+      "sha256": "fc8a54d6927fb2055fdd7e3bb79765b1171674da2748dd84b13d991e253fc7a2",
+      "bytes": 30774
     },
     {
       "path": "data/entities/resolution/ENTITIES-2026-09-13-bebc9d15cbf1.json",
@@ -3134,6 +3389,26 @@
       "bytes": 29425
     },
     {
+      "path": "data/cases/briefs/CASE-BRIEF-SAU-H6-294110-v1.json",
+      "sha256": "15fc43062eccb6160c4bc3c4955e9aa63de6663e4b0a963fe85717ef043162f7",
+      "bytes": 4616
+    },
+    {
+      "path": "data/cases/briefs/CASE-BRIEF-SAU-H6-294120-v1.json",
+      "sha256": "a592ded84abc1e85cbb52386e1c50d643fa4abd672d3347fbd4bc08c9fd4340b",
+      "bytes": 4482
+    },
+    {
+      "path": "data/cases/briefs/CASE-BRIEF-SAU-H6-310430-v1.json",
+      "sha256": "cf588c9e08b50c6118fd33435380d8a6fc1cc21075c5175627de259529edd65c",
+      "bytes": 4308
+    },
+    {
+      "path": "data/cases/briefs/CASE-BRIEF-SAU-H6-310510-v1.json",
+      "sha256": "9b46334263a900c740cfc1b46a283170491fc5589981fb3f1723f13e1ef37429",
+      "bytes": 4627
+    },
+    {
       "path": "data/cases/briefs/CASE-BRIEF-SAU-H6-392010-v1.json",
       "sha256": "3619ba83548a72f8feb34ba973673bebb90de50be2c056eb30eb89888e72226b",
       "bytes": 4935
@@ -3164,9 +3439,19 @@
       "bytes": 68706
     },
     {
+      "path": "data/cases/selection/CASE-SELECTION-S15-b96de36ff0ce.json",
+      "sha256": "65d1fe62f7dba44a7dd52f5bc40d4566576d696cc679b5c0a97e3f31efcd3fbe",
+      "bytes": 72651
+    },
+    {
       "path": "data/cases/selection/comtrade-partners-s14-v1.json",
       "sha256": "4f50d2753dc27ecd86ff22f562f493c33667e1418c02a6e128b2ee711e5d1718",
       "bytes": 125
+    },
+    {
+      "path": "data/cases/selection/comtrade-partners-s15-v1.json",
+      "sha256": "14e7c0cf22c442296130e0b6447d25682053003a6d811c3a85fac3513c133485",
+      "bytes": 168
     },
     {
       "path": "data/cases/selection/hs6-disclosure-terms-v1.json",
@@ -3174,9 +3459,19 @@
       "bytes": 24986
     },
     {
+      "path": "data/cases/selection/hs6-disclosure-terms-v2.json",
+      "sha256": "eebe4ffab2d541b4356209407cc53b5710b16d65c2a14179fb06495762f22756",
+      "bytes": 30323
+    },
+    {
       "path": "data/cases/selection/identity-exclusions-v1.json",
       "sha256": "5e18dd7a5573610d6d02909cf9f6e792646de61650d1a6d7c5eb37a9308941c6",
       "bytes": 622
+    },
+    {
+      "path": "data/cases/selection/identity-exclusions-v2.json",
+      "sha256": "464f25e3c88efd3bde577412792eebfa9a8b9244df3e262daf3094ad34b5f301",
+      "bytes": 2624
     },
     {
       "path": "data/cases/selection/wits-partners-s14-v1.json",
@@ -3192,6 +3487,11 @@
       "path": "config/history/product_families.v1-1.0.0.yaml",
       "sha256": "841bc5ac732b9f9348495d3594926dea84dd4df7aab134092f81d06b4de7ecd4",
       "bytes": 988
+    },
+    {
+      "path": "config/history/product_families.v1-1.1.0.yaml",
+      "sha256": "62fa9c2944474ffbc5952801ba676a2adf750870a88969c59e22337b4564446b",
+      "bytes": 2493
     }
   ]
 }

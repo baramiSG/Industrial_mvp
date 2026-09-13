@@ -580,3 +580,38 @@ numeric zero.
 `nomenclature_authority`, restricted to `wco_hs_nomenclature`, Class B and
 `TARGET_PRODUCT_IDENTITY`; it cannot support producer capability or nameplate
 facts.
+
+## 13. S15 selection and scoped partner-snapshot identity
+
+`S14-CS-1.1` extends the version-gated case-selection record. Before tiering it
+removes every candidate with classification-continuity gaps as
+`SERIES_GAP_YEARS`; each row records the missing import years, and missing
+years are not observations of zero trade. Residual identity removal is allowed
+only through a hashed `identity_exclusions` row carrying the HS revision,
+reason, verbatim WCO text and stored page/line address.
+
+The write-once S15 record is
+`CASE-SELECTION-S15-b96de36ff0ce`. Its input block freezes the four document
+identities available at T5. Reconstruction resolves those recorded identities
+and compares canonical bytes; it does not substitute documents acquired later.
+A current-state diagnostic after W-A15b includes a fifth SABIC Agri-Nutrients
+record and therefore has a different digest, while retaining the same four
+selected HS6 codes. That diagnostic is not a replacement selection record.
+
+An acquired snapshot normally retains
+`<KIND>-SAU-<SOURCE>[-<NOMENCLATURE>]-<as_of_date>`. When a different unit set
+would collide at the same kind, source, nomenclature and date, only the new
+record gains `-<scope12>`, where `scope12` is the first twelve hexadecimal
+characters of SHA-256 over the canonical sorted unit keys. The scoped record
+stores those keys in `scope_units` and a one-way `coexists_with` reference to
+the unscoped sibling; it must not carry `supersedes`. Validation requires the
+sibling to exist, requires equal identity dimensions, recomputes the suffix,
+and rejects overlapping unit keys. Reconstruction uses each record's own
+recorded units. Thus
+`PARTNERS-SAU-UN-COMTRADE-2026-09-13-edbd1926e196` contains only the four S15
+units and coexists with the unchanged S14a snapshot for its disjoint unit set.
+
+`DocumentList 1.0.0` also admits `regulatory_authority` only for
+`sfda_registers`, Class B and its configured support codes. This source kind
+does not turn a company-list observation into product capability, production
+or qualification evidence.

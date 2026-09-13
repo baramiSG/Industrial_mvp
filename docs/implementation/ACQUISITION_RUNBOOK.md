@@ -185,3 +185,41 @@ authorized T9 invocation. The generator then adds `data/cases/**`,
 `config/history/**`, the new raw/document/entity/partner artifacts and updates
 only the authorized configuration/Core authority hashes. No second invocation
 is authorized.
+
+## S15a pharma/API and fertiliser evidence
+
+S15a's live windows are closed. Do not re-acquire or load `.env` when
+reconstructing this slice.
+
+| Window / source | Bound | Recorded outcome |
+|---|---:|---|
+| W-A15a / WCO 29/30/31 | one terms + three PDFs | run `20260913T033253Z`; three COMPLETE Class-B identity records |
+| W-A15b / SPIMACO | two listed documents | run `20260913T035150Z`; first unit COMPLETE; local parser dependency stop before the second request |
+| W-A15b / SABIC Agri-Nutrients | one terms + one report | run `20260913T035235Z`; COMPLETE |
+| W-A15b / SFDA register | one terms + one page | run `20260913T035254Z`; COMPLETE |
+| W-P15 / UN Comtrade | one terms + four selected units | run `20260913T035527Z`; 294110/294120/310430/310510 COMPLETE; five actual HTTP requests |
+
+The W-P15 aggregate RunReport count 14 is the cumulative-sum artefact
+2+3+4+5, not fourteen HTTP requests. The scoped partner snapshot contains only
+the four listed units and reconstructs independently beside the same-day S14a
+snapshot.
+
+Use the recorded-input reconstruction contract:
+
+```bash
+make reconstruct-selection
+make reconstruct
+```
+
+`make reconstruct-selection` must print
+`CASE SELECTION RECONSTRUCTION PASS (2 records)`. Do not use a raw
+current-state `select` as replacement of the T5 record: after W-A15b it
+correctly observes the later SABIC document and changes the diagnostic digest,
+while the selected set remains unchanged. OD-16 retains
+`CASE-SELECTION-S15-b96de36ff0ce`.
+
+Every `U` capability value means not identified within the cited stored
+evidence; it does not mean absent. `NO_PUBLIC_TENDER_FOUND` is scoped only to
+the recorded search. Missing years and unavailable quantities are not zero.
+The single S15a manifest generation is authorized by ADR-023 only after all
+pre-generation gates pass; a second run requires a separate owner ruling.

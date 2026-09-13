@@ -185,6 +185,31 @@ The reviewer found and the owner corrected Core 04's 2.2.0 exact-key names
 before a second/final S14b manifest generation. PR CI and merged-main CI both
 passed 5/5. Parent **S14 is COMPLETE**; S15 is next.
 
+## S15 split (SLICE_GRAPH §5)
+
+The approved decomposition
+`.autonomous-workflow/plans/s15-deep-cases-b/cycle-1/decomposition-1.json`
+(`ea01de65…`) partitions S15 into:
+
+1. `s15a-case-selection-evidence-pharma-fertilizers` — `S14-CS-1.1`,
+   product-family/source versioning, bounded WCO/producer/SFDA/Comtrade
+   evidence, mentions-v3, four CaseBriefs and PublicSnapshot 2.2.0 engine
+   proofs. It changes no portfolio, scenario, golden or browser root.
+2. `s15b-deep-case-portfolio-scenarios-and-goldens` — consumes the reviewed
+   S15a records, adds portfolio/scenario/golden/browser coverage and computes
+   the owner-approved route demonstrations without changing real decisions.
+
+The parent completes only after both children merge. S15a preparation W1
+`697322e` was rebased onto M15
+`6dc966a9f210b47a94b96aaeffadcbcc6642415f` as W1'
+`7d4853e8d979d86a5fa932fbd4468bceacfb63b4`. The owner resolved the sole
+integration conflict to `CASE RECONSTRUCTION PASS (5 snapshots, 9 briefs)`.
+OD-16 retains recorded selection `CASE-SELECTION-S15-b96de36ff0ce`; its
+recorded-input reconstruction passes after W-A15b even though a current-state
+diagnostic sees the later SABIC document and changes its digest without
+changing the selected set. S15a remains an unapproved local implementation
+candidate until independent review.
+
 ## Explicit non-goals for v0.3.0
 
 Authentication, role-based approval, official override workflow, confidential Ministry connectors, live customs transactions, paid-data acquisition, model training on Ministry applications, causal incentive-effect claims, generic AI chat, CRM, document management, any change to the methodology DOCX, and any alteration of the v0.2.0 tag, release records or frozen v1 golden snapshot files.
