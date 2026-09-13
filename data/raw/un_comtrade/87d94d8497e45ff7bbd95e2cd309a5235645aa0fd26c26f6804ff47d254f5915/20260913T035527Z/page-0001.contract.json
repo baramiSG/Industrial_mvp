@@ -1,0 +1,67 @@
+{
+  "access_classification": "public_registered",
+  "authority": "UN Comtrade",
+  "byte_count": 12664,
+  "compressed_sha256": "67cbd847dc2a0b50be9784c254efc807b3051bb0539dc4a245222b503163d434",
+  "content_type": "application/json",
+  "credential_env_var": "IOR_COMTRADE_SUBSCRIPTION_KEY",
+  "credential_used": true,
+  "endpoint_or_document": "https://comtradeapi.un.org/data/v1/get/C/A/HS?reporterCode=682&period=2024&flowCode=M&cmdCode=310510&motCode=0&customsCode=C00&includeDesc=true",
+  "flow": "imports",
+  "http_status": 200,
+  "license_or_usage_note": "Terms captured from https://uncomtrade.org/docs/policy-on-use-and-re-dissemination/",
+  "nomenclature": "HS",
+  "normalization_reason": null,
+  "normalization_status": "NORMALIZED",
+  "page_index": 1,
+  "page_meta": {
+    "enumerated_children": null,
+    "next_page_token_present": false,
+    "page_index": 1,
+    "pages_expected": 1,
+    "rows_in_page": 12
+  },
+  "partner": "0",
+  "period": "2024",
+  "product_code": "310510",
+  "product_scope": "EXPLICIT",
+  "query_contract": {
+    "flow": "imports",
+    "nomenclature": "HS",
+    "parameters": [
+      {
+        "key": "partner_dimension_query",
+        "value": "&includeDesc=true"
+      }
+    ],
+    "partner": "0",
+    "periods": [
+      "2024"
+    ],
+    "product_codes": [
+      "310510"
+    ],
+    "product_scope": "EXPLICIT",
+    "reporter": "SAU",
+    "source_id": "un_comtrade",
+    "stage": "PARTNERS"
+  },
+  "query_hash": "87d94d8497e45ff7bbd95e2cd309a5235645aa0fd26c26f6804ff47d254f5915",
+  "raw_file_path": "data/raw/un_comtrade/87d94d8497e45ff7bbd95e2cd309a5235645aa0fd26c26f6804ff47d254f5915/20260913T035527Z/page-0001.payload.json.gz",
+  "reporter": "SAU",
+  "response_headers_subset": [
+    {
+      "name": "content-type",
+      "value": "application/json; charset=utf-8"
+    },
+    {
+      "name": "date",
+      "value": "Sun, 13 Sep 2026 03:55:43 GMT"
+    }
+  ],
+  "retrieved_at": "2026-09-13T03:55:46Z",
+  "run_id": "20260913T035527Z",
+  "sha256": "47b00ad51fd478841dca3fb5db0559a2f28d602d88e1fc60df10f967ba72d973",
+  "source_id": "un_comtrade",
+  "source_refresh_date": "2026-09-13"
+}

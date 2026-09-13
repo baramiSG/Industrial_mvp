@@ -1,0 +1,2285 @@
+{
+  "family_count": 2,
+  "inputs": {
+    "documents": {
+      "file_count": 4,
+      "files": [
+        {
+          "path": "data/documents/producer_maaden/records/DOC-PRODUCER-MAADEN-a48b1f95cba9-956b9a16c655.json",
+          "sha256": "799de8f3956bfa766b0aef210b4bd0123c5f27baf7b6e43e489d9bb69970b3d3"
+        },
+        {
+          "path": "data/documents/producer_maaden/records/DOC-PRODUCER-MAADEN-b1dd369ea0fe-dae44e050e70.json",
+          "sha256": "4711297a49aed623f3926f204821a4556f59d7b7812b77b7117e02b1fabbc4a2"
+        },
+        {
+          "path": "data/documents/wco_hs_nomenclature/records/DOC-WCO-HS-NOMENCLATURE-fd99902db1af-d01a792902be.json",
+          "sha256": "b60762f9c60b9ee26e176f6e8cf4ebee683549743ace207ecaf72ec604e2f168"
+        },
+        {
+          "path": "data/documents/wco_hs_nomenclature/records/DOC-WCO-HS-NOMENCLATURE-fe3ed4f5325a-88edcc1ee93d.json",
+          "sha256": "8073a7e800d16b30b7ba169e6de6cc213b6005d15699fd36c7a82267bc2238e4"
+        }
+      ],
+      "files_sha256": "fc3842f458196738d8c5630f2ccf9b4ff72169a5776563fd78d8b2a6a322a4a0",
+      "path": "data/documents",
+      "source_ids": [
+        "producer_maaden",
+        "producer_sabic_agrinutrients",
+        "wco_hs_nomenclature"
+      ]
+    },
+    "identity_exclusions": {
+      "path": "data/cases/selection/identity-exclusions-v2.json",
+      "sha256": "464f25e3c88efd3bde577412792eebfa9a8b9244df3e262daf3094ad34b5f301"
+    },
+    "product_families": {
+      "path": "config/product_families.v1.yaml",
+      "sha256": "0e37381f33802fc0822655eedac7a20fba0df082becdaf503b3df43d8ff41c19",
+      "version": "1.2.0"
+    },
+    "rule_parameters": {
+      "disclosure_coverage_key": true,
+      "frozen_hs6": [
+        "390210",
+        "721049"
+      ],
+      "quotas": {
+        "fertilizers": 2,
+        "pharma_api": 2
+      },
+      "rule_version": "S14-CS-1.1",
+      "viability_latest_import_net_weight": true
+    },
+    "screening": {
+      "file_count": 98,
+      "files": [
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/queues.json",
+          "sha256": "4519f9843d889486de7044b3017402d96dd95abb235c4e9f59fd8fd25c8f03e5"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/01.json",
+          "sha256": "cca899a070ad55d054e45021f922cfd5a45baa3f479f22bf2dccd50f472d49d2"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/02.json",
+          "sha256": "7e8943b100b5e72bf9ffb65a0effd12249d4a6d80bbafda1276e88f4c156848e"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/03.json",
+          "sha256": "f2f5c420be34e8302b677c1378695e9b6a721057c82d66bde678bb16081e6b82"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/04.json",
+          "sha256": "70516e45210de5ae84893e7a89e0ca0cf777e60410a3e880d012ce56fb73790c"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/05.json",
+          "sha256": "e34ecbdd9ac5cd20a4862eb309ae1c95c320d02f2603dbef332113ce74fe9246"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/06.json",
+          "sha256": "c0718b97c154ab209d92d617561672b7961c9464295d9ebb81968fd728d79f9c"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/07.json",
+          "sha256": "c2a0b061108fecb0864e8eec768b8b599ceaad5c97e019c8f081732fd00b19ae"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/08.json",
+          "sha256": "db72ffe6e766a28039578aa0893828c9a5a01cd303de5285fdb4f4cd81d5f6ac"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/09.json",
+          "sha256": "9ffde73a6fdfd7fa2a4794722196f33ef2ad77a1c5565bac222b727cf2e5c3c3"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/10.json",
+          "sha256": "3ff4c2c2907ef7fb7776992a766ebddd08084a48eb81414362ff7ef7596051c8"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/11.json",
+          "sha256": "5e004397434d4c1bf656ee4292f15a8d294bd632334963296fa9fdb712f3c276"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/12.json",
+          "sha256": "76a253bf3da2d587f404f667edcef1fdb0330b61800e720da7d3b13a992d0863"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/13.json",
+          "sha256": "4725fe8fed2b8e78b3e126a920d92f1ca475e1c8b42b24789e8b98352584d798"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/14.json",
+          "sha256": "0acd243346a3cde20973ea6c295e7e426c885c18f5e3d31328fe941d2a08edfc"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/15.json",
+          "sha256": "8adf2a03450d52186c0eadbb14c0a374bc1c04205fe8cb675eac17a0cfb019c6"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/16.json",
+          "sha256": "b49d4a874cf920d108073f92beb8cf792d9b5f22631178512a420637919491ef"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/17.json",
+          "sha256": "b34289db0187be87ee537a59b9ee710ab3f25c9e7f7c36d298ce9dbc01732982"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/18.json",
+          "sha256": "8a20652c433886b92578b9a8b028634cb2030f25e6aa4ed1ec5f9d6361893c0c"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/19.json",
+          "sha256": "04bfb84616efa7bfb2a0423122eec6d7f9af87d55acbd2658abd73a4735aea30"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/20.json",
+          "sha256": "4a4295683d583c5d8461f1c60474241e8031b2571dbaf76ed548939d4fa95cb0"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/21.json",
+          "sha256": "eb60e91d5dfeb656ccdb319525e5302e1f7ae635c4ea50b8ff92037fae07e9be"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/22.json",
+          "sha256": "5db2f40d3935450364102eb32da3bb876cabb5d1bbba51fe090add37f55aaca3"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/23.json",
+          "sha256": "c4517654b6aff570acdf4954793cca2da152b6883c388f87c8b2ec1786349600"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/24.json",
+          "sha256": "95b991eb5638732a3877abaa64df939d7b4dc5d847a448c1cae5b9c38615b491"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/25.json",
+          "sha256": "32255e92defc43e47a3a4fbff04cace3a499b5333aae18c2a606dd71fa08956d"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/26.json",
+          "sha256": "4a4a14e0d174a640d01895d94dc5f6e31ece8c9d4c70731b10a37f32ae1c44d3"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/27.json",
+          "sha256": "aa5964b4cc867df2954e21892bdcc314c7b1cf69b8622fc2fea629f25d42ee9d"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/28.json",
+          "sha256": "89950411e517fca66f00b1a78e97a778fc86d95b9eb5ae8e5ed61d82e57ee29a"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/29.json",
+          "sha256": "148d37c4798f7f273756fcb9ff72938031d705d8186b948c3764c0f1b5f77eba"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/30.json",
+          "sha256": "aca0609e932a2b1a151fb36049375626829d27df39a48b70ca847808854dab31"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/31.json",
+          "sha256": "2f238f5ef5125620c275bdbd65bd00fccb47a89958d8c2899cd4acef9f6e165b"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/32.json",
+          "sha256": "95e6dac09f7eb1681e8494f6b24df75ce3542d2fba3e94765de057ba5e364a2e"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/33.json",
+          "sha256": "d028808dd4b017368ae36319a0cb0db0be930695bd60ae4aeb9ebde708b8d867"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/34.json",
+          "sha256": "cd27e1e28a688c7e2fe18eb20cd6297e3e384adf4c72bb4a5738af7f507f24e3"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/35.json",
+          "sha256": "573bb7b465c8e8d83b9531434e021d5d1ade6bb5ff95efd290898adc5aa17c00"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/36.json",
+          "sha256": "b28c299dda4eb1c36c489dff84c76811a6c221606bc30b507ed50095dfd15ab2"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/37.json",
+          "sha256": "bd5e407f3f93d87454a5b23de1babb516aadd7b8b2699a820e7cfacf4a6570f1"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/38.json",
+          "sha256": "a8bd12c3d23818cbd523025cee71913ba70efc17ae29d133688618e843ad47a6"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/39.json",
+          "sha256": "b39b99ac381ff25064338286aa2f8d8a0a7249932df01f7465cbc827043a99b9"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/40.json",
+          "sha256": "8a5fba5813f097eff1b43b4219b0f93b93f41c47b25a1ac11819a4fe517444b2"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/41.json",
+          "sha256": "a55436c24411e5a621fca37fc62e32194e7befb664b5c9da3af8633f15b6783d"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/42.json",
+          "sha256": "47e98381518ef7151eba97bd8eb0cc9d4b34010c435881fb2d248591fec4e4cb"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/43.json",
+          "sha256": "8d0c2c68646a8050cb8f7ed4d4539809b4c44fb47ce1823bbcb02814a652bc49"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/44.json",
+          "sha256": "f85d6920a60c979d26e5a9a326d55f3388334c1741e6f7dfc14209b1786ee9ae"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/45.json",
+          "sha256": "051443ea8a3e29c4edc27667f32c72595bbabaf05c49507c3f70d3a7327c90eb"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/46.json",
+          "sha256": "b2420a4d66758febb0fc70b3f37a5fa77161680324401f80c2e358d46778b362"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/47.json",
+          "sha256": "957795ac0fd3492afa8055d12cc4894674494d47a8c3c68028ccf726d36f2deb"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/48.json",
+          "sha256": "0d78f1b20a372d2af27f6010fc474a398ee7fc6eb12c08df8b3b2c993b728f4a"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/49.json",
+          "sha256": "5ff2c27b85f9214e93f66f1446d6f9a4cba5d465e99ad15e38928e1e67f95bae"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/50.json",
+          "sha256": "61633232d67ae341bda709dd06598d6cf8f4e5d71e8f01fe50accc215a5ed6fb"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/51.json",
+          "sha256": "d8def7e4716e49330c59769c4d0670305ccc748a8a7d1d9a388d5bd67fe665e6"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/52.json",
+          "sha256": "2099f1a93776a18789e87057deee7b29506f23b3aefa765016e5917a346026fa"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/53.json",
+          "sha256": "846fa87cc438bbf4993b2d6661c2967e4ef2464589ee13e97518dd83c2093a7c"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/54.json",
+          "sha256": "c463f38fe2c9a06a251651879766cfb67c19ac22253e7efacfab049a7a4aa64d"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/55.json",
+          "sha256": "be180e966e2f2213304be0aaa981974cb2f74f57692c0d4456bb62d2f14020c1"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/56.json",
+          "sha256": "59fbdf7855500eb4530f6928d0cdfab7402c8b08445e13735c12e7c3a2337ce5"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/57.json",
+          "sha256": "22f2cc00ee9c0f132d1a13f9936abf5d2c6bcf6874eaeb0ffef439f627850a8a"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/58.json",
+          "sha256": "00078166ea4b02cec61f3b3f1d74866937e7d8c4e70e09bc0d2ef1a81f229066"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/59.json",
+          "sha256": "74fbd4c27e62d532730c5dcbd9428fb4a13c327b5742bb61fdfca69284f456df"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/60.json",
+          "sha256": "bc8f3938339410fc8225594bb18d74223437908f9289adb8f49673f73f75fddd"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/61.json",
+          "sha256": "f57797a9d55a01228a9dd2b385880c7e2e0b7072fbb7b2439ebb7f4656e6900d"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/62.json",
+          "sha256": "69da0eb9134fd400fecef8f0985315d64c643a4010ed9d335a02980fcc66d54f"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/63.json",
+          "sha256": "a2e1c38b6fc298de814cd3be4b6d0a75c39d7249640355aa7e1ba7bb3eca2d96"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/64.json",
+          "sha256": "990ddf82dc1da8e032d5c6c493d02c15f4236b302bd30d5c7e04c58d281c4099"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/65.json",
+          "sha256": "e292311719b7f91141de75aa6b35535ec496576a020d38b3e23e2900aa1a996d"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/66.json",
+          "sha256": "a8d1c8ff674b9bded3d446912d777cd3b442f08d880a594b24f0f2d5f1575334"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/67.json",
+          "sha256": "c5f101dcc25589aa9abd03b183ef29f70e0f63ad4e46d7550d9f703e9f81b0b6"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/68.json",
+          "sha256": "e3e390a7aa60a82d308833b3e43ef2267db6953923e2e79038d810bfbe4b46b4"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/69.json",
+          "sha256": "cc99551891f0b52c06c2572f42d8abf13dad2781d600002f1488507bea00bcae"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/70.json",
+          "sha256": "57f15afc352f72fb2f16e536cfeaa574f481fbea1319d5c79e2f7d4a7e97b46f"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/71.json",
+          "sha256": "7b830fc675793cfe0fa8ff738dcdd33ac829722b0df6269410fe715ade18f3e3"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/72.json",
+          "sha256": "a2d457d8756f00580213d9280528a5640673bb6b7d4fbb7252dd3179cd9b1d12"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/73.json",
+          "sha256": "3d8595a129b9ebdb42d306af08d8ff5f3077d2a1ef61a22aad353e85e0f473c3"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/74.json",
+          "sha256": "897fd627b8cedc27e27dbf5057761ecc101727e6210d46f04f9393eed66a0b30"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/75.json",
+          "sha256": "6fac1032ac5242254ff929ec70832c83d0e8fee9b43787dd7548dede7d76a8ea"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/76.json",
+          "sha256": "0e5998bb26f9a6bc5a7e9b915a627f4444e7a143f00d6da623aa083274f0c9cb"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/78.json",
+          "sha256": "a155e29d84ec1d9ec976a03e572bd9b8e42ba591087fdc7af554161cbdf8e5c5"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/79.json",
+          "sha256": "15915663a03888f46867c5355065b7c9f133d3e48144e7c4e73b9348afa8eca6"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/80.json",
+          "sha256": "1686d01662bfbe27eda5fb97beae8874caa5ef2ee80513514f09c0ce141ea97b"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/81.json",
+          "sha256": "a58633995e7188e72700622e931ee8cfd01ab67c32430a9ac7fc8be238f9c380"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/82.json",
+          "sha256": "8d0dbc68e8e01a927c811d48a23b599d9ce4683d6a3314a97aad02902e65c180"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/83.json",
+          "sha256": "da4c6ea718e84678fb5a0360103664d0b0b5081bc8d3ce600d04586e087f1f1c"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/84.json",
+          "sha256": "5b9c56283ee7a3ecd9de6fe6de01d0bb4207e9c10370f6a33b38661c2b566bcb"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/85.json",
+          "sha256": "079396982e8079306c54ef312c6131e60c3910fa99e588e2ce25be25f5f92ffd"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/86.json",
+          "sha256": "b864cd3648c98591c5505484b5c005d137e017a24f05a1014c290118853a009d"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/87.json",
+          "sha256": "a6c1b3b3ee30751e02e17e09254fa4bb72259354deeb1c3294e0759398b33d66"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/88.json",
+          "sha256": "60a0eb95f0e6c4f364b242c88d0d5057c7fdc813301aa9aef6b024860ae2cfa8"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/89.json",
+          "sha256": "76c657871cf4ec021424d674fda4d11534c009c76da1b23d79920fe196021cb8"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/90.json",
+          "sha256": "3c5c95eebd72158925ad8ce6ee7b30f1cbe21d53ba536fbd6fcecd53fa171355"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/91.json",
+          "sha256": "e634252ee60286d107a95319f6790e0a4688f07569c300ae7e30e7f61312ee26"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/92.json",
+          "sha256": "aed994314012c2ed1601d1aea65bd2d4f3675a7a2a1509901f2c49785216ec04"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/94.json",
+          "sha256": "980e79bba82d5034b1e8c3cac63dd49096d7632b2963fc235ada0430dad340d3"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/95.json",
+          "sha256": "22d58203df6be65ac39dc1a34b22b66cdb4fc1abb52f8aeae746a8b22fe411c9"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/96.json",
+          "sha256": "59eaff19ded52e5d4cf23bd473ba8f395f920d90b1e8fc631e005eab496d4913"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/97.json",
+          "sha256": "3026c4c80c659af9a5ed3cc63d6a4f5ba15f7e1781cc7ebe7965c2892425540d"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/records/99.json",
+          "sha256": "9e3333f60c727eaff99b1625d6529bb785599d1422b75b93f48e5ca27d9f2876"
+        },
+        {
+          "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8/summary.json",
+          "sha256": "e06cb1c219c339f7c03e4616323cf6df6c0539fbc356118732563ae3bf8bba70"
+        }
+      ],
+      "files_sha256": "231b8c3c999f3b69fea9c45d38c2dfc93d1a1e9faccef0e735658aa4adab06cc",
+      "path": "data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8",
+      "snapshot_id": "SCREENING-SAU-2026-09-12-9b6b22032fd8"
+    },
+    "terms": {
+      "path": "data/cases/selection/hs6-disclosure-terms-v2.json",
+      "sha256": "eebe4ffab2d541b4356209407cc53b5710b16d65c2a14179fb06495762f22756"
+    },
+    "universe": {
+      "path": "data/snapshots/universe/UNIVERSE-SAU-UN-COMTRADE-HS-2026-09-12.json",
+      "sha256": "758acdb41c5759e5be2c6215405e9c6829bc527b73850d8c4b54327c61b0c78d",
+      "snapshot_id": "UNIVERSE-SAU-UN-COMTRADE-HS-2026-09-12"
+    }
+  },
+  "owner_designated_cases": [],
+  "profiles": {
+    "fertilizers": {
+      "excluded_by_identity": [
+        {
+          "basis": {
+            "identity_judgment": "The Other subheading is the residual of heading 31.05 after the named nutrient combinations and forms; its remaining fertiliser scope is heterogeneous and does not resolve one commercial product class.",
+            "one_dash_group_text": "3105.90 - Other",
+            "parent_heading_text": "31.05 Mineral or chemical fertilisers containing two or three of the",
+            "subheading_text": "3105.90 - Other"
+          },
+          "document_id": "DOC-WCO-HS-NOMENCLATURE-fe3ed4f5325a-88edcc1ee93d",
+          "hs6": "310590",
+          "hs_revision": "H6",
+          "line_indices": {
+            "one_dash_group_text": [
+              15
+            ],
+            "parent_heading_text": [
+              42
+            ],
+            "subheading_text": [
+              15
+            ]
+          },
+          "page_index": {
+            "one_dash_group_text": 3,
+            "parent_heading_text": 2,
+            "subheading_text": 3
+          },
+          "reason": "RESIDUAL_CATCH_ALL_SUBHEADING",
+          "rule_version": "S14-CS-1.1"
+        }
+      ],
+      "excluded_by_viability": [
+        "310420"
+      ],
+      "excluded_frozen": [],
+      "excluded_series_gap_years": [
+        {
+          "basis": "Persistence rules need a continuous series; missing years are not zero trade. Screening continuity is GAP_YEARS; missing import years [2021].",
+          "hs6": "310229",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "missing_import_years": [
+            2021
+          ],
+          "reason": "SERIES_GAP_YEARS",
+          "rule_version": "S14-CS-1.1"
+        },
+        {
+          "basis": "Persistence rules need a continuous series; missing years are not zero trade. Screening continuity is GAP_YEARS; missing import years [2021].",
+          "hs6": "310530",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "missing_import_years": [
+            2021
+          ],
+          "reason": "SERIES_GAP_YEARS",
+          "rule_version": "S14-CS-1.1"
+        },
+        {
+          "basis": "Persistence rules need a continuous series; missing years are not zero trade. Screening continuity is GAP_YEARS; missing import years [2024].",
+          "hs6": "310551",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "missing_import_years": [
+            2024
+          ],
+          "reason": "SERIES_GAP_YEARS",
+          "rule_version": "S14-CS-1.1"
+        },
+        {
+          "basis": "Persistence rules need a continuous series; missing years are not zero trade. Screening continuity is GAP_YEARS; missing import years [2023].",
+          "hs6": "310560",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "missing_import_years": [
+            2023
+          ],
+          "reason": "SERIES_GAP_YEARS",
+          "rule_version": "S14-CS-1.1"
+        }
+      ],
+      "quota": 2,
+      "rows": [
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "310430",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 16.67651265,
+          "latest_net_weight_kg": 22461146.0,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "fertilizers",
+          "r2_fired": true,
+          "selected": true,
+          "substitution_rank": null,
+          "tier": 3,
+          "tier_label": "CLASSIFICATION_CONTINUITY_ONLY"
+        },
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "310510",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 6.729769698,
+          "latest_net_weight_kg": 2445810.0,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "fertilizers",
+          "r2_fired": true,
+          "selected": true,
+          "substitution_rank": null,
+          "tier": 3,
+          "tier_label": "CLASSIFICATION_CONTINUITY_ONLY"
+        },
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "310221",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 3.3150588500000002,
+          "latest_net_weight_kg": 12475326.0,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "fertilizers",
+          "r2_fired": true,
+          "selected": false,
+          "substitution_rank": 1,
+          "tier": 3,
+          "tier_label": "CLASSIFICATION_CONTINUITY_ONLY"
+        },
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "310250",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 1.409589831,
+          "latest_net_weight_kg": 1161022.0,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "fertilizers",
+          "r2_fired": true,
+          "selected": false,
+          "substitution_rank": 2,
+          "tier": 3,
+          "tier_label": "CLASSIFICATION_CONTINUITY_ONLY"
+        },
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "310230",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 47.044386556999996,
+          "latest_net_weight_kg": 89006800.0,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "fertilizers",
+          "r2_fired": false,
+          "selected": false,
+          "substitution_rank": 3,
+          "tier": 3,
+          "tier_label": "CLASSIFICATION_CONTINUITY_ONLY"
+        },
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "310490",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 7.3381272829999995,
+          "latest_net_weight_kg": 5297961.0,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "fertilizers",
+          "r2_fired": false,
+          "selected": false,
+          "substitution_rank": 4,
+          "tier": 3,
+          "tier_label": "CLASSIFICATION_CONTINUITY_ONLY"
+        },
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "310520",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 4.768910281,
+          "latest_net_weight_kg": 3389303.0,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "fertilizers",
+          "r2_fired": false,
+          "selected": false,
+          "substitution_rank": 5,
+          "tier": 3,
+          "tier_label": "CLASSIFICATION_CONTINUITY_ONLY"
+        },
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "310390",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 2.520143937,
+          "latest_net_weight_kg": 2641690.0,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "fertilizers",
+          "r2_fired": false,
+          "selected": false,
+          "substitution_rank": 6,
+          "tier": 3,
+          "tier_label": "CLASSIFICATION_CONTINUITY_ONLY"
+        },
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "310260",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 0.568316519,
+          "latest_net_weight_kg": 961440.0,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "fertilizers",
+          "r2_fired": false,
+          "selected": false,
+          "substitution_rank": 7,
+          "tier": 3,
+          "tier_label": "CLASSIFICATION_CONTINUITY_ONLY"
+        },
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "310559",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 23.790355405,
+          "latest_net_weight_kg": 27155068.0,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "fertilizers",
+          "r2_fired": false,
+          "selected": false,
+          "substitution_rank": 8,
+          "tier": 4,
+          "tier_label": "PRICE_LED_GROWTH"
+        },
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "310290",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 0.614359718,
+          "latest_net_weight_kg": 457485.0,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "fertilizers",
+          "r2_fired": false,
+          "selected": false,
+          "substitution_rank": 9,
+          "tier": 4,
+          "tier_label": "PRICE_LED_GROWTH"
+        },
+        {
+          "disclosure_covered": true,
+          "disclosure_document_ids": [
+            "DOC-PRODUCER-MAADEN-b1dd369ea0fe-dae44e050e70"
+          ],
+          "hs6": "310540",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 4.864641745,
+          "latest_net_weight_kg": 4627618.0,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "fertilizers",
+          "r2_fired": false,
+          "selected": false,
+          "substitution_rank": 10,
+          "tier": 5,
+          "tier_label": "EXPORT_IMPORT_RATIO_WARNING"
+        },
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "310210",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 3.815402571,
+          "latest_net_weight_kg": 2818511.0,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "fertilizers",
+          "r2_fired": false,
+          "selected": false,
+          "substitution_rank": 11,
+          "tier": 5,
+          "tier_label": "EXPORT_IMPORT_RATIO_WARNING"
+        }
+      ],
+      "selected": [
+        "310430",
+        "310510"
+      ],
+      "substitution_order": [
+        "310221",
+        "310250",
+        "310230",
+        "310490",
+        "310520",
+        "310390",
+        "310260",
+        "310559",
+        "310290",
+        "310540",
+        "310210"
+      ]
+    },
+    "pharma_api": {
+      "excluded_by_identity": [
+        {
+          "basis": {
+            "identity_judgment": "The two-dash Other subheading is the residual of the unfused-pyridine group after the named compounds; its remaining molecule scope is heterogeneous and does not resolve one commercial product class.",
+            "one_dash_group_text": "Compounds containing an unfused pyridine ring (whether or not hydrogenated) in the structure :",
+            "parent_heading_text": "29.33 Heterocyclic compounds with nitrogen hetero-atom(s) only.",
+            "subheading_text": "2933.39 -- Other"
+          },
+          "document_id": "DOC-WCO-HS-NOMENCLATURE-fd99902db1af-d01a792902be",
+          "hs6": "293339",
+          "hs_revision": "H6",
+          "line_indices": [
+            3,
+            12,
+            27
+          ],
+          "page_index": 17,
+          "reason": "RESIDUAL_CATCH_ALL_SUBHEADING",
+          "rule_version": "S14-CS-1.1"
+        },
+        {
+          "basis": {
+            "identity_judgment": "The Other subheading is the residual of heading 29.41 after five named antibiotic classes; its remaining antibiotic scope is heterogeneous and does not resolve one commercial product class.",
+            "one_dash_group_text": "2941.90 - Other",
+            "parent_heading_text": "29.41 Antibiotics.",
+            "subheading_text": "2941.90 - Other"
+          },
+          "document_id": "DOC-WCO-HS-NOMENCLATURE-fd99902db1af-d01a792902be",
+          "hs6": "294190",
+          "hs_revision": "H6",
+          "line_indices": [
+            10,
+            17
+          ],
+          "page_index": 21,
+          "reason": "RESIDUAL_CATCH_ALL_SUBHEADING",
+          "rule_version": "S14-CS-1.1"
+        }
+      ],
+      "excluded_by_viability": [
+        "293711"
+      ],
+      "excluded_frozen": [],
+      "excluded_series_gap_years": [
+        {
+          "basis": "Persistence rules need a continuous series; missing years are not zero trade. Screening continuity is GAP_YEARS; missing import years [2022].",
+          "hs6": "293723",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "missing_import_years": [
+            2022
+          ],
+          "reason": "SERIES_GAP_YEARS",
+          "rule_version": "S14-CS-1.1"
+        },
+        {
+          "basis": "Persistence rules need a continuous series; missing years are not zero trade. Screening continuity is GAP_YEARS; missing import years [2023].",
+          "hs6": "293919",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "missing_import_years": [
+            2023
+          ],
+          "reason": "SERIES_GAP_YEARS",
+          "rule_version": "S14-CS-1.1"
+        }
+      ],
+      "quota": 2,
+      "rows": [
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "294110",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 12.195517562000001,
+          "latest_net_weight_kg": 343023.119,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "pharma_api",
+          "r2_fired": true,
+          "selected": true,
+          "substitution_rank": null,
+          "tier": 3,
+          "tier_label": "CLASSIFICATION_CONTINUITY_ONLY"
+        },
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "294120",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 9.954578151,
+          "latest_net_weight_kg": 47779.0,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "pharma_api",
+          "r2_fired": true,
+          "selected": true,
+          "substitution_rank": null,
+          "tier": 3,
+          "tier_label": "CLASSIFICATION_CONTINUITY_ONLY"
+        },
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "294130",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 5.267652135,
+          "latest_net_weight_kg": 101661.292,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "pharma_api",
+          "r2_fired": true,
+          "selected": false,
+          "substitution_rank": 1,
+          "tier": 3,
+          "tier_label": "CLASSIFICATION_CONTINUITY_ONLY"
+        },
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "293722",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 4.26816496,
+          "latest_net_weight_kg": 924.809,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "pharma_api",
+          "r2_fired": true,
+          "selected": false,
+          "substitution_rank": 2,
+          "tier": 3,
+          "tier_label": "CLASSIFICATION_CONTINUITY_ONLY"
+        },
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "293942",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 3.0983868560000003,
+          "latest_net_weight_kg": 39175.0,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "pharma_api",
+          "r2_fired": true,
+          "selected": false,
+          "substitution_rank": 3,
+          "tier": 3,
+          "tier_label": "CLASSIFICATION_CONTINUITY_ONLY"
+        },
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "293331",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 2.6684634,
+          "latest_net_weight_kg": 717998.0,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "pharma_api",
+          "r2_fired": true,
+          "selected": false,
+          "substitution_rank": 4,
+          "tier": 3,
+          "tier_label": "CLASSIFICATION_CONTINUITY_ONLY"
+        },
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "293590",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 2.506534071,
+          "latest_net_weight_kg": 178191.495,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "pharma_api",
+          "r2_fired": true,
+          "selected": false,
+          "substitution_rank": 5,
+          "tier": 3,
+          "tier_label": "CLASSIFICATION_CONTINUITY_ONLY"
+        },
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "293319",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 2.478167938,
+          "latest_net_weight_kg": 182065.819,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "pharma_api",
+          "r2_fired": true,
+          "selected": false,
+          "substitution_rank": 6,
+          "tier": 3,
+          "tier_label": "CLASSIFICATION_CONTINUITY_ONLY"
+        },
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "293621",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 2.249614344,
+          "latest_net_weight_kg": 63983.089,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "pharma_api",
+          "r2_fired": true,
+          "selected": false,
+          "substitution_rank": 7,
+          "tier": 3,
+          "tier_label": "CLASSIFICATION_CONTINUITY_ONLY"
+        },
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "293721",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 2.2293215440000003,
+          "latest_net_weight_kg": 3234.842,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "pharma_api",
+          "r2_fired": true,
+          "selected": false,
+          "substitution_rank": 8,
+          "tier": 3,
+          "tier_label": "CLASSIFICATION_CONTINUITY_ONLY"
+        },
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "293790",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 1.99851595,
+          "latest_net_weight_kg": 1382.107,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "pharma_api",
+          "r2_fired": true,
+          "selected": false,
+          "substitution_rank": 9,
+          "tier": 3,
+          "tier_label": "CLASSIFICATION_CONTINUITY_ONLY"
+        },
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "293624",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 1.807169821,
+          "latest_net_weight_kg": 182698.0,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "pharma_api",
+          "r2_fired": true,
+          "selected": false,
+          "substitution_rank": 10,
+          "tier": 3,
+          "tier_label": "CLASSIFICATION_CONTINUITY_ONLY"
+        },
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "293979",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 1.3135765,
+          "latest_net_weight_kg": 6715.596,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "pharma_api",
+          "r2_fired": true,
+          "selected": false,
+          "substitution_rank": 11,
+          "tier": 3,
+          "tier_label": "CLASSIFICATION_CONTINUITY_ONLY"
+        },
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "293623",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 1.1442354380000002,
+          "latest_net_weight_kg": 50671.125,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "pharma_api",
+          "r2_fired": true,
+          "selected": false,
+          "substitution_rank": 12,
+          "tier": 3,
+          "tier_label": "CLASSIFICATION_CONTINUITY_ONLY"
+        },
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "293911",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 0.733877048,
+          "latest_net_weight_kg": 1038.0,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "pharma_api",
+          "r2_fired": true,
+          "selected": false,
+          "substitution_rank": 13,
+          "tier": 3,
+          "tier_label": "CLASSIFICATION_CONTINUITY_ONLY"
+        },
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "293355",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 0.109999997,
+          "latest_net_weight_kg": 100.0,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "pharma_api",
+          "r2_fired": true,
+          "selected": false,
+          "substitution_rank": 14,
+          "tier": 3,
+          "tier_label": "CLASSIFICATION_CONTINUITY_ONLY"
+        },
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "293719",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 0.06791146499999999,
+          "latest_net_weight_kg": 525.0,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "pharma_api",
+          "r2_fired": true,
+          "selected": false,
+          "substitution_rank": 15,
+          "tier": 3,
+          "tier_label": "CLASSIFICATION_CONTINUITY_ONLY"
+        },
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "293491",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 0.051350932,
+          "latest_net_weight_kg": 58722.21,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "pharma_api",
+          "r2_fired": true,
+          "selected": false,
+          "substitution_rank": 16,
+          "tier": 3,
+          "tier_label": "CLASSIFICATION_CONTINUITY_ONLY"
+        },
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "293980",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 0.00486,
+          "latest_net_weight_kg": 66.0,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "pharma_api",
+          "r2_fired": true,
+          "selected": false,
+          "substitution_rank": 17,
+          "tier": 3,
+          "tier_label": "CLASSIFICATION_CONTINUITY_ONLY"
+        },
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "293499",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 13.788558322,
+          "latest_net_weight_kg": 1644193.514,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "pharma_api",
+          "r2_fired": false,
+          "selected": false,
+          "substitution_rank": 18,
+          "tier": 3,
+          "tier_label": "CLASSIFICATION_CONTINUITY_ONLY"
+        },
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "293369",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 9.026074974,
+          "latest_net_weight_kg": 3444127.0,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "pharma_api",
+          "r2_fired": false,
+          "selected": false,
+          "substitution_rank": 19,
+          "tier": 3,
+          "tier_label": "CLASSIFICATION_CONTINUITY_ONLY"
+        },
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "294150",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 5.959169984,
+          "latest_net_weight_kg": 60979.162,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "pharma_api",
+          "r2_fired": false,
+          "selected": false,
+          "substitution_rank": 20,
+          "tier": 3,
+          "tier_label": "CLASSIFICATION_CONTINUITY_ONLY"
+        },
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "293629",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 3.990980434,
+          "latest_net_weight_kg": 175375.025,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "pharma_api",
+          "r2_fired": false,
+          "selected": false,
+          "substitution_rank": 21,
+          "tier": 3,
+          "tier_label": "CLASSIFICATION_CONTINUITY_ONLY"
+        },
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "293627",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 3.487404179,
+          "latest_net_weight_kg": 599514.713,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "pharma_api",
+          "r2_fired": false,
+          "selected": false,
+          "substitution_rank": 22,
+          "tier": 3,
+          "tier_label": "CLASSIFICATION_CONTINUITY_ONLY"
+        },
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "293379",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 1.580576227,
+          "latest_net_weight_kg": 416301.914,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "pharma_api",
+          "r2_fired": false,
+          "selected": false,
+          "substitution_rank": 23,
+          "tier": 3,
+          "tier_label": "CLASSIFICATION_CONTINUITY_ONLY"
+        },
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "293729",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 1.525733295,
+          "latest_net_weight_kg": 634.0,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "pharma_api",
+          "r2_fired": false,
+          "selected": false,
+          "substitution_rank": 24,
+          "tier": 3,
+          "tier_label": "CLASSIFICATION_CONTINUITY_ONLY"
+        },
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "293690",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 1.495362896,
+          "latest_net_weight_kg": 113806.637,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "pharma_api",
+          "r2_fired": false,
+          "selected": false,
+          "substitution_rank": 25,
+          "tier": 3,
+          "tier_label": "CLASSIFICATION_CONTINUITY_ONLY"
+        },
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "293410",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 1.092456506,
+          "latest_net_weight_kg": 105572.0,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "pharma_api",
+          "r2_fired": false,
+          "selected": false,
+          "substitution_rank": 26,
+          "tier": 3,
+          "tier_label": "CLASSIFICATION_CONTINUITY_ONLY"
+        },
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "293349",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 1.041816507,
+          "latest_net_weight_kg": 3292.513,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "pharma_api",
+          "r2_fired": false,
+          "selected": false,
+          "substitution_rank": 27,
+          "tier": 3,
+          "tier_label": "CLASSIFICATION_CONTINUITY_ONLY"
+        },
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "293420",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 0.406491457,
+          "latest_net_weight_kg": 54482.585,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "pharma_api",
+          "r2_fired": false,
+          "selected": false,
+          "substitution_rank": 28,
+          "tier": 3,
+          "tier_label": "CLASSIFICATION_CONTINUITY_ONLY"
+        },
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "293930",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 0.383283724,
+          "latest_net_weight_kg": 19808.522,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "pharma_api",
+          "r2_fired": false,
+          "selected": false,
+          "substitution_rank": 29,
+          "tier": 3,
+          "tier_label": "CLASSIFICATION_CONTINUITY_ONLY"
+        },
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "293949",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 0.372114124,
+          "latest_net_weight_kg": 4120.0,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "pharma_api",
+          "r2_fired": false,
+          "selected": false,
+          "substitution_rank": 30,
+          "tier": 3,
+          "tier_label": "CLASSIFICATION_CONTINUITY_ONLY"
+        },
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "293321",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 0.14526586300000002,
+          "latest_net_weight_kg": 26114.415,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "pharma_api",
+          "r2_fired": false,
+          "selected": false,
+          "substitution_rank": 31,
+          "tier": 3,
+          "tier_label": "CLASSIFICATION_CONTINUITY_ONLY"
+        },
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "293311",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 0.12259679700000001,
+          "latest_net_weight_kg": 2581.762,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "pharma_api",
+          "r2_fired": false,
+          "selected": false,
+          "substitution_rank": 32,
+          "tier": 3,
+          "tier_label": "CLASSIFICATION_CONTINUITY_ONLY"
+        },
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "293550",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 0.07430453100000001,
+          "latest_net_weight_kg": 412.0,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "pharma_api",
+          "r2_fired": false,
+          "selected": false,
+          "substitution_rank": 33,
+          "tier": 3,
+          "tier_label": "CLASSIFICATION_CONTINUITY_ONLY"
+        },
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "293352",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 0.002325867,
+          "latest_net_weight_kg": 8.0,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "pharma_api",
+          "r2_fired": false,
+          "selected": false,
+          "substitution_rank": 34,
+          "tier": 3,
+          "tier_label": "CLASSIFICATION_CONTINUITY_ONLY"
+        },
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "293371",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 0.0007584,
+          "latest_net_weight_kg": 3.0,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "pharma_api",
+          "r2_fired": false,
+          "selected": false,
+          "substitution_rank": 35,
+          "tier": 3,
+          "tier_label": "CLASSIFICATION_CONTINUITY_ONLY"
+        },
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "293399",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 29.650065925,
+          "latest_net_weight_kg": 1513891.666,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "pharma_api",
+          "r2_fired": false,
+          "selected": false,
+          "substitution_rank": 36,
+          "tier": 4,
+          "tier_label": "PRICE_LED_GROWTH"
+        },
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "293359",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 11.173201054,
+          "latest_net_weight_kg": 137150.697,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "pharma_api",
+          "r2_fired": false,
+          "selected": false,
+          "substitution_rank": 37,
+          "tier": 4,
+          "tier_label": "PRICE_LED_GROWTH"
+        },
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "293361",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 10.967249326,
+          "latest_net_weight_kg": 5510120.338,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "pharma_api",
+          "r2_fired": false,
+          "selected": false,
+          "substitution_rank": 38,
+          "tier": 4,
+          "tier_label": "PRICE_LED_GROWTH"
+        },
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "293628",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 5.586744127,
+          "latest_net_weight_kg": 586257.363,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "pharma_api",
+          "r2_fired": false,
+          "selected": false,
+          "substitution_rank": 39,
+          "tier": 4,
+          "tier_label": "PRICE_LED_GROWTH"
+        },
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "293329",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 4.6548934840000005,
+          "latest_net_weight_kg": 356835.967,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "pharma_api",
+          "r2_fired": false,
+          "selected": false,
+          "substitution_rank": 40,
+          "tier": 4,
+          "tier_label": "PRICE_LED_GROWTH"
+        },
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "293622",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 1.8499994199999998,
+          "latest_net_weight_kg": 52040.0,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "pharma_api",
+          "r2_fired": false,
+          "selected": false,
+          "substitution_rank": 41,
+          "tier": 4,
+          "tier_label": "PRICE_LED_GROWTH"
+        },
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "293625",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 0.978192776,
+          "latest_net_weight_kg": 33448.296,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "pharma_api",
+          "r2_fired": false,
+          "selected": false,
+          "substitution_rank": 42,
+          "tier": 4,
+          "tier_label": "PRICE_LED_GROWTH"
+        },
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "293969",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 0.937627443,
+          "latest_net_weight_kg": 31955.8,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "pharma_api",
+          "r2_fired": false,
+          "selected": false,
+          "substitution_rank": 43,
+          "tier": 4,
+          "tier_label": "PRICE_LED_GROWTH"
+        },
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "293626",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 0.849172245,
+          "latest_net_weight_kg": 15215.209,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "pharma_api",
+          "r2_fired": false,
+          "selected": false,
+          "substitution_rank": 44,
+          "tier": 4,
+          "tier_label": "PRICE_LED_GROWTH"
+        },
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "293430",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 0.730800248,
+          "latest_net_weight_kg": 125035.0,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "pharma_api",
+          "r2_fired": false,
+          "selected": false,
+          "substitution_rank": 45,
+          "tier": 4,
+          "tier_label": "PRICE_LED_GROWTH"
+        },
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "294140",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 0.5471063860000001,
+          "latest_net_weight_kg": 17605.958,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "pharma_api",
+          "r2_fired": false,
+          "selected": false,
+          "substitution_rank": 46,
+          "tier": 4,
+          "tier_label": "PRICE_LED_GROWTH"
+        },
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "293353",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 0.074603465,
+          "latest_net_weight_kg": 7748.0,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "pharma_api",
+          "r2_fired": false,
+          "selected": false,
+          "substitution_rank": 47,
+          "tier": 4,
+          "tier_label": "PRICE_LED_GROWTH"
+        },
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "293920",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 0.048007732000000004,
+          "latest_net_weight_kg": 33.0,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "pharma_api",
+          "r2_fired": false,
+          "selected": false,
+          "substitution_rank": 48,
+          "tier": 4,
+          "tier_label": "PRICE_LED_GROWTH"
+        },
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "293959",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 0.04494373200000001,
+          "latest_net_weight_kg": 263.0,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "pharma_api",
+          "r2_fired": false,
+          "selected": false,
+          "substitution_rank": 49,
+          "tier": 4,
+          "tier_label": "PRICE_LED_GROWTH"
+        },
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "293510",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 0.025146399,
+          "latest_net_weight_kg": 288.0,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "pharma_api",
+          "r2_fired": false,
+          "selected": false,
+          "substitution_rank": 50,
+          "tier": 4,
+          "tier_label": "PRICE_LED_GROWTH"
+        },
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "293354",
+          "hs_revisions": [
+            "H5",
+            "H6"
+          ],
+          "imports_usd_m_latest": 0.010186933,
+          "latest_net_weight_kg": 21.0,
+          "positive_import_years": [
+            2021,
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "pharma_api",
+          "r2_fired": false,
+          "selected": false,
+          "substitution_rank": 51,
+          "tier": 4,
+          "tier_label": "PRICE_LED_GROWTH"
+        },
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "293750",
+          "hs_revisions": [
+            "H6"
+          ],
+          "imports_usd_m_latest": 0.001672,
+          "latest_net_weight_kg": 1.0,
+          "positive_import_years": [
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "pharma_api",
+          "r2_fired": false,
+          "selected": false,
+          "substitution_rank": 52,
+          "tier": 6,
+          "tier_label": "PERSISTENCE_ONLY"
+        },
+        {
+          "disclosure_covered": false,
+          "disclosure_document_ids": [],
+          "hs6": "293332",
+          "hs_revisions": [
+            "H6"
+          ],
+          "imports_usd_m_latest": 0.000806133,
+          "latest_net_weight_kg": 1.0,
+          "positive_import_years": [
+            2022,
+            2023,
+            2024
+          ],
+          "profile": "pharma_api",
+          "r2_fired": false,
+          "selected": false,
+          "substitution_rank": 53,
+          "tier": 6,
+          "tier_label": "PERSISTENCE_ONLY"
+        }
+      ],
+      "selected": [
+        "294110",
+        "294120"
+      ],
+      "substitution_order": [
+        "294130",
+        "293722",
+        "293942",
+        "293331",
+        "293590",
+        "293319",
+        "293621",
+        "293721",
+        "293790",
+        "293624",
+        "293979",
+        "293623",
+        "293911",
+        "293355",
+        "293719",
+        "293491",
+        "293980",
+        "293499",
+        "293369",
+        "294150",
+        "293629",
+        "293627",
+        "293379",
+        "293729",
+        "293690",
+        "293410",
+        "293349",
+        "293420",
+        "293930",
+        "293949",
+        "293321",
+        "293311",
+        "293550",
+        "293352",
+        "293371",
+        "293399",
+        "293359",
+        "293361",
+        "293628",
+        "293329",
+        "293622",
+        "293625",
+        "293969",
+        "293626",
+        "293430",
+        "294140",
+        "293353",
+        "293920",
+        "293959",
+        "293510",
+        "293354",
+        "293750",
+        "293332"
+      ]
+    }
+  },
+  "rule_id": "S14-CS-1.1",
+  "rule_version": "S14-CS-1.1",
+  "schema_version": "1.1.0",
+  "selected_hs6": [
+    "294110",
+    "294120",
+    "310430",
+    "310510"
+  ],
+  "selection_id": "CASE-SELECTION-S15-b96de36ff0ce"
+}

@@ -39,6 +39,9 @@ DOCUMENT_SOURCE_STAGES = {
     "producer_alupco": Stage.DOCUMENT,
     "producer_altaiseer_talco": Stage.DOCUMENT,
     "producer_maaden": Stage.DOCUMENT,
+    "producer_spimaco": Stage.DOCUMENT,
+    "producer_sabic_agrinutrients": Stage.DOCUMENT,
+    "sfda_registers": Stage.DOCUMENT,
     "wco_hs_nomenclature": Stage.DOCUMENT,
 }
 INSTITUTIONAL_SOURCE_IDS = frozenset(INSTITUTIONAL_SOURCE_STAGES)
@@ -242,9 +245,9 @@ def validate_acquisition_sources(payload: dict[str, Any]) -> None:
     metadata = payload.get("metadata")
     if not isinstance(metadata, dict):
         raise AcquisitionConfigurationError("metadata must be a mapping")
-    if metadata.get("version") != "1.4.0":
+    if metadata.get("version") != "1.5.0":
         raise AcquisitionConfigurationError(
-            "metadata.version must be 1.4.0"
+            "metadata.version must be 1.5.0"
         )
 
     raw_store = payload.get("raw_store")

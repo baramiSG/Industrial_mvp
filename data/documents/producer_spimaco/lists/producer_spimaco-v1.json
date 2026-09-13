@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.0.0",
+  "list_id": "producer_spimaco-v1",
+  "source_id": "producer_spimaco",
+  "recorded_on": "2026-09-13",
+  "recorded_by_seat": "implementer-sol",
+  "consultation_summary_text": "W-A15b read ir.spimaco.com.sa/robots.txt and the official investor-relations landing page with verified TLS. The target landing and /media/ paths are allowed. The landing linked to the corporate privacy page on spimaco.com.sa; that separate host failed normal certificate-chain verification at robots.txt, so the privacy body and document-reuse terms were not identified within this consultation and TLS was not bypassed. The two bounded PDF URLs below remain official-host observations; no search excerpt is promoted to evidence.",
+  "documentation_urls_observed": [
+    "https://ir.spimaco.com.sa",
+    "https://ir.spimaco.com.sa/robots.txt",
+    "https://ir.spimaco.com.sa/media/khagysaq/earnings-release_spimaco_q4-2025_en.pdf",
+    "https://ir.spimaco.com.sa/media/ydojpaeq/fs_q4-2025_spimaco_en.pdf",
+    "https://spimaco.com.sa/privacy/privacy-en.html"
+  ],
+  "entries": [
+    {
+      "entry_id": "E-001",
+      "document_url": "https://ir.spimaco.com.sa/media/khagysaq/earnings-release_spimaco_q4-2025_en.pdf",
+      "publisher_text": "SPIMACO — Saudi Pharmaceutical Industries and Medical Appliances Corporation",
+      "publisher_kind": "producer",
+      "document_kind": "issuer_disclosure",
+      "languages": [
+        "en"
+      ],
+      "expected_content_type": "application/pdf",
+      "evidence_class_target": "C",
+      "supports": [
+        "DOMESTIC_PROCESS_FAMILY",
+        "DOMESTIC_PRODUCT_PORTFOLIO"
+      ],
+      "title_text": "SPIMACO Q4 and Full Year 2025 Earnings Release",
+      "document_date_text": "UNAVAILABLE",
+      "source_reference_text": "earnings-release_spimaco_q4-2025_en.pdf"
+    },
+    {
+      "entry_id": "E-002",
+      "document_url": "https://ir.spimaco.com.sa/media/ydojpaeq/fs_q4-2025_spimaco_en.pdf",
+      "publisher_text": "SPIMACO — Saudi Pharmaceutical Industries and Medical Appliances Corporation",
+      "publisher_kind": "producer",
+      "document_kind": "financial_statement",
+      "languages": [
+        "en"
+      ],
+      "expected_content_type": "application/pdf",
+      "evidence_class_target": "C",
+      "supports": [
+        "DOMESTIC_PROCESS_FAMILY",
+        "DOMESTIC_PRODUCT_PORTFOLIO"
+      ],
+      "title_text": "SPIMACO Consolidated Financial Statements for 2025",
+      "document_date_text": "UNAVAILABLE",
+      "source_reference_text": "fs_q4-2025_spimaco_en.pdf"
+    }
+  ]
+}

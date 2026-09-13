@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0.0",
+  "list_id": "producer_sabic_agrinutrients-v1",
+  "source_id": "producer_sabic_agrinutrients",
+  "recorded_on": "2026-09-13",
+  "recorded_by_seat": "implementer-sol",
+  "consultation_summary_text": "W-A15b read robots.txt on the legacy safco.com.sa document host and current www.sabic-agrinutrients.com host; both returned an empty Disallow directive. The legacy landing and current reports page returned HTTP 200 and linked their respective legal-disclaimer pages, which were each read once. The visible terms state that entering, browsing, downloading or copying site material is subject to those terms; no numeric request-rate policy was identified within the consultation. The bounded Board Report URL below is an official legacy-host observation; no search excerpt is promoted to evidence.",
+  "documentation_urls_observed": [
+    "https://safco.com.sa/robots.txt",
+    "https://safco.com.sa/en/Images/SABIC%20AN%20Board%20Annual%20Report%202024%20EN_tcm1039-46998.pdf",
+    "https://safco.com.sa/en/legal-dislaimer",
+    "https://www.sabic-agrinutrients.com/en/investor-relations/reports",
+    "https://www.sabic-agrinutrients.com/en/legal-dislaimer"
+  ],
+  "entries": [
+    {
+      "entry_id": "E-001",
+      "document_url": "https://safco.com.sa/en/Images/SABIC%20AN%20Board%20Annual%20Report%202024%20EN_tcm1039-46998.pdf",
+      "publisher_text": "SABIC Agri-Nutrients Company",
+      "publisher_kind": "producer",
+      "document_kind": "annual_report",
+      "languages": [
+        "en"
+      ],
+      "expected_content_type": "application/pdf",
+      "evidence_class_target": "C",
+      "supports": [
+        "DOMESTIC_NAMEPLATE_CAPACITY",
+        "DOMESTIC_PROCESS_FAMILY",
+        "DOMESTIC_PRODUCT_PORTFOLIO"
+      ],
+      "title_text": "SABIC Agri-Nutrients Board of Directors' Annual Report 2024",
+      "document_date_text": "2024",
+      "source_reference_text": "SABIC AN Board Annual Report 2024 EN"
+    }
+  ]
+}

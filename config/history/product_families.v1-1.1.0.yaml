@@ -1,0 +1,36 @@
+metadata:
+  version: "1.1.0"
+  effective_date: "2026-09-13"
+  authority: "Methodology §§6.3, 13 and 14; owner rulings PR-1 and OD-3"
+
+families:
+  coated_steel:
+    sector_profile: coated_steel
+    hs4_headings: ["7210"]
+    status: AVAILABLE
+    basis: "Methodology §13 worked case 721049 and frozen public opportunity"
+  polypropylene_primary_forms:
+    sector_profile: technical_plastics
+    hs4_headings: ["3902"]
+    status: AVAILABLE
+    basis: "Methodology §14 worked case and frozen public opportunity"
+  technical_plastics_conversion:
+    sector_profile: technical_plastics
+    hs4_headings: ["3917", "3920", "3921"]
+    status: AVAILABLE
+    basis: "Owner ruling OD-3 (2026-09-13): WCO HS 2022 Chapter 39 conversion semi-manufactures 39.17 (tubes, pipes and hoses, and fittings therefor, of plastics), 39.20 (other plates, sheets, film, foil and strip, of plastics, non-cellular and not reinforced, laminated, supported or similarly combined with other materials) and 39.21 (other plates, sheets, film, foil and strip, of plastics), matching profile hard gates 'Polymer/additive compatibility; conversion route; tooling; barrier/performance; food, medical or automotive qualification' (methodology §6.3 profile row). 39.02 remains the §14 worked-case primary-forms family. TITLE_VERIFICATION: DOC-WCO-HS-NOMENCLATURE-53d6f01ac062-0926bf9934da page 7 lines 19–20, page 8 lines 8–9 and line 36; index https://www.wcoomd.org/en/topics/nomenclature/instrument-and-tools/hs-nomenclature-2022-edition/hs-nomenclature-2022-edition.aspx."
+  pharma_api:
+    sector_profile: pharma_api
+    hs4_headings: []
+    status: MEMBERSHIP_UNAVAILABLE
+    basis: "Owner/analyst mapping pending under OD-6"
+  fertilizers:
+    sector_profile: fertilizers
+    hs4_headings: []
+    status: MEMBERSHIP_UNAVAILABLE
+    basis: "Owner/analyst mapping pending under OD-6"
+  fabricated_aluminium:
+    sector_profile: fabricated_aluminium
+    hs4_headings: ["7604", "7605", "7606", "7607", "7608", "7609", "7610", "7611", "7612", "7613", "7614", "7616"]
+    status: AVAILABLE
+    basis: "Owner pre-ruling PR-1 (2026-09-12): WCO HS 2022 Chapter 76 wrought and fabricated aluminium 76.04–76.14 and 76.16, matching profile hard gates alloy; forming/fabrication; heat treatment; joining/finishing; engineering certification; customer liability (methodology §6.3). 76.15 household articles are excluded as the boundary; 76.01–76.03 unwrought aluminium, waste/scrap and powders are excluded as feedstock."

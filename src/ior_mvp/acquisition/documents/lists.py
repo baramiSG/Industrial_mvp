@@ -34,6 +34,7 @@ PUBLISHER_KINDS = frozenset({
     "exchange",
     "nomenclature_authority",
     "procurement_authority",
+    "regulatory_authority",
     "standards_authority",
 })
 
@@ -51,6 +52,9 @@ SOURCE_PUBLISHER_KINDS: Mapping[str, frozenset[str]] = {
     "producer_alupco": frozenset({"producer"}),
     "producer_altaiseer_talco": frozenset({"producer"}),
     "producer_maaden": frozenset({"producer"}),
+    "producer_spimaco": frozenset({"producer"}),
+    "producer_sabic_agrinutrients": frozenset({"producer"}),
+    "sfda_registers": frozenset({"regulatory_authority"}),
     "wco_hs_nomenclature": frozenset({"nomenclature_authority"}),
     TEST_FIXTURE_SOURCE: frozenset({"producer"}),
 }
@@ -130,6 +134,19 @@ SOURCE_ALLOWED_SUPPORTS: Mapping[str, frozenset[str]] = {
         "DOMESTIC_SPECIFICATION_ENVELOPE",
         "DOMESTIC_DIMENSION_ENVELOPE",
         "BILINGUAL_SPECIFICATION_EXTRACTION",
+    }),
+    "producer_spimaco": frozenset({
+        "DOMESTIC_PRODUCT_PORTFOLIO",
+        "DOMESTIC_PROCESS_FAMILY",
+    }),
+    "producer_sabic_agrinutrients": frozenset({
+        "DOMESTIC_NAMEPLATE_CAPACITY",
+        "DOMESTIC_PRODUCT_PORTFOLIO",
+        "DOMESTIC_PROCESS_FAMILY",
+    }),
+    "sfda_registers": frozenset({
+        "DOMESTIC_PRODUCT_PORTFOLIO",
+        "HARD_REGULATORY_PROCESS_GATES",
     }),
     "wco_hs_nomenclature": frozenset({
         "TARGET_PRODUCT_IDENTITY",

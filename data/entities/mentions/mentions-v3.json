@@ -1,0 +1,47 @@
+{
+  "consultation_summary_text": "S15 mentions copied verbatim from the two new COMPLETE producer DocumentRecords. One publisher/company span is recorded for SPIMACO and one for SABIC Agri-Nutrients. SPIMACO E-002 was not requested after the bounded acquisition command failed locally, so no Dammam Pharmaceutical Company span is claimed. The SFDA page did not identify either selected HS6 product or a governed same-line producer/site association, so no register-derived plant mention is claimed.",
+  "list_id": "mentions-v3",
+  "mentions": [
+    {
+      "address": {
+        "document_id": "DOC-PRODUCER-SPIMACO-1eb1608ff72b-884197ccc5a7",
+        "line_index": 8,
+        "page_index": 8
+      },
+      "alias": null,
+      "designation_text": null,
+      "entity_type_observed": "COMPANY",
+      "identifier": null,
+      "language": "en",
+      "mention_id": "M-001",
+      "mention_kind": "PUBLISHER_NAME",
+      "source_kind": "DOCUMENT_RECORD",
+      "span_text": "Saudi Pharmaceutical Industries and Medical Appliances Corporation (SPIMACO)",
+      "statement": null,
+      "subject_mention_id": null,
+      "text_order": "logical"
+    },
+    {
+      "address": {
+        "document_id": "DOC-PRODUCER-SABIC-AGRINUTRIENTS-d853eeed63fa-42fdc62825bc",
+        "line_index": 46,
+        "page_index": 5
+      },
+      "alias": null,
+      "designation_text": null,
+      "entity_type_observed": "COMPANY",
+      "identifier": null,
+      "language": "en",
+      "mention_id": "M-002",
+      "mention_kind": "PUBLISHER_NAME",
+      "source_kind": "DOCUMENT_RECORD",
+      "span_text": "SABIC Agri-Nutrients Company",
+      "statement": null,
+      "subject_mention_id": null,
+      "text_order": "logical"
+    }
+  ],
+  "recorded_by_seat": "implementer-sol",
+  "recorded_on": "2026-09-13",
+  "schema_version": "1.0.0"
+}

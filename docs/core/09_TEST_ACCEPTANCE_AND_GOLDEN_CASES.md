@@ -545,3 +545,38 @@ the same S14b change reference, a 76-entry manifest, host comparison,
 recursive ownership and byte-budget checks, and measured drift tables. OD-15
 corrects the computed portfolio chip and catalogue-sourced Arabic decision
 subject before the second execution.
+
+### 10.2 S15a selection, evidence and integrated engine proof
+
+`S14-CS-1.1` is tested on doubles and on the frozen S13 screening/universe
+inputs. It excludes `SERIES_GAP_YEARS` before tiering regardless of queue flags,
+requires addressed WCO evidence for every `identity_exclusions` row and keeps
+missing-versus-zero semantics explicit: missing years are not zero trade.
+The pinned S15 output selects pharma_api 294110/294120 and fertilizers
+310430/310510. Its recorded four document identities are part of the
+write-once input contract.
+
+`reconstruct-selection` resolves those recorded identities and must print
+`CASE SELECTION RECONSTRUCTION PASS (2 records)` after reproducing both S14 and
+S15 canonical bytes. OD-16 distinguishes that acceptance oracle from a raw
+current-state selection diagnostic: after W-A15b, the additional SABIC
+Agri-Nutrients record changes disclosure coverage for non-selected 310210 and
+therefore changes the diagnostic digest, but not the selected four-code set.
+The diagnostic output is neither written nor promoted.
+
+The four S15 CaseBriefs build through the merged PublicSnapshot 2.2.0 carrier.
+Their partner detail is OBSERVED with 10, 4, 11 and 11 non-World rows. Every
+public capability dimension is `U` and every profile hard gate is
+`UNAVAILABLE`: those values mean not identified within the cited stored
+evidence, not absent. All four computed public decisions are INVESTIGATE with
+null route and `ROUTE_CHANGING_EVIDENCE_UNRESOLVED`; each fires
+R0/R1-D/R2/R3/R4-D/R10/R12. No Class-D scenario input enters this child or its
+public proof.
+
+Acceptance additionally requires scoped and unscoped partner snapshots to
+reconstruct independently from disjoint recorded units, nine briefs plus the
+five committed S14 snapshots to pass case reconstruction, three entity
+artifacts to reconstruct, the 76-entry visual manifest and frozen outcomes to
+remain unchanged, and the single S15a manifest generation to add only governed
+S15 evidence rows while changing only the two approved configuration and four
+Core authority hashes.

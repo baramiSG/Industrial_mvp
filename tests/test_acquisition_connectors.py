@@ -48,9 +48,11 @@ def test_default_registry_ids() -> None:
         "baci_cepii", "etimad_tenders", "gastat", "ministry_of_industry", "modon",
         "producer_advanced_petrochemical", "producer_altaiseer_talco",
         "producer_alupco", "producer_hadeed", "producer_maaden",
-        "producer_sabic", "producer_tasnee", "producer_unicoil",
-        "saber_registry", "saso_catalogue", "saso_documents", "tadawul_disclosures",
-        "un_comtrade", "wco_hs_nomenclature", "wits_trade", "zatca_tariff",
+        "producer_sabic", "producer_sabic_agrinutrients", "producer_spimaco",
+        "producer_tasnee", "producer_unicoil",
+        "saber_registry", "saso_catalogue", "saso_documents", "sfda_registers",
+        "tadawul_disclosures", "un_comtrade", "wco_hs_nomenclature", "wits_trade",
+        "zatca_tariff",
     )
 
 
@@ -65,7 +67,8 @@ def test_snapshot_kinds_per_dd22() -> None:
         "tadawul_disclosures", "etimad_tenders", "saso_documents", "producer_unicoil",
         "producer_sabic", "producer_advanced_petrochemical", "producer_tasnee",
         "producer_hadeed", "producer_alupco", "producer_altaiseer_talco",
-        "producer_maaden", "wco_hs_nomenclature",
+        "producer_maaden", "producer_spimaco", "producer_sabic_agrinutrients",
+        "sfda_registers", "wco_hs_nomenclature",
     ):
         assert reg.snapshot_kinds(source) == frozenset({"document"})
 

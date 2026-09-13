@@ -146,5 +146,17 @@ class ProducerMaadenConnector(DocumentConnector):
     source_id = "producer_maaden"
 
 
+class ProducerSpimacoConnector(DocumentConnector):
+    source_id = "producer_spimaco"
+
+
+class ProducerSabicAgriNutrientsConnector(DocumentConnector):
+    source_id = "producer_sabic_agrinutrients"
+
+
+class SfdaRegistersConnector(DocumentConnector):
+    source_id = "sfda_registers"
+
+
 class WcoHsNomenclatureConnector(DocumentConnector):
     source_id = "wco_hs_nomenclature"

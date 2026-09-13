@@ -1,7 +1,7 @@
 metadata:
-  version: "1.4.0"
+  version: "1.5.0"
   effective_date: "2026-09-13"
-  authority: "Methodology §3.2, §11, §11.3; Core 05 v2 §3.2, §4-§6, §10-§11; owner rulings OD-6 and OD-9"
+  authority: "Methodology §3.2, §11, §11.3; Core 05 v2 §3.2, §4-§6, §10-§11; owner rulings OD-6, OD-9 and S15 OD-7"
 
 raw_store:
   root: data/raw
@@ -711,6 +711,105 @@ sources:
     default_reviewer_status: unconfirmed_by_responsible_authority
     expected_content_types:
       - application/pdf
+      - text/html
+    user_agent: industrial-opportunity-resolution-mvp/0.2.0 (public-data acquisition;
+      offline runtime)
+    recorded_on: '2026-09-13'
+  producer_spimaco:
+    authority: SPIMACO — Saudi Pharmaceutical Industries and Medical Appliances Corporation public IR disclosures
+    access_classification: public_open
+    documentation_reference: https://ir.spimaco.com.sa
+    terms_reference: UNAVAILABLE
+    endpoint_templates:
+      DOCUMENT: '{document_url}'
+      TERMS: UNAVAILABLE
+    parameters:
+      product_all_token: UNAVAILABLE
+      partner_world_token: UNAVAILABLE
+      reporter_token: UNAVAILABLE
+      flow_tokens: UNAVAILABLE
+    pagination:
+      kind: NONE
+      documentation_reference: UNAVAILABLE
+      parameters: {}
+    nomenclature: UNAVAILABLE
+    reporter_code: SAU
+    credential_env_var: UNAVAILABLE
+    rate_limit:
+      documented_policy: UNAVAILABLE
+      min_interval_seconds: 2.0
+      max_attempts: 3
+      timeout_seconds: 60
+    license_capture_required: false
+    default_evidence_class: C
+    default_reviewer_status: unconfirmed_by_responsible_authority
+    expected_content_types:
+      - application/pdf
+    user_agent: industrial-opportunity-resolution-mvp/0.2.0 (public-data acquisition;
+      offline runtime)
+    recorded_on: '2026-09-13'
+  producer_sabic_agrinutrients:
+    authority: SABIC Agri-Nutrients Company public disclosures
+    access_classification: public_open
+    documentation_reference: https://www.sabic-agrinutrients.com/en/investor-relations/reports
+    terms_reference: https://safco.com.sa/en/legal-dislaimer
+    endpoint_templates:
+      DOCUMENT: '{document_url}'
+      TERMS: https://safco.com.sa/en/legal-dislaimer
+    parameters:
+      product_all_token: UNAVAILABLE
+      partner_world_token: UNAVAILABLE
+      reporter_token: UNAVAILABLE
+      flow_tokens: UNAVAILABLE
+    pagination:
+      kind: NONE
+      documentation_reference: UNAVAILABLE
+      parameters: {}
+    nomenclature: UNAVAILABLE
+    reporter_code: SAU
+    credential_env_var: UNAVAILABLE
+    rate_limit:
+      documented_policy: UNAVAILABLE
+      min_interval_seconds: 2.0
+      max_attempts: 3
+      timeout_seconds: 60
+    license_capture_required: true
+    default_evidence_class: C
+    default_reviewer_status: unconfirmed_by_responsible_authority
+    expected_content_types:
+      - application/pdf
+    user_agent: industrial-opportunity-resolution-mvp/0.2.0 (public-data acquisition;
+      offline runtime)
+    recorded_on: '2026-09-13'
+  sfda_registers:
+    authority: Saudi Food and Drug Authority — public drug registers
+    access_classification: public_open
+    documentation_reference: https://www.sfda.gov.sa/en/drug-companies
+    terms_reference: https://www.sfda.gov.sa/en/terms-of-use
+    endpoint_templates:
+      DOCUMENT: '{document_url}'
+      TERMS: https://www.sfda.gov.sa/en/terms-of-use
+    parameters:
+      product_all_token: UNAVAILABLE
+      partner_world_token: UNAVAILABLE
+      reporter_token: UNAVAILABLE
+      flow_tokens: UNAVAILABLE
+    pagination:
+      kind: NONE
+      documentation_reference: UNAVAILABLE
+      parameters: {}
+    nomenclature: UNAVAILABLE
+    reporter_code: SAU
+    credential_env_var: UNAVAILABLE
+    rate_limit:
+      documented_policy: UNAVAILABLE
+      min_interval_seconds: 2.0
+      max_attempts: 3
+      timeout_seconds: 60
+    license_capture_required: true
+    default_evidence_class: B
+    default_reviewer_status: unconfirmed_by_responsible_authority
+    expected_content_types:
       - text/html
     user_agent: industrial-opportunity-resolution-mvp/0.2.0 (public-data acquisition;
       offline runtime)

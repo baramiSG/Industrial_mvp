@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
+from copy import deepcopy
 from datetime import date
 from pathlib import Path
 from unittest.mock import patch
@@ -10,22 +12,29 @@ from unittest.mock import patch
 import pytest
 
 from ior_mvp.acquisition import repository
-from ior_mvp.acquisition.connectors.base import ConnectorRegistry
+from ior_mvp.acquisition.connectors.base import ConnectorRegistry, default_registry
 from ior_mvp.acquisition.contracts import (
     CompletenessBasis,
     ProductScope,
     QueryContract,
     Stage,
     UnavailableReason,
+    canonical_dumps,
 )
-from ior_mvp.acquisition.coverage import evaluate_coverage, not_attempted_coverage
+from ior_mvp.acquisition.coverage import (
+    evaluate_coverage,
+    not_attempted_coverage,
+    select_latest_units,
+)
 from ior_mvp.acquisition.kinds import default_kind_registry
 from ior_mvp.acquisition.passports import assert_passport_complete
 from ior_mvp.acquisition.pipeline import build_snapshots
 from ior_mvp.acquisition.raw_store import RawStore
 from ior_mvp.acquisition.snapshots import (
     build_partner_snapshot,
+    build_row_snapshot,
     build_universe_snapshot,
+    reconstruct_pinned,
     snapshot_id,
     validate_partner_snapshot,
     write_snapshot,
@@ -103,6 +112,174 @@ def test_un_comtrade_partner_snapshot_id_is_distinct_and_wits_snapshot_bytes_unc
         assert path.name not in expected
         payload = json.loads(path.read_text(encoding="utf-8"))
         assert payload["source_id"] == "un_comtrade"
+
+
+def test_same_day_collision_uses_deterministic_scope_and_reconstructs(
+    tmp_path: Path,
+) -> None:
+    config = _config_with_test_source()
+    store = _temp_store(tmp_path)
+    registry = ConnectorRegistry({"TEST-FIXTURE": DoubleConnector})
+    source_config = config["sources"]["TEST-FIXTURE"]
+
+    first = QueryContract(
+        source_id="TEST-FIXTURE",
+        stage=Stage.PARTNERS,
+        reporter="SAU",
+        partner="WLD",
+        flow="imports",
+        product_scope=ProductScope.EXPLICIT,
+        product_codes=("721049",),
+        nomenclature="H0",
+        periods=("2024",),
+    )
+    seed_unit(
+        store,
+        contract=first,
+        run_id="20260904T120000Z",
+        payload=_fixture("test_double_trade_rows.json"),
+        source_config=source_config,
+    )
+    unscoped = build_partner_snapshot(
+        store, config, registry, source_id="TEST-FIXTURE"
+    )
+    unscoped_path = write_snapshot(
+        unscoped, tmp_path, allow_test_double=True
+    )
+    assert unscoped_path.stem == "PARTNERS-SAU-TEST-FIXTURE-2026-09-04"
+    assert "scope_units" not in unscoped
+    assert "coexists_with" not in unscoped
+
+    second = QueryContract(
+        source_id="TEST-FIXTURE",
+        stage=Stage.PARTNERS,
+        reporter="SAU",
+        partner="WLD",
+        flow="imports",
+        product_scope=ProductScope.EXPLICIT,
+        product_codes=("730110",),
+        nomenclature="H0",
+        periods=("2024",),
+    )
+    seed_unit(
+        store,
+        contract=second,
+        run_id="20260904T130000Z",
+        payload=_fixture("test_double_trade_rows.json"),
+        source_config=source_config,
+    )
+    latest = select_latest_units(
+        store, source_id="TEST-FIXTURE", stage=Stage.PARTNERS
+    )
+    second_key = ("730110", "imports", "2024")
+    collision = build_row_snapshot(
+        store,
+        config,
+        registry,
+        kind="partners",
+        source_id="TEST-FIXTURE",
+        selected_override={second_key: latest[second_key]},
+    )
+    scoped_path = write_snapshot(
+        collision, tmp_path, allow_test_double=True
+    )
+    scoped = json.loads(scoped_path.read_text(encoding="utf-8"))
+    scope_units = sorted(
+        (unit["unit_key"] for unit in collision["coverage"]["units"]),
+        key=canonical_dumps,
+    )
+    scope12 = hashlib.sha256(
+        canonical_dumps(scope_units).encode("utf-8")
+    ).hexdigest()[:12]
+
+    assert scoped_path.stem == f"{unscoped_path.stem}-{scope12}"
+    assert scoped["snapshot_id"] == scoped_path.stem
+    assert scoped["scope_units"] == scope_units
+    assert scoped["coexists_with"] == unscoped_path.stem
+    assert "supersedes" not in scoped
+    assert unscoped_path.read_text(encoding="utf-8") == canonical_dumps(unscoped)
+    assert reconstruct_pinned(scoped_path, store, config, registry).match
+    assert reconstruct_pinned(unscoped_path, store, config, registry).match
+    assert write_snapshot(
+        unscoped, tmp_path, allow_test_double=True
+    ) == unscoped_path
+
+    wrong_scope = deepcopy(scoped)
+    wrong_scope["snapshot_id"] = f"{scoped['snapshot_id'][:-1]}0"
+    with pytest.raises(ValueError, match="snapshot_id mismatch"):
+        validate_partner_snapshot(
+            wrong_scope, allow_test_double=True, data_root=tmp_path
+        )
+
+    overlapping = build_partner_snapshot(
+        store, config, registry, source_id="TEST-FIXTURE"
+    )
+    with pytest.raises(ValueError, match="overlap"):
+        write_snapshot(overlapping, tmp_path, allow_test_double=True)
+
+    missing_sibling = deepcopy(scoped)
+    with pytest.raises(ValueError, match="sibling does not exist"):
+        validate_partner_snapshot(
+            missing_sibling,
+            allow_test_double=True,
+            data_root=tmp_path / "missing",
+        )
+
+    superseding = deepcopy(scoped)
+    superseding["supersedes"] = unscoped_path.stem
+    with pytest.raises(ValueError, match="must not supersede"):
+        validate_partner_snapshot(
+            superseding, allow_test_double=True, data_root=tmp_path
+        )
+
+
+def test_s15_scoped_partner_snapshot_is_four_units_and_s14_is_unchanged() -> None:
+    root = PROJECT_ROOT / "data"
+    partner_root = root / "snapshots" / "partners"
+    sibling_path = (
+        partner_root / "PARTNERS-SAU-UN-COMTRADE-2026-09-13.json"
+    )
+    scoped_path = (
+        partner_root
+        / "PARTNERS-SAU-UN-COMTRADE-2026-09-13-edbd1926e196.json"
+    )
+    assert hashlib.sha256(sibling_path.read_bytes()).hexdigest() == (
+        "e523c834e18193385f5f29c954c48b1c9e79023d401d560b5ddea78036cbe47b"
+    )
+    sibling = json.loads(sibling_path.read_text(encoding="utf-8"))
+    scoped = json.loads(scoped_path.read_text(encoding="utf-8"))
+    scoped_units = {tuple(unit) for unit in scoped["scope_units"]}
+    sibling_units = {
+        tuple(unit["unit_key"]) for unit in sibling["coverage"]["units"]
+    }
+    assert scoped_units == {
+        ("294110", "imports", "2024"),
+        ("294120", "imports", "2024"),
+        ("310430", "imports", "2024"),
+        ("310510", "imports", "2024"),
+    }
+    assert scoped_units.isdisjoint(sibling_units)
+    assert scoped["coverage"]["units_requested"] == 4
+    assert scoped["coverage"]["units_complete"] == 4
+    assert scoped["coverage"]["units_excluded"] == []
+    assert scoped["transformation_record"]["exclusions"] == []
+    assert not any(row["hs6"] == "721061" for row in scoped["rows"])
+    validate_partner_snapshot(scoped, data_root=root)
+
+    config = acquisition_sources_config()
+    raw_config = config["raw_store"]
+    store = RawStore(
+        root / "raw",
+        max_artifact_bytes=raw_config["max_artifact_bytes_compressed"],
+        max_store_bytes=raw_config["max_store_bytes_compressed"],
+    )
+    registry = default_registry()
+    assert reconstruct_pinned(
+        sibling_path, store, config, registry
+    ).match
+    assert reconstruct_pinned(
+        scoped_path, store, config, registry
+    ).match
 
 
 def test_acquired_snapshot_loaders_read_only_their_kind_and_validate() -> None:

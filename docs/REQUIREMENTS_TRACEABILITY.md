@@ -354,6 +354,24 @@ reviewer-grok correction-round APPROVE with zero findings on candidate
 `24c3b3cc…`, PR CI 5/5 on exact head `19eef02` (run `34743000153`), and
 merged-main CI 5/5 (run `34743666297`). Parent S14 is COMPLETE; S15 follows.
 
+## T. Milestone v0.3.0 — S15a evidence child
+
+| ID | Observable acceptance | Implementation evidence | Status | Slice |
+|---|---|---|---|---|
+| V3-S15-SELECT | Four pharma/API and fertiliser cases are selected by version-gated, address-backed rules and reconstruct from recorded inputs. | `S14-CS-1.1`; `CASE-SELECTION-S15-b96de36ff0ce`; typed `SERIES_GAP_YEARS`; WCO-addressed `identity_exclusions`; OD-16 recorded-input reconstruction. | TESTED | s15a |
+| V3-S15-FAMILIES | Pharma/API and fertiliser family scope is versioned without rebuilding S13 screening. | product families 1.2.0; exact retained 1.1.0 bytes; screening reconstruction. | TESTED | s15a |
+| V3-S15-EVIDENCE | New public WCO, producer, regulator and partner evidence is bounded, source-qualified and reconstructible. | W-A15a three WCO records; W-A15b SPIMACO/SABIC/SFDA records; W-P15 four COMPLETE units; scoped snapshot with disjoint units. | TESTED | s15a |
+| V3-S15-ENTITY | New publisher spans enter a third artifact without inferred capability. | `mentions-v3`; `ENTITIES-2026-09-13-219b097bddda`; two exact document links. | TESTED | s15a |
+| V3-S15-BRIEF | Four CaseBriefs deterministically build through PublicSnapshot 2.2.0 with honest partner state and unknown capability. | OBSERVED 10/4/11/11; every capability state `U`; every profile hard gate `UNAVAILABLE`; no synthetic marker. | TESTED | s15a |
+| V3-S15-ENGINE | Public results are computed rather than authored. | Four INVESTIGATE/null proofs; reason `ROUTE_CHANGING_EVIDENCE_UNRESOLVED`; fired R0/R1-D/R2/R3/R4-D/R10/R12. | TESTED | s15a |
+| V3-S15-PORTABLE | Generated manifests, frozen roots, portability and CI pass on the exact candidate. | Pending T12 one-run receipt, different-path copy, local `make ci` and committed scratch-clone `CI=1 make ci`. | IMPLEMENTED | s15a |
+
+OD-16 records a selection sensitivity, not a second selection: the later SABIC
+document changes a raw current-state diagnostic digest and non-selected 310210
+disclosure coverage, but the selected four codes remain unchanged and the
+diagnostic is not promoted. Independent implementation review, PR, hosted CI,
+merge and parent completion remain separate gates.
+
 ## Branch and release-state rules
 
 1. No row on the S05 implementation branch is promoted above `TESTED`.

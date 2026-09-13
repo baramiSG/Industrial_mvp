@@ -6,9 +6,18 @@ from dataclasses import dataclass, fields
 from math import isfinite
 from datetime import date
 from enum import StrEnum
-from typing import Any, Callable, Mapping
+from typing import Any, Callable, Mapping, Sequence
 
-from .contracts import DirectoryRow, ProductionObservation, RegistryRow, Stage, canonical_dumps, source_tag, stage_spec
+from .contracts import (
+    DirectoryRow,
+    ProductionObservation,
+    RegistryRow,
+    Stage,
+    canonical_dumps,
+    sha256_bytes,
+    source_tag,
+    stage_spec,
+)
 
 
 class CompletenessPolicy(StrEnum):
@@ -58,10 +67,31 @@ class KindRegistry:
     def stage_for(self, kind: str) -> Stage:
         return self.get(kind).stage
 
-    def snapshot_id(self, kind: str, *, source_id: str, nomenclature: str, as_of_date: date) -> str:
+    def snapshot_id(
+        self,
+        kind: str,
+        *,
+        source_id: str,
+        nomenclature: str,
+        as_of_date: date,
+        scope_units: Sequence[Sequence[str]] | None = None,
+    ) -> str:
         spec = self.get(kind)
         classification = f"-{nomenclature}" if spec.id_includes_nomenclature else ""
-        return f"{spec.id_prefix}-SAU-{source_tag(source_id)}{classification}-{as_of_date.isoformat()}"
+        base = (
+            f"{spec.id_prefix}-SAU-{source_tag(source_id)}"
+            f"{classification}-{as_of_date.isoformat()}"
+        )
+        if scope_units is None:
+            return base
+        canonical_units = sorted(
+            (list(unit) for unit in scope_units),
+            key=canonical_dumps,
+        )
+        scope12 = sha256_bytes(
+            canonical_dumps(canonical_units).encode("utf-8")
+        )[:12]
+        return f"{base}-{scope12}"
 
 
 def _universe_extra(selected: Mapping) -> dict[str, Any]:

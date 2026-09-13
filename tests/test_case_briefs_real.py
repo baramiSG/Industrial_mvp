@@ -10,7 +10,17 @@ from ior_mvp.config import PROJECT_ROOT
 
 
 BRIEF_ROOT = PROJECT_ROOT / "data" / "cases" / "briefs"
-EXPECTED_HS6 = ("392010", "721012", "721061", "760429", "760711")
+EXPECTED_HS6 = (
+    "294110",
+    "294120",
+    "310430",
+    "310510",
+    "392010",
+    "721012",
+    "721061",
+    "760429",
+    "760711",
+)
 
 
 def _paths() -> list[Path]:
@@ -70,6 +80,30 @@ def test_721061_brief_partner_detail_matches_stored_v3_defective_v1_and_wits_uni
         )
         assert contract["query_hash"] == attempt["query_hash"]
         assert contract["run_id"] == attempt["run_id"]
+
+
+def test_s15_briefs_reference_scoped_observed_partner_units() -> None:
+    expected_rows = {
+        "294110": 10,
+        "294120": 4,
+        "310430": 11,
+        "310510": 11,
+    }
+    snapshot_id = "PARTNERS-SAU-UN-COMTRADE-2026-09-13-edbd1926e196"
+    for hs6, observed_rows in expected_rows.items():
+        brief = json.loads(
+            (
+                BRIEF_ROOT / f"CASE-BRIEF-SAU-H6-{hs6}-v1.json"
+            ).read_text(encoding="utf-8")
+        )
+        detail = brief["partner_detail"]
+        assert brief["partner_snapshot_id"] == snapshot_id
+        assert detail["partner_snapshot_id"] == snapshot_id
+        assert detail["state"] == "PARTNER_DETAIL_OBSERVED"
+        assert detail["reason"] is None
+        assert detail["observed_partner_rows"] == observed_rows
+        assert len(detail["attempts"]) == 1
+        assert detail["attempts"][0]["coverage_status"] == "COMPLETE"
 
 
 def test_built_snapshots_and_briefs_contain_no_credential_header_or_env_value() -> None:

@@ -1,7 +1,7 @@
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
   effective_date: "2026-09-13"
-  authority: "Methodology §§6.3, 13 and 14; owner rulings PR-1 and OD-3"
+  authority: "Methodology §§6.3, 13 and 14; owner rulings PR-1, OD-3 and S15 OD-1/OD-3"
 
 families:
   coated_steel:
@@ -21,14 +21,14 @@ families:
     basis: "Owner ruling OD-3 (2026-09-13): WCO HS 2022 Chapter 39 conversion semi-manufactures 39.17 (tubes, pipes and hoses, and fittings therefor, of plastics), 39.20 (other plates, sheets, film, foil and strip, of plastics, non-cellular and not reinforced, laminated, supported or similarly combined with other materials) and 39.21 (other plates, sheets, film, foil and strip, of plastics), matching profile hard gates 'Polymer/additive compatibility; conversion route; tooling; barrier/performance; food, medical or automotive qualification' (methodology §6.3 profile row). 39.02 remains the §14 worked-case primary-forms family. TITLE_VERIFICATION: DOC-WCO-HS-NOMENCLATURE-53d6f01ac062-0926bf9934da page 7 lines 19–20, page 8 lines 8–9 and line 36; index https://www.wcoomd.org/en/topics/nomenclature/instrument-and-tools/hs-nomenclature-2022-edition/hs-nomenclature-2022-edition.aspx."
   pharma_api:
     sector_profile: pharma_api
-    hs4_headings: []
-    status: MEMBERSHIP_UNAVAILABLE
-    basis: "Owner/analyst mapping pending under OD-6"
+    hs4_headings: ["2933", "2934", "2935", "2936", "2937", "2939", "2941"]
+    status: AVAILABLE
+    basis: "Owner confirmation 2026-09-13 (PR-1 default): WCO HS 2022 Chapter 29 headings 29.33, 29.34, 29.35, 29.36, 29.37, 29.39 and 29.41 whose legal titles name pharmaceutically defined molecule classes in the confirmed API-synthesis core. The 3002/3003/3004 biological and finished-dosage boundary is excluded by owner scope and remains shown, not hidden. TITLE_VERIFICATION: DOC-WCO-HS-NOMENCLATURE-fd99902db1af-d01a792902be page 17 line 3, page 18 lines 24 and 40, page 19 lines 5 and 20, page 20 line 12, page 21 line 10; boundary DOC-WCO-HS-NOMENCLATURE-4e3dbeff29ba-7ad8d2b476a9 page 2 line 33 and page 3 lines 13 and 35."
   fertilizers:
     sector_profile: fertilizers
-    hs4_headings: []
-    status: MEMBERSHIP_UNAVAILABLE
-    basis: "Owner/analyst mapping pending under OD-6"
+    hs4_headings: ["3102", "3103", "3104", "3105"]
+    status: AVAILABLE
+    basis: "Owner confirmation 2026-09-13 (PR-1 default): WCO HS 2022 Chapter 31 headings 31.02, 31.03, 31.04 and 31.05 are the confirmed mineral or chemical fertilisers core. Heading 3101 is the organic-fertiliser boundary excluded by owner scope and remains shown, not hidden. Feedstock headings 2814, 2809, 2510 and 2503 are excluded from the product family. TITLE_VERIFICATION: DOC-WCO-HS-NOMENCLATURE-fe3ed4f5325a-88edcc1ee93d page 2 lines 14, 30, 37 and 42–45; boundary 31.01 page 2 line 10."
   fabricated_aluminium:
     sector_profile: fabricated_aluminium
     hs4_headings: ["7604", "7605", "7606", "7607", "7608", "7609", "7610", "7611", "7612", "7613", "7614", "7616"]

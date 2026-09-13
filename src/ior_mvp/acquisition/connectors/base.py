@@ -897,10 +897,13 @@ def default_registry() -> ConnectorRegistry:
         ProducerAltaiseerTalcoConnector,
         ProducerHadeedConnector,
         ProducerMaadenConnector,
+        ProducerSabicAgriNutrientsConnector,
         ProducerSabicConnector,
+        ProducerSpimacoConnector,
         ProducerTasneeConnector,
         ProducerUnicoilConnector,
         SasoDocumentsConnector,
+        SfdaRegistersConnector,
         TadawulDisclosuresConnector,
         WcoHsNomenclatureConnector,
     )
@@ -927,6 +930,9 @@ def default_registry() -> ConnectorRegistry:
             "producer_alupco": ProducerAlupcoConnector,
             "producer_altaiseer_talco": ProducerAltaiseerTalcoConnector,
             "producer_maaden": ProducerMaadenConnector,
+            "producer_spimaco": ProducerSpimacoConnector,
+            "producer_sabic_agrinutrients": ProducerSabicAgriNutrientsConnector,
+            "sfda_registers": SfdaRegistersConnector,
             "wco_hs_nomenclature": WcoHsNomenclatureConnector,
         }
     )

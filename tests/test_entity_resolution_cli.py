@@ -270,6 +270,7 @@ def test_reconstruct_script_entities_temp_root_exit_0_and_three_pass_lines(
         "RECONSTRUCTION PASS (0 snapshots, 0 artifacts)",
         "DOCUMENT RECONSTRUCTION PASS (0 records, 0 artifacts)",
         "ENTITY RECONSTRUCTION PASS (1 artifacts, 1 links)",
+        "CASE SELECTION RECONSTRUCTION PASS (0 records)",
     ]
 
 

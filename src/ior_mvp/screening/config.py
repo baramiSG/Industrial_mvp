@@ -98,8 +98,8 @@ def validate_screening_config(value: dict[str, Any]) -> None:
 
 
 def validate_product_families(value: dict[str, Any]) -> None:
-    if value.get("metadata", {}).get("version") != "1.1.0":
-        raise ScreeningConfigurationError("product-family version must be 1.1.0")
+    if value.get("metadata", {}).get("version") != "1.2.0":
+        raise ScreeningConfigurationError("product-family version must be 1.2.0")
     seen: set[str] = set()
     for family_id, family in value.get("families", {}).items():
         if family.get("sector_profile") not in SECTOR_PROFILES:
