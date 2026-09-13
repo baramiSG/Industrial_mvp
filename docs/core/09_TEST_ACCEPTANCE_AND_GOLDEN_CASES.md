@@ -188,6 +188,28 @@ The grammar can admit ALL-CAPS English words, snake/dotted lowercase English
 and Title-Case-plus-digit strings; content parity therefore also requires
 English-template equality and the catalogue-label leak check.
 
+### 2.8 Graph projection and live-Cypher tests
+
+Offline tests validate the stored `data/graph/` export, exact 19-label and
+15-edge vocabulary, endpoint rules, canonical ordering, write-once behavior,
+input-derived identity, provenance completeness, public/Class-D partition,
+derived-output flags and two-build byte equality.
+
+Live tests are isolated under `graph_tests/`, outside default `testpaths`.
+They require `IOR_GRAPH_TEST_EXPLICIT=1`, delete or reject inherited Aura
+connection state, and permit only the local Compose or isolated CI target.
+The designated graph gate creates all 19 uniqueness constraints, loads by
+governed id, proves a second load creates 0/0, compares every label/type count,
+checks provenance and partition with Cypher, and compares the four fixed
+Cypher views with deterministic artifact functions. With the service stopped,
+the API must return typed `GRAPH_UNAVAILABLE`, never HTTP 500 or an artifact
+fallback.
+
+`scripts/reconstruct_snapshot.py --all` additionally rebuilds the current
+projection from its recorded governed inputs and emits
+`GRAPH RECONSTRUCTION PASS`. The Aura suite is operator-only and cannot
+collect without both the operator flag and exact instance confirmation.
+
 ## 3. Threshold boundary tests
 
 For every threshold, include below/equal/above cases where applicable.
@@ -222,6 +244,16 @@ Required assertions:
 
 TL-09 assertions 8 and 9 extend the synthetic-isolation boundary to the
 summary, queue, record and evidence-passport screening surfaces.
+
+TL-09 assertions 10–12 extend the boundary to the graph:
+
+10. every public graph query filters nodes and relationships with
+    `synthetic_flag=false`;
+11. no synthetic node or edge appears on a public graph payload or feeds a
+    real-decision graph input; and
+12. every public node and edge carries `synthetic_flag=false` and the
+    `scenario_id='PUBLIC'` sentinel, while every synthetic element carries
+    Class D, its scenario id and both visible warning labels.
 
 ## 5. Snapshot test policy
 
@@ -393,6 +425,17 @@ python3 scripts/demo_smoke.py
 ```
 
 All must pass.
+
+### Gate I — Graph
+
+- the governed projection validates and reconstructs byte-for-byte;
+- the local or designated CI Neo4j mirror is loaded with all 19 uniqueness
+  constraints and exact artifact counts;
+- the second load creates zero nodes and zero relationships;
+- provenance null counts and public/Class-D partition violations are zero;
+- required Cypher view results equal deterministic artifact functions;
+- the stopped service returns typed `GRAPH_UNAVAILABLE`; and
+- no ordinary test or CI job can select Aura.
 
 ## 7. Definition of done for the packaged MVP
 

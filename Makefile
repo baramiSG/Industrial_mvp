@@ -2,6 +2,7 @@ UV ?= $(HOME)/.local/bin/uv
 NODE ?= node
 UV_RUN = $(UV) run --locked --extra dev
 UV_RUN_E2E = $(UV) run --locked --extra dev --extra e2e
+UV_RUN_GRAPH = $(UV) run --locked --extra dev --extra graph
 UI_CONTRACTS = $(UV_RUN) python scripts/check_ui_contracts.py
 ES_MODULE_CHECK = $(UV_RUN) python scripts/check_es_modules.py --node "$(NODE)"
 E2E_ARTIFACT_DIR ?= .artifacts/e2e
@@ -25,7 +26,10 @@ VISUAL_BASELINE_IMAGE = ior-visual-baselines:playwright-1.62.0-noble
 	acquire-documents build-documents build-entities build-screening \
 	validate-screening screening-reconstruct screen-candidates \
 	select-cases select-cases-s15 reconstruct-selection \
-	validate-briefs build-case cases-reconstruct
+	validate-briefs build-case cases-reconstruct \
+	graph-build graph-validate graph-credential graph-up graph-load \
+	graph-verify graph-tests graph-down graph-unavailable-test graph-gate \
+	graph-aura-load graph-aura-verify
 
 install:
 	python3 -m pip install -e ".[dev]"
@@ -87,10 +91,11 @@ e2e-update-baselines: visual-baseline-image
 		--change-ref "$(IOR_BASELINE_CHANGE_REF)"
 
 ci: uv-sync
+	$(MAKE) graph-gate
 	$(UV_RUN) python scripts/check_prohibited_files.py
 	$(UV_RUN) python scripts/check_threshold_literals.py
 	$(UI_CONTRACTS)
-	$(UV_RUN) python -m compileall -q src scripts tests browser_tests
+	$(UV_RUN) python -m compileall -q src scripts tests browser_tests graph_tests
 	$(ES_MODULE_CHECK)
 	PYTHONPATH=src $(UV_RUN) python scripts/verify_integrity.py
 	PYTHONPATH=src $(UV_RUN) python scripts/validate_scenarios.py
@@ -225,3 +230,86 @@ build-case:
 
 cases-reconstruct:
 	PYTHONPATH=src $(UV_RUN) python -m ior_mvp.cases reconstruct
+
+graph-build:
+	PYTHONDONTWRITEBYTECODE=1 PYTHONPYCACHEPREFIX=/tmp/ior-s16a-pyc \
+		PYTHONPATH=src $(UV_RUN_GRAPH) python -m ior_mvp.graph build
+
+graph-validate:
+	PYTHONDONTWRITEBYTECODE=1 PYTHONPYCACHEPREFIX=/tmp/ior-s16a-pyc \
+		PYTHONPATH=src $(UV_RUN_GRAPH) python -m ior_mvp.graph validate
+
+graph-credential:
+	PYTHONDONTWRITEBYTECODE=1 PYTHONPYCACHEPREFIX=/tmp/ior-s16a-pyc \
+		PYTHONPATH=src $(UV_RUN_GRAPH) python -m ior_mvp.graph credential
+
+graph-up: graph-credential
+	docker compose up -d --pull never industrial-mvp-neo4j
+	NEO4J_AUTH_FILE="$(CURDIR)/.secrets/neo4j_auth.txt" \
+		PYTHONDONTWRITEBYTECODE=1 PYTHONPYCACHEPREFIX=/tmp/ior-s16a-pyc \
+		PYTHONPATH=src $(UV_RUN_GRAPH) python -m ior_mvp.graph wait \
+		--target compose --timeout 180
+
+graph-load:
+	NEO4J_AUTH_FILE="$(CURDIR)/.secrets/neo4j_auth.txt" \
+		PYTHONDONTWRITEBYTECODE=1 PYTHONPYCACHEPREFIX=/tmp/ior-s16a-pyc \
+		PYTHONPATH=src $(UV_RUN_GRAPH) python -m ior_mvp.graph load \
+		--target compose
+
+graph-verify:
+	NEO4J_AUTH_FILE="$(CURDIR)/.secrets/neo4j_auth.txt" \
+		PYTHONDONTWRITEBYTECODE=1 PYTHONPYCACHEPREFIX=/tmp/ior-s16a-pyc \
+		PYTHONPATH=src $(UV_RUN_GRAPH) python -m ior_mvp.graph verify \
+		--target compose
+
+graph-tests:
+	IOR_GRAPH_TEST_EXPLICIT=1 IOR_GRAPH_TARGET=compose \
+		NEO4J_AUTH_FILE="$(CURDIR)/.secrets/neo4j_auth.txt" \
+		PYTHONDONTWRITEBYTECODE=1 PYTHONPYCACHEPREFIX=/tmp/ior-s16a-pyc \
+		PYTHONPATH=src $(UV_RUN_GRAPH) pytest -q graph_tests \
+		-m "graph and not graph_unavailable"
+
+graph-down:
+	docker compose stop industrial-mvp-neo4j
+
+graph-unavailable-test:
+	IOR_GRAPH_TEST_EXPLICIT=1 IOR_GRAPH_TARGET=compose \
+		NEO4J_AUTH_FILE="$(CURDIR)/.secrets/neo4j_auth.txt" \
+		PYTHONDONTWRITEBYTECODE=1 PYTHONPYCACHEPREFIX=/tmp/ior-s16a-pyc \
+		PYTHONPATH=src $(UV_RUN_GRAPH) pytest -q graph_tests \
+		-m graph_unavailable
+
+graph-gate:
+	@$(MAKE) graph-up
+	@set -eu; \
+		trap '$(MAKE) graph-down >/dev/null 2>&1 || true' EXIT; \
+		NEO4J_AUTH_FILE="$(CURDIR)/.secrets/neo4j_auth.txt" \
+		PYTHONDONTWRITEBYTECODE=1 PYTHONPYCACHEPREFIX=/tmp/ior-s16a-pyc \
+		PYTHONPATH=src $(UV_RUN_GRAPH) python -m ior_mvp.graph clear --target compose --confirm-clear industrial-mvp-neo4j; \
+		$(MAKE) graph-load; \
+		$(MAKE) graph-load; \
+		$(MAKE) graph-verify; \
+		$(MAKE) graph-tests; \
+		$(MAKE) graph-down; \
+		$(MAKE) graph-unavailable-test; \
+		echo GRAPH_UNAVAILABLE_OK
+
+graph-aura-load:
+	@test "$(IOR_GRAPH_AURA_OPERATOR)" = "1" || \
+		(echo "IOR_GRAPH_AURA_OPERATOR=1 required" >&2; exit 2)
+	@test -n "$(AURA_CONFIRM)" || (echo "AURA_CONFIRM required" >&2; exit 2)
+	@test -z "$(CI)" || (echo "CI may not connect to Aura" >&2; exit 2)
+	@set -a; . ./.env; set +a; \
+		PYTHONDONTWRITEBYTECODE=1 PYTHONPYCACHEPREFIX=/tmp/ior-s16a-pyc \
+		PYTHONPATH=src $(UV_RUN_GRAPH) python -m ior_mvp.graph load \
+		--target aura --confirm-instance "$(AURA_CONFIRM)"
+
+graph-aura-verify:
+	@test "$(IOR_GRAPH_AURA_OPERATOR)" = "1" || \
+		(echo "IOR_GRAPH_AURA_OPERATOR=1 required" >&2; exit 2)
+	@test -n "$(AURA_CONFIRM)" || (echo "AURA_CONFIRM required" >&2; exit 2)
+	@test -z "$(CI)" || (echo "CI may not connect to Aura" >&2; exit 2)
+	@set -a; . ./.env; set +a; \
+		PYTHONDONTWRITEBYTECODE=1 PYTHONPYCACHEPREFIX=/tmp/ior-s16a-pyc \
+		PYTHONPATH=src $(UV_RUN_GRAPH) python -m ior_mvp.graph verify \
+		--target aura --confirm-instance "$(AURA_CONFIRM)"

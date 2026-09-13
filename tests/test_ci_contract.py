@@ -334,6 +334,7 @@ def test_ci_workflow_contains_no_optional_failure_escape() -> None:
         "uv-gates",
         "pip-gates",
         "docker-build",
+        "graph-gates",
         "browser-gates",
     }
     for job_name, job in workflow["jobs"].items():

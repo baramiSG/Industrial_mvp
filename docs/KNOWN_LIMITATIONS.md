@@ -121,6 +121,17 @@ Updated by the Supervisor at every slice completion. Items marked *pre-existing*
 | KL-116 | S15 W-P15's aggregate RunReport `requests_made=14` is not a transport count. | The shared budget used five actual HTTP requests (one terms plus four data); the aggregate sums cumulative per-unit values 2+3+4+5. This pre-existing reporting defect is disclosed, not corrected in S15a. |
 | KL-117 | Same-day Comtrade partner evidence requires two authoritative snapshots. | The scoped S15 snapshot contains four disjoint units and no copied S14 exclusions; it coexists with the unchanged S14a snapshot. Neither supersedes the other and consumers must select by recorded unit identity. |
 
+## S16a graph-projection limitations (open, not fabricated)
+
+| ID | Limitation | Evidence / boundary |
+|---|---|---|
+| KL-118 | No COMPLETE ZATCA tariff unit exists on base `1289e31`; the graph therefore contains one `TARIFF-SA12-UNAVAILABLE` marker and zero `CLASSIFIED_AS` relationships. | Stored ZATCA attempt status is INCOMPLETE / `MAX_REQUESTS_EXHAUSTED`; graph artifact validation and live count tests. A future line may be projected only from a COMPLETE governed unit. |
+| KL-119 | Public `Input`, `Technology`, `Equipment` and `CustomerSegment` facts were not identified within the S16a governed base inputs. | The v2 vocabulary retains the types but the projection does not manufacture instances. Class-D scenario nodes remain labelled and isolated. |
+| KL-120 | Methodology §8.3 sequencing dependency, common exposure, cannibalisation and option-value outputs are not computed in S16a. | The approved PR-S16-12 RQ-16 scope records those portfolio outputs as later work; no governed dependency facts currently support them. |
+| KL-121 | Route 8 remains `NOT_CALCULABLE / GRAPH_REQUIRED` in S16a because the base scenarios contain no governed `shared_enabler` block and the public evidence contains no passported enabler fact. | The projection contains zero `UNLOCKED_BY` relationships; the live UnlockValue equality test skips only with `NO_UNLOCKED_BY_EDGES_IN_S16A`. S16b owns contract 2.1.0 and activation. |
+| KL-122 | The application container is not wired to Neo4j and `graph.api.router` is deliberately unmounted. | OD-1 split and the approved plan assign the mount to S16b and complete demo orchestration/reset to S21. Host-process and standalone FastAPI tests exercise the S16a contract. |
+| KL-123 | Aura is a managed deployment target under OR-7 although original owner ruling R-6 said no Aura instance. | OD-17 records OR-7 as the superseding target ruling; local Compose remains the offline/demo mirror. No Aura connection or `.env` read occurred in this preparation phase. |
+
 ## S12a institutional acquisition outcomes (open, not fabricated)
 
 The 2026-09-11 bounded documentation consultations and operator invocations are recorded in `.workflow/slices/S12a-acquisition-framework-institutional-sources/implementation_log.md`. All five acquisition attempts made zero requests, stored no pages, have null observed response and INCOMPLETE coverage with ENDPOINT_UNVERIFIED; their sibling `coverage.json` matches embedded attempt coverage. Each kind build returns COVERAGE_INCOMPLETE, not FORMAT_NOT_PARSEABLE. These observations do not prove that the institutions lack public data. No institutional source-specific parser, normalized row or snapshot was invented.

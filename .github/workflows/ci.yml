@@ -48,7 +48,7 @@ jobs:
       - name: Validate UI catalogue, token and copy contracts
         run: uv run --locked --extra dev python scripts/check_ui_contracts.py
       - name: Compile Python
-        run: uv run --locked --extra dev python -m compileall -q src scripts tests
+        run: uv run --locked --extra dev python -m compileall -q src scripts tests graph_tests
       - name: Check JavaScript ES-module syntax
         run: uv run --locked --extra dev python scripts/check_es_modules.py --node node
       - name: Verify integrity
@@ -85,7 +85,7 @@ jobs:
       - name: Validate UI catalogue, token and copy contracts
         run: python scripts/check_ui_contracts.py
       - name: Compile Python
-        run: python -m compileall -q src scripts tests
+        run: python -m compileall -q src scripts tests graph_tests
       - name: Check JavaScript ES-module syntax
         run: python scripts/check_es_modules.py --node node
       - name: Verify integrity
@@ -109,6 +109,75 @@ jobs:
           persist-credentials: false
       - name: Build image
         run: docker build --file Dockerfile --tag industrial-opportunity-resolution-mvp:ci .
+      - name: Verify runtime image excludes optional graph driver
+        run: |
+          docker run --rm industrial-opportunity-resolution-mvp:ci \
+            python -c "import importlib.util,sys; sys.exit(0 if importlib.util.find_spec('neo4j') is None else 1)"
+          echo IMAGE_HAS_NO_NEO4J_OK
+
+  graph-gates:
+    name: graph / Neo4j service / Python 3.12
+    runs-on: ubuntu-latest
+    env:
+      IOR_GRAPH_TARGET: ci
+      NEO4J_USERNAME: neo4j
+      NEO4J_PASSWORD: ci-${{ github.run_id }}-${{ github.run_attempt }}-pw
+      PYTHONDONTWRITEBYTECODE: "1"
+      PYTHONPYCACHEPREFIX: /tmp/ior-s16a-ci-pyc
+    services:
+      neo4j:
+        image: neo4j:5.26.30@sha256:037cf5756f0135cbfd66b739b6df7c7c4bb100f9ce11602f6f9538e17e02c74d
+        env:
+          NEO4J_AUTH: neo4j/ci-${{ github.run_id }}-${{ github.run_attempt }}-pw
+        ports:
+          - 7475:7474
+          - 7688:7687
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+      - name: Sync locked graph environment
+        run: uv sync --locked --extra dev --extra graph --python "3.12"
+      - name: Scan prohibited files and secret patterns
+        run: uv run --locked --extra dev --extra graph python scripts/check_prohibited_files.py
+      - name: Wait for isolated Neo4j service
+        run: >-
+          PYTHONPATH=src uv run --locked --extra dev --extra graph
+          python -m ior_mvp.graph wait --target ci --timeout 180
+      - name: Rebuild-check governed graph projection
+        run: >-
+          PYTHONPATH=src uv run --locked --extra dev --extra graph
+          python -m ior_mvp.graph build --check
+      - name: Load governed projection twice
+        run: |
+          PYTHONPATH=src uv run --locked --extra dev --extra graph python -m ior_mvp.graph load --target ci
+          PYTHONPATH=src uv run --locked --extra dev --extra graph python -m ior_mvp.graph load --target ci
+      - name: Verify live mirror equality
+        run: >-
+          PYTHONPATH=src uv run --locked --extra dev --extra graph
+          python -m ior_mvp.graph verify --target ci
+      - name: Run live Cypher equality suite
+        env:
+          IOR_GRAPH_TEST_EXPLICIT: "1"
+        run: >-
+          PYTHONPATH=src uv run --locked --extra dev --extra graph
+          pytest -q graph_tests -m "graph and not graph_unavailable"
+      - name: Stop service and prove fail-closed behavior
+        env:
+          IOR_GRAPH_TEST_EXPLICIT: "1"
+        run: |
+          docker stop ${{ job.services.neo4j.id }}
+          PYTHONPATH=src uv run --locked --extra dev --extra graph pytest -q graph_tests -m graph_unavailable
 
   browser-gates:
     name: browser / Chromium / Python 3.12

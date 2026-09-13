@@ -1,0 +1,48 @@
+metadata:
+  artifact: industrial-opportunity-graph-views
+  version: "1.0.0"
+  effective_date: "2026-09-13"
+  authority: "SLICE_GRAPH S16/S17 and owner rulings PR-S16-6, PR-S16-8, PR-S16-12"
+  status: governed_for_s16
+
+views:
+  - view_id: adjacency
+    label:
+      en: Why brownfield is adjacent
+      ar: لماذا يُعدّ التوسع في المنشأة القائمة متجاوراً
+    description:
+      en: Evidence-backed process, equipment, standard and certification signals behind R9-S.
+      ar: إشارات العملية والمعدات والمواصفة والشهادة المسندة بالأدلة وراء القاعدة R9-S.
+    params:
+      - opportunity_id
+      - mode
+  - view_id: route_blocking
+    label:
+      en: Capability blocking the route
+      ar: القدرة التي تعيق المسار
+    description:
+      en: Missing capability dimensions and hard gates linked to evaluated intervention routes.
+      ar: أبعاد القدرة والبوابات الصلبة المفقودة والمرتبطة بمسارات التدخل المقيمة.
+    params:
+      - opportunity_id
+      - mode
+  - view_id: shared_enabler
+    label:
+      en: Shared enabler across opportunities
+      ar: عامل تمكين مشترك بين الفرص
+    description:
+      en: Governed dependencies and UnlockValue inputs for shared enabling infrastructure.
+      ar: التبعيات المحكومة ومدخلات قيمة الإتاحة للبنية التمكينية المشتركة.
+    params:
+      - opportunity_id
+      - mode
+  - view_id: evidence_to_change
+    label:
+      en: Evidence that could change the decision
+      ar: الأدلة التي قد تغيّر القرار
+    description:
+      en: Decision-critical evidence needs linked to blocked fields, routes and existing passports.
+      ar: احتياجات الأدلة الحرجة للقرار المرتبطة بالحقول والمسارات المعطلة وجوازات الأدلة القائمة.
+    params:
+      - opportunity_id
+      - mode

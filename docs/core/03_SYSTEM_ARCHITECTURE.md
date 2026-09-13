@@ -362,3 +362,50 @@ mode and does not alter the three S13a route contracts.
 An unavailable universe is a successful typed runtime condition: the summary
 returns HTTP 200 with `universe_status=UNAVAILABLE`, empty queues and the latest
 recorded reason. Unknown queue and HS6 identifiers return typed 404 responses.
+
+## 13. Graph projection runtime
+
+The governed graph has two layers:
+
+1. `data/graph/` is the canonical, offline, hashable and reconstructible
+   projection of public snapshots, Class-D scenarios, entity artifacts,
+   CaseBrief spans, screening identity and tariff-attempt state.
+2. Neo4j mirrors that exact projection for Cypher views. Local Compose, the
+   isolated CI service container and the owner-authorized Aura deployment
+   target use the same idempotent loader and verification contract.
+
+The deterministic engine and existing opportunity endpoints do not open a
+graph socket. They consume the governed artifact in-process; live graph access
+is confined to the unmounted S16a `graph.api.router` contract and is mounted in
+S16b. This preserves the offline demo and warm-response requirements.
+
+The project-owned Compose service is
+`industrial-mvp-neo4j`, pinned to the recorded Neo4j 5.26.30 image digest, on
+loopback host ports 7475/7688 with a dedicated volume and network. Its
+credential is generated once into a git-ignored mode-0600 file and handed to
+the container through the `NEO4J_AUTH_FILE` secret pattern. Because local
+Compose preserves the host file owner, a root entrypoint stages a mode-0400
+runtime copy owned by the Neo4j uid before the vendor entrypoint runs; the
+credential value is never printed.
+
+Targets `compose` and `ci` ignore inherited `NEO4J_URI` and always resolve to
+`bolt://localhost:7688`. Aura is an operator-only deployment target under
+OR-7. Its `neo4j+s` host prefix, `AURA_INSTANCEID`, and explicit
+`--confirm-instance` must agree before driver creation or any write.
+`DETACH DELETE` is unavailable without an exact target-scoped
+`--confirm-clear`.
+
+The loader creates Community-compatible uniqueness constraints for all 19
+labels, per-label indexes, and uses `MERGE` by governed node and relationship
+ids. A second load creates zero nodes and zero relationships. It refuses a
+different live projection before any write; replacement requires an explicit
+clear of the dedicated target. Live verification checks label/type counts,
+provenance on every element, the public/Class-D partition, and the projection
+identity.
+
+When configuration, the optional driver, connectivity, instance identity or
+projection equality is unavailable, `GraphService` returns HTTP 200 with
+`graph_status=GRAPH_UNAVAILABLE`, a typed reason code and empty view elements.
+It never substitutes artifact results for a failed live view and never
+swallows the test-suite `OfflineGuardViolation`. The fixed bilingual view
+catalogue remains available while the service is down.

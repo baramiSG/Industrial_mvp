@@ -66,6 +66,11 @@ def prohibited_path_rules(path: str) -> tuple[str, ...]:
         rules.append("path:*.p12")
     if normalized == ".workflow/logs" or normalized.startswith(".workflow/logs/"):
         rules.append("path:.workflow/logs/")
+    if (
+        ".secrets" in parts
+        and normalized != ".secrets/neo4j_auth.example.txt"
+    ):
+        rules.append("path:.secrets/")
 
     return tuple(rules)
 

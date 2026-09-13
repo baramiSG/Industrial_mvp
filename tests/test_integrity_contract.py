@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 import json
 import re
+import tomllib
 from pathlib import Path
 
 import yaml
@@ -1055,3 +1056,134 @@ def test_s14b_governed_docs_record_portfolio_routes_and_limits() -> None:
         "OD-15",
     ):
         assert token in limitations
+def test_ci_workflow_has_graph_gates_service_job_pinned_by_digest() -> None:
+    project = tomllib.loads(
+        (PROJECT_ROOT / "pyproject.toml").read_text(encoding="utf-8")
+    )
+    assert project["project"]["optional-dependencies"]["graph"] == [
+        "neo4j>=5.28,<6"
+    ]
+    workflow = (
+        PROJECT_ROOT / ".github/workflows/ci.yml"
+    ).read_text(encoding="utf-8")
+    assert "graph-gates:" in workflow
+    assert "name: graph / Neo4j service / Python 3.12" in workflow
+    assert (
+        "neo4j:5.26.30@sha256:"
+        "037cf5756f0135cbfd66b739b6df7c7c4bb100f9ce11602f6f9538e17e02c74d"
+    ) in workflow
+    assert "7688:7687" in workflow
+    assert "7475:7474" in workflow
+    assert "job.services.neo4j.id" in workflow
+    assert "--extra graph" in workflow
+    assert "compileall -q src scripts tests graph_tests" in workflow
+    assert "IMAGE_HAS_NO_NEO4J_OK" in workflow
+
+
+def test_graph_gate_stops_on_failure_and_clears_only_with_confirmation() -> None:
+    makefile = (PROJECT_ROOT / "Makefile").read_text(encoding="utf-8")
+    graph_gate = makefile.split("graph-gate:\n", maxsplit=1)[1].split(
+        "\ngraph-aura-load:",
+        maxsplit=1,
+    )[0]
+    assert "set -eu;" in graph_gate
+    assert (
+        "clear --target compose "
+        "--confirm-clear industrial-mvp-neo4j"
+    ) in graph_gate
+
+
+def test_s16a_core_v2_graph_contracts() -> None:
+    core_02 = (
+        PROJECT_ROOT / "docs/core/02_METHODOLOGY_IMPLEMENTATION_MAP.md"
+    ).read_text(encoding="utf-8")
+    core_03 = (
+        PROJECT_ROOT / "docs/core/03_SYSTEM_ARCHITECTURE.md"
+    ).read_text(encoding="utf-8")
+    core_04 = (
+        PROJECT_ROOT / "docs/core/04_CANONICAL_DATA_MODEL.md"
+    ).read_text(encoding="utf-8")
+    core_09 = (
+        PROJECT_ROOT / "docs/core/09_TEST_ACCEPTANCE_AND_GOLDEN_CASES.md"
+    ).read_text(encoding="utf-8")
+    combined = "\n".join((core_02, core_03, core_04, core_09))
+    for token in (
+        "Graph projection runtime",
+        "CLASSIFIED_AS",
+        "UNLOCKED_BY",
+        "`scenario_id='PUBLIC'`",
+        "GRAPH_UNAVAILABLE",
+        "GRAPH RECONSTRUCTION PASS",
+        "data/graph/",
+        "Gate I — Graph",
+    ):
+        assert token in combined
+    for symbol in (
+        "graph.projection.build_repository_projection",
+        "graph.artifact.validate_projection",
+        "graph.engine_feed.adjacency_explanation",
+        "graph.engine_feed.route_blocking_capability",
+        "graph.engine_feed.evidence_linkage",
+        "graph.loader.load",
+        "graph.loader.verify",
+        "graph.service.GraphService",
+        "graph.api.router",
+    ):
+        assert symbol in core_02
+    for label in (
+        "Product",
+        "TariffLine",
+        "Specification",
+        "Application",
+        "Plant",
+        "ProductionLine",
+        "Process",
+        "Equipment",
+        "Capability",
+        "Standard",
+        "Certification",
+        "Input",
+        "Technology",
+        "Company",
+        "CustomerSegment",
+        "Evidence",
+        "Scenario",
+        "Decision",
+        "Intervention",
+    ):
+        assert label in core_04
+    assert "v1 → v2 mapping" in core_04
+    assert "TL-09 assertions 10–12" in core_09
+    assert "ADR-024" in (
+        PROJECT_ROOT / "docs/ARCHITECTURE_DECISIONS.md"
+    ).read_text(encoding="utf-8")
+    assert "KL-118" in (
+        PROJECT_ROOT / "docs/KNOWN_LIMITATIONS.md"
+    ).read_text(encoding="utf-8")
+    assert (
+        PROJECT_ROOT / "docs/implementation/GRAPH_RUNBOOK.md"
+    ).is_file()
+
+
+def test_build_manifests_includes_graph_root_and_graph_views_config() -> None:
+    source = (PROJECT_ROOT / "scripts/build_manifests.py").read_text(
+        encoding="utf-8"
+    )
+    assert 'ROOT / "data" / "graph"' in source
+    assert 'ROOT / "config" / "graph_views.v1.yaml"' in source
+
+
+def test_reconstruct_script_prints_graph_reconstruction_pass_line(
+    capsys,
+) -> None:
+    from scripts.reconstruct_snapshot import _reconstruct_graph
+
+    projections, nodes, edges = _reconstruct_graph(
+        PROJECT_ROOT / "data",
+        check_manifest=False,
+        manifest_rows={},
+    )
+    assert projections == 1
+    assert nodes > 0
+    assert edges > 0
+    assert "GRAPH RECONSTRUCTION PASS (1 projections," in capsys.readouterr().out
