@@ -1,0 +1,165 @@
+{
+  "decision_narrative": {
+    "INVESTIGATE": {
+      "conditions": [],
+      "headline": {
+        "ar": "تحقّق مُحاكى — ما زالت بوابة واحدة أو أكثر غير محسومة",
+        "en": "SIMULATED INVESTIGATE — one or more gates remain unresolved"
+      },
+      "kill_conditions": [],
+      "rationale": {
+        "ar": "لم يستوف فرع المحاكاة جميع البوابات الصلبة.",
+        "en": "The simulated branch did not satisfy every hard gate."
+      },
+      "route_label": {
+        "ar": "لم تجتز المحاكاة جميع الضوابط",
+        "en": "Simulation controls did not all pass"
+      }
+    },
+    "REJECT": {
+      "conditions": [
+        {
+          "ar": "أعد الفتح فقط لدرجة غشاء حاجزة أو متخصصة مسماة تدعمها أدلة من المشترين.",
+          "en": "Reopen only for a named barrier or specialty film grade supported by buyer evidence."
+        }
+      ],
+      "headline": {
+        "ar": "رفض مُحاكى — الطاقة المحلية المكافئة لأغشية البولي إيثيلين تفوق الطلب المستهدف",
+        "en": "SIMULATED REJECT — equivalent domestic PE film capacity exceeds target demand"
+      },
+      "kill_conditions": [
+        {
+          "ar": "يُوقف أي دعم مقترح للطاقة العامة ما دامت الطاقة المؤهلة المكافئة متاحة.",
+          "en": "Any proposed generic-capacity support is stopped while equivalent qualified capacity is available."
+        }
+      ],
+      "rationale": {
+        "ar": "تُظهر مصفوفة الدرجات الداخلية المحاكاة عرضاً مؤهلاً مكافئاً من أغشية وصفائح البولي إيثيلين يفوق الطلب المستهدف دون إخفاق سوقي ملزم؛ ولن يحقق دعم الطاقة العامة إضافية في بند تصدّر منه المملكة أضعاف ما تستورده.",
+        "en": "The simulated internal grade matrix shows equivalent qualified PE film and sheet supply above target demand with no binding market failure; generic capacity support would be non-additional in a line where the Kingdom already exports several times its imports."
+      },
+      "route_label": {
+        "ar": "لا تدخل",
+        "en": "No intervention"
+      }
+    }
+  },
+  "display_label": "SIMULATED — NOT MINISTRY EVIDENCE",
+  "evidence_class": "D",
+  "ground_truth": {
+    "basis": "Core 06 §5.3 planted ground truth; Core 07 §7.4 and §7.6 step 1: the idle-equivalent-capacity exclusion (EX-04) is SATISFIED — equivalent domestic grade, qualified idle capacity at least target demand, no binding market failure — so REJECT route 0 with HARD_EXCLUSION_SATISFIED precedes any route selection.",
+    "expected_route_code": 0,
+    "expected_simulation_state": "REJECT"
+  },
+  "narrative_metadata": {
+    "arabic_text_status": "ANALYST_AUTHORED_DRAFT"
+  },
+  "opportunity_id": "SAU-H6-392010",
+  "scenario_id": "SYN-MINISTRY-PE-FILM-001",
+  "scenario_version": "2.0.0",
+  "seed_basis": "Public 2024 gross flows of HS 3920.10 (imports 21.678 kt / USD 70.43 M; exports 188.72 kt / USD 281.75 M; export/import value ratio 4.0; UN Comtrade H6 series) bound the synthetic target demand and grade matrix; no public nameplate span exists, so the synthetic converter line is an explicit design basis.",
+  "source": "DEMO_GENERATOR",
+  "synthetic_flag": true,
+  "synthetic_inputs": {
+    "capability_states": {
+      "capacity_time_window": 0,
+      "certification_customer_qualification": 0,
+      "core_process_route": 0,
+      "equipment_envelope": 0,
+      "feedstock_chemistry": 0,
+      "finishing_spec_control": 0,
+      "qa_lab_metrology": 0,
+      "skills_market_integration": 0,
+      "utilities_ehs_permitting": 0
+    },
+    "class_if_confirmed": {
+      "basis": "Ministry customs tariff-line descriptions, converter grade matrix and buyer records if confirmed.",
+      "demand_at_required_specification": "A",
+      "domestic_supply_or_capability": "A",
+      "hard_regulatory_or_process_gate": "A",
+      "product_identity": "A"
+    },
+    "counterfactual": {
+      "q1_incumbent_meets_specification_without_capital": true,
+      "q4_downside_demand_supports_incumbent_and_new_entrant": false,
+      "q5_new_entry_displaces_efficient_domestic_production": true,
+      "q6_technology_jv_superior_to_expansion_or_greenfield": false
+    },
+    "decision_specific_hard_gates": {
+      "application_qualification": "resolved by the synthetic converter grade matrix",
+      "conversion_route": "resolved by the synthetic converter grade matrix",
+      "performance_requirement": "resolved by the synthetic converter grade matrix",
+      "polymer_additive_compatibility": "resolved by the synthetic converter grade matrix",
+      "tooling": "resolved by the synthetic converter grade matrix"
+    },
+    "demand": {
+      "announced_demand_kt": 0.0,
+      "committed_demand_kt": 0.0,
+      "downside_demand_kt": 14.0,
+      "target_spec_demand_kt": 16.0
+    },
+    "economics": {
+      "currency": "SAR_m",
+      "reason": "No verified specification-adjusted gap; capacity support is non-additional.",
+      "support_required": 0.0
+    },
+    "equivalence": {
+      "basis": "Synthetic converter grade matrix: domestic blown/cast PE film lines produce an equivalent generic grade with qualified availability above target demand.",
+      "binding_market_failure": "none verified",
+      "domestic_grade_equivalent": true,
+      "qualified_available_kt": 24.0
+    },
+    "evsi": {
+      "delay_cost_m_sar": 1.0,
+      "evidence_cost_m_sar": 2.0,
+      "next_fact": "Obtain a named barrier or specialty film exception only if a buyer identifies one",
+      "route_change_probability": 0.08,
+      "value_difference_m_sar": 20.0
+    },
+    "hard_exclusion_inputs": {
+      "idle_equivalent_domestic_capacity": {
+        "binding_market_failure": false,
+        "qualified_idle_capacity_kt": "UNAVAILABLE"
+      }
+    },
+    "hard_gates": {
+      "application_qualification": "resolved",
+      "conversion_route": "resolved: blown and cast film extrusion",
+      "performance_requirement": "resolved",
+      "polymer_additive_compatibility": "resolved",
+      "tooling": "resolved"
+    },
+    "plant_line": {
+      "availability": 0.9,
+      "current_utilisation": 0.71,
+      "market_allocation_share": 0.75,
+      "nameplate_kt": 60.0,
+      "qualification_share": 0.6,
+      "yield": 0.95
+    },
+    "target_specification": {
+      "application": "general flexible packaging and industrial wrap",
+      "customer_qualification_required": false,
+      "name": "Generic LDPE/LLDPE packaging film and sheet, non-cellular, unprinted"
+    },
+    "tariff_line_allocation": {
+      "basis": "Synthetic 12-digit allocation of the public 2024 HS 3920.10 import quantity",
+      "lines": [
+        {
+          "description_en": "LDPE packaging film (synthetic line)",
+          "national_tariff_line": "SYN-3920.10-A",
+          "quantity_kt": 12.4
+        },
+        {
+          "description_en": "LLDPE stretch and shrink film (synthetic line)",
+          "national_tariff_line": "SYN-3920.10-B",
+          "quantity_kt": 6.1
+        },
+        {
+          "description_en": "PE sheet and strip (synthetic line)",
+          "national_tariff_line": "SYN-3920.10-C",
+          "quantity_kt": 3.178178
+        }
+      ]
+    }
+  }
+}

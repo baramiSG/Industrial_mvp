@@ -1,0 +1,371 @@
+{
+  "decision_narrative": {
+    "ADVANCE": {
+      "conditions": [
+        {
+          "ar": "تجميع تعهد شراء ملتزم للمشاريع لا يقل عن 3.6 ألف طن عبر المشترين المسمّين قبل استثمار المنتجين القائمين في القوالب والتأهيل.",
+          "en": "Aggregate committed project offtake of at least 3.6 kt across the named buyers before the incumbents invest in dies and qualification."
+        },
+        {
+          "ar": "لا يُمنح دعم مالي؛ يقتصر التدخل على تنسيق المشتريات.",
+          "en": "No financial support is granted; the intervention is procurement coordination only."
+        }
+      ],
+      "headline": {
+        "ar": "تقدّم مُحاكى — تعهد شراء مجمّع للمنتجين القائمين لقطاعات الألومنيوم",
+        "en": "SIMULATED ADVANCE — aggregated procurement commitment for the incumbent extruders"
+      },
+      "kill_conditions": [
+        {
+          "ar": "انخفاض تعهد الشراء الملتزم إلى أقل من حجم التعادل للقوالب والتأهيل.",
+          "en": "Committed offtake falls below the die and qualification break-even volume."
+        },
+        {
+          "ar": "عودة المشترين إلى القطاعات المستوردة بعد التأهيل.",
+          "en": "Buyers revert to imported profiles after qualification."
+        }
+      ],
+      "rationale": {
+        "ar": "تُظهر أدلة المحاكاة بمستوى الوزارة منتجين قائمين لديهم طاقة فائضة وخليطة ومعالجة مكافئتين، بينما يتشتت الطلب على القطاعات المستهدفة بين مشاريع كثيرة؛ ويجعل تعهد الشراء المجمّع والمشروط الاستثمار في القوالب والعدد والتأهيل قابلاً للتمويل دون دعم رأسمالي.",
+        "en": "The simulated Ministry-grade evidence shows incumbent extruders with spare capacity and an equivalent alloy/temper, while target-profile demand is fragmented across many projects; an aggregated, conditional offtake makes the die, tooling and qualification investment bankable without capital support."
+      },
+      "route_label": {
+        "ar": "تجميع الطلب أو التزام الشراء أو تعهد الشراء المشروط (المسار 4)",
+        "en": "Demand aggregation, procurement commitment or conditional offtake (route 4)"
+      }
+    },
+    "INVESTIGATE": {
+      "conditions": [],
+      "headline": {
+        "ar": "تحقّق مُحاكى — ما زالت بوابة واحدة أو أكثر غير محسومة",
+        "en": "SIMULATED INVESTIGATE — one or more gates remain unresolved"
+      },
+      "kill_conditions": [],
+      "rationale": {
+        "ar": "لم يستوف فرع المحاكاة جميع البوابات الصلبة.",
+        "en": "The simulated branch did not satisfy every hard gate."
+      },
+      "route_label": {
+        "ar": "لم تجتز المحاكاة جميع الضوابط",
+        "en": "Simulation controls did not all pass"
+      }
+    }
+  },
+  "display_label": "SIMULATED — NOT MINISTRY EVIDENCE",
+  "evidence_class": "D",
+  "ground_truth": {
+    "basis": "Core 06 §5.3 planted ground truth; Core 07 §7.7 and §7.6 step 3: the demand-aggregation/conditional-offtake record passes every gate with zero financial support, the quantity gap (qualified availability below target demand) makes route 0 fail, routes 1–3 and 6 fail by constraint class, route 5 fails proportionality, route 7 is blocked by the lower fully-resolving route; public R2/R3/R9-S and synthetic R5/R7/R8 execute FULL.",
+    "expected_route_code": 4,
+    "expected_simulation_state": "ADVANCE"
+  },
+  "narrative_metadata": {
+    "arabic_text_status": "ANALYST_AUTHORED_DRAFT"
+  },
+  "opportunity_id": "SAU-H6-760429",
+  "scenario_id": "SYN-MINISTRY-ALU-PROFILES-001",
+  "scenario_version": "2.0.0",
+  "seed_basis": "Public 2024 imports of HS 7604.29 (9.189841 kt, USD 51.78 M; UN Comtrade H6 series) bound the buyer and tariff-line allocations and the target demand; ALUPCO and TALCO spans establish extrusion (Class C) without a numeric nameplate, so the synthetic line and its qualified share are an explicit design basis.",
+  "source": "DEMO_GENERATOR",
+  "synthetic_flag": true,
+  "synthetic_inputs": {
+    "buyer_allocation": {
+      "basis": "Synthetic importer records for the target profiles within the public 2024 import quantity",
+      "buyers": [
+        {
+          "buyer_id": "SYN-BUYER-01",
+          "quantity_kt": 0.9,
+          "segment": "facade contractor"
+        },
+        {
+          "buyer_id": "SYN-BUYER-02",
+          "quantity_kt": 0.7,
+          "segment": "facade contractor"
+        },
+        {
+          "buyer_id": "SYN-BUYER-03",
+          "quantity_kt": 0.6,
+          "segment": "structural fabricator"
+        },
+        {
+          "buyer_id": "SYN-BUYER-04",
+          "quantity_kt": 0.5,
+          "segment": "structural fabricator"
+        },
+        {
+          "buyer_id": "SYN-BUYER-05",
+          "quantity_kt": 0.5,
+          "segment": "facade contractor"
+        },
+        {
+          "buyer_id": "SYN-BUYER-06",
+          "quantity_kt": 0.4,
+          "segment": "industrial framing"
+        },
+        {
+          "buyer_id": "SYN-BUYER-07",
+          "quantity_kt": 0.4,
+          "segment": "facade contractor"
+        },
+        {
+          "buyer_id": "SYN-BUYER-08",
+          "quantity_kt": 0.4,
+          "segment": "structural fabricator"
+        },
+        {
+          "buyer_id": "SYN-BUYER-09",
+          "quantity_kt": 0.3,
+          "segment": "industrial framing"
+        },
+        {
+          "buyer_id": "SYN-BUYER-10",
+          "quantity_kt": 0.3,
+          "segment": "facade contractor"
+        },
+        {
+          "buyer_id": "SYN-BUYER-11",
+          "quantity_kt": 0.3,
+          "segment": "structural fabricator"
+        },
+        {
+          "buyer_id": "SYN-BUYER-12",
+          "quantity_kt": 0.2,
+          "segment": "industrial framing"
+        },
+        {
+          "buyer_id": "SYN-BUYER-13",
+          "quantity_kt": 0.2,
+          "segment": "facade contractor"
+        },
+        {
+          "buyer_id": "SYN-BUYER-14",
+          "quantity_kt": 0.2,
+          "segment": "industrial framing"
+        },
+        {
+          "buyer_id": "SYN-BUYER-15",
+          "quantity_kt": 0.1,
+          "segment": "structural fabricator"
+        }
+      ]
+    },
+    "capability_states": {
+      "capacity_time_window": 0,
+      "certification_customer_qualification": 2,
+      "core_process_route": 0,
+      "equipment_envelope": 1,
+      "feedstock_chemistry": 0,
+      "finishing_spec_control": 1,
+      "qa_lab_metrology": 1,
+      "skills_market_integration": 1,
+      "utilities_ehs_permitting": 0
+    },
+    "class_if_confirmed": {
+      "basis": "Ministry customs, producer allocation and project qualification records if confirmed.",
+      "demand_at_required_specification": "A",
+      "domestic_supply_or_capability": "A",
+      "hard_regulatory_or_process_gate": "B",
+      "product_identity": "A"
+    },
+    "competition_inputs": {
+      "market_concentration": {
+        "hhi_after": 0.29,
+        "hhi_before": 0.31
+      }
+    },
+    "counterfactual": {
+      "q1_incumbent_meets_specification_without_capital": false,
+      "q4_downside_demand_supports_incumbent_and_new_entrant": false,
+      "q5_new_entry_displaces_efficient_domestic_production": true,
+      "q6_technology_jv_superior_to_expansion_or_greenfield": false
+    },
+    "decision_specific_hard_gates": {
+      "alloy": "resolved by the synthetic target specification and buyer qualification records",
+      "customer_liability": "resolved by the synthetic target specification and buyer qualification records",
+      "engineering_certification": "resolved by the synthetic target specification and buyer qualification records",
+      "forming_fabrication": "resolved by the synthetic target specification and buyer qualification records",
+      "heat_treatment": "resolved by the synthetic target specification and buyer qualification records",
+      "joining_finishing": "resolved by the synthetic target specification and buyer qualification records"
+    },
+    "demand": {
+      "announced_demand_kt": 1.5,
+      "base_demand_kt": 9.1,
+      "commitment_probability": 0.8,
+      "committed_demand_kt": 3.6,
+      "downside_demand_kt": 5.2,
+      "target_spec_demand_kt": 6.0
+    },
+    "economics": {
+      "cash_flows_without_support": [
+        -9.5,
+        2.6,
+        2.6,
+        2.6,
+        2.6,
+        2.6,
+        2.6
+      ],
+      "currency": "SAR_m",
+      "hurdle_rate": 0.12,
+      "minimum_efficient_scale_kt": 3.0,
+      "national_value": {
+        "displacement": 2.0,
+        "domestic_value_added": 22.0,
+        "exports": 4.0,
+        "fiscal_receipts": 4.0,
+        "government_cost": 1.0,
+        "knowledge_skills": 3.0,
+        "resilience_value": 6.0,
+        "resource_environment": 1.0,
+        "risk_allowance": 4.0
+      },
+      "support_instrument": "none — procurement coordination only"
+    },
+    "equivalence": {
+      "basis": "Synthetic line-level records: the incumbents extrude the target alloy and temper, but only 2.5 kt is currently qualified and allocated to the named buyers.",
+      "domestic_grade_equivalent": true,
+      "qualified_available_kt": 2.5
+    },
+    "evsi": {
+      "delay_cost_m_sar": 1.5,
+      "evidence_cost_m_sar": 1.0,
+      "next_fact": "Confirm project-level profile specifications and the incumbents' qualified allocation",
+      "route_change_probability": 0.45,
+      "value_difference_m_sar": 31.0
+    },
+    "hard_exclusion_inputs": {
+      "downside_market_below_mes": {
+        "credible_export_contract": "UNAVAILABLE"
+      },
+      "heterogeneous_residual_code": {
+        "commercial_product_separable": true,
+        "product_level_evidence_available": true
+      },
+      "idle_equivalent_domestic_capacity": {
+        "binding_market_failure": true,
+        "qualified_idle_capacity_kt": 2.5
+      },
+      "redundancy_or_crowd_out": {
+        "competition_finding": "ACCEPTABLE"
+      },
+      "transitory_or_measurement_gap": {
+        "dominant_cause": "OTHER"
+      },
+      "unsatisfiable_hard_gate": {
+        "gate_domain": "engineering_certification",
+        "gate_satisfiability": "SATISFIABLE"
+      }
+    },
+    "hard_gates": {
+      "alloy": "resolved: 6063/6061",
+      "customer_liability": "resolved",
+      "engineering_certification": "resolved with project qualification programme",
+      "forming_fabrication": "resolved",
+      "heat_treatment": "resolved: T6 ageing",
+      "joining_finishing": "resolved"
+    },
+    "plant_line": {
+      "availability": 0.9,
+      "current_utilisation": 0.62,
+      "market_allocation_share": 0.51,
+      "nameplate_kt": 40.0,
+      "qualification_share": 0.16,
+      "yield": 0.85
+    },
+    "production_and_retained_flows": {
+      "basis": "Synthetic producer output and customs origin records reconciled to public 2024 gross flows",
+      "domestic_origin_exports_kt": 21.0,
+      "domestic_production_kt": 38.0,
+      "period_year": 2024,
+      "reexports_kt": 0.589841,
+      "retained_imports_kt": 8.6
+    },
+    "route_evidence": [
+      {
+        "basis": "Aggregated, conditional project offtake enabling incumbent die, tooling and qualification investment without financial support.",
+        "binding_constraint": "demand_fragmentation_or_offtake",
+        "binding_constraint_fully_removed": true,
+        "competition": {
+          "downside_demand_kt": 5.2,
+          "existing_effective_capacity_kt": 2.5,
+          "proposed_incremental_capacity_kt": 3.6
+        },
+        "distortion_unacceptable": false,
+        "downside_cash_flows_m_sar": [
+          -9.5,
+          2.6,
+          2.6,
+          2.6,
+          2.6,
+          2.6,
+          2.6
+        ],
+        "hurdle_rate": 0.12,
+        "intervention_proportionate_to_constraint": true,
+        "investment_already_approved_or_financed": false,
+        "national_value": {
+          "displacement": 2.0,
+          "domestic_value_added": 22.0,
+          "exports": 4.0,
+          "fiscal_receipts": 4.0,
+          "government_cost": 1.0,
+          "knowledge_skills": 3.0,
+          "resilience_value": 6.0,
+          "resource_environment": 1.0,
+          "risk_allowance": 4.0
+        },
+        "policy_prohibition_identified": false,
+        "proceeds_without_intervention": false,
+        "route_code": 4,
+        "technical_feasibility_confirmed": true
+      },
+      {
+        "basis": "Capital support for expansion is disproportionate while incumbents hold spare extrusion capacity.",
+        "binding_constraint": "capacity_or_availability",
+        "binding_constraint_fully_removed": true,
+        "distortion_unacceptable": false,
+        "intervention_proportionate_to_constraint": false,
+        "investment_already_approved_or_financed": false,
+        "policy_prohibition_identified": false,
+        "proceeds_without_intervention": false,
+        "route_code": 5,
+        "technical_feasibility_confirmed": true
+      }
+    ],
+    "target_specification": {
+      "alloy": [
+        "6063",
+        "6061"
+      ],
+      "application": "curtain-wall, façade and structural framing systems",
+      "customer_qualification_required": true,
+      "name": "6063/6061-T6 architectural and structural aluminium-alloy solid profiles to project drawings",
+      "standard": "SASO/ASTM B221 with EN 755 tolerances (synthetic design basis)",
+      "temper": "T6"
+    },
+    "tariff_line_allocation": {
+      "basis": "Synthetic 12-digit allocation of the public 2024 HS 7604.29 import quantity",
+      "lines": [
+        {
+          "description_en": "Architectural solid profiles (synthetic line)",
+          "national_tariff_line": "SYN-7604.29-A",
+          "quantity_kt": 5.2
+        },
+        {
+          "description_en": "Structural bars and rods (synthetic line)",
+          "national_tariff_line": "SYN-7604.29-B",
+          "quantity_kt": 2.9
+        },
+        {
+          "description_en": "Other alloy profiles (synthetic line)",
+          "national_tariff_line": "SYN-7604.29-C",
+          "quantity_kt": 1.089841
+        }
+      ]
+    },
+    "upgrade": {
+      "description": "Incumbent die, tooling and qualification for the aggregated profile order book; no new nameplate",
+      "incremental_capacity_kt": 3.6,
+      "schedule_months": 9
+    }
+  }
+}

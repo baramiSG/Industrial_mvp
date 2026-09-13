@@ -1,0 +1,891 @@
+{
+  "as_of_date": "2026-09-12",
+  "authority_note": "Public branch only. Product identity is retained at generic HS6 scope; target-specification demand and domestic conversion capability are unresolved. Derived from UNIVERSE-SAU-UN-COMTRADE-HS-2026-09-12 rows of HS revision H6 (2022–2024); the 2021 H5 row is excluded to avoid splicing revisions. Gross flows; not retained domestic demand. Partner detail for 2024 imports is OBSERVED from wits_trade.",
+  "criticality_designation": "UNAVAILABLE",
+  "decision_inputs": {
+    "monitor_trigger": "UNAVAILABLE",
+    "route_evidence": "UNAVAILABLE",
+    "specification_equivalence": "UNAVAILABLE",
+    "target_specification_demand": "UNAVAILABLE"
+  },
+  "domestic_capability": {
+    "coarse_adjacency_signals": [],
+    "producer_evidence": [],
+    "profile_hard_gates": {
+      "application_qualification": {
+        "evidence_ids": [],
+        "status": "UNAVAILABLE"
+      },
+      "conversion_route": {
+        "evidence_ids": [],
+        "status": "UNAVAILABLE"
+      },
+      "performance_requirement": {
+        "evidence_ids": [],
+        "status": "UNAVAILABLE"
+      },
+      "polymer_additive_compatibility": {
+        "evidence_ids": [],
+        "status": "UNAVAILABLE"
+      },
+      "tooling": {
+        "evidence_ids": [],
+        "status": "UNAVAILABLE"
+      }
+    },
+    "public_dimension_states": {
+      "capacity_time_window": "U",
+      "certification_customer_qualification": "U",
+      "core_process_route": "U",
+      "equipment_envelope": "U",
+      "feedstock_chemistry": "U",
+      "finishing_spec_control": "U",
+      "qa_lab_metrology": "U",
+      "skills_market_integration": "U",
+      "utilities_ehs_permitting": "U"
+    },
+    "same_process_family": "UNAVAILABLE",
+    "unresolved_hard_gates": [
+      {
+        "evidence_ids": [],
+        "name": "polymer_additive_compatibility",
+        "state": "unresolved"
+      },
+      {
+        "evidence_ids": [],
+        "name": "conversion_route",
+        "state": "unresolved"
+      },
+      {
+        "evidence_ids": [],
+        "name": "tooling",
+        "state": "unresolved"
+      },
+      {
+        "evidence_ids": [],
+        "name": "performance_requirement",
+        "state": "unresolved"
+      },
+      {
+        "evidence_ids": [],
+        "name": "application_qualification",
+        "state": "unresolved"
+      }
+    ],
+    "verified_present": "UNAVAILABLE"
+  },
+  "domestic_flows": {
+    "domestic_origin_exports_kt": "UNAVAILABLE",
+    "domestic_production_kt": "UNAVAILABLE",
+    "period_year": 2024,
+    "reexports_kt": "UNAVAILABLE",
+    "retained_imports_kt": "UNAVAILABLE",
+    "source_evidence_ids": []
+  },
+  "evidence": [
+    {
+      "contradiction": null,
+      "evidence_class": "B",
+      "evidence_id": "P-COMTRADE-392010-M",
+      "period": "2022/2023/2024",
+      "retrieved_at": "2026-09-12",
+      "reviewer_status": "unconfirmed_by_responsible_authority",
+      "source": "UN Comtrade",
+      "status": "calculated",
+      "supports": [
+        "TRADE_QUANTITY",
+        "TRADE_VALUE"
+      ],
+      "synthetic_flag": false,
+      "title": "UN Comtrade Saudi imports rows for HS 392010",
+      "transformation": "LATEST_REVISION_ONLY H6 rows; trade value divided by 1,000,000 to USD million and net weight divided by 1,000,000 to kt.",
+      "url": "https://comtradeapi.un.org/data/v1/get/C/A/HS?reporterCode=682&period=2024&flowCode=M&cmdCode=AG6&partnerCode=0&motCode=0&customsCode=C00"
+    },
+    {
+      "contradiction": null,
+      "evidence_class": "B",
+      "evidence_id": "P-COMTRADE-392010-X",
+      "period": "2022/2023/2024",
+      "retrieved_at": "2026-09-12",
+      "reviewer_status": "unconfirmed_by_responsible_authority",
+      "source": "UN Comtrade",
+      "status": "calculated",
+      "supports": [
+        "EXPORT_IMPORT_RATIO",
+        "TRADE_QUANTITY",
+        "TRADE_VALUE"
+      ],
+      "synthetic_flag": false,
+      "title": "UN Comtrade Saudi exports rows for HS 392010",
+      "transformation": "LATEST_REVISION_ONLY H6 rows; trade value divided by 1,000,000 to USD million and net weight divided by 1,000,000 to kt.",
+      "url": "https://comtradeapi.un.org/data/v1/get/C/A/HS?reporterCode=682&period=2024&flowCode=X&cmdCode=AG6&partnerCode=0&motCode=0&customsCode=C00"
+    },
+    {
+      "contradiction": null,
+      "evidence_class": "B",
+      "evidence_id": "P-WCO-392010",
+      "period": "2022",
+      "retrieved_at": "2026-09-12",
+      "reviewer_status": "unconfirmed_by_responsible_authority",
+      "source": "wco_hs_nomenclature",
+      "status": "observed",
+      "supports": [
+        "TARGET_PRODUCT_IDENTITY"
+      ],
+      "synthetic_flag": false,
+      "title": "HS Nomenclature 2022 — Chapter 39",
+      "transformation": "Verbatim span from DocumentRecord DOC-WCO-HS-NOMENCLATURE-53d6f01ac062-0926bf9934da.",
+      "url": "https://www.wcoomd.org/-/media/wco/public/global/pdf/topics/nomenclature/instruments-and-tools/hs-nomenclature-2022/2022/0739_2022e.pdf?la=en"
+    },
+    {
+      "contradiction": null,
+      "evidence_class": "B",
+      "evidence_id": "P-WITS-392010-PARTNERS",
+      "period": "2024",
+      "retrieved_at": "2026-09-12",
+      "reviewer_status": "unconfirmed_by_responsible_authority",
+      "source": "World Bank WITS",
+      "status": "calculated",
+      "supports": [
+        "SUPPLIER_CONCENTRATION"
+      ],
+      "synthetic_flag": false,
+      "title": "WITS Saudi 2024 import partner rows for HS 392010",
+      "transformation": "World aggregate excluded; value divided by 1,000,000 to USD million and net weight divided by 1,000,000 to kt. Partner detail state: PARTNER_DETAIL_OBSERVED (wits_trade; 42 partner rows).",
+      "url": "https://wits.worldbank.org/trade/comtrade/en/country/SAU/year/2024/tradeflow/Imports/partner/ALL/product/392010"
+    }
+  ],
+  "hard_exclusion_inputs": {
+    "downside_market_below_mes": {
+      "credible_export_contract": "UNAVAILABLE",
+      "evidence_ids": [],
+      "minimum_efficient_scale_kt": "UNAVAILABLE",
+      "sustainable_downside_demand_kt": "UNAVAILABLE"
+    },
+    "heterogeneous_residual_code": {
+      "commercial_product_separable": "UNAVAILABLE",
+      "evidence_ids": [],
+      "product_level_evidence_available": "UNAVAILABLE"
+    },
+    "idle_equivalent_domestic_capacity": {
+      "binding_market_failure": "UNAVAILABLE",
+      "domestic_specification_equivalent": "UNAVAILABLE",
+      "evidence_ids": [],
+      "qualified_idle_capacity_kt": "UNAVAILABLE",
+      "target_specification_demand_kt": "UNAVAILABLE"
+    },
+    "redundancy_or_crowd_out": {
+      "competition_finding": "UNAVAILABLE",
+      "evidence_ids": []
+    },
+    "transitory_or_measurement_gap": {
+      "dominant_cause": "UNAVAILABLE",
+      "evidence_ids": []
+    },
+    "unsatisfiable_hard_gate": {
+      "evidence_ids": [],
+      "gate_domain": "UNAVAILABLE",
+      "gate_satisfiability": "UNAVAILABLE"
+    }
+  },
+  "opportunity": {
+    "application_boundary": "HS 3920.10 contains non-cellular plates, sheets, film, foil and strip of polymers of ethylene; target dimensions, performance, customer application and qualification remain unresolved.",
+    "as_of_date": "2026-09-12",
+    "commercial_name_ar": "ألواح وصفائح وأغشية ورقائق وشرائط غير خلوية من بوليمرات الإيثيلين",
+    "commercial_name_en": "Other non-cellular plates, sheets, film, foil and strip of plastics — of polymers of ethylene",
+    "decision_object_status": "generic_hs6_only",
+    "hs6": "392010",
+    "hs_revision": "H6",
+    "id": "SAU-H6-392010",
+    "national_tariff_line": "UNAVAILABLE",
+    "sector_profile": "technical_plastics"
+  },
+  "partner_detail": {
+    "attempt_passport_ids": [],
+    "observed_partner_rows": 42,
+    "observed_passport_id": "P-WITS-392010-PARTNERS",
+    "partner_snapshot_id": "PARTNERS-SAU-WITS-TRADE-2026-09-12",
+    "reason": null,
+    "source_id": "wits_trade",
+    "state": "PARTNER_DETAIL_OBSERVED",
+    "unit_key": [
+      "392010",
+      "imports",
+      "2024"
+    ]
+  },
+  "partner_observations": [
+    {
+      "flow": "imports",
+      "gross_flow": true,
+      "net_weight_kt": 0.010175,
+      "partner": "Aruba",
+      "quantity_unit": "kt",
+      "source_evidence_id": "P-WITS-392010-PARTNERS",
+      "trade_value_usd_m": 0.0556,
+      "validity_flags": {
+        "net_weight_valid": true,
+        "quantity_comparable": true,
+        "value_valid": true
+      },
+      "year": 2024
+    },
+    {
+      "flow": "imports",
+      "gross_flow": true,
+      "net_weight_kt": 0.001864,
+      "partner": "Australia",
+      "quantity_unit": "kt",
+      "source_evidence_id": "P-WITS-392010-PARTNERS",
+      "trade_value_usd_m": 0.06753,
+      "validity_flags": {
+        "net_weight_valid": true,
+        "quantity_comparable": true,
+        "value_valid": true
+      },
+      "year": 2024
+    },
+    {
+      "flow": "imports",
+      "gross_flow": true,
+      "net_weight_kt": 0.001043,
+      "partner": "Austria",
+      "quantity_unit": "kt",
+      "source_evidence_id": "P-WITS-392010-PARTNERS",
+      "trade_value_usd_m": 0.00555,
+      "validity_flags": {
+        "net_weight_valid": true,
+        "quantity_comparable": true,
+        "value_valid": true
+      },
+      "year": 2024
+    },
+    {
+      "flow": "imports",
+      "gross_flow": true,
+      "net_weight_kt": 3.42344,
+      "partner": "Bahrain",
+      "quantity_unit": "kt",
+      "source_evidence_id": "P-WITS-392010-PARTNERS",
+      "trade_value_usd_m": 11.20204,
+      "validity_flags": {
+        "net_weight_valid": true,
+        "quantity_comparable": true,
+        "value_valid": true
+      },
+      "year": 2024
+    },
+    {
+      "flow": "imports",
+      "gross_flow": true,
+      "net_weight_kt": 0.007059,
+      "partner": "Belgium",
+      "quantity_unit": "kt",
+      "source_evidence_id": "P-WITS-392010-PARTNERS",
+      "trade_value_usd_m": 0.07241,
+      "validity_flags": {
+        "net_weight_valid": true,
+        "quantity_comparable": true,
+        "value_valid": true
+      },
+      "year": 2024
+    },
+    {
+      "flow": "imports",
+      "gross_flow": true,
+      "net_weight_kt": 0.000272,
+      "partner": "Bulgaria",
+      "quantity_unit": "kt",
+      "source_evidence_id": "P-WITS-392010-PARTNERS",
+      "trade_value_usd_m": 0.01097,
+      "validity_flags": {
+        "net_weight_valid": true,
+        "quantity_comparable": true,
+        "value_valid": true
+      },
+      "year": 2024
+    },
+    {
+      "flow": "imports",
+      "gross_flow": true,
+      "net_weight_kt": 0.033825,
+      "partner": "Canada",
+      "quantity_unit": "kt",
+      "source_evidence_id": "P-WITS-392010-PARTNERS",
+      "trade_value_usd_m": 0.52521,
+      "validity_flags": {
+        "net_weight_valid": true,
+        "quantity_comparable": true,
+        "value_valid": true
+      },
+      "year": 2024
+    },
+    {
+      "flow": "imports",
+      "gross_flow": true,
+      "net_weight_kt": 4.76639,
+      "partner": "China",
+      "quantity_unit": "kt",
+      "source_evidence_id": "P-WITS-392010-PARTNERS",
+      "trade_value_usd_m": 10.13449,
+      "validity_flags": {
+        "net_weight_valid": true,
+        "quantity_comparable": true,
+        "value_valid": true
+      },
+      "year": 2024
+    },
+    {
+      "flow": "imports",
+      "gross_flow": true,
+      "net_weight_kt": 0.116243,
+      "partner": "Czech Republic",
+      "quantity_unit": "kt",
+      "source_evidence_id": "P-WITS-392010-PARTNERS",
+      "trade_value_usd_m": 2.67482,
+      "validity_flags": {
+        "net_weight_valid": true,
+        "quantity_comparable": true,
+        "value_valid": true
+      },
+      "year": 2024
+    },
+    {
+      "flow": "imports",
+      "gross_flow": true,
+      "net_weight_kt": 0.320218,
+      "partner": "Denmark",
+      "quantity_unit": "kt",
+      "source_evidence_id": "P-WITS-392010-PARTNERS",
+      "trade_value_usd_m": 3.77566,
+      "validity_flags": {
+        "net_weight_valid": true,
+        "quantity_comparable": true,
+        "value_valid": true
+      },
+      "year": 2024
+    },
+    {
+      "flow": "imports",
+      "gross_flow": true,
+      "net_weight_kt": 0.137396,
+      "partner": "Egypt, Arab Rep.",
+      "quantity_unit": "kt",
+      "source_evidence_id": "P-WITS-392010-PARTNERS",
+      "trade_value_usd_m": 0.41914,
+      "validity_flags": {
+        "net_weight_valid": true,
+        "quantity_comparable": true,
+        "value_valid": true
+      },
+      "year": 2024
+    },
+    {
+      "flow": "imports",
+      "gross_flow": true,
+      "net_weight_kt": 0.00151,
+      "partner": "Finland",
+      "quantity_unit": "kt",
+      "source_evidence_id": "P-WITS-392010-PARTNERS",
+      "trade_value_usd_m": 0.01629,
+      "validity_flags": {
+        "net_weight_valid": true,
+        "quantity_comparable": true,
+        "value_valid": true
+      },
+      "year": 2024
+    },
+    {
+      "flow": "imports",
+      "gross_flow": true,
+      "net_weight_kt": 0.162466,
+      "partner": "France",
+      "quantity_unit": "kt",
+      "source_evidence_id": "P-WITS-392010-PARTNERS",
+      "trade_value_usd_m": 1.97462,
+      "validity_flags": {
+        "net_weight_valid": true,
+        "quantity_comparable": true,
+        "value_valid": true
+      },
+      "year": 2024
+    },
+    {
+      "flow": "imports",
+      "gross_flow": true,
+      "net_weight_kt": 0.351829,
+      "partner": "Germany",
+      "quantity_unit": "kt",
+      "source_evidence_id": "P-WITS-392010-PARTNERS",
+      "trade_value_usd_m": 1.34418,
+      "validity_flags": {
+        "net_weight_valid": true,
+        "quantity_comparable": true,
+        "value_valid": true
+      },
+      "year": 2024
+    },
+    {
+      "flow": "imports",
+      "gross_flow": true,
+      "net_weight_kt": 0.017524,
+      "partner": "Greece",
+      "quantity_unit": "kt",
+      "source_evidence_id": "P-WITS-392010-PARTNERS",
+      "trade_value_usd_m": 0.04956,
+      "validity_flags": {
+        "net_weight_valid": true,
+        "quantity_comparable": true,
+        "value_valid": true
+      },
+      "year": 2024
+    },
+    {
+      "flow": "imports",
+      "gross_flow": true,
+      "net_weight_kt": 0.025381,
+      "partner": "Hungary",
+      "quantity_unit": "kt",
+      "source_evidence_id": "P-WITS-392010-PARTNERS",
+      "trade_value_usd_m": 0.24948,
+      "validity_flags": {
+        "net_weight_valid": true,
+        "quantity_comparable": true,
+        "value_valid": true
+      },
+      "year": 2024
+    },
+    {
+      "flow": "imports",
+      "gross_flow": true,
+      "net_weight_kt": 1.31765,
+      "partner": "India",
+      "quantity_unit": "kt",
+      "source_evidence_id": "P-WITS-392010-PARTNERS",
+      "trade_value_usd_m": 3.67133,
+      "validity_flags": {
+        "net_weight_valid": true,
+        "quantity_comparable": true,
+        "value_valid": true
+      },
+      "year": 2024
+    },
+    {
+      "flow": "imports",
+      "gross_flow": true,
+      "net_weight_kt": 5.50095,
+      "partner": "Indonesia",
+      "quantity_unit": "kt",
+      "source_evidence_id": "P-WITS-392010-PARTNERS",
+      "trade_value_usd_m": 18.94653,
+      "validity_flags": {
+        "net_weight_valid": true,
+        "quantity_comparable": true,
+        "value_valid": true
+      },
+      "year": 2024
+    },
+    {
+      "flow": "imports",
+      "gross_flow": true,
+      "net_weight_kt": 0.152395,
+      "partner": "Italy",
+      "quantity_unit": "kt",
+      "source_evidence_id": "P-WITS-392010-PARTNERS",
+      "trade_value_usd_m": 0.77276,
+      "validity_flags": {
+        "net_weight_valid": true,
+        "quantity_comparable": true,
+        "value_valid": true
+      },
+      "year": 2024
+    },
+    {
+      "flow": "imports",
+      "gross_flow": true,
+      "net_weight_kt": 0.000413,
+      "partner": "Japan",
+      "quantity_unit": "kt",
+      "source_evidence_id": "P-WITS-392010-PARTNERS",
+      "trade_value_usd_m": 0.01196,
+      "validity_flags": {
+        "net_weight_valid": true,
+        "quantity_comparable": true,
+        "value_valid": true
+      },
+      "year": 2024
+    },
+    {
+      "flow": "imports",
+      "gross_flow": true,
+      "net_weight_kt": 0.000271,
+      "partner": "Korea, Rep.",
+      "quantity_unit": "kt",
+      "source_evidence_id": "P-WITS-392010-PARTNERS",
+      "trade_value_usd_m": 0.00887,
+      "validity_flags": {
+        "net_weight_valid": true,
+        "quantity_comparable": true,
+        "value_valid": true
+      },
+      "year": 2024
+    },
+    {
+      "flow": "imports",
+      "gross_flow": true,
+      "net_weight_kt": 0.0254,
+      "partner": "Kuwait",
+      "quantity_unit": "kt",
+      "source_evidence_id": "P-WITS-392010-PARTNERS",
+      "trade_value_usd_m": 0.05288,
+      "validity_flags": {
+        "net_weight_valid": true,
+        "quantity_comparable": true,
+        "value_valid": true
+      },
+      "year": 2024
+    },
+    {
+      "flow": "imports",
+      "gross_flow": true,
+      "net_weight_kt": 0.000705,
+      "partner": "Latvia",
+      "quantity_unit": "kt",
+      "source_evidence_id": "P-WITS-392010-PARTNERS",
+      "trade_value_usd_m": 0.00847,
+      "validity_flags": {
+        "net_weight_valid": true,
+        "quantity_comparable": true,
+        "value_valid": true
+      },
+      "year": 2024
+    },
+    {
+      "flow": "imports",
+      "gross_flow": true,
+      "net_weight_kt": 0.314208,
+      "partner": "Malaysia",
+      "quantity_unit": "kt",
+      "source_evidence_id": "P-WITS-392010-PARTNERS",
+      "trade_value_usd_m": 1.36898,
+      "validity_flags": {
+        "net_weight_valid": true,
+        "quantity_comparable": true,
+        "value_valid": true
+      },
+      "year": 2024
+    },
+    {
+      "flow": "imports",
+      "gross_flow": true,
+      "net_weight_kt": 0.005366,
+      "partner": "Netherlands",
+      "quantity_unit": "kt",
+      "source_evidence_id": "P-WITS-392010-PARTNERS",
+      "trade_value_usd_m": 0.04897,
+      "validity_flags": {
+        "net_weight_valid": true,
+        "quantity_comparable": true,
+        "value_valid": true
+      },
+      "year": 2024
+    },
+    {
+      "flow": "imports",
+      "gross_flow": true,
+      "net_weight_kt": 0.225196,
+      "partner": "Oman",
+      "quantity_unit": "kt",
+      "source_evidence_id": "P-WITS-392010-PARTNERS",
+      "trade_value_usd_m": 1.05981,
+      "validity_flags": {
+        "net_weight_valid": true,
+        "quantity_comparable": true,
+        "value_valid": true
+      },
+      "year": 2024
+    },
+    {
+      "flow": "imports",
+      "gross_flow": true,
+      "net_weight_kt": 0.010173,
+      "partner": "Other Asia, nes",
+      "quantity_unit": "kt",
+      "source_evidence_id": "P-WITS-392010-PARTNERS",
+      "trade_value_usd_m": 0.03335,
+      "validity_flags": {
+        "net_weight_valid": true,
+        "quantity_comparable": true,
+        "value_valid": true
+      },
+      "year": 2024
+    },
+    {
+      "flow": "imports",
+      "gross_flow": true,
+      "net_weight_kt": 0.109803,
+      "partner": "Pakistan",
+      "quantity_unit": "kt",
+      "source_evidence_id": "P-WITS-392010-PARTNERS",
+      "trade_value_usd_m": 0.20007,
+      "validity_flags": {
+        "net_weight_valid": true,
+        "quantity_comparable": true,
+        "value_valid": true
+      },
+      "year": 2024
+    },
+    {
+      "flow": "imports",
+      "gross_flow": true,
+      "net_weight_kt": 0.01791,
+      "partner": "Poland",
+      "quantity_unit": "kt",
+      "source_evidence_id": "P-WITS-392010-PARTNERS",
+      "trade_value_usd_m": 0.02525,
+      "validity_flags": {
+        "net_weight_valid": true,
+        "quantity_comparable": true,
+        "value_valid": true
+      },
+      "year": 2024
+    },
+    {
+      "flow": "imports",
+      "gross_flow": true,
+      "net_weight_kt": 3.8e-05,
+      "partner": "Portugal",
+      "quantity_unit": "kt",
+      "source_evidence_id": "P-WITS-392010-PARTNERS",
+      "trade_value_usd_m": 0.00341,
+      "validity_flags": {
+        "net_weight_valid": true,
+        "quantity_comparable": true,
+        "value_valid": true
+      },
+      "year": 2024
+    },
+    {
+      "flow": "imports",
+      "gross_flow": true,
+      "net_weight_kt": 2.41012,
+      "partner": "Qatar",
+      "quantity_unit": "kt",
+      "source_evidence_id": "P-WITS-392010-PARTNERS",
+      "trade_value_usd_m": 3.40492,
+      "validity_flags": {
+        "net_weight_valid": true,
+        "quantity_comparable": true,
+        "value_valid": true
+      },
+      "year": 2024
+    },
+    {
+      "flow": "imports",
+      "gross_flow": true,
+      "net_weight_kt": 8e-05,
+      "partner": "Romania",
+      "quantity_unit": "kt",
+      "source_evidence_id": "P-WITS-392010-PARTNERS",
+      "trade_value_usd_m": 0.0003,
+      "validity_flags": {
+        "net_weight_valid": true,
+        "quantity_comparable": true,
+        "value_valid": true
+      },
+      "year": 2024
+    },
+    {
+      "flow": "imports",
+      "gross_flow": true,
+      "net_weight_kt": 0.000182,
+      "partner": "Singapore",
+      "quantity_unit": "kt",
+      "source_evidence_id": "P-WITS-392010-PARTNERS",
+      "trade_value_usd_m": 0.00638,
+      "validity_flags": {
+        "net_weight_valid": true,
+        "quantity_comparable": true,
+        "value_valid": true
+      },
+      "year": 2024
+    },
+    {
+      "flow": "imports",
+      "gross_flow": true,
+      "net_weight_kt": 0.000844,
+      "partner": "South Africa",
+      "quantity_unit": "kt",
+      "source_evidence_id": "P-WITS-392010-PARTNERS",
+      "trade_value_usd_m": 0.02263,
+      "validity_flags": {
+        "net_weight_valid": true,
+        "quantity_comparable": true,
+        "value_valid": true
+      },
+      "year": 2024
+    },
+    {
+      "flow": "imports",
+      "gross_flow": true,
+      "net_weight_kt": 0.2343,
+      "partner": "Spain",
+      "quantity_unit": "kt",
+      "source_evidence_id": "P-WITS-392010-PARTNERS",
+      "trade_value_usd_m": 0.74976,
+      "validity_flags": {
+        "net_weight_valid": true,
+        "quantity_comparable": true,
+        "value_valid": true
+      },
+      "year": 2024
+    },
+    {
+      "flow": "imports",
+      "gross_flow": true,
+      "net_weight_kt": 0.111083,
+      "partner": "Sweden",
+      "quantity_unit": "kt",
+      "source_evidence_id": "P-WITS-392010-PARTNERS",
+      "trade_value_usd_m": 0.6684,
+      "validity_flags": {
+        "net_weight_valid": true,
+        "quantity_comparable": true,
+        "value_valid": true
+      },
+      "year": 2024
+    },
+    {
+      "flow": "imports",
+      "gross_flow": true,
+      "net_weight_kt": 0.058742,
+      "partner": "Switzerland",
+      "quantity_unit": "kt",
+      "source_evidence_id": "P-WITS-392010-PARTNERS",
+      "trade_value_usd_m": 0.36276,
+      "validity_flags": {
+        "net_weight_valid": true,
+        "quantity_comparable": true,
+        "value_valid": true
+      },
+      "year": 2024
+    },
+    {
+      "flow": "imports",
+      "gross_flow": true,
+      "net_weight_kt": 0.062253,
+      "partner": "Thailand",
+      "quantity_unit": "kt",
+      "source_evidence_id": "P-WITS-392010-PARTNERS",
+      "trade_value_usd_m": 0.61463,
+      "validity_flags": {
+        "net_weight_valid": true,
+        "quantity_comparable": true,
+        "value_valid": true
+      },
+      "year": 2024
+    },
+    {
+      "flow": "imports",
+      "gross_flow": true,
+      "net_weight_kt": 0.378948,
+      "partner": "Turkey",
+      "quantity_unit": "kt",
+      "source_evidence_id": "P-WITS-392010-PARTNERS",
+      "trade_value_usd_m": 1.09261,
+      "validity_flags": {
+        "net_weight_valid": true,
+        "quantity_comparable": true,
+        "value_valid": true
+      },
+      "year": 2024
+    },
+    {
+      "flow": "imports",
+      "gross_flow": true,
+      "net_weight_kt": 1.27151,
+      "partner": "United Arab Emirates",
+      "quantity_unit": "kt",
+      "source_evidence_id": "P-WITS-392010-PARTNERS",
+      "trade_value_usd_m": 3.78488,
+      "validity_flags": {
+        "net_weight_valid": true,
+        "quantity_comparable": true,
+        "value_valid": true
+      },
+      "year": 2024
+    },
+    {
+      "flow": "imports",
+      "gross_flow": true,
+      "net_weight_kt": 0.004579,
+      "partner": "United Kingdom",
+      "quantity_unit": "kt",
+      "source_evidence_id": "P-WITS-392010-PARTNERS",
+      "trade_value_usd_m": 0.08133,
+      "validity_flags": {
+        "net_weight_valid": true,
+        "quantity_comparable": true,
+        "value_valid": true
+      },
+      "year": 2024
+    },
+    {
+      "flow": "imports",
+      "gross_flow": true,
+      "net_weight_kt": 0.088417,
+      "partner": "United States",
+      "quantity_unit": "kt",
+      "source_evidence_id": "P-WITS-392010-PARTNERS",
+      "trade_value_usd_m": 0.85281,
+      "validity_flags": {
+        "net_weight_valid": true,
+        "quantity_comparable": true,
+        "value_valid": true
+      },
+      "year": 2024
+    }
+  ],
+  "schema_version": "2.2.0",
+  "snapshot_id": "PUBLIC-SAU-H6-392010-2026-09-12",
+  "source_boundary": "public",
+  "supersedes": "UNAVAILABLE",
+  "trade": [
+    {
+      "export_uv_usd_t": 1837.7,
+      "exports_kt": 196.310537,
+      "exports_usd_m": 360.763358,
+      "import_uv_usd_t": 4019.7,
+      "imports_kt": 16.526346,
+      "imports_usd_m": 66.430946,
+      "year": 2022
+    },
+    {
+      "export_uv_usd_t": 3238.4,
+      "exports_kt": 91.989295,
+      "exports_usd_m": 297.894298,
+      "import_uv_usd_t": 3196.1,
+      "imports_kt": 19.400713,
+      "imports_usd_m": 62.00668,
+      "year": 2023
+    },
+    {
+      "export_uv_usd_t": 1492.9,
+      "exports_kt": 188.720462,
+      "exports_usd_m": 281.748629,
+      "import_uv_usd_t": 3249.0,
+      "imports_kt": 21.678178,
+      "imports_usd_m": 70.431615,
+      "year": 2024
+    }
+  ],
+  "trade_quality": {
+    "domestic_origin_exports_separated": false,
+    "execution_cap": "DEGRADED where continuity or tariff-line detail is required; 2021 (H5) excluded by the latest-revision H6 rule Partner detail: PARTNER_DETAIL_OBSERVED (P-WITS-392010-PARTNERS).",
+    "flow_basis": "gross",
+    "missing_years": [],
+    "monthly_partner_tariff_line_available": false,
+    "quantity_comparable": true,
+    "reexports_separated": false
+  }
+}
