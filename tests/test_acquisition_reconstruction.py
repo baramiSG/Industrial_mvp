@@ -21,7 +21,12 @@ from ior_mvp.acquisition.contracts import (
 )
 from ior_mvp.acquisition.pipeline import plan_requests, plan_units
 from ior_mvp.acquisition.raw_store import RawStore
-from ior_mvp.acquisition.snapshots import reconstruct, snapshot_sha256, write_snapshot
+from ior_mvp.acquisition.snapshots import (
+    reconstruct,
+    reconstruct_pinned,
+    snapshot_sha256,
+    write_snapshot,
+)
 from ior_mvp.acquisition.source_config import acquisition_sources_config
 from ior_mvp.config import PROJECT_ROOT
 from tests.acquisition_doubles import DoubleConnector, seed_unit
@@ -39,7 +44,7 @@ def test_reconstruct_matches_repository_partner_snapshot() -> None:
     snaps = list((PROJECT_ROOT / "data" / "snapshots" / "partners").glob("*.json"))
     assert snaps
     for path in snaps:
-        result = reconstruct(path, store, config, registry)
+        result = reconstruct_pinned(path, store, config, registry)
         assert result.match, result.detail
 
 

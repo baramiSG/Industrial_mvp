@@ -176,6 +176,7 @@ def _reconstruct_screening(
     from ior_mvp.screening.snapshot import (
         load_screening_summary_directory,
         reconstruct_screening_snapshot,
+        resolve_recorded_input,
         validate_screening_snapshot_directory,
     )
 
@@ -213,6 +214,18 @@ def _reconstruct_screening(
                     sys.exit(2)
                 expected_hash, expected_bytes = manifest_rows[ref]
                 absolute = data_root.parent / ref
+                if ref.startswith("config/"):
+                    try:
+                        absolute = resolve_recorded_input(
+                            {"path": ref, "sha256": expected_hash},
+                            root=data_root.parent,
+                        )
+                    except ValueError:
+                        print(
+                            "SCREENING RECONSTRUCTION FAIL: "
+                            f"manifest hash mismatch for {ref}"
+                        )
+                        sys.exit(1)
                 if (
                     not absolute.exists()
                     or _sha256_file(absolute) != expected_hash
@@ -239,13 +252,71 @@ def _reconstruct_screening(
     return len(paths)
 
 
+def _reconstruct_cases(
+    data_root: Path,
+    *,
+    check_manifest: bool,
+    manifest_rows: dict[str, tuple[str, int]],
+) -> tuple[int, int]:
+    from ior_mvp.cases.build import build_from_brief
+    from ior_mvp.cases.projection import canonical_bytes
+
+    brief_paths = sorted(
+        (data_root / "cases" / "briefs").glob("CASE-BRIEF-*.json")
+    )
+    committed = 0
+    for brief_path in brief_paths:
+        relative = brief_path.relative_to(data_root.parent).as_posix()
+        if check_manifest:
+            if relative not in manifest_rows:
+                print(
+                    f"CASE RECONSTRUCTION FAIL: manifest row missing for {relative}"
+                )
+                sys.exit(2)
+            expected_hash, expected_bytes = manifest_rows[relative]
+            if (
+                _sha256_file(brief_path) != expected_hash
+                or brief_path.stat().st_size != expected_bytes
+            ):
+                print(
+                    f"CASE RECONSTRUCTION FAIL: manifest hash mismatch for {relative}"
+                )
+                sys.exit(1)
+        snapshot = build_from_brief(brief_path, root=data_root.parent)
+        candidates = (
+            data_root
+            / "snapshots"
+            / "public"
+            / f"{snapshot['opportunity']['id']}.json",
+            data_root
+            / "snapshots"
+            / "public"
+            / f"{snapshot['snapshot_id']}.json",
+        )
+        committed_path = next((path for path in candidates if path.exists()), None)
+        if committed_path is None:
+            continue
+        committed += 1
+        if committed_path.read_bytes() != canonical_bytes(snapshot):
+            print(
+                "CASE RECONSTRUCTION FAIL: "
+                f"{snapshot['snapshot_id']} byte mismatch"
+            )
+            sys.exit(1)
+    print(
+        f"CASE RECONSTRUCTION PASS ({committed} snapshots, "
+        f"{len(brief_paths)} briefs)"
+    )
+    return committed, len(brief_paths)
+
+
 def main() -> None:
     _install_socket_block()
     import argparse
 
     from ior_mvp.acquisition.connectors.base import default_registry
     from ior_mvp.acquisition.raw_store import RawStore
-    from ior_mvp.acquisition.snapshots import reconstruct
+    from ior_mvp.acquisition.snapshots import reconstruct_pinned
     from ior_mvp.acquisition.kinds import default_kind_registry
     from ior_mvp.acquisition.source_config import acquisition_sources_config
 
@@ -330,7 +401,7 @@ def main() -> None:
                     print(f"RECONSTRUCTION FAIL: manifest hash mismatch for {rel}")
                     sys.exit(1)
 
-        result = reconstruct(snap_path, store, config, registry)
+        result = reconstruct_pinned(snap_path, store, config, registry)
         verified += result.artifacts_verified
         if not result.match:
             detail = result.detail.get("reason", "BYTE_MISMATCH")
@@ -350,6 +421,11 @@ def main() -> None:
         manifest_rows=manifest_rows,
     )
     screening_snapshots = _reconstruct_screening(
+        data_root,
+        check_manifest=not args.no_check_manifest,
+        manifest_rows=manifest_rows,
+    )
+    _reconstruct_cases(
         data_root,
         check_manifest=not args.no_check_manifest,
         manifest_rows=manifest_rows,

@@ -26,7 +26,7 @@ These records are stored locally, hashed and never refreshed during runtime.
 
 | Source | Use | Grain / caution | MVP status |
 |---|---|---|---|
-| UN Comtrade / WITS | HS6 value, quantity, partner and time series | Reporter record; gross flows; quantity quality varies | official v1 Comtrade universe COMPLETE (2021–2024; imports and exports; 5,443 HS6); frozen S11 WITS partner snapshot retained separately; Comtrade partner detail and ZATCA tariff tree UNAVAILABLE |
+| UN Comtrade / WITS | HS6 value, quantity, partner and time series | Reporter record; gross flows; quantity quality varies | official v1 Comtrade universe COMPLETE (2021–2024; imports and exports; 5,443 HS6); WITS partner detail OBSERVED for 392010/721012/760429/760711; corrected W-C V3 Comtrade partner detail OBSERVED for 721061 with seven named non-World H6 rows; original WITS and Comtrade attempts retained; ZATCA tariff tree UNAVAILABLE |
 | BACI (CEPII) | reconciled bilateral HS6 and cross-country consistency | annual; release-version pinning required | connector implemented (S11); raw evidence only, no analytical kind |
 | ITC Trade Map | monthly and mirror diagnostics | registration/licensing conditions; not a substitute for Saudi administrative data | connector planned |
 | GASTAT foreign trade and open data | official domestic aggregate anchor | reconcile definitions and revisions | connector planned |
@@ -44,6 +44,10 @@ Mirror data may help explain a missing year or partner anomaly. It must not be s
 | MODON directories | plant/entity discovery | C; connector implemented (S12a); availability and coverage recorded per run |
 | Tadawul filings and annual reports | nameplate, expansion and financial context | C; connector implemented (S12b); availability and coverage recorded per run |
 | EPDs and product sheets | process, range, standards and certifications | C; connector implemented (S12b); availability and coverage recorded per run |
+| Hadeed public catalogue | coated-steel process/product envelope | C; S14a run `20260912T233102Z` COMPLETE; one span-addressable record |
+| ALUPCO public profile | aluminium extrusion, sites and disclosed production envelope | C; S14a run `20260912T233130Z` COMPLETE; one span-addressable record |
+| Al Taiseer Group TALCO profile | aluminium profile manufacture, extrusion and finishing | C; S14a run `20260912T233154Z` COMPLETE; one span-addressable record |
+| Ma'aden annual report and results page | aluminium rolling and company production context | C; S14a run `20260912T233222Z` COMPLETE; two span-addressable records |
 | GPCA / sector associations | sector capacity context | B/C |
 
 Public nameplate capacity does not establish current effective capacity, qualification share, allocation or availability.
@@ -58,6 +62,7 @@ Public nameplate capacity does not establish current effective capacity, qualifi
 | Etimad tenders and awards | real bilingual demand specifications | exact document/page span required; connector implemented (S12b); availability and coverage recorded per run |
 | SABER registry | conformity evidence | registration does not prove every buyer qualification; connector implemented (S12a); availability and coverage recorded per run |
 | Producer catalogues / certificates | published product envelope | confirm current edition and contradiction; connector implemented (S12b); availability and coverage recorded per run |
+| WCO HS Nomenclature 2022 chapter texts | target-product classification identity only | B; source `wco_hs_nomenclature`; Chapters 39/72/76 COMPLETE in S14a; never capability/nameplate support |
 
 ### 3.4 Economics
 
@@ -292,3 +297,37 @@ Refusal is `OUT_OF_SCOPE_CONTENT` with `PersonalDataFields` for matched labels o
   `classificationCode` per unit. Any mismatch remains INCOMPLETE and cannot
   become the Saudi universe. Stage-two partner rows and tariff schedules remain
   distinct artifacts.
+
+- **S14a W-A/W-T/W-P discipline:** every robots and linked-terms observation,
+  source/list id, request bound and rationale is recorded before execution.
+  WCO Chapter URLs come from observed index hrefs; no numeric filename pattern
+  is guessed. WCO identity text is Class B and
+  `TARGET_PRODUCT_IDENTITY`-only. Producer disclosures are Class C and may
+  affect capability only through verified DocumentRecord spans. Tasnee and
+  SPIMACO remain `UNAVAILABLE` after one system-CA verification failure each;
+  TLS was not bypassed. WITS partner acquisition used the ruled five-HS6 list,
+  2024 imports and `MAX_REQUESTS=6`. Four units normalized; 721061 redirected
+  to an HTTP-200 error page and is a derived `FORMAT_NOT_PARSEABLE` exclusion.
+  Historical and current partner snapshots reconstruct from their own recorded
+  raw-run selections. Transport-complete but `PENDING/UNPARSED` units may be
+  excluded only for an `AT_LEAST_ONE_COMPLETE_WITH_EXCLUSIONS` kind; all-unit
+  kinds continue to fail closed.
+- **S14a W-C source substitution:** a substitute source is admissible only
+  when reporter, year, flow, HS6 and classification match from stored response
+  rows under that source's own terms and credential contract; the original
+  attempt remains visible. For 721061, V1 omitted `partnerCode` and returned a
+  clear `count == len(data) == 8` envelope with one World and seven non-World
+  H6 rows. The seven partner codes had null descriptions, so the required
+  partner-description predicate failed. AM-3 added raw-Decimal aggregate
+  reconciliation and a governed `&includeDesc=true` V3 variant. The first
+  operator command did not transmit V3 because Make left its ampersand
+  unquoted; OD-18 classified that immutable repeat as a tooling defect.
+  Test-first quoting then carried the exact variant into the URL and contract.
+  Corrected V3 returned seven unique non-World descriptions, and their
+  primary-value sum 71,149,266.221 reconciled exactly to the stored universe
+  World value within tolerance 0.0035. Coverage is COMPLETE and the separate
+  `PARTNERS-SAU-UN-COMTRADE-2026-09-13` snapshot retains the defective repeat,
+  V1 and WITS units as superseded attempts. No row was filtered or renamed.
+  A clear JSON `count == 0 == len(data)` response would be
+  `NORMALIZED_EMPTY`/ZERO; an error, only-World or unparseable response remains
+  MISSING and never becomes zero.

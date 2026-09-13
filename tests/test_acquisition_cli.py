@@ -7,10 +7,204 @@ import json
 import os
 import subprocess
 import sys
+import time
+from pathlib import Path
 
 import pytest
 
 from ior_mvp.acquisition.cli import build_parser
+
+
+def test_make_acquire_partners_quotes_variant_ampersand_for_cli_contract_and_url(
+    tmp_path,
+    monkeypatch,
+) -> None:
+    from ior_mvp.acquisition import cli
+    from ior_mvp.acquisition.contracts import Stage
+    from ior_mvp.acquisition.pipeline import CandidateList, plan_units
+    from ior_mvp.acquisition.source_config import acquisition_sources_config
+
+    candidate_path = tmp_path / "candidates.json"
+    candidate_path.write_text(
+        json.dumps(
+            {
+                "candidate_source": "TEST DOUBLE",
+                "hs6_codes": ["721061"],
+                "recorded_on": "2026-09-13",
+            }
+        )
+    )
+    captured_argv_path = tmp_path / "argv.json"
+    capture = tmp_path / "capture.py"
+    capture.write_text(
+        "#!/usr/bin/env python3\n"
+        "import json, os, sys\n"
+        "open(os.environ['CAPTURE_ARGV'], 'w').write(json.dumps(sys.argv[1:]))\n"
+    )
+    capture.chmod(0o755)
+    subprocess.run(
+        [
+            "make",
+            "acquire-partners",
+            "SOURCE=un_comtrade",
+            f"CANDIDATES={candidate_path}",
+            "YEARS=2024",
+            "FLOWS=imports",
+            "MAX_REQUESTS=2",
+            "PARAMETERS=partner_dimension_query=&includeDesc=true",
+            "IOR_ACQUISITION_LIVE=1",
+            f"UV_RUN={capture}",
+        ],
+        cwd=Path(__file__).resolve().parents[1],
+        check=True,
+        capture_output=True,
+        text=True,
+        env={**os.environ, "CAPTURE_ARGV": str(captured_argv_path)},
+    )
+    for _ in range(100):
+        if captured_argv_path.exists():
+            break
+        time.sleep(0.01)
+    argv = json.loads(captured_argv_path.read_text())
+    parameter_index = argv.index("--parameter")
+    assert argv[parameter_index + 1] == (
+        "partner_dimension_query=&includeDesc=true"
+    )
+
+    captured = {}
+    monkeypatch.setattr(cli, "_deps", lambda *_args, **_kwargs: object())
+
+    class Report:
+        exit_code = 0
+        __dict__ = {"exit_code": 0}
+
+    def fake_acquire(*_args, **kwargs):
+        captured.update(kwargs)
+        return Report()
+
+    monkeypatch.setattr(cli, "acquire_partners", fake_acquire)
+    cli_args = argv[argv.index("acquire-partners") :]
+    with pytest.raises(SystemExit, match="0"):
+        cli.main(cli_args)
+    expected = (("partner_dimension_query", "&includeDesc=true"),)
+    assert captured["parameters"] == expected
+
+    contract = plan_units(
+        Stage.PARTNERS,
+        source_id="un_comtrade",
+        years=(2024,),
+        flows=("imports",),
+        candidates=CandidateList("TEST DOUBLE", ("721061",), "2026-09-13"),
+        config=acquisition_sources_config(),
+        parameters=expected,
+    )[0]
+    assert contract.parameters == expected
+    template = acquisition_sources_config()["sources"]["un_comtrade"][
+        "endpoint_templates"
+    ]["PARTNERS"]
+    assert template.format(
+        reporter="682",
+        period="2024",
+        flow_code="M",
+        product="721061",
+        partner_dimension_query=contract.parameters[0][1],
+    ).endswith("&includeDesc=true")
+
+
+def test_acquire_partners_parameter_flag_enters_contract_parameters_and_query_hash_and_rejects_reserved_names(
+    tmp_path,
+    monkeypatch,
+) -> None:
+    from ior_mvp.acquisition import cli
+    from ior_mvp.acquisition.cli import _parse_parameters
+    from ior_mvp.acquisition.contracts import (
+        AcquisitionConfigurationError,
+        Stage,
+    )
+    from ior_mvp.acquisition.pipeline import CandidateList, plan_units
+    from ior_mvp.acquisition.source_config import acquisition_sources_config
+
+    parser = build_parser()
+    args = parser.parse_args(
+        [
+            "acquire-partners",
+            "--source",
+            "un_comtrade",
+            "--candidates",
+            "test.json",
+            "--years",
+            "2024",
+            "--max-requests",
+            "2",
+            "--parameter",
+            "partner_dimension_query=",
+        ]
+    )
+    parameters = _parse_parameters(args.parameter)
+    config = acquisition_sources_config()
+    candidate = CandidateList("TEST DOUBLE", ("721061",), "2026-09-13")
+    plain = plan_units(
+        Stage.PARTNERS,
+        source_id="un_comtrade",
+        years=(2024,),
+        flows=("imports",),
+        candidates=candidate,
+        config=config,
+    )[0]
+    variant = plan_units(
+        Stage.PARTNERS,
+        source_id="un_comtrade",
+        years=(2024,),
+        flows=("imports",),
+        candidates=candidate,
+        config=config,
+        parameters=parameters,
+    )[0]
+    assert variant.parameters == (("partner_dimension_query", ""),)
+    assert variant.query_hash() != plain.query_hash()
+    with pytest.raises(AcquisitionConfigurationError, match="reserved"):
+        _parse_parameters(["partner=ALL"])
+    candidate_path = tmp_path / "candidates.json"
+    candidate_path.write_text(
+        json.dumps(
+            {
+                "candidate_source": "TEST DOUBLE",
+                "hs6_codes": ["721061"],
+                "recorded_on": "2026-09-13",
+            }
+        ),
+        encoding="utf-8",
+    )
+    captured = {}
+    monkeypatch.setattr(cli, "_deps", lambda *_args, **_kwargs: object())
+
+    class Report:
+        exit_code = 0
+        __dict__ = {"exit_code": 0}
+
+    def fake_acquire(*_args, **kwargs):
+        captured.update(kwargs)
+        return Report()
+
+    monkeypatch.setattr(cli, "acquire_partners", fake_acquire)
+    with pytest.raises(SystemExit) as completed:
+        cli.main(
+            [
+                "acquire-partners",
+                "--source",
+                "un_comtrade",
+                "--candidates",
+                str(candidate_path),
+                "--years",
+                "2024",
+                "--max-requests",
+                "2",
+                "--parameter",
+                "partner_dimension_query=",
+            ]
+        )
+    assert completed.value.code == 0
+    assert captured["parameters"] == (("partner_dimension_query", ""),)
 
 
 def test_build_parser_required_args() -> None:

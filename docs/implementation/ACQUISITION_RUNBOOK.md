@@ -139,3 +139,49 @@ reconstruct the directory before use; each file must remain below 48 MiB and
 the directory below 100 MiB. Runtime record lookup loads only its HS2 shard.
 A future W2 still requires an observed official partner endpoint/token and a
 new owner-authorized budget.
+
+## S14a case-evidence windows and offline derivation
+
+S14a opened only the owner-approved W-A, W-T, W-P and AM-2 W-C windows. Full pre-window
+parameters, robots/terms facts, verbatim RunReports and stored page identities
+are in `.workflow/slices/S14-deep-cases-a/implementation_log.md`. `.env` was
+sourced only inside the W-C acquisition command and was never read as text;
+no credential value was printed or stored, TLS verification was never disabled, and
+`www.rajhisteel.com` was never requested.
+
+| Window / source | Bound | Recorded outcome |
+|---|---:|---|
+| W-A / `wco_hs_nomenclature` | 3 documents + terms; `MAX_REQUESTS=4` | Chapters 39, 72 and 76 COMPLETE; three Class-B `DocumentRecord`s. The WCO index was read a second, disclosed time after the first in-memory link predicate emitted no chapter hrefs; no URL was guessed. |
+| W-A / `producer_hadeed` | 1 document; `MAX_REQUESTS=1` | Catalogue COMPLETE; one Class-C `DocumentRecord`. |
+| W-A / `producer_alupco` | 1 document; `MAX_REQUESTS=1` | About page COMPLETE; one Class-C `DocumentRecord`. The downloads index returned HTTP 500 during consultation, so no PDF URL was added. |
+| W-A / `producer_altaiseer_talco` | 1 document; `MAX_REQUESTS=1` | Public profile COMPLETE; one Class-C `DocumentRecord`. |
+| W-A / `producer_maaden` | 2 documents + terms; `MAX_REQUESTS=3` | Annual report and results page COMPLETE; two Class-C `DocumentRecord`s. |
+| W-T / Tasnee and SPIMACO | one verified-TLS robots GET each | Both failed `CERTIFICATE_VERIFY_FAILED`; recorded `UNAVAILABLE`, no retry or bypass. |
+| W-P / `wits_trade` | five HS6 + terms; `MAX_REQUESTS=6` | Four selected HS6 normalized; 721061 redirected to an HTTP-200 `Error.aspx` and is a derived `FORMAT_NOT_PARSEABLE` exclusion. `PARTNERS-SAU-WITS-TRADE-2026-09-12` is retained beside the byte-identical 2026-09-03 snapshot. |
+| W-C / `un_comtrade` | HS6 721061, 2024 imports, V1 omission of `partnerCode`; `MAX_REQUESTS=2` | Terms plus one data response. The clear envelope contained 8 H6 rows (1 World, 7 non-World), but every partner description was null; coverage is `INCOMPLETE / COVERAGE_INDETERMINATE`. `partner2Code` was single-valued at 0, so V2 did not open. No Comtrade partner snapshot was built; the WITS attempt remains visible. |
+
+`RunReport.requests_made` still sums cumulative per-unit coverage values
+(KL-65). Actual request-budget use is therefore the recorded bound, not the
+aggregate RunReport number: WCO 4, Hadeed 1, ALUPCO 1, TALCO 1, Ma'aden 3 and
+WITS 6.
+W-C used two connector requests (terms plus data). Its emitted top-level
+RunReport count remained 0 on the unavailable branch while the immutable unit
+coverage correctly records 2; the slice log preserves both values.
+
+Case selection and derivation remain offline:
+
+```bash
+make select-cases SNAPSHOT=<screening-directory> UNIVERSE=<universe-json> \
+  TERMS=data/cases/selection/hs6-disclosure-terms-v1.json \
+  QUOTA=coated_steel=2,fabricated_aluminium=2,technical_plastics=1 OUT=<output-directory>
+make validate-briefs
+make build-case BRIEF=<case-brief-json> OUT=<output-directory>
+make cases-reconstruct
+```
+
+At this section's authoring, the S14a `build_manifests.py` run count is **0**.
+ADR-021 must contain the final authority/evidence rationale before the single
+authorized T9 invocation. The generator then adds `data/cases/**`,
+`config/history/**`, the new raw/document/entity/partner artifacts and updates
+only the authorized configuration/Core authority hashes. No second invocation
+is authorized.

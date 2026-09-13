@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 from datetime import date
+from decimal import Decimal, InvalidOperation
 from typing import Any
 
 from ..contracts import (
@@ -16,6 +17,7 @@ from ..contracts import (
     TradeObservation,
     UNAVAILABLE,
     UnavailableReason,
+    Stage,
 )
 from ..harmonise import trade_observation_from_row
 from .base import BaseConnector
@@ -65,6 +67,8 @@ class UnComtradeConnector(BaseConnector):
         }
         if "reporter_682_all_rows" in failed:
             return UnavailableReason.REPORTER_MISMATCH
+        if failed == {"partner_desc_present_for_non_world_rows"}:
+            return UnavailableReason.PARTNER_DESCRIPTIONS_UNAVAILABLE
         return UnavailableReason.COVERAGE_INDETERMINATE
 
     @staticmethod
@@ -85,6 +89,113 @@ class UnComtradeConnector(BaseConnector):
     @staticmethod
     def _error_is_clear(envelope: dict[str, Any]) -> bool:
         return envelope.get("error") in (None, "", [], {})
+
+    @staticmethod
+    def _decimal_scale(value: str) -> int:
+        decimal = Decimal(value)
+        return max(0, -decimal.as_tuple().exponent)
+
+    def _universe_reference(
+        self,
+        *,
+        flow: str,
+        period: str,
+        hs6: str,
+    ) -> str | None:
+        selected = self.store.latest_runs(
+            source_id=self.source_id,
+            stage=Stage.UNIVERSE.value,
+        ).get((flow, period))
+        if selected is None or selected[0].status != "COMPLETE":
+            return None
+        coverage = selected[0]
+        for contract in self.store.pages_for(
+            self.source_id,
+            coverage.query_hash,
+            coverage.run_id,
+        ):
+            try:
+                envelope = json.loads(
+                    self.store.read_payload(contract).decode("utf-8"),
+                    parse_float=str,
+                )
+            except (UnicodeError, json.JSONDecodeError):
+                return None
+            rows = envelope.get("data") if isinstance(envelope, dict) else None
+            if not isinstance(rows, list):
+                return None
+            for row in rows:
+                if (
+                    isinstance(row, dict)
+                    and str(row.get("cmdCode")) == hs6
+                    and row.get("primaryValue") is not None
+                ):
+                    return str(row["primaryValue"])
+        return None
+
+    def _aggregate_reconciliation(
+        self,
+        *,
+        payload: bytes,
+        query: Any,
+    ) -> tuple[bool, str]:
+        reference_text = self._universe_reference(
+            flow=query.flow,
+            period=query.periods[0] if query.periods else "",
+            hs6=query.product_codes[0] if query.product_codes else "",
+        )
+        if reference_text is None:
+            return False, "reference unavailable"
+        try:
+            envelope = json.loads(payload.decode("utf-8"), parse_float=str)
+            rows = envelope.get("data") if isinstance(envelope, dict) else None
+            if not isinstance(rows, list):
+                return False, "partner rows unavailable"
+            reference = Decimal(reference_text)
+            non_world = [
+                str(row["primaryValue"])
+                for row in rows
+                if isinstance(row, dict)
+                and str(row.get("partnerCode")) != "0"
+                and row.get("primaryValue") is not None
+            ]
+            if len(non_world) != sum(
+                isinstance(row, dict)
+                and str(row.get("partnerCode")) != "0"
+                for row in rows
+            ):
+                return False, "non-World primaryValue unavailable"
+            values = [Decimal(value) for value in non_world]
+            world_values = [
+                str(row["primaryValue"])
+                for row in rows
+                if isinstance(row, dict)
+                and str(row.get("partnerCode")) == "0"
+                and row.get("primaryValue") is not None
+            ]
+            scale = max(
+                [self._decimal_scale(reference_text)]
+                + [self._decimal_scale(value) for value in non_world]
+                + [self._decimal_scale(value) for value in world_values]
+            )
+            unit = Decimal(10) ** -scale
+            total = sum(values, Decimal(0))
+            tolerance = Decimal(len(values)) * unit / 2
+            difference = abs(total - reference)
+            world_ok = all(
+                abs(Decimal(value) - reference) <= unit / 2
+                for value in world_values
+            )
+            passed = difference <= tolerance and world_ok
+            return (
+                passed,
+                (
+                    f"S={total}; R={reference}; diff={difference}; "
+                    f"s={scale}; tolerance={tolerance}; world_match={world_ok}"
+                ),
+            )
+        except (InvalidOperation, KeyError, TypeError, ValueError):
+            return False, "numeric token unavailable"
 
     def page_meta(self, payload: bytes, content_type: str) -> PageMeta:
         rows = UNAVAILABLE
@@ -115,6 +226,23 @@ class UnComtradeConnector(BaseConnector):
             enumerated_children=None,
         )
 
+    def classify_page(
+        self,
+        payload: bytes,
+        content_type: str,
+        stage: Stage,
+    ) -> tuple[str, str | None]:
+        if stage is Stage.PARTNERS and self._json_content_type(content_type):
+            envelope = self._envelope(payload)
+            if (
+                envelope is not None
+                and envelope.get("count") == 0
+                and envelope.get("data") == []
+                and self._error_is_clear(envelope)
+            ):
+                return "NORMALIZED_EMPTY", "zero_rows_provider_count_0"
+        return super().classify_page(payload, content_type, stage)
+
     def validate(self, raw: RawArtifact) -> QualityReport:
         contract = raw.contract
         payload = self.store.read_payload(contract)
@@ -136,6 +264,18 @@ class UnComtradeConnector(BaseConnector):
             .get(query.flow, query.flow)
         )
         expected_period = query.periods[0] if query.periods else ""
+        partner_stage = query.stage is Stage.PARTNERS
+        zero_envelope = (
+            partner_stage
+            and envelope is not None
+            and count == 0
+            and dataset == []
+            and self._error_is_clear(envelope)
+        )
+        aggregate_ok, aggregate_detail = self._aggregate_reconciliation(
+            payload=payload,
+            query=query,
+        ) if partner_stage else (True, "not applicable")
         reporter_ok = bool(rows) and all(
             str(item.get("reporterCode")) == expected_reporter
             for item in rows
@@ -151,6 +291,8 @@ class UnComtradeConnector(BaseConnector):
             for item in rows
             if isinstance(item, dict)
         ) and all(isinstance(item, dict) for item in rows)
+        if zero_envelope:
+            reporter_ok = period_ok = flow_ok = True
         if query.stage.value == "UNIVERSE":
             partner_ok = bool(rows) and all(
                 isinstance(item, dict)
@@ -158,10 +300,13 @@ class UnComtradeConnector(BaseConnector):
                 for item in rows
             )
         else:
-            partner_ok = bool(rows) and any(
-                isinstance(item, dict)
-                and str(item.get("partnerCode")) != "0"
-                for item in rows
+            partner_ok = zero_envelope or (
+                bool(rows)
+                and any(
+                    isinstance(item, dict)
+                    and str(item.get("partnerCode")) != "0"
+                    for item in rows
+                )
             )
         hs6_values = [
             str(item.get("cmdCode", ""))
@@ -188,8 +333,10 @@ class UnComtradeConnector(BaseConnector):
             and all(classifications)
             and len(set(classifications)) == 1
         )
+        if zero_envelope:
+            hs6_ok = classification_ok = True
         duplicate_ok = len(set(hs6_values)) == len(hs6_values)
-        checks = (
+        common_checks = (
             QualityCheck(
                 "content_type_json",
                 "PASS" if content_type_json else "FAIL",
@@ -221,6 +368,9 @@ class UnComtradeConnector(BaseConnector):
                 else "FAIL",
                 f"count={count!r}; stored_rows={len(rows)}",
             ),
+        )
+        if not partner_stage:
+            checks = common_checks + (
             QualityCheck(
                 "rows_present",
                 "PASS" if rows else "FAIL",
@@ -261,7 +411,132 @@ class UnComtradeConnector(BaseConnector):
                 "PASS" if duplicate_ok else "FAIL",
                 query.stage.value,
             ),
-        )
+            )
+        else:
+            partner_pairs = [
+                (str(item.get("cmdCode", "")), str(item.get("partnerCode", "")))
+                for item in rows
+                if isinstance(item, dict)
+            ]
+            pair_unique = (
+                zero_envelope
+                or (
+                    len(partner_pairs) == len(rows)
+                    and len(set(partner_pairs)) == len(partner_pairs)
+                )
+            )
+            secondary_fields = ("partner2Code", "motCode", "customsCode")
+            secondary_ok = zero_envelope or all(
+                not any(field in item for item in rows if isinstance(item, dict))
+                or (
+                    all(
+                        isinstance(item, dict) and field in item
+                        for item in rows
+                    )
+                    and len(
+                        {
+                            str(item[field])
+                            for item in rows
+                            if isinstance(item, dict)
+                        }
+                    )
+                    == 1
+                )
+                for field in secondary_fields
+            )
+            partner_desc_ok = zero_envelope or all(
+                str(item.get("partnerCode")) == "0"
+                or (
+                    isinstance(item.get("partnerDesc"), str)
+                    and bool(item["partnerDesc"].strip())
+                    and item["partnerDesc"] != UNAVAILABLE
+                )
+                for item in rows
+                if isinstance(item, dict)
+            )
+            non_world_descs = [
+                item["partnerDesc"].strip()
+                for item in rows
+                if isinstance(item, dict)
+                and str(item.get("partnerCode")) != "0"
+                and isinstance(item.get("partnerDesc"), str)
+                and item["partnerDesc"].strip()
+                and item["partnerDesc"] != UNAVAILABLE
+            ]
+            partner_desc_unique = (
+                len(non_world_descs) == len(set(non_world_descs))
+            )
+            checks = common_checks + (
+                QualityCheck(
+                    "count_below_documented_cap",
+                    "PASS"
+                    if isinstance(count, int)
+                    and not isinstance(count, bool)
+                    and count < self.documented_record_cap
+                    else "FAIL",
+                    f"count={count!r}; cap={self.documented_record_cap}",
+                ),
+                QualityCheck(
+                    "rows_or_zero_envelope",
+                    "PASS" if rows or zero_envelope else "FAIL",
+                    f"{len(rows)} rows; zero_envelope={zero_envelope}",
+                ),
+                QualityCheck(
+                    "reporter_682_all_rows",
+                    "PASS" if reporter_ok else "FAIL",
+                    f"expected reporterCode={expected_reporter}",
+                ),
+                QualityCheck(
+                    "period_matches_contract",
+                    "PASS" if period_ok else "FAIL",
+                    f"expected period={expected_period}",
+                ),
+                QualityCheck(
+                    "flow_matches_contract",
+                    "PASS" if flow_ok else "FAIL",
+                    f"expected flowCode={expected_flow}",
+                ),
+                QualityCheck(
+                    "partner_matches_stage",
+                    "PASS" if partner_ok else "FAIL",
+                    query.stage.value,
+                ),
+                QualityCheck(
+                    "cmd_code_hs6_all_rows",
+                    "PASS" if hs6_ok else "FAIL",
+                    "six-digit explicit HS6 required",
+                ),
+                QualityCheck(
+                    "single_classification_code_per_unit",
+                    "PASS" if classification_ok else "FAIL",
+                    f"classification_codes={sorted(set(classifications))}",
+                ),
+                QualityCheck(
+                    "partner_rows_unique_per_unit",
+                    "PASS" if pair_unique else "FAIL",
+                    "(cmdCode, partnerCode) must be unique",
+                ),
+                QualityCheck(
+                    "secondary_dimensions_single_valued",
+                    "PASS" if secondary_ok else "FAIL",
+                    "present partner2Code/motCode/customsCode fields",
+                ),
+                QualityCheck(
+                    "partner_desc_present_for_non_world_rows",
+                    "PASS" if partner_desc_ok else "FAIL",
+                    "non-World rows require partnerDesc",
+                ),
+                QualityCheck(
+                    "aggregate_reconciles",
+                    "PASS" if aggregate_ok else "FAIL",
+                    aggregate_detail,
+                ),
+                QualityCheck(
+                    "partner_desc_unique_for_non_world_rows",
+                    "PASS" if partner_desc_unique else "FAIL",
+                    "non-empty non-World partnerDesc values must be unique",
+                ),
+            )
         status = "PASS" if all(c.result == "PASS" for c in checks) else "FAIL"
         return QualityReport(
             source_id=contract.source_id,

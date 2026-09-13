@@ -457,3 +457,74 @@ def test_screening_size_budgets_per_file_and_total(tmp_path):
     assert max(sizes) <= budgets["max_governed_file_bytes"]
     assert sum(sizes) <= budgets["screening_snapshot_total_max_bytes"]
     assert "screening_snapshot_max_bytes" not in budgets
+
+
+def test_check_inputs_passes_when_live_config_matches(tmp_path):
+    from ior_mvp.screening.snapshot import resolve_recorded_input
+
+    path = tmp_path / "config" / "screening.v1.yaml"
+    path.parent.mkdir(parents=True)
+    path.write_bytes(b"metadata:\n  version: 1.0.0\n")
+    identity = {
+        "path": "config/screening.v1.yaml",
+        "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+    }
+    assert resolve_recorded_input(identity, root=tmp_path) == path
+
+
+def test_check_inputs_resolves_superseded_config_from_history_by_content_hash(
+    tmp_path,
+):
+    from ior_mvp.screening.snapshot import resolve_recorded_input
+
+    live = tmp_path / "config" / "product_families.v1.yaml"
+    history = (
+        tmp_path / "config" / "history" / "product_families.v1-1.0.0.yaml"
+    )
+    history.parent.mkdir(parents=True)
+    live.write_bytes(b"metadata:\n  version: 1.1.0\n")
+    history.write_bytes(b"metadata:\n  version: 1.0.0\n")
+    identity = {
+        "path": "config/product_families.v1.yaml",
+        "sha256": hashlib.sha256(history.read_bytes()).hexdigest(),
+    }
+    assert resolve_recorded_input(identity, root=tmp_path) == history
+
+
+def test_check_inputs_rejects_unknown_hash_even_with_history_present(tmp_path):
+    from ior_mvp.screening.snapshot import resolve_recorded_input
+
+    live = tmp_path / "config" / "product_families.v1.yaml"
+    history = (
+        tmp_path / "config" / "history" / "product_families.v1-1.0.0.yaml"
+    )
+    history.parent.mkdir(parents=True)
+    live.write_bytes(b"metadata:\n  version: 1.1.0\n")
+    history.write_bytes(b"metadata:\n  version: 1.0.0\n")
+    with pytest.raises(ValueError, match="INPUTS_CHANGED"):
+        resolve_recorded_input(
+            {
+                "path": "config/product_families.v1.yaml",
+                "sha256": "a" * 64,
+            },
+            root=tmp_path,
+        )
+
+
+def test_history_resolution_never_applies_to_data_inputs(tmp_path):
+    from ior_mvp.screening.snapshot import resolve_recorded_input
+
+    data = tmp_path / "data" / "source.json"
+    history = tmp_path / "config" / "history" / "source.json"
+    data.parent.mkdir(parents=True)
+    history.parent.mkdir(parents=True)
+    data.write_bytes(b'{"version": 2}\n')
+    history.write_bytes(b'{"version": 1}\n')
+    with pytest.raises(ValueError, match="INPUTS_CHANGED"):
+        resolve_recorded_input(
+            {
+                "path": "data/source.json",
+                "sha256": hashlib.sha256(history.read_bytes()).hexdigest(),
+            },
+            root=tmp_path,
+        )

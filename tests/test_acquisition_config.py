@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import copy
+import json
 import subprocess
 from pathlib import Path
 
@@ -35,6 +36,20 @@ DOCUMENT = {
     "producer_sabic": ("SABIC (incl. Hadeed) public disclosures", "C"),
     "producer_advanced_petrochemical": ("Advanced Petrochemical public disclosures", "C"),
     "producer_tasnee": ("Tasnee public disclosures", "C"),
+    "producer_hadeed": (
+        "Hadeed — Saudi Iron and Steel Company public disclosures",
+        "C",
+    ),
+    "producer_alupco": ("ALUPCO public disclosures", "C"),
+    "producer_altaiseer_talco": (
+        "Al Taiseer Group TALCO public disclosures",
+        "C",
+    ),
+    "producer_maaden": ("Ma'aden public disclosures", "C"),
+    "wco_hs_nomenclature": (
+        "World Customs Organization — Harmonized System Nomenclature 2022 edition (public chapter legal texts)",
+        "B",
+    ),
 }
 S11 = {"wits_trade", "un_comtrade", "baci_cepii", "zatca_tariff"}
 UNCHANGED_S11 = {"wits_trade", "baci_cepii", "zatca_tariff"}
@@ -49,7 +64,7 @@ def _head_config() -> dict:
 @pytest.fixture
 def phased_config() -> dict:
     cfg = _head_config()
-    cfg["metadata"]["version"] = "1.3.0"
+    cfg["metadata"]["version"] = "1.4.0"
     for sid, (stage, authority, _) in INSTITUTIONAL.items():
         cfg["sources"][sid] = pre_observation_source_config(sid, stage=stage, authority=authority)
     for sid, (authority, evidence_class) in DOCUMENT.items():
@@ -84,8 +99,8 @@ def valid_config() -> dict:
     return yaml.safe_load(path.read_text(encoding="utf-8"))
 
 
-def test_loads_yaml_version_and_sixteen_sources(valid_config: dict) -> None:
-    assert valid_config["metadata"]["version"] == "1.3.0"
+def test_loads_yaml_version_and_twenty_one_sources(valid_config: dict) -> None:
+    assert valid_config["metadata"]["version"] == "1.4.0"
     assert set(valid_config["sources"]) == S11 | set(INSTITUTIONAL) | set(DOCUMENT)
 
 
@@ -119,6 +134,26 @@ def test_credential_env_var_only_for_un_comtrade(valid_config: dict) -> None:
     )
     for sid in ("wits_trade", "baci_cepii", "zatca_tariff"):
         assert valid_config["sources"][sid]["credential_env_var"] is None
+
+
+def test_un_comtrade_partners_template_omits_partner_token_and_variants_are_v1_empty_v2_partner2code_zero_v3_include_desc(
+    valid_config: dict,
+) -> None:
+    source = valid_config["sources"]["un_comtrade"]
+    template = source["endpoint_templates"]["PARTNERS"]
+    assert "{partner}" not in template
+    assert template.endswith("{partner_dimension_query}")
+    variants = source["parameters"]["partner_dimension_variants"]
+    assert set(variants) == {"V1", "V2", "V3"}
+    assert variants["V1"]["value"] == ""
+    assert variants["V2"]["value"] == "&partner2Code=0"
+    assert variants["V3"]["value"] == "&includeDesc=true"
+    assert set(variants["V1"]) == {"value", "observation_basis"}
+    assert set(variants["V2"]) == {"value", "observation_basis"}
+    assert set(variants["V3"]) == {"value", "observation_basis"}
+    assert "OD-16" in variants["V3"]["observation_basis"]
+    assert "unobserved" in variants["V3"]["observation_basis"]
+    assert "all" not in json.dumps(variants).casefold()
 
 
 def test_license_capture_implications(valid_config: dict) -> None:
@@ -158,7 +193,7 @@ def test_config_loader_lives_in_acquisition_package_and_caches() -> None:
     )
     acquisition_sources_config.cache_clear()
     cfg = acquisition_sources_config()
-    assert cfg["metadata"]["version"] == "1.3.0"
+    assert cfg["metadata"]["version"] == "1.4.0"
     assert acquisition_sources_config() is cfg
 
 
@@ -382,8 +417,8 @@ def test_s11_and_s12a_mappings_unchanged_and_strict(valid_config: dict) -> None:
     assert valid_config["raw_store"] == head["raw_store"]
 
 
-def test_metadata_version_pinned_to_1_3_0(valid_config: dict) -> None:
-    assert valid_config["metadata"]["version"] == "1.3.0"
+def test_metadata_version_pinned_to_1_4_0(valid_config: dict) -> None:
+    assert valid_config["metadata"]["version"] == "1.4.0"
     validate_acquisition_sources(valid_config)
 
 
@@ -485,6 +520,82 @@ def test_live_yaml_loads_without_invented_enums() -> None:
             }
             assert source_config.observation_state(sid, src) == "PRE_OBSERVATION"
     test_credential_env_var_only_for_un_comtrade(cfg)
+
+
+def test_s14_producer_document_sources_present_with_exact_keys(
+    valid_config: dict,
+) -> None:
+    expected = {
+        "producer_hadeed",
+        "producer_alupco",
+        "producer_altaiseer_talco",
+        "producer_maaden",
+    }
+    assert expected <= set(valid_config["sources"])
+    assert expected <= set(source_config.DOCUMENT_SOURCE_STAGES)
+    for source_id in expected:
+        source = valid_config["sources"][source_id]
+        assert set(source) == source_config.SOURCE_KEYS
+        assert source["endpoint_templates"]["DOCUMENT"] == "{document_url}"
+        assert source["default_evidence_class"] == "C"
+        assert source["credential_env_var"] == UNAVAILABLE
+
+
+def test_s14_producer_sources_observed_fact_fields_are_url_or_unavailable(
+    valid_config: dict,
+) -> None:
+    for source_id in (
+        "producer_hadeed",
+        "producer_alupco",
+        "producer_altaiseer_talco",
+        "producer_maaden",
+    ):
+        source = valid_config["sources"][source_id]
+        for value in source_config.observed_fact_values(source_id, source).values():
+            assert value == UNAVAILABLE or isinstance(
+                value, (str, list, dict)
+            )
+
+
+def test_1_3_0_history_copy_is_byte_identical_to_superseded_config() -> None:
+    retained = (
+        PROJECT_ROOT
+        / "config"
+        / "history"
+        / "acquisition_sources.v1-1.3.0.yaml"
+    )
+    expected = subprocess.check_output(
+        ["git", "show", "HEAD:config/acquisition_sources.v1.yaml"],
+        cwd=PROJECT_ROOT,
+    )
+    assert retained.read_bytes() == expected
+
+
+def test_wco_hs_nomenclature_document_source_declared_with_observed_facts_and_class_b(
+    valid_config: dict,
+) -> None:
+    source = valid_config["sources"]["wco_hs_nomenclature"]
+    assert source["default_evidence_class"] == "B"
+    assert source["default_reviewer_status"] == (
+        "unconfirmed_by_responsible_authority"
+    )
+    assert source["endpoint_templates"]["DOCUMENT"] == "{document_url}"
+    assert source["expected_content_types"] == ["application/pdf"]
+    assert source["credential_env_var"] == UNAVAILABLE
+
+
+def test_default_registry_contains_all_s14_document_sources() -> None:
+    from ior_mvp.acquisition.connectors.base import default_registry
+
+    registry = default_registry()
+    for source_id in (
+        "producer_hadeed",
+        "producer_alupco",
+        "producer_altaiseer_talco",
+        "producer_maaden",
+        "wco_hs_nomenclature",
+    ):
+        assert source_id in registry.ids()
 
 
 @pytest.mark.parametrize("sid", INSTITUTIONAL)

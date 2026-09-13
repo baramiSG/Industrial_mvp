@@ -23,7 +23,8 @@ VISUAL_BASELINE_IMAGE = ior-visual-baselines:playwright-1.62.0-noble
 	acquire-universe acquire-partners acquire-tariff acquire-baci \
 	acquire-aggregates acquire-directory acquire-registry build-snapshots reconstruct \
 	acquire-documents build-documents build-entities build-screening \
-	validate-screening screening-reconstruct screen-candidates
+	validate-screening screening-reconstruct screen-candidates \
+	select-cases validate-briefs build-case cases-reconstruct
 
 install:
 	python3 -m pip install -e ".[dev]"
@@ -114,7 +115,7 @@ acquire-partners:
 	@test -n "$(CANDIDATES)" || (echo "CANDIDATES required" >&2; exit 2)
 	@test -n "$(YEARS)" || (echo "YEARS required" >&2; exit 2)
 	@test -n "$(MAX_REQUESTS)" || (echo "MAX_REQUESTS required" >&2; exit 2)
-	PYTHONPATH=src $(UV_RUN) python -m ior_mvp.acquisition acquire-partners --source $(SOURCE) --candidates $(CANDIDATES) --years $(YEARS) --max-requests $(MAX_REQUESTS) $(if $(FLOWS),--flows $(FLOWS),)
+	PYTHONPATH=src $(UV_RUN) python -m ior_mvp.acquisition acquire-partners --source $(SOURCE) --candidates $(CANDIDATES) --years $(YEARS) --max-requests $(MAX_REQUESTS) $(if $(FLOWS),--flows $(FLOWS),) $(if $(PARAMETERS),--parameter "$(PARAMETERS)",)
 
 acquire-tariff:
 	@test "$(IOR_ACQUISITION_LIVE)" = "1" || (echo "IOR_ACQUISITION_LIVE=1 required" >&2; exit 2)
@@ -187,3 +188,26 @@ screen-candidates:
 	@test -n "$(UNIVERSE)" || (echo "UNIVERSE required" >&2; exit 2)
 	PYTHONPATH=src $(UV_RUN) python -m ior_mvp.screening emit-candidates \
 		--universe $(UNIVERSE) $(if $(BATCH_SIZE),--batch-size $(BATCH_SIZE),)
+
+select-cases:
+	@test -n "$(SNAPSHOT)" || (echo "SNAPSHOT required" >&2; exit 2)
+	@test -n "$(UNIVERSE)" || (echo "UNIVERSE required" >&2; exit 2)
+	@test -n "$(TERMS)" || (echo "TERMS required" >&2; exit 2)
+	@test -n "$(QUOTA)" || (echo "QUOTA required" >&2; exit 2)
+	@test -n "$(OUT)" || (echo "OUT required" >&2; exit 2)
+	PYTHONPATH=src $(UV_RUN) python -m ior_mvp.cases select \
+		--screening $(SNAPSHOT) --universe $(UNIVERSE) --terms $(TERMS) \
+		--quota $(QUOTA) --out $(OUT)
+
+validate-briefs:
+	@for brief in data/cases/briefs/CASE-BRIEF-*.json; do \
+		PYTHONPATH=src $(UV_RUN) python -m ior_mvp.cases validate-brief --brief "$$brief" || exit $$?; \
+	done
+
+build-case:
+	@test -n "$(BRIEF)" || (echo "BRIEF required" >&2; exit 2)
+	@test -n "$(OUT)" || (echo "OUT required" >&2; exit 2)
+	PYTHONPATH=src $(UV_RUN) python -m ior_mvp.cases build --brief $(BRIEF) --out $(OUT)
+
+cases-reconstruct:
+	PYTHONPATH=src $(UV_RUN) python -m ior_mvp.cases reconstruct

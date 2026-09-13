@@ -85,6 +85,26 @@ def test_repository_partner_snapshot_valid() -> None:
             assert (PROJECT_ROOT / ref["path"]).exists()
 
 
+def test_un_comtrade_partner_snapshot_id_is_distinct_and_wits_snapshot_bytes_unchanged() -> None:
+    import hashlib
+
+    root = PROJECT_ROOT / "data" / "snapshots" / "partners"
+    expected = {
+        "PARTNERS-SAU-WITS-TRADE-2026-09-12.json": (
+            "0a5a564594ecdb35ad129f7c111e3e5f62ba6d152fac275cea6d0ecc0e08dc63"
+        ),
+        "PARTNERS-SAU-WITS-TRADE-2026-09-03.json": (
+            "cdcc904af656b8d1ba02f6dd23593071cddcf21739e58290d4cf197e6723657f"
+        ),
+    }
+    for name, digest in expected.items():
+        assert hashlib.sha256((root / name).read_bytes()).hexdigest() == digest
+    for path in root.glob("PARTNERS-SAU-UN-COMTRADE-*.json"):
+        assert path.name not in expected
+        payload = json.loads(path.read_text(encoding="utf-8"))
+        assert payload["source_id"] == "un_comtrade"
+
+
 def test_acquired_snapshot_loaders_read_only_their_kind_and_validate() -> None:
     repository.clear_acquisition_caches()
     loaders = {
@@ -186,6 +206,117 @@ def test_partner_rebuild_as_of_date_stable(tmp_path: Path) -> None:
             store, config, registry, source_id="TEST-FIXTURE"
         )
     assert record["as_of_date"] == "2026-09-04"
+
+
+def test_partner_snapshot_excludes_complete_transport_unit_with_unparsed_page(
+    tmp_path: Path,
+) -> None:
+    config = _config_with_test_source("TEST-FIXTURE")
+    store = _temp_store(tmp_path)
+    registry = _double_registry()
+    source_cfg = {
+        **config["sources"]["wits_trade"],
+        "source_id": "TEST-FIXTURE",
+    }
+    for code in ("721049", "721061"):
+        contract = QueryContract(
+            source_id="TEST-FIXTURE",
+            stage=Stage.PARTNERS,
+            reporter="SAU",
+            partner="WLD",
+            flow="imports",
+            product_scope=ProductScope.EXPLICIT,
+            product_codes=(code,),
+            nomenclature="H0",
+            periods=("2024",),
+        )
+        artifact = seed_unit(
+            store,
+            contract=contract,
+            run_id="20260904T120000Z",
+            payload=_fixture("test_double_trade_rows.json"),
+            source_config=source_cfg,
+        )
+        if code == "721061":
+            page_path = (
+                store.unit_dir(
+                    "TEST-FIXTURE",
+                    artifact.contract.query_hash,
+                    artifact.contract.run_id,
+                )
+                / "page-0001.contract.json"
+            )
+            page = json.loads(page_path.read_text(encoding="utf-8"))
+            page["normalization_status"] = "UNPARSED"
+            page["normalization_reason"] = "no_rows_parsed"
+            page_path.write_text(
+                json.dumps(page, ensure_ascii=False, sort_keys=True, indent=2)
+                + "\n",
+                encoding="utf-8",
+            )
+
+    record = build_partner_snapshot(
+        store, config, registry, source_id="TEST-FIXTURE"
+    )
+    assert record["coverage"]["units_requested"] == 2
+    assert record["coverage"]["units_complete"] == 1
+    assert record["coverage"]["units_excluded"] == [
+        {
+            "reason": "FORMAT_NOT_PARSEABLE",
+            "selected_run_id": "20260904T120000Z",
+            "unit_key": ["721061", "imports", "2024"],
+        }
+    ]
+    assert record["transformation_record"]["exclusions"] == record["coverage"][
+        "units_excluded"
+    ]
+
+
+def test_pinned_reconstruction_keeps_historical_snapshot_reproducible(
+    tmp_path: Path,
+) -> None:
+    from ior_mvp.acquisition.snapshots import reconstruct, reconstruct_pinned
+
+    config = _config_with_test_source("TEST-FIXTURE")
+    store = _temp_store(tmp_path)
+    registry = _double_registry()
+    source_cfg = {
+        **config["sources"]["wits_trade"],
+        "source_id": "TEST-FIXTURE",
+    }
+    contract = QueryContract(
+        source_id="TEST-FIXTURE",
+        stage=Stage.PARTNERS,
+        reporter="SAU",
+        partner="WLD",
+        flow="imports",
+        product_scope=ProductScope.EXPLICIT,
+        product_codes=("721049",),
+        nomenclature="H0",
+        periods=("2024",),
+    )
+    seed_unit(
+        store,
+        contract=contract,
+        run_id="20260904T120000Z",
+        payload=_fixture("test_double_trade_rows.json"),
+        source_config=source_cfg,
+    )
+    original = build_partner_snapshot(
+        store, config, registry, source_id="TEST-FIXTURE"
+    )
+    path = write_snapshot(original, tmp_path, allow_test_double=True)
+    seed_unit(
+        store,
+        contract=contract,
+        run_id="20260905T120000Z",
+        payload=_fixture("test_double_trade_rows.json"),
+        source_config=source_cfg,
+    )
+    assert reconstruct(path, store, config, registry).detail["reason"] == (
+        "SELECTION_CHANGED"
+    )
+    assert reconstruct_pinned(path, store, config, registry).match
 
 
 def test_proof_a_superseded_run_not_selected(tmp_path: Path) -> None:

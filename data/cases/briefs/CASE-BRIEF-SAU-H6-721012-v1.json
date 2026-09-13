@@ -1,0 +1,160 @@
+{
+  "application_boundary": "HS 7210.12 identifies tin-plated or tin-coated flat-rolled iron or non-alloy steel of width 600 mm or more and thickness below 0.5 mm; target coating, standard, application and qualification remain unresolved.",
+  "authority_note": "Public branch only. Product identity is retained at generic HS6 scope; no stored producer span establishes domestic tinplate capability or target-specification demand.",
+  "brief_id": "CASE-BRIEF-SAU-H6-721012-v1",
+  "capability": {
+    "coarse_adjacency_signals": [],
+    "producer_evidence": [],
+    "profile_hard_gates": {
+      "coating_route_and_mass": {
+        "span_ids": [],
+        "status": "UNAVAILABLE"
+      },
+      "mandatory_or_customer_standard": {
+        "span_ids": [],
+        "status": "UNAVAILABLE"
+      },
+      "substrate_range": {
+        "span_ids": [],
+        "status": "UNAVAILABLE"
+      },
+      "surface_treatment": {
+        "span_ids": [],
+        "status": "UNAVAILABLE"
+      },
+      "width_thickness_envelope": {
+        "span_ids": [],
+        "status": "UNAVAILABLE"
+      }
+    },
+    "public_dimension_states": {
+      "capacity_time_window": {
+        "span_ids": [],
+        "state": "U"
+      },
+      "certification_customer_qualification": {
+        "span_ids": [],
+        "state": "U"
+      },
+      "core_process_route": {
+        "span_ids": [],
+        "state": "U"
+      },
+      "equipment_envelope": {
+        "span_ids": [],
+        "state": "U"
+      },
+      "feedstock_chemistry": {
+        "span_ids": [],
+        "state": "U"
+      },
+      "finishing_spec_control": {
+        "span_ids": [],
+        "state": "U"
+      },
+      "qa_lab_metrology": {
+        "span_ids": [],
+        "state": "U"
+      },
+      "skills_market_integration": {
+        "span_ids": [],
+        "state": "U"
+      },
+      "utilities_ehs_permitting": {
+        "span_ids": [],
+        "state": "U"
+      }
+    },
+    "same_process_family": {
+      "span_ids": [],
+      "value": "UNAVAILABLE"
+    },
+    "unresolved_hard_gates": [
+      "substrate_range",
+      "width_thickness_envelope",
+      "coating_route_and_mass",
+      "surface_treatment",
+      "mandatory_or_customer_standard"
+    ],
+    "verified_present": {
+      "span_ids": [],
+      "value": "UNAVAILABLE"
+    }
+  },
+  "commercial_name_ar": "منتجات مسطحة من الحديد أو الصلب غير المخلوط، مطلية بالقصدير، بعرض 600 مم أو أكثر وبسماكة أقل من 0.5 مم",
+  "commercial_name_en": "Tin-plated or tin-coated flat-rolled iron or non-alloy steel, width 600 mm or more, thickness less than 0.5 mm",
+  "decision_object_status": "generic_hs6_only",
+  "document_evidence": [
+    {
+      "document_id": "DOC-WCO-HS-NOMENCLATURE-5530bdf97060-8da42b5156a2",
+      "evidence_id": "P-WCO-721012",
+      "period": "2022",
+      "supports": [
+        "TARGET_PRODUCT_IDENTITY"
+      ]
+    }
+  ],
+  "hs6": "721012",
+  "hs_revision": "H6",
+  "name_basis": "WCO_HS_2022_LEGAL_TEXT",
+  "name_basis_ar": "ANALYST_TRANSLATION",
+  "opportunity_id": "SAU-H6-721012",
+  "partner_detail": {
+    "attempts": [
+      {
+        "contract_path": "data/raw/wits_trade/ac22708082e052fb156814e1c6e66ec24a6e6b6d9f7561383c6b31d1a549b371/20260912T233403Z/page-0001.contract.json",
+        "contract_sha256": "dd67da52b0d66dbb4e05081e877e4636d2173cc3cd3b0c96631d991651a7a4ff",
+        "coverage_status": "COMPLETE",
+        "endpoint_or_document": "https://wits.worldbank.org/trade/comtrade/en/country/SAU/year/2024/tradeflow/Imports/partner/ALL/product/721012",
+        "http_status": 200,
+        "normalization_status": "NORMALIZED",
+        "query_hash": "ac22708082e052fb156814e1c6e66ec24a6e6b6d9f7561383c6b31d1a549b371",
+        "run_id": "20260912T233403Z",
+        "source_id": "wits_trade",
+        "stop_reason": null
+      }
+    ],
+    "basis": "The stored WITS partner unit is COMPLETE and normalized; 12 non-World 2024 import partner rows are observed after excluding the World aggregate.",
+    "observed_partner_rows": 12,
+    "partner_snapshot_id": "PARTNERS-SAU-WITS-TRADE-2026-09-12",
+    "reason": null,
+    "source_id": "wits_trade",
+    "state": "PARTNER_DETAIL_OBSERVED",
+    "unit_key": [
+      "721012",
+      "imports",
+      "2024"
+    ]
+  },
+  "partner_snapshot_id": "PARTNERS-SAU-WITS-TRADE-2026-09-12",
+  "schema_version": "1.1.0",
+  "sector_profile": "coated_steel",
+  "spans": [
+    {
+      "document_id": "DOC-WCO-HS-NOMENCLATURE-5530bdf97060-8da42b5156a2",
+      "line_index": 6,
+      "page_index": 7,
+      "span_id": "SPAN-WCO-721012-H",
+      "span_text": "Flat-rolled  products  of  iron  or  non",
+      "text_order": "logical"
+    },
+    {
+      "document_id": "DOC-WCO-HS-NOMENCLATURE-5530bdf97060-8da42b5156a2",
+      "line_index": 8,
+      "page_index": 7,
+      "span_id": "SPAN-WCO-721012-T",
+      "span_text": "Plated or coated with tin",
+      "text_order": "logical"
+    },
+    {
+      "document_id": "DOC-WCO-HS-NOMENCLATURE-5530bdf97060-8da42b5156a2",
+      "line_index": 10,
+      "page_index": 7,
+      "span_id": "SPAN-WCO-721012-S",
+      "span_text": "Of a thickness of less than 0.5",
+      "text_order": "logical"
+    }
+  ],
+  "trade_series_rule": "LATEST_REVISION_ONLY",
+  "universe_snapshot_id": "UNIVERSE-SAU-UN-COMTRADE-HS-2026-09-12"
+}

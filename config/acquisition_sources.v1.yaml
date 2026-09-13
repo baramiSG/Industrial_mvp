@@ -1,7 +1,7 @@
 metadata:
-  version: "1.3.0"
-  effective_date: "2026-09-12"
-  authority: "Methodology §3.2, §11, §11.3; Core 05 v2 §4-§6, §10-§11"
+  version: "1.4.0"
+  effective_date: "2026-09-13"
+  authority: "Methodology §3.2, §11, §11.3; Core 05 v2 §3.2, §4-§6, §10-§11; owner rulings OD-6 and OD-9"
 
 raw_store:
   root: data/raw
@@ -77,7 +77,7 @@ sources:
     terms_reference: https://uncomtrade.org/docs/policy-on-use-and-re-dissemination/
     endpoint_templates:
       UNIVERSE: "https://comtradeapi.un.org/data/v1/get/C/A/HS?reporterCode={reporter}&period={period}&flowCode={flow_code}&cmdCode={product}&partnerCode={partner}&motCode=0&customsCode=C00"
-      PARTNERS: UNAVAILABLE
+      PARTNERS: "https://comtradeapi.un.org/data/v1/get/C/A/HS?reporterCode={reporter}&period={period}&flowCode={flow_code}&cmdCode={product}&motCode=0&customsCode=C00{partner_dimension_query}"
       TERMS: https://uncomtrade.org/docs/policy-on-use-and-re-dissemination/
     parameters:
       product_all_token: AG6
@@ -86,6 +86,16 @@ sources:
       flow_tokens:
         imports: M
         exports: X
+      partner_dimension_variants:
+        V1:
+          value: ""
+          observation_basis: "Null hypothesis: omit partnerCode; behavior must be observed from response rows."
+        V2:
+          value: "&partner2Code=0"
+          observation_basis: "Stored 2024 universe rows contain partner2Code with value 0; usable only if V1 rows show multiple values."
+        V3:
+          value: "&includeDesc=true"
+          observation_basis: "OD-16 owner statement; stored V1 and 2024 universe responses have null description and ISO fields, and repository history used includeDesc. The official v1 parameter table is unobserved here; only V3 response rows establish the effect."
     pagination:
       kind: NONE
       documentation_reference: https://uncomtrade.org/docs/subscriptions/
@@ -108,7 +118,7 @@ sources:
     expected_content_types:
       - application/json
     user_agent: industrial-opportunity-resolution-mvp/0.2.0 (public-data acquisition; offline runtime)
-    recorded_on: "2026-09-12"
+    recorded_on: "2026-09-13"
 
   baci_cepii:
     authority: CEPII BACI
@@ -572,3 +582,169 @@ sources:
     user_agent: industrial-opportunity-resolution-mvp/0.2.0 (public-data acquisition;
       offline runtime)
     recorded_on: '2026-09-12'
+  producer_hadeed:
+    authority: Hadeed — Saudi Iron and Steel Company public disclosures
+    access_classification: public_open
+    documentation_reference: https://hadeed.com.sa
+    terms_reference: UNAVAILABLE
+    endpoint_templates:
+      DOCUMENT: '{document_url}'
+      TERMS: UNAVAILABLE
+    parameters:
+      product_all_token: UNAVAILABLE
+      partner_world_token: UNAVAILABLE
+      reporter_token: UNAVAILABLE
+      flow_tokens: UNAVAILABLE
+    pagination:
+      kind: NONE
+      documentation_reference: UNAVAILABLE
+      parameters: {}
+    nomenclature: UNAVAILABLE
+    reporter_code: SAU
+    credential_env_var: UNAVAILABLE
+    rate_limit:
+      documented_policy: UNAVAILABLE
+      min_interval_seconds: 2.0
+      max_attempts: 3
+      timeout_seconds: 60
+    license_capture_required: false
+    default_evidence_class: C
+    default_reviewer_status: unconfirmed_by_responsible_authority
+    expected_content_types:
+      - application/pdf
+    user_agent: industrial-opportunity-resolution-mvp/0.2.0 (public-data acquisition;
+      offline runtime)
+    recorded_on: '2026-09-13'
+  producer_alupco:
+    authority: ALUPCO public disclosures
+    access_classification: public_open
+    documentation_reference: https://alupco.com
+    terms_reference: UNAVAILABLE
+    endpoint_templates:
+      DOCUMENT: '{document_url}'
+      TERMS: UNAVAILABLE
+    parameters:
+      product_all_token: UNAVAILABLE
+      partner_world_token: UNAVAILABLE
+      reporter_token: UNAVAILABLE
+      flow_tokens: UNAVAILABLE
+    pagination:
+      kind: NONE
+      documentation_reference: UNAVAILABLE
+      parameters: {}
+    nomenclature: UNAVAILABLE
+    reporter_code: SAU
+    credential_env_var: UNAVAILABLE
+    rate_limit:
+      documented_policy: UNAVAILABLE
+      min_interval_seconds: 2.0
+      max_attempts: 3
+      timeout_seconds: 60
+    license_capture_required: false
+    default_evidence_class: C
+    default_reviewer_status: unconfirmed_by_responsible_authority
+    expected_content_types:
+      - text/html
+    user_agent: industrial-opportunity-resolution-mvp/0.2.0 (public-data acquisition;
+      offline runtime)
+    recorded_on: '2026-09-13'
+  producer_altaiseer_talco:
+    authority: Al Taiseer Group TALCO public disclosures
+    access_classification: public_open
+    documentation_reference: https://altaiseer.com
+    terms_reference: UNAVAILABLE
+    endpoint_templates:
+      DOCUMENT: '{document_url}'
+      TERMS: UNAVAILABLE
+    parameters:
+      product_all_token: UNAVAILABLE
+      partner_world_token: UNAVAILABLE
+      reporter_token: UNAVAILABLE
+      flow_tokens: UNAVAILABLE
+    pagination:
+      kind: NONE
+      documentation_reference: UNAVAILABLE
+      parameters: {}
+    nomenclature: UNAVAILABLE
+    reporter_code: SAU
+    credential_env_var: UNAVAILABLE
+    rate_limit:
+      documented_policy: UNAVAILABLE
+      min_interval_seconds: 2.0
+      max_attempts: 3
+      timeout_seconds: 60
+    license_capture_required: false
+    default_evidence_class: C
+    default_reviewer_status: unconfirmed_by_responsible_authority
+    expected_content_types:
+      - text/html
+    user_agent: industrial-opportunity-resolution-mvp/0.2.0 (public-data acquisition;
+      offline runtime)
+    recorded_on: '2026-09-13'
+  producer_maaden:
+    authority: Ma'aden public disclosures
+    access_classification: public_open
+    documentation_reference: https://www.maaden.com
+    terms_reference: https://www.maaden.com/terms-and-conditions
+    endpoint_templates:
+      DOCUMENT: '{document_url}'
+      TERMS: https://www.maaden.com/terms-and-conditions
+    parameters:
+      product_all_token: UNAVAILABLE
+      partner_world_token: UNAVAILABLE
+      reporter_token: UNAVAILABLE
+      flow_tokens: UNAVAILABLE
+    pagination:
+      kind: NONE
+      documentation_reference: UNAVAILABLE
+      parameters: {}
+    nomenclature: UNAVAILABLE
+    reporter_code: SAU
+    credential_env_var: UNAVAILABLE
+    rate_limit:
+      documented_policy: UNAVAILABLE
+      min_interval_seconds: 2.0
+      max_attempts: 3
+      timeout_seconds: 60
+    license_capture_required: true
+    default_evidence_class: C
+    default_reviewer_status: unconfirmed_by_responsible_authority
+    expected_content_types:
+      - application/pdf
+      - text/html
+    user_agent: industrial-opportunity-resolution-mvp/0.2.0 (public-data acquisition;
+      offline runtime)
+    recorded_on: '2026-09-13'
+  wco_hs_nomenclature:
+    authority: World Customs Organization — Harmonized System Nomenclature 2022 edition (public chapter legal texts)
+    access_classification: public_open
+    documentation_reference: https://www.wcoomd.org/en/topics/nomenclature/instrument-and-tools/hs-nomenclature-2022-edition/hs-nomenclature-2022-edition.aspx
+    terms_reference: https://www.wcoomd.org/en/about-us/legal-instruments/wco-standard-terms-and-conditions_council-decision-n331.aspx
+    endpoint_templates:
+      DOCUMENT: '{document_url}'
+      TERMS: https://www.wcoomd.org/en/about-us/legal-instruments/wco-standard-terms-and-conditions_council-decision-n331.aspx
+    parameters:
+      product_all_token: UNAVAILABLE
+      partner_world_token: UNAVAILABLE
+      reporter_token: UNAVAILABLE
+      flow_tokens: UNAVAILABLE
+    pagination:
+      kind: NONE
+      documentation_reference: UNAVAILABLE
+      parameters: {}
+    nomenclature: HS2022
+    reporter_code: SAU
+    credential_env_var: UNAVAILABLE
+    rate_limit:
+      documented_policy: UNAVAILABLE
+      min_interval_seconds: 2.0
+      max_attempts: 3
+      timeout_seconds: 60
+    license_capture_required: true
+    default_evidence_class: B
+    default_reviewer_status: unconfirmed_by_responsible_authority
+    expected_content_types:
+      - application/pdf
+    user_agent: industrial-opportunity-resolution-mvp/0.2.0 (public-data acquisition;
+      offline runtime)
+    recorded_on: '2026-09-13'

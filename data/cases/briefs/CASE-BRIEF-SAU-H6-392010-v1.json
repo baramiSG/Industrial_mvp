@@ -1,0 +1,152 @@
+{
+  "application_boundary": "HS 3920.10 contains non-cellular plates, sheets, film, foil and strip of polymers of ethylene; target dimensions, performance, customer application and qualification remain unresolved.",
+  "authority_note": "Public branch only. Product identity is retained at generic HS6 scope; target-specification demand and domestic conversion capability are unresolved.",
+  "brief_id": "CASE-BRIEF-SAU-H6-392010-v1",
+  "capability": {
+    "coarse_adjacency_signals": [],
+    "producer_evidence": [],
+    "profile_hard_gates": {
+      "application_qualification": {
+        "span_ids": [],
+        "status": "UNAVAILABLE"
+      },
+      "conversion_route": {
+        "span_ids": [],
+        "status": "UNAVAILABLE"
+      },
+      "performance_requirement": {
+        "span_ids": [],
+        "status": "UNAVAILABLE"
+      },
+      "polymer_additive_compatibility": {
+        "span_ids": [],
+        "status": "UNAVAILABLE"
+      },
+      "tooling": {
+        "span_ids": [],
+        "status": "UNAVAILABLE"
+      }
+    },
+    "public_dimension_states": {
+      "capacity_time_window": {
+        "span_ids": [],
+        "state": "U"
+      },
+      "certification_customer_qualification": {
+        "span_ids": [],
+        "state": "U"
+      },
+      "core_process_route": {
+        "span_ids": [],
+        "state": "U"
+      },
+      "equipment_envelope": {
+        "span_ids": [],
+        "state": "U"
+      },
+      "feedstock_chemistry": {
+        "span_ids": [],
+        "state": "U"
+      },
+      "finishing_spec_control": {
+        "span_ids": [],
+        "state": "U"
+      },
+      "qa_lab_metrology": {
+        "span_ids": [],
+        "state": "U"
+      },
+      "skills_market_integration": {
+        "span_ids": [],
+        "state": "U"
+      },
+      "utilities_ehs_permitting": {
+        "span_ids": [],
+        "state": "U"
+      }
+    },
+    "same_process_family": {
+      "span_ids": [],
+      "value": "UNAVAILABLE"
+    },
+    "unresolved_hard_gates": [
+      "polymer_additive_compatibility",
+      "conversion_route",
+      "tooling",
+      "performance_requirement",
+      "application_qualification"
+    ],
+    "verified_present": {
+      "span_ids": [],
+      "value": "UNAVAILABLE"
+    }
+  },
+  "commercial_name_ar": "ألواح وصفائح وأغشية ورقائق وشرائط غير خلوية من بوليمرات الإيثيلين",
+  "commercial_name_en": "Other non-cellular plates, sheets, film, foil and strip of plastics — of polymers of ethylene",
+  "decision_object_status": "generic_hs6_only",
+  "document_evidence": [
+    {
+      "document_id": "DOC-WCO-HS-NOMENCLATURE-53d6f01ac062-0926bf9934da",
+      "evidence_id": "P-WCO-392010",
+      "period": "2022",
+      "supports": [
+        "TARGET_PRODUCT_IDENTITY"
+      ]
+    }
+  ],
+  "hs6": "392010",
+  "hs_revision": "H6",
+  "name_basis": "WCO_HS_2022_LEGAL_TEXT",
+  "name_basis_ar": "ANALYST_TRANSLATION",
+  "opportunity_id": "SAU-H6-392010",
+  "partner_detail": {
+    "attempts": [
+      {
+        "contract_path": "data/raw/wits_trade/73fee7942370a560970adeadd1a36777ef35bd5d645b935439038e4e8011068b/20260912T233403Z/page-0001.contract.json",
+        "contract_sha256": "16abeb4ee7b06a5bf933bf90ebe864d5bb49f732f89b310f615faa1df119e5c8",
+        "coverage_status": "COMPLETE",
+        "endpoint_or_document": "https://wits.worldbank.org/trade/comtrade/en/country/SAU/year/2024/tradeflow/Imports/partner/ALL/product/392010",
+        "http_status": 200,
+        "normalization_status": "NORMALIZED",
+        "query_hash": "73fee7942370a560970adeadd1a36777ef35bd5d645b935439038e4e8011068b",
+        "run_id": "20260912T233403Z",
+        "source_id": "wits_trade",
+        "stop_reason": null
+      }
+    ],
+    "basis": "The stored WITS partner unit is COMPLETE and normalized; 42 non-World 2024 import partner rows are observed after excluding the World aggregate.",
+    "observed_partner_rows": 42,
+    "partner_snapshot_id": "PARTNERS-SAU-WITS-TRADE-2026-09-12",
+    "reason": null,
+    "source_id": "wits_trade",
+    "state": "PARTNER_DETAIL_OBSERVED",
+    "unit_key": [
+      "392010",
+      "imports",
+      "2024"
+    ]
+  },
+  "partner_snapshot_id": "PARTNERS-SAU-WITS-TRADE-2026-09-12",
+  "schema_version": "1.1.0",
+  "sector_profile": "technical_plastics",
+  "spans": [
+    {
+      "document_id": "DOC-WCO-HS-NOMENCLATURE-53d6f01ac062-0926bf9934da",
+      "line_index": 8,
+      "page_index": 8,
+      "span_id": "SPAN-WCO-392010-H",
+      "span_text": "Other plates, sheets, film, foil and strip, of plastics",
+      "text_order": "logical"
+    },
+    {
+      "document_id": "DOC-WCO-HS-NOMENCLATURE-53d6f01ac062-0926bf9934da",
+      "line_index": 11,
+      "page_index": 8,
+      "span_id": "SPAN-WCO-392010-S",
+      "span_text": "Of polymers of ethylene",
+      "text_order": "logical"
+    }
+  ],
+  "trade_series_rule": "LATEST_REVISION_ONLY",
+  "universe_snapshot_id": "UNIVERSE-SAU-UN-COMTRADE-HS-2026-09-12"
+}

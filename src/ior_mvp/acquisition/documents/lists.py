@@ -32,11 +32,28 @@ DOCUMENT_KINDS = frozenset({
 PUBLISHER_KINDS = frozenset({
     "producer",
     "exchange",
+    "nomenclature_authority",
     "procurement_authority",
     "standards_authority",
 })
 
 LANGUAGES = frozenset({"ar", "en"})
+
+SOURCE_PUBLISHER_KINDS: Mapping[str, frozenset[str]] = {
+    "tadawul_disclosures": frozenset({"exchange"}),
+    "etimad_tenders": frozenset({"procurement_authority"}),
+    "saso_documents": frozenset({"standards_authority"}),
+    "producer_unicoil": frozenset({"producer"}),
+    "producer_sabic": frozenset({"producer"}),
+    "producer_advanced_petrochemical": frozenset({"producer"}),
+    "producer_tasnee": frozenset({"producer"}),
+    "producer_hadeed": frozenset({"producer"}),
+    "producer_alupco": frozenset({"producer"}),
+    "producer_altaiseer_talco": frozenset({"producer"}),
+    "producer_maaden": frozenset({"producer"}),
+    "wco_hs_nomenclature": frozenset({"nomenclature_authority"}),
+    TEST_FIXTURE_SOURCE: frozenset({"producer"}),
+}
 
 LIST_ID_PATTERN = re.compile(r"^[a-z0-9][a-z0-9_-]{2,79}$")
 ENTRY_ID_PATTERN = re.compile(r"^E-[0-9]{3}$")
@@ -77,6 +94,45 @@ SOURCE_ALLOWED_SUPPORTS: Mapping[str, frozenset[str]] = {
         "DOMESTIC_SPECIFICATION_ENVELOPE",
         "DOMESTIC_DIMENSION_ENVELOPE",
         "BILINGUAL_SPECIFICATION_EXTRACTION",
+    }),
+    "producer_hadeed": frozenset({
+        "DOMESTIC_NAMEPLATE_CAPACITY",
+        "DOMESTIC_PROCESS_ROUTE",
+        "DOMESTIC_PROCESS_FAMILY",
+        "DOMESTIC_PRODUCT_PORTFOLIO",
+        "DOMESTIC_SPECIFICATION_ENVELOPE",
+        "DOMESTIC_DIMENSION_ENVELOPE",
+        "BILINGUAL_SPECIFICATION_EXTRACTION",
+    }),
+    "producer_alupco": frozenset({
+        "DOMESTIC_NAMEPLATE_CAPACITY",
+        "DOMESTIC_PROCESS_ROUTE",
+        "DOMESTIC_PROCESS_FAMILY",
+        "DOMESTIC_PRODUCT_PORTFOLIO",
+        "DOMESTIC_SPECIFICATION_ENVELOPE",
+        "DOMESTIC_DIMENSION_ENVELOPE",
+        "BILINGUAL_SPECIFICATION_EXTRACTION",
+    }),
+    "producer_altaiseer_talco": frozenset({
+        "DOMESTIC_NAMEPLATE_CAPACITY",
+        "DOMESTIC_PROCESS_ROUTE",
+        "DOMESTIC_PROCESS_FAMILY",
+        "DOMESTIC_PRODUCT_PORTFOLIO",
+        "DOMESTIC_SPECIFICATION_ENVELOPE",
+        "DOMESTIC_DIMENSION_ENVELOPE",
+        "BILINGUAL_SPECIFICATION_EXTRACTION",
+    }),
+    "producer_maaden": frozenset({
+        "DOMESTIC_NAMEPLATE_CAPACITY",
+        "DOMESTIC_PROCESS_ROUTE",
+        "DOMESTIC_PROCESS_FAMILY",
+        "DOMESTIC_PRODUCT_PORTFOLIO",
+        "DOMESTIC_SPECIFICATION_ENVELOPE",
+        "DOMESTIC_DIMENSION_ENVELOPE",
+        "BILINGUAL_SPECIFICATION_EXTRACTION",
+    }),
+    "wco_hs_nomenclature": frozenset({
+        "TARGET_PRODUCT_IDENTITY",
     }),
     "tadawul_disclosures": frozenset({
         "DOMESTIC_NAMEPLATE_CAPACITY",
@@ -247,6 +303,12 @@ def validate_document_list(
             raise AcquisitionConfigurationError("publisher_text required")
         if entry["publisher_kind"] not in PUBLISHER_KINDS:
             raise AcquisitionConfigurationError("publisher_kind invalid")
+        if entry["publisher_kind"] not in SOURCE_PUBLISHER_KINDS.get(
+            source_id, frozenset()
+        ):
+            raise AcquisitionConfigurationError(
+                "publisher_kind not allowed for source"
+            )
         if entry["document_kind"] not in DOCUMENT_KINDS:
             raise AcquisitionConfigurationError("document_kind invalid")
         langs = entry["languages"]

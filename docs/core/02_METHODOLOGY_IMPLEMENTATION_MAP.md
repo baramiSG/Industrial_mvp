@@ -260,3 +260,8 @@ Any new domain function must be added to this map before implementation review c
 | Screening loader | `screening.repository.screening_snapshot` | Core 03 runtime boundary | `tests/test_screening_repository_and_api.py` | newest valid snapshot |
 | Screening API | `screening.api.router` | Core 03 API contract | `tests/test_screening_repository_and_api.py` | summary/queue/record |
 | Candidate emission | `screening.cli.emit_candidates` | Methodology §12 stage two | `tests/test_screening_candidates.py` | hashed HS6 batches |
+| S14 deep-case selection | `cases.selection.select_cases` | Methodology §§1, 4, 12; OD-2/OD-3/OD-11 | `tests/test_case_selection.py` | hashed `CASE-SELECTION-S14-*` record with ruled `identity_exclusions` |
+| CaseBrief validation | `cases.brief.validate_case_brief` | Methodology §§2, 5.1, 10–11 | `tests/test_case_brief.py`, `tests/test_case_briefs_real.py` | `CaseBrief 1.0.0` and verbatim page/line spans |
+| Derived public snapshot | `cases.projection.build_public_snapshot` | Methodology §§2–6, 11–12 | `tests/test_case_projection.py`, `tests/test_case_briefs_real.py` | temporary `SAU-H6-` PublicSnapshot 2.1.0 proof |
+| Superseded screening input resolution | `screening.snapshot.resolve_recorded_input` | Manifest §§7.3, 7.5, 8; Core 04 §11 | retention and reconstruction tests | current-or-`config/history/` content-hash resolution; otherwise `INPUTS_CHANGED` |
+| Historical acquired-snapshot reconstruction | `acquisition.snapshots.reconstruct_pinned` | Methodology §11.3; Manifest §7.5 | `tests/test_acquisition_snapshots.py` | old and current source snapshots reconstruct from their recorded raw-run selection |

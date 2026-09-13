@@ -314,6 +314,22 @@ independent visual inspection, Arabic parity probe and both-locale journeys,
 and hosted CI 5/5 on the exact head `2cc18f1` (run 34720051770). Parent S13 is
 COMPLETE (s13a #21, s13b #23).
 
+## R. Milestone v0.3.0 — S14a evidence child
+
+| ID | Observable acceptance | Implementation evidence | Status | Slice |
+|---|---|---|---|---|
+| V3-S14-SELECT | Five cases are selected deterministically from the frozen S13 queues and ruled product families, with disclosure/viability inputs and OD-11 identity exclusion hashed. | `cases.selection`; `CASE-SELECTION-S14-250cd516de0a`; two equal runs; real-output and negative tests. | TESTED | s14a |
+| V3-S14-FAMILIES | Fabricated aluminium and technical-plastics conversion membership is cited, versioned and does not rebuild the screening snapshot. | product families 1.1.0; exact retained 1.0.0 bytes; current-or-history content-hash tests; screening reconstruction. | TESTED | s14a |
+| V3-S14-DOCS | Selected-profile public documents are acquired where permitted and unavailable states remain explicit. | W-A eight COMPLETE records; W-T two TLS UNAVAILABLE observations; W-P four normalized lines plus one `FORMAT_NOT_PARSEABLE` exclusion; W-C stores 8 H6 rows for 721061 but remains `COVERAGE_INDETERMINATE` because partner descriptions are null; verbatim RunReports. | TESTED | s14a |
+| V3-S14-ENTITY | New producer names/site spans resolve through a second write-once entity artifact without inferred identities. | `mentions-v2`; `ENTITIES-2026-09-13-bebc9d15cbf1`; six verified spans, five exact links, one unresolved. | TESTED | s14a |
+| V3-S14-BRIEF | A span-gated `CaseBrief 1.1.0` deterministically derives PublicSnapshot 2.1.0 without authored public fields and distinguishes partner OBSERVED, MISSING and ZERO. | Exact tri-state/contract/hash/refusal tests; 721061 unresolved Comtrade and WITS attempt passports; four WITS OBSERVED counts 42/12/43/27; five temporary builds; `CASE RECONSTRUCTION PASS (0 snapshots, 5 briefs)`. | TESTED | s14a |
+| V3-S14-ENGINE | Every built public case reports its honest computed state before any golden is authored. | Five engine proofs: INVESTIGATE, null route, `ROUTE_CHANGING_EVIDENCE_UNRESOLVED`; fired-rule sets in ADR-021 and slice log. | TESTED | s14a |
+| V3-S14-FROZEN | Original public/synthetic/golden/browser roots and top-level runtime modules remain exact. | T9 frozen diff/tree/hash, visual-manifest, golden and portability gates pending. | IMPLEMENTED | s14a |
+
+S14a does not close the parent S14 minimum portfolio requirement. S14b consumes
+the pinned list, commits snapshots and Class-D scenarios together, then adds
+goldens, project list, route matrix and browser/visual coverage.
+
 ## Branch and release-state rules
 
 1. No row on the S05 implementation branch is promoted above `TESTED`.

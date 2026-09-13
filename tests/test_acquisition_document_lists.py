@@ -78,6 +78,7 @@ def test_evidence_class_target_must_equal_source_default() -> None:
 def test_supports_subset_per_source() -> None:
     payload = document_list_payload("etimad_tenders")
     payload["entries"][0]["evidence_class_target"] = "B"
+    payload["entries"][0]["publisher_kind"] = "procurement_authority"
     payload["entries"][0]["supports"] = ["DOMESTIC_PRODUCT_PORTFOLIO"]
     with pytest.raises(AcquisitionConfigurationError):
         validate_document_list(payload, source_id="etimad_tenders", default_evidence_class="B")
@@ -116,3 +117,76 @@ def test_list_sha256_and_write_once_path_rules(tmp_path: Path) -> None:
         store.list_path("../producer_unicoil", "producer_unicoil-v1")
     with pytest.raises(RawStoreIntegrityError):
         store.record_path("producer_unicoil", "../../x")
+
+
+def test_s14_producer_lists_validate_and_entries_match_observed_urls() -> None:
+    root = Path(__file__).resolve().parents[1] / "data" / "documents"
+    expected = {
+        "producer_hadeed": {
+            "https://hadeed.com.sa/pdf/product-catalouge.pdf",
+        },
+        "producer_alupco": {"https://alupco.com/about/"},
+        "producer_altaiseer_talco": {
+            "https://altaiseer.com/en/%d8%aa%d8%a7%d9%84%d9%83%d9%88-%d9%81%d9%8a-%d8%b3%d8%b7%d9%88%d8%b1/",
+        },
+        "producer_maaden": {
+            "https://www.maaden.com/news-insights/latest-news/maaden-fourth-quarter-and-full-year-2025-results",
+            "https://axvpvthrjz64.compat.objectstorage.me-jeddah-1.oraclecloud.com/maaden-website-assets/reports/annual-reports/maaden-ar-updated-ver---mar-26-eng-ver_compressed.pdf",
+        },
+    }
+    for source_id, urls in expected.items():
+        path = root / source_id / "lists" / f"{source_id}-v1.json"
+        loaded = load_document_list(
+            path,
+            source_id=source_id,
+            default_evidence_class="C",
+        )
+        assert {entry.document_url for entry in loaded.entries} == urls
+        assert all(entry.publisher_kind == "producer" for entry in loaded.entries)
+
+
+def test_nomenclature_authority_publisher_kind_governed_and_allowed_only_target_product_identity() -> None:
+    payload = document_list_payload("wco_hs_nomenclature")
+    entry = payload["entries"][0]
+    entry.update(
+        {
+            "publisher_kind": "nomenclature_authority",
+            "document_kind": "other_public_document",
+            "evidence_class_target": "B",
+            "supports": ["TARGET_PRODUCT_IDENTITY"],
+        }
+    )
+    validate_document_list(
+        payload,
+        source_id="wco_hs_nomenclature",
+        default_evidence_class="B",
+    )
+
+    wrong_support = json.loads(json.dumps(payload))
+    wrong_support["entries"][0]["supports"] = [
+        "DOMESTIC_NAMEPLATE_CAPACITY"
+    ]
+    with pytest.raises(AcquisitionConfigurationError, match="supports"):
+        validate_document_list(
+            wrong_support,
+            source_id="wco_hs_nomenclature",
+            default_evidence_class="B",
+        )
+
+    wrong_kind = json.loads(json.dumps(payload))
+    wrong_kind["entries"][0]["publisher_kind"] = "producer"
+    with pytest.raises(AcquisitionConfigurationError, match="publisher_kind"):
+        validate_document_list(
+            wrong_kind,
+            source_id="wco_hs_nomenclature",
+            default_evidence_class="B",
+        )
+
+    producer = document_list_payload("producer_unicoil")
+    producer["entries"][0]["publisher_kind"] = "nomenclature_authority"
+    with pytest.raises(AcquisitionConfigurationError, match="publisher_kind"):
+        validate_document_list(
+            producer,
+            source_id="producer_unicoil",
+            default_evidence_class="C",
+        )

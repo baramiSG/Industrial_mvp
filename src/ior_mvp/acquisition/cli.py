@@ -11,7 +11,12 @@ from pathlib import Path
 
 from ..config import PROJECT_ROOT
 from .connectors.base import default_registry
-from .contracts import AcquisitionConfigurationError, OfflineGuardViolation, canonical_dumps
+from .contracts import (
+    AcquisitionConfigurationError,
+    OfflineGuardViolation,
+    RESERVED_UNIT_PARAMETERS,
+    canonical_dumps,
+)
 from .documents.store import validate_list_id
 from .entities.mentions import LIST_ID_PATTERN
 from .entities.rules import EntityResolutionError
@@ -45,6 +50,24 @@ def _parse_years(value: str) -> tuple[int, ...]:
     return (int(value),)
 
 
+def _parse_parameters(values: list[str]) -> tuple[tuple[str, str], ...]:
+    parsed: list[tuple[str, str]] = []
+    for raw in values:
+        if "=" not in raw:
+            raise AcquisitionConfigurationError(
+                "parameters require NAME=VALUE"
+            )
+        key, value = raw.split("=", 1)
+        if not key or key in RESERVED_UNIT_PARAMETERS:
+            raise AcquisitionConfigurationError(
+                f"parameter name is reserved: {key!r}"
+            )
+        parsed.append((key, value))
+    if len({key for key, _ in parsed}) != len(parsed):
+        raise AcquisitionConfigurationError("parameter names must be unique")
+    return tuple(sorted(parsed))
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="ior_mvp.acquisition")
     sub = parser.add_subparsers(dest="command", required=True)
@@ -63,6 +86,7 @@ def build_parser() -> argparse.ArgumentParser:
     add_acquire("acquire-universe", years=True)
     partners = add_acquire("acquire-partners", years=True)
     partners.add_argument("--candidates", required=True)
+    partners.add_argument("--parameter", action="append", default=[])
     # DD-19: the tariff tree is one period-free contract; no --years at all.
     add_acquire("acquire-tariff", years=False)
     add_acquire("acquire-baci", years=True)
@@ -152,6 +176,11 @@ def main(argv: list[str] | None = None) -> None:
             validate_list_id(args.list_id)
         except AcquisitionConfigurationError as exc:
             parser.error(str(exc))
+    if args.command == "acquire-partners":
+        try:
+            args.parameters = _parse_parameters(args.parameter)
+        except AcquisitionConfigurationError as exc:
+            parser.error(str(exc))
     if args.command == "build-entities":
         if LIST_ID_PATTERN.fullmatch(args.mention_list_id) is None:
             parser.error(f"Invalid entity mention list_id: {args.mention_list_id!r}")
@@ -197,6 +226,7 @@ def main(argv: list[str] | None = None) -> None:
                 flows=flows,
                 deps=deps,
                 max_requests=args.max_requests,
+                parameters=args.parameters,
             )
             print(canonical_dumps(report.__dict__))
             sys.exit(report.exit_code)

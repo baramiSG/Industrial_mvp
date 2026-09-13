@@ -74,10 +74,24 @@ def main() -> None:
         snapshot_paths += sorted(
             p for p in screening_root.rglob("*") if p.is_file()
         )
+    cases_root = ROOT / "data" / "cases"
+    if cases_root.exists():
+        snapshot_paths += sorted(
+            p for p in cases_root.rglob("*") if p.is_file()
+        )
+    history_root = ROOT / "config" / "history"
+    if history_root.exists():
+        snapshot_paths += sorted(
+            p for p in history_root.rglob("*") if p.is_file()
+        )
     snapshot_manifest = {
         "manifest_version": "1.0",
         "generated_on": str(date.today()),
-        "policy": "Golden cases and synthetic scenarios run only against pinned files in this manifest.",
+        "policy": (
+            "Golden cases and synthetic scenarios run only against pinned files "
+            "in this manifest; case derivation inputs and retained superseded operating-configuration bytes "
+            "are also hash-pinned."
+        ),
         "files": [entry(path) for path in snapshot_paths],
     }
     (ROOT / "data" / "manifests" / "snapshot_manifest.json").write_text(
