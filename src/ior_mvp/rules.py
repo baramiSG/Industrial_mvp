@@ -22,6 +22,7 @@ from .trade_metrics import (
     established_domestic_nameplate,
     export_import_value_ratio,
     latest_usable_trade_pair,
+    partner_detail_state,
 )
 
 
@@ -884,6 +885,49 @@ def _r3_rule(
         "quantity": quantity_metrics,
     }
     if execution == "DISABLED":
+        detail = partner_detail_state(case)
+        if (
+            detail is not None
+            and detail[0] == "PARTNER_DETAIL_MISSING"
+            and detail[1] is not None
+        ):
+            reason = detail[1]
+            return _rule(
+                "R3",
+                "Supplier concentration",
+                execution,
+                fired,
+                (
+                    f"Partner detail MISSING ({reason}): value- and "
+                    "quantity-basis partner concentration are "
+                    "NOT_CALCULABLE because no partner rows were parsed — "
+                    "missing evidence, not zero trade."
+                ),
+                effect,
+                metrics,
+                result_code="PARTNER_DETAIL_MISSING",
+                decision_effect_code="NO_CONCENTRATION_INFERENCE",
+                result_values={"partner_detail_reason": reason},
+            )
+        if (
+            detail is not None
+            and detail[0] == "PARTNER_TRADE_OBSERVED_ZERO"
+        ):
+            return _rule(
+                "R3",
+                "Supplier concentration",
+                execution,
+                fired,
+                (
+                    "Partner trade OBSERVED ZERO: value- and "
+                    "quantity-basis partner concentration are "
+                    "NOT_CALCULABLE because zero partner rows were observed."
+                ),
+                effect,
+                metrics,
+                result_code="PARTNER_TRADE_OBSERVED_ZERO",
+                decision_effect_code="NO_CONCENTRATION_INFERENCE",
+            )
         return _rule(
             "R3",
             "Supplier concentration",
@@ -994,6 +1038,47 @@ def _r4d_rule(
             "Open specification research only; no grade conclusion.",
             metrics,
             result_code="DISCLOSED_DISPERSION",
+            decision_effect_code="SPECIFICATION_RESEARCH_ONLY",
+        )
+    detail = partner_detail_state(case)
+    if (
+        detail is not None
+        and detail[0] == "PARTNER_DETAIL_MISSING"
+        and detail[1] is not None
+    ):
+        reason = detail[1]
+        return _rule(
+            "R4-D",
+            "Unit-value dispersion — degraded",
+            execution,
+            fired,
+            (
+                f"Partner detail MISSING ({reason}): comparable annual "
+                "partner coverage is unavailable — missing evidence, not "
+                "zero trade; R4-D is not calculable."
+            ),
+            "Open specification research only; no grade conclusion.",
+            metrics,
+            result_code="PARTNER_DETAIL_MISSING",
+            decision_effect_code="SPECIFICATION_RESEARCH_ONLY",
+            result_values={"partner_detail_reason": reason},
+        )
+    if (
+        detail is not None
+        and detail[0] == "PARTNER_TRADE_OBSERVED_ZERO"
+    ):
+        return _rule(
+            "R4-D",
+            "Unit-value dispersion — degraded",
+            execution,
+            fired,
+            (
+                "Partner trade OBSERVED ZERO: no partner unit values exist; "
+                "R4-D is not calculable."
+            ),
+            "Open specification research only; no grade conclusion.",
+            metrics,
+            result_code="PARTNER_TRADE_OBSERVED_ZERO",
             decision_effect_code="SPECIFICATION_RESEARCH_ONLY",
         )
     return _rule(

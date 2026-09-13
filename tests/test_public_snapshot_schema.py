@@ -8,9 +8,9 @@ from typing import Any
 import pytest
 
 import ior_mvp.data_repository as data_repository
+import ior_mvp.public_snapshot as public_snapshot
 from ior_mvp.config import PROJECT_ROOT
 from ior_mvp.public_snapshot import (
-    PUBLIC_SNAPSHOT_SCHEMA_VERSION,
     PublicSnapshotIntegrityError,
     capability_hard_gate_names,
     has_known_hard_gate_failure,
@@ -60,7 +60,9 @@ def test_exact_in_memory_v2_candidates_validate(
 
     validate_public_snapshot(candidate, path=live, root=root)
 
-    assert candidate["schema_version"] == PUBLIC_SNAPSHOT_SCHEMA_VERSION
+    assert candidate["schema_version"] == (
+        public_snapshot.LEGACY_PUBLIC_SNAPSHOT_SCHEMA_VERSION_2_1
+    )
     assert "rule_context" not in candidate
 
 
@@ -714,3 +716,327 @@ def test_gate_b_public_index_reuses_schema_validator(
         match="reviewer_status",
     ):
         _index_public_cases(live.parent)
+
+
+def _v22_candidate(
+    tmp_path: Path,
+) -> tuple[dict[str, Any], Path, Path]:
+    candidate, root, live = _candidate(tmp_path)
+    candidate["schema_version"] = "2.2.0"
+    candidate.pop("partner_observations", None)
+    return candidate, root, live
+
+
+def _partner_passport(
+    candidate: dict[str, Any],
+    evidence_id: str,
+    *,
+    status: str,
+    transformation: str,
+) -> dict[str, Any]:
+    passport = deepcopy(candidate["evidence"][0])
+    passport.update(
+        {
+            "evidence_id": evidence_id,
+            "status": status,
+            "transformation": transformation,
+            "synthetic_flag": False,
+            "contradiction": None,
+        }
+    )
+    return passport
+
+
+def _partner_row(evidence_id: str) -> dict[str, Any]:
+    return {
+        "year": 2024,
+        "partner": "Test partner",
+        "flow": "imports",
+        "trade_value_usd_m": 92.3,
+        "net_weight_kt": 56.0,
+        "quantity_unit": "kt",
+        "validity_flags": {
+            "value_valid": True,
+            "net_weight_valid": True,
+            "quantity_comparable": True,
+        },
+        "gross_flow": True,
+        "source_evidence_id": evidence_id,
+    }
+
+
+def _partner_detail(
+    *,
+    state: str,
+    reason: str | None,
+    rows: int | str,
+    attempts: list[str],
+    observed: str | None,
+) -> dict[str, Any]:
+    return {
+        "state": state,
+        "reason": reason,
+        "source_id": (
+            "UNAVAILABLE"
+            if state == "PARTNER_DETAIL_MISSING"
+            else "un_comtrade"
+        ),
+        "partner_snapshot_id": (
+            "UNAVAILABLE"
+            if state == "PARTNER_DETAIL_MISSING"
+            else "PARTNERS-TEST"
+        ),
+        "unit_key": ["721049", "imports", "2024"],
+        "observed_partner_rows": rows,
+        "attempt_passport_ids": attempts,
+        "observed_passport_id": observed,
+    }
+
+
+def test_supported_versions_are_2_1_0_and_2_2_0_and_constant_is_2_2_0(
+) -> None:
+    assert public_snapshot.SUPPORTED_PUBLIC_SNAPSHOT_SCHEMA_VERSIONS == (
+        frozenset({"2.1.0", "2.2.0"})
+    )
+    assert public_snapshot.PUBLIC_SNAPSHOT_SCHEMA_VERSION == "2.2.0"
+    assert (
+        public_snapshot.LEGACY_PUBLIC_SNAPSHOT_SCHEMA_VERSION_2_1
+        == "2.1.0"
+    )
+
+
+def test_2_1_0_record_with_partner_detail_is_refused_as_extra_key(
+    tmp_path: Path,
+) -> None:
+    candidate, root, live = _candidate(tmp_path)
+    candidate["partner_detail"] = _partner_detail(
+        state="PARTNER_DETAIL_MISSING",
+        reason="NOT_ACQUIRED",
+        rows="UNAVAILABLE",
+        attempts=[],
+        observed=None,
+    )
+
+    with pytest.raises(
+        PublicSnapshotIntegrityError,
+        match=r"snapshot: unexpected key\(s\): partner_detail",
+    ):
+        validate_public_snapshot(candidate, path=live, root=root)
+
+
+def test_2_2_0_partner_detail_exact_keys_state_enum_and_reason_vocabulary(
+    tmp_path: Path,
+) -> None:
+    candidate, root, live = _v22_candidate(tmp_path)
+    candidate["partner_observations"] = "UNAVAILABLE"
+    candidate["partner_detail"] = _partner_detail(
+        state="PARTNER_DETAIL_MISSING",
+        reason="NOT_ACQUIRED",
+        rows="UNAVAILABLE",
+        attempts=[],
+        observed=None,
+    )
+    validate_public_snapshot(candidate, path=live, root=root)
+
+    extra = deepcopy(candidate)
+    extra["partner_detail"]["authored_outcome"] = "MISSING"
+    with pytest.raises(
+        PublicSnapshotIntegrityError,
+        match=r"partner_detail: unexpected key\(s\): authored_outcome",
+    ):
+        validate_public_snapshot(extra, path=live, root=root)
+
+    invalid_state = deepcopy(candidate)
+    invalid_state["partner_detail"]["state"] = "UNKNOWN"
+    with pytest.raises(
+        PublicSnapshotIntegrityError,
+        match="partner_detail.state",
+    ):
+        validate_public_snapshot(invalid_state, path=live, root=root)
+
+    invalid_reason = deepcopy(candidate)
+    invalid_reason["partner_detail"]["reason"] = "NOT_A_REASON"
+    with pytest.raises(
+        PublicSnapshotIntegrityError,
+        match="partner_detail.reason",
+    ):
+        validate_public_snapshot(invalid_reason, path=live, root=root)
+
+    invalid_attempt_type = deepcopy(candidate)
+    invalid_attempt_type["partner_detail"]["reason"] = "HTTP_ERROR"
+    invalid_attempt_type["partner_detail"]["attempt_passport_ids"] = [{}]
+    with pytest.raises(
+        PublicSnapshotIntegrityError,
+        match="partner_detail.attempt_passport_ids",
+    ):
+        validate_public_snapshot(
+            invalid_attempt_type,
+            path=live,
+            root=root,
+        )
+
+
+def test_2_2_0_cross_rules_list_requires_observed_unavailable_requires_missing_or_zero_absent_requires_absent(
+    tmp_path: Path,
+) -> None:
+    candidate, root, live = _v22_candidate(tmp_path)
+    validate_public_snapshot(candidate, path=live, root=root)
+
+    unavailable_without_detail = deepcopy(candidate)
+    unavailable_without_detail["partner_observations"] = "UNAVAILABLE"
+    with pytest.raises(
+        PublicSnapshotIntegrityError,
+        match="partner_detail",
+    ):
+        validate_public_snapshot(
+            unavailable_without_detail,
+            path=live,
+            root=root,
+        )
+
+    missing = deepcopy(unavailable_without_detail)
+    missing["partner_detail"] = _partner_detail(
+        state="PARTNER_DETAIL_MISSING",
+        reason="NOT_ACQUIRED",
+        rows="UNAVAILABLE",
+        attempts=[],
+        observed=None,
+    )
+    validate_public_snapshot(missing, path=live, root=root)
+
+    rows_without_detail = deepcopy(candidate)
+    rows_without_detail["partner_observations"] = [
+        _partner_row("P-PARTNERS")
+    ]
+    rows_without_detail["evidence"].append(
+        _partner_passport(
+            rows_without_detail,
+            "P-PARTNERS",
+            status="calculated",
+            transformation="NORMALIZED_PARTNER_ROWS",
+        )
+    )
+    with pytest.raises(
+        PublicSnapshotIntegrityError,
+        match="partner_detail",
+    ):
+        validate_public_snapshot(rows_without_detail, path=live, root=root)
+
+    observed = deepcopy(rows_without_detail)
+    observed["partner_detail"] = _partner_detail(
+        state="PARTNER_DETAIL_OBSERVED",
+        reason=None,
+        rows=1,
+        attempts=[],
+        observed="P-PARTNERS",
+    )
+    validate_public_snapshot(observed, path=live, root=root)
+
+    detail_without_layer = deepcopy(candidate)
+    detail_without_layer["partner_detail"] = observed["partner_detail"]
+    with pytest.raises(
+        PublicSnapshotIntegrityError,
+        match="partner_detail",
+    ):
+        validate_public_snapshot(
+            detail_without_layer,
+            path=live,
+            root=root,
+        )
+
+
+def test_2_2_0_attempt_and_observed_passport_references_resolve_with_required_status(
+    tmp_path: Path,
+) -> None:
+    candidate, root, live = _v22_candidate(tmp_path)
+    candidate["partner_observations"] = "UNAVAILABLE"
+    candidate["evidence"].append(
+        _partner_passport(
+            candidate,
+            "P-PARTNERS-ATTEMPT",
+            status="unresolved",
+            transformation="PARTNER_DETAIL_MISSING:HTTP_ERROR",
+        )
+    )
+    candidate["partner_detail"] = _partner_detail(
+        state="PARTNER_DETAIL_MISSING",
+        reason="HTTP_ERROR",
+        rows="UNAVAILABLE",
+        attempts=["P-PARTNERS-ATTEMPT"],
+        observed=None,
+    )
+    validate_public_snapshot(candidate, path=live, root=root)
+
+    wrong_prefix = deepcopy(candidate)
+    wrong_prefix["evidence"][-1]["transformation"] = "HTTP_ERROR"
+    with pytest.raises(
+        PublicSnapshotIntegrityError,
+        match="transformation",
+    ):
+        validate_public_snapshot(wrong_prefix, path=live, root=root)
+
+    observed = deepcopy(candidate)
+    observed_id = "P-COMTRADE-390210-PARTNERS"
+    observed["partner_observations"] = [_partner_row(observed_id)]
+    observed["evidence"][-1]["transformation"] = (
+        "PARTNER_DETAIL_ATTEMPT_SUPERSEDED:HTTP_ERROR"
+    )
+    observed["evidence"].append(
+        _partner_passport(
+            observed,
+            "P-WITS-390210-PARTNERS-ATTEMPT",
+            status="unresolved",
+            transformation=(
+                "PARTNER_DETAIL_ATTEMPT_SUPERSEDED:"
+                "FORMAT_NOT_PARSEABLE"
+            ),
+        )
+    )
+    observed["evidence"].append(
+        _partner_passport(
+            observed,
+            observed_id,
+            status="calculated",
+            transformation="NORMALIZED_PARTNER_ROWS",
+        )
+    )
+    observed["partner_detail"] = _partner_detail(
+        state="PARTNER_DETAIL_OBSERVED",
+        reason=None,
+        rows=1,
+        attempts=[
+            "P-PARTNERS-ATTEMPT",
+            "P-WITS-390210-PARTNERS-ATTEMPT",
+        ],
+        observed=observed_id,
+    )
+    validate_public_snapshot(observed, path=live, root=root)
+
+    zero = deepcopy(candidate)
+    zero_id = "P-COMTRADE-390210-PARTNERS-ZERO"
+    zero["evidence"].append(
+        _partner_passport(
+            zero,
+            zero_id,
+            status="observed",
+            transformation="PARTNER_TRADE_OBSERVED_ZERO",
+        )
+    )
+    zero["partner_detail"] = _partner_detail(
+        state="PARTNER_TRADE_OBSERVED_ZERO",
+        reason=None,
+        rows=0,
+        attempts=["P-PARTNERS-ATTEMPT"],
+        observed=zero_id,
+    )
+    validate_public_snapshot(zero, path=live, root=root)
+
+
+def test_partner_detail_missing_reasons_equal_unavailable_reason_enum_plus_not_acquired_and_revision_mismatch(
+) -> None:
+    from ior_mvp.acquisition.contracts import UnavailableReason
+
+    assert public_snapshot.PARTNER_DETAIL_MISSING_REASONS == (
+        {reason.name for reason in UnavailableReason}
+        | {"NOT_ACQUIRED", "REVISION_MISMATCH"}
+    )

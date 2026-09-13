@@ -1,3 +1,5 @@
+"""Fail-closed PublicSnapshot 2.1 and 2.2 validation."""
+
 from __future__ import annotations
 
 import json
@@ -11,7 +13,52 @@ from .evidence import EvidenceIntegrityError
 from .public_decision import SUPPORT_CODES
 
 
-PUBLIC_SNAPSHOT_SCHEMA_VERSION = "2.1.0"
+LEGACY_PUBLIC_SNAPSHOT_SCHEMA_VERSION_2_1 = "2.1.0"
+PUBLIC_SNAPSHOT_SCHEMA_VERSION = "2.2.0"
+SUPPORTED_PUBLIC_SNAPSHOT_SCHEMA_VERSIONS = frozenset(
+    {
+        LEGACY_PUBLIC_SNAPSHOT_SCHEMA_VERSION_2_1,
+        PUBLIC_SNAPSHOT_SCHEMA_VERSION,
+    }
+)
+PARTNER_DETAIL_OBSERVED = "PARTNER_DETAIL_OBSERVED"
+PARTNER_DETAIL_MISSING = "PARTNER_DETAIL_MISSING"
+PARTNER_TRADE_OBSERVED_ZERO = "PARTNER_TRADE_OBSERVED_ZERO"
+PARTNER_DETAIL_STATES = frozenset(
+    {
+        PARTNER_DETAIL_OBSERVED,
+        PARTNER_DETAIL_MISSING,
+        PARTNER_TRADE_OBSERVED_ZERO,
+    }
+)
+# Kept local so the runtime public-snapshot validator does not import the
+# acquisition package. A test pins equality with UnavailableReason plus the
+# two projection-only states.
+PARTNER_DETAIL_MISSING_REASONS = frozenset(
+    {
+        "CREDENTIAL_ABSENT",
+        "ENDPOINT_UNVERIFIED",
+        "NETWORK_ERROR",
+        "HTTP_ERROR",
+        "RATE_LIMITED",
+        "MAX_REQUESTS_EXHAUSTED",
+        "LICENSE_UNRECORDED",
+        "LICENSE_NOT_PERMITTED",
+        "PAID_ACCESS_REQUIRED",
+        "SIZE_BUDGET_EXCEEDED",
+        "FORMAT_NOT_PARSEABLE",
+        "COUNT_MISMATCH",
+        "RECORD_CAP_REACHED",
+        "COVERAGE_INDETERMINATE",
+        "COVERAGE_INCOMPLETE",
+        "NO_UNITS_IN_STORE",
+        "REPORTER_MISMATCH",
+        "OUT_OF_SCOPE_CONTENT",
+        "OPERATOR_DISABLED",
+        "NOT_ACQUIRED",
+        "REVISION_MISMATCH",
+    }
+)
 UNAVAILABLE = "UNAVAILABLE"
 HISTORICAL_V1_DIRECTORY = PurePosixPath(
     "data/snapshots/public/historical/v1"
@@ -111,6 +158,11 @@ def _exact_keys(
 def _reject_authored_outcomes(value: Any, field: str = "snapshot") -> None:
     if isinstance(value, dict):
         for key, nested in value.items():
+            if field == "snapshot" and key == "partner_detail":
+                # PublicSnapshot 2.2 uses a typed evidence-state field. Its
+                # exact-key validator below prevents decision fields from
+                # being smuggled into this block.
+                continue
             if key in _FORBIDDEN_RULE_KEYS:
                 _fail(
                     f"{field}.{key}",
@@ -586,6 +638,221 @@ def _validate_partner_observations(
                 f"{field}.source_evidence_id",
                 f"unresolved evidence ID {source_id}",
             )
+
+
+def _validate_partner_detail(
+    value: Any,
+    *,
+    partner_observations: Any,
+    evidence_by_id: dict[str, dict[str, Any]],
+    opportunity_hs6: str,
+) -> None:
+    detail = _exact_keys(
+        value,
+        "partner_detail",
+        required={
+            "state",
+            "reason",
+            "source_id",
+            "partner_snapshot_id",
+            "unit_key",
+            "observed_partner_rows",
+            "attempt_passport_ids",
+            "observed_passport_id",
+        },
+    )
+    state = detail["state"]
+    if state not in PARTNER_DETAIL_STATES:
+        _fail(
+            "partner_detail.state",
+            "must be a governed partner-detail state",
+        )
+    reason = detail["reason"]
+    if state == PARTNER_DETAIL_MISSING:
+        if reason not in PARTNER_DETAIL_MISSING_REASONS:
+            _fail(
+                "partner_detail.reason",
+                "must be a governed missing-data reason",
+            )
+    elif reason is not None:
+        _fail(
+            "partner_detail.reason",
+            "must be null unless state is PARTNER_DETAIL_MISSING",
+        )
+
+    source_id = _nonempty_string(
+        detail["source_id"],
+        "partner_detail.source_id",
+        unavailable=True,
+    )
+    if source_id not in {"un_comtrade", "wits_trade", UNAVAILABLE}:
+        _fail(
+            "partner_detail.source_id",
+            "must be un_comtrade, wits_trade or UNAVAILABLE",
+        )
+    _nonempty_string(
+        detail["partner_snapshot_id"],
+        "partner_detail.partner_snapshot_id",
+        unavailable=True,
+    )
+    unit_key = detail["unit_key"]
+    if unit_key != [opportunity_hs6, "imports", "2024"]:
+        _fail(
+            "partner_detail.unit_key",
+            "must equal [opportunity.hs6, imports, 2024]",
+        )
+
+    observed_rows = detail["observed_partner_rows"]
+    if state == PARTNER_DETAIL_OBSERVED:
+        _integer(
+            observed_rows,
+            "partner_detail.observed_partner_rows",
+            minimum=1,
+        )
+    elif state == PARTNER_TRADE_OBSERVED_ZERO:
+        if observed_rows != 0 or isinstance(observed_rows, bool):
+            _fail(
+                "partner_detail.observed_partner_rows",
+                "must equal 0 for PARTNER_TRADE_OBSERVED_ZERO",
+            )
+    elif observed_rows != UNAVAILABLE:
+        _fail(
+            "partner_detail.observed_partner_rows",
+            "must equal UNAVAILABLE for PARTNER_DETAIL_MISSING",
+        )
+
+    attempts = detail["attempt_passport_ids"]
+    if not isinstance(attempts, list):
+        _fail(
+            "partner_detail.attempt_passport_ids",
+            "must be a list",
+        )
+    if any(
+        not isinstance(attempt_id, str)
+        or not attempt_id
+        or attempt_id.strip() != attempt_id
+        for attempt_id in attempts
+    ):
+        _fail(
+            "partner_detail.attempt_passport_ids",
+            "must contain non-empty trimmed evidence IDs",
+        )
+    if len(attempts) != len(set(attempts)):
+        _fail(
+            "partner_detail.attempt_passport_ids",
+            "must not contain duplicates",
+        )
+    if (
+        state == PARTNER_DETAIL_MISSING
+        and reason != "NOT_ACQUIRED"
+        and not attempts
+    ):
+        _fail(
+            "partner_detail.attempt_passport_ids",
+            "must name at least one attempt unless reason is NOT_ACQUIRED",
+        )
+    for index, attempt_id in enumerate(attempts):
+        field = f"partner_detail.attempt_passport_ids[{index}]"
+        attempt_id = _nonempty_string(attempt_id, field)
+        passport = evidence_by_id.get(attempt_id)
+        if passport is None:
+            _fail(field, f"unresolved evidence ID {attempt_id}")
+        if (
+            passport.get("status") != "unresolved"
+            or passport.get("synthetic_flag") is not False
+        ):
+            _fail(
+                field,
+                "must reference an unresolved public evidence passport",
+            )
+        transformation = passport.get("transformation")
+        allowed_prefixes = ("PARTNER_DETAIL_MISSING:",)
+        if state == PARTNER_DETAIL_OBSERVED:
+            allowed_prefixes += (
+                "PARTNER_DETAIL_ATTEMPT_SUPERSEDED:",
+            )
+        if not isinstance(transformation, str) or not transformation.startswith(
+            allowed_prefixes
+        ):
+            _fail(
+                f"{field}.transformation",
+                "must carry a governed partner-detail attempt prefix",
+            )
+
+    observed_id = detail["observed_passport_id"]
+    if state == PARTNER_DETAIL_MISSING:
+        if observed_id is not None:
+            _fail(
+                "partner_detail.observed_passport_id",
+                "must be null for PARTNER_DETAIL_MISSING",
+            )
+    else:
+        observed_id = _nonempty_string(
+            observed_id,
+            "partner_detail.observed_passport_id",
+        )
+        passport = evidence_by_id.get(observed_id)
+        if passport is None:
+            _fail(
+                "partner_detail.observed_passport_id",
+                f"unresolved evidence ID {observed_id}",
+            )
+        expected_status = (
+            "calculated"
+            if state == PARTNER_DETAIL_OBSERVED
+            else "observed"
+        )
+        if (
+            passport.get("status") != expected_status
+            or passport.get("synthetic_flag") is not False
+        ):
+            _fail(
+                "partner_detail.observed_passport_id",
+                f"must reference a public {expected_status} passport",
+            )
+        if (
+            state == PARTNER_TRADE_OBSERVED_ZERO
+            and not observed_id.endswith("-PARTNERS-ZERO")
+        ):
+            _fail(
+                "partner_detail.observed_passport_id",
+                "zero-state passport ID must end -PARTNERS-ZERO",
+            )
+
+    if isinstance(partner_observations, list):
+        if state != PARTNER_DETAIL_OBSERVED:
+            _fail(
+                "partner_detail.state",
+                "partner rows require PARTNER_DETAIL_OBSERVED",
+            )
+        if observed_rows != len(partner_observations):
+            _fail(
+                "partner_detail.observed_partner_rows",
+                "must equal the partner-observation row count",
+            )
+        if any(
+            row.get("source_evidence_id") != observed_id
+            for row in partner_observations
+            if isinstance(row, dict)
+        ):
+            _fail(
+                "partner_observations.source_evidence_id",
+                "must equal partner_detail.observed_passport_id",
+            )
+    elif partner_observations == UNAVAILABLE:
+        if state not in {
+            PARTNER_DETAIL_MISSING,
+            PARTNER_TRADE_OBSERVED_ZERO,
+        }:
+            _fail(
+                "partner_detail.state",
+                "UNAVAILABLE partner rows require MISSING or ZERO state",
+            )
+    else:
+        _fail(
+            "partner_detail",
+            "requires partner_observations",
+        )
 
 
 def _unavailable_or_share(value: Any, field: str) -> float | str:
@@ -1726,12 +1993,14 @@ def validate_public_snapshot(
     path: Path | None = None,
     root: Path = PROJECT_ROOT,
 ) -> None:
-    """Validate one live PublicSnapshot 2.1 without mutating or coercing it."""
+    """Validate PublicSnapshot 2.1 or 2.2 without mutating or coercing it."""
     _mapping(record, "snapshot")
-    if record.get("schema_version") != PUBLIC_SNAPSHOT_SCHEMA_VERSION:
+    schema_version = record.get("schema_version")
+    if schema_version not in SUPPORTED_PUBLIC_SNAPSHOT_SCHEMA_VERSIONS:
         _fail(
             "schema_version",
-            f"must equal {PUBLIC_SNAPSHOT_SCHEMA_VERSION}",
+            "must be one of "
+            + ", ".join(sorted(SUPPORTED_PUBLIC_SNAPSHOT_SCHEMA_VERSIONS)),
         )
     root_outcomes = sorted(set(record) & _ROOT_DECISION_KEYS)
     if root_outcomes:
@@ -1760,11 +2029,20 @@ def validate_public_snapshot(
             "decision_inputs",
             "evidence",
         },
-        optional={
-            "partner_observations",
-            "disclosed_concentration",
-            "disclosed_dispersion",
-        },
+        optional=(
+            {
+                "partner_observations",
+                "disclosed_concentration",
+                "disclosed_dispersion",
+                "partner_detail",
+            }
+            if schema_version == PUBLIC_SNAPSHOT_SCHEMA_VERSION
+            else {
+                "partner_observations",
+                "disclosed_concentration",
+                "disclosed_dispersion",
+            }
+        ),
     )
     if snapshot["source_boundary"] != "public":
         _fail("source_boundary", "must equal public")
@@ -1784,6 +2062,21 @@ def validate_public_snapshot(
             snapshot["partner_observations"],
             evidence_ids,
         )
+    if schema_version == PUBLIC_SNAPSHOT_SCHEMA_VERSION:
+        has_partner_layer = "partner_observations" in snapshot
+        has_partner_detail = "partner_detail" in snapshot
+        if has_partner_layer != has_partner_detail:
+            _fail(
+                "partner_detail",
+                "must be present exactly when partner_observations is present",
+            )
+        if has_partner_detail:
+            _validate_partner_detail(
+                snapshot["partner_detail"],
+                partner_observations=snapshot["partner_observations"],
+                evidence_by_id=evidence_by_id,
+                opportunity_hs6=opportunity["hs6"],
+            )
     if "disclosed_concentration" in snapshot:
         _validate_disclosed_concentration(
             snapshot["disclosed_concentration"],

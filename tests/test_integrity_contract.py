@@ -887,3 +887,26 @@ def test_s14a_core_v2_case_contracts() -> None:
     assert "config/history/" in core_04
     assert "INPUTS_CHANGED" in core_09
     assert "CASE RECONSTRUCTION PASS" in core_09
+
+
+def test_s14b_core_04_and_07_partner_detail_sentences() -> None:
+    core_04 = (
+        PROJECT_ROOT / "docs" / "core" / "04_CANONICAL_DATA_MODEL.md"
+    ).read_text(encoding="utf-8")
+    core_07 = (
+        PROJECT_ROOT / "docs" / "core" / "07_DETERMINISTIC_ENGINE_SPEC.md"
+    ).read_text(encoding="utf-8")
+
+    for token in (
+        "PublicSnapshot 2.2.0",
+        "`partner_detail`",
+        "`attempt_passport_ids`",
+        "2.1.0 records remain valid unchanged",
+    ):
+        assert token in core_04
+    for token in (
+        "PARTNER_DETAIL_MISSING",
+        "PARTNER_TRADE_OBSERVED_ZERO",
+        "missing evidence is never rendered as zero",
+    ):
+        assert token in core_07

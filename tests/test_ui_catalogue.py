@@ -216,8 +216,8 @@ def test_ui_catalogue_metadata_locales_and_version_are_exact() -> None:
 
     assert payload["metadata"] == {
         "artifact": "industrial-opportunity-ui-strings",
-        "version": "1.2.0",
-        "effective_date": "2026-09-12",
+        "version": "1.3.0",
+        "effective_date": "2026-09-13",
         "authority": (
             "Core 01 NFR-006/NFR-007 and UX GenUI Demo Specification"
         ),
@@ -304,6 +304,50 @@ def test_ui_catalogue_locale_keys_and_placeholders_match() -> None:
         assert _placeholders(strings["en"][key]) == _placeholders(
             strings["ar"][key]
         )
+
+
+def test_partner_detail_metric_and_dossier_keys_exist_in_both_locales_and_are_used(
+) -> None:
+    strings = _catalogue()["strings"]
+    expected = {
+        "metric.hhi_partner_detail_missing": (
+            "Partner detail missing ({reason}) — missing evidence, not "
+            "zero trade"
+        ),
+        "metric.hhi_partner_trade_zero": (
+            "Partner trade observed zero — no partner rows"
+        ),
+        "dossier.partner_detail": "Partner detail (2024 imports)",
+        "dossier.partner_detail_observed": (
+            "Observed from {source} — {rows} partner rows"
+        ),
+        "dossier.partner_detail_missing": (
+            "MISSING ({reason}) — missing evidence, not zero trade; "
+            "attempts: {attempts}"
+        ),
+        "dossier.partner_detail_zero": (
+            "Observed ZERO from {source} — zero partner rows"
+        ),
+    }
+    source = "\n".join(
+        (
+            (
+                PROJECT_ROOT
+                / "src/ior_mvp/static/modules/renderers/decision.js"
+            ).read_text(encoding="utf-8"),
+            (
+                PROJECT_ROOT / "src/ior_mvp/dossier.py"
+            ).read_text(encoding="utf-8"),
+        )
+    )
+
+    for key, value in expected.items():
+        assert strings["en"][key] == value
+        assert re.search(r"[\u0600-\u06ff]", strings["ar"][key]), key
+        assert _placeholders(strings["en"][key]) == _placeholders(
+            strings["ar"][key]
+        )
+        assert key in source
 
 
 def test_ui_catalogue_values_are_nonempty_nfc_strings() -> None:
@@ -556,7 +600,7 @@ def test_ui_strings_endpoint_returns_valid_en_and_ar_bundles(
     payload = response.json()
     catalogue = _catalogue()
     assert payload == {
-        "catalogue_version": "1.2.0",
+        "catalogue_version": "1.3.0",
         "locale": locale,
         **catalogue["locales"][locale],
         "strings": catalogue["strings"][locale],

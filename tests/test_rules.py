@@ -466,6 +466,117 @@ def test_r4d_row_and_disabled_result_texts_are_exact() -> None:
     )
 
 
+def _partner_detail_rule_case(
+    state: str,
+    reason: str | None,
+) -> dict:
+    case = _v2_case("SAU-H0-390210")
+    case.pop("disclosed_concentration", None)
+    case.pop("disclosed_dispersion", None)
+    case["partner_observations"] = "UNAVAILABLE"
+    case["partner_detail"] = {
+        "state": state,
+        "reason": reason,
+    }
+    return case
+
+
+def test_r3_reports_partner_detail_missing_code_reason_value_and_disabled_execution(
+) -> None:
+    case = _partner_detail_rule_case(
+        "PARTNER_DETAIL_MISSING",
+        "COVERAGE_INDETERMINATE",
+    )
+
+    r3 = _r3_rule(case, thresholds_config()["rules"]["R3"])
+    r4d = _r4d_rule(case, thresholds_config()["rules"]["R4_D"])
+
+    assert (r3["execution"], r3["fired"]) == ("DISABLED", None)
+    assert r3["result_code"] == "PARTNER_DETAIL_MISSING"
+    assert r3["result_values"] == {
+        "partner_detail_reason": "COVERAGE_INDETERMINATE"
+    }
+    assert r3["result"] == (
+        "Partner detail MISSING (COVERAGE_INDETERMINATE): value- and "
+        "quantity-basis partner concentration are NOT_CALCULABLE because "
+        "no partner rows were parsed — missing evidence, not zero trade."
+    )
+    assert (r4d["execution"], r4d["fired"]) == ("DISABLED", None)
+    assert r4d["result_code"] == "PARTNER_DETAIL_MISSING"
+    assert r4d["result_values"] == {
+        "partner_detail_reason": "COVERAGE_INDETERMINATE"
+    }
+
+
+def test_r3_and_r4d_report_partner_trade_observed_zero_codes_on_zero_doubles(
+) -> None:
+    case = _partner_detail_rule_case(
+        "PARTNER_TRADE_OBSERVED_ZERO",
+        None,
+    )
+
+    r3 = _r3_rule(case, thresholds_config()["rules"]["R3"])
+    r4d = _r4d_rule(case, thresholds_config()["rules"]["R4_D"])
+
+    assert (r3["execution"], r3["fired"]) == ("DISABLED", None)
+    assert r3["result_code"] == "PARTNER_TRADE_OBSERVED_ZERO"
+    assert r3["result_values"] == {}
+    assert "Partner trade OBSERVED ZERO" in r3["result"]
+    assert (r4d["execution"], r4d["fired"]) == ("DISABLED", None)
+    assert r4d["result_code"] == "PARTNER_TRADE_OBSERVED_ZERO"
+    assert r4d["result_values"] == {}
+    assert "Partner trade OBSERVED ZERO" in r4d["result"]
+
+
+def test_r3_r4d_codes_unchanged_for_frozen_2_1_0_cases_and_observed_state(
+) -> None:
+    config_r3 = thresholds_config()["rules"]["R3"]
+    config_r4d = thresholds_config()["rules"]["R4_D"]
+    steel = _v2_case("SAU-H0-721049")
+    polypropylene = _v2_case("SAU-H0-390210")
+
+    assert _r3_rule(steel, config_r3)["result_code"] == (
+        "VALUE_CONCENTRATED_QUANTITY_NOT_CALCULABLE"
+    )
+    assert _r4d_rule(steel, config_r4d)["result_code"] == (
+        "DISCLOSED_DISPERSION"
+    )
+    assert _r3_rule(polypropylene, config_r3)["result_code"] == (
+        "BOTH_BASES_NOT_CALCULABLE"
+    )
+    assert _r4d_rule(polypropylene, config_r4d)["result_code"] == (
+        "DISCLOSED_DISPERSION"
+    )
+
+    observed = _partner_detail_rule_case(
+        "PARTNER_DETAIL_OBSERVED",
+        None,
+    )
+    observed["partner_observations"] = [
+        {
+            "year": 2024,
+            "partner": "Observed but incomplete",
+            "flow": "imports",
+            "trade_value_usd_m": 1.0,
+            "net_weight_kt": 1.0,
+            "quantity_unit": "kt",
+            "validity_flags": {
+                "value_valid": True,
+                "net_weight_valid": True,
+                "quantity_comparable": True,
+            },
+            "gross_flow": True,
+            "source_evidence_id": "P-WITS-390210",
+        }
+    ]
+    assert _r3_rule(observed, config_r3)["result_code"] == (
+        "BOTH_BASES_NOT_CALCULABLE"
+    )
+    assert _r4d_rule(observed, config_r4d)["result_code"] == (
+        "COVERAGE_INSUFFICIENT"
+    )
+
+
 def test_r5_full_path_applies_configured_penetration_threshold() -> None:
     case = _v2_case("SAU-H0-721049")
     case["trade"][-1]["imports_kt"] = 100.0

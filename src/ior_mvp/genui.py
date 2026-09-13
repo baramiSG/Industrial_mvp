@@ -68,6 +68,7 @@ def build_ui_manifest(analysis: dict[str, Any]) -> dict[str, Any]:
                 "capacity": analysis.get("capacity"),
                 "economics": analysis.get("economics"),
                 "supplier_concentration": r3_metrics,
+                "partner_detail": analysis.get("partner_detail"),
             },
         },
         {

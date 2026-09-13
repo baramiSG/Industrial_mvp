@@ -93,7 +93,7 @@ def build_dossier(analysis: dict[str, Any]) -> dict[str, Any]:
             f"{capacity.get('specification_adjusted_gap_kt', 0):,.1f} kt."
         )
     return {
-        "dossier_version": "1.1",
+        "dossier_version": "1.2",
         "opportunity_id": opportunity["id"],
         "mode": analysis["mode"],
         "decision_headline": decision["headline"],
@@ -135,6 +135,7 @@ def build_dossier(analysis: dict[str, Any]) -> dict[str, Any]:
         "capability_route": analysis["capability"],
         "economics": economics,
         "competition_policy": analysis.get("competition"),
+        "partner_detail": analysis.get("partner_detail"),
         "evidence_summary": {
             "public_records": public_count,
             "synthetic_records": synthetic_count,
@@ -229,6 +230,16 @@ def render_dossier_html(
             f'dir="ltr">{e(value)}</bdi>'
         )
 
+    def technical_template(key: str, **values: Any) -> str:
+        markers = {
+            name: f"IORTECHNICAL{name.upper()}TOKEN"
+            for name in values
+        }
+        rendered = e(ui_text(key, locale, **markers))
+        for name, marker in markers.items():
+            rendered = rendered.replace(marker, technical(values[name]))
+        return rendered
+
     def localized_code(label: str, value: str) -> str:
         if locale == "en":
             return technical(value)
@@ -288,6 +299,40 @@ def render_dossier_html(
         disclosure_html = (
             f'<div class="warning">{rendered_labels}<br>'
             f"{caption()}{island(disclosure['seed_basis'])}</div>"
+        )
+    partner_detail = dossier.get("partner_detail")
+    partner_detail_html = ""
+    if isinstance(partner_detail, dict):
+        partner_state = partner_detail.get("state")
+        if partner_state == "PARTNER_DETAIL_OBSERVED":
+            partner_status_html = technical_template(
+                "dossier.partner_detail_observed",
+                source=partner_detail.get("source_id", "UNAVAILABLE"),
+                rows=partner_detail.get(
+                    "observed_partner_rows",
+                    "UNAVAILABLE",
+                ),
+            )
+        elif partner_state == "PARTNER_DETAIL_MISSING":
+            attempts = ", ".join(
+                partner_detail.get("attempt_passport_ids", [])
+            ) or "UNAVAILABLE"
+            partner_status_html = technical_template(
+                "dossier.partner_detail_missing",
+                reason=partner_detail.get("reason", "UNAVAILABLE"),
+                attempts=attempts,
+            )
+        elif partner_state == "PARTNER_TRADE_OBSERVED_ZERO":
+            partner_status_html = technical_template(
+                "dossier.partner_detail_zero",
+                source=partner_detail.get("source_id", "UNAVAILABLE"),
+            )
+        else:
+            raise ValueError("unknown partner-detail state")
+        partner_detail_html = (
+            '<p class="small partner-detail">'
+            f'<strong>{text("dossier.partner_detail")}</strong><br>'
+            f"{partner_status_html}</p>"
         )
     simulated_rules = dossier["gap_diagnosis"].get("simulated_rules", [])
     simulated_rules_html = ""
@@ -477,7 +522,7 @@ def render_dossier_html(
 <section class="box decision-conditions"><h2>{text("dossier.decision_conditions")}</h2>{narrative_caption}<ul>{conditions_html}</ul></section>
 <section class="box kill-conditions"><h2>{text("dossier.kill_conditions")}</h2>{narrative_caption}<ul>{kills_html}</ul></section>
 <section class="box next-actions"><h2>{text("dossier.next_actions")}</h2>{narrative_caption}<ul>{next_actions_html}</ul></section>
-<section class="box"><h2>{text("dossier.evidence_boundary")}</h2><p>{evidence_counts}</p><p class="small">{text("dossier.snapshot")} {technical(evidence["snapshot_id"])} · {text("dossier.as_of")} {technical(evidence["as_of_date"])}</p></section>
+<section class="box"><h2>{text("dossier.evidence_boundary")}</h2><p>{evidence_counts}</p>{partner_detail_html}<p class="small">{text("dossier.snapshot")} {technical(evidence["snapshot_id"])} · {text("dossier.as_of")} {technical(evidence["as_of_date"])}</p></section>
 <section class="box"><h2>{text("dossier.authority")}</h2>{authority_html}</section>
 </div>
 </main>

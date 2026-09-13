@@ -191,6 +191,26 @@ def test_integrity_banner_displays_public_and_active_states_together() -> None:
     assert "props.mode === \"simulated\"" in banner
 
 
+def test_metric_grid_hhi_note_uses_partner_detail_catalogue_keys_and_never_renders_zero(
+) -> None:
+    source = _module_source("modules/renderers/decision.js")
+    note = _app_function(source, "hhiNote")
+    grid = _app_function(source, "renderMetricGrid")
+
+    assert "hhiNote(hhi, threshold, partnerDetail)" in source
+    assert "PARTNER_DETAIL_MISSING" in note
+    assert "PARTNER_TRADE_OBSERVED_ZERO" in note
+    assert 't("metric.hhi_partner_detail_missing"' in note
+    assert 't("metric.hhi_partner_trade_zero")' in note
+    assert 't("metric.hhi_unavailable")' in note
+    assert "props.partner_detail" in grid
+    assert (
+        'technical(hhi == null ? t("common.unavailable") : number(hhi, 2))'
+        in grid
+    )
+    assert "hhi == null ? 0" not in grid
+
+
 def test_decision_actions_exposes_dossier_html_action() -> None:
     app_js = _module_source("modules/renderers/evidence.js")
     actions = _app_function(app_js, "renderDecisionActions")

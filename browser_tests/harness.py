@@ -82,7 +82,55 @@ POLYPROPYLENE = Case(
     public_active_state="REJECT",
     simulated_active_state="REJECT",
 )
-CASES = (STEEL, POLYPROPYLENE)
+GALVALUME = Case(
+    id="SAU-H6-721061",
+    hs6="721061",
+    slug="galvalume",
+    real_state="INVESTIGATE",
+    public_active_state="INVESTIGATE",
+    simulated_active_state="ADVANCE",
+)
+TINPLATE = Case(
+    id="SAU-H6-721012",
+    hs6="721012",
+    slug="tinplate",
+    real_state="INVESTIGATE",
+    public_active_state="INVESTIGATE",
+    simulated_active_state="ADVANCE",
+)
+ALU_FOIL = Case(
+    id="SAU-H6-760711",
+    hs6="760711",
+    slug="alu-foil",
+    real_state="INVESTIGATE",
+    public_active_state="INVESTIGATE",
+    simulated_active_state="ADVANCE",
+)
+ALU_PROFILES = Case(
+    id="SAU-H6-760429",
+    hs6="760429",
+    slug="alu-profiles",
+    real_state="INVESTIGATE",
+    public_active_state="INVESTIGATE",
+    simulated_active_state="ADVANCE",
+)
+PE_FILM = Case(
+    id="SAU-H6-392010",
+    hs6="392010",
+    slug="pe-film",
+    real_state="INVESTIGATE",
+    public_active_state="INVESTIGATE",
+    simulated_active_state="REJECT",
+)
+CASES = (
+    STEEL,
+    POLYPROPYLENE,
+    GALVALUME,
+    TINPLATE,
+    ALU_FOIL,
+    ALU_PROFILES,
+    PE_FILM,
+)
 MODES: tuple[Mode, ...] = ("public", "simulated")
 
 

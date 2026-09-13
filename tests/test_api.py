@@ -10,7 +10,10 @@ from fastapi.testclient import TestClient
 import ior_mvp.decision_engine as decision_engine
 from ior_mvp.app import STATIC_DIR, app, spa_fallback
 from ior_mvp.config import PROJECT_ROOT
-from ior_mvp.data_repository import get_synthetic_scenario
+from ior_mvp.data_repository import (
+    get_public_case,
+    get_synthetic_scenario,
+)
 from ior_mvp.narratives import NarrativeCatalogueError
 from ior_mvp.public_snapshot import PublicSnapshotIntegrityError
 from ior_mvp.public_snapshot import validate_public_snapshot
@@ -425,7 +428,7 @@ def test_opportunity_list_modes() -> None:
     public = client.get("/api/opportunities?mode=public")
     simulated = client.get("/api/opportunities?mode=simulated")
     assert public.status_code == simulated.status_code == 200
-    assert len(public.json()) == len(simulated.json()) == 2
+    assert len(public.json()) == len(simulated.json()) == 7
 
 
 @pytest.mark.parametrize(
@@ -482,6 +485,37 @@ def test_detailed_analysis_exposes_additive_public_snapshot_v2_contract(
         assert r3["metrics"]["value"]["hhi"] == pytest.approx(
             expected_hhi
         )
+
+
+def test_public_analysis_carries_partner_detail_none_for_2_1_0_and_block_for_2_2_0(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    frozen = decision_engine.analyze_public("SAU-H0-390210")
+    assert frozen["partner_detail"] is None
+
+    candidate = deepcopy(get_public_case("SAU-H0-390210"))
+    candidate["schema_version"] = "2.2.0"
+    candidate.pop("disclosed_concentration", None)
+    candidate.pop("disclosed_dispersion", None)
+    candidate["partner_observations"] = "UNAVAILABLE"
+    candidate["partner_detail"] = {
+        "state": "PARTNER_DETAIL_MISSING",
+        "reason": "NOT_ACQUIRED",
+        "source_id": "UNAVAILABLE",
+        "partner_snapshot_id": "UNAVAILABLE",
+        "unit_key": ["390210", "imports", "2024"],
+        "observed_partner_rows": "UNAVAILABLE",
+        "attempt_passport_ids": [],
+        "observed_passport_id": None,
+    }
+    monkeypatch.setattr(
+        decision_engine,
+        "get_public_case",
+        lambda opportunity_id: deepcopy(candidate),
+    )
+
+    analysis = decision_engine.analyze_public("SAU-H6-390210")
+    assert analysis["partner_detail"] == candidate["partner_detail"]
 
 
 def test_steel_ui_manifest_uses_approved_components() -> None:

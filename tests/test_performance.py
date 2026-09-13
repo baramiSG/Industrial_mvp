@@ -15,6 +15,11 @@ MAX_MEDIAN_MS = 250.0
 OPPORTUNITY_IDS = (
     "SAU-H0-721049",
     "SAU-H0-390210",
+    "SAU-H6-721061",
+    "SAU-H6-721012",
+    "SAU-H6-760711",
+    "SAU-H6-760429",
+    "SAU-H6-392010",
 )
 MODES = ("public", "simulated")
 ANALYSIS_PATHS = (

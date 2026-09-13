@@ -35,6 +35,19 @@ MANDATORY_SCENARIO_FIELDS = [
     "synthetic_inputs",
 ]
 ARABIC_DISCLOSURE = "محاكاة — ليست بيانات أو أدلة صادرة عن الوزارة"
+OPPORTUNITY_IDS = (
+    "SAU-H0-721049",
+    "SAU-H0-390210",
+    "SAU-H6-721061",
+    "SAU-H6-721012",
+    "SAU-H6-760711",
+    "SAU-H6-760429",
+    "SAU-H6-392010",
+)
+FROZEN_2_1_IDS = {
+    "SAU-H0-721049",
+    "SAU-H0-390210",
+}
 
 
 def _steel_scenario() -> dict:
@@ -44,13 +57,14 @@ def _steel_scenario() -> dict:
 
 
 def test_public_snapshots_contain_no_synthetic_rows() -> None:
-    for opportunity_id in (
-        "SAU-H0-721049",
-        "SAU-H0-390210",
-    ):
+    for opportunity_id in OPPORTUNITY_IDS:
         case = get_public_case(opportunity_id)
         validate_public_snapshot(case)
-        assert case["schema_version"] == "2.1.0"
+        assert case["schema_version"] == (
+            "2.1.0"
+            if opportunity_id in FROZEN_2_1_IDS
+            else "2.2.0"
+        )
         assert "rule_context" not in case
         assert "public_decision_contract" not in case
         validate_public_evidence(case["evidence"])
@@ -242,7 +256,7 @@ def test_repository_propagates_policy_failure_as_integrity_error(
 
 @pytest.mark.parametrize(
     "opportunity_id",
-    ["SAU-H0-721049", "SAU-H0-390210"],
+    OPPORTUNITY_IDS,
 )
 def test_policy_validation_accepts_additive_s04_metadata(
     opportunity_id: str,
@@ -258,7 +272,7 @@ def test_policy_validation_accepts_additive_s04_metadata(
 
 @pytest.mark.parametrize(
     "opportunity_id",
-    ["SAU-H0-721049", "SAU-H0-390210"],
+    OPPORTUNITY_IDS,
 )
 def test_cached_scenario_is_unchanged_after_analyze_simulated(
     opportunity_id: str,
