@@ -1,0 +1,842 @@
+{
+  "artifact_id": "ENTITIES-2026-09-13-219b097bddda",
+  "artifact_id_scheme": "ENTITY_ARTIFACT_ID_V1",
+  "as_of_date": "2026-09-13",
+  "counts": {
+    "entities_by_type": {
+      "COMPANY": 2,
+      "LICENCE_HOLDER": 0,
+      "LINE": 0,
+      "PLANT": 0
+    },
+    "links_by_status": {
+      "DETERMINISTIC_IDENTIFIER": 0,
+      "EXACT_DOCUMENT_EVIDENCE": 2,
+      "PROPOSED_PENDING_REVIEW": 0,
+      "UNRESOLVED": 0
+    },
+    "observation_links_by_status": {
+      "DETERMINISTIC_IDENTIFIER": 0,
+      "EXACT_DOCUMENT_EVIDENCE": 0,
+      "PROPOSED_PENDING_REVIEW": 0,
+      "UNRESOLVED": 5
+    },
+    "passport_links_by_status": {
+      "DETERMINISTIC_IDENTIFIER": 0,
+      "EXACT_DOCUMENT_EVIDENCE": 2,
+      "PROPOSED_PENDING_REVIEW": 0,
+      "UNRESOLVED": 24
+    }
+  },
+  "documents_without_mentions": [
+    "DOC-PRODUCER-ALTAISEER-TALCO-b68e0eef2440-b339b1ac8d87",
+    "DOC-PRODUCER-ALUPCO-135870d0e4c7-0261d54ca8a6",
+    "DOC-PRODUCER-HADEED-92ca24b2076f-253eed8b773e",
+    "DOC-PRODUCER-MAADEN-a48b1f95cba9-956b9a16c655",
+    "DOC-PRODUCER-MAADEN-b1dd369ea0fe-dae44e050e70",
+    "DOC-PRODUCER-UNICOIL-70151205e3a4-1762d53d6cab",
+    "DOC-PRODUCER-UNICOIL-7d21f605fc4e-6eb00a1886d0",
+    "DOC-PRODUCER-UNICOIL-9cf950950e95-6217c780a89a",
+    "DOC-PRODUCER-UNICOIL-cec488bffcda-3017de71d962",
+    "DOC-PRODUCER-UNICOIL-d7302a241f7d-f35cfd06f777",
+    "DOC-PRODUCER-UNICOIL-ecb55cc26093-612efea9a835",
+    "DOC-SASO-DOCUMENTS-641a518f410a-1bfd6143aaa9",
+    "DOC-SASO-DOCUMENTS-69ea78b9cd4e-000691d40661",
+    "DOC-SASO-DOCUMENTS-710bf26c140e-b25658901d54",
+    "DOC-SASO-DOCUMENTS-c778364b4087-b89ca084a45d",
+    "DOC-SASO-DOCUMENTS-d5e242b67294-9189ec73295b",
+    "DOC-SASO-DOCUMENTS-e57d73b6e5b7-0e0d00cb00cf",
+    "DOC-SFDA-REGISTERS-e4dc16615481-5f1b33b9c8fc",
+    "DOC-WCO-HS-NOMENCLATURE-4e3dbeff29ba-7ad8d2b476a9",
+    "DOC-WCO-HS-NOMENCLATURE-53d6f01ac062-0926bf9934da",
+    "DOC-WCO-HS-NOMENCLATURE-5530bdf97060-8da42b5156a2",
+    "DOC-WCO-HS-NOMENCLATURE-69bd7323c7aa-bd350605a78a",
+    "DOC-WCO-HS-NOMENCLATURE-fd99902db1af-d01a792902be",
+    "DOC-WCO-HS-NOMENCLATURE-fe3ed4f5325a-88edcc1ee93d"
+  ],
+  "entities": [
+    {
+      "attributes_unresolved": [],
+      "canonical_key": "ENTITY_ID_V1|COMPANY|sabic agri nutrients company",
+      "entity_id": "COMPANY-5deeaaf2805183bc",
+      "entity_type": "COMPANY",
+      "evidence_mention_ids": [
+        "M-002"
+      ],
+      "first_observed_as_of": "2026-09-13",
+      "granularity": "LEGAL_ENTITY",
+      "identifiers": [],
+      "jurisdiction": "UNAVAILABLE",
+      "locality_token": null,
+      "merged_into": null,
+      "names": [
+        {
+          "established_by_mention_ids": [
+            "M-002"
+          ],
+          "language": "en",
+          "name_text": "SABIC Agri-Nutrients Company",
+          "normalised_exact": "sabic agri nutrients company",
+          "normalised_variant": "sabic agri nutrients",
+          "role": "PRIMARY",
+          "text_order": "logical"
+        }
+      ],
+      "parent": {
+        "company_entity_id": null,
+        "plant_entity_id": null
+      },
+      "primary_name_ar": "UNAVAILABLE",
+      "primary_name_en": "SABIC Agri-Nutrients Company"
+    },
+    {
+      "attributes_unresolved": [],
+      "canonical_key": "ENTITY_ID_V1|COMPANY|saudi pharmaceutical industries and medical appliances corporation spimaco",
+      "entity_id": "COMPANY-edae84e523587dca",
+      "entity_type": "COMPANY",
+      "evidence_mention_ids": [
+        "M-001"
+      ],
+      "first_observed_as_of": "2026-09-13",
+      "granularity": "LEGAL_ENTITY",
+      "identifiers": [],
+      "jurisdiction": "UNAVAILABLE",
+      "locality_token": null,
+      "merged_into": null,
+      "names": [
+        {
+          "established_by_mention_ids": [
+            "M-001"
+          ],
+          "language": "en",
+          "name_text": "Saudi Pharmaceutical Industries and Medical Appliances Corporation (SPIMACO)",
+          "normalised_exact": "saudi pharmaceutical industries and medical appliances corporation spimaco",
+          "normalised_variant": "saudi pharmaceutical industries and medical appliances corporation spimaco",
+          "role": "PRIMARY",
+          "text_order": "logical"
+        }
+      ],
+      "parent": {
+        "company_entity_id": null,
+        "plant_entity_id": null
+      },
+      "primary_name_ar": "UNAVAILABLE",
+      "primary_name_en": "Saudi Pharmaceutical Industries and Medical Appliances Corporation (SPIMACO)"
+    }
+  ],
+  "id_scheme": {
+    "hash": "sha256",
+    "hex_length": 16,
+    "name": "ENTITY_ID_V1"
+  },
+  "inputs": {
+    "document_records": [
+      {
+        "document_id": "DOC-PRODUCER-ALTAISEER-TALCO-b68e0eef2440-b339b1ac8d87",
+        "path": "documents/producer_altaiseer_talco/records/DOC-PRODUCER-ALTAISEER-TALCO-b68e0eef2440-b339b1ac8d87.json",
+        "sha256": "75d55703b7609e59533b02e0b932378805eac232c73e6fd8ad4fa69a9479e241"
+      },
+      {
+        "document_id": "DOC-PRODUCER-ALUPCO-135870d0e4c7-0261d54ca8a6",
+        "path": "documents/producer_alupco/records/DOC-PRODUCER-ALUPCO-135870d0e4c7-0261d54ca8a6.json",
+        "sha256": "531ad2c64141bf4ba045d31359deb1a12e9a4f22df75a5c2512d9cc51242f480"
+      },
+      {
+        "document_id": "DOC-PRODUCER-HADEED-92ca24b2076f-253eed8b773e",
+        "path": "documents/producer_hadeed/records/DOC-PRODUCER-HADEED-92ca24b2076f-253eed8b773e.json",
+        "sha256": "23dfdda61d95551ece8eeab71dd205038e0da7bdf3ffe494be9ba9d0c6c92978"
+      },
+      {
+        "document_id": "DOC-PRODUCER-MAADEN-a48b1f95cba9-956b9a16c655",
+        "path": "documents/producer_maaden/records/DOC-PRODUCER-MAADEN-a48b1f95cba9-956b9a16c655.json",
+        "sha256": "799de8f3956bfa766b0aef210b4bd0123c5f27baf7b6e43e489d9bb69970b3d3"
+      },
+      {
+        "document_id": "DOC-PRODUCER-MAADEN-b1dd369ea0fe-dae44e050e70",
+        "path": "documents/producer_maaden/records/DOC-PRODUCER-MAADEN-b1dd369ea0fe-dae44e050e70.json",
+        "sha256": "4711297a49aed623f3926f204821a4556f59d7b7812b77b7117e02b1fabbc4a2"
+      },
+      {
+        "document_id": "DOC-PRODUCER-SABIC-AGRINUTRIENTS-d853eeed63fa-42fdc62825bc",
+        "path": "documents/producer_sabic_agrinutrients/records/DOC-PRODUCER-SABIC-AGRINUTRIENTS-d853eeed63fa-42fdc62825bc.json",
+        "sha256": "aaf9df26f90416450442c573be049b5029b12ab965a659340239c063346ce28d"
+      },
+      {
+        "document_id": "DOC-PRODUCER-SPIMACO-1eb1608ff72b-884197ccc5a7",
+        "path": "documents/producer_spimaco/records/DOC-PRODUCER-SPIMACO-1eb1608ff72b-884197ccc5a7.json",
+        "sha256": "2064331f1d892c49baa17940bd092560c7dbdd6f6dee747a7fa68a9ae74989fd"
+      },
+      {
+        "document_id": "DOC-PRODUCER-UNICOIL-70151205e3a4-1762d53d6cab",
+        "path": "documents/producer_unicoil/records/DOC-PRODUCER-UNICOIL-70151205e3a4-1762d53d6cab.json",
+        "sha256": "3d1bc18c75bc9f87c215b402aedb1adeb4558ceb7f9a86ab3d2617fb2e0438f3"
+      },
+      {
+        "document_id": "DOC-PRODUCER-UNICOIL-7d21f605fc4e-6eb00a1886d0",
+        "path": "documents/producer_unicoil/records/DOC-PRODUCER-UNICOIL-7d21f605fc4e-6eb00a1886d0.json",
+        "sha256": "18a19cf639ee6c951e384f56e846c4a1f9591cd177f9df64f7b278fd565a1e57"
+      },
+      {
+        "document_id": "DOC-PRODUCER-UNICOIL-9cf950950e95-6217c780a89a",
+        "path": "documents/producer_unicoil/records/DOC-PRODUCER-UNICOIL-9cf950950e95-6217c780a89a.json",
+        "sha256": "9a91b7e75733b8054a416b4cc7a3a511be7803beb9b3a32ad4b6d6d49f021341"
+      },
+      {
+        "document_id": "DOC-PRODUCER-UNICOIL-cec488bffcda-3017de71d962",
+        "path": "documents/producer_unicoil/records/DOC-PRODUCER-UNICOIL-cec488bffcda-3017de71d962.json",
+        "sha256": "cb05df254482a7bf98e7544f4f6f50abfd612e6e1214af5bc18731f2829039c7"
+      },
+      {
+        "document_id": "DOC-PRODUCER-UNICOIL-d7302a241f7d-f35cfd06f777",
+        "path": "documents/producer_unicoil/records/DOC-PRODUCER-UNICOIL-d7302a241f7d-f35cfd06f777.json",
+        "sha256": "12b8468a9116bd5889a9003ff5354fb66e881f884e368accf2bed8baef83ef53"
+      },
+      {
+        "document_id": "DOC-PRODUCER-UNICOIL-ecb55cc26093-612efea9a835",
+        "path": "documents/producer_unicoil/records/DOC-PRODUCER-UNICOIL-ecb55cc26093-612efea9a835.json",
+        "sha256": "ec6bb5b4a862d1e39a3787659d917f1d7a2215240a238b231f6832209cb399c5"
+      },
+      {
+        "document_id": "DOC-SASO-DOCUMENTS-641a518f410a-1bfd6143aaa9",
+        "path": "documents/saso_documents/records/DOC-SASO-DOCUMENTS-641a518f410a-1bfd6143aaa9.json",
+        "sha256": "bbcbb428568efcd8608dd12295e56dd0b3cfbac2fc338f4a0e89d8fed57a2733"
+      },
+      {
+        "document_id": "DOC-SASO-DOCUMENTS-69ea78b9cd4e-000691d40661",
+        "path": "documents/saso_documents/records/DOC-SASO-DOCUMENTS-69ea78b9cd4e-000691d40661.json",
+        "sha256": "8ef6184c5b683ec2c9711dbccc16b498134c92c5ba953f912278090d06d80121"
+      },
+      {
+        "document_id": "DOC-SASO-DOCUMENTS-710bf26c140e-b25658901d54",
+        "path": "documents/saso_documents/records/DOC-SASO-DOCUMENTS-710bf26c140e-b25658901d54.json",
+        "sha256": "20f9ba9da6a65e542e41eaf9d1a5135534a9d7dc1c36c760fe29f75e7d3e0293"
+      },
+      {
+        "document_id": "DOC-SASO-DOCUMENTS-c778364b4087-b89ca084a45d",
+        "path": "documents/saso_documents/records/DOC-SASO-DOCUMENTS-c778364b4087-b89ca084a45d.json",
+        "sha256": "a92c209f425c8e6a99cdd4691b8aebced8696b81efbf630ffee11a8c83ec5129"
+      },
+      {
+        "document_id": "DOC-SASO-DOCUMENTS-d5e242b67294-9189ec73295b",
+        "path": "documents/saso_documents/records/DOC-SASO-DOCUMENTS-d5e242b67294-9189ec73295b.json",
+        "sha256": "f65999b530a8864f7e34a351d5bfc032f654ae80eac437276df5b096ba991a0c"
+      },
+      {
+        "document_id": "DOC-SASO-DOCUMENTS-e57d73b6e5b7-0e0d00cb00cf",
+        "path": "documents/saso_documents/records/DOC-SASO-DOCUMENTS-e57d73b6e5b7-0e0d00cb00cf.json",
+        "sha256": "16f674bb2d37761521e9e464e4fc238d26183fe0838c7c764893bb3f9809476d"
+      },
+      {
+        "document_id": "DOC-SFDA-REGISTERS-e4dc16615481-5f1b33b9c8fc",
+        "path": "documents/sfda_registers/records/DOC-SFDA-REGISTERS-e4dc16615481-5f1b33b9c8fc.json",
+        "sha256": "9d142e62cdc79607d6e005c144d57505dd2caf12573e26453a662aff96256e91"
+      },
+      {
+        "document_id": "DOC-WCO-HS-NOMENCLATURE-4e3dbeff29ba-7ad8d2b476a9",
+        "path": "documents/wco_hs_nomenclature/records/DOC-WCO-HS-NOMENCLATURE-4e3dbeff29ba-7ad8d2b476a9.json",
+        "sha256": "9d0cba7d3127b6dbc4aa715e667e7720ff60cbf5e2766926208e58b3a710dede"
+      },
+      {
+        "document_id": "DOC-WCO-HS-NOMENCLATURE-53d6f01ac062-0926bf9934da",
+        "path": "documents/wco_hs_nomenclature/records/DOC-WCO-HS-NOMENCLATURE-53d6f01ac062-0926bf9934da.json",
+        "sha256": "3a0e268197d85214234432cd9ad829176214855c7535765f7c322057347d62d4"
+      },
+      {
+        "document_id": "DOC-WCO-HS-NOMENCLATURE-5530bdf97060-8da42b5156a2",
+        "path": "documents/wco_hs_nomenclature/records/DOC-WCO-HS-NOMENCLATURE-5530bdf97060-8da42b5156a2.json",
+        "sha256": "446d3c57824439d0e9936371d9d76ba3fb09d8e3dbfbcd65fd6da6d0a0a31dd4"
+      },
+      {
+        "document_id": "DOC-WCO-HS-NOMENCLATURE-69bd7323c7aa-bd350605a78a",
+        "path": "documents/wco_hs_nomenclature/records/DOC-WCO-HS-NOMENCLATURE-69bd7323c7aa-bd350605a78a.json",
+        "sha256": "6374bad7c5983c88b5f6bbfb16ab9fd72f00b8ad905ffa490351e14fc356cfd6"
+      },
+      {
+        "document_id": "DOC-WCO-HS-NOMENCLATURE-fd99902db1af-d01a792902be",
+        "path": "documents/wco_hs_nomenclature/records/DOC-WCO-HS-NOMENCLATURE-fd99902db1af-d01a792902be.json",
+        "sha256": "b60762f9c60b9ee26e176f6e8cf4ebee683549743ace207ecaf72ec604e2f168"
+      },
+      {
+        "document_id": "DOC-WCO-HS-NOMENCLATURE-fe3ed4f5325a-88edcc1ee93d",
+        "path": "documents/wco_hs_nomenclature/records/DOC-WCO-HS-NOMENCLATURE-fe3ed4f5325a-88edcc1ee93d.json",
+        "sha256": "8073a7e800d16b30b7ba169e6de6cc213b6005d15699fd36c7a82267bc2238e4"
+      }
+    ],
+    "mention_list": {
+      "list_id": "mentions-v3",
+      "path": "entities/mentions/mentions-v3.json",
+      "sha256": "219b097bddda2af67d44ab56f2ade8562fa312f8c219b934fcf72707ba1e2f8c"
+    },
+    "public_snapshots": [
+      {
+        "path": "snapshots/public/SAU-H0-390210.json",
+        "sha256": "edaeaabf82276f75a1887aa0869b9e3a4070c3338fa0e9f677c55607cd8d0ac4",
+        "snapshot_id": "PUBLIC-SAU-H0-390210-2026-08-31"
+      },
+      {
+        "path": "snapshots/public/SAU-H0-721049.json",
+        "sha256": "5c2ab676e5b68509e002eddff4f80107c0d2cc1b78c3b063e26f84d13355512e",
+        "snapshot_id": "PUBLIC-SAU-H0-721049-2026-08-31"
+      }
+    ],
+    "rule_table": {
+      "path": "config/entity_resolution.v1.yaml",
+      "sha256": "c320d2e8a92ad18786935f86366d2d826ffb33d413ebe493c11811f40da00bc9",
+      "version": "1.0.0"
+    }
+  },
+  "kind": "entity_resolution",
+  "links": [
+    {
+      "candidate_entity_ids": [],
+      "entity_id": "COMPANY-edae84e523587dca",
+      "entity_type": "COMPANY",
+      "evidence": {
+        "address": {
+          "document_id": "DOC-PRODUCER-SPIMACO-1eb1608ff72b-884197ccc5a7",
+          "line_index": 8,
+          "page_index": 8
+        },
+        "as_of_date": "2026-09-13",
+        "input_sha256": "2064331f1d892c49baa17940bd092560c7dbdd6f6dee747a7fa68a9ae74989fd",
+        "language": "en",
+        "source_kind": "DOCUMENT_RECORD",
+        "span_text": "Saudi Pharmaceutical Industries and Medical Appliances Corporation (SPIMACO)",
+        "text_order": "logical"
+      },
+      "link_id": "L-001",
+      "link_status": "EXACT_DOCUMENT_EVIDENCE",
+      "mention_id": "M-001",
+      "precedence_rank": 2,
+      "rule_applied": "MINTED_FROM_MENTION",
+      "unresolved_reason": null
+    },
+    {
+      "candidate_entity_ids": [],
+      "entity_id": "COMPANY-5deeaaf2805183bc",
+      "entity_type": "COMPANY",
+      "evidence": {
+        "address": {
+          "document_id": "DOC-PRODUCER-SABIC-AGRINUTRIENTS-d853eeed63fa-42fdc62825bc",
+          "line_index": 46,
+          "page_index": 5
+        },
+        "as_of_date": "2026-09-13",
+        "input_sha256": "aaf9df26f90416450442c573be049b5029b12ab965a659340239c063346ce28d",
+        "language": "en",
+        "source_kind": "DOCUMENT_RECORD",
+        "span_text": "SABIC Agri-Nutrients Company",
+        "text_order": "logical"
+      },
+      "link_id": "L-002",
+      "link_status": "EXACT_DOCUMENT_EVIDENCE",
+      "mention_id": "M-002",
+      "precedence_rank": 2,
+      "rule_applied": "MINTED_FROM_MENTION",
+      "unresolved_reason": null
+    }
+  ],
+  "merge_records": [],
+  "name_change_records": [],
+  "normalisation": {
+    "method_id": "NAME_NORMALISATION_V1",
+    "version": "1.0.0"
+  },
+  "observation_links": [
+    {
+      "candidate_entity_ids": [],
+      "entity_id": null,
+      "link_status": "UNRESOLVED",
+      "observation_ref": {
+        "json_pointer": "/domestic_capability/producer_evidence/0/producer",
+        "snapshot_id": "PUBLIC-SAU-H0-390210-2026-08-31"
+      },
+      "unresolved_reason": "NO_MENTION_RECORDED",
+      "via_mention_ids": []
+    },
+    {
+      "candidate_entity_ids": [],
+      "entity_id": null,
+      "link_status": "UNRESOLVED",
+      "observation_ref": {
+        "json_pointer": "/domestic_capability/producer_evidence/1/producer",
+        "snapshot_id": "PUBLIC-SAU-H0-390210-2026-08-31"
+      },
+      "unresolved_reason": "NO_MENTION_RECORDED",
+      "via_mention_ids": []
+    },
+    {
+      "candidate_entity_ids": [],
+      "entity_id": null,
+      "link_status": "UNRESOLVED",
+      "observation_ref": {
+        "json_pointer": "/domestic_capability/producer_evidence/2/producer",
+        "snapshot_id": "PUBLIC-SAU-H0-390210-2026-08-31"
+      },
+      "unresolved_reason": "NO_MENTION_RECORDED",
+      "via_mention_ids": []
+    },
+    {
+      "candidate_entity_ids": [],
+      "entity_id": null,
+      "link_status": "UNRESOLVED",
+      "observation_ref": {
+        "json_pointer": "/domestic_capability/producer_evidence/0/producer",
+        "snapshot_id": "PUBLIC-SAU-H0-721049-2026-08-31"
+      },
+      "unresolved_reason": "NO_MENTION_RECORDED",
+      "via_mention_ids": []
+    },
+    {
+      "candidate_entity_ids": [],
+      "entity_id": null,
+      "link_status": "UNRESOLVED",
+      "observation_ref": {
+        "json_pointer": "/domestic_capability/producer_evidence/1/producer",
+        "snapshot_id": "PUBLIC-SAU-H0-721049-2026-08-31"
+      },
+      "unresolved_reason": "NO_MENTION_RECORDED",
+      "via_mention_ids": []
+    }
+  ],
+  "ownership_records": [],
+  "passport_links": [
+    {
+      "candidate_entity_ids": [],
+      "corroboration": null,
+      "entity_id": null,
+      "link_status": "UNRESOLVED",
+      "passport_ref": {
+        "document_id": "DOC-PRODUCER-ALTAISEER-TALCO-b68e0eef2440-b339b1ac8d87",
+        "evidence_id": null,
+        "json_pointer": null,
+        "kind": "DOCUMENT_RECORD_PASSPORT",
+        "passport_id": "producer_altaiseer_talco-b68e0eef2440-20260912T233154Z",
+        "snapshot_id": null
+      },
+      "unresolved_reason": "NO_MENTION_RECORDED",
+      "via_mention_ids": []
+    },
+    {
+      "candidate_entity_ids": [],
+      "corroboration": null,
+      "entity_id": null,
+      "link_status": "UNRESOLVED",
+      "passport_ref": {
+        "document_id": "DOC-PRODUCER-ALUPCO-135870d0e4c7-0261d54ca8a6",
+        "evidence_id": null,
+        "json_pointer": null,
+        "kind": "DOCUMENT_RECORD_PASSPORT",
+        "passport_id": "producer_alupco-135870d0e4c7-20260912T233130Z",
+        "snapshot_id": null
+      },
+      "unresolved_reason": "NO_MENTION_RECORDED",
+      "via_mention_ids": []
+    },
+    {
+      "candidate_entity_ids": [],
+      "corroboration": null,
+      "entity_id": null,
+      "link_status": "UNRESOLVED",
+      "passport_ref": {
+        "document_id": "DOC-PRODUCER-HADEED-92ca24b2076f-253eed8b773e",
+        "evidence_id": null,
+        "json_pointer": null,
+        "kind": "DOCUMENT_RECORD_PASSPORT",
+        "passport_id": "producer_hadeed-92ca24b2076f-20260912T233102Z",
+        "snapshot_id": null
+      },
+      "unresolved_reason": "NO_MENTION_RECORDED",
+      "via_mention_ids": []
+    },
+    {
+      "candidate_entity_ids": [],
+      "corroboration": null,
+      "entity_id": null,
+      "link_status": "UNRESOLVED",
+      "passport_ref": {
+        "document_id": "DOC-PRODUCER-MAADEN-a48b1f95cba9-956b9a16c655",
+        "evidence_id": null,
+        "json_pointer": null,
+        "kind": "DOCUMENT_RECORD_PASSPORT",
+        "passport_id": "producer_maaden-a48b1f95cba9-20260912T233222Z",
+        "snapshot_id": null
+      },
+      "unresolved_reason": "NO_MENTION_RECORDED",
+      "via_mention_ids": []
+    },
+    {
+      "candidate_entity_ids": [],
+      "corroboration": null,
+      "entity_id": null,
+      "link_status": "UNRESOLVED",
+      "passport_ref": {
+        "document_id": "DOC-PRODUCER-MAADEN-b1dd369ea0fe-dae44e050e70",
+        "evidence_id": null,
+        "json_pointer": null,
+        "kind": "DOCUMENT_RECORD_PASSPORT",
+        "passport_id": "producer_maaden-b1dd369ea0fe-20260912T233222Z",
+        "snapshot_id": null
+      },
+      "unresolved_reason": "NO_MENTION_RECORDED",
+      "via_mention_ids": []
+    },
+    {
+      "candidate_entity_ids": [],
+      "corroboration": null,
+      "entity_id": "COMPANY-5deeaaf2805183bc",
+      "link_status": "EXACT_DOCUMENT_EVIDENCE",
+      "passport_ref": {
+        "document_id": "DOC-PRODUCER-SABIC-AGRINUTRIENTS-d853eeed63fa-42fdc62825bc",
+        "evidence_id": null,
+        "json_pointer": null,
+        "kind": "DOCUMENT_RECORD_PASSPORT",
+        "passport_id": "producer_sabic_agrinutrients-d853eeed63fa-20260913T035235Z",
+        "snapshot_id": null
+      },
+      "unresolved_reason": null,
+      "via_mention_ids": [
+        "M-002"
+      ]
+    },
+    {
+      "candidate_entity_ids": [],
+      "corroboration": null,
+      "entity_id": "COMPANY-edae84e523587dca",
+      "link_status": "EXACT_DOCUMENT_EVIDENCE",
+      "passport_ref": {
+        "document_id": "DOC-PRODUCER-SPIMACO-1eb1608ff72b-884197ccc5a7",
+        "evidence_id": null,
+        "json_pointer": null,
+        "kind": "DOCUMENT_RECORD_PASSPORT",
+        "passport_id": "producer_spimaco-1eb1608ff72b-20260913T035150Z",
+        "snapshot_id": null
+      },
+      "unresolved_reason": null,
+      "via_mention_ids": [
+        "M-001"
+      ]
+    },
+    {
+      "candidate_entity_ids": [],
+      "corroboration": null,
+      "entity_id": null,
+      "link_status": "UNRESOLVED",
+      "passport_ref": {
+        "document_id": "DOC-PRODUCER-UNICOIL-70151205e3a4-1762d53d6cab",
+        "evidence_id": null,
+        "json_pointer": null,
+        "kind": "DOCUMENT_RECORD_PASSPORT",
+        "passport_id": "producer_unicoil-70151205e3a4-20260912T053955Z",
+        "snapshot_id": null
+      },
+      "unresolved_reason": "NO_MENTION_RECORDED",
+      "via_mention_ids": []
+    },
+    {
+      "candidate_entity_ids": [],
+      "corroboration": null,
+      "entity_id": null,
+      "link_status": "UNRESOLVED",
+      "passport_ref": {
+        "document_id": "DOC-PRODUCER-UNICOIL-7d21f605fc4e-6eb00a1886d0",
+        "evidence_id": null,
+        "json_pointer": null,
+        "kind": "DOCUMENT_RECORD_PASSPORT",
+        "passport_id": "producer_unicoil-7d21f605fc4e-20260912T053955Z",
+        "snapshot_id": null
+      },
+      "unresolved_reason": "NO_MENTION_RECORDED",
+      "via_mention_ids": []
+    },
+    {
+      "candidate_entity_ids": [],
+      "corroboration": null,
+      "entity_id": null,
+      "link_status": "UNRESOLVED",
+      "passport_ref": {
+        "document_id": "DOC-PRODUCER-UNICOIL-9cf950950e95-6217c780a89a",
+        "evidence_id": null,
+        "json_pointer": null,
+        "kind": "DOCUMENT_RECORD_PASSPORT",
+        "passport_id": "producer_unicoil-9cf950950e95-20260912T053955Z",
+        "snapshot_id": null
+      },
+      "unresolved_reason": "NO_MENTION_RECORDED",
+      "via_mention_ids": []
+    },
+    {
+      "candidate_entity_ids": [],
+      "corroboration": null,
+      "entity_id": null,
+      "link_status": "UNRESOLVED",
+      "passport_ref": {
+        "document_id": "DOC-PRODUCER-UNICOIL-cec488bffcda-3017de71d962",
+        "evidence_id": null,
+        "json_pointer": null,
+        "kind": "DOCUMENT_RECORD_PASSPORT",
+        "passport_id": "producer_unicoil-cec488bffcda-20260912T053955Z",
+        "snapshot_id": null
+      },
+      "unresolved_reason": "NO_MENTION_RECORDED",
+      "via_mention_ids": []
+    },
+    {
+      "candidate_entity_ids": [],
+      "corroboration": null,
+      "entity_id": null,
+      "link_status": "UNRESOLVED",
+      "passport_ref": {
+        "document_id": "DOC-PRODUCER-UNICOIL-d7302a241f7d-f35cfd06f777",
+        "evidence_id": null,
+        "json_pointer": null,
+        "kind": "DOCUMENT_RECORD_PASSPORT",
+        "passport_id": "producer_unicoil-d7302a241f7d-20260912T053955Z",
+        "snapshot_id": null
+      },
+      "unresolved_reason": "NO_MENTION_RECORDED",
+      "via_mention_ids": []
+    },
+    {
+      "candidate_entity_ids": [],
+      "corroboration": null,
+      "entity_id": null,
+      "link_status": "UNRESOLVED",
+      "passport_ref": {
+        "document_id": "DOC-PRODUCER-UNICOIL-ecb55cc26093-612efea9a835",
+        "evidence_id": null,
+        "json_pointer": null,
+        "kind": "DOCUMENT_RECORD_PASSPORT",
+        "passport_id": "producer_unicoil-ecb55cc26093-20260912T053955Z",
+        "snapshot_id": null
+      },
+      "unresolved_reason": "NO_MENTION_RECORDED",
+      "via_mention_ids": []
+    },
+    {
+      "candidate_entity_ids": [],
+      "corroboration": null,
+      "entity_id": null,
+      "link_status": "UNRESOLVED",
+      "passport_ref": {
+        "document_id": "DOC-SASO-DOCUMENTS-641a518f410a-1bfd6143aaa9",
+        "evidence_id": null,
+        "json_pointer": null,
+        "kind": "DOCUMENT_RECORD_PASSPORT",
+        "passport_id": "saso_documents-641a518f410a-20260912T053622Z",
+        "snapshot_id": null
+      },
+      "unresolved_reason": "NO_MENTION_RECORDED",
+      "via_mention_ids": []
+    },
+    {
+      "candidate_entity_ids": [],
+      "corroboration": null,
+      "entity_id": null,
+      "link_status": "UNRESOLVED",
+      "passport_ref": {
+        "document_id": "DOC-SASO-DOCUMENTS-69ea78b9cd4e-000691d40661",
+        "evidence_id": null,
+        "json_pointer": null,
+        "kind": "DOCUMENT_RECORD_PASSPORT",
+        "passport_id": "saso_documents-69ea78b9cd4e-20260912T053622Z",
+        "snapshot_id": null
+      },
+      "unresolved_reason": "NO_MENTION_RECORDED",
+      "via_mention_ids": []
+    },
+    {
+      "candidate_entity_ids": [],
+      "corroboration": null,
+      "entity_id": null,
+      "link_status": "UNRESOLVED",
+      "passport_ref": {
+        "document_id": "DOC-SASO-DOCUMENTS-710bf26c140e-b25658901d54",
+        "evidence_id": null,
+        "json_pointer": null,
+        "kind": "DOCUMENT_RECORD_PASSPORT",
+        "passport_id": "saso_documents-710bf26c140e-20260912T053622Z",
+        "snapshot_id": null
+      },
+      "unresolved_reason": "NO_MENTION_RECORDED",
+      "via_mention_ids": []
+    },
+    {
+      "candidate_entity_ids": [],
+      "corroboration": null,
+      "entity_id": null,
+      "link_status": "UNRESOLVED",
+      "passport_ref": {
+        "document_id": "DOC-SASO-DOCUMENTS-c778364b4087-b89ca084a45d",
+        "evidence_id": null,
+        "json_pointer": null,
+        "kind": "DOCUMENT_RECORD_PASSPORT",
+        "passport_id": "saso_documents-c778364b4087-20260912T053622Z",
+        "snapshot_id": null
+      },
+      "unresolved_reason": "NO_MENTION_RECORDED",
+      "via_mention_ids": []
+    },
+    {
+      "candidate_entity_ids": [],
+      "corroboration": null,
+      "entity_id": null,
+      "link_status": "UNRESOLVED",
+      "passport_ref": {
+        "document_id": "DOC-SASO-DOCUMENTS-d5e242b67294-9189ec73295b",
+        "evidence_id": null,
+        "json_pointer": null,
+        "kind": "DOCUMENT_RECORD_PASSPORT",
+        "passport_id": "saso_documents-d5e242b67294-20260912T053622Z",
+        "snapshot_id": null
+      },
+      "unresolved_reason": "NO_MENTION_RECORDED",
+      "via_mention_ids": []
+    },
+    {
+      "candidate_entity_ids": [],
+      "corroboration": null,
+      "entity_id": null,
+      "link_status": "UNRESOLVED",
+      "passport_ref": {
+        "document_id": "DOC-SASO-DOCUMENTS-e57d73b6e5b7-0e0d00cb00cf",
+        "evidence_id": null,
+        "json_pointer": null,
+        "kind": "DOCUMENT_RECORD_PASSPORT",
+        "passport_id": "saso_documents-e57d73b6e5b7-20260912T053622Z",
+        "snapshot_id": null
+      },
+      "unresolved_reason": "NO_MENTION_RECORDED",
+      "via_mention_ids": []
+    },
+    {
+      "candidate_entity_ids": [],
+      "corroboration": null,
+      "entity_id": null,
+      "link_status": "UNRESOLVED",
+      "passport_ref": {
+        "document_id": "DOC-SFDA-REGISTERS-e4dc16615481-5f1b33b9c8fc",
+        "evidence_id": null,
+        "json_pointer": null,
+        "kind": "DOCUMENT_RECORD_PASSPORT",
+        "passport_id": "sfda_registers-e4dc16615481-20260913T035254Z",
+        "snapshot_id": null
+      },
+      "unresolved_reason": "NO_MENTION_RECORDED",
+      "via_mention_ids": []
+    },
+    {
+      "candidate_entity_ids": [],
+      "corroboration": null,
+      "entity_id": null,
+      "link_status": "UNRESOLVED",
+      "passport_ref": {
+        "document_id": "DOC-WCO-HS-NOMENCLATURE-4e3dbeff29ba-7ad8d2b476a9",
+        "evidence_id": null,
+        "json_pointer": null,
+        "kind": "DOCUMENT_RECORD_PASSPORT",
+        "passport_id": "wco_hs_nomenclature-4e3dbeff29ba-20260913T033253Z",
+        "snapshot_id": null
+      },
+      "unresolved_reason": "NO_MENTION_RECORDED",
+      "via_mention_ids": []
+    },
+    {
+      "candidate_entity_ids": [],
+      "corroboration": null,
+      "entity_id": null,
+      "link_status": "UNRESOLVED",
+      "passport_ref": {
+        "document_id": "DOC-WCO-HS-NOMENCLATURE-53d6f01ac062-0926bf9934da",
+        "evidence_id": null,
+        "json_pointer": null,
+        "kind": "DOCUMENT_RECORD_PASSPORT",
+        "passport_id": "wco_hs_nomenclature-53d6f01ac062-20260912T233006Z",
+        "snapshot_id": null
+      },
+      "unresolved_reason": "NO_MENTION_RECORDED",
+      "via_mention_ids": []
+    },
+    {
+      "candidate_entity_ids": [],
+      "corroboration": null,
+      "entity_id": null,
+      "link_status": "UNRESOLVED",
+      "passport_ref": {
+        "document_id": "DOC-WCO-HS-NOMENCLATURE-5530bdf97060-8da42b5156a2",
+        "evidence_id": null,
+        "json_pointer": null,
+        "kind": "DOCUMENT_RECORD_PASSPORT",
+        "passport_id": "wco_hs_nomenclature-5530bdf97060-20260912T233006Z",
+        "snapshot_id": null
+      },
+      "unresolved_reason": "NO_MENTION_RECORDED",
+      "via_mention_ids": []
+    },
+    {
+      "candidate_entity_ids": [],
+      "corroboration": null,
+      "entity_id": null,
+      "link_status": "UNRESOLVED",
+      "passport_ref": {
+        "document_id": "DOC-WCO-HS-NOMENCLATURE-69bd7323c7aa-bd350605a78a",
+        "evidence_id": null,
+        "json_pointer": null,
+        "kind": "DOCUMENT_RECORD_PASSPORT",
+        "passport_id": "wco_hs_nomenclature-69bd7323c7aa-20260912T233006Z",
+        "snapshot_id": null
+      },
+      "unresolved_reason": "NO_MENTION_RECORDED",
+      "via_mention_ids": []
+    },
+    {
+      "candidate_entity_ids": [],
+      "corroboration": null,
+      "entity_id": null,
+      "link_status": "UNRESOLVED",
+      "passport_ref": {
+        "document_id": "DOC-WCO-HS-NOMENCLATURE-fd99902db1af-d01a792902be",
+        "evidence_id": null,
+        "json_pointer": null,
+        "kind": "DOCUMENT_RECORD_PASSPORT",
+        "passport_id": "wco_hs_nomenclature-fd99902db1af-20260913T033253Z",
+        "snapshot_id": null
+      },
+      "unresolved_reason": "NO_MENTION_RECORDED",
+      "via_mention_ids": []
+    },
+    {
+      "candidate_entity_ids": [],
+      "corroboration": null,
+      "entity_id": null,
+      "link_status": "UNRESOLVED",
+      "passport_ref": {
+        "document_id": "DOC-WCO-HS-NOMENCLATURE-fe3ed4f5325a-88edcc1ee93d",
+        "evidence_id": null,
+        "json_pointer": null,
+        "kind": "DOCUMENT_RECORD_PASSPORT",
+        "passport_id": "wco_hs_nomenclature-fe3ed4f5325a-20260913T033253Z",
+        "snapshot_id": null
+      },
+      "unresolved_reason": "NO_MENTION_RECORDED",
+      "via_mention_ids": []
+    }
+  ],
+  "quality_summary": "PASS",
+  "schema_version": "1.0.0",
+  "source_boundary": "public",
+  "synthetic_flag": false,
+  "transformation_record": {
+    "config_version": "1.0.0",
+    "exclusions": [],
+    "formula": "resolve_entities",
+    "parameters": {
+      "id_scheme": "ENTITY_ID_V1",
+      "mention_list_id": "mentions-v3",
+      "normalisation_method_id": "NAME_NORMALISATION_V1",
+      "normalisation_version": "1.0.0",
+      "rule_table_version": "1.0.0"
+    },
+    "pipeline_version": "1.0.0"
+  }
+}

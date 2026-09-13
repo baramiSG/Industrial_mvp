@@ -729,9 +729,9 @@ def test_reconstruct_script_prints_case_reconstruction_pass_line(
         check_manifest=False,
         manifest_rows={},
     )
-    assert (committed, briefs) == (5, 5)
+    assert (committed, briefs) == (5, 9)
     assert (
-        "CASE RECONSTRUCTION PASS (5 snapshots, 5 briefs)"
+        "CASE RECONSTRUCTION PASS (5 snapshots, 9 briefs)"
         in capsys.readouterr().out
     )
 
@@ -740,7 +740,7 @@ def test_config_history_files_are_superseded_versions_only() -> None:
     history_root = PROJECT_ROOT / "config" / "history"
     paths = sorted(history_root.glob("*.yaml"))
     assert paths
-    recorded_hashes = {
+    screening_hashes = {
         identity["sha256"]
         for summary_path in (
             PROJECT_ROOT / "data" / "screening" / "snapshots"
@@ -749,6 +749,15 @@ def test_config_history_files_are_superseded_versions_only() -> None:
             summary_path.read_text(encoding="utf-8")
         )["inputs"].values()
         for identity in group
+    }
+    selection_family_hashes = {
+        record["inputs"]["product_families"]["sha256"]
+        for selection_path in (
+            PROJECT_ROOT / "data" / "cases" / "selection"
+        ).glob("CASE-SELECTION-*.json")
+        for record in [
+            json.loads(selection_path.read_text(encoding="utf-8"))
+        ]
     }
     for path in paths:
         match = re.fullmatch(r"(.+)-([0-9]+\.[0-9]+\.[0-9]+)\.yaml", path.name)
@@ -759,6 +768,9 @@ def test_config_history_files_are_superseded_versions_only() -> None:
         live = yaml.safe_load(live_path.read_text(encoding="utf-8"))
         assert retained["metadata"]["version"] == match.group(2)
         assert retained["metadata"]["version"] != live["metadata"]["version"]
+        recorded_hashes = set(screening_hashes)
+        if match.group(1) == "product_families.v1":
+            recorded_hashes.update(selection_family_hashes)
         assert hashlib.sha256(path.read_bytes()).hexdigest() in recorded_hashes
 
 

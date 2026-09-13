@@ -55,9 +55,32 @@ class ReconstructionResult:
 
 
 def snapshot_id(kind: str, *, source_id: str, nomenclature: str,
-                as_of_date: date, kinds: KindRegistry | None = None) -> str:
+                as_of_date: date, kinds: KindRegistry | None = None,
+                scope_units: Sequence[Sequence[str]] | None = None) -> str:
     return (kinds or default_kind_registry()).snapshot_id(
-        kind, source_id=source_id, nomenclature=nomenclature, as_of_date=as_of_date)
+        kind,
+        source_id=source_id,
+        nomenclature=nomenclature,
+        as_of_date=as_of_date,
+        scope_units=scope_units,
+    )
+
+
+def _scope_units(record: dict[str, Any]) -> list[list[str]]:
+    units: list[list[str]] = []
+    for coverage_unit in record.get("coverage", {}).get("units", []):
+        unit_key = coverage_unit.get("unit_key")
+        if (
+            not isinstance(unit_key, list)
+            or not unit_key
+            or any(not isinstance(value, str) or not value for value in unit_key)
+        ):
+            raise ValueError("scope unit_key must be a non-empty string array")
+        units.append(list(unit_key))
+    units.sort(key=canonical_dumps)
+    if not units or len({canonical_dumps(unit) for unit in units}) != len(units):
+        raise ValueError("scope_units must be non-empty and unique")
+    return units
 
 
 def _forbidden_keys_check(record: dict[str, Any]) -> None:
@@ -78,29 +101,60 @@ def _reject_test_double(record: dict[str, Any], *, allow_test_double: bool) -> N
 
 
 def validate_snapshot(record: dict[str, Any], *, kinds: KindRegistry | None = None,
-                      allow_test_double: bool = False) -> None:
+                      allow_test_double: bool = False,
+                      data_root: Path = PROJECT_ROOT / "data") -> None:
     kinds = kinds or default_kind_registry()
     spec = kinds.get(record["kind"])
-    _validate_common(record, kind=spec.kind, kinds=kinds, allow_test_double=allow_test_double)
+    _validate_common(
+        record,
+        kind=spec.kind,
+        kinds=kinds,
+        allow_test_double=allow_test_double,
+        data_root=data_root,
+    )
     spec.validator_extra(record)
 
 
-def _validate_named(record: dict[str, Any], kind: str, allow_test_double: bool) -> None:
+def _validate_named(
+    record: dict[str, Any],
+    kind: str,
+    allow_test_double: bool,
+    data_root: Path,
+) -> None:
     if record.get("kind") != kind:
         raise ValueError(f"kind mismatch: {kind}")
-    validate_snapshot(record, allow_test_double=allow_test_double)
+    validate_snapshot(
+        record,
+        allow_test_double=allow_test_double,
+        data_root=data_root,
+    )
 
 
-def validate_universe_snapshot(record: dict[str, Any], *, allow_test_double: bool = False) -> None:
-    _validate_named(record, "universe", allow_test_double)
+def validate_universe_snapshot(
+    record: dict[str, Any],
+    *,
+    allow_test_double: bool = False,
+    data_root: Path = PROJECT_ROOT / "data",
+) -> None:
+    _validate_named(record, "universe", allow_test_double, data_root)
 
 
-def validate_tariff_snapshot(record: dict[str, Any], *, allow_test_double: bool = False) -> None:
-    _validate_named(record, "tariff", allow_test_double)
+def validate_tariff_snapshot(
+    record: dict[str, Any],
+    *,
+    allow_test_double: bool = False,
+    data_root: Path = PROJECT_ROOT / "data",
+) -> None:
+    _validate_named(record, "tariff", allow_test_double, data_root)
 
 
-def validate_partner_snapshot(record: dict[str, Any], *, allow_test_double: bool = False) -> None:
-    _validate_named(record, "partners", allow_test_double)
+def validate_partner_snapshot(
+    record: dict[str, Any],
+    *,
+    allow_test_double: bool = False,
+    data_root: Path = PROJECT_ROOT / "data",
+) -> None:
+    _validate_named(record, "partners", allow_test_double, data_root)
 
 
 def _validate_common(
@@ -109,6 +163,7 @@ def _validate_common(
     kind: str,
     kinds: KindRegistry,
     allow_test_double: bool,
+    data_root: Path,
 ) -> None:
     _forbidden_keys_check(record)
     _reject_test_double(record, allow_test_double=allow_test_double)
@@ -137,13 +192,57 @@ def _validate_common(
         raise ValueError("invalid selection_rule")
     if record["coverage"]["source_id"] != record["source_id"]:
         raise ValueError("coverage source_id mismatch")
-    expected_id = snapshot_id(
+    scope_units = record.get("scope_units")
+    coexists_with = record.get("coexists_with")
+    if (scope_units is None) != (coexists_with is None):
+        raise ValueError("scope_units and coexists_with must appear together")
+    base_id = snapshot_id(
         kind,
         source_id=record["source_id"],
         nomenclature=record["nomenclature"],
         as_of_date=date.fromisoformat(record["as_of_date"]),
         kinds=kinds,
     )
+    if scope_units is not None:
+        if scope_units != _scope_units(record):
+            raise ValueError("scope_units must equal sorted coverage unit keys")
+        if coexists_with != base_id:
+            raise ValueError("coexists_with must equal the unscoped snapshot id")
+        if "supersedes" in record:
+            raise ValueError("scoped analytical snapshots must not supersede")
+        sibling_path = (
+            _snapshot_directory(data_root, kinds.get(kind).root)
+            / f"{coexists_with}.json"
+        )
+        if not sibling_path.is_file():
+            raise ValueError("coexists_with sibling does not exist")
+        try:
+            sibling = json.loads(sibling_path.read_text(encoding="utf-8"))
+        except (OSError, UnicodeError, json.JSONDecodeError) as exc:
+            raise ValueError("coexists_with sibling is unreadable") from exc
+        for field in ("kind", "source_id", "nomenclature", "as_of_date"):
+            if sibling.get(field) != record[field]:
+                raise ValueError(f"coexists_with sibling {field} mismatch")
+        if sibling.get("snapshot_id") != coexists_with:
+            raise ValueError("coexists_with sibling identity mismatch")
+        if "scope_units" in sibling or "coexists_with" in sibling:
+            raise ValueError("coexists_with sibling must be unscoped")
+        sibling_units = {
+            canonical_dumps(unit)
+            for unit in _scope_units(sibling)
+        }
+        if sibling_units & {canonical_dumps(unit) for unit in scope_units}:
+            raise ValueError("scoped and sibling unit keys overlap")
+        expected_id = snapshot_id(
+            kind,
+            source_id=record["source_id"],
+            nomenclature=record["nomenclature"],
+            as_of_date=date.fromisoformat(record["as_of_date"]),
+            kinds=kinds,
+            scope_units=scope_units,
+        )
+    else:
+        expected_id = base_id
     if record["snapshot_id"] != expected_id:
         raise ValueError("snapshot_id mismatch")
     stage = kinds.stage_for(kind)
@@ -199,15 +298,62 @@ def write_snapshot(
         except ValueError:
             pass
 
-    validate_snapshot(record, kinds=kinds, allow_test_double=allow_test_double)
+    validate_snapshot(
+        record,
+        kinds=kinds,
+        allow_test_double=allow_test_double,
+        data_root=root,
+    )
 
     out_dir = _snapshot_directory(root, spec.root)
     out_dir.mkdir(parents=True, exist_ok=True)
     path = out_dir / f"{record['snapshot_id']}.json"
     content = canonical_dumps(record)
     if path.exists():
-        if path.read_text(encoding="utf-8") != content:
+        if path.read_text(encoding="utf-8") == content:
+            return path
+        if "scope_units" in record or "coexists_with" in record:
             raise SnapshotWriteConflict(f"Snapshot write conflict: {path}")
+        existing = json.loads(path.read_text(encoding="utf-8"))
+        validate_snapshot(
+            existing,
+            kinds=kinds,
+            allow_test_double=allow_test_double,
+            data_root=root,
+        )
+        existing_units = {
+            canonical_dumps(unit) for unit in _scope_units(existing)
+        }
+        candidate_units = {
+            canonical_dumps(unit) for unit in _scope_units(record)
+        }
+        if existing_units & candidate_units:
+            raise ValueError("scoped and sibling unit keys overlap")
+        scoped = {
+            **record,
+            "snapshot_id": snapshot_id(
+                kind,
+                source_id=record["source_id"],
+                nomenclature=record["nomenclature"],
+                as_of_date=date.fromisoformat(record["as_of_date"]),
+                kinds=kinds,
+                scope_units=_scope_units(record),
+            ),
+            "scope_units": _scope_units(record),
+            "coexists_with": existing["snapshot_id"],
+        }
+        validate_snapshot(
+            scoped,
+            kinds=kinds,
+            allow_test_double=allow_test_double,
+            data_root=root,
+        )
+        path = out_dir / f"{scoped['snapshot_id']}.json"
+        content = canonical_dumps(scoped)
+        if path.exists() and path.read_text(encoding="utf-8") != content:
+            raise SnapshotWriteConflict(f"Snapshot write conflict: {path}")
+        if not path.exists():
+            path.write_text(content, encoding="utf-8")
     else:
         path.write_text(content, encoding="utf-8")
     return path
@@ -519,6 +665,19 @@ def reconstruct_pinned(
         kinds=kinds,
         selected_override=selected,
     )
+    if "scope_units" in record:
+        rebuilt = {
+            **rebuilt,
+            "snapshot_id": record["snapshot_id"],
+            "scope_units": record["scope_units"],
+            "coexists_with": record["coexists_with"],
+        }
+        validate_snapshot(
+            rebuilt,
+            kinds=kinds,
+            allow_test_double=True,
+            data_root=snapshot_path.parents[2],
+        )
     actual_sha = snapshot_sha256(rebuilt)
     return ReconstructionResult(
         match=actual_sha == expected_sha,
@@ -571,6 +730,19 @@ def reconstruct(
                 },
             )
         raise
+    if "scope_units" in record:
+        rebuilt = {
+            **rebuilt,
+            "snapshot_id": record["snapshot_id"],
+            "scope_units": record["scope_units"],
+            "coexists_with": record["coexists_with"],
+        }
+        validate_snapshot(
+            rebuilt,
+            kinds=kinds,
+            allow_test_double=True,
+            data_root=snapshot_path.parents[2],
+        )
     actual_sha = snapshot_sha256(rebuilt)
     return ReconstructionResult(
         match=actual_sha == expected_sha,

@@ -310,6 +310,14 @@ def _reconstruct_cases(
     return committed, len(brief_paths)
 
 
+def _reconstruct_case_selections(data_root: Path) -> int:
+    from ior_mvp.cases.selection import reconstruct_all_selections
+
+    count = reconstruct_all_selections(root=data_root.parent)
+    print(f"CASE SELECTION RECONSTRUCTION PASS ({count} records)")
+    return count
+
+
 def main() -> None:
     _install_socket_block()
     import argparse
@@ -445,6 +453,7 @@ def main() -> None:
         print(
             f"SCREENING RECONSTRUCTION PASS ({screening_snapshots} snapshots)"
         )
+    _reconstruct_case_selections(data_root)
     sys.exit(0)
 
 

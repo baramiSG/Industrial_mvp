@@ -5,6 +5,9 @@ from __future__ import annotations
 import copy
 
 import pytest
+import yaml
+
+from ior_mvp.config import PROJECT_ROOT
 
 
 def _module():
@@ -18,7 +21,7 @@ def _module():
 def test_screening_config_loads_and_pins_versions():
     module = _module()
     assert module.screening_config()["metadata"]["version"] == "1.0.0"
-    assert module.product_families_config()["metadata"]["version"] == "1.1.0"
+    assert module.product_families_config()["metadata"]["version"] == "1.2.0"
 
 
 def test_five_queue_ids_exact_and_vocabularies_closed():
@@ -106,8 +109,8 @@ def test_family_lookup_by_hs4_prefix_unique_or_unavailable():
     assert module.family_for_hs6("300001", families) is None
 
 
-def test_product_families_version_pinned_to_1_1_0():
-    assert _module().product_families_config()["metadata"]["version"] == "1.1.0"
+def test_product_families_version_pinned_to_1_2_0():
+    assert _module().product_families_config()["metadata"]["version"] == "1.2.0"
 
 
 def test_fabricated_aluminium_core_headings_available_with_pr1_basis():
@@ -161,11 +164,62 @@ def test_polypropylene_primary_forms_unchanged_3902_only():
     }
 
 
-def test_pharma_and_fertilizers_remain_membership_unavailable():
-    families = _module().product_families_config()["families"]
-    for family_id in ("pharma_api", "fertilizers"):
-        assert families[family_id]["hs4_headings"] == []
-        assert families[family_id]["status"] == "MEMBERSHIP_UNAVAILABLE"
+def test_pharma_api_core_headings_available_with_confirmed_basis():
+    family = _module().product_families_config()["families"]["pharma_api"]
+    assert family["hs4_headings"] == [
+        "2933",
+        "2934",
+        "2935",
+        "2936",
+        "2937",
+        "2939",
+        "2941",
+    ]
+    assert family["status"] == "AVAILABLE"
+    assert "Owner confirmation 2026-09-13" in family["basis"]
+    assert "3002/3003/3004" in family["basis"]
+    assert "excluded by owner scope" in family["basis"]
+    assert "TITLE_VERIFICATION:" in family["basis"]
+
+
+def test_fertilizers_core_headings_available_with_confirmed_basis():
+    family = _module().product_families_config()["families"]["fertilizers"]
+    assert family["hs4_headings"] == ["3102", "3103", "3104", "3105"]
+    assert family["status"] == "AVAILABLE"
+    assert "Owner confirmation 2026-09-13" in family["basis"]
+    assert "3101" in family["basis"]
+    assert "excluded by owner scope" in family["basis"]
+    for feedstock in ("2814", "2809", "2510", "2503"):
+        assert feedstock in family["basis"]
+    assert "TITLE_VERIFICATION:" in family["basis"]
+
+
+def test_other_families_byte_unchanged_from_1_1_0():
+    retained = yaml.safe_load(
+        (
+            PROJECT_ROOT
+            / "config"
+            / "history"
+            / "product_families.v1-1.1.0.yaml"
+        ).read_text(encoding="utf-8")
+    )
+    live = _module().product_families_config()
+    for family_id in (
+        "coated_steel",
+        "polypropylene_primary_forms",
+        "technical_plastics_conversion",
+        "fabricated_aluminium",
+    ):
+        assert live["families"][family_id] == retained["families"][family_id]
+
+
+def test_family_for_hs6_294110_is_pharma_api_310430_is_fertilizers_300410_and_310100_are_none():
+    module = _module()
+    families = module.product_families_config()
+    assert module.family_for_hs6("294110", families)["family_id"] == "pharma_api"
+    assert module.family_for_hs6("310430", families)["family_id"] == "fertilizers"
+    assert module.family_for_hs6("300410", families) is None
+    assert module.family_for_hs6("310100", families) is None
 
 
 def test_family_for_hs6_760429_is_fabricated_aluminium_and_761510_is_none():

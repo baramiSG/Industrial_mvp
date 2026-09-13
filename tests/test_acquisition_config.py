@@ -50,6 +50,18 @@ DOCUMENT = {
         "World Customs Organization — Harmonized System Nomenclature 2022 edition (public chapter legal texts)",
         "B",
     ),
+    "producer_spimaco": (
+        "SPIMACO — Saudi Pharmaceutical Industries and Medical Appliances Corporation public IR disclosures",
+        "C",
+    ),
+    "producer_sabic_agrinutrients": (
+        "SABIC Agri-Nutrients Company public disclosures",
+        "C",
+    ),
+    "sfda_registers": (
+        "Saudi Food and Drug Authority — public drug registers",
+        "B",
+    ),
 }
 S11 = {"wits_trade", "un_comtrade", "baci_cepii", "zatca_tariff"}
 UNCHANGED_S11 = {"wits_trade", "baci_cepii", "zatca_tariff"}
@@ -69,7 +81,7 @@ def _superseded_config() -> dict:
 @pytest.fixture
 def phased_config() -> dict:
     cfg = _superseded_config()
-    cfg["metadata"]["version"] = "1.4.0"
+    cfg["metadata"]["version"] = "1.5.0"
     for sid, (stage, authority, _) in INSTITUTIONAL.items():
         cfg["sources"][sid] = pre_observation_source_config(sid, stage=stage, authority=authority)
     for sid, (authority, evidence_class) in DOCUMENT.items():
@@ -104,8 +116,8 @@ def valid_config() -> dict:
     return yaml.safe_load(path.read_text(encoding="utf-8"))
 
 
-def test_loads_yaml_version_and_twenty_one_sources(valid_config: dict) -> None:
-    assert valid_config["metadata"]["version"] == "1.4.0"
+def test_loads_yaml_version_and_twenty_four_sources(valid_config: dict) -> None:
+    assert valid_config["metadata"]["version"] == "1.5.0"
     assert set(valid_config["sources"]) == S11 | set(INSTITUTIONAL) | set(DOCUMENT)
 
 
@@ -198,7 +210,7 @@ def test_config_loader_lives_in_acquisition_package_and_caches() -> None:
     )
     acquisition_sources_config.cache_clear()
     cfg = acquisition_sources_config()
-    assert cfg["metadata"]["version"] == "1.4.0"
+    assert cfg["metadata"]["version"] == "1.5.0"
     assert acquisition_sources_config() is cfg
 
 
@@ -346,7 +358,7 @@ def test_forbidden_keys_still_rejected(phased_config: dict, key: str, location: 
 def test_version_and_id_set_exact(phased_config: dict, change: str) -> None:
     validate_acquisition_sources(phased_config)
     if change == "version":
-        phased_config["metadata"]["version"] = "1.1.0"
+        phased_config["metadata"]["version"] = "1.4.0"
     elif change == "fifteen":
         del phased_config["sources"]["gastat"]
     else:
@@ -422,8 +434,8 @@ def test_s11_and_s12a_mappings_unchanged_and_strict(valid_config: dict) -> None:
     assert valid_config["raw_store"] == head["raw_store"]
 
 
-def test_metadata_version_pinned_to_1_4_0(valid_config: dict) -> None:
-    assert valid_config["metadata"]["version"] == "1.4.0"
+def test_metadata_version_pinned_to_1_5_0(valid_config: dict) -> None:
+    assert valid_config["metadata"]["version"] == "1.5.0"
     validate_acquisition_sources(valid_config)
 
 
@@ -601,6 +613,95 @@ def test_default_registry_contains_all_s14_document_sources() -> None:
         "wco_hs_nomenclature",
     ):
         assert source_id in registry.ids()
+
+
+def test_default_registry_contains_all_s15_document_sources_and_wco_v2_list() -> None:
+    from ior_mvp.acquisition.connectors.base import default_registry
+
+    registry = default_registry()
+    for source_id in (
+        "producer_spimaco",
+        "producer_sabic_agrinutrients",
+        "sfda_registers",
+        "wco_hs_nomenclature",
+    ):
+        assert source_id in registry.ids()
+
+    document_list = json.loads(
+        (
+            PROJECT_ROOT
+            / "data"
+            / "documents"
+            / "wco_hs_nomenclature"
+            / "lists"
+            / "wco_hs_nomenclature-v2.json"
+        ).read_text(encoding="utf-8")
+    )
+    assert document_list["list_id"] == "wco_hs_nomenclature-v2"
+    assert document_list["source_id"] == "wco_hs_nomenclature"
+
+
+def test_s15_document_sources_present_with_exact_keys_and_classes(
+    valid_config: dict,
+) -> None:
+    expected = {
+        "producer_spimaco": "C",
+        "producer_sabic_agrinutrients": "C",
+        "sfda_registers": "B",
+    }
+    assert expected.keys() <= valid_config["sources"].keys()
+    assert expected.keys() <= source_config.DOCUMENT_SOURCE_STAGES.keys()
+    for source_id, evidence_class in expected.items():
+        source = valid_config["sources"][source_id]
+        assert set(source) == source_config.SOURCE_KEYS
+        assert source["endpoint_templates"]["DOCUMENT"] == "{document_url}"
+        assert source["default_evidence_class"] == evidence_class
+        assert source["credential_env_var"] == UNAVAILABLE
+
+
+def test_s15_observed_fact_fields_are_url_or_unavailable(
+    valid_config: dict,
+) -> None:
+    for source_id in (
+        "producer_spimaco",
+        "producer_sabic_agrinutrients",
+        "sfda_registers",
+    ):
+        values = source_config.observed_fact_values(
+            source_id,
+            valid_config["sources"][source_id],
+        )
+        for value in values.values():
+            if value == UNAVAILABLE:
+                continue
+            if isinstance(value, list):
+                assert value and all(isinstance(item, str) and item for item in value)
+            elif isinstance(value, dict):
+                assert all(
+                    isinstance(key, str) and isinstance(item, str)
+                    for key, item in value.items()
+                )
+            else:
+                assert isinstance(value, str) and (
+                    value.startswith(("http://", "https://"))
+                    or value in {"public_open", "NONE"}
+                )
+
+
+def test_no_history_copy_required_for_1_4_0_is_documented() -> None:
+    assert not (
+        PROJECT_ROOT
+        / "config"
+        / "history"
+        / "acquisition_sources.v1-1.4.0.yaml"
+    ).exists()
+    text = (PROJECT_ROOT / "docs" / "ARCHITECTURE_DECISIONS.md").read_text(
+        encoding="utf-8"
+    )
+    assert "ADR-023" in text
+    assert "screening + case-selection inputs" in text
+    assert "acquisition_sources 1.4.0" in text
+    assert "no history copy" in text
 
 
 @pytest.mark.parametrize("sid", INSTITUTIONAL)

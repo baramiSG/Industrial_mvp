@@ -24,13 +24,15 @@ EXPECTED_SOURCE_IDS = frozenset(
      "tadawul_disclosures", "etimad_tenders", "saso_documents", "producer_unicoil",
      "producer_sabic", "producer_advanced_petrochemical", "producer_tasnee",
      "producer_hadeed", "producer_alupco", "producer_altaiseer_talco",
-     "producer_maaden", "wco_hs_nomenclature"}
+     "producer_maaden", "producer_spimaco", "producer_sabic_agrinutrients",
+     "sfda_registers", "wco_hs_nomenclature"}
 )
 DOCUMENT_SOURCE_IDS = frozenset(
     {"tadawul_disclosures", "etimad_tenders", "saso_documents", "producer_unicoil",
      "producer_sabic", "producer_advanced_petrochemical", "producer_tasnee",
      "producer_hadeed", "producer_alupco", "producer_altaiseer_talco",
-     "producer_maaden", "wco_hs_nomenclature"}
+     "producer_maaden", "producer_spimaco", "producer_sabic_agrinutrients",
+     "sfda_registers", "wco_hs_nomenclature"}
 )
 
 

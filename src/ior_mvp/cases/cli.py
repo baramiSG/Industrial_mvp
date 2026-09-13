@@ -11,7 +11,12 @@ from ior_mvp.config import PROJECT_ROOT
 
 from .brief import load_case_brief
 from .build import build_brief_to_directory, reconstruct_briefs
-from .selection import select_cases, write_selection
+from .selection import (
+    RULE_VERSIONS,
+    reconstruct_all_selections,
+    select_cases,
+    write_selection,
+)
 
 
 def _quotas(values: Sequence[str]) -> dict[str, int]:
@@ -37,6 +42,12 @@ def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="python -m ior_mvp.cases")
     commands = parser.add_subparsers(dest="command", required=True)
     select = commands.add_parser("select")
+    select.add_argument(
+        "--rule-version",
+        choices=RULE_VERSIONS,
+        default="S14-CS-1.1",
+    )
+    select.add_argument("--record-prefix")
     select.add_argument("--screening", type=Path, required=True)
     select.add_argument("--universe", type=Path, required=True)
     select.add_argument(
@@ -52,6 +63,7 @@ def _parser() -> argparse.ArgumentParser:
         default=PROJECT_ROOT / "data" / "documents",
     )
     select.add_argument("--quota", action="append", required=True)
+    select.add_argument("--owner-designations", type=Path)
     select.add_argument("--out", type=Path, required=True)
     select.add_argument("--no-viability", action="store_true")
     select.add_argument("--no-disclosure-key", action="store_true")
@@ -61,6 +73,7 @@ def _parser() -> argparse.ArgumentParser:
     build.add_argument("--brief", type=Path, required=True)
     build.add_argument("--out", type=Path, required=True)
     commands.add_parser("reconstruct")
+    commands.add_parser("reconstruct-selection")
     return parser
 
 
@@ -82,7 +95,9 @@ def _print_selection(record: dict, path: Path) -> None:
             f"(runner-up {runner_up}; {len(substitutes)} substitutes; "
             f"{len(result['excluded_by_viability'])} viability exclusions; "
             f"{len(result['excluded_by_identity'])} identity exclusions; "
-            f"{len(result['excluded_frozen'])} frozen exclusions)"
+            f"{len(result['excluded_frozen'])} frozen exclusions; "
+            f"{len(result.get('excluded_series_gap_years', []))} "
+            "series-gap exclusions)"
         )
     for name, identity in record["inputs"].items():
         if not isinstance(identity, dict):
@@ -112,6 +127,10 @@ def main(argv: Sequence[str] | None = None) -> int:
             f"{briefs} briefs)"
         )
         return 0
+    if args.command == "reconstruct-selection":
+        count = reconstruct_all_selections()
+        print(f"CASE SELECTION RECONSTRUCTION PASS ({count} records)")
+        return 0
     if args.command != "select":
         return 2
     quotas = _quotas(args.quota)
@@ -131,7 +150,13 @@ def main(argv: Sequence[str] | None = None) -> int:
         frozen_hs6=frozenset({"390210", "721049"}),
         use_viability=not args.no_viability,
         use_disclosure_key=not args.no_disclosure_key,
+        rule_version=args.rule_version,
+        owner_designations_path=args.owner_designations,
     )
-    path = write_selection(record, args.out)
+    path = write_selection(
+        record,
+        args.out,
+        record_prefix=args.record_prefix,
+    )
     _print_selection(record, path)
     return 0

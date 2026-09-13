@@ -1,0 +1,67 @@
+{
+  "access_classification": "public_open",
+  "authority": "Saudi Food and Drug Authority — public drug registers",
+  "byte_count": 67381,
+  "compressed_sha256": "7624ad55d5af2cf9d12888222b3f711ab76318d03f23cce75431b9aa2851d180",
+  "content_type": "text/html",
+  "credential_env_var": null,
+  "credential_used": false,
+  "endpoint_or_document": "https://www.sfda.gov.sa/en/drug-companies",
+  "flow": "UNAVAILABLE",
+  "http_status": 200,
+  "license_or_usage_note": "Terms captured from https://www.sfda.gov.sa/en/terms-of-use",
+  "nomenclature": "UNAVAILABLE",
+  "normalization_reason": null,
+  "normalization_status": "NORMALIZED",
+  "page_index": 1,
+  "page_meta": {
+    "enumerated_children": null,
+    "next_page_token_present": false,
+    "page_index": 1,
+    "pages_expected": 1,
+    "rows_in_page": "UNAVAILABLE"
+  },
+  "partner": "UNAVAILABLE",
+  "period": "UNAVAILABLE",
+  "product_code": "UNAVAILABLE",
+  "product_scope": "NOT_APPLICABLE",
+  "query_contract": {
+    "flow": "UNAVAILABLE",
+    "nomenclature": "UNAVAILABLE",
+    "parameters": [
+      {
+        "key": "document_url",
+        "value": "https://www.sfda.gov.sa/en/drug-companies"
+      }
+    ],
+    "partner": "UNAVAILABLE",
+    "periods": [],
+    "product_codes": [],
+    "product_scope": "NOT_APPLICABLE",
+    "reporter": "SAU",
+    "source_id": "sfda_registers",
+    "stage": "DOCUMENT"
+  },
+  "query_hash": "e4dc166154818550daa40849d1cbf5d7219e9606bf2d902f5c47f49f60f85a25",
+  "raw_file_path": "data/raw/sfda_registers/e4dc166154818550daa40849d1cbf5d7219e9606bf2d902f5c47f49f60f85a25/20260913T035254Z/page-0001.payload.html.gz",
+  "reporter": "SAU",
+  "response_headers_subset": [
+    {
+      "name": "content-length",
+      "value": "67381"
+    },
+    {
+      "name": "content-type",
+      "value": "text/html; charset=utf-8"
+    },
+    {
+      "name": "date",
+      "value": "Sun, 13 Sep 2026 03:52:40 GMT"
+    }
+  ],
+  "retrieved_at": "2026-09-13T03:53:02Z",
+  "run_id": "20260913T035254Z",
+  "sha256": "5f1b33b9c8fc2dae2508e1d50d1a1e848387b7e6d82a1e42884c45b12c495255",
+  "source_id": "sfda_registers",
+  "source_refresh_date": "2026-09-13"
+}

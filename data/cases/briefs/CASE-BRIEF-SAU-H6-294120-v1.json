@@ -1,0 +1,74 @@
+{
+  "application_boundary": "HS 2941.20 identifies streptomycins and their derivatives, and salts thereof; the target molecule, synthesis route, grade, impurity profile, dosage application and qualification remain unresolved.",
+  "authority_note": "Public branch only. Product identity is retained at generic HS6 scope under S14-CS-1.1 and CASE-SELECTION-S15-b96de36ff0ce; runner-ups, SERIES_GAP_YEARS rows, residual identity exclusions and viability exclusions remain outside this brief. No API-synthesis producer for this HS6 was identified within the stored SPIMACO disclosure and SFDA register observation acquired on 2026-09-13.",
+  "brief_id": "CASE-BRIEF-SAU-H6-294120-v1",
+  "capability": {
+    "coarse_adjacency_signals": [],
+    "producer_evidence": [],
+    "profile_hard_gates": {
+      "analytical_validation": {"span_ids": [], "status": "UNAVAILABLE"},
+      "containment": {"span_ids": [], "status": "UNAVAILABLE"},
+      "effluent": {"span_ids": [], "status": "UNAVAILABLE"},
+      "gmp": {"span_ids": [], "status": "UNAVAILABLE"},
+      "impurity_control": {"span_ids": [], "status": "UNAVAILABLE"},
+      "ip_fto": {"span_ids": [], "status": "UNAVAILABLE"},
+      "named_molecule_and_synthesis_route": {"span_ids": [], "status": "UNAVAILABLE"}
+    },
+    "public_dimension_states": {
+      "capacity_time_window": {"span_ids": [], "state": "U"},
+      "certification_customer_qualification": {"span_ids": [], "state": "U"},
+      "core_process_route": {"span_ids": [], "state": "U"},
+      "equipment_envelope": {"span_ids": [], "state": "U"},
+      "feedstock_chemistry": {"span_ids": [], "state": "U"},
+      "finishing_spec_control": {"span_ids": [], "state": "U"},
+      "qa_lab_metrology": {"span_ids": [], "state": "U"},
+      "skills_market_integration": {"span_ids": [], "state": "U"},
+      "utilities_ehs_permitting": {"span_ids": [], "state": "U"}
+    },
+    "same_process_family": {"span_ids": [], "value": "UNAVAILABLE"},
+    "unresolved_hard_gates": ["named_molecule_and_synthesis_route", "gmp", "containment", "impurity_control", "analytical_validation", "effluent", "ip_fto"],
+    "verified_present": {"span_ids": [], "value": "UNAVAILABLE"}
+  },
+  "commercial_name_ar": "الستربتوميسينات ومشتقاتها؛ وأملاحها",
+  "commercial_name_en": "Streptomycins and their derivatives; salts thereof",
+  "decision_object_status": "generic_hs6_only",
+  "document_evidence": [
+    {"document_id": "DOC-WCO-HS-NOMENCLATURE-fd99902db1af-d01a792902be", "evidence_id": "P-WCO-294120", "period": "2022", "supports": ["TARGET_PRODUCT_IDENTITY"]}
+  ],
+  "hs6": "294120",
+  "hs_revision": "H6",
+  "name_basis": "WCO_HS_2022_LEGAL_TEXT",
+  "name_basis_ar": "ANALYST_TRANSLATION",
+  "opportunity_id": "SAU-H6-294120",
+  "partner_detail": {
+    "attempts": [
+      {
+        "contract_path": "data/raw/un_comtrade/1827a470893b856cc7ce7bee55ab13f63c3a958c85ac7fdffc599369ee38f78c/20260913T035527Z/page-0001.contract.json",
+        "contract_sha256": "dcdc6d3e78f32e50ae6e41225a3a5d422f4c1da31a98a229d364b83133fd1e6b",
+        "coverage_status": "COMPLETE",
+        "endpoint_or_document": "https://comtradeapi.un.org/data/v1/get/C/A/HS?reporterCode=682&period=2024&flowCode=M&cmdCode=294120&motCode=0&customsCode=C00&includeDesc=true",
+        "http_status": 200,
+        "normalization_status": "NORMALIZED",
+        "query_hash": "1827a470893b856cc7ce7bee55ab13f63c3a958c85ac7fdffc599369ee38f78c",
+        "run_id": "20260913T035527Z",
+        "source_id": "un_comtrade",
+        "stop_reason": null
+      }
+    ],
+    "basis": "The stored UN Comtrade V3 unit is COMPLETE and normalized; four named non-World 2024 import partner rows are observed in the scoped partner snapshot.",
+    "observed_partner_rows": 4,
+    "partner_snapshot_id": "PARTNERS-SAU-UN-COMTRADE-2026-09-13-edbd1926e196",
+    "reason": null,
+    "source_id": "un_comtrade",
+    "state": "PARTNER_DETAIL_OBSERVED",
+    "unit_key": ["294120", "imports", "2024"]
+  },
+  "partner_snapshot_id": "PARTNERS-SAU-UN-COMTRADE-2026-09-13-edbd1926e196",
+  "schema_version": "1.1.0",
+  "sector_profile": "pharma_api",
+  "spans": [
+    {"document_id": "DOC-WCO-HS-NOMENCLATURE-fd99902db1af-d01a792902be", "line_index": 13, "page_index": 21, "span_id": "SPAN-WCO-294120-S", "span_text": "Streptomycins and their derivatives; salts thereof", "text_order": "logical"}
+  ],
+  "trade_series_rule": "LATEST_REVISION_ONLY",
+  "universe_snapshot_id": "UNIVERSE-SAU-UN-COMTRADE-HS-2026-09-12"
+}

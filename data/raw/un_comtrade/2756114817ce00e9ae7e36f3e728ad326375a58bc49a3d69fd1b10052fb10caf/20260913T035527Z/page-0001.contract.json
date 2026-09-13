@@ -1,0 +1,60 @@
+{
+  "access_classification": "public_registered",
+  "authority": "UN Comtrade",
+  "byte_count": 464768,
+  "compressed_sha256": "eb3cf2d4f63f868fef3ecdb51d7691ed7032fb58af9a2867083e231dc0c21061",
+  "content_type": "text/html",
+  "credential_env_var": "IOR_COMTRADE_SUBSCRIPTION_KEY",
+  "credential_used": true,
+  "endpoint_or_document": "https://uncomtrade.org/docs/policy-on-use-and-re-dissemination/",
+  "flow": "imports",
+  "http_status": 200,
+  "license_or_usage_note": "Terms captured from https://uncomtrade.org/docs/policy-on-use-and-re-dissemination/",
+  "nomenclature": "HS",
+  "normalization_reason": "no_rows_parsed",
+  "normalization_status": "UNPARSED",
+  "page_index": 1,
+  "page_meta": {
+    "enumerated_children": null,
+    "next_page_token_present": false,
+    "page_index": 1,
+    "pages_expected": "UNAVAILABLE",
+    "rows_in_page": "UNAVAILABLE"
+  },
+  "partner": "0",
+  "period": "2024",
+  "product_code": "UNAVAILABLE",
+  "product_scope": "NOT_APPLICABLE",
+  "query_contract": {
+    "flow": "imports",
+    "nomenclature": "HS",
+    "parameters": [],
+    "partner": "0",
+    "periods": [
+      "2024"
+    ],
+    "product_codes": [],
+    "product_scope": "NOT_APPLICABLE",
+    "reporter": "SAU",
+    "source_id": "un_comtrade",
+    "stage": "TERMS"
+  },
+  "query_hash": "2756114817ce00e9ae7e36f3e728ad326375a58bc49a3d69fd1b10052fb10caf",
+  "raw_file_path": "data/raw/un_comtrade/2756114817ce00e9ae7e36f3e728ad326375a58bc49a3d69fd1b10052fb10caf/20260913T035527Z/page-0001.payload.html.gz",
+  "reporter": "SAU",
+  "response_headers_subset": [
+    {
+      "name": "content-type",
+      "value": "text/html; charset=UTF-8"
+    },
+    {
+      "name": "date",
+      "value": "Sun, 13 Sep 2026 03:55:29 GMT"
+    }
+  ],
+  "retrieved_at": "2026-09-13T03:55:32Z",
+  "run_id": "20260913T035527Z",
+  "sha256": "a8afbe14b09fc3909a1ec7b691060636b0c3159ebdd97169e20b666209de3db1",
+  "source_id": "un_comtrade",
+  "source_refresh_date": "2026-09-13"
+}

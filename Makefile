@@ -24,7 +24,8 @@ VISUAL_BASELINE_IMAGE = ior-visual-baselines:playwright-1.62.0-noble
 	acquire-aggregates acquire-directory acquire-registry build-snapshots reconstruct \
 	acquire-documents build-documents build-entities build-screening \
 	validate-screening screening-reconstruct screen-candidates \
-	select-cases validate-briefs build-case cases-reconstruct
+	select-cases select-cases-s15 reconstruct-selection \
+	validate-briefs build-case cases-reconstruct
 
 install:
 	python3 -m pip install -e ".[dev]"
@@ -198,6 +199,19 @@ select-cases:
 	PYTHONPATH=src $(UV_RUN) python -m ior_mvp.cases select \
 		--screening $(SNAPSHOT) --universe $(UNIVERSE) --terms $(TERMS) \
 		--quota $(QUOTA) --out $(OUT)
+
+select-cases-s15:
+	PYTHONPATH=src $(UV_RUN) python -m ior_mvp.cases select \
+		--rule-version S14-CS-1.1 --record-prefix CASE-SELECTION-S15- \
+		--screening data/screening/snapshots/SCREENING-SAU-2026-09-12-9b6b22032fd8 \
+		--universe data/snapshots/universe/UNIVERSE-SAU-UN-COMTRADE-HS-2026-09-12.json \
+		--families config/product_families.v1.yaml \
+		--terms data/cases/selection/hs6-disclosure-terms-v2.json \
+		--identity-exclusions data/cases/selection/identity-exclusions-v2.json \
+		--quota pharma_api=2,fertilizers=2 --out data/cases/selection
+
+reconstruct-selection:
+	PYTHONPATH=src $(UV_RUN) python -m ior_mvp.cases reconstruct-selection
 
 validate-briefs:
 	@for brief in data/cases/briefs/CASE-BRIEF-*.json; do \

@@ -12,6 +12,7 @@ from ior_mvp.acquisition.contracts import (
     RawStoreIntegrityError,
 )
 from ior_mvp.acquisition.documents.lists import (
+    PUBLISHER_KINDS,
     SOURCE_ALLOWED_SUPPORTS,
     load_document_list,
     list_sha256,
@@ -190,3 +191,88 @@ def test_nomenclature_authority_publisher_kind_governed_and_allowed_only_target_
             source_id="producer_unicoil",
             default_evidence_class="C",
         )
+
+
+def test_regulatory_authority_publisher_kind_allowed_only_for_sfda_registers() -> None:
+    assert "regulatory_authority" in PUBLISHER_KINDS
+    payload = document_list_payload("sfda_registers")
+    payload["entries"][0].update(
+        {
+            "publisher_kind": "regulatory_authority",
+            "document_kind": "other_public_document",
+            "expected_content_type": "text/html",
+            "evidence_class_target": "B",
+            "supports": ["HARD_REGULATORY_PROCESS_GATES"],
+        }
+    )
+    validate_document_list(
+        payload,
+        source_id="sfda_registers",
+        default_evidence_class="B",
+    )
+
+    producer = document_list_payload("producer_spimaco")
+    producer["entries"][0]["publisher_kind"] = "regulatory_authority"
+    with pytest.raises(AcquisitionConfigurationError, match="publisher_kind"):
+        validate_document_list(
+            producer,
+            source_id="producer_spimaco",
+            default_evidence_class="C",
+        )
+
+
+def test_s15_lists_validate_and_entries_match_observed_urls() -> None:
+    root = Path(__file__).resolve().parents[1] / "data" / "documents"
+    expected = {
+        "producer_spimaco": {
+            "https://ir.spimaco.com.sa/media/khagysaq/earnings-release_spimaco_q4-2025_en.pdf",
+            "https://ir.spimaco.com.sa/media/ydojpaeq/fs_q4-2025_spimaco_en.pdf",
+        },
+        "producer_sabic_agrinutrients": {
+            "https://safco.com.sa/en/Images/SABIC%20AN%20Board%20Annual%20Report%202024%20EN_tcm1039-46998.pdf",
+        },
+        "sfda_registers": {
+            "https://www.sfda.gov.sa/en/drug-companies",
+        },
+    }
+    for source_id, urls in expected.items():
+        path = root / source_id / "lists" / f"{source_id}-v1.json"
+        loaded = load_document_list(
+            path,
+            source_id=source_id,
+            default_evidence_class=(
+                "B" if source_id == "sfda_registers" else "C"
+            ),
+        )
+        assert {entry.document_url for entry in loaded.entries} == urls
+
+
+def test_wco_v2_entries_are_chapters_29_30_31_with_identity_support_only() -> None:
+    path = (
+        Path(__file__).resolve().parents[1]
+        / "data"
+        / "documents"
+        / "wco_hs_nomenclature"
+        / "lists"
+        / "wco_hs_nomenclature-v2.json"
+    )
+    loaded = load_document_list(
+        path,
+        source_id="wco_hs_nomenclature",
+        default_evidence_class="B",
+    )
+    assert [entry.entry_id for entry in loaded.entries] == [
+        "E-004",
+        "E-005",
+        "E-006",
+    ]
+    assert [entry.title_text for entry in loaded.entries] == [
+        "HS Nomenclature 2022 — Chapter 29",
+        "HS Nomenclature 2022 — Chapter 30",
+        "HS Nomenclature 2022 — Chapter 31",
+    ]
+    for entry in loaded.entries:
+        assert entry.publisher_kind == "nomenclature_authority"
+        assert entry.evidence_class_target == "B"
+        assert entry.supports == ("TARGET_PRODUCT_IDENTITY",)
+        assert entry.document_url.startswith("https://www.wcoomd.org/")

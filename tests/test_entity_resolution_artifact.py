@@ -232,7 +232,7 @@ def test_s14_mentions_v2_spans_verified_and_second_artifact_reconstructs() -> No
             PROJECT_ROOT / "data" / "entities" / "resolution"
         ).glob("ENTITIES-*.json")
     )
-    assert len(paths) == 2
+    assert len(paths) >= 2
     artifact = next(
         record
         for path in paths
@@ -244,3 +244,46 @@ def test_s14_mentions_v2_spans_verified_and_second_artifact_reconstructs() -> No
     validate_entity_artifact(artifact)
     assert artifact["quality_summary"] == "PASS"
     assert sum(artifact["counts"]["links_by_status"].values()) == 6
+
+
+def test_s15_mentions_v3_spans_verified_and_third_artifact_reconstructs() -> None:
+    mention_path = (
+        PROJECT_ROOT
+        / "data"
+        / "entities"
+        / "mentions"
+        / "mentions-v3.json"
+    )
+    mention_list = load_mention_list(mention_path)
+    documents = default_document_loader(PROJECT_ROOT / "data")
+    snapshots = default_snapshot_loader(PROJECT_ROOT / "data")
+    verified = verify_mentions(
+        mention_list,
+        documents=documents,
+        snapshots=snapshots,
+    )
+    assert len(verified) == 2
+    assert {
+        item.mention.address["document_id"] for item in verified
+    } == {
+        "DOC-PRODUCER-SPIMACO-1eb1608ff72b-884197ccc5a7",
+        "DOC-PRODUCER-SABIC-AGRINUTRIENTS-d853eeed63fa-42fdc62825bc",
+    }
+
+    paths = sorted(
+        (
+            PROJECT_ROOT / "data" / "entities" / "resolution"
+        ).glob("ENTITIES-*.json")
+    )
+    assert len(paths) == 3
+    artifact = next(
+        record
+        for path in paths
+        if (
+            record := json.loads(path.read_text(encoding="utf-8"))
+        )["inputs"]["mention_list"]["list_id"]
+        == "mentions-v3"
+    )
+    validate_entity_artifact(artifact)
+    assert artifact["quality_summary"] == "PASS"
+    assert sum(artifact["counts"]["links_by_status"].values()) == 2
