@@ -7,6 +7,7 @@ import pytest
 
 from browser_tests.harness import (
     AR,
+    CASES,
     EN,
     DESKTOP,
     POLYPROPYLENE,
@@ -232,3 +233,16 @@ def test_governed_visual_baselines_match(
         case_id=hs6,
         mode="public",
     )
+
+    for case in CASES[2:]:
+        goto_portfolio(page, "public", locale)
+        select_case(page, case, "public", locale)
+        _anchor(page, "#workspace")
+        visual_session.capture(
+            page,
+            locale=locale.code,
+            viewport=viewport.name,
+            screen=f"journey-g-{case.slug}-public-workspace",
+            case_id=case.id,
+            mode="public",
+        )

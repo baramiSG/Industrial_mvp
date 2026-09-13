@@ -108,6 +108,43 @@ def _latest_trade_row(case: dict[str, Any]) -> dict[str, Any] | None:
     return max(dated, key=lambda row: row["year"]) if dated else None
 
 
+def partner_detail_state(
+    case: dict[str, Any],
+) -> tuple[str, str | None] | None:
+    """Return the typed partner-detail state when PublicSnapshot 2.2 has it."""
+    detail = case.get("partner_detail")
+    if not isinstance(detail, dict):
+        return None
+    state = detail.get("state")
+    if not isinstance(state, str):
+        return None
+    reason = detail.get("reason")
+    return state, reason if isinstance(reason, str) else None
+
+
+def _partner_concentration_fallback_reason(
+    case: dict[str, Any],
+    basis: Literal["value", "quantity"],
+) -> str:
+    detail = partner_detail_state(case)
+    if detail is not None:
+        state, reason = detail
+        if state == "PARTNER_DETAIL_MISSING" and reason is not None:
+            return (
+                f"PARTNER_DETAIL_MISSING:{reason} — no partner rows were "
+                "parsed; missing evidence, not zero trade."
+            )
+        if state == "PARTNER_TRADE_OBSERVED_ZERO":
+            return (
+                "PARTNER_TRADE_OBSERVED_ZERO — normalized response "
+                "contained zero partner rows."
+            )
+    return (
+        f"No partner rows or source-attributed {basis} concentration "
+        "disclosure are available."
+    )
+
+
 def concentration_metrics(
     case: dict[str, Any],
     basis: Literal["value", "quantity"],
@@ -245,10 +282,7 @@ def concentration_metrics(
         basis,
         year=year,
         flow_basis=flow_basis,
-        reason=(
-            f"No partner rows or source-attributed {basis} concentration "
-            "disclosure are available."
-        ),
+        reason=_partner_concentration_fallback_reason(case, basis),
     )
 
 
@@ -544,6 +578,28 @@ def degraded_dispersion_metrics(
         }
     if row_failure is not None:
         return row_failure
+    detail = partner_detail_state(case)
+    if detail is not None:
+        state, reason = detail
+        if state == "PARTNER_DETAIL_MISSING" and reason is not None:
+            return _unavailable_dispersion(
+                basis="none",
+                minimum_coverage=minimum,
+                reason=(
+                    f"PARTNER_DETAIL_MISSING:{reason} — no comparable "
+                    "partner unit values exist; missing evidence, not zero "
+                    "trade."
+                ),
+            )
+        if state == "PARTNER_TRADE_OBSERVED_ZERO":
+            return _unavailable_dispersion(
+                basis="none",
+                minimum_coverage=minimum,
+                reason=(
+                    "PARTNER_TRADE_OBSERVED_ZERO — no partner unit values "
+                    "exist because zero partner rows were observed."
+                ),
+            )
     return _unavailable_dispersion(
         basis="none",
         minimum_coverage=minimum,

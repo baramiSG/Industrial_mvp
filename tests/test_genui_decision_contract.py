@@ -106,3 +106,32 @@ def test_genui_component_registry_remains_unchanged() -> None:
         "data_unlocks",
         "decision_actions",
     }
+
+
+def test_metric_grid_props_carry_partner_detail_and_no_new_component_type(
+) -> None:
+    analysis = analyze("SAU-H0-390210", "public")
+    analysis["partner_detail"] = {
+        "state": "PARTNER_DETAIL_MISSING",
+        "reason": "NOT_ACQUIRED",
+    }
+
+    manifest = build_ui_manifest(analysis)
+    metric_grid = _component(manifest, "metric_grid")
+
+    assert metric_grid["props"]["partner_detail"] == (
+        analysis["partner_detail"]
+    )
+    assert {
+        component["type"] for component in manifest["components"]
+    } == {
+        "integrity_banner",
+        "decision_hero",
+        "metric_grid",
+        "trade_chart",
+        "rule_ledger",
+        "capability_matrix",
+        "evidence_ledger",
+        "data_unlocks",
+        "decision_actions",
+    }

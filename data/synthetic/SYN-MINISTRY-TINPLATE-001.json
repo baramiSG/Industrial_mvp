@@ -1,0 +1,272 @@
+{
+  "decision_narrative": {
+    "ADVANCE": {
+      "conditions": [
+        {
+          "ar": "تأمين تعهد شراء ملتزم من مصنّعي العلب يغطي الحد الأدنى للحجم الاقتصادي قبل الترسية.",
+          "en": "Secure committed can-maker offtake covering at least the minimum efficient scale before award."
+        },
+        {
+          "ar": "الدعم محدود بالحد الأدنى المحسوب، ومرتبط بمعالم إنجاز، وخاضع للاسترداد.",
+          "en": "Support is capped at the calculated minimum, milestone-based and subject to clawback."
+        }
+      ],
+      "headline": {
+        "ar": "تقدّم مُحاكى — دخول جديد موجّه لخط قصدرة إلكتروليتي",
+        "en": "SIMULATED ADVANCE — targeted greenfield electrolytic tinning line"
+      },
+      "kill_conditions": [
+        {
+          "ar": "التزام منتج قائم للمنتجات المسطحة بخط قصدرة قبل الترسية.",
+          "en": "An incumbent flat-rolled producer commits a tinning line before award."
+        },
+        {
+          "ar": "انخفاض الطلب في السيناريو المتشائم إلى أقل من الحد الأدنى للحجم الاقتصادي.",
+          "en": "Downside demand falls below minimum efficient scale."
+        }
+      ],
+      "rationale": {
+        "ar": "تُظهر أدلة المحاكاة بمستوى الوزارة غياب قدرة محلية على إنتاج الصفيح المقصدر، وطلباً مستداماً على المواصفة المستهدفة يفوق الحد الأدنى للحجم الاقتصادي، وخطاً جديداً تجتاز اقتصادياته المدعومة وقيمته الوطنية وضوابط المنافسة بعد إخفاق كل المسارات الأدنى.",
+        "en": "The simulated Ministry-grade evidence shows no domestic tinplate capability, a sustained target-specification demand above minimum efficient scale, and a greenfield line whose supported economics, national value and competition controls pass after every lower route fails."
+      },
+      "route_label": {
+        "ar": "دخول جديد موجّه (المسار 7)",
+        "en": "Targeted greenfield entry (route 7)"
+      }
+    },
+    "INVESTIGATE": {
+      "conditions": [],
+      "headline": {
+        "ar": "تحقّق مُحاكى — ما زالت بوابة واحدة أو أكثر غير محسومة",
+        "en": "SIMULATED INVESTIGATE — one or more gates remain unresolved"
+      },
+      "kill_conditions": [],
+      "rationale": {
+        "ar": "لم يستوف فرع المحاكاة جميع البوابات الصلبة.",
+        "en": "The simulated branch did not satisfy every hard gate."
+      },
+      "route_label": {
+        "ar": "لم تجتز المحاكاة جميع الضوابط",
+        "en": "Simulation controls did not all pass"
+      }
+    }
+  },
+  "display_label": "SIMULATED — NOT MINISTRY EVIDENCE",
+  "evidence_class": "D",
+  "ground_truth": {
+    "basis": "Core 06 §5.3 planted ground truth; Core 07 §7.7 route-7 conjunction: D* above the major-line/JV maximum, downside demand at least minimum efficient scale, passing competition, and every lower route failing by computation (route 0 gap requires action; routes 1–4 and 6 constraint class not applicable; route 5 infeasible — no incumbent tinning line).",
+    "expected_route_code": 7,
+    "expected_simulation_state": "ADVANCE"
+  },
+  "narrative_metadata": {
+    "arabic_text_status": "ANALYST_AUTHORED_DRAFT"
+  },
+  "opportunity_id": "SAU-H6-721012",
+  "scenario_id": "SYN-MINISTRY-TINPLATE-001",
+  "scenario_version": "2.0.0",
+  "seed_basis": "Public 2024 imports of HS 7210.12 (104.575 kt, USD 115.37 M; UN Comtrade H6 series) bound the synthetic target-specification demand; no stored producer span establishes any domestic tinplate line, so plant_line records no existing line (nameplate 0) and the greenfield line is an explicit design basis.",
+  "source": "DEMO_GENERATOR",
+  "synthetic_flag": true,
+  "synthetic_inputs": {
+    "capability_states": {
+      "capacity_time_window": 3,
+      "certification_customer_qualification": 3,
+      "core_process_route": 3,
+      "equipment_envelope": 3,
+      "feedstock_chemistry": 2,
+      "finishing_spec_control": 3,
+      "qa_lab_metrology": 2,
+      "skills_market_integration": 2,
+      "utilities_ehs_permitting": 1
+    },
+    "class_if_confirmed": {
+      "basis": "Ministry customs, licensing and can-maker qualification records if confirmed.",
+      "demand_at_required_specification": "A",
+      "domestic_supply_or_capability": "A",
+      "hard_regulatory_or_process_gate": "B",
+      "product_identity": "A"
+    },
+    "counterfactual": {
+      "q1_incumbent_meets_specification_without_capital": false,
+      "q4_downside_demand_supports_incumbent_and_new_entrant": "UNAVAILABLE",
+      "q5_new_entry_displaces_efficient_domestic_production": false,
+      "q6_technology_jv_superior_to_expansion_or_greenfield": false
+    },
+    "decision_specific_hard_gates": {
+      "coating_route_and_mass": "resolved by the synthetic target specification and greenfield design basis",
+      "mandatory_or_customer_standard": "resolved by the synthetic target specification and greenfield design basis",
+      "substrate_range": "resolved by the synthetic target specification and greenfield design basis",
+      "surface_treatment": "resolved by the synthetic target specification and greenfield design basis",
+      "width_thickness_envelope": "resolved by the synthetic target specification and greenfield design basis"
+    },
+    "demand": {
+      "announced_demand_kt": 20.0,
+      "base_demand_kt": 104.0,
+      "commitment_probability": 0.7,
+      "committed_demand_kt": 48.0,
+      "downside_demand_kt": 80.0,
+      "target_spec_demand_kt": 95.0
+    },
+    "economics": {
+      "cash_flows_without_support": [
+        -620.0,
+        78.0,
+        78.0,
+        78.0,
+        78.0,
+        78.0,
+        78.0,
+        78.0,
+        78.0,
+        78.0,
+        78.0,
+        78.0,
+        78.0
+      ],
+      "currency": "SAR_m",
+      "hurdle_rate": 0.12,
+      "minimum_efficient_scale_kt": 60.0,
+      "national_value": {
+        "displacement": 15.0,
+        "domestic_value_added": 210.0,
+        "exports": 30.0,
+        "fiscal_receipts": 40.0,
+        "government_cost": 60.0,
+        "knowledge_skills": 25.0,
+        "resilience_value": 45.0,
+        "resource_environment": 20.0,
+        "risk_allowance": 35.0
+      },
+      "support_instrument": "conditional capex co-investment with sunset and clawback"
+    },
+    "equivalence": {
+      "basis": "No domestic tinplate production exists in the synthetic Ministry records; no equivalent grade is available.",
+      "domestic_grade_equivalent": false
+    },
+    "evsi": {
+      "delay_cost_m_sar": 6.0,
+      "evidence_cost_m_sar": 4.0,
+      "next_fact": "Confirm committed can-maker offtake and substrate sourcing",
+      "route_change_probability": 0.55,
+      "value_difference_m_sar": 220.0
+    },
+    "hard_exclusion_inputs": {
+      "downside_market_below_mes": {
+        "credible_export_contract": false
+      },
+      "heterogeneous_residual_code": {
+        "commercial_product_separable": true,
+        "product_level_evidence_available": true
+      },
+      "idle_equivalent_domestic_capacity": {
+        "binding_market_failure": true,
+        "qualified_idle_capacity_kt": 0.0
+      },
+      "redundancy_or_crowd_out": {
+        "competition_finding": "ACCEPTABLE"
+      },
+      "transitory_or_measurement_gap": {
+        "dominant_cause": "OTHER"
+      },
+      "unsatisfiable_hard_gate": {
+        "gate_domain": "customer_qualification",
+        "gate_satisfiability": "SATISFIABLE"
+      }
+    },
+    "hard_gates": {
+      "coating_route_and_mass": "resolved by the synthetic target specification and greenfield design basis",
+      "mandatory_or_customer_standard": "resolved by the synthetic target specification and greenfield design basis",
+      "substrate_range": "resolved by the synthetic target specification and greenfield design basis",
+      "surface_treatment": "resolved by the synthetic target specification and greenfield design basis",
+      "width_thickness_envelope": "resolved by the synthetic target specification and greenfield design basis"
+    },
+    "plant_line": {
+      "availability": 0.0,
+      "market_allocation_share": 0.0,
+      "nameplate_kt": 0.0,
+      "qualification_share": 0.0,
+      "yield": 0.0
+    },
+    "route_evidence": [
+      {
+        "basis": "No incumbent electrolytic tinning line exists to debottleneck or expand.",
+        "binding_constraint": "capacity_or_availability",
+        "binding_constraint_fully_removed": true,
+        "distortion_unacceptable": false,
+        "intervention_proportionate_to_constraint": true,
+        "investment_already_approved_or_financed": false,
+        "policy_prohibition_identified": false,
+        "proceeds_without_intervention": false,
+        "route_code": 5,
+        "technical_feasibility_confirmed": false
+      },
+      {
+        "basis": "Targeted greenfield electrolytic tinning line at minimum efficient scale.",
+        "binding_constraint": "capacity_or_availability",
+        "binding_constraint_fully_removed": true,
+        "competition": {
+          "downside_demand_kt": 80.0,
+          "existing_effective_capacity_kt": 0.0,
+          "proposed_incremental_capacity_kt": 90.0
+        },
+        "distortion_unacceptable": false,
+        "downside_cash_flows_m_sar": [
+          -620.0,
+          78.0,
+          78.0,
+          78.0,
+          78.0,
+          78.0,
+          78.0,
+          78.0,
+          78.0,
+          78.0,
+          78.0,
+          78.0,
+          78.0
+        ],
+        "hurdle_rate": 0.12,
+        "intervention_proportionate_to_constraint": true,
+        "investment_already_approved_or_financed": false,
+        "national_value": {
+          "displacement": 15.0,
+          "domestic_value_added": 210.0,
+          "exports": 30.0,
+          "fiscal_receipts": 40.0,
+          "government_cost": 60.0,
+          "knowledge_skills": 25.0,
+          "resilience_value": 45.0,
+          "resource_environment": 20.0,
+          "risk_allowance": 35.0
+        },
+        "policy_prohibition_identified": false,
+        "proceeds_without_intervention": false,
+        "route_code": 7,
+        "technical_feasibility_confirmed": true
+      }
+    ],
+    "target_specification": {
+      "application": "metal packaging can stock",
+      "customer_qualification_required": true,
+      "name": "Electrolytic tinplate (ETP) can stock for two- and three-piece food and beverage cans",
+      "standard": "SASO-ASTM A623/A623M (synthetic design basis)",
+      "thickness_mm": [
+        0.17,
+        0.32
+      ],
+      "tin_coating_g_m2": [
+        2.8,
+        5.6
+      ],
+      "width_mm": [
+        700,
+        1000
+      ]
+    },
+    "upgrade": {
+      "description": "Targeted greenfield electrolytic tinning line (cold-rolled substrate sourced domestically or imported)",
+      "incremental_capacity_kt": 90.0,
+      "schedule_months": 36
+    }
+  }
+}

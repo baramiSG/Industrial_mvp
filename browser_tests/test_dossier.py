@@ -80,9 +80,10 @@ def test_open_dossier_popup_matches_case_and_mode(
         )
     )
     if locale.code == "ar":
+        hs_revision = case.id.split("-", maxsplit=2)[1]
         hs_token = popup.locator(
             "bdi.technical-token",
-            has_text=f"HS H0 / {case.hs6}",
+            has_text=f"HS {hs_revision} / {case.hs6}",
         )
         expect(hs_token).to_have_count(1)
         token_detail = hs_token.evaluate(
@@ -93,7 +94,7 @@ def test_open_dossier_popup_matches_case_and_mode(
             })"""
         )
         assert token_detail == {
-            "text": f"HS H0 / {case.hs6}",
+            "text": f"HS {hs_revision} / {case.hs6}",
             "direction": "ltr",
             "unicodeBidi": "isolate",
         }

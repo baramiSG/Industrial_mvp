@@ -298,13 +298,14 @@ Populated by S14, S15 and S16 as routes are truthfully demonstrated; audited in 
 | Route | Intervention (methodology §1.2) | Case / scenario | Binding constraint | Why lower routes failed | Evidence (snapshot / scenario IDs, passports) | Expected state | Actual state | Status |
 |---:|---|---|---|---|---|---|---|---|
 | 0 | No intervention | `SAU-H0-390210` / `SYN-MINISTRY-PP-001` (existing) | none — equivalent qualified supply exceeds demand | n/a (lowest route) | frozen PP snapshot and scenario | REJECT (public and simulated) | REJECT | DEMONSTRATED; re-proven by computed S09 public and S10 simulated selection (PRs #12–#13) |
+| 0 | No intervention | `SAU-H6-392010` / `SYN-MINISTRY-PE-FILM-001` | no binding gap — equivalent qualified availability 24 kt exceeds 16 kt target demand | n/a (lowest route); EX-04 satisfied | `PUBLIC-SAU-H6-392010-2026-09-12`; scenario reconciliation and Gate B | REJECT (route 0) | REJECT (route 0) | DEMONSTRATED; S14b computed selection |
 | 1 | Remove administrative, classification or regulatory barrier | — | — | — | — | — | — | NOT DEMONSTRATED |
 | 2 | Information, market linkage or investor/technology matching | — | — | — | — | — | — | NOT DEMONSTRATED |
-| 3 | Certification, testing, metrology or quality-system support | — | — | — | — | — | — | NOT DEMONSTRATED |
-| 4 | Demand aggregation, procurement commitment or conditional offtake | — | — | — | — | — | — | NOT DEMONSTRATED |
+| 3 | Certification, testing, metrology or quality-system support | `SAU-H6-721061` / `SYN-MINISTRY-GALVALUME-001` | incumbent GL output is not certified to the target standard | route 0 leaves an application gap; routes 1–2 do not fully resolve certification/customer qualification | `PUBLIC-SAU-H6-721061-2026-09-12`; scenario route record S*=5, ΔNV=82, ratio=1.149; Gate B | ADVANCE (route 3) | ADVANCE (route 3) | DEMONSTRATED; S14b computed selection |
+| 4 | Demand aggregation, procurement commitment or conditional offtake | `SAU-H6-760429` / `SYN-MINISTRY-ALU-PROFILES-001` | only 2.5 kt of equivalent incumbent capacity is qualified for 6.0 kt target demand | route 0 leaves a quantity gap; routes 1–3 do not match the binding constraint; route 4 fully resolves it with zero support | `PUBLIC-SAU-H6-760429-2026-09-12`; reconciled 9.189841 kt allocations; route-4 NPV +1.19; Gate B | ADVANCE (route 4) | ADVANCE (route 4) | DEMONSTRATED; S14b computed selection |
 | 5 | Debottlenecking, yield improvement or incremental line expansion | `SAU-H0-721049` / `SYN-MINISTRY-STEEL-001` (existing) | incumbent capacity/process binding, D\* 0.2667 | unsupported brownfield fails hurdle (NPV −18, IRR 9.5%); non-financial routes do not resolve capacity | frozen steel snapshot and scenario | SIMULATED ADVANCE | ADVANCE (route 5) | DEMONSTRATED; re-proven through amended-I5 computed S10 selection (PR #13) |
-| 6 | Technology licensing, specialist line or joint venture | — | — | — | — | — | — | NOT DEMONSTRATED |
-| 7 | Targeted greenfield entry | — | — | — | — | — | — | NOT DEMONSTRATED |
+| 6 | Technology licensing, specialist line or joint venture | `SAU-H6-760711` / `SYN-MINISTRY-ALU-FOIL-001` | incumbent flat-rolled mill has zero foil-qualified output; D\*=0.5667 | route 0 leaves a gap; routes 1–4 do not resolve the capability class; route 5 is infeasible for foil gauges | `PUBLIC-SAU-H6-760711-2026-09-12`; route record S*=51, ΔNV=172, ratio=1.059; Gate B | ADVANCE (route 6) | ADVANCE (route 6) | DEMONSTRATED; S14b computed selection |
+| 7 | Targeted greenfield entry | `SAU-H6-721012` / `SYN-MINISTRY-TINPLATE-001` | no domestic line; D\*=0.90 and downside demand 80 kt exceeds MES 60 kt | route 0 leaves a gap; routes 1–4 are inapplicable; routes 5–6 fail feasibility/capability; no lower route fully resolves | `PUBLIC-SAU-H6-721012-2026-09-12`; route record S*=137, ΔNV=220, ratio=1.125; Gate B | ADVANCE (route 7) | ADVANCE (route 7) | DEMONSTRATED; S14b computed selection |
 | 8 | Shared enabling infrastructure serving several opportunities | — (requires S16 real graph; `GRAPH_REQUIRED` until then) | — | — | — | — | — | NOT DEMONSTRATED |
 
 **S09 local-candidate note (implementation evidence, not route-matrix
@@ -320,3 +321,11 @@ amended-I5 selection for steel, with both packaged outcomes and exact values
 unchanged. Routes 1–4, 6 and 7 remain fixture capability proofs rather than
 governed demonstration rows; S14/S15 still own their demonstration. Route 8
 remains `NOT_CALCULABLE` / `GRAPH_REQUIRED` until S16.
+
+**S14b completion note:** MONITOR remains
+`UNDEMONSTRATED (material R1-D trigger)`. Every one of the five governed S14b
+public cases has `material_trigger_rule_ids(rules) = ["R1-D"]` (with other
+signals varying), while route-0 MONITOR requires a named trigger, at least one
+signal and an empty material-trigger set. No input or threshold is changed to
+manufacture a MONITOR row. Routes 1 and 2 remain undemonstrated; routes 3, 4,
+6 and 7 and the second route-0 case above are computed demonstrations.

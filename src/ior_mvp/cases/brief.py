@@ -7,25 +7,17 @@ import json
 from pathlib import Path
 from typing import Any, Mapping
 
-from ior_mvp.acquisition.contracts import UnavailableReason
 from ior_mvp.config import PROJECT_ROOT, sector_profiles_config
 from ior_mvp.public_decision import SUPPORT_CODES
+from ior_mvp.public_snapshot import (
+    PARTNER_DETAIL_MISSING_REASONS,
+    PARTNER_DETAIL_STATES,
+)
 
 
 SCHEMA_VERSION = "1.1.0"
 TRADE_SERIES_RULE = "LATEST_REVISION_ONLY"
 UNAVAILABLE = "UNAVAILABLE"
-PARTNER_DETAIL_STATES = frozenset(
-    {
-        "PARTNER_DETAIL_OBSERVED",
-        "PARTNER_DETAIL_MISSING",
-        "PARTNER_TRADE_OBSERVED_ZERO",
-    }
-)
-PARTNER_DETAIL_MISSING_REASONS = frozenset(
-    {reason.value for reason in UnavailableReason}
-    | {"NOT_ACQUIRED", "REVISION_MISMATCH"}
-)
 _TOP_KEYS = frozenset(
     {
         "schema_version",

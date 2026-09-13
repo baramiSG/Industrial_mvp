@@ -89,6 +89,7 @@ def analyze_public(opportunity_id: str) -> dict[str, Any]:
         "evsi": None,
         "trade": case["trade"],
         "trade_quality": case["trade_quality"],
+        "partner_detail": case.get("partner_detail"),
         "supplier_metrics": build_supplier_metrics(
             case,
             r3["metrics"],

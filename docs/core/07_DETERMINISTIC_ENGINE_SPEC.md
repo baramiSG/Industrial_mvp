@@ -122,6 +122,13 @@ or uses a source-attributed calculated disclosure. It remains DEGRADED and
 may open only product-mix/specification research. It never claims a cluster,
 grade, quality, or localization case.
 
+For PublicSnapshot 2.2.0, R3 and R4-D consume the typed `partner_detail`
+state. Missing rows emit `PARTNER_DETAIL_MISSING` with the governed reason;
+an observed empty provider envelope emits `PARTNER_TRADE_OBSERVED_ZERO`.
+Neither state publishes HHI or dispersion. Missing evidence handling is
+explicit: missing evidence is never rendered as zero. OBSERVED rows continue
+through the calculations above.
+
 R5 computes retained imports, net import exposure, apparent consumption, and
 import penetration when their physical inputs exist. Missing inputs remain
 `NOT_CALCULABLE` with named reasons. Verified domestic capability plus
@@ -468,6 +475,25 @@ computed generic-capacity rejection condition is satisfied; the state is
 REJECT and route 0 is selected. Both results are computed, not read from
 data.
 
+S14b adds five derived public cases. Each computes INVESTIGATE with null route
+because decision-critical target-specification demand and capability remain
+unresolved:
+
+| Opportunity | Fired rules |
+|---|---|
+| `SAU-H6-721061` | R0, R1-D, R3, R10, R12 |
+| `SAU-H6-721012` | R0, R1-D, R2, R4-D, R12 |
+| `SAU-H6-760711` | R0, R1-D, R2, R12 |
+| `SAU-H6-760429` | R0, R1-D, R2, R3, R4-D, R5, R9-S, R10, R12 |
+| `SAU-H6-392010` | R0, R1-D, R2, R4-D, R12 |
+
+MONITOR is UNDEMONSTRATED by these governed cases. Route 0 can use
+`MONITOR_NO_IMMEDIATE_ACTION` only when a named monitor trigger exists, at
+least one signal fires, and `material_trigger_rule_ids(rules)` is empty.
+Every S14b public case fires material R1-D, so that computation is false; no
+value, threshold or result is changed to manufacture MONITOR. The generalized
+MONITOR branch remains proved by the S09/S10 fixtures.
+
 ### 7.9 Simulation branch
 
 S10 generalizes simulation selection on scenario contract 2.0.0 through
@@ -487,6 +513,21 @@ unchanged. Packaged polypropylene still reaches REJECT route 0 with
 `HARD_EXCLUSION_SATISFIED` when the idle-capacity exclusion is satisfied.
 Simulated R5/R8 ledger rows follow configured thresholds with FULL/DEGRADED/
 DISABLED execution states.
+
+The five S14b Class-D scenarios are reconciled to their public marginals and
+reach planted ground truth only through the same computed selector:
+
+| Scenario | Computed state / route | Binding result |
+|---|---|---|
+| `SYN-MINISTRY-GALVALUME-001` | ADVANCE / 3 | certification and customer qualification |
+| `SYN-MINISTRY-TINPLATE-001` | ADVANCE / 7 | targeted greenfield after lower routes fail |
+| `SYN-MINISTRY-ALU-FOIL-001` | ADVANCE / 6 | technology licensing / specialist line / JV |
+| `SYN-MINISTRY-ALU-PROFILES-001` | ADVANCE / 4 | conditional offtake with zero financial support |
+| `SYN-MINISTRY-PE-FILM-001` | REJECT / 0 | equivalent qualified availability exceeds demand |
+
+Gate B compares each computed state and route with its declared ground truth.
+Synthetic evidence remains Class D, changes only `simulation_decision` and
+`active_decision` in simulated mode, and never changes `real_decision`.
 
 ## 8. Conditions and kill conditions
 

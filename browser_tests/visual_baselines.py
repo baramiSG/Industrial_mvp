@@ -47,6 +47,11 @@ SCREENS = (
     "journey-f-screening-queue-robust",
     "journey-f-screening-queue-empty",
     "journey-f-screening-record",
+    "journey-g-galvalume-public-workspace",
+    "journey-g-tinplate-public-workspace",
+    "journey-g-alu-foil-public-workspace",
+    "journey-g-alu-profiles-public-workspace",
+    "journey-g-pe-film-public-workspace",
 )
 MAX_FILE_BYTES = 600 * 1024
 MAX_TOTAL_BYTES = 12 * 1024 * 1024

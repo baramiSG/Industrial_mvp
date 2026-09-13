@@ -1,0 +1,250 @@
+{
+  "decision_narrative": {
+    "ADVANCE": {
+      "conditions": [
+        {
+          "ar": "تحقيق اعتماد الطرف الثالث للمواصفة المستهدفة وأول قبول من العملاء خلال 12 شهراً.",
+          "en": "Achieve third-party certification to the target standard and first customer acceptance within 12 months."
+        },
+        {
+          "ar": "المشاركة في تكلفة التأهيل مرتبطة بمعالم إنجاز ومحددة بأجل انتهاء.",
+          "en": "Qualification cost-share is milestone-based and sunset-bound."
+        }
+      ],
+      "headline": {
+        "ar": "تقدّم مُحاكى — دعم الاعتماد وتأهيل العملاء لخط الجلفلوم القائم",
+        "en": "SIMULATED ADVANCE — certification and customer-qualification support for the incumbent GL line"
+      },
+      "kill_conditions": [
+        {
+          "ar": "انخفاض الطلب الملتزم به على المواصفة المستهدفة إلى أقل من حجم التأهيل الاقتصادي الأدنى.",
+          "en": "Committed target-specification demand falls below the minimum efficient qualification volume."
+        },
+        {
+          "ar": "عدم تحقيق الاعتماد بحلول المعلم التعاقدي.",
+          "en": "Certification is not achieved by the contractual milestone."
+        }
+      ],
+      "rationale": {
+        "ar": "تحسم أدلة المحاكاة فجوة تطبيق وتأهيل: تستطيع العملية القائمة إنتاج الملف المطلي بالألومنيوم والزنك المستهدف، لكن المواصفة المستهدفة وتأهيل العملاء غير معتمدَين بعد؛ ويزيل برنامج تأهيل محدود القيد الملزم بأدنى دعم.",
+        "en": "The simulated Ministry-grade evidence resolves an application/qualification gap: the incumbent process can make the target Al-Zn coated coil, but the target standard and customer qualification are not yet certified; a bounded qualification programme removes the binding constraint at minimum support."
+      },
+      "route_label": {
+        "ar": "دعم الاعتماد والاختبار وتأهيل العملاء (المسار 3)",
+        "en": "Certification, testing and customer-qualification support (route 3)"
+      }
+    },
+    "INVESTIGATE": {
+      "conditions": [],
+      "headline": {
+        "ar": "تحقّق مُحاكى — ما زالت بوابة واحدة أو أكثر غير محسومة",
+        "en": "SIMULATED INVESTIGATE — one or more gates remain unresolved"
+      },
+      "kill_conditions": [],
+      "rationale": {
+        "ar": "لم يستوف فرع المحاكاة جميع البوابات الصلبة.",
+        "en": "The simulated branch did not satisfy every hard gate."
+      },
+      "route_label": {
+        "ar": "لم تجتز المحاكاة جميع الضوابط",
+        "en": "Simulation controls did not all pass"
+      }
+    }
+  },
+  "display_label": "SIMULATED — NOT MINISTRY EVIDENCE",
+  "evidence_class": "D",
+  "ground_truth": {
+    "basis": "Core 06 §5.3 planted ground truth; Core 07 §7.3 conjunction and §7.6 step 3: the certification/qualification route 3 record passes every gate, the application gap makes routes 0–2 and 4–7 fail by computation, and the synthetic R8 committed-demand signal executes FULL.",
+    "expected_route_code": 3,
+    "expected_simulation_state": "ADVANCE"
+  },
+  "narrative_metadata": {
+    "arabic_text_status": "ANALYST_AUTHORED_DRAFT"
+  },
+  "opportunity_id": "SAU-H6-721061",
+  "scenario_id": "SYN-MINISTRY-GALVALUME-001",
+  "scenario_version": "2.0.0",
+  "seed_basis": "Public 2024 imports of HS 7210.61 (93.232 kt, USD 71.15 M; UN Comtrade H6 series) bound the synthetic target-specification demand; no public nameplate span exists for the incumbent GL line, so the synthetic line is an explicit design basis (Core 06 §4), not a reconciled marginal.",
+  "source": "DEMO_GENERATOR",
+  "synthetic_flag": true,
+  "synthetic_inputs": {
+    "capability_states": {
+      "capacity_time_window": 1,
+      "certification_customer_qualification": 2,
+      "core_process_route": 0,
+      "equipment_envelope": 1,
+      "feedstock_chemistry": 0,
+      "finishing_spec_control": 1,
+      "qa_lab_metrology": 1,
+      "skills_market_integration": 0,
+      "utilities_ehs_permitting": 0
+    },
+    "class_if_confirmed": {
+      "basis": "Ministry customs, production and qualification records if confirmed; hard gates await certification-programme validation.",
+      "demand_at_required_specification": "A",
+      "domestic_supply_or_capability": "A",
+      "hard_regulatory_or_process_gate": "B",
+      "product_identity": "A"
+    },
+    "counterfactual": {
+      "q1_incumbent_meets_specification_without_capital": false,
+      "q4_downside_demand_supports_incumbent_and_new_entrant": false,
+      "q5_new_entry_displaces_efficient_domestic_production": true,
+      "q6_technology_jv_superior_to_expansion_or_greenfield": false
+    },
+    "decision_specific_hard_gates": {
+      "coating_route_and_mass": "resolved by the synthetic target specification and qualification programme",
+      "mandatory_or_customer_standard": "resolved by the synthetic target specification and qualification programme",
+      "substrate_range": "resolved by the synthetic target specification and qualification programme",
+      "surface_treatment": "resolved by the synthetic target specification and qualification programme",
+      "width_thickness_envelope": "resolved by the synthetic target specification and qualification programme"
+    },
+    "demand": {
+      "announced_demand_kt": 12.0,
+      "base_demand_kt": 93.0,
+      "commitment_probability": 0.8,
+      "committed_demand_kt": 30.0,
+      "downside_demand_kt": 46.0,
+      "target_spec_demand_kt": 48.0
+    },
+    "economics": {
+      "cash_flows_without_support": [
+        -42.0,
+        7.5,
+        7.5,
+        7.5,
+        7.5,
+        7.5,
+        7.5,
+        7.5,
+        7.5
+      ],
+      "currency": "SAR_m",
+      "hurdle_rate": 0.12,
+      "minimum_efficient_scale_kt": 30.0,
+      "national_value": {
+        "displacement": 8.0,
+        "domestic_value_added": 64.0,
+        "exports": 6.0,
+        "fiscal_receipts": 11.0,
+        "government_cost": 5.0,
+        "knowledge_skills": 9.0,
+        "resilience_value": 18.0,
+        "resource_environment": 3.0,
+        "risk_allowance": 10.0
+      },
+      "support_instrument": "certification, testing and customer-qualification cost-share"
+    },
+    "equivalence": {
+      "basis": "Synthetic line-level qualification records: the incumbent GL output is not yet certified or customer-qualified to the target standard; no qualified equivalent grade is currently available.",
+      "domestic_grade_equivalent": false
+    },
+    "evsi": {
+      "delay_cost_m_sar": 3.0,
+      "evidence_cost_m_sar": 2.0,
+      "next_fact": "Confirm the incumbent's coating-mass capability and buyer qualification requirements",
+      "route_change_probability": 0.6,
+      "value_difference_m_sar": 82.0
+    },
+    "hard_exclusion_inputs": {
+      "downside_market_below_mes": {
+        "credible_export_contract": "UNAVAILABLE"
+      },
+      "heterogeneous_residual_code": {
+        "commercial_product_separable": true,
+        "product_level_evidence_available": true
+      },
+      "idle_equivalent_domestic_capacity": {
+        "binding_market_failure": true,
+        "qualified_idle_capacity_kt": "UNAVAILABLE"
+      },
+      "redundancy_or_crowd_out": {
+        "competition_finding": "ACCEPTABLE"
+      },
+      "transitory_or_measurement_gap": {
+        "dominant_cause": "OTHER"
+      },
+      "unsatisfiable_hard_gate": {
+        "gate_domain": "customer_qualification",
+        "gate_satisfiability": "SATISFIABLE"
+      }
+    },
+    "hard_gates": {
+      "coating_route_and_mass": "resolved with coating-mass control programme",
+      "mandatory_or_customer_standard": "resolved with certification and customer-qualification programme",
+      "substrate_range": "resolved",
+      "surface_treatment": "resolved",
+      "width_thickness_envelope": "resolved"
+    },
+    "plant_line": {
+      "availability": 0.9,
+      "current_utilisation": 0.86,
+      "market_allocation_share": 0.7,
+      "nameplate_kt": 120.0,
+      "qualification_share": 0.35,
+      "yield": 0.94
+    },
+    "route_evidence": [
+      {
+        "basis": "Certification, testing and customer-qualification programme on the incumbent GL line.",
+        "binding_constraint": "qualification_or_certification",
+        "binding_constraint_fully_removed": true,
+        "competition": {
+          "downside_demand_kt": 46.0,
+          "existing_effective_capacity_kt": 24.8724,
+          "proposed_incremental_capacity_kt": 28.0
+        },
+        "distortion_unacceptable": false,
+        "downside_cash_flows_m_sar": [
+          -42.0,
+          7.5,
+          7.5,
+          7.5,
+          7.5,
+          7.5,
+          7.5,
+          7.5,
+          7.5
+        ],
+        "hurdle_rate": 0.12,
+        "intervention_proportionate_to_constraint": true,
+        "investment_already_approved_or_financed": false,
+        "national_value": {
+          "displacement": 8.0,
+          "domestic_value_added": 64.0,
+          "exports": 6.0,
+          "fiscal_receipts": 11.0,
+          "government_cost": 5.0,
+          "knowledge_skills": 9.0,
+          "resilience_value": 18.0,
+          "resource_environment": 3.0,
+          "risk_allowance": 10.0
+        },
+        "policy_prohibition_identified": false,
+        "proceeds_without_intervention": false,
+        "route_code": 3,
+        "technical_feasibility_confirmed": true
+      }
+    ],
+    "target_specification": {
+      "application": "pre-engineered building roofing and cladding",
+      "coating_mass_g_m2": 150,
+      "customer_qualification_required": true,
+      "name": "AZ150 aluminium-zinc coated steel coil for roofing and cladding panels",
+      "standard": "SASO-ASTM A792/A792M (synthetic design basis)",
+      "thickness_mm": [
+        0.4,
+        0.8
+      ],
+      "width_mm": [
+        900,
+        1250
+      ]
+    },
+    "upgrade": {
+      "description": "Qualification and certification programme raising the qualified share of the existing GL line; no new nameplate",
+      "incremental_capacity_kt": 28.0,
+      "schedule_months": 12
+    }
+  }
+}

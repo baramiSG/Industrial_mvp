@@ -270,7 +270,7 @@ def test_public_dossier_v11_projects_only_public_contradictions() -> None:
         analyze("SAU-H0-390210", "public")
     )
 
-    assert steel["dossier_version"] == "1.1"
+    assert steel["dossier_version"] == "1.2"
     assert steel["contradiction_register"] == {
         "public": [
             {
@@ -291,6 +291,37 @@ def test_public_dossier_v11_projects_only_public_contradictions() -> None:
         "synthetic": [],
         "synthetic_status": "NOT_APPLICABLE",
     }
+
+
+def test_dossier_partner_detail_key_and_html_line_only_for_2_2_0() -> None:
+    frozen_analysis = analyze("SAU-H0-390210", "public")
+    frozen = build_dossier(frozen_analysis)
+    assert frozen["partner_detail"] is None
+    for locale in ("en", "ar"):
+        assert _ui_strings(locale)["dossier.partner_detail"] not in (
+            render_dossier_html(frozen, locale=locale)
+        )
+
+    current_analysis = deepcopy(frozen_analysis)
+    current_analysis["schema_version"] = "2.2.0"
+    current_analysis["partner_detail"] = {
+        "state": "PARTNER_DETAIL_MISSING",
+        "reason": "COVERAGE_INDETERMINATE",
+        "source_id": "UNAVAILABLE",
+        "partner_snapshot_id": "UNAVAILABLE",
+        "unit_key": ["390210", "imports", "2024"],
+        "observed_partner_rows": "UNAVAILABLE",
+        "attempt_passport_ids": ["P-PARTNERS-ATTEMPT"],
+        "observed_passport_id": None,
+    }
+    current = build_dossier(current_analysis)
+    assert current["partner_detail"] == current_analysis["partner_detail"]
+    for locale in ("en", "ar"):
+        html = render_dossier_html(current, locale=locale)
+        strings = _ui_strings(locale)
+        assert strings["dossier.partner_detail"] in html
+        assert "COVERAGE_INDETERMINATE" in html
+        assert "P-PARTNERS-ATTEMPT" in html
 
 
 def test_simulated_dossier_separates_public_and_synthetic_contradictions(

@@ -51,10 +51,29 @@ export function renderDecisionHero(props) {
   `;
 }
 
-export function hhiNote(hhi, threshold) {
+export function hhiNote(hhi, threshold, partnerDetail) {
+  if (hhi == null && partnerDetail?.state === "PARTNER_DETAIL_MISSING") {
+    return t("metric.hhi_partner_detail_missing", {
+      reason: partnerDetail.reason,
+    });
+  }
+  if (hhi == null && partnerDetail?.state === "PARTNER_TRADE_OBSERVED_ZERO") {
+    return t("metric.hhi_partner_trade_zero");
+  }
   if (hhi == null) return t("metric.hhi_unavailable");
   if (threshold == null) return t("metric.hhi_threshold_unavailable");
   return t("metric.hhi_threshold", { threshold: number(threshold, 2) });
+}
+
+export function decisionObjectStatus(status) {
+  const keys = {
+    generic_hs6_only: "decision_object.generic_hs6_only",
+    partially_resolved: "decision_object.partially_resolved",
+    resolved: "decision_object.resolved",
+  };
+  const key = keys[status];
+  if (!key) throw new Error(`DECISION_OBJECT_STATUS_UNKNOWN:${status}`);
+  return t(key);
 }
 
 export function renderMetricGrid(props) {
@@ -63,6 +82,7 @@ export function renderMetricGrid(props) {
   const economics = props.economics;
   const hhi = props.supplier_metrics?.partner_value_hhi;
   const threshold = props.supplier_concentration?.hhi_threshold;
+  const partnerDetail = props.partner_detail;
   const metrics = [
     [
       t("metric.latest_imports"),
@@ -77,7 +97,7 @@ export function renderMetricGrid(props) {
     [
       t("metric.supplier_hhi"),
       technical(hhi == null ? t("common.unavailable") : number(hhi, 2)),
-      hhiNote(hhi, threshold),
+      hhiNote(hhi, threshold, partnerDetail),
       false,
     ],
     [
@@ -99,7 +119,9 @@ export function renderMetricGrid(props) {
             ? t("metric.economics_pass")
             : economics.reason || t("metric.no_support")
         )
-        : state.analysis.opportunity.decision_object_status.replaceAll("_", " "),
+        : decisionObjectStatus(
+          state.analysis.opportunity.decision_object_status,
+        ),
       Boolean(economics && !economics.passes && economics.reason),
     ],
   ];

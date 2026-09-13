@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import re
+import subprocess
 from pathlib import Path
 
 from ior_mvp.config import PROJECT_ROOT
@@ -189,6 +190,48 @@ def test_integrity_banner_displays_public_and_active_states_together() -> None:
     assert "decisionChip(props.real_state" in banner
     assert "decisionChip(props.active_state" in banner
     assert "props.mode === \"simulated\"" in banner
+
+
+def test_metric_grid_hhi_note_uses_partner_detail_catalogue_keys_and_never_renders_zero(
+) -> None:
+    source = _module_source("modules/renderers/decision.js")
+    note = _app_function(source, "hhiNote")
+    grid = _app_function(source, "renderMetricGrid")
+
+    assert "hhiNote(hhi, threshold, partnerDetail)" in source
+    assert "PARTNER_DETAIL_MISSING" in note
+    assert "PARTNER_TRADE_OBSERVED_ZERO" in note
+    assert 't("metric.hhi_partner_detail_missing"' in note
+    assert 't("metric.hhi_partner_trade_zero")' in note
+    assert 't("metric.hhi_unavailable")' in note
+    assert "props.partner_detail" in grid
+    assert (
+        'technical(hhi == null ? t("common.unavailable") : number(hhi, 2))'
+        in grid
+    )
+    assert "hhi == null ? 0" not in grid
+
+
+def test_trade_chart_path_breaks_at_unavailable_points_instead_of_emitting_nan(
+) -> None:
+    source = _module_source("modules/renderers/trade.js")
+    executable = "\n".join(source.splitlines()[3:])
+    script = (
+        executable
+        + '\nconsole.log(chartPath([1, "UNAVAILABLE", 3], '
+        + "(index) => index, (value) => value));\n"
+    )
+
+    result = subprocess.run(
+        ["node", "--input-type=module"],
+        input=script,
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+
+    assert result.returncode == 0, result.stderr
+    assert result.stdout.strip() == "M0,1 M2,3"
 
 
 def test_decision_actions_exposes_dossier_html_action() -> None:

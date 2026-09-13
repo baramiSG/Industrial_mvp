@@ -251,9 +251,30 @@ def test_hard_exclusion_and_decision_inputs_all_unavailable(tmp_path: Path) -> N
 
 def test_snapshot_id_supersedes_and_schema(tmp_path: Path) -> None:
     snapshot = _build(tmp_path)
-    assert snapshot["schema_version"] == "2.1.0"
+    assert snapshot["schema_version"] == "2.2.0"
     assert snapshot["snapshot_id"] == "PUBLIC-SAU-H6-392010-2026-09-12"
     assert snapshot["supersedes"] == "UNAVAILABLE"
+
+
+def test_builder_writes_2_2_0_with_partner_detail_derived_from_brief_and_emitted_passports(
+    tmp_path: Path,
+) -> None:
+    document_id = _write_document(tmp_path)
+    brief = _brief(document_id)
+
+    snapshot = _build(tmp_path, brief=brief)
+
+    assert snapshot["schema_version"] == "2.2.0"
+    assert snapshot["partner_detail"] == {
+        "state": "PARTNER_DETAIL_MISSING",
+        "reason": "NOT_ACQUIRED",
+        "source_id": "UNAVAILABLE",
+        "partner_snapshot_id": "UNAVAILABLE",
+        "unit_key": ["392010", "imports", "2024"],
+        "observed_partner_rows": "UNAVAILABLE",
+        "attempt_passport_ids": [],
+        "observed_passport_id": None,
+    }
 
 
 def test_built_snapshot_passes_validate_public_snapshot(tmp_path: Path) -> None:
@@ -333,6 +354,40 @@ def test_missing_state_projects_unavailable_rows_with_attempt_passport_marker_an
     assert "missing evidence, not zero trade" in snapshot["authority_note"]
 
 
+def test_missing_state_block_references_every_attempt_passport_and_null_observed_passport(
+    tmp_path: Path,
+) -> None:
+    document_id = _write_document(tmp_path)
+    brief = _brief(document_id)
+    _stored_partner_case(
+        tmp_path,
+        brief,
+        normalization_status="UNPARSED",
+        exclusion_reason="FORMAT_NOT_PARSEABLE",
+    )
+    brief["partner_detail"].update(
+        {
+            "state": "PARTNER_DETAIL_MISSING",
+            "reason": "FORMAT_NOT_PARSEABLE",
+            "observed_partner_rows": "UNAVAILABLE",
+        }
+    )
+    snapshot_path = next(
+        (tmp_path / "data" / "snapshots" / "partners").glob("*.json")
+    )
+    partners = json.loads(snapshot_path.read_text(encoding="utf-8"))
+
+    snapshot = _build(tmp_path, brief=brief, partners=partners)
+    attempt_ids = [
+        row["evidence_id"]
+        for row in snapshot["evidence"]
+        if "-PARTNERS-ATTEMPT" in row["evidence_id"]
+    ]
+
+    assert snapshot["partner_detail"]["attempt_passport_ids"] == attempt_ids
+    assert snapshot["partner_detail"]["observed_passport_id"] is None
+
+
 def test_observed_zero_state_projects_zero_passport_not_attempt_passport(
     tmp_path: Path,
 ) -> None:
@@ -366,6 +421,8 @@ def test_observed_zero_state_projects_zero_passport_not_attempt_passport(
     )
     assert zero["status"] == "observed"
     assert zero["transformation"].startswith("PARTNER_TRADE_OBSERVED_ZERO;")
+    assert snapshot["partner_detail"]["observed_passport_id"] == zero["evidence_id"]
+    assert snapshot["partner_detail"]["attempt_passport_ids"] == []
 
 
 def test_observed_rows_from_un_comtrade_snapshot_use_comtrade_passport_and_keep_wits_attempt_passport(
@@ -466,6 +523,14 @@ def test_observed_rows_from_un_comtrade_snapshot_use_comtrade_passport_and_keep_
     )
     assert "superseded by COMPLETE unit un_comtrade/" in attempt["transformation"]
     assert snapshot["partner_observations"][0]["partner"] == "China"
+    assert (
+        snapshot["partner_detail"]["observed_passport_id"]
+        == "P-COMTRADE-392010-PARTNERS"
+    )
+    assert snapshot["partner_detail"]["observed_partner_rows"] == 1
+    assert snapshot["partner_detail"]["attempt_passport_ids"] == [
+        "P-WITS-392010-PARTNERS-ATTEMPT"
+    ]
 
 
 def test_projection_refuses_brief_state_that_contradicts_loaded_snapshot(

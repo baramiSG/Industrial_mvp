@@ -354,16 +354,16 @@ def test_repository_scenario_validator_passes_current_fixtures(
 
     assert status == 0
     output = capsys.readouterr().out
-    assert "SCENARIO VALIDATION PASS (2 scenarios)" in output
+    assert "SCENARIO VALIDATION PASS (7 scenarios)" in output
     assert "status=PASS" in output
     assert (
         "tariff_line_allocation_sums_to_public_hs6_total: "
         "NOT_APPLICABLE"
     ) in output
-    assert output.count("ground_truth_backtest: PASS") == 2
+    assert output.count("ground_truth_backtest: PASS") == 7
 
 
-def test_validator_reports_exact_ground_truth_for_both_scenarios() -> None:
+def test_validator_reports_exact_ground_truth_for_all_scenarios() -> None:
     reports = validate_scenario_directories(
         SYNTHETIC_DIR,
         PUBLIC_DIR,
@@ -373,20 +373,22 @@ def test_validator_reports_exact_ground_truth_for_both_scenarios() -> None:
         for report in reports
     }
 
-    assert by_scenario[
-        "SYN-MINISTRY-STEEL-001"
-    ]["ground_truth_backtest"] == {
-        "expected": {"state": "ADVANCE", "route_code": 5},
-        "actual": {"state": "ADVANCE", "route_code": 5},
-        "match": True,
+    expected = {
+        "SYN-MINISTRY-STEEL-001": ("ADVANCE", 5),
+        "SYN-MINISTRY-PP-001": ("REJECT", 0),
+        "SYN-MINISTRY-GALVALUME-001": ("ADVANCE", 3),
+        "SYN-MINISTRY-TINPLATE-001": ("ADVANCE", 7),
+        "SYN-MINISTRY-ALU-FOIL-001": ("ADVANCE", 6),
+        "SYN-MINISTRY-ALU-PROFILES-001": ("ADVANCE", 4),
+        "SYN-MINISTRY-PE-FILM-001": ("REJECT", 0),
     }
-    assert by_scenario[
-        "SYN-MINISTRY-PP-001"
-    ]["ground_truth_backtest"] == {
-        "expected": {"state": "REJECT", "route_code": 0},
-        "actual": {"state": "REJECT", "route_code": 0},
-        "match": True,
-    }
+    assert set(by_scenario) == set(expected)
+    for scenario_id, (state, route_code) in expected.items():
+        assert by_scenario[scenario_id]["ground_truth_backtest"] == {
+            "expected": {"state": state, "route_code": route_code},
+            "actual": {"state": state, "route_code": route_code},
+            "match": True,
+        }
 
 
 def test_validator_returns_one_for_ground_truth_mismatch(

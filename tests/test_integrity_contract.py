@@ -10,6 +10,21 @@ import yaml
 from ior_mvp.config import PROJECT_ROOT
 
 
+S14B_PUBLIC_AND_SYNTHETIC = {
+    f"data/snapshots/public/PUBLIC-SAU-H6-{hs6}-2026-09-12.json"
+    for hs6 in ("392010", "721012", "721061", "760429", "760711")
+} | {
+    f"data/synthetic/SYN-MINISTRY-{slug}-001.json"
+    for slug in (
+        "ALU-FOIL",
+        "ALU-PROFILES",
+        "GALVALUME",
+        "PE-FILM",
+        "TINPLATE",
+    )
+}
+
+
 def test_manifests_exist_and_track_expected_files() -> None:
     snapshot_manifest = PROJECT_ROOT / "data" / "manifests" / "snapshot_manifest.json"
     authority_manifest = PROJECT_ROOT / "docs" / "authority" / "authority_hashes.json"
@@ -58,7 +73,7 @@ def test_s08_snapshot_manifest_retains_live_and_historical_public_rows(
         "data/synthetic/historical/v1_1/SYN-MINISTRY-STEEL-001.json",
         "data/synthetic/historical/v1_1/SYN-MINISTRY-PP-001.json",
         "data/golden/ar_en_spec_extraction.json",
-    }
+    } | S14B_PUBLIC_AND_SYNTHETIC
     assert frozen <= paths
     allowed_extra_prefixes = (
         "data/raw/",
@@ -92,7 +107,7 @@ def _partition_valid(paths: set[str]) -> bool:
         "data/synthetic/historical/v1_1/SYN-MINISTRY-STEEL-001.json",
         "data/synthetic/historical/v1_1/SYN-MINISTRY-PP-001.json",
         "data/golden/ar_en_spec_extraction.json",
-    }
+    } | S14B_PUBLIC_AND_SYNTHETIC
     if not frozen <= paths:
         return False
     allowed_extra_prefixes = (
@@ -125,6 +140,7 @@ def test_s11_snapshot_manifest_rejects_public_partition_leak() -> None:
     paths = {item["path"] for item in manifest["files"]}
     assert _partition_valid(paths)
     assert not _partition_valid(paths | {"data/snapshots/public/extra.json"})
+    assert not _partition_valid(paths | {"data/synthetic/extra.json"})
     for kind in ("production", "directory", "registry"):
         assert _partition_valid(paths | {f"data/snapshots/{kind}/extra.json"})
         assert not _partition_valid(paths | {f"data/snapshots/{kind}-other/extra.json"})
@@ -713,9 +729,9 @@ def test_reconstruct_script_prints_case_reconstruction_pass_line(
         check_manifest=False,
         manifest_rows={},
     )
-    assert (committed, briefs) == (0, 5)
+    assert (committed, briefs) == (5, 5)
     assert (
-        "CASE RECONSTRUCTION PASS (0 snapshots, 5 briefs)"
+        "CASE RECONSTRUCTION PASS (5 snapshots, 5 briefs)"
         in capsys.readouterr().out
     )
 
@@ -887,3 +903,105 @@ def test_s14a_core_v2_case_contracts() -> None:
     assert "config/history/" in core_04
     assert "INPUTS_CHANGED" in core_09
     assert "CASE RECONSTRUCTION PASS" in core_09
+
+
+def test_s14b_core_04_and_07_partner_detail_sentences() -> None:
+    core_04 = (
+        PROJECT_ROOT / "docs" / "core" / "04_CANONICAL_DATA_MODEL.md"
+    ).read_text(encoding="utf-8")
+    core_07 = (
+        PROJECT_ROOT / "docs" / "core" / "07_DETERMINISTIC_ENGINE_SPEC.md"
+    ).read_text(encoding="utf-8")
+
+    for token in ("PublicSnapshot 2.2.0", "2.1.0 records remain valid unchanged"):
+        assert token in core_04
+    section_12 = core_04.split(
+        "## 12. CaseBrief 1.1.0 and derived PublicSnapshot provenance",
+        maxsplit=1,
+    )[1]
+    exact_key_marker = (
+        "Its exact-key `partner_detail` block contains exactly:\n"
+    )
+    assert exact_key_marker in section_12
+    exact_key_block = section_12.split(
+        exact_key_marker,
+        maxsplit=1,
+    )[1].split("\n\n", maxsplit=1)[0]
+    assert re.findall(r"`([^`]+)`", exact_key_block) == [
+        "state",
+        "reason",
+        "source_id",
+        "partner_snapshot_id",
+        "unit_key",
+        "observed_partner_rows",
+        "attempt_passport_ids",
+        "observed_passport_id",
+    ]
+    for obsolete_name in (
+        "source_snapshot_id",
+        "observed_row_count",
+        "calculated_passport_id",
+    ):
+        assert obsolete_name not in section_12
+    for token in (
+        "PARTNER_DETAIL_MISSING",
+        "PARTNER_TRADE_OBSERVED_ZERO",
+        "missing evidence is never rendered as zero",
+    ):
+        assert token in core_07
+
+
+def test_s14b_governed_docs_record_portfolio_routes_and_limits() -> None:
+    core_07 = (
+        PROJECT_ROOT / "docs" / "core" / "07_DETERMINISTIC_ENGINE_SPEC.md"
+    ).read_text(encoding="utf-8")
+    core_09 = (
+        PROJECT_ROOT / "docs" / "core" / "09_TEST_ACCEPTANCE_AND_GOLDEN_CASES.md"
+    ).read_text(encoding="utf-8")
+    slice_graph = (
+        PROJECT_ROOT
+        / "docs"
+        / "milestones"
+        / "v0.3.0"
+        / "SLICE_GRAPH.md"
+    ).read_text(encoding="utf-8")
+    limitations = (
+        PROJECT_ROOT / "docs" / "KNOWN_LIMITATIONS.md"
+    ).read_text(encoding="utf-8")
+
+    for token in (
+        "SAU-H6-721061",
+        "SAU-H6-721012",
+        "SAU-H6-760711",
+        "SAU-H6-760429",
+        "SAU-H6-392010",
+        "MONITOR is UNDEMONSTRATED",
+    ):
+        assert token in core_07
+    for token in (
+        "Golden C — Galvalume",
+        "Golden D — Tinplate",
+        "Golden E — Aluminium foil",
+        "Golden F — Aluminium profiles",
+        "Golden G — PE film",
+        "76 entries",
+        "CASE RECONSTRUCTION PASS (5 snapshots, 5 briefs)",
+    ):
+        assert token in core_09
+    for token in (
+        "SYN-MINISTRY-PE-FILM-001",
+        "ADVANCE (route 3)",
+        "ADVANCE (route 4)",
+        "ADVANCE (route 6)",
+        "ADVANCE (route 7)",
+        "UNDEMONSTRATED (material R1-D trigger)",
+    ):
+        assert token in slice_graph
+    for token in (
+        "`_scaled`",
+        "six decimal places",
+        "KL-85 remains open",
+        "S22 release-script backlog",
+        "OD-15",
+    ):
+        assert token in limitations

@@ -38,6 +38,7 @@ from browser_tests.pages import (
 pytestmark = pytest.mark.e2e
 MODE_LOCALES = tuple(product(MODES, LOCALES))
 CASE_MODE_LOCALES = tuple(product(MODES, CASES, LOCALES))
+NEW_CASE_LOCALES = tuple(product(CASES[2:], LOCALES))
 
 
 @pytest.mark.parametrize(
@@ -54,8 +55,10 @@ def test_portfolio_loads_expected_cases_and_states(
     goto_portfolio(page, mode, locale)
 
     expect(page.locator("#kpi-grid .kpi-card")).to_have_count(4)
-    expect(page.locator("[data-open-id]")).to_have_count(2)
-    expect(page.locator("#opportunity-select option")).to_have_count(2)
+    expect(page.locator("[data-open-id]")).to_have_count(len(CASES))
+    expect(page.locator("#opportunity-select option")).to_have_count(
+        len(CASES)
+    )
     assert {
         button.get_attribute("data-open-id")
         for button in page.locator("[data-open-id]").all()
@@ -76,6 +79,17 @@ def test_portfolio_loads_expected_cases_and_states(
             for current, following in zip(words, words[1:], strict=False)
         ), chip.inner_text()
     strings = locale_bundle(locale)["strings"]
+    rule_path_count = page.locator(
+        "#methodology .rule-table tbody tr"
+    ).count()
+    expected_chip = (
+        f"{len(CASES)} golden cases · {rule_path_count} rule paths"
+        if locale == EN
+        else f"{len(CASES)} حالات ذهبية · {rule_path_count} مسار قاعدة"
+    )
+    expect(
+        page.locator('[data-i18n="portfolio.chip"]')
+    ).to_have_text(expected_chip)
     expect(page.locator("#kpi-grid")).to_contain_text(
         strings["kpi.leakage_label"]
     )
@@ -162,7 +176,7 @@ def test_opportunity_select_loads_each_case(
                 "generic-capacity warning threshold is not met."
             ),
         }
-    else:
+    elif case == POLYPROPYLENE:
         expected_results = {
             "R3": (
                 "Value- and quantity-basis partner concentration are "
@@ -174,12 +188,15 @@ def test_opportunity_select_loads_each_case(
                 "grade conclusion."
             ),
         }
-    for rule_id, expected in expected_results.items():
-        row = by_rule[rule_id]
-        assert row["result"] == expected
+    else:
+        expected_results = {}
+    for rule_id, row in by_rule.items():
         visible = row["localized"][locale.code]["result"]["text"]
         expect(page.locator("#workspace")).to_contain_text(visible)
-        if locale == EN:
+        expected = expected_results.get(rule_id)
+        if expected is not None:
+            assert row["result"] == expected
+        if locale == EN and expected is not None:
             assert visible == expected
 
     hero = page.locator(".decision-hero")
@@ -193,7 +210,12 @@ def test_opportunity_select_loads_each_case(
         for field in ("conditions", "kill_conditions"):
             for item in narrative[field]:
                 expect(hero).to_contain_text(item["text"])
-        expect(unlocks).to_have_count(5)
+        expected_unlocks = (
+            5
+            if case in {STEEL, POLYPROPYLENE}
+            else len(narrative["missing_facts"])
+        )
+        expect(unlocks).to_have_count(expected_unlocks)
         assert [item.inner_text().split(" ", maxsplit=1)[-1] for item in unlocks.all()]
         for item in narrative["missing_facts"]:
             expect(page.locator(".unlock-list")).to_contain_text(
@@ -216,12 +238,12 @@ def test_opportunity_select_loads_each_case(
         for field in ("conditions", "kill_conditions"):
             for item in narrative[field]:
                 expect(hero).to_contain_text(item["text"])
-        expect(unlocks).to_have_count(5)
         unlock_props = next(
             row
             for row in manifest_payload["components"]
             if row["type"] == "data_unlocks"
         )["props"]["localized_missing_facts"][locale.code]
+        expect(unlocks).to_have_count(len(unlock_props))
         for item in unlock_props:
             text = item["text"] if isinstance(item, dict) else item
             expect(page.locator(".unlock-list")).to_contain_text(text)
@@ -237,6 +259,108 @@ def test_opportunity_select_loads_each_case(
                 == 0
             )
             assert hero.locator(".source-language-caption").count() == 0
+
+
+@pytest.mark.parametrize(
+    ("case", "locale"),
+    NEW_CASE_LOCALES,
+    ids=[
+        f"{case.slug}-{locale.code}"
+        for case, locale in NEW_CASE_LOCALES
+    ],
+)
+def test_new_case_view_distinguishes_observed_missing_and_simulated(
+    browser_session: BrowserSession,
+    case: Case,
+    locale: Locale,
+) -> None:
+    page = browser_session.page
+    strings = locale_bundle(locale)["strings"]
+    labels = locale_bundle(locale)["synthetic_labels"]
+
+    goto_portfolio(page, "public", locale)
+    public_response, _ = select_case(page, case, "public", locale)
+    public = public_response.json()
+    public_evidence = public["evidence"]
+    observed = [
+        row
+        for row in public_evidence
+        if row["status"] in {"observed", "calculated"}
+    ]
+    assert observed
+    assert all(
+        row["status"] in {"observed", "calculated", "unresolved"}
+        and row["evidence_class"] in {"B", "C"}
+        and row["synthetic_flag"] is False
+        for row in public_evidence
+    )
+    expect(page.locator("#workspace")).to_contain_text(observed[0]["title"])
+    expect(page.locator("#workspace")).to_contain_text(
+        strings["common.unavailable"]
+    )
+    assert public["data_unlocks"]
+    expect(page.locator(".unlock-list li")).to_have_count(
+        len(public["data_unlocks"])
+    )
+    for label in labels.values():
+        expect(page.locator("#workspace")).not_to_contain_text(label)
+
+    if case.id == "SAU-H6-721061":
+        partner_detail = public["partner_detail"]
+        assert partner_detail["state"] in {
+            "PARTNER_DETAIL_MISSING",
+            "PARTNER_DETAIL_OBSERVED",
+        }
+        assert partner_detail["state"] != "PARTNER_TRADE_OBSERVED_ZERO"
+        if partner_detail["state"] == "PARTNER_DETAIL_MISSING":
+            note = strings["metric.hhi_partner_detail_missing"].format(
+                reason=partner_detail["reason"]
+            )
+            expect(page.locator("#workspace")).to_contain_text(note)
+            assert public["supplier_metrics"] is None
+        else:
+            assert partner_detail["observed_partner_rows"] > 0
+            expect(page.locator("#workspace")).not_to_contain_text(
+                strings["metric.hhi_partner_detail_missing"].split(
+                    "{reason}",
+                    maxsplit=1,
+                )[0].strip()
+            )
+
+    goto_portfolio(page, "simulated", locale)
+    simulated_response, _ = select_case(
+        page,
+        case,
+        "simulated",
+        locale,
+    )
+    simulated = simulated_response.json()
+    scenario = simulated["simulation_scenario"]
+    assert scenario["scenario_id"].startswith("SYN-MINISTRY-")
+    assert scenario["seed_basis"]
+    assert simulated["real_decision"]["state"] == "INVESTIGATE"
+    assert simulated["simulation_decision"]["state"] == (
+        case.simulated_active_state
+    )
+    synthetic_evidence = [
+        row for row in simulated["evidence"] if row["synthetic_flag"] is True
+    ]
+    synthetic_rules = [
+        row
+        for row in simulated["rules"]
+        if row.get("synthetic_flag") is True
+    ]
+    assert synthetic_evidence and synthetic_rules
+    assert all(
+        row["evidence_class"] == "D"
+        and row["source"] == "DEMO_GENERATOR"
+        for row in synthetic_evidence
+    )
+    evidence_table = page.locator("#workspace .evidence-table")
+    expect(evidence_table).to_contain_text("DEMO_GENERATOR")
+    expect(evidence_table).to_contain_text("D")
+    for label in labels.values():
+        expect(page.locator("#workspace")).to_contain_text(label)
 
 
 @pytest.mark.parametrize(
@@ -360,6 +484,31 @@ def test_workspace_and_methodology_ledgers_have_no_english_catalogue_prose_in_ar
             + "\n",
             encoding="utf-8",
         )
+
+
+@pytest.mark.parametrize(
+    "case",
+    CASES,
+    ids=[case.slug for case in CASES],
+)
+def test_arabic_decision_subject_card_has_catalogue_parity(
+    browser_session: BrowserSession,
+    case: Case,
+) -> None:
+    page = browser_session.page
+    goto_portfolio(page, "public", AR)
+    detail, _ = select_case(page, case, "public", AR)
+    status = detail.json()["opportunity"]["decision_object_status"]
+    expected = {
+        "generic_hs6_only": "رمز النظام المنسق العام فقط",
+        "partially_resolved": "محسوم جزئيا",
+        "resolved": "محسوم",
+    }[status]
+    selector = "#workspace .metric-panel .metric-box:nth-child(4)"
+    card = page.locator(selector)
+    expect(card.locator("p")).to_have_text(expected)
+    report = arabic_parity_report(page, f"{selector} p")
+    assert_arabic_parity(report, expected_source_spans=0)
 
 
 @pytest.mark.parametrize(

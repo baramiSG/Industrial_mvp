@@ -17,6 +17,7 @@ import {
   populateSelect,
   renderKPIs,
   renderOpportunityCards,
+  renderPortfolioChip,
 } from "./portfolio.js";
 import { state } from "./state.js";
 import {
@@ -55,6 +56,7 @@ export function rerenderLocaleState() {
   renderOpportunityCards();
   populateSelect();
   rerenderWorkspace();
+  renderPortfolioChip();
   renderExtraction();
   rerenderScreening();
 }

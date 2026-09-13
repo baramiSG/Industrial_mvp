@@ -46,6 +46,11 @@ SCREENS = (
     "journey-f-screening-queue-robust",
     "journey-f-screening-queue-empty",
     "journey-f-screening-record",
+    "journey-g-galvalume-public-workspace",
+    "journey-g-tinplate-public-workspace",
+    "journey-g-alu-foil-public-workspace",
+    "journey-g-alu-profiles-public-workspace",
+    "journey-g-pe-film-public-workspace",
 )
 
 
@@ -70,7 +75,7 @@ def test_pillow_is_an_exact_e2e_only_dependency() -> None:
     ]
 
 
-def test_visual_manifest_has_exact_56_entry_locale_viewport_screen_matrix() -> None:
+def test_visual_manifest_has_exact_76_entry_locale_viewport_screen_matrix() -> None:
     entries = _manifest()["entries"]
     actual = {
         (entry["locale"], entry["viewport"], entry["screen"])
@@ -78,7 +83,7 @@ def test_visual_manifest_has_exact_56_entry_locale_viewport_screen_matrix() -> N
     }
     expected = set(product(LOCALES, VIEWPORTS, SCREENS))
 
-    assert len(entries) == 56
+    assert len(entries) == 76
     assert actual == expected
     assert len(actual) == len(entries)
 
@@ -127,7 +132,7 @@ def test_visual_manifest_and_every_webp_hash_size_dimensions_and_rgb_decode_matc
 def test_visual_baseline_files_are_lossless_webp_with_600_kib_and_12_mib_budgets() -> None:
     files = sorted(BASELINE_ROOT.glob("*/*/*.webp"))
 
-    assert len(files) == 56
+    assert len(files) == 76
     assert all(path.read_bytes()[12:16] == b"VP8L" for path in files)
     assert all(path.stat().st_size <= 600 * 1024 for path in files)
     assert sum(path.stat().st_size for path in files) <= 12 * 1024 * 1024

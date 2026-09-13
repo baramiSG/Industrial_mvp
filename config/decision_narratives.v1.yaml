@@ -1,7 +1,7 @@
 metadata:
   artifact: industrial-opportunity-decision-narratives
-  version: "1.2.0"
-  effective_date: "2026-09-12"
+  version: "1.3.0"
+  effective_date: "2026-09-13"
   authority: "Industrial Opportunity Resolution Methodology §§1.2, 4.2, 5.3, 7.1.1, 7.4, 9, 12 and 15; Core 07 v2"
   status: frozen_for_demo_cycle
   default_locale: en
@@ -26,6 +26,7 @@ placeholder_kinds:
   confidence_cap: computed
   ratio: computed
   named_fact_count: computed
+  partner_detail_reason: computed
 
 templates:
   en:
@@ -201,6 +202,8 @@ templates:
     rule.r3.result.quantity_concentrated_value_not_calculable: "External supply is concentrated on the quantity basis; value concentration is NOT_CALCULABLE."
     rule.r3.result.concentrated_on_calculable_basis: "External supply is concentrated on at least one calculable basis."
     rule.r3.result.thresholds_not_met: "Concentration thresholds are not met on the calculable basis or bases."
+    rule.r3.result.partner_detail_missing: "Partner detail MISSING ({partner_detail_reason}): value- and quantity-basis partner concentration are NOT_CALCULABLE because no partner rows were parsed — missing evidence, not zero trade."
+    rule.r3.result.partner_trade_observed_zero: "Partner trade OBSERVED ZERO: value- and quantity-basis partner concentration are NOT_CALCULABLE because zero partner rows were observed."
     rule.r3.effect.no_concentration_inference: "No concentration inference."
     rule.r3.effect.resilience_review: "Generate a resilience/diversification review, not an automatic localisation recommendation."
 
@@ -212,6 +215,8 @@ templates:
     rule.r4-d.result.descriptive_dispersion: "Comparable annual partner unit values show descriptive dispersion; no cluster or grade conclusion."
     rule.r4-d.result.disclosed_dispersion: "A source-attributed annual unit-value dispersion summary supports a descriptive product-mix signal; no cluster or grade conclusion."
     rule.r4-d.result.coverage_insufficient: "Comparable annual partner coverage is insufficient; R4-D is not calculable."
+    rule.r4-d.result.partner_detail_missing: "Partner detail MISSING ({partner_detail_reason}): comparable annual partner coverage is unavailable — missing evidence, not zero trade; R4-D is not calculable."
+    rule.r4-d.result.partner_trade_observed_zero: "Partner trade OBSERVED ZERO: no partner unit values exist; R4-D is not calculable."
     rule.r4-d.effect.specification_research_only: "Open specification research only; no grade conclusion."
 
     rule.r5.name: "Domestic supply plus continued imports"
@@ -446,6 +451,8 @@ templates:
     rule.r3.result.quantity_concentrated_value_not_calculable: "العرض الخارجي متركز على أساس الكمية؛ ولا يمكن حساب تركز القيمة."
     rule.r3.result.concentrated_on_calculable_basis: "العرض الخارجي متركز على أساس واحد قابل للحساب على الأقل."
     rule.r3.result.thresholds_not_met: "لم تتحقق حدود التركز على الأساس أو الأسس القابلة للحساب."
+    rule.r3.result.partner_detail_missing: "تفاصيل الشركاء مفقودة ({partner_detail_reason}): لا يمكن حساب تركز الشركاء على أساس القيمة أو الكمية لعدم تحليل صفوف الشركاء؛ وهذه أدلة مفقودة وليست تجارة صفرية."
+    rule.r3.result.partner_trade_observed_zero: "تجارة الشركاء المرصودة صفر: لا يمكن حساب تركز الشركاء على أساس القيمة أو الكمية لأن عدد صفوف الشركاء المرصودة يساوي صفراً."
     rule.r3.effect.no_concentration_inference: "لا استنتاج بشأن التركز."
     rule.r3.effect.resilience_review: "افتح مراجعة للمرونة والتنويع، لا توصية آلية بالتوطين."
 
@@ -457,6 +464,8 @@ templates:
     rule.r4-d.result.descriptive_dispersion: "تُظهر قيم الوحدة السنوية القابلة للمقارنة بين الشركاء تشتتاً وصفياً؛ دون استنتاج عن عنقود أو درجة."
     rule.r4-d.result.disclosed_dispersion: "يدعم ملخص منسوب إلى مصدر لتشتت قيمة الوحدة السنوية إشارة وصفية لمزيج المنتجات؛ دون استنتاج عن عنقود أو درجة."
     rule.r4-d.result.coverage_insufficient: "تغطية الشركاء السنوية القابلة للمقارنة غير كافية؛ ولا يمكن حساب قاعدة التشتت."
+    rule.r4-d.result.partner_detail_missing: "تفاصيل الشركاء مفقودة ({partner_detail_reason}): لا تتوافر تغطية سنوية قابلة للمقارنة للشركاء؛ وهذه أدلة مفقودة وليست تجارة صفرية، لذلك لا يمكن حساب القاعدة."
+    rule.r4-d.result.partner_trade_observed_zero: "تجارة الشركاء المرصودة صفر: لا توجد قيم وحدة للشركاء، لذلك لا يمكن حساب القاعدة."
     rule.r4-d.effect.specification_research_only: "افتح بحث المواصفة فقط؛ دون استنتاج عن الدرجة."
 
     rule.r5.name: "العرض المحلي مع استمرار الواردات"

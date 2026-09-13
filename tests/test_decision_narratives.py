@@ -81,8 +81,8 @@ def test_decision_catalogue_metadata_and_locale_contract_are_exact() -> None:
 
     assert payload["metadata"] == {
         "artifact": "industrial-opportunity-decision-narratives",
-        "version": "1.2.0",
-        "effective_date": "2026-09-12",
+        "version": "1.3.0",
+        "effective_date": "2026-09-13",
         "authority": (
             "Industrial Opportunity Resolution Methodology §§1.2, 4.2, "
             "5.3, 7.1.1, 7.4, 9, 12 and 15; Core 07 v2"
@@ -106,6 +106,7 @@ def test_decision_catalogue_metadata_and_locale_contract_are_exact() -> None:
         "confidence_cap": "computed",
         "ratio": "computed",
         "named_fact_count": "computed",
+        "partner_detail_reason": "computed",
     }
 
 
@@ -126,6 +127,46 @@ def test_decision_catalogue_has_exact_key_and_placeholder_parity() -> None:
         assert _placeholders(templates["en"][key]) == _placeholders(
             templates["ar"][key]
         )
+
+
+def test_partner_detail_result_templates_exist_in_both_locales_with_reason_placeholder(
+) -> None:
+    templates = _catalogue()["templates"]
+    expected = {
+        "rule.r3.result.partner_detail_missing": (
+            "Partner detail MISSING ({partner_detail_reason}): value- and "
+            "quantity-basis partner concentration are NOT_CALCULABLE "
+            "because no partner rows were parsed — missing evidence, not "
+            "zero trade."
+        ),
+        "rule.r3.result.partner_trade_observed_zero": (
+            "Partner trade OBSERVED ZERO: value- and quantity-basis "
+            "partner concentration are NOT_CALCULABLE because zero partner "
+            "rows were observed."
+        ),
+        "rule.r4-d.result.partner_detail_missing": (
+            "Partner detail MISSING ({partner_detail_reason}): comparable "
+            "annual partner coverage is unavailable — missing evidence, "
+            "not zero trade; R4-D is not calculable."
+        ),
+        "rule.r4-d.result.partner_trade_observed_zero": (
+            "Partner trade OBSERVED ZERO: no partner unit values exist; "
+            "R4-D is not calculable."
+        ),
+    }
+
+    for key, text in expected.items():
+        assert templates["en"][key] == text
+        assert re.search(r"[\u0600-\u06ff]", templates["ar"][key])
+        assert _placeholders(templates["en"][key]) == _placeholders(
+            templates["ar"][key]
+        )
+    assert _placeholders(
+        templates["en"]["rule.r3.result.partner_detail_missing"]
+    ) == {"partner_detail_reason"}
+    assert _placeholders(
+        templates["en"]["rule.r4-d.result.partner_detail_missing"]
+    ) == {"partner_detail_reason"}
 
 
 def test_rule_ledger_catalogue_keys_cover_every_code_and_nothing_more() -> None:
@@ -565,11 +606,11 @@ def test_correction_round_keys_have_exact_english_and_arabic_literals() -> None:
         assert templates["ar"][key] == ar_text, key
 
 
-def test_catalogue_has_213_keys_with_parity_and_validator_pass() -> None:
+def test_catalogue_has_217_keys_with_parity_and_validator_pass() -> None:
     payload = _catalogue()
     en = payload["templates"]["en"]
     ar = payload["templates"]["ar"]
-    assert len(en) == len(ar) == 213
+    assert len(en) == len(ar) == 217
     assert set(en) == set(ar)
     validate_decision_narratives(payload)
 

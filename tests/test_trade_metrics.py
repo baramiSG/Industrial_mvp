@@ -598,3 +598,93 @@ def test_supplier_compatibility_projection_is_null_without_concentration(
     r4d = degraded_dispersion_metrics(case, 0.70)
 
     assert build_supplier_metrics(case, r3, r4d) is None
+
+
+def _partner_detail_fallback_case(
+    state: str | None,
+    reason: str | None = None,
+) -> dict:
+    case = {
+        "trade": [
+            {
+                "year": 2024,
+                "imports_usd_m": 10.0,
+                "imports_kt": 5.0,
+                "exports_usd_m": 1.0,
+                "exports_kt": 0.5,
+            }
+        ],
+        "trade_quality": {"flow_basis": "gross"},
+        "partner_observations": "UNAVAILABLE",
+    }
+    if state is not None:
+        case["partner_detail"] = {
+            "state": state,
+            "reason": reason,
+        }
+    return case
+
+
+def test_concentration_fallback_reason_names_partner_detail_missing_with_reason_token(
+) -> None:
+    case = _partner_detail_fallback_case(
+        "PARTNER_DETAIL_MISSING",
+        "COVERAGE_INDETERMINATE",
+    )
+
+    for basis in ("value", "quantity"):
+        result = concentration_metrics(case, basis)
+        assert result["status"] == "NOT_CALCULABLE"
+        assert result["reason"] == (
+            "PARTNER_DETAIL_MISSING:COVERAGE_INDETERMINATE — no partner "
+            "rows were parsed; missing evidence, not zero trade."
+        )
+        assert result["hhi"] == "NOT_CALCULABLE"
+
+
+def test_concentration_and_dispersion_fallback_reasons_name_observed_zero_and_never_zero_values(
+) -> None:
+    case = _partner_detail_fallback_case(
+        "PARTNER_TRADE_OBSERVED_ZERO"
+    )
+
+    concentration = concentration_metrics(case, "value")
+    dispersion = degraded_dispersion_metrics(case, 0.70)
+
+    assert concentration["reason"] == (
+        "PARTNER_TRADE_OBSERVED_ZERO — normalized response contained "
+        "zero partner rows."
+    )
+    assert dispersion["reason"] == (
+        "PARTNER_TRADE_OBSERVED_ZERO — no partner unit values exist "
+        "because zero partner rows were observed."
+    )
+    assert concentration["status"] == dispersion["status"] == (
+        "NOT_CALCULABLE"
+    )
+    assert concentration["hhi"] != 0
+    assert dispersion["weighted_median_usd_t"] != 0
+
+
+def test_fallback_reasons_unchanged_without_partner_detail_and_for_observed_state(
+) -> None:
+    expected_concentration = (
+        "No partner rows or source-attributed value concentration "
+        "disclosure are available."
+    )
+    expected_dispersion = (
+        "No comparable partner rows or source-attributed dispersion "
+        "disclosure are available."
+    )
+    no_detail = _partner_detail_fallback_case(None)
+    observed = _partner_detail_fallback_case(
+        "PARTNER_DETAIL_OBSERVED"
+    )
+
+    for case in (no_detail, observed):
+        assert concentration_metrics(case, "value")["reason"] == (
+            expected_concentration
+        )
+        assert degraded_dispersion_metrics(case, 0.70)["reason"] == (
+            expected_dispersion
+        )

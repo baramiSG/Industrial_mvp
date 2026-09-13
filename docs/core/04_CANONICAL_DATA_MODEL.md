@@ -544,11 +544,37 @@ briefs)` validates every brief and, once S14b commits a derived snapshot,
 compares the committed bytes with a fresh brief + universe + partner +
 DocumentRecord projection.
 
-S14b will formalize this carrier as the version-gated PublicSnapshot 2.2.0
-`partner_detail` block and update concentration/R3/R4-D reason codes in the
-same change as its single visual regeneration. Until then, 2.1.0 passport
-markers distinguish missing evidence from zero while the engine reason strings
-remain generic.
+S14b formalizes the carrier as version-gated `PublicSnapshot 2.2.0`.
+Its exact-key `partner_detail` block contains exactly:
+
+- `state`
+- `reason`
+- `source_id`
+- `partner_snapshot_id`
+- `unit_key`
+- `observed_partner_rows`
+- `attempt_passport_ids`
+- `observed_passport_id`
+
+The source ID and partner-snapshot ID identify the source-qualified input, or
+carry explicit `UNAVAILABLE`; the unit key must identify the opportunity HS6,
+imports and 2024. OBSERVED requires a positive row count equal to the partner
+observations and a calculated public observed passport referenced by every
+row; unresolved superseded attempts remain named. MISSING requires
+`UNAVAILABLE` partner observations and row count, a governed missing reason,
+a null observed-passport ID and unresolved attempt passports, except that
+`NOT_ACQUIRED` may have no attempt. ZERO requires `UNAVAILABLE` partner
+observations, row count zero, null reason and a public observed zero passport
+whose ID ends `-PARTNERS-ZERO`. The builder derives every value from the
+validated CaseBrief and referenced evidence; the block is never authored in a
+snapshot.
+
+PublicSnapshot 2.1.0 records remain valid unchanged. They retain the
+passport-marker carrier above and do not acquire an authored 2.2.0 block.
+Only the five S14b derived snapshots use 2.2.0. Concentration, R3, R4-D,
+GenUI and dossier projections consume the typed state: missing evidence stays
+`NOT_CALCULABLE`, observed zero stays distinct, and no absent value becomes
+numeric zero.
 
 `DocumentList 1.0.0` publisher kinds additionally include
 `nomenclature_authority`, restricted to `wco_hs_nomenclature`, Class B and

@@ -275,6 +275,17 @@ def test_partner_detail_reason_set_equals_unavailable_reason_enum_plus_not_acqui
     )
 
 
+def test_brief_vocabularies_are_imported_from_public_snapshot_single_source() -> None:
+    from ior_mvp import public_snapshot
+    from ior_mvp.cases import brief
+
+    assert brief.PARTNER_DETAIL_STATES is public_snapshot.PARTNER_DETAIL_STATES
+    assert (
+        brief.PARTNER_DETAIL_MISSING_REASONS
+        is public_snapshot.PARTNER_DETAIL_MISSING_REASONS
+    )
+
+
 def test_partner_descriptions_unavailable_is_governed_reason_and_requires_matching_normalized_attempt(
     tmp_path: Path,
 ) -> None:
