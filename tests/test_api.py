@@ -393,6 +393,19 @@ def test_no_candidate_expected_payloads_match_engine_output(
     )
     assert expected_path.is_file()
     expected = json.loads(expected_path.read_text(encoding="utf-8"))
+
+    def current_ui_version(value: object) -> None:
+        if isinstance(value, dict):
+            for key, child in value.items():
+                if key == "ui_strings" and child == "1.3.0":
+                    value[key] = "1.4.0"
+                else:
+                    current_ui_version(child)
+        elif isinstance(value, list):
+            for child in value:
+                current_ui_version(child)
+
+    current_ui_version(expected)
     fixture_client = TestClient(app, raise_server_exceptions=False)
 
     actual = {
@@ -428,7 +441,20 @@ def test_opportunity_list_modes() -> None:
     public = client.get("/api/opportunities?mode=public")
     simulated = client.get("/api/opportunities?mode=simulated")
     assert public.status_code == simulated.status_code == 200
-    assert len(public.json()) == len(simulated.json()) == 7
+    assert len(public.json()) == len(simulated.json()) == 11
+    assert {row["id"] for row in public.json()} == {
+        "SAU-H0-721049",
+        "SAU-H0-390210",
+        "SAU-H6-721061",
+        "SAU-H6-721012",
+        "SAU-H6-760711",
+        "SAU-H6-760429",
+        "SAU-H6-392010",
+        "SAU-H6-294110",
+        "SAU-H6-294120",
+        "SAU-H6-310430",
+        "SAU-H6-310510",
+    }
 
 
 @pytest.mark.parametrize(
@@ -890,6 +916,78 @@ def test_missing_economics_input_returns_422(
     payload = response.json()
     assert payload["detail"]["code"] == "EVIDENCE_INTEGRITY_ERROR"
     assert missing_key in payload["detail"]["message"]
+
+
+def test_s15b_absent_evsi_is_null_across_analysis_and_manifest() -> None:
+    client = TestClient(app, raise_server_exceptions=False)
+    public = client.get("/api/opportunities/SAU-H6-294110?mode=public")
+    simulated = client.get("/api/opportunities/SAU-H6-294110?mode=simulated")
+    manifest = client.get(
+        "/api/opportunities/SAU-H6-294110/ui-manifest?mode=simulated"
+    )
+
+    assert public.status_code == 200
+    assert simulated.status_code == 200
+    assert manifest.status_code == 200
+    payload = simulated.json()
+    assert payload["evsi"] is None
+    assert payload["real_decision"] == public.json()["real_decision"]
+    assert payload["data_unlocks"] == public.json()["data_unlocks"]
+    assert "evsi" not in payload["synthetic_inputs_used"]
+    assert not any(
+        row["evidence_id"].endswith("::evsi")
+        for row in payload["evidence"]
+        if row.get("synthetic_flag") is True
+    )
+    economics = next(
+        row["props"]
+        for row in manifest.json()["components"]
+        if row["type"] == "economics_panel"
+    )
+    assert economics["evsi"] is None
+
+
+@pytest.mark.parametrize(
+    ("invalid_evsi", "detail"),
+    [
+        (None, "evsi must be a mapping"),
+        ([], "evsi must be a mapping"),
+        ({}, "route_change_probability"),
+        ({"route_change_probability": 0.5}, "value_difference_m_sar"),
+        (
+            {
+                "route_change_probability": None,
+                "value_difference_m_sar": 10.0,
+                "evidence_cost_m_sar": 1.0,
+                "delay_cost_m_sar": 1.0,
+            },
+            "invalid value",
+        ),
+    ],
+)
+def test_s15b_supplied_invalid_evsi_returns_typed_422(
+    monkeypatch: pytest.MonkeyPatch,
+    invalid_evsi: object,
+    detail: str,
+) -> None:
+    scenario = get_synthetic_scenario("SAU-H6-294110")
+    assert scenario is not None
+    invalid = deepcopy(scenario)
+    invalid["synthetic_inputs"]["evsi"] = invalid_evsi
+    monkeypatch.setattr(
+        decision_engine,
+        "get_synthetic_scenario",
+        lambda opportunity_id: invalid,
+    )
+
+    response = TestClient(app, raise_server_exceptions=False).get(
+        "/api/opportunities/SAU-H6-294110?mode=simulated"
+    )
+
+    assert response.status_code == 422
+    payload = response.json()
+    assert payload["detail"]["code"] == "EVIDENCE_INTEGRITY_ERROR"
+    assert detail in payload["detail"]["message"]
 
 
 def test_analysis_narrative_integrity_failure_returns_typed_422(

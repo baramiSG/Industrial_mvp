@@ -24,6 +24,13 @@ S14B_PUBLIC_AND_SYNTHETIC = {
         "TINPLATE",
     )
 }
+S15B_PUBLIC_AND_SYNTHETIC = {
+    f"data/snapshots/public/PUBLIC-SAU-H6-{hs6}-2026-09-12.json"
+    for hs6 in ("294110", "294120", "310430", "310510")
+} | {
+    f"data/synthetic/SYN-MINISTRY-{slug}-001.json"
+    for slug in ("PENICILLIN-API", "STREPTOMYCIN-API", "SOP", "FERT-RETAIL-PACKS")
+}
 
 
 def test_manifests_exist_and_track_expected_files() -> None:
@@ -74,7 +81,7 @@ def test_s08_snapshot_manifest_retains_live_and_historical_public_rows(
         "data/synthetic/historical/v1_1/SYN-MINISTRY-STEEL-001.json",
         "data/synthetic/historical/v1_1/SYN-MINISTRY-PP-001.json",
         "data/golden/ar_en_spec_extraction.json",
-    } | S14B_PUBLIC_AND_SYNTHETIC
+    } | S14B_PUBLIC_AND_SYNTHETIC | S15B_PUBLIC_AND_SYNTHETIC
     assert frozen <= paths
     allowed_extra_prefixes = (
         "data/raw/",
@@ -109,7 +116,7 @@ def _partition_valid(paths: set[str]) -> bool:
         "data/synthetic/historical/v1_1/SYN-MINISTRY-STEEL-001.json",
         "data/synthetic/historical/v1_1/SYN-MINISTRY-PP-001.json",
         "data/golden/ar_en_spec_extraction.json",
-    } | S14B_PUBLIC_AND_SYNTHETIC
+    } | S14B_PUBLIC_AND_SYNTHETIC | S15B_PUBLIC_AND_SYNTHETIC
     if not frozen <= paths:
         return False
     allowed_extra_prefixes = (
@@ -142,6 +149,8 @@ def test_s11_snapshot_manifest_rejects_public_partition_leak() -> None:
     )
     paths = {item["path"] for item in manifest["files"]}
     assert _partition_valid(paths)
+    for required in S15B_PUBLIC_AND_SYNTHETIC:
+        assert not _partition_valid(paths - {required})
     assert not _partition_valid(paths | {"data/snapshots/public/extra.json"})
     assert not _partition_valid(paths | {"data/synthetic/extra.json"})
     for kind in ("production", "directory", "registry"):
@@ -738,9 +747,9 @@ def test_reconstruct_script_prints_case_reconstruction_pass_line(
         check_manifest=False,
         manifest_rows={},
     )
-    assert (committed, briefs) == (5, 9)
+    assert (committed, briefs) == (9, 9)
     assert (
-        "CASE RECONSTRUCTION PASS (5 snapshots, 9 briefs)"
+        "CASE RECONSTRUCTION PASS (9 snapshots, 9 briefs)"
         in capsys.readouterr().out
     )
 
@@ -1198,3 +1207,49 @@ def test_reconstruct_script_prints_graph_reconstruction_pass_line(
     assert nodes > 0
     assert edges > 0
     assert "GRAPH RECONSTRUCTION PASS (1 projections," in capsys.readouterr().out
+
+
+def test_s15b_core_and_control_contracts_are_present() -> None:
+    core_01 = (
+        PROJECT_ROOT / "docs/core/01_PRODUCT_AND_REQUIREMENTS.md"
+    ).read_text(encoding="utf-8")
+    core_02 = (
+        PROJECT_ROOT / "docs/core/02_METHODOLOGY_IMPLEMENTATION_MAP.md"
+    ).read_text(encoding="utf-8")
+    core_03 = (
+        PROJECT_ROOT / "docs/core/03_SYSTEM_ARCHITECTURE.md"
+    ).read_text(encoding="utf-8")
+    core_04 = (
+        PROJECT_ROOT / "docs/core/04_CANONICAL_DATA_MODEL.md"
+    ).read_text(encoding="utf-8")
+    core_07 = (
+        PROJECT_ROOT / "docs/core/07_DETERMINISTIC_ENGINE_SPEC.md"
+    ).read_text(encoding="utf-8")
+    core_09 = (
+        PROJECT_ROOT / "docs/core/09_TEST_ACCEPTANCE_AND_GOLDEN_CASES.md"
+    ).read_text(encoding="utf-8")
+    combined = "\n".join(
+        (core_01, core_02, core_03, core_04, core_07, core_09)
+    )
+
+    for token in (
+        "GET /api/case-selection",
+        "CASE_SELECTION_INTEGRITY_ERROR",
+        "CASE-SELECTION-S15-b96de36ff0ce",
+        "SYN-MINISTRY-PENICILLIN-API-001",
+        "SYN-MINISTRY-STREPTOMYCIN-API-001",
+        "SYN-MINISTRY-SOP-001",
+        "SYN-MINISTRY-FERT-RETAIL-PACKS-001",
+        "evsi: null",
+        "SERIES_GAP_YEARS",
+        "eleven cases",
+    ):
+        assert token in combined
+    assert "ADR-025" in (
+        PROJECT_ROOT / "docs/ARCHITECTURE_DECISIONS.md"
+    ).read_text(encoding="utf-8")
+    limitations = (
+        PROJECT_ROOT / "docs/KNOWN_LIMITATIONS.md"
+    ).read_text(encoding="utf-8")
+    assert "KL-124" in limitations
+    assert "KL-125" in limitations

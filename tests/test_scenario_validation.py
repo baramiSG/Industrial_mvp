@@ -354,13 +354,13 @@ def test_repository_scenario_validator_passes_current_fixtures(
 
     assert status == 0
     output = capsys.readouterr().out
-    assert "SCENARIO VALIDATION PASS (7 scenarios)" in output
+    assert "SCENARIO VALIDATION PASS (11 scenarios)" in output
     assert "status=PASS" in output
     assert (
         "tariff_line_allocation_sums_to_public_hs6_total: "
         "NOT_APPLICABLE"
     ) in output
-    assert output.count("ground_truth_backtest: PASS") == 7
+    assert output.count("ground_truth_backtest: PASS") == 11
 
 
 def test_validator_reports_exact_ground_truth_for_all_scenarios() -> None:
@@ -381,6 +381,10 @@ def test_validator_reports_exact_ground_truth_for_all_scenarios() -> None:
         "SYN-MINISTRY-ALU-FOIL-001": ("ADVANCE", 6),
         "SYN-MINISTRY-ALU-PROFILES-001": ("ADVANCE", 4),
         "SYN-MINISTRY-PE-FILM-001": ("REJECT", 0),
+        "SYN-MINISTRY-PENICILLIN-API-001": ("ADVANCE", 1),
+        "SYN-MINISTRY-STREPTOMYCIN-API-001": ("REJECT", 0),
+        "SYN-MINISTRY-SOP-001": ("ADVANCE", 2),
+        "SYN-MINISTRY-FERT-RETAIL-PACKS-001": ("REJECT", 0),
     }
     assert set(by_scenario) == set(expected)
     for scenario_id, (state, route_code) in expected.items():

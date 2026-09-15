@@ -80,7 +80,10 @@ export function renderMetricGrid(props) {
   const latest = [...props.trade].sort((a, b) => a.year - b.year).at(-1);
   const capacity = props.capacity;
   const economics = props.economics;
-  const hhi = props.supplier_metrics?.partner_value_hhi;
+  const rawHhi = props.supplier_metrics?.partner_value_hhi;
+  const hhi = typeof rawHhi === "number" && Number.isFinite(rawHhi)
+    ? rawHhi
+    : null;
   const threshold = props.supplier_concentration?.hhi_threshold;
   const partnerDetail = props.partner_detail;
   const metrics = [

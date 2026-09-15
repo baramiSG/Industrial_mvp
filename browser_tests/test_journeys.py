@@ -14,8 +14,12 @@ from browser_tests.harness import (
     CASES,
     LOCALES,
     MODES,
+    FERT_RETAIL_PACKS,
+    PENICILLIN_API,
     POLYPROPYLENE,
+    SOP,
     STEEL,
+    STREPTOMYCIN_API,
     BrowserSession,
     Case,
     Locale,
@@ -552,3 +556,41 @@ def test_locale_switch_updates_document_url_storage_and_preserves_state(
     )
     wait_for_document(page, locale)
     wait_for_workspace(page, POLYPROPYLENE, "simulated", locale)
+
+
+@pytest.mark.parametrize(
+    ("case", "locale"),
+    tuple(
+        product(
+            (PENICILLIN_API, STREPTOMYCIN_API, SOP, FERT_RETAIL_PACKS),
+            LOCALES,
+        )
+    ),
+    ids=[
+        f"{case.slug}-{locale.code}"
+        for case, locale in product(
+            (PENICILLIN_API, STREPTOMYCIN_API, SOP, FERT_RETAIL_PACKS),
+            LOCALES,
+        )
+    ],
+)
+def test_s15b_evsi_absent_renders_localized_unavailable(
+    browser_session: BrowserSession,
+    case: Case,
+    locale: Locale,
+) -> None:
+    page = browser_session.page
+    goto_portfolio(page, "simulated", locale)
+    detail, _ = select_case(page, case, "simulated", locale)
+    payload = detail.json()
+    strings = locale_bundle(locale)["strings"]
+    evsi_box = page.locator(".economics-box").filter(
+        has_text=strings["economics.evsi"]
+    )
+
+    assert payload["evsi"] is None
+    expect(evsi_box).to_have_count(1)
+    expect(evsi_box.locator("small")).to_have_text(strings["economics.evsi"])
+    expect(evsi_box.locator("strong")).to_have_text(strings["common.unavailable"])
+    economics_card = evsi_box.locator("xpath=ancestor::article[1]")
+    expect(economics_card).not_to_contain_text(strings["economics.next_fact"])

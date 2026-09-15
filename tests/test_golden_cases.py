@@ -381,3 +381,63 @@ def test_pe_film_public_golden_case() -> None:
 
 def test_pe_film_simulated_golden_case() -> None:
     _assert_s14_simulated_golden("SAU-H6-392010")
+
+
+S15B_GOLDENS = {
+    "SAU-H6-294110": ("ADVANCE", 1, None, 10),
+    "SAU-H6-294120": (
+        "REJECT",
+        0,
+        "EX-03_UNSATISFIABLE_HARD_GATE",
+        4,
+    ),
+    "SAU-H6-310430": ("ADVANCE", 2, None, 11),
+    "SAU-H6-310510": (
+        "REJECT",
+        0,
+        "EX-01_HETEROGENEOUS_RESIDUAL",
+        11,
+    ),
+}
+
+
+@pytest.mark.parametrize(
+    ("opportunity_id", "expected"),
+    list(S15B_GOLDENS.items()),
+)
+def test_s15b_public_golden_cases(
+    opportunity_id: str,
+    expected: tuple[str, int, str | None, int],
+) -> None:
+    result = analyze(opportunity_id, "public")
+
+    assert result["real_decision"]["state"] == "INVESTIGATE"
+    assert result["real_decision"]["route_code"] is None
+    assert result["capability"]["d_star"] is None
+    assert result["partner_detail"]["observed_partner_rows"] == expected[3]
+    assert {
+        row["rule_id"] for row in result["rules"] if row["fired"] is True
+    } == {"R0", "R1-D", "R2", "R3", "R4-D", "R10", "R12"}
+
+
+@pytest.mark.parametrize(
+    ("opportunity_id", "expected"),
+    list(S15B_GOLDENS.items()),
+)
+def test_s15b_simulated_golden_cases(
+    opportunity_id: str,
+    expected: tuple[str, int, str | None, int],
+) -> None:
+    state, route, exclusion, _ = expected
+    result = analyze(opportunity_id, "simulated")
+
+    assert result["real_decision"]["state"] == "INVESTIGATE"
+    assert result["simulation_decision"]["state"] == state
+    assert result["simulation_decision"]["route_code"] == route
+    assert result["evsi"] is None
+    assert result["integrity"]["real_decision_unchanged_after_simulation"] is True
+    assert result["integrity"]["ground_truth_backtest"]["match"] is True
+    satisfied = {
+        row["code"] for row in result["hard_exclusions"] if row["status"] == "SATISFIED"
+    }
+    assert satisfied == ({exclusion} if exclusion else set())

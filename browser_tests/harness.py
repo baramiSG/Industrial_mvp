@@ -122,6 +122,38 @@ PE_FILM = Case(
     public_active_state="INVESTIGATE",
     simulated_active_state="REJECT",
 )
+PENICILLIN_API = Case(
+    id="SAU-H6-294110",
+    hs6="294110",
+    slug="penicillin-api",
+    real_state="INVESTIGATE",
+    public_active_state="INVESTIGATE",
+    simulated_active_state="ADVANCE",
+)
+STREPTOMYCIN_API = Case(
+    id="SAU-H6-294120",
+    hs6="294120",
+    slug="streptomycin-api",
+    real_state="INVESTIGATE",
+    public_active_state="INVESTIGATE",
+    simulated_active_state="REJECT",
+)
+SOP = Case(
+    id="SAU-H6-310430",
+    hs6="310430",
+    slug="sop",
+    real_state="INVESTIGATE",
+    public_active_state="INVESTIGATE",
+    simulated_active_state="ADVANCE",
+)
+FERT_RETAIL_PACKS = Case(
+    id="SAU-H6-310510",
+    hs6="310510",
+    slug="fert-retail-packs",
+    real_state="INVESTIGATE",
+    public_active_state="INVESTIGATE",
+    simulated_active_state="REJECT",
+)
 CASES = (
     STEEL,
     POLYPROPYLENE,
@@ -130,6 +162,10 @@ CASES = (
     ALU_FOIL,
     ALU_PROFILES,
     PE_FILM,
+    PENICILLIN_API,
+    STREPTOMYCIN_API,
+    SOP,
+    FERT_RETAIL_PACKS,
 )
 MODES: tuple[Mode, ...] = ("public", "simulated")
 
@@ -322,6 +358,7 @@ _FOCUS_INVENTORY_SCRIPT = """() => {
     "button:not([disabled])",
     "a[href]",
     "select:not([disabled])",
+    "summary",
     "[tabindex]:not([tabindex='-1'])",
   ].join(",");
   const visible = (element) => {
@@ -344,6 +381,9 @@ _FOCUS_INVENTORY_SCRIPT = """() => {
     }
     if (element.dataset.screeningPage) {
       return `page:${element.dataset.screeningPage}`;
+    }
+    if (element.dataset.selectionDetail) {
+      return `selection:${element.dataset.selectionDetail}`;
     }
     if (element.getAttribute("href")) {
       return `href:${element.getAttribute("href")}`;
@@ -385,6 +425,9 @@ _FOCUSED_CONTROL_SCRIPT = """() => {
     }
     if (element.dataset.screeningPage) {
       return `page:${element.dataset.screeningPage}`;
+    }
+    if (element.dataset.selectionDetail) {
+      return `selection:${element.dataset.selectionDetail}`;
     }
     if (element.getAttribute("href")) {
       return `href:${element.getAttribute("href")}`;

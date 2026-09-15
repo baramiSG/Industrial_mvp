@@ -1,0 +1,186 @@
+{
+  "decision_narrative": {
+    "ADVANCE": {
+      "conditions": [
+        {
+          "ar": "تأكيد مواصفة كبريتات البوتاسيوم والطلب المستهدف قبل تنفيذ برنامج الربط.",
+          "en": "Confirm the potassium-sulphate specification and target demand before the linkage programme."
+        },
+        {
+          "ar": "ربط استمرار التدخل بتحقق مطابقة المنتج ووصوله إلى المشترين المستهدفين.",
+          "en": "Continue the intervention only while product matching and target-buyer access are demonstrated."
+        }
+      ],
+      "headline": {
+        "ar": "تقدّم مُحاكى — معالجة قيد معلومات وربط سوقي لكبريتات البوتاسيوم",
+        "en": "SIMULATED ADVANCE — address an information and market-linkage constraint for potassium sulphate"
+      },
+      "kill_conditions": [
+        {
+          "ar": "عدم تأكيد الطلب على المواصفة أو قدرة المنتج المفترضة.",
+          "en": "The assumed specification demand or product capability is not confirmed."
+        },
+        {
+          "ar": "ثبوت أن الربط لا يغيّر قرار المشترين أو أن المشروع سيمضي من دونه.",
+          "en": "Linkage does not change buyer decisions or the project proceeds without it."
+        }
+      ],
+      "rationale": {
+        "ar": "تفترض المحاكاة منتج كبريتات بوتاسيوم محدد المواصفة وبوابات فنية محلولة، وتحدد نقص المعلومات والربط بين العرض والمشترين بوصفه القيد الملزم؛ لذلك يزيل المسار 2 القيد قبل أي دعم أعلى.",
+        "en": "The simulation assumes a specified potassium-sulphate product and resolved technical gates, and identifies missing information and buyer linkage as the binding constraint; route 2 therefore resolves the gap before any higher intervention."
+      },
+      "route_label": {
+        "ar": "المعلومات والربط السوقي (المسار 2)",
+        "en": "Information and market linkage (route 2)"
+      }
+    }
+  },
+  "display_label": "SIMULATED — NOT MINISTRY EVIDENCE",
+  "evidence_class": "D",
+  "ground_truth": {
+    "basis": "Class-D planted ground truth: route 2 fully removes the information or market-linkage constraint, route 1 does not pass, every exclusion is NOT_SATISFIED, and higher routes are precedence-blocked.",
+    "expected_route_code": 2,
+    "expected_simulation_state": "ADVANCE"
+  },
+  "narrative_metadata": {
+    "arabic_text_status": "ANALYST_AUTHORED_DRAFT"
+  },
+  "opportunity_id": "SAU-H6-310430",
+  "scenario_id": "SYN-MINISTRY-SOP-001",
+  "scenario_version": "2.0.0",
+  "seed_basis": "Public snapshot PUBLIC-SAU-H6-310430-2026-09-12 trade year 2024 imports_kt 22.461146 bounds the Class-D demand and line assumptions; no public nameplate is asserted.",
+  "source": "DEMO_GENERATOR",
+  "synthetic_flag": true,
+  "synthetic_inputs": {
+    "capability_states": {
+      "capacity_time_window": 0,
+      "certification_customer_qualification": 0,
+      "core_process_route": 0,
+      "equipment_envelope": 0,
+      "feedstock_chemistry": 0,
+      "finishing_spec_control": 0,
+      "qa_lab_metrology": 0,
+      "skills_market_integration": 0,
+      "utilities_ehs_permitting": 0
+    },
+    "class_if_confirmed": {
+      "basis": "Hypothetical confirmed Ministry-grade identity, demand, capability and gate records.",
+      "demand_at_required_specification": "A",
+      "domestic_supply_or_capability": "A",
+      "hard_regulatory_or_process_gate": "B",
+      "product_identity": "A"
+    },
+    "counterfactual": {
+      "q1_incumbent_meets_specification_without_capital": false
+    },
+    "decision_specific_hard_gates": {
+      "agronomic_performance": "resolved by the synthetic agronomic record",
+      "emissions_and_safe_handling": "resolved by the synthetic handling record",
+      "feedstock_route": "resolved by the synthetic feedstock record",
+      "formulation_granulation": "resolved by the synthetic formulation record",
+      "nutrient_basis": "resolved by the synthetic nutrient record"
+    },
+    "demand": {
+      "committed_demand_kt": 5.615286,
+      "downside_demand_kt": 10.107515,
+      "target_spec_demand_kt": 11.230573
+    },
+    "economics": {
+      "cash_flows_without_support": [-10.0, 6.0, 6.0],
+      "currency": "SAR_m",
+      "hurdle_rate": 0.1,
+      "minimum_efficient_scale_kt": 2.246114,
+      "national_value": {
+        "displacement": 1.0,
+        "domestic_value_added": 50.0,
+        "exports": 10.0,
+        "fiscal_receipts": 5.0,
+        "government_cost": 5.0,
+        "knowledge_skills": 5.0,
+        "resilience_value": 5.0,
+        "resource_environment": 1.0,
+        "risk_allowance": 2.0
+      },
+      "support_instrument": "Hypothetical non-financial information and buyer-linkage intervention"
+    },
+    "equivalence": {
+      "basis": "Class-D assumption that no currently qualified equivalent supply resolves the named target application.",
+      "domestic_grade_equivalent": false
+    },
+    "hard_exclusion_inputs": {
+      "downside_market_below_mes": {
+        "credible_export_contract": false
+      },
+      "heterogeneous_residual_code": {
+        "commercial_product_separable": true,
+        "product_level_evidence_available": true
+      },
+      "idle_equivalent_domestic_capacity": {
+        "binding_market_failure": true,
+        "qualified_idle_capacity_kt": 0.0
+      },
+      "redundancy_or_crowd_out": {
+        "competition_finding": "ACCEPTABLE"
+      },
+      "transitory_or_measurement_gap": {
+        "dominant_cause": "OTHER"
+      },
+      "unsatisfiable_hard_gate": {
+        "gate_domain": "safe_handling",
+        "gate_satisfiability": "SATISFIABLE"
+      }
+    },
+    "hard_gates": {
+      "agronomic_performance": "resolved",
+      "emissions_and_safe_handling": "resolved",
+      "feedstock_route": "resolved",
+      "formulation_granulation": "resolved",
+      "nutrient_basis": "resolved"
+    },
+    "plant_line": {
+      "availability": 0.9,
+      "current_utilisation": 0.7,
+      "market_allocation_share": 0.8,
+      "nameplate_kt": 11.230573,
+      "qualification_share": 0.5,
+      "yield": 0.95
+    },
+    "route_evidence": [
+      {
+        "basis": "Class-D information and market-linkage simulation assumption.",
+        "binding_constraint": "information_or_market_linkage",
+        "binding_constraint_fully_removed": true,
+        "competition": {
+          "downside_demand_kt": 10.107515,
+          "existing_effective_capacity_kt": 3.840856,
+          "proposed_incremental_capacity_kt": 0.0
+        },
+        "distortion_unacceptable": false,
+        "downside_cash_flows_m_sar": [-10.0, 6.0, 6.0],
+        "hurdle_rate": 0.1,
+        "intervention_proportionate_to_constraint": true,
+        "investment_already_approved_or_financed": false,
+        "national_value": {
+          "displacement": 1.0,
+          "domestic_value_added": 50.0,
+          "exports": 10.0,
+          "fiscal_receipts": 5.0,
+          "government_cost": 5.0,
+          "knowledge_skills": 5.0,
+          "resilience_value": 5.0,
+          "resource_environment": 1.0,
+          "risk_allowance": 2.0
+        },
+        "policy_prohibition_identified": false,
+        "proceeds_without_intervention": false,
+        "route_code": 2,
+        "technical_feasibility_confirmed": true
+      }
+    ],
+    "target_specification": {
+      "application": "chloride-sensitive crop nutrition programme",
+      "name": "Synthetic potassium-sulphate specification SOP-001",
+      "standard": "Synthetic nutrient-basis and agronomic-performance specification"
+    }
+  }
+}

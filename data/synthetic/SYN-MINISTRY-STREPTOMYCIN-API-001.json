@@ -1,0 +1,150 @@
+{
+  "decision_narrative": {
+    "REJECT": {
+      "conditions": [
+        {
+          "ar": "لا يُعاد فتح الحالة إلا بدليل أن بوابة التصريف البيئي قابلة للحل ضمن المتطلبات النظامية.",
+          "en": "Reopen only with evidence that the environmental-effluent gate is satisfiable within regulatory requirements."
+        }
+      ],
+      "headline": {
+        "ar": "رفض مُحاكى — بوابة بيئية صلبة غير قابلة للحل لمادة ستربتوميسين دوائية فعالة",
+        "en": "SIMULATED REJECT — unsatisfiable environmental hard gate for a streptomycin API"
+      },
+      "kill_conditions": [
+        {
+          "ar": "استمرار عدم قابلية بوابة التصريف البيئي للحل يوقف جميع مسارات التدخل.",
+          "en": "Continued inability to satisfy the effluent gate stops every intervention route."
+        }
+      ],
+      "rationale": {
+        "ar": "تفترض المحاكاة مادة ستربتوميسين دوائية فعالة محددة، لكنها تسجل بوابة تصريف بيئي غير قابلة للحل؛ لذلك يتحقق الاستبعاد EX-03 ويُرفض التدخل قبل مقارنة المسارات.",
+        "en": "The simulation assumes a specified streptomycin API but records an unsatisfiable environmental-effluent gate; exclusion EX-03 is therefore satisfied and intervention is rejected before route comparison."
+      },
+      "route_label": {
+        "ar": "لا تدخل — استبعاد بوابة صلبة",
+        "en": "No intervention — hard-gate exclusion"
+      }
+    }
+  },
+  "display_label": "SIMULATED — NOT MINISTRY EVIDENCE",
+  "evidence_class": "D",
+  "ground_truth": {
+    "basis": "Class-D planted ground truth: EX-03 is SATISFIED because the environmental-effluent gate is UNSATISFIABLE, so REJECT route 0 precedes route selection.",
+    "expected_route_code": 0,
+    "expected_simulation_state": "REJECT"
+  },
+  "narrative_metadata": {
+    "arabic_text_status": "ANALYST_AUTHORED_DRAFT"
+  },
+  "opportunity_id": "SAU-H6-294120",
+  "scenario_id": "SYN-MINISTRY-STREPTOMYCIN-API-001",
+  "scenario_version": "2.0.0",
+  "seed_basis": "Public snapshot PUBLIC-SAU-H6-294120-2026-09-12 trade year 2024 imports_kt 0.047779 bounds the Class-D demand and line assumptions; no public nameplate is asserted.",
+  "source": "DEMO_GENERATOR",
+  "synthetic_flag": true,
+  "synthetic_inputs": {
+    "capability_states": {
+      "capacity_time_window": 0,
+      "certification_customer_qualification": 0,
+      "core_process_route": 0,
+      "equipment_envelope": 0,
+      "feedstock_chemistry": 0,
+      "finishing_spec_control": 0,
+      "qa_lab_metrology": 0,
+      "skills_market_integration": 0,
+      "utilities_ehs_permitting": 3
+    },
+    "class_if_confirmed": {
+      "basis": "Hypothetical confirmed Ministry-grade identity, demand and capability records; the hard-gate finding remains a Class-D simulation assumption.",
+      "demand_at_required_specification": "A",
+      "domestic_supply_or_capability": "A",
+      "hard_regulatory_or_process_gate": "B",
+      "product_identity": "A"
+    },
+    "counterfactual": {
+      "q1_incumbent_meets_specification_without_capital": false
+    },
+    "decision_specific_hard_gates": {
+      "analytical_validation": "resolved by the synthetic analytical method record",
+      "containment": "resolved by the synthetic containment record",
+      "effluent": "known failure: synthetic environmental-effluent gate is unsatisfiable",
+      "gmp": "resolved by the synthetic GMP record",
+      "impurity_control": "resolved by the synthetic impurity-control record",
+      "ip_fto": "resolved by the synthetic freedom-to-operate record",
+      "named_molecule_and_synthesis_route": "resolved by the synthetic molecule and route record"
+    },
+    "demand": {
+      "committed_demand_kt": 0.011944,
+      "downside_demand_kt": 0.021500,
+      "target_spec_demand_kt": 0.023889
+    },
+    "economics": {
+      "cash_flows_without_support": [-10.0, 6.0, 6.0],
+      "currency": "SAR_m",
+      "hurdle_rate": 0.1,
+      "minimum_efficient_scale_kt": 0.004777,
+      "national_value": {
+        "displacement": 1.0,
+        "domestic_value_added": 50.0,
+        "exports": 10.0,
+        "fiscal_receipts": 5.0,
+        "government_cost": 5.0,
+        "knowledge_skills": 5.0,
+        "resilience_value": 5.0,
+        "resource_environment": 1.0,
+        "risk_allowance": 2.0
+      },
+      "support_instrument": "Hypothetical non-financial administrative intervention"
+    },
+    "equivalence": {
+      "basis": "Class-D assumption that no currently qualified equivalent supply resolves the named target application.",
+      "domestic_grade_equivalent": false
+    },
+    "hard_exclusion_inputs": {
+      "downside_market_below_mes": {
+        "credible_export_contract": false
+      },
+      "heterogeneous_residual_code": {
+        "commercial_product_separable": true,
+        "product_level_evidence_available": true
+      },
+      "idle_equivalent_domestic_capacity": {
+        "binding_market_failure": true,
+        "qualified_idle_capacity_kt": 0.0
+      },
+      "redundancy_or_crowd_out": {
+        "competition_finding": "ACCEPTABLE"
+      },
+      "transitory_or_measurement_gap": {
+        "dominant_cause": "OTHER"
+      },
+      "unsatisfiable_hard_gate": {
+        "gate_domain": "environmental",
+        "gate_satisfiability": "UNSATISFIABLE"
+      }
+    },
+    "hard_gates": {
+      "analytical_validation": "resolved",
+      "containment": "resolved",
+      "effluent": "known failure: synthetic environmental-effluent gate is unsatisfiable",
+      "gmp": "resolved",
+      "impurity_control": "resolved",
+      "ip_fto": "resolved",
+      "named_molecule_and_synthesis_route": "resolved"
+    },
+    "plant_line": {
+      "availability": 0.9,
+      "current_utilisation": 0.7,
+      "market_allocation_share": 0.8,
+      "nameplate_kt": 0.023889,
+      "qualification_share": 0.5,
+      "yield": 0.95
+    },
+    "target_specification": {
+      "application": "sterile finished-dose manufacturing using a named streptomycin API",
+      "name": "Synthetic streptomycin API specification S-API-001",
+      "standard": "Synthetic GMP, impurity-control and effluent specification"
+    }
+  }
+}

@@ -20,6 +20,10 @@ OPPORTUNITY_IDS = (
     "SAU-H6-760711",
     "SAU-H6-760429",
     "SAU-H6-392010",
+    "SAU-H6-294110",
+    "SAU-H6-294120",
+    "SAU-H6-310430",
+    "SAU-H6-310510",
 )
 MODES = ("public", "simulated")
 ANALYSIS_PATHS = (

@@ -30,6 +30,10 @@ import {
   rerenderScreening,
   screeningBack,
 } from "./screening/index.js";
+import {
+  renderSelection,
+  retrySelection,
+} from "./selection/index.js";
 
 export function scrollToSection(id) {
   document.getElementById(id)?.scrollIntoView({
@@ -59,6 +63,7 @@ export function rerenderLocaleState() {
   renderPortfolioChip();
   renderExtraction();
   rerenderScreening();
+  renderSelection();
 }
 
 export async function switchLocale() {
@@ -77,11 +82,13 @@ async function handleClick(event) {
     "[data-mode],[data-target],[data-open-id],[data-dossier-html],"
     + "[data-copy-json],[data-locale-switch],[data-queue-id],[data-hs6],"
     + "[data-screening-back],[data-screening-page],[data-passport-ref],"
-    + "#open-first-case,#view-methodology",
+    + "[data-selection-retry],#open-first-case,#view-methodology",
   );
   if (!target) return;
   if (target.dataset.localeSwitch !== undefined) {
     await switchLocale();
+  } else if (target.dataset.selectionRetry !== undefined) {
+    await retrySelection();
   } else if (target.dataset.mode) {
     await setMode(target.dataset.mode);
   } else if (target.dataset.target) {

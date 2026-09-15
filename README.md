@@ -22,13 +22,14 @@ The real decision state is immutable. Synthetic evidence is separately flagged, 
 - Original final methodology as the governing domain authority.
 - Ten-document frozen implementation core.
 - Versioned threshold, sector-profile and evidence-policy configuration.
-- Two hashed public golden-case snapshots.
-- Two Ministry-grade synthetic scenarios seeded from public marginals.
+- Eleven hashed public golden-case snapshots, including four S15b builder-derived cases.
+- Eleven explicitly Class-D synthetic scenarios seeded from public marginals.
 - Deterministic R0–R12 execution ledger.
 - Price–quantity decomposition, concentration, effective capacity, K/U/D\*, NPV, IRR, S\*, incremental national value, competition ratio and EVSI.
 - Schema-driven GenUI decision workspace assembled from an approved component library.
 - Arabic–English specification extraction golden gate with preserved source spans.
 - One-page decision dossier in JSON and printable HTML.
+- Manifest-verified bilingual S15 case-selection and exclusion surface at `/api/case-selection`.
 - FastAPI backend, offline frontend, tests, integrity manifests, Docker support and WSL startup scripts.
 
 ## Start in WSL
@@ -103,7 +104,7 @@ bilingual catalogue/token/copy contracts, Python compilation, recursive
 ES-module syntax, integrity verification, Gate B scenario
 reconciliation/back-test, full test suite and demo smoke on uv/Python 3.12,
 uv/Python 3.14 and the documented pip path; it also builds the Docker image and
-compares 118 functional plus four governed visual Chromium nodes.
+compares 498 functional plus four governed visual Chromium nodes.
 
 After installing uv as described in `docs/DEVELOPMENT_GUIDE.md`, reproduce the required gates locally with:
 

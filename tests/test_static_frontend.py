@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import re
 import subprocess
 from pathlib import Path
@@ -210,6 +211,91 @@ def test_metric_grid_hhi_note_uses_partner_detail_catalogue_keys_and_never_rende
         in grid
     )
     assert "hhi == null ? 0" not in grid
+
+
+def _javascript_function(source: str, name: str) -> str:
+    return f"function {name}{_app_function(source, name)}\n}}"
+
+
+def test_metric_grid_executes_value_hhi_unavailable_and_numeric_cases() -> None:
+    source = _module_source("modules/renderers/decision.js")
+    functions = "\n".join(
+        _javascript_function(source, name)
+        for name in ("hhiNote", "decisionObjectStatus", "renderMetricGrid")
+    )
+    script = f"""
+const state = {{
+  locale: "en",
+  ui: {{bcp47: "en-US"}},
+  analysis: {{
+    real_decision: {{confidence: "LOW"}},
+    opportunity: {{decision_object_status: "resolved"}},
+  }},
+}};
+const translations = {{
+  en: {{unavailable: "Unavailable", hhiUnavailable: "HHI unavailable"}},
+  ar: {{unavailable: "غير متاح", hhiUnavailable: "مؤشر التركّز غير متاح"}},
+}};
+function t(key, values = {{}}) {{
+  if (key === "common.unavailable") return translations[state.locale].unavailable;
+  if (key === "metric.hhi_unavailable") return translations[state.locale].hhiUnavailable;
+  if (key === "metric.hhi_threshold") return `threshold:${{values.threshold}}`;
+  return key;
+}}
+function localeTag() {{ return state.locale === "ar" ? "ar-SA-u-nu-latn" : "en-US-u-nu-latn"; }}
+function number(value, digits = 1) {{
+  if (value == null) return t("common.unavailable");
+  return new Intl.NumberFormat(localeTag(), {{
+    numberingSystem: "latn", minimumFractionDigits: 0, maximumFractionDigits: digits,
+  }}).format(value);
+}}
+function integer(value) {{ return String(value); }}
+function usd(value) {{ return `USD ${{number(value)}}m`; }}
+function money(value) {{ return `SAR ${{number(value)}}m`; }}
+function technical(value) {{ return `<technical>${{value}}</technical>`; }}
+function escapeHtml(value) {{ return String(value); }}
+{functions}
+const values = [
+  ["sentinel", "NOT_CALCULABLE"], ["null", null], ["undefined", undefined],
+  ["nan", NaN], ["infinity", Infinity], ["zero", 0], ["valid", 0.2935],
+];
+const output = [];
+for (const locale of ["en", "ar"]) {{
+  state.locale = locale;
+  for (const [name, value] of values) {{
+    const props = {{
+      trade: [{{year: 2025, imports_usd_m: 1, imports_kt: 1}}],
+      supplier_metrics: value === undefined ? {{}} : {{partner_value_hhi: value}},
+      supplier_concentration: {{hhi_threshold: 0.3}}, partner_detail: {{}},
+      capacity: null, economics: null,
+    }};
+    output.push({{locale, name, html: renderMetricGrid(props)}});
+  }}
+}}
+console.log(JSON.stringify(output));
+"""
+    result = subprocess.run(
+        ["node", "--input-type=module"], input=script, text=True,
+        capture_output=True, check=False,
+    )
+    assert result.returncode == 0, result.stderr
+    rows = json.loads(result.stdout)
+    for row in rows:
+        value = re.search(
+            r"<small>metric\.supplier_hhi</small>\s*<strong>(.*?)</strong>",
+            row["html"], re.DOTALL,
+        )
+        assert value is not None
+        if row["name"] in {"sentinel", "null", "undefined", "nan", "infinity"}:
+            unavailable = "Unavailable" if row["locale"] == "en" else "غير متاح"
+            note = "HHI unavailable" if row["locale"] == "en" else "مؤشر التركّز غير متاح"
+            assert value.group(1) == f"<technical>{unavailable}</technical>"
+            assert note in row["html"]
+            assert "NaN" not in row["html"]
+        elif row["name"] == "zero":
+            assert value.group(1) == "<technical>0</technical>"
+        else:
+            assert value.group(1) == "<technical>0.29</technical>"
 
 
 def test_trade_chart_path_breaks_at_unavailable_points_instead_of_emitting_nan(

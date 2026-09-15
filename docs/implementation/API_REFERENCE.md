@@ -24,6 +24,10 @@ Returns the project definition, modes, external build references and golden-case
 
 Returns the versioned threshold artifact exactly as loaded by the engine.
 
+## GET `/api/case-selection`
+
+Returns response schema `1.0.0` for the manifest-verified public S15 selection record: selection and rule identities, repository-relative reference and hash, recorded public input references, and ordered pharma/API and fertilizer profile objects with quotas, selected cases, substitutes and every recorded exclusion. The endpoint accepts no caller-selected file path and remains identical if an unused `mode` query is supplied. Selection-integrity failures return HTTP 422 with `CASE_SELECTION_INTEGRITY_ERROR` and no partial response.
+
 ## GET `/api/opportunities?mode=public|simulated`
 
 Returns portfolio summaries.
@@ -54,7 +58,7 @@ Returns the complete analysis contract:
 - trade, evidence and data unlocks;
 - integrity assertions, including `ground_truth_backtest` (`expected`, `actual`, `match`) on successful simulated responses.
 
-In simulated mode the top-level aggregate mirrors `simulation_decision` for route hypotheses, gap class, hard exclusions, advance gate and preferred hypothesis while `real_decision` remains the public branch unchanged. `active_decision` equals `simulation_decision`. Simulated decisions expose bilingual `localized_narrative` from the scenario contract; `data_unlocks.localized_missing_facts` always reflects the five public evidence needs in both modes.
+In simulated mode the top-level aggregate mirrors `simulation_decision` for route hypotheses, gap class, hard exclusions, advance gate and preferred hypothesis while `real_decision` remains the public branch unchanged. `active_decision` equals `simulation_decision`. Simulated decisions expose bilingual `localized_narrative` from the scenario contract; `data_unlocks.localized_missing_facts` always reflects the five public evidence needs in both modes. `evsi` is the existing calculated mapping when a complete block is supplied, or `null` when the optional block is absent. Supplied null, wrong-type, empty, partial or non-convertible blocks remain evidence-integrity errors and return HTTP 422; null is never a numeric zero.
 
 ## GET `/api/opportunities/{opportunity_id}/ui-manifest?mode=...`
 
@@ -62,7 +66,7 @@ Returns the approved GenUI component manifest.
 
 ## GET `/api/opportunities/{opportunity_id}/dossier?mode=...`
 
-Returns the structured Decision Dossier as JSON. Simulated mode sets `next_evidence_actions` to the active decision `missing_facts`, includes `counterfactual` from `simulation_decision`, and projects the scenario bilingual narrative. Public mode returns `counterfactual: null`.
+Returns the structured Decision Dossier as JSON. Simulated mode sets `next_evidence_actions` to the active decision `missing_facts`, includes `counterfactual` from `simulation_decision`, and projects the scenario bilingual narrative. Public mode returns `counterfactual: null`. The four S15b cases use dossier version `1.3` and add `evidence_summary.selection` with the pinned selection id, rule, reference and profile; earlier dossiers remain version `1.2` without that field.
 
 ## GET `/api/opportunities/{opportunity_id}/dossier.html?mode=...`
 

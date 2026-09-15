@@ -58,7 +58,7 @@ The Gate G/TL-07 proof scope now combines the preserved live HTTP/API and static
 | FR-042 | S* is the minimum configured support step satisfying hurdles. | Support search and SAR 18m exact test; CI-ALL. | COMPLETE | S01 |
 | FR-043 | Incremental national value is relative to no action. | `incremental_national_value`; component/value tests; CI-ALL. | COMPLETE | S01 |
 | FR-044 | Show post-entry capacity/downside-demand ratio. | `decision_engine.competition_warning`, `_simulation_economics`, `_simulate`; configured boundary and payload tests; CI-S02, CI-S04, S05-LOCAL after observed. | COMPLETE | S02/S04/S05 |
-| FR-045 | EVSI identifies whether a named evidence action is worth obtaining. | `approximate_evsi`; national-value/EVSI test; CI-ALL. | COMPLETE | S01 |
+| FR-045 | EVSI identifies whether a named evidence action is worth obtaining. | `approximate_evsi`; absent-key compatibility in `simulation.simulate`; valid, invalid, zero and steel-129.3 regressions in `test_s15b_portfolio.py`, `test_api.py` and capability economics. | IMPLEMENTED; review pending | S01/S15b |
 | FR-050 | Public decisions use public evidence only. | `analyze_public`, public repository, validation; isolation/golden tests; CI-ALL. | COMPLETE | S01 |
 | FR-051 | Simulation does not mutate public decisions. | fingerprint guard and isolated public copy; isolation tests; CI-ALL. | COMPLETE | S01 |
 | FR-052 | Decisions include state, route, rationale, confidence, conditions, and kill conditions. | public selector and scenario narratives; fidelity/golden tests; CI-S04. | COMPLETE | S04 |
@@ -68,7 +68,9 @@ The Gate G/TL-07 proof scope now combines the preserved live HTTP/API and static
 | FR-061 | Manifest uses approved component types only. | Fixed registry and guardrails; approved-set test; CI-ALL. | COMPLETE | S01 |
 | FR-062 | Omit economics panels when economics is unavailable. | Conditional manifest component; public omission test; CI-ALL. | COMPLETE | S01 |
 | FR-063 | Runtime model output cannot generate executable browser code. | Fixed renderer registry and guardrail; API/static tests; CI-ALL. | COMPLETE | S01 |
-| FR-064 | Export machine-readable and printable dossiers. | `dossier.py` and JSON/HTML routes; exact dossier tests; CI-ALL, S05-FOCUSED. | COMPLETE | S01/S05 |
+| FR-064 | Export machine-readable and printable dossiers. | `dossier.py` and JSON/HTML routes; S15b dossier 1.3 selection reference; exact dossier tests. | IMPLEMENTED; review pending | S01/S05/S15b |
+| FR-065 | Expose the governed S15 selection and all recorded exclusions bilingually. | `case_selection_view.py`, `/api/case-selection`, selection ES modules, API/static/browser regressions. | IMPLEMENTED; browser proof pending | S15b |
+| FR-066 | Add the pinned selection reference only to S15b dossiers. | Dossier 1.3 conditional projection; earlier-dossier preservation tests. | IMPLEMENTED; review pending | S15b |
 | FR-070 | Keep Arabic/English source spans on normalized fields. | Extraction contract; 4/4 test; CI-ALL. | COMPLETE | S01 |
 | FR-071 | Support standard, coating, dimensions, and environment fields. | Offline extractor schema; golden test; CI-ALL. | COMPLETE | S01 |
 | FR-072 | Offline extractor passes the labelled golden set. | `run_extraction_golden_set`; exact 4/4 test; CI-ALL. | COMPLETE | S01 |
