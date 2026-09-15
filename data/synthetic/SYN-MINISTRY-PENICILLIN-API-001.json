@@ -1,0 +1,190 @@
+{
+  "decision_narrative": {
+    "ADVANCE": {
+      "conditions": [
+        {
+          "ar": "تأكيد هوية المادة الدوائية الفعالة والمواصفة والطلب المستهدف قبل إزالة العائق الإداري.",
+          "en": "Confirm the API identity, specification and target demand before removing the administrative barrier."
+        },
+        {
+          "ar": "إثبات قابلية إزالة العائق وأن التدخل يغيّر التوقيت أو النطاق بصورة إضافية.",
+          "en": "Prove the barrier is removable and the intervention changes timing or scale additionally."
+        }
+      ],
+      "headline": {
+        "ar": "تقدّم مُحاكى — إزالة عائق إداري أو تنظيمي محدد لمادة بنسلين دوائية فعالة",
+        "en": "SIMULATED ADVANCE — remove a defined administrative or regulatory barrier for a penicillin API"
+      },
+      "kill_conditions": [
+        {
+          "ar": "عدم تأكيد الطلب على المواصفة المفترضة أو هوية المادة الدوائية الفعالة.",
+          "en": "The assumed target-specification demand or API identity is not confirmed."
+        },
+        {
+          "ar": "ثبوت أن العائق غير قابل للإزالة أو أن الاستثمار سيمضي من دون التدخل.",
+          "en": "The barrier proves non-removable or the investment proceeds without intervention."
+        }
+      ],
+      "rationale": {
+        "ar": "تفترض المحاكاة مادة بنسلين دوائية فعالة مسماة وطلباً مطابقاً للمواصفة وبوابات فنية محلولة، وتحدد عائقاً إدارياً قابلاً للإزالة بوصفه القيد الملزم؛ لذلك يسبق المسار 1 أي تدخل أعلى كلفة.",
+        "en": "The simulation assumes a named penicillin API, target-specification demand and resolved technical gates, and identifies a removable administrative barrier as the binding constraint; route 1 therefore precedes every more interventionist route."
+      },
+      "route_label": {
+        "ar": "إزالة عائق إداري أو تنظيمي (المسار 1)",
+        "en": "Administrative or regulatory barrier removal (route 1)"
+      }
+    }
+  },
+  "display_label": "SIMULATED — NOT MINISTRY EVIDENCE",
+  "evidence_class": "D",
+  "ground_truth": {
+    "basis": "Class-D planted ground truth: route 1 fully removes the administrative or regulatory constraint, every exclusion is NOT_SATISFIED, and higher routes are precedence-blocked.",
+    "expected_route_code": 1,
+    "expected_simulation_state": "ADVANCE"
+  },
+  "narrative_metadata": {
+    "arabic_text_status": "ANALYST_AUTHORED_DRAFT"
+  },
+  "opportunity_id": "SAU-H6-294110",
+  "scenario_id": "SYN-MINISTRY-PENICILLIN-API-001",
+  "scenario_version": "2.0.0",
+  "seed_basis": "Public snapshot PUBLIC-SAU-H6-294110-2026-09-12 trade year 2024 imports_kt 0.343023 bounds the Class-D demand and line assumptions; no public nameplate is asserted.",
+  "source": "DEMO_GENERATOR",
+  "synthetic_flag": true,
+  "synthetic_inputs": {
+    "capability_states": {
+      "capacity_time_window": 0,
+      "certification_customer_qualification": 0,
+      "core_process_route": 0,
+      "equipment_envelope": 0,
+      "feedstock_chemistry": 0,
+      "finishing_spec_control": 0,
+      "qa_lab_metrology": 0,
+      "skills_market_integration": 0,
+      "utilities_ehs_permitting": 0
+    },
+    "class_if_confirmed": {
+      "basis": "Hypothetical confirmed Ministry-grade identity, demand, capability and gate records.",
+      "demand_at_required_specification": "A",
+      "domestic_supply_or_capability": "A",
+      "hard_regulatory_or_process_gate": "B",
+      "product_identity": "A"
+    },
+    "counterfactual": {
+      "q1_incumbent_meets_specification_without_capital": false
+    },
+    "decision_specific_hard_gates": {
+      "analytical_validation": "resolved by the synthetic analytical method record",
+      "containment": "resolved by the synthetic containment record",
+      "effluent": "resolved by the synthetic effluent-control record",
+      "gmp": "resolved by the synthetic GMP record",
+      "impurity_control": "resolved by the synthetic impurity-control record",
+      "ip_fto": "resolved by the synthetic freedom-to-operate record",
+      "named_molecule_and_synthesis_route": "resolved by the synthetic molecule and route record"
+    },
+    "demand": {
+      "committed_demand_kt": 0.085755,
+      "downside_demand_kt": 0.154360,
+      "target_spec_demand_kt": 0.171511
+    },
+    "economics": {
+      "cash_flows_without_support": [-10.0, 6.0, 6.0],
+      "currency": "SAR_m",
+      "hurdle_rate": 0.1,
+      "minimum_efficient_scale_kt": 0.034302,
+      "national_value": {
+        "displacement": 1.0,
+        "domestic_value_added": 50.0,
+        "exports": 10.0,
+        "fiscal_receipts": 5.0,
+        "government_cost": 5.0,
+        "knowledge_skills": 5.0,
+        "resilience_value": 5.0,
+        "resource_environment": 1.0,
+        "risk_allowance": 2.0
+      },
+      "support_instrument": "Hypothetical non-financial administrative and regulatory intervention"
+    },
+    "equivalence": {
+      "basis": "Class-D assumption that no currently qualified equivalent supply resolves the named target application.",
+      "domestic_grade_equivalent": false
+    },
+    "hard_exclusion_inputs": {
+      "downside_market_below_mes": {
+        "credible_export_contract": false
+      },
+      "heterogeneous_residual_code": {
+        "commercial_product_separable": true,
+        "product_level_evidence_available": true
+      },
+      "idle_equivalent_domestic_capacity": {
+        "binding_market_failure": true,
+        "qualified_idle_capacity_kt": 0.0
+      },
+      "redundancy_or_crowd_out": {
+        "competition_finding": "ACCEPTABLE"
+      },
+      "transitory_or_measurement_gap": {
+        "dominant_cause": "OTHER"
+      },
+      "unsatisfiable_hard_gate": {
+        "gate_domain": "regulatory",
+        "gate_satisfiability": "SATISFIABLE"
+      }
+    },
+    "hard_gates": {
+      "analytical_validation": "resolved",
+      "containment": "resolved",
+      "effluent": "resolved",
+      "gmp": "resolved",
+      "impurity_control": "resolved",
+      "ip_fto": "resolved",
+      "named_molecule_and_synthesis_route": "resolved"
+    },
+    "plant_line": {
+      "availability": 0.9,
+      "current_utilisation": 0.7,
+      "market_allocation_share": 0.8,
+      "nameplate_kt": 0.171511,
+      "qualification_share": 0.5,
+      "yield": 0.95
+    },
+    "route_evidence": [
+      {
+        "basis": "Class-D administrative-barrier simulation assumption.",
+        "binding_constraint": "administrative_or_regulatory",
+        "binding_constraint_fully_removed": true,
+        "competition": {
+          "downside_demand_kt": 0.154360,
+          "existing_effective_capacity_kt": 0.058656,
+          "proposed_incremental_capacity_kt": 0.0
+        },
+        "distortion_unacceptable": false,
+        "downside_cash_flows_m_sar": [-10.0, 6.0, 6.0],
+        "hurdle_rate": 0.1,
+        "intervention_proportionate_to_constraint": true,
+        "investment_already_approved_or_financed": false,
+        "national_value": {
+          "displacement": 1.0,
+          "domestic_value_added": 50.0,
+          "exports": 10.0,
+          "fiscal_receipts": 5.0,
+          "government_cost": 5.0,
+          "knowledge_skills": 5.0,
+          "resilience_value": 5.0,
+          "resource_environment": 1.0,
+          "risk_allowance": 2.0
+        },
+        "policy_prohibition_identified": false,
+        "proceeds_without_intervention": false,
+        "route_code": 1,
+        "technical_feasibility_confirmed": true
+      }
+    ],
+    "target_specification": {
+      "application": "sterile finished-dose manufacturing using a named penicillin API",
+      "name": "Synthetic penicillin API specification P-API-001",
+      "standard": "Synthetic GMP and impurity-control specification"
+    }
+  }
+}

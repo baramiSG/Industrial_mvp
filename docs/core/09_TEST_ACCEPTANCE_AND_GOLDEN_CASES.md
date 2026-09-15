@@ -623,3 +623,30 @@ artifacts to reconstruct, the 76-entry visual manifest and frozen outcomes to
 remain unchanged, and the single S15a manifest generation to add only governed
 S15 evidence rows while changing only the two approved configuration and four
 Core authority hashes.
+
+### 10.3 S15b portfolio, selection and EVSI proof
+
+The four S15a briefs must rebuild byte-identical PublicSnapshot 2.2.0 files and
+extend the configured repository to eleven cases. Their public goldens remain
+INVESTIGATE/null with observed partner counts 10, 4, 11 and 11 and the exact
+R0/R1-D/R2/R3/R4-D/R10/R12 fired set. Their Class-D scenarios must compute,
+in order, ADVANCE/1, REJECT/0 with EX-03, ADVANCE/2, and REJECT/0 with EX-01.
+All original scenario and public outcomes remain covered.
+
+Selection acceptance requires the manifest-verified
+`CASE-SELECTION-S15-b96de36ff0ce` public projection, both selected pairs, quotas,
+ordered substitutes, input references and every residual-identity, viability,
+series-gap and frozen-case exclusion. API and browser tests prove the surface is
+mode-independent, bilingual and synthetic-free; selected S15 dossiers alone add
+the version-1.3 selection reference.
+
+EVSI acceptance distinguishes true omission from a supplied invalid block. For
+each S15b scenario, a failing spy proves omission does not call
+`approximate_evsi`, direct simulation and API output return null, and public
+`real_decision` and `data_unlocks` remain unchanged. Supplied null, top-level
+wrong types, empty/partial mappings and conversion failures remain direct
+integrity errors and typed HTTP 422. The seven existing supplied mappings retain
+exact helper equality, including the steel 129.3 pin; test-only zero and negative
+results remain numeric mappings. GenUI renders the localized unavailable value
+without an EVSI next-fact note, dossiers remain usable, and the graph wrapper
+retains `numeric_evsi: NOT_CALCULABLE` without synthesizing an estimate.

@@ -1,6 +1,6 @@
 {
   "manifest_version": "1.0",
-  "generated_on": "2026-09-13",
+  "generated_on": "2026-09-15",
   "policy": "Golden cases and synthetic scenarios run only against pinned files in this manifest; case derivation inputs and retained superseded operating-configuration bytes and the governed graph projection are also hash-pinned.",
   "files": [
     {
@@ -22,6 +22,26 @@
       "path": "data/snapshots/partners/PARTNERS-SAU-WITS-TRADE-2026-09-12.json",
       "sha256": "0a5a564594ecdb35ad129f7c111e3e5f62ba6d152fac275cea6d0ecc0e08dc63",
       "bytes": 150961
+    },
+    {
+      "path": "data/snapshots/public/PUBLIC-SAU-H6-294110-2026-09-12.json",
+      "sha256": "2dc68acbb9be4ad07290a71bca0c28a3e32d937ef25a6fabaf3c87fb227f6ce5",
+      "bytes": 13943
+    },
+    {
+      "path": "data/snapshots/public/PUBLIC-SAU-H6-294120-2026-09-12.json",
+      "sha256": "c692e89ae635dad61d6ad6a049c2608c1e07d13ed4632829f8a8b5fed39b527c",
+      "bytes": 11386
+    },
+    {
+      "path": "data/snapshots/public/PUBLIC-SAU-H6-310430-2026-09-12.json",
+      "sha256": "beccf975fbe9c945af67ced3a7c783501520752e60c65b3c5bd8dc398c606716",
+      "bytes": 13911
+    },
+    {
+      "path": "data/snapshots/public/PUBLIC-SAU-H6-310510-2026-09-12.json",
+      "sha256": "1bf360c8162d4568a079e49257b849d24283733cebe06139dcb7846759582e3e",
+      "bytes": 14091
     },
     {
       "path": "data/snapshots/public/PUBLIC-SAU-H6-392010-2026-09-12.json",
@@ -84,6 +104,11 @@
       "bytes": 14657
     },
     {
+      "path": "data/synthetic/SYN-MINISTRY-FERT-RETAIL-PACKS-001.json",
+      "sha256": "23f7c6cc375f7a7020832dd8f99e7cbb8fa98d7dbdb56be6f7faa731510ed04f",
+      "bytes": 6340
+    },
+    {
       "path": "data/synthetic/SYN-MINISTRY-GALVALUME-001.json",
       "sha256": "7fa4b2a370cbaf33494c8a817d24b5ef30b127c4636e7fe6eb9773eed3aa3764",
       "bytes": 10502
@@ -94,14 +119,29 @@
       "bytes": 7478
     },
     {
+      "path": "data/synthetic/SYN-MINISTRY-PENICILLIN-API-001.json",
+      "sha256": "41aea203b3bbe4a42ff66d0bcc8b2295b87260e034cc476b4511297bc4c705e1",
+      "bytes": 8097
+    },
+    {
       "path": "data/synthetic/SYN-MINISTRY-PP-001.json",
       "sha256": "0c7a8b94e17be26c6de9764bf1836c490ae2cb031fa14077e2f95de688711580",
       "bytes": 5828
     },
     {
+      "path": "data/synthetic/SYN-MINISTRY-SOP-001.json",
+      "sha256": "a9e7a1d7e178d3d4ffeacb0a2d8cbce9bca298ffd610fee83a53157085c6ff63",
+      "bytes": 7808
+    },
+    {
       "path": "data/synthetic/SYN-MINISTRY-STEEL-001.json",
       "sha256": "535d66e9c511899e787bfb11558933d0507bf54402068e32c98935d00bd21567",
       "bytes": 9336
+    },
+    {
+      "path": "data/synthetic/SYN-MINISTRY-STREPTOMYCIN-API-001.json",
+      "sha256": "7c4b1a8a9701edb8118b93b77da4183a6023108abdfe508389e4bb8cf9805d5b",
+      "bytes": 6380
     },
     {
       "path": "data/synthetic/SYN-MINISTRY-TINPLATE-001.json",
@@ -3480,7 +3520,7 @@
     },
     {
       "path": "data/graph/current.json",
-      "sha256": "f5346fdb42763f8492cbb4f3b641daabeb1e12bdf87a3991b0ba39ec0a7941a5",
+      "sha256": "29434bd8b4c6a70d9426bc5b9d86a89be10a954e2a2354289b74b92f07f5c496",
       "bytes": 139
     },
     {
@@ -3502,6 +3542,16 @@
       "path": "data/graph/projections/GRAPH-SAU-2026-09-12-941efbdf1e4a/projection.json",
       "sha256": "795975c4b89bd4a4769da831a2f76917a5cc69075f2042597df51ed0b1c16f1e",
       "bytes": 844574
+    },
+    {
+      "path": "data/graph/projections/GRAPH-SAU-2026-09-12-e651e7065377/manifest.json",
+      "sha256": "3155e9990d5dbfc56bf72cf8bed019c6afb4d3f31a7fc52b4ac514d483d1a480",
+      "bytes": 228
+    },
+    {
+      "path": "data/graph/projections/GRAPH-SAU-2026-09-12-e651e7065377/projection.json",
+      "sha256": "4cfa9021987486bf5c802c0ab9f18255805b1020447efd9c79906faef17a6295",
+      "bytes": 2205195
     },
     {
       "path": "config/history/acquisition_sources.v1-1.3.0.yaml",

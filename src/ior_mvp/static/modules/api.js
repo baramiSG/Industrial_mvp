@@ -11,6 +11,10 @@ export async function getJSON(url) {
   return response.json();
 }
 
+export function caseSelectionEndpoint() {
+  return "/api/case-selection";
+}
+
 export function opportunityListEndpoint(mode) {
   return `/api/opportunities?mode=${encodeURIComponent(mode)}`;
 }

@@ -1,0 +1,17 @@
+# S15b findings ledger
+
+| Finding | Source | Disposition/state |
+|---|---|---|
+| PLAN-v1 F01 | Retained plan review | VALID; corrected in approved PLAN v2 and closed at plan review. |
+| PLAN-v1 F02 | Retained plan review | VALID; corrected in approved PLAN v2 and closed at plan review. |
+| S15B-EVSI-01 | Implementation/runtime contradiction | VALID; corrected under approved AM2 with RED/GREEN and compatibility proof. Implementation-review closure remains pending. |
+| S15B-AM3-F01 | Retained AM3 review | VALID; revision 1 rejected, registry synchronization and real-guard tests approved in revision 2, implemented RED 3/8 and GREEN 11. Implementation-review closure remains pending. |
+| S15b keyboard summary inventory | Implementation self-audit from real browser gate | VALID; all 16 failures were the mode/viewport/locale keyboard matrix. Stable native-summary identities, harness inventory and accessibility order were added; later full functional gate passed 498/498. Not an independent-review finding. |
+| S15B-PREGEN-F01 | Retained pre-generation review | VALID. `replaceAll("_", " ")` converted the governed raw `pharma_api` identifier into unisolated English prose. The heading now inserts the unchanged raw identifier through `technical()` while retaining escaped catalogue text; real EN/AR DOM assertions and refreshed screenshots pass. |
+| S15B-PREGEN-F02 | Retained pre-generation review | PARTIALLY_VALID. Attempt4 steel-simulated measurements were invalid because the diagnostic asserted only mode-button/chip shape and captured the public state at an unsettled offset. Four steel-simulated regions therefore required correction. The other reviewer-noted 1px differences were valid minimal before/after unions, not defects. New diagnostics assert selected ID, mode, expected active state, Class-D disclosure, version, loaded fonts and settled layout for all 36 workspace identities; a verifier now proves all 36 exact unions and all 44 region identities. |
+| T6-RGB-DRIFT-01 | Implementation T6 gate | The first reported portfolio failure was invalid because mask mode `1` with fill `1` failed to exclude approved pixels. The broader residual remains VALID after the mask correction: 52 old images differ outside the approved regions. |
+| S15B-T6-MASK-01 | Owner T6 evidence | VALID/CORRECTED. A positive inside-region RGB regression failed before correction. The verifier now uses an 8-bit `L` mask with white 255 inside approved rectangles; inside change passes and outside change fails. |
+| S15B-AM4-OWNER-F01..F04 | Owner implementation review | VALID/CORRECTED. Typed conjunctive proof, fixed source/runtime/image bindings, exact negative/new-view/CSSOM checks and dev-only Pillow compatibility were implemented. Retained independent review closed all four. |
+| S15B-UI-HHI-01 | Retained independent implementation review | VALID/CORRECTED/APPROVED. `NOT_CALCULABLE` previously reached `Intl.NumberFormat` and rendered not-a-number. The exact finite-number guard maps nonnumeric/nonfinite inputs to the existing localized unavailable branch; EN/AR renderer and four-case browser proof pass. |
+
+All currently known corrective implementation defects have code/test corrections. The scoped AM4 and HHI findings are independently closed; AM2/AM3 full-implementation closure remains part of the final review. T6 and T7 artifacts are owner-accepted. Final detached-candidate implementation review, owner acceptance and delivery remain pending; AM3 plan semantic correction round remains 1 and the AM4 owner correction pass remains 1.

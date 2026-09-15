@@ -186,6 +186,7 @@ Module: `app.py`
 Responsibilities:
 
 - expose health, project, threshold, opportunity, manifest, dossier and extraction endpoints;
+- expose the manifest-verified, mode-independent public S15 selection through `GET /api/case-selection` with no caller-provided file path;
 - mount four public-only screening reads before the SPA fallback:
   `/api/screening`, `/api/screening/queues/{queue_id}`,
   `/api/screening/records/{hs6}`, and `GET /api/screening/evidence`;
@@ -340,7 +341,8 @@ The MVP does not lock the Ministry into a particular cloud or data platform.
 - hash mismatch → integrity failure before demo/release;
 - UNAVAILABLE attempt record persisted with reason and observed response;
 - INCOMPLETE latest-run coverage → no universe/tariff snapshot for that source;
-- reconstruction mismatch or changed latest-run selection → integrity failure (exit 1 / SELECTION_CHANGED).
+- reconstruction mismatch or changed latest-run selection → integrity failure (exit 1 / SELECTION_CHANGED);
+- missing, changed or malformed pinned case-selection evidence → typed HTTP 422 `CASE_SELECTION_INTEGRITY_ERROR` with no partial or stale successful projection.
 
 ## 11. Scaling path
 

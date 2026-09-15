@@ -12,6 +12,7 @@ import {
 } from "./dom.js";
 import { integer, number, usd } from "./formatters.js";
 import { t } from "./i18n.js";
+import { loadSelection } from "./selection/index.js";
 import { state } from "./state.js";
 import { loadOpportunity } from "./workspace.js";
 
@@ -115,7 +116,9 @@ export function populateSelect() {
 }
 
 export async function loadPortfolio() {
-  state.opportunities = await getJSON(opportunityListEndpoint(state.mode));
+  const requests = [getJSON(opportunityListEndpoint(state.mode))];
+  if (state.selection.requestEpoch === 0) requests.push(loadSelection());
+  [state.opportunities] = await Promise.all(requests);
   if (!state.opportunities.some((item) => item.id === state.selectedId)) {
     state.selectedId = state.opportunities[0]?.id || null;
   }

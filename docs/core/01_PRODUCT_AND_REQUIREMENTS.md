@@ -224,6 +224,8 @@ The user opens or prints a one-page dossier containing:
 - **FR-062** The UI shall adapt to available evidence; economics panels shall not appear when economics is unavailable.
 - **FR-063** Runtime model output shall not generate arbitrary executable browser code.
 - **FR-064** The application shall export a machine-readable dossier and printable HTML dossier.
+- **FR-065** The application shall expose the pinned public S15 selection, quotas, ordered substitutes, references and every recorded identity, viability, series-gap and frozen-case exclusion in a bilingual mode-independent surface.
+- **FR-066** The four S15 dossiers shall carry their pinned selection record, rule and profile without adding that reference to earlier dossiers.
 
 ### 6.8 Bilingual extraction
 

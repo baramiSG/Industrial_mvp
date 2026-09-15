@@ -1,0 +1,146 @@
+{
+  "decision_narrative": {
+    "REJECT": {
+      "conditions": [
+        {
+          "ar": "أعد الفتح فقط لمنتج سماد تجاري قابل للفصل تدعمه مواصفة وطلب على مستوى المنتج.",
+          "en": "Reopen only for a separable commercial fertilizer product supported by product-level specification and demand evidence."
+        }
+      ],
+      "headline": {
+        "ar": "رفض مُحاكى — بند عبوات التجزئة غير متجانس ولا تتوافر أدلة على مستوى المنتج",
+        "en": "SIMULATED REJECT — heterogeneous retail-pack heading without product-level evidence"
+      },
+      "kill_conditions": [
+        {
+          "ar": "يبقى دعم الطاقة العامة موقوفاً ما دام المنتج التجاري غير قابل للفصل من البند المتبقي.",
+          "en": "Generic capacity support remains stopped while the commercial product cannot be separated from the residual heading."
+        }
+      ],
+      "rationale": {
+        "ar": "تفترض المحاكاة أن بند الأقراص والعبوات الصغيرة يجمع منتجات تجارية غير قابلة للفصل وأن الأدلة على مستوى المنتج غير متاحة؛ لذلك يتحقق الاستبعاد EX-01 ولا يجوز تحويل البند الجمركي إلى فرصة مصنع عامة.",
+        "en": "The simulation assumes that the tablets and small-pack heading combines inseparable commercial products and lacks product-level evidence; exclusion EX-01 is therefore satisfied and the customs heading cannot become a generic factory opportunity."
+      },
+      "route_label": {
+        "ar": "لا تدخل — استبعاد بند متبقٍ غير متجانس",
+        "en": "No intervention — heterogeneous residual exclusion"
+      }
+    }
+  },
+  "display_label": "SIMULATED — NOT MINISTRY EVIDENCE",
+  "evidence_class": "D",
+  "ground_truth": {
+    "basis": "Class-D planted ground truth: EX-01 is SATISFIED because the commercial product is not separable and product-level evidence is unavailable, so REJECT route 0 precedes route selection.",
+    "expected_route_code": 0,
+    "expected_simulation_state": "REJECT"
+  },
+  "narrative_metadata": {
+    "arabic_text_status": "ANALYST_AUTHORED_DRAFT"
+  },
+  "opportunity_id": "SAU-H6-310510",
+  "scenario_id": "SYN-MINISTRY-FERT-RETAIL-PACKS-001",
+  "scenario_version": "2.0.0",
+  "seed_basis": "Public snapshot PUBLIC-SAU-H6-310510-2026-09-12 trade year 2024 imports_kt 2.445810 bounds the Class-D demand and line assumptions; no public nameplate is asserted and the WCO heading is not described as an Other residual.",
+  "source": "DEMO_GENERATOR",
+  "synthetic_flag": true,
+  "synthetic_inputs": {
+    "capability_states": {
+      "capacity_time_window": 0,
+      "certification_customer_qualification": 0,
+      "core_process_route": 0,
+      "equipment_envelope": 0,
+      "feedstock_chemistry": 0,
+      "finishing_spec_control": 0,
+      "qa_lab_metrology": 0,
+      "skills_market_integration": 0,
+      "utilities_ehs_permitting": 0
+    },
+    "class_if_confirmed": {
+      "basis": "Hypothetical confirmed Ministry-grade identity, demand, capability and gate records; actual scenario evidence remains Class D.",
+      "demand_at_required_specification": "A",
+      "domestic_supply_or_capability": "A",
+      "hard_regulatory_or_process_gate": "B",
+      "product_identity": "A"
+    },
+    "counterfactual": {
+      "q1_incumbent_meets_specification_without_capital": false
+    },
+    "decision_specific_hard_gates": {
+      "agronomic_performance": "resolved by the synthetic agronomic record",
+      "emissions_and_safe_handling": "resolved by the synthetic handling record",
+      "feedstock_route": "resolved by the synthetic feedstock record",
+      "formulation_granulation": "resolved by the synthetic formulation record",
+      "nutrient_basis": "resolved by the synthetic nutrient record"
+    },
+    "demand": {
+      "committed_demand_kt": 0.611452,
+      "downside_demand_kt": 1.100614,
+      "target_spec_demand_kt": 1.222905
+    },
+    "economics": {
+      "cash_flows_without_support": [-10.0, 6.0, 6.0],
+      "currency": "SAR_m",
+      "hurdle_rate": 0.1,
+      "minimum_efficient_scale_kt": 0.244581,
+      "national_value": {
+        "displacement": 1.0,
+        "domestic_value_added": 50.0,
+        "exports": 10.0,
+        "fiscal_receipts": 5.0,
+        "government_cost": 5.0,
+        "knowledge_skills": 5.0,
+        "resilience_value": 5.0,
+        "resource_environment": 1.0,
+        "risk_allowance": 2.0
+      },
+      "support_instrument": "Hypothetical non-financial information intervention"
+    },
+    "equivalence": {
+      "basis": "Class-D assumption used only to keep the non-EX-01 exclusions independently false.",
+      "domestic_grade_equivalent": false
+    },
+    "hard_exclusion_inputs": {
+      "downside_market_below_mes": {
+        "credible_export_contract": false
+      },
+      "heterogeneous_residual_code": {
+        "commercial_product_separable": false,
+        "product_level_evidence_available": false
+      },
+      "idle_equivalent_domestic_capacity": {
+        "binding_market_failure": true,
+        "qualified_idle_capacity_kt": 0.0
+      },
+      "redundancy_or_crowd_out": {
+        "competition_finding": "ACCEPTABLE"
+      },
+      "transitory_or_measurement_gap": {
+        "dominant_cause": "OTHER"
+      },
+      "unsatisfiable_hard_gate": {
+        "gate_domain": "safe_handling",
+        "gate_satisfiability": "SATISFIABLE"
+      }
+    },
+    "hard_gates": {
+      "agronomic_performance": "resolved",
+      "emissions_and_safe_handling": "resolved",
+      "feedstock_route": "resolved",
+      "formulation_granulation": "resolved",
+      "nutrient_basis": "resolved"
+    },
+    "plant_line": {
+      "availability": 0.9,
+      "current_utilisation": 0.7,
+      "market_allocation_share": 0.8,
+      "nameplate_kt": 1.222905,
+      "qualification_share": 0.5,
+      "yield": 0.95
+    },
+    "target_specification": {
+      "application": "small-package and tablet fertilizer retail channels",
+      "name": "Synthetic mixed retail-pack fertilizer heading",
+      "standard": "Synthetic product-level evidence intentionally unavailable"
+    }
+  }
+}

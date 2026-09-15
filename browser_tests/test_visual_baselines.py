@@ -246,3 +246,17 @@ def test_governed_visual_baselines_match(
             case_id=case.id,
             mode="public",
         )
+
+    goto_portfolio(page, "public", locale)
+    page.locator("#selection details").evaluate_all(
+        "elements => elements.forEach(element => { element.open = true; })"
+    )
+    _anchor(page, "#selection")
+    visual_session.capture(
+        page,
+        locale=locale.code,
+        viewport=viewport.name,
+        screen="journey-h-selection-exclusions",
+        case_id=None,
+        mode="public",
+    )

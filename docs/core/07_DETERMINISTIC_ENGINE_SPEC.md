@@ -514,6 +514,14 @@ unchanged. Packaged polypropylene still reaches REJECT route 0 with
 Simulated R5/R8 ledger rows follow configured thresholds with FULL/DEGRADED/
 DISABLED execution states.
 
+Aggregate EVSI is calculated only when the `synthetic_inputs.evsi` key is
+supplied. True omission skips `approximate_evsi` and returns `evsi: null` while
+ordinary state and route selection continues. Key presence controls this branch:
+supplied null, wrong-type, empty, partial and non-convertible blocks retain their
+existing evidence-integrity failures, and complete supplied mappings retain the
+existing formula, rounding, positive flag and optional `next_fact`. A legitimate
+calculated zero remains a mapping and is never represented as null.
+
 The five S14b Class-D scenarios are reconciled to their public marginals and
 reach planted ground truth only through the same computed selector:
 
@@ -524,6 +532,16 @@ reach planted ground truth only through the same computed selector:
 | `SYN-MINISTRY-ALU-FOIL-001` | ADVANCE / 6 | technology licensing / specialist line / JV |
 | `SYN-MINISTRY-ALU-PROFILES-001` | ADVANCE / 4 | conditional offtake with zero financial support |
 | `SYN-MINISTRY-PE-FILM-001` | REJECT / 0 | equivalent qualified availability exceeds demand |
+
+The four S15b Class-D scenarios use the same selector and deliberately omit
+aggregate EVSI because no estimates were supplied:
+
+| Scenario | Computed state / route | Binding result |
+|---|---|---|
+| `SYN-MINISTRY-PENICILLIN-API-001` | ADVANCE / 1 | incumbent standard-product route |
+| `SYN-MINISTRY-STREPTOMYCIN-API-001` | REJECT / 0 | EX-03 unsatisfiable hard gate |
+| `SYN-MINISTRY-SOP-001` | ADVANCE / 2 | domestic process route |
+| `SYN-MINISTRY-FERT-RETAIL-PACKS-001` | REJECT / 0 | EX-01 heterogeneous residual |
 
 Gate B compares each computed state and route with its declared ground truth.
 Synthetic evidence remains Class D, changes only `simulation_decision` and

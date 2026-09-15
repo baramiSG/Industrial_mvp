@@ -9,6 +9,7 @@ from fastapi.staticfiles import StaticFiles
 
 from . import __version__
 from .ai_extraction import run_extraction_golden_set
+from .case_selection_view import CaseSelectionIntegrityError, case_selection_view
 from .config import (
     PROJECT_ROOT,
     UIStringConfigurationError,
@@ -100,6 +101,20 @@ def ui_strings(locale: str) -> dict[str, Any]:
         raise HTTPException(
             status_code=500,
             detail={"code": "UI_CATALOGUE_INTEGRITY_ERROR"},
+        ) from exc
+
+
+@app.get("/api/case-selection")
+def case_selection() -> dict[str, Any]:
+    try:
+        return case_selection_view()
+    except CaseSelectionIntegrityError as exc:
+        raise HTTPException(
+            status_code=422,
+            detail={
+                "code": "CASE_SELECTION_INTEGRITY_ERROR",
+                "message": str(exc),
+            },
         ) from exc
 
 

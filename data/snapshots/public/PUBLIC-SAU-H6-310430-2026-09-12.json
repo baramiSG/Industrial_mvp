@@ -1,0 +1,426 @@
+{
+  "as_of_date": "2026-09-12",
+  "authority_note": "Public branch only. Product identity is retained at generic HS6 scope under S14-CS-1.1 and CASE-SELECTION-S15-b96de36ff0ce; runner-ups, SERIES_GAP_YEARS rows, residual identity exclusions and viability exclusions remain outside this brief. No potassium-sulphate producer for this HS6 was identified within the stored SABIC Agri-Nutrients and Ma'aden disclosures acquired or retained through 2026-09-13. Derived from UNIVERSE-SAU-UN-COMTRADE-HS-2026-09-12 rows of HS revision H6 (2022–2024); the 2021 H5 row is excluded to avoid splicing revisions. Gross flows; not retained domestic demand. Partner detail for 2024 imports is OBSERVED from un_comtrade.",
+  "criticality_designation": "UNAVAILABLE",
+  "decision_inputs": {
+    "monitor_trigger": "UNAVAILABLE",
+    "route_evidence": "UNAVAILABLE",
+    "specification_equivalence": "UNAVAILABLE",
+    "target_specification_demand": "UNAVAILABLE"
+  },
+  "domestic_capability": {
+    "coarse_adjacency_signals": [],
+    "producer_evidence": [],
+    "profile_hard_gates": {
+      "agronomic_performance": {
+        "evidence_ids": [],
+        "status": "UNAVAILABLE"
+      },
+      "emissions_and_safe_handling": {
+        "evidence_ids": [],
+        "status": "UNAVAILABLE"
+      },
+      "feedstock_route": {
+        "evidence_ids": [],
+        "status": "UNAVAILABLE"
+      },
+      "formulation_granulation": {
+        "evidence_ids": [],
+        "status": "UNAVAILABLE"
+      },
+      "nutrient_basis": {
+        "evidence_ids": [],
+        "status": "UNAVAILABLE"
+      }
+    },
+    "public_dimension_states": {
+      "capacity_time_window": "U",
+      "certification_customer_qualification": "U",
+      "core_process_route": "U",
+      "equipment_envelope": "U",
+      "feedstock_chemistry": "U",
+      "finishing_spec_control": "U",
+      "qa_lab_metrology": "U",
+      "skills_market_integration": "U",
+      "utilities_ehs_permitting": "U"
+    },
+    "same_process_family": "UNAVAILABLE",
+    "unresolved_hard_gates": [
+      {
+        "evidence_ids": [],
+        "name": "feedstock_route",
+        "state": "unresolved"
+      },
+      {
+        "evidence_ids": [],
+        "name": "formulation_granulation",
+        "state": "unresolved"
+      },
+      {
+        "evidence_ids": [],
+        "name": "nutrient_basis",
+        "state": "unresolved"
+      },
+      {
+        "evidence_ids": [],
+        "name": "agronomic_performance",
+        "state": "unresolved"
+      },
+      {
+        "evidence_ids": [],
+        "name": "emissions_and_safe_handling",
+        "state": "unresolved"
+      }
+    ],
+    "verified_present": "UNAVAILABLE"
+  },
+  "domestic_flows": {
+    "domestic_origin_exports_kt": "UNAVAILABLE",
+    "domestic_production_kt": "UNAVAILABLE",
+    "period_year": 2024,
+    "reexports_kt": "UNAVAILABLE",
+    "retained_imports_kt": "UNAVAILABLE",
+    "source_evidence_ids": []
+  },
+  "evidence": [
+    {
+      "contradiction": null,
+      "evidence_class": "B",
+      "evidence_id": "P-COMTRADE-310430-M",
+      "period": "2022/2023/2024",
+      "retrieved_at": "2026-09-12",
+      "reviewer_status": "unconfirmed_by_responsible_authority",
+      "source": "UN Comtrade",
+      "status": "calculated",
+      "supports": [
+        "TRADE_QUANTITY",
+        "TRADE_VALUE"
+      ],
+      "synthetic_flag": false,
+      "title": "UN Comtrade Saudi imports rows for HS 310430",
+      "transformation": "LATEST_REVISION_ONLY H6 rows; trade value divided by 1,000,000 to USD million and net weight divided by 1,000,000 to kt.",
+      "url": "https://comtradeapi.un.org/data/v1/get/C/A/HS?reporterCode=682&period=2024&flowCode=M&cmdCode=AG6&partnerCode=0&motCode=0&customsCode=C00"
+    },
+    {
+      "contradiction": null,
+      "evidence_class": "B",
+      "evidence_id": "P-COMTRADE-310430-PARTNERS",
+      "period": "2024",
+      "retrieved_at": "2026-09-13",
+      "reviewer_status": "unconfirmed_by_responsible_authority",
+      "source": "UN Comtrade",
+      "status": "calculated",
+      "supports": [
+        "SUPPLIER_CONCENTRATION"
+      ],
+      "synthetic_flag": false,
+      "title": "UN Comtrade Saudi 2024 import partner rows for HS 310430",
+      "transformation": "World aggregate excluded; value divided by 1,000,000 to USD million and net weight divided by 1,000,000 to kt. Partner detail state: PARTNER_DETAIL_OBSERVED (un_comtrade; 11 partner rows).",
+      "url": "https://comtradeapi.un.org/data/v1/get/C/A/HS?reporterCode=682&period=2024&flowCode=M&cmdCode=310430&motCode=0&customsCode=C00&includeDesc=true"
+    },
+    {
+      "contradiction": null,
+      "evidence_class": "B",
+      "evidence_id": "P-COMTRADE-310430-X",
+      "period": "2022/2023/2024",
+      "retrieved_at": "2026-09-12",
+      "reviewer_status": "unconfirmed_by_responsible_authority",
+      "source": "UN Comtrade",
+      "status": "calculated",
+      "supports": [
+        "EXPORT_IMPORT_RATIO",
+        "TRADE_QUANTITY",
+        "TRADE_VALUE"
+      ],
+      "synthetic_flag": false,
+      "title": "UN Comtrade Saudi exports rows for HS 310430",
+      "transformation": "LATEST_REVISION_ONLY H6 rows; trade value divided by 1,000,000 to USD million and net weight divided by 1,000,000 to kt.",
+      "url": "https://comtradeapi.un.org/data/v1/get/C/A/HS?reporterCode=682&period=2024&flowCode=X&cmdCode=AG6&partnerCode=0&motCode=0&customsCode=C00"
+    },
+    {
+      "contradiction": null,
+      "evidence_class": "B",
+      "evidence_id": "P-WCO-310430",
+      "period": "2022",
+      "retrieved_at": "2026-09-13",
+      "reviewer_status": "unconfirmed_by_responsible_authority",
+      "source": "wco_hs_nomenclature",
+      "status": "observed",
+      "supports": [
+        "TARGET_PRODUCT_IDENTITY"
+      ],
+      "synthetic_flag": false,
+      "title": "HS Nomenclature 2022 — Chapter 31",
+      "transformation": "Verbatim span from DocumentRecord DOC-WCO-HS-NOMENCLATURE-fe3ed4f5325a-88edcc1ee93d.",
+      "url": "https://www.wcoomd.org/-/media/wco/public/global/pdf/topics/nomenclature/instruments-and-tools/hs-nomenclature-2022/2022/0631_2022e.pdf?la=en"
+    }
+  ],
+  "hard_exclusion_inputs": {
+    "downside_market_below_mes": {
+      "credible_export_contract": "UNAVAILABLE",
+      "evidence_ids": [],
+      "minimum_efficient_scale_kt": "UNAVAILABLE",
+      "sustainable_downside_demand_kt": "UNAVAILABLE"
+    },
+    "heterogeneous_residual_code": {
+      "commercial_product_separable": "UNAVAILABLE",
+      "evidence_ids": [],
+      "product_level_evidence_available": "UNAVAILABLE"
+    },
+    "idle_equivalent_domestic_capacity": {
+      "binding_market_failure": "UNAVAILABLE",
+      "domestic_specification_equivalent": "UNAVAILABLE",
+      "evidence_ids": [],
+      "qualified_idle_capacity_kt": "UNAVAILABLE",
+      "target_specification_demand_kt": "UNAVAILABLE"
+    },
+    "redundancy_or_crowd_out": {
+      "competition_finding": "UNAVAILABLE",
+      "evidence_ids": []
+    },
+    "transitory_or_measurement_gap": {
+      "dominant_cause": "UNAVAILABLE",
+      "evidence_ids": []
+    },
+    "unsatisfiable_hard_gate": {
+      "evidence_ids": [],
+      "gate_domain": "UNAVAILABLE",
+      "gate_satisfiability": "UNAVAILABLE"
+    }
+  },
+  "opportunity": {
+    "application_boundary": "HS 3104.30 identifies potassium sulphate as a mineral or chemical potassic fertiliser; nutrient basis, grade, feedstock route, formulation, granulation, application and safe-handling requirements remain unresolved.",
+    "as_of_date": "2026-09-12",
+    "commercial_name_ar": "كبريتات البوتاسيوم",
+    "commercial_name_en": "Potassium sulphate",
+    "decision_object_status": "generic_hs6_only",
+    "hs6": "310430",
+    "hs_revision": "H6",
+    "id": "SAU-H6-310430",
+    "national_tariff_line": "UNAVAILABLE",
+    "sector_profile": "fertilizers"
+  },
+  "partner_detail": {
+    "attempt_passport_ids": [],
+    "observed_partner_rows": 11,
+    "observed_passport_id": "P-COMTRADE-310430-PARTNERS",
+    "partner_snapshot_id": "PARTNERS-SAU-UN-COMTRADE-2026-09-13-edbd1926e196",
+    "reason": null,
+    "source_id": "un_comtrade",
+    "state": "PARTNER_DETAIL_OBSERVED",
+    "unit_key": [
+      "310430",
+      "imports",
+      "2024"
+    ]
+  },
+  "partner_observations": [
+    {
+      "flow": "imports",
+      "gross_flow": true,
+      "net_weight_kt": 13.16934,
+      "partner": "Belgium",
+      "quantity_unit": "kt",
+      "source_evidence_id": "P-COMTRADE-310430-PARTNERS",
+      "trade_value_usd_m": 9.949119,
+      "validity_flags": {
+        "net_weight_valid": true,
+        "quantity_comparable": true,
+        "value_valid": true
+      },
+      "year": 2024
+    },
+    {
+      "flow": "imports",
+      "gross_flow": true,
+      "net_weight_kt": 0.473,
+      "partner": "China",
+      "quantity_unit": "kt",
+      "source_evidence_id": "P-COMTRADE-310430-PARTNERS",
+      "trade_value_usd_m": 0.517703,
+      "validity_flags": {
+        "net_weight_valid": true,
+        "quantity_comparable": true,
+        "value_valid": true
+      },
+      "year": 2024
+    },
+    {
+      "flow": "imports",
+      "gross_flow": true,
+      "net_weight_kt": 1.52435,
+      "partner": "Egypt",
+      "quantity_unit": "kt",
+      "source_evidence_id": "P-COMTRADE-310430-PARTNERS",
+      "trade_value_usd_m": 1.093826,
+      "validity_flags": {
+        "net_weight_valid": true,
+        "quantity_comparable": true,
+        "value_valid": true
+      },
+      "year": 2024
+    },
+    {
+      "flow": "imports",
+      "gross_flow": true,
+      "net_weight_kt": 0.23408,
+      "partner": "France",
+      "quantity_unit": "kt",
+      "source_evidence_id": "P-COMTRADE-310430-PARTNERS",
+      "trade_value_usd_m": 0.132681,
+      "validity_flags": {
+        "net_weight_valid": true,
+        "quantity_comparable": true,
+        "value_valid": true
+      },
+      "year": 2024
+    },
+    {
+      "flow": "imports",
+      "gross_flow": true,
+      "net_weight_kt": 0.46,
+      "partner": "Germany",
+      "quantity_unit": "kt",
+      "source_evidence_id": "P-COMTRADE-310430-PARTNERS",
+      "trade_value_usd_m": 0.324057,
+      "validity_flags": {
+        "net_weight_valid": true,
+        "quantity_comparable": true,
+        "value_valid": true
+      },
+      "year": 2024
+    },
+    {
+      "flow": "imports",
+      "gross_flow": true,
+      "net_weight_kt": 0.04626,
+      "partner": "Italy",
+      "quantity_unit": "kt",
+      "source_evidence_id": "P-COMTRADE-310430-PARTNERS",
+      "trade_value_usd_m": 0.26247,
+      "validity_flags": {
+        "net_weight_valid": true,
+        "quantity_comparable": true,
+        "value_valid": true
+      },
+      "year": 2024
+    },
+    {
+      "flow": "imports",
+      "gross_flow": true,
+      "net_weight_kt": 1.2075,
+      "partner": "Jordan",
+      "quantity_unit": "kt",
+      "source_evidence_id": "P-COMTRADE-310430-PARTNERS",
+      "trade_value_usd_m": 0.831011,
+      "validity_flags": {
+        "net_weight_valid": true,
+        "quantity_comparable": true,
+        "value_valid": true
+      },
+      "year": 2024
+    },
+    {
+      "flow": "imports",
+      "gross_flow": true,
+      "net_weight_kt": 4.898,
+      "partner": "Other Asia, nes",
+      "quantity_unit": "kt",
+      "source_evidence_id": "P-COMTRADE-310430-PARTNERS",
+      "trade_value_usd_m": 2.831539,
+      "validity_flags": {
+        "net_weight_valid": true,
+        "quantity_comparable": true,
+        "value_valid": true
+      },
+      "year": 2024
+    },
+    {
+      "flow": "imports",
+      "gross_flow": true,
+      "net_weight_kt": 0.077429,
+      "partner": "Russian Federation",
+      "quantity_unit": "kt",
+      "source_evidence_id": "P-COMTRADE-310430-PARTNERS",
+      "trade_value_usd_m": 0.043189,
+      "validity_flags": {
+        "net_weight_valid": true,
+        "quantity_comparable": true,
+        "value_valid": true
+      },
+      "year": 2024
+    },
+    {
+      "flow": "imports",
+      "gross_flow": true,
+      "net_weight_kt": 0.256187,
+      "partner": "Spain",
+      "quantity_unit": "kt",
+      "source_evidence_id": "P-COMTRADE-310430-PARTNERS",
+      "trade_value_usd_m": 0.376186,
+      "validity_flags": {
+        "net_weight_valid": true,
+        "quantity_comparable": true,
+        "value_valid": true
+      },
+      "year": 2024
+    },
+    {
+      "flow": "imports",
+      "gross_flow": true,
+      "net_weight_kt": 0.115,
+      "partner": "USA",
+      "quantity_unit": "kt",
+      "source_evidence_id": "P-COMTRADE-310430-PARTNERS",
+      "trade_value_usd_m": 0.314731,
+      "validity_flags": {
+        "net_weight_valid": true,
+        "quantity_comparable": true,
+        "value_valid": true
+      },
+      "year": 2024
+    }
+  ],
+  "schema_version": "2.2.0",
+  "snapshot_id": "PUBLIC-SAU-H6-310430-2026-09-12",
+  "source_boundary": "public",
+  "supersedes": "UNAVAILABLE",
+  "trade": [
+    {
+      "export_uv_usd_t": 853.1,
+      "exports_kt": 41.67813,
+      "exports_usd_m": 35.554193,
+      "import_uv_usd_t": 1219.2,
+      "imports_kt": 15.954833,
+      "imports_usd_m": 19.451609,
+      "year": 2022
+    },
+    {
+      "export_uv_usd_t": 709.5,
+      "exports_kt": 21.175913,
+      "exports_usd_m": 15.023914,
+      "import_uv_usd_t": 755.8,
+      "imports_kt": 19.242467,
+      "imports_usd_m": 14.544307,
+      "year": 2023
+    },
+    {
+      "export_uv_usd_t": 585.1,
+      "exports_kt": 14.336294,
+      "exports_usd_m": 8.388083,
+      "import_uv_usd_t": 742.5,
+      "imports_kt": 22.461146,
+      "imports_usd_m": 16.676513,
+      "year": 2024
+    }
+  ],
+  "trade_quality": {
+    "domestic_origin_exports_separated": false,
+    "execution_cap": "DEGRADED where continuity or tariff-line detail is required; 2021 (H5) excluded by the latest-revision H6 rule Partner detail: PARTNER_DETAIL_OBSERVED (P-COMTRADE-310430-PARTNERS).",
+    "flow_basis": "gross",
+    "missing_years": [],
+    "monthly_partner_tariff_line_available": false,
+    "quantity_comparable": true,
+    "reexports_separated": false
+  }
+}

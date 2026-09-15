@@ -5,10 +5,30 @@ import json
 from pathlib import Path
 from typing import Any
 
+from .case_selection_view import case_selection_view
 from .config import ui_text
 
 
 STATIC_DIR = Path(__file__).resolve().parent / "static"
+S15B_PROFILES = {
+    "SAU-H6-294110": "pharma_api",
+    "SAU-H6-294120": "pharma_api",
+    "SAU-H6-310430": "fertilizers",
+    "SAU-H6-310510": "fertilizers",
+}
+
+
+def _selection_reference(opportunity_id: str) -> dict[str, str] | None:
+    profile = S15B_PROFILES.get(opportunity_id)
+    if profile is None:
+        return None
+    selection = case_selection_view()
+    return {
+        "selection_id": selection["selection_id"],
+        "rule_version": selection["rule_version"],
+        "reference": selection["selection_reference"]["path"],
+        "profile": profile,
+    }
 
 
 def _dossier_styles() -> str:
@@ -22,6 +42,7 @@ def _dossier_styles() -> str:
 def build_dossier(analysis: dict[str, Any]) -> dict[str, Any]:
     decision = analysis["active_decision"]
     opportunity = analysis["opportunity"]
+    selection_reference = _selection_reference(opportunity["id"])
     latest = max(analysis["trade"], key=lambda row: row["year"])
     capacity = analysis.get("capacity") or {}
     economics = analysis.get("economics") or {}
@@ -93,7 +114,7 @@ def build_dossier(analysis: dict[str, Any]) -> dict[str, Any]:
             f"{capacity.get('specification_adjusted_gap_kt', 0):,.1f} kt."
         )
     return {
-        "dossier_version": "1.2",
+        "dossier_version": "1.3" if selection_reference else "1.2",
         "opportunity_id": opportunity["id"],
         "mode": analysis["mode"],
         "decision_headline": decision["headline"],
@@ -143,6 +164,11 @@ def build_dossier(analysis: dict[str, Any]) -> dict[str, Any]:
             "as_of_date": analysis["as_of_date"],
             "authority": analysis["authority"],
             "integrity": analysis["integrity"],
+            **(
+                {"selection": selection_reference}
+                if selection_reference is not None
+                else {}
+            ),
         },
         "contradiction_register": contradiction_register,
         "conditions": decision.get("conditions", []),
@@ -391,6 +417,19 @@ def render_dossier_html(
         public=evidence["public_records"],
         synthetic=evidence["synthetic_records"],
     )
+    selection = evidence.get("selection")
+    selection_html = ""
+    if isinstance(selection, dict):
+        selection_html = (
+            '<p class="small selection-reference">'
+            + technical_template(
+                "dossier.selection_reference",
+                selection_id=selection["selection_id"],
+                rule_version=selection["rule_version"],
+                profile=selection["profile"],
+            )
+            + f"<br>{technical(selection['reference'])}</p>"
+        )
     title = text("dossier.document_title", state=state_text)
     supply_json = json.dumps(
         dossier["supply_conclusion"],
@@ -522,7 +561,7 @@ def render_dossier_html(
 <section class="box decision-conditions"><h2>{text("dossier.decision_conditions")}</h2>{narrative_caption}<ul>{conditions_html}</ul></section>
 <section class="box kill-conditions"><h2>{text("dossier.kill_conditions")}</h2>{narrative_caption}<ul>{kills_html}</ul></section>
 <section class="box next-actions"><h2>{text("dossier.next_actions")}</h2>{narrative_caption}<ul>{next_actions_html}</ul></section>
-<section class="box"><h2>{text("dossier.evidence_boundary")}</h2><p>{evidence_counts}</p>{partner_detail_html}<p class="small">{text("dossier.snapshot")} {technical(evidence["snapshot_id"])} · {text("dossier.as_of")} {technical(evidence["as_of_date"])}</p></section>
+<section class="box"><h2>{text("dossier.evidence_boundary")}</h2><p>{evidence_counts}</p>{selection_html}{partner_detail_html}<p class="small">{text("dossier.snapshot")} {technical(evidence["snapshot_id"])} · {text("dossier.as_of")} {technical(evidence["as_of_date"])}</p></section>
 <section class="box"><h2>{text("dossier.authority")}</h2>{authority_html}</section>
 </div>
 </main>

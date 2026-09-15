@@ -52,9 +52,14 @@ SCREENS = (
     "journey-g-alu-foil-public-workspace",
     "journey-g-alu-profiles-public-workspace",
     "journey-g-pe-film-public-workspace",
+    "journey-g-penicillin-api-public-workspace",
+    "journey-g-streptomycin-api-public-workspace",
+    "journey-g-sop-public-workspace",
+    "journey-g-fert-retail-packs-public-workspace",
+    "journey-h-selection-exclusions",
 )
 MAX_FILE_BYTES = 600 * 1024
-MAX_TOTAL_BYTES = 12 * 1024 * 1024
+MAX_TOTAL_BYTES = 16 * 1024 * 1024
 VisualMode = Literal["compare", "update"]
 
 

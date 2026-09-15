@@ -8,6 +8,11 @@ export const state = {
   manifest: null,
   extraction: null,
   requestEpoch: 0,
+  selection: {
+    data: null,
+    error: null,
+    requestEpoch: 0,
+  },
   screening: {
     summary: null,
     evidence: null,

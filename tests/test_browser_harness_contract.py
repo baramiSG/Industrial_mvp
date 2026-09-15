@@ -71,6 +71,7 @@ def test_browser_suite_has_the_approved_top_level_shape() -> None:
         "test_guardrails.py",
         "test_journeys.py",
         "test_responsive.py",
+        "test_s15b_selection.py",
         "test_screening.py",
         "test_visual_baselines.py",
         "visual_baselines.py",
@@ -449,7 +450,7 @@ def test_server_teardown_accepts_clean_exit_or_requested_sigterm() -> None:
     assert harness.is_expected_server_return_code(1) is False
 
 
-def test_browser_inventory_has_exactly_33_named_tests() -> None:
+def test_browser_inventory_has_exactly_36_named_tests() -> None:
     expected = {
         "test_portfolio_loads_expected_cases_and_states",
         "test_opportunity_card_opens_selected_workspace",
@@ -499,6 +500,9 @@ def test_browser_inventory_has_exactly_33_named_tests() -> None:
             "catalogue_prose_in_arabic"
         ),
             "test_arabic_decision_subject_card_has_catalogue_parity",
+        "test_s15b_evsi_absent_renders_localized_unavailable",
+        "test_s15b_selection_and_every_exclusion_render_bilingually",
+        "test_s15b_selection_endpoint_is_loaded_once_without_mode_query",
     }
     actual: set[str] = set()
     for path in BROWSER_TESTS.glob("test_*.py"):

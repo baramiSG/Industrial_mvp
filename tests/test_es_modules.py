@@ -28,6 +28,8 @@ EXPECTED_MODULES = {
     "modules/screening/record-evidence.js",
     "modules/screening/record.js",
     "modules/screening/summary.js",
+    "modules/selection/index.js",
+    "modules/selection/render.js",
     "modules/state.js",
     "modules/workspace.js",
     "modules/renderers/capability.js",

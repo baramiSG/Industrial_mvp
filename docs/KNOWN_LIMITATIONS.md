@@ -121,6 +121,13 @@ Updated by the Supervisor at every slice completion. Items marked *pre-existing*
 | KL-116 | S15 W-P15's aggregate RunReport `requests_made=14` is not a transport count. | The shared budget used five actual HTTP requests (one terms plus four data); the aggregate sums cumulative per-unit values 2+3+4+5. This pre-existing reporting defect is disclosed, not corrected in S15a. |
 | KL-117 | Same-day Comtrade partner evidence requires two authoritative snapshots. | The scoped S15 snapshot contains four disjoint units and no copied S14 exclusions; it coexists with the unchanged S14a snapshot. Neither supersedes the other and consumers must select by recorded unit identity. |
 
+## S15b portfolio-child limitations and carry-forward
+
+| ID | Limitation | Evidence / boundary |
+|---|---|---|
+| KL-124 | MONITOR remains undemonstrated by the four S15b cases. | Every public case fires material R1-D and every simulated ground truth selects ADVANCE or REJECT. No input, route or threshold is retuned to manufacture MONITOR; generalized S09/S10 fixtures remain the proof. |
+| KL-125 | All route-changing internal facts and decision narratives in the four S15b scenarios are hypothetical analyst-draft Class-D inputs. | They are labelled `DEMO_GENERATOR`, isolated to simulated mode and do not establish actual producer capability, demand, regulatory feasibility, economics, exclusion status or Ministry authorization. Aggregate EVSI remains null because no estimates were supplied. |
+
 ## S16a graph-projection limitations (open, not fabricated)
 
 | ID | Limitation | Evidence / boundary |

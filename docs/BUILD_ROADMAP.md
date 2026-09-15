@@ -207,8 +207,11 @@ integration conflict correctly records five committed snapshots and nine
 briefs. OD-16 retains the write-once `CASE-SELECTION-S15-b96de36ff0ce`;
 recorded-input reconstruction passes after W-A15b even though a current-state
 diagnostic sees the later SABIC document and changes only its digest, not the
-selected set. PR CI was green 5/5 on its exact head. S15b is READY to add the
-portfolio/scenario/golden/browser layer; S15 remains in progress until then.
+selected set. PR CI was green 5/5 on its exact head. The uncommitted S15b
+candidate adds the four builder-derived public snapshots, four Class-D
+scenarios, eleven-case portfolio, governed bilingual selection surface and
+conditional absent-EVSI compatibility. Owner main reconciliation, graph refresh,
+canonical visual and manifest gates remain pending; S15 remains in progress.
 
 ## S16 split (SLICE_GRAPH §5)
 

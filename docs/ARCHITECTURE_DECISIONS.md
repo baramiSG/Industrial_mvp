@@ -1373,3 +1373,70 @@ identity and hashes are logged; a committed correction receives a new
 projection id. The local service can be stopped without affecting offline
 analysis. Credential rotation or reset must explicitly recreate the dedicated
 volume because `NEO4J_AUTH_FILE` seeds only a new database.
+
+## ADR-025 — S15b deep portfolio, public selection surface and absent EVSI
+
+**Status:** uncommitted S15b implementation candidate under approved PLAN v2
+`06902a87…` and focused EVSI amendment AM2 `330547d5…`. Independent
+implementation review, owner acceptance, generated artifacts, PR/CI and delivery
+remain separate gates.
+
+**Context.** S15a delivered four public-only briefs and the write-once selection
+`CASE-SELECTION-S15-b96de36ff0ce`. S15b must turn those briefs into four
+builder-derived PublicSnapshot 2.2.0 records, add four isolated Class-D scenarios,
+extend the deep portfolio to eleven cases, and expose the governed selection
+without changing any prior evidence or public decision. No probability,
+value-difference, evidence-cost or delay-cost estimates were supplied for the
+new scenarios, so manufacturing aggregate EVSI inputs would violate the
+no-free-facts boundary.
+
+**Decision.** The four scenarios omit `synthetic_inputs.evsi`. In
+`simulation.simulate`, absence alone skips `approximate_evsi` and returns null;
+all supplied mapping, required-key and conversion errors and every valid
+calculation remain unchanged. The new public results stay INVESTIGATE/null.
+Simulations compute ADVANCE/1 for 294110, REJECT/0 EX-03 for 294120, ADVANCE/2
+for 310430 and REJECT/0 EX-01 for 310510. Synthetic evidence remains Class D
+and cannot alter `real_decision` or public `data_unlocks`.
+
+A new read-only `GET /api/case-selection` verifies the pinned selection bytes
+against the snapshot manifest and projects a fixed public response. It accepts
+no caller path, is mode-independent, and includes both profile quotas, selected
+pairs, ordered substitutes, public input references and all recorded identity,
+viability, series-gap and frozen-case exclusions. UI strings 1.4.0 owns the
+bilingual selection labels. Only the four S15b dossiers move to version 1.3 and
+add the selection id, rule, reference and profile; older dossiers remain 1.2.
+
+**Authority and generation.** Manifest §7.2 covers runtime, API, dossier, UI and
+tests; §7.3 covers UI strings 1.4.0; §7.4 covers Core 01/02/04/07/09 and this
+ADR; §7.5 covers the four public snapshots and four scenarios. The four
+snapshots were each double-built and byte-compared before product generation.
+At the T4 handoff, graph refresh, canonical visual regeneration and the single
+manifest invocation remained deferred to their owner reconciliation gates.
+
+**T5 graph receipt.** After owner reconciliation confirmed unchanged base
+`f671f36`, finalized graph inputs produced
+`GRAPH-SAU-2026-09-12-e651e7065377` twice in distinct scratch roots with exact
+byte equality. The final write-once projection has 922 nodes and 1,041 edges;
+its projection, manifest and pointer SHA-256 values are respectively
+`4cfa9021987486bf5c802c0ab9f18255805b1020447efd9c79906faef17a6295`,
+`3155e9990d5dbfc56bf72cf8bed019c6afb4d3f31a7fc52b4ac514d483d1a480`
+and `29434bd8b4c6a70d9426bc5b9d86a89be10a954e2a2354289b74b92f07f5c496`.
+Both historical projection directories remain unchanged. Validation and graph
+regressions prove eleven top-level public inputs, eleven scenarios, public/Class-D
+partition and mandatory provenance. Canonical visual and manifest generation
+counts remain zero at this receipt.
+
+**T6 visual receipt.** After corrected pre-generation review and separate owner
+release, the sole canonical launch generated 96 lossless RGB entries from the
+pinned image and Chromium revision: 76 retained paths, 20 additions, no
+removals, 14,724,616 aggregate bytes and 230,978 maximum bytes, all uid 1000.
+The generated manifest SHA-256 is `4fd90577…` and the baseline tree OID is
+`0d2e0fe9…`. The launch budget is consumed at one. The initial drift result was
+invalidated by S15B-T6-MASK-01: a one-bit mask with fill `1` failed to exclude
+approved pixels. The corrected 8-bit mask still finds 52 outside-region residuals:
+all 36 workspace and all 16 screening images, while all 16 dossier images are
+pixel-identical. State-bound B/W diagnostics reproduce the residuals and show a
+changed long-page absolute/fractional anchor phase after the portfolio/selection
+additions, not a standalone dossier or image-runtime difference. T6 remains
+blocked; generated output is retained and no second launch, region widening or
+manifest invocation is authorized or claimed.

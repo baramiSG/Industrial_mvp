@@ -706,3 +706,28 @@ units and coexists with the unchanged S14a snapshot for its disjoint unit set.
 `sfda_registers`, Class B and its configured support codes. This source kind
 does not turn a company-list observation into product capability, production
 or qualification evidence.
+
+## 14. S15b public selection and optional EVSI projections
+
+`GET /api/case-selection` projects only the manifest-verified write-once
+`CASE-SELECTION-S15-b96de36ff0ce` record. Its response schema is `1.0.0` and
+contains `source_boundary: public`, `synthetic_flag: false`, the selection and
+rule identities, the repository-relative selection reference and hash, recorded
+public input references, and ordered `pharma_api` then `fertilizers` profile
+objects. Each profile retains its quota, selected pair, substitution order,
+rows, and complete identity, viability, series-gap and frozen-case exclusions.
+The endpoint takes no caller-selected file path and its result does not vary by
+evidence mode.
+
+The aggregate analysis field `evsi` is either the existing calculation mapping
+or JSON `null`. Null means no EVSI calculation occurred because the optional
+`synthetic_inputs.evsi` key was absent; it is not numeric zero and does not mean
+that evidence has no decision value. If the key is supplied, it must remain a
+mapping with all four required inputs and values accepted by the existing
+calculation. Supplied null, wrong-type, empty, partial or non-convertible blocks
+fail with the existing evidence-integrity error instead of becoming null.
+
+The four S15b dossiers use version `1.3` and add
+`evidence_summary.selection` with the selection id, rule version, repository
+reference and sector profile. Earlier dossier records remain version `1.2` and
+do not acquire that field.

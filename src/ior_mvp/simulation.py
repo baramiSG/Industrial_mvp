@@ -885,17 +885,20 @@ def simulate(public: dict[str, Any], scenario: dict[str, Any]) -> dict[str, Any]
         formula_capacity,
         thresholds,
     )
-    evsi_inputs = inputs.get("evsi")
-    if not isinstance(evsi_inputs, dict):
-        raise EvidenceIntegrityError(
-            "scenario.synthetic_inputs.evsi must be a mapping"
-        )
-    try:
-        evsi = approximate_evsi(evsi_inputs)
-    except (TypeError, ValueError) as exc:
-        raise EvidenceIntegrityError(
-            f"scenario.synthetic_inputs.evsi contains an invalid value: {exc}"
-        ) from exc
+    if "evsi" not in inputs:
+        evsi = None
+    else:
+        evsi_inputs = inputs["evsi"]
+        if not isinstance(evsi_inputs, dict):
+            raise EvidenceIntegrityError(
+                "scenario.synthetic_inputs.evsi must be a mapping"
+            )
+        try:
+            evsi = approximate_evsi(evsi_inputs)
+        except (TypeError, ValueError) as exc:
+            raise EvidenceIntegrityError(
+                f"scenario.synthetic_inputs.evsi contains an invalid value: {exc}"
+            ) from exc
     route_record = None
     decision = compute_simulated_decision(
         public_case,
