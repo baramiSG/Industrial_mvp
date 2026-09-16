@@ -92,7 +92,7 @@ def test_summary_contract_and_authority_versions():
     assert payload["synthetic_flag"] is False
     assert payload["authority"] == {
         "screening_config_version": "1.0.0",
-        "thresholds_version": "1.2.0",
+        "thresholds_version": "1.3.0",
         "product_families_version": "1.2.0",
         "acquisition_config_version": "1.3.0",
     }
@@ -262,7 +262,7 @@ def test_evidence_route_returns_eight_universe_passports_verbatim():
     ]
     assert payload["authority"] == {
         "screening_config_version": "1.0.0",
-        "thresholds_version": "1.2.0",
+        "thresholds_version": "1.3.0",
         "product_families_version": "1.2.0",
         "acquisition_config_version": "1.3.0",
     }
@@ -285,7 +285,7 @@ def test_evidence_route_without_snapshot_is_explicit(monkeypatch):
         "reason_codes": ["NO_SCREENING_SNAPSHOT"],
         "authority": {
             "screening_config_version": "1.0.0",
-            "thresholds_version": "1.2.0",
+            "thresholds_version": "1.3.0",
             "product_families_version": "1.2.0",
             "acquisition_config_version": "1.3.0",
         },

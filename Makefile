@@ -3,6 +3,7 @@ NODE ?= node
 UV_RUN = $(UV) run --locked --extra dev
 UV_RUN_E2E = $(UV) run --locked --extra dev --extra e2e
 UV_RUN_GRAPH = $(UV) run --locked --extra dev --extra graph
+GRAPH_PYCACHE_PREFIX ?= /tmp/ior-s16a-pyc
 UI_CONTRACTS = $(UV_RUN) python scripts/check_ui_contracts.py
 ES_MODULE_CHECK = $(UV_RUN) python scripts/check_es_modules.py --node "$(NODE)"
 E2E_ARTIFACT_DIR ?= .artifacts/e2e
@@ -232,40 +233,40 @@ cases-reconstruct:
 	PYTHONPATH=src $(UV_RUN) python -m ior_mvp.cases reconstruct
 
 graph-build:
-	PYTHONDONTWRITEBYTECODE=1 PYTHONPYCACHEPREFIX=/tmp/ior-s16a-pyc \
+	PYTHONDONTWRITEBYTECODE=1 PYTHONPYCACHEPREFIX=$(GRAPH_PYCACHE_PREFIX) \
 		PYTHONPATH=src $(UV_RUN_GRAPH) python -m ior_mvp.graph build
 
 graph-validate:
-	PYTHONDONTWRITEBYTECODE=1 PYTHONPYCACHEPREFIX=/tmp/ior-s16a-pyc \
+	PYTHONDONTWRITEBYTECODE=1 PYTHONPYCACHEPREFIX=$(GRAPH_PYCACHE_PREFIX) \
 		PYTHONPATH=src $(UV_RUN_GRAPH) python -m ior_mvp.graph validate
 
 graph-credential:
-	PYTHONDONTWRITEBYTECODE=1 PYTHONPYCACHEPREFIX=/tmp/ior-s16a-pyc \
+	PYTHONDONTWRITEBYTECODE=1 PYTHONPYCACHEPREFIX=$(GRAPH_PYCACHE_PREFIX) \
 		PYTHONPATH=src $(UV_RUN_GRAPH) python -m ior_mvp.graph credential
 
 graph-up: graph-credential
 	docker compose up -d --pull never industrial-mvp-neo4j
 	NEO4J_AUTH_FILE="$(CURDIR)/.secrets/neo4j_auth.txt" \
-		PYTHONDONTWRITEBYTECODE=1 PYTHONPYCACHEPREFIX=/tmp/ior-s16a-pyc \
+		PYTHONDONTWRITEBYTECODE=1 PYTHONPYCACHEPREFIX=$(GRAPH_PYCACHE_PREFIX) \
 		PYTHONPATH=src $(UV_RUN_GRAPH) python -m ior_mvp.graph wait \
 		--target compose --timeout 180
 
 graph-load:
 	NEO4J_AUTH_FILE="$(CURDIR)/.secrets/neo4j_auth.txt" \
-		PYTHONDONTWRITEBYTECODE=1 PYTHONPYCACHEPREFIX=/tmp/ior-s16a-pyc \
+		PYTHONDONTWRITEBYTECODE=1 PYTHONPYCACHEPREFIX=$(GRAPH_PYCACHE_PREFIX) \
 		PYTHONPATH=src $(UV_RUN_GRAPH) python -m ior_mvp.graph load \
 		--target compose
 
 graph-verify:
 	NEO4J_AUTH_FILE="$(CURDIR)/.secrets/neo4j_auth.txt" \
-		PYTHONDONTWRITEBYTECODE=1 PYTHONPYCACHEPREFIX=/tmp/ior-s16a-pyc \
+		PYTHONDONTWRITEBYTECODE=1 PYTHONPYCACHEPREFIX=$(GRAPH_PYCACHE_PREFIX) \
 		PYTHONPATH=src $(UV_RUN_GRAPH) python -m ior_mvp.graph verify \
 		--target compose
 
 graph-tests:
 	IOR_GRAPH_TEST_EXPLICIT=1 IOR_GRAPH_TARGET=compose \
 		NEO4J_AUTH_FILE="$(CURDIR)/.secrets/neo4j_auth.txt" \
-		PYTHONDONTWRITEBYTECODE=1 PYTHONPYCACHEPREFIX=/tmp/ior-s16a-pyc \
+		PYTHONDONTWRITEBYTECODE=1 PYTHONPYCACHEPREFIX=$(GRAPH_PYCACHE_PREFIX) \
 		PYTHONPATH=src $(UV_RUN_GRAPH) pytest -q graph_tests \
 		-m "graph and not graph_unavailable"
 
@@ -275,7 +276,7 @@ graph-down:
 graph-unavailable-test:
 	IOR_GRAPH_TEST_EXPLICIT=1 IOR_GRAPH_TARGET=compose \
 		NEO4J_AUTH_FILE="$(CURDIR)/.secrets/neo4j_auth.txt" \
-		PYTHONDONTWRITEBYTECODE=1 PYTHONPYCACHEPREFIX=/tmp/ior-s16a-pyc \
+		PYTHONDONTWRITEBYTECODE=1 PYTHONPYCACHEPREFIX=$(GRAPH_PYCACHE_PREFIX) \
 		PYTHONPATH=src $(UV_RUN_GRAPH) pytest -q graph_tests \
 		-m graph_unavailable
 
@@ -284,7 +285,7 @@ graph-gate:
 	@set -eu; \
 		trap '$(MAKE) graph-down >/dev/null 2>&1 || true' EXIT; \
 		NEO4J_AUTH_FILE="$(CURDIR)/.secrets/neo4j_auth.txt" \
-		PYTHONDONTWRITEBYTECODE=1 PYTHONPYCACHEPREFIX=/tmp/ior-s16a-pyc \
+		PYTHONDONTWRITEBYTECODE=1 PYTHONPYCACHEPREFIX=$(GRAPH_PYCACHE_PREFIX) \
 		PYTHONPATH=src $(UV_RUN_GRAPH) python -m ior_mvp.graph clear --target compose --confirm-clear industrial-mvp-neo4j; \
 		$(MAKE) graph-load; \
 		$(MAKE) graph-load; \
@@ -300,7 +301,7 @@ graph-aura-load:
 	@test -n "$(AURA_CONFIRM)" || (echo "AURA_CONFIRM required" >&2; exit 2)
 	@test -z "$(CI)" || (echo "CI may not connect to Aura" >&2; exit 2)
 	@set -a; . ./.env; set +a; \
-		PYTHONDONTWRITEBYTECODE=1 PYTHONPYCACHEPREFIX=/tmp/ior-s16a-pyc \
+		PYTHONDONTWRITEBYTECODE=1 PYTHONPYCACHEPREFIX=$(GRAPH_PYCACHE_PREFIX) \
 		PYTHONPATH=src $(UV_RUN_GRAPH) python -m ior_mvp.graph load \
 		--target aura --confirm-instance "$(AURA_CONFIRM)"
 
@@ -310,6 +311,6 @@ graph-aura-verify:
 	@test -n "$(AURA_CONFIRM)" || (echo "AURA_CONFIRM required" >&2; exit 2)
 	@test -z "$(CI)" || (echo "CI may not connect to Aura" >&2; exit 2)
 	@set -a; . ./.env; set +a; \
-		PYTHONDONTWRITEBYTECODE=1 PYTHONPYCACHEPREFIX=/tmp/ior-s16a-pyc \
+		PYTHONDONTWRITEBYTECODE=1 PYTHONPYCACHEPREFIX=$(GRAPH_PYCACHE_PREFIX) \
 		PYTHONPATH=src $(UV_RUN_GRAPH) python -m ior_mvp.graph verify \
 		--target aura --confirm-instance "$(AURA_CONFIRM)"

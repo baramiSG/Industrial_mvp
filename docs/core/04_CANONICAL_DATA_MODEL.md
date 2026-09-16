@@ -517,6 +517,12 @@ methodology, current Core/config bytes and engine sources are direct inputs;
 generated authority/snapshot manifests are integrity outputs, not projection
 inputs, which avoids a circular graph→manifest→graph identity.
 
+### 8.6 Shared-enabler input and provenance
+
+A non-derived `UNLOCKED_BY` relationship carries `unlock_probability`, `dependency_share`, positive `dependent_incremental_national_value_m_sar`, `valuation_route_code` and the precise `valuation_input_reference`. Its source is a public Product; a simulated relationship is Class D and its scenario membership resolves to one non-derived Scenario whose `opportunity_id` equals that Product. The target shared-enabler Intervention carries the common declaration, both labels, scenario membership list, cost and component evidence. Public and simulated feeds reject derived, ambiguous, unrelated or partition-invalid elements.
+
+The route input aligns dependent opportunity IDs, probabilities, values, shares, valuation codes and references and retains the graph projection identity. Evaluated route 8 adds a `shared_enabler` audit block; the legacy `GRAPH_REQUIRED` record contains no evaluated-only fields.
+
 ## 9. Dossier projection
 
 The Decision Dossier is a projection, not a separate source of truth. It is generated from the canonical record and includes:

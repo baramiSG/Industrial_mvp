@@ -39,7 +39,7 @@ An autonomous agent may refactor implementation, but it may not remove a mapped 
 | 2.1 / 12 — Decision-critical evidence gate | Four field assessments from controlled passport support codes; configured class/status gate; no source-type predicate | `public_decision.assess_decision_critical_fields`, `evidence.evaluate_advance_gate`, `evidence_policy.v1.yaml` | field-class, source-independence, positive/downgrade ADVANCE tests | evidence assessment and gate diagnostics |
 | 4.2 — Hard exclusions | Six typed checks; unknown is NOT_CALCULABLE; satisfied exclusion rejects before deep routes | `public_decision.evaluate_hard_exclusions` | six-check truth tables and unknown tests | hard-exclusion diagnostics |
 | 5.3 — Gap taxonomy | Exactly one primary methodology class and ordered secondary classes | `public_decision.classify_gap` | taxonomy table tests | gap class |
-| 7.1.1 / 7.4 / 12 — Public routes | Ordered 0–8 hypotheses; precedence then maximum defensible ΔNV; route 8 GRAPH_REQUIRED | `route_hypotheses.py` | order, precedence, max-ΔNV, tie and graph tests | route hypotheses and preferred hypothesis |
+| 7.1.1 / 7.4 / 12 — Public routes | Ordered 0–8 hypotheses; precedence then maximum defensible ΔNV; route 8 requires a governed graph feed | `route_hypotheses.py` | order, precedence, max-ΔNV, tie and graph tests | route hypotheses and preferred hypothesis |
 | 6.3 — Five sector profiles | Five frozen profiles, nine weights each, complete profile hard gates | `capability.py`, `sector_profiles.v1.yaml` | per-profile weight/Kmin/band/gate tests | capability matrix |
 | 9 / 15 — Evidence needs and narrative | Computed evidence needs, conditions, kill conditions and governed EN/AR narrative | `evidence_needs.py`, `narratives.py`, `decision_narratives.v1.yaml` | exact golden copy, parity, escaping and browser tests | hero, unlocks, dossier |
 | Appendix A | Formula reference | `rules.py`, `capability.py`, `economics.py` | formula tests | metric cards |
@@ -241,8 +241,8 @@ Any new domain function must be added to this map before implementation review c
 | Scenario contract validation | `scenario_contract.validate_simulation_contract` | Core 06 v2 §12 | `tests/test_scenario_contract.py` | HTTP 422 on malformed 2.0.0 scenarios |
 | Scenario projection | `scenario_contract.project_simulated_case` | Core 06 v2 §12; Core 07 §7.9 | contract/generalized tests | composite case for public engine reuse |
 | Simulated decision assembly | `simulation.compute_simulated_decision` | Core 07 §7.9 | `tests/test_simulation_generalized.py` | `simulation_decision` aggregate |
-| Shared-enabler contract | `route_hypotheses.evaluate_shared_enabler_route` | Core 07 §7.7 | route hypothesis tests | route 8 `GRAPH_REQUIRED` |
-| Shared-enabler unlock helper | `route_hypotheses.shared_enabler_unlock_value` | ADR-014 | route hypothesis tests | deterministic unlock value only |
+| Shared-enabler contract | `scenario_contract.validate_shared_enabler`, `scenario_contract.shared_enabler_valuation`, `route_hypotheses.evaluate_shared_enabler_route` | Core 06 §12; Core 07 §7.7 | scenario, projection and route hypothesis tests | route 8 `GRAPH_REQUIRED` or evaluated audit record |
+| Shared-enabler unlock helper | `route_hypotheses.shared_enabler_unlock_value` | ADR-014; ADR-026 | route hypothesis tests | deterministic UnlockValue with configured dependent minimum |
 | Source connector protocol | `acquisition.connectors.base.SourceConnector` | Core 05 §10–§11; ADR-015 | `tests/test_acquisition_connectors.py` | RunReport per source |
 | Raw evidence store | `acquisition.raw_store.RawStore` | Core 05 §10; DD-3 | `tests/test_acquisition_raw_store.py` | hashed page contracts |
 | Completeness accounting | `acquisition.coverage.evaluate_coverage` | Core 05 §11; DD-18 | `tests/test_acquisition_coverage.py` | coverage.json per unit |
@@ -275,6 +275,6 @@ Any new domain function must be added to this map before implementation review c
 | R9-S adjacency explanation | `graph.engine_feed.adjacency_explanation` | Methodology R9-S; S17 view 1 | artifact/Cypher equality tests | fixed `adjacency` view |
 | Route-blocking capability | `graph.engine_feed.route_blocking_capability` | Core 07 §§4.3, 7.7; S17 view 2 | artifact/Cypher equality tests | fixed `route_blocking` view |
 | Evidence-to-change linkage | `graph.engine_feed.evidence_linkage` | Methodology §9; S17 view 4 | artifact/Cypher equality tests | fixed `evidence_to_change` view |
-| Shared-enabler projection feed | `graph.engine_feed.shared_enabler_inputs`, `graph.engine_feed.shared_enabler_queue_rows` | Methodology §§8.2–8.3; R-2 | public-empty, Class-D isolation and live equality tests | fixed `shared_enabler` view; route activation remains S16b |
+| Shared-enabler projection feed | `graph.engine_feed.shared_enabler_inputs`, `graph.engine_feed.shared_enabler_queue_rows` | Methodology §§8.2–8.3; R-2 | public-empty, Class-D membership, valuation provenance, isolation and live equality tests | fixed `shared_enabler` view and route-8 engine input |
 | Idempotent graph mirror | `graph.loader.load`, `graph.loader.verify` | R-3, R-6, OR-7 | `graph_tests/test_loader.py`, provenance/count tests | Compose/CI/Aura-safe mirror |
 | Fail-closed live graph service | `graph.service.GraphService`, `graph.api.router` | S16 objective; Core 03 §13 | stopped-service and offline API tests | typed `GRAPH_UNAVAILABLE` |

@@ -267,7 +267,12 @@ def test_policy_validation_accepts_additive_s04_metadata(
 ) -> None:
     scenario = get_synthetic_scenario(opportunity_id)
     assert scenario is not None
-    assert scenario["scenario_version"] == "2.0.0"
+    expected_version = (
+        "2.1.0"
+        if opportunity_id in {"SAU-H6-760711", "SAU-H6-760429"}
+        else "2.0.0"
+    )
+    assert scenario["scenario_version"] == expected_version
     assert isinstance(scenario["ground_truth"], dict)
     assert isinstance(scenario["decision_narrative"], dict)
 

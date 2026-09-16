@@ -1164,6 +1164,52 @@ def _base_demand_probability_check(
     )
 
 
+def _shared_enabler_check(scenario: dict[str, Any]) -> dict[str, Any]:
+    from .scenario_contract import (
+        shared_enabler_valuation,
+        validate_shared_enabler,
+    )
+
+    source = "Core 06 scenario contract 2.1.0 and methodology §8.3"
+    formula = "explicit route valuation and complete Class-D declaration"
+    try:
+        declaration = validate_shared_enabler(scenario)
+        if declaration is None:
+            return _check(
+                "shared_enabler_declaration_valid",
+                source,
+                formula,
+                "NOT_APPLICABLE",
+                blocking=True,
+                inputs={},
+                detail="No shared-enabler declaration is present.",
+            )
+        route_code, value = shared_enabler_valuation(scenario)
+    except EvidenceIntegrityError as exc:
+        return _check(
+            "shared_enabler_declaration_valid",
+            source,
+            formula,
+            "FAIL",
+            blocking=True,
+            inputs={},
+            detail=str(exc),
+        )
+    return _check(
+        "shared_enabler_declaration_valid",
+        source,
+        formula,
+        "PASS",
+        blocking=True,
+        inputs={
+            "enabler_id": declaration["enabler_id"],
+            "valuation_route_code": route_code,
+            "dependent_incremental_national_value_m_sar": value,
+        },
+        detail="Shared-enabler declaration and explicit valuation source are valid.",
+    )
+
+
 def reconcile_synthetic_scenario(
     scenario: dict[str, Any],
     public_case: dict[str, Any],
@@ -1193,6 +1239,7 @@ def reconcile_synthetic_scenario(
         _expansion_assumption_check(inputs, public_case),
         _retained_flows_check(inputs, public_case),
         _base_demand_probability_check(inputs),
+        _shared_enabler_check(scenario),
     ]
     blocking_results = [
         check["result"]

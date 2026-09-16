@@ -14,6 +14,7 @@ from ior_mvp.route_hypotheses import (
     ROUTE_KEYS,
     apply_precedence,
     evaluate_route_hypotheses,
+    evaluate_shared_enabler_route,
     select_preferred_hypothesis,
 )
 from ior_mvp.rules import evaluate_rules
@@ -461,3 +462,157 @@ def test_route_module_ast_has_no_case_identity_or_first_pass_dispatch() -> None:
     assert "SAU-H0-721049" not in strings
     assert "SAU-H0-390210" not in strings
     assert "first passing" not in " ".join(strings).casefold()
+
+
+def _s16b_route_eight_inputs() -> dict:
+    return {
+        "enabler_id": "ENABLER-SYN-TEST-001",
+        "dependent_opportunity_ids": ["P-A", "P-B"],
+        "unlock_probabilities": [1.0, 1.0],
+        "dependent_incremental_national_values_m_sar": [100.0, 103.0],
+        "dependency_shares": [1.0, 1.0],
+        "enabler_cost_m_sar": 25.0,
+        "graph_projection_id": "GRAPH-TEST",
+        "valuation_route_codes": [6, 4],
+        "valuation_input_references": [
+            "synthetic_inputs.route_evidence[route_code=6].national_value",
+            "synthetic_inputs.route_evidence[route_code=4].national_value",
+        ],
+        "components": {
+            "technical_feasibility_confirmed": True,
+            "investment_already_approved_or_financed": False,
+            "proceeds_without_intervention": False,
+            "policy_prohibition_identified": False,
+            "distortion_unacceptable": False,
+            "intervention_proportionate_to_constraint": True,
+            "competition": {
+                "existing_effective_capacity_kt": 2.5,
+                "proposed_incremental_capacity_kt": 39.6,
+                "downside_demand_kt": 39.2,
+            },
+        },
+        "constraint_classes_addressed": ["capability_or_technology"],
+        "removes_binding_constraint": True,
+        "evidence_ids": ["E-A", "E-B"],
+    }
+
+
+def test_s16b_route_eight_computes_and_wins_at_178() -> None:
+    inputs = _s16b_route_eight_inputs()
+    route = evaluate_shared_enabler_route(
+        inputs,
+        detected_constraint="capability_or_technology",
+    )
+    assert route["status"] == "passes"
+    assert route["unrounded_incremental_national_value_m_sar"] == 178.0
+    preferred = select_preferred_hypothesis(
+        apply_precedence([_passing_route(3, 66.0), route])
+    )
+    assert preferred is not None
+    assert preferred["route_code"] == 8
+
+
+def test_s16b_route_eight_boundaries_fail_closed() -> None:
+    insufficient = _s16b_route_eight_inputs()
+    for key in (
+        "dependent_opportunity_ids",
+        "unlock_probabilities",
+        "dependent_incremental_national_values_m_sar",
+        "dependency_shares",
+        "valuation_route_codes",
+        "valuation_input_references",
+    ):
+        insufficient[key] = insufficient[key][:1]
+    assert evaluate_shared_enabler_route(
+        insufficient,
+        detected_constraint="capability_or_technology",
+    )["reason_codes"] == ["SHARED_ENABLER_DEPENDENTS_INSUFFICIENT"]
+    nonpositive = _s16b_route_eight_inputs()
+    nonpositive["enabler_cost_m_sar"] = 203.0
+    assert evaluate_shared_enabler_route(
+        nonpositive,
+        detected_constraint="capability_or_technology",
+    )["reason_codes"] == ["UNLOCK_VALUE_NONPOSITIVE"]
+
+
+@pytest.mark.parametrize(
+    ("field", "value"),
+    [
+        ("unlock_probabilities", [True, 1.0]),
+        ("dependency_shares", [float("inf"), 1.0]),
+        ("dependent_incremental_national_values_m_sar", [0.0, 103.0]),
+        ("valuation_route_codes", [True, 4]),
+        ("valuation_input_references", ["", "valid"]),
+        ("dependent_opportunity_ids", ["P-A", "P-A"]),
+        ("constraint_classes_addressed", ["invalid"]),
+    ],
+)
+def test_s16b_route_eight_rejects_malformed_graph_inputs(
+    field: str,
+    value: object,
+) -> None:
+    inputs = _s16b_route_eight_inputs()
+    inputs[field] = value
+    with pytest.raises(EvidenceIntegrityError):
+        evaluate_shared_enabler_route(
+            inputs,
+            detected_constraint="capability_or_technology",
+        )
+
+
+def test_s16b_zero_probability_dependent_is_excluded_from_minimum() -> None:
+    inputs = _s16b_route_eight_inputs()
+    inputs["unlock_probabilities"] = [0.0, 1.0]
+    route = evaluate_shared_enabler_route(
+        inputs,
+        detected_constraint="capability_or_technology",
+    )
+    assert route["status"] == "NOT_CALCULABLE"
+    assert route["reason_codes"] == [
+        "SHARED_ENABLER_DEPENDENTS_INSUFFICIENT"
+    ]
+    assert route["shared_enabler"]["counted_dependent_ids"] == ["P-B"]
+    assert route["shared_enabler"]["excluded_dependents"] == [
+        {
+            "opportunity_id": "P-A",
+            "reason_codes": ["UNLOCK_PROBABILITY_NONPOSITIVE"],
+        }
+    ]
+
+
+def test_s16b_zero_share_dependent_is_excluded_from_minimum() -> None:
+    inputs = _s16b_route_eight_inputs()
+    inputs["dependency_shares"] = [1.0, 0.0]
+    route = evaluate_shared_enabler_route(
+        inputs,
+        detected_constraint="capability_or_technology",
+    )
+    assert route["status"] == "NOT_CALCULABLE"
+    assert route["shared_enabler"]["counted_dependent_ids"] == ["P-A"]
+    assert route["shared_enabler"]["excluded_dependents"] == [
+        {
+            "opportunity_id": "P-B",
+            "reason_codes": ["DEPENDENCY_SHARE_NONPOSITIVE"],
+        }
+    ]
+
+
+def test_s16b_mismatched_detected_constraint_is_only_partial_resolution() -> None:
+    inputs = _s16b_route_eight_inputs()
+    case = _fixture("advance-route-3.json")
+    case["decision_inputs"]["route_evidence"][0][
+        "binding_constraint_fully_removed"
+    ] = False
+    hypotheses = evaluate_route_hypotheses(
+        case,
+        _rules(),
+        _capability(),
+        {"primary": "application"},
+        _rejections(),
+        detected_constraint="qualification_or_certification",
+        shared_enabler=inputs,
+    )
+    route = hypotheses[8]
+    assert route["status"] == "passes"
+    assert route["resolves_binding_constraint"] == "fails"
+    assert route["reason_codes"] == ["PARTIAL_RESOLUTION"]

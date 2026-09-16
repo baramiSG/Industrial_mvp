@@ -206,3 +206,61 @@ def test_available_view_returns_governed_nodes_and_relationships(
     assert len(payload["edges"]) == 1
     assert payload["edges"][0]["id"] == adjacency.key
     assert payload["edges"][0]["type"] == "ADJACENT_TO"
+
+
+def test_s16b_query_failure_after_available_status_fails_closed(
+    tmp_path: Path,
+) -> None:
+    projection = load_projection(PROJECT_ROOT / "data/graph")
+    auth = tmp_path / "auth"
+    auth.write_text("neo4j/test-password\n", encoding="utf-8")
+    spec = resolve_target("compose", {"NEO4J_AUTH_FILE": str(auth)})
+
+    def unavailable(*_args):
+        raise GraphConnectionError("query failed")
+
+    service = GraphService(
+        spec,
+        artifact_projection_id=projection.projection_id,
+        projection=projection,
+        status_reader=lambda _spec: {
+            "projection_id": projection.projection_id,
+            "counts": projection.counts,
+            "synthetic_partition": {},
+        },
+        view_reader=unavailable,
+    )
+    payload = service.view("adjacency", "SAU-H0-721049", "public")
+    assert payload["graph_status"] == "GRAPH_UNAVAILABLE"
+    assert payload["reason_code"] == "CONNECTION_FAILED"
+    assert payload["nodes"] == []
+    assert service.shared_enablers("public")["reason_code"] == (
+        "CONNECTION_FAILED"
+    )
+
+
+def test_s16b_unexpected_query_and_offline_guard_errors_propagate(
+    tmp_path: Path,
+) -> None:
+    projection = load_projection(PROJECT_ROOT / "data/graph")
+    auth = tmp_path / "auth"
+    auth.write_text("neo4j/test-password\n", encoding="utf-8")
+    spec = resolve_target("compose", {"NEO4J_AUTH_FILE": str(auth)})
+    status = lambda _spec: {
+        "projection_id": projection.projection_id,
+        "counts": projection.counts,
+        "synthetic_partition": {},
+    }
+    for error in (
+        RuntimeError("programming error"),
+        OfflineGuardViolation("socket refused"),
+    ):
+        service = GraphService(
+            spec,
+            artifact_projection_id=projection.projection_id,
+            projection=projection,
+            status_reader=status,
+            view_reader=lambda *_args, error=error: (_ for _ in ()).throw(error),
+        )
+        with pytest.raises(type(error), match=str(error)):
+            service.view("adjacency", "SAU-H0-721049", "public")

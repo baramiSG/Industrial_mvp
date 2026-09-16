@@ -3,14 +3,15 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeAlias
+from typing import TYPE_CHECKING, Any, TypeAlias
 
 from ior_mvp.route_hypotheses import (
     SHARED_ENABLER_CONTRACT_FIELDS,
     shared_enabler_unlock_value,
 )
 
-from .projection import GraphProjection
+if TYPE_CHECKING:
+    from .projection import GraphProjection
 
 
 GraphBranch: TypeAlias = str | tuple[str, str]
@@ -53,6 +54,15 @@ def shared_enabler_inputs(
 ) -> dict[str, Any] | None:
     """Return route-8 inputs only from non-derived UNLOCKED_BY evidence."""
     mode, scenario_id = _branch(branch)
+    nodes = _node_index(projection)
+    product = nodes.get(opportunity_id)
+    if (
+        product is None
+        or product.label != "Product"
+        or product.properties.get("synthetic_flag") is not False
+        or product.properties.get("derived") is not False
+    ):
+        return None
     candidates = [
         edge
         for edge in projection.edges
@@ -63,39 +73,109 @@ def shared_enabler_inputs(
             (
                 mode == "public"
                 and edge.properties.get("synthetic_flag") is False
+                and edge.properties.get("scenario_id") == "PUBLIC"
             )
             or (
                 mode == "simulated"
+                and edge.properties.get("synthetic_flag") is True
+                and edge.properties.get("evidence_class") == "D"
                 and edge.properties.get("scenario_id") == scenario_id
             )
         )
     ]
     if not candidates:
         return None
-    if len({edge.target for edge in candidates}) != 1:
+    if len(candidates) != 1:
         raise ValueError(
-            f"Opportunity has multiple shared enablers: {opportunity_id}"
+            f"Opportunity has ambiguous shared enablers: {opportunity_id}"
         )
-    enabler_id = candidates[0].target
-    nodes = _node_index(projection)
+    candidate = candidates[0]
+    enabler_id = candidate.target
     enabler = nodes.get(enabler_id)
-    if enabler is None or enabler.properties.get("derived") is not False:
-        return None
-    dependents = [
-        edge
-        for edge in projection.edges
-        if edge.type == "UNLOCKED_BY"
-        and edge.target == enabler_id
-        and edge.properties.get("derived") is False
-        and (
-            edge.properties.get("synthetic_flag") is False
-            if mode == "public"
-            else edge.properties.get("synthetic_flag") is True
-        )
-    ]
+    if (
+        enabler is None
+        or enabler.label != "Intervention"
+        or enabler.properties.get("kind") != "shared_enabler"
+        or enabler.properties.get("derived") is not False
+        or enabler.properties.get("projection_id") != projection.projection_id
+    ):
+        raise ValueError("Shared-enabler node is invalid")
+    enabler_scenarios = enabler.properties.get("scenario_ids", [])
+    if mode == "public":
+        if (
+            enabler.properties.get("synthetic_flag") is not False
+            or enabler.properties.get("scenario_id") != "PUBLIC"
+        ):
+            raise ValueError("Public shared-enabler provenance is invalid")
+    elif (
+        enabler.properties.get("synthetic_flag") is not True
+        or enabler.properties.get("evidence_class") != "D"
+        or not isinstance(enabler_scenarios, list)
+        or scenario_id not in enabler_scenarios
+    ):
+        raise ValueError("Simulated shared-enabler provenance is invalid")
+    dependents = []
+    for edge in projection.edges:
+        if (
+            edge.type != "UNLOCKED_BY"
+            or edge.target != enabler_id
+            or edge.properties.get("derived") is not False
+            or edge.properties.get("projection_id") != projection.projection_id
+        ):
+            continue
+        dependent = nodes.get(edge.source)
+        if (
+            dependent is None
+            or dependent.label != "Product"
+            or dependent.properties.get("synthetic_flag") is not False
+            or dependent.properties.get("derived") is not False
+        ):
+            raise ValueError("Shared-enabler dependent Product is invalid")
+        edge_scenario = edge.properties.get("scenario_id")
+        if mode == "public":
+            if (
+                edge.properties.get("synthetic_flag") is not False
+                or edge_scenario != "PUBLIC"
+            ):
+                continue
+        else:
+            membership = nodes.get(str(edge_scenario))
+            if (
+                edge.properties.get("synthetic_flag") is not True
+                or edge.properties.get("evidence_class") != "D"
+                or edge_scenario not in enabler_scenarios
+                or membership is None
+                or membership.label != "Scenario"
+                or membership.properties.get("opportunity_id") != edge.source
+                or membership.properties.get("synthetic_flag") is not True
+                or membership.properties.get("derived") is not False
+            ):
+                raise ValueError("Shared-enabler scenario membership is invalid")
+        dependents.append(edge)
     dependents.sort(key=lambda edge: edge.source)
     if not dependents:
         return None
+    if len({edge.source for edge in dependents}) != len(dependents):
+        raise ValueError("Shared-enabler dependent membership is duplicated")
+    required_edge_properties = {
+        "unlock_probability",
+        "dependent_incremental_national_value_m_sar",
+        "dependency_share",
+        "valuation_route_code",
+        "valuation_input_reference",
+        "constraint_classes_addressed",
+        "removes_binding_constraint",
+    }
+    if any(
+        required_edge_properties - set(edge.properties)
+        for edge in dependents
+    ):
+        raise ValueError("Shared-enabler dependency properties are incomplete")
+    if (
+        "enabler_cost_m_sar" not in enabler.properties
+        or not isinstance(enabler.properties.get("components"), dict)
+    ):
+        raise ValueError("Shared-enabler common properties are incomplete")
     result: dict[str, Any] = {
         "enabler_id": enabler_id,
         "dependent_opportunity_ids": [edge.source for edge in dependents],
@@ -111,11 +191,17 @@ def shared_enabler_inputs(
         ],
         "enabler_cost_m_sar": enabler.properties["enabler_cost_m_sar"],
         "graph_projection_id": projection.projection_id,
+        "valuation_route_codes": [
+            edge.properties["valuation_route_code"] for edge in dependents
+        ],
+        "valuation_input_references": [
+            edge.properties["valuation_input_reference"] for edge in dependents
+        ],
         "components": enabler.properties.get("components"),
-        "constraint_classes_addressed": candidates[0].properties.get(
+        "constraint_classes_addressed": candidate.properties.get(
             "constraint_classes_addressed", []
         ),
-        "removes_binding_constraint": candidates[0].properties.get(
+        "removes_binding_constraint": candidate.properties.get(
             "removes_binding_constraint"
         ),
         "evidence_ids": sorted(
@@ -299,85 +385,95 @@ def shared_enabler_queue_rows(
     branch: GraphBranch,
 ) -> list[dict[str, Any]]:
     """Aggregate shared-enabler portfolio rows from governed evidence edges."""
-    mode, scenario_id = _branch(branch)
+    mode, _scenario_id = _branch(branch)
     nodes = _node_index(projection)
-    enabler_ids = sorted(
-        {
-            edge.target
-            for edge in projection.edges
-            if edge.type == "UNLOCKED_BY"
-            and edge.properties.get("derived") is False
-            and (
-                edge.properties.get("synthetic_flag") is False
-                if mode == "public"
-                else (
-                    edge.properties.get("synthetic_flag") is True
-                    and scenario_id
-                    in nodes[edge.target].properties.get("scenario_ids", [])
+    rows_by_enabler: dict[str, dict[str, Any]] = {}
+    products = sorted(
+        node.id for node in projection.nodes if node.label == "Product"
+    )
+    for opportunity_id in products:
+        inputs = shared_enabler_inputs(
+            projection,
+            opportunity_id,
+            branch=branch,
+        )
+        if inputs is None or inputs["enabler_id"] in rows_by_enabler:
+            continue
+        enabler = nodes[inputs["enabler_id"]]
+        eligible_indexes = [
+            index
+            for index, (probability, value, share) in enumerate(
+                zip(
+                    inputs["unlock_probabilities"],
+                    inputs["dependent_incremental_national_values_m_sar"],
+                    inputs["dependency_shares"],
+                    strict=True,
                 )
             )
-        }
-    )
-    rows: list[dict[str, Any]] = []
-    for enabler_id in enabler_ids:
-        dependents = sorted(
-            (
-                edge
+            if float(probability) > 0
+            and float(share) > 0
+            and float(value) > 0
+        ]
+        if not eligible_indexes:
+            continue
+        dependent_ids = [
+            inputs["dependent_opportunity_ids"][index]
+            for index in eligible_indexes
+        ]
+        unlock_value = shared_enabler_unlock_value(
+            [
+                float(inputs["unlock_probabilities"][index])
+                for index in eligible_indexes
+            ],
+            [
+                float(
+                    inputs[
+                        "dependent_incremental_national_values_m_sar"
+                    ][index]
+                )
+                for index in eligible_indexes
+            ],
+            [
+                float(inputs["dependency_shares"][index])
+                for index in eligible_indexes
+            ],
+            float(inputs["enabler_cost_m_sar"]),
+        )
+        evidence_ids = sorted(
+            {
+                str(value)
                 for edge in projection.edges
                 if edge.type == "UNLOCKED_BY"
-                and edge.target == enabler_id
-                and edge.properties.get("derived") is False
+                and edge.target == inputs["enabler_id"]
+                and edge.source in dependent_ids
                 and (
                     edge.properties.get("synthetic_flag") is False
                     if mode == "public"
                     else edge.properties.get("synthetic_flag") is True
                 )
-            ),
-            key=lambda edge: edge.source,
-        )
-        enabler = nodes[enabler_id]
-        probabilities = [
-            float(edge.properties["unlock_probability"]) for edge in dependents
-        ]
-        values = [
-            float(
-                edge.properties[
-                    "dependent_incremental_national_value_m_sar"
-                ]
-            )
-            for edge in dependents
-        ]
-        shares = [
-            float(edge.properties["dependency_share"]) for edge in dependents
-        ]
-        cost = float(enabler.properties["enabler_cost_m_sar"])
-        unlock_value = shared_enabler_unlock_value(
-            probabilities,
-            values,
-            shares,
-            cost,
-        )
-        rows.append(
-            {
-                "enabler_id": enabler_id,
-                "enabler_kind": enabler.properties.get("enabler_kind"),
-                "label": enabler.properties.get("label"),
-                "dependent_opportunity_ids": [
-                    edge.source for edge in dependents
-                ],
-                "counted_dependents": len(dependents),
-                "unlock_value_m_sar": unlock_value,
-                "status": (
-                    "POSITIVE" if unlock_value > 0 else "NONPOSITIVE"
-                ),
-                "graph_projection_id": projection.projection_id,
-                "evidence_ids": sorted(
-                    {
-                        str(value)
-                        for edge in dependents
-                        for value in edge.properties.get("evidence_ids", [])
-                    }
-                ),
+                and float(edge.properties["unlock_probability"]) > 0
+                and float(edge.properties["dependency_share"]) > 0
+                and float(
+                    edge.properties[
+                        "dependent_incremental_national_value_m_sar"
+                    ]
+                )
+                > 0
+                for value in edge.properties.get("evidence_ids", [])
             }
         )
-    return rows
+        rows_by_enabler[inputs["enabler_id"]] = {
+            "enabler_id": inputs["enabler_id"],
+            "enabler_kind": enabler.properties.get("enabler_kind"),
+            "label": {
+                "en": enabler.properties.get("label_en"),
+                "ar": enabler.properties.get("label_ar"),
+            },
+            "dependent_opportunity_ids": dependent_ids,
+            "counted_dependents": len(dependent_ids),
+            "unlock_value_m_sar": unlock_value,
+            "status": "POSITIVE" if unlock_value > 0 else "NONPOSITIVE",
+            "graph_projection_id": projection.projection_id,
+            "evidence_ids": evidence_ids,
+        }
+    return [rows_by_enabler[key] for key in sorted(rows_by_enabler)]

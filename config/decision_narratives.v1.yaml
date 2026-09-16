@@ -1,7 +1,7 @@
 metadata:
   artifact: industrial-opportunity-decision-narratives
-  version: "1.3.0"
-  effective_date: "2026-09-13"
+  version: "1.4.0"
+  effective_date: "2026-09-16"
   authority: "Industrial Opportunity Resolution Methodology §§1.2, 4.2, 5.3, 7.1.1, 7.4, 9, 12 and 15; Core 07 v2"
   status: frozen_for_demo_cycle
   default_locale: en
@@ -153,6 +153,8 @@ templates:
     route.6.reason: "A verified technology constraint and major-line/JV adjacency are required."
     route.7.reason: "Greenfield requires failed lower routes, D* above the configured band, demand at MES, and passing competition gates."
     route.8.reason: "GRAPH_REQUIRED: route 8 requires the governed dependency graph and a positive UnlockValue."
+    route.8.reason.dependents_insufficient: "Route 8 is not calculable because the governed shared enabler has fewer than the configured minimum dependent opportunities."
+    route.8.reason.unlock_nonpositive: "Route 8 fails because the governed shared-enabler UnlockValue is not positive."
     route.reason.input_unavailable: "Required public route evidence is unavailable."
     route.reason.lower_route_resolves: "A lower-intervention route fully resolves the binding constraint."
     route.reason.economics_unavailable: "Downside route economics are unavailable."
@@ -402,6 +404,8 @@ templates:
     route.6.reason: "يلزم قيد تقني مثبت وتجاور لخط رئيسي أو مشروع مشترك."
     route.7.reason: "يتطلب المشروع الجديد فشل المسارات الأدنى، ومسافة قدرة أعلى من النطاق المحدد، وطلباً عند الحد الأدنى للكفاءة، واجتياز بوابات المنافسة."
     route.8.reason: "يتطلب المسار 8 الرسم البياني المحكوم وقيمة فتح موجبة؛ الرسم البياني مطلوب."
+    route.8.reason.dependents_insufficient: "لا يمكن حساب المسار 8 لأن عامل التمكين المشترك المحكوم يخدم عدداً من الفرص التابعة أقل من الحد الأدنى المهيأ."
+    route.8.reason.unlock_nonpositive: "يفشل المسار 8 لأن قيمة فتح عامل التمكين المشترك المحكومة ليست موجبة."
     route.reason.input_unavailable: "دليل المسار العام المطلوب غير متاح."
     route.reason.lower_route_resolves: "يحسم مسار أقل تدخلاً القيد الملزم بالكامل."
     route.reason.economics_unavailable: "اقتصاديات المسار في السيناريو المتحفظ غير متاحة."

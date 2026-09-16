@@ -221,7 +221,9 @@ def test_s15b_supplied_incomplete_or_invalid_evsi_remains_invalid(
         simulation.simulate(get_public_case("SAU-H6-294110"), scenario)
 
 
-def test_existing_scenarios_retain_exact_evsi_calculations() -> None:
+def test_existing_scenarios_retain_exact_evsi_calculations(
+    s16b_simulate,
+) -> None:
     for opportunity_id in (
         "SAU-H0-721049",
         "SAU-H0-390210",
@@ -234,7 +236,9 @@ def test_existing_scenarios_retain_exact_evsi_calculations() -> None:
         scenario = get_synthetic_scenario(opportunity_id)
         assert scenario is not None
         expected = approximate_evsi(scenario["synthetic_inputs"]["evsi"])
-        assert simulation.simulate(get_public_case(opportunity_id), scenario)["evsi"] == expected
+        assert s16b_simulate(
+            get_public_case(opportunity_id), scenario
+        )["evsi"] == expected
 
 
 def test_supplied_zero_and_negative_evsi_stay_numeric() -> None:

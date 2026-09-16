@@ -154,24 +154,24 @@ The machine-readable source of truth is `authority_hashes.json`. The table below
 | Path | SHA-256 | Bytes |
 | --- | --- | --- |
 | `docs/authority/Industrial_Opportunity_Resolution_Methodology_Final_KSA.docx` | `5717cbd42acc9947ce5e450013719275acb7ed1470847b21fb2cc547c8ac4ce9` | 224,257 |
-| `config/thresholds.v1.yaml` | `4e891b9706408f6a661565e09609d0d663e1a00a17bda4e283a4b2ee63d3c47a` | 3,887 |
+| `config/thresholds.v1.yaml` | `7d6e5d3c9a8f422b3a6133f305ee4578ae1607671f5bdf4da6606d590955e363` | 4,149 |
 | `config/sector_profiles.v1.yaml` | `9765e84dc32297d624f72644a436f5aac15fe600df5536d717f3600b05708e3e` | 2,879 |
 | `config/evidence_policy.v1.yaml` | `667d4def45fd11a85f852c8b16c922d781bfc171c46e0f822dd8202d4318de73` | 1,835 |
 | `config/ui_strings.v1.yaml` | `984290f6b6771d54d987a188987a6a50d404984a2c58ef3d32e0d4306de3d432` | 63,529 |
-| `config/decision_narratives.v1.yaml` | `0190f136f1b4abc2360c6f1347e26984f85333149c8a9605fe1b6c1e3150b045` | 53,945 |
+| `config/decision_narratives.v1.yaml` | `b25bc7c0ba81dfd47a0c66414b2b990f6bea5733dc938a6190f1c1e178b17ee9` | 54,645 |
 | `config/acquisition_sources.v1.yaml` | `ee2ca7010dbec51c99b5e3a0be50899d8c65dab30b236f3edeb905c4d036b199` | 30,463 |
 | `config/entity_resolution.v1.yaml` | `c320d2e8a92ad18786935f86366d2d826ffb33d413ebe493c11811f40da00bc9` | 2,594 |
 | `config/screening.v1.yaml` | `21ec2ff6893d3a52a79a5dc91a72c8a54c68adedffa4962c5b1323ca32de8d3e` | 2,183 |
 | `config/product_families.v1.yaml` | `0e37381f33802fc0822655eedac7a20fba0df082becdaf503b3df43d8ff41c19` | 3,592 |
 | `config/graph_views.v1.yaml` | `aa66c21e87d31169e76f1cba846097418f04a5ef7b581f0c27dad5d947bf37fb` | 2,071 |
-| `docs/core/01_PRODUCT_AND_REQUIREMENTS.md` | `12f537ab78a45fdac21980a3e4f4d3cf445bb22d5129b79b6a520f96bc947303` | 17,899 |
-| `docs/core/02_METHODOLOGY_IMPLEMENTATION_MAP.md` | `3a15cec51eb41a865ce41cc11b735c31bd2154c6124953132cae7301d8358ff4` | 25,232 |
-| `docs/core/03_SYSTEM_ARCHITECTURE.md` | `13b409d26e8536e1ebd3e5e9fa01a6f48df41e0b41e2dcc02d0bc244dae19d90` | 15,776 |
-| `docs/core/04_CANONICAL_DATA_MODEL.md` | `7b3412620bf7a128946faa8dbe5ecd1fcd466b76000ba2a9b5b377bae15b4b3b` | 39,169 |
+| `docs/core/01_PRODUCT_AND_REQUIREMENTS.md` | `46c13176d0cd9847d30fa840963f6351c471bcb2d3ecfb7fd25ba49073226ae2` | 18,137 |
+| `docs/core/02_METHODOLOGY_IMPLEMENTATION_MAP.md` | `fa7f2251fd869598ae146258f1ce0c58c2b7bc91f212e8026d7de4af3be344fb` | 25,469 |
+| `docs/core/03_SYSTEM_ARCHITECTURE.md` | `395b696394e240ad258a155221560228d6b4aecc86d7b799fc843ca22279692f` | 15,822 |
+| `docs/core/04_CANONICAL_DATA_MODEL.md` | `ca5f1bdbca65728a600f7e44c7fe753322b55853f6e512245b6a870717a3eb8d` | 40,121 |
 | `docs/core/05_DATA_SOURCES_AND_INGESTION.md` | `723e4c7716323160c1e0b6f5dc48c27819538c248a7648658dcc4d701d3d8a28` | 29,732 |
-| `docs/core/06_SYNTHETIC_MINISTRY_DATA_SPEC.md` | `3575c5b178cd195884c151bcaf8fa4188847250ba3aed3e2df7d02b7449b24cb` | 7,376 |
-| `docs/core/07_DETERMINISTIC_ENGINE_SPEC.md` | `b1e9d643406f027674bf098041133c545734630f02788246e488951964932e28` | 30,558 |
+| `docs/core/06_SYNTHETIC_MINISTRY_DATA_SPEC.md` | `96e7f69a2d7551653990b4e5a1a1a12ebf70efac0b461f9640fc085f52912675` | 9,048 |
+| `docs/core/07_DETERMINISTIC_ENGINE_SPEC.md` | `4f8276b8ca11f5787ec80875b1130982c79d7f0ade4f2d513b59235a3e25aa83` | 31,566 |
 | `docs/core/08_AI_EXTRACTION_AND_EVIDENCE_SPEC.md` | `875f30b1a597f94548cf1cdb8315c753dc0fe9d780674b36a7bd8653e9e56f58` | 5,564 |
-| `docs/core/09_TEST_ACCEPTANCE_AND_GOLDEN_CASES.md` | `a98c5cbac3e22293e619bc85881c6760c01bf490d41dc593c04c6894aec5a27d` | 29,936 |
+| `docs/core/09_TEST_ACCEPTANCE_AND_GOLDEN_CASES.md` | `48d29ee615185c13bc66e6c8c0e79a76c8981e74eb2776995bf37f800b49b89c` | 30,446 |
 
 <!-- HASH_TABLE_END -->

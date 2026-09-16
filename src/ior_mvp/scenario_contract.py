@@ -10,7 +10,7 @@ from .economics import NATIONAL_VALUE_KEYS
 from .evidence import EvidenceIntegrityError, synthetic_display_labels
 from .public_snapshot import capability_hard_gate_names
 
-SUPPORTED_SCENARIO_CONTRACT_VERSIONS = frozenset({"2.0.0"})
+SUPPORTED_SCENARIO_CONTRACT_VERSIONS = frozenset({"2.0.0", "2.1.0"})
 VALID_DECISION_STATES = frozenset({"REJECT", "MONITOR", "INVESTIGATE", "ADVANCE"})
 GOVERNED_SYNTHETIC_INPUT_KEYS = frozenset(
     {
@@ -34,6 +34,7 @@ GOVERNED_SYNTHETIC_INPUT_KEYS = frozenset(
         "production_and_retained_flows",
         "counterfactual",
         "competition_inputs",
+        "shared_enabler",
     }
 )
 _BROWNFIELD_ROUTE_CODE = 5
@@ -43,6 +44,65 @@ _ROUTE5_INHERITED_FIELDS = frozenset(
         "hurdle_rate",
         "national_value",
         "competition",
+    }
+)
+_SHARED_ENABLER_FIELDS = frozenset(
+    {
+        "enabler_id",
+        "enabler_kind",
+        "label",
+        "enabler_cost_m_sar",
+        "valuation_route_code",
+        "constraint_classes_addressed",
+        "removes_binding_constraint",
+        "unlock_probability",
+        "dependency_share",
+        "components",
+        "basis",
+    }
+)
+_SHARED_COMPONENT_FIELDS = frozenset(
+    {
+        "technical_feasibility_confirmed",
+        "investment_already_approved_or_financed",
+        "proceeds_without_intervention",
+        "policy_prohibition_identified",
+        "distortion_unacceptable",
+        "intervention_proportionate_to_constraint",
+        "competition",
+    }
+)
+_SHARED_BOOLEAN_FIELDS = _SHARED_COMPONENT_FIELDS - {"competition"}
+_SHARED_ENABLER_KINDS = frozenset(
+    {
+        "shared_laboratory",
+        "treatment_facility",
+        "tooling",
+        "utility",
+        "input_supply",
+        "logistics",
+        "skills_programme",
+        "policy_instrument",
+    }
+)
+_SHARED_COMPETITION_FIELDS = frozenset(
+    {
+        "existing_effective_capacity_kt",
+        "proposed_incremental_capacity_kt",
+        "downside_demand_kt",
+    }
+)
+_SHARED_CONSTRAINT_CLASSES = frozenset(
+    {
+        "administrative_or_regulatory",
+        "commercial_or_relationship",
+        "information_or_market_linkage",
+        "qualification_or_certification",
+        "specification_or_grade",
+        "demand_fragmentation_or_offtake",
+        "capacity_or_availability",
+        "cost_or_competitiveness",
+        "capability_or_technology",
     }
 )
 
@@ -100,6 +160,213 @@ def _validate_bilingual_list(value: Any, field: str) -> list[dict[str, str]]:
     if not isinstance(value, list):
         raise EvidenceIntegrityError(f"{field} must be a list")
     return [_validate_bilingual_text(item, f"{field}[]") for item in value]
+
+
+def _shared_enabler_block(scenario: dict[str, Any]) -> dict[str, Any] | None:
+    inputs = scenario.get("synthetic_inputs")
+    if not isinstance(inputs, dict):
+        return None
+    if "shared_enabler" not in inputs:
+        return None
+    block = inputs["shared_enabler"]
+    if not isinstance(block, dict):
+        raise EvidenceIntegrityError(
+            "scenario.synthetic_inputs.shared_enabler must be a mapping"
+        )
+    return block
+
+
+def _shared_enabler_route_record(
+    scenario: dict[str, Any],
+    route_code: int,
+) -> dict[str, Any]:
+    inputs = scenario.get("synthetic_inputs")
+    records = inputs.get("route_evidence") if isinstance(inputs, dict) else None
+    if not isinstance(records, list):
+        raise EvidenceIntegrityError(
+            "shared_enabler valuation requires route_evidence"
+        )
+    matches = [
+        record
+        for record in records
+        if isinstance(record, dict)
+        and not isinstance(record.get("route_code"), bool)
+        and record.get("route_code") == route_code
+    ]
+    if len(matches) != 1:
+        raise EvidenceIntegrityError(
+            "shared_enabler valuation_route_code must resolve exactly one route_evidence record"
+        )
+    return matches[0]
+
+
+def shared_enabler_valuation(
+    scenario: dict[str, Any],
+) -> tuple[int, float]:
+    block = _shared_enabler_block(scenario)
+    if block is None:
+        raise EvidenceIntegrityError("shared_enabler declaration is absent")
+    route_code = block.get("valuation_route_code")
+    if (
+        isinstance(route_code, bool)
+        or not isinstance(route_code, int)
+        or route_code < 1
+        or route_code > 7
+    ):
+        raise EvidenceIntegrityError(
+            "shared_enabler.valuation_route_code must be an integer from 1 through 7"
+        )
+    record = _shared_enabler_route_record(scenario, route_code)
+    values = record.get("national_value")
+    if values is None and route_code == _BROWNFIELD_ROUTE_CODE:
+        inputs = scenario.get("synthetic_inputs")
+        economics = inputs.get("economics") if isinstance(inputs, dict) else None
+        values = economics.get("national_value") if isinstance(economics, dict) else None
+    from .route_hypotheses import _national_value
+
+    _display, raw = _national_value(values)
+    if raw is None or raw <= 0:
+        raise EvidenceIntegrityError(
+            "shared_enabler valuation source must provide positive incremental national value"
+        )
+    return route_code, raw
+
+
+def validate_shared_enabler(
+    scenario: dict[str, Any],
+) -> dict[str, Any] | None:
+    block = _shared_enabler_block(scenario)
+    if block is None:
+        return None
+    if scenario.get("scenario_version") != "2.1.0":
+        raise EvidenceIntegrityError(
+            "shared_enabler is permitted only for scenario_version 2.1.0"
+        )
+    if set(block) != _SHARED_ENABLER_FIELDS:
+        unknown = sorted(set(block) - _SHARED_ENABLER_FIELDS)
+        missing = sorted(_SHARED_ENABLER_FIELDS - set(block))
+        detail = unknown or missing
+        raise EvidenceIntegrityError(
+            "shared_enabler fields are invalid: " + ", ".join(detail)
+        )
+    for field in ("enabler_id", "enabler_kind", "basis"):
+        value = block.get(field)
+        if not isinstance(value, str) or not value.strip():
+            raise EvidenceIntegrityError(
+                f"shared_enabler.{field} must be a non-empty string"
+            )
+    if block["enabler_kind"] not in _SHARED_ENABLER_KINDS:
+        raise EvidenceIntegrityError(
+            "shared_enabler.enabler_kind is not supported"
+        )
+    _validate_bilingual_text(block.get("label"), "shared_enabler.label")
+    cost = _required_number(
+        block.get("enabler_cost_m_sar"),
+        "shared_enabler.enabler_cost_m_sar",
+    )
+    if cost < 0:
+        raise EvidenceIntegrityError(
+            "shared_enabler.enabler_cost_m_sar must be non-negative"
+        )
+    route_code = block.get("valuation_route_code")
+    if (
+        isinstance(route_code, bool)
+        or not isinstance(route_code, int)
+        or route_code < 1
+        or route_code > 7
+    ):
+        raise EvidenceIntegrityError(
+            "shared_enabler.valuation_route_code must be an integer from 1 through 7"
+        )
+    constraints = block.get("constraint_classes_addressed")
+    if (
+        not isinstance(constraints, list)
+        or not constraints
+        or any(
+            not isinstance(value, str)
+            or value not in _SHARED_CONSTRAINT_CLASSES
+            for value in constraints
+        )
+        or len(set(constraints)) != len(constraints)
+    ):
+        raise EvidenceIntegrityError(
+            "shared_enabler.constraint_classes_addressed is invalid"
+        )
+    if not isinstance(block.get("removes_binding_constraint"), bool):
+        raise EvidenceIntegrityError(
+            "shared_enabler.removes_binding_constraint must be boolean"
+        )
+    for field in ("unlock_probability", "dependency_share"):
+        number = _required_number(block.get(field), f"shared_enabler.{field}")
+        if number <= 0 or number > 1:
+            raise EvidenceIntegrityError(
+                f"shared_enabler.{field} must be greater than 0 and at most 1"
+            )
+    components = block.get("components")
+    if not isinstance(components, dict) or set(components) != _SHARED_COMPONENT_FIELDS:
+        raise EvidenceIntegrityError("shared_enabler.components fields are invalid")
+    for field in _SHARED_BOOLEAN_FIELDS:
+        if not isinstance(components.get(field), bool):
+            raise EvidenceIntegrityError(
+                f"shared_enabler.components.{field} must be boolean"
+            )
+    competition = components.get("competition")
+    if (
+        not isinstance(competition, dict)
+        or set(competition) != _SHARED_COMPETITION_FIELDS
+    ):
+        raise EvidenceIntegrityError(
+            "shared_enabler.components.competition fields are invalid"
+        )
+    for field in _SHARED_COMPETITION_FIELDS:
+        number = _required_number(
+            competition.get(field),
+            f"shared_enabler.components.competition.{field}",
+        )
+        if number < 0 or (field == "downside_demand_kt" and number <= 0):
+            raise EvidenceIntegrityError(
+                f"shared_enabler.components.competition.{field} is invalid"
+            )
+    shared_enabler_valuation(scenario)
+    return block
+
+
+def validate_shared_enabler_consistency(
+    scenarios: list[dict[str, Any]],
+) -> None:
+    scenario_ids: set[str] = set()
+    declarations: dict[str, tuple[dict[str, Any], set[str]]] = {}
+    for scenario in scenarios:
+        scenario_id = scenario.get("scenario_id")
+        if not isinstance(scenario_id, str) or scenario_id in scenario_ids:
+            raise EvidenceIntegrityError("Synthetic scenario identities must be unique")
+        scenario_ids.add(scenario_id)
+        block = validate_shared_enabler(scenario)
+        if block is None:
+            continue
+        enabler_id = block["enabler_id"]
+        common = {
+            key: block[key]
+            for key in ("enabler_kind", "label", "enabler_cost_m_sar", "components")
+        }
+        opportunity_id = scenario.get("opportunity_id")
+        if not isinstance(opportunity_id, str) or not opportunity_id:
+            raise EvidenceIntegrityError(
+                "shared_enabler dependent opportunity identity is invalid"
+            )
+        if enabler_id not in declarations:
+            declarations[enabler_id] = (common, {opportunity_id})
+            continue
+        expected, dependents = declarations[enabler_id]
+        if common != expected:
+            raise EvidenceIntegrityError(
+                f"ENABLER_DECLARATION_CONFLICT: {enabler_id}"
+            )
+        if opportunity_id in dependents:
+            raise EvidenceIntegrityError(
+                f"shared_enabler duplicate dependent opportunity: {opportunity_id}"
+            )
+        dependents.add(opportunity_id)
 
 
 def validate_simulation_contract(scenario: dict[str, Any]) -> None:
@@ -220,6 +487,7 @@ def validate_simulation_contract(scenario: dict[str, Any]) -> None:
                         raise EvidenceIntegrityError(
                             f"route-5 record must not declare {field}"
                         )
+    validate_shared_enabler(scenario)
     if expected_state == "MONITOR" and not isinstance(
         inputs.get("monitor_trigger"),
         dict,

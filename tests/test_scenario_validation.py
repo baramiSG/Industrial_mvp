@@ -538,6 +538,7 @@ def test_reconciliation_fixture_passes_all_ten_checks() -> None:
         "expansion_assumption_disclosed_and_bounded",
         "retained_flows_reconcile_to_public_trade",
         "base_demand_and_commitment_probability_valid",
+        "shared_enabler_declaration_valid",
     ]
 
 
@@ -610,3 +611,13 @@ def test_reconciliation_fixture_mutations_fail_exactly_one_check(
         match=failed_rule,
     ):
         require_scenario_reconciliation(report)
+
+
+def test_s16b_reconciliation_appends_shared_enabler_check_eleven() -> None:
+    report = reconcile_synthetic_scenario(
+        _scenario("SAU-H0-721049"),
+        get_public_case("SAU-H0-721049"),
+    )
+    assert len(report["checks"]) == 11
+    assert report["checks"][-1]["rule_id"] == "shared_enabler_declaration_valid"
+    assert report["checks"][-1]["result"] == "NOT_APPLICABLE"

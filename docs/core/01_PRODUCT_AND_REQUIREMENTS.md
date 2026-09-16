@@ -198,7 +198,7 @@ The user opens or prints a one-page dossier containing:
 - **FR-045** EVSI shall identify whether a named evidence action is worth obtaining.
 - **FR-046** The public branch shall emit ordered route hypotheses 0–8 with pass, fail, or NOT_CALCULABLE status and evidence-backed reasons.
 - **FR-047** A fully resolving lower route shall block escalation; otherwise the engine shall select maximum defensible incremental national value among feasible, additional, permissible alternatives.
-- **FR-048** Route 8 shall remain NOT_CALCULABLE with GRAPH_REQUIRED until a governed dependency graph supplies the shared-enabler calculation.
+- **FR-048** Route 8 shall remain NOT_CALCULABLE with GRAPH_REQUIRED without a governed dependency-graph input; an evaluated record uses explicit positive dependent valuations, the configured minimum dependent count, UnlockValue, component gates and lower-route precedence.
 - **FR-049** Missing facts, conditions, kill conditions, and decision narratives shall be computed and rendered from a versioned bilingual catalogue rather than authored in a public snapshot.
 
 ### 6.6 Decisions
@@ -211,8 +211,8 @@ The user opens or prints a one-page dossier containing:
 
 ### 6.9 Simulation branch
 
-- **FR-055** Simulated route hypotheses evaluate routes 0–7 plus a route-8 `GRAPH_REQUIRED` contract without activating graph selection.
-- **FR-056** Scenario contract 2.0.0 validates bilingual narratives, optional allocation/expansion/flow blocks, and fail-closed pairing with public unresolved gates.
+- **FR-055** Simulated route hypotheses evaluate routes 0–8; route 8 is selectable only from a validated branch-qualified graph feed and otherwise retains the exact `GRAPH_REQUIRED` contract.
+- **FR-056** Scenario contracts 2.0.0 and 2.1.0 validate bilingual narratives, optional allocation/expansion/flow blocks, fail-closed pairing with public unresolved gates, and version-gated shared-enabler declarations.
 - **FR-057** Simulated reconciliation compares tariff-line sums, buyer totals, expansion assumptions, retained flows, and base-demand probability inputs to public marginals.
 - **FR-058** Simulated narratives render from scenario text when declared, otherwise from catalogue 1.1.0 keys, in both English and Arabic.
 - **FR-059** UI and dossier surfaces mirror `simulation_decision` in simulated mode while `real_decision` and public `data_unlocks` remain unchanged.

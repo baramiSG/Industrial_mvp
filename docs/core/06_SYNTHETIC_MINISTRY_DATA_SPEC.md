@@ -248,3 +248,11 @@ Runtime accepts only `scenario_version: 2.0.0`. Historical byte-identical 1.1.0 
 Optional governed blocks include `class_if_confirmed`, `tariff_line_allocation`, `buyer_allocation`, `expansion_assumption`, `production_and_retained_flows`, and `economics.minimum_efficient_scale_kt`. Gate B reconciliation emits ten ordered checks including allocation sums, expansion bounds, retained-flow reconcile, and `base_demand_and_commitment_probability_valid`.
 
 Simulated ADVANCE uses the `CLASS_IF_CONFIRMED` advance-gate basis: declared confirmed classes gate publication while actual synthetic rows remain Class D.
+
+## 13. Scenario contract 2.1.0 shared enablers
+
+Runtime accepts 2.0.0 and 2.1.0. A `shared_enabler` declaration is legal only in 2.1.0 and is rejected when null, malformed, incomplete or attached to 2.0.0. The declaration contains one immutable enabler identity; kind exactly `shared_laboratory`, `treatment_facility`, `tooling`, `utility`, `input_supply`, `logistics`, `skills_programme` or `policy_instrument`; bilingual synthetic-design label; non-negative cost; explicit valuation route code 1–7; addressed constraint classes; causal-removal boolean; probability and dependency share each strictly greater than zero and at most one; six component booleans; a competition triplet; and the Class-D design basis.
+
+The valuation route code must resolve exactly one declared route-evidence record. Route 5 retains its existing economics national-value inheritance; every other route uses its own declared national-value block. Ground truth and derived Decision or Intervention results never select or supply valuation. The valuation must be finite and positive before projection.
+
+Gate B appends `shared_enabler_declaration_valid` as check 11. Complete-directory validation additionally requires unique scenario and dependent identities and exact agreement of kind, label, cost and components for declarations sharing an enabler ID. Evaluated aggregation counts only dependents whose probability, dependency share and positive valuation are all eligible. The governed aluminium pair remains Class D, `DEMO_GENERATOR`, scenario-attributed and visibly labelled; its computed UnlockValue is 35.28 M SAR, while routes 6 and 4 continue to win through lower-route precedence.

@@ -5,7 +5,7 @@
 `data/graph/` is the governed, offline source. Neo4j is an idempotently
 rebuildable mirror used for fixed Cypher views; it is never a second source of
 evidence. The graph contains public evidence and explicitly labelled Class-D
-scenario elements only. The S16a API module is unmounted until S16b.
+scenario elements only. The graph API module is mounted; ordinary opportunity computation remains artifact-backed and socket-free.
 
 Every Python command in this runbook uses:
 
@@ -47,6 +47,10 @@ make graph-validate
 Two builds from identical governed inputs must produce the same
 `projection_id` and bytes. `python -m ior_mvp.graph build --check` compares a
 fresh build with the current artifact without writing.
+
+Scenario contract 2.1.0 permits a complete Class-D `shared_enabler` declaration with an explicit route-1–7 valuation reference. Phase one projects only declared evidence, validates scenario membership and valuation provenance, and injects branch-qualified inputs before engine outputs are projected. The governed aluminium pair computes UnlockValue 35.28 M SAR but remains blocked by fully resolving routes 6/4. A test-only pair proves route 8 can win honestly at 178 M SAR.
+
+After approved code/config/scenario edits and before the separately controlled graph generation, the persisted pointer is expected to differ from a fresh build. Preserve that failure; do not overwrite `data/graph/**`, regenerate manifests or start a mirror until the later operation packet binds the literal projection output.
 
 Reconstruction is part of:
 
@@ -151,5 +155,8 @@ PROJECTION_MISMATCH
 ```
 
 The fixed bilingual catalogue remains available. No live-view failure falls
-back silently to artifact rows. The default test-suite
-`OfflineGuardViolation` propagates rather than being translated.
+back silently to artifact rows. A missing or corrupt canonical artifact returns
+sanitized HTTP 422 `GRAPH_ARTIFACT_INTEGRITY_ERROR`; query-time connection or
+driver failures after a successful status check return the same typed
+unavailable shape. The default test-suite `OfflineGuardViolation` and
+unexpected programming exceptions propagate rather than being translated.

@@ -11,12 +11,19 @@ from typing import Any, Iterable, Mapping
 
 from ior_mvp import __version__
 from ior_mvp.capability import evaluate_capability
-from ior_mvp.cases.build import build_from_brief
 from ior_mvp.config import PROJECT_ROOT
-from ior_mvp.evidence import synthetic_display_labels, synthetic_evidence_rows
+from ior_mvp.evidence import (
+    EvidenceIntegrityError,
+    synthetic_display_labels,
+    synthetic_evidence_rows,
+)
 from ior_mvp.public_decision import compute_public_decision
 from ior_mvp.public_snapshot import capability_hard_gate_names
-from ior_mvp.route_hypotheses import BROWNFIELD_ROUTE_CODE, _national_value
+from ior_mvp.scenario_contract import (
+    shared_enabler_valuation,
+    validate_shared_enabler_consistency,
+)
+from ior_mvp.route_hypotheses import BROWNFIELD_ROUTE_CODE
 from ior_mvp.rules import evaluate_rules
 
 from .model import (
@@ -952,29 +959,22 @@ def _project_public_case(
             )
 
 
-def _scenario_delta_nv(scenario: Mapping[str, Any]) -> float:
-    route_code = scenario.get("ground_truth", {}).get("expected_route_code")
-    inputs = scenario.get("synthetic_inputs", {})
-    records = inputs.get("route_evidence", [])
-    record = next(
-        (
-            row
-            for row in records
-            if isinstance(row, Mapping) and row.get("route_code") == route_code
-        ),
-        None,
-    )
-    values = record.get("national_value") if isinstance(record, Mapping) else None
-    if values is None and route_code == BROWNFIELD_ROUTE_CODE:
-        economics = inputs.get("economics")
-        if isinstance(economics, Mapping):
-            values = economics.get("national_value")
-    _display, raw = _national_value(values)
-    if raw is None or raw <= 0:
-        raise GraphProjectionError(
-            "Shared-enabler dependent lacks positive ground-truth national value"
+def _scenario_delta_nv(
+    scenario: Mapping[str, Any],
+) -> tuple[int, float, str]:
+    try:
+        route_code, raw = shared_enabler_valuation(dict(scenario))
+    except (EvidenceIntegrityError, ValueError) as exc:
+        raise GraphProjectionError(str(exc)) from exc
+    reference = (
+        "synthetic_inputs.economics.national_value"
+        if route_code == BROWNFIELD_ROUTE_CODE
+        else (
+            "synthetic_inputs.route_evidence"
+            f"[route_code={route_code}].national_value"
         )
-    return raw
+    )
+    return route_code, raw, reference
 
 
 def _project_scenario(
@@ -1331,7 +1331,9 @@ def _project_enablers(
             scenario = by_scenario[scenario_id]
             block = scenario["synthetic_inputs"]["shared_enabler"]
             product_id = str(scenario["opportunity_id"])
-            delta_nv = _scenario_delta_nv(scenario)
+            valuation_route_code, delta_nv, valuation_reference = (
+                _scenario_delta_nv(scenario)
+            )
             edge_props = _base_properties(
                 identity="PENDING",
                 evidence_id=f"{scenario_id}::shared_enabler",
@@ -1350,6 +1352,8 @@ def _project_enablers(
                     "unlock_probability": block["unlock_probability"],
                     "dependency_share": block["dependency_share"],
                     "dependent_incremental_national_value_m_sar": delta_nv,
+                    "valuation_route_code": valuation_route_code,
+                    "valuation_input_reference": valuation_reference,
                     "constraint_classes_addressed": deepcopy(
                         block["constraint_classes_addressed"]
                     ),
@@ -1541,6 +1545,12 @@ def build_evidence_layer(
     scenario_values = sorted(
         scenarios.values(), key=lambda row: str(row["scenario_id"])
     )
+    try:
+        validate_shared_enabler_consistency(
+            [dict(scenario) for scenario in scenario_values]
+        )
+    except (EvidenceIntegrityError, ValueError) as exc:
+        raise GraphProjectionError(str(exc)) from exc
     for scenario in scenario_values:
         _project_scenario(assembler, scenario)
     _project_enablers(assembler, scenario_values)
@@ -1558,6 +1568,8 @@ def build_evidence_layer(
 def _load_repository_cases(
     root: Path,
 ) -> tuple[dict[str, dict[str, Any]], list[dict[str, Any]]]:
+    from ior_mvp.cases.build import build_from_brief
+
     cases: dict[str, dict[str, Any]] = {}
     for path in sorted((root / "data/snapshots/public").glob("*.json")):
         record = _json(path)
@@ -1604,7 +1616,11 @@ def _engine_run_id(root: Path, inputs: list[dict[str, Any]]) -> tuple[str, str]:
     return f"ENGINE-{digest[:12]}", authority_digest
 
 
-def _public_analysis(case: Mapping[str, Any]) -> dict[str, Any]:
+def _public_analysis(
+    case: Mapping[str, Any],
+    *,
+    shared_enabler: dict[str, Any] | None = None,
+) -> dict[str, Any]:
     clean_case = {
         key: deepcopy(value)
         for key, value in case.items()
@@ -1617,7 +1633,12 @@ def _public_analysis(case: Mapping[str, Any]) -> dict[str, Any]:
         clean_case["domestic_capability"]["profile_hard_gates"],
         capability_hard_gate_names(clean_case["domestic_capability"]),
     )
-    decision = compute_public_decision(clean_case, rules, capability)
+    decision = compute_public_decision(
+        clean_case,
+        rules,
+        capability,
+        shared_enabler=shared_enabler,
+    )
     r12 = next(row for row in rules if row["rule_id"] == "R12")
     return {
         "opportunity_id": clean_case["opportunity"]["id"],
@@ -1634,6 +1655,8 @@ def _public_analysis(case: Mapping[str, Any]) -> dict[str, Any]:
 def _simulated_analysis(
     case: Mapping[str, Any],
     scenario: Mapping[str, Any],
+    *,
+    shared_enabler: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     from ior_mvp.simulation import simulate
 
@@ -1644,7 +1667,11 @@ def _simulated_analysis(
     }
     rules = evaluate_rules(clean_case)
     clean_case["rules"] = rules
-    branch = simulate(clean_case, dict(scenario))
+    branch = simulate(
+        clean_case,
+        dict(scenario),
+        shared_enabler=shared_enabler,
+    )
     r12 = next(row for row in rules if row["rule_id"] == "R12")
     return {
         "opportunity_id": clean_case["opportunity"]["id"],
@@ -1700,14 +1727,28 @@ def build_repository_projection(
         inputs=inputs,
     )
     projection.engine["authority_basis_sha256"] = authority_digest
+    from .engine_feed import shared_enabler_inputs
+
     analyses: dict[tuple[str, str], dict[str, Any]] = {
-        (opportunity_id, "public"): _public_analysis(case)
+        (opportunity_id, "public"): _public_analysis(
+            case,
+            shared_enabler=shared_enabler_inputs(
+                projection,
+                opportunity_id,
+                branch="public",
+            ),
+        )
         for opportunity_id, case in sorted(cases.items())
     }
     for opportunity_id, scenario in sorted(scenarios.items()):
         analyses[(opportunity_id, "simulated")] = _simulated_analysis(
             cases[opportunity_id],
             scenario,
+            shared_enabler=shared_enabler_inputs(
+                projection,
+                opportunity_id,
+                branch=("simulated", scenario["scenario_id"]),
+            ),
         )
     project_engine_outputs(projection, analyses)
     projection.refresh_counts()

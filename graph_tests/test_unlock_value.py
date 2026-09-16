@@ -20,8 +20,7 @@ def test_shared_enabler_unlock_value_cypher_equals_engine(
         for node in projection.nodes
         if node.label == "Scenario"
     )
-    if not any(edge.type == "UNLOCKED_BY" for edge in projection.edges):
-        pytest.skip("NO_UNLOCKED_BY_EDGES_IN_S16A")
+    assert any(edge.type == "UNLOCKED_BY" for edge in projection.edges)
     assert scenarios
     for scenario_id in scenarios:
         live = execute_view(

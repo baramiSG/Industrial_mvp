@@ -5,6 +5,8 @@ from copy import deepcopy
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
 
+from ior_mvp.app import app as product_app
+import ior_mvp.graph.api as graph_api
 from ior_mvp.graph.api import (
     get_graph_service,
     load_view_catalogue,
@@ -251,3 +253,28 @@ def test_labels_resolve_to_catalogue_key_or_bilingual_pair() -> None:
         or (node.get("name_en") and node.get("name_ar"))
         for node in payload["nodes"]
     )
+
+
+def test_s16b_product_app_mounts_existing_graph_router() -> None:
+    response = TestClient(product_app).get("/api/graph/catalogue")
+    assert response.status_code == 200
+    assert response.json()["metadata"]["version"] == "1.0.0"
+
+
+def test_s16b_corrupt_canonical_graph_returns_sanitized_422(
+    monkeypatch,
+) -> None:
+    from ior_mvp.graph.repository import GraphRepositoryError
+
+    def invalid_projection():
+        raise GraphRepositoryError("private artifact detail")
+
+    monkeypatch.setattr(graph_api, "graph_projection", invalid_projection)
+    response = TestClient(product_app, raise_server_exceptions=False).get(
+        "/api/graph/status"
+    )
+    assert response.status_code == 422
+    assert response.json()["detail"] == {
+        "code": "GRAPH_ARTIFACT_INTEGRITY_ERROR"
+    }
+    assert "private artifact detail" not in response.text

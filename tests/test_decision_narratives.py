@@ -81,8 +81,8 @@ def test_decision_catalogue_metadata_and_locale_contract_are_exact() -> None:
 
     assert payload["metadata"] == {
         "artifact": "industrial-opportunity-decision-narratives",
-        "version": "1.3.0",
-        "effective_date": "2026-09-13",
+        "version": "1.4.0",
+        "effective_date": "2026-09-16",
         "authority": (
             "Industrial Opportunity Resolution Methodology §§1.2, 4.2, "
             "5.3, 7.1.1, 7.4, 9, 12 and 15; Core 07 v2"
@@ -606,11 +606,11 @@ def test_correction_round_keys_have_exact_english_and_arabic_literals() -> None:
         assert templates["ar"][key] == ar_text, key
 
 
-def test_catalogue_has_217_keys_with_parity_and_validator_pass() -> None:
+def test_catalogue_has_219_keys_with_parity_and_validator_pass() -> None:
     payload = _catalogue()
     en = payload["templates"]["en"]
     ar = payload["templates"]["ar"]
-    assert len(en) == len(ar) == 217
+    assert len(en) == len(ar) == 219
     assert set(en) == set(ar)
     validate_decision_narratives(payload)
 

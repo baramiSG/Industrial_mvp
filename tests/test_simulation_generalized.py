@@ -8,6 +8,8 @@ import ior_mvp.decision_engine as decision_engine
 import ior_mvp.simulation as simulation
 from ior_mvp.data_repository import get_public_case, get_synthetic_scenario
 from ior_mvp.evidence import EvidenceIntegrityError
+from ior_mvp.graph.engine_feed import shared_enabler_inputs
+from ior_mvp.graph.projection import build_evidence_layer
 from ior_mvp.public_decision import DecisionIntegrityError
 from ior_mvp.scenario_contract import validate_simulation_contract
 
@@ -54,7 +56,7 @@ def test_analyze_public_wrapper_matches_direct_simulate() -> None:
 
 def test_decision_engine_reexports_simulation() -> None:
     assert decision_engine.SUPPORTED_SCENARIO_CONTRACT_VERSIONS == frozenset(
-        {"2.0.0"}
+        {"2.0.0", "2.1.0"}
     )
     assert decision_engine._simulate is simulation.simulate
 
@@ -305,3 +307,65 @@ def test_simulated_evidence_rows_remain_class_d_and_labelled() -> None:
     ].values():
         assert assessment["evidence_class"] == "D"
         assert assessment["synthetic_flag"] is True
+
+
+def test_s16b_honest_projection_fixture_selects_route_eight_and_backtests() -> None:
+    opportunities = ("SAU-H6-760711", "SAU-H6-760429")
+    public_cases = {
+        opportunity_id: deepcopy(get_public_case(opportunity_id))
+        for opportunity_id in opportunities
+    }
+    scenarios = {}
+    for opportunity_id in opportunities:
+        scenario = deepcopy(get_synthetic_scenario(opportunity_id))
+        assert scenario is not None
+        suffix = "A" if opportunity_id == "SAU-H6-760711" else "B"
+        scenario["scenario_id"] = f"SYN-TEST-ROUTE8-{suffix}"
+        block = scenario["synthetic_inputs"]["shared_enabler"]
+        block["enabler_id"] = "ENABLER-SYN-TEST-ROUTE8"
+        block["unlock_probability"] = 1.0
+        block["dependency_share"] = 1.0
+        selected_route = block["valuation_route_code"]
+        selected = next(
+            record
+            for record in scenario["synthetic_inputs"]["route_evidence"]
+            if record["route_code"] == selected_route
+        )
+        selected["binding_constraint_fully_removed"] = False
+        scenario["ground_truth"]["expected_route_code"] = 8
+        scenario["ground_truth"]["expected_simulation_state"] = "ADVANCE"
+        scenario["decision_narrative"].pop("ADVANCE")
+        scenarios[opportunity_id] = scenario
+    projection = build_evidence_layer(
+        public_cases=public_cases,
+        scenarios=scenarios,
+        entity_artifacts=[],
+        briefs=[],
+        tariff_snapshots=[],
+        tariff_attempts=[],
+        projection_id="GRAPH-TEST",
+        engine_run_id="ENGINE-TEST",
+        inputs=[],
+    )
+    for opportunity_id, scenario in scenarios.items():
+        branch = simulation.simulate(
+            public_cases[opportunity_id],
+            scenario,
+            shared_enabler=shared_enabler_inputs(
+                projection,
+                opportunity_id,
+                branch=("simulated", scenario["scenario_id"]),
+            ),
+        )
+        decision = branch["simulation_decision"]
+        assert decision["state"] == "ADVANCE"
+        assert decision["route_code"] == 8
+        assert branch["route_hypotheses"][8][
+            "unrounded_incremental_national_value_m_sar"
+        ] == 178.0
+        assert decision["narrative_source"] == "catalogue"
+        assert decision["route_label"] == "Shared enabling infrastructure"
+        assert simulation.evaluate_ground_truth_backtest(
+            scenario,
+            decision,
+        )["match"] is True

@@ -207,6 +207,8 @@ def test_unlocked_by_edges_from_shared_enabler_block_with_derived_delta_nv() -> 
     scenario_b = deepcopy(scenario_a)
     scenario_b["scenario_id"] = "SYN-TEST-B"
     scenario_b["opportunity_id"] = "SAU-H0-721050"
+    scenario_a["scenario_version"] = "2.1.0"
+    scenario_b["scenario_version"] = "2.1.0"
     block = {
         "enabler_id": "ENABLER-SYN-TEST-001",
         "enabler_kind": "shared_laboratory",
@@ -219,7 +221,20 @@ def test_unlocked_by_edges_from_shared_enabler_block_with_derived_delta_nv() -> 
         "unlock_probability": 0.5,
         "dependency_share": 0.5,
         "enabler_cost_m_sar": 10.0,
-        "components": {},
+        "valuation_route_code": 5,
+        "components": {
+            "technical_feasibility_confirmed": True,
+            "investment_already_approved_or_financed": False,
+            "proceeds_without_intervention": False,
+            "policy_prohibition_identified": False,
+            "distortion_unacceptable": False,
+            "intervention_proportionate_to_constraint": True,
+            "competition": {
+                "existing_effective_capacity_kt": 0.0,
+                "proposed_incremental_capacity_kt": 1.0,
+                "downside_demand_kt": 1.0,
+            },
+        },
         "basis": "DEMO_GENERATOR test double",
     }
     scenario_a["synthetic_inputs"]["shared_enabler"] = deepcopy(block)
@@ -255,6 +270,8 @@ def test_enabler_declaration_conflict_is_error() -> None:
     scenario_a = _json(PROJECT_ROOT / "data/synthetic/SYN-MINISTRY-STEEL-001.json")
     scenario_b = deepcopy(scenario_a)
     scenario_b["scenario_id"] = "SYN-TEST-B"
+    scenario_a["scenario_version"] = "2.1.0"
+    scenario_b["scenario_version"] = "2.1.0"
     block = {
         "enabler_id": "ENABLER-SYN-TEST-001",
         "enabler_kind": "shared_laboratory",
@@ -264,7 +281,20 @@ def test_enabler_declaration_conflict_is_error() -> None:
         "unlock_probability": 0.5,
         "dependency_share": 0.5,
         "enabler_cost_m_sar": 10.0,
-        "components": {},
+        "valuation_route_code": 5,
+        "components": {
+            "technical_feasibility_confirmed": True,
+            "investment_already_approved_or_financed": False,
+            "proceeds_without_intervention": False,
+            "policy_prohibition_identified": False,
+            "distortion_unacceptable": False,
+            "intervention_proportionate_to_constraint": True,
+            "competition": {
+                "existing_effective_capacity_kt": 0.0,
+                "proposed_incremental_capacity_kt": 1.0,
+                "downside_demand_kt": 1.0,
+            },
+        },
         "basis": "test",
     }
     scenario_a["synthetic_inputs"]["shared_enabler"] = deepcopy(block)

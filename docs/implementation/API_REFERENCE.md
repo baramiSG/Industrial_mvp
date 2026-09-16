@@ -78,6 +78,12 @@ Simulated dossier JSON and HTML include the labelled synthetic R6/R7/R8 evaluati
 
 Runs the offline AR/EN extraction golden set and returns accuracy, expected fields, actual fields and source spans.
 
+## Graph API
+
+`GET /api/graph/status` returns the live mirror state. `GET /api/graph/catalogue` returns the fixed bilingual four-view catalogue independently of mirror availability. `GET /api/graph/opportunities/{opportunity_id}/views/{view_id}?mode=public|simulated` returns one fixed view, and `GET /api/graph/portfolio/shared-enablers?mode=public|simulated` returns graph/artifact-equal shared-enabler rows.
+
+Unavailable live configuration, driver, connection or projection equality returns HTTP 200 with `GRAPH_UNAVAILABLE`, a typed reason and no partial elements or artifact fallback. Unknown opportunity or view returns typed 404; an invalid mode uses FastAPI 422. A missing, corrupt or malformed canonical graph artifact returns sanitized HTTP 422 `GRAPH_ARTIFACT_INTEGRITY_ERROR`. Query failures after an available status check use the same typed unavailable boundary, while offline-guard and unexpected programming exceptions propagate.
+
 ## Error behavior
 
 - unknown opportunity: HTTP 404;

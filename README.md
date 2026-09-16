@@ -30,6 +30,7 @@ The real decision state is immutable. Synthetic evidence is separately flagged, 
 - Arabic–English specification extraction golden gate with preserved source spans.
 - One-page decision dossier in JSON and printable HTML.
 - Manifest-verified bilingual S15 case-selection and exclusion surface at `/api/case-selection`.
+- Governed Class-D shared-enabler declarations, graph-fed route-8 evaluation and the mounted `/api/graph` contract.
 - FastAPI backend, offline frontend, tests, integrity manifests, Docker support and WSL startup scripts.
 
 ## Start in WSL

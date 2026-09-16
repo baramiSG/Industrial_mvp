@@ -207,8 +207,13 @@ fallback.
 
 `scripts/reconstruct_snapshot.py --all` additionally rebuilds the current
 projection from its recorded governed inputs and emits
-`GRAPH RECONSTRUCTION PASS`. The Aura suite is operator-only and cannot
-collect without both the operator flag and exact instance confirmation.
+`GRAPH RECONSTRUCTION PASS`. Scenario validation preserves the original ten
+checks and appends `shared_enabler_declaration_valid` as check 11, followed by
+the separate ground-truth back-test. It proves exact common declaration
+agreement, explicit valuation references, 35.28 for the governed pair,
+ADVANCE/8 at 178 for the honest fixture and unchanged governed routes 6/4.
+The Aura suite is operator-only and cannot collect without both the operator
+flag and exact instance confirmation.
 
 ## 3. Threshold boundary tests
 
@@ -301,8 +306,8 @@ must block ADVANCE.
 The proof covers all six hard exclusions, unknown exclusion inputs, exactly
 one primary gap class, MONITOR with a named trigger, screening dispositions,
 evidenced REJECT conditions, route order 0–8, lower-route precedence,
-maximum-ΔNV selection, lower-route tie resolution, and route 8
-GRAPH_REQUIRED.
+maximum-ΔNV selection, lower-route tie resolution, route-8 `GRAPH_REQUIRED`
+without a feed, and evaluated route-8 selection from a governed fixture feed.
 
 The proof includes FULL-vs-degraded API coverage: a conforming fixture with
 two observed trade years reaches ADVANCE with `ALL_ADVANCE_GATES_PASS`;
@@ -461,8 +466,9 @@ Golden simulated steel remains ADVANCE route 5 with exact numeric pins.
 Golden simulated polypropylene remains REJECT route 0 with
 `HARD_EXCLUSION_SATISFIED`. Fixture scenarios prove routes 1–4, 6, 7, MONITOR,
 partial resolution, lower-route blocking, class-if-confirmed both directions,
-and route-8 `GRAPH_REQUIRED` refusal without synthetic leakage into
-`real_decision`.
+route-8 `GRAPH_REQUIRED` refusal without a feed, and an honest two-dependent
+fixture that computes ADVANCE/8 at UnlockValue 178 without synthetic leakage
+into `real_decision`.
 
 ### Scenario contract migration proof
 
