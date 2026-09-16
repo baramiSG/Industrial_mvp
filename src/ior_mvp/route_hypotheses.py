@@ -73,6 +73,10 @@ _REASON_KEYS = {
     ),
     "CAPABILITY_BAND_FAILED": "route.reason.capability_band_failed",
     "CAPABILITY_UNPUBLISHED": "route.reason.capability_unpublished",
+    "SHARED_ENABLER_DEPENDENTS_INSUFFICIENT": (
+        "route.8.reason.dependents_insufficient"
+    ),
+    "UNLOCK_VALUE_NONPOSITIVE": "route.8.reason.unlock_nonpositive",
 }
 
 
@@ -84,6 +88,8 @@ SHARED_ENABLER_CONTRACT_FIELDS = (
     "dependency_shares",
     "enabler_cost_m_sar",
     "graph_projection_id",
+    "valuation_route_codes",
+    "valuation_input_references",
 )
 
 
@@ -112,6 +118,8 @@ def shared_enabler_unlock_value(
 
 def evaluate_shared_enabler_route(
     inputs: dict[str, Any] | None,
+    *,
+    detected_constraint: str | None = None,
 ) -> dict[str, Any]:
     route = _base_route(8)
     if inputs is None:
@@ -122,10 +130,254 @@ def evaluate_shared_enabler_route(
             8,
         )
         return route
-    raise EvidenceIntegrityError(
-        "Route 8 inputs must originate from the governed Neo4j "
-        "projection (S16)"
+    if not isinstance(inputs, dict):
+        raise EvidenceIntegrityError("Route 8 graph inputs must be a mapping")
+    missing = set(SHARED_ENABLER_CONTRACT_FIELDS) - set(inputs)
+    if missing:
+        raise EvidenceIntegrityError(
+            "Route 8 graph inputs are missing: " + ", ".join(sorted(missing))
+        )
+    enabler_id = inputs.get("enabler_id")
+    projection_id = inputs.get("graph_projection_id")
+    if not isinstance(enabler_id, str) or not enabler_id:
+        raise EvidenceIntegrityError("Route 8 enabler_id must be non-empty")
+    if not isinstance(projection_id, str) or not projection_id:
+        raise EvidenceIntegrityError(
+            "Route 8 graph_projection_id must be non-empty"
+        )
+    list_fields = (
+        "dependent_opportunity_ids",
+        "unlock_probabilities",
+        "dependent_incremental_national_values_m_sar",
+        "dependency_shares",
+        "valuation_route_codes",
+        "valuation_input_references",
     )
+    values = {field: inputs.get(field) for field in list_fields}
+    if any(not isinstance(value, list) for value in values.values()):
+        raise EvidenceIntegrityError("Route 8 dependent inputs must be lists")
+    lengths = {len(value) for value in values.values() if isinstance(value, list)}
+    if len(lengths) != 1:
+        raise EvidenceIntegrityError("Route 8 dependent input lists must align")
+    dependent_ids = values["dependent_opportunity_ids"]
+    assert isinstance(dependent_ids, list)
+    if (
+        any(not isinstance(value, str) or not value for value in dependent_ids)
+        or len(set(dependent_ids)) != len(dependent_ids)
+    ):
+        raise EvidenceIntegrityError(
+            "Route 8 dependent opportunity identities must be unique strings"
+        )
+    probabilities = values["unlock_probabilities"]
+    national_values = values["dependent_incremental_national_values_m_sar"]
+    shares = values["dependency_shares"]
+    route_codes = values["valuation_route_codes"]
+    references = values["valuation_input_references"]
+    assert isinstance(probabilities, list)
+    assert isinstance(national_values, list)
+    assert isinstance(shares, list)
+    assert isinstance(route_codes, list)
+    assert isinstance(references, list)
+    checked_probabilities = [_known_number(value) for value in probabilities]
+    checked_shares = [_known_number(value) for value in shares]
+    for field, checked in (
+        ("unlock_probabilities", checked_probabilities),
+        ("dependency_shares", checked_shares),
+    ):
+        if any(value is None or value < 0 or value > 1 for value in checked):
+            raise EvidenceIntegrityError(
+                f"Route 8 {field} must contain finite values between 0 and 1"
+            )
+    checked_values = [_known_number(value) for value in national_values]
+    if any(value is None or value <= 0 for value in checked_values):
+        raise EvidenceIntegrityError(
+            "Route 8 dependent national values must be finite and positive"
+        )
+    if any(
+        isinstance(value, bool)
+        or not isinstance(value, int)
+        or value < 1
+        or value > 7
+        for value in route_codes
+    ):
+        raise EvidenceIntegrityError(
+            "Route 8 valuation route codes must be integers from 1 through 7"
+        )
+    if any(not isinstance(value, str) or not value for value in references):
+        raise EvidenceIntegrityError(
+            "Route 8 valuation input references must be non-empty strings"
+        )
+    eligible_indexes: list[int] = []
+    excluded_dependents: list[dict[str, Any]] = []
+    for index, opportunity_id in enumerate(dependent_ids):
+        reason_codes: list[str] = []
+        probability = checked_probabilities[index]
+        share = checked_shares[index]
+        if probability is not None and probability <= 0:
+            reason_codes.append("UNLOCK_PROBABILITY_NONPOSITIVE")
+        if share is not None and share <= 0:
+            reason_codes.append("DEPENDENCY_SHARE_NONPOSITIVE")
+        if reason_codes:
+            excluded_dependents.append(
+                {
+                    "opportunity_id": opportunity_id,
+                    "reason_codes": reason_codes,
+                }
+            )
+        else:
+            eligible_indexes.append(index)
+    shared_audit = {
+        **deepcopy(inputs),
+        "counted_dependent_ids": [
+            dependent_ids[index] for index in eligible_indexes
+        ],
+        "excluded_dependents": excluded_dependents,
+    }
+    cost = _known_number(inputs.get("enabler_cost_m_sar"))
+    if cost is None or cost < 0:
+        raise EvidenceIntegrityError(
+            "Route 8 enabler cost must be finite and non-negative"
+        )
+    minimum = thresholds_config().get("routes", {}).get(
+        "shared_enabler", {}
+    ).get("minimum_dependent_opportunities")
+    if isinstance(minimum, bool) or not isinstance(minimum, int) or minimum < 1:
+        raise EvidenceIntegrityError(
+            "Route 8 minimum dependent opportunities configuration is invalid"
+        )
+    if len(eligible_indexes) < minimum:
+        route["reason_codes"] = [
+            "SHARED_ENABLER_DEPENDENTS_INSUFFICIENT"
+        ]
+        route["reasons"], route["localized_reasons"] = _reason_payload(
+            route["reason_codes"], 8
+        )
+        route["shared_enabler"] = shared_audit
+        return route
+    components = inputs.get("components")
+    if not isinstance(components, dict):
+        raise EvidenceIntegrityError("Route 8 components must be a mapping")
+    required_components = {
+        "technical_feasibility_confirmed",
+        "investment_already_approved_or_financed",
+        "proceeds_without_intervention",
+        "policy_prohibition_identified",
+        "distortion_unacceptable",
+        "intervention_proportionate_to_constraint",
+        "competition",
+    }
+    if set(components) != required_components or any(
+        not isinstance(components.get(field), bool)
+        for field in required_components - {"competition"}
+    ):
+        raise EvidenceIntegrityError("Route 8 component evidence is invalid")
+    removes = inputs.get("removes_binding_constraint")
+    constraints = inputs.get("constraint_classes_addressed")
+    if not isinstance(removes, bool):
+        raise EvidenceIntegrityError(
+            "Route 8 removes_binding_constraint must be boolean"
+        )
+    allowed_constraints = {
+        value for values in ROUTE_CONSTRAINTS.values() for value in values
+    }
+    if (
+        not isinstance(constraints, list)
+        or not constraints
+        or any(
+            not isinstance(value, str) or value not in allowed_constraints
+            for value in constraints
+        )
+        or len(set(constraints)) != len(constraints)
+    ):
+        raise EvidenceIntegrityError(
+            "Route 8 constraint classes are invalid"
+        )
+    fully_resolves = removes and detected_constraint in constraints
+    feasibility = _component(components["technical_feasibility_confirmed"])
+    approved = _component(
+        components["investment_already_approved_or_financed"], inverse=True
+    )
+    proceeds = _component(
+        components["proceeds_without_intervention"], inverse=True
+    )
+    additionality = "passes" if approved == proceeds == "passes" else "fails"
+    policy_parts = {
+        _component(components["policy_prohibition_identified"], inverse=True),
+        _component(components["distortion_unacceptable"], inverse=True),
+        _component(components["intervention_proportionate_to_constraint"]),
+    }
+    policy = "passes" if policy_parts == {"passes"} else "fails"
+    competition_values = components["competition"]
+    if not isinstance(competition_values, dict) or set(competition_values) != {
+        "existing_effective_capacity_kt",
+        "proposed_incremental_capacity_kt",
+        "downside_demand_kt",
+    }:
+        raise EvidenceIntegrityError("Route 8 competition evidence is invalid")
+    competition, competition_status = _competition(competition_values)
+    if competition_status == NOT_CALCULABLE:
+        raise EvidenceIntegrityError("Route 8 competition evidence is invalid")
+    evidence_ids = inputs.get("evidence_ids", [])
+    if not isinstance(evidence_ids, list) or any(
+        not isinstance(value, str) or not value for value in evidence_ids
+    ):
+        raise EvidenceIntegrityError("Route 8 evidence ids are invalid")
+    raw_value = shared_enabler_unlock_value(
+        [
+            float(checked_probabilities[index])
+            for index in eligible_indexes
+            if checked_probabilities[index] is not None
+        ],
+        [
+            float(checked_values[index])
+            for index in eligible_indexes
+            if checked_values[index] is not None
+        ],
+        [
+            float(checked_shares[index])
+            for index in eligible_indexes
+            if checked_shares[index] is not None
+        ],
+        cost,
+    )
+    reason_codes: list[str] = []
+    if raw_value <= 0:
+        reason_codes.append("UNLOCK_VALUE_NONPOSITIVE")
+    if feasibility == "fails":
+        reason_codes.append("FEASIBILITY_FAILED")
+    if additionality == "fails":
+        reason_codes.append("ADDITIONALITY_FAILED")
+    if policy == "fails":
+        reason_codes.append("POLICY_FAILED")
+    if competition_status == "fails":
+        reason_codes.append("COMPETITION_FAILED")
+    if not fully_resolves:
+        reason_codes.append("PARTIAL_RESOLUTION")
+    status = "passes" if not set(reason_codes) - {"PARTIAL_RESOLUTION"} else "fails"
+    route.update(
+        {
+            "status": status,
+            "feasibility": feasibility,
+            "resolves_binding_constraint": (
+                "passes" if fully_resolves else "fails"
+            ),
+            "additionality": additionality,
+            "policy_permissibility": policy,
+            "incremental_national_value_m_sar": round(raw_value, 2),
+            "unrounded_incremental_national_value_m_sar": raw_value,
+            "competition": competition,
+            "reason_codes": reason_codes,
+            "evidence_ids": sorted(evidence_ids),
+            "shared_enabler": {
+                **shared_audit,
+                "unlock_value_m_sar": raw_value,
+            },
+        }
+    )
+    route["reasons"], route["localized_reasons"] = _reason_payload(
+        reason_codes, 8
+    )
+    return route
 
 
 def _capability_band_gate(
@@ -669,7 +921,9 @@ def apply_precedence(
     )
     for route in routes:
         route_code = route["route_code"]
-        if route_code in {0, 8}:
+        if route_code == 0 or (
+            route_code == 8 and "shared_enabler" not in route
+        ):
             continue
         blocker = next(
             (
@@ -707,11 +961,6 @@ def evaluate_route_hypotheses(
     detected_constraint: str | None = None,
     shared_enabler: dict[str, Any] | None = None,
 ) -> list[dict[str, Any]]:
-    if shared_enabler is not None:
-        raise EvidenceIntegrityError(
-            "Route 8 inputs must originate from the governed Neo4j "
-            "projection (S16)"
-        )
     evidence = _route_evidence(case)
     hypotheses = [
         _route_zero(
@@ -793,7 +1042,15 @@ def evaluate_route_hypotheses(
             brownfield["reason_codes"],
             5,
         )
-    graph_route = evaluate_shared_enabler_route(None)
+    route_eight_constraint = (
+        detected_constraint
+        if detected_constraint is not None
+        else gap_class.get("constraint_class")
+    )
+    graph_route = evaluate_shared_enabler_route(
+        shared_enabler,
+        detected_constraint=route_eight_constraint,
+    )
     hypotheses.append(graph_route)
     return apply_precedence(hypotheses)
 
@@ -858,7 +1115,7 @@ def select_preferred_hypothesis(
         route
         for route in routes
         if route.get("status") == "passes"
-        and 0 < route.get("route_code", 0) < 8
+        and 0 < route.get("route_code", 0) <= 8
         and _known_number(
             route.get(
                 "unrounded_incremental_national_value_m_sar"

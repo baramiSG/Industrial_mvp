@@ -82,9 +82,9 @@ def validate_decision_narratives(payload: dict[str, Any]) -> None:
     assert isinstance(locales, dict)
     assert isinstance(placeholder_kinds, dict)
     assert isinstance(templates, dict)
-    if metadata.get("version") != "1.3.0":
+    if metadata.get("version") != "1.4.0":
         raise NarrativeCatalogueError(
-            "Decision narrative metadata.version must be 1.3.0"
+            "Decision narrative metadata.version must be 1.4.0"
         )
     if metadata.get("default_locale") != "en":
         raise NarrativeCatalogueError(

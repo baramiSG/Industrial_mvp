@@ -232,10 +232,16 @@ current projection `GRAPH-SAU-2026-09-12-3ce241f08f7a` retains
 received two independent APPROVEs with zero findings (the second covers
 Compose cleanup), passed all six exact-head CI jobs and squash-merged as
 `71ed558`. Clean-worktree integrity, pytest, smoke and all reconstruction
-passes are green. S16b may now integrate on this delivered foundation; its
-route-8 activation, API mount, visual regeneration and Aura operator
-verification remain pending. Parent S16 does not complete until both children
-deliver.
+passes are green. S16b's uncommitted candidate adds the version-gated
+Class-D shared-enabler contract, explicit valuation provenance, graph-fed
+route-8 evaluation and mounted graph API on this delivered foundation.
+Original graph, manifest and visual generations are complete. Exact local
+and portability verification passed 2,854 unit tests, 498 functional and four
+visual checks in each root, plus local live/unavailable graph proof.
+Independent implementation review and owner acceptance are complete. Aura
+operator verification passed on the original bound instance without clearing.
+PR/CI/merge delivery remains pending at this capture point; parent S16 does not
+complete until both children deliver.
 
 ## Explicit non-goals for v0.3.0
 

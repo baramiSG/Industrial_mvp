@@ -5,6 +5,7 @@ from __future__ import annotations
 import hashlib
 import json
 from collections.abc import Mapping
+from math import isfinite
 from pathlib import Path
 from typing import Any
 
@@ -23,6 +24,13 @@ from .projection import GraphProjection
 
 class GraphIntegrityError(ValueError):
     """Raised when a graph artifact violates its governed contract."""
+
+
+def _finite_number(value: Any) -> float | None:
+    if isinstance(value, bool) or not isinstance(value, (int, float)):
+        return None
+    number = float(value)
+    return number if isfinite(number) else None
 
 
 def _json_bytes(value: Any) -> bytes:
@@ -222,6 +230,78 @@ def validate_projection(projection: GraphProjection) -> None:
             raise GraphIntegrityError(
                 f"Public/Class-D partition violation: {edge.key}"
             )
+        if edge.type == "UNLOCKED_BY":
+            enabler = properties_by_id[edge.target]
+            dependent = properties_by_id[edge.source]
+            route_code = edge.properties.get("valuation_route_code")
+            reference = edge.properties.get("valuation_input_reference")
+            probability = _finite_number(
+                edge.properties.get("unlock_probability")
+            )
+            share = _finite_number(edge.properties.get("dependency_share"))
+            value = _finite_number(
+                edge.properties.get(
+                    "dependent_incremental_national_value_m_sar"
+                )
+            )
+            cost = _finite_number(enabler.get("enabler_cost_m_sar"))
+            constraints = edge.properties.get("constraint_classes_addressed")
+            if (
+                labels_by_id[edge.source] != "Product"
+                or labels_by_id[edge.target] != "Intervention"
+                or dependent.get("synthetic_flag") is not False
+                or dependent.get("derived") is not False
+                or enabler.get("kind") != "shared_enabler"
+                or enabler.get("derived") is not False
+                or edge.properties.get("derived") is not False
+                or isinstance(route_code, bool)
+                or not isinstance(route_code, int)
+                or route_code < 1
+                or route_code > 7
+                or not isinstance(reference, str)
+                or not reference
+                or probability is None
+                or probability < 0
+                or probability > 1
+                or share is None
+                or share < 0
+                or share > 1
+                or value is None
+                or value <= 0
+                or cost is None
+                or cost < 0
+                or not isinstance(enabler.get("components"), dict)
+                or not isinstance(
+                    edge.properties.get("removes_binding_constraint"), bool
+                )
+                or not isinstance(constraints, list)
+                or not constraints
+                or any(
+                    not isinstance(item, str) or not item
+                    for item in constraints
+                )
+                or len(set(constraints)) != len(constraints)
+            ):
+                raise GraphIntegrityError(
+                    f"Shared-enabler provenance is invalid: {edge.key}"
+                )
+            if edge.properties.get("synthetic_flag") is True:
+                scenario_id = edge.properties.get("scenario_id")
+                scenarios = enabler.get("scenario_ids")
+                membership = properties_by_id.get(str(scenario_id))
+                if (
+                    edge.properties.get("evidence_class") != "D"
+                    or enabler.get("evidence_class") != "D"
+                    or not isinstance(scenarios, list)
+                    or scenario_id not in scenarios
+                    or membership is None
+                    or membership.get("opportunity_id") != edge.source
+                    or membership.get("synthetic_flag") is not True
+                    or membership.get("derived") is not False
+                ):
+                    raise GraphIntegrityError(
+                        f"Shared-enabler membership is invalid: {edge.key}"
+                    )
 
     tariff_markers = {
         node.id
@@ -330,11 +410,24 @@ def load_projection(
         pointer_path = root / "current.json"
         if not pointer_path.is_file():
             raise GraphIntegrityError("Graph current pointer is missing")
-        pointer = json.loads(pointer_path.read_text(encoding="utf-8"))
-        projection_identity = str(pointer["projection_id"])
-        expected_hash = str(pointer["sha256"])
+        try:
+            pointer = json.loads(pointer_path.read_text(encoding="utf-8"))
+            projection_identity = pointer["projection_id"]
+            expected_hash = pointer["sha256"]
+        except (OSError, UnicodeError, json.JSONDecodeError, KeyError, TypeError) as exc:
+            raise GraphIntegrityError("Graph current pointer is invalid") from exc
+        if not isinstance(projection_identity, str) or not isinstance(
+            expected_hash, str
+        ):
+            raise GraphIntegrityError("Graph current pointer is invalid")
     else:
         expected_hash = ""
+    if (
+        not isinstance(projection_identity, str)
+        or Path(projection_identity).name != projection_identity
+        or not projection_identity.startswith("GRAPH-")
+    ):
+        raise GraphIntegrityError("Graph projection identity is invalid")
     projection_root = root / "projections" / projection_identity
     projection_path = projection_root / "projection.json"
     manifest_path = projection_root / "manifest.json"
@@ -342,8 +435,17 @@ def load_projection(
         raise GraphIntegrityError(
             f"Graph projection files are missing: {projection_identity}"
         )
-    content = projection_path.read_bytes()
-    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    try:
+        content = projection_path.read_bytes()
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeError, json.JSONDecodeError) as exc:
+        raise GraphIntegrityError(
+            f"Graph projection files are invalid: {projection_identity}"
+        ) from exc
+    if not isinstance(manifest, Mapping):
+        raise GraphIntegrityError(
+            f"Graph projection manifest is invalid: {projection_identity}"
+        )
     digest = _sha256_bytes(content)
     if (
         manifest.get("projection_id") != projection_identity

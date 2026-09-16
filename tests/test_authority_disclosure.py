@@ -98,11 +98,11 @@ def test_every_detailed_analysis_exposes_source_derived_authority(
     assert result["authority"] == _expected_authority()
     assert response.status_code == 200
     assert response.json()["authority"] == _expected_authority()
-    assert result["authority"]["config_versions"]["thresholds"] == "1.2.0"
+    assert result["authority"]["config_versions"]["thresholds"] == "1.3.0"
     assert result["authority"]["config_versions"]["ui_strings"] == "1.4.0"
     assert result["authority"]["config_versions"][
         "decision_narratives"
-    ] == "1.3.0"
+    ] == "1.4.0"
     assert len(
         result["authority"]["methodology"]["sha256_prefix"]
     ) == 12

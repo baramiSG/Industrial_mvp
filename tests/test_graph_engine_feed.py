@@ -6,6 +6,7 @@ import pytest
 
 from ior_mvp.config import PROJECT_ROOT
 from ior_mvp.graph.artifact import load_projection
+from ior_mvp.graph.cypher import VIEW_QUERIES
 from ior_mvp.graph.engine_feed import (
     adjacency_explanation,
     evidence_linkage,
@@ -67,8 +68,14 @@ def _enabler_projection(*, derived_edge: bool = False) -> GraphProjection:
                 "technical_feasibility_confirmed": True,
             },
             "scenario_ids": ["SYN-A", "SYN-B"],
+            "label_en": "Test enabler",
+            "label_ar": "عامل تمكين اختباري",
         }
     )
+    scenario_a = _props("SYN-A", synthetic=True, scenario_id="SYN-A")
+    scenario_a["opportunity_id"] = "P-A"
+    scenario_b = _props("SYN-B", synthetic=True, scenario_id="SYN-B")
+    scenario_b["opportunity_id"] = "P-B"
     nodes = [
         GraphNode(
             "Product",
@@ -81,6 +88,8 @@ def _enabler_projection(*, derived_edge: bool = False) -> GraphProjection:
             _props("P-B", synthetic=False, scenario_id="PUBLIC"),
         ),
         GraphNode("Intervention", "ENABLER-SYN-TEST-001", enabler),
+        GraphNode("Scenario", "SYN-A", scenario_a),
+        GraphNode("Scenario", "SYN-B", scenario_b),
     ]
     edges = []
     for product, scenario, probability, value, share in (
@@ -99,6 +108,11 @@ def _enabler_projection(*, derived_edge: bool = False) -> GraphProjection:
                 "unlock_probability": probability,
                 "dependent_incremental_national_value_m_sar": value,
                 "dependency_share": share,
+                "valuation_route_code": 6 if scenario == "SYN-A" else 4,
+                "valuation_input_reference": (
+                    "synthetic_inputs.route_evidence"
+                    f"[route_code={6 if scenario == 'SYN-A' else 4}].national_value"
+                ),
                 "constraint_classes_addressed": [
                     "capacity_or_availability"
                 ],
@@ -254,3 +268,64 @@ def test_shared_enabler_queue_rows_public_empty_and_simulated_aggregation(
     assert len(rows) == 1
     assert rows[0]["dependent_opportunity_ids"] == ["P-A", "P-B"]
     assert rows[0]["unlock_value_m_sar"] == pytest.approx(35.0)
+
+
+def test_s16b_shared_enabler_queue_excludes_zero_probability_and_share() -> None:
+    zero_probability = _enabler_projection()
+    edge_a = next(edge for edge in zero_probability.edges if edge.source == "P-A")
+    edge_a.properties["unlock_probability"] = 0.0
+    probability_rows = shared_enabler_queue_rows(
+        zero_probability,
+        branch=("simulated", "SYN-A"),
+    )
+    assert probability_rows[0]["dependent_opportunity_ids"] == ["P-B"]
+    assert probability_rows[0]["counted_dependents"] == 1
+    assert probability_rows[0]["unlock_value_m_sar"] == pytest.approx(10.0)
+
+    zero_share = _enabler_projection()
+    edge_b = next(edge for edge in zero_share.edges if edge.source == "P-B")
+    edge_b.properties["dependency_share"] = 0.0
+    share_rows = shared_enabler_queue_rows(
+        zero_share,
+        branch=("simulated", "SYN-A"),
+    )
+    assert share_rows[0]["dependent_opportunity_ids"] == ["P-A"]
+    assert share_rows[0]["counted_dependents"] == 1
+    assert share_rows[0]["unlock_value_m_sar"] == pytest.approx(15.0)
+
+
+def test_s16b_shared_enabler_query_requires_declared_membership_and_nonderived_inputs() -> None:
+    query = VIEW_QUERIES["shared_enabler"]
+    assert "dependent.derived = false" in query
+    assert "unlock.derived = false" in query
+    assert "enabler.derived = false" in query
+    assert "unlock.unlock_probability > 0" in query
+    assert "unlock.dependency_share > 0" in query
+    assert "unlock.dependent_incremental_national_value_m_sar > 0" in query
+    assert "unlock.evidence_class = 'D'" in query
+    assert "enabler.evidence_class = 'D'" in query
+    assert "EXISTS {" in query
+    assert "membership.opportunity_id = dependent.id" in query
+
+
+def test_s16b_shared_enabler_feed_rejects_membership_and_derived_taint() -> None:
+    membership = _enabler_projection()
+    scenario = next(node for node in membership.nodes if node.id == "SYN-B")
+    scenario.properties["opportunity_id"] = "P-A"
+    with pytest.raises(ValueError, match="membership"):
+        shared_enabler_inputs(
+            membership,
+            "P-A",
+            branch=("simulated", "SYN-A"),
+        )
+    derived = _enabler_projection()
+    enabler = next(
+        node for node in derived.nodes if node.id == "ENABLER-SYN-TEST-001"
+    )
+    enabler.properties["derived"] = True
+    with pytest.raises(ValueError, match="node is invalid"):
+        shared_enabler_inputs(
+            derived,
+            "P-A",
+            branch=("simulated", "SYN-A"),
+        )

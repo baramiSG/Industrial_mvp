@@ -39,6 +39,25 @@ def _latest_trade(case: dict[str, Any]) -> dict[str, Any]:
     return max(case["trade"], key=lambda row: row["year"])
 
 
+def _graph_shared_enabler(
+    opportunity_id: str,
+    branch: str | tuple[str, str],
+) -> dict[str, Any] | None:
+    from .graph.engine_feed import shared_enabler_inputs
+    from .graph.repository import GraphRepositoryError, graph_projection
+
+    try:
+        return shared_enabler_inputs(
+            graph_projection(),
+            opportunity_id,
+            branch=branch,
+        )
+    except (GraphRepositoryError, ValueError) as exc:
+        raise EvidenceIntegrityError(
+            "Governed graph artifact cannot supply route-8 inputs"
+        ) from exc
+
+
 def analyze_public(opportunity_id: str) -> dict[str, Any]:
     case = isolated_copy(get_public_case(opportunity_id))
     validate_public_evidence(case["evidence"])
@@ -49,7 +68,12 @@ def analyze_public(opportunity_id: str) -> dict[str, Any]:
         case["domestic_capability"]["profile_hard_gates"],
         capability_hard_gate_names(case["domestic_capability"]),
     )
-    decision = compute_public_decision(case, rules, capability)
+    decision = compute_public_decision(
+        case,
+        rules,
+        capability,
+        shared_enabler=_graph_shared_enabler(opportunity_id, "public"),
+    )
     latest = _latest_trade(case)
     r3 = next(row for row in rules if row["rule_id"] == "R3")
     r4d = next(row for row in rules if row["rule_id"] == "R4-D")
@@ -138,7 +162,14 @@ def analyze_simulated(opportunity_id: str) -> dict[str, Any]:
     require_scenario_reconciliation(reconciliation)
     real_before = isolated_copy(public["real_decision"])
 
-    branch = _simulate(public, scenario)
+    branch = _simulate(
+        public,
+        scenario,
+        shared_enabler=_graph_shared_enabler(
+            opportunity_id,
+            ("simulated", scenario["scenario_id"]),
+        ),
+    )
     backtest = evaluate_ground_truth_backtest(
         scenario,
         branch["simulation_decision"],

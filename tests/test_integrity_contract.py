@@ -31,6 +31,10 @@ S15B_PUBLIC_AND_SYNTHETIC = {
     f"data/synthetic/SYN-MINISTRY-{slug}-001.json"
     for slug in ("PENICILLIN-API", "STREPTOMYCIN-API", "SOP", "FERT-RETAIL-PACKS")
 }
+S16B_HISTORICAL_SCENARIOS = {
+    "data/synthetic/historical/v2_0/SYN-MINISTRY-ALU-FOIL-001.json",
+    "data/synthetic/historical/v2_0/SYN-MINISTRY-ALU-PROFILES-001.json",
+}
 
 
 def test_manifests_exist_and_track_expected_files() -> None:
@@ -81,7 +85,7 @@ def test_s08_snapshot_manifest_retains_live_and_historical_public_rows(
         "data/synthetic/historical/v1_1/SYN-MINISTRY-STEEL-001.json",
         "data/synthetic/historical/v1_1/SYN-MINISTRY-PP-001.json",
         "data/golden/ar_en_spec_extraction.json",
-    } | S14B_PUBLIC_AND_SYNTHETIC | S15B_PUBLIC_AND_SYNTHETIC
+    } | S14B_PUBLIC_AND_SYNTHETIC | S15B_PUBLIC_AND_SYNTHETIC | S16B_HISTORICAL_SCENARIOS
     assert frozen <= paths
     allowed_extra_prefixes = (
         "data/raw/",
@@ -116,7 +120,7 @@ def _partition_valid(paths: set[str]) -> bool:
         "data/synthetic/historical/v1_1/SYN-MINISTRY-STEEL-001.json",
         "data/synthetic/historical/v1_1/SYN-MINISTRY-PP-001.json",
         "data/golden/ar_en_spec_extraction.json",
-    } | S14B_PUBLIC_AND_SYNTHETIC | S15B_PUBLIC_AND_SYNTHETIC
+    } | S14B_PUBLIC_AND_SYNTHETIC | S15B_PUBLIC_AND_SYNTHETIC | S16B_HISTORICAL_SCENARIOS
     if not frozen <= paths:
         return False
     allowed_extra_prefixes = (
@@ -149,10 +153,13 @@ def test_s11_snapshot_manifest_rejects_public_partition_leak() -> None:
     )
     paths = {item["path"] for item in manifest["files"]}
     assert _partition_valid(paths)
-    for required in S15B_PUBLIC_AND_SYNTHETIC:
+    for required in S15B_PUBLIC_AND_SYNTHETIC | S16B_HISTORICAL_SCENARIOS:
         assert not _partition_valid(paths - {required})
     assert not _partition_valid(paths | {"data/snapshots/public/extra.json"})
     assert not _partition_valid(paths | {"data/synthetic/extra.json"})
+    assert not _partition_valid(
+        paths | {"data/synthetic/historical/v2_0/extra.json"}
+    )
     for kind in ("production", "directory", "registry"):
         assert _partition_valid(paths | {f"data/snapshots/{kind}/extra.json"})
         assert not _partition_valid(paths | {f"data/snapshots/{kind}-other/extra.json"})
@@ -546,7 +553,10 @@ def test_s09_core_v2_contracts_define_the_generalized_public_engine() -> None:
     assert "### 7.2 Decision-critical field assessment" in core["07"]
     assert "### 7.6 Formal state and screening disposition" in core["07"]
     assert "### 7.7 Route hypotheses and selection" in core["07"]
-    assert "Route 8 always returns `NOT_CALCULABLE`" in core["07"]
+    assert (
+        "Route 8 returns `NOT_CALCULABLE` with reason `GRAPH_REQUIRED` when no"
+        in core["07"]
+    )
     normalized_core_07 = " ".join(core["07"].split())
     assert (
         "fails closed with a decision-integrity error rather than being "
@@ -777,6 +787,10 @@ def test_config_history_files_are_superseded_versions_only() -> None:
             json.loads(selection_path.read_text(encoding="utf-8"))
         ]
     }
+    retained_authority_hashes = {
+        "thresholds.v1": "4e891b9706408f6a661565e09609d0d663e1a00a17bda4e283a4b2ee63d3c47a",
+        "decision_narratives.v1": "0190f136f1b4abc2360c6f1347e26984f85333149c8a9605fe1b6c1e3150b045",
+    }
     for path in paths:
         match = re.fullmatch(r"(.+)-([0-9]+\.[0-9]+\.[0-9]+)\.yaml", path.name)
         assert match is not None
@@ -789,6 +803,8 @@ def test_config_history_files_are_superseded_versions_only() -> None:
         recorded_hashes = set(screening_hashes)
         if match.group(1) == "product_families.v1":
             recorded_hashes.update(selection_family_hashes)
+        if match.group(1) in retained_authority_hashes:
+            recorded_hashes.add(retained_authority_hashes[match.group(1)])
         assert hashlib.sha256(path.read_bytes()).hexdigest() in recorded_hashes
 
 

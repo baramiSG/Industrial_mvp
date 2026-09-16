@@ -23,6 +23,11 @@ from ior_mvp.rules import evaluate_rules
 FIXTURE_ROOT = PROJECT_ROOT / "tests" / "fixtures" / "public_decision"
 
 
+@pytest.fixture(autouse=True)
+def _s16b_use_fresh_graph(s16b_graph_cache) -> None:
+    del s16b_graph_cache
+
+
 def _load_advance_fixture() -> dict:
     return json.loads(
         (FIXTURE_ROOT / "advance-route-3.json").read_text(
@@ -398,6 +403,10 @@ def test_no_candidate_expected_payloads_match_engine_output(
         if isinstance(value, dict):
             for key, child in value.items():
                 if key == "ui_strings" and child == "1.3.0":
+                    value[key] = "1.4.0"
+                elif key == "thresholds" and child == "1.2.0":
+                    value[key] = "1.3.0"
+                elif key == "decision_narratives" and child == "1.3.0":
                     value[key] = "1.4.0"
                 else:
                     current_ui_version(child)

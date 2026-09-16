@@ -176,3 +176,18 @@ def test_current_pointer_matches_written_projection(
     assert pointer["projection_id"] == projection.projection_id
     loaded = load_projection(tmp_path)
     assert canonical_bytes(loaded) == canonical_bytes(projection)
+
+
+def test_s16b_invalid_pointer_and_shared_enabler_provenance_fail_closed(
+    tmp_path,
+    projection: GraphProjection,
+) -> None:
+    tmp_path.mkdir(exist_ok=True)
+    (tmp_path / "current.json").write_text("{", encoding="utf-8")
+    with pytest.raises(GraphIntegrityError, match="current pointer"):
+        load_projection(tmp_path)
+    changed = deepcopy(projection)
+    unlocked = next(edge for edge in changed.edges if edge.type == "UNLOCKED_BY")
+    unlocked.properties["valuation_route_code"] = True
+    with pytest.raises(GraphIntegrityError, match="Shared-enabler provenance"):
+        validate_projection(changed)

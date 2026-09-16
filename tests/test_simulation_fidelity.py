@@ -59,7 +59,7 @@ def test_supported_scenario_contract_version_is_accepted() -> None:
 
     assert (
         decision_engine.SUPPORTED_SCENARIO_CONTRACT_VERSIONS
-        == frozenset({"2.0.0"})
+        == frozenset({"2.0.0", "2.1.0"})
     )
     decision_engine.validate_simulation_contract(scenario)
 

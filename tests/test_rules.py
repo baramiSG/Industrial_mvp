@@ -171,8 +171,8 @@ def test_degraded_uv_never_claims_grade() -> None:
 
 def test_threshold_is_loaded_from_versioned_config() -> None:
     config = thresholds_config()
-    assert config["metadata"]["version"] == "1.2.0"
-    assert config["metadata"]["effective_date"] == "2026-09-02"
+    assert config["metadata"]["version"] == "1.3.0"
+    assert config["metadata"]["effective_date"] == "2026-09-16"
     assert config["rules"]["R2"][
         "minimum_quantity_contribution_share"
     ] == pytest.approx(0.60)

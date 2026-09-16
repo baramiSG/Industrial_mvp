@@ -377,9 +377,10 @@ The governed graph has two layers:
    target use the same idempotent loader and verification contract.
 
 The deterministic engine and existing opportunity endpoints do not open a
-graph socket. They consume the governed artifact in-process; live graph access
-is confined to the unmounted S16a `graph.api.router` contract and is mounted in
-S16b. This preserves the offline demo and warm-response requirements.
+graph socket. They consume branch-qualified shared-enabler inputs from the
+cached, validated governed artifact in-process. The mounted `graph.api.router`
+uses live Neo4j only for the fixed graph-view endpoints. This preserves the
+offline demo and warm-response requirements.
 
 The project-owned Compose service is
 `industrial-mvp-neo4j`, pinned to the recorded Neo4j 5.26.30 image digest, on

@@ -32,6 +32,13 @@ S14_CASES = (
     ("SAU-H6-392010", "PE-FILM", "REJECT", 0),
 )
 S14_IDS = tuple(row[0] for row in S14_CASES)
+
+
+@pytest.fixture(autouse=True)
+def _s16b_use_fresh_graph(s16b_graph_cache) -> None:
+    del s16b_graph_cache
+
+
 EXPECTED_REASONS = {
     "SAU-H6-721061": "ALL_ADVANCE_GATES_PASS",
     "SAU-H6-721012": "ALL_ADVANCE_GATES_PASS",
@@ -291,7 +298,9 @@ def test_each_s14_scenario_validates_contract_2_0_0_and_metadata(
     validate_synthetic_scenario(scenario)
     validate_simulation_contract(scenario)
 
-    assert scenario["scenario_version"] == "2.0.0"
+    assert scenario["scenario_version"] == (
+        "2.1.0" if slug in {"ALU-FOIL", "ALU-PROFILES"} else "2.0.0"
+    )
     assert scenario["opportunity_id"] == opportunity_id
     assert scenario["synthetic_flag"] is True
     assert scenario["evidence_class"] == "D"
@@ -327,6 +336,11 @@ def test_each_s14_scenario_reconciles_gate_b_without_fail(
     assert report["status"] == "PASS"
     assert tuple(row["result"] for row in report["checks"]) == (
         EXPECTED_GATE_B[opportunity_id]
+        + (
+            "PASS"
+            if opportunity_id in {"SAU-H6-760711", "SAU-H6-760429"}
+            else "NOT_APPLICABLE",
+        )
     )
     assert all(row["result"] != "FAIL" for row in report["checks"])
 
@@ -341,10 +355,11 @@ def test_each_s14_scenario_reaches_planted_truth_by_computation(
     slug: str,
     state: str,
     route: int,
+    s16b_simulate,
 ) -> None:
     _snapshot_path(opportunity_id)
     scenario = _scenario(slug)
-    branch = simulate(get_public_case(opportunity_id), scenario)
+    branch = s16b_simulate(get_public_case(opportunity_id), scenario)
     decision = branch["simulation_decision"]
 
     assert decision["state"] == state
@@ -368,11 +383,25 @@ def test_lower_routes_fail_with_recorded_reason_codes(
     slug: str,
     _state: str,
     _route: int,
+    s16b_simulate,
 ) -> None:
     del _state, _route
     _snapshot_path(opportunity_id)
-    branch = simulate(get_public_case(opportunity_id), _scenario(slug))
-    assert _route_rows(branch) == EXPECTED_ROUTES[opportunity_id]
+    branch = s16b_simulate(get_public_case(opportunity_id), _scenario(slug))
+    expected = EXPECTED_ROUTES[opportunity_id]
+    if opportunity_id in {"SAU-H6-760711", "SAU-H6-760429"}:
+        expected = (
+            *expected[:8],
+            (
+                "fails",
+                (
+                    "PARTIAL_RESOLUTION",
+                    "LOWER_ROUTE_FULLY_RESOLVES",
+                ),
+                6 if opportunity_id == "SAU-H6-760711" else 4,
+            ),
+        )
+    assert _route_rows(branch) == expected
 
 
 @pytest.mark.parametrize(
@@ -647,3 +676,30 @@ def test_partner_scaling_six_decimals_preserves_721061_value_reconciliation(
             decimal_places,
         )
         assert coarser_sum != pytest.approx(coarser_world, abs=1e-6)
+
+
+@pytest.mark.parametrize(
+    ("opportunity_id", "expected_route"),
+    [("SAU-H6-760711", 6), ("SAU-H6-760429", 4)],
+)
+def test_s16b_governed_route_eight_is_35_28_and_lower_route_blocked(
+    opportunity_id: str,
+    expected_route: int,
+    s16b_simulate,
+) -> None:
+    scenario = _scenario(
+        "ALU-FOIL" if opportunity_id == "SAU-H6-760711" else "ALU-PROFILES"
+    )
+    branch = s16b_simulate(get_public_case(opportunity_id), scenario)
+    route_eight = branch["route_hypotheses"][8]
+    assert route_eight["unrounded_incremental_national_value_m_sar"] == (
+        pytest.approx(35.28)
+    )
+    assert route_eight["status"] == "fails"
+    assert route_eight["reason_codes"] == [
+        "PARTIAL_RESOLUTION",
+        "LOWER_ROUTE_FULLY_RESOLVES",
+    ]
+    assert route_eight["resolves_binding_constraint"] == "fails"
+    assert route_eight["precedence"]["blocked_by_lower_route"] == expected_route
+    assert branch["simulation_decision"]["route_code"] == expected_route

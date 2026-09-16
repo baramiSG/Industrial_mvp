@@ -4,25 +4,24 @@ from __future__ import annotations
 
 import os
 from collections.abc import Callable, Mapping
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from ior_mvp.acquisition.contracts import OfflineGuardViolation
 
 from .engine_feed import shared_enabler_queue_rows
-from .loader import (
-    ConnectionSpec,
-    GraphConnectionFailure,
-    GraphDriverNotInstalled,
-    GraphSafetyError,
-    execute_view,
-    live_status,
-    resolve_target,
-)
-from .projection import GraphProjection
+if TYPE_CHECKING:
+    from .loader import ConnectionSpec
+    from .projection import GraphProjection
+else:
+    ConnectionSpec = Any
 
 
-GraphDriverUnavailable = GraphDriverNotInstalled
-GraphConnectionError = GraphConnectionFailure
+class GraphDriverUnavailable(RuntimeError):
+    """Raised when the optional graph driver cannot serve a view."""
+
+
+class GraphConnectionError(RuntimeError):
+    """Raised when the live graph cannot serve a view."""
 
 
 class GraphNotFound(LookupError):
@@ -41,7 +40,18 @@ ViewReader = Callable[
 
 
 def _default_status_reader(spec: ConnectionSpec) -> dict[str, Any]:
-    return live_status(spec)
+    from .loader import (
+        GraphConnectionFailure,
+        GraphDriverNotInstalled,
+        live_status,
+    )
+
+    try:
+        return live_status(spec)
+    except GraphDriverNotInstalled as exc:
+        raise GraphDriverUnavailable from exc
+    except GraphConnectionFailure as exc:
+        raise GraphConnectionError from exc
 
 
 def _default_view_reader(
@@ -51,13 +61,24 @@ def _default_view_reader(
     mode: str,
     scenario_id: str,
 ) -> list[dict[str, Any]]:
-    return execute_view(
-        spec,
-        view_id,
-        opportunity_id=opportunity_id,
-        mode=mode,
-        scenario_id=scenario_id,
+    from .loader import (
+        GraphConnectionFailure,
+        GraphDriverNotInstalled,
+        execute_view,
     )
+
+    try:
+        return execute_view(
+            spec,
+            view_id,
+            opportunity_id=opportunity_id,
+            mode=mode,
+            scenario_id=scenario_id,
+        )
+    except GraphDriverNotInstalled as exc:
+        raise GraphDriverUnavailable from exc
+    except GraphConnectionFailure as exc:
+        raise GraphConnectionError from exc
 
 
 class GraphService:
@@ -93,6 +114,8 @@ class GraphService:
                 artifact_projection_id=projection.projection_id,
                 projection=projection,
             )
+        from .loader import GraphSafetyError, resolve_target
+
         try:
             spec = resolve_target(
                 target,
@@ -136,9 +159,9 @@ class GraphService:
             live = self._status_reader(self.spec)
         except OfflineGuardViolation:
             raise
-        except GraphDriverNotInstalled:
+        except GraphDriverUnavailable:
             return self._unavailable_status("DRIVER_NOT_INSTALLED")
-        except (GraphConnectionFailure, OSError, TimeoutError):
+        except (GraphConnectionError, OSError, TimeoutError):
             return self._unavailable_status("CONNECTION_FAILED")
         if live.get("projection_id") != self.artifact_projection_id:
             result = self._unavailable_status("PROJECTION_MISMATCH")
@@ -433,13 +456,37 @@ class GraphService:
             }
         assert self.spec is not None
         scenario_id = self._scenario_id(opportunity_id, mode)
-        rows = self._view_reader(
-            self.spec,
-            view_id,
-            opportunity_id,
-            mode,
-            scenario_id,
-        )
+        try:
+            rows = self._view_reader(
+                self.spec,
+                view_id,
+                opportunity_id,
+                mode,
+                scenario_id,
+            )
+        except OfflineGuardViolation:
+            raise
+        except GraphDriverUnavailable:
+            reason_code = "DRIVER_NOT_INSTALLED"
+        except (GraphConnectionError, OSError, TimeoutError):
+            reason_code = "CONNECTION_FAILED"
+        else:
+            reason_code = None
+        if reason_code is not None:
+            return {
+                "view_id": view_id,
+                "opportunity_id": opportunity_id,
+                "mode": mode,
+                "graph_status": "GRAPH_UNAVAILABLE",
+                "reason_code": reason_code,
+                "projection_id": self.artifact_projection_id,
+                "synthetic_flag": False,
+                "display_labels": None,
+                "nodes": [],
+                "edges": [],
+                "explanation": None,
+                "drilldown": [],
+            }
         nodes, edges = self._view_elements(
             view_id,
             opportunity_id,
@@ -511,13 +558,32 @@ class GraphService:
                 self.projection,
                 branch="public",
             )
-            rows = self._view_reader(
-                self.spec,
-                "shared_enabler",
-                "",
-                "public",
-                "PUBLIC",
-            )
+            try:
+                rows = self._view_reader(
+                    self.spec,
+                    "shared_enabler",
+                    "",
+                    "public",
+                    "PUBLIC",
+                )
+            except OfflineGuardViolation:
+                raise
+            except GraphDriverUnavailable:
+                return {
+                    "mode": mode,
+                    "graph_status": "GRAPH_UNAVAILABLE",
+                    "reason_code": "DRIVER_NOT_INSTALLED",
+                    "projection_id": self.artifact_projection_id,
+                    "rows": [],
+                }
+            except (GraphConnectionError, OSError, TimeoutError):
+                return {
+                    "mode": mode,
+                    "graph_status": "GRAPH_UNAVAILABLE",
+                    "reason_code": "CONNECTION_FAILED",
+                    "projection_id": self.artifact_projection_id,
+                    "rows": [],
+                }
             if rows != artifact_rows:
                 return {
                     "mode": mode,
@@ -547,17 +613,36 @@ class GraphService:
                     for row in artifact_rows
                 }.values()
             )
-            rows = [
-                row
-                for scenario_id in scenario_ids
-                for row in self._view_reader(
-                    self.spec,
-                    "shared_enabler",
-                    "",
-                    "simulated",
-                    scenario_id,
-                )
-            ]
+            rows = []
+            for scenario_id in scenario_ids:
+                try:
+                    rows.extend(
+                        self._view_reader(
+                            self.spec,
+                            "shared_enabler",
+                            "",
+                            "simulated",
+                            scenario_id,
+                        )
+                    )
+                except OfflineGuardViolation:
+                    raise
+                except GraphDriverUnavailable:
+                    return {
+                        "mode": mode,
+                        "graph_status": "GRAPH_UNAVAILABLE",
+                        "reason_code": "DRIVER_NOT_INSTALLED",
+                        "projection_id": self.artifact_projection_id,
+                        "rows": [],
+                    }
+                except (GraphConnectionError, OSError, TimeoutError):
+                    return {
+                        "mode": mode,
+                        "graph_status": "GRAPH_UNAVAILABLE",
+                        "reason_code": "CONNECTION_FAILED",
+                        "projection_id": self.artifact_projection_id,
+                        "rows": [],
+                    }
             rows = list(
                 {
                     row["enabler_id"]: row

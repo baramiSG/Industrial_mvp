@@ -395,6 +395,17 @@ is recorded. It does not mount the graph API or activate route 8; those remain
 s16b. Aura verification is an owner-led s16b operator gate under OD-15 and was
 not attempted during this child.
 
+## V. Milestone v0.3.0 — S16b route-eight activation and graph API
+
+| ID | Observable acceptance | Implementation evidence | Status | Slice |
+|---|---|---|---|---|
+| V3-S16B-CONTRACT | Scenario 2.1.0 validates complete Class-D shared-enabler declarations, explicit valuation and cross-scenario consistency while 2.0.0 remains supported. | Scenario-contract negatives, exact v2.0 histories and Gate B check 11. | VERIFIED locally; independently approved; delivery pending | s16b |
+| V3-S16B-ROUTE8 | Graph-fed route 8 calculates UnlockValue, observes configured minimum/typed component gates, lower-route precedence and maximum-value selection. | Governed pair 35.28 blocked by routes 6/4; honest fixture ADVANCE/8 at 178; zero/negative/minimum/taint tests. | VERIFIED locally; independently approved; delivery pending | s16b |
+| V3-S16B-INJECTION | Phase-one non-derived evidence feeds public/simulated computation without current-artifact recursion or derived feedback. | Fresh projection fixture, membership/provenance tests and unchanged real decisions. | VERIFIED with canonical graph; independently approved; delivery pending | s16b |
+| V3-S16B-API | Existing graph router is mounted with preserved schemas and sanitized canonical-artifact/query-time failure boundaries. | Mounted catalogue, typed 404/422/unavailable and exception-propagation tests. | VERIFIED locally and on Aura; independently approved; delivery pending | s16b |
+
+This candidate remains uncommitted on its delivery branch. Product verification at detached commit `c0d5ec2` passed 2,854 unit tests, 498 functional and four visual checks in each of two locations; original graph/manifest/visual generations and local live/unavailable mirror proof are complete. Final independent implementation review, owner acceptance and mandatory Aura PASS are complete. PR/exact-head CI and delivery remain pending at this capture point. Owner record/status-only changes are inspected separately without claiming new product test results.
+
 ## Branch and release-state rules
 
 1. No row on the S05 implementation branch is promoted above `TESTED`.

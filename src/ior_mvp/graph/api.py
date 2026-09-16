@@ -10,7 +10,7 @@ from fastapi import APIRouter, Depends, HTTPException
 
 from ior_mvp.config import CONFIG_DIR
 
-from .repository import graph_projection
+from .repository import GraphRepositoryError, graph_projection
 from .service import GraphNotFound, GraphService
 
 
@@ -61,7 +61,13 @@ def load_view_catalogue() -> dict[str, Any]:
 
 def get_graph_service() -> GraphService:
     """Construct the live service from names already present in the process."""
-    projection = graph_projection()
+    try:
+        projection = graph_projection()
+    except GraphRepositoryError as exc:
+        raise HTTPException(
+            status_code=422,
+            detail={"code": "GRAPH_ARTIFACT_INTEGRITY_ERROR"},
+        ) from exc
     return GraphService.from_environment(projection)
 
 

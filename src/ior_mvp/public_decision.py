@@ -1690,6 +1690,8 @@ def compute_public_decision(
     case: dict[str, Any],
     rules: list[dict[str, Any]],
     capability: dict[str, Any],
+    *,
+    shared_enabler: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     assessments = assess_decision_critical_fields(
         case,
@@ -1718,6 +1720,7 @@ def compute_public_decision(
         capability,
         gap,
         rejections,
+        shared_enabler=shared_enabler,
     )
     preferred = select_preferred_hypothesis(hypotheses)
     selected = None

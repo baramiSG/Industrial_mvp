@@ -89,8 +89,10 @@ def test_public_engine_feeds_ignore_class_d_edges() -> None:
             assert "SIMULATED — NOT MINISTRY EVIDENCE" not in str(result)
 
 
-def test_real_decision_fingerprint_unchanged_for_all_cases_after_simulation_with_graph() -> None:
-    projection = _projection()
+def test_real_decision_fingerprint_unchanged_for_all_cases_after_simulation_with_graph(
+    s16b_graph_cache,
+) -> None:
+    projection = s16b_graph_cache
     scenario_opportunities = sorted(
         node.properties["opportunity_id"]
         for node in projection.nodes

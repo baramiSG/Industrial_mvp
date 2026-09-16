@@ -18,9 +18,12 @@ from ior_mvp.evidence import (
     reconcile_synthetic_scenario,
     validate_synthetic_scenario,
 )
+from ior_mvp.graph.engine_feed import shared_enabler_inputs
+from ior_mvp.graph.projection import build_evidence_layer
 from ior_mvp.public_snapshot import (
     validate_public_snapshot,
 )
+from ior_mvp.scenario_contract import validate_shared_enabler_consistency
 
 
 SYNTHETIC_DIR = DATA_DIR / "synthetic"
@@ -115,9 +118,29 @@ def validate_scenario_directories(
             f"No synthetic JSON files found in {synthetic_dir}"
         )
 
+    scenario_rows = [
+        (path, _read_json_object(path)) for path in scenario_paths
+    ]
+    validate_shared_enabler_consistency(
+        [scenario for _path, scenario in scenario_rows]
+    )
+    scenarios = {
+        str(scenario["opportunity_id"]): scenario
+        for _path, scenario in scenario_rows
+    }
+    projection = build_evidence_layer(
+        public_cases=public_cases,
+        scenarios=scenarios,
+        entity_artifacts=[],
+        briefs=[],
+        tariff_snapshots=[],
+        tariff_attempts=[],
+        projection_id="GRAPH-TEST",
+        engine_run_id="ENGINE-TEST",
+        inputs=[],
+    )
     reports: list[dict[str, Any]] = []
-    for path in scenario_paths:
-        scenario = _read_json_object(path)
+    for path, scenario in scenario_rows:
         scenario_id = scenario.get("scenario_id", "<missing>")
         opportunity_id = scenario.get("opportunity_id")
         try:
@@ -133,7 +156,15 @@ def validate_scenario_directories(
                 public_case,
             )
             if report["status"] != "FAIL":
-                branch = _simulate(public_case, scenario)
+                branch = _simulate(
+                    public_case,
+                    scenario,
+                    shared_enabler=shared_enabler_inputs(
+                        projection,
+                        str(opportunity_id),
+                        branch=("simulated", str(scenario_id)),
+                    ),
+                )
                 backtest = evaluate_ground_truth_backtest(
                     scenario,
                     branch["simulation_decision"],
@@ -178,6 +209,26 @@ def _print_reports(reports: list[dict[str, Any]]) -> None:
                 f"  {check['rule_id']}: {check['result']} "
                 f"- {check['detail']}"
             )
+    enablers = {
+        check.get("inputs", {}).get("enabler_id")
+        for report in reports
+        for check in report.get("checks", [])
+        if check.get("rule_id") == "shared_enabler_declaration_valid"
+        and check.get("result") == "PASS"
+    }
+    enablers.discard(None)
+    if enablers:
+        dependents = sum(
+            1
+            for report in reports
+            for check in report.get("checks", [])
+            if check.get("rule_id") == "shared_enabler_declaration_valid"
+            and check.get("result") == "PASS"
+        )
+        print(
+            "SHARED ENABLER CONSISTENCY PASS "
+            f"({len(enablers)} enablers, {dependents} dependents)"
+        )
 
 
 def main(

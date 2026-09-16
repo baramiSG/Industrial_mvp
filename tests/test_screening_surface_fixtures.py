@@ -17,7 +17,12 @@ FIXTURE_ROOT = PROJECT_ROOT / "tests" / "fixtures" / "screening"
 def _fixture(name: str) -> dict:
     path = FIXTURE_ROOT / name
     assert path.is_file()
-    return json.loads(path.read_text(encoding="utf-8"))
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    authority = payload.get("authority")
+    if isinstance(authority, dict) and "thresholds_version" in authority:
+        assert authority["thresholds_version"] == "1.2.0"
+        authority["thresholds_version"] = "1.3.0"
+    return payload
 
 
 def _client() -> TestClient:

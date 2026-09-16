@@ -461,10 +461,17 @@ selected.
 
 Route 7 additionally requires D* > the configured major-line/JV maximum,
 demand at least minimum efficient scale, and passing competition controls.
-Route 8 always returns `NOT_CALCULABLE` with reason `GRAPH_REQUIRED` until
-S16 supplies a graph-identified shared enabler and positive UnlockValue from
-the governed Neo4j projection. Snapshot or in-memory substitutes are
-forbidden.
+Route 8 returns `NOT_CALCULABLE` with reason `GRAPH_REQUIRED` when no
+governed branch-qualified graph input exists. An evaluated record requires a
+non-derived shared enabler, declared scenario membership and explicit positive
+dependent valuations. Only aligned dependents with probability > 0, dependency
+share > 0 and value > 0 count toward the configured minimum and UnlockValue;
+zero-weight rows remain explicit exclusions in the audit. Full constraint
+resolution requires both the declaration's removal boolean and membership of
+the actual detected constraint in its addressed classes. An absent or valid
+mismatched detected class produces `PARTIAL_RESOLUTION`. Positive UnlockValue
+and passing feasibility, additionality, policy and competition components
+remain required. Snapshot or ungoverned in-memory substitutes are forbidden.
 
 ### 7.8 Golden public outcomes
 
@@ -504,9 +511,13 @@ public selector on a projected composite case from
 Advance gating uses basis `CLASS_IF_CONFIRMED`: declared confirmed classes may
 unlock simulated ADVANCE while actual synthetic assessments remain Class D.
 Route evaluation adds `PARTIAL_RESOLUTION`, `CONSTRAINT_CLASS_NOT_APPLICABLE`,
-`CAPABILITY_BAND_FAILED`, and `FEASIBILITY_FAILED` reason codes. Route 8 always
-returns `NOT_CALCULABLE` with `GRAPH_REQUIRED`; no in-memory substitute is
-permitted.
+`CAPABILITY_BAND_FAILED`, and `FEASIBILITY_FAILED` reason codes. Route 8 retains
+`GRAPH_REQUIRED` without a feed and otherwise participates in the same lower-route
+precedence and maximum-unrounded-national-value selection. An evaluated record
+may truthfully retain `PARTIAL_RESOLUTION` alongside `LOWER_ROUTE_FULLY_RESOLVES`
+when the detected class is absent or mismatched and a lower route also blocks
+escalation. A 2.1.0 declaration without its matching graph feed is an integrity
+error.
 
 Packaged steel still reaches ADVANCE route 5 with frozen public goldens
 unchanged. Packaged polypropylene still reaches REJECT route 0 with
@@ -610,7 +621,7 @@ Changing a threshold requires a new version, rationale, sector scope and full re
 - zero or multiple primary gap classes → decision-integrity error;
 - MONITOR without a named allowed trigger → decision-integrity error;
 - unavailable required route input → `NOT_CALCULABLE`;
-- route 8 before graph activation → `NOT_CALCULABLE` / `GRAPH_REQUIRED`;
+- route 8 without a governed branch-qualified feed → `NOT_CALCULABLE` / `GRAPH_REQUIRED`; malformed, mismatched or declaration-less feeds fail closed;
 - unknown profile → fail closed;
 - malformed narrative catalogue, locale-key mismatch, placeholder mismatch,
   or unescaped rendering attempt → narrative-integrity error;

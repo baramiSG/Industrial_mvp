@@ -139,6 +139,14 @@ Updated by the Supervisor at every slice completion. Items marked *pre-existing*
 | KL-122 | The application container is not wired to Neo4j and `graph.api.router` is deliberately unmounted. | OD-1 split and the approved plan assign the mount to S16b and complete demo orchestration/reset to S21. Host-process and standalone FastAPI tests exercise the S16a contract. |
 | KL-123 | Aura is a managed deployment target under OR-7 although original owner ruling R-6 said no Aura instance. | OD-17 records OR-7 as the superseding target ruling; local Compose remains the offline/demo mirror. No Aura connection or `.env` read occurred in this preparation phase. |
 
+## S16b route-eight activation limitations
+
+| ID | Limitation | Evidence / boundary |
+|---|---|---|
+| KL-126 | The governed aluminium declarations activate route 8 but do not select it. | Their computed shared UnlockValue is 35.28 M SAR, but fully resolving routes 6 and 4 correctly block escalation. ADVANCE/8 at 178 is proved by an explicitly test-only, non-persisted projection fixture; it is not a governed case or Ministry evidence. |
+| KL-127 | RESOLVED in the verified S16b candidate: T1/T2 persisted graph/manifest staleness. | The original controlled generations completed once each; graph `fbc93afb3c6e` is 925/1,045, snapshot/authority manifests are 719/20, reconstruction/integrity pass, and the former artifact-related unit failures passed in both exact 2,854-test runs. This is local verification, not delivery. |
+| KL-128 | RESOLVED: required Aura application/projection proof. | The owner verified original instance `8a7338e0`: empty-before-load, 925/1,045, idempotent reload 0/0, complete provenance/partition, matching sample views and AVAILABLE/NOT_CONFIGURED application behavior. No Aura clear or clearing test fixture ran. This actual PASS, not an ordinary skip, satisfies the pre-PR gate. |
+
 ## S12a institutional acquisition outcomes (open, not fabricated)
 
 The 2026-09-11 bounded documentation consultations and operator invocations are recorded in `.workflow/slices/S12a-acquisition-framework-institutional-sources/implementation_log.md`. All five acquisition attempts made zero requests, stored no pages, have null observed response and INCOMPLETE coverage with ENDPOINT_UNVERIFIED; their sibling `coverage.json` matches embedded attempt coverage. Each kind build returns COVERAGE_INCOMPLETE, not FORMAT_NOT_PARSEABLE. These observations do not prove that the institutions lack public data. No institutional source-specific parser, normalized row or snapshot was invented.

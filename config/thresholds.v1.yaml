@@ -1,7 +1,7 @@
 metadata:
   artifact: industrial-opportunity-thresholds
-  version: "1.2.0"
-  effective_date: "2026-09-02"
+  version: "1.3.0"
+  effective_date: "2026-09-16"
   authority: "Industrial Opportunity Resolution Methodology, Appendix B"
   status: frozen_for_demo_cycle
   change_gate: "methodology-owner approval + golden-case regression"
@@ -95,6 +95,13 @@ capability:
     greenfield_likely_above: 0.65
   rationale: "Unknowns can never improve adjacency; hard gates must be resolved."
   revision_date: "2026-08-31"
+
+routes:
+  shared_enabler:
+    minimum_dependent_opportunities: 2
+    rationale: "Methodology8.3 requires several positive-value opportunities; two is the smallest plural, without tuning existing decisions."
+    sector_scope: all
+    revision_date: "2026-09-16"
 
 competition:
   post_entry_capacity_to_downside_demand_warning: 1.25

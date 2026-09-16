@@ -63,7 +63,7 @@
   },
   "opportunity_id": "SAU-H6-760711",
   "scenario_id": "SYN-MINISTRY-ALU-FOIL-001",
-  "scenario_version": "2.0.0",
+  "scenario_version": "2.1.0",
   "seed_basis": "Public 2024 imports of HS 7607.11 (53.679 kt, USD 180.58 M; UN Comtrade H6 series) bound the synthetic target demand; the acquired Ma'aden disclosure does not establish foil capability, so the incumbent flat-rolled mill and its zero foil-qualified share are an explicit design basis.",
   "source": "DEMO_GENERATOR",
   "synthetic_flag": true,
@@ -244,6 +244,36 @@
         "technical_feasibility_confirmed": true
       }
     ],
+    "shared_enabler": {
+      "enabler_id": "ENABLER-SYN-ALU-CASTHOUSE-001",
+      "enabler_kind": "input_supply",
+      "label": {
+        "en": "(synthetic design basis) shared aluminium billet and foil-stock casthouse supply",
+        "ar": "(أساس تصميم محاكى) إمداد مشترك من مسبك الألومنيوم بالكتل ومخزون الرقائق"
+      },
+      "enabler_cost_m_sar": 25.0,
+      "valuation_route_code": 6,
+      "constraint_classes_addressed": [
+        "capability_or_technology"
+      ],
+      "removes_binding_constraint": true,
+      "unlock_probability": 0.6,
+      "dependency_share": 0.5,
+      "components": {
+        "technical_feasibility_confirmed": true,
+        "investment_already_approved_or_financed": false,
+        "proceeds_without_intervention": false,
+        "policy_prohibition_identified": false,
+        "distortion_unacceptable": false,
+        "intervention_proportionate_to_constraint": true,
+        "competition": {
+          "existing_effective_capacity_kt": 2.5,
+          "proposed_incremental_capacity_kt": 39.6,
+          "downside_demand_kt": 39.2
+        }
+      },
+      "basis": "Synthetic counterfactual only: assume coordinated aluminium billet/foil-stock supply is an enabling alternative addressing the named downstream technology and offtake constraints. The component flags and causal removal declarations are explicit Class-D design assumptions, not observations or engineering confirmations. The common competition envelope aggregates the two existing Class-D downstream product-route triplets (0/36/34 and2.5/3.6/5.2 kt); it is not a casthouse nameplate, conversion coefficient or empirical market estimate. Preserve each existing per-opportunity competition control. Existing fully resolving routes6/4 remain selected and block escalation to route8."
+    },
     "target_specification": {
       "alloy": [
         "1235",

@@ -23,6 +23,7 @@ from .decision_engine import analyze, list_opportunities
 from .dossier import build_dossier, render_dossier_html
 from .evidence import EvidenceIntegrityError
 from .genui import build_ui_manifest
+from .graph.api import router as graph_router
 from .narratives import NarrativeCatalogueError
 from .screening.api import router as screening_router
 
@@ -36,6 +37,7 @@ app = FastAPI(
 )
 app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 app.include_router(screening_router)
+app.include_router(graph_router)
 
 
 def _evidence_integrity_http_exception(

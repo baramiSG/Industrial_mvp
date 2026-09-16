@@ -27,6 +27,7 @@ from .public_decision import (
 )
 from .public_decision import classify_gap as public_classify_gap
 from .route_hypotheses import (
+    BROWNFIELD_ROUTE_CODE,
     evaluate_route_hypotheses,
     select_preferred_hypothesis,
 )
@@ -34,7 +35,9 @@ from .rules import evaluate_rules, evaluate_simulated_rules
 from .scenario_contract import (
     decision_narrative_for_state,
     project_simulated_case,
+    shared_enabler_valuation,
     validate_scenario_pairing,
+    validate_shared_enabler,
     validate_simulation_contract,
 )
 from . import signals
@@ -586,7 +589,11 @@ def _catalogue_simulated_narrative(
         localized[locale] = {
             "headline": render_catalogue_entry(headline_key, locale, values),
             "route_label": render_catalogue_entry(
-                route_key or "route.0.label",
+                (
+                    f"route.{route_code}.label"
+                    if state == "ADVANCE" and route_code is not None
+                    else route_key or "route.0.label"
+                ),
                 locale,
             ),
             "rationale": render_catalogue_entry(rationale_key, locale),
@@ -718,6 +725,57 @@ def competition_gates(
     }
 
 
+def _validate_injected_shared_enabler(
+    public_case: dict[str, Any],
+    scenario: dict[str, Any],
+    shared_enabler: dict[str, Any] | None,
+) -> None:
+    declaration = validate_shared_enabler(scenario)
+    if declaration is None:
+        if shared_enabler is not None:
+            raise EvidenceIntegrityError(
+                "Projection supplied shared-enabler inputs without a scenario declaration"
+            )
+        return
+    if shared_enabler is None:
+        raise EvidenceIntegrityError(
+            "Scenario shared-enabler declaration has no matching projection input"
+        )
+    opportunity_id = public_case.get("opportunity", {}).get("id")
+    if shared_enabler.get("enabler_id") != declaration["enabler_id"]:
+        raise EvidenceIntegrityError(
+            "Projection shared-enabler identity does not match the scenario declaration"
+        )
+    dependents = shared_enabler.get("dependent_opportunity_ids")
+    if not isinstance(dependents, list) or opportunity_id not in dependents:
+        raise EvidenceIntegrityError(
+            "Projection shared-enabler membership does not match the scenario opportunity"
+        )
+    index = dependents.index(opportunity_id)
+    route_codes = shared_enabler.get("valuation_route_codes")
+    references = shared_enabler.get("valuation_input_references")
+    route_code, _value = shared_enabler_valuation(scenario)
+    expected_reference = (
+        "synthetic_inputs.economics.national_value"
+        if route_code == BROWNFIELD_ROUTE_CODE
+        else (
+            "synthetic_inputs.route_evidence"
+            f"[route_code={route_code}].national_value"
+        )
+    )
+    if (
+        not isinstance(route_codes, list)
+        or index >= len(route_codes)
+        or route_codes[index] != route_code
+        or not isinstance(references, list)
+        or index >= len(references)
+        or references[index] != expected_reference
+    ):
+        raise EvidenceIntegrityError(
+            "Projection shared-enabler valuation provenance does not match the declaration"
+        )
+
+
 def compute_simulated_decision(
     public_case: dict[str, Any],
     scenario: dict[str, Any],
@@ -726,7 +784,10 @@ def compute_simulated_decision(
     capability: dict[str, Any],
     economics: dict[str, Any],
     competition: dict[str, Any],
+    *,
+    shared_enabler: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
+    _validate_injected_shared_enabler(public_case, scenario, shared_enabler)
     policy = evidence_policy_config()
     composite = project_simulated_case(
         public_case,
@@ -770,6 +831,7 @@ def compute_simulated_decision(
         gap,
         rejections,
         detected_constraint=gap.get("constraint_class"),
+        shared_enabler=shared_enabler,
     )
     preferred = select_preferred_hypothesis(hypotheses)
     selected = None
@@ -869,7 +931,12 @@ def compute_simulated_decision(
     return decision
 
 
-def simulate(public: dict[str, Any], scenario: dict[str, Any]) -> dict[str, Any]:
+def simulate(
+    public: dict[str, Any],
+    scenario: dict[str, Any],
+    *,
+    shared_enabler: dict[str, Any] | None = None,
+) -> dict[str, Any]:
     validate_simulation_contract(scenario)
     public_case = public
     rules = public["rules"] if "rules" in public else evaluate_rules(public_case)
@@ -908,6 +975,7 @@ def simulate(public: dict[str, Any], scenario: dict[str, Any]) -> dict[str, Any]
         capability,
         economics,
         competition,
+        shared_enabler=shared_enabler,
     )
     if isinstance(decision.get("preferred_hypothesis"), dict):
         code = decision["preferred_hypothesis"].get("route_code")

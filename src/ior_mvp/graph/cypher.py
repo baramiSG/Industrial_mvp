@@ -118,16 +118,35 @@ VIEW_QUERIES: dict[str, str] = {
     "shared_enabler": """
         MATCH (dependent:Product)-[unlock:UNLOCKED_BY]->(enabler:Intervention)
         WHERE enabler.kind = 'shared_enabler'
+          AND dependent.derived = false
+          AND unlock.derived = false
+          AND enabler.derived = false
+          AND unlock.unlock_probability > 0
+          AND unlock.dependency_share > 0
+          AND unlock.dependent_incremental_national_value_m_sar > 0
           AND (
             ($mode = 'public'
               AND dependent.synthetic_flag = false
               AND unlock.synthetic_flag = false
-              AND enabler.synthetic_flag = false)
+              AND enabler.synthetic_flag = false
+              AND unlock.scenario_id = 'PUBLIC'
+              AND enabler.scenario_id = 'PUBLIC')
             OR
             ($mode = 'simulated'
               AND dependent.synthetic_flag = false
               AND unlock.synthetic_flag = true
-              AND $scenario_id IN enabler.scenario_ids)
+              AND enabler.synthetic_flag = true
+              AND unlock.evidence_class = 'D'
+              AND enabler.evidence_class = 'D'
+              AND $scenario_id IN enabler.scenario_ids
+              AND unlock.scenario_id IN enabler.scenario_ids
+              AND EXISTS {
+                MATCH (membership:Scenario)
+                WHERE membership.id = unlock.scenario_id
+                  AND membership.opportunity_id = dependent.id
+                  AND membership.synthetic_flag = true
+                  AND membership.derived = false
+              })
           )
         WITH enabler, dependent, unlock
         ORDER BY enabler.id, dependent.id
