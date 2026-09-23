@@ -105,6 +105,15 @@ def test_genui_component_registry_remains_unchanged() -> None:
         "evidence_ledger",
         "data_unlocks",
         "decision_actions",
+        "graph_view",
+    }
+    assert manifest["components"][-1] == {
+        "type": "graph_view",
+        "id": "graph-view",
+        "props": {
+            "opportunity_id": "SAU-H0-721049",
+            "mode": "simulated",
+        },
     }
 
 
@@ -134,4 +143,5 @@ def test_metric_grid_props_carry_partner_detail_and_no_new_component_type(
         "evidence_ledger",
         "data_unlocks",
         "decision_actions",
+        "graph_view",
     }

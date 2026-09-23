@@ -10,6 +10,10 @@ import {
 } from "./dom.js";
 import { t } from "./i18n.js";
 import { renderMethodology } from "./methodology.js";
+import {
+  mountGraphComponent,
+  prepareGraphContext,
+} from "./graph/index.js";
 import { renderComponent } from "./renderers/index.js";
 import { nextRequestEpoch, state } from "./state.js";
 
@@ -17,6 +21,10 @@ export function renderManifest() {
   document.getElementById("workspace-manifest").innerHTML = (
     state.manifest.components.map(renderComponent).join("")
   );
+  const descriptor = state.manifest.components.find(
+    (component) => component.type === "graph_view",
+  );
+  if (descriptor) mountGraphComponent(descriptor.props);
 }
 
 export function renderWorkspaceTitle() {
@@ -31,12 +39,21 @@ export function renderWorkspaceTitle() {
 
 export async function loadOpportunity(id) {
   state.selectedId = id;
+  const mode = state.mode;
+  prepareGraphContext(id, mode);
   const epoch = nextRequestEpoch();
-  const [analysis, manifest] = await Promise.all([
-    getJSON(opportunityEndpoint(id, state.mode)),
-    getJSON(manifestEndpoint(id, state.mode)),
+  const responses = await Promise.allSettled([
+    getJSON(opportunityEndpoint(id, mode)),
+    getJSON(manifestEndpoint(id, mode)),
   ]);
-  if (epoch !== state.requestEpoch) return;
+  if (epoch !== state.requestEpoch || state.mode !== mode
+    || state.selectedId !== id) return;
+  const failure = responses.find((response) => response.status === "rejected");
+  if (failure) throw failure.reason;
+  const [analysis, manifest] = responses.map((response) => response.value);
+  if (analysis?.opportunity?.id !== id || analysis?.mode !== mode
+    || manifest?.context?.opportunity_id !== id
+    || manifest?.context?.mode !== mode) return;
   state.analysis = analysis;
   state.manifest = manifest;
   const select = document.getElementById("opportunity-select");

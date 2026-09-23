@@ -167,15 +167,14 @@ control and approved viewport, including keyboard focus, WCAG 2.1 A/AA, bidirect
 layout, intended-font rendering, dossier print/PDF, console and network failures.
 Post-redesign visual baselines are hashed test oracles: comparison is deterministic,
 updates require an explicit reviewer-approved procedure, and CI shall never update them.
-The S14b matrix has 76 entries. Five public-workspace screens extend the
-S13b fourteen-screen matrix to nineteen screens in two locales and two
-viewports. Canonical regeneration round one records the 56-entry comparison
-against the S14a merge. OD-15 then corrects the portfolio count/rule chip and
-Arabic decision-subject label; OD-16 authorizes canonical regeneration round
-two. Its eight portfolio changes are confined to the chip bounding boxes and
-its seven Arabic desktop public-workspace changes are confined to the
-decision-subject card. All other baseline images remain byte-identical,
-ownership and budget gates pass, and CI only compares.
+The delivered S16b matrix has 96 entries. S17 adds four graph screens across
+two locales and the existing two viewports, producing 112 images only through
+the separately authorized canonical generation. The graph captures identify
+fixture-backed UI evidence separately from the live-Cypher gate and include the
+fixed catalogue, fixture/capture sources, current graph pointer and referenced
+projection files in visual provenance. All paths remain opaque lossless RGB
+WebP with the fixed 600 KiB per-file and 16 MiB aggregate budgets and unchanged
+comparison tolerances. CI only compares and never updates.
 
 Arabic analytical parity has two parts. First, governed prose and code labels
 must come from the Arabic catalogues; verbatim source spans and classified
@@ -214,6 +213,16 @@ agreement, explicit valuation references, 35.28 for the governed pair,
 ADVANCE/8 at 178 for the honest fixture and unchanged governed routes 6/4.
 The Aura suite is operator-only and cannot collect without both the operator
 flag and exact instance confirmation.
+
+S17 adds a distinct `graph_ui` marker and loopback-only browser test after the
+existing graph-only suite and before service stop. Its modules must import and
+collect in a locked dev-only environment where Playwright, Neo4j and Pillow are
+absent; optional imports, browser launch and driver creation occur only inside
+the explicit live path after target guards. The test verifies the preloaded
+projection, uses no graph-response interception, exercises the four fixed views
+in both locales, compares rendered element identities with live API responses,
+and verifies mirror identity and counts again afterward. Local and hosted graph
+gates retain the order graph-only → graph UI → stop → unavailable.
 
 ## 3. Threshold boundary tests
 
@@ -258,7 +267,10 @@ TL-09 assertions 10–12 extend the boundary to the graph:
     real-decision graph input; and
 12. every public node and edge carries `synthetic_flag=false` and the
     `scenario_id='PUBLIC'` sentinel, while every synthetic element carries
-    Class D, its scenario id and both visible warning labels.
+    Class D, its scenario id and both visible warning labels; and
+13. the graph serializer filters evidence-support edges to public or the exact
+    selected simulated scenario, derives synthetic state from nodes and edges,
+    and the browser rejects any synthetic element delivered to a public view.
 
 ## 5. Snapshot test policy
 

@@ -27,6 +27,14 @@ export function manifestEndpoint(id, mode) {
   return `/api/opportunities/${encodeURIComponent(id)}/ui-manifest?mode=${encodeURIComponent(mode)}`;
 }
 
+export function graphCatalogueEndpoint() {
+  return "/api/graph/catalogue";
+}
+
+export function graphViewEndpoint(id, viewId, mode) {
+  return `/api/graph/opportunities/${encodeURIComponent(id)}/views/${encodeURIComponent(viewId)}?mode=${encodeURIComponent(mode)}`;
+}
+
 export function dossierEndpoint(id, mode) {
   return `/api/opportunities/${encodeURIComponent(id)}/dossier?mode=${encodeURIComponent(mode)}`;
 }

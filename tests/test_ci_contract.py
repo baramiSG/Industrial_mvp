@@ -375,3 +375,41 @@ def test_reconstruct_step_follows_scenario_validation() -> None:
 def test_no_check_manifest_not_in_ci_or_makefile() -> None:
     assert "--no-check-manifest" not in WORKFLOW.read_text(encoding="utf-8")
     assert "--no-check-manifest" not in MAKEFILE.read_text(encoding="utf-8")
+
+
+def test_s17_graph_ui_make_and_ci_order_is_exact() -> None:
+    makefile = MAKEFILE.read_text(encoding="utf-8")
+    assert "graph-ui-tests" in makefile.split(".PHONY:", 1)[1].split("\n\n", 1)[0]
+    assert (
+        "UV_RUN_GRAPH_UI = $(UV) run --locked --extra dev --extra graph --extra e2e"
+        in makefile
+    )
+    assert '-m "graph and not graph_unavailable and not graph_ui"' in makefile
+    assert (
+        "$(MAKE) graph-tests; \\\n\t\t$(MAKE) graph-ui-tests; \\\n\t\t$(MAKE) graph-down;"
+        in makefile
+    )
+    assert "trap '$(MAKE) graph-down >/dev/null 2>&1 || true' EXIT;" in makefile
+    assert makefile.index("$(MAKE) graph-ui-tests;") < makefile.index(
+        "$(MAKE) graph-unavailable-test;"
+    )
+    job = _workflow()["jobs"]["graph-gates"]
+    commands = _run_commands(job)
+    required = (
+        'uv sync --locked --extra dev --extra graph --extra e2e --python "3.12"',
+        "uv run --locked --extra dev --extra graph --extra e2e python -m playwright install --with-deps chromium",
+        'pytest -q graph_tests -m "graph and not graph_unavailable and not graph_ui"',
+        "pytest -q graph_tests -m graph_ui --browser chromium",
+        "docker stop ${{ job.services.neo4j.id }}",
+        "pytest -q graph_tests -m graph_unavailable",
+    )
+    assert all(value in commands for value in required)
+    assert [commands.index(value) for value in required] == sorted(
+        commands.index(value) for value in required
+    )
+    workflow = _workflow()
+    assert len(workflow["jobs"]) == 5
+    expanded_checks = len(
+        workflow["jobs"]["uv-gates"]["strategy"]["matrix"]["python-version"]
+    ) + len(set(workflow["jobs"]) - {"uv-gates"})
+    assert expanded_checks == 6

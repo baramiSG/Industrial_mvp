@@ -394,6 +394,17 @@ class GraphService:
                 if edge.type == "SUPPORTED_BY_EVIDENCE"
                 and edge.source in targets
                 and edge.target in evidence_ids
+                and (
+                    (
+                        edge.properties.get("synthetic_flag") is False
+                        and edge.properties.get("scenario_id") == "PUBLIC"
+                    )
+                    or (
+                        mode == "simulated"
+                        and edge.properties.get("synthetic_flag") is True
+                        and edge.properties.get("scenario_id") == scenario_id
+                    )
+                )
             )
         selected_edges.sort(
             key=lambda edge: (
@@ -494,16 +505,18 @@ class GraphService:
             scenario_id,
             rows,
         )
+        elements = [*nodes, *edges]
         synthetic = any(
-            node.get("provenance", {}).get("synthetic_flag") is True
-            for node in nodes
+            element.get("provenance", {}).get("synthetic_flag") is True
+            for element in elements
         )
         labels = (
             next(
                 (
-                    node["display_labels"]
-                    for node in nodes
-                    if "display_labels" in node
+                    element["display_labels"]
+                    for element in elements
+                    if element.get("provenance", {}).get("synthetic_flag") is True
+                    and "display_labels" in element
                 ),
                 None,
             )

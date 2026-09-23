@@ -146,10 +146,12 @@ jobs:
         with:
           enable-cache: true
           cache-dependency-glob: uv.lock
-      - name: Sync locked graph environment
-        run: uv sync --locked --extra dev --extra graph --python "3.12"
+      - name: Sync locked graph and browser environment
+        run: uv sync --locked --extra dev --extra graph --extra e2e --python "3.12"
       - name: Scan prohibited files and secret patterns
         run: uv run --locked --extra dev --extra graph python scripts/check_prohibited_files.py
+      - name: Install Chromium prerequisites for graph UI
+        run: uv run --locked --extra dev --extra graph --extra e2e python -m playwright install --with-deps chromium
       - name: Wait for isolated Neo4j service
         run: >-
           PYTHONPATH=src uv run --locked --extra dev --extra graph
@@ -171,7 +173,13 @@ jobs:
           IOR_GRAPH_TEST_EXPLICIT: "1"
         run: >-
           PYTHONPATH=src uv run --locked --extra dev --extra graph
-          pytest -q graph_tests -m "graph and not graph_unavailable"
+          pytest -q graph_tests -m "graph and not graph_unavailable and not graph_ui"
+      - name: Run live graph UI equality suite
+        env:
+          IOR_GRAPH_TEST_EXPLICIT: "1"
+        run: >-
+          PYTHONPATH=src uv run --locked --extra dev --extra graph --extra e2e
+          pytest -q graph_tests -m graph_ui --browser chromium
       - name: Stop service and prove fail-closed behavior
         env:
           IOR_GRAPH_TEST_EXPLICIT: "1"

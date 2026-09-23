@@ -5,6 +5,7 @@ from typing import Any
 
 import pytest
 
+from browser_tests.graph_pages import install_graph_routes, prepare_graph_capture
 from browser_tests.harness import (
     AR,
     CASES,
@@ -98,6 +99,7 @@ def test_governed_visual_baselines_match(
     viewport: Viewport,
 ) -> None:
     page = browser_session.page
+    install_graph_routes(page)
     goto_portfolio(page, "public", locale)
     _anchor(page, "section.compact-section")
     visual_session.capture(
@@ -260,3 +262,27 @@ def test_governed_visual_baselines_match(
         case_id=None,
         mode="public",
     )
+
+    graph_states = (
+        (STEEL, "public", "adjacency", "journey-i-graph-adjacency"),
+        (STEEL, "simulated", "route_blocking", "journey-i-graph-route-blocking"),
+        (
+            next(case for case in CASES if case.id == "SAU-H6-760711"),
+            "simulated",
+            "shared_enabler",
+            "journey-i-graph-shared-enabler",
+        ),
+        (STEEL, "public", "evidence_to_change", "journey-i-graph-evidence-to-change"),
+    )
+    for case, mode, view_id, screen in graph_states:
+        goto_portfolio(page, mode, locale)
+        select_case(page, case, mode, locale)
+        prepare_graph_capture(page, view_id)
+        visual_session.capture(
+            page,
+            locale=locale.code,
+            viewport=viewport.name,
+            screen=screen,
+            case_id=case.id,
+            mode=mode,
+        )

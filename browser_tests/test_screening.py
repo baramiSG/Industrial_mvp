@@ -8,6 +8,8 @@ from pathlib import Path
 from urllib.parse import parse_qs, urlsplit
 
 import pytest
+
+from browser_tests.graph_fixtures import adapt_no_candidate_expected
 from playwright.sync_api import Page, Route, expect
 
 from browser_tests.harness import (
@@ -700,6 +702,7 @@ def test_no_candidate_deep_case_renders_disposition_label_not_null(
             / "no-candidate-no-fired-signal.expected.json"
         ).read_text(encoding="utf-8")
     )
+    expected = adapt_no_candidate_expected(expected)
     opportunity_id = expected["analysis"]["opportunity"]["id"]
     page.route(
         re.compile(r".*/api/opportunities\?mode=public$"),

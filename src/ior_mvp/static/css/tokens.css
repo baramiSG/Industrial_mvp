@@ -129,6 +129,9 @@
     --size-chart-dot: 9px;
     --size-capability-bar: 9px;
     --size-capability-label: 145px;
+    --size-graph-min: 720px;
+    --size-graph-stroke: 2px;
+    --size-graph-selected-stroke: 4px;
     --size-opacity-hidden: 0;
     --size-opacity-visible: 1;
     --size-sidebar-active: 3px;
@@ -173,6 +176,7 @@
     --layout-screening-columns: repeat(2, minmax(0, 1fr));
     --layout-screening-direction: row;
     --layout-screening-align: center;
+    --layout-graph-columns: repeat(2, minmax(0, 1fr));
 
     --breakpoint-wide: 1180px;
     --breakpoint-tablet: 900px;
@@ -290,6 +294,7 @@
       --layout-screening-columns: minmax(0, 1fr);
       --layout-screening-direction: column;
       --layout-screening-align: stretch;
+      --layout-graph-columns: minmax(0, 1fr);
     }
   }
 

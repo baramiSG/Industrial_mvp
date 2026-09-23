@@ -63,11 +63,14 @@ def test_browser_suite_has_the_approved_top_level_shape() -> None:
     } == {
         "THIRD_PARTY_NOTICES.md",
         "conftest.py",
+        "graph_fixtures.py",
+        "graph_pages.py",
         "harness.py",
         "parity_grammar.py",
         "pages.py",
         "test_accessibility.py",
         "test_dossier.py",
+        "test_graph.py",
         "test_guardrails.py",
         "test_journeys.py",
         "test_responsive.py",
@@ -450,7 +453,7 @@ def test_server_teardown_accepts_clean_exit_or_requested_sigterm() -> None:
     assert harness.is_expected_server_return_code(1) is False
 
 
-def test_browser_inventory_has_exactly_36_named_tests() -> None:
+def test_browser_inventory_has_exactly_45_named_tests() -> None:
     expected = {
         "test_portfolio_loads_expected_cases_and_states",
         "test_opportunity_card_opens_selected_workspace",
@@ -503,6 +506,15 @@ def test_browser_inventory_has_exactly_36_named_tests() -> None:
         "test_s15b_evsi_absent_renders_localized_unavailable",
         "test_s15b_selection_and_every_exclusion_render_bilingually",
         "test_s15b_selection_endpoint_is_loaded_once_without_mode_query",
+        "test_graph_collapsed_lazy_catalogue_and_views",
+        "test_graph_node_edge_selection_and_passports",
+        "test_graph_related_evidence_and_unresolved_references",
+        "test_graph_empty_unavailable_and_transport_states",
+        "test_graph_context_races_and_close",
+        "test_graph_keyboard_accessibility_rtl",
+        "test_graph_untrusted_content_and_public_isolation",
+        "test_graph_visual_budget_preflight",
+        "test_graph_portfolio_out_of_order_does_not_restore_stale_selection",
     }
     actual: set[str] = set()
     for path in BROWSER_TESTS.glob("test_*.py"):

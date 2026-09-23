@@ -13,7 +13,7 @@ import {
 import { integer, number, usd } from "./formatters.js";
 import { t } from "./i18n.js";
 import { loadSelection } from "./selection/index.js";
-import { state } from "./state.js";
+import { nextRequestEpoch, state } from "./state.js";
 import { loadOpportunity } from "./workspace.js";
 
 export function displayName(item) {
@@ -116,9 +116,16 @@ export function populateSelect() {
 }
 
 export async function loadPortfolio() {
-  const requests = [getJSON(opportunityListEndpoint(state.mode))];
+  const mode = state.mode;
+  const epoch = nextRequestEpoch();
+  const requests = [getJSON(opportunityListEndpoint(mode))];
   if (state.selection.requestEpoch === 0) requests.push(loadSelection());
-  [state.opportunities] = await Promise.all(requests);
+  const responses = await Promise.allSettled(requests);
+  if (epoch !== state.requestEpoch || mode !== state.mode) return;
+  const failure = responses.find((response) => response.status === "rejected");
+  if (failure) throw failure.reason;
+  const opportunities = responses[0].value;
+  state.opportunities = opportunities;
   if (!state.opportunities.some((item) => item.id === state.selectedId)) {
     state.selectedId = state.opportunities[0]?.id || null;
   }

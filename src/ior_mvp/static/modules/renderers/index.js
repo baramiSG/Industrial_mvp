@@ -12,6 +12,7 @@ import {
   renderEvidenceLedger,
 } from "./evidence.js";
 import { renderIntegrityBanner } from "./integrity.js";
+import { renderGraphComponent } from "../graph/index.js";
 
 export const RENDERERS = Object.freeze({
   integrity_banner: renderIntegrityBanner,
@@ -24,6 +25,7 @@ export const RENDERERS = Object.freeze({
   evidence_ledger: renderEvidenceLedger,
   data_unlocks: renderDataUnlocks,
   decision_actions: renderDecisionActions,
+  graph_view: renderGraphComponent,
 });
 
 export function renderComponent(component) {

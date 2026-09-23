@@ -1,0 +1,185 @@
+.graph-card {
+  min-inline-size: var(--space-0);
+}
+
+.graph-panel {
+  display: grid;
+  gap: var(--space-16);
+  min-inline-size: var(--space-0);
+}
+
+.graph-panel[hidden] {
+  display: none;
+}
+
+.graph-panel > label {
+  color: var(--color-muted);
+  font-size: var(--font-size-11);
+  font-weight: var(--font-weight-bold);
+}
+
+.graph-panel > select {
+  inline-size: var(--size-full);
+}
+
+.graph-state,
+.graph-selection,
+.graph-native-controls > section {
+  border: var(--border-hairline) solid var(--color-line);
+  border-radius: var(--radius-md);
+  background: var(--color-soft);
+  padding: var(--space-16);
+}
+
+.graph-state h4,
+.graph-selection h4,
+.graph-native-controls h4,
+.graph-details h5 {
+  margin-block: var(--space-0) var(--space-8);
+}
+
+.graph-state p,
+.graph-explanation {
+  color: var(--color-muted);
+  margin-block: var(--space-0);
+}
+
+.graph-state-error {
+  border-color: var(--color-danger);
+  background: var(--color-danger-soft);
+}
+
+.graph-visual {
+  overflow-inline: auto;
+  border: var(--border-hairline) solid var(--color-line);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+
+.graph-visual:focus-visible {
+  outline: var(--border-accent) solid var(--color-info);
+  outline-offset: var(--space-2);
+  box-shadow: var(--shadow-control);
+}
+
+.graph-diagram {
+  display: block;
+  inline-size: var(--size-full);
+  min-inline-size: var(--size-graph-min);
+  block-size: auto;
+}
+
+.graph-svg-edge-hit {
+  fill: var(--color-transparent);
+  pointer-events: all;
+}
+
+.graph-svg-edge line {
+  stroke: var(--color-navy-700);
+  stroke-width: var(--size-graph-stroke);
+}
+
+.graph-svg-edge marker path {
+  fill: var(--color-navy-700);
+}
+
+.graph-svg-node circle {
+  fill: var(--color-accent-soft);
+  stroke: var(--color-accent-text);
+  stroke-width: var(--size-graph-stroke);
+}
+
+.graph-svg-node text {
+  fill: var(--color-navy-850);
+  font-family: var(--font-family-interface);
+  font-size: var(--font-size-12);
+  font-weight: var(--font-weight-bold);
+}
+
+.graph-svg-node.is-synthetic circle {
+  fill: var(--color-warning-soft);
+  stroke: var(--color-warning-text);
+}
+
+.graph-svg-node.is-selected circle,
+.graph-svg-edge.is-selected line {
+  stroke: var(--color-danger-text);
+  stroke-width: var(--size-graph-selected-stroke);
+}
+
+.graph-svg-node.is-selected text {
+  text-decoration: underline;
+}
+
+.graph-native-controls {
+  display: grid;
+  grid-template-columns: var(--layout-graph-columns);
+  gap: var(--space-14);
+}
+
+.graph-button-list {
+  display: grid;
+  gap: var(--space-8);
+}
+
+.graph-element-button {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-12);
+  text-align: start;
+  border: var(--border-hairline) solid var(--color-line-strong);
+  border-radius: var(--radius-control);
+  background: var(--color-surface);
+  color: var(--color-navy-850);
+  padding: var(--space-10);
+}
+
+.graph-element-button small {
+  color: var(--color-muted);
+}
+
+.graph-element-button.is-selected {
+  border: var(--border-accent) solid var(--color-accent-text);
+  box-shadow: var(--shadow-control);
+}
+
+.graph-details,
+.graph-evidence-results {
+  display: grid;
+  gap: var(--space-12);
+}
+
+.graph-provenance dl,
+.graph-passport dl {
+  display: grid;
+  grid-template-columns: var(--layout-graph-columns);
+  gap: var(--space-8);
+  margin-block: var(--space-0);
+}
+
+.graph-provenance dl > div,
+.graph-passport dl > div {
+  min-inline-size: var(--space-0);
+}
+
+.graph-provenance dt,
+.graph-passport dt {
+  color: var(--color-muted);
+  font-size: var(--font-size-10);
+  font-weight: var(--font-weight-bold);
+}
+
+.graph-provenance dd,
+.graph-passport dd {
+  margin-inline: var(--space-0);
+  overflow-wrap: anywhere;
+}
+
+.graph-passport {
+  border-block-start: var(--border-hairline) solid var(--color-line);
+  padding-block-start: var(--space-12);
+}
+
+.graph-unresolved {
+  color: var(--color-warning-text);
+}

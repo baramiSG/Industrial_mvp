@@ -57,6 +57,10 @@ SCREENS = (
     "journey-g-sop-public-workspace",
     "journey-g-fert-retail-packs-public-workspace",
     "journey-h-selection-exclusions",
+    "journey-i-graph-adjacency",
+    "journey-i-graph-route-blocking",
+    "journey-i-graph-shared-enabler",
+    "journey-i-graph-evidence-to-change",
 )
 MAX_FILE_BYTES = 600 * 1024
 MAX_TOTAL_BYTES = 16 * 1024 * 1024
@@ -144,6 +148,11 @@ def compare_paths(baseline_path: Path, actual_path: Path) -> dict[str, Any]:
 
 def _source_hashes() -> dict[str, str]:
     static = ROOT / "src" / "ior_mvp" / "static"
+    graph_current = ROOT / "data" / "graph" / "current.json"
+    projection_id = json.loads(
+        graph_current.read_text(encoding="utf-8")
+    )["projection_id"]
+    projection_root = ROOT / "data" / "graph" / "projections" / projection_id
     paths = [
         *sorted((ROOT / "src" / "ior_mvp").glob("*.py")),
         static / "index.html",
@@ -154,6 +163,14 @@ def _source_hashes() -> dict[str, str]:
         ROOT / "config" / "ui_strings.v1.yaml",
         ROOT / "config" / "evidence_policy.v1.yaml",
         ROOT / "config" / "decision_narratives.v1.yaml",
+        ROOT / "config" / "graph_views.v1.yaml",
+        ROOT / "browser_tests" / "graph_fixtures.py",
+        ROOT / "browser_tests" / "graph_pages.py",
+        ROOT / "browser_tests" / "test_graph.py",
+        ROOT / "browser_tests" / "test_visual_baselines.py",
+        graph_current,
+        projection_root / "projection.json",
+        projection_root / "manifest.json",
     ]
     return {
         path.relative_to(ROOT).as_posix(): sha256(path)

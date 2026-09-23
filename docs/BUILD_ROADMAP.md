@@ -243,6 +243,17 @@ operator verification passed on the original bound instance without clearing.
 PR/CI/merge delivery remains pending at this capture point; parent S16 does not
 complete until both children deliver.
 
+## S17 source implementation boundary
+
+The independently approved S17 plan adds one collapsed, lazy `graph_view`
+component after decision actions, four fixed bilingual deterministic SVG/native
+control views, stored-evidence drill-down, race-safe context invalidation, an
+ordered live graph/UI gate and sixteen visual paths. The bounded dependency
+amendment permits only the graph-service public evidence-edge isolation repair
+and combined node/edge warning calculation. Source implementation remains
+uncommitted; graph, product-manifest and canonical-visual generations and all
+later review/delivery gates remain separate.
+
 ## Explicit non-goals for v0.3.0
 
 Authentication, role-based approval, official override workflow, confidential Ministry connectors, live customs transactions, paid-data acquisition, model training on Ministry applications, causal incentive-effect claims, generic AI chat, CRM, document management, any change to the methodology DOCX, and any alteration of the v0.2.0 tag, release records or frozen v1 golden snapshot files.

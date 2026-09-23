@@ -39,6 +39,7 @@ Benefits:
 | `evidence_ledger` | always | source, class, status and boundary |
 | `data_unlocks` | always | exact missing facts and active synthetic blocks |
 | `decision_actions` | always | dossier and JSON output |
+| `graph_view` | after decision actions; collapsed until opened | four fixed evidence-backed dependency views with deterministic SVG and native controls |
 | `screening_summary` | Screening summary | universe, coverage, disposition and route-specific queue counts |
 | `screening_queue` | a selected screening queue | Pareto-ordered entries and pagination without an ordinal master list |
 | `screening_record` | a selected HS6 record | governed ledger, exclusions, needs, adjacency and evidence-basis anchors |
@@ -107,6 +108,10 @@ Benefits:
   persistent evidence region.
 - UNAVAILABLE, PARTIAL and empty-queue states remain labelled and actionable
   without fabricated counts.
+- The graph remains request-free while collapsed; opening exposes the four fixed
+  views, native node/edge controls and stored-evidence drill-down.
+- Graph empty, unavailable, transport and rejected-response states remain
+  distinct and never substitute fixture or artifact rows for a failed live view.
 - All controls are keyboard reachable.
 
 ## 8. Arabic support

@@ -31,6 +31,7 @@ The real decision state is immutable. Synthetic evidence is separately flagged, 
 - One-page decision dossier in JSON and printable HTML.
 - Manifest-verified bilingual S15 case-selection and exclusion surface at `/api/case-selection`.
 - Governed Class-D shared-enabler declarations, graph-fed route-8 evaluation and the mounted `/api/graph` contract.
+- A collapsed, lazy-loaded bilingual graph component with four deterministic SVG/native-control views and stored-evidence drill-down.
 - FastAPI backend, offline frontend, tests, integrity manifests, Docker support and WSL startup scripts.
 
 ## Start in WSL
@@ -105,7 +106,10 @@ bilingual catalogue/token/copy contracts, Python compilation, recursive
 ES-module syntax, integrity verification, Gate B scenario
 reconciliation/back-test, full test suite and demo smoke on uv/Python 3.12,
 uv/Python 3.14 and the documented pip path; it also builds the Docker image and
-compares 498 functional plus four governed visual Chromium nodes.
+runs the dedicated live graph/UI step after graph-only equality and before the
+stopped-service proof, and compares the governed functional and visual Chromium
+matrix. The S17 source target is 112 visual paths after its separately approved
+canonical generation.
 
 After installing uv as described in `docs/DEVELOPMENT_GUIDE.md`, reproduce the required gates locally with:
 
@@ -157,9 +161,12 @@ The backend emits a constrained UI manifest based on the decision context. It se
 - economics and EVSI panel;
 - evidence passport table;
 - data-unlock queue;
-- dossier actions.
+- dossier actions;
+- four fixed interactive graph views with explicit empty and unavailable states.
 
-The model does not generate executable browser code at runtime. This preserves auditability while allowing the interface to adapt to the decision state and available evidence.
+The graph component makes no request while collapsed, rejects stale or
+public/synthetic-mismatched responses, and uses only the existing fixed graph
+API and stored opportunity evidence. The model does not generate executable browser code at runtime. This preserves auditability while allowing the interface to adapt to the decision state and available evidence.
 
 ## Repository map
 

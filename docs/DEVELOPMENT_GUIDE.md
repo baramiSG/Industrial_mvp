@@ -320,6 +320,38 @@ docker stop ior-local
 docker rm ior-local
 ```
 
+## Interactive graph development
+
+S17 appends a collapsed `graph_view` component after decision actions. The
+browser makes no graph request before the user opens it. The four fixed views
+use deterministic custom SVG plus equivalent native controls; no graph library,
+CDN, force simulation, timer layout or new endpoint is introduced. Graph and
+evidence requests commit only when their epoch, opportunity, mode, view and
+selected element still match.
+
+Pure construction checks use the locked dev environment and actual ES modules.
+The dev-only import proof creates an isolated locked environment with only the
+`dev` extra, proves Playwright, Neo4j and Pillow absent, collects the graph UI
+modules without fixture setup, then runs adapter negatives. Optional packages
+and service connections belong only to the explicit live target.
+
+```bash
+make graph-ui-tests
+make graph-gate
+```
+
+`graph-gate` runs graph-only equality, then graph UI, then stops the service and
+proves `GRAPH_UNAVAILABLE`. The graph UI child receives only compose/CI loopback
+configuration through its guarded adapter; the default browser environment
+continues to strip graph, Aura and credential settings. The hosted graph job
+uses the same ordering and retains the six expanded checks.
+
+After source inputs are complete, generation order is graph projection, product
+manifests, current-input functional/live proof, visual feasibility, then one
+canonical 112-image allocation. Do not represent integrity, full pytest or
+visual comparison as green while these inputs are stale. The existing Aura
+instance is preserved and is not used for S17 live acceptance.
+
 ## Slice workflow
 
 Each bounded slice follows:
