@@ -59,7 +59,7 @@
   "active_milestone": "v0.3.0",
   "fallback1_completion_build": {
     "task_id": "s17-interactive-graph-view",
-    "state": "INDEPENDENTLY_APPROVED_OWNER_ACCEPTED_RECORD_DELTA_REVIEW_PENDING",
+    "state": "DELIVERED_VERIFIED_ACCEPTED",
     "branch": "slice/s17-interactive-graph-view",
     "base": "6e85eeec2686c59ae3c0d9e7dcb0baf2d7f2dcd8",
     "product_candidate_tree": "adc34119a6dcdcf18a52b0e94ae7089affff9d25",
@@ -69,7 +69,7 @@
     "verification": {"python_each_root": 2887, "functional_each_root": 513, "visual_each_root": 4, "graph_nodes": 925, "graph_edges": 1045},
     "generation_counts": {"graph": 1, "product_manifest": 1, "canonical_visual_total": 6},
     "records": ".workflow/slices/S17-interactive-graph-view/",
-    "delivery": "PENDING owner-record delta confirmation, commit, PR, exact-head CI, merge and merged-main receipt"
+    "delivery": {"pr": 35, "pr_head": "a0b7141eb681184ab47b0d3d92f37f97a028a675", "pr_ci_run": 35831654002, "merge_commit": "e10225005fe13295d1c10e443276e0139be806c6", "main_ci_run": 35834129601, "checks_each": "6/6 PASS", "merged_tree": "5da017e824bab7c3f1313f2a8d0332f48c9a2dab", "post_merge": "integrity, 2887 pytest, smoke, reconstruction and graph build-check PASS"}
   },
   "native_completion_build": {
     "current_slice": "s16b-route-eight-activation-and-graph-api",
@@ -98,8 +98,8 @@
     "v0.3.0": {
       "name": "Ministerial Demonstration Readiness",
       "state": "IN_PROGRESS",
-      "current_slice": "s17-interactive-graph-view",
-      "next_slice": "S18",
+      "current_slice": "S18",
+      "next_slice": "S19",
       "planning_documents": ["docs/milestones/v0.3.0/GAP_ANALYSIS.md", "docs/milestones/v0.3.0/SLICE_GRAPH.md"],
       "owner_decisions": {"OD-1": "APPROVED_WITH_AMENDMENTS 2026-09-02 (I1, I5 amended; R-1..R-6)", "OD-2": "APPROVED_WITH_AMENDMENTS 2026-09-02", "adr": "ADR-010"},
       "seat_models": {"supervisor": "claude-fable-5-1-thinking-max", "planner_implementer": "gpt-5.6-sol-max", "reviewer": "cursor-grok-4.6-xhigh", "ladders": "4 plans / 8 implementation candidates per slice, then BLOCKED_FOR_OWNER", "owner_lead_agent": "claude-fable-5.1 (Cursor) — delegated owner authority 2026-09-12; plugin ceremony cancelled 2026-09-07"},
@@ -171,7 +171,7 @@
         }
       },
       "route_coverage_matrix": "docs/milestones/v0.3.0/SLICE_GRAPH.md#9",
-      "last_updated": "2026-09-23T07:16:13Z"
+      "last_updated": "2026-09-23T08:26:08Z"
     }
   }
 }

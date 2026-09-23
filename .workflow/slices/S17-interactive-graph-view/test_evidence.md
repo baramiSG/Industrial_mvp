@@ -23,3 +23,9 @@ Generated evidence:
 - 112/112 WebPs byte-identical through final review correction.
 
 The reviewer independently ran the hash-bound stdlib oracle: 4 tests, OK. Hosted CI remains pending until the reviewed owner-record delta is committed and pushed.
+
+## Hosted and merged-main delivery
+
+- PR run `35831654002`: six of six checks passed on head `a0b7141eb681184ab47b0d3d92f37f97a028a675`.
+- Main run `35834129601`: six of six checks passed on merge `e10225005fe13295d1c10e443276e0139be806c6`.
+- Clean merged-main: integrity PASS; 2,887 pytest PASS; smoke PASS; all reconstruction stages PASS; graph build-check PASS at 925/1,045.

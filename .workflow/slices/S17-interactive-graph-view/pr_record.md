@@ -1,9 +1,12 @@
 # S17 PR and delivery record
 
-Pre-PR status: independently APPROVED and owner-ACCEPTED; owner-record delta confirmation pending before commit.
+Delivery: [PR #35](https://github.com/baramiSG/Industrial_mvp/pull/35), squash-merged 2026-09-23 as `e10225005fe13295d1c10e443276e0139be806c6`.
 
-Authorized target: `baramiSG/Industrial_mvp`, branch `slice/s17-interactive-graph-view`, base `main` at `6e85eeec2686c59ae3c0d9e7dcb0baf2d7f2dcd8`.
+- Reviewed/committed head: `a0b7141eb681184ab47b0d3d92f37f97a028a675`.
+- Reviewed/merged tree: `5da017e824bab7c3f1313f2a8d0332f48c9a2dab` (exact equality).
+- PR CI: run `35831654002`, six of six checks passed.
+- Merged-main CI: run `35834129601`, six of six checks passed.
+- Independent reviewer: final correction APPROVE, zero unresolved findings; bounded owner-record and formatting confirmations APPROVE.
+- Owner decision: ACCEPT and merge go after exact-head CI.
 
-Required remaining sequence: bounded independent confirmation of owner-only records/state → exact reviewed commit → push → PR → all six exact-head CI jobs green → owner merge go → squash merge → merged-main CI and local receipt.
-
-No commit, push, PR, hosted CI, merge or delivery result is claimed here.
+Post-merge clean worktree passed integrity, 2,887 pytest, smoke, full reconstruction and graph build-check. Remote task branch was deleted. Aura was not refreshed or cleared.

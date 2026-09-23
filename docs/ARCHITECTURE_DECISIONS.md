@@ -1461,7 +1461,7 @@ The governed pair uses `ENABLER-SYN-ALU-CASTHOUSE-001`, cost 25 M SAR, foil P/sh
 
 ## ADR-027 — Bilingual interactive graph view and evidence-bound lifecycle
 
-**Status:** Uncommitted S17 correction candidate. Graph and product-manifest allocations are complete and must not replay. All visual allocations, including the F01 corrective refresh `S17-FINAL-REVIEW-R1`, are complete; that refresh produced zero WebP changes and updated visual source provenance only. Final independent re-review, owner acceptance and delivery remain pending.
+**Status:** Accepted on squash merge of [PR #35](https://github.com/baramiSG/Industrial_mvp/pull/35) as `e102250` (2026-09-23). Graph and product-manifest allocations are complete and must not replay. All visual allocations, including `S17-FINAL-REVIEW-R1`, are complete; that refresh produced zero WebP changes. Independent correction re-review, separate owner acceptance, PR/main CI and merged-main verification passed.
 
 **Context:** Methodology §§8.3, 9, 10.3, 11 and 15 require evidence-backed dependencies, explicit uncertainty and drill-down without anonymous authorization. Core 03 permits only approved GenUI types. S16b supplies four fixed live graph views and fail-closed service behavior. The independently approved S17 plan `421515e8…`, accepted by the owner, chooses deterministic custom SVG plus native controls and preserves the existing API, engine, projection vocabulary, routes, evidence and Aura deployment.
 

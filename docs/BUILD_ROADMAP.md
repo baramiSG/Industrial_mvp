@@ -243,16 +243,17 @@ operator verification passed on the original bound instance without clearing.
 PR/CI/merge delivery remains pending at this capture point; parent S16 does not
 complete until both children deliver.
 
-## S17 source implementation boundary
+## S17 interactive graph view delivery
 
-The independently approved S17 plan adds one collapsed, lazy `graph_view`
-component after decision actions, four fixed bilingual deterministic SVG/native
-control views, stored-evidence drill-down, race-safe context invalidation, an
-ordered live graph/UI gate and sixteen visual paths. The bounded dependency
-amendment permits only the graph-service public evidence-edge isolation repair
-and combined node/edge warning calculation. Source implementation remains
-uncommitted; graph, product-manifest and canonical-visual generations and all
-later review/delivery gates remain separate.
+S17 delivered through [PR #35](https://github.com/baramiSG/Industrial_mvp/pull/35)
+as squash `e102250` on 2026-09-23. The approved collapsed, lazy `graph_view`
+provides four bilingual deterministic SVG/native-control views, stored-evidence
+drill-down, race-safe mode/opportunity invalidation and the ordered live graph/UI
+gate. `S17-DEP-AM1` retains public/simulation edge isolation. The governed graph
+is `GRAPH-SAU-2026-09-12-b63159c7bdc1` at 925/1,045; manifests and 112 visuals
+are current. Independent correction re-review approved with zero findings, both
+PR and merged-main CI passed 6/6, and clean merged-main integrity, pytest, smoke,
+reconstruction and graph build-check passed. Aura remains deliberately unrefreshed.
 
 ## Explicit non-goals for v0.3.0
 

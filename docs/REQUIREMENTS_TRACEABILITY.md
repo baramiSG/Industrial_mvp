@@ -410,12 +410,14 @@ This candidate remains uncommitted on its delivery branch. Product verification 
 
 | ID | Observable acceptance | Implementation evidence | Status | Slice |
 |---|---|---|---|---|
-| V3-E4 | Four fixed bilingual graph views render through the approved GenUI registry with deterministic SVG and equivalent native controls. | `graph_view` descriptor, explicit 19-node/15-edge label maps, pure layout/validation/escaping tests. | IMPLEMENTED; generated and browser evidence pending | S17 |
-| V3-A2-GRAPH | The graph remains collapsed and request-free initially; opportunity, mode, view, close, locale and evidence races cannot restore stale content. | Independent graph epoch/context plus guarded workspace and portfolio epochs; browser race inventory. | IMPLEMENTED; browser execution pending | S17 |
-| V3-S17-EVIDENCE | Node and edge references resolve only to stored evidence; conflicting records remain opportunity-qualified and missing references remain explicit. | Existing analysis endpoints, URL allowlist, escaped document addresses and contract/security tests. | IMPLEMENTED; browser execution pending | S17 |
-| V3-S17-ISOLATION | Public payloads contain only public nodes and edges; simulated state and both warning labels account for synthetic nodes and edges. | All-case/view serializer regression, edge-only warning regression and client public-payload rejection. | TESTED focused; integrated inputs pending | S17 |
-| V3-S17-LIVE | The existing graph gate runs graph-only equality, then non-intercepted graph UI, then stop/unavailable without changing the default credential-stripped browser environment. | Exact Make/CI contract and dev-only import/collection gate. | IMPLEMENTED; live execution pending | S17 |
-| V3-S17-VISUAL | Sixteen graph captures extend 96 retained paths to 112 with fixed provenance, RGB, byte budgets and tolerances. | Visual source/matrix contracts and fixture identities. | IMPLEMENTED source; canonical allocation pending | S17 |
+| V3-E4 | Four fixed bilingual graph views render through the approved GenUI registry with deterministic SVG and equivalent native controls. | `graph_view`, explicit 19-node/15-edge maps, pure layout contracts, browser journeys and hosted CI. | TESTED | S17 |
+| V3-A2-GRAPH | The graph remains collapsed and request-free initially; opportunity, mode, view, close, locale and evidence races cannot restore stale content. | Epoch/context guards plus F01 delayed-Public regression; two exact-root CI passes and hosted CI. | TESTED | S17 |
+| V3-S17-EVIDENCE | Node and edge references resolve only to stored evidence; conflicting records remain opportunity-qualified and missing references remain explicit. | Existing analysis endpoints, URL allowlist, escaped addresses, contract/security and browser drill-down tests. | TESTED | S17 |
+| V3-S17-ISOLATION | Public payloads contain only public nodes and edges; simulated state and both warning labels account for synthetic nodes and edges. | All-case/view serializer regression, edge-only warnings, client rejection and hosted graph/browser gates. | TESTED | S17 |
+| V3-S17-LIVE | The existing graph gate runs graph-only equality, then non-intercepted graph UI, then stop/unavailable without changing the default credential-stripped browser environment. | Local verification/portability and hosted graph job passed the exact ordered gate. | TESTED | S17 |
+| V3-S17-VISUAL | Sixteen graph captures extend 96 retained paths to 112 with fixed provenance, RGB, byte budgets and tolerances. | Canonical manifest `S17-FINAL-REVIEW-R1`; 112 entries; final refresh changed zero WebPs; local and hosted visual gates passed. | TESTED | S17 |
+
+Delivered on [PR #35](https://github.com/baramiSG/Industrial_mvp/pull/35) as squash `e10225005fe13295d1c10e443276e0139be806c6` after independent correction re-review APPROVE, separate owner acceptance, PR run `35831654002` and merged-main run `35834129601`, each 6/6 green. Clean merged-main integrity, 2,887 pytest, smoke, full reconstruction and graph build-check passed; Aura remains unrefreshed by design.
 
 ## Branch and release-state rules
 
