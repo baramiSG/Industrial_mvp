@@ -1,0 +1,693 @@
+{
+  "environment": {
+    "chromium_revision": "chromium-1234",
+    "device_scale_factor": 1,
+    "font_hashes": {
+      "src/ior_mvp/static/assets/fonts/noto-sans-arabic/noto-sans-arabic-arabic-wght-normal.woff2": "ce85091f020920b65762b387b194ef59457ea5b25b760f2dcc35240a94bb8669",
+      "src/ior_mvp/static/assets/fonts/noto-sans/noto-sans-latin-wght-normal.woff2": "51ca196f49a33e79e7870ff88ebd2829a3f627a51e7d690986618f0e7ad2b52d"
+    },
+    "launch_flags": [
+      "--font-render-hinting=none",
+      "--disable-lcd-text",
+      "--force-color-profile=srgb"
+    ],
+    "locales": {
+      "ar": "ar-SA",
+      "en": "en-US"
+    },
+    "playwright_version": "1.62.0",
+    "producer_base_digest": "mcr.microsoft.com/playwright/python:v1.62.0-noble@sha256:aa81288e738725378becba5b3e06cb0f3a7f012a610e87e8d767a090ea3f740d",
+    "producer_image": "ior-visual-baselines:playwright-1.62.0-noble",
+    "producer_image_id": "sha256:938b534c8bac0f80012299fc0bba33c00d29f2ade02416bbc1df9d9c028f8112",
+    "projection_id": "GRAPH-SAU-2026-09-12-b63159c7bdc1",
+    "pytest_playwright_version": "0.9.0",
+    "python_version": "3.12.3",
+    "root": "/workspace",
+    "scratch_head": "564b1b7a3924ba14d219af8ed027c54311911910",
+    "source_tree_oid": "37390c9ad07556e88e6c608091c6e9c413acb4a5",
+    "viewport": {
+      "height": 900,
+      "width": 1440
+    }
+  },
+  "label": "old-repeat-ar",
+  "measurement": {
+    "requests": [
+      "/api/graph/catalogue",
+      "/api/graph/opportunities/SAU-H0-721049/views/adjacency?mode=public",
+      "/api/graph/opportunities/SAU-H0-721049/views/evidence_to_change?mode=public"
+    ],
+    "row_count": 12,
+    "rows": [
+      {
+        "below_fold": false,
+        "button": {
+          "bottom": 782.19,
+          "height": 64,
+          "left": 80.02,
+          "right": 561.02,
+          "top": 718.19,
+          "width": 481
+        },
+        "button_relative_bottom": 110,
+        "button_relative_top": 46,
+        "clipped_at_fold": false,
+        "index": 1,
+        "label": "\u0645\u0642\u064a\u062f \u0628\u0648\u0627\u0633\u0637\u0629",
+        "small": {
+          "bottom": 771.19,
+          "height": 42,
+          "left": 91.02,
+          "right": 484.95,
+          "top": 729.19,
+          "width": 393.94
+        },
+        "small_band_offsets": [
+          {
+            "bottom": 34,
+            "top": 19
+          },
+          {
+            "bottom": 51.5,
+            "top": 36.5
+          }
+        ],
+        "small_bands": 2,
+        "source": "DEC-SAU-H0-721049-public-ENGINE-a30f1c62564e",
+        "span": {
+          "bottom": 771.19,
+          "height": 42,
+          "left": 496.95,
+          "right": 550.02,
+          "top": 729.19,
+          "width": 53.06
+        },
+        "span_band_offsets": [
+          {
+            "bottom": 31,
+            "top": 12
+          },
+          {
+            "bottom": 52,
+            "top": 33
+          }
+        ],
+        "span_bands": 2,
+        "target": "CAP-SAU-H0-721049-capacity-time-window",
+        "token_count": 2
+      },
+      {
+        "below_fold": false,
+        "button": {
+          "bottom": 854.19,
+          "height": 64,
+          "left": 80.02,
+          "right": 561.02,
+          "top": 790.19,
+          "width": 481
+        },
+        "button_relative_bottom": 182,
+        "button_relative_top": 118,
+        "clipped_at_fold": false,
+        "index": 2,
+        "label": "\u0645\u0642\u064a\u062f \u0628\u0648\u0627\u0633\u0637\u0629",
+        "small": {
+          "bottom": 843.19,
+          "height": 42,
+          "left": 91.02,
+          "right": 476.64,
+          "top": 801.19,
+          "width": 385.63
+        },
+        "small_band_offsets": [
+          {
+            "bottom": 34,
+            "top": 19
+          },
+          {
+            "bottom": 51.5,
+            "top": 36.5
+          }
+        ],
+        "small_bands": 2,
+        "source": "DEC-SAU-H0-721049-public-ENGINE-a30f1c62564e",
+        "span": {
+          "bottom": 843.19,
+          "height": 42,
+          "left": 488.64,
+          "right": 550.02,
+          "top": 801.19,
+          "width": 61.38
+        },
+        "span_band_offsets": [
+          {
+            "bottom": 31,
+            "top": 12
+          },
+          {
+            "bottom": 52,
+            "top": 33
+          }
+        ],
+        "span_bands": 2,
+        "target": "INT-SAU-H0-721049-route-5",
+        "token_count": 2
+      },
+      {
+        "below_fold": false,
+        "button": {
+          "bottom": 926.19,
+          "height": 64,
+          "left": 80.02,
+          "right": 561.02,
+          "top": 862.19,
+          "width": 481
+        },
+        "button_relative_bottom": 254,
+        "button_relative_top": 190,
+        "clipped_at_fold": true,
+        "index": 3,
+        "label": "\u0645\u0642\u064a\u062f \u0628\u0648\u0627\u0633\u0637\u0629",
+        "small": {
+          "bottom": 915.19,
+          "height": 42,
+          "left": 91.02,
+          "right": 467.73,
+          "top": 873.19,
+          "width": 376.72
+        },
+        "small_band_offsets": [
+          {
+            "bottom": 34,
+            "top": 19
+          },
+          {
+            "bottom": 51.5,
+            "top": 36.5
+          }
+        ],
+        "small_bands": 2,
+        "source": "DEC-SAU-H0-721049-public-ENGINE-a30f1c62564e",
+        "span": {
+          "bottom": 915.19,
+          "height": 42,
+          "left": 479.73,
+          "right": 550.02,
+          "top": 873.19,
+          "width": 70.28
+        },
+        "span_band_offsets": [
+          {
+            "bottom": 31,
+            "top": 12
+          },
+          {
+            "bottom": 52,
+            "top": 33
+          }
+        ],
+        "span_bands": 2,
+        "target": "SAU-H0-721049",
+        "token_count": 2
+      },
+      {
+        "below_fold": true,
+        "button": {
+          "bottom": 998.19,
+          "height": 64,
+          "left": 80.02,
+          "right": 561.02,
+          "top": 934.19,
+          "width": 481
+        },
+        "button_relative_bottom": 326,
+        "button_relative_top": 262,
+        "clipped_at_fold": false,
+        "index": 4,
+        "label": "\u0645\u0642\u064a\u062f \u0628\u0648\u0627\u0633\u0637\u0629",
+        "small": {
+          "bottom": 987.19,
+          "height": 42,
+          "left": 91.02,
+          "right": 477.75,
+          "top": 945.19,
+          "width": 386.73
+        },
+        "small_band_offsets": [
+          {
+            "bottom": 34,
+            "top": 19
+          },
+          {
+            "bottom": 51.5,
+            "top": 36.5
+          }
+        ],
+        "small_bands": 2,
+        "source": "DEC-SAU-H0-721049-public-ENGINE-a30f1c62564e",
+        "span": {
+          "bottom": 987.19,
+          "height": 42,
+          "left": 489.75,
+          "right": 550.02,
+          "top": 945.19,
+          "width": 60.27
+        },
+        "span_band_offsets": [
+          {
+            "bottom": 31,
+            "top": 12
+          },
+          {
+            "bottom": 52,
+            "top": 33
+          }
+        ],
+        "span_bands": 2,
+        "target": "SPEC-SAU-H0-721049-TARGET",
+        "token_count": 2
+      },
+      {
+        "below_fold": true,
+        "button": {
+          "bottom": 1070.19,
+          "height": 64,
+          "left": 80.02,
+          "right": 561.02,
+          "top": 1006.19,
+          "width": 481
+        },
+        "button_relative_bottom": 398,
+        "button_relative_top": 334,
+        "clipped_at_fold": false,
+        "index": 5,
+        "label": "\u0645\u0642\u064a\u062f \u0628\u0648\u0627\u0633\u0637\u0629",
+        "small": {
+          "bottom": 1059.19,
+          "height": 42,
+          "left": 91.02,
+          "right": 477.75,
+          "top": 1017.19,
+          "width": 386.73
+        },
+        "small_band_offsets": [
+          {
+            "bottom": 34,
+            "top": 19
+          },
+          {
+            "bottom": 51.5,
+            "top": 36.5
+          }
+        ],
+        "small_bands": 2,
+        "source": "DEC-SAU-H0-721049-public-ENGINE-a30f1c62564e",
+        "span": {
+          "bottom": 1059.19,
+          "height": 42,
+          "left": 489.75,
+          "right": 550.02,
+          "top": 1017.19,
+          "width": 60.27
+        },
+        "span_band_offsets": [
+          {
+            "bottom": 31,
+            "top": 12
+          },
+          {
+            "bottom": 52,
+            "top": 33
+          }
+        ],
+        "span_bands": 2,
+        "target": "SPEC-SAU-H0-721049-TARGET",
+        "token_count": 2
+      },
+      {
+        "below_fold": true,
+        "button": {
+          "bottom": 1124.69,
+          "height": 46.5,
+          "left": 80.02,
+          "right": 561.02,
+          "top": 1078.19,
+          "width": 481
+        },
+        "button_relative_bottom": 452.5,
+        "button_relative_top": 406,
+        "clipped_at_fold": false,
+        "index": 6,
+        "label": "\u0645\u0633\u0646\u062f \u0628\u062f\u0644\u064a\u0644",
+        "small": {
+          "bottom": 1113.69,
+          "height": 24.5,
+          "left": 91.02,
+          "right": 434.53,
+          "top": 1089.19,
+          "width": 343.52
+        },
+        "small_band_offsets": [
+          {
+            "bottom": 34,
+            "top": 19
+          }
+        ],
+        "small_bands": 1,
+        "source": "CAP-SAU-H0-721049-capacity-time-window",
+        "span": {
+          "bottom": 1113.69,
+          "height": 24.5,
+          "left": 484.58,
+          "right": 550.02,
+          "top": 1089.19,
+          "width": 65.44
+        },
+        "span_band_offsets": [
+          {
+            "bottom": 31,
+            "top": 12
+          }
+        ],
+        "span_bands": 1,
+        "target": "S-UNICOIL-EPD",
+        "token_count": 2
+      },
+      {
+        "below_fold": true,
+        "button": {
+          "bottom": 1179.19,
+          "height": 46.5,
+          "left": 80.02,
+          "right": 561.02,
+          "top": 1132.69,
+          "width": 481
+        },
+        "button_relative_bottom": 507,
+        "button_relative_top": 460.5,
+        "clipped_at_fold": false,
+        "index": 7,
+        "label": "\u0645\u0633\u0646\u062f \u0628\u062f\u0644\u064a\u0644",
+        "small": {
+          "bottom": 1168.19,
+          "height": 24.5,
+          "left": 91.02,
+          "right": 285.84,
+          "top": 1143.69,
+          "width": 194.83
+        },
+        "small_band_offsets": [
+          {
+            "bottom": 34,
+            "top": 19
+          }
+        ],
+        "small_bands": 1,
+        "source": "SAU-H0-721049",
+        "span": {
+          "bottom": 1168.19,
+          "height": 24.5,
+          "left": 484.58,
+          "right": 550.02,
+          "top": 1143.69,
+          "width": 65.44
+        },
+        "span_band_offsets": [
+          {
+            "bottom": 31,
+            "top": 12
+          }
+        ],
+        "span_bands": 1,
+        "target": "S-UNICOIL-EPD",
+        "token_count": 2
+      },
+      {
+        "below_fold": true,
+        "button": {
+          "bottom": 1233.69,
+          "height": 46.5,
+          "left": 80.02,
+          "right": 561.02,
+          "top": 1187.19,
+          "width": 481
+        },
+        "button_relative_bottom": 561.5,
+        "button_relative_top": 515,
+        "clipped_at_fold": false,
+        "index": 8,
+        "label": "\u0645\u0633\u0646\u062f \u0628\u062f\u0644\u064a\u0644",
+        "small": {
+          "bottom": 1222.69,
+          "height": 24.5,
+          "left": 91.02,
+          "right": 285.84,
+          "top": 1198.19,
+          "width": 194.83
+        },
+        "small_band_offsets": [
+          {
+            "bottom": 34,
+            "top": 19
+          }
+        ],
+        "small_bands": 1,
+        "source": "SAU-H0-721049",
+        "span": {
+          "bottom": 1222.69,
+          "height": 24.5,
+          "left": 484.58,
+          "right": 550.02,
+          "top": 1198.19,
+          "width": 65.44
+        },
+        "span_band_offsets": [
+          {
+            "bottom": 31,
+            "top": 12
+          }
+        ],
+        "span_bands": 1,
+        "target": "S-UNICOIL-EPD",
+        "token_count": 2
+      },
+      {
+        "below_fold": true,
+        "button": {
+          "bottom": 1288.19,
+          "height": 46.5,
+          "left": 80.02,
+          "right": 561.02,
+          "top": 1241.69,
+          "width": 481
+        },
+        "button_relative_bottom": 616,
+        "button_relative_top": 569.5,
+        "clipped_at_fold": false,
+        "index": 9,
+        "label": "\u0645\u0633\u0646\u062f \u0628\u062f\u0644\u064a\u0644",
+        "small": {
+          "bottom": 1277.19,
+          "height": 24.5,
+          "left": 91.02,
+          "right": 291.11,
+          "top": 1252.69,
+          "width": 200.09
+        },
+        "small_band_offsets": [
+          {
+            "bottom": 34,
+            "top": 19
+          }
+        ],
+        "small_bands": 1,
+        "source": "SAU-H0-721049",
+        "span": {
+          "bottom": 1277.19,
+          "height": 24.5,
+          "left": 484.58,
+          "right": 550.02,
+          "top": 1252.69,
+          "width": 65.44
+        },
+        "span_band_offsets": [
+          {
+            "bottom": 31,
+            "top": 12
+          }
+        ],
+        "span_bands": 1,
+        "target": "S-UNICOIL-SPEC",
+        "token_count": 2
+      },
+      {
+        "below_fold": true,
+        "button": {
+          "bottom": 1342.69,
+          "height": 46.5,
+          "left": 80.02,
+          "right": 561.02,
+          "top": 1296.19,
+          "width": 481
+        },
+        "button_relative_bottom": 670.5,
+        "button_relative_top": 624,
+        "clipped_at_fold": false,
+        "index": 10,
+        "label": "\u0645\u0633\u0646\u062f \u0628\u062f\u0644\u064a\u0644",
+        "small": {
+          "bottom": 1331.69,
+          "height": 24.5,
+          "left": 91.02,
+          "right": 291.11,
+          "top": 1307.19,
+          "width": 200.09
+        },
+        "small_band_offsets": [
+          {
+            "bottom": 34,
+            "top": 19
+          }
+        ],
+        "small_bands": 1,
+        "source": "SAU-H0-721049",
+        "span": {
+          "bottom": 1331.69,
+          "height": 24.5,
+          "left": 484.58,
+          "right": 550.02,
+          "top": 1307.19,
+          "width": 65.44
+        },
+        "span_band_offsets": [
+          {
+            "bottom": 31,
+            "top": 12
+          }
+        ],
+        "span_bands": 1,
+        "target": "S-UNICOIL-SPEC",
+        "token_count": 2
+      },
+      {
+        "below_fold": true,
+        "button": {
+          "bottom": 1397.19,
+          "height": 46.5,
+          "left": 80.02,
+          "right": 561.02,
+          "top": 1350.69,
+          "width": 481
+        },
+        "button_relative_bottom": 725,
+        "button_relative_top": 678.5,
+        "clipped_at_fold": false,
+        "index": 11,
+        "label": "\u0645\u0633\u0646\u062f \u0628\u062f\u0644\u064a\u0644",
+        "small": {
+          "bottom": 1386.19,
+          "height": 24.5,
+          "left": 91.02,
+          "right": 283.86,
+          "top": 1361.69,
+          "width": 192.84
+        },
+        "small_band_offsets": [
+          {
+            "bottom": 34,
+            "top": 19
+          }
+        ],
+        "small_bands": 1,
+        "source": "SAU-H0-721049",
+        "span": {
+          "bottom": 1386.19,
+          "height": 24.5,
+          "left": 484.58,
+          "right": 550.02,
+          "top": 1361.69,
+          "width": 65.44
+        },
+        "span_band_offsets": [
+          {
+            "bottom": 31,
+            "top": 12
+          }
+        ],
+        "span_bands": 1,
+        "target": "S-WITS-721049",
+        "token_count": 2
+      },
+      {
+        "below_fold": true,
+        "button": {
+          "bottom": 1451.69,
+          "height": 46.5,
+          "left": 80.02,
+          "right": 561.02,
+          "top": 1405.19,
+          "width": 481
+        },
+        "button_relative_bottom": 779.5,
+        "button_relative_top": 733,
+        "clipped_at_fold": false,
+        "index": 12,
+        "label": "\u0645\u0633\u0646\u062f \u0628\u062f\u0644\u064a\u0644",
+        "small": {
+          "bottom": 1440.69,
+          "height": 24.5,
+          "left": 91.02,
+          "right": 360.02,
+          "top": 1416.19,
+          "width": 269
+        },
+        "small_band_offsets": [
+          {
+            "bottom": 34,
+            "top": 19
+          }
+        ],
+        "small_bands": 1,
+        "source": "SPEC-SAU-H0-721049-TARGET",
+        "span": {
+          "bottom": 1440.69,
+          "height": 24.5,
+          "left": 484.58,
+          "right": 550.02,
+          "top": 1416.19,
+          "width": 65.44
+        },
+        "span_band_offsets": [
+          {
+            "bottom": 31,
+            "top": 12
+          }
+        ],
+        "span_bands": 1,
+        "target": "S-WITS-721049",
+        "token_count": 2
+      }
+    ],
+    "run_id_row_count": 5,
+    "section": {
+      "bottom": 1468.69,
+      "height": 796.5,
+      "left": 63.02,
+      "right": 578.02,
+      "top": 672.19,
+      "width": 515
+    },
+    "section_top": 672.19,
+    "state": {
+      "case": "SAU-H0-721049",
+      "dir": "rtl",
+      "dpr": 1,
+      "height": 900,
+      "lang": "ar",
+      "public_active": true,
+      "simulated_active": false,
+      "view": "evidence_to_change",
+      "width": 1440
+    }
+  }
+}

@@ -134,6 +134,8 @@ class EvidenceReference(FrozenModel):
                 raise ValueError(
                     "synthetic evidence reference metadata is invalid"
                 )
-        elif self.scenario_id is not None or self.display_labels is not None:
+        elif (self.scenario_id is not None or self.display_labels is not None
+              or self.status is EvidenceStatus.SYNTHETIC
+              or self.source == "DEMO_GENERATOR"):
             raise ValueError("public evidence cannot carry synthetic metadata")
         return self

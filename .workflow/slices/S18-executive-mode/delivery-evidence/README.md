@@ -1,0 +1,66 @@
+# S18a immutable implementation evidence subset
+
+This is the approved 55-file publication export, copied without byte changes in the separately reviewed S18b0 follow-up. It publishes 54 selected evidence files plus their original publication manifest; it does not publish the entire 856-file local implementation bundle.
+
+The immutable [implementation receipt](am4/AM4-IMPLEMENTATION-RECEIPT.md) has SHA-256 `8fc1368371a067bc3e2fe99359600be5d01c663024644e9e3d8147478e4122fb`. Its historical review-pending wording and local paths remain unchanged. The later independent Claude approval and actual delivery facts are linked in [delivery_record.md](../delivery_record.md). This wrapper maps the original evidence names to durable repository paths below.
+
+`AM4-FINAL-SHA256SUMS` binds all 856 files of the complete preserved local bundle. Running that historical list against this selected subset would correctly report missing files. Use this directory's `SHA256SUMS` to verify the published subset and wrapper; it excludes itself. The original publication manifest records byte size, original name and hash for every selected file. `.log` to `.log.txt` naming changes preserve bytes. No candidate archive, Git index, credentials, owner transcript or bulk runtime is included.
+
+| Original evidence path | Published copy | SHA-256 |
+|---|---|---|
+| `AM4-FINAL-SHA256SUMS` | [am4/AM4-FINAL-SHA256SUMS](am4/AM4-FINAL-SHA256SUMS) | `af9c76a7594ed497ae2f0b6f9098031b90f1416cc1034666c3522ac7ad238214` |
+| `AM4-IMPLEMENTATION-RECEIPT.md` | [am4/AM4-IMPLEMENTATION-RECEIPT.md](am4/AM4-IMPLEMENTATION-RECEIPT.md) | `8fc1368371a067bc3e2fe99359600be5d01c663024644e9e3d8147478e4122fb` |
+| `AM4-STOP-REPORT.md` | [am4/AM4-STOP-REPORT.md](am4/AM4-STOP-REPORT.md) | `9c2692d2f4d807db9fd8280780174635a532d89af7309d6ad91dc7f77c3c30e6` |
+| `CLAUDE-IMPLEMENTATION-REVIEW-HANDOFF.md` | [am4/CLAUDE-IMPLEMENTATION-REVIEW-HANDOFF.md](am4/CLAUDE-IMPLEMENTATION-REVIEW-HANDOFF.md) | `6e53ac09b41957561c92db1fbb33cb1cc1f2a0fa03ec246ab558390d0d20de4b` |
+| `final/am4-final.diff` | [am4/final/am4-final.diff](am4/final/am4-final.diff) | `f0cbd78d9c2f51b71860dfc0610f5adf40eccca267ca8cf260fa21f5a8485a00` |
+| `final/candidate-archive-verification.json` | [am4/final/candidate-archive-verification.json](am4/final/candidate-archive-verification.json) | `e3195c115464c4d1dfec0b3c674341d7113978852458042ac88b76040512684e` |
+| `final/candidate-identity.json` | [am4/final/candidate-identity.json](am4/final/candidate-identity.json) | `0ebb86609967c8b4a6d3aabd7e37311e57c8fc7009543270d8cc3b058a39b442` |
+| `final/ci-root1-result.json` | [am4/final/ci-root1-result.json](am4/final/ci-root1-result.json) | `d5685730378dd37d16be1e4e0166aabdf59cb4dc8e2733dc06aa69830c9d3e8d` |
+| `final/ci-root1.log` | [am4/final/ci-root1.log.txt](am4/final/ci-root1.log.txt) | `96cea2a81b6c067a5885d8973ee005d955c391ea273153d9d63a713e2ca1877d` |
+| `final/ci-root2-result.json` | [am4/final/ci-root2-result.json](am4/final/ci-root2-result.json) | `689c11af1cd8bfb2d6c49937b308e5d6c82610686a9230effc66829aa3259a77` |
+| `final/ci-root2.log` | [am4/final/ci-root2.log.txt](am4/final/ci-root2.log.txt) | `882235e5252e9271e393c68aba84bf5afff38d0d0162b607e8037cbf434d7c0c` |
+| `final/e2e-result.json` | [am4/final/e2e-result.json](am4/final/e2e-result.json) | `be6a5d1805523cc28a274be943cb61663facd59a7e00ad680e116a6543aae384` |
+| `final/e2e.log` | [am4/final/e2e.log.txt](am4/final/e2e.log.txt) | `2d44be283dc72b4f634552eb0d4d688ea7750d1988b77618cf263431304c8dd8` |
+| `final/final-preservation.json` | [am4/final/final-preservation.json](am4/final/final-preservation.json) | `5ddb15b948c17a00fb1716e56323fee2bdd0884cc5f5bce2a6316497d176f374` |
+| `final/focused-green-resumed.log` | [am4/final/focused-green-resumed.log.txt](am4/final/focused-green-resumed.log.txt) | `37f101463569fb668a3e2accb48da4da30d4955b7783db9cc4a6d33f793e0a00` |
+| `final/focused-green.log` | [am4/final/focused-green.log.txt](am4/final/focused-green.log.txt) | `4f7b67d2c0e2ea7ebb4a62de2dd0eeb5fff8d87146faacaae7ce8c5049acf742` |
+| `final/focused-red-host.log` | [am4/final/focused-red-host.log.txt](am4/final/focused-red-host.log.txt) | `d10d918906e880eb1c5d249bf95a2cb994f4607ade7561f52cd138cea62496cc` |
+| `final/preservation-before.json` | [am4/final/preservation-before.json](am4/final/preservation-before.json) | `0e31c7c946f6bcee27e94561e732b0b7780ebcdc1e72fb87ace208bdb6997f28` |
+| `final/proof-roots.json` | [am4/final/proof-roots.json](am4/final/proof-roots.json) | `47560577d638c2f44017e4c91bfb2935b0ae2fc524bbdd4e2b16b092483bab55` |
+| `final/r1-out/new-ar-relationships.json` | [am4/final/r1-out/new-ar-relationships.json](am4/final/r1-out/new-ar-relationships.json) | `f9f51f52c9c17c3a55f3ac13fe741afe18d132a9b5e9aba03f1629f000f3a0cc` |
+| `final/r1-out/new-ar-rewrite-relationships.json` | [am4/final/r1-out/new-ar-rewrite-relationships.json](am4/final/r1-out/new-ar-rewrite-relationships.json) | `9a951e3696de4f0ac736232d47d07559f8948cd5675d5e655e8f1082c713f8f5` |
+| `final/r1-out/new-en-relationships.json` | [am4/final/r1-out/new-en-relationships.json](am4/final/r1-out/new-en-relationships.json) | `8f712ab72092af3ee09097193731bf91104bdad98bcda4bc0e32cd3a812e0502` |
+| `final/r1-out/new-en-rewrite-relationships.json` | [am4/final/r1-out/new-en-rewrite-relationships.json](am4/final/r1-out/new-en-rewrite-relationships.json) | `27c1d570231d1e80a0f8b182d9a39b61a8ec7f839beb4faa128508baf2db452a` |
+| `final/r1-out/new-relationships.json` | [am4/final/r1-out/new-relationships.json](am4/final/r1-out/new-relationships.json) | `06dc5312966e64ffd82b3494e06ad965932c90e631e496e07da61646ab8754e9` |
+| `final/r1-out/old-ar-relationships.json` | [am4/final/r1-out/old-ar-relationships.json](am4/final/r1-out/old-ar-relationships.json) | `57b6c60ff5fa7b97ef772f12534edc81c0f5af762dfe1a318b7027b42bc056fc` |
+| `final/r1-out/old-en-relationships.json` | [am4/final/r1-out/old-en-relationships.json](am4/final/r1-out/old-en-relationships.json) | `9d2a6772103c2555abd75bde4438df17b455a7a0264ba457332552debf379944` |
+| `final/r1-out/old-relationships.json` | [am4/final/r1-out/old-relationships.json](am4/final/r1-out/old-relationships.json) | `d45ef2190ed25e4b7ec4e351f47bac669f4b831b9bdfef14d671b8312294195c` |
+| `final/r1-out/old-repeat-ar-relationships.json` | [am4/final/r1-out/old-repeat-ar-relationships.json](am4/final/r1-out/old-repeat-ar-relationships.json) | `69a2e1966f8458f085ca415068d4ab65bae7c70c1c884f31413a1ad9a28257b4` |
+| `final/r1-out/old-repeat-en-relationships.json` | [am4/final/r1-out/old-repeat-en-relationships.json](am4/final/r1-out/old-repeat-en-relationships.json) | `ba3b14a403dc604cc7bdf236094f053b714080dcfd94648798bdbbba56d20932` |
+| `final/r1-out/old-repeat-relationships.json` | [am4/final/r1-out/old-repeat-relationships.json](am4/final/r1-out/old-repeat-relationships.json) | `9d9ef7d2e8ed478d21954b10e20aef640c8ef3c1fe2cd7bc0d11abc279a07c77` |
+| `final/r1-out/relationships-comparison.json` | [am4/final/r1-out/relationships-comparison.json](am4/final/r1-out/relationships-comparison.json) | `3b8783c683ea97ed470e089bba44e0b26a6884cc015a2766124e609036374c39` |
+| `final/r1-probe-result.json` | [am4/final/r1-probe-result.json](am4/final/r1-probe-result.json) | `b0e3a0e6f40c6e2ae581a2e6263959f663e790b20f557eba0a327682d3f90e01` |
+| `final/skills-applied.json` | [am4/final/skills-applied.json](am4/final/skills-applied.json) | `da5a8f7b7bc2f3af3c6c7d2d75f66cfab1d4e6aeafb11f740c2e11e7fdf56601` |
+| `final/task8-all11-focused.log` | [am4/final/task8-all11-focused.log.txt](am4/final/task8-all11-focused.log.txt) | `4d9c35b081d4b15d0c6d7f08a70ef6e9f1182d4a9b32a45b5489762d10563640` |
+| `final/task8-all11-outcomes.log` | [am4/final/task8-all11-outcomes.log.txt](am4/final/task8-all11-outcomes.log.txt) | `627154fd2d27f901ea746858ce088160560501ede3c65b65de74c09b4a4d8046` |
+| `final/task8-compile.log` | [am4/final/task8-compile.log.txt](am4/final/task8-compile.log.txt) | `5ada081fb5cf4f4ecedf1c1ebea40f2e7f5101dc191194115d75de03a46be5e0` |
+| `final/task8-es-modules.log` | [am4/final/task8-es-modules.log.txt](am4/final/task8-es-modules.log.txt) | `c5499508d71be2d1cfd8063ec266568f6eb0d6e53c7a97f61ea97dfde0649cfe` |
+| `final/task8-frozen-status-isolation.log` | [am4/final/task8-frozen-status-isolation.log.txt](am4/final/task8-frozen-status-isolation.log.txt) | `b73a5e1514dcb246c5e03a6311a3b73d14d54e53b18e54b92fadff0190dfd8d6` |
+| `final/task8-full-pytest.log` | [am4/final/task8-full-pytest.log.txt](am4/final/task8-full-pytest.log.txt) | `b72705d518bb9266c8021013c8898c34274f11be96430380ef27b7994cbe7818` |
+| `final/task8-graph-build-check.log` | [am4/final/task8-graph-build-check.log.txt](am4/final/task8-graph-build-check.log.txt) | `92746f5fbae6f81948ab1be69a60fcc34724e9f5bcc29361e91ff3a4fce9c5d0` |
+| `final/task8-graph-validate.log` | [am4/final/task8-graph-validate.log.txt](am4/final/task8-graph-validate.log.txt) | `792d63282441ff0d3b943acc7ab06b173d3293f6a259893c61bfc093656b6e39` |
+| `final/task8-integrity.log` | [am4/final/task8-integrity.log.txt](am4/final/task8-integrity.log.txt) | `6137708aba455cfee91d052228c79b138320a0d55b2519e89b55207d3ccf6f69` |
+| `final/task8-materialize.log` | [am4/final/task8-materialize.log.txt](am4/final/task8-materialize.log.txt) | `693c12f1ff44043885aac3b142ac35bc3acebaadc4cd314f55b19dbbcbd2034b` |
+| `final/task8-prohibited-secret.log` | [am4/final/task8-prohibited-secret.log.txt](am4/final/task8-prohibited-secret.log.txt) | `c953d377dfa758fb7867aebd5b67a50ca82ac70f617380bb86054bd522d5921f` |
+| `final/task8-reconstruction.log` | [am4/final/task8-reconstruction.log.txt](am4/final/task8-reconstruction.log.txt) | `7e223e6317f9a51645473af87ee96ea66cd4a223e094db02cda35f71c1262caf` |
+| `final/task8-results.json` | [am4/final/task8-results.json](am4/final/task8-results.json) | `83067709d1c9f0da8a4375448e9c47b2fa129b65182f0e5dda2f4fc09a856cde` |
+| `final/task8-runner.log` | [am4/final/task8-runner.log.txt](am4/final/task8-runner.log.txt) | `b995bd5273b5f9561f450f95dc7f47192b7d436fe3e539912f4dd9523fd5ae5b` |
+| `final/task8-scenarios.log` | [am4/final/task8-scenarios.log.txt](am4/final/task8-scenarios.log.txt) | `5fe2781c90f86a3270c20b983e7ade6e1335e757fa950b814ee23722c30bcc6e` |
+| `final/task8-smoke.log` | [am4/final/task8-smoke.log.txt](am4/final/task8-smoke.log.txt) | `aa3799a8bafe0606e321da35e540dc1785bd91bb1179e3f0a6dd4dcf8440abb4` |
+| `final/task8-thresholds.log` | [am4/final/task8-thresholds.log.txt](am4/final/task8-thresholds.log.txt) | `98f5413b9659eb08d7ba4128c3efa05b116b9ff49dbdd0b0ee35bc8247a615c1` |
+| `final/task8-ui-contracts.log` | [am4/final/task8-ui-contracts.log.txt](am4/final/task8-ui-contracts.log.txt) | `61b5a6f60e2b09b8215f2a6d796f962f3a994de52f0b6ca8560ca787d2f035a3` |
+| `final/task8-uv-sync.log` | [am4/final/task8-uv-sync.log.txt](am4/final/task8-uv-sync.log.txt) | `da790c1e7b1fa500b131cb8f1b254971dc074476991fd65ac4e7301669f578b3` |
+| `final/verification-infrastructure-notes.md` | [am4/final/verification-infrastructure-notes.md](am4/final/verification-infrastructure-notes.md) | `005b53ca903e20aa61a6278d911717783c2d42d70d97e5145641ad8d5b66d1f6` |
+| `authenticated Claude assistant text` | [claude-am4-implementation-review.md](claude-am4-implementation-review.md) | `8c5ae016ada1adf520352afbe2679bbe82c455d121ff32a355695a315d8a5562` |
+
+Sanad: hashes and sizes checked against the independently reviewed export before copying. Test results are historical exact-tree evidence, not new S18b0 runs. Muhasabah: PASS for this bounded publication; the complete original bundle remains preserved locally.

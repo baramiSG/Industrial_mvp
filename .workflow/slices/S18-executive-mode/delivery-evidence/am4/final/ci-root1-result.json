@@ -1,0 +1,46 @@
+{
+  "label": "ci-root1",
+  "command": [
+    "make",
+    "ci"
+  ],
+  "cwd": "/tmp/s18-am4-ci-root1",
+  "tree": "1364789a964f96f6ebabf8eae1d239a5bad0b15e",
+  "head": "5964d28b5270b5be89ec804d5a51cecef99d16dd",
+  "started_at_utc": "2026-09-23T19:25:05.288250+00:00",
+  "environment_overrides": {
+    "PLAYWRIGHT_BROWSERS_PATH": "/home/barami/.playwright-browsers",
+    "IOR_VISUAL_MODE": "compare",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "NEO4J_DATABASE": "neo4j",
+    "COMPOSE_FILE": "/tmp/s18-am4-ci-root1/docker-compose.yml:/tmp/s18-am4-codex-implementation/ci-root1-compose.override.yml",
+    "COMPOSE_PROJECT_NAME": "s18-am4-ci-root1",
+    "GRAPH_PYCACHE_PREFIX": "/tmp/s18-am4-ci-root1-pycache"
+  },
+  "clean_before": true,
+  "graph_container": {
+    "id": "e0f2175d85e0bf3e2513f1eeee2bc9bf52c349293a0d7df2409be55e78731545",
+    "created": "2026-09-23T19:25:06.806741765Z",
+    "image_id": "sha256:037cf5756f0135cbfd66b739b6df7c7c4bb100f9ce11602f6f9538e17e02c74d",
+    "name": "/s18-am4-ci-root1-neo4j",
+    "volume_names": [
+      "e15b3e9c9354116aced1b7f6443d6f15275541de83c238dea7ed96fb7ae4f49a",
+      "s18-am4-ci-root1-data"
+    ],
+    "network_names": [
+      "s18-am4-ci-root1-net"
+    ]
+  },
+  "exit_code": 0,
+  "duration_seconds": 1212.228,
+  "clean_after": true,
+  "tree_after": "1364789a964f96f6ebabf8eae1d239a5bad0b15e",
+  "log": "ci-root1.log",
+  "credential": {
+    "created_fresh": true,
+    "mode": "0o600",
+    "sha256": "53dafdd8ea09cb13a52f27f7813d0f253ff4d9a563ca7690aa9b6a31a4d229eb",
+    "path": "/tmp/s18-am4-ci-root1/.secrets/neo4j_auth.txt",
+    "value_disclosed": false
+  }
+}

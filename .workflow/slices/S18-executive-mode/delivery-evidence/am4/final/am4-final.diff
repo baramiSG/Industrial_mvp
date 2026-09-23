@@ -1,0 +1,908 @@
+diff --git a/.workflow/slices/S18-executive-mode/plan-amendment-4.md b/.workflow/slices/S18-executive-mode/plan-amendment-4.md
+new file mode 100644
+index 0000000..c636ca0
+--- /dev/null
++++ b/.workflow/slices/S18-executive-mode/plan-amendment-4.md
+@@ -0,0 +1,80 @@
++# DRAFT — S18a PLAN v1 Amendment 4: rejected executive-candidate correction
++
++**Status:** planner proposal for Claude Code's independent plan-and-handoff review, then owner acceptance. The initial AM-4 packet was rejected for AM4-F1; this corrected packet awaits Claude Code re-review and owner acceptance. No candidate edit, staging, regeneration, or implementation is authorized by this draft. It supersedes only the repair and verification instructions stated here; the approved PLAN v1, AM-1, corrected AM-2, AM-3 and AM-3 R1, including the exact two-image exception and corrected geometry gate, remain binding. Current rejected tree: `2ab8d401c2312725540aa6270d449da16a96e01f` on `slice/s18-executive-mode`, HEAD `564b1b7a3924ba14d219af8ed027c54311911910`. Codex plans, Windsurf Cascade implements after approval and owner acceptance, and Claude Code alone approves the plan and exact implementation tree. Historical approvals and the owner-accepted AM-3/R1 decisions retain their original attribution.
++
++## 1. Trigger, evidence, authority and decision requested
++
++Claude's exact-tree review of `2ab8d401…` returned **REJECT** on B1–B3 and D1. Cascade independently reproduced all four in the retained scratch tree without editing it; the report is `/home/barami/.cache/industrial-opportunity-resolution-mvp/s18-am3-r1/REJECT-2ab8d401-reproduction.md` (SHA-256 `a2f98285a32b5857e768383e9a538d1863b40175f90c7af9b18dae5b10e65475`). Claude's review and later boundary correction are the assistant messages at lines 1080 and 1099 of `/home/barami/.claude/projects/-home-barami-projects-industrial-opportunity-resolution-mvp/c22afe51-efb5-4451-a04c-bada16c2695a.jsonl`; the packet's evidence index distinguishes these reviews from this planner's limited probes. Earlier green receipts establish only that the rejected tree passed the then-executed gates, not implementation acceptance or the correctness of the repaired tree.
++
++These are corrections to the already approved S18a executive projection contract: all loaded cases must be explainable, absent values typed, linked contradictions retained, and cross-scenario evidence fail-closed. They must not change real/simulated engine decisions, methodology terms, evidence boundary, route ordering, thresholds, frozen data or the two bound WebPs. Manifest §7.4 is inapplicable because no governing methodology meaning or Core text changes. Ordinary §7.2 describes unchanged observable behavior, while B1/B2 necessarily correct observable executive API output. **Owner ruling requested:** accept this bounded contract-conformance correction under the existing S18a implementation authority with §7.2's unit/golden/integrity proof and the additional exact-tree gates below; record explicitly that the executive API's previously nonconforming observable responses change. This is a proposed classification, not an assertion that literal §7.2 already covers it. If the owner or Claude finds a methodology interpretation or new authority boundary, stop under Manifest §10 and amend the plan before implementation.
++
++## 2. Exact repair contracts and focused proof
++
++### B1 — legitimate absent preferred route
++
++`case_projection.py:119` currently sends `preferred_hypothesis=None` into `_mapping`, yielding a false integrity 422 for eight cases. In `build_steps`, distinguish a **present** `preferred_hypothesis` with value `None` from an absent or malformed field. Accept a present `None` **whatever the route-status mix**, and project `PUBLIC_CONCLUSION.preferred_route_code` as the existing typed `ExecutiveValue(availability=NOT_CALCULABLE, value=None)`. Accept a mapping when its `route_code` is an integer 0–8 and belongs to the validated `route_hypotheses` route codes. Consume the engine's typed result; do not re-implement `select_preferred_hypothesis` (`route_hypotheses.py:1079–1155`), synthesize a route, or impose any condition on `real_decision.route_code` or route statuses.
++
++For this preferred-hypothesis validation, raise `ExecutiveIntegrityError` and the governed typed API 422 **only** when: (1) the key is missing; (2) its value is neither `None` nor a mapping; or (3) it is a mapping whose `route_code` is missing, is not an integer 0–8, or is absent from the validated `route_hypotheses` route codes. Do not coerce strings, floats or booleans into an integer route code. Add no other preferred-hypothesis precondition; independent validation of the route list remains in force and is not a second selection rule.
++
++Add parameterized service and TestClient API coverage over the exact 11 loaded case IDs: all `build_executive_case` calls and `GET /api/executive/opportunities/{id}` return typed 200 models with eight steps and four vectors; the eight currently false-422 cases expose `preferred_route_code` as `NOT_CALCULABLE`/null. Keep exact public and simulated outcome equality, steel `INVESTIGATE` and polypropylene `REJECT`. Add a valid fixture with `preferred_hypothesis=None` and mixed `fails`/`NOT_CALCULABLE` route statuses: service build succeeds, API returns 200 and the preferred route value is `NOT_CALCULABLE`/null. Do not require its real-decision route code to be null. Negative fixtures cover a missing key, wrong-type value, missing/non-integer/out-of-range mapping code, and an **inconsistent mapping with an integer 0–8 code absent from the validated route list**; require the governed typed 422, not a 500 or silent null. A `None` value with mixed route statuses is never the malformed "inconsistent" fixture.
++
++### B2 — simulated claim contradiction
++
++`provenance.py:201–203` currently assigns every simulated claim `SUPPORTED`. Preserve the existing all-stored-ID and current-scenario synthetic-evidence checks. Index the combined validated public/current-scenario evidence rows and **reuse the public claim path's contradiction predicate** (`claims.py:175–179`) through one shared helper within the already permitted `claims.py`/`provenance.py` paths, called by both public and simulated claim construction. Do not re-implement the predicate separately: any linked row with a truthy `contradiction` makes that claim `CONTRADICTED`; otherwise a fully linked claim remains `SUPPORTED`. Do not drop the contradicting ID, relabel public rows as synthetic, infer contradiction from unrelated rows, or change decision values. Tests must show steel `decision.simulated` and `step.CONDITIONS_AND_KILL.simulated` remain linked to `S-UNICOIL-SPEC` and become `CONTRADICTED`, while public claims and branch metadata remain intact. Add an injected contradiction on a linked current-scenario synthetic row and a non-linked contradiction control, verifying exact status in each case.
++
++### B3 — verified cross-scenario dependency only
++
++Delete the `endswith("::shared_enabler")` exemption in `provenance.py:235–242`. Traverse `simulation_decision` evidence references with their source paths and reject malformed/non-string/empty IDs rather than silently skipping them. Every public or current-scenario reference must resolve to the validated combined evidence index. A foreign reference is permitted **only** in route 8's `evidence_ids` and its nested `shared_enabler.evidence_ids`, not in another route or arbitrary decision field. Validate the entire allowance, not a suffix:
++
++1. Require one well-formed route-8 `shared_enabler` payload with current opportunity and scenario membership. Independently obtain the validated, pinned graph artifact's `shared_enabler_inputs(graph_projection(), opportunity_id, branch=("simulated", current_scenario_id))`; require the payload's enabler ID, graph projection ID, ordered dependent opportunity IDs and evidence-ID set to match that feed. A missing/unavailable/mismatched artifact becomes `ExecutiveIntegrityError`, not an untyped 500 or an invented allowance.
++2. For **every** dependent opportunity in the feed, use the loaded, validated synthetic-scenario repository. Require a unique scenario ID, the same declared `synthetic_inputs.shared_enabler.enabler_id`, and membership of the exact `scenario_id::shared_enabler` ID in that scenario's validated `synthetic_evidence_rows`. The current opportunity must be one member. Require the route-8 and nested payload evidence-ID sets to equal exactly this verified dependency set, with no duplicate, missing or extra ID. Do not hard-code aluminium IDs as a general rule; the governed aluminium pair is the regression fixture.
++3. Only after that validation, omit the **verified foreign** dependency IDs from the scenario-local `ClaimReference.evidence_ids`; retain them in the underlying route-8/graph payload and record in ADR-028 that a single-scenario executive claim cannot present another scenario's Class-D row as its own. Keep current-scenario synthetic evidence and any linked public evidence in the claim. No generic suffix filtering remains.
++
++Tests must reject `ANY-UNRELATED::shared_enabler`, `ANY-UNRELATED::other_suffix`, other absent IDs, a real foreign ID injected in route 0 or an unrelated field, a foreign ID with a forged or missing dependency declaration, and missing stored foreign evidence. Both governed aluminium opportunities must build and return API 200 with their exact two declared route-8 dependency IDs validated, while every emitted simulated claim remains limited to public plus its own scenario's stored evidence. Document this narrow rule in ADR-028 only; leave Core 07 and all graph inputs unchanged. If the selected implementation needs a different dependency source or cannot maintain the claimed membership invariant, stop for plan review instead of broadening the exemption.
++
++### Recommended corrections admitted into this same narrow pass
++
++`INTERVENTION` contains only simulated values. In `case_projection.py`, prefix its five value keys `simulated_`, associate the available step only with `step.INTERVENTION.simulated`, and remove the public step/route claim IDs from that simulated-only step. If simulation is unavailable, keep the step typed `UNAVAILABLE` with no simulated claim or fabricated value. Its Class-D evidence IDs, labels and numeric values remain unchanged. Focused tests check key/claim branch identity for steel, polypropylene and unavailable simulation; the public claim registry itself remains available separately.
++
++Remove `claims.py:164–165`'s fabricated `("identity/tariff-line",)` default. If a claim has neither stored support nor an actual computed missing-need code, raise `ExecutiveIntegrityError`; keep `ClaimReference`'s existing invariant rather than inventing a need or weakening the model. Test the no-evidence/no-needs failure and a real declared-need unresolved claim. Cascade's exhaustive current-case check found the default does not fire on the 11 frozen cases, so this is a latent correction, not a claim that a current output was wrong.
++
++### D1 — stable, truthful control records
++
++Before computing the repaired candidate tree, update only the S18a portions of ADR-028 in `docs/ARCHITECTURE_DECISIONS.md`, `docs/BUILD_ROADMAP.md`, `docs/BUILD_PROGRESS.md`, and the `V3-S18A-*` rows/adjacent S18a note in `docs/REQUIREMENTS_TRACEABILITY.md`. Preserve S17 and earlier history. Use this substance: **the R1 exact tree completed Task 8, compare-only e2e, the bilingual R1 geometry probe and two clean-root `make ci`; Claude rejected its implementation for B1–B3 and D1; AM-4 repairs require those same gates on a new exact tree, independent review and separate owner implementation acceptance.** Record the existing AM-3/R1 approvals and bounded visual exception as historical approvals, not implementation approval. ADR-028 also states B3's validated dependency rule. Do not say the new candidate passed before its receipts exist.
++
++Use a stable status such as `R1 EXACT TREE REJECTED; AM-4 EXACT-TREE VERIFICATION GATED`. The new tree OID and gate outcomes belong in an external, hash-bound implementation receipt, not in the four documents whose bytes define that tree. Wording must state the requirement and where the result is recorded, without claiming it remains pending after a pass. Finish all control-document text **before** creating the new tree. After gates, submit the external receipt; any required later repository text change creates a different tree and forces all exact-tree gates to restart. Do not embed the final tree ID in its own contents.
++
++## 3. Strict file boundary and no-regeneration proof
++
++**Only these implementation paths may change:**
++
++- `src/ior_mvp/executive/case_projection.py` (B1, INTERVENTION);
++- `src/ior_mvp/executive/provenance.py` (B2, B3);
++- `src/ior_mvp/executive/claims.py` (shared B2 contradiction predicate, missing-need fallback);
++- `tests/test_executive_service.py`, `tests/test_executive_api.py`, `tests/test_executive_claims.py` (focused and all-11 regressions);
++- `docs/ARCHITECTURE_DECISIONS.md`, `docs/BUILD_ROADMAP.md`, `docs/BUILD_PROGRESS.md`, `docs/REQUIREMENTS_TRACEABILITY.md` (D1/ADR-028 only).
++
++After plan approval and owner acceptance, the **only** additional candidate record paths are a new `.workflow/slices/S18-executive-mode/plan-amendment-4.md` holding these exact approved bytes and an additive `.workflow/slices/S18-executive-mode/plan_review.md` entry quoting Claude's verdict and the full plan/packet hashes. The owner-control update is local/ignored at `/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/owner-decisions/s18-visual-release-1.json`, preserving earlier decisions. External receipts/errata remain outside the candidate. No other file, test, pin, baseline, artifact, hook, index or Git ref may change. In particular, `screening/*.py` is absent from the hashes but **not needed or permitted**; `src/ior_mvp/app.py`, top-level `src/ior_mvp/*.py`, `cases/*.py`, `graph/*.py`, `docs/core/**` (including Core 07), `config/**`, `data/**`, browser/static sources and baselines are excluded. A newly needed path requires another reviewed amendment.
++
++Read-only inspection of the actual bound manifests found 228 graph projection inputs, 83 visual `source_tree` entries, 724 snapshot-manifest files and 20 authority-hash files, **zero existing hash drift**. None of the ten implementation paths above, the two slice records, or any `screening/*.py` path appears in those four lists. `src/ior_mvp/app.py` does appear in graph and visual lists; Core 07 appears in graph and authority lists. Thus the scoped AM-4 edits require **no graph, manifest or canonical screenshot regeneration**. Recheck this set intersection and every existing digest before and after implementation; any new hashed-input/visual-source delta stops and returns to a reviewed plan. Do not invoke any generator, change a visual pin, or repeat the consumed visual allocation.
++
++## 4. Execution and exact-candidate acceptance order
++
++1. **Approval gate:** Claude reviews the complete external AM-4 packet (plan **and handoff**) and returns an exact-byte verdict with full plan and packet SHA-256s. The owner then accepts this AM-4 scope/classification under those hashes. Only afterward append the exact verdict and hashes to `plan_review.md`, add the accepted decision to the existing owner record without rewriting AM-3/R1 history, and hand Cascade the verified packet. Do not request implementation from Cascade before those records are complete.
++2. **Preservation gate:** Cascade reconfirms branch/HEAD, rejected tree `2ab8d401…`, unstaged ordinary index and the three retained alternate indexes, approved AM-3/R1 hashes, owner decision, 228-input graph/visual/snapshot/authority manifests, two WebP SHA-256s/sizes, visual manifest `216aa8e0a85f35151a065f53e057f314bccadc14a6bdc802be9540ffb880dfb2` and baseline tree `dfb2612b9e637367ae4441db489dda4f5d17bf36`. Stop on drift. Copy approved AM-4 bytes into the **new** slice amendment file; preserve AM-3 and R1 files byte-identically.
++3. **Focused red-to-green:** Add the B1–B3, INTERVENTION and missing-need regressions first; capture failures on the rejected logic, then implement only the permitted source changes. Run focused tests and all-11 API/case checks. Correct the four control documents per D1 before the final tree. Preserve every governed public/simulated decision and real-decision equality. Any unexpected test or contract failure stops rather than prompting an unplanned edit.
++4. **Exact tree:** use a **new** temporary alternate index, without changing refs, HEAD, the ordinary index or any pre-existing alternate index. Unreferenced Git objects may be written. Materialize the candidate in a clean local-only committed scratch root; require scratch `HEAD^{tree}` equals the newly recorded candidate OID, clean status, unchanged frozen-root/baseline tree OIDs and the bound pin. The scratch commit is verification infrastructure, not delivery.
++5. **Required gates on that exact tree:** run all AM-3 R1 Task 8 checks—frozen pins and status tests, full `PYTHONPATH=src pytest -q`, integrity, scenario validation, all reconstruction stages, smoke, graph validate/build-check, prohibited/secret/threshold/UI/ES/compile scans, all eleven outcomes and synthetic isolation—then `make e2e` **compare-only**. Run the approved R1 bilingual old-HEAD/new-tree geometry probe, including the full producer/base identities, 12/5 rows, unchanged unmodified-DOM fields and controlled rewrite in both locales. After it passes, run complete `make ci` from **two different-path clean roots of that same exact tree** with fresh isolated graph containers/credentials. Record commands, exit codes, hashes, counts, environment and tree identities without credentials. Prior `2ab8d401…` passes cannot substitute for any new-tree result. All gates must exit zero; a failing probe, pin, browser, test or clean-root gate stops the path.
++6. **Review and delivery gate:** preserve a hash-bound external exact-tree receipt. Claude independently reviews the **new exact tree** and evidence with zero unresolved findings; the owner separately accepts that implementation before ordinary staging, commit, PR/CI or delivery. AM-4 plan/owner acceptance alone is not implementation acceptance. Do not start S18b, Aura, generation or any adjacent repair through this amendment.
++
++## 5. Nonblocking observation triage
++
++- **Included, source-confirmed:** INTERVENTION's unlabeled simulated keys/public claim association (`case_projection.py:226–245`) and the unused fabricated need fallback (`claims.py:164–165`). The latter is latent: Cascade found zero current uses after correcting its first mistaken scan.
++- **Deferred, Cascade-reproduced but not an AM-4 blocker:** case-level EVSI has no explicit `availability` marker while summary reports seven AVAILABLE/four UNAVAILABLE. Current absent numeric values remain non-AVAILABLE; adding a case-level schema field would expand the approved API contract and likely touch models/tests. Record for a separately reviewed S18b/API follow-up; do not silently label it fixed. If a required AM-4 gate demonstrates a false assertion or leakage, stop and amend.
++- **Deferred, agent-reported and not reproduced as endpoint failures:** untyped malformed-input paths, weak model-level `EvidenceReference` partition validation, trivial `rule.R4` test, missing broader validator tests, overbroad R12 needs on unresolved R6/R7/R8/R10 claims, and single-missing-suffix behavior. The B1/B3 focused negative cases do require typed fail-closed errors and may incidentally expose a specific instance; fix only within this plan's permitted paths, otherwise stop. The partition observation is visible in `provenance_models.py` but upstream analysis validation currently rejects the bad row; no new model edit is authorized. A missing required simulated suffix may properly fail closed, so do not relax it without a separate contract ruling. Track the rest for independent follow-up, not as silently passed checks.
++
++## 6. Stop and self-audit boundary
++
++Stop on missing approval/owner ruling; new required file; altered graph/visual/snapshot/authority input; changed engine/public/simulated outcome; fabricated need, unsupported claim status or foreign evidence; changed WebP or pin; a test/geometry/CI failure; or a conflict between this amendment and higher authority. Return the exact failing input, command, exit code and tree identity to Codex and Claude for a reviewed amendment. Do not weaken a test or broaden the foreign-ID exception to make the fixture pass.
++
++This draft relies on the reproduced B1–B3/D1 findings and the read-only aluminium payload/manifest inspections cited in `EVIDENCE-INDEX.md`; it does **not** claim to have run AM-4 tests or repaired the candidate. The only new owner decision is the bounded contract-conformance classification and scope acceptance under the final review hashes. No implementation or delivery decision is presumed.
+diff --git a/.workflow/slices/S18-executive-mode/plan_review.md b/.workflow/slices/S18-executive-mode/plan_review.md
+index 173d0c7..3288287 100644
+--- a/.workflow/slices/S18-executive-mode/plan_review.md
++++ b/.workflow/slices/S18-executive-mode/plan_review.md
+@@ -41,3 +41,39 @@ Approved AM-3 R1 SHA-256: `fa841e974bb77fdb23ac155eea20bba7cfba7c12791987ca72c74
+ Approved R1 external `SHA256SUMS` SHA-256: `6ef5e940a05c941bc9c47eec2baec9415b017257d83c7ca58cb248f811b1587a`.
+ 
+ This approval covers exactly those R1 plan and revision-packet bytes. It corrects the §5.3a geometry gate and reporting requirements while retaining the earlier AM-3 approval and the historical PLAN v1/corrected AM-2 approvals above. The owner re-acceptance is recorded separately in `/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/owner-decisions/s18-visual-release-1.json`. Implementation verification, independent exact-tree review and separate owner implementation acceptance remain pending; this entry does not authorize staging or delivery.
++
++## AM-4 R1 independent plan and handoff review — 2026-09-23
++
++Reviewer: **Claude Code**, the owner-confirmed independent approving reviewer. Codex verified the verdict in Claude Code's own assistant record; Codex is the planner and recorder, not the approving reviewer.
++
++Exact verdict as transmitted by the owner:
++
++> Re-review of AM-4 R1 (packet SHA256SUMS 63ca77a2…): APPROVE
++
++Verbatim source Markdown heading:
++
++> # Re-review of AM-4 R1 (packet `SHA256SUMS` `63ca77a2…`): **APPROVE**
++
++Approved AM-4 plan: `/home/barami/.cache/industrial-opportunity-resolution-mvp/s18-planner-am4-review-r1/AM-4-DRAFT.md`.
++SHA-256: `60f516f776a6f3486e097240fd29a716d6b88fda89ad1d6bf3af990588e06e46`.
++
++Approved Cascade handoff: `/home/barami/.cache/industrial-opportunity-resolution-mvp/s18-planner-am4-review-r1/CASCADE-AM4-HANDOFF-DRAFT.md`.
++SHA-256: `39d97eb0790aca0d20f2e941e5ac8f3c58246b1b8a8eea222c19cf3b3cb4f62b`.
++
++Approved packet checksum list: `/home/barami/.cache/industrial-opportunity-resolution-mvp/s18-planner-am4-review-r1/SHA256SUMS`.
++SHA-256: `63ca77a2d65ec4a6c929d0c4b80b537afe9f121a1b00432bf9d9d0c7298f44ea`.
++
++Reviewer attribution: Claude Code session `c22afe51-efb5-4451-a04c-bada16c2695a`, assistant message UUID `9a6d7d7b-4354-4969-a2b4-1516e539e40e`, model `claude-opus-5-5`, issued `2026-09-23T18:09:19.767Z`; source `/home/barami/.claude/projects/-home-barami-projects-industrial-opportunity-resolution-mvp/c22afe51-efb5-4451-a04c-bada16c2695a.jsonl:1273`. Source JSON record SHA-256: `3b38998ce40710567a493c0682571583c2ee061c2a426aa32d0af2ccd6182eec`. The verbatim review is retained at `/home/barami/.cache/industrial-opportunity-resolution-mvp/s18-am4-acceptance/claude-am4-r1-review.md` (SHA-256 `5dd0852f7d79f3b908c4b1b4e8ab22682f496d5d564f64db0330e569c7228f76`), with metadata at `/home/barami/.cache/industrial-opportunity-resolution-mvp/s18-am4-acceptance/reviewer-attribution.json`. This confirms Claude's own final APPROVE verdict rather than attributing a Codex review to Claude.
++
++Claude's implementation note, quoted exactly:
++
++> In Python, `bool` is a subclass of `int`. When enforcing the 0-8 integer check, exclude `True`/`False` explicitly, since AM-4 forbids coercing booleans. Add them to the negative fixture.
++
++Cascade must include both `True` and `False` route-code negative fixtures and require the governed typed 422. This implements the approved AM-4 prohibition on boolean coercion; it does not change the approved packet.
++
++The owner accepted AM-4's bounded contract-conformance scope/classification, explicitly including the identified changes to observable executive API behavior, under all three hashes above. The decision is recorded in the additive `am4` block of `/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/owner-decisions/s18-visual-release-1.json`. Earlier decisions, seat assignments and approvals remain intact. The previous owner record and this file's pre-append bytes are retained at `/home/barami/.cache/industrial-opportunity-resolution-mvp/s18-am4-acceptance/owner-record-pre-am4.json` and `/home/barami/.cache/industrial-opportunity-resolution-mvp/s18-am4-acceptance/plan-review-pre-am4.md`.
++
++Once both records are complete and verified, the approved handoff's approval/owner-acceptance preconditions are satisfied without editing its “Do not implement from this draft” wording or any approved packet byte. Cascade may implement only that approved scope and must include this append when building a **new exact candidate tree**. The rejected tree `2ab8d401c2312725540aa6270d449da16a96e01f` and its receipts remain historical; the worktree differs from that tree at this step only by this authorized review append.
++
++Every prescribed gate remains required on the new exact tree: Task 8, `make e2e` compare-only, the approved R1 bilingual controlled-rewrite probe with producer identities, and complete `make ci` in both clean roots. Claude's independent exact-tree implementation review with zero unresolved findings and separate owner implementation acceptance must follow before staging or delivery. No new-tree pass or implementation acceptance is recorded by this entry.
++
+diff --git a/docs/ARCHITECTURE_DECISIONS.md b/docs/ARCHITECTURE_DECISIONS.md
+index ed883b5..3f60a02 100644
+--- a/docs/ARCHITECTURE_DECISIONS.md
++++ b/docs/ARCHITECTURE_DECISIONS.md
+@@ -1481,15 +1481,11 @@ The existing graph gate inserts a dev-only-safe, non-intercepted `graph_ui` step
+ 
+ ## ADR-028 — S18 executive projection boundary and public/synthetic separation
+ 
+-**Status:** Uncommitted S18a post-manifest, post-visual implementation candidate
+-under approved plan `1b300b0f…`, AM-1 `b362205a…`, corrected AM-2
+-`4022bcee…`, approved AM-3 `396492a0…`, approved AM-3 R1 `fa841e97…` and design
+-`1370a7a3…`. The owner accepted the bounded two-image visual exception under
+-Manifest §7.2 with Core 09 option (b) (recorded at `c89ff2fa…`). Verification
+-then stopped at the original AM-3 §5.3a geometry gate, whose literal span/small
+-width clause was falsified by text-driven flex widths; R1 corrects only that
+-gate. Independent implementation review, separate owner implementation
+-acceptance, PR/CI and delivery remain separate gates and are not claimed here.
++**Status:** R1 EXACT TREE REJECTED; AM-4 EXACT-TREE VERIFICATION GATED.
++
++The R1 exact tree `2ab8d401c2312725540aa6270d449da16a96e01f` completed Task 8, compare-only `make e2e`, the corrected bilingual R1 geometry probe and complete `make ci` in two clean roots. Claude Code then rejected its implementation for B1–B3 and D1. The prior passes and AM-3/R1 plan approvals are historical evidence, not implementation approval.
++
++Owner-accepted AM-4 `60f516f776a6f3486e097240fd29a716d6b88fda89ad1d6bf3af990588e06e46` requires every one of those gates on a new exact candidate, followed by Claude Code’s independent exact-tree review and separate owner implementation acceptance before staging or delivery. The candidate identity, actual gate outcomes and evidence hashes are recorded outside the candidate in `/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/evidence/s18-am4-codex-implementation/AM4-IMPLEMENTATION-RECEIPT.md`. This status records that verification requirement without preclaiming results. No further generation, visual refresh or S18b work is authorized.
+ 
+ **Context:** Methodology §§8, 9, 10.3 and 15 require decision explanation,
+ separate route-specific vectors, evidence value and accountable provenance.
+@@ -1508,6 +1504,30 @@ explicitly unresolved. Simulated decision and step claims are separately
+ qualified by current scenario, Class D, `DEMO_GENERATOR` and both policy labels;
+ they may reference only valid public rows plus that scenario's synthetic rows.
+ 
++AM-4 binds the route-8 exception to the validated pinned graph artifact's
++`shared_enabler_inputs(graph_projection(), opportunity_id, branch=("simulated",
++current_scenario_id))`. The enabler identity, graph projection identity, ordered
++dependent opportunities and evidence-ID set must match that feed. Every dependent
++must have a unique validated loaded scenario declaring the same enabler and the
++exact stored `scenario_id::shared_enabler` evidence row; current opportunity and
++scenario membership are required. Route 8's direct and nested `shared_enabler`
++evidence-ID sets must equal that verified dependency set without duplicate,
++missing or extra IDs. Foreign references anywhere else fail closed, as do malformed
++IDs and unavailable or mismatched dependencies. Only those verified foreign IDs
++are omitted from the scenario-local executive claim; they remain in the underlying
++route-8 and graph payload. A single-scenario claim cannot present another
++scenario's Class-D row as its own. There is no suffix-based allowance.
++
++The other AM-4 contract corrections consume a present null preferred route as
++typed `NOT_CALCULABLE` regardless of route-status mix, reuse one linked-contradiction
++predicate in both claim branches, mark INTERVENTION values and claim as simulated,
++and reject a claim with neither stored support nor an actual missing-need code.
++These correct observable executive output without changing engine decisions,
++methodology, Core, configuration or frozen evidence. The owner accepted that bounded
++contract-conformance classification explicitly; §7.2 proof is required without
++claiming its unchanged-observable wording literally covers the corrected API output.
++
++
+ Public dataset unlocks classify exact R12 and screening need codes, deduplicate
+ loaded opportunities and screening HS6 independently, and preserve unknown
+ codes as `UNMAPPED`. Class-D EVSI is a different model branch requiring
+@@ -1556,4 +1576,6 @@ retains the Core 09 pre-generation sentence under option (b), and adds KL-132.
+ The owner accepted that exception; verification then stopped at AM-3 §5.3a
+ because its literal span/small width clause was falsified by text-driven flex
+ widths on the run-ID rows, and approved AM-3 R1 `fa841e97…` corrects only that
+-gate. Aura remains untouched.
++gate. Those corrected R1 gates subsequently completed on the rejected tree as
++recorded above; they do not establish acceptance of the AM-4 candidate. Aura
++remains untouched.
+diff --git a/docs/BUILD_PROGRESS.md b/docs/BUILD_PROGRESS.md
+index 4ef5f41..ac313d4 100644
+--- a/docs/BUILD_PROGRESS.md
++++ b/docs/BUILD_PROGRESS.md
+@@ -52,7 +52,7 @@ S12's approved split is recorded in `BUILD_ROADMAP.md` §S12 split and `.workflo
+ | S15b Deep-case portfolio, scenarios and goldens | MERGED | slice/s15b-deep-case-portfolio-scenarios-and-goldens | [#33](https://github.com/baramiSG/Industrial_mvp/pull/33) | e4ae8aa | PR run 35030387702 and main run 35032759122 green (6/6 each) | Final independent APPROVE and owner acceptance; 2,807 unit tests, 498 functional and four visual checks in verification/portability; HHI unavailable-display correction and governed artifacts verified; merged-main receipt retained; parent S15 complete. Earlier T6 log entries below are preserved history, not current blockers. |
+ | S16b Route-eight activation and graph API | APPROVED; AURA VERIFIED; READY FOR PR | slice/s16b-route-eight-activation-and-graph-api | — | — | Pre-PR capture; subsequent CI/merge results belong to the associated PR and delivery receipt | Product `fd047867…` at `c0d5ec2`: 2,854 unit tests, 498 functional and four visual checks in each of two roots; graph `fbc93afb3c6e` 925/1,045, reload 0/0, nine local live and two unavailable checks. Retained Grok APPROVE and owner acceptance recorded; Aura `8a7338e0` passed exact925/1,045, reload0/0, provenance/partition, sample and application checks with no clear. PR/CI/merge/main receipt remain. |
+ | S17 Interactive graph view | MERGED | slice/s17-interactive-graph-view (deleted) | [#35](https://github.com/baramiSG/Industrial_mvp/pull/35) | e102250 | PR run 35831654002 and main run 35834129601 green (6/6 each; browser 27m32s on PR) | Plan `421515e8…` + `S17-DEP-AM1`; graph `GRAPH-SAU-2026-09-12-b63159c7bdc1` 925/1,045; snapshot 722; graph/product generation must not replay and did not replay; 112 visuals; F01 visual source provenance refresh `S17-FINAL-REVIEW-R1` kept all WebPs byte-identical with zero WebP changes; final reviewer REJECT F01/F02 → correction APPROVE zero findings; owner ACCEPT; two local exact-root `make ci` passes (2,887 + 513 + 4); merged tree equals reviewed tree; post-merge integrity/pytest/smoke/reconstruction/graph build-check PASS. |
+-| S18a Executive projection and provenance API | OWNER-ACCEPTED EXCEPTION; VERIFICATION STOPPED AT §5.3a; IMPLEMENTATION ACCEPTANCE PENDING | slice/s18-executive-mode | — | — | Local post-manifest, post-visual verification; no hosted CI | Approved plan `1b300b0f…`, AM-1 `b362205a…`, corrected AM-2 `4022bcee…`, approved AM-3 `396492a0…`, approved AM-3 R1 `fa841e97…` and design `1370a7a3…`; typed APIs, exact public rule provenance and scenario-qualified Class-D claims implemented test-first. One owner-bound existing-builder invocation, without retry, materialized `GRAPH-SAU-2026-09-12-461bf4840962` at 925/1,045; validation/build-check passed, normalized semantics were unchanged and all prior projections remained byte-identical. One separately authorized manifest-generator invocation produced 724 snapshot rows and retained 20 authority rows with changes confined to Core 01/02/04/07/09. The single authorized canonical visual-provenance refresh then ran once, without retry, and stopped correctly: 110 of 112 WebPs are byte-identical and only the two desktop public-steel `evidence_to_change` captures changed because the Relationships list renders the graph's run-qualified Decision ID. The owner accepted that bounded two-image exception under Manifest §7.2 and Core 09 option (b) (recorded at `c89ff2fa…`), and AM-3 records KL-132. Verification then stopped at the original AM-3 §5.3a geometry gate because its literal span/small width clause was falsified by text-driven flex widths; AM-3 R1 `fa841e97…` corrects only that gate. The corrected bilingual probe, exact-candidate `make ci` in two clean roots, independent implementation review and separate owner implementation acceptance all remain outstanding, so no implementation acceptance, commit, PR, merge or delivery is claimed. S18b remains prohibited and unstarted. |
++| S18a Executive projection and provenance API | R1 EXACT TREE REJECTED; AM-4 EXACT-TREE VERIFICATION GATED | slice/s18-executive-mode | — | — | R1 local gates completed on rejected tree; AM-4 results in external receipt; no hosted CI | Approved plan `1b300b0f…`, AM-1 `b362205a…`, corrected AM-2 `4022bcee…`, approved AM-3 `396492a0…`, approved AM-3 R1 `fa841e97…` and design `1370a7a3…`; typed APIs, exact public rule provenance and scenario-qualified Class-D claims implemented test-first. One owner-bound existing-builder invocation, without retry, materialized `GRAPH-SAU-2026-09-12-461bf4840962` at 925/1,045; validation/build-check passed, normalized semantics were unchanged and all prior projections remained byte-identical. One separately authorized manifest-generator invocation produced 724 snapshot rows and retained 20 authority rows with changes confined to Core 01/02/04/07/09. The single authorized canonical visual-provenance refresh then ran once, without retry, and stopped correctly: 110 of 112 WebPs are byte-identical and only the two desktop public-steel `evidence_to_change` captures changed because the Relationships list renders the graph's run-qualified Decision ID. The owner accepted that bounded two-image exception under Manifest §7.2 and Core 09 option (b) (recorded at `c89ff2fa…`), and AM-3 records KL-132. The R1 exact tree `2ab8d401c2312725540aa6270d449da16a96e01f` completed Task 8, compare-only `make e2e`, the corrected bilingual R1 geometry probe and complete `make ci` in two clean roots. Claude Code then rejected its implementation for B1–B3 and D1. The prior passes and AM-3/R1 plan approvals are historical evidence, not implementation approval. Owner-accepted AM-4 `60f516f776a6f3486e097240fd29a716d6b88fda89ad1d6bf3af990588e06e46` requires every one of those gates on a new exact candidate, followed by Claude Code’s independent exact-tree review and separate owner implementation acceptance before staging or delivery. The candidate identity, actual gate outcomes and evidence hashes are recorded outside the candidate in `/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/evidence/s18-am4-codex-implementation/AM4-IMPLEMENTATION-RECEIPT.md`. This status records that verification requirement without preclaiming results. No further generation, visual refresh or S18b work is authorized. |
+ 
+ ## Log
+ 
+diff --git a/docs/BUILD_ROADMAP.md b/docs/BUILD_ROADMAP.md
+index 3c24092..cbaeb56 100644
+--- a/docs/BUILD_ROADMAP.md
++++ b/docs/BUILD_ROADMAP.md
+@@ -266,7 +266,8 @@ The owner-approved S18 boundary has two serialized children:
+    accessibility/browser journeys and visual matrix. S18b is not started by
+    the S18a implementation.
+ 
+-S18a is an uncommitted post-manifest, post-visual candidate under approved AM-3
++S18a status: **R1 EXACT TREE REJECTED; AM-4 EXACT-TREE VERIFICATION GATED**. It remains
++uncommitted under historically approved AM-3
+ `396492a0…` and approved AM-3 R1 `fa841e97…`. It changes no scenario, golden,
+ configuration, UI/static source or browser journey. After final graph-input
+ binding, one existing-builder invocation materialized
+@@ -280,12 +281,9 @@ observed 110 of 112 WebPs byte-identical; only the two desktop public-steel
+ `evidence_to_change` captures changed, because the Relationships list renders the
+ graph's run-qualified Decision ID. The owner accepted that bounded two-image
+ exception under Manifest §7.2 with Core 09 option (b) (recorded at `c89ff2fa…`),
+-and AM-3 records KL-132. Verification then stopped at the original AM-3 §5.3a
+-geometry gate because its literal span/small width clause was falsified by
+-text-driven flex widths on the run-ID rows; R1 corrects only that gate. The
+-corrected bilingual probe, exact-candidate `make ci` in two clean roots,
+-independent implementation review, separate owner implementation acceptance,
+-PR/CI, merge and parent completion remain pending.
++and AM-3 records KL-132. The R1 exact tree `2ab8d401c2312725540aa6270d449da16a96e01f` completed Task 8, compare-only `make e2e`, the corrected bilingual R1 geometry probe and complete `make ci` in two clean roots. Claude Code then rejected its implementation for B1–B3 and D1. The prior passes and AM-3/R1 plan approvals are historical evidence, not implementation approval.
++
++Owner-accepted AM-4 `60f516f776a6f3486e097240fd29a716d6b88fda89ad1d6bf3af990588e06e46` requires every one of those gates on a new exact candidate, followed by Claude Code’s independent exact-tree review and separate owner implementation acceptance before staging or delivery. The candidate identity, actual gate outcomes and evidence hashes are recorded outside the candidate in `/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/evidence/s18-am4-codex-implementation/AM4-IMPLEMENTATION-RECEIPT.md`. This status records that verification requirement without preclaiming results. No further generation, visual refresh or S18b work is authorized.
+ 
+ ## Explicit non-goals for v0.3.0
+ 
+diff --git a/docs/REQUIREMENTS_TRACEABILITY.md b/docs/REQUIREMENTS_TRACEABILITY.md
+index 3c8b327..ed39183 100644
+--- a/docs/REQUIREMENTS_TRACEABILITY.md
++++ b/docs/REQUIREMENTS_TRACEABILITY.md
+@@ -423,23 +423,22 @@ Delivered on [PR #35](https://github.com/baramiSG/Industrial_mvp/pull/35) as squ
+ 
+ | ID | Observable acceptance | Implementation evidence | Status | Slice |
+ |---|---|---|---|---|
+-| V3-S18A-STEPS | Every loaded case has exactly eight explanatory steps and four separate decision vectors without a combined score or ordinal rank. | Frozen enums/models; service and eleven-outcome equality tests. | TESTED locally; post-manifest | s18a |
+-| V3-S18A-DATASETS | Public dataset unlocks use exact structured codes and return separate deduplicated loaded-case and screening-HS6 IDs; unknown codes remain `UNMAPPED`. | Taxonomy boundary tests; frozen six-kind counts and sorted-ID SHA-256 oracles across 5,443 records. | TESTED locally; post-manifest | s18a |
+-| V3-S18A-EVSI | Scenario EVSI remains a separate Class-D generator branch and is never assigned to a public dataset kind from prose. | Seven available/four unavailable rows; `math.fsum` 371.55 / 374.95 / -3.4; public-branch absence assertions. | TESTED locally; post-manifest | s18a |
+-| V3-S18A-INTEGRITY | Integrity zero is computed from public leakage, real-decision equality, synthetic metadata and scenario validation. | Zero oracle plus eight injected negative fixtures with exact check and affected ID. | TESTED locally; post-manifest | s18a |
+-| V3-S18A-CLAIMS | Public claims link only to stored public evidence or remain unresolved; simulated claims use only valid public rows plus exact current-scenario Class-D rows with complete warning metadata. | Exhaustive real-rule mapping; exact simulated decision/step suffix sets; contradiction, unresolved, absent-ID, wrong/cross-scenario metadata and synthetic-leak tests. | TESTED locally; post-manifest | s18a |
+-| V3-S18A-API | Summary and case APIs are mounted before fallback, typed, mode-independent, read-only and below the 250 ms warm median. | Response-model equality, OpenAPI, typed 404/422, route-order, import-boundary and five-sample warm tests. | TESTED locally; post-manifest | s18a |
+-| V3-S18A-SCOPE | S18a changes no scenario/golden/config/UI/static/browser journey and does not start S18b; Core/engine changes require write-once graph and visual-manifest provenance closure, with only the AM-3 bounded two-image visual-oracle exception. | One owner-bound existing-builder invocation, without retry, produced `GRAPH-SAU-2026-09-12-461bf4840962` at 925/1,045; validation/build-check passed, normalized semantics were unchanged and all prior projection files remained byte-identical. One separately authorized manifest-generator invocation produced 724 snapshot rows and retained 20 authority rows with changes confined to Core 01/02/04/07/09. The single authorized canonical refresh observed 110/112 WebPs byte-identical and changed only the two desktop public-steel `evidence_to_change` captures, whose Relationships list renders the run-qualified Decision ID; the owner accepted that exception and Core 09 option (b) (recorded at `c89ff2fa…`) and AM-3 records KL-132. Verification then stopped at the original AM-3 §5.3a geometry gate, whose literal span/small width clause was falsified by text-driven flex widths; approved AM-3 R1 `fa841e97…` corrects only that gate. | IMPLEMENTED; owner exception accepted; verification stopped at §5.3a, implementation acceptance pending | s18a |
++| V3-S18A-STEPS | Every loaded case has exactly eight explanatory steps and four separate decision vectors without a combined score or ordinal rank. | Frozen enums/models; AM-4 all-eleven service/API cases and outcome equality, typed-null route and simulated-only INTERVENTION regressions; final gate results in external receipt. | R1 evidence; AM-4 exact-tree verification gated | s18a |
++| V3-S18A-DATASETS | Public dataset unlocks use exact structured codes and return separate deduplicated loaded-case and screening-HS6 IDs; unknown codes remain `UNMAPPED`. | Taxonomy boundary tests; frozen six-kind counts and sorted-ID SHA-256 oracles across 5,443 records. | R1 evidence; AM-4 exact-tree verification gated | s18a |
++| V3-S18A-EVSI | Scenario EVSI remains a separate Class-D generator branch and is never assigned to a public dataset kind from prose. | Seven available/four unavailable rows; `math.fsum` 371.55 / 374.95 / -3.4; public-branch absence assertions. | R1 evidence; AM-4 exact-tree verification gated | s18a |
++| V3-S18A-INTEGRITY | Integrity zero is computed from public leakage, real-decision equality, synthetic metadata and scenario validation. | Zero oracle plus eight injected negative fixtures with exact check and affected ID. | R1 evidence; AM-4 exact-tree verification gated | s18a |
++| V3-S18A-CLAIMS | Public claims link only to stored public evidence or remain unresolved; simulated claims use only valid public rows plus exact current-scenario Class-D rows with complete warning metadata. | Exhaustive real-rule mapping and simulated suffix sets; AM-4 linked contradictions, no fabricated need, exact dependency validation, source-path and stored-evidence rejection fixtures; final gate results in external receipt. | R1 evidence; AM-4 exact-tree verification gated | s18a |
++| V3-S18A-API | Summary and case APIs are mounted before fallback, typed, mode-independent, read-only and below the 250 ms warm median. | Response-model equality, OpenAPI, typed 404/422, route-order, import-boundary and warm tests; AM-4 all-eleven endpoints, status-independent null route and malformed codes including both booleans; final gate results in external receipt. | R1 evidence; AM-4 exact-tree verification gated | s18a |
++| V3-S18A-SCOPE | S18a changes no scenario/golden/config/UI/static/browser journey and does not start S18b; Core/engine changes require write-once graph and visual-manifest provenance closure, with only the AM-3 bounded two-image visual-oracle exception. | One owner-bound existing-builder invocation, without retry, produced `GRAPH-SAU-2026-09-12-461bf4840962` at 925/1,045; validation/build-check passed, normalized semantics were unchanged and all prior projection files remained byte-identical. One separately authorized manifest-generator invocation produced 724 snapshot rows and retained 20 authority rows with changes confined to Core 01/02/04/07/09. The single authorized canonical refresh observed 110/112 WebPs byte-identical and changed only the two desktop public-steel `evidence_to_change` captures, whose Relationships list renders the run-qualified Decision ID; the owner accepted that exception and Core 09 option (b) (recorded at `c89ff2fa…`) and AM-3 records KL-132. The R1 exact tree `2ab8d401c2312725540aa6270d449da16a96e01f` completed Task 8, compare-only `make e2e`, the corrected bilingual R1 geometry probe and complete `make ci` in two clean roots. Claude Code then rejected its implementation for B1–B3 and D1. The prior passes and AM-3/R1 plan approvals are historical evidence, not implementation approval. | R1 EXACT TREE REJECTED; AM-4 EXACT-TREE VERIFICATION GATED | s18a |
+ 
+ The S18a candidate remains uncommitted. The single authorized graph generation,
+-the single authorized manifest generation and the single authorized canonical
+-visual refresh have all run and are exhausted. The owner accepted the bounded
+-two-image visual exception under Manifest §7.2 with Core 09 option (b) and
+-KL-132; verification then stopped at the original AM-3 §5.3a geometry gate and
+-approved AM-3 R1 `fa841e97…` corrects only that gate. The corrected bilingual
+-probe, exact-candidate `make ci` in two clean roots, independent implementation
+-review, separate owner implementation acceptance, staging, commit, PR/CI, merge
+-and S18 parent completion remain pending.
++manifest generation and canonical visual refresh have run and are exhausted.
++The bounded two-image visual exception, Core 09 option (b), KL-132 and historical
++AM-3/R1 approvals remain preserved. They are not implementation acceptance.
++
++The R1 exact tree `2ab8d401c2312725540aa6270d449da16a96e01f` completed Task 8, compare-only `make e2e`, the corrected bilingual R1 geometry probe and complete `make ci` in two clean roots. Claude Code then rejected its implementation for B1–B3 and D1. The prior passes and AM-3/R1 plan approvals are historical evidence, not implementation approval.
++
++Owner-accepted AM-4 `60f516f776a6f3486e097240fd29a716d6b88fda89ad1d6bf3af990588e06e46` requires every one of those gates on a new exact candidate, followed by Claude Code’s independent exact-tree review and separate owner implementation acceptance before staging or delivery. The candidate identity, actual gate outcomes and evidence hashes are recorded outside the candidate in `/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/evidence/s18-am4-codex-implementation/AM4-IMPLEMENTATION-RECEIPT.md`. This status records that verification requirement without preclaiming results. No further generation, visual refresh or S18b work is authorized.
+ 
+ ## Branch and release-state rules
+ 
+diff --git a/src/ior_mvp/executive/case_projection.py b/src/ior_mvp/executive/case_projection.py
+index 999f4c1..b9936dc 100644
+--- a/src/ior_mvp/executive/case_projection.py
++++ b/src/ior_mvp/executive/case_projection.py
+@@ -116,12 +116,24 @@ def build_steps(
+         key=lambda row: row["year"],
+     )
+     decision = _mapping(public.get("real_decision"), "real decision")
+-    preferred = _mapping(public.get("preferred_hypothesis"), "preferred route")
+     gap = _mapping(public.get("gap_class"), "gap")
+-    routes = tuple(
+-        f"route.{row['route_code']}"
+-        for row in _rows(public.get("route_hypotheses"), "routes")
+-    )
++    route_rows = _rows(public.get("route_hypotheses"), "routes")
++    route_codes = tuple(row.get("route_code") for row in route_rows)
++    if any(type(code) is not int or not 0 <= code <= 8 for code in route_codes):
++        raise ExecutiveIntegrityError("Route codes must be integers 0-8")
++    if len(set(route_codes)) != len(route_codes):
++        raise ExecutiveIntegrityError("Route codes must be unique")
++    routes = tuple(f"route.{code}" for code in route_codes)
++    if "preferred_hypothesis" not in public:
++        raise ExecutiveIntegrityError("Preferred route field is missing")
++    preferred = public["preferred_hypothesis"]
++    preferred_code = None
++    if preferred is not None:
++        preferred = _mapping(preferred, "preferred route")
++        preferred_code = preferred.get("route_code")
++        if (type(preferred_code) is not int or not 0 <= preferred_code <= 8
++                or preferred_code not in route_codes):
++            raise ExecutiveIntegrityError("Preferred route code must be a declared integer 0-8")
+ 
+     def sim(key: str) -> Analysis:
+         value = simulated.get(key) if simulated is not None else None
+@@ -171,7 +183,7 @@ def build_steps(
+             _values(
+                 ("state", decision.get("state")),
+                 ("gap_class", gap.get("primary")),
+-                ("preferred_route_code", preferred.get("route_code")),
++                ("preferred_route_code", preferred_code),
+                 ("rationale", decision.get("rationale")),
+             ),
+             "decision.public",
+@@ -225,23 +237,23 @@ def build_steps(
+         _step(
+             ExecutiveStepId.INTERVENTION,
+             _values(
+-                ("selected_route_code", sim_decision.get("route_code")),
+-                ("unsupported_npv_m_sar", economics.get("unsupported_npv_m")),
++                ("simulated_selected_route_code", sim_decision.get("route_code")),
++                ("simulated_unsupported_npv_m_sar", economics.get("unsupported_npv_m")),
+                 (
+-                    "minimum_effective_support_m_sar",
++                    "simulated_minimum_effective_support_m_sar",
+                     economics.get("minimum_effective_support_m"),
+                 ),
+                 (
+-                    "incremental_national_value_m_sar",
++                    "simulated_incremental_national_value_m_sar",
+                     national_value.get("incremental_national_value_m_sar"),
+                 ),
+-                ("approximate_evsi_m_sar", evsi.get("approximate_evsi_m_sar")),
++                ("simulated_approximate_evsi_m_sar", evsi.get("approximate_evsi_m_sar")),
+                 unavailable=absent,
+                 evidence_ids=claim_evidence.get(intervention_step_id, ()),
+             ),
+-            *routes,
+             *((intervention_step_id,) if not absent else ()),
+             unavailable=absent,
++            public_claim=False,
+         ),
+         _step(
+             ExecutiveStepId.CONDITIONS_AND_KILL,
+diff --git a/src/ior_mvp/executive/claims.py b/src/ior_mvp/executive/claims.py
+index 05f7637..6ebbe72 100644
+--- a/src/ior_mvp/executive/claims.py
++++ b/src/ior_mvp/executive/claims.py
+@@ -151,6 +151,11 @@ def _validate_ids(
+     return stable_ids
+ 
+ 
++def _linked_claim_status(contradictions: Iterable[Any]) -> ClaimStatus:
++    """Preserve any truthy contradiction among the claim's linked rows."""
++    return ClaimStatus.CONTRADICTED if any(contradictions) else ClaimStatus.SUPPORTED
++
++
+ def _claim(
+     *,
+     claim_id: str,
+@@ -162,7 +167,7 @@ def _claim(
+     if not stable_ids:
+         needs = tuple(sorted(set(missing_need_codes)))
+         if not needs:
+-            needs = ("identity/tariff-line",)
++            raise ExecutiveIntegrityError(f"Claim {claim_id} has no support or missing need")
+         return ClaimReference(
+             claim_id=claim_id,
+             status=ClaimStatus.UNRESOLVED,
+@@ -172,11 +177,7 @@ def _claim(
+         raise ExecutiveIntegrityError(
+             f"Public claim {claim_id} cannot link synthetic evidence"
+         )
+-    status = (
+-        ClaimStatus.CONTRADICTED
+-        if any(index[evidence_id].contradiction for evidence_id in stable_ids)
+-        else ClaimStatus.SUPPORTED
+-    )
++    status = _linked_claim_status(index[evidence_id].contradiction for evidence_id in stable_ids)
+     return ClaimReference(
+         claim_id=claim_id,
+         status=status,
+diff --git a/src/ior_mvp/executive/provenance.py b/src/ior_mvp/executive/provenance.py
+index 221b387..1459987 100644
+--- a/src/ior_mvp/executive/provenance.py
++++ b/src/ior_mvp/executive/provenance.py
+@@ -6,11 +6,17 @@ from collections.abc import Mapping, Sequence
+ from dataclasses import dataclass
+ from typing import Any
+ 
+-from ior_mvp.evidence import synthetic_display_labels
++from ior_mvp.data_repository import RepositoryError, synthetic_scenarios
++from ior_mvp.evidence import (
++    EvidenceIntegrityError, synthetic_display_labels, synthetic_evidence_rows,
++)
++from ior_mvp.graph.engine_feed import shared_enabler_inputs
++from ior_mvp.graph.repository import GraphRepositoryError, graph_projection
++
++from .claims import _linked_claim_status
+ 
+ from .models import (
+     ClaimReference,
+-    ClaimStatus,
+     DecisionBranch,
+     EvidenceClass,
+     EvidenceReference,
+@@ -37,6 +43,7 @@ class _SimulationEvidence:
+     scenario_id: str
+     labels: PolicyLabels
+     combined_ids: frozenset[str]
++    indexed_rows: Mapping[str, Mapping[str, Any]]
+     public_ids: frozenset[str]
+     synthetic_ids: frozenset[str]
+     synthetic_by_suffix: Mapping[str, str]
+@@ -144,31 +151,115 @@ def _simulation_evidence(
+         scenario_id=scenario_id,
+         labels=labels,
+         combined_ids=frozenset(combined_rows),
++        indexed_rows=combined_rows,
+         public_ids=frozenset(public_rows),
+         synthetic_ids=frozenset(synthetic_ids),
+         synthetic_by_suffix=by_suffix,
+     )
+ 
+ 
+-def _referenced_evidence_ids(value: Any) -> set[str]:
+-    evidence_ids: set[str] = set()
++def _reference_ids(value: Any, path: tuple[str | int, ...]) -> tuple[str, ...]:
++    if (not isinstance(value, Sequence) or isinstance(value, (str, bytes))
++            or any(not isinstance(item, str) or not item.strip() for item in value)):
++        raise ExecutiveIntegrityError(f"Malformed evidence ids at {path}")
++    return tuple(value)
++
++
++def _evidence_references(
++    value: Any, path: tuple[str | int, ...] = (),
++) -> list[tuple[tuple[str | int, ...], tuple[str, ...]]]:
++    references = []
+     if isinstance(value, Mapping):
+         for key, item in value.items():
+-            if (
+-                key == "evidence_ids"
+-                and isinstance(item, Sequence)
+-                and not isinstance(item, (str, bytes))
+-            ):
+-                evidence_ids.update(
+-                    evidence_id
+-                    for evidence_id in item
+-                    if isinstance(evidence_id, str)
+-                )
+-            evidence_ids.update(_referenced_evidence_ids(item))
++            location = (*path, key)
++            if key == "evidence_ids":
++                references.append((location, _reference_ids(item, location)))
++            else:
++                references.extend(_evidence_references(item, location))
+     elif isinstance(value, Sequence) and not isinstance(value, (str, bytes)):
+-        for item in value:
+-            evidence_ids.update(_referenced_evidence_ids(item))
+-    return evidence_ids
++        for index, item in enumerate(value):
++            references.extend(_evidence_references(item, (*path, index)))
++    return references
++
++
++def _shared_enabler_allowance(
++    public: Mapping[str, Any], decision: Mapping[str, Any], evidence: _SimulationEvidence,
++) -> dict[tuple[str | int, ...], frozenset[str]]:
++    """Validate the graph feed and stored dependencies before allowing foreign IDs."""
++    routes = _rows(decision.get("route_hypotheses"), field="simulated routes")
++    candidates = [(i, row) for i, row in enumerate(routes) if row.get("route_code") == 8]
++    if not any("shared_enabler" in row for _, row in candidates):
++        return {}
++    if len(candidates) != 1 or type(candidates[0][1].get("route_code")) is not int:
++        raise ExecutiveIntegrityError("Shared enabler requires one integer route 8")
++    index, route = candidates[0]
++    payload = route.get("shared_enabler")
++    opportunity = public.get("opportunity")
++    opportunity_id = opportunity.get("id") if isinstance(opportunity, Mapping) else None
++    if not isinstance(payload, Mapping) or not isinstance(opportunity_id, str):
++        raise ExecutiveIntegrityError("Shared-enabler payload or opportunity is invalid")
++    try:
++        feed = shared_enabler_inputs(
++            graph_projection(), opportunity_id, branch=("simulated", evidence.scenario_id),
++        )
++        scenarios = synthetic_scenarios()
++    except (GraphRepositoryError, RepositoryError, EvidenceIntegrityError, ValueError, OSError) as exc:
++        raise ExecutiveIntegrityError("Shared-enabler dependency sources are unavailable or invalid") from exc
++    if not isinstance(feed, Mapping):
++        raise ExecutiveIntegrityError("Shared enabler has no bound graph feed")
++    for field in ("enabler_id", "graph_projection_id", "dependent_opportunity_ids"):
++        if field not in feed or payload.get(field) != feed[field]:
++            raise ExecutiveIntegrityError(f"Shared-enabler {field} differs from bound graph feed")
++    dependents = _reference_ids(feed["dependent_opportunity_ids"], ("dependent_opportunity_ids",))
++    if opportunity_id not in dependents or len(set(dependents)) != len(dependents):
++        raise ExecutiveIntegrityError("Shared-enabler current opportunity membership is invalid")
++    verified: set[str] = set()
++    for dependent in dependents:
++        scenario = scenarios.get(dependent)
++        if not isinstance(scenario, dict) or scenario.get("opportunity_id") != dependent:
++            raise ExecutiveIntegrityError(f"Missing dependent scenario: {dependent}")
++        scenario_id = scenario.get("scenario_id")
++        if (not isinstance(scenario_id, str) or not scenario_id
++                or sum(row.get("scenario_id") == scenario_id for row in scenarios.values()) != 1
++                or (dependent == opportunity_id and scenario_id != evidence.scenario_id)):
++            raise ExecutiveIntegrityError("Shared-enabler scenario membership is invalid")
++        declaration = scenario.get("synthetic_inputs", {}).get("shared_enabler")
++        if not isinstance(declaration, Mapping) or declaration.get("enabler_id") != feed["enabler_id"]:
++            raise ExecutiveIntegrityError(f"Missing or forged shared-enabler declaration: {dependent}")
++        try:
++            stored_rows = synthetic_evidence_rows(scenario)
++        except (EvidenceIntegrityError, ValueError, KeyError, TypeError) as exc:
++            raise ExecutiveIntegrityError(f"Invalid dependent scenario evidence: {dependent}") from exc
++        stored_ids = tuple(_row_id(row) for row in stored_rows)
++        required_id = f"{scenario_id}::shared_enabler"
++        if len(set(stored_ids)) != len(stored_ids) or required_id not in stored_ids:
++            raise ExecutiveIntegrityError(f"Missing or duplicate stored dependency evidence: {required_id}")
++        verified.add(required_id)
++    route_path = ("route_hypotheses", index, "evidence_ids")
++    nested_path = ("route_hypotheses", index, "shared_enabler", "evidence_ids")
++    for path, raw in ((route_path, route.get("evidence_ids")),
++                      (nested_path, payload.get("evidence_ids")),
++                      (("graph_feed", "evidence_ids"), feed.get("evidence_ids"))):
++        ids = _reference_ids(raw, path)
++        if len(ids) != len(set(ids)) or set(ids) != verified:
++            raise ExecutiveIntegrityError(f"Shared-enabler evidence differs from verified dependencies at {path}")
++    foreign = frozenset(verified - {f"{evidence.scenario_id}::shared_enabler"})
++    return {route_path: foreign, nested_path: foreign}
++
++
++def _decision_evidence_ids(
++    public: Mapping[str, Any], decision: Mapping[str, Any], evidence: _SimulationEvidence,
++) -> set[str]:
++    references = _evidence_references(decision)
++    allowance = _shared_enabler_allowance(public, decision, evidence)
++    local_ids: set[str] = set()
++    for path, ids in references:
++        for evidence_id in ids:
++            if evidence_id in evidence.combined_ids:
++                local_ids.add(evidence_id)
++            elif evidence_id not in allowance.get(path, ()):
++                raise ExecutiveIntegrityError(f"Absent or foreign evidence id at {path}: {evidence_id}")
++    return local_ids
+ 
+ 
+ def _ids_for_suffixes(
+@@ -200,7 +291,9 @@ def _simulated_claim(
+         )
+     return ClaimReference(
+         claim_id=claim_id,
+-        status=ClaimStatus.SUPPORTED,
++        status=_linked_claim_status(
++            evidence.indexed_rows[evidence_id].get("contradiction") for evidence_id in evidence_ids
++        ),
+         evidence_ids=tuple(sorted(evidence_ids)),
+         branch=DecisionBranch.SIMULATED,
+         synthetic_flag=True,
+@@ -232,14 +325,7 @@ def build_simulated_claim_registry(
+     )
+     if public_decision is None:
+         raise ExecutiveIntegrityError("Public decision claim is missing")
+-    decision_ids = {
+-        evidence_id
+-        for evidence_id in _referenced_evidence_ids(decision)
+-        if not (
+-            evidence_id.endswith("::shared_enabler")
+-            and not evidence_id.startswith(f"{evidence.scenario_id}::")
+-        )
+-    }
++    decision_ids = _decision_evidence_ids(public, decision, evidence)
+     decision_ids.update(public_decision.evidence_ids)
+     if (
+         isinstance(decision.get("counterfactual"), Mapping)
+diff --git a/tests/test_executive_api.py b/tests/test_executive_api.py
+index b93f267..6078359 100644
+--- a/tests/test_executive_api.py
++++ b/tests/test_executive_api.py
+@@ -114,3 +114,128 @@ def test_executive_runtime_does_not_import_acquisition_transport() -> None:
+     assert "acquisition" not in source
+     assert "requests" not in source
+     assert "httpx" not in source
++
++
++@pytest.mark.parametrize("opportunity_id", [
++    "SAU-H0-390210", "SAU-H0-721049", "SAU-H6-294110", "SAU-H6-294120",
++    "SAU-H6-310430", "SAU-H6-310510", "SAU-H6-392010", "SAU-H6-721012",
++    "SAU-H6-721061", "SAU-H6-760429", "SAU-H6-760711",
++])
++def test_am4_all_loaded_case_endpoints_are_typed_200(opportunity_id):
++    from ior_mvp.executive.models import ExecutiveCase
++    response = TestClient(app).get(f"/api/executive/opportunities/{opportunity_id}")
++    assert response.status_code == 200, response.text
++    model = ExecutiveCase.model_validate(response.json())
++    assert len(model.steps) == 8 and len(model.vectors) == 4
++    assert model == build_executive_case(opportunity_id)
++
++
++@pytest.mark.parametrize("preferred", [None, {}, pytest.param({"route_code": True}, id="true-route-code"),
++    pytest.param({"route_code": False}, id="false-route-code"),
++    {"route_code": "5"}, {"route_code": 5.0}, {"route_code": -1}, {"route_code": 9},
++    {"route_code": None}, {"route_code": 7}, [], "route", 5, "MISSING"])
++def test_am4_preferred_route_contract_service_and_typed_api(monkeypatch, preferred):
++    from copy import deepcopy
++    from ior_mvp.decision_engine import analyze
++    import ior_mvp.executive.service as service
++    from ior_mvp.executive.taxonomy import ExecutiveIntegrityError
++
++    def changed(opportunity_id, mode="public"):
++        value = deepcopy(analyze(opportunity_id, mode))
++        if mode == "public":
++            if preferred == "MISSING":
++                value.pop("preferred_hypothesis")
++            else:
++                value["preferred_hypothesis"] = preferred
++            value["route_hypotheses"] = [r for r in value["route_hypotheses"] if r["route_code"] != 7]
++            for i, route in enumerate(value["route_hypotheses"]):
++                route["status"] = "fails" if i % 2 else "NOT_CALCULABLE"
++        return value
++
++    monkeypatch.setattr(service, "analyze", changed)
++    # PP retains its real route 0; present None cannot be coupled to that route or status mix.
++    opportunity_id = "SAU-H0-390210"
++    if preferred is None:
++        case = build_executive_case(opportunity_id)
++        value = next(v for s in case.steps for v in s.values if v.key == "preferred_route_code")
++        assert (value.availability.value, value.value) == ("NOT_CALCULABLE", None)
++        assert case.decisions.public.route_code == 0
++    else:
++        with pytest.raises(ExecutiveIntegrityError):
++            build_executive_case(opportunity_id)
++    response = TestClient(app).get(f"/api/executive/opportunities/{opportunity_id}")
++    assert response.status_code == (200 if preferred is None else 422), response.text
++    if preferred is None:
++        value = next(v for s in response.json()["steps"] for v in s["values"] if v["key"] == "preferred_route_code")
++        assert value["availability"] == "NOT_CALCULABLE" and value["value"] is None
++    else:
++        assert response.json()["detail"]["code"] == "EXECUTIVE_INTEGRITY_ERROR"
++
++
++@pytest.mark.parametrize("mutation", [
++    "unrelated_shared", "other_suffix", "absent", "wrong_route", "wrong_field",
++    "forged_enabler", "missing_declaration", "missing_stored", "missing_scenario",
++    "duplicate_scenario", "duplicate_id", "missing_id", "extra_id", "wrong_projection",
++    "wrong_dependents", "missing_payload", "graph_unavailable", "graph_missing",
++    "nonstring_id", "empty_id", "malformed_ids",
++])
++def test_am4_foreign_or_malformed_simulated_references_return_typed_422(monkeypatch, mutation):
++    from copy import deepcopy
++    from ior_mvp.decision_engine import analyze
++    from ior_mvp.data_repository import synthetic_scenarios
++    from ior_mvp.evidence import synthetic_evidence_rows
++    from ior_mvp.graph.repository import GraphRepositoryError
++    import ior_mvp.executive.service as service
++    import ior_mvp.executive.provenance as provenance
++
++    opportunity_id = "SAU-H6-760429"
++    public = analyze(opportunity_id, "public")
++    simulated = deepcopy(analyze(opportunity_id, "simulated"))
++    decision = simulated["simulation_decision"]
++    route = next(r for r in decision["route_hypotheses"] if r["route_code"] == 8)
++    payload = route["shared_enabler"]
++    foreign_id = "SYN-MINISTRY-ALU-FOIL-001::shared_enabler"
++    scenarios = deepcopy(synthetic_scenarios())
++    foreign = scenarios["SAU-H6-760711"]
++    if mutation in {"unrelated_shared", "other_suffix", "absent", "wrong_route"}:
++        bad = {"unrelated_shared": "ANY-UNRELATED::shared_enabler", "other_suffix": "ANY-UNRELATED::other_suffix",
++               "absent": "ABSENT", "wrong_route": foreign_id}[mutation]
++        decision["route_hypotheses"][0]["evidence_ids"].append(bad)
++    elif mutation == "wrong_field":
++        decision["unrelated"] = {"evidence_ids": [foreign_id]}
++    elif mutation == "forged_enabler":
++        foreign["synthetic_inputs"]["shared_enabler"]["enabler_id"] = "FORGED"
++    elif mutation == "missing_declaration":
++        foreign["synthetic_inputs"].pop("shared_enabler")
++    elif mutation == "missing_scenario":
++        scenarios.pop("SAU-H6-760711")
++    elif mutation == "duplicate_scenario":
++        foreign["scenario_id"] = scenarios[opportunity_id]["scenario_id"]
++    elif mutation == "missing_stored":
++        monkeypatch.setattr(provenance, "synthetic_evidence_rows", lambda scenario: [r for r in synthetic_evidence_rows(scenario) if r["evidence_id"] != foreign_id], raising=False)
++    elif mutation in {"duplicate_id", "missing_id", "extra_id"}:
++        if mutation == "duplicate_id":
++            payload["evidence_ids"].append(foreign_id)
++        elif mutation == "missing_id":
++            payload["evidence_ids"].remove(foreign_id)
++        else:
++            payload["evidence_ids"].append("ANY-UNRELATED::shared_enabler")
++    elif mutation == "wrong_projection":
++        payload["graph_projection_id"] = "FORGED"
++    elif mutation == "wrong_dependents":
++        payload["dependent_opportunity_ids"].reverse()
++    elif mutation == "missing_payload":
++        route.pop("shared_enabler")
++    elif mutation == "graph_unavailable":
++        def unavailable():
++            raise GraphRepositoryError("Unavailable bound graph")
++        monkeypatch.setattr(provenance, "graph_projection", unavailable, raising=False)
++    elif mutation == "graph_missing":
++        monkeypatch.setattr(provenance, "shared_enabler_inputs", lambda *a, **kw: None, raising=False)
++    else:
++        decision["unrelated"] = {"evidence_ids": {"nonstring_id": [42], "empty_id": [""], "malformed_ids": "bad"}[mutation]}
++    monkeypatch.setattr(provenance, "synthetic_scenarios", lambda: scenarios, raising=False)
++    monkeypatch.setattr(service, "analyze", lambda _id, mode="public": public if mode == "public" else simulated)
++    response = TestClient(app).get(f"/api/executive/opportunities/{opportunity_id}")
++    assert response.status_code == 422, response.text
++    assert response.json()["detail"]["code"] == "EXECUTIVE_INTEGRITY_ERROR"
+diff --git a/tests/test_executive_claims.py b/tests/test_executive_claims.py
+index f625209..4ad1661 100644
+--- a/tests/test_executive_claims.py
++++ b/tests/test_executive_claims.py
+@@ -377,3 +377,106 @@ def test_simulated_claims_reject_incomplete_scenario_policy_labels() -> None:
+     }
+     with pytest.raises(ExecutiveIntegrityError, match="labels"):
+         build_claim_registry(public, simulated)
++
++
++@pytest.mark.parametrize("claim_id", ["decision.simulated", "step.CONDITIONS_AND_KILL.simulated"])
++def test_am4_steel_simulated_claim_preserves_linked_contradiction(claim_id):
++    from ior_mvp.executive.claims import build_claim_registry
++    public = analyze("SAU-H0-721049", "public")
++    simulated = analyze("SAU-H0-721049", "simulated")
++    claims = build_claim_registry(public, simulated)
++    claim = next(c for c in claims if c.claim_id == claim_id)
++    assert "S-UNICOIL-SPEC" in claim.evidence_ids
++    assert claim.status.value == "CONTRADICTED"
++    assert tuple(c for c in claims if c.branch.value == "PUBLIC") == build_claim_registry(public)
++    assert claim.branch.value == "SIMULATED" and claim.evidence_class.value == "D"
++    assert claim.scenario_id == "SYN-MINISTRY-STEEL-001"
++
++
++@pytest.mark.parametrize("suffix,expected", [("economics", "CONTRADICTED"), ("demand", "SUPPORTED")])
++def test_am4_only_linked_synthetic_contradictions_affect_claim(suffix, expected):
++    from ior_mvp.executive.claims import build_claim_registry
++    public = analyze("SAU-H0-721049", "public")
++    simulated = deepcopy(analyze("SAU-H0-721049", "simulated"))
++    original_decision = deepcopy(simulated["simulation_decision"])
++    row = next(r for r in simulated["evidence"] if r["evidence_id"] == f"SYN-MINISTRY-STEEL-001::{suffix}")
++    row["contradiction"] = "Injected stored contradiction"
++    claim = next(c for c in build_claim_registry(public, simulated) if c.claim_id == "step.INTERVENTION.simulated")
++    assert claim.status.value == expected
++    assert (row["evidence_id"] in claim.evidence_ids) == (suffix == "economics")
++    assert simulated["simulation_decision"] == original_decision
++
++
++def test_am4_no_fabricated_missing_need():
++    from ior_mvp.executive.claims import build_claim_registry
++    from ior_mvp.executive.taxonomy import ExecutiveIntegrityError
++    public = deepcopy(analyze("SAU-H0-721049", "public"))
++    r12 = next(r for r in public["rules"] if r["rule_id"] == "R12")
++    r12["metrics"]["evidence_needs"] = []
++    with pytest.raises(ExecutiveIntegrityError, match="need|support"):
++        build_claim_registry(public)
++    r12["metrics"]["evidence_needs"] = [{"need_code": "route economics", "evidence_ids": []}]
++    claim = next(c for c in build_claim_registry(public) if c.claim_id == "rule.R12")
++    assert claim.status.value == "UNRESOLVED"
++    assert claim.missing_need_codes == ("route economics",) and not claim.evidence_ids
++
++
++@pytest.mark.parametrize("opportunity_id", ["SAU-H6-760429", "SAU-H6-760711"])
++def test_am4_aluminium_dependency_retained_but_claims_scenario_local(opportunity_id):
++    from ior_mvp.executive.claims import build_claim_registry
++    from ior_mvp.graph.engine_feed import shared_enabler_inputs
++    from ior_mvp.graph.repository import graph_projection
++    from ior_mvp.data_repository import synthetic_scenarios
++    from ior_mvp.evidence import synthetic_evidence_rows
++    public = analyze(opportunity_id, "public")
++    simulated = analyze(opportunity_id, "simulated")
++    original = deepcopy(simulated)
++    scenario_id = simulated["simulation_scenario"]["scenario_id"]
++    feed = shared_enabler_inputs(graph_projection(), opportunity_id, branch=("simulated", scenario_id))
++    expected = {"SYN-MINISTRY-ALU-FOIL-001::shared_enabler", "SYN-MINISTRY-ALU-PROFILES-001::shared_enabler"}
++    route = next(r for r in simulated["simulation_decision"]["route_hypotheses"] if r["route_code"] == 8)
++    assert set(route["evidence_ids"]) == set(route["shared_enabler"]["evidence_ids"]) == set(feed["evidence_ids"]) == expected
++    assert feed["dependent_opportunity_ids"] == ["SAU-H6-760429", "SAU-H6-760711"]
++    for dependent in feed["dependent_opportunity_ids"]:
++        scenario = synthetic_scenarios()[dependent]
++        assert scenario["synthetic_inputs"]["shared_enabler"]["enabler_id"] == feed["enabler_id"]
++        assert f"{scenario['scenario_id']}::shared_enabler" in {r["evidence_id"] for r in synthetic_evidence_rows(scenario)}
++    stored = {r["evidence_id"] for r in simulated["evidence"]}
++    for claim in build_claim_registry(public, simulated):
++        assert set(claim.evidence_ids) <= stored
++    assert simulated == original
++
++
++@pytest.mark.parametrize("mutation", ["unrelated_shared", "absent", "wrong_route", "wrong_field",
++                                      "forged_declaration", "missing_declaration", "missing_stored"])
++def test_am4_claims_reject_invalid_foreign_dependencies(monkeypatch, mutation):
++    from ior_mvp.executive.claims import build_claim_registry
++    from ior_mvp.executive.taxonomy import ExecutiveIntegrityError
++    from ior_mvp.data_repository import synthetic_scenarios
++    from ior_mvp.evidence import synthetic_evidence_rows
++    import ior_mvp.executive.provenance as provenance
++
++    public = analyze("SAU-H6-760429", "public")
++    simulated = deepcopy(analyze("SAU-H6-760429", "simulated"))
++    decision = simulated["simulation_decision"]
++    foreign_id = "SYN-MINISTRY-ALU-FOIL-001::shared_enabler"
++    if mutation in {"unrelated_shared", "absent", "wrong_route"}:
++        bad = {"unrelated_shared": "ANY-UNRELATED::shared_enabler",
++               "absent": "ANY-UNRELATED::other_suffix", "wrong_route": foreign_id}[mutation]
++        decision["route_hypotheses"][0]["evidence_ids"].append(bad)
++    elif mutation == "wrong_field":
++        decision["unrelated"] = {"evidence_ids": [foreign_id]}
++    elif mutation == "missing_stored":
++        monkeypatch.setattr(provenance, "synthetic_evidence_rows", lambda scenario: [
++            row for row in synthetic_evidence_rows(scenario) if row["evidence_id"] != foreign_id
++        ], raising=False)
++    else:
++        scenarios = deepcopy(synthetic_scenarios())
++        inputs = scenarios["SAU-H6-760711"]["synthetic_inputs"]
++        if mutation == "missing_declaration":
++            inputs.pop("shared_enabler")
++        else:
++            inputs["shared_enabler"]["enabler_id"] = "FORGED"
++        monkeypatch.setattr(provenance, "synthetic_scenarios", lambda: scenarios, raising=False)
++    with pytest.raises(ExecutiveIntegrityError):
++        build_claim_registry(public, simulated)
+diff --git a/tests/test_executive_service.py b/tests/test_executive_service.py
+index f0170a6..194a590 100644
+--- a/tests/test_executive_service.py
++++ b/tests/test_executive_service.py
+@@ -216,8 +216,8 @@ def test_steel_has_exact_steps_vectors_and_existing_branch_outcomes() -> None:
+     assert all(
+         (
+             f"step.{row.step_id.value}" in row.claim_ids
+-            if row.step_id is not ExecutiveStepId.SIMULATED_EVIDENCE
+-            else "step.SIMULATED_EVIDENCE.simulated" in row.claim_ids
++            if row.step_id not in {ExecutiveStepId.SIMULATED_EVIDENCE, ExecutiveStepId.INTERVENTION}
++            else f"step.{row.step_id.value}.simulated" in row.claim_ids
+         )
+         for row in executive.steps
+     )
+@@ -286,9 +286,9 @@ def test_polypropylene_rejection_does_not_invent_support() -> None:
+         if row.step_id is ExecutiveStepId.INTERVENTION
+     )
+     values = {row.key: row.value for row in intervention.values}
+-    assert values["selected_route_code"] == 0
+-    assert values["minimum_effective_support_m_sar"] == 0.0
+-    assert values["incremental_national_value_m_sar"] is None
++    assert values["simulated_selected_route_code"] == 0
++    assert values["simulated_minimum_effective_support_m_sar"] == 0.0
++    assert values["simulated_incremental_national_value_m_sar"] is None
+ 
+ 
+ def test_case_without_scenario_has_typed_unavailable_simulation(
+@@ -326,3 +326,54 @@ def test_unknown_and_malformed_case_inputs_fail_closed(
+     monkeypatch.setattr(service, "analyze", malformed_analyze)
+     with pytest.raises(ExecutiveIntegrityError, match="ABSENT"):
+         service.build_executive_case("SAU-H0-721049")
++
++
++@pytest.mark.parametrize("opportunity_id", ALL_IDS)
++def test_am4_all_cases_preserve_typed_steps_vectors_and_decisions(opportunity_id):
++    from ior_mvp.data_repository import public_cases
++    from ior_mvp.executive.models import ExecutiveCase, ExecutiveStepId, DecisionVectorId
++
++    assert tuple(sorted(public_cases())) == ALL_IDS
++    public = analyze(opportunity_id, "public")
++    simulated = analyze(opportunity_id, "simulated")
++    case = build_executive_case(opportunity_id)
++    assert isinstance(case, ExecutiveCase)
++    assert tuple(s.step_id for s in case.steps) == tuple(ExecutiveStepId)
++    assert tuple(v.vector_id for v in case.vectors) == tuple(DecisionVectorId)
++    for projected, original in ((case.decisions.public, public["real_decision"]),
++                                (case.decisions.simulated, simulated["simulation_decision"])):
++        assert (projected.state.value, projected.route_code) == (original["state"], original["route_code"])
++    assert simulated["real_decision"] == public["real_decision"]
++    value = next(v for s in case.steps for v in s.values if v.key == "preferred_route_code")
++    absent = opportunity_id not in {"SAU-H0-390210", "SAU-H0-721049", "SAU-H6-760429"}
++    assert (value.availability.value, value.value) == (
++        ("NOT_CALCULABLE", None) if absent else ("AVAILABLE", public["preferred_hypothesis"]["route_code"])
++    )
++
++
++@pytest.mark.parametrize("opportunity_id", ["SAU-H0-721049", "SAU-H0-390210"])
++@pytest.mark.parametrize("available", [True, False])
++def test_am4_intervention_is_exclusively_simulated(monkeypatch, opportunity_id, available):
++    import ior_mvp.executive.service as service
++
++    if not available:
++        monkeypatch.setattr(service, "synthetic_scenarios", lambda: {})
++    case = build_executive_case(opportunity_id)
++    step = next(s for s in case.steps if s.step_id.value == "INTERVENTION")
++    assert step.claim_ids == (("step.INTERVENTION.simulated",) if available else ())
++    assert {v.key for v in step.values} == {
++        "simulated_selected_route_code", "simulated_unsupported_npv_m_sar",
++        "simulated_minimum_effective_support_m_sar", "simulated_incremental_national_value_m_sar",
++        "simulated_approximate_evsi_m_sar",
++    }
++    assert any(c.claim_id == "step.INTERVENTION" for c in case.claims)
++    if not available:
++        assert step.availability.value == "UNAVAILABLE"
++        assert all(v.value is None and not v.evidence_ids and v.availability.value == "UNAVAILABLE" for v in step.values)
++    else:
++        original = analyze(opportunity_id, "simulated")
++        expected = (original["simulation_decision"]["route_code"], original["economics"].get("unsupported_npv_m"),
++                    original["economics"]["minimum_effective_support_m"],
++                    (original["economics"].get("national_value") or {}).get("incremental_national_value_m_sar"),
++                    (original.get("evsi") or {}).get("approximate_evsi_m_sar"))
++        assert tuple(v.value for v in step.values) == expected

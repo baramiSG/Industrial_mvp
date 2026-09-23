@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from collections.abc import Mapping, Sequence
+from collections.abc import Iterable, Mapping, Sequence
 from functools import lru_cache
 from math import fsum
 from typing import Any
@@ -28,6 +28,7 @@ from .provenance import build_evidence_index
 from .taxonomy import (
     ExecutiveIntegrityError, build_dataset_unlocks, extract_case_need_codes,
 )
+from .validation import finite_number, mapping as _mapping, mapping_rows as _rows
 
 EXECUTIVE_SCHEMA_VERSION = "1.0.0"
 SYNTHETIC_SOURCE = "DEMO_GENERATOR"
@@ -37,21 +38,6 @@ Pair = tuple[str, Analysis, Analysis | None]
 
 class ExecutiveOpportunityNotFoundError(LookupError):
     """Raised when an executive case identity is not loaded."""
-
-
-def _mapping(value: Any, field: str) -> Analysis:
-    if not isinstance(value, Mapping):
-        raise ExecutiveIntegrityError(f"{field} must be a mapping")
-    return value
-
-
-def _rows(value: Any, field: str) -> tuple[Analysis, ...]:
-    valid_sequence = isinstance(value, Sequence) and not isinstance(
-        value, (str, bytes)
-    )
-    if not valid_sequence or not all(isinstance(row, Mapping) for row in value):
-        raise ExecutiveIntegrityError(f"{field} must contain mappings")
-    return tuple(value)
 
 
 def _opportunity_order() -> tuple[str, ...]:
@@ -146,6 +132,26 @@ def _integrity_summary(pairs: Sequence[Pair]) -> IntegritySummary:
     )
 
 
+def _finite_evsi_sum(values: Iterable[float], field: str) -> float:
+    """Sum validated EVSI values without leaking representation overflow.
+
+    Args:
+        values: Finite EVSI values in their existing aggregation order.
+        field: Fixed, non-sensitive aggregate label for an integrity error.
+
+    Returns:
+        The finite result of the existing math.fsum calculation.
+
+    Raises:
+        ExecutiveIntegrityError: The sum cannot be represented as a finite float.
+    """
+    try:
+        total = fsum(values)
+    except OverflowError:
+        raise ExecutiveIntegrityError(f"{field} must be a finite number") from None
+    return finite_number(total, field)
+
+
 def _evsi_summary(pairs: Sequence[Pair]) -> SyntheticEvsiSummary:
     cases: list[SyntheticEvsiCase] = []
     for opportunity_id, _, simulated in pairs:
@@ -167,7 +173,7 @@ def _evsi_summary(pairs: Sequence[Pair]) -> SyntheticEvsiSummary:
             continue
         evsi = _mapping(raw, "EVSI")
         next_fact = evsi.get("next_fact")
-        if not isinstance(next_fact, str) or not next_fact:
+        if not isinstance(next_fact, str) or not next_fact.strip():
             raise ExecutiveIntegrityError("Available EVSI next_fact is invalid")
         cases.append(
             SyntheticEvsiCase(
@@ -175,11 +181,14 @@ def _evsi_summary(pairs: Sequence[Pair]) -> SyntheticEvsiSummary:
                 scenario_id=scenario_id,
                 availability=AvailabilityStatus.AVAILABLE,
                 next_fact=next_fact,
-                approximate_evsi_m_sar=float(evsi["approximate_evsi_m_sar"]),
-                route_change_probability=float(evsi["route_change_probability"]),
-                value_difference_m_sar=float(evsi["value_difference_m_sar"]),
-                evidence_cost_m_sar=float(evsi["evidence_cost_m_sar"]),
-                delay_cost_m_sar=float(evsi["delay_cost_m_sar"]),
+                **{
+                    field: finite_number(evsi.get(field), f"EVSI {field}")
+                    for field in (
+                        "approximate_evsi_m_sar", "route_change_probability",
+                        "value_difference_m_sar", "evidence_cost_m_sar",
+                        "delay_cost_m_sar",
+                    )
+                },
             )
         )
     values = tuple(
@@ -194,10 +203,14 @@ def _evsi_summary(pairs: Sequence[Pair]) -> SyntheticEvsiSummary:
         display_labels=PolicyLabels(**synthetic_display_labels()),
         available_case_count=len(values),
         unavailable_case_count=len(cases) - len(values),
-        total_approximate_evsi_m_sar=fsum(values),
-        positive_approximate_evsi_m_sar=fsum(row for row in values if row > 0),
-        non_positive_approximate_evsi_m_sar=fsum(
-            row for row in values if row <= 0
+        total_approximate_evsi_m_sar=_finite_evsi_sum(
+            values, "EVSI total_approximate_evsi_m_sar"
+        ),
+        positive_approximate_evsi_m_sar=_finite_evsi_sum(
+            (row for row in values if row > 0), "EVSI positive_approximate_evsi_m_sar"
+        ),
+        non_positive_approximate_evsi_m_sar=_finite_evsi_sum(
+            (row for row in values if row <= 0), "EVSI non_positive_approximate_evsi_m_sar"
         ),
         cases=tuple(cases),
     )

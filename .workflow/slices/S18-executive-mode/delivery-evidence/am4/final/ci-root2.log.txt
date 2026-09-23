@@ -1,0 +1,514 @@
+{
+  "label": "ci-root2",
+  "command": [
+    "make",
+    "ci"
+  ],
+  "cwd": "/tmp/s18-am4-ci-root2",
+  "tree": "1364789a964f96f6ebabf8eae1d239a5bad0b15e",
+  "head": "5964d28b5270b5be89ec804d5a51cecef99d16dd",
+  "started_at_utc": "2026-09-23T19:45:17.578679+00:00",
+  "environment_overrides": {
+    "PLAYWRIGHT_BROWSERS_PATH": "/home/barami/.playwright-browsers",
+    "IOR_VISUAL_MODE": "compare",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "NEO4J_DATABASE": "neo4j",
+    "COMPOSE_FILE": "/tmp/s18-am4-ci-root2/docker-compose.yml:/tmp/s18-am4-codex-implementation/ci-root2-compose.override.yml",
+    "COMPOSE_PROJECT_NAME": "s18-am4-ci-root2",
+    "GRAPH_PYCACHE_PREFIX": "/tmp/s18-am4-ci-root2-pycache"
+  },
+  "clean_before": true
+}
+/home/barami/.local/bin/uv sync --locked --extra dev
+Using CPython 3.14.6
+Creating virtual environment at: .venv
+Resolved 43 packages in 0.89ms
+   Building industrial-opportunity-resolution-mvp @ file:///tmp/s18-am4-ci-root2
+      Built industrial-opportunity-resolution-mvp @ file:///tmp/s18-am4-ci-root2
+Prepared 1 package in 829ms
+warning: Failed to hardlink files; falling back to full copy. This may lead to degraded performance.
+         If the cache and target directories are on different filesystems, hardlinking may not be supported.
+         If this is intentional, set `export UV_LINK_MODE=copy` or use `--link-mode=copy` to suppress this warning.
+Installed 29 packages in 34ms
+ + annotated-doc==0.0.5
+ + annotated-types==0.8.0
+ + anyio==4.14.2
+ + certifi==2026.7.22
+ + click==8.5.0
+ + fastapi==0.141.1
+ + h11==0.16.0
+ + httpcore==1.0.9
+ + httptools==0.8.0
+ + httpx==0.28.1
+ + idna==3.19
+ + industrial-opportunity-resolution-mvp==0.2.0 (from file:///tmp/s18-am4-ci-root2)
+ + iniconfig==2.3.0
+ + packaging==26.3
+ + pluggy==1.6.0
+ + pydantic==2.13.5
+ + pydantic-core==2.46.5
+ + pygments==2.21.0
+ + pypdf==6.16.1
+ + pytest==8.4.2
+ + python-dotenv==1.2.3
+ + pyyaml==6.0.3
+ + starlette==1.6.0
+ + typing-extensions==4.16.0
+ + typing-inspection==0.4.4
+ + uvicorn==0.52.4
+ + uvloop==0.22.1
+ + watchfiles==1.2.0
+ + websockets==17.1
+make graph-gate
+make[1]: Entering directory '/tmp/s18-am4-ci-root2'
+make[2]: Entering directory '/tmp/s18-am4-ci-root2'
+PYTHONDONTWRITEBYTECODE=1 PYTHONPYCACHEPREFIX=/tmp/s18-am4-ci-root2-pycache \
+	PYTHONPATH=src /home/barami/.local/bin/uv run --locked --extra dev --extra graph python -m ior_mvp.graph credential
+warning: Failed to hardlink files; falling back to full copy. This may lead to degraded performance.
+         If the cache and target directories are on different filesystems, hardlinking may not be supported.
+         If this is intentional, set `export UV_LINK_MODE=copy` or use `--link-mode=copy` to suppress this warning.
+Installed 2 packages in 15ms
+CREDENTIAL_CREATED
+docker compose up -d --pull never industrial-mvp-neo4j
+ Network s18-am4-ci-root2-net Creating 
+ Network s18-am4-ci-root2-net Creating 
+ Volume s18-am4-ci-root2-data Creating 
+ Volume s18-am4-ci-root2-data Creating 
+ Volume s18-am4-ci-root2-data Created 
+ Volume s18-am4-ci-root2-data Created 
+ Network s18-am4-ci-root2-net Created 
+ Network s18-am4-ci-root2-net Created 
+ Container s18-am4-ci-root2-neo4j Creating 
+ Container s18-am4-ci-root2-neo4j Created 
+ Container s18-am4-ci-root2-neo4j Starting 
+ Container s18-am4-ci-root2-neo4j Started 
+NEO4J_AUTH_FILE="/tmp/s18-am4-ci-root2/.secrets/neo4j_auth.txt" \
+	PYTHONDONTWRITEBYTECODE=1 PYTHONPYCACHEPREFIX=/tmp/s18-am4-ci-root2-pycache \
+	PYTHONPATH=src /home/barami/.local/bin/uv run --locked --extra dev --extra graph python -m ior_mvp.graph wait \
+	--target compose --timeout 180
+GRAPH READY (compose)
+make[2]: Leaving directory '/tmp/s18-am4-ci-root2'
+GRAPH CLEAR PASS (compose)
+make[2]: Entering directory '/tmp/s18-am4-ci-root2'
+NEO4J_AUTH_FILE="/tmp/s18-am4-ci-root2/.secrets/neo4j_auth.txt" \
+	PYTHONDONTWRITEBYTECODE=1 PYTHONPYCACHEPREFIX=/tmp/s18-am4-ci-root2-pycache \
+	PYTHONPATH=src /home/barami/.local/bin/uv run --locked --extra dev --extra graph python -m ior_mvp.graph load \
+	--target compose
+GRAPH LOAD PASS (compose; GRAPH-SAU-2026-09-12-461bf4840962; created 925 nodes / 1045 relationships)
+make[2]: Leaving directory '/tmp/s18-am4-ci-root2'
+make[2]: Entering directory '/tmp/s18-am4-ci-root2'
+NEO4J_AUTH_FILE="/tmp/s18-am4-ci-root2/.secrets/neo4j_auth.txt" \
+	PYTHONDONTWRITEBYTECODE=1 PYTHONPYCACHEPREFIX=/tmp/s18-am4-ci-root2-pycache \
+	PYTHONPATH=src /home/barami/.local/bin/uv run --locked --extra dev --extra graph python -m ior_mvp.graph load \
+	--target compose
+GRAPH LOAD PASS (compose; GRAPH-SAU-2026-09-12-461bf4840962; created 0 nodes / 0 relationships)
+make[2]: Leaving directory '/tmp/s18-am4-ci-root2'
+make[2]: Entering directory '/tmp/s18-am4-ci-root2'
+NEO4J_AUTH_FILE="/tmp/s18-am4-ci-root2/.secrets/neo4j_auth.txt" \
+	PYTHONDONTWRITEBYTECODE=1 PYTHONPYCACHEPREFIX=/tmp/s18-am4-ci-root2-pycache \
+	PYTHONPATH=src /home/barami/.local/bin/uv run --locked --extra dev --extra graph python -m ior_mvp.graph verify \
+	--target compose
+GRAPH VERIFY PASS (compose; GRAPH-SAU-2026-09-12-461bf4840962; 925 nodes; 1045 edges)
+make[2]: Leaving directory '/tmp/s18-am4-ci-root2'
+make[2]: Entering directory '/tmp/s18-am4-ci-root2'
+IOR_GRAPH_TEST_EXPLICIT=1 IOR_GRAPH_TARGET=compose \
+	NEO4J_AUTH_FILE="/tmp/s18-am4-ci-root2/.secrets/neo4j_auth.txt" \
+	PYTHONDONTWRITEBYTECODE=1 PYTHONPYCACHEPREFIX=/tmp/s18-am4-ci-root2-pycache \
+	PYTHONPATH=src /home/barami/.local/bin/uv run --locked --extra dev --extra graph pytest -q graph_tests \
+	-m "graph and not graph_unavailable and not graph_ui"
+s.........                                                               [100%]/tmp/s18-am4-ci-root2/.venv/lib/python3.14/site-packages/neo4j/_sync/io/_bolt.py:199: DeprecationWarning: 'asyncio.iscoroutinefunction' is deprecated and slated for removal in Python 3.16; use inspect.iscoroutinefunction() instead
+  if not asyncio.iscoroutinefunction(self.close):
+/tmp/s18-am4-ci-root2/.venv/lib/python3.14/site-packages/neo4j/_sync/io/_bolt.py:199: DeprecationWarning: 'asyncio.iscoroutinefunction' is deprecated and slated for removal in Python 3.16; use inspect.iscoroutinefunction() instead
+  if not asyncio.iscoroutinefunction(self.close):
+
+=============================== warnings summary ===============================
+.venv/lib/python3.14/site-packages/fastapi/testclient.py:1
+  /tmp/s18-am4-ci-root2/.venv/lib/python3.14/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+graph_tests/test_constraints_provenance.py: 30 warnings
+  /tmp/s18-am4-ci-root2/.venv/lib/python3.14/site-packages/neo4j/_meta.py:213: DeprecationWarning: 'asyncio.iscoroutinefunction' is deprecated and slated for removal in Python 3.16; use inspect.iscoroutinefunction() instead
+    if asyncio.iscoroutinefunction(f):
+
+graph_tests/test_constraints_provenance.py: 1964 warnings
+graph_tests/test_unlock_value.py: 68 warnings
+graph_tests/test_views_equal_artifact.py: 658 warnings
+  /tmp/s18-am4-ci-root2/.venv/lib/python3.14/site-packages/neo4j/_sync/io/_common.py:216: DeprecationWarning: 'asyncio.iscoroutinefunction' is deprecated and slated for removal in Python 3.16; use inspect.iscoroutinefunction() instead
+    if asyncio.iscoroutinefunction(connection_attr):
+
+graph_tests/test_constraints_provenance.py: 4 warnings
+graph_tests/test_unlock_value.py: 8 warnings
+graph_tests/test_views_equal_artifact.py: 93 warnings
+  /tmp/s18-am4-ci-root2/.venv/lib/python3.14/site-packages/neo4j/_sync/io/_bolt.py:199: DeprecationWarning: 'asyncio.iscoroutinefunction' is deprecated and slated for removal in Python 3.16; use inspect.iscoroutinefunction() instead
+    if not asyncio.iscoroutinefunction(self.close):
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+SKIPPED [1] graph_tests/test_aura_verification.py:18: AURA_OPERATOR_ONLY
+9 passed, 1 skipped, 3 deselected, 2826 warnings in 3.59s
+make[2]: Leaving directory '/tmp/s18-am4-ci-root2'
+make[2]: Entering directory '/tmp/s18-am4-ci-root2'
+IOR_GRAPH_TEST_EXPLICIT=1 IOR_GRAPH_TARGET=compose \
+	NEO4J_AUTH_FILE="/tmp/s18-am4-ci-root2/.secrets/neo4j_auth.txt" \
+	PYTHONDONTWRITEBYTECODE=1 PYTHONPYCACHEPREFIX=/tmp/s18-am4-ci-root2-pycache \
+	PYTHONPATH=src /home/barami/.local/bin/uv run --locked --extra dev --extra graph --extra e2e pytest -q graph_tests \
+	-m graph_ui --browser chromium
+warning: Failed to hardlink files; falling back to full copy. This may lead to degraded performance.
+         If the cache and target directories are on different filesystems, hardlinking may not be supported.
+         If this is intentional, set `export UV_LINK_MODE=copy` or use `--link-mode=copy` to suppress this warning.
+Installed 11 packages in 50ms
+.                                                                        [100%]/tmp/s18-am4-ci-root2/.venv/lib/python3.14/site-packages/neo4j/_sync/io/_bolt.py:199: DeprecationWarning: 'asyncio.iscoroutinefunction' is deprecated and slated for removal in Python 3.16; use inspect.iscoroutinefunction() instead
+  if not asyncio.iscoroutinefunction(self.close):
+
+=============================== warnings summary ===============================
+.venv/lib/python3.14/site-packages/fastapi/testclient.py:1
+  /tmp/s18-am4-ci-root2/.venv/lib/python3.14/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+graph_tests/test_graph_ui.py: 30 warnings
+  /tmp/s18-am4-ci-root2/.venv/lib/python3.14/site-packages/neo4j/_meta.py:213: DeprecationWarning: 'asyncio.iscoroutinefunction' is deprecated and slated for removal in Python 3.16; use inspect.iscoroutinefunction() instead
+    if asyncio.iscoroutinefunction(f):
+
+graph_tests/test_graph_ui.py: 518 warnings
+  /tmp/s18-am4-ci-root2/.venv/lib/python3.14/site-packages/neo4j/_sync/io/_common.py:216: DeprecationWarning: 'asyncio.iscoroutinefunction' is deprecated and slated for removal in Python 3.16; use inspect.iscoroutinefunction() instead
+    if asyncio.iscoroutinefunction(connection_attr):
+
+graph_tests/test_graph_ui.py::test_live_graph_ui_matches_mirror_without_interception
+  /tmp/s18-am4-ci-root2/.venv/lib/python3.14/site-packages/neo4j/_sync/io/_bolt.py:199: DeprecationWarning: 'asyncio.iscoroutinefunction' is deprecated and slated for removal in Python 3.16; use inspect.iscoroutinefunction() instead
+    if not asyncio.iscoroutinefunction(self.close):
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+1 passed, 12 deselected, 550 warnings in 7.03s
+make[2]: Leaving directory '/tmp/s18-am4-ci-root2'
+make[2]: Entering directory '/tmp/s18-am4-ci-root2'
+docker compose down --remove-orphans
+ Container s18-am4-ci-root2-neo4j Stopping 
+ Container s18-am4-ci-root2-neo4j Stopped 
+ Container s18-am4-ci-root2-neo4j Removing 
+ Container s18-am4-ci-root2-neo4j Removed 
+ Network s18-am4-ci-root2-net Removing 
+ Network s18-am4-ci-root2-net Removed 
+make[2]: Leaving directory '/tmp/s18-am4-ci-root2'
+make[2]: Entering directory '/tmp/s18-am4-ci-root2'
+IOR_GRAPH_TEST_EXPLICIT=1 IOR_GRAPH_TARGET=compose \
+	NEO4J_AUTH_FILE="/tmp/s18-am4-ci-root2/.secrets/neo4j_auth.txt" \
+	PYTHONDONTWRITEBYTECODE=1 PYTHONPYCACHEPREFIX=/tmp/s18-am4-ci-root2-pycache \
+	PYTHONPATH=src /home/barami/.local/bin/uv run --locked --extra dev --extra graph pytest -q graph_tests \
+	-m graph_unavailable
+..                                                                       [100%]
+=============================== warnings summary ===============================
+.venv/lib/python3.14/site-packages/fastapi/testclient.py:1
+  /tmp/s18-am4-ci-root2/.venv/lib/python3.14/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+graph_tests/test_unavailable.py: 30 warnings
+  /tmp/s18-am4-ci-root2/.venv/lib/python3.14/site-packages/neo4j/_meta.py:213: DeprecationWarning: 'asyncio.iscoroutinefunction' is deprecated and slated for removal in Python 3.16; use inspect.iscoroutinefunction() instead
+    if asyncio.iscoroutinefunction(f):
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+2 passed, 11 deselected, 31 warnings in 0.60s
+make[2]: Leaving directory '/tmp/s18-am4-ci-root2'
+GRAPH_UNAVAILABLE_OK
+make[1]: Leaving directory '/tmp/s18-am4-ci-root2'
+/home/barami/.local/bin/uv run --locked --extra dev python scripts/check_prohibited_files.py
+PROHIBITED FILE SCAN PASS (1571 tracked files)
+/home/barami/.local/bin/uv run --locked --extra dev python scripts/check_threshold_literals.py
+THRESHOLD LITERAL SCAN PASS (101 Python files; 24 configured numeric values)
+/home/barami/.local/bin/uv run --locked --extra dev python scripts/check_ui_contracts.py
+UI CONTRACT CHECK PASS
+/home/barami/.local/bin/uv run --locked --extra dev python -m compileall -q src scripts tests browser_tests graph_tests
+/home/barami/.local/bin/uv run --locked --extra dev python scripts/check_es_modules.py --node "node"
+ES MODULE CHECK PASS (37 files)
+PYTHONPATH=src /home/barami/.local/bin/uv run --locked --extra dev python scripts/verify_integrity.py
+INTEGRITY PASS
+- data/manifests/snapshot_manifest.json
+- docs/authority/authority_hashes.json
+PYTHONPATH=src /home/barami/.local/bin/uv run --locked --extra dev python scripts/validate_scenarios.py
+SCENARIO VALIDATION PASS (11 scenarios)
+- SYN-MINISTRY-ALU-FOIL-001.json scenario=SYN-MINISTRY-ALU-FOIL-001 opportunity=SAU-H6-760711 status=PASS
+  target_spec_demand_within_public_imports: PASS - 40 kt <= 53.6793 kt.
+  line_nameplate_within_disclosed_public_capacity: NOT_APPLICABLE - No numeric public installed nameplate is disclosed.
+  capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].
+  qualified_availability_within_physical_output: NOT_APPLICABLE - No qualified_available_kt is declared.
+  demand_layers_remain_separate: INFORMATIONAL - Demand layers are reported separately; no ordering constraint is enforced.
+  tariff_line_allocation_sums_to_public_hs6_total: NOT_APPLICABLE - No tariff_line_allocation block is declared.
+  buyer_allocation_within_public_imports: NOT_APPLICABLE - No buyer_allocation block is declared.
+  expansion_assumption_disclosed_and_bounded: NOT_APPLICABLE - No expansion_assumption block is declared.
+  retained_flows_reconcile_to_public_trade: NOT_APPLICABLE - No production_and_retained_flows block is declared.
+  base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.
+  shared_enabler_declaration_valid: PASS - Shared-enabler declaration and explicit valuation source are valid.
+  ground_truth_backtest: PASS - Engine state and route match planted ground truth.
+- SYN-MINISTRY-ALU-PROFILES-001.json scenario=SYN-MINISTRY-ALU-PROFILES-001 opportunity=SAU-H6-760429 status=PASS
+  target_spec_demand_within_public_imports: PASS - 6 kt <= 9.18984 kt.
+  line_nameplate_within_disclosed_public_capacity: NOT_APPLICABLE - No numeric public installed nameplate is disclosed.
+  capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].
+  qualified_availability_within_physical_output: PASS - 2.5 kt <= 30.6 kt.
+  demand_layers_remain_separate: INFORMATIONAL - Demand layers are reported separately; no ordering constraint is enforced.
+  tariff_line_allocation_sums_to_public_hs6_total: PASS - Tariff-line quantities sum to 9.18984 kt against public imports 9.18984 kt.
+  buyer_allocation_within_public_imports: PASS - Buyer quantities sum to 6 kt within public imports 9.18984 kt.
+  expansion_assumption_disclosed_and_bounded: NOT_APPLICABLE - No expansion_assumption block is declared.
+  retained_flows_reconcile_to_public_trade: PASS - Retained flows reconcile to public trade marginals.
+  base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.
+  shared_enabler_declaration_valid: PASS - Shared-enabler declaration and explicit valuation source are valid.
+  ground_truth_backtest: PASS - Engine state and route match planted ground truth.
+- SYN-MINISTRY-FERT-RETAIL-PACKS-001.json scenario=SYN-MINISTRY-FERT-RETAIL-PACKS-001 opportunity=SAU-H6-310510 status=PASS
+  target_spec_demand_within_public_imports: PASS - 1.2229 kt <= 2.44581 kt.
+  line_nameplate_within_disclosed_public_capacity: NOT_APPLICABLE - No numeric public installed nameplate is disclosed.
+  capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].
+  qualified_availability_within_physical_output: NOT_APPLICABLE - No qualified_available_kt is declared.
+  demand_layers_remain_separate: INFORMATIONAL - Demand layers are reported separately; no ordering constraint is enforced.
+  tariff_line_allocation_sums_to_public_hs6_total: NOT_APPLICABLE - No tariff_line_allocation block is declared.
+  buyer_allocation_within_public_imports: NOT_APPLICABLE - No buyer_allocation block is declared.
+  expansion_assumption_disclosed_and_bounded: NOT_APPLICABLE - No expansion_assumption block is declared.
+  retained_flows_reconcile_to_public_trade: NOT_APPLICABLE - No production_and_retained_flows block is declared.
+  base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.
+  shared_enabler_declaration_valid: NOT_APPLICABLE - No shared-enabler declaration is present.
+  ground_truth_backtest: PASS - Engine state and route match planted ground truth.
+- SYN-MINISTRY-GALVALUME-001.json scenario=SYN-MINISTRY-GALVALUME-001 opportunity=SAU-H6-721061 status=PASS
+  target_spec_demand_within_public_imports: PASS - 48 kt <= 93.232 kt.
+  line_nameplate_within_disclosed_public_capacity: NOT_APPLICABLE - No numeric public installed nameplate is disclosed.
+  capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].
+  qualified_availability_within_physical_output: NOT_APPLICABLE - No qualified_available_kt is declared.
+  demand_layers_remain_separate: INFORMATIONAL - Demand layers are reported separately; no ordering constraint is enforced.
+  tariff_line_allocation_sums_to_public_hs6_total: NOT_APPLICABLE - No tariff_line_allocation block is declared.
+  buyer_allocation_within_public_imports: NOT_APPLICABLE - No buyer_allocation block is declared.
+  expansion_assumption_disclosed_and_bounded: NOT_APPLICABLE - No expansion_assumption block is declared.
+  retained_flows_reconcile_to_public_trade: NOT_APPLICABLE - No production_and_retained_flows block is declared.
+  base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.
+  shared_enabler_declaration_valid: NOT_APPLICABLE - No shared-enabler declaration is present.
+  ground_truth_backtest: PASS - Engine state and route match planted ground truth.
+- SYN-MINISTRY-PE-FILM-001.json scenario=SYN-MINISTRY-PE-FILM-001 opportunity=SAU-H6-392010 status=PASS
+  target_spec_demand_within_public_imports: PASS - 16 kt <= 21.6782 kt.
+  line_nameplate_within_disclosed_public_capacity: NOT_APPLICABLE - No numeric public installed nameplate is disclosed.
+  capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].
+  qualified_availability_within_physical_output: PASS - 24 kt <= 51.3 kt.
+  demand_layers_remain_separate: INFORMATIONAL - Demand layers are reported separately; no ordering constraint is enforced.
+  tariff_line_allocation_sums_to_public_hs6_total: PASS - Tariff-line quantities sum to 21.6782 kt against public imports 21.6782 kt.
+  buyer_allocation_within_public_imports: NOT_APPLICABLE - No buyer_allocation block is declared.
+  expansion_assumption_disclosed_and_bounded: NOT_APPLICABLE - No expansion_assumption block is declared.
+  retained_flows_reconcile_to_public_trade: NOT_APPLICABLE - No production_and_retained_flows block is declared.
+  base_demand_and_commitment_probability_valid: NOT_APPLICABLE - No base demand, commitment probability or MES block is declared.
+  shared_enabler_declaration_valid: NOT_APPLICABLE - No shared-enabler declaration is present.
+  ground_truth_backtest: PASS - Engine state and route match planted ground truth.
+- SYN-MINISTRY-PENICILLIN-API-001.json scenario=SYN-MINISTRY-PENICILLIN-API-001 opportunity=SAU-H6-294110 status=PASS
+  target_spec_demand_within_public_imports: PASS - 0.171511 kt <= 0.343023 kt.
+  line_nameplate_within_disclosed_public_capacity: NOT_APPLICABLE - No numeric public installed nameplate is disclosed.
+  capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].
+  qualified_availability_within_physical_output: NOT_APPLICABLE - No qualified_available_kt is declared.
+  demand_layers_remain_separate: INFORMATIONAL - Demand layers are reported separately; no ordering constraint is enforced.
+  tariff_line_allocation_sums_to_public_hs6_total: NOT_APPLICABLE - No tariff_line_allocation block is declared.
+  buyer_allocation_within_public_imports: NOT_APPLICABLE - No buyer_allocation block is declared.
+  expansion_assumption_disclosed_and_bounded: NOT_APPLICABLE - No expansion_assumption block is declared.
+  retained_flows_reconcile_to_public_trade: NOT_APPLICABLE - No production_and_retained_flows block is declared.
+  base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.
+  shared_enabler_declaration_valid: NOT_APPLICABLE - No shared-enabler declaration is present.
+  ground_truth_backtest: PASS - Engine state and route match planted ground truth.
+- SYN-MINISTRY-PP-001.json scenario=SYN-MINISTRY-PP-001 opportunity=SAU-H0-390210 status=PASS
+  target_spec_demand_within_public_imports: PASS - 56 kt <= 56 kt.
+  line_nameplate_within_disclosed_public_capacity: PASS - 1170 kt <= 1170 kt.
+  capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].
+  qualified_availability_within_physical_output: PASS - 80 kt <= 1055.46 kt.
+  demand_layers_remain_separate: INFORMATIONAL - Demand layers are reported separately; no ordering constraint is enforced.
+  tariff_line_allocation_sums_to_public_hs6_total: NOT_APPLICABLE - No tariff_line_allocation block is declared.
+  buyer_allocation_within_public_imports: NOT_APPLICABLE - No buyer_allocation block is declared.
+  expansion_assumption_disclosed_and_bounded: NOT_APPLICABLE - No expansion_assumption block is declared.
+  retained_flows_reconcile_to_public_trade: NOT_APPLICABLE - No production_and_retained_flows block is declared.
+  base_demand_and_commitment_probability_valid: NOT_APPLICABLE - No base demand, commitment probability or MES block is declared.
+  shared_enabler_declaration_valid: NOT_APPLICABLE - No shared-enabler declaration is present.
+  ground_truth_backtest: PASS - Engine state and route match planted ground truth.
+- SYN-MINISTRY-SOP-001.json scenario=SYN-MINISTRY-SOP-001 opportunity=SAU-H6-310430 status=PASS
+  target_spec_demand_within_public_imports: PASS - 11.2306 kt <= 22.4611 kt.
+  line_nameplate_within_disclosed_public_capacity: NOT_APPLICABLE - No numeric public installed nameplate is disclosed.
+  capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].
+  qualified_availability_within_physical_output: NOT_APPLICABLE - No qualified_available_kt is declared.
+  demand_layers_remain_separate: INFORMATIONAL - Demand layers are reported separately; no ordering constraint is enforced.
+  tariff_line_allocation_sums_to_public_hs6_total: NOT_APPLICABLE - No tariff_line_allocation block is declared.
+  buyer_allocation_within_public_imports: NOT_APPLICABLE - No buyer_allocation block is declared.
+  expansion_assumption_disclosed_and_bounded: NOT_APPLICABLE - No expansion_assumption block is declared.
+  retained_flows_reconcile_to_public_trade: NOT_APPLICABLE - No production_and_retained_flows block is declared.
+  base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.
+  shared_enabler_declaration_valid: NOT_APPLICABLE - No shared-enabler declaration is present.
+  ground_truth_backtest: PASS - Engine state and route match planted ground truth.
+- SYN-MINISTRY-STEEL-001.json scenario=SYN-MINISTRY-STEEL-001 opportunity=SAU-H0-721049 status=PASS
+  target_spec_demand_within_public_imports: PASS - 104 kt <= 287.9 kt.
+  line_nameplate_within_disclosed_public_capacity: PASS - 250 kt <= 250 kt.
+  capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].
+  qualified_availability_within_physical_output: NOT_APPLICABLE - No qualified_available_kt is declared.
+  demand_layers_remain_separate: INFORMATIONAL - Demand layers are reported separately; no ordering constraint is enforced.
+  tariff_line_allocation_sums_to_public_hs6_total: NOT_APPLICABLE - No tariff_line_allocation block is declared.
+  buyer_allocation_within_public_imports: NOT_APPLICABLE - No buyer_allocation block is declared.
+  expansion_assumption_disclosed_and_bounded: NOT_APPLICABLE - No expansion_assumption block is declared.
+  retained_flows_reconcile_to_public_trade: NOT_APPLICABLE - No production_and_retained_flows block is declared.
+  base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.
+  shared_enabler_declaration_valid: NOT_APPLICABLE - No shared-enabler declaration is present.
+  ground_truth_backtest: PASS - Engine state and route match planted ground truth.
+- SYN-MINISTRY-STREPTOMYCIN-API-001.json scenario=SYN-MINISTRY-STREPTOMYCIN-API-001 opportunity=SAU-H6-294120 status=PASS
+  target_spec_demand_within_public_imports: PASS - 0.023889 kt <= 0.047779 kt.
+  line_nameplate_within_disclosed_public_capacity: NOT_APPLICABLE - No numeric public installed nameplate is disclosed.
+  capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].
+  qualified_availability_within_physical_output: NOT_APPLICABLE - No qualified_available_kt is declared.
+  demand_layers_remain_separate: INFORMATIONAL - Demand layers are reported separately; no ordering constraint is enforced.
+  tariff_line_allocation_sums_to_public_hs6_total: NOT_APPLICABLE - No tariff_line_allocation block is declared.
+  buyer_allocation_within_public_imports: NOT_APPLICABLE - No buyer_allocation block is declared.
+  expansion_assumption_disclosed_and_bounded: NOT_APPLICABLE - No expansion_assumption block is declared.
+  retained_flows_reconcile_to_public_trade: NOT_APPLICABLE - No production_and_retained_flows block is declared.
+  base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.
+  shared_enabler_declaration_valid: NOT_APPLICABLE - No shared-enabler declaration is present.
+  ground_truth_backtest: PASS - Engine state and route match planted ground truth.
+- SYN-MINISTRY-TINPLATE-001.json scenario=SYN-MINISTRY-TINPLATE-001 opportunity=SAU-H6-721012 status=PASS
+  target_spec_demand_within_public_imports: PASS - 95 kt <= 104.575 kt.
+  line_nameplate_within_disclosed_public_capacity: NOT_APPLICABLE - No numeric public installed nameplate is disclosed.
+  capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].
+  qualified_availability_within_physical_output: NOT_APPLICABLE - No qualified_available_kt is declared.
+  demand_layers_remain_separate: INFORMATIONAL - Demand layers are reported separately; no ordering constraint is enforced.
+  tariff_line_allocation_sums_to_public_hs6_total: NOT_APPLICABLE - No tariff_line_allocation block is declared.
+  buyer_allocation_within_public_imports: NOT_APPLICABLE - No buyer_allocation block is declared.
+  expansion_assumption_disclosed_and_bounded: NOT_APPLICABLE - No expansion_assumption block is declared.
+  retained_flows_reconcile_to_public_trade: NOT_APPLICABLE - No production_and_retained_flows block is declared.
+  base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.
+  shared_enabler_declaration_valid: NOT_APPLICABLE - No shared-enabler declaration is present.
+  ground_truth_backtest: PASS - Engine state and route match planted ground truth.
+SHARED ENABLER CONSISTENCY PASS (1 enablers, 2 dependents)
+PYTHONPATH=src /home/barami/.local/bin/uv run --locked --extra dev python scripts/reconstruct_snapshot.py --all
+Rotated text discovered. Output will be incomplete.
+Rotated text discovered. Output will be incomplete.
+Rotated text discovered. Output will be incomplete.
+Rotated text discovered. Output will be incomplete.
+Rotated text discovered. Output will be incomplete.
+Rotated text discovered. Output will be incomplete.
+Rotated text discovered. Output will be incomplete.
+Rotated text discovered. Output will be incomplete.
+Rotated text discovered. Output will be incomplete.
+Rotated text discovered. Output will be incomplete.
+Rotated text discovered. Output will be incomplete.
+Rotated text discovered. Output will be incomplete.
+Rotated text discovered. Output will be incomplete.
+Rotated text discovered. Output will be incomplete.
+Rotated text discovered. Output will be incomplete.
+Rotated text discovered. Output will be incomplete.
+Rotated text discovered. Output will be incomplete.
+Rotated text discovered. Output will be incomplete.
+Rotated text discovered. Output will be incomplete.
+Rotated text discovered. Output will be incomplete.
+Rotated text discovered. Output will be incomplete.
+Rotated text discovered. Output will be incomplete.
+Rotated text discovered. Output will be incomplete.
+Rotated text discovered. Output will be incomplete.
+Rotated text discovered. Output will be incomplete.
+Rotated text discovered. Output will be incomplete.
+Rotated text discovered. Output will be incomplete.
+Rotated text discovered. Output will be incomplete.
+Rotated text discovered. Output will be incomplete.
+Rotated text discovered. Output will be incomplete.
+Rotated text discovered. Output will be incomplete.
+Rotated text discovered. Output will be incomplete.
+Rotated text discovered. Output will be incomplete.
+Rotated text discovered. Output will be incomplete.
+Rotated text discovered. Output will be incomplete.
+Rotated text discovered. Output will be incomplete.
+Got invalid hex string: Non-hexadecimal digit found (b'CMapName')
+Skipping broken line b'endcmap CMapName currentdict /CMap defineresource pop end end': Odd-length string
+Got invalid hex string: Non-hexadecimal digit found (b'CMapName')
+Skipping broken line b'endcmap CMapName currentdict /CMap defineresource pop end end': Odd-length string
+Got invalid hex string: Non-hexadecimal digit found (b'CMapName')
+Skipping broken line b'endcmap CMapName currentdict /CMap defineresource pop end end': Odd-length string
+Got invalid hex string: Non-hexadecimal digit found (b'CMapName')
+Skipping broken line b'endcmap CMapName currentdict /CMap defineresource pop end end': Odd-length string
+invalid pdf header: b'HTTP/'
+incorrect startxref pointer(1)
+parsing for Object Streams
+invalid pdf header: b'HTTP/'
+incorrect startxref pointer(1)
+parsing for Object Streams
+Rotated text discovered. Output will be incomplete.
+Rotated text discovered. Output will be incomplete.
+Rotated text discovered. Output will be incomplete.
+Rotated text discovered. Output will be incomplete.
+CASE RECONSTRUCTION PASS (9 snapshots, 9 briefs)
+GRAPH RECONSTRUCTION PASS (1 projections, 925 nodes, 1045 edges)
+RECONSTRUCTION PASS (5 snapshots, 42 artifacts)
+DOCUMENT RECONSTRUCTION PASS (26 records, 26 artifacts)
+ENTITY RECONSTRUCTION PASS (3 artifacts, 46 links)
+SCREENING RECONSTRUCTION PASS (1 snapshots)
+CASE SELECTION RECONSTRUCTION PASS (2 records)
+PYTHONPATH=src /home/barami/.local/bin/uv run --locked --extra dev pytest -q
+........................................................................ [  2%]
+........................................................................ [  4%]
+........................................................................ [  7%]
+........................................................................ [  9%]
+........................................................................ [ 11%]
+........................................................................ [ 14%]
+........................................................................ [ 16%]
+........................................................................ [ 19%]
+........................................................................ [ 21%]
+........................................................................ [ 23%]
+........................................................................ [ 26%]
+........................................................................ [ 28%]
+........................................................................ [ 30%]
+........................................................................ [ 33%]
+........................................................................ [ 35%]
+........................................................................ [ 38%]
+........................................................................ [ 40%]
+........................................................................ [ 42%]
+........................................................................ [ 45%]
+........................................................................ [ 47%]
+........................................................................ [ 49%]
+........................................................................ [ 52%]
+........................................................................ [ 54%]
+........................................................................ [ 57%]
+........................................................................ [ 59%]
+........................................................................ [ 61%]
+........................................................................ [ 64%]
+........................................................................ [ 66%]
+........................................................................ [ 68%]
+........................................................................ [ 71%]
+........................................................................ [ 73%]
+........................................................................ [ 76%]
+........................................................................ [ 78%]
+........................................................................ [ 80%]
+........................................................................ [ 83%]
+........................................................................ [ 85%]
+........................................................................ [ 88%]
+........................................................................ [ 90%]
+........................................................................ [ 92%]
+........................................................................ [ 95%]
+........................................................................ [ 97%]
+........................................................................ [ 99%]
+...                                                                      [100%]
+=============================== warnings summary ===============================
+.venv/lib/python3.14/site-packages/fastapi/testclient.py:1
+  /tmp/s18-am4-ci-root2/.venv/lib/python3.14/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+3027 passed, 1 warning in 68.65s (0:01:08)
+PYTHONPATH=src /home/barami/.local/bin/uv run --locked --extra dev python scripts/demo_smoke.py
+SMOKE PASS
+- Steel / public: INVESTIGATE
+- Steel / simulated: ADVANCE, real state unchanged
+- Polypropylene / public: REJECT generic capacity
+- AR/EN extraction golden gate: 100%
+/home/barami/.local/bin/uv run --locked --extra dev --extra e2e python scripts/check_browser_prerequisites.py
+BROWSER PREFLIGHT PASS
+playwright=1.62.0
+pytest-playwright=0.9.0
+chromium=/home/barami/.playwright-browsers/chromium-1234/chrome-linux64/chrome
+axe_sha256=c24f097bd2f451d4f933e8bc7d8d539f8672a2ebcb5cc9f9f3eec8ca9470a0c1
+font_family=DejaVu Sans
+font_file=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf
+product_fonts=IOR Noto Sans,IOR Noto Sans Arabic
+IOR_E2E_EXPLICIT=1 IOR_E2E_ARTIFACT_DIR=".artifacts/e2e" PYTHONPATH=src /home/barami/.local/bin/uv run --locked --extra dev --extra e2e pytest -q browser_tests --browser chromium --tracing retain-on-failure --screenshot only-on-failure --output=".artifacts/e2e/playwright" -m "e2e and not visual"
+........................................................................ [ 14%]
+........................................................................ [ 28%]
+........................................................................ [ 42%]
+........................................................................ [ 56%]
+........................................................................ [ 70%]
+........................................................................ [ 84%]
+........................................................................ [ 98%]
+.........                                                                [100%]
+513 passed, 4 deselected in 910.82s (0:15:10)
+IOR_E2E_EXPLICIT=1 IOR_E2E_ARTIFACT_DIR=".artifacts/e2e" PYTHONPATH=src /home/barami/.local/bin/uv run --locked --extra dev --extra e2e pytest -q browser_tests --browser chromium --tracing retain-on-failure --screenshot only-on-failure --output=".artifacts/e2e/playwright" -m visual
+....                                                                     [100%]
+4 passed, 513 deselected in 129.52s (0:02:09)
+
+exit_code=0

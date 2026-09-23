@@ -24,6 +24,7 @@ from .models import (
     PolicyLabels,
 )
 from .taxonomy import ExecutiveIntegrityError
+from .validation import mapping
 
 ROUTE_SUFFIXES = frozenset(
     {
@@ -207,6 +208,8 @@ def _shared_enabler_allowance(
         raise ExecutiveIntegrityError("Shared-enabler dependency sources are unavailable or invalid") from exc
     if not isinstance(feed, Mapping):
         raise ExecutiveIntegrityError("Shared enabler has no bound graph feed")
+    scenarios = mapping(scenarios, "dependent scenarios")
+    scenario_rows = tuple(mapping(row, "dependent scenario") for row in scenarios.values())
     for field in ("enabler_id", "graph_projection_id", "dependent_opportunity_ids"):
         if field not in feed or payload.get(field) != feed[field]:
             raise ExecutiveIntegrityError(f"Shared-enabler {field} differs from bound graph feed")
@@ -220,10 +223,11 @@ def _shared_enabler_allowance(
             raise ExecutiveIntegrityError(f"Missing dependent scenario: {dependent}")
         scenario_id = scenario.get("scenario_id")
         if (not isinstance(scenario_id, str) or not scenario_id
-                or sum(row.get("scenario_id") == scenario_id for row in scenarios.values()) != 1
+                or sum(row.get("scenario_id") == scenario_id for row in scenario_rows) != 1
                 or (dependent == opportunity_id and scenario_id != evidence.scenario_id)):
             raise ExecutiveIntegrityError("Shared-enabler scenario membership is invalid")
-        declaration = scenario.get("synthetic_inputs", {}).get("shared_enabler")
+        inputs = mapping(scenario.get("synthetic_inputs"), "dependent synthetic_inputs")
+        declaration = inputs.get("shared_enabler")
         if not isinstance(declaration, Mapping) or declaration.get("enabler_id") != feed["enabler_id"]:
             raise ExecutiveIntegrityError(f"Missing or forged shared-enabler declaration: {dependent}")
         try:

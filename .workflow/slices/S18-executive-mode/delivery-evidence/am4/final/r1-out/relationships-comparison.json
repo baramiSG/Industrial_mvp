@@ -1,0 +1,1066 @@
+{
+  "environment": {
+    "chromium_revision": "chromium-1234",
+    "device_scale_factor": 1,
+    "font_hashes": {
+      "src/ior_mvp/static/assets/fonts/noto-sans-arabic/noto-sans-arabic-arabic-wght-normal.woff2": "ce85091f020920b65762b387b194ef59457ea5b25b760f2dcc35240a94bb8669",
+      "src/ior_mvp/static/assets/fonts/noto-sans/noto-sans-latin-wght-normal.woff2": "51ca196f49a33e79e7870ff88ebd2829a3f627a51e7d690986618f0e7ad2b52d"
+    },
+    "launch_flags": [
+      "--font-render-hinting=none",
+      "--disable-lcd-text",
+      "--force-color-profile=srgb"
+    ],
+    "locales": {
+      "ar": "ar-SA",
+      "en": "en-US"
+    },
+    "new_projection_id": "GRAPH-SAU-2026-09-12-461bf4840962",
+    "new_scratch_head": "5964d28b5270b5be89ec804d5a51cecef99d16dd",
+    "new_source_tree_oid": "1364789a964f96f6ebabf8eae1d239a5bad0b15e",
+    "old_projection_id": "GRAPH-SAU-2026-09-12-b63159c7bdc1",
+    "old_scratch_head": "564b1b7a3924ba14d219af8ed027c54311911910",
+    "old_source_tree_oid": "37390c9ad07556e88e6c608091c6e9c413acb4a5",
+    "playwright_version": "1.62.0",
+    "producer_base_digest": "mcr.microsoft.com/playwright/python:v1.62.0-noble@sha256:aa81288e738725378becba5b3e06cb0f3a7f012a610e87e8d767a090ea3f740d",
+    "producer_image": "ior-visual-baselines:playwright-1.62.0-noble",
+    "producer_image_id": "sha256:938b534c8bac0f80012299fc0bba33c00d29f2ade02416bbc1df9d9c028f8112",
+    "projection_id": "GRAPH-SAU-2026-09-12-b63159c7bdc1",
+    "pytest_playwright_version": "0.9.0",
+    "python_version": "3.12.3",
+    "root": "/workspace",
+    "scratch_head": "564b1b7a3924ba14d219af8ed027c54311911910",
+    "source_tree_oid": "37390c9ad07556e88e6c608091c6e9c413acb4a5",
+    "viewport": {
+      "height": 900,
+      "width": 1440
+    }
+  },
+  "failures": [],
+  "locales": {
+    "ar": {
+      "new_row_count": 12,
+      "new_run_id_rows": 5,
+      "old_row_count": 12,
+      "old_run_id_rows": 5,
+      "ordered_tuples": [
+        {
+          "label": "\u0645\u0642\u064a\u062f \u0628\u0648\u0627\u0633\u0637\u0629",
+          "source": "DEC-SAU-H0-721049-public-ENGINE-RUN",
+          "target": "CAP-SAU-H0-721049-capacity-time-window"
+        },
+        {
+          "label": "\u0645\u0642\u064a\u062f \u0628\u0648\u0627\u0633\u0637\u0629",
+          "source": "DEC-SAU-H0-721049-public-ENGINE-RUN",
+          "target": "INT-SAU-H0-721049-route-5"
+        },
+        {
+          "label": "\u0645\u0642\u064a\u062f \u0628\u0648\u0627\u0633\u0637\u0629",
+          "source": "DEC-SAU-H0-721049-public-ENGINE-RUN",
+          "target": "SAU-H0-721049"
+        },
+        {
+          "label": "\u0645\u0642\u064a\u062f \u0628\u0648\u0627\u0633\u0637\u0629",
+          "source": "DEC-SAU-H0-721049-public-ENGINE-RUN",
+          "target": "SPEC-SAU-H0-721049-TARGET"
+        },
+        {
+          "label": "\u0645\u0642\u064a\u062f \u0628\u0648\u0627\u0633\u0637\u0629",
+          "source": "DEC-SAU-H0-721049-public-ENGINE-RUN",
+          "target": "SPEC-SAU-H0-721049-TARGET"
+        },
+        {
+          "label": "\u0645\u0633\u0646\u062f \u0628\u062f\u0644\u064a\u0644",
+          "source": "CAP-SAU-H0-721049-capacity-time-window",
+          "target": "S-UNICOIL-EPD"
+        },
+        {
+          "label": "\u0645\u0633\u0646\u062f \u0628\u062f\u0644\u064a\u0644",
+          "source": "SAU-H0-721049",
+          "target": "S-UNICOIL-EPD"
+        },
+        {
+          "label": "\u0645\u0633\u0646\u062f \u0628\u062f\u0644\u064a\u0644",
+          "source": "SAU-H0-721049",
+          "target": "S-UNICOIL-EPD"
+        },
+        {
+          "label": "\u0645\u0633\u0646\u062f \u0628\u062f\u0644\u064a\u0644",
+          "source": "SAU-H0-721049",
+          "target": "S-UNICOIL-SPEC"
+        },
+        {
+          "label": "\u0645\u0633\u0646\u062f \u0628\u062f\u0644\u064a\u0644",
+          "source": "SAU-H0-721049",
+          "target": "S-UNICOIL-SPEC"
+        },
+        {
+          "label": "\u0645\u0633\u0646\u062f \u0628\u062f\u0644\u064a\u0644",
+          "source": "SAU-H0-721049",
+          "target": "S-WITS-721049"
+        },
+        {
+          "label": "\u0645\u0633\u0646\u062f \u0628\u062f\u0644\u064a\u0644",
+          "source": "SPEC-SAU-H0-721049-TARGET",
+          "target": "S-WITS-721049"
+        }
+      ],
+      "ordered_tuples_equal": true,
+      "rewrite": {
+        "every_field_equal": true,
+        "replacements": 5,
+        "row_field_differences": [],
+        "section_equal": true,
+        "text_changes": {
+          "changed_indexes": [
+            2,
+            7,
+            12,
+            17,
+            22
+          ],
+          "changed_text_nodes": 5,
+          "text_nodes": 61
+        },
+        "unnormalized_tuples_equal": true
+      },
+      "rows": [
+        {
+          "allowed_fields": [
+            "small.right",
+            "small.width",
+            "span.left",
+            "span.width"
+          ],
+          "differing_fields": [
+            "small.right",
+            "small.width",
+            "span.left",
+            "span.width"
+          ],
+          "gap_new": 12.0,
+          "gap_old": 12.0,
+          "index": 1,
+          "ok": true,
+          "required_extra_equal": true,
+          "run_id_row": true,
+          "shared_gap_equal": true,
+          "unexpected_fields": []
+        },
+        {
+          "allowed_fields": [
+            "small.right",
+            "small.width",
+            "span.left",
+            "span.width"
+          ],
+          "differing_fields": [
+            "small.right",
+            "small.width",
+            "span.left",
+            "span.width"
+          ],
+          "gap_new": 12.0,
+          "gap_old": 12.0,
+          "index": 2,
+          "ok": true,
+          "required_extra_equal": true,
+          "run_id_row": true,
+          "shared_gap_equal": true,
+          "unexpected_fields": []
+        },
+        {
+          "allowed_fields": [
+            "small.right",
+            "small.width",
+            "span.left",
+            "span.width"
+          ],
+          "differing_fields": [
+            "small.right",
+            "small.width",
+            "span.left",
+            "span.width"
+          ],
+          "gap_new": 12.0,
+          "gap_old": 12.0,
+          "index": 3,
+          "ok": true,
+          "required_extra_equal": true,
+          "run_id_row": true,
+          "shared_gap_equal": true,
+          "unexpected_fields": []
+        },
+        {
+          "allowed_fields": [
+            "small.right",
+            "small.width",
+            "span.left",
+            "span.width"
+          ],
+          "differing_fields": [
+            "small.right",
+            "small.width",
+            "span.left",
+            "span.width"
+          ],
+          "gap_new": 12.0,
+          "gap_old": 12.0,
+          "index": 4,
+          "ok": true,
+          "required_extra_equal": true,
+          "run_id_row": true,
+          "shared_gap_equal": true,
+          "unexpected_fields": []
+        },
+        {
+          "allowed_fields": [
+            "small.right",
+            "small.width",
+            "span.left",
+            "span.width"
+          ],
+          "differing_fields": [
+            "small.right",
+            "small.width",
+            "span.left",
+            "span.width"
+          ],
+          "gap_new": 12.0,
+          "gap_old": 12.0,
+          "index": 5,
+          "ok": true,
+          "required_extra_equal": true,
+          "run_id_row": true,
+          "shared_gap_equal": true,
+          "unexpected_fields": []
+        },
+        {
+          "allowed_fields": [],
+          "differing_fields": [],
+          "gap_new": 50.05,
+          "gap_old": 50.05,
+          "index": 6,
+          "ok": true,
+          "required_extra_equal": true,
+          "run_id_row": false,
+          "shared_gap_equal": true,
+          "unexpected_fields": []
+        },
+        {
+          "allowed_fields": [],
+          "differing_fields": [],
+          "gap_new": 198.74,
+          "gap_old": 198.74,
+          "index": 7,
+          "ok": true,
+          "required_extra_equal": true,
+          "run_id_row": false,
+          "shared_gap_equal": true,
+          "unexpected_fields": []
+        },
+        {
+          "allowed_fields": [],
+          "differing_fields": [],
+          "gap_new": 198.74,
+          "gap_old": 198.74,
+          "index": 8,
+          "ok": true,
+          "required_extra_equal": true,
+          "run_id_row": false,
+          "shared_gap_equal": true,
+          "unexpected_fields": []
+        },
+        {
+          "allowed_fields": [],
+          "differing_fields": [],
+          "gap_new": 193.47,
+          "gap_old": 193.47,
+          "index": 9,
+          "ok": true,
+          "required_extra_equal": true,
+          "run_id_row": false,
+          "shared_gap_equal": true,
+          "unexpected_fields": []
+        },
+        {
+          "allowed_fields": [],
+          "differing_fields": [],
+          "gap_new": 193.47,
+          "gap_old": 193.47,
+          "index": 10,
+          "ok": true,
+          "required_extra_equal": true,
+          "run_id_row": false,
+          "shared_gap_equal": true,
+          "unexpected_fields": []
+        },
+        {
+          "allowed_fields": [],
+          "differing_fields": [],
+          "gap_new": 200.72,
+          "gap_old": 200.72,
+          "index": 11,
+          "ok": true,
+          "required_extra_equal": true,
+          "run_id_row": false,
+          "shared_gap_equal": true,
+          "unexpected_fields": []
+        },
+        {
+          "allowed_fields": [],
+          "differing_fields": [],
+          "gap_new": 124.56,
+          "gap_old": 124.56,
+          "index": 12,
+          "ok": true,
+          "required_extra_equal": true,
+          "run_id_row": false,
+          "shared_gap_equal": true,
+          "unexpected_fields": []
+        }
+      ],
+      "rows_3_to_5": [
+        {
+          "index": 3,
+          "new": {
+            "below_fold": false,
+            "button": {
+              "bottom": 926.19,
+              "height": 64,
+              "left": 80.02,
+              "right": 561.02,
+              "top": 862.19,
+              "width": 481
+            },
+            "button_relative_bottom": 254,
+            "button_relative_top": 190,
+            "clipped_at_fold": true,
+            "small_band_offsets": [
+              {
+                "bottom": 34,
+                "top": 19
+              },
+              {
+                "bottom": 51.5,
+                "top": 36.5
+              }
+            ],
+            "small_bands": 2,
+            "span_band_offsets": [
+              {
+                "bottom": 31,
+                "top": 12
+              },
+              {
+                "bottom": 52,
+                "top": 33
+              }
+            ],
+            "span_bands": 2
+          },
+          "old": {
+            "below_fold": false,
+            "button": {
+              "bottom": 926.19,
+              "height": 64,
+              "left": 80.02,
+              "right": 561.02,
+              "top": 862.19,
+              "width": 481
+            },
+            "button_relative_bottom": 254,
+            "button_relative_top": 190,
+            "clipped_at_fold": true,
+            "small_band_offsets": [
+              {
+                "bottom": 34,
+                "top": 19
+              },
+              {
+                "bottom": 51.5,
+                "top": 36.5
+              }
+            ],
+            "small_bands": 2,
+            "span_band_offsets": [
+              {
+                "bottom": 31,
+                "top": 12
+              },
+              {
+                "bottom": 52,
+                "top": 33
+              }
+            ],
+            "span_bands": 2
+          }
+        },
+        {
+          "index": 4,
+          "new": {
+            "below_fold": true,
+            "button": {
+              "bottom": 998.19,
+              "height": 64,
+              "left": 80.02,
+              "right": 561.02,
+              "top": 934.19,
+              "width": 481
+            },
+            "button_relative_bottom": 326,
+            "button_relative_top": 262,
+            "clipped_at_fold": false,
+            "small_band_offsets": [
+              {
+                "bottom": 34,
+                "top": 19
+              },
+              {
+                "bottom": 51.5,
+                "top": 36.5
+              }
+            ],
+            "small_bands": 2,
+            "span_band_offsets": [
+              {
+                "bottom": 31,
+                "top": 12
+              },
+              {
+                "bottom": 52,
+                "top": 33
+              }
+            ],
+            "span_bands": 2
+          },
+          "old": {
+            "below_fold": true,
+            "button": {
+              "bottom": 998.19,
+              "height": 64,
+              "left": 80.02,
+              "right": 561.02,
+              "top": 934.19,
+              "width": 481
+            },
+            "button_relative_bottom": 326,
+            "button_relative_top": 262,
+            "clipped_at_fold": false,
+            "small_band_offsets": [
+              {
+                "bottom": 34,
+                "top": 19
+              },
+              {
+                "bottom": 51.5,
+                "top": 36.5
+              }
+            ],
+            "small_bands": 2,
+            "span_band_offsets": [
+              {
+                "bottom": 31,
+                "top": 12
+              },
+              {
+                "bottom": 52,
+                "top": 33
+              }
+            ],
+            "span_bands": 2
+          }
+        },
+        {
+          "index": 5,
+          "new": {
+            "below_fold": true,
+            "button": {
+              "bottom": 1070.19,
+              "height": 64,
+              "left": 80.02,
+              "right": 561.02,
+              "top": 1006.19,
+              "width": 481
+            },
+            "button_relative_bottom": 398,
+            "button_relative_top": 334,
+            "clipped_at_fold": false,
+            "small_band_offsets": [
+              {
+                "bottom": 34,
+                "top": 19
+              },
+              {
+                "bottom": 51.5,
+                "top": 36.5
+              }
+            ],
+            "small_bands": 2,
+            "span_band_offsets": [
+              {
+                "bottom": 31,
+                "top": 12
+              },
+              {
+                "bottom": 52,
+                "top": 33
+              }
+            ],
+            "span_bands": 2
+          },
+          "old": {
+            "below_fold": true,
+            "button": {
+              "bottom": 1070.19,
+              "height": 64,
+              "left": 80.02,
+              "right": 561.02,
+              "top": 1006.19,
+              "width": 481
+            },
+            "button_relative_bottom": 398,
+            "button_relative_top": 334,
+            "clipped_at_fold": false,
+            "small_band_offsets": [
+              {
+                "bottom": 34,
+                "top": 19
+              },
+              {
+                "bottom": 51.5,
+                "top": 36.5
+              }
+            ],
+            "small_bands": 2,
+            "span_band_offsets": [
+              {
+                "bottom": 31,
+                "top": 12
+              },
+              {
+                "bottom": 52,
+                "top": 33
+              }
+            ],
+            "span_bands": 2
+          }
+        }
+      ],
+      "rows_3_to_5_clipping_unchanged": true,
+      "run_id_row_indexes": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "section_equal": true
+    },
+    "en": {
+      "new_row_count": 12,
+      "new_run_id_rows": 5,
+      "old_row_count": 12,
+      "old_run_id_rows": 5,
+      "ordered_tuples": [
+        {
+          "label": "Constrained by",
+          "source": "DEC-SAU-H0-721049-public-ENGINE-RUN",
+          "target": "CAP-SAU-H0-721049-capacity-time-window"
+        },
+        {
+          "label": "Constrained by",
+          "source": "DEC-SAU-H0-721049-public-ENGINE-RUN",
+          "target": "INT-SAU-H0-721049-route-5"
+        },
+        {
+          "label": "Constrained by",
+          "source": "DEC-SAU-H0-721049-public-ENGINE-RUN",
+          "target": "SAU-H0-721049"
+        },
+        {
+          "label": "Constrained by",
+          "source": "DEC-SAU-H0-721049-public-ENGINE-RUN",
+          "target": "SPEC-SAU-H0-721049-TARGET"
+        },
+        {
+          "label": "Constrained by",
+          "source": "DEC-SAU-H0-721049-public-ENGINE-RUN",
+          "target": "SPEC-SAU-H0-721049-TARGET"
+        },
+        {
+          "label": "Supported by evidence",
+          "source": "CAP-SAU-H0-721049-capacity-time-window",
+          "target": "S-UNICOIL-EPD"
+        },
+        {
+          "label": "Supported by evidence",
+          "source": "SAU-H0-721049",
+          "target": "S-UNICOIL-EPD"
+        },
+        {
+          "label": "Supported by evidence",
+          "source": "SAU-H0-721049",
+          "target": "S-UNICOIL-EPD"
+        },
+        {
+          "label": "Supported by evidence",
+          "source": "SAU-H0-721049",
+          "target": "S-UNICOIL-SPEC"
+        },
+        {
+          "label": "Supported by evidence",
+          "source": "SAU-H0-721049",
+          "target": "S-UNICOIL-SPEC"
+        },
+        {
+          "label": "Supported by evidence",
+          "source": "SAU-H0-721049",
+          "target": "S-WITS-721049"
+        },
+        {
+          "label": "Supported by evidence",
+          "source": "SPEC-SAU-H0-721049-TARGET",
+          "target": "S-WITS-721049"
+        }
+      ],
+      "ordered_tuples_equal": true,
+      "rewrite": {
+        "every_field_equal": true,
+        "replacements": 5,
+        "row_field_differences": [],
+        "section_equal": true,
+        "text_changes": {
+          "changed_indexes": [
+            2,
+            7,
+            12,
+            17,
+            22
+          ],
+          "changed_text_nodes": 5,
+          "text_nodes": 61
+        },
+        "unnormalized_tuples_equal": true
+      },
+      "rows": [
+        {
+          "allowed_fields": [
+            "small.left",
+            "small.width",
+            "span.right",
+            "span.width"
+          ],
+          "differing_fields": [],
+          "gap_new": 12.0,
+          "gap_old": 12.0,
+          "index": 1,
+          "ok": true,
+          "required_extra_equal": true,
+          "run_id_row": true,
+          "shared_gap_equal": true,
+          "unexpected_fields": []
+        },
+        {
+          "allowed_fields": [
+            "small.left",
+            "small.width",
+            "span.right",
+            "span.width"
+          ],
+          "differing_fields": [
+            "small.left",
+            "small.width",
+            "span.right",
+            "span.width"
+          ],
+          "gap_new": 12.0,
+          "gap_old": 12.0,
+          "index": 2,
+          "ok": true,
+          "required_extra_equal": true,
+          "run_id_row": true,
+          "shared_gap_equal": true,
+          "unexpected_fields": []
+        },
+        {
+          "allowed_fields": [
+            "small.left",
+            "small.width",
+            "span.right",
+            "span.width"
+          ],
+          "differing_fields": [
+            "small.left",
+            "small.width",
+            "span.right",
+            "span.width"
+          ],
+          "gap_new": 12.0,
+          "gap_old": 12.0,
+          "index": 3,
+          "ok": true,
+          "required_extra_equal": true,
+          "run_id_row": true,
+          "shared_gap_equal": true,
+          "unexpected_fields": []
+        },
+        {
+          "allowed_fields": [
+            "small.left",
+            "small.width",
+            "span.right",
+            "span.width"
+          ],
+          "differing_fields": [],
+          "gap_new": 12.0,
+          "gap_old": 12.0,
+          "index": 4,
+          "ok": true,
+          "required_extra_equal": true,
+          "run_id_row": true,
+          "shared_gap_equal": true,
+          "unexpected_fields": []
+        },
+        {
+          "allowed_fields": [
+            "small.left",
+            "small.width",
+            "span.right",
+            "span.width"
+          ],
+          "differing_fields": [],
+          "gap_new": 12.0,
+          "gap_old": 12.0,
+          "index": 5,
+          "ok": true,
+          "required_extra_equal": true,
+          "run_id_row": true,
+          "shared_gap_equal": true,
+          "unexpected_fields": []
+        },
+        {
+          "allowed_fields": [],
+          "differing_fields": [],
+          "gap_new": 12,
+          "gap_old": 12,
+          "index": 6,
+          "ok": true,
+          "required_extra_equal": true,
+          "run_id_row": false,
+          "shared_gap_equal": true,
+          "unexpected_fields": []
+        },
+        {
+          "allowed_fields": [],
+          "differing_fields": [],
+          "gap_new": 113.94,
+          "gap_old": 113.94,
+          "index": 7,
+          "ok": true,
+          "required_extra_equal": true,
+          "run_id_row": false,
+          "shared_gap_equal": true,
+          "unexpected_fields": []
+        },
+        {
+          "allowed_fields": [],
+          "differing_fields": [],
+          "gap_new": 113.94,
+          "gap_old": 113.94,
+          "index": 8,
+          "ok": true,
+          "required_extra_equal": true,
+          "run_id_row": false,
+          "shared_gap_equal": true,
+          "unexpected_fields": []
+        },
+        {
+          "allowed_fields": [],
+          "differing_fields": [],
+          "gap_new": 108.67,
+          "gap_old": 108.67,
+          "index": 9,
+          "ok": true,
+          "required_extra_equal": true,
+          "run_id_row": false,
+          "shared_gap_equal": true,
+          "unexpected_fields": []
+        },
+        {
+          "allowed_fields": [],
+          "differing_fields": [],
+          "gap_new": 108.67,
+          "gap_old": 108.67,
+          "index": 10,
+          "ok": true,
+          "required_extra_equal": true,
+          "run_id_row": false,
+          "shared_gap_equal": true,
+          "unexpected_fields": []
+        },
+        {
+          "allowed_fields": [],
+          "differing_fields": [],
+          "gap_new": 115.92,
+          "gap_old": 115.92,
+          "index": 11,
+          "ok": true,
+          "required_extra_equal": true,
+          "run_id_row": false,
+          "shared_gap_equal": true,
+          "unexpected_fields": []
+        },
+        {
+          "allowed_fields": [],
+          "differing_fields": [],
+          "gap_new": 39.76,
+          "gap_old": 39.76,
+          "index": 12,
+          "ok": true,
+          "required_extra_equal": true,
+          "run_id_row": false,
+          "shared_gap_equal": true,
+          "unexpected_fields": []
+        }
+      ],
+      "rows_3_to_5": [
+        {
+          "index": 3,
+          "new": {
+            "below_fold": false,
+            "button": {
+              "bottom": 925.69,
+              "height": 64,
+              "left": 878.98,
+              "right": 1359.98,
+              "top": 861.69,
+              "width": 481
+            },
+            "button_relative_bottom": 254,
+            "button_relative_top": 190,
+            "clipped_at_fold": true,
+            "small_band_offsets": [
+              {
+                "bottom": 34,
+                "top": 19
+              },
+              {
+                "bottom": 51.5,
+                "top": 36.5
+              }
+            ],
+            "small_bands": 2,
+            "span_band_offsets": [
+              {
+                "bottom": 31,
+                "top": 12
+              },
+              {
+                "bottom": 52,
+                "top": 33
+              }
+            ],
+            "span_bands": 2
+          },
+          "old": {
+            "below_fold": false,
+            "button": {
+              "bottom": 925.69,
+              "height": 64,
+              "left": 878.98,
+              "right": 1359.98,
+              "top": 861.69,
+              "width": 481
+            },
+            "button_relative_bottom": 254,
+            "button_relative_top": 190,
+            "clipped_at_fold": true,
+            "small_band_offsets": [
+              {
+                "bottom": 34,
+                "top": 19
+              },
+              {
+                "bottom": 51.5,
+                "top": 36.5
+              }
+            ],
+            "small_bands": 2,
+            "span_band_offsets": [
+              {
+                "bottom": 31,
+                "top": 12
+              },
+              {
+                "bottom": 52,
+                "top": 33
+              }
+            ],
+            "span_bands": 2
+          }
+        },
+        {
+          "index": 4,
+          "new": {
+            "below_fold": true,
+            "button": {
+              "bottom": 997.69,
+              "height": 64,
+              "left": 878.98,
+              "right": 1359.98,
+              "top": 933.69,
+              "width": 481
+            },
+            "button_relative_bottom": 326,
+            "button_relative_top": 262,
+            "clipped_at_fold": false,
+            "small_band_offsets": [
+              {
+                "bottom": 34,
+                "top": 19
+              },
+              {
+                "bottom": 51.5,
+                "top": 36.5
+              }
+            ],
+            "small_bands": 2,
+            "span_band_offsets": [
+              {
+                "bottom": 31,
+                "top": 12
+              },
+              {
+                "bottom": 52,
+                "top": 33
+              }
+            ],
+            "span_bands": 2
+          },
+          "old": {
+            "below_fold": true,
+            "button": {
+              "bottom": 997.69,
+              "height": 64,
+              "left": 878.98,
+              "right": 1359.98,
+              "top": 933.69,
+              "width": 481
+            },
+            "button_relative_bottom": 326,
+            "button_relative_top": 262,
+            "clipped_at_fold": false,
+            "small_band_offsets": [
+              {
+                "bottom": 34,
+                "top": 19
+              },
+              {
+                "bottom": 51.5,
+                "top": 36.5
+              }
+            ],
+            "small_bands": 2,
+            "span_band_offsets": [
+              {
+                "bottom": 31,
+                "top": 12
+              },
+              {
+                "bottom": 52,
+                "top": 33
+              }
+            ],
+            "span_bands": 2
+          }
+        },
+        {
+          "index": 5,
+          "new": {
+            "below_fold": true,
+            "button": {
+              "bottom": 1069.69,
+              "height": 64,
+              "left": 878.98,
+              "right": 1359.98,
+              "top": 1005.69,
+              "width": 481
+            },
+            "button_relative_bottom": 398,
+            "button_relative_top": 334,
+            "clipped_at_fold": false,
+            "small_band_offsets": [
+              {
+                "bottom": 34,
+                "top": 19
+              },
+              {
+                "bottom": 51.5,
+                "top": 36.5
+              }
+            ],
+            "small_bands": 2,
+            "span_band_offsets": [
+              {
+                "bottom": 31,
+                "top": 12
+              },
+              {
+                "bottom": 52,
+                "top": 33
+              }
+            ],
+            "span_bands": 2
+          },
+          "old": {
+            "below_fold": true,
+            "button": {
+              "bottom": 1069.69,
+              "height": 64,
+              "left": 878.98,
+              "right": 1359.98,
+              "top": 1005.69,
+              "width": 481
+            },
+            "button_relative_bottom": 398,
+            "button_relative_top": 334,
+            "clipped_at_fold": false,
+            "small_band_offsets": [
+              {
+                "bottom": 34,
+                "top": 19
+              },
+              {
+                "bottom": 51.5,
+                "top": 36.5
+              }
+            ],
+            "small_bands": 2,
+            "span_band_offsets": [
+              {
+                "bottom": 31,
+                "top": 12
+              },
+              {
+                "bottom": 52,
+                "top": 33
+              }
+            ],
+            "span_bands": 2
+          }
+        }
+      ],
+      "rows_3_to_5_clipping_unchanged": true,
+      "run_id_row_indexes": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "section_equal": true
+    }
+  },
+  "pass": true
+}

@@ -1,0 +1,56 @@
+{
+  "label": "e2e",
+  "command": [
+    "make",
+    "e2e"
+  ],
+  "cwd": "/tmp/s18-am4-task8",
+  "tree": "1364789a964f96f6ebabf8eae1d239a5bad0b15e",
+  "head": "5964d28b5270b5be89ec804d5a51cecef99d16dd",
+  "started_at_utc": "2026-09-23T19:07:20.953708+00:00",
+  "environment_overrides": {
+    "PLAYWRIGHT_BROWSERS_PATH": "/home/barami/.playwright-browsers",
+    "IOR_VISUAL_MODE": "compare",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "NEO4J_DATABASE": "neo4j"
+  },
+  "clean_before": true
+}
+/home/barami/.local/bin/uv sync --locked --extra dev --extra e2e
+Resolved 43 packages in 0.84ms
+Uninstalled 2 packages in 3ms
+ - neo4j==5.28.4
+ - pytz==2026.3.post1
+/home/barami/.local/bin/uv run --locked --extra dev --extra e2e python scripts/check_browser_prerequisites.py
+BROWSER PREFLIGHT PASS
+playwright=1.62.0
+pytest-playwright=0.9.0
+chromium=/home/barami/.playwright-browsers/chromium-1234/chrome-linux64/chrome
+axe_sha256=c24f097bd2f451d4f933e8bc7d8d539f8672a2ebcb5cc9f9f3eec8ca9470a0c1
+font_family=DejaVu Sans
+font_file=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf
+product_fonts=IOR Noto Sans,IOR Noto Sans Arabic
+IOR_E2E_EXPLICIT=1 IOR_E2E_ARTIFACT_DIR=".artifacts/e2e" PYTHONPATH=src /home/barami/.local/bin/uv run --locked --extra dev --extra e2e pytest -q browser_tests --browser chromium --tracing retain-on-failure --screenshot only-on-failure --output=".artifacts/e2e/playwright" -m "e2e and not visual"
+........................................................................ [ 14%]
+........................................................................ [ 28%]
+........................................................................ [ 42%]
+........................................................................ [ 56%]
+........................................................................ [ 70%]
+........................................................................ [ 84%]
+........................................................................ [ 98%]
+.........                                                                [100%]
+513 passed, 4 deselected in 915.15s (0:15:15)
+/home/barami/.local/bin/uv run --locked --extra dev --extra e2e python scripts/check_browser_prerequisites.py
+BROWSER PREFLIGHT PASS
+playwright=1.62.0
+pytest-playwright=0.9.0
+chromium=/home/barami/.playwright-browsers/chromium-1234/chrome-linux64/chrome
+axe_sha256=c24f097bd2f451d4f933e8bc7d8d539f8672a2ebcb5cc9f9f3eec8ca9470a0c1
+font_family=DejaVu Sans
+font_file=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf
+product_fonts=IOR Noto Sans,IOR Noto Sans Arabic
+IOR_E2E_EXPLICIT=1 IOR_E2E_ARTIFACT_DIR=".artifacts/e2e" PYTHONPATH=src /home/barami/.local/bin/uv run --locked --extra dev --extra e2e pytest -q browser_tests --browser chromium --tracing retain-on-failure --screenshot only-on-failure --output=".artifacts/e2e/playwright" -m visual
+....                                                                     [100%]
+4 passed, 513 deselected in 129.51s (0:02:09)
+
+exit_code=0

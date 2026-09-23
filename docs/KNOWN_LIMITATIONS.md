@@ -209,3 +209,16 @@ Future-use template copied verbatim from the approved privacy policy (not an act
 ```text
 <source/query_hash/run_id>: OUT_OF_SCOPE_CONTENT:UninspectableTextPayload. Response refused before storage by S12a text-only policy. No payload retained; DD-15(b) offline parsing unavailable. Evidence: <attempt path/status/body SHA-256/byte count>. Format/encoding support requires a separate governed change. Do not call this FORMAT_NOT_PARSEABLE; that code describes stored UNPARSED build refusal.
 ```
+
+## AM4 follow-up disposition — S18b0
+
+The S18a implementation is now delivered at its exact approved tree; [PR37 delivery and immutable receipt](../.workflow/slices/S18-executive-mode/delivery_record.md) supersede earlier delivery-pending observations without erasing them. The [separately approved S18b0 plan](../.workflow/slices/S18b0-executive-contract-hardening/plan.md) addresses only enumerated reproduced malformed-input and model-partition gaps. Its focused implementation tests now pass, while exact-candidate gates and independent implementation review remain pending; no broad closure is inferred.
+
+| ID | Remaining limitation or bounded repair | Disposition |
+|---|---|---|
+| KL-133 | The executive case schema has no explicit case-level EVSI availability marker | OPEN; frontend must join the exact case row in executive summary and label availability honestly; no schema addition in S18b0 |
+| KL-134 | Empty/malformed trade and required R11 input, malformed supplied EVSI, dependent scenario mappings and false public/synthetic model markers need typed boundary validation and regression proof | BOUNDED REPAIR IMPLEMENTED; focused regression proof retained; exact-candidate gates/review pending. Other malformed paths remain unverified; do not claim all malformed inputs are fixed |
+| KL-135 | R12 missing needs retain broad case-wide attribution; finer rule-specific mapping is not established | OPEN; use honest case-wide labels pending separately reviewed mapping |
+| KL-136 | New validator coverage must distinguish actual repaired defects from validators that already reject malformed objects | FOCUSED COVERAGE RECORDED; independent review pending. Existing R4-F/R4-D exact-mapping test remains byte-identical and supersedes the earlier trivial-R4-only coverage observation |
+
+KL-132 remains open for the separately approved S18b Core/generation correction. Live Aura update/verification and final cross-model release review remain separate requirements; local graph passes and Aura-only skips do not satisfy them.
