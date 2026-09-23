@@ -737,3 +737,42 @@ The four S15b dossiers use version `1.3` and add
 `evidence_summary.selection` with the selection id, rule version, repository
 reference and sector profile. Earlier dossier records remain version `1.2` and
 do not acquire that field.
+
+## 15. S18a executive projection contracts
+
+Executive responses use frozen Pydantic v2 models with `extra="forbid"`.
+`ExecutiveSummary` contains opportunity references, public dataset unlocks,
+an isolated synthetic EVSI summary, computed integrity and authority.
+`ExecutiveCase` contains one opportunity, a side-by-side decision comparison,
+exactly eight ordered steps, exactly four ordered vectors, semantic claims, a
+stored evidence index and authority. These are projections; they do not create
+a second decision store.
+
+`DatasetKind` is exhaustive for the six governed codes:
+`IDENTITY_TARIFF`, `TARGET_SPECIFICATION_DEMAND`, `PRODUCER_CAPABILITY`,
+`EFFECTIVE_CAPACITY_ALLOCATION`, `RETAINED_FLOW` and `ROUTE_ECONOMICS`.
+An unknown exact code is retained as `UNMAPPED`; it is not discarded or
+credited. Each dataset row has `synthetic_flag=false`, separate loaded-case and
+screening counts, and the exact deduplicated affected IDs.
+
+`SyntheticEvsiSummary` is structurally incompatible with a public dataset row:
+it requires `synthetic_flag=true`, evidence Class D, source `DEMO_GENERATOR`,
+both policy-owned labels and scenario-qualified case rows. Available rows carry
+the existing four inputs, result and declared `next_fact`; omitted EVSI is
+typed `UNAVAILABLE`, never numeric zero. No dataset identifier is inferred from
+that prose.
+
+Claim IDs are semantic: `decision.public`, `metric.*`, `rule.<rule_id>`,
+`route.<route_code>` and `step.<step_id>`. A supported or contradicted claim
+must reference an ID present in its returned evidence index. A claim without
+stored support has no evidence ID and is `UNRESOLVED` with one or more exact
+need codes. Public claims carry `branch=PUBLIC`, prohibit synthetic metadata
+and may reference only public rows.
+
+Scenario-qualified claims use `branch=SIMULATED`, `synthetic_flag=true`, the
+current scenario ID, Class D, source `DEMO_GENERATOR` and both policy labels.
+Their stable IDs are `decision.simulated` and
+`step.<SIMULATED_EVIDENCE|ROUTE_COMPARISON|INTERVENTION|CONDITIONS_AND_KILL>.simulated`.
+They require at least one exact current-scenario synthetic row and may retain
+only valid public evidence used by the counterfactual. Cross-scenario rows and
+incomplete synthetic metadata fail validation.

@@ -55,7 +55,7 @@ def test_in_memory_g17_is_deterministic_and_writes_nothing() -> None:
     assert first.counts["nodes"] == 925
     assert first.counts["edges"] == 1045
     assert all(path.read_bytes() == content for path, content in before.items())
-    assert len(json.loads(snapshot_manifest.read_text(encoding="utf-8"))["files"]) == 722
+    assert len(json.loads(snapshot_manifest.read_text(encoding="utf-8"))["files"]) == 724
     assert len(json.loads(authority_manifest.read_text(encoding="utf-8"))["files"]) == 20
     print(
         "S17_IN_MEMORY_G17",

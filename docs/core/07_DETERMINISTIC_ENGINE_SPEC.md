@@ -655,3 +655,48 @@ with the named `supplier_concentration` trigger. Material triggers indicate
 INVESTIGATE; satisfied exclusions or FULL-fired R11 indicate REJECT. Unknown
 capability does not improve adjacency and no screening record emits D* or
 ADVANCE.
+
+## 13. S18a executive aggregation and projection rules
+
+The executive layer calls the existing public and simulated analyzers and never
+changes rule, state or route selection. It always emits eight steps in the
+governed order and four independent §8 vectors. No formula combines the vectors
+and no vector order is presented as an opportunity ranking.
+
+Public dataset counts use only R12 `metrics.evidence_needs[].need_code` and
+screening `evidence_needs[].code`. Classification is exact, not prose-based.
+For each dataset kind an opportunity or HS6 is counted at most once, with
+loaded-case IDs and screening HS6 IDs retained separately. Unknown codes map to
+visible `UNMAPPED`; frozen-input tests require the current residual to be zero.
+
+Scenario EVSI is a separate Class-D branch. Case rows reuse the existing
+deterministic result; totals, positive values and non-positive values use
+`math.fsum`. A scenario without declared EVSI contributes an `UNAVAILABLE`
+case, not zero. The engine never derives a dataset kind from `next_fact`.
+
+Integrity zero is computed from four complete checks: no synthetic marker in
+public evidence; exact public/simulated `real_decision` equality; complete
+Class-D/source/scenario/policy metadata on synthetic evidence; and PASS
+reconciliation plus matching ground-truth back-test. Each check returns its
+affected opportunity IDs, and the overall count is the sum of check counts.
+
+Claim evidence is selected only through the controlled `supports` vocabulary,
+exact R12 evidence references, route evidence references and fired-rule
+support. Missing and duplicate evidence IDs fail closed. No first-row fallback
+is allowed. Empty support produces `UNRESOLVED`; a linked contradiction remains
+linked and produces `CONTRADICTED`.
+
+Public rule mapping is exact: R0 uses product-identity support;
+R1-F/R1-D/R2/R3/R4-F/R4-D/R5 use trade support; R9-S uses domestic
+supply/capability support; R11 uses export/import plus domestic-capability
+support; and R12 uses its declared evidence IDs. R6/R7/R8/R10 remain
+`UNRESOLVED` unless exact delivered support exists.
+
+Simulated claims validate every Class-D row against the current scenario,
+`DEMO_GENERATOR` and both policy labels before linkage. Simulated-evidence
+claims use all current-scenario rows; route-comparison claims use
+`route_evidence`, `counterfactual`, `hard_exclusion_inputs` and
+`class_if_confirmed`; intervention claims use `economics`, `evsi`,
+`route_evidence` and `counterfactual` when present. Decision and
+conditions/kill claims use exact evidence IDs carried by the simulated
+decision, its counterfactual row and relevant public-decision evidence.

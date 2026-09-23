@@ -282,3 +282,15 @@ Any new domain function must be added to this map before implementation review c
 | Deterministic bilingual graph presentation | `static/modules/graph/{model,layout,diagram,labels,render}.js` | Methodology §§8.3, 10.3; S17 approved plan | pure-JS and bilingual browser tests | four fixed SVG/native-control views |
 | Graph evidence drill-down | `static/modules/graph/{evidence,passports}.js` | Methodology §§9, 11, 15 | graph contract, security and browser tests | stored evidence cards, explicit unresolved references |
 | Live graph/UI equality | `graph_tests/{ui_support,test_graph_ui}.py` | Core 09 §2.8; S17 IAC-06 | dev-only import gate and `graph_ui` loopback test | rendered IDs equal current live responses |
+
+## S18a executive projection mapping
+
+| Methodology concept | Implementation | Authority basis | Verification | Output |
+|---|---|---|---|---|
+| Eight-step executive explanation | `executive.case_projection.build_steps`, `ExecutiveStepId` | Methodology §§9, 10.3, 15 | `tests/test_executive_service.py` | fixed ordered progressive steps |
+| Four separate decision vectors | `executive.case_projection.build_vectors`, `DecisionVectorId` | Methodology §8 | service/model contract tests | no combined score or ordinal ranking |
+| Structured public dataset unlocks | `executive.taxonomy`, `screening.repository.iter_screening_records` | Methodology §§9, 11 | taxonomy and frozen-count tests | separate loaded-case and screening-HS6 IDs |
+| Class-D EVSI summary | `executive.service._evsi_summary` | Methodology §9; evidence policy synthetic isolation | service/isolation tests | separate scenario-declared aggregate; no dataset assignment |
+| Live executive integrity | `executive.service._integrity_summary` | Methodology §§9, 15 | injected leakage/equality/metadata/reconciliation tests | computed checks and violation count |
+| Branch-qualified evidence-bound claims | `executive.claims.build_claim_registry`, `executive.provenance` | Methodology §§9, 11, 15 | exhaustive public-rule IDs; exact simulated suffixes; metadata, cross-scenario, unresolved and missing-reference tests | public-only IDs or current-scenario Class-D IDs with explicit branch metadata |
+| Read-only executive API | `executive.api.router`, `app.include_router` | Core 01 FR-088–FR-093 | API, OpenAPI, route-order and warm-latency tests | typed summary and case responses |

@@ -45,7 +45,7 @@ FROZEN_TREE_OIDS = {
     "data/snapshots/public": "12eace2f822dd1d61d091ae20021187bf15ae00e",
     "data/synthetic": "ce8e219a574bc8159e82593dd089686e74edb7ef",
     "data/golden": "72618db654110823ec7a8d4dd6415a37e4554e33",
-    "browser_tests/baselines": "ba10ae7c54ac96614c015484e7445752b5680285",
+    "browser_tests/baselines": "dfb2612b9e637367ae4441db489dda4f5d17bf36",
 }
 
 # Used only by the depth-1 detector of this repository to prove the object absent.

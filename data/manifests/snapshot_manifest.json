@@ -1,6 +1,6 @@
 {
   "manifest_version": "1.0",
-  "generated_on": "2026-09-16",
+  "generated_on": "2026-09-23",
   "policy": "Golden cases and synthetic scenarios run only against pinned files in this manifest; case derivation inputs and retained superseded operating-configuration bytes and the governed graph projection are also hash-pinned.",
   "files": [
     {
@@ -3530,7 +3530,7 @@
     },
     {
       "path": "data/graph/current.json",
-      "sha256": "471852387e6d791552397d888be9303cc7a46ff323f006af1bb1a816eb686ecb",
+      "sha256": "ec82c51b2a25f3418df9fd6c1358bb1f65638ae89f4998e9a44a2ef1c7eb693b",
       "bytes": 139
     },
     {
@@ -3542,6 +3542,16 @@
       "path": "data/graph/projections/GRAPH-SAU-2026-09-12-3ce241f08f7a/projection.json",
       "sha256": "b749db36715c56b9c077d5d10627a925845b9688ce57b678b26747a965440009",
       "bytes": 1739788
+    },
+    {
+      "path": "data/graph/projections/GRAPH-SAU-2026-09-12-461bf4840962/manifest.json",
+      "sha256": "5a8095bcaee1061880541fbcd00e397d5eafe2e8104c9f8ededc0aec51fb0cd5",
+      "bytes": 228
+    },
+    {
+      "path": "data/graph/projections/GRAPH-SAU-2026-09-12-461bf4840962/projection.json",
+      "sha256": "588993013617276883cea6ef5d26768110a3e89149d3d5b4c6173ba3a4ece89e",
+      "bytes": 2215695
     },
     {
       "path": "data/graph/projections/GRAPH-SAU-2026-09-12-941efbdf1e4a/manifest.json",

@@ -1478,3 +1478,104 @@ UI strings advance 1.4.0→1.5.0 under Manifest §7.3 with effective date 2026-0
 The existing graph gate inserts a dev-only-safe, non-intercepted `graph_ui` step after graph-only equality and before service stop. The default browser child environment remains stripped; the adapter accepts only compose/CI loopback configuration. Ordinary browser and visual tests use serialized artifact payloads, except one explicitly test-only Class-D nonempty blocker. Canonical visual scope adds four screens across two locales and two viewports, extending 96 retained paths to 112 while preserving 600 KiB/file, 16 MiB total and all comparison tolerances.
 
 **Generation and recovery:** The graph allocation completed as `GRAPH-SAU-2026-09-12-b63159c7bdc1` at 925 nodes and 1,045 edges, and product-manifest generation completed at 722 snapshot rows; both must not replay and did not replay during F03. All visual allocations completed at 112 entries. The separately authorized F01 refresh `S17-FINAL-REVIEW-R1` passed canonical compare with all 112 WebPs byte-identical, zero WebP changes and refreshed visual source provenance only. The current Aura projection is not cleared or refreshed; S17 live acceptance uses the owned loopback mirror. Rollback treats source, graph pointer/projection, manifests and visual set as one reviewed unit while retaining write-once history.
+
+## ADR-028 — S18 executive projection boundary and public/synthetic separation
+
+**Status:** R1 EXACT TREE REJECTED; AM-4 EXACT-TREE VERIFICATION GATED.
+
+The R1 exact tree `2ab8d401c2312725540aa6270d449da16a96e01f` completed Task 8, compare-only `make e2e`, the corrected bilingual R1 geometry probe and complete `make ci` in two clean roots. Claude Code then rejected its implementation for B1–B3 and D1. The prior passes and AM-3/R1 plan approvals are historical evidence, not implementation approval.
+
+Owner-accepted AM-4 `60f516f776a6f3486e097240fd29a716d6b88fda89ad1d6bf3af990588e06e46` requires every one of those gates on a new exact candidate, followed by Claude Code’s independent exact-tree review and separate owner implementation acceptance before staging or delivery. The candidate identity, actual gate outcomes and evidence hashes are recorded outside the candidate in `/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/evidence/s18-am4-codex-implementation/AM4-IMPLEMENTATION-RECEIPT.md`. This status records that verification requirement without preclaiming results. No further generation, visual refresh or S18b work is authorized.
+
+**Context:** Methodology §§8, 9, 10.3 and 15 require decision explanation,
+separate route-specific vectors, evidence value and accountable provenance.
+The loaded eleven-case portfolio and 5,443-record public screen already contain
+the governed decisions and structured evidence needs. Current Class-D
+scenarios declare EVSI but no dataset identifier. Assigning that value to a
+dataset by reading `next_fact` would be a free fact, and recomputing decisions
+in a browser would create a parallel decision system.
+
+**Decision:** S18 is split. S18a adds only a typed read-only executive package
+and two mode-independent APIs; S18b owns every UI, catalogue, browser and visual
+change. The server projects existing public/simulated analyses into exactly
+eight steps and four separate vectors with no combined score or ordinal rank.
+Major public claims reference only stored public evidence IDs or remain
+explicitly unresolved. Simulated decision and step claims are separately
+qualified by current scenario, Class D, `DEMO_GENERATOR` and both policy labels;
+they may reference only valid public rows plus that scenario's synthetic rows.
+
+AM-4 binds the route-8 exception to the validated pinned graph artifact's
+`shared_enabler_inputs(graph_projection(), opportunity_id, branch=("simulated",
+current_scenario_id))`. The enabler identity, graph projection identity, ordered
+dependent opportunities and evidence-ID set must match that feed. Every dependent
+must have a unique validated loaded scenario declaring the same enabler and the
+exact stored `scenario_id::shared_enabler` evidence row; current opportunity and
+scenario membership are required. Route 8's direct and nested `shared_enabler`
+evidence-ID sets must equal that verified dependency set without duplicate,
+missing or extra IDs. Foreign references anywhere else fail closed, as do malformed
+IDs and unavailable or mismatched dependencies. Only those verified foreign IDs
+are omitted from the scenario-local executive claim; they remain in the underlying
+route-8 and graph payload. A single-scenario claim cannot present another
+scenario's Class-D row as its own. There is no suffix-based allowance.
+
+The other AM-4 contract corrections consume a present null preferred route as
+typed `NOT_CALCULABLE` regardless of route-status mix, reuse one linked-contradiction
+predicate in both claim branches, mark INTERVENTION values and claim as simulated,
+and reject a claim with neither stored support nor an actual missing-need code.
+These correct observable executive output without changing engine decisions,
+methodology, Core, configuration or frozen evidence. The owner accepted that bounded
+contract-conformance classification explicitly; §7.2 proof is required without
+claiming its unchanged-observable wording literally covers the corrected API output.
+
+
+Public dataset unlocks classify exact R12 and screening need codes, deduplicate
+loaded opportunities and screening HS6 independently, and preserve unknown
+codes as `UNMAPPED`. Class-D EVSI is a different model branch requiring
+`synthetic_flag=true`, Class D, `DEMO_GENERATOR`, scenario identity and both
+policy labels. It is aggregated with `math.fsum` and never assigned to a
+dataset kind from prose.
+
+The integrity KPI calculates, rather than literals, public synthetic leakage,
+real-decision equality, synthetic metadata validity and scenario
+reconciliation/back-test status. The API accepts no mode, filesystem path or
+evidence source and performs no authorization, override or support approval.
+
+**Scope and generation:** S18a changes no scenario, golden, configuration,
+UI/static source or browser journey. Core and top-level engine
+inputs necessarily change the write-once graph identity/projection bytes while
+graph semantics and 925/1,045 node/edge counts are expected unchanged. The
+required `app.py` mount and the graph pointer/projection change visual manifest
+provenance. The single authorized canonical refresh
+(`S18A-EXECUTIVE-API-PROVENANCE-1`) observed 110 of 112 WebPs byte-identical;
+only the two desktop public-steel `evidence_to_change` captures changed, because
+the Relationships list renders the graph's run-qualified Decision ID and its
+derived relationship keys. AM-3 records that bounded two-image exception with no
+new path, viewport or tolerance. These are observed results, not asserted
+expectations.
+
+After every graph-hashed Core/source byte is final, a read-only in-memory build
+is returned to the owner for identity binding. Graph generation, manifest
+generation and the provenance-only canonical visual refresh each require their
+separate amended authorization. No Aura operation is included.
+
+**Bound graph-generation receipt:** After the owner independently bound the
+final 228-input build, the existing graph builder was invoked once, without
+retry, and materialized `GRAPH-SAU-2026-09-12-461bf4840962` at 925 nodes and
+1,045 edges. Its projection is 2,215,695 bytes with SHA-256
+`588993013617276883cea6ef5d26768110a3e89149d3d5b4c6173ba3a4ece89e`.
+Validation and read-only build-check passed; the prior `b63159c7bdc1`
+projection and every earlier projection file remained byte-identical. After
+normalizing run-scoped engine identities and derived relationship keys, node
+and edge semantics are unchanged. The separately authorized manifest generator
+then ran once, producing 724 snapshot rows and retaining 20 authority rows with
+changes confined to Core 01/02/04/07/09. The separately authorized canonical
+visual refresh then ran once, without retry, and stopped correctly under AM-2
+step 10 because its all-WebP-equality prediction was falsified for those two
+images. AM-3 records the bounded two-image exception under Manifest §7.2,
+retains the Core 09 pre-generation sentence under option (b), and adds KL-132.
+The owner accepted that exception; verification then stopped at AM-3 §5.3a
+because its literal span/small width clause was falsified by text-driven flex
+widths on the run-ID rows, and approved AM-3 R1 `fa841e97…` corrects only that
+gate. Those corrected R1 gates subsequently completed on the rejected tree as
+recorded above; they do not establish acceptance of the AM-4 candidate. Aura
+remains untouched.
