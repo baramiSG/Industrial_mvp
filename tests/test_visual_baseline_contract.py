@@ -56,6 +56,10 @@ SCREENS = (
     "journey-g-sop-public-workspace",
     "journey-g-fert-retail-packs-public-workspace",
     "journey-h-selection-exclusions",
+    "journey-i-graph-adjacency",
+    "journey-i-graph-route-blocking",
+    "journey-i-graph-shared-enabler",
+    "journey-i-graph-evidence-to-change",
 )
 
 
@@ -80,7 +84,7 @@ def test_pillow_is_an_exact_e2e_only_dependency() -> None:
     ]
 
 
-def test_visual_manifest_has_exact_96_entry_locale_viewport_screen_matrix() -> None:
+def test_visual_manifest_has_exact_112_entry_locale_viewport_screen_matrix() -> None:
     entries = _manifest()["entries"]
     actual = {
         (entry["locale"], entry["viewport"], entry["screen"])
@@ -88,7 +92,7 @@ def test_visual_manifest_has_exact_96_entry_locale_viewport_screen_matrix() -> N
     }
     expected = set(product(LOCALES, VIEWPORTS, SCREENS))
 
-    assert len(entries) == 96
+    assert len(entries) == 112
     assert actual == expected
     assert len(actual) == len(entries)
 
@@ -105,6 +109,18 @@ def test_visual_manifest_and_every_webp_hash_size_dimensions_and_rgb_decode_matc
     assert (
         "config/decision_narratives.v1.yaml"
         in payload["source_tree"]
+    )
+    assert "config/graph_views.v1.yaml" in payload["source_tree"]
+    assert "browser_tests/graph_fixtures.py" in payload["source_tree"]
+    assert "browser_tests/graph_pages.py" in payload["source_tree"]
+    assert "data/graph/current.json" in payload["source_tree"]
+    assert any(
+        path.endswith("/projection.json")
+        for path in payload["source_tree"]
+    )
+    assert any(
+        path.endswith("/manifest.json") and path.startswith("data/graph/")
+        for path in payload["source_tree"]
     )
     for path, digest in payload["source_tree"].items():
         assert hashlib.sha256(
@@ -137,7 +153,7 @@ def test_visual_manifest_and_every_webp_hash_size_dimensions_and_rgb_decode_matc
 def test_visual_baseline_files_are_lossless_webp_with_600_kib_and_16_mib_budgets() -> None:
     files = sorted(BASELINE_ROOT.glob("*/*/*.webp"))
 
-    assert len(files) == 96
+    assert len(files) == 112
     assert all(path.read_bytes()[12:16] == b"VP8L" for path in files)
     assert all(path.stat().st_size <= 600 * 1024 for path in files)
     assert sum(path.stat().st_size for path in files) <= 16 * 1024 * 1024

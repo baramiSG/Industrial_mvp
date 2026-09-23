@@ -787,6 +787,15 @@ def test_config_history_files_are_superseded_versions_only() -> None:
             json.loads(selection_path.read_text(encoding="utf-8"))
         ]
     }
+    graph_projection_inputs = [
+        identity
+        for projection_path in (
+            PROJECT_ROOT / "data" / "graph" / "projections"
+        ).glob("GRAPH-*/projection.json")
+        for identity in json.loads(
+            projection_path.read_text(encoding="utf-8")
+        )["inputs"]
+    ]
     retained_authority_hashes = {
         "thresholds.v1": "4e891b9706408f6a661565e09609d0d663e1a00a17bda4e283a4b2ee63d3c47a",
         "decision_narratives.v1": "0190f136f1b4abc2360c6f1347e26984f85333149c8a9605fe1b6c1e3150b045",
@@ -803,6 +812,11 @@ def test_config_history_files_are_superseded_versions_only() -> None:
         recorded_hashes = set(screening_hashes)
         if match.group(1) == "product_families.v1":
             recorded_hashes.update(selection_family_hashes)
+        recorded_hashes.update(
+            identity["sha256"]
+            for identity in graph_projection_inputs
+            if identity["path"] == f"config/{match.group(1)}.yaml"
+        )
         if match.group(1) in retained_authority_hashes:
             recorded_hashes.add(retained_authority_hashes[match.group(1)])
         assert hashlib.sha256(path.read_bytes()).hexdigest() in recorded_hashes
@@ -1064,7 +1078,7 @@ def test_s14b_governed_docs_record_portfolio_routes_and_limits() -> None:
         "Golden E — Aluminium foil",
         "Golden F — Aluminium profiles",
         "Golden G — PE film",
-        "76 entries",
+        "producing 112 images",
         "CASE RECONSTRUCTION PASS (5 snapshots, 5 briefs)",
     ):
         assert token in core_09
@@ -1269,3 +1283,31 @@ def test_s15b_core_and_control_contracts_are_present() -> None:
     ).read_text(encoding="utf-8")
     assert "KL-124" in limitations
     assert "KL-125" in limitations
+
+
+def test_s17_history_current_graph_and_authority_outputs_are_manifested() -> None:
+    snapshot = json.loads(
+        (
+            PROJECT_ROOT / "data/manifests/snapshot_manifest.json"
+        ).read_text(encoding="utf-8")
+    )
+    paths = {row["path"] for row in snapshot["files"]}
+    current = json.loads(
+        (PROJECT_ROOT / "data/graph/current.json").read_text(encoding="utf-8")
+    )["projection_id"]
+    assert len(paths) == 722
+    assert "config/history/ui_strings.v1-1.4.0.yaml" in paths
+    assert f"data/graph/projections/{current}/projection.json" in paths
+    assert f"data/graph/projections/{current}/manifest.json" in paths
+    authority = json.loads(
+        (
+            PROJECT_ROOT / "docs/authority/authority_hashes.json"
+        ).read_text(encoding="utf-8")
+    )
+    authority_paths = {row["path"] for row in authority["files"]}
+    assert {
+        "config/ui_strings.v1.yaml",
+        "docs/core/02_METHODOLOGY_IMPLEMENTATION_MAP.md",
+        "docs/core/03_SYSTEM_ARCHITECTURE.md",
+        "docs/core/09_TEST_ACCEPTANCE_AND_GOLDEN_CASES.md",
+    } <= authority_paths

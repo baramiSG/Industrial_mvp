@@ -3,6 +3,7 @@ NODE ?= node
 UV_RUN = $(UV) run --locked --extra dev
 UV_RUN_E2E = $(UV) run --locked --extra dev --extra e2e
 UV_RUN_GRAPH = $(UV) run --locked --extra dev --extra graph
+UV_RUN_GRAPH_UI = $(UV) run --locked --extra dev --extra graph --extra e2e
 GRAPH_PYCACHE_PREFIX ?= /tmp/ior-s16a-pyc
 UI_CONTRACTS = $(UV_RUN) python scripts/check_ui_contracts.py
 ES_MODULE_CHECK = $(UV_RUN) python scripts/check_es_modules.py --node "$(NODE)"
@@ -29,7 +30,7 @@ VISUAL_BASELINE_IMAGE = ior-visual-baselines:playwright-1.62.0-noble
 	select-cases select-cases-s15 reconstruct-selection \
 	validate-briefs build-case cases-reconstruct \
 	graph-build graph-validate graph-credential graph-up graph-load \
-	graph-verify graph-tests graph-down graph-unavailable-test graph-gate \
+	graph-verify graph-tests graph-ui-tests graph-down graph-unavailable-test graph-gate \
 	graph-aura-load graph-aura-verify
 
 install:
@@ -268,7 +269,14 @@ graph-tests:
 		NEO4J_AUTH_FILE="$(CURDIR)/.secrets/neo4j_auth.txt" \
 		PYTHONDONTWRITEBYTECODE=1 PYTHONPYCACHEPREFIX=$(GRAPH_PYCACHE_PREFIX) \
 		PYTHONPATH=src $(UV_RUN_GRAPH) pytest -q graph_tests \
-		-m "graph and not graph_unavailable"
+		-m "graph and not graph_unavailable and not graph_ui"
+
+graph-ui-tests:
+	IOR_GRAPH_TEST_EXPLICIT=1 IOR_GRAPH_TARGET=compose \
+		NEO4J_AUTH_FILE="$(CURDIR)/.secrets/neo4j_auth.txt" \
+		PYTHONDONTWRITEBYTECODE=1 PYTHONPYCACHEPREFIX=$(GRAPH_PYCACHE_PREFIX) \
+		PYTHONPATH=src $(UV_RUN_GRAPH_UI) pytest -q graph_tests \
+		-m graph_ui --browser chromium
 
 graph-down:
 	docker compose down --remove-orphans
@@ -291,6 +299,7 @@ graph-gate:
 		$(MAKE) graph-load; \
 		$(MAKE) graph-verify; \
 		$(MAKE) graph-tests; \
+		$(MAKE) graph-ui-tests; \
 		$(MAKE) graph-down; \
 		$(MAKE) graph-unavailable-test; \
 		echo GRAPH_UNAVAILABLE_OK

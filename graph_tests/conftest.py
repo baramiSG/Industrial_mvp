@@ -38,6 +38,10 @@ def pytest_configure(config: pytest.Config) -> None:
         "markers",
         "graph_unavailable: requires the loopback graph service to be stopped",
     )
+    config.addinivalue_line(
+        "markers",
+        "graph_ui: live loopback graph and Chromium integration test",
+    )
 
 
 def pytest_sessionstart(session: pytest.Session) -> None:

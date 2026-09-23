@@ -84,6 +84,7 @@ def test_keyboard_tab_order_reaches_every_interactive_control_with_visible_focus
         "id:opportunity-select",
         f"dossier:{CASES[0].id}",
         f"copy:{CASES[0].id}",
+        "id:graph-toggle",
         "queue:high_evsi_evidence_investigation",
         "queue:incumbent_upgrade_investigation",
         "queue:likely_false_positive",

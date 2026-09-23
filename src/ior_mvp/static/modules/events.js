@@ -1,8 +1,4 @@
-import {
-  dossierEndpoint,
-  dossierHtmlEndpoint,
-  getJSON,
-} from "./api.js";
+import { dossierEndpoint, dossierHtmlEndpoint, getJSON } from "./api.js";
 import { toast } from "./dom.js";
 import { renderExtraction } from "./extraction.js";
 import {
@@ -25,6 +21,11 @@ import {
   rerenderWorkspace,
 } from "./workspace.js";
 import {
+  handleGraphAction,
+  rerenderGraph,
+  resetGraph,
+} from "./graph/index.js";
+import {
   openQueue,
   openRecord,
   rerenderScreening,
@@ -35,6 +36,17 @@ import {
   retrySelection,
 } from "./selection/index.js";
 
+let contextAction = Promise.resolve();
+function serializeContextAction(action) {
+  contextAction = contextAction.then(action).catch(handleError);
+}
+function serializedClick(event) {
+  return event.target.closest(
+    "[data-mode],[data-open-id],[data-graph-toggle],[data-graph-retry],"
+    + "#open-first-case",
+  );
+}
+
 export function scrollToSection(id) {
   document.getElementById(id)?.scrollIntoView({
     behavior: "smooth",
@@ -44,6 +56,7 @@ export function scrollToSection(id) {
 
 export async function setMode(mode) {
   state.mode = mode;
+  resetGraph();
   document.querySelectorAll(".mode-button").forEach((button) => {
     button.classList.toggle("active", button.dataset.mode === mode);
   });
@@ -64,6 +77,7 @@ export function rerenderLocaleState() {
   renderExtraction();
   rerenderScreening();
   renderSelection();
+  rerenderGraph();
 }
 
 export async function switchLocale() {
@@ -82,10 +96,14 @@ async function handleClick(event) {
     "[data-mode],[data-target],[data-open-id],[data-dossier-html],"
     + "[data-copy-json],[data-locale-switch],[data-queue-id],[data-hs6],"
     + "[data-screening-back],[data-screening-page],[data-passport-ref],"
-    + "[data-selection-retry],#open-first-case,#view-methodology",
+    + "[data-selection-retry],[data-graph-toggle],[data-graph-select],"
+    + "[data-graph-retry],#open-first-case,#view-methodology",
   );
   if (!target) return;
-  if (target.dataset.localeSwitch !== undefined) {
+  if (target.dataset.graphToggle !== undefined
+    || target.dataset.graphSelect || target.dataset.graphRetry !== undefined) {
+    await handleGraphAction(target);
+  } else if (target.dataset.localeSwitch !== undefined) {
     await switchLocale();
   } else if (target.dataset.selectionRetry !== undefined) {
     await retrySelection();
@@ -153,12 +171,24 @@ async function handleClick(event) {
 
 export function bindGlobalEvents() {
   document.addEventListener("click", (event) => {
-    handleClick(event).catch(handleError);
+    if (serializedClick(event)) {
+      serializeContextAction(() => handleClick(event));
+    } else {
+      handleClick(event).catch(handleError);
+    }
   });
   document.getElementById("opportunity-select").addEventListener(
     "change",
-    (event) => loadOpportunity(event.target.value).catch(handleError),
+    (event) => {
+      const value = event.target.value;
+      serializeContextAction(() => loadOpportunity(value));
+    },
   );
+  document.addEventListener("change", (event) => {
+    if (event.target?.dataset?.graphView !== undefined) {
+      handleGraphAction(event.target).catch(handleError);
+    }
+  });
   window.addEventListener("popstate", () => {
     loadLocale(localeFromUrl() || DEFAULT_LOCALE)
       .then(rerenderLocaleState)

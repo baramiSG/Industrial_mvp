@@ -8,6 +8,7 @@ import pytest
 from fastapi.testclient import TestClient
 
 import ior_mvp.decision_engine as decision_engine
+from browser_tests.graph_fixtures import adapt_no_candidate_expected
 from ior_mvp.app import STATIC_DIR, app, spa_fallback
 from ior_mvp.config import PROJECT_ROOT
 from ior_mvp.data_repository import (
@@ -399,22 +400,7 @@ def test_no_candidate_expected_payloads_match_engine_output(
     assert expected_path.is_file()
     expected = json.loads(expected_path.read_text(encoding="utf-8"))
 
-    def current_ui_version(value: object) -> None:
-        if isinstance(value, dict):
-            for key, child in value.items():
-                if key == "ui_strings" and child == "1.3.0":
-                    value[key] = "1.4.0"
-                elif key == "thresholds" and child == "1.2.0":
-                    value[key] = "1.3.0"
-                elif key == "decision_narratives" and child == "1.3.0":
-                    value[key] = "1.4.0"
-                else:
-                    current_ui_version(child)
-        elif isinstance(value, list):
-            for child in value:
-                current_ui_version(child)
-
-    current_ui_version(expected)
+    expected = adapt_no_candidate_expected(expected)
     fixture_client = TestClient(app, raise_server_exceptions=False)
 
     actual = {
@@ -568,6 +554,7 @@ def test_steel_ui_manifest_uses_approved_components() -> None:
         "evidence_ledger",
         "data_unlocks",
         "decision_actions",
+        "graph_view",
     }
     assert {row["type"] for row in payload["components"]} <= approved
     assert payload["guardrails"]["real_decision_never_uses_synthetic"] is True

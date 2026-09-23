@@ -281,6 +281,10 @@ The browser has renderers only for approved types. A model cannot inject scripts
 The S13b registry additionally owns `screening_summary`, `screening_queue` and
 `screening_record` renderers. A null deep-decision state is displayed through
 its governed screening disposition chip, not by inventing a formal state.
+The S17 registry appends one `graph_view` descriptor after `decision_actions`.
+It is collapsed by default, makes no graph request until opened, and renders
+only the four fixed catalogue views through deterministic SVG plus equivalent
+native HTML controls.
 
 Context rules include:
 
@@ -412,3 +416,34 @@ projection equality is unavailable, `GraphService` returns HTTP 200 with
 It never substitutes artifact results for a failed live view and never
 swallows the test-suite `OfflineGuardViolation`. The fixed bilingual view
 catalogue remains available while the service is down.
+
+## 14. Interactive graph-view adapter
+
+The browser graph adapter keeps an independent request epoch and the complete
+`(opportunity_id, mode, view_id)` context. Opportunity, mode, view, closure and
+evidence-selection transitions clear obsolete graph and passport content
+synchronously. Both successful and failed asynchronous responses must still
+match the current epoch, complete context and selected element before they may
+update state or a context-local cache.
+
+The client rejects duplicate IDs, dangling edges, response-context mismatch
+and any synthetic node or edge in a public payload. The live serializer applies
+the same branch boundary to `SUPPORTED_BY_EVIDENCE` edges and derives the
+top-level synthetic marker and bilingual policy warnings from all returned
+nodes and edges. A failed live view never falls back to artifact or fixture
+rows.
+
+Graph evidence references are the deduplicated union of element provenance,
+property references and the matching drill-down entry. They resolve only
+against stored evidence rows from the current analysis or existing analysis
+endpoints for visible portfolio products. Conflicts remain opportunity-qualified
+records; missing references and document addresses remain explicit. External
+links accept only HTTP or HTTPS and every rendered value is escaped.
+
+Ordinary browser tests use clearly identified serialized artifact fixtures; the
+only invented nonempty route-blocking relationship is test-only, simulated and
+Class D. A separate `graph_ui` loopback test uses no response interception,
+verifies the preloaded projection before Chromium, compares rendered IDs with
+actual live responses in both locales, and verifies the unchanged mirror again
+afterward. The default browser child environment remains credential- and
+graph-stripped; its guarded test adapter accepts only `compose` or `ci`.

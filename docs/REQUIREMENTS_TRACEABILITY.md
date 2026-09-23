@@ -406,6 +406,17 @@ not attempted during this child.
 
 This candidate remains uncommitted on its delivery branch. Product verification at detached commit `c0d5ec2` passed 2,854 unit tests, 498 functional and four visual checks in each of two locations; original graph/manifest/visual generations and local live/unavailable mirror proof are complete. Final independent implementation review, owner acceptance and mandatory Aura PASS are complete. PR/exact-head CI and delivery remain pending at this capture point. Owner record/status-only changes are inspected separately without claiming new product test results.
 
+## Q. Milestone v0.3.0 — S17 interactive graph view
+
+| ID | Observable acceptance | Implementation evidence | Status | Slice |
+|---|---|---|---|---|
+| V3-E4 | Four fixed bilingual graph views render through the approved GenUI registry with deterministic SVG and equivalent native controls. | `graph_view` descriptor, explicit 19-node/15-edge label maps, pure layout/validation/escaping tests. | IMPLEMENTED; generated and browser evidence pending | S17 |
+| V3-A2-GRAPH | The graph remains collapsed and request-free initially; opportunity, mode, view, close, locale and evidence races cannot restore stale content. | Independent graph epoch/context plus guarded workspace and portfolio epochs; browser race inventory. | IMPLEMENTED; browser execution pending | S17 |
+| V3-S17-EVIDENCE | Node and edge references resolve only to stored evidence; conflicting records remain opportunity-qualified and missing references remain explicit. | Existing analysis endpoints, URL allowlist, escaped document addresses and contract/security tests. | IMPLEMENTED; browser execution pending | S17 |
+| V3-S17-ISOLATION | Public payloads contain only public nodes and edges; simulated state and both warning labels account for synthetic nodes and edges. | All-case/view serializer regression, edge-only warning regression and client public-payload rejection. | TESTED focused; integrated inputs pending | S17 |
+| V3-S17-LIVE | The existing graph gate runs graph-only equality, then non-intercepted graph UI, then stop/unavailable without changing the default credential-stripped browser environment. | Exact Make/CI contract and dev-only import/collection gate. | IMPLEMENTED; live execution pending | S17 |
+| V3-S17-VISUAL | Sixteen graph captures extend 96 retained paths to 112 with fixed provenance, RGB, byte budgets and tolerances. | Visual source/matrix contracts and fixture identities. | IMPLEMENTED source; canonical allocation pending | S17 |
+
 ## Branch and release-state rules
 
 1. No row on the S05 implementation branch is promoted above `TESTED`.

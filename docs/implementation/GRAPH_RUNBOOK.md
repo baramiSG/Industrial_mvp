@@ -68,13 +68,17 @@ make graph-load
 make graph-load
 make graph-verify
 make graph-tests
+make graph-ui-tests
 make graph-down
 make graph-unavailable-test
 ```
 
 The second load must report 0 nodes and 0 relationships created. Verification
 requires exact label/type counts, one projection id, complete provenance and
-zero public/Class-D partition violations.
+zero public/Class-D partition violations. `graph-ui-tests` then opens the actual
+loopback application in Chromium without graph-response interception, checks
+both locales and the fixed views against the preloaded mirror, and verifies the
+mirror again without using the clearing fixture.
 
 `make graph-gate` performs the same sequence. It explicitly clears only the
 dedicated local test mirror with
@@ -109,9 +113,11 @@ python -m ior_mvp.graph clear \
 The `graph-gates` job starts a clean digest-pinned service container and
 generates a run-scoped credential expression. `resolve_target("ci")` ignores
 any inherited URI and uses `bolt://localhost:7688`. The job rebuild-checks the
-artifact, loads twice, verifies, runs `graph_tests/`, stops the service and
-runs the `graph_unavailable` tests. The designated job may not convert service
-failure into a skip.
+artifact, loads twice, verifies, runs graph-only `graph_tests/`, runs the
+separate `graph_ui` Chromium step, stops the service and runs the
+`graph_unavailable` tests. The locked job includes the existing graph and e2e
+extras and matching Chromium prerequisites. The designated job may not convert
+service failure into a skip.
 
 The application Docker image intentionally excludes the optional `neo4j`
 package; CI proves that boundary.
@@ -137,8 +143,10 @@ code 3. A clear additionally requires
 `--confirm-clear <exact-instance-id>`.
 
 Only the recorded operator command may source `.env`, in-shell, without
-printing values. Ordinary `tests/`, `graph_tests/`, `make ci` and hosted CI
-must never receive Aura variables. Verification reports contain target and
+printing values. Ordinary `tests/`, the compose/CI `graph_tests/`, `make ci` and hosted CI
+must never receive Aura variables. S17 preserves the delivered Aura projection;
+its changed graph inputs are accepted only on a fresh owned loopback mirror.
+Any Aura refresh remains a separately authorized operator operation. Verification reports contain target and
 instance identity only, never URI, username or password.
 
 ## Fail-closed states

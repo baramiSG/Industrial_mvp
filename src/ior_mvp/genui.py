@@ -128,6 +128,14 @@ def build_ui_manifest(analysis: dict[str, Any]) -> dict[str, Any]:
                     "mode": analysis["mode"],
                 },
             },
+            {
+                "type": "graph_view",
+                "id": "graph-view",
+                "props": {
+                    "opportunity_id": analysis["opportunity"]["id"],
+                    "mode": analysis["mode"],
+                },
+            },
         ]
     )
     return {

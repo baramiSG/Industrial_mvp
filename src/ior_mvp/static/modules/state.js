@@ -23,6 +23,23 @@ export const state = {
     record: null,
     requestEpoch: 0,
   },
+  graph: {
+    open: false,
+    descriptor: null,
+    context: null,
+    viewId: "adjacency",
+    epoch: 0,
+    selectionEpoch: 0,
+    loading: false,
+    error: null,
+    catalogue: null,
+    payload: null,
+    selected: null,
+    evidenceLoading: false,
+    evidenceError: false,
+    evidenceResult: null,
+    evidenceResponses: {},
+  },
 };
 
 export function nextRequestEpoch() {

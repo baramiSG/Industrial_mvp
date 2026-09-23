@@ -216,8 +216,8 @@ def test_ui_catalogue_metadata_locales_and_version_are_exact() -> None:
 
     assert payload["metadata"] == {
         "artifact": "industrial-opportunity-ui-strings",
-        "version": "1.4.0",
-        "effective_date": "2026-09-15",
+        "version": "1.5.0",
+        "effective_date": "2026-09-16",
         "authority": (
             "Core 01 NFR-006/NFR-007 and UX GenUI Demo Specification"
         ),
@@ -620,7 +620,7 @@ def test_ui_strings_endpoint_returns_valid_en_and_ar_bundles(
     payload = response.json()
     catalogue = _catalogue()
     assert payload == {
-        "catalogue_version": "1.4.0",
+        "catalogue_version": "1.5.0",
         "locale": locale,
         **catalogue["locales"][locale],
         "strings": catalogue["strings"][locale],

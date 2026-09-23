@@ -45,7 +45,7 @@ FROZEN_TREE_OIDS = {
     "data/snapshots/public": "12eace2f822dd1d61d091ae20021187bf15ae00e",
     "data/synthetic": "ce8e219a574bc8159e82593dd089686e74edb7ef",
     "data/golden": "72618db654110823ec7a8d4dd6415a37e4554e33",
-    "browser_tests/baselines": "90d3505b4d22d9f7299b4c91335f64ab6b0738fd",
+    "browser_tests/baselines": "ba10ae7c54ac96614c015484e7445752b5680285",
 }
 
 # Used only by the depth-1 detector of this repository to prove the object absent.
@@ -54,7 +54,7 @@ _BASE_COMMIT_FOR_ABSENCE_PROOF = (
 )
 
 VISUAL_BASELINE_ROOT = PROJECT_ROOT / "browser_tests" / "baselines" / "v0.3.0"
-VISUAL_BASELINE_ENTRIES = 96
+VISUAL_BASELINE_ENTRIES = 112
 TOP_LEVEL_MODULE = re.compile(r"^src/ior_mvp/[^/]+\.py$")
 
 GIT_EXIT_SUCCESS = 0
@@ -320,7 +320,7 @@ def synthetic_depth_one_clone(tmp_path: Path) -> tuple[Path, dict[str, str], str
 
 
 def test_public_and_synthetic_bytes_unchanged_from_base() -> None:
-    """S14b added five snapshots/scenarios; OD-16 authorized baseline run two."""
+    """Keep public/synthetic/golden bytes and S17-authorized visuals immutable."""
     for rel, (expected_hash, expected_bytes) in PINS.items():
         path = PROJECT_ROOT / rel
         data = path.read_bytes()
@@ -333,7 +333,7 @@ def test_public_and_synthetic_bytes_unchanged_from_base() -> None:
 
 
 def test_visual_baseline_tree_unchanged_from_base() -> None:
-    """OD-16 authorized S14b's second SC-5-governed baseline regeneration."""
+    """Freeze S17-FINAL-CI-GLYPH-CORRECTION-1 canonical visual bytes."""
     assert (
         frozen_tree_problems(
             PROJECT_ROOT,
