@@ -668,3 +668,58 @@ exact helper equality, including the steel 129.3 pin; test-only zero and negativ
 results remain numeric mappings. GenUI renders the localized unavailable value
 without an EVSI next-fact note, dossiers remain usable, and the graph wrapper
 retains `numeric_evsi: NOT_CALCULABLE` without synthesizing an estimate.
+
+## 11. S18a executive projection acceptance
+
+Acceptance requires model tests for frozen/strict contracts, exhaustive
+taxonomy tests, claim-ID/evidence-reference tests, summary and case service
+tests, synthetic-isolation tests, mounted API/OpenAPI tests and an excluded
+warm-up plus five measured calls below NFR-005's 250 ms median for summary and
+one case.
+
+The frozen count oracle independently pins all six current dataset kinds,
+separate loaded opportunity IDs, screening counts 5,443 / 4,996 / 4,996 / 0 /
+1,618 / 0 and SHA-256 over each sorted affected-HS6 list. The exact current
+structured-code set has zero `UNMAPPED` values. Tests must fail if prose is used
+to classify a dataset.
+
+The EVSI oracle requires eleven scenario-qualified rows, seven available and
+four unavailable. `math.fsum` totals are 371.55 M SAR overall, 374.95 positive
+and -3.4 non-positive. These values remain only in the synthetic summary with
+Class D, `DEMO_GENERATOR`, scenario IDs and both policy labels; no public
+dataset row, public vector or real decision may carry EVSI or a synthetic label.
+
+The integrity oracle injects public synthetic leakage, changed real decisions,
+wrong source/class/flag/scenario, failed reconciliation and failed back-test.
+Each mutation must fail exactly its named check with the affected opportunity
+ID. The unmodified violation count is calculated as zero; a literal constant is
+not an acceptable implementation.
+
+All eleven executive cases must equal the existing public and simulated states
+and routes. Steel remains public INVESTIGATE and simulated ADVANCE/5;
+polypropylene remains public and simulated REJECT/0 and cannot acquire a
+positive support recommendation. Unknown opportunities return typed 404 and
+governed projection failures typed 422. Executive routes are mounted before the
+SPA fallback and accept no mode, path or source input.
+
+Public rule claims use the exact delivered R0–R12 identifiers and support
+families; R6/R7/R8/R10 remain unresolved without exact delivered support.
+Simulated decision and step claims require current-scenario Class-D
+`DEMO_GENERATOR` rows, scenario identity and both policy labels. Cross-scenario
+rows, malformed metadata, absent references and synthetic-to-public linkage
+must fail closed.
+
+S18a graph identity and projection bytes change only because governed Core and
+engine input hashes change. Graph node/edge semantics and counts are expected
+to remain 925/1,045 and must be audited after the graph is generated. Visual
+manifest and provenance bytes change because `app.py` and the graph
+pointer/projection are visual sources; all 112 WebPs are expected to remain
+byte-identical and no visual path is added. These are provenance-closure
+expectations, not claims that generation has already run.
+
+Pre-generation acceptance runs focused executive, isolation, reconstruction,
+portfolio and golden regressions, then the complete non-live gates. Read-only
+in-memory graph construction binds the candidate identity only after every
+graph-hashed Core and source byte is final. Graph, manifest and canonical
+visual generation remain separate owner authorizations and are not part of the
+pre-generation candidate.

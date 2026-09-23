@@ -255,6 +255,36 @@ are current. Independent correction re-review approved with zero findings, both
 PR and merged-main CI passed 6/6, and clean merged-main integrity, pytest, smoke,
 reconstruction and graph build-check passed. Aura remains deliberately unrefreshed.
 
+## S18 split — executive mode
+
+The owner-approved S18 boundary has two serialized children:
+
+1. `s18a-executive-projection-provenance-api` — typed models, exact need
+   taxonomy, stored-evidence claim registry, cached summary/case projections,
+   computed integrity, separate Class-D EVSI and two read-only APIs.
+2. `s18b-executive-interface-visual` — the executive route, bilingual UI,
+   accessibility/browser journeys and visual matrix. S18b is not started by
+   the S18a implementation.
+
+S18a status: **R1 EXACT TREE REJECTED; AM-4 EXACT-TREE VERIFICATION GATED**. It remains
+uncommitted under historically approved AM-3
+`396492a0…` and approved AM-3 R1 `fa841e97…`. It changes no scenario, golden,
+configuration, UI/static source or browser journey. After final graph-input
+binding, one existing-builder invocation materialized
+`GRAPH-SAU-2026-09-12-461bf4840962` at 925/1,045; validation and read-only
+build-check passed, normalized graph semantics were unchanged and all prior
+projection files remained byte-identical. One separately authorized
+manifest-generator invocation produced 724 snapshot rows and retained 20
+authority rows with changes confined to Core 01/02/04/07/09. The single
+authorized canonical visual-provenance refresh then ran once, without retry, and
+observed 110 of 112 WebPs byte-identical; only the two desktop public-steel
+`evidence_to_change` captures changed, because the Relationships list renders the
+graph's run-qualified Decision ID. The owner accepted that bounded two-image
+exception under Manifest §7.2 with Core 09 option (b) (recorded at `c89ff2fa…`),
+and AM-3 records KL-132. The R1 exact tree `2ab8d401c2312725540aa6270d449da16a96e01f` completed Task 8, compare-only `make e2e`, the corrected bilingual R1 geometry probe and complete `make ci` in two clean roots. Claude Code then rejected its implementation for B1–B3 and D1. The prior passes and AM-3/R1 plan approvals are historical evidence, not implementation approval.
+
+Owner-accepted AM-4 `60f516f776a6f3486e097240fd29a716d6b88fda89ad1d6bf3af990588e06e46` requires every one of those gates on a new exact candidate, followed by Claude Code’s independent exact-tree review and separate owner implementation acceptance before staging or delivery. The candidate identity, actual gate outcomes and evidence hashes are recorded outside the candidate in `/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/evidence/s18-am4-codex-implementation/AM4-IMPLEMENTATION-RECEIPT.md`. This status records that verification requirement without preclaiming results. No further generation, visual refresh or S18b work is authorized.
+
 ## Explicit non-goals for v0.3.0
 
 Authentication, role-based approval, official override workflow, confidential Ministry connectors, live customs transactions, paid-data acquisition, model training on Ministry applications, causal incentive-effect claims, generic AI chat, CRM, document management, any change to the methodology DOCX, and any alteration of the v0.2.0 tag, release records or frozen v1 golden snapshot files.

@@ -320,3 +320,31 @@ subset.
   four screening views in both locales and approved viewports, extending the
   matrix from 40 to 56 entries through the Manifest §7 change gate while
   retaining exact frozen public outcomes.
+
+## 13. S18a executive projection and provenance requirements
+
+- **FR-088 — Typed read-only executive APIs.** `GET /api/executive/summary`
+  and `GET /api/executive/opportunities/{opportunity_id}` are mode-independent,
+  accept no caller path or evidence source, and project existing governed
+  analyses without changing decisions, routes, evidence or authorization.
+- **FR-089 — Fixed explanatory sequence.** Every case returns the eight ordered
+  steps Signal, False-positive controls, Public conclusion, Missing Ministry
+  facts, Simulated evidence, Route comparison, Intervention, and Conditions
+  and kill. Missing values remain typed `NOT_CALCULABLE` or `UNAVAILABLE`.
+- **FR-090 — Separate decision vectors.** Market/gap, strategic/resilience,
+  execution feasibility and evidence confidence remain four independent
+  vectors. The executive contract contains no combined score or ordinal rank.
+- **FR-091 — Public dataset-unlock accounting.** Loaded-case and screening-HS6
+  counts derive only from exact structured need codes, deduplicate each
+  identifier per dataset kind, return separate affected IDs, and preserve an
+  unknown code as visible `UNMAPPED`.
+- **FR-092 — Isolated Class-D EVSI.** Scenario-declared EVSI remains a separate
+  `synthetic_flag=true`, Class-D, `DEMO_GENERATOR` branch with scenario IDs and
+  both policy labels. It is never assigned to a public dataset kind by parsing
+  `next_fact` prose.
+- **FR-093 — Computed integrity and claim provenance.** The summary computes
+  public synthetic leakage, real-decision equality, synthetic metadata and
+  scenario-validation checks. Public claims link only to stored public evidence
+  IDs; unsupported claims remain explicitly `UNRESOLVED` with structured need
+  codes. Simulated claims are separately branch-qualified and may link only
+  valid public rows plus complete current-scenario Class-D evidence.

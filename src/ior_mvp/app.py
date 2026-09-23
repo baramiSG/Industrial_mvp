@@ -22,6 +22,7 @@ from .data_repository import RepositoryError
 from .decision_engine import analyze, list_opportunities
 from .dossier import build_dossier, render_dossier_html
 from .evidence import EvidenceIntegrityError
+from .executive.api import router as executive_router
 from .genui import build_ui_manifest
 from .graph.api import router as graph_router
 from .narratives import NarrativeCatalogueError
@@ -36,6 +37,7 @@ app = FastAPI(
     version=__version__,
 )
 app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
+app.include_router(executive_router)
 app.include_router(screening_router)
 app.include_router(graph_router)
 

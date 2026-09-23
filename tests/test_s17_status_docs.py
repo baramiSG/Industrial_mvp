@@ -30,9 +30,9 @@ def test_s17_status_distinguishes_completed_generation_from_f01_visual_refresh()
         ).read_text(encoding="utf-8")
     )
 
-    assert len(snapshot["files"]) == 722
+    assert len(snapshot["files"]) == 724
     assert len(visual["entries"]) == 112
-    assert visual["change_ref"] == "S17-FINAL-REVIEW-R1"
+    assert visual["change_ref"] == "S18A-EXECUTIVE-API-PROVENANCE-1"
     for text in (adr_027, s17_row):
         assert "GRAPH-SAU-2026-09-12-b63159c7bdc1" in text
         assert "722" in text

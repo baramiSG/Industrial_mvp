@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
+from copy import deepcopy
 import json
+from collections.abc import Iterator
 from functools import lru_cache
 from pathlib import Path
 from typing import Any
@@ -72,6 +74,26 @@ def screening_record(hs6: str) -> dict[str, Any] | None:
         ),
         None,
     )
+
+
+def iter_screening_records() -> Iterator[dict[str, Any]]:
+    """Yield deterministic copies of every public screening record.
+
+    Yields:
+        HS6-sorted record copies that cannot mutate the process-local cache.
+    """
+    snapshot = screening_snapshot()
+    if snapshot is None:
+        return
+    for shard in sorted(
+        snapshot["record_shards"],
+        key=lambda row: row["hs2"],
+    ):
+        for record in _screening_shard(
+            snapshot["snapshot_id"],
+            shard["hs2"],
+        ):
+            yield deepcopy(record)
 
 
 def clear_screening_caches() -> None:
