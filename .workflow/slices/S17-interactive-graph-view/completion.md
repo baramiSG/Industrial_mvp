@@ -1,7 +1,7 @@
-# S17 completion state at delivery-candidate capture
+# S17 completion
 
-Status: IMPLEMENTED, LOCALLY VERIFIED, INDEPENDENTLY APPROVED AND OWNER-ACCEPTED; DELIVERY PENDING.
+Status: DELIVERED, VERIFIED AND ACCEPTED.
 
-Accepted product tree: `adc34119a6dcdcf18a52b0e94ae7089affff9d25`. Both exact isolated `make ci` runs passed. The same dedicated reviewer corrected its permission boundary and returned final APPROVE with zero unresolved findings. Separate Sol owner acceptance passed Muhasib.
+S17 shipped through [PR #35](https://github.com/baramiSG/Industrial_mvp/pull/35) as squash `e10225005fe13295d1c10e443276e0139be806c6`; merge tree `5da017e824bab7c3f1313f2a8d0332f48c9a2dab` equals the independently approved delivery tree. PR and merged-main CI runs passed all six jobs. Clean merged-main integrity, 2,887 tests, smoke, reconstruction and graph build-check passed.
 
-Owner-only records and machine state are a post-product-review delta and require bounded independent confirmation before commit. PR, exact-head hosted CI, merge and merged-main receipt remain pending and are not assumed.
+The delivered graph remains `GRAPH-SAU-2026-09-12-b63159c7bdc1` at 925 nodes / 1,045 edges; the canonical visual set has 112 entries. Public decisions and synthetic isolation remain unchanged. Aura is intentionally unrefreshed per KL-130. S18 is next.
