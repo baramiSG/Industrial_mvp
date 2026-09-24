@@ -1,0 +1,150 @@
+cwd=/tmp/s18-am4-task8
+tree=1364789a964f96f6ebabf8eae1d239a5bad0b15e
+command=["python", "scripts/validate_scenarios.py"]
+SCENARIO VALIDATION PASS (11 scenarios)
+- SYN-MINISTRY-ALU-FOIL-001.json scenario=SYN-MINISTRY-ALU-FOIL-001 opportunity=SAU-H6-760711 status=PASS
+  target_spec_demand_within_public_imports: PASS - 40 kt <= 53.6793 kt.
+  line_nameplate_within_disclosed_public_capacity: NOT_APPLICABLE - No numeric public installed nameplate is disclosed.
+  capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].
+  qualified_availability_within_physical_output: NOT_APPLICABLE - No qualified_available_kt is declared.
+  demand_layers_remain_separate: INFORMATIONAL - Demand layers are reported separately; no ordering constraint is enforced.
+  tariff_line_allocation_sums_to_public_hs6_total: NOT_APPLICABLE - No tariff_line_allocation block is declared.
+  buyer_allocation_within_public_imports: NOT_APPLICABLE - No buyer_allocation block is declared.
+  expansion_assumption_disclosed_and_bounded: NOT_APPLICABLE - No expansion_assumption block is declared.
+  retained_flows_reconcile_to_public_trade: NOT_APPLICABLE - No production_and_retained_flows block is declared.
+  base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.
+  shared_enabler_declaration_valid: PASS - Shared-enabler declaration and explicit valuation source are valid.
+  ground_truth_backtest: PASS - Engine state and route match planted ground truth.
+- SYN-MINISTRY-ALU-PROFILES-001.json scenario=SYN-MINISTRY-ALU-PROFILES-001 opportunity=SAU-H6-760429 status=PASS
+  target_spec_demand_within_public_imports: PASS - 6 kt <= 9.18984 kt.
+  line_nameplate_within_disclosed_public_capacity: NOT_APPLICABLE - No numeric public installed nameplate is disclosed.
+  capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].
+  qualified_availability_within_physical_output: PASS - 2.5 kt <= 30.6 kt.
+  demand_layers_remain_separate: INFORMATIONAL - Demand layers are reported separately; no ordering constraint is enforced.
+  tariff_line_allocation_sums_to_public_hs6_total: PASS - Tariff-line quantities sum to 9.18984 kt against public imports 9.18984 kt.
+  buyer_allocation_within_public_imports: PASS - Buyer quantities sum to 6 kt within public imports 9.18984 kt.
+  expansion_assumption_disclosed_and_bounded: NOT_APPLICABLE - No expansion_assumption block is declared.
+  retained_flows_reconcile_to_public_trade: PASS - Retained flows reconcile to public trade marginals.
+  base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.
+  shared_enabler_declaration_valid: PASS - Shared-enabler declaration and explicit valuation source are valid.
+  ground_truth_backtest: PASS - Engine state and route match planted ground truth.
+- SYN-MINISTRY-FERT-RETAIL-PACKS-001.json scenario=SYN-MINISTRY-FERT-RETAIL-PACKS-001 opportunity=SAU-H6-310510 status=PASS
+  target_spec_demand_within_public_imports: PASS - 1.2229 kt <= 2.44581 kt.
+  line_nameplate_within_disclosed_public_capacity: NOT_APPLICABLE - No numeric public installed nameplate is disclosed.
+  capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].
+  qualified_availability_within_physical_output: NOT_APPLICABLE - No qualified_available_kt is declared.
+  demand_layers_remain_separate: INFORMATIONAL - Demand layers are reported separately; no ordering constraint is enforced.
+  tariff_line_allocation_sums_to_public_hs6_total: NOT_APPLICABLE - No tariff_line_allocation block is declared.
+  buyer_allocation_within_public_imports: NOT_APPLICABLE - No buyer_allocation block is declared.
+  expansion_assumption_disclosed_and_bounded: NOT_APPLICABLE - No expansion_assumption block is declared.
+  retained_flows_reconcile_to_public_trade: NOT_APPLICABLE - No production_and_retained_flows block is declared.
+  base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.
+  shared_enabler_declaration_valid: NOT_APPLICABLE - No shared-enabler declaration is present.
+  ground_truth_backtest: PASS - Engine state and route match planted ground truth.
+- SYN-MINISTRY-GALVALUME-001.json scenario=SYN-MINISTRY-GALVALUME-001 opportunity=SAU-H6-721061 status=PASS
+  target_spec_demand_within_public_imports: PASS - 48 kt <= 93.232 kt.
+  line_nameplate_within_disclosed_public_capacity: NOT_APPLICABLE - No numeric public installed nameplate is disclosed.
+  capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].
+  qualified_availability_within_physical_output: NOT_APPLICABLE - No qualified_available_kt is declared.
+  demand_layers_remain_separate: INFORMATIONAL - Demand layers are reported separately; no ordering constraint is enforced.
+  tariff_line_allocation_sums_to_public_hs6_total: NOT_APPLICABLE - No tariff_line_allocation block is declared.
+  buyer_allocation_within_public_imports: NOT_APPLICABLE - No buyer_allocation block is declared.
+  expansion_assumption_disclosed_and_bounded: NOT_APPLICABLE - No expansion_assumption block is declared.
+  retained_flows_reconcile_to_public_trade: NOT_APPLICABLE - No production_and_retained_flows block is declared.
+  base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.
+  shared_enabler_declaration_valid: NOT_APPLICABLE - No shared-enabler declaration is present.
+  ground_truth_backtest: PASS - Engine state and route match planted ground truth.
+- SYN-MINISTRY-PE-FILM-001.json scenario=SYN-MINISTRY-PE-FILM-001 opportunity=SAU-H6-392010 status=PASS
+  target_spec_demand_within_public_imports: PASS - 16 kt <= 21.6782 kt.
+  line_nameplate_within_disclosed_public_capacity: NOT_APPLICABLE - No numeric public installed nameplate is disclosed.
+  capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].
+  qualified_availability_within_physical_output: PASS - 24 kt <= 51.3 kt.
+  demand_layers_remain_separate: INFORMATIONAL - Demand layers are reported separately; no ordering constraint is enforced.
+  tariff_line_allocation_sums_to_public_hs6_total: PASS - Tariff-line quantities sum to 21.6782 kt against public imports 21.6782 kt.
+  buyer_allocation_within_public_imports: NOT_APPLICABLE - No buyer_allocation block is declared.
+  expansion_assumption_disclosed_and_bounded: NOT_APPLICABLE - No expansion_assumption block is declared.
+  retained_flows_reconcile_to_public_trade: NOT_APPLICABLE - No production_and_retained_flows block is declared.
+  base_demand_and_commitment_probability_valid: NOT_APPLICABLE - No base demand, commitment probability or MES block is declared.
+  shared_enabler_declaration_valid: NOT_APPLICABLE - No shared-enabler declaration is present.
+  ground_truth_backtest: PASS - Engine state and route match planted ground truth.
+- SYN-MINISTRY-PENICILLIN-API-001.json scenario=SYN-MINISTRY-PENICILLIN-API-001 opportunity=SAU-H6-294110 status=PASS
+  target_spec_demand_within_public_imports: PASS - 0.171511 kt <= 0.343023 kt.
+  line_nameplate_within_disclosed_public_capacity: NOT_APPLICABLE - No numeric public installed nameplate is disclosed.
+  capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].
+  qualified_availability_within_physical_output: NOT_APPLICABLE - No qualified_available_kt is declared.
+  demand_layers_remain_separate: INFORMATIONAL - Demand layers are reported separately; no ordering constraint is enforced.
+  tariff_line_allocation_sums_to_public_hs6_total: NOT_APPLICABLE - No tariff_line_allocation block is declared.
+  buyer_allocation_within_public_imports: NOT_APPLICABLE - No buyer_allocation block is declared.
+  expansion_assumption_disclosed_and_bounded: NOT_APPLICABLE - No expansion_assumption block is declared.
+  retained_flows_reconcile_to_public_trade: NOT_APPLICABLE - No production_and_retained_flows block is declared.
+  base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.
+  shared_enabler_declaration_valid: NOT_APPLICABLE - No shared-enabler declaration is present.
+  ground_truth_backtest: PASS - Engine state and route match planted ground truth.
+- SYN-MINISTRY-PP-001.json scenario=SYN-MINISTRY-PP-001 opportunity=SAU-H0-390210 status=PASS
+  target_spec_demand_within_public_imports: PASS - 56 kt <= 56 kt.
+  line_nameplate_within_disclosed_public_capacity: PASS - 1170 kt <= 1170 kt.
+  capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].
+  qualified_availability_within_physical_output: PASS - 80 kt <= 1055.46 kt.
+  demand_layers_remain_separate: INFORMATIONAL - Demand layers are reported separately; no ordering constraint is enforced.
+  tariff_line_allocation_sums_to_public_hs6_total: NOT_APPLICABLE - No tariff_line_allocation block is declared.
+  buyer_allocation_within_public_imports: NOT_APPLICABLE - No buyer_allocation block is declared.
+  expansion_assumption_disclosed_and_bounded: NOT_APPLICABLE - No expansion_assumption block is declared.
+  retained_flows_reconcile_to_public_trade: NOT_APPLICABLE - No production_and_retained_flows block is declared.
+  base_demand_and_commitment_probability_valid: NOT_APPLICABLE - No base demand, commitment probability or MES block is declared.
+  shared_enabler_declaration_valid: NOT_APPLICABLE - No shared-enabler declaration is present.
+  ground_truth_backtest: PASS - Engine state and route match planted ground truth.
+- SYN-MINISTRY-SOP-001.json scenario=SYN-MINISTRY-SOP-001 opportunity=SAU-H6-310430 status=PASS
+  target_spec_demand_within_public_imports: PASS - 11.2306 kt <= 22.4611 kt.
+  line_nameplate_within_disclosed_public_capacity: NOT_APPLICABLE - No numeric public installed nameplate is disclosed.
+  capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].
+  qualified_availability_within_physical_output: NOT_APPLICABLE - No qualified_available_kt is declared.
+  demand_layers_remain_separate: INFORMATIONAL - Demand layers are reported separately; no ordering constraint is enforced.
+  tariff_line_allocation_sums_to_public_hs6_total: NOT_APPLICABLE - No tariff_line_allocation block is declared.
+  buyer_allocation_within_public_imports: NOT_APPLICABLE - No buyer_allocation block is declared.
+  expansion_assumption_disclosed_and_bounded: NOT_APPLICABLE - No expansion_assumption block is declared.
+  retained_flows_reconcile_to_public_trade: NOT_APPLICABLE - No production_and_retained_flows block is declared.
+  base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.
+  shared_enabler_declaration_valid: NOT_APPLICABLE - No shared-enabler declaration is present.
+  ground_truth_backtest: PASS - Engine state and route match planted ground truth.
+- SYN-MINISTRY-STEEL-001.json scenario=SYN-MINISTRY-STEEL-001 opportunity=SAU-H0-721049 status=PASS
+  target_spec_demand_within_public_imports: PASS - 104 kt <= 287.9 kt.
+  line_nameplate_within_disclosed_public_capacity: PASS - 250 kt <= 250 kt.
+  capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].
+  qualified_availability_within_physical_output: NOT_APPLICABLE - No qualified_available_kt is declared.
+  demand_layers_remain_separate: INFORMATIONAL - Demand layers are reported separately; no ordering constraint is enforced.
+  tariff_line_allocation_sums_to_public_hs6_total: NOT_APPLICABLE - No tariff_line_allocation block is declared.
+  buyer_allocation_within_public_imports: NOT_APPLICABLE - No buyer_allocation block is declared.
+  expansion_assumption_disclosed_and_bounded: NOT_APPLICABLE - No expansion_assumption block is declared.
+  retained_flows_reconcile_to_public_trade: NOT_APPLICABLE - No production_and_retained_flows block is declared.
+  base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.
+  shared_enabler_declaration_valid: NOT_APPLICABLE - No shared-enabler declaration is present.
+  ground_truth_backtest: PASS - Engine state and route match planted ground truth.
+- SYN-MINISTRY-STREPTOMYCIN-API-001.json scenario=SYN-MINISTRY-STREPTOMYCIN-API-001 opportunity=SAU-H6-294120 status=PASS
+  target_spec_demand_within_public_imports: PASS - 0.023889 kt <= 0.047779 kt.
+  line_nameplate_within_disclosed_public_capacity: NOT_APPLICABLE - No numeric public installed nameplate is disclosed.
+  capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].
+  qualified_availability_within_physical_output: NOT_APPLICABLE - No qualified_available_kt is declared.
+  demand_layers_remain_separate: INFORMATIONAL - Demand layers are reported separately; no ordering constraint is enforced.
+  tariff_line_allocation_sums_to_public_hs6_total: NOT_APPLICABLE - No tariff_line_allocation block is declared.
+  buyer_allocation_within_public_imports: NOT_APPLICABLE - No buyer_allocation block is declared.
+  expansion_assumption_disclosed_and_bounded: NOT_APPLICABLE - No expansion_assumption block is declared.
+  retained_flows_reconcile_to_public_trade: NOT_APPLICABLE - No production_and_retained_flows block is declared.
+  base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.
+  shared_enabler_declaration_valid: NOT_APPLICABLE - No shared-enabler declaration is present.
+  ground_truth_backtest: PASS - Engine state and route match planted ground truth.
+- SYN-MINISTRY-TINPLATE-001.json scenario=SYN-MINISTRY-TINPLATE-001 opportunity=SAU-H6-721012 status=PASS
+  target_spec_demand_within_public_imports: PASS - 95 kt <= 104.575 kt.
+  line_nameplate_within_disclosed_public_capacity: NOT_APPLICABLE - No numeric public installed nameplate is disclosed.
+  capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].
+  qualified_availability_within_physical_output: NOT_APPLICABLE - No qualified_available_kt is declared.
+  demand_layers_remain_separate: INFORMATIONAL - Demand layers are reported separately; no ordering constraint is enforced.
+  tariff_line_allocation_sums_to_public_hs6_total: NOT_APPLICABLE - No tariff_line_allocation block is declared.
+  buyer_allocation_within_public_imports: NOT_APPLICABLE - No buyer_allocation block is declared.
+  expansion_assumption_disclosed_and_bounded: NOT_APPLICABLE - No expansion_assumption block is declared.
+  retained_flows_reconcile_to_public_trade: NOT_APPLICABLE - No production_and_retained_flows block is declared.
+  base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.
+  shared_enabler_declaration_valid: NOT_APPLICABLE - No shared-enabler declaration is present.
+  ground_truth_backtest: PASS - Engine state and route match planted ground truth.
+SHARED ENABLER CONSISTENCY PASS (1 enablers, 2 dependents)
+
+exit_code=0

@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from collections.abc import Mapping, Sequence
+from collections.abc import Mapping
 from typing import Any
 
 from .models import (
@@ -18,24 +18,10 @@ from .taxonomy import (
     classify_need_code,
     extract_case_need_codes,
 )
+from .validation import latest_trade, mapping as _mapping, mapping_rows as _rows
 
 Analysis = Mapping[str, Any]
 Scalar = str | int | float | bool | None
-
-
-def _mapping(value: Any, field: str) -> Analysis:
-    if not isinstance(value, Mapping):
-        raise ExecutiveIntegrityError(f"{field} must be a mapping")
-    return value
-
-
-def _rows(value: Any, field: str) -> tuple[Analysis, ...]:
-    valid_sequence = isinstance(value, Sequence) and not isinstance(
-        value, (str, bytes)
-    )
-    if not valid_sequence or not all(isinstance(row, Mapping) for row in value):
-        raise ExecutiveIntegrityError(f"{field} must contain mappings")
-    return tuple(value)
 
 
 def _value(
@@ -111,10 +97,10 @@ def build_steps(
         str(row["rule_id"]) for row in rules if row.get("fired") is True
     )
     needs = extract_case_need_codes(public)
-    trade = max(
-        _rows(public.get("trade"), "trade"),
-        key=lambda row: row["year"],
-    )
+    trade = latest_trade(public.get("trade"))
+    r11 = tuple(row for row in rules if row.get("rule_id") == "R11")
+    if len(r11) != 1:
+        raise ExecutiveIntegrityError("rules must contain exactly one R11")
     decision = _mapping(public.get("real_decision"), "real decision")
     gap = _mapping(public.get("gap_class"), "gap")
     route_rows = _rows(public.get("route_hypotheses"), "routes")
@@ -168,11 +154,7 @@ def build_steps(
                 ("hard_exclusion_count", len(public["hard_exclusions"])),
                 (
                     "r11_fired",
-                    next(
-                        row.get("fired")
-                        for row in rules
-                        if row.get("rule_id") == "R11"
-                    ),
+                    r11[0].get("fired"),
                 ),
             ),
             "rule.R11",
@@ -303,10 +285,7 @@ def build_vectors(public: Analysis) -> tuple[DecisionVector, ...]:
         public.get("evidence_class_assessment"),
         "assessments",
     )
-    trade = max(
-        _rows(public.get("trade"), "trade"),
-        key=lambda row: row["year"],
-    )
+    trade = latest_trade(public.get("trade"))
     unresolved = sum(
         _mapping(row, "assessment").get("resolution_status") != "RESOLVED"
         for row in assessments.values()

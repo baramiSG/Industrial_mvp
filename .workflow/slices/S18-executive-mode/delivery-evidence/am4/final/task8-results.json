@@ -1,0 +1,247 @@
+[
+  {
+    "label": "uv-sync",
+    "command": [
+      "/home/barami/.local/bin/uv",
+      "sync",
+      "--locked",
+      "--extra",
+      "dev",
+      "--extra",
+      "e2e",
+      "--extra",
+      "graph"
+    ],
+    "cwd": "/tmp/s18-am4-task8",
+    "tree": "1364789a964f96f6ebabf8eae1d239a5bad0b15e",
+    "started_at_utc": "2026-09-23T19:04:26.805129+00:00",
+    "duration_seconds": 2.26,
+    "exit_code": 0,
+    "log": "task8-uv-sync.log"
+  },
+  {
+    "label": "frozen-status-isolation",
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/test_frozen_public_evidence_pins.py",
+      "tests/test_s17_status_docs.py",
+      "tests/test_visual_baseline_contract.py",
+      "tests/test_executive_isolation.py"
+    ],
+    "cwd": "/tmp/s18-am4-task8",
+    "tree": "1364789a964f96f6ebabf8eae1d239a5bad0b15e",
+    "started_at_utc": "2026-09-23T19:04:29.070804+00:00",
+    "duration_seconds": 6.325,
+    "exit_code": 0,
+    "log": "task8-frozen-status-isolation.log"
+  },
+  {
+    "label": "full-pytest",
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q"
+    ],
+    "cwd": "/tmp/s18-am4-task8",
+    "tree": "1364789a964f96f6ebabf8eae1d239a5bad0b15e",
+    "started_at_utc": "2026-09-23T19:04:35.402962+00:00",
+    "duration_seconds": 81.824,
+    "exit_code": 0,
+    "log": "task8-full-pytest.log"
+  },
+  {
+    "label": "integrity",
+    "command": [
+      "python",
+      "scripts/verify_integrity.py"
+    ],
+    "cwd": "/tmp/s18-am4-task8",
+    "tree": "1364789a964f96f6ebabf8eae1d239a5bad0b15e",
+    "started_at_utc": "2026-09-23T19:05:57.234664+00:00",
+    "duration_seconds": 0.099,
+    "exit_code": 0,
+    "log": "task8-integrity.log"
+  },
+  {
+    "label": "scenarios",
+    "command": [
+      "python",
+      "scripts/validate_scenarios.py"
+    ],
+    "cwd": "/tmp/s18-am4-task8",
+    "tree": "1364789a964f96f6ebabf8eae1d239a5bad0b15e",
+    "started_at_utc": "2026-09-23T19:05:57.339054+00:00",
+    "duration_seconds": 0.167,
+    "exit_code": 0,
+    "log": "task8-scenarios.log"
+  },
+  {
+    "label": "reconstruction",
+    "command": [
+      "python",
+      "scripts/reconstruct_snapshot.py",
+      "--all"
+    ],
+    "cwd": "/tmp/s18-am4-task8",
+    "tree": "1364789a964f96f6ebabf8eae1d239a5bad0b15e",
+    "started_at_utc": "2026-09-23T19:05:57.512606+00:00",
+    "duration_seconds": 64.826,
+    "exit_code": 0,
+    "log": "task8-reconstruction.log"
+  },
+  {
+    "label": "smoke",
+    "command": [
+      "python",
+      "scripts/demo_smoke.py"
+    ],
+    "cwd": "/tmp/s18-am4-task8",
+    "tree": "1364789a964f96f6ebabf8eae1d239a5bad0b15e",
+    "started_at_utc": "2026-09-23T19:07:02.344684+00:00",
+    "duration_seconds": 0.176,
+    "exit_code": 0,
+    "log": "task8-smoke.log"
+  },
+  {
+    "label": "graph-validate",
+    "command": [
+      "python",
+      "-m",
+      "ior_mvp.graph",
+      "validate"
+    ],
+    "cwd": "/tmp/s18-am4-task8",
+    "tree": "1364789a964f96f6ebabf8eae1d239a5bad0b15e",
+    "started_at_utc": "2026-09-23T19:07:02.526486+00:00",
+    "duration_seconds": 0.13,
+    "exit_code": 0,
+    "log": "task8-graph-validate.log"
+  },
+  {
+    "label": "graph-build-check",
+    "command": [
+      "python",
+      "-m",
+      "ior_mvp.graph",
+      "build",
+      "--check"
+    ],
+    "cwd": "/tmp/s18-am4-task8",
+    "tree": "1364789a964f96f6ebabf8eae1d239a5bad0b15e",
+    "started_at_utc": "2026-09-23T19:07:02.661893+00:00",
+    "duration_seconds": 1.436,
+    "exit_code": 0,
+    "log": "task8-graph-build-check.log"
+  },
+  {
+    "label": "prohibited-secret",
+    "command": [
+      "python",
+      "scripts/check_prohibited_files.py"
+    ],
+    "cwd": "/tmp/s18-am4-task8",
+    "tree": "1364789a964f96f6ebabf8eae1d239a5bad0b15e",
+    "started_at_utc": "2026-09-23T19:07:04.103781+00:00",
+    "duration_seconds": 0.289,
+    "exit_code": 0,
+    "log": "task8-prohibited-secret.log"
+  },
+  {
+    "label": "thresholds",
+    "command": [
+      "python",
+      "scripts/check_threshold_literals.py"
+    ],
+    "cwd": "/tmp/s18-am4-task8",
+    "tree": "1364789a964f96f6ebabf8eae1d239a5bad0b15e",
+    "started_at_utc": "2026-09-23T19:07:04.399219+00:00",
+    "duration_seconds": 0.204,
+    "exit_code": 0,
+    "log": "task8-thresholds.log"
+  },
+  {
+    "label": "ui-contracts",
+    "command": [
+      "python",
+      "scripts/check_ui_contracts.py"
+    ],
+    "cwd": "/tmp/s18-am4-task8",
+    "tree": "1364789a964f96f6ebabf8eae1d239a5bad0b15e",
+    "started_at_utc": "2026-09-23T19:07:04.608426+00:00",
+    "duration_seconds": 0.115,
+    "exit_code": 0,
+    "log": "task8-ui-contracts.log"
+  },
+  {
+    "label": "es-modules",
+    "command": [
+      "python",
+      "scripts/check_es_modules.py",
+      "--node",
+      "node"
+    ],
+    "cwd": "/tmp/s18-am4-task8",
+    "tree": "1364789a964f96f6ebabf8eae1d239a5bad0b15e",
+    "started_at_utc": "2026-09-23T19:07:04.729581+00:00",
+    "duration_seconds": 0.543,
+    "exit_code": 0,
+    "log": "task8-es-modules.log"
+  },
+  {
+    "label": "compile",
+    "command": [
+      "python",
+      "-m",
+      "compileall",
+      "-q",
+      "src",
+      "scripts",
+      "tests",
+      "browser_tests",
+      "graph_tests"
+    ],
+    "cwd": "/tmp/s18-am4-task8",
+    "tree": "1364789a964f96f6ebabf8eae1d239a5bad0b15e",
+    "started_at_utc": "2026-09-23T19:07:05.278032+00:00",
+    "duration_seconds": 0.345,
+    "exit_code": 0,
+    "log": "task8-compile.log"
+  },
+  {
+    "label": "all11-focused",
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "tests/test_executive_service.py",
+      "tests/test_executive_api.py",
+      "tests/test_executive_claims.py",
+      "tests/test_executive_isolation.py",
+      "tests/test_golden_cases.py"
+    ],
+    "cwd": "/tmp/s18-am4-task8",
+    "tree": "1364789a964f96f6ebabf8eae1d239a5bad0b15e",
+    "started_at_utc": "2026-09-23T19:07:05.629692+00:00",
+    "duration_seconds": 7.098,
+    "exit_code": 0,
+    "log": "task8-all11-focused.log"
+  },
+  {
+    "label": "all11-outcomes",
+    "command": [
+      "python",
+      "/tmp/s18-am4-codex-implementation/capture_outcomes.py"
+    ],
+    "cwd": "/tmp/s18-am4-task8",
+    "tree": "1364789a964f96f6ebabf8eae1d239a5bad0b15e",
+    "started_at_utc": "2026-09-23T19:07:12.733673+00:00",
+    "duration_seconds": 0.393,
+    "exit_code": 0,
+    "log": "task8-all11-outcomes.log"
+  }
+]

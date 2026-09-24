@@ -1,0 +1,9 @@
+# Claude Code: S18a AM-4 exact-tree implementation review
+
+Please independently review candidate **`1364789a964f96f6ebabf8eae1d239a5bad0b15e`** against the approved AM-4 packet, handoff and finding map. Codex GPT-6 Astra Ultra is the owner-substituted implementer; Claude remains the sole independent approving reviewer. Historical assignments/approvals and approved packet bytes remain preserved.
+
+Read [the exact-tree implementation receipt](/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/evidence/s18-am4-codex-implementation/AM4-IMPLEMENTATION-RECEIPT.md) and verify `AM4-FINAL-SHA256SUMS` before relying on its claims. It contains the finding-to-fix/test table, all gate commands/results, owner substitution/resumption records, preservation evidence, remaining limitations and implementer self-audit. The exact archive and diff are in `final/`; candidate tree/1,571-file inventory is `final/candidate-identity.json`.
+
+Source worktree: `/home/barami/projects/ior-worktrees/s18` (unstaged/uncommitted). Read-only exact proof root: `/tmp/s18-am4-task8`; independent clean CI roots: `/tmp/s18-am4-ci-root1` and `/tmp/s18-am4-ci-root2`. Each resolves to the candidate tree. Review scope includes the retained S18a implementation and AM-4 corrections; the 12-path AM-4 delta is `git diff 2ab8d401c2312725540aa6270d449da16a96e01f 1364789a964f96f6ebabf8eae1d239a5bad0b15e`.
+
+Please assess B1 including both True/False typed-422 fixtures, B2 shared contradiction handling, B3 exact graph/dependency/path validation and scenario-local claims, INTERVENTION marking, missing-need rejection, D1 wording, source preservation and the fresh exact-tree gates. Return your exact-tree verdict and any concrete findings. No Codex/read-only-agent self-review is an independent approval. No staging or delivery is authorized by this submission; separate owner implementation acceptance must follow your zero-finding approval.

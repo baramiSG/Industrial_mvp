@@ -1,0 +1,33 @@
+START uv-sync
+END uv-sync exit 0
+START frozen-status-isolation
+END frozen-status-isolation exit 0
+START full-pytest
+END full-pytest exit 0
+START integrity
+END integrity exit 0
+START scenarios
+END scenarios exit 0
+START reconstruction
+END reconstruction exit 0
+START smoke
+END smoke exit 0
+START graph-validate
+END graph-validate exit 0
+START graph-build-check
+END graph-build-check exit 0
+START prohibited-secret
+END prohibited-secret exit 0
+START thresholds
+END thresholds exit 0
+START ui-contracts
+END ui-contracts exit 0
+START es-modules
+END es-modules exit 0
+START compile
+END compile exit 0
+START all11-focused
+END all11-focused exit 0
+START all11-outcomes
+END all11-outcomes exit 0
+TASK8_ALL_PASS

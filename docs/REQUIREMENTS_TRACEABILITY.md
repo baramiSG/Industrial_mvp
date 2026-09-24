@@ -447,3 +447,16 @@ Owner-accepted AM-4 `60f516f776a6f3486e097240fd29a716d6b88fda89ad1d6bf3af990588e
 3. BC-08 moves to `TESTED` only after the different-model final reviewer reports zero unresolved findings and the required final documents exist.
 4. `FR-073` remains `NOT_APPLICABLE (production)`.
 5. After the S05 implementation PR merges and default-branch CI for that merge is green, the Supervisor opens the narrow release-state PR. Only that PR may promote eligible rows to `COMPLETE`, record final CI/merge facts, and update durable project state.
+
+## S18a delivery closure and bounded S18b0 follow-up
+
+The historical S18a gated rows above describe the preserved implementation packet. Current S18a delivery is COMPLETE for its API/provenance child only: exact Claude-approved/owner-accepted tree `1364789a964f96f6ebabf8eae1d239a5bad0b15e` merged as `b4a00adb685c61c4d50c24e94647fbd24e599096` through PR37, with six PR and six main jobs passing. [Delivery evidence](../.workflow/slices/S18-executive-mode/delivery_record.md) binds the unchanged full receipt hash and selected durable files. Parent S18 and the milestone remain incomplete.
+
+| Follow-up requirement | Bounded proof obligation | Current status |
+|---|---|---|
+| V3-S18B0-MALFORMED | Empty/malformed trade and required-rule inputs, supplied EVSI numerics, and dependent scenario mappings fail with the existing sanitized executive integrity422; no broad exception catch | FOCUSED REGRESSIONS PASS; EXACT-CANDIDATE GATES/REVIEW PENDING |
+| V3-S18B0-PARTITION | Public references reject synthetic status/source laundering while legitimate public ClassD proxies and optional absent EVSI remain valid | FOCUSED REGRESSIONS PASS; EXACT-CANDIDATE GATES/REVIEW PENDING |
+| V3-S18B0-COMPATIBILITY | All12 executive response bytes and22 analyses unchanged; AM4 booleans/B3/claim assertions preserved; original-defect RED and positive controls retained | All46 saved artifacts equal:12 raw API responses,12 canonical responses and22 full analyses; independent review pending |
+| V3-S18B0-PRESERVATION | No frozen-input/generator change; publish only the55-file hash-bound S18a export plus permitted wrapper/delivery records | COPIED UNSTAGED; EXACT-CANDIDATE REVIEW REQUIRED |
+
+[Approved plan](../.workflow/slices/S18b0-executive-contract-hardening/plan.md) and [separate review](../.workflow/slices/S18b0-executive-contract-hardening/plan_review.md) define the finite source/test paths and full gate set. Case-level EVSI schema availability, broad R12 case-wide need mapping and malformed paths outside that plan are explicitly not closed. No final cross-model release gate is claimed by delegated same-model reviews.

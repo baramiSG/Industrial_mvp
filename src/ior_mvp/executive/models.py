@@ -231,11 +231,11 @@ class SyntheticEvsiCase(FrozenModel):
     scenario_id: str = Field(min_length=1)
     availability: AvailabilityStatus
     next_fact: str | None = None
-    approximate_evsi_m_sar: float | None = None
-    route_change_probability: float | None = None
-    value_difference_m_sar: float | None = None
-    evidence_cost_m_sar: float | None = None
-    delay_cost_m_sar: float | None = None
+    approximate_evsi_m_sar: float | None = Field(default=None, strict=True, allow_inf_nan=False)
+    route_change_probability: float | None = Field(default=None, strict=True, allow_inf_nan=False)
+    value_difference_m_sar: float | None = Field(default=None, strict=True, allow_inf_nan=False)
+    evidence_cost_m_sar: float | None = Field(default=None, strict=True, allow_inf_nan=False)
+    delay_cost_m_sar: float | None = Field(default=None, strict=True, allow_inf_nan=False)
 
     @model_validator(mode="after")
     def _validate_values(self) -> Self:
