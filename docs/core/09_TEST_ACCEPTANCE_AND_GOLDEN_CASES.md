@@ -187,6 +187,8 @@ The grammar can admit ALL-CAPS English words, snake/dotted lowercase English
 and Title-Case-plus-digit strings; content parity therefore also requires
 English-template equality and the catalogue-label leak check.
 
+S18b AM2 extends §2.7 with literal source-name regression, the real Arabic-name branch, exact six-island whole-graph Arabic parity for the canonical steel adjacency case, five independent source-disclosure mutation oracles, malicious-name escaping, and containment of controls and text at390/1024/1440 in both locales. At390, real Tab/Arrow navigation must reach both diagram scroll endpoints and every native element; whole-document axe remains required. All four graph views exercise loading, empty, unavailable, invalid, transport-error and retry states in public and simulation mode. Existing geometry, collision, source, isolation and visual assertions remain in force.
+
 ### 2.8 Graph projection and live-Cypher tests
 
 Offline tests validate the stored `data/graph/` export, exact 19-label and
@@ -713,9 +715,12 @@ S18a graph identity and projection bytes change only because governed Core and
 engine input hashes change. Graph node/edge semantics and counts are expected
 to remain 925/1,045 and must be audited after the graph is generated. Visual
 manifest and provenance bytes change because `app.py` and the graph
-pointer/projection are visual sources; all 112 WebPs are expected to remain
-byte-identical and no visual path is added. These are provenance-closure
-expectations, not claims that generation has already run.
+pointer/projection are visual sources. The accepted S18a AM-3 result was that
+110 of 112 WebPs remained byte-identical; the two desktop public-steel
+`evidence_to_change` images changed only for the run-qualified Decision ID.
+No visual path, viewport or tolerance changed. The immutable AM-3/AM-4 packets
+and their approvals retain their historical wording; this corrects the live
+KL-132 acceptance description rather than rewriting that history.
 
 Pre-generation acceptance runs focused executive, isolation, reconstruction,
 portfolio and golden regressions, then the complete non-live gates. Read-only
@@ -723,3 +728,64 @@ in-memory graph construction binds the candidate identity only after every
 graph-hashed Core and source byte is final. Graph, manifest and canonical
 visual generation remain separate owner authorizations and are not part of the
 pre-generation candidate.
+
+## 12. S18b executive surface acceptance
+
+Acceptance requires all eleven selected cases in both locales to match the
+executive API states/routes, all eight steps and four separate vectors, and all
+nine route rows per available branch in engine order. Steel remains public
+INVESTIGATE and simulated ADVANCE/5; polypropylene remains REJECT/0, with actual
+zero support distinct from absent NPV. The four unavailable EVSI rows remain
+unavailable; the frontend joins summary rows by opportunity and scenario rather
+than inventing a case-schema availability field or dataset allocation.
+
+Source drills cover metric.trade, R1-F, R4-F, R4-D and both decisions, exact
+passport membership, public contradictions retained in simulated claims,
+malicious text/URLs, unresolved case-wide needs, Escape and return focus.
+Malformed/foreign joins fail closed. Loading, empty, not-found, request error,
+locale failure, missing simulation, zero-count/UNMAPPED dataset and graph
+unavailability are explicit. Delayed responses and Back/Forward must not expose
+stale case, branch, locale or source content. Analyst values and prior control
+order remain intact with precisely added source and executive navigation controls.
+
+Arabic parity checks the complete executive subtree, including opened source
+passports: UI-controlled labels use governed Arabic, technical claim identifiers
+have a finite grammar, and verbatim English source spans carry explicit language
+and the existing source caption. Ordinary English prose and company names cannot
+pass as technical IDs. Keyboard/focus, reduced-motion, axe at1440/1024 and
+responsive390/1920/2560 checks accompany actual rendered-screen inspection.
+
+Before canonical generation run the complete functional browser gate and inspect
+all eight steps EN/AR at1440, route/unlocks/conditions at1024/390 and four failure
+states in both locales. Retain actual screenshots, URLs and observations.
+The visual matrix preserves all112 existing paths and adds exactly16 executive
+images (four scenes × two locales × two viewports), for128 total. Existing
+producer, comparison tolerances, budgets and untouched graph geometry remain
+required. Reviewed changes are limited to declared UI additions, authority labels
+and run-qualified identities; no automatic acceptance of unrelated image drift.
+
+Core02/03/09 and catalogue changes require a separately reviewed, bound graph
+build, then manifests, then canonical visual allocation after source pause.
+Expected graph semantics/counts stay925/1045; unexpected changes stop the
+operation. Snapshot726 and authority20 are observed output obligations, not
+values to force. Every hashed source/capture helper is bound before generation.
+Two clean-root exact-candidate gates, independent implementation review, exact
+PR-head checks/review and delegated acceptance precede delivery. These are
+acceptance requirements, not a claim that pending gates already passed.
+
+
+### S18b AM4 quality and pre-generation acceptance
+
+Extend source tests across all four graph views, both modes/locales and390/1024/1440 after actual stored-evidence selection; genuinely empty views retain no invented nodes. Whole-graph Arabic parity uses independently enumerated literal source-count fixtures, and full-page axe/keyboard/containment applies. Source/caption removal, raw English status, company-as-code, composite-ID wrong direction, unsafe URL and missing warning mutations must fail, retaining the five AM2 controls. Exact source text/URL/ID ordering, genuine Arabic/mixed/hostile strings, typed absence, unresolved valid-looking IDs and zero document indexes remain tested. Both callers preserve anchor/close/Escape/return focus. All eight executive steps are inspected EN/AR390/1024/1440, with expanded capability meanings, original API equality and unknown/warning negative controls. Table Tab order gains exactly two named stops; native Arrow scrolling covers both actual endpoints without relying on an assumed RTL zero origin.
+
+WebP remains opaque lossless RGB, method6/exactTrue with compression effort100, fixed dimensions/fonts/producer/tolerances and600KiB per image/16MiB aggregate. Same-input80/100 decoded equality, repeat100 identity and preserved112 old bytes precede final128 review. The actual capture-source closure includes shared passports, executive evidence/simulation, graph CSS, UI, encoder and transitive browser helpers; no Pillow default-dev dependency is added.
+
+Before generation the full unmodified functional command remains mandatory. Its sole admitted pending-output failure is graph preflight retained112 observing96 inherited nongraph images; it is reported nonzero, never GREEN. Verify the fresh16 graph capture matrix/resources separately, then the disjoint immutable96 plus fresh16 provisional112 budget. Final16 executive captures remain ungenerated/unverified until Task6. Only the ten explicitly mapped stale-output default-pytest cases may remain separately pending. After accepted generation, full functional exit0 with actual128/112 and every unchanged parent128visual/strictR1/two-rootCI/exact-review gate is required. This paragraph changes sequence honesty, not acceptance strength.
+
+### S18b AM5 and parent-scope review regression proof
+
+Computed executive integrity requires EN/AR PASS0, valid FAIL27 with all four ordered checks and affected IDs, unavailable transport/retry without stale PASS, and usable eight-step/source/keyboard journeys at390/1024/1440. Analyst identity tests cover all11 public and simulated contexts plus independent state/route/scenario conflicts, explicitly null versus route0. Screening's eight real reviewer statuses retain exact raw identity and faithful localized copy; the unchanged full Arabic scanner and all hostile injection controls remain mandatory.
+
+Every returned vector claim must be reachable with its actual status and stored passport; contradictions cannot disappear behind a metric value. Genuine missing-scenario coverage must use the real builder and validate its DTOs, with eleven public cases and no invented EVSI row for the unavailable case. All eight steps in both locales preserve the public conclusion without synthetic fetch, metadata, policy-label or EVSI-value invention. Available-branch missing/mismatched EVSI and forged unavailable metadata still reject. Only the two exact legitimate unavailable-step claim IDs extend the narrow grammar; ordinary prose and malformed suffixes still fail.
+
+The16 executive visual scenes must prove exact context and complete substantive content in the viewport before capture: public trade content; simulated route heading/both warnings/first two complete row headers; dataset explanation and complete named count cards; and polypropylene's public rejection/rationale/boundary/route. Entire required boxes, stable pre/post capture geometry and original-preparation RED evidence are required. All112 prior capture preparations, fixed dimensions, pinned producer, fonts, tolerances and600KiB/16MiB final128 budget remain unchanged. Local diagnostic screenshots/resource estimates do not certify canonical output. Independent source/UI review precedes the separately reviewed graph→manifest→visual operation and all exact-candidate gates.

@@ -33,7 +33,7 @@ export function renderMethodology() {
         <div><small>${escapeHtml(label)}</small><strong>${technical(integer(value))}</strong></div>
       `).join("")}
     </div>
-    <div class="methodology-table-wrap">
+    <div class="methodology-table-wrap" id="methodology-scroll-region" role="region" tabindex="0" aria-label="${escapeHtml(t('rules.title'))}">
       <table class="rule-table">
         <thead>
           <tr>

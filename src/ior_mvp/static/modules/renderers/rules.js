@@ -1,3 +1,4 @@
+import { claimLink } from "../claim-links.js";
 import {
   escapeHtml,
   executionLabel,
@@ -29,7 +30,7 @@ export function renderRuleLedger(props) {
         <br>${fireText(row.fired)}
       </td>
       <td>${localizedField(row, "result")}</td>
-      <td>${localizedField(row, "decision_effect")}</td>
+      <td>${localizedField(row, "decision_effect")} ${claimLink(row.synthetic_flag ? "decision.simulated" : `rule.${row.rule_id}`,  state.claimContext)}</td>
     </tr>
   `).join("");
   return `

@@ -60,11 +60,37 @@ SCREENS = (
     "journey-i-graph-route-blocking",
     "journey-i-graph-shared-enabler",
     "journey-i-graph-evidence-to-change",
+    "journey-j-executive-signal-public",
+    "journey-j-executive-simulated-route",
+    "journey-j-executive-ministry-unlocks",
+    "journey-j-executive-reject",
 )
 
 
 def _manifest() -> dict:
     return json.loads(MANIFEST.read_text(encoding="utf-8"))
+
+
+def test_actual_visual_discovery_binds_am4_capture_dependencies_without_pillow() -> None:
+    import ast
+
+    source = PROJECT_ROOT / 'browser_tests/visual_baselines.py'
+    module = ast.parse(source.read_text())
+    function = next(node for node in module.body if isinstance(node, ast.FunctionDef) and node.name == '_source_hashes')
+    namespace = {'ROOT': PROJECT_ROOT, 'json': json, 'sha256': lambda path: hashlib.sha256(path.read_bytes()).hexdigest()}
+    exec(compile(ast.Module(body=[function], type_ignores=[]), str(source), 'exec'), namespace)
+    discovered = namespace['_source_hashes']()
+    required = (
+        'src/ior_mvp/static/modules/graph/passports.js', 'src/ior_mvp/static/modules/graph/render.js',
+        'src/ior_mvp/static/modules/executive/evidence.js', 'src/ior_mvp/static/modules/executive/simulation.js',
+        'src/ior_mvp/static/modules/renderers/evidence.js', 'src/ior_mvp/static/modules/methodology.js',
+        'src/ior_mvp/static/css/graph.css', 'config/ui_strings.v1.yaml',
+        'browser_tests/visual_baselines.py', 'browser_tests/test_visual_baselines.py',
+        'browser_tests/graph_pages.py', 'browser_tests/test_graph.py', 'browser_tests/graph_fixtures.py',
+        'browser_tests/parity_grammar.py', 'browser_tests/executive_pages.py',
+    )
+    for path in required:
+        assert discovered[path] == hashlib.sha256((PROJECT_ROOT / path).read_bytes()).hexdigest()
 
 
 def test_pillow_is_an_exact_e2e_only_dependency() -> None:
@@ -84,7 +110,7 @@ def test_pillow_is_an_exact_e2e_only_dependency() -> None:
     ]
 
 
-def test_visual_manifest_has_exact_112_entry_locale_viewport_screen_matrix() -> None:
+def test_visual_manifest_has_exact_128_entry_locale_viewport_screen_matrix() -> None:
     entries = _manifest()["entries"]
     actual = {
         (entry["locale"], entry["viewport"], entry["screen"])
@@ -92,7 +118,7 @@ def test_visual_manifest_has_exact_112_entry_locale_viewport_screen_matrix() -> 
     }
     expected = set(product(LOCALES, VIEWPORTS, SCREENS))
 
-    assert len(entries) == 112
+    assert len(entries) == 128
     assert actual == expected
     assert len(actual) == len(entries)
 
@@ -113,6 +139,10 @@ def test_visual_manifest_and_every_webp_hash_size_dimensions_and_rgb_decode_matc
     assert "config/graph_views.v1.yaml" in payload["source_tree"]
     assert "browser_tests/graph_fixtures.py" in payload["source_tree"]
     assert "browser_tests/graph_pages.py" in payload["source_tree"]
+    for source in ("browser_tests/test_graph.py", "src/ior_mvp/static/modules/graph/labels.js", "src/ior_mvp/static/modules/graph/render.js", "src/ior_mvp/static/modules/graph/diagram.js", "src/ior_mvp/static/css/graph.css"):
+        assert source in payload["source_tree"]
+    for helper in ("executive_pages.py", "harness.py", "pages.py", "parity_grammar.py", "conftest.py", "visual_baselines.py"):
+        assert f"browser_tests/{helper}" in payload["source_tree"]
     assert "data/graph/current.json" in payload["source_tree"]
     assert any(
         path.endswith("/projection.json")
@@ -153,7 +183,7 @@ def test_visual_manifest_and_every_webp_hash_size_dimensions_and_rgb_decode_matc
 def test_visual_baseline_files_are_lossless_webp_with_600_kib_and_16_mib_budgets() -> None:
     files = sorted(BASELINE_ROOT.glob("*/*/*.webp"))
 
-    assert len(files) == 112
+    assert len(files) == 128
     assert all(path.read_bytes()[12:16] == b"VP8L" for path in files)
     assert all(path.stat().st_size <= 600 * 1024 for path in files)
     assert sum(path.stat().st_size for path in files) <= 16 * 1024 * 1024

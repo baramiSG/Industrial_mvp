@@ -16,6 +16,9 @@ from browser_tests.graph_fixtures import (
 )
 from browser_tests.graph_pages import (
     assert_graph_caption_edge_clearance,
+    assert_graph_panel_contains_controls_and_text,
+    assert_graph_source_name_disclosures,
+    assert_selected_graph_passports,
     assert_graph_svg_labels_within_viewbox,
     assert_graph_visible_arrow_endpoints,
     install_graph_routes,
@@ -70,7 +73,7 @@ def graph_visual_preflight_root() -> Path:
     ]
     assert len(files) == 16
     assert len(graph_baselines) == 16
-    assert len(retained) == 96
+    assert len(retained) == 112
     assert {path.stem for path in files} == GRAPH_REPLACEMENT_SCREENS
     assert all(path.stat().st_size <= 600 * 1024 for path in files)
     retained_bytes = sum(path.stat().st_size for path in retained)
@@ -496,6 +499,7 @@ def test_graph_keyboard_accessibility_rtl(
     )
     assert page.locator("#graph-svg-description").text_content() == (
         catalogue["description"][locale.code]
+        + (" " + locale_bundle(locale)["strings"]["source_language.caption"] if locale.code == "ar" else "")
     )
     report = run_axe(page)
     assert not report["violations"], format_axe_violations(report["violations"])
@@ -730,3 +734,319 @@ def test_graph_portfolio_out_of_order_does_not_restore_stale_selection(
     assert page.locator("#opportunity-select").input_value() == current
     assert page.locator(".mode-button[data-mode='public']").get_attribute("class").endswith("active")
     assert page.locator("#graph-toggle").get_attribute("aria-expanded") == "false"
+
+
+@pytest.mark.parametrize("locale", (EN, AR), ids=lambda value: value.code)
+@pytest.mark.parametrize("width", (390, 1024, 1440))
+def test_graph_node_names_preserve_sources_and_arabic(browser_session: BrowserSession, locale: Any, width: int) -> None:
+    page = browser_session.page
+    page.set_viewport_size({"width": width, "height": 900})
+    install_graph_routes(page)
+    goto_portfolio(page, "public", locale)
+    open_graph(page)
+    assert_graph_source_name_disclosures(page, locale)
+    payload = artifact_graph_payload("adjacency", "SAU-H0-721049", "public")
+    assert page.locator('.graph-button-list [data-graph-select="node"]').evaluate_all('(nodes)=>nodes.map(n=>n.dataset.graphId)') == [node['id'] for node in payload['nodes']]
+    for identity in ('COMPANY-280abef66af82a6c', 'COMPANY-a0954792195adee5'):
+        button = page.locator(f'.graph-button-list [data-graph-id="{identity}"]')
+        button.focus(); page.keyboard.press('Enter')
+        page.locator('.graph-passport, .graph-unresolved').first.wait_for()
+        assert button.get_attribute('aria-pressed') == 'true'
+        assert page.locator('.graph-provenance').inner_text().find(next(n['provenance']['evidence_id'] for n in payload['nodes'] if n['id']==identity)) >= 0
+    page.locator('.graph-button-list [data-graph-id="SAU-H0-721049"]').click()
+    page.locator('.graph-passport').first.wait_for()
+    if locale.code == 'ar':
+        link = page.locator('.graph-evidence-results [data-passport-ref]').first
+        assert link.evaluate("a=>{const c=a.nextElementSibling;return c?.classList.contains('source-language-caption') && c.id===a.getAttribute('aria-describedby') && c.checkVisibility()}")
+        assert link.locator('.source-language-caption').count() == 0
+
+
+
+def test_graph_source_disclosure_mutations_fail_strict_oracles(browser_session: BrowserSession) -> None:
+    from browser_tests.pages import arabic_parity_report, assert_arabic_parity
+    page = browser_session.page
+    page.set_viewport_size({"width":390,"height":844})
+    install_graph_routes(page); goto_portfolio(page,'public',AR); open_graph(page)
+    assert_graph_source_name_disclosures(page,AR)
+    mutations = (
+        "document.querySelector('.graph-svg-node .source-language-island').removeAttribute('dir')",
+        "document.querySelector('.graph-svg-node .source-language-island').classList.remove('source-language-island')",
+        "document.querySelector('.graph-svg-node .source-language-caption').remove()",
+        "document.querySelector('.graph-node-name .source-language-caption').style.display='none'",
+        "document.querySelector('.graph-button-list [aria-describedby]').removeAttribute('aria-describedby')",
+    )
+    original = page.locator('#graph-view').inner_html()
+    for index, mutation in enumerate(mutations):
+        page.evaluate(mutation)
+        with pytest.raises(AssertionError):
+            if index < 3:
+                assert_arabic_parity(arabic_parity_report(page,'#graph-view'),expected_source_spans=6)
+            else:
+                assert_graph_source_name_disclosures(page,AR)
+        page.locator('#graph-view').evaluate('(node,html)=>node.innerHTML=html',original)
+        assert_graph_source_name_disclosures(page,AR)
+    # AM4: actual stored passports, with independently enumerated literal counts.
+    page.locator('.graph-button-list [data-graph-id="SAU-H0-721049"]').click()
+    page.locator('.graph-passport').first.wait_for()
+    key = 'SAU-H0-721049|public|adjacency|node'
+    assert_selected_graph_passports(page, AR, 'public', key)
+    original = page.locator('#graph-view').inner_html()
+    passport_mutations = (
+        "document.querySelector('.graph-passport h5 .source-language-island').classList.remove('source-language-island')",
+        "document.querySelector('[data-passport-ref]').nextElementSibling.remove()",
+        "document.querySelector('[data-passport-value=\"status\"]').textContent='observed'",
+        "document.querySelector('[data-passport-value=\"source\"]').innerHTML='<bdi class=\"technical-token\" dir=\"ltr\">Hadeed</bdi>'",
+        "document.querySelector('.graph-passport a').setAttribute('href','javascript:alert(1)')",
+    )
+    for mutation in passport_mutations:
+        page.evaluate(mutation)
+        with pytest.raises(AssertionError):
+            assert_selected_graph_passports(page, AR, 'public', key)
+        page.locator('#graph-view').evaluate('(node,html)=>node.innerHTML=html', original)
+        assert_selected_graph_passports(page, AR, 'public', key)
+    goto_portfolio(page, 'simulated', AR)
+    select_case(page, next(case for case in CASES if case.id == 'SAU-H6-760711'), 'simulated', AR)
+    open_graph(page); select_graph_view(page, 'shared_enabler')
+    edge = artifact_graph_payload('shared_enabler', 'SAU-H6-760711', 'simulated')['edges'][0]
+    page.locator(f'.graph-button-list [data-graph-id="{edge["id"]}"]').click()
+    page.locator('.graph-passport').first.wait_for()
+    key = 'SAU-H6-760711|simulated|shared_enabler|edge'
+    assert_selected_graph_passports(page, AR, 'simulated', key)
+    original = page.locator('#graph-view').inner_html()
+    for mutation in (
+        "document.querySelector('[data-passport-value=\"evidence_id\"] bdi').dir='rtl'",
+        "document.querySelector('.graph-passport .synthetic-labels').remove()",
+    ):
+        page.evaluate(mutation)
+        with pytest.raises(AssertionError):
+            assert_selected_graph_passports(page, AR, 'simulated', key)
+        page.locator('#graph-view').evaluate('(node,html)=>node.innerHTML=html', original)
+        assert_selected_graph_passports(page, AR, 'simulated', key)
+
+
+@pytest.mark.parametrize("locale", (EN, AR), ids=lambda value: value.code)
+@pytest.mark.parametrize("width", (390, 1024, 1440))
+@pytest.mark.parametrize("scenario", ('steel','aluminium'))
+def test_graph_narrow_panel_contains_controls_and_text(browser_session: BrowserSession, locale: Any, width: int, scenario: str) -> None:
+    page=browser_session.page
+    page.set_viewport_size({'width':width,'height':900})
+    install_graph_routes(page)
+    case_id = 'SAU-H0-721049' if scenario == 'steel' else 'SAU-H6-760711'
+    for mode in ('public', 'simulated'):
+        goto_portfolio(page, mode, locale)
+        if scenario == 'aluminium': select_case(page, next(case for case in CASES if case.id == case_id), mode, locale)
+        open_graph(page)
+        for view in ('adjacency', 'route_blocking', 'shared_enabler', 'evidence_to_change'):
+            select_graph_view(page, view)
+            payload = route_blocking_fixture(case_id) if view == 'route_blocking' and mode == 'simulated' else artifact_graph_payload(view, case_id, mode)
+            assert_graph_panel_contains_controls_and_text(page)
+            if scenario == "steel" and mode == "public" and view == "evidence_to_change" and width == 1440:
+                page.evaluate("document.fonts.ready")
+                new_token, old_token = "ENGINE-a1dcbf0e7665", "ENGINE-7ae34188bdec"
+                measure = """() => {
+                  const section = document.querySelector('.graph-native-controls > section:nth-child(2)');
+                  const buttons = [...section.querySelectorAll('.graph-button-list > button[data-graph-select="edge"]')];
+                  const rect = node => {
+                    const box = node.getBoundingClientRect();
+                    return Object.fromEntries(['left','right','top','bottom','width','height'].map(key => [key, Number(box[key].toFixed(2))]));
+                  };
+                  const walker = document.createTreeWalker(section, NodeFilter.SHOW_TEXT), texts = [];
+                  while (walker.nextNode()) texts.push(walker.currentNode.nodeValue);
+                  return {html: section.innerHTML, texts, rows: buttons.map(button => {
+                    const small = button.querySelector(':scope > small');
+                    const tokens = [...small.querySelectorAll(':scope > bdi')];
+                    const box = rect(small);
+                    return {id: button.dataset.graphId, source: tokens[0].textContent,
+                      target: tokens[1].textContent, button: rect(button), small: {left: box.left, right: box.right}};
+                  })};
+                }"""
+                before = page.evaluate(measure)
+                repeat = page.evaluate(measure)
+                assert repeat == before, f"{locale.code}: untouched repeat drift"
+                assert len(before["rows"]) == 12
+                assert before["rows"][1]["target"] == "INT-SAU-H0-721049-route-5"
+                assert before["rows"][2]["target"] == "SAU-H0-721049"
+                assert sum(row["source"].count(new_token) for row in before["rows"]) == 5
+                assert sum(text.count(new_token) for text in before["texts"]) == 5
+                assert all(old_token not in text for text in before["texts"])
+                evidence = {"locale": locale.code, "new_token": new_token, "old_token": old_token,
+                            "before": before, "repeat": repeat}
+                try:
+                    changed = page.evaluate("""({from, to}) => {
+                      const section = document.querySelector('.graph-native-controls > section:nth-child(2)');
+                      const buttons = [...section.querySelectorAll('.graph-button-list > button[data-graph-select="edge"]')];
+                      const walker = document.createTreeWalker(section, NodeFilter.SHOW_TEXT), planned = [];
+                      let index = -1;
+                      while (walker.nextNode()) {
+                        index++;
+                        const node = walker.currentNode, before = node.nodeValue;
+                        if (!before.includes(from)) continue;
+                        const row = buttons.findIndex(button => button.contains(node));
+                        const source = row < 0 ? null : buttons[row].querySelector(':scope > small > bdi');
+                        if (before.split(from).length !== 2 || node.parentElement !== source)
+                          throw Error('unexpected engine token location');
+                        planned.push({node, row: row + 1, index, before, after: before.replace(from, to)});
+                      }
+                      if (buttons.length !== 12 || planned.length !== 5)
+                        throw Error('expected twelve rows and five source text nodes');
+                      window.__graphAnchorOriginalNodes = planned;
+                      for (const item of planned) item.node.nodeValue = item.after;
+                      return planned.map(({row,index,before,after}) => ({row,index,before,after}));
+                    }""", {"from": new_token, "to": old_token})
+                    evidence["changed_nodes"] = changed
+                    after = page.evaluate(measure)
+                    evidence["after"] = after
+                    assert len(changed) == 5
+                    assert [item["row"] for item in changed] == [1, 2, 3, 4, 5]
+                    assert after["texts"] == [text.replace(new_token, old_token) for text in before["texts"]]
+                    assert after["html"] == before["html"].replace(new_token, old_token)
+                    anchor = "right" if locale.code == "en" else "left"
+                    for row_number, (original, rewritten) in enumerate(zip(before["rows"], after["rows"], strict=True), 1):
+                        assert rewritten["button"] == original["button"], f"{locale.code}/row/{row_number}/button"
+                        assert rewritten["small"][anchor] == original["small"][anchor], (
+                            f"{locale.code}/row/{row_number}/small.{anchor}: "
+                            f"{original['small'][anchor]} -> {rewritten['small'][anchor]}"
+                        )
+                finally:
+                    page.evaluate("""() => {
+                      for (const item of window.__graphAnchorOriginalNodes || []) item.node.nodeValue = item.before;
+                      delete window.__graphAnchorOriginalNodes;
+                    }""")
+                    restored = page.evaluate(measure)
+                    evidence["restored"] = restored
+                    (browser_session.artifact_dir / f"graph-run-id-anchors-{locale.code}.json").write_text(
+                        json.dumps(evidence, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+                    )
+                    assert restored == before, f"{locale.code}: engine token round-trip drift"
+            if not payload['edges']:
+                assert page.locator('.graph-button-list button').count() == 0
+                assert page.locator('.graph-state').inner_text().find(locale_bundle(locale)['strings']['graph.empty_title']) >= 0
+                assert_selected_graph_passports(page, locale, mode, f'{case_id}|{mode}|{view}|empty')
+                continue
+            for kind in ('node', 'edge'):
+                element = next((n for n in payload['nodes'] if n['id'] == case_id), payload['nodes'][0]) if kind == 'node' else payload['edges'][0]
+                button = page.locator(f'.graph-button-list [data-graph-id="{element["id"]}"]')
+                button.focus(); page.keyboard.press('Enter')
+                page.locator('.graph-evidence-results').wait_for()
+                assert button.get_attribute('aria-pressed') == 'true'
+                assert_selected_graph_passports(page, locale, mode, f'{case_id}|{mode}|{view}|{kind}')
+
+
+@pytest.mark.parametrize("mode", ("public", "simulated"))
+@pytest.mark.parametrize("locale", (EN, AR), ids=lambda value: value.code)
+def test_graph_scroll_region_reaches_both_keyboard_endpoints(browser_session: BrowserSession, locale: Any, mode: str) -> None:
+    page=browser_session.page; page.set_viewport_size({'width':390,'height':844})
+    install_graph_routes(page); goto_portfolio(page,mode,locale); open_graph(page)
+    strings=locale_bundle(locale)['strings']
+    from playwright.sync_api import expect
+    for identity, label_key in (('evidence-scroll-region', 'evidence.title'), ('methodology-scroll-region', 'rules.title')):
+        table_region = page.locator('#' + identity)
+        expect(table_region).to_have_attribute('role', 'region')
+        expect(table_region).to_have_attribute('aria-label', strings[label_key])
+        page.locator('#opportunity-select').focus()
+        for _ in range(55):
+            page.keyboard.press('Tab')
+            if page.evaluate('document.activeElement.id') == identity:
+                break
+        assert page.evaluate('document.activeElement.id') == identity
+        assert table_region.evaluate("n=>n.matches(':focus-visible') && getComputedStyle(n).outlineStyle !== 'none'")
+        extent = table_region.evaluate('n=>n.scrollWidth-n.clientWidth')
+        if extent > 0:
+            forward = 'ArrowLeft' if locale.code == 'ar' else 'ArrowRight'
+            backward = 'ArrowRight' if locale.code == 'ar' else 'ArrowLeft'
+            before = table_region.evaluate('n=>n.scrollLeft')
+            page.keyboard.press(forward)
+            page.wait_for_function("({id,before})=>document.getElementById(id).scrollLeft!==before", arg={'id':identity,'before':before})
+            for _ in range(60): page.keyboard.press(forward)
+            page.wait_for_function("id=>{const n=document.getElementById(id);return Math.abs(n.scrollLeft)>=n.scrollWidth-n.clientWidth-1}", arg=identity)
+            far_endpoint = table_region.evaluate('n=>n.scrollLeft')
+            for _ in range(60): page.keyboard.press(backward)
+            page.wait_for_function("({id,far,extent})=>Math.abs(document.getElementById(id).scrollLeft-far)>=extent-1", arg={'id':identity,'far':far_endpoint,'extent':extent})
+            assert page.evaluate('document.activeElement.id') == identity
+        else:
+            assert extent == 0
+            assert table_region.evaluate('n=>[...n.querySelectorAll("th,td")].every(c=>{const b=c.getBoundingClientRect(),r=n.getBoundingClientRect();return b.left>=r.left-1&&b.right<=r.right+1})')
+    region=page.locator('#graph-scroll-region')
+    assert region.get_attribute('aria-describedby')=='graph-scroll-hint'
+    assert page.locator('#graph-scroll-hint').inner_text()==strings['graph.scroll_hint']
+    page.locator('#graph-toggle').focus(); page.keyboard.press('Tab'); page.keyboard.press('Tab')
+    assert page.evaluate('document.activeElement.id')=='graph-scroll-region'
+    assert region.evaluate('n=>n.scrollWidth>n.clientWidth')
+    page_y=page.evaluate('scrollY')
+    arrow='ArrowLeft' if locale.code=='ar' else 'ArrowRight'
+    opposite='ArrowRight' if locale.code=='ar' else 'ArrowLeft'
+    before=region.evaluate('n=>n.scrollLeft'); page.keyboard.press(arrow)
+    page.wait_for_function("before=>document.querySelector('#graph-scroll-region').scrollLeft!==before",arg=before)
+    for _ in range(40): page.keyboard.press(arrow)
+    page.wait_for_function("()=>{const n=document.querySelector('#graph-scroll-region');return Math.abs(n.scrollLeft)>=n.scrollWidth-n.clientWidth-1}")
+    for _ in range(40): page.keyboard.press(opposite)
+    page.wait_for_function("()=>Math.abs(document.querySelector('#graph-scroll-region').scrollLeft)<1")
+    assert page.evaluate('document.activeElement.id')=='graph-scroll-region'
+    assert page.evaluate('scrollY')==page_y
+    buttons=page.locator('.graph-button-list button').count()
+    for _ in range(buttons):
+        page.keyboard.press('Tab'); identity=page.evaluate('document.activeElement.dataset.graphId')
+        assert identity
+        page.keyboard.press('Enter')
+        page.locator('.graph-passport, .graph-unresolved').first.wait_for()
+        assert page.evaluate('document.activeElement.dataset.graphId')==identity
+        assert page.evaluate("document.activeElement.getAttribute('aria-pressed')")=='true'
+    report=run_axe(page)
+    assert not report['violations'],format_axe_violations(report['violations'])
+
+
+@pytest.mark.parametrize("locale", (EN, AR), ids=lambda value: value.code)
+def test_graph_all_view_states_fit_narrow_panel(new_context: Any, app_server: Any, locale: Any) -> None:
+    context=new_context(base_url=app_server.base_url,locale=locale.bcp47,viewport={'width':390,'height':844})
+    collector=BrowserFailureCollector(app_server.base_url); collector.attach_context(context)
+    page=context.new_page(); collector.attach_page(page)
+    install_graph_routes(page)
+    for mode in ('public','simulated'):
+        goto_portfolio(page,mode,locale); open_graph(page)
+        for view in ('adjacency','route_blocking','shared_enabler','evidence_to_change'):
+            select_graph_view(page,view)
+            for state_name in ('loading','empty','unavailable','invalid','error','retry'):
+                page.evaluate("""stateName=>{
+                  const original=window.fetch; window.__am2OriginalFetch=original;
+                  window.fetch=(input,init)=>String(input).includes('/api/graph/opportunities/') ? new Promise(resolve=>{
+                    window.__am2Release=async()=>{const originalResponse=await original(input,init);const payload=await originalResponse.json();
+                      if(stateName==='empty'){payload.nodes=[];payload.edges=[];payload.drilldown=[];}
+                      if(stateName==='unavailable'){payload.graph_status='GRAPH_UNAVAILABLE';payload.reason_code='CONNECTION_FAILED';payload.nodes=[];payload.edges=[];}
+                      if(stateName==='invalid')payload.nodes=[{}];
+                      resolve(new Response(JSON.stringify(payload),{status:stateName==='error'?503:200,headers:{'Content-Type':'application/json'}}));
+                    };
+                  }) : original(input,init);
+                }""",state_name)
+                page.locator('#graph-view-select').select_option(view)
+                page.locator('.graph-state-loading').wait_for()
+                assert_graph_panel_contains_controls_and_text(page)
+                page.evaluate('window.__am2Release()'); wait_graph_request_complete(page,view)
+                page.evaluate('window.fetch=window.__am2OriginalFetch')
+                if state_name in ('empty','unavailable','invalid','error'):
+                    assert page.locator('.graph-svg-node,.graph-native-controls').count()==0
+                    assert page.locator('#graph-scroll-hint').count()==0
+                    assert page.locator('.graph-state').count()==1
+                assert_graph_panel_contains_controls_and_text(page)
+                if page.locator('[data-graph-retry]').count():
+                    page.locator('[data-graph-retry]').click(); wait_graph_request_complete(page,view)
+                    assert_graph_panel_contains_controls_and_text(page)
+    context.close(); collector.assert_clean()
+
+
+@pytest.mark.parametrize("locale", (EN, AR), ids=lambda value: value.code)
+def test_graph_hostile_name_text_is_escaped(browser_session: BrowserSession, locale: Any) -> None:
+    page=browser_session.page
+    hostile='<img src=x onerror="window.__am2Attack=true"> & \"quoted\"'
+    def override(view: str, opportunity: str, mode: str) -> dict:
+        payload=artifact_graph_payload(view,opportunity,mode)
+        for node in payload['nodes']:
+            if node['id']=='COMPANY-280abef66af82a6c':
+                node['name_en']=hostile; node['name_ar']='UNAVAILABLE'
+            if node['id']=='SAU-H0-721049': node['name_ar']='منتج '+hostile
+        return payload
+    install_graph_routes(page,override); goto_portfolio(page,'public',locale); open_graph(page)
+    assert page.locator('#graph-view img, #graph-view script, #graph-view [onerror]').count()==0
+    assert page.evaluate('window.__am2Attack') is None
+    assert page.locator('.graph-button-list [data-graph-id="COMPANY-280abef66af82a6c"] .graph-node-name').text_content().startswith(hostile)
+    assert page.locator('.graph-svg-node[data-graph-id="COMPANY-280abef66af82a6c"] title').text_content()==hostile
+    if locale.code=='ar': assert page.locator('.graph-svg-node[data-graph-id="SAU-H0-721049"] title').text_content()=='منتج '+hostile

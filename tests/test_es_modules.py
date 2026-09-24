@@ -48,6 +48,19 @@ EXPECTED_MODULES = {
     "modules/renderers/integrity.js",
     "modules/renderers/rules.js",
     "modules/renderers/trade.js",
+    "modules/analyst-navigation.js",
+    "modules/claim-links.js",
+    "modules/executive/context.js",
+    "modules/executive/data.js",
+    "modules/executive/evidence.js",
+    "modules/executive/index.js",
+    "modules/executive/labels.js",
+    "modules/executive/registry.js",
+    "modules/executive/render.js",
+    "modules/executive/routes.js",
+    "modules/executive/simulation.js",
+    "modules/executive/steps.js",
+    "modules/executive/summary.js",
 }
 
 

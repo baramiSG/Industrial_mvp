@@ -1,3 +1,4 @@
+import { label as executiveLabel } from "./executive/labels.js";
 import {
   getJSON,
   opportunityListEndpoint,
@@ -32,6 +33,10 @@ export function renderKPIs() {
     (sum, item) => sum + (item.latest_imports_usd_m || 0),
     0,
   );
+  const integrity = state.executiveSummary?.integrity;
+  const integrityState = integrity?.status || "UNAVAILABLE";
+  const leakageState = integrity?.checks.find((row) => row.check_id === "PUBLIC_SYNTHETIC_LEAKAGE")?.status || "UNAVAILABLE";
+  const affected = integrity?.checks.flatMap((row) => row.affected_ids) || [];
   const metrics = [
     [t("kpi.loaded_label"), integer(state.opportunities.length), t("kpi.loaded_note")],
     [
@@ -44,14 +49,15 @@ export function renderKPIs() {
       ),
     ],
     [t("kpi.imports_label"), usd(imports), t("kpi.imports_note")],
-    [t("kpi.leakage_label"), integer(0), t("kpi.leakage_note")],
+    [executiveLabel("ui", "integrity"), integrity ? integer(integrity.violation_count) : executiveLabel("status", "UNAVAILABLE"), executiveLabel("status", integrityState)],
   ];
   document.getElementById("kpi-grid").innerHTML = metrics.map(
-    ([label, value, note]) => `
-      <article class="kpi-card">
+    ([label, value, note], index) => `
+      <article class="kpi-card" ${index === 3 ? `data-computed-integrity="${integrityState}"` : ""}>
         <small>${escapeHtml(label)}</small>
         <strong>${technical(value)}</strong>
-        <p>${escapeHtml(note)}</p>
+        <p>${escapeHtml(note)}${index === 3 && affected.length ? ` · ${escapeHtml(executiveLabel("ui", "affected"))}: ${affected.map(technicalToken).join(" · ")}` : ""}</p>
+        ${index === 3 ? `<small>${escapeHtml(t("kpi.leakage_label"))}: ${escapeHtml(executiveLabel("status", leakageState))}${integrityState === "PASS" ? ` · ${escapeHtml(t("kpi.leakage_note"))}` : ""}</small>` : ""}
       </article>
     `,
   ).join("");
@@ -118,12 +124,14 @@ export function populateSelect() {
 export async function loadPortfolio() {
   const mode = state.mode;
   const epoch = nextRequestEpoch();
-  const requests = [getJSON(opportunityListEndpoint(mode))];
+  state.executiveSummaryRequest ||= getJSON("/api/executive/summary").catch(() => null);
+  const requests = [getJSON(opportunityListEndpoint(mode)), state.executiveSummaryRequest];
   if (state.selection.requestEpoch === 0) requests.push(loadSelection());
   const responses = await Promise.allSettled(requests);
   if (epoch !== state.requestEpoch || mode !== state.mode) return;
   const failure = responses.find((response) => response.status === "rejected");
   if (failure) throw failure.reason;
+  state.executiveSummary = responses[1].value;
   const opportunities = responses[0].value;
   state.opportunities = opportunities;
   if (!state.opportunities.some((item) => item.id === state.selectedId)) {

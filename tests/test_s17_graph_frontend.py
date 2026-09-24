@@ -5,7 +5,7 @@ import subprocess
 from pathlib import Path
 
 from browser_tests.graph_fixtures import artifact_graph_payload, route_blocking_fixture
-from ior_mvp.config import PROJECT_ROOT
+from ior_mvp.config import PROJECT_ROOT, ui_strings_bundle
 
 
 NODE = "node"
@@ -133,6 +133,9 @@ const {{
   layoutGraph,
   layoutDimensions,
 }} = await import({_url(MODULE_ROOT / 'layout.js')!r});
+const {{state}} = await import({_url(MODULE_ROOT.parent / 'state.js')!r});
+const {{nodeLabel}} = await import({_url(MODULE_ROOT / 'labels.js')!r});
+const bundles = {json.dumps({locale: ui_strings_bundle(locale) for locale in ('en', 'ar')}, ensure_ascii=False)};
 const GEOMETRY_TOLERANCE = 1e-9;
 const GRAPH_CAPTION_EDGE_CLEARANCE = 6;
 const GRAPH_EDGE_STROKE_RADIUS = 1;
@@ -182,6 +185,7 @@ const intersectsCircle = (box, point) => {{
 }};
 for (const payload of payloads) {{
   for (const direction of ['ltr', 'rtl']) {{
+    state.ui = bundles[direction === 'rtl' ? 'ar' : 'en'];
     const positions = layoutGraph(payload.nodes, direction);
     const {{width, height}} = layoutDimensions();
     const byId = Object.fromEntries(positions.map((point) => [point.id, point]));
@@ -192,9 +196,7 @@ for (const payload of payloads) {{
     const placedBoxes = [];
     const labels = positions.map((point) => {{
       const node = payload.nodes.find((row) => row.id === point.id);
-      const label = direction === 'rtl'
-        ? (node.name_ar || node.name_en || node.label)
-        : (node.name_en || node.label);
+      const label = nodeLabel(node, direction === 'rtl' ? 'ar' : 'en');
       const presentation = svgNodeLabelPresentation(
         label,
         point.x,
@@ -316,6 +318,7 @@ const {{renderGraphShell}} = await import({_url(MODULE_ROOT / "render.js")!r});
 state.locale = 'en';
 state.ui = {{strings: {{
   'graph.title': 'Graph',
+  'graph.scroll_hint': 'Scroll the diagram with arrow keys.',
   'graph.close': 'Close graph',
   'graph.panel_aria': 'Graph panel',
   'graph.view_selector': 'View',
@@ -395,7 +398,7 @@ console.log(JSON.stringify({{values: values.map(safeExternalUrl)}}));
 def test_actual_evidence_resolver_qualifies_conflicts_and_keeps_missing_refs() -> None:
     script = f"""
 const {{resolveElementEvidence}} = await import({_url(MODULE_ROOT / 'evidence.js')!r});
-const element = {{id:'CURRENT', label:'Product', provenance:{{evidence_id:'E-1'}}, properties:{{evidence_ids:['E-MISSING']}}}};
+const element = {{id:'CURRENT', label:'Product', provenance:{{evidence_id:'E-1'}}, properties:{{evidence_ids:['E-MISSING','SYN-MINISTRY-ALU-FOIL-001::forged']}}}};
 const payload = {{nodes:[element, {{id:'RELATED', label:'Product'}}], drilldown:[{{element_id:'CURRENT', evidence_ids:['E-1'], document_addresses:['doc:1']}}]}};
 const analysis = {{mode:'public', opportunity:{{id:'CURRENT'}}, evidence:[{{evidence_id:'E-1', title:'current'}}]}};
 const result = await resolveElementEvidence({{
@@ -410,5 +413,83 @@ console.log(JSON.stringify(result));
         "CURRENT",
         "RELATED",
     ]
-    assert result["unresolved"] == ["E-MISSING"]
+    assert result["unresolved"] == ["E-MISSING", "SYN-MINISTRY-ALU-FOIL-001::forged"]
     assert result["documentAddresses"] == ["doc:1"]
+
+
+def test_actual_company_name_fallback_preserves_literal_canonical_names() -> None:
+    payload = artifact_graph_payload("adjacency", "SAU-H0-721049", "public")
+    script = f"""
+const {{state}} = await import({_url(MODULE_ROOT.parent / 'state.js')!r});
+const {{nodeLabel}} = await import({_url(MODULE_ROOT / 'labels.js')!r});
+state.ui = {json.dumps(ui_strings_bundle('ar'), ensure_ascii=False)};
+const nodes = {json.dumps(payload['nodes'], ensure_ascii=False)};
+console.log(JSON.stringify(Object.fromEntries(nodes.filter(n=>n.label==='Company').map(n=>[n.id,nodeLabel(n,'ar')]))));
+"""
+    assert _run(script) == {
+        "COMPANY-280abef66af82a6c": "Hadeed",
+        "COMPANY-a0954792195adee5": "Universal Metal Coating Company",
+    }
+
+
+def test_actual_name_presentation_handles_typed_absence_and_keeps_real_names() -> None:
+    script = f"""
+const {{state}} = await import({_url(MODULE_ROOT.parent / 'state.js')!r});
+const {{nodeNamePresentation}} = await import({_url(MODULE_ROOT / 'labels.js')!r});
+state.ui = {json.dumps(ui_strings_bundle('ar'), ensure_ascii=False)};
+const missing=[undefined,null,'','   ','UNAVAILABLE',' UNAVAILABLE ',false,0,1];
+const fallback=missing.map(name_ar=>nodeNamePresentation({{label:'Company',name_ar,name_en:' Hadeed '}},'ar'));
+const absent=missing.map(name=>nodeNamePresentation({{label:'Company',name_ar:name,name_en:name}},'ar'));
+const real=['شركة حديد','unavailable','N/A','UNAVAILABLE supplier'].map(name_ar=>nodeNamePresentation({{label:'Company',name_ar,name_en:'Hadeed'}},'ar'));
+const english=nodeNamePresentation({{label:'Company',name_ar:'شركة حديد',name_en:'Hadeed'}},'en');
+console.log(JSON.stringify({{fallback,absent,real,english}}));
+"""
+    result = _run(script)
+    assert result['fallback'] == [{'text': ' Hadeed ', 'sourceLanguage': 'en'}] * 9
+    assert result['absent'] == [{'text': ui_strings_bundle('ar')['strings']['graph.node.company'], 'sourceLanguage': None}] * 9
+    assert result['real'] == [{'text': text, 'sourceLanguage': None} for text in ('شركة حديد', 'unavailable', 'N/A', 'UNAVAILABLE supplier')]
+    assert result['english'] == {'text': 'Hadeed', 'sourceLanguage': None}
+
+
+def test_actual_passports_preserve_typed_sources_statuses_and_hostile_values() -> None:
+    import html
+    import re
+    from fastapi.testclient import TestClient
+    from ior_mvp.app import app
+    client = TestClient(app)
+    public = client.get('/api/opportunities/SAU-H0-721049?mode=public').json()['evidence'][0]
+    synthetic = next(row for row in client.get('/api/opportunities/SAU-H6-760711?mode=simulated').json()['evidence'] if row['evidence_id'].endswith('::shared_enabler'))
+    variants = [public, synthetic, {**public, 'title': 'مصدر عربي Hadeed', 'source': 'Hadeed', 'status': 'Unknown review prose', 'period': None, 'supports': []}, {**public, 'title': '<img onerror="alert(1)"> & source', 'source': {'bad': 1}, 'url': 'javascript:alert(1)'}, {**public, 'title': 'مصدر عربي', 'contradiction': 'Contradictory source retained'}, {**public, 'title': 'Источник', 'evidence_class': 'Unverified class prose'}]
+    script = f"""
+const {{state}} = await import({_url(MODULE_ROOT.parent / 'state.js')!r});
+const {{renderEvidenceResult}} = await import({_url(MODULE_ROOT / 'passports.js')!r});
+const variants = {json.dumps(variants, ensure_ascii=False)};
+state.locale='ar'; state.ui={json.dumps(ui_strings_bundle('ar'), ensure_ascii=False)};
+const render = record => renderEvidenceResult({{records:[{{opportunityId:'SAU-H0-721049',record}}],unresolved:['SYN-MINISTRY-ALU-FOIL-001::forged'],documentAddresses:[{{document_id:'DOC-001',page_index:0,line_index:0}},'Original document prose']}},'simulated');
+const outputs=variants.map(render); let mismatch=false;
+try {{render({{...variants[1],display_labels:null,display_label:'WRONG POLICY'}});}} catch {{mismatch=true;}}
+console.log(JSON.stringify({{outputs,mismatch}}));
+"""
+    result = _run(script)
+    output = result['outputs']
+    assert 'lang="en" dir="ltr"' in output[1] and 'source-language-caption' in output[1]
+    assert 'اصطناعي' in output[1] and '>synthetic<' not in output[1]
+    assert 'SYN-MINISTRY-ALU-FOIL-001::shared_enabler</bdi>' in output[1]
+    assert '2021/2023/2024</bdi>' in output[0]
+    assert 'graph-passport-' in output[0] and 'aria-describedby=' in output[0]
+    assert 'غير مؤكد من الجهة المسؤولة' in output[0]
+    assert '<img' not in output[3] and 'javascript:' not in output[3]
+    assert '[object Object]' not in output[3]
+    for index, record in enumerate(variants):
+        spans = re.findall(r'<span data-passport-value="title">(.*?)</span></(?:a|h5)>', output[index])
+        assert len(spans) == 2
+        for span in spans:
+            without_captions = re.sub(r'<span class="source-language-caption"[^>]*>.*?</span>', '', span)
+            assert html.unescape(re.sub('<[^>]+>', '', without_captions)) == record['title']
+    assert 'lang="ar" dir="rtl">مصدر عربي ' in output[2]
+    assert 'lang="ar" dir="rtl">مصدر عربي</span>' in output[4]
+    assert 'lang="und" dir="auto">Источник</span>' in output[5]
+    assert 'Contradictory source retained' in output[4]
+    assert 'SYN-MINISTRY-ALU-FOIL-001::forged</bdi>' in output[0]
+    assert output[0].count('>0</bdi>') == 2
+    assert result['mismatch'] is True

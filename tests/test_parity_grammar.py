@@ -177,3 +177,23 @@ def test_label_leak_detects_english_label_disguised_as_code() -> None:
         [{"text": "NOT_CALCULABLE", "class": "code_token"}],
         real,
     ) == ["NOT_CALCULABLE"]
+
+
+@pytest.mark.parametrize(('value', 'expected'), [
+    ('SYN-MINISTRY-ALU-FOIL-001::shared_enabler', 'synthetic_evidence_id'),
+    ('SYN-MINISTRY-STEEL-001::capacity', 'synthetic_evidence_id'),
+    ('2021/2023/2024', 'period_years'), ('2023/2024', 'period_years'),
+])
+def test_passport_technical_grammar_accepts_only_exact_composite_ids_and_years(value, expected):
+    assert classify_island(value) == expected
+
+
+@pytest.mark.parametrize('value', [
+    'Hadeed', 'Universal Metal Coating Company', 'ordinary English source',
+    'SYN-MINISTRY-ALU-FOIL-001:shared_enabler', 'SYN-MINISTRY-ALU-FOIL-001:::shared_enabler',
+    'FAKE-MINISTRY-ALU-FOIL-001::shared_enabler', 'SYN-MINISTRY-ALU-FOIL-001::',
+    'SYN-MINISTRY-ALU-FOIL-001::shared-enabler', 'SYN-MINISTRY-ALU-FOIL-001::shared enabler',
+    '2024/source', 'source/2024', '2024A/2025', '2024//2025',
+])
+def test_passport_technical_grammar_rejects_prose_and_malformed_lookalikes(value):
+    assert classify_island(value) == 'unclassified'

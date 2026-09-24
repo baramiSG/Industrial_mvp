@@ -55,10 +55,18 @@ export const FAILURE_KEYS = Object.freeze({
   PROJECTION_MISMATCH: "graph.failure.projection_mismatch",
 });
 
+function availableName(value) {
+  return typeof value === "string" && value.trim() !== "" && value.trim() !== "UNAVAILABLE";
+}
+
+export function nodeNamePresentation(node, locale) {
+  if (locale === "ar" && availableName(node.name_ar)) return { text: node.name_ar, sourceLanguage: null };
+  if (availableName(node.name_en)) return { text: node.name_en, sourceLanguage: locale === "ar" ? "en" : null };
+  return { text: t(NODE_LABEL_KEYS[node.label]), sourceLanguage: null };
+}
+
 export function nodeLabel(node, locale) {
-  const localized = locale === "ar"
-    ? (node.name_ar || node.name_en) : node.name_en;
-  return localized || t(NODE_LABEL_KEYS[node.label]);
+  return nodeNamePresentation(node, locale).text;
 }
 
 export function nodeKindLabel(node) {

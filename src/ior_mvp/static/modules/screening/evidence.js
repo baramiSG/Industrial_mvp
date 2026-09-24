@@ -88,7 +88,7 @@ function passportCard(passport, unit) {
         <div><dt>${escapeHtml(t("screening.evidence.passport_stage"))}</dt><dd>${technicalToken(passport.stage)}</dd></div>
         <div><dt>${escapeHtml(t("screening.evidence.passport_unit"))}</dt><dd>${flowYear(passport.unit_key)}</dd></div>
         <div><dt>${escapeHtml(t("screening.evidence.passport_class"))}</dt><dd>${technicalToken(passport.evidence_class)}</dd></div>
-        <div><dt>${escapeHtml(t("screening.evidence.passport_status"))}</dt><dd>${technicalToken(passport.status)}</dd></div>
+        <div><dt>${escapeHtml(t("screening.evidence.passport_status"))}</dt><dd><span data-screening-reviewer-status="${escapeHtml(passport.status)}">${passport.status === "unconfirmed_by_responsible_authority" ? escapeHtml(t("graph.reviewer.unconfirmed_by_responsible_authority")) : technicalToken(passport.status)}</span></dd></div>
         <div><dt>${escapeHtml(t("screening.evidence.passport_coverage"))}</dt><dd>${escapeHtml(screeningLabel("status", passport.coverage_status))}</dd></div>
         <div><dt>${escapeHtml(t("screening.evidence.passport_endpoint"))}</dt><dd>${technicalToken(retrieval.endpoint_or_document)}</dd></div>
         <div><dt>${escapeHtml(t("screening.evidence.passport_retrieved"))}</dt><dd>${technicalToken(retrieval.retrieved_at)}</dd></div>

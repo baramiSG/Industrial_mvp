@@ -294,6 +294,47 @@ Context rules include:
 - `REJECT` → emphasize the falsifying evidence and avoided intervention;
 - `ADVANCE` → show conditions, S\*, national value and kill conditions.
 
+### 7.1 S18b executive presentation registry
+
+`/executive` selects a dedicated vanilla ES-module surface while `/` retains the
+analyst workspace. The fixed registry renders exactly eight executive steps:
+SIGNAL, FALSE_POSITIVE_CONTROLS, PUBLIC_CONCLUSION, MISSING_MINISTRY_FACTS,
+SIMULATED_EVIDENCE, ROUTE_COMPARISON, INTERVENTION and CONDITIONS_AND_KILL.
+Four separate vectors remain expandable dimensions, never a combined score.
+Only reviewed renderers and escaped values enter the DOM; the API cannot supply
+HTML or a new component type.
+
+The executive summary owns integrity, public dataset counts and synthetic EVSI
+availability. Selected-case executive and public analysis responses are joined
+by opportunity and snapshot; a simulated analysis is requested only when its
+branch is available. That response must preserve the complete `real_decision`
+and match scenario, state, route, evidence membership and policy metadata.
+Analysis supplies existing localized narratives, route reasons, trade,
+capability, economics and source passports, not replacement summary counts.
+A failed join clears the display and offers retry; it never retains another
+case's claims. A monotonic context epoch binds case, step and locale changes;
+late responses cannot restore stale content. Failed locale loads retain the
+last complete language/context, and browser history restores the same selection.
+
+Public and simulated decisions remain separate, with Class D, scenario identity
+and both policy labels on simulated results. Missing route/economics values
+retain typed absence; available zero is displayed as zero. Route hypotheses and
+all nine routes preserve engine order and precedence. Claims resolve only to
+matching current public or current-scenario passports. Linked public
+contradictions remain visible inside simulated claims. Unresolved rules show
+case-wide unmet needs without asserting a rule-specific source relationship.
+
+Analyst metric, rule and decision links reuse these validated claim boundaries.
+An explicit native graph link carries only validated opportunity/mode/view
+parameters and opens the existing graph after matching analysis loads. It makes
+no arbitrary graph query and supplies no artifact fallback for an unavailable
+live graph. Portfolio integrity uses the executive summary's actual count and
+PASS/FAIL state; request failure is unavailable, never a fabricated zero.
+
+S18b AM5 integrity is a persistent executive region derived from the current summary: PASS shows the actual zero count; FAIL shows the actual total, all ordered named checks/counts and affected IDs; unavailable never reuses an earlier PASS. A valid failure notice does not rewrite decisions or disable the journey. Analyst source context additionally requires exact public/active/simulation state, route and scenario consistency, preserving null versus route0. Screening passports retain their stored reviewer-status identity while rendering its governed locale text. These boundaries do not calculate evidence or relax source/parity checks.
+
+Parent-scope completeness includes each vector's ordered actual claims and statuses, and genuine no-scenario absence: an unavailable synthetic projection joins no EVSI row, carries no fabricated metadata, and keeps the real public decision usable. Available scenarios still require exact EVSI/scenario membership. Source drills preserve contradictions and return focus; the eight-step registry and all industrial computation remain unchanged.
+
 ## 8. Deployment architecture
 
 No external API call occurs at runtime. Public acquisition runs only through explicit operator commands (`ior_mvp.acquisition` CLI or Makefile acquire targets) with `IOR_ACQUISITION_LIVE=1`; tests and CI never invoke live fetch.
@@ -447,3 +488,17 @@ verifies the preloaded projection before Chromium, compares rendered IDs with
 actual live responses in both locales, and verifies the unchanged mirror again
 afterward. The default browser child environment remains credential- and
 graph-stripped; its guarded test adapter accepts only `compose` or `ci`.
+
+
+### S18b AM2 refinement of §14: graph names and contained navigation
+
+Graph node names use one shared presentation helper. Arabic uses a real Arabic name when present, then the verbatim English source name, then the localized node kind; English uses a real English name or the localized kind. Exact trimmed `UNAVAILABLE`, empty and malformed nonstring names are absent. This does not translate or invent company names. Each Arabic fallback has individually annotated SVG text/title with adjacent source-caption metadata and a separately visible native caption linked to the complete accessible name. The whole graph keeps its locale direction. Stable IDs, graph semantics, geometry, selection and stored-evidence resolution are unchanged.
+
+The graph panel has a zero-minimum grid track; native controls, identifiers and source captions wrap inside the panel. The intrinsic SVG remains in its named, keyboard-focusable horizontal scroll region with a localized instruction; complete native nodes and relationships remain available beneath it. Narrow-layout support preserves the diagram's geometry and public/synthetic boundaries.
+
+
+### S18b AM4 typed evidence presentation
+
+The existing shared graph passport renderer serves both graph selections and executive source panels. Stored titles/source prose/supports/contradictions are escaped and individually language-annotated, with visible adjacent Arabic source captions; title references expose sibling captions through aria-describedby. Genuine Arabic and mixed source runs preserve their original text. Exact IDs, governed source codes, periods and dates use isolated technical values. Seven declared evidence statuses and the one unconfirmed reviewer state are localized without promoting unknown states or evidence classes. Unresolved references remain unresolved; document-address zero indexes are preserved. Public/synthetic branches retain qualified reference lookup, both actual policy labels, anchors and native return focus.
+
+The analyst evidence and methodology tables are named native keyboard scroll regions. The executive simulated capability section adds a native expandable0/1/2/3/U meaning legend sourced from DOCX§6.4, with original codes/dimensions and unknown unavailability retained. Its explicit simulation note and policy warnings do not confer Ministry verification. No domain computation, API, graph geometry, source evidence or global parity checker changes follow from these presentation additions.

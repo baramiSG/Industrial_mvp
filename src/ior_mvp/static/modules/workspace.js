@@ -1,3 +1,5 @@
+import { analystClaimContext } from "./claim-links.js";
+import { clearAnalystClaims, updateExecutiveLink, openRequestedGraph } from "./analyst-navigation.js";
 import {
   getJSON,
   manifestEndpoint,
@@ -19,7 +21,7 @@ import { nextRequestEpoch, state } from "./state.js";
 
 export function renderManifest() {
   document.getElementById("workspace-manifest").innerHTML = (
-    state.manifest.components.map(renderComponent).join("")
+    state.manifest.components.map(renderComponent).join("") + '<div id="analyst-claim-sources" class="full"></div>'
   );
   const descriptor = state.manifest.components.find(
     (component) => component.type === "graph_view",
@@ -28,6 +30,7 @@ export function renderManifest() {
 }
 
 export function renderWorkspaceTitle() {
+  updateExecutiveLink();
   const opportunity = state.analysis.opportunity;
   const name = state.locale === "ar" && opportunity.commercial_name_ar
     ? `<span lang="ar" dir="rtl">${escapeHtml(opportunity.commercial_name_ar)}</span>`
@@ -38,6 +41,7 @@ export function renderWorkspaceTitle() {
 }
 
 export async function loadOpportunity(id) {
+  clearAnalystClaims();
   state.selectedId = id;
   const mode = state.mode;
   prepareGraphContext(id, mode);
@@ -45,15 +49,17 @@ export async function loadOpportunity(id) {
   const responses = await Promise.allSettled([
     getJSON(opportunityEndpoint(id, mode)),
     getJSON(manifestEndpoint(id, mode)),
+    getJSON(`/api/executive/opportunities/${encodeURIComponent(id)}`).catch(() => null),
   ]);
   if (epoch !== state.requestEpoch || state.mode !== mode
     || state.selectedId !== id) return;
   const failure = responses.find((response) => response.status === "rejected");
   if (failure) throw failure.reason;
-  const [analysis, manifest] = responses.map((response) => response.value);
+  const [analysis, manifest, executiveCase] = responses.map((response) => response.value);
   if (analysis?.opportunity?.id !== id || analysis?.mode !== mode
     || manifest?.context?.opportunity_id !== id
     || manifest?.context?.mode !== mode) return;
+  state.claimContext = analystClaimContext(executiveCase, analysis);
   state.analysis = analysis;
   state.manifest = manifest;
   const select = document.getElementById("opportunity-select");
@@ -61,6 +67,7 @@ export async function loadOpportunity(id) {
   renderWorkspaceTitle();
   renderManifest();
   renderMethodology();
+  await openRequestedGraph();
 }
 
 export function rerenderWorkspace() {

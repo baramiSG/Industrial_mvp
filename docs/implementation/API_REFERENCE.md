@@ -91,3 +91,9 @@ Unavailable live configuration, driver, connection or projection equality return
 - evidence-integrity failure in simulated mode (policy, public-marginal reconciliation, scenario contract or ground-truth back-test): HTTP 422 with {"detail": {"code": "EVIDENCE_INTEGRITY_ERROR", "message": ...}}; no partial analysis is returned.
 - malformed governed data: fail closed with a clear error;
 - static frontend paths: the catch-all resolves a candidate and serves it only when it is a file contained by the resolved `src/ior_mvp/static` directory; traversal and unknown paths return the SPA `index.html` and cannot expose project files.
+
+## S18b read-only presentation joins
+
+The `/executive` client reads `/api/executive/summary` once per route session/retry, then `/api/executive/opportunities/{opportunity_id}` and the selected public `/api/opportunities/{opportunity_id}?mode=public` together. Only an available simulation triggers the corresponding simulated analysis read. Existing response contracts are unchanged: summary owns counts/integrity/EVSI; selected analyses supply localized narrative, trade, capability, economics and full passports. No all-case browser aggregation or domain calculation replaces the executive API.
+
+Before rendering, the client requires matching opportunity/snapshot, complete immutable `real_decision`, state/route/scenario equality and exact branch-qualified claims/references. Failed requests or joins display localized retry/unavailable states without previous-case sources. `ExecutiveCase` still has no new EVSI availability field: the client joins the exact summary row by opportunity and scenario. Zero remains available; null/NOT_CALCULABLE/UNAVAILABLE are not converted to zero. Graph deep links accept only validated case/mode/fixed-view inputs and use the existing live graph unavailable contract.

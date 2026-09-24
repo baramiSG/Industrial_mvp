@@ -18,6 +18,15 @@
 
 @layer tokens {
   :root {
+    --executive-pair-columns: repeat(2, minmax(0, 1fr));
+    --executive-vector-columns: repeat(4, minmax(0, 1fr));
+    --executive-padding: 34px;
+    --executive-header-flow: row;
+    --executive-max: 1680px;
+    --executive-columns: 250px minmax(0, 1fr);
+    --executive-heading-columns: minmax(0, 1.6fr) minmax(250px, 1fr);
+    --executive-steps-columns: minmax(0, 1fr);
+    --executive-skip-transform: translateY(-150%);
     --color-navy-950: #07131f;
     --color-navy-900: #0b1f33;
     --color-navy-850: #102a43;
@@ -176,7 +185,8 @@
     --layout-screening-columns: repeat(2, minmax(0, 1fr));
     --layout-screening-direction: row;
     --layout-screening-align: center;
-    --layout-graph-columns: repeat(2, minmax(0, 1fr));
+    --layout-graph-panel-columns: minmax(0, 1fr);
+  --layout-graph-columns: repeat(2, minmax(0, 1fr));
 
     --breakpoint-wide: 1180px;
     --breakpoint-tablet: 900px;
@@ -278,6 +288,8 @@
 
   @media (max-width: 1180px) {
     :root {
+      --executive-columns: minmax(0, 1fr);
+      --executive-steps-columns: repeat(2, minmax(0, 1fr));
       --layout-sidebar-width: 220px;
       --layout-main-offset: 220px;
       --layout-hero-columns: minmax(0, 1fr);
@@ -323,6 +335,11 @@
 
   @media (max-width: 560px) {
     :root {
+      --executive-heading-columns: minmax(0, 1fr);
+    --executive-pair-columns: minmax(0, 1fr);
+    --executive-vector-columns: minmax(0, 1fr);
+    --executive-padding: 16px;
+    --executive-header-flow: column;
       --layout-nav-columns: repeat(2, minmax(0, 1fr));
       --layout-hero-actions-direction: column;
       --layout-topbar-direction: column;

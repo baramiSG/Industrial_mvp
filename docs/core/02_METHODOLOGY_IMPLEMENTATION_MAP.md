@@ -294,3 +294,14 @@ Any new domain function must be added to this map before implementation review c
 | Live executive integrity | `executive.service._integrity_summary` | Methodology §§9, 15 | injected leakage/equality/metadata/reconciliation tests | computed checks and violation count |
 | Branch-qualified evidence-bound claims | `executive.claims.build_claim_registry`, `executive.provenance` | Methodology §§9, 11, 15 | exhaustive public-rule IDs; exact simulated suffixes; metadata, cross-scenario, unresolved and missing-reference tests | public-only IDs or current-scenario Class-D IDs with explicit branch metadata |
 | Read-only executive API | `executive.api.router`, `app.include_router` | Core 01 FR-088–FR-093 | API, OpenAPI, route-order and warm-latency tests | typed summary and case responses |
+
+## S18b bilingual executive presentation mapping
+
+| Methodology concept | Implementation | Authority basis | Verification | Visible output |
+|---|---|---|---|---|
+| Product/specification/application/capability/demand/route explanation | `static/modules/executive/{registry,render,steps,simulation,routes}.js` | Methodology §§1,8,9,10,15; Core03§7.1 | `browser_tests/test_executive.py` | eight steps, four separate vectors, actual trade/capability/economics and nine ordered routes |
+| Immutable public comparison and typed absence | `executive/{context,data,summary}.js` | synthetic isolation; Core01 FR-088–FR-093 | `test_executive_frontend_contract.py`, executive state/race browser tests | exact selected-case joins; public/simulated distinction; numeric zero versus unavailable/null |
+| Evidence-bound explanation and accountability | `claim-links.js`, `executive/evidence.js`, `analyst-navigation.js` | Methodology §§9,11,15 | source drills, malicious text/URL, contradiction and return-focus tests | exact current passports, case-wide unmet needs and validated analyst graph links |
+| Arabic/English governed presentation | `config/ui_strings.v1.yaml`1.6.0, executive labels and scoped CSS | Methodology §10.3; Core03§7; existing locale policy | catalogue, full-subtree Arabic parity, keyboard/axe/responsive tests | RTL layout, isolated technical IDs and explicitly attributed verbatim sources |
+
+S18b AM2 maps the source-traceability and bilingual presentation requirements to `graph/labels.js`, `graph/render.js`, `graph/diagram.js` and graph-scoped CSS. Actual stored company names and genuine Arabic names are tested independently; source-caption parity, visible/accessibility disclosure, keyboard navigation and panel containment are presentation proofs, not evidence that a graph service or Aura is available. No canonical graph content, route calculation or evidence class changes.

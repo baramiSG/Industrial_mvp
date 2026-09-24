@@ -1,5 +1,6 @@
 import { escapeHtml } from "../dom.js";
-import { edgeLabel, nodeLabel } from "./labels.js";
+import { t } from "../i18n.js";
+import { edgeLabel, nodeNamePresentation } from "./labels.js";
 import {
   GRAPH_MARKER_CLEARANCE,
   GRAPH_NODE_RADIUS,
@@ -119,9 +120,9 @@ export function renderDiagram(
       .join(" ");
     return `<g class="graph-svg-edge${selected}" data-graph-select="edge" data-graph-id="${escapeHtml(edge.id)}" aria-hidden="true"><polygon class="graph-svg-edge-hit" points="${hitPoints}"/><line x1="${source.x}" y1="${source.y}" x2="${target.x}" y2="${target.y}" marker-end="url(#graph-arrow)"/><title>${escapeHtml(edgeLabel(edge))}</title></g>`;
   }).join("");
-  const labels = Object.fromEntries(
-    payload.nodes.map((node) => [node.id, nodeLabel(node, locale)]),
-  );
+  const names = Object.fromEntries(payload.nodes.map((node) => [node.id, nodeNamePresentation(node, locale)]));
+  const labels = Object.fromEntries(Object.entries(names).map(([id, name]) => [id, name.text]));
+  const sourceCaption = Object.values(names).some((name) => name.sourceLanguage) ? t("source_language.caption") : "";
   const placedBoxes = [];
   const presentations = Object.fromEntries(positions.map((point) => {
     const presentation = svgNodeLabelPresentation(
@@ -147,10 +148,11 @@ export function renderDiagram(
     const label = labels[node.id];
     const selected = node.id === selectedId ? " is-selected" : "";
     const synthetic = node.provenance.synthetic_flag ? " is-synthetic" : "";
-    const sourceLanguage = locale === "ar" && !node.name_ar && node.name_en
-      ? ' direction="ltr"' : "";
+    const sourceLanguage = names[node.id].sourceLanguage
+      ? ' class="source-language-island" lang="en" dir="ltr" direction="ltr"' : "";
+    const sourceMetadata = sourceLanguage ? `<desc class="source-language-caption" lang="ar" dir="rtl">${escapeHtml(sourceCaption)}</desc>` : "";
     const presentation = presentations[node.id];
-    return `<g class="graph-svg-node${selected}${synthetic}" data-graph-select="node" data-graph-id="${escapeHtml(node.id)}" aria-hidden="true" transform="translate(${point.x} ${point.y})"><circle r="${GRAPH_NODE_RADIUS}"/><text x="${presentation.dx}" text-anchor="${presentation.textAnchor}" dy="${presentation.dy}"${sourceLanguage}>${escapeHtml(presentation.text)}</text><title>${escapeHtml(label)}</title></g>`;
+    return `<g class="graph-svg-node${selected}${synthetic}" data-graph-select="node" data-graph-id="${escapeHtml(node.id)}" aria-hidden="true" transform="translate(${point.x} ${point.y})"><circle r="${GRAPH_NODE_RADIUS}"/><text x="${presentation.dx}" text-anchor="${presentation.textAnchor}" dy="${presentation.dy}"${sourceLanguage}>${escapeHtml(presentation.text)}</text><title${sourceLanguage}>${escapeHtml(label)}</title>${sourceMetadata}</g>`;
   }).join("");
-  return `<svg class="graph-diagram" viewBox="0 0 ${width} ${height}" role="img" aria-labelledby="graph-svg-title graph-svg-description"><title id="graph-svg-title">${escapeHtml(accessibility.title)}</title><desc id="graph-svg-description">${escapeHtml(accessibility.description)}</desc><defs><marker id="graph-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z"/></marker></defs>${edges}${nodes}</svg>`;
+  return `<svg class="graph-diagram" viewBox="0 0 ${width} ${height}" role="img" aria-labelledby="graph-svg-title graph-svg-description"><title id="graph-svg-title">${escapeHtml(accessibility.title)}</title><desc id="graph-svg-description">${escapeHtml(accessibility.description)}${sourceCaption ? ` ${escapeHtml(sourceCaption)}` : ""}</desc><defs><marker id="graph-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z"/></marker></defs>${edges}${nodes}</svg>`;
 }

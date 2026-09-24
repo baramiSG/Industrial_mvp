@@ -95,14 +95,16 @@ def test_no_candidate_adaptation_is_guarded_and_does_not_mutate_history() -> Non
         adapt_no_candidate_expected(broken)
 
 
-def test_ui_catalogue_1_5_has_graph_parity_without_policy_label_duplication() -> None:
+def test_ui_catalogue_1_6_has_graph_parity_without_policy_label_duplication() -> None:
     payload = yaml.safe_load(
         (PROJECT_ROOT / "config/ui_strings.v1.yaml").read_text(encoding="utf-8")
     )
-    assert payload["metadata"]["version"] == "1.5.0"
-    assert payload["metadata"]["effective_date"] == "2026-09-16"
+    assert payload["metadata"]["version"] == "1.6.0"
+    assert payload["metadata"]["effective_date"] == "2026-09-24"
     english = payload["strings"]["en"]
     arabic = payload["strings"]["ar"]
+    assert english["graph.scroll_hint"] == "If the diagram extends beyond the panel, focus it and use the left and right arrow keys to scroll. All nodes and relationships are also listed below."
+    assert arabic["graph.scroll_hint"] == "إذا امتد الرسم خارج اللوحة، انقل التركيز إليه واستخدم مفتاحَي السهم لليسار واليمين للتمرير. ترد جميع العقد والعلاقات أيضًا في القائمة أدناه."
     graph_keys = {key for key in english if key.startswith("graph.")}
     assert graph_keys == {key for key in arabic if key.startswith("graph.")}
     assert len({key for key in graph_keys if key.startswith("graph.node.")}) == 19
