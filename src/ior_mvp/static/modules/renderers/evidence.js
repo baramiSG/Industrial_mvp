@@ -1,3 +1,4 @@
+import { evidenceAnchor } from "../claim-links.js";
 import {
   escapeHtml,
   narrativeEntry,
@@ -11,7 +12,7 @@ import { state } from "../state.js";
 
 export function renderEvidenceLedger(props) {
   const rows = props.evidence.map((row) => `
-    <tr class="${row.synthetic_flag ? "synthetic-row" : ""}">
+    <tr class="${row.synthetic_flag ? "synthetic-row" : ""}" id="${escapeHtml(evidenceAnchor(row.synthetic_flag ? "SIMULATED" : "PUBLIC", state.selectedId, row.evidence_id))}" tabindex="-1">
       <td><span class="evidence-class">${technical(row.evidence_class)}</span></td>
       <td>${sourceIsland(row.source)}</td>
       <td>
@@ -34,7 +35,7 @@ export function renderEvidenceLedger(props) {
           <p>${escapeHtml(t("evidence.subtitle"))}</p>
         </div>
       </div>
-      <div class="card-body card-body-scroll">
+      <div class="card-body card-body-scroll" id="evidence-scroll-region" role="region" tabindex="0" aria-label="${escapeHtml(t('evidence.title'))}">
         ${sourceCaption()}
         <table class="evidence-table">
           <thead>

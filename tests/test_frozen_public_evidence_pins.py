@@ -45,7 +45,7 @@ FROZEN_TREE_OIDS = {
     "data/snapshots/public": "12eace2f822dd1d61d091ae20021187bf15ae00e",
     "data/synthetic": "ce8e219a574bc8159e82593dd089686e74edb7ef",
     "data/golden": "72618db654110823ec7a8d4dd6415a37e4554e33",
-    "browser_tests/baselines": "dfb2612b9e637367ae4441db489dda4f5d17bf36",
+    "browser_tests/baselines": "fe06e710d6180ca3261850182c4d9299b75dff4c",
 }
 
 # Used only by the depth-1 detector of this repository to prove the object absent.
@@ -54,7 +54,7 @@ _BASE_COMMIT_FOR_ABSENCE_PROOF = (
 )
 
 VISUAL_BASELINE_ROOT = PROJECT_ROOT / "browser_tests" / "baselines" / "v0.3.0"
-VISUAL_BASELINE_ENTRIES = 112
+VISUAL_BASELINE_ENTRIES = 128
 TOP_LEVEL_MODULE = re.compile(r"^src/ior_mvp/[^/]+\.py$")
 
 GIT_EXIT_SUCCESS = 0

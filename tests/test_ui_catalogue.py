@@ -216,8 +216,8 @@ def test_ui_catalogue_metadata_locales_and_version_are_exact() -> None:
 
     assert payload["metadata"] == {
         "artifact": "industrial-opportunity-ui-strings",
-        "version": "1.5.0",
-        "effective_date": "2026-09-16",
+        "version": "1.6.0",
+        "effective_date": "2026-09-24",
         "authority": (
             "Core 01 NFR-006/NFR-007 and UX GenUI Demo Specification"
         ),
@@ -229,6 +229,25 @@ def test_ui_catalogue_metadata_locales_and_version_are_exact() -> None:
         "ar": {"bcp47": "ar-SA", "direction": "rtl"},
     }
     assert getattr(config, "SUPPORTED_UI_LOCALES", None) == ("en", "ar")
+
+
+def test_current_ui_catalogue_passes_complete_validator() -> None:
+    config.validate_ui_strings(_catalogue())
+
+
+@pytest.mark.parametrize("version", ["1.5.0", "1.7.0", "1.6", None, True, False, 1.6])
+def test_ui_catalogue_rejects_non_current_versions(version: object) -> None:
+    payload = _catalogue()
+    payload["metadata"]["version"] = version
+    with pytest.raises(config.UIStringConfigurationError, match="metadata.version"):
+        config.validate_ui_strings(payload)
+
+
+def test_ui_catalogue_rejects_missing_version() -> None:
+    payload = _catalogue()
+    del payload["metadata"]["version"]
+    with pytest.raises(config.UIStringConfigurationError, match="metadata.version"):
+        config.validate_ui_strings(payload)
 
 
 def test_ui_catalogue_has_exact_s08_contradiction_copy() -> None:
@@ -291,6 +310,8 @@ def test_ui_catalogue_has_exact_s08_contradiction_copy() -> None:
 
 
 def test_ui_catalogue_locale_keys_and_placeholders_match() -> None:
+    assert _catalogue()["strings"]["en"]["graph.scroll_hint"] == "If the diagram extends beyond the panel, focus it and use the left and right arrow keys to scroll. All nodes and relationships are also listed below."
+    assert _catalogue()["strings"]["ar"]["graph.scroll_hint"] == "إذا امتد الرسم خارج اللوحة، انقل التركيز إليه واستخدم مفتاحَي السهم لليسار واليمين للتمرير. ترد جميع العقد والعلاقات أيضًا في القائمة أدناه."
     strings = _catalogue()["strings"]
 
     assert set(strings) == {"en", "ar"}
@@ -620,7 +641,7 @@ def test_ui_strings_endpoint_returns_valid_en_and_ar_bundles(
     payload = response.json()
     catalogue = _catalogue()
     assert payload == {
-        "catalogue_version": "1.5.0",
+        "catalogue_version": "1.6.0",
         "locale": locale,
         **catalogue["locales"][locale],
         "strings": catalogue["strings"][locale],
@@ -673,3 +694,36 @@ def test_malformed_ui_catalogue_fails_closed_without_partial_bundle(
         "detail": {"code": "UI_CATALOGUE_INTEGRITY_ERROR"}
     }
     assert "strings" not in json.dumps(response.json())
+
+
+def test_am4_unknown_capability_key_is_lowercase_and_uppercase_fails_closed() -> None:
+    payload = _catalogue()
+    config.validate_ui_strings(payload)
+    meanings = {
+        "en": "Unknown; evidence acquisition required.",
+        "ar": "غير معروفة؛ يلزم جمع الأدلة.",
+    }
+    for locale, meaning in meanings.items():
+        values = payload["strings"][locale]
+        assert values["executive.capability.state.u"] == meaning
+        assert "executive.capability.state.U" not in values
+    for locale in ("en", "ar"):
+        values = payload["strings"][locale]
+        values["executive.capability.state.U"] = values.pop(
+            "executive.capability.state.u"
+        )
+    with pytest.raises(
+        config.UIStringConfigurationError,
+        match=r"UI catalogue key is invalid: executive\.capability\.state\.U$",
+    ):
+        config.validate_ui_strings(payload)
+
+
+def test_am5_integrity_catalogue_additions_are_exact_and_valid():
+    expected = {'executive.integrity.violations': {'en': 'Violations', 'ar': 'عدد المخالفات'}, 'executive.integrity.checks': {'en': 'Integrity checks', 'ar': 'فحوص سلامة البيانات'}, 'executive.integrity.public_synthetic_leakage': {'en': 'Public evidence isolation', 'ar': 'عزل الأدلة العامة عن البيانات الاصطناعية'}, 'executive.integrity.real_decision_equality': {'en': 'Real decision consistency', 'ar': 'اتساق القرار الحقيقي'}, 'executive.integrity.synthetic_metadata': {'en': 'Simulation evidence metadata', 'ar': 'بيانات تعريف أدلة المحاكاة'}, 'executive.integrity.scenario_validation': {'en': 'Scenario validation', 'ar': 'التحقق من السيناريو'}}
+    catalogue = yaml.safe_load(CATALOGUE_PATH.read_text())
+    config.validate_ui_strings(catalogue)
+    for key, values in expected.items():
+        for locale, value in values.items():
+            assert catalogue["strings"][locale][key] == value
+    assert {key for key in catalogue["strings"]["en"] if key.startswith("executive.integrity.")} == set(expected)

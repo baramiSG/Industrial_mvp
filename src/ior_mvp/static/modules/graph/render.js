@@ -1,7 +1,6 @@
 import {
   escapeHtml,
   sourceIsland,
-  syntheticLabels,
   technicalToken,
 } from "../dom.js";
 import { state } from "../state.js";
@@ -12,9 +11,9 @@ import {
   explanationLabel,
   failureLabel,
   nodeKindLabel,
-  nodeLabel,
+  nodeNamePresentation,
 } from "./labels.js";
-import { renderEvidenceResult } from "./passports.js";
+import { renderEvidenceResult, renderGraphDisclosure } from "./passports.js";
 
 function selectedIdentity(graph) {
   return graph.selected?.identity || null;
@@ -76,10 +75,12 @@ function nativeControls(graph) {
   const payload = graph.payload;
   const selected = selectedIdentity(graph);
   const nodes = payload.nodes.map((node) => {
-    const label = nodeLabel(node, state.locale);
-    const visible = state.locale === "ar" && !node.name_ar && node.name_en
-      ? sourceIsland(label) : escapeHtml(label);
-    return `<button type="button" class="graph-element-button${selected === node.id ? " is-selected" : ""}" data-graph-select="node" data-graph-id="${escapeHtml(node.id)}" aria-label="${escapeHtml(t("graph.node_button", { label }))}" aria-pressed="${selected === node.id}"><span>${visible}</span><small>${escapeHtml(nodeKindLabel(node))} · ${technicalToken(node.provenance.evidence_class)}</small></button>`;
+    const { text: label, sourceLanguage } = nodeNamePresentation(node, state.locale);
+    const captionId = `graph-name-source-${node.id}`;
+    const disclosure = sourceLanguage ? ` aria-describedby="${escapeHtml(captionId)}"` : "";
+    const visible = sourceLanguage
+      ? `${sourceIsland(label)}<span class="source-language-caption" id="${escapeHtml(captionId)}" lang="ar" dir="rtl">${escapeHtml(t("source_language.caption"))}</span>` : escapeHtml(label);
+    return `<button type="button" class="graph-element-button${selected === node.id ? " is-selected" : ""}" data-graph-select="node" data-graph-id="${escapeHtml(node.id)}" aria-label="${escapeHtml(t("graph.node_button", { label }))}" aria-pressed="${selected === node.id}"${disclosure}><span class="graph-node-name">${visible}</span><small>${escapeHtml(nodeKindLabel(node))} · ${technicalToken(node.provenance.evidence_class)}</small></button>`;
   }).join("");
   const edges = payload.edges.map((edge) => {
     const label = edgeLabel(edge);
@@ -92,7 +93,7 @@ function details(graph) {
   const element = graph.selected?.element;
   if (!element) return `<p>${escapeHtml(t("graph.selection_none"))}</p>`;
   const labels = element.provenance.synthetic_flag
-    ? syntheticLabels(element.display_labels, "synthetic-warning synthetic-labels")
+    ? renderGraphDisclosure(element.display_labels)
     : "";
   const error = graph.evidenceError
     ? `<p class="graph-unresolved">${escapeHtml(t("graph.error_body"))}</p>` : "";
@@ -103,12 +104,12 @@ function available(graph) {
   const payload = graph.payload;
   const view = graph.catalogue.views.find((row) => row.view_id === graph.viewId);
   const disclosure = payload.synthetic_flag
-    ? syntheticLabels(payload.display_labels, "synthetic-warning synthetic-labels")
+    ? renderGraphDisclosure(payload.display_labels)
     : "";
   if (!payload.edges.length) {
     return `${disclosure}<div class="graph-state"><h4>${escapeHtml(t("graph.empty_title"))}</h4><p>${escapeHtml(t("graph.empty_body"))}</p></div>`;
   }
-  return `${disclosure}<p class="graph-explanation">${escapeHtml(explanationLabel(payload.explanation))}</p><div class="graph-visual" id="graph-scroll-region" role="region" tabindex="0" aria-label="${escapeHtml(view.label[state.locale])}">${renderDiagram(payload, state.locale, selectedIdentity(graph), { title: view.label[state.locale], description: view.description[state.locale] })}</div>${nativeControls(graph)}<section class="graph-selection"><h4>${escapeHtml(t("graph.details_title"))}</h4>${details(graph)}</section>`;
+  return `${disclosure}<p class="graph-explanation">${escapeHtml(explanationLabel(payload.explanation))}</p><p class="graph-scroll-hint" id="graph-scroll-hint">${escapeHtml(t("graph.scroll_hint"))}</p><div class="graph-visual" id="graph-scroll-region" role="region" tabindex="0" aria-describedby="graph-scroll-hint" aria-label="${escapeHtml(view.label[state.locale])}">${renderDiagram(payload, state.locale, selectedIdentity(graph), { title: view.label[state.locale], description: view.description[state.locale] })}</div>${nativeControls(graph)}<section class="graph-selection"><h4>${escapeHtml(t("graph.details_title"))}</h4>${details(graph)}</section>`;
 }
 
 function body(graph) {

@@ -1016,6 +1016,48 @@
       "Claude independent morning/final model-family review"
     ],
     "release_tag": "NOT_AUTHORIZED_WITH_UNMET_FINAL_REVIEW",
-    "last_updated": "2026-09-23"
+    "last_updated": "2026-09-23",
+    "s18b": {
+      "state": "FINAL_CANDIDATE_VERIFICATION_GATED",
+      "branch": "slice/s18b-bilingual-executive-surface",
+      "base": "306a63b4d24266a63b62dd3835c6585ba328bbcd",
+      "dependency_delivery": {
+        "pr": 38,
+        "merge": "306a63b4d24266a63b62dd3835c6585ba328bbcd",
+        "tree": "cd1369dad3e090a954da9faae4570928a2b4a7e4",
+        "main_ci": 35936879756,
+        "result": "six jobs success per coordinator verified delivery record"
+      },
+      "plan_sha256": "ce2786284e0fafc4bcf89d66eed748362d0b2437c696af193b6471a8be772164",
+      "design_sha256": "d648d24330973a8b51be79829ce9188448cf83c0fec8fd1594756231b9fcc7a9",
+      "plan_review_sha256": "3bc55ba55accfe563a1bb984c937d9d5736a6e36657818569dbec70c0430be74",
+      "am1_sha256": "b93785dd5b241d66969c31b1d39366c39bc1be95212b0a2951aa7c6c6127e89d",
+      "implementer": "/root/s18b_frontend_implementer",
+      "review": "Old final tree1345ce5c8b53927825d1b6791c838968af2e9090 REJECTED/INCOMPLETE. Four-file correction independently approved by same-model Codex review618fe8b413acfedf7d6819f3acdb39b878f2d8c0451f2d63b09d30949383bb46, accepted under delegation d3c310af5eea0c0dbf9e503c79f805be0a28302a6b47798074da6ca0aad27ef0 and exactly adopted. Canonical R2 result review064240e21ee1454c615624e893d47e2ac3661f9bc867915245d14ea6891f02ef accepted under delegation04b60be6b0e47183770f154828fd1b7f588e3727eafaf964993ecffd5f374268. Both are same-model Codex subject-bound approvals, not Claude or new exact-candidate approval. Earlier approvals remain historical; no clipped-region quality approval.",
+      "records": ".workflow/slices/S18b-bilingual-executive-surface/",
+      "generation": "Accepted graph GRAPH-SAU-2026-09-12-49b458a614f3, graph228 hashes, graph/manifests/authority and snapshot726/authority20 preserved after four-file correction. Accepted canonical R2:4passed661deselected exit0;128images11666814bytes,max153100;124byte-identical and4independently-viewed changedpairs; finitecodec exit0/128rows/256retained, exactRGB/repeat100. Visual manifest a4e72a65002bc8e6aede62a739a4e3ab9c67729791e376d5ff993725527bb6ce. Actual mechanical baseline subtree fe06e710d6180ca3261850182c4d9299b75dff4c,count128. Original R1 and112quality80 budgetFAIL remain historical.",
+      "delivery": "Old candidate REJECTED/INCOMPLETE: fullpytest3326passed/2failed/1warning exit1 and genuine strictR1 anchor failure. Reviewed correction originalRED2/correctedGREEN2/existingmatrix12/count2; full make e2e-functional661passed4deselected exit0, receipt a0c0997e0d53800bda7c120e23afbefa76974dfe93b348df7f63ba4fc2066a57. CanonicalR2/pin accepted as separate phases. Source remains unstaged/uncommitted on accepted base. New candidate/fullTask7/unchangedstrictR1/two complete clean-rootCI/exactreviews/PR/hosted/merge/main/durable receipt remain pending; no future candidate OID or PASS claimed. AM4 residuals, requiredAR-V01S19repair/S19-S22/finalS21Aura/release certification remain outstanding.",
+      "historical_pre_generation_checkpoint": {
+        "state": "IMPLEMENTING_TASKS_1_TO_5; GENERATION_AND_EXACT_CANDIDATE_REVIEW_PENDING",
+        "review": "independent implementation review pending; no author approval or Claude attribution",
+        "generation": "NOT RUN; separate bound operation after source pause",
+        "delivery": "NOT STAGED, COMMITTED, PUSHED OR MERGED"
+      },
+      "required_s19_followup": {
+        "finding": "AR-V01",
+        "status": "OPEN_REQUIRED_S19_PRODUCT_REPAIR",
+        "defect": "Inherited exact-RGB right-edge clipping in both Arabic1024 simulated steel/polypropylene dossiers includes decision identity and both simulation warnings; clipped regions have no quality approval",
+        "closure": "Original-defect RED before repair and corrected GREEN for both actual cases with complete identity/both exact warnings; EN/AR public/simulated responsive390/1024/1440 regression; no hidden overflow or truncated labels",
+        "gate": "Blocks S19 and overall milestone completion; S18b preserves its explicit unchanged-dossier scope",
+        "scope_ruling_sha256": "e2b1e489ce861ba6162fb04d8da27009f51a36d376238dc76f65e81606970b60",
+        "delegated_disposition_sha256": "38eeaaf9195b591b54f7cf70765287a29a7fde55ae390ec82c903be5b3d0ccc1"
+      },
+      "historical_pre_correction_final_checkpoint": {
+        "state": "FINAL_CANDIDATE_VERIFICATION_GATED",
+        "review": "Separate source/UI, read-only, generation and canonical-operation reviews approved their bound subjects; canonical review 3881ff0c41e7e0d308981e35a01f1397ca4f61d0f44bfc27471899c5e53582ef accepted under delegation 116a8db6e7632451ec8492cf75df194017cfe537fde1ca9b28966aa809cd8c4a; final exact-candidate review pending. Actual Claude approval covers OPS R2 plan only; no author self-approval or clipped-region quality approval.",
+        "generation": "One graph build and one manifest build completed; five immediate gates passed; GRAPH-SAU-2026-09-12-49b458a614f3, snapshot726/authority20. One canonical128 capture passed4 visual tests/661 deselected; 11,666,326 bytes, maximum153,100. Both finite encoding supplements accepted. Mechanical baseline subtree pin 8a4a6650c710fad02b4690c9ba85a1597ed4118a, count128. Original112 quality80 historical budget FAIL remains recorded.",
+        "delivery": "NOT STAGED, COMMITTED, PUSHED OR MERGED; final candidate freeze, strict R1, two complete clean-root CI runs, exact-tree/exact-head review, PR/hosted/merge/main verification and durable final receipt remain pending."
+      }
+    }
   }
 }

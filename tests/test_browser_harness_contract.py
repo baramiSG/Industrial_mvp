@@ -79,6 +79,11 @@ def test_browser_suite_has_the_approved_top_level_shape() -> None:
         "test_visual_baselines.py",
         "visual_baselines.py",
         "visual_container.py",
+        "executive_pages.py",
+        "test_executive.py",
+        "test_executive_accessibility.py",
+        "test_executive_races.py",
+        "test_executive_states.py",
     }
 
 
@@ -453,7 +458,7 @@ def test_server_teardown_accepts_clean_exit_or_requested_sigterm() -> None:
     assert harness.is_expected_server_return_code(1) is False
 
 
-def test_browser_inventory_has_exactly_45_named_tests() -> None:
+def test_browser_inventory_has_exactly_76_named_tests() -> None:
     expected = {
         "test_portfolio_loads_expected_cases_and_states",
         "test_opportunity_card_opens_selected_workspace",
@@ -515,6 +520,37 @@ def test_browser_inventory_has_exactly_45_named_tests() -> None:
         "test_graph_untrusted_content_and_public_isolation",
         "test_graph_visual_budget_preflight",
         "test_graph_portfolio_out_of_order_does_not_restore_stale_selection",
+        "test_all_steps_keep_public_decision_and_nine_routes",
+        "test_analyst_sources_and_native_executive_link_keep_current_case",
+        "test_analyst_uses_computed_integrity_failure_and_affected_case",
+        "test_arabic_source_passports_keep_full_subtree_parity",
+        "test_case_comparison_and_vectors_match_api",
+        "test_claim_drill_uses_exact_stored_evidence_and_restores_focus",
+        "test_complete_arabic_executive_subtree_has_no_unmarked_english",
+        "test_delayed_case_response_cannot_restore_old_case",
+        "test_delayed_locale_response_cannot_restore_previous_case",
+        "test_direct_executive_route_renders_arabic_eight_step_shell",
+        "test_executive_native_keyboard_and_technical_isolation",
+        "test_executive_steps_have_no_viewport_overflow",
+        "test_graph_all_view_states_fit_narrow_panel",
+        "test_graph_deep_link_uses_selected_context_and_handles_unavailable",
+        "test_graph_hostile_name_text_is_escaped",
+        "test_graph_narrow_panel_contains_controls_and_text",
+        "test_graph_node_names_preserve_sources_and_arabic",
+        "test_graph_scroll_region_reaches_both_keyboard_endpoints",
+        "test_graph_source_disclosure_mutations_fail_strict_oracles",
+        "test_history_restores_case_step_and_locale",
+        "test_honest_absence_and_zero_states",
+        "test_inconsistent_join_never_exposes_a_claim",
+        "test_journey_exposes_trade_capacity_capability_and_step_navigation",
+        "test_late_analyst_claim_response_cannot_restore_previous_sources",
+        "test_loading_is_visible_before_summary_arrives",
+        "test_malicious_source_is_text_and_unsafe_url_has_no_link",
+        "test_polypropylene_zero_support_is_distinct_from_missing_npv",
+        "test_route_economics_preserve_available_values_and_typed_absence",
+        "test_transport_failures_are_explicit_without_stale_sources",
+        "test_unavailable_evsi_case_remains_unavailable",
+        "test_unresolved_claim_names_actual_case_wide_needs",
     }
     actual: set[str] = set()
     for path in BROWSER_TESTS.glob("test_*.py"):

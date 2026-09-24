@@ -1295,7 +1295,7 @@ def test_s17_history_current_graph_and_authority_outputs_are_manifested() -> Non
     current = json.loads(
         (PROJECT_ROOT / "data/graph/current.json").read_text(encoding="utf-8")
     )["projection_id"]
-    assert len(paths) == 724
+    assert len(paths) == 726
     assert "config/history/ui_strings.v1-1.4.0.yaml" in paths
     assert f"data/graph/projections/{current}/projection.json" in paths
     assert f"data/graph/projections/{current}/manifest.json" in paths

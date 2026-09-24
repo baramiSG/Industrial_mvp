@@ -61,6 +61,10 @@ SCREENS = (
     "journey-i-graph-route-blocking",
     "journey-i-graph-shared-enabler",
     "journey-i-graph-evidence-to-change",
+    "journey-j-executive-signal-public",
+    "journey-j-executive-simulated-route",
+    "journey-j-executive-ministry-unlocks",
+    "journey-j-executive-reject",
 )
 MAX_FILE_BYTES = 600 * 1024
 MAX_TOTAL_BYTES = 16 * 1024 * 1024
@@ -99,6 +103,7 @@ def write_lossless_webp(image: Image.Image, path: Path) -> None:
         path,
         format="WEBP",
         lossless=True,
+        quality=100,
         method=6,
         exact=True,
     )
@@ -168,6 +173,12 @@ def _source_hashes() -> dict[str, str]:
         ROOT / "browser_tests" / "graph_pages.py",
         ROOT / "browser_tests" / "test_graph.py",
         ROOT / "browser_tests" / "test_visual_baselines.py",
+        ROOT / "browser_tests" / "executive_pages.py",
+        ROOT / "browser_tests" / "harness.py",
+        ROOT / "browser_tests" / "pages.py",
+        ROOT / "browser_tests" / "parity_grammar.py",
+        ROOT / "browser_tests" / "conftest.py",
+        ROOT / "browser_tests" / "visual_baselines.py",
         graph_current,
         projection_root / "projection.json",
         projection_root / "manifest.json",

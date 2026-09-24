@@ -167,6 +167,11 @@ def test_screening_journey_queue_record_passport_anchor_back(
         f"passport-{row['passport_id']}"
         for row in evidence["evidence_passports"]
     ]
+    for card, row in zip(cards.all(), evidence["evidence_passports"], strict=True):
+        status = card.locator("[data-screening-reviewer-status]")
+        expect(status).to_have_attribute("data-screening-reviewer-status", row["status"])
+        expect(status).to_have_text(strings["graph.reviewer.unconfirmed_by_responsible_authority"])
+        assert row["status"] not in card.inner_text()
     passport = evidence["evidence_passports"][0]
     unit = next(
         row
@@ -178,7 +183,6 @@ def test_screening_journey_queue_record_passport_anchor_back(
         passport["source_id"],
         passport["stage"],
         passport["evidence_class"],
-        passport["status"],
         passport["retrieval"]["retrieved_at"],
         unit["completeness_basis"],
         unit["query_hash"],
@@ -594,6 +598,11 @@ def test_screening_surface_has_no_english_catalogue_prose_in_arabic(
     page = browser_session.page
     goto_portfolio(page, "public", AR)
     open_screening(page, AR)
+    statuses = page.locator("[data-screening-reviewer-status]")
+    expect(statuses).to_have_count(8)
+    for status in statuses.all():
+        expect(status).to_have_attribute("data-screening-reviewer-status", "unconfirmed_by_responsible_authority")
+        expect(status).to_have_text(locale_bundle(AR)["strings"]["graph.reviewer.unconfirmed_by_responsible_authority"])
     reports: list[tuple[str, dict]] = []
     reports.append(("summary", arabic_parity_report(page, "#screening")))
     open_queue(page, "robust_public_finding", AR)
@@ -689,53 +698,80 @@ def test_arabic_parity_predicate_fails_on_injected_english(
 
 @pytest.mark.parametrize("locale", LOCALES, ids=lambda item: item.code)
 def test_no_candidate_deep_case_renders_disposition_label_not_null(
-    browser_session: BrowserSession,
+    new_context: object,
+    app_server: object,
     locale: Locale,
 ) -> None:
-    page = browser_session.page
-    expected = json.loads(
-        (
-            PROJECT_ROOT
-            / "tests"
-            / "fixtures"
-            / "public_decision"
-            / "no-candidate-no-fired-signal.expected.json"
-        ).read_text(encoding="utf-8")
-    )
-    expected = adapt_no_candidate_expected(expected)
-    opportunity_id = expected["analysis"]["opportunity"]["id"]
-    page.route(
-        re.compile(r".*/api/opportunities\?mode=public$"),
-        lambda route: _fulfill(route, [expected["list_entry"]]),
-    )
-    page.route(
-        re.compile(
-            rf".*/api/opportunities/{opportunity_id}"
-            r"/ui-manifest\?mode=public$"
-        ),
-        lambda route: _fulfill(route, expected["ui_manifest"]),
-    )
-    page.route(
-        re.compile(
-            rf".*/api/opportunities/{opportunity_id}\?mode=public$"
-        ),
-        lambda route: _fulfill(route, expected["analysis"]),
-    )
-    page.goto(f"/?locale={locale.code}", wait_until="domcontentloaded")
-    expect(page.locator("body")).to_have_attribute("aria-busy", "false")
-    strings = locale_bundle(locale)["strings"]
-    for selector in (
-        ".decision-hero",
-        ".integrity-banner",
-        ".opportunity-card",
-    ):
-        node = page.locator(selector)
-        expect(node).to_contain_text(strings["disposition.no_candidate"])
-        expect(node).to_contain_text("NO_CANDIDATE")
-    expect(page.locator(".decision-hero")).to_contain_text(
-        expected["analysis"]["real_decision"]["localized_narrative"][
-            locale.code
-        ]["headline"]["text"]
-    )
-    visible = page.locator("body").inner_text()
-    assert not re.search(r"\b(?:None|null)\b", visible)
+    from browser_tests.harness import BrowserFailure, BrowserFailureCollector
+    context = new_context(base_url=app_server.base_url, locale=locale.bcp47)
+    collector = BrowserFailureCollector(app_server.base_url)
+    collector.attach_context(context)
+    page = context.new_page()
+    collector.attach_page(page)
+    try:
+        expected = json.loads(
+            (
+                PROJECT_ROOT
+                / "tests"
+                / "fixtures"
+                / "public_decision"
+                / "no-candidate-no-fired-signal.expected.json"
+            ).read_text(encoding="utf-8")
+        )
+        expected = adapt_no_candidate_expected(expected)
+        opportunity_id = expected["analysis"]["opportunity"]["id"]
+        page.route(
+            re.compile(r".*/api/opportunities\?mode=public$"),
+            lambda route: _fulfill(route, [expected["list_entry"]]),
+        )
+        page.route(
+            re.compile(
+                rf".*/api/opportunities/{opportunity_id}"
+                r"/ui-manifest\?mode=public$"
+            ),
+            lambda route: _fulfill(route, expected["ui_manifest"]),
+        )
+        page.route(
+            re.compile(
+                rf".*/api/opportunities/{opportunity_id}\?mode=public$"
+            ),
+            lambda route: _fulfill(route, expected["analysis"]),
+        )
+        executive_url = f"{app_server.base_url}/api/executive/opportunities/{opportunity_id}"
+        with page.expect_response(
+            lambda response: response.url == executive_url
+            and response.request.method == "GET"
+        ) as response_info:
+            page.goto(f"/?locale={locale.code}", wait_until="domcontentloaded")
+        assert response_info.value.status == 404
+        assert response_info.value.json() == {"detail": {
+            "code": "EXECUTIVE_OPPORTUNITY_NOT_FOUND", "message": opportunity_id,
+        }}
+        expect(page.locator("body")).to_have_attribute("aria-busy", "false")
+        strings = locale_bundle(locale)["strings"]
+        for selector in (
+            ".decision-hero",
+            ".integrity-banner",
+            ".opportunity-card",
+        ):
+            node = page.locator(selector)
+            expect(node).to_contain_text(strings["disposition.no_candidate"])
+            expect(node).to_contain_text("NO_CANDIDATE")
+        expect(page.locator(".decision-hero")).to_contain_text(
+            expected["analysis"]["real_decision"]["localized_narrative"][
+                locale.code
+            ]["headline"]["text"]
+        )
+        visible = page.locator("body").inner_text()
+        assert not re.search(r"\b(?:None|null)\b", visible)
+        expect(page.locator("[data-claim-id]")).to_have_count(0)
+        expect(page.locator(".claim-unavailable").first).to_be_visible()
+        expect(page.locator("#analyst-claim-sources")).to_be_empty()
+    finally:
+        context.close()
+    assert set(collector.records) == {
+        BrowserFailure(category="app-http-error", method="GET", status=404,
+            url=executive_url, detail="app response status is at least 400"),
+        BrowserFailure(category="console-error",
+            detail="Failed to load resource: the server responded with a status of 404 (Not Found)"),
+    }

@@ -15,6 +15,18 @@ LATIN_PROSE = re.compile(
 LATIN_RUN = re.compile(r"[A-Za-z]{2,}")
 
 CLASS_PATTERNS: list[tuple[str, re.Pattern[str]]] = [
+    ("synthetic_evidence_id", re.compile(
+        r"SYN-MINISTRY-[A-Z0-9]+(?:-[A-Z0-9]+)*-\d{3}"
+        r"::[a-z][a-z0-9]*(?:_[a-z0-9]+)*")),
+    ("period_years", re.compile(r"\d{4}(?:/\d{4})+")),
+    (
+        "executive_claim_id",
+        re.compile(
+            r"rule\.(?:R0|R1-F|R1-D|R2|R3|R4-F|R4-D|R5|R6|R7|R8|R9-S|R10|R11|R12)"
+            r"|step\.(?:SIGNAL|FALSE_POSITIVE_CONTROLS|PUBLIC_CONCLUSION|MISSING_MINISTRY_FACTS|SIMULATED_EVIDENCE|ROUTE_COMPARISON|INTERVENTION|CONDITIONS_AND_KILL)"
+            r"|step\.(?:SIMULATED_EVIDENCE|ROUTE_COMPARISON|INTERVENTION|CONDITIONS_AND_KILL)\.simulated"
+        ),
+    ),
     ("hs_code", re.compile(r"\d{6}")),
     ("hex_digest", re.compile(r"[0-9a-f]{12}|[0-9a-f]{64}")),
     ("run_id", re.compile(r"\d{8}T\d{6}Z")),

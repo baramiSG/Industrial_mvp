@@ -1,3 +1,4 @@
+import { claimLink } from "../claim-links.js";
 import {
   decisionChip,
   escapeHtml,
@@ -33,6 +34,7 @@ export function renderDecisionHero(props) {
         ${localized ? "" : sourceCaption()}
         ${headline}
         ${rationale}
+        ${claimLink(state.mode === "simulated" ? "decision.simulated" : "decision.public", state.claimContext)}
         <div class="decision-lists">
           <div>
             <b>${escapeHtml(t("decision.conditions"))}</b>
@@ -129,11 +131,12 @@ export function renderMetricGrid(props) {
     ],
   ];
   return `<div class="metric-panel">${metrics.map(
-    ([label, value, note, source]) => `
+    ([label, value, note, source], index) => `
       <article class="metric-box">
         <small>${escapeHtml(label)}</small>
         <strong>${value}</strong>
         <p>${source ? sourceIsland(note) : escapeHtml(note)}</p>
+        ${claimLink(["metric.trade", "metric.concentration", state.mode === "simulated" ? "step.SIMULATED_EVIDENCE.simulated" : "metric.product_specification", state.mode === "simulated" ? "step.INTERVENTION.simulated" : "metric.generic_capacity"][index], state.claimContext)}
       </article>
     `,
   ).join("")}</div>`;

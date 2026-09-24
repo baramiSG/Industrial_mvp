@@ -203,3 +203,9 @@ export UNIVERSAL_NEW_PROJECT_GUIDE=~/projects/<path>/Universal-New-Project-Guide
 ## Deliberate MVP boundary
 
 This POC runs from frozen data and requires no external API key. It demonstrates end-to-end decision logic, evidence governance and interface behavior. Production expansion would add live or scheduled connectors for Saudi customs/tariff lines, GASTAT, Ministry licences and plants, Etimad/SABER, standards, approved-deal records and controlled LLM extraction, all behind the same schemas and gates.
+
+## Bilingual executive journey
+
+With the local application running, open `/executive?opportunity=SAU-H0-721049&step=SIGNAL&locale=en` (or `locale=ar`). Eight steps connect the import signal and false-positive checks to public evidence gaps, an explicitly Class-D scenario, all nine routes, intervention economics and stopping conditions. The public decision remains visible and immutable. Source controls open stored passports and restore keyboard focus on Escape. Missing economics/EVSI remain unavailable rather than zero. The native Analyst link preserves the selected case and locale; graph exploration uses the configured mirror and reports service unavailability honestly.
+
+This surface's implementation progress and pending exact-candidate gates are recorded in [.workflow/slices/S18b-bilingual-executive-surface](.workflow/slices/S18b-bilingual-executive-surface/implementation_log.md). S18a's approved receipt/history remains preserved; no final milestone release is implied.

@@ -460,3 +460,46 @@ The historical S18a gated rows above describe the preserved implementation packe
 | V3-S18B0-PRESERVATION | No frozen-input/generator change; publish only the55-file hash-bound S18a export plus permitted wrapper/delivery records | COPIED UNSTAGED; EXACT-CANDIDATE REVIEW REQUIRED |
 
 [Approved plan](../.workflow/slices/S18b0-executive-contract-hardening/plan.md) and [separate review](../.workflow/slices/S18b0-executive-contract-hardening/plan_review.md) define the finite source/test paths and full gate set. Case-level EVSI schema availability, broad R12 case-wide need mapping and malformed paths outside that plan are explicitly not closed. No final cross-model release gate is claimed by delegated same-model reviews.
+
+## S18b requirements and verification obligations —2026-09-24
+
+S18b0's separate delivered dependency is PR38, merge`306a63b4d24266a63b62dd3835c6585ba328bbcd`, accepted tree`cd1369dad3e090a954da9faae4570928a2b4a7e4`, with six successful main jobs in run35936879756 per coordinator delivery verification. Earlier B0 pending entries remain historical. S18b now implements the independently approved [plan/design/AM1](../.workflow/slices/S18b-bilingual-executive-surface/plan.md) on isolated `slice/s18b-bilingual-executive-surface`; no delivery is preclaimed.
+
+| Obligation | Implemented boundary | Remaining acceptance |
+|---|---|---|
+| Eight steps/four vectors/eleven cases | Fixed vanilla registry, exact selected-case joins, immutable public comparison | Full functional/manual proof, independent exact-candidate review |
+| Sources, contradictions and integrity | Exact branch-qualified passports, return focus, computed server count, case-wide needs | Malformed/race/error regressions and retained review evidence |
+| Bilingual professional surface | Governed1.6 catalogue, RTL/logical CSS, native keyboard/detail, typed absence and source captions | Full Arabic parity/axe/responsive journeys and reviewed screenshots |
+| Provenance closure | Core02/03/09/catalogue changes declared in ADR-030 | Bound graph→manifest→128-image generation, two-root exact gates, hosted CI and exact-head review |
+
+The writer keeps all changes unstaged and stops before generation. Independent reviewers and coordinator delegated acceptance are separate from authorship and Claude's later review. S19 dossier, S20 extraction, S21 operations/live Aura and S22 final audit remain incomplete. AM4 residual dispositions are explicit in KNOWN_LIMITATIONS; no release tag or final cross-model acceptance is claimed.
+
+S18b AM2 is plan-approved and in implementation: canonical company-name fallback, source disclosure and responsive graph containment. Exact plan/review/acceptance references are in the S18b slice record. New regressions retain original RED evidence. Full candidate verification and generated successor identities remain pending; narrow analyst-table accessibility and diagnostic fixture/budget findings are tracked for separate bounded review.
+
+
+### S18b AM4 quality closure checkpoint
+
+The [accepted AM4v2 and additive corrections](../.workflow/slices/S18b-bilingual-executive-surface/plan_review.md) preserve prior approvals and resolve the bounded fixture collector, keyboard-table, typed-passport, capability-copy and lossless-effort issues in source. Focused evidence is retained in the [slice test record](../.workflow/slices/S18b-bilingual-executive-surface/test_evidence.md); full pre-generation diagnostics, independent rendered/source readiness, separately reviewed generation and every exact candidate gate remain required. The exact96-v112 pre-generation teardown is pending generated output, never a functional pass; actual16/provisional112 resource proof and final128/112 acceptance remain distinct. No source-author approval or S18b delivery is claimed. Earlier incomplete checkpoints remain historical.
+
+AM4 residuals remain explicitly tracked: case-level EVSI availability is joined from the server summary without a new case schema field; broader malformed-input/model-partition/test-gap closure is bounded by B0's delivered evidence and does not imply all malformed paths are covered. S19–S22 and final cross-model release review remain separate obligations. Canonical artifacts remain authoritative; this frontend work performs no Aura operation. Final durable receipts and later review must carry the actual projection/delivery outcomes.
+
+### S18b current proof boundaries — 2026-09-24
+
+| Requirement | Recorded result | Remaining obligation |
+|---|---|---|
+| Eight-step AR/EN UI, four vectors, claims and honest integrity/absence | Separate frozen-source/UI approval; F1–F6 resolved in that subject | Final exact-candidate verification |
+| Evidence isolation and industrial outcomes | Complete unnormalized real-decision equality for all11; unchanged normalized925/1045 graph; steel/public INVESTIGATE, PP/public+simulated REJECT/0 | Persisted final-candidate equality and full gates |
+| Governed artifacts | One-shot graph/manifests and completed canonical128 operation/encoding supplements independently approved and accepted | Strict R1, two full clean-root CI runs, exact candidate review and delivery |
+| S19 readable evidence boundary | AR-V01 inherited exact-RGB clipping independently established | Both actual Arabic1024 simulated steel/PP original-defect RED→GREEN, complete identity/both warnings, EN/AR public/simulated responsive regression |
+
+[Slice evidence](../.workflow/slices/S18b-bilingual-executive-surface/pr_record.md) preserves attribution and failed histories. AM4 residuals remain in KNOWN_LIMITATIONS. S19–S22, final live Aura verification and model-family release certification remain required.
+
+### S18b final-gate correction trace — 2026-09-24
+
+| Requirement | Completed correction evidence | Remaining gate |
+|---|---|---|
+| Exact governed snapshot inventory | Two independent literal expectations724→726 preserve all other assertions;2 focused tests passed | New full pytest/Task7 and both complete CI roots |
+| Stable bilingual graph-label anchors | Original EN/AR defect reproduced; scoped CSS plus permanent existing-test branch gives2 GREEN and12 matrix passes with original/restored state equality | Canonical R2/manual result accepted; unchanged strict R1 on the new candidate remains required |
+| Unchanged industrial decisions/graph authority | Adopted four files are excluded from graph228 inputs; graph/manifests/authority bytes preserved | Full all11 decision/outcome checks and exact-candidate gates remain mandatory |
+
+These are bounded correction results, not final product acceptance. CSS and the browser test are visual inputs; their canonical R2 refresh is now independently reviewed and accepted. AR-V01 original-defect S19 repair, all AM4 residuals and final S21 Aura remain as recorded.

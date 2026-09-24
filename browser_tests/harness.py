@@ -372,6 +372,8 @@ _FOCUS_INVENTORY_SCRIPT = """() => {
     );
   };
   const identity = (element) => {
+    if (element.dataset.claimId) return `claim:${element.dataset.claimId}`;
+    if (element.dataset.executiveLink !== undefined) return "nav:executive";
     if (element.dataset.target) return `nav:${element.dataset.target}`;
     if (element.dataset.mode) return `mode:${element.dataset.mode}`;
     if (element.dataset.queueId) return `queue:${element.dataset.queueId}`;
@@ -416,6 +418,8 @@ _FOCUS_INVENTORY_SCRIPT = """() => {
 _FOCUSED_CONTROL_SCRIPT = """() => {
   const element = document.activeElement;
   const identity = (() => {
+    if (element.dataset.claimId) return `claim:${element.dataset.claimId}`;
+    if (element.dataset.executiveLink !== undefined) return "nav:executive";
     if (element.dataset.target) return `nav:${element.dataset.target}`;
     if (element.dataset.mode) return `mode:${element.dataset.mode}`;
     if (element.dataset.queueId) return `queue:${element.dataset.queueId}`;

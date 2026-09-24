@@ -36,7 +36,7 @@ def test_authority_pins_separate_vectors_datasets_evsi_and_claims() -> None:
         "Core and engine input hashes change"
     ) in " ".join(acceptance.split())
     assert (
-        "all 112 WebPs are expected to remain byte-identical"
+        "110 of 112 WebPs remained byte-identical"
     ) in " ".join(acceptance.split())
 
 

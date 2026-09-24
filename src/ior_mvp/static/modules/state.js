@@ -6,6 +6,9 @@ export const state = {
   selectedId: null,
   analysis: null,
   manifest: null,
+  claimContext: null,
+  executiveSummary: null,
+  executiveSummaryRequest: null,
   extraction: null,
   requestEpoch: 0,
   selection: {

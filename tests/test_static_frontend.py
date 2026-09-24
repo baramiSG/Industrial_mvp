@@ -254,6 +254,7 @@ function usd(value) {{ return `USD ${{number(value)}}m`; }}
 function money(value) {{ return `SAR ${{number(value)}}m`; }}
 function technical(value) {{ return `<technical>${{value}}</technical>`; }}
 function escapeHtml(value) {{ return String(value); }}
+function claimLink() {{ return ""; }} // Source navigation is exercised by browser tests.
 {functions}
 const values = [
   ["sentinel", "NOT_CALCULABLE"], ["null", null], ["undefined", undefined],

@@ -157,3 +157,20 @@ Benefits:
 ## 11. Demo-specific polish
 
 The interface is deliberately offline and contains no external font, chart or CDN dependency. This prevents a Ministry presentation from failing because of network restrictions.
+
+## 12. Executive journey and analyst continuity
+
+Open `/executive?opportunity=SAU-H0-721049&step=SIGNAL&locale=en` or use `locale=ar` for Arabic. The case selector and eight-step rail, Previous/Next controls, locale switch and browser history preserve a complete selected-case context. The header compares immutable public and conditional simulated conclusions before the active explanation. Imports are an investigation signal; rules expose false-positive controls, public missing facts precede hypothetical evidence, and all nine routes retain lower-route precedence. Route detail and intervention expose stored economics, competition, support and national value; conditions explain when to stop.
+
+The four vectors stay separate. Dataset unlocks distinguish loaded cases from screening records. Synthetic EVSI has its own warning and availability; an absent estimate is not zero. Claim controls show exact current passports, contradictions and case-wide unresolved needs; Escape returns focus. English source text retains its source-language caption in Arabic. Native Analyst/Executive links preserve opportunity and locale. A claim's graph link opens the existing analyst graph in its validated branch/view; service failure remains an unavailable state, with no fabricated graph content.
+
+The executive surface uses the existing typography/tokens and fixed component registry, with RTL logical layout, readable identifiers, keyboard focus, native expandable detail and stacked narrow layouts. Loading, empty, unavailable, contradictory, not-calculable and failed-locale states are part of the experience contract. Actual screenshots and complete browser journeys must accompany independent review; baseline comparison alone does not establish usability.
+
+### S18b AM2 graph refinement for §§8–10
+
+At narrow widths the graph selector, warnings, native lists and source passports remain within the panel. The SVG intentionally scrolls horizontally with a named keyboard region and localized Arrow-key instruction; the full native list remains below. English company source names are preserved when Arabic is absent, with a visible Arabic source-language caption and accessible description. Genuine Arabic names retain Arabic direction. No invented translation, decorative graph content or global LTR exemption is permitted.
+
+
+### S18b AM4 inspection additions
+
+Open graph stored-evidence selections in both modes and locales. Confirm full source titles with visible source-language captions, localized evidence statuses, separate readable opportunity/evidence identities, safe named external links, retained contradictions and both simulation disclosures. Arabic company/source names are not invented. At390px graph controls wrap coherently; the720px diagram and native list remain usable. Tab into the two labelled analyst tables and use native arrows to reach both ends. In executive Simulated Evidence, expand the native capability legend, read0/1/2/3/U definitions and the simulation note, and verify every original dimension code against the API. U remains unknown/unavailable. Inspect all eight steps at390/1024/1440 in English and Arabic, including source return focus and open passports. Canonical screenshot approval remains separate from diagnostic capture.

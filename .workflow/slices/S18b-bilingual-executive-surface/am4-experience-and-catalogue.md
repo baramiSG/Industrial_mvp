@@ -1,0 +1,72 @@
+# S18b AM4 bounded experience and copy specification
+
+This companion is normative for the AM4 plan. It is proposed by the planner and requires a different reviewer's exact-packet verdict. The parent executive journey, analyst workspace, graph data, source resolution and public/simulation boundaries remain.
+
+## Observed problems and intended experience
+
+The copied Arabic390px shared-enabler screenshot exposes `Shared Enabler`, `synthetic` and `Simulation branch input: shared_enabler` without source markup, plus adjacent opportunity/evidence identifiers whose visual sequence is confusing. The copied graph viewport shows a browser-default grey toggle with stacked Arabic words. The source explains both: passports escape values but do not distinguish status, technical value and source prose; the graph button lacks a local control style. Existing AM2 company-source captions are correctly visible in the same graph viewport and must remain.
+
+The copied1440px Arabic executive simulation screenshot shows nine capability states as bare numbers. Original DOCX §6.4 defines0/1/2/3/U; the current Core07 repeats that reference and preserves the unknown penalty. A compact expandable legend and adjacent state explanations make existing values interpretable while keeping the simulation warning visible. This adds no calculation or claim of actual Ministry verification.
+
+The visual direction stays institutional navy/teal, white analytical cards, governed fonts, restrained borders and existing token spacing. Graph toggle/retry controls should match the existing selector and native controls: inherited font, clear text, token border/radius/padding, visible focus and normal wrapping. Keep a usable text width rather than a tiny grey button. Header may wrap into two logical rows at390px; it may not clip or displace content outside the card. Do not restyle the global shell, shrink text or alter graph geometry.
+
+## Typed passport presentation contract
+
+Use existing `renderEvidenceResult(result, mode)` for graph and executive. Add small private render helpers inside existing passports.js; maximum199physical lines and50-module inventory remain. The returned record order and exact DOM anchor/data identities remain; each caller retains its focus and branch behavior. Product code must not import the Python test grammar.
+
+| Stored field/content | Visible representation | Required preservation |
+|---|---|---|
+| `record.title`, link and heading | Faithful source text, separately annotated in both locations; if absent use the full evidenceID as a technical value | Full title/anchor; no invented title/translation; visible source caption next to each English value in Arabic; link caption accessible through `aria-describedby` |
+| `opportunityId`, `evidence_id` | Two separate labelled rows (`workspace.opportunity`, `graph.provenance_id`) with each full ID in its own technical `bdi dir=ltr` | Full exact characters and opportunity qualification; readable native line wrapping; no entire passport/row blanket LTR |
+| `source` | The exact four currently governed machine source codes `DEMO_GENERATOR`, `producer_altaiseer_talco`, `producer_alupco`, `wco_hs_nomenclature` are technical tokens; all other source names are faithful source text | The three acquisition codes are declared in `config/acquisition_sources.v1.yaml`; DEMO_GENERATOR is governed by evidence policy. Hadeed, SABIC, UNICOIL, UNComtrade/company prose remain source names, even when their letters are all capitals |
+| `period` | A stored year is a technical number; a slash-separated sequence of years is one `period_years` technical value; arbitrary other prose is source text | No reordering or rewriting years; absent/null/empty/exactUNAVAILABLE uses existing localized unavailable |
+| `retrieved_at` | Existing ISO date/datetime technical token | Preserve date; arbitrary source text stays marked prose; never invent retrieval time |
+| `status` | Fixed mapping of exactly seven Core04 enum values to `graph.status.*` keys below | Unknown strings remain original source text, never silently assigned a supported status; `synthetic` stays distinct from `observed` |
+| `evidence_class` | Exact stored class as a technical token | No actualClassD promotion; malformed text may not masquerade as a valid class |
+| `supports` | Faithful separate source spans in stored order (list entries for an array) | Each original item recoverable exactly; no fabricated claim or joined ambiguity; an empty array is localized unavailable |
+| `reviewer_status` | Exact `unconfirmed_by_responsible_authority` maps to its one key; other prose is faithful source text | No implicit approval, normalization to a different review state, or inference from evidence class |
+| `contradiction` | Faithful source text; null/absent remains unavailable | Do not replace missing contradiction with “none” or remove contradictory source text |
+| `scenario_id` | Exact full technical ID | No scenario inference or cross-scenario lookup |
+| `display_labels`, `display_label` | Both exact policy metadata labels on every synthetic passport, through the shared graph disclosure helper; English policy span individually marked with the existing source caption in Arabic | Do not duplicate policy text in UI YAML, synthesize authorization, remove either language or weaken ClassD. Singular source disclosure on nonsynthetic unusual records remains source prose |
+| Valid `url` | Exact safeExternalUrl result as one technical URL plus existing named external link | OnlyHTTP/HTTPS, `noopener noreferrer`, no unsafe scheme; no invalid URL rendered as actionable |
+| Unresolved reference sentence | Existing localized template with exact ID inserted as a technical token | Unresolved stays unresolved; syntax classification confers no evidence authority |
+| Document address object | Existing localized `graph.document_address` template; documentID and present integer page/line as isolated technical values | Zero indexes retained via `??`; no invented address; absent marker stays existing unavailable; string addresses are faithful source prose |
+
+Use escaped value children carrying a stable `data-passport-value` or equivalent narrowly scoped selector so tests compare original value text without reading newly added captions. The presence of this selector is not an authority claim. Escape all strings; never insert raw source HTML or run scripts. Unknown objects must not become `[object Object]`; retain typed absence/validated input handling and test malformed source fields through the renderer without changing API validation.
+
+### Source language and direction
+
+Current stored narrative/title/support strings are English except explicit Arabic source test cases. Preserve all source text verbatim. An English-only source value uses existing `sourceIsland` with `lang=en dir=ltr` and the exact existing catalogue source caption adjacent in Arabic. An Arabic-only source value uses a `lang=ar dir=rtl` span and is never labelled as English. A mixed value is rendered as contiguous source runs: Arabic stays RTL; each Latin prose run receives its own English source island and adjacent caption. Spaces/punctuation remain recoverable in original order; language markup must not rewrite the value. Tests cover a pure Arabic title and mixed `مصدر عربي Hadeed` with original-value equality. A source string in an unsupported script must remain escaped and directionally neutral (`lang=und dir=auto`), not falsely identified as English or translated; no new language support is claimed.
+
+The strict browser parity implementation in pages.py remains unchanged. In Arabic, the full graph subtree is inspected after each selection, including title links, headings, metadata, warnings, unresolved records and addresses. No company-name exemption or whole-card `.source-language-island` is permitted. The only test-grammar additions are the two exact technical productions in the plan. CompositeID formatting is technical syntax only; the unchanged resolver must still reject a nonexistent ID even when syntactically valid.
+
+Use `renderGraphDisclosure(labels)` in the existing passports module to avoid graph render outputting unannotated English warning text. Preserve current graph warning classes and both metadata labels. A legacy record supplying only `display_label` may use the already validated locale bundle `state.ui.synthetic_labels` pair only when its English label agrees; this reuses actual governed policy, not invented text. A mismatch must stay explicit and fail the negative rendering test, not be silently replaced. The English warning is an individual source-language span with adjacent caption in Arabic; Arabic warning is `lang=ar dir=rtl`. This matches the existing executive policy presentation without importing executive rendering into graph or changing the global syntheticLabels helper.
+
+The executive caller now trusts these typed shared passport children. Remove its broad Latin h5/dd/link reclassification and synthetic-ID-as-source patch; do not remove the claim status/branch markers, policy warning, source-reference order, close/Escape behavior or graph navigation. Both callers must pass the same source/technical/escaping tests.
+
+## Exact15 bilingual catalogue additions
+
+Machine-readable exact values are in `CATALOGUE-ADDITIONS.json`; both locales contain the identical15-key set. Add these pairs to existing pre-generation UI1.6.0, preserving all old pairs and its metadata/version/date. No display policy text is copied from evidence policy into UI YAML.
+
+- `graph.status.observed`, `.calculated`, `.model_estimated`, `.inferred`, `.assumption`, `.unresolved`, `.synthetic`: the seven declared evidence statuses, translated without changing their meaning.
+- `graph.reviewer.unconfirmed_by_responsible_authority`: names the stored lack of confirmation; it is not an approving-review record.
+- `executive.capability.legend`, `.state.0`, `.state.1`, `.state.2`, `.state.3`, `.state.U`, `.simulation_note`: seven capability keys.
+
+Each numeric state remains visible alongside its original number and localized meaning; no score aggregation or new status. Use the full meaning from the machine-readable copy both beside the row and in the definition-list legend, avoiding a second unreviewed short-label vocabulary. U remains an explicit unknown/unavailable state. The native `<details>` legend adds one focusable summary within the simulated capability block and repeats the simulation note; no analyst/global Tab-order inventory changes follow from the executive-only summary. Existing browser functions may gain assertions/parameters but the76 named inventory remains exact.
+
+Methodology mapping: 0 is verified present **within the hypothetical state being illustrated**, not verified public/Ministry evidence;1 is a known minor upgrade;2 is a major new line/technology/JV with materially useful existing assets;3 is fundamental absence with little existing-plant advantage;U requires evidence acquisition. Existing syntheticClassD warnings, source/scenario identity and the explicit simulation note prevent treating a simulated0 as observed. The original numeric state, known flag, K/U/D*, hard gates and route decisions are unchanged.
+
+## Concrete behavioral and visual acceptance
+
+1. Original artificial fixture retains its real404 and exact body/two collector records, all original disposition/null assertions and unavailable source UI. An additional unrelated error fails.
+2. Both analyst table wrappers have stable IDs, localized accessible names, native Tab focus and Arrow scrolling when overflowing; full-page axe passes at390/1024/1440. The literal full Tab sequence gains exactly two stops and preserves all previous focus/wrap assertions.
+3. Graph controls are visually coherent at390px: no tiny grey vertically stacked toggle, no clipping, every control visible/reachable, retained720px diagram scroll and complete native lists. Inspect actual EN/AR screenshots at390/1024/1440, open/closed/loading/unavailable/retry as well as available states.
+4. All four graph views and both evidence modes exercise existing source-backed or explicitly identified test-only fixture outcomes. Select a node/edge and wait for its actual stored-evidence state before full-subtree parity/whole-page axe/keyboard checks. For a genuinely empty view, assert no selectable element and the truthful empty state; do not invent graph content to satisfy selection coverage.
+5. Source corpus expectations come from fixed input records and this field specification, never DOM-derived span counts. Retain the exact AM2 preselection six-source-span canonical steel adjacency oracle. The implementer must produce a literal postselection expectation table with input hashes and counted field locations, and the preliminary independent source/UI reviewer must verify that table against raw records before accepting source readiness. Wrong raw statuses, removed captions/dir, company-as-code, unsafeURLs and missing warning mutations must fail.
+6. Both executive public and simulated claim drill-downs preserve exact stored references/contradictions, expected focus and full subtree parity after the shared renderer change. All8 steps, especially expanded simulated capability legend, receive fresh actual EN/AR screenshots and keyboard/overflow/axe inspection; values match the original API.
+7. Keep old112 baseline bytes externally. Encoding controls compare identical RGB at80/100 and repeat100 bytes in the pinned producer. Final128 paths, exact dimensions/fonts/producer and600KiB/16MiB remain. No evidence bundle claims final fit until all128 pass.
+8. Reviewer first inspects frozen source, RED/GREEN, full functional run and rendered UI; only then considers the separate Task6 generation operation. Final generated outputs still require every parent full gate, strictR1, exact-tree and hosted-head review.
+
+## Provenance and limits
+
+Copied screenshots were produced by the frontend implementer and visually inspected by this planner. The exact passport renderer diagnostic and DOCX extraction are direct planner evidence. Source-code enum/ID construction, config source definitions and actual catalogue keys support the field contract. Arabic copy is a proposed faithful rendering for independent bilingual review, not a claim of owner-supplied wording. No app/server/browser/network/container or source mutation was performed during the resumed offline drafting. This spec is not a production or candidate acceptance verdict.

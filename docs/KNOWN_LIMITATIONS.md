@@ -222,3 +222,49 @@ The S18a implementation is now delivered at its exact approved tree; [PR37 deliv
 | KL-136 | New validator coverage must distinguish actual repaired defects from validators that already reject malformed objects | FOCUSED COVERAGE RECORDED; independent review pending. Existing R4-F/R4-D exact-mapping test remains byte-identical and supersedes the earlier trivial-R4-only coverage observation |
 
 KL-132 remains open for the separately approved S18b Core/generation correction. Live Aura update/verification and final cross-model release review remain separate requirements; local graph passes and Aura-only skips do not satisfy them.
+
+## S18b residual dispositions —2026-09-24
+
+These current dispositions supplement the historical rows and accepted packets above.
+
+| Observation | Current disposition | Required follow-up |
+|---|---|---|
+| KL-133: explicit case-level EVSI availability | OPEN. UI joins exact opportunity+scenario summary rows and labels unavailable/null honestly; no API marker added | Separately reviewed additive schema/Core04/09 change, all11 cases, seven available/four unavailable, missing scenario, zero and invalid-input proof |
+| KL-134: malformed-input errors | B0 delivered the enumerated trade/R11/EVSI/dependent-mapping/overflow repairs; other paths remain unverified. UI fails closed on transport/inconsistent joins | Reproduce each newly exposed path, narrow typed validation and original-defect RED; no broad exception swallowing |
+| Public/synthetic model partition | B0 delivered bounded flag/status/source consistency and public ClassD positive controls; UI independently validates current passports and claim metadata | Do not infer every model invariant is covered; new counterexamples need a separate reviewed regression |
+| KL-136: remaining validator/test gaps | B0 retained exact R4-F/R4-D coverage and expanded bounded defects; S18b adds exact source drills and join mutations | Remaining duplicate/order/count/nonfinite/reference gaps require evidence-backed tests; do not claim comprehensive closure |
+| KL-135: broad R12 needs | OPEN. Unresolved R6/R7/R8/R10 use the explicit case-wide unmet-needs label | Authority-reviewed rule-specific structured mapping only where a source contract establishes it; no prose inference |
+| Required simulated suffix | Fail-closed behavior preserved; no missing-row waiver | Test each required supporting family separately; optional absent EVSI must remain distinguishable |
+| KL-132 historical sentence | Live Core09 and its exact pin corrected to actual110/112 equality and accepted two-image history; immutable AM3/AM4 packets retained | New S18b generation and independent exact-candidate verification remain pending |
+| KL-85/KL-107 routed analyst shell | OPEN. Executive route added; screening remains analyst section06 | S22 necessity/disposition assessment; no unrelated workspace rewrite |
+
+Inherited Arabic graph company labels and390px inner-panel clipping are separately under amendment review; no graph fix or graph UX pass is claimed by the current S18b checkpoint. Aura projection replacement/live verification and independent cross-model release review remain separate requirements. Local proof or skipped Aura checks cannot close them.
+
+S18b AM2 checkpoint: the inherited Arabic company labels (`UNAVAILABLE` despite stored English names) and graph-panel390px overflow have reproduced RED tests and bounded presentation fixes. Full candidate acceptance remains pending. The390px whole-page graph journey also exposed inaccessible horizontal-scroll wrappers in the analyst evidence ledger and methodology table; the full-page axe failure is retained for reviewed correction. These are UI limitations, not fabricated graph/service passes.
+
+
+### S18b AM4 quality closure checkpoint
+
+The [accepted AM4v2 and additive corrections](../.workflow/slices/S18b-bilingual-executive-surface/plan_review.md) preserve prior approvals and resolve the bounded fixture collector, keyboard-table, typed-passport, capability-copy and lossless-effort issues in source. Focused evidence is retained in the [slice test record](../.workflow/slices/S18b-bilingual-executive-surface/test_evidence.md); full pre-generation diagnostics, independent rendered/source readiness, separately reviewed generation and every exact candidate gate remain required. The exact96-v112 pre-generation teardown is pending generated output, never a functional pass; actual16/provisional112 resource proof and final128/112 acceptance remain distinct. No source-author approval or S18b delivery is claimed. Earlier incomplete checkpoints remain historical.
+
+AM4 residuals remain explicitly tracked: case-level EVSI availability is joined from the server summary without a new case schema field; broader malformed-input/model-partition/test-gap closure is bounded by B0's delivered evidence and does not imply all malformed paths are covered. S19–S22 and final cross-model release review remain separate obligations. Canonical artifacts remain authoritative; this frontend work performs no Aura operation. Final durable receipts and later review must carry the actual projection/delivery outcomes.
+
+### S18b AM5 / F4–F6 current pre-generation checkpoint
+
+Independent source/UI review found integrity, analyst identity and screening status defects; accepted AM5 implements their bounded repairs. Separately reviewed parent corrections restore vector claim reachability, real no-scenario handling, readable nested values and substantive16-scene capture preparation. Focused151 browser tests pass; all16 corrected local capture scenes pass strict geometry/API checks. Full immutable-source diagnostics, final manual/resource evidence, independent whole-source/UI approval and generated/exact/hosted gates remain pending at this checkpoint. The [slice evidence](../.workflow/slices/S18b-bilingual-executive-surface/test_evidence.md) retains original failures and attributes all corrections. No S18b completion or final release acceptance is claimed.
+
+KL-133 remains an API schema follow-up: handling an absent scenario honestly does not add a case-level EVSI availability field. Broader malformed-input/model partition/test-gap closure and case-wide R12 attribution remain open as recorded above. Existing graph-name/containment/table/typed-passport changes await final exact-candidate review rather than inheriting approval from focused tests. This writer made no Aura operation; the coordinator's separately verified Aura records remain authoritative. Prior pending/rejected entries are historical and preserved.
+
+### S18b current limitations and mandatory S19 repair — 2026-09-24
+
+Bounded source/UI F1–F6, graph/manifests and the completed canonical128 operation have separate approval and delegated acceptance; final-candidate/delivery gates remain pending. KL-132's live correction is included in generated provenance; final delivery closure still requires exact-candidate verification.
+
+**AR-V01 — OPEN REQUIRED S19 PRODUCT REPAIR.** Both `ar/tablet-1024x768/journey-e-polypropylene-simulated-dossier.webp` and `ar/tablet-1024x768/journey-e-steel-simulated-dossier.webp` retain inherited right-edge clipping of the decision badge/title, opportunity identity, both simulation-warning lines and right-hand product content. Exact old/current RGB equality proves inheritance, not acceptable quality; clipped regions are not approved. S19 must show original-defect RED before repair and corrected GREEN for both actual cases, complete identity/both exact warnings, and EN/AR public/simulated responsive390/1024/1440 regression. Hiding overflow or truncating labels is not repair. This blocks S19/milestone completion, not S18b's scoped dossier preservation; [finding and disposition references](../.workflow/slices/S18b-bilingual-executive-surface/pr_record.md) remain accountable.
+
+KL-133 case-level EVSI schema availability stays OPEN; UI joins summary availability. KL-134/model partitions are closed only for B0's delivered enumerated repairs; other malformed paths remain unverified. KL-136 coverage is not comprehensive; required-suffix family coverage remains a follow-up. KL-135 retains case-wide R12 attribution. KL-85/KL-107 remain OPEN for S22 disposition. Final S21 Aura must verify the accepted projection, idempotence/provenance/partition and real EN/AR application; local passes or earlier S18a Aura proof do not substitute. No final release certification is claimed.
+
+### S18b correction proof boundary — 2026-09-24
+
+F-CAND-01/02 have an independently approved and adopted four-file correction with focused RED→GREEN proof; full product closure remains gated. The old candidate stays REJECTED/INCOMPLETE. Canonical R2 now independently approves the changed visual subject; this is not exact-candidate or delivery approval. AR-V01 stays OPEN REQUIRED S19: both actual Arabic1024 simulated steel/PP dossiers require original-defect RED then corrected GREEN, complete identity/both exact warnings and EN/AR public/simulated390/1024/1440 regression. No clipped-region quality approval or overflow-hiding/truncation remedy.
+
+AM4 residuals remain precise: KL-132 delivery closure is gated despite the generated provenance correction; KL-133 case-level EVSI availability schema is OPEN (summary join only); KL-134/model partitions close only B0's enumerated repairs, with other malformed paths unverified; KL-136 duplicate/order/count/nonfinite/reference coverage is not comprehensive and required simulated-suffix family coverage remains a distinct follow-up from optional EVSI; KL-135 case-wide R12 attribution is OPEN; KL-85/KL-107 await S22 disposition. Final S21 Aura must verify the final accepted projection and real bilingual application; earlier initial S18a Aura acceptance does not substitute.
