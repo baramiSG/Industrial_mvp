@@ -1,0 +1,267 @@
+........................................................................ [  1%]
+........................................................................ [  3%]
+........................................................................ [  5%]
+........................................................................ [  7%]
+........................................................................ [  9%]
+........................................................................ [ 10%]
+........................................................................ [ 12%]
+........................................................................ [ 14%]
+........................................................................ [ 16%]
+........................................................................ [ 18%]
+........................................................................ [ 19%]
+........................................................................ [ 21%]
+........................................................................ [ 23%]
+........................................................................ [ 25%]
+........................................................................ [ 27%]
+........................................................................ [ 28%]
+........................................................................ [ 30%]
+........................................................................ [ 32%]
+........................................................................ [ 34%]
+........................................................................ [ 36%]
+........................................................................ [ 38%]
+........................................................................ [ 39%]
+........................................................................ [ 41%]
+........................................................................ [ 43%]
+........................................................................ [ 45%]
+........................................................................ [ 47%]
+........................................................................ [ 48%]
+........................................................................ [ 50%]
+........................................................................ [ 52%]
+........................................................................ [ 54%]
+........................................................................ [ 56%]
+........................................................................ [ 57%]
+........................................................................ [ 59%]
+........................................................................ [ 61%]
+........................................................................ [ 63%]
+........................................................................ [ 65%]
+........................................................FFFF............ [ 67%]
+........................................................................ [ 68%]
+........................................................................ [ 70%]
+..............................................F......................... [ 72%]
+........................................................................ [ 74%]
+........................................................................ [ 76%]
+........................................................................ [ 77%]
+........................................................................ [ 79%]
+........................................................................ [ 81%]
+........................................................................ [ 83%]
+.................................F...................................... [ 85%]
+........................................................................ [ 86%]
+........................................................................ [ 88%]
+........................................................................ [ 90%]
+........................................................................ [ 92%]
+........................................................................ [ 94%]
+........................................................................ [ 96%]
+........................................................................ [ 97%]
+..................................................................F..... [ 99%]
+.............                                                            [100%]
+=================================== FAILURES ===================================
+_____________ test_visual_baseline_provenance_matches_working_tree _____________
+
+    def test_visual_baseline_provenance_matches_working_tree() -> None:
+        payload = json.loads(
+            (VISUAL_BASELINE_ROOT / "manifest.json").read_text(encoding="utf-8")
+        )
+        assert payload["baseline_version"] == "v0.3.0"
+        assert len(payload["entries"]) == VISUAL_BASELINE_ENTRIES
+>       assert visual_provenance_problems(VISUAL_BASELINE_ROOT, PROJECT_ROOT) == []
+E       AssertionError: assert ['source-tree...sier.py', ...] == []
+E         
+E         Left contains 12 more items, first extra item: 'source-tree provenance is stale: browser_tests/graph_fixtures.py'
+E         Use -v to get more diff
+
+tests/test_frozen_public_evidence_pins.py:353: AssertionError
+___________ test_provenance_check_detects_modified_top_level_module ____________
+
+tmp_path = PosixPath('/tmp/pytest-of-barami/pytest-40935/test_provenance_check_detects_0')
+
+    def test_provenance_check_detects_modified_top_level_module(
+        tmp_path: Path,
+    ) -> None:
+        baseline_root, project_root = _clone_recorded_tree(tmp_path)
+>       assert visual_provenance_problems(baseline_root, project_root) == []
+E       AssertionError: assert ['source-tree...sier.py', ...] == []
+E         
+E         Left contains 10 more items, first extra item: 'source-tree provenance is stale: browser_tests/graph_fixtures.py'
+E         Use -v to get more diff
+
+tests/test_frozen_public_evidence_pins.py:376: AssertionError
+______________ test_provenance_check_detects_new_top_level_module ______________
+
+tmp_path = PosixPath('/tmp/pytest-of-barami/pytest-40935/test_provenance_check_detects_1')
+
+    def test_provenance_check_detects_new_top_level_module(tmp_path: Path) -> None:
+        baseline_root, project_root = _clone_recorded_tree(tmp_path)
+        (project_root / "src" / "ior_mvp" / "zz_unpinned.py").write_text(
+            "", encoding="utf-8"
+        )
+        problems = visual_provenance_problems(baseline_root, project_root)
+>       assert problems == [
+            "top-level module not in visual manifest: src/ior_mvp/zz_unpinned.py"
+        ]
+E       AssertionError: assert ['source-tree...sier.py', ...] == ['top-level m..._unpinned.py']
+E         
+E         At index 0 diff: 'source-tree provenance is stale: browser_tests/graph_fixtures.py' != 'top-level module not in visual manifest: src/ior_mvp/zz_unpinned.py'
+E         Left contains 10 more items, first extra item: 'source-tree provenance is stale: browser_tests/test_visual_baselines.py'
+E         Use -v to get more diff
+
+tests/test_frozen_public_evidence_pins.py:391: AssertionError
+_____________ test_provenance_check_detects_stale_manifest_digest ______________
+
+tmp_path = PosixPath('/tmp/pytest-of-barami/pytest-40935/test_provenance_check_detects_2')
+
+    def test_provenance_check_detects_stale_manifest_digest(tmp_path: Path) -> None:
+        baseline_root, project_root = _clone_recorded_tree(tmp_path)
+        manifest = baseline_root / "manifest.json"
+        manifest.write_bytes(manifest.read_bytes() + b"\n")
+        problems = visual_provenance_problems(baseline_root, project_root)
+>       assert problems == ["manifest.sha256 does not match manifest.json"]
+E       AssertionError: assert ['manifest.sh...nfig.py', ...] == ['manifest.sh...anifest.json']
+E         
+E         Left contains 10 more items, first extra item: 'source-tree provenance is stale: browser_tests/graph_fixtures.py'
+E         Use -v to get more diff
+
+tests/test_frozen_public_evidence_pins.py:401: AssertionError
+________ test_reconstruct_script_prints_graph_reconstruction_pass_line _________
+
+capsys = <_pytest.capture.CaptureFixture object at 0x785908b5df90>
+
+    def test_reconstruct_script_prints_graph_reconstruction_pass_line(
+        capsys,
+    ) -> None:
+        from scripts.reconstruct_snapshot import _reconstruct_graph
+    
+>       projections, nodes, edges = _reconstruct_graph(
+            PROJECT_ROOT / "data",
+            check_manifest=False,
+            manifest_rows={},
+        )
+
+tests/test_integrity_contract.py:1231: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+data_root = PosixPath('/home/barami/projects/ior-worktrees/s19/data')
+
+    def _reconstruct_graph(
+        data_root: Path,
+        *,
+        check_manifest: bool,
+        manifest_rows: dict[str, tuple[str, int]],
+    ) -> tuple[int, int, int]:
+        from ior_mvp.graph.artifact import canonical_bytes, load_projection
+        from ior_mvp.graph.projection import build_repository_projection
+    
+        graph_root = data_root / "graph"
+        current_path = graph_root / "current.json"
+        if not current_path.is_file():
+            return 0, 0, 0
+        refs = sorted(
+            path.relative_to(data_root.parent).as_posix()
+            for path in graph_root.rglob("*")
+            if path.is_file()
+        )
+        if check_manifest:
+            for ref in refs:
+                if ref not in manifest_rows:
+                    print(f"GRAPH RECONSTRUCTION FAIL: manifest row missing for {ref}")
+                    sys.exit(2)
+                expected_hash, expected_bytes = manifest_rows[ref]
+                path = data_root.parent / ref
+                if (
+                    _sha256_file(path) != expected_hash
+                    or path.stat().st_size != expected_bytes
+                ):
+                    print(f"GRAPH RECONSTRUCTION FAIL: manifest hash mismatch for {ref}")
+                    sys.exit(1)
+        stored = load_projection(graph_root)
+        rebuilt = build_repository_projection(data_root.parent)
+        if canonical_bytes(stored) != canonical_bytes(rebuilt):
+            print(
+                "GRAPH RECONSTRUCTION FAIL: "
+                f"{stored.projection_id} byte mismatch"
+            )
+>           sys.exit(1)
+E           SystemExit: 1
+
+scripts/reconstruct_snapshot.py:359: SystemExit
+----------------------------- Captured stdout call -----------------------------
+GRAPH RECONSTRUCTION FAIL: GRAPH-SAU-2026-09-12-49b458a614f3 byte mismatch
+____________ test_in_memory_g17_is_deterministic_and_writes_nothing ____________
+
+    def test_in_memory_g17_is_deterministic_and_writes_nothing() -> None:
+        current_path = PROJECT_ROOT / "data/graph/current.json"
+        snapshot_manifest = PROJECT_ROOT / "data/manifests/snapshot_manifest.json"
+        authority_manifest = PROJECT_ROOT / "docs/authority/authority_hashes.json"
+        before = {
+            path: path.read_bytes()
+            for path in (current_path, snapshot_manifest, authority_manifest)
+        }
+        first = build_repository_projection(PROJECT_ROOT)
+        second = build_repository_projection(PROJECT_ROOT)
+        assert first == second
+        assert first.projection_id == second.projection_id
+        assert first.projection_id.startswith("GRAPH-SAU-2026-09-12-")
+>       assert first.projection_id == json.loads(
+            current_path.read_text(encoding="utf-8")
+        )["projection_id"]
+E       AssertionError: assert 'GRAPH-SAU-20...-ccd1a2abd05c' == 'GRAPH-SAU-20...-49b458a614f3'
+E         
+E         - GRAPH-SAU-2026-09-12-49b458a614f3
+E         + GRAPH-SAU-2026-09-12-ccd1a2abd05c
+
+tests/test_s17_generation.py:52: AssertionError
+_ test_visual_manifest_and_every_webp_hash_size_dimensions_and_rgb_decode_match _
+
+    def test_visual_manifest_and_every_webp_hash_size_dimensions_and_rgb_decode_match() -> None:
+        manifest_bytes = MANIFEST.read_bytes()
+        payload = _manifest()
+        expected_manifest_hash = MANIFEST_HASH.read_text(
+            encoding="ascii"
+        ).strip()
+        assert hashlib.sha256(manifest_bytes).hexdigest() == (
+            expected_manifest_hash
+        )
+        assert (
+            "config/decision_narratives.v1.yaml"
+            in payload["source_tree"]
+        )
+        assert "config/graph_views.v1.yaml" in payload["source_tree"]
+        assert "browser_tests/graph_fixtures.py" in payload["source_tree"]
+        assert "browser_tests/graph_pages.py" in payload["source_tree"]
+        for source in ("browser_tests/test_graph.py", "src/ior_mvp/static/modules/graph/labels.js", "src/ior_mvp/static/modules/graph/render.js", "src/ior_mvp/static/modules/graph/diagram.js", "src/ior_mvp/static/css/graph.css"):
+            assert source in payload["source_tree"]
+        for helper in ("executive_pages.py", "harness.py", "pages.py", "parity_grammar.py", "conftest.py", "visual_baselines.py"):
+            assert f"browser_tests/{helper}" in payload["source_tree"]
+        assert "data/graph/current.json" in payload["source_tree"]
+        assert any(
+            path.endswith("/projection.json")
+            for path in payload["source_tree"]
+        )
+        assert any(
+            path.endswith("/manifest.json") and path.startswith("data/graph/")
+            for path in payload["source_tree"]
+        )
+        for path, digest in payload["source_tree"].items():
+>           assert hashlib.sha256(
+                (PROJECT_ROOT / path).read_bytes()
+            ).hexdigest() == digest
+E           AssertionError: assert 'ad34d2e5803a...62c7288c01990' == '8c744097f8d0...c51a417997842'
+E             
+E             - 8c744097f8d0cd54c407334f6167fcfc72b7355104f5b8c780ac51a417997842
+E             + ad34d2e5803a221cc92b4452d2f4ab776e8070f70dcc77b17dc62c7288c01990
+
+tests/test_visual_baseline_contract.py:156: AssertionError
+=============================== warnings summary ===============================
+.venv/lib/python3.14/site-packages/fastapi/testclient.py:1
+  /home/barami/projects/ior-worktrees/s19/.venv/lib/python3.14/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_frozen_public_evidence_pins.py::test_visual_baseline_provenance_matches_working_tree
+FAILED tests/test_frozen_public_evidence_pins.py::test_provenance_check_detects_modified_top_level_module
+FAILED tests/test_frozen_public_evidence_pins.py::test_provenance_check_detects_new_top_level_module
+FAILED tests/test_frozen_public_evidence_pins.py::test_provenance_check_detects_stale_manifest_digest
+FAILED tests/test_integrity_contract.py::test_reconstruct_script_prints_graph_reconstruction_pass_line
+FAILED tests/test_s17_generation.py::test_in_memory_g17_is_deterministic_and_writes_nothing
+FAILED tests/test_visual_baseline_contract.py::test_visual_manifest_and_every_webp_hash_size_dimensions_and_rgb_decode_match
+7 failed, 3966 passed, 1 warning in 119.00s (0:01:58)

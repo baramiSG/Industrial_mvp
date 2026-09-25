@@ -88,6 +88,14 @@ def test_no_candidate_adaptation_is_guarded_and_does_not_mutate_history() -> Non
     before = deepcopy(original)
     adapted = adapt_no_candidate_expected(original)
     assert original == before
+    assert adapted["analysis"]["authority"]["config_versions"]["ui_strings"] == "1.7.0"
+    assert adapted["ui_manifest"]["components"][0]["props"]["authority"]["config_versions"]["ui_strings"] == "1.7.0"
+    for branch in ("analysis", "ui_manifest"):
+        altered = deepcopy(original)
+        authority = (altered["analysis"]["authority"] if branch == "analysis" else altered["ui_manifest"]["components"][0]["props"]["authority"])
+        authority["config_versions"]["ui_strings"] = "1.7.0"
+        with pytest.raises(AssertionError):
+            adapt_no_candidate_expected(altered)
     assert adapted["ui_manifest"]["components"][-1]["type"] == "graph_view"
     broken = deepcopy(original)
     broken["ui_manifest"]["components"][-1]["type"] = "metric_grid"
@@ -95,11 +103,11 @@ def test_no_candidate_adaptation_is_guarded_and_does_not_mutate_history() -> Non
         adapt_no_candidate_expected(broken)
 
 
-def test_ui_catalogue_1_6_has_graph_parity_without_policy_label_duplication() -> None:
+def test_ui_catalogue_1_7_has_graph_parity_without_policy_label_duplication() -> None:
     payload = yaml.safe_load(
         (PROJECT_ROOT / "config/ui_strings.v1.yaml").read_text(encoding="utf-8")
     )
-    assert payload["metadata"]["version"] == "1.6.0"
+    assert payload["metadata"]["version"] == "1.7.0"
     assert payload["metadata"]["effective_date"] == "2026-09-24"
     english = payload["strings"]["en"]
     arabic = payload["strings"]["ar"]

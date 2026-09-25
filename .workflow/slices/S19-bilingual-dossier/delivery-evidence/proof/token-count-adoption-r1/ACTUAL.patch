@@ -1,0 +1,44 @@
+--- a/browser_tests/test_graph.py
++++ b/browser_tests/test_graph.py
+@@ -842,7 +842,7 @@
+             assert_graph_panel_contains_controls_and_text(page)
+             if scenario == "steel" and mode == "public" and view == "evidence_to_change" and width == 1440:
+                 page.evaluate("document.fonts.ready")
+-                new_token, old_token = "ENGINE-a1dcbf0e7665", "ENGINE-7ae34188bdec"
++                new_token, old_token = "ENGINE-5e01ef7c4b9d", "ENGINE-7ae34188bdec"
+                 measure = """() => {
+                   const section = document.querySelector('.graph-native-controls > section:nth-child(2)');
+                   const buttons = [...section.querySelectorAll('.graph-button-list > button[data-graph-select="edge"]')];
+--- a/tests/test_integrity_contract.py
++++ b/tests/test_integrity_contract.py
+@@ -1295,7 +1295,7 @@
+     current = json.loads(
+         (PROJECT_ROOT / "data/graph/current.json").read_text(encoding="utf-8")
+     )["projection_id"]
+-    assert len(paths) == 726
++    assert len(paths) == 728
+     assert "config/history/ui_strings.v1-1.4.0.yaml" in paths
+     assert f"data/graph/projections/{current}/projection.json" in paths
+     assert f"data/graph/projections/{current}/manifest.json" in paths
+--- a/tests/test_s17_generation.py
++++ b/tests/test_s17_generation.py
+@@ -55,7 +55,7 @@
+     assert first.counts["nodes"] == 925
+     assert first.counts["edges"] == 1045
+     assert all(path.read_bytes() == content for path, content in before.items())
+-    assert len(json.loads(snapshot_manifest.read_text(encoding="utf-8"))["files"]) == 726
++    assert len(json.loads(snapshot_manifest.read_text(encoding="utf-8"))["files"]) == 728
+     assert len(json.loads(authority_manifest.read_text(encoding="utf-8"))["files"]) == 20
+     print(
+         "S17_IN_MEMORY_G17",
+--- a/tests/test_s17_status_docs.py
++++ b/tests/test_s17_status_docs.py
+@@ -30,7 +30,7 @@
+         ).read_text(encoding="utf-8")
+     )
+ 
+-    assert len(snapshot["files"]) == 726
++    assert len(snapshot["files"]) == 728
+     assert len(visual["entries"]) == 128
+     assert visual["change_ref"] == "S18B-BILINGUAL-EXECUTIVE-SURFACE-1"
+     for text in (adr_027, s17_row):

@@ -1,0 +1,883 @@
+{
+  "status": "SUPPORTING_OBSERVATIONS_COMPLETE_NO_FINDINGS_NO_APPROVAL_ISSUED",
+  "scope": "20 fresh native first pages only: fert-retail-packs, sop, penicillin-api, streptomycin-api and tinplate × public/simulated × EN/AR.",
+  "reviewer": "Codex /root/domain_capability — supporting bilingual document QA and evidence-provenance reviewer; Claude Code remains sole independent approving reviewer.",
+  "recorded_at_utc": "2026-09-25T12:51:11Z",
+  "preparation": {
+    "refreshed": [
+      "S19 AGENTS.md and current mission HANDOFF",
+      "MANUAL-REVIEW-BRIEF.md and MANUAL-PDF-COVERAGE-PREPARATION.md",
+      "approved S19 Task4 lines104–108 and current frozen dossier summary source lines622–679",
+      "actual completed functional RESULT.json and stdout summary"
+    ],
+    "personas": [
+      "bilingual document QA reviewer",
+      "evidence-provenance reviewer"
+    ],
+    "skills_read_and_applied": [
+      "project-orientation",
+      "task-standards",
+      "pdf",
+      "strict-reviewer (inspection rigor; no approval authority claimed)",
+      "sanad-provenance",
+      "al-muhasibi",
+      "muhasabah-gate"
+    ],
+    "wait_before_views": "No fresh image opened until parent explicitly released inspection after sealed cohort and actual raster/strict PASS."
+  },
+  "bindings": [
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/browser-execution/rendered/RENDER-RESULT.json",
+      "sha256": "5eee51a9f84c633b819059bd953caf8ba36a335f50662d3209d63e03e5ef0698"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/browser-execution/strict/PDF-ACCEPTANCE.json",
+      "sha256": "bc0a02fa73bd0bb04fd2af5798b56a5685fbd2fe29b44567d83ea5a758327d65"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/browser-execution/functional/PDF-COHORT-READY.json",
+      "sha256": "90344ae1e7f7ae1c5d03b2c3d2a5ae90afb3ff3f04ecba52c46acbb5333e9134"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/browser-execution/manual/APPENDIX-REUSE.json",
+      "sha256": "395dcb90f0cda9dc3e9d55ec999bd22d45ebfdf378a687cbba321ee27fc776d9"
+    }
+  ],
+  "additional_sources": [
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/browser-execution/functional/RESULT.json",
+      "sha256": "04eb4e732786992c0775a944f70aab41e67e2a174fe939c7012228799f717479"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/browser-execution/functional/stdout.log",
+      "sha256": "b518872b5796922a54409408269cd2dd0fbad062b77d201fa6ba99a0e4ad5fdb"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/browser-preparation/MANUAL-REVIEW-BRIEF.md",
+      "sha256": "386578249303dadd4b6d6b345bb2c9d815b13c1e7cdab2587cf403a7b13a3b5d"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/browser-preparation/source/src/ior_mvp/dossier.py",
+      "sha256": "34f20faa89ea15f441285e56b238702df9de960097b4da69ed01336f4c3fb0f0"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/literal-adoption/POST-LITERAL-SOURCE-BINDING.json",
+      "sha256": "c104d456735172817dc356fe17c349c46250de2dc98dd0195952e4f5565d7dc0"
+    }
+  ],
+  "coverage": {
+    "assigned_reports": 20,
+    "fresh_native_firstpage_views": 20,
+    "locales": {
+      "ar": 10,
+      "en": 10
+    },
+    "modes": {
+      "public": 10,
+      "simulated": 10
+    },
+    "tool_calls": 20,
+    "tool": "view_image",
+    "detail": "original",
+    "contact_views": 0,
+    "firstpage_reuse": 0,
+    "new_appendix_views": 0,
+    "unviewed_assigned_pages": 0
+  },
+  "actual_native_views": [
+    {
+      "pdf": "fert-retail-packs-public-ar.pdf",
+      "pdf_sha256": "9e6ab3c6470136ae9152fb8b9cad2feecdb1e0d0abbb1b89e70a1b85ac2d7413",
+      "page": 1,
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/browser-execution/rendered/fert-retail-packs-public-ar-page-01.png",
+      "sha256": "d0447c8cd8a270479fe25a9b1c761040d94dd11b4eaf0ddc39e959451500e417",
+      "raster_px": [
+        1190,
+        1684
+      ],
+      "render_json_path": "/reports/8/pages/0",
+      "tool": "view_image",
+      "detail": "original",
+      "tool_returned_image": true,
+      "visually_inspected": true,
+      "observation_case": "fert-retail-packs",
+      "inspection_level": "NATIVE_1190x1684_ORIGINAL"
+    },
+    {
+      "pdf": "fert-retail-packs-public-en.pdf",
+      "pdf_sha256": "e33201fd66bcfd0a13db92ea520babfe44c74f686adee6078b2118ab1fc00cf2",
+      "page": 1,
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/browser-execution/rendered/fert-retail-packs-public-en-page-01.png",
+      "sha256": "dcd593af917f8a05d8bade43ffe7afa5dee1cd7fbb0b97c35fd806e65765dacf",
+      "raster_px": [
+        1190,
+        1684
+      ],
+      "render_json_path": "/reports/9/pages/0",
+      "tool": "view_image",
+      "detail": "original",
+      "tool_returned_image": true,
+      "visually_inspected": true,
+      "observation_case": "fert-retail-packs",
+      "inspection_level": "NATIVE_1190x1684_ORIGINAL"
+    },
+    {
+      "pdf": "fert-retail-packs-simulated-ar.pdf",
+      "pdf_sha256": "04d38a60b3781418488578dbbb5cea4527d5ce045362ddf95845c1117fa0dd82",
+      "page": 1,
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/browser-execution/rendered/fert-retail-packs-simulated-ar-page-01.png",
+      "sha256": "f6e05efdd562953821a984398013b803303950b3ffa597a9addc02ebd44361fa",
+      "raster_px": [
+        1190,
+        1684
+      ],
+      "render_json_path": "/reports/10/pages/0",
+      "tool": "view_image",
+      "detail": "original",
+      "tool_returned_image": true,
+      "visually_inspected": true,
+      "observation_case": "fert-retail-packs",
+      "inspection_level": "NATIVE_1190x1684_ORIGINAL"
+    },
+    {
+      "pdf": "fert-retail-packs-simulated-en.pdf",
+      "pdf_sha256": "4fbc2cc82f66490abad67db9aeabc85fcbdf858ad2378e70258efde39884caf0",
+      "page": 1,
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/browser-execution/rendered/fert-retail-packs-simulated-en-page-01.png",
+      "sha256": "d464d72405fde76e1cd4d1bef176b19936c2ade74c8051abc9823f535eb6e3f3",
+      "raster_px": [
+        1190,
+        1684
+      ],
+      "render_json_path": "/reports/11/pages/0",
+      "tool": "view_image",
+      "detail": "original",
+      "tool_returned_image": true,
+      "visually_inspected": true,
+      "observation_case": "fert-retail-packs",
+      "inspection_level": "NATIVE_1190x1684_ORIGINAL"
+    },
+    {
+      "pdf": "penicillin-api-public-ar.pdf",
+      "pdf_sha256": "c5cb7647b4891469e8c73ab55726392430278ca227819562ada916f7afc66ca0",
+      "page": 1,
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/browser-execution/rendered/penicillin-api-public-ar-page-01.png",
+      "sha256": "2c7586338a159828c9421c969bbd022a24b7a91255b5cd8c2b0d2c0aa34eb335",
+      "raster_px": [
+        1190,
+        1684
+      ],
+      "render_json_path": "/reports/20/pages/0",
+      "tool": "view_image",
+      "detail": "original",
+      "tool_returned_image": true,
+      "visually_inspected": true,
+      "observation_case": "penicillin-api",
+      "inspection_level": "NATIVE_1190x1684_ORIGINAL"
+    },
+    {
+      "pdf": "penicillin-api-public-en.pdf",
+      "pdf_sha256": "b198cce5525bb280174b17c6c22346ac9bb8aabe7971b4c865ae17ffc468564f",
+      "page": 1,
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/browser-execution/rendered/penicillin-api-public-en-page-01.png",
+      "sha256": "f1083b8772f9bd20fd8ea01b8ac095ddc5a63b40e37038a20b5fe213aa896f06",
+      "raster_px": [
+        1190,
+        1684
+      ],
+      "render_json_path": "/reports/21/pages/0",
+      "tool": "view_image",
+      "detail": "original",
+      "tool_returned_image": true,
+      "visually_inspected": true,
+      "observation_case": "penicillin-api",
+      "inspection_level": "NATIVE_1190x1684_ORIGINAL"
+    },
+    {
+      "pdf": "penicillin-api-simulated-ar.pdf",
+      "pdf_sha256": "e6268e737c581cb1a22d35293cd6bef6bd74024ff360a02e2fadcc47e668297d",
+      "page": 1,
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/browser-execution/rendered/penicillin-api-simulated-ar-page-01.png",
+      "sha256": "65f6c1692e4518fe55f93f065378b6083163c9ce28c05cb72c2587638509fc28",
+      "raster_px": [
+        1190,
+        1684
+      ],
+      "render_json_path": "/reports/22/pages/0",
+      "tool": "view_image",
+      "detail": "original",
+      "tool_returned_image": true,
+      "visually_inspected": true,
+      "observation_case": "penicillin-api",
+      "inspection_level": "NATIVE_1190x1684_ORIGINAL"
+    },
+    {
+      "pdf": "penicillin-api-simulated-en.pdf",
+      "pdf_sha256": "f65058bc378afd22922756e01d79016e3196bdfeb9c87641e155a9a8a3e06c67",
+      "page": 1,
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/browser-execution/rendered/penicillin-api-simulated-en-page-01.png",
+      "sha256": "7847a311c33d89b6a776b09ea7b7241eca79964c53f7f212ac6183ee5067c321",
+      "raster_px": [
+        1190,
+        1684
+      ],
+      "render_json_path": "/reports/23/pages/0",
+      "tool": "view_image",
+      "detail": "original",
+      "tool_returned_image": true,
+      "visually_inspected": true,
+      "observation_case": "penicillin-api",
+      "inspection_level": "NATIVE_1190x1684_ORIGINAL"
+    },
+    {
+      "pdf": "sop-public-ar.pdf",
+      "pdf_sha256": "e5b62ae578877dac6cb1a2c8dca9d853263b1fe103da5a89471ca68c76a34ac1",
+      "page": 1,
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/browser-execution/rendered/sop-public-ar-page-01.png",
+      "sha256": "186ab722e970a37eb93185a206ad660ff3fb7cb6d07fd0f57586426940e8e845",
+      "raster_px": [
+        1190,
+        1684
+      ],
+      "render_json_path": "/reports/28/pages/0",
+      "tool": "view_image",
+      "detail": "original",
+      "tool_returned_image": true,
+      "visually_inspected": true,
+      "observation_case": "sop",
+      "inspection_level": "NATIVE_1190x1684_ORIGINAL"
+    },
+    {
+      "pdf": "sop-public-en.pdf",
+      "pdf_sha256": "16b94a4a3786c40b2a26b04f492647a7d9e453fdd3e44ceb0723077582b9d723",
+      "page": 1,
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/browser-execution/rendered/sop-public-en-page-01.png",
+      "sha256": "2b184968a350cee5dc2d567ea0842c6221cdfb1eec4e7d12d3870b0e0f614d17",
+      "raster_px": [
+        1190,
+        1684
+      ],
+      "render_json_path": "/reports/29/pages/0",
+      "tool": "view_image",
+      "detail": "original",
+      "tool_returned_image": true,
+      "visually_inspected": true,
+      "observation_case": "sop",
+      "inspection_level": "NATIVE_1190x1684_ORIGINAL"
+    },
+    {
+      "pdf": "sop-simulated-ar.pdf",
+      "pdf_sha256": "aa4705a58f39ccccdb4d359d285dfb0ce35ef6c127f7b2770c72b78fea7da062",
+      "page": 1,
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/browser-execution/rendered/sop-simulated-ar-page-01.png",
+      "sha256": "b48161e65a8f743c404c84c6cbbe9a1caafa9558dd4e4c3a3e67ae5e32723a9e",
+      "raster_px": [
+        1190,
+        1684
+      ],
+      "render_json_path": "/reports/30/pages/0",
+      "tool": "view_image",
+      "detail": "original",
+      "tool_returned_image": true,
+      "visually_inspected": true,
+      "observation_case": "sop",
+      "inspection_level": "NATIVE_1190x1684_ORIGINAL"
+    },
+    {
+      "pdf": "sop-simulated-en.pdf",
+      "pdf_sha256": "8b62dec12b246ccd455f323c7bd98dcca7cdd6cb6213b506d483d84999c0ba9e",
+      "page": 1,
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/browser-execution/rendered/sop-simulated-en-page-01.png",
+      "sha256": "ff76721cca148056558ee2ca5aec2b5306b7f076c8d738112a5fced090d81740",
+      "raster_px": [
+        1190,
+        1684
+      ],
+      "render_json_path": "/reports/31/pages/0",
+      "tool": "view_image",
+      "detail": "original",
+      "tool_returned_image": true,
+      "visually_inspected": true,
+      "observation_case": "sop",
+      "inspection_level": "NATIVE_1190x1684_ORIGINAL"
+    },
+    {
+      "pdf": "streptomycin-api-public-ar.pdf",
+      "pdf_sha256": "4155ddb71381fb921039339f121191aae6f8d3481d84e510d73ed8d70ee64df2",
+      "page": 1,
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/browser-execution/rendered/streptomycin-api-public-ar-page-01.png",
+      "sha256": "54b6ba9e163a19632240402ba9c1ae3970e89f22450ffdb790296d3aaf325de0",
+      "raster_px": [
+        1190,
+        1684
+      ],
+      "render_json_path": "/reports/36/pages/0",
+      "tool": "view_image",
+      "detail": "original",
+      "tool_returned_image": true,
+      "visually_inspected": true,
+      "observation_case": "streptomycin-api",
+      "inspection_level": "NATIVE_1190x1684_ORIGINAL"
+    },
+    {
+      "pdf": "streptomycin-api-public-en.pdf",
+      "pdf_sha256": "0c24eefe83b68dc6f01c85320126572c4c7037d85b599167cfc6a5acb8f783a1",
+      "page": 1,
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/browser-execution/rendered/streptomycin-api-public-en-page-01.png",
+      "sha256": "0118e5bc50ffbd55f00dd47acd6bb84ac057e0442e8f51ea8de2ee1c157ac24c",
+      "raster_px": [
+        1190,
+        1684
+      ],
+      "render_json_path": "/reports/37/pages/0",
+      "tool": "view_image",
+      "detail": "original",
+      "tool_returned_image": true,
+      "visually_inspected": true,
+      "observation_case": "streptomycin-api",
+      "inspection_level": "NATIVE_1190x1684_ORIGINAL"
+    },
+    {
+      "pdf": "streptomycin-api-simulated-ar.pdf",
+      "pdf_sha256": "c8c0f814a574dcda8921c178f96203638297ed12c92c424650d0a8b7dd20c0b0",
+      "page": 1,
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/browser-execution/rendered/streptomycin-api-simulated-ar-page-01.png",
+      "sha256": "f8c3f1d5573c8b02de2fcef8af694d825bb5fec0b4d15eb3b58c732d11c7c719",
+      "raster_px": [
+        1190,
+        1684
+      ],
+      "render_json_path": "/reports/38/pages/0",
+      "tool": "view_image",
+      "detail": "original",
+      "tool_returned_image": true,
+      "visually_inspected": true,
+      "observation_case": "streptomycin-api",
+      "inspection_level": "NATIVE_1190x1684_ORIGINAL"
+    },
+    {
+      "pdf": "streptomycin-api-simulated-en.pdf",
+      "pdf_sha256": "1313961803fc2aa743bfd4622a59bd5e1f93aaa8528ae70c98258513370895a3",
+      "page": 1,
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/browser-execution/rendered/streptomycin-api-simulated-en-page-01.png",
+      "sha256": "59cbba85c4ea5dbbd322cf0228df5b6ad77f587cdcf88c73d03f9614649de33d",
+      "raster_px": [
+        1190,
+        1684
+      ],
+      "render_json_path": "/reports/39/pages/0",
+      "tool": "view_image",
+      "detail": "original",
+      "tool_returned_image": true,
+      "visually_inspected": true,
+      "observation_case": "streptomycin-api",
+      "inspection_level": "NATIVE_1190x1684_ORIGINAL"
+    },
+    {
+      "pdf": "tinplate-public-ar.pdf",
+      "pdf_sha256": "7aa2f02317cc51476c60ef35c2d08fdb5604f1e1c702c8b315b81e148ad57cb2",
+      "page": 1,
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/browser-execution/rendered/tinplate-public-ar-page-01.png",
+      "sha256": "3821043491529ba40247f9a17151162f1fa9d1f09afb89dacc0d27047097a0eb",
+      "raster_px": [
+        1190,
+        1684
+      ],
+      "render_json_path": "/reports/40/pages/0",
+      "tool": "view_image",
+      "detail": "original",
+      "tool_returned_image": true,
+      "visually_inspected": true,
+      "observation_case": "tinplate",
+      "inspection_level": "NATIVE_1190x1684_ORIGINAL"
+    },
+    {
+      "pdf": "tinplate-public-en.pdf",
+      "pdf_sha256": "7c5c57959a9dbd1b739ee8ca8c32a26bcd616a1fb7d6455b3b33a2c4fc3217fd",
+      "page": 1,
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/browser-execution/rendered/tinplate-public-en-page-01.png",
+      "sha256": "01204292bd8982f2e336e43f0d34619261fe51cd1dc9b6d2cb5c6259f304a58c",
+      "raster_px": [
+        1190,
+        1684
+      ],
+      "render_json_path": "/reports/41/pages/0",
+      "tool": "view_image",
+      "detail": "original",
+      "tool_returned_image": true,
+      "visually_inspected": true,
+      "observation_case": "tinplate",
+      "inspection_level": "NATIVE_1190x1684_ORIGINAL"
+    },
+    {
+      "pdf": "tinplate-simulated-ar.pdf",
+      "pdf_sha256": "b1cc8028fe2375c0e9775c66b391e57ae5228d94c794539629f353610c16f3de",
+      "page": 1,
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/browser-execution/rendered/tinplate-simulated-ar-page-01.png",
+      "sha256": "91ee4c20b7d18d51013438f6e5e315242dbfcfdb199f37e1ecd63387f1a24716",
+      "raster_px": [
+        1190,
+        1684
+      ],
+      "render_json_path": "/reports/42/pages/0",
+      "tool": "view_image",
+      "detail": "original",
+      "tool_returned_image": true,
+      "visually_inspected": true,
+      "observation_case": "tinplate",
+      "inspection_level": "NATIVE_1190x1684_ORIGINAL"
+    },
+    {
+      "pdf": "tinplate-simulated-en.pdf",
+      "pdf_sha256": "9693345350e2d97eda6b974c2feedbe5c24a1310db35ca322cbcaf07fb393a24",
+      "page": 1,
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/browser-execution/rendered/tinplate-simulated-en-page-01.png",
+      "sha256": "a38a3dc823a5ef4c0ad53bd0b5743058c4059455981740ebdb137b72d2b717b1",
+      "raster_px": [
+        1190,
+        1684
+      ],
+      "render_json_path": "/reports/43/pages/0",
+      "tool": "view_image",
+      "detail": "original",
+      "tool_returned_image": true,
+      "visually_inspected": true,
+      "observation_case": "tinplate",
+      "inspection_level": "NATIVE_1190x1684_ORIGINAL"
+    }
+  ],
+  "observations": [
+    {
+      "case": "fert-retail-packs",
+      "pdfs": [
+        "fert-retail-packs-public-ar.pdf",
+        "fert-retail-packs-public-en.pdf",
+        "fert-retail-packs-simulated-ar.pdf",
+        "fert-retail-packs-simulated-en.pdf"
+      ],
+      "findings": [],
+      "observations": [
+        "All four summary pages fit within one physical page with legible headings, four metric cards, decision/kill conditions, source IDs and snapshot date; no clipping or collision observed.",
+        "Public EN/AR show INVESTIGATE and explicit unavailable/not-calculable values, without simulation labels.",
+        "Simulated EN/AR show REJECT for heterogeneous residual retail-pack exclusion; numeric demand 1.222905 kt, qualified capacity 0.418 kt, D* 0 and support 0 are readable, with unchanged public INVESTIGATE and both bilingual simulation labels in the body and footer.",
+        "Arabic text is shaped and RTL, while HS H6 / 310510 and evidence IDs remain readable technical runs. No separate public-contradiction group is visible in this assigned case."
+      ]
+    },
+    {
+      "case": "penicillin-api",
+      "pdfs": [
+        "penicillin-api-public-ar.pdf",
+        "penicillin-api-public-en.pdf",
+        "penicillin-api-simulated-ar.pdf",
+        "penicillin-api-simulated-en.pdf"
+      ],
+      "findings": [],
+      "observations": [
+        "Public EN/AR show INVESTIGATE with unavailable demand/capacity and not-calculable distance/support, with no simulation banner or footer.",
+        "Simulated EN/AR visibly distinguish ADVANCE under route 1 administrative/regulatory barrier removal from the unchanged public INVESTIGATE; stated demand 0.171511 kt, qualified capacity 0.059 kt, D* 0 and support 0 are legible.",
+        "Both simulation disclosure languages appear in the highlighted body and page footer; Arabic narrative, HS H6 / 294110, evidence references and full snapshot date remain legible without clipping.",
+        "The long English headline and Arabic/English further-conditions links wrap inside the summary page. Conditions, kill conditions and source/date lines remain separate and complete; no overlap or orphan-only page observed."
+      ]
+    },
+    {
+      "case": "sop",
+      "pdfs": [
+        "sop-public-ar.pdf",
+        "sop-public-en.pdf",
+        "sop-simulated-ar.pdf",
+        "sop-simulated-en.pdf"
+      ],
+      "findings": [],
+      "observations": [
+        "Public EN/AR show INVESTIGATE with explicit unavailable/not-calculable metrics and no simulation labeling.",
+        "Simulated EN/AR show ADVANCE for route 2 information/market linkage, while the distinct unchanged-public block remains INVESTIGATE. Demand 11.230573 kt, qualified capacity 3.841 kt, D* 0 and support 0 are legible.",
+        "Both disclosure languages are visible in the simulation body and footer. HS H6 / 310430, full evidence IDs and snapshot date remain readable; Arabic technical runs do not collide with surrounding prose.",
+        "Headline/conditions links wrap within the single summary page. Metric cards, conditions, evidence ledger and footer remain separate, with no clipped or overlapped content observed."
+      ]
+    },
+    {
+      "case": "streptomycin-api",
+      "pdfs": [
+        "streptomycin-api-public-ar.pdf",
+        "streptomycin-api-public-en.pdf",
+        "streptomycin-api-simulated-ar.pdf",
+        "streptomycin-api-simulated-en.pdf"
+      ],
+      "findings": [],
+      "observations": [
+        "Public EN/AR show INVESTIGATE and explicit unavailable/not-calculable metrics with no simulation labels.",
+        "Simulated EN/AR clearly show REJECT for unsatisfiable environmental hard gate EX-03 before route comparison; unchanged public INVESTIGATE is separate. Demand 0.023889 kt and qualified capacity 0.008 kt are readable; capability distance remains not calculable, distinct from numeric support 0.",
+        "Bilingual simulation body/footer disclosures, HS H6 / 294120, both evidence IDs and full snapshot/date remain contained and readable.",
+        "Both localized headlines and the English hyphenated effluent narrative wrap without clipping. Decision/kill conditions, metrics and footer remain visually separate; no new BIDI interleaving or overlap observed on these first pages."
+      ]
+    },
+    {
+      "case": "tinplate",
+      "pdfs": [
+        "tinplate-public-ar.pdf",
+        "tinplate-public-en.pdf",
+        "tinplate-simulated-ar.pdf",
+        "tinplate-simulated-en.pdf"
+      ],
+      "findings": [],
+      "observations": [
+        "Public EN/AR show INVESTIGATE with unavailable demand/capacity and not-calculable distance/support, without synthetic labels.",
+        "Simulated EN/AR show ADVANCE for targeted greenfield route 7 and retain the unchanged public INVESTIGATE separately. The readable metric cards show demand 95 kt, qualified capacity 0 kt, D* 0.9 and support 137 SAR m.",
+        "Long product/route text and the Arabic further-conditions link wrap within the first page. Headline, conditions, kill conditions, evidence references, snapshot date and both simulation footer labels remain separate and unclipped.",
+        "HS H6 / 721012, P-COMTRADE-721012-M and P-COMTRADE-721012-X remain readable; Arabic text is shaped with coherent RTL flow and no observed technical-ID interleaving."
+      ]
+    }
+  ],
+  "common_observations": [
+    "Every assigned first page visibly contains the summary heading/state, localized narrative and route/context, product/HS identity, four metric cards, lead decision/kill conditions, evidence IDs and snapshot date within one physical page.",
+    "All ten public pages visibly show INVESTIGATE with unavailable demand/capacity and not-calculable D*/support, without synthetic labels.",
+    "All ten simulated pages visibly retain the unchanged public INVESTIGATE block and both Arabic/English simulation labels in the highlighted body and footer.",
+    "Arabic shaping/RTL prose and Latin identifiers/numeric technical runs are readable. No replacement boxes, clipped text, metric/condition overlap or footer collision observed.",
+    "Long headlines, product names and continuation links wrap within the summary. No visible font-readability concern found; this is a visual observation, not a new font-size measurement.",
+    "All ten sealed case/mode dossier JSONs have an empty public contradiction array. The absence of a separate contradiction group in these twenty summaries is consistent with those source records; the steel two-role summary case is outside this assignment."
+  ],
+  "source_dossier_crosschecks": [
+    {
+      "case": "fert-retail-packs",
+      "mode": "public",
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/browser-execution/functional/pdf/fert-retail-packs-public-dossier.json",
+      "sha256": "30c884f62427cce312a929f520b5db39f4da89e7a17725a28befc8795aba70aa",
+      "decision_state": "INVESTIGATE",
+      "public_state": "INVESTIGATE",
+      "public_contradictions": [],
+      "fields": {
+        "d_star": {
+          "value": null,
+          "availability": "NOT_CALCULABLE",
+          "unit": "ratio"
+        },
+        "target_spec_demand_kt": {
+          "value": null,
+          "availability": "UNAVAILABLE",
+          "unit": "kt"
+        },
+        "minimum_effective_support_m": {
+          "value": null,
+          "availability": "NOT_CALCULABLE",
+          "unit": "SAR m"
+        },
+        "effective_qualified_capacity_kt": {
+          "value": null,
+          "availability": "UNAVAILABLE",
+          "unit": "kt"
+        }
+      }
+    },
+    {
+      "case": "fert-retail-packs",
+      "mode": "simulated",
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/browser-execution/functional/pdf/fert-retail-packs-simulated-dossier.json",
+      "sha256": "807aaf88b474ce3a8cc009b582163c4d85fb067af5758476d6d1ef51a07e4ca3",
+      "decision_state": "REJECT",
+      "public_state": "INVESTIGATE",
+      "public_contradictions": [],
+      "fields": {
+        "d_star": {
+          "value": 0,
+          "availability": "AVAILABLE",
+          "unit": "ratio"
+        },
+        "target_spec_demand_kt": {
+          "value": 1.222905,
+          "availability": "AVAILABLE",
+          "unit": "kt"
+        },
+        "minimum_effective_support_m": {
+          "value": 0,
+          "availability": "AVAILABLE",
+          "unit": "SAR m"
+        },
+        "effective_qualified_capacity_kt": {
+          "value": 0.418,
+          "availability": "AVAILABLE",
+          "unit": "kt"
+        }
+      }
+    },
+    {
+      "case": "penicillin-api",
+      "mode": "public",
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/browser-execution/functional/pdf/penicillin-api-public-dossier.json",
+      "sha256": "b5900c6b1fba1748094dbb2bd7bdfb472c3d21962ed7fb0e47f1c862638f5220",
+      "decision_state": "INVESTIGATE",
+      "public_state": "INVESTIGATE",
+      "public_contradictions": [],
+      "fields": {
+        "d_star": {
+          "value": null,
+          "availability": "NOT_CALCULABLE",
+          "unit": "ratio"
+        },
+        "target_spec_demand_kt": {
+          "value": null,
+          "availability": "UNAVAILABLE",
+          "unit": "kt"
+        },
+        "minimum_effective_support_m": {
+          "value": null,
+          "availability": "NOT_CALCULABLE",
+          "unit": "SAR m"
+        },
+        "effective_qualified_capacity_kt": {
+          "value": null,
+          "availability": "UNAVAILABLE",
+          "unit": "kt"
+        }
+      }
+    },
+    {
+      "case": "penicillin-api",
+      "mode": "simulated",
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/browser-execution/functional/pdf/penicillin-api-simulated-dossier.json",
+      "sha256": "97269d850cf99a4f136863ead1a2dd6d18d3c583ece3444697aee3f74322936b",
+      "decision_state": "ADVANCE",
+      "public_state": "INVESTIGATE",
+      "public_contradictions": [],
+      "fields": {
+        "d_star": {
+          "value": 0,
+          "availability": "AVAILABLE",
+          "unit": "ratio"
+        },
+        "target_spec_demand_kt": {
+          "value": 0.171511,
+          "availability": "AVAILABLE",
+          "unit": "kt"
+        },
+        "minimum_effective_support_m": {
+          "value": 0,
+          "availability": "AVAILABLE",
+          "unit": "SAR m"
+        },
+        "effective_qualified_capacity_kt": {
+          "value": 0.059,
+          "availability": "AVAILABLE",
+          "unit": "kt"
+        }
+      }
+    },
+    {
+      "case": "sop",
+      "mode": "public",
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/browser-execution/functional/pdf/sop-public-dossier.json",
+      "sha256": "395f5bf029a3b1e5840c6d516299d2cbdd9f79e16b6bf7b0bf7693aece315ed6",
+      "decision_state": "INVESTIGATE",
+      "public_state": "INVESTIGATE",
+      "public_contradictions": [],
+      "fields": {
+        "d_star": {
+          "value": null,
+          "availability": "NOT_CALCULABLE",
+          "unit": "ratio"
+        },
+        "target_spec_demand_kt": {
+          "value": null,
+          "availability": "UNAVAILABLE",
+          "unit": "kt"
+        },
+        "minimum_effective_support_m": {
+          "value": null,
+          "availability": "NOT_CALCULABLE",
+          "unit": "SAR m"
+        },
+        "effective_qualified_capacity_kt": {
+          "value": null,
+          "availability": "UNAVAILABLE",
+          "unit": "kt"
+        }
+      }
+    },
+    {
+      "case": "sop",
+      "mode": "simulated",
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/browser-execution/functional/pdf/sop-simulated-dossier.json",
+      "sha256": "2e50771cac4febb1db368f97e91b17ddaed8e3e918767e61011813ab477b6fa9",
+      "decision_state": "ADVANCE",
+      "public_state": "INVESTIGATE",
+      "public_contradictions": [],
+      "fields": {
+        "d_star": {
+          "value": 0,
+          "availability": "AVAILABLE",
+          "unit": "ratio"
+        },
+        "target_spec_demand_kt": {
+          "value": 11.230573,
+          "availability": "AVAILABLE",
+          "unit": "kt"
+        },
+        "minimum_effective_support_m": {
+          "value": 0,
+          "availability": "AVAILABLE",
+          "unit": "SAR m"
+        },
+        "effective_qualified_capacity_kt": {
+          "value": 3.841,
+          "availability": "AVAILABLE",
+          "unit": "kt"
+        }
+      }
+    },
+    {
+      "case": "streptomycin-api",
+      "mode": "public",
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/browser-execution/functional/pdf/streptomycin-api-public-dossier.json",
+      "sha256": "a695f6fe9a4a3fba3afe03ada8a2f5a3600b9063fdeb6fa5d2eb5e7eff20cd89",
+      "decision_state": "INVESTIGATE",
+      "public_state": "INVESTIGATE",
+      "public_contradictions": [],
+      "fields": {
+        "d_star": {
+          "value": null,
+          "availability": "NOT_CALCULABLE",
+          "unit": "ratio"
+        },
+        "target_spec_demand_kt": {
+          "value": null,
+          "availability": "UNAVAILABLE",
+          "unit": "kt"
+        },
+        "minimum_effective_support_m": {
+          "value": null,
+          "availability": "NOT_CALCULABLE",
+          "unit": "SAR m"
+        },
+        "effective_qualified_capacity_kt": {
+          "value": null,
+          "availability": "UNAVAILABLE",
+          "unit": "kt"
+        }
+      }
+    },
+    {
+      "case": "streptomycin-api",
+      "mode": "simulated",
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/browser-execution/functional/pdf/streptomycin-api-simulated-dossier.json",
+      "sha256": "3c9a871cc9ec22b0c5f6f553e1faa3b8947f37d48f0150062ef45e90211afc7e",
+      "decision_state": "REJECT",
+      "public_state": "INVESTIGATE",
+      "public_contradictions": [],
+      "fields": {
+        "d_star": {
+          "value": null,
+          "availability": "NOT_CALCULABLE",
+          "unit": "ratio"
+        },
+        "target_spec_demand_kt": {
+          "value": 0.023889,
+          "availability": "AVAILABLE",
+          "unit": "kt"
+        },
+        "minimum_effective_support_m": {
+          "value": 0,
+          "availability": "AVAILABLE",
+          "unit": "SAR m"
+        },
+        "effective_qualified_capacity_kt": {
+          "value": 0.008,
+          "availability": "AVAILABLE",
+          "unit": "kt"
+        }
+      }
+    },
+    {
+      "case": "tinplate",
+      "mode": "public",
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/browser-execution/functional/pdf/tinplate-public-dossier.json",
+      "sha256": "1c0568bbcd7766a25cd0d31b51ae00a737a2c1313f442cab5a46767611518ee3",
+      "decision_state": "INVESTIGATE",
+      "public_state": "INVESTIGATE",
+      "public_contradictions": [],
+      "fields": {
+        "d_star": {
+          "value": null,
+          "availability": "NOT_CALCULABLE",
+          "unit": "ratio"
+        },
+        "target_spec_demand_kt": {
+          "value": null,
+          "availability": "UNAVAILABLE",
+          "unit": "kt"
+        },
+        "minimum_effective_support_m": {
+          "value": null,
+          "availability": "NOT_CALCULABLE",
+          "unit": "SAR m"
+        },
+        "effective_qualified_capacity_kt": {
+          "value": null,
+          "availability": "UNAVAILABLE",
+          "unit": "kt"
+        }
+      }
+    },
+    {
+      "case": "tinplate",
+      "mode": "simulated",
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/browser-execution/functional/pdf/tinplate-simulated-dossier.json",
+      "sha256": "d6d53a4385478bd1df506a1765c8e06776b8bed20182c8e5f7565d8f5a89f735",
+      "decision_state": "ADVANCE",
+      "public_state": "INVESTIGATE",
+      "public_contradictions": [],
+      "fields": {
+        "d_star": {
+          "value": 0.9,
+          "availability": "AVAILABLE",
+          "unit": "ratio"
+        },
+        "target_spec_demand_kt": {
+          "value": 95,
+          "availability": "AVAILABLE",
+          "unit": "kt"
+        },
+        "minimum_effective_support_m": {
+          "value": 137,
+          "availability": "AVAILABLE",
+          "unit": "SAR m"
+        },
+        "effective_qualified_capacity_kt": {
+          "value": 0,
+          "availability": "AVAILABLE",
+          "unit": "kt"
+        }
+      }
+    }
+  ],
+  "executed_readonly_checks": {
+    "fresh_firstpage_pngs_rehashed_after_views": 20,
+    "dossier_jsons_checked_against_seal": 10,
+    "strict_issues": [],
+    "report_pdf_hashes_match_seal": 20,
+    "cohort_status": "COMPLETE_IMMUTABLE44_COHORT_FULLFUNCTIONAL_EXIT0_COLLECTED",
+    "source_ledger_sha256": "c104d456735172817dc356fe17c349c46250de2dc98dd0195952e4f5565d7dc0",
+    "pytest": "839 passed, 4 deselected in 2227.94s",
+    "pre_view_receipt_hashes_verified": 4,
+    "pre_view_firstpage_png_hashes_verified": 20,
+    "post_view_firstpage_png_hashes_verified": 20,
+    "product_tests_run_by_this_reviewer": 0,
+    "renderer_or_browser_runs_by_this_reviewer": 0
+  },
+  "findings": [],
+  "unresolved_anomalies": [],
+  "appendix_attribution": {
+    "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/browser-execution/manual/APPENDIX-REUSE.json",
+    "sha256": "395dcb90f0cda9dc3e9d55ec999bd22d45ebfdf378a687cbba321ee27fc776d9",
+    "scope": "Root reports all1914 same-report/page appendix PNGs exact against retained observations, with6119 files rehashed. This record binds that receipt only; it does not duplicate the appendix work or claim fresh appendix views."
+  },
+  "sanad": {
+    "direct": "Twenty named view_image(original) returns were actually inspected in five four-page batches. Every image hash matched renderer metadata before and after viewing; ten source dossier JSON hashes matched the sealed cohort. Functional exit0 and839pass stdout and strict44/1958/issues[] were directly read.",
+    "attributed": "Functional/raster/strict executions and appendix reuse belong to their existing coordinator receipts; their execution was not repeated here.",
+    "assumptions": "The reviewed sealed outputs remain immutable. Visual conclusions are limited to these exact twenty first-page images.",
+    "limitations": "No whole-dossier, other24firstpage, new appendix, complete engine-calculation or later canonical/candidate/CI/delivery/Aura acceptance is asserted. Pixel-level layout inspection complements the existing automated text/content/geometry checks."
+  },
+  "muhasabah": {
+    "status": "PASS_FOR_SCOPED_SUPPORTING_OBSERVATIONS",
+    "audit": "All assigned20 pages actually viewed at original resolution and source-bound; no generated-equals-viewed substitution, hidden finding, firstpage reuse or independent approval claim. Only DOMAIN-FIRSTPAGES.json written; no source/index/Git/browser/raster/service/Aura changes."
+  }
+}
+

@@ -1,0 +1,91 @@
+{
+  "verdict": "APPROVE",
+  "scope": "Sealed finite repair plan and exact CSS patch only; no implementation/output/capture approval",
+  "references": [
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nonrule-caption-correction-r1/PROPOSAL.md",
+      "sha256": "bce2ccb868605463a8eae9796123111da3a62b8f20c93f4894be60344a14e64a"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nonrule-caption-correction-r1/PROPOSED-CSS.patch",
+      "sha256": "e0bbe60c7d7d9aa049b7aa18b2c898758e14daaebbf12f037ee25ab824bb3c10"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nonrule-caption-correction-r1/DIAGNOSIS.json",
+      "sha256": "95c154608bc1da03cee3d0acdf7158cd8f2b7c6c74ab75cfb52f086ba6ed62c9"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nonrule-caption-correction-r1/CAPABILITY-HTML.txt",
+      "sha256": "37f16039522e2b6357b6ab1229b8c6010ee0345732f36bce46fa995ccbda273f"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nonrule-caption-correction-r1/preimages/src/ior_mvp/static/css/dossier.css",
+      "sha256": "440b06e0a743deb8d44645fef6e4916b27a003946b926c69e4485b398d74b6ea"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nonrule-caption-correction-r1/preimages/browser_tests/test_dossier.py",
+      "sha256": "4f7118b28616fd0e4dba18b26ce5136c905f49995db8d61c5695e482ee5d79c0"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-record-correction-r1/accepted-first-scalar-r1/SOURCE.json",
+      "sha256": "ba5bec02c6912ad4e2dcafcba18f6746852bdbd66687fd784b6af86b380f2bdc"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-record-correction-r1/accepted-first-scalar-r1/source/src/ior_mvp/dossier.py",
+      "sha256": "0e74a4f07b72e520fccdb487d87a1abba8b3f05ff07414a6693d4d8ba717acaa"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-record-correction-r1/check_pdf_matrix.py",
+      "sha256": "bfa13f1ac4d8056f56a15a78ecf3f3e330f0c6abbcacefa96c4b352ed59e55bd"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/reviews/s19-final-steel-pp-first-visual-r3/REVIEW.md",
+      "sha256": "d31ac826faf41137a85ee29ad01641a94d4e2b49d49d0be2e86e55fc5d77b053"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/reviews/s19-final-steel-pp-first-visual-r3/VIEWED-EVIDENCE.json",
+      "sha256": "ba22e699e389eddbd8645d2d940c143bddc4c2b2dee9fc0811bbff724e58c67e"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/final-pdf-review-r3/REVIEW.md",
+      "sha256": "bbb88b71d675a5eae6b38bba3c8a91e2483cddc487152d0ac14cfebcfa846169"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/reviews/s19-final-aluminium-visual-r3/REVIEW.json",
+      "sha256": "f95320e6734512d9f09eff6b0b56dc543b6fa3ddbd176577f18237839df4e2c6"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/planning/s19/S19-IMPLEMENTATION-PLAN.md",
+      "sha256": "7749006ae850adf66fea862934c8362d9ea5c9254aaf74ded702504e69ce44d1"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/owner-decisions/20260925-s19-delivery-then-stop-1.json",
+      "sha256": "5862e42f9c560f5b4c5d4c709881b1e7a3b9dcac6a1ebde9e6e52f0f62741eb6"
+    }
+  ],
+  "independent_checks": {
+    "two_source_preimages_equal_frozen_and_live": true,
+    "exact_patch_postimage_rederived_in_memory": "d36215e0fd410b27640e38e79dea8f34ad8d4ee4a7435c6adccedfb600295985",
+    "first_scalar_and_other_css_preserved": true,
+    "actual_source_value": "blocks.capability.records.profile_hard_gates.named_molecule_and_synthesis_route = RESOLVED",
+    "actual_dom_first_key": "named_molecule_and_synthesis_route; serialized JSON sorts keys and is not a first-field oracle",
+    "direct_native_failure": "Streptomycin simulated AR13/14 already independently viewed and bound in own r3 VIEWED-EVIDENCE",
+    "prior_checker_reviewed": "Existing PDFium complete-window character multiplicity and ordered source occurrence predicates are retained byte-for-byte outside one finite conditional insertion."
+  },
+  "requirements": [
+    "Only dossier.css and existing named print-test body; no new browser inventory/function/helper/dependency.",
+    "Exact capability caption, adjacent record and first child only; preserve first-scalar rules and long-record flow.",
+    "Unique complete capability heading excluding contents; first following complete route0 boundary; unique caption, hard-gate group, exact field/value windows ordered and nonoverlapping on one page; absent/ambiguous fails.",
+    "Retained actual r3 PDF must fail the same assertion; old browser PASS remains a documented coverage gap, not a false CSS RED claim.",
+    "Existing all44 print selection first; unchanged strict/raster and independent changed-page manual coverage before long fullfunctional release.",
+    "API44JSON/22public decisions exact;44HTML sole complete CSS substitution;230inputs/sixoutputs/44indexes/canonical preimages preserved.",
+    "Required final fullfunctional/render/canonical/exact-candidate/CI gates remain; S19-only then STOP."
+  ],
+  "assumptions_and_risks": [
+    "Outer missing keep chain is a supported hypothesis, not proven repaired behavior.",
+    "Capability selector applies across reports; all44 print matrix can reveal repagination effects.",
+    "PDFium Arabic multiplicity establishes exact complete-window character content, not reading order; native inspection remains required."
+  ],
+  "sanad": "Direct plan/patch/source/HTML/JSON/checker reads and independently observed bad native pair; three completed review batches bound without borrowing unseen visual coverage.",
+  "muhasabah": "PASS for plan verdict only; prior failures retained, no source/checker/index/service changes or future PASS claim."
+}

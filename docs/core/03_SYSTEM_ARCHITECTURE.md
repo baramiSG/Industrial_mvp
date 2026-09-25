@@ -159,14 +159,20 @@ Responsibilities:
 
 ### 4.8 Dossier service
 
-Module: `dossier.py`
+Modules: `dossier.py`, `dossier_projection.py`, `dossier_validation.py`
 
 Responsibilities:
 
-- build the structured Decision Dossier;
-- produce printable HTML;
-- disclose synthetic evidence in simulated mode;
-- preserve snapshot and integrity metadata.
+- project the accepted analysis into the detached DecisionDossier `2.0.0` contract in Core04§9, retaining legacy fields and adding the complete public decision, structured blocks and supporting evidence pack;
+- render bilingual printable HTML in `dossier.py`; rendering does not fetch evidence or calculate decisions;
+- load governed scenario context only for simulated exports, validate its exact opportunity/scenario/version and Class-D disclosure identity, then project the finite whitelist;
+- retain public observations separately from simulated inputs, all nine evaluated route rows in engine order, contradictions, conditions, kill conditions and exact local passport references;
+- represent unavailable and NOT_CALCULABLE fields explicitly without substituting zero or inventing a source path;
+- preserve snapshot and integrity metadata, S15 selection metadata only where applicable, and both policy labels in simulated output.
+
+The existing JSON and HTML routes share typed export validation: malformed required export context raises `DossierIntegrityError`, mapped to HTTP422 `DOSSIER_INTEGRITY_ERROR`; it never yields a partial successful dossier. Unknown opportunities and invalid query parameters retain their existing contracts. `dossier-actions.js` provides native Print / Save PDF; the screen toolbar also offers JSON and a validated return link preserving opportunity, mode and locale. There is no server-side PDF endpoint, browser runtime dependency in the API, or graph-service requirement for resolving the embedded evidence pack.
+
+The S19 shared `renderers/trade.js` keeps existing value/quantity curves and their independent scales. A visible bilingual note explains that line heights cannot be compared across units; a closed native details/table exposes the actual public year/value/quantity observations in both Analyst modes and Executive Signal. Zero remains zero; unavailable cells are labelled. No interpolation, recalculation, input mutation or synthetic trade series is introduced. Native keyboard controls and `.trade-chart`-scoped styles serve this existing component.
 
 ### 4.9 GenUI manifest service
 

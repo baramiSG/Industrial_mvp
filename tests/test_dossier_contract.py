@@ -270,7 +270,7 @@ def test_public_dossier_v11_projects_only_public_contradictions() -> None:
         analyze("SAU-H0-390210", "public")
     )
 
-    assert steel["dossier_version"] == "1.2"
+    assert steel["dossier_version"] == "2.0.0"
     assert steel["contradiction_register"] == {
         "public": [
             {
@@ -580,3 +580,40 @@ def test_public_dossier_escapes_every_structured_narrative_segment() -> None:
         "&lt;script data-probe=&quot;narrative&quot;&gt;"
         in rendered
     )
+
+@pytest.mark.parametrize('locale', ['en', 'ar'])
+def test_simulated_page_margin_css_decodes_to_exact_policy_pair(locale):
+    from ior_mvp.evidence import synthetic_display_labels
+    labels = synthetic_display_labels()
+    rendered = render_dossier_html(build_dossier(analyze('SAU-H0-721049', 'simulated')), locale)
+    style = rendered.split('<style>', 1)[1].split('</style>', 1)[0]
+    values = re.findall(r'@bottom-center\s*\{\s*content:\s*("(?:\\[0-9a-f]+ )*")', style)
+    assert len(values) == 1
+    decoded = ''.join(chr(int(value, 16)) for value in re.findall(r'\\([0-9a-f]+) ', values[0]))
+    assert decoded == labels['ar'] + '\n' + labels['en']
+    assert not re.search(r'(?<![-\w])position\s*:\s*fixed', style)
+    assert '--size-dossier-footer-top' not in style
+    assert 'class="print-disclosure"' not in rendered
+    for label in labels.values():
+        assert label in rendered
+    public = render_dossier_html(build_dossier(analyze('SAU-H0-721049', 'public')), locale)
+    public_style = public.split('<style>', 1)[1].split('</style>', 1)[0]
+    assert not re.findall(r'@bottom-center\s*\{\s*content:\s*"', public_style)
+    for label in labels.values():
+        assert label not in public
+
+@pytest.mark.parametrize('value', ['"\\\n\r\f\t</style><script>probe()</script>/*@import url(x);', 'محاكاة — ليست بيانات', '\U0001f642'])
+def test_print_css_string_cannot_terminate_style_or_change_value(value):
+    from html.parser import HTMLParser
+    import ior_mvp.dossier as dossier
+    encoded = dossier._css_string(value)
+    assert re.fullmatch(r'"(?:\\[0-9a-f]+ )*"', encoded)
+    assert ''.join(chr(int(code, 16)) for code in re.findall(r'\\([0-9a-f]+) ', encoded)) == value
+    class Tags(HTMLParser):
+        def __init__(self):
+            super().__init__(); self.tags = []
+        def handle_starttag(self, tag, attrs):
+            self.tags.append(tag)
+    parser = Tags()
+    parser.feed('<style>@page{@bottom-center{content:' + encoded + ';}}</style>')
+    assert parser.tags == ['style']

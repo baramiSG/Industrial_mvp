@@ -1,0 +1,614 @@
+{
+  "schema_version": 1,
+  "at_utc": "2026-09-25T03:00:48.811617+00:00",
+  "status": "EXECUTED_VERIFIED_PENDING_INDEPENDENT_RESULT_REVIEW",
+  "author": "/root/s19_product_implementer",
+  "scope": "Exactly accepted six-output stock graph/manifest operation once, five immediate gates, and actual persisted88 API comparison. No product/test/docs edits beyond approved generated authority table and hashes.",
+  "acceptance_sha256": "54185c7853a6b012b30434acd3695501fba28c4a0a1b11b367f247763cfbf020",
+  "postcheck_literal_correction_acceptance_sha256": "4717f54f2cbdbeada33249da290ba72f61d8c1cdbaec3f7adee2bc17cb2a2c07",
+  "postcheck_literal_review_sha256": "405bf97d1fd3c91c6f429da528c841e3fcde4b4c0f1d5d9463a012f238b7e7e2",
+  "preflight_sha256": "a275d7ad6904f60e0ac9e31d9f15fe109749e22d3a65e17a6c943787a2b0ac07",
+  "postcheck_sha256": "1d714896c13208916c51d53fc4f6adf6c41d19ce388a12df510cc33158c84df0",
+  "api_comparison_sha256": "70ac057c665759727d87d74d33ddccb46fff9f32bf52819a08d615fdfe8342f0",
+  "generators_executed_once_each": true,
+  "immediate_gates_exit_codes": [
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "projection_id": "GRAPH-SAU-2026-09-12-ccd1a2abd05c",
+  "engine_run_id": "ENGINE-5e01ef7c4b9d",
+  "canonical_sha256": "066b366033cc70e00480668355ceccf19f71813cae8969067aff1743e85d7a88",
+  "nodes": 925,
+  "edges": 1045,
+  "inputs": 230,
+  "source_files_before": 1757,
+  "source_files_after": 1759,
+  "unchanged_existing_source_files": 1753,
+  "changed_existing": [
+    "data/graph/current.json",
+    "data/manifests/snapshot_manifest.json",
+    "docs/authority/00_AUTHORITY_MANIFEST.md",
+    "docs/authority/authority_hashes.json"
+  ],
+  "added": [
+    "data/graph/projections/GRAPH-SAU-2026-09-12-ccd1a2abd05c/manifest.json",
+    "data/graph/projections/GRAPH-SAU-2026-09-12-ccd1a2abd05c/projection.json"
+  ],
+  "protected_indexes_unchanged": 44,
+  "snapshot_inventory_before": 726,
+  "snapshot_inventory_after": 728,
+  "authority_inventory": 20,
+  "actual_api_responses": 88,
+  "actual_api_all200": true,
+  "all88_successor_bodies_exact": true,
+  "pre_generation_comparison_counts": {
+    "analysis.json": {
+      "total": 22,
+      "pre_generation_byte_equal": 20
+    },
+    "dossier.json": {
+      "total": 22,
+      "pre_generation_byte_equal": 20
+    },
+    ".html": {
+      "total": 44,
+      "pre_generation_byte_equal": 44
+    }
+  },
+  "complete22_real_public_decisions_equal": true,
+  "source_after_api_unchanged": true,
+  "failed_check": "EXECUTION-POSTCHECK-ATTEMPT1.json remains failed: three mistaken expected Core filenames; corrected only under independent concurrence and delegated acceptance. No generator/gate retry.",
+  "warnings": "Reconstruction exit0 retains rotated-text/CMap/HTTP-header source-PDF parser warnings in05-reconstruction.stderr. Actual API capture exit0 retains inherited Starlette/httpx deprecation warning. Neither warning stream is omitted or relabelled.",
+  "api_command": [
+    ".venv/bin/python",
+    "-B",
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-generation-r1/ACTUAL-API-COMPARISON.py"
+  ],
+  "api_cwd": "/home/barami/projects/ior-worktrees/s19",
+  "api_environment_delta": {
+    "PYTHONPATH": "src",
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "api_exit_code": 0,
+  "files": {
+    "ACTUAL-API-COMPARISON.json": {
+      "sha256": "70ac057c665759727d87d74d33ddccb46fff9f32bf52819a08d615fdfe8342f0",
+      "bytes": 39056
+    },
+    "ACTUAL-API-COMPARISON.py": {
+      "sha256": "cc8e00f62d35bb3d27eb61a20a06783be5c87c6243c841364b7bf33417e7206c",
+      "bytes": 5884
+    },
+    "ACTUAL-API-COMPARISON.stderr": {
+      "sha256": "a1b252d60289dbe6a8b47883ef7d24012efed3b81f085eea726b3a8902c1afa5",
+      "bytes": 280
+    },
+    "ACTUAL-API-COMPARISON.stdout": {
+      "sha256": "1db6e26b4b90f33ef8184fdd947720b6ccaf0c3be7c9383cbe2b901850f52d44",
+      "bytes": 404
+    },
+    "EXECUTION-POSTCHECK-ATTEMPT1.json": {
+      "sha256": "0c6d62288d4322857a6b0162e3a16b994929dd44e9bba5163e88b9cab60704e6",
+      "bytes": 2305
+    },
+    "EXECUTION-POSTCHECK.json": {
+      "sha256": "1d714896c13208916c51d53fc4f6adf6c41d19ce388a12df510cc33158c84df0",
+      "bytes": 341862
+    },
+    "EXECUTION-PREFLIGHT.json": {
+      "sha256": "a275d7ad6904f60e0ac9e31d9f15fe109749e22d3a65e17a6c943787a2b0ac07",
+      "bytes": 340003
+    },
+    "GENERATED-POSTIMAGES.json": {
+      "sha256": "5d21c815f2a3c4a5d487cc99c4cb4fb0bc0165b9113914282ae0f1ed105ff8ee",
+      "bytes": 1177
+    },
+    "INDEX-PRESERVATION-BINDING.json": {
+      "sha256": "5825d6206fedb985e4846b9101c83ec54d1fc5a1c6b3d1a96040f8794e3780ef",
+      "bytes": 15789
+    },
+    "INDEX-PRESERVATION-SHA256SUMS": {
+      "sha256": "22aca1ffab20304d4aeb2580043b1668a48e5c02d8263f4b6da32069ff64525b",
+      "bytes": 98
+    },
+    "OPERATION-PROPOSAL.json": {
+      "sha256": "65ccd005f75938a5eca25c761260154a03f80cdc340b44424715b78ab312d938",
+      "bytes": 10539
+    },
+    "PROPOSAL-SHA256SUMS": {
+      "sha256": "367edce661a0cff643960b1ef5938cf739139bd3fb90512abb59ce51bc531797",
+      "bytes": 533
+    },
+    "actual-api-outputs/SAU-H0-390210-public-analysis.json": {
+      "sha256": "9006c3fc5b6eb7dea4ca569acec9bb5a96e23c4cbec70f2d68eb8bc1153bce83",
+      "bytes": 112256
+    },
+    "actual-api-outputs/SAU-H0-390210-public-ar.html": {
+      "sha256": "709e997d0b01f6de98c9e2a4b013d604dbaa10b2f0cd17a15622d5072740c539",
+      "bytes": 114273
+    },
+    "actual-api-outputs/SAU-H0-390210-public-dossier.json": {
+      "sha256": "251ed556ecf80258b37a6869b6813a33096a5f3681ccaf95ed60f2b56542ea4f",
+      "bytes": 163498
+    },
+    "actual-api-outputs/SAU-H0-390210-public-en.html": {
+      "sha256": "fdd3ff5ea26f3ebf21a22bf238406566455693a35c41ab8af58915568e9fba3e",
+      "bytes": 99319
+    },
+    "actual-api-outputs/SAU-H0-390210-simulated-analysis.json": {
+      "sha256": "f4d721a93596d4b93f77548f95fd4fd4e3cd78bc37e68975a97701387d3ce2ed",
+      "bytes": 153985
+    },
+    "actual-api-outputs/SAU-H0-390210-simulated-ar.html": {
+      "sha256": "85d2f40f371ffe5b14ce6dbb01ef5a6d4cf49613e85f2f247e0f9efe002353bd",
+      "bytes": 189662
+    },
+    "actual-api-outputs/SAU-H0-390210-simulated-dossier.json": {
+      "sha256": "a5ebd1ddb7ade74b8bfbfb144dc1b22b605b201fca3ec3a9a79704d3711eef5a",
+      "bytes": 218851
+    },
+    "actual-api-outputs/SAU-H0-390210-simulated-en.html": {
+      "sha256": "f2ff89924299a051529669fea5d9719ede3a4716b441804081a87960ee0f2ad6",
+      "bytes": 165229
+    },
+    "actual-api-outputs/SAU-H0-721049-public-analysis.json": {
+      "sha256": "6cb6679ced68593142de582a23853bca23523c66efc31274d44b4cf8240633b4",
+      "bytes": 112186
+    },
+    "actual-api-outputs/SAU-H0-721049-public-ar.html": {
+      "sha256": "dfcaecdb04d147664b6c6252f837a7a0471237cc6069055c7fcdac31b90e0fe1",
+      "bytes": 117346
+    },
+    "actual-api-outputs/SAU-H0-721049-public-dossier.json": {
+      "sha256": "69efe2a68ca50e17f2fd484fe5a6bc808fc570e7d809884914146931efa4b21d",
+      "bytes": 161846
+    },
+    "actual-api-outputs/SAU-H0-721049-public-en.html": {
+      "sha256": "e74e9fe7297e0d0937e40bf1f7b6d08d97373a41d5610755369557a95c1464a7",
+      "bytes": 102086
+    },
+    "actual-api-outputs/SAU-H0-721049-simulated-analysis.json": {
+      "sha256": "cf1e94af58e321f3000750702240a5674d31f669894d4ba1685944692a16d595",
+      "bytes": 153996
+    },
+    "actual-api-outputs/SAU-H0-721049-simulated-ar.html": {
+      "sha256": "8a8a37e67e636a0f7549c8883b0644d66e41163fc35ebde588d1ab8332dbc016",
+      "bytes": 202700
+    },
+    "actual-api-outputs/SAU-H0-721049-simulated-dossier.json": {
+      "sha256": "e618faa9151bb74cbd3469c4b1e084e116ae57fa725776947ec1ae9d2292ac48",
+      "bytes": 221241
+    },
+    "actual-api-outputs/SAU-H0-721049-simulated-en.html": {
+      "sha256": "dcd9ae72fcabc5054568c382b381146cd36c19a655cd03e55cbe67cc4f02028b",
+      "bytes": 177132
+    },
+    "actual-api-outputs/SAU-H6-294110-public-analysis.json": {
+      "sha256": "2a987d59b408d29b7de05a73574a7a74c82ef1d1de467214c73c388e7614b34c",
+      "bytes": 106164
+    },
+    "actual-api-outputs/SAU-H6-294110-public-ar.html": {
+      "sha256": "f5a265135f35bd8e25b66f7d8d64e77c0d074fd1207621a2024a923085af6f93",
+      "bytes": 114657
+    },
+    "actual-api-outputs/SAU-H6-294110-public-dossier.json": {
+      "sha256": "b7c5db6dff79c18986b6a8ea5a215108eb698b9022d5f44af63801d1aa539689",
+      "bytes": 154020
+    },
+    "actual-api-outputs/SAU-H6-294110-public-en.html": {
+      "sha256": "b75059eec02d8db0954445e73d38368f7cc4c000a6eae5a24aa462148349aef4",
+      "bytes": 99836
+    },
+    "actual-api-outputs/SAU-H6-294110-simulated-analysis.json": {
+      "sha256": "876de3e3561c057275b8853c33ff059a241931a403acbe1e3b2971cb0919c395",
+      "bytes": 153264
+    },
+    "actual-api-outputs/SAU-H6-294110-simulated-ar.html": {
+      "sha256": "278e0c453cc8430bb05e2d2777e14a7dbc7e44fc18922c4536722f552b446c9c",
+      "bytes": 195957
+    },
+    "actual-api-outputs/SAU-H6-294110-simulated-dossier.json": {
+      "sha256": "376a3787adc0b088a2c7e77e1b3e3ff3689b6c9b7e3d1f9dfe0ffa667f10086b",
+      "bytes": 219340
+    },
+    "actual-api-outputs/SAU-H6-294110-simulated-en.html": {
+      "sha256": "8f84cb9abf1232253bfa71575068dbdaabb62baa3e6be460311986e1df985e4c",
+      "bytes": 171189
+    },
+    "actual-api-outputs/SAU-H6-294120-public-analysis.json": {
+      "sha256": "71154d8225c6ff97432dfa0f0ace4f09e8d99f9995fe5660d920e55fec705a45",
+      "bytes": 106339
+    },
+    "actual-api-outputs/SAU-H6-294120-public-ar.html": {
+      "sha256": "04d4351511c1b05be7348136ec1bef522e59d0e5b1cd89eb60a6715f70f7ce98",
+      "bytes": 114267
+    },
+    "actual-api-outputs/SAU-H6-294120-public-dossier.json": {
+      "sha256": "412a2b7c04cc14a5e12dcb9505adb95789e4bc68573334bb4fd46c15c0bbc992",
+      "bytes": 154090
+    },
+    "actual-api-outputs/SAU-H6-294120-public-en.html": {
+      "sha256": "1331e2fd5408bb4faab1fe23f2430dc5474de431f14799047f39726431f3d564",
+      "bytes": 99325
+    },
+    "actual-api-outputs/SAU-H6-294120-simulated-analysis.json": {
+      "sha256": "8d5028beac3a97adb017188de4d10ef73fcff0a47cf16f135f1937ca5b26a6f7",
+      "bytes": 154903
+    },
+    "actual-api-outputs/SAU-H6-294120-simulated-ar.html": {
+      "sha256": "4fd3dc569ca1fa25049df3a730af3adb87429f5aa7338e545f1339c86c0ec38e",
+      "bytes": 191760
+    },
+    "actual-api-outputs/SAU-H6-294120-simulated-dossier.json": {
+      "sha256": "b4c627024c454febe7e531a260f37bd5cb01c172bc0ce40233e0c311fd34d119",
+      "bytes": 220099
+    },
+    "actual-api-outputs/SAU-H6-294120-simulated-en.html": {
+      "sha256": "f4236614d180d21ac1382ddb1f59a3cd2e0a1f89589fcd49f729e5423c6521c8",
+      "bytes": 167251
+    },
+    "actual-api-outputs/SAU-H6-310430-public-analysis.json": {
+      "sha256": "c8a8494acbf51bbde1dbe2ff09958a2474100b63d872efc8c4986a3a897c1265",
+      "bytes": 106046
+    },
+    "actual-api-outputs/SAU-H6-310430-public-ar.html": {
+      "sha256": "2271aa57116b5d2e83fb4b24ae206d452642cf1c1ae2d62f81e379e16c501a3d",
+      "bytes": 113773
+    },
+    "actual-api-outputs/SAU-H6-310430-public-dossier.json": {
+      "sha256": "f710d95fce09e58e6581d8a16321b1776194998a343a6b8f690fbb52c755e011",
+      "bytes": 153715
+    },
+    "actual-api-outputs/SAU-H6-310430-public-en.html": {
+      "sha256": "7247ac536451023874bd148ac026d93bd855392457d8f8b67b5c3a6b53ac82ac",
+      "bytes": 98863
+    },
+    "actual-api-outputs/SAU-H6-310430-simulated-analysis.json": {
+      "sha256": "886278c6bde182949cf01dd6a8cdd3f39b376cdd1b708af7338fe90e0968596a",
+      "bytes": 151336
+    },
+    "actual-api-outputs/SAU-H6-310430-simulated-ar.html": {
+      "sha256": "bbe616a0b4302dd8a8ec21167e1ae6699b481536907dfc3fa9eba4830c29b4ea",
+      "bytes": 193855
+    },
+    "actual-api-outputs/SAU-H6-310430-simulated-dossier.json": {
+      "sha256": "127a95814bb47643f73ee4097b062ffcdf94ee4316d985015d350b38dca665b2",
+      "bytes": 216040
+    },
+    "actual-api-outputs/SAU-H6-310430-simulated-en.html": {
+      "sha256": "54d28513e9169f35af2fe3668acf2cbad8b7ff72abaee8f6099444f1c382076b",
+      "bytes": 169048
+    },
+    "actual-api-outputs/SAU-H6-310510-public-analysis.json": {
+      "sha256": "a2ec4df05df3720a138568ade170c56532348743eaeee4b6d8c21e2882180967",
+      "bytes": 106254
+    },
+    "actual-api-outputs/SAU-H6-310510-public-ar.html": {
+      "sha256": "b37fc3a8b385818912f9e0af45b964404b98fa5f4e75ef17a6a67a89235534f2",
+      "bytes": 114024
+    },
+    "actual-api-outputs/SAU-H6-310510-public-dossier.json": {
+      "sha256": "d8037b3ebb81cd76ed6c49a9f788b0b0b488ac752cc3a072e75d06aced19acbc",
+      "bytes": 154124
+    },
+    "actual-api-outputs/SAU-H6-310510-public-en.html": {
+      "sha256": "8c59d31e213b2eeb917c178df074ba9955a91000cec3223af8bf56b88a3f79aa",
+      "bytes": 99073
+    },
+    "actual-api-outputs/SAU-H6-310510-simulated-analysis.json": {
+      "sha256": "00f8c810a4dd1e7f02625a3a3c6ccef194b29269ecec3fe679f55d018f349bf9",
+      "bytes": 153256
+    },
+    "actual-api-outputs/SAU-H6-310510-simulated-ar.html": {
+      "sha256": "9421b7259e4e1ae5e5b7b549d394ae65816649b2d038e50903dccde17f4bb7d8",
+      "bytes": 191665
+    },
+    "actual-api-outputs/SAU-H6-310510-simulated-dossier.json": {
+      "sha256": "98fda77972b88e57c5712beb3e083eba40edbf0689751fb9d292facc1a54609b",
+      "bytes": 218982
+    },
+    "actual-api-outputs/SAU-H6-310510-simulated-en.html": {
+      "sha256": "4c60b15eb06649ad9ee2cbcf19fa2912fd4328507b28b1b2034835a7205196d1",
+      "bytes": 167244
+    },
+    "actual-api-outputs/SAU-H6-392010-public-analysis.json": {
+      "sha256": "76d2c7e38f1053665ae1392d01f0187e53483dafafdbca699cd1415e70aa39f5",
+      "bytes": 105217
+    },
+    "actual-api-outputs/SAU-H6-392010-public-ar.html": {
+      "sha256": "ecbe7e1cdb18237066e2028c45f661abc22302d7d2f6713272e8f69835c39e7e",
+      "bytes": 112089
+    },
+    "actual-api-outputs/SAU-H6-392010-public-dossier.json": {
+      "sha256": "f96b06f8ab32479224f7f52796757e15aa4bca704ad3e20820a44f9fc2a829db",
+      "bytes": 152717
+    },
+    "actual-api-outputs/SAU-H6-392010-public-en.html": {
+      "sha256": "1b74650cc63bb26def56e08cf45d8e4bad798bd702e09d16342c5868c3b35d29",
+      "bytes": 97382
+    },
+    "actual-api-outputs/SAU-H6-392010-simulated-analysis.json": {
+      "sha256": "c9eca4f059a23e6a7ff9c99a38318f3a311215a0d9a7a4b34d234a70e957166a",
+      "bytes": 153657
+    },
+    "actual-api-outputs/SAU-H6-392010-simulated-ar.html": {
+      "sha256": "a5796b7f425192f21fa8cc132e03f23ffd72d48410cb8ae6fb32ab40ac7baa63",
+      "bytes": 190268
+    },
+    "actual-api-outputs/SAU-H6-392010-simulated-dossier.json": {
+      "sha256": "0cc42273d0d600190278da2422a1900bd086661649250e8b62794d7d96c73d69",
+      "bytes": 217019
+    },
+    "actual-api-outputs/SAU-H6-392010-simulated-en.html": {
+      "sha256": "b3a5baa2e594bcd99baf6d4727bd7609ca11595bea1dab80358a806942c45771",
+      "bytes": 165681
+    },
+    "actual-api-outputs/SAU-H6-721012-public-analysis.json": {
+      "sha256": "a5b4207227c386234807d30b32348b3096d9dbe062e74ead34ed6015cfb3ca31",
+      "bytes": 105318
+    },
+    "actual-api-outputs/SAU-H6-721012-public-ar.html": {
+      "sha256": "8819bbc688e9d534627c4f509f3f8fb79a32e49817d02806c6375c45a5873f8a",
+      "bytes": 112249
+    },
+    "actual-api-outputs/SAU-H6-721012-public-dossier.json": {
+      "sha256": "63ca7d189b81e91a64f99746695106dc3d7e9fffa53c4ff72d7a4e195f4d6c2c",
+      "bytes": 152947
+    },
+    "actual-api-outputs/SAU-H6-721012-public-en.html": {
+      "sha256": "71d4a097bab850f078f897b25e85dfbf40ce82551599e8c1875c16532e441cbf",
+      "bytes": 97463
+    },
+    "actual-api-outputs/SAU-H6-721012-simulated-analysis.json": {
+      "sha256": "75ac217cdd735b10db96e6ee90e3c74c5943655c091ada72ce3b46748881cae6",
+      "bytes": 147999
+    },
+    "actual-api-outputs/SAU-H6-721012-simulated-ar.html": {
+      "sha256": "72fb37ea9c8f760f7c5ed0b7baa4557239478dabe36b22ce6b42fdd91b3edb23",
+      "bytes": 200364
+    },
+    "actual-api-outputs/SAU-H6-721012-simulated-dossier.json": {
+      "sha256": "8530bee76fe3e46dbd7cdbe294d40a956f7e1d070af0b07e3d6ae7664999af47",
+      "bytes": 214647
+    },
+    "actual-api-outputs/SAU-H6-721012-simulated-en.html": {
+      "sha256": "3631835b91cd15d270adbcd59dad77e21323e869dae77a35f88ccb00e83aabf9",
+      "bytes": 175252
+    },
+    "actual-api-outputs/SAU-H6-721061-public-analysis.json": {
+      "sha256": "fff4612eeb95156adb45e4123741ccddb2a140c5d0d65da2a8de9cc4871cf128",
+      "bytes": 108447
+    },
+    "actual-api-outputs/SAU-H6-721061-public-ar.html": {
+      "sha256": "7829b6680ed79a8fb48200881e5fbc328da9a610d1bad52c77a8236e3fe97bbb",
+      "bytes": 120812
+    },
+    "actual-api-outputs/SAU-H6-721061-public-dossier.json": {
+      "sha256": "3666b959efaa6d705b757bdf0ae39fb9f4b43381de34b22ea773cd7e0413f1fe",
+      "bytes": 156366
+    },
+    "actual-api-outputs/SAU-H6-721061-public-en.html": {
+      "sha256": "a5d4c5463585af39fefcac5037b7440cebcb76324a3c06e0fa6ffe59551cd6fc",
+      "bytes": 105519
+    },
+    "actual-api-outputs/SAU-H6-721061-simulated-analysis.json": {
+      "sha256": "1c35726206e2d7986777d925e2c2d0e706cbfec6fc4caa28b4c4455cb879e7cf",
+      "bytes": 154387
+    },
+    "actual-api-outputs/SAU-H6-721061-simulated-ar.html": {
+      "sha256": "2fb09d550724d16dc28ad4984c14e032373047f0ab64d6740f24a3e8fad2ffbb",
+      "bytes": 207455
+    },
+    "actual-api-outputs/SAU-H6-721061-simulated-dossier.json": {
+      "sha256": "55119fc13b3ed60e3ef2e4788828fd9ed2b883d50bc7a7f93d5ad1a6b75a79ab",
+      "bytes": 221148
+    },
+    "actual-api-outputs/SAU-H6-721061-simulated-en.html": {
+      "sha256": "5919f14045cf2be5ef25c029e9dd8f68e02706b0430e4a4e4a2c728e77a72aba",
+      "bytes": 182005
+    },
+    "actual-api-outputs/SAU-H6-760429-public-analysis.json": {
+      "sha256": "f033eda8588ca3871c84b0d65329040838e1fd3064d024c748f2a92d432f6b04",
+      "bytes": 111306
+    },
+    "actual-api-outputs/SAU-H6-760429-public-ar.html": {
+      "sha256": "629e7eb41f62defa7314109ae20ea5c65c1c3820684837b67add81766a5ac0ae",
+      "bytes": 120880
+    },
+    "actual-api-outputs/SAU-H6-760429-public-dossier.json": {
+      "sha256": "d178c1f9f18082f69b929f305f85d2c238f8de2cca11833e442d9ad0dcf9e2aa",
+      "bytes": 160312
+    },
+    "actual-api-outputs/SAU-H6-760429-public-en.html": {
+      "sha256": "d71f054931fd9d00274011081a00a160c1f2cbc2f1e4f5dad4da1301d93acbcf",
+      "bytes": 105365
+    },
+    "actual-api-outputs/SAU-H6-760429-simulated-analysis.json": {
+      "sha256": "baf618770991867c3e490013188d1710dd32fcca8f295a28c9759d9e498515c8",
+      "bytes": 163392
+    },
+    "actual-api-outputs/SAU-H6-760429-simulated-ar.html": {
+      "sha256": "8eebdc284ef7b1c22809e7f7e00528385bf6cc27ec9c60b85bcbd6346cf0bcd9",
+      "bytes": 230973
+    },
+    "actual-api-outputs/SAU-H6-760429-simulated-dossier.json": {
+      "sha256": "914081aa1b22d327a924d43f6a4af4bc6ff7565205a69df1c321e646d062afed",
+      "bytes": 234342
+    },
+    "actual-api-outputs/SAU-H6-760429-simulated-en.html": {
+      "sha256": "78349fc64457198e0d8241ef8112a9f118af2f8c877753b349cd765906f44943",
+      "bytes": 203273
+    },
+    "actual-api-outputs/SAU-H6-760711-public-analysis.json": {
+      "sha256": "7e3ddb9e0d47e12baef34b8ac7ac52647ecdbaeb94f638e179eaae87d53dd9fe",
+      "bytes": 105224
+    },
+    "actual-api-outputs/SAU-H6-760711-public-ar.html": {
+      "sha256": "0dc839a11221f8e43420b35229be46fb21fb8f19b1f1e82c5a981f541046b3ac",
+      "bytes": 111731
+    },
+    "actual-api-outputs/SAU-H6-760711-public-dossier.json": {
+      "sha256": "712b78e4ca3589ee552420ba7d486d75465958732272c240f5c97461063eaaf8",
+      "bytes": 152774
+    },
+    "actual-api-outputs/SAU-H6-760711-public-en.html": {
+      "sha256": "718100d912b56aab27103df5061562f215b79395c6892831df021aff007b97f9",
+      "bytes": 96974
+    },
+    "actual-api-outputs/SAU-H6-760711-simulated-analysis.json": {
+      "sha256": "664e30d2a85c30edff0d00022561a196451b8d967174ed396298611d6b1a07f5",
+      "bytes": 154785
+    },
+    "actual-api-outputs/SAU-H6-760711-simulated-ar.html": {
+      "sha256": "59688e88642a4a72c76d5c9283c918876c94b80c5c0ed0bc550ead07bbbff443",
+      "bytes": 202946
+    },
+    "actual-api-outputs/SAU-H6-760711-simulated-dossier.json": {
+      "sha256": "91bfe81e778e10ba0965c81375f39a64c1a03b499d3e4f15314171a50b3768e7",
+      "bytes": 221546
+    },
+    "actual-api-outputs/SAU-H6-760711-simulated-en.html": {
+      "sha256": "bb49c01b1ee380294712f16dade89903b4328cb123a3b62ce394cef4e144d304",
+      "bytes": 177553
+    },
+    "execution/01-graph-build.json": {
+      "sha256": "e2b4039fa049649f2c14a22f1f9b5c3177f84fac3853fbec6f63c9de59f5606e",
+      "bytes": 629
+    },
+    "execution/01-graph-build.stderr": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "execution/01-graph-build.stdout": {
+      "sha256": "def1ee38bcca54fd17baf5735cf2b9446ae24126365a22ceaa3de19eda88c42a",
+      "bytes": 76
+    },
+    "execution/01-graph-postcheck.json": {
+      "sha256": "90e1a37f5a2b8f27c992eccaa12ff9b8718dd3e1a8be3826403cc6f7cbb30059",
+      "bytes": 405
+    },
+    "execution/02-manifests.json": {
+      "sha256": "a8c83fad11cbae9efc0437304b4c21a24fdc133bb294bd5d78a2fce693f8b1ad",
+      "bytes": 591
+    },
+    "execution/02-manifests.stderr": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "execution/02-manifests.stdout": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "execution/03-integrity.json": {
+      "sha256": "f1fa9f87c3c15d517e71dd74326a52ddcd4b51fc66f6644b1ba5ea473f8fe3df",
+      "bytes": 592
+    },
+    "execution/03-integrity.stderr": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "execution/03-integrity.stdout": {
+      "sha256": "6b608ffcb9a862f030cf907573fa823e549eba43245c8b2869809be2ca6f0e11",
+      "bytes": 94
+    },
+    "execution/04-scenarios.json": {
+      "sha256": "f5b764e44d3c72577d19842abe090e9494b0dc5ec722f5feefa03e21d703a102",
+      "bytes": 594
+    },
+    "execution/04-scenarios.stderr": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "execution/04-scenarios.stdout": {
+      "sha256": "213b7ab2a7ca18a2a46201ff8e6674007c03ff3882ffde6199aa3a8f2d85714a",
+      "bytes": 14897
+    },
+    "execution/05-reconstruction.json": {
+      "sha256": "3bb0605f7fec32378f34056d7d0619ae21a0e122964b84426a54f4eac7a06947",
+      "bytes": 609
+    },
+    "execution/05-reconstruction.stderr": {
+      "sha256": "9a5bcd9bf71a1cb841b499bd9aa3752fa1eaa3034bef1476702cbc7582689548",
+      "bytes": 2938
+    },
+    "execution/05-reconstruction.stdout": {
+      "sha256": "b1aa34d07ebe5b1abc4362a598880a5845a44385990e7403bf4e3a8d31be02f1",
+      "bytes": 360
+    },
+    "execution/06-graph-validate.json": {
+      "sha256": "e1c1a7c333ceb4dfd1bfa395f16788a149145c7cbf1e0764bba796da38b5aeb2",
+      "bytes": 632
+    },
+    "execution/06-graph-validate.stderr": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "execution/06-graph-validate.stdout": {
+      "sha256": "983a75ef07d7e35b82687df7e0dbb08ee2550faee31b7a796da2cf8b616f5bb5",
+      "bytes": 81
+    },
+    "execution/07-graph-check.json": {
+      "sha256": "7f658119114078dbf4a4658acdcc288bb97fbf9f819eb945fbb0424a10359744",
+      "bytes": 644
+    },
+    "execution/07-graph-check.stderr": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "execution/07-graph-check.stdout": {
+      "sha256": "def1ee38bcca54fd17baf5735cf2b9446ae24126365a22ceaa3de19eda88c42a",
+      "bytes": 76
+    },
+    "generated-postimages/data/graph/current.json": {
+      "sha256": "8e9eb94158f2f70ac1c1be8c59d39c0eb2bedb1216a4c8eb14b349efcdda7de9",
+      "bytes": 139
+    },
+    "generated-postimages/data/graph/projections/GRAPH-SAU-2026-09-12-ccd1a2abd05c/manifest.json": {
+      "sha256": "9ea7e04a010b702ad1bf40916bdb7a7a6627b62c267cb41d05e4dc619a24430e",
+      "bytes": 228
+    },
+    "generated-postimages/data/graph/projections/GRAPH-SAU-2026-09-12-ccd1a2abd05c/projection.json": {
+      "sha256": "066b366033cc70e00480668355ceccf19f71813cae8969067aff1743e85d7a88",
+      "bytes": 2216176
+    },
+    "generated-postimages/data/manifests/snapshot_manifest.json": {
+      "sha256": "dbea71d6f18fbae9751dd66d226bd164c7534092568e22dac95ccd70fa56d6b0",
+      "bytes": 174817
+    },
+    "generated-postimages/docs/authority/00_AUTHORITY_MANIFEST.md": {
+      "sha256": "355a9ee4b6cb671616bf327296d4edff7f9029d57094a390b17e05bc669ad3ef",
+      "bytes": 11022
+    },
+    "generated-postimages/docs/authority/authority_hashes.json": {
+      "sha256": "3d73013c8f64096729cced4b52361280df4c4f8b4b07f2e32da67bb282c91be4",
+      "bytes": 3539
+    },
+    "preimages/data/graph/current.json": {
+      "sha256": "f752db287ba15102a3fb6f701addab1761ebdf002d9cd796179a587a36480499",
+      "bytes": 139
+    },
+    "preimages/data/manifests/snapshot_manifest.json": {
+      "sha256": "2cd95045920d36a0979b12be3fcbb40d80f58711b0e028fa5484f384dc5a201c",
+      "bytes": 174403
+    },
+    "preimages/docs/authority/00_AUTHORITY_MANIFEST.md": {
+      "sha256": "0c9133d2b82cc896797237db633c177084ea069ca2c6068a80779bc7d1e2d06c",
+      "bytes": 11022
+    },
+    "preimages/docs/authority/authority_hashes.json": {
+      "sha256": "f2ee3f35b0c06d68b122d1d7dde142f8a5112859d0c1f3309e7e29540395d551",
+      "bytes": 3539
+    }
+  },
+  "sanad": "Direct accepted record reads; immediate full1757 source/230 inputs/44 index/preimage checks; actual seven stock command records and stdout/stderr; exact six postimages; complete manifest/table/canonical/source postchecks; all88 actual unpatched API response bodies equal rehashed reviewed successor expectations.",
+  "muhasabah": {
+    "result": "PASS for measured operation facts, not selfapproval",
+    "assumptions": "None substituted for the actual generated/API comparisons; later source/output changes require new bindings.",
+    "risks": "Original failed literal check and parser warnings retained. No automatic retry/forced ID/restore or source index mutation.",
+    "requirements": "Source remains unstaged/uncommitted; original graph roots and all44 indexes preserved.",
+    "unverified": "Independent generated-result approval; separately authorized capture correction and token/count adoption; post-generation functional/durable44 strict/raster/manual; canonical/exact-tree/CI/hosted delivery."
+  }
+}

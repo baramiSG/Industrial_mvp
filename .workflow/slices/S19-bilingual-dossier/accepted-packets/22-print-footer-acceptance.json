@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "at_utc": "2026-09-25T00:14:53.204423+00:00",
+  "record_kind": "DELEGATED_S19_PRINT_FOOTER_AMENDMENT_ACCEPTANCE",
+  "authority": [
+    "20260923-overnight-milestone-delegation-1.json",
+    "20260923-blocker-resolution-delegation-1.json",
+    "20260924-s19-actual-base-amendment-acceptance-1.json"
+  ],
+  "actor": "/root Codex GPT-6 Astra Ultra coordinator",
+  "status": "ACCEPTED_BOUNDED_ARCHITECTURE_AND_INTEGRATION; PRODUCT_NOT_YET_APPROVED",
+  "author": "/root/s19_delivered_base_handoff",
+  "implementer": "/root/s19_product_implementer",
+  "independent_reviewer": "/root/s19_source_reviewer",
+  "verdict": "APPROVE; no amendment findings",
+  "attribution": "Independent same-model Codex review and owner-delegated coordinator acceptance; not Claude approval or a personal owner quote.",
+  "exact_records": [
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/planning/s19-print-footer-r1/AMENDMENT.md",
+      "sha256": "00d5c6d48c0bdcc4d9678c35aac3094713ba2e37b8c14d0d63c069ddcdae2ae7"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/planning/s19-print-footer-r1/SHA256SUMS",
+      "sha256": "1b6e2bdf144344195eb1797cc377921dec93d9a977bae82a1c7d583f8cfff2a6"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/reviews/s19-print-footer-r1/REVIEW.md",
+      "sha256": "4b24c3ab8ac2b66bc84c99fb44be8175018e7137f92e0b151b93c6b3a2339b01"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/reviews/s19-print-footer-r1/EVIDENCE.json",
+      "sha256": "cdbcec07b0854ddde00ac689a3294df3a4cc6d2f0dc3f7c62cc9a504d352e567"
+    }
+  ],
+  "manifest_entries_verified": 375,
+  "scope": [
+    "Integrate only reviewed footer behavior in dossier.py, dossier.css and tokens.css; preserve newer valid renderer changes with preimages and targeted diff.",
+    "Execute focused amendment tests and existing parent Task4 full44/everypage print proof. Strengthen already allowed browser_tests/test_dossier.py::test_dossier_print_media_and_pdf_are_valid; preserve inherited checks and function name, bind exact inherited-body delta for ordinary paused-source review. This fulfills the existing explicit requirement; it adds no inventory name.",
+    "Keep all seven separately admitted new browser bodies unchanged; no new name/path/framework/CI/checker/dependency.",
+    "Keep source unstaged/uncommitted and generation gated until independent source readiness."
+  ],
+  "requirements_preserved": [
+    "Complete44 PDFs/everypage, all prescribed text/content/region/raster/negative/public-isolation checks",
+    "Page-count quality and final rendered review remain unapproved",
+    "All source, graph/manifest, canonical/pin/R1, clean-root CI, exact-tree/head/GitHub delivery gates"
+  ],
+  "integration_preimages": {
+    "src/ior_mvp/dossier.py": "83647e45be7cf9cecbf24a5624792f413dac6b6c6514d47e0bf5aa46d62e0e57",
+    "src/ior_mvp/static/css/dossier.css": "68ffde7f18a621c980466d2c10592a48841d6d51f9131d3063528adc5fe6c72e",
+    "src/ior_mvp/static/css/tokens.css": "e0491fc0a4307a13d28d27c7f6d31c789455a132f7e31b1bcae8d40d4ebfa765",
+    "browser_tests/test_dossier.py": "d022d78a3171b9ee369354e5cd7bcb26640899f813949b837fd855b6859dba96"
+  },
+  "sanad": "Root read full amendment/review, refreshed parent Task4/handoff, rehashed375 sealed entries and four records. Live GitHub confirms S18b merged/main6PASS. PDF execution attributed to independent review, not fresh root run.",
+  "muhasabah": "PASS for bounded amendment only; product remains incomplete. No source/index/service/generator mutation. Initial recording command failed before execution because python alias absent; retried with installed python3."
+}

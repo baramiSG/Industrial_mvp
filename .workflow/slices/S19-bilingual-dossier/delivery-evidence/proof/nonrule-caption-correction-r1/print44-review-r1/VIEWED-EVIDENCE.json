@@ -1,0 +1,152 @@
+{
+  "status": "PASS_SUPPORTING_RENDERED_OBSERVATIONS_NO_APPROVAL_ISSUED",
+  "scope": "28 reports/seven cases/1219pages of accepted-source print-first cohort; separate independent source reviewer/root approve final correction.",
+  "preparation": "Refreshed exact accepted caption proposal/review/owner record before this run; reused governing reads, Task4/5 and S19-only stop.",
+  "personas": [
+    "bilingual paged-media reviewer",
+    "provenance auditor"
+  ],
+  "skills_applied": [
+    "pdf",
+    "strict-reviewer",
+    "task-standards",
+    "sanad-provenance",
+    "al-muhasibi",
+    "muhasabah-gate"
+  ],
+  "time_utc": "2026-09-25T07:45:17.012989+00:00",
+  "source": {
+    "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nonrule-caption-correction-r1/SOURCE.json",
+    "sha256": "6e7469e9a18db9ddb74e838e18cff984e3c3ceadc9c08098807858d9c62e36a5"
+  },
+  "cohort": {
+    "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nonrule-caption-correction-r1/print44/PDF-COHORT-READY.json",
+    "sha256": "f150b89d6ded2cff1a76c5b8c70eeee7d7f9e05280064a9fa0dbb0f8b2945a06"
+  },
+  "renderer": {
+    "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nonrule-caption-correction-r1/print44-review-r1/rendered/RENDER-RESULT.json",
+    "sha256": "79e14a405fed7ff5da81ee900f40c9d9a9641e88eaf88e1b8ced756638573093"
+  },
+  "strict": {
+    "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nonrule-caption-correction-r1/print44-review-r1/acceptance/PDF-ACCEPTANCE.json",
+    "sha256": "d130394eaf686bb32f2b188cd7f79418793c77f5b704f312a4fe0305bcfe7aa7"
+  },
+  "tool_hashes": {
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/planning/s19/renderer-proof/render_pdf.py": "80f17b6ff9040acc445001b33882efa0e44afbe820cac74b50338b5e2bb7f88b",
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nonrule-caption-correction-r1/check_pdf_matrix.py": "a68250a4168efa1ce444802099283ed4150326384815002ce2284125f15a2444"
+  },
+  "executions": [
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nonrule-caption-correction-r1/print44-review-r1/RENDER-EXECUTION.json",
+      "sha256": "2200e69e1146e4c0a0389e27f68a3d51f0c8aa6bc82055105598276c01d85f5c"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nonrule-caption-correction-r1/print44-review-r1/STRICT-EXECUTION.json",
+      "sha256": "f254b4b1d62ce9231064e1a9e52545ed3ef84e645c779b852c668825c83f62fc"
+    }
+  ],
+  "automatic": {
+    "documents": 44,
+    "pages": 1958,
+    "dpi": 144,
+    "renderer_exit": 0,
+    "strict_exit": 0,
+    "strict_issues": [],
+    "physical_violations": 0,
+    "source_cohort_tools_unchanged": true
+  },
+  "coverage": {
+    "reports": 28,
+    "pages": 1219,
+    "exact_prior_own_png_observation_reuses": 1216,
+    "changed_pages": 3,
+    "all_changed_pages_directly_viewed_native": true,
+    "new_contacts": 0
+  },
+  "reuse_binding": {
+    "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nonrule-caption-correction-r1/print44-review-r1/PNG-REUSE.json",
+    "sha256": "35c02be67ded00b3c0a902d1cb7db8cab35dd2cfee936a4517806f20c836f9d7"
+  },
+  "direct_native_views": [
+    {
+      "pdf": "streptomycin-api-simulated-ar.pdf",
+      "pdf_sha256": "8096a2c48efd8b266903e2f59fd2108d4284232671a32d7db0600cf79dfd0c67",
+      "page": 13,
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nonrule-caption-correction-r1/print44-review-r1/rendered/streptomycin-api-simulated-ar-page-13.png",
+      "sha256": "a390a5292d4f9549329bef67681beef628678518ea5a45e01f8d3954885f28eb"
+    },
+    {
+      "pdf": "streptomycin-api-simulated-ar.pdf",
+      "pdf_sha256": "8096a2c48efd8b266903e2f59fd2108d4284232671a32d7db0600cf79dfd0c67",
+      "page": 14,
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nonrule-caption-correction-r1/print44-review-r1/rendered/streptomycin-api-simulated-ar-page-14.png",
+      "sha256": "0781d16883605679f94e6c91e8f5dd323ea66674b9c1685b2955c100e7816d2c"
+    },
+    {
+      "pdf": "streptomycin-api-simulated-ar.pdf",
+      "pdf_sha256": "8096a2c48efd8b266903e2f59fd2108d4284232671a32d7db0600cf79dfd0c67",
+      "page": 15,
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nonrule-caption-correction-r1/print44-review-r1/rendered/streptomycin-api-simulated-ar-page-15.png",
+      "sha256": "b80ed57f731478db274d2452bbd785d6435ad9c45c1abc9cf27afe0ae5be99e4"
+    }
+  ],
+  "page_counts": {
+    "fert-retail-packs-public-ar.pdf": 32,
+    "fert-retail-packs-public-en.pdf": 28,
+    "fert-retail-packs-simulated-ar.pdf": 60,
+    "fert-retail-packs-simulated-en.pdf": 52,
+    "galvalume-public-ar.pdf": 35,
+    "galvalume-public-en.pdf": 30,
+    "galvalume-simulated-ar.pdf": 65,
+    "galvalume-simulated-en.pdf": 55,
+    "pe-film-public-ar.pdf": 31,
+    "pe-film-public-en.pdf": 27,
+    "pe-film-simulated-ar.pdf": 59,
+    "pe-film-simulated-en.pdf": 52,
+    "penicillin-api-public-ar.pdf": 32,
+    "penicillin-api-public-en.pdf": 28,
+    "penicillin-api-simulated-ar.pdf": 61,
+    "penicillin-api-simulated-en.pdf": 53,
+    "sop-public-ar.pdf": 32,
+    "sop-public-en.pdf": 28,
+    "sop-simulated-ar.pdf": 60,
+    "sop-simulated-en.pdf": 53,
+    "streptomycin-api-public-ar.pdf": 32,
+    "streptomycin-api-public-en.pdf": 28,
+    "streptomycin-api-simulated-ar.pdf": 60,
+    "streptomycin-api-simulated-en.pdf": 52,
+    "tinplate-public-ar.pdf": 31,
+    "tinplate-public-en.pdf": 27,
+    "tinplate-simulated-ar.pdf": 62,
+    "tinplate-simulated-en.pdf": 54
+  },
+  "findings": [],
+  "closure": {
+    "finding": "CAPTION-ORPHAN-03",
+    "historical_record": {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/final-pdf-review-r3/REVIEW.md",
+      "sha256": "bbb88b71d675a5eae6b38bba3c8a91e2483cddc487152d0ac14cfebcfa846169"
+    },
+    "actual": "Streptomycin simulatedAR13 no longer ends in isolated caption. Page14 begins original-source caption followed by profile-hard-gates heading and complete named-molecule/synthesis route = RESOLVED. Page15 contains readable continuation; simulation footers remain clear with no overlap on all three changed pages.",
+    "pages": [
+      13,
+      14,
+      15
+    ],
+    "limits": "Direct native proof establishes this observed caption/record association and readability; finite strict successor separately checks exact occurrence/order. No independent approval of earlier first-scalar prototype authored by this agent."
+  },
+  "page_count_assessment": "All28 assigned counts remain unchanged (27–65). Previously inspected1216identical images retain layout observations, not prior approval. Three changed pages are content-filled, without blank/orphan-only page. Long route records remain deliberately breakable; ordinary complete-row continuation on15 is not an isolated heading/caption. No invented global cap or whole44 manual approval.",
+  "sanad": {
+    "direct": "All1958 current PNG hashes checked against renderer;225cohort/1759source checked at operation boundaries. Actual3native view images+1216hash-linked prior own observations.",
+    "inference": "CSS effectiveness established by actual moved caption, not merely matching selector text.",
+    "attributed": "Other cohorts are assigned to root/source reviewer; their conclusions are not asserted here.",
+    "remaining": "Required fullfunctional after finite independent approval, final cohort binding, canonical/R1/exactcandidate/twoCI/perrootPDF/hosted delivery."
+  },
+  "muhasabah": {
+    "status": "PASS for truthful scoped supporting report",
+    "requirements": "No failed result relabelled; r3 remains REJECT. No approval of own prior prototype or whole source.",
+    "assumptions": "Identical same-report PNG pixels preserve prior visible observations; map binds exact old/new bytes.",
+    "risk": "Subsequent source changes require applicable revalidation; fullfunctional gate not replaced by print-first44.",
+    "preservation": "One renderer and one strict operation; no product/index/service/graph/canonical mutation. S19-only stop retained."
+  }
+}

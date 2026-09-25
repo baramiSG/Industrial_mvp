@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "at_utc": "2026-09-25T01:57:48.527534+00:00",
+  "record_kind": "DELEGATED_S19_ARABIC_FONT_CORRECTION_ACCEPTANCE",
+  "actor": "/root coordinator under existing owner delegation",
+  "authority": "20260923-blocker-resolution-delegation-1.json",
+  "author": "/root/s19_product_implementer",
+  "independent_reviewer": "/root/s19_source_reviewer",
+  "bindings": {
+    "proposal": {
+      "path": "s19/product-implementation-r1/r13-arabic-font/PROPOSAL.md",
+      "sha256": "56a6a83cbccbc5ca8b52acda199c1a4aaf3021054afdba6e34d6afe29324017c"
+    },
+    "review": {
+      "path": "reviews/s19-source-preparation-r1/R13-ARABIC-FONT-CONCURRENCE.md",
+      "sha256": "0869536240ad0f52f3f9c23c9542440fa8abc3e470d67235af7efe7d9e02cc08"
+    },
+    "unit_report": {
+      "path": "reviews/s19-r13-pre-generation-unit-r1/REPORT.md",
+      "sha256": "4b20f911541ab93b70750624e9a81c22e5b20f9b453127d4ba888d25a3aee92c"
+    },
+    "failed_browser_observation": {
+      "path": "s19/product-implementation-r1/final-functional-r1/RESOURCE-FAILURE-OBSERVATION.json",
+      "sha256": "92559ae0c0138649bb33469b9c54f84c56713857aeacce8b8473945967a7955e"
+    }
+  },
+  "permitted_paths": [
+    "src/ior_mvp/static/css/dossier.css"
+  ],
+  "preimages": {
+    "src/ior_mvp/static/css/dossier.css": "37e5a23dcd94fce8a05da1d122a3304e279ca4caf2d519b4c42f3fbb431f245c"
+  },
+  "accepted_delta": "Restrict existing source-language-island font selector to [lang=\"en\"] so earlier Arabic selector selects Arabic font first; keep code selector and all declarations unchanged.",
+  "execution_condition": "Preserve frozen r13 browser failure and stop its owned stalled pytest gracefully before editing live source. Both complete unit attempts are retained, no repeat required for unchanged unit source.",
+  "proof": "Inherited failing font test and unchanged case/mode/locale matrix GREEN; corrected full functional/PDF/rendered evidence and normal final gates remain.",
+  "constraints": "No font/token/size/margin/footer/text/harness/assertion/generator/index changes. Browser resource recipe correction reviewed separately; no framework.",
+  "sanad": "Root directly read proposal, review, CSS cause evidence, nonzero unit report and stalled run evidence; independent review attributed to Codex reviewer, not Claude.",
+  "muhasabah": "PASS for bounded delegated correction acceptance only; no product completion or transfer of previous rendered identity to changed CSS."
+}

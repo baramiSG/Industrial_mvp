@@ -28,7 +28,7 @@ The real decision state is immutable. Synthetic evidence is separately flagged, 
 - Price–quantity decomposition, concentration, effective capacity, K/U/D\*, NPV, IRR, S\*, incremental national value, competition ratio and EVSI.
 - Schema-driven GenUI decision workspace assembled from an approved component library.
 - Arabic–English specification extraction golden gate with preserved source spans.
-- One-page decision dossier in JSON and printable HTML.
+- DecisionDossier2.0.0 JSON and bilingual printable HTML, with a one-page decision summary backed by the full evidence appendix and native Chromium Print / Save PDF.
 - Manifest-verified bilingual S15 case-selection and exclusion surface at `/api/case-selection`.
 - Governed Class-D shared-enabler declarations, graph-fed route-8 evaluation and the mounted `/api/graph` contract.
 - A collapsed, lazy-loaded bilingual graph component with four deterministic SVG/native-control views and stored-evidence drill-down.
@@ -208,4 +208,12 @@ This POC runs from frozen data and requires no external API key. It demonstrates
 
 With the local application running, open `/executive?opportunity=SAU-H0-721049&step=SIGNAL&locale=en` (or `locale=ar`). Eight steps connect the import signal and false-positive checks to public evidence gaps, an explicitly Class-D scenario, all nine routes, intervention economics and stopping conditions. The public decision remains visible and immutable. Source controls open stored passports and restore keyboard focus on Escape. Missing economics/EVSI remain unavailable rather than zero. The native Analyst link preserves the selected case and locale; graph exploration uses the configured mirror and reports service unavailability honestly.
 
-This surface's implementation progress and pending exact-candidate gates are recorded in [.workflow/slices/S18b-bilingual-executive-surface](.workflow/slices/S18b-bilingual-executive-surface/implementation_log.md). S18a's approved receipt/history remains preserved; no final milestone release is implied.
+The executive surface was delivered in [PR39](https://github.com/baramiSG/Industrial_mvp/pull/39); [required main checks](https://github.com/baramiSG/Industrial_mvp/actions/runs/36062918988) passed. Its historical implementation checkpoints remain in [.workflow/slices/S18b-bilingual-executive-surface](.workflow/slices/S18b-bilingual-executive-surface/implementation_log.md). No final milestone release is implied.
+
+## Bilingual Decision Dossier
+
+From Executive Mode, follow **Analyst**, explicitly select **Public** or **Ministry Simulation**, then open the dossier action. The dossier toolbar offers **Print / Save PDF**, **Download JSON** and return to the same case, mode and locale. Chrome/Chromium's native print dialog produces the PDF; there is no server PDF download endpoint. Direct Analyst export remains available.
+
+The summary leads with the decision and immutable public conclusion. The supporting appendix covers identity, demand, named supply, false-positive controls, capability and all nine routes, economics/intervention, competition/policy, rules, evidence/contradictions, stopping conditions and authority. Missing values remain unavailable or NOT_CALCULABLE; genuine zero support remains zero. Simulated output retains Class-D identity and both warning labels. Source passages keep their attribution; the Arabic rule ledger uses governed Arabic prose. The trade chart's visible note explains its independent scales, and **View observed values** opens the actual public observations without implying comparable line heights.
+
+S19 is currently under source, rendered/PDF and exact-candidate verification; these instructions describe its implementation contract, not completed release acceptance. See the [accepted S19 plan](.workflow/slices/S19-bilingual-dossier/accepted-packets/00-s19-S19-IMPLEMENTATION-PLAN.md), [current progress](docs/BUILD_PROGRESS.md) and [limitations](docs/KNOWN_LIMITATIONS.md). Final live Aura verification and model-family release review remain required.

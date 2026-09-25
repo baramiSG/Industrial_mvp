@@ -1,0 +1,178 @@
+{
+  "reference_rows": [
+    {
+      "table": "exclusions",
+      "code": "EX-01_HETEROGENEOUS_RESIDUAL",
+      "prefix": "The commercial product cannot be separated from a highly heterogeneous residual code and no product-level evidence is available.",
+      "prefixBottom": 6844.515625,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-STREPTOMYCIN-API-001::hard_exclusion_inputs",
+          "href": "#evidence-SYN-MINISTRY-STREPTOMYCIN-API-001::hard_exclusion_inputs",
+          "top": 6845.390625,
+          "bottom": 6864.390625
+        }
+      ]
+    },
+    {
+      "table": "exclusions",
+      "code": "EX-02_MARKET_BELOW_MES",
+      "prefix": "The sustainable downside market is below minimum efficient scale and no credible export contract exists.",
+      "prefixBottom": 6918.453125,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-STREPTOMYCIN-API-001::hard_exclusion_inputs",
+          "href": "#evidence-SYN-MINISTRY-STREPTOMYCIN-API-001::hard_exclusion_inputs",
+          "top": 6919.328125,
+          "bottom": 6938.328125
+        }
+      ]
+    },
+    {
+      "table": "exclusions",
+      "code": "EX-03_UNSATISFIABLE_HARD_GATE",
+      "prefix": "A legal, safety, environmental, IP or customer-qualification hard gate cannot be satisfied.",
+      "prefixBottom": 6992.390625,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-STREPTOMYCIN-API-001::hard_exclusion_inputs",
+          "href": "#evidence-SYN-MINISTRY-STREPTOMYCIN-API-001::hard_exclusion_inputs",
+          "top": 6993.265625,
+          "bottom": 7012.265625
+        }
+      ]
+    },
+    {
+      "table": "exclusions",
+      "code": "EX-04_IDLE_EQUIVALENT_CAPACITY",
+      "prefix": "Domestic production meets the required specification with material idle capacity and no binding market failure is evidenced.",
+      "prefixBottom": 7066.328125,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-STREPTOMYCIN-API-001::hard_exclusion_inputs",
+          "href": "#evidence-SYN-MINISTRY-STREPTOMYCIN-API-001::hard_exclusion_inputs",
+          "top": 7067.203125,
+          "bottom": 7086.203125
+        }
+      ]
+    },
+    {
+      "table": "exclusions",
+      "code": "EX-05_TRANSITORY_OR_MEASUREMENT",
+      "prefix": "The apparent gap is dominated by re-export, one-off project demand, temporary price arbitrage or classification discontinuity.",
+      "prefixBottom": 7140.265625,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-STREPTOMYCIN-API-001::hard_exclusion_inputs",
+          "href": "#evidence-SYN-MINISTRY-STREPTOMYCIN-API-001::hard_exclusion_inputs",
+          "top": 7141.140625,
+          "bottom": 7160.140625
+        }
+      ]
+    },
+    {
+      "table": "exclusions",
+      "code": "EX-06_REDUNDANCY_OR_CROWD_OUT",
+      "prefix": "The intervention would create unacceptable redundant capacity or crowd out a more efficient incumbent.",
+      "prefixBottom": 7214.203125,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-STREPTOMYCIN-API-001::hard_exclusion_inputs",
+          "href": "#evidence-SYN-MINISTRY-STREPTOMYCIN-API-001::hard_exclusion_inputs",
+          "top": 7215.078125,
+          "bottom": 7234.078125
+        }
+      ]
+    },
+    {
+      "table": "rejection-conditions",
+      "code": "hard_exclusion",
+      "prefix": "HARD_EXCLUSION_SATISFIED",
+      "prefixBottom": 7358.046875,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-STREPTOMYCIN-API-001::hard_exclusion_inputs",
+          "href": "#evidence-SYN-MINISTRY-STREPTOMYCIN-API-001::hard_exclusion_inputs",
+          "top": 7358.046875,
+          "bottom": 7377.046875
+        }
+      ]
+    },
+    {
+      "table": "rejection-conditions",
+      "code": "false_or_measurement_gap",
+      "prefix": "FALSE_OR_MEASUREMENT_NOT_ESTABLISHED",
+      "prefixBottom": 7412.109375,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-STREPTOMYCIN-API-001::hard_exclusion_inputs",
+          "href": "#evidence-SYN-MINISTRY-STREPTOMYCIN-API-001::hard_exclusion_inputs",
+          "top": 7412.109375,
+          "bottom": 7431.109375
+        }
+      ]
+    },
+    {
+      "table": "rejection-conditions",
+      "code": "equivalent_idle_qualified_supply",
+      "prefix": "EQUIVALENT_QUALIFIED_SUPPLY_NOT_ESTABLISHED",
+      "prefixBottom": 7466.171875,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-STREPTOMYCIN-API-001::demand",
+          "href": "#evidence-SYN-MINISTRY-STREPTOMYCIN-API-001::demand",
+          "top": 7466.171875,
+          "bottom": 7485.171875
+        },
+        {
+          "text": "SYN-MINISTRY-STREPTOMYCIN-API-001::equivalence",
+          "href": "#evidence-SYN-MINISTRY-STREPTOMYCIN-API-001::equivalence",
+          "top": 7486.046875,
+          "bottom": 7505.046875
+        }
+      ]
+    },
+    {
+      "table": "rejection-conditions",
+      "code": "uneconomic_at_efficient_scale",
+      "prefix": "EFFICIENT_SCALE_ECONOMICS_UNAVAILABLE",
+      "prefixBottom": 7540.109375,
+      "references": []
+    },
+    {
+      "table": "rejection-conditions",
+      "code": "structural_overcapacity",
+      "prefix": "STRUCTURAL_OVERCAPACITY_NOT_ESTABLISHED",
+      "prefixBottom": 7574.296875,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-STREPTOMYCIN-API-001::hard_exclusion_inputs",
+          "href": "#evidence-SYN-MINISTRY-STREPTOMYCIN-API-001::hard_exclusion_inputs",
+          "top": 7574.296875,
+          "bottom": 7593.296875
+        }
+      ]
+    },
+    {
+      "table": "rejection-conditions",
+      "code": "generic_capacity_contradicted",
+      "prefix": "GENERIC_CAPACITY_NOT_CONTRADICTED",
+      "prefixBottom": 7628.359375,
+      "references": [
+        {
+          "text": "P-COMTRADE-294120-X",
+          "href": "#evidence-P-COMTRADE-294120-X",
+          "top": 7628.359375,
+          "bottom": 7647.359375
+        }
+      ]
+    }
+  ],
+  "nested_record_pages": [
+    {
+      "page": 23,
+      "first_fact_present": true
+    }
+  ],
+  "failures": []
+}

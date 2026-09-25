@@ -1,0 +1,44 @@
+{
+  "at_utc": "2026-09-25T02:12:09.305891+00:00",
+  "executor": "/root/s19_delivered_base_handoff",
+  "status": "READONLY_DOUBLE_BUILD_AND_ALL11_COMPARISON_PASS_PENDING_INDEPENDENT_REVIEW",
+  "source_root": "/home/barami/projects/ior-worktrees/s19",
+  "readiness_source_sha256": "5ddecc186da54df7111a5cb8361a50a96dc7f2dcdf01608fe017f230643569e5",
+  "observed_r14_ledger_sha256": "a1f2496b610b91eda9b5a45d9c111376e58d2f961c36346558ee556f68fee606",
+  "reused_predecessor": {
+    "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s18b/ops-final-r2/final-observation.stdout.json",
+    "sha256": "08b6db876c8f4feab13e327426532581c485971d5ff0ad207c43997f73ada656",
+    "delivered_commit": "ce407db9832b61c5a8a85dfda2e3b7623da2fbc9",
+    "tree": "789577cbd16cec9cd6c260b5e98a5eac0ae83c20",
+    "source_binding_note": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/PREDECESSOR-EVIDENCE-PREPARATION.md"
+  },
+  "observation_exit_code": 0,
+  "comparator_exit_code": 0,
+  "observation_script_sha256": "6c28482074078af82d1d4ae9c111749863b74d69cb2221ef394f14c238306a89",
+  "comparison_script_sha256": "eebc60a27c5eb0db0dbb519236647de85127b394a97ef965b7730ee1a7c75c6a",
+  "graph": {
+    "projection_id": "GRAPH-SAU-2026-09-12-ccd1a2abd05c",
+    "engine": {
+      "authority_basis_sha256": "1790d09fd17adc1e94ad0ea3d9a8103ef74faf6614b22a5820d859dd21b6e453",
+      "engine_run_id": "ENGINE-5e01ef7c4b9d",
+      "package_version": "0.2.0"
+    },
+    "nodes": 925,
+    "edges": 1045,
+    "inputs": 230,
+    "canonical_sha256": "066b366033cc70e00480668355ceccf19f71813cae8969067aff1743e85d7a88",
+    "canonical_bytes": 2216176
+  },
+  "input_delta": {
+    "unchanged": 220,
+    "changed": 8,
+    "added": 2,
+    "removed": 0,
+    "exact_record": "INPUT-COMPARISON.json"
+  },
+  "analyses": "ANALYSIS-COMPARISON.json records all 11 complete real_decision hashes, repeats, and exact 39 leaf differences; comparator additionally compares full graph multiset and complete analyses after only authorized allowances.",
+  "preservation": "All1732 observed source bytes and source index unchanged across execution; later exact1757 readiness binding verified separately; no generated/index/service writes.",
+  "limits": "This is read-only evidence authored by the validator implementer, not independent source approval. Full functional, final PDF, generation, canonical visual, pin, exact candidate, CI and delivery gates remain separately required.",
+  "sanad": "Direct execution and retained stdout/stderr/exit status; direct hashes/byte comparisons against frozen source and delivered predecessor evidence. Prior independent approvals are attributed, not recreated.",
+  "muhasabah": "PASS for bounded recorded facts. No weakened equality, fabricated identity, generation, or approval. One preliminary metadata read attempted unqualified python (not installed, exit127), then used python3; neither was the graph gate."
+}

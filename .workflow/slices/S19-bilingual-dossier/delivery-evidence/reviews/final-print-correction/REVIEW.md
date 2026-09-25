@@ -1,0 +1,17 @@
+# Finite final-print correction review
+
+Verdict: **APPROVE** proposal3781e3dd and its exact two-path boundary. This approves the correction plan, not unimplemented behavior or future gates.
+
+Refreshed the accepted Task3/4 print requirements, current frozen renderer/CSS/existing print-test body, exact proposal/preimages and S19-only stop boundary; retained mandatory authority preparation. Persona: independent bilingual paged-media and regression reviewer. Applied strict-reviewer, PDF, Sanad, al-Muhasibi and Muhasabah; no source/service/index mutation.
+
+The three scoped display:block selectors separate the rejection reason and each reference in the two actual gap tables. Their children match the current renderer: direct reason bdi and direct anchors, with the exclusions narrative preceding the first anchor. This preserves every source token/link and avoids global link behavior. It addresses BIDI-REF-01 without requiring a graph-input markup change.
+
+The print-only nested record dt break-after constraint is a proportionate first correction for NESTED-DT-01. The current direct dt/dd block structure permits this constraint, but fragmentation success is deliberately not assumed. Long nested records remain breakable. Actual steel EN output must keep the counterfactual label and first complete field label/value together; if it does not, stop and report the measured failure. No automatic escalation to a broad unbreakable-record rule is approved.
+
+Strengthening only the existing named print-test body is within the accepted test scope. The proposed Range/reference geometry must measure complete preceding text and complete links, preserving source-derived exact text/hrefs; a CSS-string or mere bdi-presence check would not satisfy it. The English PDF predicate must bind the actual source q3 field/value and catalogue labels to one emitted page, preserving all inherited assertions and matrix names. Direct retained steel source confirms incremental_capacity_kt=50, and actual EN24/25 fail the required adjacency. Empty or absent optional records must retain their established valid behavior; no new validation scope is authorized.
+
+Approve the specified four complete targeted reports, unchanged strict geometry/footer/content checks, 144dpi rasters and independent review before the required complete functional/final44 run. Original RED bytes and diagnostics remain. Product closure requires these actual results; previous automated44/1948PASS does not close either visual finding.
+
+Directly verified all seven preimages and all230 graph-input hashes. Both proposed paths are absent from those inputs; CSS is present in the109 visual source set. Therefore avoiding graph regeneration is justified if the required post-edit230/six-generated-output/88-response/index preservation checks hold. Rebind corrected source and visual-source hashes before canonical allocation; do not reuse an old whole-source receipt. All other canonical requirements remain unchanged.
+
+Sanad: EVIDENCE.json binds direct proposal/source/fixture/image-preimage/input checks and the independent two-finding record. CSS repair efficacy is an explicit assumption to test, not a claimed fact. Risk is changed wrapping/pagination, covered by targeted and complete rendered proof without relaxed fonts, bounds or assertions. Unverified: implementation, RED/GREEN outcomes, corrected complete44, canonical/candidate/CI/delivery. Muhasabah: **PASS** for this finite plan review; no new framework, authority change, graph replay or future approval introduced.

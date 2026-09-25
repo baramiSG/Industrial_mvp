@@ -1,0 +1,127 @@
+--- retained/src/ior_mvp/dossier.py
++++ corrected/src/ior_mvp/dossier.py
+@@ -665,6 +665,8 @@
+     public_summary=(f'<div class="summary-public"><strong>{h.t("dossier.public_conclusion")}</strong>'+h.narrative(public_narrative['headline'],'p')+'</div>') if disclosure else ''
+     summary_refs=[row['evidence_id'] for row in pack['passports'] if row.get('synthetic_flag') is False][:2]
+     contrary=[row['evidence_id'] for row in dossier['contradiction_register']['public']]
++    evidence_groups=f'<p class="summary-evidence">{h.t("evidence.title")}: {h.refs(summary_refs)}</p>'
++    if contrary:evidence_groups+=f'<p class="summary-evidence">{h.t("dossier.public_contradictions")}: {h.refs(contrary)}</p>'
+     summary=f'''<section class="dossier-summary" id="decision-summary">
+ <p class="eyebrow">{h.t('dossier.summary')}</p><div class="state">{state_markup}</div>
+ <section class="decision-narrative">{h.narrative(narrative['headline'],'h1')}{h.narrative(narrative['rationale'],'p')}
+@@ -673,7 +675,7 @@
+ <div class="summary-identity"><strong>{h.e(name)}</strong><br>{h.technical('HS '+identity['hs_revision']+' / '+identity['hs6'])}</div>
+ {public_summary}<dl class="summary-metrics">{''.join(mini(key) for key in ('target_spec_demand_kt','effective_qualified_capacity_kt','d_star','minimum_effective_support_m'))}</dl>
+ <div class="summary-conditions">{lead('conditions')}{lead('kill_conditions')}</div>
+-<p class="summary-evidence">{h.t('evidence.title')}: {h.refs(summary_refs+contrary)}</p>
++{evidence_groups}
+ <p class="summary-date">{h.t('dossier.snapshot')}: {h.technical(evidence['snapshot_id'])} · {h.t('dossier.as_of')}: {h.technical(evidence['as_of_date'])}</p>
+ </section>'''
+     # The complete public conclusion is retained independently of the active branch.
+--- retained/tests/test_dossier_projection.py
++++ corrected/tests/test_dossier_projection.py
+@@ -393,3 +393,104 @@
+         for key in ('latest_imports_usd_m','latest_imports_kt'):assert format(integrity[key],'.12g') in complete
+         assert ui_text('dossier.boolean.true',locale) in complete
+     assert dossier==before
++
++
++class SummaryEvidence(HTMLParser):
++    """Label and evidence-id groups inside the decision-summary section only."""
++
++    def __init__(self, markup):
++        super().__init__()
++        self.groups=[]
++        self._sections=[]
++        self._group=None
++        self._anchor=False
++        self.feed(markup)
++
++    def handle_starttag(self, tag, attrs):
++        attrs=dict(attrs)
++        if tag=='section':self._sections.append(attrs.get('id'))
++        elif tag=='p' and 'decision-summary' in self._sections and 'summary-evidence' in attrs.get('class','').split():
++            self._group={'label':'','ids':[]}
++        elif tag=='a' and self._group is not None:
++            self._anchor=True
++            href=attrs.get('href','')
++            if href.startswith('#evidence-'):self._group['ids'].append(href[len('#evidence-'):])
++
++    def handle_endtag(self, tag):
++        if tag=='section' and self._sections:self._sections.pop()
++        elif tag=='a':self._anchor=False
++        elif tag=='p' and self._group is not None:
++            self.groups.append(self._group);self._group=None
++
++    def handle_data(self, data):
++        if self._group is not None and not self._anchor:self._group['label']+=data
++
++
++def _public_summary_refs(dossier):
++    return [row['evidence_id'] for row in dossier['evidence_pack']['passports'] if row.get('synthetic_flag') is False][:2]
++
++
++def _public_contrary(dossier):
++    return [row['evidence_id'] for row in dossier['contradiction_register']['public']]
++
++
++@pytest.mark.parametrize('mode', ['public','simulated'])
++@pytest.mark.parametrize('locale', ['en','ar'])
++def test_summary_separates_supporting_and_public_contradiction_refs(mode, locale):
++    from ior_mvp.config import ui_text
++    analysis=analyze('SAU-H0-721049', mode)
++    dossier=build_dossier(analysis)
++    before=deepcopy(dossier)
++    markup=render_dossier_html(dossier, locale)
++    assert dossier==before
++    assert dossier['public_decision']['state']==analysis['real_decision']['state']
++    refs,contrary=_public_summary_refs(dossier),_public_contrary(dossier)
++    assert contrary==['S-UNICOIL-SPEC'] and 'S-UNICOIL-SPEC' not in refs
++    groups=SummaryEvidence(markup).groups
++    assert [group['ids'] for group in groups]==[refs, contrary]
++    assert ui_text('evidence.title', locale) in groups[0]['label']
++    assert ui_text('dossier.public_contradictions', locale) in groups[1]['label']
++    assert ui_text('dossier.no_public_contradictions', locale) not in ''.join(group['label'] for group in groups)
++    synthetic=[row['evidence_id'] for row in dossier['evidence_pack']['passports'] if row.get('synthetic_flag') is True]
++    assert not set(synthetic) & {item for group in groups for item in group['ids']}
++    assert 'Published coating range differs from EPD and is retained for confirmation.' in markup
++
++
++@pytest.mark.parametrize('mode', ['public','simulated'])
++@pytest.mark.parametrize('locale', ['en','ar'])
++def test_summary_omits_empty_public_contradiction_group(mode, locale):
++    from ior_mvp.config import ui_text
++    analysis=analyze('SAU-H0-390210', mode)
++    dossier=build_dossier(analysis)
++    before=deepcopy(dossier)
++    markup=render_dossier_html(dossier, locale)
++    assert dossier==before
++    assert _public_contrary(dossier)==[]
++    groups=SummaryEvidence(markup).groups
++    assert [group['ids'] for group in groups]==[_public_summary_refs(dossier)]
++    assert ui_text('evidence.title', locale) in groups[0]['label']
++    assert ui_text('dossier.public_contradictions', locale) not in groups[0]['label']
++    assert ui_text('dossier.no_public_contradictions', locale) not in groups[0]['label']
++    assert ui_text('dossier.no_public_contradictions', locale) in markup
++
++
++def test_summary_keeps_a_reference_that_is_both_supporting_and_contradictory():
++    from ior_mvp.config import ui_text
++    analysis=deepcopy(analyze('SAU-H0-721049', 'public'))
++    target=next(row for row in analysis['evidence'] if row.get('synthetic_flag') is False)
++    assert not row_contradiction(target)
++    target['contradiction']='Dual-role probe retained for confirmation.'
++    dossier=build_dossier(analysis)
++    refs,contrary=_public_summary_refs(dossier),_public_contrary(dossier)
++    assert target['evidence_id'] in refs and target['evidence_id'] in contrary
++    for locale in ('en','ar'):
++        markup=render_dossier_html(dossier, locale)
++        groups=SummaryEvidence(markup).groups
++        assert [group['ids'] for group in groups]==[refs, contrary]
++        assert ui_text('evidence.title', locale) in groups[0]['label']
++        assert ui_text('dossier.public_contradictions', locale) in groups[1]['label']
++        assert 'Dual-role probe retained for confirmation.' in markup
++
++
++def row_contradiction(row):
++    return isinstance(row.get('contradiction'), str) and row['contradiction']

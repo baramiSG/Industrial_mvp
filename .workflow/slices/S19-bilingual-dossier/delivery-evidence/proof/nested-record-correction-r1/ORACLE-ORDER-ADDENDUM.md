@@ -1,0 +1,13 @@
+# Additive exact-occurrence clarification
+
+This supplements proposal SHA160b6b759aac2b0aec3d5748ba4fa3f94952926e480533f55d09972e69c39ffe without rewriting it. Independent review identified a real false-positive hazard: the profiles Arabic page32 already contains Displacement=2 in the earlier computed national-value component table, before the orphan raw National value heading. Mere same-page presence is insufficient.
+
+For every added Arabic assertion, retain actual page indexes and ordered complete contiguous PDFium text lines; use the existing `label_present` character-multiplicity comparison only to recognize a complete label/first-row window. Do not reverse Arabic, use whole-page bags, or accept an earlier/later unrelated occurrence.
+
+- **Profiles raw national value:** identify the unique complete-line «القيمة الوطنية» heading for the raw economics occurrence and its following boundary `SYN-MINISTRY-ALU-PROFILES-001::economics`. Only consider first complete «الإزاحة» plus actual source value2 AFTER that exact heading and BEFORE the boundary; reject missing/ambiguous heading, boundary or first-row order. The earlier computed displacement cannot satisfy it. Require the heading and the complete first-row window to occupy the same single page.
+- **PP quantity:** restrict to the actual unique R3→R4-F interval. Within it identify the complete Quantity heading, then the complete Recorded basis/actual source quantity row AFTER the heading; require ordered unique association and the same single page, rejecting missing/ambiguous occurrences.
+- **Penicillin/profiles R1-D captions:** retain the actual unique R1-D→R2 interval. Locate its source-original caption, then the complete positive-years label and every source year value AFTER that caption; require ordered unique association and the same single page. A different rule's caption cannot satisfy the association.
+
+Exact DOM/catalogue/source comparisons remain in the existing browser test body. Native page-pair review remains mandatory for Arabic reading order. The initial corrected oracle must fail all four Arabic instances against actual preserved PDFs before the production CSS change. Preserve the original proposal and reviewer finding; no source edit or proof-predicate relaxation is authorized by this text alone.
+
+Sanad: independent reviewer read of exact retained profilesAR32/PDFium text and actual renderer/source occurrence boundaries. Muhasabah: PASS finite proposal clarification; it closes a detected weak-oracle premise before implementation. CSS effectiveness remains unverified; no new framework, dependency, source path or graph operation.

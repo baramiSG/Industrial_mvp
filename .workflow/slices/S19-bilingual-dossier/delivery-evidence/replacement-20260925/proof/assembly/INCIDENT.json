@@ -1,0 +1,55 @@
+{
+  "assembly_gap": {
+    "approved_physical_accepted26": 20,
+    "approved_physical_delivery_evidence": 1520,
+    "candidate_notes_written": false,
+    "complete_scan_receipt_finalized": false,
+    "omitted_approved_paths": 74,
+    "omitted_extension": ".log",
+    "previous_git_visible_paths": 3227,
+    "prospective_union_paths": 3301,
+    "reason": ".gitignore:9 *.log and git ls-files --cached --others --exclude-standard excludes untracked ignored logs"
+  },
+  "disposition": "Writer paused. No index restore, candidate freeze, candidate note, or corrected completed ledger/scan until root decision and independent disposition.",
+  "external_artifacts_created": [
+    "final-assembly-correction/audit_once.py",
+    "final-assembly-correction/observed-index-6451da67.bin",
+    "final-assembly-correction/INCIDENT.json",
+    "final-assembly-correction/INCIDENT.md"
+  ],
+  "first_unprotected_git_read": {
+    "GIT_OPTIONAL_LOCKS": "not set",
+    "causation": "plausible stat-cache refresh; command-level cause inferred, not independently proven",
+    "command": "pwd && git status --short --branch && git rev-parse HEAD",
+    "command_execution_time_utc": "not retained by tool transcript; do not equate index mtime with command timestamp",
+    "cwd": "/home/barami/projects/ior-worktrees/s19",
+    "observed_index_mtime_utc": "2026-09-25T13:54:41.359228766Z"
+  },
+  "index": {
+    "bytes": 272314,
+    "exact_preimage_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/reviews/s19-canonical-other56-r1/W19-INDEX-OBSERVED-799d94.bin",
+    "exact_preimage_sha256": "799d94a7b865644e0cd658e52687a9805224beb40c846f6403d0b87b3dd49722",
+    "expected_sha256": "799d94a7b865644e0cd658e52687a9805224beb40c846f6403d0b87b3dd49722",
+    "logical_stage_listing_sha256_current_and_preimage": "0dcfc2970e2bc5e589027ebccbabd04d71c7005a43630b7f18bc0d4deea362c4",
+    "observed_sha256": "6451da67da6dbcf8344a897b806a4cbce20d75751185593c0659ec906cbb57e3",
+    "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.git/worktrees/s19/index",
+    "restored": false,
+    "saved_copy_mode": "0600",
+    "saved_observed_copy": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/final-assembly-correction/observed-index-6451da67.bin"
+  },
+  "preservation": {
+    "branch": "slice/s19-bilingual-dossier",
+    "candidate_edits_by_correction_writer": [],
+    "head": "ce407db9832b61c5a8a85dfda2e3b7623da2fbc9",
+    "index_mismatches": 1,
+    "ordinary_staged_paths": 0,
+    "other_indexes_matching": 44,
+    "prior_postassembly_content_drift": 0,
+    "prior_postassembly_content_paths": 3227,
+    "protected_indexes_total": 45,
+    "refs_changed_by_correction_writer": false
+  },
+  "recorded_at_utc": "2026-09-25T14:01:34.970160+00:00",
+  "status": "PAUSED_FOR_ROOT_AND_INDEPENDENT_REVIEW; INDEX_BYTE_PRESERVATION_FAILED",
+  "worktree": "/home/barami/projects/ior-worktrees/s19"
+}

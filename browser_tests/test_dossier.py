@@ -230,6 +230,8 @@ def test_dossier_print_media_and_pdf_are_valid(
     goto_portfolio(page, mode, locale)
     select_case(page, case, mode, locale)
     popup = open_dossier_popup(page, case, mode, locale)
+    popup.evaluate("document.fonts.ready")
+    assert popup.evaluate("document.fonts.status") == "loaded"
     popup.emulate_media(media="print")
     styles = popup.evaluate(
         """() => {
@@ -277,6 +279,40 @@ def test_dossier_print_media_and_pdf_are_valid(
     assert len(pdf) >= 10_240
     page_objects = len(re.findall(rb"/Type\s*/Page\b", pdf))
     assert page_objects >= 1
+    from io import BytesIO
+    from pypdf import PdfReader
+    reader = PdfReader(BytesIO(pdf))
+    assert len(reader.pages) == page_objects >= 2
+    texts = [sheet.extract_text() for sheet in reader.pages]
+    assert all(text.strip() and "\ufffd" not in text for text in texts)
+    for sheet in reader.pages:
+        assert abs(float(sheet.mediabox.width) - 210 * 72 / 25.4) < 1
+        assert abs(float(sheet.mediabox.height) - 297 * 72 / 25.4) < 1
+    response = popup.request.get(f"/api/opportunities/{case.id}?mode={mode}")
+    export_response = popup.request.get(f"/api/opportunities/{case.id}/dossier?mode={mode}")
+    assert response.status == export_response.status == 200
+    analysis, exported = response.json(), export_response.json()
+    assert exported["public_decision"] == analysis["real_decision"]
+    complete_text = re.sub(r"\s", "", "\n".join(texts))
+    assert case.id in complete_text
+    for passport in analysis["evidence"]:
+        assert passport["evidence_id"] in complete_text
+    if mode == "simulated":
+        assert all(locale_bundle(locale)["synthetic_labels"]["en"] in text for text in texts)
+    else:
+        assert "SYN-MINISTRY-" not in complete_text
+        assert re.sub(r"\s", "", locale_bundle(locale)["synthetic_labels"]["en"]) not in complete_text
+    for kind, payload in (("analysis", analysis), ("dossier", exported)):
+        source_path = pdf_dir / f"{case.slug}-{mode}-{kind}.json"
+        encoded = json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True) + "\n"
+        if source_path.exists():
+            assert source_path.read_text(encoding="utf-8") == encoded
+        source_path.write_text(encoded, encoding="utf-8")
+    html_response = popup.request.get(popup.url)
+    assert html_response.status == 200
+    (pdf_dir / f"{case.slug}-{mode}-{locale.code}.html").write_text(
+        html_response.text(), encoding="utf-8"
+    )
     summary_path = (
         pdf_dir / f"{case.slug}-{mode}-{locale.code}-summary.json"
     )
@@ -286,6 +322,9 @@ def test_dossier_print_media_and_pdf_are_valid(
                 "bytes": len(pdf),
                 "locale": locale.code,
                 "page_objects": page_objects,
+                "fonts_ready": True,
+                "public_decision_matches_source": True,
+                "selectable_text_every_page": True,
                 "path": str(
                     pdf_path.relative_to(browser_session.artifact_dir)
                 ),
@@ -296,3 +335,234 @@ def test_dossier_print_media_and_pdf_are_valid(
         + "\n",
         encoding="utf-8",
     )
+
+    # Separate complete source references from the preceding reason/narrative.
+    # Inline LTR isolates alone can interleave their wrapped lines in RTL cells.
+    reference_rows = popup.evaluate(
+        """() => [...document.querySelectorAll(
+          'table[data-dossier-table="exclusions"] tbody tr, ' +
+          'table[data-dossier-table="rejection-conditions"] tbody tr'
+        )].map(row => {
+          const cell = row.querySelector('td:last-child');
+          const anchors = [...cell.querySelectorAll(':scope > a')];
+          const prefix = document.createRange();
+          prefix.selectNodeContents(cell);
+          if (anchors.length) prefix.setEndBefore(anchors[0]);
+          const prefixRects = [...prefix.getClientRects()]
+            .filter(rect => rect.width > 0 && rect.height > 0);
+          return {
+            table: row.closest('table').dataset.dossierTable,
+            code: row.querySelector('th').textContent,
+            prefix: prefix.toString(),
+            prefixBottom: Math.max(...prefixRects.map(rect => rect.bottom)),
+            references: anchors.map(anchor => {
+              const range = document.createRange();
+              range.selectNodeContents(anchor);
+              const rects = [...range.getClientRects()]
+                .filter(rect => rect.width > 0 && rect.height > 0);
+              return {
+                text: anchor.textContent, href: anchor.getAttribute('href'),
+                top: Math.min(...rects.map(rect => rect.top)),
+                bottom: Math.max(...rects.map(rect => rect.bottom)),
+              };
+            }),
+          };
+        })"""
+    )
+    layout_failures = []
+    gap_records = exported["blocks"]["gap"]["records"]
+    for table, source_key in (
+        ("exclusions", "hard_exclusions"),
+        ("rejection-conditions", "rejection_conditions"),
+    ):
+        rendered_rows = [row for row in reference_rows if row["table"] == table]
+        assert len(rendered_rows) == len(gap_records[source_key])
+        for row, source in zip(rendered_rows, gap_records[source_key], strict=True):
+            assert row["code"] == source["code"]
+            expected_prefix = (
+                source["localized_narrative"][locale.code]
+                if table == "exclusions" else source["reason_code"]
+            )
+            assert row["prefix"] == expected_prefix
+            assert [(ref["text"], ref["href"]) for ref in row["references"]] == [
+                (evidence_id, f"#evidence-{evidence_id}")
+                for evidence_id in source.get("evidence_ids", [])
+            ]
+            preceding_bottom = row["prefixBottom"]
+            for ref in row["references"]:
+                if ref["top"] < preceding_bottom - 0.01:
+                    layout_failures.append({
+                        "finding": "BIDI-REF-01", "table": table,
+                        "code": row["code"], "reference": ref["text"],
+                        "preceding_bottom": preceding_bottom, "top": ref["top"],
+                    })
+                preceding_bottom = ref["bottom"]
+
+    nested_record_pages = []
+    counterfactual = exported.get("counterfactual")
+    q3 = (
+        counterfactual.get("q3_brownfield_versus_greenfield")
+        if isinstance(counterfactual, dict) else None
+    )
+    if locale.code == "en" and isinstance(q3, dict) and "incremental_capacity_kt" in q3:
+        strings = locale_bundle(locale)["strings"]
+        term = strings["dossier.field.q3_brownfield_versus_greenfield"]
+        field = strings["dossier.field.incremental_capacity_kt"]
+        value = q3["incremental_capacity_kt"]
+        if isinstance(value, (int, float)):
+            value_text = format(value, ".12g")
+        elif value in ("UNAVAILABLE", "NOT_CALCULABLE", "NOT_APPLICABLE"):
+            value_text = strings[f"dossier.availability.{value.lower()}"]
+        else:
+            value_text = str(value)
+        expected_fact = re.sub(r"\s", "", field + value_text)
+        nested_record_pages = [
+            {"page": index + 1, "first_fact_present": expected_fact in re.sub(r"\s", "", text)}
+            for index, text in enumerate(texts) if term in text
+        ]
+        if not nested_record_pages or not all(row["first_fact_present"] for row in nested_record_pages):
+            layout_failures.append({
+                "finding": "NESTED-DT-01", "term": term,
+                "expected_first_fact": field + " " + value_text,
+                "pages": nested_record_pages,
+            })
+    # Exact DOM/source associations complement the PDFium Arabic page proof.
+    # pypdf cannot faithfully decode these Arabic glyphs; do not reverse its text.
+    record_associations = []
+    strings = locale_bundle(locale)["strings"]
+    if mode == "simulated" and locale.code == "ar" and case.slug in (
+        "polypropylene", "alu-profiles", "penicillin-api",
+    ):
+        if case.slug == "polypropylene":
+            source_rule = next(
+                row for row in exported["blocks"]["ledger"]["records"]["rules"]
+                if row["rule_id"] == "R3"
+            )
+            rule = popup.locator(".rule-record").filter(
+                has=popup.locator("h3 > .technical-token", has_text=re.compile(r"^R3$"))
+            )
+            term = rule.locator(".record-group > dt").filter(
+                has_text=re.compile("^" + re.escape(strings["dossier.field.quantity"]) + "$")
+            )
+            expect(term).to_have_count(1)
+            first = term.locator("xpath=../dd/dl/div[1]")
+            expect(first.locator(":scope > dt")).to_have_text(strings["dossier.field.basis"])
+            expect(first.locator(":scope > dd")).to_have_text(source_rule["metrics"]["quantity"]["basis"])
+            record_associations.append({
+                "finding": "NESTED-DT-02", "heading": term.inner_text(),
+                "first_label": first.locator(":scope > dt").inner_text(),
+                "first_value": first.locator(":scope > dd").inner_text(),
+                "source_path": "blocks.ledger.records.rules[rule_id=R3].metrics.quantity.basis",
+            })
+        if case.slug == "alu-profiles":
+            raw = exported["evidence_pack"]["scenario_inputs"]["economics"]["data"]
+            term = popup.locator("#dossier-economics .record-group > dt").filter(
+                has_text=re.compile("^" + re.escape(strings["dossier.field.national_value"]) + "$")
+            )
+            expect(term).to_have_count(1)
+            first = term.locator("xpath=../dd/dl/div[1]")
+            expect(first.locator(":scope > dt")).to_have_text(strings["dossier.field.displacement"])
+            expect(first.locator(":scope > dd")).to_have_text(format(raw["national_value"]["displacement"], ".12g"))
+            record_associations.append({
+                "finding": "NESTED-DT-04", "heading": term.inner_text(),
+                "first_label": first.locator(":scope > dt").inner_text(),
+                "first_value": first.locator(":scope > dd").inner_text(),
+                "source_path": "evidence_pack.scenario_inputs.economics.data.national_value.displacement",
+            })
+        if case.slug in ("alu-profiles", "penicillin-api"):
+            source_rule = next(
+                row for row in exported["blocks"]["ledger"]["records"]["rules"]
+                if row["rule_id"] == "R1-D"
+            )
+            rule = popup.locator(".rule-record").filter(
+                has=popup.locator("h3 > .technical-token", has_text=re.compile(r"^R1-D$"))
+            )
+            caption = rule.locator(":scope > .dossier-source-caption")
+            expect(caption).to_have_text(strings["dossier.source_original"])
+            first = rule.locator(":scope > .dossier-source-caption + .dossier-record > div:first-child")
+            expect(first.locator(":scope > dt")).to_have_text(strings["dossier.field.positive_years"])
+            assert first.locator(":scope > dd li").all_inner_texts() == [
+                str(year) for year in source_rule["metrics"]["positive_years"]
+            ]
+            record_associations.append({
+                "finding": "CAPTION-ORPHAN-02" if case.slug == "alu-profiles" else "CAPTION-ORPHAN-01",
+                "heading": caption.inner_text(), "first_label": first.locator(":scope > dt").inner_text(),
+                "first_values": first.locator(":scope > dd li").all_inner_texts(),
+                "source_path": "blocks.ledger.records.rules[rule_id=R1-D].metrics.positive_years",
+            })
+    if mode == "simulated" and locale.code == "ar" and case.slug == "streptomycin-api":
+        caption = popup.locator("#dossier-capability > .dossier-source-caption")
+        expect(caption).to_have_count(1)
+        expect(caption).to_have_text(strings["dossier.source_original"])
+        group = popup.locator(
+            "#dossier-capability > .dossier-source-caption + "
+            ".dossier-record > .record-group:first-child"
+        )
+        expect(group).to_have_count(1)
+        expect(group.locator(":scope > dt")).to_have_text(strings["dossier.field.profile_hard_gates"])
+        first = group.locator(":scope > dd > .dossier-record > .record-scalar:first-child")
+        expect(first).to_have_count(1)
+        expect(first.locator(":scope > dt")).to_have_text(strings["dossier.field.named_molecule_and_synthesis_route"])
+        expect(first.locator(":scope > dd")).to_have_text(
+            exported["blocks"]["capability"]["records"]["profile_hard_gates"]["named_molecule_and_synthesis_route"]
+        )
+        record_associations.append({
+            "finding": "CAPTION-ORPHAN-03", "caption": caption.inner_text(),
+            "heading": group.locator(":scope > dt").inner_text(),
+            "first_label": first.locator(":scope > dt").inner_text(),
+            "first_value": first.locator(":scope > dd").inner_text(),
+            "source_path": "blocks.capability.records.profile_hard_gates.named_molecule_and_synthesis_route",
+        })
+    if mode == "simulated" and locale.code == "en" and case.slug == "alu-foil":
+        reconciliation = exported["blocks"]["authority"]["records"]["integrity"]["scenario_reconciliation"]
+        term = strings["dossier.field.scenario_reconciliation"]
+        first_fact = strings["dossier.field.status"] + str(reconciliation["status"])
+        reconciliation_pages = [
+            {"page": index + 1, "first_fact_after_heading": re.sub(r"\s", "", first_fact) in re.sub(r"\s", "", text.split(term, 1)[1])}
+            for index, text in enumerate(texts) if term in text
+        ]
+        record_associations.append({
+            "finding": "NESTED-DT-03", "heading": term, "first_fact": first_fact,
+            "source_path": "blocks.authority.records.integrity.scenario_reconciliation.status",
+            "pages": reconciliation_pages,
+        })
+        if len(reconciliation_pages) != 1 or not reconciliation_pages[0]["first_fact_after_heading"]:
+            layout_failures.append({"finding": "NESTED-DT-03", "pages": reconciliation_pages})
+    if record_associations:
+        (pdf_dir / f"{case.slug}-{mode}-{locale.code}-record-associations.json").write_text(
+            json.dumps(record_associations, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+        )
+
+    (pdf_dir / f"{case.slug}-{mode}-{locale.code}-layout.json").write_text(
+        json.dumps({
+            "reference_rows": reference_rows,
+            "nested_record_pages": nested_record_pages,
+            "failures": layout_failures,
+        }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
+    assert not layout_failures, layout_failures
+
+
+@pytest.mark.parametrize(('mode','case','locale'),CASE_MODE_LOCALES,
+    ids=[f'{mode}-{case.slug}-{locale.code}' for mode,case,locale in CASE_MODE_LOCALES])
+def test_executive_to_analyst_dossier_retains_context(browser_session,mode,case,locale):
+    from browser_tests.executive_pages import goto_executive
+    page=browser_session.page
+    goto_executive(page,case,locale,'PUBLIC_CONCLUSION')
+    page.locator('[data-analyst-link]').click()
+    expect(page.locator('#opportunity-select')).to_have_value(case.id)
+    expect(page.locator('html')).to_have_attribute('lang',locale.code)
+    page.locator(f'[data-mode="{mode}"]').click()
+    select_case(page,case,mode,locale)
+    popup=open_dossier_popup(page,case,mode,locale)
+    expect(popup.locator('.meta')).to_contain_text(case.id)
+    expect(popup.locator('.state')).to_contain_text(case.active_state(mode))
+    analysis=page.request.get(f'/api/opportunities/{case.id}?mode={mode}').json()
+    exported=popup.request.get(f'/api/opportunities/{case.id}/dossier?mode={mode}').json()
+    assert exported['public_decision']==analysis['real_decision']
+    expect(popup.locator('main')).to_contain_text(analysis['real_decision']['localized_narrative'][locale.code]['headline']['text'])
+    popup.locator('[data-dossier-return]').click()
+    expect(popup.locator('#opportunity-select')).to_have_value(case.id)
+    expect(popup.locator('html')).to_have_attribute('lang',locale.code)
+    expect(popup.locator(f'[data-mode="{mode}"]')).to_have_class(re.compile(r'\bactive\b'))
+    assert parse_qs(urlsplit(popup.url).query)=={'opportunity':[case.id],'mode':[mode],'locale':[locale.code]}

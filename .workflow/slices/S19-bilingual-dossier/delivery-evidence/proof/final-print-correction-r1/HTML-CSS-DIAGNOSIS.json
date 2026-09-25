@@ -1,0 +1,35 @@
+{
+  "finding": "Proof assumption correction: CSS is embedded in HTML, not externally linked",
+  "scope": "Read-only diagnosis on4already-produced targetHTML files; full88 comparator remains stopped pending reviewed expectation correction",
+  "css_preimage_sha256": "fb10139b6c278f08be68d26534633b6cb966de91533156319a9b92d7b47ef818",
+  "css_postimage_sha256": "d124607ce4466fad488678c33aacffd248b198f77d7a9b1097ccf39d9fc63b13",
+  "rows": [
+    {
+      "file": "alu-foil-simulated-ar.html",
+      "before_sha256": "59688e88642a4a72c76d5c9283c918876c94b80c5c0ed0bc550ead07bbbff443",
+      "after_sha256": "5d4423268e248d2cc0b30438b72dcc262c2c23bd28c915335e6cc82797745103",
+      "exact_single_css_substitution_in_style": true
+    },
+    {
+      "file": "alu-profiles-simulated-ar.html",
+      "before_sha256": "8eebdc284ef7b1c22809e7f7e00528385bf6cc27ec9c60b85bcbd6346cf0bcd9",
+      "after_sha256": "d2204b5e64c0854a5e3ebe1ae87d5fe74465a13ed2e33c9cf3b15a399445b0b1",
+      "exact_single_css_substitution_in_style": true
+    },
+    {
+      "file": "steel-simulated-en.html",
+      "before_sha256": "dcd9ae72fcabc5054568c382b381146cd36c19a655cd03e55cbe67cc4f02028b",
+      "after_sha256": "a29ff5896617306fc34dcd9d694482837f913e04167a81064ee960c9a293e25d",
+      "exact_single_css_substitution_in_style": true
+    },
+    {
+      "file": "streptomycin-api-simulated-ar.html",
+      "before_sha256": "4fd3dc569ca1fa25049df3a730af3adb87429f5aa7338e545f1339c86c0ec38e",
+      "after_sha256": "3f128b6005487e7289116fa4d7f7ef6a01efaab9443d591e0ad8dd5cbabfc915",
+      "exact_single_css_substitution_in_style": true
+    }
+  ],
+  "original_api_attempt_exit": 1,
+  "failed_html": "SAU-H0-390210-public-en.html",
+  "original_css_text_diff": "--- preimage\n+++ postimage\n@@ -43,6 +43,11 @@\n .dossier-section table { display: var(--layout-dossier-table); inline-size: var(--size-dossier-full); table-layout: fixed; border-collapse: collapse; margin-block: var(--space-12); }\n .dossier-section th, .dossier-section td { display: var(--layout-dossier-cell); padding: var(--space-9); border-block-end: var(--border-hairline) solid var(--color-line); text-align: start; vertical-align: top; min-inline-size: var(--space-0); }\n .dossier-section thead { background: var(--color-soft); }\n+.dossier-section table[data-dossier-table=\"exclusions\"] td:last-child > a,\n+.dossier-section table[data-dossier-table=\"rejection-conditions\"] td:last-child > a,\n+.dossier-section table[data-dossier-table=\"rejection-conditions\"] td:last-child > .technical-token {\n+  display: block;\n+}\n .dossier-record { margin-block: var(--space-9); }\n .dossier-record > div { border-block-end: var(--border-hairline) solid var(--color-line); padding-block: var(--space-7); }\n .dossier-record dt { color: var(--color-muted); font-weight: var(--font-weight-medium); }\n@@ -78,6 +83,7 @@\n   .page h1 { font-size: var(--font-size-dossier-print-title); }\n   .page h2, .page h3 { break-after: avoid; }\n   .dossier-intro { break-inside: avoid; }\n+  .dossier-record .record-group > dt { break-after: avoid; }\n   .rule-record > p:first-of-type { break-after: avoid; }\n   .warning, .branch-disclosure { break-inside: avoid; }\n   .dossier-section > .branch-label, .dossier-section > .branch-disclosure { break-after: avoid; }\n"
+}

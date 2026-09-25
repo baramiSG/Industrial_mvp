@@ -1,0 +1,32 @@
+{
+  "status": "PASS",
+  "source_files_and_pathset": 1759,
+  "changed_paths": 94,
+  "unchanged_nonbaseline": 1629,
+  "graph_inputs": 230,
+  "protected_indexes": 44,
+  "visual_sources": 109,
+  "fonts": 2,
+  "postimages_live_and_copy": 130,
+  "old_preimages_preserved": 130,
+  "codec_records": 128,
+  "directly_decoded_rgb_files": 384,
+  "retained_encodings": 256,
+  "raw_dossier_bounds_calls": 16,
+  "positions": 32,
+  "capture_summary": {
+    "collected": 4,
+    "exit_status": 0,
+    "explicit_gate": true,
+    "failed": 0,
+    "named_tests": [
+      "test_governed_visual_baselines_match"
+    ],
+    "passed": 4,
+    "skipped": 0
+  },
+  "staging_empty": true,
+  "errors": [],
+  "direct_checks": "Previous inline direct check completed source/pathset/input/index/hash/raw bounds/384 decoded-RGB comparisons before a review-only wrong summary filename stopped it. This follow-up reads actual run-summary-visual.json and finishes staging/HEAD checks. No product/generator error or retry.",
+  "review_attempt_note": "FileNotFoundError for capture-artifacts/summary.json retained in tool transcript; corrected lookup run-summary-visual.json. No claim first review command exited0."
+}

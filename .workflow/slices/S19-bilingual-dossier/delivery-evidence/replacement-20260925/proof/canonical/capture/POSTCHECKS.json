@@ -1,0 +1,550 @@
+{
+  "recorded_at_utc": "2026-09-25T13:21:15.086768+00:00",
+  "status": "CAPTURE_EXIT0_POSTCHECKS_PASS_CODEC_AND_MANUAL_PENDING",
+  "proposal_sha256": "7cbf9a77856f2709a84038f2e636649ce36e602dbdcd4496cfc133ab01211960",
+  "capture_command_sha256": "1b03e0eb7fc21313800651be3433be5834fddc583e115413ec7cf483a0a86306",
+  "result_sha256": "09d089df2c12add0afec68aab3ecd383184cbe61bf1eff32017464b90bb74005",
+  "allocation_consumed": true,
+  "visual_tests": "4passed839deselected394.14s",
+  "pathset": 130,
+  "webps": 128,
+  "changed_byte_files": [
+    {
+      "path": "browser_tests/baselines/v0.3.0/ar/desktop-1440x900/journey-e-steel-public-dossier.webp",
+      "old_sha256": "541439db02e5722d168b8b7b3206a606ec7ce4c768283d217883348fafbbf16d",
+      "new_sha256": "68048e0c477a3cd9fe4c251271689dfb64ca508dc555431ab40395d29a3101c6",
+      "bytes": 49538
+    },
+    {
+      "path": "browser_tests/baselines/v0.3.0/ar/desktop-1440x900/journey-i-graph-evidence-to-change.webp",
+      "old_sha256": "452d65aeb7f985dc981da35321f8aa95bb98ff96b3f59218b1e9bb90f84990e6",
+      "new_sha256": "288cd9148b3d91e01f496d74da444eb67b72c164572655d860139e0705a9f0bd",
+      "bytes": 98854
+    },
+    {
+      "path": "browser_tests/baselines/v0.3.0/en/desktop-1440x900/journey-e-steel-public-dossier.webp",
+      "old_sha256": "d684c4d367301dc727b76654027d7a9a405d5bcccc7a84e8062f8cad10880b8e",
+      "new_sha256": "a8578bd5f6314ba51680ab804a0313af64969de7d6e19526ac43ab2d6465f6ba",
+      "bytes": 49490
+    },
+    {
+      "path": "browser_tests/baselines/v0.3.0/en/desktop-1440x900/journey-i-graph-evidence-to-change.webp",
+      "old_sha256": "5b7551a60693f2e594a29c285d268059effcb9e9d27381fa5de5fe413052fe04",
+      "new_sha256": "3a10703cf68cecca52923fb4bb938763d37fb64026d8c1c41f541a080cec72df",
+      "bytes": 106758
+    },
+    {
+      "path": "browser_tests/baselines/v0.3.0/manifest.json",
+      "old_sha256": "00eb35bd4610f1b087bc871cd115f58386e1574e682cb7b1e2e801860aa631e7",
+      "new_sha256": "0d05eee71eb214c65d21209b52d3933144bb888eb1ddc100f9006e9c9d3621bc",
+      "bytes": 67266
+    },
+    {
+      "path": "browser_tests/baselines/v0.3.0/manifest.sha256",
+      "old_sha256": "eb2c08f7f9a07ab5a43fc92b5e3557aa79c3811c17bb75a9e01d9f8834129e72",
+      "new_sha256": "77515a9193b7d9a9de866a16b65cdf4b9acef5938d73ac2d842464679227323f",
+      "bytes": 65
+    }
+  ],
+  "byte_changed_count": 6,
+  "unchanged_nonbaseline_source_rows": 1631,
+  "all45_indexes_unchanged": true,
+  "ordinary_staging_empty": true,
+  "host43_metadata_and_interpreter_unchanged": true,
+  "both130_old_predecessors_unchanged": true,
+  "candidate_previous_absent": true,
+  "owned_container_reaped": true,
+  "new_baseline_files": {
+    "manifest.sha256": "77515a9193b7d9a9de866a16b65cdf4b9acef5938d73ac2d842464679227323f",
+    "manifest.json": "0d05eee71eb214c65d21209b52d3933144bb888eb1ddc100f9006e9c9d3621bc",
+    "en/tablet-1024x768/journey-f-screening-queue-empty.webp": "1aa00445e4b35eb5c8e0818fd3b3d7e99ff196635e7fd919410574c3f250924a",
+    "en/tablet-1024x768/journey-g-sop-public-workspace.webp": "f11daea96354dab0666ec26474d17b276684742f5e6540de06099a54b4150180",
+    "en/tablet-1024x768/journey-h-selection-exclusions.webp": "4cfb8791df7655a67a3828412b1811430a6201fe1ef1efa182c0c432f219693d",
+    "en/tablet-1024x768/journey-f-screening-record.webp": "410e0a4dda9ce2e7dd39a252948a4217214c91acc3b6e47b11347b03660d5cad",
+    "en/tablet-1024x768/journey-i-graph-route-blocking.webp": "69b06c2d45d28a5d626f69805bf40af38bf90c38448f2ced72de1cbdc957ba4a",
+    "en/tablet-1024x768/journey-d-polypropylene-public-workspace.webp": "84428ae9550afa715243867973f948b2c7a02d8e103f059c256b3b02e90480e6",
+    "en/tablet-1024x768/journey-e-steel-simulated-dossier.webp": "1797d85c3f3f0fab379e4ab3ec1ddede47dbc36c79c59805da8c87fcb6c37c47",
+    "en/tablet-1024x768/journey-g-alu-profiles-public-workspace.webp": "645af019a01049b5d0c318c66e3e9d5f6cfd69f80757f223c50d18cd05abe4ff",
+    "en/tablet-1024x768/journey-g-fert-retail-packs-public-workspace.webp": "29670b38e07d6b6b3f911f75b4561ea58b58be20a204a1d012199c5b0207104c",
+    "en/tablet-1024x768/journey-f-screening-queue-robust.webp": "22bd6d40336f8b6533649928754bbf8d5c35be498062e6293346139d77efbfb8",
+    "en/tablet-1024x768/journey-g-penicillin-api-public-workspace.webp": "651e8428e9ca23d620b374e96b4178645e7584e67b26fc51efca48433ef0cfda",
+    "en/tablet-1024x768/journey-e-polypropylene-simulated-dossier.webp": "5b22a23c86783d08003c3edd3ed739b75029516414cde801e8b5019e0ddc460d",
+    "en/tablet-1024x768/journey-g-tinplate-public-workspace.webp": "65cd0be04b4b52d4eecfd99c375f0d93e42ad3480577eae0f0b35327805b64c7",
+    "en/tablet-1024x768/journey-j-executive-reject.webp": "b85b9f187f005f142e5f914772816602f5620b20d4b9eea7d01c6b85e49ee734",
+    "en/tablet-1024x768/journey-b-steel-public-workspace.webp": "2be4ef2e84e3f55f8e29d744df211ab88278c112753d08a452c5f9a090ae8d8d",
+    "en/tablet-1024x768/journey-g-streptomycin-api-public-workspace.webp": "95c31894ea22a8e01f06490c1b02dd74d898f9eb7f7d7478f4888c70a951de42",
+    "en/tablet-1024x768/journey-e-steel-public-dossier.webp": "80ca69887816447e7b81a269cfe75e33d842c13e0291ca2128ea08531d9c7ef4",
+    "en/tablet-1024x768/journey-a-portfolio-public.webp": "1ffb3cbe805cde3238780c1af7229301b7eaef002ed2bb15cd4e4e190188757f",
+    "en/tablet-1024x768/journey-i-graph-adjacency.webp": "c646250f6c8498120c793ec10cbb57ce4c21c1387e6d98338e7e5f95d69193d5",
+    "en/tablet-1024x768/journey-d-polypropylene-simulated-workspace.webp": "517d368eb7094d46a1bec9effd6e11ccbaa077993b0240dab5b64beca34fcc1a",
+    "en/tablet-1024x768/journey-j-executive-ministry-unlocks.webp": "65dabd889bc3c3032f33a00a9a893d49e79f982bb8c8db78078131ee8f82fe75",
+    "en/tablet-1024x768/journey-g-galvalume-public-workspace.webp": "35d1662871856e3a5217e4a3aced7ac617d272383b7ea799b87252142d93970e",
+    "en/tablet-1024x768/journey-j-executive-signal-public.webp": "1d89c3d927dff2073bd3ab14f745d0d294435b36de0b4310eb13ed41f89d5d8b",
+    "en/tablet-1024x768/journey-g-pe-film-public-workspace.webp": "8646d1c07df0996df43fbd29a877d28527e5f70c3b7313977be417bd5cff60ac",
+    "en/tablet-1024x768/journey-i-graph-shared-enabler.webp": "ae4578c4da5c93662ee3aeaf70d19823453c985fd1a9a61097d198d5b8aa4dd9",
+    "en/tablet-1024x768/journey-j-executive-simulated-route.webp": "ffb2b75e0509c3bec88b37544f1af6d99d57d5fd52a952624ca9c205f1d86b18",
+    "en/tablet-1024x768/journey-g-alu-foil-public-workspace.webp": "5eb2170fe83f27f16c7df721909158533496c4b1305297841b64fa17e3ce850b",
+    "en/tablet-1024x768/journey-e-polypropylene-public-dossier.webp": "2fe3c89e9e3d38e5f9216b76117c1b4b91344ee1ea9aaa155816d9370ab3d5e6",
+    "en/tablet-1024x768/journey-i-graph-evidence-to-change.webp": "1abad76dad8a839d622f514b60106bdb9eb8c8608afb23b80bcfbd0d1b65e12a",
+    "en/tablet-1024x768/journey-a-portfolio-simulated.webp": "36bf255bb7876a366eae434b13b3a5670e9a9fd9239655c0f39c6f63ed0b898e",
+    "en/tablet-1024x768/journey-c-steel-simulated-workspace.webp": "01c94c380b9a288f28b455789eb9ceef12550a46a008767e51eebe2a7814aae1",
+    "en/tablet-1024x768/journey-f-screening-summary.webp": "58c95662ece1651db6d2f9f1892f3863cace5c1e3080174f89ce99fa75fac85a",
+    "en/desktop-1440x900/journey-f-screening-queue-empty.webp": "cd6c2011405141829eab9e88905594a069bfedb2fdd087d4daea315954b79853",
+    "en/desktop-1440x900/journey-g-sop-public-workspace.webp": "6344059a78b167d08148391b3574c9ee34ff6e41197eb68a46b0326bff71e709",
+    "en/desktop-1440x900/journey-h-selection-exclusions.webp": "26bf12fd617db5e79ecc6f584c1ece8607a310f4d753346995952133e6aaf640",
+    "en/desktop-1440x900/journey-f-screening-record.webp": "8c4b9ee21d75ca31a93b743ad0a21af9d1f396297cac3d497264c8205eb44bab",
+    "en/desktop-1440x900/journey-i-graph-route-blocking.webp": "d069de58a2933738d2bde9af4605bf25460443faccce82fc753823c0cc65d1be",
+    "en/desktop-1440x900/journey-d-polypropylene-public-workspace.webp": "eb129b0d628c5692f87993a4f02668048f8f17be084c99f4a10a7c6e8245ebab",
+    "en/desktop-1440x900/journey-e-steel-simulated-dossier.webp": "9b3ad0d632c973f80ccf2abf2cc442ecfa1a2d8a7ab679c34f55473d6ef34839",
+    "en/desktop-1440x900/journey-g-alu-profiles-public-workspace.webp": "6df5e2f7eb12016a47a41c33c56f069305db698d986ba2f4cc967a1319425a9b",
+    "en/desktop-1440x900/journey-g-fert-retail-packs-public-workspace.webp": "edc2c6b56b7ccd58a48aab14a8a7cd505e6e6b90c1fb72c1548b43c473597047",
+    "en/desktop-1440x900/journey-f-screening-queue-robust.webp": "b8687a3dd94dfa47bd40b165a6cce67c947cacc0dfd9c820ac16100d31fc41b5",
+    "en/desktop-1440x900/journey-g-penicillin-api-public-workspace.webp": "b7ae1aefbc9c2c803d8d93b55ee8f434326d7dd6866bc43cfd01ffe0f0942440",
+    "en/desktop-1440x900/journey-e-polypropylene-simulated-dossier.webp": "0be6122f67d59190880ae62fdf6d976f003d287dd4f1b643c7e0e9de68c320bc",
+    "en/desktop-1440x900/journey-g-tinplate-public-workspace.webp": "0727f7aa0c99fe2446ff2a2d4e9bcaa431e5bb33324c38de26362b4d096efb5e",
+    "en/desktop-1440x900/journey-j-executive-reject.webp": "e3b94fe38d992968996e53c337f82f69e97fac5520f736b859b01d3a3153d3cf",
+    "en/desktop-1440x900/journey-b-steel-public-workspace.webp": "793d0cda4caba530391b09f27f41135184dffbd436ed394aa76a86e8cd64872d",
+    "en/desktop-1440x900/journey-g-streptomycin-api-public-workspace.webp": "1600299b1c6f03b8c01b0896d5fab9ac59814e991ce4587c5c57ed33f89b6489",
+    "en/desktop-1440x900/journey-e-steel-public-dossier.webp": "a8578bd5f6314ba51680ab804a0313af64969de7d6e19526ac43ab2d6465f6ba",
+    "en/desktop-1440x900/journey-a-portfolio-public.webp": "c66256c43e5da1b8c64c1da00817f4ea67fed40b508a23cd32f35047f570f45d",
+    "en/desktop-1440x900/journey-i-graph-adjacency.webp": "8f8c7982eb4d04c7ac60d4dc39370f1444f918c4fe1ec1a1bf6806ad4b3e31ed",
+    "en/desktop-1440x900/journey-d-polypropylene-simulated-workspace.webp": "ab1a3cdf37d7b755ad852fec8cdb0d08f53dacf89abb25f4eac297672fe23d05",
+    "en/desktop-1440x900/journey-j-executive-ministry-unlocks.webp": "5b933bfbeaf6528bc622f8e94ff3becfaad537d81b5b3103834fb4bf2ebc53e7",
+    "en/desktop-1440x900/journey-g-galvalume-public-workspace.webp": "1c075afc7766871038c4d7b35f2f4207d6d84116f85c0c85fe4b64069e32fb93",
+    "en/desktop-1440x900/journey-j-executive-signal-public.webp": "0bb72994727cb942201aead17b8af1c40fb3a057cdd2b6fe369b9e8901b51c0f",
+    "en/desktop-1440x900/journey-g-pe-film-public-workspace.webp": "4c6994412104ae84b8bd2d51a3901a32d073879819d79e5093bfe7549015eb4d",
+    "en/desktop-1440x900/journey-i-graph-shared-enabler.webp": "c8bfd680bb7003b79374c336c8e5b8489c8497b36b039aac25c5426dc90c1285",
+    "en/desktop-1440x900/journey-j-executive-simulated-route.webp": "672e3e9dfed6174dd82f0af6d71011b870916382d2b8c15022431dd23599b577",
+    "en/desktop-1440x900/journey-g-alu-foil-public-workspace.webp": "2d70abf6ac8f9e9f8c758cb216f8cb6b5e795e41039e2ec3527b6f70832f0fdd",
+    "en/desktop-1440x900/journey-e-polypropylene-public-dossier.webp": "833ae3d4f07063c66f8a39ef953820243201745844680355dc285d9aa4128a9f",
+    "en/desktop-1440x900/journey-i-graph-evidence-to-change.webp": "3a10703cf68cecca52923fb4bb938763d37fb64026d8c1c41f541a080cec72df",
+    "en/desktop-1440x900/journey-a-portfolio-simulated.webp": "95e12b3b37cb255d9ae7916c3644cc2fc2c543b073bb02ab0884f8d73c91a7a5",
+    "en/desktop-1440x900/journey-c-steel-simulated-workspace.webp": "a278ced2ed19f1a9b87eae3a3d9f69f003de674949e9d53ae89f89ddf4ae7427",
+    "en/desktop-1440x900/journey-f-screening-summary.webp": "60e685fdaa841246776d6bd44d51da4663b0ab911d8ae9aca6e801662daada2b",
+    "ar/tablet-1024x768/journey-f-screening-queue-empty.webp": "1275592397e79d311851ffa1524578fc74fdc9e968edd5d054257f8dfe06d5d0",
+    "ar/tablet-1024x768/journey-g-sop-public-workspace.webp": "f4fc1b9d0af09df4ab29d4e5cd9e51675b7d0bbbc16d4305e56e8663982eeb04",
+    "ar/tablet-1024x768/journey-h-selection-exclusions.webp": "eee065e43d4c8ab0cd1ac4c5922551b5a8a24507e3192aefd48f1828aa7cd542",
+    "ar/tablet-1024x768/journey-f-screening-record.webp": "d26378c5bab0521bf974748ac22b87491561367a220562d816edc3e6435ae19e",
+    "ar/tablet-1024x768/journey-i-graph-route-blocking.webp": "1eb70512d80cf237009deedf9363b383888803740ce9e00cf11ef2919ba9b1ab",
+    "ar/tablet-1024x768/journey-d-polypropylene-public-workspace.webp": "f4e53446ef89429a3389d44fbc1cb0988a1cb44ef8dd09965cf5974c10d322c4",
+    "ar/tablet-1024x768/journey-e-steel-simulated-dossier.webp": "a44d6c8363e461cca36c5e51a04dc32fd21ee9d1bca8bfeb26f0c95c22038495",
+    "ar/tablet-1024x768/journey-g-alu-profiles-public-workspace.webp": "4db9e2f643b2b02f713cd8e98b3b5b056fc7a59cc26c7bc8c5005deb92c149a1",
+    "ar/tablet-1024x768/journey-g-fert-retail-packs-public-workspace.webp": "5eede30b88f62710bea3723c2066a6aa1a4bf3b166a5f6854d884260846fc2a1",
+    "ar/tablet-1024x768/journey-f-screening-queue-robust.webp": "c655ce7536c3a9df1b35cf24da0ce4351bbf1ed728ff7b4b04acc08ef6832e33",
+    "ar/tablet-1024x768/journey-g-penicillin-api-public-workspace.webp": "6450a327a085d8960c45b781e2deb01517bd2d31649736996d2502860d54290b",
+    "ar/tablet-1024x768/journey-e-polypropylene-simulated-dossier.webp": "41037b63519f3738a3380d41bddceae3458a2dd60ac415fc86f692b871cd8149",
+    "ar/tablet-1024x768/journey-g-tinplate-public-workspace.webp": "f22c2b0ed38056877d4f70a56da0a7e54dc22bce90747aeb3f18a4d87c9d2bbd",
+    "ar/tablet-1024x768/journey-j-executive-reject.webp": "9d6b69846df826456a9d98210cfb42f914f5ae8b4bbb18823b7fcfc96cc0e3f7",
+    "ar/tablet-1024x768/journey-b-steel-public-workspace.webp": "961948547d36a44b7baaf7ce7b415fe433fff1fd3c9785f2a2793571f02bc4de",
+    "ar/tablet-1024x768/journey-g-streptomycin-api-public-workspace.webp": "b15f9eadc99af1136263d12f1fbf07e549549e21a982571a5fe13720a02724fc",
+    "ar/tablet-1024x768/journey-e-steel-public-dossier.webp": "df4bc8ddbd2755fec75a50716673795bfc7b1896d4fe6fd4441ef72abca75ab7",
+    "ar/tablet-1024x768/journey-a-portfolio-public.webp": "85960d94bcd3176e5e221b189a5c15368a4a0db1394ebdf532357a6e5728b633",
+    "ar/tablet-1024x768/journey-i-graph-adjacency.webp": "6bc61be3edf3388c17caa5f0ac74bc698f10a057119010a4f97d4c4fe29e606b",
+    "ar/tablet-1024x768/journey-d-polypropylene-simulated-workspace.webp": "2d16c1e45b2dab355d9d45e41ce3f01551a00594471b8deaa3b5e710be534786",
+    "ar/tablet-1024x768/journey-j-executive-ministry-unlocks.webp": "2a9c96d09c4e5e1c57528eba6e991f22270172d8168493e8ab8463b003615dc7",
+    "ar/tablet-1024x768/journey-g-galvalume-public-workspace.webp": "baccf695df37778a29aa068d03825e0f8f4ef9b5d923ac8552e5c0f33f0acb0a",
+    "ar/tablet-1024x768/journey-j-executive-signal-public.webp": "3eb6107516d236df91e7ff7c8df07a8749991d937382fddb8b0f87b2d140b0f0",
+    "ar/tablet-1024x768/journey-g-pe-film-public-workspace.webp": "183225bb67d5f4a4448148bfd0a1b121adcf9c2277054367900723d6b294d829",
+    "ar/tablet-1024x768/journey-i-graph-shared-enabler.webp": "cf354a2431ef4223256b3022bbc4d81a4c945df5210dce8a9793bf6fa3687ad9",
+    "ar/tablet-1024x768/journey-j-executive-simulated-route.webp": "6f2959860466dc32433cfd52e768d4a69fc3300276654054aede90780a01273d",
+    "ar/tablet-1024x768/journey-g-alu-foil-public-workspace.webp": "3a5e4877cd131b6f348dfb9ff6b3ab24acb3cd722be8d17ba25950b6af877b7c",
+    "ar/tablet-1024x768/journey-e-polypropylene-public-dossier.webp": "d3ad54716a4aff7f6d63a3fe0757434b01f83d9c594413bdbf4301646c21b88a",
+    "ar/tablet-1024x768/journey-i-graph-evidence-to-change.webp": "743bc9ca62b4df6e2a61e2ffd5474eed0d7b2e86f5d5bf7a6f074a8b766ed72d",
+    "ar/tablet-1024x768/journey-a-portfolio-simulated.webp": "849982c0a3632bbe02e61ccf8a0925a749f86d371c0c633df6ff5bb6b18a815f",
+    "ar/tablet-1024x768/journey-c-steel-simulated-workspace.webp": "a99150663e36c0f5ec28bfeced7dfc7485fd5e9ade6792c33b7149081461e048",
+    "ar/tablet-1024x768/journey-f-screening-summary.webp": "15c8b54fab4315e8037736a27eb779c510c8a8ff946731ca0408ff618639ada0",
+    "ar/desktop-1440x900/journey-f-screening-queue-empty.webp": "b9841b97bc9a11c4089ee91bc5f403c9258b38a9d890db224b8cea5a841996da",
+    "ar/desktop-1440x900/journey-g-sop-public-workspace.webp": "6b0173fe4600fb97e67394b9637ffabdfde8ded78b07045443fb74cb3718fd7d",
+    "ar/desktop-1440x900/journey-h-selection-exclusions.webp": "d03eabad6ffd9ff57d850213aa77d8009f2c1272f213dc2a50fe6491d8dc307a",
+    "ar/desktop-1440x900/journey-f-screening-record.webp": "3484d0f4a3b6a4b5c07d8d6e10dc25a4acfc7328a55d989204b48b02f3929bd0",
+    "ar/desktop-1440x900/journey-i-graph-route-blocking.webp": "f7b93d743936d1cd79c90e5594378317fa58da210fb457a43b6bfc82f24ccd27",
+    "ar/desktop-1440x900/journey-d-polypropylene-public-workspace.webp": "b4da9986f2544d88fa9f901daef30de5c82defbdbf491d0aa33d6db8bdd46a1a",
+    "ar/desktop-1440x900/journey-e-steel-simulated-dossier.webp": "1728b25a488e433f86346acc844d0ae5839ac933ec6e5b63f541c9121d34ed45",
+    "ar/desktop-1440x900/journey-g-alu-profiles-public-workspace.webp": "dd37c58ce926605fc0a5e75814fd4015e049c8716a90dbd012056ba471a6eaef",
+    "ar/desktop-1440x900/journey-g-fert-retail-packs-public-workspace.webp": "cbdba06fe44d4894de347929e0bc3dc749dfb2deaf77d0c40f7d97b36a2c0740",
+    "ar/desktop-1440x900/journey-f-screening-queue-robust.webp": "bd926c938fe9ee66917c01a04c322d078e17727e1fd2c6cd6d6ae24efdd2d579",
+    "ar/desktop-1440x900/journey-g-penicillin-api-public-workspace.webp": "232a3122db5a09cff5ebcd0e046cfbe7e5db5a5897e709314822982a0ff51672",
+    "ar/desktop-1440x900/journey-e-polypropylene-simulated-dossier.webp": "38f6bcdf59fcffcf46ce8b54ec3c82ddab3564b16a3b0f2cc9e4caeb2b0be430",
+    "ar/desktop-1440x900/journey-g-tinplate-public-workspace.webp": "634664a2dcd10320943c7c7df54db20f06120bd5394b7742232e4cd90af6377c",
+    "ar/desktop-1440x900/journey-j-executive-reject.webp": "60b3198359c04f366e258f2b42d461ee2e4ddb3fb6337e403b1ca961810885da",
+    "ar/desktop-1440x900/journey-b-steel-public-workspace.webp": "338899bd3a4705404b53aaaf8f7193ccf96153ca80cb73f1c6e574fae8dc2753",
+    "ar/desktop-1440x900/journey-g-streptomycin-api-public-workspace.webp": "b9c7dd48d020eb9f0ccc681d67a48578f23ec569af9ad57446fef7632f081989",
+    "ar/desktop-1440x900/journey-e-steel-public-dossier.webp": "68048e0c477a3cd9fe4c251271689dfb64ca508dc555431ab40395d29a3101c6",
+    "ar/desktop-1440x900/journey-a-portfolio-public.webp": "01295a9ee5446c4a4af27c5930d47f1cd005a99e0efe53c61fad52960626b130",
+    "ar/desktop-1440x900/journey-i-graph-adjacency.webp": "478ad11527c07f88ebccf581a8bc3d589f0d4560a4f9b6642cf17aa97dffb232",
+    "ar/desktop-1440x900/journey-d-polypropylene-simulated-workspace.webp": "5c4ef0dc85aa35c1018eabd0bd28815904dd1c79de15d19f51e6138894714868",
+    "ar/desktop-1440x900/journey-j-executive-ministry-unlocks.webp": "42e9fa35d204aa6e7314c42f741479f20a90606b9bbc8dbc0c3f2c44f31d0ecf",
+    "ar/desktop-1440x900/journey-g-galvalume-public-workspace.webp": "75c2e96f9c0a49039861cd9c2708bd1b40cb7885821e542db632e084f78c4e40",
+    "ar/desktop-1440x900/journey-j-executive-signal-public.webp": "a8a80882b8595ed26b4f10572dfedebcaf0403accc59e8b2aeeb25e6e3352ae0",
+    "ar/desktop-1440x900/journey-g-pe-film-public-workspace.webp": "41675f0a370e3a81d80eb909083c9bb7e87f04318dc20051cc5175a0229aad3f",
+    "ar/desktop-1440x900/journey-i-graph-shared-enabler.webp": "38bfac89e18c746ccd75dfc0ea79f87a2a2ab57906cd93eddca41040190c8dbd",
+    "ar/desktop-1440x900/journey-j-executive-simulated-route.webp": "5b7925089ffaf219169cfaed6232abb76fa3610e1a93571063e763010a75bfde",
+    "ar/desktop-1440x900/journey-g-alu-foil-public-workspace.webp": "ea51b0c649653a0fba628da9e7d1493bd4d2806dbe6fee37e757191543bbf83f",
+    "ar/desktop-1440x900/journey-e-polypropylene-public-dossier.webp": "006f30855e4b1963ed5e8c21917fab0ffeeb0480e651fc910235a069249619ae",
+    "ar/desktop-1440x900/journey-i-graph-evidence-to-change.webp": "288cd9148b3d91e01f496d74da444eb67b72c164572655d860139e0705a9f0bd",
+    "ar/desktop-1440x900/journey-a-portfolio-simulated.webp": "ddf33bcff8a5efeb560628afa2972f3d1e01c52e5770d9bd53cd7072e0e847be",
+    "ar/desktop-1440x900/journey-c-steel-simulated-workspace.webp": "2e47ca1d93a3d8f020f2ccb7be6b84c5bd776bf1c89e088590936df071a95fec",
+    "ar/desktop-1440x900/journey-f-screening-summary.webp": "a3f1fbf3ae62c673f306d37d6acef297a98fd0f121d8cced0009d77c49595eda"
+  },
+  "postimage_root": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/postimages/v0.3.0",
+  "fresh_artifact_root": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e",
+  "fresh_artifacts": {
+    "server.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "mtime_ns": 1790341958776352933,
+      "uid": 1000,
+      "gid": 1000
+    },
+    "run-summary-visual.json": {
+      "sha256": "978257d7e968433c2d825f14e584cebd97c50a0f03966e0360d5f2986f3e001c",
+      "bytes": 179,
+      "mtime_ns": 1790342351170265564,
+      "uid": 1000,
+      "gid": 1000
+    },
+    "dossier-bounds/en/tablet-1024x768/journey-e-polypropylene-public-dossier-leftmost.png": {
+      "sha256": "5a975f8e9941ef8dcde504608112864e2bcab8c83e4286be6dd510cf010c8f67",
+      "bytes": 93789,
+      "mtime_ns": 1790342101484816648,
+      "uid": 1000,
+      "gid": 1000
+    },
+    "dossier-bounds/en/tablet-1024x768/journey-e-polypropylene-simulated-dossier.json": {
+      "sha256": "04dcc467d28a685d2165e40ccbd93a4dfadaa8bec2424a62db8b9809a5747f4d",
+      "bytes": 6867,
+      "mtime_ns": 1790342104404939814,
+      "uid": 1000,
+      "gid": 1000
+    },
+    "dossier-bounds/en/tablet-1024x768/journey-e-polypropylene-simulated-dossier-initial.png": {
+      "sha256": "df3867e1219e6fd9f6da421c28ce6e90d10e82e04a43d561b6e8b1bc95b4bcf6",
+      "bytes": 88337,
+      "mtime_ns": 1790342104336936944,
+      "uid": 1000,
+      "gid": 1000
+    },
+    "dossier-bounds/en/tablet-1024x768/journey-e-steel-public-dossier-leftmost.png": {
+      "sha256": "59ef713f58e989cdb3ab019360781bd5780570df63c09c604251d20517d1526a",
+      "bytes": 97549,
+      "mtime_ns": 1790342096356908230,
+      "uid": 1000,
+      "gid": 1000
+    },
+    "dossier-bounds/en/tablet-1024x768/journey-e-steel-simulated-dossier-initial.png": {
+      "sha256": "2945cc7aa4016ca67a42227bcadf8438193e87b62b2dba0e82739dfddabcf7e9",
+      "bytes": 100923,
+      "mtime_ns": 1790342099228721490,
+      "uid": 1000,
+      "gid": 1000
+    },
+    "dossier-bounds/en/tablet-1024x768/journey-e-polypropylene-public-dossier.json": {
+      "sha256": "fc22f7cd490577109daac200bf10f79a968ff630d124792a8b76af63f81347aa",
+      "bytes": 5477,
+      "mtime_ns": 1790342101488816818,
+      "uid": 1000,
+      "gid": 1000
+    },
+    "dossier-bounds/en/tablet-1024x768/journey-e-polypropylene-public-dossier-initial.png": {
+      "sha256": "5a975f8e9941ef8dcde504608112864e2bcab8c83e4286be6dd510cf010c8f67",
+      "bytes": 93789,
+      "mtime_ns": 1790342101440814794,
+      "uid": 1000,
+      "gid": 1000
+    },
+    "dossier-bounds/en/tablet-1024x768/journey-e-steel-public-dossier-initial.png": {
+      "sha256": "59ef713f58e989cdb3ab019360781bd5780570df63c09c604251d20517d1526a",
+      "bytes": 97549,
+      "mtime_ns": 1790342096308906055,
+      "uid": 1000,
+      "gid": 1000
+    },
+    "dossier-bounds/en/tablet-1024x768/journey-e-steel-simulated-dossier-leftmost.png": {
+      "sha256": "2945cc7aa4016ca67a42227bcadf8438193e87b62b2dba0e82739dfddabcf7e9",
+      "bytes": 100923,
+      "mtime_ns": 1790342099292724189,
+      "uid": 1000,
+      "gid": 1000
+    },
+    "dossier-bounds/en/tablet-1024x768/journey-e-steel-simulated-dossier.json": {
+      "sha256": "2402823f3ff4e1ddd8d5da7876eec277a220f931ae82c395d54ed1d7474bee32",
+      "bytes": 7051,
+      "mtime_ns": 1790342099292724189,
+      "uid": 1000,
+      "gid": 1000
+    },
+    "dossier-bounds/en/tablet-1024x768/journey-e-polypropylene-simulated-dossier-leftmost.png": {
+      "sha256": "df3867e1219e6fd9f6da421c28ce6e90d10e82e04a43d561b6e8b1bc95b4bcf6",
+      "bytes": 88337,
+      "mtime_ns": 1790342104404939814,
+      "uid": 1000,
+      "gid": 1000
+    },
+    "dossier-bounds/en/tablet-1024x768/journey-e-steel-public-dossier.json": {
+      "sha256": "69e6cba18d7e021f4e6944c590eaba71503e5062d976bf6de2b39f63ada40437",
+      "bytes": 5601,
+      "mtime_ns": 1790342096356908230,
+      "uid": 1000,
+      "gid": 1000
+    },
+    "dossier-bounds/en/desktop-1440x900/journey-e-polypropylene-public-dossier-leftmost.png": {
+      "sha256": "b17d0404ad24cf27d7c1daa06cce6a1ab640586639246e45be18154434ed2825",
+      "bytes": 117836,
+      "mtime_ns": 1790342002258212829,
+      "uid": 1000,
+      "gid": 1000
+    },
+    "dossier-bounds/en/desktop-1440x900/journey-e-polypropylene-simulated-dossier.json": {
+      "sha256": "017af24048a7d55274038cfa592ff5e49f6635b62c30e31014f965e8ecf1f3ee",
+      "bytes": 6917,
+      "mtime_ns": 1790342005006306785,
+      "uid": 1000,
+      "gid": 1000
+    },
+    "dossier-bounds/en/desktop-1440x900/journey-e-polypropylene-simulated-dossier-initial.png": {
+      "sha256": "3e447e564abe0a0786558e10eb707a973418c33ec0f122cb8d5c1273b6268e79",
+      "bytes": 113976,
+      "mtime_ns": 1790342004938304461,
+      "uid": 1000,
+      "gid": 1000
+    },
+    "dossier-bounds/en/desktop-1440x900/journey-e-steel-public-dossier-leftmost.png": {
+      "sha256": "d44546557417cba2ab751d98318e052c3235307b37664c167140b9b6f4f97743",
+      "bytes": 125918,
+      "mtime_ns": 1790341997018004324,
+      "uid": 1000,
+      "gid": 1000
+    },
+    "dossier-bounds/en/desktop-1440x900/journey-e-steel-simulated-dossier-initial.png": {
+      "sha256": "bf96afe2ed9613d5fa6a213363f67cebb31f934efa33fad2ae9d49a58ca36601",
+      "bytes": 129324,
+      "mtime_ns": 1790341999906124419,
+      "uid": 1000,
+      "gid": 1000
+    },
+    "dossier-bounds/en/desktop-1440x900/journey-e-polypropylene-public-dossier.json": {
+      "sha256": "eb30ba4cad7efe7cf29d01e1d777ac8c328bc2180207cf9b48cf8ae2ec132d86",
+      "bytes": 5513,
+      "mtime_ns": 1790342002258212829,
+      "uid": 1000,
+      "gid": 1000
+    },
+    "dossier-bounds/en/desktop-1440x900/journey-e-polypropylene-public-dossier-initial.png": {
+      "sha256": "b17d0404ad24cf27d7c1daa06cce6a1ab640586639246e45be18154434ed2825",
+      "bytes": 117836,
+      "mtime_ns": 1790342002190210504,
+      "uid": 1000,
+      "gid": 1000
+    },
+    "dossier-bounds/en/desktop-1440x900/journey-e-steel-public-dossier-initial.png": {
+      "sha256": "d44546557417cba2ab751d98318e052c3235307b37664c167140b9b6f4f97743",
+      "bytes": 125918,
+      "mtime_ns": 1790341996970002328,
+      "uid": 1000,
+      "gid": 1000
+    },
+    "dossier-bounds/en/desktop-1440x900/journey-e-steel-simulated-dossier-leftmost.png": {
+      "sha256": "bf96afe2ed9613d5fa6a213363f67cebb31f934efa33fad2ae9d49a58ca36601",
+      "bytes": 129324,
+      "mtime_ns": 1790341999974127245,
+      "uid": 1000,
+      "gid": 1000
+    },
+    "dossier-bounds/en/desktop-1440x900/journey-e-steel-simulated-dossier.json": {
+      "sha256": "9d9ff39dc899898879d4418769b56489347572c2d82678e74839f6033b181dbb",
+      "bytes": 7095,
+      "mtime_ns": 1790341999974127245,
+      "uid": 1000,
+      "gid": 1000
+    },
+    "dossier-bounds/en/desktop-1440x900/journey-e-polypropylene-simulated-dossier-leftmost.png": {
+      "sha256": "3e447e564abe0a0786558e10eb707a973418c33ec0f122cb8d5c1273b6268e79",
+      "bytes": 113976,
+      "mtime_ns": 1790342005002306649,
+      "uid": 1000,
+      "gid": 1000
+    },
+    "dossier-bounds/en/desktop-1440x900/journey-e-steel-public-dossier.json": {
+      "sha256": "ec3a088d2f2f596c1590fc9e24a24853fe015e49dc1dccedc04392a9954519df",
+      "bytes": 5633,
+      "mtime_ns": 1790341997022004491,
+      "uid": 1000,
+      "gid": 1000
+    },
+    "dossier-bounds/ar/tablet-1024x768/journey-e-polypropylene-public-dossier-leftmost.png": {
+      "sha256": "74ee6f1805706bd1432a6f089eb5e712f252234e72b8bf3ec9bc4034669bbda9",
+      "bytes": 92156,
+      "mtime_ns": 1790342296689431691,
+      "uid": 1000,
+      "gid": 1000
+    },
+    "dossier-bounds/ar/tablet-1024x768/journey-e-polypropylene-simulated-dossier.json": {
+      "sha256": "9d110ac1fd2a1fc9cd41089dbc72f76a76815b86481a3e2b8cc313ae55669d6c",
+      "bytes": 7355,
+      "mtime_ns": 1790342299441550030,
+      "uid": 1000,
+      "gid": 1000
+    },
+    "dossier-bounds/ar/tablet-1024x768/journey-e-polypropylene-simulated-dossier-initial.png": {
+      "sha256": "5cb54bcae7af398907bce37275db026dc76b4e25680999179511b3b2ec32ac20",
+      "bytes": 88009,
+      "mtime_ns": 1790342299389547797,
+      "uid": 1000,
+      "gid": 1000
+    },
+    "dossier-bounds/ar/tablet-1024x768/journey-e-steel-public-dossier-leftmost.png": {
+      "sha256": "c5fd582e4d960cfed074bee1bcca55dac5da4f08f6c49e6060a05e2fca656f28",
+      "bytes": 94802,
+      "mtime_ns": 1790342291237196016,
+      "uid": 1000,
+      "gid": 1000
+    },
+    "dossier-bounds/ar/tablet-1024x768/journey-e-steel-simulated-dossier-initial.png": {
+      "sha256": "ef0e3f162d1974e9e26556eb361a429b84ebfdae90d16a1a059354f90a25d8a3",
+      "bytes": 96944,
+      "mtime_ns": 1790342294241325871,
+      "uid": 1000,
+      "gid": 1000
+    },
+    "dossier-bounds/ar/tablet-1024x768/journey-e-polypropylene-public-dossier.json": {
+      "sha256": "0e753464dd7918cd48d11d8211aa397a5b523943695a723db56d3a3bfac48b62",
+      "bytes": 6013,
+      "mtime_ns": 1790342296689431691,
+      "uid": 1000,
+      "gid": 1000
+    },
+    "dossier-bounds/ar/tablet-1024x768/journey-e-polypropylene-public-dossier-initial.png": {
+      "sha256": "74ee6f1805706bd1432a6f089eb5e712f252234e72b8bf3ec9bc4034669bbda9",
+      "bytes": 92156,
+      "mtime_ns": 1790342296637429443,
+      "uid": 1000,
+      "gid": 1000
+    },
+    "dossier-bounds/ar/tablet-1024x768/journey-e-steel-public-dossier-initial.png": {
+      "sha256": "c5fd582e4d960cfed074bee1bcca55dac5da4f08f6c49e6060a05e2fca656f28",
+      "bytes": 94802,
+      "mtime_ns": 1790342291185193768,
+      "uid": 1000,
+      "gid": 1000
+    },
+    "dossier-bounds/ar/tablet-1024x768/journey-e-steel-simulated-dossier-leftmost.png": {
+      "sha256": "ef0e3f162d1974e9e26556eb361a429b84ebfdae90d16a1a059354f90a25d8a3",
+      "bytes": 96944,
+      "mtime_ns": 1790342294297328290,
+      "uid": 1000,
+      "gid": 1000
+    },
+    "dossier-bounds/ar/tablet-1024x768/journey-e-steel-simulated-dossier.json": {
+      "sha256": "fce5349996d71f3d9de197338e5eb818c4f6c21642d4cc5fd87283e1786917af",
+      "bytes": 8963,
+      "mtime_ns": 1790342294297328290,
+      "uid": 1000,
+      "gid": 1000
+    },
+    "dossier-bounds/ar/tablet-1024x768/journey-e-polypropylene-simulated-dossier-leftmost.png": {
+      "sha256": "5cb54bcae7af398907bce37275db026dc76b4e25680999179511b3b2ec32ac20",
+      "bytes": 88009,
+      "mtime_ns": 1790342299437549859,
+      "uid": 1000,
+      "gid": 1000
+    },
+    "dossier-bounds/ar/tablet-1024x768/journey-e-steel-public-dossier.json": {
+      "sha256": "f3ba0111c1173e30f5410ef9868e3c75861fb1022aac6e39fa5766f1585f9079",
+      "bytes": 7413,
+      "mtime_ns": 1790342291237196016,
+      "uid": 1000,
+      "gid": 1000
+    },
+    "dossier-bounds/ar/desktop-1440x900/journey-e-polypropylene-public-dossier-leftmost.png": {
+      "sha256": "638d4621702551315568bbf08c25faf1267727cc488c445a7d264cbe173c56a0",
+      "bytes": 114170,
+      "mtime_ns": 1790342197119583245,
+      "uid": 1000,
+      "gid": 1000
+    },
+    "dossier-bounds/ar/desktop-1440x900/journey-e-polypropylene-simulated-dossier.json": {
+      "sha256": "387d0b5d5698e732b0967bf9d4ea0395361e60e663ce076cef5bc822de501e43",
+      "bytes": 7435,
+      "mtime_ns": 1790342199903706412,
+      "uid": 1000,
+      "gid": 1000
+    },
+    "dossier-bounds/ar/desktop-1440x900/journey-e-polypropylene-simulated-dossier-initial.png": {
+      "sha256": "33ecb2a73f4883d90800eaa9e22139185c88cce0604fcc567f65d2b19aed94d1",
+      "bytes": 112031,
+      "mtime_ns": 1790342199835703403,
+      "uid": 1000,
+      "gid": 1000
+    },
+    "dossier-bounds/ar/desktop-1440x900/journey-e-steel-public-dossier-leftmost.png": {
+      "sha256": "23d55fce4702455ccd4757c602d3043fdaf025156a3c9cb7e32882eb9dea4951",
+      "bytes": 120553,
+      "mtime_ns": 1790342191855353578,
+      "uid": 1000,
+      "gid": 1000
+    },
+    "dossier-bounds/ar/desktop-1440x900/journey-e-steel-simulated-dossier-initial.png": {
+      "sha256": "369e5a8fe08b7d3f3ffbf8375ca59ef667afd3760dcc79e42772caa1ea1a3495",
+      "bytes": 129636,
+      "mtime_ns": 1790342194839482377,
+      "uid": 1000,
+      "gid": 1000
+    },
+    "dossier-bounds/ar/desktop-1440x900/journey-e-polypropylene-public-dossier.json": {
+      "sha256": "8697ac079b57f1bb97ecb98078f3a766faf08ba82618fb1e8f02d65e4802ab14",
+      "bytes": 6075,
+      "mtime_ns": 1790342197123583423,
+      "uid": 1000,
+      "gid": 1000
+    },
+    "dossier-bounds/ar/desktop-1440x900/journey-e-polypropylene-public-dossier-initial.png": {
+      "sha256": "638d4621702551315568bbf08c25faf1267727cc488c445a7d264cbe173c56a0",
+      "bytes": 114170,
+      "mtime_ns": 1790342197059580591,
+      "uid": 1000,
+      "gid": 1000
+    },
+    "dossier-bounds/ar/desktop-1440x900/journey-e-steel-public-dossier-initial.png": {
+      "sha256": "23d55fce4702455ccd4757c602d3043fdaf025156a3c9cb7e32882eb9dea4951",
+      "bytes": 120553,
+      "mtime_ns": 1790342191803351399,
+      "uid": 1000,
+      "gid": 1000
+    },
+    "dossier-bounds/ar/desktop-1440x900/journey-e-steel-simulated-dossier-leftmost.png": {
+      "sha256": "369e5a8fe08b7d3f3ffbf8375ca59ef667afd3760dcc79e42772caa1ea1a3495",
+      "bytes": 129636,
+      "mtime_ns": 1790342194907485385,
+      "uid": 1000,
+      "gid": 1000
+    },
+    "dossier-bounds/ar/desktop-1440x900/journey-e-steel-simulated-dossier.json": {
+      "sha256": "8747d856e116a5fb4bffa42f97aeab4c8e39402f48815c80994f50dfb405fd8f",
+      "bytes": 8981,
+      "mtime_ns": 1790342194907485385,
+      "uid": 1000,
+      "gid": 1000
+    },
+    "dossier-bounds/ar/desktop-1440x900/journey-e-polypropylene-simulated-dossier-leftmost.png": {
+      "sha256": "33ecb2a73f4883d90800eaa9e22139185c88cce0604fcc567f65d2b19aed94d1",
+      "bytes": 112031,
+      "mtime_ns": 1790342199903706412,
+      "uid": 1000,
+      "gid": 1000
+    },
+    "dossier-bounds/ar/desktop-1440x900/journey-e-steel-public-dossier.json": {
+      "sha256": "1e4f5538ddbaf446116e0f6204dabe7ff3aa48d657f50daae49be1ee402396f2",
+      "bytes": 7471,
+      "mtime_ns": 1790342191855353578,
+      "uid": 1000,
+      "gid": 1000
+    }
+  },
+  "all50_artifacts_fresh_after_launch": true,
+  "historical_handoff_at_release": {
+    "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/handoff-history/HANDOFF-cdfa1a1b9e34bfa129cf2db68adc37be34511704767b9e94e711facaecf0bddc.md",
+    "sha256": "cdfa1a1b9e34bfa129cf2db68adc37be34511704767b9e94e711facaecf0bddc"
+  },
+  "sanad": "Actual captureexit0 and post-run content/pathset/mtime/ownership/index/environment/preimage checks. Complete newartifactarea copiedbeforelaterbrowser. No pixelacceptance inferred from allowedpathset.",
+  "muhasabah": "PASS capture/postcheckscope. Bothcodecproofs and independentpixel/boundsadjudication pending; no pin/adoption/finalcandidate/delivery/Aura pass."
+}

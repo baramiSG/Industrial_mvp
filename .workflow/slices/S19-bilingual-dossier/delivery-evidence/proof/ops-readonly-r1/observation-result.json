@@ -1,0 +1,34 @@
+{
+  "command": [
+    "/home/barami/.local/bin/uv",
+    "run",
+    "--locked",
+    "--extra",
+    "dev",
+    "--extra",
+    "graph",
+    "python",
+    "-",
+    "source"
+  ],
+  "cwd": "/home/barami/projects/ior-worktrees/s19",
+  "role": "source",
+  "script": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-readonly-r1/observation.py",
+  "script_sha256": "6c28482074078af82d1d4ae9c111749863b74d69cb2221ef394f14c238306a89",
+  "environment": {
+    "PATH": "/home/barami/.nvm/versions/node/v22.22.3/lib/node_modules/@openai/codex/node_modules/@openai/codex-linux-x64/vendor/x86_64-unknown-linux-musl/codex-path:/home/barami/.local/bin:/home/barami/.codex/tmp/arg0/codex-arg0mRq8JN:/home/barami/.nvm/versions/node/v22.22.3/lib/node_modules/@openai/codex/node_modules/@openai/codex-linux-x64/vendor/x86_64-unknown-linux-musl/codex-path:/home/barami/flutter/bin:/home/barami/.devin-server/bin/b98cc43128712ba73c60cca73876f58a710aaa27/bin/remote-cli:/home/barami/.local/bin:/home/barami/.nvm/versions/node/v22.22.3/bin:/home/barami/flutter/bin:/home/barami/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files/NVIDIA Corporation/NVIDIA App/NvDLISR:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/c/Program Files/dotnet/:/mnt/c/Program Files/Tailscale/:/mnt/c/Program Files/Git/cmd:/mnt/c/Program Files/nodejs/:/mnt/c/Program Files (x86)/cloudflared/:/Docker/host/bin:/mnt/c/Users/Admin/AppData/Local/Programs/Python/Python313/Scripts/:/mnt/c/Users/Admin/AppData/Local/Programs/Python/Python313/:/mnt/c/Users/Admin/AppData/Local/Programs/Python/Launcher/:/mnt/c/Users/Admin/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/Admin/AppData/Local/Programs/Windsurf/bin:/mnt/c/Users/Admin/AppData/Local/Programs/cursor/resources/app/bin:/mnt/c/Users/Admin/AppData/Local/Programs/Devin/bin:/mnt/c/Users/Admin/.lmstudio/bin:/mnt/c/Users/Admin/AppData/Roaming/npm:/snap/bin:/home/barami/.devin-server/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts",
+    "HOME": "/home/barami",
+    "LANG": "C.UTF-8",
+    "GIT_OPTIONAL_LOCKS": "0",
+    "PYTHONPATH": "src",
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "source_ledger_sha256": "a1f2496b610b91eda9b5a45d9c111376e58d2f961c36346558ee556f68fee606",
+  "started_at_utc": "2026-09-25T02:04:55.761445+00:00",
+  "exit_code": 0,
+  "timed_out": false,
+  "ended_at_utc": "2026-09-25T02:04:59.232748+00:00",
+  "duration_seconds": 3.473,
+  "stdout_sha256": "48fa3ca4cfb9c628fe1f9e4f4cc0a53cae0b4f27b100db86e2547859393b9f7c",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

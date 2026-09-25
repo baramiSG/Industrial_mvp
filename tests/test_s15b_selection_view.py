@@ -155,7 +155,7 @@ def test_s15b_dossier_adds_selection_reference_without_changing_old_cases() -> N
 
     assert current.status_code == 200
     assert old.status_code == 200
-    assert current.json()["dossier_version"] == "1.3"
+    assert current.json()["dossier_version"] == "2.0.0"
     assert current.json()["evidence_summary"]["selection"] == {
         "selection_id": "CASE-SELECTION-S15-b96de36ff0ce",
         "rule_version": "S14-CS-1.1",
@@ -164,7 +164,7 @@ def test_s15b_dossier_adds_selection_reference_without_changing_old_cases() -> N
         ),
         "profile": "pharma_api",
     }
-    assert old.json()["dossier_version"] == "1.2"
+    assert old.json()["dossier_version"] == "2.0.0"
     assert "selection" not in old.json()["evidence_summary"]
 
 

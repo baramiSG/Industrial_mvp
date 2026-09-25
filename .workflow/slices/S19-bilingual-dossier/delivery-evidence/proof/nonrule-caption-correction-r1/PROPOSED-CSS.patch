@@ -1,0 +1,18 @@
+--- a/src/ior_mvp/static/css/dossier.css
++++ b/src/ior_mvp/static/css/dossier.css
+@@ -90,10 +90,13 @@
+   .dossier-record .record-group > dd > .dossier-record,
+   .dossier-record .record-group > dd > .dossier-record > :first-child,
+   .rule-record > .dossier-source-caption + .dossier-record,
+-  .rule-record > .dossier-source-caption + .dossier-record > :first-child {
++  .rule-record > .dossier-source-caption + .dossier-record > :first-child,
++  #dossier-capability > .dossier-source-caption + .dossier-record,
++  #dossier-capability > .dossier-source-caption + .dossier-record > :first-child {
+     break-before: avoid;
+   }
+-  .rule-record > .dossier-source-caption { break-after: avoid; }
++  .rule-record > .dossier-source-caption,
++  #dossier-capability > .dossier-source-caption { break-after: avoid; }
+   .rule-record > p:first-of-type { break-after: avoid; }
+   .warning, .branch-disclosure { break-inside: avoid; }
+   .dossier-section > .branch-label, .dossier-section > .branch-disclosure { break-after: avoid; }

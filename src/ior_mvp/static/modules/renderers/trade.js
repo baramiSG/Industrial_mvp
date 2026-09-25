@@ -63,8 +63,15 @@ export function renderTradeChart(props) {
       ? `<circle class="chart-point-quantity" cx="${x(index)}" cy="${yQty(row.imports_kt)}" r="4"><title>${escapeHtml(t("trade.quantity_point", { value: number(row.imports_kt) }))}</title></circle>`
       : "",
   ).join("");
+  const cell = (value, unit) => knownNumber(value)
+    ? `<bdi class="technical-token" dir="ltr">${escapeHtml(number(value))} ${escapeHtml(unit)}</bdi>`
+    : escapeHtml(t("trade.data_unavailable"));
+  const observedRows = trade.map((row) => `<tr><th scope="row"><bdi dir="ltr">${escapeHtml(integer(row.year))}</bdi></th><td>${cell(row.imports_usd_m, "USD m")}</td><td>${cell(row.imports_kt, "kt")}</td></tr>`).join("");
+  const observedData = trade.length
+    ? `<table><caption>${escapeHtml(t("trade.data_caption"))}</caption><thead><tr><th scope="col">${escapeHtml(t("trade.year"))}</th><th scope="col">${escapeHtml(t("trade.value"))}</th><th scope="col">${escapeHtml(t("trade.quantity"))}</th></tr></thead><tbody>${observedRows}</tbody></table>`
+    : `<p>${escapeHtml(t("trade.data_empty"))}</p>`;
   return `
-    <article class="workspace-card full">
+    <article class="workspace-card full trade-chart">
       <div class="card-header">
         <div><h3>${escapeHtml(t("trade.title"))}</h3><p>${escapeHtml(t("trade.subtitle"))}</p></div>
         <span class="exec-chip exec-DEGRADED">${escapeHtml(t("trade.boundary"))}</span>
@@ -83,6 +90,8 @@ export function renderTradeChart(props) {
           <span><i class="legend-dot legend-value"></i>${escapeHtml(t("trade.value"))}</span>
           <span><i class="legend-dot legend-quantity"></i>${escapeHtml(t("trade.quantity"))}</span>
         </div>
+        <p class="trade-scale-note">${escapeHtml(t("trade.scale_note"))}</p>
+        <details><summary id="trade-data-summary">${escapeHtml(t("trade.data_summary"))}</summary>${observedData}</details>
       </div>
     </article>
   `;

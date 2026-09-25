@@ -1,0 +1,86 @@
+{
+  "at_utc": "2026-09-25T14:01:58.615339+00:00",
+  "action": "EXACT_SAVED_BYTE_RESTORATION_NOT_RECONSTRUCTION",
+  "authority": "Current delegated operational mandate; preservation/recovery withinprojectboundary. Rootperformedrestoration;notagentunreviewedstatreconstruction.",
+  "index": "/home/barami/projects/industrial-opportunity-resolution-mvp/.git/worktrees/s19/index",
+  "before_sha256": "6451da67da6dbcf8344a897b806a4cbce20d75751185593c0659ec906cbb57e3",
+  "exact_saved_preimage": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/index-stat-refresh-recovery-r1/observed.index",
+  "saved_sha256": "799d94a7b865644e0cd658e52687a9805224beb40c846f6403d0b87b3dd49722",
+  "observed_preserved_copy": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/final-assembly-correction/observed-index-6451da67.bin",
+  "after_sha256": "799d94a7b865644e0cd658e52687a9805224beb40c846f6403d0b87b3dd49722",
+  "logical_entries_and_flags_equal_before_saved": true,
+  "cached_diff_empty_both": true,
+  "read_commands": [
+    {
+      "context": "current",
+      "argv": [
+        "git",
+        "ls-files",
+        "--stage",
+        "-z"
+      ],
+      "stdout_sha256": "0dcfc2970e2bc5e589027ebccbabd04d71c7005a43630b7f18bc0d4deea362c4",
+      "exit_code": 0
+    },
+    {
+      "context": "current",
+      "argv": [
+        "git",
+        "ls-files",
+        "-v",
+        "-z"
+      ],
+      "stdout_sha256": "0240cceba03f3d051f1c6f3ed1f183aaf8b6825b9fc2d355d2ebf6a7be6845a6",
+      "exit_code": 0
+    },
+    {
+      "context": "current",
+      "argv": [
+        "git",
+        "diff",
+        "--cached",
+        "--name-only"
+      ],
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "exit_code": 0
+    },
+    {
+      "context": "saved",
+      "argv": [
+        "git",
+        "ls-files",
+        "--stage",
+        "-z"
+      ],
+      "stdout_sha256": "0dcfc2970e2bc5e589027ebccbabd04d71c7005a43630b7f18bc0d4deea362c4",
+      "exit_code": 0
+    },
+    {
+      "context": "saved",
+      "argv": [
+        "git",
+        "ls-files",
+        "-v",
+        "-z"
+      ],
+      "stdout_sha256": "0240cceba03f3d051f1c6f3ed1f183aaf8b6825b9fc2d355d2ebf6a7be6845a6",
+      "exit_code": 0
+    },
+    {
+      "context": "saved",
+      "argv": [
+        "git",
+        "diff",
+        "--cached",
+        "--name-only"
+      ],
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "exit_code": 0
+    }
+  ],
+  "protected45_restored_match": true,
+  "new_baseline_pin_index_unchanged": true,
+  "filesystem_note": "Index-file replacement updates filesystem metadata; no claim it was untouched throughout. Exact original content restored, all source/indexcontent/refs remain subject to independent incident disposition beforefreeze.",
+  "independent_disposition": "PENDING_CLAUDE",
+  "muhasabah": "Preservation failure acknowledged; factual recovery notfinalapproval."
+}

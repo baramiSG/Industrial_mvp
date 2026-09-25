@@ -1,0 +1,79 @@
+{
+  "status": "PASS for frozen source/test/checker delta inspection; corrected-output approval PENDING",
+  "source_ledger": {
+    "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nonrule-caption-correction-r1/SOURCE.json",
+    "sha256": "6e7469e9a18db9ddb74e838e18cff984e3c3ceadc9c08098807858d9c62e36a5"
+  },
+  "checks": {
+    "source_files_hashed": 1759,
+    "same_predecessor_pathset": true,
+    "only_changed_paths": [
+      "browser_tests/test_dossier.py",
+      "src/ior_mvp/static/css/dossier.css"
+    ],
+    "approved_css_postimage_exact": "d36215e0fd410b27640e38e79dea8f34ad8d4ee4a7435c6adccedfb600295985",
+    "old_print_statements_preserved": 56,
+    "one_new_top_level_if_statement": true,
+    "all_other_AST_decorators_signature_preserved": true,
+    "checker_predecessor_bytes_exact_after_subtracting_one_bound_block": true,
+    "meaningful_original_pdf_red": {
+      "documents": 44,
+      "pages": 1958,
+      "exit_code": 1,
+      "only_failure": "CAPTION-ORPHAN-03",
+      "caption_page": 13,
+      "group_and_first_field_page": 14
+    }
+  },
+  "direct_reasoning": "DOM oracle asserts exact unique direct caption, first hard-gate group, source-labelled first scalar and explicit source-path RESOLVED. PDF checker uses exact complete-window lengths plus existing Arabic character multiplicity, capability section through first following route0, unique nonoverlapping ordered caption/group/field-value windows on one page. No global first-field-presence shortcut or CSS-string oracle.",
+  "references": [
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nonrule-caption-correction-r1/SOURCE.json",
+      "sha256": "6e7469e9a18db9ddb74e838e18cff984e3c3ceadc9c08098807858d9c62e36a5"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nonrule-caption-correction-r1/SOURCE-BINDING.json",
+      "sha256": "908b89cc058c60ee2cd6a7dc1658fb610e10a39c499759fbf32d2b4a576d93fb"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nonrule-caption-correction-r1/IMPLEMENTATION.patch",
+      "sha256": "e889c362d4bc226fee3766d3e36045312f9a09b1ec0a966c58ba87ace5e3b9e3"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nonrule-caption-correction-r1/check_pdf_matrix.py",
+      "sha256": "a68250a4168efa1ce444802099283ed4150326384815002ce2284125f15a2444"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nonrule-caption-correction-r1/check_pdf_matrix.predecessor.py",
+      "sha256": "bfa13f1ac4d8056f56a15a78ecf3f3e330f0c6abbcacefa96c4b352ed59e55bd"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nonrule-caption-correction-r1/CHECKER-ADDITION.txt",
+      "sha256": "2bf59ca7f49ac7ce65ea50092d94fc8b0b6dc46d1c3d9a89701bc73d2b1f3769"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nonrule-caption-correction-r1/RED-EXECUTION.json",
+      "sha256": "fa00bee4e5e712d2e3851fb3e4c788c13ddc96c0808e2289ffbe4f63e27370ab"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nonrule-caption-correction-r1/red.stdout",
+      "sha256": "8c7dfb3a9e2327029e13bed465d4e472288fce3d3ab9a552482b3baa4518617b"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nonrule-caption-correction-r1/red.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nonrule-caption-correction-r1/red-acceptance/PDF-ACCEPTANCE.json",
+      "sha256": "4ccf672ad6f2ba7c9fb8af240af89f09891ee1e5debf86ae1a682775e278c3e6"
+    }
+  ],
+  "pending": [
+    "Corrected stock all44 print completion",
+    "Corrected strict and full required raster/manual coverage",
+    "Actual88 API/source/input/index preservation and sealed receipt",
+    "Independent finite output verdict and root release before long fullfunctional"
+  ],
+  "sanad": "Direct immutable source hashes/AST comparison/checker subtraction and raw original RED records; no corrected-output result borrowed or inferred.",
+  "muhasabah": "PASS for bounded source checks; actual repair effectiveness remains unverified. No source/test/checker/index/service mutations."
+}

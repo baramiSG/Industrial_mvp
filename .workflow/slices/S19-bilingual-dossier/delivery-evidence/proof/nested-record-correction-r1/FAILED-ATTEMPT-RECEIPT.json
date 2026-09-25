@@ -1,0 +1,596 @@
+{
+  "status": "FAILED_HYPOTHESIS_PRESERVED_NO_NEXT_PRODUCER",
+  "at_utc": "2026-09-25T06:01:29.338901+00:00",
+  "source_ledger_sha256": "758783bbdb135fb3451565995013a78e76ad30bdfb2be615bac0d56316a851f9",
+  "files": {
+    "ACTUAL.patch": {
+      "sha256": "a2592dbbfbeaa2bbf33c4aa0cdaef25a5560d2a16939b6963da04b694e4e9ffb",
+      "bytes": 6588
+    },
+    "COMPUTED-DOM-COMMAND.json": {
+      "sha256": "b2a8c1253ef24b170e4afba5270d161af932000740f783af4724ca49747f1253",
+      "bytes": 1006
+    },
+    "COMPUTED-DOM.json": {
+      "sha256": "814fffa2b356896114c7c258e4fd2bdd8c3709ca8384928f623ba386b151d584",
+      "bytes": 5561
+    },
+    "COMPUTED-DOM.py": {
+      "sha256": "66b434e74d93509e45dc93b6817b26f576833f488696e46a863e08c489daa9f4",
+      "bytes": 1832
+    },
+    "DIAGNOSIS.json": {
+      "sha256": "c1ba9766514694eea9a11d5d6be02ef8a6d8d367b4ec7d86b3254d21f3e8a420",
+      "bytes": 2049
+    },
+    "EXECUTION-PREFLIGHT.json": {
+      "sha256": "28c34206be8fbc0f71ca575fea9a64b07d98393bdfa4724cdd32be805371fe80",
+      "bytes": 555
+    },
+    "FAILED-ATTEMPT-PRESERVATION.json": {
+      "sha256": "a3d9d2091963f87ecc1128a224fca717a0dab2d2fc596fa82cbb841f3f68bcef",
+      "bytes": 462
+    },
+    "FOIL-ORIGINAL-RED.json": {
+      "sha256": "7f80a2eafe9b7c14ca07106f70c66b888134c5ea83900c1c084b7f4802591c89",
+      "bytes": 535
+    },
+    "IMPLEMENTATION-ATTEMPT.md": {
+      "sha256": "5319062c97bfc1a07d12ce2e590e328864b2ca2bdcb54e9ea7deabe21bba0e81",
+      "bytes": 3585
+    },
+    "ORACLE-ORDER-ADDENDUM.md": {
+      "sha256": "6440f14afdf69fc2a23b0ccf456591a3c79240651163d6a233cadb8829b43d68",
+      "bytes": 2665
+    },
+    "POSTIMAGES.json": {
+      "sha256": "f389d35f50eea36c7c263b2b6246481db615fd8870ab9881961c601c54a06b40",
+      "bytes": 214
+    },
+    "PROPOSAL.md": {
+      "sha256": "160b6b759aac2b0aec3d5748ba4fa3f94952926e480533f55d09972e69c39ffe",
+      "bytes": 8847
+    },
+    "RED-CHECKER-COMMAND.json": {
+      "sha256": "3b5aa2ba649dbf6f2461f5462ac6ffa1dd7a0a30fd40f599b86d40871f162800",
+      "bytes": 1789
+    },
+    "RED-CHECKER-EXIT.json": {
+      "sha256": "71ec65ce144ab7b5ca3854b139af377456ae1ecad54945e543cd69a262c3dfb6",
+      "bytes": 171
+    },
+    "SOURCE-GREEN.json": {
+      "sha256": "758783bbdb135fb3451565995013a78e76ad30bdfb2be615bac0d56316a851f9",
+      "bytes": 267569
+    },
+    "SOURCE-RED.json": {
+      "sha256": "14e7c054ba0e553d060531b054808c9f43a27e64f1aa4b0b8765b5dd18dbd1a2",
+      "bytes": 267569
+    },
+    "association-block.txt": {
+      "sha256": "32e68db623cdc49ee7a77af09746ce39faf0ea85e623491b6c33469324b346b5",
+      "bytes": 4235
+    },
+    "check-targets.py": {
+      "sha256": "2633dd54e0b999e407eb883d2c1b8d32f53317730e90f7188ae67c39d0e10efa",
+      "bytes": 6772
+    },
+    "check_pdf_matrix.preimage.py": {
+      "sha256": "830ed51e7b3cb6e46042856a88d97acf50dc9cfb4035091a844e60f7f46a1c6e",
+      "bytes": 12707
+    },
+    "check_pdf_matrix.py": {
+      "sha256": "bfa13f1ac4d8056f56a15a78ecf3f3e330f0c6abbcacefa96c4b352ed59e55bd",
+      "bytes": 17342
+    },
+    "computed.stderr": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "computed.stdout": {
+      "sha256": "8904ca90ae2299596cf4236726e042b7f4ca6ec46d9c879cd2ce5b912a9ff292",
+      "bytes": 108
+    },
+    "green/COMMAND.json": {
+      "sha256": "de18e63a180010027bcd4ecb29856197f2407bc951941a10866c0b080abe1c6a",
+      "bytes": 1897
+    },
+    "green/pdf/alu-foil-simulated-analysis.json": {
+      "sha256": "bed5c99413385626c7e729aff14a73c74c98be32556359bdc10b29f9a6c84bfd",
+      "bytes": 215243
+    },
+    "green/pdf/alu-foil-simulated-dossier.json": {
+      "sha256": "8eb3c8e89b663baff62b4a7f19c7106b7d5aa2f1be81b3b3ca5fe2538b9be09c",
+      "bytes": 334846
+    },
+    "green/pdf/alu-foil-simulated-en-layout.json": {
+      "sha256": "379d5b890b374623eaa28954a3443500485877fcce1ddd915e526c9b96d4f7bd",
+      "bytes": 6191
+    },
+    "green/pdf/alu-foil-simulated-en-record-associations.json": {
+      "sha256": "49d3f6f162b59a063fb9fb6b40884c0753edbc31a4ba23f2a82f6eb380e8cd49",
+      "bytes": 304
+    },
+    "green/pdf/alu-foil-simulated-en-summary.json": {
+      "sha256": "8834c6a4d742305d6cd3c77a4efa84fd2e54e2c2c4cb19c189d7be3f72799ff2",
+      "bytes": 208
+    },
+    "green/pdf/alu-foil-simulated-en.html": {
+      "sha256": "00d0f81f1752efde9540278459a2da4d5f3f68bdc8c76b555100fd43c08ba8b7",
+      "bytes": 178290
+    },
+    "green/pdf/alu-foil-simulated-en.pdf": {
+      "sha256": "5e271424e9b34f128ac6b973d0220b79af2387964d1e2452618a4c7c887b2bbb",
+      "bytes": 507974
+    },
+    "green/pdf/alu-profiles-simulated-analysis.json": {
+      "sha256": "d8b2a8aa6fea90eaab3096a4c71e9790e6bc2e5cb3fd04990619ca6c3bcacecf",
+      "bytes": 226885
+    },
+    "green/pdf/alu-profiles-simulated-ar-layout.json": {
+      "sha256": "29a6d7ebaa94a149759e8cd27178936720be9cc08aa2469d708454e8032cbc4e",
+      "bytes": 6367
+    },
+    "green/pdf/alu-profiles-simulated-ar-record-associations.json": {
+      "sha256": "b124f13e7e14357a463cb7a24347935519e1f5958f15b23a7681f63066b9a6f5",
+      "bytes": 585
+    },
+    "green/pdf/alu-profiles-simulated-ar-summary.json": {
+      "sha256": "bc509c36584312fe15a189fb3c42451ffb2de2096a1c5bc160a98054bdd365f6",
+      "bytes": 212
+    },
+    "green/pdf/alu-profiles-simulated-ar.html": {
+      "sha256": "71ba1c647508620fbfeb47ff73c89c8546fec5f1d853d66b0df588a994a2e863",
+      "bytes": 231710
+    },
+    "green/pdf/alu-profiles-simulated-ar.pdf": {
+      "sha256": "0956a29b6609752004b6e1ddd92d8103e383bf3652808108fa91e087d9ddca12",
+      "bytes": 888352
+    },
+    "green/pdf/alu-profiles-simulated-dossier.json": {
+      "sha256": "9b18ff2bbd6ed61265ed0317dac98835ae2d15efb195c96bec8b6a1dd0c314cf",
+      "bytes": 353506
+    },
+    "green/pdf/penicillin-api-simulated-analysis.json": {
+      "sha256": "657c5ee5c9db8f03f1caa15a1d2234a368869584d09ecfb9f45421b160f1019c",
+      "bytes": 211498
+    },
+    "green/pdf/penicillin-api-simulated-ar-layout.json": {
+      "sha256": "183d29257d251123cc0e154675aa730031a7d765fe977315ade429b8a82c865a",
+      "bytes": 6376
+    },
+    "green/pdf/penicillin-api-simulated-ar-record-associations.json": {
+      "sha256": "322b4121eac2a9d090e31e17f756d0d3ad0c32ef57e9cda08edf02f12840e94a",
+      "bytes": 344
+    },
+    "green/pdf/penicillin-api-simulated-ar-summary.json": {
+      "sha256": "937cf76bf2f57f7d60c7b5fdf9704db95fcc82d130dd4bba0c8e21cefd45958d",
+      "bytes": 214
+    },
+    "green/pdf/penicillin-api-simulated-ar.html": {
+      "sha256": "f633c2abec19f95c2d37279b5e84781f035c1edaf743d4ce68efbe56f02ac291",
+      "bytes": 196694
+    },
+    "green/pdf/penicillin-api-simulated-ar.pdf": {
+      "sha256": "063da050e2027250a54e56f055368da04dbaf31db865ec183bd06511c0d111ab",
+      "bytes": 812893
+    },
+    "green/pdf/penicillin-api-simulated-dossier.json": {
+      "sha256": "97269d850cf99a4f136863ead1a2dd6d18d3c583ece3444697aee3f74322936b",
+      "bytes": 328777
+    },
+    "green/pdf/polypropylene-simulated-analysis.json": {
+      "sha256": "8d8d48c18cd8e426b41fc127289831c199636f6ac34c82d6f107fa6285ca5c31",
+      "bytes": 213464
+    },
+    "green/pdf/polypropylene-simulated-ar-layout.json": {
+      "sha256": "aa71e3002091c30ab75658094849603ed60c678429806bc38cc3b3918110c1fd",
+      "bytes": 6160
+    },
+    "green/pdf/polypropylene-simulated-ar-record-associations.json": {
+      "sha256": "da9e59272f6d04a22c44922910cb92f3bcbdd8a07f32f3fd48aa99264969a44b",
+      "bytes": 237
+    },
+    "green/pdf/polypropylene-simulated-ar-summary.json": {
+      "sha256": "f4a4d988e4a40b6e5c95b8b56dfe46c9f052f21cd34f4fd6245c82510b6c3f6d",
+      "bytes": 213
+    },
+    "green/pdf/polypropylene-simulated-ar.html": {
+      "sha256": "b41370749cb6594357fddf3c0ea24a6e12c90b223da22844ceb64e78c75915aa",
+      "bytes": 190399
+    },
+    "green/pdf/polypropylene-simulated-ar.pdf": {
+      "sha256": "21bf5b8e809589afb5e95bd0fb55b688a3bfcec9bdba5749b54988ce8a3cad97",
+      "bytes": 782015
+    },
+    "green/pdf/polypropylene-simulated-dossier.json": {
+      "sha256": "a58a0c9e5a1941df5078f69dd18650d94ad0c44c3099fef9c4da6359ea6790c4",
+      "bytes": 330134
+    },
+    "green/playwright/browser-tests-test-dossier-py-test-dossier-print-media-and-pdf-are-valid-chromium-simulated-alu-foil-en/test-failed-1.png": {
+      "sha256": "2a92cf938226b58219a87a5fe51277027b999ca75e21bc9714a72f01a9113e06",
+      "bytes": 274706
+    },
+    "green/playwright/browser-tests-test-dossier-py-test-dossier-print-media-and-pdf-are-valid-chromium-simulated-alu-foil-en/test-failed-2.png": {
+      "sha256": "ad983a1715a332a13ee10c02a724d5b1b980cbfc85c0f49f62a10b382ae54712",
+      "bytes": 147038
+    },
+    "green/playwright/browser-tests-test-dossier-py-test-dossier-print-media-and-pdf-are-valid-chromium-simulated-alu-foil-en/trace.zip": {
+      "sha256": "c4b172c6d4382ddd5ed59d358a4cff9121476d6b0f2f11929d08a6c5652c4b46",
+      "bytes": 1363810
+    },
+    "green/run-summary-functional.json": {
+      "sha256": "4fb1affd328edc4d629deb1c284337a45bc2098ab77c018e29ecfb441272a1c0",
+      "bytes": 185
+    },
+    "green/server.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "green/stderr.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "green/stdout.log": {
+      "sha256": "fd0c8159b16866f53fc38a24c60ef23e4ec2625b754e965aadb760836aa41cd2",
+      "bytes": 17658
+    },
+    "postimages/browser_tests/test_dossier.py": {
+      "sha256": "4f7118b28616fd0e4dba18b26ce5136c905f49995db8d61c5695e482ee5d79c0",
+      "bytes": 23342
+    },
+    "postimages/src/ior_mvp/static/css/dossier.css": {
+      "sha256": "ae7f466d7a3d4b3413ad4f48079f7f82298133668a77a4e5cca70e3d118bb2c7",
+      "bytes": 8544
+    },
+    "preimages/browser_tests/test_dossier.py": {
+      "sha256": "2912d949c90395251180f1442fb486046686938a3150eb23f783d59eedcb0f97",
+      "bytes": 18093
+    },
+    "preimages/src/ior_mvp/static/css/dossier.css": {
+      "sha256": "d124607ce4466fad488678c33aacffd248b198f77d7a9b1097ccf39d9fc63b13",
+      "bytes": 8149
+    },
+    "red/COMMAND.json": {
+      "sha256": "815e8331db3901959a01e5be142913b90345ea3ece07240509d94ab9563e438d",
+      "bytes": 1884
+    },
+    "red/pdf/alu-foil-simulated-analysis.json": {
+      "sha256": "bed5c99413385626c7e729aff14a73c74c98be32556359bdc10b29f9a6c84bfd",
+      "bytes": 215243
+    },
+    "red/pdf/alu-foil-simulated-dossier.json": {
+      "sha256": "8eb3c8e89b663baff62b4a7f19c7106b7d5aa2f1be81b3b3ca5fe2538b9be09c",
+      "bytes": 334846
+    },
+    "red/pdf/alu-foil-simulated-en-layout.json": {
+      "sha256": "379d5b890b374623eaa28954a3443500485877fcce1ddd915e526c9b96d4f7bd",
+      "bytes": 6191
+    },
+    "red/pdf/alu-foil-simulated-en-record-associations.json": {
+      "sha256": "49d3f6f162b59a063fb9fb6b40884c0753edbc31a4ba23f2a82f6eb380e8cd49",
+      "bytes": 304
+    },
+    "red/pdf/alu-foil-simulated-en-summary.json": {
+      "sha256": "8834c6a4d742305d6cd3c77a4efa84fd2e54e2c2c4cb19c189d7be3f72799ff2",
+      "bytes": 208
+    },
+    "red/pdf/alu-foil-simulated-en.html": {
+      "sha256": "56e728cf19ecb2ecda5e122c801dc22337f473007c32f1231e2349ef0f897f1e",
+      "bytes": 177895
+    },
+    "red/pdf/alu-foil-simulated-en.pdf": {
+      "sha256": "17b4296b9606cab13a1a1db53e506fdc62e83e6fbc079d43a7fbad4cf39b7a5e",
+      "bytes": 507974
+    },
+    "red/pdf/alu-profiles-simulated-analysis.json": {
+      "sha256": "d8b2a8aa6fea90eaab3096a4c71e9790e6bc2e5cb3fd04990619ca6c3bcacecf",
+      "bytes": 226885
+    },
+    "red/pdf/alu-profiles-simulated-ar-layout.json": {
+      "sha256": "29a6d7ebaa94a149759e8cd27178936720be9cc08aa2469d708454e8032cbc4e",
+      "bytes": 6367
+    },
+    "red/pdf/alu-profiles-simulated-ar-record-associations.json": {
+      "sha256": "b124f13e7e14357a463cb7a24347935519e1f5958f15b23a7681f63066b9a6f5",
+      "bytes": 585
+    },
+    "red/pdf/alu-profiles-simulated-ar-summary.json": {
+      "sha256": "bc509c36584312fe15a189fb3c42451ffb2de2096a1c5bc160a98054bdd365f6",
+      "bytes": 212
+    },
+    "red/pdf/alu-profiles-simulated-ar.html": {
+      "sha256": "d2204b5e64c0854a5e3ebe1ae87d5fe74465a13ed2e33c9cf3b15a399445b0b1",
+      "bytes": 231315
+    },
+    "red/pdf/alu-profiles-simulated-ar.pdf": {
+      "sha256": "8a9845eed42afe9ecc96cdfb597800e6819d9820b1edcae11eba21602a95c771",
+      "bytes": 888352
+    },
+    "red/pdf/alu-profiles-simulated-dossier.json": {
+      "sha256": "9b18ff2bbd6ed61265ed0317dac98835ae2d15efb195c96bec8b6a1dd0c314cf",
+      "bytes": 353506
+    },
+    "red/pdf/penicillin-api-simulated-analysis.json": {
+      "sha256": "657c5ee5c9db8f03f1caa15a1d2234a368869584d09ecfb9f45421b160f1019c",
+      "bytes": 211498
+    },
+    "red/pdf/penicillin-api-simulated-ar-layout.json": {
+      "sha256": "183d29257d251123cc0e154675aa730031a7d765fe977315ade429b8a82c865a",
+      "bytes": 6376
+    },
+    "red/pdf/penicillin-api-simulated-ar-record-associations.json": {
+      "sha256": "322b4121eac2a9d090e31e17f756d0d3ad0c32ef57e9cda08edf02f12840e94a",
+      "bytes": 344
+    },
+    "red/pdf/penicillin-api-simulated-ar-summary.json": {
+      "sha256": "937cf76bf2f57f7d60c7b5fdf9704db95fcc82d130dd4bba0c8e21cefd45958d",
+      "bytes": 214
+    },
+    "red/pdf/penicillin-api-simulated-ar.html": {
+      "sha256": "ca616c613eddf4884bec274a8f0b55304e2f9003a646ec4028ceb5996766af93",
+      "bytes": 196299
+    },
+    "red/pdf/penicillin-api-simulated-ar.pdf": {
+      "sha256": "294477ac52bd435e56ebd5c56bf72d59946ec562ac10907cd9805744df85aece",
+      "bytes": 812893
+    },
+    "red/pdf/penicillin-api-simulated-dossier.json": {
+      "sha256": "97269d850cf99a4f136863ead1a2dd6d18d3c583ece3444697aee3f74322936b",
+      "bytes": 328777
+    },
+    "red/pdf/polypropylene-simulated-analysis.json": {
+      "sha256": "8d8d48c18cd8e426b41fc127289831c199636f6ac34c82d6f107fa6285ca5c31",
+      "bytes": 213464
+    },
+    "red/pdf/polypropylene-simulated-ar-layout.json": {
+      "sha256": "aa71e3002091c30ab75658094849603ed60c678429806bc38cc3b3918110c1fd",
+      "bytes": 6160
+    },
+    "red/pdf/polypropylene-simulated-ar-record-associations.json": {
+      "sha256": "da9e59272f6d04a22c44922910cb92f3bcbdd8a07f32f3fd48aa99264969a44b",
+      "bytes": 237
+    },
+    "red/pdf/polypropylene-simulated-ar-summary.json": {
+      "sha256": "6be38736e0591ab1209025b55db6b5a929a823bba3fc10b38ce30b9ae8176141",
+      "bytes": 213
+    },
+    "red/pdf/polypropylene-simulated-ar.html": {
+      "sha256": "8688fd286a3a9215d96c7fc20975dd836b42f4d35b4081bf5ae8bbc2ef2286bd",
+      "bytes": 190004
+    },
+    "red/pdf/polypropylene-simulated-ar.pdf": {
+      "sha256": "3c2405e4d56e45e54ecf6cc5f0199e34d513e91f61da313125b4d47e9471c38f",
+      "bytes": 782638
+    },
+    "red/pdf/polypropylene-simulated-dossier.json": {
+      "sha256": "a58a0c9e5a1941df5078f69dd18650d94ad0c44c3099fef9c4da6359ea6790c4",
+      "bytes": 330134
+    },
+    "red/playwright/browser-tests-test-dossier-py-test-dossier-print-media-and-pdf-are-valid-chromium-simulated-alu-foil-en/test-failed-1.png": {
+      "sha256": "2a92cf938226b58219a87a5fe51277027b999ca75e21bc9714a72f01a9113e06",
+      "bytes": 274706
+    },
+    "red/playwright/browser-tests-test-dossier-py-test-dossier-print-media-and-pdf-are-valid-chromium-simulated-alu-foil-en/test-failed-2.png": {
+      "sha256": "ad983a1715a332a13ee10c02a724d5b1b980cbfc85c0f49f62a10b382ae54712",
+      "bytes": 147038
+    },
+    "red/playwright/browser-tests-test-dossier-py-test-dossier-print-media-and-pdf-are-valid-chromium-simulated-alu-foil-en/trace.zip": {
+      "sha256": "eb664035d74493b21c4c1dd6bafcfed19c5c0b6f80118ff7acc776f07250f9b3",
+      "bytes": 1362849
+    },
+    "red/run-summary-functional.json": {
+      "sha256": "4fb1affd328edc4d629deb1c284337a45bc2098ab77c018e29ecfb441272a1c0",
+      "bytes": 185
+    },
+    "red/server.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "red/stderr.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "red/stdout.log": {
+      "sha256": "a0d65bbdb59153303e74be541f5204d0ae083d0cbefd1b765c996c08c67a715b",
+      "bytes": 17658
+    },
+    "red-acceptance/PDF-ACCEPTANCE.json": {
+      "sha256": "75ed9830bc702f89c7f23ab0121845d64c1332410ed42bd584216c004f96bced",
+      "bytes": 4345405
+    },
+    "red-acceptance/alu-foil-public-ar.txt": {
+      "sha256": "bc26a02db385e3057d24ea6090d2c53426ef68cf2212d7275e2375b975bc7d24",
+      "bytes": 41601
+    },
+    "red-acceptance/alu-foil-public-en.txt": {
+      "sha256": "ffd0a3bc3ccdd6f46553e98c6b253dd4702b79b7879b17c26fe153fe872f29ca",
+      "bytes": 27578
+    },
+    "red-acceptance/alu-foil-simulated-ar.txt": {
+      "sha256": "012c1052344b970f2a40425df142726f8a1f13fd0d3175b0759a8cca6d3fd3d0",
+      "bytes": 84299
+    },
+    "red-acceptance/alu-foil-simulated-en.txt": {
+      "sha256": "4581edf8780ff8c067ada3db63b00aa7a9492e7a6e30889e7dd6bbd499e75e58",
+      "bytes": 59017
+    },
+    "red-acceptance/alu-profiles-public-ar.txt": {
+      "sha256": "453e07e6dc20b396399bffd21f92df0fd05d0d4d953815365c61f5b09cab4cb9",
+      "bytes": 44409
+    },
+    "red-acceptance/alu-profiles-public-en.txt": {
+      "sha256": "b1820ba9cd0bc109100738ce4819dfbc2e7eaa5132a4e314ee01447d3b44e88a",
+      "bytes": 29493
+    },
+    "red-acceptance/alu-profiles-simulated-ar.txt": {
+      "sha256": "2bb7a3d0ea9740c8321b5a4f4fa88516dd037e1fe3470459d942a767a67df5f0",
+      "bytes": 94447
+    },
+    "red-acceptance/alu-profiles-simulated-en.txt": {
+      "sha256": "67d38edcd074d5a7c62dd2ec1a1f43fa29bd0d342d6456fdc3e8422ee801a0b1",
+      "bytes": 66823
+    },
+    "red-acceptance/fert-retail-packs-public-ar.txt": {
+      "sha256": "c19f80ce9ad6f0364fe2e9f991d3cd1240b385aaf8f1b04318cfbb1321f04ad5",
+      "bytes": 42535
+    },
+    "red-acceptance/fert-retail-packs-public-en.txt": {
+      "sha256": "80a2e5f93c174e2a0546795cfbe8eba3b263ffec8dcbd48ca48f98deb0bba62a",
+      "bytes": 28241
+    },
+    "red-acceptance/fert-retail-packs-simulated-ar.txt": {
+      "sha256": "bfebbbf366fe9515f2a337b8595def98379dfa3484b27e10851462c39883bd82",
+      "bytes": 82257
+    },
+    "red-acceptance/fert-retail-packs-simulated-en.txt": {
+      "sha256": "c095adc567aa49e729ae92ec74404c6da795fb75302f848cb1547cbf0cd88453",
+      "bytes": 57614
+    },
+    "red-acceptance/galvalume-public-ar.txt": {
+      "sha256": "126759fe9981839c7188062a2c24b23573b1264984f221463e3d7b289b3b16de",
+      "bytes": 44937
+    },
+    "red-acceptance/galvalume-public-en.txt": {
+      "sha256": "b5094a15609a97fa82acd18f30f1186aa68ab84138beb25f9880a9954b8eff59",
+      "bytes": 30356
+    },
+    "red-acceptance/galvalume-simulated-ar.txt": {
+      "sha256": "b1a64033d1767580159e98e6b33c06ee41ab8aa3310d6453bd8bf81cd4e3bb52",
+      "bytes": 86454
+    },
+    "red-acceptance/galvalume-simulated-en.txt": {
+      "sha256": "11150862e1c5611097b3b45c8c08a2141c8e01d6ab661285460d8376dbe19b34",
+      "bytes": 61036
+    },
+    "red-acceptance/pe-film-public-ar.txt": {
+      "sha256": "7a747bb17b6143f75cab8c567ef5358e20f60af34dff55397a8e760d743f8eea",
+      "bytes": 41557
+    },
+    "red-acceptance/pe-film-public-en.txt": {
+      "sha256": "5487b138848a96f142e91fcfbabf4f4b71e95234efe54fb0cef26025608e8b25",
+      "bytes": 27546
+    },
+    "red-acceptance/pe-film-simulated-ar.txt": {
+      "sha256": "7b318b73ecae6d44b84e8a3862f7fb60ba3c4659fbe7d64f2f3fceff15d74ed5",
+      "bytes": 81285
+    },
+    "red-acceptance/pe-film-simulated-en.txt": {
+      "sha256": "f257a773dd05891aea556ae78cb0e6fb66b5456c9770f204cba4c84803b53f37",
+      "bytes": 56956
+    },
+    "red-acceptance/penicillin-api-public-ar.txt": {
+      "sha256": "c90f9fcb9eb8b22b2c3e3fa8dec890a36dfdafc011bed3b3971c73e20f984f1b",
+      "bytes": 42274
+    },
+    "red-acceptance/penicillin-api-public-en.txt": {
+      "sha256": "e9958617c4b9bcc36ef50ac036f6777783fd58037d9dd50c1862d0a780f8aba1",
+      "bytes": 28113
+    },
+    "red-acceptance/penicillin-api-simulated-ar.txt": {
+      "sha256": "73e5e985ebc660a254dccdf0ba911ce723ade49b0c1ffde946e989e473afd0e0",
+      "bytes": 83091
+    },
+    "red-acceptance/penicillin-api-simulated-en.txt": {
+      "sha256": "2ab14cf8dfcbb59f584facbf4524bd7b3a100b4e6ef98f47205da08be5bfaacc",
+      "bytes": 58393
+    },
+    "red-acceptance/polypropylene-public-ar.txt": {
+      "sha256": "5eb33f390eaab629565484f3d94b52f6f9ce17e0d47d2cd8f4f44d5380997eb8",
+      "bytes": 41681
+    },
+    "red-acceptance/polypropylene-public-en.txt": {
+      "sha256": "c2bd14836aca06e24897893e3a2c003d2a0915471450da65f173c26f2593ab86",
+      "bytes": 27405
+    },
+    "red-acceptance/polypropylene-simulated-ar.txt": {
+      "sha256": "7df7b47e29c5de34ce67722a91116ff3dbbefc385db58a2c061a76bef2a46903",
+      "bytes": 80021
+    },
+    "red-acceptance/polypropylene-simulated-en.txt": {
+      "sha256": "93060ad868a1fae7290692ead7ccb0d6718b2b7e6d660f2bed86a995c5d2fa8d",
+      "bytes": 55859
+    },
+    "red-acceptance/sop-public-ar.txt": {
+      "sha256": "970edeb1462c6c37fc775045c107f3e126f9ab7d4c3e9081d3a216023ae3130d",
+      "bytes": 42166
+    },
+    "red-acceptance/sop-public-en.txt": {
+      "sha256": "a68272222f882a0731598f6f6b05645870fe8b899679fb63d303005395fdf364",
+      "bytes": 27925
+    },
+    "red-acceptance/sop-simulated-ar.txt": {
+      "sha256": "192e596bc736fd0d7a5b30817a2b433c580b51a6107232536eb383020ba1f6a3",
+      "bytes": 81973
+    },
+    "red-acceptance/sop-simulated-en.txt": {
+      "sha256": "055a3964c54d8a39f3e4e3c1db5ca781571e4b2b968f6bb280fc2c3b65d3a948",
+      "bytes": 57486
+    },
+    "red-acceptance/steel-public-ar.txt": {
+      "sha256": "475e125511cb68ed9a712e22495f9555fab6f96e0296fe6db6cbcf85d9edb906",
+      "bytes": 42850
+    },
+    "red-acceptance/steel-public-en.txt": {
+      "sha256": "328207ab534ea1bdbca45cf1fe8d1d8cf289934024660ad26466ac14d4a235a7",
+      "bytes": 28207
+    },
+    "red-acceptance/steel-simulated-ar.txt": {
+      "sha256": "d498afe9c890601f697abc03531a8dde88ffff16c32337ce165bf7428c02653b",
+      "bytes": 83720
+    },
+    "red-acceptance/steel-simulated-en.txt": {
+      "sha256": "3d8bfe748bac990b58d26432f4036c1cb7f99ce9dfe3ce0b9da406f8b5e522e4",
+      "bytes": 58553
+    },
+    "red-acceptance/streptomycin-api-public-ar.txt": {
+      "sha256": "16f60cf796bae383efae684eddb565c099e203a905bfaffc100e1dc717520487",
+      "bytes": 42446
+    },
+    "red-acceptance/streptomycin-api-public-en.txt": {
+      "sha256": "bacc15beebaff5ecbf6c373fcb0feea8159ed02d7cffa8b1af3fc7b4e216bd8c",
+      "bytes": 28223
+    },
+    "red-acceptance/streptomycin-api-simulated-ar.txt": {
+      "sha256": "b6dd9b53fa775326ecb62b723d7cb66d89d2d1bf6f36eb1766ba9f8529160138",
+      "bytes": 82042
+    },
+    "red-acceptance/streptomycin-api-simulated-en.txt": {
+      "sha256": "01a0dde2534c9db5d1006030bfd4cfb80e37ff4eaca65bdc8e576bb5d2b3e957",
+      "bytes": 57363
+    },
+    "red-acceptance/tinplate-public-ar.txt": {
+      "sha256": "113cd297b1b82f01a13fef63af52dbfed2c46bb403e9615d149f6339b9035198",
+      "bytes": 41779
+    },
+    "red-acceptance/tinplate-public-en.txt": {
+      "sha256": "439bdb37666071bd87d200b9cd8e9bbf5b2867a6db028401c05a31ed383c99d8",
+      "bytes": 27667
+    },
+    "red-acceptance/tinplate-simulated-ar.txt": {
+      "sha256": "cc405553832277288b81015a6e598f7ae90171141d2d3c8d7179dccfdd9e574d",
+      "bytes": 82780
+    },
+    "red-acceptance/tinplate-simulated-en.txt": {
+      "sha256": "0572830ad8d4cd7997cd6a529fcfc77885f14636b2271264da403864d92677b4",
+      "bytes": 58047
+    },
+    "red-checker.stderr": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "red-checker.stdout": {
+      "sha256": "0d2166d8a48d12f192fa817c86a297f49963b4e291d0cee6288899284f3e9c6d",
+      "bytes": 470
+    },
+    "server/server.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "test-addition.txt": {
+      "sha256": "013fcbd398b771f442f9e918c7fdda13d142b5741737b7d29c384d6fa5ed3cde",
+      "bytes": 5249
+    }
+  },
+  "scope": "Exact completed implementer attempt only; source copies represented by full ledgers, fresh specialist future outputs excluded"
+}

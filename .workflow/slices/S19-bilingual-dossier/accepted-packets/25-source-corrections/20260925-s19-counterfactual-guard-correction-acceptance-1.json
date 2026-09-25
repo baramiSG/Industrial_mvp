@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "at_utc": "2026-09-25T01:25:26.494572+00:00",
+  "record_kind": "DELEGATED_S19_R12_SRC01_GUARD_CORRECTION_ACCEPTANCE",
+  "actor": "/root coordinator under existing owner delegation",
+  "authority": "20260923-blocker-resolution-delegation-1.json",
+  "parent_acceptance": "20260925-s19-batched-presentation-correction-acceptance-1.json",
+  "author": "/root/s19_product_implementer",
+  "independent_reviewer": "/root/s19_source_reviewer",
+  "review": {
+    "path": ".autonomous-workflow/overnight-2026-09-23/reviews/s19-r12-finite-correction-r1/REVIEW.md",
+    "sha256": "fd54fa3f55362e180ebccf8f6a50657006df6b00fbeab063f7eb397860796ff7",
+    "verdict": "REJECT r12 candidate; explicit concurrence with smallest guard correction"
+  },
+  "permitted_paths": [
+    "src/ior_mvp/dossier.py",
+    "tests/test_dossier_projection.py"
+  ],
+  "preimages": {
+    "src/ior_mvp/dossier.py": "14af5b406b65b897ca89048c13a4727f99f543afdc7cedca2f7bcedb21bf4311",
+    "tests/test_dossier_projection.py": "4598ffb045c387d0507c5b875b9c4b762e4eb82acf58db042c465d4a57006e5d"
+  },
+  "approved_correction": "Guard outer and nested counterfactual mapping types before caption lookup; record_group first-pair path only for nonempty mappings, otherwise preserve existing h.value rendering. No schema expansion or replacement of source values.",
+  "required_proof": [
+    "Two demonstrated shape regressions genuinely fail r12 then pass corrected source/API.",
+    "Exact22JSON/44HTML equality for all valid sources between r12 and guard successor before reusing targeted outputs.",
+    "Independent corrected delta review and existing targeted/final printed proof remain required."
+  ],
+  "history": "Preserve r12 rejection, frozen bytes, actual probes and targeted producer output. No whole-product acceptance, generator or staging.",
+  "sanad": "Root read exact review/probe and affected live source, verified review hash. Independent reviewer supplied concrete correction and directly reproduced JSON200/HTML500.",
+  "muhasabah": "PASS bounded correction authorization only; no invented owner quote or Claude approval; output reuse is conditional on actual exact equality."
+}

@@ -1,0 +1,33 @@
+        # Direct capability caption: exact source occurrence through first route0.
+        if mode=='simulated' and locale=='ar' and case.slug=='streptomycin-api':
+            lines=[(index+1,line) for index,text in enumerate(texts) for line in text.splitlines() if normalized(line)]
+            boundary_windows={'capability':[],'route0':[]}
+            for key,label in (('capability',strings['dossier.section.capability']),('route0',strings['executive.route.0'])):
+                for index in range(len(lines)):
+                    for length in (1,2,3):
+                        if index+length>len(lines):continue
+                        window=''.join(line for _,line in lines[index:index+length])
+                        if len(normalized(window))==len(normalized(label)) and label_present(window,label,locale):
+                            boundary_windows[key].append({'line':index,'length':length,'pages':sorted({page for page,_ in lines[index:index+length]}),'text':window});break
+            association={'finding':'CAPTION-ORPHAN-03','source_path':'blocks.capability.records.profile_hard_gates.named_molecule_and_synthesis_route','boundaries':boundary_windows,'caption_windows':[],'group_windows':[],'first_row_windows':[]}
+            starts=boundary_windows['capability'];boundary_ok=len(starts)==1 and len(starts[0]['pages'])==1
+            if boundary_ok:
+                start=starts[0]['line']+starts[0]['length']
+                following=[row for row in boundary_windows['route0'] if row['line']>=start]
+                boundary_ok=bool(following) and len(following[0]['pages'])==1
+                if boundary_ok:
+                    end=following[0]['line'];association['first_following_route0']=following[0]
+                    targets=(('caption_windows',strings['dossier.source_original']),('group_windows',strings['dossier.field.profile_hard_gates']),('first_row_windows',strings['dossier.field.named_molecule_and_synthesis_route']+str(dossier['blocks']['capability']['records']['profile_hard_gates']['named_molecule_and_synthesis_route'])))
+                    for key,label in targets:
+                        for index in range(start,end):
+                            for length in (1,2,3):
+                                if index+length>end:continue
+                                window=''.join(line for _,line in lines[index:index+length])
+                                if len(normalized(window))==len(normalized(label)) and label_present(window,label,locale):
+                                    association[key].append({'line':index,'length':length,'pages':sorted({page for page,_ in lines[index:index+length]}),'text':window});break
+            groups=[association[key] for key in ('caption_windows','group_windows','first_row_windows')]
+            unique=boundary_ok and all(len(rows)==1 for rows in groups)
+            ordered=unique and all(left[0]['line']+left[0]['length']<=right[0]['line'] for left,right in zip(groups,groups[1:]))
+            association['passed']=bool(ordered and all(len(rows[0]['pages'])==1 and rows[0]['pages']==groups[0][0]['pages'] for rows in groups))
+            report.setdefault('record_associations',[]).append(association)
+            if not association['passed']:report['issues'].append('orphan/missing/ambiguous ordered capability caption:CAPTION-ORPHAN-03')

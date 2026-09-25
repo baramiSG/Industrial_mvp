@@ -1,0 +1,248 @@
+{
+  "scope": "Sensitivity of actual finite S19 PDF acceptance predicates; expected failures are not product gate passes",
+  "checker_sha256": "830ed51e7b3cb6e46042856a88d97acf50dc9cfb4035091a844e60f7f46a1c6e",
+  "results": [
+    {
+      "control": "actual44PDF narrative/document/raster positives",
+      "result": "PASS",
+      "documents": 44
+    },
+    {
+      "control": "off-page-public-en.pdf",
+      "required_failure": "physical glyph bounds",
+      "actual_issues": [
+        "page1: no selectable body text",
+        "page1: physical glyph bounds",
+        "page1: content glyph bounds"
+      ],
+      "sha256": "9c0f7543ec0c01b12075e6c5314e760de47e8b35f35178413ffd4b43f9367964"
+    },
+    {
+      "control": "missing-font-public-en.pdf",
+      "required_failure": "missing embedded font/Unicode map",
+      "actual_issues": [
+        "page1: missing embedded font/Unicode map",
+        "page2: missing embedded font/Unicode map",
+        "page3: missing embedded font/Unicode map",
+        "page4: missing embedded font/Unicode map",
+        "page5: missing embedded font/Unicode map",
+        "page6: missing embedded font/Unicode map",
+        "page7: missing embedded font/Unicode map",
+        "page8: missing embedded font/Unicode map",
+        "page9: missing embedded font/Unicode map",
+        "page10: missing embedded font/Unicode map",
+        "page11: missing embedded font/Unicode map",
+        "page12: missing embedded font/Unicode map",
+        "page13: missing embedded font/Unicode map",
+        "page14: missing embedded font/Unicode map",
+        "page15: missing embedded font/Unicode map",
+        "page16: missing embedded font/Unicode map",
+        "page17: missing embedded font/Unicode map",
+        "page18: missing embedded font/Unicode map",
+        "page19: missing embedded font/Unicode map",
+        "page20: missing embedded font/Unicode map",
+        "page21: missing embedded font/Unicode map",
+        "page22: missing embedded font/Unicode map",
+        "page23: missing embedded font/Unicode map",
+        "page24: missing embedded font/Unicode map",
+        "page25: missing embedded font/Unicode map",
+        "page26: missing embedded font/Unicode map",
+        "page27: missing embedded font/Unicode map",
+        "page28: missing embedded font/Unicode map",
+        "page29: missing embedded font/Unicode map"
+      ],
+      "sha256": "d7f1cdc0668caf3b56755a32e23f1c05b14af38cd40afcd7804f3094ad8dff25"
+    },
+    {
+      "control": "retained old dossier en",
+      "page": 2,
+      "physical_violations": [
+        {
+          "character": 2103,
+          "box": [
+            594.613525390625,
+            80.96395874023438,
+            598.7662963867188,
+            81.55721282958984
+          ]
+        }
+      ],
+      "sha256": "384f3cc1a586de7950bdf329252f6ed63d89d384e573e9c20fada06913e87720"
+    },
+    {
+      "control": "retained old dossier ar",
+      "page": 4,
+      "physical_violations": [
+        {
+          "character": 460,
+          "box": [
+            -4.532527923583984,
+            373.7999267578125,
+            1.4194722175598145,
+            380.471923828125
+          ]
+        }
+      ],
+      "sha256": "9b4c4b5eab4687ae61b67843b52cefc2d303b460de8d3602a574a7fad3adf1b9"
+    },
+    {
+      "control": "actual failed fixed footer",
+      "issues": [
+        "page1: footer policy missing/malformed/displaced",
+        "page1: no positive body/footer separation",
+        "page2: footer policy missing/malformed/displaced",
+        "page2: no positive body/footer separation",
+        "page3: footer policy missing/malformed/displaced",
+        "page3: no positive body/footer separation",
+        "page4: footer policy missing/malformed/displaced",
+        "page4: no positive body/footer separation",
+        "page5: footer policy missing/malformed/displaced",
+        "page5: no positive body/footer separation",
+        "page6: footer policy missing/malformed/displaced",
+        "page6: no positive body/footer separation",
+        "page7: footer policy missing/malformed/displaced",
+        "page7: no positive body/footer separation",
+        "page8: footer policy missing/malformed/displaced",
+        "page8: no positive body/footer separation",
+        "page9: footer policy missing/malformed/displaced",
+        "page9: no positive body/footer separation",
+        "page10: footer policy missing/malformed/displaced",
+        "page10: no positive body/footer separation",
+        "page11: footer policy missing/malformed/displaced",
+        "page11: no positive body/footer separation",
+        "page12: footer policy missing/malformed/displaced",
+        "page12: no positive body/footer separation",
+        "page13: footer policy missing/malformed/displaced",
+        "page13: no positive body/footer separation",
+        "page14: footer policy missing/malformed/displaced",
+        "page14: no positive body/footer separation",
+        "page15: footer policy missing/malformed/displaced",
+        "page15: no positive body/footer separation",
+        "page16: footer policy missing/malformed/displaced",
+        "page16: no positive body/footer separation",
+        "page17: footer policy missing/malformed/displaced",
+        "page17: no positive body/footer separation",
+        "page18: footer policy missing/malformed/displaced",
+        "page18: no positive body/footer separation",
+        "page19: footer policy missing/malformed/displaced",
+        "page19: no positive body/footer separation",
+        "page20: footer policy missing/malformed/displaced",
+        "page20: no positive body/footer separation",
+        "page21: footer policy missing/malformed/displaced",
+        "page21: no positive body/footer separation",
+        "page22: footer policy missing/malformed/displaced",
+        "page22: no positive body/footer separation",
+        "page23: footer policy missing/malformed/displaced",
+        "page23: no positive body/footer separation",
+        "page24: footer policy missing/malformed/displaced",
+        "page24: no positive body/footer separation",
+        "page25: footer policy missing/malformed/displaced",
+        "page25: no positive body/footer separation",
+        "page26: footer policy missing/malformed/displaced",
+        "page26: no positive body/footer separation",
+        "page27: footer policy missing/malformed/displaced",
+        "page27: no positive body/footer separation",
+        "page28: footer policy missing/malformed/displaced",
+        "page28: no positive body/footer separation",
+        "page29: footer policy missing/malformed/displaced",
+        "page29: no positive body/footer separation",
+        "page30: footer policy missing/malformed/displaced",
+        "page30: no positive body/footer separation",
+        "page31: footer policy missing/malformed/displaced",
+        "page31: no positive body/footer separation",
+        "page32: footer policy missing/malformed/displaced",
+        "page32: no positive body/footer separation",
+        "page33: footer policy missing/malformed/displaced",
+        "page33: no positive body/footer separation",
+        "page34: footer policy missing/malformed/displaced",
+        "page34: no positive body/footer separation",
+        "page35: footer policy missing/malformed/displaced",
+        "page35: no positive body/footer separation",
+        "page36: footer policy missing/malformed/displaced",
+        "page36: no positive body/footer separation",
+        "page37: footer policy missing/malformed/displaced",
+        "page37: no positive body/footer separation",
+        "page38: footer policy missing/malformed/displaced",
+        "page38: no positive body/footer separation",
+        "page39: footer policy missing/malformed/displaced",
+        "page39: no positive body/footer separation",
+        "page40: footer policy missing/malformed/displaced",
+        "page40: no positive body/footer separation",
+        "page41: footer policy missing/malformed/displaced",
+        "page41: no positive body/footer separation",
+        "page42: footer policy missing/malformed/displaced",
+        "page42: no positive body/footer separation",
+        "page43: footer policy missing/malformed/displaced",
+        "page43: no positive body/footer separation",
+        "page44: footer policy missing/malformed/displaced",
+        "page44: no positive body/footer separation",
+        "page45: footer policy missing/malformed/displaced",
+        "page45: no positive body/footer separation",
+        "page46: footer policy missing/malformed/displaced",
+        "page46: no positive body/footer separation",
+        "page47: footer policy missing/malformed/displaced",
+        "page47: no positive body/footer separation",
+        "page48: footer policy missing/malformed/displaced",
+        "page48: no positive body/footer separation",
+        "page49: footer policy missing/malformed/displaced",
+        "page49: no positive body/footer separation",
+        "page50: footer policy missing/malformed/displaced",
+        "page50: no positive body/footer separation",
+        "page51: footer policy missing/malformed/displaced",
+        "page51: no positive body/footer separation",
+        "page52: footer policy missing/malformed/displaced",
+        "page52: no positive body/footer separation"
+      ],
+      "sha256": "5363706b9e81c5ea73685a091e0e4f1bcb7a173a3a4bf2a0539b59d293f2ffb8"
+    },
+    {
+      "control": "actual renderer omitted public narrative en",
+      "narrative_issues": [
+        "missing complete public narrative:headline",
+        "missing complete public narrative:rationale",
+        "missing complete public narrative:route_label",
+        "missing complete public narrative:conditions:0",
+        "missing complete public narrative:kill_conditions:0",
+        "missing complete public narrative:kill_conditions:1"
+      ],
+      "sha256": "7772e441ff04f078376950d4f26ccd2e149012439b8cd888c3d3e85bd5c459aa"
+    },
+    {
+      "control": "actual renderer omitted public narrative ar",
+      "narrative_issues": [
+        "missing complete public narrative:headline",
+        "missing complete public narrative:rationale",
+        "missing complete public narrative:route_label",
+        "missing complete public narrative:conditions:0",
+        "missing complete public narrative:kill_conditions:0",
+        "missing complete public narrative:kill_conditions:1"
+      ],
+      "sha256": "1868d2bf23d3c2800addc81572559a6969c1ef08fd5fc4df898bd948f8a74b2a"
+    },
+    {
+      "control": "missing document",
+      "issues": [
+        {
+          "matrix_missing": [
+            "steel-public-en.pdf"
+          ],
+          "matrix_unexpected": []
+        }
+      ]
+    },
+    {
+      "control": "missing actual PDF page",
+      "issues": [
+        "PDF/raster hash mismatch:steel-public-en.pdf",
+        "missing/duplicate PDF or raster page:steel-public-en.pdf"
+      ]
+    },
+    {
+      "control": "missing rendered page",
+      "issues": [
+        "missing rendered asset:steel-public-en-page-01.png",
+        "rendered page asset inventory mismatch"
+      ]
+    }
+  ]
+}

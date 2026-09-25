@@ -1,0 +1,39 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+__ test_trade_chart_discloses_scales_and_preserves_observed_values_and_curves __
+
+    def test_trade_chart_discloses_scales_and_preserves_observed_values_and_curves() -> None:
+        from html import unescape
+        from ior_mvp.config import ui_strings_bundle
+        bundles={locale:ui_strings_bundle(locale) for locale in ('en','ar')}
+        module=(STATIC_ROOT/'modules/renderers/trade.js').as_uri()
+        state_module=(STATIC_ROOT/'modules/state.js').as_uri()
+        script=f'''
+    import {{renderTradeChart}} from {json.dumps(module)};
+    import {{state}} from {json.dumps(state_module)};
+    const bundles={json.dumps(bundles,ensure_ascii=False)};
+    const values=[null,undefined,"123",true,false,NaN,Infinity];
+    const output=[];
+    for (const locale of ["en","ar"]) {{
+     state.locale=locale;state.ui=bundles[locale];
+     const trade=[{{year:2024,imports_usd_m:236.9,imports_kt:287.9}},{{year:2021,imports_usd_m:0,imports_kt:0}},{{year:2023,imports_usd_m:186,imports_kt:173.9}}];
+     Object.freeze(trade);for(const row of trade)Object.freeze(row);
+     output.push({{locale,kind:"valid",html:renderTradeChart({{trade}}),years:trade.map(r=>r.year)}});
+     for(let i=0;i<values.length;i++) output.push({{locale,kind:"missing",html:renderTradeChart({{trade:[{{year:2024,imports_usd_m:values[i],imports_kt:values[i]}}]}})}});
+     output.push({{locale,kind:"empty",html:renderTradeChart({{trade:[]}})}});
+    }}
+    console.log(JSON.stringify(output));
+    '''
+        result=subprocess.run(['node','--input-type=module'],input=script,text=True,capture_output=True,check=False)
+        assert result.returncode==0,result.stderr
+        for item in json.loads(result.stdout):
+            markup=unescape(item['html']);strings=bundles[item['locale']]['strings']
+>           assert strings.get('trade.scale_note','Each line uses its own scale.') in markup
+E           assert 'Each line uses its own scale. Compare trends within a line; heights of the value and quantity lines are not comparable.' in '\n    <article class="workspace-card full">\n      <div class="card-header">\n        <div><h3>Public trade signal</h...<i class="legend-dot legend-quantity"></i>Import quantity, kt</span>\n        </div>\n      </div>\n    </article>\n  '
+E            +  where 'Each line uses its own scale. Compare trends within a line; heights of the value and quantity lines are not comparable.' = <built-in method get of dict object at 0x783d6df1b1c0>('trade.scale_note', 'Each line uses its own scale.')
+E            +    where <built-in method get of dict object at 0x783d6df1b1c0> = {'actions.copied': 'Decision dossier JSON copied', 'actions.copy_json': 'Copy decision JSON', 'actions.open_dossier': 'Open dossier', 'actions.subtitle': 'One-page dossier and machine-readable record', ...}.get
+
+tests/test_static_frontend.py:588: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_static_frontend.py::test_trade_chart_discloses_scales_and_preserves_observed_values_and_curves
+1 failed, 29 deselected in 0.15s

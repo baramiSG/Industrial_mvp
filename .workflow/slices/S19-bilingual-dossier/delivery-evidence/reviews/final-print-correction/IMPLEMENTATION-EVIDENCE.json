@@ -1,0 +1,182 @@
+{
+  "verdict": "APPROVE",
+  "scope": "Exact finite CSS/test implementation, actual regression and API preservation, with separately attributed four-target visual review",
+  "source_green_sha256": "18180060d91ef4c91cb5152114bebe3fed2e9704370839703a9455b06694dbc2",
+  "direct_checks": {
+    "source_files_live_and_frozen": 1759,
+    "source_pathset_equal": true,
+    "staged_diff_empty": true,
+    "only_two_approved_deltas": true,
+    "old_print_test_statements_unchanged": 41,
+    "all_other_module_AST_unchanged": true,
+    "red_green_only_css_diff": true,
+    "actual_red_cases": 4,
+    "actual_green_cases": 4,
+    "reference_failures_rederived": [
+      51,
+      0
+    ],
+    "actual_steel_pdf_heading_first_fact": [
+      "RED page24 detached",
+      "GREEN page25 complete"
+    ],
+    "all88_bodies_recompared": {
+      "json": 44,
+      "html": 44
+    },
+    "complete_real_public_decisions_equal": 22,
+    "graph_inputs_unchanged": 230,
+    "generated_outputs_unchanged": 6,
+    "indexes_unchanged": 44,
+    "target_strict_documents": 4,
+    "target_strict_pages": 251,
+    "target_strict_issues": []
+  },
+  "attributed_visual_review": {
+    "agent": "/root/s19_delivered_base_handoff",
+    "verdict": "APPROVE",
+    "four_reports_pages": 251,
+    "native_contexts_viewed_by_that_reviewer": 14,
+    "my_new_native_views_in_this_implementation_review": 0
+  },
+  "evidence": [
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/final-print-correction-r1/SOURCE-GREEN.json",
+      "sha256": "18180060d91ef4c91cb5152114bebe3fed2e9704370839703a9455b06694dbc2"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/final-print-correction-r1/SOURCE-RED.json",
+      "sha256": "233700dcacf18aff1869debac5e5a195ab0624a321ef7b21e01f2ff85e194019"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/final-print-correction-r1/POSTIMAGES.json",
+      "sha256": "797b2fb5140d3aa8913b6ac442749c80ce0701656a197f6d74a7ce48eda551d1"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/final-print-correction-r1/source-green/src/ior_mvp/static/css/dossier.css",
+      "sha256": "d124607ce4466fad488678c33aacffd248b198f77d7a9b1097ccf39d9fc63b13"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/final-print-correction-r1/source-green/browser_tests/test_dossier.py",
+      "sha256": "2912d949c90395251180f1442fb486046686938a3150eb23f783d59eedcb0f97"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/final-print-correction-r1/ACTUAL-API-COMPARISON-r2.json",
+      "sha256": "da2eda06153c17081c4e784eba4864d5dad019052023f2173687b2af513139ed"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/final-print-correction-r1/ACTUAL-API-COMPARISON-r2.py",
+      "sha256": "c384e955a030071ce1a3af5710c98cdc34f63bc17916e34603bf91c47f717382"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/final-print-correction-r1/ACTUAL-API-COMPARISON-r2.stdout",
+      "sha256": "dad19e0a223ac62efb997550fcfa6ce028187c4ed2eb1395dd5c97f592dfd0db"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/final-print-correction-r1/ACTUAL-API-COMPARISON-r2.stderr",
+      "sha256": "a1b252d60289dbe6a8b47883ef7d24012efed3b81f085eea726b3a8902c1afa5"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/final-print-correction-r1/ACTUAL-API-COMPARISON.stderr",
+      "sha256": "407633671bedb46a64e13afb4ac0f4d871635cd2e66899d5581daedd74d626af"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/final-print-correction-r1/targeted-review-r1/REVIEW.md",
+      "sha256": "cd6e7ba5176ba2939213597949547db24fc4de43553f47313a7a426a73877139"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/final-print-correction-r1/targeted-review-r1/VIEWED-EVIDENCE.json",
+      "sha256": "3759795e1ab6b9a7c9f7afa7dbdcf25108d4176a3530387bc767608c54e2bf4c"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/final-print-correction-r1/targeted-review-r1/TARGET-STRICT.json",
+      "sha256": "efa319de619a98982cade526604d8a4fe60f144e297d333f42b28e3a6d729840"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/final-print-correction-r1/targeted-review-r1/rendered/RENDER-RESULT.json",
+      "sha256": "bdd2464ad323985816c8843c5f9767bbcaffbbdc5471117c054b0216b74d5531"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/reviews/s19-final-print-correction-r1/INDEPENDENT-REGRESSION-CHECK.json",
+      "sha256": "27ff01db8e1fa076e2b49e926e5e00b65b32047c7ad539f30bc4b5594bdcac04"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/reviews/s19-final-print-correction-r1/HTML-CSS-EXPECTATION-ADDENDUM.md",
+      "sha256": "137b9bfb70ef9afc6dbd7d8e27dfbcfd8bf040655de5216ac8cf1d18d7c11adc"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/final-print-correction-r1/red/COMMAND.json",
+      "sha256": "6d17e14c472c2819a608dd2ae777d24de2afbc8537c81c88e55db78ace511cd1"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/final-print-correction-r1/red/stdout.log",
+      "sha256": "dc0f743b7f3144f64ffbcfa220a7b786fd5d04f781d5b974c58ad3c45c5e9a4d"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/final-print-correction-r1/red/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/final-print-correction-r1/red/run-summary-functional.json",
+      "sha256": "025ea9f6266f96c03a2dc68d216547cfac5cd55ac5bd44680058141e2f2a86d3"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/final-print-correction-r1/red/pdf/alu-foil-simulated-ar-layout.json",
+      "sha256": "6302f36278324f4b01988554d2f6a041326eb2882381e44c5f71aa6a41b66281"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/final-print-correction-r1/red/pdf/alu-profiles-simulated-ar-layout.json",
+      "sha256": "e5ac5c915559fc6d887b589e9240f45d8b2e48a84f7e31d845e3b7f298dc2fb5"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/final-print-correction-r1/red/pdf/steel-simulated-en-layout.json",
+      "sha256": "33cc37847671d0385e3dab6077053c30e2c37b6ac7668194f5e320cc152a9d25"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/final-print-correction-r1/red/pdf/streptomycin-api-simulated-ar-layout.json",
+      "sha256": "790633b52e8663228e5790800816f63d9b3ebecaee5b601af0a4b2ac35d960a9"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/final-print-correction-r1/green/COMMAND.json",
+      "sha256": "6db86f296064d7f2824deed2ee7182cb826982e6bcc5da03a84b36be92bf4827"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/final-print-correction-r1/green/stdout.log",
+      "sha256": "6957a101b14648ede9491a04255cf257c6fbb9ebb1e3b31ed8ddb5bd990e5ee9"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/final-print-correction-r1/green/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/final-print-correction-r1/green/run-summary-functional.json",
+      "sha256": "c9eee9add270841a8b706eaee051b2af88ca1c0a09482c78d6040ffb5d855f50"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/final-print-correction-r1/green/pdf/alu-foil-simulated-ar-layout.json",
+      "sha256": "8704f6761e964e7f37a3ebcffd192883512637b2c126578fb121d9d351c37e5d"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/final-print-correction-r1/green/pdf/alu-profiles-simulated-ar-layout.json",
+      "sha256": "29a6d7ebaa94a149759e8cd27178936720be9cc08aa2469d708454e8032cbc4e"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/final-print-correction-r1/green/pdf/steel-simulated-en-layout.json",
+      "sha256": "530ddf635f09e2d9e3c8e86682448f300c13b91a4076190b667800d6f0ad5c02"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/final-print-correction-r1/green/pdf/streptomycin-api-simulated-ar-layout.json",
+      "sha256": "7eb1ec4214672ff41ec060dbd907c0674889af8a6574162947d975a685ccfff8"
+    }
+  ],
+  "unverified": [
+    "corrected complete full functional and final44 rendered proof",
+    "canonical exact source rebind and capture",
+    "two clean candidate root/strict and exact-head CI/delivery gates"
+  ],
+  "sealed_author_receipt": {
+    "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/final-print-correction-r1/RECEIPT.json",
+    "sha256": "59b5b7102b674194ebdcc13927de1fee9809b3004b8d64bd886c373cda7d661a",
+    "entries_directly_rehashed": 702
+  }
+}

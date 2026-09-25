@@ -1,0 +1,79 @@
+{
+  "verdict": "REJECT",
+  "scope": "Actual accepted keep-chain hypothesis on frozen source; no further operation approval",
+  "files": [
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-record-correction-r1/SOURCE-GREEN.json",
+      "sha256": "758783bbdb135fb3451565995013a78e76ad30bdfb2be615bac0d56316a851f9"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-record-correction-r1/POSTIMAGES.json",
+      "sha256": "f389d35f50eea36c7c263b2b6246481db615fd8870ab9881961c601c54a06b40"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-record-correction-r1/ACTUAL.patch",
+      "sha256": "a2592dbbfbeaa2bbf33c4aa0cdaef25a5560d2a16939b6963da04b694e4e9ffb"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-record-correction-r1/check_pdf_matrix.py",
+      "sha256": "bfa13f1ac4d8056f56a15a78ecf3f3e330f0c6abbcacefa96c4b352ed59e55bd"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-record-correction-r1/check_pdf_matrix.preimage.py",
+      "sha256": "830ed51e7b3cb6e46042856a88d97acf50dc9cfb4035091a844e60f7f46a1c6e"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-record-correction-r1/RED-CHECKER-EXIT.json",
+      "sha256": "71ec65ce144ab7b5ca3854b139af377456ae1ecad54945e543cd69a262c3dfb6"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-record-correction-r1/red-checker.stdout",
+      "sha256": "0d2166d8a48d12f192fa817c86a297f49963b4e291d0cee6288899284f3e9c6d"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-record-correction-r1/red-acceptance/PDF-ACCEPTANCE.json",
+      "sha256": "75ed9830bc702f89c7f23ab0121845d64c1332410ed42bd584216c004f96bced"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-record-correction-r1/green/COMMAND.json",
+      "sha256": "de18e63a180010027bcd4ecb29856197f2407bc951941a10866c0b080abe1c6a"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-record-correction-r1/green/run-summary-functional.json",
+      "sha256": "4fb1affd328edc4d629deb1c284337a45bc2098ab77c018e29ecfb441272a1c0"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-record-correction-r1/green/stdout.log",
+      "sha256": "fd0c8159b16866f53fc38a24c60ef23e4ec2625b754e965aadb760836aa41cd2"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-record-correction-r1/green/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-record-correction-r1/green/pdf/alu-foil-simulated-en.pdf",
+      "sha256": "5e271424e9b34f128ac6b973d0220b79af2387964d1e2452618a4c7c887b2bbb"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-record-correction-r1/green/pdf/alu-foil-simulated-en-record-associations.json",
+      "sha256": "49d3f6f162b59a063fb9fb6b40884c0753edbc31a4ba23f2a82f6eb380e8cd49"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-record-correction-r1/green/pdf/alu-foil-simulated-en-layout.json",
+      "sha256": "379d5b890b374623eaa28954a3443500485877fcce1ddd915e526c9b96d4f7bd"
+    }
+  ],
+  "direct_rederivation": {
+    "tool": "Existing W19 pypdf",
+    "pdf": "green/pdf/alu-foil-simulated-en.pdf",
+    "pages": 54,
+    "heading_page": 49,
+    "first_status_PASS_page": 50,
+    "same_page_predicate": false
+  },
+  "postimages_verified": {
+    "src/ior_mvp/static/css/dossier.css": "ae7f466d7a3d4b3413ad4f48079f7f82298133668a77a4e5cca70e3d118bb2c7",
+    "browser_tests/test_dossier.py": "4f7118b28616fd0e4dba18b26ce5136c905f49995db8d61c5695e482ee5d79c0"
+  },
+  "attribution": "Actual command exit1, collected4, failed1, passed3; three browser passes are not proof of Arabic emitted-page closure."
+}

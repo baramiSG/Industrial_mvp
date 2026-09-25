@@ -11,6 +11,7 @@ from ior_mvp.config import PROJECT_ROOT
 STATIC_ROOT = PROJECT_ROOT / "src" / "ior_mvp" / "static"
 MODULE_ROOT = STATIC_ROOT / "modules"
 EXPECTED_MODULES = {
+    "modules/dossier-actions.js",
     "app.js",
     "modules/api.js",
     "modules/dom.js",

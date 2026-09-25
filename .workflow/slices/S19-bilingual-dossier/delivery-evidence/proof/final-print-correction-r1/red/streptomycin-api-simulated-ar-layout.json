@@ -1,0 +1,270 @@
+{
+  "reference_rows": [
+    {
+      "table": "exclusions",
+      "code": "EX-01_HETEROGENEOUS_RESIDUAL",
+      "prefix": "يتعذر فصل المنتج التجاري عن رمز متبق شديد التباين، ولا يتوافر دليل على مستوى المنتج.",
+      "prefixBottom": 7947.1875,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-STREPTOMYCIN-API-001::hard_exclusion_inputs",
+          "href": "#evidence-SYN-MINISTRY-STREPTOMYCIN-API-001::hard_exclusion_inputs",
+          "top": 7927.1875,
+          "bottom": 7970.9375
+        }
+      ]
+    },
+    {
+      "table": "exclusions",
+      "code": "EX-02_MARKET_BELOW_MES",
+      "prefix": "السوق المستدام في سيناريو الطلب المتحفظ أدنى من الحد الأدنى للكفاءة، ولا يوجد عقد تصدير موثوق.",
+      "prefixBottom": 8032.75,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-STREPTOMYCIN-API-001::hard_exclusion_inputs",
+          "href": "#evidence-SYN-MINISTRY-STREPTOMYCIN-API-001::hard_exclusion_inputs",
+          "top": 8012.75,
+          "bottom": 8056.5
+        }
+      ]
+    },
+    {
+      "table": "exclusions",
+      "code": "EX-03_UNSATISFIABLE_HARD_GATE",
+      "prefix": "يتعذر استيفاء بوابة إلزامية قانونية أو متعلقة بالسلامة أو البيئة أو الملكية الفكرية أو تأهيل العميل.",
+      "prefixBottom": 8118.3125,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-STREPTOMYCIN-API-001::hard_exclusion_inputs",
+          "href": "#evidence-SYN-MINISTRY-STREPTOMYCIN-API-001::hard_exclusion_inputs",
+          "top": 8098.3125,
+          "bottom": 8142.0625
+        }
+      ]
+    },
+    {
+      "table": "exclusions",
+      "code": "EX-04_IDLE_EQUIVALENT_CAPACITY",
+      "prefix": "يلبي الإنتاج المحلي المواصفة المطلوبة بطاقة عاطلة مؤثرة، ولم يثبت وجود إخفاق سوقي ملزم.",
+      "prefixBottom": 8203.875,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-STREPTOMYCIN-API-001::hard_exclusion_inputs",
+          "href": "#evidence-SYN-MINISTRY-STREPTOMYCIN-API-001::hard_exclusion_inputs",
+          "top": 8183.875,
+          "bottom": 8227.625
+        }
+      ]
+    },
+    {
+      "table": "exclusions",
+      "code": "EX-05_TRANSITORY_OR_MEASUREMENT",
+      "prefix": "تهيمن على الفجوة الظاهرة إعادة التصدير أو طلب مشروع لمرة واحدة أو موازنة سعرية مؤقتة أو انقطاع في التصنيف.",
+      "prefixBottom": 8289.4375,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-STREPTOMYCIN-API-001::hard_exclusion_inputs",
+          "href": "#evidence-SYN-MINISTRY-STREPTOMYCIN-API-001::hard_exclusion_inputs",
+          "top": 8269.4375,
+          "bottom": 8313.1875
+        }
+      ]
+    },
+    {
+      "table": "exclusions",
+      "code": "EX-06_REDUNDANCY_OR_CROWD_OUT",
+      "prefix": "سيؤدي التدخل إلى طاقة فائضة غير مقبولة أو إلى مزاحمة منتج قائم أكثر كفاءة.",
+      "prefixBottom": 8375,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-STREPTOMYCIN-API-001::hard_exclusion_inputs",
+          "href": "#evidence-SYN-MINISTRY-STREPTOMYCIN-API-001::hard_exclusion_inputs",
+          "top": 8355,
+          "bottom": 8398.75
+        }
+      ]
+    },
+    {
+      "table": "rejection-conditions",
+      "code": "hard_exclusion",
+      "prefix": "HARD_EXCLUSION_SATISFIED",
+      "prefixBottom": 8531.671875,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-STREPTOMYCIN-API-001::hard_exclusion_inputs",
+          "href": "#evidence-SYN-MINISTRY-STREPTOMYCIN-API-001::hard_exclusion_inputs",
+          "top": 8511.671875,
+          "bottom": 8555.421875
+        }
+      ]
+    },
+    {
+      "table": "rejection-conditions",
+      "code": "false_or_measurement_gap",
+      "prefix": "FALSE_OR_MEASUREMENT_NOT_ESTABLISHED",
+      "prefixBottom": 8593.484375,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-STREPTOMYCIN-API-001::hard_exclusion_inputs",
+          "href": "#evidence-SYN-MINISTRY-STREPTOMYCIN-API-001::hard_exclusion_inputs",
+          "top": 8573.484375,
+          "bottom": 8617.234375
+        }
+      ]
+    },
+    {
+      "table": "rejection-conditions",
+      "code": "equivalent_idle_qualified_supply",
+      "prefix": "EQUIVALENT_QUALIFIED_SUPPLY_NOT_ESTABLISHED",
+      "prefixBottom": 8655.296875,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-STREPTOMYCIN-API-001::demand",
+          "href": "#evidence-SYN-MINISTRY-STREPTOMYCIN-API-001::demand",
+          "top": 8635.296875,
+          "bottom": 8679.046875
+        },
+        {
+          "text": "SYN-MINISTRY-STREPTOMYCIN-API-001::equivalence",
+          "href": "#evidence-SYN-MINISTRY-STREPTOMYCIN-API-001::equivalence",
+          "top": 8659.046875,
+          "bottom": 8702.796875
+        }
+      ]
+    },
+    {
+      "table": "rejection-conditions",
+      "code": "uneconomic_at_efficient_scale",
+      "prefix": "EFFICIENT_SCALE_ECONOMICS_UNAVAILABLE",
+      "prefixBottom": 8740.859375,
+      "references": []
+    },
+    {
+      "table": "rejection-conditions",
+      "code": "structural_overcapacity",
+      "prefix": "STRUCTURAL_OVERCAPACITY_NOT_ESTABLISHED",
+      "prefixBottom": 8778.921875,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-STREPTOMYCIN-API-001::hard_exclusion_inputs",
+          "href": "#evidence-SYN-MINISTRY-STREPTOMYCIN-API-001::hard_exclusion_inputs",
+          "top": 8758.921875,
+          "bottom": 8802.671875
+        }
+      ]
+    },
+    {
+      "table": "rejection-conditions",
+      "code": "generic_capacity_contradicted",
+      "prefix": "GENERIC_CAPACITY_NOT_CONTRADICTED",
+      "prefixBottom": 8840.734375,
+      "references": [
+        {
+          "text": "P-COMTRADE-294120-X",
+          "href": "#evidence-P-COMTRADE-294120-X",
+          "top": 8820.734375,
+          "bottom": 8864.484375
+        }
+      ]
+    }
+  ],
+  "nested_record_pages": [],
+  "failures": [
+    {
+      "finding": "BIDI-REF-01",
+      "table": "exclusions",
+      "code": "EX-01_HETEROGENEOUS_RESIDUAL",
+      "reference": "SYN-MINISTRY-STREPTOMYCIN-API-001::hard_exclusion_inputs",
+      "preceding_bottom": 7947.1875,
+      "top": 7927.1875
+    },
+    {
+      "finding": "BIDI-REF-01",
+      "table": "exclusions",
+      "code": "EX-02_MARKET_BELOW_MES",
+      "reference": "SYN-MINISTRY-STREPTOMYCIN-API-001::hard_exclusion_inputs",
+      "preceding_bottom": 8032.75,
+      "top": 8012.75
+    },
+    {
+      "finding": "BIDI-REF-01",
+      "table": "exclusions",
+      "code": "EX-03_UNSATISFIABLE_HARD_GATE",
+      "reference": "SYN-MINISTRY-STREPTOMYCIN-API-001::hard_exclusion_inputs",
+      "preceding_bottom": 8118.3125,
+      "top": 8098.3125
+    },
+    {
+      "finding": "BIDI-REF-01",
+      "table": "exclusions",
+      "code": "EX-04_IDLE_EQUIVALENT_CAPACITY",
+      "reference": "SYN-MINISTRY-STREPTOMYCIN-API-001::hard_exclusion_inputs",
+      "preceding_bottom": 8203.875,
+      "top": 8183.875
+    },
+    {
+      "finding": "BIDI-REF-01",
+      "table": "exclusions",
+      "code": "EX-05_TRANSITORY_OR_MEASUREMENT",
+      "reference": "SYN-MINISTRY-STREPTOMYCIN-API-001::hard_exclusion_inputs",
+      "preceding_bottom": 8289.4375,
+      "top": 8269.4375
+    },
+    {
+      "finding": "BIDI-REF-01",
+      "table": "exclusions",
+      "code": "EX-06_REDUNDANCY_OR_CROWD_OUT",
+      "reference": "SYN-MINISTRY-STREPTOMYCIN-API-001::hard_exclusion_inputs",
+      "preceding_bottom": 8375,
+      "top": 8355
+    },
+    {
+      "finding": "BIDI-REF-01",
+      "table": "rejection-conditions",
+      "code": "hard_exclusion",
+      "reference": "SYN-MINISTRY-STREPTOMYCIN-API-001::hard_exclusion_inputs",
+      "preceding_bottom": 8531.671875,
+      "top": 8511.671875
+    },
+    {
+      "finding": "BIDI-REF-01",
+      "table": "rejection-conditions",
+      "code": "false_or_measurement_gap",
+      "reference": "SYN-MINISTRY-STREPTOMYCIN-API-001::hard_exclusion_inputs",
+      "preceding_bottom": 8593.484375,
+      "top": 8573.484375
+    },
+    {
+      "finding": "BIDI-REF-01",
+      "table": "rejection-conditions",
+      "code": "equivalent_idle_qualified_supply",
+      "reference": "SYN-MINISTRY-STREPTOMYCIN-API-001::demand",
+      "preceding_bottom": 8655.296875,
+      "top": 8635.296875
+    },
+    {
+      "finding": "BIDI-REF-01",
+      "table": "rejection-conditions",
+      "code": "equivalent_idle_qualified_supply",
+      "reference": "SYN-MINISTRY-STREPTOMYCIN-API-001::equivalence",
+      "preceding_bottom": 8679.046875,
+      "top": 8659.046875
+    },
+    {
+      "finding": "BIDI-REF-01",
+      "table": "rejection-conditions",
+      "code": "structural_overcapacity",
+      "reference": "SYN-MINISTRY-STREPTOMYCIN-API-001::hard_exclusion_inputs",
+      "preceding_bottom": 8778.921875,
+      "top": 8758.921875
+    },
+    {
+      "finding": "BIDI-REF-01",
+      "table": "rejection-conditions",
+      "code": "generic_capacity_contradicted",
+      "reference": "P-COMTRADE-294120-X",
+      "preceding_bottom": 8840.734375,
+      "top": 8820.734375
+    }
+  ]
+}

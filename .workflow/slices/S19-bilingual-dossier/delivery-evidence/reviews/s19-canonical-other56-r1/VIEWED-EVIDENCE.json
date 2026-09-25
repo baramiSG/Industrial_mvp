@@ -1,0 +1,1838 @@
+{
+  "status": "COMPLETE",
+  "persona": "Independent visual-regression and evidence reviewer; not product/capture author",
+  "method": "All20 changed old/new files viewed using view_image detail=original; remaining36 accepted only by direct byte and RGB hash equality. No generated contacts or new browser captures.",
+  "pair_binding_sha256": "a293cb137e36a6b06fa12ae14708c469e8d08f3f99e9f302e3b80df31eb16f05",
+  "native_pairs": [
+    {
+      "after_bytes": 92082,
+      "after_rgb_sha256": "a837924bb7af7b69ff09b4d06341e5f3dc4f35f026107410c9ad049d285e672f",
+      "after_sha256": "478ad11527c07f88ebccf581a8bc3d589f0d4560a4f9b6642cf17aa97dffb232",
+      "before_bytes": 92556,
+      "before_rgb_sha256": "bf7b4e9b560a53b5105c708f23afc418ea47ef792536a93003ab22aa983a0429",
+      "before_sha256": "6b05ffd3c554e5af90b64016d4f1fad671042fbd245ecc5c16b3d774415b83b2",
+      "bytes_equal": false,
+      "classification": "PIXEL_CHANGE_REQUIRES_INDEPENDENT_REVIEW",
+      "diff_png": "pixel-diffs/ar/desktop-1440x900/journey-i-graph-adjacency.png",
+      "diff_sha256": "cafbce531be2888403b8818266a7743bf40d4f5833b1d72d2447dce1705aaf89",
+      "dimensions": [
+        1440,
+        900
+      ],
+      "metrics": {
+        "dimensions": [
+          1440,
+          900
+        ],
+        "mean_absolute_channel_error": 0.005971,
+        "passes": true,
+        "significant_pixel_ratio": 0.0003,
+        "significant_pixels": 389,
+        "total_pixels": 1296000
+      },
+      "path": "ar/desktop-1440x900/journey-i-graph-adjacency.webp",
+      "pixels_equal": false,
+      "before_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/canonical-operation-r1/preimages/v0.3.0/ar/desktop-1440x900/journey-i-graph-adjacency.webp",
+      "after_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-canonical-r1/postimages/v0.3.0/ar/desktop-1440x900/journey-i-graph-adjacency.webp",
+      "exact_changed_bbox": [
+        63,
+        133,
+        1107,
+        588
+      ]
+    },
+    {
+      "after_bytes": 98858,
+      "after_rgb_sha256": "f44198bd4aef16807b503e8b66698fabc887cd75bb319397c052f8a18292558c",
+      "after_sha256": "452d65aeb7f985dc981da35321f8aa95bb98ff96b3f59218b1e9bb90f84990e6",
+      "before_bytes": 98646,
+      "before_rgb_sha256": "f0a51cc1800596712d32dbbdacab0add36fb245c5e06d36f192743ada97e98bd",
+      "before_sha256": "c02510e30ff39cdaea77488d25c5ac60c3792d6e85dc3943653103afded7df9d",
+      "bytes_equal": false,
+      "classification": "PIXEL_CHANGE_REQUIRES_INDEPENDENT_REVIEW",
+      "diff_png": "pixel-diffs/ar/desktop-1440x900/journey-i-graph-evidence-to-change.png",
+      "diff_sha256": "1c20d814ff8637997fdf161c368244986858f0eb2077f63d4ad8d8498a4ecda8",
+      "dimensions": [
+        1440,
+        900
+      ],
+      "metrics": {
+        "dimensions": [
+          1440,
+          900
+        ],
+        "mean_absolute_channel_error": 0.038089,
+        "passes": true,
+        "significant_pixel_ratio": 0.000921,
+        "significant_pixels": 1194,
+        "total_pixels": 1296000
+      },
+      "path": "ar/desktop-1440x900/journey-i-graph-evidence-to-change.webp",
+      "pixels_equal": false,
+      "before_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/canonical-operation-r1/preimages/v0.3.0/ar/desktop-1440x900/journey-i-graph-evidence-to-change.webp",
+      "after_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-canonical-r1/postimages/v0.3.0/ar/desktop-1440x900/journey-i-graph-evidence-to-change.webp",
+      "exact_changed_bbox": [
+        63,
+        133,
+        1107,
+        816
+      ]
+    },
+    {
+      "after_bytes": 93928,
+      "after_rgb_sha256": "996ec6fe6f8afe24d6da9825f2f7560d44e72b4ee8a5d7bc6ab757526e513284",
+      "after_sha256": "f7b93d743936d1cd79c90e5594378317fa58da210fb457a43b6bfc82f24ccd27",
+      "before_bytes": 94376,
+      "before_rgb_sha256": "4db9dfd9381bad45e62b9c3adc51dfcefef9b14749094184d699351a9aae304b",
+      "before_sha256": "990bac4b92b84153b41aac611b80565fd831e4ed3621c7ad56b13b5138ccd56d",
+      "bytes_equal": false,
+      "classification": "PIXEL_CHANGE_REQUIRES_INDEPENDENT_REVIEW",
+      "diff_png": "pixel-diffs/ar/desktop-1440x900/journey-i-graph-route-blocking.png",
+      "diff_sha256": "2361919c78cfce37aadcf92a4d15855082dc0ea3d06557f1143da718a5527a39",
+      "dimensions": [
+        1440,
+        900
+      ],
+      "metrics": {
+        "dimensions": [
+          1440,
+          900
+        ],
+        "mean_absolute_channel_error": 0.005994,
+        "passes": true,
+        "significant_pixel_ratio": 0.000312,
+        "significant_pixels": 404,
+        "total_pixels": 1296000
+      },
+      "path": "ar/desktop-1440x900/journey-i-graph-route-blocking.webp",
+      "pixels_equal": false,
+      "before_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/canonical-operation-r1/preimages/v0.3.0/ar/desktop-1440x900/journey-i-graph-route-blocking.webp",
+      "after_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-canonical-r1/postimages/v0.3.0/ar/desktop-1440x900/journey-i-graph-route-blocking.webp",
+      "exact_changed_bbox": [
+        112,
+        402,
+        1058,
+        683
+      ]
+    },
+    {
+      "after_bytes": 90480,
+      "after_rgb_sha256": "9c13f2507a1819bc460e52271886713276417753c574ff60ed88d404bffe4a02",
+      "after_sha256": "38bfac89e18c746ccd75dfc0ea79f87a2a2ab57906cd93eddca41040190c8dbd",
+      "before_bytes": 90604,
+      "before_rgb_sha256": "f913b6b36dce5990dd98a47830eb9307b65139623fa86e00ecdf1a88ae76f708",
+      "before_sha256": "ffe54d3f9f75d73b378f83927c8569ab21a1ca8b51a3c2cbddfb057a5bd5963b",
+      "bytes_equal": false,
+      "classification": "PIXEL_CHANGE_REQUIRES_INDEPENDENT_REVIEW",
+      "diff_png": "pixel-diffs/ar/desktop-1440x900/journey-i-graph-shared-enabler.png",
+      "diff_sha256": "740e6316ddfda1e0e1f9aed4d431a114951ae9ca9abdefa1d666193f88621455",
+      "dimensions": [
+        1440,
+        900
+      ],
+      "metrics": {
+        "dimensions": [
+          1440,
+          900
+        ],
+        "mean_absolute_channel_error": 0.000277,
+        "passes": true,
+        "significant_pixel_ratio": 0.0,
+        "significant_pixels": 0,
+        "total_pixels": 1296000
+      },
+      "path": "ar/desktop-1440x900/journey-i-graph-shared-enabler.webp",
+      "pixels_equal": false,
+      "before_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/canonical-operation-r1/preimages/v0.3.0/ar/desktop-1440x900/journey-i-graph-shared-enabler.webp",
+      "after_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-canonical-r1/postimages/v0.3.0/ar/desktop-1440x900/journey-i-graph-shared-enabler.webp",
+      "exact_changed_bbox": [
+        63,
+        134,
+        1107,
+        725
+      ]
+    },
+    {
+      "after_bytes": 71578,
+      "after_rgb_sha256": "ec7837bc68a391af1923a0a77542fcfb3b8932230261753d7c17e4977460bf94",
+      "after_sha256": "1275592397e79d311851ffa1524578fc74fdc9e968edd5d054257f8dfe06d5d0",
+      "before_bytes": 71746,
+      "before_rgb_sha256": "a70df6496f79328d82c5321cbf9acbd1a4ade91e9b5b8133ab5a97bc45f217a8",
+      "before_sha256": "79b0b468d477b9a902c81fdb0e1db28bdceef2478c49cf9355eb8d9d905416f6",
+      "bytes_equal": false,
+      "classification": "PIXEL_CHANGE_REQUIRES_INDEPENDENT_REVIEW",
+      "diff_png": "pixel-diffs/ar/tablet-1024x768/journey-f-screening-queue-empty.png",
+      "diff_sha256": "206a757b524e42800bc078f89df0ea83547219aab743722a2585d390f03c8fd8",
+      "dimensions": [
+        1024,
+        768
+      ],
+      "metrics": {
+        "dimensions": [
+          1024,
+          768
+        ],
+        "mean_absolute_channel_error": 1e-05,
+        "passes": true,
+        "significant_pixel_ratio": 0.0,
+        "significant_pixels": 0,
+        "total_pixels": 786432
+      },
+      "path": "ar/tablet-1024x768/journey-f-screening-queue-empty.webp",
+      "pixels_equal": false,
+      "before_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/canonical-operation-r1/preimages/v0.3.0/ar/tablet-1024x768/journey-f-screening-queue-empty.webp",
+      "after_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-canonical-r1/postimages/v0.3.0/ar/tablet-1024x768/journey-f-screening-queue-empty.webp",
+      "exact_changed_bbox": [
+        44,
+        356,
+        760,
+        360
+      ]
+    },
+    {
+      "after_bytes": 75940,
+      "after_rgb_sha256": "f6397ddf4ae40b048bd27ca6c089d618dc3cd7efc595bf132308378bef898bc0",
+      "after_sha256": "c655ce7536c3a9df1b35cf24da0ce4351bbf1ed728ff7b4b04acc08ef6832e33",
+      "before_bytes": 75886,
+      "before_rgb_sha256": "4141c4d245ec8b861907cf828244f93217669447a162ae70cc3b51ba16ac75ae",
+      "before_sha256": "b92ee6cfd40171110a5f40f26e97379debc71fc620a8f0405ef26a4e77926e8a",
+      "bytes_equal": false,
+      "classification": "PIXEL_CHANGE_REQUIRES_INDEPENDENT_REVIEW",
+      "diff_png": "pixel-diffs/ar/tablet-1024x768/journey-f-screening-queue-robust.png",
+      "diff_sha256": "ba990e8e6d1423c5a66b0c4267038ef8d08a1584f58042ccd32a5ebac3d1e145",
+      "dimensions": [
+        1024,
+        768
+      ],
+      "metrics": {
+        "dimensions": [
+          1024,
+          768
+        ],
+        "mean_absolute_channel_error": 1.8e-05,
+        "passes": true,
+        "significant_pixel_ratio": 0.0,
+        "significant_pixels": 0,
+        "total_pixels": 786432
+      },
+      "path": "ar/tablet-1024x768/journey-f-screening-queue-robust.webp",
+      "pixels_equal": false,
+      "before_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/canonical-operation-r1/preimages/v0.3.0/ar/tablet-1024x768/journey-f-screening-queue-robust.webp",
+      "after_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-canonical-r1/postimages/v0.3.0/ar/tablet-1024x768/journey-f-screening-queue-robust.webp",
+      "exact_changed_bbox": [
+        44,
+        356,
+        760,
+        698
+      ]
+    },
+    {
+      "after_bytes": 73752,
+      "after_rgb_sha256": "d3b5a34a12e462b4e5f86918605853aae918df112dd73b39d84bf3d0edc914d2",
+      "after_sha256": "d26378c5bab0521bf974748ac22b87491561367a220562d816edc3e6435ae19e",
+      "before_bytes": 73620,
+      "before_rgb_sha256": "0e0a28c773064b9323b6c372a22a78f10b60a6e9685be5a49f6c039a348950d3",
+      "before_sha256": "ee890145107e77234601ae2d4b3a9e10419af3f1465b17e0e9102f10f684770d",
+      "bytes_equal": false,
+      "classification": "PIXEL_CHANGE_REQUIRES_INDEPENDENT_REVIEW",
+      "diff_png": "pixel-diffs/ar/tablet-1024x768/journey-f-screening-record.png",
+      "diff_sha256": "e0a6a33799b7e56c29c41c6650f418fdb1c1f99a76c9b4825bdaa96d4811e98e",
+      "dimensions": [
+        1024,
+        768
+      ],
+      "metrics": {
+        "dimensions": [
+          1024,
+          768
+        ],
+        "mean_absolute_channel_error": 1.7e-05,
+        "passes": true,
+        "significant_pixel_ratio": 0.0,
+        "significant_pixels": 0,
+        "total_pixels": 786432
+      },
+      "path": "ar/tablet-1024x768/journey-f-screening-record.webp",
+      "pixels_equal": false,
+      "before_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/canonical-operation-r1/preimages/v0.3.0/ar/tablet-1024x768/journey-f-screening-record.webp",
+      "after_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-canonical-r1/postimages/v0.3.0/ar/tablet-1024x768/journey-f-screening-record.webp",
+      "exact_changed_bbox": [
+        43,
+        356,
+        762,
+        615
+      ]
+    },
+    {
+      "after_bytes": 74504,
+      "after_rgb_sha256": "5a47359b3f91289555bcd5cfa559337acc44f3de87259841ca7ec6c5a800a6be",
+      "after_sha256": "6bc61be3edf3388c17caa5f0ac74bc698f10a057119010a4f97d4c4fe29e606b",
+      "before_bytes": 74406,
+      "before_rgb_sha256": "facb1a4340aee379494b61d6192740deb1c8f641b2402f70925a29cec32d9f1f",
+      "before_sha256": "d3d216c743352b128c9683729b69084b4e46291ed062921ff088c0ae49eb7b64",
+      "bytes_equal": false,
+      "classification": "PIXEL_CHANGE_REQUIRES_INDEPENDENT_REVIEW",
+      "diff_png": "pixel-diffs/ar/tablet-1024x768/journey-i-graph-adjacency.png",
+      "diff_sha256": "1a40dc055303d2fc09db0c6d32e92c01c81bfa7e3441c629cf26bc2024ed6cdc",
+      "dimensions": [
+        1024,
+        768
+      ],
+      "metrics": {
+        "dimensions": [
+          1024,
+          768
+        ],
+        "mean_absolute_channel_error": 2.9e-05,
+        "passes": true,
+        "significant_pixel_ratio": 0.0,
+        "significant_pixels": 0,
+        "total_pixels": 786432
+      },
+      "path": "ar/tablet-1024x768/journey-i-graph-adjacency.webp",
+      "pixels_equal": false,
+      "before_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/canonical-operation-r1/preimages/v0.3.0/ar/tablet-1024x768/journey-i-graph-adjacency.webp",
+      "after_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-canonical-r1/postimages/v0.3.0/ar/tablet-1024x768/journey-i-graph-adjacency.webp",
+      "exact_changed_bbox": [
+        63,
+        167,
+        741,
+        752
+      ]
+    },
+    {
+      "after_bytes": 79440,
+      "after_rgb_sha256": "1dc5e1b07cbbdc7d3bca1ab4ff1b56617ec65c75f3dd721355f814c78a115c28",
+      "after_sha256": "743bc9ca62b4df6e2a61e2ffd5474eed0d7b2e86f5d5bf7a6f074a8b766ed72d",
+      "before_bytes": 79292,
+      "before_rgb_sha256": "80688abb167bf556cebdc6d4593a4094c2f7776ab2b2c6873b01465c3b240a80",
+      "before_sha256": "ee455c3815e78666222869fc380cffe6905560f4bfef2a89905f2f48395bd05f",
+      "bytes_equal": false,
+      "classification": "PIXEL_CHANGE_REQUIRES_INDEPENDENT_REVIEW",
+      "diff_png": "pixel-diffs/ar/tablet-1024x768/journey-i-graph-evidence-to-change.png",
+      "diff_sha256": "38071f109c1b4d2d692e1de3290a81708a93e593ed0ea2dd3e00d15d29591472",
+      "dimensions": [
+        1024,
+        768
+      ],
+      "metrics": {
+        "dimensions": [
+          1024,
+          768
+        ],
+        "mean_absolute_channel_error": 2.8e-05,
+        "passes": true,
+        "significant_pixel_ratio": 0.0,
+        "significant_pixels": 0,
+        "total_pixels": 786432
+      },
+      "path": "ar/tablet-1024x768/journey-i-graph-evidence-to-change.webp",
+      "pixels_equal": false,
+      "before_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/canonical-operation-r1/preimages/v0.3.0/ar/tablet-1024x768/journey-i-graph-evidence-to-change.webp",
+      "after_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-canonical-r1/postimages/v0.3.0/ar/tablet-1024x768/journey-i-graph-evidence-to-change.webp",
+      "exact_changed_bbox": [
+        63,
+        167,
+        741,
+        176
+      ]
+    },
+    {
+      "after_bytes": 79308,
+      "after_rgb_sha256": "cca9cc41e2e95e5fe70246a1137b0a47525094a77ad7f088e468f4b36b2b53f2",
+      "after_sha256": "1eb70512d80cf237009deedf9363b383888803740ce9e00cf11ef2919ba9b1ab",
+      "before_bytes": 79380,
+      "before_rgb_sha256": "beab0660fec2f6a1be4dcf037484cdc5f76b92e2b8d1c433d216415d162f2067",
+      "before_sha256": "61d88b476fc133ae2ef8e8c5f0e973794bb5791f78255303fac4a24b2e2681aa",
+      "bytes_equal": false,
+      "classification": "PIXEL_CHANGE_REQUIRES_INDEPENDENT_REVIEW",
+      "diff_png": "pixel-diffs/ar/tablet-1024x768/journey-i-graph-route-blocking.png",
+      "diff_sha256": "4213f7aef729dafeadf320bdc8aef23acd88322c757a42f88b3c79e3fa87158f",
+      "dimensions": [
+        1024,
+        768
+      ],
+      "metrics": {
+        "dimensions": [
+          1024,
+          768
+        ],
+        "mean_absolute_channel_error": 6.7e-05,
+        "passes": true,
+        "significant_pixel_ratio": 0.0,
+        "significant_pixels": 0,
+        "total_pixels": 786432
+      },
+      "path": "ar/tablet-1024x768/journey-i-graph-route-blocking.webp",
+      "pixels_equal": false,
+      "before_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/canonical-operation-r1/preimages/v0.3.0/ar/tablet-1024x768/journey-i-graph-route-blocking.webp",
+      "after_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-canonical-r1/postimages/v0.3.0/ar/tablet-1024x768/journey-i-graph-route-blocking.webp",
+      "exact_changed_bbox": [
+        63,
+        134,
+        741,
+        195
+      ]
+    },
+    {
+      "after_bytes": 74884,
+      "after_rgb_sha256": "a198c5a0135196c064e5849b7879db424d823e634285bf30cca2824af857e35e",
+      "after_sha256": "cf354a2431ef4223256b3022bbc4d81a4c945df5210dce8a9793bf6fa3687ad9",
+      "before_bytes": 74800,
+      "before_rgb_sha256": "fa96a38b16d80635283b70b7b6aec3babf9586b5629444674a7b96d3dc323d3d",
+      "before_sha256": "5b8aaa623f3080efb2922b1b17645323ef11916b99d56e58219e807ff9d0a3ce",
+      "bytes_equal": false,
+      "classification": "PIXEL_CHANGE_REQUIRES_INDEPENDENT_REVIEW",
+      "diff_png": "pixel-diffs/ar/tablet-1024x768/journey-i-graph-shared-enabler.png",
+      "diff_sha256": "c714699714e282486b8842de9d8b2791c5513009dff4e7eff4622ba62a99df4e",
+      "dimensions": [
+        1024,
+        768
+      ],
+      "metrics": {
+        "dimensions": [
+          1024,
+          768
+        ],
+        "mean_absolute_channel_error": 4.5e-05,
+        "passes": true,
+        "significant_pixel_ratio": 0.0,
+        "significant_pixels": 0,
+        "total_pixels": 786432
+      },
+      "path": "ar/tablet-1024x768/journey-i-graph-shared-enabler.webp",
+      "pixels_equal": false,
+      "before_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/canonical-operation-r1/preimages/v0.3.0/ar/tablet-1024x768/journey-i-graph-shared-enabler.webp",
+      "after_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-canonical-r1/postimages/v0.3.0/ar/tablet-1024x768/journey-i-graph-shared-enabler.webp",
+      "exact_changed_bbox": [
+        63,
+        133,
+        741,
+        173
+      ]
+    },
+    {
+      "after_bytes": 98088,
+      "after_rgb_sha256": "b274ac32e1743d14d797d990c03be44d5b76789e1d784d1bef392da0e32da7b5",
+      "after_sha256": "60e685fdaa841246776d6bd44d51da4663b0ab911d8ae9aca6e801662daada2b",
+      "before_bytes": 98552,
+      "before_rgb_sha256": "8f7c69b5817872513a37e205cec511cea1996c0a52a7fd7edaa9a36ea28c6118",
+      "before_sha256": "dd42557cba673b0569692e2175090d8899dbd2fb69a53da17d6014f57e8a5065",
+      "bytes_equal": false,
+      "classification": "PIXEL_CHANGE_REQUIRES_INDEPENDENT_REVIEW",
+      "diff_png": "pixel-diffs/en/desktop-1440x900/journey-f-screening-summary.png",
+      "diff_sha256": "80530f2a72947eb39642743ae382d9584d51a73a13ffad6be355e27fa9303d66",
+      "dimensions": [
+        1440,
+        900
+      ],
+      "metrics": {
+        "dimensions": [
+          1440,
+          900
+        ],
+        "mean_absolute_channel_error": 9e-06,
+        "passes": true,
+        "significant_pixel_ratio": 0.0,
+        "significant_pixels": 0,
+        "total_pixels": 1296000
+      },
+      "path": "en/desktop-1440x900/journey-f-screening-summary.webp",
+      "pixels_equal": false,
+      "before_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/canonical-operation-r1/preimages/v0.3.0/en/desktop-1440x900/journey-f-screening-summary.webp",
+      "after_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-canonical-r1/postimages/v0.3.0/en/desktop-1440x900/journey-f-screening-summary.webp",
+      "exact_changed_bbox": [
+        313,
+        355,
+        1398,
+        365
+      ]
+    },
+    {
+      "after_bytes": 97356,
+      "after_rgb_sha256": "32b8bc3fac1ef297461b15993222db9dff05739a64ba015915a1005f96e79dcb",
+      "after_sha256": "8f8c7982eb4d04c7ac60d4dc39370f1444f918c4fe1ec1a1bf6806ad4b3e31ed",
+      "before_bytes": 96948,
+      "before_rgb_sha256": "ed892d96b380fd12aab222b0a363509c1c636b985c5e3a00c8da77787c52525d",
+      "before_sha256": "1f32112e89e172b8bda33df2530708a761b02438bc4a21be7fa50c1b8319d033",
+      "bytes_equal": false,
+      "classification": "PIXEL_CHANGE_REQUIRES_INDEPENDENT_REVIEW",
+      "diff_png": "pixel-diffs/en/desktop-1440x900/journey-i-graph-adjacency.png",
+      "diff_sha256": "805dfa924437330b578e00eb3c48598cd0aeb1d70b096a3856c3256ec5eab542",
+      "dimensions": [
+        1440,
+        900
+      ],
+      "metrics": {
+        "dimensions": [
+          1440,
+          900
+        ],
+        "mean_absolute_channel_error": 0.00446,
+        "passes": true,
+        "significant_pixel_ratio": 0.000231,
+        "significant_pixels": 299,
+        "total_pixels": 1296000
+      },
+      "path": "en/desktop-1440x900/journey-i-graph-adjacency.webp",
+      "pixels_equal": false,
+      "before_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/canonical-operation-r1/preimages/v0.3.0/en/desktop-1440x900/journey-i-graph-adjacency.webp",
+      "after_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-canonical-r1/postimages/v0.3.0/en/desktop-1440x900/journey-i-graph-adjacency.webp",
+      "exact_changed_bbox": [
+        333,
+        167,
+        1377,
+        758
+      ]
+    },
+    {
+      "after_bytes": 106830,
+      "after_rgb_sha256": "fac8cdbb139645c52edfcf6f168e22148a6bb40bfbfd73125f34ef97839b2183",
+      "after_sha256": "5b7551a60693f2e594a29c285d268059effcb9e9d27381fa5de5fe413052fe04",
+      "before_bytes": 106548,
+      "before_rgb_sha256": "e296a540559e11ca2f133b349fd6203db1accd348a18f7f1e9d2998ab2ca29c8",
+      "before_sha256": "87adf0ffa281eda0f847664d4b31c85cb1864fa084b833845ad28a9684022a5a",
+      "bytes_equal": false,
+      "classification": "PIXEL_CHANGE_REQUIRES_INDEPENDENT_REVIEW",
+      "diff_png": "pixel-diffs/en/desktop-1440x900/journey-i-graph-evidence-to-change.png",
+      "diff_sha256": "fc444896b654983bf82e7f962b54ae2167d7cc990ed747cf63abc1b3c942a837",
+      "dimensions": [
+        1440,
+        900
+      ],
+      "metrics": {
+        "dimensions": [
+          1440,
+          900
+        ],
+        "mean_absolute_channel_error": 0.026903,
+        "passes": true,
+        "significant_pixel_ratio": 0.00047,
+        "significant_pixels": 609,
+        "total_pixels": 1296000
+      },
+      "path": "en/desktop-1440x900/journey-i-graph-evidence-to-change.webp",
+      "pixels_equal": false,
+      "before_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/canonical-operation-r1/preimages/v0.3.0/en/desktop-1440x900/journey-i-graph-evidence-to-change.webp",
+      "after_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-canonical-r1/postimages/v0.3.0/en/desktop-1440x900/journey-i-graph-evidence-to-change.webp",
+      "exact_changed_bbox": [
+        333,
+        167,
+        1377,
+        816
+      ]
+    },
+    {
+      "after_bytes": 98326,
+      "after_rgb_sha256": "e36d816b6be7533c356dcc204427313cb2a81b505acc816cd72a162b0129caa8",
+      "after_sha256": "d069de58a2933738d2bde9af4605bf25460443faccce82fc753823c0cc65d1be",
+      "before_bytes": 97614,
+      "before_rgb_sha256": "7d4950924b41a4c47aef72503cad06d68e8d434743cabff7bde144cd81aca41e",
+      "before_sha256": "092c9d4d1d9a51325e5430841cd65b7aa4c900fc577006cb0ed32bd23c50649b",
+      "bytes_equal": false,
+      "classification": "PIXEL_CHANGE_REQUIRES_INDEPENDENT_REVIEW",
+      "diff_png": "pixel-diffs/en/desktop-1440x900/journey-i-graph-route-blocking.png",
+      "diff_sha256": "7b233dd1b39f067978a236d1bf203f5d3ca5034b5d8f4aafb9c2977d8b6a5951",
+      "dimensions": [
+        1440,
+        900
+      ],
+      "metrics": {
+        "dimensions": [
+          1440,
+          900
+        ],
+        "mean_absolute_channel_error": 0.005538,
+        "passes": true,
+        "significant_pixel_ratio": 0.000196,
+        "significant_pixels": 254,
+        "total_pixels": 1296000
+      },
+      "path": "en/desktop-1440x900/journey-i-graph-route-blocking.webp",
+      "pixels_equal": false,
+      "before_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/canonical-operation-r1/preimages/v0.3.0/en/desktop-1440x900/journey-i-graph-route-blocking.webp",
+      "after_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-canonical-r1/postimages/v0.3.0/en/desktop-1440x900/journey-i-graph-route-blocking.webp",
+      "exact_changed_bbox": [
+        333,
+        133,
+        1377,
+        697
+      ]
+    },
+    {
+      "after_bytes": 95948,
+      "after_rgb_sha256": "53537b0b7b4bfefb14c923d1dd3397b35c7a67bdfac42a43fe0baaca109794bf",
+      "after_sha256": "c8bfd680bb7003b79374c336c8e5b8489c8497b36b039aac25c5426dc90c1285",
+      "before_bytes": 95610,
+      "before_rgb_sha256": "1498dde8e401cc11d86eb4f93e673d66d2d9fa89a352d1475b25ba35558b57d1",
+      "before_sha256": "ff98e8867410d2a6eeeeff3468ff50bbdadfac7dc86cb0e4a7d02e81ce53b59b",
+      "bytes_equal": false,
+      "classification": "PIXEL_CHANGE_REQUIRES_INDEPENDENT_REVIEW",
+      "diff_png": "pixel-diffs/en/desktop-1440x900/journey-i-graph-shared-enabler.png",
+      "diff_sha256": "c3a4ab1405f6ab6f694b1c510560a46f12f0553593fe11d2bcaba6a611f6121c",
+      "dimensions": [
+        1440,
+        900
+      ],
+      "metrics": {
+        "dimensions": [
+          1440,
+          900
+        ],
+        "mean_absolute_channel_error": 0.000576,
+        "passes": true,
+        "significant_pixel_ratio": 3e-06,
+        "significant_pixels": 4,
+        "total_pixels": 1296000
+      },
+      "path": "en/desktop-1440x900/journey-i-graph-shared-enabler.webp",
+      "pixels_equal": false,
+      "before_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/canonical-operation-r1/preimages/v0.3.0/en/desktop-1440x900/journey-i-graph-shared-enabler.webp",
+      "after_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-canonical-r1/postimages/v0.3.0/en/desktop-1440x900/journey-i-graph-shared-enabler.webp",
+      "exact_changed_bbox": [
+        333,
+        79,
+        1394,
+        705
+      ]
+    },
+    {
+      "after_bytes": 79944,
+      "after_rgb_sha256": "158d8de9b07c088e08576bcd8230bb28cf189f936b8708abe504efcc6bd5e13b",
+      "after_sha256": "c646250f6c8498120c793ec10cbb57ce4c21c1387e6d98338e7e5f95d69193d5",
+      "before_bytes": 79848,
+      "before_rgb_sha256": "cf912d829e2190e8dcf87dbcbcb27608dbd4629b2d668fdc2789ee20dcc204c9",
+      "before_sha256": "f20cc8d68dfdc741c5146284f9f01da0a400a326968c743bc69433cb122cd64e",
+      "bytes_equal": false,
+      "classification": "PIXEL_CHANGE_REQUIRES_INDEPENDENT_REVIEW",
+      "diff_png": "pixel-diffs/en/tablet-1024x768/journey-i-graph-adjacency.png",
+      "diff_sha256": "38f6737e0d309cadf7a2ad52f0e52ce64648d1091a27dde3fda1ce17138e2b50",
+      "dimensions": [
+        1024,
+        768
+      ],
+      "metrics": {
+        "dimensions": [
+          1024,
+          768
+        ],
+        "mean_absolute_channel_error": 5.8e-05,
+        "passes": true,
+        "significant_pixel_ratio": 0.0,
+        "significant_pixels": 0,
+        "total_pixels": 786432
+      },
+      "path": "en/tablet-1024x768/journey-i-graph-adjacency.webp",
+      "pixels_equal": false,
+      "before_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/canonical-operation-r1/preimages/v0.3.0/en/tablet-1024x768/journey-i-graph-adjacency.webp",
+      "after_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-canonical-r1/postimages/v0.3.0/en/tablet-1024x768/journey-i-graph-adjacency.webp",
+      "exact_changed_bbox": [
+        283,
+        19,
+        972,
+        177
+      ]
+    },
+    {
+      "after_bytes": 86866,
+      "after_rgb_sha256": "29fc09607e58168cf694d9dcf82824d54d7f0e0b1b019d69930321572576dea7",
+      "after_sha256": "1abad76dad8a839d622f514b60106bdb9eb8c8608afb23b80bcfbd0d1b65e12a",
+      "before_bytes": 87198,
+      "before_rgb_sha256": "3478b9ad8871775f6f72deef521ffaad2ec9d946b084de313bbabbdfaa11212a",
+      "before_sha256": "b6eda588fcc62aa1dba030476c7c3cecd129c4c598bf3b9a3e12cf84cb25c6c2",
+      "bytes_equal": false,
+      "classification": "PIXEL_CHANGE_REQUIRES_INDEPENDENT_REVIEW",
+      "diff_png": "pixel-diffs/en/tablet-1024x768/journey-i-graph-evidence-to-change.png",
+      "diff_sha256": "38f6737e0d309cadf7a2ad52f0e52ce64648d1091a27dde3fda1ce17138e2b50",
+      "dimensions": [
+        1024,
+        768
+      ],
+      "metrics": {
+        "dimensions": [
+          1024,
+          768
+        ],
+        "mean_absolute_channel_error": 5.8e-05,
+        "passes": true,
+        "significant_pixel_ratio": 0.0,
+        "significant_pixels": 0,
+        "total_pixels": 786432
+      },
+      "path": "en/tablet-1024x768/journey-i-graph-evidence-to-change.webp",
+      "pixels_equal": false,
+      "before_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/canonical-operation-r1/preimages/v0.3.0/en/tablet-1024x768/journey-i-graph-evidence-to-change.webp",
+      "after_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-canonical-r1/postimages/v0.3.0/en/tablet-1024x768/journey-i-graph-evidence-to-change.webp",
+      "exact_changed_bbox": [
+        283,
+        19,
+        972,
+        177
+      ]
+    },
+    {
+      "after_bytes": 81470,
+      "after_rgb_sha256": "1f6422b92aaa02adbc7eb69ce7a0158d09edabf67d13bfd2fad734e7b506f3b8",
+      "after_sha256": "69b06c2d45d28a5d626f69805bf40af38bf90c38448f2ced72de1cbdc957ba4a",
+      "before_bytes": 81550,
+      "before_rgb_sha256": "eb7921c7b3a996854fb59b0bc62589344cff12f700a0f3b9ddade21bca8fa4b6",
+      "before_sha256": "63198f554a30be57f207a60a0bf917cbf911551f0471f73acd321a11f99b310a",
+      "bytes_equal": false,
+      "classification": "PIXEL_CHANGE_REQUIRES_INDEPENDENT_REVIEW",
+      "diff_png": "pixel-diffs/en/tablet-1024x768/journey-i-graph-route-blocking.png",
+      "diff_sha256": "b510715dc292d5b73c1af0c839703e71811390b14c25715140bc6eda44f9e3c6",
+      "dimensions": [
+        1024,
+        768
+      ],
+      "metrics": {
+        "dimensions": [
+          1024,
+          768
+        ],
+        "mean_absolute_channel_error": 8.4e-05,
+        "passes": true,
+        "significant_pixel_ratio": 0.0,
+        "significant_pixels": 0,
+        "total_pixels": 786432
+      },
+      "path": "en/tablet-1024x768/journey-i-graph-route-blocking.webp",
+      "pixels_equal": false,
+      "before_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/canonical-operation-r1/preimages/v0.3.0/en/tablet-1024x768/journey-i-graph-route-blocking.webp",
+      "after_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-canonical-r1/postimages/v0.3.0/en/tablet-1024x768/journey-i-graph-route-blocking.webp",
+      "exact_changed_bbox": [
+        283,
+        23,
+        961,
+        714
+      ]
+    },
+    {
+      "after_bytes": 77360,
+      "after_rgb_sha256": "c285cf54dc2febb0ddd47d6677bdffd3d2c89056d13d1242fb75a5cf35d8cc42",
+      "after_sha256": "ae4578c4da5c93662ee3aeaf70d19823453c985fd1a9a61097d198d5b8aa4dd9",
+      "before_bytes": 77402,
+      "before_rgb_sha256": "8d605c055b88a77b7289fc09e6f516694cf86587414cded9e522b317a82257d3",
+      "before_sha256": "af788131a05f90c273997f5262020170aba7762197eda61a089d79a856173774",
+      "bytes_equal": false,
+      "classification": "PIXEL_CHANGE_REQUIRES_INDEPENDENT_REVIEW",
+      "diff_png": "pixel-diffs/en/tablet-1024x768/journey-i-graph-shared-enabler.png",
+      "diff_sha256": "bcf4ba38766b8d96dc8670ff0b9c1a16487ca6b72f73d557ac9af921f3d0412d",
+      "dimensions": [
+        1024,
+        768
+      ],
+      "metrics": {
+        "dimensions": [
+          1024,
+          768
+        ],
+        "mean_absolute_channel_error": 8e-05,
+        "passes": true,
+        "significant_pixel_ratio": 0.0,
+        "significant_pixels": 0,
+        "total_pixels": 786432
+      },
+      "path": "en/tablet-1024x768/journey-i-graph-shared-enabler.webp",
+      "pixels_equal": false,
+      "before_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/canonical-operation-r1/preimages/v0.3.0/en/tablet-1024x768/journey-i-graph-shared-enabler.webp",
+      "after_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-canonical-r1/postimages/v0.3.0/en/tablet-1024x768/journey-i-graph-shared-enabler.webp",
+      "exact_changed_bbox": [
+        283,
+        134,
+        961,
+        201
+      ]
+    }
+  ],
+  "unchanged_pairs": [
+    {
+      "after_bytes": 113198,
+      "after_rgb_sha256": "40cce50f7e961300a80c42addeaf01875cb948f4eacfda00bab9ed1a1e50b61e",
+      "after_sha256": "01295a9ee5446c4a4af27c5930d47f1cd005a99e0efe53c61fad52960626b130",
+      "before_bytes": 113198,
+      "before_rgb_sha256": "40cce50f7e961300a80c42addeaf01875cb948f4eacfda00bab9ed1a1e50b61e",
+      "before_sha256": "01295a9ee5446c4a4af27c5930d47f1cd005a99e0efe53c61fad52960626b130",
+      "bytes_equal": true,
+      "classification": "BYTE_IDENTICAL",
+      "dimensions": [
+        1440,
+        900
+      ],
+      "metrics": {
+        "dimensions": [
+          1440,
+          900
+        ],
+        "mean_absolute_channel_error": 0.0,
+        "passes": true,
+        "significant_pixel_ratio": 0.0,
+        "significant_pixels": 0,
+        "total_pixels": 1296000
+      },
+      "path": "ar/desktop-1440x900/journey-a-portfolio-public.webp",
+      "pixels_equal": true,
+      "before_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/canonical-operation-r1/preimages/v0.3.0/ar/desktop-1440x900/journey-a-portfolio-public.webp",
+      "after_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-canonical-r1/postimages/v0.3.0/ar/desktop-1440x900/journey-a-portfolio-public.webp",
+      "exact_changed_bbox": null
+    },
+    {
+      "after_bytes": 114648,
+      "after_rgb_sha256": "80097c1a4cbee50a1bfd481bd852cb9769a0bf5439b43e68a578f97d5d695172",
+      "after_sha256": "ddf33bcff8a5efeb560628afa2972f3d1e01c52e5770d9bd53cd7072e0e847be",
+      "before_bytes": 114648,
+      "before_rgb_sha256": "80097c1a4cbee50a1bfd481bd852cb9769a0bf5439b43e68a578f97d5d695172",
+      "before_sha256": "ddf33bcff8a5efeb560628afa2972f3d1e01c52e5770d9bd53cd7072e0e847be",
+      "bytes_equal": true,
+      "classification": "BYTE_IDENTICAL",
+      "dimensions": [
+        1440,
+        900
+      ],
+      "metrics": {
+        "dimensions": [
+          1440,
+          900
+        ],
+        "mean_absolute_channel_error": 0.0,
+        "passes": true,
+        "significant_pixel_ratio": 0.0,
+        "significant_pixels": 0,
+        "total_pixels": 1296000
+      },
+      "path": "ar/desktop-1440x900/journey-a-portfolio-simulated.webp",
+      "pixels_equal": true,
+      "before_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/canonical-operation-r1/preimages/v0.3.0/ar/desktop-1440x900/journey-a-portfolio-simulated.webp",
+      "after_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-canonical-r1/postimages/v0.3.0/ar/desktop-1440x900/journey-a-portfolio-simulated.webp",
+      "exact_changed_bbox": null
+    },
+    {
+      "after_bytes": 91942,
+      "after_rgb_sha256": "629b20d2f50a94d63ab795483ddcb4d3cc3fe92987132f18ca0ca7c997d51cf9",
+      "after_sha256": "b9841b97bc9a11c4089ee91bc5f403c9258b38a9d890db224b8cea5a841996da",
+      "before_bytes": 91942,
+      "before_rgb_sha256": "629b20d2f50a94d63ab795483ddcb4d3cc3fe92987132f18ca0ca7c997d51cf9",
+      "before_sha256": "b9841b97bc9a11c4089ee91bc5f403c9258b38a9d890db224b8cea5a841996da",
+      "bytes_equal": true,
+      "classification": "BYTE_IDENTICAL",
+      "dimensions": [
+        1440,
+        900
+      ],
+      "metrics": {
+        "dimensions": [
+          1440,
+          900
+        ],
+        "mean_absolute_channel_error": 0.0,
+        "passes": true,
+        "significant_pixel_ratio": 0.0,
+        "significant_pixels": 0,
+        "total_pixels": 1296000
+      },
+      "path": "ar/desktop-1440x900/journey-f-screening-queue-empty.webp",
+      "pixels_equal": true,
+      "before_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/canonical-operation-r1/preimages/v0.3.0/ar/desktop-1440x900/journey-f-screening-queue-empty.webp",
+      "after_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-canonical-r1/postimages/v0.3.0/ar/desktop-1440x900/journey-f-screening-queue-empty.webp",
+      "exact_changed_bbox": null
+    },
+    {
+      "after_bytes": 89750,
+      "after_rgb_sha256": "559cbd0158aae2778148cd82fab628b5169d65539eee753123db8937d870592f",
+      "after_sha256": "bd926c938fe9ee66917c01a04c322d078e17727e1fd2c6cd6d6ae24efdd2d579",
+      "before_bytes": 89750,
+      "before_rgb_sha256": "559cbd0158aae2778148cd82fab628b5169d65539eee753123db8937d870592f",
+      "before_sha256": "bd926c938fe9ee66917c01a04c322d078e17727e1fd2c6cd6d6ae24efdd2d579",
+      "bytes_equal": true,
+      "classification": "BYTE_IDENTICAL",
+      "dimensions": [
+        1440,
+        900
+      ],
+      "metrics": {
+        "dimensions": [
+          1440,
+          900
+        ],
+        "mean_absolute_channel_error": 0.0,
+        "passes": true,
+        "significant_pixel_ratio": 0.0,
+        "significant_pixels": 0,
+        "total_pixels": 1296000
+      },
+      "path": "ar/desktop-1440x900/journey-f-screening-queue-robust.webp",
+      "pixels_equal": true,
+      "before_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/canonical-operation-r1/preimages/v0.3.0/ar/desktop-1440x900/journey-f-screening-queue-robust.webp",
+      "after_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-canonical-r1/postimages/v0.3.0/ar/desktop-1440x900/journey-f-screening-queue-robust.webp",
+      "exact_changed_bbox": null
+    },
+    {
+      "after_bytes": 96690,
+      "after_rgb_sha256": "37d5491ad05469e28f46f06aec522a2a08bc34c5df20e64ab15d6bae0a9179a5",
+      "after_sha256": "3484d0f4a3b6a4b5c07d8d6e10dc25a4acfc7328a55d989204b48b02f3929bd0",
+      "before_bytes": 96690,
+      "before_rgb_sha256": "37d5491ad05469e28f46f06aec522a2a08bc34c5df20e64ab15d6bae0a9179a5",
+      "before_sha256": "3484d0f4a3b6a4b5c07d8d6e10dc25a4acfc7328a55d989204b48b02f3929bd0",
+      "bytes_equal": true,
+      "classification": "BYTE_IDENTICAL",
+      "dimensions": [
+        1440,
+        900
+      ],
+      "metrics": {
+        "dimensions": [
+          1440,
+          900
+        ],
+        "mean_absolute_channel_error": 0.0,
+        "passes": true,
+        "significant_pixel_ratio": 0.0,
+        "significant_pixels": 0,
+        "total_pixels": 1296000
+      },
+      "path": "ar/desktop-1440x900/journey-f-screening-record.webp",
+      "pixels_equal": true,
+      "before_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/canonical-operation-r1/preimages/v0.3.0/ar/desktop-1440x900/journey-f-screening-record.webp",
+      "after_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-canonical-r1/postimages/v0.3.0/ar/desktop-1440x900/journey-f-screening-record.webp",
+      "exact_changed_bbox": null
+    },
+    {
+      "after_bytes": 91224,
+      "after_rgb_sha256": "42c0ffa1537d68c598392b2872efdb364e709410f85e0387e039253aadc447bf",
+      "after_sha256": "a3f1fbf3ae62c673f306d37d6acef297a98fd0f121d8cced0009d77c49595eda",
+      "before_bytes": 91224,
+      "before_rgb_sha256": "42c0ffa1537d68c598392b2872efdb364e709410f85e0387e039253aadc447bf",
+      "before_sha256": "a3f1fbf3ae62c673f306d37d6acef297a98fd0f121d8cced0009d77c49595eda",
+      "bytes_equal": true,
+      "classification": "BYTE_IDENTICAL",
+      "dimensions": [
+        1440,
+        900
+      ],
+      "metrics": {
+        "dimensions": [
+          1440,
+          900
+        ],
+        "mean_absolute_channel_error": 0.0,
+        "passes": true,
+        "significant_pixel_ratio": 0.0,
+        "significant_pixels": 0,
+        "total_pixels": 1296000
+      },
+      "path": "ar/desktop-1440x900/journey-f-screening-summary.webp",
+      "pixels_equal": true,
+      "before_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/canonical-operation-r1/preimages/v0.3.0/ar/desktop-1440x900/journey-f-screening-summary.webp",
+      "after_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-canonical-r1/postimages/v0.3.0/ar/desktop-1440x900/journey-f-screening-summary.webp",
+      "exact_changed_bbox": null
+    },
+    {
+      "after_bytes": 87998,
+      "after_rgb_sha256": "b48768bc32b7c5177d600390ee253d70760af1c8632adc4f3365946b0e6d7dd5",
+      "after_sha256": "d03eabad6ffd9ff57d850213aa77d8009f2c1272f213dc2a50fe6491d8dc307a",
+      "before_bytes": 87998,
+      "before_rgb_sha256": "b48768bc32b7c5177d600390ee253d70760af1c8632adc4f3365946b0e6d7dd5",
+      "before_sha256": "d03eabad6ffd9ff57d850213aa77d8009f2c1272f213dc2a50fe6491d8dc307a",
+      "bytes_equal": true,
+      "classification": "BYTE_IDENTICAL",
+      "dimensions": [
+        1440,
+        900
+      ],
+      "metrics": {
+        "dimensions": [
+          1440,
+          900
+        ],
+        "mean_absolute_channel_error": 0.0,
+        "passes": true,
+        "significant_pixel_ratio": 0.0,
+        "significant_pixels": 0,
+        "total_pixels": 1296000
+      },
+      "path": "ar/desktop-1440x900/journey-h-selection-exclusions.webp",
+      "pixels_equal": true,
+      "before_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/canonical-operation-r1/preimages/v0.3.0/ar/desktop-1440x900/journey-h-selection-exclusions.webp",
+      "after_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-canonical-r1/postimages/v0.3.0/ar/desktop-1440x900/journey-h-selection-exclusions.webp",
+      "exact_changed_bbox": null
+    },
+    {
+      "after_bytes": 23776,
+      "after_rgb_sha256": "2fed71fff37c78dccccdbb05c0587c3aa6dd3a927cd6083d4144ca3689186b9b",
+      "after_sha256": "42e9fa35d204aa6e7314c42f741479f20a90606b9bbc8dbc0c3f2c44f31d0ecf",
+      "before_bytes": 23776,
+      "before_rgb_sha256": "2fed71fff37c78dccccdbb05c0587c3aa6dd3a927cd6083d4144ca3689186b9b",
+      "before_sha256": "42e9fa35d204aa6e7314c42f741479f20a90606b9bbc8dbc0c3f2c44f31d0ecf",
+      "bytes_equal": true,
+      "classification": "BYTE_IDENTICAL",
+      "dimensions": [
+        1440,
+        900
+      ],
+      "metrics": {
+        "dimensions": [
+          1440,
+          900
+        ],
+        "mean_absolute_channel_error": 0.0,
+        "passes": true,
+        "significant_pixel_ratio": 0.0,
+        "significant_pixels": 0,
+        "total_pixels": 1296000
+      },
+      "path": "ar/desktop-1440x900/journey-j-executive-ministry-unlocks.webp",
+      "pixels_equal": true,
+      "before_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/canonical-operation-r1/preimages/v0.3.0/ar/desktop-1440x900/journey-j-executive-ministry-unlocks.webp",
+      "after_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-canonical-r1/postimages/v0.3.0/ar/desktop-1440x900/journey-j-executive-ministry-unlocks.webp",
+      "exact_changed_bbox": null
+    },
+    {
+      "after_bytes": 42362,
+      "after_rgb_sha256": "c53669dee8a78346f0d3ff6ca96f5064bdbd9adc904fbf026e6329f39e69e284",
+      "after_sha256": "60b3198359c04f366e258f2b42d461ee2e4ddb3fb6337e403b1ca961810885da",
+      "before_bytes": 42362,
+      "before_rgb_sha256": "c53669dee8a78346f0d3ff6ca96f5064bdbd9adc904fbf026e6329f39e69e284",
+      "before_sha256": "60b3198359c04f366e258f2b42d461ee2e4ddb3fb6337e403b1ca961810885da",
+      "bytes_equal": true,
+      "classification": "BYTE_IDENTICAL",
+      "dimensions": [
+        1440,
+        900
+      ],
+      "metrics": {
+        "dimensions": [
+          1440,
+          900
+        ],
+        "mean_absolute_channel_error": 0.0,
+        "passes": true,
+        "significant_pixel_ratio": 0.0,
+        "significant_pixels": 0,
+        "total_pixels": 1296000
+      },
+      "path": "ar/desktop-1440x900/journey-j-executive-reject.webp",
+      "pixels_equal": true,
+      "before_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/canonical-operation-r1/preimages/v0.3.0/ar/desktop-1440x900/journey-j-executive-reject.webp",
+      "after_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-canonical-r1/postimages/v0.3.0/ar/desktop-1440x900/journey-j-executive-reject.webp",
+      "exact_changed_bbox": null
+    },
+    {
+      "after_bytes": 32346,
+      "after_rgb_sha256": "1eea421f49d6cf5dede21a498e0dde9ae34443a94277be6bf5edddf38321c629",
+      "after_sha256": "5b7925089ffaf219169cfaed6232abb76fa3610e1a93571063e763010a75bfde",
+      "before_bytes": 32346,
+      "before_rgb_sha256": "1eea421f49d6cf5dede21a498e0dde9ae34443a94277be6bf5edddf38321c629",
+      "before_sha256": "5b7925089ffaf219169cfaed6232abb76fa3610e1a93571063e763010a75bfde",
+      "bytes_equal": true,
+      "classification": "BYTE_IDENTICAL",
+      "dimensions": [
+        1440,
+        900
+      ],
+      "metrics": {
+        "dimensions": [
+          1440,
+          900
+        ],
+        "mean_absolute_channel_error": 0.0,
+        "passes": true,
+        "significant_pixel_ratio": 0.0,
+        "significant_pixels": 0,
+        "total_pixels": 1296000
+      },
+      "path": "ar/desktop-1440x900/journey-j-executive-simulated-route.webp",
+      "pixels_equal": true,
+      "before_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/canonical-operation-r1/preimages/v0.3.0/ar/desktop-1440x900/journey-j-executive-simulated-route.webp",
+      "after_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-canonical-r1/postimages/v0.3.0/ar/desktop-1440x900/journey-j-executive-simulated-route.webp",
+      "exact_changed_bbox": null
+    },
+    {
+      "after_bytes": 84282,
+      "after_rgb_sha256": "09e420fa8e6715ea44650b3486cfffd163d81037f1449ac8376889a1fdcbdafc",
+      "after_sha256": "85960d94bcd3176e5e221b189a5c15368a4a0db1394ebdf532357a6e5728b633",
+      "before_bytes": 84282,
+      "before_rgb_sha256": "09e420fa8e6715ea44650b3486cfffd163d81037f1449ac8376889a1fdcbdafc",
+      "before_sha256": "85960d94bcd3176e5e221b189a5c15368a4a0db1394ebdf532357a6e5728b633",
+      "bytes_equal": true,
+      "classification": "BYTE_IDENTICAL",
+      "dimensions": [
+        1024,
+        768
+      ],
+      "metrics": {
+        "dimensions": [
+          1024,
+          768
+        ],
+        "mean_absolute_channel_error": 0.0,
+        "passes": true,
+        "significant_pixel_ratio": 0.0,
+        "significant_pixels": 0,
+        "total_pixels": 786432
+      },
+      "path": "ar/tablet-1024x768/journey-a-portfolio-public.webp",
+      "pixels_equal": true,
+      "before_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/canonical-operation-r1/preimages/v0.3.0/ar/tablet-1024x768/journey-a-portfolio-public.webp",
+      "after_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-canonical-r1/postimages/v0.3.0/ar/tablet-1024x768/journey-a-portfolio-public.webp",
+      "exact_changed_bbox": null
+    },
+    {
+      "after_bytes": 79796,
+      "after_rgb_sha256": "a0ecd7b8e3c5954eabf3a1e7e3eceffe56ba183e99aaf0cec094aec0b1f3fb1c",
+      "after_sha256": "849982c0a3632bbe02e61ccf8a0925a749f86d371c0c633df6ff5bb6b18a815f",
+      "before_bytes": 79796,
+      "before_rgb_sha256": "a0ecd7b8e3c5954eabf3a1e7e3eceffe56ba183e99aaf0cec094aec0b1f3fb1c",
+      "before_sha256": "849982c0a3632bbe02e61ccf8a0925a749f86d371c0c633df6ff5bb6b18a815f",
+      "bytes_equal": true,
+      "classification": "BYTE_IDENTICAL",
+      "dimensions": [
+        1024,
+        768
+      ],
+      "metrics": {
+        "dimensions": [
+          1024,
+          768
+        ],
+        "mean_absolute_channel_error": 0.0,
+        "passes": true,
+        "significant_pixel_ratio": 0.0,
+        "significant_pixels": 0,
+        "total_pixels": 786432
+      },
+      "path": "ar/tablet-1024x768/journey-a-portfolio-simulated.webp",
+      "pixels_equal": true,
+      "before_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/canonical-operation-r1/preimages/v0.3.0/ar/tablet-1024x768/journey-a-portfolio-simulated.webp",
+      "after_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-canonical-r1/postimages/v0.3.0/ar/tablet-1024x768/journey-a-portfolio-simulated.webp",
+      "exact_changed_bbox": null
+    },
+    {
+      "after_bytes": 68280,
+      "after_rgb_sha256": "29bad9fe0c5d3d0c3254b64eefadfa26df81d540c206237d37d2997b3d8a6bcf",
+      "after_sha256": "15c8b54fab4315e8037736a27eb779c510c8a8ff946731ca0408ff618639ada0",
+      "before_bytes": 68280,
+      "before_rgb_sha256": "29bad9fe0c5d3d0c3254b64eefadfa26df81d540c206237d37d2997b3d8a6bcf",
+      "before_sha256": "15c8b54fab4315e8037736a27eb779c510c8a8ff946731ca0408ff618639ada0",
+      "bytes_equal": true,
+      "classification": "BYTE_IDENTICAL",
+      "dimensions": [
+        1024,
+        768
+      ],
+      "metrics": {
+        "dimensions": [
+          1024,
+          768
+        ],
+        "mean_absolute_channel_error": 0.0,
+        "passes": true,
+        "significant_pixel_ratio": 0.0,
+        "significant_pixels": 0,
+        "total_pixels": 786432
+      },
+      "path": "ar/tablet-1024x768/journey-f-screening-summary.webp",
+      "pixels_equal": true,
+      "before_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/canonical-operation-r1/preimages/v0.3.0/ar/tablet-1024x768/journey-f-screening-summary.webp",
+      "after_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-canonical-r1/postimages/v0.3.0/ar/tablet-1024x768/journey-f-screening-summary.webp",
+      "exact_changed_bbox": null
+    },
+    {
+      "after_bytes": 73098,
+      "after_rgb_sha256": "cc42b2c8ac42041d57a0b4b0f0c5dc5a8cf5d15e4ef1c612d3a8ab6aa3b58b97",
+      "after_sha256": "eee065e43d4c8ab0cd1ac4c5922551b5a8a24507e3192aefd48f1828aa7cd542",
+      "before_bytes": 73098,
+      "before_rgb_sha256": "cc42b2c8ac42041d57a0b4b0f0c5dc5a8cf5d15e4ef1c612d3a8ab6aa3b58b97",
+      "before_sha256": "eee065e43d4c8ab0cd1ac4c5922551b5a8a24507e3192aefd48f1828aa7cd542",
+      "bytes_equal": true,
+      "classification": "BYTE_IDENTICAL",
+      "dimensions": [
+        1024,
+        768
+      ],
+      "metrics": {
+        "dimensions": [
+          1024,
+          768
+        ],
+        "mean_absolute_channel_error": 0.0,
+        "passes": true,
+        "significant_pixel_ratio": 0.0,
+        "significant_pixels": 0,
+        "total_pixels": 786432
+      },
+      "path": "ar/tablet-1024x768/journey-h-selection-exclusions.webp",
+      "pixels_equal": true,
+      "before_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/canonical-operation-r1/preimages/v0.3.0/ar/tablet-1024x768/journey-h-selection-exclusions.webp",
+      "after_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-canonical-r1/postimages/v0.3.0/ar/tablet-1024x768/journey-h-selection-exclusions.webp",
+      "exact_changed_bbox": null
+    },
+    {
+      "after_bytes": 14232,
+      "after_rgb_sha256": "70865a57dcb7f5e8009708d2e00dee3ebffcd2c5e5767d24ab2e44ae7510c6ec",
+      "after_sha256": "2a9c96d09c4e5e1c57528eba6e991f22270172d8168493e8ab8463b003615dc7",
+      "before_bytes": 14232,
+      "before_rgb_sha256": "70865a57dcb7f5e8009708d2e00dee3ebffcd2c5e5767d24ab2e44ae7510c6ec",
+      "before_sha256": "2a9c96d09c4e5e1c57528eba6e991f22270172d8168493e8ab8463b003615dc7",
+      "bytes_equal": true,
+      "classification": "BYTE_IDENTICAL",
+      "dimensions": [
+        1024,
+        768
+      ],
+      "metrics": {
+        "dimensions": [
+          1024,
+          768
+        ],
+        "mean_absolute_channel_error": 0.0,
+        "passes": true,
+        "significant_pixel_ratio": 0.0,
+        "significant_pixels": 0,
+        "total_pixels": 786432
+      },
+      "path": "ar/tablet-1024x768/journey-j-executive-ministry-unlocks.webp",
+      "pixels_equal": true,
+      "before_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/canonical-operation-r1/preimages/v0.3.0/ar/tablet-1024x768/journey-j-executive-ministry-unlocks.webp",
+      "after_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-canonical-r1/postimages/v0.3.0/ar/tablet-1024x768/journey-j-executive-ministry-unlocks.webp",
+      "exact_changed_bbox": null
+    },
+    {
+      "after_bytes": 27628,
+      "after_rgb_sha256": "745660e08d1780b049b9c6cd3522b885a1e27916646f197e202533b0b161eb4c",
+      "after_sha256": "9d6b69846df826456a9d98210cfb42f914f5ae8b4bbb18823b7fcfc96cc0e3f7",
+      "before_bytes": 27628,
+      "before_rgb_sha256": "745660e08d1780b049b9c6cd3522b885a1e27916646f197e202533b0b161eb4c",
+      "before_sha256": "9d6b69846df826456a9d98210cfb42f914f5ae8b4bbb18823b7fcfc96cc0e3f7",
+      "bytes_equal": true,
+      "classification": "BYTE_IDENTICAL",
+      "dimensions": [
+        1024,
+        768
+      ],
+      "metrics": {
+        "dimensions": [
+          1024,
+          768
+        ],
+        "mean_absolute_channel_error": 0.0,
+        "passes": true,
+        "significant_pixel_ratio": 0.0,
+        "significant_pixels": 0,
+        "total_pixels": 786432
+      },
+      "path": "ar/tablet-1024x768/journey-j-executive-reject.webp",
+      "pixels_equal": true,
+      "before_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/canonical-operation-r1/preimages/v0.3.0/ar/tablet-1024x768/journey-j-executive-reject.webp",
+      "after_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-canonical-r1/postimages/v0.3.0/ar/tablet-1024x768/journey-j-executive-reject.webp",
+      "exact_changed_bbox": null
+    },
+    {
+      "after_bytes": 23978,
+      "after_rgb_sha256": "0c410c9efc82ac200c041b0d413997ad92b38de8df56414f35a975eedd00693f",
+      "after_sha256": "6f2959860466dc32433cfd52e768d4a69fc3300276654054aede90780a01273d",
+      "before_bytes": 23978,
+      "before_rgb_sha256": "0c410c9efc82ac200c041b0d413997ad92b38de8df56414f35a975eedd00693f",
+      "before_sha256": "6f2959860466dc32433cfd52e768d4a69fc3300276654054aede90780a01273d",
+      "bytes_equal": true,
+      "classification": "BYTE_IDENTICAL",
+      "dimensions": [
+        1024,
+        768
+      ],
+      "metrics": {
+        "dimensions": [
+          1024,
+          768
+        ],
+        "mean_absolute_channel_error": 0.0,
+        "passes": true,
+        "significant_pixel_ratio": 0.0,
+        "significant_pixels": 0,
+        "total_pixels": 786432
+      },
+      "path": "ar/tablet-1024x768/journey-j-executive-simulated-route.webp",
+      "pixels_equal": true,
+      "before_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/canonical-operation-r1/preimages/v0.3.0/ar/tablet-1024x768/journey-j-executive-simulated-route.webp",
+      "after_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-canonical-r1/postimages/v0.3.0/ar/tablet-1024x768/journey-j-executive-simulated-route.webp",
+      "exact_changed_bbox": null
+    },
+    {
+      "after_bytes": 116324,
+      "after_rgb_sha256": "45ebe3ef43bac8b9776f04f2b196f37547ab5ba285817612adb29956dd88160b",
+      "after_sha256": "c66256c43e5da1b8c64c1da00817f4ea67fed40b508a23cd32f35047f570f45d",
+      "before_bytes": 116324,
+      "before_rgb_sha256": "45ebe3ef43bac8b9776f04f2b196f37547ab5ba285817612adb29956dd88160b",
+      "before_sha256": "c66256c43e5da1b8c64c1da00817f4ea67fed40b508a23cd32f35047f570f45d",
+      "bytes_equal": true,
+      "classification": "BYTE_IDENTICAL",
+      "dimensions": [
+        1440,
+        900
+      ],
+      "metrics": {
+        "dimensions": [
+          1440,
+          900
+        ],
+        "mean_absolute_channel_error": 0.0,
+        "passes": true,
+        "significant_pixel_ratio": 0.0,
+        "significant_pixels": 0,
+        "total_pixels": 1296000
+      },
+      "path": "en/desktop-1440x900/journey-a-portfolio-public.webp",
+      "pixels_equal": true,
+      "before_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/canonical-operation-r1/preimages/v0.3.0/en/desktop-1440x900/journey-a-portfolio-public.webp",
+      "after_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-canonical-r1/postimages/v0.3.0/en/desktop-1440x900/journey-a-portfolio-public.webp",
+      "exact_changed_bbox": null
+    },
+    {
+      "after_bytes": 118164,
+      "after_rgb_sha256": "476a0985739caf7e68e1ea9cae512dcd6285bc1f1c2d071f08c74799bf1d0e8b",
+      "after_sha256": "95e12b3b37cb255d9ae7916c3644cc2fc2c543b073bb02ab0884f8d73c91a7a5",
+      "before_bytes": 118164,
+      "before_rgb_sha256": "476a0985739caf7e68e1ea9cae512dcd6285bc1f1c2d071f08c74799bf1d0e8b",
+      "before_sha256": "95e12b3b37cb255d9ae7916c3644cc2fc2c543b073bb02ab0884f8d73c91a7a5",
+      "bytes_equal": true,
+      "classification": "BYTE_IDENTICAL",
+      "dimensions": [
+        1440,
+        900
+      ],
+      "metrics": {
+        "dimensions": [
+          1440,
+          900
+        ],
+        "mean_absolute_channel_error": 0.0,
+        "passes": true,
+        "significant_pixel_ratio": 0.0,
+        "significant_pixels": 0,
+        "total_pixels": 1296000
+      },
+      "path": "en/desktop-1440x900/journey-a-portfolio-simulated.webp",
+      "pixels_equal": true,
+      "before_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/canonical-operation-r1/preimages/v0.3.0/en/desktop-1440x900/journey-a-portfolio-simulated.webp",
+      "after_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-canonical-r1/postimages/v0.3.0/en/desktop-1440x900/journey-a-portfolio-simulated.webp",
+      "exact_changed_bbox": null
+    },
+    {
+      "after_bytes": 99604,
+      "after_rgb_sha256": "41ae6a0194aab8582241c0a0a83730e9192f8842dd206f4506a35f867247a08b",
+      "after_sha256": "cd6c2011405141829eab9e88905594a069bfedb2fdd087d4daea315954b79853",
+      "before_bytes": 99604,
+      "before_rgb_sha256": "41ae6a0194aab8582241c0a0a83730e9192f8842dd206f4506a35f867247a08b",
+      "before_sha256": "cd6c2011405141829eab9e88905594a069bfedb2fdd087d4daea315954b79853",
+      "bytes_equal": true,
+      "classification": "BYTE_IDENTICAL",
+      "dimensions": [
+        1440,
+        900
+      ],
+      "metrics": {
+        "dimensions": [
+          1440,
+          900
+        ],
+        "mean_absolute_channel_error": 0.0,
+        "passes": true,
+        "significant_pixel_ratio": 0.0,
+        "significant_pixels": 0,
+        "total_pixels": 1296000
+      },
+      "path": "en/desktop-1440x900/journey-f-screening-queue-empty.webp",
+      "pixels_equal": true,
+      "before_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/canonical-operation-r1/preimages/v0.3.0/en/desktop-1440x900/journey-f-screening-queue-empty.webp",
+      "after_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-canonical-r1/postimages/v0.3.0/en/desktop-1440x900/journey-f-screening-queue-empty.webp",
+      "exact_changed_bbox": null
+    },
+    {
+      "after_bytes": 96326,
+      "after_rgb_sha256": "e3fa308390f9270ed1a817f9a115a851c4d6e5dd6e3c10591fc733c08a31729f",
+      "after_sha256": "b8687a3dd94dfa47bd40b165a6cce67c947cacc0dfd9c820ac16100d31fc41b5",
+      "before_bytes": 96326,
+      "before_rgb_sha256": "e3fa308390f9270ed1a817f9a115a851c4d6e5dd6e3c10591fc733c08a31729f",
+      "before_sha256": "b8687a3dd94dfa47bd40b165a6cce67c947cacc0dfd9c820ac16100d31fc41b5",
+      "bytes_equal": true,
+      "classification": "BYTE_IDENTICAL",
+      "dimensions": [
+        1440,
+        900
+      ],
+      "metrics": {
+        "dimensions": [
+          1440,
+          900
+        ],
+        "mean_absolute_channel_error": 0.0,
+        "passes": true,
+        "significant_pixel_ratio": 0.0,
+        "significant_pixels": 0,
+        "total_pixels": 1296000
+      },
+      "path": "en/desktop-1440x900/journey-f-screening-queue-robust.webp",
+      "pixels_equal": true,
+      "before_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/canonical-operation-r1/preimages/v0.3.0/en/desktop-1440x900/journey-f-screening-queue-robust.webp",
+      "after_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-canonical-r1/postimages/v0.3.0/en/desktop-1440x900/journey-f-screening-queue-robust.webp",
+      "exact_changed_bbox": null
+    },
+    {
+      "after_bytes": 101100,
+      "after_rgb_sha256": "ec4ad839e8bc8550a9d68e4362d89d4cc176d8957d3a78f9b435623ac83d3d38",
+      "after_sha256": "8c4b9ee21d75ca31a93b743ad0a21af9d1f396297cac3d497264c8205eb44bab",
+      "before_bytes": 101100,
+      "before_rgb_sha256": "ec4ad839e8bc8550a9d68e4362d89d4cc176d8957d3a78f9b435623ac83d3d38",
+      "before_sha256": "8c4b9ee21d75ca31a93b743ad0a21af9d1f396297cac3d497264c8205eb44bab",
+      "bytes_equal": true,
+      "classification": "BYTE_IDENTICAL",
+      "dimensions": [
+        1440,
+        900
+      ],
+      "metrics": {
+        "dimensions": [
+          1440,
+          900
+        ],
+        "mean_absolute_channel_error": 0.0,
+        "passes": true,
+        "significant_pixel_ratio": 0.0,
+        "significant_pixels": 0,
+        "total_pixels": 1296000
+      },
+      "path": "en/desktop-1440x900/journey-f-screening-record.webp",
+      "pixels_equal": true,
+      "before_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/canonical-operation-r1/preimages/v0.3.0/en/desktop-1440x900/journey-f-screening-record.webp",
+      "after_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-canonical-r1/postimages/v0.3.0/en/desktop-1440x900/journey-f-screening-record.webp",
+      "exact_changed_bbox": null
+    },
+    {
+      "after_bytes": 92032,
+      "after_rgb_sha256": "c65eb34ffeecc827e67246618222de6ebd2c6309942127401c7df982edd980d4",
+      "after_sha256": "26bf12fd617db5e79ecc6f584c1ece8607a310f4d753346995952133e6aaf640",
+      "before_bytes": 92032,
+      "before_rgb_sha256": "c65eb34ffeecc827e67246618222de6ebd2c6309942127401c7df982edd980d4",
+      "before_sha256": "26bf12fd617db5e79ecc6f584c1ece8607a310f4d753346995952133e6aaf640",
+      "bytes_equal": true,
+      "classification": "BYTE_IDENTICAL",
+      "dimensions": [
+        1440,
+        900
+      ],
+      "metrics": {
+        "dimensions": [
+          1440,
+          900
+        ],
+        "mean_absolute_channel_error": 0.0,
+        "passes": true,
+        "significant_pixel_ratio": 0.0,
+        "significant_pixels": 0,
+        "total_pixels": 1296000
+      },
+      "path": "en/desktop-1440x900/journey-h-selection-exclusions.webp",
+      "pixels_equal": true,
+      "before_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/canonical-operation-r1/preimages/v0.3.0/en/desktop-1440x900/journey-h-selection-exclusions.webp",
+      "after_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-canonical-r1/postimages/v0.3.0/en/desktop-1440x900/journey-h-selection-exclusions.webp",
+      "exact_changed_bbox": null
+    },
+    {
+      "after_bytes": 24754,
+      "after_rgb_sha256": "73086e6e69662806004a002ce41c4f9cc02f197de67da570f8d40ee496fc4b8c",
+      "after_sha256": "5b933bfbeaf6528bc622f8e94ff3becfaad537d81b5b3103834fb4bf2ebc53e7",
+      "before_bytes": 24754,
+      "before_rgb_sha256": "73086e6e69662806004a002ce41c4f9cc02f197de67da570f8d40ee496fc4b8c",
+      "before_sha256": "5b933bfbeaf6528bc622f8e94ff3becfaad537d81b5b3103834fb4bf2ebc53e7",
+      "bytes_equal": true,
+      "classification": "BYTE_IDENTICAL",
+      "dimensions": [
+        1440,
+        900
+      ],
+      "metrics": {
+        "dimensions": [
+          1440,
+          900
+        ],
+        "mean_absolute_channel_error": 0.0,
+        "passes": true,
+        "significant_pixel_ratio": 0.0,
+        "significant_pixels": 0,
+        "total_pixels": 1296000
+      },
+      "path": "en/desktop-1440x900/journey-j-executive-ministry-unlocks.webp",
+      "pixels_equal": true,
+      "before_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/canonical-operation-r1/preimages/v0.3.0/en/desktop-1440x900/journey-j-executive-ministry-unlocks.webp",
+      "after_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-canonical-r1/postimages/v0.3.0/en/desktop-1440x900/journey-j-executive-ministry-unlocks.webp",
+      "exact_changed_bbox": null
+    },
+    {
+      "after_bytes": 42878,
+      "after_rgb_sha256": "3ae77aeab883dbc5125db6f872b508b95bd96f394b763fd1644a89012626b736",
+      "after_sha256": "e3b94fe38d992968996e53c337f82f69e97fac5520f736b859b01d3a3153d3cf",
+      "before_bytes": 42878,
+      "before_rgb_sha256": "3ae77aeab883dbc5125db6f872b508b95bd96f394b763fd1644a89012626b736",
+      "before_sha256": "e3b94fe38d992968996e53c337f82f69e97fac5520f736b859b01d3a3153d3cf",
+      "bytes_equal": true,
+      "classification": "BYTE_IDENTICAL",
+      "dimensions": [
+        1440,
+        900
+      ],
+      "metrics": {
+        "dimensions": [
+          1440,
+          900
+        ],
+        "mean_absolute_channel_error": 0.0,
+        "passes": true,
+        "significant_pixel_ratio": 0.0,
+        "significant_pixels": 0,
+        "total_pixels": 1296000
+      },
+      "path": "en/desktop-1440x900/journey-j-executive-reject.webp",
+      "pixels_equal": true,
+      "before_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/canonical-operation-r1/preimages/v0.3.0/en/desktop-1440x900/journey-j-executive-reject.webp",
+      "after_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-canonical-r1/postimages/v0.3.0/en/desktop-1440x900/journey-j-executive-reject.webp",
+      "exact_changed_bbox": null
+    },
+    {
+      "after_bytes": 29460,
+      "after_rgb_sha256": "8a690bd6290695e74da518eb39770e1e98ab3cba596e54e11fb05dd82050bfe5",
+      "after_sha256": "672e3e9dfed6174dd82f0af6d71011b870916382d2b8c15022431dd23599b577",
+      "before_bytes": 29460,
+      "before_rgb_sha256": "8a690bd6290695e74da518eb39770e1e98ab3cba596e54e11fb05dd82050bfe5",
+      "before_sha256": "672e3e9dfed6174dd82f0af6d71011b870916382d2b8c15022431dd23599b577",
+      "bytes_equal": true,
+      "classification": "BYTE_IDENTICAL",
+      "dimensions": [
+        1440,
+        900
+      ],
+      "metrics": {
+        "dimensions": [
+          1440,
+          900
+        ],
+        "mean_absolute_channel_error": 0.0,
+        "passes": true,
+        "significant_pixel_ratio": 0.0,
+        "significant_pixels": 0,
+        "total_pixels": 1296000
+      },
+      "path": "en/desktop-1440x900/journey-j-executive-simulated-route.webp",
+      "pixels_equal": true,
+      "before_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/canonical-operation-r1/preimages/v0.3.0/en/desktop-1440x900/journey-j-executive-simulated-route.webp",
+      "after_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-canonical-r1/postimages/v0.3.0/en/desktop-1440x900/journey-j-executive-simulated-route.webp",
+      "exact_changed_bbox": null
+    },
+    {
+      "after_bytes": 88508,
+      "after_rgb_sha256": "43a490f89ac3e79f0c964f45420467d49d3f1530c64beef9e225b759730b3def",
+      "after_sha256": "1ffb3cbe805cde3238780c1af7229301b7eaef002ed2bb15cd4e4e190188757f",
+      "before_bytes": 88508,
+      "before_rgb_sha256": "43a490f89ac3e79f0c964f45420467d49d3f1530c64beef9e225b759730b3def",
+      "before_sha256": "1ffb3cbe805cde3238780c1af7229301b7eaef002ed2bb15cd4e4e190188757f",
+      "bytes_equal": true,
+      "classification": "BYTE_IDENTICAL",
+      "dimensions": [
+        1024,
+        768
+      ],
+      "metrics": {
+        "dimensions": [
+          1024,
+          768
+        ],
+        "mean_absolute_channel_error": 0.0,
+        "passes": true,
+        "significant_pixel_ratio": 0.0,
+        "significant_pixels": 0,
+        "total_pixels": 786432
+      },
+      "path": "en/tablet-1024x768/journey-a-portfolio-public.webp",
+      "pixels_equal": true,
+      "before_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/canonical-operation-r1/preimages/v0.3.0/en/tablet-1024x768/journey-a-portfolio-public.webp",
+      "after_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-canonical-r1/postimages/v0.3.0/en/tablet-1024x768/journey-a-portfolio-public.webp",
+      "exact_changed_bbox": null
+    },
+    {
+      "after_bytes": 84636,
+      "after_rgb_sha256": "00f20b7d52e55c7b0d69d974d04027c72c7f018b449b97ab3266b39b1382160f",
+      "after_sha256": "36bf255bb7876a366eae434b13b3a5670e9a9fd9239655c0f39c6f63ed0b898e",
+      "before_bytes": 84636,
+      "before_rgb_sha256": "00f20b7d52e55c7b0d69d974d04027c72c7f018b449b97ab3266b39b1382160f",
+      "before_sha256": "36bf255bb7876a366eae434b13b3a5670e9a9fd9239655c0f39c6f63ed0b898e",
+      "bytes_equal": true,
+      "classification": "BYTE_IDENTICAL",
+      "dimensions": [
+        1024,
+        768
+      ],
+      "metrics": {
+        "dimensions": [
+          1024,
+          768
+        ],
+        "mean_absolute_channel_error": 0.0,
+        "passes": true,
+        "significant_pixel_ratio": 0.0,
+        "significant_pixels": 0,
+        "total_pixels": 786432
+      },
+      "path": "en/tablet-1024x768/journey-a-portfolio-simulated.webp",
+      "pixels_equal": true,
+      "before_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/canonical-operation-r1/preimages/v0.3.0/en/tablet-1024x768/journey-a-portfolio-simulated.webp",
+      "after_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-canonical-r1/postimages/v0.3.0/en/tablet-1024x768/journey-a-portfolio-simulated.webp",
+      "exact_changed_bbox": null
+    },
+    {
+      "after_bytes": 79714,
+      "after_rgb_sha256": "2168801c8b178ed114c8721b9786f9393b3e556e4a7882326219d343bd6bc6c3",
+      "after_sha256": "1aa00445e4b35eb5c8e0818fd3b3d7e99ff196635e7fd919410574c3f250924a",
+      "before_bytes": 79714,
+      "before_rgb_sha256": "2168801c8b178ed114c8721b9786f9393b3e556e4a7882326219d343bd6bc6c3",
+      "before_sha256": "1aa00445e4b35eb5c8e0818fd3b3d7e99ff196635e7fd919410574c3f250924a",
+      "bytes_equal": true,
+      "classification": "BYTE_IDENTICAL",
+      "dimensions": [
+        1024,
+        768
+      ],
+      "metrics": {
+        "dimensions": [
+          1024,
+          768
+        ],
+        "mean_absolute_channel_error": 0.0,
+        "passes": true,
+        "significant_pixel_ratio": 0.0,
+        "significant_pixels": 0,
+        "total_pixels": 786432
+      },
+      "path": "en/tablet-1024x768/journey-f-screening-queue-empty.webp",
+      "pixels_equal": true,
+      "before_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/canonical-operation-r1/preimages/v0.3.0/en/tablet-1024x768/journey-f-screening-queue-empty.webp",
+      "after_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-canonical-r1/postimages/v0.3.0/en/tablet-1024x768/journey-f-screening-queue-empty.webp",
+      "exact_changed_bbox": null
+    },
+    {
+      "after_bytes": 84168,
+      "after_rgb_sha256": "9d63ce8ef40fd9376c8942564598fef2862aee2697f296eb39a702a39117b59b",
+      "after_sha256": "22bd6d40336f8b6533649928754bbf8d5c35be498062e6293346139d77efbfb8",
+      "before_bytes": 84168,
+      "before_rgb_sha256": "9d63ce8ef40fd9376c8942564598fef2862aee2697f296eb39a702a39117b59b",
+      "before_sha256": "22bd6d40336f8b6533649928754bbf8d5c35be498062e6293346139d77efbfb8",
+      "bytes_equal": true,
+      "classification": "BYTE_IDENTICAL",
+      "dimensions": [
+        1024,
+        768
+      ],
+      "metrics": {
+        "dimensions": [
+          1024,
+          768
+        ],
+        "mean_absolute_channel_error": 0.0,
+        "passes": true,
+        "significant_pixel_ratio": 0.0,
+        "significant_pixels": 0,
+        "total_pixels": 786432
+      },
+      "path": "en/tablet-1024x768/journey-f-screening-queue-robust.webp",
+      "pixels_equal": true,
+      "before_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/canonical-operation-r1/preimages/v0.3.0/en/tablet-1024x768/journey-f-screening-queue-robust.webp",
+      "after_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-canonical-r1/postimages/v0.3.0/en/tablet-1024x768/journey-f-screening-queue-robust.webp",
+      "exact_changed_bbox": null
+    },
+    {
+      "after_bytes": 80458,
+      "after_rgb_sha256": "83e6769acebec693b54a368c8434c4a9c1bd97fb674aa86898fde42330a96fce",
+      "after_sha256": "410e0a4dda9ce2e7dd39a252948a4217214c91acc3b6e47b11347b03660d5cad",
+      "before_bytes": 80458,
+      "before_rgb_sha256": "83e6769acebec693b54a368c8434c4a9c1bd97fb674aa86898fde42330a96fce",
+      "before_sha256": "410e0a4dda9ce2e7dd39a252948a4217214c91acc3b6e47b11347b03660d5cad",
+      "bytes_equal": true,
+      "classification": "BYTE_IDENTICAL",
+      "dimensions": [
+        1024,
+        768
+      ],
+      "metrics": {
+        "dimensions": [
+          1024,
+          768
+        ],
+        "mean_absolute_channel_error": 0.0,
+        "passes": true,
+        "significant_pixel_ratio": 0.0,
+        "significant_pixels": 0,
+        "total_pixels": 786432
+      },
+      "path": "en/tablet-1024x768/journey-f-screening-record.webp",
+      "pixels_equal": true,
+      "before_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/canonical-operation-r1/preimages/v0.3.0/en/tablet-1024x768/journey-f-screening-record.webp",
+      "after_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-canonical-r1/postimages/v0.3.0/en/tablet-1024x768/journey-f-screening-record.webp",
+      "exact_changed_bbox": null
+    },
+    {
+      "after_bytes": 75930,
+      "after_rgb_sha256": "6a96a89f8025bd79245e8c738eee831b80d723d6f05a84de17367fa6c3e097ba",
+      "after_sha256": "58c95662ece1651db6d2f9f1892f3863cace5c1e3080174f89ce99fa75fac85a",
+      "before_bytes": 75930,
+      "before_rgb_sha256": "6a96a89f8025bd79245e8c738eee831b80d723d6f05a84de17367fa6c3e097ba",
+      "before_sha256": "58c95662ece1651db6d2f9f1892f3863cace5c1e3080174f89ce99fa75fac85a",
+      "bytes_equal": true,
+      "classification": "BYTE_IDENTICAL",
+      "dimensions": [
+        1024,
+        768
+      ],
+      "metrics": {
+        "dimensions": [
+          1024,
+          768
+        ],
+        "mean_absolute_channel_error": 0.0,
+        "passes": true,
+        "significant_pixel_ratio": 0.0,
+        "significant_pixels": 0,
+        "total_pixels": 786432
+      },
+      "path": "en/tablet-1024x768/journey-f-screening-summary.webp",
+      "pixels_equal": true,
+      "before_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/canonical-operation-r1/preimages/v0.3.0/en/tablet-1024x768/journey-f-screening-summary.webp",
+      "after_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-canonical-r1/postimages/v0.3.0/en/tablet-1024x768/journey-f-screening-summary.webp",
+      "exact_changed_bbox": null
+    },
+    {
+      "after_bytes": 78340,
+      "after_rgb_sha256": "f98e85c72d0874e67e07d6297b8ab78f8e3bb2377c33b31376448ac833341dda",
+      "after_sha256": "4cfb8791df7655a67a3828412b1811430a6201fe1ef1efa182c0c432f219693d",
+      "before_bytes": 78340,
+      "before_rgb_sha256": "f98e85c72d0874e67e07d6297b8ab78f8e3bb2377c33b31376448ac833341dda",
+      "before_sha256": "4cfb8791df7655a67a3828412b1811430a6201fe1ef1efa182c0c432f219693d",
+      "bytes_equal": true,
+      "classification": "BYTE_IDENTICAL",
+      "dimensions": [
+        1024,
+        768
+      ],
+      "metrics": {
+        "dimensions": [
+          1024,
+          768
+        ],
+        "mean_absolute_channel_error": 0.0,
+        "passes": true,
+        "significant_pixel_ratio": 0.0,
+        "significant_pixels": 0,
+        "total_pixels": 786432
+      },
+      "path": "en/tablet-1024x768/journey-h-selection-exclusions.webp",
+      "pixels_equal": true,
+      "before_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/canonical-operation-r1/preimages/v0.3.0/en/tablet-1024x768/journey-h-selection-exclusions.webp",
+      "after_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-canonical-r1/postimages/v0.3.0/en/tablet-1024x768/journey-h-selection-exclusions.webp",
+      "exact_changed_bbox": null
+    },
+    {
+      "after_bytes": 14474,
+      "after_rgb_sha256": "34563afdd04c36a8a527ad61231a90414f7fc772f0f2ae881ff7c2a291b87658",
+      "after_sha256": "65dabd889bc3c3032f33a00a9a893d49e79f982bb8c8db78078131ee8f82fe75",
+      "before_bytes": 14474,
+      "before_rgb_sha256": "34563afdd04c36a8a527ad61231a90414f7fc772f0f2ae881ff7c2a291b87658",
+      "before_sha256": "65dabd889bc3c3032f33a00a9a893d49e79f982bb8c8db78078131ee8f82fe75",
+      "bytes_equal": true,
+      "classification": "BYTE_IDENTICAL",
+      "dimensions": [
+        1024,
+        768
+      ],
+      "metrics": {
+        "dimensions": [
+          1024,
+          768
+        ],
+        "mean_absolute_channel_error": 0.0,
+        "passes": true,
+        "significant_pixel_ratio": 0.0,
+        "significant_pixels": 0,
+        "total_pixels": 786432
+      },
+      "path": "en/tablet-1024x768/journey-j-executive-ministry-unlocks.webp",
+      "pixels_equal": true,
+      "before_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/canonical-operation-r1/preimages/v0.3.0/en/tablet-1024x768/journey-j-executive-ministry-unlocks.webp",
+      "after_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-canonical-r1/postimages/v0.3.0/en/tablet-1024x768/journey-j-executive-ministry-unlocks.webp",
+      "exact_changed_bbox": null
+    },
+    {
+      "after_bytes": 27732,
+      "after_rgb_sha256": "0b5fb78e00f4be92832fd441ec62e65aa97d4e385fe196b0127dd1472b4c88c1",
+      "after_sha256": "b85b9f187f005f142e5f914772816602f5620b20d4b9eea7d01c6b85e49ee734",
+      "before_bytes": 27732,
+      "before_rgb_sha256": "0b5fb78e00f4be92832fd441ec62e65aa97d4e385fe196b0127dd1472b4c88c1",
+      "before_sha256": "b85b9f187f005f142e5f914772816602f5620b20d4b9eea7d01c6b85e49ee734",
+      "bytes_equal": true,
+      "classification": "BYTE_IDENTICAL",
+      "dimensions": [
+        1024,
+        768
+      ],
+      "metrics": {
+        "dimensions": [
+          1024,
+          768
+        ],
+        "mean_absolute_channel_error": 0.0,
+        "passes": true,
+        "significant_pixel_ratio": 0.0,
+        "significant_pixels": 0,
+        "total_pixels": 786432
+      },
+      "path": "en/tablet-1024x768/journey-j-executive-reject.webp",
+      "pixels_equal": true,
+      "before_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/canonical-operation-r1/preimages/v0.3.0/en/tablet-1024x768/journey-j-executive-reject.webp",
+      "after_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-canonical-r1/postimages/v0.3.0/en/tablet-1024x768/journey-j-executive-reject.webp",
+      "exact_changed_bbox": null
+    },
+    {
+      "after_bytes": 21408,
+      "after_rgb_sha256": "149079701894a35fe889bd19cced019d0151bdf48a5f4768cc5e53a70b6b947e",
+      "after_sha256": "ffb2b75e0509c3bec88b37544f1af6d99d57d5fd52a952624ca9c205f1d86b18",
+      "before_bytes": 21408,
+      "before_rgb_sha256": "149079701894a35fe889bd19cced019d0151bdf48a5f4768cc5e53a70b6b947e",
+      "before_sha256": "ffb2b75e0509c3bec88b37544f1af6d99d57d5fd52a952624ca9c205f1d86b18",
+      "bytes_equal": true,
+      "classification": "BYTE_IDENTICAL",
+      "dimensions": [
+        1024,
+        768
+      ],
+      "metrics": {
+        "dimensions": [
+          1024,
+          768
+        ],
+        "mean_absolute_channel_error": 0.0,
+        "passes": true,
+        "significant_pixel_ratio": 0.0,
+        "significant_pixels": 0,
+        "total_pixels": 786432
+      },
+      "path": "en/tablet-1024x768/journey-j-executive-simulated-route.webp",
+      "pixels_equal": true,
+      "before_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/canonical-operation-r1/preimages/v0.3.0/en/tablet-1024x768/journey-j-executive-simulated-route.webp",
+      "after_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-canonical-r1/postimages/v0.3.0/en/tablet-1024x768/journey-j-executive-simulated-route.webp",
+      "exact_changed_bbox": null
+    }
+  ],
+  "native_image_count": 40,
+  "findings": [],
+  "observations": [
+    "Expected visible ENGINE-a1dcbf0e7665 to ENGINE-5e01ef7c4b9d replacement in EN/AR desktop evidence-to-change relationship.",
+    "No additional visible text, values, diagram topology, layout, mode/language control, warning, or hierarchy change observed in this partition.",
+    "Other decoded pixel differences are below inherited tolerance; their cause is not inferred. Existing tablet graph viewport clipping is present in both preimage and postimage."
+  ],
+  "unverified": "This visual scope does not substitute for actual-predecessor R1 geometry or exact-candidate gates."
+}

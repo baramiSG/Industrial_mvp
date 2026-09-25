@@ -1,0 +1,81 @@
+FFF                                                                      [100%]
+=================================== FAILURES ===================================
+_____ test_s17_history_current_graph_and_authority_outputs_are_manifested ______
+
+    def test_s17_history_current_graph_and_authority_outputs_are_manifested() -> None:
+        snapshot = json.loads(
+            (
+                PROJECT_ROOT / "data/manifests/snapshot_manifest.json"
+            ).read_text(encoding="utf-8")
+        )
+        paths = {row["path"] for row in snapshot["files"]}
+        current = json.loads(
+            (PROJECT_ROOT / "data/graph/current.json").read_text(encoding="utf-8")
+        )["projection_id"]
+>       assert len(paths) == 726
+E       AssertionError: assert 728 == 726
+E        +  where 728 = len({'config/history/acquisition_sources.v1-1.3.0.yaml', 'config/history/decision_narratives.v1-1.3.0.yaml', 'config/histo...uct_families.v1-1.1.0.yaml', 'config/history/thresholds.v1-1.2.0.yaml', 'config/history/ui_strings.v1-1.4.0.yaml', ...})
+
+tests/test_integrity_contract.py:1298: AssertionError
+____________ test_in_memory_g17_is_deterministic_and_writes_nothing ____________
+
+    def test_in_memory_g17_is_deterministic_and_writes_nothing() -> None:
+        current_path = PROJECT_ROOT / "data/graph/current.json"
+        snapshot_manifest = PROJECT_ROOT / "data/manifests/snapshot_manifest.json"
+        authority_manifest = PROJECT_ROOT / "docs/authority/authority_hashes.json"
+        before = {
+            path: path.read_bytes()
+            for path in (current_path, snapshot_manifest, authority_manifest)
+        }
+        first = build_repository_projection(PROJECT_ROOT)
+        second = build_repository_projection(PROJECT_ROOT)
+        assert first == second
+        assert first.projection_id == second.projection_id
+        assert first.projection_id.startswith("GRAPH-SAU-2026-09-12-")
+        assert first.projection_id == json.loads(
+            current_path.read_text(encoding="utf-8")
+        )["projection_id"]
+        assert first.counts["nodes"] == 925
+        assert first.counts["edges"] == 1045
+        assert all(path.read_bytes() == content for path, content in before.items())
+>       assert len(json.loads(snapshot_manifest.read_text(encoding="utf-8"))["files"]) == 726
+E       AssertionError: assert 728 == 726
+E        +  where 728 = len([{'bytes': 44761, 'path': 'data/snapshots/partners/PARTNERS-SAU-UN-COMTRADE-2026-09-13-edbd1926e196.json', 'sha256': '...LIC-SAU-H6-294120-2026-09-12.json', 'sha256': 'c692e89ae635dad61d6ad6a049c2608c1e07d13ed4632829f8a8b5fed39b527c'}, ...])
+
+tests/test_s17_generation.py:58: AssertionError
+__ test_s17_status_distinguishes_completed_generation_from_f01_visual_refresh __
+
+    def test_s17_status_distinguishes_completed_generation_from_f01_visual_refresh() -> (
+        None
+    ):
+        architecture = (PROJECT_ROOT / "docs" / "ARCHITECTURE_DECISIONS.md").read_text(
+            encoding="utf-8"
+        )
+        adr_027 = architecture.split("## ADR-027", maxsplit=1)[1]
+        progress = (PROJECT_ROOT / "docs" / "BUILD_PROGRESS.md").read_text(encoding="utf-8")
+        s17_row = next(
+            line
+            for line in progress.splitlines()
+            if line.startswith("| S17 Interactive graph view |")
+        )
+        snapshot = json.loads(
+            (PROJECT_ROOT / "data" / "manifests" / "snapshot_manifest.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        visual = json.loads(
+            (
+                PROJECT_ROOT / "browser_tests" / "baselines" / "v0.3.0" / "manifest.json"
+            ).read_text(encoding="utf-8")
+        )
+    
+>       assert len(snapshot["files"]) == 726
+E       AssertionError: assert 728 == 726
+E        +  where 728 = len([{'bytes': 44761, 'path': 'data/snapshots/partners/PARTNERS-SAU-UN-COMTRADE-2026-09-13-edbd1926e196.json', 'sha256': '...LIC-SAU-H6-294120-2026-09-12.json', 'sha256': 'c692e89ae635dad61d6ad6a049c2608c1e07d13ed4632829f8a8b5fed39b527c'}, ...])
+
+tests/test_s17_status_docs.py:33: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_integrity_contract.py::test_s17_history_current_graph_and_authority_outputs_are_manifested
+FAILED tests/test_s17_generation.py::test_in_memory_g17_is_deterministic_and_writes_nothing
+FAILED tests/test_s17_status_docs.py::test_s17_status_distinguishes_completed_generation_from_f01_visual_refresh
+3 failed in 2.72s

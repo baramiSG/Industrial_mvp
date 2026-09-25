@@ -1,0 +1,29 @@
+EEEE                                                                     [100%]
+==================================== ERRORS ====================================
+_ ERROR at setup of test_dossier_print_media_and_pdf_are_valid[chromium-public-steel-en] _
+Chromium executable is missing for Playwright 1.62.0. Install it with: uv run --locked --extra dev --extra e2e python -m playwright install --with-deps chromium
+
+During handling of the above exception, another exception occurred:
+real-browser prerequisite failure: Chromium executable is missing for Playwright 1.62.0. Install it with: uv run --locked --extra dev --extra e2e python -m playwright install --with-deps chromium
+_ ERROR at setup of test_dossier_print_media_and_pdf_are_valid[chromium-public-steel-ar] _
+Chromium executable is missing for Playwright 1.62.0. Install it with: uv run --locked --extra dev --extra e2e python -m playwright install --with-deps chromium
+
+During handling of the above exception, another exception occurred:
+real-browser prerequisite failure: Chromium executable is missing for Playwright 1.62.0. Install it with: uv run --locked --extra dev --extra e2e python -m playwright install --with-deps chromium
+_ ERROR at setup of test_dossier_print_media_and_pdf_are_valid[chromium-simulated-steel-en] _
+Chromium executable is missing for Playwright 1.62.0. Install it with: uv run --locked --extra dev --extra e2e python -m playwright install --with-deps chromium
+
+During handling of the above exception, another exception occurred:
+real-browser prerequisite failure: Chromium executable is missing for Playwright 1.62.0. Install it with: uv run --locked --extra dev --extra e2e python -m playwright install --with-deps chromium
+_ ERROR at setup of test_dossier_print_media_and_pdf_are_valid[chromium-simulated-steel-ar] _
+Chromium executable is missing for Playwright 1.62.0. Install it with: uv run --locked --extra dev --extra e2e python -m playwright install --with-deps chromium
+
+During handling of the above exception, another exception occurred:
+real-browser prerequisite failure: Chromium executable is missing for Playwright 1.62.0. Install it with: uv run --locked --extra dev --extra e2e python -m playwright install --with-deps chromium
+=========================== short test summary info ============================
+ERROR browser_tests/test_dossier.py::test_dossier_print_media_and_pdf_are_valid[chromium-public-steel-en]
+ERROR browser_tests/test_dossier.py::test_dossier_print_media_and_pdf_are_valid[chromium-public-steel-ar]
+ERROR browser_tests/test_dossier.py::test_dossier_print_media_and_pdf_are_valid[chromium-simulated-steel-en]
+ERROR browser_tests/test_dossier.py::test_dossier_print_media_and_pdf_are_valid[chromium-simulated-steel-ar]
+172 deselected, 4 errors in 0.36s
+EXIT:1

@@ -1,0 +1,122 @@
+{
+  "timestamp_utc": "2026-09-25T06:29:31.672273+00:00",
+  "status": "PREPARED_NO_CAPTURE_OR_ALLOCATION",
+  "author": "/root/s19_product_implementer",
+  "preparation": "Refreshed exact integrated source approval/root fullfunctional release and prior canonical method. Personas: release-provenance and bilingual regression engineer; executing-plans/github-flow/verification/Sanad/al-Muhasibi/Muhasabah applied.",
+  "original_proposal": {
+    "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/canonical-operation-r1/OPERATION-PROPOSAL.json",
+    "sha256": "0444c71390309b41f19fb910d1bbcbea15d4767e39ec8911773403fe292bd1a9"
+  },
+  "original_binding": {
+    "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/canonical-operation-r1/INPUT-BINDING.json",
+    "sha256": "b0277b0b4d056d5184fc3e247a530f07aa442ca8f44a10a1adc5ddd7ace1af63"
+  },
+  "successor_binding": {
+    "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/canonical-source-rebinding-r2/INPUT-BINDING.json",
+    "sha256": "491200af944b843883bec326861ed3cb6e1311904d584d893b0f5631eecf5460"
+  },
+  "source_ledger": {
+    "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-record-correction-r1/accepted-first-scalar-r1/SOURCE.json",
+    "sha256": "ba5bec02c6912ad4e2dcafcba18f6746852bdbd66687fd784b6af86b380f2bdc"
+  },
+  "source_delta": {
+    "browser_tests/test_dossier.py": {
+      "before": "2912d949c90395251180f1442fb486046686938a3150eb23f783d59eedcb0f97",
+      "after": "4f7118b28616fd0e4dba18b26ce5136c905f49995db8d61c5695e482ee5d79c0"
+    },
+    "src/ior_mvp/static/css/dossier.css": {
+      "before": "d124607ce4466fad488678c33aacffd248b198f77d7a9b1097ccf39d9fc63b13",
+      "after": "440b06e0a743deb8d44645fef6e4916b27a003946b926c69e4485b398d74b6ea"
+    }
+  },
+  "visual_source_delta": {
+    "src/ior_mvp/static/css/dossier.css": {
+      "before": "d124607ce4466fad488678c33aacffd248b198f77d7a9b1097ccf39d9fc63b13",
+      "after": "440b06e0a743deb8d44645fef6e4916b27a003946b926c69e4485b398d74b6ea"
+    }
+  },
+  "counts": {
+    "source": 1759,
+    "visual_sources": 109,
+    "graph_inputs": 230,
+    "indexes": 44,
+    "baseline_files": 130,
+    "baseline_images": 128,
+    "fonts": 2,
+    "supplemental_sources": 6
+  },
+  "invariants_rehashed": {
+    "full_live_and_frozen_source_equal": true,
+    "source_pathset_equal": true,
+    "graph_inputs_unchanged": true,
+    "all44_indexes_unchanged": true,
+    "all130_baselines_and_preimages_unchanged": true,
+    "all128_dimensions_modes_unchanged": true,
+    "fonts_and_supplemental_sources_unchanged": true
+  },
+  "method_unchanged": {
+    "capture_command": "/home/barami/.local/bin/uv run --locked --extra dev --extra e2e python scripts/run_visual_baseline_container.py --image sha256:938b534c8bac0f80012299fc0bba33c00d29f2ade02416bbc1df9d9c028f8112 --mode update --change-ref S19-BILINGUAL-DOSSIER-1",
+    "capture_command_sha256": "af0543fc14904f58592a176a5a53c1eac976d93dbce3c208fe1eb2486fb4bf64",
+    "proposal_override": "Only OPERATION-PROPOSAL.input_binding resolves to the SHA-bound successor INPUT-BINDING; every capture method/scope/stop condition stays unchanged.",
+    "producer_image_id": "sha256:938b534c8bac0f80012299fc0bba33c00d29f2ade02416bbc1df9d9c028f8112",
+    "scope_identical_to_original_binding": true,
+    "codec_script_sha256": "eef1c23ad2f7f5582a91e515155f22e0e5efa53eca5fa799c39853116c8f0c5c",
+    "codec_command_only_difference": "Replace readonly /binding.json host source with successor INPUT-BINDING path; all other argv and stdin bytes unchanged.",
+    "codec_command": [
+      "docker",
+      "run",
+      "--rm",
+      "-i",
+      "--network=none",
+      "--user",
+      "1000:1000",
+      "--workdir",
+      "/workspace",
+      "--env",
+      "HOME=/tmp",
+      "--env",
+      "PYTHONDONTWRITEBYTECODE=1",
+      "--env",
+      "PYTHONPATH=/workspace/src:/workspace",
+      "--mount",
+      "type=bind,src=/home/barami/projects/ior-worktrees/s19/src,dst=/workspace/src,readonly",
+      "--mount",
+      "type=bind,src=/home/barami/projects/ior-worktrees/s19/config,dst=/workspace/config,readonly",
+      "--mount",
+      "type=bind,src=/home/barami/projects/ior-worktrees/s19/data,dst=/workspace/data,readonly",
+      "--mount",
+      "type=bind,src=/home/barami/projects/ior-worktrees/s19/docs/authority,dst=/workspace/docs/authority,readonly",
+      "--mount",
+      "type=bind,src=/home/barami/projects/ior-worktrees/s19/browser_tests,dst=/workspace/browser_tests,readonly",
+      "--mount",
+      "type=bind,src=/home/barami/projects/ior-worktrees/s19/scripts,dst=/workspace/scripts,readonly",
+      "--mount",
+      "type=bind,src=/home/barami/projects/ior-worktrees/s19/pyproject.toml,dst=/workspace/pyproject.toml,readonly",
+      "--mount",
+      "type=bind,src=/home/barami/projects/ior-worktrees/s19/uv.lock,dst=/workspace/uv.lock,readonly",
+      "--mount",
+      "type=bind,src=/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/canonical-operation-r1/preimages/v0.3.0,dst=/old,readonly",
+      "--mount",
+      "type=bind,src=/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/canonical-source-rebinding-r2/INPUT-BINDING.json,dst=/binding.json,readonly",
+      "--mount",
+      "type=bind,src=/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-canonical-r1,dst=/evidence",
+      "sha256:938b534c8bac0f80012299fc0bba33c00d29f2ade02416bbc1df9d9c028f8112",
+      "python",
+      "-"
+    ],
+    "codec_stdin_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/canonical-operation-r1/codec-pixel-check.py"
+  },
+  "gates_remaining": [
+    "Actual running r3 fullfunctional exit0 and result binding",
+    "Actual same-source complete44 strict/raster/manual independent acceptance using successor bfa13f1a",
+    "Independent rebinding review and coordinator single capture allocation",
+    "Immediate preflight; all16 actual bounds callsites and128 codec/manual/R1/pin/exactcandidate gates unchanged"
+  ],
+  "no_operations": "Only read-only hash/discovery/image-metadata checks and external record writes. No capture/codec/graph/source/index/service action; current authorized functional producer continues separately.",
+  "sanad": "Direct current hashes/discovery/decode/image-ID checks and named accepted prior method; no future run outcome assumed.",
+  "muhasabah": "PASS bounded source rebinding; previous packet immutable, currentfullfunctional/final44/canonical remain pending.",
+  "previous_rebinding": {
+    "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/canonical-source-rebinding-r1/REBINDING.json",
+    "sha256": "200c5c2ebe8c9fb3c38fa1edd397947d9c22613c4703891b950f1f57412d0d76"
+  }
+}

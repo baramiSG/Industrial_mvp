@@ -21,6 +21,7 @@ from .config import (
 from .data_repository import RepositoryError
 from .decision_engine import analyze, list_opportunities
 from .dossier import build_dossier, render_dossier_html
+from .dossier_validation import DossierIntegrityError
 from .evidence import EvidenceIntegrityError
 from .executive.api import router as executive_router
 from .genui import build_ui_manifest
@@ -153,12 +154,22 @@ def ui_manifest(
     return build_ui_manifest(_safe_analysis(opportunity_id, mode))
 
 
+def _safe_dossier(opportunity_id: str, mode: str) -> dict:
+    analysis = _safe_analysis(opportunity_id, mode)
+    try:
+        return build_dossier(analysis)
+    except DossierIntegrityError as exc:
+        raise HTTPException(status_code=422, detail={
+            "code": "DOSSIER_INTEGRITY_ERROR", "message": str(exc),
+        }) from exc
+
+
 @app.get("/api/opportunities/{opportunity_id}/dossier")
 def dossier(
     opportunity_id: str,
     mode: Literal["public", "simulated"] = Query(default="public"),
 ) -> dict:
-    return build_dossier(_safe_analysis(opportunity_id, mode))
+    return _safe_dossier(opportunity_id, mode)
 
 
 @app.get("/api/opportunities/{opportunity_id}/dossier.html", response_class=HTMLResponse)
@@ -167,7 +178,7 @@ def dossier_html(
     mode: Literal["public", "simulated"] = Query(default="public"),
     locale: Literal["en", "ar"] = Query(default="en"),
 ) -> HTMLResponse:
-    dossier_value = build_dossier(_safe_analysis(opportunity_id, mode))
+    dossier_value = _safe_dossier(opportunity_id, mode)
     return HTMLResponse(
         render_dossier_html(dossier_value, locale=locale)
     )

@@ -88,6 +88,7 @@ def test_keyboard_tab_order_reaches_every_interactive_control_with_visible_focus
         "claim:metric.concentration",
         "claim:step.SIMULATED_EVIDENCE.simulated" if mode == "simulated" else "claim:metric.product_specification",
         "claim:step.INTERVENTION.simulated" if mode == "simulated" else "claim:metric.generic_capacity",
+        "id:trade-data-summary",
         *(f"claim:rule.{rule}" for rule in ("R0", "R1-F", "R1-D", "R2", "R3", "R4-F", "R4-D", "R5", "R6", "R7", "R8", "R9-S", "R10", "R11", "R12")),
         *(("claim:decision.simulated",) * 4 if mode == "simulated" else ()),
         "id:evidence-scroll-region",

@@ -1,0 +1,185 @@
+{
+  "reference_rows": [
+    {
+      "table": "exclusions",
+      "code": "EX-01_HETEROGENEOUS_RESIDUAL",
+      "prefix": "The commercial product cannot be separated from a highly heterogeneous residual code and no product-level evidence is available.",
+      "prefixBottom": 6424.015625,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-TINPLATE-001::hard_exclusion_inputs",
+          "href": "#evidence-SYN-MINISTRY-TINPLATE-001::hard_exclusion_inputs",
+          "top": 6424.890625,
+          "bottom": 6443.890625
+        }
+      ]
+    },
+    {
+      "table": "exclusions",
+      "code": "EX-02_MARKET_BELOW_MES",
+      "prefix": "The sustainable downside market is below minimum efficient scale and no credible export contract exists.",
+      "prefixBottom": 6497.953125,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-TINPLATE-001::hard_exclusion_inputs",
+          "href": "#evidence-SYN-MINISTRY-TINPLATE-001::hard_exclusion_inputs",
+          "top": 6498.828125,
+          "bottom": 6517.828125
+        }
+      ]
+    },
+    {
+      "table": "exclusions",
+      "code": "EX-03_UNSATISFIABLE_HARD_GATE",
+      "prefix": "A legal, safety, environmental, IP or customer-qualification hard gate cannot be satisfied.",
+      "prefixBottom": 6571.890625,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-TINPLATE-001::hard_exclusion_inputs",
+          "href": "#evidence-SYN-MINISTRY-TINPLATE-001::hard_exclusion_inputs",
+          "top": 6572.765625,
+          "bottom": 6591.765625
+        }
+      ]
+    },
+    {
+      "table": "exclusions",
+      "code": "EX-04_IDLE_EQUIVALENT_CAPACITY",
+      "prefix": "Domestic production meets the required specification with material idle capacity and no binding market failure is evidenced.",
+      "prefixBottom": 6645.828125,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-TINPLATE-001::hard_exclusion_inputs",
+          "href": "#evidence-SYN-MINISTRY-TINPLATE-001::hard_exclusion_inputs",
+          "top": 6646.703125,
+          "bottom": 6665.703125
+        }
+      ]
+    },
+    {
+      "table": "exclusions",
+      "code": "EX-05_TRANSITORY_OR_MEASUREMENT",
+      "prefix": "The apparent gap is dominated by re-export, one-off project demand, temporary price arbitrage or classification discontinuity.",
+      "prefixBottom": 6719.765625,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-TINPLATE-001::hard_exclusion_inputs",
+          "href": "#evidence-SYN-MINISTRY-TINPLATE-001::hard_exclusion_inputs",
+          "top": 6720.640625,
+          "bottom": 6739.640625
+        }
+      ]
+    },
+    {
+      "table": "exclusions",
+      "code": "EX-06_REDUNDANCY_OR_CROWD_OUT",
+      "prefix": "The intervention would create unacceptable redundant capacity or crowd out a more efficient incumbent.",
+      "prefixBottom": 6793.703125,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-TINPLATE-001::hard_exclusion_inputs",
+          "href": "#evidence-SYN-MINISTRY-TINPLATE-001::hard_exclusion_inputs",
+          "top": 6794.578125,
+          "bottom": 6813.578125
+        }
+      ]
+    },
+    {
+      "table": "rejection-conditions",
+      "code": "hard_exclusion",
+      "prefix": "HARD_EXCLUSION_NOT_SATISFIED",
+      "prefixBottom": 6937.546875,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-TINPLATE-001::hard_exclusion_inputs",
+          "href": "#evidence-SYN-MINISTRY-TINPLATE-001::hard_exclusion_inputs",
+          "top": 6937.546875,
+          "bottom": 6956.546875
+        }
+      ]
+    },
+    {
+      "table": "rejection-conditions",
+      "code": "false_or_measurement_gap",
+      "prefix": "FALSE_OR_MEASUREMENT_NOT_ESTABLISHED",
+      "prefixBottom": 6991.609375,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-TINPLATE-001::hard_exclusion_inputs",
+          "href": "#evidence-SYN-MINISTRY-TINPLATE-001::hard_exclusion_inputs",
+          "top": 6991.609375,
+          "bottom": 7010.609375
+        }
+      ]
+    },
+    {
+      "table": "rejection-conditions",
+      "code": "equivalent_idle_qualified_supply",
+      "prefix": "EQUIVALENT_QUALIFIED_SUPPLY_NOT_ESTABLISHED",
+      "prefixBottom": 7045.671875,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-TINPLATE-001::demand",
+          "href": "#evidence-SYN-MINISTRY-TINPLATE-001::demand",
+          "top": 7045.671875,
+          "bottom": 7064.671875
+        },
+        {
+          "text": "SYN-MINISTRY-TINPLATE-001::equivalence",
+          "href": "#evidence-SYN-MINISTRY-TINPLATE-001::equivalence",
+          "top": 7065.546875,
+          "bottom": 7084.546875
+        }
+      ]
+    },
+    {
+      "table": "rejection-conditions",
+      "code": "uneconomic_at_efficient_scale",
+      "prefix": "ECONOMIC_ROUTE_EXISTS",
+      "prefixBottom": 7119.609375,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-TINPLATE-001::route_evidence",
+          "href": "#evidence-SYN-MINISTRY-TINPLATE-001::route_evidence",
+          "top": 7119.609375,
+          "bottom": 7138.609375
+        }
+      ]
+    },
+    {
+      "table": "rejection-conditions",
+      "code": "structural_overcapacity",
+      "prefix": "STRUCTURAL_OVERCAPACITY_NOT_ESTABLISHED",
+      "prefixBottom": 7173.671875,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-TINPLATE-001::hard_exclusion_inputs",
+          "href": "#evidence-SYN-MINISTRY-TINPLATE-001::hard_exclusion_inputs",
+          "top": 7173.671875,
+          "bottom": 7192.671875
+        }
+      ]
+    },
+    {
+      "table": "rejection-conditions",
+      "code": "generic_capacity_contradicted",
+      "prefix": "GENERIC_CAPACITY_NOT_CONTRADICTED",
+      "prefixBottom": 7227.734375,
+      "references": [
+        {
+          "text": "P-COMTRADE-721012-X",
+          "href": "#evidence-P-COMTRADE-721012-X",
+          "top": 7227.734375,
+          "bottom": 7246.734375
+        }
+      ]
+    }
+  ],
+  "nested_record_pages": [
+    {
+      "page": 23,
+      "first_fact_present": true
+    }
+  ],
+  "failures": []
+}

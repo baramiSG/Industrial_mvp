@@ -1,0 +1,67 @@
+FF.......F.                                                              [100%]
+=================================== FAILURES ===================================
+_ test_supply_section_keeps_complete_observed_producer_facts_and_signals[SAU-H0-390210] _
+
+case = 'SAU-H0-390210'
+
+    @pytest.mark.parametrize('case',CASES)
+    def test_supply_section_keeps_complete_observed_producer_facts_and_signals(case):
+        analysis=analyze(case,'public')
+        for locale in ('en','ar'):
+            html=render_dossier_html(build_dossier(analysis),locale)
+            supply=html.split('<section id="dossier-supply"',1)[1].split('</section>',1)[0]
+            text=''.join(Document(supply).text)
+            for row in analysis['domestic_capability']['producer_evidence']:
+                for key in ('public_note','portfolio','process_family','nameplate_source_evidence_id'):
+                    value=row.get(key)
+>                   if isinstance(value,str) and value!='UNAVAILABLE':assert value in text,(case,key)
+                                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E                   AssertionError: ('SAU-H0-390210', 'portfolio')
+E                   assert 'homo, random and impact products and compounds' in ' class="dossier-section">Domestic supply and qualified capacitySupply conclusionPublic producer observations; namepla...stablished by the supplied evidence.ktQualified available supplyUnavailableNot established by the supplied evidence.kt'
+
+tests/test_dossier_projection.py:191: AssertionError
+_ test_supply_section_keeps_complete_observed_producer_facts_and_signals[SAU-H0-721049] _
+
+case = 'SAU-H0-721049'
+
+    @pytest.mark.parametrize('case',CASES)
+    def test_supply_section_keeps_complete_observed_producer_facts_and_signals(case):
+        analysis=analyze(case,'public')
+        for locale in ('en','ar'):
+            html=render_dossier_html(build_dossier(analysis),locale)
+            supply=html.split('<section id="dossier-supply"',1)[1].split('</section>',1)[0]
+            text=''.join(Document(supply).text)
+            for row in analysis['domestic_capability']['producer_evidence']:
+                for key in ('public_note','portfolio','process_family','nameplate_source_evidence_id'):
+                    value=row.get(key)
+>                   if isinstance(value,str) and value!='UNAVAILABLE':assert value in text,(case,key)
+                                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E                   AssertionError: ('SAU-H0-721049', 'process_family')
+E                   assert 'coated_steel' in ' class="dossier-section">Domestic supply and qualified capacitySupply conclusionPublic producer observations; namepla...stablished by the supplied evidence.ktQualified available supplyUnavailableNot established by the supplied evidence.kt'
+
+tests/test_dossier_projection.py:191: AssertionError
+_ test_supply_section_keeps_complete_observed_producer_facts_and_signals[SAU-H6-760429] _
+
+case = 'SAU-H6-760429'
+
+    @pytest.mark.parametrize('case',CASES)
+    def test_supply_section_keeps_complete_observed_producer_facts_and_signals(case):
+        analysis=analyze(case,'public')
+        for locale in ('en','ar'):
+            html=render_dossier_html(build_dossier(analysis),locale)
+            supply=html.split('<section id="dossier-supply"',1)[1].split('</section>',1)[0]
+            text=''.join(Document(supply).text)
+            for row in analysis['domestic_capability']['producer_evidence']:
+                for key in ('public_note','portfolio','process_family','nameplate_source_evidence_id'):
+                    value=row.get(key)
+>                   if isinstance(value,str) and value!='UNAVAILABLE':assert value in text,(case,key)
+                                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E                   AssertionError: ('SAU-H6-760429', 'process_family')
+E                   assert 'fabricated_aluminium' in ' class="dossier-section">Domestic supply and qualified capacitySupply conclusionPublic producer observations; namepla...stablished by the supplied evidence.ktQualified available supplyUnavailableNot established by the supplied evidence.kt'
+
+tests/test_dossier_projection.py:191: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_dossier_projection.py::test_supply_section_keeps_complete_observed_producer_facts_and_signals[SAU-H0-390210]
+FAILED tests/test_dossier_projection.py::test_supply_section_keeps_complete_observed_producer_facts_and_signals[SAU-H0-721049]
+FAILED tests/test_dossier_projection.py::test_supply_section_keeps_complete_observed_producer_facts_and_signals[SAU-H6-760429]
+3 failed, 8 passed, 134 deselected in 0.20s

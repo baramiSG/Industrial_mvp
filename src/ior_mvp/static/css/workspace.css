@@ -523,3 +523,12 @@ select {
   flex-wrap: wrap;
   gap: var(--space-10);
 }
+
+.trade-chart .trade-scale-note { color: var(--color-muted); margin-block: var(--space-14); }
+.trade-chart details { border-block-start: var(--border-hairline) solid var(--color-line); padding-block-start: var(--space-12); }
+.trade-chart summary { cursor: pointer; color: var(--color-accent-text); font-weight: var(--font-weight-medium); }
+.trade-chart summary:focus-visible { outline: var(--border-accent) solid var(--color-info); outline-offset: var(--space-3); }
+.trade-chart table { inline-size: var(--size-full); border-collapse: collapse; table-layout: fixed; margin-block: var(--space-14); }
+.trade-chart caption { text-align: start; font-weight: var(--font-weight-medium); margin-block-end: var(--space-8); }
+.trade-chart th, .trade-chart td { padding: var(--space-8); text-align: start; border-block-end: var(--border-hairline) solid var(--color-line); overflow-wrap: anywhere; }
+.trade-chart .technical-token { direction: ltr; unicode-bidi: isolate; }

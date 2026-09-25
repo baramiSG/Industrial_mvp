@@ -1,0 +1,1842 @@
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF [ 65%]
+FFFFFFFFFFFFFFFF...........FFFFFFFFFFF                                   [100%]
+=================================== FAILURES ===================================
+_ test_supply_is_named_structured_content_without_raw_dictionary[public-SAU-H0-390210] _
+
+case = 'SAU-H0-390210', mode = 'public'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public', 'simulated'])
+    def test_supply_is_named_structured_content_without_raw_dictionary(case, mode):
+        analysis=analyze(case, mode)
+        markup=render_dossier_html(build_dossier(analysis), 'ar')
+        document=Document(markup)
+>       assert not any(tag=='code' and "source-language-island" in attrs.get('class','') for tag,attrs in document.tags), 'Original raw supply dictionary is not a document table'
+E       AssertionError: Original raw supply dictionary is not a document table
+E       assert not True
+E        +  where True = any(<generator object test_supply_is_named_structured_content_without_raw_dictionary.<locals>.<genexpr> at 0x78321f7d8f40>)
+
+tests/test_dossier_projection.py:31: AssertionError
+_ test_supply_is_named_structured_content_without_raw_dictionary[public-SAU-H0-721049] _
+
+case = 'SAU-H0-721049', mode = 'public'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public', 'simulated'])
+    def test_supply_is_named_structured_content_without_raw_dictionary(case, mode):
+        analysis=analyze(case, mode)
+        markup=render_dossier_html(build_dossier(analysis), 'ar')
+        document=Document(markup)
+>       assert not any(tag=='code' and "source-language-island" in attrs.get('class','') for tag,attrs in document.tags), 'Original raw supply dictionary is not a document table'
+E       AssertionError: Original raw supply dictionary is not a document table
+E       assert not True
+E        +  where True = any(<generator object test_supply_is_named_structured_content_without_raw_dictionary.<locals>.<genexpr> at 0x78321f7d9f30>)
+
+tests/test_dossier_projection.py:31: AssertionError
+_ test_supply_is_named_structured_content_without_raw_dictionary[public-SAU-H6-294110] _
+
+case = 'SAU-H6-294110', mode = 'public'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public', 'simulated'])
+    def test_supply_is_named_structured_content_without_raw_dictionary(case, mode):
+        analysis=analyze(case, mode)
+        markup=render_dossier_html(build_dossier(analysis), 'ar')
+        document=Document(markup)
+>       assert not any(tag=='code' and "source-language-island" in attrs.get('class','') for tag,attrs in document.tags), 'Original raw supply dictionary is not a document table'
+E       AssertionError: Original raw supply dictionary is not a document table
+E       assert not True
+E        +  where True = any(<generator object test_supply_is_named_structured_content_without_raw_dictionary.<locals>.<genexpr> at 0x78321f7db010>)
+
+tests/test_dossier_projection.py:31: AssertionError
+_ test_supply_is_named_structured_content_without_raw_dictionary[public-SAU-H6-294120] _
+
+case = 'SAU-H6-294120', mode = 'public'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public', 'simulated'])
+    def test_supply_is_named_structured_content_without_raw_dictionary(case, mode):
+        analysis=analyze(case, mode)
+        markup=render_dossier_html(build_dossier(analysis), 'ar')
+        document=Document(markup)
+>       assert not any(tag=='code' and "source-language-island" in attrs.get('class','') for tag,attrs in document.tags), 'Original raw supply dictionary is not a document table'
+E       AssertionError: Original raw supply dictionary is not a document table
+E       assert not True
+E        +  where True = any(<generator object test_supply_is_named_structured_content_without_raw_dictionary.<locals>.<genexpr> at 0x78321f1b0220>)
+
+tests/test_dossier_projection.py:31: AssertionError
+_ test_supply_is_named_structured_content_without_raw_dictionary[public-SAU-H6-310430] _
+
+case = 'SAU-H6-310430', mode = 'public'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public', 'simulated'])
+    def test_supply_is_named_structured_content_without_raw_dictionary(case, mode):
+        analysis=analyze(case, mode)
+        markup=render_dossier_html(build_dossier(analysis), 'ar')
+        document=Document(markup)
+>       assert not any(tag=='code' and "source-language-island" in attrs.get('class','') for tag,attrs in document.tags), 'Original raw supply dictionary is not a document table'
+E       AssertionError: Original raw supply dictionary is not a document table
+E       assert not True
+E        +  where True = any(<generator object test_supply_is_named_structured_content_without_raw_dictionary.<locals>.<genexpr> at 0x78321f1b1300>)
+
+tests/test_dossier_projection.py:31: AssertionError
+_ test_supply_is_named_structured_content_without_raw_dictionary[public-SAU-H6-310510] _
+
+case = 'SAU-H6-310510', mode = 'public'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public', 'simulated'])
+    def test_supply_is_named_structured_content_without_raw_dictionary(case, mode):
+        analysis=analyze(case, mode)
+        markup=render_dossier_html(build_dossier(analysis), 'ar')
+        document=Document(markup)
+>       assert not any(tag=='code' and "source-language-island" in attrs.get('class','') for tag,attrs in document.tags), 'Original raw supply dictionary is not a document table'
+E       AssertionError: Original raw supply dictionary is not a document table
+E       assert not True
+E        +  where True = any(<generator object test_supply_is_named_structured_content_without_raw_dictionary.<locals>.<genexpr> at 0x78321f1b2200>)
+
+tests/test_dossier_projection.py:31: AssertionError
+_ test_supply_is_named_structured_content_without_raw_dictionary[public-SAU-H6-392010] _
+
+case = 'SAU-H6-392010', mode = 'public'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public', 'simulated'])
+    def test_supply_is_named_structured_content_without_raw_dictionary(case, mode):
+        analysis=analyze(case, mode)
+        markup=render_dossier_html(build_dossier(analysis), 'ar')
+        document=Document(markup)
+>       assert not any(tag=='code' and "source-language-island" in attrs.get('class','') for tag,attrs in document.tags), 'Original raw supply dictionary is not a document table'
+E       AssertionError: Original raw supply dictionary is not a document table
+E       assert not True
+E        +  where True = any(<generator object test_supply_is_named_structured_content_without_raw_dictionary.<locals>.<genexpr> at 0x78321f1b33d0>)
+
+tests/test_dossier_projection.py:31: AssertionError
+_ test_supply_is_named_structured_content_without_raw_dictionary[public-SAU-H6-721012] _
+
+case = 'SAU-H6-721012', mode = 'public'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public', 'simulated'])
+    def test_supply_is_named_structured_content_without_raw_dictionary(case, mode):
+        analysis=analyze(case, mode)
+        markup=render_dossier_html(build_dossier(analysis), 'ar')
+        document=Document(markup)
+>       assert not any(tag=='code' and "source-language-island" in attrs.get('class','') for tag,attrs in document.tags), 'Original raw supply dictionary is not a document table'
+E       AssertionError: Original raw supply dictionary is not a document table
+E       assert not True
+E        +  where True = any(<generator object test_supply_is_named_structured_content_without_raw_dictionary.<locals>.<genexpr> at 0x78321f7db970>)
+
+tests/test_dossier_projection.py:31: AssertionError
+_ test_supply_is_named_structured_content_without_raw_dictionary[public-SAU-H6-721061] _
+
+case = 'SAU-H6-721061', mode = 'public'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public', 'simulated'])
+    def test_supply_is_named_structured_content_without_raw_dictionary(case, mode):
+        analysis=analyze(case, mode)
+        markup=render_dossier_html(build_dossier(analysis), 'ar')
+        document=Document(markup)
+>       assert not any(tag=='code' and "source-language-island" in attrs.get('class','') for tag,attrs in document.tags), 'Original raw supply dictionary is not a document table'
+E       AssertionError: Original raw supply dictionary is not a document table
+E       assert not True
+E        +  where True = any(<generator object test_supply_is_named_structured_content_without_raw_dictionary.<locals>.<genexpr> at 0x78321f7da5c0>)
+
+tests/test_dossier_projection.py:31: AssertionError
+_ test_supply_is_named_structured_content_without_raw_dictionary[public-SAU-H6-760429] _
+
+case = 'SAU-H6-760429', mode = 'public'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public', 'simulated'])
+    def test_supply_is_named_structured_content_without_raw_dictionary(case, mode):
+        analysis=analyze(case, mode)
+        markup=render_dossier_html(build_dossier(analysis), 'ar')
+        document=Document(markup)
+>       assert not any(tag=='code' and "source-language-island" in attrs.get('class','') for tag,attrs in document.tags), 'Original raw supply dictionary is not a document table'
+E       AssertionError: Original raw supply dictionary is not a document table
+E       assert not True
+E        +  where True = any(<generator object test_supply_is_named_structured_content_without_raw_dictionary.<locals>.<genexpr> at 0x78321f7d9b70>)
+
+tests/test_dossier_projection.py:31: AssertionError
+_ test_supply_is_named_structured_content_without_raw_dictionary[public-SAU-H6-760711] _
+
+case = 'SAU-H6-760711', mode = 'public'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public', 'simulated'])
+    def test_supply_is_named_structured_content_without_raw_dictionary(case, mode):
+        analysis=analyze(case, mode)
+        markup=render_dossier_html(build_dossier(analysis), 'ar')
+        document=Document(markup)
+>       assert not any(tag=='code' and "source-language-island" in attrs.get('class','') for tag,attrs in document.tags), 'Original raw supply dictionary is not a document table'
+E       AssertionError: Original raw supply dictionary is not a document table
+E       assert not True
+E        +  where True = any(<generator object test_supply_is_named_structured_content_without_raw_dictionary.<locals>.<genexpr> at 0x78321f1b27a0>)
+
+tests/test_dossier_projection.py:31: AssertionError
+_ test_supply_is_named_structured_content_without_raw_dictionary[simulated-SAU-H0-390210] _
+
+case = 'SAU-H0-390210', mode = 'simulated'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public', 'simulated'])
+    def test_supply_is_named_structured_content_without_raw_dictionary(case, mode):
+        analysis=analyze(case, mode)
+        markup=render_dossier_html(build_dossier(analysis), 'ar')
+        document=Document(markup)
+>       assert not any(tag=='code' and "source-language-island" in attrs.get('class','') for tag,attrs in document.tags), 'Original raw supply dictionary is not a document table'
+E       AssertionError: Original raw supply dictionary is not a document table
+E       assert not True
+E        +  where True = any(<generator object test_supply_is_named_structured_content_without_raw_dictionary.<locals>.<genexpr> at 0x78321f1b0d60>)
+
+tests/test_dossier_projection.py:31: AssertionError
+_ test_supply_is_named_structured_content_without_raw_dictionary[simulated-SAU-H0-721049] _
+
+case = 'SAU-H0-721049', mode = 'simulated'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public', 'simulated'])
+    def test_supply_is_named_structured_content_without_raw_dictionary(case, mode):
+        analysis=analyze(case, mode)
+        markup=render_dossier_html(build_dossier(analysis), 'ar')
+        document=Document(markup)
+>       assert not any(tag=='code' and "source-language-island" in attrs.get('class','') for tag,attrs in document.tags), 'Original raw supply dictionary is not a document table'
+E       AssertionError: Original raw supply dictionary is not a document table
+E       assert not True
+E        +  where True = any(<generator object test_supply_is_named_structured_content_without_raw_dictionary.<locals>.<genexpr> at 0x78321f418400>)
+
+tests/test_dossier_projection.py:31: AssertionError
+_ test_supply_is_named_structured_content_without_raw_dictionary[simulated-SAU-H6-294110] _
+
+case = 'SAU-H6-294110', mode = 'simulated'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public', 'simulated'])
+    def test_supply_is_named_structured_content_without_raw_dictionary(case, mode):
+        analysis=analyze(case, mode)
+        markup=render_dossier_html(build_dossier(analysis), 'ar')
+        document=Document(markup)
+>       assert not any(tag=='code' and "source-language-island" in attrs.get('class','') for tag,attrs in document.tags), 'Original raw supply dictionary is not a document table'
+E       AssertionError: Original raw supply dictionary is not a document table
+E       assert not True
+E        +  where True = any(<generator object test_supply_is_named_structured_content_without_raw_dictionary.<locals>.<genexpr> at 0x78321f419210>)
+
+tests/test_dossier_projection.py:31: AssertionError
+_ test_supply_is_named_structured_content_without_raw_dictionary[simulated-SAU-H6-294120] _
+
+case = 'SAU-H6-294120', mode = 'simulated'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public', 'simulated'])
+    def test_supply_is_named_structured_content_without_raw_dictionary(case, mode):
+        analysis=analyze(case, mode)
+        markup=render_dossier_html(build_dossier(analysis), 'ar')
+        document=Document(markup)
+>       assert not any(tag=='code' and "source-language-island" in attrs.get('class','') for tag,attrs in document.tags), 'Original raw supply dictionary is not a document table'
+E       AssertionError: Original raw supply dictionary is not a document table
+E       assert not True
+E        +  where True = any(<generator object test_supply_is_named_structured_content_without_raw_dictionary.<locals>.<genexpr> at 0x78321f41a020>)
+
+tests/test_dossier_projection.py:31: AssertionError
+_ test_supply_is_named_structured_content_without_raw_dictionary[simulated-SAU-H6-310430] _
+
+case = 'SAU-H6-310430', mode = 'simulated'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public', 'simulated'])
+    def test_supply_is_named_structured_content_without_raw_dictionary(case, mode):
+        analysis=analyze(case, mode)
+        markup=render_dossier_html(build_dossier(analysis), 'ar')
+        document=Document(markup)
+>       assert not any(tag=='code' and "source-language-island" in attrs.get('class','') for tag,attrs in document.tags), 'Original raw supply dictionary is not a document table'
+E       AssertionError: Original raw supply dictionary is not a document table
+E       assert not True
+E        +  where True = any(<generator object test_supply_is_named_structured_content_without_raw_dictionary.<locals>.<genexpr> at 0x78321f41ae30>)
+
+tests/test_dossier_projection.py:31: AssertionError
+_ test_supply_is_named_structured_content_without_raw_dictionary[simulated-SAU-H6-310510] _
+
+case = 'SAU-H6-310510', mode = 'simulated'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public', 'simulated'])
+    def test_supply_is_named_structured_content_without_raw_dictionary(case, mode):
+        analysis=analyze(case, mode)
+        markup=render_dossier_html(build_dossier(analysis), 'ar')
+        document=Document(markup)
+>       assert not any(tag=='code' and "source-language-island" in attrs.get('class','') for tag,attrs in document.tags), 'Original raw supply dictionary is not a document table'
+E       AssertionError: Original raw supply dictionary is not a document table
+E       assert not True
+E        +  where True = any(<generator object test_supply_is_named_structured_content_without_raw_dictionary.<locals>.<genexpr> at 0x78321f41bc40>)
+
+tests/test_dossier_projection.py:31: AssertionError
+_ test_supply_is_named_structured_content_without_raw_dictionary[simulated-SAU-H6-392010] _
+
+case = 'SAU-H6-392010', mode = 'simulated'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public', 'simulated'])
+    def test_supply_is_named_structured_content_without_raw_dictionary(case, mode):
+        analysis=analyze(case, mode)
+        markup=render_dossier_html(build_dossier(analysis), 'ar')
+        document=Document(markup)
+>       assert not any(tag=='code' and "source-language-island" in attrs.get('class','') for tag,attrs in document.tags), 'Original raw supply dictionary is not a document table'
+E       AssertionError: Original raw supply dictionary is not a document table
+E       assert not True
+E        +  where True = any(<generator object test_supply_is_named_structured_content_without_raw_dictionary.<locals>.<genexpr> at 0x78321eff4a90>)
+
+tests/test_dossier_projection.py:31: AssertionError
+_ test_supply_is_named_structured_content_without_raw_dictionary[simulated-SAU-H6-721012] _
+
+case = 'SAU-H6-721012', mode = 'simulated'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public', 'simulated'])
+    def test_supply_is_named_structured_content_without_raw_dictionary(case, mode):
+        analysis=analyze(case, mode)
+        markup=render_dossier_html(build_dossier(analysis), 'ar')
+        document=Document(markup)
+>       assert not any(tag=='code' and "source-language-island" in attrs.get('class','') for tag,attrs in document.tags), 'Original raw supply dictionary is not a document table'
+E       AssertionError: Original raw supply dictionary is not a document table
+E       assert not True
+E        +  where True = any(<generator object test_supply_is_named_structured_content_without_raw_dictionary.<locals>.<genexpr> at 0x78321f1b1f30>)
+
+tests/test_dossier_projection.py:31: AssertionError
+_ test_supply_is_named_structured_content_without_raw_dictionary[simulated-SAU-H6-721061] _
+
+case = 'SAU-H6-721061', mode = 'simulated'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public', 'simulated'])
+    def test_supply_is_named_structured_content_without_raw_dictionary(case, mode):
+        analysis=analyze(case, mode)
+        markup=render_dossier_html(build_dossier(analysis), 'ar')
+        document=Document(markup)
+>       assert not any(tag=='code' and "source-language-island" in attrs.get('class','') for tag,attrs in document.tags), 'Original raw supply dictionary is not a document table'
+E       AssertionError: Original raw supply dictionary is not a document table
+E       assert not True
+E        +  where True = any(<generator object test_supply_is_named_structured_content_without_raw_dictionary.<locals>.<genexpr> at 0x78321f1b23e0>)
+
+tests/test_dossier_projection.py:31: AssertionError
+_ test_supply_is_named_structured_content_without_raw_dictionary[simulated-SAU-H6-760429] _
+
+case = 'SAU-H6-760429', mode = 'simulated'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public', 'simulated'])
+    def test_supply_is_named_structured_content_without_raw_dictionary(case, mode):
+        analysis=analyze(case, mode)
+        markup=render_dossier_html(build_dossier(analysis), 'ar')
+        document=Document(markup)
+>       assert not any(tag=='code' and "source-language-island" in attrs.get('class','') for tag,attrs in document.tags), 'Original raw supply dictionary is not a document table'
+E       AssertionError: Original raw supply dictionary is not a document table
+E       assert not True
+E        +  where True = any(<generator object test_supply_is_named_structured_content_without_raw_dictionary.<locals>.<genexpr> at 0x78321f81f1f0>)
+
+tests/test_dossier_projection.py:31: AssertionError
+_ test_supply_is_named_structured_content_without_raw_dictionary[simulated-SAU-H6-760711] _
+
+case = 'SAU-H6-760711', mode = 'simulated'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public', 'simulated'])
+    def test_supply_is_named_structured_content_without_raw_dictionary(case, mode):
+        analysis=analyze(case, mode)
+        markup=render_dossier_html(build_dossier(analysis), 'ar')
+        document=Document(markup)
+>       assert not any(tag=='code' and "source-language-island" in attrs.get('class','') for tag,attrs in document.tags), 'Original raw supply dictionary is not a document table'
+E       AssertionError: Original raw supply dictionary is not a document table
+E       assert not True
+E        +  where True = any(<generator object test_supply_is_named_structured_content_without_raw_dictionary.<locals>.<genexpr> at 0x78321f7d9990>)
+
+tests/test_dossier_projection.py:31: AssertionError
+__ test_arabic_ledger_renders_localized_name_result_and_effect[SAU-H0-390210] __
+
+case = 'SAU-H0-390210'
+
+    @pytest.mark.parametrize('case', CASES)
+    def test_arabic_ledger_renders_localized_name_result_and_effect(case):
+        analysis=analyze(case, 'simulated')
+        text=''.join(Document(render_dossier_html(build_dossier(analysis),'ar')).text)
+        for rule in analysis['rules']:
+            for field in ['name','result','decision_effect']:
+>               assert rule['localized']['ar'][field]['text'] in text, (rule['rule_id'],field)
+E               AssertionError: ('R0', 'name')
+E               assert 'بوابة الهوية' in '\n\n\n\n\nملف القرار — رفض\n@font-face {\n  font-family: "IOR Noto Sans";\n  font-style: normal;\n  font-display: blo...b21fb2cc547c8ac4ce9المشروع 0.2.0 · الحدود 1.3.0 · ملفات القطاعات 1.1.0 · سياسة الأدلة 1.4.0 · نصوص الواجهة 1.6.0\n\n\n'
+
+tests/test_dossier_projection.py:42: AssertionError
+__ test_arabic_ledger_renders_localized_name_result_and_effect[SAU-H0-721049] __
+
+case = 'SAU-H0-721049'
+
+    @pytest.mark.parametrize('case', CASES)
+    def test_arabic_ledger_renders_localized_name_result_and_effect(case):
+        analysis=analyze(case, 'simulated')
+        text=''.join(Document(render_dossier_html(build_dossier(analysis),'ar')).text)
+        for rule in analysis['rules']:
+            for field in ['name','result','decision_effect']:
+>               assert rule['localized']['ar'][field]['text'] in text, (rule['rule_id'],field)
+E               AssertionError: ('R0', 'name')
+E               assert 'بوابة الهوية' in '\n\n\n\n\nملف القرار — تقدم\n@font-face {\n  font-family: "IOR Noto Sans";\n  font-style: normal;\n  font-display: bl...b21fb2cc547c8ac4ce9المشروع 0.2.0 · الحدود 1.3.0 · ملفات القطاعات 1.1.0 · سياسة الأدلة 1.4.0 · نصوص الواجهة 1.6.0\n\n\n'
+
+tests/test_dossier_projection.py:42: AssertionError
+__ test_arabic_ledger_renders_localized_name_result_and_effect[SAU-H6-294110] __
+
+case = 'SAU-H6-294110'
+
+    @pytest.mark.parametrize('case', CASES)
+    def test_arabic_ledger_renders_localized_name_result_and_effect(case):
+        analysis=analyze(case, 'simulated')
+        text=''.join(Document(render_dossier_html(build_dossier(analysis),'ar')).text)
+        for rule in analysis['rules']:
+            for field in ['name','result','decision_effect']:
+>               assert rule['localized']['ar'][field]['text'] in text, (rule['rule_id'],field)
+E               AssertionError: ('R0', 'name')
+E               assert 'بوابة الهوية' in '\n\n\n\n\nملف القرار — تقدم\n@font-face {\n  font-family: "IOR Noto Sans";\n  font-style: normal;\n  font-display: bl...b21fb2cc547c8ac4ce9المشروع 0.2.0 · الحدود 1.3.0 · ملفات القطاعات 1.1.0 · سياسة الأدلة 1.4.0 · نصوص الواجهة 1.6.0\n\n\n'
+
+tests/test_dossier_projection.py:42: AssertionError
+__ test_arabic_ledger_renders_localized_name_result_and_effect[SAU-H6-294120] __
+
+case = 'SAU-H6-294120'
+
+    @pytest.mark.parametrize('case', CASES)
+    def test_arabic_ledger_renders_localized_name_result_and_effect(case):
+        analysis=analyze(case, 'simulated')
+        text=''.join(Document(render_dossier_html(build_dossier(analysis),'ar')).text)
+        for rule in analysis['rules']:
+            for field in ['name','result','decision_effect']:
+>               assert rule['localized']['ar'][field]['text'] in text, (rule['rule_id'],field)
+E               AssertionError: ('R0', 'name')
+E               assert 'بوابة الهوية' in '\n\n\n\n\nملف القرار — رفض\n@font-face {\n  font-family: "IOR Noto Sans";\n  font-style: normal;\n  font-display: blo...b21fb2cc547c8ac4ce9المشروع 0.2.0 · الحدود 1.3.0 · ملفات القطاعات 1.1.0 · سياسة الأدلة 1.4.0 · نصوص الواجهة 1.6.0\n\n\n'
+
+tests/test_dossier_projection.py:42: AssertionError
+__ test_arabic_ledger_renders_localized_name_result_and_effect[SAU-H6-310430] __
+
+case = 'SAU-H6-310430'
+
+    @pytest.mark.parametrize('case', CASES)
+    def test_arabic_ledger_renders_localized_name_result_and_effect(case):
+        analysis=analyze(case, 'simulated')
+        text=''.join(Document(render_dossier_html(build_dossier(analysis),'ar')).text)
+        for rule in analysis['rules']:
+            for field in ['name','result','decision_effect']:
+>               assert rule['localized']['ar'][field]['text'] in text, (rule['rule_id'],field)
+E               AssertionError: ('R0', 'name')
+E               assert 'بوابة الهوية' in '\n\n\n\n\nملف القرار — تقدم\n@font-face {\n  font-family: "IOR Noto Sans";\n  font-style: normal;\n  font-display: bl...b21fb2cc547c8ac4ce9المشروع 0.2.0 · الحدود 1.3.0 · ملفات القطاعات 1.1.0 · سياسة الأدلة 1.4.0 · نصوص الواجهة 1.6.0\n\n\n'
+
+tests/test_dossier_projection.py:42: AssertionError
+__ test_arabic_ledger_renders_localized_name_result_and_effect[SAU-H6-310510] __
+
+case = 'SAU-H6-310510'
+
+    @pytest.mark.parametrize('case', CASES)
+    def test_arabic_ledger_renders_localized_name_result_and_effect(case):
+        analysis=analyze(case, 'simulated')
+        text=''.join(Document(render_dossier_html(build_dossier(analysis),'ar')).text)
+        for rule in analysis['rules']:
+            for field in ['name','result','decision_effect']:
+>               assert rule['localized']['ar'][field]['text'] in text, (rule['rule_id'],field)
+E               AssertionError: ('R0', 'name')
+E               assert 'بوابة الهوية' in '\n\n\n\n\nملف القرار — رفض\n@font-face {\n  font-family: "IOR Noto Sans";\n  font-style: normal;\n  font-display: blo...b21fb2cc547c8ac4ce9المشروع 0.2.0 · الحدود 1.3.0 · ملفات القطاعات 1.1.0 · سياسة الأدلة 1.4.0 · نصوص الواجهة 1.6.0\n\n\n'
+
+tests/test_dossier_projection.py:42: AssertionError
+__ test_arabic_ledger_renders_localized_name_result_and_effect[SAU-H6-392010] __
+
+case = 'SAU-H6-392010'
+
+    @pytest.mark.parametrize('case', CASES)
+    def test_arabic_ledger_renders_localized_name_result_and_effect(case):
+        analysis=analyze(case, 'simulated')
+        text=''.join(Document(render_dossier_html(build_dossier(analysis),'ar')).text)
+        for rule in analysis['rules']:
+            for field in ['name','result','decision_effect']:
+>               assert rule['localized']['ar'][field]['text'] in text, (rule['rule_id'],field)
+E               AssertionError: ('R0', 'name')
+E               assert 'بوابة الهوية' in '\n\n\n\n\nملف القرار — رفض\n@font-face {\n  font-family: "IOR Noto Sans";\n  font-style: normal;\n  font-display: blo...b21fb2cc547c8ac4ce9المشروع 0.2.0 · الحدود 1.3.0 · ملفات القطاعات 1.1.0 · سياسة الأدلة 1.4.0 · نصوص الواجهة 1.6.0\n\n\n'
+
+tests/test_dossier_projection.py:42: AssertionError
+__ test_arabic_ledger_renders_localized_name_result_and_effect[SAU-H6-721012] __
+
+case = 'SAU-H6-721012'
+
+    @pytest.mark.parametrize('case', CASES)
+    def test_arabic_ledger_renders_localized_name_result_and_effect(case):
+        analysis=analyze(case, 'simulated')
+        text=''.join(Document(render_dossier_html(build_dossier(analysis),'ar')).text)
+        for rule in analysis['rules']:
+            for field in ['name','result','decision_effect']:
+>               assert rule['localized']['ar'][field]['text'] in text, (rule['rule_id'],field)
+E               AssertionError: ('R0', 'name')
+E               assert 'بوابة الهوية' in '\n\n\n\n\nملف القرار — تقدم\n@font-face {\n  font-family: "IOR Noto Sans";\n  font-style: normal;\n  font-display: bl...b21fb2cc547c8ac4ce9المشروع 0.2.0 · الحدود 1.3.0 · ملفات القطاعات 1.1.0 · سياسة الأدلة 1.4.0 · نصوص الواجهة 1.6.0\n\n\n'
+
+tests/test_dossier_projection.py:42: AssertionError
+__ test_arabic_ledger_renders_localized_name_result_and_effect[SAU-H6-721061] __
+
+case = 'SAU-H6-721061'
+
+    @pytest.mark.parametrize('case', CASES)
+    def test_arabic_ledger_renders_localized_name_result_and_effect(case):
+        analysis=analyze(case, 'simulated')
+        text=''.join(Document(render_dossier_html(build_dossier(analysis),'ar')).text)
+        for rule in analysis['rules']:
+            for field in ['name','result','decision_effect']:
+>               assert rule['localized']['ar'][field]['text'] in text, (rule['rule_id'],field)
+E               AssertionError: ('R0', 'name')
+E               assert 'بوابة الهوية' in '\n\n\n\n\nملف القرار — تقدم\n@font-face {\n  font-family: "IOR Noto Sans";\n  font-style: normal;\n  font-display: bl...b21fb2cc547c8ac4ce9المشروع 0.2.0 · الحدود 1.3.0 · ملفات القطاعات 1.1.0 · سياسة الأدلة 1.4.0 · نصوص الواجهة 1.6.0\n\n\n'
+
+tests/test_dossier_projection.py:42: AssertionError
+__ test_arabic_ledger_renders_localized_name_result_and_effect[SAU-H6-760429] __
+
+case = 'SAU-H6-760429'
+
+    @pytest.mark.parametrize('case', CASES)
+    def test_arabic_ledger_renders_localized_name_result_and_effect(case):
+        analysis=analyze(case, 'simulated')
+        text=''.join(Document(render_dossier_html(build_dossier(analysis),'ar')).text)
+        for rule in analysis['rules']:
+            for field in ['name','result','decision_effect']:
+>               assert rule['localized']['ar'][field]['text'] in text, (rule['rule_id'],field)
+E               AssertionError: ('R0', 'name')
+E               assert 'بوابة الهوية' in '\n\n\n\n\nملف القرار — تقدم\n@font-face {\n  font-family: "IOR Noto Sans";\n  font-style: normal;\n  font-display: bl...b21fb2cc547c8ac4ce9المشروع 0.2.0 · الحدود 1.3.0 · ملفات القطاعات 1.1.0 · سياسة الأدلة 1.4.0 · نصوص الواجهة 1.6.0\n\n\n'
+
+tests/test_dossier_projection.py:42: AssertionError
+__ test_arabic_ledger_renders_localized_name_result_and_effect[SAU-H6-760711] __
+
+case = 'SAU-H6-760711'
+
+    @pytest.mark.parametrize('case', CASES)
+    def test_arabic_ledger_renders_localized_name_result_and_effect(case):
+        analysis=analyze(case, 'simulated')
+        text=''.join(Document(render_dossier_html(build_dossier(analysis),'ar')).text)
+        for rule in analysis['rules']:
+            for field in ['name','result','decision_effect']:
+>               assert rule['localized']['ar'][field]['text'] in text, (rule['rule_id'],field)
+E               AssertionError: ('R0', 'name')
+E               assert 'بوابة الهوية' in '\n\n\n\n\nملف القرار — تقدم\n@font-face {\n  font-family: "IOR Noto Sans";\n  font-style: normal;\n  font-display: bl...b21fb2cc547c8ac4ce9المشروع 0.2.0 · الحدود 1.3.0 · ملفات القطاعات 1.1.0 · سياسة الأدلة 1.4.0 · نصوص الواجهة 1.6.0\n\n\n'
+
+tests/test_dossier_projection.py:42: AssertionError
+_ test_all_methodology_sections_exist_even_without_evidence[public-SAU-H0-390210] _
+
+case = 'SAU-H0-390210', mode = 'public'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public','simulated'])
+    def test_all_methodology_sections_exist_even_without_evidence(case,mode):
+        document=Document(render_dossier_html(build_dossier(analyze(case,mode)),'en'))
+        ids={attrs.get('id') for tag,attrs in document.tags if tag=='section'}
+>       assert {'dossier-'+section for section in SECTIONS} <= ids
+E       AssertionError: assert {'dossier-aut...onomics', ...} <= {None}
+E         
+E         Extra items in the left set:
+E         'dossier-identity'
+E         'dossier-ledger'
+E         'dossier-supply'
+E         'dossier-authority'
+E         'dossier-competition'...
+E         
+E         ...Full output truncated (6 lines hidden), use '-vv' to show
+
+tests/test_dossier_projection.py:49: AssertionError
+_ test_all_methodology_sections_exist_even_without_evidence[public-SAU-H0-721049] _
+
+case = 'SAU-H0-721049', mode = 'public'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public','simulated'])
+    def test_all_methodology_sections_exist_even_without_evidence(case,mode):
+        document=Document(render_dossier_html(build_dossier(analyze(case,mode)),'en'))
+        ids={attrs.get('id') for tag,attrs in document.tags if tag=='section'}
+>       assert {'dossier-'+section for section in SECTIONS} <= ids
+E       AssertionError: assert {'dossier-aut...onomics', ...} <= {None}
+E         
+E         Extra items in the left set:
+E         'dossier-identity'
+E         'dossier-ledger'
+E         'dossier-supply'
+E         'dossier-authority'
+E         'dossier-competition'...
+E         
+E         ...Full output truncated (6 lines hidden), use '-vv' to show
+
+tests/test_dossier_projection.py:49: AssertionError
+_ test_all_methodology_sections_exist_even_without_evidence[public-SAU-H6-294110] _
+
+case = 'SAU-H6-294110', mode = 'public'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public','simulated'])
+    def test_all_methodology_sections_exist_even_without_evidence(case,mode):
+        document=Document(render_dossier_html(build_dossier(analyze(case,mode)),'en'))
+        ids={attrs.get('id') for tag,attrs in document.tags if tag=='section'}
+>       assert {'dossier-'+section for section in SECTIONS} <= ids
+E       AssertionError: assert {'dossier-aut...onomics', ...} <= {None}
+E         
+E         Extra items in the left set:
+E         'dossier-identity'
+E         'dossier-ledger'
+E         'dossier-supply'
+E         'dossier-authority'
+E         'dossier-competition'...
+E         
+E         ...Full output truncated (6 lines hidden), use '-vv' to show
+
+tests/test_dossier_projection.py:49: AssertionError
+_ test_all_methodology_sections_exist_even_without_evidence[public-SAU-H6-294120] _
+
+case = 'SAU-H6-294120', mode = 'public'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public','simulated'])
+    def test_all_methodology_sections_exist_even_without_evidence(case,mode):
+        document=Document(render_dossier_html(build_dossier(analyze(case,mode)),'en'))
+        ids={attrs.get('id') for tag,attrs in document.tags if tag=='section'}
+>       assert {'dossier-'+section for section in SECTIONS} <= ids
+E       AssertionError: assert {'dossier-aut...onomics', ...} <= {None}
+E         
+E         Extra items in the left set:
+E         'dossier-identity'
+E         'dossier-ledger'
+E         'dossier-supply'
+E         'dossier-authority'
+E         'dossier-competition'...
+E         
+E         ...Full output truncated (6 lines hidden), use '-vv' to show
+
+tests/test_dossier_projection.py:49: AssertionError
+_ test_all_methodology_sections_exist_even_without_evidence[public-SAU-H6-310430] _
+
+case = 'SAU-H6-310430', mode = 'public'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public','simulated'])
+    def test_all_methodology_sections_exist_even_without_evidence(case,mode):
+        document=Document(render_dossier_html(build_dossier(analyze(case,mode)),'en'))
+        ids={attrs.get('id') for tag,attrs in document.tags if tag=='section'}
+>       assert {'dossier-'+section for section in SECTIONS} <= ids
+E       AssertionError: assert {'dossier-aut...onomics', ...} <= {None}
+E         
+E         Extra items in the left set:
+E         'dossier-identity'
+E         'dossier-ledger'
+E         'dossier-supply'
+E         'dossier-authority'
+E         'dossier-competition'...
+E         
+E         ...Full output truncated (6 lines hidden), use '-vv' to show
+
+tests/test_dossier_projection.py:49: AssertionError
+_ test_all_methodology_sections_exist_even_without_evidence[public-SAU-H6-310510] _
+
+case = 'SAU-H6-310510', mode = 'public'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public','simulated'])
+    def test_all_methodology_sections_exist_even_without_evidence(case,mode):
+        document=Document(render_dossier_html(build_dossier(analyze(case,mode)),'en'))
+        ids={attrs.get('id') for tag,attrs in document.tags if tag=='section'}
+>       assert {'dossier-'+section for section in SECTIONS} <= ids
+E       AssertionError: assert {'dossier-aut...onomics', ...} <= {None}
+E         
+E         Extra items in the left set:
+E         'dossier-identity'
+E         'dossier-ledger'
+E         'dossier-supply'
+E         'dossier-authority'
+E         'dossier-competition'...
+E         
+E         ...Full output truncated (6 lines hidden), use '-vv' to show
+
+tests/test_dossier_projection.py:49: AssertionError
+_ test_all_methodology_sections_exist_even_without_evidence[public-SAU-H6-392010] _
+
+case = 'SAU-H6-392010', mode = 'public'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public','simulated'])
+    def test_all_methodology_sections_exist_even_without_evidence(case,mode):
+        document=Document(render_dossier_html(build_dossier(analyze(case,mode)),'en'))
+        ids={attrs.get('id') for tag,attrs in document.tags if tag=='section'}
+>       assert {'dossier-'+section for section in SECTIONS} <= ids
+E       AssertionError: assert {'dossier-aut...onomics', ...} <= {None}
+E         
+E         Extra items in the left set:
+E         'dossier-identity'
+E         'dossier-ledger'
+E         'dossier-supply'
+E         'dossier-authority'
+E         'dossier-competition'...
+E         
+E         ...Full output truncated (6 lines hidden), use '-vv' to show
+
+tests/test_dossier_projection.py:49: AssertionError
+_ test_all_methodology_sections_exist_even_without_evidence[public-SAU-H6-721012] _
+
+case = 'SAU-H6-721012', mode = 'public'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public','simulated'])
+    def test_all_methodology_sections_exist_even_without_evidence(case,mode):
+        document=Document(render_dossier_html(build_dossier(analyze(case,mode)),'en'))
+        ids={attrs.get('id') for tag,attrs in document.tags if tag=='section'}
+>       assert {'dossier-'+section for section in SECTIONS} <= ids
+E       AssertionError: assert {'dossier-aut...onomics', ...} <= {None}
+E         
+E         Extra items in the left set:
+E         'dossier-identity'
+E         'dossier-ledger'
+E         'dossier-supply'
+E         'dossier-authority'
+E         'dossier-competition'...
+E         
+E         ...Full output truncated (6 lines hidden), use '-vv' to show
+
+tests/test_dossier_projection.py:49: AssertionError
+_ test_all_methodology_sections_exist_even_without_evidence[public-SAU-H6-721061] _
+
+case = 'SAU-H6-721061', mode = 'public'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public','simulated'])
+    def test_all_methodology_sections_exist_even_without_evidence(case,mode):
+        document=Document(render_dossier_html(build_dossier(analyze(case,mode)),'en'))
+        ids={attrs.get('id') for tag,attrs in document.tags if tag=='section'}
+>       assert {'dossier-'+section for section in SECTIONS} <= ids
+E       AssertionError: assert {'dossier-aut...onomics', ...} <= {None}
+E         
+E         Extra items in the left set:
+E         'dossier-identity'
+E         'dossier-ledger'
+E         'dossier-supply'
+E         'dossier-authority'
+E         'dossier-competition'...
+E         
+E         ...Full output truncated (6 lines hidden), use '-vv' to show
+
+tests/test_dossier_projection.py:49: AssertionError
+_ test_all_methodology_sections_exist_even_without_evidence[public-SAU-H6-760429] _
+
+case = 'SAU-H6-760429', mode = 'public'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public','simulated'])
+    def test_all_methodology_sections_exist_even_without_evidence(case,mode):
+        document=Document(render_dossier_html(build_dossier(analyze(case,mode)),'en'))
+        ids={attrs.get('id') for tag,attrs in document.tags if tag=='section'}
+>       assert {'dossier-'+section for section in SECTIONS} <= ids
+E       AssertionError: assert {'dossier-aut...onomics', ...} <= {None}
+E         
+E         Extra items in the left set:
+E         'dossier-identity'
+E         'dossier-ledger'
+E         'dossier-supply'
+E         'dossier-authority'
+E         'dossier-competition'...
+E         
+E         ...Full output truncated (6 lines hidden), use '-vv' to show
+
+tests/test_dossier_projection.py:49: AssertionError
+_ test_all_methodology_sections_exist_even_without_evidence[public-SAU-H6-760711] _
+
+case = 'SAU-H6-760711', mode = 'public'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public','simulated'])
+    def test_all_methodology_sections_exist_even_without_evidence(case,mode):
+        document=Document(render_dossier_html(build_dossier(analyze(case,mode)),'en'))
+        ids={attrs.get('id') for tag,attrs in document.tags if tag=='section'}
+>       assert {'dossier-'+section for section in SECTIONS} <= ids
+E       AssertionError: assert {'dossier-aut...onomics', ...} <= {None}
+E         
+E         Extra items in the left set:
+E         'dossier-identity'
+E         'dossier-ledger'
+E         'dossier-supply'
+E         'dossier-authority'
+E         'dossier-competition'...
+E         
+E         ...Full output truncated (6 lines hidden), use '-vv' to show
+
+tests/test_dossier_projection.py:49: AssertionError
+_ test_all_methodology_sections_exist_even_without_evidence[simulated-SAU-H0-390210] _
+
+case = 'SAU-H0-390210', mode = 'simulated'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public','simulated'])
+    def test_all_methodology_sections_exist_even_without_evidence(case,mode):
+        document=Document(render_dossier_html(build_dossier(analyze(case,mode)),'en'))
+        ids={attrs.get('id') for tag,attrs in document.tags if tag=='section'}
+>       assert {'dossier-'+section for section in SECTIONS} <= ids
+E       AssertionError: assert {'dossier-aut...onomics', ...} <= {None}
+E         
+E         Extra items in the left set:
+E         'dossier-identity'
+E         'dossier-ledger'
+E         'dossier-supply'
+E         'dossier-authority'
+E         'dossier-competition'...
+E         
+E         ...Full output truncated (6 lines hidden), use '-vv' to show
+
+tests/test_dossier_projection.py:49: AssertionError
+_ test_all_methodology_sections_exist_even_without_evidence[simulated-SAU-H0-721049] _
+
+case = 'SAU-H0-721049', mode = 'simulated'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public','simulated'])
+    def test_all_methodology_sections_exist_even_without_evidence(case,mode):
+        document=Document(render_dossier_html(build_dossier(analyze(case,mode)),'en'))
+        ids={attrs.get('id') for tag,attrs in document.tags if tag=='section'}
+>       assert {'dossier-'+section for section in SECTIONS} <= ids
+E       AssertionError: assert {'dossier-aut...onomics', ...} <= {None}
+E         
+E         Extra items in the left set:
+E         'dossier-identity'
+E         'dossier-ledger'
+E         'dossier-supply'
+E         'dossier-authority'
+E         'dossier-competition'...
+E         
+E         ...Full output truncated (6 lines hidden), use '-vv' to show
+
+tests/test_dossier_projection.py:49: AssertionError
+_ test_all_methodology_sections_exist_even_without_evidence[simulated-SAU-H6-294110] _
+
+case = 'SAU-H6-294110', mode = 'simulated'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public','simulated'])
+    def test_all_methodology_sections_exist_even_without_evidence(case,mode):
+        document=Document(render_dossier_html(build_dossier(analyze(case,mode)),'en'))
+        ids={attrs.get('id') for tag,attrs in document.tags if tag=='section'}
+>       assert {'dossier-'+section for section in SECTIONS} <= ids
+E       AssertionError: assert {'dossier-aut...onomics', ...} <= {None}
+E         
+E         Extra items in the left set:
+E         'dossier-identity'
+E         'dossier-ledger'
+E         'dossier-supply'
+E         'dossier-authority'
+E         'dossier-competition'...
+E         
+E         ...Full output truncated (6 lines hidden), use '-vv' to show
+
+tests/test_dossier_projection.py:49: AssertionError
+_ test_all_methodology_sections_exist_even_without_evidence[simulated-SAU-H6-294120] _
+
+case = 'SAU-H6-294120', mode = 'simulated'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public','simulated'])
+    def test_all_methodology_sections_exist_even_without_evidence(case,mode):
+        document=Document(render_dossier_html(build_dossier(analyze(case,mode)),'en'))
+        ids={attrs.get('id') for tag,attrs in document.tags if tag=='section'}
+>       assert {'dossier-'+section for section in SECTIONS} <= ids
+E       AssertionError: assert {'dossier-aut...onomics', ...} <= {None}
+E         
+E         Extra items in the left set:
+E         'dossier-identity'
+E         'dossier-ledger'
+E         'dossier-supply'
+E         'dossier-authority'
+E         'dossier-competition'...
+E         
+E         ...Full output truncated (6 lines hidden), use '-vv' to show
+
+tests/test_dossier_projection.py:49: AssertionError
+_ test_all_methodology_sections_exist_even_without_evidence[simulated-SAU-H6-310430] _
+
+case = 'SAU-H6-310430', mode = 'simulated'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public','simulated'])
+    def test_all_methodology_sections_exist_even_without_evidence(case,mode):
+        document=Document(render_dossier_html(build_dossier(analyze(case,mode)),'en'))
+        ids={attrs.get('id') for tag,attrs in document.tags if tag=='section'}
+>       assert {'dossier-'+section for section in SECTIONS} <= ids
+E       AssertionError: assert {'dossier-aut...onomics', ...} <= {None}
+E         
+E         Extra items in the left set:
+E         'dossier-identity'
+E         'dossier-ledger'
+E         'dossier-supply'
+E         'dossier-authority'
+E         'dossier-competition'...
+E         
+E         ...Full output truncated (6 lines hidden), use '-vv' to show
+
+tests/test_dossier_projection.py:49: AssertionError
+_ test_all_methodology_sections_exist_even_without_evidence[simulated-SAU-H6-310510] _
+
+case = 'SAU-H6-310510', mode = 'simulated'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public','simulated'])
+    def test_all_methodology_sections_exist_even_without_evidence(case,mode):
+        document=Document(render_dossier_html(build_dossier(analyze(case,mode)),'en'))
+        ids={attrs.get('id') for tag,attrs in document.tags if tag=='section'}
+>       assert {'dossier-'+section for section in SECTIONS} <= ids
+E       AssertionError: assert {'dossier-aut...onomics', ...} <= {None}
+E         
+E         Extra items in the left set:
+E         'dossier-identity'
+E         'dossier-ledger'
+E         'dossier-supply'
+E         'dossier-authority'
+E         'dossier-competition'...
+E         
+E         ...Full output truncated (6 lines hidden), use '-vv' to show
+
+tests/test_dossier_projection.py:49: AssertionError
+_ test_all_methodology_sections_exist_even_without_evidence[simulated-SAU-H6-392010] _
+
+case = 'SAU-H6-392010', mode = 'simulated'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public','simulated'])
+    def test_all_methodology_sections_exist_even_without_evidence(case,mode):
+        document=Document(render_dossier_html(build_dossier(analyze(case,mode)),'en'))
+        ids={attrs.get('id') for tag,attrs in document.tags if tag=='section'}
+>       assert {'dossier-'+section for section in SECTIONS} <= ids
+E       AssertionError: assert {'dossier-aut...onomics', ...} <= {None}
+E         
+E         Extra items in the left set:
+E         'dossier-identity'
+E         'dossier-ledger'
+E         'dossier-supply'
+E         'dossier-authority'
+E         'dossier-competition'...
+E         
+E         ...Full output truncated (6 lines hidden), use '-vv' to show
+
+tests/test_dossier_projection.py:49: AssertionError
+_ test_all_methodology_sections_exist_even_without_evidence[simulated-SAU-H6-721012] _
+
+case = 'SAU-H6-721012', mode = 'simulated'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public','simulated'])
+    def test_all_methodology_sections_exist_even_without_evidence(case,mode):
+        document=Document(render_dossier_html(build_dossier(analyze(case,mode)),'en'))
+        ids={attrs.get('id') for tag,attrs in document.tags if tag=='section'}
+>       assert {'dossier-'+section for section in SECTIONS} <= ids
+E       AssertionError: assert {'dossier-aut...onomics', ...} <= {None}
+E         
+E         Extra items in the left set:
+E         'dossier-identity'
+E         'dossier-ledger'
+E         'dossier-supply'
+E         'dossier-authority'
+E         'dossier-competition'...
+E         
+E         ...Full output truncated (6 lines hidden), use '-vv' to show
+
+tests/test_dossier_projection.py:49: AssertionError
+_ test_all_methodology_sections_exist_even_without_evidence[simulated-SAU-H6-721061] _
+
+case = 'SAU-H6-721061', mode = 'simulated'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public','simulated'])
+    def test_all_methodology_sections_exist_even_without_evidence(case,mode):
+        document=Document(render_dossier_html(build_dossier(analyze(case,mode)),'en'))
+        ids={attrs.get('id') for tag,attrs in document.tags if tag=='section'}
+>       assert {'dossier-'+section for section in SECTIONS} <= ids
+E       AssertionError: assert {'dossier-aut...onomics', ...} <= {None}
+E         
+E         Extra items in the left set:
+E         'dossier-identity'
+E         'dossier-ledger'
+E         'dossier-supply'
+E         'dossier-authority'
+E         'dossier-competition'...
+E         
+E         ...Full output truncated (6 lines hidden), use '-vv' to show
+
+tests/test_dossier_projection.py:49: AssertionError
+_ test_all_methodology_sections_exist_even_without_evidence[simulated-SAU-H6-760429] _
+
+case = 'SAU-H6-760429', mode = 'simulated'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public','simulated'])
+    def test_all_methodology_sections_exist_even_without_evidence(case,mode):
+        document=Document(render_dossier_html(build_dossier(analyze(case,mode)),'en'))
+        ids={attrs.get('id') for tag,attrs in document.tags if tag=='section'}
+>       assert {'dossier-'+section for section in SECTIONS} <= ids
+E       AssertionError: assert {'dossier-aut...onomics', ...} <= {None}
+E         
+E         Extra items in the left set:
+E         'dossier-identity'
+E         'dossier-ledger'
+E         'dossier-supply'
+E         'dossier-authority'
+E         'dossier-competition'...
+E         
+E         ...Full output truncated (6 lines hidden), use '-vv' to show
+
+tests/test_dossier_projection.py:49: AssertionError
+_ test_all_methodology_sections_exist_even_without_evidence[simulated-SAU-H6-760711] _
+
+case = 'SAU-H6-760711', mode = 'simulated'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public','simulated'])
+    def test_all_methodology_sections_exist_even_without_evidence(case,mode):
+        document=Document(render_dossier_html(build_dossier(analyze(case,mode)),'en'))
+        ids={attrs.get('id') for tag,attrs in document.tags if tag=='section'}
+>       assert {'dossier-'+section for section in SECTIONS} <= ids
+E       AssertionError: assert {'dossier-aut...onomics', ...} <= {None}
+E         
+E         Extra items in the left set:
+E         'dossier-identity'
+E         'dossier-ledger'
+E         'dossier-supply'
+E         'dossier-authority'
+E         'dossier-competition'...
+E         
+E         ...Full output truncated (6 lines hidden), use '-vv' to show
+
+tests/test_dossier_projection.py:49: AssertionError
+_ test_simulated_export_keeps_complete_visible_public_conclusion[SAU-H0-390210] _
+
+case = 'SAU-H0-390210'
+
+    @pytest.mark.parametrize('case',CASES)
+    def test_simulated_export_keeps_complete_visible_public_conclusion(case):
+        analysis=analyze(case,'simulated');dossier=build_dossier(analysis)
+>       assert dossier.get('public_decision') == analysis['real_decision']
+E       AssertionError: assert None == {'advance_gate': {'blocked_classes': ['D', 'E'], 'blocked_fields': [{'evidence_class': 'C', 'field': 'product_identity...'conditions': ['Only a named specialty grade/application exception may re-enter INVESTIGATE.'], 'confidence': 'C', ...}
+E        +  where None = <built-in method get of dict object at 0x78321f225a40>('public_decision')
+E        +    where <built-in method get of dict object at 0x78321f225a40> = {'advance_gate': {'basis': 'CLASS_IF_CONFIRMED', 'blocked_classes': ['D', 'E'], 'blocked_fields': [], 'blocked_resolut...warning': True}, 'conditions': ['Reopen only for a named specialty-grade exception supported by buyer evidence.'], ...}.get
+
+tests/test_dossier_projection.py:54: AssertionError
+_ test_simulated_export_keeps_complete_visible_public_conclusion[SAU-H0-721049] _
+
+case = 'SAU-H0-721049'
+
+    @pytest.mark.parametrize('case',CASES)
+    def test_simulated_export_keeps_complete_visible_public_conclusion(case):
+        analysis=analyze(case,'simulated');dossier=build_dossier(analysis)
+>       assert dossier.get('public_decision') == analysis['real_decision']
+E       AssertionError: assert None == {'advance_gate': {'blocked_classes': ['D', 'E'], 'blocked_fields': [{'evidence_class': 'C', 'field': 'product_identity...cial support recommendation before effective capacity and target specification are resolved.'], 'confidence': 'C', ...}
+E        +  where None = <built-in method get of dict object at 0x78321f343f80>('public_decision')
+E        +    where <built-in method get of dict object at 0x78321f343f80> = {'advance_gate': {'basis': 'CLASS_IF_CONFIRMED', 'blocked_classes': ['D', 'E'], 'blocked_fields': [], 'blocked_resolut...ental qualified capacity within 18 months.', 'Support is milestone-based, sunset-bound and subject to clawback.'], ...}.get
+
+tests/test_dossier_projection.py:54: AssertionError
+_ test_simulated_export_keeps_complete_visible_public_conclusion[SAU-H6-294110] _
+
+case = 'SAU-H6-294110'
+
+    @pytest.mark.parametrize('case',CASES)
+    def test_simulated_export_keeps_complete_visible_public_conclusion(case):
+        analysis=analyze(case,'simulated');dossier=build_dossier(analysis)
+>       assert dossier.get('public_decision') == analysis['real_decision']
+E       AssertionError: assert None == {'advance_gate': {'blocked_classes': ['D', 'E'], 'blocked_fields': [{'evidence_class': 'B', 'field': 'product_identity...cial support recommendation before effective capacity and target specification are resolved.'], 'confidence': 'C', ...}
+E        +  where None = <built-in method get of dict object at 0x78321f094c00>('public_decision')
+E        +    where <built-in method get of dict object at 0x78321f094c00> = {'advance_gate': {'basis': 'CLASS_IF_CONFIRMED', 'blocked_classes': ['D', 'E'], 'blocked_fields': [], 'blocked_resolut...istrative barrier.', 'Prove the barrier is removable and the intervention changes timing or scale additionally.'], ...}.get
+
+tests/test_dossier_projection.py:54: AssertionError
+_ test_simulated_export_keeps_complete_visible_public_conclusion[SAU-H6-294120] _
+
+case = 'SAU-H6-294120'
+
+    @pytest.mark.parametrize('case',CASES)
+    def test_simulated_export_keeps_complete_visible_public_conclusion(case):
+        analysis=analyze(case,'simulated');dossier=build_dossier(analysis)
+>       assert dossier.get('public_decision') == analysis['real_decision']
+E       AssertionError: assert None == {'advance_gate': {'blocked_classes': ['D', 'E'], 'blocked_fields': [{'evidence_class': 'B', 'field': 'product_identity...cial support recommendation before effective capacity and target specification are resolved.'], 'confidence': 'C', ...}
+E        +  where None = <built-in method get of dict object at 0x78321f6e7c00>('public_decision')
+E        +    where <built-in method get of dict object at 0x78321f6e7c00> = {'advance_gate': {'basis': 'CLASS_IF_CONFIRMED', 'blocked_classes': ['D', 'E'], 'blocked_fields': [{'evidence_class': ...['Reopen only with evidence that the environmental-effluent gate is satisfiable within regulatory requirements.'], ...}.get
+
+tests/test_dossier_projection.py:54: AssertionError
+_ test_simulated_export_keeps_complete_visible_public_conclusion[SAU-H6-310430] _
+
+case = 'SAU-H6-310430'
+
+    @pytest.mark.parametrize('case',CASES)
+    def test_simulated_export_keeps_complete_visible_public_conclusion(case):
+        analysis=analyze(case,'simulated');dossier=build_dossier(analysis)
+>       assert dossier.get('public_decision') == analysis['real_decision']
+E       AssertionError: assert None == {'advance_gate': {'blocked_classes': ['D', 'E'], 'blocked_fields': [{'evidence_class': 'B', 'field': 'product_identity...cial support recommendation before effective capacity and target specification are resolved.'], 'confidence': 'C', ...}
+E        +  where None = <built-in method get of dict object at 0x78321f46b180>('public_decision')
+E        +    where <built-in method get of dict object at 0x78321f46b180> = {'advance_gate': {'basis': 'CLASS_IF_CONFIRMED', 'blocked_classes': ['D', 'E'], 'blocked_fields': [], 'blocked_resolut...e programme.', 'Continue the intervention only while product matching and target-buyer access are demonstrated.'], ...}.get
+
+tests/test_dossier_projection.py:54: AssertionError
+_ test_simulated_export_keeps_complete_visible_public_conclusion[SAU-H6-310510] _
+
+case = 'SAU-H6-310510'
+
+    @pytest.mark.parametrize('case',CASES)
+    def test_simulated_export_keeps_complete_visible_public_conclusion(case):
+        analysis=analyze(case,'simulated');dossier=build_dossier(analysis)
+>       assert dossier.get('public_decision') == analysis['real_decision']
+E       AssertionError: assert None == {'advance_gate': {'blocked_classes': ['D', 'E'], 'blocked_fields': [{'evidence_class': 'B', 'field': 'product_identity...cial support recommendation before effective capacity and target specification are resolved.'], 'confidence': 'C', ...}
+E        +  where None = <built-in method get of dict object at 0x78321f406580>('public_decision')
+E        +    where <built-in method get of dict object at 0x78321f406580> = {'advance_gate': {'basis': 'CLASS_IF_CONFIRMED', 'blocked_classes': ['D', 'E'], 'blocked_fields': [], 'blocked_resolut...nly for a separable commercial fertilizer product supported by product-level specification and demand evidence.'], ...}.get
+
+tests/test_dossier_projection.py:54: AssertionError
+_ test_simulated_export_keeps_complete_visible_public_conclusion[SAU-H6-392010] _
+
+case = 'SAU-H6-392010'
+
+    @pytest.mark.parametrize('case',CASES)
+    def test_simulated_export_keeps_complete_visible_public_conclusion(case):
+        analysis=analyze(case,'simulated');dossier=build_dossier(analysis)
+>       assert dossier.get('public_decision') == analysis['real_decision']
+E       AssertionError: assert None == {'advance_gate': {'blocked_classes': ['D', 'E'], 'blocked_fields': [{'evidence_class': 'B', 'field': 'product_identity...cial support recommendation before effective capacity and target specification are resolved.'], 'confidence': 'C', ...}
+E        +  where None = <built-in method get of dict object at 0x78321f1e5180>('public_decision')
+E        +    where <built-in method get of dict object at 0x78321f1e5180> = {'advance_gate': {'basis': 'CLASS_IF_CONFIRMED', 'blocked_classes': ['D', 'E'], 'blocked_fields': [], 'blocked_resolut...g': True}, 'conditions': ['Reopen only for a named barrier or specialty film grade supported by buyer evidence.'], ...}.get
+
+tests/test_dossier_projection.py:54: AssertionError
+_ test_simulated_export_keeps_complete_visible_public_conclusion[SAU-H6-721012] _
+
+case = 'SAU-H6-721012'
+
+    @pytest.mark.parametrize('case',CASES)
+    def test_simulated_export_keeps_complete_visible_public_conclusion(case):
+        analysis=analyze(case,'simulated');dossier=build_dossier(analysis)
+>       assert dossier.get('public_decision') == analysis['real_decision']
+E       AssertionError: assert None == {'advance_gate': {'blocked_classes': ['D', 'E'], 'blocked_fields': [{'evidence_class': 'B', 'field': 'product_identity...cial support recommendation before effective capacity and target specification are resolved.'], 'confidence': 'C', ...}
+E        +  where None = <built-in method get of dict object at 0x78321f1f17c0>('public_decision')
+E        +    where <built-in method get of dict object at 0x78321f1f17c0> = {'advance_gate': {'basis': 'CLASS_IF_CONFIRMED', 'blocked_classes': ['D', 'E'], 'blocked_fields': [], 'blocked_resolut...nt scale before award.', 'Support is capped at the calculated minimum, milestone-based and subject to clawback.'], ...}.get
+
+tests/test_dossier_projection.py:54: AssertionError
+_ test_simulated_export_keeps_complete_visible_public_conclusion[SAU-H6-721061] _
+
+case = 'SAU-H6-721061'
+
+    @pytest.mark.parametrize('case',CASES)
+    def test_simulated_export_keeps_complete_visible_public_conclusion(case):
+        analysis=analyze(case,'simulated');dossier=build_dossier(analysis)
+>       assert dossier.get('public_decision') == analysis['real_decision']
+E       AssertionError: assert None == {'advance_gate': {'blocked_classes': ['D', 'E'], 'blocked_fields': [{'evidence_class': 'B', 'field': 'product_identity...cial support recommendation before effective capacity and target specification are resolved.'], 'confidence': 'C', ...}
+E        +  where None = <built-in method get of dict object at 0x78321f4ddb00>('public_decision')
+E        +    where <built-in method get of dict object at 0x78321f4ddb00> = {'advance_gate': {'basis': 'CLASS_IF_CONFIRMED', 'blocked_classes': ['D', 'E'], 'blocked_fields': [], 'blocked_resolut...nd first customer acceptance within 12 months.', 'Qualification cost-share is milestone-based and sunset-bound.'], ...}.get
+
+tests/test_dossier_projection.py:54: AssertionError
+_ test_simulated_export_keeps_complete_visible_public_conclusion[SAU-H6-760429] _
+
+case = 'SAU-H6-760429'
+
+    @pytest.mark.parametrize('case',CASES)
+    def test_simulated_export_keeps_complete_visible_public_conclusion(case):
+        analysis=analyze(case,'simulated');dossier=build_dossier(analysis)
+>       assert dossier.get('public_decision') == analysis['real_decision']
+E       AssertionError: assert None == {'advance_gate': {'blocked_classes': ['D', 'E'], 'blocked_fields': [{'evidence_class': 'B', 'field': 'product_identity...cial support recommendation before effective capacity and target specification are resolved.'], 'confidence': 'C', ...}
+E        +  where None = <built-in method get of dict object at 0x78321f08aa80>('public_decision')
+E        +    where <built-in method get of dict object at 0x78321f08aa80> = {'advance_gate': {'basis': 'CLASS_IF_CONFIRMED', 'blocked_classes': ['D', 'E'], 'blocked_fields': [], 'blocked_resolut... dies and qualification.', 'No financial support is granted; the intervention is procurement coordination only.'], ...}.get
+
+tests/test_dossier_projection.py:54: AssertionError
+_ test_simulated_export_keeps_complete_visible_public_conclusion[SAU-H6-760711] _
+
+case = 'SAU-H6-760711'
+
+    @pytest.mark.parametrize('case',CASES)
+    def test_simulated_export_keeps_complete_visible_public_conclusion(case):
+        analysis=analyze(case,'simulated');dossier=build_dossier(analysis)
+>       assert dossier.get('public_decision') == analysis['real_decision']
+E       AssertionError: assert None == {'advance_gate': {'blocked_classes': ['D', 'E'], 'blocked_fields': [{'evidence_class': 'B', 'field': 'product_identity...cial support recommendation before effective capacity and target specification are resolved.'], 'confidence': 'C', ...}
+E        +  where None = <built-in method get of dict object at 0x78321eeedfc0>('public_decision')
+E        +    where <built-in method get of dict object at 0x78321eeedfc0> = {'advance_gate': {'basis': 'CLASS_IF_CONFIRMED', 'blocked_classes': ['D', 'E'], 'blocked_fields': [], 'blocked_resolut...tner and a converter offtake before award.', 'Support is milestone-based, sunset-bound and subject to clawback.'], ...}.get
+
+tests/test_dossier_projection.py:54: AssertionError
+_ test_projection_is_detached_and_preserves_decisions_routes_and_passports[public-SAU-H0-390210] _
+
+case = 'SAU-H0-390210', mode = 'public'
+
+    @pytest.mark.parametrize('case',CASES)
+    @pytest.mark.parametrize('mode',['public','simulated'])
+    def test_projection_is_detached_and_preserves_decisions_routes_and_passports(case,mode):
+        analysis=analyze(case,mode);before=deepcopy(analysis)
+        scenario=get_synthetic_scenario(case);scenario_before=deepcopy(scenario)
+        dossier=build_dossier(analysis)
+>       assert dossier['dossier_version']=='2.0.0'
+E       AssertionError: assert '1.2' == '2.0.0'
+E         
+E         - 2.0.0
+E         + 1.2
+
+tests/test_dossier_projection.py:69: AssertionError
+_ test_projection_is_detached_and_preserves_decisions_routes_and_passports[public-SAU-H0-721049] _
+
+case = 'SAU-H0-721049', mode = 'public'
+
+    @pytest.mark.parametrize('case',CASES)
+    @pytest.mark.parametrize('mode',['public','simulated'])
+    def test_projection_is_detached_and_preserves_decisions_routes_and_passports(case,mode):
+        analysis=analyze(case,mode);before=deepcopy(analysis)
+        scenario=get_synthetic_scenario(case);scenario_before=deepcopy(scenario)
+        dossier=build_dossier(analysis)
+>       assert dossier['dossier_version']=='2.0.0'
+E       AssertionError: assert '1.2' == '2.0.0'
+E         
+E         - 2.0.0
+E         + 1.2
+
+tests/test_dossier_projection.py:69: AssertionError
+_ test_projection_is_detached_and_preserves_decisions_routes_and_passports[public-SAU-H6-294110] _
+
+case = 'SAU-H6-294110', mode = 'public'
+
+    @pytest.mark.parametrize('case',CASES)
+    @pytest.mark.parametrize('mode',['public','simulated'])
+    def test_projection_is_detached_and_preserves_decisions_routes_and_passports(case,mode):
+        analysis=analyze(case,mode);before=deepcopy(analysis)
+        scenario=get_synthetic_scenario(case);scenario_before=deepcopy(scenario)
+        dossier=build_dossier(analysis)
+>       assert dossier['dossier_version']=='2.0.0'
+E       AssertionError: assert '1.3' == '2.0.0'
+E         
+E         - 2.0.0
+E         + 1.3
+
+tests/test_dossier_projection.py:69: AssertionError
+_ test_projection_is_detached_and_preserves_decisions_routes_and_passports[public-SAU-H6-294120] _
+
+case = 'SAU-H6-294120', mode = 'public'
+
+    @pytest.mark.parametrize('case',CASES)
+    @pytest.mark.parametrize('mode',['public','simulated'])
+    def test_projection_is_detached_and_preserves_decisions_routes_and_passports(case,mode):
+        analysis=analyze(case,mode);before=deepcopy(analysis)
+        scenario=get_synthetic_scenario(case);scenario_before=deepcopy(scenario)
+        dossier=build_dossier(analysis)
+>       assert dossier['dossier_version']=='2.0.0'
+E       AssertionError: assert '1.3' == '2.0.0'
+E         
+E         - 2.0.0
+E         + 1.3
+
+tests/test_dossier_projection.py:69: AssertionError
+_ test_projection_is_detached_and_preserves_decisions_routes_and_passports[public-SAU-H6-310430] _
+
+case = 'SAU-H6-310430', mode = 'public'
+
+    @pytest.mark.parametrize('case',CASES)
+    @pytest.mark.parametrize('mode',['public','simulated'])
+    def test_projection_is_detached_and_preserves_decisions_routes_and_passports(case,mode):
+        analysis=analyze(case,mode);before=deepcopy(analysis)
+        scenario=get_synthetic_scenario(case);scenario_before=deepcopy(scenario)
+        dossier=build_dossier(analysis)
+>       assert dossier['dossier_version']=='2.0.0'
+E       AssertionError: assert '1.3' == '2.0.0'
+E         
+E         - 2.0.0
+E         + 1.3
+
+tests/test_dossier_projection.py:69: AssertionError
+_ test_projection_is_detached_and_preserves_decisions_routes_and_passports[public-SAU-H6-310510] _
+
+case = 'SAU-H6-310510', mode = 'public'
+
+    @pytest.mark.parametrize('case',CASES)
+    @pytest.mark.parametrize('mode',['public','simulated'])
+    def test_projection_is_detached_and_preserves_decisions_routes_and_passports(case,mode):
+        analysis=analyze(case,mode);before=deepcopy(analysis)
+        scenario=get_synthetic_scenario(case);scenario_before=deepcopy(scenario)
+        dossier=build_dossier(analysis)
+>       assert dossier['dossier_version']=='2.0.0'
+E       AssertionError: assert '1.3' == '2.0.0'
+E         
+E         - 2.0.0
+E         + 1.3
+
+tests/test_dossier_projection.py:69: AssertionError
+_ test_projection_is_detached_and_preserves_decisions_routes_and_passports[public-SAU-H6-392010] _
+
+case = 'SAU-H6-392010', mode = 'public'
+
+    @pytest.mark.parametrize('case',CASES)
+    @pytest.mark.parametrize('mode',['public','simulated'])
+    def test_projection_is_detached_and_preserves_decisions_routes_and_passports(case,mode):
+        analysis=analyze(case,mode);before=deepcopy(analysis)
+        scenario=get_synthetic_scenario(case);scenario_before=deepcopy(scenario)
+        dossier=build_dossier(analysis)
+>       assert dossier['dossier_version']=='2.0.0'
+E       AssertionError: assert '1.2' == '2.0.0'
+E         
+E         - 2.0.0
+E         + 1.2
+
+tests/test_dossier_projection.py:69: AssertionError
+_ test_projection_is_detached_and_preserves_decisions_routes_and_passports[public-SAU-H6-721012] _
+
+case = 'SAU-H6-721012', mode = 'public'
+
+    @pytest.mark.parametrize('case',CASES)
+    @pytest.mark.parametrize('mode',['public','simulated'])
+    def test_projection_is_detached_and_preserves_decisions_routes_and_passports(case,mode):
+        analysis=analyze(case,mode);before=deepcopy(analysis)
+        scenario=get_synthetic_scenario(case);scenario_before=deepcopy(scenario)
+        dossier=build_dossier(analysis)
+>       assert dossier['dossier_version']=='2.0.0'
+E       AssertionError: assert '1.2' == '2.0.0'
+E         
+E         - 2.0.0
+E         + 1.2
+
+tests/test_dossier_projection.py:69: AssertionError
+_ test_projection_is_detached_and_preserves_decisions_routes_and_passports[public-SAU-H6-721061] _
+
+case = 'SAU-H6-721061', mode = 'public'
+
+    @pytest.mark.parametrize('case',CASES)
+    @pytest.mark.parametrize('mode',['public','simulated'])
+    def test_projection_is_detached_and_preserves_decisions_routes_and_passports(case,mode):
+        analysis=analyze(case,mode);before=deepcopy(analysis)
+        scenario=get_synthetic_scenario(case);scenario_before=deepcopy(scenario)
+        dossier=build_dossier(analysis)
+>       assert dossier['dossier_version']=='2.0.0'
+E       AssertionError: assert '1.2' == '2.0.0'
+E         
+E         - 2.0.0
+E         + 1.2
+
+tests/test_dossier_projection.py:69: AssertionError
+_ test_projection_is_detached_and_preserves_decisions_routes_and_passports[public-SAU-H6-760429] _
+
+case = 'SAU-H6-760429', mode = 'public'
+
+    @pytest.mark.parametrize('case',CASES)
+    @pytest.mark.parametrize('mode',['public','simulated'])
+    def test_projection_is_detached_and_preserves_decisions_routes_and_passports(case,mode):
+        analysis=analyze(case,mode);before=deepcopy(analysis)
+        scenario=get_synthetic_scenario(case);scenario_before=deepcopy(scenario)
+        dossier=build_dossier(analysis)
+>       assert dossier['dossier_version']=='2.0.0'
+E       AssertionError: assert '1.2' == '2.0.0'
+E         
+E         - 2.0.0
+E         + 1.2
+
+tests/test_dossier_projection.py:69: AssertionError
+_ test_projection_is_detached_and_preserves_decisions_routes_and_passports[public-SAU-H6-760711] _
+
+case = 'SAU-H6-760711', mode = 'public'
+
+    @pytest.mark.parametrize('case',CASES)
+    @pytest.mark.parametrize('mode',['public','simulated'])
+    def test_projection_is_detached_and_preserves_decisions_routes_and_passports(case,mode):
+        analysis=analyze(case,mode);before=deepcopy(analysis)
+        scenario=get_synthetic_scenario(case);scenario_before=deepcopy(scenario)
+        dossier=build_dossier(analysis)
+>       assert dossier['dossier_version']=='2.0.0'
+E       AssertionError: assert '1.2' == '2.0.0'
+E         
+E         - 2.0.0
+E         + 1.2
+
+tests/test_dossier_projection.py:69: AssertionError
+_ test_projection_is_detached_and_preserves_decisions_routes_and_passports[simulated-SAU-H0-390210] _
+
+case = 'SAU-H0-390210', mode = 'simulated'
+
+    @pytest.mark.parametrize('case',CASES)
+    @pytest.mark.parametrize('mode',['public','simulated'])
+    def test_projection_is_detached_and_preserves_decisions_routes_and_passports(case,mode):
+        analysis=analyze(case,mode);before=deepcopy(analysis)
+        scenario=get_synthetic_scenario(case);scenario_before=deepcopy(scenario)
+        dossier=build_dossier(analysis)
+>       assert dossier['dossier_version']=='2.0.0'
+E       AssertionError: assert '1.2' == '2.0.0'
+E         
+E         - 2.0.0
+E         + 1.2
+
+tests/test_dossier_projection.py:69: AssertionError
+_ test_projection_is_detached_and_preserves_decisions_routes_and_passports[simulated-SAU-H0-721049] _
+
+case = 'SAU-H0-721049', mode = 'simulated'
+
+    @pytest.mark.parametrize('case',CASES)
+    @pytest.mark.parametrize('mode',['public','simulated'])
+    def test_projection_is_detached_and_preserves_decisions_routes_and_passports(case,mode):
+        analysis=analyze(case,mode);before=deepcopy(analysis)
+        scenario=get_synthetic_scenario(case);scenario_before=deepcopy(scenario)
+        dossier=build_dossier(analysis)
+>       assert dossier['dossier_version']=='2.0.0'
+E       AssertionError: assert '1.2' == '2.0.0'
+E         
+E         - 2.0.0
+E         + 1.2
+
+tests/test_dossier_projection.py:69: AssertionError
+_ test_projection_is_detached_and_preserves_decisions_routes_and_passports[simulated-SAU-H6-294110] _
+
+case = 'SAU-H6-294110', mode = 'simulated'
+
+    @pytest.mark.parametrize('case',CASES)
+    @pytest.mark.parametrize('mode',['public','simulated'])
+    def test_projection_is_detached_and_preserves_decisions_routes_and_passports(case,mode):
+        analysis=analyze(case,mode);before=deepcopy(analysis)
+        scenario=get_synthetic_scenario(case);scenario_before=deepcopy(scenario)
+        dossier=build_dossier(analysis)
+>       assert dossier['dossier_version']=='2.0.0'
+E       AssertionError: assert '1.3' == '2.0.0'
+E         
+E         - 2.0.0
+E         + 1.3
+
+tests/test_dossier_projection.py:69: AssertionError
+_ test_projection_is_detached_and_preserves_decisions_routes_and_passports[simulated-SAU-H6-294120] _
+
+case = 'SAU-H6-294120', mode = 'simulated'
+
+    @pytest.mark.parametrize('case',CASES)
+    @pytest.mark.parametrize('mode',['public','simulated'])
+    def test_projection_is_detached_and_preserves_decisions_routes_and_passports(case,mode):
+        analysis=analyze(case,mode);before=deepcopy(analysis)
+        scenario=get_synthetic_scenario(case);scenario_before=deepcopy(scenario)
+        dossier=build_dossier(analysis)
+>       assert dossier['dossier_version']=='2.0.0'
+E       AssertionError: assert '1.3' == '2.0.0'
+E         
+E         - 2.0.0
+E         + 1.3
+
+tests/test_dossier_projection.py:69: AssertionError
+_ test_projection_is_detached_and_preserves_decisions_routes_and_passports[simulated-SAU-H6-310430] _
+
+case = 'SAU-H6-310430', mode = 'simulated'
+
+    @pytest.mark.parametrize('case',CASES)
+    @pytest.mark.parametrize('mode',['public','simulated'])
+    def test_projection_is_detached_and_preserves_decisions_routes_and_passports(case,mode):
+        analysis=analyze(case,mode);before=deepcopy(analysis)
+        scenario=get_synthetic_scenario(case);scenario_before=deepcopy(scenario)
+        dossier=build_dossier(analysis)
+>       assert dossier['dossier_version']=='2.0.0'
+E       AssertionError: assert '1.3' == '2.0.0'
+E         
+E         - 2.0.0
+E         + 1.3
+
+tests/test_dossier_projection.py:69: AssertionError
+_ test_projection_is_detached_and_preserves_decisions_routes_and_passports[simulated-SAU-H6-310510] _
+
+case = 'SAU-H6-310510', mode = 'simulated'
+
+    @pytest.mark.parametrize('case',CASES)
+    @pytest.mark.parametrize('mode',['public','simulated'])
+    def test_projection_is_detached_and_preserves_decisions_routes_and_passports(case,mode):
+        analysis=analyze(case,mode);before=deepcopy(analysis)
+        scenario=get_synthetic_scenario(case);scenario_before=deepcopy(scenario)
+        dossier=build_dossier(analysis)
+>       assert dossier['dossier_version']=='2.0.0'
+E       AssertionError: assert '1.3' == '2.0.0'
+E         
+E         - 2.0.0
+E         + 1.3
+
+tests/test_dossier_projection.py:69: AssertionError
+_ test_projection_is_detached_and_preserves_decisions_routes_and_passports[simulated-SAU-H6-392010] _
+
+case = 'SAU-H6-392010', mode = 'simulated'
+
+    @pytest.mark.parametrize('case',CASES)
+    @pytest.mark.parametrize('mode',['public','simulated'])
+    def test_projection_is_detached_and_preserves_decisions_routes_and_passports(case,mode):
+        analysis=analyze(case,mode);before=deepcopy(analysis)
+        scenario=get_synthetic_scenario(case);scenario_before=deepcopy(scenario)
+        dossier=build_dossier(analysis)
+>       assert dossier['dossier_version']=='2.0.0'
+E       AssertionError: assert '1.2' == '2.0.0'
+E         
+E         - 2.0.0
+E         + 1.2
+
+tests/test_dossier_projection.py:69: AssertionError
+_ test_projection_is_detached_and_preserves_decisions_routes_and_passports[simulated-SAU-H6-721012] _
+
+case = 'SAU-H6-721012', mode = 'simulated'
+
+    @pytest.mark.parametrize('case',CASES)
+    @pytest.mark.parametrize('mode',['public','simulated'])
+    def test_projection_is_detached_and_preserves_decisions_routes_and_passports(case,mode):
+        analysis=analyze(case,mode);before=deepcopy(analysis)
+        scenario=get_synthetic_scenario(case);scenario_before=deepcopy(scenario)
+        dossier=build_dossier(analysis)
+>       assert dossier['dossier_version']=='2.0.0'
+E       AssertionError: assert '1.2' == '2.0.0'
+E         
+E         - 2.0.0
+E         + 1.2
+
+tests/test_dossier_projection.py:69: AssertionError
+_ test_projection_is_detached_and_preserves_decisions_routes_and_passports[simulated-SAU-H6-721061] _
+
+case = 'SAU-H6-721061', mode = 'simulated'
+
+    @pytest.mark.parametrize('case',CASES)
+    @pytest.mark.parametrize('mode',['public','simulated'])
+    def test_projection_is_detached_and_preserves_decisions_routes_and_passports(case,mode):
+        analysis=analyze(case,mode);before=deepcopy(analysis)
+        scenario=get_synthetic_scenario(case);scenario_before=deepcopy(scenario)
+        dossier=build_dossier(analysis)
+>       assert dossier['dossier_version']=='2.0.0'
+E       AssertionError: assert '1.2' == '2.0.0'
+E         
+E         - 2.0.0
+E         + 1.2
+
+tests/test_dossier_projection.py:69: AssertionError
+_ test_projection_is_detached_and_preserves_decisions_routes_and_passports[simulated-SAU-H6-760429] _
+
+case = 'SAU-H6-760429', mode = 'simulated'
+
+    @pytest.mark.parametrize('case',CASES)
+    @pytest.mark.parametrize('mode',['public','simulated'])
+    def test_projection_is_detached_and_preserves_decisions_routes_and_passports(case,mode):
+        analysis=analyze(case,mode);before=deepcopy(analysis)
+        scenario=get_synthetic_scenario(case);scenario_before=deepcopy(scenario)
+        dossier=build_dossier(analysis)
+>       assert dossier['dossier_version']=='2.0.0'
+E       AssertionError: assert '1.2' == '2.0.0'
+E         
+E         - 2.0.0
+E         + 1.2
+
+tests/test_dossier_projection.py:69: AssertionError
+_ test_projection_is_detached_and_preserves_decisions_routes_and_passports[simulated-SAU-H6-760711] _
+
+case = 'SAU-H6-760711', mode = 'simulated'
+
+    @pytest.mark.parametrize('case',CASES)
+    @pytest.mark.parametrize('mode',['public','simulated'])
+    def test_projection_is_detached_and_preserves_decisions_routes_and_passports(case,mode):
+        analysis=analyze(case,mode);before=deepcopy(analysis)
+        scenario=get_synthetic_scenario(case);scenario_before=deepcopy(scenario)
+        dossier=build_dossier(analysis)
+>       assert dossier['dossier_version']=='2.0.0'
+E       AssertionError: assert '1.2' == '2.0.0'
+E         
+E         - 2.0.0
+E         + 1.2
+
+tests/test_dossier_projection.py:69: AssertionError
+_______ test_scalar_source_oracle_and_scenario_whitelist[SAU-H0-390210] ________
+
+case = 'SAU-H0-390210'
+
+    @pytest.mark.parametrize('case',CASES)
+    def test_scalar_source_oracle_and_scenario_whitelist(case):
+        analysis=analyze(case,'simulated'); scenario=get_synthetic_scenario(case)
+        dossier=build_dossier(analysis)
+        expected={
+          'effective_qualified_capacity_kt': analysis['capacity'].get('effective_qualified_capacity_kt'),
+          'target_spec_demand_kt': scenario['synthetic_inputs']['demand'].get('target_spec_demand_kt'),
+          'known_weight_coverage': analysis['capability']['known_weight_coverage'],
+          'd_star': analysis['capability']['d_star'],
+          'minimum_effective_support_m': (analysis['economics'] or {}).get('minimum_effective_support_m'),
+        }
+>       actual={f['key']:f for b in dossier['blocks'].values() for f in b['fields']}
+                                    ^^^^^^^^^^^^^^^^^
+E       KeyError: 'blocks'
+
+tests/test_dossier_projection.py:99: KeyError
+_______ test_scalar_source_oracle_and_scenario_whitelist[SAU-H0-721049] ________
+
+case = 'SAU-H0-721049'
+
+    @pytest.mark.parametrize('case',CASES)
+    def test_scalar_source_oracle_and_scenario_whitelist(case):
+        analysis=analyze(case,'simulated'); scenario=get_synthetic_scenario(case)
+        dossier=build_dossier(analysis)
+        expected={
+          'effective_qualified_capacity_kt': analysis['capacity'].get('effective_qualified_capacity_kt'),
+          'target_spec_demand_kt': scenario['synthetic_inputs']['demand'].get('target_spec_demand_kt'),
+          'known_weight_coverage': analysis['capability']['known_weight_coverage'],
+          'd_star': analysis['capability']['d_star'],
+          'minimum_effective_support_m': (analysis['economics'] or {}).get('minimum_effective_support_m'),
+        }
+>       actual={f['key']:f for b in dossier['blocks'].values() for f in b['fields']}
+                                    ^^^^^^^^^^^^^^^^^
+E       KeyError: 'blocks'
+
+tests/test_dossier_projection.py:99: KeyError
+_______ test_scalar_source_oracle_and_scenario_whitelist[SAU-H6-294110] ________
+
+case = 'SAU-H6-294110'
+
+    @pytest.mark.parametrize('case',CASES)
+    def test_scalar_source_oracle_and_scenario_whitelist(case):
+        analysis=analyze(case,'simulated'); scenario=get_synthetic_scenario(case)
+        dossier=build_dossier(analysis)
+        expected={
+          'effective_qualified_capacity_kt': analysis['capacity'].get('effective_qualified_capacity_kt'),
+          'target_spec_demand_kt': scenario['synthetic_inputs']['demand'].get('target_spec_demand_kt'),
+          'known_weight_coverage': analysis['capability']['known_weight_coverage'],
+          'd_star': analysis['capability']['d_star'],
+          'minimum_effective_support_m': (analysis['economics'] or {}).get('minimum_effective_support_m'),
+        }
+>       actual={f['key']:f for b in dossier['blocks'].values() for f in b['fields']}
+                                    ^^^^^^^^^^^^^^^^^
+E       KeyError: 'blocks'
+
+tests/test_dossier_projection.py:99: KeyError
+_______ test_scalar_source_oracle_and_scenario_whitelist[SAU-H6-294120] ________
+
+case = 'SAU-H6-294120'
+
+    @pytest.mark.parametrize('case',CASES)
+    def test_scalar_source_oracle_and_scenario_whitelist(case):
+        analysis=analyze(case,'simulated'); scenario=get_synthetic_scenario(case)
+        dossier=build_dossier(analysis)
+        expected={
+          'effective_qualified_capacity_kt': analysis['capacity'].get('effective_qualified_capacity_kt'),
+          'target_spec_demand_kt': scenario['synthetic_inputs']['demand'].get('target_spec_demand_kt'),
+          'known_weight_coverage': analysis['capability']['known_weight_coverage'],
+          'd_star': analysis['capability']['d_star'],
+          'minimum_effective_support_m': (analysis['economics'] or {}).get('minimum_effective_support_m'),
+        }
+>       actual={f['key']:f for b in dossier['blocks'].values() for f in b['fields']}
+                                    ^^^^^^^^^^^^^^^^^
+E       KeyError: 'blocks'
+
+tests/test_dossier_projection.py:99: KeyError
+_______ test_scalar_source_oracle_and_scenario_whitelist[SAU-H6-310430] ________
+
+case = 'SAU-H6-310430'
+
+    @pytest.mark.parametrize('case',CASES)
+    def test_scalar_source_oracle_and_scenario_whitelist(case):
+        analysis=analyze(case,'simulated'); scenario=get_synthetic_scenario(case)
+        dossier=build_dossier(analysis)
+        expected={
+          'effective_qualified_capacity_kt': analysis['capacity'].get('effective_qualified_capacity_kt'),
+          'target_spec_demand_kt': scenario['synthetic_inputs']['demand'].get('target_spec_demand_kt'),
+          'known_weight_coverage': analysis['capability']['known_weight_coverage'],
+          'd_star': analysis['capability']['d_star'],
+          'minimum_effective_support_m': (analysis['economics'] or {}).get('minimum_effective_support_m'),
+        }
+>       actual={f['key']:f for b in dossier['blocks'].values() for f in b['fields']}
+                                    ^^^^^^^^^^^^^^^^^
+E       KeyError: 'blocks'
+
+tests/test_dossier_projection.py:99: KeyError
+_______ test_scalar_source_oracle_and_scenario_whitelist[SAU-H6-310510] ________
+
+case = 'SAU-H6-310510'
+
+    @pytest.mark.parametrize('case',CASES)
+    def test_scalar_source_oracle_and_scenario_whitelist(case):
+        analysis=analyze(case,'simulated'); scenario=get_synthetic_scenario(case)
+        dossier=build_dossier(analysis)
+        expected={
+          'effective_qualified_capacity_kt': analysis['capacity'].get('effective_qualified_capacity_kt'),
+          'target_spec_demand_kt': scenario['synthetic_inputs']['demand'].get('target_spec_demand_kt'),
+          'known_weight_coverage': analysis['capability']['known_weight_coverage'],
+          'd_star': analysis['capability']['d_star'],
+          'minimum_effective_support_m': (analysis['economics'] or {}).get('minimum_effective_support_m'),
+        }
+>       actual={f['key']:f for b in dossier['blocks'].values() for f in b['fields']}
+                                    ^^^^^^^^^^^^^^^^^
+E       KeyError: 'blocks'
+
+tests/test_dossier_projection.py:99: KeyError
+_______ test_scalar_source_oracle_and_scenario_whitelist[SAU-H6-392010] ________
+
+case = 'SAU-H6-392010'
+
+    @pytest.mark.parametrize('case',CASES)
+    def test_scalar_source_oracle_and_scenario_whitelist(case):
+        analysis=analyze(case,'simulated'); scenario=get_synthetic_scenario(case)
+        dossier=build_dossier(analysis)
+        expected={
+          'effective_qualified_capacity_kt': analysis['capacity'].get('effective_qualified_capacity_kt'),
+          'target_spec_demand_kt': scenario['synthetic_inputs']['demand'].get('target_spec_demand_kt'),
+          'known_weight_coverage': analysis['capability']['known_weight_coverage'],
+          'd_star': analysis['capability']['d_star'],
+          'minimum_effective_support_m': (analysis['economics'] or {}).get('minimum_effective_support_m'),
+        }
+>       actual={f['key']:f for b in dossier['blocks'].values() for f in b['fields']}
+                                    ^^^^^^^^^^^^^^^^^
+E       KeyError: 'blocks'
+
+tests/test_dossier_projection.py:99: KeyError
+_______ test_scalar_source_oracle_and_scenario_whitelist[SAU-H6-721012] ________
+
+case = 'SAU-H6-721012'
+
+    @pytest.mark.parametrize('case',CASES)
+    def test_scalar_source_oracle_and_scenario_whitelist(case):
+        analysis=analyze(case,'simulated'); scenario=get_synthetic_scenario(case)
+        dossier=build_dossier(analysis)
+        expected={
+          'effective_qualified_capacity_kt': analysis['capacity'].get('effective_qualified_capacity_kt'),
+          'target_spec_demand_kt': scenario['synthetic_inputs']['demand'].get('target_spec_demand_kt'),
+          'known_weight_coverage': analysis['capability']['known_weight_coverage'],
+          'd_star': analysis['capability']['d_star'],
+          'minimum_effective_support_m': (analysis['economics'] or {}).get('minimum_effective_support_m'),
+        }
+>       actual={f['key']:f for b in dossier['blocks'].values() for f in b['fields']}
+                                    ^^^^^^^^^^^^^^^^^
+E       KeyError: 'blocks'
+
+tests/test_dossier_projection.py:99: KeyError
+_______ test_scalar_source_oracle_and_scenario_whitelist[SAU-H6-721061] ________
+
+case = 'SAU-H6-721061'
+
+    @pytest.mark.parametrize('case',CASES)
+    def test_scalar_source_oracle_and_scenario_whitelist(case):
+        analysis=analyze(case,'simulated'); scenario=get_synthetic_scenario(case)
+        dossier=build_dossier(analysis)
+        expected={
+          'effective_qualified_capacity_kt': analysis['capacity'].get('effective_qualified_capacity_kt'),
+          'target_spec_demand_kt': scenario['synthetic_inputs']['demand'].get('target_spec_demand_kt'),
+          'known_weight_coverage': analysis['capability']['known_weight_coverage'],
+          'd_star': analysis['capability']['d_star'],
+          'minimum_effective_support_m': (analysis['economics'] or {}).get('minimum_effective_support_m'),
+        }
+>       actual={f['key']:f for b in dossier['blocks'].values() for f in b['fields']}
+                                    ^^^^^^^^^^^^^^^^^
+E       KeyError: 'blocks'
+
+tests/test_dossier_projection.py:99: KeyError
+_______ test_scalar_source_oracle_and_scenario_whitelist[SAU-H6-760429] ________
+
+case = 'SAU-H6-760429'
+
+    @pytest.mark.parametrize('case',CASES)
+    def test_scalar_source_oracle_and_scenario_whitelist(case):
+        analysis=analyze(case,'simulated'); scenario=get_synthetic_scenario(case)
+        dossier=build_dossier(analysis)
+        expected={
+          'effective_qualified_capacity_kt': analysis['capacity'].get('effective_qualified_capacity_kt'),
+          'target_spec_demand_kt': scenario['synthetic_inputs']['demand'].get('target_spec_demand_kt'),
+          'known_weight_coverage': analysis['capability']['known_weight_coverage'],
+          'd_star': analysis['capability']['d_star'],
+          'minimum_effective_support_m': (analysis['economics'] or {}).get('minimum_effective_support_m'),
+        }
+>       actual={f['key']:f for b in dossier['blocks'].values() for f in b['fields']}
+                                    ^^^^^^^^^^^^^^^^^
+E       KeyError: 'blocks'
+
+tests/test_dossier_projection.py:99: KeyError
+_______ test_scalar_source_oracle_and_scenario_whitelist[SAU-H6-760711] ________
+
+case = 'SAU-H6-760711'
+
+    @pytest.mark.parametrize('case',CASES)
+    def test_scalar_source_oracle_and_scenario_whitelist(case):
+        analysis=analyze(case,'simulated'); scenario=get_synthetic_scenario(case)
+        dossier=build_dossier(analysis)
+        expected={
+          'effective_qualified_capacity_kt': analysis['capacity'].get('effective_qualified_capacity_kt'),
+          'target_spec_demand_kt': scenario['synthetic_inputs']['demand'].get('target_spec_demand_kt'),
+          'known_weight_coverage': analysis['capability']['known_weight_coverage'],
+          'd_star': analysis['capability']['d_star'],
+          'minimum_effective_support_m': (analysis['economics'] or {}).get('minimum_effective_support_m'),
+        }
+>       actual={f['key']:f for b in dossier['blocks'].values() for f in b['fields']}
+                                    ^^^^^^^^^^^^^^^^^
+E       KeyError: 'blocks'
+
+tests/test_dossier_projection.py:99: KeyError
+=========================== short test summary info ============================
+FAILED tests/test_dossier_projection.py::test_supply_is_named_structured_content_without_raw_dictionary[public-SAU-H0-390210]
+FAILED tests/test_dossier_projection.py::test_supply_is_named_structured_content_without_raw_dictionary[public-SAU-H0-721049]
+FAILED tests/test_dossier_projection.py::test_supply_is_named_structured_content_without_raw_dictionary[public-SAU-H6-294110]
+FAILED tests/test_dossier_projection.py::test_supply_is_named_structured_content_without_raw_dictionary[public-SAU-H6-294120]
+FAILED tests/test_dossier_projection.py::test_supply_is_named_structured_content_without_raw_dictionary[public-SAU-H6-310430]
+FAILED tests/test_dossier_projection.py::test_supply_is_named_structured_content_without_raw_dictionary[public-SAU-H6-310510]
+FAILED tests/test_dossier_projection.py::test_supply_is_named_structured_content_without_raw_dictionary[public-SAU-H6-392010]
+FAILED tests/test_dossier_projection.py::test_supply_is_named_structured_content_without_raw_dictionary[public-SAU-H6-721012]
+FAILED tests/test_dossier_projection.py::test_supply_is_named_structured_content_without_raw_dictionary[public-SAU-H6-721061]
+FAILED tests/test_dossier_projection.py::test_supply_is_named_structured_content_without_raw_dictionary[public-SAU-H6-760429]
+FAILED tests/test_dossier_projection.py::test_supply_is_named_structured_content_without_raw_dictionary[public-SAU-H6-760711]
+FAILED tests/test_dossier_projection.py::test_supply_is_named_structured_content_without_raw_dictionary[simulated-SAU-H0-390210]
+FAILED tests/test_dossier_projection.py::test_supply_is_named_structured_content_without_raw_dictionary[simulated-SAU-H0-721049]
+FAILED tests/test_dossier_projection.py::test_supply_is_named_structured_content_without_raw_dictionary[simulated-SAU-H6-294110]
+FAILED tests/test_dossier_projection.py::test_supply_is_named_structured_content_without_raw_dictionary[simulated-SAU-H6-294120]
+FAILED tests/test_dossier_projection.py::test_supply_is_named_structured_content_without_raw_dictionary[simulated-SAU-H6-310430]
+FAILED tests/test_dossier_projection.py::test_supply_is_named_structured_content_without_raw_dictionary[simulated-SAU-H6-310510]
+FAILED tests/test_dossier_projection.py::test_supply_is_named_structured_content_without_raw_dictionary[simulated-SAU-H6-392010]
+FAILED tests/test_dossier_projection.py::test_supply_is_named_structured_content_without_raw_dictionary[simulated-SAU-H6-721012]
+FAILED tests/test_dossier_projection.py::test_supply_is_named_structured_content_without_raw_dictionary[simulated-SAU-H6-721061]
+FAILED tests/test_dossier_projection.py::test_supply_is_named_structured_content_without_raw_dictionary[simulated-SAU-H6-760429]
+FAILED tests/test_dossier_projection.py::test_supply_is_named_structured_content_without_raw_dictionary[simulated-SAU-H6-760711]
+FAILED tests/test_dossier_projection.py::test_arabic_ledger_renders_localized_name_result_and_effect[SAU-H0-390210]
+FAILED tests/test_dossier_projection.py::test_arabic_ledger_renders_localized_name_result_and_effect[SAU-H0-721049]
+FAILED tests/test_dossier_projection.py::test_arabic_ledger_renders_localized_name_result_and_effect[SAU-H6-294110]
+FAILED tests/test_dossier_projection.py::test_arabic_ledger_renders_localized_name_result_and_effect[SAU-H6-294120]
+FAILED tests/test_dossier_projection.py::test_arabic_ledger_renders_localized_name_result_and_effect[SAU-H6-310430]
+FAILED tests/test_dossier_projection.py::test_arabic_ledger_renders_localized_name_result_and_effect[SAU-H6-310510]
+FAILED tests/test_dossier_projection.py::test_arabic_ledger_renders_localized_name_result_and_effect[SAU-H6-392010]
+FAILED tests/test_dossier_projection.py::test_arabic_ledger_renders_localized_name_result_and_effect[SAU-H6-721012]
+FAILED tests/test_dossier_projection.py::test_arabic_ledger_renders_localized_name_result_and_effect[SAU-H6-721061]
+FAILED tests/test_dossier_projection.py::test_arabic_ledger_renders_localized_name_result_and_effect[SAU-H6-760429]
+FAILED tests/test_dossier_projection.py::test_arabic_ledger_renders_localized_name_result_and_effect[SAU-H6-760711]
+FAILED tests/test_dossier_projection.py::test_all_methodology_sections_exist_even_without_evidence[public-SAU-H0-390210]
+FAILED tests/test_dossier_projection.py::test_all_methodology_sections_exist_even_without_evidence[public-SAU-H0-721049]
+FAILED tests/test_dossier_projection.py::test_all_methodology_sections_exist_even_without_evidence[public-SAU-H6-294110]
+FAILED tests/test_dossier_projection.py::test_all_methodology_sections_exist_even_without_evidence[public-SAU-H6-294120]
+FAILED tests/test_dossier_projection.py::test_all_methodology_sections_exist_even_without_evidence[public-SAU-H6-310430]
+FAILED tests/test_dossier_projection.py::test_all_methodology_sections_exist_even_without_evidence[public-SAU-H6-310510]
+FAILED tests/test_dossier_projection.py::test_all_methodology_sections_exist_even_without_evidence[public-SAU-H6-392010]
+FAILED tests/test_dossier_projection.py::test_all_methodology_sections_exist_even_without_evidence[public-SAU-H6-721012]
+FAILED tests/test_dossier_projection.py::test_all_methodology_sections_exist_even_without_evidence[public-SAU-H6-721061]
+FAILED tests/test_dossier_projection.py::test_all_methodology_sections_exist_even_without_evidence[public-SAU-H6-760429]
+FAILED tests/test_dossier_projection.py::test_all_methodology_sections_exist_even_without_evidence[public-SAU-H6-760711]
+FAILED tests/test_dossier_projection.py::test_all_methodology_sections_exist_even_without_evidence[simulated-SAU-H0-390210]
+FAILED tests/test_dossier_projection.py::test_all_methodology_sections_exist_even_without_evidence[simulated-SAU-H0-721049]
+FAILED tests/test_dossier_projection.py::test_all_methodology_sections_exist_even_without_evidence[simulated-SAU-H6-294110]
+FAILED tests/test_dossier_projection.py::test_all_methodology_sections_exist_even_without_evidence[simulated-SAU-H6-294120]
+FAILED tests/test_dossier_projection.py::test_all_methodology_sections_exist_even_without_evidence[simulated-SAU-H6-310430]
+FAILED tests/test_dossier_projection.py::test_all_methodology_sections_exist_even_without_evidence[simulated-SAU-H6-310510]
+FAILED tests/test_dossier_projection.py::test_all_methodology_sections_exist_even_without_evidence[simulated-SAU-H6-392010]
+FAILED tests/test_dossier_projection.py::test_all_methodology_sections_exist_even_without_evidence[simulated-SAU-H6-721012]
+FAILED tests/test_dossier_projection.py::test_all_methodology_sections_exist_even_without_evidence[simulated-SAU-H6-721061]
+FAILED tests/test_dossier_projection.py::test_all_methodology_sections_exist_even_without_evidence[simulated-SAU-H6-760429]
+FAILED tests/test_dossier_projection.py::test_all_methodology_sections_exist_even_without_evidence[simulated-SAU-H6-760711]
+FAILED tests/test_dossier_projection.py::test_simulated_export_keeps_complete_visible_public_conclusion[SAU-H0-390210]
+FAILED tests/test_dossier_projection.py::test_simulated_export_keeps_complete_visible_public_conclusion[SAU-H0-721049]
+FAILED tests/test_dossier_projection.py::test_simulated_export_keeps_complete_visible_public_conclusion[SAU-H6-294110]
+FAILED tests/test_dossier_projection.py::test_simulated_export_keeps_complete_visible_public_conclusion[SAU-H6-294120]
+FAILED tests/test_dossier_projection.py::test_simulated_export_keeps_complete_visible_public_conclusion[SAU-H6-310430]
+FAILED tests/test_dossier_projection.py::test_simulated_export_keeps_complete_visible_public_conclusion[SAU-H6-310510]
+FAILED tests/test_dossier_projection.py::test_simulated_export_keeps_complete_visible_public_conclusion[SAU-H6-392010]
+FAILED tests/test_dossier_projection.py::test_simulated_export_keeps_complete_visible_public_conclusion[SAU-H6-721012]
+FAILED tests/test_dossier_projection.py::test_simulated_export_keeps_complete_visible_public_conclusion[SAU-H6-721061]
+FAILED tests/test_dossier_projection.py::test_simulated_export_keeps_complete_visible_public_conclusion[SAU-H6-760429]
+FAILED tests/test_dossier_projection.py::test_simulated_export_keeps_complete_visible_public_conclusion[SAU-H6-760711]
+FAILED tests/test_dossier_projection.py::test_projection_is_detached_and_preserves_decisions_routes_and_passports[public-SAU-H0-390210]
+FAILED tests/test_dossier_projection.py::test_projection_is_detached_and_preserves_decisions_routes_and_passports[public-SAU-H0-721049]
+FAILED tests/test_dossier_projection.py::test_projection_is_detached_and_preserves_decisions_routes_and_passports[public-SAU-H6-294110]
+FAILED tests/test_dossier_projection.py::test_projection_is_detached_and_preserves_decisions_routes_and_passports[public-SAU-H6-294120]
+FAILED tests/test_dossier_projection.py::test_projection_is_detached_and_preserves_decisions_routes_and_passports[public-SAU-H6-310430]
+FAILED tests/test_dossier_projection.py::test_projection_is_detached_and_preserves_decisions_routes_and_passports[public-SAU-H6-310510]
+FAILED tests/test_dossier_projection.py::test_projection_is_detached_and_preserves_decisions_routes_and_passports[public-SAU-H6-392010]
+FAILED tests/test_dossier_projection.py::test_projection_is_detached_and_preserves_decisions_routes_and_passports[public-SAU-H6-721012]
+FAILED tests/test_dossier_projection.py::test_projection_is_detached_and_preserves_decisions_routes_and_passports[public-SAU-H6-721061]
+FAILED tests/test_dossier_projection.py::test_projection_is_detached_and_preserves_decisions_routes_and_passports[public-SAU-H6-760429]
+FAILED tests/test_dossier_projection.py::test_projection_is_detached_and_preserves_decisions_routes_and_passports[public-SAU-H6-760711]
+FAILED tests/test_dossier_projection.py::test_projection_is_detached_and_preserves_decisions_routes_and_passports[simulated-SAU-H0-390210]
+FAILED tests/test_dossier_projection.py::test_projection_is_detached_and_preserves_decisions_routes_and_passports[simulated-SAU-H0-721049]
+FAILED tests/test_dossier_projection.py::test_projection_is_detached_and_preserves_decisions_routes_and_passports[simulated-SAU-H6-294110]
+FAILED tests/test_dossier_projection.py::test_projection_is_detached_and_preserves_decisions_routes_and_passports[simulated-SAU-H6-294120]
+FAILED tests/test_dossier_projection.py::test_projection_is_detached_and_preserves_decisions_routes_and_passports[simulated-SAU-H6-310430]
+FAILED tests/test_dossier_projection.py::test_projection_is_detached_and_preserves_decisions_routes_and_passports[simulated-SAU-H6-310510]
+FAILED tests/test_dossier_projection.py::test_projection_is_detached_and_preserves_decisions_routes_and_passports[simulated-SAU-H6-392010]
+FAILED tests/test_dossier_projection.py::test_projection_is_detached_and_preserves_decisions_routes_and_passports[simulated-SAU-H6-721012]
+FAILED tests/test_dossier_projection.py::test_projection_is_detached_and_preserves_decisions_routes_and_passports[simulated-SAU-H6-721061]
+FAILED tests/test_dossier_projection.py::test_projection_is_detached_and_preserves_decisions_routes_and_passports[simulated-SAU-H6-760429]
+FAILED tests/test_dossier_projection.py::test_projection_is_detached_and_preserves_decisions_routes_and_passports[simulated-SAU-H6-760711]
+FAILED tests/test_dossier_projection.py::test_scalar_source_oracle_and_scenario_whitelist[SAU-H0-390210]
+FAILED tests/test_dossier_projection.py::test_scalar_source_oracle_and_scenario_whitelist[SAU-H0-721049]
+FAILED tests/test_dossier_projection.py::test_scalar_source_oracle_and_scenario_whitelist[SAU-H6-294110]
+FAILED tests/test_dossier_projection.py::test_scalar_source_oracle_and_scenario_whitelist[SAU-H6-294120]
+FAILED tests/test_dossier_projection.py::test_scalar_source_oracle_and_scenario_whitelist[SAU-H6-310430]
+FAILED tests/test_dossier_projection.py::test_scalar_source_oracle_and_scenario_whitelist[SAU-H6-310510]
+FAILED tests/test_dossier_projection.py::test_scalar_source_oracle_and_scenario_whitelist[SAU-H6-392010]
+FAILED tests/test_dossier_projection.py::test_scalar_source_oracle_and_scenario_whitelist[SAU-H6-721012]
+FAILED tests/test_dossier_projection.py::test_scalar_source_oracle_and_scenario_whitelist[SAU-H6-721061]
+FAILED tests/test_dossier_projection.py::test_scalar_source_oracle_and_scenario_whitelist[SAU-H6-760429]
+FAILED tests/test_dossier_projection.py::test_scalar_source_oracle_and_scenario_whitelist[SAU-H6-760711]
+99 failed, 11 passed in 0.71s

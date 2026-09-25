@@ -1,0 +1,20 @@
+{
+  "recorded_at_utc": "2026-09-25T11:35:04.728863+00:00",
+  "parent_source_ledger_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/literal-adoption/POST-LITERAL-SOURCE-BINDING.json",
+  "parent_source_ledger_sha256": "c104d456735172817dc356fe17c349c46250de2dc98dd0195952e4f5565d7dc0",
+  "source_files": 1761,
+  "positive_source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/browser-preparation/source",
+  "original_css_source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/browser-preparation/original-css-source",
+  "positive_matches_all_source_bytes": true,
+  "negative_only_delta": {
+    "path": "src/ior_mvp/static/css/graph.css",
+    "before_sha256": "3c45f10453d0abcd0ce8a0d62e0e063e9f3df1a70464b63d0ab23e3bbaf97779",
+    "after_sha256": "22af477cffb1e18394c6aedcc2f1280ab34692e132912012437aa211bfeb17d6",
+    "removed_exact_block": ".graph-element-button[data-graph-select=\"edge\"] > small {\n  flex-grow: 1;\n}\n",
+    "diff_sha256": "3d073380aab0a28b6295e623a8738a87a26d041112f225e7e6d1306d25b7f6cb"
+  },
+  "independent_copies": true,
+  "shared_git_or_venv": false,
+  "browser_operations_run": false,
+  "scope": "Preparation of concrete immutable review/test inputs only. No candidate modification. No browser GO yet."
+}

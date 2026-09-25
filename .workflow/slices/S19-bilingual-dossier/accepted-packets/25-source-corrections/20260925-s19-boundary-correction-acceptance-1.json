@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "recorded_at_utc": "2026-09-25T01:09:36.608551+00:00",
+  "record_kind": "DELEGATED_S19_FINITE_VALIDATOR_CORRECTION_ACCEPTANCE",
+  "authority": [
+    "20260923-blocker-resolution-delegation-1.json",
+    "20260924-s19-actual-base-amendment-acceptance-1.json"
+  ],
+  "actor": "/root coordinator under owner delegation",
+  "author": "/root/s19_delivered_base_handoff",
+  "independent_reviewer": "/root/s19_source_reviewer",
+  "review": {
+    "path": ".autonomous-workflow/overnight-2026-09-23/reviews/s19-boundary-correction-r1/REVIEW.md",
+    "sha256": "ce221be487c4f38499bb4c24f946cf71a3942205f1012006f77633434b8d03e2",
+    "verdict": "APPROVE frozen two-file correction only"
+  },
+  "approved_postimages": {
+    "src/ior_mvp/dossier_validation.py": "33550297a04ed741471c2bc73cdcde517e1ec308f768c625f49a304f879c4f3c",
+    "tests/test_dossier_isolation.py": "705cefb65a41466c76e2c7360c0a05dbb8ab08e54e47dbaae9003b06faf0d5a6"
+  },
+  "source_binding_sha256": "d40eff61dac3f7cf6882bde008007c49683b159950b0394feddf822cb02aaddf",
+  "scope": "Close SRC-VAL-01 and its synthetic-passport addendum for actual dossier export consumers; preserve all valid outputs and optional/null distinctions. Not an engine-wide malformed-input closure.",
+  "evidence": {
+    "reviewer_direct": "12 corrupted inputs yield 12 typed build errors and 36 typed JSON/ENHTML/ARHTML 422s;100 valid before/after files byte-equal;2941 receipt entries verified",
+    "author_retained": "315 genuine original failures plus1 positive;316 corrected pass;649 focused pass; separate replay setup failures preserved",
+    "root_direct": "Read review, checked review hash and current two postimages, ordinary index hash unchanged"
+  },
+  "remaining": "Batched presentation corrections, independent complete source review,44-PDF proof,generation,canonical,R1,exact-tree local and hosted delivery gates remain pending.",
+  "sanad": "Named independent review and bound source/evidence; author and reviewer counts attributed, not represented as a fresh root test run.",
+  "muhasabah": "PASS bounded delegated acceptance only; no source edit, no invented owner quote, no Claude attribution or whole-candidate approval."
+}

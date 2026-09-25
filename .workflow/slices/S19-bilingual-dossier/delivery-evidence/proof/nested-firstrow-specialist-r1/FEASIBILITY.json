@@ -1,0 +1,351 @@
+{
+  "status": "MEASURED_FEASIBILITY_READY_FOR_INDEPENDENT_REVIEW_NOT_PRODUCT_APPROVAL",
+  "previous_failed_source": {
+    "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-record-correction-r1/SOURCE-GREEN.json",
+    "sha256": "758783bbdb135fb3451565995013a78e76ad30bdfb2be615bac0d56316a851f9"
+  },
+  "prototype_source": {
+    "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/SOURCE.json",
+    "sha256": "ba5bec02c6912ad4e2dcafcba18f6746852bdbd66687fd784b6af86b380f2bdc"
+  },
+  "source_count": 1759,
+  "only_source_delta": [
+    "src/ior_mvp/static/css/dossier.css"
+  ],
+  "css_preimage_sha256": "ae7f466d7a3d4b3413ad4f48079f7f82298133668a77a4e5cca70e3d118bb2c7",
+  "css_postimage_sha256": "440b06e0a743deb8d44645fef6e4916b27a003946b926c69e4485b398d74b6ea",
+  "patch": {
+    "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/FIRST-SCALAR.patch",
+    "sha256": "b9275aeb2c729b64aec4d017ef1a2ad76d7a7247ecd139f8fc4252b05e92ce65"
+  },
+  "producer_command": {
+    "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/COMMAND.json",
+    "sha256": "03773006a592a0229c12007337973793aa9c0b0fdc39427fd9829986ea04f902"
+  },
+  "producer_execution": {
+    "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/trial1/EXECUTION.json",
+    "sha256": "03de74931ba9ea1e45e565d5f4b60131f6fc2fbc8dc28369d1b52e3e15a9152c"
+  },
+  "producer_stdout": {
+    "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/trial1/stdout.log",
+    "sha256": "0e95df75187a30def2d21f54d78e179f9ac0c3334df518a97c8e782dd7d75f50"
+  },
+  "producer_stderr": {
+    "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/trial1/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "producer_result": "4 passed in18.39s; exit0",
+  "old_failure": {
+    "pdf": {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-record-correction-r1/green/pdf/alu-foil-simulated-en.pdf",
+      "sha256": "5e271424e9b34f128ac6b973d0220b79af2387964d1e2452618a4c7c887b2bbb"
+    },
+    "observed_pages": [
+      {
+        "page": 49,
+        "heading": true,
+        "status_PASS": false
+      },
+      {
+        "page": 50,
+        "heading": false,
+        "status_PASS": true
+      }
+    ],
+    "producer": {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-record-correction-r1/green/COMMAND.json",
+      "sha256": "de18e63a180010027bcd4ecb29856197f2407bc951941a10866c0b080abe1c6a"
+    },
+    "stdout": {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-record-correction-r1/green/stdout.log",
+      "sha256": "fd0c8159b16866f53fc38a24c60ef23e4ec2625b754e965aadb760836aa41cd2"
+    },
+    "classification": "Actual before/after keep-chain failure retained unchanged"
+  },
+  "tools": {
+    "renderer": {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/planning/s19/renderer-proof/render_pdf.py",
+      "sha256": "80f17b6ff9040acc445001b33882efa0e44afbe820cac74b50338b5e2bb7f88b"
+    },
+    "strict": {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-record-correction-r1/check_pdf_matrix.py",
+      "sha256": "bfa13f1ac4d8056f56a15a78ecf3f3e330f0c6abbcacefa96c4b352ed59e55bd"
+    },
+    "target_wrapper": {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-record-correction-r1/check-targets.py",
+      "sha256": "2633dd54e0b999e407eb883d2c1b8d32f53317730e90f7188ae67c39d0e10efa"
+    },
+    "image": "sha256:938b534c8bac0f80012299fc0bba33c00d29f2ade02416bbc1df9d9c028f8112"
+  },
+  "proof_command": {
+    "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/PROOF-COMMAND.json",
+    "sha256": "8de6e2f2ac0a6a53341e2f8609de24dd63777410c0ec53e46a9bb53a23b13835"
+  },
+  "proof_execution": {
+    "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/PROOF-EXECUTION.json",
+    "sha256": "5f853c034c8b25c854466aef4d5227defeac8d83570523fed273ef4097754cf2"
+  },
+  "strict": {
+    "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/proof/TARGET-STRICT.json",
+    "sha256": "8f72ebd85d39a6545286dcd283f7197d31dbe06b6c5b1e9a456e5fe41b5981de"
+  },
+  "render_result": {
+    "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/proof/rendered/RENDER-RESULT.json",
+    "sha256": "d99a4719261db7030d7bb497e82b0bbaa2909b7a6807e0f8e40e145509bf21fd"
+  },
+  "new_html_css_only": [
+    {
+      "file": "alu-foil-simulated-en.html",
+      "old": "00d0f81f1752efde9540278459a2da4d5f3f68bdc8c76b555100fd43c08ba8b7",
+      "new": "83d29eb54ce8a3f06438a78adac1a5a2a03bd5146b3874f49b2d359eec80e70a",
+      "sole_exact_css_substitution": true
+    },
+    {
+      "file": "alu-profiles-simulated-ar.html",
+      "old": "71ba1c647508620fbfeb47ff73c89c8546fec5f1d853d66b0df588a994a2e863",
+      "new": "f5d6bb10cf5087aea9eb882c55b71d45e80ff9e49e1f76ad3b71c76e44e87658",
+      "sole_exact_css_substitution": true
+    },
+    {
+      "file": "penicillin-api-simulated-ar.html",
+      "old": "f633c2abec19f95c2d37279b5e84781f035c1edaf743d4ce68efbe56f02ac291",
+      "new": "44f556cae7259a7ba6e3e14dbd7b890a1ce062157c398d114b7a853150db1898",
+      "sole_exact_css_substitution": true
+    },
+    {
+      "file": "polypropylene-simulated-ar.html",
+      "old": "b41370749cb6594357fddf3c0ea24a6e12c90b223da22844ceb64e78c75915aa",
+      "new": "15074d1581771714ee799f1f19a16033e6d34164e05a8ce6dafaccbacfc5cd94",
+      "sole_exact_css_substitution": true
+    }
+  ],
+  "new_analysis_dossier_json_equal": [
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/trial1/pdf/alu-foil-simulated-analysis.json",
+      "sha256": "bed5c99413385626c7e729aff14a73c74c98be32556359bdc10b29f9a6c84bfd"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/trial1/pdf/alu-foil-simulated-dossier.json",
+      "sha256": "8eb3c8e89b663baff62b4a7f19c7106b7d5aa2f1be81b3b3ca5fe2538b9be09c"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/trial1/pdf/alu-profiles-simulated-analysis.json",
+      "sha256": "d8b2a8aa6fea90eaab3096a4c71e9790e6bc2e5cb3fd04990619ca6c3bcacecf"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/trial1/pdf/alu-profiles-simulated-dossier.json",
+      "sha256": "9b18ff2bbd6ed61265ed0317dac98835ae2d15efb195c96bec8b6a1dd0c314cf"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/trial1/pdf/penicillin-api-simulated-analysis.json",
+      "sha256": "657c5ee5c9db8f03f1caa15a1d2234a368869584d09ecfb9f45421b160f1019c"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/trial1/pdf/penicillin-api-simulated-dossier.json",
+      "sha256": "97269d850cf99a4f136863ead1a2dd6d18d3c583ece3444697aee3f74322936b"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/trial1/pdf/polypropylene-simulated-analysis.json",
+      "sha256": "8d8d48c18cd8e426b41fc127289831c199636f6ac34c82d6f107fa6285ca5c31"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/trial1/pdf/polypropylene-simulated-dossier.json",
+      "sha256": "a58a0c9e5a1941df5078f69dd18650d94ad0c44c3099fef9c4da6359ea6790c4"
+    }
+  ],
+  "producer_files": {
+    "alu-foil-simulated-analysis.json": {
+      "sha256": "bed5c99413385626c7e729aff14a73c74c98be32556359bdc10b29f9a6c84bfd",
+      "bytes": 215243
+    },
+    "alu-foil-simulated-dossier.json": {
+      "sha256": "8eb3c8e89b663baff62b4a7f19c7106b7d5aa2f1be81b3b3ca5fe2538b9be09c",
+      "bytes": 334846
+    },
+    "alu-foil-simulated-en-layout.json": {
+      "sha256": "1f9ec526648434f6d238cfb798cb2e333b9e853603ef7b8614623fd4a15b2487",
+      "bytes": 6032
+    },
+    "alu-foil-simulated-en-record-associations.json": {
+      "sha256": "366b1fa7954ae346abfc46e85ad85385a0db5636e259201af055762718182039",
+      "bytes": 303
+    },
+    "alu-foil-simulated-en-summary.json": {
+      "sha256": "7d263ba444f937b4bb8493996a51715ec56eb2930059bc8bff689eda17e19f08",
+      "bytes": 208
+    },
+    "alu-foil-simulated-en.html": {
+      "sha256": "83d29eb54ce8a3f06438a78adac1a5a2a03bd5146b3874f49b2d359eec80e70a",
+      "bytes": 178488
+    },
+    "alu-foil-simulated-en.pdf": {
+      "sha256": "f2de7a0e84a074c0111769a8dfa5adcb4a76896a698cd76c2b6cd100bdbfdc6b",
+      "bytes": 509665
+    },
+    "alu-profiles-simulated-analysis.json": {
+      "sha256": "d8b2a8aa6fea90eaab3096a4c71e9790e6bc2e5cb3fd04990619ca6c3bcacecf",
+      "bytes": 226885
+    },
+    "alu-profiles-simulated-ar-layout.json": {
+      "sha256": "29a6d7ebaa94a149759e8cd27178936720be9cc08aa2469d708454e8032cbc4e",
+      "bytes": 6367
+    },
+    "alu-profiles-simulated-ar-record-associations.json": {
+      "sha256": "b124f13e7e14357a463cb7a24347935519e1f5958f15b23a7681f63066b9a6f5",
+      "bytes": 585
+    },
+    "alu-profiles-simulated-ar-summary.json": {
+      "sha256": "403d126f8cea8ec6ede899b0d9ef564e8c1ba2c54974e3f5f26271ddbc057b51",
+      "bytes": 212
+    },
+    "alu-profiles-simulated-ar.html": {
+      "sha256": "f5d6bb10cf5087aea9eb882c55b71d45e80ff9e49e1f76ad3b71c76e44e87658",
+      "bytes": 231908
+    },
+    "alu-profiles-simulated-ar.pdf": {
+      "sha256": "f761682d1a25c43e6de932bccf068f2f3eea19d1836dad243f2450ce5c29819b",
+      "bytes": 886781
+    },
+    "alu-profiles-simulated-dossier.json": {
+      "sha256": "9b18ff2bbd6ed61265ed0317dac98835ae2d15efb195c96bec8b6a1dd0c314cf",
+      "bytes": 353506
+    },
+    "penicillin-api-simulated-analysis.json": {
+      "sha256": "657c5ee5c9db8f03f1caa15a1d2234a368869584d09ecfb9f45421b160f1019c",
+      "bytes": 211498
+    },
+    "penicillin-api-simulated-ar-layout.json": {
+      "sha256": "183d29257d251123cc0e154675aa730031a7d765fe977315ade429b8a82c865a",
+      "bytes": 6376
+    },
+    "penicillin-api-simulated-ar-record-associations.json": {
+      "sha256": "322b4121eac2a9d090e31e17f756d0d3ad0c32ef57e9cda08edf02f12840e94a",
+      "bytes": 344
+    },
+    "penicillin-api-simulated-ar-summary.json": {
+      "sha256": "7ede6c16ef36b4efec4f89ce7d42251fabae06acad44cfc1b9634160b0ef7b31",
+      "bytes": 214
+    },
+    "penicillin-api-simulated-ar.html": {
+      "sha256": "44f556cae7259a7ba6e3e14dbd7b890a1ce062157c398d114b7a853150db1898",
+      "bytes": 196892
+    },
+    "penicillin-api-simulated-ar.pdf": {
+      "sha256": "3ace0a81724907d6aeb66fb46e3ba867c27087edd95cfb45dd3d87142573e5c0",
+      "bytes": 811215
+    },
+    "penicillin-api-simulated-dossier.json": {
+      "sha256": "97269d850cf99a4f136863ead1a2dd6d18d3c583ece3444697aee3f74322936b",
+      "bytes": 328777
+    },
+    "polypropylene-simulated-analysis.json": {
+      "sha256": "8d8d48c18cd8e426b41fc127289831c199636f6ac34c82d6f107fa6285ca5c31",
+      "bytes": 213464
+    },
+    "polypropylene-simulated-ar-layout.json": {
+      "sha256": "aa71e3002091c30ab75658094849603ed60c678429806bc38cc3b3918110c1fd",
+      "bytes": 6160
+    },
+    "polypropylene-simulated-ar-record-associations.json": {
+      "sha256": "da9e59272f6d04a22c44922910cb92f3bcbdd8a07f32f3fd48aa99264969a44b",
+      "bytes": 237
+    },
+    "polypropylene-simulated-ar-summary.json": {
+      "sha256": "bfb14d35313b8369312b6f8ed8a791f5cd32fbf8615b7c3251fab199eb6d269f",
+      "bytes": 213
+    },
+    "polypropylene-simulated-ar.html": {
+      "sha256": "15074d1581771714ee799f1f19a16033e6d34164e05a8ce6dafaccbacfc5cd94",
+      "bytes": 190597
+    },
+    "polypropylene-simulated-ar.pdf": {
+      "sha256": "8344d1962388864d62cfa3ee9849002bd00749c4a527b5b16b16f8cf9bd81a9c",
+      "bytes": 781638
+    },
+    "polypropylene-simulated-dossier.json": {
+      "sha256": "a58a0c9e5a1941df5078f69dd18650d94ad0c44c3099fef9c4da6359ea6790c4",
+      "bytes": 330134
+    }
+  },
+  "native_views_actually_inspected": [
+    {
+      "page": 49,
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/proof/rendered/alu-foil-simulated-en-page-49.png",
+      "sha256": "71f4645fc5e6c575a936707626df99d29fa07d16e3a9ac50dcd3b481bb1891c2"
+    },
+    {
+      "page": 50,
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/proof/rendered/alu-foil-simulated-en-page-50.png",
+      "sha256": "d4b13050a25a41238ade42fa21caf49c1d88013e3b365901c772cecf940e5c13"
+    },
+    {
+      "page": 32,
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/proof/rendered/polypropylene-simulated-ar-page-32.png",
+      "sha256": "4e7506d05fa1fd1f0133b40cfd047e7621aa69729c134c7cdd01b79bd58fd40a"
+    },
+    {
+      "page": 33,
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/proof/rendered/polypropylene-simulated-ar-page-33.png",
+      "sha256": "66735a7d97e6043ea7947a17f26e5f3344b5104e4fd24526933d01e7b9476c35"
+    },
+    {
+      "page": 32,
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/proof/rendered/alu-profiles-simulated-ar-page-32.png",
+      "sha256": "6d3cb563d617971b6da03365eaf1496b39a7bd856aa776de7c099bba5a7345ae"
+    },
+    {
+      "page": 33,
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/proof/rendered/alu-profiles-simulated-ar-page-33.png",
+      "sha256": "232e16b5745656b3d46c8362cefd75ed34cf39bfcd84fa2fecb39b6b564f410e"
+    },
+    {
+      "page": 35,
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/proof/rendered/alu-profiles-simulated-ar-page-35.png",
+      "sha256": "54247c5b31af356443f520c7c80e43af4fd8d09cdf4b848cc2cf88af971fa9d7"
+    },
+    {
+      "page": 36,
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/proof/rendered/alu-profiles-simulated-ar-page-36.png",
+      "sha256": "6449e047067c9efc0feec847b510573d9cc9dd5cbc3f374826e339ea18f509e0"
+    },
+    {
+      "page": 30,
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/proof/rendered/penicillin-api-simulated-ar-page-30.png",
+      "sha256": "1f3b2ee1bc4159ebd1ea3789fa34f1981b779970415393628c007a6f3b65a889"
+    },
+    {
+      "page": 31,
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/proof/rendered/penicillin-api-simulated-ar-page-31.png",
+      "sha256": "f1031fc8cbd056f99f1ae58e1564a46d7120d7e8e6b58ada345077538387c198"
+    }
+  ],
+  "visual_observations": [
+    "FoilEN50 Scenario reconciliation and StatusPASS together;49 ends prior synthetic-isolation fact.",
+    "PPAR33 Quantity with Recorded basis quantity; no stranded heading32.",
+    "ProfilesAR33 raw National value with Displacement2; computed components remain earlier32.",
+    "ProfilesAR36 and penicillinAR31 R1-D source caption stays with complete positive-years2022/2023/2024.",
+    "Viewed pages retain both disclosures and readable source text; no overlap observed. All250 native pages were not manually inspected."
+  ],
+  "preservation": {
+    "previous_source_rehashed_equal": true,
+    "prototype_source_rehashed_equal": true,
+    "original_packets_and_failed_outputs_not_written": true,
+    "product_worktree_or_indexes_or_services_modified": false,
+    "graph_generation_or_canonical_operation": false
+  },
+  "sanad": {
+    "direct": "Actual1759 source comparisons, four unchanged-producer tests, strict4/250 zeroissues, PDFium144dpi250page generation,10native page views, old foilPDF page extraction and sole CSS substitution in all4HTML.",
+    "inference": "Unprotected internal fragmentation of the first scalar Grid row was the remaining layout mechanism: keeping that one row internally intact, with the prior external keep chain unchanged, moves heading+fact together. This is an empirical CSS diagnosis, not a claim to have instrumented Blink internals.",
+    "primary_reference": [
+      "https://www.w3.org/TR/css-break-3/#break-propagation",
+      "https://www.w3.org/TR/css-grid-1/#pagination"
+    ]
+  },
+  "muhasabah": {
+    "result": "PASS for bounded feasibility and amendment, not self-approval",
+    "assumptions": "Identical producer/test/image/source exceptCSS supplies the controlled comparison; internal-engine cause inferred from actualisolated property delta.",
+    "risks": "Other reports can repaginate; final44 and later exact-candidate gates remain mandatory. First scalar row only is kept; arbitrary long later records remain breakable.",
+    "unverified": "Fresh product transfer, priorBIDI/q3 closure targets, full88API equality, fullfunctional/final44manual, canonical/R1, twoCIroots and delivery.",
+    "boundaries": "Only new external proofcopy/evidence created. Sourcewriter remains separate; independent approval and coordinator acceptance required."
+  }
+}

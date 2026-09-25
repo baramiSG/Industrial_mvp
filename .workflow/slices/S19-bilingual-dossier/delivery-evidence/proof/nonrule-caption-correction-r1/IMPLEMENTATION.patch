@@ -1,0 +1,50 @@
+--- before/browser_tests/test_dossier.py
++++ after/browser_tests/test_dossier.py
+@@ -490,6 +490,29 @@
+                 "first_values": first.locator(":scope > dd li").all_inner_texts(),
+                 "source_path": "blocks.ledger.records.rules[rule_id=R1-D].metrics.positive_years",
+             })
++    if mode == "simulated" and locale.code == "ar" and case.slug == "streptomycin-api":
++        caption = popup.locator("#dossier-capability > .dossier-source-caption")
++        expect(caption).to_have_count(1)
++        expect(caption).to_have_text(strings["dossier.source_original"])
++        group = popup.locator(
++            "#dossier-capability > .dossier-source-caption + "
++            ".dossier-record > .record-group:first-child"
++        )
++        expect(group).to_have_count(1)
++        expect(group.locator(":scope > dt")).to_have_text(strings["dossier.field.profile_hard_gates"])
++        first = group.locator(":scope > dd > .dossier-record > .record-scalar:first-child")
++        expect(first).to_have_count(1)
++        expect(first.locator(":scope > dt")).to_have_text(strings["dossier.field.named_molecule_and_synthesis_route"])
++        expect(first.locator(":scope > dd")).to_have_text(
++            exported["blocks"]["capability"]["records"]["profile_hard_gates"]["named_molecule_and_synthesis_route"]
++        )
++        record_associations.append({
++            "finding": "CAPTION-ORPHAN-03", "caption": caption.inner_text(),
++            "heading": group.locator(":scope > dt").inner_text(),
++            "first_label": first.locator(":scope > dt").inner_text(),
++            "first_value": first.locator(":scope > dd").inner_text(),
++            "source_path": "blocks.capability.records.profile_hard_gates.named_molecule_and_synthesis_route",
++        })
+     if mode == "simulated" and locale.code == "en" and case.slug == "alu-foil":
+         reconciliation = exported["blocks"]["authority"]["records"]["integrity"]["scenario_reconciliation"]
+         term = strings["dossier.field.scenario_reconciliation"]
+--- before/src/ior_mvp/static/css/dossier.css
++++ after/src/ior_mvp/static/css/dossier.css
+@@ -90,10 +90,13 @@
+   .dossier-record .record-group > dd > .dossier-record,
+   .dossier-record .record-group > dd > .dossier-record > :first-child,
+   .rule-record > .dossier-source-caption + .dossier-record,
+-  .rule-record > .dossier-source-caption + .dossier-record > :first-child {
++  .rule-record > .dossier-source-caption + .dossier-record > :first-child,
++  #dossier-capability > .dossier-source-caption + .dossier-record,
++  #dossier-capability > .dossier-source-caption + .dossier-record > :first-child {
+     break-before: avoid;
+   }
+-  .rule-record > .dossier-source-caption { break-after: avoid; }
++  .rule-record > .dossier-source-caption,
++  #dossier-capability > .dossier-source-caption { break-after: avoid; }
+   .rule-record > p:first-of-type { break-after: avoid; }
+   .warning, .branch-disclosure { break-inside: avoid; }
+   .dossier-section > .branch-label, .dossier-section > .branch-disclosure { break-after: avoid; }

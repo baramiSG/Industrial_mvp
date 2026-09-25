@@ -1,0 +1,9 @@
+{
+  "owner_instruction": "please note for the clis you are not going to use the api keys i have subscriptions",
+  "policy": "Authenticated existing subscriptions only; remove API-key environment overrides from CLI launches; no paid API fallback or overage authorization. An unavailable subscription route is not approval.",
+  "routes": {
+    "cursor": "Authenticated subscription; explicit grok-4.7-high",
+    "claude": "Claude.ai firstParty Max OAuth; explicit claude-opus-5-5/high",
+    "codex": "ChatGPT authenticated; explicit gpt-6-sol/high for corrections"
+  }
+}

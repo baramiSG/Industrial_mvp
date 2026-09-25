@@ -160,6 +160,20 @@ Follow `docs/implementation/MINISTRY_DEMO_SCRIPT.md`:
 4. PP public/simulated `REJECT`;
 5. Decision Dossier.
 
+### S19 dossier export workflow
+
+S19 extends this final step for every case in both locales and evidence modes. Its source/rendered/PDF and delivery gates remain pending; use the current build record to distinguish implementation from accepted delivery.
+
+1. In Executive Mode choose the case and language, then follow the existing **Analyst** link. Select the intended analyst evidence mode explicitly; Executive Mode displays both branches and does not supply a global selected export mode.
+2. Open the analyst dossier action. Confirm the opportunity, locale, evidence mode and public conclusion before sharing or printing. Simulated output must show both exact policy warnings; public output must show neither.
+3. Use **Download JSON** for the locale-neutral DecisionDossier2.0.0 record or **Print / Save PDF** for the native Chrome/Chromium print dialog. Choose A4 with print backgrounds and turn off the browser’s automatic **Headers and footers** option. The product does not expose a PDF server endpoint or require a PDF service. Keep full technical IDs and both simulated-page warnings visible; unreadable, clipped or overlapping output is a defect, not an acceptable export.
+4. Read the first-page decision summary and the complete appendix. The latter retains all conditions/kill conditions, the public decision in simulation, source passports and contradictions. Unavailable values are not zero; external route-8 dependencies are not local evidence. The export introduces no authorization or source confirmation.
+5. Use the return link to recover the same case/mode/locale. In the workspace, **View observed values** opens the trade chart's public year/value/quantity table; the two plotted lines use independent scales and their heights are not comparable.
+
+An HTTP422 `DOSSIER_INTEGRITY_ERROR` means required export context is malformed or conflicts with the governed analysis/scenario. Preserve the sanitized response and reproduce; do not regenerate evidence, present a partial successful report, or change decisions to make export succeed. Existing unknown-case404 and invalid-query422 behavior remains. The endpoint's typed failure does not establish comprehensive malformed-input coverage beyond the tested export boundary.
+
+The S19 acceptance record must retain all44 PDFs/text/page metadata/checksums, every-page144dpi raster proof and the reviewed visual subset. Original print defects and failed attempts remain evidence. Native PDF output is not PDF-UA certification. S21 still requires final-projection live Aura and real bilingual application verification; local or skipped Aura checks do not close it.
+
 ## Required gates
 
 ```bash

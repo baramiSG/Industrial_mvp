@@ -1,0 +1,65 @@
+{
+  "id": "6490a1a47b33e2062713f1cba45b95bb60ebbf2065b089a593324f1dc9dae449",
+  "image": "sha256:938b534c8bac0f80012299fc0bba33c00d29f2ade02416bbc1df9d9c028f8112",
+  "started_at": "2026-09-25T08:38:12.069783609Z",
+  "command": [
+    "python",
+    "browser_tests/visual_container.py",
+    "--mode",
+    "update",
+    "--change-ref",
+    "S19-BILINGUAL-DOSSIER-1"
+  ],
+  "mounts": [
+    {
+      "Source": "/home/barami/projects/ior-worktrees/s19/data",
+      "Destination": "/workspace/data",
+      "RW": false
+    },
+    {
+      "Source": "/home/barami/projects/ior-worktrees/s19/browser_tests",
+      "Destination": "/workspace/browser_tests",
+      "RW": false
+    },
+    {
+      "Source": "/home/barami/projects/ior-worktrees/s19/browser_tests/baselines/v0.3.0",
+      "Destination": "/workspace/browser_tests/baselines/v0.3.0",
+      "RW": true
+    },
+    {
+      "Source": "/home/barami/projects/ior-worktrees/s19/.artifacts/e2e",
+      "Destination": "/workspace/.artifacts/e2e",
+      "RW": true
+    },
+    {
+      "Source": "/home/barami/projects/ior-worktrees/s19/config",
+      "Destination": "/workspace/config",
+      "RW": false
+    },
+    {
+      "Source": "/home/barami/projects/ior-worktrees/s19/docs/authority",
+      "Destination": "/workspace/docs/authority",
+      "RW": false
+    },
+    {
+      "Source": "/home/barami/projects/ior-worktrees/s19/scripts",
+      "Destination": "/workspace/scripts",
+      "RW": false
+    },
+    {
+      "Source": "/home/barami/projects/ior-worktrees/s19/pyproject.toml",
+      "Destination": "/workspace/pyproject.toml",
+      "RW": false
+    },
+    {
+      "Source": "/home/barami/projects/ior-worktrees/s19/uv.lock",
+      "Destination": "/workspace/uv.lock",
+      "RW": false
+    },
+    {
+      "Source": "/home/barami/projects/ior-worktrees/s19/src",
+      "Destination": "/workspace/src",
+      "RW": false
+    }
+  ]
+}

@@ -1,0 +1,185 @@
+{
+  "reference_rows": [
+    {
+      "table": "exclusions",
+      "code": "EX-01_HETEROGENEOUS_RESIDUAL",
+      "prefix": "The commercial product cannot be separated from a highly heterogeneous residual code and no product-level evidence is available.",
+      "prefixBottom": 6644.390625,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-GALVALUME-001::hard_exclusion_inputs",
+          "href": "#evidence-SYN-MINISTRY-GALVALUME-001::hard_exclusion_inputs",
+          "top": 6645.265625,
+          "bottom": 6664.265625
+        }
+      ]
+    },
+    {
+      "table": "exclusions",
+      "code": "EX-02_MARKET_BELOW_MES",
+      "prefix": "The sustainable downside market is below minimum efficient scale and no credible export contract exists.",
+      "prefixBottom": 6718.328125,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-GALVALUME-001::hard_exclusion_inputs",
+          "href": "#evidence-SYN-MINISTRY-GALVALUME-001::hard_exclusion_inputs",
+          "top": 6719.203125,
+          "bottom": 6738.203125
+        }
+      ]
+    },
+    {
+      "table": "exclusions",
+      "code": "EX-03_UNSATISFIABLE_HARD_GATE",
+      "prefix": "A legal, safety, environmental, IP or customer-qualification hard gate cannot be satisfied.",
+      "prefixBottom": 6792.265625,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-GALVALUME-001::hard_exclusion_inputs",
+          "href": "#evidence-SYN-MINISTRY-GALVALUME-001::hard_exclusion_inputs",
+          "top": 6793.140625,
+          "bottom": 6812.140625
+        }
+      ]
+    },
+    {
+      "table": "exclusions",
+      "code": "EX-04_IDLE_EQUIVALENT_CAPACITY",
+      "prefix": "Domestic production meets the required specification with material idle capacity and no binding market failure is evidenced.",
+      "prefixBottom": 6866.203125,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-GALVALUME-001::hard_exclusion_inputs",
+          "href": "#evidence-SYN-MINISTRY-GALVALUME-001::hard_exclusion_inputs",
+          "top": 6867.078125,
+          "bottom": 6886.078125
+        }
+      ]
+    },
+    {
+      "table": "exclusions",
+      "code": "EX-05_TRANSITORY_OR_MEASUREMENT",
+      "prefix": "The apparent gap is dominated by re-export, one-off project demand, temporary price arbitrage or classification discontinuity.",
+      "prefixBottom": 6940.140625,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-GALVALUME-001::hard_exclusion_inputs",
+          "href": "#evidence-SYN-MINISTRY-GALVALUME-001::hard_exclusion_inputs",
+          "top": 6941.015625,
+          "bottom": 6960.015625
+        }
+      ]
+    },
+    {
+      "table": "exclusions",
+      "code": "EX-06_REDUNDANCY_OR_CROWD_OUT",
+      "prefix": "The intervention would create unacceptable redundant capacity or crowd out a more efficient incumbent.",
+      "prefixBottom": 7014.078125,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-GALVALUME-001::hard_exclusion_inputs",
+          "href": "#evidence-SYN-MINISTRY-GALVALUME-001::hard_exclusion_inputs",
+          "top": 7014.953125,
+          "bottom": 7033.953125
+        }
+      ]
+    },
+    {
+      "table": "rejection-conditions",
+      "code": "hard_exclusion",
+      "prefix": "HARD_EXCLUSION_NOT_SATISFIED",
+      "prefixBottom": 7157.921875,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-GALVALUME-001::hard_exclusion_inputs",
+          "href": "#evidence-SYN-MINISTRY-GALVALUME-001::hard_exclusion_inputs",
+          "top": 7157.921875,
+          "bottom": 7176.921875
+        }
+      ]
+    },
+    {
+      "table": "rejection-conditions",
+      "code": "false_or_measurement_gap",
+      "prefix": "FALSE_OR_MEASUREMENT_NOT_ESTABLISHED",
+      "prefixBottom": 7211.984375,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-GALVALUME-001::hard_exclusion_inputs",
+          "href": "#evidence-SYN-MINISTRY-GALVALUME-001::hard_exclusion_inputs",
+          "top": 7211.984375,
+          "bottom": 7230.984375
+        }
+      ]
+    },
+    {
+      "table": "rejection-conditions",
+      "code": "equivalent_idle_qualified_supply",
+      "prefix": "EQUIVALENT_QUALIFIED_SUPPLY_NOT_ESTABLISHED",
+      "prefixBottom": 7266.046875,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-GALVALUME-001::demand",
+          "href": "#evidence-SYN-MINISTRY-GALVALUME-001::demand",
+          "top": 7266.046875,
+          "bottom": 7285.046875
+        },
+        {
+          "text": "SYN-MINISTRY-GALVALUME-001::equivalence",
+          "href": "#evidence-SYN-MINISTRY-GALVALUME-001::equivalence",
+          "top": 7285.921875,
+          "bottom": 7304.921875
+        }
+      ]
+    },
+    {
+      "table": "rejection-conditions",
+      "code": "uneconomic_at_efficient_scale",
+      "prefix": "ECONOMIC_ROUTE_EXISTS",
+      "prefixBottom": 7339.984375,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-GALVALUME-001::route_evidence",
+          "href": "#evidence-SYN-MINISTRY-GALVALUME-001::route_evidence",
+          "top": 7339.984375,
+          "bottom": 7358.984375
+        }
+      ]
+    },
+    {
+      "table": "rejection-conditions",
+      "code": "structural_overcapacity",
+      "prefix": "STRUCTURAL_OVERCAPACITY_NOT_ESTABLISHED",
+      "prefixBottom": 7394.046875,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-GALVALUME-001::hard_exclusion_inputs",
+          "href": "#evidence-SYN-MINISTRY-GALVALUME-001::hard_exclusion_inputs",
+          "top": 7394.046875,
+          "bottom": 7413.046875
+        }
+      ]
+    },
+    {
+      "table": "rejection-conditions",
+      "code": "generic_capacity_contradicted",
+      "prefix": "GENERIC_CAPACITY_NOT_CONTRADICTED",
+      "prefixBottom": 7448.109375,
+      "references": [
+        {
+          "text": "P-COMTRADE-721061-X",
+          "href": "#evidence-P-COMTRADE-721061-X",
+          "top": 7448.109375,
+          "bottom": 7467.109375
+        }
+      ]
+    }
+  ],
+  "nested_record_pages": [
+    {
+      "page": 23,
+      "first_fact_present": true
+    }
+  ],
+  "failures": []
+}

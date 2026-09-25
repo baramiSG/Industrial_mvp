@@ -1,0 +1,596 @@
+{
+  "actual_calls": 16,
+  "positions_per_call": 2,
+  "source_helper_sha256": "827d03d83adb78d2e274c25a5759d63ed73f0a62c1787f4c51362ec5116d1f5e",
+  "capture_body_sha256": "acd0989c8dd8b797d8d66eb412489efb2a158fd2a7e9d4c4511ef404c2849924",
+  "scroll_restoration_evidence": "Each actual same-loop capture completed the source-bound original_scroll equality assertion immediately after bounds and before capture; all4visual cases passed. Raw initial/leftmost measurements retained; no separate raw post-restore coordinate record is invented.",
+  "visual_summary": {
+    "collected": 4,
+    "exit_status": 0,
+    "explicit_gate": true,
+    "failed": 0,
+    "named_tests": [
+      "test_governed_visual_baselines_match"
+    ],
+    "passed": 4,
+    "skipped": 0
+  },
+  "observations": [
+    {
+      "path": "ar/desktop-1440x900/journey-e-polypropylene-public-dossier.json",
+      "json_sha256": "8697ac079b57f1bb97ecb98078f3a766faf08ba82618fb1e8f02d65e4802ab14",
+      "case_id": "SAU-H0-390210",
+      "mode": "public",
+      "viewport": "desktop-1440x900",
+      "locale": "ar",
+      "positions": [
+        {
+          "position": "initial",
+          "width": 1440,
+          "scrollWidth": 1440,
+          "scrollX": 0,
+          "fonts": "loaded",
+          "all_boxes_and_text_unclipped": true
+        },
+        {
+          "position": "leftmost",
+          "width": 1440,
+          "scrollWidth": 1440,
+          "scrollX": 0,
+          "fonts": "loaded",
+          "all_boxes_and_text_unclipped": true
+        }
+      ],
+      "pngs": [
+        {
+          "name": "journey-e-polypropylene-public-dossier-initial.png",
+          "sha256": "638d4621702551315568bbf08c25faf1267727cc488c445a7d264cbe173c56a0"
+        },
+        {
+          "name": "journey-e-polypropylene-public-dossier-leftmost.png",
+          "sha256": "638d4621702551315568bbf08c25faf1267727cc488c445a7d264cbe173c56a0"
+        }
+      ]
+    },
+    {
+      "path": "ar/desktop-1440x900/journey-e-polypropylene-simulated-dossier.json",
+      "json_sha256": "387d0b5d5698e732b0967bf9d4ea0395361e60e663ce076cef5bc822de501e43",
+      "case_id": "SAU-H0-390210",
+      "mode": "simulated",
+      "viewport": "desktop-1440x900",
+      "locale": "ar",
+      "positions": [
+        {
+          "position": "initial",
+          "width": 1440,
+          "scrollWidth": 1440,
+          "scrollX": 0,
+          "fonts": "loaded",
+          "all_boxes_and_text_unclipped": true
+        },
+        {
+          "position": "leftmost",
+          "width": 1440,
+          "scrollWidth": 1440,
+          "scrollX": 0,
+          "fonts": "loaded",
+          "all_boxes_and_text_unclipped": true
+        }
+      ],
+      "pngs": [
+        {
+          "name": "journey-e-polypropylene-simulated-dossier-initial.png",
+          "sha256": "33ecb2a73f4883d90800eaa9e22139185c88cce0604fcc567f65d2b19aed94d1"
+        },
+        {
+          "name": "journey-e-polypropylene-simulated-dossier-leftmost.png",
+          "sha256": "33ecb2a73f4883d90800eaa9e22139185c88cce0604fcc567f65d2b19aed94d1"
+        }
+      ]
+    },
+    {
+      "path": "ar/desktop-1440x900/journey-e-steel-public-dossier.json",
+      "json_sha256": "1e4f5538ddbaf446116e0f6204dabe7ff3aa48d657f50daae49be1ee402396f2",
+      "case_id": "SAU-H0-721049",
+      "mode": "public",
+      "viewport": "desktop-1440x900",
+      "locale": "ar",
+      "positions": [
+        {
+          "position": "initial",
+          "width": 1440,
+          "scrollWidth": 1440,
+          "scrollX": 0,
+          "fonts": "loaded",
+          "all_boxes_and_text_unclipped": true
+        },
+        {
+          "position": "leftmost",
+          "width": 1440,
+          "scrollWidth": 1440,
+          "scrollX": 0,
+          "fonts": "loaded",
+          "all_boxes_and_text_unclipped": true
+        }
+      ],
+      "pngs": [
+        {
+          "name": "journey-e-steel-public-dossier-initial.png",
+          "sha256": "28159a73c563d26b0892ca0531200fab3c4e83ea1e2ddca20d3fead465476a57"
+        },
+        {
+          "name": "journey-e-steel-public-dossier-leftmost.png",
+          "sha256": "28159a73c563d26b0892ca0531200fab3c4e83ea1e2ddca20d3fead465476a57"
+        }
+      ]
+    },
+    {
+      "path": "ar/desktop-1440x900/journey-e-steel-simulated-dossier.json",
+      "json_sha256": "8747d856e116a5fb4bffa42f97aeab4c8e39402f48815c80994f50dfb405fd8f",
+      "case_id": "SAU-H0-721049",
+      "mode": "simulated",
+      "viewport": "desktop-1440x900",
+      "locale": "ar",
+      "positions": [
+        {
+          "position": "initial",
+          "width": 1440,
+          "scrollWidth": 1440,
+          "scrollX": 0,
+          "fonts": "loaded",
+          "all_boxes_and_text_unclipped": true
+        },
+        {
+          "position": "leftmost",
+          "width": 1440,
+          "scrollWidth": 1440,
+          "scrollX": 0,
+          "fonts": "loaded",
+          "all_boxes_and_text_unclipped": true
+        }
+      ],
+      "pngs": [
+        {
+          "name": "journey-e-steel-simulated-dossier-initial.png",
+          "sha256": "369e5a8fe08b7d3f3ffbf8375ca59ef667afd3760dcc79e42772caa1ea1a3495"
+        },
+        {
+          "name": "journey-e-steel-simulated-dossier-leftmost.png",
+          "sha256": "369e5a8fe08b7d3f3ffbf8375ca59ef667afd3760dcc79e42772caa1ea1a3495"
+        }
+      ]
+    },
+    {
+      "path": "ar/tablet-1024x768/journey-e-polypropylene-public-dossier.json",
+      "json_sha256": "0e753464dd7918cd48d11d8211aa397a5b523943695a723db56d3a3bfac48b62",
+      "case_id": "SAU-H0-390210",
+      "mode": "public",
+      "viewport": "tablet-1024x768",
+      "locale": "ar",
+      "positions": [
+        {
+          "position": "initial",
+          "width": 1024,
+          "scrollWidth": 1024,
+          "scrollX": 0,
+          "fonts": "loaded",
+          "all_boxes_and_text_unclipped": true
+        },
+        {
+          "position": "leftmost",
+          "width": 1024,
+          "scrollWidth": 1024,
+          "scrollX": 0,
+          "fonts": "loaded",
+          "all_boxes_and_text_unclipped": true
+        }
+      ],
+      "pngs": [
+        {
+          "name": "journey-e-polypropylene-public-dossier-initial.png",
+          "sha256": "74ee6f1805706bd1432a6f089eb5e712f252234e72b8bf3ec9bc4034669bbda9"
+        },
+        {
+          "name": "journey-e-polypropylene-public-dossier-leftmost.png",
+          "sha256": "74ee6f1805706bd1432a6f089eb5e712f252234e72b8bf3ec9bc4034669bbda9"
+        }
+      ]
+    },
+    {
+      "path": "ar/tablet-1024x768/journey-e-polypropylene-simulated-dossier.json",
+      "json_sha256": "9d110ac1fd2a1fc9cd41089dbc72f76a76815b86481a3e2b8cc313ae55669d6c",
+      "case_id": "SAU-H0-390210",
+      "mode": "simulated",
+      "viewport": "tablet-1024x768",
+      "locale": "ar",
+      "positions": [
+        {
+          "position": "initial",
+          "width": 1024,
+          "scrollWidth": 1024,
+          "scrollX": 0,
+          "fonts": "loaded",
+          "all_boxes_and_text_unclipped": true
+        },
+        {
+          "position": "leftmost",
+          "width": 1024,
+          "scrollWidth": 1024,
+          "scrollX": 0,
+          "fonts": "loaded",
+          "all_boxes_and_text_unclipped": true
+        }
+      ],
+      "pngs": [
+        {
+          "name": "journey-e-polypropylene-simulated-dossier-initial.png",
+          "sha256": "5cb54bcae7af398907bce37275db026dc76b4e25680999179511b3b2ec32ac20"
+        },
+        {
+          "name": "journey-e-polypropylene-simulated-dossier-leftmost.png",
+          "sha256": "5cb54bcae7af398907bce37275db026dc76b4e25680999179511b3b2ec32ac20"
+        }
+      ]
+    },
+    {
+      "path": "ar/tablet-1024x768/journey-e-steel-public-dossier.json",
+      "json_sha256": "f3ba0111c1173e30f5410ef9868e3c75861fb1022aac6e39fa5766f1585f9079",
+      "case_id": "SAU-H0-721049",
+      "mode": "public",
+      "viewport": "tablet-1024x768",
+      "locale": "ar",
+      "positions": [
+        {
+          "position": "initial",
+          "width": 1024,
+          "scrollWidth": 1024,
+          "scrollX": 0,
+          "fonts": "loaded",
+          "all_boxes_and_text_unclipped": true
+        },
+        {
+          "position": "leftmost",
+          "width": 1024,
+          "scrollWidth": 1024,
+          "scrollX": 0,
+          "fonts": "loaded",
+          "all_boxes_and_text_unclipped": true
+        }
+      ],
+      "pngs": [
+        {
+          "name": "journey-e-steel-public-dossier-initial.png",
+          "sha256": "c5fd582e4d960cfed074bee1bcca55dac5da4f08f6c49e6060a05e2fca656f28"
+        },
+        {
+          "name": "journey-e-steel-public-dossier-leftmost.png",
+          "sha256": "c5fd582e4d960cfed074bee1bcca55dac5da4f08f6c49e6060a05e2fca656f28"
+        }
+      ]
+    },
+    {
+      "path": "ar/tablet-1024x768/journey-e-steel-simulated-dossier.json",
+      "json_sha256": "fce5349996d71f3d9de197338e5eb818c4f6c21642d4cc5fd87283e1786917af",
+      "case_id": "SAU-H0-721049",
+      "mode": "simulated",
+      "viewport": "tablet-1024x768",
+      "locale": "ar",
+      "positions": [
+        {
+          "position": "initial",
+          "width": 1024,
+          "scrollWidth": 1024,
+          "scrollX": 0,
+          "fonts": "loaded",
+          "all_boxes_and_text_unclipped": true
+        },
+        {
+          "position": "leftmost",
+          "width": 1024,
+          "scrollWidth": 1024,
+          "scrollX": 0,
+          "fonts": "loaded",
+          "all_boxes_and_text_unclipped": true
+        }
+      ],
+      "pngs": [
+        {
+          "name": "journey-e-steel-simulated-dossier-initial.png",
+          "sha256": "ef0e3f162d1974e9e26556eb361a429b84ebfdae90d16a1a059354f90a25d8a3"
+        },
+        {
+          "name": "journey-e-steel-simulated-dossier-leftmost.png",
+          "sha256": "ef0e3f162d1974e9e26556eb361a429b84ebfdae90d16a1a059354f90a25d8a3"
+        }
+      ]
+    },
+    {
+      "path": "en/desktop-1440x900/journey-e-polypropylene-public-dossier.json",
+      "json_sha256": "eb30ba4cad7efe7cf29d01e1d777ac8c328bc2180207cf9b48cf8ae2ec132d86",
+      "case_id": "SAU-H0-390210",
+      "mode": "public",
+      "viewport": "desktop-1440x900",
+      "locale": "en",
+      "positions": [
+        {
+          "position": "initial",
+          "width": 1440,
+          "scrollWidth": 1440,
+          "scrollX": 0,
+          "fonts": "loaded",
+          "all_boxes_and_text_unclipped": true
+        },
+        {
+          "position": "leftmost",
+          "width": 1440,
+          "scrollWidth": 1440,
+          "scrollX": 0,
+          "fonts": "loaded",
+          "all_boxes_and_text_unclipped": true
+        }
+      ],
+      "pngs": [
+        {
+          "name": "journey-e-polypropylene-public-dossier-initial.png",
+          "sha256": "b17d0404ad24cf27d7c1daa06cce6a1ab640586639246e45be18154434ed2825"
+        },
+        {
+          "name": "journey-e-polypropylene-public-dossier-leftmost.png",
+          "sha256": "b17d0404ad24cf27d7c1daa06cce6a1ab640586639246e45be18154434ed2825"
+        }
+      ]
+    },
+    {
+      "path": "en/desktop-1440x900/journey-e-polypropylene-simulated-dossier.json",
+      "json_sha256": "017af24048a7d55274038cfa592ff5e49f6635b62c30e31014f965e8ecf1f3ee",
+      "case_id": "SAU-H0-390210",
+      "mode": "simulated",
+      "viewport": "desktop-1440x900",
+      "locale": "en",
+      "positions": [
+        {
+          "position": "initial",
+          "width": 1440,
+          "scrollWidth": 1440,
+          "scrollX": 0,
+          "fonts": "loaded",
+          "all_boxes_and_text_unclipped": true
+        },
+        {
+          "position": "leftmost",
+          "width": 1440,
+          "scrollWidth": 1440,
+          "scrollX": 0,
+          "fonts": "loaded",
+          "all_boxes_and_text_unclipped": true
+        }
+      ],
+      "pngs": [
+        {
+          "name": "journey-e-polypropylene-simulated-dossier-initial.png",
+          "sha256": "3e447e564abe0a0786558e10eb707a973418c33ec0f122cb8d5c1273b6268e79"
+        },
+        {
+          "name": "journey-e-polypropylene-simulated-dossier-leftmost.png",
+          "sha256": "3e447e564abe0a0786558e10eb707a973418c33ec0f122cb8d5c1273b6268e79"
+        }
+      ]
+    },
+    {
+      "path": "en/desktop-1440x900/journey-e-steel-public-dossier.json",
+      "json_sha256": "ec3a088d2f2f596c1590fc9e24a24853fe015e49dc1dccedc04392a9954519df",
+      "case_id": "SAU-H0-721049",
+      "mode": "public",
+      "viewport": "desktop-1440x900",
+      "locale": "en",
+      "positions": [
+        {
+          "position": "initial",
+          "width": 1440,
+          "scrollWidth": 1440,
+          "scrollX": 0,
+          "fonts": "loaded",
+          "all_boxes_and_text_unclipped": true
+        },
+        {
+          "position": "leftmost",
+          "width": 1440,
+          "scrollWidth": 1440,
+          "scrollX": 0,
+          "fonts": "loaded",
+          "all_boxes_and_text_unclipped": true
+        }
+      ],
+      "pngs": [
+        {
+          "name": "journey-e-steel-public-dossier-initial.png",
+          "sha256": "ba89a2f374e57ad1823898f40ad13a8330c466471858d83c6db6af4ebfc8eea4"
+        },
+        {
+          "name": "journey-e-steel-public-dossier-leftmost.png",
+          "sha256": "ba89a2f374e57ad1823898f40ad13a8330c466471858d83c6db6af4ebfc8eea4"
+        }
+      ]
+    },
+    {
+      "path": "en/desktop-1440x900/journey-e-steel-simulated-dossier.json",
+      "json_sha256": "9d9ff39dc899898879d4418769b56489347572c2d82678e74839f6033b181dbb",
+      "case_id": "SAU-H0-721049",
+      "mode": "simulated",
+      "viewport": "desktop-1440x900",
+      "locale": "en",
+      "positions": [
+        {
+          "position": "initial",
+          "width": 1440,
+          "scrollWidth": 1440,
+          "scrollX": 0,
+          "fonts": "loaded",
+          "all_boxes_and_text_unclipped": true
+        },
+        {
+          "position": "leftmost",
+          "width": 1440,
+          "scrollWidth": 1440,
+          "scrollX": 0,
+          "fonts": "loaded",
+          "all_boxes_and_text_unclipped": true
+        }
+      ],
+      "pngs": [
+        {
+          "name": "journey-e-steel-simulated-dossier-initial.png",
+          "sha256": "bf96afe2ed9613d5fa6a213363f67cebb31f934efa33fad2ae9d49a58ca36601"
+        },
+        {
+          "name": "journey-e-steel-simulated-dossier-leftmost.png",
+          "sha256": "bf96afe2ed9613d5fa6a213363f67cebb31f934efa33fad2ae9d49a58ca36601"
+        }
+      ]
+    },
+    {
+      "path": "en/tablet-1024x768/journey-e-polypropylene-public-dossier.json",
+      "json_sha256": "fc22f7cd490577109daac200bf10f79a968ff630d124792a8b76af63f81347aa",
+      "case_id": "SAU-H0-390210",
+      "mode": "public",
+      "viewport": "tablet-1024x768",
+      "locale": "en",
+      "positions": [
+        {
+          "position": "initial",
+          "width": 1024,
+          "scrollWidth": 1024,
+          "scrollX": 0,
+          "fonts": "loaded",
+          "all_boxes_and_text_unclipped": true
+        },
+        {
+          "position": "leftmost",
+          "width": 1024,
+          "scrollWidth": 1024,
+          "scrollX": 0,
+          "fonts": "loaded",
+          "all_boxes_and_text_unclipped": true
+        }
+      ],
+      "pngs": [
+        {
+          "name": "journey-e-polypropylene-public-dossier-initial.png",
+          "sha256": "5a975f8e9941ef8dcde504608112864e2bcab8c83e4286be6dd510cf010c8f67"
+        },
+        {
+          "name": "journey-e-polypropylene-public-dossier-leftmost.png",
+          "sha256": "5a975f8e9941ef8dcde504608112864e2bcab8c83e4286be6dd510cf010c8f67"
+        }
+      ]
+    },
+    {
+      "path": "en/tablet-1024x768/journey-e-polypropylene-simulated-dossier.json",
+      "json_sha256": "04dcc467d28a685d2165e40ccbd93a4dfadaa8bec2424a62db8b9809a5747f4d",
+      "case_id": "SAU-H0-390210",
+      "mode": "simulated",
+      "viewport": "tablet-1024x768",
+      "locale": "en",
+      "positions": [
+        {
+          "position": "initial",
+          "width": 1024,
+          "scrollWidth": 1024,
+          "scrollX": 0,
+          "fonts": "loaded",
+          "all_boxes_and_text_unclipped": true
+        },
+        {
+          "position": "leftmost",
+          "width": 1024,
+          "scrollWidth": 1024,
+          "scrollX": 0,
+          "fonts": "loaded",
+          "all_boxes_and_text_unclipped": true
+        }
+      ],
+      "pngs": [
+        {
+          "name": "journey-e-polypropylene-simulated-dossier-initial.png",
+          "sha256": "df3867e1219e6fd9f6da421c28ce6e90d10e82e04a43d561b6e8b1bc95b4bcf6"
+        },
+        {
+          "name": "journey-e-polypropylene-simulated-dossier-leftmost.png",
+          "sha256": "df3867e1219e6fd9f6da421c28ce6e90d10e82e04a43d561b6e8b1bc95b4bcf6"
+        }
+      ]
+    },
+    {
+      "path": "en/tablet-1024x768/journey-e-steel-public-dossier.json",
+      "json_sha256": "69e6cba18d7e021f4e6944c590eaba71503e5062d976bf6de2b39f63ada40437",
+      "case_id": "SAU-H0-721049",
+      "mode": "public",
+      "viewport": "tablet-1024x768",
+      "locale": "en",
+      "positions": [
+        {
+          "position": "initial",
+          "width": 1024,
+          "scrollWidth": 1024,
+          "scrollX": 0,
+          "fonts": "loaded",
+          "all_boxes_and_text_unclipped": true
+        },
+        {
+          "position": "leftmost",
+          "width": 1024,
+          "scrollWidth": 1024,
+          "scrollX": 0,
+          "fonts": "loaded",
+          "all_boxes_and_text_unclipped": true
+        }
+      ],
+      "pngs": [
+        {
+          "name": "journey-e-steel-public-dossier-initial.png",
+          "sha256": "59ef713f58e989cdb3ab019360781bd5780570df63c09c604251d20517d1526a"
+        },
+        {
+          "name": "journey-e-steel-public-dossier-leftmost.png",
+          "sha256": "59ef713f58e989cdb3ab019360781bd5780570df63c09c604251d20517d1526a"
+        }
+      ]
+    },
+    {
+      "path": "en/tablet-1024x768/journey-e-steel-simulated-dossier.json",
+      "json_sha256": "2402823f3ff4e1ddd8d5da7876eec277a220f931ae82c395d54ed1d7474bee32",
+      "case_id": "SAU-H0-721049",
+      "mode": "simulated",
+      "viewport": "tablet-1024x768",
+      "locale": "en",
+      "positions": [
+        {
+          "position": "initial",
+          "width": 1024,
+          "scrollWidth": 1024,
+          "scrollX": 0,
+          "fonts": "loaded",
+          "all_boxes_and_text_unclipped": true
+        },
+        {
+          "position": "leftmost",
+          "width": 1024,
+          "scrollWidth": 1024,
+          "scrollX": 0,
+          "fonts": "loaded",
+          "all_boxes_and_text_unclipped": true
+        }
+      ],
+      "pngs": [
+        {
+          "name": "journey-e-steel-simulated-dossier-initial.png",
+          "sha256": "2945cc7aa4016ca67a42227bcadf8438193e87b62b2dba0e82739dfddabcf7e9"
+        },
+        {
+          "name": "journey-e-steel-simulated-dossier-leftmost.png",
+          "sha256": "2945cc7aa4016ca67a42227bcadf8438193e87b62b2dba0e82739dfddabcf7e9"
+        }
+      ]
+    }
+  ]
+}

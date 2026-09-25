@@ -1,0 +1,33 @@
+{
+  "at_utc": "2026-09-25T05:39:57.603404+00:00",
+  "scope": "Read-only diagnosis only; source frozen",
+  "source_ledger_sha256": "18180060d91ef4c91cb5152114bebe3fed2e9704370839703a9455b06694dbc2",
+  "preimages": {
+    "src/ior_mvp/static/css/dossier.css": "d124607ce4466fad488678c33aacffd248b198f77d7a9b1097ccf39d9fc63b13",
+    "browser_tests/test_dossier.py": "2912d949c90395251180f1442fb486046686938a3150eb23f783d59eedcb0f97"
+  },
+  "computed_dom_sha256": "814fffa2b356896114c7c258e4fd2bdd8c3709ca8384928f623ba386b151d584",
+  "actual_command_exit": 0,
+  "source_path": "blocks.ledger.records.rules[4].metrics.quantity",
+  "observed_css": {
+    "term_break_after": "avoid",
+    "dd_break_before": "auto",
+    "nested_dl_break_before": "auto",
+    "first_grid_row_break_before": "auto"
+  },
+  "native_viewed": [
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/final-pdf-review-r2/rendered/polypropylene-simulated-ar-page-32.png",
+      "sha256": "374548e9de08dc7b3657e01386163ec3b45321d27108b0cd588550f30126622d"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/final-pdf-review-r2/rendered/polypropylene-simulated-ar-page-33.png",
+      "sha256": "bba7e5c04e55906ad3cd911c934d3f5f201344c26d57800b6d307ac49e167718"
+    }
+  ],
+  "finding": "Quantity heading orphan page32; first Recorded basis/quantity pair page33",
+  "inference": "Avoid-after on term alone does not prevent the page break inside empty leading dd/dl fragments. First-child keep chain is a candidate, not measured corrected behavior.",
+  "unverified": "Finite correction/proof strategy requires independent review and root acceptance; second reader caption finding will be batched.",
+  "sanad": "Actual frozen HTML and computed Chromium print CSS; directly viewed two144dpi pages; no CSS injected/PDF produced.",
+  "muhasabah": "PASS diagnosis scope; no proof of corrected behavior or overall PDF approval claimed."
+}
