@@ -1,0 +1,519 @@
+<!doctype html>
+<html lang="en" dir="ltr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Decision Dossier — Investigate</title><style>@font-face {
+  font-family: "IOR Noto Sans";
+  font-style: normal;
+  font-display: block;
+  font-weight: 100 900;
+  src: url("/static/assets/fonts/noto-sans/noto-sans-latin-wght-normal.woff2") format("woff2-variations");
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+
+@font-face {
+  font-family: "IOR Noto Sans Arabic";
+  font-style: normal;
+  font-display: block;
+  font-weight: 100 900;
+  src: url("/static/assets/fonts/noto-sans-arabic/noto-sans-arabic-arabic-wght-normal.woff2") format("woff2-variations");
+  unicode-range: U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC4,U+10EFC-10EFF,U+1EE00-1EE03,U+1EE05-1EE1F,U+1EE21-1EE22,U+1EE24,U+1EE27,U+1EE29-1EE32,U+1EE34-1EE37,U+1EE39,U+1EE3B,U+1EE42,U+1EE47,U+1EE49,U+1EE4B,U+1EE4D-1EE4F,U+1EE51-1EE52,U+1EE54,U+1EE57,U+1EE59,U+1EE5B,U+1EE5D,U+1EE5F,U+1EE61-1EE62,U+1EE64,U+1EE67-1EE6A,U+1EE6C-1EE72,U+1EE74-1EE77,U+1EE79-1EE7C,U+1EE7E,U+1EE80-1EE89,U+1EE8B-1EE9B,U+1EEA1-1EEA3,U+1EEA5-1EEA9,U+1EEAB-1EEBB,U+1EEF0-1EEF1;
+}
+
+@layer tokens {
+  :root {
+    --executive-pair-columns: repeat(2, minmax(0, 1fr));
+    --executive-vector-columns: repeat(4, minmax(0, 1fr));
+    --executive-padding: 34px;
+    --executive-header-flow: row;
+    --executive-max: 1680px;
+    --executive-columns: 250px minmax(0, 1fr);
+    --executive-heading-columns: minmax(0, 1.6fr) minmax(250px, 1fr);
+    --executive-steps-columns: minmax(0, 1fr);
+    --executive-skip-transform: translateY(-150%);
+    --color-navy-950: #07131f;
+    --color-navy-900: #0b1f33;
+    --color-navy-850: #102a43;
+    --color-navy-800: #173b5e;
+    --color-navy-700: #36556f;
+    --color-muted: #52677b;
+    --color-muted-strong: #576b7f;
+    --color-paper: #f4f7f9;
+    --color-surface: #ffffff;
+    --color-line: #dce5ec;
+    --color-line-strong: #c7d3dd;
+    --color-accent: #0f9f91;
+    --color-accent-text: #08766d;
+    --color-on-dark: #2dd4bf;
+    --color-accent-soft: #ddf7f2;
+    --color-warning: #c79435;
+    --color-warning-text: #76510d;
+    --color-warning-soft: #fff5dc;
+    --color-danger: #bd3d45;
+    --color-danger-text: #913038;
+    --color-danger-soft: #fde8ea;
+    --color-info: #2b6cb0;
+    --color-info-text: #285d92;
+    --color-info-soft: #e9f2fb;
+    --color-control-bg: #e8eef2;
+    --color-workspace: #edf3f6;
+    --color-soft: #f5f8fa;
+    --color-softer: #f7fafb;
+    --color-hover: #fafcfd;
+    --color-sidebar-text: #eaf2f7;
+    --color-sidebar-muted: #9db0c1;
+    --color-sidebar-subtle: #94a9bc;
+    --color-sidebar-footer: #91a7b9;
+    --color-dark-muted: #b7c6d4;
+    --color-dark-card-muted: #adc0d0;
+    --color-banner-muted: #a9c2d3;
+    --color-chart-label: #718399;
+    --color-synthetic-bg: #ffefbf;
+    --color-synthetic-text: #6f4c0a;
+    --color-white-overlay: rgb(255 255 255 / 8%);
+    --color-white-line: rgb(255 255 255 / 10%);
+    --color-paper-overlay: rgb(244 247 249 / 88%);
+    --color-line-overlay: rgb(199 211 221 / 80%);
+    --color-transparent: transparent;
+    --color-current: currentColor;
+
+    --space-0: 0;
+    --space-1: 1px;
+    --space-2: 2px;
+    --space-3: 3px;
+    --space-4: 4px;
+    --space-5: 5px;
+    --space-6: 6px;
+    --space-7: 7px;
+    --space-8: 8px;
+    --space-9: 9px;
+    --space-10: 10px;
+    --space-11: 11px;
+    --space-12: 12px;
+    --space-13: 13px;
+    --space-14: 14px;
+    --space-15: 15px;
+    --space-16: 16px;
+    --space-17: 17px;
+    --space-18: 18px;
+    --space-19: 19px;
+    --space-20: 20px;
+    --space-22: 22px;
+    --space-24: 24px;
+    --space-25: 25px;
+    --space-28: 28px;
+    --space-30: 30px;
+    --space-34: 34px;
+    --space-35: 35px;
+    --space-38: 38px;
+    --space-42: 42px;
+    --space-45: 45px;
+    --space-48: 48px;
+    --space-52: 52px;
+    --space-56: 56px;
+    --space-60: 60px;
+    --space-64: 64px;
+    --space-80: 80px;
+
+    --size-full: 100%;
+    --size-viewport: 100vh;
+    --size-sr: 1px;
+    --size-logo: 44px;
+    --size-status: 8px;
+    --size-flow-icon: 38px;
+    --size-icon: 20px;
+    --size-flow-column: 42px;
+    --size-state: 86px;
+    --size-class: 24px;
+    --size-unlock: 22px;
+    --size-chart: 280px;
+    --size-sidebar: 270px;
+    --size-select-min: 320px;
+    --size-hero-min: 510px;
+    --size-topbar-min: 95px;
+    --size-loading-min: 100px;
+    --size-skeleton: 150px;
+    --size-skeleton-tall: 330px;
+    --size-card-decoration: 170px;
+    --size-content-wide: 850px;
+    --size-content-copy: 730px;
+    --size-content-route: 780px;
+    --size-dossier-max: 1050px;
+    --size-chart-dot: 9px;
+    --size-capability-bar: 9px;
+    --size-capability-label: 145px;
+    --size-graph-min: 720px;
+    --size-graph-stroke: 2px;
+    --size-graph-selected-stroke: 4px;
+    --size-opacity-hidden: 0;
+    --size-opacity-visible: 1;
+    --size-sidebar-active: 3px;
+    --size-negative-one: -1px;
+
+    --layout-sidebar-position: fixed;
+    --layout-sidebar-width: var(--size-sidebar);
+    --layout-nav-columns: none;
+    --layout-nav-overflow: visible;
+    --layout-main-offset: var(--size-sidebar);
+    --layout-topbar-position: sticky;
+    --layout-topbar-direction: row;
+    --layout-topbar-align: center;
+    --layout-sidebar-footer-display: block;
+    --layout-hero-columns: minmax(0, 1.05fr) minmax(430px, 0.95fr);
+    --layout-workspace-columns: minmax(0, 1.28fr) minmax(320px, 0.72fr);
+    --layout-opportunity-columns: repeat(2, minmax(0, 1fr));
+    --layout-kpi-columns: repeat(4, minmax(0, 1fr));
+    --layout-metric-columns: repeat(4, minmax(0, 1fr));
+    --layout-governance-columns: repeat(3, minmax(0, 1fr));
+    --layout-extraction-columns: repeat(2, minmax(0, 1fr));
+    --layout-methodology-columns: repeat(4, minmax(0, 1fr));
+    --layout-economics-columns: repeat(3, minmax(0, 1fr));
+    --layout-capability-columns: repeat(3, minmax(0, 1fr));
+    --layout-capability-row: minmax(145px, 1fr) 2fr 42px;
+    --layout-stats-columns: repeat(3, minmax(0, 1fr));
+    --layout-flow-columns: none;
+    --layout-flow-node-columns: var(--size-flow-column) 1fr;
+    --layout-flow-node-align: start;
+    --layout-heading-direction: row;
+    --layout-heading-align: end;
+    --layout-workspace-tools-direction: row;
+    --layout-workspace-tools-align: center;
+    --layout-workspace-tools-width: auto;
+    --layout-select-width: auto;
+    --layout-decision-columns: auto 1fr auto;
+    --layout-hero-actions-direction: row;
+    --layout-footer-direction: row;
+    --layout-full-span: 1 / -1;
+    --layout-flow-span: 1 / 3;
+    --layout-dossier-columns: repeat(2, minmax(0, 1fr));
+    --layout-screening-columns: repeat(2, minmax(0, 1fr));
+    --layout-screening-direction: row;
+    --layout-screening-align: center;
+    --layout-graph-panel-columns: minmax(0, 1fr);
+  --layout-graph-columns: repeat(2, minmax(0, 1fr));
+
+    --breakpoint-wide: 1180px;
+    --breakpoint-tablet: 900px;
+    --breakpoint-mobile: 560px;
+
+    --border-none: 0;
+    --border-hairline: 1px;
+    --border-accent: 3px;
+
+    --radius-round: 999px;
+    --radius-circle: 50%;
+    --radius-xs: 7px;
+    --radius-sm: 8px;
+    --radius-control: 9px;
+    --radius-md: 10px;
+    --radius-card: 12px;
+    --radius-panel: 14px;
+    --radius-lg: 16px;
+    --radius-xl: 22px;
+    --radius-state: 24px;
+
+    --shadow-panel: 0 18px 60px rgb(7 30 52 / 10%);
+    --shadow-soft: 0 8px 24px rgb(7 30 52 / 7%);
+    --shadow-control: 0 4px 12px rgb(12 42 67 / 20%);
+    --shadow-button: 0 8px 20px rgb(16 42 67 / 18%);
+    --shadow-hero: 0 28px 80px rgb(0 0 0 / 18%);
+    --shadow-status: 0 0 0 4px rgb(45 212 191 / 12%);
+    --shadow-none: none;
+
+    --font-family-interface: "IOR Noto Sans", "IOR Noto Sans Arabic", sans-serif;
+    --font-family-arabic: "IOR Noto Sans Arabic", "IOR Noto Sans", sans-serif;
+    --font-size-hero: clamp(38px, 5vw, 66px);
+    --font-size-hero-mobile: 40px;
+    --font-size-section: clamp(25px, 3vw, 38px);
+    --font-size-9: 9px;
+    --font-size-10: 10px;
+    --font-size-11: 11px;
+    --font-size-12: 12px;
+    --font-size-14: 14px;
+    --font-size-15: 15px;
+    --font-size-16: 16px;
+    --font-size-17: 17px;
+    --font-size-18: 18px;
+    --font-size-20: 20px;
+    --font-size-22: 22px;
+    --font-size-23: 23px;
+    --font-size-24: 24px;
+    --font-size-28: 28px;
+    --font-weight-medium: 700;
+    --font-weight-strong: 750;
+    --font-weight-bold: 800;
+    --font-weight-heavy: 850;
+    --font-weight-black: 900;
+    --font-line-tight: 1.02;
+    --font-line-heading: 1.15;
+    --font-line-control: 1.2;
+    --font-line-body: 1.5;
+    --font-track-tight: -0.04em;
+    --font-track-heading: -0.025em;
+    --font-track-small: 0.01em;
+    --font-track-medium: 0.05em;
+    --font-track-wide: 0.06em;
+    --font-track-label: 0.08em;
+    --font-track-eyebrow: 0.12em;
+
+    --z-topbar: 15;
+    --z-sidebar: 20;
+    --z-card-action: 2;
+    --z-toast: 100;
+
+    --motion-duration: 0.2s;
+    --motion-toast-duration: 0.25s;
+    --motion-shimmer: shimmer 1.5s infinite;
+    --motion-scroll: smooth;
+    --motion-hover-inline: translateX(2px);
+    --motion-hover-block: translateY(-1px);
+    --motion-card-block: translateY(-3px);
+    --motion-toast-block: translateY(10px);
+    --motion-rtl-flip: scaleX(-1);
+    --motion-none: none;
+
+    --gradient-sidebar: radial-gradient(circle at 20% 8%, rgb(45 212 191 / 12%), transparent 32%), linear-gradient(160deg, #071624 0%, #0b2339 60%, #0d2c46 100%);
+    --gradient-hero: radial-gradient(circle at 78% 18%, rgb(45 212 191 / 15%), transparent 28%), radial-gradient(circle at 12% 90%, rgb(199 148 53 / 12%), transparent 32%), linear-gradient(145deg, #071726 0%, #0b263e 58%, #11344f 100%);
+    --gradient-banner: linear-gradient(100deg, #0c2a43, #11496a);
+    --gradient-capability: linear-gradient(90deg, #0f9f91, #d2a547);
+    --gradient-unknown: repeating-linear-gradient(45deg, #dfe7ed, #dfe7ed 4px, #eef3f6 4px, #eef3f6 8px);
+    --gradient-flow: linear-gradient(#2dd4bf, rgb(45 212 191 / 20%));
+    --gradient-skeleton: linear-gradient(90deg, #e7edf1 25%, #f4f7f9 50%, #e7edf1 75%);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :root {
+      --motion-duration: 0s;
+      --motion-toast-duration: 0s;
+      --motion-shimmer: none;
+      --motion-scroll: auto;
+    }
+  }
+
+  @media (max-width: 1180px) {
+    :root {
+      --executive-columns: minmax(0, 1fr);
+      --executive-steps-columns: repeat(2, minmax(0, 1fr));
+      --layout-sidebar-width: 220px;
+      --layout-main-offset: 220px;
+      --layout-hero-columns: minmax(0, 1fr);
+      --layout-heading-direction: column;
+      --layout-heading-align: start;
+      --layout-workspace-tools-width: var(--size-full);
+      --layout-select-width: var(--size-full);
+      --layout-flow-columns: repeat(4, minmax(0, 1fr));
+      --layout-flow-node-columns: minmax(0, 1fr);
+      --layout-flow-node-align: center;
+      --layout-kpi-columns: repeat(2, minmax(0, 1fr));
+      --layout-metric-columns: repeat(2, minmax(0, 1fr));
+      --layout-decision-columns: minmax(0, 1fr);
+      --layout-screening-columns: minmax(0, 1fr);
+      --layout-screening-direction: column;
+      --layout-screening-align: stretch;
+      --layout-graph-columns: minmax(0, 1fr);
+    }
+  }
+
+  @media (max-width: 900px) {
+    :root {
+      --layout-sidebar-position: static;
+      --layout-sidebar-width: auto;
+      --layout-nav-columns: repeat(6, minmax(0, 1fr));
+      --layout-nav-overflow: auto;
+      --layout-main-offset: 0;
+      --layout-topbar-position: static;
+      --layout-topbar-direction: column;
+      --layout-topbar-align: stretch;
+      --layout-sidebar-footer-display: none;
+      --layout-opportunity-columns: minmax(0, 1fr);
+      --layout-workspace-columns: minmax(0, 1fr);
+      --layout-governance-columns: minmax(0, 1fr);
+      --layout-extraction-columns: minmax(0, 1fr);
+      --layout-flow-columns: minmax(0, 1fr);
+      --layout-decision-columns: minmax(0, 1fr);
+      --layout-workspace-tools-direction: column;
+      --layout-workspace-tools-align: stretch;
+      --layout-methodology-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 560px) {
+    :root {
+      --executive-heading-columns: minmax(0, 1fr);
+    --executive-pair-columns: minmax(0, 1fr);
+    --executive-vector-columns: minmax(0, 1fr);
+    --executive-padding: 16px;
+    --executive-header-flow: column;
+      --layout-nav-columns: repeat(2, minmax(0, 1fr));
+      --layout-hero-actions-direction: column;
+      --layout-topbar-direction: column;
+      --layout-kpi-columns: minmax(0, 1fr);
+      --layout-metric-columns: minmax(0, 1fr);
+      --layout-stats-columns: minmax(0, 1fr);
+      --layout-capability-columns: minmax(0, 1fr);
+      --layout-economics-columns: minmax(0, 1fr);
+      --layout-methodology-columns: minmax(0, 1fr);
+      --layout-footer-direction: column;
+      --font-size-hero: var(--font-size-hero-mobile);
+    }
+  }
+
+  /* S19 document-only tokens. */
+  :root {
+    --size-dossier-reading: 1100px;
+    --size-dossier-full: 100%;
+    --layout-dossier-summary: repeat(2, minmax(0, 1fr));
+    --layout-dossier-record: minmax(0, 1fr) minmax(0, 2fr);
+    --size-dossier-field-label: 34%;
+    --size-dossier-field-unit: 12%;
+    --layout-dossier-table: table;
+    --layout-dossier-row: table-row;
+    --layout-dossier-cell: table-cell;
+    --layout-dossier-tbody: table-row-group;
+    --layout-dossier-thead: table-header-group;
+    --size-dossier-print-margin: 14mm;
+    --size-dossier-print-bottom: 27mm;
+    --size-dossier-footer-gap: 5mm;
+    --font-size-dossier-print: 10.5pt;
+    --font-size-dossier-print-ar: 11.5pt;
+    --font-size-dossier-print-title: 17pt;
+    --font-size-dossier-footer: 11.5pt;
+    --font-leading-dossier-print: 1.42;
+    --font-leading-dossier-print-ar: 1.55;
+    --space-dossier-print: 5pt;
+  }
+  @media screen and (max-width: 700px) {
+    :root { --layout-dossier-summary: minmax(0, 1fr); --layout-dossier-record: minmax(0, 1fr); --size-dossier-field-label: 100%; --size-dossier-field-unit: 100%; --layout-dossier-table: block; --layout-dossier-row: block; --layout-dossier-cell: block; --layout-dossier-tbody: block; --layout-dossier-thead: block; }
+  }
+}
+
+.dossier-body {
+  margin: var(--space-0);
+  color: var(--color-navy-900);
+  background: var(--color-workspace);
+  font-family: var(--font-family-interface);
+  line-height: var(--font-leading-dossier-print);
+}
+:root[dir="rtl"],
+[lang="ar"] { font-family: var(--font-family-arabic); }
+.source-language-island[lang="en"],
+code {
+  font-family: var(--font-family-interface);
+}
+.dossier-body *, .dossier-body *::before, .dossier-body *::after {
+  box-sizing: border-box;
+}
+.page {
+  inline-size: var(--size-dossier-full);
+  max-inline-size: var(--size-dossier-reading);
+  margin: var(--space-28) auto;
+  background: var(--color-surface);
+  padding: var(--space-28);
+  box-shadow: var(--shadow-panel);
+  overflow-wrap: anywhere;
+}
+.page h1 { font-size: var(--font-size-28); margin: var(--space-12) var(--space-0); }
+.page h2 { font-size: var(--font-size-20); color: var(--color-navy-850); border-block-end: var(--border-hairline) solid var(--color-line); padding-block-end: var(--space-8); }
+.page h3 { font-size: var(--font-size-16); }
+.meta { color: var(--color-muted); margin-block-end: var(--space-18); }
+.state { display: inline-block; padding: var(--space-7) var(--space-11); border-radius: var(--radius-round); background: var(--color-navy-850); color: var(--color-surface); font-weight: var(--font-weight-medium); }
+.eyebrow { color: var(--color-accent-text); font-weight: var(--font-weight-medium); }
+.warning, .branch-disclosure { background: var(--color-warning-soft); border: var(--border-hairline) solid var(--color-warning); padding: var(--space-12); border-radius: var(--radius-md); margin-block: var(--space-14); }
+.warning strong, .branch-disclosure strong { display: block; }
+.summary-identity { margin-block: var(--space-18); }
+.summary-public { border-inline-start: var(--border-accent) solid var(--color-accent-text); padding-inline-start: var(--space-14); }
+.summary-metrics, .summary-conditions { display: grid; grid-template-columns: var(--layout-dossier-summary); gap: var(--space-14); }
+.summary-metrics > div { background: var(--color-soft); padding: var(--space-14); }
+.summary-metrics dt { color: var(--color-muted); }
+.summary-metrics dd { margin: var(--space-0); font-weight: var(--font-weight-medium); }
+.dossier-appendix { border-block-start: var(--border-hairline) solid var(--color-line); margin-block-start: var(--space-28); }
+.dossier-contents ol { columns: auto; }
+.dossier-section { padding-block: var(--space-16); }
+.dossier-section table { display: var(--layout-dossier-table); inline-size: var(--size-dossier-full); table-layout: fixed; border-collapse: collapse; margin-block: var(--space-12); }
+.dossier-section th, .dossier-section td { display: var(--layout-dossier-cell); padding: var(--space-9); border-block-end: var(--border-hairline) solid var(--color-line); text-align: start; vertical-align: top; min-inline-size: var(--space-0); }
+.dossier-section thead { background: var(--color-soft); }
+.dossier-section table[data-dossier-table="exclusions"] td:last-child > a,
+.dossier-section table[data-dossier-table="rejection-conditions"] td:last-child > a,
+.dossier-section table[data-dossier-table="rejection-conditions"] td:last-child > .technical-token {
+  display: block;
+}
+.dossier-record { margin-block: var(--space-9); }
+.dossier-record > div { border-block-end: var(--border-hairline) solid var(--color-line); padding-block: var(--space-7); }
+.dossier-record dt { color: var(--color-muted); font-weight: var(--font-weight-medium); }
+.dossier-record dd { margin: var(--space-0); }
+.dossier-record .record-scalar { display: grid; grid-template-columns: var(--layout-dossier-record); gap: var(--space-9); }
+.dossier-record .record-group > dt { border-block-end: var(--border-hairline) solid var(--color-line); }
+.dossier-record .dossier-record > div { border: 0; }
+.dossier-values { display: flex; flex-wrap: wrap; gap: var(--space-7) var(--space-18); margin-block: var(--space-0); }
+.dossier-section table[data-dossier-table="fields"] th:first-child { inline-size: var(--size-dossier-field-label); }
+.dossier-section table[data-dossier-table="fields"] th:last-child { inline-size: var(--size-dossier-field-unit); }
+.dossier-section table[data-dossier-table="passport"] th:first-child { inline-size: var(--size-dossier-field-label); }
+.route-record, .rule-record { border-block-start: var(--border-hairline) solid var(--color-line); margin-block: var(--space-18); }
+.dossier-section th { font-weight: var(--font-weight-medium); }
+.dossier-section ul { padding-inline-start: var(--space-18); }
+.page a, .dossier-toolbar a { color: var(--color-accent-text); text-decoration: underline; }
+.page a:focus-visible, .dossier-toolbar :focus-visible { outline: var(--border-accent) solid var(--color-info); outline-offset: var(--space-3); }
+.ltr-isolate { direction: ltr; unicode-bidi: isolate; }
+.source-language-island { unicode-bidi: isolate; }
+.field-reason, .branch-label, .summary-date { color: var(--color-muted); }
+.dossier-source-caption { color: var(--color-muted); border-inline-start: var(--border-accent) solid var(--color-warning); padding-inline-start: var(--space-8); }
+.dossier-toolbar { max-inline-size: var(--size-dossier-reading); margin: var(--space-18) auto; padding: var(--space-14); display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-14); }
+.dossier-toolbar p { flex-basis: var(--size-dossier-full); margin: var(--space-0); color: var(--color-muted); }
+.dossier-toolbar button { font: inherit; background: var(--color-navy-850); color: var(--color-surface); padding: var(--space-9) var(--space-14); border: 0; border-radius: var(--radius-md); cursor: pointer; }
+@media print {
+  @page { size: A4; margin: var(--size-dossier-print-margin); margin-bottom: var(--size-dossier-print-bottom);
+    @bottom-center { content: none; white-space: pre; font-family: var(--font-family-arabic); font-size: var(--font-size-dossier-footer); font-weight: var(--font-weight-medium); line-height: var(--font-leading-dossier-print-ar); color: var(--color-navy-900); direction: rtl; unicode-bidi: plaintext; vertical-align: top; padding-top: var(--size-dossier-footer-gap); }
+  }
+  .dossier-body { background: var(--color-surface); font-size: var(--font-size-dossier-print); line-height: var(--font-leading-dossier-print); }
+  :root[lang="ar"] .dossier-body { font-size: var(--font-size-dossier-print-ar); line-height: var(--font-leading-dossier-print-ar); }
+  .page { box-shadow: var(--shadow-none); margin: var(--space-0); max-inline-size: none; padding: var(--space-0); }
+  .page { padding-inline: var(--space-3); }
+  .dossier-toolbar { display: none; }
+  .page h1 { font-size: var(--font-size-dossier-print-title); }
+  .page h2, .page h3 { break-after: avoid; }
+  .dossier-intro { break-inside: avoid; }
+  .dossier-record .record-group > dt { break-after: avoid; }
+  .dossier-record .record-group > dd > .dossier-record > .record-scalar:first-child,
+  .rule-record > .dossier-source-caption + .dossier-record > .record-scalar:first-child { break-inside: avoid; }
+  .dossier-record .record-group > dd,
+  .dossier-record .record-group > dd > .dossier-record,
+  .dossier-record .record-group > dd > .dossier-record > :first-child,
+  .rule-record > .dossier-source-caption + .dossier-record,
+  .rule-record > .dossier-source-caption + .dossier-record > :first-child,
+  #dossier-capability > .dossier-source-caption + .dossier-record,
+  #dossier-capability > .dossier-source-caption + .dossier-record > :first-child {
+    break-before: avoid;
+  }
+  .rule-record > .dossier-source-caption,
+  #dossier-capability > .dossier-source-caption { break-after: avoid; }
+  .rule-record > p:first-of-type { break-after: avoid; }
+  .warning, .branch-disclosure { break-inside: avoid; }
+  .dossier-section > .branch-label, .dossier-section > .branch-disclosure { break-after: avoid; }
+  .passport > .branch-disclosure, .passport > .dossier-source-caption, .passport-title { break-after: avoid; }
+  .passport > table { break-before: avoid; }
+  .page p, .page li { orphans: 3; widows: 3; }
+  .dossier-appendix { break-before: page; border: 0; margin: var(--space-0); }
+  .dossier-section table { margin-block: var(--space-dossier-print); }
+  .dossier-section th, .dossier-section td { display: var(--layout-dossier-cell); padding: var(--space-dossier-print); }
+  .dossier-section thead { display: table-header-group; }
+  .dossier-section tr { break-inside: avoid; }
+  .summary-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .summary-metrics > div { padding: var(--space-dossier-print); }
+  .summary-conditions { display: block; }
+  .summary-identity, .warning { margin-block: var(--space-dossier-print); }
+  .summary-date, .summary-evidence { margin-block: var(--space-dossier-print); }
+}
+
+.dossier-section tr { display: var(--layout-dossier-row); }
+.dossier-section tbody { display: var(--layout-dossier-tbody); }
+.dossier-section thead { display: var(--layout-dossier-thead); }
+</style><script type="module" src="/static/modules/dossier-actions.js"></script></head>
+<body class="dossier-body"><div class="dossier-toolbar"><span>Public evidence</span><button type="button" data-dossier-print>Print / Save PDF</button><a href="/api/opportunities/SAU-H0-721049/dossier?mode=public&amp;locale=en" download="SAU-H0-721049-public.json">Download JSON</a><a data-dossier-return href="/?opportunity=SAU-H0-721049&amp;mode=public&amp;locale=en#workspace">Return to workspace</a><p>To export this complete dossier in Chrome or Chromium, select Print and then Save as PDF.</p></div>
+<main class="page" aria-label="Printable decision dossier"><section class="dossier-summary" id="decision-summary">
+<p class="eyebrow">Decision summary</p><div class="state"><bdi class="ltr-isolate technical-token" dir="ltr">INVESTIGATE</bdi></div>
+<section class="decision-narrative"><h1>INVESTIGATE — binding constraint unresolved</h1><p>Test brownfield first; greenfield is not justified from public evidence.</p>
+<div class="meta"><bdi class="ltr-isolate technical-token" dir="ltr">SAU-H0-721049</bdi> · <span>Brownfield priority to test</span> · Mode: Public evidence</div></section>
+
+<div class="summary-identity"><strong>Non-corrugated zinc-coated flat-rolled iron or non-alloy steel, width 600 mm or more</strong><br><bdi class="ltr-isolate technical-token" dir="ltr">HS H0 / 721049</bdi></div>
+<dl class="summary-metrics"><div><dt>Target-specification demand</dt><dd>Unavailable <bdi class="ltr-isolate technical-token" dir="ltr">kt</bdi></dd></div><div><dt>Effective qualified capacity</dt><dd>Unavailable <bdi class="ltr-isolate technical-token" dir="ltr">kt</bdi></dd></div><div><dt>Published capability distance D*</dt><dd>Not calculable <bdi class="ltr-isolate technical-token" dir="ltr">ratio</bdi></dd></div><div><dt>Minimum effective support S*</dt><dd>Not calculable <bdi class="ltr-isolate technical-token" dir="ltr">SAR m</bdi></dd></div></dl>
+<div class="summary-conditions"><p><strong>Decision conditions</strong><br><span>No greenfield or financial support recommendation before effective capacity and target specification are resolved.</span></p><p><strong>Kill conditions</strong><br><span>Demand is temporary, re-exported or below efficient scale</span> <a href="#dossier-conditions">1 more; see the full record</a></p></div>
+<p class="summary-evidence">Evidence passport ledger: <a href="#evidence-S-WITS-721049"><bdi class="ltr-isolate technical-token" dir="ltr">S-WITS-721049</bdi></a> <a href="#evidence-S-UNICOIL-EPD"><bdi class="ltr-isolate technical-token" dir="ltr">S-UNICOIL-EPD</bdi></a></p><p class="summary-evidence">Public evidence contradictions: <a href="#evidence-S-UNICOIL-SPEC"><bdi class="ltr-isolate technical-token" dir="ltr">S-UNICOIL-SPEC</bdi></a></p>
+<p class="summary-date">Snapshot: <bdi class="ltr-isolate technical-token" dir="ltr">PUBLIC-SAU-H0-721049-2026-08-31</bdi> · As of: <bdi class="ltr-isolate technical-token" dir="ltr">2026-08-31</bdi></p>
+</section><div class="dossier-appendix"><nav class="dossier-contents" aria-label="Supporting evidence pack"><h2>Supporting evidence pack</h2><ol><li><a href="#dossier-identity">Identity and specification boundary</a></li><li><a href="#dossier-demand">Demand and public trade signals</a></li><li><a href="#dossier-supply">Domestic supply and qualified capacity</a></li><li><a href="#dossier-gap">Gap diagnosis and false-positive controls</a></li><li><a href="#dossier-capability">Capability and route alternatives</a></li><li><a href="#dossier-economics">Economics and intervention</a></li><li><a href="#dossier-competition">Competition and public policy</a></li><li><a href="#dossier-ledger">Complete rule execution ledger</a></li><li><a href="#dossier-evidence">Evidence passports and contradictions</a></li><li><a href="#dossier-conditions">Conditions, kill conditions and next facts</a></li><li><a href="#dossier-authority">Authority and reproducibility</a></li></ol></nav><section id="dossier-identity" class="dossier-section"><h2>Identity and specification boundary</h2><p class="branch-label">Public evidence</p><h3>Product identity</h3><table data-dossier-table="fields"><thead><tr><th scope="col">Source field</th><th scope="col">Value</th><th scope="col">Unit</th></tr></thead><tbody><tr><th scope="row">HS revision</th><td><span class="source-language-island" lang="en" dir="ltr">H0</span></td><td></td></tr><tr><th scope="row">HS code</th><td><span class="source-language-island" lang="en" dir="ltr">721049</span></td><td></td></tr><tr><th scope="row">National tariff line</th><td><span class="availability">Unavailable</span><br><span class="field-reason">Not established by the supplied evidence.</span></td><td></td></tr><tr><th scope="row">Commercial name, English source</th><td><span class="source-language-island" lang="en" dir="ltr">Non-corrugated zinc-coated flat-rolled iron or non-alloy steel, width 600 mm or more</span></td><td></td></tr><tr><th scope="row">Commercial name, Arabic</th><td><span class="source-language-island" lang="ar" dir="rtl">منتجات مسطحة مدرفلة من حديد أو صلب غير مخلوط، مطلية بالزنك، بعرض 600 مم أو أكثر، غير مموجة</span></td><td></td></tr><tr><th scope="row">Application boundary</th><td><span class="source-language-island" lang="en" dir="ltr">Multiple applications; target customer/application remains unresolved in public evidence.</span></td><td></td></tr><tr><th scope="row">Target specification</th><td><span class="availability">Unavailable</span><br><span class="field-reason">Not established by the supplied evidence.</span></td><td></td></tr><tr><th scope="row">Standard</th><td><span class="availability">Unavailable</span><br><span class="field-reason">Not established by the supplied evidence.</span></td><td></td></tr><tr><th scope="row">Alloy</th><td><span class="availability">Unavailable</span><br><span class="field-reason">Not established by the supplied evidence.</span></td><td></td></tr><tr><th scope="row">Temper</th><td><span class="availability">Unavailable</span><br><span class="field-reason">Not established by the supplied evidence.</span></td><td></td></tr><tr><th scope="row">Application</th><td><span class="availability">Unavailable</span><br><span class="field-reason">Not established by the supplied evidence.</span></td><td></td></tr><tr><th scope="row">Zinc coating mass</th><td><span class="availability">Unavailable</span><br><span class="field-reason">Not established by the supplied evidence.</span></td><td><bdi class="ltr-isolate technical-token" dir="ltr">g/m²</bdi></td></tr><tr><th scope="row">Tin coating mass</th><td><span class="availability">Unavailable</span><br><span class="field-reason">Not established by the supplied evidence.</span></td><td><bdi class="ltr-isolate technical-token" dir="ltr">g/m²</bdi></td></tr><tr><th scope="row">Thickness</th><td><span class="availability">Unavailable</span><br><span class="field-reason">Not established by the supplied evidence.</span></td><td><bdi class="ltr-isolate technical-token" dir="ltr">mm</bdi></td></tr><tr><th scope="row">Thickness</th><td><span class="availability">Unavailable</span><br><span class="field-reason">Not established by the supplied evidence.</span></td><td><bdi class="ltr-isolate technical-token" dir="ltr">µm</bdi></td></tr><tr><th scope="row">Width</th><td><span class="availability">Unavailable</span><br><span class="field-reason">Not established by the supplied evidence.</span></td><td><bdi class="ltr-isolate technical-token" dir="ltr">mm</bdi></td></tr><tr><th scope="row">Customer qualification required</th><td><span class="availability">Unavailable</span><br><span class="field-reason">Not established by the supplied evidence.</span></td><td></td></tr></tbody></table><h3>Classification revision and concordance</h3>Unavailable<h3>Specification source spans</h3>Unavailable</section><section id="dossier-demand" class="dossier-section"><h2>Demand and public trade signals</h2><p class="branch-label">Public evidence</p><h3>Demand conclusion</h3><p>Gross imports are a screening signal, not demand at the target specification.</p><table data-dossier-table="fields"><thead><tr><th scope="col">Source field</th><th scope="col">Value</th><th scope="col">Unit</th></tr></thead><tbody><tr><th scope="row">Base demand</th><td><span class="availability">Unavailable</span><br><span class="field-reason">Not established by the supplied evidence.</span></td><td><bdi class="ltr-isolate technical-token" dir="ltr">kt</bdi></td></tr><tr><th scope="row">Target-specification demand</th><td><span class="availability">Unavailable</span><br><span class="field-reason">Not established by the supplied evidence.</span></td><td><bdi class="ltr-isolate technical-token" dir="ltr">kt</bdi></td></tr><tr><th scope="row">Downside demand</th><td><span class="availability">Unavailable</span><br><span class="field-reason">Not established by the supplied evidence.</span></td><td><bdi class="ltr-isolate technical-token" dir="ltr">kt</bdi></td></tr><tr><th scope="row">Committed demand</th><td><span class="availability">Unavailable</span><br><span class="field-reason">Not established by the supplied evidence.</span></td><td><bdi class="ltr-isolate technical-token" dir="ltr">kt</bdi></td></tr><tr><th scope="row">Announced demand</th><td><span class="availability">Unavailable</span><br><span class="field-reason">Not established by the supplied evidence.</span></td><td><bdi class="ltr-isolate technical-token" dir="ltr">kt</bdi></td></tr><tr><th scope="row">Commitment probability</th><td><span class="availability">Unavailable</span><br><span class="field-reason">Not established by the supplied evidence.</span></td><td><bdi class="ltr-isolate technical-token" dir="ltr">ratio</bdi></td></tr><tr><th scope="row">Observation year</th><td><bdi class="ltr-isolate technical-token" dir="ltr">2024</bdi></td><td><bdi class="ltr-isolate technical-token" dir="ltr">year</bdi></td></tr><tr><th scope="row">Gross import value</th><td><bdi class="ltr-isolate technical-token" dir="ltr">236.9</bdi></td><td><bdi class="ltr-isolate technical-token" dir="ltr">USD m</bdi></td></tr><tr><th scope="row">Gross import quantity</th><td><bdi class="ltr-isolate technical-token" dir="ltr">287.9</bdi></td><td><bdi class="ltr-isolate technical-token" dir="ltr">kt</bdi></td></tr><tr><th scope="row">Named buyers</th><td><span class="availability">Unavailable</span><br><span class="field-reason">Not established by the supplied evidence.</span></td><td></td></tr><tr><th scope="row">Buyer concentration</th><td><span class="availability">Unavailable</span><br><span class="field-reason">Not established by the supplied evidence.</span></td><td></td></tr><tr><th scope="row">Demand timing</th><td><span class="availability">Unavailable</span><br><span class="field-reason">Not established by the supplied evidence.</span></td><td></td></tr></tbody></table><table data-dossier-table="trade"><thead><tr><th scope="col">Year</th><th scope="col">Import value, USD m</th><th scope="col">Import quantity, kt</th></tr></thead><tbody><tr><th scope="row"><bdi class="ltr-isolate technical-token" dir="ltr">2021</bdi></th><td><bdi class="ltr-isolate technical-token" dir="ltr">194.1</bdi></td><td><bdi class="ltr-isolate technical-token" dir="ltr">177.4</bdi></td></tr><tr><th scope="row"><bdi class="ltr-isolate technical-token" dir="ltr">2023</bdi></th><td><bdi class="ltr-isolate technical-token" dir="ltr">186</bdi></td><td><bdi class="ltr-isolate technical-token" dir="ltr">173.8</bdi></td></tr><tr><th scope="row"><bdi class="ltr-isolate technical-token" dir="ltr">2024</bdi></th><td><bdi class="ltr-isolate technical-token" dir="ltr">236.9</bdi></td><td><bdi class="ltr-isolate technical-token" dir="ltr">287.9</bdi></td></tr></tbody></table><h3>Trade coverage and measurement</h3><dl class="dossier-record"><div class="record-scalar"><dt>Trade-flow basis</dt><dd><span class="source-language-island" lang="en" dir="ltr">gross</span></dd></div><div class="record-scalar"><dt>Re-exports separated</dt><dd>No</dd></div><div class="record-scalar"><dt>Domestic-origin exports separated</dt><dd>No</dd></div><div class="record-scalar"><dt>Missing years</dt><dd><ul class="dossier-values"><li><bdi class="ltr-isolate technical-token" dir="ltr">2022</bdi></li></ul></dd></div><div class="record-scalar"><dt>Monthly partner/tariff-line detail available</dt><dd>No</dd></div><div class="record-scalar"><dt>Quantity is comparable</dt><dd>Yes</dd></div><div class="record-scalar"><dt>Execution ceiling</dt><dd><span class="source-language-island" lang="en" dir="ltr">DEGRADED where continuity or tariff-line detail is required</span></dd></div></dl><h3>Production, retained flows and re-exports</h3><dl class="dossier-record"><div class="record-scalar"><dt>Reference year</dt><dd><bdi class="ltr-isolate technical-token" dir="ltr">2024</bdi></dd></div><div class="record-scalar"><dt>Domestic production (kt)</dt><dd>Unavailable</dd></div><div class="record-scalar"><dt>Retained imports (kt)</dt><dd>Unavailable</dd></div><div class="record-scalar"><dt>Domestic-origin exports (kt)</dt><dd>Unavailable</dd></div><div class="record-scalar"><dt>Re-exports (kt)</dt><dd>Unavailable</dd></div><div class="record-scalar"><dt>Source evidence references</dt><dd><ul class="dossier-values"><li>None recorded; no completed review is implied.</li></ul></dd></div></dl><h3>Supplier diagnostics</h3><dl class="dossier-record"><div class="record-scalar"><dt>Partner concentration by value (HHI)</dt><dd><bdi class="ltr-isolate technical-token" dir="ltr">0.36</bdi></dd></div><div class="record-scalar"><dt>Largest supplier share</dt><dd>Not calculable</dd></div><div class="record-scalar"><dt>Top-two supplier value share</dt><dd><bdi class="ltr-isolate technical-token" dir="ltr">0.763</bdi></dd></div><div class="record-scalar"><dt>Partner concentration by quantity (HHI)</dt><dd>Not calculable</dd></div><div class="record-scalar"><dt>Largest supplier quantity share</dt><dd>Not calculable</dd></div><div class="record-scalar"><dt>Bulk unit-value range (USD/t)</dt><dd><ul class="dossier-values"><li><bdi class="ltr-isolate technical-token" dir="ltr">776</bdi></li><li><bdi class="ltr-isolate technical-token" dir="ltr">864</bdi></li></ul></dd></div><div class="record-group"><dt>Small-volume high-unit-value observation</dt><dd><dl class="dossier-record"><div class="record-scalar"><dt>Trading partner</dt><dd><span class="source-language-island" lang="en" dir="ltr">Austria</span></dd></div><div class="record-scalar"><dt>Quantity (kt)</dt><dd><bdi class="ltr-isolate technical-token" dir="ltr">1</bdi></dd></div><div class="record-scalar"><dt>Unit value (USD/t)</dt><dd><bdi class="ltr-isolate technical-token" dir="ltr">4179</bdi></dd></div></dl></dd></div></dl></section><section id="dossier-supply" class="dossier-section"><h2>Domestic supply and qualified capacity</h2><h3>Supply conclusion</h3><p>Public producer observations; nameplate is not qualified capacity.</p><table data-dossier-table="producers"><thead><tr><th scope="col">Named producer</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row"><span class="source-language-island" lang="en" dir="ltr">UNICOIL</span></th><td><dl class="dossier-record"><div class="record-scalar"><dt>Process family</dt><dd><span class="source-language-island" lang="en" dir="ltr">coated_steel</span></dd></div><div class="record-scalar"><dt>Published process route</dt><dd><span class="source-language-island" lang="en" dir="ltr">continuous hot-dip galvanising</span></dd></div><div class="record-scalar"><dt>Published standards</dt><dd><ul class="dossier-values"><li><span class="source-language-island" lang="en" dir="ltr">SASO-ASTM A653/A653M</span></li></ul></dd></div><div class="record-scalar"><dt>Published coating range (g/m²)</dt><dd><ul class="dossier-values"><li><bdi class="ltr-isolate technical-token" dir="ltr">45</bdi></li><li><bdi class="ltr-isolate technical-token" dir="ltr">350</bdi></li></ul></dd></div><div class="record-scalar"><dt>Observed nameplate capacity, t/y</dt><dd><bdi class="ltr-isolate technical-token" dir="ltr">250000</bdi></dd></div><div class="record-scalar"><dt>Nominal-capacity status</dt><dd><span class="source-language-island" lang="en" dir="ltr">observed</span></dd></div><div class="record-scalar"><dt>Nominal-capacity evidence reference</dt><dd><span class="source-language-island" lang="en" dir="ltr">S-UNICOIL-EPD</span></dd></div><div class="record-scalar"><dt>Evidence class</dt><dd><span class="source-language-island" lang="en" dir="ltr">C</span></dd></div></dl><a href="#evidence-S-UNICOIL-EPD"><bdi class="ltr-isolate technical-token" dir="ltr">S-UNICOIL-EPD</bdi></a> <a href="#evidence-S-UNICOIL-SPEC"><bdi class="ltr-isolate technical-token" dir="ltr">S-UNICOIL-SPEC</bdi></a></td></tr><tr><th scope="row"><span class="source-language-island" lang="en" dir="ltr">Hadeed</span></th><td><dl class="dossier-record"><div class="record-scalar"><dt>Process family</dt><dd><span class="source-language-island" lang="en" dir="ltr">coated_steel</span></dd></div><div class="record-scalar"><dt>Published process route</dt><dd><span class="source-language-island" lang="en" dir="ltr">cold-rolled galvanised and colour-coated coil publicly listed</span></dd></div><div class="record-scalar"><dt>Published standards</dt><dd>Unavailable</dd></div><div class="record-scalar"><dt>Published coating range (g/m²)</dt><dd>Unavailable</dd></div><div class="record-scalar"><dt>Observed nameplate capacity, t/y</dt><dd>Unavailable</dd></div><div class="record-scalar"><dt>Nominal-capacity status</dt><dd><span class="source-language-island" lang="en" dir="ltr">unresolved</span></dd></div><div class="record-scalar"><dt>Nominal-capacity evidence reference</dt><dd>Unavailable</dd></div><div class="record-scalar"><dt>Evidence class</dt><dd><span class="source-language-island" lang="en" dir="ltr">C</span></dd></div></dl><a href="#evidence-S-HADEED"><bdi class="ltr-isolate technical-token" dir="ltr">S-HADEED</bdi></a></td></tr></tbody></table><h3>Observed adjacency signals</h3><ul><li><dl class="dossier-record"><div class="record-scalar"><dt>Signal type</dt><dd><span class="source-language-island" lang="en" dir="ltr">core_process</span></dd></div><div class="record-scalar"><dt>Description</dt><dd><span class="source-language-island" lang="en" dir="ltr">continuous hot-dip galvanising</span></dd></div><div class="record-scalar"><dt>Evidence references</dt><dd><ul class="dossier-values"><li><span class="source-language-island" lang="en" dir="ltr">S-UNICOIL-EPD</span></li></ul></dd></div></dl></li><li><dl class="dossier-record"><div class="record-scalar"><dt>Signal type</dt><dd><span class="source-language-island" lang="en" dir="ltr">core_process</span></dd></div><div class="record-scalar"><dt>Description</dt><dd><span class="source-language-island" lang="en" dir="ltr">cold rolling and pickling</span></dd></div><div class="record-scalar"><dt>Evidence references</dt><dd><ul class="dossier-values"><li><span class="source-language-island" lang="en" dir="ltr">S-UNICOIL-EPD</span></li></ul></dd></div></dl></li><li><dl class="dossier-record"><div class="record-scalar"><dt>Signal type</dt><dd><span class="source-language-island" lang="en" dir="ltr">adjacent_output</span></dd></div><div class="record-scalar"><dt>Description</dt><dd><span class="source-language-island" lang="en" dir="ltr">published ASTM/SASO grades</span></dd></div><div class="record-scalar"><dt>Evidence references</dt><dd><ul class="dossier-values"><li><span class="source-language-island" lang="en" dir="ltr">S-UNICOIL-EPD</span></li><li><span class="source-language-island" lang="en" dir="ltr">S-UNICOIL-SPEC</span></li></ul></dd></div></dl></li><li><dl class="dossier-record"><div class="record-scalar"><dt>Signal type</dt><dd><span class="source-language-island" lang="en" dir="ltr">relevant_certification</span></dd></div><div class="record-scalar"><dt>Description</dt><dd><span class="source-language-island" lang="en" dir="ltr">ISO/IEC 17025 laboratory</span></dd></div><div class="record-scalar"><dt>Evidence references</dt><dd><ul class="dossier-values"><li><span class="source-language-island" lang="en" dir="ltr">S-UNICOIL-EPD</span></li></ul></dd></div></dl></li></ul><p class="branch-label">Public evidence</p><table data-dossier-table="fields"><thead><tr><th scope="col">Source field</th><th scope="col">Value</th><th scope="col">Unit</th></tr></thead><tbody><tr><th scope="row">Effective qualified capacity</th><td><span class="availability">Unavailable</span><br><span class="field-reason">Not established by the supplied evidence.</span></td><td><bdi class="ltr-isolate technical-token" dir="ltr">kt</bdi></td></tr><tr><th scope="row">Qualified available supply</th><td><span class="availability">Unavailable</span><br><span class="field-reason">Not established by the supplied evidence.</span></td><td><bdi class="ltr-isolate technical-token" dir="ltr">kt</bdi></td></tr></tbody></table></section><section id="dossier-gap" class="dossier-section"><h2>Gap diagnosis and false-positive controls</h2><p class="branch-label">Public evidence</p><p>Evidence gap</p><table data-dossier-table="fields"><thead><tr><th scope="col">Source field</th><th scope="col">Value</th><th scope="col">Unit</th></tr></thead><tbody><tr><th scope="row">Specification-adjusted gap</th><td><span class="availability">Unavailable</span><br><span class="field-reason">Not established by the supplied evidence.</span></td><td><bdi class="ltr-isolate technical-token" dir="ltr">kt</bdi></td></tr></tbody></table><table data-dossier-table="exclusions"><thead><tr><th scope="col">Source reference</th><th scope="col">Status</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row"><bdi class="ltr-isolate technical-token" dir="ltr">EX-01_HETEROGENEOUS_RESIDUAL</bdi></th><td>Not calculable</td><td>The commercial product cannot be separated from a highly heterogeneous residual code and no product-level evidence is available.</td></tr><tr><th scope="row"><bdi class="ltr-isolate technical-token" dir="ltr">EX-02_MARKET_BELOW_MES</bdi></th><td>Not calculable</td><td>The sustainable downside market is below minimum efficient scale and no credible export contract exists.</td></tr><tr><th scope="row"><bdi class="ltr-isolate technical-token" dir="ltr">EX-03_UNSATISFIABLE_HARD_GATE</bdi></th><td>Not calculable</td><td>A legal, safety, environmental, IP or customer-qualification hard gate cannot be satisfied.</td></tr><tr><th scope="row"><bdi class="ltr-isolate technical-token" dir="ltr">EX-04_IDLE_EQUIVALENT_CAPACITY</bdi></th><td>Not calculable</td><td>Domestic production meets the required specification with material idle capacity and no binding market failure is evidenced.</td></tr><tr><th scope="row"><bdi class="ltr-isolate technical-token" dir="ltr">EX-05_TRANSITORY_OR_MEASUREMENT</bdi></th><td>Not calculable</td><td>The apparent gap is dominated by re-export, one-off project demand, temporary price arbitrage or classification discontinuity.</td></tr><tr><th scope="row"><bdi class="ltr-isolate technical-token" dir="ltr">EX-06_REDUNDANCY_OR_CROWD_OUT</bdi></th><td>Not calculable</td><td>The intervention would create unacceptable redundant capacity or crowd out a more efficient incumbent.</td></tr></tbody></table><h3>Test the apparent gap</h3><table data-dossier-table="rejection-conditions"><thead><tr><th scope="col">Source reference</th><th scope="col">Status</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row"><bdi class="ltr-isolate technical-token" dir="ltr">hard_exclusion</bdi></th><td>Not calculable</td><td><bdi class="ltr-isolate technical-token" dir="ltr">HARD_EXCLUSION_NOT_SATISFIED</bdi></td></tr><tr><th scope="row"><bdi class="ltr-isolate technical-token" dir="ltr">false_or_measurement_gap</bdi></th><td>Not calculable</td><td><bdi class="ltr-isolate technical-token" dir="ltr">FALSE_OR_MEASUREMENT_NOT_ESTABLISHED</bdi></td></tr><tr><th scope="row"><bdi class="ltr-isolate technical-token" dir="ltr">equivalent_idle_qualified_supply</bdi></th><td>Not calculable</td><td><bdi class="ltr-isolate technical-token" dir="ltr">EQUIVALENCE_INPUT_UNAVAILABLE</bdi></td></tr><tr><th scope="row"><bdi class="ltr-isolate technical-token" dir="ltr">uneconomic_at_efficient_scale</bdi></th><td>Not calculable</td><td><bdi class="ltr-isolate technical-token" dir="ltr">EFFICIENT_SCALE_ECONOMICS_UNAVAILABLE</bdi></td></tr><tr><th scope="row"><bdi class="ltr-isolate technical-token" dir="ltr">structural_overcapacity</bdi></th><td>Not calculable</td><td><bdi class="ltr-isolate technical-token" dir="ltr">STRUCTURAL_OVERCAPACITY_NOT_ESTABLISHED</bdi></td></tr><tr><th scope="row"><bdi class="ltr-isolate technical-token" dir="ltr">generic_capacity_contradicted</bdi></th><td>Not satisfied</td><td><bdi class="ltr-isolate technical-token" dir="ltr">GENERIC_CAPACITY_NOT_CONTRADICTED</bdi><a href="#evidence-S-UNICOIL-EPD"><bdi class="ltr-isolate technical-token" dir="ltr">S-UNICOIL-EPD</bdi></a></td></tr></tbody></table></section><section id="dossier-capability" class="dossier-section"><h2>Capability and route alternatives</h2><p class="branch-label">Public evidence</p><table data-dossier-table="fields"><thead><tr><th scope="col">Source field</th><th scope="col">Value</th><th scope="col">Unit</th></tr></thead><tbody><tr><th scope="row">Known coverage K</th><td><bdi class="ltr-isolate technical-token" dir="ltr">0.75</bdi></td><td><bdi class="ltr-isolate technical-token" dir="ltr">ratio</bdi></td></tr><tr><th scope="row">Unknown weight U</th><td><bdi class="ltr-isolate technical-token" dir="ltr">0.25</bdi></td><td><bdi class="ltr-isolate technical-token" dir="ltr">ratio</bdi></td></tr><tr><th scope="row">Uncertainty penalty (lambda)</th><td><bdi class="ltr-isolate technical-token" dir="ltr">0.5</bdi></td><td><bdi class="ltr-isolate technical-token" dir="ltr">ratio</bdi></td></tr><tr><th scope="row">Minimum known coverage</th><td><bdi class="ltr-isolate technical-token" dir="ltr">0.7</bdi></td><td><bdi class="ltr-isolate technical-token" dir="ltr">ratio</bdi></td></tr><tr><th scope="row">Published capability distance D*</th><td><span class="availability">Not calculable</span><br><span class="field-reason">Cannot be calculated from the supplied evidence.</span></td><td><bdi class="ltr-isolate technical-token" dir="ltr">ratio</bdi></td></tr></tbody></table><table data-dossier-table="capability"><thead><tr><th scope="col">Source field</th><th scope="col">State</th><th scope="col">Weight</th></tr></thead><tbody><tr><th scope="row">Feedstock chemistry</th><td><bdi class="ltr-isolate technical-token" dir="ltr">0</bdi></td><td><bdi class="ltr-isolate technical-token" dir="ltr">0.05</bdi></td></tr><tr><th scope="row">Core process route</th><td><bdi class="ltr-isolate technical-token" dir="ltr">0</bdi></td><td><bdi class="ltr-isolate technical-token" dir="ltr">0.2</bdi></td></tr><tr><th scope="row">Equipment operating envelope</th><td><bdi class="ltr-isolate technical-token" dir="ltr">1</bdi></td><td><bdi class="ltr-isolate technical-token" dir="ltr">0.2</bdi></td></tr><tr><th scope="row">Finishing and specification control</th><td><bdi class="ltr-isolate technical-token" dir="ltr">1</bdi></td><td><bdi class="ltr-isolate technical-token" dir="ltr">0.15</bdi></td></tr><tr><th scope="row">Quality, laboratories and metrology</th><td><bdi class="ltr-isolate technical-token" dir="ltr">0</bdi></td><td><bdi class="ltr-isolate technical-token" dir="ltr">0.1</bdi></td></tr><tr><th scope="row">Certification and customer qualification</th><td><bdi class="ltr-isolate technical-token" dir="ltr">U</bdi></td><td><bdi class="ltr-isolate technical-token" dir="ltr">0.1</bdi></td></tr><tr><th scope="row">Capacity and timing</th><td><bdi class="ltr-isolate technical-token" dir="ltr">U</bdi></td><td><bdi class="ltr-isolate technical-token" dir="ltr">0.1</bdi></td></tr><tr><th scope="row">Utilities, environment and permitting</th><td><bdi class="ltr-isolate technical-token" dir="ltr">U</bdi></td><td><bdi class="ltr-isolate technical-token" dir="ltr">0.05</bdi></td></tr><tr><th scope="row">Skills and market integration</th><td><bdi class="ltr-isolate technical-token" dir="ltr">1</bdi></td><td><bdi class="ltr-isolate technical-token" dir="ltr">0.05</bdi></td></tr></tbody></table><dl class="dossier-record"><div class="record-group"><dt>Sector-profile hard gates</dt><dd><dl class="dossier-record"><div class="record-scalar"><dt>Substrate range</dt><dd>Unavailable</dd></div><div class="record-scalar"><dt>Width/thickness envelope</dt><dd>Unavailable</dd></div><div class="record-scalar"><dt>Coating process and mass</dt><dd>Unavailable</dd></div><div class="record-scalar"><dt>Surface treatment</dt><dd>Unavailable</dd></div><div class="record-scalar"><dt>Mandatory or customer standard</dt><dd>Unavailable</dd></div></dl></dd></div><div class="record-scalar"><dt>Unresolved hard gates</dt><dd><ul class="dossier-values"><li><span class="source-language-island" lang="en" dir="ltr">substrate_range</span></li><li><span class="source-language-island" lang="en" dir="ltr">width_thickness_envelope</span></li><li><span class="source-language-island" lang="en" dir="ltr">coating_route_and_mass</span></li><li><span class="source-language-island" lang="en" dir="ltr">surface_treatment</span></li><li><span class="source-language-island" lang="en" dir="ltr">mandatory_or_customer_standard</span></li><li><span class="source-language-island" lang="en" dir="ltr">exact imported specification</span></li><li><span class="source-language-island" lang="en" dir="ltr">customer/application qualification</span></li><li><span class="source-language-island" lang="en" dir="ltr">effective spare capacity and allocation</span></li></ul></dd></div><div class="record-scalar"><dt>Known hard-gate failures</dt><dd><ul class="dossier-values"><li>None recorded; no completed review is implied.</li></ul></dd></div></dl><div data-dossier-records="routes"><article class="route-record"><div class="dossier-intro"><h3>No intervention</h3><p>Not calculable</p><table data-dossier-table="record"><thead><tr><th scope="col">Source field</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Feasibility</th><td>Not calculable</td></tr><tr><th scope="row">Resolves the binding constraint</th><td>Not calculable</td></tr><tr><th scope="row">Additionality</th><td>Not calculable</td></tr><tr><th scope="row">Policy permissibility</th><td>Not calculable</td></tr></tbody></table></div><dl class="dossier-record"><div class="record-scalar"><dt>Unsupported NPV</dt><dd>Not calculable</dd></div><div class="record-scalar"><dt>Unsupported IRR</dt><dd>Not calculable</dd></div><div class="record-scalar"><dt>Minimum effective support S*</dt><dd>Not calculable</dd></div></dl><p><strong>Lower-route precedence</strong>: No lower route recorded</p><dl class="dossier-record"><div class="record-scalar"><dt>Incremental national value</dt><dd>Not calculable</dd></div></dl>Not calculable<ul><li>No action is the comparator and is selected when an evidenced rejection condition fully resolves the proposition.</li></ul></article><article class="route-record"><div class="dossier-intro"><h3>Administrative or regulatory correction</h3><p>Not calculable</p><table data-dossier-table="record"><thead><tr><th scope="col">Source field</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Feasibility</th><td>Not calculable</td></tr><tr><th scope="row">Resolves the binding constraint</th><td>Not calculable</td></tr><tr><th scope="row">Additionality</th><td>Not calculable</td></tr><tr><th scope="row">Policy permissibility</th><td>Not calculable</td></tr></tbody></table></div><dl class="dossier-record"><div class="record-scalar"><dt>Unsupported NPV</dt><dd>Not calculable</dd></div><div class="record-scalar"><dt>Unsupported IRR</dt><dd>Not calculable</dd></div><div class="record-scalar"><dt>Minimum effective support S*</dt><dd>Not calculable</dd></div></dl><p><strong>Lower-route precedence</strong>: No lower route recorded</p><dl class="dossier-record"><div class="record-scalar"><dt>Incremental national value</dt><dd>Not calculable</dd></div></dl>Not calculable<ul><li>Administrative, classification or regulatory barrier evidence is required.</li></ul></article><article class="route-record"><div class="dossier-intro"><h3>Information and market linkage</h3><p>Not calculable</p><table data-dossier-table="record"><thead><tr><th scope="col">Source field</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Feasibility</th><td>Not calculable</td></tr><tr><th scope="row">Resolves the binding constraint</th><td>Not calculable</td></tr><tr><th scope="row">Additionality</th><td>Not calculable</td></tr><tr><th scope="row">Policy permissibility</th><td>Not calculable</td></tr></tbody></table></div><dl class="dossier-record"><div class="record-scalar"><dt>Unsupported NPV</dt><dd>Not calculable</dd></div><div class="record-scalar"><dt>Unsupported IRR</dt><dd>Not calculable</dd></div><div class="record-scalar"><dt>Minimum effective support S*</dt><dd>Not calculable</dd></div></dl><p><strong>Lower-route precedence</strong>: No lower route recorded</p><dl class="dossier-record"><div class="record-scalar"><dt>Incremental national value</dt><dd>Not calculable</dd></div></dl>Not calculable<ul><li>A verified information, linkage or matching constraint is required.</li></ul></article><article class="route-record"><div class="dossier-intro"><h3>Certification, testing and quality</h3><p>Not calculable</p><table data-dossier-table="record"><thead><tr><th scope="col">Source field</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Feasibility</th><td>Not calculable</td></tr><tr><th scope="row">Resolves the binding constraint</th><td>Not calculable</td></tr><tr><th scope="row">Additionality</th><td>Not calculable</td></tr><tr><th scope="row">Policy permissibility</th><td>Not calculable</td></tr></tbody></table></div><dl class="dossier-record"><div class="record-scalar"><dt>Unsupported NPV</dt><dd>Not calculable</dd></div><div class="record-scalar"><dt>Unsupported IRR</dt><dd>Not calculable</dd></div><div class="record-scalar"><dt>Minimum effective support S*</dt><dd>Not calculable</dd></div></dl><p><strong>Lower-route precedence</strong>: No lower route recorded</p><dl class="dossier-record"><div class="record-scalar"><dt>Incremental national value</dt><dd>Not calculable</dd></div></dl>Not calculable<ul><li>A verified specification, certification, testing or qualification constraint is required.</li></ul></article><article class="route-record"><div class="dossier-intro"><h3>Demand aggregation and offtake</h3><p>Not calculable</p><table data-dossier-table="record"><thead><tr><th scope="col">Source field</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Feasibility</th><td>Not calculable</td></tr><tr><th scope="row">Resolves the binding constraint</th><td>Not calculable</td></tr><tr><th scope="row">Additionality</th><td>Not calculable</td></tr><tr><th scope="row">Policy permissibility</th><td>Not calculable</td></tr></tbody></table></div><dl class="dossier-record"><div class="record-scalar"><dt>Unsupported NPV</dt><dd>Not calculable</dd></div><div class="record-scalar"><dt>Unsupported IRR</dt><dd>Not calculable</dd></div><div class="record-scalar"><dt>Minimum effective support S*</dt><dd>Not calculable</dd></div></dl><p><strong>Lower-route precedence</strong>: No lower route recorded</p><dl class="dossier-record"><div class="record-scalar"><dt>Incremental national value</dt><dd>Not calculable</dd></div></dl>Not calculable<ul><li>A verified demand-fragmentation or offtake constraint is required.</li></ul></article><article class="route-record"><div class="dossier-intro"><h3>Brownfield upgrade or expansion</h3><p>Not calculable</p><table data-dossier-table="record"><thead><tr><th scope="col">Source field</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Feasibility</th><td>Not calculable</td></tr><tr><th scope="row">Resolves the binding constraint</th><td>Not calculable</td></tr><tr><th scope="row">Additionality</th><td>Not calculable</td></tr><tr><th scope="row">Policy permissibility</th><td>Not calculable</td></tr></tbody></table></div><dl class="dossier-record"><div class="record-scalar"><dt>Unsupported NPV</dt><dd>Not calculable</dd></div><div class="record-scalar"><dt>Unsupported IRR</dt><dd>Not calculable</dd></div><div class="record-scalar"><dt>Minimum effective support S*</dt><dd>Not calculable</dd></div></dl><p><strong>Lower-route precedence</strong>: No lower route recorded</p><dl class="dossier-record"><div class="record-scalar"><dt>Incremental national value</dt><dd>Not calculable</dd></div></dl>Not calculable<ul><li>Verified incumbent adjacency makes brownfield the priority hypothesis; effective capacity and economics remain required.</li><li>Downside route economics are unavailable.</li></ul></article><article class="route-record"><div class="dossier-intro"><h3>Technology partnership or joint venture</h3><p>Not calculable</p><table data-dossier-table="record"><thead><tr><th scope="col">Source field</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Feasibility</th><td>Not calculable</td></tr><tr><th scope="row">Resolves the binding constraint</th><td>Not calculable</td></tr><tr><th scope="row">Additionality</th><td>Not calculable</td></tr><tr><th scope="row">Policy permissibility</th><td>Not calculable</td></tr></tbody></table></div><dl class="dossier-record"><div class="record-scalar"><dt>Unsupported NPV</dt><dd>Not calculable</dd></div><div class="record-scalar"><dt>Unsupported IRR</dt><dd>Not calculable</dd></div><div class="record-scalar"><dt>Minimum effective support S*</dt><dd>Not calculable</dd></div></dl><p><strong>Lower-route precedence</strong>: No lower route recorded</p><dl class="dossier-record"><div class="record-scalar"><dt>Incremental national value</dt><dd>Not calculable</dd></div></dl>Not calculable<ul><li>A verified technology constraint and major-line/JV adjacency are required.</li></ul></article><article class="route-record"><div class="dossier-intro"><h3>Greenfield capacity</h3><p>Not calculable</p><table data-dossier-table="record"><thead><tr><th scope="col">Source field</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Feasibility</th><td>Not calculable</td></tr><tr><th scope="row">Resolves the binding constraint</th><td>Not calculable</td></tr><tr><th scope="row">Additionality</th><td>Not calculable</td></tr><tr><th scope="row">Policy permissibility</th><td>Not calculable</td></tr></tbody></table></div><dl class="dossier-record"><div class="record-scalar"><dt>Unsupported NPV</dt><dd>Not calculable</dd></div><div class="record-scalar"><dt>Unsupported IRR</dt><dd>Not calculable</dd></div><div class="record-scalar"><dt>Minimum effective support S*</dt><dd>Not calculable</dd></div></dl><p><strong>Lower-route precedence</strong>: No lower route recorded</p><dl class="dossier-record"><div class="record-scalar"><dt>Incremental national value</dt><dd>Not calculable</dd></div></dl>Not calculable<ul><li>Greenfield requires failed lower routes, D* above the configured band, demand at MES, and passing competition gates.</li></ul></article><article class="route-record"><div class="dossier-intro"><h3>Shared enabling infrastructure</h3><p>Not calculable</p><table data-dossier-table="record"><thead><tr><th scope="col">Source field</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Feasibility</th><td>Not calculable</td></tr><tr><th scope="row">Resolves the binding constraint</th><td>Not calculable</td></tr><tr><th scope="row">Additionality</th><td>Not calculable</td></tr><tr><th scope="row">Policy permissibility</th><td>Not calculable</td></tr></tbody></table></div><dl class="dossier-record"><div class="record-scalar"><dt>Unsupported NPV</dt><dd>Not calculable</dd></div><div class="record-scalar"><dt>Unsupported IRR</dt><dd>Not calculable</dd></div><div class="record-scalar"><dt>Minimum effective support S*</dt><dd>Not calculable</dd></div></dl><p><strong>Lower-route precedence</strong>: No lower route recorded</p><dl class="dossier-record"><div class="record-scalar"><dt>Incremental national value</dt><dd>Not calculable</dd></div></dl>Not calculable<ul><li>GRAPH_REQUIRED: route 8 requires the governed dependency graph and a positive UnlockValue.</li></ul></article></div><div class="dossier-intro"><h3>Counterfactual</h3>Unavailable</div></section><section id="dossier-economics" class="dossier-section"><h2>Economics and intervention</h2><p class="branch-label">Public evidence</p><table data-dossier-table="fields"><thead><tr><th scope="col">Source field</th><th scope="col">Value</th><th scope="col">Unit</th></tr></thead><tbody><tr><th scope="row">Unsupported NPV</th><td><span class="availability">Not calculable</span><br><span class="field-reason">Cannot be calculated from the supplied evidence.</span></td><td><bdi class="ltr-isolate technical-token" dir="ltr">SAR m</bdi></td></tr><tr><th scope="row">Unsupported IRR</th><td><span class="availability">Not calculable</span><br><span class="field-reason">Cannot be calculated from the supplied evidence.</span></td><td><bdi class="ltr-isolate technical-token" dir="ltr">ratio</bdi></td></tr><tr><th scope="row">Minimum effective support S*</th><td><span class="availability">Not calculable</span><br><span class="field-reason">Cannot be calculated from the supplied evidence.</span></td><td><bdi class="ltr-isolate technical-token" dir="ltr">SAR m</bdi></td></tr><tr><th scope="row">Supported NPV</th><td><span class="availability">Not calculable</span><br><span class="field-reason">Cannot be calculated from the supplied evidence.</span></td><td><bdi class="ltr-isolate technical-token" dir="ltr">SAR m</bdi></td></tr><tr><th scope="row">Supported IRR</th><td><span class="availability">Not calculable</span><br><span class="field-reason">Cannot be calculated from the supplied evidence.</span></td><td><bdi class="ltr-isolate technical-token" dir="ltr">ratio</bdi></td></tr><tr><th scope="row">Hurdle rate</th><td><span class="availability">Not calculable</span><br><span class="field-reason">Cannot be calculated from the supplied evidence.</span></td><td><bdi class="ltr-isolate technical-token" dir="ltr">ratio</bdi></td></tr><tr><th scope="row">Separate downside result</th><td><span class="availability">Not calculable</span><br><span class="field-reason">Cannot be calculated from the supplied evidence.</span></td><td><bdi class="ltr-isolate technical-token" dir="ltr">SAR m</bdi></td></tr></tbody></table><h3>National-value comparison</h3>Unavailable</section><section id="dossier-competition" class="dossier-section"><h2>Competition and public policy</h2><p class="branch-label">Public evidence</p><table data-dossier-table="fields"><thead><tr><th scope="col">Source field</th><th scope="col">Value</th><th scope="col">Unit</th></tr></thead><tbody><tr><th scope="row">Capacity to downside demand ratio</th><td><span class="availability">Unavailable</span><br><span class="field-reason">Not established by the supplied evidence.</span></td><td><bdi class="ltr-isolate technical-token" dir="ltr">ratio</bdi></td></tr><tr><th scope="row">Displacement cost</th><td><span class="availability">Unavailable</span><br><span class="field-reason">Not established by the supplied evidence.</span></td><td><bdi class="ltr-isolate technical-token" dir="ltr">SAR m</bdi></td></tr><tr><th scope="row">Sunset date</th><td><span class="availability">Unavailable</span><br><span class="field-reason">Not established by the supplied evidence.</span></td><td></td></tr></tbody></table>Unavailable<p>Calculation and recommendation do not authorize public support.</p></section><section id="dossier-ledger" class="dossier-section"><h2>Complete rule execution ledger</h2><div data-dossier-records="rules"><article class="rule-record"><div class="dossier-intro"><h3><bdi class="ltr-isolate technical-token" dir="ltr">R0</bdi> · <span>Identity gate</span></h3><p>Full · Fires</p><p>HS revision H0 and HS6 721049 are frozen in the snapshot; specification/application remains separately gated.</p></div><p>Continue to screening while preserving the unresolved decision object.</p><dl class="dossier-record"></dl></article><article class="rule-record"><div class="dossier-intro"><h3><bdi class="ltr-isolate technical-token" dir="ltr">R1-F</bdi> · <span>Persistent retained exposure — full</span></h3><p>Disabled · Not evaluable</p><p>Full continuity is unavailable and gross flows are not retained imports.</p></div><p>Do not claim the full persistence rule.</p><dl class="dossier-record"><div class="record-scalar"><dt>Missing years</dt><dd><ul class="dossier-values"><li><bdi class="ltr-isolate technical-token" dir="ltr">2022</bdi></li></ul></dd></div></dl></article><article class="rule-record"><div class="dossier-intro"><h3><bdi class="ltr-isolate technical-token" dir="ltr">R1-D</bdi> · <span>Persistence signal — degraded</span></h3><p>Degraded · Fires</p><p>3 positive observed years within the configured window; no interpolation used.</p></div><p>Generate INVESTIGATE only; confidence capped at C.</p><dl class="dossier-record"><div class="record-scalar"><dt>Positive observed years</dt><dd><ul class="dossier-values"><li><bdi class="ltr-isolate technical-token" dir="ltr">2021</bdi></li><li><bdi class="ltr-isolate technical-token" dir="ltr">2023</bdi></li><li><bdi class="ltr-isolate technical-token" dir="ltr">2024</bdi></li></ul></dd></div><div class="record-scalar"><dt>Confidence ceiling</dt><dd><span class="source-language-island" lang="en" dir="ltr">C</span></dd></div></dl></article><article class="rule-record"><div class="dossier-intro"><h3><bdi class="ltr-isolate technical-token" dir="ltr">R2</bdi> · <span>Quantity-led expansion</span></h3><p>Full · Fires</p><p>Quantity-led expansion signal fires.</p></div><p>Separate structural volume growth from price movement.</p><dl class="dossier-record"><div class="record-scalar"><dt>First year</dt><dd><bdi class="ltr-isolate technical-token" dir="ltr">2023</bdi></dd></div><div class="record-scalar"><dt>Final year</dt><dd><bdi class="ltr-isolate technical-token" dir="ltr">2024</bdi></dd></div><div class="record-scalar"><dt>Observed period (years)</dt><dd><bdi class="ltr-isolate technical-token" dir="ltr">1</bdi></dd></div><div class="record-scalar"><dt>Change in log value</dt><dd><bdi class="ltr-isolate technical-token" dir="ltr">0.2419</bdi></dd></div><div class="record-scalar"><dt>Change in log quantity</dt><dd><bdi class="ltr-isolate technical-token" dir="ltr">0.5047</bdi></dd></div><div class="record-scalar"><dt>Change in log unit value</dt><dd><bdi class="ltr-isolate technical-token" dir="ltr">-0.2625</bdi></dd></div><div class="record-scalar"><dt>Quantity contribution share</dt><dd><bdi class="ltr-isolate technical-token" dir="ltr">0.6579</bdi></dd></div><div class="record-scalar"><dt>Quantity compound annual growth rate</dt><dd><bdi class="ltr-isolate technical-token" dir="ltr">0.6565</bdi></dd></div></dl></article><article class="rule-record"><div class="dossier-intro"><h3><bdi class="ltr-isolate technical-token" dir="ltr">R3</bdi> · <span>Supplier concentration</span></h3><p>Full · Fires</p><p>External supply is concentrated on the value basis; quantity concentration is NOT_CALCULABLE.</p></div><p>Generate a resilience/diversification review, not an automatic localisation recommendation.</p><dl class="dossier-record"><div class="record-scalar"><dt>Concentration index (HHI)</dt><dd><bdi class="ltr-isolate technical-token" dir="ltr">0.36</bdi></dd></div><div class="record-scalar"><dt>Largest supplier share</dt><dd>Not calculable</dd></div><div class="record-scalar"><dt>Top-two supplier share</dt><dd><bdi class="ltr-isolate technical-token" dir="ltr">0.763</bdi></dd></div><div class="record-scalar"><dt>Concentration threshold (HHI)</dt><dd><bdi class="ltr-isolate technical-token" dir="ltr">0.25</bdi></dd></div><div class="record-scalar"><dt>Largest-supplier threshold</dt><dd><bdi class="ltr-isolate technical-token" dir="ltr">0.5</bdi></dd></div><div class="record-group"><dt>Value</dt><dd><dl class="dossier-record"><div class="record-scalar"><dt>Recorded basis</dt><dd><span class="source-language-island" lang="en" dir="ltr">value</span></dd></div><div class="record-scalar"><dt>Status</dt><dd><span class="source-language-island" lang="en" dir="ltr">FULL</span></dd></div><div class="record-scalar"><dt>Observation year</dt><dd><bdi class="ltr-isolate technical-token" dir="ltr">2024</bdi></dd></div><div class="record-scalar"><dt>Trade-flow basis</dt><dd><span class="source-language-island" lang="en" dir="ltr">gross</span></dd></div><div class="record-scalar"><dt>Source</dt><dd><span class="source-language-island" lang="en" dir="ltr">disclosed_concentration</span></dd></div><div class="record-scalar"><dt>Concentration index (HHI)</dt><dd><bdi class="ltr-isolate technical-token" dir="ltr">0.36</bdi></dd></div><div class="record-scalar"><dt>Largest supplier share</dt><dd>Not calculable</dd></div><div class="record-scalar"><dt>Top-two supplier share</dt><dd><bdi class="ltr-isolate technical-token" dir="ltr">0.763</bdi></dd></div><div class="record-scalar"><dt>Valid observation coverage</dt><dd>Not calculable</dd></div><div class="record-scalar"><dt>Eligible partner count</dt><dd>Not calculable</dd></div><div class="record-scalar"><dt>Source explanation</dt><dd>Unavailable</dd></div></dl></dd></div><div class="record-group"><dt>Quantity</dt><dd><dl class="dossier-record"><div class="record-scalar"><dt>Recorded basis</dt><dd><span class="source-language-island" lang="en" dir="ltr">quantity</span></dd></div><div class="record-scalar"><dt>Status</dt><dd>Not calculable</dd></div><div class="record-scalar"><dt>Observation year</dt><dd><bdi class="ltr-isolate technical-token" dir="ltr">2024</bdi></dd></div><div class="record-scalar"><dt>Trade-flow basis</dt><dd><span class="source-language-island" lang="en" dir="ltr">gross</span></dd></div><div class="record-scalar"><dt>Source</dt><dd><span class="source-language-island" lang="en" dir="ltr">none</span></dd></div><div class="record-scalar"><dt>Concentration index (HHI)</dt><dd>Not calculable</dd></div><div class="record-scalar"><dt>Largest supplier share</dt><dd>Not calculable</dd></div><div class="record-scalar"><dt>Top-two supplier share</dt><dd>Not calculable</dd></div><div class="record-scalar"><dt>Valid observation coverage</dt><dd>Not calculable</dd></div><div class="record-scalar"><dt>Eligible partner count</dt><dd>Not calculable</dd></div><div class="record-scalar"><dt>Source explanation</dt><dd><span class="source-language-island" lang="en" dir="ltr">No partner rows or source-attributed quantity concentration disclosure are available.</span></dd></div></dl></dd></div></dl></article><article class="rule-record"><div class="dossier-intro"><h3><bdi class="ltr-isolate technical-token" dir="ltr">R4-F</bdi> · <span>Product-tier heterogeneity — full</span></h3><p>Disabled · Not evaluable</p><p>Partner-month × tariff-line cells are unavailable.</p></div><p>Do not fit clusters or claim grades.</p><dl class="dossier-record"></dl></article><article class="rule-record"><div class="dossier-intro"><h3><bdi class="ltr-isolate technical-token" dir="ltr">R4-D</bdi> · <span>Unit-value dispersion — degraded</span></h3><p>Degraded · Fires</p><p>A source-attributed annual unit-value dispersion summary supports a descriptive product-mix signal; no cluster or grade conclusion.</p></div><p>Open specification research only; no grade conclusion.</p><dl class="dossier-record"><div class="record-scalar"><dt>Status</dt><dd><span class="source-language-island" lang="en" dir="ltr">DISCLOSED</span></dd></div><div class="record-scalar"><dt>Calculation basis</dt><dd><span class="source-language-island" lang="en" dir="ltr">disclosed_dispersion</span></dd></div><div class="record-scalar"><dt>Valid value coverage</dt><dd>Not calculable</dd></div><div class="record-scalar"><dt>Valid quantity coverage</dt><dd>Not calculable</dd></div><div class="record-scalar"><dt>Minimum valid-value coverage</dt><dd><bdi class="ltr-isolate technical-token" dir="ltr">0.7</bdi></dd></div><div class="record-scalar"><dt>Weighted first quartile (USD/t)</dt><dd>Not calculable</dd></div><div class="record-scalar"><dt>Weighted median (USD/t)</dt><dd>Not calculable</dd></div><div class="record-scalar"><dt>Weighted third quartile (USD/t)</dt><dd>Not calculable</dd></div><div class="record-scalar"><dt>Interquartile range (USD/t)</dt><dd>Not calculable</dd></div><div class="record-scalar"><dt>Bulk unit-value band (USD/t)</dt><dd><ul class="dossier-values"><li><bdi class="ltr-isolate technical-token" dir="ltr">776</bdi></li><li><bdi class="ltr-isolate technical-token" dir="ltr">864</bdi></li></ul></dd></div><div class="record-group"><dt>Potential outlier</dt><dd><dl class="dossier-record"><div class="record-scalar"><dt>Trading partner</dt><dd><span class="source-language-island" lang="en" dir="ltr">Austria</span></dd></div><div class="record-scalar"><dt>Net weight (kt)</dt><dd><bdi class="ltr-isolate technical-token" dir="ltr">1</bdi></dd></div><div class="record-scalar"><dt>Unit value (USD/t)</dt><dd><bdi class="ltr-isolate technical-token" dir="ltr">4179</bdi></dd></div><div class="record-scalar"><dt>Confirmed outlier</dt><dd>No</dd></div></dl></dd></div><div class="record-scalar"><dt>Comparison observations</dt><dd>Not calculable</dd></div><div class="record-scalar"><dt>Source evidence reference</dt><dd><span class="source-language-island" lang="en" dir="ltr">S-WITS-721049</span></dd></div><div class="record-scalar"><dt>Source explanation</dt><dd><span class="source-language-island" lang="en" dir="ltr">Annual partner data permit only the degraded R4-D path; complete row-level value and comparable-quantity coverage are not present in the frozen fixture.</span></dd></div></dl></article><article class="rule-record"><div class="dossier-intro"><h3><bdi class="ltr-isolate technical-token" dir="ltr">R5</bdi> · <span>Domestic supply plus continued imports</span></h3><p>Degraded · Fires</p><p>Verified domestic capability coexists with material gross imports.</p></div><p>Test specification, qualification, capacity, price, application and allocation mismatch.</p><dl class="dossier-record"><div class="record-scalar"><dt>Retained imports (kt)</dt><dd>Not calculable</dd></div><div class="record-scalar"><dt>Net import exposure (kt)</dt><dd>Not calculable</dd></div><div class="record-scalar"><dt>Apparent consumption (kt)</dt><dd>Not calculable</dd></div><div class="record-scalar"><dt>Retained imports / apparent consumption</dt><dd>Not calculable</dd></div><div class="record-scalar"><dt>Calculation basis</dt><dd>Not calculable</dd></div><div class="record-scalar"><dt>Unavailable inputs</dt><dd><ul class="dossier-values"><li><span class="source-language-island" lang="en" dir="ltr">domestic_origin_exports_kt</span></li><li><span class="source-language-island" lang="en" dir="ltr">domestic_production_kt</span></li><li><span class="source-language-island" lang="en" dir="ltr">reexports_kt</span></li><li><span class="source-language-island" lang="en" dir="ltr">retained_imports_kt</span></li></ul></dd></div><div class="record-group"><dt>Reasons for unavailability</dt><dd><dl class="dossier-record"><div class="record-scalar"><dt>Retained imports (kt)</dt><dd><ul class="dossier-values"><li><span class="source-language-island" lang="en" dir="ltr">reexports_kt</span></li><li><span class="source-language-island" lang="en" dir="ltr">retained_imports_kt</span></li></ul></dd></div><div class="record-scalar"><dt>Net import exposure (kt)</dt><dd><ul class="dossier-values"><li><span class="source-language-island" lang="en" dir="ltr">domestic_origin_exports_kt</span></li><li><span class="source-language-island" lang="en" dir="ltr">retained_imports_kt</span></li></ul></dd></div><div class="record-scalar"><dt>Apparent consumption (kt)</dt><dd><ul class="dossier-values"><li><span class="source-language-island" lang="en" dir="ltr">domestic_origin_exports_kt</span></li><li><span class="source-language-island" lang="en" dir="ltr">domestic_production_kt</span></li><li><span class="source-language-island" lang="en" dir="ltr">retained_imports_kt</span></li></ul></dd></div><div class="record-scalar"><dt>Retained imports / apparent consumption</dt><dd><ul class="dossier-values"><li><span class="source-language-island" lang="en" dir="ltr">apparent_consumption_kt</span></li><li><span class="source-language-island" lang="en" dir="ltr">retained_imports_kt</span></li></ul></dd></div></dl></dd></div><div class="record-scalar"><dt>Configured threshold</dt><dd><bdi class="ltr-isolate technical-token" dir="ltr">0.2</bdi></dd></div><div class="record-scalar"><dt>Source explanation</dt><dd><span class="source-language-island" lang="en" dir="ltr">Domestic production quantity and retained-import flow are absent from the frozen public snapshot; gross imports cannot establish apparent consumption.</span></dd></div></dl></article><article class="rule-record"><div class="dossier-intro"><h3><bdi class="ltr-isolate technical-token" dir="ltr">R6</bdi> · <span>Capacity pressure</span></h3><p>Disabled · Not evaluable</p><p>Effective utilisation and target-specification shortage are not public.</p></div><p>Obtain line-level availability, yield, qualification share and allocation.</p><dl class="dossier-record"></dl></article><article class="rule-record"><div class="dossier-intro"><h3><bdi class="ltr-isolate technical-token" dir="ltr">R7</bdi> · <span>Latent domestic capacity</span></h3><p>Disabled · Not evaluable</p><p>Idle qualified capacity and specification equivalence are not established publicly.</p></div><p>Do not assume latent capacity.</p><dl class="dossier-record"></dl></article><article class="rule-record"><div class="dossier-intro"><h3><bdi class="ltr-isolate technical-token" dir="ltr">R8</bdi> · <span>Committed future demand</span></h3><p>Disabled · Not evaluable</p><p>Awarded/financed demand at the target specification is unavailable.</p></div><p>Keep base, committed and announced demand separate when provided.</p><dl class="dossier-record"></dl></article><article class="rule-record"><div class="dossier-intro"><h3><bdi class="ltr-isolate technical-token" dir="ltr">R9-S</bdi> · <span>Coarse incumbent adjacency screen</span></h3><p>Full · Fires</p><p>A verified Saudi plant is in the same process family with additional capability signals.</p></div><p>Open the full line-level capability assessment; do not publish D* from screening alone.</p><dl class="dossier-record"><div class="record-scalar"><dt>Same process family</dt><dd>Yes</dd></div><div class="record-scalar"><dt>Qualifying signal count</dt><dd><bdi class="ltr-isolate technical-token" dir="ltr">4</bdi></dd></div><div class="record-scalar"><dt>Known hard-gate failure</dt><dd>No</dd></div></dl></article><article class="rule-record"><div class="dossier-intro"><h3><bdi class="ltr-isolate technical-token" dir="ltr">R10</bdi> · <span>Strategic criticality</span></h3><p>Degraded · Fires</p><p>A resilience review is warranted by concentration; formal criticality still requires authority confirmation.</p></div><p>Keep commercial viability and strategic value separate.</p><dl class="dossier-record"><div class="record-scalar"><dt>Criticality status</dt><dd>Not calculable</dd></div><div class="record-scalar"><dt>Criticality evidence reference</dt><dd>Unavailable</dd></div></dl></article><article class="rule-record"><div class="dossier-intro"><h3><bdi class="ltr-isolate technical-token" dir="ltr">R11</bdi> · <span>Economic exclusion / generic-capacity warning</span></h3><p>Full · Does not fire</p><p>Gross exports are 0.1144× imports; the configured generic-capacity warning threshold is not met.</p></div><p>Reject generic support or move only a named specialty exception to investigation.</p><dl class="dossier-record"><div class="record-scalar"><dt>Export/import value ratio</dt><dd><bdi class="ltr-isolate technical-token" dir="ltr">0.1144</bdi></dd></div><div class="record-scalar"><dt>Export/import ratio threshold</dt><dd><bdi class="ltr-isolate technical-token" dir="ltr">50</bdi></dd></div><div class="record-scalar"><dt>Calculated export/import value ratio</dt><dd><bdi class="ltr-isolate technical-token" dir="ltr">0.1144</bdi></dd></div><div class="record-scalar"><dt>Disclosed export/import value ratio</dt><dd>Unavailable</dd></div><div class="record-scalar"><dt>Disclosed ratio is consistent</dt><dd>Unavailable</dd></div><div class="record-scalar"><dt>Ratio basis</dt><dd><span class="source-language-island" lang="en" dir="ltr">gross_trade_value</span></dd></div><div class="record-scalar"><dt>Ratio status</dt><dd><span class="source-language-island" lang="en" dir="ltr">CALCULABLE</span></dd></div><div class="record-scalar"><dt>Ratio explanation</dt><dd>Unavailable</dd></div><div class="record-group"><dt>Established nominal capacity</dt><dd><dl class="dossier-record"><div class="record-scalar"><dt>Established by evidence</dt><dd>Yes</dd></div><div class="record-scalar"><dt>Total observed nominal capacity (t/year)</dt><dd><bdi class="ltr-isolate technical-token" dir="ltr">250000</bdi></dd></div><div class="record-scalar"><dt>Named producers</dt><dd><ul class="dossier-values"><li><span class="source-language-island" lang="en" dir="ltr">UNICOIL</span></li></ul></dd></div><div class="record-scalar"><dt>Evidence references</dt><dd><ul class="dossier-values"><li><span class="source-language-island" lang="en" dir="ltr">S-UNICOIL-EPD</span></li></ul></dd></div><div class="record-scalar"><dt>Source explanation</dt><dd>Unavailable</dd></div></dl></dd></div></dl></article><article class="rule-record"><div class="dossier-intro"><h3><bdi class="ltr-isolate technical-token" dir="ltr">R12</bdi> · <span>Evidence-value trigger</span></h3><p>Degraded · Fires</p><p>5 named facts could change the route.</p></div><p>Prioritise the smallest evidence request with a plausible route effect; quantify EVSI when cost and value inputs exist.</p><dl class="dossier-record"><div class="record-scalar"><dt>Named missing facts</dt><dd><ul class="dossier-values"><li><span class="source-language-island" lang="en" dir="ltr">Line-level production by specification, application and destination</span></li><li><span class="source-language-island" lang="en" dir="ltr">Effective availability, allocation, utilisation, yield, qualification share, backlog and planned outages</span></li><li><span class="source-language-island" lang="en" dir="ltr">Importer/offtaker specifications and reason local supply was not selected</span></li><li><span class="source-language-island" lang="en" dir="ltr">Re-export and domestic-origin flow decomposition</span></li><li><span class="source-language-island" lang="en" dir="ltr">Delivered cost, import parity and unsupported Brownfield economics</span></li></ul></dd></div><div class="record-group"><dt>Evidence needed</dt><dd><ul><li><p>Line-level production by specification, application and destination</p><dl class="dossier-record"><div class="record-scalar"><dt>Evidence-need identifier</dt><dd><span class="source-language-island" lang="en" dir="ltr">line-level production or producer-grade matrix</span></dd></div><div class="record-scalar"><dt>Blocked decision field</dt><dd><span class="source-language-island" lang="en" dir="ltr">product_identity</span></dd></div><div class="record-scalar"><dt>Effect on route</dt><dd><span class="source-language-island" lang="en" dir="ltr">Can establish domestic equivalence and change the incumbent route.</span></dd></div><div class="record-scalar"><dt>Evidence references</dt><dd><ul class="dossier-values"><li><span class="source-language-island" lang="en" dir="ltr">S-UNICOIL-EPD</span></li><li><span class="source-language-island" lang="en" dir="ltr">S-UNICOIL-SPEC</span></li></ul></dd></div><div class="record-scalar"><dt>Numerical value of information</dt><dd>Not calculable</dd></div></dl></li><li><p>Effective availability, allocation, utilisation, yield, qualification share, backlog and planned outages</p><dl class="dossier-record"><div class="record-scalar"><dt>Evidence-need identifier</dt><dd><span class="source-language-island" lang="en" dir="ltr">capacity/availability/allocation</span></dd></div><div class="record-scalar"><dt>Blocked decision field</dt><dd><span class="source-language-island" lang="en" dir="ltr">domestic_supply_or_capability</span></dd></div><div class="record-scalar"><dt>Effect on route</dt><dd><span class="source-language-island" lang="en" dir="ltr">Can distinguish no action, brownfield expansion, and new capacity.</span></dd></div><div class="record-scalar"><dt>Evidence references</dt><dd><ul class="dossier-values"><li><span class="source-language-island" lang="en" dir="ltr">S-UNICOIL-EPD</span></li></ul></dd></div><div class="record-scalar"><dt>Numerical value of information</dt><dd>Not calculable</dd></div></dl></li><li><p>Importer/offtaker specifications and reason local supply was not selected</p><dl class="dossier-record"><div class="record-scalar"><dt>Evidence-need identifier</dt><dd><span class="source-language-island" lang="en" dir="ltr">target specification/application</span></dd></div><div class="record-scalar"><dt>Blocked decision field</dt><dd><span class="source-language-island" lang="en" dir="ltr">demand_at_required_specification</span></dd></div><div class="record-scalar"><dt>Effect on route</dt><dd><span class="source-language-island" lang="en" dir="ltr">Can establish target demand and change state or route.</span></dd></div><div class="record-scalar"><dt>Evidence references</dt><dd><ul class="dossier-values"><li>None recorded; no completed review is implied.</li></ul></dd></div><div class="record-scalar"><dt>Numerical value of information</dt><dd>Not calculable</dd></div></dl></li><li><p>Re-export and domestic-origin flow decomposition</p><dl class="dossier-record"><div class="record-scalar"><dt>Evidence-need identifier</dt><dd><span class="source-language-island" lang="en" dir="ltr">re-export/origin decomposition</span></dd></div><div class="record-scalar"><dt>Blocked decision field</dt><dd><span class="source-language-island" lang="en" dir="ltr">demand_at_required_specification</span></dd></div><div class="record-scalar"><dt>Effect on route</dt><dd><span class="source-language-island" lang="en" dir="ltr">Can distinguish retained demand from a false or transitory gap.</span></dd></div><div class="record-scalar"><dt>Evidence references</dt><dd><ul class="dossier-values"><li><span class="source-language-island" lang="en" dir="ltr">S-WITS-721049</span></li></ul></dd></div><div class="record-scalar"><dt>Numerical value of information</dt><dd>Not calculable</dd></div></dl></li><li><p>Delivered cost, import parity and unsupported Brownfield economics</p><dl class="dossier-record"><div class="record-scalar"><dt>Evidence-need identifier</dt><dd><span class="source-language-island" lang="en" dir="ltr">route economics</span></dd></div><div class="record-scalar"><dt>Blocked decision field</dt><dd><span class="source-language-island" lang="en" dir="ltr">route_economics</span></dd></div><div class="record-scalar"><dt>Effect on route</dt><dd><span class="source-language-island" lang="en" dir="ltr">Can determine whether the plausible route proceeds unsupported.</span></dd></div><div class="record-scalar"><dt>Evidence references</dt><dd><ul class="dossier-values"><li>None recorded; no completed review is implied.</li></ul></dd></div><div class="record-scalar"><dt>Numerical value of information</dt><dd>Not calculable</dd></div></dl></li></ul></dd></div></dl></article></div></section><section id="dossier-evidence" class="dossier-section"><div class="contradiction-register"><div class="dossier-intro"><h2>Evidence passports and contradictions</h2><p>4 public records; 0 synthetic records.</p><h3>Contradiction register</h3><h3>Public evidence contradictions</h3><p><a href="#evidence-S-UNICOIL-SPEC"><bdi class="ltr-isolate technical-token" dir="ltr">S-UNICOIL-SPEC</bdi></a>: <span class="source-language-island" lang="en" dir="ltr">Published coating range differs from EPD and is retained for confirmation.</span></p></div><h3>Synthetic evidence contradictions</h3><p>Synthetic evidence is not active in public mode.</p></div><article class="passport" id="evidence-S-WITS-721049"><h3><bdi class="ltr-isolate technical-token" dir="ltr">S-WITS-721049</bdi></h3><p class="passport-title"><span class="source-language-island" lang="en" dir="ltr">WITS/UN Comtrade Saudi trade rows for HS 721049</span></p><table data-dossier-table="passport"><thead><tr><th scope="col">Source field</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Source</th><td><span class="source-language-island" lang="en" dir="ltr">WITS/UN Comtrade</span></td></tr><tr><th scope="row">Class</th><td><span class="source-language-island" lang="en" dir="ltr">B</span></td></tr><tr><th scope="row">Status</th><td><span class="source-language-island" lang="en" dir="ltr">observed</span></td></tr><tr><th scope="row">Source period</th><td><span class="source-language-island" lang="en" dir="ltr">2021/2023/2024</span></td></tr><tr><th scope="row">Retrieval date</th><td><span class="source-language-island" lang="en" dir="ltr">2026-08-31</span></td></tr><tr><th scope="row">Reviewer status</th><td><span class="source-language-island" lang="en" dir="ltr">unconfirmed_by_responsible_authority</span></td></tr><tr><th scope="row">Transformation</th><td><span class="source-language-island" lang="en" dir="ltr">Frozen annual world rows; concentration and dispersion are disclosed aggregates from the methodology worked case.</span></td></tr><tr><th scope="row">Supporting claims</th><td><ul class="dossier-values"><li><span class="source-language-island" lang="en" dir="ltr">TRADE_VALUE</span></li><li><span class="source-language-island" lang="en" dir="ltr">TRADE_QUANTITY</span></li><li><span class="source-language-island" lang="en" dir="ltr">SUPPLIER_CONCENTRATION</span></li></ul></td></tr><tr><th scope="row">Contradiction register</th><td>Unavailable</td></tr><tr><th scope="row">Source reference</th><td><a class="source-url" href="https://wits.worldbank.org/trade/comtrade/en/country/SAU/year/2024/tradeflow/Imports/partner/ALL/product/721049" rel="noreferrer"><bdi class="ltr-isolate technical-token" dir="ltr">https://wits.worldbank.org/trade/comtrade/en/country/SAU/year/2024/tradeflow/Imports/partner/ALL/product/721049</bdi></a></td></tr></tbody></table></article><article class="passport" id="evidence-S-UNICOIL-EPD"><h3><bdi class="ltr-isolate technical-token" dir="ltr">S-UNICOIL-EPD</bdi></h3><p class="passport-title"><span class="source-language-island" lang="en" dir="ltr">UNICOIL 2024 Environmental Product Declaration</span></p><table data-dossier-table="passport"><thead><tr><th scope="col">Source field</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Source</th><td><span class="source-language-island" lang="en" dir="ltr">UNICOIL</span></td></tr><tr><th scope="row">Class</th><td><span class="source-language-island" lang="en" dir="ltr">C</span></td></tr><tr><th scope="row">Status</th><td><span class="source-language-island" lang="en" dir="ltr">observed</span></td></tr><tr><th scope="row">Source period</th><td><span class="source-language-island" lang="en" dir="ltr">2023/2024</span></td></tr><tr><th scope="row">Retrieval date</th><td><span class="source-language-island" lang="en" dir="ltr">2026-08-31</span></td></tr><tr><th scope="row">Reviewer status</th><td><span class="source-language-island" lang="en" dir="ltr">unconfirmed_by_responsible_authority</span></td></tr><tr><th scope="row">Transformation</th><td>Unavailable</td></tr><tr><th scope="row">Supporting claims</th><td><ul class="dossier-values"><li><span class="source-language-island" lang="en" dir="ltr">DOMESTIC_NAMEPLATE_CAPACITY</span></li><li><span class="source-language-island" lang="en" dir="ltr">DOMESTIC_PROCESS_ROUTE</span></li><li><span class="source-language-island" lang="en" dir="ltr">DOMESTIC_SPECIFICATION_ENVELOPE</span></li><li><span class="source-language-island" lang="en" dir="ltr">DOMESTIC_LABORATORY_METROLOGY</span></li></ul></td></tr><tr><th scope="row">Contradiction register</th><td>Unavailable</td></tr><tr><th scope="row">Source reference</th><td><a class="source-url" href="https://www.unicoil.com.sa/wp-content/uploads/2026/05/EPD-Report_GS_Unicoil_Rev02-1_1.pdf" rel="noreferrer"><bdi class="ltr-isolate technical-token" dir="ltr">https://www.unicoil.com.sa/wp-content/uploads/2026/05/EPD-Report_GS_Unicoil_Rev02-1_1.pdf</bdi></a></td></tr></tbody></table></article><article class="passport" id="evidence-S-UNICOIL-SPEC"><h3><bdi class="ltr-isolate technical-token" dir="ltr">S-UNICOIL-SPEC</bdi></h3><p class="passport-title"><span class="source-language-island" lang="en" dir="ltr">UNICOIL Arabic and English galvanized product specifications</span></p><table data-dossier-table="passport"><thead><tr><th scope="col">Source field</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Source</th><td><span class="source-language-island" lang="en" dir="ltr">UNICOIL</span></td></tr><tr><th scope="row">Class</th><td><span class="source-language-island" lang="en" dir="ltr">C</span></td></tr><tr><th scope="row">Status</th><td><span class="source-language-island" lang="en" dir="ltr">observed</span></td></tr><tr><th scope="row">Source period</th><td>Unavailable</td></tr><tr><th scope="row">Retrieval date</th><td><span class="source-language-island" lang="en" dir="ltr">2026-08-31</span></td></tr><tr><th scope="row">Reviewer status</th><td><span class="source-language-island" lang="en" dir="ltr">unconfirmed_by_responsible_authority</span></td></tr><tr><th scope="row">Transformation</th><td>Unavailable</td></tr><tr><th scope="row">Supporting claims</th><td><ul class="dossier-values"><li><span class="source-language-island" lang="en" dir="ltr">BILINGUAL_SPECIFICATION_EXTRACTION</span></li><li><span class="source-language-island" lang="en" dir="ltr">DOMESTIC_SPECIFICATION_ENVELOPE</span></li><li><span class="source-language-island" lang="en" dir="ltr">DOMESTIC_DIMENSION_ENVELOPE</span></li></ul></td></tr><tr><th scope="row">Contradiction register</th><td><span class="source-language-island" lang="en" dir="ltr">Published coating range differs from EPD and is retained for confirmation.</span></td></tr><tr><th scope="row">Source reference</th><td><a class="source-url" href="https://www.unicoil.com.sa/products%26services/gi-product-brands-specifications-2/" rel="noreferrer"><bdi class="ltr-isolate technical-token" dir="ltr">https://www.unicoil.com.sa/products%26services/gi-product-brands-specifications-2/</bdi></a></td></tr></tbody></table></article><article class="passport" id="evidence-S-HADEED"><h3><bdi class="ltr-isolate technical-token" dir="ltr">S-HADEED</bdi></h3><p class="passport-title"><span class="source-language-island" lang="en" dir="ltr">Hadeed flat-products catalogue</span></p><table data-dossier-table="passport"><thead><tr><th scope="col">Source field</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Source</th><td><span class="source-language-island" lang="en" dir="ltr">Hadeed</span></td></tr><tr><th scope="row">Class</th><td><span class="source-language-island" lang="en" dir="ltr">C</span></td></tr><tr><th scope="row">Status</th><td><span class="source-language-island" lang="en" dir="ltr">observed</span></td></tr><tr><th scope="row">Source period</th><td>Unavailable</td></tr><tr><th scope="row">Retrieval date</th><td><span class="source-language-island" lang="en" dir="ltr">2026-08-31</span></td></tr><tr><th scope="row">Reviewer status</th><td><span class="source-language-island" lang="en" dir="ltr">unconfirmed_by_responsible_authority</span></td></tr><tr><th scope="row">Transformation</th><td>Unavailable</td></tr><tr><th scope="row">Supporting claims</th><td><ul class="dossier-values"><li><span class="source-language-island" lang="en" dir="ltr">DOMESTIC_PROCESS_FAMILY</span></li></ul></td></tr><tr><th scope="row">Contradiction register</th><td>Unavailable</td></tr><tr><th scope="row">Source reference</th><td><a class="source-url" href="https://hadeed.com.sa/products?group-category=cold-rolled-galvanized&amp;main-category=flat-products" rel="noreferrer"><bdi class="ltr-isolate technical-token" dir="ltr">https://hadeed.com.sa/products?group-category=cold-rolled-galvanized&amp;main-category=flat-products</bdi></a></td></tr></tbody></table></article></section><section id="dossier-conditions" class="dossier-section"><h2>Conditions, kill conditions and next facts</h2><p class="branch-label">Public evidence</p><div class="decision-conditions"><h3>Decision conditions</h3><ul><li><span>No greenfield or financial support recommendation before effective capacity and target specification are resolved.</span></li></ul></div><div class="kill-conditions"><h3>Kill conditions</h3><ul><li><span>Demand is temporary, re-exported or below efficient scale</span></li><li><span>Incumbent expansion already closes the specification-adjusted gap</span></li></ul></div><div class="next-actions"><h3>Next evidence actions</h3><ul><li><span>Line-level production by specification, application and destination</span></li><li><span>Effective availability, allocation, utilisation, yield, qualification share, backlog and planned outages</span></li><li><span>Importer/offtaker specifications and reason local supply was not selected</span></li><li><span>Re-export and domestic-origin flow decomposition</span></li><li><span>Delivered cost, import parity and unsupported Brownfield economics</span></li></ul></div><h3>Decision history and expert overrides</h3><p>None recorded; no completed review is implied.</p></section><section id="dossier-authority" class="dossier-section"><h2>Authority and reproducibility</h2><h3>Authority and versions</h3><table data-dossier-table="record"><thead><tr><th scope="col">Source reference</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Methodology</th><td><bdi class="ltr-isolate technical-token" dir="ltr">docs/authority/Industrial_Opportunity_Resolution_Methodology_Final_KSA.docx</bdi><br><bdi class="ltr-isolate technical-token" dir="ltr">5717cbd42acc9947ce5e450013719275acb7ed1470847b21fb2cc547c8ac4ce9</bdi></td></tr><tr><th scope="row">Project</th><td><bdi class="ltr-isolate technical-token" dir="ltr">0.2.0</bdi></td></tr><tr><th scope="row">Thresholds</th><td><bdi class="ltr-isolate technical-token" dir="ltr">1.3.0</bdi></td></tr><tr><th scope="row">Sector profiles</th><td><bdi class="ltr-isolate technical-token" dir="ltr">1.1.0</bdi></td></tr><tr><th scope="row">Evidence policy</th><td><bdi class="ltr-isolate technical-token" dir="ltr">1.4.0</bdi></td></tr><tr><th scope="row">UI strings</th><td><bdi class="ltr-isolate technical-token" dir="ltr">1.7.0</bdi></td></tr></tbody></table><div class="dossier-intro"><h3>Evidence boundary</h3><dl class="dossier-record"><div class="record-scalar"><dt>Public decision uses public evidence only</dt><dd>Yes</dd></div><div class="record-scalar"><dt>Synthetic branch isolation</dt><dd>Yes</dd></div><div class="record-scalar"><dt>Scenario reconciliation</dt><dd>Unavailable</dd></div><div class="record-scalar"><dt>Latest imports (USD million)</dt><dd><bdi class="ltr-isolate technical-token" dir="ltr">236.9</bdi></dd></div><div class="record-scalar"><dt>Latest imports (kt)</dt><dd><bdi class="ltr-isolate technical-token" dir="ltr">287.9</bdi></dd></div></dl></div></section></div></main></body></html>

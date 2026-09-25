@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "at_utc": "2026-09-25T01:38:19.341487+00:00",
+  "record_kind": "DELEGATED_S19_TERMINAL_RECORD_CORRECTION_ACCEPTANCE",
+  "actor": "/root coordinator under existing owner delegation",
+  "authority": "20260923-blocker-resolution-delegation-1.json",
+  "author": "/root/s19_product_implementer",
+  "independent_source_reviewer": "/root/s19_source_reviewer",
+  "independent_visual_reviewer": "/root/s19_delivered_base_handoff",
+  "bindings": {
+    "proposal": {
+      "path": "s19/product-implementation-r1/r12-terminal-record/PROPOSAL.md",
+      "sha256": "d384093ae27d043ffa7fe62eaad89c9a18153492c5223a88c148c5a59c8a95bf"
+    },
+    "actual22": {
+      "path": "s19/product-implementation-r1/r12-terminal-record/ACTUAL22.json",
+      "sha256": "2ea019da69632492cb29638b7fa82227302060d569c53b30b4ba320e060cf988"
+    },
+    "review": {
+      "path": "reviews/s19-r12-finite-correction-r1/TERMINAL-CONCURRENCE.md",
+      "sha256": "e5d275feeb2a691a90affb160e41eda87032509008de8053b9277a87083c7353"
+    },
+    "visual_finding": {
+      "path": "reviews/s19-r12-targeted-visual-r1/REVIEW.md",
+      "sha256": "f5b7ae8fdf6da4bf0bf2a31b204d5720f7ac2674024fd37710098d921a1c0e46"
+    }
+  },
+  "permitted_paths": [
+    "src/ior_mvp/dossier.py",
+    "tests/test_dossier_projection.py"
+  ],
+  "preimages": {
+    "src/ior_mvp/dossier.py": "eae56f1f9a2b8ad91edeed386de452220005f3c3f647212f4709b20d96776d47",
+    "tests/test_dossier_projection.py": "2dd30c1d6e891caf1904da043aec8f2f9790427ebd6b0520f2f6ead645390441"
+  },
+  "accepted_delta": "Existing authority renderer groups complete public heading/five-pair record; simulated keeps first-fact/long reconciliation flowing and groups complete four-field/eight-scalar terminal suffix. Reuse existing intro/CSS. Preserve all values/order/guard behavior.",
+  "targeted_reports": [
+    "fert-retail-packs-simulated-ar",
+    "polypropylene-simulated-en",
+    "sop-simulated-ar",
+    "sop-public-en",
+    "steel-public-en"
+  ],
+  "proof": "Meaningful original source RED to corrected GREEN; unchanged JSON/source values; all five actual final/preceding-page closures with strict geometry and correct content. Prior intro evidence reused only for unchanged bytes or repeated checks. Then single stock full-functional browser run may produce required44 PDFs; all original complete gates remain.",
+  "constraints": "Exactly two paths; no CSS/config/validator/domain/projection/browser/check changes; no generator/staging/candidate acceptance. Preserve r12 rejection and existing proofs.",
+  "sanad": "Root read full proposal/concurrence/visual review and directly viewed four tail pages. Independent reviewer verified actual22 exact order/values/shapes; that check attributed.",
+  "muhasabah": "PASS bounded correction execution only; no unfinished product acceptance, invented owner quote or Claude approval."
+}

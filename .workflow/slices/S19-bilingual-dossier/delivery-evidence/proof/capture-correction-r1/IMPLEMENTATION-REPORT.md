@@ -1,0 +1,11 @@
+# Bounded capture correction implementation
+
+Implemented only the accepted two browser paths. The existing dossier helper runs before each existing dossier capture; exact initial scroll is restored with native instant scrolling and asserted before the unchanged capture call. Visual source discovery retains all106 inherited paths and adds exactly the three independently named direct imports. All test function names, capture calls/identities, viewport/font/tolerance/budget controls,193src/config files,230 graph inputs and44 protected indexes remain unchanged.
+
+Original unchanged omission assertion executed RED exit1, then GREEN exit0. Actual source discovery106→109 and all hashes are correct; in-memory omission of each of the three new members and inherited pages.py yields the expected assertion failure. Existing focused contracts25PASS. No test/harness/helper/script or graph-generator edit.
+
+New direct stock browser proof:8PASS at actual1440×900 for steel/PP×public/simulated×EN/AR. Every unchanged-helper report records initial and leftmost positions, loaded fonts, nonempty complete required identity/policy text, no clipping/overflow, exact native scroll restoration and clean browser channels. The eight retained1024×768 reports and their PNG dimensions/hashes were rechecked; all193productsrc/config and helper bytes equal their boundr14 source. The old1440×1000 reports are not relabelled as canonical desktop proof.
+
+No canonical capture has run. The actual corrected canonical callsite must still execute16times with unique locale/viewport/screen reports during the already-required single canonical operation. Frozen postimages/source snapshot and exact command/results are bound in RECEIPT.json. Source is paused for finite independent review; subsequent separately allowed token/count edits do not rewrite this packet.
+
+Sanad: direct originalRED/GREEN, four omission failures,25focused contracts,8new real desktop browser results and exact retained tablet/product/helper rehashes. Muhasabah PASS for implementation facts only; independent CAP-01 closure and later16canonical observations/final browser-PDF/canonical/delivery remain pending. No selfapproval, source-data mutation or graph replay.

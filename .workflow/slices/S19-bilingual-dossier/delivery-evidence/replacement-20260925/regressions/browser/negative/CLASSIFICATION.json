@@ -1,0 +1,49 @@
+{
+  "recorded_at_utc": "2026-09-25T11:50:33.192469+00:00",
+  "classification": "MEANINGFUL_RED_BOTH_LOCALES",
+  "actual_assertion": "test_graph.py:906 protected small.right/left",
+  "cases": [
+    {
+      "locale": "en",
+      "raw_sha256": "b7f04453a3a10bb60bb2d4f8b2aaa790861b8074fa2e47c9e353879f65a56093",
+      "all12_button_boxes_equal": true,
+      "repeat_and_restoration_exact": true,
+      "five_expected_rewrites": true,
+      "protected_edge": "right",
+      "anchor_changes": [
+        {
+          "row": 2,
+          "before": 1344.2,
+          "after": 1346.06
+        },
+        {
+          "row": 3,
+          "before": 1277.83,
+          "after": 1279.69
+        }
+      ]
+    },
+    {
+      "locale": "ar",
+      "raw_sha256": "f53a8428add0ecb78eee7b6c49298e1d71049478705ecf3108301abedfe91086",
+      "all12_button_boxes_equal": true,
+      "repeat_and_restoration_exact": true,
+      "five_expected_rewrites": true,
+      "protected_edge": "left",
+      "anchor_changes": [
+        {
+          "row": 2,
+          "before": 95.8,
+          "after": 93.94
+        },
+        {
+          "row": 3,
+          "before": 162.17,
+          "after": 160.31
+        }
+      ]
+    }
+  ],
+  "setup_missing_token_button_restore_failures": false,
+  "alternate_needed": false
+}

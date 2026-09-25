@@ -99,7 +99,7 @@ def test_every_detailed_analysis_exposes_source_derived_authority(
     assert response.status_code == 200
     assert response.json()["authority"] == _expected_authority()
     assert result["authority"]["config_versions"]["thresholds"] == "1.3.0"
-    assert result["authority"]["config_versions"]["ui_strings"] == "1.6.0"
+    assert result["authority"]["config_versions"]["ui_strings"] == "1.7.0"
     assert result["authority"]["config_versions"][
         "decision_narratives"
     ] == "1.4.0"

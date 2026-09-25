@@ -1,0 +1,11 @@
+--- failed/src/ior_mvp/static/css/dossier.css
++++ proposed/src/ior_mvp/static/css/dossier.css
+@@ -84,6 +84,8 @@
+   .page h2, .page h3 { break-after: avoid; }
+   .dossier-intro { break-inside: avoid; }
+   .dossier-record .record-group > dt { break-after: avoid; }
++  .dossier-record .record-group > dd > .dossier-record > .record-scalar:first-child,
++  .rule-record > .dossier-source-caption + .dossier-record > .record-scalar:first-child { break-inside: avoid; }
+   .dossier-record .record-group > dd,
+   .dossier-record .record-group > dd > .dossier-record,
+   .dossier-record .record-group > dd > .dossier-record > :first-child,

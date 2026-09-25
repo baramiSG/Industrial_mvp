@@ -1,0 +1,525 @@
+{
+  "status": "ALL11_FULL_REAL_DECISIONS_AND_PUBLIC_REPEATS_PASS",
+  "cases": [
+    {
+      "case": "SAU-H0-390210",
+      "complete_real_decision_sha256": "53d5338d10f6dc9d337a505e91adb88abed78492676127169c0ceed9c136bb61",
+      "canonical_bytes": 25050,
+      "six_full_real_decision_values_equal": true,
+      "old_and_new_public_repeats_equal": true
+    },
+    {
+      "case": "SAU-H0-721049",
+      "complete_real_decision_sha256": "560794e7024e97c2f6b897d27aff3c94ebd6a3c379c5899521768d6b9e8c7269",
+      "canonical_bytes": 24630,
+      "six_full_real_decision_values_equal": true,
+      "old_and_new_public_repeats_equal": true
+    },
+    {
+      "case": "SAU-H6-294110",
+      "complete_real_decision_sha256": "ab5649057eb4ca97723f106f80c7716ed8362cc0e098c62b50173b658f8efb0f",
+      "canonical_bytes": 23066,
+      "six_full_real_decision_values_equal": true,
+      "old_and_new_public_repeats_equal": true
+    },
+    {
+      "case": "SAU-H6-294120",
+      "complete_real_decision_sha256": "188986eabeb3f552c76d675a6beef56d929b6b35e7e60f06eedf558b48bae22e",
+      "canonical_bytes": 23066,
+      "six_full_real_decision_values_equal": true,
+      "old_and_new_public_repeats_equal": true
+    },
+    {
+      "case": "SAU-H6-310430",
+      "complete_real_decision_sha256": "d631bf3ab44c4d110da67be620cd2fa241d0abf26a1a8d5dc096d3c860729931",
+      "canonical_bytes": 23066,
+      "six_full_real_decision_values_equal": true,
+      "old_and_new_public_repeats_equal": true
+    },
+    {
+      "case": "SAU-H6-310510",
+      "complete_real_decision_sha256": "001f9b69475498db16755681dddef245ac0139ce253077254284dbe7b89d2078",
+      "canonical_bytes": 23066,
+      "six_full_real_decision_values_equal": true,
+      "old_and_new_public_repeats_equal": true
+    },
+    {
+      "case": "SAU-H6-392010",
+      "complete_real_decision_sha256": "5827113b672ce5f5087e2b42d94f9d630b779edf48632638d1badb24ed09c271",
+      "canonical_bytes": 23017,
+      "six_full_real_decision_values_equal": true,
+      "old_and_new_public_repeats_equal": true
+    },
+    {
+      "case": "SAU-H6-721012",
+      "complete_real_decision_sha256": "0e58e85613a6efc13b9726cb1b4469b9913c4226f32ed1ec14972e4a5fef10ce",
+      "canonical_bytes": 23017,
+      "six_full_real_decision_values_equal": true,
+      "old_and_new_public_repeats_equal": true
+    },
+    {
+      "case": "SAU-H6-721061",
+      "complete_real_decision_sha256": "bb996e9cb33156aaa846f42adc5ebf69bd171a85ed1ffc1a26e98caf22d20796",
+      "canonical_bytes": 23061,
+      "six_full_real_decision_values_equal": true,
+      "old_and_new_public_repeats_equal": true
+    },
+    {
+      "case": "SAU-H6-760429",
+      "complete_real_decision_sha256": "069c2987294f2116ccd878c224fa30d9fc10d3b477e84368d5bc2bce29af8917",
+      "canonical_bytes": 24061,
+      "six_full_real_decision_values_equal": true,
+      "old_and_new_public_repeats_equal": true
+    },
+    {
+      "case": "SAU-H6-760711",
+      "complete_real_decision_sha256": "123c7f70c063000a1a0830aa37d4045c66c6dca46e1cd0441bb893d8f5b4f238",
+      "canonical_bytes": 23017,
+      "six_full_real_decision_values_equal": true,
+      "old_and_new_public_repeats_equal": true
+    }
+  ],
+  "only_actual_analysis_leaf_differences": [
+    {
+      "path": [
+        "SAU-H0-390210",
+        "public_after",
+        "authority",
+        "config_versions",
+        "ui_strings"
+      ],
+      "before": "1.6.0",
+      "after": "1.7.0"
+    },
+    {
+      "path": [
+        "SAU-H0-390210",
+        "public_before",
+        "authority",
+        "config_versions",
+        "ui_strings"
+      ],
+      "before": "1.6.0",
+      "after": "1.7.0"
+    },
+    {
+      "path": [
+        "SAU-H0-390210",
+        "simulated",
+        "authority",
+        "config_versions",
+        "ui_strings"
+      ],
+      "before": "1.6.0",
+      "after": "1.7.0"
+    },
+    {
+      "path": [
+        "SAU-H0-721049",
+        "public_after",
+        "authority",
+        "config_versions",
+        "ui_strings"
+      ],
+      "before": "1.6.0",
+      "after": "1.7.0"
+    },
+    {
+      "path": [
+        "SAU-H0-721049",
+        "public_before",
+        "authority",
+        "config_versions",
+        "ui_strings"
+      ],
+      "before": "1.6.0",
+      "after": "1.7.0"
+    },
+    {
+      "path": [
+        "SAU-H0-721049",
+        "simulated",
+        "authority",
+        "config_versions",
+        "ui_strings"
+      ],
+      "before": "1.6.0",
+      "after": "1.7.0"
+    },
+    {
+      "path": [
+        "SAU-H6-294110",
+        "public_after",
+        "authority",
+        "config_versions",
+        "ui_strings"
+      ],
+      "before": "1.6.0",
+      "after": "1.7.0"
+    },
+    {
+      "path": [
+        "SAU-H6-294110",
+        "public_before",
+        "authority",
+        "config_versions",
+        "ui_strings"
+      ],
+      "before": "1.6.0",
+      "after": "1.7.0"
+    },
+    {
+      "path": [
+        "SAU-H6-294110",
+        "simulated",
+        "authority",
+        "config_versions",
+        "ui_strings"
+      ],
+      "before": "1.6.0",
+      "after": "1.7.0"
+    },
+    {
+      "path": [
+        "SAU-H6-294120",
+        "public_after",
+        "authority",
+        "config_versions",
+        "ui_strings"
+      ],
+      "before": "1.6.0",
+      "after": "1.7.0"
+    },
+    {
+      "path": [
+        "SAU-H6-294120",
+        "public_before",
+        "authority",
+        "config_versions",
+        "ui_strings"
+      ],
+      "before": "1.6.0",
+      "after": "1.7.0"
+    },
+    {
+      "path": [
+        "SAU-H6-294120",
+        "simulated",
+        "authority",
+        "config_versions",
+        "ui_strings"
+      ],
+      "before": "1.6.0",
+      "after": "1.7.0"
+    },
+    {
+      "path": [
+        "SAU-H6-310430",
+        "public_after",
+        "authority",
+        "config_versions",
+        "ui_strings"
+      ],
+      "before": "1.6.0",
+      "after": "1.7.0"
+    },
+    {
+      "path": [
+        "SAU-H6-310430",
+        "public_before",
+        "authority",
+        "config_versions",
+        "ui_strings"
+      ],
+      "before": "1.6.0",
+      "after": "1.7.0"
+    },
+    {
+      "path": [
+        "SAU-H6-310430",
+        "simulated",
+        "authority",
+        "config_versions",
+        "ui_strings"
+      ],
+      "before": "1.6.0",
+      "after": "1.7.0"
+    },
+    {
+      "path": [
+        "SAU-H6-310510",
+        "public_after",
+        "authority",
+        "config_versions",
+        "ui_strings"
+      ],
+      "before": "1.6.0",
+      "after": "1.7.0"
+    },
+    {
+      "path": [
+        "SAU-H6-310510",
+        "public_before",
+        "authority",
+        "config_versions",
+        "ui_strings"
+      ],
+      "before": "1.6.0",
+      "after": "1.7.0"
+    },
+    {
+      "path": [
+        "SAU-H6-310510",
+        "simulated",
+        "authority",
+        "config_versions",
+        "ui_strings"
+      ],
+      "before": "1.6.0",
+      "after": "1.7.0"
+    },
+    {
+      "path": [
+        "SAU-H6-392010",
+        "public_after",
+        "authority",
+        "config_versions",
+        "ui_strings"
+      ],
+      "before": "1.6.0",
+      "after": "1.7.0"
+    },
+    {
+      "path": [
+        "SAU-H6-392010",
+        "public_before",
+        "authority",
+        "config_versions",
+        "ui_strings"
+      ],
+      "before": "1.6.0",
+      "after": "1.7.0"
+    },
+    {
+      "path": [
+        "SAU-H6-392010",
+        "simulated",
+        "authority",
+        "config_versions",
+        "ui_strings"
+      ],
+      "before": "1.6.0",
+      "after": "1.7.0"
+    },
+    {
+      "path": [
+        "SAU-H6-721012",
+        "public_after",
+        "authority",
+        "config_versions",
+        "ui_strings"
+      ],
+      "before": "1.6.0",
+      "after": "1.7.0"
+    },
+    {
+      "path": [
+        "SAU-H6-721012",
+        "public_before",
+        "authority",
+        "config_versions",
+        "ui_strings"
+      ],
+      "before": "1.6.0",
+      "after": "1.7.0"
+    },
+    {
+      "path": [
+        "SAU-H6-721012",
+        "simulated",
+        "authority",
+        "config_versions",
+        "ui_strings"
+      ],
+      "before": "1.6.0",
+      "after": "1.7.0"
+    },
+    {
+      "path": [
+        "SAU-H6-721061",
+        "public_after",
+        "authority",
+        "config_versions",
+        "ui_strings"
+      ],
+      "before": "1.6.0",
+      "after": "1.7.0"
+    },
+    {
+      "path": [
+        "SAU-H6-721061",
+        "public_before",
+        "authority",
+        "config_versions",
+        "ui_strings"
+      ],
+      "before": "1.6.0",
+      "after": "1.7.0"
+    },
+    {
+      "path": [
+        "SAU-H6-721061",
+        "simulated",
+        "authority",
+        "config_versions",
+        "ui_strings"
+      ],
+      "before": "1.6.0",
+      "after": "1.7.0"
+    },
+    {
+      "path": [
+        "SAU-H6-760429",
+        "public_after",
+        "authority",
+        "config_versions",
+        "ui_strings"
+      ],
+      "before": "1.6.0",
+      "after": "1.7.0"
+    },
+    {
+      "path": [
+        "SAU-H6-760429",
+        "public_before",
+        "authority",
+        "config_versions",
+        "ui_strings"
+      ],
+      "before": "1.6.0",
+      "after": "1.7.0"
+    },
+    {
+      "path": [
+        "SAU-H6-760429",
+        "simulated",
+        "active_decision",
+        "route_hypotheses",
+        8,
+        "shared_enabler",
+        "graph_projection_id"
+      ],
+      "before": "GRAPH-SAU-2026-09-12-49b458a614f3",
+      "after": "GRAPH-SAU-2026-09-12-ccd1a2abd05c"
+    },
+    {
+      "path": [
+        "SAU-H6-760429",
+        "simulated",
+        "authority",
+        "config_versions",
+        "ui_strings"
+      ],
+      "before": "1.6.0",
+      "after": "1.7.0"
+    },
+    {
+      "path": [
+        "SAU-H6-760429",
+        "simulated",
+        "route_hypotheses",
+        8,
+        "shared_enabler",
+        "graph_projection_id"
+      ],
+      "before": "GRAPH-SAU-2026-09-12-49b458a614f3",
+      "after": "GRAPH-SAU-2026-09-12-ccd1a2abd05c"
+    },
+    {
+      "path": [
+        "SAU-H6-760429",
+        "simulated",
+        "simulation_decision",
+        "route_hypotheses",
+        8,
+        "shared_enabler",
+        "graph_projection_id"
+      ],
+      "before": "GRAPH-SAU-2026-09-12-49b458a614f3",
+      "after": "GRAPH-SAU-2026-09-12-ccd1a2abd05c"
+    },
+    {
+      "path": [
+        "SAU-H6-760711",
+        "public_after",
+        "authority",
+        "config_versions",
+        "ui_strings"
+      ],
+      "before": "1.6.0",
+      "after": "1.7.0"
+    },
+    {
+      "path": [
+        "SAU-H6-760711",
+        "public_before",
+        "authority",
+        "config_versions",
+        "ui_strings"
+      ],
+      "before": "1.6.0",
+      "after": "1.7.0"
+    },
+    {
+      "path": [
+        "SAU-H6-760711",
+        "simulated",
+        "active_decision",
+        "route_hypotheses",
+        8,
+        "shared_enabler",
+        "graph_projection_id"
+      ],
+      "before": "GRAPH-SAU-2026-09-12-49b458a614f3",
+      "after": "GRAPH-SAU-2026-09-12-ccd1a2abd05c"
+    },
+    {
+      "path": [
+        "SAU-H6-760711",
+        "simulated",
+        "authority",
+        "config_versions",
+        "ui_strings"
+      ],
+      "before": "1.6.0",
+      "after": "1.7.0"
+    },
+    {
+      "path": [
+        "SAU-H6-760711",
+        "simulated",
+        "route_hypotheses",
+        8,
+        "shared_enabler",
+        "graph_projection_id"
+      ],
+      "before": "GRAPH-SAU-2026-09-12-49b458a614f3",
+      "after": "GRAPH-SAU-2026-09-12-ccd1a2abd05c"
+    },
+    {
+      "path": [
+        "SAU-H6-760711",
+        "simulated",
+        "simulation_decision",
+        "route_hypotheses",
+        8,
+        "shared_enabler",
+        "graph_projection_id"
+      ],
+      "before": "GRAPH-SAU-2026-09-12-49b458a614f3",
+      "after": "GRAPH-SAU-2026-09-12-ccd1a2abd05c"
+    }
+  ],
+  "ui_catalogue_differences": 33,
+  "own_route8_projection_differences": 6
+}

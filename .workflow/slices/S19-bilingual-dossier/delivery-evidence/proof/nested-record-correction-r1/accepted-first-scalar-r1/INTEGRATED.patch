@@ -1,0 +1,112 @@
+--- original/src/ior_mvp/static/css/dossier.css
++++ accepted/src/ior_mvp/static/css/dossier.css
+@@ -84,6 +84,16 @@
+   .page h2, .page h3 { break-after: avoid; }
+   .dossier-intro { break-inside: avoid; }
+   .dossier-record .record-group > dt { break-after: avoid; }
++  .dossier-record .record-group > dd > .dossier-record > .record-scalar:first-child,
++  .rule-record > .dossier-source-caption + .dossier-record > .record-scalar:first-child { break-inside: avoid; }
++  .dossier-record .record-group > dd,
++  .dossier-record .record-group > dd > .dossier-record,
++  .dossier-record .record-group > dd > .dossier-record > :first-child,
++  .rule-record > .dossier-source-caption + .dossier-record,
++  .rule-record > .dossier-source-caption + .dossier-record > :first-child {
++    break-before: avoid;
++  }
++  .rule-record > .dossier-source-caption { break-after: avoid; }
+   .rule-record > p:first-of-type { break-after: avoid; }
+   .warning, .branch-disclosure { break-inside: avoid; }
+   .dossier-section > .branch-label, .dossier-section > .branch-disclosure { break-after: avoid; }
+--- original/browser_tests/test_dossier.py
++++ accepted/browser_tests/test_dossier.py
+@@ -426,6 +426,90 @@
+                 "expected_first_fact": field + " " + value_text,
+                 "pages": nested_record_pages,
+             })
++    # Exact DOM/source associations complement the PDFium Arabic page proof.
++    # pypdf cannot faithfully decode these Arabic glyphs; do not reverse its text.
++    record_associations = []
++    strings = locale_bundle(locale)["strings"]
++    if mode == "simulated" and locale.code == "ar" and case.slug in (
++        "polypropylene", "alu-profiles", "penicillin-api",
++    ):
++        if case.slug == "polypropylene":
++            source_rule = next(
++                row for row in exported["blocks"]["ledger"]["records"]["rules"]
++                if row["rule_id"] == "R3"
++            )
++            rule = popup.locator(".rule-record").filter(
++                has=popup.locator("h3 > .technical-token", has_text=re.compile(r"^R3$"))
++            )
++            term = rule.locator(".record-group > dt").filter(
++                has_text=re.compile("^" + re.escape(strings["dossier.field.quantity"]) + "$")
++            )
++            expect(term).to_have_count(1)
++            first = term.locator("xpath=../dd/dl/div[1]")
++            expect(first.locator(":scope > dt")).to_have_text(strings["dossier.field.basis"])
++            expect(first.locator(":scope > dd")).to_have_text(source_rule["metrics"]["quantity"]["basis"])
++            record_associations.append({
++                "finding": "NESTED-DT-02", "heading": term.inner_text(),
++                "first_label": first.locator(":scope > dt").inner_text(),
++                "first_value": first.locator(":scope > dd").inner_text(),
++                "source_path": "blocks.ledger.records.rules[rule_id=R3].metrics.quantity.basis",
++            })
++        if case.slug == "alu-profiles":
++            raw = exported["evidence_pack"]["scenario_inputs"]["economics"]["data"]
++            term = popup.locator("#dossier-economics .record-group > dt").filter(
++                has_text=re.compile("^" + re.escape(strings["dossier.field.national_value"]) + "$")
++            )
++            expect(term).to_have_count(1)
++            first = term.locator("xpath=../dd/dl/div[1]")
++            expect(first.locator(":scope > dt")).to_have_text(strings["dossier.field.displacement"])
++            expect(first.locator(":scope > dd")).to_have_text(format(raw["national_value"]["displacement"], ".12g"))
++            record_associations.append({
++                "finding": "NESTED-DT-04", "heading": term.inner_text(),
++                "first_label": first.locator(":scope > dt").inner_text(),
++                "first_value": first.locator(":scope > dd").inner_text(),
++                "source_path": "evidence_pack.scenario_inputs.economics.data.national_value.displacement",
++            })
++        if case.slug in ("alu-profiles", "penicillin-api"):
++            source_rule = next(
++                row for row in exported["blocks"]["ledger"]["records"]["rules"]
++                if row["rule_id"] == "R1-D"
++            )
++            rule = popup.locator(".rule-record").filter(
++                has=popup.locator("h3 > .technical-token", has_text=re.compile(r"^R1-D$"))
++            )
++            caption = rule.locator(":scope > .dossier-source-caption")
++            expect(caption).to_have_text(strings["dossier.source_original"])
++            first = rule.locator(":scope > .dossier-source-caption + .dossier-record > div:first-child")
++            expect(first.locator(":scope > dt")).to_have_text(strings["dossier.field.positive_years"])
++            assert first.locator(":scope > dd li").all_inner_texts() == [
++                str(year) for year in source_rule["metrics"]["positive_years"]
++            ]
++            record_associations.append({
++                "finding": "CAPTION-ORPHAN-02" if case.slug == "alu-profiles" else "CAPTION-ORPHAN-01",
++                "heading": caption.inner_text(), "first_label": first.locator(":scope > dt").inner_text(),
++                "first_values": first.locator(":scope > dd li").all_inner_texts(),
++                "source_path": "blocks.ledger.records.rules[rule_id=R1-D].metrics.positive_years",
++            })
++    if mode == "simulated" and locale.code == "en" and case.slug == "alu-foil":
++        reconciliation = exported["blocks"]["authority"]["records"]["integrity"]["scenario_reconciliation"]
++        term = strings["dossier.field.scenario_reconciliation"]
++        first_fact = strings["dossier.field.status"] + str(reconciliation["status"])
++        reconciliation_pages = [
++            {"page": index + 1, "first_fact_after_heading": re.sub(r"\s", "", first_fact) in re.sub(r"\s", "", text.split(term, 1)[1])}
++            for index, text in enumerate(texts) if term in text
++        ]
++        record_associations.append({
++            "finding": "NESTED-DT-03", "heading": term, "first_fact": first_fact,
++            "source_path": "blocks.authority.records.integrity.scenario_reconciliation.status",
++            "pages": reconciliation_pages,
++        })
++        if len(reconciliation_pages) != 1 or not reconciliation_pages[0]["first_fact_after_heading"]:
++            layout_failures.append({"finding": "NESTED-DT-03", "pages": reconciliation_pages})
++    if record_associations:
++        (pdf_dir / f"{case.slug}-{mode}-{locale.code}-record-associations.json").write_text(
++            json.dumps(record_associations, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
++        )
++
+     (pdf_dir / f"{case.slug}-{mode}-{locale.code}-layout.json").write_text(
+         json.dumps({
+             "reference_rows": reference_rows,

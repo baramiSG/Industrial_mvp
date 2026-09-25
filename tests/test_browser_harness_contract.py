@@ -63,6 +63,10 @@ def test_browser_suite_has_the_approved_top_level_shape() -> None:
     } == {
         "THIRD_PARTY_NOTICES.md",
         "conftest.py",
+        "dossier_pages.py",
+        "test_dossier_accessibility.py",
+        "test_dossier_failure_states.py",
+        "test_trade_chart.py",
         "graph_fixtures.py",
         "graph_pages.py",
         "harness.py",
@@ -458,8 +462,15 @@ def test_server_teardown_accepts_clean_exit_or_requested_sigterm() -> None:
     assert harness.is_expected_server_return_code(1) is False
 
 
-def test_browser_inventory_has_exactly_76_named_tests() -> None:
+def test_browser_inventory_has_exactly_83_named_tests() -> None:
     expected = {
+        "test_dossier_empty_unavailable_and_real_zero_are_distinct",
+        "test_dossier_keyboard_print_download_and_return",
+        "test_dossier_missing_case_and_invalid_mode_never_return_success",
+        "test_dossier_responsive_identity_and_policy_text_bounds",
+        "test_executive_to_analyst_dossier_retains_context",
+        "test_trade_keyboard_data_remains_readable_at_narrow_width",
+        "test_trade_native_data_matches_entire_public_source",
         "test_portfolio_loads_expected_cases_and_states",
         "test_opportunity_card_opens_selected_workspace",
         "test_opportunity_select_loads_each_case",

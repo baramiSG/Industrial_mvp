@@ -403,9 +403,17 @@ def test_source_language_code_islands_use_vendored_interface_font() -> None:
         "  font-family: var(--font-family-interface);"
     ) in base
     assert (
-        ".source-language-island,\ncode {\n"
+        '.source-language-island[lang="en"],\ncode {\n'
         "  font-family: var(--font-family-interface);"
     ) in dossier
+    assert (
+        ':root[dir="rtl"],\n'
+        '[lang="ar"] { font-family: var(--font-family-arabic); }'
+    ) in dossier
+    assert (
+        ".source-language-island,\ncode {\n"
+        "  font-family: var(--font-family-interface);"
+    ) not in dossier
 
 
 def test_reduced_motion_context_disables_transient_colour_states() -> None:
@@ -557,3 +565,51 @@ def test_screening_css_layer_is_imported_and_token_only() -> None:
 
     assert '@import url("./css/screening.css") layer(screening);' in styles
     assert screening
+
+
+def test_trade_chart_discloses_scales_and_preserves_observed_values_and_curves() -> None:
+    from html import unescape
+    from ior_mvp.config import ui_strings_bundle
+    bundles={locale:ui_strings_bundle(locale) for locale in ('en','ar')}
+    module=(STATIC_ROOT/'modules/renderers/trade.js').as_uri()
+    state_module=(STATIC_ROOT/'modules/state.js').as_uri()
+    script=f'''
+import {{renderTradeChart}} from {json.dumps(module)};
+import {{state}} from {json.dumps(state_module)};
+const bundles={json.dumps(bundles,ensure_ascii=False)};
+const values=[null,undefined,"123",true,false,NaN,Infinity];
+const output=[];
+for (const locale of ["en","ar"]) {{
+ state.locale=locale;state.ui=bundles[locale];
+ const trade=[{{year:2024,imports_usd_m:236.9,imports_kt:287.9}},{{year:2021,imports_usd_m:0,imports_kt:0}},{{year:2023,imports_usd_m:186,imports_kt:173.9}}];
+ Object.freeze(trade);for(const row of trade)Object.freeze(row);
+ output.push({{locale,kind:"valid",html:renderTradeChart({{trade}}),years:trade.map(r=>r.year)}});
+ for(let i=0;i<values.length;i++) output.push({{locale,kind:"missing",html:renderTradeChart({{trade:[{{year:2024,imports_usd_m:values[i],imports_kt:values[i]}}]}})}});
+ output.push({{locale,kind:"empty",html:renderTradeChart({{trade:[]}})}});
+}}
+console.log(JSON.stringify(output));
+'''
+    result=subprocess.run(['node','--input-type=module'],input=script,text=True,capture_output=True,check=False)
+    assert result.returncode==0,result.stderr
+    for item in json.loads(result.stdout):
+        markup=unescape(item['html']);strings=bundles[item['locale']]['strings']
+        assert strings.get('trade.scale_note','Each line uses its own scale.') in markup
+        assert '<details' in markup and re.search(r'<summary(?:\s[^>]*)?>',markup)
+        assert strings.get('trade.data_summary','View observed values') in markup
+        assert '<details open' not in markup
+        if item['kind']=='valid':
+            assert item['years']==[2024,2021,2023]
+            body=markup.split('<tbody>',1)[1].split('</tbody>',1)[0]
+            assert [int(y) for y in re.findall(r'<th scope="row">.*?>(\d{4})<',body)]==[2021,2023,2024]
+            assert '236.9' in body and '287.9' in body
+            assert '>0 USD m<' in body and '>0 kt<' in body
+            # Independent path coordinates from the original 760x250 chart.
+            assert 'M48,212 L391.5,77.40432973527106' in markup
+            assert 'L735,40.571428571428584' in markup
+            assert strings['trade.value'] in markup and strings['trade.quantity'] in markup
+        elif item['kind']=='missing':
+            body=markup.split('<tbody>',1)[1].split('</tbody>',1)[0]
+            assert body.count(strings['trade.data_unavailable'])==2
+            assert 'NaN' not in body and 'Infinity' not in body
+        else:
+            assert strings['trade.data_empty'] in markup

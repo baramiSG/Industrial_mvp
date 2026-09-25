@@ -1,0 +1,286 @@
+{
+  "at_utc": "2026-09-25T03:09:35.923353+00:00",
+  "status": "IMPLEMENTED_MEASURED_PENDING_INDEPENDENT_CAPTURE_REVIEW",
+  "source_ledger_sha256": "ca8a66d717270e48b1f74d7d51f6e67a982d9076cde1fd2b1cb85e75d3979a63",
+  "source_files": 1759,
+  "source_green_sha256": "32b7ad521fb98fc79f7be63b2d25d5b11bae0df1628c7b4b3db2d3f6bbf9ec03",
+  "desktop_command_exit": 0,
+  "new_desktop_cases": 8,
+  "retained_tablet_cases": [
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/product-implementation-r1/final-functional-r2/dossier-bounds/steel-public-en-1024.json",
+      "sha256": "69e6cba18d7e021f4e6944c590eaba71503e5062d976bf6de2b39f63ada40437",
+      "viewport": [
+        1024,
+        768
+      ],
+      "actual_two_position_bounds_pass": true,
+      "canonical_dimension_match": true
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/product-implementation-r1/final-functional-r2/dossier-bounds/steel-public-ar-1024.json",
+      "sha256": "f3ba0111c1173e30f5410ef9868e3c75861fb1022aac6e39fa5766f1585f9079",
+      "viewport": [
+        1024,
+        768
+      ],
+      "actual_two_position_bounds_pass": true,
+      "canonical_dimension_match": true
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/product-implementation-r1/final-functional-r2/dossier-bounds/steel-simulated-en-1024.json",
+      "sha256": "2402823f3ff4e1ddd8d5da7876eec277a220f931ae82c395d54ed1d7474bee32",
+      "viewport": [
+        1024,
+        768
+      ],
+      "actual_two_position_bounds_pass": true,
+      "canonical_dimension_match": true
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/product-implementation-r1/final-functional-r2/dossier-bounds/steel-simulated-ar-1024.json",
+      "sha256": "fce5349996d71f3d9de197338e5eb818c4f6c21642d4cc5fd87283e1786917af",
+      "viewport": [
+        1024,
+        768
+      ],
+      "actual_two_position_bounds_pass": true,
+      "canonical_dimension_match": true
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/product-implementation-r1/final-functional-r2/dossier-bounds/polypropylene-public-en-1024.json",
+      "sha256": "fc22f7cd490577109daac200bf10f79a968ff630d124792a8b76af63f81347aa",
+      "viewport": [
+        1024,
+        768
+      ],
+      "actual_two_position_bounds_pass": true,
+      "canonical_dimension_match": true
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/product-implementation-r1/final-functional-r2/dossier-bounds/polypropylene-public-ar-1024.json",
+      "sha256": "0e753464dd7918cd48d11d8211aa397a5b523943695a723db56d3a3bfac48b62",
+      "viewport": [
+        1024,
+        768
+      ],
+      "actual_two_position_bounds_pass": true,
+      "canonical_dimension_match": true
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/product-implementation-r1/final-functional-r2/dossier-bounds/polypropylene-simulated-en-1024.json",
+      "sha256": "04dcc467d28a685d2165e40ccbd93a4dfadaa8bec2424a62db8b9809a5747f4d",
+      "viewport": [
+        1024,
+        768
+      ],
+      "actual_two_position_bounds_pass": true,
+      "canonical_dimension_match": true
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/product-implementation-r1/final-functional-r2/dossier-bounds/polypropylene-simulated-ar-1024.json",
+      "sha256": "9d110ac1fd2a1fc9cd41089dbc72f76a76815b86481a3e2b8cc313ae55669d6c",
+      "viewport": [
+        1024,
+        768
+      ],
+      "actual_two_position_bounds_pass": true,
+      "canonical_dimension_match": true
+    }
+  ],
+  "helper_sha256": "827d03d83adb78d2e274c25a5759d63ed73f0a62c1787f4c51362ec5116d1f5e",
+  "src_config_unchanged_from_r14": 193,
+  "focused_contract_passed": 25,
+  "files": {
+    "ACTUAL.patch": {
+      "sha256": "23647fe348a1e2ff8baedcfb597b427f5a5dd7d5da29d0bdae360b4250b8cc43",
+      "bytes": 1837
+    },
+    "DESKTOP-COMMAND.json": {
+      "sha256": "04a372e5c49d690bdb8723b747794780668105bc40328a3a37ce81fcabe4985e",
+      "bytes": 1239
+    },
+    "DESKTOP-COMMAND.txt": {
+      "sha256": "f07da765e57fd814942e1cc13b84b52460a0d70e3b6fad223dce826e94032573",
+      "bytes": 861
+    },
+    "IMPLEMENTATION-REPORT.md": {
+      "sha256": "dcf65a0f611a4a9947dd597466844d6912166bbfbf693e77a108ef2d5b8fd99c",
+      "bytes": 2227
+    },
+    "PREIMAGE-DISCOVERY.json": {
+      "sha256": "c55c96ce9dc448edba676a84b36cb41ccec22e4a4b1e22e66ccd64857ce28703",
+      "bytes": 11742
+    },
+    "PREPARATION-RED.json": {
+      "sha256": "e2f0cd53662b12e9634b8c9573019631fe154a4ee5ca3da997a85dc4b4d9c573",
+      "bytes": 994
+    },
+    "SOURCE-GREEN.json": {
+      "sha256": "32b7ad521fb98fc79f7be63b2d25d5b11bae0df1628c7b4b3db2d3f6bbf9ec03",
+      "bytes": 14514
+    },
+    "SOURCE.json": {
+      "sha256": "ca8a66d717270e48b1f74d7d51f6e67a982d9076cde1fd2b1cb85e75d3979a63",
+      "bytes": 267569
+    },
+    "desktop-output/RESULTS.json": {
+      "sha256": "f75a9c6f3a0edb9a231b28880bd7a1deaf020283b2ee69eea7cb761e44cd98c9",
+      "bytes": 2755
+    },
+    "desktop-output/dossier-bounds/polypropylene-public-ar-1440x900-initial.png": {
+      "sha256": "638d4621702551315568bbf08c25faf1267727cc488c445a7d264cbe173c56a0",
+      "bytes": 114170
+    },
+    "desktop-output/dossier-bounds/polypropylene-public-ar-1440x900-leftmost.png": {
+      "sha256": "638d4621702551315568bbf08c25faf1267727cc488c445a7d264cbe173c56a0",
+      "bytes": 114170
+    },
+    "desktop-output/dossier-bounds/polypropylene-public-ar-1440x900.json": {
+      "sha256": "8697ac079b57f1bb97ecb98078f3a766faf08ba82618fb1e8f02d65e4802ab14",
+      "bytes": 6075
+    },
+    "desktop-output/dossier-bounds/polypropylene-public-en-1440x900-initial.png": {
+      "sha256": "b17d0404ad24cf27d7c1daa06cce6a1ab640586639246e45be18154434ed2825",
+      "bytes": 117836
+    },
+    "desktop-output/dossier-bounds/polypropylene-public-en-1440x900-leftmost.png": {
+      "sha256": "b17d0404ad24cf27d7c1daa06cce6a1ab640586639246e45be18154434ed2825",
+      "bytes": 117836
+    },
+    "desktop-output/dossier-bounds/polypropylene-public-en-1440x900.json": {
+      "sha256": "eb30ba4cad7efe7cf29d01e1d777ac8c328bc2180207cf9b48cf8ae2ec132d86",
+      "bytes": 5513
+    },
+    "desktop-output/dossier-bounds/polypropylene-simulated-ar-1440x900-initial.png": {
+      "sha256": "33ecb2a73f4883d90800eaa9e22139185c88cce0604fcc567f65d2b19aed94d1",
+      "bytes": 112031
+    },
+    "desktop-output/dossier-bounds/polypropylene-simulated-ar-1440x900-leftmost.png": {
+      "sha256": "33ecb2a73f4883d90800eaa9e22139185c88cce0604fcc567f65d2b19aed94d1",
+      "bytes": 112031
+    },
+    "desktop-output/dossier-bounds/polypropylene-simulated-ar-1440x900.json": {
+      "sha256": "387d0b5d5698e732b0967bf9d4ea0395361e60e663ce076cef5bc822de501e43",
+      "bytes": 7435
+    },
+    "desktop-output/dossier-bounds/polypropylene-simulated-en-1440x900-initial.png": {
+      "sha256": "3e447e564abe0a0786558e10eb707a973418c33ec0f122cb8d5c1273b6268e79",
+      "bytes": 113976
+    },
+    "desktop-output/dossier-bounds/polypropylene-simulated-en-1440x900-leftmost.png": {
+      "sha256": "3e447e564abe0a0786558e10eb707a973418c33ec0f122cb8d5c1273b6268e79",
+      "bytes": 113976
+    },
+    "desktop-output/dossier-bounds/polypropylene-simulated-en-1440x900.json": {
+      "sha256": "017af24048a7d55274038cfa592ff5e49f6635b62c30e31014f965e8ecf1f3ee",
+      "bytes": 6917
+    },
+    "desktop-output/dossier-bounds/steel-public-ar-1440x900-initial.png": {
+      "sha256": "28159a73c563d26b0892ca0531200fab3c4e83ea1e2ddca20d3fead465476a57",
+      "bytes": 119144
+    },
+    "desktop-output/dossier-bounds/steel-public-ar-1440x900-leftmost.png": {
+      "sha256": "28159a73c563d26b0892ca0531200fab3c4e83ea1e2ddca20d3fead465476a57",
+      "bytes": 119144
+    },
+    "desktop-output/dossier-bounds/steel-public-ar-1440x900.json": {
+      "sha256": "1e4f5538ddbaf446116e0f6204dabe7ff3aa48d657f50daae49be1ee402396f2",
+      "bytes": 7471
+    },
+    "desktop-output/dossier-bounds/steel-public-en-1440x900-initial.png": {
+      "sha256": "ba89a2f374e57ad1823898f40ad13a8330c466471858d83c6db6af4ebfc8eea4",
+      "bytes": 124102
+    },
+    "desktop-output/dossier-bounds/steel-public-en-1440x900-leftmost.png": {
+      "sha256": "ba89a2f374e57ad1823898f40ad13a8330c466471858d83c6db6af4ebfc8eea4",
+      "bytes": 124102
+    },
+    "desktop-output/dossier-bounds/steel-public-en-1440x900.json": {
+      "sha256": "ec3a088d2f2f596c1590fc9e24a24853fe015e49dc1dccedc04392a9954519df",
+      "bytes": 5633
+    },
+    "desktop-output/dossier-bounds/steel-simulated-ar-1440x900-initial.png": {
+      "sha256": "369e5a8fe08b7d3f3ffbf8375ca59ef667afd3760dcc79e42772caa1ea1a3495",
+      "bytes": 129636
+    },
+    "desktop-output/dossier-bounds/steel-simulated-ar-1440x900-leftmost.png": {
+      "sha256": "369e5a8fe08b7d3f3ffbf8375ca59ef667afd3760dcc79e42772caa1ea1a3495",
+      "bytes": 129636
+    },
+    "desktop-output/dossier-bounds/steel-simulated-ar-1440x900.json": {
+      "sha256": "8747d856e116a5fb4bffa42f97aeab4c8e39402f48815c80994f50dfb405fd8f",
+      "bytes": 8981
+    },
+    "desktop-output/dossier-bounds/steel-simulated-en-1440x900-initial.png": {
+      "sha256": "bf96afe2ed9613d5fa6a213363f67cebb31f934efa33fad2ae9d49a58ca36601",
+      "bytes": 129324
+    },
+    "desktop-output/dossier-bounds/steel-simulated-en-1440x900-leftmost.png": {
+      "sha256": "bf96afe2ed9613d5fa6a213363f67cebb31f934efa33fad2ae9d49a58ca36601",
+      "bytes": 129324
+    },
+    "desktop-output/dossier-bounds/steel-simulated-en-1440x900.json": {
+      "sha256": "9d9ff39dc899898879d4418769b56489347572c2d82678e74839f6033b181dbb",
+      "bytes": 7095
+    },
+    "desktop-output/server/server.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "desktop-proof.py": {
+      "sha256": "7a84e150ad6e78f39c7f6e8a40698bfc639de34b796dfd9dd95e4a071a05493d",
+      "bytes": 2858
+    },
+    "desktop-proof.stderr": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "desktop-proof.stdout": {
+      "sha256": "81ab4e7c90352e75908308bfccb5c35090918022c217b52ac881182afc73d8a5",
+      "bytes": 455
+    },
+    "focused-contract.log": {
+      "sha256": "514c0c2f8b12583c82d1ab0eee136d9dd023fe6435e73e4dc59b08a1d5a61c18",
+      "bytes": 99
+    },
+    "original-omission-green.stderr": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "original-omission-green.stdout": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "original-omission-input.py": {
+      "sha256": "50958369123e0c5138a14bb511e904c9b2e5c438db5d1054e5beceb54138c41b",
+      "bytes": 554
+    },
+    "original-omission-red.stderr": {
+      "sha256": "e21b10d821f7642b862b0527b38aba0c7244f3d59474d7608446db9e6f180850",
+      "bytes": 168
+    },
+    "original-omission-red.stdout": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "postimages/browser_tests/test_visual_baselines.py": {
+      "sha256": "acd0989c8dd8b797d8d66eb412489efb2a158fd2a7e9d4c4511ef404c2849924",
+      "bytes": 19604
+    },
+    "postimages/browser_tests/visual_baselines.py": {
+      "sha256": "77bd1c92103aaa523d3a8877130aff0cdcd5a2315f53510b49ef7e8496ecaf94",
+      "bytes": 14891
+    },
+    "preimages/browser_tests/test_visual_baselines.py": {
+      "sha256": "4f06a594aa50dbf21531a25dcea8fa917456bd7f2689c391430b5d0dbb821162",
+      "bytes": 19035
+    },
+    "preimages/browser_tests/visual_baselines.py": {
+      "sha256": "075c9305eb93622a1b447ad76136cd02fadfa5a6c39c0acecd57ab907324326c",
+      "bytes": 14729
+    }
+  },
+  "sanad": "Actual two-file frozen source/diff, original RED\u2192GREEN, exact discovery/omission checks, unchanged graph inputs and index/source boundaries,8new desktop plus8rehashed tablet reports.",
+  "muhasabah": "PASS for truthful bounded implementation report; independent review and actual16future canonical callsite executions pending."
+}

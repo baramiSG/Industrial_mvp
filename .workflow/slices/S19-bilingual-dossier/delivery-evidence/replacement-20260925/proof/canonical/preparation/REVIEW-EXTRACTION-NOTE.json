@@ -1,0 +1,8 @@
+{
+  "issue": "Resume stream emits initial empty success num_turns0 before actual four-turn result. Initial root parser selected placeholder and wrote one newline, never treated as approval. Empty bytes preserved; exact actual nonempty final result equals final assistant text and is now recorded at review path. Future extraction requires nonempty successful final result.",
+  "empty_preimage_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+  "actual_review_path": "/home/barami/.cache/industrial-opportunity-resolution-mvp/claude-reviews/s19-ds19-1-canonical-go-clarification-20260925.md",
+  "actual_review_sha256": "7cc3e40c181cac8bf1e1da6f0cda65a13466532b3469ab3297622fc1c0f6b75a",
+  "actual_turns": 4,
+  "original_reviewer_text_unchanged": true
+}

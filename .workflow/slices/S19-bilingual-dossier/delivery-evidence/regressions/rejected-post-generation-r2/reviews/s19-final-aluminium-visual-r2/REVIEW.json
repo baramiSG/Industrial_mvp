@@ -1,0 +1,66 @@
+{
+  "at_utc": "2026-09-25T05:43:48.342271+00:00",
+  "verdict": "REJECT",
+  "scope": "Aluminium eight PDFs only; whole S19 candidate approval not asserted.",
+  "preparation": "Refreshed AGENTS, owner S19 delivery-then-stop boundary, approved parent plan/handoff and current correction/source/reports; senior bilingual document QA and delivery coordinator personas; applied project-orientation, task-standards, strict-reviewer, Sanad, al-Muhasibi, Muhasabah, github-flow and verification-before-completion.",
+  "coverage": {
+    "reports": 8,
+    "pages": 375,
+    "new_pages": 104,
+    "contacts": 21,
+    "exact_prior_page_reuses": 271
+  },
+  "viewed_ledger_sha256": "67125a83199046de9875ca6e2a042c4b73be817e0e213fcae2c9d21256b34a38",
+  "findings": [
+    {
+      "id": "NESTED-DT-03",
+      "pdf": "alu-foil-simulated-en.pdf",
+      "pages": [
+        49,
+        50
+      ],
+      "actual": "Scenario reconciliation title is alone at bottom49; first scalar Status PASS begins50.",
+      "correction": "Keep nested title with first displayed scalar row; allow later rows to paginate."
+    },
+    {
+      "id": "NESTED-DT-04",
+      "pdf": "alu-profiles-simulated-ar.pdf",
+      "pages": [
+        32,
+        33
+      ],
+      "actual": "القيمة الوطنية title is alone at bottom32; first الإزاحة=2 begins33.",
+      "correction": "Same nested-record first-row association correction, no full-record unbreakable block."
+    },
+    {
+      "id": "CAPTION-ORPHAN-02",
+      "pdf": "alu-profiles-simulated-ar.pdf",
+      "pages": [
+        35,
+        36
+      ],
+      "actual": "R1-D source caption النص الأصلي للمصدر is alone after prose on35; first metric positive observed years2022/2023/2024 begins36.",
+      "correction": "Keep actual nonempty rule source caption with first metrics row, later rows breakable."
+    }
+  ],
+  "closed": [
+    "BIDI-REF-01: actual foilAR11 and profilesAR15 reason codes, prose and links visually separated at native resolution."
+  ],
+  "other_observations": [
+    "No additional distinct clipping/footer overlap or missing-content defect observed in assigned pages.",
+    "Route8 profilesAR24 external foil dependency explicitly marked not a local evidence passport; public routes remain separate.",
+    "Existing automated strict44/1950 PASS is not manual approval."
+  ],
+  "sanad": {
+    "direct": "21contact images/104changed pages and9native views;375PNG hashes and21contact hashes reverified.",
+    "reused": "271exact own-prior observed page PNGs, chain recorded in CONTACTS and VIEW-PROGRESS.",
+    "attributed": "Other reviewer PP/penicillin findings outside this report; no independent whole-cohort verdict."
+  },
+  "muhasabah": {
+    "verdict": "PASS for bounded review; product verdict REJECT",
+    "assumptions": "Contact thumbnails establish page coverage; suspected defects and bidi closure confirmed with native pages.",
+    "risks": "Any CSS change can repaginate remaining reports; required full cohort review remains.",
+    "unverified": "New correction, final candidate, canonical capture, CI and delivery pending.",
+    "writes": "External review/checkpoint only; no candidate/source/index/service mutation."
+  }
+}

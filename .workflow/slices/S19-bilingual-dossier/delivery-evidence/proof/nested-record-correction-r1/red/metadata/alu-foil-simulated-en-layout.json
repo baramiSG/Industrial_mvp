@@ -1,0 +1,195 @@
+{
+  "reference_rows": [
+    {
+      "table": "exclusions",
+      "code": "EX-01_HETEROGENEOUS_RESIDUAL",
+      "prefix": "The commercial product cannot be separated from a highly heterogeneous residual code and no product-level evidence is available.",
+      "prefixBottom": 6404.140625,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-ALU-FOIL-001::hard_exclusion_inputs",
+          "href": "#evidence-SYN-MINISTRY-ALU-FOIL-001::hard_exclusion_inputs",
+          "top": 6405.015625,
+          "bottom": 6424.015625
+        }
+      ]
+    },
+    {
+      "table": "exclusions",
+      "code": "EX-02_MARKET_BELOW_MES",
+      "prefix": "The sustainable downside market is below minimum efficient scale and no credible export contract exists.",
+      "prefixBottom": 6478.078125,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-ALU-FOIL-001::hard_exclusion_inputs",
+          "href": "#evidence-SYN-MINISTRY-ALU-FOIL-001::hard_exclusion_inputs",
+          "top": 6478.953125,
+          "bottom": 6497.953125
+        }
+      ]
+    },
+    {
+      "table": "exclusions",
+      "code": "EX-03_UNSATISFIABLE_HARD_GATE",
+      "prefix": "A legal, safety, environmental, IP or customer-qualification hard gate cannot be satisfied.",
+      "prefixBottom": 6552.015625,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-ALU-FOIL-001::hard_exclusion_inputs",
+          "href": "#evidence-SYN-MINISTRY-ALU-FOIL-001::hard_exclusion_inputs",
+          "top": 6552.890625,
+          "bottom": 6571.890625
+        }
+      ]
+    },
+    {
+      "table": "exclusions",
+      "code": "EX-04_IDLE_EQUIVALENT_CAPACITY",
+      "prefix": "Domestic production meets the required specification with material idle capacity and no binding market failure is evidenced.",
+      "prefixBottom": 6625.953125,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-ALU-FOIL-001::hard_exclusion_inputs",
+          "href": "#evidence-SYN-MINISTRY-ALU-FOIL-001::hard_exclusion_inputs",
+          "top": 6626.828125,
+          "bottom": 6645.828125
+        }
+      ]
+    },
+    {
+      "table": "exclusions",
+      "code": "EX-05_TRANSITORY_OR_MEASUREMENT",
+      "prefix": "The apparent gap is dominated by re-export, one-off project demand, temporary price arbitrage or classification discontinuity.",
+      "prefixBottom": 6699.890625,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-ALU-FOIL-001::hard_exclusion_inputs",
+          "href": "#evidence-SYN-MINISTRY-ALU-FOIL-001::hard_exclusion_inputs",
+          "top": 6700.765625,
+          "bottom": 6719.765625
+        }
+      ]
+    },
+    {
+      "table": "exclusions",
+      "code": "EX-06_REDUNDANCY_OR_CROWD_OUT",
+      "prefix": "The intervention would create unacceptable redundant capacity or crowd out a more efficient incumbent.",
+      "prefixBottom": 6773.828125,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-ALU-FOIL-001::hard_exclusion_inputs",
+          "href": "#evidence-SYN-MINISTRY-ALU-FOIL-001::hard_exclusion_inputs",
+          "top": 6774.703125,
+          "bottom": 6793.703125
+        }
+      ]
+    },
+    {
+      "table": "rejection-conditions",
+      "code": "hard_exclusion",
+      "prefix": "HARD_EXCLUSION_NOT_SATISFIED",
+      "prefixBottom": 6917.671875,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-ALU-FOIL-001::hard_exclusion_inputs",
+          "href": "#evidence-SYN-MINISTRY-ALU-FOIL-001::hard_exclusion_inputs",
+          "top": 6917.671875,
+          "bottom": 6936.671875
+        }
+      ]
+    },
+    {
+      "table": "rejection-conditions",
+      "code": "false_or_measurement_gap",
+      "prefix": "FALSE_OR_MEASUREMENT_NOT_ESTABLISHED",
+      "prefixBottom": 6971.734375,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-ALU-FOIL-001::hard_exclusion_inputs",
+          "href": "#evidence-SYN-MINISTRY-ALU-FOIL-001::hard_exclusion_inputs",
+          "top": 6971.734375,
+          "bottom": 6990.734375
+        }
+      ]
+    },
+    {
+      "table": "rejection-conditions",
+      "code": "equivalent_idle_qualified_supply",
+      "prefix": "EQUIVALENT_QUALIFIED_SUPPLY_NOT_ESTABLISHED",
+      "prefixBottom": 7025.796875,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-ALU-FOIL-001::demand",
+          "href": "#evidence-SYN-MINISTRY-ALU-FOIL-001::demand",
+          "top": 7025.796875,
+          "bottom": 7044.796875
+        },
+        {
+          "text": "SYN-MINISTRY-ALU-FOIL-001::equivalence",
+          "href": "#evidence-SYN-MINISTRY-ALU-FOIL-001::equivalence",
+          "top": 7045.671875,
+          "bottom": 7064.671875
+        }
+      ]
+    },
+    {
+      "table": "rejection-conditions",
+      "code": "uneconomic_at_efficient_scale",
+      "prefix": "ECONOMIC_ROUTE_EXISTS",
+      "prefixBottom": 7099.734375,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-ALU-FOIL-001::route_evidence",
+          "href": "#evidence-SYN-MINISTRY-ALU-FOIL-001::route_evidence",
+          "top": 7099.734375,
+          "bottom": 7118.734375
+        }
+      ]
+    },
+    {
+      "table": "rejection-conditions",
+      "code": "structural_overcapacity",
+      "prefix": "STRUCTURAL_OVERCAPACITY_NOT_ESTABLISHED",
+      "prefixBottom": 7153.796875,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-ALU-FOIL-001::hard_exclusion_inputs",
+          "href": "#evidence-SYN-MINISTRY-ALU-FOIL-001::hard_exclusion_inputs",
+          "top": 7153.796875,
+          "bottom": 7172.796875
+        }
+      ]
+    },
+    {
+      "table": "rejection-conditions",
+      "code": "generic_capacity_contradicted",
+      "prefix": "GENERIC_CAPACITY_NOT_CONTRADICTED",
+      "prefixBottom": 7207.859375,
+      "references": [
+        {
+          "text": "P-COMTRADE-760711-X",
+          "href": "#evidence-P-COMTRADE-760711-X",
+          "top": 7207.859375,
+          "bottom": 7226.859375
+        }
+      ]
+    }
+  ],
+  "nested_record_pages": [
+    {
+      "page": 23,
+      "first_fact_present": true
+    }
+  ],
+  "failures": [
+    {
+      "finding": "NESTED-DT-03",
+      "pages": [
+        {
+          "page": 49,
+          "first_fact_after_heading": false
+        }
+      ]
+    }
+  ]
+}

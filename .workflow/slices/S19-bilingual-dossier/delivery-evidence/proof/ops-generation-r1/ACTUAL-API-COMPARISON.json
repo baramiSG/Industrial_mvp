@@ -1,0 +1,977 @@
+{
+  "status": "PASS",
+  "method": "Actual unpatched in-process API/TestClient against persisted generated graph in W19",
+  "projection_id": "GRAPH-SAU-2026-09-12-ccd1a2abd05c",
+  "postcheck_sha256": "1d714896c13208916c51d53fc4f6adf6c41d19ce388a12df510cc33158c84df0",
+  "reviewer_outputs_sha256": "ed7b0f2088d5556458b470aad6de753d233517a91d0244ec34b09b116062c4c5",
+  "reviewer_comparison_sha256": "8a0e4410c427ba80fd47ac54ff40e1784e2c64cb73027e3168d40c01c1998846",
+  "script_sha256": "cc8e00f62d35bb3d27eb61a20a06783be5c87c6243c841364b7bf33417e7206c",
+  "responses": 88,
+  "all_status_200": true,
+  "all88_complete_successor_bodies_byte_equal": true,
+  "all22_complete_real_public_decisions_equal": true,
+  "counts": {
+    "analysis.json": {
+      "total": 22,
+      "pre_generation_byte_equal": 20
+    },
+    "dossier.json": {
+      "total": 22,
+      "pre_generation_byte_equal": 20
+    },
+    ".html": {
+      "total": 44,
+      "pre_generation_byte_equal": 44
+    }
+  },
+  "source_files_unchanged": 1759,
+  "indexes_unchanged": 44,
+  "rows": [
+    {
+      "file": "SAU-H0-390210-public-analysis.json",
+      "url": "/api/opportunities/SAU-H0-390210?mode=public",
+      "http_status": 200,
+      "sha256": "9006c3fc5b6eb7dea4ca569acec9bb5a96e23c4cbec70f2d68eb8bc1153bce83",
+      "bytes": 112256,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H0-390210-public-dossier.json",
+      "url": "/api/opportunities/SAU-H0-390210/dossier?mode=public",
+      "http_status": 200,
+      "sha256": "251ed556ecf80258b37a6869b6813a33096a5f3681ccaf95ed60f2b56542ea4f",
+      "bytes": 163498,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H0-390210-public-en.html",
+      "url": "/api/opportunities/SAU-H0-390210/dossier.html?mode=public&locale=en",
+      "http_status": 200,
+      "sha256": "fdd3ff5ea26f3ebf21a22bf238406566455693a35c41ab8af58915568e9fba3e",
+      "bytes": 99319,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H0-390210-public-ar.html",
+      "url": "/api/opportunities/SAU-H0-390210/dossier.html?mode=public&locale=ar",
+      "http_status": 200,
+      "sha256": "709e997d0b01f6de98c9e2a4b013d604dbaa10b2f0cd17a15622d5072740c539",
+      "bytes": 114273,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H0-390210-simulated-analysis.json",
+      "url": "/api/opportunities/SAU-H0-390210?mode=simulated",
+      "http_status": 200,
+      "sha256": "f4d721a93596d4b93f77548f95fd4fd4e3cd78bc37e68975a97701387d3ce2ed",
+      "bytes": 153985,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H0-390210-simulated-dossier.json",
+      "url": "/api/opportunities/SAU-H0-390210/dossier?mode=simulated",
+      "http_status": 200,
+      "sha256": "a5ebd1ddb7ade74b8bfbfb144dc1b22b605b201fca3ec3a9a79704d3711eef5a",
+      "bytes": 218851,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H0-390210-simulated-en.html",
+      "url": "/api/opportunities/SAU-H0-390210/dossier.html?mode=simulated&locale=en",
+      "http_status": 200,
+      "sha256": "f2ff89924299a051529669fea5d9719ede3a4716b441804081a87960ee0f2ad6",
+      "bytes": 165229,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H0-390210-simulated-ar.html",
+      "url": "/api/opportunities/SAU-H0-390210/dossier.html?mode=simulated&locale=ar",
+      "http_status": 200,
+      "sha256": "85d2f40f371ffe5b14ce6dbb01ef5a6d4cf49613e85f2f247e0f9efe002353bd",
+      "bytes": 189662,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H0-721049-public-analysis.json",
+      "url": "/api/opportunities/SAU-H0-721049?mode=public",
+      "http_status": 200,
+      "sha256": "6cb6679ced68593142de582a23853bca23523c66efc31274d44b4cf8240633b4",
+      "bytes": 112186,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H0-721049-public-dossier.json",
+      "url": "/api/opportunities/SAU-H0-721049/dossier?mode=public",
+      "http_status": 200,
+      "sha256": "69efe2a68ca50e17f2fd484fe5a6bc808fc570e7d809884914146931efa4b21d",
+      "bytes": 161846,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H0-721049-public-en.html",
+      "url": "/api/opportunities/SAU-H0-721049/dossier.html?mode=public&locale=en",
+      "http_status": 200,
+      "sha256": "e74e9fe7297e0d0937e40bf1f7b6d08d97373a41d5610755369557a95c1464a7",
+      "bytes": 102086,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H0-721049-public-ar.html",
+      "url": "/api/opportunities/SAU-H0-721049/dossier.html?mode=public&locale=ar",
+      "http_status": 200,
+      "sha256": "dfcaecdb04d147664b6c6252f837a7a0471237cc6069055c7fcdac31b90e0fe1",
+      "bytes": 117346,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H0-721049-simulated-analysis.json",
+      "url": "/api/opportunities/SAU-H0-721049?mode=simulated",
+      "http_status": 200,
+      "sha256": "cf1e94af58e321f3000750702240a5674d31f669894d4ba1685944692a16d595",
+      "bytes": 153996,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H0-721049-simulated-dossier.json",
+      "url": "/api/opportunities/SAU-H0-721049/dossier?mode=simulated",
+      "http_status": 200,
+      "sha256": "e618faa9151bb74cbd3469c4b1e084e116ae57fa725776947ec1ae9d2292ac48",
+      "bytes": 221241,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H0-721049-simulated-en.html",
+      "url": "/api/opportunities/SAU-H0-721049/dossier.html?mode=simulated&locale=en",
+      "http_status": 200,
+      "sha256": "dcd9ae72fcabc5054568c382b381146cd36c19a655cd03e55cbe67cc4f02028b",
+      "bytes": 177132,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H0-721049-simulated-ar.html",
+      "url": "/api/opportunities/SAU-H0-721049/dossier.html?mode=simulated&locale=ar",
+      "http_status": 200,
+      "sha256": "8a8a37e67e636a0f7549c8883b0644d66e41163fc35ebde588d1ab8332dbc016",
+      "bytes": 202700,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-294110-public-analysis.json",
+      "url": "/api/opportunities/SAU-H6-294110?mode=public",
+      "http_status": 200,
+      "sha256": "2a987d59b408d29b7de05a73574a7a74c82ef1d1de467214c73c388e7614b34c",
+      "bytes": 106164,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-294110-public-dossier.json",
+      "url": "/api/opportunities/SAU-H6-294110/dossier?mode=public",
+      "http_status": 200,
+      "sha256": "b7c5db6dff79c18986b6a8ea5a215108eb698b9022d5f44af63801d1aa539689",
+      "bytes": 154020,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-294110-public-en.html",
+      "url": "/api/opportunities/SAU-H6-294110/dossier.html?mode=public&locale=en",
+      "http_status": 200,
+      "sha256": "b75059eec02d8db0954445e73d38368f7cc4c000a6eae5a24aa462148349aef4",
+      "bytes": 99836,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-294110-public-ar.html",
+      "url": "/api/opportunities/SAU-H6-294110/dossier.html?mode=public&locale=ar",
+      "http_status": 200,
+      "sha256": "f5a265135f35bd8e25b66f7d8d64e77c0d074fd1207621a2024a923085af6f93",
+      "bytes": 114657,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-294110-simulated-analysis.json",
+      "url": "/api/opportunities/SAU-H6-294110?mode=simulated",
+      "http_status": 200,
+      "sha256": "876de3e3561c057275b8853c33ff059a241931a403acbe1e3b2971cb0919c395",
+      "bytes": 153264,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-294110-simulated-dossier.json",
+      "url": "/api/opportunities/SAU-H6-294110/dossier?mode=simulated",
+      "http_status": 200,
+      "sha256": "376a3787adc0b088a2c7e77e1b3e3ff3689b6c9b7e3d1f9dfe0ffa667f10086b",
+      "bytes": 219340,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-294110-simulated-en.html",
+      "url": "/api/opportunities/SAU-H6-294110/dossier.html?mode=simulated&locale=en",
+      "http_status": 200,
+      "sha256": "8f84cb9abf1232253bfa71575068dbdaabb62baa3e6be460311986e1df985e4c",
+      "bytes": 171189,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-294110-simulated-ar.html",
+      "url": "/api/opportunities/SAU-H6-294110/dossier.html?mode=simulated&locale=ar",
+      "http_status": 200,
+      "sha256": "278e0c453cc8430bb05e2d2777e14a7dbc7e44fc18922c4536722f552b446c9c",
+      "bytes": 195957,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-294120-public-analysis.json",
+      "url": "/api/opportunities/SAU-H6-294120?mode=public",
+      "http_status": 200,
+      "sha256": "71154d8225c6ff97432dfa0f0ace4f09e8d99f9995fe5660d920e55fec705a45",
+      "bytes": 106339,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-294120-public-dossier.json",
+      "url": "/api/opportunities/SAU-H6-294120/dossier?mode=public",
+      "http_status": 200,
+      "sha256": "412a2b7c04cc14a5e12dcb9505adb95789e4bc68573334bb4fd46c15c0bbc992",
+      "bytes": 154090,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-294120-public-en.html",
+      "url": "/api/opportunities/SAU-H6-294120/dossier.html?mode=public&locale=en",
+      "http_status": 200,
+      "sha256": "1331e2fd5408bb4faab1fe23f2430dc5474de431f14799047f39726431f3d564",
+      "bytes": 99325,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-294120-public-ar.html",
+      "url": "/api/opportunities/SAU-H6-294120/dossier.html?mode=public&locale=ar",
+      "http_status": 200,
+      "sha256": "04d4351511c1b05be7348136ec1bef522e59d0e5b1cd89eb60a6715f70f7ce98",
+      "bytes": 114267,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-294120-simulated-analysis.json",
+      "url": "/api/opportunities/SAU-H6-294120?mode=simulated",
+      "http_status": 200,
+      "sha256": "8d5028beac3a97adb017188de4d10ef73fcff0a47cf16f135f1937ca5b26a6f7",
+      "bytes": 154903,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-294120-simulated-dossier.json",
+      "url": "/api/opportunities/SAU-H6-294120/dossier?mode=simulated",
+      "http_status": 200,
+      "sha256": "b4c627024c454febe7e531a260f37bd5cb01c172bc0ce40233e0c311fd34d119",
+      "bytes": 220099,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-294120-simulated-en.html",
+      "url": "/api/opportunities/SAU-H6-294120/dossier.html?mode=simulated&locale=en",
+      "http_status": 200,
+      "sha256": "f4236614d180d21ac1382ddb1f59a3cd2e0a1f89589fcd49f729e5423c6521c8",
+      "bytes": 167251,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-294120-simulated-ar.html",
+      "url": "/api/opportunities/SAU-H6-294120/dossier.html?mode=simulated&locale=ar",
+      "http_status": 200,
+      "sha256": "4fd3dc569ca1fa25049df3a730af3adb87429f5aa7338e545f1339c86c0ec38e",
+      "bytes": 191760,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-310430-public-analysis.json",
+      "url": "/api/opportunities/SAU-H6-310430?mode=public",
+      "http_status": 200,
+      "sha256": "c8a8494acbf51bbde1dbe2ff09958a2474100b63d872efc8c4986a3a897c1265",
+      "bytes": 106046,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-310430-public-dossier.json",
+      "url": "/api/opportunities/SAU-H6-310430/dossier?mode=public",
+      "http_status": 200,
+      "sha256": "f710d95fce09e58e6581d8a16321b1776194998a343a6b8f690fbb52c755e011",
+      "bytes": 153715,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-310430-public-en.html",
+      "url": "/api/opportunities/SAU-H6-310430/dossier.html?mode=public&locale=en",
+      "http_status": 200,
+      "sha256": "7247ac536451023874bd148ac026d93bd855392457d8f8b67b5c3a6b53ac82ac",
+      "bytes": 98863,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-310430-public-ar.html",
+      "url": "/api/opportunities/SAU-H6-310430/dossier.html?mode=public&locale=ar",
+      "http_status": 200,
+      "sha256": "2271aa57116b5d2e83fb4b24ae206d452642cf1c1ae2d62f81e379e16c501a3d",
+      "bytes": 113773,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-310430-simulated-analysis.json",
+      "url": "/api/opportunities/SAU-H6-310430?mode=simulated",
+      "http_status": 200,
+      "sha256": "886278c6bde182949cf01dd6a8cdd3f39b376cdd1b708af7338fe90e0968596a",
+      "bytes": 151336,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-310430-simulated-dossier.json",
+      "url": "/api/opportunities/SAU-H6-310430/dossier?mode=simulated",
+      "http_status": 200,
+      "sha256": "127a95814bb47643f73ee4097b062ffcdf94ee4316d985015d350b38dca665b2",
+      "bytes": 216040,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-310430-simulated-en.html",
+      "url": "/api/opportunities/SAU-H6-310430/dossier.html?mode=simulated&locale=en",
+      "http_status": 200,
+      "sha256": "54d28513e9169f35af2fe3668acf2cbad8b7ff72abaee8f6099444f1c382076b",
+      "bytes": 169048,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-310430-simulated-ar.html",
+      "url": "/api/opportunities/SAU-H6-310430/dossier.html?mode=simulated&locale=ar",
+      "http_status": 200,
+      "sha256": "bbe616a0b4302dd8a8ec21167e1ae6699b481536907dfc3fa9eba4830c29b4ea",
+      "bytes": 193855,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-310510-public-analysis.json",
+      "url": "/api/opportunities/SAU-H6-310510?mode=public",
+      "http_status": 200,
+      "sha256": "a2ec4df05df3720a138568ade170c56532348743eaeee4b6d8c21e2882180967",
+      "bytes": 106254,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-310510-public-dossier.json",
+      "url": "/api/opportunities/SAU-H6-310510/dossier?mode=public",
+      "http_status": 200,
+      "sha256": "d8037b3ebb81cd76ed6c49a9f788b0b0b488ac752cc3a072e75d06aced19acbc",
+      "bytes": 154124,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-310510-public-en.html",
+      "url": "/api/opportunities/SAU-H6-310510/dossier.html?mode=public&locale=en",
+      "http_status": 200,
+      "sha256": "8c59d31e213b2eeb917c178df074ba9955a91000cec3223af8bf56b88a3f79aa",
+      "bytes": 99073,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-310510-public-ar.html",
+      "url": "/api/opportunities/SAU-H6-310510/dossier.html?mode=public&locale=ar",
+      "http_status": 200,
+      "sha256": "b37fc3a8b385818912f9e0af45b964404b98fa5f4e75ef17a6a67a89235534f2",
+      "bytes": 114024,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-310510-simulated-analysis.json",
+      "url": "/api/opportunities/SAU-H6-310510?mode=simulated",
+      "http_status": 200,
+      "sha256": "00f8c810a4dd1e7f02625a3a3c6ccef194b29269ecec3fe679f55d018f349bf9",
+      "bytes": 153256,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-310510-simulated-dossier.json",
+      "url": "/api/opportunities/SAU-H6-310510/dossier?mode=simulated",
+      "http_status": 200,
+      "sha256": "98fda77972b88e57c5712beb3e083eba40edbf0689751fb9d292facc1a54609b",
+      "bytes": 218982,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-310510-simulated-en.html",
+      "url": "/api/opportunities/SAU-H6-310510/dossier.html?mode=simulated&locale=en",
+      "http_status": 200,
+      "sha256": "4c60b15eb06649ad9ee2cbcf19fa2912fd4328507b28b1b2034835a7205196d1",
+      "bytes": 167244,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-310510-simulated-ar.html",
+      "url": "/api/opportunities/SAU-H6-310510/dossier.html?mode=simulated&locale=ar",
+      "http_status": 200,
+      "sha256": "9421b7259e4e1ae5e5b7b549d394ae65816649b2d038e50903dccde17f4bb7d8",
+      "bytes": 191665,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-392010-public-analysis.json",
+      "url": "/api/opportunities/SAU-H6-392010?mode=public",
+      "http_status": 200,
+      "sha256": "76d2c7e38f1053665ae1392d01f0187e53483dafafdbca699cd1415e70aa39f5",
+      "bytes": 105217,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-392010-public-dossier.json",
+      "url": "/api/opportunities/SAU-H6-392010/dossier?mode=public",
+      "http_status": 200,
+      "sha256": "f96b06f8ab32479224f7f52796757e15aa4bca704ad3e20820a44f9fc2a829db",
+      "bytes": 152717,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-392010-public-en.html",
+      "url": "/api/opportunities/SAU-H6-392010/dossier.html?mode=public&locale=en",
+      "http_status": 200,
+      "sha256": "1b74650cc63bb26def56e08cf45d8e4bad798bd702e09d16342c5868c3b35d29",
+      "bytes": 97382,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-392010-public-ar.html",
+      "url": "/api/opportunities/SAU-H6-392010/dossier.html?mode=public&locale=ar",
+      "http_status": 200,
+      "sha256": "ecbe7e1cdb18237066e2028c45f661abc22302d7d2f6713272e8f69835c39e7e",
+      "bytes": 112089,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-392010-simulated-analysis.json",
+      "url": "/api/opportunities/SAU-H6-392010?mode=simulated",
+      "http_status": 200,
+      "sha256": "c9eca4f059a23e6a7ff9c99a38318f3a311215a0d9a7a4b34d234a70e957166a",
+      "bytes": 153657,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-392010-simulated-dossier.json",
+      "url": "/api/opportunities/SAU-H6-392010/dossier?mode=simulated",
+      "http_status": 200,
+      "sha256": "0cc42273d0d600190278da2422a1900bd086661649250e8b62794d7d96c73d69",
+      "bytes": 217019,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-392010-simulated-en.html",
+      "url": "/api/opportunities/SAU-H6-392010/dossier.html?mode=simulated&locale=en",
+      "http_status": 200,
+      "sha256": "b3a5baa2e594bcd99baf6d4727bd7609ca11595bea1dab80358a806942c45771",
+      "bytes": 165681,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-392010-simulated-ar.html",
+      "url": "/api/opportunities/SAU-H6-392010/dossier.html?mode=simulated&locale=ar",
+      "http_status": 200,
+      "sha256": "a5796b7f425192f21fa8cc132e03f23ffd72d48410cb8ae6fb32ab40ac7baa63",
+      "bytes": 190268,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-721012-public-analysis.json",
+      "url": "/api/opportunities/SAU-H6-721012?mode=public",
+      "http_status": 200,
+      "sha256": "a5b4207227c386234807d30b32348b3096d9dbe062e74ead34ed6015cfb3ca31",
+      "bytes": 105318,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-721012-public-dossier.json",
+      "url": "/api/opportunities/SAU-H6-721012/dossier?mode=public",
+      "http_status": 200,
+      "sha256": "63ca7d189b81e91a64f99746695106dc3d7e9fffa53c4ff72d7a4e195f4d6c2c",
+      "bytes": 152947,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-721012-public-en.html",
+      "url": "/api/opportunities/SAU-H6-721012/dossier.html?mode=public&locale=en",
+      "http_status": 200,
+      "sha256": "71d4a097bab850f078f897b25e85dfbf40ce82551599e8c1875c16532e441cbf",
+      "bytes": 97463,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-721012-public-ar.html",
+      "url": "/api/opportunities/SAU-H6-721012/dossier.html?mode=public&locale=ar",
+      "http_status": 200,
+      "sha256": "8819bbc688e9d534627c4f509f3f8fb79a32e49817d02806c6375c45a5873f8a",
+      "bytes": 112249,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-721012-simulated-analysis.json",
+      "url": "/api/opportunities/SAU-H6-721012?mode=simulated",
+      "http_status": 200,
+      "sha256": "75ac217cdd735b10db96e6ee90e3c74c5943655c091ada72ce3b46748881cae6",
+      "bytes": 147999,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-721012-simulated-dossier.json",
+      "url": "/api/opportunities/SAU-H6-721012/dossier?mode=simulated",
+      "http_status": 200,
+      "sha256": "8530bee76fe3e46dbd7cdbe294d40a956f7e1d070af0b07e3d6ae7664999af47",
+      "bytes": 214647,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-721012-simulated-en.html",
+      "url": "/api/opportunities/SAU-H6-721012/dossier.html?mode=simulated&locale=en",
+      "http_status": 200,
+      "sha256": "3631835b91cd15d270adbcd59dad77e21323e869dae77a35f88ccb00e83aabf9",
+      "bytes": 175252,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-721012-simulated-ar.html",
+      "url": "/api/opportunities/SAU-H6-721012/dossier.html?mode=simulated&locale=ar",
+      "http_status": 200,
+      "sha256": "72fb37ea9c8f760f7c5ed0b7baa4557239478dabe36b22ce6b42fdd91b3edb23",
+      "bytes": 200364,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-721061-public-analysis.json",
+      "url": "/api/opportunities/SAU-H6-721061?mode=public",
+      "http_status": 200,
+      "sha256": "fff4612eeb95156adb45e4123741ccddb2a140c5d0d65da2a8de9cc4871cf128",
+      "bytes": 108447,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-721061-public-dossier.json",
+      "url": "/api/opportunities/SAU-H6-721061/dossier?mode=public",
+      "http_status": 200,
+      "sha256": "3666b959efaa6d705b757bdf0ae39fb9f4b43381de34b22ea773cd7e0413f1fe",
+      "bytes": 156366,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-721061-public-en.html",
+      "url": "/api/opportunities/SAU-H6-721061/dossier.html?mode=public&locale=en",
+      "http_status": 200,
+      "sha256": "a5d4c5463585af39fefcac5037b7440cebcb76324a3c06e0fa6ffe59551cd6fc",
+      "bytes": 105519,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-721061-public-ar.html",
+      "url": "/api/opportunities/SAU-H6-721061/dossier.html?mode=public&locale=ar",
+      "http_status": 200,
+      "sha256": "7829b6680ed79a8fb48200881e5fbc328da9a610d1bad52c77a8236e3fe97bbb",
+      "bytes": 120812,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-721061-simulated-analysis.json",
+      "url": "/api/opportunities/SAU-H6-721061?mode=simulated",
+      "http_status": 200,
+      "sha256": "1c35726206e2d7986777d925e2c2d0e706cbfec6fc4caa28b4c4455cb879e7cf",
+      "bytes": 154387,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-721061-simulated-dossier.json",
+      "url": "/api/opportunities/SAU-H6-721061/dossier?mode=simulated",
+      "http_status": 200,
+      "sha256": "55119fc13b3ed60e3ef2e4788828fd9ed2b883d50bc7a7f93d5ad1a6b75a79ab",
+      "bytes": 221148,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-721061-simulated-en.html",
+      "url": "/api/opportunities/SAU-H6-721061/dossier.html?mode=simulated&locale=en",
+      "http_status": 200,
+      "sha256": "5919f14045cf2be5ef25c029e9dd8f68e02706b0430e4a4e4a2c728e77a72aba",
+      "bytes": 182005,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-721061-simulated-ar.html",
+      "url": "/api/opportunities/SAU-H6-721061/dossier.html?mode=simulated&locale=ar",
+      "http_status": 200,
+      "sha256": "2fb09d550724d16dc28ad4984c14e032373047f0ab64d6740f24a3e8fad2ffbb",
+      "bytes": 207455,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-760429-public-analysis.json",
+      "url": "/api/opportunities/SAU-H6-760429?mode=public",
+      "http_status": 200,
+      "sha256": "f033eda8588ca3871c84b0d65329040838e1fd3064d024c748f2a92d432f6b04",
+      "bytes": 111306,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-760429-public-dossier.json",
+      "url": "/api/opportunities/SAU-H6-760429/dossier?mode=public",
+      "http_status": 200,
+      "sha256": "d178c1f9f18082f69b929f305f85d2c238f8de2cca11833e442d9ad0dcf9e2aa",
+      "bytes": 160312,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-760429-public-en.html",
+      "url": "/api/opportunities/SAU-H6-760429/dossier.html?mode=public&locale=en",
+      "http_status": 200,
+      "sha256": "d71f054931fd9d00274011081a00a160c1f2cbc2f1e4f5dad4da1301d93acbcf",
+      "bytes": 105365,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-760429-public-ar.html",
+      "url": "/api/opportunities/SAU-H6-760429/dossier.html?mode=public&locale=ar",
+      "http_status": 200,
+      "sha256": "629e7eb41f62defa7314109ae20ea5c65c1c3820684837b67add81766a5ac0ae",
+      "bytes": 120880,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-760429-simulated-analysis.json",
+      "url": "/api/opportunities/SAU-H6-760429?mode=simulated",
+      "http_status": 200,
+      "sha256": "baf618770991867c3e490013188d1710dd32fcca8f295a28c9759d9e498515c8",
+      "bytes": 163392,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": false,
+      "exact_reviewed_differences": [
+        {
+          "path": "/simulation_decision/route_hypotheses/8/shared_enabler/graph_projection_id",
+          "before": "GRAPH-SAU-2026-09-12-49b458a614f3",
+          "after": "GRAPH-SAU-2026-09-12-ccd1a2abd05c"
+        },
+        {
+          "path": "/active_decision/route_hypotheses/8/shared_enabler/graph_projection_id",
+          "before": "GRAPH-SAU-2026-09-12-49b458a614f3",
+          "after": "GRAPH-SAU-2026-09-12-ccd1a2abd05c"
+        },
+        {
+          "path": "/route_hypotheses/8/shared_enabler/graph_projection_id",
+          "before": "GRAPH-SAU-2026-09-12-49b458a614f3",
+          "after": "GRAPH-SAU-2026-09-12-ccd1a2abd05c"
+        }
+      ]
+    },
+    {
+      "file": "SAU-H6-760429-simulated-dossier.json",
+      "url": "/api/opportunities/SAU-H6-760429/dossier?mode=simulated",
+      "http_status": 200,
+      "sha256": "914081aa1b22d327a924d43f6a4af4bc6ff7565205a69df1c321e646d062afed",
+      "bytes": 234342,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": false,
+      "exact_reviewed_differences": [
+        {
+          "path": "/route_hypotheses/8/shared_enabler/graph_projection_id",
+          "before": "GRAPH-SAU-2026-09-12-49b458a614f3",
+          "after": "GRAPH-SAU-2026-09-12-ccd1a2abd05c"
+        },
+        {
+          "path": "/blocks/decision/records/active_decision/route_hypotheses/8/shared_enabler/graph_projection_id",
+          "before": "GRAPH-SAU-2026-09-12-49b458a614f3",
+          "after": "GRAPH-SAU-2026-09-12-ccd1a2abd05c"
+        },
+        {
+          "path": "/blocks/capability/records/routes/8/shared_enabler/graph_projection_id",
+          "before": "GRAPH-SAU-2026-09-12-49b458a614f3",
+          "after": "GRAPH-SAU-2026-09-12-ccd1a2abd05c"
+        }
+      ]
+    },
+    {
+      "file": "SAU-H6-760429-simulated-en.html",
+      "url": "/api/opportunities/SAU-H6-760429/dossier.html?mode=simulated&locale=en",
+      "http_status": 200,
+      "sha256": "78349fc64457198e0d8241ef8112a9f118af2f8c877753b349cd765906f44943",
+      "bytes": 203273,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-760429-simulated-ar.html",
+      "url": "/api/opportunities/SAU-H6-760429/dossier.html?mode=simulated&locale=ar",
+      "http_status": 200,
+      "sha256": "8eebdc284ef7b1c22809e7f7e00528385bf6cc27ec9c60b85bcbd6346cf0bcd9",
+      "bytes": 230973,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-760711-public-analysis.json",
+      "url": "/api/opportunities/SAU-H6-760711?mode=public",
+      "http_status": 200,
+      "sha256": "7e3ddb9e0d47e12baef34b8ac7ac52647ecdbaeb94f638e179eaae87d53dd9fe",
+      "bytes": 105224,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-760711-public-dossier.json",
+      "url": "/api/opportunities/SAU-H6-760711/dossier?mode=public",
+      "http_status": 200,
+      "sha256": "712b78e4ca3589ee552420ba7d486d75465958732272c240f5c97461063eaaf8",
+      "bytes": 152774,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-760711-public-en.html",
+      "url": "/api/opportunities/SAU-H6-760711/dossier.html?mode=public&locale=en",
+      "http_status": 200,
+      "sha256": "718100d912b56aab27103df5061562f215b79395c6892831df021aff007b97f9",
+      "bytes": 96974,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-760711-public-ar.html",
+      "url": "/api/opportunities/SAU-H6-760711/dossier.html?mode=public&locale=ar",
+      "http_status": 200,
+      "sha256": "0dc839a11221f8e43420b35229be46fb21fb8f19b1f1e82c5a981f541046b3ac",
+      "bytes": 111731,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-760711-simulated-analysis.json",
+      "url": "/api/opportunities/SAU-H6-760711?mode=simulated",
+      "http_status": 200,
+      "sha256": "664e30d2a85c30edff0d00022561a196451b8d967174ed396298611d6b1a07f5",
+      "bytes": 154785,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": false,
+      "exact_reviewed_differences": [
+        {
+          "path": "/simulation_decision/route_hypotheses/8/shared_enabler/graph_projection_id",
+          "before": "GRAPH-SAU-2026-09-12-49b458a614f3",
+          "after": "GRAPH-SAU-2026-09-12-ccd1a2abd05c"
+        },
+        {
+          "path": "/active_decision/route_hypotheses/8/shared_enabler/graph_projection_id",
+          "before": "GRAPH-SAU-2026-09-12-49b458a614f3",
+          "after": "GRAPH-SAU-2026-09-12-ccd1a2abd05c"
+        },
+        {
+          "path": "/route_hypotheses/8/shared_enabler/graph_projection_id",
+          "before": "GRAPH-SAU-2026-09-12-49b458a614f3",
+          "after": "GRAPH-SAU-2026-09-12-ccd1a2abd05c"
+        }
+      ]
+    },
+    {
+      "file": "SAU-H6-760711-simulated-dossier.json",
+      "url": "/api/opportunities/SAU-H6-760711/dossier?mode=simulated",
+      "http_status": 200,
+      "sha256": "91bfe81e778e10ba0965c81375f39a64c1a03b499d3e4f15314171a50b3768e7",
+      "bytes": 221546,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": false,
+      "exact_reviewed_differences": [
+        {
+          "path": "/route_hypotheses/8/shared_enabler/graph_projection_id",
+          "before": "GRAPH-SAU-2026-09-12-49b458a614f3",
+          "after": "GRAPH-SAU-2026-09-12-ccd1a2abd05c"
+        },
+        {
+          "path": "/blocks/decision/records/active_decision/route_hypotheses/8/shared_enabler/graph_projection_id",
+          "before": "GRAPH-SAU-2026-09-12-49b458a614f3",
+          "after": "GRAPH-SAU-2026-09-12-ccd1a2abd05c"
+        },
+        {
+          "path": "/blocks/capability/records/routes/8/shared_enabler/graph_projection_id",
+          "before": "GRAPH-SAU-2026-09-12-49b458a614f3",
+          "after": "GRAPH-SAU-2026-09-12-ccd1a2abd05c"
+        }
+      ]
+    },
+    {
+      "file": "SAU-H6-760711-simulated-en.html",
+      "url": "/api/opportunities/SAU-H6-760711/dossier.html?mode=simulated&locale=en",
+      "http_status": 200,
+      "sha256": "bb49c01b1ee380294712f16dade89903b4328cb123a3b62ce394cef4e144d304",
+      "bytes": 177553,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    },
+    {
+      "file": "SAU-H6-760711-simulated-ar.html",
+      "url": "/api/opportunities/SAU-H6-760711/dossier.html?mode=simulated&locale=ar",
+      "http_status": 200,
+      "sha256": "59688e88642a4a72c76d5c9283c918876c94b80c5c0ed0bc550ead07bbbff443",
+      "bytes": 202946,
+      "reviewed_successor_byte_equal": true,
+      "pre_generation_byte_equal": true,
+      "exact_reviewed_differences": []
+    }
+  ],
+  "sanad": "Direct actual persisted API response bodies compared completely with rehashed retained reviewer expectations; no normalization or successor override.",
+  "muhasabah": "PASS for actual88 API equivalence only; operation-result review, token/count adoption and final functional/PDF/canonical/delivery gates remain pending."
+}

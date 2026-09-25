@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "at_utc": "2026-09-25T02:55:37.576074+00:00",
+  "record_kind": "DELEGATED_S19_CAPTURE_INTEGRATION_CORRECTION_ACCEPTANCE",
+  "actor": "/root coordinator under existing owner blocker-resolution delegation",
+  "authority": "20260923-blocker-resolution-delegation-1.json",
+  "proposer": "/root/s19_delivered_base_handoff",
+  "independent_reviewer": "/root/s19_source_reviewer",
+  "implementer": "/root/s19_product_implementer",
+  "bindings": {
+    "proposal": {
+      "path": "s19/canonical-preparation-r1/PROPOSAL.md",
+      "sha256": "4512ff31e96a5af191fe9bec28e21694a2270b982dffecc0b8cbf69826a26ec2"
+    },
+    "patch": {
+      "path": "s19/canonical-preparation-r1/PROPOSED.patch",
+      "sha256": "ffe06386149a98a2da79c237dc4f39b6c7771b9e22375074c1c434b2e543ba71"
+    },
+    "review": {
+      "path": "reviews/s19-source-readiness-r1/CAPTURE-INTEGRATION-REVIEW.md",
+      "sha256": "ff04cae4331d5cd97b75ce534ec838bebf4f100c34c3fed2600c4796e2f438e7"
+    },
+    "finding": {
+      "path": "reviews/s19-source-readiness-r1/CAPTURE-INTEGRATION-FINDING.md",
+      "sha256": "8c398b609d73c033440d28074dcf765340dfce6356ac9545ed47871fd37144e1"
+    }
+  },
+  "accepted_scope": "Exactly two previously permitted browser files: apply submitted helper call/import, exact native scroll restoration and unchanged capture; add exactly three literal provenance members per independent review: browser_tests/dossier_pages.py, scripts/visual_metrics.py, scripts/check_browser_prerequisites.py. The scripts/helper themselves remain unchanged.",
+  "verification": "Original omission RED, corrected GREEN, required-member and inherited-member omission sensitivity; exact inherited source set plus3; all230 graph-input hashes unchanged; reuse8 exact tablet results and run only8 missing1440x900 direct existing-helper checks; actual16 callsite observations during single later canonical capture. No new test names, adapters, discovery framework or graph replay.",
+  "sequencing": "Finish current six-output operation postchecks and88 actual response comparison first, retaining generated postimages. Then sole writer applies this correction and separately already-approved actual token/count adoption.",
+  "status": "CORRECTION_EXECUTION_AUTHORIZED; CAP-01 NOT_YET_CLOSED; NOT_PRODUCT_OR_CANONICAL_APPROVAL",
+  "history": "Preserve source review and additive qualification, source preimages, all failed attempts and receipts.",
+  "sanad": "Root read actual proposal/patch/review and parent Task5, verified bound hashes; independent reviewer verified retained helper cases and imports. Actual implementation and new checks pending.",
+  "muhasabah": "PASS for bounded delegated acceptance; same-model independent review, no Claude attribution, owner quotation, waived gate or changed approved packet."
+}

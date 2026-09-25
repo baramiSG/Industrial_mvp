@@ -216,7 +216,7 @@ def test_ui_catalogue_metadata_locales_and_version_are_exact() -> None:
 
     assert payload["metadata"] == {
         "artifact": "industrial-opportunity-ui-strings",
-        "version": "1.6.0",
+        "version": "1.7.0",
         "effective_date": "2026-09-24",
         "authority": (
             "Core 01 NFR-006/NFR-007 and UX GenUI Demo Specification"
@@ -235,7 +235,7 @@ def test_current_ui_catalogue_passes_complete_validator() -> None:
     config.validate_ui_strings(_catalogue())
 
 
-@pytest.mark.parametrize("version", ["1.5.0", "1.7.0", "1.6", None, True, False, 1.6])
+@pytest.mark.parametrize("version", ["1.5.0", "1.6.0", "1.8.0", "1.6", "1.7", None, True, False, 1.6, 1.7])
 def test_ui_catalogue_rejects_non_current_versions(version: object) -> None:
     payload = _catalogue()
     payload["metadata"]["version"] = version
@@ -641,7 +641,7 @@ def test_ui_strings_endpoint_returns_valid_en_and_ar_bundles(
     payload = response.json()
     catalogue = _catalogue()
     assert payload == {
-        "catalogue_version": "1.6.0",
+        "catalogue_version": "1.7.0",
         "locale": locale,
         **catalogue["locales"][locale],
         "strings": catalogue["strings"][locale],
@@ -727,3 +727,33 @@ def test_am5_integrity_catalogue_additions_are_exact_and_valid():
         for locale, value in values.items():
             assert catalogue["strings"][locale][key] == value
     assert {key for key in catalogue["strings"]["en"] if key.startswith("executive.integrity.")} == set(expected)
+
+
+def test_dossier_catalogue_contracts_keep_unused_unknown_and_copy_sensitivity(monkeypatch):
+    from copy import deepcopy
+    from ior_mvp.config import UIStringConfigurationError
+    import ior_mvp.dossier as dossier
+    from ior_mvp.decision_engine import analyze
+    from scripts import check_ui_contracts as checker
+    assert checker.catalogue_usage_findings()==[]
+    payload=deepcopy(checker.catalogue_payload())
+    for locale in ('en','ar'):payload['strings'][locale]['dossier.unused_probe']='unused fixture'
+    with monkeypatch.context() as patch:
+        patch.setattr(checker,'catalogue_payload',lambda:payload)
+        assert any(f.category=='unused-key' and f.detail=='dossier.unused_probe' for f in checker.catalogue_usage_findings())
+    with monkeypatch.context() as patch:
+        patch.setitem(dossier.SECTION_LABELS,'identity','dossier.missing_reached_probe')
+        with pytest.raises(UIStringConfigurationError,match='missing_reached_probe'):
+            dossier.render_dossier_html(dossier.build_dossier(analyze('SAU-H0-721049','public')),'en')
+    assert checker.copy_findings()==[]
+    original=Path.read_text
+    def with_literal(path,*args,**kwargs):
+        source=original(path,*args,**kwargs)
+        if path==PROJECT_ROOT/'src/ior_mvp/dossier.py':
+            return source+'\ncopy_probe = "Print / Save PDF"\n'
+        return source
+    with monkeypatch.context() as patch:
+        patch.setattr(Path,'read_text',with_literal)
+        assert any(f.category=='catalogue-copy' and f.detail=='Print / Save PDF' for f in checker.copy_findings())
+    assert checker.catalogue_usage_findings()==[]
+    assert checker.copy_findings()==[]

@@ -1,0 +1,242 @@
+{
+  "schema_version": 1,
+  "status": "PREPARED_REQUIRES_CLAUDE_OPERATION_GO_AND_DELEGATED_RELEASE",
+  "recorded_at_utc": "2026-09-25T11:14:21.779662+00:00",
+  "operation_id": "S19-D-S19-1-REPLACEMENT-GENERATION-1",
+  "scope": "Only one stock graph write, one stock manifests build, immediate5gates, then permitted literal adoption plus its documented sensitivity checks; canonical/functional/PDF/R1/CI operations require their subsequent exact evidence binding. No automatic retry.",
+  "reviewed_source": {
+    "review_path": "/home/barami/.cache/industrial-opportunity-resolution-mvp/claude-reviews/s19-ds19-1-source-readiness-review-20260925.md",
+    "review_sha256": "7e78bf3ba431f148f1bdadeb94582c01b4eca4bd87cd0c3c7e55ff417206e867",
+    "source_acceptance_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/owner-decisions/20260925-s19-ds19-1-source-readiness-acceptance-1.json",
+    "source_acceptance_sha256": "f2f1d7672a1b1789d46e24f6758f43920a82f44d197cac2adad4b1f6b11689c8",
+    "operation_source_ledger": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/replacement-readiness/GENERATION-SOURCE-BINDING.json",
+    "operation_source_ledger_sha256": "c99cdafa8b4d37085fe80c6ddf6b5ceac2a4ae91d8efdd9827633244160065b7",
+    "post_readiness_delta": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/replacement-readiness/PRE-GENERATION-RECORD-DELTA.json",
+    "post_readiness_delta_sha256": "7199158106645503bdfe08ee33f305ee84f9fe0a97a48697e0a9682aeeebd6ad",
+    "record_delta_scope": "Exactly append-only ADR031, implementation-log.md and plan-review.md; no graph/visual input changed. Original source-copy bytes and complete review are preserved."
+  },
+  "input_inventory_and_history": {
+    "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/replacement-readiness/S19-REPLACEMENT-OPERATION-DRAFT-r2.json",
+    "sha256": "939830a3e397d425327a4031a1a7183630ed926e0180a186dce16ad7e3219537",
+    "sections": "graph_input_allowlist, preserved_generated_history, delivered_predecessor, permitted_literal_adoption",
+    "direct_current230_input_hash_and_size_check": "PASS",
+    "new_graph_directory_absent": true
+  },
+  "observations": {
+    "corrected": {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/replacement-readiness/corrected-observation.json",
+      "sha256": "2bf2bd78d044a87ea858333b22bfef752497a76814573847bb22324e88d051fe"
+    },
+    "predecessor": {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/replacement-readiness/predecessor-observation.json",
+      "sha256": "f8ec20b899da2af412c22b6ca6c8ebd5dee706076e99aa6ddfcab48b9028b810"
+    },
+    "provenance": "Root-produced read-only observations; this author inspected/hashes them and compared their retained JSON. Construction/comparator execution and approval are not claimed by this draft.",
+    "proposed_projection_id": "GRAPH-SAU-2026-09-12-6f43b1a8c4aa",
+    "proposed_engine_run_id": "ENGINE-6b54371e99f3",
+    "canonical_sha256": "85b166d6183f59a82e966665cb62add102f4a1c497ebabc7bf2e176fd8afd377",
+    "canonical_bytes": 2216176,
+    "counts": {
+      "nodes": 925,
+      "edges": 1045,
+      "inputs": 230
+    },
+    "pending": "Canonical bytes and input inventory verified from retained read-only double construction; semantic receipt bound above. Actual emitted corroboration and independent operation GO still pending."
+  },
+  "semantic_result": {
+    "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/replacement-readiness/GRAPH-SEMANTICS-RESULT.json",
+    "sha256": "398214bd0873e34d79dcf08e5a7d9dd7bbc58ad290092d1b582ca8a4b6c88cd6",
+    "executed_by": "Codex root; independently reproduced by Claude source reviewer; comparison excludes input array which is separately checked exact"
+  },
+  "generation_operation": {
+    "reused_recipe": {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-generation-r1/OPERATION-PROPOSAL.json",
+      "sha256": "65ccd005f75938a5eca25c761260154a03f80cdc340b44424715b78ab312d938"
+    },
+    "cwd": "/home/barami/projects/ior-worktrees/s19",
+    "commands_once_in_order": [
+      [
+        "/home/barami/.local/bin/uv",
+        "run",
+        "--locked",
+        "--extra",
+        "dev",
+        "--extra",
+        "graph",
+        "python",
+        "-m",
+        "ior_mvp.graph",
+        "build"
+      ],
+      [
+        "/home/barami/.local/bin/uv",
+        "run",
+        "--locked",
+        "--extra",
+        "dev",
+        "python",
+        "scripts/build_manifests.py"
+      ]
+    ],
+    "immediate_gates_in_order": [
+      [
+        "/home/barami/.local/bin/uv",
+        "run",
+        "--locked",
+        "--extra",
+        "dev",
+        "python",
+        "scripts/verify_integrity.py"
+      ],
+      [
+        "/home/barami/.local/bin/uv",
+        "run",
+        "--locked",
+        "--extra",
+        "dev",
+        "python",
+        "scripts/validate_scenarios.py"
+      ],
+      [
+        "/home/barami/.local/bin/uv",
+        "run",
+        "--locked",
+        "--extra",
+        "dev",
+        "python",
+        "scripts/reconstruct_snapshot.py",
+        "--all"
+      ],
+      [
+        "/home/barami/.local/bin/uv",
+        "run",
+        "--locked",
+        "--extra",
+        "dev",
+        "--extra",
+        "graph",
+        "python",
+        "-m",
+        "ior_mvp.graph",
+        "validate"
+      ],
+      [
+        "/home/barami/.local/bin/uv",
+        "run",
+        "--locked",
+        "--extra",
+        "dev",
+        "--extra",
+        "graph",
+        "python",
+        "-m",
+        "ior_mvp.graph",
+        "build",
+        "--check"
+      ]
+    ],
+    "environment": {
+      "PATH": "/home/barami/.local/bin:/usr/local/bin:/usr/bin:/bin",
+      "HOME": "/home/barami",
+      "LANG": "C.UTF-8",
+      "PYTHONPATH": "src",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "GIT_OPTIONAL_LOCKS": "0",
+      "UV_OFFLINE": "1",
+      "UV_NO_PROGRESS": "1"
+    },
+    "allowed_source_output_paths": [
+      "data/graph/current.json",
+      "data/graph/projections/GRAPH-SAU-2026-09-12-6f43b1a8c4aa/projection.json",
+      "data/graph/projections/GRAPH-SAU-2026-09-12-6f43b1a8c4aa/manifest.json",
+      "data/manifests/snapshot_manifest.json",
+      "docs/authority/authority_hashes.json",
+      "docs/authority/00_AUTHORITY_MANIFEST.md"
+    ],
+    "preflight": [
+      "Claude source-readiness APPROVE hash; separate exact operation review/GO and delegated allocation binding. Writer paused/exclusive. Four steel sample PDFs are source-readiness evidence, not the replacement44 cohort.",
+      "Rehash exact corrected source/pathset and complete protected-index union. Record planned literal hunks in admitted slice ADR before manifests; if this adds/changes source records, preserve exact delta and bind a new complete operation-source ledger. No assertion that1759 source ledger remains unchanged.",
+      "Full230 discovered inputs must equal complete_corrected_inventory; proposed new graph directory absent; preserve the four overwritten-path preimages. Reconfirm actual emitted identity against bound read-only observation.",
+      "Complete required source-readiness evidence under accepted plan/review; never mark an unrun pre-generation functional gate passed. Retained initial operation preflight/results are not transferable. The approved correction sequence explicitly retains post-generation full functional/all44 proof.",
+      "Verify current locked environment already satisfies required extras offline; no dependency download or lock edit. Confirm graph command emits bound canonical SHA256 and source state exactly matches operation ledger before consuming allocation."
+    ],
+    "postconditions": [
+      "Emitted projection equals bound canonical bytes/hash/ID;925nodes1045edges230inputs. Exactly two new paths; all existing projection members retained byte-exact.",
+      "Snapshot728→730 only after proving old membership plus exactly new projection/manifest; current pointer row updated. Authority20 files and content rows remain unchanged for D-S19-1; do not copy the prior operation assertion that Core/catalogue rows change. Actual generated_on behavior may change generated metadata; verify, never force writes or dates.",
+      "Six allowed paths are a write envelope, not a claim all six change: new pair plus pointer/snapshot expected; authority hashes/table may remain byte-identical. Outside HASH_TABLE text unchanged and table agrees with authority_hashes. All other source bytes/indexes unchanged except separately admitted/reviewed literal/record steps.",
+      "All five immediate gates exit0; stdout/stderr/partial outputs retained separately. No additional generator attempt."
+    ]
+  },
+  "literal_adoption": {
+    "authority": {
+      "base_amendment": {
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/source-readiness/source/.workflow/slices/S19-bilingual-dossier/accepted-packets/09-s19-base-adoption-r1-AMENDMENT.md",
+        "sha256": "5d0583000ac67713fa6963bcc115e2f93ab57c826f6ebb6315754fc85b14501f"
+      },
+      "citations": "Accepted base-adoption amendment:30–32 adds the token-assignment and two specific test-file permissions;34 expressly preserves the parent status-doc live-count/change_ref and subtree-pin permissions;38 ADR-before-manifests/no speculative token;39 emitted-token adoption;40–41 original-CSS sensitivity;42 independently established manifest count applied also to status-doc site;43 actual hunks/matrix/functional/final review. Delivered-base handoff44/52–57 and Claude addendum-review71 carry these into replacement."
+    },
+    "changes": [
+      {
+        "path": "browser_tests/test_graph.py",
+        "line": 845,
+        "change": "Only new_token ENGINE-5e01ef7c4b9d→actual emitted successor (predicted ENGINE-6b54371e99f3); only AFTER graph write/manifest and corroboration, before full functional/canonical.",
+        "graph_input": false,
+        "visual_source_tree": true,
+        "preserve": "Initially old_token ENGINE-7ae34188bdec unchanged. Revert only flex-grow:1 in isolated negative-control copy; both EN/AR protected-anchor failure and correct-CSS success required. Sole alternate ENGINE-a1dcbf0e7665 allowed only after retained insensitive first result. No arbitrary string search, weakened equality or missing-token RED."
+      },
+      {
+        "path": "tests/test_integrity_contract.py",
+        "line": 1298,
+        "change": "Only live snapshot count728→independently verified730 AFTER manifest membership proof.",
+        "graph_input": false,
+        "visual_source_tree": false
+      },
+      {
+        "path": "tests/test_s17_generation.py",
+        "line": 58,
+        "change": "Only live snapshot count728→same independently verified730 AFTER manifest membership proof.",
+        "graph_input": false,
+        "visual_source_tree": false
+      },
+      {
+        "path": "tests/test_s17_status_docs.py",
+        "line": 33,
+        "change": "Only live snapshot count728→same independently verified730 AFTER manifest membership proof. This is parent-existing permission, expressly retained by base amendment34/42. Keep historical S17 numbers/assertions at lines36 onward unchanged.",
+        "graph_input": false,
+        "visual_source_tree": false
+      }
+    ],
+    "inventory_and_review": "Independent operation review must verify this complete permitted set before Cursor applies any literal change. Current immutable1759 ledger remains D-S19-1 source-readiness only. After actual generated output corroboration, permit the exact token and THREE count literals, record exact hunks/new full inventory and obtain the required separate review/binding before functional/canonical. None of these tests is a graph input. Only browser_tests/test_graph.py is visual source_tree and MUST be captured at its new hash. Product source approval is not transferred to unseen later bytes; final candidate gates remain absent.",
+    "later_pins": [
+      {
+        "path": "tests/test_s17_status_docs.py",
+        "line": 35,
+        "scope": "Only live new change_ref at35 after accepted capture: proposed S19-BILINGUAL-DOSSIER-2; snapshot-count33 is separately listed above. visual entries128 and historical S17 assertions unchanged."
+      },
+      {
+        "path": "tests/test_frozen_public_evidence_pins.py",
+        "line": 48,
+        "scope": "actual accepted replacement baseline subtree OID; supersede untested0bc664f2 value, preserve all frozen data/golden pins"
+      }
+    ],
+    "runtime_expectation_inventory": "Exactly THREE live manifest-count sites: test_integrity_contract.py:1298; test_s17_generation.py:58; test_s17_status_docs.py:33. Plus the narrowly permitted new_token assignment at browser_tests/test_graph.py:845 and conditional historical old_token allowance. No such literal was changed in the current immutable1759 source-readiness input."
+  },
+  "indexes": {
+    "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/INITIAL-INDEX-BINDING.json",
+    "sha256": "1c5e28626ebda3d4407cf7d3b71f62e0aaab03378eeea28208eaebb944cdc7fc",
+    "count": 45,
+    "rule": "All45expected bytes preserved before/after; no index/refs/staging mutation."
+  },
+  "downstream_scope_precision": {
+    "canonical_not_released": true,
+    "proposed_change_ref": "S19-BILINGUAL-DOSSIER-2",
+    "draft_correction": "Draft r2 omitted manifest.sha256 from its future canonical output envelope. Correct boundary is exactly existing128WebPs plus manifest.json AND manifest.sha256 (130files), as stock canonical operation. No canonical execution is authorized by this generation-only proposal.",
+    "pdf_scope_correction": "New Claude review found4steelHTML summaries change, not44. All44strict/manual proof remains mandatory.",
+    "capture_inputs": "After literal adoption browser_tests/test_graph.py changes as visual input; bind new ledger/source_tree and accepted all44PDF evidence before separate canonical GO. Readiness approval of dossier renderer remains byte-specific; no unseen visual bytes accepted.",
+    "ci_aura": "Separate reviewed actual-candidate/operational bindings remain required, not released here."
+  },
+  "failure_policy": "First nonzero, unexpected semantic/path/count/hash delta or source drift stops; preserve partial outputs/logs as INCOMPLETE. No automatic second generation/capture, forced identity, historical deletion or silent restore. Correction and additional allocation require existing independent review/delegated process.",
+  "delegation": "Latest operational mandate + supplied guide; Codex may record exact delegated decisions after independent Claude GO. No fabricated personal-owner quotation.",
+  "sanad": "Actual approved source, recorded in-memory comparisons, full230input rows, exact old+new row inventory, suppliedguide and bound existing operation recipes.",
+  "muhasabah": "Prospective operation only; no generator count/identity/gate success or GO assumed."
+}

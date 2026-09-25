@@ -503,3 +503,34 @@ AM4 residuals remain explicitly tracked: case-level EVSI availability is joined 
 | Unchanged industrial decisions/graph authority | Adopted four files are excluded from graph228 inputs; graph/manifests/authority bytes preserved | Full all11 decision/outcome checks and exact-candidate gates remain mandatory |
 
 These are bounded correction results, not final product acceptance. CSS and the browser test are visual inputs; their canonical R2 refresh is now independently reviewed and accepted. AR-V01 original-defect S19 repair, all AM4 residuals and final S21 Aura remain as recorded.
+
+## S19 dossier contract and pending acceptance — 2026-09-24
+
+S18b's delivered prerequisite is [PR39](https://github.com/baramiSG/Industrial_mvp/pull/39), merge `ce407db9832b61c5a8a85dfda2e3b7623da2fbc9`, with six successful [required main jobs](https://github.com/baramiSG/Industrial_mvp/actions/runs/36062918988). The following S19 rows are **implementation/required-proof mappings**, not completion claims. The accepted plan and amendments are retained in the [S19 packet](../.workflow/slices/S19-bilingual-dossier/accepted-packets/00-s19-S19-IMPLEMENTATION-PLAN.md).
+
+| Requirement | Implementation / required proof | Current disposition |
+|---|---|---|
+| Methodology§15/15.1; FR-064 | Core04§9 Dossier2.0.0; `dossier.py`, projection/validation;22 JSON/44 HTML/PDF, full appendix and native Print / Save PDF | Implementation in progress; full rendered and exact-candidate gates pending |
+| FR-050/051/059; public/synthetic separation | Complete detached `public_decision`, public no-scenario loader, exact context422 mutations and pre/post source fingerprints | Required source/isolation proof; no branch or evidence authority change |
+| FR-011/013/015; source accountability | Original passports/contradictions, actual local IDs and external route-8 references, safe URLs, missing history/overrides honestly typed | Required source-mapping and hostile-input tests; no invented review or passport |
+| KL-33 / methodology supply conclusion | Named producers and structured capacity/specification/upgrade fields, with observed/simulated separation | OPEN until original raw-JSON RED, corrected output and independent review |
+| KL-84 / FR-085 Arabic parity | Actual `localized.ar` rule name/result/effect; governed chrome, attributed source spans and complete technical IDs | OPEN until Arabic regression and rendered proof |
+| AR-V01 / readable evidence boundary | Both real Arabic1024 simulated steel/PP clipping regressions and EN/AR public/simulated390/1024/1440 proof | OPEN REQUIRED S19 REPAIR; no overflow hiding or truncation |
+| TRADE-SCALE-01 / faithful public signal | Unchanged curves plus visible independent-scale note/native source table; all11 cases, both callers/locales, zero/missing distinction and keyboard proof | OPEN REQUIRED S19 REPAIR; no new trade calculation |
+| Core09§13 / print and delivery | All44 PDFs/every-page rasterization, complete content/bounds/disclosure,128 canonical paths, strict R1, two exact clean-root CIs and separate exact-tree/head reviews | Pending; previous-slice green results cannot certify S19 |
+
+The exporter adds no case-level EVSI schema, official synthetic evidence, complete missing demand/supply data or domain-review sign-off. KL-133/134/135/136 and model partition/required-suffix follow-ups remain under KNOWN_LIMITATIONS; final S21 Aura and S22 model-family release gates remain open.
+
+### S19 additive proof reconciliation — 2026-09-25
+
+The preceding S19 table remains the preserved implementation checkpoint. Later evidence does not declare final requirement closure.
+
+| Requirement | Later bounded evidence | Remaining acceptance |
+|---|---|---|
+| Methodology §15/15.1; FR-064; Core 09 §13 | Replacement 44 PDFs/1,958 pages; 44 fresh first-page observations and 1,914 exact retained appendix observations; Claude full-44 and capture-result reviews | Exact-candidate Task 6, both clean-root CI/PDF proofs, final implementation review |
+| FR-050/051/059; evidence isolation | All 11 real decisions and normalized graph semantics preserved; steel public INVESTIGATE; polypropylene public REJECT | Repeat exact-candidate isolation/golden gates |
+| FR-011/013/015; D-S19-1 | Existing bilingual keys separately label supporting references and public contradictions; Claude source, full-44 and capture-result reviews | Final candidate review |
+| KL-33; KL-84; AR-V01; TRADE-SCALE-01 | Bounded source/regression/rendered evidence carried through the replacement cohort and capture | Explicit finding disposition still required; this entry does not close them |
+| Generated/canonical provenance | Projection `6f43b1a8c4aa`, run `ENGINE-6b54371e99f3`, snapshot 730; capture `S19-BILINGUAL-DOSSIER-2`; pins adopted in this unit | Frozen-candidate R1 from delivered `a1dc` to `6b5437`, Task 6 and delivery |
+
+No global KL closure, Ministry evidence upgrade, PDF-UA claim, live Aura result or final release follows from these rows.

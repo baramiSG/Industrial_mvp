@@ -5,6 +5,7 @@ from typing import Any
 
 import pytest
 
+from browser_tests.dossier_pages import assert_dossier_bounds
 from browser_tests.executive_pages import goto_executive
 from browser_tests.graph_pages import install_graph_routes, prepare_graph_capture
 from browser_tests.harness import (
@@ -123,7 +124,12 @@ def _executive_scene_payload(page: Any, case: Any, locale: Locale, step: str, mo
         assert chart.locator(".chart-value").get_attribute("d")
         assert chart.locator(".chart-point-value").count() == sum(isinstance(row["imports_usd_m"], (int, float)) for row in real["trade"])
         assert chart.locator(".chart-label").all_text_contents() == [str(row["year"]) for row in sorted(real["trade"], key=lambda row: row["year"])]
-        required = [target.locator(".card-header"), chart, target.locator(".chart-legend")]
+        note = target.locator(".trade-scale-note")
+        summary = target.locator("details > summary")
+        expect(note).to_have_text(strings["trade.scale_note"])
+        expect(summary).to_have_text(strings["trade.data_summary"])
+        assert target.locator("details").evaluate("node => node.open") is False
+        required = [target.locator(".card-header"), chart, target.locator(".chart-legend"), note, summary]
     elif step == "ROUTE_COMPARISON":
         simulated = api_json(page, f"/api/opportunities/{case.id}?mode=simulated")
         decision = detail["decisions"]["simulated"]
@@ -321,6 +327,19 @@ def test_governed_visual_baselines_match(
         goto_portfolio(page, mode, locale)
         select_case(page, case, mode, locale)
         popup = open_dossier_popup(page, case, mode, locale)
+        original_scroll = popup.evaluate("() => [scrollX, scrollY]")
+        assert_dossier_bounds(
+            popup,
+            case,
+            mode,
+            locale,
+            visual_session.artifact_root / "dossier-bounds" / locale.code / viewport.name / screen,
+        )
+        popup.evaluate(
+            "([left, top]) => window.scrollTo({left, top, behavior: 'instant'})",
+            original_scroll,
+        )
+        assert popup.evaluate("() => [scrollX, scrollY]") == original_scroll
         visual_session.capture(
             popup,
             locale=locale.code,

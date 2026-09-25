@@ -1,0 +1,180 @@
+{
+  "reference_rows": [
+    {
+      "table": "exclusions",
+      "code": "EX-01_HETEROGENEOUS_RESIDUAL",
+      "prefix": "يتعذر فصل المنتج التجاري عن رمز متبق شديد التباين، ولا يتوافر دليل على مستوى المنتج.",
+      "prefixBottom": 7774.34375,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-GALVALUME-001::hard_exclusion_inputs",
+          "href": "#evidence-SYN-MINISTRY-GALVALUME-001::hard_exclusion_inputs",
+          "top": 7778.09375,
+          "bottom": 7798.09375
+        }
+      ]
+    },
+    {
+      "table": "exclusions",
+      "code": "EX-02_MARKET_BELOW_MES",
+      "prefix": "السوق المستدام في سيناريو الطلب المتحفظ أدنى من الحد الأدنى للكفاءة، ولا يوجد عقد تصدير موثوق.",
+      "prefixBottom": 7859.90625,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-GALVALUME-001::hard_exclusion_inputs",
+          "href": "#evidence-SYN-MINISTRY-GALVALUME-001::hard_exclusion_inputs",
+          "top": 7863.65625,
+          "bottom": 7883.65625
+        }
+      ]
+    },
+    {
+      "table": "exclusions",
+      "code": "EX-03_UNSATISFIABLE_HARD_GATE",
+      "prefix": "يتعذر استيفاء بوابة إلزامية قانونية أو متعلقة بالسلامة أو البيئة أو الملكية الفكرية أو تأهيل العميل.",
+      "prefixBottom": 7945.46875,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-GALVALUME-001::hard_exclusion_inputs",
+          "href": "#evidence-SYN-MINISTRY-GALVALUME-001::hard_exclusion_inputs",
+          "top": 7949.21875,
+          "bottom": 7969.21875
+        }
+      ]
+    },
+    {
+      "table": "exclusions",
+      "code": "EX-04_IDLE_EQUIVALENT_CAPACITY",
+      "prefix": "يلبي الإنتاج المحلي المواصفة المطلوبة بطاقة عاطلة مؤثرة، ولم يثبت وجود إخفاق سوقي ملزم.",
+      "prefixBottom": 8031.03125,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-GALVALUME-001::hard_exclusion_inputs",
+          "href": "#evidence-SYN-MINISTRY-GALVALUME-001::hard_exclusion_inputs",
+          "top": 8034.78125,
+          "bottom": 8054.78125
+        }
+      ]
+    },
+    {
+      "table": "exclusions",
+      "code": "EX-05_TRANSITORY_OR_MEASUREMENT",
+      "prefix": "تهيمن على الفجوة الظاهرة إعادة التصدير أو طلب مشروع لمرة واحدة أو موازنة سعرية مؤقتة أو انقطاع في التصنيف.",
+      "prefixBottom": 8116.59375,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-GALVALUME-001::hard_exclusion_inputs",
+          "href": "#evidence-SYN-MINISTRY-GALVALUME-001::hard_exclusion_inputs",
+          "top": 8120.34375,
+          "bottom": 8140.34375
+        }
+      ]
+    },
+    {
+      "table": "exclusions",
+      "code": "EX-06_REDUNDANCY_OR_CROWD_OUT",
+      "prefix": "سيؤدي التدخل إلى طاقة فائضة غير مقبولة أو إلى مزاحمة منتج قائم أكثر كفاءة.",
+      "prefixBottom": 8178.40625,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-GALVALUME-001::hard_exclusion_inputs",
+          "href": "#evidence-SYN-MINISTRY-GALVALUME-001::hard_exclusion_inputs",
+          "top": 8182.15625,
+          "bottom": 8202.15625
+        }
+      ]
+    },
+    {
+      "table": "rejection-conditions",
+      "code": "hard_exclusion",
+      "prefix": "HARD_EXCLUSION_NOT_SATISFIED",
+      "prefixBottom": 8337.828125,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-GALVALUME-001::hard_exclusion_inputs",
+          "href": "#evidence-SYN-MINISTRY-GALVALUME-001::hard_exclusion_inputs",
+          "top": 8338.828125,
+          "bottom": 8358.828125
+        }
+      ]
+    },
+    {
+      "table": "rejection-conditions",
+      "code": "false_or_measurement_gap",
+      "prefix": "FALSE_OR_MEASUREMENT_NOT_ESTABLISHED",
+      "prefixBottom": 8399.640625,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-GALVALUME-001::hard_exclusion_inputs",
+          "href": "#evidence-SYN-MINISTRY-GALVALUME-001::hard_exclusion_inputs",
+          "top": 8400.640625,
+          "bottom": 8420.640625
+        }
+      ]
+    },
+    {
+      "table": "rejection-conditions",
+      "code": "equivalent_idle_qualified_supply",
+      "prefix": "EQUIVALENT_QUALIFIED_SUPPLY_NOT_ESTABLISHED",
+      "prefixBottom": 8461.453125,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-GALVALUME-001::demand",
+          "href": "#evidence-SYN-MINISTRY-GALVALUME-001::demand",
+          "top": 8462.453125,
+          "bottom": 8482.453125
+        },
+        {
+          "text": "SYN-MINISTRY-GALVALUME-001::equivalence",
+          "href": "#evidence-SYN-MINISTRY-GALVALUME-001::equivalence",
+          "top": 8486.203125,
+          "bottom": 8506.203125
+        }
+      ]
+    },
+    {
+      "table": "rejection-conditions",
+      "code": "uneconomic_at_efficient_scale",
+      "prefix": "ECONOMIC_ROUTE_EXISTS",
+      "prefixBottom": 8547.015625,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-GALVALUME-001::route_evidence",
+          "href": "#evidence-SYN-MINISTRY-GALVALUME-001::route_evidence",
+          "top": 8548.015625,
+          "bottom": 8568.015625
+        }
+      ]
+    },
+    {
+      "table": "rejection-conditions",
+      "code": "structural_overcapacity",
+      "prefix": "STRUCTURAL_OVERCAPACITY_NOT_ESTABLISHED",
+      "prefixBottom": 8608.828125,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-GALVALUME-001::hard_exclusion_inputs",
+          "href": "#evidence-SYN-MINISTRY-GALVALUME-001::hard_exclusion_inputs",
+          "top": 8609.828125,
+          "bottom": 8629.828125
+        }
+      ]
+    },
+    {
+      "table": "rejection-conditions",
+      "code": "generic_capacity_contradicted",
+      "prefix": "GENERIC_CAPACITY_NOT_CONTRADICTED",
+      "prefixBottom": 8670.640625,
+      "references": [
+        {
+          "text": "P-COMTRADE-721061-X",
+          "href": "#evidence-P-COMTRADE-721061-X",
+          "top": 8671.640625,
+          "bottom": 8691.640625
+        }
+      ]
+    }
+  ],
+  "nested_record_pages": [],
+  "failures": []
+}

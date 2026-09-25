@@ -155,6 +155,10 @@
     {
       "at": "2026-09-12T15:10:00+03:00",
       "event": "S12c delivered: plan-1-dispatch1 approved (grok); implementer-sol slot 1 (OD-9); grok implementation APPROVE zero findings on c2370180\u2026; committed 752fe24; PR #19 CI 5/5; squash-merged as 78c002f; post-merge integrity/smoke/reconstruction (1/4 + 12/12 + 1/38)/2027 tests PASS. Parent S12 complete. S13 selected next."
+    },
+    {
+      "at": "2026-09-25T13:50:05Z",
+      "event": "Additive S19 completion checkpoint: preserved stop and historical ccd1/r4 evidence; recorded mandate resumption, D-S19-1 source approval, actual 6f43/6b5437 generation, replacement 839 functional/44 PDF proof and Claude-approved canonical capture. This unit completed the two pins and finite durable/control assembly. Exact-candidate, delivery and Aura gates remain pending in s19_completion_20260925."
     }
   ],
   "active_milestone": "v0.3.0",
@@ -1059,5 +1063,99 @@
         "delivery": "NOT STAGED, COMMITTED, PUSHED OR MERGED; final candidate freeze, strict R1, two complete clean-root CI runs, exact-tree/exact-head review, PR/hosted/merge/main verification and durable final receipt remain pending."
       }
     }
+  },
+  "s19_completion_20260924": {
+    "state": "IMPLEMENTING; SOURCE_UI_GENERATION_AND_EXACT_CANDIDATE_GATES_PENDING",
+    "branch": "slice/s19-bilingual-dossier",
+    "base": "ce407db9832b61c5a8a85dfda2e3b7623da2fbc9",
+    "base_tree": "789577cbd16cec9cd6c260b5e98a5eac0ae83c20",
+    "dependency_delivery": {
+      "pr": "https://github.com/baramiSG/Industrial_mvp/pull/39",
+      "merge": "ce407db9832b61c5a8a85dfda2e3b7623da2fbc9",
+      "required_main_ci": "https://github.com/baramiSG/Industrial_mvp/actions/runs/36062918988",
+      "checks": "6/6 SUCCESS",
+      "durable_receipt": "https://github.com/baramiSG/Industrial_mvp/pull/39#issuecomment-5823329553"
+    },
+    "authority": "Owner overnight/blocker-resolution delegation; actual delivered-base acceptance 20260924-s19-actual-base-amendment-acceptance-1.json; separate authors/reviewers; prior records preserved",
+    "plan_sha256": "7749006ae850adf66fea862934c8362d9ea5c9254aaf74ded702504e69ce44d1",
+    "records": ".workflow/slices/S19-bilingual-dossier/",
+    "contract": "DecisionDossier2.0.0 retains legacy keys and adds complete detached public_decision, blocks and evidence_pack; public never loads scenario context; simulation whitelist and typed422; native Chromium Print / Save PDF",
+    "writers": {
+      "product_tests_slice_records": "/root/s19_product_implementer",
+      "assigned_task5_documentation": "/root/s19_documentation_implementer",
+      "documentation_assignment": "20260924-s19-documentation-write-assignment-1.json"
+    },
+    "review": "Independent same-model Codex review; no self-approval or Claude attribution. Source and exact-candidate implementation approval remain pending.",
+    "generation": "NOT RUN for S19. Finalize hashed source/Core/catalogue first; separately reviewed graph, manifest and canonical operations required. Do not force future snapshot count728.",
+    "delivery": "NOT STAGED, COMMITTED, PUSHED OR MERGED for S19; all required exact-tree/head and hosted/main gates remain",
+    "open_product_findings": [
+      "KL-33 structured supply",
+      "KL-84 Arabic dossier ledger",
+      "AR-V01 Arabic1024 steel/polypropylene clipping",
+      "TRADE-SCALE-01 independent scales and native observed data"
+    ],
+    "required_remaining": [
+      "All44 PDFs and every-page rendered/content/bounds/disclosure proof",
+      "Full graph semantics and all11 complete real_decision equality",
+      "128 canonical images and strict R1 geometry",
+      "Two complete resource-isolated clean-root make ci runs",
+      "Independent exact candidate/head review and delegated acceptance",
+      "PR hosted checks, merge and required main checks",
+      "AM4 EVSI/malformed-input/model-partition/test residuals",
+      "Final S21 accepted-projection live Aura and bilingual application",
+      "S22 cross-model release certification"
+    ],
+    "history_note": "All earlier pending and rejected checkpoints retain their original content; the dependency_delivery above supplies the later actual S18b result. This S19 checkpoint is not unfinished-product acceptance."
+  },
+  "s19_completion_20260925": {
+    "state": "Replacement capture approved; two pins and finite assembly completed; final candidate and delivery pending",
+    "branch": "slice/s19-bilingual-dossier",
+    "base": "ce407db9832b61c5a8a85dfda2e3b7623da2fbc9",
+    "authority": "Recorded 2026-09-25 operational mandate prospectively resumes the preserved 09:14:50 UTC stop; prior approvals remain bound to their original subjects",
+    "seats": {
+      "coordinator": "Codex",
+      "primary_implementer": "Cursor Grok 4.7 High",
+      "correction_fallback": "GPT-6 Sol High",
+      "independent_reviewer": "Claude Code"
+    },
+    "records": ".workflow/slices/S19-bilingual-dossier/",
+    "pins": {
+      "baseline_subtree": "65a71b382404295fdaf4b803cbf89d0e7a2984f6",
+      "change_ref": "S19-BILINGUAL-DOSSIER-2",
+      "index": "mission-20260925/final-assembly/baseline-pin.index"
+    },
+    "durable_copy": {
+      "historical_selected_files": 1000,
+      "historical_readme": 1,
+      "replacement_files": 508,
+      "accepted_packet": "26-completion-resumption"
+    },
+    "capture_result_acceptance": "Claude APPROVE c32c3425681e21d5383ceabc180c03b5698db108645114b660754d219663d9ee; manifest 0d05eee71eb214c65d21209b52d3933144bb888eb1ddc100f9006e9c9d3621bc",
+    "delegated_capture_acceptance": "33fa4570837bafb991872d7e3ec46c21f9dd91909b7db5df06da2b28f72d6e69",
+    "prohibited_scan": "PASS, 0 findings. External receipt mission-20260925/final-assembly/PROHIBITED-SCAN.json. Not a final-candidate gate.",
+    "assembly_scope_correction": {
+      "original_scan_scope": "The 3227-path final-assembly/PROHIBITED-SCAN.json was a Git-visible partial scope; 74 approved copied .log receipts were excluded by .gitignore:9.",
+      "complete_scope": "The external final-assembly-correction ledger and scan bind the explicit prospective union, including approved delivery-evidence and accepted-packet-26 physical paths. The coordinator alone may force-add the exact bound ignored paths to a new freeze index.",
+      "index_history": "Earlier fb883938 to 799d94a7 was an accepted prospective metadata disposition with original fb88 bytes unavailable. Today's 799d94a7 to 6451da67 failure was retained, then exact saved 799d94a7 bytes were restored by the coordinator and independently approved by actual Claude Code. No claim of restoration to fb88 or uninterrupted index preservation.",
+      "evidence": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/assembly/",
+      "final_candidate_status": "Not frozen or accepted; all Task 6 and delivery gates remain pending"
+    },
+    "static_font_test_correction": {
+      "historical_failed_candidate_tree": "c746de8510fcc4da0557cd0be4a47fc42fd0aa7d",
+      "historical_full_pytest": "FAIL: 1 failed, 3981 passed; obsolete unqualified dossier source-island font assertion. This gate remains failed.",
+      "approved_cause": "The independent r13 Arabic-font correction intentionally scoped the dossier interface-font rule to English source islands after a real Arabic computed-font failure.",
+      "independent_review": "Actual Claude Code APPROVE 0ae3903717455d5fe08e390779c0fd933b6d432b51f2baec992855ba13b25419, for the bounded test-only correction; not final implementation acceptance.",
+      "delegated_acceptance": "80ef200ce5c5e47fc76739cd3139ec44db93952983ff1ebaba4fa82b9a814001",
+      "adopted_test_sha256": "7c5badd1a51a7643561d4c40f319fab2c7620225b4344db6fa7d4b01cc925d42",
+      "new_candidate_status": "Not frozen. Fresh exact-tree Task 6 gates, including the behavioral Arabic-font check, R1, two clean-root CI runs, review and delivery remain pending."
+    },
+    "required_remaining": [
+      "Exact candidate freeze and all Task 6 checks, including actual-delivered-predecessor R1",
+      "Two complete clean-root CI runs, each with its own 44-PDF proof",
+      "Claude exact-tree/exact-head review and separate delegated acceptance",
+      "Required hosted checks, merge and main CI",
+      "Separately reviewed live Aura checkpoint"
+    ],
+    "history_note": "Historical ccd1/r4/stop records are preserved. No final-tree identity, S19 delivery or Aura completion is asserted."
   }
 }

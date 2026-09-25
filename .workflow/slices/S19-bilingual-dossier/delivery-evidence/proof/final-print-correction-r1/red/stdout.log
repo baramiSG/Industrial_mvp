@@ -1,0 +1,948 @@
+BROWSER PREFLIGHT PASS
+playwright=1.62.0
+pytest-playwright=0.9.0
+chromium=/ms-playwright/chromium-1234/chrome-linux64/chrome
+axe_sha256=c24f097bd2f451d4f933e8bc7d8d539f8672a2ebcb5cc9f9f3eec8ca9470a0c1
+font_family=FreeSerif
+font_file=/usr/share/fonts/truetype/freefont/FreeSerif.ttf
+product_fonts=IOR Noto Sans,IOR Noto Sans Arabic
+FFFF                                                                     [100%]
+=================================== FAILURES ===================================
+__ test_dossier_print_media_and_pdf_are_valid[chromium-simulated-alu-foil-ar] __
+
+browser_session = BrowserSession(page=<Page url='http://127.0.0.1:47873/?locale=ar'>, context=<BrowserContext browser=<Browser type=<Bro...Path('/proof/server.log')), artifact_dir=PosixPath('/proof'), locale=Locale(code='ar', bcp47='ar-SA', direction='rtl'))
+mode = 'simulated'
+case = Case(id='SAU-H6-760711', hs6='760711', slug='alu-foil', real_state='INVESTIGATE', public_active_state='INVESTIGATE', simulated_active_state='ADVANCE')
+locale = Locale(code='ar', bcp47='ar-SA', direction='rtl')
+
+    @pytest.mark.parametrize(
+        ("mode", "case", "locale"),
+        CASE_MODE_LOCALES,
+        ids=[
+            f"{mode}-{case.slug}-{locale.code}"
+            for mode, case, locale in CASE_MODE_LOCALES
+        ],
+    )
+    def test_dossier_print_media_and_pdf_are_valid(
+        browser_session: BrowserSession,
+        mode: Mode,
+        case: Case,
+        locale: Locale,
+    ) -> None:
+        page = browser_session.page
+        goto_portfolio(page, mode, locale)
+        select_case(page, case, mode, locale)
+        popup = open_dossier_popup(page, case, mode, locale)
+        popup.evaluate("document.fonts.ready")
+        assert popup.evaluate("document.fonts.status") == "loaded"
+        popup.emulate_media(media="print")
+        styles = popup.evaluate(
+            """() => {
+              const body = getComputedStyle(document.body);
+              const page = document.querySelector("main.page");
+              const sheet = getComputedStyle(page);
+              return {
+                print: matchMedia("print").matches,
+                bodyBackground: body.backgroundColor,
+                boxShadow: sheet.boxShadow,
+                margins: [
+                  sheet.marginTop,
+                  sheet.marginRight,
+                  sheet.marginBottom,
+                  sheet.marginLeft,
+                ],
+                maxWidth: sheet.maxWidth,
+                overflow: (
+                  document.documentElement.scrollWidth <=
+                    document.documentElement.clientWidth &&
+                  document.body.scrollWidth <= document.body.clientWidth
+                ),
+              };
+            }"""
+        )
+        assert styles == {
+            "print": True,
+            "bodyBackground": "rgb(255, 255, 255)",
+            "boxShadow": "none",
+            "margins": ["0px", "0px", "0px", "0px"],
+            "maxWidth": "none",
+            "overflow": True,
+        }
+        pdf = popup.pdf(
+            format="A4",
+            print_background=True,
+            prefer_css_page_size=True,
+        )
+        pdf_dir = browser_session.artifact_dir / "pdf"
+        pdf_dir.mkdir(parents=True, exist_ok=True)
+        pdf_path = pdf_dir / f"{case.slug}-{mode}-{locale.code}.pdf"
+        pdf_path.write_bytes(pdf)
+        assert pdf.startswith(b"%PDF-")
+        assert pdf.rstrip().endswith(b"%%EOF")
+        assert len(pdf) >= 10_240
+        page_objects = len(re.findall(rb"/Type\s*/Page\b", pdf))
+        assert page_objects >= 1
+        from io import BytesIO
+        from pypdf import PdfReader
+        reader = PdfReader(BytesIO(pdf))
+        assert len(reader.pages) == page_objects >= 2
+        texts = [sheet.extract_text() for sheet in reader.pages]
+        assert all(text.strip() and "\ufffd" not in text for text in texts)
+        for sheet in reader.pages:
+            assert abs(float(sheet.mediabox.width) - 210 * 72 / 25.4) < 1
+            assert abs(float(sheet.mediabox.height) - 297 * 72 / 25.4) < 1
+        response = popup.request.get(f"/api/opportunities/{case.id}?mode={mode}")
+        export_response = popup.request.get(f"/api/opportunities/{case.id}/dossier?mode={mode}")
+        assert response.status == export_response.status == 200
+        analysis, exported = response.json(), export_response.json()
+        assert exported["public_decision"] == analysis["real_decision"]
+        complete_text = re.sub(r"\s", "", "\n".join(texts))
+        assert case.id in complete_text
+        for passport in analysis["evidence"]:
+            assert passport["evidence_id"] in complete_text
+        if mode == "simulated":
+            assert all(locale_bundle(locale)["synthetic_labels"]["en"] in text for text in texts)
+        else:
+            assert "SYN-MINISTRY-" not in complete_text
+            assert re.sub(r"\s", "", locale_bundle(locale)["synthetic_labels"]["en"]) not in complete_text
+        for kind, payload in (("analysis", analysis), ("dossier", exported)):
+            source_path = pdf_dir / f"{case.slug}-{mode}-{kind}.json"
+            encoded = json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True) + "\n"
+            if source_path.exists():
+                assert source_path.read_text(encoding="utf-8") == encoded
+            source_path.write_text(encoded, encoding="utf-8")
+        html_response = popup.request.get(popup.url)
+        assert html_response.status == 200
+        (pdf_dir / f"{case.slug}-{mode}-{locale.code}.html").write_text(
+            html_response.text(), encoding="utf-8"
+        )
+        summary_path = (
+            pdf_dir / f"{case.slug}-{mode}-{locale.code}-summary.json"
+        )
+        summary_path.write_text(
+            json.dumps(
+                {
+                    "bytes": len(pdf),
+                    "locale": locale.code,
+                    "page_objects": page_objects,
+                    "fonts_ready": True,
+                    "public_decision_matches_source": True,
+                    "selectable_text_every_page": True,
+                    "path": str(
+                        pdf_path.relative_to(browser_session.artifact_dir)
+                    ),
+                },
+                indent=2,
+                sort_keys=True,
+            )
+            + "\n",
+            encoding="utf-8",
+        )
+    
+        # Separate complete source references from the preceding reason/narrative.
+        # Inline LTR isolates alone can interleave their wrapped lines in RTL cells.
+        reference_rows = popup.evaluate(
+            """() => [...document.querySelectorAll(
+              'table[data-dossier-table="exclusions"] tbody tr, ' +
+              'table[data-dossier-table="rejection-conditions"] tbody tr'
+            )].map(row => {
+              const cell = row.querySelector('td:last-child');
+              const anchors = [...cell.querySelectorAll(':scope > a')];
+              const prefix = document.createRange();
+              prefix.selectNodeContents(cell);
+              if (anchors.length) prefix.setEndBefore(anchors[0]);
+              const prefixRects = [...prefix.getClientRects()]
+                .filter(rect => rect.width > 0 && rect.height > 0);
+              return {
+                table: row.closest('table').dataset.dossierTable,
+                code: row.querySelector('th').textContent,
+                prefix: prefix.toString(),
+                prefixBottom: Math.max(...prefixRects.map(rect => rect.bottom)),
+                references: anchors.map(anchor => {
+                  const range = document.createRange();
+                  range.selectNodeContents(anchor);
+                  const rects = [...range.getClientRects()]
+                    .filter(rect => rect.width > 0 && rect.height > 0);
+                  return {
+                    text: anchor.textContent, href: anchor.getAttribute('href'),
+                    top: Math.min(...rects.map(rect => rect.top)),
+                    bottom: Math.max(...rects.map(rect => rect.bottom)),
+                  };
+                }),
+              };
+            })"""
+        )
+        layout_failures = []
+        gap_records = exported["blocks"]["gap"]["records"]
+        for table, source_key in (
+            ("exclusions", "hard_exclusions"),
+            ("rejection-conditions", "rejection_conditions"),
+        ):
+            rendered_rows = [row for row in reference_rows if row["table"] == table]
+            assert len(rendered_rows) == len(gap_records[source_key])
+            for row, source in zip(rendered_rows, gap_records[source_key], strict=True):
+                assert row["code"] == source["code"]
+                expected_prefix = (
+                    source["localized_narrative"][locale.code]
+                    if table == "exclusions" else source["reason_code"]
+                )
+                assert row["prefix"] == expected_prefix
+                assert [(ref["text"], ref["href"]) for ref in row["references"]] == [
+                    (evidence_id, f"#evidence-{evidence_id}")
+                    for evidence_id in source.get("evidence_ids", [])
+                ]
+                preceding_bottom = row["prefixBottom"]
+                for ref in row["references"]:
+                    if ref["top"] < preceding_bottom - 0.01:
+                        layout_failures.append({
+                            "finding": "BIDI-REF-01", "table": table,
+                            "code": row["code"], "reference": ref["text"],
+                            "preceding_bottom": preceding_bottom, "top": ref["top"],
+                        })
+                    preceding_bottom = ref["bottom"]
+    
+        nested_record_pages = []
+        counterfactual = exported.get("counterfactual")
+        q3 = (
+            counterfactual.get("q3_brownfield_versus_greenfield")
+            if isinstance(counterfactual, dict) else None
+        )
+        if locale.code == "en" and isinstance(q3, dict) and "incremental_capacity_kt" in q3:
+            strings = locale_bundle(locale)["strings"]
+            term = strings["dossier.field.q3_brownfield_versus_greenfield"]
+            field = strings["dossier.field.incremental_capacity_kt"]
+            value = q3["incremental_capacity_kt"]
+            if isinstance(value, (int, float)):
+                value_text = format(value, ".12g")
+            elif value in ("UNAVAILABLE", "NOT_CALCULABLE", "NOT_APPLICABLE"):
+                value_text = strings[f"dossier.availability.{value.lower()}"]
+            else:
+                value_text = str(value)
+            expected_fact = re.sub(r"\s", "", field + value_text)
+            nested_record_pages = [
+                {"page": index + 1, "first_fact_present": expected_fact in re.sub(r"\s", "", text)}
+                for index, text in enumerate(texts) if term in text
+            ]
+            if not nested_record_pages or not all(row["first_fact_present"] for row in nested_record_pages):
+                layout_failures.append({
+                    "finding": "NESTED-DT-01", "term": term,
+                    "expected_first_fact": field + " " + value_text,
+                    "pages": nested_record_pages,
+                })
+        (pdf_dir / f"{case.slug}-{mode}-{locale.code}-layout.json").write_text(
+            json.dumps({
+                "reference_rows": reference_rows,
+                "nested_record_pages": nested_record_pages,
+                "failures": layout_failures,
+            }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+        )
+>       assert not layout_failures, layout_failures
+E       AssertionError: [{'code': 'EX-01_HETEROGENEOUS_RESIDUAL', 'finding': 'BIDI-REF-01', 'preceding_bottom': 7535.265625, 'reference': 'SYN...I-REF-01', 'preceding_bottom': 7963.078125, 'reference': 'SYN-MINISTRY-ALU-FOIL-001::hard_exclusion_inputs', ...}, ...]
+E       assert not [{'code': 'EX-01_HETEROGENEOUS_RESIDUAL', 'finding': 'BIDI-REF-01', 'preceding_bottom': 7535.265625, 'reference': 'SYN...I-REF-01', 'preceding_bottom': 7963.078125, 'reference': 'SYN-MINISTRY-ALU-FOIL-001::hard_exclusion_inputs', ...}, ...]
+
+browser_tests/test_dossier.py:436: AssertionError
+_ test_dossier_print_media_and_pdf_are_valid[chromium-simulated-alu-profiles-ar] _
+
+browser_session = BrowserSession(page=<Page url='http://127.0.0.1:47873/?locale=ar'>, context=<BrowserContext browser=<Browser type=<Bro...Path('/proof/server.log')), artifact_dir=PosixPath('/proof'), locale=Locale(code='ar', bcp47='ar-SA', direction='rtl'))
+mode = 'simulated'
+case = Case(id='SAU-H6-760429', hs6='760429', slug='alu-profiles', real_state='INVESTIGATE', public_active_state='INVESTIGATE', simulated_active_state='ADVANCE')
+locale = Locale(code='ar', bcp47='ar-SA', direction='rtl')
+
+    @pytest.mark.parametrize(
+        ("mode", "case", "locale"),
+        CASE_MODE_LOCALES,
+        ids=[
+            f"{mode}-{case.slug}-{locale.code}"
+            for mode, case, locale in CASE_MODE_LOCALES
+        ],
+    )
+    def test_dossier_print_media_and_pdf_are_valid(
+        browser_session: BrowserSession,
+        mode: Mode,
+        case: Case,
+        locale: Locale,
+    ) -> None:
+        page = browser_session.page
+        goto_portfolio(page, mode, locale)
+        select_case(page, case, mode, locale)
+        popup = open_dossier_popup(page, case, mode, locale)
+        popup.evaluate("document.fonts.ready")
+        assert popup.evaluate("document.fonts.status") == "loaded"
+        popup.emulate_media(media="print")
+        styles = popup.evaluate(
+            """() => {
+              const body = getComputedStyle(document.body);
+              const page = document.querySelector("main.page");
+              const sheet = getComputedStyle(page);
+              return {
+                print: matchMedia("print").matches,
+                bodyBackground: body.backgroundColor,
+                boxShadow: sheet.boxShadow,
+                margins: [
+                  sheet.marginTop,
+                  sheet.marginRight,
+                  sheet.marginBottom,
+                  sheet.marginLeft,
+                ],
+                maxWidth: sheet.maxWidth,
+                overflow: (
+                  document.documentElement.scrollWidth <=
+                    document.documentElement.clientWidth &&
+                  document.body.scrollWidth <= document.body.clientWidth
+                ),
+              };
+            }"""
+        )
+        assert styles == {
+            "print": True,
+            "bodyBackground": "rgb(255, 255, 255)",
+            "boxShadow": "none",
+            "margins": ["0px", "0px", "0px", "0px"],
+            "maxWidth": "none",
+            "overflow": True,
+        }
+        pdf = popup.pdf(
+            format="A4",
+            print_background=True,
+            prefer_css_page_size=True,
+        )
+        pdf_dir = browser_session.artifact_dir / "pdf"
+        pdf_dir.mkdir(parents=True, exist_ok=True)
+        pdf_path = pdf_dir / f"{case.slug}-{mode}-{locale.code}.pdf"
+        pdf_path.write_bytes(pdf)
+        assert pdf.startswith(b"%PDF-")
+        assert pdf.rstrip().endswith(b"%%EOF")
+        assert len(pdf) >= 10_240
+        page_objects = len(re.findall(rb"/Type\s*/Page\b", pdf))
+        assert page_objects >= 1
+        from io import BytesIO
+        from pypdf import PdfReader
+        reader = PdfReader(BytesIO(pdf))
+        assert len(reader.pages) == page_objects >= 2
+        texts = [sheet.extract_text() for sheet in reader.pages]
+        assert all(text.strip() and "\ufffd" not in text for text in texts)
+        for sheet in reader.pages:
+            assert abs(float(sheet.mediabox.width) - 210 * 72 / 25.4) < 1
+            assert abs(float(sheet.mediabox.height) - 297 * 72 / 25.4) < 1
+        response = popup.request.get(f"/api/opportunities/{case.id}?mode={mode}")
+        export_response = popup.request.get(f"/api/opportunities/{case.id}/dossier?mode={mode}")
+        assert response.status == export_response.status == 200
+        analysis, exported = response.json(), export_response.json()
+        assert exported["public_decision"] == analysis["real_decision"]
+        complete_text = re.sub(r"\s", "", "\n".join(texts))
+        assert case.id in complete_text
+        for passport in analysis["evidence"]:
+            assert passport["evidence_id"] in complete_text
+        if mode == "simulated":
+            assert all(locale_bundle(locale)["synthetic_labels"]["en"] in text for text in texts)
+        else:
+            assert "SYN-MINISTRY-" not in complete_text
+            assert re.sub(r"\s", "", locale_bundle(locale)["synthetic_labels"]["en"]) not in complete_text
+        for kind, payload in (("analysis", analysis), ("dossier", exported)):
+            source_path = pdf_dir / f"{case.slug}-{mode}-{kind}.json"
+            encoded = json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True) + "\n"
+            if source_path.exists():
+                assert source_path.read_text(encoding="utf-8") == encoded
+            source_path.write_text(encoded, encoding="utf-8")
+        html_response = popup.request.get(popup.url)
+        assert html_response.status == 200
+        (pdf_dir / f"{case.slug}-{mode}-{locale.code}.html").write_text(
+            html_response.text(), encoding="utf-8"
+        )
+        summary_path = (
+            pdf_dir / f"{case.slug}-{mode}-{locale.code}-summary.json"
+        )
+        summary_path.write_text(
+            json.dumps(
+                {
+                    "bytes": len(pdf),
+                    "locale": locale.code,
+                    "page_objects": page_objects,
+                    "fonts_ready": True,
+                    "public_decision_matches_source": True,
+                    "selectable_text_every_page": True,
+                    "path": str(
+                        pdf_path.relative_to(browser_session.artifact_dir)
+                    ),
+                },
+                indent=2,
+                sort_keys=True,
+            )
+            + "\n",
+            encoding="utf-8",
+        )
+    
+        # Separate complete source references from the preceding reason/narrative.
+        # Inline LTR isolates alone can interleave their wrapped lines in RTL cells.
+        reference_rows = popup.evaluate(
+            """() => [...document.querySelectorAll(
+              'table[data-dossier-table="exclusions"] tbody tr, ' +
+              'table[data-dossier-table="rejection-conditions"] tbody tr'
+            )].map(row => {
+              const cell = row.querySelector('td:last-child');
+              const anchors = [...cell.querySelectorAll(':scope > a')];
+              const prefix = document.createRange();
+              prefix.selectNodeContents(cell);
+              if (anchors.length) prefix.setEndBefore(anchors[0]);
+              const prefixRects = [...prefix.getClientRects()]
+                .filter(rect => rect.width > 0 && rect.height > 0);
+              return {
+                table: row.closest('table').dataset.dossierTable,
+                code: row.querySelector('th').textContent,
+                prefix: prefix.toString(),
+                prefixBottom: Math.max(...prefixRects.map(rect => rect.bottom)),
+                references: anchors.map(anchor => {
+                  const range = document.createRange();
+                  range.selectNodeContents(anchor);
+                  const rects = [...range.getClientRects()]
+                    .filter(rect => rect.width > 0 && rect.height > 0);
+                  return {
+                    text: anchor.textContent, href: anchor.getAttribute('href'),
+                    top: Math.min(...rects.map(rect => rect.top)),
+                    bottom: Math.max(...rects.map(rect => rect.bottom)),
+                  };
+                }),
+              };
+            })"""
+        )
+        layout_failures = []
+        gap_records = exported["blocks"]["gap"]["records"]
+        for table, source_key in (
+            ("exclusions", "hard_exclusions"),
+            ("rejection-conditions", "rejection_conditions"),
+        ):
+            rendered_rows = [row for row in reference_rows if row["table"] == table]
+            assert len(rendered_rows) == len(gap_records[source_key])
+            for row, source in zip(rendered_rows, gap_records[source_key], strict=True):
+                assert row["code"] == source["code"]
+                expected_prefix = (
+                    source["localized_narrative"][locale.code]
+                    if table == "exclusions" else source["reason_code"]
+                )
+                assert row["prefix"] == expected_prefix
+                assert [(ref["text"], ref["href"]) for ref in row["references"]] == [
+                    (evidence_id, f"#evidence-{evidence_id}")
+                    for evidence_id in source.get("evidence_ids", [])
+                ]
+                preceding_bottom = row["prefixBottom"]
+                for ref in row["references"]:
+                    if ref["top"] < preceding_bottom - 0.01:
+                        layout_failures.append({
+                            "finding": "BIDI-REF-01", "table": table,
+                            "code": row["code"], "reference": ref["text"],
+                            "preceding_bottom": preceding_bottom, "top": ref["top"],
+                        })
+                    preceding_bottom = ref["bottom"]
+    
+        nested_record_pages = []
+        counterfactual = exported.get("counterfactual")
+        q3 = (
+            counterfactual.get("q3_brownfield_versus_greenfield")
+            if isinstance(counterfactual, dict) else None
+        )
+        if locale.code == "en" and isinstance(q3, dict) and "incremental_capacity_kt" in q3:
+            strings = locale_bundle(locale)["strings"]
+            term = strings["dossier.field.q3_brownfield_versus_greenfield"]
+            field = strings["dossier.field.incremental_capacity_kt"]
+            value = q3["incremental_capacity_kt"]
+            if isinstance(value, (int, float)):
+                value_text = format(value, ".12g")
+            elif value in ("UNAVAILABLE", "NOT_CALCULABLE", "NOT_APPLICABLE"):
+                value_text = strings[f"dossier.availability.{value.lower()}"]
+            else:
+                value_text = str(value)
+            expected_fact = re.sub(r"\s", "", field + value_text)
+            nested_record_pages = [
+                {"page": index + 1, "first_fact_present": expected_fact in re.sub(r"\s", "", text)}
+                for index, text in enumerate(texts) if term in text
+            ]
+            if not nested_record_pages or not all(row["first_fact_present"] for row in nested_record_pages):
+                layout_failures.append({
+                    "finding": "NESTED-DT-01", "term": term,
+                    "expected_first_fact": field + " " + value_text,
+                    "pages": nested_record_pages,
+                })
+        (pdf_dir / f"{case.slug}-{mode}-{locale.code}-layout.json").write_text(
+            json.dumps({
+                "reference_rows": reference_rows,
+                "nested_record_pages": nested_record_pages,
+                "failures": layout_failures,
+            }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+        )
+>       assert not layout_failures, layout_failures
+E       AssertionError: [{'code': 'EX-01_HETEROGENEOUS_RESIDUAL', 'finding': 'BIDI-REF-01', 'preceding_bottom': 10788.125, 'reference': 'SYN-M...EF-01', 'preceding_bottom': 11215.9375, 'reference': 'SYN-MINISTRY-ALU-PROFILES-001::hard_exclusion_inputs', ...}, ...]
+E       assert not [{'code': 'EX-01_HETEROGENEOUS_RESIDUAL', 'finding': 'BIDI-REF-01', 'preceding_bottom': 10788.125, 'reference': 'SYN-M...EF-01', 'preceding_bottom': 11215.9375, 'reference': 'SYN-MINISTRY-ALU-PROFILES-001::hard_exclusion_inputs', ...}, ...]
+
+browser_tests/test_dossier.py:436: AssertionError
+_ test_dossier_print_media_and_pdf_are_valid[chromium-simulated-streptomycin-api-ar] _
+
+browser_session = BrowserSession(page=<Page url='http://127.0.0.1:47873/?locale=ar'>, context=<BrowserContext browser=<Browser type=<Bro...Path('/proof/server.log')), artifact_dir=PosixPath('/proof'), locale=Locale(code='ar', bcp47='ar-SA', direction='rtl'))
+mode = 'simulated'
+case = Case(id='SAU-H6-294120', hs6='294120', slug='streptomycin-api', real_state='INVESTIGATE', public_active_state='INVESTIGATE', simulated_active_state='REJECT')
+locale = Locale(code='ar', bcp47='ar-SA', direction='rtl')
+
+    @pytest.mark.parametrize(
+        ("mode", "case", "locale"),
+        CASE_MODE_LOCALES,
+        ids=[
+            f"{mode}-{case.slug}-{locale.code}"
+            for mode, case, locale in CASE_MODE_LOCALES
+        ],
+    )
+    def test_dossier_print_media_and_pdf_are_valid(
+        browser_session: BrowserSession,
+        mode: Mode,
+        case: Case,
+        locale: Locale,
+    ) -> None:
+        page = browser_session.page
+        goto_portfolio(page, mode, locale)
+        select_case(page, case, mode, locale)
+        popup = open_dossier_popup(page, case, mode, locale)
+        popup.evaluate("document.fonts.ready")
+        assert popup.evaluate("document.fonts.status") == "loaded"
+        popup.emulate_media(media="print")
+        styles = popup.evaluate(
+            """() => {
+              const body = getComputedStyle(document.body);
+              const page = document.querySelector("main.page");
+              const sheet = getComputedStyle(page);
+              return {
+                print: matchMedia("print").matches,
+                bodyBackground: body.backgroundColor,
+                boxShadow: sheet.boxShadow,
+                margins: [
+                  sheet.marginTop,
+                  sheet.marginRight,
+                  sheet.marginBottom,
+                  sheet.marginLeft,
+                ],
+                maxWidth: sheet.maxWidth,
+                overflow: (
+                  document.documentElement.scrollWidth <=
+                    document.documentElement.clientWidth &&
+                  document.body.scrollWidth <= document.body.clientWidth
+                ),
+              };
+            }"""
+        )
+        assert styles == {
+            "print": True,
+            "bodyBackground": "rgb(255, 255, 255)",
+            "boxShadow": "none",
+            "margins": ["0px", "0px", "0px", "0px"],
+            "maxWidth": "none",
+            "overflow": True,
+        }
+        pdf = popup.pdf(
+            format="A4",
+            print_background=True,
+            prefer_css_page_size=True,
+        )
+        pdf_dir = browser_session.artifact_dir / "pdf"
+        pdf_dir.mkdir(parents=True, exist_ok=True)
+        pdf_path = pdf_dir / f"{case.slug}-{mode}-{locale.code}.pdf"
+        pdf_path.write_bytes(pdf)
+        assert pdf.startswith(b"%PDF-")
+        assert pdf.rstrip().endswith(b"%%EOF")
+        assert len(pdf) >= 10_240
+        page_objects = len(re.findall(rb"/Type\s*/Page\b", pdf))
+        assert page_objects >= 1
+        from io import BytesIO
+        from pypdf import PdfReader
+        reader = PdfReader(BytesIO(pdf))
+        assert len(reader.pages) == page_objects >= 2
+        texts = [sheet.extract_text() for sheet in reader.pages]
+        assert all(text.strip() and "\ufffd" not in text for text in texts)
+        for sheet in reader.pages:
+            assert abs(float(sheet.mediabox.width) - 210 * 72 / 25.4) < 1
+            assert abs(float(sheet.mediabox.height) - 297 * 72 / 25.4) < 1
+        response = popup.request.get(f"/api/opportunities/{case.id}?mode={mode}")
+        export_response = popup.request.get(f"/api/opportunities/{case.id}/dossier?mode={mode}")
+        assert response.status == export_response.status == 200
+        analysis, exported = response.json(), export_response.json()
+        assert exported["public_decision"] == analysis["real_decision"]
+        complete_text = re.sub(r"\s", "", "\n".join(texts))
+        assert case.id in complete_text
+        for passport in analysis["evidence"]:
+            assert passport["evidence_id"] in complete_text
+        if mode == "simulated":
+            assert all(locale_bundle(locale)["synthetic_labels"]["en"] in text for text in texts)
+        else:
+            assert "SYN-MINISTRY-" not in complete_text
+            assert re.sub(r"\s", "", locale_bundle(locale)["synthetic_labels"]["en"]) not in complete_text
+        for kind, payload in (("analysis", analysis), ("dossier", exported)):
+            source_path = pdf_dir / f"{case.slug}-{mode}-{kind}.json"
+            encoded = json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True) + "\n"
+            if source_path.exists():
+                assert source_path.read_text(encoding="utf-8") == encoded
+            source_path.write_text(encoded, encoding="utf-8")
+        html_response = popup.request.get(popup.url)
+        assert html_response.status == 200
+        (pdf_dir / f"{case.slug}-{mode}-{locale.code}.html").write_text(
+            html_response.text(), encoding="utf-8"
+        )
+        summary_path = (
+            pdf_dir / f"{case.slug}-{mode}-{locale.code}-summary.json"
+        )
+        summary_path.write_text(
+            json.dumps(
+                {
+                    "bytes": len(pdf),
+                    "locale": locale.code,
+                    "page_objects": page_objects,
+                    "fonts_ready": True,
+                    "public_decision_matches_source": True,
+                    "selectable_text_every_page": True,
+                    "path": str(
+                        pdf_path.relative_to(browser_session.artifact_dir)
+                    ),
+                },
+                indent=2,
+                sort_keys=True,
+            )
+            + "\n",
+            encoding="utf-8",
+        )
+    
+        # Separate complete source references from the preceding reason/narrative.
+        # Inline LTR isolates alone can interleave their wrapped lines in RTL cells.
+        reference_rows = popup.evaluate(
+            """() => [...document.querySelectorAll(
+              'table[data-dossier-table="exclusions"] tbody tr, ' +
+              'table[data-dossier-table="rejection-conditions"] tbody tr'
+            )].map(row => {
+              const cell = row.querySelector('td:last-child');
+              const anchors = [...cell.querySelectorAll(':scope > a')];
+              const prefix = document.createRange();
+              prefix.selectNodeContents(cell);
+              if (anchors.length) prefix.setEndBefore(anchors[0]);
+              const prefixRects = [...prefix.getClientRects()]
+                .filter(rect => rect.width > 0 && rect.height > 0);
+              return {
+                table: row.closest('table').dataset.dossierTable,
+                code: row.querySelector('th').textContent,
+                prefix: prefix.toString(),
+                prefixBottom: Math.max(...prefixRects.map(rect => rect.bottom)),
+                references: anchors.map(anchor => {
+                  const range = document.createRange();
+                  range.selectNodeContents(anchor);
+                  const rects = [...range.getClientRects()]
+                    .filter(rect => rect.width > 0 && rect.height > 0);
+                  return {
+                    text: anchor.textContent, href: anchor.getAttribute('href'),
+                    top: Math.min(...rects.map(rect => rect.top)),
+                    bottom: Math.max(...rects.map(rect => rect.bottom)),
+                  };
+                }),
+              };
+            })"""
+        )
+        layout_failures = []
+        gap_records = exported["blocks"]["gap"]["records"]
+        for table, source_key in (
+            ("exclusions", "hard_exclusions"),
+            ("rejection-conditions", "rejection_conditions"),
+        ):
+            rendered_rows = [row for row in reference_rows if row["table"] == table]
+            assert len(rendered_rows) == len(gap_records[source_key])
+            for row, source in zip(rendered_rows, gap_records[source_key], strict=True):
+                assert row["code"] == source["code"]
+                expected_prefix = (
+                    source["localized_narrative"][locale.code]
+                    if table == "exclusions" else source["reason_code"]
+                )
+                assert row["prefix"] == expected_prefix
+                assert [(ref["text"], ref["href"]) for ref in row["references"]] == [
+                    (evidence_id, f"#evidence-{evidence_id}")
+                    for evidence_id in source.get("evidence_ids", [])
+                ]
+                preceding_bottom = row["prefixBottom"]
+                for ref in row["references"]:
+                    if ref["top"] < preceding_bottom - 0.01:
+                        layout_failures.append({
+                            "finding": "BIDI-REF-01", "table": table,
+                            "code": row["code"], "reference": ref["text"],
+                            "preceding_bottom": preceding_bottom, "top": ref["top"],
+                        })
+                    preceding_bottom = ref["bottom"]
+    
+        nested_record_pages = []
+        counterfactual = exported.get("counterfactual")
+        q3 = (
+            counterfactual.get("q3_brownfield_versus_greenfield")
+            if isinstance(counterfactual, dict) else None
+        )
+        if locale.code == "en" and isinstance(q3, dict) and "incremental_capacity_kt" in q3:
+            strings = locale_bundle(locale)["strings"]
+            term = strings["dossier.field.q3_brownfield_versus_greenfield"]
+            field = strings["dossier.field.incremental_capacity_kt"]
+            value = q3["incremental_capacity_kt"]
+            if isinstance(value, (int, float)):
+                value_text = format(value, ".12g")
+            elif value in ("UNAVAILABLE", "NOT_CALCULABLE", "NOT_APPLICABLE"):
+                value_text = strings[f"dossier.availability.{value.lower()}"]
+            else:
+                value_text = str(value)
+            expected_fact = re.sub(r"\s", "", field + value_text)
+            nested_record_pages = [
+                {"page": index + 1, "first_fact_present": expected_fact in re.sub(r"\s", "", text)}
+                for index, text in enumerate(texts) if term in text
+            ]
+            if not nested_record_pages or not all(row["first_fact_present"] for row in nested_record_pages):
+                layout_failures.append({
+                    "finding": "NESTED-DT-01", "term": term,
+                    "expected_first_fact": field + " " + value_text,
+                    "pages": nested_record_pages,
+                })
+        (pdf_dir / f"{case.slug}-{mode}-{locale.code}-layout.json").write_text(
+            json.dumps({
+                "reference_rows": reference_rows,
+                "nested_record_pages": nested_record_pages,
+                "failures": layout_failures,
+            }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+        )
+>       assert not layout_failures, layout_failures
+E       AssertionError: [{'code': 'EX-01_HETEROGENEOUS_RESIDUAL', 'finding': 'BIDI-REF-01', 'preceding_bottom': 7947.1875, 'reference': 'SYN-M...-REF-01', 'preceding_bottom': 8375, 'reference': 'SYN-MINISTRY-STREPTOMYCIN-API-001::hard_exclusion_inputs', ...}, ...]
+E       assert not [{'code': 'EX-01_HETEROGENEOUS_RESIDUAL', 'finding': 'BIDI-REF-01', 'preceding_bottom': 7947.1875, 'reference': 'SYN-M...-REF-01', 'preceding_bottom': 8375, 'reference': 'SYN-MINISTRY-STREPTOMYCIN-API-001::hard_exclusion_inputs', ...}, ...]
+
+browser_tests/test_dossier.py:436: AssertionError
+___ test_dossier_print_media_and_pdf_are_valid[chromium-simulated-steel-en] ____
+
+browser_session = BrowserSession(page=<Page url='http://127.0.0.1:47873/?locale=en'>, context=<BrowserContext browser=<Browser type=<Bro...Path('/proof/server.log')), artifact_dir=PosixPath('/proof'), locale=Locale(code='en', bcp47='en-US', direction='ltr'))
+mode = 'simulated'
+case = Case(id='SAU-H0-721049', hs6='721049', slug='steel', real_state='INVESTIGATE', public_active_state='INVESTIGATE', simulated_active_state='ADVANCE')
+locale = Locale(code='en', bcp47='en-US', direction='ltr')
+
+    @pytest.mark.parametrize(
+        ("mode", "case", "locale"),
+        CASE_MODE_LOCALES,
+        ids=[
+            f"{mode}-{case.slug}-{locale.code}"
+            for mode, case, locale in CASE_MODE_LOCALES
+        ],
+    )
+    def test_dossier_print_media_and_pdf_are_valid(
+        browser_session: BrowserSession,
+        mode: Mode,
+        case: Case,
+        locale: Locale,
+    ) -> None:
+        page = browser_session.page
+        goto_portfolio(page, mode, locale)
+        select_case(page, case, mode, locale)
+        popup = open_dossier_popup(page, case, mode, locale)
+        popup.evaluate("document.fonts.ready")
+        assert popup.evaluate("document.fonts.status") == "loaded"
+        popup.emulate_media(media="print")
+        styles = popup.evaluate(
+            """() => {
+              const body = getComputedStyle(document.body);
+              const page = document.querySelector("main.page");
+              const sheet = getComputedStyle(page);
+              return {
+                print: matchMedia("print").matches,
+                bodyBackground: body.backgroundColor,
+                boxShadow: sheet.boxShadow,
+                margins: [
+                  sheet.marginTop,
+                  sheet.marginRight,
+                  sheet.marginBottom,
+                  sheet.marginLeft,
+                ],
+                maxWidth: sheet.maxWidth,
+                overflow: (
+                  document.documentElement.scrollWidth <=
+                    document.documentElement.clientWidth &&
+                  document.body.scrollWidth <= document.body.clientWidth
+                ),
+              };
+            }"""
+        )
+        assert styles == {
+            "print": True,
+            "bodyBackground": "rgb(255, 255, 255)",
+            "boxShadow": "none",
+            "margins": ["0px", "0px", "0px", "0px"],
+            "maxWidth": "none",
+            "overflow": True,
+        }
+        pdf = popup.pdf(
+            format="A4",
+            print_background=True,
+            prefer_css_page_size=True,
+        )
+        pdf_dir = browser_session.artifact_dir / "pdf"
+        pdf_dir.mkdir(parents=True, exist_ok=True)
+        pdf_path = pdf_dir / f"{case.slug}-{mode}-{locale.code}.pdf"
+        pdf_path.write_bytes(pdf)
+        assert pdf.startswith(b"%PDF-")
+        assert pdf.rstrip().endswith(b"%%EOF")
+        assert len(pdf) >= 10_240
+        page_objects = len(re.findall(rb"/Type\s*/Page\b", pdf))
+        assert page_objects >= 1
+        from io import BytesIO
+        from pypdf import PdfReader
+        reader = PdfReader(BytesIO(pdf))
+        assert len(reader.pages) == page_objects >= 2
+        texts = [sheet.extract_text() for sheet in reader.pages]
+        assert all(text.strip() and "\ufffd" not in text for text in texts)
+        for sheet in reader.pages:
+            assert abs(float(sheet.mediabox.width) - 210 * 72 / 25.4) < 1
+            assert abs(float(sheet.mediabox.height) - 297 * 72 / 25.4) < 1
+        response = popup.request.get(f"/api/opportunities/{case.id}?mode={mode}")
+        export_response = popup.request.get(f"/api/opportunities/{case.id}/dossier?mode={mode}")
+        assert response.status == export_response.status == 200
+        analysis, exported = response.json(), export_response.json()
+        assert exported["public_decision"] == analysis["real_decision"]
+        complete_text = re.sub(r"\s", "", "\n".join(texts))
+        assert case.id in complete_text
+        for passport in analysis["evidence"]:
+            assert passport["evidence_id"] in complete_text
+        if mode == "simulated":
+            assert all(locale_bundle(locale)["synthetic_labels"]["en"] in text for text in texts)
+        else:
+            assert "SYN-MINISTRY-" not in complete_text
+            assert re.sub(r"\s", "", locale_bundle(locale)["synthetic_labels"]["en"]) not in complete_text
+        for kind, payload in (("analysis", analysis), ("dossier", exported)):
+            source_path = pdf_dir / f"{case.slug}-{mode}-{kind}.json"
+            encoded = json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True) + "\n"
+            if source_path.exists():
+                assert source_path.read_text(encoding="utf-8") == encoded
+            source_path.write_text(encoded, encoding="utf-8")
+        html_response = popup.request.get(popup.url)
+        assert html_response.status == 200
+        (pdf_dir / f"{case.slug}-{mode}-{locale.code}.html").write_text(
+            html_response.text(), encoding="utf-8"
+        )
+        summary_path = (
+            pdf_dir / f"{case.slug}-{mode}-{locale.code}-summary.json"
+        )
+        summary_path.write_text(
+            json.dumps(
+                {
+                    "bytes": len(pdf),
+                    "locale": locale.code,
+                    "page_objects": page_objects,
+                    "fonts_ready": True,
+                    "public_decision_matches_source": True,
+                    "selectable_text_every_page": True,
+                    "path": str(
+                        pdf_path.relative_to(browser_session.artifact_dir)
+                    ),
+                },
+                indent=2,
+                sort_keys=True,
+            )
+            + "\n",
+            encoding="utf-8",
+        )
+    
+        # Separate complete source references from the preceding reason/narrative.
+        # Inline LTR isolates alone can interleave their wrapped lines in RTL cells.
+        reference_rows = popup.evaluate(
+            """() => [...document.querySelectorAll(
+              'table[data-dossier-table="exclusions"] tbody tr, ' +
+              'table[data-dossier-table="rejection-conditions"] tbody tr'
+            )].map(row => {
+              const cell = row.querySelector('td:last-child');
+              const anchors = [...cell.querySelectorAll(':scope > a')];
+              const prefix = document.createRange();
+              prefix.selectNodeContents(cell);
+              if (anchors.length) prefix.setEndBefore(anchors[0]);
+              const prefixRects = [...prefix.getClientRects()]
+                .filter(rect => rect.width > 0 && rect.height > 0);
+              return {
+                table: row.closest('table').dataset.dossierTable,
+                code: row.querySelector('th').textContent,
+                prefix: prefix.toString(),
+                prefixBottom: Math.max(...prefixRects.map(rect => rect.bottom)),
+                references: anchors.map(anchor => {
+                  const range = document.createRange();
+                  range.selectNodeContents(anchor);
+                  const rects = [...range.getClientRects()]
+                    .filter(rect => rect.width > 0 && rect.height > 0);
+                  return {
+                    text: anchor.textContent, href: anchor.getAttribute('href'),
+                    top: Math.min(...rects.map(rect => rect.top)),
+                    bottom: Math.max(...rects.map(rect => rect.bottom)),
+                  };
+                }),
+              };
+            })"""
+        )
+        layout_failures = []
+        gap_records = exported["blocks"]["gap"]["records"]
+        for table, source_key in (
+            ("exclusions", "hard_exclusions"),
+            ("rejection-conditions", "rejection_conditions"),
+        ):
+            rendered_rows = [row for row in reference_rows if row["table"] == table]
+            assert len(rendered_rows) == len(gap_records[source_key])
+            for row, source in zip(rendered_rows, gap_records[source_key], strict=True):
+                assert row["code"] == source["code"]
+                expected_prefix = (
+                    source["localized_narrative"][locale.code]
+                    if table == "exclusions" else source["reason_code"]
+                )
+                assert row["prefix"] == expected_prefix
+                assert [(ref["text"], ref["href"]) for ref in row["references"]] == [
+                    (evidence_id, f"#evidence-{evidence_id}")
+                    for evidence_id in source.get("evidence_ids", [])
+                ]
+                preceding_bottom = row["prefixBottom"]
+                for ref in row["references"]:
+                    if ref["top"] < preceding_bottom - 0.01:
+                        layout_failures.append({
+                            "finding": "BIDI-REF-01", "table": table,
+                            "code": row["code"], "reference": ref["text"],
+                            "preceding_bottom": preceding_bottom, "top": ref["top"],
+                        })
+                    preceding_bottom = ref["bottom"]
+    
+        nested_record_pages = []
+        counterfactual = exported.get("counterfactual")
+        q3 = (
+            counterfactual.get("q3_brownfield_versus_greenfield")
+            if isinstance(counterfactual, dict) else None
+        )
+        if locale.code == "en" and isinstance(q3, dict) and "incremental_capacity_kt" in q3:
+            strings = locale_bundle(locale)["strings"]
+            term = strings["dossier.field.q3_brownfield_versus_greenfield"]
+            field = strings["dossier.field.incremental_capacity_kt"]
+            value = q3["incremental_capacity_kt"]
+            if isinstance(value, (int, float)):
+                value_text = format(value, ".12g")
+            elif value in ("UNAVAILABLE", "NOT_CALCULABLE", "NOT_APPLICABLE"):
+                value_text = strings[f"dossier.availability.{value.lower()}"]
+            else:
+                value_text = str(value)
+            expected_fact = re.sub(r"\s", "", field + value_text)
+            nested_record_pages = [
+                {"page": index + 1, "first_fact_present": expected_fact in re.sub(r"\s", "", text)}
+                for index, text in enumerate(texts) if term in text
+            ]
+            if not nested_record_pages or not all(row["first_fact_present"] for row in nested_record_pages):
+                layout_failures.append({
+                    "finding": "NESTED-DT-01", "term": term,
+                    "expected_first_fact": field + " " + value_text,
+                    "pages": nested_record_pages,
+                })
+        (pdf_dir / f"{case.slug}-{mode}-{locale.code}-layout.json").write_text(
+            json.dumps({
+                "reference_rows": reference_rows,
+                "nested_record_pages": nested_record_pages,
+                "failures": layout_failures,
+            }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+        )
+>       assert not layout_failures, layout_failures
+E       AssertionError: [{'code': 'EX-01_HETEROGENEOUS_RESIDUAL', 'finding': 'BIDI-REF-01', 'preceding_bottom': 7511.171875, 'reference': 'SYN...BIDI-REF-01', 'preceding_bottom': 7841.109375, 'reference': 'SYN-MINISTRY-STEEL-001::hard_exclusion_inputs', ...}, ...]
+E       assert not [{'code': 'EX-01_HETEROGENEOUS_RESIDUAL', 'finding': 'BIDI-REF-01', 'preceding_bottom': 7511.171875, 'reference': 'SYN...BIDI-REF-01', 'preceding_bottom': 7841.109375, 'reference': 'SYN-MINISTRY-STEEL-001::hard_exclusion_inputs', ...}, ...]
+
+browser_tests/test_dossier.py:436: AssertionError
+=========================== short test summary info ============================
+FAILED browser_tests/test_dossier.py::test_dossier_print_media_and_pdf_are_valid[chromium-simulated-alu-foil-ar]
+FAILED browser_tests/test_dossier.py::test_dossier_print_media_and_pdf_are_valid[chromium-simulated-alu-profiles-ar]
+FAILED browser_tests/test_dossier.py::test_dossier_print_media_and_pdf_are_valid[chromium-simulated-streptomycin-api-ar]
+FAILED browser_tests/test_dossier.py::test_dossier_print_media_and_pdf_are_valid[chromium-simulated-steel-en]
+4 failed in 17.90s

@@ -1,0 +1,62 @@
+{
+  "verdict": "APPROVE",
+  "scope": "Finite proposed correction only; not implementation or output acceptance",
+  "files": [
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/final-print-correction-r1/PROPOSAL.md",
+      "sha256": "3781e3dd8e3302e8400f39b5e237637c4541bf9502ab1e8542faae899d68c9c7"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/final-print-correction-r1/PREIMAGES.json",
+      "sha256": "ee8e9c3e01d8e745421c8021e59ce321c645a8e36858b973b8827cd5a656d514"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/reviews/s19-final-steel-pp-first-visual-r1/REVIEW.md",
+      "sha256": "ea09e0984d7a9075dd7c4ae897918e7e973843b6a48c866bdcd0913f69a50375"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/reviews/s19-final-steel-pp-first-visual-r1/VIEWED-EVIDENCE.json",
+      "sha256": "5d66e7a1c6e099fea431fd72d9458827051726dec79714e5b8782b87ae0c037a"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/canonical-operation-r1/INPUT-BINDING.json",
+      "sha256": "b0277b0b4d056d5184fc3e247a530f07aa442ca8f44a10a1adc5ddd7ace1af63"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/product-implementation-r1/source-post-generation-r1/src/ior_mvp/dossier.py",
+      "sha256": "0e74a4f07b72e520fccdb487d87a1abba8b3f05ff07414a6693d4d8ba717acaa"
+    },
+    {
+      "path": "/home/barami/projects/ior-worktrees/s19/src/ior_mvp/static/css/dossier.css",
+      "sha256": "fb10139b6c278f08be68d26534633b6cb966de91533156319a9b92d7b47ef818"
+    },
+    {
+      "path": "/home/barami/projects/ior-worktrees/s19/browser_tests/test_dossier.py",
+      "sha256": "18165d46ba3cc17699f892185711a373b0969f059a64222fc3dbf17aa8f4eb61"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/product-implementation-r1/post-generation-functional-r1/pdf/steel-simulated-dossier.json",
+      "sha256": "0fc7b6f196e1b6dda0da3e5ba3fb6c850b49d6dff51dd7dc50023b6980c24b60"
+    }
+  ],
+  "direct_checks": {
+    "all_seven_preimages_match": true,
+    "all230_graph_inputs_match": true,
+    "both_proposed_paths_absent_graph_inputs": true,
+    "css_present_in_109_visual_sources": true,
+    "actual_steel_q3_incremental_capacity": 50.0
+  },
+  "required_targets": [
+    "alu-foil-simulated-ar",
+    "alu-profiles-simulated-ar",
+    "streptomycin-api-simulated-ar",
+    "steel-simulated-en"
+  ],
+  "unverified": [
+    "actual two-path repair",
+    "meaningful original-source failures and corrected passes",
+    "dt fragmentation behavior",
+    "corrected full functional/final44",
+    "canonical and exact-candidate gates"
+  ]
+}

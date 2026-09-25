@@ -1,0 +1,124 @@
+{
+  "at_utc": "2026-09-25T08:38:11.752363+00:00",
+  "status": "PASS_IMMEDIATE_PREFLIGHT",
+  "source_ledger_sha256": "6e7469e9a18db9ddb74e838e18cff984e3c3ceadc9c08098807858d9c62e36a5",
+  "input_binding_sha256": "a34a2036457332bbd6de44e74191472aa215b97bda5828295622bd215df317eb",
+  "release_sha256": "0b100c763c4367d40767b278f21c4fd4223926b73af14925ad81ae2bac11f408",
+  "source_files": 1759,
+  "source_pathset_equal": true,
+  "visual_sources": 109,
+  "fonts": 2,
+  "graph_inputs": 230,
+  "indexes": 44,
+  "generated_outputs": 6,
+  "old_baseline_files": 130,
+  "old_images_dimensions": 128,
+  "staging_empty": true,
+  "candidate_previous_artifact_result_absent_before": true,
+  "image_id": "sha256:938b534c8bac0f80012299fc0bba33c00d29f2ade02416bbc1df9d9c028f8112",
+  "stock_docker_argv": [
+    "docker",
+    "run",
+    "--rm",
+    "--network=none",
+    "--ipc=host",
+    "--user",
+    "1000:1000",
+    "--env",
+    "HOME=/tmp",
+    "--env",
+    "XDG_CACHE_HOME=/tmp/.cache",
+    "--env",
+    "PLAYWRIGHT_BROWSERS_PATH=/ms-playwright",
+    "--env",
+    "IOR_HOST_UID=1000",
+    "--env",
+    "IOR_HOST_GID=1000",
+    "--env",
+    "IOR_E2E_EXPLICIT=1",
+    "--env",
+    "IOR_E2E_ARTIFACT_DIR=/workspace/.artifacts/e2e",
+    "--env",
+    "IOR_VISUAL_MODE=update",
+    "--env",
+    "IOR_BASELINE_CHANGE_REF=S19-BILINGUAL-DOSSIER-1",
+    "--env",
+    "IOR_CANONICAL_VISUAL=1",
+    "--env",
+    "IOR_CHROMIUM_REVISION=chromium-1234",
+    "--env",
+    "PYTHONPATH=/workspace/src",
+    "--mount",
+    "type=bind,src=/home/barami/projects/ior-worktrees/s19/src,dst=/workspace/src,readonly",
+    "--mount",
+    "type=bind,src=/home/barami/projects/ior-worktrees/s19/config,dst=/workspace/config,readonly",
+    "--mount",
+    "type=bind,src=/home/barami/projects/ior-worktrees/s19/data,dst=/workspace/data,readonly",
+    "--mount",
+    "type=bind,src=/home/barami/projects/ior-worktrees/s19/docs/authority,dst=/workspace/docs/authority,readonly",
+    "--mount",
+    "type=bind,src=/home/barami/projects/ior-worktrees/s19/browser_tests,dst=/workspace/browser_tests,readonly",
+    "--mount",
+    "type=bind,src=/home/barami/projects/ior-worktrees/s19/scripts,dst=/workspace/scripts,readonly",
+    "--mount",
+    "type=bind,src=/home/barami/projects/ior-worktrees/s19/pyproject.toml,dst=/workspace/pyproject.toml,readonly",
+    "--mount",
+    "type=bind,src=/home/barami/projects/ior-worktrees/s19/uv.lock,dst=/workspace/uv.lock,readonly",
+    "--mount",
+    "type=bind,src=/home/barami/projects/ior-worktrees/s19/browser_tests/baselines/v0.3.0,dst=/workspace/browser_tests/baselines/v0.3.0",
+    "--mount",
+    "type=bind,src=/home/barami/projects/ior-worktrees/s19/.artifacts/e2e,dst=/workspace/.artifacts/e2e",
+    "sha256:938b534c8bac0f80012299fc0bba33c00d29f2ade02416bbc1df9d9c028f8112",
+    "python",
+    "browser_tests/visual_container.py",
+    "--mode",
+    "update",
+    "--change-ref",
+    "S19-BILINGUAL-DOSSIER-1"
+  ],
+  "mounts": [
+    {
+      "read_only": true,
+      "relative": "src"
+    },
+    {
+      "read_only": true,
+      "relative": "config"
+    },
+    {
+      "read_only": true,
+      "relative": "data"
+    },
+    {
+      "read_only": true,
+      "relative": "docs/authority"
+    },
+    {
+      "read_only": true,
+      "relative": "browser_tests"
+    },
+    {
+      "read_only": true,
+      "relative": "scripts"
+    },
+    {
+      "read_only": true,
+      "relative": "pyproject.toml"
+    },
+    {
+      "read_only": true,
+      "relative": "uv.lock"
+    },
+    {
+      "read_only": false,
+      "relative": "browser_tests/baselines/v0.3.0"
+    },
+    {
+      "read_only": false,
+      "relative": ".artifacts/e2e"
+    }
+  ],
+  "skills": "Refreshed allocation/currentmethod/currentreview; release-provenance and visual-regression personas; executing-plans/github-flow/verification/Sanad/al-Muhasibi/Muhasabah applied",
+  "sanad": "All immediate checks performed against actual W/frozen source and accepted final44/fullfunctional outputs; no capture yet.",
+  "muhasabah": "PASS preflight only; single capture/result unverified."
+}

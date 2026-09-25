@@ -1,0 +1,97 @@
+{
+  "reference_rows": [
+    {
+      "table": "exclusions",
+      "code": "EX-01_HETEROGENEOUS_RESIDUAL",
+      "prefix": "The commercial product cannot be separated from a highly heterogeneous residual code and no product-level evidence is available.",
+      "prefixBottom": 5276.796875,
+      "references": []
+    },
+    {
+      "table": "exclusions",
+      "code": "EX-02_MARKET_BELOW_MES",
+      "prefix": "The sustainable downside market is below minimum efficient scale and no credible export contract exists.",
+      "prefixBottom": 5330.859375,
+      "references": []
+    },
+    {
+      "table": "exclusions",
+      "code": "EX-03_UNSATISFIABLE_HARD_GATE",
+      "prefix": "A legal, safety, environmental, IP or customer-qualification hard gate cannot be satisfied.",
+      "prefixBottom": 5384.921875,
+      "references": []
+    },
+    {
+      "table": "exclusions",
+      "code": "EX-04_IDLE_EQUIVALENT_CAPACITY",
+      "prefix": "Domestic production meets the required specification with material idle capacity and no binding market failure is evidenced.",
+      "prefixBottom": 5438.984375,
+      "references": []
+    },
+    {
+      "table": "exclusions",
+      "code": "EX-05_TRANSITORY_OR_MEASUREMENT",
+      "prefix": "The apparent gap is dominated by re-export, one-off project demand, temporary price arbitrage or classification discontinuity.",
+      "prefixBottom": 5493.046875,
+      "references": []
+    },
+    {
+      "table": "exclusions",
+      "code": "EX-06_REDUNDANCY_OR_CROWD_OUT",
+      "prefix": "The intervention would create unacceptable redundant capacity or crowd out a more efficient incumbent.",
+      "prefixBottom": 5547.109375,
+      "references": []
+    },
+    {
+      "table": "rejection-conditions",
+      "code": "hard_exclusion",
+      "prefix": "HARD_EXCLUSION_NOT_SATISFIED",
+      "prefixBottom": 5671.078125,
+      "references": []
+    },
+    {
+      "table": "rejection-conditions",
+      "code": "false_or_measurement_gap",
+      "prefix": "FALSE_OR_MEASUREMENT_NOT_ESTABLISHED",
+      "prefixBottom": 5705.265625,
+      "references": []
+    },
+    {
+      "table": "rejection-conditions",
+      "code": "equivalent_idle_qualified_supply",
+      "prefix": "EQUIVALENCE_INPUT_UNAVAILABLE",
+      "prefixBottom": 5739.453125,
+      "references": []
+    },
+    {
+      "table": "rejection-conditions",
+      "code": "uneconomic_at_efficient_scale",
+      "prefix": "EFFICIENT_SCALE_ECONOMICS_UNAVAILABLE",
+      "prefixBottom": 5773.640625,
+      "references": []
+    },
+    {
+      "table": "rejection-conditions",
+      "code": "structural_overcapacity",
+      "prefix": "STRUCTURAL_OVERCAPACITY_NOT_ESTABLISHED",
+      "prefixBottom": 5807.828125,
+      "references": []
+    },
+    {
+      "table": "rejection-conditions",
+      "code": "generic_capacity_contradicted",
+      "prefix": "GENERIC_CAPACITY_NOT_CONTRADICTED",
+      "prefixBottom": 5842.015625,
+      "references": [
+        {
+          "text": "P-COMTRADE-310430-X",
+          "href": "#evidence-P-COMTRADE-310430-X",
+          "top": 5842.015625,
+          "bottom": 5861.015625
+        }
+      ]
+    }
+  ],
+  "nested_record_pages": [],
+  "failures": []
+}

@@ -525,17 +525,52 @@ The route input aligns dependent opportunity IDs, probabilities, values, shares,
 
 ## 9. Dossier projection
 
-The Decision Dossier is a projection, not a separate source of truth. It is generated from the canonical record and includes:
+DecisionDossier `2.0.0` is a detached projection of the canonical analysis, not a separate source of truth. One version applies to all eleven cases and both evidence modes. Retain all pre-existing top-level keys and their meaning, including selection metadata only for the four applicable S15 cases; historical exports are not rewritten. Absent numeric facts must not become zero in legacy prose or new fields. JSON remains locale-neutral, with governed bilingual narratives; HTML selects `en` or `ar`.
 
-- decision headline;
-- identity;
-- demand and supply conclusions;
-- gap;
-- capability route;
-- economics;
-- competition/policy;
-- evidence summary;
-- conditions and kill conditions.
+The additive fields are:
+
+| Field | Contract |
+|---|---|
+| `public_decision` | Deep copy of the complete `analysis.real_decision`, equal in public and simulated exports. It remains visible in simulated HTML/PDF. |
+| `blocks` | Ordered `decision`, `identity`, `demand`, `supply`, `gap`, `capability`, `economics`, `competition`, `ledger`, `evidence`, `conditions`, `authority`. Each block has `key`, `status`, `fields`, `records` and its branch boundary. The complete active decision is retained under `blocks.decision.records.active_decision`, not an additional top-level decision contract. |
+| `evidence_pack` | Detached original passports, whitelisted scenario inputs in simulation only, separately identified external route-8 dependencies, and honest availability/record status for supporting material, decision history and expert overrides. |
+
+`decision` supports the summary; the other eleven blocks form the full appendix. They cover methodology§15/§15.1: identity and boundary, demand, named supply, gap/false-positive controls, capability and all route alternatives, economics/intervention, competition/policy, rule ledger, supporting and contradictory evidence, conditions/kill conditions/next facts, and authority/reproducibility. Existing source extracts, revision/concordance, trade cleaning/coverage/re-export treatment, supplier diagnostics, specification spans, plant capability, demand/cash-flow inputs and national value are projected where available. Missing source detail remains unavailable; no dossier calculation fills it.
+
+### 9.1 Scalar availability and provenance
+
+Each projected scalar carries `key`, `availability`, `value`, `unit`, nullable `source_path`, `evidence_ids`, nullable localized-reason key and branch metadata. `source_path` identifies the actual canonical analysis or scenario JSON location; it is **null when the field is absent**, not a fabricated path. An existing null or availability sentinel retains its actual path. A path is not a claim that a passport exists.
+
+| Availability | Meaning |
+|---|---|
+| `AVAILABLE` | An actual value, including genuine numeric zero or a boolean in a boolean field. Numeric fields reject booleans, nonfinite numbers and coercible strings. |
+| `UNAVAILABLE` | The required observation/input is absent or unavailable. |
+| `NOT_CALCULABLE` | A computed numeric result is null, explicitly not calculable, or lacks the inputs required by the documented result field. |
+| `NOT_APPLICABLE` | The source explicitly marks the value or branch inapplicable. |
+
+Non-available values are null with a reason. Missing unsupported NPV is NOT_CALCULABLE; polypropylene's genuine zero minimum support remains zero. Imports are a public signal, not target demand. Observed nameplate capacity is not effective qualified capacity. Published `d_star` is used; `internal_d_star_before_gate` is never presented as a published metric. Unknown capability and absent downside/sunset/buyer facts remain unresolved.
+
+### 9.2 Evidence-mode boundary and scenario whitelist
+
+Public projection does not load or consult scenario context. It contains no synthetic passports, scenario input paths, EVSI value, synthetic policy warning or class-if-confirmed upgrade; legacy `synthetic_disclosure` is null. Simulated projection first requires exact opportunity ID, scenario ID/version, `source=DEMO_GENERATOR`, `evidence_class=D`, boolean synthetic flag and policy-label identity. Both policy labels come from the governed evidence policy. Blocks carry the active branch context; individual public identity/trade scalars retain their explicit public boundary. Copied producer records preserve their original public source/class/evidence attribution without adding invented branch metadata; the simulated supply block does not turn those observations into synthetic facts. HTML distinguishes observed supply from simulated capacity. Malformed required structures or conflicting context fail through the typed dossier integrity error; genuine optional absence remains available to the renderer as typed missingness.
+
+Only these stored scenario fields may enter the export; no raw scenario dump or exporter-side calculation is permitted:
+
+| Input block | Allowed fields |
+|---|---|
+| `target_specification` | `name`, `standard`, `alloy`, `temper`, `application`, `coating_mass_g_m2`, `tin_coating_g_m2`, `thickness_mm`, `thickness_um`, `width_mm`, `customer_qualification_required` |
+| `plant_line` | `nameplate_kt`, `availability`, `yield`, `qualification_share`, `market_allocation_share`, `current_utilisation` |
+| `demand` | `base_demand_kt`, `target_spec_demand_kt`, `downside_demand_kt`, `committed_demand_kt`, `announced_demand_kt`, `commitment_probability` |
+| `upgrade` | `description`, `incremental_capacity_kt`, `schedule_months` |
+| `economics` | `currency`, `cash_flows_without_support`, `hurdle_rate`, `minimum_efficient_scale_kt`, `support_instrument`, `support_required`, `reason`, `national_value` |
+| `route_evidence` | Selected row fields `route_code`, `downside_cash_flows_m_sar`, `hurdle_rate`, `basis` |
+| `buyer_allocation` | `basis` and ordered `buyers[].buyer_id`, `segment`, `quantity_kt`, subject to the existing scenario contract; IDs are synthetic identifiers, not observed customers |
+
+Each projected scenario block must resolve its exact supporting passport ID in `analysis.evidence`; a plausible suffix is insufficient. Already-evaluated route-8 foreign evidence IDs are `EXTERNAL_DEPENDENCY` references, never fabricated local passports or additions to local evidence counts. The exporter performs no cross-case traversal. Keep every original passport field, support/contradiction and reviewer status; document/page/line detail is present only where the source provides it. `NONE_RECORDED` history or overrides do not imply expert approval. HTML escapes values and attributes; only safe HTTP/HTTPS source URLs become links, with other schemes rendered as text.
+
+### 9.3 Presentation boundary
+
+The first printed A4 page is a readable decision summary backed by the complete appendix starting on page2. All conditions and kill conditions remain in the appendix; a summary may show a lead item and accurate remaining-item count. The Arabic ledger uses its existing `localized.ar` name/result/effect, while genuine source quotations remain attributed in their original language. Technical IDs remain complete and directionally isolated. Both policy labels recur on every simulated page without overlapping content; public pages contain neither. Native Chromium Print / Save PDF is the supported workflow, not a server PDF route or a PDF-UA certification claim. Core09 defines the required rendered proof.
 
 ## 10. Evolution rule
 
@@ -733,10 +768,11 @@ mapping with all four required inputs and values accepted by the existing
 calculation. Supplied null, wrong-type, empty, partial or non-convertible blocks
 fail with the existing evidence-integrity error instead of becoming null.
 
-The four S15b dossiers use version `1.3` and add
+At S15b delivery, the four selected dossiers used version `1.3` and added
 `evidence_summary.selection` with the selection id, rule version, repository
-reference and sector profile. Earlier dossier records remain version `1.2` and
-do not acquire that field.
+reference and sector profile. Earlier historical dossier records remain version `1.2` and
+do not acquire that field. The live S19 projection uses `2.0.0` for all cases under §9,
+preserving the same selection membership and meaning.
 
 ## 15. S18a executive projection contracts
 

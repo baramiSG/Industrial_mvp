@@ -1,0 +1,31 @@
+{
+  "cwd": "/home/barami/projects/ior-worktrees/s19",
+  "environment_addition": {
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "attempts": [
+    {
+      "argv": [
+        "/home/barami/projects/ior-worktrees/s19/.venv/bin/python",
+        "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/final-print-correction-r1/ACTUAL-API-COMPARISON.py"
+      ],
+      "exit_code": 1,
+      "retained_responses": 3,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "407633671bedb46a64e13afb4ac0f4d871635cd2e66899d5581daedd74d626af",
+      "classification": "Expected-output premise was wrong: CSS embedded; preserved original failure, not PASS"
+    },
+    {
+      "argv": [
+        "/home/barami/projects/ior-worktrees/s19/.venv/bin/python",
+        "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/final-print-correction-r1/ACTUAL-API-COMPARISON-r2.py"
+      ],
+      "exit_code": 0,
+      "retained_responses": 88,
+      "stdout_sha256": "dad19e0a223ac62efb997550fcfa6ce028187c4ed2eb1395dd5c97f592dfd0db",
+      "stderr_sha256": "a1b252d60289dbe6a8b47883ef7d24012efed3b81f085eea726b3a8902c1afa5",
+      "classification": "PASS under separately approved exact embedded-CSS expectation"
+    }
+  ],
+  "stderr_note": "Existing Starlette TestClient httpx deprecation warning retained; no dependency change"
+}

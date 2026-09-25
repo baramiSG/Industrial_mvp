@@ -219,7 +219,7 @@ def adapt_no_candidate_expected(original: dict[str, Any]) -> dict[str, Any]:
         assert versions["ui_strings"] == "1.3.0"
         versions["thresholds"] = "1.3.0"
         versions["decision_narratives"] = "1.4.0"
-        versions["ui_strings"] = "1.6.0"
+        versions["ui_strings"] = "1.7.0"
     assert components[-1] == {
         "id": "actions",
         "props": {"mode": "public", "opportunity_id": identity},

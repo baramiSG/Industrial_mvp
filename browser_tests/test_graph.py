@@ -842,7 +842,7 @@ def test_graph_narrow_panel_contains_controls_and_text(browser_session: BrowserS
             assert_graph_panel_contains_controls_and_text(page)
             if scenario == "steel" and mode == "public" and view == "evidence_to_change" and width == 1440:
                 page.evaluate("document.fonts.ready")
-                new_token, old_token = "ENGINE-a1dcbf0e7665", "ENGINE-7ae34188bdec"
+                new_token, old_token = "ENGINE-6b54371e99f3", "ENGINE-7ae34188bdec"
                 measure = """() => {
                   const section = document.querySelector('.graph-native-controls > section:nth-child(2)');
                   const buttons = [...section.querySelectorAll('.graph-button-list > button[data-graph-select="edge"]')];

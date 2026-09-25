@@ -1,0 +1,285 @@
+{
+  "reference_rows": [
+    {
+      "table": "exclusions",
+      "code": "EX-01_HETEROGENEOUS_RESIDUAL",
+      "prefix": "يتعذر فصل المنتج التجاري عن رمز متبق شديد التباين، ولا يتوافر دليل على مستوى المنتج.",
+      "prefixBottom": 10788.125,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-ALU-PROFILES-001::hard_exclusion_inputs",
+          "href": "#evidence-SYN-MINISTRY-ALU-PROFILES-001::hard_exclusion_inputs",
+          "top": 10768.125,
+          "bottom": 10811.875
+        }
+      ]
+    },
+    {
+      "table": "exclusions",
+      "code": "EX-02_MARKET_BELOW_MES",
+      "prefix": "السوق المستدام في سيناريو الطلب المتحفظ أدنى من الحد الأدنى للكفاءة، ولا يوجد عقد تصدير موثوق.",
+      "prefixBottom": 10873.6875,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-ALU-PROFILES-001::hard_exclusion_inputs",
+          "href": "#evidence-SYN-MINISTRY-ALU-PROFILES-001::hard_exclusion_inputs",
+          "top": 10853.6875,
+          "bottom": 10897.4375
+        }
+      ]
+    },
+    {
+      "table": "exclusions",
+      "code": "EX-03_UNSATISFIABLE_HARD_GATE",
+      "prefix": "يتعذر استيفاء بوابة إلزامية قانونية أو متعلقة بالسلامة أو البيئة أو الملكية الفكرية أو تأهيل العميل.",
+      "prefixBottom": 10959.25,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-ALU-PROFILES-001::hard_exclusion_inputs",
+          "href": "#evidence-SYN-MINISTRY-ALU-PROFILES-001::hard_exclusion_inputs",
+          "top": 10939.25,
+          "bottom": 10983
+        }
+      ]
+    },
+    {
+      "table": "exclusions",
+      "code": "EX-04_IDLE_EQUIVALENT_CAPACITY",
+      "prefix": "يلبي الإنتاج المحلي المواصفة المطلوبة بطاقة عاطلة مؤثرة، ولم يثبت وجود إخفاق سوقي ملزم.",
+      "prefixBottom": 11044.8125,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-ALU-PROFILES-001::hard_exclusion_inputs",
+          "href": "#evidence-SYN-MINISTRY-ALU-PROFILES-001::hard_exclusion_inputs",
+          "top": 11024.8125,
+          "bottom": 11068.5625
+        }
+      ]
+    },
+    {
+      "table": "exclusions",
+      "code": "EX-05_TRANSITORY_OR_MEASUREMENT",
+      "prefix": "تهيمن على الفجوة الظاهرة إعادة التصدير أو طلب مشروع لمرة واحدة أو موازنة سعرية مؤقتة أو انقطاع في التصنيف.",
+      "prefixBottom": 11130.375,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-ALU-PROFILES-001::hard_exclusion_inputs",
+          "href": "#evidence-SYN-MINISTRY-ALU-PROFILES-001::hard_exclusion_inputs",
+          "top": 11110.375,
+          "bottom": 11154.125
+        }
+      ]
+    },
+    {
+      "table": "exclusions",
+      "code": "EX-06_REDUNDANCY_OR_CROWD_OUT",
+      "prefix": "سيؤدي التدخل إلى طاقة فائضة غير مقبولة أو إلى مزاحمة منتج قائم أكثر كفاءة.",
+      "prefixBottom": 11215.9375,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-ALU-PROFILES-001::hard_exclusion_inputs",
+          "href": "#evidence-SYN-MINISTRY-ALU-PROFILES-001::hard_exclusion_inputs",
+          "top": 11195.9375,
+          "bottom": 11215.9375
+        }
+      ]
+    },
+    {
+      "table": "rejection-conditions",
+      "code": "hard_exclusion",
+      "prefix": "HARD_EXCLUSION_NOT_SATISFIED",
+      "prefixBottom": 11348.859375,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-ALU-PROFILES-001::hard_exclusion_inputs",
+          "href": "#evidence-SYN-MINISTRY-ALU-PROFILES-001::hard_exclusion_inputs",
+          "top": 11328.859375,
+          "bottom": 11372.609375
+        }
+      ]
+    },
+    {
+      "table": "rejection-conditions",
+      "code": "false_or_measurement_gap",
+      "prefix": "FALSE_OR_MEASUREMENT_NOT_ESTABLISHED",
+      "prefixBottom": 11410.671875,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-ALU-PROFILES-001::hard_exclusion_inputs",
+          "href": "#evidence-SYN-MINISTRY-ALU-PROFILES-001::hard_exclusion_inputs",
+          "top": 11390.671875,
+          "bottom": 11434.421875
+        }
+      ]
+    },
+    {
+      "table": "rejection-conditions",
+      "code": "equivalent_idle_qualified_supply",
+      "prefix": "EQUIVALENT_QUALIFIED_SUPPLY_NOT_ESTABLISHED",
+      "prefixBottom": 11472.484375,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-ALU-PROFILES-001::demand",
+          "href": "#evidence-SYN-MINISTRY-ALU-PROFILES-001::demand",
+          "top": 11452.484375,
+          "bottom": 11496.234375
+        },
+        {
+          "text": "SYN-MINISTRY-ALU-PROFILES-001::equivalence",
+          "href": "#evidence-SYN-MINISTRY-ALU-PROFILES-001::equivalence",
+          "top": 11476.234375,
+          "bottom": 11519.984375
+        }
+      ]
+    },
+    {
+      "table": "rejection-conditions",
+      "code": "uneconomic_at_efficient_scale",
+      "prefix": "ECONOMIC_ROUTE_EXISTS",
+      "prefixBottom": 11558.046875,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-ALU-PROFILES-001::route_evidence",
+          "href": "#evidence-SYN-MINISTRY-ALU-PROFILES-001::route_evidence",
+          "top": 11538.046875,
+          "bottom": 11581.796875
+        }
+      ]
+    },
+    {
+      "table": "rejection-conditions",
+      "code": "structural_overcapacity",
+      "prefix": "STRUCTURAL_OVERCAPACITY_NOT_ESTABLISHED",
+      "prefixBottom": 11619.859375,
+      "references": [
+        {
+          "text": "SYN-MINISTRY-ALU-PROFILES-001::hard_exclusion_inputs",
+          "href": "#evidence-SYN-MINISTRY-ALU-PROFILES-001::hard_exclusion_inputs",
+          "top": 11599.859375,
+          "bottom": 11643.609375
+        }
+      ]
+    },
+    {
+      "table": "rejection-conditions",
+      "code": "generic_capacity_contradicted",
+      "prefix": "GENERIC_CAPACITY_NOT_CONTRADICTED",
+      "prefixBottom": 11681.671875,
+      "references": [
+        {
+          "text": "P-COMTRADE-760429-X",
+          "href": "#evidence-P-COMTRADE-760429-X",
+          "top": 11661.671875,
+          "bottom": 11705.421875
+        }
+      ]
+    }
+  ],
+  "nested_record_pages": [],
+  "failures": [
+    {
+      "finding": "BIDI-REF-01",
+      "table": "exclusions",
+      "code": "EX-01_HETEROGENEOUS_RESIDUAL",
+      "reference": "SYN-MINISTRY-ALU-PROFILES-001::hard_exclusion_inputs",
+      "preceding_bottom": 10788.125,
+      "top": 10768.125
+    },
+    {
+      "finding": "BIDI-REF-01",
+      "table": "exclusions",
+      "code": "EX-02_MARKET_BELOW_MES",
+      "reference": "SYN-MINISTRY-ALU-PROFILES-001::hard_exclusion_inputs",
+      "preceding_bottom": 10873.6875,
+      "top": 10853.6875
+    },
+    {
+      "finding": "BIDI-REF-01",
+      "table": "exclusions",
+      "code": "EX-03_UNSATISFIABLE_HARD_GATE",
+      "reference": "SYN-MINISTRY-ALU-PROFILES-001::hard_exclusion_inputs",
+      "preceding_bottom": 10959.25,
+      "top": 10939.25
+    },
+    {
+      "finding": "BIDI-REF-01",
+      "table": "exclusions",
+      "code": "EX-04_IDLE_EQUIVALENT_CAPACITY",
+      "reference": "SYN-MINISTRY-ALU-PROFILES-001::hard_exclusion_inputs",
+      "preceding_bottom": 11044.8125,
+      "top": 11024.8125
+    },
+    {
+      "finding": "BIDI-REF-01",
+      "table": "exclusions",
+      "code": "EX-05_TRANSITORY_OR_MEASUREMENT",
+      "reference": "SYN-MINISTRY-ALU-PROFILES-001::hard_exclusion_inputs",
+      "preceding_bottom": 11130.375,
+      "top": 11110.375
+    },
+    {
+      "finding": "BIDI-REF-01",
+      "table": "exclusions",
+      "code": "EX-06_REDUNDANCY_OR_CROWD_OUT",
+      "reference": "SYN-MINISTRY-ALU-PROFILES-001::hard_exclusion_inputs",
+      "preceding_bottom": 11215.9375,
+      "top": 11195.9375
+    },
+    {
+      "finding": "BIDI-REF-01",
+      "table": "rejection-conditions",
+      "code": "hard_exclusion",
+      "reference": "SYN-MINISTRY-ALU-PROFILES-001::hard_exclusion_inputs",
+      "preceding_bottom": 11348.859375,
+      "top": 11328.859375
+    },
+    {
+      "finding": "BIDI-REF-01",
+      "table": "rejection-conditions",
+      "code": "false_or_measurement_gap",
+      "reference": "SYN-MINISTRY-ALU-PROFILES-001::hard_exclusion_inputs",
+      "preceding_bottom": 11410.671875,
+      "top": 11390.671875
+    },
+    {
+      "finding": "BIDI-REF-01",
+      "table": "rejection-conditions",
+      "code": "equivalent_idle_qualified_supply",
+      "reference": "SYN-MINISTRY-ALU-PROFILES-001::demand",
+      "preceding_bottom": 11472.484375,
+      "top": 11452.484375
+    },
+    {
+      "finding": "BIDI-REF-01",
+      "table": "rejection-conditions",
+      "code": "equivalent_idle_qualified_supply",
+      "reference": "SYN-MINISTRY-ALU-PROFILES-001::equivalence",
+      "preceding_bottom": 11496.234375,
+      "top": 11476.234375
+    },
+    {
+      "finding": "BIDI-REF-01",
+      "table": "rejection-conditions",
+      "code": "uneconomic_at_efficient_scale",
+      "reference": "SYN-MINISTRY-ALU-PROFILES-001::route_evidence",
+      "preceding_bottom": 11558.046875,
+      "top": 11538.046875
+    },
+    {
+      "finding": "BIDI-REF-01",
+      "table": "rejection-conditions",
+      "code": "structural_overcapacity",
+      "reference": "SYN-MINISTRY-ALU-PROFILES-001::hard_exclusion_inputs",
+      "preceding_bottom": 11619.859375,
+      "top": 11599.859375
+    },
+    {
+      "finding": "BIDI-REF-01",
+      "table": "rejection-conditions",
+      "code": "generic_capacity_contradicted",
+      "reference": "P-COMTRADE-760429-X",
+      "preceding_bottom": 11681.671875,
+      "top": 11661.671875
+    }
+  ]
+}

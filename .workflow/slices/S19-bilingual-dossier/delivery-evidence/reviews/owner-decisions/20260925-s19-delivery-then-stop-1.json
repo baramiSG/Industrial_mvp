@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "record_kind": "OWNER_S19_DELIVERY_THEN_STOP_SUPERSEDING_BOUNDARY",
+  "recorded_at_utc": "2026-09-25T03:54:01.319210+00:00",
+  "source": "Latest direct owner message in this Codex conversation",
+  "owner_instruction_exact": "Finish the currently authorized S19 scope and its existing review and GitHub delivery process, then STOP. This supersedes the overnight instruction to advance automatically to subsequent slices.",
+  "active_scope": "Existing authorized S19 corrections, independent review, verification, reviewed commit/push/PR; merge and main CI only under already granted delivery authority.",
+  "stop_trigger": "S19 delivery complete; then stop and wait for next owner instruction.",
+  "prohibited_expansion": [
+    "No S20 or another slice",
+    "No additional enhancements",
+    "No Ministry-facing frontend redesign inside S19"
+  ],
+  "preservation": [
+    "Do not interrupt running operations or discard work",
+    "Preserve/checkpoint existing later-slice work without advancing it",
+    "Preserve historical approvals/evidence/indexes/worktrees"
+  ],
+  "mandatory_preparation": "Coordinator and each subagent refresh relevant instructions/documents/approved plan before remaining tasks, then independently select personas and actually invoke relevant installed skills; Sanad and applicable al-muhasibi/Muhasabah self-audit; independent review retained.",
+  "final_handoff_requirements": [
+    "What S19 delivered",
+    "PR, commit and actual CI links",
+    "Pushed, merged and main verified as separate statuses",
+    "Remaining findings/obligations including Aura",
+    "Location of preserved unfinished work"
+  ],
+  "delegation_propagated_to": [
+    "/root/s19_product_implementer",
+    "/root/s19_source_reviewer",
+    "/root/s19_delivered_base_handoff"
+  ],
+  "sanad": "Direct owner instruction; existing S19 plan and delivery authority retained. No invented owner acceptance of unfinished gates.",
+  "muhasabah": "PASS for boundary record. Running producer unchanged, no later-slice work advanced, no product or approved packet modified."
+}

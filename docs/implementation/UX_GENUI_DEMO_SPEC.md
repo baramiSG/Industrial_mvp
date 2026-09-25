@@ -101,6 +101,7 @@ Benefits:
 - Opportunity selector preserves the chosen evidence mode.
 - Case cards open the workspace.
 - Dossier opens in a printable new window.
+- The dossier toolbar provides native Print / Save PDF, downloadable JSON and return to the same case, evidence mode and locale. Executive→Analyst preserves case/locale; the user explicitly chooses analyst evidence mode before export.
 - Decision JSON can be copied.
 - Navigation scrolls to page sections.
 - Screening navigation opens the summary; every queue entry drills into its
@@ -113,6 +114,16 @@ Benefits:
 - Graph empty, unavailable, transport and rejected-response states remain
   distinct and never substitute fixture or artifact rows for a failed live view.
 - All controls are keyboard reachable.
+
+### S19 dossier and shared trade presentation
+
+The dossier is an evidence-backed reading surface. Its first printed A4 page is a summary; the appendix begins on page2 and contains identity/boundary, demand, named supply, gap/false-positive controls, capability/all nine routes, economics/intervention, competition/policy, rule ledger, evidence/contradictions, conditions/kill conditions/next facts and authority. Full public conclusions stay visible alongside separately marked simulation. A lead condition may link to an accurately counted full list; do not truncate source content to fit. Missing data and NOT_CALCULABLE remain distinct from genuine zero.
+
+Arabic chrome and rule name/result/effect come from governed Arabic catalogues/narratives. Original source passages remain attributed and correctly directed; technical IDs/HS/standards/units/URLs remain complete LTR isolates. Responsive390/1024/1440 layouts must retain readable full identity and both synthetic labels without body overflow or clipped rows. Both labels repeat on every simulated printed page in a reserved non-overlapping region; public exports carry neither. Minimum print body sizes are10.5pt EN/11.5pt AR. Native Chromium Save PDF is the explicit workflow, with no server PDF or accessibility-certification claim.
+
+The shared public trade chart retains its existing curves and units in Analyst public/simulated and Executive Signal. A visible adjacent note states that each line uses its own scale, so line heights are not comparable. Closed native **View observed values** details expose a captioned table of every actual public year, value and quantity, with column/row headers, genuine zero and explicitly unavailable cells. Enter/Space toggles details and Tab reaches it with visible focus; no tooltip-only disclosure, interpolation or new calculation. In canonical Executive Signal, the note/closed summary and every prior required content box remain fully visible. Only the declared chart-local and necessary below-card flow changes are eligible for the reviewed visual refresh.
+
+AR-V01 dossier clipping and TRADE-SCALE-01 explanation/data access remain required S19 repairs until original-defect RED→GREEN, complete rendered/PDF proof and independent implementation review pass. The experience specification states acceptance requirements; it does not certify the unfinished candidate.
 
 ## 8. Arabic support
 

@@ -1,0 +1,55 @@
+{
+  "at_utc": "2026-09-25T11:26:29.794824+00:00",
+  "result": "PASS",
+  "projection_id": "GRAPH-SAU-2026-09-12-6f43b1a8c4aa",
+  "engine_run_id": "ENGINE-6b54371e99f3",
+  "projection_sha256": "85b166d6183f59a82e966665cb62add102f4a1c497ebabc7bf2e176fd8afd377",
+  "projection_bytes": 2216176,
+  "counts": {
+    "edges": 1045,
+    "edges_by_type": {
+      "ADJACENT_TO": 18,
+      "CERTIFIED_TO": 2,
+      "CONSTRAINED_BY": 119,
+      "DEPENDS_ON": 198,
+      "HAS_CAPABILITY": 342,
+      "HAS_LINE": 11,
+      "PRODUCED_BY": 18,
+      "QUALIFIED_FOR": 11,
+      "REQUIRES_SPECIFICATION": 44,
+      "SUPPORTED_BY_EVIDENCE": 245,
+      "UNLOCKED_BY": 2,
+      "USED_IN": 22,
+      "USES_PROCESS": 13
+    },
+    "nodes": 925,
+    "nodes_by_label": {
+      "Application": 22,
+      "Capability": 342,
+      "Certification": 1,
+      "Company": 12,
+      "CustomerSegment": 11,
+      "Decision": 22,
+      "Evidence": 229,
+      "Intervention": 199,
+      "Plant": 14,
+      "Process": 7,
+      "Product": 11,
+      "ProductionLine": 11,
+      "Scenario": 11,
+      "Specification": 22,
+      "Standard": 10,
+      "TariffLine": 1
+    }
+  },
+  "input_count": 230,
+  "new_paths": [
+    "data/graph/projections/GRAPH-SAU-2026-09-12-6f43b1a8c4aa/manifest.json",
+    "data/graph/projections/GRAPH-SAU-2026-09-12-6f43b1a8c4aa/projection.json"
+  ],
+  "changed_paths": [
+    "data/graph/current.json"
+  ],
+  "full_graph_equals_bound_observation": true,
+  "indexes_preserved": 45
+}

@@ -1,0 +1,200 @@
+{
+  "scope": "Exactly four source literal changes and actual regression/sensitivity proof; immutable full source is bound by HISTORICAL-CORRECT-SOURCE.json",
+  "files": {
+    "ACTUAL.patch": {
+      "sha256": "2487a702e623054e1886ffcc6396e8496f941a855f9a1bd12354eaf5bbd9e12a",
+      "bytes": 2196
+    },
+    "FINAL-CHECKS.json": {
+      "sha256": "2e983e74d71e00c012bde6d892ed5d78672065d6df84fb1473cb8e047ffed947",
+      "bytes": 1427
+    },
+    "HISTORICAL-CORRECT-SOURCE.json": {
+      "sha256": "e50e60ce9e312bfe0ea7ddf0f60c5b27853fd5b86d2369a5b870587522110447",
+      "bytes": 267569
+    },
+    "HISTORICAL-CSS-NEGATIVE.json": {
+      "sha256": "e7b47479c7902c79ccf2c7dbdafc4842c180542c32af212f38498a8f2f1b395d",
+      "bytes": 526
+    },
+    "PREPARATION.json": {
+      "sha256": "e811c998ce165edb71c7f7d215b5456846bcb93e1b7a32e781481bff36c57ddb",
+      "bytes": 1541
+    },
+    "REPORT.md": {
+      "sha256": "2b40397e9264d42437f21a4e360d4c9708a09319779c0ae5c51955685c6311b8",
+      "bytes": 1802
+    },
+    "SOURCE-SENSITIVITY.json": {
+      "sha256": "a9ff2291bca2fd97a3bc56a4f2f9d80b8566eb96974a59aa3164d5c35648729d",
+      "bytes": 2611
+    },
+    "count-green-full.log": {
+      "sha256": "02a7b93fb66f0983c3f1f84819f56bd8051e890425cc63f27b5a607a47c117cd",
+      "bytes": 99
+    },
+    "count-red.log": {
+      "sha256": "17868419a8e7599c81701eecde86b658cb64d8ed4c5fc8a5a9a3957dcce23217",
+      "bytes": 4489
+    },
+    "historical-correct-matrix/COMMAND.json": {
+      "sha256": "51d3ffbfd5101a4431c151fb1c3bee8eed5ad5ce0526c088c6dc5cb25bff8970",
+      "bytes": 1364
+    },
+    "historical-correct-matrix/COMMAND.txt": {
+      "sha256": "d4e167f3867efcf097c204d7ed1ee6a44fb900ba4ae1d3071100bf7fbc6ed971",
+      "bytes": 967
+    },
+    "historical-correct-matrix/graph-run-id-anchors-ar.json": {
+      "sha256": "e8c64335fe5a5bebdd29d243b9d0db8e0ae47ca12be5ff81aed81a4b47f6ebe6",
+      "bytes": 60291
+    },
+    "historical-correct-matrix/graph-run-id-anchors-en.json": {
+      "sha256": "26d7158d244d6fc89495a9ae5685c1f415ba47d5e3b30c46120e3d3d582c6fbb",
+      "bytes": 60043
+    },
+    "historical-correct-matrix/run-summary-functional.json": {
+      "sha256": "352fbb6c62cc44e0de3507c192c03adca65ff70714c887fa28ccb0bf9e5a5bb1",
+      "bytes": 195
+    },
+    "historical-correct-matrix/server.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "historical-correct-matrix.stderr": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "historical-correct-matrix.stdout": {
+      "sha256": "8802c8369116b4d7d24088ff93253c45434249b352abe46c2d95d0cf7a71556d",
+      "bytes": 442
+    },
+    "historical-css-negative/COMMAND.json": {
+      "sha256": "5a8164c7cc907f6e98fff6415bdcc685e070105d40e07f353f10dddc83af1d00",
+      "bytes": 1387
+    },
+    "historical-css-negative/COMMAND.txt": {
+      "sha256": "932bf1466857d64dea5117531c25601f88f2f25529e6c125c1698f124f843a47",
+      "bytes": 998
+    },
+    "historical-css-negative/graph-run-id-anchors-ar.json": {
+      "sha256": "9ca2adf7352650fdcc086ffc2468bacd9bc387f5e751b3a53068bd0abdd21d97",
+      "bytes": 60295
+    },
+    "historical-css-negative/graph-run-id-anchors-en.json": {
+      "sha256": "84f9946b9b065cd081f0b7e2e623a0f640953f11a29465251a8498e95b05a431",
+      "bytes": 60039
+    },
+    "historical-css-negative/playwright/browser-tests-test-graph-py-test-graph-narrow-panel-contains-controls-and-text-chromium-steel-1440-ar/test-failed-1.png": {
+      "sha256": "ba35172ac6eead35216c99ea0d44250a60577b84e254d4d0d80793c3670eb499",
+      "bytes": 261373
+    },
+    "historical-css-negative/playwright/browser-tests-test-graph-py-test-graph-narrow-panel-contains-controls-and-text-chromium-steel-1440-ar/trace.zip": {
+      "sha256": "0833578ff1a903c3657bb76d8cb84088bfb9e4ca803c8a770fb9a149f16be18a",
+      "bytes": 7171020
+    },
+    "historical-css-negative/playwright/browser-tests-test-graph-py-test-graph-narrow-panel-contains-controls-and-text-chromium-steel-1440-en/test-failed-1.png": {
+      "sha256": "c2592c564ce16f78cb5957f1299b40ec19bec3c2aba3900f0eb7bb0b7ac49c1d",
+      "bytes": 280920
+    },
+    "historical-css-negative/playwright/browser-tests-test-graph-py-test-graph-narrow-panel-contains-controls-and-text-chromium-steel-1440-en/trace.zip": {
+      "sha256": "937aeffdc54b2babb0788355942a25e35c1a2922605d9e92b4d3d3e11d1845de",
+      "bytes": 7220843
+    },
+    "historical-css-negative/run-summary-functional.json": {
+      "sha256": "3bb3e25d1d707ee3eb26ce0a5de00674372cb7ba61dda1178b6bb12aaf61d127",
+      "bytes": 193
+    },
+    "historical-css-negative/server.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "historical-css-negative.stderr": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "historical-css-negative.stdout": {
+      "sha256": "ed34dfc02ea153f7576767f86d8026f3162e906687d59074d053375e5a8ea77a",
+      "bytes": 15014
+    },
+    "postimages/browser_tests/test_graph.py": {
+      "sha256": "2b37163125581c45cf8067c04257dc9b7c3c0dd6d0bc984883ec853a44ce454c",
+      "bytes": 50016
+    },
+    "postimages/tests/test_integrity_contract.py": {
+      "sha256": "ee966276b75722536a71b0c0e02d7ed7ba4be3e615ce4c87ca2df59292326d44",
+      "bytes": 52112
+    },
+    "postimages/tests/test_s17_generation.py": {
+      "sha256": "2da86d1e5fa9c10cd35bd033b2855751a035213ab67365d86ed81388b6b1bfc5",
+      "bytes": 3736
+    },
+    "postimages/tests/test_s17_status_docs.py": {
+      "sha256": "98cab27514fc6bad963e54a89d6f7b56ce7d7e10585a19443304f9cb5573e55a",
+      "bytes": 1812
+    },
+    "preimages/browser_tests/test_graph.py": {
+      "sha256": "6dc0d514a999193b857681e06df4bece2fe0f306c8e8069ff1ff30c3850066b0",
+      "bytes": 50016
+    },
+    "preimages/src/ior_mvp/static/css/graph.css": {
+      "sha256": "3c45f10453d0abcd0ce8a0d62e0e063e9f3df1a70464b63d0ab23e3bbaf97779",
+      "bytes": 5602
+    },
+    "preimages/tests/test_integrity_contract.py": {
+      "sha256": "f039c59767632cbea4bc89c0119a2a1542f011bd3f26eb29d0e2dd5300b7655e",
+      "bytes": 52112
+    },
+    "preimages/tests/test_s17_generation.py": {
+      "sha256": "648fe31e55959e88d52e76e36a1adc49a80e3a25bf9599a242ba30ee45d57a9e",
+      "bytes": 3736
+    },
+    "preimages/tests/test_s17_status_docs.py": {
+      "sha256": "70e12138e84c216915ff253134ff8ca43faebd72bc4be5887a5b51d8a09a0b56",
+      "bytes": 1812
+    },
+    "token-red/COMMAND.json": {
+      "sha256": "867a219ce1c7e45a88d87e533163875051975953ac1812ecf449e3d4d0894768",
+      "bytes": 1347
+    },
+    "token-red/COMMAND.txt": {
+      "sha256": "af01989f6f2510d61ea62f8fe9ea80f8a518e977eb7a077d417baacb3a12fdf8",
+      "bytes": 958
+    },
+    "token-red/playwright/browser-tests-test-graph-py-test-graph-narrow-panel-contains-controls-and-text-chromium-steel-1440-ar/test-failed-1.png": {
+      "sha256": "ba35172ac6eead35216c99ea0d44250a60577b84e254d4d0d80793c3670eb499",
+      "bytes": 261373
+    },
+    "token-red/playwright/browser-tests-test-graph-py-test-graph-narrow-panel-contains-controls-and-text-chromium-steel-1440-ar/trace.zip": {
+      "sha256": "e3beb567e0cb44a58357bef6168f0cf0a6e86f57ea9460078c419e5b27112e82",
+      "bytes": 7080254
+    },
+    "token-red/playwright/browser-tests-test-graph-py-test-graph-narrow-panel-contains-controls-and-text-chromium-steel-1440-en/test-failed-1.png": {
+      "sha256": "c2592c564ce16f78cb5957f1299b40ec19bec3c2aba3900f0eb7bb0b7ac49c1d",
+      "bytes": 280920
+    },
+    "token-red/playwright/browser-tests-test-graph-py-test-graph-narrow-panel-contains-controls-and-text-chromium-steel-1440-en/trace.zip": {
+      "sha256": "713add28040287b45c0ef8e778a4804af7a8499cce1961ead192f5672d86eadb",
+      "bytes": 6852037
+    },
+    "token-red/run-summary-functional.json": {
+      "sha256": "3bb3e25d1d707ee3eb26ce0a5de00674372cb7ba61dda1178b6bb12aaf61d127",
+      "bytes": 193
+    },
+    "token-red/server.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "token-red.stderr": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "token-red.stdout": {
+      "sha256": "8c472226da022b5ce0065ee5ea8ed9f7c60b704c157576a077003bdde21134cb",
+      "bytes": 8649
+    }
+  },
+  "status": "AUTHOR_READY_FOR_INDEPENDENT_REVIEW",
+  "sanad": "Every evidence file has a SHA-256 and byte count; frozen source ledger separately binds 1759 files.",
+  "muhasabah": "Verified bounded unit only; final functional/PDF/canonical gates pending."
+}

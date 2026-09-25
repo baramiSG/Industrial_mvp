@@ -1,0 +1,109 @@
+{
+  "reference_rows": [
+    {
+      "table": "exclusions",
+      "code": "EX-01_HETEROGENEOUS_RESIDUAL",
+      "prefix": "يتعذر فصل المنتج التجاري عن رمز متبق شديد التباين، ولا يتوافر دليل على مستوى المنتج.",
+      "prefixBottom": 6550.1875,
+      "references": []
+    },
+    {
+      "table": "exclusions",
+      "code": "EX-02_MARKET_BELOW_MES",
+      "prefix": "السوق المستدام في سيناريو الطلب المتحفظ أدنى من الحد الأدنى للكفاءة، ولا يوجد عقد تصدير موثوق.",
+      "prefixBottom": 6612,
+      "references": []
+    },
+    {
+      "table": "exclusions",
+      "code": "EX-03_UNSATISFIABLE_HARD_GATE",
+      "prefix": "يتعذر استيفاء بوابة إلزامية قانونية أو متعلقة بالسلامة أو البيئة أو الملكية الفكرية أو تأهيل العميل.",
+      "prefixBottom": 6673.8125,
+      "references": []
+    },
+    {
+      "table": "exclusions",
+      "code": "EX-04_IDLE_EQUIVALENT_CAPACITY",
+      "prefix": "يلبي الإنتاج المحلي المواصفة المطلوبة بطاقة عاطلة مؤثرة، ولم يثبت وجود إخفاق سوقي ملزم.",
+      "prefixBottom": 6735.625,
+      "references": []
+    },
+    {
+      "table": "exclusions",
+      "code": "EX-05_TRANSITORY_OR_MEASUREMENT",
+      "prefix": "تهيمن على الفجوة الظاهرة إعادة التصدير أو طلب مشروع لمرة واحدة أو موازنة سعرية مؤقتة أو انقطاع في التصنيف.",
+      "prefixBottom": 6797.4375,
+      "references": []
+    },
+    {
+      "table": "exclusions",
+      "code": "EX-06_REDUNDANCY_OR_CROWD_OUT",
+      "prefix": "سيؤدي التدخل إلى طاقة فائضة غير مقبولة أو إلى مزاحمة منتج قائم أكثر كفاءة.",
+      "prefixBottom": 6835.5,
+      "references": []
+    },
+    {
+      "table": "rejection-conditions",
+      "code": "hard_exclusion",
+      "prefix": "HARD_EXCLUSION_NOT_SATISFIED",
+      "prefixBottom": 6971.171875,
+      "references": []
+    },
+    {
+      "table": "rejection-conditions",
+      "code": "false_or_measurement_gap",
+      "prefix": "FALSE_OR_MEASUREMENT_NOT_ESTABLISHED",
+      "prefixBottom": 7009.234375,
+      "references": []
+    },
+    {
+      "table": "rejection-conditions",
+      "code": "equivalent_idle_qualified_supply",
+      "prefix": "EQUIVALENCE_INPUT_UNAVAILABLE",
+      "prefixBottom": 7047.296875,
+      "references": []
+    },
+    {
+      "table": "rejection-conditions",
+      "code": "uneconomic_at_efficient_scale",
+      "prefix": "EFFICIENT_SCALE_ECONOMICS_UNAVAILABLE",
+      "prefixBottom": 7085.359375,
+      "references": []
+    },
+    {
+      "table": "rejection-conditions",
+      "code": "structural_overcapacity",
+      "prefix": "STRUCTURAL_OVERCAPACITY_NOT_ESTABLISHED",
+      "prefixBottom": 7123.421875,
+      "references": []
+    },
+    {
+      "table": "rejection-conditions",
+      "code": "generic_capacity_contradicted",
+      "prefix": "GENERIC_CAPACITY_CONTRADICTED",
+      "prefixBottom": 7161.484375,
+      "references": [
+        {
+          "text": "P-ADVANCED",
+          "href": "#evidence-P-ADVANCED",
+          "top": 7162.484375,
+          "bottom": 7182.484375
+        },
+        {
+          "text": "P-TASNEE",
+          "href": "#evidence-P-TASNEE",
+          "top": 7186.234375,
+          "bottom": 7206.234375
+        },
+        {
+          "text": "P-WITS-390210",
+          "href": "#evidence-P-WITS-390210",
+          "top": 7209.984375,
+          "bottom": 7229.984375
+        }
+      ]
+    }
+  ],
+  "nested_record_pages": [],
+  "failures": []
+}

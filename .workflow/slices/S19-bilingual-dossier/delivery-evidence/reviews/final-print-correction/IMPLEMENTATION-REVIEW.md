@@ -1,0 +1,25 @@
+# Finite final-print implementation review
+
+Verdict: **APPROVE** the exact CSS/test correction, its regression evidence and preservation proof. Together with the separately authored four-target visual APPROVE, the two reported defects are closed in those targets. This permits the already-required full functional/final44 verification after coordinator acceptance; it does not approve that future output, canonical execution or the whole candidate.
+
+## Reviewed source and regression
+
+Refreshed the accepted Task3/4 requirements, correction proposal3781e3dd, delegated acceptance5bbe4c36, embedded-CSS addendum and S19-only stop boundary. Persona: independent bilingual paged-media and regression reviewer. Applied strict-reviewer, verification-before-completion, PDF, Sanad, al-Muhasibi and Muhasabah. Only external review evidence was written.
+
+Directly checked frozen SOURCE-GREEN18180060 and all1,759 source files. Exactly the two permitted paths change. CSS contains only the three scoped block selectors and the print nested-dt break constraint. No fonts, dimensions, policy, record content or graph-input behavior changes. In the test, all41 inherited statements remain an identical AST prefix; signature/decorators and every other module AST node remain exact. Only the existing named test gains assertions; no inventory or test-matrix expansion.
+
+The new assertions compare rendered row count/code, original source narrative/reason, ordered evidence text and hrefs against the actual exported source. Range bounds require each complete reference to follow the complete preceding text/reference vertically, so they detect interleaving without relying on a CSS string. The PDF assertion compares the catalogue term and complete first field/value against the actual source q3 record on one emitted English page. Optional absent/nonmapping q3 remains outside that conditional assertion; all existing supplied q3 values use the covered numeric or unavailable forms.
+
+Original-CSS and corrected snapshots differ only by CSS, with the same strengthened test bytes. Actual pinned-browser commands yielded4FAIL in17.90s then4PASS in16.91s, both with empty stderr. Independently recalculated the retained layout coordinates:51 reference-separation failures become0. Independently extracted both actual steel PDFs: the heading alone on RED page24 becomes heading plus Incremental capacity50 on GREEN page25. These are meaningful assertions against observed product failures, not expected values derived from rendered output.
+
+## Output and preservation
+
+The independent rendered reviewer directly viewed14 native contexts across all four specified reports and approved both defect closures: targeted-review-r1/REVIEW.md cd6e7ba5. I read and hash-bound that separate verdict; I did not duplicate or claim those14 views as mine. Direct strict-record inspection confirms4 reports/251pages/issues[]. The exact702-entry author receipt59b5b710 was fully rehashed, including output/source/tool evidence.
+
+The original88-response attempt correctly stopped because the proposal incorrectly assumed externally linked CSS; that failure and my mistaken prior concurrence remain explicit in the additive expectation record137b9bfb. The authorized corrected comparator uses the actual unpatched application and persisted graph. I independently re-compared all88 retained bodies:22 dossier JSON and22 analysis JSON are byte-identical to the reviewed generated successor; each44HTML equals its predecessor after exactly one complete bound CSS substitution inside its sole style block, with all other bytes exact. All22 complete public decisions equal the analyses and earlier public decisions. The comparator's stderr contains the existing Starlette/httpx deprecation warning, not an assertion failure; no dependency change is indicated or authorized.
+
+Direct live/frozen hash and pathset checks confirm1,759 source files,230 graph inputs, six generated postimages and44 protected indexes unchanged beyond the two approved source hashes; staging is empty. No graph replay is needed. Corrected whole-source/visual-source bindings must replace the earlier binding before canonical allocation; unchanged image/fonts/path membership/budgets and actual16 helper-call requirement remain.
+
+Sanad: IMPLEMENTATION-EVIDENCE.json binds direct source/AST/hash/API/PDF/layout checks and distinguishes the separate visual review. INDEPENDENT-REGRESSION-CHECK.json records rederived51→0 geometry and actual24→25 adjacency. Assumptions: four targets do not establish all44 rendered outputs. Risk: layout changes can repaginate other reports, so the required complete functional/strict/raster/manual proof remains. Unverified: corrected complete44, canonical capture, exact-candidate/two-root CI and delivery. Prior failures remain historical evidence.
+
+Muhasabah: **PASS for this bounded implementation review**. No remaining finding in the submitted two-path unit; no unsupported full-product or future-gate success claim. S19-only delivery-then-stop boundary remains.

@@ -1,0 +1,20 @@
+--- S18b/comparison.py
++++ S19/comparison.py
+@@ -38,7 +38,7 @@
+             require(p['engine_run_id'] == run, 'own run'); p['engine_run_id'] = 'OWN-RUN'
+     g['projection_id'] = 'OWN-PROJECTION'; g['engine']['engine_run_id'] = 'OWN-RUN'
+     g['engine']['authority_basis_sha256'] = 'VERIFIED-INPUT-AUTHORITY'
+-    del g['inputs'] # compared separately, exactly, with only the five authorized rows changed
++    del g['inputs'] # compared separately and exactly against the S19 approved input-row binding
+     nodes = Counter(J(n) for n in g.pop('nodes')); edges = Counter(J(e) for e in g.pop('edges'))
+     return J(g), nodes, edges
+ require(normalize_graph(old['graph']) == normalize_graph(new['graph']), 'complete graph semantics')
+@@ -53,7 +53,7 @@
+         require(before['mode'] == after['mode'] == 'public' and sim['mode'] == 'simulated', 'modes')
+         require(before['simulation_decision'] is None and J(before['active_decision']) == J(before['real_decision']), 'public consistency')
+         require(J(sim['active_decision']) == J(sim['simulation_decision']), 'simulation consistency')
+-    for side, raw, version in ((A, old['graph'], '1.5.0'), (B, new['graph'], '1.6.0')):
++    for side, raw, version in ((A, old['graph'], '1.6.0'), (B, new['graph'], '1.7.0')):
+         for phase in ('public_before','simulated','public_after'):
+             require(side[case][phase]['authority']['config_versions']['ui_strings'] == version, 'catalogue transition')
+ a, b = deepcopy(A), deepcopy(B)

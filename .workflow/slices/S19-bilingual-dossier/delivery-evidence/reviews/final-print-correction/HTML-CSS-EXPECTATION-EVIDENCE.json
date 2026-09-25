@@ -1,0 +1,36 @@
+{
+  "verdict": "APPROVE",
+  "scope": "Correct erroneous equality expectation only; no source or result approval",
+  "diagnosis_sha256": "785e20c459b87b40279fa9798d0bcb2892f3179595aae774193582d78710ea82",
+  "original_failed_attempt_stderr_sha256": "407633671bedb46a64e13afb4ac0f4d871635cd2e66899d5581daedd74d626af",
+  "css_before_sha256": "fb10139b6c278f08be68d26534633b6cb966de91533156319a9b92d7b47ef818",
+  "css_after_sha256": "d124607ce4466fad488678c33aacffd248b198f77d7a9b1097ccf39d9fc63b13",
+  "independent_four_actual_html_checks": [
+    {
+      "html": "alu-foil-simulated-ar.html",
+      "before_sha256": "59688e88642a4a72c76d5c9283c918876c94b80c5c0ed0bc550ead07bbbff443",
+      "after_sha256": "5d4423268e248d2cc0b30438b72dcc262c2c23bd28c915335e6cc82797745103",
+      "exact_one_full_css_substitution_inside_sole_style": true
+    },
+    {
+      "html": "alu-profiles-simulated-ar.html",
+      "before_sha256": "8eebdc284ef7b1c22809e7f7e00528385bf6cc27ec9c60b85bcbd6346cf0bcd9",
+      "after_sha256": "d2204b5e64c0854a5e3ebe1ae87d5fe74465a13ed2e33c9cf3b15a399445b0b1",
+      "exact_one_full_css_substitution_inside_sole_style": true
+    },
+    {
+      "html": "steel-simulated-en.html",
+      "before_sha256": "dcd9ae72fcabc5054568c382b381146cd36c19a655cd03e55cbe67cc4f02028b",
+      "after_sha256": "a29ff5896617306fc34dcd9d694482837f913e04167a81064ee960c9a293e25d",
+      "exact_one_full_css_substitution_inside_sole_style": true
+    },
+    {
+      "html": "streptomycin-api-simulated-ar.html",
+      "before_sha256": "4fd3dc569ca1fa25049df3a730af3adb87429f5aa7338e545f1339c86c0ec38e",
+      "after_sha256": "3f128b6005487e7289116fa4d7f7ef6a01efaab9443d591e0ad8dd5cbabfc915",
+      "exact_one_full_css_substitution_inside_sole_style": true
+    }
+  ],
+  "required_full_comparison": "22 dossier JSON and22 analysis JSON byte-equal;44 HTML equals predecessor after exactly one full bound CSS substitution in sole style block; complete public decisions equal; other bytes exact",
+  "full88_status": "Pending; original comparison stopped at first HTML mismatch"
+}

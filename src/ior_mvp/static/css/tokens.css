@@ -353,4 +353,32 @@
       --font-size-hero: var(--font-size-hero-mobile);
     }
   }
+
+  /* S19 document-only tokens. */
+  :root {
+    --size-dossier-reading: 1100px;
+    --size-dossier-full: 100%;
+    --layout-dossier-summary: repeat(2, minmax(0, 1fr));
+    --layout-dossier-record: minmax(0, 1fr) minmax(0, 2fr);
+    --size-dossier-field-label: 34%;
+    --size-dossier-field-unit: 12%;
+    --layout-dossier-table: table;
+    --layout-dossier-row: table-row;
+    --layout-dossier-cell: table-cell;
+    --layout-dossier-tbody: table-row-group;
+    --layout-dossier-thead: table-header-group;
+    --size-dossier-print-margin: 14mm;
+    --size-dossier-print-bottom: 27mm;
+    --size-dossier-footer-gap: 5mm;
+    --font-size-dossier-print: 10.5pt;
+    --font-size-dossier-print-ar: 11.5pt;
+    --font-size-dossier-print-title: 17pt;
+    --font-size-dossier-footer: 11.5pt;
+    --font-leading-dossier-print: 1.42;
+    --font-leading-dossier-print-ar: 1.55;
+    --space-dossier-print: 5pt;
+  }
+  @media screen and (max-width: 700px) {
+    :root { --layout-dossier-summary: minmax(0, 1fr); --layout-dossier-record: minmax(0, 1fr); --size-dossier-field-label: 100%; --size-dossier-field-unit: 100%; --layout-dossier-table: block; --layout-dossier-row: block; --layout-dossier-cell: block; --layout-dossier-tbody: block; --layout-dossier-thead: block; }
+  }
 }

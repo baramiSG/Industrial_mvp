@@ -1,0 +1,14 @@
+{
+  "prior_script": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/final-print-correction-r1/ACTUAL-API-COMPARISON-r2.py",
+  "prior_sha256": "c384e955a030071ce1a3af5710c98cdc34f63bc17916e34603bf91c47f717382",
+  "literal_path_substitutions": {
+    "O = E / 's19/final-print-correction-r1'": "O = E / 's19/nested-record-correction-r1/accepted-first-scalar-r1'",
+    "'SOURCE-GREEN.json'": "'SOURCE.json'",
+    "old_css = (O / 'preimages/src/ior_mvp/static/css/dossier.css').read_bytes()": "old_css = (E / 's19/final-print-correction-r1/preimages/src/ior_mvp/static/css/dossier.css').read_bytes()",
+    "'source-green/src/ior_mvp/static/css/dossier.css'": "'source/src/ior_mvp/static/css/dossier.css'",
+    "'actual-api-outputs-r2'": "'actual-api-outputs'",
+    "'ACTUAL-API-COMPARISON-r2.json'": "'ACTUAL-API-COMPARISON.json'"
+  },
+  "algorithm_changed": false,
+  "purpose": "Reuse exact accepted unpatched88probe; supplementary exactcurrentCSSdelta comparison follows"
+}

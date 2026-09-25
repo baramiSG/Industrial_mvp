@@ -1,0 +1,2045 @@
+.F...........................FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF [ 51%]
+FFFFFFFFFFFFFFFFFFFFFFF............F.....FF.F............F.....FF.F      [100%]
+=================================== FAILURES ===================================
+__________ test_public_decision_is_never_changed_by_export[simulated] __________
+
+mode = 'simulated'
+
+    @pytest.mark.parametrize('mode',['public','simulated'])
+    def test_public_decision_is_never_changed_by_export(mode):
+        analysis=analyze('SAU-H0-721049',mode); before=deepcopy(analysis)
+>       dossier=build_dossier(analysis)
+                ^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_dossier_isolation.py:12: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/ior_mvp/dossier.py:188: in build_dossier
+    result.update(project_dossier(analysis, scenario))
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/ior_mvp/dossier_projection.py:98: in project_dossier
+    add(block,key,value,f'scenario.synthetic_inputs.{name}.{key}',unit,numeric=numeric,
+src/ior_mvp/dossier_projection.py:88: in add
+    blocks[block]['fields'].append(scalar(key,value,path,unit,numeric=numeric,branch=tag or active,evidence_ids=ids,missing_status=missing_status))
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+key = 'thickness_mm', value = [0.7, 1.5]
+source_path = 'scenario.synthetic_inputs.target_specification.thickness_mm'
+unit = 'mm'
+
+    def scalar(key: str, value: Any, source_path: str, unit: str | None=None,
+               *, numeric: bool=False, evidence_ids: list | None=None,
+               branch: dict | None=None, missing_status: str='UNAVAILABLE') -> dict:
+        if value is MISSING:
+            status=missing_status; value=None
+        elif value is None:
+            status='NOT_CALCULABLE' if numeric else 'UNAVAILABLE'
+        elif isinstance(value,str) and value in ('UNAVAILABLE','NOT_CALCULABLE','NOT_APPLICABLE'):
+            status=value;value=None
+        else:
+            status='AVAILABLE'
+            if numeric and (isinstance(value,bool) or not isinstance(value,(int,float)) or not isfinite(value)):
+>               raise DossierIntegrityError(f'Dossier finite numeric value required: {source_path}')
+E               ior_mvp.dossier_validation.DossierIntegrityError: Dossier finite numeric value required: scenario.synthetic_inputs.target_specification.thickness_mm
+
+src/ior_mvp/dossier_projection.py:45: DossierIntegrityError
+_ test_supply_is_named_structured_content_without_raw_dictionary[public-SAU-H0-390210] _
+
+case = 'SAU-H0-390210', mode = 'public'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public', 'simulated'])
+    def test_supply_is_named_structured_content_without_raw_dictionary(case, mode):
+        analysis=analyze(case, mode)
+        markup=render_dossier_html(build_dossier(analysis), 'ar')
+        document=Document(markup)
+>       assert not any(tag=='code' and "source-language-island" in attrs.get('class','') for tag,attrs in document.tags), 'Original raw supply dictionary is not a document table'
+E       AssertionError: Original raw supply dictionary is not a document table
+E       assert not True
+E        +  where True = any(<generator object test_supply_is_named_structured_content_without_raw_dictionary.<locals>.<genexpr> at 0x756f3297b6a0>)
+
+tests/test_dossier_projection.py:31: AssertionError
+_ test_supply_is_named_structured_content_without_raw_dictionary[public-SAU-H0-721049] _
+
+case = 'SAU-H0-721049', mode = 'public'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public', 'simulated'])
+    def test_supply_is_named_structured_content_without_raw_dictionary(case, mode):
+        analysis=analyze(case, mode)
+        markup=render_dossier_html(build_dossier(analysis), 'ar')
+        document=Document(markup)
+>       assert not any(tag=='code' and "source-language-island" in attrs.get('class','') for tag,attrs in document.tags), 'Original raw supply dictionary is not a document table'
+E       AssertionError: Original raw supply dictionary is not a document table
+E       assert not True
+E        +  where True = any(<generator object test_supply_is_named_structured_content_without_raw_dictionary.<locals>.<genexpr> at 0x756f312ece50>)
+
+tests/test_dossier_projection.py:31: AssertionError
+_ test_supply_is_named_structured_content_without_raw_dictionary[public-SAU-H6-294110] _
+
+case = 'SAU-H6-294110', mode = 'public'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public', 'simulated'])
+    def test_supply_is_named_structured_content_without_raw_dictionary(case, mode):
+        analysis=analyze(case, mode)
+        markup=render_dossier_html(build_dossier(analysis), 'ar')
+        document=Document(markup)
+>       assert not any(tag=='code' and "source-language-island" in attrs.get('class','') for tag,attrs in document.tags), 'Original raw supply dictionary is not a document table'
+E       AssertionError: Original raw supply dictionary is not a document table
+E       assert not True
+E        +  where True = any(<generator object test_supply_is_named_structured_content_without_raw_dictionary.<locals>.<genexpr> at 0x756f312ede40>)
+
+tests/test_dossier_projection.py:31: AssertionError
+_ test_supply_is_named_structured_content_without_raw_dictionary[public-SAU-H6-294120] _
+
+case = 'SAU-H6-294120', mode = 'public'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public', 'simulated'])
+    def test_supply_is_named_structured_content_without_raw_dictionary(case, mode):
+        analysis=analyze(case, mode)
+        markup=render_dossier_html(build_dossier(analysis), 'ar')
+        document=Document(markup)
+>       assert not any(tag=='code' and "source-language-island" in attrs.get('class','') for tag,attrs in document.tags), 'Original raw supply dictionary is not a document table'
+E       AssertionError: Original raw supply dictionary is not a document table
+E       assert not True
+E        +  where True = any(<generator object test_supply_is_named_structured_content_without_raw_dictionary.<locals>.<genexpr> at 0x756f312ee020>)
+
+tests/test_dossier_projection.py:31: AssertionError
+_ test_supply_is_named_structured_content_without_raw_dictionary[public-SAU-H6-310430] _
+
+case = 'SAU-H6-310430', mode = 'public'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public', 'simulated'])
+    def test_supply_is_named_structured_content_without_raw_dictionary(case, mode):
+        analysis=analyze(case, mode)
+        markup=render_dossier_html(build_dossier(analysis), 'ar')
+        document=Document(markup)
+>       assert not any(tag=='code' and "source-language-island" in attrs.get('class','') for tag,attrs in document.tags), 'Original raw supply dictionary is not a document table'
+E       AssertionError: Original raw supply dictionary is not a document table
+E       assert not True
+E        +  where True = any(<generator object test_supply_is_named_structured_content_without_raw_dictionary.<locals>.<genexpr> at 0x756f312ecd60>)
+
+tests/test_dossier_projection.py:31: AssertionError
+_ test_supply_is_named_structured_content_without_raw_dictionary[public-SAU-H6-310510] _
+
+case = 'SAU-H6-310510', mode = 'public'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public', 'simulated'])
+    def test_supply_is_named_structured_content_without_raw_dictionary(case, mode):
+        analysis=analyze(case, mode)
+        markup=render_dossier_html(build_dossier(analysis), 'ar')
+        document=Document(markup)
+>       assert not any(tag=='code' and "source-language-island" in attrs.get('class','') for tag,attrs in document.tags), 'Original raw supply dictionary is not a document table'
+E       AssertionError: Original raw supply dictionary is not a document table
+E       assert not True
+E        +  where True = any(<generator object test_supply_is_named_structured_content_without_raw_dictionary.<locals>.<genexpr> at 0x756f314e6890>)
+
+tests/test_dossier_projection.py:31: AssertionError
+_ test_supply_is_named_structured_content_without_raw_dictionary[public-SAU-H6-392010] _
+
+case = 'SAU-H6-392010', mode = 'public'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public', 'simulated'])
+    def test_supply_is_named_structured_content_without_raw_dictionary(case, mode):
+        analysis=analyze(case, mode)
+        markup=render_dossier_html(build_dossier(analysis), 'ar')
+        document=Document(markup)
+>       assert not any(tag=='code' and "source-language-island" in attrs.get('class','') for tag,attrs in document.tags), 'Original raw supply dictionary is not a document table'
+E       AssertionError: Original raw supply dictionary is not a document table
+E       assert not True
+E        +  where True = any(<generator object test_supply_is_named_structured_content_without_raw_dictionary.<locals>.<genexpr> at 0x756f311c5210>)
+
+tests/test_dossier_projection.py:31: AssertionError
+_ test_supply_is_named_structured_content_without_raw_dictionary[public-SAU-H6-721012] _
+
+case = 'SAU-H6-721012', mode = 'public'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public', 'simulated'])
+    def test_supply_is_named_structured_content_without_raw_dictionary(case, mode):
+        analysis=analyze(case, mode)
+        markup=render_dossier_html(build_dossier(analysis), 'ar')
+        document=Document(markup)
+>       assert not any(tag=='code' and "source-language-island" in attrs.get('class','') for tag,attrs in document.tags), 'Original raw supply dictionary is not a document table'
+E       AssertionError: Original raw supply dictionary is not a document table
+E       assert not True
+E        +  where True = any(<generator object test_supply_is_named_structured_content_without_raw_dictionary.<locals>.<genexpr> at 0x756f311c5a80>)
+
+tests/test_dossier_projection.py:31: AssertionError
+_ test_supply_is_named_structured_content_without_raw_dictionary[public-SAU-H6-721061] _
+
+case = 'SAU-H6-721061', mode = 'public'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public', 'simulated'])
+    def test_supply_is_named_structured_content_without_raw_dictionary(case, mode):
+        analysis=analyze(case, mode)
+        markup=render_dossier_html(build_dossier(analysis), 'ar')
+        document=Document(markup)
+>       assert not any(tag=='code' and "source-language-island" in attrs.get('class','') for tag,attrs in document.tags), 'Original raw supply dictionary is not a document table'
+E       AssertionError: Original raw supply dictionary is not a document table
+E       assert not True
+E        +  where True = any(<generator object test_supply_is_named_structured_content_without_raw_dictionary.<locals>.<genexpr> at 0x756f310d5c60>)
+
+tests/test_dossier_projection.py:31: AssertionError
+_ test_supply_is_named_structured_content_without_raw_dictionary[public-SAU-H6-760429] _
+
+case = 'SAU-H6-760429', mode = 'public'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public', 'simulated'])
+    def test_supply_is_named_structured_content_without_raw_dictionary(case, mode):
+        analysis=analyze(case, mode)
+        markup=render_dossier_html(build_dossier(analysis), 'ar')
+        document=Document(markup)
+>       assert not any(tag=='code' and "source-language-island" in attrs.get('class','') for tag,attrs in document.tags), 'Original raw supply dictionary is not a document table'
+E       AssertionError: Original raw supply dictionary is not a document table
+E       assert not True
+E        +  where True = any(<generator object test_supply_is_named_structured_content_without_raw_dictionary.<locals>.<genexpr> at 0x756f311c4a90>)
+
+tests/test_dossier_projection.py:31: AssertionError
+_ test_supply_is_named_structured_content_without_raw_dictionary[public-SAU-H6-760711] _
+
+case = 'SAU-H6-760711', mode = 'public'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public', 'simulated'])
+    def test_supply_is_named_structured_content_without_raw_dictionary(case, mode):
+        analysis=analyze(case, mode)
+        markup=render_dossier_html(build_dossier(analysis), 'ar')
+        document=Document(markup)
+>       assert not any(tag=='code' and "source-language-island" in attrs.get('class','') for tag,attrs in document.tags), 'Original raw supply dictionary is not a document table'
+E       AssertionError: Original raw supply dictionary is not a document table
+E       assert not True
+E        +  where True = any(<generator object test_supply_is_named_structured_content_without_raw_dictionary.<locals>.<genexpr> at 0x756f311c46d0>)
+
+tests/test_dossier_projection.py:31: AssertionError
+_ test_supply_is_named_structured_content_without_raw_dictionary[simulated-SAU-H0-390210] _
+
+case = 'SAU-H0-390210', mode = 'simulated'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public', 'simulated'])
+    def test_supply_is_named_structured_content_without_raw_dictionary(case, mode):
+        analysis=analyze(case, mode)
+        markup=render_dossier_html(build_dossier(analysis), 'ar')
+        document=Document(markup)
+>       assert not any(tag=='code' and "source-language-island" in attrs.get('class','') for tag,attrs in document.tags), 'Original raw supply dictionary is not a document table'
+E       AssertionError: Original raw supply dictionary is not a document table
+E       assert not True
+E        +  where True = any(<generator object test_supply_is_named_structured_content_without_raw_dictionary.<locals>.<genexpr> at 0x756f311c7d30>)
+
+tests/test_dossier_projection.py:31: AssertionError
+_ test_supply_is_named_structured_content_without_raw_dictionary[simulated-SAU-H0-721049] _
+
+case = 'SAU-H0-721049', mode = 'simulated'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public', 'simulated'])
+    def test_supply_is_named_structured_content_without_raw_dictionary(case, mode):
+        analysis=analyze(case, mode)
+>       markup=render_dossier_html(build_dossier(analysis), 'ar')
+                                   ^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_dossier_projection.py:29: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/ior_mvp/dossier.py:188: in build_dossier
+    result.update(project_dossier(analysis, scenario))
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/ior_mvp/dossier_projection.py:98: in project_dossier
+    add(block,key,value,f'scenario.synthetic_inputs.{name}.{key}',unit,numeric=numeric,
+src/ior_mvp/dossier_projection.py:88: in add
+    blocks[block]['fields'].append(scalar(key,value,path,unit,numeric=numeric,branch=tag or active,evidence_ids=ids,missing_status=missing_status))
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+key = 'thickness_mm', value = [0.7, 1.5]
+source_path = 'scenario.synthetic_inputs.target_specification.thickness_mm'
+unit = 'mm'
+
+    def scalar(key: str, value: Any, source_path: str, unit: str | None=None,
+               *, numeric: bool=False, evidence_ids: list | None=None,
+               branch: dict | None=None, missing_status: str='UNAVAILABLE') -> dict:
+        if value is MISSING:
+            status=missing_status; value=None
+        elif value is None:
+            status='NOT_CALCULABLE' if numeric else 'UNAVAILABLE'
+        elif isinstance(value,str) and value in ('UNAVAILABLE','NOT_CALCULABLE','NOT_APPLICABLE'):
+            status=value;value=None
+        else:
+            status='AVAILABLE'
+            if numeric and (isinstance(value,bool) or not isinstance(value,(int,float)) or not isfinite(value)):
+>               raise DossierIntegrityError(f'Dossier finite numeric value required: {source_path}')
+E               ior_mvp.dossier_validation.DossierIntegrityError: Dossier finite numeric value required: scenario.synthetic_inputs.target_specification.thickness_mm
+
+src/ior_mvp/dossier_projection.py:45: DossierIntegrityError
+_ test_supply_is_named_structured_content_without_raw_dictionary[simulated-SAU-H6-294110] _
+
+case = 'SAU-H6-294110', mode = 'simulated'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public', 'simulated'])
+    def test_supply_is_named_structured_content_without_raw_dictionary(case, mode):
+        analysis=analyze(case, mode)
+        markup=render_dossier_html(build_dossier(analysis), 'ar')
+        document=Document(markup)
+>       assert not any(tag=='code' and "source-language-island" in attrs.get('class','') for tag,attrs in document.tags), 'Original raw supply dictionary is not a document table'
+E       AssertionError: Original raw supply dictionary is not a document table
+E       assert not True
+E        +  where True = any(<generator object test_supply_is_named_structured_content_without_raw_dictionary.<locals>.<genexpr> at 0x756f312ef790>)
+
+tests/test_dossier_projection.py:31: AssertionError
+_ test_supply_is_named_structured_content_without_raw_dictionary[simulated-SAU-H6-294120] _
+
+case = 'SAU-H6-294120', mode = 'simulated'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public', 'simulated'])
+    def test_supply_is_named_structured_content_without_raw_dictionary(case, mode):
+        analysis=analyze(case, mode)
+        markup=render_dossier_html(build_dossier(analysis), 'ar')
+        document=Document(markup)
+>       assert not any(tag=='code' and "source-language-island" in attrs.get('class','') for tag,attrs in document.tags), 'Original raw supply dictionary is not a document table'
+E       AssertionError: Original raw supply dictionary is not a document table
+E       assert not True
+E        +  where True = any(<generator object test_supply_is_named_structured_content_without_raw_dictionary.<locals>.<genexpr> at 0x756f314e54e0>)
+
+tests/test_dossier_projection.py:31: AssertionError
+_ test_supply_is_named_structured_content_without_raw_dictionary[simulated-SAU-H6-310430] _
+
+case = 'SAU-H6-310430', mode = 'simulated'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public', 'simulated'])
+    def test_supply_is_named_structured_content_without_raw_dictionary(case, mode):
+        analysis=analyze(case, mode)
+        markup=render_dossier_html(build_dossier(analysis), 'ar')
+        document=Document(markup)
+>       assert not any(tag=='code' and "source-language-island" in attrs.get('class','') for tag,attrs in document.tags), 'Original raw supply dictionary is not a document table'
+E       AssertionError: Original raw supply dictionary is not a document table
+E       assert not True
+E        +  where True = any(<generator object test_supply_is_named_structured_content_without_raw_dictionary.<locals>.<genexpr> at 0x756f311c58a0>)
+
+tests/test_dossier_projection.py:31: AssertionError
+_ test_supply_is_named_structured_content_without_raw_dictionary[simulated-SAU-H6-310510] _
+
+case = 'SAU-H6-310510', mode = 'simulated'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public', 'simulated'])
+    def test_supply_is_named_structured_content_without_raw_dictionary(case, mode):
+        analysis=analyze(case, mode)
+        markup=render_dossier_html(build_dossier(analysis), 'ar')
+        document=Document(markup)
+>       assert not any(tag=='code' and "source-language-island" in attrs.get('class','') for tag,attrs in document.tags), 'Original raw supply dictionary is not a document table'
+E       AssertionError: Original raw supply dictionary is not a document table
+E       assert not True
+E        +  where True = any(<generator object test_supply_is_named_structured_content_without_raw_dictionary.<locals>.<genexpr> at 0x756f311c6e30>)
+
+tests/test_dossier_projection.py:31: AssertionError
+_ test_supply_is_named_structured_content_without_raw_dictionary[simulated-SAU-H6-392010] _
+
+case = 'SAU-H6-392010', mode = 'simulated'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public', 'simulated'])
+    def test_supply_is_named_structured_content_without_raw_dictionary(case, mode):
+        analysis=analyze(case, mode)
+        markup=render_dossier_html(build_dossier(analysis), 'ar')
+        document=Document(markup)
+>       assert not any(tag=='code' and "source-language-island" in attrs.get('class','') for tag,attrs in document.tags), 'Original raw supply dictionary is not a document table'
+E       AssertionError: Original raw supply dictionary is not a document table
+E       assert not True
+E        +  where True = any(<generator object test_supply_is_named_structured_content_without_raw_dictionary.<locals>.<genexpr> at 0x756f312ef4c0>)
+
+tests/test_dossier_projection.py:31: AssertionError
+_ test_supply_is_named_structured_content_without_raw_dictionary[simulated-SAU-H6-721012] _
+
+case = 'SAU-H6-721012', mode = 'simulated'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public', 'simulated'])
+    def test_supply_is_named_structured_content_without_raw_dictionary(case, mode):
+        analysis=analyze(case, mode)
+>       markup=render_dossier_html(build_dossier(analysis), 'ar')
+                                   ^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_dossier_projection.py:29: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/ior_mvp/dossier.py:188: in build_dossier
+    result.update(project_dossier(analysis, scenario))
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/ior_mvp/dossier_projection.py:98: in project_dossier
+    add(block,key,value,f'scenario.synthetic_inputs.{name}.{key}',unit,numeric=numeric,
+src/ior_mvp/dossier_projection.py:88: in add
+    blocks[block]['fields'].append(scalar(key,value,path,unit,numeric=numeric,branch=tag or active,evidence_ids=ids,missing_status=missing_status))
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+key = 'tin_coating_g_m2', value = [2.8, 5.6]
+source_path = 'scenario.synthetic_inputs.target_specification.tin_coating_g_m2'
+unit = 'g/m²'
+
+    def scalar(key: str, value: Any, source_path: str, unit: str | None=None,
+               *, numeric: bool=False, evidence_ids: list | None=None,
+               branch: dict | None=None, missing_status: str='UNAVAILABLE') -> dict:
+        if value is MISSING:
+            status=missing_status; value=None
+        elif value is None:
+            status='NOT_CALCULABLE' if numeric else 'UNAVAILABLE'
+        elif isinstance(value,str) and value in ('UNAVAILABLE','NOT_CALCULABLE','NOT_APPLICABLE'):
+            status=value;value=None
+        else:
+            status='AVAILABLE'
+            if numeric and (isinstance(value,bool) or not isinstance(value,(int,float)) or not isfinite(value)):
+>               raise DossierIntegrityError(f'Dossier finite numeric value required: {source_path}')
+E               ior_mvp.dossier_validation.DossierIntegrityError: Dossier finite numeric value required: scenario.synthetic_inputs.target_specification.tin_coating_g_m2
+
+src/ior_mvp/dossier_projection.py:45: DossierIntegrityError
+_ test_supply_is_named_structured_content_without_raw_dictionary[simulated-SAU-H6-721061] _
+
+case = 'SAU-H6-721061', mode = 'simulated'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public', 'simulated'])
+    def test_supply_is_named_structured_content_without_raw_dictionary(case, mode):
+        analysis=analyze(case, mode)
+>       markup=render_dossier_html(build_dossier(analysis), 'ar')
+                                   ^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_dossier_projection.py:29: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/ior_mvp/dossier.py:188: in build_dossier
+    result.update(project_dossier(analysis, scenario))
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/ior_mvp/dossier_projection.py:98: in project_dossier
+    add(block,key,value,f'scenario.synthetic_inputs.{name}.{key}',unit,numeric=numeric,
+src/ior_mvp/dossier_projection.py:88: in add
+    blocks[block]['fields'].append(scalar(key,value,path,unit,numeric=numeric,branch=tag or active,evidence_ids=ids,missing_status=missing_status))
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+key = 'thickness_mm', value = [0.4, 0.8]
+source_path = 'scenario.synthetic_inputs.target_specification.thickness_mm'
+unit = 'mm'
+
+    def scalar(key: str, value: Any, source_path: str, unit: str | None=None,
+               *, numeric: bool=False, evidence_ids: list | None=None,
+               branch: dict | None=None, missing_status: str='UNAVAILABLE') -> dict:
+        if value is MISSING:
+            status=missing_status; value=None
+        elif value is None:
+            status='NOT_CALCULABLE' if numeric else 'UNAVAILABLE'
+        elif isinstance(value,str) and value in ('UNAVAILABLE','NOT_CALCULABLE','NOT_APPLICABLE'):
+            status=value;value=None
+        else:
+            status='AVAILABLE'
+            if numeric and (isinstance(value,bool) or not isinstance(value,(int,float)) or not isfinite(value)):
+>               raise DossierIntegrityError(f'Dossier finite numeric value required: {source_path}')
+E               ior_mvp.dossier_validation.DossierIntegrityError: Dossier finite numeric value required: scenario.synthetic_inputs.target_specification.thickness_mm
+
+src/ior_mvp/dossier_projection.py:45: DossierIntegrityError
+_ test_supply_is_named_structured_content_without_raw_dictionary[simulated-SAU-H6-760429] _
+
+case = 'SAU-H6-760429', mode = 'simulated'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public', 'simulated'])
+    def test_supply_is_named_structured_content_without_raw_dictionary(case, mode):
+        analysis=analyze(case, mode)
+        markup=render_dossier_html(build_dossier(analysis), 'ar')
+        document=Document(markup)
+>       assert not any(tag=='code' and "source-language-island" in attrs.get('class','') for tag,attrs in document.tags), 'Original raw supply dictionary is not a document table'
+E       AssertionError: Original raw supply dictionary is not a document table
+E       assert not True
+E        +  where True = any(<generator object test_supply_is_named_structured_content_without_raw_dictionary.<locals>.<genexpr> at 0x756f311c7d30>)
+
+tests/test_dossier_projection.py:31: AssertionError
+_ test_supply_is_named_structured_content_without_raw_dictionary[simulated-SAU-H6-760711] _
+
+case = 'SAU-H6-760711', mode = 'simulated'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public', 'simulated'])
+    def test_supply_is_named_structured_content_without_raw_dictionary(case, mode):
+        analysis=analyze(case, mode)
+>       markup=render_dossier_html(build_dossier(analysis), 'ar')
+                                   ^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_dossier_projection.py:29: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/ior_mvp/dossier.py:188: in build_dossier
+    result.update(project_dossier(analysis, scenario))
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/ior_mvp/dossier_projection.py:98: in project_dossier
+    add(block,key,value,f'scenario.synthetic_inputs.{name}.{key}',unit,numeric=numeric,
+src/ior_mvp/dossier_projection.py:88: in add
+    blocks[block]['fields'].append(scalar(key,value,path,unit,numeric=numeric,branch=tag or active,evidence_ids=ids,missing_status=missing_status))
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+key = 'thickness_um', value = [6.3, 40]
+source_path = 'scenario.synthetic_inputs.target_specification.thickness_um'
+unit = 'µm'
+
+    def scalar(key: str, value: Any, source_path: str, unit: str | None=None,
+               *, numeric: bool=False, evidence_ids: list | None=None,
+               branch: dict | None=None, missing_status: str='UNAVAILABLE') -> dict:
+        if value is MISSING:
+            status=missing_status; value=None
+        elif value is None:
+            status='NOT_CALCULABLE' if numeric else 'UNAVAILABLE'
+        elif isinstance(value,str) and value in ('UNAVAILABLE','NOT_CALCULABLE','NOT_APPLICABLE'):
+            status=value;value=None
+        else:
+            status='AVAILABLE'
+            if numeric and (isinstance(value,bool) or not isinstance(value,(int,float)) or not isfinite(value)):
+>               raise DossierIntegrityError(f'Dossier finite numeric value required: {source_path}')
+E               ior_mvp.dossier_validation.DossierIntegrityError: Dossier finite numeric value required: scenario.synthetic_inputs.target_specification.thickness_um
+
+src/ior_mvp/dossier_projection.py:45: DossierIntegrityError
+__ test_arabic_ledger_renders_localized_name_result_and_effect[SAU-H0-390210] __
+
+case = 'SAU-H0-390210'
+
+    @pytest.mark.parametrize('case', CASES)
+    def test_arabic_ledger_renders_localized_name_result_and_effect(case):
+        analysis=analyze(case, 'simulated')
+        text=''.join(Document(render_dossier_html(build_dossier(analysis),'ar')).text)
+        for rule in analysis['rules']:
+            for field in ['name','result','decision_effect']:
+>               assert rule['localized']['ar'][field]['text'] in text, (rule['rule_id'],field)
+E               AssertionError: ('R0', 'name')
+E               assert 'بوابة الهوية' in '\n\n\n\n\nملف القرار — رفض\n@font-face {\n  font-family: "IOR Noto Sans";\n  font-style: normal;\n  font-display: blo...b21fb2cc547c8ac4ce9المشروع 0.2.0 · الحدود 1.3.0 · ملفات القطاعات 1.1.0 · سياسة الأدلة 1.4.0 · نصوص الواجهة 1.6.0\n\n\n'
+
+tests/test_dossier_projection.py:42: AssertionError
+__ test_arabic_ledger_renders_localized_name_result_and_effect[SAU-H0-721049] __
+
+case = 'SAU-H0-721049'
+
+    @pytest.mark.parametrize('case', CASES)
+    def test_arabic_ledger_renders_localized_name_result_and_effect(case):
+        analysis=analyze(case, 'simulated')
+>       text=''.join(Document(render_dossier_html(build_dossier(analysis),'ar')).text)
+                                                  ^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_dossier_projection.py:39: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/ior_mvp/dossier.py:188: in build_dossier
+    result.update(project_dossier(analysis, scenario))
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/ior_mvp/dossier_projection.py:98: in project_dossier
+    add(block,key,value,f'scenario.synthetic_inputs.{name}.{key}',unit,numeric=numeric,
+src/ior_mvp/dossier_projection.py:88: in add
+    blocks[block]['fields'].append(scalar(key,value,path,unit,numeric=numeric,branch=tag or active,evidence_ids=ids,missing_status=missing_status))
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+key = 'thickness_mm', value = [0.7, 1.5]
+source_path = 'scenario.synthetic_inputs.target_specification.thickness_mm'
+unit = 'mm'
+
+    def scalar(key: str, value: Any, source_path: str, unit: str | None=None,
+               *, numeric: bool=False, evidence_ids: list | None=None,
+               branch: dict | None=None, missing_status: str='UNAVAILABLE') -> dict:
+        if value is MISSING:
+            status=missing_status; value=None
+        elif value is None:
+            status='NOT_CALCULABLE' if numeric else 'UNAVAILABLE'
+        elif isinstance(value,str) and value in ('UNAVAILABLE','NOT_CALCULABLE','NOT_APPLICABLE'):
+            status=value;value=None
+        else:
+            status='AVAILABLE'
+            if numeric and (isinstance(value,bool) or not isinstance(value,(int,float)) or not isfinite(value)):
+>               raise DossierIntegrityError(f'Dossier finite numeric value required: {source_path}')
+E               ior_mvp.dossier_validation.DossierIntegrityError: Dossier finite numeric value required: scenario.synthetic_inputs.target_specification.thickness_mm
+
+src/ior_mvp/dossier_projection.py:45: DossierIntegrityError
+__ test_arabic_ledger_renders_localized_name_result_and_effect[SAU-H6-294110] __
+
+case = 'SAU-H6-294110'
+
+    @pytest.mark.parametrize('case', CASES)
+    def test_arabic_ledger_renders_localized_name_result_and_effect(case):
+        analysis=analyze(case, 'simulated')
+        text=''.join(Document(render_dossier_html(build_dossier(analysis),'ar')).text)
+        for rule in analysis['rules']:
+            for field in ['name','result','decision_effect']:
+>               assert rule['localized']['ar'][field]['text'] in text, (rule['rule_id'],field)
+E               AssertionError: ('R0', 'name')
+E               assert 'بوابة الهوية' in '\n\n\n\n\nملف القرار — تقدم\n@font-face {\n  font-family: "IOR Noto Sans";\n  font-style: normal;\n  font-display: bl...b21fb2cc547c8ac4ce9المشروع 0.2.0 · الحدود 1.3.0 · ملفات القطاعات 1.1.0 · سياسة الأدلة 1.4.0 · نصوص الواجهة 1.6.0\n\n\n'
+
+tests/test_dossier_projection.py:42: AssertionError
+__ test_arabic_ledger_renders_localized_name_result_and_effect[SAU-H6-294120] __
+
+case = 'SAU-H6-294120'
+
+    @pytest.mark.parametrize('case', CASES)
+    def test_arabic_ledger_renders_localized_name_result_and_effect(case):
+        analysis=analyze(case, 'simulated')
+        text=''.join(Document(render_dossier_html(build_dossier(analysis),'ar')).text)
+        for rule in analysis['rules']:
+            for field in ['name','result','decision_effect']:
+>               assert rule['localized']['ar'][field]['text'] in text, (rule['rule_id'],field)
+E               AssertionError: ('R0', 'name')
+E               assert 'بوابة الهوية' in '\n\n\n\n\nملف القرار — رفض\n@font-face {\n  font-family: "IOR Noto Sans";\n  font-style: normal;\n  font-display: blo...b21fb2cc547c8ac4ce9المشروع 0.2.0 · الحدود 1.3.0 · ملفات القطاعات 1.1.0 · سياسة الأدلة 1.4.0 · نصوص الواجهة 1.6.0\n\n\n'
+
+tests/test_dossier_projection.py:42: AssertionError
+__ test_arabic_ledger_renders_localized_name_result_and_effect[SAU-H6-310430] __
+
+case = 'SAU-H6-310430'
+
+    @pytest.mark.parametrize('case', CASES)
+    def test_arabic_ledger_renders_localized_name_result_and_effect(case):
+        analysis=analyze(case, 'simulated')
+        text=''.join(Document(render_dossier_html(build_dossier(analysis),'ar')).text)
+        for rule in analysis['rules']:
+            for field in ['name','result','decision_effect']:
+>               assert rule['localized']['ar'][field]['text'] in text, (rule['rule_id'],field)
+E               AssertionError: ('R0', 'name')
+E               assert 'بوابة الهوية' in '\n\n\n\n\nملف القرار — تقدم\n@font-face {\n  font-family: "IOR Noto Sans";\n  font-style: normal;\n  font-display: bl...b21fb2cc547c8ac4ce9المشروع 0.2.0 · الحدود 1.3.0 · ملفات القطاعات 1.1.0 · سياسة الأدلة 1.4.0 · نصوص الواجهة 1.6.0\n\n\n'
+
+tests/test_dossier_projection.py:42: AssertionError
+__ test_arabic_ledger_renders_localized_name_result_and_effect[SAU-H6-310510] __
+
+case = 'SAU-H6-310510'
+
+    @pytest.mark.parametrize('case', CASES)
+    def test_arabic_ledger_renders_localized_name_result_and_effect(case):
+        analysis=analyze(case, 'simulated')
+        text=''.join(Document(render_dossier_html(build_dossier(analysis),'ar')).text)
+        for rule in analysis['rules']:
+            for field in ['name','result','decision_effect']:
+>               assert rule['localized']['ar'][field]['text'] in text, (rule['rule_id'],field)
+E               AssertionError: ('R0', 'name')
+E               assert 'بوابة الهوية' in '\n\n\n\n\nملف القرار — رفض\n@font-face {\n  font-family: "IOR Noto Sans";\n  font-style: normal;\n  font-display: blo...b21fb2cc547c8ac4ce9المشروع 0.2.0 · الحدود 1.3.0 · ملفات القطاعات 1.1.0 · سياسة الأدلة 1.4.0 · نصوص الواجهة 1.6.0\n\n\n'
+
+tests/test_dossier_projection.py:42: AssertionError
+__ test_arabic_ledger_renders_localized_name_result_and_effect[SAU-H6-392010] __
+
+case = 'SAU-H6-392010'
+
+    @pytest.mark.parametrize('case', CASES)
+    def test_arabic_ledger_renders_localized_name_result_and_effect(case):
+        analysis=analyze(case, 'simulated')
+        text=''.join(Document(render_dossier_html(build_dossier(analysis),'ar')).text)
+        for rule in analysis['rules']:
+            for field in ['name','result','decision_effect']:
+>               assert rule['localized']['ar'][field]['text'] in text, (rule['rule_id'],field)
+E               AssertionError: ('R0', 'name')
+E               assert 'بوابة الهوية' in '\n\n\n\n\nملف القرار — رفض\n@font-face {\n  font-family: "IOR Noto Sans";\n  font-style: normal;\n  font-display: blo...b21fb2cc547c8ac4ce9المشروع 0.2.0 · الحدود 1.3.0 · ملفات القطاعات 1.1.0 · سياسة الأدلة 1.4.0 · نصوص الواجهة 1.6.0\n\n\n'
+
+tests/test_dossier_projection.py:42: AssertionError
+__ test_arabic_ledger_renders_localized_name_result_and_effect[SAU-H6-721012] __
+
+case = 'SAU-H6-721012'
+
+    @pytest.mark.parametrize('case', CASES)
+    def test_arabic_ledger_renders_localized_name_result_and_effect(case):
+        analysis=analyze(case, 'simulated')
+>       text=''.join(Document(render_dossier_html(build_dossier(analysis),'ar')).text)
+                                                  ^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_dossier_projection.py:39: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/ior_mvp/dossier.py:188: in build_dossier
+    result.update(project_dossier(analysis, scenario))
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/ior_mvp/dossier_projection.py:98: in project_dossier
+    add(block,key,value,f'scenario.synthetic_inputs.{name}.{key}',unit,numeric=numeric,
+src/ior_mvp/dossier_projection.py:88: in add
+    blocks[block]['fields'].append(scalar(key,value,path,unit,numeric=numeric,branch=tag or active,evidence_ids=ids,missing_status=missing_status))
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+key = 'tin_coating_g_m2', value = [2.8, 5.6]
+source_path = 'scenario.synthetic_inputs.target_specification.tin_coating_g_m2'
+unit = 'g/m²'
+
+    def scalar(key: str, value: Any, source_path: str, unit: str | None=None,
+               *, numeric: bool=False, evidence_ids: list | None=None,
+               branch: dict | None=None, missing_status: str='UNAVAILABLE') -> dict:
+        if value is MISSING:
+            status=missing_status; value=None
+        elif value is None:
+            status='NOT_CALCULABLE' if numeric else 'UNAVAILABLE'
+        elif isinstance(value,str) and value in ('UNAVAILABLE','NOT_CALCULABLE','NOT_APPLICABLE'):
+            status=value;value=None
+        else:
+            status='AVAILABLE'
+            if numeric and (isinstance(value,bool) or not isinstance(value,(int,float)) or not isfinite(value)):
+>               raise DossierIntegrityError(f'Dossier finite numeric value required: {source_path}')
+E               ior_mvp.dossier_validation.DossierIntegrityError: Dossier finite numeric value required: scenario.synthetic_inputs.target_specification.tin_coating_g_m2
+
+src/ior_mvp/dossier_projection.py:45: DossierIntegrityError
+__ test_arabic_ledger_renders_localized_name_result_and_effect[SAU-H6-721061] __
+
+case = 'SAU-H6-721061'
+
+    @pytest.mark.parametrize('case', CASES)
+    def test_arabic_ledger_renders_localized_name_result_and_effect(case):
+        analysis=analyze(case, 'simulated')
+>       text=''.join(Document(render_dossier_html(build_dossier(analysis),'ar')).text)
+                                                  ^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_dossier_projection.py:39: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/ior_mvp/dossier.py:188: in build_dossier
+    result.update(project_dossier(analysis, scenario))
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/ior_mvp/dossier_projection.py:98: in project_dossier
+    add(block,key,value,f'scenario.synthetic_inputs.{name}.{key}',unit,numeric=numeric,
+src/ior_mvp/dossier_projection.py:88: in add
+    blocks[block]['fields'].append(scalar(key,value,path,unit,numeric=numeric,branch=tag or active,evidence_ids=ids,missing_status=missing_status))
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+key = 'thickness_mm', value = [0.4, 0.8]
+source_path = 'scenario.synthetic_inputs.target_specification.thickness_mm'
+unit = 'mm'
+
+    def scalar(key: str, value: Any, source_path: str, unit: str | None=None,
+               *, numeric: bool=False, evidence_ids: list | None=None,
+               branch: dict | None=None, missing_status: str='UNAVAILABLE') -> dict:
+        if value is MISSING:
+            status=missing_status; value=None
+        elif value is None:
+            status='NOT_CALCULABLE' if numeric else 'UNAVAILABLE'
+        elif isinstance(value,str) and value in ('UNAVAILABLE','NOT_CALCULABLE','NOT_APPLICABLE'):
+            status=value;value=None
+        else:
+            status='AVAILABLE'
+            if numeric and (isinstance(value,bool) or not isinstance(value,(int,float)) or not isfinite(value)):
+>               raise DossierIntegrityError(f'Dossier finite numeric value required: {source_path}')
+E               ior_mvp.dossier_validation.DossierIntegrityError: Dossier finite numeric value required: scenario.synthetic_inputs.target_specification.thickness_mm
+
+src/ior_mvp/dossier_projection.py:45: DossierIntegrityError
+__ test_arabic_ledger_renders_localized_name_result_and_effect[SAU-H6-760429] __
+
+case = 'SAU-H6-760429'
+
+    @pytest.mark.parametrize('case', CASES)
+    def test_arabic_ledger_renders_localized_name_result_and_effect(case):
+        analysis=analyze(case, 'simulated')
+        text=''.join(Document(render_dossier_html(build_dossier(analysis),'ar')).text)
+        for rule in analysis['rules']:
+            for field in ['name','result','decision_effect']:
+>               assert rule['localized']['ar'][field]['text'] in text, (rule['rule_id'],field)
+E               AssertionError: ('R0', 'name')
+E               assert 'بوابة الهوية' in '\n\n\n\n\nملف القرار — تقدم\n@font-face {\n  font-family: "IOR Noto Sans";\n  font-style: normal;\n  font-display: bl...b21fb2cc547c8ac4ce9المشروع 0.2.0 · الحدود 1.3.0 · ملفات القطاعات 1.1.0 · سياسة الأدلة 1.4.0 · نصوص الواجهة 1.6.0\n\n\n'
+
+tests/test_dossier_projection.py:42: AssertionError
+__ test_arabic_ledger_renders_localized_name_result_and_effect[SAU-H6-760711] __
+
+case = 'SAU-H6-760711'
+
+    @pytest.mark.parametrize('case', CASES)
+    def test_arabic_ledger_renders_localized_name_result_and_effect(case):
+        analysis=analyze(case, 'simulated')
+>       text=''.join(Document(render_dossier_html(build_dossier(analysis),'ar')).text)
+                                                  ^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_dossier_projection.py:39: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/ior_mvp/dossier.py:188: in build_dossier
+    result.update(project_dossier(analysis, scenario))
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/ior_mvp/dossier_projection.py:98: in project_dossier
+    add(block,key,value,f'scenario.synthetic_inputs.{name}.{key}',unit,numeric=numeric,
+src/ior_mvp/dossier_projection.py:88: in add
+    blocks[block]['fields'].append(scalar(key,value,path,unit,numeric=numeric,branch=tag or active,evidence_ids=ids,missing_status=missing_status))
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+key = 'thickness_um', value = [6.3, 40]
+source_path = 'scenario.synthetic_inputs.target_specification.thickness_um'
+unit = 'µm'
+
+    def scalar(key: str, value: Any, source_path: str, unit: str | None=None,
+               *, numeric: bool=False, evidence_ids: list | None=None,
+               branch: dict | None=None, missing_status: str='UNAVAILABLE') -> dict:
+        if value is MISSING:
+            status=missing_status; value=None
+        elif value is None:
+            status='NOT_CALCULABLE' if numeric else 'UNAVAILABLE'
+        elif isinstance(value,str) and value in ('UNAVAILABLE','NOT_CALCULABLE','NOT_APPLICABLE'):
+            status=value;value=None
+        else:
+            status='AVAILABLE'
+            if numeric and (isinstance(value,bool) or not isinstance(value,(int,float)) or not isfinite(value)):
+>               raise DossierIntegrityError(f'Dossier finite numeric value required: {source_path}')
+E               ior_mvp.dossier_validation.DossierIntegrityError: Dossier finite numeric value required: scenario.synthetic_inputs.target_specification.thickness_um
+
+src/ior_mvp/dossier_projection.py:45: DossierIntegrityError
+_ test_all_methodology_sections_exist_even_without_evidence[public-SAU-H0-390210] _
+
+case = 'SAU-H0-390210', mode = 'public'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public','simulated'])
+    def test_all_methodology_sections_exist_even_without_evidence(case,mode):
+        document=Document(render_dossier_html(build_dossier(analyze(case,mode)),'en'))
+        ids={attrs.get('id') for tag,attrs in document.tags if tag=='section'}
+>       assert {'dossier-'+section for section in SECTIONS} <= ids
+E       AssertionError: assert {'dossier-aut...onomics', ...} <= {None}
+E         
+E         Extra items in the left set:
+E         'dossier-identity'
+E         'dossier-ledger'
+E         'dossier-supply'
+E         'dossier-authority'
+E         'dossier-competition'...
+E         
+E         ...Full output truncated (6 lines hidden), use '-vv' to show
+
+tests/test_dossier_projection.py:49: AssertionError
+_ test_all_methodology_sections_exist_even_without_evidence[public-SAU-H0-721049] _
+
+case = 'SAU-H0-721049', mode = 'public'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public','simulated'])
+    def test_all_methodology_sections_exist_even_without_evidence(case,mode):
+        document=Document(render_dossier_html(build_dossier(analyze(case,mode)),'en'))
+        ids={attrs.get('id') for tag,attrs in document.tags if tag=='section'}
+>       assert {'dossier-'+section for section in SECTIONS} <= ids
+E       AssertionError: assert {'dossier-aut...onomics', ...} <= {None}
+E         
+E         Extra items in the left set:
+E         'dossier-identity'
+E         'dossier-ledger'
+E         'dossier-supply'
+E         'dossier-authority'
+E         'dossier-competition'...
+E         
+E         ...Full output truncated (6 lines hidden), use '-vv' to show
+
+tests/test_dossier_projection.py:49: AssertionError
+_ test_all_methodology_sections_exist_even_without_evidence[public-SAU-H6-294110] _
+
+case = 'SAU-H6-294110', mode = 'public'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public','simulated'])
+    def test_all_methodology_sections_exist_even_without_evidence(case,mode):
+        document=Document(render_dossier_html(build_dossier(analyze(case,mode)),'en'))
+        ids={attrs.get('id') for tag,attrs in document.tags if tag=='section'}
+>       assert {'dossier-'+section for section in SECTIONS} <= ids
+E       AssertionError: assert {'dossier-aut...onomics', ...} <= {None}
+E         
+E         Extra items in the left set:
+E         'dossier-identity'
+E         'dossier-ledger'
+E         'dossier-supply'
+E         'dossier-authority'
+E         'dossier-competition'...
+E         
+E         ...Full output truncated (6 lines hidden), use '-vv' to show
+
+tests/test_dossier_projection.py:49: AssertionError
+_ test_all_methodology_sections_exist_even_without_evidence[public-SAU-H6-294120] _
+
+case = 'SAU-H6-294120', mode = 'public'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public','simulated'])
+    def test_all_methodology_sections_exist_even_without_evidence(case,mode):
+        document=Document(render_dossier_html(build_dossier(analyze(case,mode)),'en'))
+        ids={attrs.get('id') for tag,attrs in document.tags if tag=='section'}
+>       assert {'dossier-'+section for section in SECTIONS} <= ids
+E       AssertionError: assert {'dossier-aut...onomics', ...} <= {None}
+E         
+E         Extra items in the left set:
+E         'dossier-identity'
+E         'dossier-ledger'
+E         'dossier-supply'
+E         'dossier-authority'
+E         'dossier-competition'...
+E         
+E         ...Full output truncated (6 lines hidden), use '-vv' to show
+
+tests/test_dossier_projection.py:49: AssertionError
+_ test_all_methodology_sections_exist_even_without_evidence[public-SAU-H6-310430] _
+
+case = 'SAU-H6-310430', mode = 'public'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public','simulated'])
+    def test_all_methodology_sections_exist_even_without_evidence(case,mode):
+        document=Document(render_dossier_html(build_dossier(analyze(case,mode)),'en'))
+        ids={attrs.get('id') for tag,attrs in document.tags if tag=='section'}
+>       assert {'dossier-'+section for section in SECTIONS} <= ids
+E       AssertionError: assert {'dossier-aut...onomics', ...} <= {None}
+E         
+E         Extra items in the left set:
+E         'dossier-identity'
+E         'dossier-ledger'
+E         'dossier-supply'
+E         'dossier-authority'
+E         'dossier-competition'...
+E         
+E         ...Full output truncated (6 lines hidden), use '-vv' to show
+
+tests/test_dossier_projection.py:49: AssertionError
+_ test_all_methodology_sections_exist_even_without_evidence[public-SAU-H6-310510] _
+
+case = 'SAU-H6-310510', mode = 'public'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public','simulated'])
+    def test_all_methodology_sections_exist_even_without_evidence(case,mode):
+        document=Document(render_dossier_html(build_dossier(analyze(case,mode)),'en'))
+        ids={attrs.get('id') for tag,attrs in document.tags if tag=='section'}
+>       assert {'dossier-'+section for section in SECTIONS} <= ids
+E       AssertionError: assert {'dossier-aut...onomics', ...} <= {None}
+E         
+E         Extra items in the left set:
+E         'dossier-identity'
+E         'dossier-ledger'
+E         'dossier-supply'
+E         'dossier-authority'
+E         'dossier-competition'...
+E         
+E         ...Full output truncated (6 lines hidden), use '-vv' to show
+
+tests/test_dossier_projection.py:49: AssertionError
+_ test_all_methodology_sections_exist_even_without_evidence[public-SAU-H6-392010] _
+
+case = 'SAU-H6-392010', mode = 'public'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public','simulated'])
+    def test_all_methodology_sections_exist_even_without_evidence(case,mode):
+        document=Document(render_dossier_html(build_dossier(analyze(case,mode)),'en'))
+        ids={attrs.get('id') for tag,attrs in document.tags if tag=='section'}
+>       assert {'dossier-'+section for section in SECTIONS} <= ids
+E       AssertionError: assert {'dossier-aut...onomics', ...} <= {None}
+E         
+E         Extra items in the left set:
+E         'dossier-identity'
+E         'dossier-ledger'
+E         'dossier-supply'
+E         'dossier-authority'
+E         'dossier-competition'...
+E         
+E         ...Full output truncated (6 lines hidden), use '-vv' to show
+
+tests/test_dossier_projection.py:49: AssertionError
+_ test_all_methodology_sections_exist_even_without_evidence[public-SAU-H6-721012] _
+
+case = 'SAU-H6-721012', mode = 'public'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public','simulated'])
+    def test_all_methodology_sections_exist_even_without_evidence(case,mode):
+        document=Document(render_dossier_html(build_dossier(analyze(case,mode)),'en'))
+        ids={attrs.get('id') for tag,attrs in document.tags if tag=='section'}
+>       assert {'dossier-'+section for section in SECTIONS} <= ids
+E       AssertionError: assert {'dossier-aut...onomics', ...} <= {None}
+E         
+E         Extra items in the left set:
+E         'dossier-identity'
+E         'dossier-ledger'
+E         'dossier-supply'
+E         'dossier-authority'
+E         'dossier-competition'...
+E         
+E         ...Full output truncated (6 lines hidden), use '-vv' to show
+
+tests/test_dossier_projection.py:49: AssertionError
+_ test_all_methodology_sections_exist_even_without_evidence[public-SAU-H6-721061] _
+
+case = 'SAU-H6-721061', mode = 'public'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public','simulated'])
+    def test_all_methodology_sections_exist_even_without_evidence(case,mode):
+        document=Document(render_dossier_html(build_dossier(analyze(case,mode)),'en'))
+        ids={attrs.get('id') for tag,attrs in document.tags if tag=='section'}
+>       assert {'dossier-'+section for section in SECTIONS} <= ids
+E       AssertionError: assert {'dossier-aut...onomics', ...} <= {None}
+E         
+E         Extra items in the left set:
+E         'dossier-identity'
+E         'dossier-ledger'
+E         'dossier-supply'
+E         'dossier-authority'
+E         'dossier-competition'...
+E         
+E         ...Full output truncated (6 lines hidden), use '-vv' to show
+
+tests/test_dossier_projection.py:49: AssertionError
+_ test_all_methodology_sections_exist_even_without_evidence[public-SAU-H6-760429] _
+
+case = 'SAU-H6-760429', mode = 'public'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public','simulated'])
+    def test_all_methodology_sections_exist_even_without_evidence(case,mode):
+        document=Document(render_dossier_html(build_dossier(analyze(case,mode)),'en'))
+        ids={attrs.get('id') for tag,attrs in document.tags if tag=='section'}
+>       assert {'dossier-'+section for section in SECTIONS} <= ids
+E       AssertionError: assert {'dossier-aut...onomics', ...} <= {None}
+E         
+E         Extra items in the left set:
+E         'dossier-identity'
+E         'dossier-ledger'
+E         'dossier-supply'
+E         'dossier-authority'
+E         'dossier-competition'...
+E         
+E         ...Full output truncated (6 lines hidden), use '-vv' to show
+
+tests/test_dossier_projection.py:49: AssertionError
+_ test_all_methodology_sections_exist_even_without_evidence[public-SAU-H6-760711] _
+
+case = 'SAU-H6-760711', mode = 'public'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public','simulated'])
+    def test_all_methodology_sections_exist_even_without_evidence(case,mode):
+        document=Document(render_dossier_html(build_dossier(analyze(case,mode)),'en'))
+        ids={attrs.get('id') for tag,attrs in document.tags if tag=='section'}
+>       assert {'dossier-'+section for section in SECTIONS} <= ids
+E       AssertionError: assert {'dossier-aut...onomics', ...} <= {None}
+E         
+E         Extra items in the left set:
+E         'dossier-identity'
+E         'dossier-ledger'
+E         'dossier-supply'
+E         'dossier-authority'
+E         'dossier-competition'...
+E         
+E         ...Full output truncated (6 lines hidden), use '-vv' to show
+
+tests/test_dossier_projection.py:49: AssertionError
+_ test_all_methodology_sections_exist_even_without_evidence[simulated-SAU-H0-390210] _
+
+case = 'SAU-H0-390210', mode = 'simulated'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public','simulated'])
+    def test_all_methodology_sections_exist_even_without_evidence(case,mode):
+        document=Document(render_dossier_html(build_dossier(analyze(case,mode)),'en'))
+        ids={attrs.get('id') for tag,attrs in document.tags if tag=='section'}
+>       assert {'dossier-'+section for section in SECTIONS} <= ids
+E       AssertionError: assert {'dossier-aut...onomics', ...} <= {None}
+E         
+E         Extra items in the left set:
+E         'dossier-identity'
+E         'dossier-ledger'
+E         'dossier-supply'
+E         'dossier-authority'
+E         'dossier-competition'...
+E         
+E         ...Full output truncated (6 lines hidden), use '-vv' to show
+
+tests/test_dossier_projection.py:49: AssertionError
+_ test_all_methodology_sections_exist_even_without_evidence[simulated-SAU-H0-721049] _
+
+case = 'SAU-H0-721049', mode = 'simulated'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public','simulated'])
+    def test_all_methodology_sections_exist_even_without_evidence(case,mode):
+>       document=Document(render_dossier_html(build_dossier(analyze(case,mode)),'en'))
+                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_dossier_projection.py:47: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/ior_mvp/dossier.py:188: in build_dossier
+    result.update(project_dossier(analysis, scenario))
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/ior_mvp/dossier_projection.py:98: in project_dossier
+    add(block,key,value,f'scenario.synthetic_inputs.{name}.{key}',unit,numeric=numeric,
+src/ior_mvp/dossier_projection.py:88: in add
+    blocks[block]['fields'].append(scalar(key,value,path,unit,numeric=numeric,branch=tag or active,evidence_ids=ids,missing_status=missing_status))
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+key = 'thickness_mm', value = [0.7, 1.5]
+source_path = 'scenario.synthetic_inputs.target_specification.thickness_mm'
+unit = 'mm'
+
+    def scalar(key: str, value: Any, source_path: str, unit: str | None=None,
+               *, numeric: bool=False, evidence_ids: list | None=None,
+               branch: dict | None=None, missing_status: str='UNAVAILABLE') -> dict:
+        if value is MISSING:
+            status=missing_status; value=None
+        elif value is None:
+            status='NOT_CALCULABLE' if numeric else 'UNAVAILABLE'
+        elif isinstance(value,str) and value in ('UNAVAILABLE','NOT_CALCULABLE','NOT_APPLICABLE'):
+            status=value;value=None
+        else:
+            status='AVAILABLE'
+            if numeric and (isinstance(value,bool) or not isinstance(value,(int,float)) or not isfinite(value)):
+>               raise DossierIntegrityError(f'Dossier finite numeric value required: {source_path}')
+E               ior_mvp.dossier_validation.DossierIntegrityError: Dossier finite numeric value required: scenario.synthetic_inputs.target_specification.thickness_mm
+
+src/ior_mvp/dossier_projection.py:45: DossierIntegrityError
+_ test_all_methodology_sections_exist_even_without_evidence[simulated-SAU-H6-294110] _
+
+case = 'SAU-H6-294110', mode = 'simulated'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public','simulated'])
+    def test_all_methodology_sections_exist_even_without_evidence(case,mode):
+        document=Document(render_dossier_html(build_dossier(analyze(case,mode)),'en'))
+        ids={attrs.get('id') for tag,attrs in document.tags if tag=='section'}
+>       assert {'dossier-'+section for section in SECTIONS} <= ids
+E       AssertionError: assert {'dossier-aut...onomics', ...} <= {None}
+E         
+E         Extra items in the left set:
+E         'dossier-identity'
+E         'dossier-ledger'
+E         'dossier-supply'
+E         'dossier-authority'
+E         'dossier-competition'...
+E         
+E         ...Full output truncated (6 lines hidden), use '-vv' to show
+
+tests/test_dossier_projection.py:49: AssertionError
+_ test_all_methodology_sections_exist_even_without_evidence[simulated-SAU-H6-294120] _
+
+case = 'SAU-H6-294120', mode = 'simulated'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public','simulated'])
+    def test_all_methodology_sections_exist_even_without_evidence(case,mode):
+        document=Document(render_dossier_html(build_dossier(analyze(case,mode)),'en'))
+        ids={attrs.get('id') for tag,attrs in document.tags if tag=='section'}
+>       assert {'dossier-'+section for section in SECTIONS} <= ids
+E       AssertionError: assert {'dossier-aut...onomics', ...} <= {None}
+E         
+E         Extra items in the left set:
+E         'dossier-identity'
+E         'dossier-ledger'
+E         'dossier-supply'
+E         'dossier-authority'
+E         'dossier-competition'...
+E         
+E         ...Full output truncated (6 lines hidden), use '-vv' to show
+
+tests/test_dossier_projection.py:49: AssertionError
+_ test_all_methodology_sections_exist_even_without_evidence[simulated-SAU-H6-310430] _
+
+case = 'SAU-H6-310430', mode = 'simulated'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public','simulated'])
+    def test_all_methodology_sections_exist_even_without_evidence(case,mode):
+        document=Document(render_dossier_html(build_dossier(analyze(case,mode)),'en'))
+        ids={attrs.get('id') for tag,attrs in document.tags if tag=='section'}
+>       assert {'dossier-'+section for section in SECTIONS} <= ids
+E       AssertionError: assert {'dossier-aut...onomics', ...} <= {None}
+E         
+E         Extra items in the left set:
+E         'dossier-identity'
+E         'dossier-ledger'
+E         'dossier-supply'
+E         'dossier-authority'
+E         'dossier-competition'...
+E         
+E         ...Full output truncated (6 lines hidden), use '-vv' to show
+
+tests/test_dossier_projection.py:49: AssertionError
+_ test_all_methodology_sections_exist_even_without_evidence[simulated-SAU-H6-310510] _
+
+case = 'SAU-H6-310510', mode = 'simulated'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public','simulated'])
+    def test_all_methodology_sections_exist_even_without_evidence(case,mode):
+        document=Document(render_dossier_html(build_dossier(analyze(case,mode)),'en'))
+        ids={attrs.get('id') for tag,attrs in document.tags if tag=='section'}
+>       assert {'dossier-'+section for section in SECTIONS} <= ids
+E       AssertionError: assert {'dossier-aut...onomics', ...} <= {None}
+E         
+E         Extra items in the left set:
+E         'dossier-identity'
+E         'dossier-ledger'
+E         'dossier-supply'
+E         'dossier-authority'
+E         'dossier-competition'...
+E         
+E         ...Full output truncated (6 lines hidden), use '-vv' to show
+
+tests/test_dossier_projection.py:49: AssertionError
+_ test_all_methodology_sections_exist_even_without_evidence[simulated-SAU-H6-392010] _
+
+case = 'SAU-H6-392010', mode = 'simulated'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public','simulated'])
+    def test_all_methodology_sections_exist_even_without_evidence(case,mode):
+        document=Document(render_dossier_html(build_dossier(analyze(case,mode)),'en'))
+        ids={attrs.get('id') for tag,attrs in document.tags if tag=='section'}
+>       assert {'dossier-'+section for section in SECTIONS} <= ids
+E       AssertionError: assert {'dossier-aut...onomics', ...} <= {None}
+E         
+E         Extra items in the left set:
+E         'dossier-identity'
+E         'dossier-ledger'
+E         'dossier-supply'
+E         'dossier-authority'
+E         'dossier-competition'...
+E         
+E         ...Full output truncated (6 lines hidden), use '-vv' to show
+
+tests/test_dossier_projection.py:49: AssertionError
+_ test_all_methodology_sections_exist_even_without_evidence[simulated-SAU-H6-721012] _
+
+case = 'SAU-H6-721012', mode = 'simulated'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public','simulated'])
+    def test_all_methodology_sections_exist_even_without_evidence(case,mode):
+>       document=Document(render_dossier_html(build_dossier(analyze(case,mode)),'en'))
+                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_dossier_projection.py:47: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/ior_mvp/dossier.py:188: in build_dossier
+    result.update(project_dossier(analysis, scenario))
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/ior_mvp/dossier_projection.py:98: in project_dossier
+    add(block,key,value,f'scenario.synthetic_inputs.{name}.{key}',unit,numeric=numeric,
+src/ior_mvp/dossier_projection.py:88: in add
+    blocks[block]['fields'].append(scalar(key,value,path,unit,numeric=numeric,branch=tag or active,evidence_ids=ids,missing_status=missing_status))
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+key = 'tin_coating_g_m2', value = [2.8, 5.6]
+source_path = 'scenario.synthetic_inputs.target_specification.tin_coating_g_m2'
+unit = 'g/m²'
+
+    def scalar(key: str, value: Any, source_path: str, unit: str | None=None,
+               *, numeric: bool=False, evidence_ids: list | None=None,
+               branch: dict | None=None, missing_status: str='UNAVAILABLE') -> dict:
+        if value is MISSING:
+            status=missing_status; value=None
+        elif value is None:
+            status='NOT_CALCULABLE' if numeric else 'UNAVAILABLE'
+        elif isinstance(value,str) and value in ('UNAVAILABLE','NOT_CALCULABLE','NOT_APPLICABLE'):
+            status=value;value=None
+        else:
+            status='AVAILABLE'
+            if numeric and (isinstance(value,bool) or not isinstance(value,(int,float)) or not isfinite(value)):
+>               raise DossierIntegrityError(f'Dossier finite numeric value required: {source_path}')
+E               ior_mvp.dossier_validation.DossierIntegrityError: Dossier finite numeric value required: scenario.synthetic_inputs.target_specification.tin_coating_g_m2
+
+src/ior_mvp/dossier_projection.py:45: DossierIntegrityError
+_ test_all_methodology_sections_exist_even_without_evidence[simulated-SAU-H6-721061] _
+
+case = 'SAU-H6-721061', mode = 'simulated'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public','simulated'])
+    def test_all_methodology_sections_exist_even_without_evidence(case,mode):
+>       document=Document(render_dossier_html(build_dossier(analyze(case,mode)),'en'))
+                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_dossier_projection.py:47: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/ior_mvp/dossier.py:188: in build_dossier
+    result.update(project_dossier(analysis, scenario))
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/ior_mvp/dossier_projection.py:98: in project_dossier
+    add(block,key,value,f'scenario.synthetic_inputs.{name}.{key}',unit,numeric=numeric,
+src/ior_mvp/dossier_projection.py:88: in add
+    blocks[block]['fields'].append(scalar(key,value,path,unit,numeric=numeric,branch=tag or active,evidence_ids=ids,missing_status=missing_status))
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+key = 'thickness_mm', value = [0.4, 0.8]
+source_path = 'scenario.synthetic_inputs.target_specification.thickness_mm'
+unit = 'mm'
+
+    def scalar(key: str, value: Any, source_path: str, unit: str | None=None,
+               *, numeric: bool=False, evidence_ids: list | None=None,
+               branch: dict | None=None, missing_status: str='UNAVAILABLE') -> dict:
+        if value is MISSING:
+            status=missing_status; value=None
+        elif value is None:
+            status='NOT_CALCULABLE' if numeric else 'UNAVAILABLE'
+        elif isinstance(value,str) and value in ('UNAVAILABLE','NOT_CALCULABLE','NOT_APPLICABLE'):
+            status=value;value=None
+        else:
+            status='AVAILABLE'
+            if numeric and (isinstance(value,bool) or not isinstance(value,(int,float)) or not isfinite(value)):
+>               raise DossierIntegrityError(f'Dossier finite numeric value required: {source_path}')
+E               ior_mvp.dossier_validation.DossierIntegrityError: Dossier finite numeric value required: scenario.synthetic_inputs.target_specification.thickness_mm
+
+src/ior_mvp/dossier_projection.py:45: DossierIntegrityError
+_ test_all_methodology_sections_exist_even_without_evidence[simulated-SAU-H6-760429] _
+
+case = 'SAU-H6-760429', mode = 'simulated'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public','simulated'])
+    def test_all_methodology_sections_exist_even_without_evidence(case,mode):
+        document=Document(render_dossier_html(build_dossier(analyze(case,mode)),'en'))
+        ids={attrs.get('id') for tag,attrs in document.tags if tag=='section'}
+>       assert {'dossier-'+section for section in SECTIONS} <= ids
+E       AssertionError: assert {'dossier-aut...onomics', ...} <= {None}
+E         
+E         Extra items in the left set:
+E         'dossier-identity'
+E         'dossier-ledger'
+E         'dossier-supply'
+E         'dossier-authority'
+E         'dossier-competition'...
+E         
+E         ...Full output truncated (6 lines hidden), use '-vv' to show
+
+tests/test_dossier_projection.py:49: AssertionError
+_ test_all_methodology_sections_exist_even_without_evidence[simulated-SAU-H6-760711] _
+
+case = 'SAU-H6-760711', mode = 'simulated'
+
+    @pytest.mark.parametrize('case', CASES)
+    @pytest.mark.parametrize('mode', ['public','simulated'])
+    def test_all_methodology_sections_exist_even_without_evidence(case,mode):
+>       document=Document(render_dossier_html(build_dossier(analyze(case,mode)),'en'))
+                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_dossier_projection.py:47: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/ior_mvp/dossier.py:188: in build_dossier
+    result.update(project_dossier(analysis, scenario))
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/ior_mvp/dossier_projection.py:98: in project_dossier
+    add(block,key,value,f'scenario.synthetic_inputs.{name}.{key}',unit,numeric=numeric,
+src/ior_mvp/dossier_projection.py:88: in add
+    blocks[block]['fields'].append(scalar(key,value,path,unit,numeric=numeric,branch=tag or active,evidence_ids=ids,missing_status=missing_status))
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+key = 'thickness_um', value = [6.3, 40]
+source_path = 'scenario.synthetic_inputs.target_specification.thickness_um'
+unit = 'µm'
+
+    def scalar(key: str, value: Any, source_path: str, unit: str | None=None,
+               *, numeric: bool=False, evidence_ids: list | None=None,
+               branch: dict | None=None, missing_status: str='UNAVAILABLE') -> dict:
+        if value is MISSING:
+            status=missing_status; value=None
+        elif value is None:
+            status='NOT_CALCULABLE' if numeric else 'UNAVAILABLE'
+        elif isinstance(value,str) and value in ('UNAVAILABLE','NOT_CALCULABLE','NOT_APPLICABLE'):
+            status=value;value=None
+        else:
+            status='AVAILABLE'
+            if numeric and (isinstance(value,bool) or not isinstance(value,(int,float)) or not isfinite(value)):
+>               raise DossierIntegrityError(f'Dossier finite numeric value required: {source_path}')
+E               ior_mvp.dossier_validation.DossierIntegrityError: Dossier finite numeric value required: scenario.synthetic_inputs.target_specification.thickness_um
+
+src/ior_mvp/dossier_projection.py:45: DossierIntegrityError
+_ test_simulated_export_keeps_complete_visible_public_conclusion[SAU-H0-390210] _
+
+case = 'SAU-H0-390210'
+
+    @pytest.mark.parametrize('case',CASES)
+    def test_simulated_export_keeps_complete_visible_public_conclusion(case):
+        analysis=analyze(case,'simulated');dossier=build_dossier(analysis)
+        assert dossier.get('public_decision') == analysis['real_decision']
+        for locale in ['en','ar']:
+            text=''.join(Document(render_dossier_html(dossier,locale)).text)
+            narrative=analysis['real_decision']['localized_narrative'][locale]
+            for field in ['headline','rationale','route_label']:
+>               assert narrative[field]['text'] in text
+E               assert 'REJECT — generic capacity support' in '\n\n\n\n\nDecision Dossier — Reject\n@font-face {\n  font-family: "IOR Noto Sans";\n  font-style: normal;\n  font-dis...cc547c8ac4ce9Project 0.2.0 · Thresholds 1.3.0 · Sector profiles 1.1.0 · Evidence policy 1.4.0 · UI strings 1.6.0\n\n\n'
+
+tests/test_dossier_projection.py:59: AssertionError
+_ test_simulated_export_keeps_complete_visible_public_conclusion[SAU-H0-721049] _
+
+case = 'SAU-H0-721049'
+
+    @pytest.mark.parametrize('case',CASES)
+    def test_simulated_export_keeps_complete_visible_public_conclusion(case):
+>       analysis=analyze(case,'simulated');dossier=build_dossier(analysis)
+                                                   ^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_dossier_projection.py:53: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/ior_mvp/dossier.py:188: in build_dossier
+    result.update(project_dossier(analysis, scenario))
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/ior_mvp/dossier_projection.py:98: in project_dossier
+    add(block,key,value,f'scenario.synthetic_inputs.{name}.{key}',unit,numeric=numeric,
+src/ior_mvp/dossier_projection.py:88: in add
+    blocks[block]['fields'].append(scalar(key,value,path,unit,numeric=numeric,branch=tag or active,evidence_ids=ids,missing_status=missing_status))
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+key = 'thickness_mm', value = [0.7, 1.5]
+source_path = 'scenario.synthetic_inputs.target_specification.thickness_mm'
+unit = 'mm'
+
+    def scalar(key: str, value: Any, source_path: str, unit: str | None=None,
+               *, numeric: bool=False, evidence_ids: list | None=None,
+               branch: dict | None=None, missing_status: str='UNAVAILABLE') -> dict:
+        if value is MISSING:
+            status=missing_status; value=None
+        elif value is None:
+            status='NOT_CALCULABLE' if numeric else 'UNAVAILABLE'
+        elif isinstance(value,str) and value in ('UNAVAILABLE','NOT_CALCULABLE','NOT_APPLICABLE'):
+            status=value;value=None
+        else:
+            status='AVAILABLE'
+            if numeric and (isinstance(value,bool) or not isinstance(value,(int,float)) or not isfinite(value)):
+>               raise DossierIntegrityError(f'Dossier finite numeric value required: {source_path}')
+E               ior_mvp.dossier_validation.DossierIntegrityError: Dossier finite numeric value required: scenario.synthetic_inputs.target_specification.thickness_mm
+
+src/ior_mvp/dossier_projection.py:45: DossierIntegrityError
+_ test_simulated_export_keeps_complete_visible_public_conclusion[SAU-H6-294110] _
+
+case = 'SAU-H6-294110'
+
+    @pytest.mark.parametrize('case',CASES)
+    def test_simulated_export_keeps_complete_visible_public_conclusion(case):
+        analysis=analyze(case,'simulated');dossier=build_dossier(analysis)
+        assert dossier.get('public_decision') == analysis['real_decision']
+        for locale in ['en','ar']:
+            text=''.join(Document(render_dossier_html(dossier,locale)).text)
+            narrative=analysis['real_decision']['localized_narrative'][locale]
+            for field in ['headline','rationale','route_label']:
+>               assert narrative[field]['text'] in text
+E               assert 'INVESTIGATE — binding constraint unresolved' in '\n\n\n\n\nDecision Dossier — Advance\n@font-face {\n  font-family: "IOR Noto Sans";\n  font-style: normal;\n  font-di...cc547c8ac4ce9Project 0.2.0 · Thresholds 1.3.0 · Sector profiles 1.1.0 · Evidence policy 1.4.0 · UI strings 1.6.0\n\n\n'
+
+tests/test_dossier_projection.py:59: AssertionError
+_ test_simulated_export_keeps_complete_visible_public_conclusion[SAU-H6-294120] _
+
+case = 'SAU-H6-294120'
+
+    @pytest.mark.parametrize('case',CASES)
+    def test_simulated_export_keeps_complete_visible_public_conclusion(case):
+        analysis=analyze(case,'simulated');dossier=build_dossier(analysis)
+        assert dossier.get('public_decision') == analysis['real_decision']
+        for locale in ['en','ar']:
+            text=''.join(Document(render_dossier_html(dossier,locale)).text)
+            narrative=analysis['real_decision']['localized_narrative'][locale]
+            for field in ['headline','rationale','route_label']:
+>               assert narrative[field]['text'] in text
+E               assert 'INVESTIGATE — binding constraint unresolved' in '\n\n\n\n\nDecision Dossier — Reject\n@font-face {\n  font-family: "IOR Noto Sans";\n  font-style: normal;\n  font-dis...cc547c8ac4ce9Project 0.2.0 · Thresholds 1.3.0 · Sector profiles 1.1.0 · Evidence policy 1.4.0 · UI strings 1.6.0\n\n\n'
+
+tests/test_dossier_projection.py:59: AssertionError
+_ test_simulated_export_keeps_complete_visible_public_conclusion[SAU-H6-310430] _
+
+case = 'SAU-H6-310430'
+
+    @pytest.mark.parametrize('case',CASES)
+    def test_simulated_export_keeps_complete_visible_public_conclusion(case):
+        analysis=analyze(case,'simulated');dossier=build_dossier(analysis)
+        assert dossier.get('public_decision') == analysis['real_decision']
+        for locale in ['en','ar']:
+            text=''.join(Document(render_dossier_html(dossier,locale)).text)
+            narrative=analysis['real_decision']['localized_narrative'][locale]
+            for field in ['headline','rationale','route_label']:
+>               assert narrative[field]['text'] in text
+E               assert 'INVESTIGATE — binding constraint unresolved' in '\n\n\n\n\nDecision Dossier — Advance\n@font-face {\n  font-family: "IOR Noto Sans";\n  font-style: normal;\n  font-di...cc547c8ac4ce9Project 0.2.0 · Thresholds 1.3.0 · Sector profiles 1.1.0 · Evidence policy 1.4.0 · UI strings 1.6.0\n\n\n'
+
+tests/test_dossier_projection.py:59: AssertionError
+_ test_simulated_export_keeps_complete_visible_public_conclusion[SAU-H6-310510] _
+
+case = 'SAU-H6-310510'
+
+    @pytest.mark.parametrize('case',CASES)
+    def test_simulated_export_keeps_complete_visible_public_conclusion(case):
+        analysis=analyze(case,'simulated');dossier=build_dossier(analysis)
+        assert dossier.get('public_decision') == analysis['real_decision']
+        for locale in ['en','ar']:
+            text=''.join(Document(render_dossier_html(dossier,locale)).text)
+            narrative=analysis['real_decision']['localized_narrative'][locale]
+            for field in ['headline','rationale','route_label']:
+>               assert narrative[field]['text'] in text
+E               assert 'INVESTIGATE — binding constraint unresolved' in '\n\n\n\n\nDecision Dossier — Reject\n@font-face {\n  font-family: "IOR Noto Sans";\n  font-style: normal;\n  font-dis...cc547c8ac4ce9Project 0.2.0 · Thresholds 1.3.0 · Sector profiles 1.1.0 · Evidence policy 1.4.0 · UI strings 1.6.0\n\n\n'
+
+tests/test_dossier_projection.py:59: AssertionError
+_ test_simulated_export_keeps_complete_visible_public_conclusion[SAU-H6-392010] _
+
+case = 'SAU-H6-392010'
+
+    @pytest.mark.parametrize('case',CASES)
+    def test_simulated_export_keeps_complete_visible_public_conclusion(case):
+        analysis=analyze(case,'simulated');dossier=build_dossier(analysis)
+        assert dossier.get('public_decision') == analysis['real_decision']
+        for locale in ['en','ar']:
+            text=''.join(Document(render_dossier_html(dossier,locale)).text)
+            narrative=analysis['real_decision']['localized_narrative'][locale]
+            for field in ['headline','rationale','route_label']:
+>               assert narrative[field]['text'] in text
+E               assert 'INVESTIGATE — binding constraint unresolved' in '\n\n\n\n\nDecision Dossier — Reject\n@font-face {\n  font-family: "IOR Noto Sans";\n  font-style: normal;\n  font-dis...cc547c8ac4ce9Project 0.2.0 · Thresholds 1.3.0 · Sector profiles 1.1.0 · Evidence policy 1.4.0 · UI strings 1.6.0\n\n\n'
+
+tests/test_dossier_projection.py:59: AssertionError
+_ test_simulated_export_keeps_complete_visible_public_conclusion[SAU-H6-721012] _
+
+case = 'SAU-H6-721012'
+
+    @pytest.mark.parametrize('case',CASES)
+    def test_simulated_export_keeps_complete_visible_public_conclusion(case):
+>       analysis=analyze(case,'simulated');dossier=build_dossier(analysis)
+                                                   ^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_dossier_projection.py:53: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/ior_mvp/dossier.py:188: in build_dossier
+    result.update(project_dossier(analysis, scenario))
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/ior_mvp/dossier_projection.py:98: in project_dossier
+    add(block,key,value,f'scenario.synthetic_inputs.{name}.{key}',unit,numeric=numeric,
+src/ior_mvp/dossier_projection.py:88: in add
+    blocks[block]['fields'].append(scalar(key,value,path,unit,numeric=numeric,branch=tag or active,evidence_ids=ids,missing_status=missing_status))
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+key = 'tin_coating_g_m2', value = [2.8, 5.6]
+source_path = 'scenario.synthetic_inputs.target_specification.tin_coating_g_m2'
+unit = 'g/m²'
+
+    def scalar(key: str, value: Any, source_path: str, unit: str | None=None,
+               *, numeric: bool=False, evidence_ids: list | None=None,
+               branch: dict | None=None, missing_status: str='UNAVAILABLE') -> dict:
+        if value is MISSING:
+            status=missing_status; value=None
+        elif value is None:
+            status='NOT_CALCULABLE' if numeric else 'UNAVAILABLE'
+        elif isinstance(value,str) and value in ('UNAVAILABLE','NOT_CALCULABLE','NOT_APPLICABLE'):
+            status=value;value=None
+        else:
+            status='AVAILABLE'
+            if numeric and (isinstance(value,bool) or not isinstance(value,(int,float)) or not isfinite(value)):
+>               raise DossierIntegrityError(f'Dossier finite numeric value required: {source_path}')
+E               ior_mvp.dossier_validation.DossierIntegrityError: Dossier finite numeric value required: scenario.synthetic_inputs.target_specification.tin_coating_g_m2
+
+src/ior_mvp/dossier_projection.py:45: DossierIntegrityError
+_ test_simulated_export_keeps_complete_visible_public_conclusion[SAU-H6-721061] _
+
+case = 'SAU-H6-721061'
+
+    @pytest.mark.parametrize('case',CASES)
+    def test_simulated_export_keeps_complete_visible_public_conclusion(case):
+>       analysis=analyze(case,'simulated');dossier=build_dossier(analysis)
+                                                   ^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_dossier_projection.py:53: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/ior_mvp/dossier.py:188: in build_dossier
+    result.update(project_dossier(analysis, scenario))
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/ior_mvp/dossier_projection.py:98: in project_dossier
+    add(block,key,value,f'scenario.synthetic_inputs.{name}.{key}',unit,numeric=numeric,
+src/ior_mvp/dossier_projection.py:88: in add
+    blocks[block]['fields'].append(scalar(key,value,path,unit,numeric=numeric,branch=tag or active,evidence_ids=ids,missing_status=missing_status))
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+key = 'thickness_mm', value = [0.4, 0.8]
+source_path = 'scenario.synthetic_inputs.target_specification.thickness_mm'
+unit = 'mm'
+
+    def scalar(key: str, value: Any, source_path: str, unit: str | None=None,
+               *, numeric: bool=False, evidence_ids: list | None=None,
+               branch: dict | None=None, missing_status: str='UNAVAILABLE') -> dict:
+        if value is MISSING:
+            status=missing_status; value=None
+        elif value is None:
+            status='NOT_CALCULABLE' if numeric else 'UNAVAILABLE'
+        elif isinstance(value,str) and value in ('UNAVAILABLE','NOT_CALCULABLE','NOT_APPLICABLE'):
+            status=value;value=None
+        else:
+            status='AVAILABLE'
+            if numeric and (isinstance(value,bool) or not isinstance(value,(int,float)) or not isfinite(value)):
+>               raise DossierIntegrityError(f'Dossier finite numeric value required: {source_path}')
+E               ior_mvp.dossier_validation.DossierIntegrityError: Dossier finite numeric value required: scenario.synthetic_inputs.target_specification.thickness_mm
+
+src/ior_mvp/dossier_projection.py:45: DossierIntegrityError
+_ test_simulated_export_keeps_complete_visible_public_conclusion[SAU-H6-760429] _
+
+case = 'SAU-H6-760429'
+
+    @pytest.mark.parametrize('case',CASES)
+    def test_simulated_export_keeps_complete_visible_public_conclusion(case):
+        analysis=analyze(case,'simulated');dossier=build_dossier(analysis)
+        assert dossier.get('public_decision') == analysis['real_decision']
+        for locale in ['en','ar']:
+            text=''.join(Document(render_dossier_html(dossier,locale)).text)
+            narrative=analysis['real_decision']['localized_narrative'][locale]
+            for field in ['headline','rationale','route_label']:
+>               assert narrative[field]['text'] in text
+E               assert 'INVESTIGATE — binding constraint unresolved' in '\n\n\n\n\nDecision Dossier — Advance\n@font-face {\n  font-family: "IOR Noto Sans";\n  font-style: normal;\n  font-di...cc547c8ac4ce9Project 0.2.0 · Thresholds 1.3.0 · Sector profiles 1.1.0 · Evidence policy 1.4.0 · UI strings 1.6.0\n\n\n'
+
+tests/test_dossier_projection.py:59: AssertionError
+_ test_simulated_export_keeps_complete_visible_public_conclusion[SAU-H6-760711] _
+
+case = 'SAU-H6-760711'
+
+    @pytest.mark.parametrize('case',CASES)
+    def test_simulated_export_keeps_complete_visible_public_conclusion(case):
+>       analysis=analyze(case,'simulated');dossier=build_dossier(analysis)
+                                                   ^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_dossier_projection.py:53: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/ior_mvp/dossier.py:188: in build_dossier
+    result.update(project_dossier(analysis, scenario))
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/ior_mvp/dossier_projection.py:98: in project_dossier
+    add(block,key,value,f'scenario.synthetic_inputs.{name}.{key}',unit,numeric=numeric,
+src/ior_mvp/dossier_projection.py:88: in add
+    blocks[block]['fields'].append(scalar(key,value,path,unit,numeric=numeric,branch=tag or active,evidence_ids=ids,missing_status=missing_status))
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+key = 'thickness_um', value = [6.3, 40]
+source_path = 'scenario.synthetic_inputs.target_specification.thickness_um'
+unit = 'µm'
+
+    def scalar(key: str, value: Any, source_path: str, unit: str | None=None,
+               *, numeric: bool=False, evidence_ids: list | None=None,
+               branch: dict | None=None, missing_status: str='UNAVAILABLE') -> dict:
+        if value is MISSING:
+            status=missing_status; value=None
+        elif value is None:
+            status='NOT_CALCULABLE' if numeric else 'UNAVAILABLE'
+        elif isinstance(value,str) and value in ('UNAVAILABLE','NOT_CALCULABLE','NOT_APPLICABLE'):
+            status=value;value=None
+        else:
+            status='AVAILABLE'
+            if numeric and (isinstance(value,bool) or not isinstance(value,(int,float)) or not isfinite(value)):
+>               raise DossierIntegrityError(f'Dossier finite numeric value required: {source_path}')
+E               ior_mvp.dossier_validation.DossierIntegrityError: Dossier finite numeric value required: scenario.synthetic_inputs.target_specification.thickness_um
+
+src/ior_mvp/dossier_projection.py:45: DossierIntegrityError
+_ test_projection_is_detached_and_preserves_decisions_routes_and_passports[simulated-SAU-H0-721049] _
+
+case = 'SAU-H0-721049', mode = 'simulated'
+
+    @pytest.mark.parametrize('case',CASES)
+    @pytest.mark.parametrize('mode',['public','simulated'])
+    def test_projection_is_detached_and_preserves_decisions_routes_and_passports(case,mode):
+        analysis=analyze(case,mode);before=deepcopy(analysis)
+        scenario=get_synthetic_scenario(case);scenario_before=deepcopy(scenario)
+>       dossier=build_dossier(analysis)
+                ^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_dossier_projection.py:68: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/ior_mvp/dossier.py:188: in build_dossier
+    result.update(project_dossier(analysis, scenario))
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/ior_mvp/dossier_projection.py:98: in project_dossier
+    add(block,key,value,f'scenario.synthetic_inputs.{name}.{key}',unit,numeric=numeric,
+src/ior_mvp/dossier_projection.py:88: in add
+    blocks[block]['fields'].append(scalar(key,value,path,unit,numeric=numeric,branch=tag or active,evidence_ids=ids,missing_status=missing_status))
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+key = 'thickness_mm', value = [0.7, 1.5]
+source_path = 'scenario.synthetic_inputs.target_specification.thickness_mm'
+unit = 'mm'
+
+    def scalar(key: str, value: Any, source_path: str, unit: str | None=None,
+               *, numeric: bool=False, evidence_ids: list | None=None,
+               branch: dict | None=None, missing_status: str='UNAVAILABLE') -> dict:
+        if value is MISSING:
+            status=missing_status; value=None
+        elif value is None:
+            status='NOT_CALCULABLE' if numeric else 'UNAVAILABLE'
+        elif isinstance(value,str) and value in ('UNAVAILABLE','NOT_CALCULABLE','NOT_APPLICABLE'):
+            status=value;value=None
+        else:
+            status='AVAILABLE'
+            if numeric and (isinstance(value,bool) or not isinstance(value,(int,float)) or not isfinite(value)):
+>               raise DossierIntegrityError(f'Dossier finite numeric value required: {source_path}')
+E               ior_mvp.dossier_validation.DossierIntegrityError: Dossier finite numeric value required: scenario.synthetic_inputs.target_specification.thickness_mm
+
+src/ior_mvp/dossier_projection.py:45: DossierIntegrityError
+_ test_projection_is_detached_and_preserves_decisions_routes_and_passports[simulated-SAU-H6-721012] _
+
+case = 'SAU-H6-721012', mode = 'simulated'
+
+    @pytest.mark.parametrize('case',CASES)
+    @pytest.mark.parametrize('mode',['public','simulated'])
+    def test_projection_is_detached_and_preserves_decisions_routes_and_passports(case,mode):
+        analysis=analyze(case,mode);before=deepcopy(analysis)
+        scenario=get_synthetic_scenario(case);scenario_before=deepcopy(scenario)
+>       dossier=build_dossier(analysis)
+                ^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_dossier_projection.py:68: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/ior_mvp/dossier.py:188: in build_dossier
+    result.update(project_dossier(analysis, scenario))
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/ior_mvp/dossier_projection.py:98: in project_dossier
+    add(block,key,value,f'scenario.synthetic_inputs.{name}.{key}',unit,numeric=numeric,
+src/ior_mvp/dossier_projection.py:88: in add
+    blocks[block]['fields'].append(scalar(key,value,path,unit,numeric=numeric,branch=tag or active,evidence_ids=ids,missing_status=missing_status))
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+key = 'tin_coating_g_m2', value = [2.8, 5.6]
+source_path = 'scenario.synthetic_inputs.target_specification.tin_coating_g_m2'
+unit = 'g/m²'
+
+    def scalar(key: str, value: Any, source_path: str, unit: str | None=None,
+               *, numeric: bool=False, evidence_ids: list | None=None,
+               branch: dict | None=None, missing_status: str='UNAVAILABLE') -> dict:
+        if value is MISSING:
+            status=missing_status; value=None
+        elif value is None:
+            status='NOT_CALCULABLE' if numeric else 'UNAVAILABLE'
+        elif isinstance(value,str) and value in ('UNAVAILABLE','NOT_CALCULABLE','NOT_APPLICABLE'):
+            status=value;value=None
+        else:
+            status='AVAILABLE'
+            if numeric and (isinstance(value,bool) or not isinstance(value,(int,float)) or not isfinite(value)):
+>               raise DossierIntegrityError(f'Dossier finite numeric value required: {source_path}')
+E               ior_mvp.dossier_validation.DossierIntegrityError: Dossier finite numeric value required: scenario.synthetic_inputs.target_specification.tin_coating_g_m2
+
+src/ior_mvp/dossier_projection.py:45: DossierIntegrityError
+_ test_projection_is_detached_and_preserves_decisions_routes_and_passports[simulated-SAU-H6-721061] _
+
+case = 'SAU-H6-721061', mode = 'simulated'
+
+    @pytest.mark.parametrize('case',CASES)
+    @pytest.mark.parametrize('mode',['public','simulated'])
+    def test_projection_is_detached_and_preserves_decisions_routes_and_passports(case,mode):
+        analysis=analyze(case,mode);before=deepcopy(analysis)
+        scenario=get_synthetic_scenario(case);scenario_before=deepcopy(scenario)
+>       dossier=build_dossier(analysis)
+                ^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_dossier_projection.py:68: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/ior_mvp/dossier.py:188: in build_dossier
+    result.update(project_dossier(analysis, scenario))
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/ior_mvp/dossier_projection.py:98: in project_dossier
+    add(block,key,value,f'scenario.synthetic_inputs.{name}.{key}',unit,numeric=numeric,
+src/ior_mvp/dossier_projection.py:88: in add
+    blocks[block]['fields'].append(scalar(key,value,path,unit,numeric=numeric,branch=tag or active,evidence_ids=ids,missing_status=missing_status))
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+key = 'thickness_mm', value = [0.4, 0.8]
+source_path = 'scenario.synthetic_inputs.target_specification.thickness_mm'
+unit = 'mm'
+
+    def scalar(key: str, value: Any, source_path: str, unit: str | None=None,
+               *, numeric: bool=False, evidence_ids: list | None=None,
+               branch: dict | None=None, missing_status: str='UNAVAILABLE') -> dict:
+        if value is MISSING:
+            status=missing_status; value=None
+        elif value is None:
+            status='NOT_CALCULABLE' if numeric else 'UNAVAILABLE'
+        elif isinstance(value,str) and value in ('UNAVAILABLE','NOT_CALCULABLE','NOT_APPLICABLE'):
+            status=value;value=None
+        else:
+            status='AVAILABLE'
+            if numeric and (isinstance(value,bool) or not isinstance(value,(int,float)) or not isfinite(value)):
+>               raise DossierIntegrityError(f'Dossier finite numeric value required: {source_path}')
+E               ior_mvp.dossier_validation.DossierIntegrityError: Dossier finite numeric value required: scenario.synthetic_inputs.target_specification.thickness_mm
+
+src/ior_mvp/dossier_projection.py:45: DossierIntegrityError
+_ test_projection_is_detached_and_preserves_decisions_routes_and_passports[simulated-SAU-H6-760711] _
+
+case = 'SAU-H6-760711', mode = 'simulated'
+
+    @pytest.mark.parametrize('case',CASES)
+    @pytest.mark.parametrize('mode',['public','simulated'])
+    def test_projection_is_detached_and_preserves_decisions_routes_and_passports(case,mode):
+        analysis=analyze(case,mode);before=deepcopy(analysis)
+        scenario=get_synthetic_scenario(case);scenario_before=deepcopy(scenario)
+>       dossier=build_dossier(analysis)
+                ^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_dossier_projection.py:68: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/ior_mvp/dossier.py:188: in build_dossier
+    result.update(project_dossier(analysis, scenario))
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/ior_mvp/dossier_projection.py:98: in project_dossier
+    add(block,key,value,f'scenario.synthetic_inputs.{name}.{key}',unit,numeric=numeric,
+src/ior_mvp/dossier_projection.py:88: in add
+    blocks[block]['fields'].append(scalar(key,value,path,unit,numeric=numeric,branch=tag or active,evidence_ids=ids,missing_status=missing_status))
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+key = 'thickness_um', value = [6.3, 40]
+source_path = 'scenario.synthetic_inputs.target_specification.thickness_um'
+unit = 'µm'
+
+    def scalar(key: str, value: Any, source_path: str, unit: str | None=None,
+               *, numeric: bool=False, evidence_ids: list | None=None,
+               branch: dict | None=None, missing_status: str='UNAVAILABLE') -> dict:
+        if value is MISSING:
+            status=missing_status; value=None
+        elif value is None:
+            status='NOT_CALCULABLE' if numeric else 'UNAVAILABLE'
+        elif isinstance(value,str) and value in ('UNAVAILABLE','NOT_CALCULABLE','NOT_APPLICABLE'):
+            status=value;value=None
+        else:
+            status='AVAILABLE'
+            if numeric and (isinstance(value,bool) or not isinstance(value,(int,float)) or not isfinite(value)):
+>               raise DossierIntegrityError(f'Dossier finite numeric value required: {source_path}')
+E               ior_mvp.dossier_validation.DossierIntegrityError: Dossier finite numeric value required: scenario.synthetic_inputs.target_specification.thickness_um
+
+src/ior_mvp/dossier_projection.py:45: DossierIntegrityError
+_______ test_scalar_source_oracle_and_scenario_whitelist[SAU-H0-721049] ________
+
+case = 'SAU-H0-721049'
+
+    @pytest.mark.parametrize('case',CASES)
+    def test_scalar_source_oracle_and_scenario_whitelist(case):
+        analysis=analyze(case,'simulated'); scenario=get_synthetic_scenario(case)
+>       dossier=build_dossier(analysis)
+                ^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_dossier_projection.py:91: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/ior_mvp/dossier.py:188: in build_dossier
+    result.update(project_dossier(analysis, scenario))
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/ior_mvp/dossier_projection.py:98: in project_dossier
+    add(block,key,value,f'scenario.synthetic_inputs.{name}.{key}',unit,numeric=numeric,
+src/ior_mvp/dossier_projection.py:88: in add
+    blocks[block]['fields'].append(scalar(key,value,path,unit,numeric=numeric,branch=tag or active,evidence_ids=ids,missing_status=missing_status))
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+key = 'thickness_mm', value = [0.7, 1.5]
+source_path = 'scenario.synthetic_inputs.target_specification.thickness_mm'
+unit = 'mm'
+
+    def scalar(key: str, value: Any, source_path: str, unit: str | None=None,
+               *, numeric: bool=False, evidence_ids: list | None=None,
+               branch: dict | None=None, missing_status: str='UNAVAILABLE') -> dict:
+        if value is MISSING:
+            status=missing_status; value=None
+        elif value is None:
+            status='NOT_CALCULABLE' if numeric else 'UNAVAILABLE'
+        elif isinstance(value,str) and value in ('UNAVAILABLE','NOT_CALCULABLE','NOT_APPLICABLE'):
+            status=value;value=None
+        else:
+            status='AVAILABLE'
+            if numeric and (isinstance(value,bool) or not isinstance(value,(int,float)) or not isfinite(value)):
+>               raise DossierIntegrityError(f'Dossier finite numeric value required: {source_path}')
+E               ior_mvp.dossier_validation.DossierIntegrityError: Dossier finite numeric value required: scenario.synthetic_inputs.target_specification.thickness_mm
+
+src/ior_mvp/dossier_projection.py:45: DossierIntegrityError
+_______ test_scalar_source_oracle_and_scenario_whitelist[SAU-H6-721012] ________
+
+case = 'SAU-H6-721012'
+
+    @pytest.mark.parametrize('case',CASES)
+    def test_scalar_source_oracle_and_scenario_whitelist(case):
+        analysis=analyze(case,'simulated'); scenario=get_synthetic_scenario(case)
+>       dossier=build_dossier(analysis)
+                ^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_dossier_projection.py:91: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/ior_mvp/dossier.py:188: in build_dossier
+    result.update(project_dossier(analysis, scenario))
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/ior_mvp/dossier_projection.py:98: in project_dossier
+    add(block,key,value,f'scenario.synthetic_inputs.{name}.{key}',unit,numeric=numeric,
+src/ior_mvp/dossier_projection.py:88: in add
+    blocks[block]['fields'].append(scalar(key,value,path,unit,numeric=numeric,branch=tag or active,evidence_ids=ids,missing_status=missing_status))
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+key = 'tin_coating_g_m2', value = [2.8, 5.6]
+source_path = 'scenario.synthetic_inputs.target_specification.tin_coating_g_m2'
+unit = 'g/m²'
+
+    def scalar(key: str, value: Any, source_path: str, unit: str | None=None,
+               *, numeric: bool=False, evidence_ids: list | None=None,
+               branch: dict | None=None, missing_status: str='UNAVAILABLE') -> dict:
+        if value is MISSING:
+            status=missing_status; value=None
+        elif value is None:
+            status='NOT_CALCULABLE' if numeric else 'UNAVAILABLE'
+        elif isinstance(value,str) and value in ('UNAVAILABLE','NOT_CALCULABLE','NOT_APPLICABLE'):
+            status=value;value=None
+        else:
+            status='AVAILABLE'
+            if numeric and (isinstance(value,bool) or not isinstance(value,(int,float)) or not isfinite(value)):
+>               raise DossierIntegrityError(f'Dossier finite numeric value required: {source_path}')
+E               ior_mvp.dossier_validation.DossierIntegrityError: Dossier finite numeric value required: scenario.synthetic_inputs.target_specification.tin_coating_g_m2
+
+src/ior_mvp/dossier_projection.py:45: DossierIntegrityError
+_______ test_scalar_source_oracle_and_scenario_whitelist[SAU-H6-721061] ________
+
+case = 'SAU-H6-721061'
+
+    @pytest.mark.parametrize('case',CASES)
+    def test_scalar_source_oracle_and_scenario_whitelist(case):
+        analysis=analyze(case,'simulated'); scenario=get_synthetic_scenario(case)
+>       dossier=build_dossier(analysis)
+                ^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_dossier_projection.py:91: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/ior_mvp/dossier.py:188: in build_dossier
+    result.update(project_dossier(analysis, scenario))
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/ior_mvp/dossier_projection.py:98: in project_dossier
+    add(block,key,value,f'scenario.synthetic_inputs.{name}.{key}',unit,numeric=numeric,
+src/ior_mvp/dossier_projection.py:88: in add
+    blocks[block]['fields'].append(scalar(key,value,path,unit,numeric=numeric,branch=tag or active,evidence_ids=ids,missing_status=missing_status))
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+key = 'thickness_mm', value = [0.4, 0.8]
+source_path = 'scenario.synthetic_inputs.target_specification.thickness_mm'
+unit = 'mm'
+
+    def scalar(key: str, value: Any, source_path: str, unit: str | None=None,
+               *, numeric: bool=False, evidence_ids: list | None=None,
+               branch: dict | None=None, missing_status: str='UNAVAILABLE') -> dict:
+        if value is MISSING:
+            status=missing_status; value=None
+        elif value is None:
+            status='NOT_CALCULABLE' if numeric else 'UNAVAILABLE'
+        elif isinstance(value,str) and value in ('UNAVAILABLE','NOT_CALCULABLE','NOT_APPLICABLE'):
+            status=value;value=None
+        else:
+            status='AVAILABLE'
+            if numeric and (isinstance(value,bool) or not isinstance(value,(int,float)) or not isfinite(value)):
+>               raise DossierIntegrityError(f'Dossier finite numeric value required: {source_path}')
+E               ior_mvp.dossier_validation.DossierIntegrityError: Dossier finite numeric value required: scenario.synthetic_inputs.target_specification.thickness_mm
+
+src/ior_mvp/dossier_projection.py:45: DossierIntegrityError
+_______ test_scalar_source_oracle_and_scenario_whitelist[SAU-H6-760711] ________
+
+case = 'SAU-H6-760711'
+
+    @pytest.mark.parametrize('case',CASES)
+    def test_scalar_source_oracle_and_scenario_whitelist(case):
+        analysis=analyze(case,'simulated'); scenario=get_synthetic_scenario(case)
+>       dossier=build_dossier(analysis)
+                ^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_dossier_projection.py:91: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/ior_mvp/dossier.py:188: in build_dossier
+    result.update(project_dossier(analysis, scenario))
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/ior_mvp/dossier_projection.py:98: in project_dossier
+    add(block,key,value,f'scenario.synthetic_inputs.{name}.{key}',unit,numeric=numeric,
+src/ior_mvp/dossier_projection.py:88: in add
+    blocks[block]['fields'].append(scalar(key,value,path,unit,numeric=numeric,branch=tag or active,evidence_ids=ids,missing_status=missing_status))
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+key = 'thickness_um', value = [6.3, 40]
+source_path = 'scenario.synthetic_inputs.target_specification.thickness_um'
+unit = 'µm'
+
+    def scalar(key: str, value: Any, source_path: str, unit: str | None=None,
+               *, numeric: bool=False, evidence_ids: list | None=None,
+               branch: dict | None=None, missing_status: str='UNAVAILABLE') -> dict:
+        if value is MISSING:
+            status=missing_status; value=None
+        elif value is None:
+            status='NOT_CALCULABLE' if numeric else 'UNAVAILABLE'
+        elif isinstance(value,str) and value in ('UNAVAILABLE','NOT_CALCULABLE','NOT_APPLICABLE'):
+            status=value;value=None
+        else:
+            status='AVAILABLE'
+            if numeric and (isinstance(value,bool) or not isinstance(value,(int,float)) or not isfinite(value)):
+>               raise DossierIntegrityError(f'Dossier finite numeric value required: {source_path}')
+E               ior_mvp.dossier_validation.DossierIntegrityError: Dossier finite numeric value required: scenario.synthetic_inputs.target_specification.thickness_um
+
+src/ior_mvp/dossier_projection.py:45: DossierIntegrityError
+=============================== warnings summary ===============================
+.venv/lib/python3.14/site-packages/fastapi/testclient.py:1
+  /home/barami/projects/ior-worktrees/s19/.venv/lib/python3.14/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_dossier_isolation.py::test_public_decision_is_never_changed_by_export[simulated]
+FAILED tests/test_dossier_projection.py::test_supply_is_named_structured_content_without_raw_dictionary[public-SAU-H0-390210]
+FAILED tests/test_dossier_projection.py::test_supply_is_named_structured_content_without_raw_dictionary[public-SAU-H0-721049]
+FAILED tests/test_dossier_projection.py::test_supply_is_named_structured_content_without_raw_dictionary[public-SAU-H6-294110]
+FAILED tests/test_dossier_projection.py::test_supply_is_named_structured_content_without_raw_dictionary[public-SAU-H6-294120]
+FAILED tests/test_dossier_projection.py::test_supply_is_named_structured_content_without_raw_dictionary[public-SAU-H6-310430]
+FAILED tests/test_dossier_projection.py::test_supply_is_named_structured_content_without_raw_dictionary[public-SAU-H6-310510]
+FAILED tests/test_dossier_projection.py::test_supply_is_named_structured_content_without_raw_dictionary[public-SAU-H6-392010]
+FAILED tests/test_dossier_projection.py::test_supply_is_named_structured_content_without_raw_dictionary[public-SAU-H6-721012]
+FAILED tests/test_dossier_projection.py::test_supply_is_named_structured_content_without_raw_dictionary[public-SAU-H6-721061]
+FAILED tests/test_dossier_projection.py::test_supply_is_named_structured_content_without_raw_dictionary[public-SAU-H6-760429]
+FAILED tests/test_dossier_projection.py::test_supply_is_named_structured_content_without_raw_dictionary[public-SAU-H6-760711]
+FAILED tests/test_dossier_projection.py::test_supply_is_named_structured_content_without_raw_dictionary[simulated-SAU-H0-390210]
+FAILED tests/test_dossier_projection.py::test_supply_is_named_structured_content_without_raw_dictionary[simulated-SAU-H0-721049]
+FAILED tests/test_dossier_projection.py::test_supply_is_named_structured_content_without_raw_dictionary[simulated-SAU-H6-294110]
+FAILED tests/test_dossier_projection.py::test_supply_is_named_structured_content_without_raw_dictionary[simulated-SAU-H6-294120]
+FAILED tests/test_dossier_projection.py::test_supply_is_named_structured_content_without_raw_dictionary[simulated-SAU-H6-310430]
+FAILED tests/test_dossier_projection.py::test_supply_is_named_structured_content_without_raw_dictionary[simulated-SAU-H6-310510]
+FAILED tests/test_dossier_projection.py::test_supply_is_named_structured_content_without_raw_dictionary[simulated-SAU-H6-392010]
+FAILED tests/test_dossier_projection.py::test_supply_is_named_structured_content_without_raw_dictionary[simulated-SAU-H6-721012]
+FAILED tests/test_dossier_projection.py::test_supply_is_named_structured_content_without_raw_dictionary[simulated-SAU-H6-721061]
+FAILED tests/test_dossier_projection.py::test_supply_is_named_structured_content_without_raw_dictionary[simulated-SAU-H6-760429]
+FAILED tests/test_dossier_projection.py::test_supply_is_named_structured_content_without_raw_dictionary[simulated-SAU-H6-760711]
+FAILED tests/test_dossier_projection.py::test_arabic_ledger_renders_localized_name_result_and_effect[SAU-H0-390210]
+FAILED tests/test_dossier_projection.py::test_arabic_ledger_renders_localized_name_result_and_effect[SAU-H0-721049]
+FAILED tests/test_dossier_projection.py::test_arabic_ledger_renders_localized_name_result_and_effect[SAU-H6-294110]
+FAILED tests/test_dossier_projection.py::test_arabic_ledger_renders_localized_name_result_and_effect[SAU-H6-294120]
+FAILED tests/test_dossier_projection.py::test_arabic_ledger_renders_localized_name_result_and_effect[SAU-H6-310430]
+FAILED tests/test_dossier_projection.py::test_arabic_ledger_renders_localized_name_result_and_effect[SAU-H6-310510]
+FAILED tests/test_dossier_projection.py::test_arabic_ledger_renders_localized_name_result_and_effect[SAU-H6-392010]
+FAILED tests/test_dossier_projection.py::test_arabic_ledger_renders_localized_name_result_and_effect[SAU-H6-721012]
+FAILED tests/test_dossier_projection.py::test_arabic_ledger_renders_localized_name_result_and_effect[SAU-H6-721061]
+FAILED tests/test_dossier_projection.py::test_arabic_ledger_renders_localized_name_result_and_effect[SAU-H6-760429]
+FAILED tests/test_dossier_projection.py::test_arabic_ledger_renders_localized_name_result_and_effect[SAU-H6-760711]
+FAILED tests/test_dossier_projection.py::test_all_methodology_sections_exist_even_without_evidence[public-SAU-H0-390210]
+FAILED tests/test_dossier_projection.py::test_all_methodology_sections_exist_even_without_evidence[public-SAU-H0-721049]
+FAILED tests/test_dossier_projection.py::test_all_methodology_sections_exist_even_without_evidence[public-SAU-H6-294110]
+FAILED tests/test_dossier_projection.py::test_all_methodology_sections_exist_even_without_evidence[public-SAU-H6-294120]
+FAILED tests/test_dossier_projection.py::test_all_methodology_sections_exist_even_without_evidence[public-SAU-H6-310430]
+FAILED tests/test_dossier_projection.py::test_all_methodology_sections_exist_even_without_evidence[public-SAU-H6-310510]
+FAILED tests/test_dossier_projection.py::test_all_methodology_sections_exist_even_without_evidence[public-SAU-H6-392010]
+FAILED tests/test_dossier_projection.py::test_all_methodology_sections_exist_even_without_evidence[public-SAU-H6-721012]
+FAILED tests/test_dossier_projection.py::test_all_methodology_sections_exist_even_without_evidence[public-SAU-H6-721061]
+FAILED tests/test_dossier_projection.py::test_all_methodology_sections_exist_even_without_evidence[public-SAU-H6-760429]
+FAILED tests/test_dossier_projection.py::test_all_methodology_sections_exist_even_without_evidence[public-SAU-H6-760711]
+FAILED tests/test_dossier_projection.py::test_all_methodology_sections_exist_even_without_evidence[simulated-SAU-H0-390210]
+FAILED tests/test_dossier_projection.py::test_all_methodology_sections_exist_even_without_evidence[simulated-SAU-H0-721049]
+FAILED tests/test_dossier_projection.py::test_all_methodology_sections_exist_even_without_evidence[simulated-SAU-H6-294110]
+FAILED tests/test_dossier_projection.py::test_all_methodology_sections_exist_even_without_evidence[simulated-SAU-H6-294120]
+FAILED tests/test_dossier_projection.py::test_all_methodology_sections_exist_even_without_evidence[simulated-SAU-H6-310430]
+FAILED tests/test_dossier_projection.py::test_all_methodology_sections_exist_even_without_evidence[simulated-SAU-H6-310510]
+FAILED tests/test_dossier_projection.py::test_all_methodology_sections_exist_even_without_evidence[simulated-SAU-H6-392010]
+FAILED tests/test_dossier_projection.py::test_all_methodology_sections_exist_even_without_evidence[simulated-SAU-H6-721012]
+FAILED tests/test_dossier_projection.py::test_all_methodology_sections_exist_even_without_evidence[simulated-SAU-H6-721061]
+FAILED tests/test_dossier_projection.py::test_all_methodology_sections_exist_even_without_evidence[simulated-SAU-H6-760429]
+FAILED tests/test_dossier_projection.py::test_all_methodology_sections_exist_even_without_evidence[simulated-SAU-H6-760711]
+FAILED tests/test_dossier_projection.py::test_simulated_export_keeps_complete_visible_public_conclusion[SAU-H0-390210]
+FAILED tests/test_dossier_projection.py::test_simulated_export_keeps_complete_visible_public_conclusion[SAU-H0-721049]
+FAILED tests/test_dossier_projection.py::test_simulated_export_keeps_complete_visible_public_conclusion[SAU-H6-294110]
+FAILED tests/test_dossier_projection.py::test_simulated_export_keeps_complete_visible_public_conclusion[SAU-H6-294120]
+FAILED tests/test_dossier_projection.py::test_simulated_export_keeps_complete_visible_public_conclusion[SAU-H6-310430]
+FAILED tests/test_dossier_projection.py::test_simulated_export_keeps_complete_visible_public_conclusion[SAU-H6-310510]
+FAILED tests/test_dossier_projection.py::test_simulated_export_keeps_complete_visible_public_conclusion[SAU-H6-392010]
+FAILED tests/test_dossier_projection.py::test_simulated_export_keeps_complete_visible_public_conclusion[SAU-H6-721012]
+FAILED tests/test_dossier_projection.py::test_simulated_export_keeps_complete_visible_public_conclusion[SAU-H6-721061]
+FAILED tests/test_dossier_projection.py::test_simulated_export_keeps_complete_visible_public_conclusion[SAU-H6-760429]
+FAILED tests/test_dossier_projection.py::test_simulated_export_keeps_complete_visible_public_conclusion[SAU-H6-760711]
+FAILED tests/test_dossier_projection.py::test_projection_is_detached_and_preserves_decisions_routes_and_passports[simulated-SAU-H0-721049]
+FAILED tests/test_dossier_projection.py::test_projection_is_detached_and_preserves_decisions_routes_and_passports[simulated-SAU-H6-721012]
+FAILED tests/test_dossier_projection.py::test_projection_is_detached_and_preserves_decisions_routes_and_passports[simulated-SAU-H6-721061]
+FAILED tests/test_dossier_projection.py::test_projection_is_detached_and_preserves_decisions_routes_and_passports[simulated-SAU-H6-760711]
+FAILED tests/test_dossier_projection.py::test_scalar_source_oracle_and_scenario_whitelist[SAU-H0-721049]
+FAILED tests/test_dossier_projection.py::test_scalar_source_oracle_and_scenario_whitelist[SAU-H6-721012]
+FAILED tests/test_dossier_projection.py::test_scalar_source_oracle_and_scenario_whitelist[SAU-H6-721061]
+FAILED tests/test_dossier_projection.py::test_scalar_source_oracle_and_scenario_whitelist[SAU-H6-760711]
+75 failed, 64 passed, 1 warning in 1.34s

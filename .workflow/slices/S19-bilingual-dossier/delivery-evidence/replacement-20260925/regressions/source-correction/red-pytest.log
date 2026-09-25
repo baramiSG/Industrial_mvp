@@ -1,0 +1,132 @@
+FFFF....F                                                                [100%]
+=================================== FAILURES ===================================
+__ test_summary_separates_supporting_and_public_contradiction_refs[en-public] __
+
+mode = 'public', locale = 'en'
+
+    @pytest.mark.parametrize('mode', ['public','simulated'])
+    @pytest.mark.parametrize('locale', ['en','ar'])
+    def test_summary_separates_supporting_and_public_contradiction_refs(mode, locale):
+        from ior_mvp.config import ui_text
+        analysis=analyze('SAU-H0-721049', mode)
+        dossier=build_dossier(analysis)
+        before=deepcopy(dossier)
+        markup=render_dossier_html(dossier, locale)
+        assert dossier==before
+        assert dossier['public_decision']['state']==analysis['real_decision']['state']
+        refs,contrary=_public_summary_refs(dossier),_public_contrary(dossier)
+        assert contrary==['S-UNICOIL-SPEC'] and 'S-UNICOIL-SPEC' not in refs
+        groups=SummaryEvidence(markup).groups
+>       assert [group['ids'] for group in groups]==[refs, contrary]
+E       AssertionError: assert [['S-WITS-721...NICOIL-SPEC']] == [['S-WITS-721...NICOIL-SPEC']]
+E         
+E         At index 0 diff: ['S-WITS-721049', 'S-UNICOIL-EPD', 'S-UNICOIL-SPEC'] != ['S-WITS-721049', 'S-UNICOIL-EPD']
+E         Right contains one more item: ['S-UNICOIL-SPEC']
+E         Use -v to get more diff
+
+tests/test_dossier_projection.py:450: AssertionError
+_ test_summary_separates_supporting_and_public_contradiction_refs[en-simulated] _
+
+mode = 'simulated', locale = 'en'
+
+    @pytest.mark.parametrize('mode', ['public','simulated'])
+    @pytest.mark.parametrize('locale', ['en','ar'])
+    def test_summary_separates_supporting_and_public_contradiction_refs(mode, locale):
+        from ior_mvp.config import ui_text
+        analysis=analyze('SAU-H0-721049', mode)
+        dossier=build_dossier(analysis)
+        before=deepcopy(dossier)
+        markup=render_dossier_html(dossier, locale)
+        assert dossier==before
+        assert dossier['public_decision']['state']==analysis['real_decision']['state']
+        refs,contrary=_public_summary_refs(dossier),_public_contrary(dossier)
+        assert contrary==['S-UNICOIL-SPEC'] and 'S-UNICOIL-SPEC' not in refs
+        groups=SummaryEvidence(markup).groups
+>       assert [group['ids'] for group in groups]==[refs, contrary]
+E       AssertionError: assert [['S-WITS-721...NICOIL-SPEC']] == [['S-WITS-721...NICOIL-SPEC']]
+E         
+E         At index 0 diff: ['S-WITS-721049', 'S-UNICOIL-EPD', 'S-UNICOIL-SPEC'] != ['S-WITS-721049', 'S-UNICOIL-EPD']
+E         Right contains one more item: ['S-UNICOIL-SPEC']
+E         Use -v to get more diff
+
+tests/test_dossier_projection.py:450: AssertionError
+__ test_summary_separates_supporting_and_public_contradiction_refs[ar-public] __
+
+mode = 'public', locale = 'ar'
+
+    @pytest.mark.parametrize('mode', ['public','simulated'])
+    @pytest.mark.parametrize('locale', ['en','ar'])
+    def test_summary_separates_supporting_and_public_contradiction_refs(mode, locale):
+        from ior_mvp.config import ui_text
+        analysis=analyze('SAU-H0-721049', mode)
+        dossier=build_dossier(analysis)
+        before=deepcopy(dossier)
+        markup=render_dossier_html(dossier, locale)
+        assert dossier==before
+        assert dossier['public_decision']['state']==analysis['real_decision']['state']
+        refs,contrary=_public_summary_refs(dossier),_public_contrary(dossier)
+        assert contrary==['S-UNICOIL-SPEC'] and 'S-UNICOIL-SPEC' not in refs
+        groups=SummaryEvidence(markup).groups
+>       assert [group['ids'] for group in groups]==[refs, contrary]
+E       AssertionError: assert [['S-WITS-721...NICOIL-SPEC']] == [['S-WITS-721...NICOIL-SPEC']]
+E         
+E         At index 0 diff: ['S-WITS-721049', 'S-UNICOIL-EPD', 'S-UNICOIL-SPEC'] != ['S-WITS-721049', 'S-UNICOIL-EPD']
+E         Right contains one more item: ['S-UNICOIL-SPEC']
+E         Use -v to get more diff
+
+tests/test_dossier_projection.py:450: AssertionError
+_ test_summary_separates_supporting_and_public_contradiction_refs[ar-simulated] _
+
+mode = 'simulated', locale = 'ar'
+
+    @pytest.mark.parametrize('mode', ['public','simulated'])
+    @pytest.mark.parametrize('locale', ['en','ar'])
+    def test_summary_separates_supporting_and_public_contradiction_refs(mode, locale):
+        from ior_mvp.config import ui_text
+        analysis=analyze('SAU-H0-721049', mode)
+        dossier=build_dossier(analysis)
+        before=deepcopy(dossier)
+        markup=render_dossier_html(dossier, locale)
+        assert dossier==before
+        assert dossier['public_decision']['state']==analysis['real_decision']['state']
+        refs,contrary=_public_summary_refs(dossier),_public_contrary(dossier)
+        assert contrary==['S-UNICOIL-SPEC'] and 'S-UNICOIL-SPEC' not in refs
+        groups=SummaryEvidence(markup).groups
+>       assert [group['ids'] for group in groups]==[refs, contrary]
+E       AssertionError: assert [['S-WITS-721...NICOIL-SPEC']] == [['S-WITS-721...NICOIL-SPEC']]
+E         
+E         At index 0 diff: ['S-WITS-721049', 'S-UNICOIL-EPD', 'S-UNICOIL-SPEC'] != ['S-WITS-721049', 'S-UNICOIL-EPD']
+E         Right contains one more item: ['S-UNICOIL-SPEC']
+E         Use -v to get more diff
+
+tests/test_dossier_projection.py:450: AssertionError
+___ test_summary_keeps_a_reference_that_is_both_supporting_and_contradictory ___
+
+    def test_summary_keeps_a_reference_that_is_both_supporting_and_contradictory():
+        from ior_mvp.config import ui_text
+        analysis=deepcopy(analyze('SAU-H0-721049', 'public'))
+        target=next(row for row in analysis['evidence'] if row.get('synthetic_flag') is False)
+        assert not row_contradiction(target)
+        target['contradiction']='Dual-role probe retained for confirmation.'
+        dossier=build_dossier(analysis)
+        refs,contrary=_public_summary_refs(dossier),_public_contrary(dossier)
+        assert target['evidence_id'] in refs and target['evidence_id'] in contrary
+        for locale in ('en','ar'):
+            markup=render_dossier_html(dossier, locale)
+            groups=SummaryEvidence(markup).groups
+>           assert [group['ids'] for group in groups]==[refs, contrary]
+E           AssertionError: assert [['S-WITS-721...NICOIL-SPEC']] == [['S-WITS-721...NICOIL-SPEC']]
+E             
+E             At index 0 diff: ['S-WITS-721049', 'S-UNICOIL-EPD', 'S-WITS-721049', 'S-UNICOIL-SPEC'] != ['S-WITS-721049', 'S-UNICOIL-EPD']
+E             Right contains one more item: ['S-WITS-721049', 'S-UNICOIL-SPEC']
+E             Use -v to get more diff
+
+tests/test_dossier_projection.py:489: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_dossier_projection.py::test_summary_separates_supporting_and_public_contradiction_refs[en-public]
+FAILED tests/test_dossier_projection.py::test_summary_separates_supporting_and_public_contradiction_refs[en-simulated]
+FAILED tests/test_dossier_projection.py::test_summary_separates_supporting_and_public_contradiction_refs[ar-public]
+FAILED tests/test_dossier_projection.py::test_summary_separates_supporting_and_public_contradiction_refs[ar-simulated]
+FAILED tests/test_dossier_projection.py::test_summary_keeps_a_reference_that_is_both_supporting_and_contradictory
+5 failed, 4 passed in 0.30s
+EXIT:1

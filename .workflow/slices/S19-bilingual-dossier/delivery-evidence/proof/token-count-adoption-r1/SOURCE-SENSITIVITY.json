@@ -1,0 +1,65 @@
+{
+  "scope": "Exactly four approved literal sites; positive browser matrix still running when this source/sensitivity record was written",
+  "postimages": {
+    "browser_tests/test_graph.py": "2b37163125581c45cf8067c04257dc9b7c3c0dd6d0bc984883ec853a44ce454c",
+    "tests/test_integrity_contract.py": "ee966276b75722536a71b0c0e02d7ed7ba4be3e615ce4c87ca2df59292326d44",
+    "tests/test_s17_generation.py": "2da86d1e5fa9c10cd35bd033b2855751a035213ab67365d86ed81388b6b1bfc5",
+    "tests/test_s17_status_docs.py": "98cab27514fc6bad963e54a89d6f7b56ce7d7e10585a19443304f9cb5573e55a"
+  },
+  "source_from_capture_only_four_expected_literal_changes": true,
+  "all230_graph_input_rows_unchanged": true,
+  "all44indexes_unchanged": true,
+  "production_graph_css_unchanged": true,
+  "negative_css_only_copy": {
+    "only_changed_path": "src/ior_mvp/static/css/graph.css",
+    "removed_exact_inherited_rule": ".graph-element-button[data-graph-select=\"edge\"] > small {\n  flex-grow: 1;\n}\n",
+    "before_css_sha256": "3c45f10453d0abcd0ce8a0d62e0e063e9f3df1a70464b63d0ab23e3bbaf97779",
+    "after_css_sha256": "22af477cffb1e18394c6aedcc2f1280ab34692e132912012437aa211bfeb17d6",
+    "counterfactual_token": "ENGINE-7ae34188bdec",
+    "scope": "Disposable copy only; W19 CSS unchanged; actual tests/assertions and allother source bytes identical"
+  },
+  "historical_counterfactual_sensitive_in_both_locales": {
+    "en": {
+      "protected_anchor": "right",
+      "changes": [
+        {
+          "row": 2,
+          "before": 1343.53,
+          "after": 1346.06
+        },
+        {
+          "row": 3,
+          "before": 1277.16,
+          "after": 1279.69
+        }
+      ],
+      "rows": 12,
+      "replacements": 5,
+      "repeat_and_restore_exact": true
+    },
+    "ar": {
+      "protected_anchor": "left",
+      "changes": [
+        {
+          "row": 2,
+          "before": 96.47,
+          "after": 93.94
+        },
+        {
+          "row": 3,
+          "before": 162.84,
+          "after": 160.31
+        }
+      ],
+      "rows": 12,
+      "replacements": 5,
+      "repeat_and_restore_exact": true
+    }
+  },
+  "alternate_not_used": true,
+  "actual_count_red": "3 assertions728!=726",
+  "actual_stale_token_red": "2 assertions0!=5; distinct from successful CSS defect sensitivity",
+  "count_green_full": "40passed6.44s",
+  "sanad": "Byte-exact literal transformations and fullsource/input/index/CSS preservation; actual historical-token CSS-only negative raw rows and assertion logs.",
+  "muhasabah": "PASS for bounded source/sensitivity facts; correct-CSS full12matrix outcome and independent review pending."
+}

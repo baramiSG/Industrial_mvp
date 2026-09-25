@@ -1,0 +1,211 @@
+{
+  "scope": "Independent finite first-scalar amendment/feasibility review; transfer not yet performed",
+  "amendment": {
+    "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/AMENDMENT.md",
+    "sha256": "46fff9c9de09eb34d24b2fd22ff3c779599251f5c0e35b02dea82b17762f8b49"
+  },
+  "feasibility": {
+    "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/FEASIBILITY.json",
+    "sha256": "e56236e8155e32cc8ad083e05e401374032fa802c023e7dc520f7d2b702ef3df"
+  },
+  "bound_path_hashes_verified": 35,
+  "source": {
+    "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/SOURCE.json",
+    "sha256": "ba5bec02c6912ad4e2dcafcba18f6746852bdbd66687fd784b6af86b380f2bdc",
+    "count": 1759,
+    "all_file_hashes_and_pathset_reverified": true,
+    "only_delta": [
+      "src/ior_mvp/static/css/dossier.css"
+    ],
+    "previous_count_unchanged": 1758,
+    "css_sha256": "440b06e0a743deb8d44645fef6e4916b27a003946b926c69e4485b398d74b6ea"
+  },
+  "independent_output_comparison": {
+    "html_exact_single_css_substitution": [
+      "penicillin-api-simulated-ar.html",
+      "alu-foil-simulated-en.html",
+      "polypropylene-simulated-ar.html",
+      "alu-profiles-simulated-ar.html"
+    ],
+    "analysis_json_equal": 4,
+    "dossier_json_equal": 4,
+    "producer_files_rehashed": 28,
+    "rendered_pages_rehashed": 250,
+    "strict_issues": []
+  },
+  "arabic_associations": [
+    {
+      "pdf": "alu-profiles-simulated-ar.pdf",
+      "finding": "NESTED-DT-04",
+      "heading": "القيمة الوطنية",
+      "complete_first_fact": "الإزاحة2",
+      "start_token": null,
+      "end_token": "SYN-MINISTRY-ALU-PROFILES-001::economics",
+      "heading_windows": [
+        {
+          "line": 876,
+          "length": 1,
+          "pages": [
+            33
+          ],
+          "text": "ةينطولا ةميقلا"
+        }
+      ],
+      "first_row_windows": [
+        {
+          "line": 877,
+          "length": 1,
+          "pages": [
+            33
+          ],
+          "text": "2 ةحازإلا"
+        }
+      ],
+      "following_source_boundary": 887,
+      "passed": true
+    },
+    {
+      "pdf": "alu-profiles-simulated-ar.pdf",
+      "finding": "CAPTION-ORPHAN-02",
+      "heading": "النص الأصلي للمصدر",
+      "complete_first_fact": "السنوات المرصودة ذات القيم الموجبة202220232024",
+      "start_token": "R1-D",
+      "end_token": "R2",
+      "heading_windows": [
+        {
+          "line": 960,
+          "length": 2,
+          "pages": [
+            36
+          ],
+          "text": "للمصدر يلصأ ال صنلا"
+        }
+      ],
+      "first_row_windows": [
+        {
+          "line": 962,
+          "length": 3,
+          "pages": [
+            36
+          ],
+          "text": "ميقلا تاذ ةدوصرملا تاونسلاةبجوملا2024 2023 2022"
+        }
+      ],
+      "boundary_starts": [
+        953
+      ],
+      "boundary_ends": [
+        966
+      ],
+      "passed": true
+    },
+    {
+      "pdf": "penicillin-api-simulated-ar.pdf",
+      "finding": "CAPTION-ORPHAN-01",
+      "heading": "النص الأصلي للمصدر",
+      "complete_first_fact": "السنوات المرصودة ذات القيم الموجبة202220232024",
+      "start_token": "R1-D",
+      "end_token": "R2",
+      "heading_windows": [
+        {
+          "line": 839,
+          "length": 2,
+          "pages": [
+            31
+          ],
+          "text": "للمصدر يلصأ ال صنلا"
+        }
+      ],
+      "first_row_windows": [
+        {
+          "line": 841,
+          "length": 3,
+          "pages": [
+            31
+          ],
+          "text": "ميقلا تاذ ةدوصرملا تاونسلاةبجوملا2024 2023 2022"
+        }
+      ],
+      "boundary_starts": [
+        832
+      ],
+      "boundary_ends": [
+        845
+      ],
+      "passed": true
+    },
+    {
+      "pdf": "polypropylene-simulated-ar.pdf",
+      "finding": "NESTED-DT-02",
+      "heading": "الكمية",
+      "complete_first_fact": "الأساس المسجلquantity",
+      "start_token": "R3",
+      "end_token": "R4-F",
+      "heading_windows": [
+        {
+          "line": 900,
+          "length": 1,
+          "pages": [
+            33
+          ],
+          "text": "ةيمكلا"
+        }
+      ],
+      "first_row_windows": [
+        {
+          "line": 901,
+          "length": 1,
+          "pages": [
+            33
+          ],
+          "text": "quantity لجسملا أساس ال"
+        }
+      ],
+      "boundary_starts": [
+        874
+      ],
+      "boundary_ends": [
+        913
+      ],
+      "passed": true
+    }
+  ],
+  "english_foil_association": [
+    {
+      "finding": "NESTED-DT-03",
+      "heading": "Scenario reconciliation",
+      "first_fact": "StatusPASS",
+      "source_path": "blocks.authority.records.integrity.scenario_reconciliation.status",
+      "pages": [
+        {
+          "page": 50,
+          "first_fact_after_heading": true
+        }
+      ]
+    }
+  ],
+  "own_native_views": [
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/proof/rendered/polypropylene-simulated-ar-page-33.png",
+      "sha256": "66735a7d97e6043ea7947a17f26e5f3344b5104e4fd24526933d01e7b9476c35"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/proof/rendered/penicillin-api-simulated-ar-page-31.png",
+      "sha256": "f1031fc8cbd056f99f1ae58e1564a46d7120d7e8e6b58ada345077538387c198"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/proof/rendered/alu-foil-simulated-en-page-50.png",
+      "sha256": "d4b13050a25a41238ade42fa21caf49c1d88013e3b365901c772cecf940e5c13"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/proof/rendered/alu-profiles-simulated-ar-page-33.png",
+      "sha256": "232e16b5745656b3d46c8362cefd75ed34cf39bfcd84fa2fecb39b6b564f410e"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/proof/rendered/alu-profiles-simulated-ar-page-36.png",
+      "sha256": "6449e047067c9efc0feec847b510573d9cc9dd5cbc3f374826e339ea18f509e0"
+    }
+  ],
+  "attributed_native_contexts": "Specialist ten paired-page views bound in FEASIBILITY; root three own closure pages bound dd23cecaa…",
+  "remaining": "Author transfer+1759 equality, three preservation reports/API88, finalfunctional44/strict/raster/manual/canonical/candidate CI remain."
+}

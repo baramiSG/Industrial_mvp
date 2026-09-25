@@ -1,0 +1,13 @@
+# Actual nested-record keep-chain implementation — REJECT
+
+Frozen source ledger `758783bbdb135fb3451565995013a78e76ad30bdfb2be615bac0d56316a851f9` implements the accepted CSS chain and existing-test extension, but the targeted producer exits1: **1 failed, 3 passed in21.11s**. The unchanged requirement is not met.
+
+**NESTED-DT-03 remains open:** emitted `alu-foil-simulated-en.pdf` (SHA `5e271424e9b34f128ac6b973d0220b79af2387964d1e2452618a4c7c887b2bbb`) ends page49 with Scenario reconciliation; Status PASS begins50. I directly re-extracted those pages with the existing pypdf and reproduced the exact failed predicate. The retained layout/record-association artifact and pytest assertion agree. The four-report run is not GREEN despite its directory name. Three passing browser tests establish their asserted DOM/source checks, not unperformed Arabic emitted-page/native closure.
+
+Required action: preserve this unsuccessful hypothesis and its evidence; do not run the remaining preservation reports or fullfunctional from it. Use the coordinator-assigned fresh specialist’s bounded isolated fragmentation diagnosis to demonstrate a changed correction approach before product adoption. No additional speculative CSS stacking, content/font/margin reduction, graph operation or general checker framework is approved.
+
+The finite Arabic checker was also inspected: removing its single added block restores every predecessor byte; original44-document execution exits1 with exactly the four Arabic split-page findings and no unrelated strict failure. Each original failure contains unique complete heading and first-row windows on different pages. This useful sensitivity remains valid history; it does not make the failed CSS repair acceptable.
+
+Sanad: direct immutable patch/CSS/test/postimage reads and hashes, actual command/summary/stdout and emitted PDF re-extraction. Root’s assignment of the fresh specialist is coordination authority, not evidence that a replacement works. Exact bindings are in IMPLEMENTATION-REJECTION-EVIDENCE.json. Relevant accepted proposal/addendum, Task3/4 and S19-only stop boundaries remain unchanged; strict-reviewer, PDF verification, Sanad and al-Muhasibi/Muhasabah were applied.
+
+Assumptions: none needed for this observed failure. Risk: further shared print changes can repaginate other reports; existing targeted then final44 requirements remain. Unverified: corrected Arabic page associations, replacement feasibility, final candidate/canonical/CI. No product/index/service mutation or new producer was performed by this reviewer. **Muhasabah: PASS for the bounded rejection.**

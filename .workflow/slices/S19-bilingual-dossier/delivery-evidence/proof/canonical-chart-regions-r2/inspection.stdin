@@ -1,0 +1,45 @@
+import json
+from pathlib import Path
+from playwright.sync_api import sync_playwright,expect
+from browser_tests.harness import start_app_server,stop_app_server,BrowserFailureCollector,CASES,STEEL,EN,AR,DESKTOP,TABLET
+from browser_tests.pages import goto_portfolio,select_case,locale_bundle
+from browser_tests.executive_pages import goto_executive
+from browser_tests.graph_pages import install_graph_routes
+from browser_tests.test_visual_baselines import _anchor,_prepare_executive_capture,_assert_executive_scene_visible
+from browser_tests.visual_baselines import LAUNCH_FLAGS
+out=Path('/proof');rows=[]
+manifest=json.loads(Path('/workspace/browser_tests/baselines/v0.3.0/manifest.json').read_text())
+entries=[r for r in manifest['entries'] if r['screen'].endswith('-workspace') or r['screen']=='journey-j-executive-signal-public']
+assert len(entries)==56
+cases={c.id:c for c in CASES};locales={'en':EN,'ar':AR};viewports={v.name:v for v in (DESKTOP,TABLET)}
+server=start_app_server(Path('/workspace'),out/'server')
+try:
+ with sync_playwright() as pw:
+  browser=pw.chromium.launch(args=list(LAUNCH_FLAGS))
+  for entry in entries:
+   locale=locales[entry['locale']];viewport=viewports[entry['viewport']];case=cases[entry['case_id']]
+   context=browser.new_context(base_url=server.base_url,locale=locale.bcp47,viewport=viewport.as_dict(),device_scale_factor=1,reduced_motion='reduce')
+   collector=BrowserFailureCollector(server.base_url);collector.attach_context(context);page=context.new_page();install_graph_routes(page)
+   executive=entry['screen']=='journey-j-executive-signal-public'
+   if executive:
+    goto_executive(page,case,locale,'SIGNAL');required=_prepare_executive_capture(page,case,locale,'SIGNAL','public');required_boxes=_assert_executive_scene_visible(required)
+   else:
+    goto_portfolio(page,entry['mode'],locale);select_case(page,case,entry['mode'],locale);_anchor(page,'#workspace');required_boxes=None
+   page.evaluate("async()=>{await document.fonts.ready;const active=document.activeElement;if(active instanceof HTMLElement)active.blur();await new Promise(requestAnimationFrame);await new Promise(requestAnimationFrame)}")
+   card=page.locator('.chart-wrap').locator('xpath=ancestor::article[1]');assert card.count()==1
+   strings=locale_bundle(locale)['strings'];expect(card.locator('.trade-scale-note')).to_have_text(strings['trade.scale_note']);expect(card.locator('details > summary')).to_have_text(strings['trade.data_summary']);assert card.locator('details').evaluate('n=>n.open') is False
+   boxes=card.evaluate("""node=>{const rect=n=>{const r=n.getBoundingClientRect();const left=Math.max(0,r.left),top=Math.max(0,r.top),right=Math.min(innerWidth,r.right),bottom=Math.min(innerHeight,r.bottom);return {left:r.left,top:r.top,right:r.right,bottom:r.bottom,width:r.width,height:r.height,visibleIntersection:right>left&&bottom>top?{left,top,right,bottom}:null}};return {card:rect(node),chart:rect(node.querySelector('.chart-wrap')),note:rect(node.querySelector('.trade-scale-note')),summary:rect(node.querySelector('details > summary')),viewport:{width:innerWidth,height:innerHeight},scroll:[scrollX,scrollY]}}""")
+   png=None
+   if entry['screen'] in ('journey-b-steel-public-workspace','journey-j-executive-signal-public'):
+    png='diagnostics/'+entry['path'].replace('.webp','.png');target=out/png;target.parent.mkdir(parents=True,exist_ok=True);page.screenshot(path=str(target),full_page=False,animations='disabled',caret='hide')
+   if executive:assert _assert_executive_scene_visible(required)==required_boxes
+   collector.assert_clean()
+   row={'canonical_path':entry['path'],'case_id':case.id,'mode':entry['mode'],'locale':locale.code,'viewport_name':viewport.name,'closed_table':True,'exact_note_and_summary':True,'boxes':boxes,'old_required_signal_boxes':required_boxes,'diagnostic_png':png,'browser_failure_count':len(collector.records)}
+   rows.append(row)
+   with (out/'ROWS.jsonl').open('a') as f:f.write(json.dumps(row,ensure_ascii=False)+'\n')
+   context.close();print('INSPECTED '+entry['path'],flush=True)
+  browser.close()
+finally:stop_app_server(server)
+assert len(rows)==56
+(out/'RESULTS.json').write_text(json.dumps({'scope':'Direct closed-state region observation through unchanged stock navigation; not canonical capture or actual pixel-change comparison','rows':rows,'count':len(rows),'screenshots':sum(bool(r['diagnostic_png']) for r in rows)},ensure_ascii=False,indent=2)+'\n')
+print('56 closed chart-scene DOM inspections complete;8diagnosticPNGs; no canonical capture')

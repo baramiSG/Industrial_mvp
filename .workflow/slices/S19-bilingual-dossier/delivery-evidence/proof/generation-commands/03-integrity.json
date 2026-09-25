@@ -1,0 +1,24 @@
+{
+  "command": [
+    "/home/barami/.local/bin/uv",
+    "run",
+    "--locked",
+    "--extra",
+    "dev",
+    "python",
+    "scripts/verify_integrity.py"
+  ],
+  "cwd": "/home/barami/projects/ior-worktrees/s19",
+  "environment": {
+    "PATH": "/home/barami/.local/bin:/usr/local/bin:/usr/bin:/bin",
+    "HOME": "/home/barami",
+    "LANG": "C.UTF-8",
+    "PYTHONPATH": "src",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "GIT_OPTIONAL_LOCKS": "0"
+  },
+  "started_at_utc": "2026-09-25T02:45:33.607714+00:00",
+  "status": "PASS",
+  "exit_code": 0,
+  "ended_at_utc": "2026-09-25T02:45:33.756508+00:00"
+}

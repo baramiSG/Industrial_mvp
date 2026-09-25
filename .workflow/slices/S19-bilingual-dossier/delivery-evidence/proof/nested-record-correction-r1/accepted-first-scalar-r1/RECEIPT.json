@@ -1,0 +1,2240 @@
+{
+  "status": "FINITE_IMPLEMENTATION_PROOF_COMPLETE_PENDING_INDEPENDENT_REVIEW",
+  "at_utc": "2026-09-25T06:22:31.886090+00:00",
+  "source_ledger_sha256": "ba5bec02c6912ad4e2dcafcba18f6746852bdbd66687fd784b6af86b380f2bdc",
+  "files": {
+    "ACTUAL-API-COMPARISON.json": {
+      "sha256": "07fba266809a9f7ad337d0150ba949253e635c2d74aec17ef2268712f29422a9",
+      "bytes": 48793
+    },
+    "ACTUAL-API-COMPARISON.py": {
+      "sha256": "dcf2a341f612f37816e0566fc6d473c0108b2fa7e323950754059808b857ae74",
+      "bytes": 7731
+    },
+    "API-ADAPTATION.json": {
+      "sha256": "81047a9d8bc3e9ebc1e861300393943250910e9040da371854870cbddbd921f7",
+      "bytes": 1030
+    },
+    "API-EXECUTION.json": {
+      "sha256": "5bd1fc41192739ac5aa64e66bc948d3309520247336682e72a428ef30490f366",
+      "bytes": 525
+    },
+    "FINAL-PRESERVATION.json": {
+      "sha256": "6f1ab36a484cec389384c22eab0ea7cc4a16b1c2805eb1a73ac478f3f039ffc2",
+      "bytes": 1293
+    },
+    "IMMEDIATE-API-EQUALITY.json": {
+      "sha256": "64bbfb23462c86a8b5b5665f8ad138ba27038ec3ce9eeeece32ee32855da9066",
+      "bytes": 25725
+    },
+    "IMPLEMENTATION-REPORT.md": {
+      "sha256": "c4a0c176cfc59351f8245f59896fa8e1eaecefc3166c7eead5e7f722388eb5f2",
+      "bytes": 5113
+    },
+    "INTEGRATED.patch": {
+      "sha256": "aced28f168e0d38e597c23a5514c690f49279bf0327fd3730f5ecbd673a3205d",
+      "bytes": 6798
+    },
+    "PRESERVATION-COHORT.json": {
+      "sha256": "5253da5d19aba2d140d6175bc7aba5f621777fb532affd3f72f7792c3f7ff997",
+      "bytes": 3243
+    },
+    "SOURCE.json": {
+      "sha256": "ba5bec02c6912ad4e2dcafcba18f6746852bdbd66687fd784b6af86b380f2bdc",
+      "bytes": 267569
+    },
+    "TRANSFER.json": {
+      "sha256": "95eb389c830ec000a54d147ef3af6759e44bb0fa09d445e9d95578bccbe28c22",
+      "bytes": 1030
+    },
+    "actual-api-outputs/SAU-H0-390210-public-analysis.json": {
+      "sha256": "9006c3fc5b6eb7dea4ca569acec9bb5a96e23c4cbec70f2d68eb8bc1153bce83",
+      "bytes": 112256
+    },
+    "actual-api-outputs/SAU-H0-390210-public-ar.html": {
+      "sha256": "e6095c6b9711c3116723f5fc47507b8b8c338e389e64d7b86635b634f372d8c1",
+      "bytes": 115208
+    },
+    "actual-api-outputs/SAU-H0-390210-public-dossier.json": {
+      "sha256": "251ed556ecf80258b37a6869b6813a33096a5f3681ccaf95ed60f2b56542ea4f",
+      "bytes": 163498
+    },
+    "actual-api-outputs/SAU-H0-390210-public-en.html": {
+      "sha256": "4a8f5df1bc1c2b84bd97a8b53d155344062a1633c83a193b1f5a83f0fd141a1a",
+      "bytes": 100254
+    },
+    "actual-api-outputs/SAU-H0-390210-simulated-analysis.json": {
+      "sha256": "f4d721a93596d4b93f77548f95fd4fd4e3cd78bc37e68975a97701387d3ce2ed",
+      "bytes": 153985
+    },
+    "actual-api-outputs/SAU-H0-390210-simulated-ar.html": {
+      "sha256": "15074d1581771714ee799f1f19a16033e6d34164e05a8ce6dafaccbacfc5cd94",
+      "bytes": 190597
+    },
+    "actual-api-outputs/SAU-H0-390210-simulated-dossier.json": {
+      "sha256": "a5ebd1ddb7ade74b8bfbfb144dc1b22b605b201fca3ec3a9a79704d3711eef5a",
+      "bytes": 218851
+    },
+    "actual-api-outputs/SAU-H0-390210-simulated-en.html": {
+      "sha256": "cc83e64e64e56b9426b27abe9bcce9f95e903743aaf440883728c6c26384a017",
+      "bytes": 166164
+    },
+    "actual-api-outputs/SAU-H0-721049-public-analysis.json": {
+      "sha256": "6cb6679ced68593142de582a23853bca23523c66efc31274d44b4cf8240633b4",
+      "bytes": 112186
+    },
+    "actual-api-outputs/SAU-H0-721049-public-ar.html": {
+      "sha256": "629d03955cb3503b156a405448ec9c210a0e82c8d73b451b1cfea42b01242bd2",
+      "bytes": 118281
+    },
+    "actual-api-outputs/SAU-H0-721049-public-dossier.json": {
+      "sha256": "69efe2a68ca50e17f2fd484fe5a6bc808fc570e7d809884914146931efa4b21d",
+      "bytes": 161846
+    },
+    "actual-api-outputs/SAU-H0-721049-public-en.html": {
+      "sha256": "1e347216a2a2ce8c09aa8c99b74ae2cc57c7169c706ac1d669d9736b68890ef8",
+      "bytes": 103021
+    },
+    "actual-api-outputs/SAU-H0-721049-simulated-analysis.json": {
+      "sha256": "cf1e94af58e321f3000750702240a5674d31f669894d4ba1685944692a16d595",
+      "bytes": 153996
+    },
+    "actual-api-outputs/SAU-H0-721049-simulated-ar.html": {
+      "sha256": "75076be80eeb3607c61914ef76b638b459c71c64c064eb92e34dd3ffd81a08d8",
+      "bytes": 203635
+    },
+    "actual-api-outputs/SAU-H0-721049-simulated-dossier.json": {
+      "sha256": "e618faa9151bb74cbd3469c4b1e084e116ae57fa725776947ec1ae9d2292ac48",
+      "bytes": 221241
+    },
+    "actual-api-outputs/SAU-H0-721049-simulated-en.html": {
+      "sha256": "140e20d9ecd9e8b3a569266353768c6bc2b3e45e03c4782d84507fbea221a7be",
+      "bytes": 178067
+    },
+    "actual-api-outputs/SAU-H6-294110-public-analysis.json": {
+      "sha256": "2a987d59b408d29b7de05a73574a7a74c82ef1d1de467214c73c388e7614b34c",
+      "bytes": 106164
+    },
+    "actual-api-outputs/SAU-H6-294110-public-ar.html": {
+      "sha256": "fe4895fff622713fbb2da389ef465e4e8e4c2de73c60444197f5fbbec6d1ce66",
+      "bytes": 115592
+    },
+    "actual-api-outputs/SAU-H6-294110-public-dossier.json": {
+      "sha256": "b7c5db6dff79c18986b6a8ea5a215108eb698b9022d5f44af63801d1aa539689",
+      "bytes": 154020
+    },
+    "actual-api-outputs/SAU-H6-294110-public-en.html": {
+      "sha256": "a1c636c65501b86c5dde474c08213877f7e4192b167c1b3416ea3443bc704bbb",
+      "bytes": 100771
+    },
+    "actual-api-outputs/SAU-H6-294110-simulated-analysis.json": {
+      "sha256": "876de3e3561c057275b8853c33ff059a241931a403acbe1e3b2971cb0919c395",
+      "bytes": 153264
+    },
+    "actual-api-outputs/SAU-H6-294110-simulated-ar.html": {
+      "sha256": "44f556cae7259a7ba6e3e14dbd7b890a1ce062157c398d114b7a853150db1898",
+      "bytes": 196892
+    },
+    "actual-api-outputs/SAU-H6-294110-simulated-dossier.json": {
+      "sha256": "376a3787adc0b088a2c7e77e1b3e3ff3689b6c9b7e3d1f9dfe0ffa667f10086b",
+      "bytes": 219340
+    },
+    "actual-api-outputs/SAU-H6-294110-simulated-en.html": {
+      "sha256": "44b8990c603921d76b496c88f3087ae87c519829e9179cf543800beb753c70f4",
+      "bytes": 172124
+    },
+    "actual-api-outputs/SAU-H6-294120-public-analysis.json": {
+      "sha256": "71154d8225c6ff97432dfa0f0ace4f09e8d99f9995fe5660d920e55fec705a45",
+      "bytes": 106339
+    },
+    "actual-api-outputs/SAU-H6-294120-public-ar.html": {
+      "sha256": "206defd2c47b9b50a4dcb028095ab3f94079bb0a8e11ebe2d580ec86aa7965f9",
+      "bytes": 115202
+    },
+    "actual-api-outputs/SAU-H6-294120-public-dossier.json": {
+      "sha256": "412a2b7c04cc14a5e12dcb9505adb95789e4bc68573334bb4fd46c15c0bbc992",
+      "bytes": 154090
+    },
+    "actual-api-outputs/SAU-H6-294120-public-en.html": {
+      "sha256": "0b4734a93d1d5c3e2060ae1bfd403e841c4ea2be7c1b4b7e46d09d13575a598c",
+      "bytes": 100260
+    },
+    "actual-api-outputs/SAU-H6-294120-simulated-analysis.json": {
+      "sha256": "8d5028beac3a97adb017188de4d10ef73fcff0a47cf16f135f1937ca5b26a6f7",
+      "bytes": 154903
+    },
+    "actual-api-outputs/SAU-H6-294120-simulated-ar.html": {
+      "sha256": "5968aee70ed1144396c6c143fae39a73e10da8efdc33604a582352f4f9d4333d",
+      "bytes": 192695
+    },
+    "actual-api-outputs/SAU-H6-294120-simulated-dossier.json": {
+      "sha256": "b4c627024c454febe7e531a260f37bd5cb01c172bc0ce40233e0c311fd34d119",
+      "bytes": 220099
+    },
+    "actual-api-outputs/SAU-H6-294120-simulated-en.html": {
+      "sha256": "eaba9c3675a2a20a760f8555c0918fb5e2c4374c1f8778c45c4c2ad1d21f58ca",
+      "bytes": 168186
+    },
+    "actual-api-outputs/SAU-H6-310430-public-analysis.json": {
+      "sha256": "c8a8494acbf51bbde1dbe2ff09958a2474100b63d872efc8c4986a3a897c1265",
+      "bytes": 106046
+    },
+    "actual-api-outputs/SAU-H6-310430-public-ar.html": {
+      "sha256": "b1a27129f94a984c119461562d5a6921071a14cad944d52248a9251319c285ab",
+      "bytes": 114708
+    },
+    "actual-api-outputs/SAU-H6-310430-public-dossier.json": {
+      "sha256": "f710d95fce09e58e6581d8a16321b1776194998a343a6b8f690fbb52c755e011",
+      "bytes": 153715
+    },
+    "actual-api-outputs/SAU-H6-310430-public-en.html": {
+      "sha256": "7d69ae2f5953044df461abdddde364bfcf7f5fbf04a3e8da0db6a8a089ccb853",
+      "bytes": 99798
+    },
+    "actual-api-outputs/SAU-H6-310430-simulated-analysis.json": {
+      "sha256": "886278c6bde182949cf01dd6a8cdd3f39b376cdd1b708af7338fe90e0968596a",
+      "bytes": 151336
+    },
+    "actual-api-outputs/SAU-H6-310430-simulated-ar.html": {
+      "sha256": "1f3762e1640a373d7bd1d14c36a0b2484d4b82d4969b2031d9ea04f1fc7f4522",
+      "bytes": 194790
+    },
+    "actual-api-outputs/SAU-H6-310430-simulated-dossier.json": {
+      "sha256": "127a95814bb47643f73ee4097b062ffcdf94ee4316d985015d350b38dca665b2",
+      "bytes": 216040
+    },
+    "actual-api-outputs/SAU-H6-310430-simulated-en.html": {
+      "sha256": "2c3e46effceb8220580e18016770224eac5a4aa5fadf078800a9ce507eb84d4d",
+      "bytes": 169983
+    },
+    "actual-api-outputs/SAU-H6-310510-public-analysis.json": {
+      "sha256": "a2ec4df05df3720a138568ade170c56532348743eaeee4b6d8c21e2882180967",
+      "bytes": 106254
+    },
+    "actual-api-outputs/SAU-H6-310510-public-ar.html": {
+      "sha256": "51a38b81ce19c985797a13195625a9e7167dad9a2c21d0377a0cc57ac7520a03",
+      "bytes": 114959
+    },
+    "actual-api-outputs/SAU-H6-310510-public-dossier.json": {
+      "sha256": "d8037b3ebb81cd76ed6c49a9f788b0b0b488ac752cc3a072e75d06aced19acbc",
+      "bytes": 154124
+    },
+    "actual-api-outputs/SAU-H6-310510-public-en.html": {
+      "sha256": "4b702b7644da46732614d8e4b81fd703bbb4eb5c6331cb7858b3d0e948cf3028",
+      "bytes": 100008
+    },
+    "actual-api-outputs/SAU-H6-310510-simulated-analysis.json": {
+      "sha256": "00f8c810a4dd1e7f02625a3a3c6ccef194b29269ecec3fe679f55d018f349bf9",
+      "bytes": 153256
+    },
+    "actual-api-outputs/SAU-H6-310510-simulated-ar.html": {
+      "sha256": "344a16c18bc334be692f8ed06380641f5d041f0a065d64b2ddb22a1171220f0a",
+      "bytes": 192600
+    },
+    "actual-api-outputs/SAU-H6-310510-simulated-dossier.json": {
+      "sha256": "98fda77972b88e57c5712beb3e083eba40edbf0689751fb9d292facc1a54609b",
+      "bytes": 218982
+    },
+    "actual-api-outputs/SAU-H6-310510-simulated-en.html": {
+      "sha256": "330f15f8af3e915ee0103e87e39f570106c0ae8fe18d4eb2f0c061ddc1e81520",
+      "bytes": 168179
+    },
+    "actual-api-outputs/SAU-H6-392010-public-analysis.json": {
+      "sha256": "76d2c7e38f1053665ae1392d01f0187e53483dafafdbca699cd1415e70aa39f5",
+      "bytes": 105217
+    },
+    "actual-api-outputs/SAU-H6-392010-public-ar.html": {
+      "sha256": "e98d52e6a2421cff6e0aeb6c023d1f1f60b511b171d68b29ad22589c82b6a9bb",
+      "bytes": 113024
+    },
+    "actual-api-outputs/SAU-H6-392010-public-dossier.json": {
+      "sha256": "f96b06f8ab32479224f7f52796757e15aa4bca704ad3e20820a44f9fc2a829db",
+      "bytes": 152717
+    },
+    "actual-api-outputs/SAU-H6-392010-public-en.html": {
+      "sha256": "160c8ef5eb20ab0892456d363fd7211c82380d960de706f03ff1930e46dc22e5",
+      "bytes": 98317
+    },
+    "actual-api-outputs/SAU-H6-392010-simulated-analysis.json": {
+      "sha256": "c9eca4f059a23e6a7ff9c99a38318f3a311215a0d9a7a4b34d234a70e957166a",
+      "bytes": 153657
+    },
+    "actual-api-outputs/SAU-H6-392010-simulated-ar.html": {
+      "sha256": "2eff8fa390ff706ca97b3a389fd1d3cf472e866d4233a8427c8a4493b5208d83",
+      "bytes": 191203
+    },
+    "actual-api-outputs/SAU-H6-392010-simulated-dossier.json": {
+      "sha256": "0cc42273d0d600190278da2422a1900bd086661649250e8b62794d7d96c73d69",
+      "bytes": 217019
+    },
+    "actual-api-outputs/SAU-H6-392010-simulated-en.html": {
+      "sha256": "763c5af1861efacad8a2b4678ca9cee390874a8ebb9f6aacea1e96e1709127e3",
+      "bytes": 166616
+    },
+    "actual-api-outputs/SAU-H6-721012-public-analysis.json": {
+      "sha256": "a5b4207227c386234807d30b32348b3096d9dbe062e74ead34ed6015cfb3ca31",
+      "bytes": 105318
+    },
+    "actual-api-outputs/SAU-H6-721012-public-ar.html": {
+      "sha256": "964e7d6429e4b0e3ae33f6e8e85a18782828ef8d8ee0c72c10b1e02c27772b3d",
+      "bytes": 113184
+    },
+    "actual-api-outputs/SAU-H6-721012-public-dossier.json": {
+      "sha256": "63ca7d189b81e91a64f99746695106dc3d7e9fffa53c4ff72d7a4e195f4d6c2c",
+      "bytes": 152947
+    },
+    "actual-api-outputs/SAU-H6-721012-public-en.html": {
+      "sha256": "23e3a9c466d24ffaa631bed8df22f36de80367e839e78f052df21d3fd7967ce2",
+      "bytes": 98398
+    },
+    "actual-api-outputs/SAU-H6-721012-simulated-analysis.json": {
+      "sha256": "75ac217cdd735b10db96e6ee90e3c74c5943655c091ada72ce3b46748881cae6",
+      "bytes": 147999
+    },
+    "actual-api-outputs/SAU-H6-721012-simulated-ar.html": {
+      "sha256": "f0d74a8eeaaac7d72fa4901812a8994d4919601ddd23c7260c90be086bc0d5d1",
+      "bytes": 201299
+    },
+    "actual-api-outputs/SAU-H6-721012-simulated-dossier.json": {
+      "sha256": "8530bee76fe3e46dbd7cdbe294d40a956f7e1d070af0b07e3d6ae7664999af47",
+      "bytes": 214647
+    },
+    "actual-api-outputs/SAU-H6-721012-simulated-en.html": {
+      "sha256": "77d8b08926555c0cd8c278b5d2a4bcc8378a1359759bbaf6811bbac0dbdb138e",
+      "bytes": 176187
+    },
+    "actual-api-outputs/SAU-H6-721061-public-analysis.json": {
+      "sha256": "fff4612eeb95156adb45e4123741ccddb2a140c5d0d65da2a8de9cc4871cf128",
+      "bytes": 108447
+    },
+    "actual-api-outputs/SAU-H6-721061-public-ar.html": {
+      "sha256": "c5a49dc87b7f7b732ef6fc3963c2f2137212915518e0be9c0690c811e5c983ba",
+      "bytes": 121747
+    },
+    "actual-api-outputs/SAU-H6-721061-public-dossier.json": {
+      "sha256": "3666b959efaa6d705b757bdf0ae39fb9f4b43381de34b22ea773cd7e0413f1fe",
+      "bytes": 156366
+    },
+    "actual-api-outputs/SAU-H6-721061-public-en.html": {
+      "sha256": "402f699ef4b8732f7fbf7fa918db467bff4bc2e8718dad1d6eb6ac9d7eb41716",
+      "bytes": 106454
+    },
+    "actual-api-outputs/SAU-H6-721061-simulated-analysis.json": {
+      "sha256": "1c35726206e2d7986777d925e2c2d0e706cbfec6fc4caa28b4c4455cb879e7cf",
+      "bytes": 154387
+    },
+    "actual-api-outputs/SAU-H6-721061-simulated-ar.html": {
+      "sha256": "6c174ba4f3c1ee5665c5ed6bb12da750d4ad2f7a66abdd8556757894f1dc6f14",
+      "bytes": 208390
+    },
+    "actual-api-outputs/SAU-H6-721061-simulated-dossier.json": {
+      "sha256": "55119fc13b3ed60e3ef2e4788828fd9ed2b883d50bc7a7f93d5ad1a6b75a79ab",
+      "bytes": 221148
+    },
+    "actual-api-outputs/SAU-H6-721061-simulated-en.html": {
+      "sha256": "5d2339dd9f83c8820ad380261e6c2e2e3947158ddd69575fe171c40c5f2292ec",
+      "bytes": 182940
+    },
+    "actual-api-outputs/SAU-H6-760429-public-analysis.json": {
+      "sha256": "f033eda8588ca3871c84b0d65329040838e1fd3064d024c748f2a92d432f6b04",
+      "bytes": 111306
+    },
+    "actual-api-outputs/SAU-H6-760429-public-ar.html": {
+      "sha256": "53cf60e8af81ca8c7d28f1bf7841458895fb51d908c4571951c3e4213532e035",
+      "bytes": 121815
+    },
+    "actual-api-outputs/SAU-H6-760429-public-dossier.json": {
+      "sha256": "d178c1f9f18082f69b929f305f85d2c238f8de2cca11833e442d9ad0dcf9e2aa",
+      "bytes": 160312
+    },
+    "actual-api-outputs/SAU-H6-760429-public-en.html": {
+      "sha256": "c083d3760524451ba7da51a5d94be849a1c4c17e6a687925c0829d38b6e141be",
+      "bytes": 106300
+    },
+    "actual-api-outputs/SAU-H6-760429-simulated-analysis.json": {
+      "sha256": "baf618770991867c3e490013188d1710dd32fcca8f295a28c9759d9e498515c8",
+      "bytes": 163392
+    },
+    "actual-api-outputs/SAU-H6-760429-simulated-ar.html": {
+      "sha256": "f5d6bb10cf5087aea9eb882c55b71d45e80ff9e49e1f76ad3b71c76e44e87658",
+      "bytes": 231908
+    },
+    "actual-api-outputs/SAU-H6-760429-simulated-dossier.json": {
+      "sha256": "914081aa1b22d327a924d43f6a4af4bc6ff7565205a69df1c321e646d062afed",
+      "bytes": 234342
+    },
+    "actual-api-outputs/SAU-H6-760429-simulated-en.html": {
+      "sha256": "ba47ea63fd2c524a41a0534f2cc02b1ebc6d151bdb1ca7627e4ce1bdbf7b63a2",
+      "bytes": 204208
+    },
+    "actual-api-outputs/SAU-H6-760711-public-analysis.json": {
+      "sha256": "7e3ddb9e0d47e12baef34b8ac7ac52647ecdbaeb94f638e179eaae87d53dd9fe",
+      "bytes": 105224
+    },
+    "actual-api-outputs/SAU-H6-760711-public-ar.html": {
+      "sha256": "7fc86981b3ade36c4d550f23c277b83ad21c20232d4d1364c80ee5cb887ae9ec",
+      "bytes": 112666
+    },
+    "actual-api-outputs/SAU-H6-760711-public-dossier.json": {
+      "sha256": "712b78e4ca3589ee552420ba7d486d75465958732272c240f5c97461063eaaf8",
+      "bytes": 152774
+    },
+    "actual-api-outputs/SAU-H6-760711-public-en.html": {
+      "sha256": "740e833e861d1e54ff581f02c8d0076ab623d60a90dc6ba1980651ed9389cbcc",
+      "bytes": 97909
+    },
+    "actual-api-outputs/SAU-H6-760711-simulated-analysis.json": {
+      "sha256": "664e30d2a85c30edff0d00022561a196451b8d967174ed396298611d6b1a07f5",
+      "bytes": 154785
+    },
+    "actual-api-outputs/SAU-H6-760711-simulated-ar.html": {
+      "sha256": "8e0fc8ebf8bd8c3d2c62fd6b8a621aa4d888583db0e9eedf3ea387ffb672c8a0",
+      "bytes": 203881
+    },
+    "actual-api-outputs/SAU-H6-760711-simulated-dossier.json": {
+      "sha256": "91bfe81e778e10ba0965c81375f39a64c1a03b499d3e4f15314171a50b3768e7",
+      "bytes": 221546
+    },
+    "actual-api-outputs/SAU-H6-760711-simulated-en.html": {
+      "sha256": "83d29eb54ce8a3f06438a78adac1a5a2a03bd5146b3874f49b2d359eec80e70a",
+      "bytes": 178488
+    },
+    "api.stderr": {
+      "sha256": "a1b252d60289dbe6a8b47883ef7d24012efed3b81f085eea726b3a8902c1afa5",
+      "bytes": 280
+    },
+    "api.stdout": {
+      "sha256": "dad19e0a223ac62efb997550fcfa6ce028187c4ed2eb1395dd5c97f592dfd0db",
+      "bytes": 415
+    },
+    "check-preservation.py": {
+      "sha256": "2c6cd0353838e27548c32b7ee18dab9afe67b94f409469eb541d10e71c9476bb",
+      "bytes": 6772
+    },
+    "preservation/COMMAND.json": {
+      "sha256": "b68d2c39d1b9a096f63c41ac3dd72d7888fc2b5ab7640e613c41c7f287e30c87",
+      "bytes": 1825
+    },
+    "preservation/pdf/alu-foil-simulated-analysis.json": {
+      "sha256": "bed5c99413385626c7e729aff14a73c74c98be32556359bdc10b29f9a6c84bfd",
+      "bytes": 215243
+    },
+    "preservation/pdf/alu-foil-simulated-ar-layout.json": {
+      "sha256": "8704f6761e964e7f37a3ebcffd192883512637b2c126578fb121d9d351c37e5d",
+      "bytes": 6230
+    },
+    "preservation/pdf/alu-foil-simulated-ar-summary.json": {
+      "sha256": "2ea71bf30eb413de3fb73e1c32fe76296833c4df5064cdbf6d561f9df5b0debf",
+      "bytes": 208
+    },
+    "preservation/pdf/alu-foil-simulated-ar.html": {
+      "sha256": "8e0fc8ebf8bd8c3d2c62fd6b8a621aa4d888583db0e9eedf3ea387ffb672c8a0",
+      "bytes": 203881
+    },
+    "preservation/pdf/alu-foil-simulated-ar.pdf": {
+      "sha256": "576a4c2bd910e095328f77dd0590443ec7085f777199e4e534332c5468422b81",
+      "bytes": 825369
+    },
+    "preservation/pdf/alu-foil-simulated-dossier.json": {
+      "sha256": "8eb3c8e89b663baff62b4a7f19c7106b7d5aa2f1be81b3b3ca5fe2538b9be09c",
+      "bytes": 334846
+    },
+    "preservation/pdf/steel-simulated-analysis.json": {
+      "sha256": "2c8b74f237d251098d9fd6d6de89c43179b4deed299bfa639fbf037b82a881c6",
+      "bytes": 214858
+    },
+    "preservation/pdf/steel-simulated-dossier.json": {
+      "sha256": "0fc7b6f196e1b6dda0da3e5ba3fb6c850b49d6dff51dd7dc50023b6980c24b60",
+      "bytes": 335275
+    },
+    "preservation/pdf/steel-simulated-en-layout.json": {
+      "sha256": "530ddf635f09e2d9e3c8e86682448f300c13b91a4076190b667800d6f0ad5c02",
+      "bytes": 5948
+    },
+    "preservation/pdf/steel-simulated-en-summary.json": {
+      "sha256": "b4bc9e50e1d2787849aa0846e9a4787a0232f84b78577d8cbc9faa3b5e1269a6",
+      "bytes": 205
+    },
+    "preservation/pdf/steel-simulated-en.html": {
+      "sha256": "140e20d9ecd9e8b3a569266353768c6bc2b3e45e03c4782d84507fbea221a7be",
+      "bytes": 178067
+    },
+    "preservation/pdf/steel-simulated-en.pdf": {
+      "sha256": "a09321947dbc0051210c0ab20e8dae7f6faa9543325fcb0010684044fc7a5362",
+      "bytes": 510363
+    },
+    "preservation/pdf/streptomycin-api-simulated-analysis.json": {
+      "sha256": "477722bdb1ef3fee45228fdd9df8a0539ac157a7269db7721effed0853cca68e",
+      "bytes": 213343
+    },
+    "preservation/pdf/streptomycin-api-simulated-ar-layout.json": {
+      "sha256": "7eb1ec4214672ff41ec060dbd907c0674889af8a6574162947d975a685ccfff8",
+      "bytes": 6191
+    },
+    "preservation/pdf/streptomycin-api-simulated-ar-summary.json": {
+      "sha256": "4c60431127867da9ae8efa4ab30f50c5837cd3b0e810e1956fadd614da3681c8",
+      "bytes": 216
+    },
+    "preservation/pdf/streptomycin-api-simulated-ar.html": {
+      "sha256": "5968aee70ed1144396c6c143fae39a73e10da8efdc33604a582352f4f9d4333d",
+      "bytes": 192695
+    },
+    "preservation/pdf/streptomycin-api-simulated-ar.pdf": {
+      "sha256": "89bac5c86ca599c7cdf569d91d00e68fc37057cee6558b9859eb22abd2be2fff",
+      "bytes": 801526
+    },
+    "preservation/pdf/streptomycin-api-simulated-dossier.json": {
+      "sha256": "3c9a871cc9ec22b0c5f6f553e1faa3b8947f37d48f0150062ef45e90211afc7e",
+      "bytes": 329597
+    },
+    "preservation/run-summary-functional.json": {
+      "sha256": "cdd5f59bb4f0dfe9e43ce41f5b9aa4cb2485e868b15e3f0a85298321ec1c988a",
+      "bytes": 185
+    },
+    "preservation/server.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "preservation/stderr.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "preservation/stdout.log": {
+      "sha256": "29025957c21d0a417102ea7f21a5a521af1149fffb4e52214bc233cf7762c66d",
+      "bytes": 430
+    },
+    "preservation-review-r1/EXECUTION.json": {
+      "sha256": "ecaf4557c268788b52b5f9a556919a480a958babff2355624406a5b59e5dfbc8",
+      "bytes": 109
+    },
+    "preservation-review-r1/INPUT-BINDING.json": {
+      "sha256": "d12eebbd533eb994fd1fbc50df76d3ea6c96916790caa90c3e161de24ecc3aac",
+      "bytes": 2567
+    },
+    "preservation-review-r1/REVIEW.md": {
+      "sha256": "f9c660cc019e16123c01b26d411b9db79b2bd295752208e69cba65bc105c293c",
+      "bytes": 2249
+    },
+    "preservation-review-r1/TARGET-STRICT.json": {
+      "sha256": "703774ec7696ac4ce493647276b422e5359d66f28deb9486259e6ace432e6f3c",
+      "bytes": 437755
+    },
+    "preservation-review-r1/VIEWED-EVIDENCE.json": {
+      "sha256": "593060a8beadc9f01df9062a7ec3204daf81a87bc2a33806e8098b352ffda418",
+      "bytes": 11388
+    },
+    "preservation-review-r1/rendered/RENDER-RESULT.json": {
+      "sha256": "0d025f2088955ac5b6de727a82f944c089b3ed617aa5bfc353f69d5e5a332714",
+      "bytes": 101080
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-01.png": {
+      "sha256": "c05631935a6956e2808abdd4ac5124475ce28a4aaf34e71538c7385baf43fcb5",
+      "bytes": 292072
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-01.txt": {
+      "sha256": "e4bf471bb7489fd6e8b8c37126a9e216edeb229d391e150939f37448946df4e9",
+      "bytes": 2157
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-02.png": {
+      "sha256": "7a2c6460f7261689833026c12eef76820aa55b624f5312af44bf43442fd90cc6",
+      "bytes": 221995
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-02.txt": {
+      "sha256": "0a3bd9c96cb583fbbe3a4f76b5b6c078f466196eb24c1f682fdc463b71c4b1ae",
+      "bytes": 1699
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-03.png": {
+      "sha256": "0e7b12897bd42ce408ffb987eccca4f31898fa2d51e3aadd12461d1e2282efda",
+      "bytes": 269451
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-03.txt": {
+      "sha256": "32690736612a6c26a729e305e53f403d9ff34e12870298b840c517cb24c66f9c",
+      "bytes": 1857
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-04.png": {
+      "sha256": "5b6a8505372619e533f81af2ab27222ccfa634532d96ed428baa847c26c30cfc",
+      "bytes": 201867
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-04.txt": {
+      "sha256": "3ceb5798bff36f4c0fb37b4ace85248abd8fe8b017222f2908d2472ea6e53fa6",
+      "bytes": 1156
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-05.png": {
+      "sha256": "f3e8ae5425f169ce3d6eab9398a3af05c6af07a251555200c459cd82225a8b61",
+      "bytes": 189652
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-05.txt": {
+      "sha256": "7e39fd00a1db9ff2083a0a09654a32a840f1fae8e1b57895326232f902da5cb7",
+      "bytes": 1187
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-06.png": {
+      "sha256": "e50fc0a0985990832f7fcf4e59bb24a40c5c2b7c2c6583d4a91f0306d34954c2",
+      "bytes": 220968
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-06.txt": {
+      "sha256": "575de7507948072f25d3d2c7a8286e4585bab6cab11d54a7383c32734152fea4",
+      "bytes": 1347
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-07.png": {
+      "sha256": "79f16caf4fe7f624ec47384a7b674b20a42c9af268c52f5e3eeb86eb5427038b",
+      "bytes": 213588
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-07.txt": {
+      "sha256": "7cb2ff1290304f090fd6114727dfa1d546dfb6ecb21cd065039662c9638bc7c5",
+      "bytes": 1530
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-08.png": {
+      "sha256": "30d33a64d5fe31623d8a7ad62025108e7c53a8653376eda0b0d8f7d235d00588",
+      "bytes": 196159
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-08.txt": {
+      "sha256": "33a92fa2017f0fec2660ab79606c3bb1ae4f0fd501b0bb658e42548f16703e94",
+      "bytes": 1257
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-09.png": {
+      "sha256": "ea01ff8e4d48de58f2a4350c98812b1647d4323e1155e9e92fcdcee7a6812d53",
+      "bytes": 191255
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-09.txt": {
+      "sha256": "6b0d84d0de629d920a54ae66283d93b8fff953ac2e828a534a9770962532db9c",
+      "bytes": 1117
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-10.png": {
+      "sha256": "8b7fac03fe4185cfafb7253a52cb029f54b8ad66c19d0dd0e32044cb5f8aad62",
+      "bytes": 274431
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-10.txt": {
+      "sha256": "983dd959e5378fc18a6021104306205153be867e50536f2e1b71514c2936c1b5",
+      "bytes": 1819
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-11.png": {
+      "sha256": "8b8fa67b3de02016d27127f18a0ac8f1e8c9e444a7803547102247f077d396f9",
+      "bytes": 207147
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-11.txt": {
+      "sha256": "8f414725c411bae0fddcf8e16df8e15d4e9eddd61a87e087b8f6c3007ea56399",
+      "bytes": 1008
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-12.png": {
+      "sha256": "96c39172edb9343d3b60567fb867302e62b184485910d280501bf78b3aa1f24b",
+      "bytes": 191976
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-12.txt": {
+      "sha256": "27cb739769513377b250ed7007fbf96a905221318b327978d04df0da94693ccc",
+      "bytes": 1281
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-13.png": {
+      "sha256": "8876e5d374b858b1860187c795a94a62c38ab6911a8afce1488ca1aece39a4e0",
+      "bytes": 190897
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-13.txt": {
+      "sha256": "42806d58551c925f3254bcd31459228b165bf3214b3a690d07753462b4f62eb9",
+      "bytes": 1416
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-14.png": {
+      "sha256": "5f8f5373375a45639252c209fc6694edf8cdab5c2446cf6c95c2857734cacc8b",
+      "bytes": 185149
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-14.txt": {
+      "sha256": "d93a0a8f819aeb0700282c8db70efe3a167055e1ff3d1de75bad89ed7887068a",
+      "bytes": 1422
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-15.png": {
+      "sha256": "7da2830b31e12a45dead45fae1068e45159347cdc4ab603c32308094699a483f",
+      "bytes": 188799
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-15.txt": {
+      "sha256": "c979e7199d29ea8f0f9459f5d35ea28f3f000e84c3184f18b30ce6545a51cb73",
+      "bytes": 1474
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-16.png": {
+      "sha256": "4aa249998f969702e8f797c67743527012be4996b6cd4c29e59ae97e85440c4e",
+      "bytes": 180530
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-16.txt": {
+      "sha256": "e0d33d847a9b3bcdb2a9fe548d40faacade38ec4cff2e00c13ac200879abd8d5",
+      "bytes": 1359
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-17.png": {
+      "sha256": "b56a921422c2895c0db584cd2269608dab1fff38b68e1234b3ab6e8c42741f10",
+      "bytes": 178378
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-17.txt": {
+      "sha256": "9c98eb362267e6ba38a20a0cc815c7d3d958f8f5b0bd6fbc3e5505a85c3633d1",
+      "bytes": 1240
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-18.png": {
+      "sha256": "a2e7dfa511ef4cf156fb274a25c9989884c2088accd548fcdaf754cdfd969c13",
+      "bytes": 176019
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-18.txt": {
+      "sha256": "4859eb50cef04520498401c14c53ab96098012061864854596c62b41fec9412a",
+      "bytes": 1355
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-19.png": {
+      "sha256": "6924dea215a588fa7b898196420c27c26f708c1731bcecf5a3e4e4a1f7fac8f2",
+      "bytes": 182610
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-19.txt": {
+      "sha256": "d2abac309fb46a3f577f2da139449fad17547912215dfc5310e93089cff6727f",
+      "bytes": 1338
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-20.png": {
+      "sha256": "d39e6da27b773c682bf3bc64da817ef63c6d2d248846c4ac28c6c27524714cd5",
+      "bytes": 183943
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-20.txt": {
+      "sha256": "80d238c9a3e16d1644e3216fa7e1491d609363fc7d4b06981c51e091c178406d",
+      "bytes": 1419
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-21.png": {
+      "sha256": "10031722755257a4c997d9ba959874ddc80d6478c4c87e7af32053aa08b79be5",
+      "bytes": 195461
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-21.txt": {
+      "sha256": "0c96cb375986696c5eac8c7a23f555fd2ea8786db2e341b7a9fb6f49cd14292b",
+      "bytes": 1533
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-22.png": {
+      "sha256": "f6099a4662bd0b2ce58519abd70ecfa9aa65f2fbe20173b830d71ec4d879952c",
+      "bytes": 189082
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-22.txt": {
+      "sha256": "3291bcc2c8106f6a5188d8857d59df19c3195f5a5d43abccafa0974e884cd94a",
+      "bytes": 1469
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-23.png": {
+      "sha256": "6ec8c4aa9a7f378b3a204028e55970462ad37f131514d79c58b3dab8e38e13f3",
+      "bytes": 198113
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-23.txt": {
+      "sha256": "5e82f82e1fce10e4413e19c13facf10fefd3fb438fd6b9ad781c12c969152dd7",
+      "bytes": 1562
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-24.png": {
+      "sha256": "465526a39ad769c1442a7987bb497d791be9fdbef2f44e168d1d2c8e93784810",
+      "bytes": 188114
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-24.txt": {
+      "sha256": "b59a3cd733ded08c3ece2fcd729ea4f747dd16ee4db64d827e42242e42a022b2",
+      "bytes": 1436
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-25.png": {
+      "sha256": "17b24c7ad5cd4b1d8999aa5addfd60feff8a356296615bab50d6b8859c478516",
+      "bytes": 206847
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-25.txt": {
+      "sha256": "5108a1f3de8b8cf86f7cbfbaba2fc0c49203eb0ebe9eb0493e97b10aba5f9d9f",
+      "bytes": 1662
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-26.png": {
+      "sha256": "abfa207d542624035b51bd5def5d38c421289b2a1c2671e0721c9f428ab0fe17",
+      "bytes": 168296
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-26.txt": {
+      "sha256": "f91832a4c0a8fc4cbd5b6b650994bd45cb17a546820445beaf2f33e7ae47fc01",
+      "bytes": 1114
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-27.png": {
+      "sha256": "9305ac4543ae7eb3085046f3b3896362a379e3e46a7f43a6bcd724f3b95406d1",
+      "bytes": 185827
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-27.txt": {
+      "sha256": "801aabafd7eaa734014ecf519989ad9a1cc8230fd44b7c05e11e6c9b44d779a8",
+      "bytes": 1258
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-28.png": {
+      "sha256": "bdbd36b3207a03c3923df453856b40a24875653beea6714cecf2f3b344cdf942",
+      "bytes": 155342
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-28.txt": {
+      "sha256": "ab76cc70b98605023cf48957a467ab33a91f830c6c2b891b83975b036a381c87",
+      "bytes": 1003
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-29.png": {
+      "sha256": "d7c7373be8fb333647b5feb5c71e0465bff960d5be73079db120c13c1e06510b",
+      "bytes": 217835
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-29.txt": {
+      "sha256": "1f1e161f10a3e77232aa5d8c58267af151c32e2bcf54e8dc3474393545122cf5",
+      "bytes": 1319
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-30.png": {
+      "sha256": "935c1baa897db519c04283a331e8f0d08829714e0c81cb26a5534fb1670ab23b",
+      "bytes": 165896
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-30.txt": {
+      "sha256": "173fd56809cd54e5ae66434de427dc44822a2f4eb6dd6d735d9f8d0012a6d692",
+      "bytes": 1212
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-31.png": {
+      "sha256": "9ecdf753603d57b32722adbb61028ffc54d2c87452a1cf912829a97b497f7995",
+      "bytes": 189591
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-31.txt": {
+      "sha256": "4f3b5054b5d1072cfaf7a7705ca0dba9b89d836750c8483aec2fa4acdd7bd34b",
+      "bytes": 1385
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-32.png": {
+      "sha256": "9cfa7a431c6a51c059d7848752d9a5d3be32b9c188f2c131007e010626429baf",
+      "bytes": 162682
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-32.txt": {
+      "sha256": "e82a066a423280881f56693f2079a9ac3d4b7d6653fc5c4a969350d8cf45899f",
+      "bytes": 1173
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-33.png": {
+      "sha256": "de01a62ce4bca9db8303aee37710602572dceab842e2cf911576549adb089bbb",
+      "bytes": 194796
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-33.txt": {
+      "sha256": "810808f1514a74c06ab0bbb4a1ac1795f29861d2c4573daa43fa7dfb1e3ac090",
+      "bytes": 1350
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-34.png": {
+      "sha256": "cceb3095f8b745a8fafc5147eaae16daa1db6f9c7592ff2f239228f8b570b0e8",
+      "bytes": 220565
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-34.txt": {
+      "sha256": "fd51fb6b60a52b0aaeb9d45a6fdabbc9dc8acf14ee8c44c0cc0d57bbea6cd92b",
+      "bytes": 1621
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-35.png": {
+      "sha256": "fc00d439f3890785d9b661c09d33b1c9126b09802c5e3ce640ccf88df6e2ffa7",
+      "bytes": 247795
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-35.txt": {
+      "sha256": "615c339fbcfa923164d64564fe64ee58716132ebaeb3e32e53a28bb25a029295",
+      "bytes": 1610
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-36.png": {
+      "sha256": "ca33b61c44b87dbd79afbf04373bfd9b15317b8190f5b01235c791ffb13e19d8",
+      "bytes": 195670
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-36.txt": {
+      "sha256": "5371d060738f9aa90a2d4de1f43392ebc6421cc64529751cc06681fa382d9eba",
+      "bytes": 1557
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-37.png": {
+      "sha256": "c2808a849640f805cffce9d62e7e0d992d5ffb1328e8575659c918a52a6d7444",
+      "bytes": 204817
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-37.txt": {
+      "sha256": "c0d22f16a61ea56f507fc8c940dcaabb52c139b8f7fb61e82cc8abeba47ba8a6",
+      "bytes": 1552
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-38.png": {
+      "sha256": "3caed53eba029f6f8dfff0e17e8ecf5c7165e10b018df9e71a8fe2a70f12f30d",
+      "bytes": 268153
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-38.txt": {
+      "sha256": "1d735e6be43b440fd3e4ad6d5b813e5ebf657d44cb58778b46e1bc5fc273f2cb",
+      "bytes": 1706
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-39.png": {
+      "sha256": "7c74364b5b7fb1fc83c48e302188783122030f7989ee8069173d51282b7e9cf6",
+      "bytes": 283795
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-39.txt": {
+      "sha256": "428370ae1927f0dcbfd921db00f4f5c6e518c58f8b4825429c6c9ed086cbdeb0",
+      "bytes": 2022
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-40.png": {
+      "sha256": "5583b3656a3eaa4ff9ede9afbb8bd6590243ad2425c38ca5137baa013dad0c17",
+      "bytes": 215236
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-40.txt": {
+      "sha256": "793be21f28b54e5a6be114c1a92c3a0d3e4fb8687ea9776e909f2362de8d74a9",
+      "bytes": 1662
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-41.png": {
+      "sha256": "dfcd1fbba03a3ca19379d3dd68a3463562f9930544bb0209326cb97e3e0228d9",
+      "bytes": 212932
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-41.txt": {
+      "sha256": "2944b931da5bb001cfb23fcf1bfaa7bb233016de9548955738ed072ec181a2d4",
+      "bytes": 1689
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-42.png": {
+      "sha256": "474ca88c9c25461be4410f321bb496f0dfd64567da833d2b6777356316daa0f1",
+      "bytes": 154213
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-42.txt": {
+      "sha256": "1bac0c445826d69d422ca2bd01ddf5ec279ddecbf4c3a9111fe5c184cccb72f6",
+      "bytes": 1098
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-43.png": {
+      "sha256": "f235b7290c5eac47231e226de3af0e84ffc1a9133a34021ce4d2d1413ac6433f",
+      "bytes": 220385
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-43.txt": {
+      "sha256": "58172679b4b7b262365e0e46a1c3a099774481b31c0d412a72843b431dc58860",
+      "bytes": 1127
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-44.png": {
+      "sha256": "99b7d80f84e9f3ace6425d51f1cbebde42be4935baaba2023d24fc9c8086e896",
+      "bytes": 240589
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-44.txt": {
+      "sha256": "5d4365dad99fd43465c19b5960e900bbbecb66c5abf58826d4ae344590557d0a",
+      "bytes": 1230
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-45.png": {
+      "sha256": "15e57740f93c25a0195a812a3085abe0bf54e1b48ceb8e1f3bd15985890f51bf",
+      "bytes": 220216
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-45.txt": {
+      "sha256": "1346b4a09117932892ded6624c0acd35079ffb6960b106a6ad4fcf3a44e0d133",
+      "bytes": 1123
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-46.png": {
+      "sha256": "3d003457f060ca481609a9841d6c978eaec1fc8a3c3e13d0c81704ce499c2bc5",
+      "bytes": 176935
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-46.txt": {
+      "sha256": "0fe8edad48ce5b20fc23ab8e61dceab7c76d24c54163c29cc4f1c324ac618903",
+      "bytes": 1066
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-47.png": {
+      "sha256": "b7e594126f026ebb205c081338607ae89eafbb83ccf8941231f94e6f3d97b863",
+      "bytes": 162778
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-47.txt": {
+      "sha256": "a9162475d9fc64c5b2a5f5ddb9d4d0b5bf320e45e336450290928f31f579fa6a",
+      "bytes": 1050
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-48.png": {
+      "sha256": "ccf554da84bef33e863a7dffe52d9781469473c468a5f349df974919f29a9612",
+      "bytes": 179166
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-48.txt": {
+      "sha256": "91d4cb3d519f9c61032e20957c9601a66b24b164465f7018f114479086b5df84",
+      "bytes": 1075
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-49.png": {
+      "sha256": "10813daba04a835dff03803d41e749581570cbf926df7726fa4b1fb2c5e41e08",
+      "bytes": 158731
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-49.txt": {
+      "sha256": "18fa31e5577b871251303e22b5058d7f42c135c19d602a19a2022302a053575d",
+      "bytes": 1023
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-50.png": {
+      "sha256": "3b8e1bfe7a879d56b4fdedc1df386c9e577f2bf4a400c04c307bc93de7542aac",
+      "bytes": 166293
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-50.txt": {
+      "sha256": "33ea4965baa825076f5194603578fd0b9e4ce72592b764a7929223e364efc27f",
+      "bytes": 1020
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-51.png": {
+      "sha256": "c027c3173ae3f9ba2b74ac55e968722a1fe2f12f19fcab7a00a4d28faa5b025e",
+      "bytes": 163832
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-51.txt": {
+      "sha256": "6f4b3262db56a8580030dbc3740ad76f1bb98a01603b79bad1d245b466f7b8d3",
+      "bytes": 1057
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-52.png": {
+      "sha256": "3c85b70c4316c012833eac79d727ba2fea5c92451344dd14b5034b37cd73e553",
+      "bytes": 167785
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-52.txt": {
+      "sha256": "d4fd2c07fdcf869233ac6a00789fd0291d10778f6d0787161bc37330571bd3a1",
+      "bytes": 1029
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-53.png": {
+      "sha256": "f546d8de3d7d58b20ee000e2523e5660950f60f892e7ee8b4a26011ff0f23537",
+      "bytes": 161731
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-53.txt": {
+      "sha256": "e0a5d513a1c58512bbeaec61b27de4e0bdb83830b83decf5b5847a041cdff93a",
+      "bytes": 1042
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-54.png": {
+      "sha256": "d6992d11b1b3fd2c674efcdb2415b6171041a336dbae02c6424d586aae82a22a",
+      "bytes": 175189
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-54.txt": {
+      "sha256": "8ab50b8d1365e472ad775a7d88039b8841ef3606b3ab1156b7e44c27df472b4c",
+      "bytes": 1061
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-55.png": {
+      "sha256": "d7c21f964aaa80ebcb290c0a2ea9e7f94c03362b09d28b69b3e1f2e8498add3d",
+      "bytes": 181864
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-55.txt": {
+      "sha256": "3a1189ea6de68dd3349a6d8556901b4c6021a61026751e0fbf9ec5f2bbde0693",
+      "bytes": 1193
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-56.png": {
+      "sha256": "2859ab65a45bcd0f892d0ec594dca43982ce85af2c576187dbd145c780bf0119",
+      "bytes": 218486
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-56.txt": {
+      "sha256": "e2ac82cbbbaf5690d095d0e8db73faf324eed6ffdab92a66456ec8a2264f8c17",
+      "bytes": 1540
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-57.png": {
+      "sha256": "7a5879559400d0e9815ef24583dfe2d544013a82725fe6714fe6f41dfb152811",
+      "bytes": 182594
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-57.txt": {
+      "sha256": "43fcd3fdf306db5227ef03d685cb72d9052a72768aca25550868a43a1194bb83",
+      "bytes": 1108
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-58.png": {
+      "sha256": "8ea8d824f6b51ba8d625433e0d308988357e1a3f8634f7b98ee025fc65d799f4",
+      "bytes": 238454
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-58.txt": {
+      "sha256": "93c72176bcf40d59a63219183b03d9042a1a90e69c1ea16658682be669bc1420",
+      "bytes": 1471
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-59.png": {
+      "sha256": "c05f3a8c08e778bc75e2f26133e0c3f04f00950c9797ab4a96763251d921b150",
+      "bytes": 238376
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-59.txt": {
+      "sha256": "60a6e92db1775fba4125b95bad1755a6290dd335c22f8e0481a7021883ddae21",
+      "bytes": 1342
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-60.png": {
+      "sha256": "db7fb79738752cc6974c32720e4cf2f700f7471fccb48a9a8195368ff81a4f35",
+      "bytes": 212706
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-60.txt": {
+      "sha256": "e6083f92327515e3e2e904ffd5aa004b25002c61dcab17a6aef57de82d4fa3a1",
+      "bytes": 1302
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-61.png": {
+      "sha256": "9a35c0a674899cb85876da63f3e6df91d49580c43e9b5f8ce1f67b28c3bf2556",
+      "bytes": 261400
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-61.txt": {
+      "sha256": "97fe35927d6bd70859dc924126c6679e57d1fe8e4bebe61081a466106acdab29",
+      "bytes": 1433
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-62.png": {
+      "sha256": "862d61dd519ee40703127691cdd7ba68a67d171b8fd29055e848ab09047566bb",
+      "bytes": 168060
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-62.txt": {
+      "sha256": "c34e31b6fe33a4437f1a2359ac49e252f1aa86051d5e4a918115b25c50efa8f6",
+      "bytes": 967
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-63.png": {
+      "sha256": "c39c11b6de3b01ba49e4929f5306586d0d35f2c59e1ef4da54925409762d2b13",
+      "bytes": 87434
+    },
+    "preservation-review-r1/rendered/alu-foil-simulated-ar-page-63.txt": {
+      "sha256": "b3df49c06def0f6899f303fdb06be28fbc23b652af77dee632e1d3ea0ddbd1dd",
+      "bytes": 547
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-01.png": {
+      "sha256": "2d97e1015d8fc880bc5c3850e81af6354ac86484547f5df29d202401a27bf5e3",
+      "bytes": 252823
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-01.txt": {
+      "sha256": "c7d52b06f1675c3b2ce36d5f932f93c01cc7a0d4f1822e38717236a912f12cab",
+      "bytes": 1314
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-02.png": {
+      "sha256": "a3c2cccbef5f6d995c1c9883ed161318509c9821491bf01eb85b59f42478c9fd",
+      "bytes": 297867
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-02.txt": {
+      "sha256": "f2db84b8e8ee9328f72c9b074c9c54ef86f306e3e343e7024751db055340041d",
+      "bytes": 1562
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-03.png": {
+      "sha256": "08284a66cc6d8b4a9982c7418306bf05b5c72797cee3fbb9572f3853cbbe0b0a",
+      "bytes": 289767
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-03.txt": {
+      "sha256": "c80e05b6b0f98c61a2be60c4be2f68bc7bc3135f578899ec3c846d879dffd2c8",
+      "bytes": 1542
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-04.png": {
+      "sha256": "94a4a10ae3d32a6473a8bdc33a3b7810ec70a09d789f18179df735c0a10d7fed",
+      "bytes": 224148
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-04.txt": {
+      "sha256": "e5c3d14a97afdb3adb3e261012b67ab0f8da24c9ffb2338330b727acd9799725",
+      "bytes": 1120
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-05.png": {
+      "sha256": "982496043bb2695ba1f6151e9c26584d71d7cfa4a3686c3f3821fca45cb1b422",
+      "bytes": 223023
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-05.txt": {
+      "sha256": "57bf8618fba188f4cc5c0dc3cf266b65ee146ffa175fccdd96df315dec2fdb91",
+      "bytes": 1067
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-06.png": {
+      "sha256": "e7ada95a4e5914df5543652ec4cb23bf4b751fa04ef6113ea9799c663f1b8c84",
+      "bytes": 186090
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-06.txt": {
+      "sha256": "dd81b13131649f59aa44d663a061f0654d7017424613bc507d35503250668400",
+      "bytes": 883
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-07.png": {
+      "sha256": "a49337405cb23eae634b545fe570941c64bc9c33a77d0decbdb05151756ae8fe",
+      "bytes": 113201
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-07.txt": {
+      "sha256": "b2ad50d341612d15551b08416930085f5e28d5f1c0fe61c7ed4d4a1170635241",
+      "bytes": 510
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-08.png": {
+      "sha256": "8b7206a1c707565d59c9137cd68e42644e24f147e1bb40de1fd03bbee341805e",
+      "bytes": 187452
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-08.txt": {
+      "sha256": "bff11601bca5e7dafe331ac389b9871c9a08cc1831f3233ff09fe4e1027270a6",
+      "bytes": 874
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-09.png": {
+      "sha256": "051ac57aa3f960c601ffee644a61e4364d562dd5389da0219cbed0d8e9f6890f",
+      "bytes": 228113
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-09.txt": {
+      "sha256": "818eacd38904df39db0a6ed8b14b795afa71e15301bf7dae43190a03f6c15559",
+      "bytes": 1175
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-10.png": {
+      "sha256": "8d0e77a7d1df113719c006ced08a14dc14f0de52dc7944b12079884d7ddba4df",
+      "bytes": 248395
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-10.txt": {
+      "sha256": "f5fd5771bce27aa2c7328d02a4984c2db22c284df8557d0b69f7107c8c5b7531",
+      "bytes": 1287
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-11.png": {
+      "sha256": "595fa1fc5a4dc390f5820a97ca454c73d36f2874599d05f937e02b3f6351f6fc",
+      "bytes": 259709
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-11.txt": {
+      "sha256": "5dc3c18d9548adb830b39a4852f2e8281042c7976131d7ee0ff627d5c0bf9090",
+      "bytes": 1289
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-12.png": {
+      "sha256": "3adf015f52b95abffcf690800adda0ccbc8d6cdef74390d245a01de8f1c12b42",
+      "bytes": 189144
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-12.txt": {
+      "sha256": "b6cf28cfd5779970c941769ea539d36181e615e6bdfc78231d82cf72f1278678",
+      "bytes": 937
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-13.png": {
+      "sha256": "a3112623070cac22ad84d5eb58cd7512677953de8c95e69dec8b1d90e6ff3804",
+      "bytes": 199324
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-13.txt": {
+      "sha256": "dfacda3733895061958a1b238a0a599321aa21f01f0ce3c348d5402b9937d4d7",
+      "bytes": 934
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-14.png": {
+      "sha256": "561d7ea530b04806c527ed4440193b588ca5f9f8490ddc2af105b3673a9a6f74",
+      "bytes": 200415
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-14.txt": {
+      "sha256": "40472d79a88f651368bd1e64811dd9ccbeb23a07daea39a0a9a7db1d600abda4",
+      "bytes": 1009
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-15.png": {
+      "sha256": "3faf518a46b958e8f92d70e5e6c2547b9bc274806818e2fbde44f74b63a6a9e8",
+      "bytes": 169407
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-15.txt": {
+      "sha256": "a66b16a42b0f9450c117179e39dbe8605ccce2dd3268af2d20e40a1a98827192",
+      "bytes": 851
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-16.png": {
+      "sha256": "b5a31f0cdacbc1f87a6515a49bc9ca9815214d7e5503eaabaf6e0c6344405bf6",
+      "bytes": 190600
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-16.txt": {
+      "sha256": "f044ba7f94a0027123f44b243252b63cf71e169a04acabc0dba3b5a876bed899",
+      "bytes": 916
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-17.png": {
+      "sha256": "e10ac9eea3d0e8ba5763c4917c06adc9f94326fa4f4884824f98ba8a513891cd",
+      "bytes": 170752
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-17.txt": {
+      "sha256": "35b68cda052995bb5714bde2d9f35dfabbe3ef81cb34ce14843e70ef195e709e",
+      "bytes": 850
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-18.png": {
+      "sha256": "5b55b05373f27e67ccee84713f3db1322f2cd689b09263f8a29ee0209904b42a",
+      "bytes": 210015
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-18.txt": {
+      "sha256": "9c2785d8e7ee0d90c8685845a1c0b05ba547f319ca4eddf4b211ee1c5e8a6cc9",
+      "bytes": 1044
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-19.png": {
+      "sha256": "9730eb41ac7ef231d17cb3c8d918652f3d2d10576f70ad0a81a896bbffa9ce0c",
+      "bytes": 175868
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-19.txt": {
+      "sha256": "79c5d4e0b2d9d43f3c7b8215b02729196dfc45c261cf38d43ebbf1face21e3a9",
+      "bytes": 875
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-20.png": {
+      "sha256": "d6a55380100cbaf9b93bc478f12597b33b1b1c0f9e6c09f8826577d8dacba455",
+      "bytes": 203603
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-20.txt": {
+      "sha256": "ca03605437678b0fe025f4b786900ee2ddc8a2d03ce297644065c633f76a8149",
+      "bytes": 1004
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-21.png": {
+      "sha256": "079864d06bc05d0f697266065995234d07d76cd7497fd1b8ad074a28e6b05309",
+      "bytes": 201973
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-21.txt": {
+      "sha256": "25e00cdc88d3457d838150e484321bb59585e6fa0e8950c28fb8cc29ada18f61",
+      "bytes": 1016
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-22.png": {
+      "sha256": "997c1bc7392b190b617e125a610ba2aadd678115477a7057bbb3bb0f874cae6d",
+      "bytes": 195249
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-22.txt": {
+      "sha256": "ca934a9fe1859478d4e54f03ee773c9732ca1f48dd90cc549a84169a92a9845f",
+      "bytes": 969
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-23.png": {
+      "sha256": "e51cab15d09ccb334ce2173be36389c029f713eca2c09acac05360b8b543901a",
+      "bytes": 201853
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-23.txt": {
+      "sha256": "84099da2b5ceb1a2bb2d731a9a2de91f690214888b48be318aff6ad81a98a504",
+      "bytes": 993
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-24.png": {
+      "sha256": "c4c056e226418f9b9258923c52968f80a55956d95b8caab975a564953b2d89f1",
+      "bytes": 208608
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-24.txt": {
+      "sha256": "7439c7d0e972926758e0f65d044ff193aad1a2ccc6b6c2f711332c92afb2766d",
+      "bytes": 1032
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-25.png": {
+      "sha256": "0c0892b3e9fc5275a2a1f723d1c7cd743f43aa0a5f96d389fbe3f44c4f4a1d4c",
+      "bytes": 207883
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-25.txt": {
+      "sha256": "abc95448d5b42a0d38c65e6a48d2eb78ac3d79f9c493642a395316bfddfd3804",
+      "bytes": 1029
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-26.png": {
+      "sha256": "de31cccc9e713657e4b9f85c8327657ed1e632cf1d67c90c36f9a03490099ccf",
+      "bytes": 198700
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-26.txt": {
+      "sha256": "ba5a5796277855df0bdb262ffc37bf70c3d9955c15f64d11ac4e6b6ed46b2b33",
+      "bytes": 926
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-27.png": {
+      "sha256": "26e5521f75bfda7989e00bd09511d32885a2822cb5164e6a3d05bd5a0754fb74",
+      "bytes": 205645
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-27.txt": {
+      "sha256": "1275fd0a2f9f161c9cee3fb9817eb91824eae703fa110b5f663a3fe759ffd35f",
+      "bytes": 1036
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-28.png": {
+      "sha256": "c2ab5b2d475f8a0f3c56cfccab0ef82fc2c6e27e538ef9cfcc40ecf2033e0e6b",
+      "bytes": 209434
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-28.txt": {
+      "sha256": "74165fa99ac71487fb7eb026992e4eb35017abb7fc1871cfe0f742d213785a80",
+      "bytes": 1054
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-29.png": {
+      "sha256": "60b8f4a563358a47832a5e5c5991cf9ba014f33537a8ab51c45230fd3c9f6f7a",
+      "bytes": 200026
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-29.txt": {
+      "sha256": "9230ef440623c46c57ffa39d3a1cd56d3fafcd545efaf82d46ae1319bc7d228a",
+      "bytes": 989
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-30.png": {
+      "sha256": "6ae09de8f80e1a1a94901ec6a9d4dafd68e9f96f4ffcec013302975f062b1474",
+      "bytes": 198582
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-30.txt": {
+      "sha256": "63ef098af07090abff2db7fa2ab0ff9e111d57eaa9e58399540d9b7eb4e58be5",
+      "bytes": 979
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-31.png": {
+      "sha256": "8bff531fe217e564dde7e43a092d25314e9288b911e2bdf1ecf2247a1c3ace59",
+      "bytes": 231567
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-31.txt": {
+      "sha256": "79b397c9f83929dafda449aae1bfeeac4c1ea1d8dfcf3d77e6eefa6836f679f0",
+      "bytes": 1164
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-32.png": {
+      "sha256": "ec3e76b389bb4d3096ecfcbdf8676bf32ca2e2f4fe6a153a9cb6da4784cb3a8b",
+      "bytes": 275739
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-32.txt": {
+      "sha256": "6e7b222279bfbec15e2d8b0f54fce4668850e4dcce8699b847fa7e89e5921a9a",
+      "bytes": 1402
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-33.png": {
+      "sha256": "788e27c0e6aaf4432202ee9862a1ba3a5963a941def2d5a0e803018e102734e8",
+      "bytes": 244526
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-33.txt": {
+      "sha256": "72ad2e14e4af537fd488fd613843dc27ec2938ab829cfcd9435eb90fa1e335e3",
+      "bytes": 1278
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-34.png": {
+      "sha256": "44fd9f18a22f2abc324720ecf1320cba0cbc3ef61831ff9ae62b782d60ba8855",
+      "bytes": 244125
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-34.txt": {
+      "sha256": "63eb3a0d8dbf1d71db9ff47345ea9870df458c8284c64f0759030d48c6929ce0",
+      "bytes": 1234
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-35.png": {
+      "sha256": "ce36bda4b74c4a788bda6e5e383c082dc668650fa2b94a5dd90053dedf360879",
+      "bytes": 292852
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-35.txt": {
+      "sha256": "1085a7b38d212b24860bdd0348759e955c26ce97969c40e39e19302c896e2b7c",
+      "bytes": 1505
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-36.png": {
+      "sha256": "d9fa6988b7d991fac72afd1ce44da1d5540f96ce1f60f736f7cbe05232c96ba1",
+      "bytes": 236001
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-36.txt": {
+      "sha256": "ad0e1e203fffd1300bab456d11d62bbc3c6ccd47dc0546783a6eabf3db4ceee1",
+      "bytes": 1212
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-37.png": {
+      "sha256": "716edca696500e49d72748f79aa915df162b39fbb09e22350d8afdd094d86005",
+      "bytes": 229339
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-37.txt": {
+      "sha256": "e349083080848d3bfd4bd78cfe4f124035ae0ccdba6e0269cefbbd5139c8bc0d",
+      "bytes": 1153
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-38.png": {
+      "sha256": "fc9ab590dd017e6a7fcb3dec9c35c6171edb8bc30761fc720a41c65ccecc4339",
+      "bytes": 181078
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-38.txt": {
+      "sha256": "10b8ede826531d600e11667d9785a63a8ae71e8b727a5a4f777a3de7a8666d02",
+      "bytes": 887
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-39.png": {
+      "sha256": "cbf00e27dc0e0ded17a106a3b4efc96ee384e6e32cdcbfa9ae7acb1f01b2deb6",
+      "bytes": 229180
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-39.txt": {
+      "sha256": "c40f492b2677d5ac9e26a6b160ff442e4b0442044415f207abd89ca6cf339da8",
+      "bytes": 1061
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-40.png": {
+      "sha256": "e53e3a0e580879d81f3ad78792063c248462fdf2dd0d7c41423a81fd727fb25e",
+      "bytes": 203174
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-40.txt": {
+      "sha256": "9b99a3c45df4aaf36655906e0a160f058efc1517603588d4d991314ed7d08567",
+      "bytes": 936
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-41.png": {
+      "sha256": "43fc2294612e56dfd2d3daa46db1d06b9eb880956e4bd1aeee1d9a3161ad67ad",
+      "bytes": 231564
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-41.txt": {
+      "sha256": "80952af5958f92816bb5ec17f0ce3bc8853c28c6891f5bccf7d91018375c4eb4",
+      "bytes": 1121
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-42.png": {
+      "sha256": "270abccd118f33584bcfc2ad27a28e6ac4e31fd625514f36960760781a581c4e",
+      "bytes": 169186
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-42.txt": {
+      "sha256": "5366dec28dab73d8b3453dd139b83b182ac75966fc4827e9bbd0101cf7e1560d",
+      "bytes": 844
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-43.png": {
+      "sha256": "cd4b3cf22d555cbe7c498e7faa90b9e5fc71a4e695c74880b7b941117d2f817e",
+      "bytes": 189820
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-43.txt": {
+      "sha256": "8675851ce7b5bebd9e256759137a00cb8ad4c85182a9e7775ceccc5bbb4fcd22",
+      "bytes": 963
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-44.png": {
+      "sha256": "adcf2c0298bce852ad6dd6a113803e24b9e81edcf3c4bfd3d2c3363e41406044",
+      "bytes": 186226
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-44.txt": {
+      "sha256": "fc7ea6aa6db9ff8890f0ef683984f7ed5eb797451eba027b19415ac6b6a7a308",
+      "bytes": 945
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-45.png": {
+      "sha256": "85e34ca0b3bba2daa3a41a22fb48b07d587d58e65f141797336a75d32ceafb87",
+      "bytes": 187642
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-45.txt": {
+      "sha256": "44a352b99c7cefd9aa0c9d64bfb4c290cb9d40bf1d1ebd67b476730587dbaa93",
+      "bytes": 962
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-46.png": {
+      "sha256": "149b6d23ec9296f012e50a8c8b3f9893c32e822c2053e1514da3b0c31c8a402e",
+      "bytes": 168480
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-46.txt": {
+      "sha256": "b58dbf6d02e2b1ab3f653c64f7a86508f42eb35e45eaf6fd5c2a36b691fe5b0d",
+      "bytes": 840
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-47.png": {
+      "sha256": "ea5d877b49af8bec5c5da35a2e7d352feaf00264cd51eeabc2b9c2998dc7d19b",
+      "bytes": 179324
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-47.txt": {
+      "sha256": "7cce441e36983eaf74630de9eeaacc6c92507ffec6ce2fdf996a2ce45b09acdb",
+      "bytes": 915
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-48.png": {
+      "sha256": "f1cd60cb760c80e65f89d0c75fa3dcd898ecdac1b41d86349df5121662e9a5bd",
+      "bytes": 190577
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-48.txt": {
+      "sha256": "9c37ed0addd3f633563e7206601e66422b89fda5212a9328dd146b96eab3d7f5",
+      "bytes": 973
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-49.png": {
+      "sha256": "085751d92138b876146ab5c00d2174962fa8668369da99ab8f292ef5d2a220a5",
+      "bytes": 154502
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-49.txt": {
+      "sha256": "60da67a98615132a26d146cdb5ab698ecfb17b077f5ff79d971ae498a0615ede",
+      "bytes": 760
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-50.png": {
+      "sha256": "6d7cb08c3a429f0511997662e81f551623c1b307f730e204d8152214a399cdbe",
+      "bytes": 236187
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-50.txt": {
+      "sha256": "dec6566cae942b583dea65c18624b518e5e544b04a42558daf65f62255a63131",
+      "bytes": 1197
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-51.png": {
+      "sha256": "80805b31878d3b195ab95498e094e1f748948950fcbe76cc0030d3d6b3ac4d4a",
+      "bytes": 209968
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-51.txt": {
+      "sha256": "20497975be2faeae64253bbcad1590700201bf1e1a66897a73d177e267020452",
+      "bytes": 982
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-52.png": {
+      "sha256": "475835c5586b5f77c26dbeacd527c5e605d10cbe071497764e0f87c9c4d822c0",
+      "bytes": 220408
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-52.txt": {
+      "sha256": "fcb69ee57fbe947d7d171d85adfc7c6f533446a53feff7627e6229f953424bde",
+      "bytes": 1082
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-53.png": {
+      "sha256": "3a08ec8c5acbd361d1d6fa1f5058683c356b676c77423c98a7fee9b45c6fc716",
+      "bytes": 221947
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-53.txt": {
+      "sha256": "dc3ad15779585b827c9dd10ffe4a64d9b9f520e2e5b452c690c993baf5a87884",
+      "bytes": 1086
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-54.png": {
+      "sha256": "879fc644de5affd251ef547296019298104fb9436fe9c9615194dd73f368bd01",
+      "bytes": 259267
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-54.txt": {
+      "sha256": "14b7a870b7edf67b767c0f588233d375d6d82ef22d41d9c5ddb44034dd589455",
+      "bytes": 1324
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-55.png": {
+      "sha256": "bcb52311fc0c46da7e01ced473572929ab5cbab25a0431b140b81bdd867ffd69",
+      "bytes": 246734
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-55.txt": {
+      "sha256": "fe9409a5dbbb2b0af77508d3fa339981138f6d4167bfbebce98ae8a6c2315be9",
+      "bytes": 1227
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-56.png": {
+      "sha256": "f3593352b6034dfcb2a10182d2d29f1ba6872dd638e8f972d9f42650d6e729a2",
+      "bytes": 84019
+    },
+    "preservation-review-r1/rendered/steel-simulated-en-page-56.txt": {
+      "sha256": "0ea811181f7dc5774110248ce219384a8fd0fe9f8dfbd0a984870448138b649b",
+      "bytes": 379
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-01.png": {
+      "sha256": "f8c3f1d5573c8b02de2fcef8af694d825bb5fec0b4d15eb3b58c732d11c7c719",
+      "bytes": 248537
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-01.txt": {
+      "sha256": "8481977f823f1678ae06438f8154ebeec580d415ab5da81566e29322e3039b4b",
+      "bytes": 1777
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-02.png": {
+      "sha256": "14378a2677b8aa28fd72fbb2f01dfd3704f4d8556445cf62993ba1ca73a5be08",
+      "bytes": 224279
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-02.txt": {
+      "sha256": "2ec9f022ad8cf7a853e09ce7281f86b67e1ac467cbe611b11db2fe545a8709b4",
+      "bytes": 1707
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-03.png": {
+      "sha256": "e677b714cc96de38fc7c94c25f39e0bc907e26ac28675dd3872b4d2bd3f8dc68",
+      "bytes": 272694
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-03.txt": {
+      "sha256": "11f61d509ef25155e6f5d24feeb4f5ba8950b7cd285744d2ae58dae584d6ea41",
+      "bytes": 1824
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-04.png": {
+      "sha256": "11d7a779da88aa5d7d6cc0630806a70c2366ac51b5c217902d77e5a42ccb3dc5",
+      "bytes": 233395
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-04.txt": {
+      "sha256": "aacbb134b59f7c04e90b7c5361eb663a19b8de938951ff9ccc153cb5b762e259",
+      "bytes": 1387
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-05.png": {
+      "sha256": "a34aa0bb474b16328a183251bade6025408945aafa6a4d1cac99221ddc01b0ef",
+      "bytes": 212683
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-05.txt": {
+      "sha256": "4fb607e1be080a2f64e8071b0e6a6c971ee410be0fa58538f681e8ac87d744c7",
+      "bytes": 1307
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-06.png": {
+      "sha256": "ee92a16856718df553abfb6a622e5c76bccb85598b5272004b5494d3078ccca3",
+      "bytes": 224403
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-06.txt": {
+      "sha256": "d15780a84732611f746557ec55edfd10ced406f5fdf6015cc474683c23439655",
+      "bytes": 1416
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-07.png": {
+      "sha256": "5b245e8b05d52d4c8973b09e27d0f2d19aa2c555fba1559221539189860f66a8",
+      "bytes": 199793
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-07.txt": {
+      "sha256": "9488ff7e81b5566d9dfabe85ffe4bd0fb568193df783310a4c207d071da0a61a",
+      "bytes": 1478
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-08.png": {
+      "sha256": "49a8916e23e024a19be2595d2ed782ca05943da1895096679ff122673e1c8a6d",
+      "bytes": 201343
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-08.txt": {
+      "sha256": "8d820a6fd117e3973fdffe4fd7a08e334318e2abda92ea85348b7e692cdf64f9",
+      "bytes": 1304
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-09.png": {
+      "sha256": "a6c384cdd916758486f97906db7d4dfd7fa78a0046ede00b9aec1a992111f350",
+      "bytes": 214565
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-09.txt": {
+      "sha256": "8a8f3af7641f0d3c4f19f90dbd2a8b811d776dcd99d110a1d03b7afcf280a5ee",
+      "bytes": 1311
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-10.png": {
+      "sha256": "e943968d8d9a40e5feb0b1abd981cece174d4e1348b839be322cc67ce938614f",
+      "bytes": 200739
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-10.txt": {
+      "sha256": "68ac0a026c13b83299b506abe109c375a3490b7ae2860587cd175622f655e03c",
+      "bytes": 1265
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-11.png": {
+      "sha256": "31420b9aa0aedd0ef4bcf80c702e4218cc3836bd291119ac2623bf85893e40f1",
+      "bytes": 245099
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-11.txt": {
+      "sha256": "5de70b684d687b9496c0933a128fae0c9c164b5dd70c4ad95d5e4bd62a1889ac",
+      "bytes": 1522
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-12.png": {
+      "sha256": "55193ad4750288cdbdd93000a6c204a9390fa4c84d1a40cbe4731bdc7a359f6d",
+      "bytes": 184118
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-12.txt": {
+      "sha256": "a20e226e4a4ecae2eb34e7a31dab7e74799b5914074bb3d97e41e355d29d6b38",
+      "bytes": 873
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-13.png": {
+      "sha256": "4a218c54a0276b1b7e154eb12c7511d4b3fa489f942e392b4b8b386e75b1c264",
+      "bytes": 188721
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-13.txt": {
+      "sha256": "458de8012d3d98c52bce6ad8e85a6e403ca9eb3c532fa85947e6fb3c03f656c8",
+      "bytes": 1284
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-14.png": {
+      "sha256": "fb9248c834aaf60d291b3496f5c46ee19e795a43e08d5afedcd707d53d38c41d",
+      "bytes": 193437
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-14.txt": {
+      "sha256": "919c1585086334874314fdae78e51c03bc2de41b566d8b360f99fe2d0cfee605",
+      "bytes": 1394
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-15.png": {
+      "sha256": "68593465ff5a197759ca554666ac13d08689af508960820d25cfb8183c610455",
+      "bytes": 158533
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-15.txt": {
+      "sha256": "d1d532d87ea46f9d0da54200f62b9e8605bda336ab0eff0fe0d30af215901c78",
+      "bytes": 1207
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-16.png": {
+      "sha256": "92df127be5cf81e8f3547c56cda0c56c46bf8465d9aaec6d108eb338dc86f13d",
+      "bytes": 190470
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-16.txt": {
+      "sha256": "e53279dc286c083668aef5f2bb535bd2ebca07068395ef22955f00c26f4d5120",
+      "bytes": 1490
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-17.png": {
+      "sha256": "954bccce573e3d87e7ff9a42f90cfe29a24016681cc5a212aab90e4c7a6abf4a",
+      "bytes": 199278
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-17.txt": {
+      "sha256": "9982843ef49f2baa6ab46213d412cc21b640016e379ff2d0ece825084e9cb130",
+      "bytes": 1589
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-18.png": {
+      "sha256": "5b2baf49d1932636af7b64cbfd2524d954c5ff13aaec135d3892d33c277c8e95",
+      "bytes": 194114
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-18.txt": {
+      "sha256": "284dc02d14cad1dd85416c1884853cfbd74f688a2b7e107c34346fb0497805bc",
+      "bytes": 1522
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-19.png": {
+      "sha256": "04a0391c18308dfc6da4917b2dcc3eb8f1314d279fba3c64c76f560b6bacf0ac",
+      "bytes": 222859
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-19.txt": {
+      "sha256": "cd755797e26ea8e092d02d8cb884d9999281529fdaaa60b96f39e35a6357841b",
+      "bytes": 1810
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-20.png": {
+      "sha256": "5bd33e74b59a92f1b5105da34338a3c485ed6e073f9d8c3bdb5d3bff55f70976",
+      "bytes": 182506
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-20.txt": {
+      "sha256": "30b5eeef9f0788453c3ebbb62ac82831b13593e0ae9c930e21b3f6a95125b267",
+      "bytes": 1411
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-21.png": {
+      "sha256": "fa2a7fef67de6a4c808fe05272d1c5a203854e08b3103f91a24890dc8ab87d70",
+      "bytes": 201823
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-21.txt": {
+      "sha256": "29ecf386be06962ca4784f69b7a97763f703deaed891e85d1749d0388d2dd4cc",
+      "bytes": 1581
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-22.png": {
+      "sha256": "f4863292a5d1bd5f5d56f62cddaba3110a052f184fbbc1b1146bb9dab10a3c3b",
+      "bytes": 185770
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-22.txt": {
+      "sha256": "6105653f7ec4cbce8ba63fdd00cc1a0924573f4d06be1e56b788a48f35853894",
+      "bytes": 1440
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-23.png": {
+      "sha256": "7f37da9aafb992ac2d23c949389a18f8b8799745c28a4ec02cf91218b2d58f7d",
+      "bytes": 187364
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-23.txt": {
+      "sha256": "9421be4876e9f06eefbf0787d3414a7d37bd3fa666064bc13d23894a9c28e482",
+      "bytes": 1465
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-24.png": {
+      "sha256": "389ac7d4c6c7fb159f6bdbb3fcc8306a77172de3e93f8406efc396ecdb7cd170",
+      "bytes": 200441
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-24.txt": {
+      "sha256": "6829be82725ad56f5cbad7a5a2be1e02260fc466cf01d8379f729f233ce7cf15",
+      "bytes": 1565
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-25.png": {
+      "sha256": "3355af2b730ea16f6123a6faf6d50930cafbb1744409c268e5d34adbfddfb930",
+      "bytes": 202973
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-25.txt": {
+      "sha256": "af18297e026afc362d58c67473cc9764a6e00230e35b385a64b6f193c31971b5",
+      "bytes": 1619
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-26.png": {
+      "sha256": "6ddd3edd268ba07a18d95f273a2f8c24f1dfadd7cc7a96d1925cbdd2462038b4",
+      "bytes": 209847
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-26.txt": {
+      "sha256": "435e08eb5d7fcd50e51ff57a1ccf5e058c4721df471bad3fa207c135168fa7cd",
+      "bytes": 1619
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-27.png": {
+      "sha256": "6f9e74a9f9f57c8d398050e32db94e1fa1c4b90fadba40908c3a95e5b19dbb02",
+      "bytes": 199956
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-27.txt": {
+      "sha256": "4a6387cae02bcccf721a84229a9fd5f5ce5b60a36be4512891539c4149dc5583",
+      "bytes": 1374
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-28.png": {
+      "sha256": "d03d838af7637aec397202e5812129b44ddd3da254deb79deb3cba069be28fcd",
+      "bytes": 146578
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-28.txt": {
+      "sha256": "3ca909ed5e64bc781cc02c4d71b19b1937d0dc2f5d9a08bcfc9fcc04616aa87e",
+      "bytes": 992
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-29.png": {
+      "sha256": "13488ff42677048aa6127a909c4007e251431595d8c9ce1260cad1c5828714f9",
+      "bytes": 187991
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-29.txt": {
+      "sha256": "1fbd74aa5a2205dde38584e346b22cad5cd5c6775c339d09eba393038c29cab5",
+      "bytes": 1245
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-30.png": {
+      "sha256": "d00ca40f9c5c3705de228d5cf28e58464d1e1a7f7b8d64e10ea38c1df867b331",
+      "bytes": 189280
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-30.txt": {
+      "sha256": "5ae4929bcc3d2dc2d65faa63b2079e20bc032c38a8803922a4d7160c71385a29",
+      "bytes": 1456
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-31.png": {
+      "sha256": "df90d11d3f4a9797a4af51b5d856ba9b84eac57b20fa47125dcb579167c6137d",
+      "bytes": 170299
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-31.txt": {
+      "sha256": "e6b0ffb51cfb74792553c0420bf38f1b28efce02ba82b3beca40d2cec8a8472e",
+      "bytes": 1177
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-32.png": {
+      "sha256": "efb81d17374e302098e3ea8ba08298d9cf46c643095d3925b0475cb837145952",
+      "bytes": 181016
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-32.txt": {
+      "sha256": "50645e604e9854fc053e3e2b4ba868bb0017123cd21ff317f4fb7b5eb0531d15",
+      "bytes": 1243
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-33.png": {
+      "sha256": "6706a68249f72f2a6d7e2f79ede3067f69f508e002a7b3df4088a489e23dc180",
+      "bytes": 186445
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-33.txt": {
+      "sha256": "7edead66b8c9ec02b640f05ffa36d0bc4956a4b31d0c260eb99c7eed615374d3",
+      "bytes": 1358
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-34.png": {
+      "sha256": "5090caacc253be49bb9c9aa7519a4fbe2d9d625d9810b9c5201bc1516bf20f92",
+      "bytes": 220738
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-34.txt": {
+      "sha256": "6e68c2a20f9a47d50e06aad669d00cbf69383b2cf51515b34e16ca0819d9fbf5",
+      "bytes": 1509
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-35.png": {
+      "sha256": "b745f6eb7131a19e7ad588714f477bc7aeb08f62506cccd60f90835c5f8cae15",
+      "bytes": 238889
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-35.txt": {
+      "sha256": "1d64a098cd3d327a07d20cf198a3640db67a9e941ef266f0301038079edc8570",
+      "bytes": 1612
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-36.png": {
+      "sha256": "e934a5b84d6727de37e00e07d8eceec3e90bc9cc58cb129b7e565c38f363c782",
+      "bytes": 197089
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-36.txt": {
+      "sha256": "8b473d3f4cc419cd08075b23a013b1493e6a22045bade9e3b9334bddf5e16742",
+      "bytes": 1607
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-37.png": {
+      "sha256": "f000a09c709a39aee4b101affbbca51443e7e4103f783819621635f41cebb3ad",
+      "bytes": 194813
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-37.txt": {
+      "sha256": "c28e197b250f5e76a7e95431d9051a70c9be4d3e395488db8fbeab67e99e3a57",
+      "bytes": 1433
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-38.png": {
+      "sha256": "c2b75e578cfdd1c6da74ee3654bfc5467ac7e3ea42cdd6f7666ca3d1cdc33349",
+      "bytes": 292353
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-38.txt": {
+      "sha256": "e43a3236f8a56cf5ba2e0e8b1b0ee96bf3354799e877cd2e0828edaf071f3e02",
+      "bytes": 1924
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-39.png": {
+      "sha256": "9afe1724e12d57fe133f27b496e9a82b2af3e5730cabe95bf0185938d0eb1e6f",
+      "bytes": 244210
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-39.txt": {
+      "sha256": "cbff0e1daebd54b2b66376933e708c8d5375d88292f81250c314ab7ea9348ff0",
+      "bytes": 1669
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-40.png": {
+      "sha256": "4a98dd1bdb4ed8e4b92c0934362b9ffc1166e603b1fe297e93beada7fc34860a",
+      "bytes": 217422
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-40.txt": {
+      "sha256": "23d7863f4b0a5fcf08477a1f225445c4342a78e2c1e62a5a3612c1ed8bbd6d6e",
+      "bytes": 1678
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-41.png": {
+      "sha256": "0dab489893dcd4b8e417b23469beba7432e75de99de22660312f1c9690f00ef9",
+      "bytes": 216768
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-41.txt": {
+      "sha256": "5cafe0e0b8302b08d416b03627178a4ee63170c04b67bccc6919a4137e4fe792",
+      "bytes": 1716
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-42.png": {
+      "sha256": "6787e44ecc81be88234ca9ce29e9f2d700be6f6c94feea0401d78db88aaadb25",
+      "bytes": 169777
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-42.txt": {
+      "sha256": "11ed9654347030335d274d3ccf7be07fb97f682f845a03bd66a82fc2d6d398d3",
+      "bytes": 1238
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-43.png": {
+      "sha256": "577e582473ead62076921e45cba348c9f335ff95ea19edf6d67706d04135915f",
+      "bytes": 222659
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-43.txt": {
+      "sha256": "3fbff518fd5b300e15f63a2009f034cacf07c0d3e560f12bb92358252ebbef79",
+      "bytes": 1136
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-44.png": {
+      "sha256": "fed5464e7f34d486deea7e36e95f0c952f9d71c1c5a124e4bb3140bb9d3fe5a9",
+      "bytes": 260441
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-44.txt": {
+      "sha256": "6a441f695bc8138e09aa1f04820986162b6ad9fd59d61c1ed23a2d19b5f55ac2",
+      "bytes": 1316
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-45.png": {
+      "sha256": "989c8f94f82d219ab32e84c913bd082fabd96b2badaefefcd99fb67f96228ec7",
+      "bytes": 215284
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-45.txt": {
+      "sha256": "407dc2a86b4a720f89541d486bf4cc1be6bab3dbd095c3dd324fd8f2d17546ef",
+      "bytes": 1069
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-46.png": {
+      "sha256": "0d4220cfbb14eb204a5d42dcd3aa46d497ea9037a4879c1b5a13678966445ec6",
+      "bytes": 181717
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-46.txt": {
+      "sha256": "45f3136e94f4a7ff7a356dcc950d9474efe6c03b20a74e8a28ac606db77a089d",
+      "bytes": 1082
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-47.png": {
+      "sha256": "eb773d58d120932645abe62e080bf3e866c90ce334248ba630fb48eaff8b1cff",
+      "bytes": 165183
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-47.txt": {
+      "sha256": "e2af57be836da5e991da2dbe1428ed543691f45ac867f57b4933b36e81bce3dd",
+      "bytes": 1058
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-48.png": {
+      "sha256": "be5dda525cd7e8ed2fb4c51ad751cece35d9efa5bfd90f7cf86bcdea268275b8",
+      "bytes": 183942
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-48.txt": {
+      "sha256": "4e288dd8f9dc0c7228bcf164260b52f8d797922c7ae94681221fa0cf4bcf24ad",
+      "bytes": 1091
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-49.png": {
+      "sha256": "53253af94542e0b807551086a10b07a660763065273fac6ce65aea0864471274",
+      "bytes": 161168
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-49.txt": {
+      "sha256": "60434e5d6b9dcc0865801cb5bc846d73d8f2b888825c7b5fac34dd139572d06f",
+      "bytes": 1031
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-50.png": {
+      "sha256": "e60ebcf90e2e1ac42be71f5d523357e0032ce7f1017d298d080edc3627d73cdf",
+      "bytes": 177919
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-50.txt": {
+      "sha256": "f7a3077dc35ca13544d2d10a52982ceddd99d931bb83f91a3f2b79983def3ca2",
+      "bytes": 1070
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-51.png": {
+      "sha256": "1b6b9cc4801b682eface01e3bee4ad5f9834b0b484dd493036be9c4719979220",
+      "bytes": 164447
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-51.txt": {
+      "sha256": "bb21b8069400c3880b7c4fa490d17f4da0b0da5fbe197f199254167aa0d9acd1",
+      "bytes": 1049
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-52.png": {
+      "sha256": "cc0d86d28d666e603240bd4d74215b67860b29d7df36c17549829d294a9f50b4",
+      "bytes": 175962
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-52.txt": {
+      "sha256": "32ca1d1f2fe78d54644da88850d522d4eaaa8e6aa876e7aa4e9bdbf8cbff22d5",
+      "bytes": 1065
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-53.png": {
+      "sha256": "3a03af08267067bbcca3376c6805de39ecff9c701b31cb41dea70ea00409f4ae",
+      "bytes": 188778
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-53.txt": {
+      "sha256": "70d77fc734ae74e5259f4b4974503c30c2bcc40951d1862f716a36966041f905",
+      "bytes": 1348
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-54.png": {
+      "sha256": "92ef7db0df1e93ffbd8183f5e264190dd03376a21c5fc5e42bcccc9102f25dbd",
+      "bytes": 196399
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-54.txt": {
+      "sha256": "1f20362f98e6dc0053a2e741b8274f026a4b74000f5062e1339bc7b5df7134c7",
+      "bytes": 1168
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-55.png": {
+      "sha256": "d521395f56a82721592c828a1603c47f58f81cfe7d5ff1c1e96dea0becc03713",
+      "bytes": 239471
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-55.txt": {
+      "sha256": "f51c5b7dc33b143dc0e97ca948790225c8604ba7f28521a45fac88d71d64a97d",
+      "bytes": 1457
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-56.png": {
+      "sha256": "42ca7f0afa5f37211b753377b4ccc077c96a43bbb6457b55845c620422ec1e1c",
+      "bytes": 225850
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-56.txt": {
+      "sha256": "36d4dd6f58aba4e8c715f17d9e1beba14c1c00b566969aed93eb642e63031d40",
+      "bytes": 1285
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-57.png": {
+      "sha256": "eb43708139e803920c976eb314e3ab8b560c12f5912cc1b8ce3644cb2205f298",
+      "bytes": 229609
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-57.txt": {
+      "sha256": "53ed30f18d52cd04686021adf1077ef0c033dc3dae7283b5e96c4a8def7c8d33",
+      "bytes": 1354
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-58.png": {
+      "sha256": "740d73a26137012d78b2d4b2776ff4dfbeeb794e2209e240bc9ab393514b8ede",
+      "bytes": 260354
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-58.txt": {
+      "sha256": "aff1fcbca713e4b53370c0e119ae25b6feb583475d3a7346f6fe0f67a185c694",
+      "bytes": 1443
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-59.png": {
+      "sha256": "bc8a722066773e848747ab72aa7874668ab71593450bc64817ccce8b3557aee1",
+      "bytes": 170057
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-59.txt": {
+      "sha256": "164b91448b5ab382ad42b84a4eb3fb85db28e6020f535b3376fd4e455b389f79",
+      "bytes": 973
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-60.png": {
+      "sha256": "37a90526b8c07515029521f736e0e07cce4ead0ef4f2039c83cdfccfed3cec36",
+      "bytes": 83260
+    },
+    "preservation-review-r1/rendered/streptomycin-api-simulated-ar-page-60.txt": {
+      "sha256": "e306e812cbe33c9b7352921b819b897bbaee15bb62cdbe9fc6a03ebdbdb07cf0",
+      "bytes": 543
+    },
+    "preservation-review-r1/stderr.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "preservation-review-r1/stdout.log": {
+      "sha256": "b3e4bebf5e7c098c8857a94d834399a6e47c00bc3f38003747a9356b31750b5f",
+      "bytes": 154
+    }
+  },
+  "external_bindings": {
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/planning/s19/renderer-proof/render_pdf.py": {
+      "sha256": "80f17b6ff9040acc445001b33882efa0e44afbe820cac74b50338b5e2bb7f88b",
+      "bytes": 2287
+    },
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/reviews/s19-nested-record-correction-r1/FIRST-SCALAR-EVIDENCE.json": {
+      "sha256": "ac3024c62bd1310ca3064a0326b09b61e04de8a63d080d92fccdf0dc08d33209",
+      "bytes": 7094
+    },
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/reviews/s19-nested-record-correction-r1/FIRST-SCALAR-REVIEW.md": {
+      "sha256": "9535583d3e45c5f5e8b18532e38c6a2dc0ec29a04f51bd08d12e14690d193c88",
+      "bytes": 4224
+    },
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/AMENDMENT.md": {
+      "sha256": "46fff9c9de09eb34d24b2fd22ff3c779599251f5c0e35b02dea82b17762f8b49",
+      "bytes": 4028
+    },
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/COMMAND.json": {
+      "sha256": "03773006a592a0229c12007337973793aa9c0b0fdc39427fd9829986ea04f902",
+      "bytes": 1752
+    },
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/FEASIBILITY.json": {
+      "sha256": "e56236e8155e32cc8ad083e05e401374032fa802c023e7dc520f7d2b702ef3df",
+      "bytes": 19103
+    },
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/FIRST-SCALAR.patch": {
+      "sha256": "b9275aeb2c729b64aec4d017ef1a2ad76d7a7247ecd139f8fc4252b05e92ce65",
+      "bytes": 631
+    },
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/PROOF-COMMAND.json": {
+      "sha256": "8de6e2f2ac0a6a53341e2f8609de24dd63777410c0ec53e46a9bb53a23b13835",
+      "bytes": 1414
+    },
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/PROOF-EXECUTION.json": {
+      "sha256": "5f853c034c8b25c854466aef4d5227defeac8d83570523fed273ef4097754cf2",
+      "bytes": 54
+    },
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/SOURCE.json": {
+      "sha256": "ba5bec02c6912ad4e2dcafcba18f6746852bdbd66687fd784b6af86b380f2bdc",
+      "bytes": 267569
+    },
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/proof/TARGET-STRICT.json": {
+      "sha256": "8f72ebd85d39a6545286dcd283f7197d31dbe06b6c5b1e9a456e5fe41b5981de",
+      "bytes": 620029
+    },
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/proof/rendered/RENDER-RESULT.json": {
+      "sha256": "d99a4719261db7030d7bb497e82b0bbaa2909b7a6807e0f8e40e145509bf21fd",
+      "bytes": 141493
+    },
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/proof/rendered/alu-foil-simulated-en-page-49.png": {
+      "sha256": "71f4645fc5e6c575a936707626df99d29fa07d16e3a9ac50dcd3b481bb1891c2",
+      "bytes": 189616
+    },
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/proof/rendered/alu-foil-simulated-en-page-50.png": {
+      "sha256": "d4b13050a25a41238ade42fa21caf49c1d88013e3b365901c772cecf940e5c13",
+      "bytes": 238857
+    },
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/proof/rendered/alu-profiles-simulated-ar-page-32.png": {
+      "sha256": "6d3cb563d617971b6da03365eaf1496b39a7bd856aa776de7c099bba5a7345ae",
+      "bytes": 149586
+    },
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/proof/rendered/alu-profiles-simulated-ar-page-33.png": {
+      "sha256": "232e16b5745656b3d46c8362cefd75ed34cf39bfcd84fa2fecb39b6b564f410e",
+      "bytes": 188674
+    },
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/proof/rendered/alu-profiles-simulated-ar-page-35.png": {
+      "sha256": "54247c5b31af356443f520c7c80e43af4fd8d09cdf4b848cc2cf88af971fa9d7",
+      "bytes": 179962
+    },
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/proof/rendered/alu-profiles-simulated-ar-page-36.png": {
+      "sha256": "6449e047067c9efc0feec847b510573d9cc9dd5cbc3f374826e339ea18f509e0",
+      "bytes": 169173
+    },
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/proof/rendered/penicillin-api-simulated-ar-page-30.png": {
+      "sha256": "1f3b2ee1bc4159ebd1ea3789fa34f1981b779970415393628c007a6f3b65a889",
+      "bytes": 171712
+    },
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/proof/rendered/penicillin-api-simulated-ar-page-31.png": {
+      "sha256": "f1031fc8cbd056f99f1ae58e1564a46d7120d7e8e6b58ada345077538387c198",
+      "bytes": 167078
+    },
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/proof/rendered/polypropylene-simulated-ar-page-32.png": {
+      "sha256": "4e7506d05fa1fd1f0133b40cfd047e7621aa69729c134c7cdd01b79bd58fd40a",
+      "bytes": 176046
+    },
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/proof/rendered/polypropylene-simulated-ar-page-33.png": {
+      "sha256": "66735a7d97e6043ea7947a17f26e5f3344b5104e4fd24526933d01e7b9476c35",
+      "bytes": 180990
+    },
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/trial1/EXECUTION.json": {
+      "sha256": "03de74931ba9ea1e45e565d5f4b60131f6fc2fbc8dc28369d1b52e3e15a9152c",
+      "bytes": 54
+    },
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/trial1/pdf/alu-foil-simulated-analysis.json": {
+      "sha256": "bed5c99413385626c7e729aff14a73c74c98be32556359bdc10b29f9a6c84bfd",
+      "bytes": 215243
+    },
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/trial1/pdf/alu-foil-simulated-dossier.json": {
+      "sha256": "8eb3c8e89b663baff62b4a7f19c7106b7d5aa2f1be81b3b3ca5fe2538b9be09c",
+      "bytes": 334846
+    },
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/trial1/pdf/alu-foil-simulated-en-layout.json": {
+      "sha256": "1f9ec526648434f6d238cfb798cb2e333b9e853603ef7b8614623fd4a15b2487",
+      "bytes": 6032
+    },
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/trial1/pdf/alu-foil-simulated-en-record-associations.json": {
+      "sha256": "366b1fa7954ae346abfc46e85ad85385a0db5636e259201af055762718182039",
+      "bytes": 303
+    },
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/trial1/pdf/alu-foil-simulated-en-summary.json": {
+      "sha256": "7d263ba444f937b4bb8493996a51715ec56eb2930059bc8bff689eda17e19f08",
+      "bytes": 208
+    },
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/trial1/pdf/alu-foil-simulated-en.html": {
+      "sha256": "83d29eb54ce8a3f06438a78adac1a5a2a03bd5146b3874f49b2d359eec80e70a",
+      "bytes": 178488
+    },
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/trial1/pdf/alu-foil-simulated-en.pdf": {
+      "sha256": "f2de7a0e84a074c0111769a8dfa5adcb4a76896a698cd76c2b6cd100bdbfdc6b",
+      "bytes": 509665
+    },
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/trial1/pdf/alu-profiles-simulated-analysis.json": {
+      "sha256": "d8b2a8aa6fea90eaab3096a4c71e9790e6bc2e5cb3fd04990619ca6c3bcacecf",
+      "bytes": 226885
+    },
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/trial1/pdf/alu-profiles-simulated-ar-layout.json": {
+      "sha256": "29a6d7ebaa94a149759e8cd27178936720be9cc08aa2469d708454e8032cbc4e",
+      "bytes": 6367
+    },
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/trial1/pdf/alu-profiles-simulated-ar-record-associations.json": {
+      "sha256": "b124f13e7e14357a463cb7a24347935519e1f5958f15b23a7681f63066b9a6f5",
+      "bytes": 585
+    },
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/trial1/pdf/alu-profiles-simulated-ar-summary.json": {
+      "sha256": "403d126f8cea8ec6ede899b0d9ef564e8c1ba2c54974e3f5f26271ddbc057b51",
+      "bytes": 212
+    },
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/trial1/pdf/alu-profiles-simulated-ar.html": {
+      "sha256": "f5d6bb10cf5087aea9eb882c55b71d45e80ff9e49e1f76ad3b71c76e44e87658",
+      "bytes": 231908
+    },
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/trial1/pdf/alu-profiles-simulated-ar.pdf": {
+      "sha256": "f761682d1a25c43e6de932bccf068f2f3eea19d1836dad243f2450ce5c29819b",
+      "bytes": 886781
+    },
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/trial1/pdf/alu-profiles-simulated-dossier.json": {
+      "sha256": "9b18ff2bbd6ed61265ed0317dac98835ae2d15efb195c96bec8b6a1dd0c314cf",
+      "bytes": 353506
+    },
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/trial1/pdf/penicillin-api-simulated-analysis.json": {
+      "sha256": "657c5ee5c9db8f03f1caa15a1d2234a368869584d09ecfb9f45421b160f1019c",
+      "bytes": 211498
+    },
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/trial1/pdf/penicillin-api-simulated-ar-layout.json": {
+      "sha256": "183d29257d251123cc0e154675aa730031a7d765fe977315ade429b8a82c865a",
+      "bytes": 6376
+    },
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/trial1/pdf/penicillin-api-simulated-ar-record-associations.json": {
+      "sha256": "322b4121eac2a9d090e31e17f756d0d3ad0c32ef57e9cda08edf02f12840e94a",
+      "bytes": 344
+    },
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/trial1/pdf/penicillin-api-simulated-ar-summary.json": {
+      "sha256": "7ede6c16ef36b4efec4f89ce7d42251fabae06acad44cfc1b9634160b0ef7b31",
+      "bytes": 214
+    },
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/trial1/pdf/penicillin-api-simulated-ar.html": {
+      "sha256": "44f556cae7259a7ba6e3e14dbd7b890a1ce062157c398d114b7a853150db1898",
+      "bytes": 196892
+    },
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/trial1/pdf/penicillin-api-simulated-ar.pdf": {
+      "sha256": "3ace0a81724907d6aeb66fb46e3ba867c27087edd95cfb45dd3d87142573e5c0",
+      "bytes": 811215
+    },
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/trial1/pdf/penicillin-api-simulated-dossier.json": {
+      "sha256": "97269d850cf99a4f136863ead1a2dd6d18d3c583ece3444697aee3f74322936b",
+      "bytes": 328777
+    },
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/trial1/pdf/polypropylene-simulated-analysis.json": {
+      "sha256": "8d8d48c18cd8e426b41fc127289831c199636f6ac34c82d6f107fa6285ca5c31",
+      "bytes": 213464
+    },
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/trial1/pdf/polypropylene-simulated-ar-layout.json": {
+      "sha256": "aa71e3002091c30ab75658094849603ed60c678429806bc38cc3b3918110c1fd",
+      "bytes": 6160
+    },
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/trial1/pdf/polypropylene-simulated-ar-record-associations.json": {
+      "sha256": "da9e59272f6d04a22c44922910cb92f3bcbdd8a07f32f3fd48aa99264969a44b",
+      "bytes": 237
+    },
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/trial1/pdf/polypropylene-simulated-ar-summary.json": {
+      "sha256": "bfb14d35313b8369312b6f8ed8a791f5cd32fbf8615b7c3251fab199eb6d269f",
+      "bytes": 213
+    },
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/trial1/pdf/polypropylene-simulated-ar.html": {
+      "sha256": "15074d1581771714ee799f1f19a16033e6d34164e05a8ce6dafaccbacfc5cd94",
+      "bytes": 190597
+    },
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/trial1/pdf/polypropylene-simulated-ar.pdf": {
+      "sha256": "8344d1962388864d62cfa3ee9849002bd00749c4a527b5b16b16f8cf9bd81a9c",
+      "bytes": 781638
+    },
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/trial1/pdf/polypropylene-simulated-dossier.json": {
+      "sha256": "a58a0c9e5a1941df5078f69dd18650d94ad0c44c3099fef9c4da6359ea6790c4",
+      "bytes": 330134
+    },
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/trial1/stderr.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-firstrow-specialist-r1/trial1/stdout.log": {
+      "sha256": "0e95df75187a30def2d21f54d78e179f9ac0c3334df518a97c8e782dd7d75f50",
+      "bytes": 430
+    },
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-record-correction-r1/FAILED-ATTEMPT-RECEIPT.json": {
+      "sha256": "f5f2915e97964177cd5989db314721701649339bc5033f402cf07d3e55967096",
+      "bytes": 24251
+    },
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-record-correction-r1/FOIL-ORIGINAL-RED.json": {
+      "sha256": "7f80a2eafe9b7c14ca07106f70c66b888134c5ea83900c1c084b7f4802591c89",
+      "bytes": 535
+    },
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-record-correction-r1/ORACLE-ORDER-ADDENDUM.md": {
+      "sha256": "6440f14afdf69fc2a23b0ccf456591a3c79240651163d6a233cadb8829b43d68",
+      "bytes": 2665
+    },
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-record-correction-r1/PROPOSAL.md": {
+      "sha256": "160b6b759aac2b0aec3d5748ba4fa3f94952926e480533f55d09972e69c39ffe",
+      "bytes": 8847
+    },
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-record-correction-r1/SOURCE-GREEN.json": {
+      "sha256": "758783bbdb135fb3451565995013a78e76ad30bdfb2be615bac0d56316a851f9",
+      "bytes": 267569
+    },
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-record-correction-r1/check-targets.py": {
+      "sha256": "2633dd54e0b999e407eb883d2c1b8d32f53317730e90f7188ae67c39d0e10efa",
+      "bytes": 6772
+    },
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-record-correction-r1/check_pdf_matrix.py": {
+      "sha256": "bfa13f1ac4d8056f56a15a78ecf3f3e330f0c6abbcacefa96c4b352ed59e55bd",
+      "bytes": 17342
+    },
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-record-correction-r1/green/COMMAND.json": {
+      "sha256": "de18e63a180010027bcd4ecb29856197f2407bc951941a10866c0b080abe1c6a",
+      "bytes": 1897
+    },
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-record-correction-r1/green/pdf/alu-foil-simulated-en.pdf": {
+      "sha256": "5e271424e9b34f128ac6b973d0220b79af2387964d1e2452618a4c7c887b2bbb",
+      "bytes": 507974
+    },
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-record-correction-r1/green/stdout.log": {
+      "sha256": "fd0c8159b16866f53fc38a24c60ef23e4ec2625b754e965aadb760836aa41cd2",
+      "bytes": 17658
+    },
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-record-correction-r1/red-acceptance/PDF-ACCEPTANCE.json": {
+      "sha256": "75ed9830bc702f89c7f23ab0121845d64c1332410ed42bd584216c004f96bced",
+      "bytes": 4345405
+    },
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-record-correction-r1/test-addition.txt": {
+      "sha256": "013fcbd398b771f442f9e918c7fdda13d142b5741737b7d29c384d6fa5ed3cde",
+      "bytes": 5249
+    },
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/owner-decisions/20260925-s19-first-scalar-correction-acceptance-1.json": {
+      "sha256": "6f4c66a82bc75a7fe9e4f306be0c2e92ba83e3ae76d94ad54ed7d9286ceb3aa3",
+      "bytes": 2027
+    }
+  },
+  "scope": "Source equality/five original failures to accepted four-report repair/three prior closures/API88/preservation. No fullfunctional/final44/canonical approval.",
+  "sanad": "Exact files and SHA256, command exits, independent attributed observations; source represented by full1759 SOURCE ledger.",
+  "muhasabah": "PASS bounded handoff; later gates pending; no source changes beyond accepted CSS transfer."
+}

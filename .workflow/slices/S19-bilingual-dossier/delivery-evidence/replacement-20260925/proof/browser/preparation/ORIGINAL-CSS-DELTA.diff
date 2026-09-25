@@ -1,0 +1,12 @@
+--- current/src/ior_mvp/static/css/graph.css
++++ original-css/src/ior_mvp/static/css/graph.css
+@@ -139,9 +139,6 @@
+   color: var(--color-muted);
+ }
+ 
+-.graph-element-button[data-graph-select="edge"] > small {
+-  flex-grow: 1;
+-}
+ 
+ .graph-element-button.is-selected {
+   border: var(--border-accent) solid var(--color-accent-text);

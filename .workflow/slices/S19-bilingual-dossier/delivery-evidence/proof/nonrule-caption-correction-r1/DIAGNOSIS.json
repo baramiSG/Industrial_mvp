@@ -1,0 +1,45 @@
+{
+  "status": "READ_ONLY_DIAGNOSIS_PROPOSAL_NOT_FINAL_BATCH_NOT_IMPLEMENTED",
+  "at_utc": "2026-09-25T07:17:54.235335+00:00",
+  "source_ledger": {
+    "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/nested-record-correction-r1/accepted-first-scalar-r1/SOURCE.json",
+    "sha256": "ba5bec02c6912ad4e2dcafcba18f6746852bdbd66687fd784b6af86b380f2bdc"
+  },
+  "preimages": {
+    "src/ior_mvp/static/css/dossier.css": "440b06e0a743deb8d44645fef6e4916b27a003946b926c69e4485b398d74b6ea",
+    "browser_tests/test_dossier.py": "4f7118b28616fd0e4dba18b26ce5136c905f49995db8d61c5695e482ee5d79c0"
+  },
+  "html": {
+    "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/product-implementation-r1/post-generation-functional-r3/pdf/streptomycin-api-simulated-ar.html",
+    "sha256": "5968aee70ed1144396c6c143fae39a73e10da8efdc33604a582352f4f9d4333d"
+  },
+  "dossier": {
+    "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/product-implementation-r1/post-generation-functional-r3/pdf/streptomycin-api-simulated-dossier.json",
+    "sha256": "3c9a871cc9ec22b0c5f6f553e1faa3b8947f37d48f0150062ef45e90211afc7e"
+  },
+  "pdf": {
+    "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/product-implementation-r1/post-generation-functional-r3/pdf/streptomycin-api-simulated-ar.pdf",
+    "sha256": "3e092ab56a659f21b4a3be7d7a0affa2a1b5eb5d8332ec7ed0babb194fe9c1e6"
+  },
+  "native_views_actually_inspected": [
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/final-pdf-review-r3/rendered/streptomycin-api-simulated-ar-page-13.png",
+      "sha256": "4a218c54a0276b1b7e154eb12c7511d4b3fa489f942e392b4b8b386e75b1c264"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/final-pdf-review-r3/rendered/streptomycin-api-simulated-ar-page-14.png",
+      "sha256": "fb9248c834aaf60d291b3496f5c46ee19e795a43e08d5afedcd707d53d38c41d"
+    }
+  ],
+  "actual_observation": "Source-original caption is alone at bottom of13; profile_hard_gates heading plus first named_molecule_and_synthesis_route=RESOLVED appear14. Footer remains intact; this is association failure, not bounds/glyph failure.",
+  "actual_structure": "#dossier-capability > p.dossier-source-caption + dl.dossier-record > div.record-group > dt + dd > dl.dossier-record > div.record-scalar:first-child",
+  "consumed_source_path": "blocks.capability.records.profile_hard_gates.named_molecule_and_synthesis_route",
+  "actual_source_value": "RESOLVED",
+  "css_gap": "Four existing print selectors require .rule-record > before .dossier-source-caption. This direct section child matches none of them. Nested group dt/dd/firstscalar protection already exists.",
+  "candidate_hypothesis": "Remove only those four rule-parent restrictions to extend the existing caption/first-record keep chain; preserve every other CSS byte and long-record flow. Requires independent review before source edits.",
+  "oracle_note": "Use exact ordered complete-line PDFium windows within capability section through first route0, with caption/group-heading/first field+value on same page. JSON serialization sorts keys: first source key must be explicit actualDOM key, not sorted JSON first key.",
+  "unverified": "Remaining reader batch, proposed CSS actual effect and final44. No corrected output or approval is claimed.",
+  "preparation": "Refreshed accepted nested-record chain and actual source/render output; independently selected senior paged-media regression engineer and evidence auditor. Applied systematic-debugging, receiving-code-review, TDD, Sanad/al-Muhasibi/Muhasabah; governing full reads reused.",
+  "sanad": "Direct source/HTML/JSON/native reads and bound hashes; reported wholecohort status remains attributed to actual839PASS/strict44PASS/manualfinding.",
+  "muhasabah": "PASS diagnosis only. No source/checker/index/generator/canonical changes; original r3 preserved."
+}

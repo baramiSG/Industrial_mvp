@@ -1,0 +1,236 @@
+{
+  "recorded_at_utc": "2026-09-25T12:53:15.193104+00:00",
+  "status": "COMPLETE_SUPPORTING44_PROOF_PENDING_CLAUDE_INDEPENDENT_READINESS",
+  "source_ledger": {
+    "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/literal-adoption/POST-LITERAL-SOURCE-BINDING.json",
+    "sha256": "c104d456735172817dc356fe17c349c46250de2dc98dd0195952e4f5565d7dc0"
+  },
+  "cohort": {
+    "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/browser-execution/functional/PDF-COHORT-READY.json",
+    "sha256": "90344ae1e7f7ae1c5d03b2c3d2a5ae90afb3ff3f04ecba52c46acbb5333e9134"
+  },
+  "functional_result": {
+    "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/browser-execution/functional/RESULT.json",
+    "sha256": "04eb4e732786992c0775a944f70aab41e67e2a174fe939c7012228799f717479"
+  },
+  "render": {
+    "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/browser-execution/rendered/RENDER-RESULT.json",
+    "sha256": "5eee51a9f84c633b819059bd953caf8ba36a335f50662d3209d63e03e5ef0698"
+  },
+  "strict": {
+    "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/browser-execution/strict/PDF-ACCEPTANCE.json",
+    "sha256": "bc0a02fa73bd0bb04fd2af5798b56a5685fbd2fe29b44567d83ea5a758327d65"
+  },
+  "procedure": {
+    "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/browser-preparation/MANUAL-REVIEW-BRIEF.md",
+    "sha256": "386578249303dadd4b6d6b345bb2c9d815b13c1e7cdab2587cf403a7b13a3b5d"
+  },
+  "fresh_firstpage_observations": [
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/browser-execution/manual/ROOT-FIRSTPAGES.json",
+      "sha256": "284308fb47184b093cc4531356f8e715216a9d27a032fa40d4e0108864081d32"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/browser-execution/manual/AUTHORITY-FIRSTPAGES.json",
+      "sha256": "8c3b4447a011d09770c2cc00d43941048c66d15fad4fb1e79a112b1bc9d8f7fc"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/browser-execution/manual/DOMAIN-FIRSTPAGES.json",
+      "sha256": "7b844d904a072877eae46c4b667847bfb24e663a1683894022840f3e693e435d"
+    }
+  ],
+  "fresh_firstpage_coverage": {
+    "steel-public-en.pdf": {
+      "observer_record": "ROOT-FIRSTPAGES.json",
+      "png_sha256": "6edacc4340dfd5cc9dab329cc86378a53983ec486eaf2c899989628c822048cf"
+    },
+    "steel-public-ar.pdf": {
+      "observer_record": "ROOT-FIRSTPAGES.json",
+      "png_sha256": "d797e031fd67dd2ba57115e63c6656338b564552aac4e74dfda5f051798d262b"
+    },
+    "steel-simulated-en.pdf": {
+      "observer_record": "ROOT-FIRSTPAGES.json",
+      "png_sha256": "1d7371b6523548c271d6c1904ee946902690deeed87879afcd47bd52839b36a0"
+    },
+    "steel-simulated-ar.pdf": {
+      "observer_record": "ROOT-FIRSTPAGES.json",
+      "png_sha256": "c570236a9ebe28effdd5161b48f9b75e6ab6534016678c7502e3ddb0b9f58f7b"
+    },
+    "polypropylene-public-en.pdf": {
+      "observer_record": "ROOT-FIRSTPAGES.json",
+      "png_sha256": "604999ae2138548d3791cd1ab20b3c3e4238f48f6a3b32e83df6dfd95d4749ab"
+    },
+    "polypropylene-public-ar.pdf": {
+      "observer_record": "ROOT-FIRSTPAGES.json",
+      "png_sha256": "1aee7c4c77efbbbdd76e4a7b4d3b8bc45ecc99fb42c70cfd6a01724adf12fe4e"
+    },
+    "polypropylene-simulated-en.pdf": {
+      "observer_record": "ROOT-FIRSTPAGES.json",
+      "png_sha256": "60a4eb8dc0c0f53e518788962d25240a6159f3bfe03de2535528f1a556389105"
+    },
+    "polypropylene-simulated-ar.pdf": {
+      "observer_record": "ROOT-FIRSTPAGES.json",
+      "png_sha256": "ee9caf78770905f7f00e2c2dd3ad43b3dc1bb95839b4246d25b30cf1a9268a3e"
+    },
+    "alu-foil-public-en.pdf": {
+      "observer_record": "AUTHORITY-FIRSTPAGES.json",
+      "png_sha256": "138f067cb8824b6bda489ff496f054b36d1c7b1bc906761576fce6bfbc6d9600"
+    },
+    "alu-foil-public-ar.pdf": {
+      "observer_record": "AUTHORITY-FIRSTPAGES.json",
+      "png_sha256": "0fb0c987346002536167613df0df2dbce215055b22cce4c78c633258f1871efd"
+    },
+    "alu-foil-simulated-en.pdf": {
+      "observer_record": "AUTHORITY-FIRSTPAGES.json",
+      "png_sha256": "4a622317e481d3f6b8b87263eaf33185f86f6062ab78ddb23932876e4ad7b419"
+    },
+    "alu-foil-simulated-ar.pdf": {
+      "observer_record": "AUTHORITY-FIRSTPAGES.json",
+      "png_sha256": "c05631935a6956e2808abdd4ac5124475ce28a4aaf34e71538c7385baf43fcb5"
+    },
+    "alu-profiles-public-en.pdf": {
+      "observer_record": "AUTHORITY-FIRSTPAGES.json",
+      "png_sha256": "eb6190c5325fe530754e6faa9071d523633c10ce758137a23fbf14759a582c29"
+    },
+    "alu-profiles-public-ar.pdf": {
+      "observer_record": "AUTHORITY-FIRSTPAGES.json",
+      "png_sha256": "5a10af8751a2e83d8c65044996a18fbab1b1f811f04ad2af6ad2f02f91660614"
+    },
+    "alu-profiles-simulated-en.pdf": {
+      "observer_record": "AUTHORITY-FIRSTPAGES.json",
+      "png_sha256": "3f89ead24d8489c184023cbae1ad5b83065ded21f4db3d1a538e2fcc7e07e462"
+    },
+    "alu-profiles-simulated-ar.pdf": {
+      "observer_record": "AUTHORITY-FIRSTPAGES.json",
+      "png_sha256": "ada7664f1927c4a2fc7a8005a5294d0c429624733462b5e4b4e4b236fd94ed7c"
+    },
+    "galvalume-public-en.pdf": {
+      "observer_record": "AUTHORITY-FIRSTPAGES.json",
+      "png_sha256": "f6e81d8df57c814b32b713dfce305d9606b1b0e2e22b90aedc9f35aa70791c66"
+    },
+    "galvalume-public-ar.pdf": {
+      "observer_record": "AUTHORITY-FIRSTPAGES.json",
+      "png_sha256": "ae353dcc56ac02b6de08430b610e5dda40ce598ad6ec7bbc4430e1fb47ca5e6e"
+    },
+    "galvalume-simulated-en.pdf": {
+      "observer_record": "AUTHORITY-FIRSTPAGES.json",
+      "png_sha256": "2132188cc4c3255daa92aefa0cbb1def7b52e03c589052c1bb7c034bf746cf39"
+    },
+    "galvalume-simulated-ar.pdf": {
+      "observer_record": "AUTHORITY-FIRSTPAGES.json",
+      "png_sha256": "2ae0b56cb76fd33c3117876992ea43a2addbd108e9d4bbdc7fff3b4dd0b79272"
+    },
+    "pe-film-public-en.pdf": {
+      "observer_record": "AUTHORITY-FIRSTPAGES.json",
+      "png_sha256": "63fcffa60f44d8cfdbe0b7eff9bb55d40a8280297882ddd9e86247b82dbaafe3"
+    },
+    "pe-film-public-ar.pdf": {
+      "observer_record": "AUTHORITY-FIRSTPAGES.json",
+      "png_sha256": "6e7d685d1f77ec015f9b358dbdd356ef5c559385699f2ef51b345df4084128a9"
+    },
+    "pe-film-simulated-en.pdf": {
+      "observer_record": "AUTHORITY-FIRSTPAGES.json",
+      "png_sha256": "387c473e38363a517d35101bfb4b96faab39d693e058bc526bd6463849428045"
+    },
+    "pe-film-simulated-ar.pdf": {
+      "observer_record": "AUTHORITY-FIRSTPAGES.json",
+      "png_sha256": "f8805eb483ef60b0652293035a600ef66f55cb2a170a8ffd99c7aca5097023cd"
+    },
+    "fert-retail-packs-public-ar.pdf": {
+      "observer_record": "DOMAIN-FIRSTPAGES.json",
+      "png_sha256": "d0447c8cd8a270479fe25a9b1c761040d94dd11b4eaf0ddc39e959451500e417"
+    },
+    "fert-retail-packs-public-en.pdf": {
+      "observer_record": "DOMAIN-FIRSTPAGES.json",
+      "png_sha256": "dcd593af917f8a05d8bade43ffe7afa5dee1cd7fbb0b97c35fd806e65765dacf"
+    },
+    "fert-retail-packs-simulated-ar.pdf": {
+      "observer_record": "DOMAIN-FIRSTPAGES.json",
+      "png_sha256": "f6e05efdd562953821a984398013b803303950b3ffa597a9addc02ebd44361fa"
+    },
+    "fert-retail-packs-simulated-en.pdf": {
+      "observer_record": "DOMAIN-FIRSTPAGES.json",
+      "png_sha256": "d464d72405fde76e1cd4d1bef176b19936c2ade74c8051abc9823f535eb6e3f3"
+    },
+    "penicillin-api-public-ar.pdf": {
+      "observer_record": "DOMAIN-FIRSTPAGES.json",
+      "png_sha256": "2c7586338a159828c9421c969bbd022a24b7a91255b5cd8c2b0d2c0aa34eb335"
+    },
+    "penicillin-api-public-en.pdf": {
+      "observer_record": "DOMAIN-FIRSTPAGES.json",
+      "png_sha256": "f1083b8772f9bd20fd8ea01b8ac095ddc5a63b40e37038a20b5fe213aa896f06"
+    },
+    "penicillin-api-simulated-ar.pdf": {
+      "observer_record": "DOMAIN-FIRSTPAGES.json",
+      "png_sha256": "65f6c1692e4518fe55f93f065378b6083163c9ce28c05cb72c2587638509fc28"
+    },
+    "penicillin-api-simulated-en.pdf": {
+      "observer_record": "DOMAIN-FIRSTPAGES.json",
+      "png_sha256": "7847a311c33d89b6a776b09ea7b7241eca79964c53f7f212ac6183ee5067c321"
+    },
+    "sop-public-ar.pdf": {
+      "observer_record": "DOMAIN-FIRSTPAGES.json",
+      "png_sha256": "186ab722e970a37eb93185a206ad660ff3fb7cb6d07fd0f57586426940e8e845"
+    },
+    "sop-public-en.pdf": {
+      "observer_record": "DOMAIN-FIRSTPAGES.json",
+      "png_sha256": "2b184968a350cee5dc2d567ea0842c6221cdfb1eec4e7d12d3870b0e0f614d17"
+    },
+    "sop-simulated-ar.pdf": {
+      "observer_record": "DOMAIN-FIRSTPAGES.json",
+      "png_sha256": "b48161e65a8f743c404c84c6cbbe9a1caafa9558dd4e4c3a3e67ae5e32723a9e"
+    },
+    "sop-simulated-en.pdf": {
+      "observer_record": "DOMAIN-FIRSTPAGES.json",
+      "png_sha256": "ff76721cca148056558ee2ca5aec2b5306b7f076c8d738112a5fced090d81740"
+    },
+    "streptomycin-api-public-ar.pdf": {
+      "observer_record": "DOMAIN-FIRSTPAGES.json",
+      "png_sha256": "54b6ba9e163a19632240402ba9c1ae3970e89f22450ffdb790296d3aaf325de0"
+    },
+    "streptomycin-api-public-en.pdf": {
+      "observer_record": "DOMAIN-FIRSTPAGES.json",
+      "png_sha256": "0118e5bc50ffbd55f00dd47acd6bb84ac057e0442e8f51ea8de2ee1c157ac24c"
+    },
+    "streptomycin-api-simulated-ar.pdf": {
+      "observer_record": "DOMAIN-FIRSTPAGES.json",
+      "png_sha256": "f8c3f1d5573c8b02de2fcef8af694d825bb5fec0b4d15eb3b58c732d11c7c719"
+    },
+    "streptomycin-api-simulated-en.pdf": {
+      "observer_record": "DOMAIN-FIRSTPAGES.json",
+      "png_sha256": "59cbba85c4ea5dbbd322cf0228df5b6ad77f587cdcf88c73d03f9614649de33d"
+    },
+    "tinplate-public-ar.pdf": {
+      "observer_record": "DOMAIN-FIRSTPAGES.json",
+      "png_sha256": "3821043491529ba40247f9a17151162f1fa9d1f09afb89dacc0d27047097a0eb"
+    },
+    "tinplate-public-en.pdf": {
+      "observer_record": "DOMAIN-FIRSTPAGES.json",
+      "png_sha256": "01204292bd8982f2e336e43f0d34619261fe51cd1dc9b6d2cb5c6259f304a58c"
+    },
+    "tinplate-simulated-ar.pdf": {
+      "observer_record": "DOMAIN-FIRSTPAGES.json",
+      "png_sha256": "91ee4c20b7d18d51013438f6e5e315242dbfcfdb199f37e1ecd63387f1a24716"
+    },
+    "tinplate-simulated-en.pdf": {
+      "observer_record": "DOMAIN-FIRSTPAGES.json",
+      "png_sha256": "a38a3dc823a5ef4c0ad53bd0b5743058c4059455981740ebdb137b72d2b717b1"
+    }
+  },
+  "appendix_reuse": {
+    "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/browser-execution/manual/APPENDIX-REUSE.json",
+    "sha256": "395dcb90f0cda9dc3e9d55ec999bd22d45ebfdf378a687cbba321ee27fc776d9"
+  },
+  "observed_counts": {
+    "reports": 44,
+    "pages": 1958,
+    "maximum": 73,
+    "fresh_firstpages": 44,
+    "exact_appendix_observation_reuse": 1914,
+    "uncovered_pages": 0,
+    "findings": 0
+  },
+  "authority_limit": "Codex supporting observations only. Claude independent full44readiness and canonical operation GO still required; no final candidate or delivery acceptance.",
+  "sanad": "Machine results directly collected; root8freshpages and attributed36fresh agent views have exact coverage/hashbindings. All1914appendix exactsamepagecomparison bound accepted prior observation lineage, not claimed freshly viewed.",
+  "muhasabah": "PASS supporting-proof completeness and preservation; independent acceptance/canonical and finalcandidate/CI/delivery/Aura remain pending."
+}

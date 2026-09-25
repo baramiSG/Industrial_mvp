@@ -1,0 +1,48 @@
+{
+  "status": "FAILED_INLINE_POSTCHECK_LITERAL_MISMATCH_NO_GENERATOR_RETRY",
+  "at_utc": "2026-09-25T02:48:53.461319+00:00",
+  "exit_code": 1,
+  "exception": "AssertionError",
+  "actual_authority_changed_rows": [
+    "config/ui_strings.v1.yaml",
+    "docs/core/02_METHODOLOGY_IMPLEMENTATION_MAP.md",
+    "docs/core/03_SYSTEM_ARCHITECTURE.md",
+    "docs/core/04_CANONICAL_DATA_MODEL.md",
+    "docs/core/09_TEST_ACCEPTANCE_AND_GOLDEN_CASES.md"
+  ],
+  "erroneous_expected_rows": [
+    "config/ui_strings.v1.yaml",
+    "docs/core/02_METHODOLOGY_IMPLEMENTATION_MAP.md",
+    "docs/core/03_TECHNICAL_ARCHITECTURE_AND_GENUI.md",
+    "docs/core/04_DATA_ARCHITECTURE_EVIDENCE_API.md",
+    "docs/core/09_TESTING_ACCEPTANCE_AND_CI.md"
+  ],
+  "approved_input_comparison_changed_authority_rows": [
+    "config/ui_strings.v1.yaml",
+    "docs/core/02_METHODOLOGY_IMPLEMENTATION_MAP.md",
+    "docs/core/03_SYSTEM_ARCHITECTURE.md",
+    "docs/core/04_CANONICAL_DATA_MODEL.md",
+    "docs/core/09_TEST_ACCEPTANCE_AND_GOLDEN_CASES.md"
+  ],
+  "actual_matches_bound_approved_rows": true,
+  "checks_completed_before_assertion": [
+    "exact2added4changed0removed source paths",
+    "1753 other existing source files unchanged including all old graph files",
+    "all44indexes unchanged",
+    "head/branch/zero staged unchanged",
+    "exact230discovered inputs unchanged",
+    "canonical projection bytes and925/1045counts exact",
+    "snapshot726to728 only2new rows andcurrent pointer rowchanged",
+    "authority20paths unchanged"
+  ],
+  "not_yet_completed": [
+    "authority fullrow/currentbyte checks",
+    "exact table/outside preservation",
+    "sealed final postcheck receipt",
+    "actual persisted88 API responses"
+  ],
+  "source_action": "NONE; both generators and all five gates already exited0; no retry/restore/source edit",
+  "requested_correction": "Replace only the three erroneous expected path strings in the disposable inline evidence check with the exact already-bound actual filenames; no product/generator/input/assertion scope change.",
+  "sanad": "Direct actual authority manifest comparison against retained reviewed INPUT-COMPARISON.json plus actual failed inline assertion.",
+  "muhasabah": "PASS for truthful failure classification; operation postcheck remains incomplete pending reviewed correction."
+}

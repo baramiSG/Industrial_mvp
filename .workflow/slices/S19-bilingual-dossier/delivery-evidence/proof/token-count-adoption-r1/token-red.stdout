@@ -1,0 +1,120 @@
+BROWSER PREFLIGHT PASS
+playwright=1.62.0
+pytest-playwright=0.9.0
+chromium=/ms-playwright/chromium-1234/chrome-linux64/chrome
+axe_sha256=c24f097bd2f451d4f933e8bc7d8d539f8672a2ebcb5cc9f9f3eec8ca9470a0c1
+font_family=FreeSerif
+font_file=/usr/share/fonts/truetype/freefont/FreeSerif.ttf
+product_fonts=IOR Noto Sans,IOR Noto Sans Arabic
+FF                                                                       [100%]
+=================================== FAILURES ===================================
+__ test_graph_narrow_panel_contains_controls_and_text[chromium-steel-1440-en] __
+
+browser_session = BrowserSession(page=<Page url='http://127.0.0.1:53387/?locale=en'>, context=<BrowserContext browser=<Browser type=<Bro...Path('/proof/server.log')), artifact_dir=PosixPath('/proof'), locale=Locale(code='en', bcp47='en-US', direction='ltr'))
+locale = Locale(code='en', bcp47='en-US', direction='ltr'), width = 1440
+scenario = 'steel'
+
+    @pytest.mark.parametrize("locale", (EN, AR), ids=lambda value: value.code)
+    @pytest.mark.parametrize("width", (390, 1024, 1440))
+    @pytest.mark.parametrize("scenario", ('steel','aluminium'))
+    def test_graph_narrow_panel_contains_controls_and_text(browser_session: BrowserSession, locale: Any, width: int, scenario: str) -> None:
+        page=browser_session.page
+        page.set_viewport_size({'width':width,'height':900})
+        install_graph_routes(page)
+        case_id = 'SAU-H0-721049' if scenario == 'steel' else 'SAU-H6-760711'
+        for mode in ('public', 'simulated'):
+            goto_portfolio(page, mode, locale)
+            if scenario == 'aluminium': select_case(page, next(case for case in CASES if case.id == case_id), mode, locale)
+            open_graph(page)
+            for view in ('adjacency', 'route_blocking', 'shared_enabler', 'evidence_to_change'):
+                select_graph_view(page, view)
+                payload = route_blocking_fixture(case_id) if view == 'route_blocking' and mode == 'simulated' else artifact_graph_payload(view, case_id, mode)
+                assert_graph_panel_contains_controls_and_text(page)
+                if scenario == "steel" and mode == "public" and view == "evidence_to_change" and width == 1440:
+                    page.evaluate("document.fonts.ready")
+                    new_token, old_token = "ENGINE-a1dcbf0e7665", "ENGINE-7ae34188bdec"
+                    measure = """() => {
+                      const section = document.querySelector('.graph-native-controls > section:nth-child(2)');
+                      const buttons = [...section.querySelectorAll('.graph-button-list > button[data-graph-select="edge"]')];
+                      const rect = node => {
+                        const box = node.getBoundingClientRect();
+                        return Object.fromEntries(['left','right','top','bottom','width','height'].map(key => [key, Number(box[key].toFixed(2))]));
+                      };
+                      const walker = document.createTreeWalker(section, NodeFilter.SHOW_TEXT), texts = [];
+                      while (walker.nextNode()) texts.push(walker.currentNode.nodeValue);
+                      return {html: section.innerHTML, texts, rows: buttons.map(button => {
+                        const small = button.querySelector(':scope > small');
+                        const tokens = [...small.querySelectorAll(':scope > bdi')];
+                        const box = rect(small);
+                        return {id: button.dataset.graphId, source: tokens[0].textContent,
+                          target: tokens[1].textContent, button: rect(button), small: {left: box.left, right: box.right}};
+                      })};
+                    }"""
+                    before = page.evaluate(measure)
+                    repeat = page.evaluate(measure)
+                    assert repeat == before, f"{locale.code}: untouched repeat drift"
+                    assert len(before["rows"]) == 12
+                    assert before["rows"][1]["target"] == "INT-SAU-H0-721049-route-5"
+                    assert before["rows"][2]["target"] == "SAU-H0-721049"
+>                   assert sum(row["source"].count(new_token) for row in before["rows"]) == 5
+E                   assert 0 == 5
+E                    +  where 0 = sum(<generator object test_graph_narrow_panel_contains_controls_and_text.<locals>.<genexpr> at 0x7ea2fb4b0ac0>)
+
+browser_tests/test_graph.py:869: AssertionError
+__ test_graph_narrow_panel_contains_controls_and_text[chromium-steel-1440-ar] __
+
+browser_session = BrowserSession(page=<Page url='http://127.0.0.1:53387/?locale=ar'>, context=<BrowserContext browser=<Browser type=<Bro...Path('/proof/server.log')), artifact_dir=PosixPath('/proof'), locale=Locale(code='ar', bcp47='ar-SA', direction='rtl'))
+locale = Locale(code='ar', bcp47='ar-SA', direction='rtl'), width = 1440
+scenario = 'steel'
+
+    @pytest.mark.parametrize("locale", (EN, AR), ids=lambda value: value.code)
+    @pytest.mark.parametrize("width", (390, 1024, 1440))
+    @pytest.mark.parametrize("scenario", ('steel','aluminium'))
+    def test_graph_narrow_panel_contains_controls_and_text(browser_session: BrowserSession, locale: Any, width: int, scenario: str) -> None:
+        page=browser_session.page
+        page.set_viewport_size({'width':width,'height':900})
+        install_graph_routes(page)
+        case_id = 'SAU-H0-721049' if scenario == 'steel' else 'SAU-H6-760711'
+        for mode in ('public', 'simulated'):
+            goto_portfolio(page, mode, locale)
+            if scenario == 'aluminium': select_case(page, next(case for case in CASES if case.id == case_id), mode, locale)
+            open_graph(page)
+            for view in ('adjacency', 'route_blocking', 'shared_enabler', 'evidence_to_change'):
+                select_graph_view(page, view)
+                payload = route_blocking_fixture(case_id) if view == 'route_blocking' and mode == 'simulated' else artifact_graph_payload(view, case_id, mode)
+                assert_graph_panel_contains_controls_and_text(page)
+                if scenario == "steel" and mode == "public" and view == "evidence_to_change" and width == 1440:
+                    page.evaluate("document.fonts.ready")
+                    new_token, old_token = "ENGINE-a1dcbf0e7665", "ENGINE-7ae34188bdec"
+                    measure = """() => {
+                      const section = document.querySelector('.graph-native-controls > section:nth-child(2)');
+                      const buttons = [...section.querySelectorAll('.graph-button-list > button[data-graph-select="edge"]')];
+                      const rect = node => {
+                        const box = node.getBoundingClientRect();
+                        return Object.fromEntries(['left','right','top','bottom','width','height'].map(key => [key, Number(box[key].toFixed(2))]));
+                      };
+                      const walker = document.createTreeWalker(section, NodeFilter.SHOW_TEXT), texts = [];
+                      while (walker.nextNode()) texts.push(walker.currentNode.nodeValue);
+                      return {html: section.innerHTML, texts, rows: buttons.map(button => {
+                        const small = button.querySelector(':scope > small');
+                        const tokens = [...small.querySelectorAll(':scope > bdi')];
+                        const box = rect(small);
+                        return {id: button.dataset.graphId, source: tokens[0].textContent,
+                          target: tokens[1].textContent, button: rect(button), small: {left: box.left, right: box.right}};
+                      })};
+                    }"""
+                    before = page.evaluate(measure)
+                    repeat = page.evaluate(measure)
+                    assert repeat == before, f"{locale.code}: untouched repeat drift"
+                    assert len(before["rows"]) == 12
+                    assert before["rows"][1]["target"] == "INT-SAU-H0-721049-route-5"
+                    assert before["rows"][2]["target"] == "SAU-H0-721049"
+>                   assert sum(row["source"].count(new_token) for row in before["rows"]) == 5
+E                   assert 0 == 5
+E                    +  where 0 = sum(<generator object test_graph_narrow_panel_contains_controls_and_text.<locals>.<genexpr> at 0x7ea2fb6da180>)
+
+browser_tests/test_graph.py:869: AssertionError
+=========================== short test summary info ============================
+FAILED browser_tests/test_graph.py::test_graph_narrow_panel_contains_controls_and_text[chromium-steel-1440-en]
+FAILED browser_tests/test_graph.py::test_graph_narrow_panel_contains_controls_and_text[chromium-steel-1440-ar]
+2 failed, 10 deselected in 18.85s

@@ -1,0 +1,350 @@
+FFFFFFFFFFFFFF                                                           [100%]
+=================================== FAILURES ===================================
+___ test_malformed_required_narrative_has_typed_422[dossier-headline-value0] ___
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x77658b373100>
+field = 'headline', value = {}, suffix = 'dossier'
+
+    @pytest.mark.parametrize(('field','value'),[
+        ('headline',{}),('rationale',{'text':None}),
+        ('route_label',{'text':'fixture','segments':[None]}),
+        ('headline',{'text':'fixture','segments':[{'text':4}]}),
+        ('conditions',None),('kill_conditions',[None]),
+        ('missing_facts',[{'segments':[]}]),
+    ])
+    @pytest.mark.parametrize('suffix',['dossier','dossier.html'])
+    def test_malformed_required_narrative_has_typed_422(monkeypatch,field,value,suffix):
+        import importlib
+        from ior_mvp.dossier_validation import DossierIntegrityError
+        analysis=deepcopy(analyze('SAU-H0-721049','public'))
+        analysis['active_decision']['localized_narrative']['en'][field]=value
+>       with pytest.raises(DossierIntegrityError):build_dossier(analysis)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ior_mvp.dossier_validation.DossierIntegrityError'>
+
+tests/test_dossier_isolation.py:127: Failed
+__ test_malformed_required_narrative_has_typed_422[dossier-rationale-value1] ___
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x77658b372d70>
+field = 'rationale', value = {'text': None}, suffix = 'dossier'
+
+    @pytest.mark.parametrize(('field','value'),[
+        ('headline',{}),('rationale',{'text':None}),
+        ('route_label',{'text':'fixture','segments':[None]}),
+        ('headline',{'text':'fixture','segments':[{'text':4}]}),
+        ('conditions',None),('kill_conditions',[None]),
+        ('missing_facts',[{'segments':[]}]),
+    ])
+    @pytest.mark.parametrize('suffix',['dossier','dossier.html'])
+    def test_malformed_required_narrative_has_typed_422(monkeypatch,field,value,suffix):
+        import importlib
+        from ior_mvp.dossier_validation import DossierIntegrityError
+        analysis=deepcopy(analyze('SAU-H0-721049','public'))
+        analysis['active_decision']['localized_narrative']['en'][field]=value
+>       with pytest.raises(DossierIntegrityError):build_dossier(analysis)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ior_mvp.dossier_validation.DossierIntegrityError'>
+
+tests/test_dossier_isolation.py:127: Failed
+_ test_malformed_required_narrative_has_typed_422[dossier-route_label-value2] __
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x77658b161250>
+field = 'route_label', value = {'segments': [None], 'text': 'fixture'}
+suffix = 'dossier'
+
+    @pytest.mark.parametrize(('field','value'),[
+        ('headline',{}),('rationale',{'text':None}),
+        ('route_label',{'text':'fixture','segments':[None]}),
+        ('headline',{'text':'fixture','segments':[{'text':4}]}),
+        ('conditions',None),('kill_conditions',[None]),
+        ('missing_facts',[{'segments':[]}]),
+    ])
+    @pytest.mark.parametrize('suffix',['dossier','dossier.html'])
+    def test_malformed_required_narrative_has_typed_422(monkeypatch,field,value,suffix):
+        import importlib
+        from ior_mvp.dossier_validation import DossierIntegrityError
+        analysis=deepcopy(analyze('SAU-H0-721049','public'))
+        analysis['active_decision']['localized_narrative']['en'][field]=value
+>       with pytest.raises(DossierIntegrityError):build_dossier(analysis)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ior_mvp.dossier_validation.DossierIntegrityError'>
+
+tests/test_dossier_isolation.py:127: Failed
+___ test_malformed_required_narrative_has_typed_422[dossier-headline-value3] ___
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x77658b13a030>
+field = 'headline', value = {'segments': [{'text': 4}], 'text': 'fixture'}
+suffix = 'dossier'
+
+    @pytest.mark.parametrize(('field','value'),[
+        ('headline',{}),('rationale',{'text':None}),
+        ('route_label',{'text':'fixture','segments':[None]}),
+        ('headline',{'text':'fixture','segments':[{'text':4}]}),
+        ('conditions',None),('kill_conditions',[None]),
+        ('missing_facts',[{'segments':[]}]),
+    ])
+    @pytest.mark.parametrize('suffix',['dossier','dossier.html'])
+    def test_malformed_required_narrative_has_typed_422(monkeypatch,field,value,suffix):
+        import importlib
+        from ior_mvp.dossier_validation import DossierIntegrityError
+        analysis=deepcopy(analyze('SAU-H0-721049','public'))
+        analysis['active_decision']['localized_narrative']['en'][field]=value
+>       with pytest.raises(DossierIntegrityError):build_dossier(analysis)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ior_mvp.dossier_validation.DossierIntegrityError'>
+
+tests/test_dossier_isolation.py:127: Failed
+___ test_malformed_required_narrative_has_typed_422[dossier-conditions-None] ___
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x77658b13a9c0>
+field = 'conditions', value = None, suffix = 'dossier'
+
+    @pytest.mark.parametrize(('field','value'),[
+        ('headline',{}),('rationale',{'text':None}),
+        ('route_label',{'text':'fixture','segments':[None]}),
+        ('headline',{'text':'fixture','segments':[{'text':4}]}),
+        ('conditions',None),('kill_conditions',[None]),
+        ('missing_facts',[{'segments':[]}]),
+    ])
+    @pytest.mark.parametrize('suffix',['dossier','dossier.html'])
+    def test_malformed_required_narrative_has_typed_422(monkeypatch,field,value,suffix):
+        import importlib
+        from ior_mvp.dossier_validation import DossierIntegrityError
+        analysis=deepcopy(analyze('SAU-H0-721049','public'))
+        analysis['active_decision']['localized_narrative']['en'][field]=value
+>       with pytest.raises(DossierIntegrityError):build_dossier(analysis)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ior_mvp.dossier_validation.DossierIntegrityError'>
+
+tests/test_dossier_isolation.py:127: Failed
+_ test_malformed_required_narrative_has_typed_422[dossier-kill_conditions-value5] _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x77658ac25750>
+field = 'kill_conditions', value = [None], suffix = 'dossier'
+
+    @pytest.mark.parametrize(('field','value'),[
+        ('headline',{}),('rationale',{'text':None}),
+        ('route_label',{'text':'fixture','segments':[None]}),
+        ('headline',{'text':'fixture','segments':[{'text':4}]}),
+        ('conditions',None),('kill_conditions',[None]),
+        ('missing_facts',[{'segments':[]}]),
+    ])
+    @pytest.mark.parametrize('suffix',['dossier','dossier.html'])
+    def test_malformed_required_narrative_has_typed_422(monkeypatch,field,value,suffix):
+        import importlib
+        from ior_mvp.dossier_validation import DossierIntegrityError
+        analysis=deepcopy(analyze('SAU-H0-721049','public'))
+        analysis['active_decision']['localized_narrative']['en'][field]=value
+>       with pytest.raises(DossierIntegrityError):build_dossier(analysis)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ior_mvp.dossier_validation.DossierIntegrityError'>
+
+tests/test_dossier_isolation.py:127: Failed
+_ test_malformed_required_narrative_has_typed_422[dossier-missing_facts-value6] _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x77658ac25f50>
+field = 'missing_facts', value = [{'segments': []}], suffix = 'dossier'
+
+    @pytest.mark.parametrize(('field','value'),[
+        ('headline',{}),('rationale',{'text':None}),
+        ('route_label',{'text':'fixture','segments':[None]}),
+        ('headline',{'text':'fixture','segments':[{'text':4}]}),
+        ('conditions',None),('kill_conditions',[None]),
+        ('missing_facts',[{'segments':[]}]),
+    ])
+    @pytest.mark.parametrize('suffix',['dossier','dossier.html'])
+    def test_malformed_required_narrative_has_typed_422(monkeypatch,field,value,suffix):
+        import importlib
+        from ior_mvp.dossier_validation import DossierIntegrityError
+        analysis=deepcopy(analyze('SAU-H0-721049','public'))
+        analysis['active_decision']['localized_narrative']['en'][field]=value
+>       with pytest.raises(DossierIntegrityError):build_dossier(analysis)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ior_mvp.dossier_validation.DossierIntegrityError'>
+
+tests/test_dossier_isolation.py:127: Failed
+_ test_malformed_required_narrative_has_typed_422[dossier.html-headline-value0] _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x77658accf5c0>
+field = 'headline', value = {}, suffix = 'dossier.html'
+
+    @pytest.mark.parametrize(('field','value'),[
+        ('headline',{}),('rationale',{'text':None}),
+        ('route_label',{'text':'fixture','segments':[None]}),
+        ('headline',{'text':'fixture','segments':[{'text':4}]}),
+        ('conditions',None),('kill_conditions',[None]),
+        ('missing_facts',[{'segments':[]}]),
+    ])
+    @pytest.mark.parametrize('suffix',['dossier','dossier.html'])
+    def test_malformed_required_narrative_has_typed_422(monkeypatch,field,value,suffix):
+        import importlib
+        from ior_mvp.dossier_validation import DossierIntegrityError
+        analysis=deepcopy(analyze('SAU-H0-721049','public'))
+        analysis['active_decision']['localized_narrative']['en'][field]=value
+>       with pytest.raises(DossierIntegrityError):build_dossier(analysis)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ior_mvp.dossier_validation.DossierIntegrityError'>
+
+tests/test_dossier_isolation.py:127: Failed
+_ test_malformed_required_narrative_has_typed_422[dossier.html-rationale-value1] _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x77658acce8a0>
+field = 'rationale', value = {'text': None}, suffix = 'dossier.html'
+
+    @pytest.mark.parametrize(('field','value'),[
+        ('headline',{}),('rationale',{'text':None}),
+        ('route_label',{'text':'fixture','segments':[None]}),
+        ('headline',{'text':'fixture','segments':[{'text':4}]}),
+        ('conditions',None),('kill_conditions',[None]),
+        ('missing_facts',[{'segments':[]}]),
+    ])
+    @pytest.mark.parametrize('suffix',['dossier','dossier.html'])
+    def test_malformed_required_narrative_has_typed_422(monkeypatch,field,value,suffix):
+        import importlib
+        from ior_mvp.dossier_validation import DossierIntegrityError
+        analysis=deepcopy(analyze('SAU-H0-721049','public'))
+        analysis['active_decision']['localized_narrative']['en'][field]=value
+>       with pytest.raises(DossierIntegrityError):build_dossier(analysis)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ior_mvp.dossier_validation.DossierIntegrityError'>
+
+tests/test_dossier_isolation.py:127: Failed
+_ test_malformed_required_narrative_has_typed_422[dossier.html-route_label-value2] _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x77658a8a5390>
+field = 'route_label', value = {'segments': [None], 'text': 'fixture'}
+suffix = 'dossier.html'
+
+    @pytest.mark.parametrize(('field','value'),[
+        ('headline',{}),('rationale',{'text':None}),
+        ('route_label',{'text':'fixture','segments':[None]}),
+        ('headline',{'text':'fixture','segments':[{'text':4}]}),
+        ('conditions',None),('kill_conditions',[None]),
+        ('missing_facts',[{'segments':[]}]),
+    ])
+    @pytest.mark.parametrize('suffix',['dossier','dossier.html'])
+    def test_malformed_required_narrative_has_typed_422(monkeypatch,field,value,suffix):
+        import importlib
+        from ior_mvp.dossier_validation import DossierIntegrityError
+        analysis=deepcopy(analyze('SAU-H0-721049','public'))
+        analysis['active_decision']['localized_narrative']['en'][field]=value
+>       with pytest.raises(DossierIntegrityError):build_dossier(analysis)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ior_mvp.dossier_validation.DossierIntegrityError'>
+
+tests/test_dossier_isolation.py:127: Failed
+_ test_malformed_required_narrative_has_typed_422[dossier.html-headline-value3] _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x77658a8a4f30>
+field = 'headline', value = {'segments': [{'text': 4}], 'text': 'fixture'}
+suffix = 'dossier.html'
+
+    @pytest.mark.parametrize(('field','value'),[
+        ('headline',{}),('rationale',{'text':None}),
+        ('route_label',{'text':'fixture','segments':[None]}),
+        ('headline',{'text':'fixture','segments':[{'text':4}]}),
+        ('conditions',None),('kill_conditions',[None]),
+        ('missing_facts',[{'segments':[]}]),
+    ])
+    @pytest.mark.parametrize('suffix',['dossier','dossier.html'])
+    def test_malformed_required_narrative_has_typed_422(monkeypatch,field,value,suffix):
+        import importlib
+        from ior_mvp.dossier_validation import DossierIntegrityError
+        analysis=deepcopy(analyze('SAU-H0-721049','public'))
+        analysis['active_decision']['localized_narrative']['en'][field]=value
+>       with pytest.raises(DossierIntegrityError):build_dossier(analysis)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ior_mvp.dossier_validation.DossierIntegrityError'>
+
+tests/test_dossier_isolation.py:127: Failed
+_ test_malformed_required_narrative_has_typed_422[dossier.html-conditions-None] _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x77658ac35980>
+field = 'conditions', value = None, suffix = 'dossier.html'
+
+    @pytest.mark.parametrize(('field','value'),[
+        ('headline',{}),('rationale',{'text':None}),
+        ('route_label',{'text':'fixture','segments':[None]}),
+        ('headline',{'text':'fixture','segments':[{'text':4}]}),
+        ('conditions',None),('kill_conditions',[None]),
+        ('missing_facts',[{'segments':[]}]),
+    ])
+    @pytest.mark.parametrize('suffix',['dossier','dossier.html'])
+    def test_malformed_required_narrative_has_typed_422(monkeypatch,field,value,suffix):
+        import importlib
+        from ior_mvp.dossier_validation import DossierIntegrityError
+        analysis=deepcopy(analyze('SAU-H0-721049','public'))
+        analysis['active_decision']['localized_narrative']['en'][field]=value
+>       with pytest.raises(DossierIntegrityError):build_dossier(analysis)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ior_mvp.dossier_validation.DossierIntegrityError'>
+
+tests/test_dossier_isolation.py:127: Failed
+_ test_malformed_required_narrative_has_typed_422[dossier.html-kill_conditions-value5] _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x77658a7cad50>
+field = 'kill_conditions', value = [None], suffix = 'dossier.html'
+
+    @pytest.mark.parametrize(('field','value'),[
+        ('headline',{}),('rationale',{'text':None}),
+        ('route_label',{'text':'fixture','segments':[None]}),
+        ('headline',{'text':'fixture','segments':[{'text':4}]}),
+        ('conditions',None),('kill_conditions',[None]),
+        ('missing_facts',[{'segments':[]}]),
+    ])
+    @pytest.mark.parametrize('suffix',['dossier','dossier.html'])
+    def test_malformed_required_narrative_has_typed_422(monkeypatch,field,value,suffix):
+        import importlib
+        from ior_mvp.dossier_validation import DossierIntegrityError
+        analysis=deepcopy(analyze('SAU-H0-721049','public'))
+        analysis['active_decision']['localized_narrative']['en'][field]=value
+>       with pytest.raises(DossierIntegrityError):build_dossier(analysis)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ior_mvp.dossier_validation.DossierIntegrityError'>
+
+tests/test_dossier_isolation.py:127: Failed
+_ test_malformed_required_narrative_has_typed_422[dossier.html-missing_facts-value6] _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x77658a7cab10>
+field = 'missing_facts', value = [{'segments': []}], suffix = 'dossier.html'
+
+    @pytest.mark.parametrize(('field','value'),[
+        ('headline',{}),('rationale',{'text':None}),
+        ('route_label',{'text':'fixture','segments':[None]}),
+        ('headline',{'text':'fixture','segments':[{'text':4}]}),
+        ('conditions',None),('kill_conditions',[None]),
+        ('missing_facts',[{'segments':[]}]),
+    ])
+    @pytest.mark.parametrize('suffix',['dossier','dossier.html'])
+    def test_malformed_required_narrative_has_typed_422(monkeypatch,field,value,suffix):
+        import importlib
+        from ior_mvp.dossier_validation import DossierIntegrityError
+        analysis=deepcopy(analyze('SAU-H0-721049','public'))
+        analysis['active_decision']['localized_narrative']['en'][field]=value
+>       with pytest.raises(DossierIntegrityError):build_dossier(analysis)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ior_mvp.dossier_validation.DossierIntegrityError'>
+
+tests/test_dossier_isolation.py:127: Failed
+=============================== warnings summary ===============================
+.venv/lib/python3.14/site-packages/fastapi/testclient.py:1
+  /home/barami/projects/ior-worktrees/s19/.venv/lib/python3.14/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_dossier_isolation.py::test_malformed_required_narrative_has_typed_422[dossier-headline-value0]
+FAILED tests/test_dossier_isolation.py::test_malformed_required_narrative_has_typed_422[dossier-rationale-value1]
+FAILED tests/test_dossier_isolation.py::test_malformed_required_narrative_has_typed_422[dossier-route_label-value2]
+FAILED tests/test_dossier_isolation.py::test_malformed_required_narrative_has_typed_422[dossier-headline-value3]
+FAILED tests/test_dossier_isolation.py::test_malformed_required_narrative_has_typed_422[dossier-conditions-None]
+FAILED tests/test_dossier_isolation.py::test_malformed_required_narrative_has_typed_422[dossier-kill_conditions-value5]
+FAILED tests/test_dossier_isolation.py::test_malformed_required_narrative_has_typed_422[dossier-missing_facts-value6]
+FAILED tests/test_dossier_isolation.py::test_malformed_required_narrative_has_typed_422[dossier.html-headline-value0]
+FAILED tests/test_dossier_isolation.py::test_malformed_required_narrative_has_typed_422[dossier.html-rationale-value1]
+FAILED tests/test_dossier_isolation.py::test_malformed_required_narrative_has_typed_422[dossier.html-route_label-value2]
+FAILED tests/test_dossier_isolation.py::test_malformed_required_narrative_has_typed_422[dossier.html-headline-value3]
+FAILED tests/test_dossier_isolation.py::test_malformed_required_narrative_has_typed_422[dossier.html-conditions-None]
+FAILED tests/test_dossier_isolation.py::test_malformed_required_narrative_has_typed_422[dossier.html-kill_conditions-value5]
+FAILED tests/test_dossier_isolation.py::test_malformed_required_narrative_has_typed_422[dossier.html-missing_facts-value6]
+14 failed, 35 deselected, 1 warning in 0.30s

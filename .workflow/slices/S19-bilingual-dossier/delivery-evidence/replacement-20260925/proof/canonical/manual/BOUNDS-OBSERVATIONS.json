@@ -1,0 +1,1403 @@
+{
+  "recorded_at_utc": "2026-09-25T13:30:35.826814+00:00",
+  "author": "/root/authority_s19",
+  "status": "SUPPORTING_OBSERVATIONS_COMPLETE_NO_FINDINGS_CLAUDE_ACCEPTANCE_PENDING",
+  "scope": "Read-only fresh16 dossier bounds/32geometry PNG audit and16 native initial views, joined to16 canonical WebPs; no historical pair adjudication or full128 approval.",
+  "preparation": {
+    "personas": [
+      "bilingual browser-layout reviewer",
+      "release-provenance auditor"
+    ],
+    "skills": [
+      {
+        "path": "/home/barami/.agents/skills/task-standards/SKILL.md",
+        "sha256": "8fbc892777086c2f774a0d969b6c6c20deaccb6081bcfd46ef96f56beb641a6d"
+      },
+      {
+        "path": "/home/barami/.agents/skills/project-orientation/SKILL.md",
+        "sha256": "da953c4c69541cb063369a531640d0a0af5596374b0a54e398a26a300ef19da6"
+      },
+      {
+        "path": "/home/barami/.agents/skills/strict-reviewer/SKILL.md",
+        "sha256": "d8ac7b939abeecde1292a487d25af293339a313383b43981d6c54ea7625fc975"
+      },
+      {
+        "path": "/home/barami/.agents/skills/sanad-provenance/SKILL.md",
+        "sha256": "7923e7767604436616e5d8de23a6cad194f7a3f66ca49f9302fa051847676f7e"
+      },
+      {
+        "path": "/home/barami/.agents/skills/al-muhasibi/SKILL.md",
+        "sha256": "f92f89cb7bc16c1ab035d13a41423e85c7c9939015f9bbfc5a85360fd3a29c6f"
+      },
+      {
+        "path": "/home/barami/.agents/skills/muhasabah-gate/SKILL.md",
+        "sha256": "46c63018bf5ba29095520e6362fc26a91dffb4bcaf6ec89ff04d62e12f042791"
+      }
+    ],
+    "strict_reviewer_boundary": "Claude is sole independent approver; this is a supporting observation record, not operation/canonical acceptance."
+  },
+  "sources": [
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/HANDOFF.md",
+      "sha256": "8ef9106b2358104b0fc18774dcac81361d5309880632096ed119177b49f59885"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-preparation/CANONICAL-OPERATION-PROPOSAL-r4.json",
+      "sha256": "7cbf9a77856f2709a84038f2e636649ce36e602dbdcd4496cfc133ab01211960"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/POSTCHECKS.json",
+      "sha256": "e9bb3a7a5e374ca4259faf7bf9c3a0a8aa1c92d21fe28be5757695b7472b2481"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/COMMAND.json",
+      "sha256": "1b03e0eb7fc21313800651be3433be5834fddc583e115413ec7cf483a0a86306"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/RESULT.json",
+      "sha256": "09d089df2c12add0afec68aab3ecd383184cbe61bf1eff32017464b90bb74005"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/run-summary-visual.json",
+      "sha256": "978257d7e968433c2d825f14e584cebd97c50a0f03966e0360d5f2986f3e001c"
+    },
+    {
+      "path": "/home/barami/.cache/industrial-opportunity-resolution-mvp/claude-reviews/s19-ds19-1-full44-canonical-operation-review-20260925.md",
+      "sha256": "c3fece871fb50060e806ac735c536638cd050eee8971ffe83ac5eaac643d44e9"
+    },
+    {
+      "path": "/home/barami/.cache/industrial-opportunity-resolution-mvp/claude-reviews/s19-ds19-1-canonical-go-clarification-20260925.md",
+      "sha256": "7cc3e40c181cac8bf1e1da6f0cda65a13466532b3469ab3297622fc1c0f6b75a"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/immediate_s19_1/RESULT.json",
+      "sha256": "2277fd00e11cfacf0a8570c30a8834ad5301ca2a833d3eea6cae5f8ce0be3b1e"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/immediate_s19_1/CODEC-PIXEL-RESULT.json",
+      "sha256": "d7a00d2afb928a6e3848ffb318392333d881e425349944917495fe930ed16496"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/delivered_ce407/RESULT.json",
+      "sha256": "a94b0ff67dd2d56b454f1854c8fa10dd1e3ccd02d77c25063ef1318a8693b994"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/delivered_ce407/CODEC-PIXEL-RESULT.json",
+      "sha256": "2530f05189037709b9f46354c2d7194d741fbde77591a61a000295eb9125cf42"
+    }
+  ],
+  "reviewed_helper_sources": [
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/browser-preparation/source/browser_tests/dossier_pages.py",
+      "sha256": "827d03d83adb78d2e274c25a5759d63ed73f0a62c1787f4c51362ec5116d1f5e",
+      "matches_reviewed_r4_visual_source_hash": true
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/browser-preparation/source/browser_tests/test_visual_baselines.py",
+      "sha256": "acd0989c8dd8b797d8d66eb412489efb2a158fd2a7e9d4c4511ef404c2849924",
+      "matches_reviewed_r4_visual_source_hash": true
+    }
+  ],
+  "read_only_decoder": {
+    "executable": "/home/barami/projects/ior-worktrees/s19/.venv/bin/python",
+    "pillow_version": "12.3.0",
+    "mode": "Existing installed Pillow; -B; in-memory RGB decoding/hashing only. No image files generated/modified, no dependency installation."
+  },
+  "capture_launch_at_utc": "2026-09-25T13:12:35.861905+00:00",
+  "capture_launch_time_ns": 1790341955861905344,
+  "fresh_artifact_rehash": [
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/ar/desktop-1440x900/journey-e-polypropylene-public-dossier-initial.png",
+      "sha256": "638d4621702551315568bbf08c25faf1267727cc488c445a7d264cbe173c56a0",
+      "bytes": 114170,
+      "mtime_ns": 1790342197059580591,
+      "after_capture_launch": true
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/ar/desktop-1440x900/journey-e-polypropylene-public-dossier-leftmost.png",
+      "sha256": "638d4621702551315568bbf08c25faf1267727cc488c445a7d264cbe173c56a0",
+      "bytes": 114170,
+      "mtime_ns": 1790342197119583245,
+      "after_capture_launch": true
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/ar/desktop-1440x900/journey-e-polypropylene-public-dossier.json",
+      "sha256": "8697ac079b57f1bb97ecb98078f3a766faf08ba82618fb1e8f02d65e4802ab14",
+      "bytes": 6075,
+      "mtime_ns": 1790342197123583423,
+      "after_capture_launch": true
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/ar/desktop-1440x900/journey-e-polypropylene-simulated-dossier-initial.png",
+      "sha256": "33ecb2a73f4883d90800eaa9e22139185c88cce0604fcc567f65d2b19aed94d1",
+      "bytes": 112031,
+      "mtime_ns": 1790342199835703403,
+      "after_capture_launch": true
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/ar/desktop-1440x900/journey-e-polypropylene-simulated-dossier-leftmost.png",
+      "sha256": "33ecb2a73f4883d90800eaa9e22139185c88cce0604fcc567f65d2b19aed94d1",
+      "bytes": 112031,
+      "mtime_ns": 1790342199903706412,
+      "after_capture_launch": true
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/ar/desktop-1440x900/journey-e-polypropylene-simulated-dossier.json",
+      "sha256": "387d0b5d5698e732b0967bf9d4ea0395361e60e663ce076cef5bc822de501e43",
+      "bytes": 7435,
+      "mtime_ns": 1790342199903706412,
+      "after_capture_launch": true
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/ar/desktop-1440x900/journey-e-steel-public-dossier-initial.png",
+      "sha256": "23d55fce4702455ccd4757c602d3043fdaf025156a3c9cb7e32882eb9dea4951",
+      "bytes": 120553,
+      "mtime_ns": 1790342191803351399,
+      "after_capture_launch": true
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/ar/desktop-1440x900/journey-e-steel-public-dossier-leftmost.png",
+      "sha256": "23d55fce4702455ccd4757c602d3043fdaf025156a3c9cb7e32882eb9dea4951",
+      "bytes": 120553,
+      "mtime_ns": 1790342191855353578,
+      "after_capture_launch": true
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/ar/desktop-1440x900/journey-e-steel-public-dossier.json",
+      "sha256": "1e4f5538ddbaf446116e0f6204dabe7ff3aa48d657f50daae49be1ee402396f2",
+      "bytes": 7471,
+      "mtime_ns": 1790342191855353578,
+      "after_capture_launch": true
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/ar/desktop-1440x900/journey-e-steel-simulated-dossier-initial.png",
+      "sha256": "369e5a8fe08b7d3f3ffbf8375ca59ef667afd3760dcc79e42772caa1ea1a3495",
+      "bytes": 129636,
+      "mtime_ns": 1790342194839482377,
+      "after_capture_launch": true
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/ar/desktop-1440x900/journey-e-steel-simulated-dossier-leftmost.png",
+      "sha256": "369e5a8fe08b7d3f3ffbf8375ca59ef667afd3760dcc79e42772caa1ea1a3495",
+      "bytes": 129636,
+      "mtime_ns": 1790342194907485385,
+      "after_capture_launch": true
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/ar/desktop-1440x900/journey-e-steel-simulated-dossier.json",
+      "sha256": "8747d856e116a5fb4bffa42f97aeab4c8e39402f48815c80994f50dfb405fd8f",
+      "bytes": 8981,
+      "mtime_ns": 1790342194907485385,
+      "after_capture_launch": true
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/ar/tablet-1024x768/journey-e-polypropylene-public-dossier-initial.png",
+      "sha256": "74ee6f1805706bd1432a6f089eb5e712f252234e72b8bf3ec9bc4034669bbda9",
+      "bytes": 92156,
+      "mtime_ns": 1790342296637429443,
+      "after_capture_launch": true
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/ar/tablet-1024x768/journey-e-polypropylene-public-dossier-leftmost.png",
+      "sha256": "74ee6f1805706bd1432a6f089eb5e712f252234e72b8bf3ec9bc4034669bbda9",
+      "bytes": 92156,
+      "mtime_ns": 1790342296689431691,
+      "after_capture_launch": true
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/ar/tablet-1024x768/journey-e-polypropylene-public-dossier.json",
+      "sha256": "0e753464dd7918cd48d11d8211aa397a5b523943695a723db56d3a3bfac48b62",
+      "bytes": 6013,
+      "mtime_ns": 1790342296689431691,
+      "after_capture_launch": true
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/ar/tablet-1024x768/journey-e-polypropylene-simulated-dossier-initial.png",
+      "sha256": "5cb54bcae7af398907bce37275db026dc76b4e25680999179511b3b2ec32ac20",
+      "bytes": 88009,
+      "mtime_ns": 1790342299389547797,
+      "after_capture_launch": true
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/ar/tablet-1024x768/journey-e-polypropylene-simulated-dossier-leftmost.png",
+      "sha256": "5cb54bcae7af398907bce37275db026dc76b4e25680999179511b3b2ec32ac20",
+      "bytes": 88009,
+      "mtime_ns": 1790342299437549859,
+      "after_capture_launch": true
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/ar/tablet-1024x768/journey-e-polypropylene-simulated-dossier.json",
+      "sha256": "9d110ac1fd2a1fc9cd41089dbc72f76a76815b86481a3e2b8cc313ae55669d6c",
+      "bytes": 7355,
+      "mtime_ns": 1790342299441550030,
+      "after_capture_launch": true
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/ar/tablet-1024x768/journey-e-steel-public-dossier-initial.png",
+      "sha256": "c5fd582e4d960cfed074bee1bcca55dac5da4f08f6c49e6060a05e2fca656f28",
+      "bytes": 94802,
+      "mtime_ns": 1790342291185193768,
+      "after_capture_launch": true
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/ar/tablet-1024x768/journey-e-steel-public-dossier-leftmost.png",
+      "sha256": "c5fd582e4d960cfed074bee1bcca55dac5da4f08f6c49e6060a05e2fca656f28",
+      "bytes": 94802,
+      "mtime_ns": 1790342291237196016,
+      "after_capture_launch": true
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/ar/tablet-1024x768/journey-e-steel-public-dossier.json",
+      "sha256": "f3ba0111c1173e30f5410ef9868e3c75861fb1022aac6e39fa5766f1585f9079",
+      "bytes": 7413,
+      "mtime_ns": 1790342291237196016,
+      "after_capture_launch": true
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/ar/tablet-1024x768/journey-e-steel-simulated-dossier-initial.png",
+      "sha256": "ef0e3f162d1974e9e26556eb361a429b84ebfdae90d16a1a059354f90a25d8a3",
+      "bytes": 96944,
+      "mtime_ns": 1790342294241325871,
+      "after_capture_launch": true
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/ar/tablet-1024x768/journey-e-steel-simulated-dossier-leftmost.png",
+      "sha256": "ef0e3f162d1974e9e26556eb361a429b84ebfdae90d16a1a059354f90a25d8a3",
+      "bytes": 96944,
+      "mtime_ns": 1790342294297328290,
+      "after_capture_launch": true
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/ar/tablet-1024x768/journey-e-steel-simulated-dossier.json",
+      "sha256": "fce5349996d71f3d9de197338e5eb818c4f6c21642d4cc5fd87283e1786917af",
+      "bytes": 8963,
+      "mtime_ns": 1790342294297328290,
+      "after_capture_launch": true
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/en/desktop-1440x900/journey-e-polypropylene-public-dossier-initial.png",
+      "sha256": "b17d0404ad24cf27d7c1daa06cce6a1ab640586639246e45be18154434ed2825",
+      "bytes": 117836,
+      "mtime_ns": 1790342002190210504,
+      "after_capture_launch": true
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/en/desktop-1440x900/journey-e-polypropylene-public-dossier-leftmost.png",
+      "sha256": "b17d0404ad24cf27d7c1daa06cce6a1ab640586639246e45be18154434ed2825",
+      "bytes": 117836,
+      "mtime_ns": 1790342002258212829,
+      "after_capture_launch": true
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/en/desktop-1440x900/journey-e-polypropylene-public-dossier.json",
+      "sha256": "eb30ba4cad7efe7cf29d01e1d777ac8c328bc2180207cf9b48cf8ae2ec132d86",
+      "bytes": 5513,
+      "mtime_ns": 1790342002258212829,
+      "after_capture_launch": true
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/en/desktop-1440x900/journey-e-polypropylene-simulated-dossier-initial.png",
+      "sha256": "3e447e564abe0a0786558e10eb707a973418c33ec0f122cb8d5c1273b6268e79",
+      "bytes": 113976,
+      "mtime_ns": 1790342004938304461,
+      "after_capture_launch": true
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/en/desktop-1440x900/journey-e-polypropylene-simulated-dossier-leftmost.png",
+      "sha256": "3e447e564abe0a0786558e10eb707a973418c33ec0f122cb8d5c1273b6268e79",
+      "bytes": 113976,
+      "mtime_ns": 1790342005002306649,
+      "after_capture_launch": true
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/en/desktop-1440x900/journey-e-polypropylene-simulated-dossier.json",
+      "sha256": "017af24048a7d55274038cfa592ff5e49f6635b62c30e31014f965e8ecf1f3ee",
+      "bytes": 6917,
+      "mtime_ns": 1790342005006306785,
+      "after_capture_launch": true
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/en/desktop-1440x900/journey-e-steel-public-dossier-initial.png",
+      "sha256": "d44546557417cba2ab751d98318e052c3235307b37664c167140b9b6f4f97743",
+      "bytes": 125918,
+      "mtime_ns": 1790341996970002328,
+      "after_capture_launch": true
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/en/desktop-1440x900/journey-e-steel-public-dossier-leftmost.png",
+      "sha256": "d44546557417cba2ab751d98318e052c3235307b37664c167140b9b6f4f97743",
+      "bytes": 125918,
+      "mtime_ns": 1790341997018004324,
+      "after_capture_launch": true
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/en/desktop-1440x900/journey-e-steel-public-dossier.json",
+      "sha256": "ec3a088d2f2f596c1590fc9e24a24853fe015e49dc1dccedc04392a9954519df",
+      "bytes": 5633,
+      "mtime_ns": 1790341997022004491,
+      "after_capture_launch": true
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/en/desktop-1440x900/journey-e-steel-simulated-dossier-initial.png",
+      "sha256": "bf96afe2ed9613d5fa6a213363f67cebb31f934efa33fad2ae9d49a58ca36601",
+      "bytes": 129324,
+      "mtime_ns": 1790341999906124419,
+      "after_capture_launch": true
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/en/desktop-1440x900/journey-e-steel-simulated-dossier-leftmost.png",
+      "sha256": "bf96afe2ed9613d5fa6a213363f67cebb31f934efa33fad2ae9d49a58ca36601",
+      "bytes": 129324,
+      "mtime_ns": 1790341999974127245,
+      "after_capture_launch": true
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/en/desktop-1440x900/journey-e-steel-simulated-dossier.json",
+      "sha256": "9d9ff39dc899898879d4418769b56489347572c2d82678e74839f6033b181dbb",
+      "bytes": 7095,
+      "mtime_ns": 1790341999974127245,
+      "after_capture_launch": true
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/en/tablet-1024x768/journey-e-polypropylene-public-dossier-initial.png",
+      "sha256": "5a975f8e9941ef8dcde504608112864e2bcab8c83e4286be6dd510cf010c8f67",
+      "bytes": 93789,
+      "mtime_ns": 1790342101440814794,
+      "after_capture_launch": true
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/en/tablet-1024x768/journey-e-polypropylene-public-dossier-leftmost.png",
+      "sha256": "5a975f8e9941ef8dcde504608112864e2bcab8c83e4286be6dd510cf010c8f67",
+      "bytes": 93789,
+      "mtime_ns": 1790342101484816648,
+      "after_capture_launch": true
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/en/tablet-1024x768/journey-e-polypropylene-public-dossier.json",
+      "sha256": "fc22f7cd490577109daac200bf10f79a968ff630d124792a8b76af63f81347aa",
+      "bytes": 5477,
+      "mtime_ns": 1790342101488816818,
+      "after_capture_launch": true
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/en/tablet-1024x768/journey-e-polypropylene-simulated-dossier-initial.png",
+      "sha256": "df3867e1219e6fd9f6da421c28ce6e90d10e82e04a43d561b6e8b1bc95b4bcf6",
+      "bytes": 88337,
+      "mtime_ns": 1790342104336936944,
+      "after_capture_launch": true
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/en/tablet-1024x768/journey-e-polypropylene-simulated-dossier-leftmost.png",
+      "sha256": "df3867e1219e6fd9f6da421c28ce6e90d10e82e04a43d561b6e8b1bc95b4bcf6",
+      "bytes": 88337,
+      "mtime_ns": 1790342104404939814,
+      "after_capture_launch": true
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/en/tablet-1024x768/journey-e-polypropylene-simulated-dossier.json",
+      "sha256": "04dcc467d28a685d2165e40ccbd93a4dfadaa8bec2424a62db8b9809a5747f4d",
+      "bytes": 6867,
+      "mtime_ns": 1790342104404939814,
+      "after_capture_launch": true
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/en/tablet-1024x768/journey-e-steel-public-dossier-initial.png",
+      "sha256": "59ef713f58e989cdb3ab019360781bd5780570df63c09c604251d20517d1526a",
+      "bytes": 97549,
+      "mtime_ns": 1790342096308906055,
+      "after_capture_launch": true
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/en/tablet-1024x768/journey-e-steel-public-dossier-leftmost.png",
+      "sha256": "59ef713f58e989cdb3ab019360781bd5780570df63c09c604251d20517d1526a",
+      "bytes": 97549,
+      "mtime_ns": 1790342096356908230,
+      "after_capture_launch": true
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/en/tablet-1024x768/journey-e-steel-public-dossier.json",
+      "sha256": "69e6cba18d7e021f4e6944c590eaba71503e5062d976bf6de2b39f63ada40437",
+      "bytes": 5601,
+      "mtime_ns": 1790342096356908230,
+      "after_capture_launch": true
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/en/tablet-1024x768/journey-e-steel-simulated-dossier-initial.png",
+      "sha256": "2945cc7aa4016ca67a42227bcadf8438193e87b62b2dba0e82739dfddabcf7e9",
+      "bytes": 100923,
+      "mtime_ns": 1790342099228721490,
+      "after_capture_launch": true
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/en/tablet-1024x768/journey-e-steel-simulated-dossier-leftmost.png",
+      "sha256": "2945cc7aa4016ca67a42227bcadf8438193e87b62b2dba0e82739dfddabcf7e9",
+      "bytes": 100923,
+      "mtime_ns": 1790342099292724189,
+      "after_capture_launch": true
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/en/tablet-1024x768/journey-e-steel-simulated-dossier.json",
+      "sha256": "2402823f3ff4e1ddd8d5da7876eec277a220f931ae82c395d54ed1d7474bee32",
+      "bytes": 7051,
+      "mtime_ns": 1790342099292724189,
+      "after_capture_launch": true
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/run-summary-visual.json",
+      "sha256": "978257d7e968433c2d825f14e584cebd97c50a0f03966e0360d5f2986f3e001c",
+      "bytes": 179,
+      "mtime_ns": 1790342351170265564,
+      "after_capture_launch": true
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/server.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "mtime_ns": 1790341958776352933,
+      "after_capture_launch": true
+    }
+  ],
+  "summary": {
+    "fresh_files_verified": 50,
+    "bounds_jsons": 16,
+    "phase_records": 32,
+    "protected_item_records": 160,
+    "geometry_pngs": 32,
+    "canonical_webp_joins": 16,
+    "byte_identical_initial_leftmost_pairs": 16,
+    "all32_pngs_equal_corresponding_canonical_decoded_rgb": true,
+    "actual_fresh_native_view_image_calls": 16,
+    "distinct_initial_png_bytes_viewed": 16,
+    "leftmost_views_not_repeated": 16,
+    "findings": []
+  },
+  "scroll_restoration": {
+    "source": "browser_tests/test_visual_baselines.py:330-342",
+    "contract": "Original [scrollX,scrollY] saved before helper; exact saved coordinates restored and asserted before canonical capture.",
+    "evidence": "Bound unchanged callsite plus completed stock visual run (4passed0failed0skipped) supplies actual assertion-success evidence. The32 raw geometry phases all have scrollX0; each initial/leftmost pair is identical and matches canonical decoded RGB.",
+    "limitation": "Geometry JSON stores initial and leftmost only, not a third raw restored-coordinate record. No such raw record is claimed."
+  },
+  "rows": [
+    {
+      "bounds": {
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/ar/desktop-1440x900/journey-e-polypropylene-public-dossier.json",
+        "sha256": "8697ac079b57f1bb97ecb98078f3a766faf08ba82618fb1e8f02d65e4802ab14"
+      },
+      "initial": {
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/ar/desktop-1440x900/journey-e-polypropylene-public-dossier-initial.png",
+        "sha256": "638d4621702551315568bbf08c25faf1267727cc488c445a7d264cbe173c56a0",
+        "decoded_rgb_sha256": "fa4a2894300adabeee0640dca126e7def18a0950154e37744dca03fb9d18a377"
+      },
+      "leftmost": {
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/ar/desktop-1440x900/journey-e-polypropylene-public-dossier-leftmost.png",
+        "sha256": "638d4621702551315568bbf08c25faf1267727cc488c445a7d264cbe173c56a0",
+        "decoded_rgb_sha256": "fa4a2894300adabeee0640dca126e7def18a0950154e37744dca03fb9d18a377"
+      },
+      "canonical": {
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/postimages/v0.3.0/ar/desktop-1440x900/journey-e-polypropylene-public-dossier.webp",
+        "sha256": "006f30855e4b1963ed5e8c21917fab0ffeeb0480e651fc910235a069249619ae",
+        "decoded_rgb_sha256": "fa4a2894300adabeee0640dca126e7def18a0950154e37744dca03fb9d18a377"
+      },
+      "dimensions": [
+        1440,
+        900
+      ],
+      "initial_leftmost_bytes_identical": true,
+      "both_pngs_equal_canonical_decoded_rgb": true,
+      "phase_records_identical": true,
+      "fonts": "loaded",
+      "scrollX_both": [
+        0,
+        0
+      ],
+      "scrollWidth_both": [
+        1440,
+        1440
+      ],
+      "protected_items": [
+        "state",
+        "title",
+        "identity",
+        "product"
+      ],
+      "all_protected_element_and_text_rects_within_physical_viewport": true,
+      "observed_state": "رفض REJECT",
+      "native_observation": {
+        "tool": "tools.view_image",
+        "detail": "original",
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/ar/desktop-1440x900/journey-e-polypropylene-public-dossier-initial.png",
+        "session_sequence": 1,
+        "actual_call_completed": true,
+        "coverage": "Fresh native initial PNG; leftmost is covered by verified byte identity, canonical by exact decoded RGB/dimensions. No separate leftmost or WebP view claimed.",
+        "notes": "Arabic REJECT heading, product and source identity fit. Unavailable metrics are distinct from numbers. Public support references appear near the bottom; no simulation warning or contradictory extra row is displayed.",
+        "findings": []
+      }
+    },
+    {
+      "bounds": {
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/ar/desktop-1440x900/journey-e-polypropylene-simulated-dossier.json",
+        "sha256": "387d0b5d5698e732b0967bf9d4ea0395361e60e663ce076cef5bc822de501e43"
+      },
+      "initial": {
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/ar/desktop-1440x900/journey-e-polypropylene-simulated-dossier-initial.png",
+        "sha256": "33ecb2a73f4883d90800eaa9e22139185c88cce0604fcc567f65d2b19aed94d1",
+        "decoded_rgb_sha256": "13ca46d142b3e0092e92db97394c3bad089f236f393ce0c18c39c42f3ea28c4d"
+      },
+      "leftmost": {
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/ar/desktop-1440x900/journey-e-polypropylene-simulated-dossier-leftmost.png",
+        "sha256": "33ecb2a73f4883d90800eaa9e22139185c88cce0604fcc567f65d2b19aed94d1",
+        "decoded_rgb_sha256": "13ca46d142b3e0092e92db97394c3bad089f236f393ce0c18c39c42f3ea28c4d"
+      },
+      "canonical": {
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/postimages/v0.3.0/ar/desktop-1440x900/journey-e-polypropylene-simulated-dossier.webp",
+        "sha256": "38f6bcdf59fcffcf46ce8b54ec3c82ddab3564b16a3b0f2cc9e4caeb2b0be430",
+        "decoded_rgb_sha256": "13ca46d142b3e0092e92db97394c3bad089f236f393ce0c18c39c42f3ea28c4d"
+      },
+      "dimensions": [
+        1440,
+        900
+      ],
+      "initial_leftmost_bytes_identical": true,
+      "both_pngs_equal_canonical_decoded_rgb": true,
+      "phase_records_identical": true,
+      "fonts": "loaded",
+      "scrollX_both": [
+        0,
+        0
+      ],
+      "scrollWidth_both": [
+        1440,
+        1440
+      ],
+      "protected_items": [
+        "state",
+        "title",
+        "identity",
+        "product",
+        "warning_ar",
+        "warning_en"
+      ],
+      "all_protected_element_and_text_rects_within_physical_viewport": true,
+      "observed_state": "رفض REJECT",
+      "native_observation": {
+        "tool": "tools.view_image",
+        "detail": "original",
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/ar/desktop-1440x900/journey-e-polypropylene-simulated-dossier-initial.png",
+        "session_sequence": 2,
+        "actual_call_completed": true,
+        "coverage": "Fresh native initial PNG; leftmost is covered by verified byte identity, canonical by exact decoded RGB/dimensions. No separate leftmost or WebP view claimed.",
+        "notes": "Arabic simulated REJECT, both full warning strings and unchanged public REJECT are visible and separated. Demand56/capacity104.49 and numeric zero distance/support are readable; lower condition text continues below the viewport.",
+        "findings": []
+      }
+    },
+    {
+      "bounds": {
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/ar/desktop-1440x900/journey-e-steel-public-dossier.json",
+        "sha256": "1e4f5538ddbaf446116e0f6204dabe7ff3aa48d657f50daae49be1ee402396f2"
+      },
+      "initial": {
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/ar/desktop-1440x900/journey-e-steel-public-dossier-initial.png",
+        "sha256": "23d55fce4702455ccd4757c602d3043fdaf025156a3c9cb7e32882eb9dea4951",
+        "decoded_rgb_sha256": "0531ac5935216f1f700757e1243c7b0e6a8525bcd9c70d900a1c8358342ac2a3"
+      },
+      "leftmost": {
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/ar/desktop-1440x900/journey-e-steel-public-dossier-leftmost.png",
+        "sha256": "23d55fce4702455ccd4757c602d3043fdaf025156a3c9cb7e32882eb9dea4951",
+        "decoded_rgb_sha256": "0531ac5935216f1f700757e1243c7b0e6a8525bcd9c70d900a1c8358342ac2a3"
+      },
+      "canonical": {
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/postimages/v0.3.0/ar/desktop-1440x900/journey-e-steel-public-dossier.webp",
+        "sha256": "68048e0c477a3cd9fe4c251271689dfb64ca508dc555431ab40395d29a3101c6",
+        "decoded_rgb_sha256": "0531ac5935216f1f700757e1243c7b0e6a8525bcd9c70d900a1c8358342ac2a3"
+      },
+      "dimensions": [
+        1440,
+        900
+      ],
+      "initial_leftmost_bytes_identical": true,
+      "both_pngs_equal_canonical_decoded_rgb": true,
+      "phase_records_identical": true,
+      "fonts": "loaded",
+      "scrollX_both": [
+        0,
+        0
+      ],
+      "scrollWidth_both": [
+        1440,
+        1440
+      ],
+      "protected_items": [
+        "state",
+        "title",
+        "identity",
+        "product"
+      ],
+      "all_protected_element_and_text_rects_within_physical_viewport": true,
+      "observed_state": "تحقق INVESTIGATE",
+      "native_observation": {
+        "tool": "tools.view_image",
+        "detail": "original",
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/ar/desktop-1440x900/journey-e-steel-public-dossier-initial.png",
+        "session_sequence": 3,
+        "actual_call_completed": true,
+        "coverage": "Fresh native initial PNG; leftmost is covered by verified byte identity, canonical by exact decoded RGB/dimensions. No separate leftmost or WebP view claimed.",
+        "notes": "Arabic INVESTIGATE heading and long steel product fit. Ledger WITS/EPD and separate public contradiction SPEC are visible on distinct labeled lines with readable LTR identifiers; no simulation banner.",
+        "findings": []
+      }
+    },
+    {
+      "bounds": {
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/ar/desktop-1440x900/journey-e-steel-simulated-dossier.json",
+        "sha256": "8747d856e116a5fb4bffa42f97aeab4c8e39402f48815c80994f50dfb405fd8f"
+      },
+      "initial": {
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/ar/desktop-1440x900/journey-e-steel-simulated-dossier-initial.png",
+        "sha256": "369e5a8fe08b7d3f3ffbf8375ca59ef667afd3760dcc79e42772caa1ea1a3495",
+        "decoded_rgb_sha256": "ac310312bb8ab81b875013b3700787845daf99ab3f4f3ba57c8e77d1fe27f5b2"
+      },
+      "leftmost": {
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/ar/desktop-1440x900/journey-e-steel-simulated-dossier-leftmost.png",
+        "sha256": "369e5a8fe08b7d3f3ffbf8375ca59ef667afd3760dcc79e42772caa1ea1a3495",
+        "decoded_rgb_sha256": "ac310312bb8ab81b875013b3700787845daf99ab3f4f3ba57c8e77d1fe27f5b2"
+      },
+      "canonical": {
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/postimages/v0.3.0/ar/desktop-1440x900/journey-e-steel-simulated-dossier.webp",
+        "sha256": "1728b25a488e433f86346acc844d0ae5839ac933ec6e5b63f541c9121d34ed45",
+        "decoded_rgb_sha256": "ac310312bb8ab81b875013b3700787845daf99ab3f4f3ba57c8e77d1fe27f5b2"
+      },
+      "dimensions": [
+        1440,
+        900
+      ],
+      "initial_leftmost_bytes_identical": true,
+      "both_pngs_equal_canonical_decoded_rgb": true,
+      "phase_records_identical": true,
+      "fonts": "loaded",
+      "scrollX_both": [
+        0,
+        0
+      ],
+      "scrollWidth_both": [
+        1440,
+        1440
+      ],
+      "protected_items": [
+        "state",
+        "title",
+        "identity",
+        "product",
+        "warning_ar",
+        "warning_en"
+      ],
+      "all_protected_element_and_text_rects_within_physical_viewport": true,
+      "observed_state": "تقدم ADVANCE",
+      "native_observation": {
+        "tool": "tools.view_image",
+        "detail": "original",
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/ar/desktop-1440x900/journey-e-steel-simulated-dossier-initial.png",
+        "session_sequence": 4,
+        "actual_call_completed": true,
+        "coverage": "Fresh native initial PNG; leftmost is covered by verified byte identity, canonical by exact decoded RGB/dimensions. No separate leftmost or WebP view claimed.",
+        "notes": "Arabic simulated ADVANCE, bilingual warning and unchanged public INVESTIGATE fit without overlap.104/57.509/0.2667/18 metrics are readable; lower conditions continue beyond this viewport.",
+        "findings": []
+      }
+    },
+    {
+      "bounds": {
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/ar/tablet-1024x768/journey-e-polypropylene-public-dossier.json",
+        "sha256": "0e753464dd7918cd48d11d8211aa397a5b523943695a723db56d3a3bfac48b62"
+      },
+      "initial": {
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/ar/tablet-1024x768/journey-e-polypropylene-public-dossier-initial.png",
+        "sha256": "74ee6f1805706bd1432a6f089eb5e712f252234e72b8bf3ec9bc4034669bbda9",
+        "decoded_rgb_sha256": "ae047ef9c4fb1b13b1edde970a25dab340b894e25919c1511e6ea58588826495"
+      },
+      "leftmost": {
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/ar/tablet-1024x768/journey-e-polypropylene-public-dossier-leftmost.png",
+        "sha256": "74ee6f1805706bd1432a6f089eb5e712f252234e72b8bf3ec9bc4034669bbda9",
+        "decoded_rgb_sha256": "ae047ef9c4fb1b13b1edde970a25dab340b894e25919c1511e6ea58588826495"
+      },
+      "canonical": {
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/postimages/v0.3.0/ar/tablet-1024x768/journey-e-polypropylene-public-dossier.webp",
+        "sha256": "d3ad54716a4aff7f6d63a3fe0757434b01f83d9c594413bdbf4301646c21b88a",
+        "decoded_rgb_sha256": "ae047ef9c4fb1b13b1edde970a25dab340b894e25919c1511e6ea58588826495"
+      },
+      "dimensions": [
+        1024,
+        768
+      ],
+      "initial_leftmost_bytes_identical": true,
+      "both_pngs_equal_canonical_decoded_rgb": true,
+      "phase_records_identical": true,
+      "fonts": "loaded",
+      "scrollX_both": [
+        0,
+        0
+      ],
+      "scrollWidth_both": [
+        1024,
+        1024
+      ],
+      "protected_items": [
+        "state",
+        "title",
+        "identity",
+        "product"
+      ],
+      "all_protected_element_and_text_rects_within_physical_viewport": true,
+      "observed_state": "رفض REJECT",
+      "native_observation": {
+        "tool": "tools.view_image",
+        "detail": "original",
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/ar/tablet-1024x768/journey-e-polypropylene-public-dossier-initial.png",
+        "session_sequence": 5,
+        "actual_call_completed": true,
+        "coverage": "Fresh native initial PNG; leftmost is covered by verified byte identity, canonical by exact decoded RGB/dimensions. No separate leftmost or WebP view claimed.",
+        "notes": "Arabic REJECT heading, identity and product fit the tablet width. All four unavailable/not-calculable metric cards and both condition columns are legible; no simulation banner.",
+        "findings": []
+      }
+    },
+    {
+      "bounds": {
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/ar/tablet-1024x768/journey-e-polypropylene-simulated-dossier.json",
+        "sha256": "9d110ac1fd2a1fc9cd41089dbc72f76a76815b86481a3e2b8cc313ae55669d6c"
+      },
+      "initial": {
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/ar/tablet-1024x768/journey-e-polypropylene-simulated-dossier-initial.png",
+        "sha256": "5cb54bcae7af398907bce37275db026dc76b4e25680999179511b3b2ec32ac20",
+        "decoded_rgb_sha256": "5b471f03f5a4ae794c9ac8458eea44d2ea593f727113d51d0543f9aaf00f972f"
+      },
+      "leftmost": {
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/ar/tablet-1024x768/journey-e-polypropylene-simulated-dossier-leftmost.png",
+        "sha256": "5cb54bcae7af398907bce37275db026dc76b4e25680999179511b3b2ec32ac20",
+        "decoded_rgb_sha256": "5b471f03f5a4ae794c9ac8458eea44d2ea593f727113d51d0543f9aaf00f972f"
+      },
+      "canonical": {
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/postimages/v0.3.0/ar/tablet-1024x768/journey-e-polypropylene-simulated-dossier.webp",
+        "sha256": "41037b63519f3738a3380d41bddceae3458a2dd60ac415fc86f692b871cd8149",
+        "decoded_rgb_sha256": "5b471f03f5a4ae794c9ac8458eea44d2ea593f727113d51d0543f9aaf00f972f"
+      },
+      "dimensions": [
+        1024,
+        768
+      ],
+      "initial_leftmost_bytes_identical": true,
+      "both_pngs_equal_canonical_decoded_rgb": true,
+      "phase_records_identical": true,
+      "fonts": "loaded",
+      "scrollX_both": [
+        0,
+        0
+      ],
+      "scrollWidth_both": [
+        1024,
+        1024
+      ],
+      "protected_items": [
+        "state",
+        "title",
+        "identity",
+        "product",
+        "warning_ar",
+        "warning_en"
+      ],
+      "all_protected_element_and_text_rects_within_physical_viewport": true,
+      "observed_state": "رفض REJECT",
+      "native_observation": {
+        "tool": "tools.view_image",
+        "detail": "original",
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/ar/tablet-1024x768/journey-e-polypropylene-simulated-dossier-initial.png",
+        "session_sequence": 6,
+        "actual_call_completed": true,
+        "coverage": "Fresh native initial PNG; leftmost is covered by verified byte identity, canonical by exact decoded RGB/dimensions. No separate leftmost or WebP view claimed.",
+        "notes": "Arabic simulated REJECT and both warning strings fit the tablet width. Unchanged public REJECT and56/104.49 metrics remain visible. The second metric row begins at the viewport bottom, consistent with scrolling content.",
+        "findings": []
+      }
+    },
+    {
+      "bounds": {
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/ar/tablet-1024x768/journey-e-steel-public-dossier.json",
+        "sha256": "f3ba0111c1173e30f5410ef9868e3c75861fb1022aac6e39fa5766f1585f9079"
+      },
+      "initial": {
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/ar/tablet-1024x768/journey-e-steel-public-dossier-initial.png",
+        "sha256": "c5fd582e4d960cfed074bee1bcca55dac5da4f08f6c49e6060a05e2fca656f28",
+        "decoded_rgb_sha256": "008e0ead26d6ea2cc3e0ae82dd9c5f5047dce6407b31bdabb1e20d6e4568207b"
+      },
+      "leftmost": {
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/ar/tablet-1024x768/journey-e-steel-public-dossier-leftmost.png",
+        "sha256": "c5fd582e4d960cfed074bee1bcca55dac5da4f08f6c49e6060a05e2fca656f28",
+        "decoded_rgb_sha256": "008e0ead26d6ea2cc3e0ae82dd9c5f5047dce6407b31bdabb1e20d6e4568207b"
+      },
+      "canonical": {
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/postimages/v0.3.0/ar/tablet-1024x768/journey-e-steel-public-dossier.webp",
+        "sha256": "df4bc8ddbd2755fec75a50716673795bfc7b1896d4fe6fd4441ef72abca75ab7",
+        "decoded_rgb_sha256": "008e0ead26d6ea2cc3e0ae82dd9c5f5047dce6407b31bdabb1e20d6e4568207b"
+      },
+      "dimensions": [
+        1024,
+        768
+      ],
+      "initial_leftmost_bytes_identical": true,
+      "both_pngs_equal_canonical_decoded_rgb": true,
+      "phase_records_identical": true,
+      "fonts": "loaded",
+      "scrollX_both": [
+        0,
+        0
+      ],
+      "scrollWidth_both": [
+        1024,
+        1024
+      ],
+      "protected_items": [
+        "state",
+        "title",
+        "identity",
+        "product"
+      ],
+      "all_protected_element_and_text_rects_within_physical_viewport": true,
+      "observed_state": "تحقق INVESTIGATE",
+      "native_observation": {
+        "tool": "tools.view_image",
+        "detail": "original",
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/ar/tablet-1024x768/journey-e-steel-public-dossier-initial.png",
+        "session_sequence": 7,
+        "actual_call_completed": true,
+        "coverage": "Fresh native initial PNG; leftmost is covered by verified byte identity, canonical by exact decoded RGB/dimensions. No separate leftmost or WebP view claimed.",
+        "notes": "Arabic INVESTIGATE and full long steel product fit without horizontal clipping. Four unavailable/not-calculable cards and wrapped conditions are readable; evidence-reference rows are below this viewport.",
+        "findings": []
+      }
+    },
+    {
+      "bounds": {
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/ar/tablet-1024x768/journey-e-steel-simulated-dossier.json",
+        "sha256": "fce5349996d71f3d9de197338e5eb818c4f6c21642d4cc5fd87283e1786917af"
+      },
+      "initial": {
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/ar/tablet-1024x768/journey-e-steel-simulated-dossier-initial.png",
+        "sha256": "ef0e3f162d1974e9e26556eb361a429b84ebfdae90d16a1a059354f90a25d8a3",
+        "decoded_rgb_sha256": "78a5a5d8da8bf79573aba94de139808a67bb1e495bbb1eb1c3e5ca075a1fc550"
+      },
+      "leftmost": {
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/ar/tablet-1024x768/journey-e-steel-simulated-dossier-leftmost.png",
+        "sha256": "ef0e3f162d1974e9e26556eb361a429b84ebfdae90d16a1a059354f90a25d8a3",
+        "decoded_rgb_sha256": "78a5a5d8da8bf79573aba94de139808a67bb1e495bbb1eb1c3e5ca075a1fc550"
+      },
+      "canonical": {
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/postimages/v0.3.0/ar/tablet-1024x768/journey-e-steel-simulated-dossier.webp",
+        "sha256": "a44d6c8363e461cca36c5e51a04dc32fd21ee9d1bca8bfeb26f0c95c22038495",
+        "decoded_rgb_sha256": "78a5a5d8da8bf79573aba94de139808a67bb1e495bbb1eb1c3e5ca075a1fc550"
+      },
+      "dimensions": [
+        1024,
+        768
+      ],
+      "initial_leftmost_bytes_identical": true,
+      "both_pngs_equal_canonical_decoded_rgb": true,
+      "phase_records_identical": true,
+      "fonts": "loaded",
+      "scrollX_both": [
+        0,
+        0
+      ],
+      "scrollWidth_both": [
+        1024,
+        1024
+      ],
+      "protected_items": [
+        "state",
+        "title",
+        "identity",
+        "product",
+        "warning_ar",
+        "warning_en"
+      ],
+      "all_protected_element_and_text_rects_within_physical_viewport": true,
+      "observed_state": "تقدم ADVANCE",
+      "native_observation": {
+        "tool": "tools.view_image",
+        "detail": "original",
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/ar/tablet-1024x768/journey-e-steel-simulated-dossier-initial.png",
+        "session_sequence": 8,
+        "actual_call_completed": true,
+        "coverage": "Fresh native initial PNG; leftmost is covered by verified byte identity, canonical by exact decoded RGB/dimensions. No separate leftmost or WebP view claimed.",
+        "notes": "Arabic ADVANCE heading fits; explanatory copy wraps to a second line without collision. Both warning strings, product, unchanged public INVESTIGATE and104/57.509 cards are legible; later cards lie below the viewport.",
+        "findings": []
+      }
+    },
+    {
+      "bounds": {
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/en/desktop-1440x900/journey-e-polypropylene-public-dossier.json",
+        "sha256": "eb30ba4cad7efe7cf29d01e1d777ac8c328bc2180207cf9b48cf8ae2ec132d86"
+      },
+      "initial": {
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/en/desktop-1440x900/journey-e-polypropylene-public-dossier-initial.png",
+        "sha256": "b17d0404ad24cf27d7c1daa06cce6a1ab640586639246e45be18154434ed2825",
+        "decoded_rgb_sha256": "a96e45b33657be520d8ae31b1d4ab2a49016fc3438db5afdb5e96c5604317f0b"
+      },
+      "leftmost": {
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/en/desktop-1440x900/journey-e-polypropylene-public-dossier-leftmost.png",
+        "sha256": "b17d0404ad24cf27d7c1daa06cce6a1ab640586639246e45be18154434ed2825",
+        "decoded_rgb_sha256": "a96e45b33657be520d8ae31b1d4ab2a49016fc3438db5afdb5e96c5604317f0b"
+      },
+      "canonical": {
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/postimages/v0.3.0/en/desktop-1440x900/journey-e-polypropylene-public-dossier.webp",
+        "sha256": "833ae3d4f07063c66f8a39ef953820243201745844680355dc285d9aa4128a9f",
+        "decoded_rgb_sha256": "a96e45b33657be520d8ae31b1d4ab2a49016fc3438db5afdb5e96c5604317f0b"
+      },
+      "dimensions": [
+        1440,
+        900
+      ],
+      "initial_leftmost_bytes_identical": true,
+      "both_pngs_equal_canonical_decoded_rgb": true,
+      "phase_records_identical": true,
+      "fonts": "loaded",
+      "scrollX_both": [
+        0,
+        0
+      ],
+      "scrollWidth_both": [
+        1440,
+        1440
+      ],
+      "protected_items": [
+        "state",
+        "title",
+        "identity",
+        "product"
+      ],
+      "all_protected_element_and_text_rects_within_physical_viewport": true,
+      "observed_state": "REJECT",
+      "native_observation": {
+        "tool": "tools.view_image",
+        "detail": "original",
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/en/desktop-1440x900/journey-e-polypropylene-public-dossier-initial.png",
+        "session_sequence": 9,
+        "actual_call_completed": true,
+        "coverage": "Fresh native initial PNG; leftmost is covered by verified byte identity, canonical by exact decoded RGB/dimensions. No separate leftmost or WebP view claimed.",
+        "notes": "English REJECT title, product and identity fit. Unavailable/not-calculable cards and both condition columns are readable; support ledger WITS/SABIC and snapshot line are visible, without a simulation banner.",
+        "findings": []
+      }
+    },
+    {
+      "bounds": {
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/en/desktop-1440x900/journey-e-polypropylene-simulated-dossier.json",
+        "sha256": "017af24048a7d55274038cfa592ff5e49f6635b62c30e31014f965e8ecf1f3ee"
+      },
+      "initial": {
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/en/desktop-1440x900/journey-e-polypropylene-simulated-dossier-initial.png",
+        "sha256": "3e447e564abe0a0786558e10eb707a973418c33ec0f122cb8d5c1273b6268e79",
+        "decoded_rgb_sha256": "3ec0acfa7f9c99fc5f9e7342ec1fa971c885a26e7bc67a43b52d328038b4e017"
+      },
+      "leftmost": {
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/en/desktop-1440x900/journey-e-polypropylene-simulated-dossier-leftmost.png",
+        "sha256": "3e447e564abe0a0786558e10eb707a973418c33ec0f122cb8d5c1273b6268e79",
+        "decoded_rgb_sha256": "3ec0acfa7f9c99fc5f9e7342ec1fa971c885a26e7bc67a43b52d328038b4e017"
+      },
+      "canonical": {
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/postimages/v0.3.0/en/desktop-1440x900/journey-e-polypropylene-simulated-dossier.webp",
+        "sha256": "0be6122f67d59190880ae62fdf6d976f003d287dd4f1b643c7e0e9de68c320bc",
+        "decoded_rgb_sha256": "3ec0acfa7f9c99fc5f9e7342ec1fa971c885a26e7bc67a43b52d328038b4e017"
+      },
+      "dimensions": [
+        1440,
+        900
+      ],
+      "initial_leftmost_bytes_identical": true,
+      "both_pngs_equal_canonical_decoded_rgb": true,
+      "phase_records_identical": true,
+      "fonts": "loaded",
+      "scrollX_both": [
+        0,
+        0
+      ],
+      "scrollWidth_both": [
+        1440,
+        1440
+      ],
+      "protected_items": [
+        "state",
+        "title",
+        "identity",
+        "product",
+        "warning_ar",
+        "warning_en"
+      ],
+      "all_protected_element_and_text_rects_within_physical_viewport": true,
+      "observed_state": "REJECT",
+      "native_observation": {
+        "tool": "tools.view_image",
+        "detail": "original",
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/en/desktop-1440x900/journey-e-polypropylene-simulated-dossier-initial.png",
+        "session_sequence": 10,
+        "actual_call_completed": true,
+        "coverage": "Fresh native initial PNG; leftmost is covered by verified byte identity, canonical by exact decoded RGB/dimensions. No separate leftmost or WebP view claimed.",
+        "notes": "English simulated REJECT heading fits on one line; explanatory copy wraps. Both warning strings and unchanged public REJECT are readable.56/104.49/0/0 metrics are visible; conditions begin at the lower viewport edge.",
+        "findings": []
+      }
+    },
+    {
+      "bounds": {
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/en/desktop-1440x900/journey-e-steel-public-dossier.json",
+        "sha256": "ec3a088d2f2f596c1590fc9e24a24853fe015e49dc1dccedc04392a9954519df"
+      },
+      "initial": {
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/en/desktop-1440x900/journey-e-steel-public-dossier-initial.png",
+        "sha256": "d44546557417cba2ab751d98318e052c3235307b37664c167140b9b6f4f97743",
+        "decoded_rgb_sha256": "77279863d6ed9534823a9b2d7d4be997397a2936c87b5fad49cd356119d25ffb"
+      },
+      "leftmost": {
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/en/desktop-1440x900/journey-e-steel-public-dossier-leftmost.png",
+        "sha256": "d44546557417cba2ab751d98318e052c3235307b37664c167140b9b6f4f97743",
+        "decoded_rgb_sha256": "77279863d6ed9534823a9b2d7d4be997397a2936c87b5fad49cd356119d25ffb"
+      },
+      "canonical": {
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/postimages/v0.3.0/en/desktop-1440x900/journey-e-steel-public-dossier.webp",
+        "sha256": "a8578bd5f6314ba51680ab804a0313af64969de7d6e19526ac43ab2d6465f6ba",
+        "decoded_rgb_sha256": "77279863d6ed9534823a9b2d7d4be997397a2936c87b5fad49cd356119d25ffb"
+      },
+      "dimensions": [
+        1440,
+        900
+      ],
+      "initial_leftmost_bytes_identical": true,
+      "both_pngs_equal_canonical_decoded_rgb": true,
+      "phase_records_identical": true,
+      "fonts": "loaded",
+      "scrollX_both": [
+        0,
+        0
+      ],
+      "scrollWidth_both": [
+        1440,
+        1440
+      ],
+      "protected_items": [
+        "state",
+        "title",
+        "identity",
+        "product"
+      ],
+      "all_protected_element_and_text_rects_within_physical_viewport": true,
+      "observed_state": "INVESTIGATE",
+      "native_observation": {
+        "tool": "tools.view_image",
+        "detail": "original",
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/en/desktop-1440x900/journey-e-steel-public-dossier-initial.png",
+        "session_sequence": 11,
+        "actual_call_completed": true,
+        "coverage": "Fresh native initial PNG; leftmost is covered by verified byte identity, canonical by exact decoded RGB/dimensions. No separate leftmost or WebP view claimed.",
+        "notes": "English INVESTIGATE title and full steel identity fit. WITS/EPD support ledger and SPEC contradiction have separate role labels and distinct lines; snapshot remains visible, with no overlap or simulation banner.",
+        "findings": []
+      }
+    },
+    {
+      "bounds": {
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/en/desktop-1440x900/journey-e-steel-simulated-dossier.json",
+        "sha256": "9d9ff39dc899898879d4418769b56489347572c2d82678e74839f6033b181dbb"
+      },
+      "initial": {
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/en/desktop-1440x900/journey-e-steel-simulated-dossier-initial.png",
+        "sha256": "bf96afe2ed9613d5fa6a213363f67cebb31f934efa33fad2ae9d49a58ca36601",
+        "decoded_rgb_sha256": "5624bdc092795063d81fd319d4ef1b37b6c26f871c02ed03a429d0246fb8ce83"
+      },
+      "leftmost": {
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/en/desktop-1440x900/journey-e-steel-simulated-dossier-leftmost.png",
+        "sha256": "bf96afe2ed9613d5fa6a213363f67cebb31f934efa33fad2ae9d49a58ca36601",
+        "decoded_rgb_sha256": "5624bdc092795063d81fd319d4ef1b37b6c26f871c02ed03a429d0246fb8ce83"
+      },
+      "canonical": {
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/postimages/v0.3.0/en/desktop-1440x900/journey-e-steel-simulated-dossier.webp",
+        "sha256": "9b3ad0d632c973f80ccf2abf2cc442ecfa1a2d8a7ab679c34f55473d6ef34839",
+        "decoded_rgb_sha256": "5624bdc092795063d81fd319d4ef1b37b6c26f871c02ed03a429d0246fb8ce83"
+      },
+      "dimensions": [
+        1440,
+        900
+      ],
+      "initial_leftmost_bytes_identical": true,
+      "both_pngs_equal_canonical_decoded_rgb": true,
+      "phase_records_identical": true,
+      "fonts": "loaded",
+      "scrollX_both": [
+        0,
+        0
+      ],
+      "scrollWidth_both": [
+        1440,
+        1440
+      ],
+      "protected_items": [
+        "state",
+        "title",
+        "identity",
+        "product",
+        "warning_ar",
+        "warning_en"
+      ],
+      "all_protected_element_and_text_rects_within_physical_viewport": true,
+      "observed_state": "ADVANCE",
+      "native_observation": {
+        "tool": "tools.view_image",
+        "detail": "original",
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/en/desktop-1440x900/journey-e-steel-simulated-dossier-initial.png",
+        "session_sequence": 12,
+        "actual_call_completed": true,
+        "coverage": "Fresh native initial PNG; leftmost is covered by verified byte identity, canonical by exact decoded RGB/dimensions. No separate leftmost or WebP view claimed.",
+        "notes": "English simulated ADVANCE heading, bilingual warning, product and unchanged public INVESTIGATE fit.104/57.509/0.2667/18 cards are readable; lower condition content continues below the viewport.",
+        "findings": []
+      }
+    },
+    {
+      "bounds": {
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/en/tablet-1024x768/journey-e-polypropylene-public-dossier.json",
+        "sha256": "fc22f7cd490577109daac200bf10f79a968ff630d124792a8b76af63f81347aa"
+      },
+      "initial": {
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/en/tablet-1024x768/journey-e-polypropylene-public-dossier-initial.png",
+        "sha256": "5a975f8e9941ef8dcde504608112864e2bcab8c83e4286be6dd510cf010c8f67",
+        "decoded_rgb_sha256": "2add3a4647adf839c558ce3dad2660d9d632478ab4539a8ba63b98a75c55a1db"
+      },
+      "leftmost": {
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/en/tablet-1024x768/journey-e-polypropylene-public-dossier-leftmost.png",
+        "sha256": "5a975f8e9941ef8dcde504608112864e2bcab8c83e4286be6dd510cf010c8f67",
+        "decoded_rgb_sha256": "2add3a4647adf839c558ce3dad2660d9d632478ab4539a8ba63b98a75c55a1db"
+      },
+      "canonical": {
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/postimages/v0.3.0/en/tablet-1024x768/journey-e-polypropylene-public-dossier.webp",
+        "sha256": "2fe3c89e9e3d38e5f9216b76117c1b4b91344ee1ea9aaa155816d9370ab3d5e6",
+        "decoded_rgb_sha256": "2add3a4647adf839c558ce3dad2660d9d632478ab4539a8ba63b98a75c55a1db"
+      },
+      "dimensions": [
+        1024,
+        768
+      ],
+      "initial_leftmost_bytes_identical": true,
+      "both_pngs_equal_canonical_decoded_rgb": true,
+      "phase_records_identical": true,
+      "fonts": "loaded",
+      "scrollX_both": [
+        0,
+        0
+      ],
+      "scrollWidth_both": [
+        1024,
+        1024
+      ],
+      "protected_items": [
+        "state",
+        "title",
+        "identity",
+        "product"
+      ],
+      "all_protected_element_and_text_rects_within_physical_viewport": true,
+      "observed_state": "REJECT",
+      "native_observation": {
+        "tool": "tools.view_image",
+        "detail": "original",
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/en/tablet-1024x768/journey-e-polypropylene-public-dossier-initial.png",
+        "session_sequence": 13,
+        "actual_call_completed": true,
+        "coverage": "Fresh native initial PNG; leftmost is covered by verified byte identity, canonical by exact decoded RGB/dimensions. No separate leftmost or WebP view claimed.",
+        "notes": "English REJECT title and product fit within tablet width. Four unavailable/not-calculable cards remain readable; decision and kill conditions wrap without overlap; no simulation banner.",
+        "findings": []
+      }
+    },
+    {
+      "bounds": {
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/en/tablet-1024x768/journey-e-polypropylene-simulated-dossier.json",
+        "sha256": "04dcc467d28a685d2165e40ccbd93a4dfadaa8bec2424a62db8b9809a5747f4d"
+      },
+      "initial": {
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/en/tablet-1024x768/journey-e-polypropylene-simulated-dossier-initial.png",
+        "sha256": "df3867e1219e6fd9f6da421c28ce6e90d10e82e04a43d561b6e8b1bc95b4bcf6",
+        "decoded_rgb_sha256": "a6583e0eed8765b2feaa54cafad0310e812cc866a2856fa947ae155f60b6400f"
+      },
+      "leftmost": {
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/en/tablet-1024x768/journey-e-polypropylene-simulated-dossier-leftmost.png",
+        "sha256": "df3867e1219e6fd9f6da421c28ce6e90d10e82e04a43d561b6e8b1bc95b4bcf6",
+        "decoded_rgb_sha256": "a6583e0eed8765b2feaa54cafad0310e812cc866a2856fa947ae155f60b6400f"
+      },
+      "canonical": {
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/postimages/v0.3.0/en/tablet-1024x768/journey-e-polypropylene-simulated-dossier.webp",
+        "sha256": "5b22a23c86783d08003c3edd3ed739b75029516414cde801e8b5019e0ddc460d",
+        "decoded_rgb_sha256": "a6583e0eed8765b2feaa54cafad0310e812cc866a2856fa947ae155f60b6400f"
+      },
+      "dimensions": [
+        1024,
+        768
+      ],
+      "initial_leftmost_bytes_identical": true,
+      "both_pngs_equal_canonical_decoded_rgb": true,
+      "phase_records_identical": true,
+      "fonts": "loaded",
+      "scrollX_both": [
+        0,
+        0
+      ],
+      "scrollWidth_both": [
+        1024,
+        1024
+      ],
+      "protected_items": [
+        "state",
+        "title",
+        "identity",
+        "product",
+        "warning_ar",
+        "warning_en"
+      ],
+      "all_protected_element_and_text_rects_within_physical_viewport": true,
+      "observed_state": "REJECT",
+      "native_observation": {
+        "tool": "tools.view_image",
+        "detail": "original",
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/en/tablet-1024x768/journey-e-polypropylene-simulated-dossier-initial.png",
+        "session_sequence": 14,
+        "actual_call_completed": true,
+        "coverage": "Fresh native initial PNG; leftmost is covered by verified byte identity, canonical by exact decoded RGB/dimensions. No separate leftmost or WebP view claimed.",
+        "notes": "English simulated REJECT heading fits the tablet width. Both full warning strings, unchanged public REJECT and56/104.49 cards are legible; remaining metric cards continue below the viewport.",
+        "findings": []
+      }
+    },
+    {
+      "bounds": {
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/en/tablet-1024x768/journey-e-steel-public-dossier.json",
+        "sha256": "69e6cba18d7e021f4e6944c590eaba71503e5062d976bf6de2b39f63ada40437"
+      },
+      "initial": {
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/en/tablet-1024x768/journey-e-steel-public-dossier-initial.png",
+        "sha256": "59ef713f58e989cdb3ab019360781bd5780570df63c09c604251d20517d1526a",
+        "decoded_rgb_sha256": "636a5a20e4ad1e532f6a8a54105a3e7a15150e7b3042d04195273f9617549f4c"
+      },
+      "leftmost": {
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/en/tablet-1024x768/journey-e-steel-public-dossier-leftmost.png",
+        "sha256": "59ef713f58e989cdb3ab019360781bd5780570df63c09c604251d20517d1526a",
+        "decoded_rgb_sha256": "636a5a20e4ad1e532f6a8a54105a3e7a15150e7b3042d04195273f9617549f4c"
+      },
+      "canonical": {
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/postimages/v0.3.0/en/tablet-1024x768/journey-e-steel-public-dossier.webp",
+        "sha256": "80ca69887816447e7b81a269cfe75e33d842c13e0291ca2128ea08531d9c7ef4",
+        "decoded_rgb_sha256": "636a5a20e4ad1e532f6a8a54105a3e7a15150e7b3042d04195273f9617549f4c"
+      },
+      "dimensions": [
+        1024,
+        768
+      ],
+      "initial_leftmost_bytes_identical": true,
+      "both_pngs_equal_canonical_decoded_rgb": true,
+      "phase_records_identical": true,
+      "fonts": "loaded",
+      "scrollX_both": [
+        0,
+        0
+      ],
+      "scrollWidth_both": [
+        1024,
+        1024
+      ],
+      "protected_items": [
+        "state",
+        "title",
+        "identity",
+        "product"
+      ],
+      "all_protected_element_and_text_rects_within_physical_viewport": true,
+      "observed_state": "INVESTIGATE",
+      "native_observation": {
+        "tool": "tools.view_image",
+        "detail": "original",
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/en/tablet-1024x768/journey-e-steel-public-dossier-initial.png",
+        "session_sequence": 15,
+        "actual_call_completed": true,
+        "coverage": "Fresh native initial PNG; leftmost is covered by verified byte identity, canonical by exact decoded RGB/dimensions. No separate leftmost or WebP view claimed.",
+        "notes": "English INVESTIGATE title and long steel product fit. Four unavailable/not-calculable cards are readable and condition columns wrap within bounds; reference rows are below the viewport.",
+        "findings": []
+      }
+    },
+    {
+      "bounds": {
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/en/tablet-1024x768/journey-e-steel-simulated-dossier.json",
+        "sha256": "2402823f3ff4e1ddd8d5da7876eec277a220f931ae82c395d54ed1d7474bee32"
+      },
+      "initial": {
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/en/tablet-1024x768/journey-e-steel-simulated-dossier-initial.png",
+        "sha256": "2945cc7aa4016ca67a42227bcadf8438193e87b62b2dba0e82739dfddabcf7e9",
+        "decoded_rgb_sha256": "bd067e1467b33574334da1d02c5b1e7a44dc94d7389a122cbfac582321c7a111"
+      },
+      "leftmost": {
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/en/tablet-1024x768/journey-e-steel-simulated-dossier-leftmost.png",
+        "sha256": "2945cc7aa4016ca67a42227bcadf8438193e87b62b2dba0e82739dfddabcf7e9",
+        "decoded_rgb_sha256": "bd067e1467b33574334da1d02c5b1e7a44dc94d7389a122cbfac582321c7a111"
+      },
+      "canonical": {
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/postimages/v0.3.0/en/tablet-1024x768/journey-e-steel-simulated-dossier.webp",
+        "sha256": "1797d85c3f3f0fab379e4ab3ec1ddede47dbc36c79c59805da8c87fcb6c37c47",
+        "decoded_rgb_sha256": "bd067e1467b33574334da1d02c5b1e7a44dc94d7389a122cbfac582321c7a111"
+      },
+      "dimensions": [
+        1024,
+        768
+      ],
+      "initial_leftmost_bytes_identical": true,
+      "both_pngs_equal_canonical_decoded_rgb": true,
+      "phase_records_identical": true,
+      "fonts": "loaded",
+      "scrollX_both": [
+        0,
+        0
+      ],
+      "scrollWidth_both": [
+        1024,
+        1024
+      ],
+      "protected_items": [
+        "state",
+        "title",
+        "identity",
+        "product",
+        "warning_ar",
+        "warning_en"
+      ],
+      "all_protected_element_and_text_rects_within_physical_viewport": true,
+      "observed_state": "ADVANCE",
+      "native_observation": {
+        "tool": "tools.view_image",
+        "detail": "original",
+        "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/canonical-execution/capture/artifacts-e2e/dossier-bounds/en/tablet-1024x768/journey-e-steel-simulated-dossier-initial.png",
+        "session_sequence": 16,
+        "actual_call_completed": true,
+        "coverage": "Fresh native initial PNG; leftmost is covered by verified byte identity, canonical by exact decoded RGB/dimensions. No separate leftmost or WebP view claimed.",
+        "notes": "English simulated ADVANCE title fits. Two-line explanatory copy, both warning strings and unchanged public INVESTIGATE do not collide.104/57.509 cards are visible; remaining metrics continue below the viewport.",
+        "findings": []
+      }
+    }
+  ],
+  "coverage_and_limits": [
+    "All16 distinct current initial PNGs were actually viewed natively at original size. Exact byte equality extends those observations to the16 leftmost PNGs; decoded RGB/dimension identity joins the corresponding16 canonical WebPs.",
+    "These are initial browser viewports, not full-page captures or printed-page acceptance. Content below the viewport is not claimed visible; all protected heading/identity/product/warning text rectangles are within this physical viewport.",
+    "No geometric anomaly was found in the assigned cohort. Root separately reviews4 changed old/new pairs and complete128-context coverage; Claude must independently adjudicate canonical acceptance before pins.",
+    "Freshness is proved by the preserved launch/mtime records and matching copied-file mtimes/hashes, not by byte differences from old artifacts.",
+    "No source/index/Git/service/browser/capture/codec mutation or execution was performed by this reviewer. Only this external observation JSON is written."
+  ],
+  "preparation_diagnostics": [
+    "Read-only inspection initially attempted slicing a dict in POSTCHECKS; corrected to mapping iteration without changing files.",
+    "System python3 had no Pillow; existing bound project interpreter was used with -B and no installation/sync. Neither preparation error is a product/test result."
+  ],
+  "assumptions": [
+    "The retained successful stock producer record accurately attributes runtime assertions; this supporting review did not rerun the browser."
+  ],
+  "sanad": {
+    "direct": "All50artifact hashes/sizes/mtimes; all16raw JSON records;32PNG/16WebP decodedRGB and dimensions;16 actual original-detail view_image returns; helper hashes and callsite source.",
+    "attributed": "Capture runtime4passes and operation approval are retained root/Claude records, not this agent execution or approval.",
+    "inference": "Exact equal initial/leftmost and canonical pixels make one fresh native view per distinct initial image sufficient for assigned visual coverage; no geometry anomaly observed."
+  },
+  "muhasabah": {
+    "gate": "PASS_SUPPORTING_RECORD_ONLY",
+    "provenance": "Every observation carries exact path/hash and actual view attribution.",
+    "scope": "No own approval, no fabricated32views, no broader product/finalcandidate/delivery/Aura claim.",
+    "remaining": "Independent Claude canonical adjudication and all later gates remain pending."
+  }
+}

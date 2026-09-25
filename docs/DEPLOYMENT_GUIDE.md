@@ -4,6 +4,14 @@
 
 The supported MVP targets are WSL, native Linux, and Docker. The package is an offline controlled demonstration, not a production authorization system. It uses local immutable JSON/YAML/DOCX/Markdown assets and has no database, migration, queue, cloud service, external API dependency, authentication, or write endpoint.
 
+The release identities and no-database description below record the original v0.2.0 deployment. Later graph/Aura operation is governed separately by the current operator records; do not infer current mirror contents from this historical release section. S19's dossier projection itself requires no graph service or new deployment component.
+
+### S19 export deployment boundary
+
+The approved S19 implementation retains the existing JSON/HTML dossier routes, local fonts and same-origin assets. DecisionDossier2.0.0 adds the structured evidence pack without changing engine decisions; UI catalogue1.7.0 is a separate governed presentation version. Native Chromium Print / Save PDF runs in the user's browser, with A4/print backgrounds, the browser’s automatic **Headers and footers** option turned off, and both policy labels on every simulated page. No server PDF endpoint, Chromium process in the API, new runtime package, remote font or source fetch is introduced. Deploy the reviewed static `dossier-actions.js` and scoped print CSS alongside the ordinary application assets.
+
+The proof-only PDF renderer overlay is an external verification tool, not an application dependency or image addition. Deployment acceptance requires the exact S19 candidate's JSON/HTML/PDF, rendered accessibility, canonical comparison, two isolated full CI roots and hosted checks/review; current S19 implementation is not yet delivered. Full required Aura verification is a separate S21 operation against the final accepted projection, including the real EN/AR frontend. The graph mirror remains subordinate to canonical artifacts. No release tag or production application deployment is authorized by these export instructions.
+
 ## Release identity
 
 - Python package/API release: `0.2.0`;
