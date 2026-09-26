@@ -1,0 +1,150 @@
+{
+  "status": "EXACT_EXPECTED_TUPLES_CORROBORATED",
+  "basis": "Preserved actual S19 R1 bound tuples; independently specified F2 replacement at rows1,2,6 only. Other9tuples unchanged. Actual raw payload plus unmodified labels.js/catalogue1086-1087,2192-2193 corroborates bothlocale literal lists. No geometry acceptance claimed.",
+  "expected_tuples": {
+    "ar": [
+      {
+        "label": "مقيد بواسطة",
+        "source": "DEC-SAU-H0-721049-public-ENGINE-RUN",
+        "target": "INT-SAU-H0-721049-route-5"
+      },
+      {
+        "label": "مقيد بواسطة",
+        "source": "DEC-SAU-H0-721049-public-ENGINE-RUN",
+        "target": "SAU-H0-721049"
+      },
+      {
+        "label": "مقيد بواسطة",
+        "source": "DEC-SAU-H0-721049-public-ENGINE-RUN",
+        "target": "SAU-H0-721049"
+      },
+      {
+        "label": "مقيد بواسطة",
+        "source": "DEC-SAU-H0-721049-public-ENGINE-RUN",
+        "target": "SPEC-SAU-H0-721049-TARGET"
+      },
+      {
+        "label": "مقيد بواسطة",
+        "source": "DEC-SAU-H0-721049-public-ENGINE-RUN",
+        "target": "SPEC-SAU-H0-721049-TARGET"
+      },
+      {
+        "label": "مسند بدليل",
+        "source": "SAU-H0-721049",
+        "target": "S-UNICOIL-EPD"
+      },
+      {
+        "label": "مسند بدليل",
+        "source": "SAU-H0-721049",
+        "target": "S-UNICOIL-EPD"
+      },
+      {
+        "label": "مسند بدليل",
+        "source": "SAU-H0-721049",
+        "target": "S-UNICOIL-EPD"
+      },
+      {
+        "label": "مسند بدليل",
+        "source": "SAU-H0-721049",
+        "target": "S-UNICOIL-SPEC"
+      },
+      {
+        "label": "مسند بدليل",
+        "source": "SAU-H0-721049",
+        "target": "S-UNICOIL-SPEC"
+      },
+      {
+        "label": "مسند بدليل",
+        "source": "SAU-H0-721049",
+        "target": "S-WITS-721049"
+      },
+      {
+        "label": "مسند بدليل",
+        "source": "SPEC-SAU-H0-721049-TARGET",
+        "target": "S-WITS-721049"
+      }
+    ],
+    "en": [
+      {
+        "label": "Constrained by",
+        "source": "DEC-SAU-H0-721049-public-ENGINE-RUN",
+        "target": "INT-SAU-H0-721049-route-5"
+      },
+      {
+        "label": "Constrained by",
+        "source": "DEC-SAU-H0-721049-public-ENGINE-RUN",
+        "target": "SAU-H0-721049"
+      },
+      {
+        "label": "Constrained by",
+        "source": "DEC-SAU-H0-721049-public-ENGINE-RUN",
+        "target": "SAU-H0-721049"
+      },
+      {
+        "label": "Constrained by",
+        "source": "DEC-SAU-H0-721049-public-ENGINE-RUN",
+        "target": "SPEC-SAU-H0-721049-TARGET"
+      },
+      {
+        "label": "Constrained by",
+        "source": "DEC-SAU-H0-721049-public-ENGINE-RUN",
+        "target": "SPEC-SAU-H0-721049-TARGET"
+      },
+      {
+        "label": "Supported by evidence",
+        "source": "SAU-H0-721049",
+        "target": "S-UNICOIL-EPD"
+      },
+      {
+        "label": "Supported by evidence",
+        "source": "SAU-H0-721049",
+        "target": "S-UNICOIL-EPD"
+      },
+      {
+        "label": "Supported by evidence",
+        "source": "SAU-H0-721049",
+        "target": "S-UNICOIL-EPD"
+      },
+      {
+        "label": "Supported by evidence",
+        "source": "SAU-H0-721049",
+        "target": "S-UNICOIL-SPEC"
+      },
+      {
+        "label": "Supported by evidence",
+        "source": "SAU-H0-721049",
+        "target": "S-UNICOIL-SPEC"
+      },
+      {
+        "label": "Supported by evidence",
+        "source": "SAU-H0-721049",
+        "target": "S-WITS-721049"
+      },
+      {
+        "label": "Supported by evidence",
+        "source": "SPEC-SAU-H0-721049-TARGET",
+        "target": "S-WITS-721049"
+      }
+    ]
+  },
+  "run_row_indexes": {
+    "ar": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "en": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  "old_token": "ENGINE-6b54371e99f3",
+  "new_token": "ENGINE-bd1cbfb71689",
+  "old_binding_sha256": "ec459dc2edcc2b170b73f62edb8f6cc9a1d7f009113197e841306f663865a180",
+  "inspection_correction": "First coordinator observer incorrectly assumed label fields in rawedges and stopped on None label. Inspected actual renderer label map/catalogue, then reran this readonly comparison. Not a productfailure or capture attempt."
+}

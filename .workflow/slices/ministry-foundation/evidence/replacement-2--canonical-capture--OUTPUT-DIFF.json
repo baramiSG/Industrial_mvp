@@ -1,0 +1,67 @@
+{
+  "manifest_sha256": "10f39fe2d46c69ffac105240ee8f8fd3dd69438751b34b01100d74a477d438ea",
+  "source_hashes_exact": true,
+  "images": 128,
+  "unchanged_images": 126,
+  "changed_images": [
+    {
+      "path": "ar/desktop-1440x900/journey-i-graph-evidence-to-change.webp",
+      "old_sha256": "40bfff0e75086560fc39338359d4c73f125623931cdc54b06244da8d4c4ed447",
+      "new_sha256": "86e0368622205ee6303cadd1b56b9d649be027de525edf5d4b4a3206c94d16e7",
+      "old_bytes": 95094,
+      "new_bytes": 94994
+    },
+    {
+      "path": "en/desktop-1440x900/journey-i-graph-evidence-to-change.webp",
+      "old_sha256": "0425c4952c59eed400140a3ef6da160babd4f551a61d900eea87b67b3d3b3860",
+      "new_sha256": "b235c599ab2c1119b33c13726955461ac6bb1592a284110bcc0ff334e387326b",
+      "old_bytes": 101934,
+      "new_bytes": 102054
+    }
+  ],
+  "total_bytes": 11743240,
+  "max_bytes": 153438,
+  "metrics": [
+    {
+      "path": "ar/desktop-1440x900/journey-i-graph-evidence-to-change.webp",
+      "bbox": [
+        95,
+        802,
+        551,
+        900
+      ],
+      "metrics": {
+        "dimensions": [
+          1440,
+          900
+        ],
+        "significant_pixels": 3710,
+        "total_pixels": 1296000,
+        "significant_pixel_ratio": 0.002863,
+        "mean_absolute_channel_error": 0.201518,
+        "passes": false
+      }
+    },
+    {
+      "path": "en/desktop-1440x900/journey-i-graph-evidence-to-change.webp",
+      "bbox": [
+        1089,
+        802,
+        1344,
+        900
+      ],
+      "metrics": {
+        "dimensions": [
+          1440,
+          900
+        ],
+        "significant_pixels": 2020,
+        "total_pixels": 1296000,
+        "significant_pixel_ratio": 0.001559,
+        "mean_absolute_channel_error": 0.107352,
+        "passes": false
+      }
+    }
+  ],
+  "inspection_note": "Initial read-only inspector used source_hashes instead of actual source_tree key and failed before writes; corrected to existing manifest schema. Capture itself passed once."
+}

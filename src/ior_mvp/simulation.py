@@ -166,33 +166,26 @@ def simulation_capability(
         raise EvidenceIntegrityError(
             "scenario.synthetic_inputs.hard_gates must be a mapping or list"
         )
+    decision_gates = inputs.get("decision_specific_hard_gates")
     public_capability = public_case["domestic_capability"]
     raw_unresolved = public_capability.get("unresolved_hard_gates", [])
-    decision_gates = inputs.get("decision_specific_hard_gates")
+    required_names = [
+        row["name"]
+        for row in raw_unresolved
+        if isinstance(row, dict) and isinstance(row.get("name"), str)
+    ]
     if isinstance(decision_gates, dict):
-        remaining = [
-            row["name"]
-            for row in raw_unresolved
-            if isinstance(row, dict)
-            and isinstance(row.get("name"), str)
-            and (
-                row["name"] not in decision_gates
-                or not str(decision_gates[row["name"]]).lower().startswith(
-                    "resolved"
-                )
-            )
-        ]
+        declarations: dict[str, str | None] | list[str] = {
+            name: decision_gates.get(name) for name in required_names
+        }
+        declarations.update(decision_gates)
     else:
-        remaining = [
-            row["name"]
-            for row in raw_unresolved
-            if isinstance(row, dict) and isinstance(row.get("name"), str)
-        ]
+        declarations = required_names
     return evaluate_capability(
         public_case["opportunity"]["sector_profile"],
         states,
         hard_gates,
-        remaining,
+        declarations,
     )
 
 

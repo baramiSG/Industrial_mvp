@@ -4,6 +4,7 @@ import math
 from typing import Any
 
 from .config import sector_profiles_config, thresholds_config
+from .gate_status import GateStatus, classify_gate_status
 
 
 def effective_qualified_capacity(
@@ -17,6 +18,56 @@ def effective_qualified_capacity(
     if nameplate < 0 or any(value < 0 or value > 1 for value in values):
         raise ValueError("Capacity factors must be between 0 and 1 and nameplate must be non-negative")
     return nameplate * availability * yield_rate * qualification_share * market_allocation_share
+
+
+def _gate_names(declarations: list[Any]) -> list[str]:
+    """Read gate names from a name list or public unresolved rows."""
+    names: list[str] = []
+    for item in declarations:
+        if isinstance(item, str):
+            names.append(item)
+        elif isinstance(item, dict) and isinstance(item.get("name"), str):
+            names.append(item["name"])
+    return names
+
+
+def _decision_gate_lists(
+    declarations: list[str] | dict[str, str | None] | None,
+) -> tuple[dict[str, str], list[str], list[str]]:
+    """Classify typed declarations; a name list stays unresolved."""
+    if isinstance(declarations, dict):
+        statuses = {
+            name: classify_gate_status(raw).value
+            for name, raw in declarations.items()
+        }
+        unresolved = [
+            name
+            for name, status in statuses.items()
+            if status == GateStatus.UNAVAILABLE.value
+        ]
+        known = [
+            name
+            for name, status in statuses.items()
+            if status == GateStatus.KNOWN_FAILURE.value
+        ]
+        return statuses, unresolved, known
+    names = [
+        name for name in (declarations or []) if isinstance(name, str)
+    ]
+    return {}, names, []
+
+
+def _unique_names(*groups: list[str]) -> list[str]:
+    """Keep the first occurrence of each gate name."""
+    seen: set[str] = set()
+    unique: list[str] = []
+    for group in groups:
+        for name in group:
+            if name in seen:
+                continue
+            seen.add(name)
+            unique.append(name)
+    return unique
 
 
 def publication_allowed(
@@ -48,7 +99,7 @@ def evaluate_capability(
     sector_profile: str,
     states: dict[str, int | str],
     hard_gates: list[str] | dict[str, Any],
-    decision_specific_hard_gates: list[str] | None = None,
+    decision_specific_hard_gates: list[str] | dict[str, str | None] | None = None,
 ) -> dict[str, Any]:
     profiles = sector_profiles_config()["profiles"]
     if sector_profile not in profiles:
@@ -102,8 +153,11 @@ def evaluate_capability(
 
     expected_profile_gates = list(profile["hard_gates"])
     unresolved_profile: list[str] = []
-    known_failures: list[str] = []
+    profile_known: list[str] = []
     profile_gate_status: dict[str, str] = {}
+    decision_status, unresolved_decision, decision_known = (
+        _decision_gate_lists(decision_specific_hard_gates)
+    )
     if isinstance(hard_gates, dict):
         extras = sorted(set(hard_gates) - set(expected_profile_gates))
         if extras:
@@ -111,53 +165,25 @@ def evaluate_capability(
                 "Unknown configured profile hard gate(s): "
                 + ", ".join(extras)
             )
-        resolved_prefixes = (
-            "resolved",
-            "not applicable",
-            "not_applicable",
-        )
         for name in expected_profile_gates:
-            value = hard_gates.get(name)
-            if isinstance(value, dict):
-                status = value.get("status")
-                if status == "RESOLVED":
-                    profile_gate_status[name] = "RESOLVED"
-                elif status == "KNOWN_FAILURE":
-                    profile_gate_status[name] = "KNOWN_FAILURE"
-                    known_failures.append(name)
-                else:
-                    profile_gate_status[name] = "UNAVAILABLE"
-                    unresolved_profile.append(name)
-            elif value is not None and str(value).casefold().startswith(
-                resolved_prefixes
-            ):
-                profile_gate_status[name] = "RESOLVED"
-            elif (
-                value is not None
-                and str(value).casefold().startswith("known_failure")
-            ):
-                profile_gate_status[name] = "KNOWN_FAILURE"
-                known_failures.append(name)
-            else:
-                profile_gate_status[name] = "UNAVAILABLE"
+            status = classify_gate_status(hard_gates.get(name))
+            profile_gate_status[name] = status.value
+            if status == GateStatus.KNOWN_FAILURE:
+                profile_known.append(name)
+            elif status == GateStatus.UNAVAILABLE:
                 unresolved_profile.append(name)
-        unresolved_decision = list(
-            decision_specific_hard_gates or []
-        )
     else:
         profile_gate_status = {
-            name: "UNAVAILABLE"
+            name: GateStatus.UNAVAILABLE.value
             for name in expected_profile_gates
         }
         unresolved_profile = list(expected_profile_gates)
         unresolved_decision = [
-            *hard_gates,
-            *(decision_specific_hard_gates or []),
+            *_gate_names(hard_gates),
+            *unresolved_decision,
         ]
-    unresolved = [
-        *unresolved_profile,
-        *unresolved_decision,
-    ]
+    unresolved = _unique_names(unresolved_profile, unresolved_decision)
+    known_failures = _unique_names(profile_known, decision_known)
 
     route_publishable = publication_allowed(
         d_star,
@@ -168,7 +194,7 @@ def evaluate_capability(
     )
     band = route_band(d_star, capability_cfg["route_bands"]) if route_publishable else None
 
-    return {
+    result = {
         "sector_profile": sector_profile,
         "profile_label": profile["label"],
         "dimensions": dimensions,
@@ -192,3 +218,6 @@ def evaluate_capability(
             else "D* is not published because known coverage or hard-gate controls do not pass."
         ),
     }
+    if isinstance(decision_specific_hard_gates, dict):
+        result["decision_specific_hard_gates"] = decision_status
+    return result

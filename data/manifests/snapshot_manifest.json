@@ -1,6 +1,6 @@
 {
   "manifest_version": "1.0",
-  "generated_on": "2026-09-25",
+  "generated_on": "2026-09-26",
   "policy": "Golden cases and synthetic scenarios run only against pinned files in this manifest; case derivation inputs and retained superseded operating-configuration bytes and the governed graph projection are also hash-pinned.",
   "files": [
     {
@@ -3530,7 +3530,7 @@
     },
     {
       "path": "data/graph/current.json",
-      "sha256": "3a0385fe44b21b6777cecb159b58a724957121a13c19df632250428e5bfdaf00",
+      "sha256": "259e6512cc4d6324b9b78dcd7d606ce45e32c09da83f6536bdb06aeee390939b",
       "bytes": 139
     },
     {
@@ -3542,6 +3542,16 @@
       "path": "data/graph/projections/GRAPH-SAU-2026-09-12-3ce241f08f7a/projection.json",
       "sha256": "b749db36715c56b9c077d5d10627a925845b9688ce57b678b26747a965440009",
       "bytes": 1739788
+    },
+    {
+      "path": "data/graph/projections/GRAPH-SAU-2026-09-12-4152824cfa67/manifest.json",
+      "sha256": "47134bec8fd162778037cab70595f84f45f1306c87f95da70aac76b36b419440",
+      "bytes": 228
+    },
+    {
+      "path": "data/graph/projections/GRAPH-SAU-2026-09-12-4152824cfa67/projection.json",
+      "sha256": "ab5890d7af3037e548827b17d498a19ebc221eca5df5941f55b18e3a978a1e60",
+      "bytes": 2234288
     },
     {
       "path": "data/graph/projections/GRAPH-SAU-2026-09-12-461bf4840962/manifest.json",
@@ -3622,6 +3632,16 @@
       "path": "data/graph/projections/GRAPH-SAU-2026-09-12-fbc93afb3c6e/projection.json",
       "sha256": "b9920d9e64eb46eb230e7634b695c0d7117c453693d0d8d2917c0fde9695f87c",
       "bytes": 2215695
+    },
+    {
+      "path": "data/graph/projections/GRAPH-SAU-2026-09-12-fd70279732aa/manifest.json",
+      "sha256": "0d545345972e18b5657c2515b7db4b419eb388bd4e9a540de8e5207f6aec904f",
+      "bytes": 228
+    },
+    {
+      "path": "data/graph/projections/GRAPH-SAU-2026-09-12-fd70279732aa/projection.json",
+      "sha256": "1b37a59f13d26445012c1c6dae0ece11c43e89c366ec17951244b3bddc3d35a9",
+      "bytes": 2234288
     },
     {
       "path": "config/history/acquisition_sources.v1-1.3.0.yaml",

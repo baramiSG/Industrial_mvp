@@ -305,3 +305,22 @@ The "Live Aura is a separate obligation" sentence above is the 2026-09-25 checkp
 Current retained-open list: **KL-133**, **KL-134**, **KL-135**, **KL-136**, **KL-85**, **KL-107**, missing demand and specification evidence, PDF-UA, the unknown root2 host-restart cause, the two non-blocking wording preferences, the unknown Aura session-expiry cause, the unknown readonly-execution-1 interruption cause, and independent review plus delivery of this additive record. S21 and complete MVP acceptance stay outside this closure. Attempt 4 remains failed. Readonly-execution-1 remains interrupted. The injected connection failure is not an Aura outage.
 
 **L1 remains.** This record does not claim live browser verification of Class-D labels on a synthetic passport. All selected current-case browser passports were public, including simulated journeys. Class-D graph-element EN/AR labels were asserted by the restored API and sampled in images; public isolation was checked. Synthetic rows stay Class D.
+
+### Ministry F source is ahead of generated artifacts — 2026-09-26
+
+The stored graph, manifests and visual pins still describe the pre-correction source. Integrity and graph-current checks that compare this source with those artifacts are expected to fail until an authorized generation. That failure is not a skipped gate and is not claimed as a pass. KL-133 through KL-136, KL-85, KL-107 and the other retained-open items above stay open.
+
+
+### Current delivery and Ministry F verification — 2026-09-26
+
+The earlier records-publication status is historical. [PR41](https://github.com/baramiSG/Industrial_mvp/pull/41) merged as `bd7c64eddd760db22d073784ef66d82c7244e906`; allsix required jobs succeeded in PR run36215521148 and main run36218769857. Accepted S19/Aura results and their limitations are retained.
+
+The reviewed Ministry F correction now has its single generated successor `GRAPH-SAU-2026-09-12-fd70279732aa` / `ENGINE-bd1cbfb71689`,925nodes/1045edges,732snapshot members and20authority members. Generation/integrity/scenarios/reconstruction/graph validation/check passed. Focused domain and42graph-browser/4affected-PDF checks passed. Canonical capture changed only the four evidence-to-change graph images;124others are byte-identical. See the [F evidence record](../.workflow/slices/ministry-foundation/test_evidence.md). No method formula, scenario, public decision, reference economics or UI design changed. Missing required gates remain unknown, independently declared scopes remain distinct, and broad evidence needs target Product.
+
+Status: implementation verification in progress. Final exact-candidate fullpytest/R1, Claude implementation review, delegated implementation acceptance and F GitHub delivery remain pending. Earlier source-ahead-generation and blanket local make-ci wording is superseded by this execution checkpoint and the recorded proportionate-verification instruction. F Aura is not loaded. Company discovery and the Ministry journey follow delivered F; S20 is not started and complete-MVP acceptance is not claimed.
+
+### Current replacement candidate — 2026-09-26
+
+The preceding first-generation F checkpoint is historical. An unchanged public API fixture failed at the first exact-candidate gate. The smallest correction restores the public capability payload shape while retaining typed simulated gate statuses. The fixture and95 focused regressions now pass;66 read-only API requests across11 cases and two roots corroborate the public analysis/UI/dossier shape. This is a corrected implementation, not accepted delivery.
+
+Replacement graph `GRAPH-SAU-2026-09-12-4152824cfa67` / `ENGINE-64e24689a59f` retains925 nodes and1,045 edges with unchanged meaning after generated identities are normalized. All seven generation checks passed. Snapshot membership is734, preserving the earlier immutable projection pair. The replacement capture and final exact-candidate gates must bind this source; earlier identity-bound receipts are historical. Unchanged graph functionality and four affected PDF layout receipts remain applicable. Claude's implementation verdict, delegated acceptance and required hosted CI remain gates before delivery. The evidence record names the exact results and retained failure. No F Aura load or complete-MVP acceptance is claimed.

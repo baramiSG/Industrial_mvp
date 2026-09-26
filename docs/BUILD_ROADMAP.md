@@ -352,3 +352,22 @@ The earlier "verification pending" sentence is the pre-delivery checkpoint. Task
 The sentence that leaves the live Aura checkpoint required is the 2026-09-25 status. The checkpoint itself now has Actual Claude approval `c412150d99c92c6f0e5b42cac1d215f90afb2bd02625bc89a9751fdbd9e96dfa` and separate delegated acceptance `a59e702c4658c15708544373bbbc2c5c390fa2ab708bb151fa46d6807db30e8a`, for main `6962105b4bee575a6271d08fe892144c6e6c1063` and tree `7c25b4616679d61f173f3d9072e3240e1a2a166b`. The accepted result is restored after a process-local injected fault, with attempt 4 still failed and readonly-execution-1 still interrupted. It is not continuous availability and it is not an Aura outage. Session-expiry and run-1 causes remain unknown.
 
 The published subset is the [Aura evidence index](../.workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/aura/AURA-EVIDENCE-INDEX.md). S19 is still not complete: this additive record needs its own exact-tree review, whitespace ruling, delivery acceptance, hosted checks and green main. S20 and S21 still follow their own dependencies. S21 is not closed by this checkpoint. No release tag is claimed.
+
+### Ministry F — constraints and graph needs — 2026-09-26
+
+F is the approved combined hard-gate and broad-need correction on `slice/ministry-foundation`. It precedes company discovery. Status: implementation in progress; verification for the new candidate pending. Generation, pins, review and delivery follow a later exact allocation. S20 is not started.
+
+
+### Current delivery and Ministry F verification — 2026-09-26
+
+The earlier records-publication status is historical. [PR41](https://github.com/baramiSG/Industrial_mvp/pull/41) merged as `bd7c64eddd760db22d073784ef66d82c7244e906`; allsix required jobs succeeded in PR run36215521148 and main run36218769857. Accepted S19/Aura results and their limitations are retained.
+
+The reviewed Ministry F correction now has its single generated successor `GRAPH-SAU-2026-09-12-fd70279732aa` / `ENGINE-bd1cbfb71689`,925nodes/1045edges,732snapshot members and20authority members. Generation/integrity/scenarios/reconstruction/graph validation/check passed. Focused domain and42graph-browser/4affected-PDF checks passed. Canonical capture changed only the four evidence-to-change graph images;124others are byte-identical. See the [F evidence record](../.workflow/slices/ministry-foundation/test_evidence.md). No method formula, scenario, public decision, reference economics or UI design changed. Missing required gates remain unknown, independently declared scopes remain distinct, and broad evidence needs target Product.
+
+Status: implementation verification in progress. Final exact-candidate fullpytest/R1, Claude implementation review, delegated implementation acceptance and F GitHub delivery remain pending. Earlier source-ahead-generation and blanket local make-ci wording is superseded by this execution checkpoint and the recorded proportionate-verification instruction. F Aura is not loaded. Company discovery and the Ministry journey follow delivered F; S20 is not started and complete-MVP acceptance is not claimed.
+
+### Current replacement candidate — 2026-09-26
+
+The preceding first-generation F checkpoint is historical. An unchanged public API fixture failed at the first exact-candidate gate. The smallest correction restores the public capability payload shape while retaining typed simulated gate statuses. The fixture and95 focused regressions now pass;66 read-only API requests across11 cases and two roots corroborate the public analysis/UI/dossier shape. This is a corrected implementation, not accepted delivery.
+
+Replacement graph `GRAPH-SAU-2026-09-12-4152824cfa67` / `ENGINE-64e24689a59f` retains925 nodes and1,045 edges with unchanged meaning after generated identities are normalized. All seven generation checks passed. Snapshot membership is734, preserving the earlier immutable projection pair. The replacement capture and final exact-candidate gates must bind this source; earlier identity-bound receipts are historical. Unchanged graph functionality and four affected PDF layout receipts remain applicable. Claude's implementation verdict, delegated acceptance and required hosted CI remain gates before delivery. The evidence record names the exact results and retained failure. No F Aura load or complete-MVP acceptance is claimed.

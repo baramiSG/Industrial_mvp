@@ -143,3 +143,16 @@ def test_s16b_live_2_1_preserves_exact_2_0_history(
         for key, value in live["synthetic_inputs"].items()
         if key != "shared_enabler"
     } == historical["synthetic_inputs"]
+
+
+def test_live_streptomycin_known_failure_declaration_is_unchanged() -> None:
+    path = ROOT / "data" / "synthetic" / "SYN-MINISTRY-STREPTOMYCIN-API-001.json"
+    scenario = json.loads(path.read_text(encoding="utf-8"))
+    declaration = (
+        "known failure: synthetic environmental-effluent gate is unsatisfiable"
+    )
+    assert scenario["synthetic_inputs"]["hard_gates"]["effluent"] == declaration
+    assert (
+        scenario["synthetic_inputs"]["decision_specific_hard_gates"]["effluent"]
+        == declaration
+    )

@@ -1,0 +1,82 @@
+{
+  "utc": "2026-09-26T06:43:58.815311+00:00",
+  "status": "DELEGATED_EXACT_SOURCE_ALLOCATION_RELEASED",
+  "operation": "MINISTRY-F-GENERATION-CAPTURE-1",
+  "authority": "Approved PLAN v3.1 F scope, Claude original and R0 approvals, recorded delegated P1/P2, mission mandate and latest proportionate workflow. No new method, architecture or operation recipe. This is delegated acceptance of exact local execution, not a new Claude implementation verdict.",
+  "plan_sha256": "f88287e2f71e54f6ac91ec4635edb1138fb17a160ff59c38e26a396e472868d8",
+  "source_binding_sha256": "428861f1625f9f886841a3e873124cb911de50f44dc1975831d08573c64f93d2",
+  "observation_sha256": "53413e6fa55186c4b6f27dccd9711881ff130036689d872b5142fbe5c2d52202",
+  "source_semantics_sha256": "54ec4d07d539cf908849d3f224468a1da13bab57e3dc9cc4e316e5a87df0a72d",
+  "correction_result_sha256": "f239c254ee33a2bf13d10f817c1242a08bdc6982128ffcf622d0a8ba5243c5aa",
+  "expected_projection": {
+    "projection_id": "GRAPH-SAU-2026-09-12-fd70279732aa",
+    "engine_run_id": "ENGINE-bd1cbfb71689",
+    "canonical_sha256": "1b37a59f13d26445012c1c6dae0ece11c43e89c366ec17951244b3bddc3d35a9",
+    "canonical_bytes": 2234288,
+    "counts": {
+      "edges": 1045,
+      "edges_by_type": {
+        "ADJACENT_TO": 18,
+        "CERTIFIED_TO": 2,
+        "CONSTRAINED_BY": 119,
+        "DEPENDS_ON": 198,
+        "HAS_CAPABILITY": 342,
+        "HAS_LINE": 11,
+        "PRODUCED_BY": 18,
+        "QUALIFIED_FOR": 11,
+        "REQUIRES_SPECIFICATION": 44,
+        "SUPPORTED_BY_EVIDENCE": 245,
+        "UNLOCKED_BY": 2,
+        "USED_IN": 22,
+        "USES_PROCESS": 13
+      },
+      "nodes": 925,
+      "nodes_by_label": {
+        "Application": 22,
+        "Capability": 342,
+        "Certification": 1,
+        "Company": 12,
+        "CustomerSegment": 11,
+        "Decision": 22,
+        "Evidence": 229,
+        "Intervention": 199,
+        "Plant": 14,
+        "Process": 7,
+        "Product": 11,
+        "ProductionLine": 11,
+        "Scenario": 11,
+        "Specification": 22,
+        "Standard": 10,
+        "TariffLine": 1
+      }
+    }
+  },
+  "input_count": 231,
+  "commands_once": [
+    "uv run --locked --extra dev --extra graph python -m ior_mvp.graph build",
+    "uv run --locked --extra dev python scripts/build_manifests.py"
+  ],
+  "immediate_checks": [
+    "scripts/verify_integrity.py",
+    "scripts/validate_scenarios.py",
+    "scripts/reconstruct_snapshot.py --all",
+    "python -m ior_mvp.graph validate",
+    "python -m ior_mvp.graph build --check"
+  ],
+  "write_envelope": [
+    "data/graph/current.json",
+    "data/manifests/snapshot_manifest.json",
+    "docs/authority/authority_hashes.json",
+    "docs/authority/00_AUTHORITY_MANIFEST.md",
+    "data/graph/projections/GRAPH-SAU-2026-09-12-fd70279732aa/projection.json",
+    "data/graph/projections/GRAPH-SAU-2026-09-12-fd70279732aa/manifest.json"
+  ],
+  "membership_proof": "Old730 snapshot members retained; exactly new immutable pair gives732. Authority remains20 with actual Core02/04/07/09 hash replacements. Verify outputs and table, no forced counts/identities.",
+  "capture": "One stock canonical update after exact generated-output corroboration, actual narrow live pins and render/source-closure checks; canonical inputs separately bound immediately before consuming capture. No refresh-until-pass.",
+  "producer_image_id": "sha256:938b534c8bac0f80012299fc0bba33c00d29f2ade02416bbc1df9d9c028f8112",
+  "producer_base_digest": "sha256:aa81288e738725378becba5b3e06cb0f3a7f012a610e87e8d767a090ea3f740d",
+  "stop": "First nonzero or unexpected identity, semantic, source/index/path/member delta stops. Preserve diagnostics and partial output; no automatic retry.",
+  "source_readiness": "6 meaningful correction RED failures;3+3GREEN;251affected finaltests with oldgeneratedidentitydeselected;198exactbasecasefieldcomparisons and22needprovenance equality;925/1045 validated in-memory. FourCoreintegrity mismatches are known pending manifest, not claimed passed.",
+  "pending": "Final-candidate domain/render/frozen-root checks, Claude substantive implementation review, separate delegated acceptance, PR/all6requiredCI/merge/main. Aura and completeMVP remain separate.",
+  "sanad_muhasabah": "PASS for bounded prospective execution with observed exact inputs; no generated output or final acceptance claimed."
+}
