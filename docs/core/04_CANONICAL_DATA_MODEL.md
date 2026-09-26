@@ -118,6 +118,25 @@ Core 07 §7.2. Free-text support claims are invalid. `domestic_capability`
 contains all configured `profile_hard_gates` with typed status and evidence
 references, plus decision-specific unresolved gates.
 
+Profile and decision-specific hard-gate declarations share one case-folded
+prefix classifier: `resolved`; `known failure` or `known_failure`; `not
+applicable` or `not_applicable`; otherwise `UNAVAILABLE`. The stored enums
+are `RESOLVED`, `KNOWN_FAILURE`, `NOT_APPLICABLE` and `UNAVAILABLE`. Raw
+declaration text stays in the source record. `NOT_APPLICABLE` is neither
+unresolved nor a known failure, and it is not relabeled `RESOLVED`. Public
+snapshot and case-brief validators continue to reject `NOT_APPLICABLE` as a
+public stored status. `unresolved_hard_gates` and `known_hard_gate_failures`
+are unique ordered unions. The profile and decision-specific unresolved
+lists both remain, including names that appear in both. Each profile and
+decision-specific declaration retains its own typed status, raw meaning,
+scope and evidence identifier; neither source confirms the other.
+
+Broad evidence needs for domestic supply or capability, a hard regulatory
+or process gate, and idle equivalent domestic capacity target the Product.
+A specification or route-economics need uses that node only when it already
+exists in the same scenario and synthetic partition. Reason and source
+links remain on the need.
+
 `hard_exclusion_inputs` carries the six typed methodology §4.2 input blocks.
 `decision_inputs` may carry target-specification demand, specification
 equivalence, route evidence for routes 1–7, and a named monitor trigger.

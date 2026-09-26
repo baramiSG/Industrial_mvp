@@ -184,6 +184,16 @@ D* publication requires all of the following:
 3. every decision-specific hard gate is resolved;
 4. no hard gate is a known failure/state `3`.
 
+"Resolved" in conditions 2 and 3 means the shared classifier returns
+`RESOLVED`. `NOT_APPLICABLE` stays `NOT_APPLICABLE`: it does not enter the
+unresolved or known-failure lists and does not block publication.
+`KNOWN_FAILURE` is not an unknown and blocks publication. `UNAVAILABLE`
+blocks publication. A decision-specific known-failure declaration keeps
+that status through simulation and capability. Summary identifiers are
+deduplicated; both scoped source lists remain. Methodology §6.4 states
+0/1/2/3/U, λ and Kmin are unchanged. The governing DOCX is unchanged by
+this correction (ADR-032, Manifest §7.4).
+
 An internal pre-gate value may be returned for diagnostics. The public
 `d_star` and route band remain null whenever a publication condition fails.
 A state `3` on a non-hard-gate dimension remains part of D* and does not by

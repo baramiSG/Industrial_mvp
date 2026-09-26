@@ -11,6 +11,7 @@ from typing import Any, Iterable, Mapping
 
 from ior_mvp import __version__
 from ior_mvp.capability import evaluate_capability
+from ior_mvp.gate_status import classify_gate_status
 from ior_mvp.config import PROJECT_ROOT
 from ior_mvp.evidence import (
     EvidenceIntegrityError,
@@ -867,7 +868,9 @@ def _project_public_case(
         )
 
     for gate, row in sorted(capability.get("profile_hard_gates", {}).items()):
-        status = row.get("status") if isinstance(row, Mapping) else row
+        status = classify_gate_status(
+            row.get("status") if isinstance(row, Mapping) else row
+        ).value
         ids = (
             [str(value) for value in row.get("evidence_ids", row.get("span_ids", []))]
             if isinstance(row, Mapping)
@@ -1017,6 +1020,18 @@ def _project_scenario(
             ),
         }
     )
+    decision_gates = scenario.get("synthetic_inputs", {}).get(
+        "decision_specific_hard_gates"
+    )
+    if isinstance(decision_gates, Mapping) and decision_gates:
+        props["decision_specific_hard_gates"] = {
+            gate: {
+                "status": classify_gate_status(declaration).value,
+                "declaration": declaration,
+                "evidence_id": f"{scenario_id}::decision_specific_hard_gates",
+            }
+            for gate, declaration in sorted(decision_gates.items())
+        }
     assembler.add_node(GraphNode("Scenario", scenario_id, props))
     for row in rows:
         evidence = _project_evidence_node(
@@ -1245,10 +1260,12 @@ def _project_scenario(
             discriminator=scenario_id,
         )
     for gate, status in sorted(inputs.get("hard_gates", {}).items()):
+        typed_status = classify_gate_status(status).value
+        evidence_ids = [f"{scenario_id}::hard_gates"]
         cap_id = capability_id(scenario_id, f"GATE-{gate}")
         cap_props = _base_properties(
             identity=cap_id,
-            evidence_id=f"{scenario_id}::hard_gates",
+            evidence_id=evidence_ids[0],
             as_of=as_of,
             evidence_class="D",
             synthetic_flag=True,
@@ -1256,13 +1273,15 @@ def _project_scenario(
             origin_kind="SCENARIO",
             origin_ref=scenario_id,
             projection_id=assembler.projection.projection_id,
+            evidence_ids=evidence_ids,
         )
         cap_props.update(
             {
                 "opportunity_id": product_id,
                 "capability_kind": "gate",
                 "gate": gate,
-                "status": status,
+                "status": typed_status,
+                "declaration": deepcopy(status),
             }
         )
         assembler.add_node(GraphNode("Capability", cap_id, cap_props))

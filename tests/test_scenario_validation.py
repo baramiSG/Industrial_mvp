@@ -613,6 +613,43 @@ def test_reconciliation_fixture_mutations_fail_exactly_one_check(
         require_scenario_reconciliation(report)
 
 
+def test_streptomycin_known_failure_text_survives_validation() -> None:
+    scenario = _scenario("SAU-H6-294120")
+    raw_profile = scenario["synthetic_inputs"]["hard_gates"]["effluent"]
+    raw_decision = scenario["synthetic_inputs"]["decision_specific_hard_gates"][
+        "effluent"
+    ]
+    from ior_mvp.scenario_contract import validate_simulation_contract
+
+    validate_simulation_contract(scenario)
+    assert scenario["synthetic_inputs"]["hard_gates"]["effluent"] == raw_profile
+    assert (
+        scenario["synthetic_inputs"]["decision_specific_hard_gates"]["effluent"]
+        == raw_decision
+    )
+    assert raw_profile == raw_decision
+    assert raw_profile.startswith("known failure:")
+
+
+def test_arbitrary_gate_prose_is_not_a_resolved_declaration() -> None:
+    scenario = _scenario("SAU-H0-721049")
+    scenario["synthetic_inputs"]["hard_gates"]["substrate_range"] = (
+        "approximately fine"
+    )
+    from ior_mvp.scenario_contract import project_simulated_case
+    from ior_mvp.simulation import capacity_projection, simulation_capability
+
+    public = get_public_case("SAU-H0-721049")
+    capacity, _, _, _ = capacity_projection(scenario["synthetic_inputs"])
+    capability = simulation_capability(public, scenario["synthetic_inputs"])
+    composite = project_simulated_case(public, scenario, capacity, capability)
+    status = composite["domestic_capability"]["profile_hard_gates"][
+        "substrate_range"
+    ]["status"]
+    assert status == "UNAVAILABLE"
+    assert "substrate_range" in capability["unresolved_hard_gates"]
+
+
 def test_s16b_reconciliation_appends_shared_enabler_check_eleven() -> None:
     report = reconcile_synthetic_scenario(
         _scenario("SAU-H0-721049"),

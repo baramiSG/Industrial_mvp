@@ -22,7 +22,7 @@ An autonomous agent may refactor implementation, but it may not remove a mapped 
 | 3 — Data Contract and Harmonisation | Preserve revision, tariff line, units, valuation, origin, entity, document and as-of date | `data_repository.py`, `acquisition/*`, snapshot schema, `05_DATA_SOURCES...` | integrity, acquisition and data-contract tests | snapshot ID, evidence ledger |
 | 4 — Candidate Rulebook | R0–R12; FULL/DEGRADED/DISABLED; falsifiable thresholds | `rules.py`, `thresholds.v1.yaml` | rule and boundary tests | R-rule ledger |
 | 5 — Test 1 Genuine Gap | Bilingual extraction, UV full/degraded controls, gap taxonomy | `ai_extraction.py`, `rules.py`, public snapshots | extraction golden, R4-D guard | extraction panel, gap statement |
-| 6 — Test 2 Capability | Effective capacity, sector profiles, K/U/D\*, hard gates, route bands | `capability.py`, `sector_profiles.v1.yaml` | capability tests | capability matrix |
+| 6 — Test 2 Capability | Effective capacity, sector profiles, K/U/D\*, hard gates, route bands | `gate_status.py`, `capability.py`, `sector_profiles.v1.yaml` | capability tests; ordered 22-branch gate lists | capability matrix |
 | 7 — Test 3 Intervention | Unsupported case, route order, S\*, national value, competition gates | `economics.py`, `decision_engine.py` | economics and steel simulation | economics/EVSI panel |
 | 8 — Strategic Value and Portfolio | Keep strategic value separate; avoid one ordinal list; project evidence-backed dependencies only | `graph.projection.build_repository_projection`, `graph.engine_feed`, decision output fields | graph artifact, Cypher-equality and state/route tests | four governed graph-view contracts and separate metrics |
 | 9 — EVSI | Research only when it can change a material decision | `economics.approximate_evsi` | EVSI unit test | highest-value next fact |
@@ -131,6 +131,13 @@ Publication controls:
 - every sector hard gate resolved;
 - no hard gate state 3;
 - K=0 → no D\*, `INVESTIGATE`.
+
+`gate_status.py` is the one prefix classifier. `NOT_APPLICABLE` does not
+block publication and is not relabeled `RESOLVED`. `KNOWN_FAILURE` blocks
+publication. Proof is the capability and scenario tests and the ordered
+gate lists in `tests/test_s17_generation.py`. Broad graph needs are
+projected by `graph/derived.py` onto the Product unless a validated
+in-scope specification or route target already exists.
 
 ### 4.5 Economics
 

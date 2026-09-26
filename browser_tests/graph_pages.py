@@ -406,11 +406,11 @@ def assert_graph_source_name_disclosures(page: Any, locale: Any) -> None:
 PASSPORT_SOURCE_COUNTS = {
     'SAU-H0-721049|public|adjacency|node': 30, 'SAU-H0-721049|public|adjacency|edge': 6,
     'SAU-H0-721049|public|route_blocking|empty': 0, 'SAU-H0-721049|public|shared_enabler|empty': 0,
-    'SAU-H0-721049|public|evidence_to_change|node': 24, 'SAU-H0-721049|public|evidence_to_change|edge': 7,
+    'SAU-H0-721049|public|evidence_to_change|node': 24, 'SAU-H0-721049|public|evidence_to_change|edge': 0,
     'SAU-H0-721049|simulated|adjacency|node': 25, 'SAU-H0-721049|simulated|adjacency|edge': 2,
     'SAU-H0-721049|simulated|route_blocking|node': 25, 'SAU-H0-721049|simulated|route_blocking|edge': 2,
     'SAU-H0-721049|simulated|shared_enabler|empty': 0,
-    'SAU-H0-721049|simulated|evidence_to_change|node': 25, 'SAU-H0-721049|simulated|evidence_to_change|edge': 9,
+    'SAU-H0-721049|simulated|evidence_to_change|node': 25, 'SAU-H0-721049|simulated|evidence_to_change|edge': 2,
     'SAU-H6-760711|public|adjacency|empty': 0, 'SAU-H6-760711|public|route_blocking|empty': 0,
     'SAU-H6-760711|public|shared_enabler|empty': 0,
     'SAU-H6-760711|public|evidence_to_change|node': 18, 'SAU-H6-760711|public|evidence_to_change|edge': 0,

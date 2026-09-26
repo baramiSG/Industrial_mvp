@@ -408,7 +408,16 @@ S12c entity proof verifies every declared Arabic/English span against its exact 
 - unknown penalty exact;
 - all five profiles and complete profile gates are validated;
 - public D\* gated;
-- simulated D\* published only after hard gates resolve.
+- simulated D\* published only after hard gates resolve;
+- one prefix classifier, and typed `NOT_APPLICABLE` is not `RESOLVED`;
+- the streptomycin simulation's only known failure is `effluent`;
+- public and simulated real decisions stay equal on all eleven cases;
+- broad evidence needs do not select a sorted capability.
+
+After authorized generation, the projection identity must derive from the
+admitted source inputs and match the authorized current projection. Pin the
+combined node and edge counts from independently enumerated output, and
+preserve prior immutable graph artifacts.
 
 ### Gate E — Economics
 

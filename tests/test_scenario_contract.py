@@ -308,3 +308,70 @@ def test_s16b_declaration_rejects_unknown_enabler_kind() -> None:
     ] = "UNSUPPORTED_KIND"
     with pytest.raises(EvidenceIntegrityError, match="enabler_kind"):
         scenario_contract.validate_simulation_contract(scenario)
+
+
+@pytest.mark.parametrize(
+    ("declaration", "expected_status"),
+    [
+        ("known_failure: effluent", "KNOWN_FAILURE"),
+        ("known failure: effluent", "KNOWN_FAILURE"),
+        ("not_applicable to this profile", "NOT_APPLICABLE"),
+        ("not applicable to resin production", "NOT_APPLICABLE"),
+        ("pending prose", "UNAVAILABLE"),
+    ],
+)
+def test_simulated_profile_gate_uses_one_prefix_classifier(
+    declaration: str,
+    expected_status: str,
+) -> None:
+    scenario = _steel()
+    public = get_public_case("SAU-H0-721049")
+    gate_name = next(iter(scenario["synthetic_inputs"]["hard_gates"]))
+    scenario["synthetic_inputs"]["hard_gates"][gate_name] = declaration
+    capacity, _, _, _ = capacity_projection(scenario["synthetic_inputs"])
+    capability = simulation_capability(public, scenario["synthetic_inputs"])
+    composite = project_simulated_case(public, scenario, capacity, capability)
+    status = composite["domestic_capability"]["profile_hard_gates"][gate_name][
+        "status"
+    ]
+    assert status == expected_status
+    assert scenario["synthetic_inputs"]["hard_gates"][gate_name] == declaration
+
+
+def test_streptomycin_known_failure_keeps_both_sources_and_is_not_unknown() -> None:
+    scenario = get_synthetic_scenario("SAU-H6-294120")
+    assert scenario is not None
+    scenario = deepcopy(scenario)
+    public = get_public_case("SAU-H6-294120")
+    public_rows = deepcopy(
+        public["domestic_capability"]["unresolved_hard_gates"]
+    )
+    raw_decision = scenario["synthetic_inputs"]["decision_specific_hard_gates"][
+        "effluent"
+    ]
+    capacity, _, _, _ = capacity_projection(scenario["synthetic_inputs"])
+    capability = simulation_capability(public, scenario["synthetic_inputs"])
+    composite = project_simulated_case(public, scenario, capacity, capability)
+    rows = composite["domestic_capability"]["unresolved_hard_gates"]
+    effluent = [row for row in rows if row["name"] == "effluent"]
+
+    assert capability["known_hard_gate_failures"] == ["effluent"]
+    assert capability["unresolved_hard_gates"] == []
+    assert len(effluent) == 1
+    assert effluent[0]["state"] == "known_failure"
+    assert (
+        composite["domestic_capability"]["profile_hard_gates"]["effluent"][
+            "status"
+        ]
+        == "KNOWN_FAILURE"
+    )
+    assert (
+        composite["domestic_capability"]["profile_hard_gates"]["effluent"][
+            "evidence_ids"
+        ]
+        == ["SYN-MINISTRY-STREPTOMYCIN-API-001::hard_gates"]
+    )
+    assert raw_decision == (
+        "known failure: synthetic environmental-effluent gate is unsatisfiable"
+    )
+    assert public["domestic_capability"]["unresolved_hard_gates"] == public_rows

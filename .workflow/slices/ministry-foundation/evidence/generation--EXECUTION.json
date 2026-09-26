@@ -1,0 +1,128 @@
+[
+  {
+    "name": "01-graph-build",
+    "command": [
+      "/home/barami/.local/bin/uv",
+      "run",
+      "--locked",
+      "--extra",
+      "dev",
+      "--extra",
+      "graph",
+      "python",
+      "-m",
+      "ior_mvp.graph",
+      "build"
+    ],
+    "start": "2026-09-26T06:44:40.589133+00:00",
+    "ended": "2026-09-26T06:44:42.096532+00:00",
+    "elapsed_seconds": 1.507,
+    "exit": 0
+  },
+  {
+    "name": "02-manifests",
+    "command": [
+      "/home/barami/.local/bin/uv",
+      "run",
+      "--locked",
+      "--extra",
+      "dev",
+      "python",
+      "scripts/build_manifests.py"
+    ],
+    "start": "2026-09-26T06:44:42.097045+00:00",
+    "ended": "2026-09-26T06:44:42.268407+00:00",
+    "elapsed_seconds": 0.171,
+    "exit": 0
+  },
+  {
+    "name": "03-integrity",
+    "command": [
+      "/home/barami/.local/bin/uv",
+      "run",
+      "--locked",
+      "--extra",
+      "dev",
+      "python",
+      "scripts/verify_integrity.py"
+    ],
+    "start": "2026-09-26T06:44:42.268681+00:00",
+    "ended": "2026-09-26T06:44:42.407730+00:00",
+    "elapsed_seconds": 0.139,
+    "exit": 0
+  },
+  {
+    "name": "04-scenarios",
+    "command": [
+      "/home/barami/.local/bin/uv",
+      "run",
+      "--locked",
+      "--extra",
+      "dev",
+      "python",
+      "scripts/validate_scenarios.py"
+    ],
+    "start": "2026-09-26T06:44:42.408078+00:00",
+    "ended": "2026-09-26T06:44:42.560024+00:00",
+    "elapsed_seconds": 0.152,
+    "exit": 0
+  },
+  {
+    "name": "05-reconstruction",
+    "command": [
+      "/home/barami/.local/bin/uv",
+      "run",
+      "--locked",
+      "--extra",
+      "dev",
+      "python",
+      "scripts/reconstruct_snapshot.py",
+      "--all"
+    ],
+    "start": "2026-09-26T06:44:42.560381+00:00",
+    "ended": "2026-09-26T06:45:47.998348+00:00",
+    "elapsed_seconds": 65.44,
+    "exit": 0
+  },
+  {
+    "name": "06-graph-validate",
+    "command": [
+      "/home/barami/.local/bin/uv",
+      "run",
+      "--locked",
+      "--extra",
+      "dev",
+      "--extra",
+      "graph",
+      "python",
+      "-m",
+      "ior_mvp.graph",
+      "validate"
+    ],
+    "start": "2026-09-26T06:45:47.998997+00:00",
+    "ended": "2026-09-26T06:45:48.139337+00:00",
+    "elapsed_seconds": 0.14,
+    "exit": 0
+  },
+  {
+    "name": "07-graph-check",
+    "command": [
+      "/home/barami/.local/bin/uv",
+      "run",
+      "--locked",
+      "--extra",
+      "dev",
+      "--extra",
+      "graph",
+      "python",
+      "-m",
+      "ior_mvp.graph",
+      "build",
+      "--check"
+    ],
+    "start": "2026-09-26T06:45:48.139747+00:00",
+    "ended": "2026-09-26T06:45:49.561266+00:00",
+    "elapsed_seconds": 1.422,
+    "exit": 0
+  }
+]

@@ -30,9 +30,9 @@ def test_s17_status_distinguishes_completed_generation_from_f01_visual_refresh()
         ).read_text(encoding="utf-8")
     )
 
-    assert len(snapshot["files"]) == 730
+    assert len(snapshot["files"]) == 734
     assert len(visual["entries"]) == 128
-    assert visual["change_ref"] == "S19-BILINGUAL-DOSSIER-2"
+    assert visual["change_ref"] == "MINISTRY-F-GATE-PROVENANCE-2"
     for text in (adr_027, s17_row):
         assert "GRAPH-SAU-2026-09-12-b63159c7bdc1" in text
         assert "722" in text

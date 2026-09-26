@@ -1,10 +1,13 @@
 from __future__ import annotations
 
+from copy import deepcopy
+
 import pytest
 
 from ior_mvp.capability import effective_qualified_capacity, evaluate_capability
 from ior_mvp.data_repository import get_public_case, get_synthetic_scenario
 from ior_mvp.decision_engine import analyze
+from ior_mvp.simulation import simulation_capability
 from ior_mvp.economics import approximate_evsi, incremental_national_value, minimum_effective_support, npv
 
 
@@ -152,3 +155,181 @@ def test_evsi_requires_all_inputs() -> None:
 def test_npv_rejects_invalid_rate() -> None:
     with pytest.raises(ValueError):
         npv(-1, [-1, 2])
+
+
+@pytest.mark.parametrize(
+    ("gate_value", "expected_status", "unresolved"),
+    [
+        ("resolved", "RESOLVED", False),
+        ("Resolved with upgrade", "RESOLVED", False),
+        ("known failure: unsatisfiable", "KNOWN_FAILURE", False),
+        ("known_failure: unsatisfiable", "KNOWN_FAILURE", False),
+        ("Known Failure", "KNOWN_FAILURE", False),
+        ("not applicable to resin production", "NOT_APPLICABLE", False),
+        ("not_applicable", "NOT_APPLICABLE", False),
+        ("NOT_APPLICABLE", "NOT_APPLICABLE", False),
+        ("pending review", "UNAVAILABLE", True),
+        ("", "UNAVAILABLE", True),
+    ],
+)
+def test_profile_gate_prefix_classifier_keeps_non_applicable_meaning(
+    gate_value: str,
+    expected_status: str,
+    unresolved: bool,
+) -> None:
+    scenario = get_synthetic_scenario("SAU-H0-721049")
+    assert scenario is not None
+    hard_gates = dict(scenario["synthetic_inputs"]["hard_gates"])
+    gate_name = next(iter(hard_gates))
+    hard_gates[gate_name] = gate_value
+
+    result = evaluate_capability(
+        "coated_steel",
+        scenario["synthetic_inputs"]["capability_states"],
+        hard_gates,
+    )
+
+    assert result["profile_hard_gates"][gate_name] == expected_status
+    assert (gate_name in result["unresolved_hard_gates"]) is unresolved
+    assert (gate_name in result["known_hard_gate_failures"]) is (
+        expected_status == "KNOWN_FAILURE"
+    )
+    if expected_status == "NOT_APPLICABLE":
+        assert result["profile_hard_gates"][gate_name] != "RESOLVED"
+
+
+def test_typed_not_applicable_dict_does_not_become_resolved_or_unknown() -> None:
+    scenario = get_synthetic_scenario("SAU-H0-721049")
+    assert scenario is not None
+    hard_gates = {
+        name: {"status": "RESOLVED", "basis": "declared"}
+        for name in scenario["synthetic_inputs"]["hard_gates"]
+    }
+    gate_name = next(iter(hard_gates))
+    hard_gates[gate_name] = {
+        "status": "NOT_APPLICABLE",
+        "basis": "profile does not apply",
+    }
+
+    result = evaluate_capability(
+        "coated_steel",
+        scenario["synthetic_inputs"]["capability_states"],
+        hard_gates,
+    )
+
+    assert result["profile_hard_gates"][gate_name] == "NOT_APPLICABLE"
+    assert gate_name not in result["unresolved_profile_hard_gates"]
+    assert gate_name not in result["unresolved_hard_gates"]
+    assert gate_name not in result["known_hard_gate_failures"]
+    assert result["route_publishable"] is True
+
+
+def test_decision_specific_known_failure_survives_as_known_failure() -> None:
+    public = get_public_case("SAU-H6-294120")
+    scenario = get_synthetic_scenario("SAU-H6-294120")
+    assert scenario is not None
+    raw_profile = scenario["synthetic_inputs"]["hard_gates"]["effluent"]
+    raw_decision = scenario["synthetic_inputs"]["decision_specific_hard_gates"][
+        "effluent"
+    ]
+
+    result = simulation_capability(public, scenario["synthetic_inputs"])
+
+    assert result["unresolved_hard_gates"] == []
+    assert result["unresolved_profile_hard_gates"] == []
+    assert result["unresolved_decision_specific_hard_gates"] == []
+    assert result["known_hard_gate_failures"] == ["effluent"]
+    assert result["profile_hard_gates"]["effluent"] == "KNOWN_FAILURE"
+    assert result["decision_specific_hard_gates"]["effluent"] == "KNOWN_FAILURE"
+    assert scenario["synthetic_inputs"]["hard_gates"]["effluent"] == raw_profile
+    assert (
+        scenario["synthetic_inputs"]["decision_specific_hard_gates"]["effluent"]
+        == raw_decision
+    )
+
+
+def test_overlapping_public_gate_names_dedupe_only_the_summary() -> None:
+    result = analyze("SAU-H6-294110", "public")
+    capability = result["capability"]
+    profile_names = [
+        name
+        for name, status in capability["profile_hard_gates"].items()
+        if status == "UNAVAILABLE"
+    ]
+    decision_names = capability["unresolved_decision_specific_hard_gates"]
+
+    assert capability["unresolved_profile_hard_gates"] == [
+        "named_molecule_and_synthesis_route",
+        "gmp",
+        "containment",
+        "impurity_control",
+        "analytical_validation",
+        "effluent",
+        "ip_fto",
+    ]
+    assert decision_names == capability["unresolved_profile_hard_gates"]
+    assert capability["unresolved_hard_gates"] == profile_names
+    assert len(capability["unresolved_hard_gates"]) == len(set(decision_names))
+    assert len(profile_names) + len(decision_names) == 14
+
+
+@pytest.mark.parametrize(
+    ("declared_names", "expected_unresolved"),
+    [
+        (
+            ("customer/application qualification", "effective spare capacity and allocation"),
+            ["exact imported specification"],
+        ),
+        (
+            (),
+            [
+                "exact imported specification",
+                "customer/application qualification",
+                "effective spare capacity and allocation",
+            ],
+        ),
+    ],
+)
+def test_omitted_required_decision_gates_block_capability(
+    declared_names: tuple[str, ...],
+    expected_unresolved: list[str],
+) -> None:
+    public = get_public_case("SAU-H0-721049")
+    scenario = get_synthetic_scenario("SAU-H0-721049")
+    assert scenario is not None
+    inputs = deepcopy(scenario["synthetic_inputs"])
+    original = inputs["decision_specific_hard_gates"]
+    inputs["decision_specific_hard_gates"] = {
+        name: original[name] for name in declared_names
+    }
+
+    result = simulation_capability(public, inputs)
+
+    assert result["unresolved_decision_specific_hard_gates"] == expected_unresolved
+    assert result["unresolved_hard_gates"] == expected_unresolved
+    assert result["route_publishable"] is False
+    assert result["d_star"] is None
+    assert all(
+        result["decision_specific_hard_gates"][name] == "UNAVAILABLE"
+        for name in expected_unresolved
+    )
+    assert inputs["decision_specific_hard_gates"] == {
+        name: original[name] for name in declared_names
+    }
+
+
+def test_omitted_decision_gate_remains_unknown_beside_known_failure() -> None:
+    public = get_public_case("SAU-H6-294120")
+    scenario = get_synthetic_scenario("SAU-H6-294120")
+    assert scenario is not None
+    inputs = deepcopy(scenario["synthetic_inputs"])
+    del inputs["decision_specific_hard_gates"]["gmp"]
+
+    result = simulation_capability(public, inputs)
+
+    assert result["unresolved_decision_specific_hard_gates"] == ["gmp"]
+    assert result["known_hard_gate_failures"] == ["effluent"]
+    assert result["decision_specific_hard_gates"]["gmp"] == "UNAVAILABLE"
+    assert result["decision_specific_hard_gates"]["effluent"] == "KNOWN_FAILURE"
+    assert result["route_publishable"] is False
+    assert result["d_star"] is None

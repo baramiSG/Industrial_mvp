@@ -1,0 +1,61 @@
+[
+  {
+    "name": "thresholds",
+    "command": [
+      "/home/barami/projects/ior-worktrees/ministry-foundation/.venv/bin/python",
+      "scripts/check_threshold_literals.py"
+    ],
+    "started": "2026-09-26T06:56:26.253556+00:00",
+    "exit": 0,
+    "elapsed": 0.325
+  },
+  {
+    "name": "ui",
+    "command": [
+      "/home/barami/projects/ior-worktrees/ministry-foundation/.venv/bin/python",
+      "scripts/check_ui_contracts.py"
+    ],
+    "started": "2026-09-26T06:56:26.578535+00:00",
+    "exit": 0,
+    "elapsed": 0.323
+  },
+  {
+    "name": "es",
+    "command": [
+      "/home/barami/projects/ior-worktrees/ministry-foundation/.venv/bin/python",
+      "scripts/check_es_modules.py",
+      "--node",
+      "node"
+    ],
+    "started": "2026-09-26T06:56:26.902158+00:00",
+    "exit": 0,
+    "elapsed": 0.865
+  },
+  {
+    "name": "compile",
+    "command": [
+      "/home/barami/projects/ior-worktrees/ministry-foundation/.venv/bin/python",
+      "-m",
+      "compileall",
+      "-q",
+      "src",
+      "scripts",
+      "tests",
+      "browser_tests",
+      "graph_tests"
+    ],
+    "started": "2026-09-26T06:56:27.767880+00:00",
+    "exit": 0,
+    "elapsed": 0.504
+  },
+  {
+    "name": "smoke",
+    "command": [
+      "/home/barami/projects/ior-worktrees/ministry-foundation/.venv/bin/python",
+      "scripts/demo_smoke.py"
+    ],
+    "started": "2026-09-26T06:56:28.272566+00:00",
+    "exit": 0,
+    "elapsed": 0.248
+  }
+]

@@ -842,7 +842,7 @@ def test_graph_narrow_panel_contains_controls_and_text(browser_session: BrowserS
             assert_graph_panel_contains_controls_and_text(page)
             if scenario == "steel" and mode == "public" and view == "evidence_to_change" and width == 1440:
                 page.evaluate("document.fonts.ready")
-                new_token, old_token = "ENGINE-6b54371e99f3", "ENGINE-7ae34188bdec"
+                new_token, old_token = "ENGINE-64e24689a59f", "ENGINE-7ae34188bdec"
                 measure = """() => {
                   const section = document.querySelector('.graph-native-controls > section:nth-child(2)');
                   const buttons = [...section.querySelectorAll('.graph-button-list > button[data-graph-select="edge"]')];
@@ -864,7 +864,8 @@ def test_graph_narrow_panel_contains_controls_and_text(browser_session: BrowserS
                 repeat = page.evaluate(measure)
                 assert repeat == before, f"{locale.code}: untouched repeat drift"
                 assert len(before["rows"]) == 12
-                assert before["rows"][1]["target"] == "INT-SAU-H0-721049-route-5"
+                assert before["rows"][0]["target"] == "INT-SAU-H0-721049-route-5"
+                assert before["rows"][1]["target"] == "SAU-H0-721049"
                 assert before["rows"][2]["target"] == "SAU-H0-721049"
                 assert sum(row["source"].count(new_token) for row in before["rows"]) == 5
                 assert sum(text.count(new_token) for text in before["texts"]) == 5

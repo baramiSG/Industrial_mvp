@@ -1275,5 +1275,38 @@
     "remaining": "Publish records PR; all six required hosted checks; merge and verify main. Then approved Ministry sequence.",
     "historical_whitespace": "153 locations/14 immutable logs accepted as a finite preservation exception; full check remains exit2; authored content clean.",
     "product_completion": "No S21 or complete MVP claim."
+  },
+  "ministry_foundation_f_20260926": {
+    "state": "IMPLEMENTATION_IN_PROGRESS_VERIFICATION_PENDING",
+    "branch": "slice/ministry-foundation",
+    "base": "bd7c64eddd760db22d073784ef66d82c7244e906",
+    "adr": "ADR-032; accepted F plan, implementation review pending",
+    "records": ".workflow/slices/ministry-foundation/",
+    "plan_sha256": "f88287e2f71e54f6ac91ec4635edb1138fb17a160ff59c38e26a396e472868d8",
+    "packet_sha256sums": "ca55d71e1d7afdab8a56e2c91eea7319ce39e884c7932e15a66ceb985b263f12",
+    "independent_review": "Plan approval is historical and is not implementation approval",
+    "generation": "Single released generation complete: GRAPH-SAU-2026-09-12-fd70279732aa / ENGINE-bd1cbfb71689;925/1045;732snapshot/20authority; seven stock commands exit0",
+    "record_candidate_tree": null,
+    "record_candidate_tree_note": "No final tree identity is embedded here.",
+    "verification_policy": "Owner proportionate workflow; focused changed-behaviour checks, required full pytest/integrity and all hosted checks; no blanket duplicate local full suites.",
+    "canonical": "Single MINISTRY-F-GATE-PROVENANCE-1;4admitted changes/124byte-identical; baseline0cb0932eb283e2cd63206944372fc484e553b7fb",
+    "verification": "Final exact-candidate fullpytest/R1 and independentimplementationreview pending; executed subset .workflow/slices/ministry-foundation/test_evidence.md"
+  },
+  "records_delivery_20260926": {
+    "pr": "https://github.com/baramiSG/Industrial_mvp/pull/41",
+    "merge_commit": "bd7c64eddd760db22d073784ef66d82c7244e906",
+    "pr_ci_run": 36215521148,
+    "main_ci_run": 36218769857,
+    "required_jobs": "six SUCCESS on each actual head",
+    "previous_status": "Earlier pending records entries are historical checkpoints; latest owner workflow and completed delivery control."
+  },
+  "ministry_foundation_replacement_2": {
+    "status": "SOURCE_CORRECTED_GENERATED_FINAL_VERIFICATION_PENDING",
+    "projection_id": "GRAPH-SAU-2026-09-12-4152824cfa67",
+    "engine_run_id": "ENGINE-64e24689a59f",
+    "snapshot_members": 734,
+    "prior_failure": "One frozen API-shape fixture failed; unchanged fixture now passes after public-shape correction.",
+    "independent_implementation_approval": null,
+    "complete_mvp": false
   }
 }

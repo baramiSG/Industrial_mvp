@@ -291,6 +291,23 @@ def _route_constraints(
             )
 
 
+def _node_in_branch_scope(
+    assembler: ProjectionAssembler,
+    node_id: str,
+    analysis: Mapping[str, Any],
+) -> bool:
+    """True when the node exists on this public or simulated branch."""
+    node = assembler.nodes.get(node_id)
+    if node is None:
+        return False
+    _subject, synthetic, scenario_id = _branch_identity(analysis)
+    properties = node.properties
+    return (
+        str(properties.get("scenario_id")) == scenario_id
+        and bool(properties.get("synthetic_flag")) is synthetic
+    )
+
+
 def _need_target(
     assembler: ProjectionAssembler,
     analysis: Mapping[str, Any],
@@ -298,7 +315,7 @@ def _need_target(
     blocked_field: str,
 ) -> str:
     product_id = str(analysis["opportunity_id"])
-    subject, synthetic, scenario_id = _branch_identity(analysis)
+    _subject, synthetic, scenario_id = _branch_identity(analysis)
     if blocked_field in {
         "demand_at_required_specification",
         "target_specification",
@@ -308,21 +325,8 @@ def _need_target(
             if synthetic
             else f"SPEC-{product_id}-TARGET"
         )
-        if candidate in assembler.nodes:
+        if _node_in_branch_scope(assembler, candidate, analysis):
             return candidate
-    if blocked_field in {
-        "domestic_supply_or_capability",
-        "hard_regulatory_or_process_gate",
-        "idle_equivalent_domestic_capacity",
-    }:
-        prefix = f"CAP-{subject}-"
-        candidates = sorted(
-            node.id
-            for node in assembler.projection.nodes
-            if node.label == "Capability" and node.id.startswith(prefix)
-        )
-        if candidates:
-            return candidates[0]
     if blocked_field in {"route_economics", "economics"}:
         preferred = analysis["decision"].get("preferred_hypothesis")
         code = (
@@ -331,7 +335,9 @@ def _need_target(
             else None
         )
         if isinstance(code, int) and code in interventions:
-            return interventions[code]
+            target = interventions[code]
+            if _node_in_branch_scope(assembler, target, analysis):
+                return target
     return product_id
 
 

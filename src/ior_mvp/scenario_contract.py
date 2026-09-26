@@ -6,6 +6,7 @@ from typing import Any
 
 from .capability import effective_qualified_capacity
 from .config import evidence_policy_config
+from .gate_status import GateStatus, classify_gate_status
 from .economics import NATIONAL_VALUE_KEYS
 from .evidence import EvidenceIntegrityError, synthetic_display_labels
 from .public_snapshot import capability_hard_gate_names
@@ -955,14 +956,38 @@ def decision_narrative_for_state(
 
 
 def _gate_status(raw: str) -> str:
-    lowered = raw.lower()
-    if lowered.startswith("resolved"):
-        return "RESOLVED"
-    if lowered.startswith("known failure"):
-        return "KNOWN_FAILURE"
-    if lowered.startswith("not applicable"):
-        return "NOT_APPLICABLE"
-    return "UNAVAILABLE"
+    """Classify one gate declaration with the shared prefix grammar."""
+    return classify_gate_status(raw).value
+
+
+def _project_unresolved_gates(
+    raw_unresolved: Any,
+    decision_gates: Any,
+) -> list[dict[str, Any]]:
+    """Keep unresolved rows and copy known failures without mutating public rows."""
+    rows = [
+        row
+        for row in raw_unresolved
+        if isinstance(row, dict) and isinstance(row.get("name"), str)
+    ] if isinstance(raw_unresolved, list) else []
+    if not isinstance(decision_gates, dict):
+        return rows
+    projected: list[dict[str, Any]] = []
+    for row in rows:
+        name = row["name"]
+        if name not in decision_gates:
+            projected.append(row)
+            continue
+        status = classify_gate_status(decision_gates[name])
+        if status in {GateStatus.RESOLVED, GateStatus.NOT_APPLICABLE}:
+            continue
+        if status == GateStatus.KNOWN_FAILURE:
+            copied = dict(row)
+            copied["state"] = "known_failure"
+            projected.append(copied)
+            continue
+        projected.append(row)
+    return projected
 
 
 def project_simulated_case(
@@ -996,23 +1021,7 @@ def project_simulated_case(
             }
     decision_gates = inputs.get("decision_specific_hard_gates", {})
     raw_unresolved = public_capability.get("unresolved_hard_gates", [])
-    if isinstance(decision_gates, dict):
-        unresolved = [
-            row
-            for row in raw_unresolved
-            if isinstance(row, dict)
-            and isinstance(row.get("name"), str)
-            and (
-                row["name"] not in decision_gates
-                or not str(decision_gates[row["name"]]).lower().startswith(
-                    "resolved"
-                )
-            )
-        ]
-    else:
-        unresolved = [
-            row for row in raw_unresolved if isinstance(row, dict)
-        ]
+    unresolved = _project_unresolved_gates(raw_unresolved, decision_gates)
     demand = inputs.get("demand", {})
     equivalence = inputs.get("equivalence")
     upgrade = inputs.get("upgrade", {})

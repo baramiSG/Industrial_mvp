@@ -236,6 +236,25 @@ def test_route_blocking_matches_route_reason_codes_and_capability_states(
         assert row["capability_id"].startswith("CAP-")
 
 
+def test_evidence_linkage_broad_needs_keep_sources_and_skip_sorted_capability() -> None:
+    from tests.test_graph_projection import project_sorted_capability_needs
+
+    projected = project_sorted_capability_needs()
+    rows = evidence_linkage(projected, "SAU-TEST", branch="public")
+    by_field = {row["blocked_field"]: row for row in rows}
+    assert by_field["domestic_supply_or_capability"]["target_id"] == "SAU-TEST"
+    assert by_field["hard_regulatory_or_process_gate"]["target_id"] == "SAU-TEST"
+    assert by_field["idle_equivalent_domestic_capacity"]["target_id"] == "SAU-TEST"
+    assert all(
+        "capacity_time_window" not in row["target_id"] for row in rows
+    )
+    assert by_field["target_specification"]["target_id"] == "SPEC-SAU-TEST-TARGET"
+    assert by_field["economics"]["target_id"] == "INT-SAU-TEST-route-5"
+    assert by_field["domestic_supply_or_capability"]["evidence_ids"] == [
+        "E-NEED-SUPPLY"
+    ]
+
+
 def test_evidence_linkage_matches_evidence_needs(
     projection: GraphProjection,
 ) -> None:

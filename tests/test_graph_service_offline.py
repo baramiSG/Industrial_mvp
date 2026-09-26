@@ -264,3 +264,47 @@ def test_s16b_unexpected_query_and_offline_guard_errors_propagate(
         )
         with pytest.raises(type(error), match=str(error)):
             service.view("adjacency", "SAU-H0-721049", "public")
+
+
+def test_evidence_to_change_service_keeps_product_targets_and_sources() -> None:
+    from ior_mvp.graph.engine_feed import evidence_linkage
+    from tests.test_graph_projection import (
+        _BROAD_NEED_FIELDS,
+        project_sorted_capability_needs,
+    )
+
+    from types import SimpleNamespace
+
+    projected = project_sorted_capability_needs()
+    rows = evidence_linkage(projected, "SAU-TEST", branch="public")
+
+    def status(_spec: object) -> dict:
+        return {
+            "projection_id": projected.projection_id,
+            "counts": projected.counts,
+            "synthetic_partition": {},
+        }
+
+    service = GraphService(
+        SimpleNamespace(target="compose"),
+        artifact_projection_id=projected.projection_id,
+        projection=projected,
+        status_reader=status,
+        view_reader=lambda *_args: rows,
+    )
+    payload = service.view("evidence_to_change", "SAU-TEST", "public")
+    constrained = [
+        edge
+        for edge in payload["edges"]
+        if edge["type"] == "CONSTRAINED_BY"
+        and edge["properties"].get("blocked_field") in _BROAD_NEED_FIELDS
+    ]
+    assert len(constrained) == 3
+    assert {edge["target"] for edge in constrained} == {"SAU-TEST"}
+    assert all(edge["properties"]["evidence_ids"] for edge in constrained)
+    spec = next(
+        edge
+        for edge in payload["edges"]
+        if edge["properties"].get("blocked_field") == "target_specification"
+    )
+    assert spec["target"] == "SPEC-SAU-TEST-TARGET"

@@ -3,6 +3,8 @@ from __future__ import annotations
 import hashlib
 import json
 
+import pytest
+
 from ior_mvp.config import PROJECT_ROOT
 from ior_mvp.decision_engine import analyze
 from ior_mvp.graph.projection import build_repository_projection, discover_inputs
@@ -55,7 +57,7 @@ def test_in_memory_g17_is_deterministic_and_writes_nothing() -> None:
     assert first.counts["nodes"] == 925
     assert first.counts["edges"] == 1045
     assert all(path.read_bytes() == content for path, content in before.items())
-    assert len(json.loads(snapshot_manifest.read_text(encoding="utf-8"))["files"]) == 730
+    assert len(json.loads(snapshot_manifest.read_text(encoding="utf-8"))["files"]) == 734
     assert len(json.loads(authority_manifest.read_text(encoding="utf-8"))["files"]) == 20
     print(
         "S17_IN_MEMORY_G17",
@@ -86,3 +88,100 @@ def test_all_eleven_public_and_simulated_outcomes_remain_unchanged() -> None:
         assert simulated["real_decision"] == public["real_decision"]
         assert simulated["simulation_decision"]["state"] == simulated_state
         assert simulated["simulation_decision"]["route_code"] == route
+        assert public["active_decision"] == public["real_decision"]
+        assert simulated["active_decision"] == simulated["simulation_decision"]
+        assert simulated["real_decision"]["state"] == public_state
+
+
+_PROFILE_GATES = {
+    "S": [
+        "substrate_range",
+        "width_thickness_envelope",
+        "coating_route_and_mass",
+        "surface_treatment",
+        "mandatory_or_customer_standard",
+    ],
+    "P": [
+        "polymer_additive_compatibility",
+        "conversion_route",
+        "tooling",
+        "performance_requirement",
+        "application_qualification",
+    ],
+    "F": [
+        "feedstock_route",
+        "formulation_granulation",
+        "nutrient_basis",
+        "agronomic_performance",
+        "emissions_and_safe_handling",
+    ],
+    "A": [
+        "alloy",
+        "forming_fabrication",
+        "heat_treatment",
+        "joining_finishing",
+        "engineering_certification",
+        "customer_liability",
+    ],
+    "H": [
+        "named_molecule_and_synthesis_route",
+        "gmp",
+        "containment",
+        "impurity_control",
+        "analytical_validation",
+        "effluent",
+        "ip_fto",
+    ],
+}
+_S0 = [
+    *_PROFILE_GATES["S"],
+    "exact imported specification",
+    "customer/application qualification",
+    "effective spare capacity and allocation",
+]
+_P0 = [
+    *_PROFILE_GATES["P"],
+    "named imported grade",
+    "buyer application and qualification",
+    "local grade availability in required volume and timing",
+]
+_PUBLIC_UNRESOLVED = {
+    "SAU-H0-721049": _S0,
+    "SAU-H0-390210": _P0,
+    "SAU-H6-294110": _PROFILE_GATES["H"],
+    "SAU-H6-294120": _PROFILE_GATES["H"],
+    "SAU-H6-310430": _PROFILE_GATES["F"],
+    "SAU-H6-310510": _PROFILE_GATES["F"],
+    "SAU-H6-392010": _PROFILE_GATES["P"],
+    "SAU-H6-721012": _PROFILE_GATES["S"],
+    "SAU-H6-721061": _PROFILE_GATES["S"],
+    "SAU-H6-760429": _PROFILE_GATES["A"],
+    "SAU-H6-760711": _PROFILE_GATES["A"],
+}
+
+
+def test_ordered_22_branch_gate_lists_and_decision_equality() -> None:
+    assert len(_PUBLIC_UNRESOLVED) == 11
+    for opportunity_id, public_names in _PUBLIC_UNRESOLVED.items():
+        public = analyze(opportunity_id, "public")
+        simulated = analyze(opportunity_id, "simulated")
+        assert public["capability"]["unresolved_hard_gates"] == public_names
+        assert simulated["capability"]["unresolved_hard_gates"] == []
+        assert public["capability"]["known_hard_gate_failures"] == []
+        if opportunity_id == "SAU-H6-294120":
+            assert simulated["capability"]["known_hard_gate_failures"] == [
+                "effluent"
+            ]
+        else:
+            assert simulated["capability"]["known_hard_gate_failures"] == []
+        assert simulated["real_decision"] == public["real_decision"]
+        assert public["active_decision"] == public["real_decision"]
+        assert simulated["active_decision"] == simulated["simulation_decision"]
+        assert public["economics"] is None
+        if opportunity_id == "SAU-H0-721049":
+            assert simulated["economics"]["minimum_effective_support_m"] == (
+                pytest.approx(18.0)
+            )
+        if opportunity_id == "SAU-H0-390210":
+            assert simulated["simulation_decision"]["state"] == "REJECT"
+            assert simulated["simulation_decision"]["route_code"] == 0

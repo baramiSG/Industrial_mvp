@@ -1,0 +1,10 @@
+{
+  "initial_source_phase_sha256": "81e387b90f79d3d6a3090fa3aea60bb93939c3327fca36e41a6a25f37177824e",
+  "at_freeze_sha256": "bc23e353c198e3ce359522c1d9b3141e65f43f164c35523ceed5f2e4d40bd012",
+  "changed_at_utc": "2026-09-26T07:16:20.281834+00:00",
+  "staged_paths": 0,
+  "ordinary_index_tree": "1eef9dcff03dd555ee22e5da2739a94082cb8ddb",
+  "content_equals_HEAD": true,
+  "cause": "Coordinator ran check_prohibited_files.py without GIT_OPTIONAL_LOCKS=0 at this time. It invokes git diff to enumerate deletions, which can refresh index stat metadata. This explains timing and unchanged staged content; process-level write tracing was not retained, so attribution is a strong inference, not directly traced.",
+  "repair": "No byte restoration or lock clearing. Index contents/HEAD/work remain preserved; pin initial byte hash claim is limited to the earlier observed operations. Set GIT_OPTIONAL_LOCKS=0 for all remaining check subprocesses."
+}

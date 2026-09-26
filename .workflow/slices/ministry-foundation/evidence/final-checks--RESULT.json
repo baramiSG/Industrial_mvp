@@ -1,0 +1,59 @@
+[
+  {
+    "name": "sync",
+    "candidate_tree": "06bd80f4a2ad252900d5b1e3e3fa55a950b0922d",
+    "command": [
+      "/home/barami/.local/bin/uv",
+      "sync",
+      "--locked",
+      "--extra",
+      "dev"
+    ],
+    "cwd": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-foundation/final-candidate/proof",
+    "started": "2026-09-26T07:20:27.008736+00:00",
+    "exit": 0,
+    "elapsed_seconds": 1.118,
+    "ended": "2026-09-26T07:20:28.127024+00:00"
+  },
+  {
+    "name": "prohibited",
+    "candidate_tree": "06bd80f4a2ad252900d5b1e3e3fa55a950b0922d",
+    "command": [
+      "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-foundation/final-candidate/proof/.venv/bin/python",
+      "scripts/check_prohibited_files.py"
+    ],
+    "cwd": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-foundation/final-candidate/proof",
+    "started": "2026-09-26T07:20:28.127288+00:00",
+    "exit": 0,
+    "elapsed_seconds": 0.833,
+    "ended": "2026-09-26T07:20:28.960581+00:00"
+  },
+  {
+    "name": "integrity",
+    "candidate_tree": "06bd80f4a2ad252900d5b1e3e3fa55a950b0922d",
+    "command": [
+      "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-foundation/final-candidate/proof/.venv/bin/python",
+      "scripts/verify_integrity.py"
+    ],
+    "cwd": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-foundation/final-candidate/proof",
+    "started": "2026-09-26T07:20:28.960870+00:00",
+    "exit": 0,
+    "elapsed_seconds": 0.156,
+    "ended": "2026-09-26T07:20:29.116587+00:00"
+  },
+  {
+    "name": "pytest",
+    "candidate_tree": "06bd80f4a2ad252900d5b1e3e3fa55a950b0922d",
+    "command": [
+      "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-foundation/final-candidate/proof/.venv/bin/python",
+      "-m",
+      "pytest",
+      "-q"
+    ],
+    "cwd": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-foundation/final-candidate/proof",
+    "started": "2026-09-26T07:20:29.116897+00:00",
+    "exit": 1,
+    "elapsed_seconds": 141.104,
+    "ended": "2026-09-26T07:22:50.215190+00:00"
+  }
+]

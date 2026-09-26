@@ -185,6 +185,47 @@ def test_catalogue_from_yaml_bilingual() -> None:
     )
 
 
+def test_evidence_to_change_api_preserves_product_target_and_sources() -> None:
+    from ior_mvp.graph.service import GraphService
+    from tests.test_graph_projection import (
+        _BROAD_NEED_FIELDS,
+        project_sorted_capability_needs,
+    )
+    from ior_mvp.graph.engine_feed import evidence_linkage
+
+    from types import SimpleNamespace
+
+    projected = project_sorted_capability_needs()
+    rows = evidence_linkage(projected, "SAU-TEST", branch="public")
+
+    def status(_spec: object) -> dict:
+        return {
+            "projection_id": projected.projection_id,
+            "counts": projected.counts,
+            "synthetic_partition": {},
+        }
+
+    service = GraphService(
+        SimpleNamespace(target="compose"),
+        artifact_projection_id=projected.projection_id,
+        projection=projected,
+        status_reader=status,
+        view_reader=lambda *_args: rows,
+    )
+    payload = _client(service).get(
+        "/api/graph/opportunities/SAU-TEST/views/evidence_to_change?mode=public"
+    ).json()
+    constrained = [
+        edge
+        for edge in payload["edges"]
+        if edge["type"] == "CONSTRAINED_BY"
+        and edge["properties"].get("blocked_field") in _BROAD_NEED_FIELDS
+    ]
+    assert payload["graph_status"] == "AVAILABLE"
+    assert {edge["target"] for edge in constrained} == {"SAU-TEST"}
+    assert all(edge["properties"]["evidence_ids"] for edge in constrained)
+
+
 def test_view_payload_schema_with_fake_service() -> None:
     response = _client(FakeGraphService()).get(
         "/api/graph/opportunities/SAU-H0-721049/views/adjacency?mode=public"
