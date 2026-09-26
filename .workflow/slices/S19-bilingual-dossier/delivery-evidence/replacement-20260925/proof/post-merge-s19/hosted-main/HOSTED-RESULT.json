@@ -1,0 +1,62 @@
+{
+  "status": "ALL_SIX_MAIN_JOBS_COMPLETED_SUCCESS",
+  "utc": "2026-09-25T21:15:54.562263+00:00",
+  "run_id": 36183985706,
+  "run_url": "https://github.com/baramiSG/Industrial_mvp/actions/runs/36183985706",
+  "event": "push",
+  "attempt": 1,
+  "merge_sha": "6962105b4bee575a6271d08fe892144c6e6c1063",
+  "tree": "7c25b4616679d61f173f3d9072e3240e1a2a166b",
+  "pr": "https://github.com/baramiSG/Industrial_mvp/pull/40",
+  "jobs": [
+    {
+      "name": "Docker image build",
+      "conclusion": "success",
+      "url": "https://github.com/baramiSG/Industrial_mvp/actions/runs/36183985706/job/108232845246"
+    },
+    {
+      "name": "graph / Neo4j service / Python 3.12",
+      "conclusion": "success",
+      "url": "https://github.com/baramiSG/Industrial_mvp/actions/runs/36183985706/job/108232845414"
+    },
+    {
+      "name": "uv / Python 3.12",
+      "conclusion": "success",
+      "url": "https://github.com/baramiSG/Industrial_mvp/actions/runs/36183985706/job/108232845429"
+    },
+    {
+      "name": "uv / Python 3.14",
+      "conclusion": "success",
+      "url": "https://github.com/baramiSG/Industrial_mvp/actions/runs/36183985706/job/108232845507"
+    },
+    {
+      "name": "pip / Python 3.12",
+      "conclusion": "success",
+      "url": "https://github.com/baramiSG/Industrial_mvp/actions/runs/36183985706/job/108232845543"
+    },
+    {
+      "name": "browser / Chromium / Python 3.12",
+      "conclusion": "success",
+      "url": "https://github.com/baramiSG/Industrial_mvp/actions/runs/36183985706/job/108232845575"
+    }
+  ],
+  "bindings": [
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/final-candidate-r2/delivery/hosted-main/RUN-FINAL.json",
+      "sha256": "0e52e48d675cb6d410b338031369c9792579d61af55ccbef06365cad1725a835"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/final-candidate-r2/delivery/hosted-main/SIX-JOB-LOGS.json",
+      "sha256": "4633271781b7bba113686276db9d8000f1ad44d3f9c8324a138031de1c8da0c8"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/final-candidate-r2/delivery/hosted-main/MAIN-READBACK.json",
+      "sha256": "0b114f3ed87138719002698f316a1ef20811a1d57fd40b42de298e7dc0a3f156"
+    }
+  ],
+  "limitations": [
+    "Explicit Aura operator skip in local graph job does not certify Aura",
+    "No S21 or complete MVP acceptance",
+    "Additive final S19 delivery record remains to publish"
+  ]
+}

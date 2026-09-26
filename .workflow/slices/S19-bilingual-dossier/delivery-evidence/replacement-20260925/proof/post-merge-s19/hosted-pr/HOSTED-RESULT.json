@@ -1,0 +1,63 @@
+{
+  "at_utc": "2026-09-25T19:54:40.718939+00:00",
+  "status": "ALL_SIX_HOSTED_CHECKS_SUCCESS",
+  "head": "39614fcdd8d8eb9a96381c3d1b806343d5164419",
+  "run_url": "https://github.com/baramiSG/Industrial_mvp/actions/runs/36175983021",
+  "pr_url": "https://github.com/baramiSG/Industrial_mvp/pull/40",
+  "event": "pull_request",
+  "attempt": 1,
+  "run_final_sha256": "6bc5e14ab105c95f087d708255dcfd36016605feeebe739f4c3889aa2a0d84e4",
+  "pr_checks_sha256": "ecaf4db163c89eb7329b965faaca86708e934b3746aed32187a8b91d3ef358c6",
+  "full_raw_log_sha256": "f2152a32dd64472ff90cb11fe345151f0ed795bd395a14fce9b91fb101f9510b",
+  "jobs": [
+    {
+      "name": "browser / Chromium / Python 3.12",
+      "id": 108206569986,
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-09-25T18:50:41Z",
+      "completed_at": "2026-09-25T19:54:09Z"
+    },
+    {
+      "name": "graph / Neo4j service / Python 3.12",
+      "id": 108206570262,
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-09-25T18:50:41Z",
+      "completed_at": "2026-09-25T18:52:16Z"
+    },
+    {
+      "name": "pip / Python 3.12",
+      "id": 108206570280,
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-09-25T18:50:41Z",
+      "completed_at": "2026-09-25T18:59:00Z"
+    },
+    {
+      "name": "Docker image build",
+      "id": 108206570347,
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-09-25T18:50:41Z",
+      "completed_at": "2026-09-25T18:51:13Z"
+    },
+    {
+      "name": "uv / Python 3.12",
+      "id": 108206570477,
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-09-25T18:50:40Z",
+      "completed_at": "2026-09-25T18:55:59Z"
+    },
+    {
+      "name": "uv / Python 3.14",
+      "id": 108206570546,
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-09-25T18:50:41Z",
+      "completed_at": "2026-09-25T18:58:10Z"
+    }
+  ],
+  "independent_head_review": "PENDING; no merge authorization inferred"
+}

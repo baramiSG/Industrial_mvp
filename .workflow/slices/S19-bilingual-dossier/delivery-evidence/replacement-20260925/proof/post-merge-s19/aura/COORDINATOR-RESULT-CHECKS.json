@@ -1,0 +1,77 @@
+{
+  "available_browser": {
+    "journeys": 44,
+    "unique_complete_case_mode_locale_matrix": true,
+    "views_per_journey": 4,
+    "errors": [],
+    "response_interception": false,
+    "images": 220
+  },
+  "restored_available_browser": {
+    "journeys": 44,
+    "unique_complete_case_mode_locale_matrix": true,
+    "views_per_journey": 4,
+    "errors": [],
+    "response_interception": false,
+    "images": 220
+  },
+  "not_configured_api": {
+    "views": 88,
+    "portfolio": 2,
+    "decisions": 0,
+    "all_progress_checks_pass": true,
+    "reason_code": "NOT_CONFIGURED"
+  },
+  "not_configured_browser": {
+    "locale_states": 2,
+    "errors": [],
+    "reason_code": "NOT_CONFIGURED"
+  },
+  "injected_network_unavailability_api": {
+    "views": 88,
+    "portfolio": 2,
+    "decisions": 0,
+    "all_progress_checks_pass": true,
+    "reason_code": "CONNECTION_FAILED"
+  },
+  "injected_network_unavailability_browser": {
+    "locale_states": 2,
+    "errors": [],
+    "reason_code": "CONNECTION_FAILED"
+  },
+  "restored_available_api": {
+    "views": 88,
+    "portfolio": 2,
+    "decisions": 11,
+    "all_progress_checks_pass": true,
+    "reason_code": null
+  },
+  "utc": "2026-09-26T03:05:37.744792+00:00",
+  "scope": "Coordinator re-derived assertions from completed receipts; no tests or Aura calls rerun. Not independent approval.",
+  "exit": 0,
+  "elapsed_seconds": 3863.884,
+  "application_proof_sha256": "f4f0e725c84dcbdd3e3a053a8eb528ff3765c0c3926e569275005e05917af983",
+  "result_sha256": "ea8aea20fd8b66620adaabf869c0763247d5d8a38ae9195a61929a6e98fbb421",
+  "all11_before_after_real_decisions_equal": true,
+  "full_before_after_sha256": "9b5cf8f9aa4db3849587da7a138f5e41e5d46cc4ea0e4df8fea62e92ba089429",
+  "preservation": {
+    "binaries_equal": true,
+    "credential_identity_equal": true,
+    "indexes_equal": 56,
+    "packets_equal": true,
+    "retained_container_unchanged": true,
+    "source_files_equal": 3307,
+    "utc": "2026-09-26T03:03:27.825062+00:00"
+  },
+  "host_cleanup_sha256": "d6ad35901812f7dafb817a12c810ef715567d21c0d82a3afcf75618ca5dd8303",
+  "attribution": "Three fresh API stages plus one semantic reuse (attempt3); fixed-88 reused; restored after fault, never continuously available. Failed attempts and interrupted run1 remain failed/interrupted.",
+  "direct_image_observation": [
+    "available/en-steel-public-evidence-graph.png",
+    "available/ar-steel-simulated-evidence-graph.png",
+    "not_configured/ar-not_configured-graph.png",
+    "injected_network_unavailability/en-connection_failed-graph.png"
+  ],
+  "image_limit": "Representative visual observations only; no claim all448 images manually reviewed.",
+  "sanad": "Actual exit/stdout/stderr hashes, parsed coverage sets and decisions, inventory hashes, preservation and host cleanup.",
+  "muhasabah": "PASS for truthful result collation; independent result review and separate delegated acceptance pending."
+}

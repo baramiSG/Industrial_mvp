@@ -1,0 +1,85 @@
+{
+  "at_utc": "2026-09-25T18:31:52.469995+00:00",
+  "status": "PASS_SOURCE_AND_REQUIRED_ROOTS_PRESERVED; PDF_MANUAL_AND_CLAUDE_FINAL_VERDICT_PENDING",
+  "candidate_tree": "7c25b4616679d61f173f3d9072e3240e1a2a166b",
+  "source_inventory": {
+    "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/final-candidate-r2/FINAL-SOURCE-INVENTORY.json",
+    "sha256": "f906a444da17be277755c8e403a4599db8d862a8db84f5799aa31d7469adbacb"
+  },
+  "checked_roots": [
+    {
+      "root": "/home/barami/projects/ior-worktrees/s19",
+      "files": 3307,
+      "all_bytes_and_executable_modes_equal": true,
+      "head": "ce407db9832b61c5a8a85dfda2e3b7623da2fbc9",
+      "tree": "789577cbd16cec9cd6c260b5e98a5eac0ae83c20",
+      "branch": "slice/s19-bilingual-dossier",
+      "staged_paths": ""
+    },
+    {
+      "root": "/home/barami/.cache/industrial-opportunity-resolution-mvp/overnight-2026-09-23/s19-ops-final-r2/ci-root1",
+      "files": 3307,
+      "all_bytes_and_executable_modes_equal": true,
+      "head": "29bf5db55adaa57de2fa1f78aa5c9a028f31dc75",
+      "tree": "7c25b4616679d61f173f3d9072e3240e1a2a166b",
+      "status_porcelain": ""
+    },
+    {
+      "root": "/home/barami/.cache/industrial-opportunity-resolution-mvp/overnight-2026-09-23/s19-ops-final-r2/ci-root3",
+      "files": 3307,
+      "all_bytes_and_executable_modes_equal": true,
+      "head": "29bf5db55adaa57de2fa1f78aa5c9a028f31dc75",
+      "tree": "7c25b4616679d61f173f3d9072e3240e1a2a166b",
+      "status_porcelain": ""
+    }
+  ],
+  "protected_indexes": {
+    "record": {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ci2-replacement-preparation-r1/PROTECTED-INDEX-UNION-54.json",
+      "sha256": "5ce928e9a057ea8166200c520a17c5b15d8880d6ceb64f4a2af660ddc53607b6"
+    },
+    "count": 54,
+    "all_equal": true
+  },
+  "sanitized_r1_source_files": 3306,
+  "sanitized_r1_source_equal": true,
+  "interrupted_attempt": {
+    "record": {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ci2-replacement-preparation-r1/INTERRUPTED-ATTEMPT1-HASHES.json",
+      "sha256": "836d0761207c4a263b013ded608f97e21018032c819f29fecb6d88e3c44d778a"
+    },
+    "files": 33,
+    "all_equal": true
+  },
+  "ci2_result": {
+    "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-ci-runtime-r3/attempt1/ci2-result.json",
+    "sha256": "6c049030da1034a12640199f50b23f4f9c0f237fea8527658edfe542102c6a38"
+  },
+  "recovery_events": {
+    "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-ci-runtime-r3/attempt1/execution-events.jsonl",
+    "sha256": "f551f08e6fee482dc22fc130dcd537e010c42b59eab194b6d781d233afd7f25b"
+  },
+  "restored_identity": {
+    "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-ci-runtime-r3/attempt1/RESTORED-IDENTITY.json",
+    "sha256": "3e36fbaed1b291c581c44b4ea5794f254f7f01c5d6b5347e9b19efb698060363"
+  },
+  "restored_graph": {
+    "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-ci-runtime-r3/attempt1/RESTORED-GRAPH.json",
+    "sha256": "8156d58b8d931aff78954a7b40c322fe910203d843b5fe4126a049828469f76d"
+  },
+  "restored_graph_execution": {
+    "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-ci-runtime-r3/attempt1/RESTORED-GRAPH-execution.json",
+    "sha256": "aef8095de1242af4308d80688aa5a2942e7f16ae5ac1a053a106f3af703b177f"
+  },
+  "retained_id": "42216eec09ddb9d4ad68058d1d1547c1980281fbbeff5a53f8ae145f42ec8d1e",
+  "current_retained_health": "true healthy",
+  "owned_test_and_pdf_containers_absent": true,
+  "owned_volumes_retained": [
+    "s19-ops2-ci1-data",
+    "s19-ops2-ci2-data",
+    "s19-ops3-ci2-data"
+  ],
+  "incomplete_records": [],
+  "sanad": "Direct byte/mode rehash; guarded Git state; CI stdout/stderr hash checks; actual recovery receipts and current Docker identity/health/volume reads. No test rerun or product mutation.",
+  "muhasabah": "PASS for final preservation only; manual PDF supporting proof and independent final verdict remain pending."
+}

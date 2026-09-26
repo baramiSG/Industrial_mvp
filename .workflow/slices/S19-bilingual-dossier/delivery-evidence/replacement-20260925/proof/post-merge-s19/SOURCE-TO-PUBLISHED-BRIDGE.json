@@ -1,0 +1,808 @@
+{
+  "status": "MATERIALIZED_FOR_INDEPENDENT_REVIEW_NOT_APPROVED",
+  "writer": "Cursor grok-4.7-high records-only implementation; not an approval",
+  "implementation_commit": "6962105b4bee575a6271d08fe892144c6e6c1063",
+  "implementation_tree": "7c25b4616679d61f173f3d9072e3240e1a2a166b",
+  "pr_head": "39614fcdd8d8eb9a96381c3d1b806343d5164419",
+  "record_candidate_tree": null,
+  "record_candidate_tree_note": "This bridge does not embed the additive record candidate tree.",
+  "destination_prefix": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19",
+  "source_map": "COMPLETE-SOURCE-COPY-MAP.json",
+  "source_count": 77,
+  "original_byte_copies": 74,
+  "sanitized_derivatives": 3,
+  "replacement_literal": "[REDACTED_CI_CREDENTIAL]",
+  "sanitization_reason": "Three originals contain the isolated run-scoped CI fixture from the public workflow template ci-${{ github.run_id }}-${{ github.run_attempt }}-pw. Only exact fixture-value occurrences were replaced. Raw originals remain outside Git. This materialization is not approval of the derivatives.",
+  "six_job_logs_hash_distinction": {
+    "note": "Historical SIX-JOB-LOGS log_sha256 (main) and sha256 (PR map) fields refer to the original raw logs. Sanitization did not rewrite those hash fields. The bridge published_sha256 values are the bytes actually published. They are not equal to the raw log hashes for the two sanitized job logs.",
+    "main_six_job_logs_published_file_sha256": "47e06051b74d25a781af9ff351678820fb0a8ab97ee605bb17bfc91b4361336b",
+    "main_six_job_logs_original_sha256": "4633271781b7bba113686276db9d8000f1ad44d3f9c8324a138031de1c8da0c8",
+    "main_graph_job_id": 108232845414,
+    "main_graph_log_sha256_inside_published_json_refers_to_raw_log": "42e5a5044d4af808e226e98cbff563c6e5efcd70235dac471df484e866089226",
+    "main_graph_published_derivative_sha256": "72e819a817be0fda6fe6bc5715fd4d622e1915702f1bbce37fcc0febb9516279",
+    "main_graph_published_derivative_bytes": 73823,
+    "pr_six_job_logs_published_file_is_original_bytes_sha256": "d19da0db002cbfacd35c81697ef4bd5a2fd040009af05331073e564d42be43b8",
+    "pr_graph_job_id": 108206570262,
+    "pr_graph_sha256_inside_published_json_refers_to_raw_log": "34cb5215ea0b905510607f92e38297db381fd5ae8947cf03d11ba20a6553eb72",
+    "pr_graph_published_derivative_sha256": "b53acae92ce6ce1f74cb1d3e7d74fb9c48ef033af0aa8574a21964df5d25df56",
+    "pr_graph_published_derivative_bytes": 115764
+  },
+  "files": [
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/final-candidate-r2/CANDIDATE-FREEZE.json",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/subject/CANDIDATE-FREEZE.json",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "80c60cab802b6c851c2cfa5a7d18056e3564abedc4c3e6a6c65fc80bce32e20f",
+      "original_bytes": 12408,
+      "published_sha256": "80c60cab802b6c851c2cfa5a7d18056e3564abedc4c3e6a6c65fc80bce32e20f",
+      "published_bytes": 12408,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/final-candidate-r2/FINAL-SOURCE-INVENTORY.json",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/subject/FINAL-SOURCE-INVENTORY.json",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "f906a444da17be277755c8e403a4599db8d862a8db84f5799aa31d7469adbacb",
+      "original_bytes": 1023386,
+      "published_sha256": "f906a444da17be277755c8e403a4599db8d862a8db84f5799aa31d7469adbacb",
+      "published_bytes": 1023386,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/final-candidate-r2/task6-offline/RESULTS.json",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/gates/offline/RESULTS.json",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "1f2be1cf0be7bcc493bffe15e29b977e0bf26c1158385331690005e1b54db53f",
+      "original_bytes": 6597,
+      "published_sha256": "1f2be1cf0be7bcc493bffe15e29b977e0bf26c1158385331690005e1b54db53f",
+      "published_bytes": 6597,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/final-candidate-r2/task6-offline/PRESERVATION.json",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/gates/offline/PRESERVATION.json",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "190fea716766e259f96ca1849031a672aacbc95e312aff537eee091a59d209b1",
+      "original_bytes": 259,
+      "published_sha256": "190fea716766e259f96ca1849031a672aacbc95e312aff537eee091a59d209b1",
+      "published_bytes": 259,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/final-candidate-r2/task6-offline/offline-4.stdout",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/gates/offline/full-pytest.stdout",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "1d72543d3484e4ebe290c0d927dd5378920e39e254132e9a372ba50c096a660f",
+      "original_bytes": 5086,
+      "published_sha256": "1d72543d3484e4ebe290c0d927dd5378920e39e254132e9a372ba50c096a660f",
+      "published_bytes": 5086,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/final-candidate-r2/e2e-compare/RESULT.json",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/gates/e2e/RESULT.json",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "0d186b929ce5b1b0dedf7d10bbc731e2752a5d50b39994396d9d0dc946bcd95f",
+      "original_bytes": 1308,
+      "published_sha256": "0d186b929ce5b1b0dedf7d10bbc731e2752a5d50b39994396d9d0dc946bcd95f",
+      "published_bytes": 1308,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/final-candidate-r2/e2e-compare/stdout.log",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/gates/e2e/stdout.txt",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "bcc5f1da9eeae46e56ac7cc1078d47c853aaec3311914e2706a9856099d81c39",
+      "original_bytes": 2700,
+      "published_sha256": "bcc5f1da9eeae46e56ac7cc1078d47c853aaec3311914e2706a9856099d81c39",
+      "published_bytes": 2700,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/r1-final-preparation-r2/runtime-output/COMPARISON.json",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/gates/r1/COMPARISON.json",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "9c74e0dfbd6b3692ac7b74c1a7db420fd8ea237bea8a6d395b2741740a6cdbc3",
+      "original_bytes": 588399,
+      "published_sha256": "9c74e0dfbd6b3692ac7b74c1a7db420fd8ea237bea8a6d395b2741740a6cdbc3",
+      "published_bytes": 588399,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/r1-final-preparation-r2/runtime-output/EXECUTION-CLOSURE.json",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/gates/r1/EXECUTION-CLOSURE.json",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "76632a0fcbb866f33a3c0d137b2df1957f0f506161d0246e419ef72975ba0f7d",
+      "original_bytes": 4563,
+      "published_sha256": "76632a0fcbb866f33a3c0d137b2df1957f0f506161d0246e419ef72975ba0f7d",
+      "published_bytes": 4563,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-ci-runtime-r2/attempt1/ci1-result.json",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/gates/ci1/ci1-result.json",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "f3777dbc8e318b69fda73f86284f2a4c3150cc050030e417f7da4ed191a86bb2",
+      "original_bytes": 1544,
+      "published_sha256": "f3777dbc8e318b69fda73f86284f2a4c3150cc050030e417f7da4ed191a86bb2",
+      "published_bytes": 1544,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-ci-runtime-r2/attempt1/ci1.stdout",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/gates/ci1/ci1.stdout",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "4c464895a5402a818a595c50cf3b1db3e92d357e52a28ba7278f1ab22fa95311",
+      "original_bytes": 35862,
+      "published_sha256": "4c464895a5402a818a595c50cf3b1db3e92d357e52a28ba7278f1ab22fa95311",
+      "published_bytes": 35862,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-ci-runtime-r2/attempt1/ci1.stderr",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/gates/ci1/ci1.stderr",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "c7bf508befdb1cca96f30e456911266e05a041f94ede8f438b186b04f4a8d3fb",
+      "original_bytes": 4858,
+      "published_sha256": "c7bf508befdb1cca96f30e456911266e05a041f94ede8f438b186b04f4a8d3fb",
+      "published_bytes": 4858,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-ci-runtime-r2/ci-root1-pdf/PDF-COHORT-READY.json",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/gates/ci1-pdf/PDF-COHORT-READY.json",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "8c7488b3c8ed9552bf1890ebc019ed14e3850cefd42716f1f5f0c6584b4ee9db",
+      "original_bytes": 39926,
+      "published_sha256": "8c7488b3c8ed9552bf1890ebc019ed14e3850cefd42716f1f5f0c6584b4ee9db",
+      "published_bytes": 39926,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-ci-runtime-r2/ci-root1-pdf/rendered/RENDER-RESULT.json",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/gates/ci1-pdf/RENDER-RESULT.json",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "a1c0590662d2805a84d9086710cac574ff995d937319e3615789854289327c84",
+      "original_bytes": 1106103,
+      "published_sha256": "a1c0590662d2805a84d9086710cac574ff995d937319e3615789854289327c84",
+      "published_bytes": 1106103,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-ci-runtime-r2/ci-root1-pdf/strict/PDF-ACCEPTANCE.json",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/gates/ci1-pdf/PDF-ACCEPTANCE.json",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "6c24bffd19f1b85f7b8ca0d4ff1831a84e595c8ab8c04be65193fb2b34eaf81c",
+      "original_bytes": 4357747,
+      "published_sha256": "6c24bffd19f1b85f7b8ca0d4ff1831a84e595c8ab8c04be65193fb2b34eaf81c",
+      "published_bytes": 4357747,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-ci-runtime-r2/ci-root1-pdf/manual/FULL44-READINESS.json",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/gates/ci1-pdf/FULL44-READINESS.json",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "f00426b2d7e4c43fd0ae36f8c4e498c2c7c34da7ebe08f3e165b69976525658f",
+      "original_bytes": 29964,
+      "published_sha256": "f00426b2d7e4c43fd0ae36f8c4e498c2c7c34da7ebe08f3e165b69976525658f",
+      "published_bytes": 29964,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-ci-runtime-r2/ci-root1-pdf/manual/ROOT-FIRSTPAGES.json",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/gates/ci1-pdf/ROOT-FIRSTPAGES.json",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "ffb39a1818ea6f881334be879386291d19dd46096769f77991c4ca35375daa41",
+      "original_bytes": 92461,
+      "published_sha256": "ffb39a1818ea6f881334be879386291d19dd46096769f77991c4ca35375daa41",
+      "published_bytes": 92461,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-ci-runtime-r2/ci-root1-pdf/manual/APPENDIX-REUSE.json",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/gates/ci1-pdf/APPENDIX-REUSE.json",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "3cf48380040d175fea165eb2442bf874bacec3ab22002f10224631d521498ee9",
+      "original_bytes": 3075795,
+      "published_sha256": "3cf48380040d175fea165eb2442bf874bacec3ab22002f10224631d521498ee9",
+      "published_bytes": 3075795,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-ci-runtime-r2/ci-root1-pdf/rendered/RESULT.json",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/gates/ci1-pdf/rendered/RESULT.json",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "6167eb923a714f59bfbe5b7028aa7c9aad56538a3bf24fecebf9e45bae071be9",
+      "original_bytes": 367,
+      "published_sha256": "6167eb923a714f59bfbe5b7028aa7c9aad56538a3bf24fecebf9e45bae071be9",
+      "published_bytes": 367,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-ci-runtime-r2/ci-root1-pdf/strict/RESULT.json",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/gates/ci1-pdf/strict/RESULT.json",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "aba8365022f1244dfa8cb9534c1e1a8775d184f23d8be64ffd2cde03685853db",
+      "original_bytes": 367,
+      "published_sha256": "aba8365022f1244dfa8cb9534c1e1a8775d184f23d8be64ffd2cde03685853db",
+      "published_bytes": 367,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-ci-runtime-r2/ci-root1-pdf/manual/FRESH-APPENDIX.json",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/gates/ci1-pdf/manual/FRESH-APPENDIX.json",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "6202cd2ce6e8d9ab43ed4a8bafd410dbe7e0e31c448b9589d7a6c2e6df07dcb6",
+      "original_bytes": 4977,
+      "published_sha256": "6202cd2ce6e8d9ab43ed4a8bafd410dbe7e0e31c448b9589d7a6c2e6df07dcb6",
+      "published_bytes": 4977,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ci-host-restart-recovery-r1/INCIDENT.json",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/gates/interruption/INCIDENT.json",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "b39acec2b375d385f3e6b03178a48b86faf8a101a33fc63e13a2b61c9f047bfc",
+      "original_bytes": 11645,
+      "published_sha256": "b39acec2b375d385f3e6b03178a48b86faf8a101a33fc63e13a2b61c9f047bfc",
+      "published_bytes": 11645,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ci-host-restart-recovery-r1/RECOVERY-CLOSURE.json",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/gates/interruption/RECOVERY-CLOSURE.json",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "d22e8c8152e7417ee04b4f6af14dc184c44f0ed1f0e0560d13df366dc9021016",
+      "original_bytes": 2582,
+      "published_sha256": "d22e8c8152e7417ee04b4f6af14dc184c44f0ed1f0e0560d13df366dc9021016",
+      "published_bytes": 2582,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ci2-replacement-preparation-r1/INTERRUPTED-ATTEMPT1-HASHES.json",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/gates/interruption/INTERRUPTED-ATTEMPT1-HASHES.json",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "836d0761207c4a263b013ded608f97e21018032c819f29fecb6d88e3c44d778a",
+      "original_bytes": 10007,
+      "published_sha256": "836d0761207c4a263b013ded608f97e21018032c819f29fecb6d88e3c44d778a",
+      "published_bytes": 10007,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-ci-runtime-r3/attempt1/ci2-result.json",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/gates/ci2/ci2-result.json",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "6c049030da1034a12640199f50b23f4f9c0f237fea8527658edfe542102c6a38",
+      "original_bytes": 1551,
+      "published_sha256": "6c049030da1034a12640199f50b23f4f9c0f237fea8527658edfe542102c6a38",
+      "published_bytes": 1551,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-ci-runtime-r3/attempt1/ci2.stdout",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/gates/ci2/ci2.stdout",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "f7c67e963ec2b993dae6b8f57d06fd2279216588b7e38d7a837432f7fc0c36dd",
+      "original_bytes": 35862,
+      "published_sha256": "f7c67e963ec2b993dae6b8f57d06fd2279216588b7e38d7a837432f7fc0c36dd",
+      "published_bytes": 35862,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-ci-runtime-r3/attempt1/ci2.stderr",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/gates/ci2/ci2.stderr",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "af432cc8dec3728de48efb6cf86d9598d0c8b939ed06a78e728ab3f947506c09",
+      "original_bytes": 4860,
+      "published_sha256": "af432cc8dec3728de48efb6cf86d9598d0c8b939ed06a78e728ab3f947506c09",
+      "published_bytes": 4860,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-ci-runtime-r3/attempt1/RESTORED-GRAPH.json",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/gates/ci2/RESTORED-GRAPH.json",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "8156d58b8d931aff78954a7b40c322fe910203d843b5fe4126a049828469f76d",
+      "original_bytes": 1049,
+      "published_sha256": "8156d58b8d931aff78954a7b40c322fe910203d843b5fe4126a049828469f76d",
+      "published_bytes": 1049,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-ci-runtime-r3/attempt1/execution-events.jsonl",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/gates/ci2/execution-events.jsonl",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "f551f08e6fee482dc22fc130dcd537e010c42b59eab194b6d781d233afd7f25b",
+      "original_bytes": 1405,
+      "published_sha256": "f551f08e6fee482dc22fc130dcd537e010c42b59eab194b6d781d233afd7f25b",
+      "published_bytes": 1405,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-ci-runtime-r3/ci-root3-pdf/PDF-COHORT-READY.json",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/gates/ci2-pdf/PDF-COHORT-READY.json",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "4e44c93093b51e2f0ec7990159dddd7d7842b5734babf1a249667344cd7d6517",
+      "original_bytes": 39772,
+      "published_sha256": "4e44c93093b51e2f0ec7990159dddd7d7842b5734babf1a249667344cd7d6517",
+      "published_bytes": 39772,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-ci-runtime-r3/ci-root3-pdf/rendered/RENDER-RESULT.json",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/gates/ci2-pdf/RENDER-RESULT.json",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "d015bd21f088aa78f5937845ae347c2384b5cbafe897a8a26532c4fba9306014",
+      "original_bytes": 1106103,
+      "published_sha256": "d015bd21f088aa78f5937845ae347c2384b5cbafe897a8a26532c4fba9306014",
+      "published_bytes": 1106103,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-ci-runtime-r3/ci-root3-pdf/strict/PDF-ACCEPTANCE.json",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/gates/ci2-pdf/PDF-ACCEPTANCE.json",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "cfd1dc1bb43abfdeaac0f824a4a52d310d67d51a67b83c2d224fb0d991eabe2e",
+      "original_bytes": 4357747,
+      "published_sha256": "cfd1dc1bb43abfdeaac0f824a4a52d310d67d51a67b83c2d224fb0d991eabe2e",
+      "published_bytes": 4357747,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-ci-runtime-r3/ci-root3-pdf/manual/FULL44-READINESS.json",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/gates/ci2-pdf/FULL44-READINESS.json",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "9d0fbea00f8589053eda36e18c4fb00ea0d35c7e2d53c857eec4db93f5eda3fa",
+      "original_bytes": 29457,
+      "published_sha256": "9d0fbea00f8589053eda36e18c4fb00ea0d35c7e2d53c857eec4db93f5eda3fa",
+      "published_bytes": 29457,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-ci-runtime-r3/ci-root3-pdf/manual/ROOT-FIRSTPAGES.json",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/gates/ci2-pdf/ROOT-FIRSTPAGES.json",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "9fb7b15b86e344ed2ce06ff2be2b23860e63f2a0ad059f50b24c9bad917f0075",
+      "original_bytes": 89828,
+      "published_sha256": "9fb7b15b86e344ed2ce06ff2be2b23860e63f2a0ad059f50b24c9bad917f0075",
+      "published_bytes": 89828,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-ci-runtime-r3/ci-root3-pdf/manual/APPENDIX-REUSE.json",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/gates/ci2-pdf/APPENDIX-REUSE.json",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "94086d6625851db581a16b181016919a87587277fc6a536ed51e667de0a28ea6",
+      "original_bytes": 3075805,
+      "published_sha256": "94086d6625851db581a16b181016919a87587277fc6a536ed51e667de0a28ea6",
+      "published_bytes": 3075805,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-ci-runtime-r3/ci-root3-pdf/rendered/RESULT.json",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/gates/ci2-pdf/rendered/RESULT.json",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "bc27a3bb7e1179c76881f33431a01cc08576e554afed487e2a00a37cbef2cd67",
+      "original_bytes": 367,
+      "published_sha256": "bc27a3bb7e1179c76881f33431a01cc08576e554afed487e2a00a37cbef2cd67",
+      "published_bytes": 367,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-ci-runtime-r3/ci-root3-pdf/strict/RESULT.json",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/gates/ci2-pdf/strict/RESULT.json",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "7c326ca52b061158a0e7d466be32ec5e761bd173eae95386a5e76d6df82a7d44",
+      "original_bytes": 367,
+      "published_sha256": "7c326ca52b061158a0e7d466be32ec5e761bd173eae95386a5e76d6df82a7d44",
+      "published_bytes": 367,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-ci-runtime-r3/ci-root3-pdf/manual/FRESH-APPENDIX.json",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/gates/ci2-pdf/manual/FRESH-APPENDIX.json",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "7ce98a4627e173dbaa7aa7a7f2ea8e6dfaef30a9faccb374deb40c65254e97b1",
+      "original_bytes": 4850,
+      "published_sha256": "7ce98a4627e173dbaa7aa7a7f2ea8e6dfaef30a9faccb374deb40c65254e97b1",
+      "published_bytes": 4850,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/final-candidate-r2/implementation-review/FINAL-PRESERVATION-r3.json",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/gates/FINAL-PRESERVATION-r3.json",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "6224027192d1a705e3b130ffb2cad95202605a96af67af9c9b99d4e0d72ed409",
+      "original_bytes": 4369,
+      "published_sha256": "6224027192d1a705e3b130ffb2cad95202605a96af67af9c9b99d4e0d72ed409",
+      "published_bytes": 4369,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/.cache/industrial-opportunity-resolution-mvp/claude-reviews/s19-final-source-implementation-review-20260925.md",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/reviews/s19-final-source-implementation-review-20260925.md",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "5ade2422296fb767dd6c41d6ea5c3a7243d3b3e9a9d0e60da0a45596116f41e1",
+      "original_bytes": 10813,
+      "published_sha256": "5ade2422296fb767dd6c41d6ea5c3a7243d3b3e9a9d0e60da0a45596116f41e1",
+      "published_bytes": 10813,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/.cache/industrial-opportunity-resolution-mvp/claude-reviews/s19-final-e2e-r1-ci-operation-review-20260925.md",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/reviews/s19-final-e2e-r1-ci-operation-review-20260925.md",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "8855010a043ad83c8d150ae6a1d17b445cf346c9af198ac1ed8c6c7d40cbc745",
+      "original_bytes": 13346,
+      "published_sha256": "8855010a043ad83c8d150ae6a1d17b445cf346c9af198ac1ed8c6c7d40cbc745",
+      "published_bytes": 13346,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/.cache/industrial-opportunity-resolution-mvp/claude-reviews/s19-final-implementation-closure-review-20260925.md",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/reviews/s19-final-implementation-closure-review-20260925.md",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "50f33c00593f2cfc756bb5d7284a52b04f8dbc2dbe861807c0d0e30c01943f24",
+      "original_bytes": 8437,
+      "published_sha256": "50f33c00593f2cfc756bb5d7284a52b04f8dbc2dbe861807c0d0e30c01943f24",
+      "published_bytes": 8437,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/owner-decisions/20260925-s19-final-implementation-acceptance-1.json",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/authority/20260925-s19-final-implementation-acceptance-1.json",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "534d242f02b089d80f20adb18ccb01bc9110b7a0094b95013be5b021c1227843",
+      "original_bytes": 6464,
+      "published_sha256": "534d242f02b089d80f20adb18ccb01bc9110b7a0094b95013be5b021c1227843",
+      "published_bytes": 6464,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/final-candidate-r2/delivery/PRE-STAGE.json",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/delivery/PRE-STAGE.json",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "351b628d1bdae124a5e9d863e6145bc3da8e56d1ee778c75803fdba21d65c297",
+      "original_bytes": 923,
+      "published_sha256": "351b628d1bdae124a5e9d863e6145bc3da8e56d1ee778c75803fdba21d65c297",
+      "published_bytes": 923,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/final-candidate-r2/delivery/STAGED-TREE.json",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/delivery/STAGED-TREE.json",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "dec90e93be8a7a2a919d128966be85309beba270ff19edd01d774f6cc2ef2830",
+      "original_bytes": 331,
+      "published_sha256": "dec90e93be8a7a2a919d128966be85309beba270ff19edd01d774f6cc2ef2830",
+      "published_bytes": 331,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/final-candidate-r2/delivery/COMMIT.json",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/delivery/COMMIT.json",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "32dcf5ae6b39947bea8af53483dc42a412383bf8a641a3cc8c8d6c834067da74",
+      "original_bytes": 699,
+      "published_sha256": "32dcf5ae6b39947bea8af53483dc42a412383bf8a641a3cc8c8d6c834067da74",
+      "published_bytes": 699,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/final-candidate-r2/delivery/PUSH-BARAMISG.json",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/delivery/PUSH-BARAMISG.json",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "e21f0ecb17d887ed86543e66241137bfe1340c078c7ee9f9bc87dacbc66c27c5",
+      "original_bytes": 599,
+      "published_sha256": "e21f0ecb17d887ed86543e66241137bfe1340c078c7ee9f9bc87dacbc66c27c5",
+      "published_bytes": 599,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/final-candidate-r2/delivery/PR-CREATE.json",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/delivery/PR-CREATE.json",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "801d0e5c09f3cb8622267ec0faf0fda178897d9dc0cbdfc7196cae7094a6e5f1",
+      "original_bytes": 476,
+      "published_sha256": "801d0e5c09f3cb8622267ec0faf0fda178897d9dc0cbdfc7196cae7094a6e5f1",
+      "published_bytes": 476,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/final-candidate-r2/delivery/hosted-pr/HOSTED-RESULT.json",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/hosted-pr/HOSTED-RESULT.json",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "8df202a283e50bfc8ac70384a37a0ec1acb484a2eb38bff8fdeadcade225ade0",
+      "original_bytes": 2075,
+      "published_sha256": "8df202a283e50bfc8ac70384a37a0ec1acb484a2eb38bff8fdeadcade225ade0",
+      "published_bytes": 2075,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/final-candidate-r2/delivery/hosted-pr/RUN-FINAL.json",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/hosted-pr/RUN-FINAL.json",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "6bc5e14ab105c95f087d708255dcfd36016605feeebe739f4c3889aa2a0d84e4",
+      "original_bytes": 26648,
+      "published_sha256": "6bc5e14ab105c95f087d708255dcfd36016605feeebe739f4c3889aa2a0d84e4",
+      "published_bytes": 26648,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/final-candidate-r2/delivery/hosted-pr/PR-FINAL-CHECKS.json",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/hosted-pr/PR-FINAL-CHECKS.json",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "ecaf4db163c89eb7329b965faaca86708e934b3746aed32187a8b91d3ef358c6",
+      "original_bytes": 2520,
+      "published_sha256": "ecaf4db163c89eb7329b965faaca86708e934b3746aed32187a8b91d3ef358c6",
+      "published_bytes": 2520,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/final-candidate-r2/delivery/hosted-pr/SIX-JOB-LOGS.json",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/hosted-pr/SIX-JOB-LOGS.json",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "d19da0db002cbfacd35c81697ef4bd5a2fd040009af05331073e564d42be43b8",
+      "original_bytes": 16912,
+      "published_sha256": "d19da0db002cbfacd35c81697ef4bd5a2fd040009af05331073e564d42be43b8",
+      "published_bytes": 16912,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/final-candidate-r2/delivery/hosted-pr/HEAD-AND-PRESERVATION.json",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/hosted-pr/HEAD-AND-PRESERVATION.json",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "6a357e8e788d1c2e95d6e56547a819a19e44075dcf4cfb6f35d4f2ea6aa3f7be",
+      "original_bytes": 1308,
+      "published_sha256": "6a357e8e788d1c2e95d6e56547a819a19e44075dcf4cfb6f35d4f2ea6aa3f7be",
+      "published_bytes": 1308,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/final-candidate-r2/delivery/hosted-pr/job-108206569986.log",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/hosted-pr/jobs/job-108206569986.txt",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "36f7c682fca11a54cbb5d12508f85079f8f5b8fea381345c1ccff71cef8327ff",
+      "original_bytes": 77659,
+      "published_sha256": "36f7c682fca11a54cbb5d12508f85079f8f5b8fea381345c1ccff71cef8327ff",
+      "published_bytes": 77659,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/final-candidate-r2/delivery/hosted-pr/job-108206570262.log",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/hosted-pr/jobs/job-108206570262.txt",
+      "publication_disposition": "SANITIZED_DERIVATIVE",
+      "original_sha256": "34cb5215ea0b905510607f92e38297db381fd5ae8947cf03d11ba20a6553eb72",
+      "original_bytes": 115694,
+      "published_sha256": "b53acae92ce6ce1f74cb1d3e7d74fb9c48ef033af0aa8574a21964df5d25df56",
+      "published_bytes": 115764,
+      "bytes_equal_to_original": false,
+      "exact_replacement_count": 14,
+      "replacement_literal": "[REDACTED_CI_CREDENTIAL]"
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/final-candidate-r2/delivery/hosted-pr/job-108206570280.log",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/hosted-pr/jobs/job-108206570280.txt",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "53ece3e46c7d96f643886b878cd6003936bf29793c745457b5c82c717104e829",
+      "original_bytes": 88795,
+      "published_sha256": "53ece3e46c7d96f643886b878cd6003936bf29793c745457b5c82c717104e829",
+      "published_bytes": 88795,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/final-candidate-r2/delivery/hosted-pr/job-108206570347.log",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/hosted-pr/jobs/job-108206570347.txt",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "a2c7a1b8cf998808fb9b02e80cbf1541ffc04f125da49d6661d4236dd28f313b",
+      "original_bytes": 38811,
+      "published_sha256": "a2c7a1b8cf998808fb9b02e80cbf1541ffc04f125da49d6661d4236dd28f313b",
+      "published_bytes": 38811,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/final-candidate-r2/delivery/hosted-pr/job-108206570477.log",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/hosted-pr/jobs/job-108206570477.txt",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "b58f0d441a48ed672d6c4ffe5c80480e8842b056e78ed7d4b4335fc8fbbfdc78",
+      "original_bytes": 83798,
+      "published_sha256": "b58f0d441a48ed672d6c4ffe5c80480e8842b056e78ed7d4b4335fc8fbbfdc78",
+      "published_bytes": 83798,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/final-candidate-r2/delivery/hosted-pr/job-108206570546.log",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/hosted-pr/jobs/job-108206570546.txt",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "ffa3808e7965e4b56f1544dc14dbe9b864030291366c1c452512ae7a2ebf5d16",
+      "original_bytes": 83723,
+      "published_sha256": "ffa3808e7965e4b56f1544dc14dbe9b864030291366c1c452512ae7a2ebf5d16",
+      "published_bytes": 83723,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/.cache/industrial-opportunity-resolution-mvp/claude-reviews/s19-final-head-review-20260925.md",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/reviews/s19-final-head-review-20260925.md",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "684f95bf4dc8390a887e2c4c59b2dad174cbf4faa83af2f4fdbb06d713bfc6e3",
+      "original_bytes": 7850,
+      "published_sha256": "684f95bf4dc8390a887e2c4c59b2dad174cbf4faa83af2f4fdbb06d713bfc6e3",
+      "published_bytes": 7850,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/owner-decisions/20260925-s19-merge-release-1.json",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/authority/20260925-s19-merge-release-1.json",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "3fbd3d3435c36d119ae3ddf23c78af42c1e9a7baaece9117e494e2ec8c24313a",
+      "original_bytes": 2148,
+      "published_sha256": "3fbd3d3435c36d119ae3ddf23c78af42c1e9a7baaece9117e494e2ec8c24313a",
+      "published_bytes": 2148,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/final-candidate-r2/delivery/MERGE-PREFLIGHT.json",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/delivery/MERGE-PREFLIGHT.json",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "0dbca26253fc95d5addaaf9bec1ee63b9c06d2c23644a26cdf14101fa38f9d8c",
+      "original_bytes": 3121,
+      "published_sha256": "0dbca26253fc95d5addaaf9bec1ee63b9c06d2c23644a26cdf14101fa38f9d8c",
+      "published_bytes": 3121,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/final-candidate-r2/delivery/MERGE-COMMAND.json",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/delivery/MERGE-COMMAND.json",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "2500dbfb408c2be2741155d1de9dcd2a99edca8e2f224a8a174f48ebcb6e6835",
+      "original_bytes": 627,
+      "published_sha256": "2500dbfb408c2be2741155d1de9dcd2a99edca8e2f224a8a174f48ebcb6e6835",
+      "published_bytes": 627,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/final-candidate-r2/delivery/MERGE-READBACK.json",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/delivery/MERGE-READBACK.json",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "27a8f61e9ed70b1a007925e77ce824e2c36e159ee67b06c4f94c2cb7e101728d",
+      "original_bytes": 4288,
+      "published_sha256": "27a8f61e9ed70b1a007925e77ce824e2c36e159ee67b06c4f94c2cb7e101728d",
+      "published_bytes": 4288,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/final-candidate-r2/delivery/hosted-main/HOSTED-RESULT.json",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/hosted-main/HOSTED-RESULT.json",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "c13eec3a4938c1112771746de5af9092a4d36649f37706c6bf830e73e8ec5f52",
+      "original_bytes": 2566,
+      "published_sha256": "c13eec3a4938c1112771746de5af9092a4d36649f37706c6bf830e73e8ec5f52",
+      "published_bytes": 2566,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/final-candidate-r2/delivery/hosted-main/SIX-JOB-LOGS.json",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/hosted-main/SIX-JOB-LOGS.json",
+      "publication_disposition": "SANITIZED_DERIVATIVE",
+      "original_sha256": "4633271781b7bba113686276db9d8000f1ad44d3f9c8324a138031de1c8da0c8",
+      "original_bytes": 61174,
+      "published_sha256": "47e06051b74d25a781af9ff351678820fb0a8ab97ee605bb17bfc91b4361336b",
+      "published_bytes": 61239,
+      "bytes_equal_to_original": false,
+      "exact_replacement_count": 13,
+      "replacement_literal": "[REDACTED_CI_CREDENTIAL]"
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/final-candidate-r2/delivery/hosted-main/MAIN-READBACK.json",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/hosted-main/MAIN-READBACK.json",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "0b114f3ed87138719002698f316a1ef20811a1d57fd40b42de298e7dc0a3f156",
+      "original_bytes": 4202,
+      "published_sha256": "0b114f3ed87138719002698f316a1ef20811a1d57fd40b42de298e7dc0a3f156",
+      "published_bytes": 4202,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/final-candidate-r2/delivery/hosted-main/RUN-FINAL.json",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/hosted-main/RUN-FINAL.json",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "0e52e48d675cb6d410b338031369c9792579d61af55ccbef06365cad1725a835",
+      "original_bytes": 26708,
+      "published_sha256": "0e52e48d675cb6d410b338031369c9792579d61af55ccbef06365cad1725a835",
+      "published_bytes": 26708,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/final-candidate-r2/delivery/hosted-main/job-108232845246.log",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/hosted-main/jobs/job-108232845246.txt",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "8f22fb764cad5449e4b3e56668b3b2b7101f4c17eb00e997ff3fb13bc2e686f6",
+      "original_bytes": 27452,
+      "published_sha256": "8f22fb764cad5449e4b3e56668b3b2b7101f4c17eb00e997ff3fb13bc2e686f6",
+      "published_bytes": 27452,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/final-candidate-r2/delivery/hosted-main/job-108232845414.log",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/hosted-main/jobs/job-108232845414.txt",
+      "publication_disposition": "SANITIZED_DERIVATIVE",
+      "original_sha256": "42e5a5044d4af808e226e98cbff563c6e5efcd70235dac471df484e866089226",
+      "original_bytes": 73753,
+      "published_sha256": "72e819a817be0fda6fe6bc5715fd4d622e1915702f1bbce37fcc0febb9516279",
+      "published_bytes": 73823,
+      "bytes_equal_to_original": false,
+      "exact_replacement_count": 14,
+      "replacement_literal": "[REDACTED_CI_CREDENTIAL]"
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/final-candidate-r2/delivery/hosted-main/job-108232845429.log",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/hosted-main/jobs/job-108232845429.txt",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "0eed81c2d5ad97485cc738c2809f5a64c0d376300f5c06674749c0c83b780330",
+      "original_bytes": 62609,
+      "published_sha256": "0eed81c2d5ad97485cc738c2809f5a64c0d376300f5c06674749c0c83b780330",
+      "published_bytes": 62609,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/final-candidate-r2/delivery/hosted-main/job-108232845507.log",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/hosted-main/jobs/job-108232845507.txt",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "fbc8d2bb58c3beb87461955d1720cedd1f94225fd2a34cd4aba05491cabc9d49",
+      "original_bytes": 62534,
+      "published_sha256": "fbc8d2bb58c3beb87461955d1720cedd1f94225fd2a34cd4aba05491cabc9d49",
+      "published_bytes": 62534,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/final-candidate-r2/delivery/hosted-main/job-108232845543.log",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/hosted-main/jobs/job-108232845543.txt",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "ec16f84b220441f55c90000d9966ec60c0e925c87849dd02749e941073afddd5",
+      "original_bytes": 66688,
+      "published_sha256": "ec16f84b220441f55c90000d9966ec60c0e925c87849dd02749e941073afddd5",
+      "published_bytes": 66688,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/final-candidate-r2/delivery/hosted-main/job-108232845575.log",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/hosted-main/jobs/job-108232845575.txt",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "1307f929f82f1a2916735ab9141c17f58905d86eb75e7f0a9550c7c5d0ab723c",
+      "original_bytes": 49322,
+      "published_sha256": "1307f929f82f1a2916735ab9141c17f58905d86eb75e7f0a9550c7c5d0ab723c",
+      "published_bytes": 49322,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/final-candidate-r2/delivery/GITHUB-DELIVERY-CLOSURE.json",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/delivery/GITHUB-DELIVERY-CLOSURE.json",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "67c78cea71c99326abf6378040ddf5fc69730d63acaea27e82d3d6f18e1d9f91",
+      "original_bytes": 4421,
+      "published_sha256": "67c78cea71c99326abf6378040ddf5fc69730d63acaea27e82d3d6f18e1d9f91",
+      "published_bytes": 4421,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/final-candidate-r2/delivery/PR-BODY-DELIVERED.md",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/delivery/PR-BODY-DELIVERED.md",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "7e5894df3092049d00fabfa25ef12c83a3fca1bd7905cb8497201a455a5dc1c5",
+      "original_bytes": 5811,
+      "published_sha256": "7e5894df3092049d00fabfa25ef12c83a3fca1bd7905cb8497201a455a5dc1c5",
+      "published_bytes": 5811,
+      "bytes_equal_to_original": true
+    },
+    {
+      "source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/final-candidate-r2/delivery/PR-DELIVERY-UPDATE.json",
+      "published_path": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/delivery/PR-DELIVERY-UPDATE.json",
+      "publication_disposition": "ORIGINAL_BYTES",
+      "original_sha256": "3968cd88b964b77f6d1c9e827d9a43288de13522f8c49decd66a8df6648ef8a8",
+      "original_bytes": 717,
+      "published_sha256": "3968cd88b964b77f6d1c9e827d9a43288de13522f8c49decd66a8df6648ef8a8",
+      "published_bytes": 717,
+      "bytes_equal_to_original": true
+    }
+  ]
+}

@@ -1,0 +1,501 @@
+{
+  "at_utc": "2026-09-25T19:55:42.948851+00:00",
+  "head": "39614fcdd8d8eb9a96381c3d1b806343d5164419",
+  "event": "pull_request",
+  "run_attempt": 1,
+  "jobs": [
+    {
+      "name": "browser / Chromium / Python 3.12",
+      "job_id": 108206569986,
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/final-candidate-r2/delivery/hosted-pr/job-108206569986.log",
+      "sha256": "36f7c682fca11a54cbb5d12508f85079f8f5b8fea381345c1ccff71cef8327ff",
+      "summaries": [
+        "2026-09-25T18:51:08.2638977Z BROWSER PREFLIGHT PASS",
+        "2026-09-25T19:48:13.1336260Z 839 passed, 4 deselected in 3422.78s (0:57:02)",
+        "2026-09-25T19:48:14.1417109Z BROWSER PREFLIGHT PASS",
+        "2026-09-25T19:54:06.6900536Z 4 passed, 839 deselected in 352.04s (0:05:52)"
+      ],
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check out repository",
+          "conclusion": "success"
+        },
+        {
+          "name": "Set up Python",
+          "conclusion": "success"
+        },
+        {
+          "name": "Set up uv",
+          "conclusion": "success"
+        },
+        {
+          "name": "Sync locked browser-test environment",
+          "conclusion": "success"
+        },
+        {
+          "name": "Cache Playwright Chromium",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install Chromium dependencies",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run bilingual real-browser and visual gates",
+          "conclusion": "success"
+        },
+        {
+          "name": "Upload browser diagnostics on failure",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Post Cache Playwright Chromium",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Set up uv",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Set up Python",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Check out repository",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "name": "graph / Neo4j service / Python 3.12",
+      "job_id": 108206570262,
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/final-candidate-r2/delivery/hosted-pr/job-108206570262.log",
+      "sha256": "34cb5215ea0b905510607f92e38297db381fd5ae8947cf03d11ba20a6553eb72",
+      "summaries": [
+        "2026-09-25T18:51:05.8839427Z PROHIBITED FILE SCAN PASS (3307 tracked files)",
+        "2026-09-25T18:51:34.4044754Z GRAPH BUILD PASS (GRAPH-SAU-2026-09-12-6f43b1a8c4aa; 925 nodes; 1045 edges)",
+        "2026-09-25T18:51:41.2160323Z GRAPH LOAD PASS (ci; GRAPH-SAU-2026-09-12-6f43b1a8c4aa; created 925 nodes / 1045 relationships)",
+        "2026-09-25T18:51:42.8483344Z GRAPH LOAD PASS (ci; GRAPH-SAU-2026-09-12-6f43b1a8c4aa; created 0 nodes / 0 relationships)",
+        "2026-09-25T18:51:44.3476331Z GRAPH VERIFY PASS (ci; GRAPH-SAU-2026-09-12-6f43b1a8c4aa; 925 nodes; 1045 edges)",
+        "2026-09-25T18:51:51.0367771Z 9 passed, 1 skipped, 3 deselected, 1 warning in 5.19s",
+        "2026-09-25T18:52:04.0367971Z 1 passed, 12 deselected, 1 warning in 11.59s",
+        "2026-09-25T18:52:11.9175364Z 2 passed, 11 deselected, 1 warning in 0.92s"
+      ],
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Initialize containers",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check out repository",
+          "conclusion": "success"
+        },
+        {
+          "name": "Set up Python",
+          "conclusion": "success"
+        },
+        {
+          "name": "Set up uv",
+          "conclusion": "success"
+        },
+        {
+          "name": "Sync locked graph and browser environment",
+          "conclusion": "success"
+        },
+        {
+          "name": "Scan prohibited files and secret patterns",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install Chromium prerequisites for graph UI",
+          "conclusion": "success"
+        },
+        {
+          "name": "Wait for isolated Neo4j service",
+          "conclusion": "success"
+        },
+        {
+          "name": "Rebuild-check governed graph projection",
+          "conclusion": "success"
+        },
+        {
+          "name": "Load governed projection twice",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify live mirror equality",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run live Cypher equality suite",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run live graph UI equality suite",
+          "conclusion": "success"
+        },
+        {
+          "name": "Stop service and prove fail-closed behavior",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Set up uv",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Set up Python",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Check out repository",
+          "conclusion": "success"
+        },
+        {
+          "name": "Stop containers",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "name": "pip / Python 3.12",
+      "job_id": 108206570280,
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/final-candidate-r2/delivery/hosted-pr/job-108206570280.log",
+      "sha256": "53ece3e46c7d96f643886b878cd6003936bf29793c745457b5c82c717104e829",
+      "summaries": [
+        "2026-09-25T18:50:57.8310090Z PROHIBITED FILE SCAN PASS (3307 tracked files)",
+        "2026-09-25T18:50:58.3859244Z THRESHOLD LITERAL SCAN PASS (104 Python files; 24 configured numeric values)",
+        "2026-09-25T18:51:01.1272639Z ES MODULE CHECK PASS (51 files)",
+        "2026-09-25T18:51:01.3434640Z INTEGRITY PASS",
+        "2026-09-25T18:51:01.6407845Z SCENARIO VALIDATION PASS (11 scenarios)",
+        "2026-09-25T18:54:14.6258426Z CASE RECONSTRUCTION PASS (9 snapshots, 9 briefs)",
+        "2026-09-25T18:54:14.6260885Z GRAPH RECONSTRUCTION PASS (1 projections, 925 nodes, 1045 edges)",
+        "2026-09-25T18:54:14.6261728Z RECONSTRUCTION PASS (5 snapshots, 42 artifacts)",
+        "2026-09-25T18:54:14.6262290Z DOCUMENT RECONSTRUCTION PASS (26 records, 26 artifacts)",
+        "2026-09-25T18:54:14.6262841Z ENTITY RECONSTRUCTION PASS (3 artifacts, 46 links)",
+        "2026-09-25T18:54:14.6263342Z SCREENING RECONSTRUCTION PASS (1 snapshots)",
+        "2026-09-25T18:54:14.6263855Z CASE SELECTION RECONSTRUCTION PASS (2 records)",
+        "2026-09-25T18:58:56.6354754Z 3982 passed, 1 warning in 279.70s (0:04:39)",
+        "2026-09-25T18:58:58.3866890Z SMOKE PASS"
+      ],
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check out repository",
+          "conclusion": "success"
+        },
+        {
+          "name": "Set up Python",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install documented pip development path",
+          "conclusion": "success"
+        },
+        {
+          "name": "Scan prohibited files and secret patterns",
+          "conclusion": "success"
+        },
+        {
+          "name": "Reject embedded threshold literals",
+          "conclusion": "success"
+        },
+        {
+          "name": "Validate UI catalogue, token and copy contracts",
+          "conclusion": "success"
+        },
+        {
+          "name": "Compile Python",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check JavaScript ES-module syntax",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify integrity",
+          "conclusion": "success"
+        },
+        {
+          "name": "Validate synthetic scenarios against public marginals",
+          "conclusion": "success"
+        },
+        {
+          "name": "Reconstruct acquired snapshots from the raw store",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run test suite",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run demo smoke",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Set up Python",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Check out repository",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "name": "Docker image build",
+      "job_id": 108206570347,
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/final-candidate-r2/delivery/hosted-pr/job-108206570347.log",
+      "sha256": "a2c7a1b8cf998808fb9b02e80cbf1541ffc04f125da49d6661d4236dd28f313b",
+      "summaries": [],
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check out repository",
+          "conclusion": "success"
+        },
+        {
+          "name": "Build image",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify runtime image excludes optional graph driver",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Check out repository",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "name": "uv / Python 3.12",
+      "job_id": 108206570477,
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/final-candidate-r2/delivery/hosted-pr/job-108206570477.log",
+      "sha256": "b58f0d441a48ed672d6c4ffe5c80480e8842b056e78ed7d4b4335fc8fbbfdc78",
+      "summaries": [
+        "2026-09-25T18:50:52.8878465Z PROHIBITED FILE SCAN PASS (3307 tracked files)",
+        "2026-09-25T18:50:53.2096118Z THRESHOLD LITERAL SCAN PASS (104 Python files; 24 configured numeric values)",
+        "2026-09-25T18:50:55.0810697Z ES MODULE CHECK PASS (51 files)",
+        "2026-09-25T18:50:55.2441054Z INTEGRITY PASS",
+        "2026-09-25T18:50:55.4173858Z SCENARIO VALIDATION PASS (11 scenarios)",
+        "2026-09-25T18:52:52.3835665Z CASE RECONSTRUCTION PASS (9 snapshots, 9 briefs)",
+        "2026-09-25T18:52:52.3836000Z GRAPH RECONSTRUCTION PASS (1 projections, 925 nodes, 1045 edges)",
+        "2026-09-25T18:52:52.3836322Z RECONSTRUCTION PASS (5 snapshots, 42 artifacts)",
+        "2026-09-25T18:52:52.3836818Z DOCUMENT RECONSTRUCTION PASS (26 records, 26 artifacts)",
+        "2026-09-25T18:52:52.3837093Z ENTITY RECONSTRUCTION PASS (3 artifacts, 46 links)",
+        "2026-09-25T18:52:52.3837352Z SCREENING RECONSTRUCTION PASS (1 snapshots)",
+        "2026-09-25T18:52:52.3837615Z CASE SELECTION RECONSTRUCTION PASS (2 records)",
+        "2026-09-25T18:55:54.5844198Z 3982 passed, 1 warning in 179.57s (0:02:59)",
+        "2026-09-25T18:55:56.6223689Z SMOKE PASS"
+      ],
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check out repository",
+          "conclusion": "success"
+        },
+        {
+          "name": "Set up Python",
+          "conclusion": "success"
+        },
+        {
+          "name": "Set up uv",
+          "conclusion": "success"
+        },
+        {
+          "name": "Sync locked development environment",
+          "conclusion": "success"
+        },
+        {
+          "name": "Scan prohibited files and secret patterns",
+          "conclusion": "success"
+        },
+        {
+          "name": "Reject embedded threshold literals",
+          "conclusion": "success"
+        },
+        {
+          "name": "Validate UI catalogue, token and copy contracts",
+          "conclusion": "success"
+        },
+        {
+          "name": "Compile Python",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check JavaScript ES-module syntax",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify integrity",
+          "conclusion": "success"
+        },
+        {
+          "name": "Validate synthetic scenarios against public marginals",
+          "conclusion": "success"
+        },
+        {
+          "name": "Reconstruct acquired snapshots from the raw store",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run test suite",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run demo smoke",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Set up uv",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Set up Python",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Check out repository",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "name": "uv / Python 3.14",
+      "job_id": 108206570546,
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/final-candidate-r2/delivery/hosted-pr/job-108206570546.log",
+      "sha256": "ffa3808e7965e4b56f1544dc14dbe9b864030291366c1c452512ae7a2ebf5d16",
+      "summaries": [
+        "2026-09-25T18:50:56.6231700Z PROHIBITED FILE SCAN PASS (3307 tracked files)",
+        "2026-09-25T18:50:57.2673267Z THRESHOLD LITERAL SCAN PASS (104 Python files; 24 configured numeric values)",
+        "2026-09-25T18:51:00.8070434Z ES MODULE CHECK PASS (51 files)",
+        "2026-09-25T18:51:01.0320860Z INTEGRITY PASS",
+        "2026-09-25T18:51:01.3437230Z SCENARIO VALIDATION PASS (11 scenarios)",
+        "2026-09-25T18:54:03.8199162Z CASE RECONSTRUCTION PASS (9 snapshots, 9 briefs)",
+        "2026-09-25T18:54:03.8200358Z GRAPH RECONSTRUCTION PASS (1 projections, 925 nodes, 1045 edges)",
+        "2026-09-25T18:54:03.8201232Z RECONSTRUCTION PASS (5 snapshots, 42 artifacts)",
+        "2026-09-25T18:54:03.8202085Z DOCUMENT RECONSTRUCTION PASS (26 records, 26 artifacts)",
+        "2026-09-25T18:54:03.8202909Z ENTITY RECONSTRUCTION PASS (3 artifacts, 46 links)",
+        "2026-09-25T18:54:03.8203577Z SCREENING RECONSTRUCTION PASS (1 snapshots)",
+        "2026-09-25T18:54:03.8204150Z CASE SELECTION RECONSTRUCTION PASS (2 records)",
+        "2026-09-25T18:58:05.4544475Z 3982 passed, 1 warning in 239.02s (0:03:59)",
+        "2026-09-25T18:58:07.2916124Z SMOKE PASS"
+      ],
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check out repository",
+          "conclusion": "success"
+        },
+        {
+          "name": "Set up Python",
+          "conclusion": "success"
+        },
+        {
+          "name": "Set up uv",
+          "conclusion": "success"
+        },
+        {
+          "name": "Sync locked development environment",
+          "conclusion": "success"
+        },
+        {
+          "name": "Scan prohibited files and secret patterns",
+          "conclusion": "success"
+        },
+        {
+          "name": "Reject embedded threshold literals",
+          "conclusion": "success"
+        },
+        {
+          "name": "Validate UI catalogue, token and copy contracts",
+          "conclusion": "success"
+        },
+        {
+          "name": "Compile Python",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check JavaScript ES-module syntax",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify integrity",
+          "conclusion": "success"
+        },
+        {
+          "name": "Validate synthetic scenarios against public marginals",
+          "conclusion": "success"
+        },
+        {
+          "name": "Reconstruct acquired snapshots from the raw store",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run test suite",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run demo smoke",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Set up uv",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Set up Python",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Check out repository",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ]
+}

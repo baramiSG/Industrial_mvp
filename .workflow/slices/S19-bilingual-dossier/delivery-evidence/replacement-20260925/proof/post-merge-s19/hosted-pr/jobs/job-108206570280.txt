@@ -1,0 +1,678 @@
+pip / Python 3.12	UNKNOWN STEP	﻿2026-09-25T18:50:42.3392520Z Current runner version: '2.337.0'
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.3428953Z ##[group]Runner Image Provisioner
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.3430715Z Hosted Compute Agent
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.3431750Z Version: 20260828.587
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.3432811Z Commit: abac92662cab4cc7352de4f9f9d2e2419aad9c29
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.3434111Z Build Date: 2026-08-28T16:44:25Z
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.3435331Z Worker ID: {d32cce39-15d0-4ffe-bc49-1cb2e05bf2db}
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.3436570Z Azure Region: eastus
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.3437492Z ##[endgroup]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.3440355Z ##[group]Operating System
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.3441590Z Ubuntu
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.3442541Z 24.04.5
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.3443453Z LTS
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.3444286Z ##[endgroup]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.3445169Z ##[group]Runner Image
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.3446379Z Image: ubuntu-24.04
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.3447349Z Version: 20260920.314.1
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.3449845Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260920.314/images/ubuntu/Ubuntu2404-Readme.md
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.3452651Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260920.314
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.3454390Z ##[endgroup]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.3456270Z ##[group]GITHUB_TOKEN Permissions
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.3459197Z Contents: read
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.3460167Z Metadata: read
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.3461174Z ##[endgroup]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.3464189Z Secret source: Actions
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.3465740Z Cache mode: write
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.3466901Z Prepare workflow directory
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.3939925Z Prepare all required actions
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.4010801Z Getting action download info
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.6051996Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.7143268Z Download action repository 'actions/setup-python@v5' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.9244876Z Complete job name: pip / Python 3.12
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.0128611Z ##[group]Run actions/checkout@v4
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.0129540Z with:
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.0129995Z   persist-credentials: false
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.0130536Z   repository: baramiSG/Industrial_mvp
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.0134557Z   token: ***
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.0134990Z   ssh-strict: true
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.0135421Z   ssh-user: git
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.0135831Z   clean: true
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.0136266Z   sparse-checkout-cone-mode: true
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.0136792Z   fetch-depth: 1
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.0137216Z   fetch-tags: false
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.0137884Z   show-progress: true
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.0138403Z   lfs: false
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.0138831Z   submodules: false
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.0139322Z   set-safe-directory: true
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.0139822Z   allow-unsafe-pr-checkout: false
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.0140596Z ##[endgroup]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.1161209Z Syncing repository: baramiSG/Industrial_mvp
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.1164146Z ##[group]Getting Git version info
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.1165600Z Working directory is '/home/runner/work/Industrial_mvp/Industrial_mvp'
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.1167381Z [command]/usr/bin/git version
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.1242199Z git version 2.55.0
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.1269376Z ##[endgroup]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.1283850Z Temporarily overriding HOME='/home/runner/work/_temp/73478f3e-3e3e-4c89-bd3c-8b278e33be18' before making global git config changes
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.1286196Z Adding repository directory to the temporary git global config as a safe directory
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.1290929Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Industrial_mvp/Industrial_mvp
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.1349175Z Deleting the contents of '/home/runner/work/Industrial_mvp/Industrial_mvp'
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.1351496Z ##[group]Initializing the repository
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.1357023Z [command]/usr/bin/git init /home/runner/work/Industrial_mvp/Industrial_mvp
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.1481299Z hint: Using 'master' as the name for the initial branch. This default branch name
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.1483229Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.1485336Z hint: to use in all of your new repositories, which will suppress this warning,
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.1486618Z hint: call:
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.1487966Z hint:
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.1488820Z hint: 	git config --global init.defaultBranch <name>
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.1489857Z hint:
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.1490988Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.1492631Z hint: 'development'. The just-created branch can be renamed via this command:
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.1493910Z hint:
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.1494629Z hint: 	git branch -m <name>
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.1495557Z hint:
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.1496721Z hint: Disable this message with "git config set advice.defaultBranchName false"
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.1498777Z Initialized empty Git repository in /home/runner/work/Industrial_mvp/Industrial_mvp/.git/
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.1501748Z [command]/usr/bin/git remote add origin https://github.com/baramiSG/Industrial_mvp
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.1552890Z ##[endgroup]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.1554326Z ##[group]Disabling automatic garbage collection
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.1556325Z [command]/usr/bin/git config --local gc.auto 0
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.1589221Z ##[endgroup]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.1590588Z ##[group]Setting up auth
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.1596838Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.1630083Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.2036575Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.2076603Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.2301708Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.2337352Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.2563495Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.2603683Z ##[endgroup]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.2604964Z ##[group]Fetching the repository
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.2614408Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +0ba7806c8d9c0960d6647389a6b11694f00aaf5c:refs/remotes/pull/40/merge
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:47.1833205Z From https://github.com/baramiSG/Industrial_mvp
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:47.1835783Z  * [new ref]         0ba7806c8d9c0960d6647389a6b11694f00aaf5c -> pull/40/merge
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:47.1840075Z ##[endgroup]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:47.1841241Z ##[group]Determining the checkout info
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:47.1842400Z ##[endgroup]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:47.1846994Z [command]/usr/bin/git sparse-checkout disable
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:47.1907375Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:47.1939878Z ##[group]Checking out the ref
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:47.1944880Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/40/merge
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.0070469Z Note: switching to 'refs/remotes/pull/40/merge'.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.0072151Z 
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.0073254Z You are in 'detached HEAD' state. You can look around, make experimental
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.0075104Z changes and commit them, and you can discard any commits you make in this
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.0076959Z state without impacting any branches by switching back to a branch.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.0078096Z 
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.0078789Z If you want to create a new branch to retain commits you create, you may
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.0080345Z do so (now or later) by using -c with the switch command. Example:
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.0081251Z 
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.0081669Z   git switch -c <new-branch-name>
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.0082617Z 
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.0083035Z Or undo this operation with:
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.0083645Z 
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.0084009Z   git switch -
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.0084507Z 
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.0085367Z Turn off this advice by setting config variable advice.detachedHead to false
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.0086552Z 
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.0087942Z HEAD is now at 0ba7806 Merge 39614fcdd8d8eb9a96381c3d1b806343d5164419 into ce407db9832b61c5a8a85dfda2e3b7623da2fbc9
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.0142236Z ##[endgroup]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.0186608Z [command]/usr/bin/git log -1 --format=%H
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.0214846Z 0ba7806c8d9c0960d6647389a6b11694f00aaf5c
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.0224472Z ##[group]Removing auth
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.0228319Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.0264223Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.0493503Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.0521871Z http.https://github.com/.extraheader
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.0532656Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.0571508Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.0804723Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.0839545Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.1066883Z ##[endgroup]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.1576836Z ##[group]Run actions/setup-python@v5
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.1578398Z with:
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.1579308Z   python-version: 3.12
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.1580295Z   cache: pip
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.1581282Z   cache-dependency-path: pyproject.toml
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.1582598Z   check-latest: false
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.1593499Z   token: ***
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.1594439Z   update-environment: true
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.1595526Z   allow-prereleases: false
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.1596600Z   freethreaded: false
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.1597576Z ##[endgroup]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.2963069Z ##[group]Installed versions
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.3065110Z (node:2310) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.3068856Z (Use `node --trace-deprecation ...` to show where the warning was created)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.3070712Z Successfully set up CPython (3.12.14)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.3072589Z ##[endgroup]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.3422343Z [command]/opt/hostedtoolcache/Python/3.12.14/x64/bin/pip cache dir
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.6608930Z /home/runner/.cache/pip
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.7529791Z Cache hit for: setup-python-Linux-x64-24.04-Ubuntu-python-3.12.14-pip-8b5caba00eeb236b981f097f49d470ab523f2cadf55445b95ea144f9811664b0
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.7631436Z (node:2310) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.9329335Z Received 16022401 of 16022401 (100.0%), 105.4 MBs/sec
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.9330215Z Cache Size: ~15 MB (16022401 B)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.9358503Z [command]/usr/bin/tar -xf /home/runner/work/_temp/23e3af8d-9869-4ae3-bd5e-745db7298ca2/cache.tzst -P -C /home/runner/work/Industrial_mvp/Industrial_mvp --use-compress-program unzstd
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.9949013Z Cache restored successfully
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.9963273Z Cache restored from key: setup-python-Linux-x64-24.04-Ubuntu-python-3.12.14-pip-8b5caba00eeb236b981f097f49d470ab523f2cadf55445b95ea144f9811664b0
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.0159450Z ##[group]Run python -m pip install -e ".[dev]"
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.0160182Z ^[[36;1mpython -m pip install -e ".[dev]"^[[0m
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.0447301Z shell: /usr/bin/bash -e {0}
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.0448073Z env:
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.0448549Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.0449305Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.0450049Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.0450719Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.0451373Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.0452032Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.0452584Z ##[endgroup]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.6542758Z Obtaining file:///home/runner/work/Industrial_mvp/Industrial_mvp
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.6559760Z   Installing build dependencies: started
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:50.3293152Z   Installing build dependencies: finished with status 'done'
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:50.3299620Z   Checking if build backend supports build_editable: started
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:50.6953415Z   Checking if build backend supports build_editable: finished with status 'done'
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:50.6962396Z   Getting requirements to build editable: started
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:51.0604916Z   Getting requirements to build editable: finished with status 'done'
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:51.0618135Z   Preparing editable metadata (pyproject.toml): started
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:51.2753883Z   Preparing editable metadata (pyproject.toml): finished with status 'done'
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:51.4486831Z Collecting fastapi<1,>=0.110 (from industrial-opportunity-resolution-mvp==0.2.0)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:51.4500803Z   Using cached fastapi-0.141.1-py3-none-any.whl.metadata (27 kB)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:51.7722386Z Collecting uvicorn<1,>=0.29 (from uvicorn[standard]<1,>=0.29->industrial-opportunity-resolution-mvp==0.2.0)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:51.8208505Z   Downloading uvicorn-0.54.0-py3-none-any.whl.metadata (6.6 kB)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:51.8564463Z Collecting PyYAML<7,>=6 (from industrial-opportunity-resolution-mvp==0.2.0)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:51.8578030Z   Using cached pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.4 kB)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:51.8915077Z Collecting pytest<9,>=8 (from industrial-opportunity-resolution-mvp==0.2.0)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:51.8927984Z   Using cached pytest-8.4.2-py3-none-any.whl.metadata (7.7 kB)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:51.9120794Z Collecting httpx<1,>=0.27 (from industrial-opportunity-resolution-mvp==0.2.0)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:51.9136789Z   Using cached httpx-0.28.1-py3-none-any.whl.metadata (7.1 kB)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:51.9373545Z Collecting pypdf==6.16.1 (from industrial-opportunity-resolution-mvp==0.2.0)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:51.9386227Z   Using cached pypdf-6.16.1-py3-none-any.whl.metadata (7.5 kB)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:51.9655404Z Collecting starlette>=0.46.0 (from fastapi<1,>=0.110->industrial-opportunity-resolution-mvp==0.2.0)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:51.9686807Z   Downloading starlette-1.7.0-py3-none-any.whl.metadata (6.6 kB)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.0638163Z Collecting pydantic>=2.9.0 (from fastapi<1,>=0.110->industrial-opportunity-resolution-mvp==0.2.0)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.0652366Z   Using cached pydantic-2.13.5-py3-none-any.whl.metadata (110 kB)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.0833765Z Collecting typing-extensions>=4.8.0 (from fastapi<1,>=0.110->industrial-opportunity-resolution-mvp==0.2.0)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.0846949Z   Using cached typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.0932465Z Collecting typing-inspection>=0.4.2 (from fastapi<1,>=0.110->industrial-opportunity-resolution-mvp==0.2.0)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.0944450Z   Using cached typing_inspection-0.4.4-py3-none-any.whl.metadata (2.6 kB)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.1036316Z Collecting annotated-doc>=0.0.2 (from fastapi<1,>=0.110->industrial-opportunity-resolution-mvp==0.2.0)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.1048906Z   Using cached annotated_doc-0.0.5-py3-none-any.whl.metadata (6.5 kB)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.1217472Z Collecting anyio (from httpx<1,>=0.27->industrial-opportunity-resolution-mvp==0.2.0)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.1231181Z   Using cached anyio-4.15.1-py3-none-any.whl.metadata (4.7 kB)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.1409647Z Collecting certifi (from httpx<1,>=0.27->industrial-opportunity-resolution-mvp==0.2.0)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.1422771Z   Using cached certifi-2026.7.22-py3-none-any.whl.metadata (2.5 kB)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.1550363Z Collecting httpcore==1.* (from httpx<1,>=0.27->industrial-opportunity-resolution-mvp==0.2.0)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.1561775Z   Using cached httpcore-1.0.9-py3-none-any.whl.metadata (21 kB)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.1700587Z Collecting idna (from httpx<1,>=0.27->industrial-opportunity-resolution-mvp==0.2.0)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.1730549Z   Downloading idna-3.20-py3-none-any.whl.metadata (7.2 kB)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.1844089Z Collecting h11>=0.16 (from httpcore==1.*->httpx<1,>=0.27->industrial-opportunity-resolution-mvp==0.2.0)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.1855303Z   Using cached h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.1945871Z Collecting iniconfig>=1 (from pytest<9,>=8->industrial-opportunity-resolution-mvp==0.2.0)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.1957087Z   Using cached iniconfig-2.3.0-py3-none-any.whl.metadata (2.5 kB)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.2042516Z Collecting packaging>=20 (from pytest<9,>=8->industrial-opportunity-resolution-mvp==0.2.0)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.2054383Z   Using cached packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.2147516Z Collecting pluggy<2,>=1.5 (from pytest<9,>=8->industrial-opportunity-resolution-mvp==0.2.0)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.2159433Z   Using cached pluggy-1.6.0-py3-none-any.whl.metadata (4.8 kB)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.2314387Z Collecting pygments>=2.7.2 (from pytest<9,>=8->industrial-opportunity-resolution-mvp==0.2.0)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.2325963Z   Using cached pygments-2.21.0-py3-none-any.whl.metadata (2.5 kB)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.2474321Z Collecting click>=7.0 (from uvicorn<1,>=0.29->uvicorn[standard]<1,>=0.29->industrial-opportunity-resolution-mvp==0.2.0)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.2485310Z   Using cached click-8.5.0-py3-none-any.whl.metadata (2.6 kB)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.2754066Z Collecting httptools>=0.8.0 (from uvicorn[standard]<1,>=0.29->industrial-opportunity-resolution-mvp==0.2.0)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.2765942Z   Using cached httptools-0.8.0-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (3.5 kB)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.2888071Z Collecting python-dotenv>=0.13 (from uvicorn[standard]<1,>=0.29->industrial-opportunity-resolution-mvp==0.2.0)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.2898923Z   Using cached python_dotenv-1.2.3-py3-none-any.whl.metadata (29 kB)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.3385526Z Collecting uvloop>=0.15.1 (from uvicorn[standard]<1,>=0.29->industrial-opportunity-resolution-mvp==0.2.0)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.3399333Z   Using cached uvloop-0.22.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (4.9 kB)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.4110347Z Collecting watchfiles>=0.20 (from uvicorn[standard]<1,>=0.29->industrial-opportunity-resolution-mvp==0.2.0)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.4141040Z   Downloading watchfiles-1.3.0-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.9 kB)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.5120843Z Collecting websockets>=13.0 (from uvicorn[standard]<1,>=0.29->industrial-opportunity-resolution-mvp==0.2.0)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.5134587Z   Using cached websockets-17.1-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (6.3 kB)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.5257053Z Collecting annotated-types>=0.6.0 (from pydantic>=2.9.0->fastapi<1,>=0.110->industrial-opportunity-resolution-mvp==0.2.0)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.5270063Z   Using cached annotated_types-0.8.0-py3-none-any.whl.metadata (15 kB)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.1578415Z Collecting pydantic-core==2.46.5 (from pydantic>=2.9.0->fastapi<1,>=0.110->industrial-opportunity-resolution-mvp==0.2.0)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.1592936Z   Using cached pydantic_core-2.46.5-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.6 kB)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.1758069Z Using cached pypdf-6.16.1-py3-none-any.whl (382 kB)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.1771709Z Using cached fastapi-0.141.1-py3-none-any.whl (131 kB)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.1784091Z Using cached httpx-0.28.1-py3-none-any.whl (73 kB)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.1795753Z Using cached httpcore-1.0.9-py3-none-any.whl (78 kB)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.1807767Z Using cached pytest-8.4.2-py3-none-any.whl (365 kB)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.1820957Z Using cached pluggy-1.6.0-py3-none-any.whl (20 kB)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.1833360Z Using cached pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (807 kB)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.1868370Z Downloading uvicorn-0.54.0-py3-none-any.whl (87 kB)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.1987529Z Using cached annotated_doc-0.0.5-py3-none-any.whl (5.3 kB)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.1999598Z Using cached click-8.5.0-py3-none-any.whl (125 kB)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.2011655Z Using cached h11-0.16.0-py3-none-any.whl (37 kB)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.2024018Z Using cached httptools-0.8.0-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (523 kB)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.2037121Z Using cached iniconfig-2.3.0-py3-none-any.whl (7.5 kB)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.2048544Z Using cached packaging-26.3-py3-none-any.whl (129 kB)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.2060633Z Using cached pydantic-2.13.5-py3-none-any.whl (472 kB)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.2074229Z Using cached pydantic_core-2.46.5-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.1 MB)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.2093394Z Using cached annotated_types-0.8.0-py3-none-any.whl (13 kB)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.2105154Z Using cached pygments-2.21.0-py3-none-any.whl (1.3 MB)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.2121809Z Using cached python_dotenv-1.2.3-py3-none-any.whl (22 kB)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.2151655Z Downloading starlette-1.7.0-py3-none-any.whl (78 kB)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.2188736Z Using cached anyio-4.15.1-py3-none-any.whl (132 kB)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.2218465Z Downloading idna-3.20-py3-none-any.whl (69 kB)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.2250691Z Using cached typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.2262537Z Using cached typing_inspection-0.4.4-py3-none-any.whl (14 kB)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.2275092Z Using cached uvloop-0.22.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (4.4 MB)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.2334760Z Downloading watchfiles-1.3.0-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (458 kB)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.2392351Z Using cached websockets-17.1-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (224 kB)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.2404677Z Using cached certifi-2026.7.22-py3-none-any.whl (136 kB)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.3244895Z Building wheels for collected packages: industrial-opportunity-resolution-mvp
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.3254662Z   Building editable for industrial-opportunity-resolution-mvp (pyproject.toml): started
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.5809651Z   Building editable for industrial-opportunity-resolution-mvp (pyproject.toml): finished with status 'done'
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.5816095Z   Created wheel for industrial-opportunity-resolution-mvp: filename=industrial_opportunity_resolution_mvp-0.2.0-0.editable-py3-none-any.whl size=7886 sha256=573aa8ceb3f610014b9205604001cd8050d50d70904225e9340c268a76328083
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.5820447Z   Stored in directory: /tmp/pip-ephem-wheel-cache-jmfefr1_/wheels/df/3b/82/08c022be7864f60c7ee357f0e45118b927d33c8a4d86658268
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.5841163Z Successfully built industrial-opportunity-resolution-mvp
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.6406184Z Installing collected packages: websockets, uvloop, typing-extensions, PyYAML, python-dotenv, pypdf, pygments, pluggy, packaging, iniconfig, idna, httptools, h11, click, certifi, annotated-types, annotated-doc, uvicorn, typing-inspection, pytest, pydantic-core, httpcore, anyio, watchfiles, starlette, pydantic, httpx, fastapi, industrial-opportunity-resolution-mvp
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:56.3904178Z 
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:56.3935404Z Successfully installed PyYAML-6.0.3 annotated-doc-0.0.5 annotated-types-0.8.0 anyio-4.15.1 certifi-2026.7.22 click-8.5.0 fastapi-0.141.1 h11-0.16.0 httpcore-1.0.9 httptools-0.8.0 httpx-0.28.1 idna-3.20 industrial-opportunity-resolution-mvp-0.2.0 iniconfig-2.3.0 packaging-26.3 pluggy-1.6.0 pydantic-2.13.5 pydantic-core-2.46.5 pygments-2.21.0 pypdf-6.16.1 pytest-8.4.2 python-dotenv-1.2.3 starlette-1.7.0 typing-extensions-4.16.0 typing-inspection-0.4.4 uvicorn-0.54.0 uvloop-0.22.1 watchfiles-1.3.0 websockets-17.1
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:56.5104574Z ##[group]Run python scripts/check_prohibited_files.py
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:56.5105058Z ^[[36;1mpython scripts/check_prohibited_files.py^[[0m
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:56.5172029Z shell: /usr/bin/bash -e {0}
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:56.5172313Z env:
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:56.5172615Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:56.5173119Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:56.5173633Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:56.5174083Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:56.5174524Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:56.5174978Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:56.5175347Z ##[endgroup]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:57.8310090Z PROHIBITED FILE SCAN PASS (3307 tracked files)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:57.8616368Z ##[group]Run python scripts/check_threshold_literals.py
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:57.8616840Z ^[[36;1mpython scripts/check_threshold_literals.py^[[0m
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:57.8680509Z shell: /usr/bin/bash -e {0}
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:57.8680775Z env:
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:57.8681058Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:57.8681539Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:57.8682017Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:57.8682442Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:57.8682862Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:57.8683284Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:57.8683649Z ##[endgroup]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.3859244Z THRESHOLD LITERAL SCAN PASS (104 Python files; 24 configured numeric values)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.3986865Z ##[group]Run python scripts/check_ui_contracts.py
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.3987281Z ^[[36;1mpython scripts/check_ui_contracts.py^[[0m
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.4051501Z shell: /usr/bin/bash -e {0}
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.4051791Z env:
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.4052088Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.4052595Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.4053095Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.4053549Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.4053994Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.4054441Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.4054810Z ##[endgroup]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.8512565Z UI CONTRACT CHECK PASS
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.8648268Z ##[group]Run python -m compileall -q src scripts tests graph_tests
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.8648799Z ^[[36;1mpython -m compileall -q src scripts tests graph_tests^[[0m
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.8711250Z shell: /usr/bin/bash -e {0}
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.8711554Z env:
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.8711874Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.8712419Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.8712964Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.8713452Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.8713925Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.8714400Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.8714804Z ##[endgroup]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:59.5614778Z ##[group]Run python scripts/check_es_modules.py --node node
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:59.5615240Z ^[[36;1mpython scripts/check_es_modules.py --node node^[[0m
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:59.5678218Z shell: /usr/bin/bash -e {0}
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:59.5678503Z env:
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:59.5678814Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:59.5679318Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:59.5679812Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:59.5680253Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:59.5680699Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:59.5681141Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:59.5681511Z ##[endgroup]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.1272639Z ES MODULE CHECK PASS (51 files)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.1375796Z ##[group]Run PYTHONPATH=src python scripts/verify_integrity.py
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.1376276Z ^[[36;1mPYTHONPATH=src python scripts/verify_integrity.py^[[0m
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.1439463Z shell: /usr/bin/bash -e {0}
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.1439738Z env:
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.1440021Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.1440479Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.1440931Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.1441334Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.1441729Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.1442120Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.1442452Z ##[endgroup]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.3434640Z INTEGRITY PASS
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.3435107Z - data/manifests/snapshot_manifest.json
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.3435733Z - docs/authority/authority_hashes.json
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.3517436Z ##[group]Run PYTHONPATH=src python scripts/validate_scenarios.py
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.3518107Z ^[[36;1mPYTHONPATH=src python scripts/validate_scenarios.py^[[0m
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.3580021Z shell: /usr/bin/bash -e {0}
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.3580293Z env:
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.3580578Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.3581050Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.3581513Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.3581935Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.3582345Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.3582762Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.3583110Z ##[endgroup]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6407845Z SCENARIO VALIDATION PASS (11 scenarios)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6409410Z - SYN-MINISTRY-ALU-FOIL-001.json scenario=SYN-MINISTRY-ALU-FOIL-001 opportunity=SAU-H6-760711 status=PASS
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6410273Z   target_spec_demand_within_public_imports: PASS - 40 kt <= 53.6793 kt.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6411150Z   line_nameplate_within_disclosed_public_capacity: NOT_APPLICABLE - No numeric public installed nameplate is disclosed.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6412173Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6413237Z   qualified_availability_within_physical_output: NOT_APPLICABLE - No qualified_available_kt is declared.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6414296Z   demand_layers_remain_separate: INFORMATIONAL - Demand layers are reported separately; no ordering constraint is enforced.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6415367Z   tariff_line_allocation_sums_to_public_hs6_total: NOT_APPLICABLE - No tariff_line_allocation block is declared.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6416312Z   buyer_allocation_within_public_imports: NOT_APPLICABLE - No buyer_allocation block is declared.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6417232Z   expansion_assumption_disclosed_and_bounded: NOT_APPLICABLE - No expansion_assumption block is declared.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6418486Z   retained_flows_reconcile_to_public_trade: NOT_APPLICABLE - No production_and_retained_flows block is declared.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6419789Z   base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6420834Z   shared_enabler_declaration_valid: PASS - Shared-enabler declaration and explicit valuation source are valid.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6421709Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6422622Z - SYN-MINISTRY-ALU-PROFILES-001.json scenario=SYN-MINISTRY-ALU-PROFILES-001 opportunity=SAU-H6-760429 status=PASS
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6423365Z   target_spec_demand_within_public_imports: PASS - 6 kt <= 9.18984 kt.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6423987Z   line_nameplate_within_disclosed_public_capacity: NOT_APPLICABLE - No numeric public installed nameplate is disclosed.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6424697Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6425263Z   qualified_availability_within_physical_output: PASS - 2.5 kt <= 30.6 kt.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6425945Z   demand_layers_remain_separate: INFORMATIONAL - Demand layers are reported separately; no ordering constraint is enforced.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6426801Z   tariff_line_allocation_sums_to_public_hs6_total: PASS - Tariff-line quantities sum to 9.18984 kt against public imports 9.18984 kt.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6427609Z   buyer_allocation_within_public_imports: PASS - Buyer quantities sum to 6 kt within public imports 9.18984 kt.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6428471Z   expansion_assumption_disclosed_and_bounded: NOT_APPLICABLE - No expansion_assumption block is declared.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6429149Z   retained_flows_reconcile_to_public_trade: PASS - Retained flows reconcile to public trade marginals.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6430067Z   base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6430860Z   shared_enabler_declaration_valid: PASS - Shared-enabler declaration and explicit valuation source are valid.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6431500Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6432225Z - SYN-MINISTRY-FERT-RETAIL-PACKS-001.json scenario=SYN-MINISTRY-FERT-RETAIL-PACKS-001 opportunity=SAU-H6-310510 status=PASS
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6432941Z   target_spec_demand_within_public_imports: PASS - 1.2229 kt <= 2.44581 kt.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6433582Z   line_nameplate_within_disclosed_public_capacity: NOT_APPLICABLE - No numeric public installed nameplate is disclosed.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6434284Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6434954Z   qualified_availability_within_physical_output: NOT_APPLICABLE - No qualified_available_kt is declared.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6435726Z   demand_layers_remain_separate: INFORMATIONAL - Demand layers are reported separately; no ordering constraint is enforced.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6436503Z   tariff_line_allocation_sums_to_public_hs6_total: NOT_APPLICABLE - No tariff_line_allocation block is declared.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6437190Z   buyer_allocation_within_public_imports: NOT_APPLICABLE - No buyer_allocation block is declared.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6437973Z   expansion_assumption_disclosed_and_bounded: NOT_APPLICABLE - No expansion_assumption block is declared.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6438680Z   retained_flows_reconcile_to_public_trade: NOT_APPLICABLE - No production_and_retained_flows block is declared.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6439428Z   base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6440125Z   shared_enabler_declaration_valid: NOT_APPLICABLE - No shared-enabler declaration is present.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6440705Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6441347Z - SYN-MINISTRY-GALVALUME-001.json scenario=SYN-MINISTRY-GALVALUME-001 opportunity=SAU-H6-721061 status=PASS
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6441959Z   target_spec_demand_within_public_imports: PASS - 48 kt <= 93.232 kt.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6442699Z   line_nameplate_within_disclosed_public_capacity: NOT_APPLICABLE - No numeric public installed nameplate is disclosed.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6443400Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6444051Z   qualified_availability_within_physical_output: NOT_APPLICABLE - No qualified_available_kt is declared.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6444811Z   demand_layers_remain_separate: INFORMATIONAL - Demand layers are reported separately; no ordering constraint is enforced.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6445576Z   tariff_line_allocation_sums_to_public_hs6_total: NOT_APPLICABLE - No tariff_line_allocation block is declared.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6446253Z   buyer_allocation_within_public_imports: NOT_APPLICABLE - No buyer_allocation block is declared.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6446916Z   expansion_assumption_disclosed_and_bounded: NOT_APPLICABLE - No expansion_assumption block is declared.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6447625Z   retained_flows_reconcile_to_public_trade: NOT_APPLICABLE - No production_and_retained_flows block is declared.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6448639Z   base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6449327Z   shared_enabler_declaration_valid: NOT_APPLICABLE - No shared-enabler declaration is present.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6449907Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6450556Z - SYN-MINISTRY-PE-FILM-001.json scenario=SYN-MINISTRY-PE-FILM-001 opportunity=SAU-H6-392010 status=PASS
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6451158Z   target_spec_demand_within_public_imports: PASS - 16 kt <= 21.6782 kt.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6451929Z   line_nameplate_within_disclosed_public_capacity: NOT_APPLICABLE - No numeric public installed nameplate is disclosed.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6452641Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6453204Z   qualified_availability_within_physical_output: PASS - 24 kt <= 51.3 kt.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6453851Z   demand_layers_remain_separate: INFORMATIONAL - Demand layers are reported separately; no ordering constraint is enforced.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6454699Z   tariff_line_allocation_sums_to_public_hs6_total: PASS - Tariff-line quantities sum to 21.6782 kt against public imports 21.6782 kt.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6455446Z   buyer_allocation_within_public_imports: NOT_APPLICABLE - No buyer_allocation block is declared.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6456105Z   expansion_assumption_disclosed_and_bounded: NOT_APPLICABLE - No expansion_assumption block is declared.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6456827Z   retained_flows_reconcile_to_public_trade: NOT_APPLICABLE - No production_and_retained_flows block is declared.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6457608Z   base_demand_and_commitment_probability_valid: NOT_APPLICABLE - No base demand, commitment probability or MES block is declared.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6458483Z   shared_enabler_declaration_valid: NOT_APPLICABLE - No shared-enabler declaration is present.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6459134Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6459860Z - SYN-MINISTRY-PENICILLIN-API-001.json scenario=SYN-MINISTRY-PENICILLIN-API-001 opportunity=SAU-H6-294110 status=PASS
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6460534Z   target_spec_demand_within_public_imports: PASS - 0.171511 kt <= 0.343023 kt.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6461188Z   line_nameplate_within_disclosed_public_capacity: NOT_APPLICABLE - No numeric public installed nameplate is disclosed.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6461890Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6462571Z   qualified_availability_within_physical_output: NOT_APPLICABLE - No qualified_available_kt is declared.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6463328Z   demand_layers_remain_separate: INFORMATIONAL - Demand layers are reported separately; no ordering constraint is enforced.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6464219Z   tariff_line_allocation_sums_to_public_hs6_total: NOT_APPLICABLE - No tariff_line_allocation block is declared.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6464902Z   buyer_allocation_within_public_imports: NOT_APPLICABLE - No buyer_allocation block is declared.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6465560Z   expansion_assumption_disclosed_and_bounded: NOT_APPLICABLE - No expansion_assumption block is declared.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6466264Z   retained_flows_reconcile_to_public_trade: NOT_APPLICABLE - No production_and_retained_flows block is declared.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6467008Z   base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6467815Z   shared_enabler_declaration_valid: NOT_APPLICABLE - No shared-enabler declaration is present.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6468407Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6468999Z - SYN-MINISTRY-PP-001.json scenario=SYN-MINISTRY-PP-001 opportunity=SAU-H0-390210 status=PASS
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6469571Z   target_spec_demand_within_public_imports: PASS - 56 kt <= 56 kt.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6470033Z   line_nameplate_within_disclosed_public_capacity: PASS - 1170 kt <= 1170 kt.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6470594Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6471160Z   qualified_availability_within_physical_output: PASS - 80 kt <= 1055.46 kt.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6471821Z   demand_layers_remain_separate: INFORMATIONAL - Demand layers are reported separately; no ordering constraint is enforced.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6472595Z   tariff_line_allocation_sums_to_public_hs6_total: NOT_APPLICABLE - No tariff_line_allocation block is declared.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6473394Z   buyer_allocation_within_public_imports: NOT_APPLICABLE - No buyer_allocation block is declared.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6474065Z   expansion_assumption_disclosed_and_bounded: NOT_APPLICABLE - No expansion_assumption block is declared.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6474775Z   retained_flows_reconcile_to_public_trade: NOT_APPLICABLE - No production_and_retained_flows block is declared.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6475550Z   base_demand_and_commitment_probability_valid: NOT_APPLICABLE - No base demand, commitment probability or MES block is declared.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6476282Z   shared_enabler_declaration_valid: NOT_APPLICABLE - No shared-enabler declaration is present.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6476854Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6477442Z - SYN-MINISTRY-SOP-001.json scenario=SYN-MINISTRY-SOP-001 opportunity=SAU-H6-310430 status=PASS
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6478121Z   target_spec_demand_within_public_imports: PASS - 11.2306 kt <= 22.4611 kt.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6478767Z   line_nameplate_within_disclosed_public_capacity: NOT_APPLICABLE - No numeric public installed nameplate is disclosed.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6479464Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6480119Z   qualified_availability_within_physical_output: NOT_APPLICABLE - No qualified_available_kt is declared.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6480919Z   demand_layers_remain_separate: INFORMATIONAL - Demand layers are reported separately; no ordering constraint is enforced.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6481682Z   tariff_line_allocation_sums_to_public_hs6_total: NOT_APPLICABLE - No tariff_line_allocation block is declared.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6482354Z   buyer_allocation_within_public_imports: NOT_APPLICABLE - No buyer_allocation block is declared.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6483008Z   expansion_assumption_disclosed_and_bounded: NOT_APPLICABLE - No expansion_assumption block is declared.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6483721Z   retained_flows_reconcile_to_public_trade: NOT_APPLICABLE - No production_and_retained_flows block is declared.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6484460Z   base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6485143Z   shared_enabler_declaration_valid: NOT_APPLICABLE - No shared-enabler declaration is present.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6485859Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6486474Z - SYN-MINISTRY-STEEL-001.json scenario=SYN-MINISTRY-STEEL-001 opportunity=SAU-H0-721049 status=PASS
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6487065Z   target_spec_demand_within_public_imports: PASS - 104 kt <= 287.9 kt.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6487543Z   line_nameplate_within_disclosed_public_capacity: PASS - 250 kt <= 250 kt.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6488382Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6489047Z   qualified_availability_within_physical_output: NOT_APPLICABLE - No qualified_available_kt is declared.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6489820Z   demand_layers_remain_separate: INFORMATIONAL - Demand layers are reported separately; no ordering constraint is enforced.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6490608Z   tariff_line_allocation_sums_to_public_hs6_total: NOT_APPLICABLE - No tariff_line_allocation block is declared.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6491293Z   buyer_allocation_within_public_imports: NOT_APPLICABLE - No buyer_allocation block is declared.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6491956Z   expansion_assumption_disclosed_and_bounded: NOT_APPLICABLE - No expansion_assumption block is declared.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6492667Z   retained_flows_reconcile_to_public_trade: NOT_APPLICABLE - No production_and_retained_flows block is declared.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6493420Z   base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6494113Z   shared_enabler_declaration_valid: NOT_APPLICABLE - No shared-enabler declaration is present.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6494829Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6495550Z - SYN-MINISTRY-STREPTOMYCIN-API-001.json scenario=SYN-MINISTRY-STREPTOMYCIN-API-001 opportunity=SAU-H6-294120 status=PASS
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6496263Z   target_spec_demand_within_public_imports: PASS - 0.023889 kt <= 0.047779 kt.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6496923Z   line_nameplate_within_disclosed_public_capacity: NOT_APPLICABLE - No numeric public installed nameplate is disclosed.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6497635Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6498553Z   qualified_availability_within_physical_output: NOT_APPLICABLE - No qualified_available_kt is declared.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6499315Z   demand_layers_remain_separate: INFORMATIONAL - Demand layers are reported separately; no ordering constraint is enforced.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6500087Z   tariff_line_allocation_sums_to_public_hs6_total: NOT_APPLICABLE - No tariff_line_allocation block is declared.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6500770Z   buyer_allocation_within_public_imports: NOT_APPLICABLE - No buyer_allocation block is declared.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6501426Z   expansion_assumption_disclosed_and_bounded: NOT_APPLICABLE - No expansion_assumption block is declared.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6502134Z   retained_flows_reconcile_to_public_trade: NOT_APPLICABLE - No production_and_retained_flows block is declared.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6502878Z   base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6503563Z   shared_enabler_declaration_valid: NOT_APPLICABLE - No shared-enabler declaration is present.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6504135Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6504817Z - SYN-MINISTRY-TINPLATE-001.json scenario=SYN-MINISTRY-TINPLATE-001 opportunity=SAU-H6-721012 status=PASS
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6505944Z   target_spec_demand_within_public_imports: PASS - 95 kt <= 104.575 kt.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6506832Z   line_nameplate_within_disclosed_public_capacity: NOT_APPLICABLE - No numeric public installed nameplate is disclosed.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6507550Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6509613Z   qualified_availability_within_physical_output: NOT_APPLICABLE - No qualified_available_kt is declared.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6510707Z   demand_layers_remain_separate: INFORMATIONAL - Demand layers are reported separately; no ordering constraint is enforced.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6511488Z   tariff_line_allocation_sums_to_public_hs6_total: NOT_APPLICABLE - No tariff_line_allocation block is declared.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6512166Z   buyer_allocation_within_public_imports: NOT_APPLICABLE - No buyer_allocation block is declared.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6512835Z   expansion_assumption_disclosed_and_bounded: NOT_APPLICABLE - No expansion_assumption block is declared.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6513551Z   retained_flows_reconcile_to_public_trade: NOT_APPLICABLE - No production_and_retained_flows block is declared.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6514303Z   base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6515013Z   shared_enabler_declaration_valid: NOT_APPLICABLE - No shared-enabler declaration is present.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6515594Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6516065Z SHARED ENABLER CONSISTENCY PASS (1 enablers, 2 dependents)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6544950Z ##[group]Run PYTHONPATH=src python scripts/reconstruct_snapshot.py --all
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6545509Z ^[[36;1mPYTHONPATH=src python scripts/reconstruct_snapshot.py --all^[[0m
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6607526Z shell: /usr/bin/bash -e {0}
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6608034Z env:
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6608311Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6608758Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6609193Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6609580Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6609963Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6610383Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6610717Z ##[endgroup]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:06.5920872Z Rotated text discovered. Output will be incomplete.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:08.4752150Z Rotated text discovered. Output will be incomplete.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:10.3810785Z Rotated text discovered. Output will be incomplete.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:10.4554255Z Rotated text discovered. Output will be incomplete.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:10.6519410Z Rotated text discovered. Output will be incomplete.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:12.4054953Z Rotated text discovered. Output will be incomplete.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:12.9199667Z Rotated text discovered. Output will be incomplete.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:13.0555804Z Rotated text discovered. Output will be incomplete.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:13.4478453Z Rotated text discovered. Output will be incomplete.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:13.9670338Z Rotated text discovered. Output will be incomplete.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:14.2869610Z Rotated text discovered. Output will be incomplete.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:14.4693197Z Rotated text discovered. Output will be incomplete.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.5176651Z Rotated text discovered. Output will be incomplete.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:18.8145132Z Rotated text discovered. Output will be incomplete.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:45.6924379Z Rotated text discovered. Output will be incomplete.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:46.3651795Z Rotated text discovered. Output will be incomplete.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:46.5823501Z Rotated text discovered. Output will be incomplete.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:47.6296638Z Rotated text discovered. Output will be incomplete.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:47.7039586Z Rotated text discovered. Output will be incomplete.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:47.9023052Z Rotated text discovered. Output will be incomplete.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:49.6590392Z Rotated text discovered. Output will be incomplete.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:50.1904756Z Rotated text discovered. Output will be incomplete.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:50.3258770Z Rotated text discovered. Output will be incomplete.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:50.7160952Z Rotated text discovered. Output will be incomplete.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:51.2436708Z Rotated text discovered. Output will be incomplete.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:51.5528544Z Rotated text discovered. Output will be incomplete.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:51.7474489Z Rotated text discovered. Output will be incomplete.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:52.7999555Z Rotated text discovered. Output will be incomplete.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:56.1096119Z Rotated text discovered. Output will be incomplete.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:23.2376010Z Rotated text discovered. Output will be incomplete.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:23.9384129Z Rotated text discovered. Output will be incomplete.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:24.1227496Z Rotated text discovered. Output will be incomplete.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:25.1987495Z Rotated text discovered. Output will be incomplete.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:27.4428482Z Rotated text discovered. Output will be incomplete.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:29.5203174Z Rotated text discovered. Output will be incomplete.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:30.8673272Z Rotated text discovered. Output will be incomplete.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:31.6524124Z Got invalid hex string: Non-hexadecimal digit found (b'CMapName')
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:31.6525322Z Skipping broken line b'endcmap CMapName currentdict /CMap defineresource pop end end': Odd-length string
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:31.7628398Z Got invalid hex string: Non-hexadecimal digit found (b'CMapName')
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:31.7629590Z Skipping broken line b'endcmap CMapName currentdict /CMap defineresource pop end end': Odd-length string
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:31.8708983Z Got invalid hex string: Non-hexadecimal digit found (b'CMapName')
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:31.8710129Z Skipping broken line b'endcmap CMapName currentdict /CMap defineresource pop end end': Odd-length string
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:31.9819839Z Got invalid hex string: Non-hexadecimal digit found (b'CMapName')
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:31.9821334Z Skipping broken line b'endcmap CMapName currentdict /CMap defineresource pop end end': Odd-length string
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:32.0875425Z invalid pdf header: b'HTTP/'
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:32.0876174Z incorrect startxref pointer(1)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:32.0881016Z parsing for Object Streams
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:34.6308940Z invalid pdf header: b'HTTP/'
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:34.6309702Z incorrect startxref pointer(1)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:34.6313787Z parsing for Object Streams
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:37.7022828Z Rotated text discovered. Output will be incomplete.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:39.0431193Z Rotated text discovered. Output will be incomplete.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:53:01.7414307Z Rotated text discovered. Output will be incomplete.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:53:05.1522205Z Rotated text discovered. Output will be incomplete.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:54:14.6258426Z CASE RECONSTRUCTION PASS (9 snapshots, 9 briefs)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:54:14.6260885Z GRAPH RECONSTRUCTION PASS (1 projections, 925 nodes, 1045 edges)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:54:14.6261728Z RECONSTRUCTION PASS (5 snapshots, 42 artifacts)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:54:14.6262290Z DOCUMENT RECONSTRUCTION PASS (26 records, 26 artifacts)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:54:14.6262841Z ENTITY RECONSTRUCTION PASS (3 artifacts, 46 links)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:54:14.6263342Z SCREENING RECONSTRUCTION PASS (1 snapshots)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:54:14.6263855Z CASE SELECTION RECONSTRUCTION PASS (2 records)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:54:14.6586138Z ##[group]Run PYTHONPATH=src pytest -q
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:54:14.6586485Z ^[[36;1mPYTHONPATH=src pytest -q^[[0m
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:54:14.6649622Z shell: /usr/bin/bash -e {0}
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:54:14.6649923Z env:
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:54:14.6650244Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:54:14.6650783Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:54:14.6651321Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:54:14.6651798Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:54:14.6652271Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:54:14.6652748Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:54:14.6653165Z ##[endgroup]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:54:24.8494955Z ........................................................................ [  1%]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:54:27.7024526Z ........................................................................ [  3%]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:54:30.5166619Z ........................................................................ [  5%]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:54:33.3106097Z ........................................................................ [  7%]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:54:36.4397303Z ........................................................................ [  9%]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:54:44.5075723Z ........................................................................ [ 10%]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:54:44.8791334Z ........................................................................ [ 12%]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:54:45.5782390Z ........................................................................ [ 14%]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:54:45.8716033Z ........................................................................ [ 16%]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:54:46.1624264Z ........................................................................ [ 18%]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:54:46.4659921Z ........................................................................ [ 19%]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:54:46.8961569Z ........................................................................ [ 21%]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:54:47.6918490Z ........................................................................ [ 23%]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:54:49.4133086Z ........................................................................ [ 25%]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:54:57.7690655Z ........................................................................ [ 27%]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:02.2634760Z ........................................................................ [ 28%]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:06.4441854Z ........................................................................ [ 30%]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:09.7725337Z ........................................................................ [ 32%]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:24.3157417Z ........................................................................ [ 34%]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:30.0216158Z ........................................................................ [ 36%]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:33.6508045Z ........................................................................ [ 37%]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:34.6422886Z ........................................................................ [ 39%]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:36.1062823Z ........................................................................ [ 41%]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:37.2389140Z ........................................................................ [ 43%]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:38.7838907Z ........................................................................ [ 45%]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:40.3141094Z ........................................................................ [ 47%]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:44.4272945Z ........................................................................ [ 48%]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:47.3314521Z ........................................................................ [ 50%]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:49.9846605Z ........................................................................ [ 52%]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:52.7548403Z ........................................................................ [ 54%]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:57.6375992Z ........................................................................ [ 56%]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:59.3172932Z ........................................................................ [ 57%]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:56:15.9965820Z ........................................................................ [ 59%]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:56:32.8185220Z ........................................................................ [ 61%]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:57:29.2450752Z ........................................................................ [ 63%]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:57:29.7419090Z ........................................................................ [ 65%]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:57:58.5758510Z ........................................................................ [ 66%]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:58:09.2875778Z ........................................................................ [ 68%]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:58:12.6905457Z ........................................................................ [ 70%]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:58:19.4613490Z ........................................................................ [ 72%]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:58:21.9553001Z ........................................................................ [ 74%]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:58:29.6122719Z ........................................................................ [ 75%]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:58:29.8084332Z ........................................................................ [ 77%]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:58:30.0995921Z ........................................................................ [ 79%]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:58:31.3964693Z ........................................................................ [ 81%]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:58:33.2936550Z ........................................................................ [ 83%]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:58:40.6288403Z ........................................................................ [ 84%]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:58:41.0375342Z ........................................................................ [ 86%]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:58:44.1405120Z ........................................................................ [ 88%]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:58:44.3530922Z ........................................................................ [ 90%]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:58:44.8117406Z ........................................................................ [ 92%]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:58:45.2463518Z ........................................................................ [ 94%]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:58:45.4912275Z ........................................................................ [ 95%]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:58:46.0298860Z ........................................................................ [ 97%]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:58:55.0184587Z ........................................................................ [ 99%]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:58:56.6346193Z ......................                                                   [100%]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:58:56.6347489Z =============================== warnings summary ===============================
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:58:56.6349071Z ../../../../../opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/fastapi/testclient.py:1
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:58:56.6351145Z   /opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:58:56.6352962Z     from starlette.testclient import TestClient as TestClient  # noqa
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:58:56.6353535Z 
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:58:56.6353997Z -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:58:56.6354754Z 3982 passed, 1 warning in 279.70s (0:04:39)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:58:58.0156661Z ##[group]Run PYTHONPATH=src python scripts/demo_smoke.py
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:58:58.0157125Z ^[[36;1mPYTHONPATH=src python scripts/demo_smoke.py^[[0m
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:58:58.0219957Z shell: /usr/bin/bash -e {0}
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:58:58.0220235Z env:
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:58:58.0220544Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:58:58.0221051Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:58:58.0221558Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:58:58.0221992Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:58:58.0222434Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:58:58.0222875Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:58:58.0223244Z ##[endgroup]
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:58:58.3866890Z SMOKE PASS
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:58:58.3867458Z - Steel / public: INVESTIGATE
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:58:58.3868365Z - Steel / simulated: ADVANCE, real state unchanged
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:58:58.3869019Z - Polypropylene / public: REJECT generic capacity
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:58:58.3869607Z - AR/EN extraction golden gate: 100%
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:58:58.4125072Z Post job cleanup.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:58:58.5402658Z Cache hit occurred on the primary key setup-python-Linux-x64-24.04-Ubuntu-python-3.12.14-pip-8b5caba00eeb236b981f097f49d470ab523f2cadf55445b95ea144f9811664b0, not saving cache.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:58:58.5405298Z (node:6874) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:58:58.5406025Z (Use `node --trace-deprecation ...` to show where the warning was created)
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:58:58.5557023Z Post job cleanup.
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:58:58.6428679Z [command]/usr/bin/git version
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:58:58.6476053Z git version 2.55.0
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:58:58.6520508Z Temporarily overriding HOME='/home/runner/work/_temp/ae6e1c16-4f0d-48fd-bf5c-397cbe352eef' before making global git config changes
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:58:58.6521905Z Adding repository directory to the temporary git global config as a safe directory
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:58:58.6526711Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Industrial_mvp/Industrial_mvp
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:58:58.6567463Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:58:58.6604920Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:58:58.6899269Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:58:58.6946758Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:58:58.7252265Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:58:58.7294811Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:58:58.7753505Z Cleaning up orphan processes
+pip / Python 3.12	UNKNOWN STEP	2026-09-25T18:58:58.8166531Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-python@v5. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

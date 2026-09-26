@@ -1,0 +1,596 @@
+browser / Chromium / Python 3.12	UNKNOWN STEP	﻿2026-09-25T18:50:42.0112300Z Current runner version: '2.337.0'
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.0146549Z ##[group]Runner Image Provisioner
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.0147820Z Hosted Compute Agent
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.0148913Z Version: 20260828.587
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.0150209Z Commit: abac92662cab4cc7352de4f9f9d2e2419aad9c29
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.0151597Z Build Date: 2026-08-28T16:44:25Z
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.0152805Z Worker ID: {06fb50ac-4dc8-4c90-ac77-523f8ae3051f}
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.0153958Z Azure Region: eastus
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.0155066Z ##[endgroup]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.0157194Z ##[group]Operating System
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.0158347Z Ubuntu
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.0159200Z 24.04.5
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.0160253Z LTS
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.0161251Z ##[endgroup]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.0162227Z ##[group]Runner Image
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.0163401Z Image: ubuntu-24.04
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.0164354Z Version: 20260920.314.1
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.0166532Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260920.314/images/ubuntu/Ubuntu2404-Readme.md
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.0169145Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260920.314
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.0171275Z ##[endgroup]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.0173088Z ##[group]GITHUB_TOKEN Permissions
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.0176111Z Contents: read
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.0177079Z Metadata: read
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.0178125Z ##[endgroup]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.0181729Z Secret source: Actions
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.0183356Z Cache mode: write
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.0184504Z Prepare workflow directory
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.0651522Z Prepare all required actions
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.0722189Z Getting action download info
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.3012361Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.3928702Z Download action repository 'actions/setup-python@v5' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.4677180Z Download action repository 'astral-sh/setup-uv@v6' (SHA:d0cc045d04ccac9d8b7881df0226f9e82c39688e)
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.6800640Z Download action repository 'actions/cache@v6.1.0' (SHA:55cc8345863c7cc4c66a329aec7e433d2d1c52a9)
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.7861183Z Download action repository 'actions/upload-artifact@v7.0.1' (SHA:043fb46d1a93c77aae656e7c1c64a875d1fc6a0a)
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.9971802Z Complete job name: browser / Chromium / Python 3.12
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.0869010Z ##[group]Run actions/checkout@v4
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.0870474Z with:
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.0871018Z   persist-credentials: false
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.0871741Z   repository: baramiSG/Industrial_mvp
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.0880823Z   token: ***
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.0881359Z   ssh-strict: true
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.0881892Z   ssh-user: git
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.0882403Z   clean: true
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.0882965Z   sparse-checkout-cone-mode: true
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.0883664Z   fetch-depth: 1
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.0884192Z   fetch-tags: false
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.0884737Z   show-progress: true
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.0885297Z   lfs: false
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.0885798Z   submodules: false
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.0886388Z   set-safe-directory: true
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.0887066Z   allow-unsafe-pr-checkout: false
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.0888073Z ##[endgroup]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.1931256Z Syncing repository: baramiSG/Industrial_mvp
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.1934833Z ##[group]Getting Git version info
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.1936698Z Working directory is '/home/runner/work/Industrial_mvp/Industrial_mvp'
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.1938346Z [command]/usr/bin/git version
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.2038949Z git version 2.55.0
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.2074225Z ##[endgroup]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.2084106Z Temporarily overriding HOME='/home/runner/work/_temp/10065fa2-1430-4c76-bd31-f22e0d06fdd9' before making global git config changes
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.2088819Z Adding repository directory to the temporary git global config as a safe directory
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.2092864Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Industrial_mvp/Industrial_mvp
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.2145087Z Deleting the contents of '/home/runner/work/Industrial_mvp/Industrial_mvp'
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.2154475Z ##[group]Initializing the repository
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.2158714Z [command]/usr/bin/git init /home/runner/work/Industrial_mvp/Industrial_mvp
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.2268309Z hint: Using 'master' as the name for the initial branch. This default branch name
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.2271161Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.2273696Z hint: to use in all of your new repositories, which will suppress this warning,
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.2275638Z hint: call:
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.2276379Z hint:
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.2277456Z hint: 	git config --global init.defaultBranch <name>
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.2278962Z hint:
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.2280507Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.2283018Z hint: 'development'. The just-created branch can be renamed via this command:
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.2284926Z hint:
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.2285758Z hint: 	git branch -m <name>
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.2286760Z hint:
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.2287926Z hint: Disable this message with "git config set advice.defaultBranchName false"
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.2294867Z Initialized empty Git repository in /home/runner/work/Industrial_mvp/Industrial_mvp/.git/
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.2299390Z [command]/usr/bin/git remote add origin https://github.com/baramiSG/Industrial_mvp
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.2338262Z ##[endgroup]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.2340254Z ##[group]Disabling automatic garbage collection
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.2352179Z [command]/usr/bin/git config --local gc.auto 0
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.2387793Z ##[endgroup]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.2389600Z ##[group]Setting up auth
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.2396801Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.2447642Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.2875721Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.2913902Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.3134651Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.3171333Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.3398257Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.3437951Z ##[endgroup]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.3440788Z ##[group]Fetching the repository
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.3449891Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +0ba7806c8d9c0960d6647389a6b11694f00aaf5c:refs/remotes/pull/40/merge
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:47.2054870Z From https://github.com/baramiSG/Industrial_mvp
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:47.2055544Z  * [new ref]         0ba7806c8d9c0960d6647389a6b11694f00aaf5c -> pull/40/merge
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:47.2060028Z ##[endgroup]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:47.2060809Z ##[group]Determining the checkout info
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:47.2063003Z ##[endgroup]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:47.2077040Z [command]/usr/bin/git sparse-checkout disable
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:47.2130486Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:47.2160820Z ##[group]Checking out the ref
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:47.2164357Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/40/merge
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.0039369Z Note: switching to 'refs/remotes/pull/40/merge'.
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.0040007Z 
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.0040491Z You are in 'detached HEAD' state. You can look around, make experimental
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.0041141Z changes and commit them, and you can discard any commits you make in this
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.0042091Z state without impacting any branches by switching back to a branch.
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.0042458Z 
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.0042707Z If you want to create a new branch to retain commits you create, you may
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.0043276Z do so (now or later) by using -c with the switch command. Example:
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.0043584Z 
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.0043714Z   git switch -c <new-branch-name>
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.0043925Z 
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.0044051Z Or undo this operation with:
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.0044245Z 
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.0044352Z   git switch -
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.0044533Z 
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.0044793Z Turn off this advice by setting config variable advice.detachedHead to false
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.0045164Z 
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.0045575Z HEAD is now at 0ba7806 Merge 39614fcdd8d8eb9a96381c3d1b806343d5164419 into ce407db9832b61c5a8a85dfda2e3b7623da2fbc9
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.0118557Z ##[endgroup]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.0165480Z [command]/usr/bin/git log -1 --format=%H
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.0192173Z 0ba7806c8d9c0960d6647389a6b11694f00aaf5c
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.0200739Z ##[group]Removing auth
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.0204289Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.0236493Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.0464158Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.0491655Z http.https://github.com/.extraheader
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.0498507Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.0533933Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.0764487Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.0798633Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.1024154Z ##[endgroup]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.1289278Z ##[group]Run actions/setup-python@v5
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.1289598Z with:
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.1290114Z   python-version: 3.12
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.1290354Z   check-latest: false
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.1293057Z   token: ***
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.1293275Z   update-environment: true
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.1293543Z   allow-prereleases: false
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.1293781Z   freethreaded: false
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.1294001Z ##[endgroup]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.2618690Z ##[group]Installed versions
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.2722933Z (node:2335) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.2724205Z (Use `node --trace-deprecation ...` to show where the warning was created)
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.2725009Z Successfully set up CPython (3.12.14)
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.2725570Z ##[endgroup]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.2964080Z ##[group]Run astral-sh/setup-uv@v6
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.2964419Z with:
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.2964636Z   enable-cache: true
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.2964884Z   cache-dependency-glob: uv.lock
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.2965158Z   activate-environment: false
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.2965530Z   working-directory: /home/runner/work/Industrial_mvp/Industrial_mvp
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.2965935Z   server-url: https://github.com
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.2969031Z   github-token: ***
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.2969295Z   restore-cache: true
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.2969534Z   save-cache: true
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.2969906Z   prune-cache: true
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.2970150Z   ignore-nothing-to-cache: false
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.2970441Z   ignore-empty-workdir: false
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.2970711Z   add-problem-matchers: true
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.2970967Z env:
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.2971235Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.2972044Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.2972503Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.2972901Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.2973297Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.2973703Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.2974073Z ##[endgroup]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.4878935Z (node:2344) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.4880491Z (Use `node --trace-deprecation ...` to show where the warning was created)
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.5040995Z Trying to find version for uv in: /home/runner/work/Industrial_mvp/Industrial_mvp/uv.toml
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.5041988Z Could not find file: /home/runner/work/Industrial_mvp/Industrial_mvp/uv.toml
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.5043210Z Trying to find version for uv in: /home/runner/work/Industrial_mvp/Industrial_mvp/pyproject.toml
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.5044729Z Could not determine uv version from uv.toml or pyproject.toml. Falling back to latest.
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.5047010Z Getting latest version from GitHub API...
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.7268022Z manifest-file not provided, reading from local file.
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.7312619Z manifest-file does not contain version 0.12.19, arch x86_64, platform unknown-linux-gnu. Falling back to GitHub releases.
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.7314354Z Downloading uv from "https://github.com/astral-sh/uv/releases/download/0.12.19/uv-x86_64-unknown-linux-gnu.tar.gz" ...
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.0154357Z [command]/usr/bin/tar xz --warning=no-unknown-keyword --overwrite -C /home/runner/work/_temp/bc1e2de6-3a06-4952-9cf3-5471e6222cc8 -f /home/runner/work/_temp/2412fdaa-8c23-477c-8689-1038239d6af5
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.4116532Z Added /home/runner/.local/bin to the path
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.4119292Z Added /opt/hostedtoolcache/uv/0.12.19/x86_64 to the path
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.4128201Z Set UV_CACHE_DIR to /home/runner/work/_temp/setup-uv-cache
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.4128884Z Successfully installed uv version 0.12.19
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.4129899Z Searching files using cache dependency glob: /home/runner/work/Industrial_mvp/Industrial_mvp/uv.lock
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.4168076Z /home/runner/work/Industrial_mvp/Industrial_mvp/uv.lock
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.4189889Z Found 1 files to hash.
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.5671011Z Trying to restore uv cache from GitHub Actions cache with key: setup-uv-1-x86_64-unknown-linux-gnu-3.12.14-pruned-c921368db8179caab5f9fcb456ae82c8b9b44f1a91d136d216ed8378cbc6eb99
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.6188312Z Cache hit for: setup-uv-1-x86_64-unknown-linux-gnu-3.12.14-pruned-c921368db8179caab5f9fcb456ae82c8b9b44f1a91d136d216ed8378cbc6eb99
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.6302250Z (node:2344) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.6907173Z Received 207484 of 207484 (100.0%), 6.0 MBs/sec
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.6907655Z Cache Size: ~0 MB (207484 B)
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.6936880Z [command]/usr/bin/tar -xf /home/runner/work/_temp/b68308dc-0635-468b-990a-7bc2034c6248/cache.tzst -P -C /home/runner/work/Industrial_mvp/Industrial_mvp --use-compress-program unzstd
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.7037846Z Cache restored successfully
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.7042458Z uv cache restored from GitHub Actions cache with key: setup-uv-1-x86_64-unknown-linux-gnu-3.12.14-pruned-c921368db8179caab5f9fcb456ae82c8b9b44f1a91d136d216ed8378cbc6eb99
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.7184148Z ##[group]Run uv sync --locked --extra dev --extra e2e --python "3.12"
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.7184719Z ^[[36;1muv sync --locked --extra dev --extra e2e --python "3.12"^[[0m
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.7498402Z shell: /usr/bin/bash -e {0}
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.7498705Z env:
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.7499014Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.7500027Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.7500529Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.7501003Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.7501443Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.7501889Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.7502319Z   UV_CACHE_DIR: /home/runner/work/_temp/setup-uv-cache
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.7502642Z ##[endgroup]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.8123858Z Using CPython 3.12.14 interpreter at: /opt/hostedtoolcache/Python/3.12.14/x64/bin/python3.12
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.8124986Z Creating virtual environment at: .venv
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.8157923Z Resolved 43 packages in 0.77ms
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.8221101Z    Building industrial-opportunity-resolution-mvp @ file:///home/runner/work/Industrial_mvp/Industrial_mvp
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.8905612Z Downloading playwright (45.5MiB)
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.9011645Z Downloading uvloop (4.2MiB)
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.9039165Z Downloading pygments (1.2MiB)
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.9051456Z Downloading pillow (6.6MiB)
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.9052191Z Downloading pydantic-core (2.0MiB)
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:50.0049595Z  Downloaded pydantic-core
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:50.0074528Z  Downloaded pygments
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:50.0481180Z  Downloaded uvloop
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:50.0627845Z  Downloaded pillow
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:50.3397913Z  Downloaded playwright
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:50.9157371Z       Built industrial-opportunity-resolution-mvp @ file:///home/runner/work/Industrial_mvp/Industrial_mvp
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:50.9167326Z Prepared 40 packages in 1.09s
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:50.9341009Z Installed 40 packages in 17ms
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:50.9341651Z  + annotated-doc==0.0.5
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:50.9342138Z  + annotated-types==0.8.0
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:50.9342570Z  + anyio==4.14.2
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:50.9342951Z  + certifi==2026.7.22
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:50.9343416Z  + charset-normalizer==3.5.1
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:50.9343874Z  + click==8.5.0
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:50.9344227Z  + fastapi==0.141.1
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:50.9344595Z  + greenlet==3.5.5
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:50.9344979Z  + h11==0.16.0
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:50.9345365Z  + httpcore==1.0.9
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:50.9345751Z  + httptools==0.8.0
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:50.9346174Z  + httpx==0.28.1
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:50.9346519Z  + idna==3.19
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:50.9347359Z  + industrial-opportunity-resolution-mvp==0.2.0 (from file:///home/runner/work/Industrial_mvp/Industrial_mvp)
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:50.9348309Z  + iniconfig==2.3.0
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:50.9348679Z  + packaging==26.3
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:50.9349039Z  + pillow==12.3.0
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:50.9349425Z  + playwright==1.62.0
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:50.9350121Z  + pluggy==1.6.0
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:50.9350483Z  + pydantic==2.13.5
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:50.9350871Z  + pydantic-core==2.46.5
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:50.9351276Z  + pyee==13.0.1
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:50.9351637Z  + pygments==2.21.0
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:50.9352001Z  + pypdf==6.16.1
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:50.9352369Z  + pytest==8.4.2
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:50.9352742Z  + pytest-base-url==2.1.0
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:50.9353185Z  + pytest-playwright==0.9.0
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:50.9353624Z  + python-dotenv==1.2.3
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:50.9354081Z  + python-slugify==8.0.4
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:50.9354612Z  + pyyaml==6.0.3
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:50.9355060Z  + requests==2.34.2
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:50.9355721Z  + starlette==1.6.0
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:50.9356129Z  + text-unidecode==1.3
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:50.9356705Z  + typing-extensions==4.16.0
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:50.9357196Z  + typing-inspection==0.4.4
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:50.9357671Z  + urllib3==2.7.0
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:50.9358168Z  + uvicorn==0.52.4
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:50.9359007Z  + uvloop==0.22.1
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:50.9359421Z  + watchfiles==1.2.0
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:50.9360145Z  + websockets==17.1
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:51.0132848Z ##[group]Run actions/cache@v6.1.0
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:51.0133161Z with:
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:51.0133382Z   path: ~/.cache/ms-playwright
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:51.0133872Z   key: playwright-Linux-X64-c921368db8179caab5f9fcb456ae82c8b9b44f1a91d136d216ed8378cbc6eb99
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:51.0134569Z   enableCrossOsArchive: false
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:51.0134829Z   fail-on-cache-miss: false
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:51.0135063Z   lookup-only: false
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:51.0135282Z   save-always: false
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:51.0135481Z env:
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:51.0135739Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:51.0136176Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:51.0136618Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:51.0137002Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:51.0137378Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:51.0137798Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:51.0138195Z   UV_CACHE_DIR: /home/runner/work/_temp/setup-uv-cache
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:51.0138494Z ##[endgroup]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:51.1917116Z Cache hit for: playwright-Linux-X64-c921368db8179caab5f9fcb456ae82c8b9b44f1a91d136d216ed8378cbc6eb99
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.2678386Z Received 188743680 of 281923952 (66.9%), 179.8 MBs/sec
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.7613164Z Received 281923952 of 281923952 (100.0%), 180.1 MBs/sec
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.7613564Z Cache Size: ~269 MB (281923952 B)
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.7672668Z [command]/usr/bin/tar -xf /home/runner/work/_temp/b2a708fa-925e-4a93-9516-c2778466fc20/cache.tzst -P -C /home/runner/work/Industrial_mvp/Industrial_mvp --use-compress-program unzstd
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.8317421Z Cache restored successfully
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.9731363Z Cache restored from key: playwright-Linux-X64-c921368db8179caab5f9fcb456ae82c8b9b44f1a91d136d216ed8378cbc6eb99
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:54.0138096Z ##[group]Run sudo apt-get update
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:54.0138534Z ^[[36;1msudo apt-get update^[[0m
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:54.0139127Z ^[[36;1muv run --locked --extra dev --extra e2e python -m playwright install --with-deps chromium^[[0m
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:54.0202481Z shell: /usr/bin/bash -e {0}
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:54.0202769Z env:
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:54.0203054Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:54.0203546Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:54.0204015Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:54.0204440Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:54.0204867Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:54.0205293Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:54.0205705Z   UV_CACHE_DIR: /home/runner/work/_temp/setup-uv-cache
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:54.0206037Z ##[endgroup]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:54.2313522Z Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:54.2562681Z Hit:2 http://azure.archive.ubuntu.com/ubuntu noble InRelease
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:54.2576687Z Get:3 http://azure.archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:54.2586426Z Get:6 https://packages.microsoft.com/ubuntu/24.04/prod noble InRelease [3600 B]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:54.2618028Z Get:4 http://azure.archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:54.2649249Z Get:5 http://azure.archive.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:54.3693496Z Get:7 https://packages.microsoft.com/ubuntu/24.04/prod noble/main arm64 Packages [441 kB]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:54.3835719Z Get:8 https://packages.microsoft.com/ubuntu/24.04/prod noble/main amd64 Packages [492 kB]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:54.4241565Z Get:9 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [1318 kB]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:54.4326174Z Get:10 http://azure.archive.ubuntu.com/ubuntu noble-updates/main Translation-en [299 kB]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:54.4333893Z Get:11 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Components [181 kB]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:54.4348517Z Get:12 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [1698 kB]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:54.4483774Z Get:13 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe Translation-en [340 kB]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:54.4521070Z Get:14 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Components [388 kB]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:54.4532118Z Get:15 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [1654 kB]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:54.4612870Z Get:16 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted Translation-en [377 kB]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:54.4632891Z Get:17 http://azure.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Components [940 B]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:54.4814801Z Get:18 http://azure.archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [40.6 kB]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:54.5254713Z Get:19 http://azure.archive.ubuntu.com/ubuntu noble-backports/main amd64 Components [5796 B]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:54.5260872Z Get:20 http://azure.archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [31.0 kB]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:54.5274657Z Get:21 http://azure.archive.ubuntu.com/ubuntu noble-backports/universe Translation-en [18.6 kB]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:54.5320480Z Get:22 http://azure.archive.ubuntu.com/ubuntu noble-backports/universe amd64 Components [12.6 kB]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:54.5330206Z Get:23 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Packages [1053 kB]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:54.5390226Z Get:24 http://azure.archive.ubuntu.com/ubuntu noble-security/main Translation-en [219 kB]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:54.5404517Z Get:25 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Components [46.3 kB]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:54.5412735Z Get:26 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1220 kB]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:54.5472731Z Get:27 http://azure.archive.ubuntu.com/ubuntu noble-security/universe Translation-en [245 kB]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:54.5488579Z Get:28 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Components [76.3 kB]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:54.5499046Z Get:29 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [1535 kB]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:54.5592193Z Get:30 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted Translation-en [353 kB]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:59.2242506Z Fetched 12.4 MB in 1s (9304 kB/s)
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:00.0032411Z Reading package lists...
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:00.4248993Z Installing dependencies...
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:00.4308476Z Switching to root user to install dependencies...
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:00.4942566Z Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:00.5257061Z Hit:2 http://azure.archive.ubuntu.com/ubuntu noble InRelease
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:00.5258323Z Hit:6 https://packages.microsoft.com/ubuntu/24.04/prod noble InRelease
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:00.5260504Z Hit:3 http://azure.archive.ubuntu.com/ubuntu noble-updates InRelease
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:00.5261794Z Hit:4 http://azure.archive.ubuntu.com/ubuntu noble-backports InRelease
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:00.5279945Z Hit:5 http://azure.archive.ubuntu.com/ubuntu noble-security InRelease
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6760546Z Reading package lists...
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6985030Z Reading package lists...
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.8636752Z Building dependency tree...
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.8644206Z Reading state information...
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.9989120Z libasound2t64 is already the newest version (1.2.11-1ubuntu0.3).
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.9990333Z libasound2t64 set to manually installed.
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.9990949Z libatk-bridge2.0-0t64 is already the newest version (2.52.0-1build1).
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.9991581Z libatk-bridge2.0-0t64 set to manually installed.
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.9992158Z libatk1.0-0t64 is already the newest version (2.52.0-1build1).
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.9992706Z libatk1.0-0t64 set to manually installed.
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.9993585Z libatspi2.0-0t64 is already the newest version (2.52.0-1build1).
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.9994241Z libatspi2.0-0t64 set to manually installed.
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.9994780Z libcairo2 is already the newest version (1.18.0-3build1).
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.9995193Z libcairo2 set to manually installed.
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.9996023Z libcups2t64 is already the newest version (2.4.7-1.2ubuntu7.14).
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.9996469Z libcups2t64 set to manually installed.
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.9996891Z libdbus-1-3 is already the newest version (1.14.10-4ubuntu4.1).
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.9997333Z libdbus-1-3 set to manually installed.
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.9997760Z libdrm2 is already the newest version (2.4.125-1ubuntu0.1~24.04.2).
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.9998210Z libdrm2 set to manually installed.
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.9998729Z libgbm1 is already the newest version (25.2.8-0ubuntu0.24.04.2).
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.9999419Z libgbm1 set to manually installed.
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.0000132Z libnspr4 is already the newest version (2:4.35-1.1build1).
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.0000672Z libnspr4 set to manually installed.
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.0001227Z libnss3 is already the newest version (2:3.98-1ubuntu0.2).
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.0001796Z libnss3 set to manually installed.
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.0002344Z libpango-1.0-0 is already the newest version (1.52.1+ds-1build1).
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.0002934Z libpango-1.0-0 set to manually installed.
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.0003513Z libx11-6 is already the newest version (2:1.8.7-1build1).
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.0003979Z libx11-6 set to manually installed.
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.0004347Z libxcb1 is already the newest version (1.15-1ubuntu2).
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.0004740Z libxcb1 set to manually installed.
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.0005114Z libxcomposite1 is already the newest version (1:0.4.5-1build3).
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.0005498Z libxcomposite1 set to manually installed.
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.0005863Z libxdamage1 is already the newest version (1:1.1.6-1build1).
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.0006212Z libxdamage1 set to manually installed.
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.0006934Z libxext6 is already the newest version (2:1.3.4-1build2).
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.0007293Z libxext6 set to manually installed.
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.0007619Z libxfixes3 is already the newest version (1:6.0.0-2build1).
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.0007971Z libxfixes3 set to manually installed.
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.0008311Z libxkbcommon0 is already the newest version (1.6.0-1build1).
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.0008660Z libxkbcommon0 set to manually installed.
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.0009006Z libxrandr2 is already the newest version (2:1.5.2-2build1).
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.0009342Z libxrandr2 set to manually installed.
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.0009931Z fonts-noto-color-emoji is already the newest version (2.047-0ubuntu0.24.04.1).
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.0010435Z libfontconfig1 is already the newest version (2.15.0-1.1ubuntu2).
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.0010809Z libfontconfig1 set to manually installed.
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.0011186Z libfreetype6 is already the newest version (2.13.2+dfsg-1ubuntu0.1).
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.0011571Z libfreetype6 set to manually installed.
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.0011920Z fonts-liberation is already the newest version (1:2.1.5-3).
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.0012295Z fonts-liberation set to manually installed.
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.0012644Z The following additional packages will be installed:
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.0013100Z   gir1.2-glib-2.0 libglib2.0-bin libglib2.0-data xfonts-encodings xfonts-utils
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.0013505Z   xserver-common
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.0013719Z Suggested packages:
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.0013954Z   low-memory-monitor
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.0014174Z Recommended packages:
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.0014448Z   fonts-ipafont-mincho fonts-tlwg-loma xfonts-base
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.0219009Z The following NEW packages will be installed:
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.0219904Z   fonts-freefont-ttf fonts-ipafont-gothic fonts-tlwg-loma-otf fonts-unifont
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.0224810Z   fonts-wqy-zenhei xfonts-cyrillic xfonts-encodings xfonts-scalable
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.0225339Z   xfonts-utils
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.0227978Z The following packages will be upgraded:
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.0233394Z   gir1.2-glib-2.0 libglib2.0-0t64 libglib2.0-bin libglib2.0-data
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.0233960Z   xserver-common xvfb
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.0395869Z 6 upgraded, 9 newly installed, 0 to remove and 26 not upgraded.
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.0396582Z Need to get 23.9 MB of archives.
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.0397574Z After this operation, 79.6 MB of additional disk space will be used.
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.0398351Z Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.1401414Z Get:2 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-ipafont-gothic all 00303-21ubuntu1 [3513 kB]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.2233606Z Get:3 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libglib2.0-data all 2.80.0-6ubuntu3.9 [50.1 kB]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.2307248Z Get:4 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libglib2.0-bin amd64 2.80.0-6ubuntu3.9 [97.9 kB]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.2392283Z Get:5 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 gir1.2-glib-2.0 amd64 2.80.0-6ubuntu3.9 [183 kB]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.2493699Z Get:6 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libglib2.0-0t64 amd64 2.80.0-6ubuntu3.9 [1547 kB]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.2838081Z Get:7 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 fonts-freefont-ttf all 20211204+svn4273-2 [5641 kB]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.3989183Z Get:8 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-tlwg-loma-otf all 1:0.7.3-1 [107 kB]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.4072000Z Get:9 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-unifont all 1:15.1.01-1build1 [2993 kB]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.4969968Z Get:10 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-wqy-zenhei all 0.9.45-8 [7472 kB]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.7812525Z Get:11 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-encodings all 1:1.0.5-0ubuntu2 [578 kB]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.8110506Z Get:12 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-utils amd64 1:7.7+6build3 [94.4 kB]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.8204945Z Get:13 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 xfonts-cyrillic all 1:1.0.5+nmu1 [384 kB]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.8427942Z Get:14 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-scalable all 1:1.0.3-1.3 [304 kB]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.8619564Z Get:15 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 xserver-common all 2:21.1.12-1ubuntu1.8 [34.8 kB]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.8714945Z Get:16 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 xvfb amd64 2:21.1.12-1ubuntu1.8 [877 kB]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:03.1529248Z Fetched 23.9 MB in 1s (27.1 MB/s)
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:03.1767173Z Selecting previously unselected package fonts-ipafont-gothic.
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:03.2065684Z (Reading database ... 
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:03.2066242Z (Reading database ... 5%
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:03.2066789Z (Reading database ... 10%
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:03.2067220Z (Reading database ... 15%
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:03.2067637Z (Reading database ... 20%
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:03.2068079Z (Reading database ... 25%
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:03.2068501Z (Reading database ... 30%
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:03.2068927Z (Reading database ... 35%
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:03.2070190Z (Reading database ... 40%
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:03.2070631Z (Reading database ... 45%
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:03.2071042Z (Reading database ... 50%
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:03.2120747Z (Reading database ... 55%
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:03.3057852Z (Reading database ... 60%
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:03.4699056Z (Reading database ... 65%
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:03.6562786Z (Reading database ... 70%
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:03.8232886Z (Reading database ... 75%
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:03.9891045Z (Reading database ... 80%
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.2076101Z (Reading database ... 85%
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.3757351Z (Reading database ... 90%
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.5202196Z (Reading database ... 95%
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.5202760Z (Reading database ... 100%
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.5203482Z (Reading database ... 202190 files and directories currently installed.)
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.5244609Z Preparing to unpack .../00-fonts-ipafont-gothic_00303-21ubuntu1_all.deb ...
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.5334589Z Unpacking fonts-ipafont-gothic (00303-21ubuntu1) ...
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.7769361Z Preparing to unpack .../01-libglib2.0-data_2.80.0-6ubuntu3.9_all.deb ...
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.7794136Z Unpacking libglib2.0-data (2.80.0-6ubuntu3.9) over (2.80.0-6ubuntu3.8) ...
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.8133301Z Preparing to unpack .../02-libglib2.0-bin_2.80.0-6ubuntu3.9_amd64.deb ...
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.8155417Z Unpacking libglib2.0-bin (2.80.0-6ubuntu3.9) over (2.80.0-6ubuntu3.8) ...
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.8643286Z Preparing to unpack .../03-gir1.2-glib-2.0_2.80.0-6ubuntu3.9_amd64.deb ...
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.8665813Z Unpacking gir1.2-glib-2.0:amd64 (2.80.0-6ubuntu3.9) over (2.80.0-6ubuntu3.8) ...
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.9053855Z Preparing to unpack .../04-libglib2.0-0t64_2.80.0-6ubuntu3.9_amd64.deb ...
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.9124913Z Unpacking libglib2.0-0t64:amd64 (2.80.0-6ubuntu3.9) over (2.80.0-6ubuntu3.8) ...
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.9530522Z Selecting previously unselected package fonts-freefont-ttf.
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.9655680Z Preparing to unpack .../05-fonts-freefont-ttf_20211204+svn4273-2_all.deb ...
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.9663682Z Unpacking fonts-freefont-ttf (20211204+svn4273-2) ...
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:05.0453915Z Selecting previously unselected package fonts-tlwg-loma-otf.
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:05.0579830Z Preparing to unpack .../06-fonts-tlwg-loma-otf_1%3a0.7.3-1_all.deb ...
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:05.0586467Z Unpacking fonts-tlwg-loma-otf (1:0.7.3-1) ...
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:05.0787350Z Selecting previously unselected package fonts-unifont.
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:05.0911055Z Preparing to unpack .../07-fonts-unifont_1%3a15.1.01-1build1_all.deb ...
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:05.0921615Z Unpacking fonts-unifont (1:15.1.01-1build1) ...
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:05.1930786Z Selecting previously unselected package fonts-wqy-zenhei.
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:05.2054981Z Preparing to unpack .../08-fonts-wqy-zenhei_0.9.45-8_all.deb ...
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:05.2153164Z Unpacking fonts-wqy-zenhei (0.9.45-8) ...
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:05.6688980Z Selecting previously unselected package xfonts-encodings.
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:05.6813649Z Preparing to unpack .../09-xfonts-encodings_1%3a1.0.5-0ubuntu2_all.deb ...
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:05.6823200Z Unpacking xfonts-encodings (1:1.0.5-0ubuntu2) ...
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:05.7102254Z Selecting previously unselected package xfonts-utils.
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:05.7225261Z Preparing to unpack .../10-xfonts-utils_1%3a7.7+6build3_amd64.deb ...
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:05.7232089Z Unpacking xfonts-utils (1:7.7+6build3) ...
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:05.7545931Z Selecting previously unselected package xfonts-cyrillic.
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:05.7705899Z Preparing to unpack .../11-xfonts-cyrillic_1%3a1.0.5+nmu1_all.deb ...
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:05.7713262Z Unpacking xfonts-cyrillic (1:1.0.5+nmu1) ...
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:05.8057311Z Selecting previously unselected package xfonts-scalable.
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:05.8180745Z Preparing to unpack .../12-xfonts-scalable_1%3a1.0.3-1.3_all.deb ...
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:05.8187633Z Unpacking xfonts-scalable (1:1.0.3-1.3) ...
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:05.8525522Z Preparing to unpack .../13-xserver-common_2%3a21.1.12-1ubuntu1.8_all.deb ...
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:05.8544830Z Unpacking xserver-common (2:21.1.12-1ubuntu1.8) over (2:21.1.12-1ubuntu1.6) ...
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:05.8871038Z Preparing to unpack .../14-xvfb_2%3a21.1.12-1ubuntu1.8_amd64.deb ...
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:05.8889959Z Unpacking xvfb (2:21.1.12-1ubuntu1.8) over (2:21.1.12-1ubuntu1.6) ...
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:05.9399440Z Setting up fonts-wqy-zenhei (0.9.45-8) ...
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:05.9512041Z Setting up fonts-freefont-ttf (20211204+svn4273-2) ...
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:05.9528818Z Setting up libglib2.0-0t64:amd64 (2.80.0-6ubuntu3.9) ...
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:05.9624779Z Setting up libglib2.0-data (2.80.0-6ubuntu3.9) ...
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:05.9643463Z Setting up fonts-tlwg-loma-otf (1:0.7.3-1) ...
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:05.9660207Z Setting up xfonts-encodings (1:1.0.5-0ubuntu2) ...
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:05.9677022Z Setting up gir1.2-glib-2.0:amd64 (2.80.0-6ubuntu3.9) ...
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:05.9693772Z Setting up fonts-ipafont-gothic (00303-21ubuntu1) ...
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:05.9757725Z update-alternatives: using /usr/share/fonts/opentype/ipafont-gothic/ipag.ttf to provide /usr/share/fonts/truetype/fonts-japanese-gothic.ttf (fonts-japanese-gothic.ttf) in auto mode
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:05.9771703Z Setting up xserver-common (2:21.1.12-1ubuntu1.8) ...
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:05.9789090Z Setting up fonts-unifont (1:15.1.01-1build1) ...
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:05.9806060Z Setting up xvfb (2:21.1.12-1ubuntu1.8) ...
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:05.9821937Z Setting up libglib2.0-bin (2.80.0-6ubuntu3.9) ...
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:05.9838226Z Setting up xfonts-utils (1:7.7+6build3) ...
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:05.9875625Z Setting up xfonts-cyrillic (1:1.0.5+nmu1) ...
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:06.0165729Z Setting up xfonts-scalable (1:1.0.3-1.3) ...
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:06.0439557Z Processing triggers for libc-bin (2.39-0ubuntu8.9) ...
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:06.0769006Z Processing triggers for man-db (2.12.0-4build2) ...
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:06.0789518Z Not building database; man-db/auto-update is not 'true'.
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:06.0799707Z Processing triggers for fontconfig (2.15.0-1.1ubuntu2) ...
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:06.7347741Z 
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:06.7348390Z Running kernel seems to be up-to-date.
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:06.7348731Z 
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:06.7348862Z Restarting services...
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:06.7808377Z  systemctl restart packagekit.service php8.3-fpm.service polkit.service udisks2.service
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:06.9488269Z 
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:06.9490716Z Service restarts being deferred:
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:06.9521022Z  systemctl restart ModemManager.service
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:06.9521698Z  systemctl restart networkd-dispatcher.service
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:06.9522127Z 
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:06.9522332Z No containers need to be restarted.
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:06.9522674Z 
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:06.9522911Z No user sessions are running outdated binaries.
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:06.9523192Z 
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:06.9523460Z No VM guests are running outdated hypervisor (qemu) binaries on this host.
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:07.7642396Z ##[group]Run make UV=uv e2e
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:07.7642714Z ^[[36;1mmake UV=uv e2e^[[0m
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:07.7709510Z shell: /usr/bin/bash -e {0}
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:07.7710037Z env:
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:07.7710325Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:07.7710806Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:07.7711283Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:07.7711700Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:07.7712117Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:07.7712532Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:07.7712947Z   UV_CACHE_DIR: /home/runner/work/_temp/setup-uv-cache
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:07.7713277Z ##[endgroup]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:07.7817473Z uv sync --locked --extra dev --extra e2e
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:07.7901241Z Resolved 43 packages in 0.76ms
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:07.7918492Z Checked 40 packages in 0.47ms
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:07.7929683Z uv run --locked --extra dev --extra e2e python scripts/check_browser_prerequisites.py
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:08.2638977Z BROWSER PREFLIGHT PASS
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:08.2639413Z playwright=1.62.0
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:08.2640049Z pytest-playwright=0.9.0
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:08.2640646Z chromium=/home/runner/.cache/ms-playwright/chromium-1234/chrome-linux64/chrome
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:08.2641539Z axe_sha256=c24f097bd2f451d4f933e8bc7d8d539f8672a2ebcb5cc9f9f3eec8ca9470a0c1
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:08.2642175Z font_family=DejaVu Sans
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:08.2642657Z font_file=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:08.2643235Z product_fonts=IOR Noto Sans,IOR Noto Sans Arabic
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:08.2778917Z IOR_E2E_EXPLICIT=1 IOR_E2E_ARTIFACT_DIR=".artifacts/e2e" PYTHONPATH=src uv run --locked --extra dev --extra e2e pytest -q browser_tests --browser chromium --tracing retain-on-failure --screenshot only-on-failure --output=".artifacts/e2e/playwright" -m "e2e and not visual"
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T18:56:42.5150885Z ........................................................................ [  8%]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T19:02:18.4149050Z ........................................................................ [ 17%]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T19:08:31.6703678Z ........................................................................ [ 25%]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T19:14:43.6412138Z ........................................................................ [ 34%]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T19:20:47.2014986Z ........................................................................ [ 42%]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T19:26:01.4747314Z ........................................................................ [ 51%]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T19:29:14.7902067Z ........................................................................ [ 60%]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T19:32:37.0044288Z ........................................................................ [ 68%]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T19:37:01.1384842Z ........................................................................ [ 77%]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T19:41:39.1755827Z ........................................................................ [ 85%]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T19:46:00.7798874Z ........................................................................ [ 94%]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T19:48:13.1335498Z ...............................................                          [100%]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T19:48:13.1336260Z 839 passed, 4 deselected in 3422.78s (0:57:02)
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T19:48:13.6891143Z uv run --locked --extra dev --extra e2e python scripts/check_browser_prerequisites.py
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T19:48:14.1417109Z BROWSER PREFLIGHT PASS
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T19:48:14.1417974Z playwright=1.62.0
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T19:48:14.1418548Z pytest-playwright=0.9.0
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T19:48:14.1418993Z chromium=/home/runner/.cache/ms-playwright/chromium-1234/chrome-linux64/chrome
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T19:48:14.1419566Z axe_sha256=c24f097bd2f451d4f933e8bc7d8d539f8672a2ebcb5cc9f9f3eec8ca9470a0c1
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T19:48:14.1420281Z font_family=DejaVu Sans
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T19:48:14.1420590Z font_file=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T19:48:14.1421492Z product_fonts=IOR Noto Sans,IOR Noto Sans Arabic
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T19:48:14.1537415Z IOR_E2E_EXPLICIT=1 IOR_E2E_ARTIFACT_DIR=".artifacts/e2e" PYTHONPATH=src uv run --locked --extra dev --extra e2e pytest -q browser_tests --browser chromium --tracing retain-on-failure --screenshot only-on-failure --output=".artifacts/e2e/playwright" -m visual
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T19:54:06.6894863Z ....                                                                     [100%]
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T19:54:06.6900536Z 4 passed, 839 deselected in 352.04s (0:05:52)
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T19:54:06.8527199Z Post job cleanup.
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T19:54:06.9718790Z Cache hit occurred on the primary key playwright-Linux-X64-c921368db8179caab5f9fcb456ae82c8b9b44f1a91d136d216ed8378cbc6eb99, not saving cache.
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T19:54:06.9858577Z Post job cleanup.
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T19:54:07.1109464Z Cache hit occurred on key setup-uv-1-x86_64-unknown-linux-gnu-3.12.14-pruned-c921368db8179caab5f9fcb456ae82c8b9b44f1a91d136d216ed8378cbc6eb99, not saving cache.
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T19:54:07.1111513Z (node:15876) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T19:54:07.1112696Z (Use `node --trace-deprecation ...` to show where the warning was created)
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T19:54:07.1234464Z Post job cleanup.
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T19:54:07.2479376Z (node:15884) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T19:54:07.2480962Z (Use `node --trace-deprecation ...` to show where the warning was created)
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T19:54:07.2615872Z Post job cleanup.
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T19:54:07.3582641Z [command]/usr/bin/git version
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T19:54:07.3630083Z git version 2.55.0
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T19:54:07.3668938Z Temporarily overriding HOME='/home/runner/work/_temp/85a5f42f-9f58-4a84-b180-86091a37eba6' before making global git config changes
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T19:54:07.3670516Z Adding repository directory to the temporary git global config as a safe directory
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T19:54:07.3676139Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Industrial_mvp/Industrial_mvp
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T19:54:07.3714552Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T19:54:07.3758752Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T19:54:07.4012149Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T19:54:07.4056556Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T19:54:07.4364405Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T19:54:07.4417276Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T19:54:07.4864219Z Cleaning up orphan processes
+browser / Chromium / Python 3.12	UNKNOWN STEP	2026-09-25T19:54:07.5223642Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-python@v5, astral-sh/setup-uv@v6. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

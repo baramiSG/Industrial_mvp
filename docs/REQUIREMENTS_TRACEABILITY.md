@@ -534,3 +534,23 @@ The preceding S19 table remains the preserved implementation checkpoint. Later e
 | Generated/canonical provenance | Projection `6f43b1a8c4aa`, run `ENGINE-6b54371e99f3`, snapshot 730; capture `S19-BILINGUAL-DOSSIER-2`; pins adopted in this unit | Frozen-candidate R1 from delivered `a1dc` to `6b5437`, Task 6 and delivery |
 
 No global KL closure, Ministry evidence upgrade, PDF-UA claim, live Aura result or final release follows from these rows.
+
+### S19 final evidence after green main — 2026-09-25
+
+The two tables above remain historical checkpoints. This row records the merged implementation. It does not close KL-133/134/135/136, KL-85/KL-107, PDF-UA, missing demand or specification evidence, or Aura.
+
+| Requirement | Final evidence on tree `7c25b4616679d61f173f3d9072e3240e1a2a166b` | Disposition |
+|---|---|---|
+| Methodology §15/15.1; FR-064; D-S19-1; evidence isolation; Core 09 §13 | Replacement 44 PDFs already published with the implementation; valid CI1 `f3777dbc…` and root3 CI2 `6c049030…`, each with its own 44-PDF readiness `f00426b2…` and `9d0fbea0…`; offline `1f2be1cf…` (3,982 passed); e2e `0d186b92…`; R1 `9c74e0df…`; Claude implementation `50f33c00…` and head `684f95bf…`; PR40 six jobs run `36175983021`; merge `6962105b4bee575a6271d08fe892144c6e6c1063`; main six jobs run `36183985706`. Inventory: [post-merge bridge](../.workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/SOURCE-TO-PUBLISHED-BRIDGE.json). | Implementation delivered on `main`. This additive record's own review and acceptance remain pending. |
+| KL-33; KL-84; AR-V01; TRADE-SCALE-01 | Closed in this record from the same gates, the rendered/PDF/keyboard evidence those reviews accepted, and green main. Original RED→GREEN stays attributed to that accepted evidence. | CLOSED for these four findings only. |
+| Retained limits | KL-133/134/135/136, KL-85/KL-107, Class D synthetic evidence, PDF-UA, unknown host-restart cause, two non-blocking wording preferences from review `50f33c00…`, and live Aura. | OPEN. The hosted graph job's `AURA_OPERATOR_ONLY` skip is a local skip. |
+
+### S19 Aura checkpoint after the green-main row — 2026-09-26
+
+The table above remains the 2026-09-25 checkpoint, including its open live-Aura cell. The later status of that one cell is:
+
+| Requirement | Later evidence | Current disposition |
+|---|---|---|
+| Separately reviewed S19 live Aura checkpoint | Continuation 2 exit 0 on main `6962105b4bee575a6271d08fe892144c6e6c1063`, tree `7c25b4616679d61f173f3d9072e3240e1a2a166b`, projection `GRAPH-SAU-2026-09-12-6f43b1a8c4aa`. Application proof `f4f0e725…`, receipt `ea8aea20…`, external 479-file index `c7ced65e…`. Claude result review `c412150d99c92c6f0e5b42cac1d215f90afb2bd02625bc89a9751fdbd9e96dfa`. Delegated acceptance `a59e702c4658c15708544373bbbc2c5c390fa2ab708bb151fa46d6807db30e8a`. Published subset: [Aura evidence index](../.workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/aura/AURA-EVIDENCE-INDEX.md). | Aura result accepted for this delivered subject. The records candidate that publishes it is still pending exact review and delivery. |
+| L1 | Selected current-case browser passports in the initial and restored journeys are public, including simulated mode. The synthetic-passport Class-D branch did not run live. | OPEN as a coverage limit. Do not claim live browser verification of Class-D labels on a synthetic passport. Class-D graph-element EN/AR labels were asserted by the restored API and sampled in images; public isolation was checked. |
+| Retained limits other than this Aura checkpoint | KL-133/134/135/136, KL-85/KL-107, Class D synthetic evidence, PDF-UA, unknown host-restart cause, two non-blocking wording preferences, unknown Aura session-expiry cause, unknown readonly-execution-1 interruption cause, S21 and complete MVP acceptance. | OPEN. Attempt 4 remains failed. Readonly-execution-1 remains interrupted. The injected connection failure is not an Aura outage. |

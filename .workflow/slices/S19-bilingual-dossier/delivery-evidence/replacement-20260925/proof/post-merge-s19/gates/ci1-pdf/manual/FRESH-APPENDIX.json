@@ -1,0 +1,73 @@
+{
+  "recorded_at_utc": "2026-09-25T17:40:01.180706+00:00",
+  "observer": "Codex /root/pdf1_inspection supporting observations, not independent approval",
+  "cohort_sha256": "8c7488b3c8ed9552bf1890ebc019ed14e3850cefd42716f1f5f0c6584b4ee9db",
+  "render_result_sha256": "a1c0590662d2805a84d9086710cac574ff995d937319e3615789854289327c84",
+  "strict_sha256": "6c24bffd19f1b85f7b8ca0d4ff1831a84e595c8ab8c04be65193fb2b34eaf81c",
+  "views": [
+    {
+      "pdf": "polypropylene-public-ar.pdf",
+      "pdf_sha256": "8ba069467675334c16896bad26b7d25add0b4ff3fcced45ab6fdc18ba3fa9e9e",
+      "page": 3,
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-ci-runtime-r2/ci-root1-pdf/rendered/polypropylene-public-ar-page-03.png",
+      "sha256": "c1c104f6bae93f7028d925cfb599cb55fdbd1149b2ebea91da4da67dc851331e",
+      "raster_px": [
+        1190,
+        1684
+      ],
+      "viewed": true,
+      "view_tool": "tools.view_image(detail=original); native uncropped image returned and inspected by /root/pdf1_inspection",
+      "reason_for_fresh_view": "Original retained-index endpoint had a different report/page filename. Coordinator explicitly required fresh current-page fallback and exclusion from reuse count; historical index remains unchanged.",
+      "observations": [
+        "Arabic source-field/value/unit table is readable, including explicit unavailable values, g/m², mm and µm units; row boundaries, classification/version and source-span headings with their unavailable values are all visible.",
+        "No visible clipping, overlapping rows, broken Arabic shaping, or public simulation disclosure."
+      ],
+      "findings": []
+    },
+    {
+      "pdf": "polypropylene-simulated-ar.pdf",
+      "pdf_sha256": "cfcadfdc63941aacbf5fae5ee2e5fb6488400d4769fbf0d29f85e7495a95b1d3",
+      "page": 61,
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-ci-runtime-r2/ci-root1-pdf/rendered/polypropylene-simulated-ar-page-61.png",
+      "sha256": "afc7b84f193051da1a5712ab4a1dfffcaaa54b260e3b33e73d41db183e3a4866",
+      "raster_px": [
+        1190,
+        1684
+      ],
+      "viewed": true,
+      "view_tool": "tools.view_image(detail=original); native uncropped image returned and inspected by /root/pdf1_inspection",
+      "reason_for_fresh_view": "Original retained-index endpoint had a different report/page filename. Coordinator explicitly required fresh current-page fallback and exclusion from reuse count; historical index remains unchanged.",
+      "observations": [
+        "Terminal Arabic comparison page visibly contains latest imports92.3 million USD and56 kt, unchanged-public-decision yes, expected REJECT/route0, actual REJECT/route0 and agreement yes.",
+        "Page contains substantive comparison data rather than an orphan-only heading; bilingual simulated footer is separated from content, with no clipping or overlap."
+      ],
+      "findings": []
+    },
+    {
+      "pdf": "steel-simulated-ar.pdf",
+      "pdf_sha256": "0ac22a41597965e9d70a73f0624e4b669a8f0e32ff7ac84193249ff25b59d753",
+      "page": 64,
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-ci-runtime-r2/ci-root1-pdf/rendered/steel-simulated-ar-page-64.png",
+      "sha256": "27a219483f14eb69cf2662769e661a076ad58277ae7387398a0843b3c1d57ebb",
+      "raster_px": [
+        1190,
+        1684
+      ],
+      "viewed": true,
+      "view_tool": "tools.view_image(detail=original); native uncropped image returned and inspected by /root/pdf1_inspection",
+      "reason_for_fresh_view": "Original retained-index endpoint had a different report/page filename. Coordinator explicitly required fresh current-page fallback and exclusion from reuse count; historical index remains unchanged.",
+      "observations": [
+        "Terminal Arabic comparison page visibly contains latest imports236.9 million USD and287.9 kt, unchanged-public-decision yes, expected ADVANCE/route5, actual ADVANCE/route5 and agreement yes.",
+        "Page contains substantive comparison data rather than an orphan-only heading; bilingual simulated footer is separated from content, with no clipping or overlap."
+      ],
+      "findings": []
+    }
+  ],
+  "findings": [],
+  "limitations": [
+    "Exactly3 fresh native appendix views; remaining appendix coverage is attributed historical observation reuse.",
+    "No fresh observation of historical contacts and no historical acceptance/index rewrite."
+  ],
+  "sanad": "Direct: all3 current PNGs returned through tools.view_image(detail=original), personally inspected and hash-bound to the ownCI1 renderer. Their visual content and absence of clipping are direct observations.",
+  "muhasabah": "PASS bounded fresh appendix fallback; no missing view inferred, no source/index/Git/service/browser/raster/test mutation or final approval claimed."
+}

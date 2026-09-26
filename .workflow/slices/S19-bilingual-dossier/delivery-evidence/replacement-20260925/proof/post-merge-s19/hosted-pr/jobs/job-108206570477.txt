@@ -1,0 +1,670 @@
+uv / Python 3.12	UNKNOWN STEP	﻿2026-09-25T18:50:41.5525962Z Current runner version: '2.337.0'
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:41.5550600Z ##[group]Runner Image Provisioner
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:41.5551414Z Hosted Compute Agent
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:41.5551966Z Version: 20260828.587
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:41.5552502Z Commit: abac92662cab4cc7352de4f9f9d2e2419aad9c29
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:41.5553202Z Build Date: 2026-08-28T16:44:25Z
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:41.5553807Z Worker ID: {5521d9dc-034b-4b2d-8afa-d6b4dbe7a81c}
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:41.5554407Z Azure Region: centralus
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:41.5555052Z ##[endgroup]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:41.5556231Z ##[group]Operating System
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:41.5557039Z Ubuntu
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:41.5557481Z 24.04.5
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:41.5557902Z LTS
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:41.5558449Z ##[endgroup]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:41.5558985Z ##[group]Runner Image
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:41.5559552Z Image: ubuntu-24.04
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:41.5560051Z Version: 20260920.314.1
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:41.5561257Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260920.314/images/ubuntu/Ubuntu2404-Readme.md
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:41.5562661Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260920.314
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:41.5563557Z ##[endgroup]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:41.5564516Z ##[group]GITHUB_TOKEN Permissions
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:41.5566219Z Contents: read
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:41.5566959Z Metadata: read
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:41.5567410Z ##[endgroup]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:41.5569341Z Secret source: Actions
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:41.5570108Z Cache mode: write
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:41.5570853Z Prepare workflow directory
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:41.5898713Z Prepare all required actions
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:41.5940725Z Getting action download info
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:41.8642079Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.2633702Z Download action repository 'actions/setup-python@v5' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.5024803Z Download action repository 'astral-sh/setup-uv@v6' (SHA:d0cc045d04ccac9d8b7881df0226f9e82c39688e)
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.5927291Z Complete job name: uv / Python 3.12
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.6548794Z ##[group]Run actions/checkout@v4
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.6549587Z with:
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.6550126Z   persist-credentials: false
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.6550786Z   repository: baramiSG/Industrial_mvp
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.6556241Z   token: ***
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.6556879Z   ssh-strict: true
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.6557424Z   ssh-user: git
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.6557942Z   clean: true
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.6558506Z   sparse-checkout-cone-mode: true
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.6559160Z   fetch-depth: 1
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.6559697Z   fetch-tags: false
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.6560242Z   show-progress: true
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.6560803Z   lfs: false
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.6561328Z   submodules: false
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.6561898Z   set-safe-directory: true
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.6562535Z   allow-unsafe-pr-checkout: false
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.6563403Z ##[endgroup]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.7262646Z Syncing repository: baramiSG/Industrial_mvp
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.7265200Z ##[group]Getting Git version info
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.7266878Z Working directory is '/home/runner/work/Industrial_mvp/Industrial_mvp'
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.7268958Z [command]/usr/bin/git version
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.7340299Z git version 2.55.0
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.7358329Z ##[endgroup]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.7367566Z Temporarily overriding HOME='/home/runner/work/_temp/0c1d9715-0fde-4540-b609-4e2a46e16282' before making global git config changes
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.7370392Z Adding repository directory to the temporary git global config as a safe directory
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.7372904Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Industrial_mvp/Industrial_mvp
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.7499008Z Deleting the contents of '/home/runner/work/Industrial_mvp/Industrial_mvp'
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.7501347Z ##[group]Initializing the repository
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.7507910Z [command]/usr/bin/git init /home/runner/work/Industrial_mvp/Industrial_mvp
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.7805341Z hint: Using 'master' as the name for the initial branch. This default branch name
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.7807832Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.7809543Z hint: to use in all of your new repositories, which will suppress this warning,
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.7811305Z hint: call:
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.7812023Z hint:
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.7812896Z hint: 	git config --global init.defaultBranch <name>
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.7813741Z hint:
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.7814779Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.7816122Z hint: 'development'. The just-created branch can be renamed via this command:
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.7817135Z hint:
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.7817658Z hint: 	git branch -m <name>
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.7818229Z hint:
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.7818976Z hint: Disable this message with "git config set advice.defaultBranchName false"
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.7820290Z Initialized empty Git repository in /home/runner/work/Industrial_mvp/Industrial_mvp/.git/
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.7822776Z [command]/usr/bin/git remote add origin https://github.com/baramiSG/Industrial_mvp
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.7899339Z ##[endgroup]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.7900743Z ##[group]Disabling automatic garbage collection
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.7902021Z [command]/usr/bin/git config --local gc.auto 0
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.7997262Z ##[endgroup]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.7998569Z ##[group]Setting up auth
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.8002627Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.8034473Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.8336787Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.8429672Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.8560500Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.8592267Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.8770240Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.9093491Z ##[endgroup]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.9095222Z ##[group]Fetching the repository
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.9102697Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +0ba7806c8d9c0960d6647389a6b11694f00aaf5c:refs/remotes/pull/40/merge
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.4702958Z From https://github.com/baramiSG/Industrial_mvp
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.4703602Z  * [new ref]         0ba7806c8d9c0960d6647389a6b11694f00aaf5c -> pull/40/merge
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.4718232Z ##[endgroup]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.4718705Z ##[group]Determining the checkout info
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.4719104Z ##[endgroup]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.4719393Z [command]/usr/bin/git sparse-checkout disable
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.4765364Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.4792237Z ##[group]Checking out the ref
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:48.4794801Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/40/merge
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.0427146Z Note: switching to 'refs/remotes/pull/40/merge'.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.0427422Z 
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.0427545Z You are in 'detached HEAD' state. You can look around, make experimental
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.0427856Z changes and commit them, and you can discard any commits you make in this
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.0428130Z state without impacting any branches by switching back to a branch.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.0428305Z 
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.0428428Z If you want to create a new branch to retain commits you create, you may
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.0428727Z do so (now or later) by using -c with the switch command. Example:
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.0429090Z 
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.0429155Z   git switch -c <new-branch-name>
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.0429259Z 
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.0429328Z Or undo this operation with:
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.0429425Z 
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.0429478Z   git switch -
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.0429594Z 
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.0429711Z Turn off this advice by setting config variable advice.detachedHead to false
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.0429870Z 
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.0430052Z HEAD is now at 0ba7806 Merge 39614fcdd8d8eb9a96381c3d1b806343d5164419 into ce407db9832b61c5a8a85dfda2e3b7623da2fbc9
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.0496668Z ##[endgroup]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.0543134Z [command]/usr/bin/git log -1 --format=%H
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.0568221Z 0ba7806c8d9c0960d6647389a6b11694f00aaf5c
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.0576192Z ##[group]Removing auth
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.0579269Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.0610128Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.0801523Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.0827303Z http.https://github.com/.extraheader
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.0832472Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.0862353Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.1057679Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.1074304Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.1253416Z ##[endgroup]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.1437005Z ##[group]Run actions/setup-python@v5
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.1437165Z with:
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.1437278Z   python-version: 3.12
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.1437398Z   check-latest: false
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.1438937Z   token: ***
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.1439049Z   update-environment: true
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.1439186Z   allow-prereleases: false
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.1439311Z   freethreaded: false
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.1439426Z ##[endgroup]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.2274870Z ##[group]Installed versions
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.2337928Z (node:2127) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.2338428Z (Use `node --trace-deprecation ...` to show where the warning was created)
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.2338796Z Successfully set up CPython (3.12.14)
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.2339161Z ##[endgroup]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.2495641Z ##[group]Run astral-sh/setup-uv@v6
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.2495887Z with:
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.2496057Z   enable-cache: true
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.2496272Z   cache-dependency-glob: uv.lock
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.2496497Z   activate-environment: false
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.2497015Z   working-directory: /home/runner/work/Industrial_mvp/Industrial_mvp
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.2497352Z   server-url: https://github.com
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.2499762Z   github-token: ***
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.2499981Z   restore-cache: true
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.2500201Z   save-cache: true
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.2500409Z   prune-cache: true
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.2500606Z   ignore-nothing-to-cache: false
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.2500837Z   ignore-empty-workdir: false
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.2501080Z   add-problem-matchers: true
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.2501293Z env:
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.2501513Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.2502067Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.2502591Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.2503111Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.2503664Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.2504004Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.2504285Z ##[endgroup]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.3671054Z (node:2135) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.3671653Z (Use `node --trace-deprecation ...` to show where the warning was created)
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.3761265Z Trying to find version for uv in: /home/runner/work/Industrial_mvp/Industrial_mvp/uv.toml
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.3761816Z Could not find file: /home/runner/work/Industrial_mvp/Industrial_mvp/uv.toml
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.3762317Z Trying to find version for uv in: /home/runner/work/Industrial_mvp/Industrial_mvp/pyproject.toml
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.3771823Z Could not determine uv version from uv.toml or pyproject.toml. Falling back to latest.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.3772967Z Getting latest version from GitHub API...
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.6772605Z manifest-file not provided, reading from local file.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.6798265Z manifest-file does not contain version 0.12.19, arch x86_64, platform unknown-linux-gnu. Falling back to GitHub releases.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:49.6800781Z Downloading uv from "https://github.com/astral-sh/uv/releases/download/0.12.19/uv-x86_64-unknown-linux-gnu.tar.gz" ...
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:50.0424313Z [command]/usr/bin/tar xz --warning=no-unknown-keyword --overwrite -C /home/runner/work/_temp/3537b495-daa9-4f51-b450-befabec64a22 -f /home/runner/work/_temp/e8be00cd-fa74-4f95-9edb-f7eb07a71125
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:50.5591904Z Added /home/runner/.local/bin to the path
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:50.5597732Z Added /opt/hostedtoolcache/uv/0.12.19/x86_64 to the path
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:50.5605740Z Set UV_CACHE_DIR to /home/runner/work/_temp/setup-uv-cache
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:50.5606094Z Successfully installed uv version 0.12.19
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:50.5606512Z Searching files using cache dependency glob: /home/runner/work/Industrial_mvp/Industrial_mvp/uv.lock
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:50.5621996Z /home/runner/work/Industrial_mvp/Industrial_mvp/uv.lock
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:50.5634493Z Found 1 files to hash.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:50.6510563Z Trying to restore uv cache from GitHub Actions cache with key: setup-uv-1-x86_64-unknown-linux-gnu-3.12.14-pruned-c921368db8179caab5f9fcb456ae82c8b9b44f1a91d136d216ed8378cbc6eb99
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:50.7963056Z Cache hit for: setup-uv-1-x86_64-unknown-linux-gnu-3.12.14-pruned-c921368db8179caab5f9fcb456ae82c8b9b44f1a91d136d216ed8378cbc6eb99
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:50.8025555Z (node:2135) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:51.0961126Z Received 207484 of 207484 (100.0%), 1.4 MBs/sec
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:51.0965951Z Cache Size: ~0 MB (207484 B)
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:51.0976985Z [command]/usr/bin/tar -xf /home/runner/work/_temp/36812a0e-934f-4375-a2bb-0958083ee6dd/cache.tzst -P -C /home/runner/work/Industrial_mvp/Industrial_mvp --use-compress-program unzstd
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:51.1058407Z Cache restored successfully
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:51.1061810Z uv cache restored from GitHub Actions cache with key: setup-uv-1-x86_64-unknown-linux-gnu-3.12.14-pruned-c921368db8179caab5f9fcb456ae82c8b9b44f1a91d136d216ed8378cbc6eb99
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:51.1202136Z ##[group]Run uv sync --locked --extra dev --python "3.12"
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:51.1202402Z ^[[36;1muv sync --locked --extra dev --python "3.12"^[[0m
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:51.1432392Z shell: /usr/bin/bash -e {0}
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:51.1432558Z env:
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:51.1432729Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:51.1432970Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:51.1433200Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:51.1433408Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:51.1433822Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:51.1434034Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:51.1434237Z   UV_CACHE_DIR: /home/runner/work/_temp/setup-uv-cache
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:51.1434403Z ##[endgroup]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:51.1851363Z Using CPython 3.12.14 interpreter at: /opt/hostedtoolcache/Python/3.12.14/x64/bin/python3.12
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:51.1851667Z Creating virtual environment at: .venv
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:51.1875219Z Resolved 43 packages in 0.61ms
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:51.1906469Z    Building industrial-opportunity-resolution-mvp @ file:///home/runner/work/Industrial_mvp/Industrial_mvp
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:51.2736949Z Downloading pydantic-core (2.0MiB)
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:51.2737180Z Downloading uvloop (4.2MiB)
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:51.2737381Z Downloading pygments (1.2MiB)
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:51.5482320Z  Downloaded pygments
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:51.5695060Z  Downloaded pydantic-core
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:51.6010668Z  Downloaded uvloop
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.0540995Z       Built industrial-opportunity-resolution-mvp @ file:///home/runner/work/Industrial_mvp/Industrial_mvp
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.0549265Z Prepared 29 packages in 866ms
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.0653672Z Installed 29 packages in 10ms
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.0654075Z  + annotated-doc==0.0.5
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.0654303Z  + annotated-types==0.8.0
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.0654554Z  + anyio==4.14.2
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.0654739Z  + certifi==2026.7.22
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.0654926Z  + click==8.5.0
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.0655103Z  + fastapi==0.141.1
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.0655283Z  + h11==0.16.0
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.0655493Z  + httpcore==1.0.9
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.0655693Z  + httptools==0.8.0
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.0655957Z  + httpx==0.28.1
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.0656137Z  + idna==3.19
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.0656940Z  + industrial-opportunity-resolution-mvp==0.2.0 (from file:///home/runner/work/Industrial_mvp/Industrial_mvp)
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.0657428Z  + iniconfig==2.3.0
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.0657638Z  + packaging==26.3
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.0657848Z  + pluggy==1.6.0
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.0658032Z  + pydantic==2.13.5
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.0658233Z  + pydantic-core==2.46.5
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.0658442Z  + pygments==2.21.0
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.0658641Z  + pypdf==6.16.1
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.0658819Z  + pytest==8.4.2
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.0659003Z  + python-dotenv==1.2.3
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.0659200Z  + pyyaml==6.0.3
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.0659390Z  + starlette==1.6.0
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.0659588Z  + typing-extensions==4.16.0
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.0659819Z  + typing-inspection==0.4.4
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.0660030Z  + uvicorn==0.52.4
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.0660219Z  + uvloop==0.22.1
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.0660407Z  + watchfiles==1.2.0
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.0660582Z  + websockets==17.1
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.0810986Z ##[group]Run uv run --locked --extra dev python scripts/check_prohibited_files.py
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.0811333Z ^[[36;1muv run --locked --extra dev python scripts/check_prohibited_files.py^[[0m
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.0864051Z shell: /usr/bin/bash -e {0}
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.0864203Z env:
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.0864357Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.0864598Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.0864840Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.0865049Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.0865260Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.0865476Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.0865680Z   UV_CACHE_DIR: /home/runner/work/_temp/setup-uv-cache
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.0865850Z ##[endgroup]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.8878465Z PROHIBITED FILE SCAN PASS (3307 tracked files)
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.9069495Z ##[group]Run uv run --locked --extra dev python scripts/check_threshold_literals.py
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.9069817Z ^[[36;1muv run --locked --extra dev python scripts/check_threshold_literals.py^[[0m
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.9119660Z shell: /usr/bin/bash -e {0}
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.9119952Z env:
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.9120105Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.9120334Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.9120562Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.9120769Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.9120972Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.9121176Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.9121378Z   UV_CACHE_DIR: /home/runner/work/_temp/setup-uv-cache
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.9121541Z ##[endgroup]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.2096118Z THRESHOLD LITERAL SCAN PASS (104 Python files; 24 configured numeric values)
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.2207916Z ##[group]Run uv run --locked --extra dev python scripts/check_ui_contracts.py
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.2208222Z ^[[36;1muv run --locked --extra dev python scripts/check_ui_contracts.py^[[0m
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.2258822Z shell: /usr/bin/bash -e {0}
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.2258966Z env:
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.2259117Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.2259351Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.2259582Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.2259785Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.2259989Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.2260198Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.2260402Z   UV_CACHE_DIR: /home/runner/work/_temp/setup-uv-cache
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.2260566Z ##[endgroup]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.4508615Z UI CONTRACT CHECK PASS
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.4637389Z ##[group]Run uv run --locked --extra dev python -m compileall -q src scripts tests graph_tests
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.4637763Z ^[[36;1muv run --locked --extra dev python -m compileall -q src scripts tests graph_tests^[[0m
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.4687868Z shell: /usr/bin/bash -e {0}
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.4688005Z env:
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.4688153Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.4688387Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.4688616Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.4688819Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.4689046Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.4689254Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.4689457Z   UV_CACHE_DIR: /home/runner/work/_temp/setup-uv-cache
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.4689621Z ##[endgroup]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.8965020Z ##[group]Run uv run --locked --extra dev python scripts/check_es_modules.py --node node
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.8965564Z ^[[36;1muv run --locked --extra dev python scripts/check_es_modules.py --node node^[[0m
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.9023027Z shell: /usr/bin/bash -e {0}
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.9023176Z env:
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.9023335Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.9023575Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.9023805Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.9024012Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.9024216Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.9024420Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.9024620Z   UV_CACHE_DIR: /home/runner/work/_temp/setup-uv-cache
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.9024783Z ##[endgroup]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.0810697Z ES MODULE CHECK PASS (51 files)
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.0895406Z ##[group]Run PYTHONPATH=src uv run --locked --extra dev python scripts/verify_integrity.py
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.0895757Z ^[[36;1mPYTHONPATH=src uv run --locked --extra dev python scripts/verify_integrity.py^[[0m
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.0947472Z shell: /usr/bin/bash -e {0}
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.0947614Z env:
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.0947798Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.0948151Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.0948499Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.0948810Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.0949125Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.0949442Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.0949733Z   UV_CACHE_DIR: /home/runner/work/_temp/setup-uv-cache
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.0949902Z ##[endgroup]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.2441054Z INTEGRITY PASS
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.2441256Z - data/manifests/snapshot_manifest.json
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.2441472Z - docs/authority/authority_hashes.json
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.2518291Z ##[group]Run PYTHONPATH=src uv run --locked --extra dev python scripts/validate_scenarios.py
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.2518644Z ^[[36;1mPYTHONPATH=src uv run --locked --extra dev python scripts/validate_scenarios.py^[[0m
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.2568740Z shell: /usr/bin/bash -e {0}
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.2568881Z env:
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.2569027Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.2569261Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.2569490Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.2569692Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.2569898Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.2570104Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.2570304Z   UV_CACHE_DIR: /home/runner/work/_temp/setup-uv-cache
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.2570467Z ##[endgroup]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4173858Z SCENARIO VALIDATION PASS (11 scenarios)
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4174800Z - SYN-MINISTRY-ALU-FOIL-001.json scenario=SYN-MINISTRY-ALU-FOIL-001 opportunity=SAU-H6-760711 status=PASS
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4175522Z   target_spec_demand_within_public_imports: PASS - 40 kt <= 53.6793 kt.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4176127Z   line_nameplate_within_disclosed_public_capacity: NOT_APPLICABLE - No numeric public installed nameplate is disclosed.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4177028Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4177693Z   qualified_availability_within_physical_output: NOT_APPLICABLE - No qualified_available_kt is declared.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4178481Z   demand_layers_remain_separate: INFORMATIONAL - Demand layers are reported separately; no ordering constraint is enforced.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4179191Z   tariff_line_allocation_sums_to_public_hs6_total: NOT_APPLICABLE - No tariff_line_allocation block is declared.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4192219Z   buyer_allocation_within_public_imports: NOT_APPLICABLE - No buyer_allocation block is declared.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4192749Z   expansion_assumption_disclosed_and_bounded: NOT_APPLICABLE - No expansion_assumption block is declared.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4193320Z   retained_flows_reconcile_to_public_trade: NOT_APPLICABLE - No production_and_retained_flows block is declared.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4193899Z   base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4194477Z   shared_enabler_declaration_valid: PASS - Shared-enabler declaration and explicit valuation source are valid.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4194982Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4195516Z - SYN-MINISTRY-ALU-PROFILES-001.json scenario=SYN-MINISTRY-ALU-PROFILES-001 opportunity=SAU-H6-760429 status=PASS
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4196006Z   target_spec_demand_within_public_imports: PASS - 6 kt <= 9.18984 kt.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4196983Z   line_nameplate_within_disclosed_public_capacity: NOT_APPLICABLE - No numeric public installed nameplate is disclosed.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4197535Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4197971Z   qualified_availability_within_physical_output: PASS - 2.5 kt <= 30.6 kt.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4198478Z   demand_layers_remain_separate: INFORMATIONAL - Demand layers are reported separately; no ordering constraint is enforced.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4199123Z   tariff_line_allocation_sums_to_public_hs6_total: PASS - Tariff-line quantities sum to 9.18984 kt against public imports 9.18984 kt.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4199734Z   buyer_allocation_within_public_imports: PASS - Buyer quantities sum to 6 kt within public imports 9.18984 kt.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4200276Z   expansion_assumption_disclosed_and_bounded: NOT_APPLICABLE - No expansion_assumption block is declared.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4201069Z   retained_flows_reconcile_to_public_trade: PASS - Retained flows reconcile to public trade marginals.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4201630Z   base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4202199Z   shared_enabler_declaration_valid: PASS - Shared-enabler declaration and explicit valuation source are valid.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4202684Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4203238Z - SYN-MINISTRY-FERT-RETAIL-PACKS-001.json scenario=SYN-MINISTRY-FERT-RETAIL-PACKS-001 opportunity=SAU-H6-310510 status=PASS
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4203785Z   target_spec_demand_within_public_imports: PASS - 1.2229 kt <= 2.44581 kt.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4204274Z   line_nameplate_within_disclosed_public_capacity: NOT_APPLICABLE - No numeric public installed nameplate is disclosed.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4204812Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4205325Z   qualified_availability_within_physical_output: NOT_APPLICABLE - No qualified_available_kt is declared.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4205912Z   demand_layers_remain_separate: INFORMATIONAL - Demand layers are reported separately; no ordering constraint is enforced.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4206525Z   tariff_line_allocation_sums_to_public_hs6_total: NOT_APPLICABLE - No tariff_line_allocation block is declared.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4207195Z   buyer_allocation_within_public_imports: NOT_APPLICABLE - No buyer_allocation block is declared.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4207730Z   expansion_assumption_disclosed_and_bounded: NOT_APPLICABLE - No expansion_assumption block is declared.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4208302Z   retained_flows_reconcile_to_public_trade: NOT_APPLICABLE - No production_and_retained_flows block is declared.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4208902Z   base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4209463Z   shared_enabler_declaration_valid: NOT_APPLICABLE - No shared-enabler declaration is present.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4209940Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4210468Z - SYN-MINISTRY-GALVALUME-001.json scenario=SYN-MINISTRY-GALVALUME-001 opportunity=SAU-H6-721061 status=PASS
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4210941Z   target_spec_demand_within_public_imports: PASS - 48 kt <= 93.232 kt.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4211404Z   line_nameplate_within_disclosed_public_capacity: NOT_APPLICABLE - No numeric public installed nameplate is disclosed.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4211951Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4212470Z   qualified_availability_within_physical_output: NOT_APPLICABLE - No qualified_available_kt is declared.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4213075Z   demand_layers_remain_separate: INFORMATIONAL - Demand layers are reported separately; no ordering constraint is enforced.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4213741Z   tariff_line_allocation_sums_to_public_hs6_total: NOT_APPLICABLE - No tariff_line_allocation block is declared.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4214452Z   buyer_allocation_within_public_imports: NOT_APPLICABLE - No buyer_allocation block is declared.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4214984Z   expansion_assumption_disclosed_and_bounded: NOT_APPLICABLE - No expansion_assumption block is declared.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4215541Z   retained_flows_reconcile_to_public_trade: NOT_APPLICABLE - No production_and_retained_flows block is declared.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4216119Z   base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4216786Z   shared_enabler_declaration_valid: NOT_APPLICABLE - No shared-enabler declaration is present.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4217240Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4217730Z - SYN-MINISTRY-PE-FILM-001.json scenario=SYN-MINISTRY-PE-FILM-001 opportunity=SAU-H6-392010 status=PASS
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4218344Z   target_spec_demand_within_public_imports: PASS - 16 kt <= 21.6782 kt.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4218835Z   line_nameplate_within_disclosed_public_capacity: NOT_APPLICABLE - No numeric public installed nameplate is disclosed.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4219384Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4219823Z   qualified_availability_within_physical_output: PASS - 24 kt <= 51.3 kt.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4220344Z   demand_layers_remain_separate: INFORMATIONAL - Demand layers are reported separately; no ordering constraint is enforced.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4220999Z   tariff_line_allocation_sums_to_public_hs6_total: PASS - Tariff-line quantities sum to 21.6782 kt against public imports 21.6782 kt.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4221578Z   buyer_allocation_within_public_imports: NOT_APPLICABLE - No buyer_allocation block is declared.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4222107Z   expansion_assumption_disclosed_and_bounded: NOT_APPLICABLE - No expansion_assumption block is declared.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4222694Z   retained_flows_reconcile_to_public_trade: NOT_APPLICABLE - No production_and_retained_flows block is declared.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4223367Z   base_demand_and_commitment_probability_valid: NOT_APPLICABLE - No base demand, commitment probability or MES block is declared.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4223983Z   shared_enabler_declaration_valid: NOT_APPLICABLE - No shared-enabler declaration is present.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4224575Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4225188Z - SYN-MINISTRY-PENICILLIN-API-001.json scenario=SYN-MINISTRY-PENICILLIN-API-001 opportunity=SAU-H6-294110 status=PASS
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4225730Z   target_spec_demand_within_public_imports: PASS - 0.171511 kt <= 0.343023 kt.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4226236Z   line_nameplate_within_disclosed_public_capacity: NOT_APPLICABLE - No numeric public installed nameplate is disclosed.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4226910Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4227427Z   qualified_availability_within_physical_output: NOT_APPLICABLE - No qualified_available_kt is declared.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4228032Z   demand_layers_remain_separate: INFORMATIONAL - Demand layers are reported separately; no ordering constraint is enforced.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4228673Z   tariff_line_allocation_sums_to_public_hs6_total: NOT_APPLICABLE - No tariff_line_allocation block is declared.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4229247Z   buyer_allocation_within_public_imports: NOT_APPLICABLE - No buyer_allocation block is declared.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4229779Z   expansion_assumption_disclosed_and_bounded: NOT_APPLICABLE - No expansion_assumption block is declared.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4230348Z   retained_flows_reconcile_to_public_trade: NOT_APPLICABLE - No production_and_retained_flows block is declared.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4230997Z   base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4231665Z   shared_enabler_declaration_valid: NOT_APPLICABLE - No shared-enabler declaration is present.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4232126Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4232587Z - SYN-MINISTRY-PP-001.json scenario=SYN-MINISTRY-PP-001 opportunity=SAU-H0-390210 status=PASS
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4233020Z   target_spec_demand_within_public_imports: PASS - 56 kt <= 56 kt.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4233399Z   line_nameplate_within_disclosed_public_capacity: PASS - 1170 kt <= 1170 kt.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4233873Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4234318Z   qualified_availability_within_physical_output: PASS - 80 kt <= 1055.46 kt.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4234847Z   demand_layers_remain_separate: INFORMATIONAL - Demand layers are reported separately; no ordering constraint is enforced.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4235581Z   tariff_line_allocation_sums_to_public_hs6_total: NOT_APPLICABLE - No tariff_line_allocation block is declared.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4236134Z   buyer_allocation_within_public_imports: NOT_APPLICABLE - No buyer_allocation block is declared.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4236790Z   expansion_assumption_disclosed_and_bounded: NOT_APPLICABLE - No expansion_assumption block is declared.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4237352Z   retained_flows_reconcile_to_public_trade: NOT_APPLICABLE - No production_and_retained_flows block is declared.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4237953Z   base_demand_and_commitment_probability_valid: NOT_APPLICABLE - No base demand, commitment probability or MES block is declared.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4238534Z   shared_enabler_declaration_valid: NOT_APPLICABLE - No shared-enabler declaration is present.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4238986Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4239457Z - SYN-MINISTRY-SOP-001.json scenario=SYN-MINISTRY-SOP-001 opportunity=SAU-H6-310430 status=PASS
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4239914Z   target_spec_demand_within_public_imports: PASS - 11.2306 kt <= 22.4611 kt.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4240423Z   line_nameplate_within_disclosed_public_capacity: NOT_APPLICABLE - No numeric public installed nameplate is disclosed.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4240975Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4241494Z   qualified_availability_within_physical_output: NOT_APPLICABLE - No qualified_available_kt is declared.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4242100Z   demand_layers_remain_separate: INFORMATIONAL - Demand layers are reported separately; no ordering constraint is enforced.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4242728Z   tariff_line_allocation_sums_to_public_hs6_total: NOT_APPLICABLE - No tariff_line_allocation block is declared.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4243279Z   buyer_allocation_within_public_imports: NOT_APPLICABLE - No buyer_allocation block is declared.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4243805Z   expansion_assumption_disclosed_and_bounded: NOT_APPLICABLE - No expansion_assumption block is declared.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4244366Z   retained_flows_reconcile_to_public_trade: NOT_APPLICABLE - No production_and_retained_flows block is declared.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4244963Z   base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4245510Z   shared_enabler_declaration_valid: NOT_APPLICABLE - No shared-enabler declaration is present.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4245977Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4246470Z - SYN-MINISTRY-STEEL-001.json scenario=SYN-MINISTRY-STEEL-001 opportunity=SAU-H0-721049 status=PASS
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4247063Z   target_spec_demand_within_public_imports: PASS - 104 kt <= 287.9 kt.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4247461Z   line_nameplate_within_disclosed_public_capacity: PASS - 250 kt <= 250 kt.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4247904Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4248438Z   qualified_availability_within_physical_output: NOT_APPLICABLE - No qualified_available_kt is declared.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4249160Z   demand_layers_remain_separate: INFORMATIONAL - Demand layers are reported separately; no ordering constraint is enforced.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4249791Z   tariff_line_allocation_sums_to_public_hs6_total: NOT_APPLICABLE - No tariff_line_allocation block is declared.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4250360Z   buyer_allocation_within_public_imports: NOT_APPLICABLE - No buyer_allocation block is declared.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4250903Z   expansion_assumption_disclosed_and_bounded: NOT_APPLICABLE - No expansion_assumption block is declared.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4251511Z   retained_flows_reconcile_to_public_trade: NOT_APPLICABLE - No production_and_retained_flows block is declared.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4252132Z   base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4252807Z   shared_enabler_declaration_valid: NOT_APPLICABLE - No shared-enabler declaration is present.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4253270Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4253834Z - SYN-MINISTRY-STREPTOMYCIN-API-001.json scenario=SYN-MINISTRY-STREPTOMYCIN-API-001 opportunity=SAU-H6-294120 status=PASS
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4254390Z   target_spec_demand_within_public_imports: PASS - 0.023889 kt <= 0.047779 kt.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4254934Z   line_nameplate_within_disclosed_public_capacity: NOT_APPLICABLE - No numeric public installed nameplate is disclosed.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4255539Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4256101Z   qualified_availability_within_physical_output: NOT_APPLICABLE - No qualified_available_kt is declared.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4256841Z   demand_layers_remain_separate: INFORMATIONAL - Demand layers are reported separately; no ordering constraint is enforced.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4257524Z   tariff_line_allocation_sums_to_public_hs6_total: NOT_APPLICABLE - No tariff_line_allocation block is declared.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4258103Z   buyer_allocation_within_public_imports: NOT_APPLICABLE - No buyer_allocation block is declared.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4258653Z   expansion_assumption_disclosed_and_bounded: NOT_APPLICABLE - No expansion_assumption block is declared.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4259262Z   retained_flows_reconcile_to_public_trade: NOT_APPLICABLE - No production_and_retained_flows block is declared.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4259865Z   base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4260433Z   shared_enabler_declaration_valid: NOT_APPLICABLE - No shared-enabler declaration is present.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4260911Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4261419Z - SYN-MINISTRY-TINPLATE-001.json scenario=SYN-MINISTRY-TINPLATE-001 opportunity=SAU-H6-721012 status=PASS
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4261901Z   target_spec_demand_within_public_imports: PASS - 95 kt <= 104.575 kt.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4262405Z   line_nameplate_within_disclosed_public_capacity: NOT_APPLICABLE - No numeric public installed nameplate is disclosed.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4262982Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4263506Z   qualified_availability_within_physical_output: NOT_APPLICABLE - No qualified_available_kt is declared.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4264111Z   demand_layers_remain_separate: INFORMATIONAL - Demand layers are reported separately; no ordering constraint is enforced.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4264752Z   tariff_line_allocation_sums_to_public_hs6_total: NOT_APPLICABLE - No tariff_line_allocation block is declared.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4265301Z   buyer_allocation_within_public_imports: NOT_APPLICABLE - No buyer_allocation block is declared.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4265852Z   expansion_assumption_disclosed_and_bounded: NOT_APPLICABLE - No expansion_assumption block is declared.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4266696Z   retained_flows_reconcile_to_public_trade: NOT_APPLICABLE - No production_and_retained_flows block is declared.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4267300Z   base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4267838Z   shared_enabler_declaration_valid: NOT_APPLICABLE - No shared-enabler declaration is present.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4268335Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4268744Z SHARED ENABLER CONSISTENCY PASS (1 enablers, 2 dependents)
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4327399Z ##[group]Run PYTHONPATH=src uv run --locked --extra dev python scripts/reconstruct_snapshot.py --all
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4327772Z ^[[36;1mPYTHONPATH=src uv run --locked --extra dev python scripts/reconstruct_snapshot.py --all^[[0m
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4377682Z shell: /usr/bin/bash -e {0}
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4377815Z env:
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4377976Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4378214Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4378439Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4378645Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4378851Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4379061Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4379258Z   UV_CACHE_DIR: /home/runner/work/_temp/setup-uv-cache
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:55.4379420Z ##[endgroup]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.5426034Z Rotated text discovered. Output will be incomplete.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:59.6371360Z Rotated text discovered. Output will be incomplete.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:00.8307610Z Rotated text discovered. Output will be incomplete.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:00.8683313Z Rotated text discovered. Output will be incomplete.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:00.9686221Z Rotated text discovered. Output will be incomplete.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.0046842Z Rotated text discovered. Output will be incomplete.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.2851103Z Rotated text discovered. Output will be incomplete.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.3579733Z Rotated text discovered. Output will be incomplete.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.5781388Z Rotated text discovered. Output will be incomplete.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.8791662Z Rotated text discovered. Output will be incomplete.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:03.0635947Z Rotated text discovered. Output will be incomplete.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:03.1584781Z Rotated text discovered. Output will be incomplete.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:03.7076420Z Rotated text discovered. Output will be incomplete.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:05.5735581Z Rotated text discovered. Output will be incomplete.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:21.5910048Z Rotated text discovered. Output will be incomplete.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:22.0132658Z Rotated text discovered. Output will be incomplete.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:22.1402890Z Rotated text discovered. Output will be incomplete.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:22.6950616Z Rotated text discovered. Output will be incomplete.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:22.7336228Z Rotated text discovered. Output will be incomplete.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:22.8373844Z Rotated text discovered. Output will be incomplete.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:23.8234169Z Rotated text discovered. Output will be incomplete.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:24.0880488Z Rotated text discovered. Output will be incomplete.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:24.1575095Z Rotated text discovered. Output will be incomplete.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:24.3635238Z Rotated text discovered. Output will be incomplete.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:24.6283058Z Rotated text discovered. Output will be incomplete.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:24.7877610Z Rotated text discovered. Output will be incomplete.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:24.8970927Z Rotated text discovered. Output will be incomplete.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:25.4501109Z Rotated text discovered. Output will be incomplete.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:27.1584365Z Rotated text discovered. Output will be incomplete.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:43.2096267Z Rotated text discovered. Output will be incomplete.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:43.5783713Z Rotated text discovered. Output will be incomplete.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:43.6696001Z Rotated text discovered. Output will be incomplete.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:44.2677459Z Rotated text discovered. Output will be incomplete.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:45.4431116Z Rotated text discovered. Output will be incomplete.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:46.5086984Z Rotated text discovered. Output will be incomplete.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:47.1991758Z Rotated text discovered. Output will be incomplete.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:47.6139574Z Got invalid hex string: Non-hexadecimal digit found (b'CMapName')
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:47.6142340Z Skipping broken line b'endcmap CMapName currentdict /CMap defineresource pop end end': Odd-length string
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:47.6718339Z Got invalid hex string: Non-hexadecimal digit found (b'CMapName')
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:47.6718799Z Skipping broken line b'endcmap CMapName currentdict /CMap defineresource pop end end': Odd-length string
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:47.7262139Z Got invalid hex string: Non-hexadecimal digit found (b'CMapName')
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:47.7262723Z Skipping broken line b'endcmap CMapName currentdict /CMap defineresource pop end end': Odd-length string
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:47.7833408Z Got invalid hex string: Non-hexadecimal digit found (b'CMapName')
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:47.7834043Z Skipping broken line b'endcmap CMapName currentdict /CMap defineresource pop end end': Odd-length string
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:47.8366935Z invalid pdf header: b'HTTP/'
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:47.8367279Z incorrect startxref pointer(1)
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:47.8369221Z parsing for Object Streams
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:49.2804081Z invalid pdf header: b'HTTP/'
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:49.2804472Z incorrect startxref pointer(1)
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:49.2807023Z parsing for Object Streams
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:50.9994536Z Rotated text discovered. Output will be incomplete.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:51.7288133Z Rotated text discovered. Output will be incomplete.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:04.4374270Z Rotated text discovered. Output will be incomplete.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:06.3982767Z Rotated text discovered. Output will be incomplete.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:52.3835665Z CASE RECONSTRUCTION PASS (9 snapshots, 9 briefs)
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:52.3836000Z GRAPH RECONSTRUCTION PASS (1 projections, 925 nodes, 1045 edges)
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:52.3836322Z RECONSTRUCTION PASS (5 snapshots, 42 artifacts)
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:52.3836818Z DOCUMENT RECONSTRUCTION PASS (26 records, 26 artifacts)
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:52.3837093Z ENTITY RECONSTRUCTION PASS (3 artifacts, 46 links)
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:52.3837352Z SCREENING RECONSTRUCTION PASS (1 snapshots)
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:52.3837615Z CASE SELECTION RECONSTRUCTION PASS (2 records)
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:52.4221788Z ##[group]Run PYTHONPATH=src uv run --locked --extra dev pytest -q
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:52.4222236Z ^[[36;1mPYTHONPATH=src uv run --locked --extra dev pytest -q^[[0m
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:52.4292397Z shell: /usr/bin/bash -e {0}
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:52.4292557Z env:
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:52.4292718Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:52.4292969Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:52.4293230Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:52.4293448Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:52.4293668Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:52.4293886Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:52.4294097Z   UV_CACHE_DIR: /home/runner/work/_temp/setup-uv-cache
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:52.4294269Z ##[endgroup]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:59.4539273Z ........................................................................ [  1%]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:53:01.0277846Z ........................................................................ [  3%]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:53:02.5845809Z ........................................................................ [  5%]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:53:04.0753821Z ........................................................................ [  7%]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:53:05.8011231Z ........................................................................ [  9%]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:53:13.1017150Z ........................................................................ [ 10%]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:53:13.3091635Z ........................................................................ [ 12%]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:53:13.7887285Z ........................................................................ [ 14%]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:53:13.9497028Z ........................................................................ [ 16%]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:53:14.1090232Z ........................................................................ [ 18%]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:53:14.2763003Z ........................................................................ [ 19%]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:53:14.5125914Z ........................................................................ [ 21%]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:53:14.9570964Z ........................................................................ [ 23%]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:53:15.9969258Z ........................................................................ [ 25%]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:53:21.0435687Z ........................................................................ [ 27%]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:53:23.5482310Z ........................................................................ [ 28%]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:53:26.3588603Z ........................................................................ [ 30%]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:53:28.2182670Z ........................................................................ [ 32%]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:53:38.6078031Z ........................................................................ [ 34%]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:53:42.0051514Z ........................................................................ [ 36%]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:53:44.0954145Z ........................................................................ [ 37%]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:53:44.5989240Z ........................................................................ [ 39%]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:53:45.5054188Z ........................................................................ [ 41%]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:53:46.2456868Z ........................................................................ [ 43%]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:53:47.2435589Z ........................................................................ [ 45%]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:53:48.0885225Z ........................................................................ [ 47%]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:53:50.6445404Z ........................................................................ [ 48%]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:53:52.2547410Z ........................................................................ [ 50%]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:53:53.7708314Z ........................................................................ [ 52%]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:53:55.3800562Z ........................................................................ [ 54%]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:53:58.6030286Z ........................................................................ [ 56%]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:53:59.7083499Z ........................................................................ [ 57%]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:54:09.7538347Z ........................................................................ [ 59%]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:54:19.9518642Z ........................................................................ [ 61%]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:54:52.1668620Z ........................................................................ [ 63%]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:54:52.4393416Z ........................................................................ [ 65%]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:10.0536457Z ........................................................................ [ 66%]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:18.7851927Z ........................................................................ [ 68%]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:21.7150619Z ........................................................................ [ 70%]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:27.1842657Z ........................................................................ [ 72%]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:28.7855106Z ........................................................................ [ 74%]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:34.4598893Z ........................................................................ [ 75%]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:34.5330700Z ........................................................................ [ 77%]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:34.7008379Z ........................................................................ [ 79%]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:35.7086314Z ........................................................................ [ 81%]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:37.0811636Z ........................................................................ [ 83%]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:43.0576065Z ........................................................................ [ 84%]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:43.2914183Z ........................................................................ [ 86%]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:45.9667509Z ........................................................................ [ 88%]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:46.1376154Z ........................................................................ [ 90%]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:46.6472480Z ........................................................................ [ 92%]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:46.9265261Z ........................................................................ [ 94%]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:47.0698232Z ........................................................................ [ 95%]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:47.4098141Z ........................................................................ [ 97%]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:52.5287332Z ........................................................................ [ 99%]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:54.5841801Z ......................                                                   [100%]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:54.5842225Z =============================== warnings summary ===============================
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:54.5842582Z .venv/lib/python3.12/site-packages/fastapi/testclient.py:1
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:54.5843132Z   /home/runner/work/Industrial_mvp/Industrial_mvp/.venv/lib/python3.12/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:54.5843664Z     from starlette.testclient import TestClient as TestClient  # noqa
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:54.5843839Z 
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:54.5843970Z -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:54.5844198Z 3982 passed, 1 warning in 179.57s (0:02:59)
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:56.4092405Z ##[group]Run PYTHONPATH=src uv run --locked --extra dev python scripts/demo_smoke.py
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:56.4092747Z ^[[36;1mPYTHONPATH=src uv run --locked --extra dev python scripts/demo_smoke.py^[[0m
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:56.4144072Z shell: /usr/bin/bash -e {0}
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:56.4144219Z env:
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:56.4144393Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:56.4144639Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:56.4144873Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:56.4145083Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:56.4145295Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:56.4145505Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:56.4145721Z   UV_CACHE_DIR: /home/runner/work/_temp/setup-uv-cache
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:56.4145887Z ##[endgroup]
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:56.6223689Z SMOKE PASS
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:56.6223943Z - Steel / public: INVESTIGATE
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:56.6224311Z - Steel / simulated: ADVANCE, real state unchanged
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:56.6226493Z - Polypropylene / public: REJECT generic capacity
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:56.6227357Z - AR/EN extraction golden gate: 100%
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:56.6527417Z Post job cleanup.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:56.7341283Z Cache hit occurred on key setup-uv-1-x86_64-unknown-linux-gnu-3.12.14-pruned-c921368db8179caab5f9fcb456ae82c8b9b44f1a91d136d216ed8378cbc6eb99, not saving cache.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:56.7342168Z (node:6649) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:56.7342573Z (Use `node --trace-deprecation ...` to show where the warning was created)
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:56.7446901Z Post job cleanup.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:56.8317935Z (node:6657) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:56.8318340Z (Use `node --trace-deprecation ...` to show where the warning was created)
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:56.8515291Z Post job cleanup.
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:56.9083440Z [command]/usr/bin/git version
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:56.9104315Z git version 2.55.0
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:56.9128737Z Temporarily overriding HOME='/home/runner/work/_temp/f6a13723-8f7c-4557-9c19-32b037191b5a' before making global git config changes
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:56.9129443Z Adding repository directory to the temporary git global config as a safe directory
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:56.9133143Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Industrial_mvp/Industrial_mvp
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:56.9170337Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:56.9199771Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:56.9413641Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:56.9447590Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:56.9651461Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:56.9679971Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:56.9962598Z Cleaning up orphan processes
+uv / Python 3.12	UNKNOWN STEP	2026-09-25T18:55:57.0159883Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-python@v5, astral-sh/setup-uv@v6. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

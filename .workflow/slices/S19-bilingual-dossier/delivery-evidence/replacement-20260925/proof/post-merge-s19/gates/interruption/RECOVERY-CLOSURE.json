@@ -1,0 +1,26 @@
+{
+  "status": "RECOVERED_VERIFIED_SAME_RETAINED_ID",
+  "recorded_at_utc": "2026-09-25T17:30:31.449252+00:00",
+  "executor_exit_code": 0,
+  "exit_code_source": "tools.write_stdin session66357 completed with exit_code0; original executor script final event and outputs retained",
+  "boot_id": "faca8be5-82e0-4fd5-becc-cd10e45d9823",
+  "container_id": "42216eec09ddb9d4ad68058d1d1547c1980281fbbeff5a53f8ae145f42ec8d1e",
+  "original_projection_id": "GRAPH-SAU-2026-09-12-461bf4840962",
+  "node_count": 925,
+  "edge_count": 1045,
+  "bindings": {
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ci-host-restart-recovery-r1/RECOVER-SAME-RETAINED-ID.py": "489e8ecb476c2af1b9d9033e6ca02dfe3dbdbb858f5992dbf5046dda5ad561e6",
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ci-host-restart-recovery-r1/attempt1/RESTORED-IDENTITY.json": "d9cf2186011478e99ef134e23c8c0701787c49b87412dcaf52cded82c31ed58a",
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ci-host-restart-recovery-r1/attempt1/RESTORED-GRAPH.json": "8156d58b8d931aff78954a7b40c322fe910203d843b5fe4126a049828469f76d",
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ci-host-restart-recovery-r1/attempt1/RESTORED-GRAPH-execution.json": "c772cfec2d0285a7cdbe381673e29e51b29839e699def55d06c481946179a703",
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ci-host-restart-recovery-r1/attempt1/FINAL-RESOURCE-INVENTORY.json": "70ca8f0fd2c1e0c7e539db8f58592be0b659b0478e86eba83b86286fa59c2f10",
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ci-host-restart-recovery-r1/attempt1/READONLY-COMMANDS.json": "656afa6b57fe62c75a3cb3d9ac2ea902653eb5f15da40a50e3522e5255958690",
+    "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ci-host-restart-recovery-r1/attempt1/execution-events.jsonl": "452a14d2a42365972083684e2cdfaeb8914f15a64e007b3913e25bf9edc737d1"
+  },
+  "protected_indexes": 53,
+  "all_equal": true,
+  "ci1": "pass retained; ownPDFproofpending",
+  "ci2": "interrupted incomplete preserved; replacement not yet released",
+  "sanad": "Actual executed recovery exited0, samecontainer restoredhealthy/fullidentity/originalgraph+53indexchecks passed. No CI2 outcome invented.",
+  "muhasabah": "PASS for recovery only, not finalimplementationacceptance."
+}

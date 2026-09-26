@@ -1,0 +1,50 @@
+{
+  "utc": "2026-09-25T21:50:38.165662+00:00",
+  "commands": [
+    {
+      "command": [
+        "docker",
+        "stop",
+        "bd926871e24ee7f8afc6e87d8f4af88e84be2d5b43d9ba4699719e40dddfd0de"
+      ],
+      "exit": 0,
+      "stdout": "bd926871e24ee7f8afc6e87d8f4af88e84be2d5b43d9ba4699719e40dddfd0de\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "docker",
+        "rm",
+        "bd926871e24ee7f8afc6e87d8f4af88e84be2d5b43d9ba4699719e40dddfd0de"
+      ],
+      "exit": 0,
+      "stdout": "bd926871e24ee7f8afc6e87d8f4af88e84be2d5b43d9ba4699719e40dddfd0de\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "docker",
+        "volume",
+        "rm",
+        "ior-s19-aura-recovery-20260925-data"
+      ],
+      "exit": 0,
+      "stdout": "ior-s19-aura-recovery-20260925-data\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "docker",
+        "network",
+        "rm",
+        "ior-s19-aura-recovery-20260925-net"
+      ],
+      "exit": 0,
+      "stdout": "ior-s19-aura-recovery-20260925-net\n",
+      "stderr": ""
+    }
+  ],
+  "retained_anonymous_created_volumes": [
+    "f0ca826150977bad25dbf297137e9d4fcdb8f47eb3ebab40f1576832a1e2aa41"
+  ]
+}

@@ -1,0 +1,835 @@
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	﻿2026-09-25T18:50:41.9191968Z Current runner version: '2.337.0'
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:41.9209721Z ##[group]Runner Image Provisioner
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:41.9210424Z Hosted Compute Agent
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:41.9211024Z Version: 20260828.587
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:41.9211552Z Commit: abac92662cab4cc7352de4f9f9d2e2419aad9c29
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:41.9212588Z Build Date: 2026-08-28T16:44:25Z
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:41.9213176Z Worker ID: {1b39ab56-b41c-4725-9b66-0e554f87c519}
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:41.9213780Z Azure Region: westus3
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:41.9214300Z ##[endgroup]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:41.9215433Z ##[group]Operating System
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:41.9215948Z Ubuntu
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:41.9216387Z 24.04.5
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:41.9216814Z LTS
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:41.9217293Z ##[endgroup]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:41.9217747Z ##[group]Runner Image
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:41.9218220Z Image: ubuntu-24.04
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:41.9218760Z Version: 20260920.314.1
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:41.9219743Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260920.314/images/ubuntu/Ubuntu2404-Readme.md
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:41.9221030Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260920.314
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:41.9222005Z ##[endgroup]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:41.9222986Z ##[group]GITHUB_TOKEN Permissions
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:41.9224666Z Contents: read
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:41.9225151Z Metadata: read
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:41.9225613Z ##[endgroup]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:41.9227574Z Secret source: Actions
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:41.9228413Z Cache mode: write
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:41.9229072Z Prepare workflow directory
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:41.9740665Z Prepare all required actions
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:41.9782762Z Getting action download info
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.2832236Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.3939477Z Download action repository 'actions/setup-python@v5' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:42.4898550Z Download action repository 'astral-sh/setup-uv@v6' (SHA:d0cc045d04ccac9d8b7881df0226f9e82c39688e)
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.5000146Z Complete job name: graph / Neo4j service / Python 3.12
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.5408419Z ##[group]Checking docker version
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.5419273Z ##[command]/usr/bin/docker version --format '{{.Server.APIVersion}}'
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.6346246Z '1.48'
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.6358243Z Docker daemon API version: '1.48'
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.6359255Z ##[command]/usr/bin/docker version --format '{{.Client.APIVersion}}'
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.6514373Z '1.48'
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.6521752Z Docker client API version: '1.48'
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.6526044Z ##[endgroup]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.6527944Z ##[group]Clean up resources from previous jobs
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.6532688Z ##[command]/usr/bin/docker ps --all --quiet --no-trunc --filter "label=f61742"
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.6650235Z ##[command]/usr/bin/docker network prune --force --filter "label=f61742"
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.6758076Z ##[endgroup]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.6758666Z ##[group]Create local container network
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.6767693Z ##[command]/usr/bin/docker network create --label f61742 github_network_8e11c1e4df9a43a999b9c6b99b502187
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.7176914Z 3c95a3a309c8eb488d58bafb76b2ed141cabd24cbaf17a4223941130572a81e9
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.7184675Z ##[endgroup]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.7207037Z ##[group]Starting neo4j service container
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:43.7226216Z ##[command]/usr/bin/docker pull neo4j:5.26.30@sha256:037cf5756f0135cbfd66b739b6df7c7c4bb100f9ce11602f6f9538e17e02c74d
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:44.2829889Z docker.io/library/neo4j@sha256:037cf5756f0135cbfd66b739b6df7c7c4bb100f9ce11602f6f9538e17e02c74d: Pulling from library/neo4j
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:44.5024165Z 6310eb16bf42: Pulling fs layer
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:44.5024854Z 9629395e8302: Pulling fs layer
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:44.5025408Z 773fc9d993ca: Pulling fs layer
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:44.5026040Z a7a71a423b02: Pulling fs layer
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:44.5026862Z 4f4fb700ef54: Pulling fs layer
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:44.5027417Z a7a71a423b02: Waiting
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:44.5028079Z 4f4fb700ef54: Waiting
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:44.7059572Z 773fc9d993ca: Download complete
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:44.8537484Z 6310eb16bf42: Verifying Checksum
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:44.8539348Z 6310eb16bf42: Download complete
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:45.0592678Z 4f4fb700ef54: Verifying Checksum
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:45.0595813Z 4f4fb700ef54: Download complete
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:45.2211415Z 9629395e8302: Verifying Checksum
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:45.2213010Z 9629395e8302: Download complete
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:45.4884112Z a7a71a423b02: Verifying Checksum
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:45.4885710Z a7a71a423b02: Download complete
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:45.7715546Z 6310eb16bf42: Pull complete
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:50.2657316Z 9629395e8302: Pull complete
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:50.2756724Z 773fc9d993ca: Pull complete
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.8335928Z a7a71a423b02: Pull complete
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.8415767Z 4f4fb700ef54: Pull complete
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.8468312Z Digest: sha256:037cf5756f0135cbfd66b739b6df7c7c4bb100f9ce11602f6f9538e17e02c74d
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.8487423Z Status: Downloaded newer image for neo4j@sha256:037cf5756f0135cbfd66b739b6df7c7c4bb100f9ce11602f6f9538e17e02c74d
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.8489121Z docker.io/library/neo4j:5.26.30@sha256:037cf5756f0135cbfd66b739b6df7c7c4bb100f9ce11602f6f9538e17e02c74d
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.8539667Z ##[command]/usr/bin/docker create --name fe87261013f64524b56c9a94ccda3e80_neo4j52630sha256037cf5756f0135cbfd66b739b6df7c7c4bb100f9ce11602f6f9538e17e02c74d_de42c1 --label f61742 --network github_network_8e11c1e4df9a43a999b9c6b99b502187 --network-alias neo4j -p 7475:7474 -p 7688:7687  -e "NEO4J_AUTH=neo4j/[REDACTED_CI_CREDENTIAL]" -e GITHUB_ACTIONS=true -e CI=true neo4j:5.26.30@sha256:037cf5756f0135cbfd66b739b6df7c7c4bb100f9ce11602f6f9538e17e02c74d
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.8805268Z 841f0b2c9b5ff776f57ea78581d03f6e4bc8b7642d8ca1c879cae94dd1426a8e
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:52.8819733Z ##[command]/usr/bin/docker start 841f0b2c9b5ff776f57ea78581d03f6e4bc8b7642d8ca1c879cae94dd1426a8e
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.0915581Z 841f0b2c9b5ff776f57ea78581d03f6e4bc8b7642d8ca1c879cae94dd1426a8e
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.0939106Z ##[command]/usr/bin/docker ps --all --filter id=841f0b2c9b5ff776f57ea78581d03f6e4bc8b7642d8ca1c879cae94dd1426a8e --filter status=running --no-trunc --format "{{.ID}} {{.Status}}"
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.1058163Z 841f0b2c9b5ff776f57ea78581d03f6e4bc8b7642d8ca1c879cae94dd1426a8e Up Less than a second
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.1072330Z ##[command]/usr/bin/docker port 841f0b2c9b5ff776f57ea78581d03f6e4bc8b7642d8ca1c879cae94dd1426a8e
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.1182198Z 7474/tcp -> 0.0.0.0:7475
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.1182669Z 7474/tcp -> [::]:7475
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.1188460Z 7687/tcp -> 0.0.0.0:7688
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.1188974Z 7687/tcp -> [::]:7688
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.1217148Z ##[endgroup]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.1225536Z ##[group]Waiting for all services to be ready
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.1237169Z ##[command]/usr/bin/docker inspect --format="{{if .Config.Healthcheck}}{{print .State.Health.Status}}{{end}}" 841f0b2c9b5ff776f57ea78581d03f6e4bc8b7642d8ca1c879cae94dd1426a8e
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.1356234Z neo4j service is healthy.
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.1356618Z ##[endgroup]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.1608221Z ##[group]Run actions/checkout@v4
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.1608734Z with:
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.1608956Z   persist-credentials: false
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.1609207Z   repository: baramiSG/Industrial_mvp
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.1612470Z   token: ***
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.1612684Z   ssh-strict: true
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.1612900Z   ssh-user: git
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.1613119Z   clean: true
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.1613321Z   sparse-checkout-cone-mode: true
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.1613553Z   fetch-depth: 1
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.1613746Z   fetch-tags: false
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.1613940Z   show-progress: true
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.1614130Z   lfs: false
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.1614474Z   submodules: false
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.1614757Z   set-safe-directory: true
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.1615066Z   allow-unsafe-pr-checkout: false
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.1615633Z env:
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.1615813Z   IOR_GRAPH_TARGET: ci
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.1616017Z   NEO4J_USERNAME: neo4j
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.1616286Z   NEO4J_PASSWORD: [REDACTED_CI_CREDENTIAL]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.1616660Z   PYTHONDONTWRITEBYTECODE: 1
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.1617675Z   PYTHONPYCACHEPREFIX: /tmp/ior-s16a-ci-pyc
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.1617925Z ##[endgroup]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.2605567Z Syncing repository: baramiSG/Industrial_mvp
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.2612217Z ##[group]Getting Git version info
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.2612852Z Working directory is '/home/runner/work/Industrial_mvp/Industrial_mvp'
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.2613766Z [command]/usr/bin/git version
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.2722894Z git version 2.55.0
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.2725540Z ##[endgroup]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.2736300Z Temporarily overriding HOME='/home/runner/work/_temp/d2c9311b-3494-437d-8c68-5707be2a6219' before making global git config changes
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.2737683Z Adding repository directory to the temporary git global config as a safe directory
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.2743841Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Industrial_mvp/Industrial_mvp
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.2785290Z Deleting the contents of '/home/runner/work/Industrial_mvp/Industrial_mvp'
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.2789474Z ##[group]Initializing the repository
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.2801292Z [command]/usr/bin/git init /home/runner/work/Industrial_mvp/Industrial_mvp
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.2917631Z hint: Using 'master' as the name for the initial branch. This default branch name
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.2918705Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.2922583Z hint: to use in all of your new repositories, which will suppress this warning,
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.2924751Z hint: call:
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.2925123Z hint:
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.2925536Z hint: 	git config --global init.defaultBranch <name>
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.2925985Z hint:
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.2926397Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.2927043Z hint: 'development'. The just-created branch can be renamed via this command:
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.2927523Z hint:
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.2927824Z hint: 	git branch -m <name>
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.2928153Z hint:
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.2928599Z hint: Disable this message with "git config set advice.defaultBranchName false"
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.2929305Z Initialized empty Git repository in /home/runner/work/Industrial_mvp/Industrial_mvp/.git/
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.2936891Z [command]/usr/bin/git remote add origin https://github.com/baramiSG/Industrial_mvp
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.3036414Z ##[endgroup]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.3037067Z ##[group]Disabling automatic garbage collection
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.3039378Z [command]/usr/bin/git config --local gc.auto 0
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.3074833Z ##[endgroup]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.3075361Z ##[group]Setting up auth
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.3080719Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.3109358Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.3475323Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.3499213Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.3665205Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.3692241Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.3876430Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.4108651Z ##[endgroup]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.4109434Z ##[group]Fetching the repository
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:53.4118743Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +0ba7806c8d9c0960d6647389a6b11694f00aaf5c:refs/remotes/pull/40/merge
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:57.5016899Z From https://github.com/baramiSG/Industrial_mvp
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:57.5023277Z  * [new ref]         0ba7806c8d9c0960d6647389a6b11694f00aaf5c -> pull/40/merge
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:57.5025932Z ##[endgroup]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:57.5026897Z ##[group]Determining the checkout info
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:57.5027886Z ##[endgroup]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:57.5038881Z [command]/usr/bin/git sparse-checkout disable
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:57.5086805Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:57.5155449Z ##[group]Checking out the ref
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:57.5162581Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/40/merge
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.4170293Z Note: switching to 'refs/remotes/pull/40/merge'.
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.4172060Z 
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.4172405Z You are in 'detached HEAD' state. You can look around, make experimental
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.4173349Z changes and commit them, and you can discard any commits you make in this
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.4174147Z state without impacting any branches by switching back to a branch.
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.4174573Z 
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.4174928Z If you want to create a new branch to retain commits you create, you may
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.4175348Z do so (now or later) by using -c with the switch command. Example:
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.4175592Z 
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.4175715Z   git switch -c <new-branch-name>
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.4175885Z 
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.4176116Z Or undo this operation with:
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.4176374Z 
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.4176508Z   git switch -
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.4176680Z 
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.4177195Z Turn off this advice by setting config variable advice.detachedHead to false
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.4177496Z 
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.4177818Z HEAD is now at 0ba7806 Merge 39614fcdd8d8eb9a96381c3d1b806343d5164419 into ce407db9832b61c5a8a85dfda2e3b7623da2fbc9
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.4247636Z ##[endgroup]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.4303629Z [command]/usr/bin/git log -1 --format=%H
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.4342467Z 0ba7806c8d9c0960d6647389a6b11694f00aaf5c
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.4351882Z ##[group]Removing auth
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.4358385Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.4392140Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.4675669Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.4703821Z http.https://github.com/.extraheader
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.4714212Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.4748584Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.4958927Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.5005955Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.5175698Z ##[endgroup]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.5456274Z ##[group]Run actions/setup-python@v5
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.5456647Z with:
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.5456952Z   python-version: 3.12
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.5457276Z   check-latest: false
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.5460976Z   token: ***
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.5461262Z   update-environment: true
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.5461595Z   allow-prereleases: false
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.5462074Z   freethreaded: false
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.5462354Z env:
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.5462637Z   IOR_GRAPH_TARGET: ci
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.5462939Z   NEO4J_USERNAME: neo4j
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.5463248Z   NEO4J_PASSWORD: [REDACTED_CI_CREDENTIAL]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.5463619Z   PYTHONDONTWRITEBYTECODE: 1
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.5463995Z   PYTHONPYCACHEPREFIX: /tmp/ior-s16a-ci-pyc
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.5464584Z ##[endgroup]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.6846397Z ##[group]Installed versions
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.6962316Z (node:2594) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.6979042Z Successfully set up CPython (3.12.14)
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.6979473Z ##[endgroup]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.7002739Z (Use `node --trace-deprecation ...` to show where the warning was created)
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.7191319Z ##[group]Run astral-sh/setup-uv@v6
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.7191806Z with:
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.7192066Z   enable-cache: true
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.7192370Z   cache-dependency-glob: uv.lock
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.7192714Z   activate-environment: false
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.7193173Z   working-directory: /home/runner/work/Industrial_mvp/Industrial_mvp
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.7193688Z   server-url: https://github.com
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.7197756Z   github-token: ***
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.7198034Z   restore-cache: true
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.7198312Z   save-cache: true
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.7198587Z   prune-cache: true
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.7198881Z   ignore-nothing-to-cache: false
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.7199228Z   ignore-empty-workdir: false
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.7199553Z   add-problem-matchers: true
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.7199858Z env:
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.7200095Z   IOR_GRAPH_TARGET: ci
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.7200377Z   NEO4J_USERNAME: neo4j
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.7200690Z   NEO4J_PASSWORD: [REDACTED_CI_CREDENTIAL]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.7201083Z   PYTHONDONTWRITEBYTECODE: 1
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.7201437Z   PYTHONPYCACHEPREFIX: /tmp/ior-s16a-ci-pyc
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.7201966Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.7202514Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.7203061Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.7203547Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.7204034Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.7204547Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.7204949Z ##[endgroup]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.9681396Z (node:2604) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.9682506Z (Use `node --trace-deprecation ...` to show where the warning was created)
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.9809169Z Trying to find version for uv in: /home/runner/work/Industrial_mvp/Industrial_mvp/uv.toml
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.9809950Z Could not find file: /home/runner/work/Industrial_mvp/Industrial_mvp/uv.toml
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.9810707Z Trying to find version for uv in: /home/runner/work/Industrial_mvp/Industrial_mvp/pyproject.toml
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.9832116Z Could not determine uv version from uv.toml or pyproject.toml. Falling back to latest.
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:58.9839764Z Getting latest version from GitHub API...
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:59.4032499Z manifest-file not provided, reading from local file.
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:59.4062646Z manifest-file does not contain version 0.12.19, arch x86_64, platform unknown-linux-gnu. Falling back to GitHub releases.
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:59.4090322Z Downloading uv from "https://github.com/astral-sh/uv/releases/download/0.12.19/uv-x86_64-unknown-linux-gnu.tar.gz" ...
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:50:59.8527376Z [command]/usr/bin/tar xz --warning=no-unknown-keyword --overwrite -C /home/runner/work/_temp/ed64184d-a038-4780-8433-fa11f7e74fc4 -f /home/runner/work/_temp/553028ef-2d43-43ee-9c25-4a3919a0ada5
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:00.5658397Z Added /home/runner/.local/bin to the path
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:00.5659082Z Added /opt/hostedtoolcache/uv/0.12.19/x86_64 to the path
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:00.5669785Z Set UV_CACHE_DIR to /home/runner/work/_temp/setup-uv-cache
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:00.5670691Z Successfully installed uv version 0.12.19
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:00.5671534Z Searching files using cache dependency glob: /home/runner/work/Industrial_mvp/Industrial_mvp/uv.lock
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:00.5696679Z /home/runner/work/Industrial_mvp/Industrial_mvp/uv.lock
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:00.5713748Z Found 1 files to hash.
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:00.6780687Z Trying to restore uv cache from GitHub Actions cache with key: setup-uv-1-x86_64-unknown-linux-gnu-3.12.14-pruned-c921368db8179caab5f9fcb456ae82c8b9b44f1a91d136d216ed8378cbc6eb99
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:00.8782606Z Cache hit for: setup-uv-1-x86_64-unknown-linux-gnu-3.12.14-pruned-c921368db8179caab5f9fcb456ae82c8b9b44f1a91d136d216ed8378cbc6eb99
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:00.8913191Z (node:2604) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.3290178Z Received 207484 of 207484 (100.0%), 1.0 MBs/sec
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.3290864Z Cache Size: ~0 MB (207484 B)
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.3319360Z [command]/usr/bin/tar -xf /home/runner/work/_temp/35efeeaa-8551-4db1-8879-e477ecb5dca8/cache.tzst -P -C /home/runner/work/Industrial_mvp/Industrial_mvp --use-compress-program unzstd
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.3411307Z Cache restored successfully
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.3415566Z uv cache restored from GitHub Actions cache with key: setup-uv-1-x86_64-unknown-linux-gnu-3.12.14-pruned-c921368db8179caab5f9fcb456ae82c8b9b44f1a91d136d216ed8378cbc6eb99
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.3515898Z ##[group]Run uv sync --locked --extra dev --extra graph --extra e2e --python "3.12"
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.3516417Z ^[[36;1muv sync --locked --extra dev --extra graph --extra e2e --python "3.12"^[[0m
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.3690185Z shell: /usr/bin/bash -e {0}
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.3690617Z env:
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.3690888Z   IOR_GRAPH_TARGET: ci
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.3691184Z   NEO4J_USERNAME: neo4j
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.3691494Z   NEO4J_PASSWORD: [REDACTED_CI_CREDENTIAL]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.3692020Z   PYTHONDONTWRITEBYTECODE: 1
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.3692374Z   PYTHONPYCACHEPREFIX: /tmp/ior-s16a-ci-pyc
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.3692792Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.3693358Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.3693945Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.3694448Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.3695000Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.3695497Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.3696010Z   UV_CACHE_DIR: /home/runner/work/_temp/setup-uv-cache
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.3696397Z ##[endgroup]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.4405676Z Using CPython 3.12.14 interpreter at: /opt/hostedtoolcache/Python/3.12.14/x64/bin/python3.12
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.4422867Z Creating virtual environment at: .venv
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.4438552Z Resolved 43 packages in 1ms
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.4602085Z    Building industrial-opportunity-resolution-mvp @ file:///home/runner/work/Industrial_mvp/Industrial_mvp
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.5204890Z Downloading pillow (6.6MiB)
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.5205937Z Downloading pydantic-core (2.0MiB)
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.5392601Z Downloading playwright (45.5MiB)
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.5397778Z Downloading uvloop (4.2MiB)
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.5404276Z Downloading pygments (1.2MiB)
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6722562Z  Downloaded pygments
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.6983415Z  Downloaded pydantic-core
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.7373227Z  Downloaded uvloop
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:01.7852447Z  Downloaded pillow
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:02.1251058Z  Downloaded playwright
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.1698258Z       Built industrial-opportunity-resolution-mvp @ file:///home/runner/work/Industrial_mvp/Industrial_mvp
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.1707294Z Prepared 42 packages in 2.72s
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.1861446Z Installed 42 packages in 15ms
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.1862376Z  + annotated-doc==0.0.5
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.1863026Z  + annotated-types==0.8.0
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.1863548Z  + anyio==4.14.2
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.1863925Z  + certifi==2026.7.22
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.1864287Z  + charset-normalizer==3.5.1
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.1864578Z  + click==8.5.0
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.1865014Z  + fastapi==0.141.1
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.1865306Z  + greenlet==3.5.5
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.1865587Z  + h11==0.16.0
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.1865889Z  + httpcore==1.0.9
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.1866142Z  + httptools==0.8.0
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.1866388Z  + httpx==0.28.1
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.1866674Z  + idna==3.19
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.1867525Z  + industrial-opportunity-resolution-mvp==0.2.0 (from file:///home/runner/work/Industrial_mvp/Industrial_mvp)
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.1868145Z  + iniconfig==2.3.0
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.1868580Z  + neo4j==5.28.4
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.1869124Z  + packaging==26.3
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.1869632Z  + pillow==12.3.0
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.1869989Z  + playwright==1.62.0
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.1870542Z  + pluggy==1.6.0
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.1871015Z  + pydantic==2.13.5
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.1871599Z  + pydantic-core==2.46.5
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.1872386Z  + pyee==13.0.1
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.1872829Z  + pygments==2.21.0
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.1873262Z  + pypdf==6.16.1
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.1873609Z  + pytest==8.4.2
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.1874017Z  + pytest-base-url==2.1.0
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.1874312Z  + pytest-playwright==0.9.0
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.1874588Z  + python-dotenv==1.2.3
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.1874890Z  + python-slugify==8.0.4
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.1875342Z  + pytz==2026.3.post1
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.1875616Z  + pyyaml==6.0.3
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.1875864Z  + requests==2.34.2
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.1876102Z  + starlette==1.6.0
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.1876495Z  + text-unidecode==1.3
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.1876781Z  + typing-extensions==4.16.0
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.1877087Z  + typing-inspection==0.4.4
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.1877362Z  + urllib3==2.7.0
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.1877647Z  + uvicorn==0.52.4
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.1877923Z  + uvloop==0.22.1
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.1878173Z  + watchfiles==1.2.0
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.1878436Z  + websockets==17.1
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.1960351Z ##[group]Run uv run --locked --extra dev --extra graph python scripts/check_prohibited_files.py
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.1960985Z ^[[36;1muv run --locked --extra dev --extra graph python scripts/check_prohibited_files.py^[[0m
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.1999111Z shell: /usr/bin/bash -e {0}
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.1999547Z env:
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.1999847Z   IOR_GRAPH_TARGET: ci
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.2000181Z   NEO4J_USERNAME: neo4j
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.2000599Z   NEO4J_PASSWORD: [REDACTED_CI_CREDENTIAL]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.2000966Z   PYTHONDONTWRITEBYTECODE: 1
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.2001346Z   PYTHONPYCACHEPREFIX: /tmp/ior-s16a-ci-pyc
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.2001989Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.2002534Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.2003030Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.2003484Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.2004053Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.2004549Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.2005026Z   UV_CACHE_DIR: /home/runner/work/_temp/setup-uv-cache
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:04.2005410Z ##[endgroup]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:05.8839427Z PROHIBITED FILE SCAN PASS (3307 tracked files)
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:05.8981384Z ##[group]Run uv run --locked --extra dev --extra graph --extra e2e python -m playwright install --with-deps chromium
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:05.8982429Z ^[[36;1muv run --locked --extra dev --extra graph --extra e2e python -m playwright install --with-deps chromium^[[0m
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:05.9017739Z shell: /usr/bin/bash -e {0}
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:05.9018161Z env:
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:05.9018419Z   IOR_GRAPH_TARGET: ci
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:05.9018688Z   NEO4J_USERNAME: neo4j
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:05.9019040Z   NEO4J_PASSWORD: [REDACTED_CI_CREDENTIAL]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:05.9019397Z   PYTHONDONTWRITEBYTECODE: 1
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:05.9019733Z   PYTHONPYCACHEPREFIX: /tmp/ior-s16a-ci-pyc
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:05.9020117Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:05.9020529Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:05.9021173Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:05.9021892Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:05.9022306Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:05.9022698Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:05.9023148Z   UV_CACHE_DIR: /home/runner/work/_temp/setup-uv-cache
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:05.9023474Z ##[endgroup]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:06.3467412Z Installing dependencies...
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:06.3515095Z Switching to root user to install dependencies...
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:06.4233190Z Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:06.4609379Z Hit:2 http://azure.archive.ubuntu.com/ubuntu noble InRelease
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:06.4619809Z Get:3 http://azure.archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:06.4661044Z Get:6 https://packages.microsoft.com/ubuntu/24.04/prod noble InRelease [3600 B]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:06.4684364Z Get:4 http://azure.archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:06.4697801Z Get:5 http://azure.archive.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:06.5555055Z Get:7 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [1318 kB]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:06.5673660Z Get:8 http://azure.archive.ubuntu.com/ubuntu noble-updates/main Translation-en [299 kB]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:06.5696944Z Get:9 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Components [181 kB]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:06.5713230Z Get:10 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [1698 kB]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:06.5795568Z Get:11 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe Translation-en [340 kB]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:06.5818864Z Get:12 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Components [388 kB]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:06.5844415Z Get:13 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [1654 kB]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:06.5922300Z Get:16 https://packages.microsoft.com/ubuntu/24.04/prod noble/main amd64 Packages [492 kB]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:06.5927629Z Get:14 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted Translation-en [377 kB]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:06.5949160Z Get:15 http://azure.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Components [940 B]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:06.5974591Z Get:17 https://packages.microsoft.com/ubuntu/24.04/prod noble/main arm64 Packages [441 kB]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:06.6264214Z Get:18 http://azure.archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [40.6 kB]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:06.6755287Z Get:19 http://azure.archive.ubuntu.com/ubuntu noble-backports/main amd64 Components [5796 B]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:06.6763740Z Get:20 http://azure.archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [31.0 kB]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:06.6772900Z Get:21 http://azure.archive.ubuntu.com/ubuntu noble-backports/universe Translation-en [18.6 kB]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:06.6781434Z Get:22 http://azure.archive.ubuntu.com/ubuntu noble-backports/universe amd64 Components [12.6 kB]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:06.6790434Z Get:23 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Packages [1053 kB]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:06.6836296Z Get:24 http://azure.archive.ubuntu.com/ubuntu noble-security/main Translation-en [219 kB]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:06.6853844Z Get:25 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Components [46.3 kB]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:06.6864007Z Get:26 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1220 kB]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:06.6917422Z Get:27 http://azure.archive.ubuntu.com/ubuntu noble-security/universe Translation-en [245 kB]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:06.6934937Z Get:28 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Components [76.3 kB]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:06.6946558Z Get:29 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [1535 kB]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:06.7012918Z Get:30 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted Translation-en [353 kB]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:14.3194194Z Fetched 12.4 MB in 1s (10.1 MB/s)
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.0084505Z Reading package lists...
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.0302232Z Reading package lists...
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.1510568Z Building dependency tree...
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.1515863Z Reading state information...
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.2982895Z libasound2t64 is already the newest version (1.2.11-1ubuntu0.3).
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.2983528Z libasound2t64 set to manually installed.
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.2983993Z libatk-bridge2.0-0t64 is already the newest version (2.52.0-1build1).
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.2984410Z libatk-bridge2.0-0t64 set to manually installed.
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.2984874Z libatk1.0-0t64 is already the newest version (2.52.0-1build1).
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.2985283Z libatk1.0-0t64 set to manually installed.
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.2985686Z libatspi2.0-0t64 is already the newest version (2.52.0-1build1).
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.2986071Z libatspi2.0-0t64 set to manually installed.
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.2986461Z libcairo2 is already the newest version (1.18.0-3build1).
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.2986934Z libcairo2 set to manually installed.
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.2987302Z libcups2t64 is already the newest version (2.4.7-1.2ubuntu7.14).
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.2987697Z libcups2t64 set to manually installed.
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.2988058Z libdbus-1-3 is already the newest version (1.14.10-4ubuntu4.1).
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.2988471Z libdbus-1-3 set to manually installed.
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.2988946Z libdrm2 is already the newest version (2.4.125-1ubuntu0.1~24.04.2).
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.2989434Z libdrm2 set to manually installed.
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.2989925Z libgbm1 is already the newest version (25.2.8-0ubuntu0.24.04.2).
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.2990324Z libgbm1 set to manually installed.
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.2990724Z libnspr4 is already the newest version (2:4.35-1.1build1).
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.2991104Z libnspr4 set to manually installed.
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.2991477Z libnss3 is already the newest version (2:3.98-1ubuntu0.2).
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.2992083Z libnss3 set to manually installed.
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.2992472Z libpango-1.0-0 is already the newest version (1.52.1+ds-1build1).
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.2992912Z libpango-1.0-0 set to manually installed.
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.2993315Z libx11-6 is already the newest version (2:1.8.7-1build1).
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.2993656Z libx11-6 set to manually installed.
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.2994024Z libxcb1 is already the newest version (1.15-1ubuntu2).
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.2994363Z libxcb1 set to manually installed.
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.2994975Z libxcomposite1 is already the newest version (1:0.4.5-1build3).
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.2995363Z libxcomposite1 set to manually installed.
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.2995811Z libxdamage1 is already the newest version (1:1.1.6-1build1).
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.2996337Z libxdamage1 set to manually installed.
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.2996895Z libxext6 is already the newest version (2:1.3.4-1build2).
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.2997409Z libxext6 set to manually installed.
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.2997904Z libxfixes3 is already the newest version (1:6.0.0-2build1).
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.2998812Z libxfixes3 set to manually installed.
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.2999185Z libxkbcommon0 is already the newest version (1.6.0-1build1).
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.2999585Z libxkbcommon0 set to manually installed.
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.2999955Z libxrandr2 is already the newest version (2:1.5.2-2build1).
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.3000345Z libxrandr2 set to manually installed.
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.3000763Z fonts-noto-color-emoji is already the newest version (2.047-0ubuntu0.24.04.1).
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.3001245Z libfontconfig1 is already the newest version (2.15.0-1.1ubuntu2).
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.3001728Z libfontconfig1 set to manually installed.
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.3002162Z libfreetype6 is already the newest version (2.13.2+dfsg-1ubuntu0.1).
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.3002564Z libfreetype6 set to manually installed.
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.3002928Z fonts-liberation is already the newest version (1:2.1.5-3).
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.3003458Z fonts-liberation set to manually installed.
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.3003848Z The following additional packages will be installed:
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.3004327Z   gir1.2-glib-2.0 libglib2.0-bin libglib2.0-data xfonts-encodings xfonts-utils
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.3004731Z   xserver-common
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.3005050Z Suggested packages:
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.3005347Z   low-memory-monitor
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.3005612Z Recommended packages:
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.3005966Z   fonts-ipafont-mincho fonts-tlwg-loma xfonts-base
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.3166349Z The following NEW packages will be installed:
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.3167183Z   fonts-freefont-ttf fonts-ipafont-gothic fonts-tlwg-loma-otf fonts-unifont
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.3172468Z   fonts-wqy-zenhei xfonts-cyrillic xfonts-encodings xfonts-scalable
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.3172978Z   xfonts-utils
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.3176596Z The following packages will be upgraded:
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.3182684Z   gir1.2-glib-2.0 libglib2.0-0t64 libglib2.0-bin libglib2.0-data
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.3183214Z   xserver-common xvfb
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.3320456Z 6 upgraded, 9 newly installed, 0 to remove and 26 not upgraded.
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.3321135Z Need to get 23.9 MB of archives.
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.3321517Z After this operation, 79.6 MB of additional disk space will be used.
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.3322223Z Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.4034390Z Get:2 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-ipafont-gothic all 00303-21ubuntu1 [3513 kB]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.5054810Z Get:3 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libglib2.0-data all 2.80.0-6ubuntu3.9 [50.1 kB]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.5511942Z Get:4 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libglib2.0-bin amd64 2.80.0-6ubuntu3.9 [97.9 kB]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.5996562Z Get:5 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 gir1.2-glib-2.0 amd64 2.80.0-6ubuntu3.9 [183 kB]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.6464245Z Get:6 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libglib2.0-0t64 amd64 2.80.0-6ubuntu3.9 [1547 kB]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.7012286Z Get:7 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 fonts-freefont-ttf all 20211204+svn4273-2 [5641 kB]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.8111107Z Get:8 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-tlwg-loma-otf all 1:0.7.3-1 [107 kB]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.8578423Z Get:9 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-unifont all 1:15.1.01-1build1 [2993 kB]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:15.9551547Z Get:10 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-wqy-zenhei all 0.9.45-8 [7472 kB]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:16.1123982Z Get:11 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-encodings all 1:1.0.5-0ubuntu2 [578 kB]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:16.1615517Z Get:12 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-utils amd64 1:7.7+6build3 [94.4 kB]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:16.2084324Z Get:13 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 xfonts-cyrillic all 1:1.0.5+nmu1 [384 kB]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:16.2570110Z Get:14 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-scalable all 1:1.0.3-1.3 [304 kB]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:16.3047949Z Get:15 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 xserver-common all 2:21.1.12-1ubuntu1.8 [34.8 kB]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:16.3510445Z Get:16 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 xvfb amd64 2:21.1.12-1ubuntu1.8 [877 kB]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:16.5776868Z Fetched 23.9 MB in 1s (23.2 MB/s)
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:16.5962387Z Selecting previously unselected package fonts-ipafont-gothic.
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:16.6140715Z (Reading database ... 
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:16.6141264Z (Reading database ... 5%
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:16.6142035Z (Reading database ... 10%
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:16.6142367Z (Reading database ... 15%
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:16.6142798Z (Reading database ... 20%
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:16.6143106Z (Reading database ... 25%
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:16.6143382Z (Reading database ... 30%
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:16.6143853Z (Reading database ... 35%
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:16.6144170Z (Reading database ... 40%
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:16.6144460Z (Reading database ... 45%
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:16.6145121Z (Reading database ... 50%
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:16.6179430Z (Reading database ... 55%
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:16.7266560Z (Reading database ... 60%
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:16.9295965Z (Reading database ... 65%
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:17.1184962Z (Reading database ... 70%
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:17.2874837Z (Reading database ... 75%
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:17.4648689Z (Reading database ... 80%
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:17.6309560Z (Reading database ... 85%
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:17.8397899Z (Reading database ... 90%
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:18.0290786Z (Reading database ... 95%
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:18.0291537Z (Reading database ... 100%
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:18.0292367Z (Reading database ... 202190 files and directories currently installed.)
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:18.0334098Z Preparing to unpack .../00-fonts-ipafont-gothic_00303-21ubuntu1_all.deb ...
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:18.0397473Z Unpacking fonts-ipafont-gothic (00303-21ubuntu1) ...
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:18.3123175Z Preparing to unpack .../01-libglib2.0-data_2.80.0-6ubuntu3.9_all.deb ...
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:18.3142040Z Unpacking libglib2.0-data (2.80.0-6ubuntu3.9) over (2.80.0-6ubuntu3.8) ...
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:18.3577164Z Preparing to unpack .../02-libglib2.0-bin_2.80.0-6ubuntu3.9_amd64.deb ...
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:18.3597676Z Unpacking libglib2.0-bin (2.80.0-6ubuntu3.9) over (2.80.0-6ubuntu3.8) ...
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:18.4070491Z Preparing to unpack .../03-gir1.2-glib-2.0_2.80.0-6ubuntu3.9_amd64.deb ...
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:18.4093366Z Unpacking gir1.2-glib-2.0:amd64 (2.80.0-6ubuntu3.9) over (2.80.0-6ubuntu3.8) ...
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:18.4446820Z Preparing to unpack .../04-libglib2.0-0t64_2.80.0-6ubuntu3.9_amd64.deb ...
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:18.4502492Z Unpacking libglib2.0-0t64:amd64 (2.80.0-6ubuntu3.9) over (2.80.0-6ubuntu3.8) ...
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:18.4926949Z Selecting previously unselected package fonts-freefont-ttf.
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:18.5021602Z Preparing to unpack .../05-fonts-freefont-ttf_20211204+svn4273-2_all.deb ...
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:18.5030384Z Unpacking fonts-freefont-ttf (20211204+svn4273-2) ...
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:18.6076509Z Selecting previously unselected package fonts-tlwg-loma-otf.
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:18.6173684Z Preparing to unpack .../06-fonts-tlwg-loma-otf_1%3a0.7.3-1_all.deb ...
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:18.6182802Z Unpacking fonts-tlwg-loma-otf (1:0.7.3-1) ...
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:18.6321145Z Selecting previously unselected package fonts-unifont.
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:18.6417768Z Preparing to unpack .../07-fonts-unifont_1%3a15.1.01-1build1_all.deb ...
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:18.6425860Z Unpacking fonts-unifont (1:15.1.01-1build1) ...
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:18.9927946Z Selecting previously unselected package fonts-wqy-zenhei.
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:19.0034798Z Preparing to unpack .../08-fonts-wqy-zenhei_0.9.45-8_all.deb ...
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:19.0109625Z Unpacking fonts-wqy-zenhei (0.9.45-8) ...
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:19.5400292Z Selecting previously unselected package xfonts-encodings.
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:19.5519393Z Preparing to unpack .../09-xfonts-encodings_1%3a1.0.5-0ubuntu2_all.deb ...
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:19.5528246Z Unpacking xfonts-encodings (1:1.0.5-0ubuntu2) ...
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:19.5719548Z Selecting previously unselected package xfonts-utils.
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:19.5825550Z Preparing to unpack .../10-xfonts-utils_1%3a7.7+6build3_amd64.deb ...
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:19.5834970Z Unpacking xfonts-utils (1:7.7+6build3) ...
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:19.6092470Z Selecting previously unselected package xfonts-cyrillic.
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:19.6187302Z Preparing to unpack .../11-xfonts-cyrillic_1%3a1.0.5+nmu1_all.deb ...
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:19.6196237Z Unpacking xfonts-cyrillic (1:1.0.5+nmu1) ...
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:19.6385883Z Selecting previously unselected package xfonts-scalable.
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:19.6476669Z Preparing to unpack .../12-xfonts-scalable_1%3a1.0.3-1.3_all.deb ...
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:19.6486838Z Unpacking xfonts-scalable (1:1.0.3-1.3) ...
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:19.6721330Z Preparing to unpack .../13-xserver-common_2%3a21.1.12-1ubuntu1.8_all.deb ...
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:19.6743184Z Unpacking xserver-common (2:21.1.12-1ubuntu1.8) over (2:21.1.12-1ubuntu1.6) ...
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:19.7003368Z Preparing to unpack .../14-xvfb_2%3a21.1.12-1ubuntu1.8_amd64.deb ...
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:19.7210033Z Unpacking xvfb (2:21.1.12-1ubuntu1.8) over (2:21.1.12-1ubuntu1.6) ...
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:19.7747657Z Setting up fonts-wqy-zenhei (0.9.45-8) ...
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:19.7849002Z Setting up fonts-freefont-ttf (20211204+svn4273-2) ...
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:19.7866964Z Setting up libglib2.0-0t64:amd64 (2.80.0-6ubuntu3.9) ...
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:19.7957861Z Setting up libglib2.0-data (2.80.0-6ubuntu3.9) ...
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:19.7976075Z Setting up fonts-tlwg-loma-otf (1:0.7.3-1) ...
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:19.7992314Z Setting up xfonts-encodings (1:1.0.5-0ubuntu2) ...
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:19.8007865Z Setting up gir1.2-glib-2.0:amd64 (2.80.0-6ubuntu3.9) ...
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:19.8023600Z Setting up fonts-ipafont-gothic (00303-21ubuntu1) ...
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:19.8072040Z update-alternatives: using /usr/share/fonts/opentype/ipafont-gothic/ipag.ttf to provide /usr/share/fonts/truetype/fonts-japanese-gothic.ttf (fonts-japanese-gothic.ttf) in auto mode
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:19.8084466Z Setting up xserver-common (2:21.1.12-1ubuntu1.8) ...
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:19.8101046Z Setting up fonts-unifont (1:15.1.01-1build1) ...
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:19.8118385Z Setting up xvfb (2:21.1.12-1ubuntu1.8) ...
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:19.8135032Z Setting up libglib2.0-bin (2.80.0-6ubuntu3.9) ...
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:19.8150819Z Setting up xfonts-utils (1:7.7+6build3) ...
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:19.8183039Z Setting up xfonts-cyrillic (1:1.0.5+nmu1) ...
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:19.8409283Z Setting up xfonts-scalable (1:1.0.3-1.3) ...
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:19.8604440Z Processing triggers for libc-bin (2.39-0ubuntu8.9) ...
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:20.0530004Z Processing triggers for man-db (2.12.0-4build2) ...
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:20.0548648Z Not building database; man-db/auto-update is not 'true'.
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:20.0560923Z Processing triggers for fontconfig (2.15.0-1.1ubuntu2) ...
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:20.5989119Z 
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:20.5990233Z Running kernel seems to be up-to-date.
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:20.5990720Z 
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:20.5990884Z Restarting services...
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:20.6307733Z  systemctl restart packagekit.service php8.3-fpm.service polkit.service udisks2.service
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:20.7222160Z 
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:20.7223283Z Service restarts being deferred:
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:20.7224007Z  systemctl restart ModemManager.service
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:20.7224842Z  systemctl restart networkd-dispatcher.service
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:20.7225331Z 
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:20.7225681Z No containers need to be restarted.
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:20.7226042Z 
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:20.7226361Z No user sessions are running outdated binaries.
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:20.7226805Z 
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:20.7227216Z No VM guests are running outdated hypervisor (qemu) binaries on this host.
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:21.4071110Z Downloading Chrome for Testing 151.0.7922.34 (playwright chromium v1234) from https://cdn.playwright.dev/builds/cft/151.0.7922.34/linux64/chrome-linux64.zip
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:22.4115244Z |                                                                                |   0% of 184.3 MiB
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:22.5875637Z |■■■■■■■■                                                                        |  10% of 184.3 MiB
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:22.6538883Z |■■■■■■■■■■■■■■■■                                                                |  20% of 184.3 MiB
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:22.7195831Z |■■■■■■■■■■■■■■■■■■■■■■■■                                                        |  30% of 184.3 MiB
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:22.7957568Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                                |  40% of 184.3 MiB
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:22.8776284Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                        |  50% of 184.3 MiB
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:22.9304429Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                |  60% of 184.3 MiB
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:23.0116373Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                        |  70% of 184.3 MiB
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:23.1012344Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                |  80% of 184.3 MiB
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:23.1712038Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■        |  90% of 184.3 MiB
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:23.2317260Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■| 100% of 184.3 MiB
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:26.0777215Z Chrome for Testing 151.0.7922.34 (playwright chromium v1234) downloaded to /home/runner/.cache/ms-playwright/chromium-1234
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:26.0780021Z Downloading FFmpeg (playwright ffmpeg v1011) from https://cdn.playwright.dev/dbazure/download/playwright/builds/ffmpeg/1011/ffmpeg-linux.zip
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:26.9895273Z |                                                                                |   0% of 2.3 MiB
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:26.9923413Z |■■■■■■■■                                                                        |  10% of 2.3 MiB
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:26.9947658Z |■■■■■■■■■■■■■■■■                                                                |  20% of 2.3 MiB
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:26.9961816Z |■■■■■■■■■■■■■■■■■■■■■■■■                                                        |  30% of 2.3 MiB
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:26.9972507Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                                |  40% of 2.3 MiB
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:26.9981821Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                        |  50% of 2.3 MiB
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:26.9991186Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                |  60% of 2.3 MiB
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:27.0000290Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                        |  70% of 2.3 MiB
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:27.0011548Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                |  80% of 2.3 MiB
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:27.0089162Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■        |  90% of 2.3 MiB
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:27.0097999Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■| 100% of 2.3 MiB
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:27.0598401Z FFmpeg (playwright ffmpeg v1011) downloaded to /home/runner/.cache/ms-playwright/ffmpeg-1011
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:27.0600755Z Downloading Chrome Headless Shell 151.0.7922.34 (playwright chromium-headless-shell v1234) from https://cdn.playwright.dev/builds/cft/151.0.7922.34/linux64/chrome-headless-shell-linux64.zip
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:28.0354935Z |                                                                                |   0% of 114.7 MiB
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:28.1751510Z |■■■■■■■■                                                                        |  10% of 114.7 MiB
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:28.2530866Z |■■■■■■■■■■■■■■■■                                                                |  20% of 114.7 MiB
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:28.3235826Z |■■■■■■■■■■■■■■■■■■■■■■■■                                                        |  30% of 114.7 MiB
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:28.3957484Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                                |  40% of 114.7 MiB
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:28.4876140Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                        |  50% of 114.7 MiB
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:28.5691502Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                |  60% of 114.7 MiB
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:28.6358755Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                        |  70% of 114.7 MiB
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:28.6974204Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                |  80% of 114.7 MiB
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:28.7355320Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■        |  90% of 114.7 MiB
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:28.7916502Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■| 100% of 114.7 MiB
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:30.8956060Z Chrome Headless Shell 151.0.7922.34 (playwright chromium-headless-shell v1234) downloaded to /home/runner/.cache/ms-playwright/chromium_headless_shell-1234
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:30.9182571Z ##[group]Run PYTHONPATH=src uv run --locked --extra dev --extra graph python -m ior_mvp.graph wait --target ci --timeout 180
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:30.9183827Z ^[[36;1mPYTHONPATH=src uv run --locked --extra dev --extra graph python -m ior_mvp.graph wait --target ci --timeout 180^[[0m
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:30.9224741Z shell: /usr/bin/bash -e {0}
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:30.9225177Z env:
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:30.9225498Z   IOR_GRAPH_TARGET: ci
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:30.9225814Z   NEO4J_USERNAME: neo4j
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:30.9226158Z   NEO4J_PASSWORD: [REDACTED_CI_CREDENTIAL]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:30.9226583Z   PYTHONDONTWRITEBYTECODE: 1
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:30.9226943Z   PYTHONPYCACHEPREFIX: /tmp/ior-s16a-ci-pyc
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:30.9227374Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:30.9227879Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:30.9228391Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:30.9228965Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:30.9229408Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:30.9229859Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:30.9230338Z   UV_CACHE_DIR: /home/runner/work/_temp/setup-uv-cache
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:30.9230726Z ##[endgroup]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:31.8048132Z GRAPH READY (ci)
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:31.8420548Z ##[group]Run PYTHONPATH=src uv run --locked --extra dev --extra graph python -m ior_mvp.graph build --check
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:31.8421201Z ^[[36;1mPYTHONPATH=src uv run --locked --extra dev --extra graph python -m ior_mvp.graph build --check^[[0m
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:31.8456996Z shell: /usr/bin/bash -e {0}
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:31.8457376Z env:
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:31.8457670Z   IOR_GRAPH_TARGET: ci
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:31.8457959Z   NEO4J_USERNAME: neo4j
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:31.8458292Z   NEO4J_PASSWORD: [REDACTED_CI_CREDENTIAL]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:31.8458648Z   PYTHONDONTWRITEBYTECODE: 1
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:31.8459047Z   PYTHONPYCACHEPREFIX: /tmp/ior-s16a-ci-pyc
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:31.8459586Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:31.8460128Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:31.8460597Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:31.8461148Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:31.8461730Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:31.8462344Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:31.8462870Z   UV_CACHE_DIR: /home/runner/work/_temp/setup-uv-cache
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:31.8463239Z ##[endgroup]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:34.4044754Z GRAPH BUILD PASS (GRAPH-SAU-2026-09-12-6f43b1a8c4aa; 925 nodes; 1045 edges)
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:34.4219615Z ##[group]Run PYTHONPATH=src uv run --locked --extra dev --extra graph python -m ior_mvp.graph load --target ci
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:34.4220286Z ^[[36;1mPYTHONPATH=src uv run --locked --extra dev --extra graph python -m ior_mvp.graph load --target ci^[[0m
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:34.4220987Z ^[[36;1mPYTHONPATH=src uv run --locked --extra dev --extra graph python -m ior_mvp.graph load --target ci^[[0m
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:34.4258710Z shell: /usr/bin/bash -e {0}
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:34.4259152Z env:
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:34.4259456Z   IOR_GRAPH_TARGET: ci
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:34.4259748Z   NEO4J_USERNAME: neo4j
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:34.4260034Z   NEO4J_PASSWORD: [REDACTED_CI_CREDENTIAL]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:34.4260429Z   PYTHONDONTWRITEBYTECODE: 1
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:34.4260779Z   PYTHONPYCACHEPREFIX: /tmp/ior-s16a-ci-pyc
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:34.4261179Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:34.4261891Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:34.4262461Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:34.4262915Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:34.4263315Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:34.4263744Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:34.4264156Z   UV_CACHE_DIR: /home/runner/work/_temp/setup-uv-cache
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:34.4264509Z ##[endgroup]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:41.2160323Z GRAPH LOAD PASS (ci; GRAPH-SAU-2026-09-12-6f43b1a8c4aa; created 925 nodes / 1045 relationships)
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:42.8483344Z GRAPH LOAD PASS (ci; GRAPH-SAU-2026-09-12-6f43b1a8c4aa; created 0 nodes / 0 relationships)
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:42.8847174Z ##[group]Run PYTHONPATH=src uv run --locked --extra dev --extra graph python -m ior_mvp.graph verify --target ci
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:42.8848309Z ^[[36;1mPYTHONPATH=src uv run --locked --extra dev --extra graph python -m ior_mvp.graph verify --target ci^[[0m
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:42.8897854Z shell: /usr/bin/bash -e {0}
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:42.8898265Z env:
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:42.8898671Z   IOR_GRAPH_TARGET: ci
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:42.8899100Z   NEO4J_USERNAME: neo4j
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:42.8899507Z   NEO4J_PASSWORD: [REDACTED_CI_CREDENTIAL]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:42.8900011Z   PYTHONDONTWRITEBYTECODE: 1
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:42.8900498Z   PYTHONPYCACHEPREFIX: /tmp/ior-s16a-ci-pyc
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:42.8901043Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:42.8901896Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:42.8902474Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:42.8903183Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:42.8903739Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:42.8904352Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:42.8905023Z   UV_CACHE_DIR: /home/runner/work/_temp/setup-uv-cache
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:42.8905590Z ##[endgroup]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:44.3476331Z GRAPH VERIFY PASS (ci; GRAPH-SAU-2026-09-12-6f43b1a8c4aa; 925 nodes; 1045 edges)
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:44.4021866Z ##[group]Run PYTHONPATH=src uv run --locked --extra dev --extra graph pytest -q graph_tests -m "graph and not graph_unavailable and not graph_ui"
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:44.4023416Z ^[[36;1mPYTHONPATH=src uv run --locked --extra dev --extra graph pytest -q graph_tests -m "graph and not graph_unavailable and not graph_ui"^[[0m
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:44.4074868Z shell: /usr/bin/bash -e {0}
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:44.4075331Z env:
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:44.4075874Z   IOR_GRAPH_TARGET: ci
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:44.4076285Z   NEO4J_USERNAME: neo4j
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:44.4076761Z   NEO4J_PASSWORD: [REDACTED_CI_CREDENTIAL]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:44.4077267Z   PYTHONDONTWRITEBYTECODE: 1
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:44.4077752Z   PYTHONPYCACHEPREFIX: /tmp/ior-s16a-ci-pyc
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:44.4078385Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:44.4079014Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:44.4079653Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:44.4080410Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:44.4081100Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:44.4081843Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:44.4082392Z   UV_CACHE_DIR: /home/runner/work/_temp/setup-uv-cache
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:44.4082960Z   IOR_GRAPH_TEST_EXPLICIT: 1
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:44.4083352Z ##[endgroup]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:51.0363882Z s.........                                                               [100%]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:51.0364282Z =============================== warnings summary ===============================
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:51.0364642Z .venv/lib/python3.12/site-packages/fastapi/testclient.py:1
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:51.0365427Z   /home/runner/work/Industrial_mvp/Industrial_mvp/.venv/lib/python3.12/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:51.0366223Z     from starlette.testclient import TestClient as TestClient  # noqa
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:51.0366468Z 
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:51.0366656Z -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:51.0367064Z =========================== short test summary info ============================
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:51.0367422Z SKIPPED [1] graph_tests/test_aura_verification.py:18: AURA_OPERATOR_ONLY
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:51.0367771Z 9 passed, 1 skipped, 3 deselected, 1 warning in 5.19s
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:51.1299471Z ##[group]Run PYTHONPATH=src uv run --locked --extra dev --extra graph --extra e2e pytest -q graph_tests -m graph_ui --browser chromium
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:51.1300187Z ^[[36;1mPYTHONPATH=src uv run --locked --extra dev --extra graph --extra e2e pytest -q graph_tests -m graph_ui --browser chromium^[[0m
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:51.1335206Z shell: /usr/bin/bash -e {0}
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:51.1335454Z env:
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:51.1335652Z   IOR_GRAPH_TARGET: ci
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:51.1335861Z   NEO4J_USERNAME: neo4j
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:51.1336080Z   NEO4J_PASSWORD: [REDACTED_CI_CREDENTIAL]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:51.1336342Z   PYTHONDONTWRITEBYTECODE: 1
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:51.1336601Z   PYTHONPYCACHEPREFIX: /tmp/ior-s16a-ci-pyc
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:51.1336905Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:51.1337258Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:51.1337607Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:51.1337965Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:51.1338287Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:51.1338600Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:51.1338907Z   UV_CACHE_DIR: /home/runner/work/_temp/setup-uv-cache
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:51.1339183Z   IOR_GRAPH_TEST_EXPLICIT: 1
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:51:51.1339400Z ##[endgroup]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:04.0363932Z .                                                                        [100%]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:04.0364563Z =============================== warnings summary ===============================
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:04.0365410Z .venv/lib/python3.12/site-packages/fastapi/testclient.py:1
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:04.0366301Z   /home/runner/work/Industrial_mvp/Industrial_mvp/.venv/lib/python3.12/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:04.0367153Z     from starlette.testclient import TestClient as TestClient  # noqa
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:04.0367408Z 
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:04.0367600Z -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:04.0367971Z 1 passed, 12 deselected, 1 warning in 11.59s
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:04.1546103Z ##[group]Run docker stop 841f0b2c9b5ff776f57ea78581d03f6e4bc8b7642d8ca1c879cae94dd1426a8e
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:04.1546640Z ^[[36;1mdocker stop 841f0b2c9b5ff776f57ea78581d03f6e4bc8b7642d8ca1c879cae94dd1426a8e^[[0m
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:04.1547164Z ^[[36;1mPYTHONPATH=src uv run --locked --extra dev --extra graph pytest -q graph_tests -m graph_unavailable^[[0m
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:04.1585938Z shell: /usr/bin/bash -e {0}
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:04.1586195Z env:
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:04.1586392Z   IOR_GRAPH_TARGET: ci
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:04.1586599Z   NEO4J_USERNAME: neo4j
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:04.1586817Z   NEO4J_PASSWORD: [REDACTED_CI_CREDENTIAL]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:04.1587065Z   PYTHONDONTWRITEBYTECODE: 1
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:04.1587324Z   PYTHONPYCACHEPREFIX: /tmp/ior-s16a-ci-pyc
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:04.1587631Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:04.1587980Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:04.1588383Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:04.1588707Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:04.1589023Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:04.1589349Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:04.1589662Z   UV_CACHE_DIR: /home/runner/work/_temp/setup-uv-cache
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:04.1589938Z   IOR_GRAPH_TEST_EXPLICIT: 1
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:04.1590152Z ##[endgroup]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:09.7146030Z 841f0b2c9b5ff776f57ea78581d03f6e4bc8b7642d8ca1c879cae94dd1426a8e
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:11.9166413Z ..                                                                       [100%]
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:11.9167648Z =============================== warnings summary ===============================
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:11.9168613Z .venv/lib/python3.12/site-packages/fastapi/testclient.py:1
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:11.9170738Z   /home/runner/work/Industrial_mvp/Industrial_mvp/.venv/lib/python3.12/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:11.9173140Z     from starlette.testclient import TestClient as TestClient  # noqa
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:11.9173842Z 
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:11.9174412Z -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:11.9175364Z 2 passed, 11 deselected, 1 warning in 0.92s
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:12.0247632Z Post job cleanup.
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:12.1294760Z Cache hit occurred on key setup-uv-1-x86_64-unknown-linux-gnu-3.12.14-pruned-c921368db8179caab5f9fcb456ae82c8b9b44f1a91d136d216ed8378cbc6eb99, not saving cache.
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:12.1295963Z (node:3767) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:12.1296607Z (Use `node --trace-deprecation ...` to show where the warning was created)
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:12.1378456Z Post job cleanup.
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:12.2444351Z (node:3775) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:12.2445241Z (Use `node --trace-deprecation ...` to show where the warning was created)
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:12.2581446Z Post job cleanup.
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:12.3349142Z [command]/usr/bin/git version
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:12.3390554Z git version 2.55.0
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:12.3428521Z Temporarily overriding HOME='/home/runner/work/_temp/e309c3ca-2df5-4a9d-9178-d885e458c0e4' before making global git config changes
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:12.3429288Z Adding repository directory to the temporary git global config as a safe directory
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:12.3435060Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Industrial_mvp/Industrial_mvp
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:12.3467296Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:12.3494685Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:12.3682748Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:12.3708281Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:12.3909225Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:12.3934604Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:12.4205178Z Print service container logs: fe87261013f64524b56c9a94ccda3e80_neo4j52630sha256037cf5756f0135cbfd66b739b6df7c7c4bb100f9ce11602f6f9538e17e02c74d_de42c1
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:12.4210629Z ##[command]/usr/bin/docker logs --details 841f0b2c9b5ff776f57ea78581d03f6e4bc8b7642d8ca1c879cae94dd1426a8e
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:12.4348131Z  Changed password for user 'neo4j'. IMPORTANT: this change will only take effect if performed before the database is started for the first time.
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:12.4349058Z  2026-09-25 18:50:58.115+0000 INFO  Logging config in use: File '/var/lib/neo4j/conf/user-logs.xml'
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:12.4349558Z  2026-09-25 18:50:58.129+0000 INFO  Starting...
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:12.4350068Z  2026-09-25 18:50:59.048+0000 INFO  This instance is ServerId{ea2f7d05} (ea2f7d05-2dc1-4280-8153-cc3363eeb6de)
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:12.4350625Z  2026-09-25 18:51:00.081+0000 INFO  ======== Neo4j 5.26.30 ========
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:12.4351260Z  2026-09-25 18:51:01.869+0000 INFO  Anonymous Usage Data is being sent to Neo4j, see https://neo4j.com/docs/usage-data/
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:12.4352041Z  2026-09-25 18:51:01.902+0000 INFO  Bolt enabled on 0.0.0.0:7687.
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:12.4353075Z  2026-09-25 18:51:03.432+0000 INFO  HTTP enabled on 0.0.0.0:7474.
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:12.4354442Z  2026-09-25 18:51:03.434+0000 INFO  Remote interface available at http://localhost:7474/
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:12.4355614Z  2026-09-25 18:51:03.436+0000 INFO  id: B0EECD2A097F47CB8784BB39C9875CF1187F9F660BEBA10820E4528027F3E729
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:12.4356386Z  2026-09-25 18:51:03.437+0000 INFO  name: system
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:12.4356844Z  2026-09-25 18:51:03.437+0000 INFO  creationDate: 2026-09-25T18:51:00.992Z
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:12.4357297Z  2026-09-25 18:51:03.437+0000 INFO  Started.
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:12.4357742Z  2026-09-25 18:52:04.184+0000 INFO  Neo4j Server shutdown initiated by request
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:12.4358194Z  2026-09-25 18:52:04.186+0000 INFO  Stopping...
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:12.4358539Z  2026-09-25 18:52:09.511+0000 INFO  Stopped.
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:12.4367356Z Stop and remove container: fe87261013f64524b56c9a94ccda3e80_neo4j52630sha256037cf5756f0135cbfd66b739b6df7c7c4bb100f9ce11602f6f9538e17e02c74d_de42c1
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:12.4371492Z ##[command]/usr/bin/docker rm --force 841f0b2c9b5ff776f57ea78581d03f6e4bc8b7642d8ca1c879cae94dd1426a8e
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:12.4990409Z 841f0b2c9b5ff776f57ea78581d03f6e4bc8b7642d8ca1c879cae94dd1426a8e
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:12.5008666Z Remove container network: github_network_8e11c1e4df9a43a999b9c6b99b502187
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:12.5012056Z ##[command]/usr/bin/docker network rm github_network_8e11c1e4df9a43a999b9c6b99b502187
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:12.5861816Z github_network_8e11c1e4df9a43a999b9c6b99b502187
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:12.5922874Z Cleaning up orphan processes
+graph / Neo4j service / Python 3.12	UNKNOWN STEP	2026-09-25T18:52:12.6160597Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-python@v5, astral-sh/setup-uv@v6. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

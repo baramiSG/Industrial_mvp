@@ -1,0 +1,1139 @@
+{
+  "head": "6962105b4bee575a6271d08fe892144c6e6c1063",
+  "tree": "7c25b4616679d61f173f3d9072e3240e1a2a166b",
+  "run_id": 36183985706,
+  "event": "push",
+  "attempt": 1,
+  "jobs": [
+    {
+      "job_id": 108232845246,
+      "name": "Docker image build",
+      "url": "https://github.com/baramiSG/Industrial_mvp/actions/runs/36183985706/job/108232845246",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-09-25T20:08:56Z",
+      "completed_at": "2026-09-25T20:09:19Z",
+      "log_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/final-candidate-r2/delivery/hosted-main/job-108232845246.log",
+      "log_sha256": "8f22fb764cad5449e4b3e56668b3b2b7101f4c17eb00e997ff3fb13bc2e686f6",
+      "bytes": 27452,
+      "merge_checkout_sha_present": true,
+      "passed_summaries": [
+        "2026-09-25T20:09:17.8175508Z \u001b[36;1mecho IMAGE_HAS_NO_NEO4J_OK\u001b[0m",
+        "2026-09-25T20:09:18.0978568Z IMAGE_HAS_NO_NEO4J_OK"
+      ],
+      "steps": [
+        {
+          "completedAt": "2026-09-25T20:08:57Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-09-25T20:08:57Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:09:01Z",
+          "conclusion": "success",
+          "name": "Check out repository",
+          "number": 2,
+          "startedAt": "2026-09-25T20:08:57Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:09:17Z",
+          "conclusion": "success",
+          "name": "Build image",
+          "number": 3,
+          "startedAt": "2026-09-25T20:09:01Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:09:18Z",
+          "conclusion": "success",
+          "name": "Verify runtime image excludes optional graph driver",
+          "number": 4,
+          "startedAt": "2026-09-25T20:09:17Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:09:18Z",
+          "conclusion": "success",
+          "name": "Post Check out repository",
+          "number": 8,
+          "startedAt": "2026-09-25T20:09:18Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:09:18Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 9,
+          "startedAt": "2026-09-25T20:09:18Z",
+          "status": "completed"
+        }
+      ]
+    },
+    {
+      "job_id": 108232845414,
+      "name": "graph / Neo4j service / Python 3.12",
+      "url": "https://github.com/baramiSG/Industrial_mvp/actions/runs/36183985706/job/108232845414",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-09-25T20:08:56Z",
+      "completed_at": "2026-09-25T20:10:50Z",
+      "log_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/final-candidate-r2/delivery/hosted-main/job-108232845414.log",
+      "log_sha256": "42e5a5044d4af808e226e98cbff563c6e5efcd70235dac471df484e866089226",
+      "bytes": 73753,
+      "merge_checkout_sha_present": true,
+      "passed_summaries": [
+        "2026-09-25T20:09:06.7450686Z   NEO4J_PASSWORD: [REDACTED_CI_CREDENTIAL]",
+        "2026-09-25T20:09:12.3828709Z   NEO4J_PASSWORD: [REDACTED_CI_CREDENTIAL]",
+        "2026-09-25T20:09:12.6971282Z   NEO4J_PASSWORD: [REDACTED_CI_CREDENTIAL]",
+        "2026-09-25T20:09:16.7761665Z   NEO4J_PASSWORD: [REDACTED_CI_CREDENTIAL]",
+        "2026-09-25T20:09:22.2597909Z   NEO4J_PASSWORD: [REDACTED_CI_CREDENTIAL]",
+        "2026-09-25T20:09:24.0202802Z PROHIBITED FILE SCAN PASS (3307 tracked files)",
+        "2026-09-25T20:09:24.0537217Z   NEO4J_PASSWORD: [REDACTED_CI_CREDENTIAL]",
+        "2026-09-25T20:09:52.6155862Z   NEO4J_PASSWORD: [REDACTED_CI_CREDENTIAL]",
+        "2026-09-25T20:09:54.2777987Z   NEO4J_PASSWORD: [REDACTED_CI_CREDENTIAL]",
+        "2026-09-25T20:09:57.5706266Z GRAPH BUILD PASS (GRAPH-SAU-2026-09-12-6f43b1a8c4aa; 925 nodes; 1045 edges)",
+        "2026-09-25T20:09:57.5970295Z   NEO4J_PASSWORD: [REDACTED_CI_CREDENTIAL]",
+        "2026-09-25T20:10:06.6015215Z GRAPH LOAD PASS (ci; GRAPH-SAU-2026-09-12-6f43b1a8c4aa; created 925 nodes / 1045 relationships)",
+        "2026-09-25T20:10:08.7501605Z GRAPH LOAD PASS (ci; GRAPH-SAU-2026-09-12-6f43b1a8c4aa; created 0 nodes / 0 relationships)",
+        "2026-09-25T20:10:08.8000655Z   NEO4J_PASSWORD: [REDACTED_CI_CREDENTIAL]",
+        "2026-09-25T20:10:10.6605143Z GRAPH VERIFY PASS (ci; GRAPH-SAU-2026-09-12-6f43b1a8c4aa; 925 nodes; 1045 edges)",
+        "2026-09-25T20:10:10.7098094Z   NEO4J_PASSWORD: [REDACTED_CI_CREDENTIAL]",
+        "2026-09-25T20:10:20.7075058Z SKIPPED [1] graph_tests/test_aura_verification.py:18: AURA_OPERATOR_ONLY",
+        "2026-09-25T20:10:20.7075703Z 9 passed, 1 skipped, 3 deselected, 1 warning in 7.71s",
+        "2026-09-25T20:10:20.8384794Z   NEO4J_PASSWORD: [REDACTED_CI_CREDENTIAL]",
+        "2026-09-25T20:10:39.0054096Z 1 passed, 12 deselected, 1 warning in 16.49s",
+        "2026-09-25T20:10:39.1322133Z   NEO4J_PASSWORD: [REDACTED_CI_CREDENTIAL]",
+        "2026-09-25T20:10:47.6448401Z 2 passed, 11 deselected, 1 warning in 1.20s"
+      ],
+      "steps": [
+        {
+          "completedAt": "2026-09-25T20:08:58Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-09-25T20:08:57Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:09:06Z",
+          "conclusion": "success",
+          "name": "Initialize containers",
+          "number": 2,
+          "startedAt": "2026-09-25T20:08:58Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:09:12Z",
+          "conclusion": "success",
+          "name": "Check out repository",
+          "number": 3,
+          "startedAt": "2026-09-25T20:09:06Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:09:12Z",
+          "conclusion": "success",
+          "name": "Set up Python",
+          "number": 4,
+          "startedAt": "2026-09-25T20:09:12Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:09:16Z",
+          "conclusion": "success",
+          "name": "Set up uv",
+          "number": 5,
+          "startedAt": "2026-09-25T20:09:12Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:09:22Z",
+          "conclusion": "success",
+          "name": "Sync locked graph and browser environment",
+          "number": 6,
+          "startedAt": "2026-09-25T20:09:16Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:09:24Z",
+          "conclusion": "success",
+          "name": "Scan prohibited files and secret patterns",
+          "number": 7,
+          "startedAt": "2026-09-25T20:09:22Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:09:52Z",
+          "conclusion": "success",
+          "name": "Install Chromium prerequisites for graph UI",
+          "number": 8,
+          "startedAt": "2026-09-25T20:09:24Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:09:54Z",
+          "conclusion": "success",
+          "name": "Wait for isolated Neo4j service",
+          "number": 9,
+          "startedAt": "2026-09-25T20:09:52Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:09:57Z",
+          "conclusion": "success",
+          "name": "Rebuild-check governed graph projection",
+          "number": 10,
+          "startedAt": "2026-09-25T20:09:54Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:10:08Z",
+          "conclusion": "success",
+          "name": "Load governed projection twice",
+          "number": 11,
+          "startedAt": "2026-09-25T20:09:57Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:10:10Z",
+          "conclusion": "success",
+          "name": "Verify live mirror equality",
+          "number": 12,
+          "startedAt": "2026-09-25T20:10:08Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:10:20Z",
+          "conclusion": "success",
+          "name": "Run live Cypher equality suite",
+          "number": 13,
+          "startedAt": "2026-09-25T20:10:10Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:10:39Z",
+          "conclusion": "success",
+          "name": "Run live graph UI equality suite",
+          "number": 14,
+          "startedAt": "2026-09-25T20:10:20Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:10:47Z",
+          "conclusion": "success",
+          "name": "Stop service and prove fail-closed behavior",
+          "number": 15,
+          "startedAt": "2026-09-25T20:10:39Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:10:47Z",
+          "conclusion": "success",
+          "name": "Post Set up uv",
+          "number": 27,
+          "startedAt": "2026-09-25T20:10:47Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:10:48Z",
+          "conclusion": "success",
+          "name": "Post Set up Python",
+          "number": 28,
+          "startedAt": "2026-09-25T20:10:47Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:10:48Z",
+          "conclusion": "success",
+          "name": "Post Check out repository",
+          "number": 29,
+          "startedAt": "2026-09-25T20:10:48Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:10:48Z",
+          "conclusion": "success",
+          "name": "Stop containers",
+          "number": 30,
+          "startedAt": "2026-09-25T20:10:48Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:10:48Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 31,
+          "startedAt": "2026-09-25T20:10:48Z",
+          "status": "completed"
+        }
+      ]
+    },
+    {
+      "job_id": 108232845429,
+      "name": "uv / Python 3.12",
+      "url": "https://github.com/baramiSG/Industrial_mvp/actions/runs/36183985706/job/108232845429",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-09-25T20:08:57Z",
+      "completed_at": "2026-09-25T20:14:00Z",
+      "log_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/final-candidate-r2/delivery/hosted-main/job-108232845429.log",
+      "log_sha256": "0eed81c2d5ad97485cc738c2809f5a64c0d376300f5c06674749c0c83b780330",
+      "bytes": 62609,
+      "merge_checkout_sha_present": true,
+      "passed_summaries": [
+        "2026-09-25T20:09:08.9133444Z PROHIBITED FILE SCAN PASS (3307 tracked files)",
+        "2026-09-25T20:09:09.2236253Z THRESHOLD LITERAL SCAN PASS (104 Python files; 24 configured numeric values)",
+        "2026-09-25T20:09:09.4850985Z UI CONTRACT CHECK PASS",
+        "2026-09-25T20:09:13.2039269Z ES MODULE CHECK PASS (51 files)",
+        "2026-09-25T20:09:13.3557592Z INTEGRITY PASS",
+        "2026-09-25T20:09:13.5345596Z SCENARIO VALIDATION PASS (11 scenarios)",
+        "2026-09-25T20:09:13.5346190Z - SYN-MINISTRY-ALU-FOIL-001.json scenario=SYN-MINISTRY-ALU-FOIL-001 opportunity=SAU-H6-760711 status=PASS",
+        "2026-09-25T20:09:13.5346774Z   target_spec_demand_within_public_imports: PASS - 40 kt <= 53.6793 kt.",
+        "2026-09-25T20:09:13.5347889Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].",
+        "2026-09-25T20:09:13.5352349Z   base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.",
+        "2026-09-25T20:09:13.5352986Z   shared_enabler_declaration_valid: PASS - Shared-enabler declaration and explicit valuation source are valid.",
+        "2026-09-25T20:09:13.5353531Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.",
+        "2026-09-25T20:09:13.5354103Z - SYN-MINISTRY-ALU-PROFILES-001.json scenario=SYN-MINISTRY-ALU-PROFILES-001 opportunity=SAU-H6-760429 status=PASS",
+        "2026-09-25T20:09:13.5354638Z   target_spec_demand_within_public_imports: PASS - 6 kt <= 9.18984 kt.",
+        "2026-09-25T20:09:13.5355755Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].",
+        "2026-09-25T20:09:13.5356229Z   qualified_availability_within_physical_output: PASS - 2.5 kt <= 30.6 kt.",
+        "2026-09-25T20:09:13.5357454Z   tariff_line_allocation_sums_to_public_hs6_total: PASS - Tariff-line quantities sum to 9.18984 kt against public imports 9.18984 kt.",
+        "2026-09-25T20:09:13.5358058Z   buyer_allocation_within_public_imports: PASS - Buyer quantities sum to 6 kt within public imports 9.18984 kt.",
+        "2026-09-25T20:09:13.5359675Z   retained_flows_reconcile_to_public_trade: PASS - Retained flows reconcile to public trade marginals.",
+        "2026-09-25T20:09:13.5360422Z   base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.",
+        "2026-09-25T20:09:13.5361056Z   shared_enabler_declaration_valid: PASS - Shared-enabler declaration and explicit valuation source are valid.",
+        "2026-09-25T20:09:13.5361599Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.",
+        "2026-09-25T20:09:13.5362220Z - SYN-MINISTRY-FERT-RETAIL-PACKS-001.json scenario=SYN-MINISTRY-FERT-RETAIL-PACKS-001 opportunity=SAU-H6-310510 status=PASS",
+        "2026-09-25T20:09:13.5362819Z   target_spec_demand_within_public_imports: PASS - 1.2229 kt <= 2.44581 kt.",
+        "2026-09-25T20:09:13.5363969Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].",
+        "2026-09-25T20:09:13.5368230Z   base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.",
+        "2026-09-25T20:09:13.5369391Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.",
+        "2026-09-25T20:09:13.5369945Z - SYN-MINISTRY-GALVALUME-001.json scenario=SYN-MINISTRY-GALVALUME-001 opportunity=SAU-H6-721061 status=PASS",
+        "2026-09-25T20:09:13.5370466Z   target_spec_demand_within_public_imports: PASS - 48 kt <= 93.232 kt.",
+        "2026-09-25T20:09:13.5371585Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].",
+        "2026-09-25T20:09:13.5375855Z   base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.",
+        "2026-09-25T20:09:13.5376944Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.",
+        "2026-09-25T20:09:13.5377543Z - SYN-MINISTRY-PE-FILM-001.json scenario=SYN-MINISTRY-PE-FILM-001 opportunity=SAU-H6-392010 status=PASS",
+        "2026-09-25T20:09:13.5378205Z   target_spec_demand_within_public_imports: PASS - 16 kt <= 21.6782 kt.",
+        "2026-09-25T20:09:13.5379535Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].",
+        "2026-09-25T20:09:13.5380017Z   qualified_availability_within_physical_output: PASS - 24 kt <= 51.3 kt.",
+        "2026-09-25T20:09:13.5381282Z   tariff_line_allocation_sums_to_public_hs6_total: PASS - Tariff-line quantities sum to 21.6782 kt against public imports 21.6782 kt.",
+        "2026-09-25T20:09:13.5384882Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.",
+        "2026-09-25T20:09:13.5385510Z - SYN-MINISTRY-PENICILLIN-API-001.json scenario=SYN-MINISTRY-PENICILLIN-API-001 opportunity=SAU-H6-294110 status=PASS",
+        "2026-09-25T20:09:13.5386112Z   target_spec_demand_within_public_imports: PASS - 0.171511 kt <= 0.343023 kt.",
+        "2026-09-25T20:09:13.5387298Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].",
+        "2026-09-25T20:09:13.5391656Z   base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.",
+        "2026-09-25T20:09:13.5392741Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.",
+        "2026-09-25T20:09:13.5393236Z - SYN-MINISTRY-PP-001.json scenario=SYN-MINISTRY-PP-001 opportunity=SAU-H0-390210 status=PASS",
+        "2026-09-25T20:09:13.5393700Z   target_spec_demand_within_public_imports: PASS - 56 kt <= 56 kt.",
+        "2026-09-25T20:09:13.5394104Z   line_nameplate_within_disclosed_public_capacity: PASS - 1170 kt <= 1170 kt.",
+        "2026-09-25T20:09:13.5394589Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].",
+        "2026-09-25T20:09:13.5395076Z   qualified_availability_within_physical_output: PASS - 80 kt <= 1055.46 kt.",
+        "2026-09-25T20:09:13.5400194Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.",
+        "2026-09-25T20:09:13.5400695Z - SYN-MINISTRY-SOP-001.json scenario=SYN-MINISTRY-SOP-001 opportunity=SAU-H6-310430 status=PASS",
+        "2026-09-25T20:09:13.5401165Z   target_spec_demand_within_public_imports: PASS - 11.2306 kt <= 22.4611 kt.",
+        "2026-09-25T20:09:13.5402311Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].",
+        "2026-09-25T20:09:13.5406421Z   base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.",
+        "2026-09-25T20:09:13.5407457Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.",
+        "2026-09-25T20:09:13.5407946Z - SYN-MINISTRY-STEEL-001.json scenario=SYN-MINISTRY-STEEL-001 opportunity=SAU-H0-721049 status=PASS",
+        "2026-09-25T20:09:13.5408407Z   target_spec_demand_within_public_imports: PASS - 104 kt <= 287.9 kt.",
+        "2026-09-25T20:09:13.5408791Z   line_nameplate_within_disclosed_public_capacity: PASS - 250 kt <= 250 kt.",
+        "2026-09-25T20:09:13.5409353Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].",
+        "2026-09-25T20:09:13.5413355Z   base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.",
+        "2026-09-25T20:09:13.5414667Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.",
+        "2026-09-25T20:09:13.5415239Z - SYN-MINISTRY-STREPTOMYCIN-API-001.json scenario=SYN-MINISTRY-STREPTOMYCIN-API-001 opportunity=SAU-H6-294120 status=PASS",
+        "2026-09-25T20:09:13.5415800Z   target_spec_demand_within_public_imports: PASS - 0.023889 kt <= 0.047779 kt.",
+        "2026-09-25T20:09:13.5416895Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].",
+        "2026-09-25T20:09:13.5420187Z   base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.",
+        "2026-09-25T20:09:13.5421168Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.",
+        "2026-09-25T20:09:13.5421492Z - SYN-MINISTRY-TINPLATE-001.json scenario=SYN-MINISTRY-TINPLATE-001 opportunity=SAU-H6-721012 status=PASS",
+        "2026-09-25T20:09:13.5421843Z   target_spec_demand_within_public_imports: PASS - 95 kt <= 104.575 kt.",
+        "2026-09-25T20:09:13.5422936Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].",
+        "2026-09-25T20:09:13.5426951Z   base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.",
+        "2026-09-25T20:09:13.5427978Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.",
+        "2026-09-25T20:09:13.5428302Z SHARED ENABLER CONSISTENCY PASS (1 enablers, 2 dependents)",
+        "2026-09-25T20:10:54.9506893Z CASE RECONSTRUCTION PASS (9 snapshots, 9 briefs)",
+        "2026-09-25T20:10:54.9507314Z GRAPH RECONSTRUCTION PASS (1 projections, 925 nodes, 1045 edges)",
+        "2026-09-25T20:10:54.9507638Z RECONSTRUCTION PASS (5 snapshots, 42 artifacts)",
+        "2026-09-25T20:10:54.9507930Z DOCUMENT RECONSTRUCTION PASS (26 records, 26 artifacts)",
+        "2026-09-25T20:10:54.9508262Z ENTITY RECONSTRUCTION PASS (3 artifacts, 46 links)",
+        "2026-09-25T20:10:54.9508557Z SCREENING RECONSTRUCTION PASS (1 snapshots)",
+        "2026-09-25T20:10:54.9508835Z CASE SELECTION RECONSTRUCTION PASS (2 records)",
+        "2026-09-25T20:13:55.4422438Z 3982 passed, 1 warning in 178.02s (0:02:58)",
+        "2026-09-25T20:13:56.9016251Z SMOKE PASS"
+      ],
+      "steps": [
+        {
+          "completedAt": "2026-09-25T20:09:00Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-09-25T20:08:58Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:09:04Z",
+          "conclusion": "success",
+          "name": "Check out repository",
+          "number": 2,
+          "startedAt": "2026-09-25T20:09:00Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:09:04Z",
+          "conclusion": "success",
+          "name": "Set up Python",
+          "number": 3,
+          "startedAt": "2026-09-25T20:09:04Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:09:06Z",
+          "conclusion": "success",
+          "name": "Set up uv",
+          "number": 4,
+          "startedAt": "2026-09-25T20:09:04Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:09:08Z",
+          "conclusion": "success",
+          "name": "Sync locked development environment",
+          "number": 5,
+          "startedAt": "2026-09-25T20:09:06Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:09:08Z",
+          "conclusion": "success",
+          "name": "Scan prohibited files and secret patterns",
+          "number": 6,
+          "startedAt": "2026-09-25T20:09:08Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:09:09Z",
+          "conclusion": "success",
+          "name": "Reject embedded threshold literals",
+          "number": 7,
+          "startedAt": "2026-09-25T20:09:08Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:09:09Z",
+          "conclusion": "success",
+          "name": "Validate UI catalogue, token and copy contracts",
+          "number": 8,
+          "startedAt": "2026-09-25T20:09:09Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:09:09Z",
+          "conclusion": "success",
+          "name": "Compile Python",
+          "number": 9,
+          "startedAt": "2026-09-25T20:09:09Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:09:13Z",
+          "conclusion": "success",
+          "name": "Check JavaScript ES-module syntax",
+          "number": 10,
+          "startedAt": "2026-09-25T20:09:09Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:09:13Z",
+          "conclusion": "success",
+          "name": "Verify integrity",
+          "number": 11,
+          "startedAt": "2026-09-25T20:09:13Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:09:13Z",
+          "conclusion": "success",
+          "name": "Validate synthetic scenarios against public marginals",
+          "number": 12,
+          "startedAt": "2026-09-25T20:09:13Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:10:54Z",
+          "conclusion": "success",
+          "name": "Reconstruct acquired snapshots from the raw store",
+          "number": 13,
+          "startedAt": "2026-09-25T20:09:13Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:13:56Z",
+          "conclusion": "success",
+          "name": "Run test suite",
+          "number": 14,
+          "startedAt": "2026-09-25T20:10:54Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:13:56Z",
+          "conclusion": "success",
+          "name": "Run demo smoke",
+          "number": 15,
+          "startedAt": "2026-09-25T20:13:56Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:13:57Z",
+          "conclusion": "success",
+          "name": "Post Set up uv",
+          "number": 28,
+          "startedAt": "2026-09-25T20:13:56Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:13:57Z",
+          "conclusion": "success",
+          "name": "Post Set up Python",
+          "number": 29,
+          "startedAt": "2026-09-25T20:13:57Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:13:57Z",
+          "conclusion": "success",
+          "name": "Post Check out repository",
+          "number": 30,
+          "startedAt": "2026-09-25T20:13:57Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:13:57Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 31,
+          "startedAt": "2026-09-25T20:13:57Z",
+          "status": "completed"
+        }
+      ]
+    },
+    {
+      "job_id": 108232845507,
+      "name": "uv / Python 3.14",
+      "url": "https://github.com/baramiSG/Industrial_mvp/actions/runs/36183985706/job/108232845507",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-09-25T20:08:56Z",
+      "completed_at": "2026-09-25T20:16:32Z",
+      "log_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/final-candidate-r2/delivery/hosted-main/job-108232845507.log",
+      "log_sha256": "fbc8d2bb58c3beb87461955d1720cedd1f94225fd2a34cd4aba05491cabc9d49",
+      "bytes": 62534,
+      "merge_checkout_sha_present": true,
+      "passed_summaries": [
+        "2026-09-25T20:09:11.2474020Z PROHIBITED FILE SCAN PASS (3307 tracked files)",
+        "2026-09-25T20:09:11.8933231Z THRESHOLD LITERAL SCAN PASS (104 Python files; 24 configured numeric values)",
+        "2026-09-25T20:09:12.3886102Z UI CONTRACT CHECK PASS",
+        "2026-09-25T20:09:16.5907405Z ES MODULE CHECK PASS (51 files)",
+        "2026-09-25T20:09:16.8228635Z INTEGRITY PASS",
+        "2026-09-25T20:09:17.1379948Z SCENARIO VALIDATION PASS (11 scenarios)",
+        "2026-09-25T20:09:17.1381204Z - SYN-MINISTRY-ALU-FOIL-001.json scenario=SYN-MINISTRY-ALU-FOIL-001 opportunity=SAU-H6-760711 status=PASS",
+        "2026-09-25T20:09:17.1382632Z   target_spec_demand_within_public_imports: PASS - 40 kt <= 53.6793 kt.",
+        "2026-09-25T20:09:17.1385714Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].",
+        "2026-09-25T20:09:17.1395151Z   base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.",
+        "2026-09-25T20:09:17.1396046Z   shared_enabler_declaration_valid: PASS - Shared-enabler declaration and explicit valuation source are valid.",
+        "2026-09-25T20:09:17.1396783Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.",
+        "2026-09-25T20:09:17.1398155Z - SYN-MINISTRY-ALU-PROFILES-001.json scenario=SYN-MINISTRY-ALU-PROFILES-001 opportunity=SAU-H6-760429 status=PASS",
+        "2026-09-25T20:09:17.1399178Z   target_spec_demand_within_public_imports: PASS - 6 kt <= 9.18984 kt.",
+        "2026-09-25T20:09:17.1401184Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].",
+        "2026-09-25T20:09:17.1401780Z   qualified_availability_within_physical_output: PASS - 2.5 kt <= 30.6 kt.",
+        "2026-09-25T20:09:17.1403317Z   tariff_line_allocation_sums_to_public_hs6_total: PASS - Tariff-line quantities sum to 9.18984 kt against public imports 9.18984 kt.",
+        "2026-09-25T20:09:17.1404126Z   buyer_allocation_within_public_imports: PASS - Buyer quantities sum to 6 kt within public imports 9.18984 kt.",
+        "2026-09-25T20:09:17.1405915Z   retained_flows_reconcile_to_public_trade: PASS - Retained flows reconcile to public trade marginals.",
+        "2026-09-25T20:09:17.1406649Z   base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.",
+        "2026-09-25T20:09:17.1408744Z   shared_enabler_declaration_valid: PASS - Shared-enabler declaration and explicit valuation source are valid.",
+        "2026-09-25T20:09:17.1409979Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.",
+        "2026-09-25T20:09:17.1411070Z - SYN-MINISTRY-FERT-RETAIL-PACKS-001.json scenario=SYN-MINISTRY-FERT-RETAIL-PACKS-001 opportunity=SAU-H6-310510 status=PASS",
+        "2026-09-25T20:09:17.1411785Z   target_spec_demand_within_public_imports: PASS - 1.2229 kt <= 2.44581 kt.",
+        "2026-09-25T20:09:17.1413172Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].",
+        "2026-09-25T20:09:17.1418491Z   base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.",
+        "2026-09-25T20:09:17.1419770Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.",
+        "2026-09-25T20:09:17.1420430Z - SYN-MINISTRY-GALVALUME-001.json scenario=SYN-MINISTRY-GALVALUME-001 opportunity=SAU-H6-721061 status=PASS",
+        "2026-09-25T20:09:17.1421039Z   target_spec_demand_within_public_imports: PASS - 48 kt <= 93.232 kt.",
+        "2026-09-25T20:09:17.1422364Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].",
+        "2026-09-25T20:09:17.1427684Z   base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.",
+        "2026-09-25T20:09:17.1428952Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.",
+        "2026-09-25T20:09:17.1429585Z - SYN-MINISTRY-PE-FILM-001.json scenario=SYN-MINISTRY-PE-FILM-001 opportunity=SAU-H6-392010 status=PASS",
+        "2026-09-25T20:09:17.1430380Z   target_spec_demand_within_public_imports: PASS - 16 kt <= 21.6782 kt.",
+        "2026-09-25T20:09:17.1431824Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].",
+        "2026-09-25T20:09:17.1432388Z   qualified_availability_within_physical_output: PASS - 24 kt <= 51.3 kt.",
+        "2026-09-25T20:09:17.1433896Z   tariff_line_allocation_sums_to_public_hs6_total: PASS - Tariff-line quantities sum to 21.6782 kt against public imports 21.6782 kt.",
+        "2026-09-25T20:09:17.1438576Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.",
+        "2026-09-25T20:09:17.1439328Z - SYN-MINISTRY-PENICILLIN-API-001.json scenario=SYN-MINISTRY-PENICILLIN-API-001 opportunity=SAU-H6-294110 status=PASS",
+        "2026-09-25T20:09:17.1440011Z   target_spec_demand_within_public_imports: PASS - 0.171511 kt <= 0.343023 kt.",
+        "2026-09-25T20:09:17.1441390Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].",
+        "2026-09-25T20:09:17.1446417Z   base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.",
+        "2026-09-25T20:09:17.1447922Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.",
+        "2026-09-25T20:09:17.1448502Z - SYN-MINISTRY-PP-001.json scenario=SYN-MINISTRY-PP-001 opportunity=SAU-H0-390210 status=PASS",
+        "2026-09-25T20:09:17.1449589Z   target_spec_demand_within_public_imports: PASS - 56 kt <= 56 kt.",
+        "2026-09-25T20:09:17.1450446Z   line_nameplate_within_disclosed_public_capacity: PASS - 1170 kt <= 1170 kt.",
+        "2026-09-25T20:09:17.1451383Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].",
+        "2026-09-25T20:09:17.1451962Z   qualified_availability_within_physical_output: PASS - 80 kt <= 1055.46 kt.",
+        "2026-09-25T20:09:17.1458286Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.",
+        "2026-09-25T20:09:17.1458881Z - SYN-MINISTRY-SOP-001.json scenario=SYN-MINISTRY-SOP-001 opportunity=SAU-H6-310430 status=PASS",
+        "2026-09-25T20:09:17.1459456Z   target_spec_demand_within_public_imports: PASS - 11.2306 kt <= 22.4611 kt.",
+        "2026-09-25T20:09:17.1460814Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].",
+        "2026-09-25T20:09:17.1465796Z   base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.",
+        "2026-09-25T20:09:17.1467342Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.",
+        "2026-09-25T20:09:17.1467953Z - SYN-MINISTRY-STEEL-001.json scenario=SYN-MINISTRY-STEEL-001 opportunity=SAU-H0-721049 status=PASS",
+        "2026-09-25T20:09:17.1468528Z   target_spec_demand_within_public_imports: PASS - 104 kt <= 287.9 kt.",
+        "2026-09-25T20:09:17.1468995Z   line_nameplate_within_disclosed_public_capacity: PASS - 250 kt <= 250 kt.",
+        "2026-09-25T20:09:17.1469546Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].",
+        "2026-09-25T20:09:17.1474529Z   base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.",
+        "2026-09-25T20:09:17.1475937Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.",
+        "2026-09-25T20:09:17.1476757Z - SYN-MINISTRY-STREPTOMYCIN-API-001.json scenario=SYN-MINISTRY-STREPTOMYCIN-API-001 opportunity=SAU-H6-294120 status=PASS",
+        "2026-09-25T20:09:17.1477634Z   target_spec_demand_within_public_imports: PASS - 0.023889 kt <= 0.047779 kt.",
+        "2026-09-25T20:09:17.1478974Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].",
+        "2026-09-25T20:09:17.1483925Z   base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.",
+        "2026-09-25T20:09:17.1485183Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.",
+        "2026-09-25T20:09:17.1485815Z - SYN-MINISTRY-TINPLATE-001.json scenario=SYN-MINISTRY-TINPLATE-001 opportunity=SAU-H6-721012 status=PASS",
+        "2026-09-25T20:09:17.1486529Z   target_spec_demand_within_public_imports: PASS - 95 kt <= 104.575 kt.",
+        "2026-09-25T20:09:17.1488987Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].",
+        "2026-09-25T20:09:17.1496207Z   base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.",
+        "2026-09-25T20:09:17.1497962Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.",
+        "2026-09-25T20:09:17.1498614Z SHARED ENABLER CONSISTENCY PASS (1 enablers, 2 dependents)",
+        "2026-09-25T20:12:21.4745483Z CASE RECONSTRUCTION PASS (9 snapshots, 9 briefs)",
+        "2026-09-25T20:12:21.4748067Z GRAPH RECONSTRUCTION PASS (1 projections, 925 nodes, 1045 edges)",
+        "2026-09-25T20:12:21.4748967Z RECONSTRUCTION PASS (5 snapshots, 42 artifacts)",
+        "2026-09-25T20:12:21.4749805Z DOCUMENT RECONSTRUCTION PASS (26 records, 26 artifacts)",
+        "2026-09-25T20:12:21.4750430Z ENTITY RECONSTRUCTION PASS (3 artifacts, 46 links)",
+        "2026-09-25T20:12:21.4750946Z SCREENING RECONSTRUCTION PASS (1 snapshots)",
+        "2026-09-25T20:12:21.4751421Z CASE SELECTION RECONSTRUCTION PASS (2 records)",
+        "2026-09-25T20:16:26.8720632Z 3982 passed, 1 warning in 242.24s (0:04:02)",
+        "2026-09-25T20:16:28.7665430Z SMOKE PASS"
+      ],
+      "steps": [
+        {
+          "completedAt": "2026-09-25T20:08:59Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-09-25T20:08:57Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:09:03Z",
+          "conclusion": "success",
+          "name": "Check out repository",
+          "number": 2,
+          "startedAt": "2026-09-25T20:08:59Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:09:04Z",
+          "conclusion": "success",
+          "name": "Set up Python",
+          "number": 3,
+          "startedAt": "2026-09-25T20:09:03Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:09:06Z",
+          "conclusion": "success",
+          "name": "Set up uv",
+          "number": 4,
+          "startedAt": "2026-09-25T20:09:04Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:09:08Z",
+          "conclusion": "success",
+          "name": "Sync locked development environment",
+          "number": 5,
+          "startedAt": "2026-09-25T20:09:06Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:09:11Z",
+          "conclusion": "success",
+          "name": "Scan prohibited files and secret patterns",
+          "number": 6,
+          "startedAt": "2026-09-25T20:09:08Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:09:11Z",
+          "conclusion": "success",
+          "name": "Reject embedded threshold literals",
+          "number": 7,
+          "startedAt": "2026-09-25T20:09:11Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:09:12Z",
+          "conclusion": "success",
+          "name": "Validate UI catalogue, token and copy contracts",
+          "number": 8,
+          "startedAt": "2026-09-25T20:09:11Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:09:13Z",
+          "conclusion": "success",
+          "name": "Compile Python",
+          "number": 9,
+          "startedAt": "2026-09-25T20:09:12Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:09:16Z",
+          "conclusion": "success",
+          "name": "Check JavaScript ES-module syntax",
+          "number": 10,
+          "startedAt": "2026-09-25T20:09:13Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:09:16Z",
+          "conclusion": "success",
+          "name": "Verify integrity",
+          "number": 11,
+          "startedAt": "2026-09-25T20:09:16Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:09:17Z",
+          "conclusion": "success",
+          "name": "Validate synthetic scenarios against public marginals",
+          "number": 12,
+          "startedAt": "2026-09-25T20:09:16Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:12:21Z",
+          "conclusion": "success",
+          "name": "Reconstruct acquired snapshots from the raw store",
+          "number": 13,
+          "startedAt": "2026-09-25T20:09:17Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:16:28Z",
+          "conclusion": "success",
+          "name": "Run test suite",
+          "number": 14,
+          "startedAt": "2026-09-25T20:12:21Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:16:28Z",
+          "conclusion": "success",
+          "name": "Run demo smoke",
+          "number": 15,
+          "startedAt": "2026-09-25T20:16:28Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:16:28Z",
+          "conclusion": "success",
+          "name": "Post Set up uv",
+          "number": 28,
+          "startedAt": "2026-09-25T20:16:28Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:16:29Z",
+          "conclusion": "success",
+          "name": "Post Set up Python",
+          "number": 29,
+          "startedAt": "2026-09-25T20:16:28Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:16:29Z",
+          "conclusion": "success",
+          "name": "Post Check out repository",
+          "number": 30,
+          "startedAt": "2026-09-25T20:16:29Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:16:29Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 31,
+          "startedAt": "2026-09-25T20:16:29Z",
+          "status": "completed"
+        }
+      ]
+    },
+    {
+      "job_id": 108232845543,
+      "name": "pip / Python 3.12",
+      "url": "https://github.com/baramiSG/Industrial_mvp/actions/runs/36183985706/job/108232845543",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-09-25T20:08:56Z",
+      "completed_at": "2026-09-25T20:17:09Z",
+      "log_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/final-candidate-r2/delivery/hosted-main/job-108232845543.log",
+      "log_sha256": "ec16f84b220441f55c90000d9966ec60c0e925c87849dd02749e941073afddd5",
+      "bytes": 66688,
+      "merge_checkout_sha_present": true,
+      "passed_summaries": [
+        "2026-09-25T20:09:11.3402927Z PROHIBITED FILE SCAN PASS (3307 tracked files)",
+        "2026-09-25T20:09:11.9000443Z THRESHOLD LITERAL SCAN PASS (104 Python files; 24 configured numeric values)",
+        "2026-09-25T20:09:12.3490674Z UI CONTRACT CHECK PASS",
+        "2026-09-25T20:09:14.6280573Z ES MODULE CHECK PASS (51 files)",
+        "2026-09-25T20:09:14.8437768Z INTEGRITY PASS",
+        "2026-09-25T20:09:15.1434101Z SCENARIO VALIDATION PASS (11 scenarios)",
+        "2026-09-25T20:09:15.1435355Z - SYN-MINISTRY-ALU-FOIL-001.json scenario=SYN-MINISTRY-ALU-FOIL-001 opportunity=SAU-H6-760711 status=PASS",
+        "2026-09-25T20:09:15.1436596Z   target_spec_demand_within_public_imports: PASS - 40 kt <= 53.6793 kt.",
+        "2026-09-25T20:09:15.1438613Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].",
+        "2026-09-25T20:09:15.1445571Z   base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.",
+        "2026-09-25T20:09:15.1446784Z   shared_enabler_declaration_valid: PASS - Shared-enabler declaration and explicit valuation source are valid.",
+        "2026-09-25T20:09:15.1447487Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.",
+        "2026-09-25T20:09:15.1448260Z - SYN-MINISTRY-ALU-PROFILES-001.json scenario=SYN-MINISTRY-ALU-PROFILES-001 opportunity=SAU-H6-760429 status=PASS",
+        "2026-09-25T20:09:15.1448961Z   target_spec_demand_within_public_imports: PASS - 6 kt <= 9.18984 kt.",
+        "2026-09-25T20:09:15.1450430Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].",
+        "2026-09-25T20:09:15.1451044Z   qualified_availability_within_physical_output: PASS - 2.5 kt <= 30.6 kt.",
+        "2026-09-25T20:09:15.1452934Z   tariff_line_allocation_sums_to_public_hs6_total: PASS - Tariff-line quantities sum to 9.18984 kt against public imports 9.18984 kt.",
+        "2026-09-25T20:09:15.1453818Z   buyer_allocation_within_public_imports: PASS - Buyer quantities sum to 6 kt within public imports 9.18984 kt.",
+        "2026-09-25T20:09:15.1455353Z   retained_flows_reconcile_to_public_trade: PASS - Retained flows reconcile to public trade marginals.",
+        "2026-09-25T20:09:15.1456491Z   base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.",
+        "2026-09-25T20:09:15.1457370Z   shared_enabler_declaration_valid: PASS - Shared-enabler declaration and explicit valuation source are valid.",
+        "2026-09-25T20:09:15.1458043Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.",
+        "2026-09-25T20:09:15.1458808Z - SYN-MINISTRY-FERT-RETAIL-PACKS-001.json scenario=SYN-MINISTRY-FERT-RETAIL-PACKS-001 opportunity=SAU-H6-310510 status=PASS",
+        "2026-09-25T20:09:15.1459524Z   target_spec_demand_within_public_imports: PASS - 1.2229 kt <= 2.44581 kt.",
+        "2026-09-25T20:09:15.1460940Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].",
+        "2026-09-25T20:09:15.1466087Z   base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.",
+        "2026-09-25T20:09:15.1467520Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.",
+        "2026-09-25T20:09:15.1468178Z - SYN-MINISTRY-GALVALUME-001.json scenario=SYN-MINISTRY-GALVALUME-001 opportunity=SAU-H6-721061 status=PASS",
+        "2026-09-25T20:09:15.1468802Z   target_spec_demand_within_public_imports: PASS - 48 kt <= 93.232 kt.",
+        "2026-09-25T20:09:15.1470144Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].",
+        "2026-09-25T20:09:15.1475398Z   base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.",
+        "2026-09-25T20:09:15.1476873Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.",
+        "2026-09-25T20:09:15.1477528Z - SYN-MINISTRY-PE-FILM-001.json scenario=SYN-MINISTRY-PE-FILM-001 opportunity=SAU-H6-392010 status=PASS",
+        "2026-09-25T20:09:15.1478150Z   target_spec_demand_within_public_imports: PASS - 16 kt <= 21.6782 kt.",
+        "2026-09-25T20:09:15.1479688Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].",
+        "2026-09-25T20:09:15.1480269Z   qualified_availability_within_physical_output: PASS - 24 kt <= 51.3 kt.",
+        "2026-09-25T20:09:15.1481815Z   tariff_line_allocation_sums_to_public_hs6_total: PASS - Tariff-line quantities sum to 21.6782 kt against public imports 21.6782 kt.",
+        "2026-09-25T20:09:15.1486306Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.",
+        "2026-09-25T20:09:15.1487055Z - SYN-MINISTRY-PENICILLIN-API-001.json scenario=SYN-MINISTRY-PENICILLIN-API-001 opportunity=SAU-H6-294110 status=PASS",
+        "2026-09-25T20:09:15.1487763Z   target_spec_demand_within_public_imports: PASS - 0.171511 kt <= 0.343023 kt.",
+        "2026-09-25T20:09:15.1489141Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].",
+        "2026-09-25T20:09:15.1494200Z   base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.",
+        "2026-09-25T20:09:15.1495481Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.",
+        "2026-09-25T20:09:15.1496075Z - SYN-MINISTRY-PP-001.json scenario=SYN-MINISTRY-PP-001 opportunity=SAU-H0-390210 status=PASS",
+        "2026-09-25T20:09:15.1496774Z   target_spec_demand_within_public_imports: PASS - 56 kt <= 56 kt.",
+        "2026-09-25T20:09:15.1497410Z   line_nameplate_within_disclosed_public_capacity: PASS - 1170 kt <= 1170 kt.",
+        "2026-09-25T20:09:15.1497981Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].",
+        "2026-09-25T20:09:15.1498551Z   qualified_availability_within_physical_output: PASS - 80 kt <= 1055.46 kt.",
+        "2026-09-25T20:09:15.1504400Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.",
+        "2026-09-25T20:09:15.1504991Z - SYN-MINISTRY-SOP-001.json scenario=SYN-MINISTRY-SOP-001 opportunity=SAU-H6-310430 status=PASS",
+        "2026-09-25T20:09:15.1505569Z   target_spec_demand_within_public_imports: PASS - 11.2306 kt <= 22.4611 kt.",
+        "2026-09-25T20:09:15.1507060Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].",
+        "2026-09-25T20:09:15.1512124Z   base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.",
+        "2026-09-25T20:09:15.1513418Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.",
+        "2026-09-25T20:09:15.1514040Z - SYN-MINISTRY-STEEL-001.json scenario=SYN-MINISTRY-STEEL-001 opportunity=SAU-H0-721049 status=PASS",
+        "2026-09-25T20:09:15.1514628Z   target_spec_demand_within_public_imports: PASS - 104 kt <= 287.9 kt.",
+        "2026-09-25T20:09:15.1515102Z   line_nameplate_within_disclosed_public_capacity: PASS - 250 kt <= 250 kt.",
+        "2026-09-25T20:09:15.1515662Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].",
+        "2026-09-25T20:09:15.1521008Z   base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.",
+        "2026-09-25T20:09:15.1522398Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.",
+        "2026-09-25T20:09:15.1523137Z - SYN-MINISTRY-STREPTOMYCIN-API-001.json scenario=SYN-MINISTRY-STREPTOMYCIN-API-001 opportunity=SAU-H6-294120 status=PASS",
+        "2026-09-25T20:09:15.1523851Z   target_spec_demand_within_public_imports: PASS - 0.023889 kt <= 0.047779 kt.",
+        "2026-09-25T20:09:15.1525226Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].",
+        "2026-09-25T20:09:15.1530404Z   base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.",
+        "2026-09-25T20:09:15.1531688Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.",
+        "2026-09-25T20:09:15.1532329Z - SYN-MINISTRY-TINPLATE-001.json scenario=SYN-MINISTRY-TINPLATE-001 opportunity=SAU-H6-721012 status=PASS",
+        "2026-09-25T20:09:15.1532941Z   target_spec_demand_within_public_imports: PASS - 95 kt <= 104.575 kt.",
+        "2026-09-25T20:09:15.1534298Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].",
+        "2026-09-25T20:09:15.1539489Z   base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.",
+        "2026-09-25T20:09:15.1541014Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.",
+        "2026-09-25T20:09:15.1541752Z SHARED ENABLER CONSISTENCY PASS (1 enablers, 2 dependents)",
+        "2026-09-25T20:12:25.8970651Z CASE RECONSTRUCTION PASS (9 snapshots, 9 briefs)",
+        "2026-09-25T20:12:25.8983031Z GRAPH RECONSTRUCTION PASS (1 projections, 925 nodes, 1045 edges)",
+        "2026-09-25T20:12:25.8984143Z RECONSTRUCTION PASS (5 snapshots, 42 artifacts)",
+        "2026-09-25T20:12:25.8985116Z DOCUMENT RECONSTRUCTION PASS (26 records, 26 artifacts)",
+        "2026-09-25T20:12:25.8985913Z ENTITY RECONSTRUCTION PASS (3 artifacts, 46 links)",
+        "2026-09-25T20:12:25.8986920Z SCREENING RECONSTRUCTION PASS (1 snapshots)",
+        "2026-09-25T20:12:25.8987535Z CASE SELECTION RECONSTRUCTION PASS (2 records)",
+        "2026-09-25T20:17:06.3350060Z 3982 passed, 1 warning in 278.18s (0:04:38)",
+        "2026-09-25T20:17:07.9644243Z SMOKE PASS"
+      ],
+      "steps": [
+        {
+          "completedAt": "2026-09-25T20:08:58Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-09-25T20:08:57Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:09:01Z",
+          "conclusion": "success",
+          "name": "Check out repository",
+          "number": 2,
+          "startedAt": "2026-09-25T20:08:58Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:09:02Z",
+          "conclusion": "success",
+          "name": "Set up Python",
+          "number": 3,
+          "startedAt": "2026-09-25T20:09:01Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:09:09Z",
+          "conclusion": "success",
+          "name": "Install documented pip development path",
+          "number": 4,
+          "startedAt": "2026-09-25T20:09:02Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:09:11Z",
+          "conclusion": "success",
+          "name": "Scan prohibited files and secret patterns",
+          "number": 5,
+          "startedAt": "2026-09-25T20:09:09Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:09:11Z",
+          "conclusion": "success",
+          "name": "Reject embedded threshold literals",
+          "number": 6,
+          "startedAt": "2026-09-25T20:09:11Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:09:12Z",
+          "conclusion": "success",
+          "name": "Validate UI catalogue, token and copy contracts",
+          "number": 7,
+          "startedAt": "2026-09-25T20:09:11Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:09:13Z",
+          "conclusion": "success",
+          "name": "Compile Python",
+          "number": 8,
+          "startedAt": "2026-09-25T20:09:12Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:09:14Z",
+          "conclusion": "success",
+          "name": "Check JavaScript ES-module syntax",
+          "number": 9,
+          "startedAt": "2026-09-25T20:09:13Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:09:14Z",
+          "conclusion": "success",
+          "name": "Verify integrity",
+          "number": 10,
+          "startedAt": "2026-09-25T20:09:14Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:09:15Z",
+          "conclusion": "success",
+          "name": "Validate synthetic scenarios against public marginals",
+          "number": 11,
+          "startedAt": "2026-09-25T20:09:14Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:12:25Z",
+          "conclusion": "success",
+          "name": "Reconstruct acquired snapshots from the raw store",
+          "number": 12,
+          "startedAt": "2026-09-25T20:09:15Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:17:07Z",
+          "conclusion": "success",
+          "name": "Run test suite",
+          "number": 13,
+          "startedAt": "2026-09-25T20:12:25Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:17:07Z",
+          "conclusion": "success",
+          "name": "Run demo smoke",
+          "number": 14,
+          "startedAt": "2026-09-25T20:17:07Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:17:08Z",
+          "conclusion": "success",
+          "name": "Post Set up Python",
+          "number": 27,
+          "startedAt": "2026-09-25T20:17:07Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:17:08Z",
+          "conclusion": "success",
+          "name": "Post Check out repository",
+          "number": 28,
+          "startedAt": "2026-09-25T20:17:08Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:17:08Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 29,
+          "startedAt": "2026-09-25T20:17:08Z",
+          "status": "completed"
+        }
+      ]
+    },
+    {
+      "job_id": 108232845575,
+      "name": "browser / Chromium / Python 3.12",
+      "url": "https://github.com/baramiSG/Industrial_mvp/actions/runs/36183985706/job/108232845575",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-09-25T20:08:57Z",
+      "completed_at": "2026-09-25T21:13:59Z",
+      "log_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/final-candidate-r2/delivery/hosted-main/job-108232845575.log",
+      "log_sha256": "1307f929f82f1a2916735ab9141c17f58905d86eb75e7f0a9550c7c5d0ab723c",
+      "bytes": 49322,
+      "merge_checkout_sha_present": true,
+      "passed_summaries": [
+        "2026-09-25T20:09:32.7562979Z BROWSER PREFLIGHT PASS",
+        "2026-09-25T21:07:58.0198447Z 839 passed, 4 deselected in 3502.53s (0:58:22)",
+        "2026-09-25T21:07:59.1201380Z BROWSER PREFLIGHT PASS",
+        "2026-09-25T21:13:55.4374728Z 4 passed, 839 deselected in 355.77s (0:05:55)"
+      ],
+      "steps": [
+        {
+          "completedAt": "2026-09-25T20:09:00Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-09-25T20:08:59Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:09:06Z",
+          "conclusion": "success",
+          "name": "Check out repository",
+          "number": 2,
+          "startedAt": "2026-09-25T20:09:00Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:09:06Z",
+          "conclusion": "success",
+          "name": "Set up Python",
+          "number": 3,
+          "startedAt": "2026-09-25T20:09:06Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:09:09Z",
+          "conclusion": "success",
+          "name": "Set up uv",
+          "number": 4,
+          "startedAt": "2026-09-25T20:09:06Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:09:11Z",
+          "conclusion": "success",
+          "name": "Sync locked browser-test environment",
+          "number": 5,
+          "startedAt": "2026-09-25T20:09:09Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:09:16Z",
+          "conclusion": "success",
+          "name": "Cache Playwright Chromium",
+          "number": 6,
+          "startedAt": "2026-09-25T20:09:11Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T20:09:32Z",
+          "conclusion": "success",
+          "name": "Install Chromium dependencies",
+          "number": 7,
+          "startedAt": "2026-09-25T20:09:16Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T21:13:55Z",
+          "conclusion": "success",
+          "name": "Run bilingual real-browser and visual gates",
+          "number": 8,
+          "startedAt": "2026-09-25T20:09:32Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T21:13:55Z",
+          "conclusion": "skipped",
+          "name": "Upload browser diagnostics on failure",
+          "number": 9,
+          "startedAt": "2026-09-25T21:13:55Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T21:13:55Z",
+          "conclusion": "success",
+          "name": "Post Cache Playwright Chromium",
+          "number": 15,
+          "startedAt": "2026-09-25T21:13:55Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T21:13:55Z",
+          "conclusion": "success",
+          "name": "Post Set up uv",
+          "number": 16,
+          "startedAt": "2026-09-25T21:13:55Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T21:13:56Z",
+          "conclusion": "success",
+          "name": "Post Set up Python",
+          "number": 17,
+          "startedAt": "2026-09-25T21:13:55Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T21:13:56Z",
+          "conclusion": "success",
+          "name": "Post Check out repository",
+          "number": 18,
+          "startedAt": "2026-09-25T21:13:56Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T21:13:56Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 19,
+          "startedAt": "2026-09-25T21:13:56Z",
+          "status": "completed"
+        }
+      ]
+    }
+  ]
+}
