@@ -146,15 +146,15 @@
     },
     {
       "at": "2026-09-12T06:20:00+03:00",
-      "event": "Owner delegated persistent owner/lead-agent authority. S12a candidate identity 98a0f95b\u2026 re-verified; independent APPROVE preserved; committed 825b81d; PR #15 CI 5/5; squash-merged as cc85cbc; main CI 34669431254 5/5; post-merge integrity/smoke/reconstruction/1755 tests PASS. s12b selected next."
+      "event": "Owner delegated persistent owner/lead-agent authority. S12a candidate identity 98a0f95b… re-verified; independent APPROVE preserved; committed 825b81d; PR #15 CI 5/5; squash-merged as cc85cbc; main CI 34669431254 5/5; post-merge integrity/smoke/reconstruction/1755 tests PASS. s12b selected next."
     },
     {
       "at": "2026-09-12T12:20:00+03:00",
-      "event": "S12b delivered: plan-1 approved (grok); implementation ladder composer x3 \u2192 fable \u2192 sol (owner ruling OR-3); reviews grok REJECT \u2192 Fable REJECT \u2192 Fable APPROVE zero findings on 5258e7d4\u2026; committed 9b462e2; PR #17 CI 5/5; squash-merged as 9a9d5c7; main CI 34684108497 5/5; post-merge integrity/smoke/reconstruction (1/4 + 12/12)/1928 tests PASS. s12c selected next."
+      "event": "S12b delivered: plan-1 approved (grok); implementation ladder composer x3 → fable → sol (owner ruling OR-3); reviews grok REJECT → Fable REJECT → Fable APPROVE zero findings on 5258e7d4…; committed 9b462e2; PR #17 CI 5/5; squash-merged as 9a9d5c7; main CI 34684108497 5/5; post-merge integrity/smoke/reconstruction (1/4 + 12/12)/1928 tests PASS. s12c selected next."
     },
     {
       "at": "2026-09-12T15:10:00+03:00",
-      "event": "S12c delivered: plan-1-dispatch1 approved (grok); implementer-sol slot 1 (OD-9); grok implementation APPROVE zero findings on c2370180\u2026; committed 752fe24; PR #19 CI 5/5; squash-merged as 78c002f; post-merge integrity/smoke/reconstruction (1/4 + 12/12 + 1/38)/2027 tests PASS. Parent S12 complete. S13 selected next."
+      "event": "S12c delivered: plan-1-dispatch1 approved (grok); implementer-sol slot 1 (OD-9); grok implementation APPROVE zero findings on c2370180…; committed 752fe24; PR #19 CI 5/5; squash-merged as 78c002f; post-merge integrity/smoke/reconstruction (1/4 + 12/12 + 1/38)/2027 tests PASS. Parent S12 complete. S13 selected next."
     },
     {
       "at": "2026-09-25T13:50:05Z",
@@ -281,7 +281,7 @@
         "planner_implementer": "gpt-5.6-sol-max",
         "reviewer": "cursor-grok-4.6-xhigh",
         "ladders": "4 plans / 8 implementation candidates per slice, then BLOCKED_FOR_OWNER",
-        "owner_lead_agent": "claude-fable-5.1 (Cursor) \u2014 delegated owner authority 2026-09-12; plugin ceremony cancelled 2026-09-07"
+        "owner_lead_agent": "claude-fable-5.1 (Cursor) — delegated owner authority 2026-09-12; plugin ceremony cancelled 2026-09-07"
       },
       "execution_order": [
         "M3-P0",
@@ -328,7 +328,7 @@
                 "merge_commit": "8053f2b70c4440efb6a00bbc7922e6d14e30377d",
                 "pr_head": "6413d04b4c43c256e6dbab12217e77f1027563fa",
                 "pr_ci_run": 34748809072,
-                "review": "reviewer-grok APPROVE zero findings on 9e2853cf\u2026",
+                "review": "reviewer-grok APPROVE zero findings on 9e2853cf…",
                 "manifest_runs": 1,
                 "merged_at": "2026-09-13T09:20:00Z"
               },
@@ -369,19 +369,19 @@
           "children": [
             {
               "task_id": "s12a-acquisition-framework-institutional-sources",
-              "goal": "S12a: Generalize the S11 acquisition framework from trade/tariff units to institutional acquisition units and snapshot kinds without changing any S11 raw artifact, snapshot, passport or reconstruction result, and acquire GASTAT public aggregates (official production/industrial statistics that supply R5 production and retained-flow inputs where the source publishes them), Ministry of Industry open data and MODON public directories, and SASO catalogue / SABER registry public metadata into passported, hashed, reconstructible snapshots \u2014 recording every unobtainable source as UNAVAILABLE with the observed response and recording the S12 split in docs/BUILD_ROADMAP.md and .workflow/state.json.",
+              "goal": "S12a: Generalize the S11 acquisition framework from trade/tariff units to institutional acquisition units and snapshot kinds without changing any S11 raw artifact, snapshot, passport or reconstruction result, and acquire GASTAT public aggregates (official production/industrial statistics that supply R5 production and retained-flow inputs where the source publishes them), Ministry of Industry open data and MODON public directories, and SASO catalogue / SABER registry public metadata into passported, hashed, reconstructible snapshots — recording every unobtainable source as UNAVAILABLE with the observed response and recording the S12 split in docs/BUILD_ROADMAP.md and .workflow/state.json.",
               "depends_on": []
             },
             {
               "task_id": "s12b-document-store-disclosures-tenders",
-              "goal": "S12b: Establish the governed span-addressable public document store on the generalized pipeline \u2014 persistent document ID, page and line addressing, original Arabic/English text preserved, raw document and derived text hashed and reconstructible under data/documents/** with manifest coverage \u2014 and acquire Tadawul issuer disclosures, Saudi producer disclosures (annual reports, environmental product declarations, product sheets and catalogue pages), Etimad public tender/specification documents and SASO public documents into it with \u00a711-complete passports, typing producer nameplate/expansion evidence as Class C, and recording blocked or unreachable sources as UNAVAILABLE with the observed response.",
+              "goal": "S12b: Establish the governed span-addressable public document store on the generalized pipeline — persistent document ID, page and line addressing, original Arabic/English text preserved, raw document and derived text hashed and reconstructible under data/documents/** with manifest coverage — and acquire Tadawul issuer disclosures, Saudi producer disclosures (annual reports, environmental product declarations, product sheets and catalogue pages), Etimad public tender/specification documents and SASO public documents into it with §11-complete passports, typing producer nameplate/expansion evidence as Class C, and recording blocked or unreachable sources as UNAVAILABLE with the observed response.",
               "depends_on": [
                 "s12a-acquisition-framework-institutional-sources"
               ]
             },
             {
               "task_id": "s12c-entity-resolution-bilingual-ids",
-              "goal": "S12c: Resolve the companies, plants, production lines and licence holders named across the acquired institutional directories, registries, disclosures and documents into persistent bilingual entity IDs per Core 05 \u00a76.5 and Core 08 \u00a710 \u2014 Arabic/English name normalisation, deterministic linking rules with explicit precedence, time-versioned ownership and name changes, and the licence-holder / company / plant / line distinction \u2014 producing a governed, hashed, reconstructible entity-resolution artifact that links acquired passports and observations to persistent IDs, holding ambiguous links at a reviewer-pending status and never fabricating a match.",
+              "goal": "S12c: Resolve the companies, plants, production lines and licence holders named across the acquired institutional directories, registries, disclosures and documents into persistent bilingual entity IDs per Core 05 §6.5 and Core 08 §10 — Arabic/English name normalisation, deterministic linking rules with explicit precedence, time-versioned ownership and name changes, and the licence-holder / company / plant / line distinction — producing a governed, hashed, reconstructible entity-resolution artifact that links acquired passports and observations to persistent IDs, holding ambiguous links at a reviewer-pending status and never fabricating a match.",
               "depends_on": [
                 "s12a-acquisition-framework-institutional-sources",
                 "s12b-document-store-disclosures-tenders"
@@ -408,7 +408,7 @@
                 "merge_commit": "834ba6062e682535a83068068d6789602b11c616",
                 "pr_head": "0dfbae9dfecc6849cfe13c2355b43a6bbfc6ad46",
                 "pr_ci_run": 34706125468,
-                "review": "reviewer-grok rounds 2/3/4 APPROVE zero findings on e73aeba9\u2026/402ff348\u2026/f7af7f75\u2026",
+                "review": "reviewer-grok rounds 2/3/4 APPROVE zero findings on e73aeba9…/402ff348…/f7af7f75…",
                 "ci_corrections": [
                   "CI-F-01 absolute screening input paths (OD-15)",
                   "CI-F-02 order-dependent detector test (OD-17)"
@@ -450,7 +450,7 @@
                 "merge_commit": "cdf6ab0aceb3c053c08daee0832615e580b779ef",
                 "pr_head": "2cc18f1a32b366c6bce033a8e4870b1becd10406",
                 "pr_ci_run": 34720051770,
-                "review": "reviewer-grok implementation APPROVE zero findings on 8fb01e4d\u2026 (product) / 85b34dfa\u2026 (with refreshed state.json)",
+                "review": "reviewer-grok implementation APPROVE zero findings on 8fb01e4d… (product) / 85b34dfa… (with refreshed state.json)",
                 "merged_at": "2026-09-12T21:52Z"
               },
               "approved_plan": {
@@ -499,7 +499,7 @@
                 "merge_commit": "ec859f72a1b438b7e5946334f60a4d72cbbf1fb1",
                 "pr_head": "274e7df",
                 "pr_ci_run": 34733383228,
-                "review": "reviewer-grok implementation APPROVE zero findings on 78c9b0c6\u2026; bounded APPROVE on 89ad2d5c\u2026",
+                "review": "reviewer-grok implementation APPROVE zero findings on 78c9b0c6…; bounded APPROVE on 89ad2d5c…",
                 "manifest_runs": 3,
                 "merged_at": "2026-09-13T03:22Z"
               },
@@ -582,7 +582,7 @@
                 "pr_head": "19eef02166de95ab3c19f0fbda95538084e935a2",
                 "pr_ci_run": 34743000153,
                 "main_ci_run": 34743666297,
-                "review": "reviewer-grok REJECT S14B-IR1-F01 then correction APPROVE zero findings on 24c3b3cc\u2026",
+                "review": "reviewer-grok REJECT S14B-IR1-F01 then correction APPROVE zero findings on 24c3b3cc…",
                 "manifest_runs": 2,
                 "merged_at": "2026-09-13T06:50:00Z"
               }
@@ -616,7 +616,7 @@
           "implementer": "gpt-5.6-sol-max (agent 25e87e27)",
           "reviewer": "cursor-grok-4.6-xhigh (agent f2929876)",
           "plan_rounds": 2,
-          "supervisor_findings": "PR-01..03 + RI-01 (plan), SR-01..02 (implementation) \u2014 all resolved",
+          "supervisor_findings": "PR-01..03 + RI-01 (plan), SR-01..02 (implementation) — all resolved",
           "reviewer_findings": "RV-01 BLOCKER (tag peel on shallow CI checkout) resolved; re-review APPROVE zero unresolved",
           "tests": "309 default (3.12 and 3.14) + 62 Chromium nodes",
           "ui_defects_fixed": [
@@ -645,7 +645,7 @@
           "implementer": "gpt-5.6-sol-max (agent ffdeb9c4)",
           "reviewer": "cursor-grok-4.6-xhigh (agent 0d169f00)",
           "plan_rounds": 2,
-          "supervisor_findings": "PR-01..05 + RI-01 (plan); SR-01 a-f HIGH (six visual/bidi/layout defects captured in first baselines) + SR-02 (implementation) \u2014 all resolved; baselines regenerated via canonical container",
+          "supervisor_findings": "PR-01..05 + RI-01 (plan); SR-01 a-f HIGH (six visual/bidi/layout defects captured in first baselines) + SR-02 (implementation) — all resolved; baselines regenerated via canonical container",
           "reviewer_findings": "APPROVE zero unresolved; 8 residuals carried; ADR-011 generator wording corrected and re-confirmed",
           "authority_changes": "evidence_policy 1.1.0->1.2.0 (display_label_ar); new config/ui_strings.v1.yaml 1.0.0 (hashed); Core 01/02/09 v2 markers; ADR-011; build_manifests.py run twice (justified)",
           "tests": "377 default (3.12 and 3.14) + 118 functional + 4 visual Chromium nodes (122)",
@@ -666,7 +666,7 @@
           "implementer": "gpt-5.6-sol-max (agent f1587e62)",
           "reviewer": "cursor-grok-4.6-xhigh (agent e6fd5b79)",
           "plan_rounds": 2,
-          "supervisor_findings": "PR-01 computed export/import ratio, PR-02 R4_D coverage key (thresholds 1.2.0), PR-03 Arabic strings (catalogue 1.1.0), PR-04 single generator run, RI-01 ledger; SR-01 live-v2 vs converted-v1 equality test \u2014 all resolved",
+          "supervisor_findings": "PR-01 computed export/import ratio, PR-02 R4_D coverage key (thresholds 1.2.0), PR-03 Arabic strings (catalogue 1.1.0), PR-04 single generator run, RI-01 ledger; SR-01 live-v2 vs converted-v1 equality test — all resolved",
           "reviewer_findings": "APPROVE zero unresolved; 9 residuals carried; independent recalculation of steel/PP metrics",
           "authority_changes": "schema v2 snapshots (IDs unchanged, v1 byte-identical in historical/v1), thresholds 1.2.0, ui_strings 1.1.0, Core 02/04/07/09 v2, ADR-012, one generator run",
           "tests": "506 default (3.12/3.14) + 118 functional + 4 visual Chromium nodes; goldens exact",
@@ -694,7 +694,7 @@
           },
           "planner": "planner-fable (claude-fable-5-1-thinking-max) through attempt 6; owner-representative editorial attempt 7; reviewer-grok plan APPROVE",
           "implementer": "implementer-composer (composer-2.5-fast) slots 1-3",
-          "reviewer": "reviewer-grok (cursor-grok-4.6-xhigh) \u2014 slot 1 REJECT, slot 2 REJECT, slot 3 APPROVE with zero findings",
+          "reviewer": "reviewer-grok (cursor-grok-4.6-xhigh) — slot 1 REJECT, slot 2 REJECT, slot 3 APPROVE with zero findings",
           "tests": "811 default + 118 functional + 4 visual; PR and main CI 5/5",
           "authority_changes": "decision narratives 1.0.0 (110 EN/AR keys), sector profiles 1.1.0, evidence policy 1.3.0, Core 02/04/07/09, ADR-013, generated manifests",
           "closes": [
@@ -722,8 +722,8 @@
             "sha256": "05f105f1a7f352adc64ff482484d0c12b7c435219fc101cf277067a7fe32b104"
           },
           "planner": "planner-fable (claude-fable-5-1-thinking-max)",
-          "implementer": "implementer-composer (composer-2.5-fast) \u2014 slots 1-3",
-          "reviewer": "reviewer-grok (cursor-grok-4.6-xhigh) \u2014 slots 1-2 REJECT, slot 3 APPROVE with zero findings",
+          "implementer": "implementer-composer (composer-2.5-fast) — slots 1-3",
+          "reviewer": "reviewer-grok (cursor-grok-4.6-xhigh) — slots 1-2 REJECT, slot 3 APPROVE with zero findings",
           "tests": "867 default + 118 functional + 4 visual; PR and main CI 5/5",
           "authority_changes": "scenario 2.0.0, evidence_policy 1.4.0, decision_narratives 1.1.0, Core 01/02/04/06/07/09 v2, ADR-014, two justified build_manifests runs",
           "closes": [
@@ -748,16 +748,16 @@
             "sha256": "8efbf0bee22fca59606c8ef4a09ea4eb6450010d44b9bb6d5b3ceeeea97edfb6"
           },
           "planner": "planner-fable (claude-fable-5-1-thinking-max)",
-          "implementer": "implementer-composer (composer-2.5-fast) \u2014 candidate 6 plan-6 delta (DD-25/DD-26)",
+          "implementer": "implementer-composer (composer-2.5-fast) — candidate 6 plan-6 delta (DD-25/DD-26)",
           "reviewer": "Post-merge review GREEN (approved child decomposition dependency_receipt); historical reviewer entry retained in candidate_history",
           "tests": "see PR #14 checks",
-          "notes": "T8-GATE n=1 partners snapshot; CI-F-01 shallow-git-diff on acc00092; owner rulings 3\u20134; P5-F01 corrected in plan-6 verification[35]; frozen raw/manifest/config/core/browser bytes unchanged",
+          "notes": "T8-GATE n=1 partners snapshot; CI-F-01 shallow-git-diff on acc00092; owner rulings 3–4; P5-F01 corrected in plan-6 verification[35]; frozen raw/manifest/config/core/browser bytes unchanged",
           "pr": "https://github.com/baramiSG/Industrial_mvp/pull/14",
           "merge_commit": "a043ed8dc1d477de50149b39de657bc963e785d7",
           "pr_ci_run": "see PR #14 checks",
           "main_ci_run": "see PR #14 checks",
           "candidate_history": {
-            "reviewer": "reviewer-grok (cursor-grok-4.6-xhigh) \u2014 pending candidate 6 review",
+            "reviewer": "reviewer-grok (cursor-grok-4.6-xhigh) — pending candidate 6 review",
             "tests": "1001+ default expected after plan-6 delta; candidate 5 baseline 990 passed"
           }
         },
@@ -774,15 +774,15 @@
             "supervisor": "session coordinator /root",
             "implementer": "session implementer /root/s12a_t4_connectors; earlier step contributors in slice log",
             "reviewer": "parent-dispatched independent step reviewers; final independent implementation review APPROVE zero defects (Claude Code claude-fable-5, 2026-09-12)",
-            "owner": "Salim \u2014 direct 2026-09-11 ruling"
+            "owner": "Salim — direct 2026-09-11 ruling"
           },
-          "source_outcomes": "Five ENDPOINT_UNVERIFIED / INCOMPLETE zero-request attempts, no institutional rows or snapshots; KL-47\u201351",
+          "source_outcomes": "Five ENDPOINT_UNVERIFIED / INCOMPLETE zero-request attempts, no institutional rows or snapshots; KL-47–51",
           "framework_proof": "TESTED with test-only parsers; existing S11 reconstruction 1 snapshot / 4 artifacts",
           "manifest_recorded_at": "2026-09-11T22:31:25Z",
           "manifest_runs": 1,
           "manifest_status": "Single T11 run exited 0; immediate S11 identity oracle passed; authority table mirrored; T12 all 26 executable gates passed; no generation remains authorized",
           "tests": "1755 default + 118 functional + 4 visual Chromium; PR and main CI 5/5",
-          "notes": "Five institutional attempts ENDPOINT_UNVERIFIED, zero requests, no institutional rows or snapshots (KL-47\u201351); S11/frozen bytes unchanged; merge tree equals reviewed candidate tree; no S12b work",
+          "notes": "Five institutional attempts ENDPOINT_UNVERIFIED, zero requests, no institutional rows or snapshots (KL-47–51); S11/frozen bytes unchanged; merge tree equals reviewed candidate tree; no S12b work",
           "pr": "https://github.com/baramiSG/Industrial_mvp/pull/15",
           "merge_commit": "cc85cbcaa8e1537d8751cced6881dae65791b1f5",
           "records": ".workflow/slices/S12a-acquisition-framework-institutional-sources/",
@@ -790,9 +790,9 @@
           "pr_head": "825b81d6626d82965b38aad0c08ce25141af680a",
           "pr_ci_run": "34669143106",
           "main_ci_run": "34669431254",
-          "implementer": "Codex session coordinator gpt-5.6-sol (high), T0\u2013T12 with step-level read-only sub-reviews",
-          "reviewer": "independent implementation review APPROVE zero defects \u2014 Claude Code claude-fable-5 (six review agents); make ci and 4 visual tests not rerun by reviewer, exercised by hosted CI on exact head",
-          "owner": "Salim \u2014 direct 2026-09-11 implementation ruling; 2026-09-12 delegation to owner lead agent (OD-S12a-1 identity/approval preserved, OD-S12a-2 merge approved)"
+          "implementer": "Codex session coordinator gpt-5.6-sol (high), T0–T12 with step-level read-only sub-reviews",
+          "reviewer": "independent implementation review APPROVE zero defects — Claude Code claude-fable-5 (six review agents); make ci and 4 visual tests not rerun by reviewer, exercised by hosted CI on exact head",
+          "owner": "Salim — direct 2026-09-11 implementation ruling; 2026-09-12 delegation to owner lead agent (OD-S12a-1 identity/approval preserved, OD-S12a-2 merge approved)"
         },
         "s12b-document-store-disclosures-tenders": {
           "state": "MERGED",
@@ -804,16 +804,16 @@
           },
           "seats": {
             "planner": "planner-fable (claude-fable-5-1-thinking-max)",
-            "implementer": "implementer-composer (composer-2.5-fast) slots 1\u20133; implementer-fable (claude-fable-5-1-thinking-max) slot 4; implementer-sol (gpt-5.6-sol-max) slot 5 final correction under OR-3/OD-13",
-            "reviewer": "reviewer-grok \u2014 plan APPROVE; implementation slot 3 REJECT (S12B-IR3-F01/F02); Fable reviewer (OR-3) \u2014 slot 5 REJECT (S12B-IR5-F01/F02), final APPROVE zero findings on 5258e7d4\u2026 (disclosure: slot-4 implementer session shared the reviewer's model)"
+            "implementer": "implementer-composer (composer-2.5-fast) slots 1–3; implementer-fable (claude-fable-5-1-thinking-max) slot 4; implementer-sol (gpt-5.6-sol-max) slot 5 final correction under OR-3/OD-13",
+            "reviewer": "reviewer-grok — plan APPROVE; implementation slot 3 REJECT (S12B-IR3-F01/F02); Fable reviewer (OR-3) — slot 5 REJECT (S12B-IR5-F01/F02), final APPROVE zero findings on 5258e7d4… (disclosure: slot-4 implementer session shared the reviewer's model)"
           },
-          "source_outcomes": "Twelve COMPLETE DocumentRecords (saso_documents 6, producer_unicoil 6) from T7-v3; all twelve rebuilt offline slot 5 from unchanged raw runs with corrected physical pages, page hashes and superseded ids (OD-13), document ids unchanged; five sources ENDPOINT_UNVERIFIED; KL-54\u201355 resolved; KL-56\u201365 open",
+          "source_outcomes": "Twelve COMPLETE DocumentRecords (saso_documents 6, producer_unicoil 6) from T7-v3; all twelve rebuilt offline slot 5 from unchanged raw runs with corrected physical pages, page hashes and superseded ids (OD-13), document ids unchanged; five sources ENDPOINT_UNVERIFIED; KL-54–55 resolved; KL-56–65 open",
           "framework_proof": "TESTED with document doubles/fixtures; all twelve record contracts and partner reconstruction 1 snapshot / 4 artifacts verified unchanged",
           "manifest_runs": 4,
           "manifest_recorded_at": "2026-09-12T05:26:47Z,2026-09-12T05:43:02Z,2026-09-12T06:37:37Z,2026-09-12T07:30:41Z",
           "manifest_status": "Four completed runs (T11 slot 2; OD-9 slot 3; OD-10 slot 4; OD-13 slot 5), all immediate [14] PASS; authorization exhausted, no fifth run",
           "records": ".workflow/slices/S12b-document-store-disclosures-tenders/",
-          "notes": "Twelve COMPLETE DocumentRecords (SASO 6 B, UNICOIL 6 C) with visual-order Arabic disclosed; five sources honest UNAVAILABLE (KL-56\u201360); four authorized manifest runs; S11/S12a and frozen bytes unchanged; merge tree equals reviewed candidate tree; no s12c work",
+          "notes": "Twelve COMPLETE DocumentRecords (SASO 6 B, UNICOIL 6 C) with visual-order Arabic disclosed; five sources honest UNAVAILABLE (KL-56–60); four authorized manifest runs; S11/S12a and frozen bytes unchanged; merge tree equals reviewed candidate tree; no s12c work",
           "candidate_identity": "5258e7d4dbc144d940792dcd57981e29d6faa1a301056fb9b26be0a00f3f674b",
           "pr": "https://github.com/baramiSG/Industrial_mvp/pull/17",
           "pr_head": "9b462e2cea441e1a269308c46cd637e949b76743",
@@ -821,7 +821,7 @@
           "merge_commit": "9a9d5c7562065437b2d763180e04e0402d430e0e",
           "main_ci_run": "34684108497",
           "tests": "1928 default + 118 functional + 4 visual Chromium; PR and main CI 5/5",
-          "owner": "Salim \u2014 OR-3 seat override 2026-09-12; owner lead agent OD-1..OD-16 (OD-15 acceptance, OD-16 merge approval)"
+          "owner": "Salim — OR-3 seat override 2026-09-12; owner lead agent OD-1..OD-16 (OD-15 acceptance, OD-16 merge approval)"
         },
         "s12c-entity-resolution-bilingual-ids": {
           "state": "MERGED",
@@ -834,7 +834,7 @@
           "seats": {
             "planner": "planner-fable",
             "implementer": "implementer-sol slot 1 under OD-9",
-            "reviewer": "reviewer-grok \u2014 plan APPROVE zero findings; implementation APPROVE zero findings on c2370180\u2026 (two non-blocking advisories)"
+            "reviewer": "reviewer-grok — plan APPROVE zero findings; implementation APPROVE zero findings on c2370180… (two non-blocking advisories)"
           },
           "entity_outcomes": "mentions-v1 has 38 builder-verified spans; artifact ENTITIES-2026-09-12-a12e24c31b02 has 5 COMPANY, 2 PLANT, 0 LINE, 0 LICENCE_HOLDER; 27 exact, 3 pending, 8 unresolved mention links",
           "framework_proof": "TESTED with doubles, real read-only artifact oracle and default manifest-checked reconstruction; no engine consumption",
@@ -895,7 +895,7 @@
           },
           "records": ".workflow/slices/S13b-bilingual-screening-surface/",
           "manifest_runs": 1,
-          "notes": "T0-T12 complete; SC-5 corrected under OD-16 (second WIP f9fec2d); one manifest run; reviewer-grok implementation APPROVE zero findings on 8fb01e4d\u2026 (advisory: this record refreshed by the owner lead before commit); delivery pending",
+          "notes": "T0-T12 complete; SC-5 corrected under OD-16 (second WIP f9fec2d); one manifest run; reviewer-grok implementation APPROVE zero findings on 8fb01e4d… (advisory: this record refreshed by the owner lead before commit); delivery pending",
           "wip_commits": [
             "d1d1462ce214f45b7fd286c6436a6bb2f0ca7f47",
             "f9fec2d72c118623e164564c2e2d4dd55f2c52b1"
@@ -922,12 +922,12 @@
           "path": ".autonomous-workflow/plans/s16-graph-backend/cycle-1/plan-1-s16.json",
           "sha256": "7e888e7a9b04d45579bfe799113a39066d4ea39e274aa2ceb5f573e0770d1b8d"
         },
-        "owner_rulings": "OD-1\u2026OD-22",
+        "owner_rulings": "OD-1…OD-22",
         "integration_conflicts": [
           "Makefile S15/S16 target union",
           "Core 02 S15/S16 mapping union",
           "case-selection and graph reconstruction union",
-          "KL-104\u2026KL-117 preservation plus graph KL-118\u2026KL-123",
+          "KL-104…KL-117 preservation plus graph KL-118…KL-123",
           "ADR-022/ADR-023 preservation plus graph ADR-024",
           "S14b/S15a/S16 integrity-contract union"
         ],
@@ -941,9 +941,9 @@
           "inputs": 219
         },
         "manifest_runs": 1,
-        "manifest_run_receipt": "2026-09-13T10:24:10Z; snapshot 698\u2192703 (five additions, zero prior-row changes); authority 19\u219220 (graph_views added; Core 02/03/04/09 changed)",
+        "manifest_run_receipt": "2026-09-13T10:24:10Z; snapshot 698→703 (five additions, zero prior-row changes); authority 19→20 (graph_views added; Core 02/03/04/09 changed)",
         "tests": "owner make ci: 2676 default + 339 functional + 4 visual; graph first/second load 740/835 then 0/0; portability PASS; clean merged-main integrity/pytest/smoke/reconstruction PASS",
-        "review": "reviewer-grok APPROVE zero findings on 040d442d\u2026; OD-20 correction-round APPROVE zero findings on 79f469dc\u2026",
+        "review": "reviewer-grok APPROVE zero findings on 040d442d…; OD-20 correction-round APPROVE zero findings on 79f469dc…",
         "delivery": {
           "pr": 31,
           "merge_commit": "71ed5586d3ba5ace355ddca6bb679f4a3ae65c69",
@@ -1156,6 +1156,124 @@
       "Required hosted checks, merge and main CI",
       "Separately reviewed live Aura checkpoint"
     ],
-    "history_note": "Historical ccd1/r4/stop records are preserved. No final-tree identity, S19 delivery or Aura completion is asserted."
+    "history_note": "Historical ccd1/r4/stop records are preserved. No final-tree identity, S19 delivery or Aura completion is asserted.",
+    "later_status_post_merge_record": {
+      "state": "IMPLEMENTATION_MERGED_MAIN_GREEN_RECORD_AWAITING_REVIEW",
+      "implementation_commit": "6962105b4bee575a6271d08fe892144c6e6c1063",
+      "implementation_parent": "ce407db9832b61c5a8a85dfda2e3b7623da2fbc9",
+      "implementation_tree": "7c25b4616679d61f173f3d9072e3240e1a2a166b",
+      "pr": 40,
+      "pr_url": "https://github.com/baramiSG/Industrial_mvp/pull/40",
+      "pr_head": "39614fcdd8d8eb9a96381c3d1b806343d5164419",
+      "pr_run": 36175983021,
+      "pr_attempt": 1,
+      "pr_jobs": "6/6 success",
+      "main_run": 36183985706,
+      "main_attempt": 1,
+      "main_event": "push",
+      "main_jobs": "6/6 success",
+      "merged_at": "2026-09-25T20:08:50Z",
+      "claude_implementation_review_sha256": "50f33c00593f2cfc756bb5d7284a52b04f8dbc2dbe861807c0d0e30c01943f24",
+      "claude_head_review_sha256": "684f95bf4dc8390a887e2c4c59b2dad174cbf4faa83af2f4fdbb06d713bfc6e3",
+      "delegated_implementation_acceptance_sha256": "534d242f02b089d80f20adb18ccb01bc9110b7a0094b95013be5b021c1227843",
+      "delegated_merge_release_sha256": "3fbd3d3435c36d119ae3ddf23c78af42c1e9a7baaece9117e494e2ec8c24313a",
+      "github_delivery_closure_sha256": "67c78cea71c99326abf6378040ddf5fc69730d63acaea27e82d3d6f18e1d9f91",
+      "evidence_prefix": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/",
+      "published_sources": {
+        "original_byte_copies": 74,
+        "sanitized_derivatives": 3,
+        "bridge": "SOURCE-TO-PUBLISHED-BRIDGE.json"
+      },
+      "closed_findings": [
+        "KL-33",
+        "KL-84",
+        "AR-V01",
+        "TRADE-SCALE-01"
+      ],
+      "retained_open": [
+        "KL-133",
+        "KL-134",
+        "KL-135",
+        "KL-136",
+        "KL-85",
+        "KL-107",
+        "missing demand and specification evidence",
+        "PDF-UA",
+        "unknown host-restart cause",
+        "route external-dependency label preference",
+        "units-after-status preference",
+        "live Aura checkpoint",
+        "independent review and delegated acceptance of this additive record"
+      ],
+      "record_candidate_tree": null,
+      "record_candidate_tree_note": "This object does not embed the additive record candidate tree. Approval and ordinary staging remain pending.",
+      "writer": "Cursor grok-4.7-high; Claude reviews stay the cited files"
+    },
+    "later_status_aura_result_20260926": {
+      "state": "AURA_RESULT_ACCEPTED_RECORDS_CANDIDATE_AWAITING_REVIEW",
+      "checkpoint_note": "later_status_post_merge_record.retained_open remains the 2026-09-25 list, including its live Aura checkpoint entry. The current retained_open list is the array in this object.",
+      "implementation_commit": "6962105b4bee575a6271d08fe892144c6e6c1063",
+      "implementation_tree": "7c25b4616679d61f173f3d9072e3240e1a2a166b",
+      "instance": "8a7338e0",
+      "projection": "GRAPH-SAU-2026-09-12-6f43b1a8c4aa",
+      "application_proof_sha256": "f4f0e725c84dcbdd3e3a053a8eb528ff3765c0c3926e569275005e05917af983",
+      "result_sha256": "ea8aea20fd8b66620adaabf869c0763247d5d8a38ae9195a61929a6e98fbb421",
+      "external_result_index_sha256": "c7ced65edb40b03d636d7e4c630a83701841cad3ceecaff04b65bf5bbd1ea083",
+      "claude_result_review_sha256": "c412150d99c92c6f0e5b42cac1d215f90afb2bd02625bc89a9751fdbd9e96dfa",
+      "delegated_acceptance_sha256": "a59e702c4658c15708544373bbbc2c5c390fa2ab708bb151fa46d6807db30e8a",
+      "evidence_index": ".workflow/slices/S19-bilingual-dossier/delivery-evidence/replacement-20260925/proof/post-merge-s19/aura/AURA-EVIDENCE-INDEX.md",
+      "published_aura_sources": 65,
+      "sanitized_aura_derivatives": 0,
+      "representative_images": 14,
+      "representative_image_bytes": 8480405,
+      "external_png_count": 448,
+      "prior_copies_unchanged": {
+        "original_byte_copies": 74,
+        "sanitized_derivatives": 3
+      },
+      "attribution": [
+        "Attempt 4 stock receipts reused; attempt 4 remains FAILED",
+        "Fixed-88 reused from attempt 2; zero new fixed-view queries",
+        "Initial AVAILABLE semantic API reused from attempt 3, including its browser failure",
+        "Three fresh API stages plus one semantic reuse",
+        "Restored after injected fault, not continuously available, and not an Aura outage"
+      ],
+      "coverage_limit_L1": "No claim of live browser verification of Class-D labels on a synthetic passport. Selected current-case passports were public, including simulated journeys.",
+      "removed_from_current_retained_open": [
+        "live Aura checkpoint"
+      ],
+      "retained_open": [
+        "KL-133",
+        "KL-134",
+        "KL-135",
+        "KL-136",
+        "KL-85",
+        "KL-107",
+        "missing demand and specification evidence",
+        "PDF-UA",
+        "unknown host-restart cause",
+        "route external-dependency label preference",
+        "units-after-status preference",
+        "unknown Aura session-expiry cause",
+        "unknown readonly-execution-1 interruption cause",
+        "S21",
+        "complete MVP acceptance",
+        "independent review, whitespace disposition and delivery of this additive record"
+      ],
+      "record_candidate_tree": null,
+      "record_candidate_tree_note": "This object does not embed the additive records candidate tree.",
+      "writer": "Cursor grok-4.7-high; Claude Aura review stays the cited file"
+    }
+  },
+  "delivery_workflow_update_20260926": {
+    "authority_record": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/owner-decisions/20260926-proportionate-delivery-workflow-update-1.json",
+    "authority_record_sha256": "1e86121756f47b1b00bbdf3025cb180bf2c046bcf6749e7504a8f56da0c8f961",
+    "scope": "Prospective proportionate verification and records publication under owner instruction; historical entries unchanged.",
+    "records_status": "ACCEPTED_EVIDENCE_ASSEMBLED_READY_FOR_CI",
+    "subject": "S19 already delivered in PR40; live Aura checkpoint independently approved and separately accepted.",
+    "routine_records_review": "Completed integrity and copy checks; no new independent product-review cycle required. Earlier pending records-review wording is the pre-update checkpoint.",
+    "remaining": "Publish records PR; all six required hosted checks; merge and verify main. Then approved Ministry sequence.",
+    "historical_whitespace": "153 locations/14 immutable logs accepted as a finite preservation exception; full check remains exit2; authored content clean.",
+    "product_completion": "No S21 or complete MVP claim."
   }
 }

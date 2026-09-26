@@ -1,0 +1,52 @@
+{
+  "utc": "2026-09-26T01:43:17.913658+00:00",
+  "status": "DELEGATED_RELEASE_ONE_EXACT_READONLY_CONTINUATION",
+  "actor": "Codex /root under owner operational delegation, not a personal-owner quotation or claimed owner inspection",
+  "reviewer": "Actual Claude CLI, claude.ai Max subscription; successful result equals final assistant text",
+  "review": "APPROVE targeted GO; Conditions 1\u20133 binding",
+  "bindings": [
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/reviews/s19-aura-readonly-continuation-go-review-20260926.md",
+      "sha256": "d4d616d3a80fc32bd8d624b0598c3470f6faae77c3ccf059b64514556b2b0b48"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/aura-readiness/readonly-continuation-1/SHA256SUMS",
+      "sha256": "6579584204a112d8b9f1ed9b82c9658261dd325ff22789ef962665912624b533"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/aura-readiness/readonly-continuation-1/run-readonly.py",
+      "sha256": "61c1bb3940e1dc177072ba20dfa270e729d469e261c1dacb1c6bd503c414df4c"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/aura-readiness/readonly-continuation-1/SUBJECTS.json",
+      "sha256": "b0e4dd2ff8c438a5d0be673e9f49ce894c37d3be72fd0d75cce082e4db3aa96a"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/coordinator-lock-reconciliation-20260926.json",
+      "sha256": "0abd829a7eafe3baebe15b59fb622e05f8e8846852d1988287c455f961381414"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/owner-decisions/20260925-industrial-mvp-operational-mandate-1.json",
+      "sha256": "9b91aba9997aa599992c96e920b5b3958364ccac11430b7e61006376a42201a7"
+    }
+  ],
+  "decision": "Run exact approved script once with prescribed RT/.venv/bin/python -B. Preserve existing coordinator lock. Fresh source/index/consumer/browser/target/fullNEW gates mandatory. No database mutation, clear, reload, install, generator or retry.",
+  "accepted_specific_reuse": [
+    "Attempt4 stock execution against freshly identical NEW",
+    "Attempt2 fixed88 (zero new queries claimed)",
+    "Attempt3 semantic AVAILABLE API88/two portfolios/11 decisions with fresh exact AVAILABLE status; no new initial API88 execution claimed"
+  ],
+  "required_fresh": [
+    "44 AVAILABLE browser journeys",
+    "NOT_CONFIGURED API88/two portfolios and two locales",
+    "CONNECTION_FAILED API88/two portfolios and two locales",
+    "Restored AVAILABLE API88/two portfolios/11 decisions and44 browser journeys",
+    "11 before/after decision hashes; full-after NEW/schema; source/index preservation and child cleanup"
+  ],
+  "failure": "Any failure is FAILED/UNKNOWN until separately re-inventoried. Pre-loop failure has no RESULT; retain whole wrapper stdout/stderr and exit. No blind retry or clear. New independent review required.",
+  "reporting": "Three fresh API stages plus one semantic reuse (attempt3); fixed88 reused; restored after fault, never continuously available; attempt4 FAILED with NEW retained, not recovered.",
+  "conditions_verbatim": "\n\n1. **One run, no retry.** Run it exactly as hashed, with `RT/.venv/bin/python -B`, under a fresh delegated release. On any failure, including a repeat of the transient `CONNECTION_FAILED` in the restored stage or in the browser stage:\n   - no clear and no retry;\n   - live state is reported UNKNOWN until a separate read-only inventory;\n   - a new independent review is required.\n2. **Pre-loop failure counts as UNKNOWN.** A failure before the `try` block (preservation, consumers, preflight, `complete()`) leaves no `RESULT.json`. The coordinator must record it as FAILED/UNKNOWN from the exit code and stderr, and must not re-run blindly.\n3. **Report wording must say:**\n   - \"three fresh API stages plus one semantic reuse (attempt 3)\";\n   - \"fixed-88 reused\";\n   - \"restored after fault\", never \"continuously available\";\n   - attempt 4 = FAILED, not recovered, NEW state retained.\n\n",
+  "pending": "Execution and independent result adjudication plus separate delegated acceptance. No S21 or MVP completion.",
+  "sanad": "Actual CLI stream/result/auth/exit, packet4 hashes and host-lock evidence verified. Prior bindings retained by referenced approved packet/subjects.",
+  "muhasabah": "PASS for narrow operational release; no future checks represented as complete."
+}

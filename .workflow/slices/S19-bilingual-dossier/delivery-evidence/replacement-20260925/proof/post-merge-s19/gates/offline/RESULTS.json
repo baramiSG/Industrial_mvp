@@ -1,0 +1,245 @@
+[
+  {
+    "name": "uv-sync-root2",
+    "argv": [
+      "/home/barami/.local/bin/uv",
+      "sync",
+      "--locked",
+      "--extra",
+      "dev",
+      "--extra",
+      "graph"
+    ],
+    "root": "/home/barami/.cache/industrial-opportunity-resolution-mvp/overnight-2026-09-23/s19-ops-final-r2/ci-root2",
+    "started_at_utc": "2026-09-25T14:49:44.877778+00:00",
+    "ended_at_utc": "2026-09-25T14:49:45.977410+00:00",
+    "exit_code": 0
+  },
+  {
+    "name": "uv-sync",
+    "argv": [
+      "/home/barami/.local/bin/uv",
+      "sync",
+      "--locked",
+      "--extra",
+      "dev",
+      "--extra",
+      "graph"
+    ],
+    "root": "/home/barami/.cache/industrial-opportunity-resolution-mvp/overnight-2026-09-23/s19-ops-final-r2/ci-root1",
+    "started_at_utc": "2026-09-25T14:49:45.977646+00:00",
+    "ended_at_utc": "2026-09-25T14:49:46.581143+00:00",
+    "exit_code": 0
+  },
+  {
+    "name": "offline-1",
+    "argv": [
+      "/home/barami/.local/bin/uv",
+      "run",
+      "--locked",
+      "--extra",
+      "dev",
+      "python",
+      "scripts/verify_integrity.py"
+    ],
+    "root": "/home/barami/.cache/industrial-opportunity-resolution-mvp/overnight-2026-09-23/s19-ops-final-r2/ci-root1",
+    "started_at_utc": "2026-09-25T14:49:46.581388+00:00",
+    "ended_at_utc": "2026-09-25T14:49:46.756149+00:00",
+    "exit_code": 0
+  },
+  {
+    "name": "offline-2",
+    "argv": [
+      "/home/barami/.local/bin/uv",
+      "run",
+      "--locked",
+      "--extra",
+      "dev",
+      "python",
+      "scripts/validate_scenarios.py"
+    ],
+    "root": "/home/barami/.cache/industrial-opportunity-resolution-mvp/overnight-2026-09-23/s19-ops-final-r2/ci-root1",
+    "started_at_utc": "2026-09-25T14:49:46.756529+00:00",
+    "ended_at_utc": "2026-09-25T14:49:46.967279+00:00",
+    "exit_code": 0
+  },
+  {
+    "name": "offline-3",
+    "argv": [
+      "/home/barami/.local/bin/uv",
+      "run",
+      "--locked",
+      "--extra",
+      "dev",
+      "python",
+      "scripts/reconstruct_snapshot.py",
+      "--all"
+    ],
+    "root": "/home/barami/.cache/industrial-opportunity-resolution-mvp/overnight-2026-09-23/s19-ops-final-r2/ci-root1",
+    "started_at_utc": "2026-09-25T14:49:46.967566+00:00",
+    "ended_at_utc": "2026-09-25T14:50:51.323080+00:00",
+    "exit_code": 0
+  },
+  {
+    "name": "offline-4",
+    "argv": [
+      "/home/barami/.local/bin/uv",
+      "run",
+      "--locked",
+      "--extra",
+      "dev",
+      "pytest",
+      "-q"
+    ],
+    "root": "/home/barami/.cache/industrial-opportunity-resolution-mvp/overnight-2026-09-23/s19-ops-final-r2/ci-root1",
+    "started_at_utc": "2026-09-25T14:50:51.323397+00:00",
+    "ended_at_utc": "2026-09-25T14:52:58.688493+00:00",
+    "exit_code": 0
+  },
+  {
+    "name": "offline-5",
+    "argv": [
+      "/home/barami/.local/bin/uv",
+      "run",
+      "--locked",
+      "--extra",
+      "dev",
+      "python",
+      "scripts/demo_smoke.py"
+    ],
+    "root": "/home/barami/.cache/industrial-opportunity-resolution-mvp/overnight-2026-09-23/s19-ops-final-r2/ci-root1",
+    "started_at_utc": "2026-09-25T14:52:58.689034+00:00",
+    "ended_at_utc": "2026-09-25T14:52:58.930453+00:00",
+    "exit_code": 0
+  },
+  {
+    "name": "offline-6",
+    "argv": [
+      "/home/barami/.local/bin/uv",
+      "run",
+      "--locked",
+      "--extra",
+      "dev",
+      "--extra",
+      "graph",
+      "python",
+      "-m",
+      "ior_mvp.graph",
+      "validate"
+    ],
+    "root": "/home/barami/.cache/industrial-opportunity-resolution-mvp/overnight-2026-09-23/s19-ops-final-r2/ci-root1",
+    "started_at_utc": "2026-09-25T14:52:58.930745+00:00",
+    "ended_at_utc": "2026-09-25T14:52:59.098297+00:00",
+    "exit_code": 0
+  },
+  {
+    "name": "offline-7",
+    "argv": [
+      "/home/barami/.local/bin/uv",
+      "run",
+      "--locked",
+      "--extra",
+      "dev",
+      "--extra",
+      "graph",
+      "python",
+      "-m",
+      "ior_mvp.graph",
+      "build",
+      "--check"
+    ],
+    "root": "/home/barami/.cache/industrial-opportunity-resolution-mvp/overnight-2026-09-23/s19-ops-final-r2/ci-root1",
+    "started_at_utc": "2026-09-25T14:52:59.098593+00:00",
+    "ended_at_utc": "2026-09-25T14:53:00.626321+00:00",
+    "exit_code": 0
+  },
+  {
+    "name": "scan-1",
+    "argv": [
+      "/home/barami/.local/bin/uv",
+      "run",
+      "--locked",
+      "--extra",
+      "dev",
+      "python",
+      "scripts/check_prohibited_files.py"
+    ],
+    "root": "/home/barami/.cache/industrial-opportunity-resolution-mvp/overnight-2026-09-23/s19-ops-final-r2/ci-root1",
+    "started_at_utc": "2026-09-25T14:53:00.626632+00:00",
+    "ended_at_utc": "2026-09-25T14:53:02.125638+00:00",
+    "exit_code": 0
+  },
+  {
+    "name": "scan-2",
+    "argv": [
+      "/home/barami/.local/bin/uv",
+      "run",
+      "--locked",
+      "--extra",
+      "dev",
+      "python",
+      "scripts/check_threshold_literals.py"
+    ],
+    "root": "/home/barami/.cache/industrial-opportunity-resolution-mvp/overnight-2026-09-23/s19-ops-final-r2/ci-root1",
+    "started_at_utc": "2026-09-25T14:53:02.125966+00:00",
+    "ended_at_utc": "2026-09-25T14:53:02.384495+00:00",
+    "exit_code": 0
+  },
+  {
+    "name": "scan-3",
+    "argv": [
+      "/home/barami/.local/bin/uv",
+      "run",
+      "--locked",
+      "--extra",
+      "dev",
+      "python",
+      "scripts/check_ui_contracts.py"
+    ],
+    "root": "/home/barami/.cache/industrial-opportunity-resolution-mvp/overnight-2026-09-23/s19-ops-final-r2/ci-root1",
+    "started_at_utc": "2026-09-25T14:53:02.384806+00:00",
+    "ended_at_utc": "2026-09-25T14:53:02.620922+00:00",
+    "exit_code": 0
+  },
+  {
+    "name": "scan-es",
+    "argv": [
+      "/home/barami/.local/bin/uv",
+      "run",
+      "--locked",
+      "--extra",
+      "dev",
+      "python",
+      "scripts/check_es_modules.py",
+      "--node",
+      "node"
+    ],
+    "root": "/home/barami/.cache/industrial-opportunity-resolution-mvp/overnight-2026-09-23/s19-ops-final-r2/ci-root1",
+    "started_at_utc": "2026-09-25T14:53:02.621316+00:00",
+    "ended_at_utc": "2026-09-25T14:53:03.458463+00:00",
+    "exit_code": 0
+  },
+  {
+    "name": "scan-compile",
+    "argv": [
+      "/home/barami/.local/bin/uv",
+      "run",
+      "--locked",
+      "--extra",
+      "dev",
+      "python",
+      "-m",
+      "compileall",
+      "-q",
+      "src",
+      "scripts",
+      "tests",
+      "browser_tests",
+      "graph_tests"
+    ],
+    "root": "/home/barami/.cache/industrial-opportunity-resolution-mvp/overnight-2026-09-23/s19-ops-final-r2/ci-root1",
+    "started_at_utc": "2026-09-25T14:53:03.458930+00:00",
+    "ended_at_utc": "2026-09-25T14:53:03.913566+00:00",
+    "exit_code": 0
+  }
+]

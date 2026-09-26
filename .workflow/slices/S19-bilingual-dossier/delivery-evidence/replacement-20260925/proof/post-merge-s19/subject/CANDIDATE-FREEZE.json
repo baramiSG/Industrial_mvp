@@ -1,0 +1,231 @@
+{
+  "status": "S19_CORRECTED_CANDIDATE_FROZEN_NOT_IMPLEMENTATION_APPROVED",
+  "at_utc": "2026-09-25T14:48:06.437460+00:00",
+  "source": "/home/barami/projects/ior-worktrees/s19",
+  "source_head": "ce407db9832b61c5a8a85dfda2e3b7623da2fbc9",
+  "branch": "slice/s19-bilingual-dossier",
+  "candidate_tree": "7c25b4616679d61f173f3d9072e3240e1a2a166b",
+  "proof_commit": "29bf5db55adaa57de2fa1f78aa5c9a028f31dc75",
+  "proof_commit_unreferenced_in_source": true,
+  "external_index": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/final-candidate-r2/candidate.index",
+  "external_index_sha256": "df9799affb938dc5bee60fa25a87d808aec392c5f54d561bf53d69c6c2f63ca8",
+  "candidate_paths": 1748,
+  "source_files": 3307,
+  "source_inventory_sha256": "f906a444da17be277755c8e403a4599db8d862a8db84f5799aa31d7469adbacb",
+  "correction_review_sha256": "0ae3903717455d5fe08e390779c0fd933b6d432b51f2baec992855ba13b25419",
+  "delegated_correction_acceptance_sha256": "80ef200ce5c5e47fc76739cd3139ec44db93952983ff1ebaba4fa82b9a814001",
+  "predecessor_failed_tree": "c746de8510fcc4da0557cd0be4a47fc42fd0aa7d",
+  "correction_paths": [
+    ".workflow/slices/S19-bilingual-dossier/implementation-log.md",
+    ".workflow/state.json",
+    "tests/test_static_frontend.py"
+  ],
+  "force_include_count": 74,
+  "scan_sha256": "63464c1d473b95178bcdd69314eeec6b4404a4695f2b4fe534278eeddd6f28f1",
+  "boundary_receipt_sha256": "8ee733d858f02e9315afa3226d48f09bd046c17184c1e3b62ce3c4cc9ab1aff3",
+  "diff_sha256": "1684e4fc27518f20da78b9638b7218cb19b61b034cc5fd4da6486f556f55c86d",
+  "archive_sha256": "6ec1cec0e2f81b4a1b4b82ab21c3c6a59512777b2ae71650f87b00594ac35deb",
+  "baseline_subtree": "65a71b382404295fdaf4b803cbf89d0e7a2984f6",
+  "prior_indexes_preserved": [
+    {
+      "path": "/home/barami/.cache/industrial-opportunity-resolution-mvp/s18-am3-final/candidate.index",
+      "sha256": "961805cb85db17b956aea2630347c5460147e7288c1c41ea2dfbf4930b8710a0"
+    },
+    {
+      "path": "/home/barami/.cache/industrial-opportunity-resolution-mvp/s18-am3-r1/candidate.index",
+      "sha256": "8f6b047be0f72ff4ec81221482d6bf94d0869efa7c36a927384cd001ebde6b52"
+    },
+    {
+      "path": "/home/barami/.cache/industrial-opportunity-resolution-mvp/s18-quota-checkpoint/candidate.index",
+      "sha256": "93a576938e42cfbcca77eda134659407c9d25cb431f9d056f84472d6f5f72f80"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s18b0/candidate-v1.index",
+      "sha256": "22c0a3069f87b4e41bebfd5f24c44016b69ba77051882ff3bcf00817eba3aafd"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s18b0/v2/candidate-v2.index",
+      "sha256": "461d0224ea251bb80bb28786f33a717c081bd289e22371ff65204165f9204bc1"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.git/index",
+      "sha256": "a3553d6eb1224e55a5f9350d6ead97aede1be5a0cb4932a1cedb9018bac1b45c"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.git/worktrees/baseline/index",
+      "sha256": "a44668c87a0c3983bbfed2259e0f1df6f6e3434af6209f90517799fbcc543e9e"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.git/worktrees/baseline1/index",
+      "sha256": "6309c8860abaca30484629cd39d04559001a1f39f6c0ee1869c88f13d420057d"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.git/worktrees/candidate/index",
+      "sha256": "0ffa9fde7d232a61e4bd204ecc2a349309a9aa32a18deb7c6479961cdb649c1c"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.git/worktrees/candidate1/index",
+      "sha256": "fd69c6915552a13ce9dc89a4ccddb454be72767fcd24b2122e874860f66ad197"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.git/worktrees/candidate2/index",
+      "sha256": "cf2e410eeace0a9e5cd0d873a985c82dd42a35b6a9b2d228732310caf181325d"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.git/worktrees/final-4-record-review/index",
+      "sha256": "2bce861ec0bec7fa223b6a9e43958cd7671b46445b7bfc085948636bda1368a4"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.git/worktrees/final-5-record-review/index",
+      "sha256": "5bed49bdad54a23ce37db2af07f4cd98ff59e5c2e0ec4ad7bad6ebca6e23bd08"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.git/worktrees/first-capture-inspection/index",
+      "sha256": "35cd675dab683b9a2e604cdac52f003bb365ee0469197b713685ea2bc072e6db"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.git/worktrees/merged-main-s15b/index",
+      "sha256": "d7b90d3dcd59a1281e721e63a0df41a44f673fd1ce2033054f9396a5864a369d"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.git/worktrees/merged-main/index",
+      "sha256": "70314ee43b8e4d45e0edd16d59d29bb2eedfd8ecaa6b5a992b31f6f5cf749cc7"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.git/worktrees/portability-r2/index",
+      "sha256": "1c77885b613e6d1e98d5806e1776464681b8bda037dc4650fe5755f2ed65392f"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.git/worktrees/portability-r21/index",
+      "sha256": "54614e982f094882a284bb67cb03c062601a05b3f449a014474e47172f9de9b8"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.git/worktrees/portability/index",
+      "sha256": "1aa0a815d41fbf75d8aebc5b497dee6736a8e33538b69f9c3a5a86ba52fe4f57"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.git/worktrees/portability1/index",
+      "sha256": "32e84aa467f3d95531d7bb1db1858d307d9fc549233c8dcb3b4e8b98e32588a0"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.git/worktrees/portability2/index",
+      "sha256": "b68547ea2c21fc1c748eb4ae8625202dc04b023a2eac54f2bdb29b320b10797a"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.git/worktrees/portability3/index",
+      "sha256": "2a8ddfda9281994396d399e426d73d850bf2b564217701abdfff5082e223a8e6"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.git/worktrees/portability4/index",
+      "sha256": "141ba2745aacb78411bea6805196382260dd2d1743d84f15c8f574d3d5ef78d0"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.git/worktrees/s14b/index",
+      "sha256": "9756e7932b5635c3ddd7daeda3d0e76a0a33317a0b879b1038027ed1e8221683"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.git/worktrees/s15a/index",
+      "sha256": "581fedd427389e38fecc6cfcaa96afb08ca6d8de1a0bd75b1c0647ecc657e3d9"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.git/worktrees/s15b/index",
+      "sha256": "83dcc1f2deda2bc86ea19efce79bda25c308cdb25e65c445f0240b94fc998d8c"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.git/worktrees/s15records/index",
+      "sha256": "38108c6a3f00fe3ac023459caf08f83c2587d52b2a56be3e1b5aaa144ad1422c"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.git/worktrees/s16a/index",
+      "sha256": "948f2701422dcad68c103375415c63aae186a613b8b5a7eb6bb2ae5c45053cca"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.git/worktrees/s16b/index",
+      "sha256": "07552b9f23ed84f7d459cc3b06a7404cf3c00f75e7f132f58ef3f9f767dbe4b6"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.git/worktrees/s16records/index",
+      "sha256": "ec2b3c9879aa53b515ae5fcc9b3d21e26007e992d516772768c3aa03a49ab004"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.git/worktrees/s17/index",
+      "sha256": "b1d18407b729a244dc7c33fe9fe0a456e5105c12002d4ee0ab50ea4f0cff0188"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.git/worktrees/s17records/index",
+      "sha256": "60a4bccb33cf784a11e6d68a821be084531a4c0fb6fa66fe859f5a0195c06143"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.git/worktrees/s18/index",
+      "sha256": "552601f4a3429db53e744b6a543a6e38d8564a4965bc237fec1f1251fc43e51f"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.git/worktrees/s18b/index",
+      "sha256": "18e2c8d62ab4ab4d2c462e764ab641d661d49bfe35452c89551b0a3bd15d4ae7"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.git/worktrees/s18b0/index",
+      "sha256": "968d082206606cfb25e945c0f45a8d2a199e863b48bbe2356803800f06c40f6f"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.git/worktrees/s19/index",
+      "sha256": "799d94a7b865644e0cd658e52687a9805224beb40c846f6403d0b87b3dd49722"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.git/worktrees/verification-r1/index",
+      "sha256": "1b3c2cc821aec14528db6235dd1f01b79370ae70c987f73713760e27b0c923a0"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.git/worktrees/verification-r2/index",
+      "sha256": "224db4ff8d3aa0c75102ff9ab89b312e615dabc59e0fb5e26d24571cdb00b723"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.git/worktrees/verification-r21/index",
+      "sha256": "50b4c60c24b25ff3a17e5e0dd084940ca0a9ddc632fbc87d76f1a110b9950d5e"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.git/worktrees/verification/index",
+      "sha256": "6d33cba03486730f3e2810a23be399fc7ed158b8b1f963ad801446f0f2d776d1"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.git/worktrees/verification1/index",
+      "sha256": "a9301a52de67d2d86c253648d2649c1f20ed7b91a4da67490ff61bbcda4a5654"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.git/worktrees/verification2/index",
+      "sha256": "c5e3b6e966ea62b15cdea46aed77a609b9e1d927c83a55383fa4193b218df055"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.git/worktrees/verification3/index",
+      "sha256": "360c1efbc8fe529680c06f18830d0e55a17c29085b85f9aa8fca65ac613fe11a"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.git/worktrees/verification4/index",
+      "sha256": "407e6b7988bd8820d1302d754173fbcec50c82fcb880c01bf860f2750433432b"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/s19/ops-final-r1/baseline.index",
+      "sha256": "f83e4247c2a868f5c3c17c791a8bc41faa4774748f7100e1a2331748b4331abf"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/final-assembly/baseline-pin.index",
+      "sha256": "2a671f8c939f8cdbb207069212be0e17d35f55c4e80062ec2576b998ccf4c4e2"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/final-candidate/candidate.index",
+      "sha256": "40610e872cefd773e68cd0ed3f8c11e8e6e3e63f45906efaa9b343d86df91942"
+    },
+    {
+      "path": "/home/barami/.cache/industrial-opportunity-resolution-mvp/overnight-2026-09-23/s19-ops-final-r1/ci-root1/.git/index",
+      "sha256": "4643ac63f5cb1928c133dddc5def7d811e1607fd16889ad7e950e6747cb7bd70"
+    },
+    {
+      "path": "/home/barami/.cache/industrial-opportunity-resolution-mvp/overnight-2026-09-23/s19-ops-final-r1/ci-root2/.git/index",
+      "sha256": "1f61f218d87a8fd5434f93e33eb0942fad99ce0eb36b244134cc3d91d0b59ea2"
+    }
+  ],
+  "ordinary_source_zero_staged": true,
+  "source_refs_unchanged": true,
+  "sanad": "Direct3307byte/mode/tree check, exact3reviewedcorrectionpaths/additivehistory, unchangedscannerzero,49oldindexes+refsunchanged.",
+  "muhasabah": "PASS freeze only. Fullpytest/R1/e2e/twoCI/implementationreview/delivery remain required. c746FAIL preserved."
+}

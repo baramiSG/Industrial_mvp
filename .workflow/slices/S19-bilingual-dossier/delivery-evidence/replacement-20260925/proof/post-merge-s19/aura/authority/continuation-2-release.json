@@ -1,0 +1,43 @@
+{
+  "utc": "2026-09-26T01:58:29.830925+00:00",
+  "status": "DELEGATED_RELEASE_SINGLE_READONLY_CONTINUATION_2",
+  "actor": "Codex delegated operational coordinator; not a personal-owner quotation or claimed owner inspection",
+  "reviewer": "Actual Claude subscription CLI; result equals final assistant text, success exit0",
+  "bindings": [
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/reviews/s19-aura-readonly-continuation-2-go-review-20260926.md",
+      "sha256": "9aa4a4abc964e2ea7772967eb5ffa03a313414fcf1665362d13a55cc8a59a5f3"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/aura-readiness/readonly-continuation-2/SHA256SUMS",
+      "sha256": "890b4c283125bbda0675a42a06430bcb5037a125a8c85418cf62ef248c23f860"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/aura-readiness/readonly-continuation-2/run-readonly.py",
+      "sha256": "6ee0acc90a4efa0b31b8d45c6c1fcbdbd6be75025c528b80da90dcb1bbdf3c72"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/aura-readiness/readonly-continuation-2/capture-exit.py",
+      "sha256": "8668160c169e7e38899ab30ac71be2dbb6b7c2d6c6a656ae9ee5f15bcddaa910"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/aura-readiness/readonly-interruption-1/INCIDENT.json",
+      "sha256": "300f40e7ab05bbefb8d67e54afe15d42b36c11138a8d68e1d45367056079f823"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/coordinator-lock-reconciliation-20260926.json",
+      "sha256": "0abd829a7eafe3baebe15b59fb622e05f8e8846852d1988287c455f961381414"
+    },
+    {
+      "path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/owner-decisions/20260926-s19-aura-readonly-continuation-release-1.json",
+      "sha256": "2628343fe88e86b260917f72383ec6421ab4b39b311fd3ad5e4cd6a57bc88e4f"
+    }
+  ],
+  "decision": "Execute exact capture-exit.py once in new subprocess session with exact read-only script. Fresh gates mandatory; no database mutation, clear, reload, install, generator, automatic retry or duplicate operation. Preservelock34210.",
+  "conditions_verbatim": "\n\n1. **Before launch:** confirm again the four hashes, a new delegated release, the lock identity, and that both output folders are absent. One launch only; no automatic retry.\n2. **Prove the new session.** `RUNNER.json` must show `session == process_group == wrapper pid`, and `START.json` must show the child in that same group. The launcher isn't a hashed artifact, so this receipt is the proof that it used `start_new_session`. If it doesn't hold, record a lifecycle deviation.\n3. **Chromium is outside the owned group.** Playwright 1.62's bundled launcher spawns the browser with `detached: process.platform !== \"win32\"` (`coreBundle.js`). That puts Chromium in its own process group, so \"stop the owned group\" does not reach it. If the run is stopped or interrupted:\n   - also check for surviving processes from the bound `PLAYWRIGHT_BROWSERS_PATH` executable;\n   - stop only processes that are provably children of this run (ancestry, start time after `RUNNER.utc`);\n   - never touch 34210 or unknown processes;\n   - then establish live state separately with the read-only inventory.\n4. **Classify the exit honestly:**\n   - missing `EXIT.json` or `RESULT.json` = INTERRUPTED/UNKNOWN;\n   - negative `rc` = terminated by signal;\n   - `rc == 1` = failed assertion, following conditions 1\u20132 of review `d4d616d3`;\n   - none of these is a pass.\n5. **Wording rules from review `d4d616d3` still apply:** \"three fresh API stages plus one semantic reuse (attempt 3)\", \"fixed-88 reused\", \"restored after fault\". Also record attempt 4 = FAILED, `readonly-execution-1` = INTERRUPTED and not counted, and the NEW state as retained.\n6. **Independent review:** the result needs an independent result review and separate delegated acceptance.\n\n",
+  "lifecycle": "Require RUNNER.session==RUNNER.process_group==wrapperPID; START.child group same. Retain host process ancestry/start identities for ownedbrowser identification. On interruption check boundbrowser executables too; Chromium has its own process group. Never signalunknowns/34210.",
+  "prior_reuse": "Prior semanticAPI andfixed88 reuse expresslyapproved unchanged; incomplete35images counttowardnothing. ThreefreshAPIstages+onesemanticreuse, fixed88reused, restoredafterfault only.",
+  "pending": "Execution, actual independent result adjudication and separate delegated acceptance. NoS21/MVPclaim.",
+  "sanad": "Actualpacket4hashes, completeindependentverdict/exit, incident/hostlock/freshinventorybound. Causeoftermination/Aurasessionexpiryunknown.",
+  "muhasabah": "PASS for conditional one-run release; no futureproof accepted."
+}

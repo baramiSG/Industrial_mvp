@@ -1,0 +1,36 @@
+/home/barami/.local/bin/uv sync --locked --extra dev --extra e2e
+/home/barami/.local/bin/uv run --locked --extra dev --extra e2e python scripts/check_browser_prerequisites.py
+BROWSER PREFLIGHT PASS
+playwright=1.62.0
+pytest-playwright=0.9.0
+chromium=/home/barami/.playwright-browsers/chromium-1234/chrome-linux64/chrome
+axe_sha256=c24f097bd2f451d4f933e8bc7d8d539f8672a2ebcb5cc9f9f3eec8ca9470a0c1
+font_family=DejaVu Sans
+font_file=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf
+product_fonts=IOR Noto Sans,IOR Noto Sans Arabic
+IOR_E2E_EXPLICIT=1 IOR_E2E_ARTIFACT_DIR=".artifacts/e2e" PYTHONPATH=src /home/barami/.local/bin/uv run --locked --extra dev --extra e2e pytest -q browser_tests --browser chromium --tracing retain-on-failure --screenshot only-on-failure --output=".artifacts/e2e/playwright" -m "e2e and not visual"
+........................................................................ [  8%]
+........................................................................ [ 17%]
+........................................................................ [ 25%]
+........................................................................ [ 34%]
+........................................................................ [ 42%]
+........................................................................ [ 51%]
+........................................................................ [ 60%]
+........................................................................ [ 68%]
+........................................................................ [ 77%]
+........................................................................ [ 85%]
+........................................................................ [ 94%]
+...............................................                          [100%]
+839 passed, 4 deselected in 2291.70s (0:38:11)
+/home/barami/.local/bin/uv run --locked --extra dev --extra e2e python scripts/check_browser_prerequisites.py
+BROWSER PREFLIGHT PASS
+playwright=1.62.0
+pytest-playwright=0.9.0
+chromium=/home/barami/.playwright-browsers/chromium-1234/chrome-linux64/chrome
+axe_sha256=c24f097bd2f451d4f933e8bc7d8d539f8672a2ebcb5cc9f9f3eec8ca9470a0c1
+font_family=DejaVu Sans
+font_file=/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf
+product_fonts=IOR Noto Sans,IOR Noto Sans Arabic
+IOR_E2E_EXPLICIT=1 IOR_E2E_ARTIFACT_DIR=".artifacts/e2e" PYTHONPATH=src /home/barami/.local/bin/uv run --locked --extra dev --extra e2e pytest -q browser_tests --browser chromium --tracing retain-on-failure --screenshot only-on-failure --output=".artifacts/e2e/playwright" -m visual
+....                                                                     [100%]
+4 passed, 839 deselected in 235.30s (0:03:55)

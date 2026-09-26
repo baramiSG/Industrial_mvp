@@ -1,0 +1,331 @@
+{
+  "aura_connection": false,
+  "compose_project": "ior-s19-aura-recovery-20260925",
+  "container": "ior-s19-aura-recovery-20260925",
+  "network": "ior-s19-aura-recovery-20260925-net",
+  "new_projection": "GRAPH-SAU-2026-09-12-6f43b1a8c4aa",
+  "observed_at_utc": "2026-09-25T21:49:02.721353+00:00",
+  "old_projection": "GRAPH-SAU-2026-09-12-461bf4840962",
+  "schema_version": 1,
+  "source_tree": "7c25b4616679d61f173f3d9072e3240e1a2a166b",
+  "stages": [
+    {
+      "name": "fresh_owned_volume_empty",
+      "result": {
+        "counts": {
+          "edges": 0,
+          "nodes": 0
+        },
+        "projection_id": null,
+        "synthetic_partition": {
+          "public_nodes": 0,
+          "synthetic_nodes": 0
+        }
+      }
+    },
+    {
+      "name": "load_old",
+      "result": {
+        "nodes_created": 925,
+        "projection_id": "GRAPH-SAU-2026-09-12-461bf4840962",
+        "properties_set": 37139,
+        "relationships_created": 1045,
+        "target": "compose"
+      }
+    },
+    {
+      "name": "verify_old",
+      "result": {
+        "counts_by_label": {
+          "Application": 22,
+          "Capability": 342,
+          "Certification": 1,
+          "Company": 12,
+          "CustomerSegment": 11,
+          "Decision": 22,
+          "Equipment": 0,
+          "Evidence": 229,
+          "Input": 0,
+          "Intervention": 199,
+          "Plant": 14,
+          "Process": 7,
+          "Product": 11,
+          "ProductionLine": 11,
+          "Scenario": 11,
+          "Specification": 22,
+          "Standard": 10,
+          "TariffLine": 1,
+          "Technology": 0
+        },
+        "counts_by_type": {
+          "ADJACENT_TO": 18,
+          "CERTIFIED_TO": 2,
+          "CONSTRAINED_BY": 119,
+          "DEPENDS_ON": 198,
+          "HAS_CAPABILITY": 342,
+          "HAS_LINE": 11,
+          "PRODUCED_BY": 18,
+          "QUALIFIED_FOR": 11,
+          "REQUIRES_SPECIFICATION": 44,
+          "SUPPORTED_BY_EVIDENCE": 245,
+          "UNLOCKED_BY": 2,
+          "USED_IN": 22,
+          "USES_PROCESS": 13
+        },
+        "edge_count": 1045,
+        "node_count": 925,
+        "partition_valid": true,
+        "projection_id": "GRAPH-SAU-2026-09-12-461bf4840962",
+        "provenance_complete": true,
+        "synthetic_partition": {
+          "public_nodes": 410,
+          "synthetic_nodes": 515
+        },
+        "target": "compose"
+      }
+    },
+    {
+      "name": "full_old_equality",
+      "result": {
+        "edges": 1045,
+        "full_edge_properties_and_endpoints_equal": true,
+        "full_node_properties_equal": true,
+        "nodes": 925,
+        "projection_id": "GRAPH-SAU-2026-09-12-461bf4840962"
+      }
+    },
+    {
+      "name": "planned_clear",
+      "result": {
+        "counts": {
+          "edges": 0,
+          "nodes": 0
+        },
+        "projection_id": null,
+        "synthetic_partition": {
+          "public_nodes": 0,
+          "synthetic_nodes": 0
+        }
+      }
+    },
+    {
+      "name": "expected_injected_partial_load_failure",
+      "result": {
+        "exception_type": "GraphConnectionFailure"
+      }
+    },
+    {
+      "name": "partial_new_state_observed",
+      "result": {
+        "counts": {
+          "edges": 0,
+          "nodes": 56
+        },
+        "projection_id": "GRAPH-SAU-2026-09-12-6f43b1a8c4aa",
+        "synthetic_partition": {
+          "public_nodes": 34,
+          "synthetic_nodes": 22
+        }
+      }
+    },
+    {
+      "name": "recovery_clear_partial",
+      "result": {
+        "counts": {
+          "edges": 0,
+          "nodes": 0
+        },
+        "projection_id": null,
+        "synthetic_partition": {
+          "public_nodes": 0,
+          "synthetic_nodes": 0
+        }
+      }
+    },
+    {
+      "name": "recovery_load_old",
+      "result": {
+        "nodes_created": 925,
+        "projection_id": "GRAPH-SAU-2026-09-12-461bf4840962",
+        "properties_set": 37139,
+        "relationships_created": 1045,
+        "target": "compose"
+      }
+    },
+    {
+      "name": "recovery_idempotence",
+      "result": {
+        "nodes_created": 0,
+        "projection_id": "GRAPH-SAU-2026-09-12-461bf4840962",
+        "properties_set": 35169,
+        "relationships_created": 0,
+        "target": "compose"
+      }
+    },
+    {
+      "name": "recovery_verify_old",
+      "result": {
+        "counts_by_label": {
+          "Application": 22,
+          "Capability": 342,
+          "Certification": 1,
+          "Company": 12,
+          "CustomerSegment": 11,
+          "Decision": 22,
+          "Equipment": 0,
+          "Evidence": 229,
+          "Input": 0,
+          "Intervention": 199,
+          "Plant": 14,
+          "Process": 7,
+          "Product": 11,
+          "ProductionLine": 11,
+          "Scenario": 11,
+          "Specification": 22,
+          "Standard": 10,
+          "TariffLine": 1,
+          "Technology": 0
+        },
+        "counts_by_type": {
+          "ADJACENT_TO": 18,
+          "CERTIFIED_TO": 2,
+          "CONSTRAINED_BY": 119,
+          "DEPENDS_ON": 198,
+          "HAS_CAPABILITY": 342,
+          "HAS_LINE": 11,
+          "PRODUCED_BY": 18,
+          "QUALIFIED_FOR": 11,
+          "REQUIRES_SPECIFICATION": 44,
+          "SUPPORTED_BY_EVIDENCE": 245,
+          "UNLOCKED_BY": 2,
+          "USED_IN": 22,
+          "USES_PROCESS": 13
+        },
+        "edge_count": 1045,
+        "node_count": 925,
+        "partition_valid": true,
+        "projection_id": "GRAPH-SAU-2026-09-12-461bf4840962",
+        "provenance_complete": true,
+        "synthetic_partition": {
+          "public_nodes": 410,
+          "synthetic_nodes": 515
+        },
+        "target": "compose"
+      }
+    },
+    {
+      "name": "recovery_full_old_equality",
+      "result": {
+        "edges": 1045,
+        "full_edge_properties_and_endpoints_equal": true,
+        "full_node_properties_equal": true,
+        "nodes": 925,
+        "projection_id": "GRAPH-SAU-2026-09-12-461bf4840962"
+      }
+    },
+    {
+      "name": "successful_replacement_load_new",
+      "result": {
+        "nodes_created": 925,
+        "projection_id": "GRAPH-SAU-2026-09-12-6f43b1a8c4aa",
+        "properties_set": 37139,
+        "relationships_created": 1045,
+        "target": "compose"
+      }
+    },
+    {
+      "name": "successful_replacement_idempotence",
+      "result": {
+        "nodes_created": 0,
+        "projection_id": "GRAPH-SAU-2026-09-12-6f43b1a8c4aa",
+        "properties_set": 35169,
+        "relationships_created": 0,
+        "target": "compose"
+      }
+    },
+    {
+      "name": "successful_replacement_verify",
+      "result": {
+        "counts_by_label": {
+          "Application": 22,
+          "Capability": 342,
+          "Certification": 1,
+          "Company": 12,
+          "CustomerSegment": 11,
+          "Decision": 22,
+          "Equipment": 0,
+          "Evidence": 229,
+          "Input": 0,
+          "Intervention": 199,
+          "Plant": 14,
+          "Process": 7,
+          "Product": 11,
+          "ProductionLine": 11,
+          "Scenario": 11,
+          "Specification": 22,
+          "Standard": 10,
+          "TariffLine": 1,
+          "Technology": 0
+        },
+        "counts_by_type": {
+          "ADJACENT_TO": 18,
+          "CERTIFIED_TO": 2,
+          "CONSTRAINED_BY": 119,
+          "DEPENDS_ON": 198,
+          "HAS_CAPABILITY": 342,
+          "HAS_LINE": 11,
+          "PRODUCED_BY": 18,
+          "QUALIFIED_FOR": 11,
+          "REQUIRES_SPECIFICATION": 44,
+          "SUPPORTED_BY_EVIDENCE": 245,
+          "UNLOCKED_BY": 2,
+          "USED_IN": 22,
+          "USES_PROCESS": 13
+        },
+        "edge_count": 1045,
+        "node_count": 925,
+        "partition_valid": true,
+        "projection_id": "GRAPH-SAU-2026-09-12-6f43b1a8c4aa",
+        "provenance_complete": true,
+        "synthetic_partition": {
+          "public_nodes": 410,
+          "synthetic_nodes": 515
+        },
+        "target": "compose"
+      }
+    },
+    {
+      "name": "successful_replacement_exact",
+      "result": {
+        "edges": 1045,
+        "full_edge_properties_and_endpoints_equal": true,
+        "full_node_properties_equal": true,
+        "nodes": 925,
+        "projection_id": "GRAPH-SAU-2026-09-12-6f43b1a8c4aa"
+      }
+    },
+    {
+      "name": "successful_inverse_load_old",
+      "result": {
+        "nodes_created": 925,
+        "projection_id": "GRAPH-SAU-2026-09-12-461bf4840962",
+        "properties_set": 37139,
+        "relationships_created": 1045,
+        "target": "compose"
+      }
+    },
+    {
+      "name": "successful_inverse_exact",
+      "result": {
+        "edges": 1045,
+        "full_edge_properties_and_endpoints_equal": true,
+        "full_node_properties_equal": true,
+        "nodes": 925,
+        "projection_id": "GRAPH-SAU-2026-09-12-461bf4840962"
+      }
+    }
+  ],
+  "status": "LOCAL_REPLACEMENT_AND_FAILURE_RECOVERY_PASS",
+  "target": "disposable_local_compose",
+  "volume": "ior-s19-aura-recovery-20260925-data"
+}

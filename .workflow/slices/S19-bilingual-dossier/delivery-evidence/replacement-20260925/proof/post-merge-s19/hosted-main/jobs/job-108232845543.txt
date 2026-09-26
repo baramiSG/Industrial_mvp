@@ -1,0 +1,662 @@
+﻿2026-09-25T20:08:57.4209686Z Current runner version: '2.337.0'
+2026-09-25T20:08:57.4244015Z ##[group]Runner Image Provisioner
+2026-09-25T20:08:57.4245372Z Hosted Compute Agent
+2026-09-25T20:08:57.4246540Z Version: 20260828.587
+2026-09-25T20:08:57.4247775Z Commit: abac92662cab4cc7352de4f9f9d2e2419aad9c29
+2026-09-25T20:08:57.4249140Z Build Date: 2026-08-28T16:44:25Z
+2026-09-25T20:08:57.4250586Z Worker ID: {28cb66a2-fb3a-4940-9cd8-2de1d200b368}
+2026-09-25T20:08:57.4251775Z Azure Region: eastus
+2026-09-25T20:08:57.4253207Z ##[endgroup]
+2026-09-25T20:08:57.4255854Z ##[group]Operating System
+2026-09-25T20:08:57.4257197Z Ubuntu
+2026-09-25T20:08:57.4258260Z 24.04.5
+2026-09-25T20:08:57.4259085Z LTS
+2026-09-25T20:08:57.4259962Z ##[endgroup]
+2026-09-25T20:08:57.4260945Z ##[group]Runner Image
+2026-09-25T20:08:57.4262004Z Image: ubuntu-24.04
+2026-09-25T20:08:57.4263076Z Version: 20260920.314.1
+2026-09-25T20:08:57.4265146Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260920.314/images/ubuntu/Ubuntu2404-Readme.md
+2026-09-25T20:08:57.4268135Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260920.314
+2026-09-25T20:08:57.4269925Z ##[endgroup]
+2026-09-25T20:08:57.4271785Z ##[group]GITHUB_TOKEN Permissions
+2026-09-25T20:08:57.4274793Z Contents: read
+2026-09-25T20:08:57.4275745Z Metadata: read
+2026-09-25T20:08:57.4276908Z ##[endgroup]
+2026-09-25T20:08:57.4279932Z Secret source: Actions
+2026-09-25T20:08:57.4281454Z Cache mode: write
+2026-09-25T20:08:57.4283227Z Prepare workflow directory
+2026-09-25T20:08:57.4766627Z Prepare all required actions
+2026-09-25T20:08:57.4837770Z Getting action download info
+2026-09-25T20:08:57.6914327Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+2026-09-25T20:08:57.7814674Z Download action repository 'actions/setup-python@v5' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+2026-09-25T20:08:57.9715942Z Complete job name: pip / Python 3.12
+2026-09-25T20:08:58.0536597Z ##[group]Run actions/checkout@v4
+2026-09-25T20:08:58.0537582Z with:
+2026-09-25T20:08:58.0538033Z   persist-credentials: false
+2026-09-25T20:08:58.0538572Z   repository: baramiSG/Industrial_mvp
+2026-09-25T20:08:58.0542354Z   token: ***
+2026-09-25T20:08:58.0542791Z   ssh-strict: true
+2026-09-25T20:08:58.0543236Z   ssh-user: git
+2026-09-25T20:08:58.0543663Z   clean: true
+2026-09-25T20:08:58.0544114Z   sparse-checkout-cone-mode: true
+2026-09-25T20:08:58.0544646Z   fetch-depth: 1
+2026-09-25T20:08:58.0545076Z   fetch-tags: false
+2026-09-25T20:08:58.0545523Z   show-progress: true
+2026-09-25T20:08:58.0545974Z   lfs: false
+2026-09-25T20:08:58.0546579Z   submodules: false
+2026-09-25T20:08:58.0547040Z   set-safe-directory: true
+2026-09-25T20:08:58.0547557Z   allow-unsafe-pr-checkout: false
+2026-09-25T20:08:58.0548402Z ##[endgroup]
+2026-09-25T20:08:58.1616800Z Syncing repository: baramiSG/Industrial_mvp
+2026-09-25T20:08:58.1619206Z ##[group]Getting Git version info
+2026-09-25T20:08:58.1620666Z Working directory is '/home/runner/work/Industrial_mvp/Industrial_mvp'
+2026-09-25T20:08:58.1621829Z [command]/usr/bin/git version
+2026-09-25T20:08:58.1694924Z git version 2.55.0
+2026-09-25T20:08:58.1749042Z ##[endgroup]
+2026-09-25T20:08:58.1764077Z Temporarily overriding HOME='/home/runner/work/_temp/e7a7d527-55d4-4dea-a699-bac28caef05f' before making global git config changes
+2026-09-25T20:08:58.1765826Z Adding repository directory to the temporary git global config as a safe directory
+2026-09-25T20:08:58.1767364Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Industrial_mvp/Industrial_mvp
+2026-09-25T20:08:58.1818656Z Deleting the contents of '/home/runner/work/Industrial_mvp/Industrial_mvp'
+2026-09-25T20:08:58.1823132Z ##[group]Initializing the repository
+2026-09-25T20:08:58.1828725Z [command]/usr/bin/git init /home/runner/work/Industrial_mvp/Industrial_mvp
+2026-09-25T20:08:58.1943222Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-09-25T20:08:58.1945208Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-09-25T20:08:58.1947012Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-09-25T20:08:58.1947954Z hint: call:
+2026-09-25T20:08:58.1948446Z hint:
+2026-09-25T20:08:58.1949028Z hint: 	git config --global init.defaultBranch <name>
+2026-09-25T20:08:58.1949724Z hint:
+2026-09-25T20:08:58.1950388Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-09-25T20:08:58.1951476Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-09-25T20:08:58.1952337Z hint:
+2026-09-25T20:08:58.1952809Z hint: 	git branch -m <name>
+2026-09-25T20:08:58.1953355Z hint:
+2026-09-25T20:08:58.1954079Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-09-25T20:08:58.1960328Z Initialized empty Git repository in /home/runner/work/Industrial_mvp/Industrial_mvp/.git/
+2026-09-25T20:08:58.1971612Z [command]/usr/bin/git remote add origin https://github.com/baramiSG/Industrial_mvp
+2026-09-25T20:08:58.2025069Z ##[endgroup]
+2026-09-25T20:08:58.2026067Z ##[group]Disabling automatic garbage collection
+2026-09-25T20:08:58.2029456Z [command]/usr/bin/git config --local gc.auto 0
+2026-09-25T20:08:58.2063377Z ##[endgroup]
+2026-09-25T20:08:58.2064385Z ##[group]Setting up auth
+2026-09-25T20:08:58.2071111Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-09-25T20:08:58.2107904Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-09-25T20:08:58.2509230Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-09-25T20:08:58.2549251Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-09-25T20:08:58.2780324Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-09-25T20:08:58.2817808Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-09-25T20:08:58.3048171Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-09-25T20:08:58.3089948Z ##[endgroup]
+2026-09-25T20:08:58.3090799Z ##[group]Fetching the repository
+2026-09-25T20:08:58.3100007Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +6962105b4bee575a6271d08fe892144c6e6c1063:refs/remotes/origin/main
+2026-09-25T20:09:00.5947598Z From https://github.com/baramiSG/Industrial_mvp
+2026-09-25T20:09:00.5959726Z  * [new ref]         6962105b4bee575a6271d08fe892144c6e6c1063 -> origin/main
+2026-09-25T20:09:00.5962044Z ##[endgroup]
+2026-09-25T20:09:00.5962831Z ##[group]Determining the checkout info
+2026-09-25T20:09:00.5963763Z ##[endgroup]
+2026-09-25T20:09:00.5966045Z [command]/usr/bin/git sparse-checkout disable
+2026-09-25T20:09:00.6028672Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-09-25T20:09:00.6067303Z ##[group]Checking out the ref
+2026-09-25T20:09:00.6073374Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+2026-09-25T20:09:01.3958034Z Switched to a new branch 'main'
+2026-09-25T20:09:01.3977473Z branch 'main' set up to track 'origin/main'.
+2026-09-25T20:09:01.4034114Z ##[endgroup]
+2026-09-25T20:09:01.4082532Z [command]/usr/bin/git log -1 --format=%H
+2026-09-25T20:09:01.4110285Z 6962105b4bee575a6271d08fe892144c6e6c1063
+2026-09-25T20:09:01.4119921Z ##[group]Removing auth
+2026-09-25T20:09:01.4123507Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-09-25T20:09:01.4157810Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-09-25T20:09:01.4389751Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-09-25T20:09:01.4418950Z http.https://github.com/.extraheader
+2026-09-25T20:09:01.4425992Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-09-25T20:09:01.4461460Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-09-25T20:09:01.4685564Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-09-25T20:09:01.4717142Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-09-25T20:09:01.4944096Z ##[endgroup]
+2026-09-25T20:09:01.5207396Z ##[group]Run actions/setup-python@v5
+2026-09-25T20:09:01.5207845Z with:
+2026-09-25T20:09:01.5208146Z   python-version: 3.12
+2026-09-25T20:09:01.5208486Z   cache: pip
+2026-09-25T20:09:01.5208819Z   cache-dependency-path: pyproject.toml
+2026-09-25T20:09:01.5209231Z   check-latest: false
+2026-09-25T20:09:01.5212151Z   token: ***
+2026-09-25T20:09:01.5212477Z   update-environment: true
+2026-09-25T20:09:01.5212842Z   allow-prereleases: false
+2026-09-25T20:09:01.5213189Z   freethreaded: false
+2026-09-25T20:09:01.5213504Z ##[endgroup]
+2026-09-25T20:09:01.6613118Z ##[group]Installed versions
+2026-09-25T20:09:01.6707118Z (node:2331) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-09-25T20:09:01.6708872Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-09-25T20:09:01.6709981Z Successfully set up CPython (3.12.14)
+2026-09-25T20:09:01.6711244Z ##[endgroup]
+2026-09-25T20:09:01.7025303Z [command]/opt/hostedtoolcache/Python/3.12.14/x64/bin/pip cache dir
+2026-09-25T20:09:02.0185365Z /home/runner/.cache/pip
+2026-09-25T20:09:02.1149460Z Cache hit for: setup-python-Linux-x64-24.04-Ubuntu-python-3.12.14-pip-8b5caba00eeb236b981f097f49d470ab523f2cadf55445b95ea144f9811664b0
+2026-09-25T20:09:02.1261547Z (node:2331) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-09-25T20:09:02.2968655Z Received 16022401 of 16022401 (100.0%), 101.9 MBs/sec
+2026-09-25T20:09:02.2969355Z Cache Size: ~15 MB (16022401 B)
+2026-09-25T20:09:02.2997739Z [command]/usr/bin/tar -xf /home/runner/work/_temp/90e63b97-1ac0-4b47-96ab-84b3835e7c86/cache.tzst -P -C /home/runner/work/Industrial_mvp/Industrial_mvp --use-compress-program unzstd
+2026-09-25T20:09:02.3492688Z Cache restored successfully
+2026-09-25T20:09:02.3509777Z Cache restored from key: setup-python-Linux-x64-24.04-Ubuntu-python-3.12.14-pip-8b5caba00eeb236b981f097f49d470ab523f2cadf55445b95ea144f9811664b0
+2026-09-25T20:09:02.3701286Z ##[group]Run python -m pip install -e ".[dev]"
+2026-09-25T20:09:02.3701815Z [36;1mpython -m pip install -e ".[dev]"[0m
+2026-09-25T20:09:02.4045243Z shell: /usr/bin/bash -e {0}
+2026-09-25T20:09:02.4045682Z env:
+2026-09-25T20:09:02.4046322Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-25T20:09:02.4047033Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+2026-09-25T20:09:02.4047709Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-25T20:09:02.4048325Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-25T20:09:02.4048919Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-25T20:09:02.4049513Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+2026-09-25T20:09:02.4050016Z ##[endgroup]
+2026-09-25T20:09:03.0779769Z Obtaining file:///home/runner/work/Industrial_mvp/Industrial_mvp
+2026-09-25T20:09:03.0797147Z   Installing build dependencies: started
+2026-09-25T20:09:03.7442778Z   Installing build dependencies: finished with status 'done'
+2026-09-25T20:09:03.7448728Z   Checking if build backend supports build_editable: started
+2026-09-25T20:09:04.1373341Z   Checking if build backend supports build_editable: finished with status 'done'
+2026-09-25T20:09:04.1382055Z   Getting requirements to build editable: started
+2026-09-25T20:09:04.5055302Z   Getting requirements to build editable: finished with status 'done'
+2026-09-25T20:09:04.5064150Z   Preparing editable metadata (pyproject.toml): started
+2026-09-25T20:09:04.7156764Z   Preparing editable metadata (pyproject.toml): finished with status 'done'
+2026-09-25T20:09:04.8047605Z Collecting fastapi<1,>=0.110 (from industrial-opportunity-resolution-mvp==0.2.0)
+2026-09-25T20:09:04.8062701Z   Using cached fastapi-0.141.1-py3-none-any.whl.metadata (27 kB)
+2026-09-25T20:09:04.8439209Z Collecting uvicorn<1,>=0.29 (from uvicorn[standard]<1,>=0.29->industrial-opportunity-resolution-mvp==0.2.0)
+2026-09-25T20:09:04.8911983Z   Downloading uvicorn-0.54.0-py3-none-any.whl.metadata (6.6 kB)
+2026-09-25T20:09:04.9267887Z Collecting PyYAML<7,>=6 (from industrial-opportunity-resolution-mvp==0.2.0)
+2026-09-25T20:09:04.9281259Z   Using cached pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.4 kB)
+2026-09-25T20:09:04.9621838Z Collecting pytest<9,>=8 (from industrial-opportunity-resolution-mvp==0.2.0)
+2026-09-25T20:09:04.9634653Z   Using cached pytest-8.4.2-py3-none-any.whl.metadata (7.7 kB)
+2026-09-25T20:09:04.9792361Z Collecting httpx<1,>=0.27 (from industrial-opportunity-resolution-mvp==0.2.0)
+2026-09-25T20:09:04.9804783Z   Using cached httpx-0.28.1-py3-none-any.whl.metadata (7.1 kB)
+2026-09-25T20:09:04.9983099Z Collecting pypdf==6.16.1 (from industrial-opportunity-resolution-mvp==0.2.0)
+2026-09-25T20:09:04.9995392Z   Using cached pypdf-6.16.1-py3-none-any.whl.metadata (7.5 kB)
+2026-09-25T20:09:05.0261898Z Collecting starlette>=0.46.0 (from fastapi<1,>=0.110->industrial-opportunity-resolution-mvp==0.2.0)
+2026-09-25T20:09:05.0294693Z   Downloading starlette-1.7.0-py3-none-any.whl.metadata (6.6 kB)
+2026-09-25T20:09:05.1253766Z Collecting pydantic>=2.9.0 (from fastapi<1,>=0.110->industrial-opportunity-resolution-mvp==0.2.0)
+2026-09-25T20:09:05.1268186Z   Using cached pydantic-2.13.5-py3-none-any.whl.metadata (110 kB)
+2026-09-25T20:09:05.1440574Z Collecting typing-extensions>=4.8.0 (from fastapi<1,>=0.110->industrial-opportunity-resolution-mvp==0.2.0)
+2026-09-25T20:09:05.1453699Z   Using cached typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+2026-09-25T20:09:05.1538175Z Collecting typing-inspection>=0.4.2 (from fastapi<1,>=0.110->industrial-opportunity-resolution-mvp==0.2.0)
+2026-09-25T20:09:05.1550794Z   Using cached typing_inspection-0.4.4-py3-none-any.whl.metadata (2.6 kB)
+2026-09-25T20:09:05.1629604Z Collecting annotated-doc>=0.0.2 (from fastapi<1,>=0.110->industrial-opportunity-resolution-mvp==0.2.0)
+2026-09-25T20:09:05.1642052Z   Using cached annotated_doc-0.0.5-py3-none-any.whl.metadata (6.5 kB)
+2026-09-25T20:09:05.1799297Z Collecting anyio (from httpx<1,>=0.27->industrial-opportunity-resolution-mvp==0.2.0)
+2026-09-25T20:09:05.1811322Z   Using cached anyio-4.15.1-py3-none-any.whl.metadata (4.7 kB)
+2026-09-25T20:09:05.1967200Z Collecting certifi (from httpx<1,>=0.27->industrial-opportunity-resolution-mvp==0.2.0)
+2026-09-25T20:09:05.1979612Z   Using cached certifi-2026.7.22-py3-none-any.whl.metadata (2.5 kB)
+2026-09-25T20:09:05.2109429Z Collecting httpcore==1.* (from httpx<1,>=0.27->industrial-opportunity-resolution-mvp==0.2.0)
+2026-09-25T20:09:05.2121969Z   Using cached httpcore-1.0.9-py3-none-any.whl.metadata (21 kB)
+2026-09-25T20:09:05.2258137Z Collecting idna (from httpx<1,>=0.27->industrial-opportunity-resolution-mvp==0.2.0)
+2026-09-25T20:09:05.2290005Z   Downloading idna-3.20-py3-none-any.whl.metadata (7.2 kB)
+2026-09-25T20:09:05.2407369Z Collecting h11>=0.16 (from httpcore==1.*->httpx<1,>=0.27->industrial-opportunity-resolution-mvp==0.2.0)
+2026-09-25T20:09:05.2418783Z   Using cached h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+2026-09-25T20:09:05.2508591Z Collecting iniconfig>=1 (from pytest<9,>=8->industrial-opportunity-resolution-mvp==0.2.0)
+2026-09-25T20:09:05.2521474Z   Using cached iniconfig-2.3.0-py3-none-any.whl.metadata (2.5 kB)
+2026-09-25T20:09:05.2613857Z Collecting packaging>=20 (from pytest<9,>=8->industrial-opportunity-resolution-mvp==0.2.0)
+2026-09-25T20:09:05.2626867Z   Using cached packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+2026-09-25T20:09:05.2723290Z Collecting pluggy<2,>=1.5 (from pytest<9,>=8->industrial-opportunity-resolution-mvp==0.2.0)
+2026-09-25T20:09:05.2735451Z   Using cached pluggy-1.6.0-py3-none-any.whl.metadata (4.8 kB)
+2026-09-25T20:09:05.2900712Z Collecting pygments>=2.7.2 (from pytest<9,>=8->industrial-opportunity-resolution-mvp==0.2.0)
+2026-09-25T20:09:05.2912933Z   Using cached pygments-2.21.0-py3-none-any.whl.metadata (2.5 kB)
+2026-09-25T20:09:05.3069356Z Collecting click>=7.0 (from uvicorn<1,>=0.29->uvicorn[standard]<1,>=0.29->industrial-opportunity-resolution-mvp==0.2.0)
+2026-09-25T20:09:05.3081700Z   Using cached click-8.5.0-py3-none-any.whl.metadata (2.6 kB)
+2026-09-25T20:09:05.3349803Z Collecting httptools>=0.8.0 (from uvicorn[standard]<1,>=0.29->industrial-opportunity-resolution-mvp==0.2.0)
+2026-09-25T20:09:05.3362657Z   Using cached httptools-0.8.0-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (3.5 kB)
+2026-09-25T20:09:05.3486477Z Collecting python-dotenv>=0.13 (from uvicorn[standard]<1,>=0.29->industrial-opportunity-resolution-mvp==0.2.0)
+2026-09-25T20:09:05.3498734Z   Using cached python_dotenv-1.2.3-py3-none-any.whl.metadata (29 kB)
+2026-09-25T20:09:05.3839924Z Collecting uvloop>=0.15.1 (from uvicorn[standard]<1,>=0.29->industrial-opportunity-resolution-mvp==0.2.0)
+2026-09-25T20:09:05.3852284Z   Using cached uvloop-0.22.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (4.9 kB)
+2026-09-25T20:09:05.4558501Z Collecting watchfiles>=0.20 (from uvicorn[standard]<1,>=0.29->industrial-opportunity-resolution-mvp==0.2.0)
+2026-09-25T20:09:05.4590009Z   Downloading watchfiles-1.3.0-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.9 kB)
+2026-09-25T20:09:05.5578872Z Collecting websockets>=13.0 (from uvicorn[standard]<1,>=0.29->industrial-opportunity-resolution-mvp==0.2.0)
+2026-09-25T20:09:05.5593135Z   Using cached websockets-17.1-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (6.3 kB)
+2026-09-25T20:09:05.5714979Z Collecting annotated-types>=0.6.0 (from pydantic>=2.9.0->fastapi<1,>=0.110->industrial-opportunity-resolution-mvp==0.2.0)
+2026-09-25T20:09:05.5726974Z   Using cached annotated_types-0.8.0-py3-none-any.whl.metadata (15 kB)
+2026-09-25T20:09:06.1888728Z Collecting pydantic-core==2.46.5 (from pydantic>=2.9.0->fastapi<1,>=0.110->industrial-opportunity-resolution-mvp==0.2.0)
+2026-09-25T20:09:06.1902228Z   Using cached pydantic_core-2.46.5-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.6 kB)
+2026-09-25T20:09:06.2069495Z Using cached pypdf-6.16.1-py3-none-any.whl (382 kB)
+2026-09-25T20:09:06.2082753Z Using cached fastapi-0.141.1-py3-none-any.whl (131 kB)
+2026-09-25T20:09:06.2094932Z Using cached httpx-0.28.1-py3-none-any.whl (73 kB)
+2026-09-25T20:09:06.2106811Z Using cached httpcore-1.0.9-py3-none-any.whl (78 kB)
+2026-09-25T20:09:06.2118882Z Using cached pytest-8.4.2-py3-none-any.whl (365 kB)
+2026-09-25T20:09:06.2131271Z Using cached pluggy-1.6.0-py3-none-any.whl (20 kB)
+2026-09-25T20:09:06.2143473Z Using cached pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (807 kB)
+2026-09-25T20:09:06.2185058Z Downloading uvicorn-0.54.0-py3-none-any.whl (87 kB)
+2026-09-25T20:09:06.2297099Z Using cached annotated_doc-0.0.5-py3-none-any.whl (5.3 kB)
+2026-09-25T20:09:06.2308829Z Using cached click-8.5.0-py3-none-any.whl (125 kB)
+2026-09-25T20:09:06.2320524Z Using cached h11-0.16.0-py3-none-any.whl (37 kB)
+2026-09-25T20:09:06.2332551Z Using cached httptools-0.8.0-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (523 kB)
+2026-09-25T20:09:06.2345576Z Using cached iniconfig-2.3.0-py3-none-any.whl (7.5 kB)
+2026-09-25T20:09:06.2357303Z Using cached packaging-26.3-py3-none-any.whl (129 kB)
+2026-09-25T20:09:06.2369018Z Using cached pydantic-2.13.5-py3-none-any.whl (472 kB)
+2026-09-25T20:09:06.2382339Z Using cached pydantic_core-2.46.5-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.1 MB)
+2026-09-25T20:09:06.2401738Z Using cached annotated_types-0.8.0-py3-none-any.whl (13 kB)
+2026-09-25T20:09:06.2413219Z Using cached pygments-2.21.0-py3-none-any.whl (1.3 MB)
+2026-09-25T20:09:06.2429493Z Using cached python_dotenv-1.2.3-py3-none-any.whl (22 kB)
+2026-09-25T20:09:06.2467340Z Downloading starlette-1.7.0-py3-none-any.whl (78 kB)
+2026-09-25T20:09:06.2503599Z Using cached anyio-4.15.1-py3-none-any.whl (132 kB)
+2026-09-25T20:09:06.2542693Z Downloading idna-3.20-py3-none-any.whl (69 kB)
+2026-09-25T20:09:06.2574450Z Using cached typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+2026-09-25T20:09:06.2586080Z Using cached typing_inspection-0.4.4-py3-none-any.whl (14 kB)
+2026-09-25T20:09:06.2598305Z Using cached uvloop-0.22.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (4.4 MB)
+2026-09-25T20:09:06.2650947Z Downloading watchfiles-1.3.0-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (458 kB)
+2026-09-25T20:09:06.2714122Z Using cached websockets-17.1-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (224 kB)
+2026-09-25T20:09:06.2726080Z Using cached certifi-2026.7.22-py3-none-any.whl (136 kB)
+2026-09-25T20:09:06.3491933Z Building wheels for collected packages: industrial-opportunity-resolution-mvp
+2026-09-25T20:09:06.3500527Z   Building editable for industrial-opportunity-resolution-mvp (pyproject.toml): started
+2026-09-25T20:09:06.5952599Z   Building editable for industrial-opportunity-resolution-mvp (pyproject.toml): finished with status 'done'
+2026-09-25T20:09:06.5958306Z   Created wheel for industrial-opportunity-resolution-mvp: filename=industrial_opportunity_resolution_mvp-0.2.0-0.editable-py3-none-any.whl size=7886 sha256=2532d082f7993373ba5d33096d91fc2d7306e86b60fc6cccd030a51015ed131e
+2026-09-25T20:09:06.5959966Z   Stored in directory: /tmp/pip-ephem-wheel-cache-i_cj0wkw/wheels/df/3b/82/08c022be7864f60c7ee357f0e45118b927d33c8a4d86658268
+2026-09-25T20:09:06.5981578Z Successfully built industrial-opportunity-resolution-mvp
+2026-09-25T20:09:06.6546696Z Installing collected packages: websockets, uvloop, typing-extensions, PyYAML, python-dotenv, pypdf, pygments, pluggy, packaging, iniconfig, idna, httptools, h11, click, certifi, annotated-types, annotated-doc, uvicorn, typing-inspection, pytest, pydantic-core, httpcore, anyio, watchfiles, starlette, pydantic, httpx, fastapi, industrial-opportunity-resolution-mvp
+2026-09-25T20:09:09.3716768Z 
+2026-09-25T20:09:09.3746959Z Successfully installed PyYAML-6.0.3 annotated-doc-0.0.5 annotated-types-0.8.0 anyio-4.15.1 certifi-2026.7.22 click-8.5.0 fastapi-0.141.1 h11-0.16.0 httpcore-1.0.9 httptools-0.8.0 httpx-0.28.1 idna-3.20 industrial-opportunity-resolution-mvp-0.2.0 iniconfig-2.3.0 packaging-26.3 pluggy-1.6.0 pydantic-2.13.5 pydantic-core-2.46.5 pygments-2.21.0 pypdf-6.16.1 pytest-8.4.2 python-dotenv-1.2.3 starlette-1.7.0 typing-extensions-4.16.0 typing-inspection-0.4.4 uvicorn-0.54.0 uvloop-0.22.1 watchfiles-1.3.0 websockets-17.1
+2026-09-25T20:09:09.4933397Z ##[group]Run python scripts/check_prohibited_files.py
+2026-09-25T20:09:09.4933861Z [36;1mpython scripts/check_prohibited_files.py[0m
+2026-09-25T20:09:09.5001014Z shell: /usr/bin/bash -e {0}
+2026-09-25T20:09:09.5001289Z env:
+2026-09-25T20:09:09.5001570Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-25T20:09:09.5002035Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+2026-09-25T20:09:09.5002495Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-25T20:09:09.5002917Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-25T20:09:09.5003331Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-25T20:09:09.5003920Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+2026-09-25T20:09:09.5004267Z ##[endgroup]
+2026-09-25T20:09:11.3402927Z PROHIBITED FILE SCAN PASS (3307 tracked files)
+2026-09-25T20:09:11.3603698Z ##[group]Run python scripts/check_threshold_literals.py
+2026-09-25T20:09:11.3604146Z [36;1mpython scripts/check_threshold_literals.py[0m
+2026-09-25T20:09:11.3667848Z shell: /usr/bin/bash -e {0}
+2026-09-25T20:09:11.3668131Z env:
+2026-09-25T20:09:11.3668431Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-25T20:09:11.3668931Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+2026-09-25T20:09:11.3669427Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-25T20:09:11.3669874Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-25T20:09:11.3670318Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-25T20:09:11.3670760Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+2026-09-25T20:09:11.3671145Z ##[endgroup]
+2026-09-25T20:09:11.9000443Z THRESHOLD LITERAL SCAN PASS (104 Python files; 24 configured numeric values)
+2026-09-25T20:09:11.9110648Z ##[group]Run python scripts/check_ui_contracts.py
+2026-09-25T20:09:11.9111053Z [36;1mpython scripts/check_ui_contracts.py[0m
+2026-09-25T20:09:11.9174737Z shell: /usr/bin/bash -e {0}
+2026-09-25T20:09:11.9174992Z env:
+2026-09-25T20:09:11.9175261Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-25T20:09:11.9175722Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+2026-09-25T20:09:11.9176429Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-25T20:09:11.9176879Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-25T20:09:11.9177305Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-25T20:09:11.9177721Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+2026-09-25T20:09:11.9178069Z ##[endgroup]
+2026-09-25T20:09:12.3490674Z UI CONTRACT CHECK PASS
+2026-09-25T20:09:12.3615503Z ##[group]Run python -m compileall -q src scripts tests graph_tests
+2026-09-25T20:09:12.3616039Z [36;1mpython -m compileall -q src scripts tests graph_tests[0m
+2026-09-25T20:09:12.3678512Z shell: /usr/bin/bash -e {0}
+2026-09-25T20:09:12.3678777Z env:
+2026-09-25T20:09:12.3679052Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-25T20:09:12.3679515Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+2026-09-25T20:09:12.3679965Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-25T20:09:12.3680368Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-25T20:09:12.3680784Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-25T20:09:12.3681206Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+2026-09-25T20:09:12.3681541Z ##[endgroup]
+2026-09-25T20:09:13.0625805Z ##[group]Run python scripts/check_es_modules.py --node node
+2026-09-25T20:09:13.0626875Z [36;1mpython scripts/check_es_modules.py --node node[0m
+2026-09-25T20:09:13.0698319Z shell: /usr/bin/bash -e {0}
+2026-09-25T20:09:13.0698585Z env:
+2026-09-25T20:09:13.0698868Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-25T20:09:13.0699333Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+2026-09-25T20:09:13.0699788Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-25T20:09:13.0700176Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-25T20:09:13.0700578Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-25T20:09:13.0700980Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+2026-09-25T20:09:13.0701313Z ##[endgroup]
+2026-09-25T20:09:14.6280573Z ES MODULE CHECK PASS (51 files)
+2026-09-25T20:09:14.6382152Z ##[group]Run PYTHONPATH=src python scripts/verify_integrity.py
+2026-09-25T20:09:14.6382649Z [36;1mPYTHONPATH=src python scripts/verify_integrity.py[0m
+2026-09-25T20:09:14.6446482Z shell: /usr/bin/bash -e {0}
+2026-09-25T20:09:14.6446752Z env:
+2026-09-25T20:09:14.6447225Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-25T20:09:14.6447682Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+2026-09-25T20:09:14.6448125Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-25T20:09:14.6448526Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-25T20:09:14.6448932Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-25T20:09:14.6449332Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+2026-09-25T20:09:14.6449665Z ##[endgroup]
+2026-09-25T20:09:14.8437768Z INTEGRITY PASS
+2026-09-25T20:09:14.8439677Z - data/manifests/snapshot_manifest.json
+2026-09-25T20:09:14.8440497Z - docs/authority/authority_hashes.json
+2026-09-25T20:09:14.8518625Z ##[group]Run PYTHONPATH=src python scripts/validate_scenarios.py
+2026-09-25T20:09:14.8519126Z [36;1mPYTHONPATH=src python scripts/validate_scenarios.py[0m
+2026-09-25T20:09:14.8582476Z shell: /usr/bin/bash -e {0}
+2026-09-25T20:09:14.8582770Z env:
+2026-09-25T20:09:14.8583058Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-25T20:09:14.8583528Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+2026-09-25T20:09:14.8584005Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-25T20:09:14.8584428Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-25T20:09:14.8584846Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-25T20:09:14.8585271Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+2026-09-25T20:09:14.8585620Z ##[endgroup]
+2026-09-25T20:09:15.1434101Z SCENARIO VALIDATION PASS (11 scenarios)
+2026-09-25T20:09:15.1435355Z - SYN-MINISTRY-ALU-FOIL-001.json scenario=SYN-MINISTRY-ALU-FOIL-001 opportunity=SAU-H6-760711 status=PASS
+2026-09-25T20:09:15.1436596Z   target_spec_demand_within_public_imports: PASS - 40 kt <= 53.6793 kt.
+2026-09-25T20:09:15.1437610Z   line_nameplate_within_disclosed_public_capacity: NOT_APPLICABLE - No numeric public installed nameplate is disclosed.
+2026-09-25T20:09:15.1438613Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].
+2026-09-25T20:09:15.1439537Z   qualified_availability_within_physical_output: NOT_APPLICABLE - No qualified_available_kt is declared.
+2026-09-25T20:09:15.1440594Z   demand_layers_remain_separate: INFORMATIONAL - Demand layers are reported separately; no ordering constraint is enforced.
+2026-09-25T20:09:15.1441679Z   tariff_line_allocation_sums_to_public_hs6_total: NOT_APPLICABLE - No tariff_line_allocation block is declared.
+2026-09-25T20:09:15.1442629Z   buyer_allocation_within_public_imports: NOT_APPLICABLE - No buyer_allocation block is declared.
+2026-09-25T20:09:15.1443557Z   expansion_assumption_disclosed_and_bounded: NOT_APPLICABLE - No expansion_assumption block is declared.
+2026-09-25T20:09:15.1444537Z   retained_flows_reconcile_to_public_trade: NOT_APPLICABLE - No production_and_retained_flows block is declared.
+2026-09-25T20:09:15.1445571Z   base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.
+2026-09-25T20:09:15.1446784Z   shared_enabler_declaration_valid: PASS - Shared-enabler declaration and explicit valuation source are valid.
+2026-09-25T20:09:15.1447487Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.
+2026-09-25T20:09:15.1448260Z - SYN-MINISTRY-ALU-PROFILES-001.json scenario=SYN-MINISTRY-ALU-PROFILES-001 opportunity=SAU-H6-760429 status=PASS
+2026-09-25T20:09:15.1448961Z   target_spec_demand_within_public_imports: PASS - 6 kt <= 9.18984 kt.
+2026-09-25T20:09:15.1449645Z   line_nameplate_within_disclosed_public_capacity: NOT_APPLICABLE - No numeric public installed nameplate is disclosed.
+2026-09-25T20:09:15.1450430Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].
+2026-09-25T20:09:15.1451044Z   qualified_availability_within_physical_output: PASS - 2.5 kt <= 30.6 kt.
+2026-09-25T20:09:15.1451989Z   demand_layers_remain_separate: INFORMATIONAL - Demand layers are reported separately; no ordering constraint is enforced.
+2026-09-25T20:09:15.1452934Z   tariff_line_allocation_sums_to_public_hs6_total: PASS - Tariff-line quantities sum to 9.18984 kt against public imports 9.18984 kt.
+2026-09-25T20:09:15.1453818Z   buyer_allocation_within_public_imports: PASS - Buyer quantities sum to 6 kt within public imports 9.18984 kt.
+2026-09-25T20:09:15.1454603Z   expansion_assumption_disclosed_and_bounded: NOT_APPLICABLE - No expansion_assumption block is declared.
+2026-09-25T20:09:15.1455353Z   retained_flows_reconcile_to_public_trade: PASS - Retained flows reconcile to public trade marginals.
+2026-09-25T20:09:15.1456491Z   base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.
+2026-09-25T20:09:15.1457370Z   shared_enabler_declaration_valid: PASS - Shared-enabler declaration and explicit valuation source are valid.
+2026-09-25T20:09:15.1458043Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.
+2026-09-25T20:09:15.1458808Z - SYN-MINISTRY-FERT-RETAIL-PACKS-001.json scenario=SYN-MINISTRY-FERT-RETAIL-PACKS-001 opportunity=SAU-H6-310510 status=PASS
+2026-09-25T20:09:15.1459524Z   target_spec_demand_within_public_imports: PASS - 1.2229 kt <= 2.44581 kt.
+2026-09-25T20:09:15.1460190Z   line_nameplate_within_disclosed_public_capacity: NOT_APPLICABLE - No numeric public installed nameplate is disclosed.
+2026-09-25T20:09:15.1460940Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].
+2026-09-25T20:09:15.1461622Z   qualified_availability_within_physical_output: NOT_APPLICABLE - No qualified_available_kt is declared.
+2026-09-25T20:09:15.1462408Z   demand_layers_remain_separate: INFORMATIONAL - Demand layers are reported separately; no ordering constraint is enforced.
+2026-09-25T20:09:15.1463209Z   tariff_line_allocation_sums_to_public_hs6_total: NOT_APPLICABLE - No tariff_line_allocation block is declared.
+2026-09-25T20:09:15.1463915Z   buyer_allocation_within_public_imports: NOT_APPLICABLE - No buyer_allocation block is declared.
+2026-09-25T20:09:15.1464602Z   expansion_assumption_disclosed_and_bounded: NOT_APPLICABLE - No expansion_assumption block is declared.
+2026-09-25T20:09:15.1465328Z   retained_flows_reconcile_to_public_trade: NOT_APPLICABLE - No production_and_retained_flows block is declared.
+2026-09-25T20:09:15.1466087Z   base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.
+2026-09-25T20:09:15.1466928Z   shared_enabler_declaration_valid: NOT_APPLICABLE - No shared-enabler declaration is present.
+2026-09-25T20:09:15.1467520Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.
+2026-09-25T20:09:15.1468178Z - SYN-MINISTRY-GALVALUME-001.json scenario=SYN-MINISTRY-GALVALUME-001 opportunity=SAU-H6-721061 status=PASS
+2026-09-25T20:09:15.1468802Z   target_spec_demand_within_public_imports: PASS - 48 kt <= 93.232 kt.
+2026-09-25T20:09:15.1469431Z   line_nameplate_within_disclosed_public_capacity: NOT_APPLICABLE - No numeric public installed nameplate is disclosed.
+2026-09-25T20:09:15.1470144Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].
+2026-09-25T20:09:15.1470809Z   qualified_availability_within_physical_output: NOT_APPLICABLE - No qualified_available_kt is declared.
+2026-09-25T20:09:15.1471584Z   demand_layers_remain_separate: INFORMATIONAL - Demand layers are reported separately; no ordering constraint is enforced.
+2026-09-25T20:09:15.1472362Z   tariff_line_allocation_sums_to_public_hs6_total: NOT_APPLICABLE - No tariff_line_allocation block is declared.
+2026-09-25T20:09:15.1473045Z   buyer_allocation_within_public_imports: NOT_APPLICABLE - No buyer_allocation block is declared.
+2026-09-25T20:09:15.1473726Z   expansion_assumption_disclosed_and_bounded: NOT_APPLICABLE - No expansion_assumption block is declared.
+2026-09-25T20:09:15.1474451Z   retained_flows_reconcile_to_public_trade: NOT_APPLICABLE - No production_and_retained_flows block is declared.
+2026-09-25T20:09:15.1475398Z   base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.
+2026-09-25T20:09:15.1476270Z   shared_enabler_declaration_valid: NOT_APPLICABLE - No shared-enabler declaration is present.
+2026-09-25T20:09:15.1476873Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.
+2026-09-25T20:09:15.1477528Z - SYN-MINISTRY-PE-FILM-001.json scenario=SYN-MINISTRY-PE-FILM-001 opportunity=SAU-H6-392010 status=PASS
+2026-09-25T20:09:15.1478150Z   target_spec_demand_within_public_imports: PASS - 16 kt <= 21.6782 kt.
+2026-09-25T20:09:15.1478931Z   line_nameplate_within_disclosed_public_capacity: NOT_APPLICABLE - No numeric public installed nameplate is disclosed.
+2026-09-25T20:09:15.1479688Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].
+2026-09-25T20:09:15.1480269Z   qualified_availability_within_physical_output: PASS - 24 kt <= 51.3 kt.
+2026-09-25T20:09:15.1480956Z   demand_layers_remain_separate: INFORMATIONAL - Demand layers are reported separately; no ordering constraint is enforced.
+2026-09-25T20:09:15.1481815Z   tariff_line_allocation_sums_to_public_hs6_total: PASS - Tariff-line quantities sum to 21.6782 kt against public imports 21.6782 kt.
+2026-09-25T20:09:15.1482570Z   buyer_allocation_within_public_imports: NOT_APPLICABLE - No buyer_allocation block is declared.
+2026-09-25T20:09:15.1483247Z   expansion_assumption_disclosed_and_bounded: NOT_APPLICABLE - No expansion_assumption block is declared.
+2026-09-25T20:09:15.1483967Z   retained_flows_reconcile_to_public_trade: NOT_APPLICABLE - No production_and_retained_flows block is declared.
+2026-09-25T20:09:15.1484763Z   base_demand_and_commitment_probability_valid: NOT_APPLICABLE - No base demand, commitment probability or MES block is declared.
+2026-09-25T20:09:15.1485511Z   shared_enabler_declaration_valid: NOT_APPLICABLE - No shared-enabler declaration is present.
+2026-09-25T20:09:15.1486306Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.
+2026-09-25T20:09:15.1487055Z - SYN-MINISTRY-PENICILLIN-API-001.json scenario=SYN-MINISTRY-PENICILLIN-API-001 opportunity=SAU-H6-294110 status=PASS
+2026-09-25T20:09:15.1487763Z   target_spec_demand_within_public_imports: PASS - 0.171511 kt <= 0.343023 kt.
+2026-09-25T20:09:15.1488424Z   line_nameplate_within_disclosed_public_capacity: NOT_APPLICABLE - No numeric public installed nameplate is disclosed.
+2026-09-25T20:09:15.1489141Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].
+2026-09-25T20:09:15.1489823Z   qualified_availability_within_physical_output: NOT_APPLICABLE - No qualified_available_kt is declared.
+2026-09-25T20:09:15.1490601Z   demand_layers_remain_separate: INFORMATIONAL - Demand layers are reported separately; no ordering constraint is enforced.
+2026-09-25T20:09:15.1491379Z   tariff_line_allocation_sums_to_public_hs6_total: NOT_APPLICABLE - No tariff_line_allocation block is declared.
+2026-09-25T20:09:15.1492067Z   buyer_allocation_within_public_imports: NOT_APPLICABLE - No buyer_allocation block is declared.
+2026-09-25T20:09:15.1492739Z   expansion_assumption_disclosed_and_bounded: NOT_APPLICABLE - No expansion_assumption block is declared.
+2026-09-25T20:09:15.1493447Z   retained_flows_reconcile_to_public_trade: NOT_APPLICABLE - No production_and_retained_flows block is declared.
+2026-09-25T20:09:15.1494200Z   base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.
+2026-09-25T20:09:15.1494897Z   shared_enabler_declaration_valid: NOT_APPLICABLE - No shared-enabler declaration is present.
+2026-09-25T20:09:15.1495481Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.
+2026-09-25T20:09:15.1496075Z - SYN-MINISTRY-PP-001.json scenario=SYN-MINISTRY-PP-001 opportunity=SAU-H0-390210 status=PASS
+2026-09-25T20:09:15.1496774Z   target_spec_demand_within_public_imports: PASS - 56 kt <= 56 kt.
+2026-09-25T20:09:15.1497410Z   line_nameplate_within_disclosed_public_capacity: PASS - 1170 kt <= 1170 kt.
+2026-09-25T20:09:15.1497981Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].
+2026-09-25T20:09:15.1498551Z   qualified_availability_within_physical_output: PASS - 80 kt <= 1055.46 kt.
+2026-09-25T20:09:15.1499273Z   demand_layers_remain_separate: INFORMATIONAL - Demand layers are reported separately; no ordering constraint is enforced.
+2026-09-25T20:09:15.1500059Z   tariff_line_allocation_sums_to_public_hs6_total: NOT_APPLICABLE - No tariff_line_allocation block is declared.
+2026-09-25T20:09:15.1500856Z   buyer_allocation_within_public_imports: NOT_APPLICABLE - No buyer_allocation block is declared.
+2026-09-25T20:09:15.1501543Z   expansion_assumption_disclosed_and_bounded: NOT_APPLICABLE - No expansion_assumption block is declared.
+2026-09-25T20:09:15.1502269Z   retained_flows_reconcile_to_public_trade: NOT_APPLICABLE - No production_and_retained_flows block is declared.
+2026-09-25T20:09:15.1503068Z   base_demand_and_commitment_probability_valid: NOT_APPLICABLE - No base demand, commitment probability or MES block is declared.
+2026-09-25T20:09:15.1503812Z   shared_enabler_declaration_valid: NOT_APPLICABLE - No shared-enabler declaration is present.
+2026-09-25T20:09:15.1504400Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.
+2026-09-25T20:09:15.1504991Z - SYN-MINISTRY-SOP-001.json scenario=SYN-MINISTRY-SOP-001 opportunity=SAU-H6-310430 status=PASS
+2026-09-25T20:09:15.1505569Z   target_spec_demand_within_public_imports: PASS - 11.2306 kt <= 22.4611 kt.
+2026-09-25T20:09:15.1506339Z   line_nameplate_within_disclosed_public_capacity: NOT_APPLICABLE - No numeric public installed nameplate is disclosed.
+2026-09-25T20:09:15.1507060Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].
+2026-09-25T20:09:15.1507723Z   qualified_availability_within_physical_output: NOT_APPLICABLE - No qualified_available_kt is declared.
+2026-09-25T20:09:15.1508494Z   demand_layers_remain_separate: INFORMATIONAL - Demand layers are reported separately; no ordering constraint is enforced.
+2026-09-25T20:09:15.1509283Z   tariff_line_allocation_sums_to_public_hs6_total: NOT_APPLICABLE - No tariff_line_allocation block is declared.
+2026-09-25T20:09:15.1509969Z   buyer_allocation_within_public_imports: NOT_APPLICABLE - No buyer_allocation block is declared.
+2026-09-25T20:09:15.1510642Z   expansion_assumption_disclosed_and_bounded: NOT_APPLICABLE - No expansion_assumption block is declared.
+2026-09-25T20:09:15.1511362Z   retained_flows_reconcile_to_public_trade: NOT_APPLICABLE - No production_and_retained_flows block is declared.
+2026-09-25T20:09:15.1512124Z   base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.
+2026-09-25T20:09:15.1512829Z   shared_enabler_declaration_valid: NOT_APPLICABLE - No shared-enabler declaration is present.
+2026-09-25T20:09:15.1513418Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.
+2026-09-25T20:09:15.1514040Z - SYN-MINISTRY-STEEL-001.json scenario=SYN-MINISTRY-STEEL-001 opportunity=SAU-H0-721049 status=PASS
+2026-09-25T20:09:15.1514628Z   target_spec_demand_within_public_imports: PASS - 104 kt <= 287.9 kt.
+2026-09-25T20:09:15.1515102Z   line_nameplate_within_disclosed_public_capacity: PASS - 250 kt <= 250 kt.
+2026-09-25T20:09:15.1515662Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].
+2026-09-25T20:09:15.1516470Z   qualified_availability_within_physical_output: NOT_APPLICABLE - No qualified_available_kt is declared.
+2026-09-25T20:09:15.1517250Z   demand_layers_remain_separate: INFORMATIONAL - Demand layers are reported separately; no ordering constraint is enforced.
+2026-09-25T20:09:15.1518034Z   tariff_line_allocation_sums_to_public_hs6_total: NOT_APPLICABLE - No tariff_line_allocation block is declared.
+2026-09-25T20:09:15.1518860Z   buyer_allocation_within_public_imports: NOT_APPLICABLE - No buyer_allocation block is declared.
+2026-09-25T20:09:15.1519531Z   expansion_assumption_disclosed_and_bounded: NOT_APPLICABLE - No expansion_assumption block is declared.
+2026-09-25T20:09:15.1520249Z   retained_flows_reconcile_to_public_trade: NOT_APPLICABLE - No production_and_retained_flows block is declared.
+2026-09-25T20:09:15.1521008Z   base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.
+2026-09-25T20:09:15.1521702Z   shared_enabler_declaration_valid: NOT_APPLICABLE - No shared-enabler declaration is present.
+2026-09-25T20:09:15.1522398Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.
+2026-09-25T20:09:15.1523137Z - SYN-MINISTRY-STREPTOMYCIN-API-001.json scenario=SYN-MINISTRY-STREPTOMYCIN-API-001 opportunity=SAU-H6-294120 status=PASS
+2026-09-25T20:09:15.1523851Z   target_spec_demand_within_public_imports: PASS - 0.023889 kt <= 0.047779 kt.
+2026-09-25T20:09:15.1524513Z   line_nameplate_within_disclosed_public_capacity: NOT_APPLICABLE - No numeric public installed nameplate is disclosed.
+2026-09-25T20:09:15.1525226Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].
+2026-09-25T20:09:15.1525898Z   qualified_availability_within_physical_output: NOT_APPLICABLE - No qualified_available_kt is declared.
+2026-09-25T20:09:15.1526793Z   demand_layers_remain_separate: INFORMATIONAL - Demand layers are reported separately; no ordering constraint is enforced.
+2026-09-25T20:09:15.1527571Z   tariff_line_allocation_sums_to_public_hs6_total: NOT_APPLICABLE - No tariff_line_allocation block is declared.
+2026-09-25T20:09:15.1528262Z   buyer_allocation_within_public_imports: NOT_APPLICABLE - No buyer_allocation block is declared.
+2026-09-25T20:09:15.1528934Z   expansion_assumption_disclosed_and_bounded: NOT_APPLICABLE - No expansion_assumption block is declared.
+2026-09-25T20:09:15.1529654Z   retained_flows_reconcile_to_public_trade: NOT_APPLICABLE - No production_and_retained_flows block is declared.
+2026-09-25T20:09:15.1530404Z   base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.
+2026-09-25T20:09:15.1531108Z   shared_enabler_declaration_valid: NOT_APPLICABLE - No shared-enabler declaration is present.
+2026-09-25T20:09:15.1531688Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.
+2026-09-25T20:09:15.1532329Z - SYN-MINISTRY-TINPLATE-001.json scenario=SYN-MINISTRY-TINPLATE-001 opportunity=SAU-H6-721012 status=PASS
+2026-09-25T20:09:15.1532941Z   target_spec_demand_within_public_imports: PASS - 95 kt <= 104.575 kt.
+2026-09-25T20:09:15.1533583Z   line_nameplate_within_disclosed_public_capacity: NOT_APPLICABLE - No numeric public installed nameplate is disclosed.
+2026-09-25T20:09:15.1534298Z   capacity_factors_within_unit_interval: PASS - All declared capacity factors are within [0,1].
+2026-09-25T20:09:15.1534964Z   qualified_availability_within_physical_output: NOT_APPLICABLE - No qualified_available_kt is declared.
+2026-09-25T20:09:15.1535739Z   demand_layers_remain_separate: INFORMATIONAL - Demand layers are reported separately; no ordering constraint is enforced.
+2026-09-25T20:09:15.1536658Z   tariff_line_allocation_sums_to_public_hs6_total: NOT_APPLICABLE - No tariff_line_allocation block is declared.
+2026-09-25T20:09:15.1537346Z   buyer_allocation_within_public_imports: NOT_APPLICABLE - No buyer_allocation block is declared.
+2026-09-25T20:09:15.1538014Z   expansion_assumption_disclosed_and_bounded: NOT_APPLICABLE - No expansion_assumption block is declared.
+2026-09-25T20:09:15.1538740Z   retained_flows_reconcile_to_public_trade: NOT_APPLICABLE - No production_and_retained_flows block is declared.
+2026-09-25T20:09:15.1539489Z   base_demand_and_commitment_probability_valid: PASS - Base demand, commitment probability and MES inputs are valid.
+2026-09-25T20:09:15.1540180Z   shared_enabler_declaration_valid: NOT_APPLICABLE - No shared-enabler declaration is present.
+2026-09-25T20:09:15.1541014Z   ground_truth_backtest: PASS - Engine state and route match planted ground truth.
+2026-09-25T20:09:15.1541752Z SHARED ENABLER CONSISTENCY PASS (1 enablers, 2 dependents)
+2026-09-25T20:09:15.1573110Z ##[group]Run PYTHONPATH=src python scripts/reconstruct_snapshot.py --all
+2026-09-25T20:09:15.1573675Z [36;1mPYTHONPATH=src python scripts/reconstruct_snapshot.py --all[0m
+2026-09-25T20:09:15.1641179Z shell: /usr/bin/bash -e {0}
+2026-09-25T20:09:15.1641455Z env:
+2026-09-25T20:09:15.1641735Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-25T20:09:15.1642344Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+2026-09-25T20:09:15.1642802Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-25T20:09:15.1643207Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-25T20:09:15.1643761Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-25T20:09:15.1644185Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+2026-09-25T20:09:15.1644658Z ##[endgroup]
+2026-09-25T20:09:20.1219687Z Rotated text discovered. Output will be incomplete.
+2026-09-25T20:09:22.0240934Z Rotated text discovered. Output will be incomplete.
+2026-09-25T20:09:23.9370078Z Rotated text discovered. Output will be incomplete.
+2026-09-25T20:09:24.0109341Z Rotated text discovered. Output will be incomplete.
+2026-09-25T20:09:24.2087031Z Rotated text discovered. Output will be incomplete.
+2026-09-25T20:09:25.9560310Z Rotated text discovered. Output will be incomplete.
+2026-09-25T20:09:26.4962239Z Rotated text discovered. Output will be incomplete.
+2026-09-25T20:09:26.6306763Z Rotated text discovered. Output will be incomplete.
+2026-09-25T20:09:27.0201513Z Rotated text discovered. Output will be incomplete.
+2026-09-25T20:09:27.5344631Z Rotated text discovered. Output will be incomplete.
+2026-09-25T20:09:27.8588349Z Rotated text discovered. Output will be incomplete.
+2026-09-25T20:09:28.0427687Z Rotated text discovered. Output will be incomplete.
+2026-09-25T20:09:29.1169629Z Rotated text discovered. Output will be incomplete.
+2026-09-25T20:09:32.4661144Z Rotated text discovered. Output will be incomplete.
+2026-09-25T20:09:59.2652536Z Rotated text discovered. Output will be incomplete.
+2026-09-25T20:09:59.9287747Z Rotated text discovered. Output will be incomplete.
+2026-09-25T20:10:00.1364960Z Rotated text discovered. Output will be incomplete.
+2026-09-25T20:10:01.1175079Z Rotated text discovered. Output will be incomplete.
+2026-09-25T20:10:01.1920497Z Rotated text discovered. Output will be incomplete.
+2026-09-25T20:10:01.3889648Z Rotated text discovered. Output will be incomplete.
+2026-09-25T20:10:03.1166712Z Rotated text discovered. Output will be incomplete.
+2026-09-25T20:10:03.6402294Z Rotated text discovered. Output will be incomplete.
+2026-09-25T20:10:03.7747930Z Rotated text discovered. Output will be incomplete.
+2026-09-25T20:10:04.1622113Z Rotated text discovered. Output will be incomplete.
+2026-09-25T20:10:04.6725301Z Rotated text discovered. Output will be incomplete.
+2026-09-25T20:10:04.9792060Z Rotated text discovered. Output will be incomplete.
+2026-09-25T20:10:05.1724833Z Rotated text discovered. Output will be incomplete.
+2026-09-25T20:10:06.2164964Z Rotated text discovered. Output will be incomplete.
+2026-09-25T20:10:09.5015491Z Rotated text discovered. Output will be incomplete.
+2026-09-25T20:10:36.1099805Z Rotated text discovered. Output will be incomplete.
+2026-09-25T20:10:36.8099840Z Rotated text discovered. Output will be incomplete.
+2026-09-25T20:10:36.9925138Z Rotated text discovered. Output will be incomplete.
+2026-09-25T20:10:38.0424438Z Rotated text discovered. Output will be incomplete.
+2026-09-25T20:10:40.2586402Z Rotated text discovered. Output will be incomplete.
+2026-09-25T20:10:42.3141481Z Rotated text discovered. Output will be incomplete.
+2026-09-25T20:10:43.6412758Z Rotated text discovered. Output will be incomplete.
+2026-09-25T20:10:44.4127595Z Got invalid hex string: Non-hexadecimal digit found (b'CMapName')
+2026-09-25T20:10:44.4129442Z Skipping broken line b'endcmap CMapName currentdict /CMap defineresource pop end end': Odd-length string
+2026-09-25T20:10:44.5221852Z Got invalid hex string: Non-hexadecimal digit found (b'CMapName')
+2026-09-25T20:10:44.5222842Z Skipping broken line b'endcmap CMapName currentdict /CMap defineresource pop end end': Odd-length string
+2026-09-25T20:10:44.6293027Z Got invalid hex string: Non-hexadecimal digit found (b'CMapName')
+2026-09-25T20:10:44.6293879Z Skipping broken line b'endcmap CMapName currentdict /CMap defineresource pop end end': Odd-length string
+2026-09-25T20:10:44.7381261Z Got invalid hex string: Non-hexadecimal digit found (b'CMapName')
+2026-09-25T20:10:44.7382224Z Skipping broken line b'endcmap CMapName currentdict /CMap defineresource pop end end': Odd-length string
+2026-09-25T20:10:44.8417293Z invalid pdf header: b'HTTP/'
+2026-09-25T20:10:44.8417848Z incorrect startxref pointer(1)
+2026-09-25T20:10:44.8422380Z parsing for Object Streams
+2026-09-25T20:10:47.3923511Z invalid pdf header: b'HTTP/'
+2026-09-25T20:10:47.3924061Z incorrect startxref pointer(1)
+2026-09-25T20:10:47.3929182Z parsing for Object Streams
+2026-09-25T20:10:50.4534926Z Rotated text discovered. Output will be incomplete.
+2026-09-25T20:10:51.7935451Z Rotated text discovered. Output will be incomplete.
+2026-09-25T20:11:14.1454652Z Rotated text discovered. Output will be incomplete.
+2026-09-25T20:11:17.4935229Z Rotated text discovered. Output will be incomplete.
+2026-09-25T20:12:25.8970651Z CASE RECONSTRUCTION PASS (9 snapshots, 9 briefs)
+2026-09-25T20:12:25.8983031Z GRAPH RECONSTRUCTION PASS (1 projections, 925 nodes, 1045 edges)
+2026-09-25T20:12:25.8984143Z RECONSTRUCTION PASS (5 snapshots, 42 artifacts)
+2026-09-25T20:12:25.8985116Z DOCUMENT RECONSTRUCTION PASS (26 records, 26 artifacts)
+2026-09-25T20:12:25.8985913Z ENTITY RECONSTRUCTION PASS (3 artifacts, 46 links)
+2026-09-25T20:12:25.8986920Z SCREENING RECONSTRUCTION PASS (1 snapshots)
+2026-09-25T20:12:25.8987535Z CASE SELECTION RECONSTRUCTION PASS (2 records)
+2026-09-25T20:12:25.9283391Z ##[group]Run PYTHONPATH=src pytest -q
+2026-09-25T20:12:25.9283757Z [36;1mPYTHONPATH=src pytest -q[0m
+2026-09-25T20:12:25.9346078Z shell: /usr/bin/bash -e {0}
+2026-09-25T20:12:25.9346685Z env:
+2026-09-25T20:12:25.9346980Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-25T20:12:25.9347476Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+2026-09-25T20:12:25.9347965Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-25T20:12:25.9348396Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-25T20:12:25.9348830Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-25T20:12:25.9349268Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+2026-09-25T20:12:25.9349642Z ##[endgroup]
+2026-09-25T20:12:36.0941833Z ........................................................................ [  1%]
+2026-09-25T20:12:38.9604661Z ........................................................................ [  3%]
+2026-09-25T20:12:41.8319378Z ........................................................................ [  5%]
+2026-09-25T20:12:44.6545126Z ........................................................................ [  7%]
+2026-09-25T20:12:47.8011612Z ........................................................................ [  9%]
+2026-09-25T20:12:55.8713870Z ........................................................................ [ 10%]
+2026-09-25T20:12:56.2488856Z ........................................................................ [ 12%]
+2026-09-25T20:12:56.9475633Z ........................................................................ [ 14%]
+2026-09-25T20:12:57.2471400Z ........................................................................ [ 16%]
+2026-09-25T20:12:57.5411717Z ........................................................................ [ 18%]
+2026-09-25T20:12:57.8472642Z ........................................................................ [ 19%]
+2026-09-25T20:12:58.2785426Z ........................................................................ [ 21%]
+2026-09-25T20:12:59.0790201Z ........................................................................ [ 23%]
+2026-09-25T20:13:00.7767237Z ........................................................................ [ 25%]
+2026-09-25T20:13:09.1057205Z ........................................................................ [ 27%]
+2026-09-25T20:13:13.5082040Z ........................................................................ [ 28%]
+2026-09-25T20:13:17.6612715Z ........................................................................ [ 30%]
+2026-09-25T20:13:20.9285924Z ........................................................................ [ 32%]
+2026-09-25T20:13:35.1861782Z ........................................................................ [ 34%]
+2026-09-25T20:13:40.5828682Z ........................................................................ [ 36%]
+2026-09-25T20:13:44.2138294Z ........................................................................ [ 37%]
+2026-09-25T20:13:45.1942728Z ........................................................................ [ 39%]
+2026-09-25T20:13:46.6354687Z ........................................................................ [ 41%]
+2026-09-25T20:13:47.7498290Z ........................................................................ [ 43%]
+2026-09-25T20:13:49.2462393Z ........................................................................ [ 45%]
+2026-09-25T20:13:50.7362101Z ........................................................................ [ 47%]
+2026-09-25T20:13:54.6223596Z ........................................................................ [ 48%]
+2026-09-25T20:13:57.5618915Z ........................................................................ [ 50%]
+2026-09-25T20:14:00.2001949Z ........................................................................ [ 52%]
+2026-09-25T20:14:02.8526813Z ........................................................................ [ 54%]
+2026-09-25T20:14:07.6755427Z ........................................................................ [ 56%]
+2026-09-25T20:14:09.3437619Z ........................................................................ [ 57%]
+2026-09-25T20:14:26.2229945Z ........................................................................ [ 59%]
+2026-09-25T20:14:42.8260434Z ........................................................................ [ 61%]
+2026-09-25T20:15:38.8947214Z ........................................................................ [ 63%]
+2026-09-25T20:15:39.3940861Z ........................................................................ [ 65%]
+2026-09-25T20:16:08.2432848Z ........................................................................ [ 66%]
+2026-09-25T20:16:18.8428546Z ........................................................................ [ 68%]
+2026-09-25T20:16:22.2377062Z ........................................................................ [ 70%]
+2026-09-25T20:16:29.0973648Z ........................................................................ [ 72%]
+2026-09-25T20:16:31.5752693Z ........................................................................ [ 74%]
+2026-09-25T20:16:39.2239679Z ........................................................................ [ 75%]
+2026-09-25T20:16:39.3547715Z ........................................................................ [ 77%]
+2026-09-25T20:16:39.6482463Z ........................................................................ [ 79%]
+2026-09-25T20:16:41.2671950Z ........................................................................ [ 81%]
+2026-09-25T20:16:43.1551735Z ........................................................................ [ 83%]
+2026-09-25T20:16:50.4441718Z ........................................................................ [ 84%]
+2026-09-25T20:16:50.8469172Z ........................................................................ [ 86%]
+2026-09-25T20:16:53.8835383Z ........................................................................ [ 88%]
+2026-09-25T20:16:54.0924468Z ........................................................................ [ 90%]
+2026-09-25T20:16:54.2414322Z ........................................................................ [ 92%]
+2026-09-25T20:16:54.6667657Z ........................................................................ [ 94%]
+2026-09-25T20:16:55.1959751Z ........................................................................ [ 95%]
+2026-09-25T20:16:55.7222113Z ........................................................................ [ 97%]
+2026-09-25T20:17:04.7678126Z ........................................................................ [ 99%]
+2026-09-25T20:17:06.3342715Z ......................                                                   [100%]
+2026-09-25T20:17:06.3343632Z =============================== warnings summary ===============================
+2026-09-25T20:17:06.3344898Z ../../../../../opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/fastapi/testclient.py:1
+2026-09-25T20:17:06.3347371Z   /opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+2026-09-25T20:17:06.3348824Z     from starlette.testclient import TestClient as TestClient  # noqa
+2026-09-25T20:17:06.3349214Z 
+2026-09-25T20:17:06.3349504Z -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+2026-09-25T20:17:06.3350060Z 3982 passed, 1 warning in 278.18s (0:04:38)
+2026-09-25T20:17:07.5976580Z ##[group]Run PYTHONPATH=src python scripts/demo_smoke.py
+2026-09-25T20:17:07.5977040Z [36;1mPYTHONPATH=src python scripts/demo_smoke.py[0m
+2026-09-25T20:17:07.6039440Z shell: /usr/bin/bash -e {0}
+2026-09-25T20:17:07.6039690Z env:
+2026-09-25T20:17:07.6039954Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-25T20:17:07.6040402Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib/pkgconfig
+2026-09-25T20:17:07.6040884Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-25T20:17:07.6041270Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-25T20:17:07.6041655Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.14/x64
+2026-09-25T20:17:07.6042039Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.14/x64/lib
+2026-09-25T20:17:07.6042365Z ##[endgroup]
+2026-09-25T20:17:07.9644243Z SMOKE PASS
+2026-09-25T20:17:07.9648165Z - Steel / public: INVESTIGATE
+2026-09-25T20:17:07.9649066Z - Steel / simulated: ADVANCE, real state unchanged
+2026-09-25T20:17:07.9649953Z - Polypropylene / public: REJECT generic capacity
+2026-09-25T20:17:07.9650612Z - AR/EN extraction golden gate: 100%
+2026-09-25T20:17:07.9962849Z Post job cleanup.
+2026-09-25T20:17:08.1218819Z Cache hit occurred on the primary key setup-python-Linux-x64-24.04-Ubuntu-python-3.12.14-pip-8b5caba00eeb236b981f097f49d470ab523f2cadf55445b95ea144f9811664b0, not saving cache.
+2026-09-25T20:17:08.1221269Z (node:6875) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-09-25T20:17:08.1222769Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-09-25T20:17:08.1369100Z Post job cleanup.
+2026-09-25T20:17:08.2282975Z [command]/usr/bin/git version
+2026-09-25T20:17:08.2329949Z git version 2.55.0
+2026-09-25T20:17:08.2373350Z Temporarily overriding HOME='/home/runner/work/_temp/f8dc01c7-91b2-4af3-ba6e-62c7f37265bb' before making global git config changes
+2026-09-25T20:17:08.2374489Z Adding repository directory to the temporary git global config as a safe directory
+2026-09-25T20:17:08.2379948Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Industrial_mvp/Industrial_mvp
+2026-09-25T20:17:08.2418743Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-09-25T20:17:08.2454270Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-09-25T20:17:08.2710334Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-09-25T20:17:08.2748534Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-09-25T20:17:08.3055693Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-09-25T20:17:08.3107569Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-09-25T20:17:08.3613699Z Cleaning up orphan processes
+2026-09-25T20:17:08.3928383Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-python@v5. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

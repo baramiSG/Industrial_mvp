@@ -1,0 +1,838 @@
+{
+  "attempt": 1,
+  "conclusion": "success",
+  "event": "pull_request",
+  "headSha": "39614fcdd8d8eb9a96381c3d1b806343d5164419",
+  "jobs": [
+    {
+      "completedAt": "2026-09-25T19:54:09Z",
+      "conclusion": "success",
+      "databaseId": 108206569986,
+      "name": "browser / Chromium / Python 3.12",
+      "startedAt": "2026-09-25T18:50:41Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-09-25T18:50:43Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-09-25T18:50:42Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:50:48Z",
+          "conclusion": "success",
+          "name": "Check out repository",
+          "number": 2,
+          "startedAt": "2026-09-25T18:50:43Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:50:48Z",
+          "conclusion": "success",
+          "name": "Set up Python",
+          "number": 3,
+          "startedAt": "2026-09-25T18:50:48Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:50:49Z",
+          "conclusion": "success",
+          "name": "Set up uv",
+          "number": 4,
+          "startedAt": "2026-09-25T18:50:48Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:50:50Z",
+          "conclusion": "success",
+          "name": "Sync locked browser-test environment",
+          "number": 5,
+          "startedAt": "2026-09-25T18:50:49Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:50:53Z",
+          "conclusion": "success",
+          "name": "Cache Playwright Chromium",
+          "number": 6,
+          "startedAt": "2026-09-25T18:50:50Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:51:07Z",
+          "conclusion": "success",
+          "name": "Install Chromium dependencies",
+          "number": 7,
+          "startedAt": "2026-09-25T18:50:53Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T19:54:06Z",
+          "conclusion": "success",
+          "name": "Run bilingual real-browser and visual gates",
+          "number": 8,
+          "startedAt": "2026-09-25T18:51:07Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T19:54:06Z",
+          "conclusion": "skipped",
+          "name": "Upload browser diagnostics on failure",
+          "number": 9,
+          "startedAt": "2026-09-25T19:54:06Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T19:54:06Z",
+          "conclusion": "success",
+          "name": "Post Cache Playwright Chromium",
+          "number": 15,
+          "startedAt": "2026-09-25T19:54:06Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T19:54:07Z",
+          "conclusion": "success",
+          "name": "Post Set up uv",
+          "number": 16,
+          "startedAt": "2026-09-25T19:54:06Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T19:54:07Z",
+          "conclusion": "success",
+          "name": "Post Set up Python",
+          "number": 17,
+          "startedAt": "2026-09-25T19:54:07Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T19:54:07Z",
+          "conclusion": "success",
+          "name": "Post Check out repository",
+          "number": 18,
+          "startedAt": "2026-09-25T19:54:07Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T19:54:07Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 19,
+          "startedAt": "2026-09-25T19:54:07Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/baramiSG/Industrial_mvp/actions/runs/36175983021/job/108206569986"
+    },
+    {
+      "completedAt": "2026-09-25T18:52:16Z",
+      "conclusion": "success",
+      "databaseId": 108206570262,
+      "name": "graph / Neo4j service / Python 3.12",
+      "startedAt": "2026-09-25T18:50:41Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-09-25T18:50:43Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-09-25T18:50:41Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:50:53Z",
+          "conclusion": "success",
+          "name": "Initialize containers",
+          "number": 2,
+          "startedAt": "2026-09-25T18:50:43Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:50:58Z",
+          "conclusion": "success",
+          "name": "Check out repository",
+          "number": 3,
+          "startedAt": "2026-09-25T18:50:53Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:50:58Z",
+          "conclusion": "success",
+          "name": "Set up Python",
+          "number": 4,
+          "startedAt": "2026-09-25T18:50:58Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:51:01Z",
+          "conclusion": "success",
+          "name": "Set up uv",
+          "number": 5,
+          "startedAt": "2026-09-25T18:50:58Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:51:04Z",
+          "conclusion": "success",
+          "name": "Sync locked graph and browser environment",
+          "number": 6,
+          "startedAt": "2026-09-25T18:51:01Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:51:05Z",
+          "conclusion": "success",
+          "name": "Scan prohibited files and secret patterns",
+          "number": 7,
+          "startedAt": "2026-09-25T18:51:04Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:51:30Z",
+          "conclusion": "success",
+          "name": "Install Chromium prerequisites for graph UI",
+          "number": 8,
+          "startedAt": "2026-09-25T18:51:05Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:51:31Z",
+          "conclusion": "success",
+          "name": "Wait for isolated Neo4j service",
+          "number": 9,
+          "startedAt": "2026-09-25T18:51:30Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:51:34Z",
+          "conclusion": "success",
+          "name": "Rebuild-check governed graph projection",
+          "number": 10,
+          "startedAt": "2026-09-25T18:51:31Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:51:42Z",
+          "conclusion": "success",
+          "name": "Load governed projection twice",
+          "number": 11,
+          "startedAt": "2026-09-25T18:51:34Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:51:44Z",
+          "conclusion": "success",
+          "name": "Verify live mirror equality",
+          "number": 12,
+          "startedAt": "2026-09-25T18:51:42Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:51:51Z",
+          "conclusion": "success",
+          "name": "Run live Cypher equality suite",
+          "number": 13,
+          "startedAt": "2026-09-25T18:51:44Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:52:04Z",
+          "conclusion": "success",
+          "name": "Run live graph UI equality suite",
+          "number": 14,
+          "startedAt": "2026-09-25T18:51:51Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:52:12Z",
+          "conclusion": "success",
+          "name": "Stop service and prove fail-closed behavior",
+          "number": 15,
+          "startedAt": "2026-09-25T18:52:04Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:52:12Z",
+          "conclusion": "success",
+          "name": "Post Set up uv",
+          "number": 27,
+          "startedAt": "2026-09-25T18:52:12Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:52:12Z",
+          "conclusion": "success",
+          "name": "Post Set up Python",
+          "number": 28,
+          "startedAt": "2026-09-25T18:52:12Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:52:12Z",
+          "conclusion": "success",
+          "name": "Post Check out repository",
+          "number": 29,
+          "startedAt": "2026-09-25T18:52:12Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:52:12Z",
+          "conclusion": "success",
+          "name": "Stop containers",
+          "number": 30,
+          "startedAt": "2026-09-25T18:52:12Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:52:12Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 31,
+          "startedAt": "2026-09-25T18:52:12Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/baramiSG/Industrial_mvp/actions/runs/36175983021/job/108206570262"
+    },
+    {
+      "completedAt": "2026-09-25T18:59:00Z",
+      "conclusion": "success",
+      "databaseId": 108206570280,
+      "name": "pip / Python 3.12",
+      "startedAt": "2026-09-25T18:50:41Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-09-25T18:50:42Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-09-25T18:50:42Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:50:48Z",
+          "conclusion": "success",
+          "name": "Check out repository",
+          "number": 2,
+          "startedAt": "2026-09-25T18:50:42Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:50:49Z",
+          "conclusion": "success",
+          "name": "Set up Python",
+          "number": 3,
+          "startedAt": "2026-09-25T18:50:48Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:50:56Z",
+          "conclusion": "success",
+          "name": "Install documented pip development path",
+          "number": 4,
+          "startedAt": "2026-09-25T18:50:49Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:50:57Z",
+          "conclusion": "success",
+          "name": "Scan prohibited files and secret patterns",
+          "number": 5,
+          "startedAt": "2026-09-25T18:50:56Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:50:58Z",
+          "conclusion": "success",
+          "name": "Reject embedded threshold literals",
+          "number": 6,
+          "startedAt": "2026-09-25T18:50:57Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:50:58Z",
+          "conclusion": "success",
+          "name": "Validate UI catalogue, token and copy contracts",
+          "number": 7,
+          "startedAt": "2026-09-25T18:50:58Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:50:59Z",
+          "conclusion": "success",
+          "name": "Compile Python",
+          "number": 8,
+          "startedAt": "2026-09-25T18:50:58Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:51:01Z",
+          "conclusion": "success",
+          "name": "Check JavaScript ES-module syntax",
+          "number": 9,
+          "startedAt": "2026-09-25T18:50:59Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:51:01Z",
+          "conclusion": "success",
+          "name": "Verify integrity",
+          "number": 10,
+          "startedAt": "2026-09-25T18:51:01Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:51:01Z",
+          "conclusion": "success",
+          "name": "Validate synthetic scenarios against public marginals",
+          "number": 11,
+          "startedAt": "2026-09-25T18:51:01Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:54:14Z",
+          "conclusion": "success",
+          "name": "Reconstruct acquired snapshots from the raw store",
+          "number": 12,
+          "startedAt": "2026-09-25T18:51:01Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:58:58Z",
+          "conclusion": "success",
+          "name": "Run test suite",
+          "number": 13,
+          "startedAt": "2026-09-25T18:54:14Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:58:58Z",
+          "conclusion": "success",
+          "name": "Run demo smoke",
+          "number": 14,
+          "startedAt": "2026-09-25T18:58:58Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:58:58Z",
+          "conclusion": "success",
+          "name": "Post Set up Python",
+          "number": 27,
+          "startedAt": "2026-09-25T18:58:58Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:58:58Z",
+          "conclusion": "success",
+          "name": "Post Check out repository",
+          "number": 28,
+          "startedAt": "2026-09-25T18:58:58Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:58:58Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 29,
+          "startedAt": "2026-09-25T18:58:58Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/baramiSG/Industrial_mvp/actions/runs/36175983021/job/108206570280"
+    },
+    {
+      "completedAt": "2026-09-25T18:51:13Z",
+      "conclusion": "success",
+      "databaseId": 108206570347,
+      "name": "Docker image build",
+      "startedAt": "2026-09-25T18:50:41Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-09-25T18:50:42Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-09-25T18:50:42Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:50:49Z",
+          "conclusion": "success",
+          "name": "Check out repository",
+          "number": 2,
+          "startedAt": "2026-09-25T18:50:42Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:51:11Z",
+          "conclusion": "success",
+          "name": "Build image",
+          "number": 3,
+          "startedAt": "2026-09-25T18:50:49Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:51:11Z",
+          "conclusion": "success",
+          "name": "Verify runtime image excludes optional graph driver",
+          "number": 4,
+          "startedAt": "2026-09-25T18:51:11Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:51:11Z",
+          "conclusion": "success",
+          "name": "Post Check out repository",
+          "number": 8,
+          "startedAt": "2026-09-25T18:51:11Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:51:11Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 9,
+          "startedAt": "2026-09-25T18:51:11Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/baramiSG/Industrial_mvp/actions/runs/36175983021/job/108206570347"
+    },
+    {
+      "completedAt": "2026-09-25T18:55:59Z",
+      "conclusion": "success",
+      "databaseId": 108206570477,
+      "name": "uv / Python 3.12",
+      "startedAt": "2026-09-25T18:50:40Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-09-25T18:50:43Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-09-25T18:50:41Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:50:49Z",
+          "conclusion": "success",
+          "name": "Check out repository",
+          "number": 2,
+          "startedAt": "2026-09-25T18:50:43Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:50:49Z",
+          "conclusion": "success",
+          "name": "Set up Python",
+          "number": 3,
+          "startedAt": "2026-09-25T18:50:49Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:50:51Z",
+          "conclusion": "success",
+          "name": "Set up uv",
+          "number": 4,
+          "startedAt": "2026-09-25T18:50:49Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:50:52Z",
+          "conclusion": "success",
+          "name": "Sync locked development environment",
+          "number": 5,
+          "startedAt": "2026-09-25T18:50:51Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:50:52Z",
+          "conclusion": "success",
+          "name": "Scan prohibited files and secret patterns",
+          "number": 6,
+          "startedAt": "2026-09-25T18:50:52Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:50:53Z",
+          "conclusion": "success",
+          "name": "Reject embedded threshold literals",
+          "number": 7,
+          "startedAt": "2026-09-25T18:50:52Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:50:53Z",
+          "conclusion": "success",
+          "name": "Validate UI catalogue, token and copy contracts",
+          "number": 8,
+          "startedAt": "2026-09-25T18:50:53Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:50:53Z",
+          "conclusion": "success",
+          "name": "Compile Python",
+          "number": 9,
+          "startedAt": "2026-09-25T18:50:53Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:50:55Z",
+          "conclusion": "success",
+          "name": "Check JavaScript ES-module syntax",
+          "number": 10,
+          "startedAt": "2026-09-25T18:50:53Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:50:55Z",
+          "conclusion": "success",
+          "name": "Verify integrity",
+          "number": 11,
+          "startedAt": "2026-09-25T18:50:55Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:50:55Z",
+          "conclusion": "success",
+          "name": "Validate synthetic scenarios against public marginals",
+          "number": 12,
+          "startedAt": "2026-09-25T18:50:55Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:52:52Z",
+          "conclusion": "success",
+          "name": "Reconstruct acquired snapshots from the raw store",
+          "number": 13,
+          "startedAt": "2026-09-25T18:50:55Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:55:56Z",
+          "conclusion": "success",
+          "name": "Run test suite",
+          "number": 14,
+          "startedAt": "2026-09-25T18:52:52Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:55:56Z",
+          "conclusion": "success",
+          "name": "Run demo smoke",
+          "number": 15,
+          "startedAt": "2026-09-25T18:55:56Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:55:56Z",
+          "conclusion": "success",
+          "name": "Post Set up uv",
+          "number": 28,
+          "startedAt": "2026-09-25T18:55:56Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:55:56Z",
+          "conclusion": "success",
+          "name": "Post Set up Python",
+          "number": 29,
+          "startedAt": "2026-09-25T18:55:56Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:55:56Z",
+          "conclusion": "success",
+          "name": "Post Check out repository",
+          "number": 30,
+          "startedAt": "2026-09-25T18:55:56Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:55:57Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 31,
+          "startedAt": "2026-09-25T18:55:56Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/baramiSG/Industrial_mvp/actions/runs/36175983021/job/108206570477"
+    },
+    {
+      "completedAt": "2026-09-25T18:58:10Z",
+      "conclusion": "success",
+      "databaseId": 108206570546,
+      "name": "uv / Python 3.14",
+      "startedAt": "2026-09-25T18:50:41Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-09-25T18:50:44Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-09-25T18:50:42Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:50:50Z",
+          "conclusion": "success",
+          "name": "Check out repository",
+          "number": 2,
+          "startedAt": "2026-09-25T18:50:44Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:50:50Z",
+          "conclusion": "success",
+          "name": "Set up Python",
+          "number": 3,
+          "startedAt": "2026-09-25T18:50:50Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:50:52Z",
+          "conclusion": "success",
+          "name": "Set up uv",
+          "number": 4,
+          "startedAt": "2026-09-25T18:50:50Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:50:54Z",
+          "conclusion": "success",
+          "name": "Sync locked development environment",
+          "number": 5,
+          "startedAt": "2026-09-25T18:50:52Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:50:56Z",
+          "conclusion": "success",
+          "name": "Scan prohibited files and secret patterns",
+          "number": 6,
+          "startedAt": "2026-09-25T18:50:54Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:50:57Z",
+          "conclusion": "success",
+          "name": "Reject embedded threshold literals",
+          "number": 7,
+          "startedAt": "2026-09-25T18:50:56Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:50:57Z",
+          "conclusion": "success",
+          "name": "Validate UI catalogue, token and copy contracts",
+          "number": 8,
+          "startedAt": "2026-09-25T18:50:57Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:50:58Z",
+          "conclusion": "success",
+          "name": "Compile Python",
+          "number": 9,
+          "startedAt": "2026-09-25T18:50:57Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:51:00Z",
+          "conclusion": "success",
+          "name": "Check JavaScript ES-module syntax",
+          "number": 10,
+          "startedAt": "2026-09-25T18:50:58Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:51:01Z",
+          "conclusion": "success",
+          "name": "Verify integrity",
+          "number": 11,
+          "startedAt": "2026-09-25T18:51:00Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:51:01Z",
+          "conclusion": "success",
+          "name": "Validate synthetic scenarios against public marginals",
+          "number": 12,
+          "startedAt": "2026-09-25T18:51:01Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:54:03Z",
+          "conclusion": "success",
+          "name": "Reconstruct acquired snapshots from the raw store",
+          "number": 13,
+          "startedAt": "2026-09-25T18:51:01Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:58:06Z",
+          "conclusion": "success",
+          "name": "Run test suite",
+          "number": 14,
+          "startedAt": "2026-09-25T18:54:03Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:58:07Z",
+          "conclusion": "success",
+          "name": "Run demo smoke",
+          "number": 15,
+          "startedAt": "2026-09-25T18:58:06Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:58:07Z",
+          "conclusion": "success",
+          "name": "Post Set up uv",
+          "number": 28,
+          "startedAt": "2026-09-25T18:58:07Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:58:07Z",
+          "conclusion": "success",
+          "name": "Post Set up Python",
+          "number": 29,
+          "startedAt": "2026-09-25T18:58:07Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:58:07Z",
+          "conclusion": "success",
+          "name": "Post Check out repository",
+          "number": 30,
+          "startedAt": "2026-09-25T18:58:07Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-25T18:58:07Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 31,
+          "startedAt": "2026-09-25T18:58:07Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/baramiSG/Industrial_mvp/actions/runs/36175983021/job/108206570546"
+    }
+  ],
+  "startedAt": "2026-09-25T18:50:37Z",
+  "status": "completed",
+  "updatedAt": "2026-09-25T19:54:10Z",
+  "url": "https://github.com/baramiSG/Industrial_mvp/actions/runs/36175983021"
+}

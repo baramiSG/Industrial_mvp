@@ -1,0 +1,309 @@
+Docker image build	UNKNOWN STEP	﻿2026-09-25T18:50:42.0191929Z Current runner version: '2.337.0'
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.0212716Z ##[group]Runner Image Provisioner
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.0213537Z Hosted Compute Agent
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.0214012Z Version: 20260828.587
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.0214517Z Commit: abac92662cab4cc7352de4f9f9d2e2419aad9c29
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.0215213Z Build Date: 2026-08-28T16:44:25Z
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.0215769Z Worker ID: {95b1921c-a83f-40bf-ac6b-31e9577fe129}
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.0216409Z Azure Region: westus3
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.0216866Z ##[endgroup]
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.0217920Z ##[group]Operating System
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.0218470Z Ubuntu
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.0218893Z 24.04.5
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.0219693Z LTS
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.0220135Z ##[endgroup]
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.0220584Z ##[group]Runner Image
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.0221097Z Image: ubuntu-24.04
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.0221580Z Version: 20260920.314.1
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.0222609Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260920.314/images/ubuntu/Ubuntu2404-Readme.md
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.0223839Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260920.314
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.0224619Z ##[endgroup]
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.0225553Z ##[group]GITHUB_TOKEN Permissions
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.0227338Z Contents: read
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.0227803Z Metadata: read
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.0228261Z ##[endgroup]
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.0230323Z Secret source: Actions
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.0231076Z Cache mode: write
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.0231703Z Prepare workflow directory
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.0570228Z Prepare all required actions
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.0625214Z Getting action download info
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.3764886Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.6949944Z Complete job name: Docker image build
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.7597271Z ##[group]Run actions/checkout@v4
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.7598009Z with:
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.7598459Z   persist-credentials: false
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.7598971Z   repository: baramiSG/Industrial_mvp
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.7602895Z   token: ***
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.7603462Z   ssh-strict: true
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.7603920Z   ssh-user: git
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.7604342Z   clean: true
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.7604780Z   sparse-checkout-cone-mode: true
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.7605318Z   fetch-depth: 1
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.7605846Z   fetch-tags: false
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.7606292Z   show-progress: true
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.7606734Z   lfs: false
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.7607143Z   submodules: false
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.7607628Z   set-safe-directory: true
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.7608108Z   allow-unsafe-pr-checkout: false
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.7608852Z ##[endgroup]
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.8474826Z Syncing repository: baramiSG/Industrial_mvp
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.8477112Z ##[group]Getting Git version info
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.8478319Z Working directory is '/home/runner/work/Industrial_mvp/Industrial_mvp'
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.8479656Z [command]/usr/bin/git version
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.8560144Z git version 2.55.0
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.8583722Z ##[endgroup]
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.8590519Z Temporarily overriding HOME='/home/runner/work/_temp/99287a74-7c9b-4a80-870e-9ecd11495597' before making global git config changes
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.8592217Z Adding repository directory to the temporary git global config as a safe directory
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.8595478Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Industrial_mvp/Industrial_mvp
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.8641369Z Deleting the contents of '/home/runner/work/Industrial_mvp/Industrial_mvp'
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.8648067Z ##[group]Initializing the repository
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.8654968Z [command]/usr/bin/git init /home/runner/work/Industrial_mvp/Industrial_mvp
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.8760012Z hint: Using 'master' as the name for the initial branch. This default branch name
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.8761451Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.8762705Z hint: to use in all of your new repositories, which will suppress this warning,
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.8763865Z hint: call:
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.8764487Z hint:
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.8765272Z hint: 	git config --global init.defaultBranch <name>
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.8766108Z hint:
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.8766881Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.8768030Z hint: 'development'. The just-created branch can be renamed via this command:
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.8768976Z hint:
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.8769817Z hint: 	git branch -m <name>
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.8770461Z hint:
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.8771238Z hint: Disable this message with "git config set advice.defaultBranchName false"
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.8772955Z Initialized empty Git repository in /home/runner/work/Industrial_mvp/Industrial_mvp/.git/
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.8775684Z [command]/usr/bin/git remote add origin https://github.com/baramiSG/Industrial_mvp
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.8818738Z ##[endgroup]
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.8819852Z ##[group]Disabling automatic garbage collection
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.8823203Z [command]/usr/bin/git config --local gc.auto 0
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.8848486Z ##[endgroup]
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.8849577Z ##[group]Setting up auth
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.8855354Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.8884351Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.9214257Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.9243144Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.9410280Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.9435780Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.9591573Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.9625355Z ##[endgroup]
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.9626651Z ##[group]Fetching the repository
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:42.9634356Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +0ba7806c8d9c0960d6647389a6b11694f00aaf5c:refs/remotes/pull/40/merge
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:48.2875621Z From https://github.com/baramiSG/Industrial_mvp
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:48.2878184Z  * [new ref]         0ba7806c8d9c0960d6647389a6b11694f00aaf5c -> pull/40/merge
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:48.2884989Z ##[endgroup]
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:48.2887808Z ##[group]Determining the checkout info
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:48.2890528Z ##[endgroup]
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:48.2892172Z [command]/usr/bin/git sparse-checkout disable
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:48.2946647Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:48.2975485Z ##[group]Checking out the ref
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:48.2977856Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/40/merge
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:49.0379813Z Note: switching to 'refs/remotes/pull/40/merge'.
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:49.0380464Z 
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:49.0380882Z You are in 'detached HEAD' state. You can look around, make experimental
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:49.0381949Z changes and commit them, and you can discard any commits you make in this
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:49.0382871Z state without impacting any branches by switching back to a branch.
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:49.0383342Z 
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:49.0383730Z If you want to create a new branch to retain commits you create, you may
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:49.0384711Z do so (now or later) by using -c with the switch command. Example:
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:49.0385181Z 
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:49.0385388Z   git switch -c <new-branch-name>
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:49.0385688Z 
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:49.0385944Z Or undo this operation with:
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:49.0386567Z 
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:49.0386741Z   git switch -
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:49.0387031Z 
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:49.0387440Z Turn off this advice by setting config variable advice.detachedHead to false
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:49.0387917Z 
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:49.0388501Z HEAD is now at 0ba7806 Merge 39614fcdd8d8eb9a96381c3d1b806343d5164419 into ce407db9832b61c5a8a85dfda2e3b7623da2fbc9
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:49.0418378Z ##[endgroup]
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:49.0455431Z [command]/usr/bin/git log -1 --format=%H
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:49.0475800Z 0ba7806c8d9c0960d6647389a6b11694f00aaf5c
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:49.0492448Z ##[group]Removing auth
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:49.0495495Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:49.0520047Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:49.0684765Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:49.0705823Z http.https://github.com/.extraheader
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:49.0711306Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:49.0738445Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:49.0898937Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:49.0922822Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:49.1084483Z ##[endgroup]
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:49.1302205Z ##[group]Run docker build --file Dockerfile --tag industrial-opportunity-resolution-mvp:ci .
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:49.1302961Z ^[[36;1mdocker build --file Dockerfile --tag industrial-opportunity-resolution-mvp:ci .^[[0m
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:49.1506062Z shell: /usr/bin/bash -e {0}
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:49.1506527Z ##[endgroup]
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:50.0337466Z #0 building with "default" instance using docker driver
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:50.0337874Z 
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:50.0338504Z #1 [internal] load build definition from Dockerfile
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:50.0339367Z #1 transferring dockerfile: 354B done
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:50.0339870Z #1 DONE 0.0s
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:50.0340242Z 
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:50.0340525Z #2 [internal] load metadata for docker.io/library/python:3.12-slim
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:50.2121226Z #2 ...
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:50.2121695Z 
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:50.2121994Z #3 [auth] library/python:pull token for registry-1.docker.io
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:50.2122617Z #3 DONE 0.0s
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:50.3623362Z 
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:50.3624630Z #2 [internal] load metadata for docker.io/library/python:3.12-slim
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:50.6128666Z #2 DONE 0.7s
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:50.7403001Z 
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:50.7404110Z #4 [internal] load .dockerignore
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:50.7405534Z #4 transferring context: 153B done
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:50.7430234Z #4 DONE 0.0s
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:50.7459514Z 
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:50.7460287Z #5 [1/8] FROM docker.io/library/python:3.12-slim@sha256:2f17fc044b579bab302c2e8054d3a686e2cb9a83de48e70534b94cd8ebbe06a9
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:50.7462113Z #5 resolve docker.io/library/python:3.12-slim@sha256:2f17fc044b579bab302c2e8054d3a686e2cb9a83de48e70534b94cd8ebbe06a9 done
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:50.7463021Z #5 sha256:3764a9a7d1e8a98213ab2201a41dbf3da9c60240ea35a5ea96ab994555070a70 1.29MB / 1.29MB 0.1s done
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:50.7464379Z #5 sha256:b0dc7f87bef15c2536cb182d6c48b52f90a0522884ec9eb222f833fa97ffebf0 0B / 12.12MB 0.1s
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:50.7490132Z #5 sha256:06ad939ed42b51caafb25b14810875d14e0ee0c441d3e2e5e46475fb8c150bca 0B / 249B 0.1s
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:50.7491332Z #5 sha256:2f17fc044b579bab302c2e8054d3a686e2cb9a83de48e70534b94cd8ebbe06a9 10.37kB / 10.37kB done
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:50.7492479Z #5 sha256:44ff437bba879d4941b710a369a8f19266aea34b29002807f0c487fabc9eec9b 1.75kB / 1.75kB done
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:50.7493887Z #5 sha256:9e87977b867847e186d066f531ef783b006d582a985c341c269446088d90f2c4 5.65kB / 5.65kB done
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:50.7494721Z #5 sha256:6b37362b3da78869050b894b799ad4df04f1f3b52774087db0d81151570244c8 0B / 29.83MB 0.1s
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:50.9492231Z #5 sha256:b0dc7f87bef15c2536cb182d6c48b52f90a0522884ec9eb222f833fa97ffebf0 12.12MB / 12.12MB 0.2s done
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:50.9518629Z #5 sha256:06ad939ed42b51caafb25b14810875d14e0ee0c441d3e2e5e46475fb8c150bca 249B / 249B 0.2s done
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:50.9523083Z #5 sha256:6b37362b3da78869050b894b799ad4df04f1f3b52774087db0d81151570244c8 29.83MB / 29.83MB 0.3s
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:51.1490661Z #5 sha256:6b37362b3da78869050b894b799ad4df04f1f3b52774087db0d81151570244c8 29.83MB / 29.83MB 0.4s done
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:51.1492566Z #5 extracting sha256:6b37362b3da78869050b894b799ad4df04f1f3b52774087db0d81151570244c8
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:51.4234716Z #5 ...
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:51.4236221Z 
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:51.4236700Z #6 [internal] load build context
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:51.4237652Z #6 transferring context: 159.55MB 0.6s done
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:51.4238532Z #6 DONE 0.6s
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:51.4238808Z 
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:51.4239965Z #5 [1/8] FROM docker.io/library/python:3.12-slim@sha256:2f17fc044b579bab302c2e8054d3a686e2cb9a83de48e70534b94cd8ebbe06a9
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:51.9504507Z #5 extracting sha256:6b37362b3da78869050b894b799ad4df04f1f3b52774087db0d81151570244c8 0.7s done
+Docker image build	UNKNOWN STEP	2026-09-25T18:50:51.9505126Z #5 extracting sha256:3764a9a7d1e8a98213ab2201a41dbf3da9c60240ea35a5ea96ab994555070a70 0.1s done
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:00.8663529Z #5 extracting sha256:b0dc7f87bef15c2536cb182d6c48b52f90a0522884ec9eb222f833fa97ffebf0
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:01.4009581Z #5 extracting sha256:b0dc7f87bef15c2536cb182d6c48b52f90a0522884ec9eb222f833fa97ffebf0 0.4s done
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:01.5430133Z #5 extracting sha256:06ad939ed42b51caafb25b14810875d14e0ee0c441d3e2e5e46475fb8c150bca
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:01.7677342Z #5 extracting sha256:06ad939ed42b51caafb25b14810875d14e0ee0c441d3e2e5e46475fb8c150bca done
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:01.7678154Z #5 DONE 10.9s
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:01.7678399Z 
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:01.7678568Z #7 [2/8] WORKDIR /app
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:01.7678940Z #7 DONE 0.0s
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:01.7679314Z 
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:01.7679605Z #8 [3/8] COPY pyproject.toml README.md ./
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:01.7680069Z #8 DONE 0.0s
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:01.7680274Z 
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:01.7680405Z #9 [4/8] COPY src ./src
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:01.7680828Z #9 DONE 0.0s
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:01.7681048Z 
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:01.7681195Z #10 [5/8] COPY config ./config
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:01.7681635Z #10 DONE 0.0s
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:01.7681938Z 
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:01.7682129Z #11 [6/8] COPY data ./data
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:02.6144562Z #11 DONE 1.0s
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:02.8265152Z 
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:02.8265728Z #12 [7/8] COPY docs ./docs
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:02.8266183Z #12 DONE 0.1s
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:02.8266322Z 
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:02.8266482Z #13 [8/8] RUN pip install --no-cache-dir .
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:03.7358700Z #13 1.059 Processing /app
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:03.8884043Z #13 1.062   Installing build dependencies: started
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:05.4958149Z #13 2.819   Installing build dependencies: finished with status 'done'
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:05.6467506Z #13 2.820   Getting requirements to build wheel: started
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:05.9472279Z #13 3.271   Getting requirements to build wheel: finished with status 'done'
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:06.0986510Z #13 3.272   Preparing metadata (pyproject.toml): started
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:06.4043712Z #13 3.728   Preparing metadata (pyproject.toml): finished with status 'done'
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:06.5071294Z #13 3.831 Collecting fastapi<1,>=0.110 (from industrial-opportunity-resolution-mvp==0.2.0)
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:06.6302088Z #13 3.880   Downloading fastapi-0.141.1-py3-none-any.whl.metadata (27 kB)
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:06.6302896Z #13 3.915 Collecting uvicorn<1,>=0.29 (from uvicorn[standard]<1,>=0.29->industrial-opportunity-resolution-mvp==0.2.0)
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:06.6303519Z #13 3.925   Downloading uvicorn-0.54.0-py3-none-any.whl.metadata (6.6 kB)
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:06.6304153Z #13 3.954 Collecting PyYAML<7,>=6 (from industrial-opportunity-resolution-mvp==0.2.0)
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:06.7787943Z #13 3.964   Downloading pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.4 kB)
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:06.7789938Z #13 3.990 Collecting starlette>=0.46.0 (from fastapi<1,>=0.110->industrial-opportunity-resolution-mvp==0.2.0)
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:06.7790775Z #13 3.999   Downloading starlette-1.7.0-py3-none-any.whl.metadata (6.6 kB)
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:06.7791528Z #13 4.103 Collecting pydantic>=2.9.0 (from fastapi<1,>=0.110->industrial-opportunity-resolution-mvp==0.2.0)
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:06.8896417Z #13 4.112   Downloading pydantic-2.13.5-py3-none-any.whl.metadata (110 kB)
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:06.8897510Z #13 4.142 Collecting typing-extensions>=4.8.0 (from fastapi<1,>=0.110->industrial-opportunity-resolution-mvp==0.2.0)
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:06.8898379Z #13 4.151   Downloading typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:06.8899540Z #13 4.164 Collecting typing-inspection>=0.4.2 (from fastapi<1,>=0.110->industrial-opportunity-resolution-mvp==0.2.0)
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:06.8900547Z #13 4.173   Downloading typing_inspection-0.4.4-py3-none-any.whl.metadata (2.6 kB)
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:06.8901692Z #13 4.185 Collecting annotated-doc>=0.0.2 (from fastapi<1,>=0.110->industrial-opportunity-resolution-mvp==0.2.0)
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:06.8902522Z #13 4.195   Downloading annotated_doc-0.0.5-py3-none-any.whl.metadata (6.5 kB)
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:06.8903575Z #13 4.214 Collecting click>=7.0 (from uvicorn<1,>=0.29->uvicorn[standard]<1,>=0.29->industrial-opportunity-resolution-mvp==0.2.0)
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:07.0139746Z #13 4.223   Downloading click-8.5.0-py3-none-any.whl.metadata (2.6 kB)
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:07.0141206Z #13 4.236 Collecting h11>=0.8 (from uvicorn<1,>=0.29->uvicorn[standard]<1,>=0.29->industrial-opportunity-resolution-mvp==0.2.0)
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:07.0141892Z #13 4.245   Downloading h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:07.0142663Z #13 4.271 Collecting httptools>=0.8.0 (from uvicorn[standard]<1,>=0.29->industrial-opportunity-resolution-mvp==0.2.0)
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:07.0143427Z #13 4.280   Downloading httptools-0.8.0-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (3.5 kB)
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:07.0144130Z #13 4.297 Collecting python-dotenv>=0.13 (from uvicorn[standard]<1,>=0.29->industrial-opportunity-resolution-mvp==0.2.0)
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:07.0144759Z #13 4.307   Downloading python_dotenv-1.2.3-py3-none-any.whl.metadata (29 kB)
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:07.0145328Z #13 4.338 Collecting uvloop>=0.15.1 (from uvicorn[standard]<1,>=0.29->industrial-opportunity-resolution-mvp==0.2.0)
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:07.1681665Z #13 4.347   Downloading uvloop-0.22.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (4.9 kB)
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:07.1683185Z #13 4.400 Collecting watchfiles>=0.20 (from uvicorn[standard]<1,>=0.29->industrial-opportunity-resolution-mvp==0.2.0)
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:07.1684407Z #13 4.410   Downloading watchfiles-1.3.0-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.9 kB)
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:07.1685654Z #13 4.492 Collecting websockets>=13.0 (from uvicorn[standard]<1,>=0.29->industrial-opportunity-resolution-mvp==0.2.0)
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:07.3517964Z #13 4.502   Downloading websockets-17.1-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (6.3 kB)
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:07.3518743Z #13 4.516 Collecting annotated-types>=0.6.0 (from pydantic>=2.9.0->fastapi<1,>=0.110->industrial-opportunity-resolution-mvp==0.2.0)
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:07.3519601Z #13 4.525   Downloading annotated_types-0.8.0-py3-none-any.whl.metadata (15 kB)
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:07.6308735Z #13 4.955 Collecting pydantic-core==2.46.5 (from pydantic>=2.9.0->fastapi<1,>=0.110->industrial-opportunity-resolution-mvp==0.2.0)
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:07.7359768Z #13 4.964   Downloading pydantic_core-2.46.5-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.6 kB)
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:07.7361043Z #13 4.987 Collecting anyio<5,>=4.0.0 (from starlette>=0.46.0->fastapi<1,>=0.110->industrial-opportunity-resolution-mvp==0.2.0)
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:07.7362472Z #13 4.997   Downloading anyio-4.15.1-py3-none-any.whl.metadata (4.7 kB)
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:07.7363471Z #13 5.024 Collecting idna>=2.8 (from anyio<5,>=4.0.0->starlette>=0.46.0->fastapi<1,>=0.110->industrial-opportunity-resolution-mvp==0.2.0)
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:07.7364346Z #13 5.034   Downloading idna-3.20-py3-none-any.whl.metadata (7.2 kB)
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:07.7365098Z #13 5.048 Downloading fastapi-0.141.1-py3-none-any.whl (131 kB)
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:07.7366067Z #13 5.060 Downloading pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (807 kB)
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:07.8397837Z #13 5.086    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 807.9/807.9 kB 34.6 MB/s eta 0:00:00
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:07.8398737Z #13 5.096 Downloading uvicorn-0.54.0-py3-none-any.whl (87 kB)
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:07.8399561Z #13 5.106 Downloading annotated_doc-0.0.5-py3-none-any.whl (5.3 kB)
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:07.8400179Z #13 5.116 Downloading click-8.5.0-py3-none-any.whl (125 kB)
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:07.8400738Z #13 5.125 Downloading h11-0.16.0-py3-none-any.whl (37 kB)
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:07.8401581Z #13 5.135 Downloading httptools-0.8.0-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (523 kB)
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:07.8402366Z #13 5.153 Downloading pydantic-2.13.5-py3-none-any.whl (472 kB)
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:07.8403199Z #13 5.164 Downloading pydantic_core-2.46.5-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.1 MB)
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:07.9444567Z #13 5.182    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.1/2.1 MB 113.3 MB/s eta 0:00:00
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:07.9445803Z #13 5.191 Downloading python_dotenv-1.2.3-py3-none-any.whl (22 kB)
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:07.9446477Z #13 5.201 Downloading starlette-1.7.0-py3-none-any.whl (78 kB)
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:07.9447136Z #13 5.211 Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:07.9447882Z #13 5.220 Downloading typing_inspection-0.4.4-py3-none-any.whl (14 kB)
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:07.9448845Z #13 5.230 Downloading uvloop-0.22.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (4.4 MB)
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:07.9450278Z #13 5.249    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.4/4.4 MB 256.7 MB/s eta 0:00:00
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:07.9451064Z #13 5.258 Downloading watchfiles-1.3.0-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (458 kB)
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:07.9451952Z #13 5.268 Downloading websockets-17.1-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (224 kB)
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:08.1452581Z #13 5.278 Downloading annotated_types-0.8.0-py3-none-any.whl (13 kB)
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:08.1453243Z #13 5.288 Downloading anyio-4.15.1-py3-none-any.whl (132 kB)
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:08.1453688Z #13 5.298 Downloading idna-3.20-py3-none-any.whl (69 kB)
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:08.1454201Z #13 5.318 Building wheels for collected packages: industrial-opportunity-resolution-mvp
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:08.1454934Z #13 5.319   Building wheel for industrial-opportunity-resolution-mvp (pyproject.toml): started
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:08.5697124Z #13 5.893   Building wheel for industrial-opportunity-resolution-mvp (pyproject.toml): finished with status 'done'
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:08.7498671Z #13 5.895   Created wheel for industrial-opportunity-resolution-mvp: filename=industrial_opportunity_resolution_mvp-0.2.0-py3-none-any.whl size=642864 sha256=81efc2debba0be912eaa6342814874ad3cc78ceaa59a7801dc3d2d19ee58e4bd
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:08.7500308Z #13 5.895   Stored in directory: /tmp/pip-ephem-wheel-cache-z0efoxez/wheels/54/1b/b7/aa63e25c8f14f4f2ae7b04e6097bdecb770e455c5c1ee0a600
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:08.7501146Z #13 5.898 Successfully built industrial-opportunity-resolution-mvp
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:08.7502669Z #13 5.923 Installing collected packages: websockets, uvloop, typing-extensions, PyYAML, python-dotenv, idna, httptools, h11, click, annotated-types, annotated-doc, uvicorn, typing-inspection, pydantic-core, anyio, watchfiles, starlette, pydantic, fastapi, industrial-opportunity-resolution-mvp
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:09.7431445Z #13 7.067 Successfully installed PyYAML-6.0.3 annotated-doc-0.0.5 annotated-types-0.8.0 anyio-4.15.1 click-8.5.0 fastapi-0.141.1 h11-0.16.0 httptools-0.8.0 idna-3.20 industrial-opportunity-resolution-mvp-0.2.0 pydantic-2.13.5 pydantic-core-2.46.5 python-dotenv-1.2.3 starlette-1.7.0 typing-extensions-4.16.0 typing-inspection-0.4.4 uvicorn-0.54.0 uvloop-0.22.1 watchfiles-1.3.0 websockets-17.1
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:09.9738848Z #13 7.067 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:09.9740644Z #13 7.147 
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:09.9741201Z #13 7.147 [notice] A new release of pip is available: 25.0.1 -> 26.2.1
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:09.9741812Z #13 7.147 [notice] To update, run: pip install --upgrade pip
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:10.2678115Z #13 DONE 7.6s
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:10.4193849Z 
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:10.4194689Z #14 exporting to image
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:10.4195251Z #14 exporting layers
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:11.0177505Z #14 exporting layers 0.7s done
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:11.0343697Z #14 writing image sha256:8e7bb4e2b9e14f05ed41faf2742fe868b2f775ccec743e041ada06a555e74cd7 done
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:11.0344724Z #14 naming to docker.io/library/industrial-opportunity-resolution-mvp:ci done
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:11.0345271Z #14 DONE 0.8s
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:11.0424441Z ##[group]Run docker run --rm industrial-opportunity-resolution-mvp:ci \
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:11.0425045Z ^[[36;1mdocker run --rm industrial-opportunity-resolution-mvp:ci \^[[0m
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:11.0425630Z ^[[36;1m  python -c "import importlib.util,sys; sys.exit(0 if importlib.util.find_spec('neo4j') is None else 1)"^[[0m
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:11.0426180Z ^[[36;1mecho IMAGE_HAS_NO_NEO4J_OK^[[0m
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:11.0465486Z shell: /usr/bin/bash -e {0}
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:11.0465909Z ##[endgroup]
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:11.3227874Z IMAGE_HAS_NO_NEO4J_OK
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:11.3335529Z Post job cleanup.
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:11.4063613Z [command]/usr/bin/git version
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:11.4095003Z git version 2.55.0
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:11.4122960Z Temporarily overriding HOME='/home/runner/work/_temp/83c7797d-cc31-4b33-b193-ca2ca5ca7352' before making global git config changes
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:11.4124042Z Adding repository directory to the temporary git global config as a safe directory
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:11.4127633Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Industrial_mvp/Industrial_mvp
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:11.4155660Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:11.4181558Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:11.4367075Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:11.4401503Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:11.4587184Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:11.4629864Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:11.4958384Z Cleaning up orphan processes
+Docker image build	UNKNOWN STEP	2026-09-25T18:51:11.5266417Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

@@ -1,0 +1,29 @@
+{
+  "utc": "2026-09-26T01:16:54.823370+00:00",
+  "status": "FAILED_RECOVERY_BLOCKED_LIVE_STATE_UNVERIFIED",
+  "failed_view": {
+    "check": "pending",
+    "graph_status": "GRAPH_UNAVAILABLE",
+    "http_status": 200,
+    "mode": "simulated",
+    "opportunity_id": "SAU-H6-310510",
+    "reason_code": "CONNECTION_FAILED",
+    "view": "shared_enabler"
+  },
+  "completed_views": 46,
+  "stock_steps_completed": [
+    "clear",
+    "first-load925/1045",
+    "reload0/0",
+    "verify",
+    "operator-test"
+  ],
+  "application_stage": "AVAILABLE API, no browser journey",
+  "recovery": "Wrapper full-inventory read failed before classification and before recovery clear; no recovery command executed",
+  "actual_exception_from_tool_session_54883": "ReadServiceUnavailable: No read service currently available; then SessionExpired: Failed to obtain connection towards READ server",
+  "trace_source": "Actual tool session54883 output; whole wrapper stderr not retained to a file by parent. Do not claim that unavailable raw log exists. Child07-application.stderr retained.",
+  "last_verified_projection": "GRAPH-SAU-2026-09-12-6f43b1a8c4aa",
+  "current_live_state": "UNVERIFIED_PENDING_READONLY_CONNECTIVITY_AND_FULL_INVENTORY",
+  "writer_active": false,
+  "next": "Read-only diagnosis. No mutation without fresh exact state and independently reviewed scoped recovery/resumption."
+}
