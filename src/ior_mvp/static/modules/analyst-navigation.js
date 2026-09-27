@@ -1,5 +1,5 @@
 import { state } from "./state.js";
-import { handleGraphAction } from "./graph/index.js";
+import { openGraph } from "./graph/index.js";
 import { closeClaimEvidence, handleClaimAction } from "./executive/evidence.js";
 
 const VIEWS = Object.freeze(["adjacency", "route_blocking", "shared_enabler", "evidence_to_change"]);
@@ -34,6 +34,5 @@ export async function openRequestedGraph() {
   requestedGraph = null;
   if (state.analysis?.opportunity.id !== requested.opportunityId || state.analysis.mode !== requested.mode) return;
   state.graph.viewId = requested.viewId;
-  const toggle = document.getElementById("graph-toggle");
-  if (toggle) await handleGraphAction(toggle);
+  await openGraph();
 }

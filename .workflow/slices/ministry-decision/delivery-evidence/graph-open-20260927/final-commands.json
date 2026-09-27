@@ -1,0 +1,160 @@
+[
+  {
+    "name": "prohibited",
+    "argv": [
+      "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/graph-open-final-candidate-r1/proof/.venv/bin/python",
+      "-B",
+      "scripts/check_prohibited_files.py"
+    ],
+    "cwd": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/graph-open-final-candidate-r1/proof",
+    "exit_code": 0,
+    "seconds": 1.017,
+    "stdout_sha256": "afcdb1efebcabfe2250c96fa73ceb5352121bfc15d378c75b4bd1d3e7ebede53",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "threshold",
+    "argv": [
+      "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/graph-open-final-candidate-r1/proof/.venv/bin/python",
+      "-B",
+      "scripts/check_threshold_literals.py"
+    ],
+    "cwd": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/graph-open-final-candidate-r1/proof",
+    "exit_code": 0,
+    "seconds": 0.32,
+    "stdout_sha256": "1ad72010a403b32f06265283ee6ea124a09c95a44d75ff32b9df5b8d600493f1",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "ui",
+    "argv": [
+      "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/graph-open-final-candidate-r1/proof/.venv/bin/python",
+      "-B",
+      "scripts/check_ui_contracts.py"
+    ],
+    "cwd": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/graph-open-final-candidate-r1/proof",
+    "exit_code": 0,
+    "seconds": 0.318,
+    "stdout_sha256": "ad8e224176b362994b66691ad6275399e407dfdc06bb213187e45a6a31d51702",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "es",
+    "argv": [
+      "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/graph-open-final-candidate-r1/proof/.venv/bin/python",
+      "-B",
+      "scripts/check_es_modules.py",
+      "--node",
+      "node"
+    ],
+    "cwd": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/graph-open-final-candidate-r1/proof",
+    "exit_code": 0,
+    "seconds": 0.968,
+    "stdout_sha256": "e694b83558825fceba65c5b43fdb469b9087bea5591be203e8472608992720f0",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "compile",
+    "argv": [
+      "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/graph-open-final-candidate-r1/proof/.venv/bin/python",
+      "-B",
+      "-m",
+      "compileall",
+      "-q",
+      "src",
+      "scripts",
+      "tests",
+      "browser_tests",
+      "graph_tests"
+    ],
+    "cwd": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/graph-open-final-candidate-r1/proof",
+    "exit_code": 0,
+    "seconds": 0.537,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "integrity",
+    "argv": [
+      "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/graph-open-final-candidate-r1/proof/.venv/bin/python",
+      "-B",
+      "scripts/verify_integrity.py"
+    ],
+    "cwd": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/graph-open-final-candidate-r1/proof",
+    "exit_code": 0,
+    "seconds": 0.155,
+    "stdout_sha256": "6b608ffcb9a862f030cf907573fa823e549eba43245c8b2869809be2ca6f0e11",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "pytest",
+    "argv": [
+      "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/graph-open-final-candidate-r1/proof/.venv/bin/python",
+      "-B",
+      "-m",
+      "pytest",
+      "-q"
+    ],
+    "cwd": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/graph-open-final-candidate-r1/proof",
+    "exit_code": 0,
+    "seconds": 148.034,
+    "stdout_sha256": "95ba66d1d3c7c150480f49daf238147166c094505badd44644fa460187c0b159",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "demo-smoke",
+    "argv": [
+      "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/graph-open-final-candidate-r1/proof/.venv/bin/python",
+      "-B",
+      "scripts/demo_smoke.py"
+    ],
+    "cwd": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/graph-open-final-candidate-r1/proof",
+    "exit_code": 0,
+    "seconds": 0.268,
+    "stdout_sha256": "90a83a3de7ad0092bab981f4268aab1461582c897e17eeff8087cb568844e4e6",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "scenario",
+    "argv": [
+      "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/graph-open-final-candidate-r1/proof/.venv/bin/python",
+      "-B",
+      "scripts/validate_scenarios.py"
+    ],
+    "cwd": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/graph-open-final-candidate-r1/proof",
+    "exit_code": 0,
+    "seconds": 0.231,
+    "stdout_sha256": "213b7ab2a7ca18a2a46201ff8e6674007c03ff3882ffde6199aa3a8f2d85714a",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "reconstruction",
+    "argv": [
+      "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/graph-open-final-candidate-r1/proof/.venv/bin/python",
+      "-B",
+      "scripts/reconstruct_snapshot.py",
+      "--all"
+    ],
+    "cwd": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/graph-open-final-candidate-r1/proof",
+    "exit_code": 0,
+    "seconds": 64.384,
+    "stdout_sha256": "24493446d41c852be8d795c21731605392144f9ddba6815feec30738e991d5e9",
+    "stderr_sha256": "9a5bcd9bf71a1cb841b499bd9aa3752fa1eaa3034bef1476702cbc7582689548"
+  },
+  {
+    "name": "graph-build-check",
+    "argv": [
+      "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/graph-open-final-candidate-r1/proof/.venv/bin/python",
+      "-B",
+      "-m",
+      "ior_mvp.graph",
+      "build",
+      "--check"
+    ],
+    "cwd": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/graph-open-final-candidate-r1/proof",
+    "exit_code": 0,
+    "seconds": 1.55,
+    "stdout_sha256": "6bea7681e30821ec8210fca75b7addff60d8dda76ebaf1076a0694ed19b91311",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+]

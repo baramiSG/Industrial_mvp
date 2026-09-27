@@ -16,9 +16,9 @@
     "auth": "gh CLI, account baramiSG, scopes repo+workflow",
     "merge_policy": "squash; ADR-007 Supervisor gate (gh pr checks all pass)"
   },
-  "current_slice": "S05-release-state",
-  "state": "COMPLETE",
-  "state_note": "COMPLETE is effective on the squash merge of release-state PR #6 with its four checks and default-branch CI green; the annotated tag v0.2.0 is placed on that merge commit by the Supervisor. If PR #6 is not merged, the project state is READY_TO_MERGE.",
+  "current_slice": "ministry-decision",
+  "state": "V3_1_MERGED_GRAPH_OPEN_CORRECTION_READY_FOR_CI_LIVE_PENDING",
+  "state_note": "Ministry v3.1 merged in PR43. Graph-open correction independently approved and locally verified; corrective GitHub delivery and complete live Aura application acceptance pending. New owner UX finding remains open for Astra and Claude Opus5.5 Max reassessment in the remaining frontend work.",
   "main_head_before_release_state": "55304dbfbd49f69d567406faddcc308aea65c804",
   "release": {
     "version": "0.2.0",
@@ -102,7 +102,7 @@
     "Rotate any credentials in the local git-ignored .env (never tracked, never packaged, never read by the Supervisor).",
     "Optionally move the repository to a GitHub plan with rulesets so the four CI checks become required checks (ADR-007)."
   ],
-  "last_updated": "2026-09-27T00:22:55.372921+00:00",
+  "last_updated": "2026-09-27T05:19:28.951143+00:00",
   "history": [
     {
       "at": "2026-09-02T01:05:00+03:00",
@@ -1310,8 +1310,8 @@
     "complete_mvp": false
   },
   "ministry_decision_m_20260926": {
-    "state": "IMPLEMENTATION_ACCEPTED_READY_FOR_GITHUB_DELIVERY",
-    "branch": "slice/ministry-decision",
+    "state": "V3_1_MERGED_GRAPH_OPEN_CORRECTION_READY_FOR_CI_LIVE_PENDING",
+    "branch": "slice/ministry-graph-open",
     "base": "bbcfe7836eb4e3c3e71ddd6b95986c45324267d4",
     "adr": "ADR-033",
     "records": ".workflow/slices/ministry-decision/",
@@ -1362,7 +1362,7 @@
       "strict_1440_steel_geometry": "EN_AR_PASS; isolated CSS flex-grow removal fails protected EN right and AR left small anchors with button boxes unchanged"
     },
     "source_readiness": ".workflow/slices/ministry-decision/SOURCE-READINESS.md",
-    "source_gate_note": "Current M1 source/artifact/local gates complete: 4198 Python, 881 functional/eight visual, seven strict R1 commands, 88 feeds/22 contexts and one graph/recovery gate. Independent Claude approval and delegated implementation/clarity acceptance recorded. Prior c984 rejection remains historical; GitHub and M live Aura pending.",
+    "source_gate_note": "PR43 merged/6mainSUCCESS. Corrected graph-open source passes14new+9existing focusedbrowser,115focusedPython,11finalcommands/4198pytest and8visual;140imagesbyteequal. Independent Claude approval. Corrective GitHub and complete live application acceptance pending.",
     "clarity_acceptance_procedure": ".workflow/slices/ministry-decision/completion.md; existing owner replacement applied once, actual Astra Max rendered assessment included in the same Claude implementation review and accepted under delegation; no human/Ministry endorsement",
     "f_dependency": {
       "pr": 42,
@@ -1372,9 +1372,9 @@
       "required_jobs": "six SUCCESS on each run"
     },
     "remaining": [
-      "PR and all six required hosted checks",
-      "Squash merge and all six green main jobs",
-      "Delivered-runtime M Aura binding/preflight/recovery/concrete GO/live result and acceptance",
+      "Corrective PR and all six required hosted checks",
+      "Corrective squash merge and all six green main jobs",
+      "Corrected merged-runtime application-only Aura continuation and complete live acceptance",
       "Then S20, S21 and S22 including route-8 disposition and final release"
     ],
     "record_candidate_tree": null,
@@ -1454,6 +1454,38 @@
       "live_aura": "PENDING_DELIVERED_SUBJECT",
       "evidence": ".workflow/slices/ministry-decision/test_evidence.md",
       "delegated_acceptance": ".workflow/slices/ministry-decision/delivery-evidence/local-m1-20260927/delegated-implementation-acceptance.json"
+    },
+    "github_delivery": {
+      "pr": 43,
+      "merge_commit": "d1916ce3f17817dea7be42d1a6529043f6b34b83",
+      "main_ci_run": 36288315175,
+      "required_jobs": "six SUCCESS"
+    },
+    "graph_open_correction": {
+      "status": "DELEGATED_CORRECTIVE_IMPLEMENTATION_ACCEPTANCE_FOR_DELIVERY",
+      "review_sha256": "b5a8c705385054e58ca0de706be0bf4fb8a3d121832dec1c716089f0257ce42f",
+      "proof_commit": "d2292e49fbf9bb20aafc02f92eafade2c67a90f1",
+      "candidate_tree": "bf63f4cf8ecdc39ff830f29bbedf4eab7391ec75",
+      "local_commands_passed": 11,
+      "visual_checks_passed": 8,
+      "basis": "Actual independent Claude CLI review and root/Sol execution receipts; existing AI-only clarity acceptance reused through140byte-equal images. No human or Ministry endorsement.",
+      "remaining": "Corrective PR/six hosted checks, merge/six main checks, reviewed application-only live continuation, then M acceptance before S20.",
+      "ministry_complete": false,
+      "utc": "2026-09-27T05:19:28.949600+00:00",
+      "branch": "slice/ministry-graph-open",
+      "evidence": ".workflow/slices/ministry-decision/delivery-evidence/graph-open-20260927/",
+      "named_browser_tests": 97,
+      "images_byte_equal": 140
+    },
+    "owner_ux_reassessment": {
+      "utc": "2026-09-27T05:16:50.783657+00:00",
+      "authority": "Owner message during current frontend preview,2026-09-27",
+      "finding": "Owner could not understand the dense frontend, did not perceive a coherent flow/story or the value of the graph. Treat as substantive usability finding, not a cosmetic request.",
+      "required_assessment": "Astra industrial-domain UX/UI assessment of actual rendered journeys after reading original reasons, Ministry questions, minutes and approved requirements; independent actual Claude Opus5.5 Max assessment; synthesize strongest supported findings into bounded design plan.",
+      "implementation": "GPT-6 Sol High through Codex CLI; same independent plan and implementation review sequence.",
+      "integration": "Finish current graph-opening corrective delivery first. Carry the assessment/design correction into remaining enhanced frontend/S21 work and final S22 acceptance; preserve Ministry→S20→S21→S22 delivery order. No silent omission and no claim visual polish alone closes it.",
+      "acceptance": "Client-facing, understandable decision story from product requirement through candidate/evidence/gap/intervention/next-action/dossier; graph must make why-found, scope, supporting evidence and conclusion-changing facts useful and inspectable. Prior AI clarity assessment remains historical evidence, not a disposition of this new owner finding.",
+      "status": "OPEN_OWNER_UX_FINDING_REQUIRED_REASSESSMENT"
     }
   }
 }

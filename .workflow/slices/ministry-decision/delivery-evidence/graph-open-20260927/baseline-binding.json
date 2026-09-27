@@ -1,0 +1,57 @@
+{
+  "utc": "2026-09-27T04:52:44.951350+00:00",
+  "status": "CAPTURE_DELTA_VERIFIED_ACTUAL_BASELINE_OID_DERIVED",
+  "actual_baseline_tree": "dfc1b69dcfa198659b18e8abaca5566941aa050d",
+  "private_tree": "1d011b0e7ef7da0dfc808a9c929ba516e67e8b83",
+  "private_index_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/graph-open-baseline-binding/private.index",
+  "private_index_sha256": "2f0d9de35d64ba30ba2da39f6f586eb97a68ce69ea05ed051be6d0f306bbd619",
+  "ordinary_index_unchanged": true,
+  "ordinary_index_sha256": "521701307dbfc6cbc320f2ca0c391afde34252d5bda55658711094416bbe83cd",
+  "source_inputs_changed": [
+    "src/ior_mvp/static/modules/analyst-navigation.js",
+    "src/ior_mvp/static/modules/graph/index.js"
+  ],
+  "images_byte_equal": 140,
+  "entry_metadata_equal": true,
+  "font_hashes_equal": true,
+  "capture_result_sha256": "be9856ff53dda4fb2192cf9c6b20c3d4a705950dc0ae692ed335c908ca151ae4",
+  "plan_review_sha256": "28e9b9f73ed04bb6892499b60137168e3ad801714775da2d95424021d82f8bc7",
+  "commands": [
+    {
+      "argv": [
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "read-tree",
+        "d1916ce3f17817dea7be42d1a6529043f6b34b83"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "add",
+        "--",
+        "browser_tests/baselines"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "write-tree"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "rev-parse",
+        "1d011b0e7ef7da0dfc808a9c929ba516e67e8b83:browser_tests/baselines"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "next_action": "Sol updates only baseline-tree literal; no hash adoption without this captured provenance"
+}

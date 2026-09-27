@@ -403,3 +403,8 @@ The frozen proof `918b8fea3e618b23f27f3acf22fcc0162f2cab97`, tree `cf666ced68029
 Full browser passes 881 functional and eight visual checks. The single quiet graph gate passes nine graph, one graph UI and two unavailable-state tests, with one expected operator-only Aura skip; the exact retained 461bf service is restored and all 66 protected indexes are preserved. Claude CLI returns APPROVE — READY_FOR_CI with zero open material findings, and Astra accepts implementation and bilingual clarity under delegated authority. Earlier checkpoints, including the c984 rejection, remain historical. GitHub delivery/six green PR and main checks and required M live Aura remain pending; M is open and S20–S22 have not started.
 
 See [current test evidence](../.workflow/slices/ministry-decision/test_evidence.md), [independent review](../.workflow/slices/ministry-decision/implementation_review.md) and [acceptance](../.workflow/slices/ministry-decision/completion.md). Existing limitations and later acceptance obligations are preserved.
+
+
+### Ministry M graph-open correction — 2026-09-27
+
+[PR43](https://github.com/baramiSG/Industrial_mvp/pull/43) delivered v3.1 at `d1916ce3f17817dea7be42d1a6529043f6b34b83`; all six [main CI](https://github.com/baramiSG/Industrial_mvp/actions/runs/36288315175) jobs passed. A candidate-to-graph opening defect found during actual Aura verification is corrected and independently accepted for corrective delivery; see [correction evidence](../.workflow/slices/ministry-decision/test_evidence.md). M remains open until the correction is delivered with green main and the complete bilingual live application verification passes. S20, S21 and S22 retain their existing order and acceptance obligations.

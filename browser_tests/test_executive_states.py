@@ -627,3 +627,165 @@ def test_graph_deep_link_uses_selected_context_and_handles_unavailable(browser_s
     expect(page.locator(".graph-state-error")).to_be_visible()
     expect(page.locator("[data-graph-view]")).to_have_value("evidence_to_change")
     expect(page.locator(".mode-button.active")).to_have_attribute("data-mode", "simulated")
+
+
+@pytest.mark.parametrize("locale", LOCALES, ids=lambda item: item.code)
+@pytest.mark.parametrize(
+    "opening",
+    ("both", "view_only", "open_only", "both_nondefault_held", "error_retry", "unavailable_retry", "manual_reopen"),
+)
+def test_candidate_graph_open_requests_preserve_scope(browser_session, locale, opening):
+    from types import SimpleNamespace
+    from urllib.parse import parse_qs, unquote, urlencode, urlsplit, urlunsplit
+
+    from browser_tests.candidate_pages import goto_candidate, select_candidate_request
+    from browser_tests.graph_fixtures import _projection, _rows, graph_catalogue_fixture
+    from browser_tests.graph_pages import wait_graph_request_complete
+    from ior_mvp.graph.service import GraphService
+
+    page = browser_session.page
+    detail, line = goto_candidate(page, STEEL, locale, role="REFERENCE_LINE")
+    assert line is not None
+    finding = next(row for row in line["findings"] if row["requirement_item_id"] == "qualified_volume")
+    select_candidate_request(page, finding)
+    link = page.locator('[data-selected-subject] a[href*="graphOpen=1"]')
+    expect(link).to_have_count(1)
+    href = link.get_attribute("href")
+    assert href is not None
+    parsed = urlsplit(href)
+    query = parse_qs(parsed.query)
+    expected_context = {
+        "company_id": line["company_id"],
+        "plant_id": line["plant_id"],
+        "line_id": line["entity_id"],
+        "requirement_item_id": finding["requirement_item_id"],
+    }
+    assert expected_context == {
+        key: query[name][0]
+        for name, key in (
+            ("company", "company_id"), ("plant", "plant_id"),
+            ("line", "line_id"), ("requirement", "requirement_item_id"),
+        )
+    }
+    assert query["opportunity"] == [STEEL.id]
+    assert query["mode"] == ["simulated"]
+    assert query["locale"] == [locale.code]
+    assert query["graphView"] == ["adjacency"]
+    assert query["graphOpen"] == ["1"]
+    assert detail["candidate_discovery"]["available"] is True
+
+    projection = _projection()
+    service = GraphService(
+        SimpleNamespace(target="fixture"),
+        artifact_projection_id=projection.projection_id,
+        projection=projection,
+        status_reader=lambda _spec: {
+            "projection_id": projection.projection_id,
+            "counts": projection.counts,
+            "synthetic_partition": {},
+        },
+        view_reader=lambda _spec, view, identity, branch, _scenario: _rows(
+            view, identity, branch,
+        ),
+    )
+    requests = []
+    payloads = []
+    first_view_error = opening == "error_retry"
+    first_unavailable = opening == "unavailable_retry"
+
+    def graph_route(route):
+        nonlocal first_view_error, first_unavailable
+        url = urlsplit(route.request.url)
+        if url.path == "/api/graph/catalogue":
+            requests.append(("catalogue", None))
+            route.fulfill(json=graph_catalogue_fixture())
+            return
+        parts = url.path.split("/")
+        assert parts[1:4] == ["api", "graph", "opportunities"] and parts[5] == "views"
+        view = unquote(parts[6])
+        params = parse_qs(url.query)
+        context = {key: params.get(key, [None])[0] for key in expected_context}
+        requests.append((view, context))
+        if first_view_error:
+            first_view_error = False
+            route.fulfill(json={"view_id": view, "graph_status": "INVALID_TEST_PAYLOAD"})
+            return
+        payload = service.view(view, unquote(parts[4]), params["mode"][0], context)
+        if first_unavailable:
+            first_unavailable = False
+            route.fulfill(json={**payload, "graph_status": "GRAPH_UNAVAILABLE",
+                                "reason_code": "CONNECTION_FAILED", "nodes": [], "edges": []})
+            return
+        payloads.append(payload)
+        route.fulfill(json=payload)
+
+    page.route("**/api/graph/**", graph_route)
+    if opening == "both_nondefault_held":
+        page.add_init_script("""(() => {
+          const original = window.fetch;
+          let held = false;
+          window.__heldGraphCatalogue = { pending: false, settled: false, release: null };
+          window.fetch = (...args) => {
+            if (!held && String(args[0]).includes('/api/graph/catalogue')) {
+              held = true;
+              return new Promise((resolve, reject) => {
+                window.__heldGraphCatalogue.pending = true;
+                window.__heldGraphCatalogue.release = () => original(...args).then(
+                  response => { window.__heldGraphCatalogue.settled = true; resolve(response); }, reject,
+                );
+              });
+            }
+            return original(...args);
+          };
+        })();""")
+    if opening == "view_only":
+        query.pop("graphOpen")
+    elif opening == "open_only":
+        query.pop("graphView")
+    elif opening == "both_nondefault_held":
+        query["graphView"] = ["evidence_to_change"]
+    requested_view = "evidence_to_change" if opening == "both_nondefault_held" else "adjacency"
+    if opening in {"both", "error_retry", "unavailable_retry", "manual_reopen"}:
+        link.click()
+    else:
+        page.goto(urlunsplit((parsed.scheme, parsed.netloc, parsed.path, urlencode(query, doseq=True), parsed.fragment)))
+    if opening == "both_nondefault_held":
+        page.wait_for_function("window.__heldGraphCatalogue?.pending === true")
+        page.evaluate("window.__heldGraphCatalogue.release()")
+        page.wait_for_function("window.__heldGraphCatalogue?.settled === true")
+    if opening in {"error_retry", "unavailable_retry"}:
+        expect(page.locator(".graph-state-error [data-graph-retry]")).to_be_visible()
+        assert len([row for row in requests if row[0] == requested_view]) == 1
+        page.locator("[data-graph-retry]").click()
+        expect(page.locator(".graph-visual")).to_be_visible(timeout=5000)
+    wait_graph_request_complete(page, requested_view)
+    expect(page.locator("#graph-panel")).to_be_visible()
+    expect(page.locator("#graph-view-select")).to_have_value(requested_view)
+    focus = "LINE-SYN-MINISTRY-STEEL-001"
+    native = page.locator(f'.graph-button-list [data-graph-select="node"][data-graph-id="{focus}"]')
+    expect(native).to_have_count(1)
+    expect(native).to_have_attribute("aria-pressed", "true")
+    assert payloads and payloads[-1]["focus_element_id"] == focus
+    assert payloads[-1]["context"] == expected_context
+    focused = next(node for node in payloads[-1]["nodes"] if node["id"] == focus)
+    assert focused["properties"]["canonical_entity_id"] == line["entity_id"]
+    assert focused["properties"]["attribution_scope"] == "CANDIDATE_DISCOVERY"
+    assert finding["requirement_item_id"] in focused["properties"]["finding_item_ids"]
+    assert focused["provenance"]["synthetic_flag"] is True
+    assert focused["provenance"]["evidence_class"] == "D"
+    expect(page.locator(".graph-source-table")).to_contain_text(line["entity_id"])
+    expect(page.locator(".graph-provenance")).to_contain_text(focused["provenance"]["evidence_id"])
+    assert all(context == expected_context for view, context in requests if view != "catalogue")
+    view_requests = [view for view, _context in requests if view != "catalogue"]
+    assert view_requests == (["adjacency", "adjacency"] if opening in {"error_retry", "unavailable_retry"} else [requested_view])
+    if opening == "both_nondefault_held":
+        assert "adjacency" not in view_requests
+        assert all(payload["view_id"] == requested_view for payload in payloads)
+    if opening == "manual_reopen":
+        page.locator("#graph-toggle").click()
+        expect(page.locator("#graph-toggle")).to_have_attribute("aria-expanded", "false")
+        expect(page.locator("#graph-panel")).to_be_hidden()
+        page.locator("#graph-toggle").click()
+        wait_graph_request_complete(page, "adjacency")
+        assert [view for view, _context in requests if view != "catalogue"] == ["adjacency", "adjacency"]
+    assert browser_session.collector.records == ()

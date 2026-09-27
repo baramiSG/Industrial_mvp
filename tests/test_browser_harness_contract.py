@@ -463,7 +463,7 @@ def test_server_teardown_accepts_clean_exit_or_requested_sigterm() -> None:
     assert harness.is_expected_server_return_code(1) is False
 
 
-def test_browser_inventory_has_exactly_96_named_tests() -> None:
+def test_browser_inventory_has_exactly_97_named_tests() -> None:
     expected = {
         "test_dossier_empty_unavailable_and_real_zero_are_distinct",
         "test_dossier_keyboard_print_download_and_return",
@@ -548,6 +548,7 @@ def test_browser_inventory_has_exactly_96_named_tests() -> None:
         "test_executive_scene_preparation_disclosure_contract",
         "test_graph_all_view_states_fit_narrow_panel",
         "test_graph_deep_link_uses_selected_context_and_handles_unavailable",
+        "test_candidate_graph_open_requests_preserve_scope",
         "test_graph_hostile_name_text_is_escaped",
         "test_graph_narrow_panel_contains_controls_and_text",
         "test_graph_node_names_preserve_sources_and_arabic",
@@ -588,7 +589,7 @@ def test_browser_inventory_has_exactly_96_named_tests() -> None:
         )
 
     actual = set(declared)
-    assert len(expected) == len(declared) == len(actual) == 96
+    assert len(expected) == len(declared) == len(actual) == 97
     assert actual == expected
 
 

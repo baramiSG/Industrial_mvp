@@ -20,3 +20,16 @@ The earlier c984 graph gate passed on its own subject, but its implementation wa
 [Implementation review](implementation_review.md), [acceptance](completion.md) and [publication](pr_record.md) retain the remaining obligations. This record reports actual receipts; local success is not live Aura acceptance.
 
 Immutable receipt preservation: three copied receipts retain 34 original trailing-whitespace lines (two in `sol-m1-alias-red.stdout`, fourteen unified-diff context lines in `sol-m1-source.diff`, eighteen Docker progress lines in `graph.stderr`). Their byte hashes remain unchanged. Authored records are checked separately; no unrestricted whitespace-check pass is claimed. This ordinary publication disposition changes no product behavior, assertion or evidence.
+
+
+## M graph-open correction — 2026-09-27
+
+Subject: private proof `d2292e49fbf9bb20aafc02f92eafade2c67a90f1`, tree `bf63f4cf8ecdc39ff830f29bbedf4eab7391ec75`,3672 tracked files. Actual implementer: Codex CLI GPT-6 Sol/high. Actual independent reviewer: Claude CLI claude-opus-5-5/high. [Plan](delivery-evidence/graph-open-20260927/plan.md), [plan review](delivery-evidence/graph-open-20260927/plan-review.md) and [implementation review](delivery-evidence/graph-open-20260927/implementation-review.md) retain their distinct roles.
+
+- New named browser regression: 14 EN/AR cases pass, including both automatic flags, held catalogue/nondefault view, error and unavailable Retry, single flags and manual close/reopen; 9 existing related browser checks pass. Inventory is 97 named tests. The offline scoped GraphService fixture is not live acceptance.
+- Focused Python/frontend: 115 pass. Final exact proof: all 11 commands pass, including 4198 pytest tests, integrity, smoke, scenarios, reconstruction and graph build --check. All 8 canonical visual comparison tests pass. Actual outputs and commands are copied alongside this record.
+- Canonical capture: 140/140 images byte-equal, 250 visual inputs, only two JavaScript source hashes changed. Actual baseline tree `dfc1b69dcfa198659b18e8abaca5566941aa050d`. The initial 4,197 pass / 1 fail stale change_ref assertion was corrected by Sol exactly as Claude prescribed; all other assertions remain. No second capture was needed.
+- Graph 240-input closure and 0a0/fa61 artifacts are unchanged. Earlier accepted backend, strict R1, dossier, reference-feed and recovery receipts remain attributed to their original execution; source/render/artifact equivalence permits their reuse. No new whole functional-browser result is claimed before hosted CI.
+- Root disclosed one C-only incidental index refresh; all 3,672 staged entries remained exactly base and 69 other indices stayed byte-preserved. The new binding explicitly adopts that metadata identity; earlier index-byte preservation is not retrospectively claimed.
+
+PR43/main and initial actual Aura loading/verification succeeded. Its incomplete application proof exposed this correction. The next live continuation must use the actual corrective merged runtime and rebind the readiness helper; its old GO is invalid. M remains open, and local proof does not replace complete live bilingual acceptance. [Delegated corrective acceptance](delivery-evidence/graph-open-20260927/delegated-acceptance.json) is for delivery only.

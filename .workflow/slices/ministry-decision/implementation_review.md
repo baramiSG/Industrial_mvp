@@ -7,3 +7,8 @@ Approval binds proof `918b8fea3e618b23f27f3acf22fcc0162f2cab97`, tree `cf666ced6
 The same review includes the actual Astra Max rendered Arabic/English clarity assessment and current [capture inspection](delivery-evidence/local-m1-20260927/canonical-inspection.json). [Delegated acceptance](completion.md) records the existing owner replacement and actual decision. The outcome is independently AI-reviewed and accepted under delegated authority; no human or Ministry endorsement is claimed.
 
 The [original v3.1 packet](approved-plan-v3.1/README.md) remains byte-preserved with its explicit published-subset boundary. Its historical reviewer model/effort remains unknown. Nonblocking candidate-fact passport wording, arrowhead convergence and generic role-match refinement remain tracked; the local proof credential is ignored and excluded from publication. Hosted CI, merge/green main, delivered-runtime M-A3 operation and live Aura acceptance are subsequent obligations. This is not M closure or final MVP acceptance.
+
+
+## M graph-open correction — 2026-09-27
+
+[Claude CLI final correction review](delivery-evidence/graph-open-20260927/implementation-review.md) approves READY_FOR_CI after the actual full local and visual results. The [initial finding](delivery-evidence/graph-open-20260927/initial-implementation-review.md) is preserved: one stale captured change_ref assertion, corrected by the same Sol implementer without altering other assertions. The graph behavior, scoped tests and helper readiness change were independently read. This verdict does not certify the future hosted jobs or live continuation.
