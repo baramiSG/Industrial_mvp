@@ -1,0 +1,5 @@
+{
+  "source_file": "codex-cli-graph-open-status-pin/TASK-ONLY.diff",
+  "source_sha256": "bafc9cf508a5c9fe6ff17bfe88b2c1ace89f8159c7a550b856a5946460c0de91",
+  "diff": "--- a/tests/test_s17_status_docs.py\n+++ b/tests/test_s17_status_docs.py\n@@ -32,7 +32,7 @@\n \n     assert len(snapshot[\"files\"]) == 748\n     assert len(visual[\"entries\"]) == 140\n-    assert visual[\"change_ref\"] == \"MINISTRY-M-V3-1-20260926\"\n+    assert visual[\"change_ref\"] == \"MINISTRY-M-GRAPH-OPEN-20260927\"\n     for text in (adr_027, s17_row):\n         assert \"GRAPH-SAU-2026-09-12-b63159c7bdc1\" in text\n         assert \"722\" in text\n"
+}

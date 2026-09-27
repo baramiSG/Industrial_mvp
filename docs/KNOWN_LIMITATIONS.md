@@ -358,3 +358,11 @@ The frozen proof `918b8fea3e618b23f27f3acf22fcc0162f2cab97`, tree `cf666ced68029
 Full browser passes 881 functional and eight visual checks. The single quiet graph gate passes nine graph, one graph UI and two unavailable-state tests, with one expected operator-only Aura skip; the exact retained 461bf service is restored and all 66 protected indexes are preserved. Claude CLI returns APPROVE — READY_FOR_CI with zero open material findings, and Astra accepts implementation and bilingual clarity under delegated authority. Earlier checkpoints, including the c984 rejection, remain historical. GitHub delivery/six green PR and main checks and required M live Aura remain pending; M is open and S20–S22 have not started.
 
 See [current test evidence](../.workflow/slices/ministry-decision/test_evidence.md), [independent review](../.workflow/slices/ministry-decision/implementation_review.md) and [acceptance](../.workflow/slices/ministry-decision/completion.md). Existing limitations and later acceptance obligations are preserved.
+
+
+### Ministry M live application boundary — 2026-09-27
+
+PR43 is delivered with green main. Its actual Aura operation loaded and verified the exact0a0/fa61 graph, then failed the candidate-to-graph application journey. The graph remains exact NEW; no inverse or complete-live claim followed. The independently reviewed graph-opening correction passes local checks with140 unchanged canonical images. Complete bilingual graph/evidence/dossier/candidate verification on the corrected merged application remains a release prerequisite. Existing substantive limitations and S20–S22 obligations remain unchanged.
+
+
+The owner subsequently reported unclear flow, excessive detail and no apparent graph value in the running preview. This new finding remains open for the required Astra and Claude Opus5.5 Max domain-UX assessment and resulting frontend corrections before final acceptance; prior AI clarity approval and byte-equal screenshots do not close it.

@@ -57,7 +57,7 @@ async function fetchView(requested, epoch) {
     await selectElement("node", state.graph.payload.focus_element_id);
   }
 }
-async function openGraph() {
+export async function openGraph(force = false) {
   if (!graphEnabled(state.graph.descriptor)) return;
   const requested = graphRequestContext(
     state.graph.descriptor.opportunity_id,
@@ -65,6 +65,7 @@ async function openGraph() {
     state.graph.viewId,
     state.analysis,
   );
+  if (!force && state.graph.open && !state.graph.error && sameGraphContext(state.graph.context, requested) && (state.graph.loading || state.graph.payload)) return;
   clearContent({ collapse: false, nextContext: requested });
   state.graph.open = true;
   state.graph.loading = true;
@@ -193,6 +194,6 @@ export async function handleGraphAction(target) {
   } else if (target.dataset.graphSelect) {
     await selectElement(target.dataset.graphSelect, target.dataset.graphId);
   } else if (target.dataset.graphRetry !== undefined) {
-    await openGraph();
+    await openGraph(true);
   }
 }

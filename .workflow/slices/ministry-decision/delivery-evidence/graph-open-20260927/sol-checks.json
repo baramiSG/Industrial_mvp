@@ -1,0 +1,132 @@
+{
+  "utc": "2026-09-27T04:42:39.406851+00:00",
+  "status": "PAUSE_FOR_COORDINATOR_CANONICAL_CAPTURE",
+  "plan": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/M-GRAPH-OPEN-CORRECTION-PLAN.md",
+  "independent_plan_approval": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/claude-graph-open-plan-review/REVIEW.md",
+  "implementation_release": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/codex-cli-graph-open-correction/IMPLEMENTATION-RELEASE.json",
+  "source_before": "SOURCE-BEFORE.json",
+  "source_after": "SOURCE-AFTER.json",
+  "source_diff": "TASK-CODE.diff",
+  "external_helper_diff": "TASK-HELPER.diff",
+  "source_changed_paths": [
+    "browser_tests/test_executive_states.py",
+    "src/ior_mvp/static/modules/analyst-navigation.js",
+    "src/ior_mvp/static/modules/graph/index.js",
+    "tests/test_browser_harness_contract.py"
+  ],
+  "source_index_sha256": "521701307dbfc6cbc320f2ca0c391afde34252d5bda55658711094416bbe83cd",
+  "helper_old_binding_invalidated": true,
+  "new_named_browser_test": "test_candidate_graph_open_requests_preserve_scope",
+  "browser_inventory_named_tests": 97,
+  "graph_index_physical_lines": 199,
+  "receipts": {
+    "RED": {
+      "command_receipt": "RED-COMMAND.json",
+      "exit_code": 1,
+      "stdout": "RED.stdout",
+      "stderr": "RED.stderr",
+      "duration_seconds": 34.07
+    },
+    "GREEN-EXACT": {
+      "command_receipt": "GREEN-EXACT-COMMAND.json",
+      "exit_code": 1,
+      "stdout": "GREEN-EXACT.stdout",
+      "stderr": "GREEN-EXACT.stderr",
+      "duration_seconds": 9.51
+    },
+    "GREEN-MATRIX": {
+      "command_receipt": "GREEN-MATRIX-COMMAND.json",
+      "exit_code": 1,
+      "stdout": "GREEN-MATRIX.stdout",
+      "stderr": "GREEN-MATRIX.stderr",
+      "duration_seconds": 88.825
+    },
+    "GREEN-HELD": {
+      "command_receipt": "GREEN-HELD-COMMAND.json",
+      "exit_code": 0,
+      "stdout": "GREEN-HELD.stdout",
+      "stderr": "GREEN-HELD.stderr",
+      "duration_seconds": 6.594
+    },
+    "RED-UNAVAILABLE": {
+      "command_receipt": "RED-UNAVAILABLE-COMMAND.json",
+      "exit_code": 1,
+      "stdout": "RED-UNAVAILABLE.stdout",
+      "stderr": "RED-UNAVAILABLE.stderr",
+      "duration_seconds": 9.545
+    },
+    "GREEN-FINAL-MATRIX": {
+      "command_receipt": "GREEN-FINAL-MATRIX-COMMAND.json",
+      "exit_code": 0,
+      "stdout": "GREEN-FINAL-MATRIX.stdout",
+      "stderr": "GREEN-FINAL-MATRIX.stderr",
+      "duration_seconds": 33.758
+    },
+    "EXISTING-BROWSER": {
+      "command_receipt": "EXISTING-BROWSER-COMMAND.json",
+      "exit_code": 0,
+      "stdout": "EXISTING-BROWSER.stdout",
+      "stderr": "EXISTING-BROWSER.stderr",
+      "duration_seconds": 19.022
+    },
+    "ES-MODULES": {
+      "command_receipt": "ES-MODULES-COMMAND.json",
+      "exit_code": 0,
+      "stdout": "ES-MODULES.stdout",
+      "stderr": "ES-MODULES.stderr",
+      "duration_seconds": 3.056
+    },
+    "STATIC-FOCUS": {
+      "command_receipt": "STATIC-FOCUS-COMMAND.json",
+      "exit_code": 0,
+      "stdout": "STATIC-FOCUS.stdout",
+      "stderr": "STATIC-FOCUS.stderr",
+      "duration_seconds": 17.19
+    },
+    "GRAPH-CLOSURE": {
+      "command_receipt": "GRAPH-CLOSURE-COMMAND.json",
+      "exit_code": 0,
+      "stdout": "GRAPH-CLOSURE.stdout",
+      "stderr": "GRAPH-CLOSURE.stderr",
+      "duration_seconds": 0.213
+    },
+    "DIFF-CHECK": {
+      "command_receipt": "DIFF-CHECK-COMMAND.json",
+      "exit_code": 0,
+      "stdout": "DIFF-CHECK.stdout",
+      "stderr": "DIFF-CHECK.stderr",
+      "duration_seconds": 0.046
+    },
+    "HELPER-SYNTAX": {
+      "command_receipt": "HELPER-SYNTAX-COMMAND.json",
+      "exit_code": 0,
+      "stdout": "HELPER-SYNTAX.stdout",
+      "stderr": "HELPER-SYNTAX.stderr",
+      "duration_seconds": 0.021
+    }
+  },
+  "verified_green": {
+    "new_parameterized_browser_cases": 14,
+    "existing_focused_browser_cases": 9,
+    "focused_python_frontend_contracts": 115,
+    "es_modules": 55,
+    "graph_inputs": 240,
+    "graph_nodes": 1160,
+    "graph_edges": 1248
+  },
+  "red_findings": {
+    "combined_flags_original": "RED.stdout; native link remained closed and wait timed out",
+    "unavailable_retry_guard": "RED-UNAVAILABLE.stdout; first unavailable response left retry without a fresh view"
+  },
+  "intermediate_test_corrections": [
+    "GREEN-EXACT failed because source table does not display requirement_item_id; final test asserts actual request context and focused line finding membership.",
+    "GREEN-MATRIX had 10 passes and 2 test setup failures because held-catalogue init script was not invoked; corrected to an IIFE, GREEN-HELD 2 passed, final matrix 14 passed."
+  ],
+  "graph_closure": "GRAPH-CLOSURE.json",
+  "visual_source_metadata": "VISUAL-PRECAPTURE.json",
+  "canonical_capture_run_here": false,
+  "helper_executed_here": false,
+  "live_aura_or_services_touched": false,
+  "independent_implementation_approval": false,
+  "ministry_m_complete": false
+}
