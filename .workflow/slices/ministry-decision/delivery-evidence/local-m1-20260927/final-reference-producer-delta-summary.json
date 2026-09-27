@@ -1,0 +1,701 @@
+{
+  "changed_adjacency_metrics": {
+    "SAU-H0-390210/public/COMPANY-0f8e69531f415144": {
+      "after": {
+        "attribution_scope": "PRODUCER_DISCLOSURE",
+        "evidence_ids": [
+          "ENGINE-EVIDENCE-SAU-H0-390210-public",
+          "P-ADVANCED"
+        ],
+        "execution": "FULL",
+        "fired": false,
+        "qualifying_signal_count": 0,
+        "result_code": "NO_DEFENSIBLE_SIGNAL",
+        "same_process_family": true
+      },
+      "before": {
+        "attribution_scope": null,
+        "evidence_ids": [
+          "ENGINE-EVIDENCE-SAU-H0-390210-public"
+        ],
+        "execution": "FULL",
+        "fired": true,
+        "qualifying_signal_count": 2,
+        "result_code": "ADJACENT_PLANT_WITH_SIGNALS",
+        "same_process_family": true
+      }
+    },
+    "SAU-H0-390210/public/COMPANY-f2d406af94a8aac1": {
+      "after": {
+        "attribution_scope": "PRODUCER_DISCLOSURE",
+        "evidence_ids": [
+          "ENGINE-EVIDENCE-SAU-H0-390210-public",
+          "P-SABIC"
+        ],
+        "execution": "FULL",
+        "fired": true,
+        "qualifying_signal_count": 1,
+        "result_code": "ADJACENT_PLANT_WITH_SIGNALS",
+        "same_process_family": true
+      },
+      "before": {
+        "attribution_scope": null,
+        "evidence_ids": [
+          "ENGINE-EVIDENCE-SAU-H0-390210-public"
+        ],
+        "execution": "FULL",
+        "fired": true,
+        "qualifying_signal_count": 2,
+        "result_code": "ADJACENT_PLANT_WITH_SIGNALS",
+        "same_process_family": true
+      }
+    },
+    "SAU-H0-390210/public/COMPANY-f3a50c477f158420": {
+      "after": {
+        "attribution_scope": "PRODUCER_DISCLOSURE",
+        "evidence_ids": [
+          "ENGINE-EVIDENCE-SAU-H0-390210-public",
+          "P-TASNEE"
+        ],
+        "execution": "FULL",
+        "fired": false,
+        "qualifying_signal_count": 0,
+        "result_code": "NO_DEFENSIBLE_SIGNAL",
+        "same_process_family": true
+      },
+      "before": {
+        "attribution_scope": null,
+        "evidence_ids": [
+          "ENGINE-EVIDENCE-SAU-H0-390210-public"
+        ],
+        "execution": "FULL",
+        "fired": true,
+        "qualifying_signal_count": 2,
+        "result_code": "ADJACENT_PLANT_WITH_SIGNALS",
+        "same_process_family": true
+      }
+    },
+    "SAU-H0-390210/simulated/PLANT-SYN-MINISTRY-PP-001": {
+      "after": {
+        "attribution_scope": "DECLARED_ENGINE_INPUT",
+        "evidence_ids": [
+          "ENGINE-EVIDENCE-SYN-MINISTRY-PP-001-simulated"
+        ],
+        "execution": "FULL",
+        "fired": true,
+        "qualifying_signal_count": 2,
+        "result_code": "ADJACENT_PLANT_WITH_SIGNALS",
+        "same_process_family": true
+      },
+      "before": {
+        "attribution_scope": null,
+        "evidence_ids": [
+          "ENGINE-EVIDENCE-SYN-MINISTRY-PP-001-simulated"
+        ],
+        "execution": "FULL",
+        "fired": true,
+        "qualifying_signal_count": 2,
+        "result_code": "ADJACENT_PLANT_WITH_SIGNALS",
+        "same_process_family": true
+      }
+    },
+    "SAU-H0-721049/public/COMPANY-280abef66af82a6c": {
+      "after": {
+        "attribution_scope": "PRODUCER_DISCLOSURE",
+        "evidence_ids": [
+          "ENGINE-EVIDENCE-SAU-H0-721049-public",
+          "S-HADEED"
+        ],
+        "execution": "FULL",
+        "fired": false,
+        "qualifying_signal_count": 0,
+        "result_code": "NO_DEFENSIBLE_SIGNAL",
+        "same_process_family": true
+      },
+      "before": {
+        "attribution_scope": null,
+        "evidence_ids": [
+          "ENGINE-EVIDENCE-SAU-H0-721049-public"
+        ],
+        "execution": "FULL",
+        "fired": true,
+        "qualifying_signal_count": 4,
+        "result_code": "ADJACENT_PLANT_WITH_SIGNALS",
+        "same_process_family": true
+      }
+    },
+    "SAU-H0-721049/public/COMPANY-a0954792195adee5": {
+      "after": {
+        "attribution_scope": "PRODUCER_DISCLOSURE",
+        "evidence_ids": [
+          "ENGINE-EVIDENCE-SAU-H0-721049-public",
+          "S-UNICOIL-EPD",
+          "S-UNICOIL-SPEC"
+        ],
+        "execution": "FULL",
+        "fired": true,
+        "qualifying_signal_count": 4,
+        "result_code": "ADJACENT_PLANT_WITH_SIGNALS",
+        "same_process_family": true
+      },
+      "before": {
+        "attribution_scope": null,
+        "evidence_ids": [
+          "ENGINE-EVIDENCE-SAU-H0-721049-public"
+        ],
+        "execution": "FULL",
+        "fired": true,
+        "qualifying_signal_count": 4,
+        "result_code": "ADJACENT_PLANT_WITH_SIGNALS",
+        "same_process_family": true
+      }
+    },
+    "SAU-H0-721049/simulated/PLANT-SYN-MINISTRY-STEEL-001": {
+      "after": {
+        "attribution_scope": "CANDIDATE_DISCOVERY",
+        "evidence_ids": [
+          "ENGINE-EVIDENCE-SYN-MINISTRY-STEEL-001-simulated",
+          "SYN-MINISTRY-STEEL-001::candidate_fact::FACT-CUS-STEEL-A",
+          "SYN-MINISTRY-STEEL-001::candidate_fact::FACT-OUT-PLANT-8932de539dd9d7d8"
+        ],
+        "execution": "FULL",
+        "fired": true,
+        "qualifying_signal_count": 2,
+        "result_code": "ADJACENT_PLANT_WITH_SIGNALS",
+        "same_process_family": true
+      },
+      "before": {
+        "attribution_scope": null,
+        "evidence_ids": [
+          "ENGINE-EVIDENCE-SYN-MINISTRY-STEEL-001-simulated"
+        ],
+        "execution": "FULL",
+        "fired": true,
+        "qualifying_signal_count": 4,
+        "result_code": "ADJACENT_PLANT_WITH_SIGNALS",
+        "same_process_family": true
+      }
+    },
+    "SAU-H6-294110/simulated/PLANT-SYN-MINISTRY-PENICILLIN-API-001": {
+      "after": {
+        "attribution_scope": "DECLARED_ENGINE_INPUT",
+        "evidence_ids": [
+          "ENGINE-EVIDENCE-SYN-MINISTRY-PENICILLIN-API-001-simulated"
+        ],
+        "execution": "DISABLED",
+        "fired": null,
+        "qualifying_signal_count": 0,
+        "result_code": "NO_DEFENSIBLE_SIGNAL",
+        "same_process_family": "NOT_CALCULABLE"
+      },
+      "before": {
+        "attribution_scope": null,
+        "evidence_ids": [
+          "ENGINE-EVIDENCE-SYN-MINISTRY-PENICILLIN-API-001-simulated"
+        ],
+        "execution": "DISABLED",
+        "fired": null,
+        "qualifying_signal_count": 0,
+        "result_code": "NO_DEFENSIBLE_SIGNAL",
+        "same_process_family": "NOT_CALCULABLE"
+      }
+    },
+    "SAU-H6-294120/simulated/PLANT-SYN-MINISTRY-STREPTOMYCIN-API-001": {
+      "after": {
+        "attribution_scope": "DECLARED_ENGINE_INPUT",
+        "evidence_ids": [
+          "ENGINE-EVIDENCE-SYN-MINISTRY-STREPTOMYCIN-API-001-simulated"
+        ],
+        "execution": "DISABLED",
+        "fired": null,
+        "qualifying_signal_count": 0,
+        "result_code": "NO_DEFENSIBLE_SIGNAL",
+        "same_process_family": "NOT_CALCULABLE"
+      },
+      "before": {
+        "attribution_scope": null,
+        "evidence_ids": [
+          "ENGINE-EVIDENCE-SYN-MINISTRY-STREPTOMYCIN-API-001-simulated"
+        ],
+        "execution": "DISABLED",
+        "fired": null,
+        "qualifying_signal_count": 0,
+        "result_code": "NO_DEFENSIBLE_SIGNAL",
+        "same_process_family": "NOT_CALCULABLE"
+      }
+    },
+    "SAU-H6-310430/simulated/PLANT-SYN-MINISTRY-SOP-001": {
+      "after": {
+        "attribution_scope": "DECLARED_ENGINE_INPUT",
+        "evidence_ids": [
+          "ENGINE-EVIDENCE-SYN-MINISTRY-SOP-001-simulated"
+        ],
+        "execution": "DISABLED",
+        "fired": null,
+        "qualifying_signal_count": 0,
+        "result_code": "NO_DEFENSIBLE_SIGNAL",
+        "same_process_family": "NOT_CALCULABLE"
+      },
+      "before": {
+        "attribution_scope": null,
+        "evidence_ids": [
+          "ENGINE-EVIDENCE-SYN-MINISTRY-SOP-001-simulated"
+        ],
+        "execution": "DISABLED",
+        "fired": null,
+        "qualifying_signal_count": 0,
+        "result_code": "NO_DEFENSIBLE_SIGNAL",
+        "same_process_family": "NOT_CALCULABLE"
+      }
+    },
+    "SAU-H6-310510/simulated/PLANT-SYN-MINISTRY-FERT-RETAIL-PACKS-001": {
+      "after": {
+        "attribution_scope": "DECLARED_ENGINE_INPUT",
+        "evidence_ids": [
+          "ENGINE-EVIDENCE-SYN-MINISTRY-FERT-RETAIL-PACKS-001-simulated"
+        ],
+        "execution": "DISABLED",
+        "fired": null,
+        "qualifying_signal_count": 0,
+        "result_code": "NO_DEFENSIBLE_SIGNAL",
+        "same_process_family": "NOT_CALCULABLE"
+      },
+      "before": {
+        "attribution_scope": null,
+        "evidence_ids": [
+          "ENGINE-EVIDENCE-SYN-MINISTRY-FERT-RETAIL-PACKS-001-simulated"
+        ],
+        "execution": "DISABLED",
+        "fired": null,
+        "qualifying_signal_count": 0,
+        "result_code": "NO_DEFENSIBLE_SIGNAL",
+        "same_process_family": "NOT_CALCULABLE"
+      }
+    },
+    "SAU-H6-392010/simulated/PLANT-SYN-MINISTRY-PE-FILM-001": {
+      "after": {
+        "attribution_scope": "DECLARED_ENGINE_INPUT",
+        "evidence_ids": [
+          "ENGINE-EVIDENCE-SYN-MINISTRY-PE-FILM-001-simulated"
+        ],
+        "execution": "DISABLED",
+        "fired": null,
+        "qualifying_signal_count": 0,
+        "result_code": "NO_DEFENSIBLE_SIGNAL",
+        "same_process_family": "NOT_CALCULABLE"
+      },
+      "before": {
+        "attribution_scope": null,
+        "evidence_ids": [
+          "ENGINE-EVIDENCE-SYN-MINISTRY-PE-FILM-001-simulated"
+        ],
+        "execution": "DISABLED",
+        "fired": null,
+        "qualifying_signal_count": 0,
+        "result_code": "NO_DEFENSIBLE_SIGNAL",
+        "same_process_family": "NOT_CALCULABLE"
+      }
+    },
+    "SAU-H6-721012/simulated/PLANT-SYN-MINISTRY-TINPLATE-001": {
+      "after": {
+        "attribution_scope": "DECLARED_ENGINE_INPUT",
+        "evidence_ids": [
+          "ENGINE-EVIDENCE-SYN-MINISTRY-TINPLATE-001-simulated"
+        ],
+        "execution": "DISABLED",
+        "fired": null,
+        "qualifying_signal_count": 0,
+        "result_code": "NO_DEFENSIBLE_SIGNAL",
+        "same_process_family": "NOT_CALCULABLE"
+      },
+      "before": {
+        "attribution_scope": null,
+        "evidence_ids": [
+          "ENGINE-EVIDENCE-SYN-MINISTRY-TINPLATE-001-simulated"
+        ],
+        "execution": "DISABLED",
+        "fired": null,
+        "qualifying_signal_count": 0,
+        "result_code": "NO_DEFENSIBLE_SIGNAL",
+        "same_process_family": "NOT_CALCULABLE"
+      }
+    },
+    "SAU-H6-721061/simulated/PLANT-SYN-MINISTRY-GALVALUME-001": {
+      "after": {
+        "attribution_scope": "DECLARED_ENGINE_INPUT",
+        "evidence_ids": [
+          "ENGINE-EVIDENCE-SYN-MINISTRY-GALVALUME-001-simulated"
+        ],
+        "execution": "DISABLED",
+        "fired": null,
+        "qualifying_signal_count": 0,
+        "result_code": "NO_DEFENSIBLE_SIGNAL",
+        "same_process_family": "NOT_CALCULABLE"
+      },
+      "before": {
+        "attribution_scope": null,
+        "evidence_ids": [
+          "ENGINE-EVIDENCE-SYN-MINISTRY-GALVALUME-001-simulated"
+        ],
+        "execution": "DISABLED",
+        "fired": null,
+        "qualifying_signal_count": 0,
+        "result_code": "NO_DEFENSIBLE_SIGNAL",
+        "same_process_family": "NOT_CALCULABLE"
+      }
+    },
+    "SAU-H6-760429/public/COMPANY-69d10bdb78064a59": {
+      "after": {
+        "attribution_scope": "PRODUCER_DISCLOSURE",
+        "evidence_ids": [
+          "ENGINE-EVIDENCE-SAU-H6-760429-public",
+          "P-ALUPCO-760429"
+        ],
+        "execution": "FULL",
+        "fired": false,
+        "qualifying_signal_count": 0,
+        "result_code": "NO_DEFENSIBLE_SIGNAL",
+        "same_process_family": true
+      },
+      "before": {
+        "attribution_scope": null,
+        "evidence_ids": [
+          "ENGINE-EVIDENCE-SAU-H6-760429-public"
+        ],
+        "execution": "FULL",
+        "fired": true,
+        "qualifying_signal_count": 1,
+        "result_code": "ADJACENT_PLANT_WITH_SIGNALS",
+        "same_process_family": true
+      }
+    },
+    "SAU-H6-760429/public/PRODUCER-public-sau-h6-760429-2026-09-12-2": {
+      "after": {
+        "attribution_scope": "PRODUCER_DISCLOSURE",
+        "evidence_ids": [
+          "ENGINE-EVIDENCE-SAU-H6-760429-public",
+          "P-TALCO-760429"
+        ],
+        "execution": "FULL",
+        "fired": false,
+        "qualifying_signal_count": 0,
+        "result_code": "NO_DEFENSIBLE_SIGNAL",
+        "same_process_family": true
+      },
+      "before": {
+        "attribution_scope": null,
+        "evidence_ids": [
+          "ENGINE-EVIDENCE-SAU-H6-760429-public"
+        ],
+        "execution": "FULL",
+        "fired": true,
+        "qualifying_signal_count": 1,
+        "result_code": "ADJACENT_PLANT_WITH_SIGNALS",
+        "same_process_family": true
+      }
+    },
+    "SAU-H6-760429/simulated/PLANT-SYN-MINISTRY-ALU-PROFILES-001": {
+      "after": {
+        "attribution_scope": "DECLARED_ENGINE_INPUT",
+        "evidence_ids": [
+          "ENGINE-EVIDENCE-SYN-MINISTRY-ALU-PROFILES-001-simulated"
+        ],
+        "execution": "FULL",
+        "fired": true,
+        "qualifying_signal_count": 1,
+        "result_code": "ADJACENT_PLANT_WITH_SIGNALS",
+        "same_process_family": true
+      },
+      "before": {
+        "attribution_scope": null,
+        "evidence_ids": [
+          "ENGINE-EVIDENCE-SYN-MINISTRY-ALU-PROFILES-001-simulated"
+        ],
+        "execution": "FULL",
+        "fired": true,
+        "qualifying_signal_count": 1,
+        "result_code": "ADJACENT_PLANT_WITH_SIGNALS",
+        "same_process_family": true
+      }
+    },
+    "SAU-H6-760711/simulated/PLANT-SYN-MINISTRY-ALU-FOIL-001": {
+      "after": {
+        "attribution_scope": "DECLARED_ENGINE_INPUT",
+        "evidence_ids": [
+          "ENGINE-EVIDENCE-SYN-MINISTRY-ALU-FOIL-001-simulated"
+        ],
+        "execution": "DISABLED",
+        "fired": null,
+        "qualifying_signal_count": 0,
+        "result_code": "NO_DEFENSIBLE_SIGNAL",
+        "same_process_family": "NOT_CALCULABLE"
+      },
+      "before": {
+        "attribution_scope": null,
+        "evidence_ids": [
+          "ENGINE-EVIDENCE-SYN-MINISTRY-ALU-FOIL-001-simulated"
+        ],
+        "execution": "DISABLED",
+        "fired": null,
+        "qualifying_signal_count": 0,
+        "result_code": "NO_DEFENSIBLE_SIGNAL",
+        "same_process_family": "NOT_CALCULABLE"
+      }
+    }
+  },
+  "closure": {
+    "frontend_in_inputs": [],
+    "generated_manifests_in_inputs": [],
+    "imported_local_python": [
+      "src/ior_mvp/__init__.py",
+      "src/ior_mvp/capability.py",
+      "src/ior_mvp/cases/__init__.py",
+      "src/ior_mvp/cases/brief.py",
+      "src/ior_mvp/cases/build.py",
+      "src/ior_mvp/cases/projection.py",
+      "src/ior_mvp/cases/selection.py",
+      "src/ior_mvp/config.py",
+      "src/ior_mvp/economics.py",
+      "src/ior_mvp/evidence.py",
+      "src/ior_mvp/evidence_needs.py",
+      "src/ior_mvp/gate_status.py",
+      "src/ior_mvp/graph/__init__.py",
+      "src/ior_mvp/graph/artifact.py",
+      "src/ior_mvp/graph/engine_feed.py",
+      "src/ior_mvp/graph/model.py",
+      "src/ior_mvp/graph/projection.py",
+      "src/ior_mvp/narratives.py",
+      "src/ior_mvp/public_decision.py",
+      "src/ior_mvp/public_snapshot.py",
+      "src/ior_mvp/route_hypotheses.py",
+      "src/ior_mvp/rules.py",
+      "src/ior_mvp/scenario_contract.py",
+      "src/ior_mvp/screening/__init__.py",
+      "src/ior_mvp/screening/config.py",
+      "src/ior_mvp/screening/dispositions.py",
+      "src/ior_mvp/screening/projection.py",
+      "src/ior_mvp/screening/queues.py",
+      "src/ior_mvp/screening/rules.py",
+      "src/ior_mvp/screening/snapshot.py",
+      "src/ior_mvp/signals.py",
+      "src/ior_mvp/trade_metrics.py"
+    ],
+    "imported_python_outside_discovery": [
+      "src/ior_mvp/screening/dispositions.py",
+      "src/ior_mvp/screening/projection.py",
+      "src/ior_mvp/screening/queues.py",
+      "src/ior_mvp/screening/rules.py",
+      "src/ior_mvp/screening/snapshot.py"
+    ]
+  },
+  "edge_delta": {
+    "added": 211,
+    "changed": 21,
+    "removed": 8
+  },
+  "feed_checks": 88,
+  "feed_differences": [],
+  "feed_equal": 88,
+  "node_delta": {
+    "added": 237,
+    "changed": 26,
+    "removed": 2
+  },
+  "reference_ledger_differences": [],
+  "reference_projection_mismatches": [],
+  "removed_edges": {
+    "REL-16e0df04d08721263f42": {
+      "key": "REL-16e0df04d08721263f42",
+      "properties": {
+        "as_of": "2026-09-12",
+        "derived": false,
+        "description": "Domestic aluminium extrusion and profile production are publicly described.",
+        "evidence_class": "C",
+        "evidence_id": "P-ALUPCO-760429",
+        "evidence_ids": [
+          "P-ALUPCO-760429",
+          "P-TALCO-760429"
+        ],
+        "key": "REL-16e0df04d08721263f42",
+        "origin_kind": "PUBLIC_SNAPSHOT",
+        "origin_ref": "PUBLIC-SAU-H6-760429-2026-09-12",
+        "projection_id": "<GENERATED_PROJECTION_ID>",
+        "scenario_id": "PUBLIC",
+        "signal_type": "core_process",
+        "synthetic_flag": false
+      },
+      "source": "PRODUCER-public-sau-h6-760429-2026-09-12-2",
+      "target": "PROC-domestic-aluminium-extrusion-and-profile-production-are-publicly-described",
+      "type": "USES_PROCESS"
+    },
+    "REL-1989e10e5c875faf3884": {
+      "key": "REL-1989e10e5c875faf3884",
+      "properties": {
+        "as_of": "2026-08-31",
+        "derived": false,
+        "description": "large established Saudi polypropylene production",
+        "evidence_class": "C",
+        "evidence_id": "P-ADVANCED",
+        "evidence_ids": [
+          "P-ADVANCED",
+          "P-TASNEE"
+        ],
+        "key": "REL-1989e10e5c875faf3884",
+        "origin_kind": "PUBLIC_SNAPSHOT",
+        "origin_ref": "PUBLIC-SAU-H0-390210-2026-08-31",
+        "projection_id": "<GENERATED_PROJECTION_ID>",
+        "scenario_id": "PUBLIC",
+        "signal_type": "core_process",
+        "synthetic_flag": false
+      },
+      "source": "COMPANY-0f8e69531f415144",
+      "target": "PROC-large-established-saudi-polypropylene-production",
+      "type": "USES_PROCESS"
+    },
+    "REL-205e6d73dd884ebbb1d5": {
+      "key": "REL-205e6d73dd884ebbb1d5",
+      "properties": {
+        "as_of": "2026-08-31",
+        "derived": false,
+        "description": "cold rolling and pickling",
+        "evidence_class": "C",
+        "evidence_id": "S-UNICOIL-EPD",
+        "evidence_ids": [
+          "S-UNICOIL-EPD"
+        ],
+        "key": "REL-205e6d73dd884ebbb1d5",
+        "origin_kind": "PUBLIC_SNAPSHOT",
+        "origin_ref": "PUBLIC-SAU-H0-721049-2026-08-31",
+        "projection_id": "<GENERATED_PROJECTION_ID>",
+        "scenario_id": "PUBLIC",
+        "signal_type": "core_process",
+        "synthetic_flag": false
+      },
+      "source": "COMPANY-280abef66af82a6c",
+      "target": "PROC-cold-rolling-and-pickling",
+      "type": "USES_PROCESS"
+    },
+    "REL-609fe81e0b344a312181": {
+      "key": "REL-609fe81e0b344a312181",
+      "properties": {
+        "as_of": "2026-08-31",
+        "derived": false,
+        "description": "large established Saudi polypropylene production",
+        "evidence_class": "C",
+        "evidence_id": "P-ADVANCED",
+        "evidence_ids": [
+          "P-ADVANCED",
+          "P-TASNEE"
+        ],
+        "key": "REL-609fe81e0b344a312181",
+        "origin_kind": "PUBLIC_SNAPSHOT",
+        "origin_ref": "PUBLIC-SAU-H0-390210-2026-08-31",
+        "projection_id": "<GENERATED_PROJECTION_ID>",
+        "scenario_id": "PUBLIC",
+        "signal_type": "core_process",
+        "synthetic_flag": false
+      },
+      "source": "COMPANY-f2d406af94a8aac1",
+      "target": "PROC-large-established-saudi-polypropylene-production",
+      "type": "USES_PROCESS"
+    },
+    "REL-7351eccfd4b6dd3b50e7": {
+      "key": "REL-7351eccfd4b6dd3b50e7",
+      "properties": {
+        "as_of": "2026-08-31",
+        "derived": false,
+        "description": "ISO/IEC 17025 laboratory",
+        "evidence_class": "C",
+        "evidence_id": "S-UNICOIL-EPD",
+        "evidence_ids": [
+          "S-UNICOIL-EPD"
+        ],
+        "key": "REL-7351eccfd4b6dd3b50e7",
+        "origin_kind": "PUBLIC_SNAPSHOT",
+        "origin_ref": "PUBLIC-SAU-H0-721049-2026-08-31",
+        "projection_id": "<GENERATED_PROJECTION_ID>",
+        "scenario_id": "PUBLIC",
+        "signal_type": "relevant_certification",
+        "synthetic_flag": false
+      },
+      "source": "COMPANY-280abef66af82a6c",
+      "target": "CERT-iso-iec-17025-laboratory",
+      "type": "CERTIFIED_TO"
+    },
+    "REL-a4e8a1ac8402be571eb6": {
+      "key": "REL-a4e8a1ac8402be571eb6",
+      "properties": {
+        "as_of": "2026-08-31",
+        "derived": false,
+        "description": "large established Saudi polypropylene production",
+        "evidence_class": "C",
+        "evidence_id": "P-ADVANCED",
+        "evidence_ids": [
+          "P-ADVANCED",
+          "P-TASNEE"
+        ],
+        "key": "REL-a4e8a1ac8402be571eb6",
+        "origin_kind": "PUBLIC_SNAPSHOT",
+        "origin_ref": "PUBLIC-SAU-H0-390210-2026-08-31",
+        "projection_id": "<GENERATED_PROJECTION_ID>",
+        "scenario_id": "PUBLIC",
+        "signal_type": "core_process",
+        "synthetic_flag": false
+      },
+      "source": "COMPANY-f3a50c477f158420",
+      "target": "PROC-large-established-saudi-polypropylene-production",
+      "type": "USES_PROCESS"
+    },
+    "REL-ace6cb51826cf83da5b3": {
+      "key": "REL-ace6cb51826cf83da5b3",
+      "properties": {
+        "as_of": "2026-08-31",
+        "derived": false,
+        "description": "continuous hot-dip galvanising",
+        "evidence_class": "C",
+        "evidence_id": "S-UNICOIL-EPD",
+        "evidence_ids": [
+          "S-UNICOIL-EPD"
+        ],
+        "key": "REL-ace6cb51826cf83da5b3",
+        "origin_kind": "PUBLIC_SNAPSHOT",
+        "origin_ref": "PUBLIC-SAU-H0-721049-2026-08-31",
+        "projection_id": "<GENERATED_PROJECTION_ID>",
+        "scenario_id": "PUBLIC",
+        "signal_type": "core_process",
+        "synthetic_flag": false
+      },
+      "source": "COMPANY-280abef66af82a6c",
+      "target": "PROC-continuous-hot-dip-galvanising",
+      "type": "USES_PROCESS"
+    },
+    "REL-c6e0b8b8563b6fb16e64": {
+      "key": "REL-c6e0b8b8563b6fb16e64",
+      "properties": {
+        "as_of": "2026-09-12",
+        "derived": false,
+        "description": "Domestic aluminium extrusion and profile production are publicly described.",
+        "evidence_class": "C",
+        "evidence_id": "P-ALUPCO-760429",
+        "evidence_ids": [
+          "P-ALUPCO-760429",
+          "P-TALCO-760429"
+        ],
+        "key": "REL-c6e0b8b8563b6fb16e64",
+        "origin_kind": "PUBLIC_SNAPSHOT",
+        "origin_ref": "PUBLIC-SAU-H6-760429-2026-09-12",
+        "projection_id": "<GENERATED_PROJECTION_ID>",
+        "scenario_id": "PUBLIC",
+        "signal_type": "core_process",
+        "synthetic_flag": false
+      },
+      "source": "COMPANY-69d10bdb78064a59",
+      "target": "PROC-domestic-aluminium-extrusion-and-profile-production-are-publicly-described",
+      "type": "USES_PROCESS"
+    }
+  },
+  "removed_nodes": [
+    "PROC-domestic-aluminium-extrusion-and-profile-production-are-publicly-described",
+    "PROC-large-established-saudi-polypropylene-production"
+  ]
+}

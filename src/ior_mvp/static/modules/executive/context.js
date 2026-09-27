@@ -16,6 +16,8 @@ export function readExecutiveLocation(summary) {
   const stepId = STEP_IDS.includes(query.get("step")) ? query.get("step") : "SIGNAL";
   return {
     opportunityId, stepId, locale: ["en", "ar"].includes(query.get("locale")) ? query.get("locale") : state.locale,
+    companyId: query.get("company"), plantId: query.get("plant"),
+    lineId: query.get("line"), requirementId: query.get("requirement"),
     invalidOpportunity: Boolean(opportunityId && !summary.opportunities.some(
       (row) => row.opportunity_id === opportunityId,
     )),
@@ -27,5 +29,12 @@ export function writeExecutiveLocation(selection, { replace = false } = {}) {
   url.searchParams.set("opportunity", selection.opportunityId);
   url.searchParams.set("step", selection.stepId);
   url.searchParams.set("locale", selection.locale);
+  for (const [key, value] of Object.entries({
+    company: selection.companyId, plant: selection.plantId,
+    line: selection.lineId, requirement: selection.requirementId,
+  })) {
+    if (value) url.searchParams.set(key, value);
+    else url.searchParams.delete(key);
+  }
   window.history[replace ? "replaceState" : "pushState"]({}, "", url);
 }

@@ -56,7 +56,7 @@ def test_analyze_public_wrapper_matches_direct_simulate() -> None:
 
 def test_decision_engine_reexports_simulation() -> None:
     assert decision_engine.SUPPORTED_SCENARIO_CONTRACT_VERSIONS == frozenset(
-        {"2.0.0", "2.1.0"}
+        {"2.0.0", "2.1.0", "2.2.0"}
     )
     assert decision_engine._simulate is simulation.simulate
 

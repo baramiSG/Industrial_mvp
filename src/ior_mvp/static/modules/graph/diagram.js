@@ -1,6 +1,7 @@
 import { escapeHtml } from "../dom.js";
 import { t } from "../i18n.js";
 import { edgeLabel, nodeNamePresentation } from "./labels.js";
+import { repeatedEdgeRoutes } from "./edge-geometry.js";
 import {
   GRAPH_MARKER_CLEARANCE,
   GRAPH_NODE_RADIUS,
@@ -109,16 +110,26 @@ export function renderDiagram(
   const positions = layoutGraph(payload.nodes, direction);
   const byId = Object.fromEntries(positions.map((row) => [row.id, row]));
   const { width, height } = layoutDimensions();
-  const edgeGeometry = payload.edges.map((edge) => ({
-    edge,
-    ...visibleEdgeEndpoints(byId[edge.source], byId[edge.target]),
-  }));
-  const edges = edgeGeometry.map(({ edge, source, target }) => {
+  const repeated = repeatedEdgeRoutes(
+    payload.edges, byId, GRAPH_NODE_RADIUS, GRAPH_MARKER_CLEARANCE, direction,
+  );
+  const edgeGeometry = payload.edges.flatMap((edge) => repeated.has(edge.id)
+    ? repeated.get(edge.id).segments.map((segment) => ({ edge, ...segment }))
+    : [{ edge, ...visibleEdgeEndpoints(byId[edge.source], byId[edge.target]), terminal: true }]);
+  const edges = payload.edges.map((edge) => {
     const selected = edge.id === selectedId ? " is-selected" : "";
+    const route = repeated.get(edge.id);
+    if (route) {
+      const path = route.points.map((point, index) => `${index ? "L" : "M"}${point.x} ${point.y}`).join(" ");
+      const segments = route.segments.map(({ source, target, terminal }) =>
+        `<line x1="${source.x}" y1="${source.y}" x2="${target.x}" y2="${target.y}"${terminal ? ' marker-end="url(#graph-arrow)"' : ""}/>`).join("");
+      return `<g class="graph-svg-edge${selected}" data-graph-select="edge" data-graph-id="${escapeHtml(edge.id)}" data-graph-source="${escapeHtml(edge.source)}" data-graph-target="${escapeHtml(edge.target)}" aria-hidden="true"><path class="graph-svg-edge-hit" d="${path}"/>${segments}<title>${escapeHtml(edgeLabel(edge))}</title></g>`;
+    }
+    const { source, target } = visibleEdgeEndpoints(byId[edge.source], byId[edge.target]);
     const hitPoints = edgeHitPolygon(byId[edge.source], byId[edge.target])
       .map((point) => point.join(","))
       .join(" ");
-    return `<g class="graph-svg-edge${selected}" data-graph-select="edge" data-graph-id="${escapeHtml(edge.id)}" aria-hidden="true"><polygon class="graph-svg-edge-hit" points="${hitPoints}"/><line x1="${source.x}" y1="${source.y}" x2="${target.x}" y2="${target.y}" marker-end="url(#graph-arrow)"/><title>${escapeHtml(edgeLabel(edge))}</title></g>`;
+    return `<g class="graph-svg-edge${selected}" data-graph-select="edge" data-graph-id="${escapeHtml(edge.id)}" data-graph-source="${escapeHtml(edge.source)}" data-graph-target="${escapeHtml(edge.target)}" aria-hidden="true"><polygon class="graph-svg-edge-hit" points="${hitPoints}"/><line x1="${source.x}" y1="${source.y}" x2="${target.x}" y2="${target.y}" marker-end="url(#graph-arrow)"/><title>${escapeHtml(edgeLabel(edge))}</title></g>`;
   }).join("");
   const names = Object.fromEntries(payload.nodes.map((node) => [node.id, nodeNamePresentation(node, locale)]));
   const labels = Object.fromEntries(Object.entries(names).map(([id, name]) => [id, name.text]));

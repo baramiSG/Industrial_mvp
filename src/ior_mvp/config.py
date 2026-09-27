@@ -151,9 +151,9 @@ def validate_ui_strings(payload: dict[str, Any]) -> None:
     assert isinstance(metadata, dict)
     assert isinstance(locales, dict)
     assert isinstance(strings, dict)
-    if metadata.get("version") != "1.7.0":
+    if metadata.get("version") != "1.8.0":
         raise UIStringConfigurationError(
-            "UI catalogue metadata.version must be 1.7.0"
+            "UI catalogue metadata.version must be 1.8.0"
         )
     if metadata.get("default_locale") != "en":
         raise UIStringConfigurationError(
@@ -189,7 +189,11 @@ def validate_ui_strings(payload: dict[str, Any]) -> None:
     policy_values = (
         {
             value
-            for key in ("display_label", "display_label_ar")
+            for key in (
+                "display_label", "display_label_ar", "executive_headline",
+                "executive_headline_ar", "reference_economics_condition",
+                "reference_economics_condition_ar",
+            )
             if isinstance(policy, dict)
             and isinstance(value := policy.get(key), str)
         }
@@ -246,7 +250,7 @@ def ui_strings_bundle(locale: str) -> dict[str, Any]:
     if locale not in SUPPORTED_UI_LOCALES:
         raise UnsupportedUILocaleError(locale)
     payload = ui_strings_config()
-    from .evidence import synthetic_display_labels
+    from .evidence import executive_policy_copy, synthetic_display_labels
 
     return {
         "catalogue_version": payload["metadata"]["version"],
@@ -254,6 +258,7 @@ def ui_strings_bundle(locale: str) -> dict[str, Any]:
         **deepcopy(payload["locales"][locale]),
         "strings": deepcopy(payload["strings"][locale]),
         "synthetic_labels": synthetic_display_labels(),
+        "executive_policy": executive_policy_copy(),
     }
 
 

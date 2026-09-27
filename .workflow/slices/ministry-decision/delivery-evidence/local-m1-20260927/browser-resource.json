@@ -1,0 +1,104 @@
+{
+  "utc": "2026-09-27T00:19:57.621302+00:00",
+  "containers": [
+    {
+      "Id": "1129f0b8f3d95a68a865fc0bae6482190ef99ec97e38f95f07b546907d3b468e",
+      "Name": "/amazing_goldstine",
+      "Image": "sha256:938b534c8bac0f80012299fc0bba33c00d29f2ade02416bbc1df9d9c028f8112",
+      "State.Pid": 85074,
+      "State.StartedAt": "2026-09-27T00:11:20.097805815Z",
+      "HostConfig.NetworkMode": "none",
+      "Mounts": [
+        {
+          "Type": "bind",
+          "Source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/final-candidate-m1-successor/proof/Makefile",
+          "Destination": "/workspace/Makefile",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/final-candidate-m1-successor/proof/src",
+          "Destination": "/workspace/src",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/final-candidate-m1-successor/proof/data",
+          "Destination": "/workspace/data",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/final-candidate-m1-successor/proof/docs/authority",
+          "Destination": "/workspace/docs/authority",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/final-candidate-m1-successor/proof/browser_tests",
+          "Destination": "/workspace/browser_tests",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/final-candidate-m1-successor/proof/scripts",
+          "Destination": "/workspace/scripts",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/final-browser-m1-successor/artifacts",
+          "Destination": "/workspace/.artifacts/e2e",
+          "Mode": "",
+          "RW": true,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/final-candidate-m1-successor/proof/config",
+          "Destination": "/workspace/config",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/final-candidate-m1-successor/proof/tests",
+          "Destination": "/workspace/tests",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/final-candidate-m1-successor/proof/pyproject.toml",
+          "Destination": "/workspace/pyproject.toml",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        },
+        {
+          "Type": "bind",
+          "Source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/final-candidate-m1-successor/proof/uv.lock",
+          "Destination": "/workspace/uv.lock",
+          "Mode": "",
+          "RW": false,
+          "Propagation": "rprivate"
+        }
+      ]
+    }
+  ],
+  "scope": "current sole owned full-browser container; no environment or credential contents read"
+}

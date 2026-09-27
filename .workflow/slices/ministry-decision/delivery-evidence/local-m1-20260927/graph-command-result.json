@@ -1,0 +1,32 @@
+{
+  "at_utc": "2026-09-27T00:54:44.919037+00:00",
+  "command": [
+    "make",
+    "graph-gate"
+  ],
+  "cwd": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/final-candidate-m1-successor/proof",
+  "environment": {
+    "PATH": "/home/barami/.nvm/versions/node/v22.22.3/bin:/home/barami/.local/bin:/usr/local/bin:/usr/bin:/bin",
+    "HOME": "/home/barami",
+    "LANG": "C.UTF-8",
+    "DOCKER_HOST": "unix:///run/docker.sock",
+    "COMPOSE_DISABLE_ENV_FILE": "1",
+    "COMPOSE_PROJECT_NAME": "m-final-graph-20260926-m1",
+    "COMPOSE_FILE": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/final-candidate-m1-successor/proof/docker-compose.yml:/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/graph-gate-m1-successor/compose.override.yml",
+    "GIT_OPTIONAL_LOCKS": "0",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONPATH": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/final-candidate-m1-successor/proof/src",
+    "GRAPH_PYCACHE_PREFIX": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/graph-gate-m1-successor/pycache",
+    "NEO4J_DATABASE": "neo4j",
+    "PLAYWRIGHT_BROWSERS_PATH": "/home/barami/.playwright-browsers",
+    "IOR_VISUAL_MODE": "compare",
+    "PYTEST_ADDOPTS": "-p no:cacheprovider",
+    "PYTHONPYCACHEPREFIX": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/graph-gate-m1-successor/pycache"
+  },
+  "candidate_tree": "cf666ced680295073c383dd5046021296e58b361",
+  "proof_commit": "918b8fea3e618b23f27f3acf22fcc0162f2cab97",
+  "exit_code": 0,
+  "duration_seconds": 33.805,
+  "stdout_sha256": "5bf183758e8234f712cb54a0d108f113c4e0e867fc54cbf5f198aad42a2fdb11",
+  "stderr_sha256": "23bdbe5f14006ee995cedf5a87c25d010b9b54e1d1b16c47c740f1e000507bba"
+}

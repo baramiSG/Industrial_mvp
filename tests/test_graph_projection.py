@@ -55,6 +55,96 @@ def test_every_public_snapshot_and_scenario_is_projected(projection) -> None:
     assert {node.id for node in _nodes(projection, "Scenario")} == expected_scenarios
 
 
+def test_candidate_graph_scopes_aliases_and_sources_are_exact(projection) -> None:
+    steel = "SYN-MINISTRY-STEEL-001"
+    pp = "SYN-MINISTRY-PP-001"
+    a_plant = "PLANT-8932de539dd9d7d8"
+    a_line = "LINE-7315366f6a9166d8"
+    nodes = {node.id: node for node in projection.nodes}
+    assert nodes[f"PLANT-{steel}"].properties["canonical_entity_id"] == a_plant
+    assert nodes[f"LINE-{steel}"].properties["canonical_entity_id"] == a_line
+    assert f"{steel}::plant::{a_plant}" not in nodes
+    assert f"{steel}::line::{a_line}" not in nodes
+    assert nodes[f"{pp}::plant::{a_plant}"].properties["scenario_id"] == pp
+    assert nodes[f"PLANT-{pp}"].properties.get("canonical_entity_id") is None
+    fact = nodes[f"{steel}::candidate_fact::FACT-CUS-STEEL-A"]
+    assert fact.properties["record_origin"] == "DIRECT_RECORD"
+    assert fact.properties["subject_id"] == a_plant
+    assert fact.properties["source_refs"][0]["pointer"].endswith("FACT-CUS-STEEL-A")
+    candidate_edges = [edge for edge in projection.edges
+                       if edge.properties.get("attribution_scope") == "CANDIDATE_DISCOVERY"
+                       and edge.type == "ADJACENT_TO"]
+    assert {edge.source for edge in candidate_edges if edge.target == "SAU-H0-721049"} == {
+        f"PLANT-{steel}", f"{steel}::plant::PLANT-b24ad239aa497c75",
+    }
+    assert not any(edge.source.startswith("LINE-") and edge.type in {
+        "HAS_CAPABILITY", "CERTIFIED_TO", "ADJACENT_TO"}
+        for edge in projection.edges)
+
+
+def test_graph_context_rejects_foreign_subject_and_stays_unavailable(projection) -> None:
+    from ior_mvp.graph.service import GraphNotFound, GraphService
+
+    service = GraphService(None, artifact_projection_id=projection.projection_id,
+                           projection=projection)
+    context = {
+        "company_id": "COMPANY-ed24005b198e52e5",
+        "plant_id": "PLANT-8932de539dd9d7d8",
+        "line_id": "LINE-7315366f6a9166d8",
+        "requirement_item_id": "width_mm",
+    }
+    result = service.view("adjacency", "SAU-H0-721049", "simulated", context)
+    assert result["graph_status"] == "GRAPH_UNAVAILABLE"
+    assert result["nodes"] == result["edges"] == []
+    assert result["focus_element_id"] == "LINE-SYN-MINISTRY-STEEL-001"
+    assert result["context"] == context
+    with pytest.raises(GraphNotFound, match="GRAPH_CONTEXT_NOT_FOUND"):
+        service.view("adjacency", "SAU-H0-390210", "simulated", context)
+    with pytest.raises(GraphNotFound, match="GRAPH_CONTEXT_NOT_FOUND"):
+        service.view("adjacency", "SAU-H0-721049", "public", context)
+    wrong = {**context, "plant_id": "PLANT-b24ad239aa497c75"}
+    with pytest.raises(GraphNotFound, match="GRAPH_CONTEXT_NOT_FOUND"):
+        service.view("adjacency", "SAU-H0-721049", "simulated", wrong)
+
+
+def test_available_adjacency_focus_uses_exact_candidate_source_table(projection) -> None:
+    from types import SimpleNamespace
+
+    from ior_mvp.graph.engine_feed import adjacency_explanation
+    from ior_mvp.graph.service import GraphService
+
+    def rows(_spec, _view, opportunity_id, mode, scenario_id):
+        result = adjacency_explanation(
+            projection, opportunity_id,
+            branch=(mode, scenario_id),
+        )
+        return [{"producer_id": producer_id} for producer_id in result["producer_ids"]]
+
+    service = GraphService(
+        SimpleNamespace(target="local"),
+        artifact_projection_id=projection.projection_id,
+        projection=projection,
+        status_reader=lambda _spec: {"projection_id": projection.projection_id},
+        view_reader=rows,
+    )
+    context = {
+        "company_id": "COMPANY-ed24005b198e52e5",
+        "plant_id": "PLANT-8932de539dd9d7d8",
+        "line_id": "LINE-7315366f6a9166d8",
+        "requirement_item_id": "width_mm",
+    }
+    result = service.view("adjacency", "SAU-H0-721049", "simulated", context)
+    assert result["graph_status"] == "AVAILABLE"
+    assert result["focus_element_id"] == "LINE-SYN-MINISTRY-STEEL-001"
+    node_ids = {node["id"] for node in result["nodes"]}
+    assert result["focus_element_id"] in node_ids
+    assert any(node["label"] == "Capability"
+               and node["properties"].get("requirement_item_id") == "width_mm"
+               for node in result["nodes"])
+    assert all(edge["type"] not in {"CERTIFIED_TO", "ADJACENT_TO", "HAS_CAPABILITY"}
+               for edge in result["edges"] if edge["source"] == result["focus_element_id"])
+
+
 def test_public_elements_have_public_sentinel_and_false_flag(projection) -> None:
     public_nodes = [
         node for node in projection.nodes if not node.properties["synthetic_flag"]
@@ -702,4 +792,301 @@ def test_decision_only_gate_is_attributed_on_existing_scenario_node() -> None:
     assert not any(
         candidate.id == capability_id(scenario_id, "GATE-exact imported specification")
         for candidate in graph.nodes
+    )
+
+
+def _steel_public_layer():
+    public = _json(PROJECT_ROOT / "data/snapshots/public/SAU-H0-721049.json")
+    return public, build_evidence_layer(
+        public_cases={public["opportunity"]["id"]: public},
+        scenarios={},
+        entity_artifacts=[],
+        briefs=[],
+        tariff_snapshots=[],
+        tariff_attempts=[],
+        projection_id="GRAPH-TEST",
+        engine_run_id="ENGINE-TEST",
+        inputs=[],
+    )
+
+
+def _producer_id(graph, evidence_id: str) -> str:
+    matches = [
+        node.id
+        for node in graph.nodes
+        if node.label == "Company"
+        and evidence_id in node.properties.get("evidence_ids", [])
+    ]
+    assert len(matches) == 1
+    return matches[0]
+
+
+def test_hadeed_does_not_inherit_unicoil_process_or_certification() -> None:
+    """Original defect: opportunity signals were copied onto every producer."""
+    _public, graph = _steel_public_layer()
+    hadeed = _producer_id(graph, "S-HADEED")
+    unicoil = _producer_id(graph, "S-UNICOIL-EPD")
+    inherited = [
+        edge
+        for edge in graph.edges
+        if edge.source == hadeed
+        and edge.type in {"USES_PROCESS", "CERTIFIED_TO"}
+        and "S-UNICOIL-EPD" in edge.properties.get("evidence_ids", [])
+    ]
+    own_process = [
+        edge
+        for edge in graph.edges
+        if edge.source == hadeed
+        and edge.type == "USES_PROCESS"
+        and "S-HADEED" in edge.properties.get("evidence_ids", [])
+    ]
+    unicoil_cert = [
+        edge
+        for edge in graph.edges
+        if edge.source == unicoil and edge.type == "CERTIFIED_TO"
+    ]
+
+    assert inherited == []
+    assert own_process
+    assert unicoil_cert
+    assert all(
+        "S-HADEED" not in edge.properties.get("evidence_ids", [])
+        for edge in unicoil_cert
+    )
+
+
+def test_public_adjacency_is_per_producer_and_keeps_reference_summary() -> None:
+    from ior_mvp.graph.derived import project_engine_outputs
+    from ior_mvp.graph.engine_feed import adjacency_explanation
+    from ior_mvp.graph.projection import _public_analysis
+
+    public, graph = _steel_public_layer()
+    analysis = _public_analysis(public, shared_enabler=None)
+    project_engine_outputs(
+        graph,
+        {(public["opportunity"]["id"], "public"): analysis},
+    )
+    hadeed = _producer_id(graph, "S-HADEED")
+    unicoil = _producer_id(graph, "S-UNICOIL-EPD")
+    rows = {
+        edge.source: edge
+        for edge in graph.edges
+        if edge.type == "ADJACENT_TO" and edge.target == "SAU-H0-721049"
+    }
+    reference = next(
+        node
+        for node in graph.nodes
+        if node.id == "ENGINE-EVIDENCE-SAU-H0-721049-public"
+    )
+    explanation = adjacency_explanation(
+        graph,
+        "SAU-H0-721049",
+        branch="public",
+    )
+
+    assert rows[hadeed].properties["fired"] is False
+    assert rows[hadeed].properties["qualifying_signal_count"] == 0
+    assert rows[hadeed].properties["attribution_scope"] == "PRODUCER_DISCLOSURE"
+    assert rows[unicoil].properties["fired"] is True
+    assert rows[unicoil].properties["qualifying_signal_count"] == 4
+    assert reference.properties["attribution_scope"] == "REFERENCE_CASE"
+    assert reference.properties["r9s_fired"] is True
+    assert reference.properties["r9s_qualifying_signal_count"] == 4
+    assert explanation["fired"] is True
+    assert explanation["qualifying_signal_count"] == 4
+    assert explanation["producer_rows"][hadeed]["fired"] is False
+    assert explanation["producer_rows"][unicoil]["qualifying_signal_count"] == 4
+
+
+def test_public_pp_producer_family_and_sole_owned_signals() -> None:
+    from ior_mvp.graph.engine_feed import adjacency_explanation
+
+    graph = build_repository_projection(PROJECT_ROOT)
+    result = adjacency_explanation(graph, "SAU-H0-390210", branch="public")
+    expected = {
+        "COMPANY-f2d406af94a8aac1": (True, True, 1, "ADJACENT_PLANT_WITH_SIGNALS", ["P-SABIC"]),
+        "COMPANY-0f8e69531f415144": (True, False, 0, "NO_DEFENSIBLE_SIGNAL", []),
+        "COMPANY-f3a50c477f158420": (True, False, 0, "NO_DEFENSIBLE_SIGNAL", []),
+    }
+    assert set(result["producer_rows"]) == set(expected)
+    for producer_id, (family, fired, count, code, signal_ids) in expected.items():
+        row = result["producer_rows"][producer_id]
+        assert row["same_process_family"] is family
+        assert row["fired"] is fired
+        assert row["execution"] == "FULL"
+        assert row["qualifying_signal_count"] == count
+        assert row["result_code"] == code
+        assert row["signal_evidence_ids"] == signal_ids
+        assert {item["evidence_ids"][0] for item in row["signals"]} == set(signal_ids)
+        assert row["attribution_scope"] == "PRODUCER_DISCLOSURE"
+    assert result["fired"] is True
+    assert result["qualifying_signal_count"] == 2
+
+
+def test_public_aluminium_exact_producer_rows_preserve_evidence_and_scope(projection) -> None:
+    expected = {
+        "COMPANY-69d10bdb78064a59": (
+            "REL-86e0f9feaada056b9067", "P-ALUPCO-760429"
+        ),
+        "PRODUCER-public-sau-h6-760429-2026-09-12-2": (
+            "REL-514c0b83c09734657191", "P-TALCO-760429"
+        ),
+    }
+    rows = {
+        edge.source: edge
+        for edge in projection.edges
+        if edge.type == "ADJACENT_TO"
+        and edge.target == "SAU-H6-760429"
+        and edge.properties.get("attribution_scope") == "PRODUCER_DISCLOSURE"
+    }
+    assert set(rows) == set(expected)
+    for producer_id, (key, evidence_id) in expected.items():
+        edge = rows[producer_id]
+        row = edge.properties
+        assert edge.key == key
+        assert row["key"] == key
+        assert row["attribution_scope"] == "PRODUCER_DISCLOSURE"
+        assert row["evidence_ids"] == [
+            "ENGINE-EVIDENCE-SAU-H6-760429-public", evidence_id
+        ]
+        assert row["scenario_id"] == "PUBLIC"
+        assert row["synthetic_flag"] is False
+        assert row["same_process_family"] is True
+        assert row["execution"] == "FULL"
+        assert row["fired"] is False
+        assert row["qualifying_signal_count"] == 0
+        assert row["result_code"] == "NO_DEFENSIBLE_SIGNAL"
+        assert row["signal_evidence_ids"] == []
+        assert row["signals"] == []
+
+
+def test_public_family_aliases_cover_actual_repository_case_loader_inputs() -> None:
+    from ior_mvp.graph.projection import (
+        _PUBLIC_SOURCE_FAMILY_IDS,
+        _load_repository_cases,
+    )
+
+    cases, _briefs = _load_repository_cases(PROJECT_ROOT)
+    labels_by_case = {
+        opportunity_id: [
+            record.get("process_family")
+            for record in case["domestic_capability"].get("producer_evidence", [])
+        ]
+        for opportunity_id, case in cases.items()
+    }
+    assert any(labels_by_case.values())
+    unmapped = [
+        (opportunity_id, label)
+        for opportunity_id, labels in labels_by_case.items()
+        for label in labels
+        if label not in _PUBLIC_SOURCE_FAMILY_IDS
+    ]
+    assert not unmapped
+
+
+@pytest.mark.parametrize(
+    "label",
+    ["technical_plastics", "technical_plastics_conversion", "unmapped_resin", None],
+)
+def test_public_pp_unmapped_source_family_is_unknown_not_false(label) -> None:
+    from ior_mvp.graph.projection import _public_analysis, public_producer_adjacency
+
+    public = deepcopy(get_public_case("SAU-H0-390210"))
+    public["domestic_capability"]["producer_evidence"][0]["process_family"] = label
+    rows = public_producer_adjacency(_public_analysis(public))
+    assert rows is not None
+    sabic = rows[0]
+    assert sabic["same_process_family"] is None
+    assert sabic["execution"] == "DISABLED"
+    assert sabic["fired"] is None
+    assert sabic["qualifying_signal_count"] == 1
+    assert sabic["result_code"] == "NO_DEFENSIBLE_SIGNAL"
+    assert sabic["signal_evidence_ids"] == ["P-SABIC"]
+
+
+def test_public_pp_missing_target_and_conversion_family_do_not_invent_match() -> None:
+    from ior_mvp.graph.projection import _public_analysis, public_producer_adjacency
+    from ior_mvp.screening.config import product_families_config
+
+    public = deepcopy(get_public_case("SAU-H0-390210"))
+    missing = deepcopy(product_families_config())
+    missing["families"]["polypropylene_primary_forms"]["hs4_headings"] = []
+    missing["families"]["polypropylene_primary_forms"]["status"] = "MEMBERSHIP_UNAVAILABLE"
+    unknown = public_producer_adjacency(_public_analysis(public, product_families=missing))
+    assert unknown is not None
+    assert [(row["same_process_family"], row["execution"], row["fired"]) for row in unknown] == [
+        (None, "DISABLED", None), (None, "DISABLED", None), (None, "DISABLED", None)
+    ]
+
+    public["opportunity"]["hs6"] = "392010"
+    conversion = public_producer_adjacency(_public_analysis(public))
+    assert conversion is not None
+    assert [(row["same_process_family"], row["execution"], row["fired"]) for row in conversion] == [
+        (False, "FULL", False), (False, "FULL", False), (False, "FULL", False)
+    ]
+
+
+def test_public_producer_signal_sources_are_exact_and_inspectable() -> None:
+    from types import SimpleNamespace
+
+    from ior_mvp.graph.engine_feed import adjacency_explanation
+    from ior_mvp.graph.projection import _public_analysis
+    from ior_mvp.graph.service import GraphService
+
+    public, graph = _steel_public_layer()
+    project_engine_outputs(
+        graph,
+        {(public["opportunity"]["id"], "public"): _public_analysis(public)},
+    )
+    unicoil = _producer_id(graph, "S-UNICOIL-EPD")
+    hadeed = _producer_id(graph, "S-HADEED")
+    source_signals = public["domestic_capability"]["coarse_adjacency_signals"]
+    expected = [
+        {
+            "signal_type": signal["signal_type"],
+            "description": signal["description"],
+            "evidence_ids": signal["evidence_ids"],
+        }
+        for signal in source_signals
+    ]
+    result = adjacency_explanation(graph, "SAU-H0-721049", branch="public")
+    assert result["producer_rows"][unicoil]["signals"] == expected
+    assert result["producer_rows"][unicoil]["signal_evidence_ids"] == [
+        "S-UNICOIL-EPD", "S-UNICOIL-SPEC"
+    ]
+    assert result["producer_rows"][unicoil]["attribution_scope"] == "PRODUCER_DISCLOSURE"
+    assert result["producer_rows"][hadeed]["signals"] == []
+    assert result["producer_rows"][hadeed]["signal_evidence_ids"] == []
+    assert result["producer_rows"][hadeed]["evidence_ids"] == [
+        "ENGINE-EVIDENCE-SAU-H0-721049-public", "S-HADEED"
+    ]
+
+    rows = [
+        {"producer_id": producer, "fired": row["fired"]}
+        for producer, row in result["producer_rows"].items()
+    ]
+    service = GraphService(
+        SimpleNamespace(target="compose"),
+        artifact_projection_id=graph.projection_id,
+        projection=graph,
+        status_reader=lambda _spec: {"projection_id": graph.projection_id,
+                                      "counts": graph.counts,
+                                      "synthetic_partition": {}},
+        view_reader=lambda *_args: rows,
+    )
+    payload = service.view("adjacency", "SAU-H0-721049", "public")
+    edges = payload["edges"]
+    unicoil_adjacent = next(edge for edge in edges if edge["type"] == "ADJACENT_TO"
+                            and edge["source"] == unicoil)
+    assert unicoil_adjacent["properties"]["signals"] == expected
+    assert unicoil_adjacent["properties"]["signal_evidence_ids"] == [
+        "S-UNICOIL-EPD", "S-UNICOIL-SPEC"
+    ]
+    assert {
+        edge["type"] for edge in edges
+        if edge["source"] == unicoil and edge["type"] != "ADJACENT_TO"
+    } == {"USES_PROCESS", "CERTIFIED_TO"}
+    assert not any(
+        "S-UNICOIL-EPD" in edge["properties"].get("evidence_ids", [])
+        for edge in edges if edge["source"] == hadeed
     )

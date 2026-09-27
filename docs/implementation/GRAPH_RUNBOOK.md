@@ -52,6 +52,10 @@ Scenario contract 2.1.0 permits a complete Class-D `shared_enabler` declaration 
 
 After approved code/config/scenario edits and before the separately controlled graph generation, the persisted pointer is expected to differ from a fresh build. Preserve that failure; do not overwrite `data/graph/**`, regenerate manifests or start a mirror until the later operation packet binds the literal projection output.
 
+For the Ministry M successor, that separate operation completed all seven stock graph/manifest gates and bound current `GRAPH-SAU-2026-09-12-2e9705ef7423` / `ENGINE-92a34ff1f60e` (1,160 nodes, 1,248 edges; 740 snapshot members). Canonical visual capture and final candidate review remain separate. The fixed-view acceptance matrix is four views × 11 cases × two branches = 88 results. Compare exact normalized producer rows and their own source membership against the artifact, and check the opportunity-wide reference R9-S separately. Bind target, projection and runtime identities in each mirror result. The accepted S19 Aura checkpoint is a different projection and does not verify M or authorize an S21 refresh. A replacement projection needs independent review and recovery before any operator action; never use a fixture clear or local CI credentials against Aura.
+
+The preceding 92a subject is historical. The actual corrected generated subject after the P06 request fix is `GRAPH-SAU-2026-09-12-b325de92eeec` / `ENGINE-77041b07efbb` (1,160 nodes, 1,248 edges; 742 snapshot and 20 authority members). The original strict 1440px Steel EN/AR source-token geometry pair passes on this subject, with a single-rule isolated CSS negative failing the protected anchors. Canonical capture and independent review remain separate.
+
 Reconstruction is part of:
 
 ```bash

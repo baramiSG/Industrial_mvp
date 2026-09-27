@@ -25,7 +25,14 @@ from ior_mvp.scenario_contract import (
     validate_shared_enabler_consistency,
 )
 from ior_mvp.route_hypotheses import BROWNFIELD_ROUTE_CODE
-from ior_mvp.rules import evaluate_rules
+from ior_mvp.rules import evaluate_r9s, evaluate_rules
+from ior_mvp.screening.config import (
+    _load as _load_family_yaml,
+    family_for_hs6,
+    product_families_config,
+    validate_product_families,
+)
+from ior_mvp.trade_metrics import UNAVAILABLE
 
 from .model import (
     GraphEdge,
@@ -226,6 +233,27 @@ def _input_row(path: Path, root: Path, kind: str) -> dict[str, Any]:
 
 def discover_inputs(root: Path = PROJECT_ROOT) -> list[dict[str, Any]]:
     """Return every governed file that can influence this projection."""
+    required_family_helpers = (
+        root / "src/ior_mvp/screening/__init__.py",
+        root / "src/ior_mvp/screening/config.py",
+    )
+    for path in required_family_helpers:
+        if not path.is_file():
+            raise GraphProjectionError(
+                f"Required graph implementation input is missing: {path.relative_to(root)}"
+            )
+    engine_implementation = (
+        *required_family_helpers,
+        *(
+            path
+            for directory in (
+                root / "src/ior_mvp",
+                root / "src/ior_mvp/cases",
+                root / "src/ior_mvp/graph",
+            )
+            for path in directory.glob("*.py")
+        ),
+    )
     groups: tuple[tuple[str, Iterable[Path]], ...] = (
         (
             "PUBLIC_SNAPSHOT",
@@ -291,18 +319,7 @@ def discover_inputs(root: Path = PROJECT_ROOT) -> list[dict[str, Any]]:
                 *(root / "config").glob("*.v1.yaml"),
             ),
         ),
-        (
-            "ENGINE_IMPLEMENTATION",
-            (
-                path
-                for directory in (
-                    root / "src/ior_mvp",
-                    root / "src/ior_mvp/cases",
-                    root / "src/ior_mvp/graph",
-                )
-                for path in directory.glob("*.py")
-            ),
-        ),
+        ("ENGINE_IMPLEMENTATION", engine_implementation),
     )
     rows: list[dict[str, Any]] = []
     seen: set[str] = set()
@@ -699,7 +716,7 @@ def _project_public_case(
         _edge(assembler, edge_type, source, target_id, edge_props)
 
     capability = case.get("domestic_capability", {})
-    producer_nodes: list[str] = []
+    producer_membership: list[tuple[str, frozenset[str]]] = []
     for index, producer in enumerate(capability.get("producer_evidence", [])):
         if not isinstance(producer, Mapping):
             continue
@@ -737,7 +754,7 @@ def _project_public_case(
                 }
             )
             assembler.add_node(GraphNode("Company", company_id, company_props))
-        producer_nodes.append(company_id)
+        producer_membership.append((company_id, frozenset(producer_evidence)))
         relation_evidence = producer_evidence[0] if producer_evidence else evidence_id
         relation_props = _base_properties(
             identity="PENDING",
@@ -948,18 +965,22 @@ def _project_public_case(
                 "signal_type": signal_type,
             }
         )
+        owner = _sole_evidence_owner(signal_ids, producer_membership)
+        if owner is None:
+            continue
         assembler.add_node(GraphNode(target_label, target_id, target_props))
-        for producer_id in sorted(set(producer_nodes)):
-            edge_props = deepcopy(target_props)
-            edge_props.pop("id")
-            _edge(
-                assembler,
-                edge_type,
-                producer_id,
-                target_id,
-                edge_props,
-                discriminator=str(signal_index),
-            )
+        edge_props = deepcopy(target_props)
+        edge_props.pop("id")
+        edge_props["attribution_scope"] = "PRODUCER_DISCLOSURE"
+        edge_props["coarse_signal"] = True
+        _edge(
+            assembler,
+            edge_type,
+            owner,
+            target_id,
+            edge_props,
+            discriminator=str(signal_index),
+        )
 
 
 def _scenario_delta_nv(
@@ -983,6 +1004,7 @@ def _scenario_delta_nv(
 def _project_scenario(
     assembler: ProjectionAssembler,
     scenario: Mapping[str, Any],
+    public_case: Mapping[str, Any],
 ) -> None:
     scenario_id = str(scenario["scenario_id"])
     product_id = str(scenario["opportunity_id"])
@@ -1259,6 +1281,7 @@ def _project_scenario(
             edge_props,
             discriminator=scenario_id,
         )
+
     for gate, status in sorted(inputs.get("hard_gates", {}).items()):
         typed_status = classify_gate_status(status).value
         evidence_ids = [f"{scenario_id}::hard_gates"]
@@ -1295,6 +1318,201 @@ def _project_scenario(
             edge_props,
             discriminator=scenario_id,
         )
+
+
+    _project_candidate_register(assembler, scenario, public_case)
+
+
+def _project_candidate_register(
+    assembler: ProjectionAssembler,
+    scenario: Mapping[str, Any],
+    public_case: Mapping[str, Any],
+) -> None:
+    """Project only attributed Class-D candidate facts and bounded findings."""
+    if scenario.get("scenario_version") != "2.2.0":
+        return
+    from ior_mvp.simulation import _candidate_diagnostics
+
+    scenario_id = str(scenario["scenario_id"])
+    opportunity_id = str(scenario["opportunity_id"])
+    as_of = str(assembler.nodes[opportunity_id].properties["as_of"])
+    register = scenario["synthetic_inputs"]["candidate_register"]
+    discovery, assessment = _candidate_diagnostics(dict(public_case), dict(scenario))
+    rows = {row["entity_id"]: row for row in discovery["rows"]}
+    block_evidence = f"{scenario_id}::candidate_register"
+    ids: dict[str, str] = {}
+
+    def graph_id(kind: str, canonical: str) -> str:
+        if scenario_id == "SYN-MINISTRY-STEEL-001":
+            if kind == "PLANT" and canonical == "PLANT-8932de539dd9d7d8":
+                return f"PLANT-{scenario_id}"
+            if kind == "LINE" and canonical == "LINE-7315366f6a9166d8":
+                return f"LINE-{scenario_id}"
+        return f"{scenario_id}::{kind.lower()}::{canonical}"
+
+    for kind, source_rows, label, id_key in (
+        ("COMPANY", register["companies"], "Company", "company_id"),
+        ("PLANT", register["plants"], "Plant", "plant_id"),
+        ("LINE", register["lines"], "ProductionLine", "line_id"),
+    ):
+        for record in source_rows:
+            canonical = str(record[id_key])
+            identity = graph_id(kind, canonical)
+            ids[canonical] = identity
+            props = _base_properties(
+                identity=identity, evidence_id=block_evidence, as_of=as_of,
+                evidence_class="D", synthetic_flag=True,
+                scenario_id=scenario_id, origin_kind="SCENARIO",
+                origin_ref=scenario_id,
+                projection_id=assembler.projection.projection_id,
+            )
+            props.update({
+                "canonical_entity_id": canonical,
+                "attribution_scope": "CANDIDATE_DISCOVERY",
+                "opportunity_id": opportunity_id,
+                "finding_item_ids": sorted({
+                    finding["requirement_item_id"]
+                    for finding in rows.get(canonical, {}).get("findings", [])
+                }),
+                "disposition": rows.get(canonical, {}).get("disposition"),
+            })
+            if kind == "COMPANY":
+                props.update({
+                    "primary_name_en": record["name_en"],
+                    "primary_name_ar": record["name_ar"],
+                    "company_id": canonical,
+                })
+            elif kind == "PLANT":
+                props["company_id"] = record["company_id"]
+            else:
+                props["plant_id"] = record["plant_id"]
+                props["company_id"] = next(
+                    plant["company_id"] for plant in register["plants"]
+                    if plant["plant_id"] == record["plant_id"]
+                )
+            if identity in assembler.nodes:
+                existing = assembler.nodes[identity]
+                if existing.label != label or existing.properties["scenario_id"] != scenario_id:
+                    raise GraphProjectionError("candidate alias crosses graph identity")
+                for key in ("canonical_entity_id", "attribution_scope", "opportunity_id",
+                            "finding_item_ids", "disposition", "company_id", "plant_id"):
+                    if key in props:
+                        existing.properties[key] = deepcopy(props[key])
+            else:
+                assembler.add_node(GraphNode(label, identity, props))
+    for line in register["lines"]:
+        source, target = ids[line["plant_id"]], ids[line["line_id"]]
+        if any(edge.type == "HAS_LINE" and edge.source == source and edge.target == target
+               for edge in assembler.projection.edges):
+            continue
+        props = _base_properties(
+            identity="PENDING", evidence_id=block_evidence, as_of=as_of,
+            evidence_class="D", synthetic_flag=True, scenario_id=scenario_id,
+            origin_kind="SCENARIO", origin_ref=scenario_id,
+            projection_id=assembler.projection.projection_id,
+        )
+        props.pop("id")
+        props["attribution_scope"] = "CANDIDATE_DISCOVERY"
+        _edge(assembler, "HAS_LINE", source, target, props)
+
+    facts = {fact["fact_id"]: fact for fact in register["facts"]}
+    attribution = {
+        link["fact_id"]: link for link in register["attribution_links"]
+    }
+    for fact_id, fact in sorted(facts.items()):
+        identity = f"{scenario_id}::candidate_fact::{fact_id}"
+        props = _base_properties(
+            identity=identity, evidence_id=identity, as_of=as_of,
+            evidence_class="D", synthetic_flag=True, scenario_id=scenario_id,
+            origin_kind="SCENARIO", origin_ref=scenario_id,
+            projection_id=assembler.projection.projection_id,
+        )
+        props.update({
+            "attribution_scope": "DECLARED_ENGINE_INPUT",
+            "fact_id": fact_id, "fact_kind": fact["kind"],
+            "subject_type": fact["subject_type"], "subject_id": fact["subject_id"],
+            "record_origin": fact["origin"], "record_window": deepcopy(fact["window"]),
+            "record_values": deepcopy(fact["values"]),
+            "source_refs": deepcopy(fact["source_refs"]),
+        })
+        assembler.add_node(GraphNode("Evidence", identity, props))
+        owners = [(fact["subject_id"], None)]
+        if fact_id in attribution:
+            owners.append((attribution[fact_id]["plant_id"], attribution[fact_id]["attribution_id"]))
+        for owner, attribution_id in owners:
+            if owner not in ids:
+                raise GraphProjectionError("candidate fact owner is missing")
+            edge_props = deepcopy(props)
+            edge_props.pop("id")
+            edge_props["attribution_scope"] = "CANDIDATE_DISCOVERY"
+            edge_props["attribution_id"] = attribution_id
+            _edge(assembler, "SUPPORTED_BY_EVIDENCE", ids[owner], identity,
+                  edge_props, discriminator=fact_id)
+
+    for row in discovery["rows"]:
+        if row["entity_kind"] != "PLANT" or row["disposition"] != "PASS_TO_ASSESSMENT":
+            continue
+        fact_ids = sorted(set(row["evidence_boundary"]["signal_fact_ids"]))
+        if any(fact_id not in facts for fact_id in fact_ids):
+            raise GraphProjectionError("candidate signal has no source fact")
+        if ids[row["entity_id"]] == f"PLANT-{scenario_id}":
+            if scenario_id != "SYN-MINISTRY-STEEL-001":
+                raise GraphProjectionError("candidate alias is not admitted")
+            assembler.nodes[ids[row["entity_id"]]].properties["candidate_r9s"] = {
+                "fired": row["r9s"]["fired"],
+                "execution": row["r9s"]["execution"],
+                "same_process_family": row["r9s"]["metrics"]["same_process_family"],
+                "qualifying_signal_count": row["r9s"]["metrics"]["qualifying_signal_count"],
+                "result_code": row["r9s"]["result_code"],
+                "fact_ids": fact_ids,
+            }
+            continue
+        props = _base_properties(
+            identity="PENDING", evidence_id=block_evidence, as_of=as_of,
+            evidence_class="D", synthetic_flag=True, scenario_id=scenario_id,
+            origin_kind="SCENARIO", origin_ref=scenario_id,
+            projection_id=assembler.projection.projection_id, derived=True,
+            engine_run_id=assembler.projection.engine["engine_run_id"],
+            evidence_ids=[f"{scenario_id}::candidate_fact::{fact_id}" for fact_id in fact_ids],
+        )
+        props.pop("id")
+        props.update({
+            "attribution_scope": "CANDIDATE_DISCOVERY",
+            "canonical_entity_id": row["entity_id"],
+            "opportunity_id": opportunity_id,
+            "fact_ids": fact_ids,
+            "fired": row["r9s"]["fired"],
+            "execution": row["r9s"]["execution"],
+            "same_process_family": row["r9s"]["metrics"]["same_process_family"],
+            "qualifying_signal_count": row["r9s"]["metrics"]["qualifying_signal_count"],
+            "result_code": row["r9s"]["result_code"],
+        })
+        _edge(assembler, "ADJACENT_TO", ids[row["entity_id"]], opportunity_id,
+              props, discriminator=scenario_id)
+
+    for line in assessment["rows"]:
+        for item in line["comparisons"]:
+            identity = f"{scenario_id}::line_capability::{line['line_id']}::{item['field_id']}"
+            props = _base_properties(
+                identity=identity, evidence_id=block_evidence, as_of=as_of,
+                evidence_class="D", synthetic_flag=True, scenario_id=scenario_id,
+                origin_kind="SCENARIO", origin_ref=scenario_id,
+                projection_id=assembler.projection.projection_id, derived=True,
+                engine_run_id=assembler.projection.engine["engine_run_id"],
+            )
+            props.update({
+                "attribution_scope": "LINE_DIAGNOSTIC",
+                "canonical_entity_id": line["line_id"],
+                "requirement_item_id": item["field_id"],
+                "status": item["status"], "finding_origin": item["origin"],
+                "current_recorded": deepcopy(item["current_recorded"]),
+                "needed": deepcopy(item["needed"]),
+            })
+            assembler.add_node(GraphNode("Capability", identity, props))
+            edge_props = deepcopy(props)
+            edge_props.pop("id")
+            _edge(assembler, "HAS_CAPABILITY", opportunity_id, identity,
+                  edge_props, discriminator=line["line_id"])
 
 
 def _project_enablers(
@@ -1571,7 +1789,7 @@ def build_evidence_layer(
     except (EvidenceIntegrityError, ValueError) as exc:
         raise GraphProjectionError(str(exc)) from exc
     for scenario in scenario_values:
-        _project_scenario(assembler, scenario)
+        _project_scenario(assembler, scenario, public_cases[str(scenario["opportunity_id"])])
     _project_enablers(assembler, scenario_values)
     _project_brief_addresses(assembler, briefs)
     _project_tariff(
@@ -1635,10 +1853,151 @@ def _engine_run_id(root: Path, inputs: list[dict[str, Any]]) -> tuple[str, str]:
     return f"ENGINE-{digest[:12]}", authority_digest
 
 
+def reference_r9s_properties(r9s: Mapping[str, Any]) -> dict[str, Any]:
+    """Return the opportunity-wide R9-S ledger stored on engine evidence."""
+    metrics = r9s.get("metrics", {})
+    return {
+        "attribution_scope": "REFERENCE_CASE",
+        "r9s_fired": r9s.get("fired"),
+        "r9s_execution": r9s.get("execution"),
+        "r9s_same_process_family": metrics.get("same_process_family"),
+        "r9s_qualifying_signal_count": metrics.get("qualifying_signal_count"),
+        "r9s_result_code": r9s.get("result_code"),
+    }
+
+
+def declared_r9s_metrics(r9s: Mapping[str, Any]) -> dict[str, Any]:
+    """Return scenario R9-S metrics for one declared engine-input producer."""
+    metrics = r9s.get("metrics", {})
+    return {
+        "fired": r9s.get("fired"),
+        "execution": r9s.get("execution"),
+        "same_process_family": metrics.get("same_process_family"),
+        "qualifying_signal_count": metrics.get("qualifying_signal_count"),
+        "result_code": r9s.get("result_code"),
+    }
+
+
+def _sole_evidence_owner(
+    evidence_ids: list[str],
+    membership: list[tuple[str, frozenset[str]]],
+) -> str | None:
+    """Return the one producer whose evidence contains every signal id."""
+    needed = frozenset(evidence_ids)
+    if not needed:
+        return None
+    owners = [producer_id for producer_id, owned in membership if needed <= owned]
+    if len(owners) != 1:
+        return None
+    return owners[0]
+
+
+def _evidence_set(record: Mapping[str, Any]) -> frozenset[str]:
+    return frozenset(str(value) for value in record.get("evidence_ids", []))
+
+
+def _sole_record_signals(
+    record: Mapping[str, Any],
+    records: list[Mapping[str, Any]],
+    signals: list[Mapping[str, Any]],
+) -> list[Mapping[str, Any]]:
+    owned = _evidence_set(record)
+    selected: list[Mapping[str, Any]] = []
+    for signal in signals:
+        needed = _evidence_set(signal)
+        if not needed or not needed <= owned:
+            continue
+        owners = [item for item in records if needed <= _evidence_set(item)]
+        if len(owners) == 1:
+            selected.append(signal)
+    return selected
+
+
+_PUBLIC_SOURCE_FAMILY_IDS = {
+    "coated_steel": "coated_steel",
+    "polypropylene": "polypropylene_primary_forms",
+    "fabricated_aluminium": "fabricated_aluminium",
+}
+
+
+def public_producer_adjacency(
+    analysis: Mapping[str, Any],
+) -> list[dict[str, Any]] | None:
+    """Return per-producer R9-S rows for a public attribution analysis."""
+    if analysis.get("mode") != "public":
+        return None
+    inputs = analysis.get("attribution_inputs")
+    if not isinstance(inputs, Mapping):
+        return None
+    records = [
+        record
+        for record in inputs.get("producer_evidence", [])
+        if isinstance(record, Mapping)
+    ]
+    signals = [
+        signal
+        for signal in inputs.get("coarse_adjacency_signals", [])
+        if isinstance(signal, Mapping)
+    ]
+    target_family_id = inputs.get("target_family_id")
+    rows: list[dict[str, Any]] = []
+    for record in records:
+        source_label = record.get("process_family")
+        source_family_id = (
+            _PUBLIC_SOURCE_FAMILY_IDS.get(source_label)
+            if isinstance(source_label, str)
+            else None
+        )
+        same_family = (
+            source_family_id == target_family_id
+            if source_family_id is not None and isinstance(target_family_id, str)
+            else UNAVAILABLE
+        )
+        owned_signals = _sole_record_signals(record, records, signals)
+        result = evaluate_r9s(
+            {
+                "same_process_family": same_family,
+                "coarse_adjacency_signals": owned_signals,
+                "unresolved_hard_gates": [],
+                "profile_hard_gates": {},
+            }
+        )
+        metrics = result.get("metrics", {})
+        rows.append(
+            {
+                "evidence_ids": sorted(_evidence_set(record)),
+                "signal_evidence_ids": sorted({
+                    str(value)
+                    for signal in owned_signals
+                    for value in signal.get("evidence_ids", [])
+                }),
+                "signals": [
+                    {
+                        "signal_type": signal["signal_type"],
+                        "description": signal["description"],
+                        "evidence_ids": list(signal["evidence_ids"]),
+                    }
+                    for signal in owned_signals
+                ],
+                "fired": result.get("fired"),
+                "execution": result.get("execution"),
+                "same_process_family": (
+                    metrics["same_process_family"]
+                    if isinstance(metrics.get("same_process_family"), bool)
+                    else None
+                ),
+                "qualifying_signal_count": metrics.get("qualifying_signal_count"),
+                "result_code": result.get("result_code"),
+            }
+        )
+    return rows
+
+
 def _public_analysis(
     case: Mapping[str, Any],
     *,
     shared_enabler: dict[str, Any] | None = None,
+    product_families: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     clean_case = {
         key: deepcopy(value)
@@ -1658,6 +2017,10 @@ def _public_analysis(
         capability,
         shared_enabler=shared_enabler,
     )
+    governed_families = product_families_config() if product_families is None else product_families
+    validate_product_families(governed_families)
+    hs6 = clean_case["opportunity"].get("hs6")
+    target_family = family_for_hs6(hs6, governed_families) if isinstance(hs6, str) else None
     r12 = next(row for row in rules if row["rule_id"] == "R12")
     return {
         "opportunity_id": clean_case["opportunity"]["id"],
@@ -1668,6 +2031,20 @@ def _public_analysis(
         "capability": capability,
         "decision": decision,
         "evidence_needs": r12["metrics"]["evidence_needs"],
+        "attribution_inputs": {
+            "sector_profile": clean_case["opportunity"]["sector_profile"],
+            "target_family_id": (
+                target_family["family_id"] if target_family is not None else None
+            ),
+            "producer_evidence": deepcopy(
+                clean_case["domestic_capability"].get("producer_evidence", [])
+            ),
+            "coarse_adjacency_signals": deepcopy(
+                clean_case["domestic_capability"].get(
+                    "coarse_adjacency_signals", []
+                )
+            ),
+        },
     }
 
 
@@ -1713,6 +2090,8 @@ def build_repository_projection(
     from .derived import project_engine_outputs
 
     inputs = discover_inputs(root)
+    product_families = _load_family_yaml(root / "config/product_families.v1.yaml")
+    validate_product_families(product_families)
     cases, briefs = _load_repository_cases(root)
     scenarios = {
         str(record["opportunity_id"]): record
@@ -1751,6 +2130,7 @@ def build_repository_projection(
     analyses: dict[tuple[str, str], dict[str, Any]] = {
         (opportunity_id, "public"): _public_analysis(
             case,
+            product_families=product_families,
             shared_enabler=shared_enabler_inputs(
                 projection,
                 opportunity_id,

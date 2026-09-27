@@ -85,6 +85,9 @@ VIEW_QUERIES: dict[str, str] = {
                adj.same_process_family AS same_process_family,
                adj.qualifying_signal_count AS qualifying_signal_count,
                adj.result_code AS result_code,
+               adj.attribution_scope AS attribution_scope,
+               coalesce(adj.signal_evidence_ids, []) AS signal_evidence_ids,
+               coalesce(adj.signals, []) AS signals,
                adj.evidence_ids AS evidence_ids
         ORDER BY producer_id
     """,

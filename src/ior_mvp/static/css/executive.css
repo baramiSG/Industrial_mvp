@@ -74,3 +74,47 @@
 .executive-integrity li { padding-block: var(--space-8); }
 
 .executive-vectors .executive-values { grid-template-columns: minmax(0, 1fr); }
+
+/* Ministry source diagnostics keep the reference decision visible above inspection. */
+.ministry-simulation-headline { margin-block: var(--space-16); padding: var(--space-14) var(--space-20); border-inline-start: var(--space-4) solid var(--color-warning); background: var(--color-warning-soft); color: var(--color-warning-text); font-weight: var(--font-weight-bold); }
+.executive-journey > ol { gap: var(--space-12); }
+.executive-journey > ol > li { border-block-start: var(--border-hairline) solid var(--color-line); padding-block-start: var(--space-8); }
+.executive-journey h3 { margin: var(--space-8) var(--space-12); color: var(--color-navy-900); font-size: var(--font-size-14); }
+.executive-journey > ol > li > ol { grid-template-columns: minmax(0, 1fr); }
+.ministry-resolution { display: grid; gap: var(--space-20); }
+.ministry-companies { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--size-sidebar)), 1fr)); gap: var(--space-12); }
+.ministry-company, .ministry-selected, .ministry-findings, .ministry-comparison, .ministry-lines, .ministry-public-producers { border: var(--border-hairline) solid var(--color-line); border-radius: var(--radius-control); background: var(--color-surface); padding: var(--space-16); }
+.ministry-company h4 { margin-block: var(--space-0) var(--space-8); }
+.ministry-company button, .ministry-lines button, .ministry-comparison button, .ministry-finding button { border: var(--border-hairline) solid var(--color-line-strong); border-radius: var(--radius-control); padding: var(--space-8) var(--space-12); color: var(--color-accent-text); background: var(--color-surface); text-align: start; overflow-wrap: anywhere; }
+.ministry-company button[aria-expanded="true"], .ministry-lines button[aria-expanded="true"] { border-color: var(--color-accent-text); background: var(--color-accent-soft); }
+.ministry-company ul, .ministry-lines ul { padding-inline-start: var(--space-20); }
+.ministry-finding-list { display: grid; gap: var(--space-12); }
+.ministry-finding { border: var(--border-hairline) solid var(--color-line); border-inline-start: var(--space-4) solid var(--color-accent-text); padding: var(--space-12); background: var(--color-softer); }
+.ministry-finding summary { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--space-8); font-weight: var(--font-weight-medium); }
+.ministry-finding > details { margin-block: var(--space-12); }
+.ministry-operands, .ministry-request { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--size-skeleton)), 1fr)); gap: var(--space-12); }
+.ministry-request > div, .ministry-operands > div { padding: var(--space-12); border: var(--border-hairline) solid var(--color-line); background: var(--color-surface); }
+.ministry-request-rail { margin-block-start: var(--space-20); border-block-start: var(--space-4) solid var(--color-accent-text); padding-block-start: var(--space-12); }
+.ministry-comparison .card-body-scroll { overflow-x: auto; }
+.ministry-comparison table { inline-size: var(--size-full); border-collapse: collapse; }
+.ministry-comparison th, .ministry-comparison td { text-align: start; vertical-align: top; padding: var(--space-12); border-block-end: var(--border-hairline) solid var(--color-line); }
+.ministry-comparison tr[aria-selected="true"] { background: var(--color-accent-soft); }
+.ministry-public-producers > div { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--size-sidebar)), 1fr)); gap: var(--space-12); }
+.ministry-public-producers article { padding: var(--space-12); background: var(--color-soft); border: var(--border-hairline) solid var(--color-line); }
+.ministry-requirement-strip { position: sticky; inset-block-start: var(--space-0); z-index: var(--z-card-action); margin-block: var(--space-12); padding: var(--space-12) var(--space-16); border: var(--border-hairline) solid var(--color-accent-text); border-radius: var(--radius-control); background: var(--color-surface); }
+.ministry-requirement-strip > strong { display: block; color: var(--color-navy-900); }
+.ministry-requirement-strip dl { display: flex; flex-wrap: wrap; gap: var(--space-8) var(--space-20); margin-block: var(--space-8); }
+.ministry-requirement-strip dl > div { min-inline-size: min(var(--size-full), var(--size-skeleton)); }
+.ministry-requirement-strip dd { margin-block-end: var(--space-0); }
+.ministry-requirement-strip small, .ministry-identity, .ministry-company small, .ministry-lines small { color: var(--color-muted); font-size: var(--font-size-12); }
+.ministry-company small, .ministry-lines small { display: block; margin-block-start: var(--space-4); }
+.ministry-company p { margin-block: var(--space-8); }
+.ministry-company h4 button { inline-size: var(--size-full); font-weight: var(--font-weight-bold); }
+.ministry-resolution > [data-company-count] > details, [data-executive-reference], [data-executive-vectors], [data-scenario-context] { border: var(--border-hairline) solid var(--color-line); border-radius: var(--radius-control); background: var(--color-surface); padding: var(--space-12); margin-block: var(--space-12); }
+.ministry-resolution > [data-company-count] > details > summary, [data-executive-reference] > summary, [data-executive-vectors] > summary, [data-scenario-context] > summary { color: var(--color-accent-text); font-weight: var(--font-weight-bold); }
+.ministry-resolution > p { margin-block: var(--space-0); }
+.ministry-finding-list { margin-block-start: var(--space-12); }
+[data-executive-current-step="SIMULATED_EVIDENCE"] .executive-title { padding-block: var(--space-16); }
+[data-executive-current-step="SIMULATED_EVIDENCE"] .executive-title h1 { font-size: var(--font-size-28); }
+[data-executive-current-step="SIMULATED_EVIDENCE"] .executive-vectors { margin-block: var(--space-8); }
+.ministry-comparison table { min-inline-size: var(--size-content-copy); }

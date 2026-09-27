@@ -34,6 +34,8 @@ S15B_PUBLIC_AND_SYNTHETIC = {
 S16B_HISTORICAL_SCENARIOS = {
     "data/synthetic/historical/v2_0/SYN-MINISTRY-ALU-FOIL-001.json",
     "data/synthetic/historical/v2_0/SYN-MINISTRY-ALU-PROFILES-001.json",
+    "data/synthetic/historical/v2_0/SYN-MINISTRY-PP-001.json",
+    "data/synthetic/historical/v2_0/SYN-MINISTRY-STEEL-001.json",
 }
 
 
@@ -1295,7 +1297,7 @@ def test_s17_history_current_graph_and_authority_outputs_are_manifested() -> Non
     current = json.loads(
         (PROJECT_ROOT / "data/graph/current.json").read_text(encoding="utf-8")
     )["projection_id"]
-    assert len(paths) == 734
+    assert len(paths) == 748
     assert "config/history/ui_strings.v1-1.4.0.yaml" in paths
     assert f"data/graph/projections/{current}/projection.json" in paths
     assert f"data/graph/projections/{current}/manifest.json" in paths

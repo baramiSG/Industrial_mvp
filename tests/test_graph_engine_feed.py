@@ -182,9 +182,11 @@ def test_feed_ignores_derived_elements() -> None:
     )
 
 
-def test_adjacency_explanation_matches_r9s_ledger_for_all_cases_both_modes(
-    projection: GraphProjection,
-) -> None:
+def test_adjacency_explanation_matches_r9s_ledger_for_all_cases_both_modes() -> None:
+    from ior_mvp.graph.projection import build_repository_projection
+
+    # Source-level successor is evaluated before persisted graph generation.
+    projection = build_repository_projection(PROJECT_ROOT)
     products = sorted(
         node.id for node in projection.nodes if node.label == "Product"
     )
@@ -197,8 +199,11 @@ def test_adjacency_explanation_matches_r9s_ledger_for_all_cases_both_modes(
         assert result["opportunity_id"] == opportunity_id
         assert isinstance(result["producer_ids"], list)
         if result["producer_ids"]:
-            assert isinstance(result["fired"], (bool, type(None)))
+            assert isinstance(result["fired"], bool)
             assert isinstance(result["qualifying_signal_count"], int)
+            assert set(result["producer_rows"]) == set(result["producer_ids"])
+            assert all(isinstance(row["qualifying_signal_count"], int)
+                       for row in result["producer_rows"].values())
     scenarios = {
         node.properties["opportunity_id"]: node.id
         for node in projection.nodes

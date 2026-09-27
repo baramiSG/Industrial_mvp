@@ -33,7 +33,10 @@ class FakeGraphService:
     def status(self) -> dict:
         return deepcopy(self._status)
 
-    def view(self, view_id: str, opportunity_id: str, mode: str) -> dict:
+    def view(self, view_id: str, opportunity_id: str, mode: str, selection: dict | None = None) -> dict:
+        assert selection is None or set(selection) == {
+            "company_id", "plant_id", "line_id", "requirement_item_id",
+        }
         if view_id == "missing":
             raise GraphNotFound("GRAPH_VIEW_NOT_FOUND")
         if opportunity_id == "UNKNOWN":
@@ -120,7 +123,10 @@ class UnavailableGraphService(FakeGraphService):
         )
         return result
 
-    def view(self, view_id: str, opportunity_id: str, mode: str) -> dict:
+    def view(self, view_id: str, opportunity_id: str, mode: str, selection: dict | None = None) -> dict:
+        assert selection is None or set(selection) == {
+            "company_id", "plant_id", "line_id", "requirement_item_id",
+        }
         return {
             "view_id": view_id,
             "opportunity_id": opportunity_id,

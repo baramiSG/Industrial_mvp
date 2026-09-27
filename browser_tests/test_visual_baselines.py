@@ -7,6 +7,7 @@ import pytest
 
 from browser_tests.dossier_pages import assert_dossier_bounds
 from browser_tests.executive_pages import goto_executive
+from browser_tests.candidate_pages import goto_candidate
 from browser_tests.graph_pages import install_graph_routes, prepare_graph_capture
 from browser_tests.harness import (
     AR,
@@ -108,7 +109,8 @@ def _executive_scene_payload(page: Any, case: Any, locale: Locale, step: str, mo
     expect(page.locator("html")).to_have_attribute("dir", locale.direction)
     detail = api_json(page, f"/api/executive/opportunities/{case.id}")
     real = api_json(page, f"/api/opportunities/{case.id}?mode=public")
-    strings = api_json(page, f"/api/ui-strings/{locale.code}")["strings"]
+    bundle = api_json(page, f"/api/ui-strings/{locale.code}")
+    strings = bundle["strings"]
     expected = ("REJECT", 0) if case.id == POLYPROPYLENE.id else ("INVESTIGATE", None)
     assert (real["real_decision"]["state"], real["real_decision"]["route_code"]) == expected
     assert (detail["decisions"]["public"]["state"], detail["decisions"]["public"]["route_code"]) == expected
@@ -116,6 +118,8 @@ def _executive_scene_payload(page: Any, case: Any, locale: Locale, step: str, mo
     expect(page.locator('[data-branch="PUBLIC"]')).to_have_attribute("data-route", str(expected[1]) if expected[1] is not None else "NOT_CALCULABLE")
     target = page.locator(targets[step])
     expect(target).to_have_count(1)
+    if step != "ROUTE_COMPARISON":
+        expect(page.locator("[data-simulation-headline]")).to_have_count(0)
     if step == "SIGNAL":
         expect(target.locator("h3")).to_have_text(strings["trade.title"])
         expect(target.locator(".exec-chip")).to_have_text(strings["trade.boundary"])
@@ -138,15 +142,37 @@ def _executive_scene_payload(page: Any, case: Any, locale: Locale, step: str, mo
         expect(page.locator('[data-branch="SIMULATED"]')).to_have_attribute("data-state", "ADVANCE")
         expect(page.locator('[data-branch="SIMULATED"]')).to_have_attribute("data-route", "5")
         expect(target.locator(":scope > h3")).to_have_text(strings["executive.ui.simulated"])
-        for language, text in decision["display_labels"].items():
-            expect(target.locator(f'.synthetic-labels > [lang="{language}"]')).to_have_text(text)
+        marker = target.locator(":scope > p")
+        expect(marker).to_have_count(1, timeout=500)
+        expect(marker).to_have_text(strings["graph.boundary_synthetic"], timeout=500)
+        expect(target.locator(".synthetic-labels")).to_have_count(0)
+        headline = page.locator("[data-simulation-headline]")
+        expect(headline).to_have_count(1)
+        expect(headline).to_have_text(bundle["executive_policy"]["headline"][locale.code])
+        full = page.locator('[data-active-step="ROUTE_COMPARISON"] [data-executive-full-provenance]')
+        expect(full).to_have_count(1, timeout=500)
+        summary = full.locator(":scope > summary")
+        expect(summary).to_have_text(strings["ministry.provenance"])
+        assert full.evaluate("node => node.tagName === 'DETAILS' && !node.open")
+        summary.click()
+        try:
+            assert full.evaluate("node => node.open")
+            for language, text in decision["display_labels"].items():
+                expect(full.locator(f'.synthetic-labels > [lang="{language}"]')).to_have_text(text, timeout=500)
+            expect(full.locator(":scope > p > bdi")).to_have_text(
+                [decision["scenario_id"], decision["source"], decision["evidence_class"]], timeout=500,
+            )
+        finally:
+            if full.evaluate("node => node.open"):
+                summary.click()
+        assert full.evaluate("node => !node.open")
         rows = target.locator("[data-route-row]")
         assert rows.evaluate_all("nodes=>nodes.map(node=>Number(node.dataset.routeRow))") == list(range(9))
         assert [row["route_code"] for row in simulated["simulation_decision"]["route_hypotheses"]] == list(range(9))
         for index, row in enumerate(simulated["simulation_decision"]["route_hypotheses"]):
             expect(rows.nth(index).locator("h4")).to_have_text(strings[f'executive.route.{row["route_code"]}'])
             expect(rows.nth(index).locator(".executive-status")).to_have_text(strings['executive.status.' + row["status"].lower()])
-        required = [target.locator(":scope > h3"), target.locator(".synthetic-labels"), rows.nth(0).locator(":scope > div"), rows.nth(1).locator(":scope > div")]
+        required = [target.locator(":scope > h3"), marker, rows.nth(0).locator(":scope > div"), rows.nth(1).locator(":scope > div")]
     elif step == "MISSING_MINISTRY_FACTS":
         summary = api_json(page, "/api/executive/summary")
         expect(target.locator(":scope > h3")).to_have_text(strings["executive.ui.missing"])
@@ -462,3 +488,127 @@ def test_governed_visual_baselines_match(
             screen=screen, case_id=case.id, mode=mode,
         )
         assert _assert_executive_scene_visible(required) == before
+
+    for case, role, screen in (
+        (STEEL, "REFERENCE_LINE", "journey-k-executive-candidate-lines-steel"),
+        (POLYPROPYLENE, None, "journey-k-executive-candidate-lines-polypropylene"),
+    ):
+        _, row = goto_candidate(page, case, locale, role=role)
+        assert row is not None
+        _anchor(page, "[data-selected-subject]")
+        visual_session.capture(
+            page, locale=locale.code, viewport=viewport.name,
+            screen=screen, case_id=case.id, mode="simulated",
+        )
+    goto_candidate(page, STEEL, locale, discovery=True)
+    _anchor(page, "[data-candidate-discovery]")
+    visual_session.capture(
+        page, locale=locale.code, viewport=viewport.name,
+        screen="journey-k-executive-candidate-discovery",
+        case_id=STEEL.id, mode="simulated",
+    )
+
+
+@pytest.mark.parametrize(
+    ("locale", "viewport"), VISUAL_MATRIX,
+    ids=[f"{locale.code}-{viewport.name}" for locale, viewport in VISUAL_MATRIX],
+)
+def test_executive_scene_preparation_disclosure_contract(browser_session: BrowserSession, locale: Locale, viewport: Viewport) -> None:
+    """Exercise the four existing executive scenes without writing a baseline."""
+    from browser_tests.executive_pages import api_json
+    from playwright.sync_api import expect
+
+    page = browser_session.page
+    page.set_viewport_size(viewport.as_dict())
+    for case, step, mode in (
+        (STEEL, "SIGNAL", "public"),
+        (STEEL, "MISSING_MINISTRY_FACTS", "public"),
+        (POLYPROPYLENE, "PUBLIC_CONCLUSION", "public"),
+        (STEEL, "ROUTE_COMPARISON", "simulated"),
+    ):
+        goto_executive(page, case, locale, step)
+        _prepare_executive_capture(page, case, locale, step, mode)
+
+    for case in (POLYPROPYLENE, STEEL):
+        goto_executive(page, case, locale, "PUBLIC_CONCLUSION")
+        public = api_json(page, f"/api/opportunities/{case.id}?mode=public")
+        records = public["domestic_capability"]["producer_evidence"]
+        conclusion = page.locator('[data-active-step="PUBLIC_CONCLUSION"] > .executive-public')
+        children = conclusion.locator(":scope > *").evaluate_all(
+            "nodes => nodes.map(node => node.matches('.ministry-public-producers') ? 'PRODUCERS' : node.tagName)"
+        )
+        assert children[:7] == ["H3", "P", "P", "H4", "P", "P", "PRODUCERS"]
+        producer = conclusion.locator(":scope > .ministry-public-producers")
+        expect(producer.locator("article h5")).to_contain_text([record["producer"] for record in records])
+        for record in records:
+            for evidence_id in record["evidence_ids"]:
+                expect(producer).to_contain_text(evidence_id)
+        assert children.index("PRODUCERS") < children.index("H4", 4)
+        expect(page.locator("[data-simulation-headline]")).to_have_count(0)
+        discovery_link = conclusion.locator('[data-executive-go="SIMULATED_EVIDENCE"]')
+        expect(discovery_link).to_have_count(1)
+        assert conclusion.locator(":scope > *").evaluate_all(
+            "nodes => nodes.findIndex(node => node.matches('.ministry-public-producers')) < nodes.findIndex(node => node.matches('[data-executive-go=SIMULATED_EVIDENCE]'))"
+        )
+        discovery_link.click()
+        expect(page.locator("[data-active-step]")).to_have_attribute("data-active-step", "SIMULATED_EVIDENCE")
+    if locale == AR and viewport == TABLET:
+        goto_executive(page, POLYPROPYLENE, locale, "PUBLIC_CONCLUSION")
+        producer = page.locator('[data-active-step="PUBLIC_CONCLUSION"] > .executive-public > .ministry-public-producers')
+        producer.evaluate("node => node.parentNode.insertBefore(node, node.parentNode.querySelector(':scope > h4'))")
+        try:
+            with pytest.raises(AssertionError, match="viewportHeight"):
+                _prepare_executive_capture(page, POLYPROPYLENE, locale, "PUBLIC_CONCLUSION", "public")
+        finally:
+            producer.evaluate("node => node.parentNode.querySelectorAll(':scope > p')[3].after(node)")
+        _prepare_executive_capture(page, POLYPROPYLENE, locale, "PUBLIC_CONCLUSION", "public")
+    goto_executive(page, STEEL, locale, "ROUTE_COMPARISON")
+    if viewport != DESKTOP:
+        return
+
+    branch = page.locator('[data-route-branch="SIMULATED"]')
+    marker = branch.locator(":scope > p")
+    original_marker = marker.evaluate("node => node.outerHTML")
+    original_marker_text = marker.inner_text()
+    marker.evaluate("node => node.remove()")
+    try:
+        with pytest.raises(AssertionError, match=":scope > p"):
+            _executive_scene_payload(page, STEEL, locale, "ROUTE_COMPARISON", "simulated")
+    finally:
+        branch.locator(":scope > h3").evaluate("(node, html) => node.insertAdjacentHTML('afterend', html)", original_marker)
+    marker = branch.locator(":scope > p")
+    marker.evaluate("node => node.textContent = 'WRONG MARKER'")
+    try:
+        with pytest.raises(AssertionError, match="WRONG MARKER"):
+            _executive_scene_payload(page, STEEL, locale, "ROUTE_COMPARISON", "simulated")
+    finally:
+        marker.evaluate("(node, text) => node.textContent = text", original_marker_text)
+
+    full = page.locator('[data-active-step="ROUTE_COMPARISON"] [data-executive-full-provenance]')
+    original_full = full.evaluate("node => node.outerHTML")
+    full.evaluate("node => node.remove()")
+    try:
+        with pytest.raises(AssertionError, match="data-executive-full-provenance"):
+            _executive_scene_payload(page, STEEL, locale, "ROUTE_COMPARISON", "simulated")
+    finally:
+        page.locator('[data-active-step="ROUTE_COMPARISON"] .executive-callout').evaluate(
+            "(node, html) => node.insertAdjacentHTML('afterend', html)", original_full,
+        )
+    full = page.locator('[data-active-step="ROUTE_COMPARISON"] [data-executive-full-provenance]')
+    label = full.locator('.synthetic-labels > [lang="en"]')
+    original_label = label.text_content()
+    label.evaluate("node => node.textContent = 'WRONG LABEL'")
+    try:
+        with pytest.raises(AssertionError, match="WRONG LABEL"):
+            _executive_scene_payload(page, STEEL, locale, "ROUTE_COMPARISON", "simulated")
+    finally:
+        label.evaluate("(node, text) => node.textContent = text", original_label)
+    metadata = full.locator(":scope > p > bdi").first
+    original_metadata = metadata.text_content()
+    metadata.evaluate("node => node.textContent = 'WRONG SCENARIO'")
+    try:
+        with pytest.raises(AssertionError, match="WRONG SCENARIO"):
+            _executive_scene_payload(page, STEEL, locale, "ROUTE_COMPARISON", "simulated")
+    finally:
+        metadata.evaluate("(node, text) => node.textContent = text", original_metadata)
+    _executive_scene_payload(page, STEEL, locale, "ROUTE_COMPARISON", "simulated")

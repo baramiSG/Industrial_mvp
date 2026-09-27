@@ -70,8 +70,11 @@ def test_analyst_uses_computed_integrity_failure_and_affected_case(browser_sessi
             assert notice.evaluate("n=>Boolean(n.compareDocumentPosition(document.querySelector('#executive-comparison')) & Node.DOCUMENT_POSITION_FOLLOWING)")
             expect(page.locator('[data-branch="PUBLIC"]')).to_have_attribute("data-state", "INVESTIGATE")
             expect(page.locator('[data-branch="PUBLIC"]')).to_have_attribute("data-route", "NOT_CALCULABLE")
-            expect(page.locator('[data-branch="SIMULATED"]')).to_have_attribute("data-state", "ADVANCE")
-            expect(page.locator('[data-branch="SIMULATED"]')).to_have_attribute("data-route", "5")
+            if step in ("SIMULATED_EVIDENCE", "ROUTE_COMPARISON", "INTERVENTION", "CONDITIONS_AND_KILL"):
+                expect(page.locator('[data-branch="SIMULATED"]')).to_have_attribute("data-state", "ADVANCE")
+                expect(page.locator('[data-branch="SIMULATED"]')).to_have_attribute("data-route", "5")
+            else:
+                expect(page.locator('[data-branch="SIMULATED"]')).to_have_count(0)
             if status == "FAIL":
                 assert notice.locator("[data-integrity-check]").evaluate_all("rows=>rows.map(row=>row.dataset.integrityCheck)") == [row["check_id"] for row in summary["integrity"]["checks"]]
                 for check in summary["integrity"]["checks"]:
@@ -119,7 +122,11 @@ def test_inconsistent_join_never_exposes_a_claim(browser_session, mutation, loca
                 branch, field = change.split("-")
                 branch = "simulated" if branch == "simulation" else branch
                 payload["decisions"][branch]["state" if field == "state" else "route_code"] = "REJECT" if field == "state" else 0
-            ExecutiveCase.model_validate(payload)
+            if change == "scenario":
+                with pytest.raises(ValueError, match="diagnostic scenario differs"):
+                    ExecutiveCase.model_validate(payload)
+            else:
+                ExecutiveCase.model_validate(payload)
     elif mutation == "real-decision":
         url = f"/api/opportunities/{STEEL.id}?mode=simulated"
         payload = api_json(page, url)
@@ -166,6 +173,275 @@ def test_unresolved_claim_names_actual_case_wide_needs(browser_session):
     expect(panel).to_contain_text("Case-wide unmet needs")
     assert panel.locator("li").all_text_contents() == needs
     expect(panel.locator("[data-passport-id]")).to_have_count(0)
+
+
+@pytest.mark.parametrize("locale", LOCALES, ids=lambda item: item.code)
+@pytest.mark.parametrize("case,item", [(STEEL, "qualified_volume"), (STEEL, "width_mm"),
+                                       (POLYPROPYLENE, "tooling_required")],
+                         ids=["steel-pending", "steel-supported", "pp-not-required"])
+def test_candidate_request_four_slots_match_typed_finding(browser_session, locale, case, item):
+    from browser_tests.candidate_pages import goto_candidate, select_candidate_request, assert_four_request_slots
+
+    page = browser_session.page
+    detail, row = goto_candidate(page, case, locale,
+                                 role="REFERENCE_LINE" if case.id == STEEL.id else None)
+    assert row is not None
+    finding = next(value for value in row["findings"] if value["requirement_item_id"] == item)
+    select_candidate_request(page, finding)
+    assert_four_request_slots(page, row, finding)
+    assert page.locator(f'[data-finding-item="{item}"]').get_attribute("data-finding") == finding["rule_id"]
+    if finding["next_evidence"] is None:
+        assert finding["action_code"] == "NO_ADDITIONAL_REQUEST"
+    else:
+        assert finding["next_evidence"]["subject_scope"] == row["entity_id"]
+    if case.id == POLYPROPYLENE.id:
+        assert finding["status"] == "NOT_REQUIRED"
+        assert finding["current_recorded"] is False
+        assert finding["needed"] is False
+        assert finding["next_evidence"] is None
+        strings = api_json(page, f"/api/ui-strings/{locale.code}")["strings"]
+        for location in ("detail", "reason", "rail"):
+            surface = page.locator(f'[data-request-location="{location}"][data-request-item="tooling_required"]')
+            expect(surface.locator('[data-request-slot="field"] dd')).to_have_text(
+                strings["ministry.slot.not_applicable"]
+            )
+            expect(surface.locator('[data-request-slot="source"] dd')).to_have_text(
+                strings["ministry.slot.not_applicable"]
+            )
+            expect(surface.locator('[data-request-slot="effect"] dd')).to_have_text(
+                strings["ministry.no_additional_request"]
+            )
+        for company_id, expected_item in (
+            ("COMPANY-7b3497b64cf80470", "ministry.item.input_procurement"),
+            ("COMPANY-7c27a105b0cfbcbc", "ministry.item.mfr_range_g_10min"),
+        ):
+            summary = page.locator(f'[data-company="{company_id}"] > p').nth(2)
+            expect(summary).to_contain_text(strings[expected_item])
+            expect(summary).not_to_contain_text("tooling_required")
+    assert detail["decisions"]["public"]["state"] == case.real_state
+
+
+@pytest.mark.parametrize("case,role", [(STEEL, "REFERENCE_LINE"), (POLYPROPYLENE, None)],
+                         ids=["steel", "polypropylene"])
+@pytest.mark.parametrize("locale", LOCALES, ids=lambda item: item.code)
+def test_native_finding_details_stays_open_until_actual_navigation(browser_session, case, role, locale):
+    from browser_tests.candidate_pages import goto_candidate
+    from browser_tests.executive_pages import select_step
+
+    page = browser_session.page
+    _, line = goto_candidate(page, case, locale, role=role)
+    assert line is not None
+    item = line["findings"][0]["requirement_item_id"]
+    url = page.url
+    parent = page.locator("[data-selected-subject] [data-all-findings]")
+    parent.locator(":scope > summary").click()
+    expect(parent).to_have_attribute("open", "")
+    finding = parent.locator(f'[data-finding-item="{item}"]')
+    finding.locator(":scope > summary").click()
+    expect(parent).to_have_attribute("open", "")
+    expect(finding).to_have_attribute("open", "")
+    finding.locator("[data-finding-reason] > summary").click()
+    expect(finding.locator("[data-finding-reason]")).to_have_attribute("open", "")
+    page.locator("[data-candidate-discovery] > h3").click()
+    expect(parent).to_have_attribute("open", "")
+    expect(finding).to_have_attribute("open", "")
+    assert page.url == url
+    finding.locator("[data-ministry-requirement]").click()
+    expect(page.locator("[data-selected-request]")).to_have_attribute("data-selected-request", item)
+    direct_url = page.url
+    select_step(page, "ROUTE_COMPARISON")
+    page.locator("[data-executive-back]").click()
+    expect(page.locator('[data-active-step="SIMULATED_EVIDENCE"]')).to_be_visible()
+    page.goto(direct_url)
+    expect(page.locator("[data-selected-request]")).to_have_attribute("data-selected-request", item)
+
+
+def test_candidate_request_slot_omission_fails_each_local_surface(browser_session):
+    from browser_tests.candidate_pages import goto_candidate, select_candidate_request, assert_four_request_slots
+
+    page = browser_session.page
+    _, row = goto_candidate(page, STEEL, EN, role="REFERENCE_LINE")
+    assert row is not None
+    finding = next(value for value in row["findings"] if value["requirement_item_id"] == "qualified_volume")
+    select_candidate_request(page, finding)
+    assert_four_request_slots(page, row, finding)
+    for location in ("detail", "reason", "rail"):
+        for slot in ("field", "source", "effect", "scope"):
+            scope = page.locator(f'[data-request-location="{location}"][data-request-item="qualified_volume"]')
+            cell = scope.locator(f'[data-request-slot="{slot}"]')
+            original = cell.evaluate("node => node.outerHTML")
+            cell.evaluate("node => node.remove()")
+            try:
+                with pytest.raises(AssertionError):
+                    assert_four_request_slots(page, row, finding)
+            finally:
+                scope.evaluate("(node, html) => node.insertAdjacentHTML('beforeend', html)", original)
+            assert_four_request_slots(page, row, finding)
+
+
+@pytest.mark.parametrize("locale", LOCALES, ids=lambda item: item.code)
+def test_ministry_clarity_rendered_quantities_gates_and_range_direction(browser_session, locale):
+    from hashlib import sha256
+    from browser_tests.candidate_pages import goto_candidate
+    from browser_tests.executive_pages import api_json, select_step
+    from ior_mvp.config import PROJECT_ROOT
+
+    page = browser_session.page
+    page.set_viewport_size({"width": 1440, "height": 900})
+    strings = api_json(page, f"/api/ui-strings/{locale.code}")["strings"]
+    unit = strings["ministry.unit.kt"]
+    observed_ranges = []
+
+    def range_order(token, first, second, unit_text):
+        result = token.evaluate("""(node, parts) => {
+          const text = node.firstChild, value = text.textContent;
+          const a = value.indexOf(parts.first), b = value.indexOf(parts.second, a + parts.first.length);
+          if (text.nodeType !== Node.TEXT_NODE || a < 0 || b < 0) throw Error('range text missing');
+          const box = (start, end) => { const range = document.createRange();
+            range.setStart(text, start); range.setEnd(text, end);
+            const rect = range.getBoundingClientRect();
+            return {left: rect.left, right: rect.right, top: rect.top, bottom: rect.bottom}; };
+          return {value, dir: node.dir, first: box(a, a + parts.first.length),
+            second: box(b, b + parts.second.length)};
+        }""", {"first": first, "second": second})
+        assert result["dir"] == "ltr" and result["value"].endswith(unit_text)
+        first_box, second_box = result["first"], result["second"]
+        assert (first_box["top"] < second_box["top"] or
+                (first_box["top"] == second_box["top"] and first_box["right"] < second_box["left"])), result
+        observed_ranges.append(result)
+        return result
+
+    steel, _ = goto_candidate(page, STEEL, locale, role="REFERENCE_LINE")
+    if locale.code == "ar":
+        assert page.locator("html").get_attribute("dir") == "rtl"
+    requirement = page.locator("[data-requirement-strip]")
+    steel_width = requirement.locator("bdi.technical-token", has_text="1,000–1,250 mm")
+    steel_thickness = requirement.locator("bdi.technical-token", has_text="0.7–1.5 mm")
+    range_order(steel_width, "1,000", "1,250", "mm")
+    range_order(steel_thickness, "0.7", "1.5", "mm")
+    assert requirement.locator("bdi.technical-token", has_text="275 g/m²").count() == 1
+    selected = page.locator("[data-selected-subject]")
+    selected.locator("[data-all-findings] > summary").click()
+    p09 = selected.locator('[data-finding-item="qualified_volume"]')
+    p09.locator(":scope > summary").click()
+    quantity = p09.locator("[data-volume-context]")
+    for key in ("ministry.target_demand", "ministry.record.field.admitted_qualified_supply_kt",
+                "ministry.shortage_headroom", "ministry.record.field.window_result", "ministry.modeled_window"):
+        expect(quantity).to_contain_text(strings[key])
+    for value in (f"104 {unit}", f"57.5092 {unit}", f"46.4908 {unit}"):
+        expect(quantity).to_contain_text(value)
+    expect(quantity).to_contain_text(strings["ministry.window.covered"])
+    for field, current_text, needed_text, current_parts, needed_parts, unit_text in (
+        ("width_mm", "600–1,300 mm", "1,000–1,250 mm", ("600", "1,300"), ("1,000", "1,250"), "mm"),
+        ("thickness_mm", "0.18–3 mm", "0.7–1.5 mm", ("0.18", "3"), ("0.7", "1.5"), "mm"),
+        ("coating_mass_g_m2", "45–350 g/m²", None, ("45", "350"), None, "g/m²"),
+    ):
+        finding = selected.locator(f'[data-finding-item="{field}"]')
+        finding.locator(":scope > summary").click()
+        operands = finding.locator(".ministry-operands")
+        range_order(operands.locator("bdi.technical-token", has_text=current_text), *current_parts, unit_text)
+        if needed_parts:
+            range_order(operands.locator("bdi.technical-token", has_text=needed_text), *needed_parts, unit_text)
+        else:
+            assert operands.locator("bdi.technical-token", has_text="275 g/m²").count() == 1
+    comparison = page.locator("[data-line-comparison]")
+    expect(comparison).to_contain_text(strings["ministry.coverage_explanation"])
+    legend = comparison.locator("[data-comparison-capability-legend]")
+    legend.locator("summary").click()
+    for state_code in ("0", "1", "2", "3", "U"):
+        expect(legend.locator(f'[data-capability-legend-state="{state_code}"]')).to_have_text(
+            strings[f'executive.capability.state.{state_code.lower()}']
+        )
+    expect(legend).to_contain_text(strings["executive.capability.simulation_note"])
+    a = comparison.locator('[data-line-row="LINE-7315366f6a9166d8"]')
+    expect(a).to_contain_text("0.2667")
+    expect(a.locator("[data-comparison-quantity]")).to_contain_text(strings["ministry.capacity_result"])
+    expect(a.locator("[data-comparison-quantity]")).to_contain_text("FORMULA")
+    expect(a.locator("[data-dstar-withheld]")).to_have_count(0)
+    for field, text, first, second, unit_text in (
+        ("width_mm", "1,000–1,250 mm", "1,000", "1,250", "mm"),
+        ("thickness_mm", "0.7–1.5 mm", "0.7", "1.5", "mm"),
+        ("coating_mass_g_m2", "45–350 g/m²", "45", "350", "g/m²"),
+    ):
+        range_order(a.locator(f'[data-comparison-field="{field}"] bdi.technical-token', has_text=text), first, second, unit_text)
+    c = comparison.locator('[data-line-row="LINE-4fbdbb0b2c107968"]')
+    expect(c.locator('[data-blocking-gate="width_thickness_envelope"]')).to_contain_text(strings["ministry.gate.unavailable"])
+    expect(c.locator('[data-affected-requirement="width_mm"]')).to_have_count(1)
+    assert c.locator("[data-comparison-quantity] dd").all_text_contents()[1:3] == [
+        strings["common.unavailable"], strings["common.unavailable"],
+    ]
+    steel_quantity_text = quantity.inner_text()
+    steel_c_quantity_text = c.locator("[data-comparison-quantity]").inner_text()
+    steel_c_capacity_result = c.locator("[data-comparison-quantity] > div").first.locator("dd").inner_text()
+    steel_c_gates = c.locator("[data-blocking-gate]").evaluate_all("nodes => nodes.map(node => ({id: node.dataset.blockingGate, text: node.innerText}))")
+    steel_image = browser_session.artifact_dir / f"label-closure-steel-gates-{locale.code}.png"
+    c.locator("[data-dstar-withheld]").scroll_into_view_if_needed()
+    page.screenshot(path=str(steel_image), full_page=False, animations="disabled", caret="hide")
+    select_step(page, "ROUTE_COMPARISON")
+    reference = page.locator("[data-reference-comparison]")
+    for key in ("dossier.field.incremental_capacity_kt", "dossier.field.schedule_months",
+                "dossier.field.greenfield_alternative"):
+        expect(reference).to_contain_text(strings[key])
+    expect(reference).to_contain_text(f"50 {unit}")
+    expect(reference).to_contain_text(f"18 {strings['ministry.months']}")
+    expect(reference).to_contain_text(strings["common.unavailable"])
+
+    pp_detail, _ = goto_candidate(page, POLYPROPYLENE, locale, line_id="LINE-cb9a42384c3523ec")
+    requirement = page.locator("[data-requirement-strip]")
+    range_order(requirement.locator("bdi.technical-token", has_text="12–20 g/10min"), "12", "20", "g/10min")
+    selected = page.locator("[data-selected-subject]")
+    selected.locator("[data-all-findings] > summary").click()
+    mfr = selected.locator('[data-finding-item="mfr_range_g_10min"]')
+    mfr.locator(":scope > summary").click()
+    for token, start, end in (("2–6 g/10min", "2", "6"), ("12–20 g/10min", "12", "20")):
+        range_order(mfr.locator(".ministry-operands bdi.technical-token", has_text=token), start, end, "g/10min")
+    for field in ("polymer_family", "manufacturing_scope", "grade_family", "additives_required"):
+        expect(selected.locator(f'[data-finding-item="{field}"] > summary')).to_contain_text(strings[f"ministry.item.{field}"])
+    b = page.locator('[data-line-row="LINE-cb9a42384c3523ec"]')
+    expect(b.locator("[data-comparison-quantity]")).to_contain_text("ADMITTED")
+    expect(b.locator('[data-blocking-gate="performance_requirement"]')).to_contain_text(strings["ministry.gate.known_failure"])
+    expect(b.locator('[data-affected-requirement="mfr_range_g_10min"]')).to_have_count(1)
+    mfr_comparison = b.locator('[data-comparison-field="mfr_range_g_10min"]')
+    for token, start, end in (("2–6 g/10min", "2", "6"), ("12–20 g/10min", "12", "20")):
+        range_order(mfr_comparison.locator("bdi.technical-token", has_text=token), start, end, "g/10min")
+    expect(b.locator("[data-comparison-quantity]")).to_contain_text(f"0 {unit}")
+    expect(b.locator("[data-comparison-quantity]")).to_contain_text(f"56 {unit}")
+    a_pp = page.locator('[data-line-row="LINE-e403e85a85052861"] [data-comparison-quantity]')
+    expect(a_pp).to_contain_text(f"70 {unit}")
+    assert f"-14 {unit}" in a_pp.inner_text().replace("\u200e", "")
+    pp_labels = {field: selected.locator(f'[data-finding-item="{field}"] > summary').inner_text()
+                 for field in ("polymer_family", "manufacturing_scope", "grade_family", "additives_required")}
+    pp_gate = b.locator('[data-blocking-gate="performance_requirement"]')
+    pp_image = browser_session.artifact_dir / f"label-closure-pp-labels-{locale.code}.png"
+    selected.locator('[data-finding-item="polymer_family"] > summary').scroll_into_view_if_needed()
+    page.screenshot(path=str(pp_image), full_page=False, animations="disabled", caret="hide")
+    source_paths = (
+        "src/ior_mvp/static/modules/executive/candidates.js",
+        "src/ior_mvp/static/modules/executive/labels.js",
+        "src/ior_mvp/static/css/executive.css",
+        "config/ui_strings.v1.yaml",
+        "browser_tests/parity_grammar.py",
+    )
+    receipt = {
+        "locale": locale.code,
+        "steel_public_state": steel["decisions"]["public"]["state"],
+        "pp_public_state": pp_detail["decisions"]["public"]["state"],
+        "steel_p09": steel_quantity_text,
+        "steel_c_quantity": steel_c_quantity_text,
+        "steel_c_capacity_result": steel_c_capacity_result,
+        "steel_c_gates": steel_c_gates,
+        "pp_b_quantity": b.locator("[data-comparison-quantity]").inner_text(),
+        "pp_b_capacity_result": b.locator("[data-comparison-quantity] > div").first.locator("dd").inner_text(),
+        "pp_b_gate": {"id": pp_gate.get_attribute("data-blocking-gate"), "text": pp_gate.inner_text()},
+        "pp_mapped_labels": pp_labels,
+        "pp_a_quantity": a_pp.inner_text(),
+        "ranges": observed_ranges,
+        "source_sha256": {path: sha256((PROJECT_ROOT / path).read_bytes()).hexdigest() for path in source_paths},
+        "screenshots": {path.name: sha256(path.read_bytes()).hexdigest() for path in (steel_image, pp_image)},
+    }
+    (browser_session.artifact_dir / f"source-clarity-{locale.code}.json").write_text(
+        json.dumps(receipt, ensure_ascii=False, indent=2) + "\n", encoding="utf-8",
+    )
 
 
 def test_loading_is_visible_before_summary_arrives(browser_session):
@@ -237,12 +513,16 @@ def test_honest_absence_and_zero_states(browser_session, monkeypatch, kind, loca
                 expect(page.locator('[data-branch="PUBLIC"]')).to_have_attribute("data-state", "INVESTIGATE")
                 expect(page.locator('[data-branch="PUBLIC"]')).to_have_attribute("data-route", "NOT_CALCULABLE")
                 unavailable = page.locator('[data-branch="SIMULATED"]')
-                expect(unavailable).to_have_attribute("data-state", "UNAVAILABLE")
-                expect(unavailable).to_contain_text(strings["executive.ui.no_simulation"])
-                expect(unavailable).not_to_contain_text(strings["executive.ui.actual_class"])
+                if step in ("SIMULATED_EVIDENCE", "ROUTE_COMPARISON", "INTERVENTION", "CONDITIONS_AND_KILL"):
+                    expect(unavailable).to_have_attribute("data-state", "UNAVAILABLE")
+                    expect(unavailable).to_contain_text(strings["executive.ui.no_simulation"])
+                    expect(unavailable).not_to_contain_text(strings["executive.ui.actual_class"])
+                else:
+                    expect(unavailable).to_have_count(0)
                 expect(page.locator("[data-case-evsi], .synthetic-labels")).to_have_count(0)
                 assert "DEMO_GENERATOR" not in page.locator("[data-executive-main]").inner_text()
-                assert "null" not in unavailable.inner_text()
+                if unavailable.count():
+                    assert "null" not in unavailable.inner_text()
                 expect(page.locator('[data-claim-id="decision.simulated"]')).to_have_count(0)
                 if locale.code == "ar":
                     report = arabic_parity_report(page, "[data-executive-main]")

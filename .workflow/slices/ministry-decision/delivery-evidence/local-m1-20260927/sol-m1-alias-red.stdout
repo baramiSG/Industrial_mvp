@@ -1,0 +1,53 @@
+F.F..                                                                    [100%]
+=================================== FAILURES ===================================
+____ test_public_family_aliases_cover_actual_repository_case_loader_inputs _____
+
+    def test_public_family_aliases_cover_actual_repository_case_loader_inputs() -> None:
+        from ior_mvp.graph.projection import (
+            _PUBLIC_SOURCE_FAMILY_IDS,
+            _load_repository_cases,
+        )
+    
+        cases, _briefs = _load_repository_cases(PROJECT_ROOT)
+        labels_by_case = {
+            opportunity_id: [
+                record.get("process_family")
+                for record in case["domestic_capability"].get("producer_evidence", [])
+            ]
+            for opportunity_id, case in cases.items()
+        }
+        assert any(labels_by_case.values())
+        unmapped = [
+            (opportunity_id, label)
+            for opportunity_id, labels in labels_by_case.items()
+            for label in labels
+            if label not in _PUBLIC_SOURCE_FAMILY_IDS
+        ]
+>       assert not unmapped
+E       AssertionError: assert not [('SAU-H6-760429', 'fabricated_aluminium'), ('SAU-H6-760429', 'fabricated_aluminium')]
+
+tests/test_graph_projection.py:984: AssertionError
+_ test_public_pp_unmapped_source_family_is_unknown_not_false[technical_plastics_conversion] _
+
+label = 'technical_plastics_conversion'
+
+    @pytest.mark.parametrize(
+        "label",
+        ["technical_plastics", "technical_plastics_conversion", "unmapped_resin", None],
+    )
+    def test_public_pp_unmapped_source_family_is_unknown_not_false(label) -> None:
+        from ior_mvp.graph.projection import _public_analysis, public_producer_adjacency
+    
+        public = deepcopy(get_public_case("SAU-H0-390210"))
+        public["domestic_capability"]["producer_evidence"][0]["process_family"] = label
+        rows = public_producer_adjacency(_public_analysis(public))
+        assert rows is not None
+        sabic = rows[0]
+>       assert sabic["same_process_family"] is None
+E       assert False is None
+
+tests/test_graph_projection.py:999: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_graph_projection.py::test_public_family_aliases_cover_actual_repository_case_loader_inputs
+FAILED tests/test_graph_projection.py::test_public_pp_unmapped_source_family_is_unknown_not_false[technical_plastics_conversion]
+2 failed, 3 passed in 1.14s

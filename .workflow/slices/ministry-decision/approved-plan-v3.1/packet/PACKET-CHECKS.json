@@ -1,0 +1,41 @@
+{
+  "scope": "Planning artifact verification only; no product tests or Aura",
+  "at_utc": "2026-09-25T09:11:50.945249+00:00",
+  "v1_packet": {
+    "entries": 44,
+    "sha256sum_c_exit": 0,
+    "preserved": true
+  },
+  "v2_packet": {
+    "entries": 63,
+    "sha256sum_c_exit": 0,
+    "preserved": true
+  },
+  "claude_review_sha256": "5045e64478cfe680d124c486b5090af76e06a5c183bbaec35dc6de52f25fb202",
+  "actual_upstream": {
+    "main": "ce407db9832b61c5a8a85dfda2e3b7623da2fbc9",
+    "at_utc": "2026-09-25T09:04:27.555860+00:00",
+    "note": "Read upstream URL from main repo config; no checkout or index access/mutation. Previous planning origin is local source clone, not GitHub.",
+    "final_main": "ce407db9832b61c5a8a85dfda2e3b7623da2fbc9",
+    "final_checked_at_utc": "2026-09-25T09:10:02.030155+00:00"
+  },
+  "json_parse": "all packet and note JSON parse",
+  "html": "standard-library parsing and fragment links checked; no browser rendering",
+  "local_markdown_links": "all local Markdown artifact links resolve",
+  "isolated_checkouts": [
+    {
+      "path": "/home/barami/.cache/industrial-opportunity-resolution-mvp/ministry-decision-plan-20260925/checkout",
+      "head": "ce407db9832b61c5a8a85dfda2e3b7623da2fbc9",
+      "clean": true
+    },
+    {
+      "path": "/home/barami/.cache/industrial-opportunity-resolution-mvp/ministry-decision-plan-v3-20260925/delivered-checkout",
+      "head": "ce407db9832b61c5a8a85dfda2e3b7623da2fbc9",
+      "clean": true
+    }
+  ],
+  "implementation": "not started",
+  "s19": "not delivered; actual delivered reconciliation remains required",
+  "skills": "read and applied as documented; no invented slash-command execution",
+  "internal_findings": "resolved as recorded in notes/internal-consistency-check.md"
+}

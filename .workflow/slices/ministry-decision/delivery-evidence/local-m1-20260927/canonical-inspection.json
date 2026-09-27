@@ -1,0 +1,29 @@
+{
+  "status": "ACCEPTED_M1_GENERATED_METADATA_CAPTURE",
+  "utc": "2026-09-27T00:03:25.946665+00:00",
+  "assessor": "Astra coordinator under delegated MVP clarity authority; continuation of existing independent Claude implementation review",
+  "method": "Directly viewed both prior and successor EN/AR 1440x900 evidence-to-change images; read capture, source preservation, image-delta and pixel-comparison receipts. No new human or Ministry review.",
+  "result_sha256": "5d78ea62de30778cc9c460b0dffaff4ec365ccde9f62fc5aa9abeda32e38470b",
+  "image_delta_sha256": "315e424a7a553ff8fecf6ee14248e074bbd1cb46610675e3329eb3cdb1c31907",
+  "pixel_delta_sha256": "56c1eff7f8e3b514470ef95264bcf9e4dea9dbbc15c6c9de2673f3595172891f",
+  "changed_images": [
+    {
+      "path": "en/desktop-1440x900/journey-i-graph-evidence-to-change.webp",
+      "prior_sha256": "68868e24453e36b183be84b26f0d30632fcb3f1eb0a3a52dc1eb809dd53f5eed",
+      "current_sha256": "7c2bd44889336889d1dafa771f0fc111c87242df89382c8bb200d6b2f82cfe76"
+    },
+    {
+      "path": "ar/desktop-1440x900/journey-i-graph-evidence-to-change.webp",
+      "prior_sha256": "d43996e54770b1cdc791d927fa81d24d84fef83b68691c8ac37683a8c0689ab5",
+      "current_sha256": "eb5eec15a189ebcee8422c07cc31a3622d03646f3073b3e7fad0d70c6360b1ad"
+    }
+  ],
+  "findings": "The visible change is the regenerated ENGINE-fa61c740067a identifier in relationship endpoints, with corresponding inline spacing. Diagram, headings, nodes and page region above y700 are pixel-equal. Changed pixels are confined to the relationship-list region starting y802. No new material content/RTL issue in these captured states. This is not an assertion of whole-page geometry equality; strict R1 remains required.",
+  "reuse": {
+    "unchanged_images": 138,
+    "prior_bounded_clarity_sha256": "283eec7fbdd5042e28285bafbc6c8525e830ecbbcc856973898955914a1623df",
+    "basis": "Candidate/discovery and other captured journeys byte-equal; prior expanded content assessment is reused within its documented scope, not rerun or generalized to every interaction."
+  },
+  "pending": "Fresh proof, strict R1, full regression/browser checks, local graph gate, final Claude implementation approval, GitHub delivery and actual Aura verification.",
+  "muhasabah": "PASS for bounded visual inspection only; Ministry M not delivered."
+}

@@ -63,6 +63,7 @@ def test_browser_suite_has_the_approved_top_level_shape() -> None:
     } == {
         "THIRD_PARTY_NOTICES.md",
         "conftest.py",
+        "candidate_pages.py",
         "dossier_pages.py",
         "test_dossier_accessibility.py",
         "test_dossier_failure_states.py",
@@ -462,7 +463,7 @@ def test_server_teardown_accepts_clean_exit_or_requested_sigterm() -> None:
     assert harness.is_expected_server_return_code(1) is False
 
 
-def test_browser_inventory_has_exactly_83_named_tests() -> None:
+def test_browser_inventory_has_exactly_96_named_tests() -> None:
     expected = {
         "test_dossier_empty_unavailable_and_real_zero_are_distinct",
         "test_dossier_keyboard_print_download_and_return",
@@ -535,6 +536,7 @@ def test_browser_inventory_has_exactly_83_named_tests() -> None:
         "test_analyst_sources_and_native_executive_link_keep_current_case",
         "test_analyst_uses_computed_integrity_failure_and_affected_case",
         "test_arabic_source_passports_keep_full_subtree_parity",
+        "test_arabic_candidate_line_request_and_comparison_keep_full_parity",
         "test_case_comparison_and_vectors_match_api",
         "test_claim_drill_uses_exact_stored_evidence_and_restores_focus",
         "test_complete_arabic_executive_subtree_has_no_unmarked_english",
@@ -543,6 +545,7 @@ def test_browser_inventory_has_exactly_83_named_tests() -> None:
         "test_direct_executive_route_renders_arabic_eight_step_shell",
         "test_executive_native_keyboard_and_technical_isolation",
         "test_executive_steps_have_no_viewport_overflow",
+        "test_executive_scene_preparation_disclosure_contract",
         "test_graph_all_view_states_fit_narrow_panel",
         "test_graph_deep_link_uses_selected_context_and_handles_unavailable",
         "test_graph_hostile_name_text_is_escaped",
@@ -562,17 +565,30 @@ def test_browser_inventory_has_exactly_83_named_tests() -> None:
         "test_transport_failures_are_explicit_without_stale_sources",
         "test_unavailable_evsi_case_remains_unavailable",
         "test_unresolved_claim_names_actual_case_wide_needs",
+        "test_candidate_request_four_slots_match_typed_finding",
+        "test_candidate_request_slot_omission_fails_each_local_surface",
+        "test_dynamic_ninth_operating_company_without_line_is_navigable",
+        "test_executive_discovery_names_requirement_and_progressive_context",
+        "test_executive_simulation_context_is_data_scoped",
+        "test_native_finding_details_stays_open_until_actual_navigation",
+        "test_public_producer_adjacency_shows_exact_scoped_signals_and_sources",
+        "test_public_q2_producer_units_and_missing_process",
+        "test_q5_reference_condition_links_to_standalone_warned_dossier",
+        "test_related_steel_company_explains_known_output_and_missing_process",
+        "test_ministry_clarity_rendered_quantities_gates_and_range_direction",
     }
-    actual: set[str] = set()
+    declared: list[str] = []
     for path in BROWSER_TESTS.glob("test_*.py"):
         module = ast.parse(path.read_text(encoding="utf-8"))
-        actual.update(
+        declared.extend(
             node.name
             for node in module.body
             if isinstance(node, ast.FunctionDef)
             and node.name.startswith("test_")
         )
 
+    actual = set(declared)
+    assert len(expected) == len(declared) == len(actual) == 96
     assert actual == expected
 
 

@@ -73,3 +73,10 @@ From the setup PR onward, orchestration for this repository follows the installe
 **Recovery context** lives in `.autonomous-workflow/` (local only; kept untracked by `.git/info/exclude` and `.gitignore`). Legacy records—`.workflow/state.json`, `docs/BUILD_PROGRESS.md`, and `.workflow/slices/**`—describe the historical protocol under which they were written. Each domain slice still maintains the five control documents, `.workflow/state.json`, and its slice record.
 
 Domain non-negotiables, mandatory authority order, required proof commands, and Manifest §7 change gates in this file are unchanged.
+
+
+## Remaining Ministry M–S22 mission (owner update, 2026-09-26)
+
+For this completion mission, the owner's later instructions supersede the historical seats and duplicate review loops above. Astra in Codex plans and coordinates delivery; GPT-6 Sol High in a separate Codex CLI session implements; Claude CLI independently reviews the plan and implementation. Deliver Ministry M, then S20, S21 and S22 in order, with each slice merged and main green before the next starts. Ministry M also requires its live Aura closure before S20. Reuse valid unchanged evidence and batch ordinary delivery records; preserve the substantive domain and GitHub gates.
+
+The current [M acceptance record](.workflow/slices/ministry-decision/completion.md) links the existing owner delegation and records the actual AI clarity assessment. Follow that disposition; historical human-signoff wording does not reinstate a superseded prerequisite. No human or Ministry endorsement may be claimed. [State](.workflow/state.json) and the five control documents retain the remaining obligations.

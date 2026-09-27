@@ -24,6 +24,15 @@ def test_exact_need_code_mapping(code: str, kind: str) -> None:
     assert classify_need_code(code).value == kind
 
 
+def test_qualification_need_maps_to_producer_capability() -> None:
+    from ior_mvp.executive.taxonomy import classify_need_code
+
+    assert (
+        classify_need_code("qualification/profile hard gates").value
+        == "PRODUCER_CAPABILITY"
+    )
+
+
 def test_unknown_need_code_remains_visible_as_unmapped() -> None:
     from ior_mvp.executive.models import DatasetKind
     from ior_mvp.executive.taxonomy import classify_need_code

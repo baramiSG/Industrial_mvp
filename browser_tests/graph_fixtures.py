@@ -1,7 +1,9 @@
 from __future__ import annotations
 
+import hashlib
 from copy import deepcopy
 from functools import lru_cache
+from pathlib import Path
 from types import SimpleNamespace
 from typing import Any
 
@@ -196,6 +198,11 @@ def graph_catalogue_fixture() -> dict[str, Any]:
 def adapt_no_candidate_expected(original: dict[str, Any]) -> dict[str, Any]:
     expected = deepcopy(original)
     identity = "FIX-PUBLIC-NO-CANDIDATE"
+    methodology_file = "docs/authority/Industrial_Opportunity_Resolution_Methodology_Final_KSA.docx"
+    historical_sha = "5717cbd42acc9947ce5e450013719275acb7ed1470847b21fb2cc547c8ac4ce9"
+    current_sha = "891de534a3361fb4bde5cecd1250890cf242ab2e018599526043cb1741e02381"
+    methodology_path = Path(__file__).resolve().parents[1] / methodology_file
+    assert hashlib.sha256(methodology_path.read_bytes()).hexdigest() == current_sha
     components = expected["ui_manifest"]["components"]
     assert expected["analysis"]["opportunity"]["id"] == identity
     assert [component["type"] for component in components] == [
@@ -217,9 +224,19 @@ def adapt_no_candidate_expected(original: dict[str, Any]) -> dict[str, Any]:
         assert versions["thresholds"] == "1.2.0"
         assert versions["decision_narratives"] == "1.3.0"
         assert versions["ui_strings"] == "1.3.0"
+        assert versions["evidence_policy"] == "1.4.0"
         versions["thresholds"] = "1.3.0"
         versions["decision_narratives"] = "1.4.0"
-        versions["ui_strings"] = "1.7.0"
+        versions["ui_strings"] = "1.8.0"
+        versions["evidence_policy"] = "1.5.0"
+        methodology = authority["methodology"]
+        assert methodology == {
+            "file": methodology_file,
+            "sha256": historical_sha,
+            "sha256_prefix": "5717cbd42acc",
+        }
+        methodology["sha256"] = current_sha
+        methodology["sha256_prefix"] = "891de534a336"
     assert components[-1] == {
         "id": "actions",
         "props": {"mode": "public", "opportunity_id": identity},

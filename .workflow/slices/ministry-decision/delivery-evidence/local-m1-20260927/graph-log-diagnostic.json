@@ -1,0 +1,54 @@
+{
+  "argv": [
+    "docker",
+    "run",
+    "--rm",
+    "--pull=never",
+    "--network=none",
+    "--read-only",
+    "--user",
+    "0:0",
+    "--mount",
+    "type=volume,src=f0a493101fe7eb0ce32270deeaa5e1d6e31b198af570a1949a96948ae791de9d,dst=/diagnostic-logs,readonly",
+    "--entrypoint",
+    "/opt/ior-venv/bin/python",
+    "sha256:938b534c8bac0f80012299fc0bba33c00d29f2ade02416bbc1df9d9c028f8112",
+    "-B",
+    "-c",
+    "from pathlib import Path\nimport json\nfiles=[]\nfor p in sorted(Path('/diagnostic-logs').iterdir()):\n if p.is_file() and (p.name.startswith('debug.log') or p.name.startswith('neo4j.log')) and not p.name.endswith('.gz'):\n  lines=p.read_text(errors='replace').splitlines()\n  pause=[s for s in lines if 'VmPauseMonitor' in s or 'stop-the-world' in s]\n  heap=[s for s in lines if any(k in s.lower() for k in ['heap','pagecache','page cache','initialheapsize','maxheapsize'])]\n  files.append({'file':p.name,'bytes':p.stat().st_size,'line_count':len(lines),'pause_lines':pause,'heap_pagecache_lines':heap})\nprint(json.dumps({'files':files,'interpretation':'Empty pause list means no pause warning recorded in these inspected logs, not no GC.'}))\n"
+  ],
+  "exit_code": 0,
+  "stdout": {
+    "files": [
+      {
+        "file": "debug.log",
+        "bytes": 141023,
+        "line_count": 899,
+        "pause_lines": [],
+        "heap_pagecache_lines": [
+          "                                                                Memory Pool: CodeHeap 'non-nmethods' (Non-heap memory): committed=3.375MiB, used=3.284MiB, max=7.816MiB, threshold=0B",
+          "                                                                Memory Pool: Metaspace (Non-heap memory): committed=22.44MiB, used=22.17MiB, max=-1B, threshold=0B",
+          "                                                                Memory Pool: CodeHeap 'profiled nmethods' (Non-heap memory): committed=6.313MiB, used=6.297MiB, max=116.1MiB, threshold=0B",
+          "                                                                Memory Pool: Compressed Class Space (Non-heap memory): committed=2.438MiB, used=2.324MiB, max=1.000GiB, threshold=0B",
+          "                                                                Memory Pool: G1 Eden Space (Heap memory): committed=640.0MiB, used=9.000MiB, max=-1B, threshold=?",
+          "                                                                Memory Pool: G1 Old Gen (Heap memory): committed=379.0MiB, used=16.99MiB, max=1.000GiB, threshold=0B",
+          "                                                                Memory Pool: G1 Survivor Space (Heap memory): committed=5.000MiB, used=4.846MiB, max=-1B, threshold=?",
+          "                                                                Memory Pool: CodeHeap 'non-profiled nmethods' (Non-heap memory): committed=2.438MiB, used=1.505MiB, max=116.1MiB, threshold=0B",
+          "                                                                server.memory.heap.initial_size=1.00GiB",
+          "                                                                server.memory.heap.max_size=1.00GiB",
+          "                                                                server.memory.pagecache.size=512.00MiB"
+        ]
+      },
+      {
+        "file": "neo4j.log",
+        "bytes": 1055,
+        "line_count": 14,
+        "pause_lines": [],
+        "heap_pagecache_lines": []
+      }
+    ],
+    "interpretation": "Empty pause list means no pause warning recorded in these inspected logs, not no GC."
+  },
+  "stderr": "",
+  "utc": "2026-09-27T00:56:28.068582+00:00"
+}

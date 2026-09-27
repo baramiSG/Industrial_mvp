@@ -197,3 +197,32 @@ def test_passport_technical_grammar_accepts_only_exact_composite_ids_and_years(v
 ])
 def test_passport_technical_grammar_rejects_prose_and_malformed_lookalikes(value):
     assert classify_island(value) == 'unclassified'
+
+
+@pytest.mark.parametrize('value', [
+    '45–350 g/m²', '275 g/m²', '0.18–3 mm', '0.7–1.5 mm',
+    '1,000–1,250 mm', '600–1,300 mm',
+    '2–6 g/10min', '8–24 g/10min', '12–20 g/10min',
+    '104 ألف طن', '57.5092 ألف طن', '46.4908 ألف طن',
+    '0 ألف طن', '-14 ألف طن', '18 شهرًا', 'D*',
+])
+def test_executive_whole_technical_islands_match_rendered_finite_values(value):
+    assert classify_island(value) == ('capability_symbol' if value == 'D*' else 'technical_quantity')
+
+
+def test_executive_arabic_quantity_words_are_exact_governed_labels():
+    from ior_mvp.config import ui_strings_bundle
+
+    strings = ui_strings_bundle('ar')['strings']
+    assert strings['ministry.unit.kt'] == 'ألف طن'
+    assert strings['ministry.months'] == 'شهرًا'
+
+
+@pytest.mark.parametrize('value', [
+    '45–350 g/m2', '45–350 kg', '45-350 g/m²', '45 – 350 g/m²',
+    '45–350 g/m² observed', '1,00–1,250 mm', '01–20 mm',
+    '12–20 g/10mins', '104 ألف طن إضافية', '104 طن', '18 أشهر',
+    'D**', 'd*', 'D* status', 'Not acquired 104 mm',
+])
+def test_executive_whole_technical_islands_reject_lookalikes_and_prose(value):
+    assert classify_island(value) == 'unclassified'

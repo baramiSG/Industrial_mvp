@@ -32,6 +32,16 @@ function routeRow(row) {
 
 export function renderRoutes(step, context) {
   const { publicAnalysis: real, simulatedAnalysis: sim, executiveCase: detail } = context;
-  const branch = (rows, simulated) => `<section data-route-branch="${simulated ? "SIMULATED" : "PUBLIC"}" class="${simulated ? "executive-simulation" : "executive-public"}"><h3>${esc(label("ui", simulated ? "simulated" : "public"))}</h3>${simulated ? policyLabels(detail.decisions.simulated.display_labels) : ""}${rows.map(routeRow).join("")}</section>`;
-  return `<p class="executive-callout">${esc(label("ui", "route_note"))}</p><div class="executive-route-grid">${branch(real.route_hypotheses, false)}${sim ? branch(sim.simulation_decision.route_hypotheses, true) : `<p>${esc(label("ui", "no_simulation"))}</p>`}</div>`;
+  const branch = (rows, simulated) => `<section data-route-branch="${simulated ? "SIMULATED" : "PUBLIC"}" class="${simulated ? "executive-simulation" : "executive-public"}"><h3>${esc(label("ui", simulated ? "simulated" : "public"))}</h3>${simulated ? `<p>${esc(t("graph.boundary_synthetic"))}</p>` : ""}${rows.map(routeRow).join("")}</section>`;
+  const cf = sim?.simulation_decision.counterfactual;
+  const shown = (value, unit = "") => value === null || value === undefined || value === "UNAVAILABLE"
+    ? esc(t("common.unavailable")) : code(`${typeof value === "number" ? number(value, 4) : value}${unit ? ` ${unit}` : ""}`);
+  const q3 = cf?.q3_brownfield_versus_greenfield;
+  const condition = cf ? `<section data-reference-comparison><h3>${esc(t("ministry.reference"))}</h3><p>${esc(t("ministry.no_winner"))}</p>
+    <dl>${(cf.q2_missing_capabilities || []).map((field) => `<div><dt>${esc(label("field", field))}</dt><dd>${code(field)}</dd></div>`).join("")}</dl>
+    <dl><div><dt>${esc(t("dossier.field.incremental_capacity_kt"))}</dt><dd>${shown(q3?.incremental_capacity_kt, t("ministry.unit.kt"))}</dd></div>
+    <div><dt>${esc(t("dossier.field.schedule_months"))}</dt><dd>${shown(q3?.schedule_months, t("ministry.months"))}</dd></div>
+    <div><dt>${esc(t("dossier.field.greenfield_alternative"))}</dt><dd>${shown(q3?.greenfield_alternative)}</dd></div></dl></section>` : "";
+  const provenance = sim ? `<details data-executive-full-provenance><summary>${esc(t("ministry.provenance"))}</summary>${policyLabels(detail.decisions.simulated.display_labels)}<p>${code(detail.decisions.simulated.scenario_id)} · ${code(detail.decisions.simulated.source)} · ${code(detail.decisions.simulated.evidence_class)}</p></details>` : "";
+  return `<p class="executive-callout">${esc(label("ui", "route_note"))}</p>${provenance}${condition}<div class="executive-route-grid">${branch(real.route_hypotheses, false)}${sim ? branch(sim.simulation_decision.route_hypotheses, true) : `<p>${esc(label("ui", "no_simulation"))}</p>`}</div>`;
 }

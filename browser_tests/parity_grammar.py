@@ -13,12 +13,24 @@ LATIN_PROSE = re.compile(
     r"[A-Za-z]+(?:\s+[A-Za-z]+){2,}"
 )
 LATIN_RUN = re.compile(r"[A-Za-z]{2,}")
+SOURCE_UNIT = r"(?:mm|kt|g/m²|g/10min)"
+ARABIC_QUANTITY_UNIT = r"(?:ألف طن|شهرًا)"
+DECIMAL = r"(?:(?:0|[1-9]\d*)(?:\.\d+)?|[1-9]\d{0,2}(?:,\d{3})+(?:\.\d+)?)"
 
 CLASS_PATTERNS: list[tuple[str, re.Pattern[str]]] = [
     ("synthetic_evidence_id", re.compile(
         r"SYN-MINISTRY-[A-Z0-9]+(?:-[A-Z0-9]+)*-\d{3}"
-        r"::[a-z][a-z0-9]*(?:_[a-z0-9]+)*")),
+        r"::[a-z][a-z0-9]*(?:_[a-z0-9]+)*"
+        r"(?:::[A-Z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)*)?")),
+    ("fact_id_list", re.compile(
+        r'\["FACT-[A-Za-z0-9-]+"(?:,"FACT-[A-Za-z0-9-]+")*\]')),
     ("period_years", re.compile(r"\d{4}(?:/\d{4})+")),
+    ("source_unit", re.compile(SOURCE_UNIT)),
+    ("technical_quantity", re.compile(
+        rf"(?:-?{DECIMAL}|{DECIMAL}–{DECIMAL}) (?:{SOURCE_UNIT}|{ARABIC_QUANTITY_UNIT})")),
+    ("capability_symbol", re.compile(r"D\*")),
+    ("ministry_field_id", re.compile(r"(?:application|standard|substrate)")),
+    ("numeric_interval", re.compile(r"[\[(]\d[\d.,]*,\d[\d.,]*[\])]")),
     (
         "executive_claim_id",
         re.compile(
@@ -39,6 +51,7 @@ CLASS_PATTERNS: list[tuple[str, re.Pattern[str]]] = [
     ),
     ("url", re.compile(r"https?://\S+")),
     ("version", re.compile(r"v?\d+\.\d+\.\d+")),
+    ("process_id", re.compile(r"PROC-[a-z]+(?:-[a-z]+)*")),
     (
         "governed_id",
         re.compile(
@@ -95,7 +108,7 @@ def label_leaks(
     en_values: Iterable[str],
 ) -> list[str]:
     labels = {_label_key(value) for value in en_values}
-    guarded = {"code_token", "catalogue_key", "governed_id"}
+    guarded = {"code_token", "catalogue_key", "governed_id", "process_id", "fact_id_list"}
     leaks: list[str] = []
     for island in islands:
         text = normalize(island.get("text", ""))

@@ -45,7 +45,7 @@ def test_simulation_contract_version_and_ground_truth_are_explicit() -> None:
     }
     for opportunity_id, pair in expected.items():
         scenario = _scenario(opportunity_id)
-        assert scenario["scenario_version"] == "2.0.0"
+        assert scenario["scenario_version"] == "2.2.0"
         assert (
             scenario["ground_truth"]["expected_simulation_state"],
             scenario["ground_truth"]["expected_route_code"],
@@ -59,7 +59,7 @@ def test_supported_scenario_contract_version_is_accepted() -> None:
 
     assert (
         decision_engine.SUPPORTED_SCENARIO_CONTRACT_VERSIONS
-        == frozenset({"2.0.0", "2.1.0"})
+        == frozenset({"2.0.0", "2.1.0", "2.2.0"})
     )
     decision_engine.validate_simulation_contract(scenario)
 

@@ -197,6 +197,8 @@ def analyze_simulated(opportunity_id: str) -> dict[str, Any]:
     public["economics"] = branch["economics"]
     public["competition"] = branch["competition"]
     public["evsi"] = branch["evsi"]
+    public["candidate_discovery"] = branch["candidate_discovery"]
+    public["line_assessment"] = branch["line_assessment"]
     public["synthetic_inputs_used"] = sorted(scenario["synthetic_inputs"].keys())
     public["evidence"] = public["evidence"] + synthetic_evidence_rows(scenario)
     public["simulation_scenario"] = {

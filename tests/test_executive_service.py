@@ -377,3 +377,101 @@ def test_am4_intervention_is_exclusively_simulated(monkeypatch, opportunity_id, 
                     (original["economics"].get("national_value") or {}).get("incremental_national_value_m_sar"),
                     (original.get("evsi") or {}).get("approximate_evsi_m_sar"))
         assert tuple(v.value for v in step.values) == expected
+
+
+@pytest.mark.parametrize("opportunity_id", ["SAU-H0-721049", "SAU-H0-390210"])
+def test_ministry_diagnostics_are_typed_class_d_and_scenario_local(opportunity_id):
+    from ior_mvp.executive.models import ExecutiveCase
+
+    public = analyze(opportunity_id, "public")
+    assert "candidate_discovery" not in public
+    assert "line_assessment" not in public
+    case = build_executive_case(opportunity_id)
+    discovery = case.candidate_discovery
+    lines = case.line_assessment
+    assert discovery.available and lines.available
+    assert discovery.scenario_id == lines.scenario_id == case.decisions.simulated.scenario_id
+    assert discovery.evidence_class.value == lines.evidence_class.value == "D"
+    assert discovery.source == lines.source == "DEMO_GENERATOR"
+    assert all(row.scenario_id == discovery.scenario_id for row in discovery.rows)
+    from ior_mvp.data_repository import get_synthetic_scenario
+    source = get_synthetic_scenario(opportunity_id)["synthetic_inputs"]
+    companies = {row["company_id"]: row for row in source["candidate_register"]["companies"]}
+    plants = {row["plant_id"]: row for row in source["candidate_register"]["plants"]}
+    for row in discovery.rows:
+        company = companies[row.company_id]
+        assert (row.company_name_en, row.company_name_ar) == (company["name_en"], company["name_ar"])
+        if row.entity_kind != "COMPANY":
+            plant_id = row.plant_id or row.entity_id
+            assert row.plant_status == plants[plant_id]["status"]
+            assert plants[plant_id]["company_id"] == row.company_id
+    target = source["target_specification"]
+    demand = source["demand"]
+    additions = source["candidate_lines"]["requirements_additions"]
+    assert discovery.requirement.target_name == target["name"]
+    assert discovery.requirement.application == target["application"]
+    assert discovery.requirement.target_demand_kt == demand["target_spec_demand_kt"]
+    assert tuple(discovery.requirement.request_window_months) == tuple(additions["request_window_months"])
+    assert discovery.requirement.specification == {
+        **{key: target[key] for key in ("standard", "coating_mass_g_m2", "thickness_mm", "width_mm") if key in target},
+        **{key: additions[key] for key in ("mfr_required", "mfr_test_condition") if key in additions},
+    }
+    assert all(
+        ref.pointer is None or ref.pointer.startswith(
+            "/synthetic_inputs/candidate_register/facts/"
+        )
+        for row in discovery.rows for finding in row.findings
+        for ref in finding.source_refs
+    )
+    assert ExecutiveCase.model_validate(case.model_dump(mode="json")) == case
+
+
+def test_older_and_absent_simulations_have_explicit_diagnostic_unavailability(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    import ior_mvp.executive.service as service
+
+    older = build_executive_case("SAU-H6-294110")
+    assert older.candidate_discovery.reason == "NO_REGISTER"
+    assert older.line_assessment.reason == "NO_LINE_RECORDS"
+    assert not older.candidate_discovery.rows and not older.line_assessment.rows
+    assert older.candidate_discovery.requirement is None
+    service.build_executive_case.cache_clear()
+    monkeypatch.setattr(service, "synthetic_scenarios", lambda: {})
+    absent = service.build_executive_case("SAU-H0-721049")
+    assert absent.candidate_discovery.reason == "NO_SCENARIO"
+    assert absent.line_assessment.reason == "NO_SCENARIO"
+    assert absent.candidate_discovery.requirement is None
+
+
+@pytest.mark.parametrize(
+    "mutation",
+    ["foreign_scenario", "official_source", "missing_line", "cross_subject_request"],
+)
+def test_ministry_diagnostic_model_rejects_foreign_or_misleading_payload(mutation):
+    from pydantic import ValidationError
+    from ior_mvp.executive.models import ExecutiveCase
+
+    payload = build_executive_case("SAU-H0-721049").model_dump(mode="json")
+    discovery = payload["candidate_discovery"]
+    if mutation == "foreign_scenario":
+        discovery["scenario_id"] = "SYN-FOREIGN"
+    elif mutation == "official_source":
+        discovery["source"] = "MINISTRY"
+    elif mutation == "missing_line":
+        discovery["rows"] = [
+            row for row in discovery["rows"]
+            if row["entity_id"] != "LINE-96f1bd96c5c6ccda"
+        ]
+    else:
+        row = next(
+            row for row in discovery["rows"]
+            if row["entity_id"] == "LINE-96f1bd96c5c6ccda"
+        )
+        request = next(
+            finding["next_evidence"] for finding in row["findings"]
+            if finding["next_evidence"] is not None
+        )
+        request["subject_scope"] = "LINE-e403e85a85052861"
+    with pytest.raises(ValidationError):
+        ExecutiveCase.model_validate(payload)

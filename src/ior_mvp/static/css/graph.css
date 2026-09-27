@@ -63,6 +63,20 @@
   box-shadow: var(--shadow-control);
 }
 
+.graph-details .card-body-scroll:focus-visible {
+  outline: var(--border-accent) solid var(--color-info);
+  outline-offset: var(--space-2);
+}
+
+.graph-details .card-body-scroll {
+  min-inline-size: var(--space-0);
+  max-inline-size: var(--size-full);
+}
+
+.graph-source-table {
+  min-inline-size: max(var(--size-full), var(--size-select-min));
+}
+
 .graph-diagram {
   display: block;
   inline-size: var(--size-full);
@@ -73,6 +87,13 @@
 .graph-svg-edge-hit {
   fill: var(--color-transparent);
   pointer-events: all;
+}
+
+.graph-svg-edge path.graph-svg-edge-hit {
+  fill: none;
+  stroke: transparent;
+  stroke-width: 20;
+  pointer-events: stroke;
 }
 
 .graph-svg-edge line {

@@ -1,5 +1,5 @@
 import { t } from "../i18n.js";
-import { escapeHtml, sourceCaption } from "../dom.js";
+import { escapeHtml, sourceCaption, sourceIsland, technicalToken as code } from "../dom.js";
 import { state } from "../state.js";
 
 export const STEP_IDS = Object.freeze([
@@ -51,4 +51,122 @@ export function policyLabels(labels) {
   if (!labels) return "";
   const order = state.locale === "ar" ? ["ar", "en"] : ["en", "ar"];
   return `<div class="synthetic-labels">${order.map((locale) => `<span lang="${locale}" dir="${locale === "ar" ? "rtl" : "ltr"}" class="${locale === "en" ? "source-language-island" : ""}">${escapeHtml(labels[locale])}</span>`).join("")}${sourceCaption()}</div>`;
+}
+
+function key(value) {
+  return String(value).toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_|_$/g, "");
+}
+
+const MINISTRY_KEYS = Object.freeze({
+  dataset: Object.freeze({
+    application_tape: "ministry.dataset.application_tape",
+    factory_customs: "ministry.dataset.factory_customs",
+    factory_customs_attribution: "ministry.dataset.factory_customs_attribution",
+    production_actuals: "ministry.dataset.production_actuals",
+    registry: "ministry.dataset.registry",
+    technical_enrichment: "ministry.dataset.technical_enrichment",
+  }),
+  effect: Object.freeze({
+    factory_attribution: "ministry.effect.factory_attribution",
+    in_scope_procurement_record: "ministry.effect.in_scope_procurement_record",
+    capacity_availability_allocation: "ministry.effect.capacity_availability_allocation",
+    identity_tariff_line: "ministry.effect.identity_tariff_line",
+    line_level_production_or_producer_grade_matrix: "ministry.effect.line_level_production_or_producer_grade_matrix",
+    qualification_profile_hard_gates: "ministry.effect.qualification_profile_hard_gates",
+    re_export_origin_decomposition: "ministry.effect.re_export_origin_decomposition",
+    route_economics: "ministry.effect.route_economics",
+    target_specification_application: "ministry.effect.target_specification_application",
+  }),
+  field: Object.freeze({
+    factory_attribution_link: "ministry.field.factory_attribution_link",
+    in_scope_procurement_record: "ministry.field.in_scope_procurement_record",
+  }),
+  origin: Object.freeze({
+    direct_record: "ministry.origin.direct_record",
+    engineering_declaration: "ministry.origin.engineering_declaration",
+    reviewed_inference: "ministry.origin.reviewed_inference",
+    unknown: "ministry.origin.unknown",
+  }),
+  status: Object.freeze({
+    conflicted: "ministry.status.conflicted",
+    limitation_identified: "ministry.status.limitation_identified",
+    not_established: "ministry.status.not_established",
+    not_required: "ministry.status.not_required",
+    supported: "ministry.status.supported",
+  }),
+  disposition: Object.freeze({
+    not_established: "ministry.disposition.not_established",
+    outside_target: "ministry.disposition.outside_target",
+    pass_to_assessment: "ministry.disposition.pass_to_assessment",
+    related_only: "ministry.disposition.related_only",
+  }),
+});
+const RECORD_FIELDS = Object.freeze({
+  admitted_hs6: "ministry.record.field.admitted_hs6",
+  admitted_qualified_supply_kt: "ministry.record.field.admitted_qualified_supply_kt",
+  country: "ministry.record.field.country",
+  customer_qualification: "ministry.record.field.customer_qualification",
+  dataset_kind: "ministry.record.field.dataset_kind",
+  end: "ministry.record.field.end",
+  equipment_model_id: "ministry.record.field.equipment_model_id",
+  establishes_installation: "ministry.record.field.establishes_installation",
+  operating_status_asserted_by_registry: "ministry.record.field.operating_status_asserted_by_registry",
+  product_family: "ministry.record.field.product_family",
+  production_kind: "ministry.record.field.production_kind",
+  reason_code: "ministry.record.field.reason_code",
+  reexport: "ministry.record.field.reexport",
+  scope: "ministry.record.field.scope",
+  stage: "ministry.record.field.stage",
+  start: "ministry.record.field.start",
+  substrate: "ministry.record.field.substrate",
+  tooling_required: "ministry.record.field.tooling_required",
+  transaction_id: "ministry.record.field.transaction_id",
+  window: "ministry.record.field.window",
+  window_result: "ministry.record.field.window_result",
+});
+const PP_FIELD_KEYS = Object.freeze({
+  polymer_family: "ministry.item.polymer_family",
+  manufacturing_scope: "ministry.item.manufacturing_scope",
+  grade_family: "ministry.item.grade_family",
+  additives_required: "ministry.item.additives_required",
+});
+export function ministryLabel(group, value) {
+  const labelKey = MINISTRY_KEYS[group]?.[key(value)];
+  if (!labelKey) throw new Error(`MINISTRY_LABEL_UNMAPPED:${group}:${value}`);
+  return t(labelKey);
+}
+
+export function recordLabel(value) {
+  return MINISTRY_KEYS.status[key(value)] || MINISTRY_KEYS.origin[key(value)] || null;
+}
+
+export function named(prefix, value) {
+  if (prefix === "field") return `${fieldName(value)} · ${sourceIsland(value)}${sourceCaption()}`;
+  const label = state.ui.strings[MINISTRY_KEYS[prefix]?.[key(value)]];
+  return label ? `${escapeHtml(label)} · ${code(value)}` : code(value);
+}
+
+export function fieldName(field) {
+  const pp = state.ui.strings[PP_FIELD_KEYS[field]];
+  if (pp) return escapeHtml(pp);
+  const recorded = state.ui.strings[RECORD_FIELDS[field]];
+  if (recorded) return escapeHtml(recorded);
+  for (const prefix of ["ministry.item.", "dossier.field.", "executive.field."]) {
+    const label = state.ui.strings[prefix + field];
+    if (label) return escapeHtml(label);
+  }
+  return `${sourceIsland(field)}${sourceCaption()}`;
+}
+
+export function capabilityMeanings() {
+  return {
+    0: t("executive.capability.state.0"), 1: t("executive.capability.state.1"),
+    2: t("executive.capability.state.2"), 3: t("executive.capability.state.3"),
+    U: t("executive.capability.state.u"),
+  };
+}
+
+export function capabilityLegend(comparison = false) {
+  const marker = comparison ? "data-comparison-capability-legend" : "data-capability-legend";
+  return `<details ${marker}><summary>${escapeHtml(t("executive.capability.legend"))}</summary><dl>${Object.entries(capabilityMeanings()).map(([value, meaning]) => `<div><dt>${code(value)}</dt><dd data-capability-legend-state="${value}">${escapeHtml(meaning)}</dd></div>`).join("")}</dl><p>${escapeHtml(t("executive.capability.simulation_note"))}</p></details>`;
 }

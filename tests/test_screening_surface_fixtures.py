@@ -112,7 +112,7 @@ def test_unavailable_and_partial_fixtures_match_api_output(
     )
     assert (
         client.get("/api/screening/records/030579").json()
-        == partial_record
+        == {**partial_record, "deep_assessment": None}
     )
 
 

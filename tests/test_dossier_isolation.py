@@ -5,6 +5,7 @@ from ior_mvp.app import app
 from ior_mvp.decision_engine import analyze
 from ior_mvp.dossier import build_dossier,render_dossier_html
 from ior_mvp import data_repository
+from ior_mvp.dossier_validation import DossierIntegrityError
 
 @pytest.mark.parametrize('mode',['public','simulated'])
 def test_public_decision_is_never_changed_by_export(mode):
@@ -28,6 +29,49 @@ def test_public_projection_never_loads_scenario_context(monkeypatch):
                 assert field['source_path'] is None
     for locale in ['en','ar']:
         assert 'scenario.synthetic_inputs' not in render_dossier_html(dossier,locale)
+
+
+@pytest.mark.parametrize('extra', ['unreviewed_block', 'candidate_discovery'])
+def test_dossier_rejects_unnamed_top_level_scenario_inputs(monkeypatch, extra):
+    analysis = analyze('SAU-H0-721049', 'simulated')
+    context = deepcopy(data_repository.get_synthetic_scenario('SAU-H0-721049'))
+    context['synthetic_inputs'][extra] = {'record': 'must not be copied'}
+    monkeypatch.setattr(data_repository, 'get_synthetic_scenario', lambda *_: context)
+    with pytest.raises(DossierIntegrityError, match='scenario'):
+        build_dossier(analysis)
+
+
+@pytest.mark.parametrize('path', ['projected_input', 'route_evidence', 'passport'])
+def test_dossier_rejects_nested_workspace_diagnostics(monkeypatch, path):
+    analysis = deepcopy(analyze('SAU-H0-721049', 'simulated'))
+    context = deepcopy(data_repository.get_synthetic_scenario('SAU-H0-721049'))
+    if path == 'projected_input':
+        context['synthetic_inputs']['plant_line']['candidate_lines'] = []
+    elif path == 'route_evidence':
+        context['synthetic_inputs']['route_evidence'][0]['candidate_register'] = {}
+    else:
+        analysis['evidence'][0]['candidate_discovery'] = {'rows': []}
+    monkeypatch.setattr(data_repository, 'get_synthetic_scenario', lambda *_: context)
+    with pytest.raises(DossierIntegrityError):
+        build_dossier(analysis)
+
+
+@pytest.mark.parametrize(('case', 'scenario_id'), [
+    ('SAU-H0-721049', 'SYN-MINISTRY-STEEL-001'),
+    ('SAU-H0-390210', 'SYN-MINISTRY-PP-001'),
+])
+def test_dossier_keeps_decision_and_excludes_workspace_blocks(case, scenario_id):
+    analysis = analyze(case, 'simulated')
+    dossier = build_dossier(analysis)
+    assert dossier['public_decision'] == analysis['real_decision']
+    assert not set(dossier['evidence_pack']['scenario_inputs']) & {
+        'candidate_register', 'candidate_lines', 'candidate_discovery', 'line_assessment',
+    }
+    excluded = {f'{scenario_id}::candidate_register', f'{scenario_id}::candidate_lines'}
+    assert excluded <= {row['evidence_id'] for row in analysis['evidence']}
+    assert excluded.isdisjoint({row['evidence_id'] for row in dossier['evidence_pack']['passports']})
+    for block in ('candidate_register', 'candidate_lines'):
+        assert block not in render_dossier_html(dossier, 'en')
 
 @pytest.mark.parametrize(('field','value'),[
  ('scenario_id','WRONG'),('opportunity_id','SAU-H0-390210'),('scenario_version','999'),

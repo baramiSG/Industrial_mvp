@@ -607,6 +607,17 @@ def execute_view(
         )
     finally:
         driver.close()
+    if view_id == "adjacency":
+        for row in rows:
+            signals = row.get("signals", [])
+            if isinstance(signals, str):
+                try:
+                    signals = json.loads(signals)
+                except json.JSONDecodeError as exc:
+                    raise GraphVerificationError("Adjacency signals are not valid JSON") from exc
+            if not isinstance(signals, list):
+                raise GraphVerificationError("Adjacency signals are not a list")
+            row["signals"] = signals
     if view_id == "shared_enabler":
         normalized: list[dict[str, Any]] = []
         for row in rows:

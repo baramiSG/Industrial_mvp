@@ -14,6 +14,26 @@ CASES = tuple(sorted(public_cases()))
 SECTIONS = ('identity', 'demand', 'supply', 'gap', 'capability', 'economics',
             'competition', 'ledger', 'evidence', 'conditions', 'authority')
 
+
+def _assert_exact_reference_passports(analysis, passports, mode):
+    scenario_by_case = {
+        'SAU-H0-721049': 'SYN-MINISTRY-STEEL-001',
+        'SAU-H0-390210': 'SYN-MINISTRY-PP-001',
+    }
+    scenario = scenario_by_case.get(analysis['opportunity']['id']) if mode == 'simulated' else None
+    excluded = {f'{scenario}::candidate_register', f'{scenario}::candidate_lines'} if scenario else set()
+    if excluded:
+        assert excluded <= {row['evidence_id'] for row in analysis['evidence']}
+    expected = [row for row in analysis['evidence'] if row['evidence_id'] not in excluded]
+    expected_ids = [row['evidence_id'] for row in expected]
+    reference_ids = [row['evidence_id'] for row in passports]
+    assert expected_ids, 'expected reference passports must be nonempty'
+    assert reference_ids, 'projected reference passports must be nonempty'
+    assert len(expected_ids) == len(set(expected_ids)), 'expected reference IDs must be unique'
+    assert len(reference_ids) == len(set(reference_ids)), 'projected reference IDs must be unique'
+    assert passports == expected
+    return excluded
+
 class Document(HTMLParser):
     def __init__(self, markup):
         super().__init__(); self.tags=[]; self.text=[]; self.feed(markup)
@@ -70,13 +90,52 @@ def test_projection_is_detached_and_preserves_decisions_routes_and_passports(cas
     assert dossier['public_decision']==analysis['real_decision']
     assert dossier['blocks']['decision']['records']['active_decision']==analysis['active_decision']
     assert dossier['blocks']['capability']['records']['routes']==analysis['route_hypotheses']
-    assert dossier['evidence_pack']['passports']==analysis['evidence']
+    _assert_exact_reference_passports(analysis, dossier['evidence_pack']['passports'], mode)
     assert dossier['blocks']['supply']['records']['producers']==analysis['domestic_capability']['producer_evidence']
     for locale in ['en','ar']:render_dossier_html(dossier,locale)
     assert analysis==before and scenario==scenario_before
     dossier['public_decision']['headline']='mutation probe'
     dossier['supply_conclusion']['producer_evidence'].clear()
     assert analysis==before
+
+
+@pytest.mark.parametrize('case', ('SAU-H0-721049', 'SAU-H0-390210'))
+def test_reference_passport_oracle_rejects_missing_reintroduced_and_foreign_suffix(case):
+    analysis = analyze(case, 'simulated')
+    passports = build_dossier(analysis)['evidence_pack']['passports']
+    excluded = _assert_exact_reference_passports(analysis, passports, 'simulated')
+    assert len(excluded) == 2 and passports
+    with pytest.raises(AssertionError):
+        _assert_exact_reference_passports(analysis, passports[1:], 'simulated')
+    reintroduced = next(row for row in analysis['evidence'] if row['evidence_id'] in excluded)
+    with pytest.raises(AssertionError):
+        _assert_exact_reference_passports(analysis, [*passports, reintroduced], 'simulated')
+    foreign = deepcopy(passports[0])
+    foreign['evidence_id'] = 'SYN-FOREIGN::candidate_lines'
+    other_analysis = deepcopy(analysis)
+    other_analysis['evidence'].append(foreign)
+    assert _assert_exact_reference_passports(other_analysis, [*passports, foreign], 'simulated') == excluded
+    with pytest.raises(AssertionError):
+        _assert_exact_reference_passports(other_analysis, passports, 'simulated')
+    public_analysis = analyze(case, 'public')
+    public_passports = build_dossier(public_analysis)['evidence_pack']['passports']
+    assert _assert_exact_reference_passports(public_analysis, public_passports, 'public') == set()
+    with pytest.raises(AssertionError, match='projected reference passports must be nonempty'):
+        _assert_exact_reference_passports(public_analysis, [], 'public')
+    with pytest.raises(AssertionError, match='projected reference IDs must be unique'):
+        _assert_exact_reference_passports(
+            public_analysis, [*public_passports, deepcopy(public_passports[0])], 'public'
+        )
+    empty_analysis = deepcopy(public_analysis)
+    empty_analysis['evidence'] = []
+    with pytest.raises(AssertionError, match='expected reference passports must be nonempty'):
+        _assert_exact_reference_passports(empty_analysis, [], 'public')
+    duplicated_analysis = deepcopy(public_analysis)
+    duplicated_analysis['evidence'].append(deepcopy(public_analysis['evidence'][0]))
+    with pytest.raises(AssertionError, match='expected reference IDs must be unique'):
+        _assert_exact_reference_passports(
+            duplicated_analysis, deepcopy(duplicated_analysis['evidence']), 'public'
+        )
 
 @pytest.mark.parametrize('case',CASES)
 def test_projection_has_no_internal_capability_score_in_html(case):

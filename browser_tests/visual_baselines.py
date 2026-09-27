@@ -65,6 +65,9 @@ SCREENS = (
     "journey-j-executive-simulated-route",
     "journey-j-executive-ministry-unlocks",
     "journey-j-executive-reject",
+    "journey-k-executive-candidate-lines-steel",
+    "journey-k-executive-candidate-lines-polypropylene",
+    "journey-k-executive-candidate-discovery",
 )
 MAX_FILE_BYTES = 600 * 1024
 MAX_TOTAL_BYTES = 16 * 1024 * 1024
@@ -159,21 +162,22 @@ def _source_hashes() -> dict[str, str]:
     )["projection_id"]
     projection_root = ROOT / "data" / "graph" / "projections" / projection_id
     paths = [
-        *sorted((ROOT / "src" / "ior_mvp").glob("*.py")),
+        *sorted((ROOT / "src" / "ior_mvp").rglob("*.py")),
         static / "index.html",
         static / "app.js",
         static / "styles.css",
         *sorted((static / "css").glob("*.css")),
         *sorted((static / "modules").rglob("*.js")),
-        ROOT / "config" / "ui_strings.v1.yaml",
-        ROOT / "config" / "evidence_policy.v1.yaml",
-        ROOT / "config" / "decision_narratives.v1.yaml",
-        ROOT / "config" / "graph_views.v1.yaml",
+        *sorted((ROOT / "config").glob("*.yaml")),
+        *sorted((ROOT / "data" / "synthetic").glob("*.json")),
+        *sorted((ROOT / "data" / "snapshots" / "public").glob("*.json")),
+        *sorted((ROOT / "data" / "cases").rglob("*.json")),
         ROOT / "browser_tests" / "graph_fixtures.py",
         ROOT / "browser_tests" / "graph_pages.py",
         ROOT / "browser_tests" / "test_graph.py",
         ROOT / "browser_tests" / "test_visual_baselines.py",
         ROOT / "browser_tests" / "executive_pages.py",
+        ROOT / "browser_tests" / "candidate_pages.py",
         ROOT / "browser_tests" / "harness.py",
         ROOT / "browser_tests" / "pages.py",
         ROOT / "browser_tests" / "dossier_pages.py",

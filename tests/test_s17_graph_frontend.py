@@ -2,14 +2,36 @@ from __future__ import annotations
 
 import json
 import subprocess
+from copy import deepcopy
 from pathlib import Path
 
+import pytest
+
 from browser_tests.graph_fixtures import artifact_graph_payload, route_blocking_fixture
+from browser_tests.graph_pages import GRAPH_COUNTED_EDGE_SPECS, PASSPORT_SOURCE_COUNTS, select_counted_graph_edge
 from ior_mvp.config import PROJECT_ROOT, ui_strings_bundle
 
 
 NODE = "node"
 MODULE_ROOT = PROJECT_ROOT / "src/ior_mvp/static/modules/graph"
+
+
+def test_counted_relationship_selectors_are_unique_on_current_artifact() -> None:
+    keys = list(GRAPH_COUNTED_EDGE_SPECS)
+    assert set(keys[:10]) == {key for key in PASSPORT_SOURCE_COUNTS if key.endswith('|edge')}
+    assert [PASSPORT_SOURCE_COUNTS[key] for key in keys[:10]] == [10, 0, 2, 2, 2, 3, 2, 2, 6, 2]
+    assert PASSPORT_SOURCE_COUNTS[keys[10]] == 0
+    for key in keys:
+        case_id, mode, view, _ = key.split('|')
+        payload = (route_blocking_fixture(case_id) if view == 'route_blocking' else
+                   artifact_graph_payload(view, case_id, mode))
+        selected = select_counted_graph_edge(payload, key)
+        assert selected in payload['edges']
+        corrupted = deepcopy(payload)
+        row = next(edge for edge in corrupted['edges'] if edge['id'] == selected['id'])
+        row['provenance']['evidence_id'] = 'WRONG-EVIDENCE'
+        with pytest.raises(AssertionError):
+            select_counted_graph_edge(corrupted, key)
 
 
 def _run(script: str) -> dict:
@@ -106,6 +128,44 @@ console.log(JSON.stringify({{horizontal, vertical, trimmed}}));
     ]
 
 
+def test_repeated_routes_keep_five_distinct_lanes_and_mirror_each_identity() -> None:
+    payloads = [
+        artifact_graph_payload('adjacency', 'SAU-H0-721049', 'public'),
+        artifact_graph_payload('evidence_to_change', 'SAU-H0-721049', 'simulated'),
+    ]
+    script = f"""
+const {{layoutGraph, layoutDimensions}} = await import({_url(MODULE_ROOT / 'layout.js')!r});
+const {{repeatedEdgeRoutes}} = await import({_url(MODULE_ROOT / 'edge-geometry.js')!r});
+const payloads = {json.dumps(payloads, ensure_ascii=False)};
+const rows = payloads.map(payload => {{
+  const directions = ['ltr', 'rtl'].map(direction => {{
+    const byId = Object.fromEntries(layoutGraph(payload.nodes, direction).map(point => [point.id, point]));
+    return repeatedEdgeRoutes(payload.edges, byId, 30, 8, direction);
+  }});
+  const groups = new Map();
+  for (const edge of payload.edges) {{
+    const key = [edge.source, edge.target].sort().join('|');
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key).push(edge.id);
+  }}
+  return [...groups.values()].filter(ids => ids.length > 1).map(ids => ({{
+    count: ids.length,
+    distinct: new Set(ids.map(id => JSON.stringify(directions[0].get(id).points.slice(1, 3)))).size === ids.length,
+    mirrored: ids.every(id => directions[0].get(id).points.every((point, index) => {{
+      const counterpart = directions[1].get(id).points[index];
+      return Math.abs(point.x + counterpart.x - layoutDimensions().width) < 1e-9
+        && Math.abs(point.y - counterpart.y) < 1e-9;
+    }})),
+  }}));
+}});
+console.log(JSON.stringify(rows));
+"""
+    rows = _run(script)
+    assert any(group['count'] == 5 for group in rows[1])
+    assert any(group['count'] == 2 for group in rows[0])
+    assert all(group['distinct'] and group['mirrored'] for groups in rows for group in groups)
+
+
 def test_actual_svg_labels_and_edges_stay_inside_intrinsic_viewbox() -> None:
     payloads = (
         artifact_graph_payload("adjacency", "SAU-H0-721049", "public"),
@@ -120,6 +180,21 @@ def test_actual_svg_labels_and_edges_stay_inside_intrinsic_viewbox() -> None:
             "SAU-H0-721049",
             "public",
         ),
+        artifact_graph_payload(
+            "evidence_to_change",
+            "SAU-H0-721049",
+            "simulated",
+        ),
+        artifact_graph_payload(
+            "evidence_to_change",
+            "SAU-H6-760711",
+            "public",
+        ),
+        artifact_graph_payload(
+            "evidence_to_change",
+            "SAU-H6-760711",
+            "simulated",
+        ),
     )
     script = f"""
 const {{
@@ -127,6 +202,7 @@ const {{
   svgNodeLabelPresentation,
   visibleEdgeEndpoints,
 }} = await import({_url(MODULE_ROOT / 'diagram.js')!r});
+const {{repeatedEdgeRoutes}} = await import({_url(MODULE_ROOT / 'edge-geometry.js')!r});
 const {{
   GRAPH_MARKER_CLEARANCE,
   GRAPH_NODE_RADIUS,
@@ -189,10 +265,10 @@ for (const payload of payloads) {{
     const positions = layoutGraph(payload.nodes, direction);
     const {{width, height}} = layoutDimensions();
     const byId = Object.fromEntries(positions.map((point) => [point.id, point]));
-    const visibleEdges = payload.edges.map((edge) => ({{
-      id: edge.id,
-      ...visibleEdgeEndpoints(byId[edge.source], byId[edge.target]),
-    }}));
+    const routes = repeatedEdgeRoutes(payload.edges, byId, GRAPH_NODE_RADIUS, GRAPH_MARKER_CLEARANCE, direction);
+    const visibleEdges = payload.edges.flatMap((edge) => routes.has(edge.id)
+      ? routes.get(edge.id).segments.map((segment) => ({{id: edge.id, ...segment}}))
+      : [{{id: edge.id, ...visibleEdgeEndpoints(byId[edge.source], byId[edge.target]), terminal: true}}]);
     const placedBoxes = [];
     const labels = positions.map((point) => {{
       const node = payload.nodes.find((row) => row.id === point.id);
@@ -224,7 +300,7 @@ for (const payload of payloads) {{
           edge,
           GRAPH_CAPTION_EDGE_CLEARANCE + GRAPH_EDGE_STROKE_RADIUS,
         )
-        && !intersectsMarker(box, edge.target)
+        && (!edge.terminal || !intersectsMarker(box, edge.target))
       ));
       const captionsClear = placedBoxes.every(
         (placed) => !intersectsBox(box, placed),
@@ -244,7 +320,9 @@ for (const payload of payloads) {{
     const edges = payload.edges.map((edge) => {{
       const source = positions.find((row) => row.id === edge.source);
       const target = positions.find((row) => row.id === edge.target);
-      const endpoints = visibleEdgeEndpoints(source, target);
+      const route = routes.get(edge.id);
+      const endpoints = route ? {{source: route.points[0], target: route.points.at(-1)}}
+        : visibleEdgeEndpoints(source, target);
       const sourceDistance = Math.hypot(
         endpoints.source.x - source.x,
         endpoints.source.y - source.y,
@@ -253,8 +331,9 @@ for (const payload of payloads) {{
         target.x - endpoints.target.x,
         target.y - endpoints.target.y,
       );
-      const segmentX = endpoints.target.x - endpoints.source.x;
-      const segmentY = endpoints.target.y - endpoints.source.y;
+      const terminal = route ? route.segments.at(-1) : endpoints;
+      const segmentX = terminal.target.x - terminal.source.x;
+      const segmentY = terminal.target.y - terminal.source.y;
       const directionDot = (
         segmentX * (target.x - source.x)
         + segmentY * (target.y - source.y)
@@ -267,15 +346,19 @@ for (const payload of payloads) {{
           targetDistance - GRAPH_NODE_RADIUS - GRAPH_MARKER_CLEARANCE
         ) < GEOMETRY_TOLERANCE
         && directionDot > 0
+        && (!route || route.segments.length === 3)
+        && (!route || route.points.every(point => point.x >= 0 && point.x <= width && point.y >= 0 && point.y <= height))
       );
     }});
-    outcomes.push({{viewId: payload.view_id, direction, labels, edges}});
+    outcomes.push({{viewId: payload.view_id, direction, labels, edges,
+      segmentCount: visibleEdges.length, edgeCount: payload.edges.length,
+      routeCount: routes.size}});
   }}
 }}
 console.log(JSON.stringify({{outcomes}}));
 """
     result = _run(script)
-    assert len(result["outcomes"]) == 8
+    assert len(result["outcomes"]) == 14
     for row in result["outcomes"]:
         assert all(
             label["inside"]
@@ -284,7 +367,9 @@ console.log(JSON.stringify({{outcomes}}));
             and label["circlesClear"]
             for label in row["labels"]
         )
-        assert all(row["edges"])
+        assert all(row["edges"]), (row["viewId"], row["direction"], [i for i, valid in enumerate(row["edges"]) if not valid])
+        assert row["segmentCount"] >= row["edgeCount"] > 0
+    assert any(row["routeCount"] >= 5 for row in result["outcomes"])
 
 
 def test_actual_diagram_escapes_untrusted_labels_and_has_no_tab_stop() -> None:
@@ -378,6 +463,36 @@ console.log(JSON.stringify({{html}}));
         < edge_button.index("<svg")
         < edge_button.index("TARGET")
     )
+
+
+def test_scoped_graph_fact_table_is_named_and_keyboard_focusable_in_both_locales() -> None:
+    payload = artifact_graph_payload('adjacency', 'SAU-H0-721049', 'simulated')
+    selected = next(edge for edge in payload['edges']
+                    if edge['properties'].get('attribution_scope') == 'CANDIDATE_DISCOVERY')
+    bundles = {locale: ui_strings_bundle(locale) for locale in ('en', 'ar')}
+    script = f"""
+const {{state}} = await import({_url(MODULE_ROOT.parent / 'state.js')!r});
+const {{renderGraphShell}} = await import({_url(MODULE_ROOT / 'render.js')!r});
+const payload = {json.dumps(payload, ensure_ascii=False)};
+const selected = {json.dumps(selected, ensure_ascii=False)};
+const bundles = {json.dumps(bundles, ensure_ascii=False)};
+const html = {{}};
+for (const locale of ['en', 'ar']) {{
+  state.locale = locale; state.ui = bundles[locale];
+  html[locale] = renderGraphShell({{opportunity_id:'SAU-H0-721049', mode:'simulated'}}, {{
+    open:true, viewId:'adjacency', payload, context:{{mode:'simulated'}},
+    catalogue:{{views:[{{view_id:'adjacency',label:{{en:'Adjacency',ar:'التجاور'}},description:{{en:'Graph',ar:'رسم'}}}}]}},
+    selected:{{identity:selected.id, element:selected}},
+    evidenceResult:{{records:[],unresolved:[],documentAddresses:[]}},
+  }}, true);
+}}
+console.log(JSON.stringify(html));
+"""
+    rendered = _run(script)
+    for locale in ('en', 'ar'):
+        label = bundles[locale]['strings']['graph.details_title']
+        assert f'role="region" tabindex="0" aria-label="{label}"' in rendered[locale]
+        assert 'class="graph-source-table"' in rendered[locale]
 
 
 def test_actual_passport_url_guard_accepts_only_http_and_https() -> None:

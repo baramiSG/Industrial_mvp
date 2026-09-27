@@ -23,6 +23,7 @@ _NEED_CODE_TO_DATASET_KIND = MappingProxyType(
         "line-level production or producer-grade matrix": (
             DatasetKind.PRODUCER_CAPABILITY
         ),
+        "qualification/profile hard gates": DatasetKind.PRODUCER_CAPABILITY,
         "capacity/availability/allocation": (
             DatasetKind.EFFECTIVE_CAPACITY_ALLOCATION
         ),

@@ -1,0 +1,16 @@
+FFFFFF                                                                   [100%]
+=================================== FAILURES ===================================
+/home/barami/projects/ior-worktrees/ministry-decision/src/ior_mvp/candidate_register.py:182: ior_mvp.evidence.EvidenceIntegrityError: FACT-CUS-STEEL-A hs_revision must be H6
+/home/barami/projects/ior-worktrees/ministry-decision/tests/test_candidate_register.py:102: Failed: DID NOT RAISE <class 'ior_mvp.evidence.EvidenceIntegrityError'>
+/home/barami/projects/ior-worktrees/ministry-decision/tests/test_candidate_register.py:115: Failed: DID NOT RAISE <class 'ior_mvp.evidence.EvidenceIntegrityError'>
+/home/barami/projects/ior-worktrees/ministry-decision/tests/test_candidate_register.py:123: AssertionError: Regex pattern did not match.
+/home/barami/projects/ior-worktrees/ministry-decision/tests/test_line_contract.py:40: Failed: DID NOT RAISE <class 'ior_mvp.evidence.EvidenceIntegrityError'>
+/home/barami/projects/ior-worktrees/ministry-decision/tests/test_candidate_discovery.py:242: StopIteration
+=========================== short test summary info ============================
+FAILED tests/test_candidate_register.py::test_valid_h0_identity_validates_and_is_not_an_h6_match
+FAILED tests/test_candidate_register.py::test_cumulative_allocation_cannot_exceed_source_quantity
+FAILED tests/test_candidate_register.py::test_effort_requires_the_nine_configured_dimensions
+FAILED tests/test_candidate_register.py::test_malformed_identity_fails - Asse...
+FAILED tests/test_line_contract.py::test_alternative_cannot_borrow_the_reference_legacy_pointer
+FAILED tests/test_candidate_discovery.py::test_linked_hot_dip_acquisition_is_equipment_context_only
+6 failed in 0.04s

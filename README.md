@@ -24,6 +24,7 @@ The real decision state is immutable. Synthetic evidence is separately flagged, 
 - Versioned threshold, sector-profile and evidence-policy configuration.
 - Eleven hashed public golden-case snapshots, including four S15b builder-derived cases.
 - Eleven explicitly Class-D synthetic scenarios seeded from public marginals.
+- Ministry v3.1 company discovery from structured records, with attributed company/factory/line evidence, supported capability comparisons and scoped next-evidence requests.
 - Deterministic R0–R12 execution ledger.
 - Price–quantity decomposition, concentration, effective capacity, K/U/D\*, NPV, IRR, S\*, incremental national value, competition ratio and EVSI.
 - Schema-driven GenUI decision workspace assembled from an approved component library.
@@ -108,8 +109,9 @@ reconciliation/back-test, full test suite and demo smoke on uv/Python 3.12,
 uv/Python 3.14 and the documented pip path; it also builds the Docker image and
 runs the dedicated live graph/UI step after graph-only equality and before the
 stopped-service proof, and compares the governed functional and visual Chromium
-matrix. The S17 source target is 112 visual paths after its separately approved
-canonical generation.
+matrix. The current Ministry visual inventory contains 140 governed images;
+[Ministry test evidence](.workflow/slices/ministry-decision/test_evidence.md) records
+the actual candidate checks and remaining delivery/live-verification status.
 
 After installing uv as described in `docs/DEVELOPMENT_GUIDE.md`, reproduce the required gates locally with:
 

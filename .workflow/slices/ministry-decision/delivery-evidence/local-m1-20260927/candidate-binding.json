@@ -1,0 +1,54 @@
+{
+  "status": "FROZEN_LOCAL_CANDIDATE_NOT_DELIVERED",
+  "utc": "2026-09-27T00:06:21.367110+00:00",
+  "source_root": "/home/barami/projects/ior-worktrees/ministry-decision",
+  "proof_root": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/final-candidate-m1-successor/proof",
+  "base_commit": "bbcfe7836eb4e3c3e71ddd6b95986c45324267d4",
+  "candidate_tree": "cf666ced680295073c383dd5046021296e58b361",
+  "proof_commit": "918b8fea3e618b23f27f3acf22fcc0162f2cab97",
+  "source_files": 3546,
+  "source_inventory_sha256": "2541fc8749b5f09f54bb26a6a7b06e9a9aa2a9e96f46fd2dea9c276fc2864f1e",
+  "archive_sha256": "c9625cd6e518c3bf1cb430503de9fba835a28fe735dceb80ff9415c6aac2d00e",
+  "ordinary_index": "/home/barami/projects/industrial-opportunity-resolution-mvp/.git/worktrees/ministry-decision/index",
+  "ordinary_index_sha256": "770d3e296985bb61b52211fd365a2b0cad96e8faf512949dfb57f236eb54eaf5",
+  "alternate_index": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/freeze-m1-successor.index",
+  "alternate_index_sha256": "ca86af7774dc9f60cf2ad0a1e41b78775d190b889356cdd8edb0901c3edc451e",
+  "proof_index_sha256": "290af9e0045f872c95922d27fe0d92a80d526f3a4865e63dcd14b8518c13d034",
+  "subtree_pins": {
+    "data/synthetic": "58cf58e1cf1e6bf20dc7d2567a337bfeb849f494",
+    "data/snapshots/public": "12eace2f822dd1d61d091ae20021187bf15ae00e",
+    "data/golden": "72618db654110823ec7a8d4dd6415a37e4554e33",
+    "browser_tests/baselines": "9dee92662f04a6de8063431d39e8d1c267f96512"
+  },
+  "capture_result_sha256": "5d78ea62de30778cc9c460b0dffaff4ec365ccde9f62fc5aa9abeda32e38470b",
+  "capture_inspection_sha256": "422a254973d998ee4d56250d64c7db2e853c24278ff674e357dd638c30324cc7",
+  "clarity_assessment_sha256": "283eec7fbdd5042e28285bafbc6c8525e830ecbbcc856973898955914a1623df",
+  "clarity_reuse_basis": "Unchanged decision content; actual successor capture changes judged in referenced inspection; no human endorsement",
+  "lease_successor": {
+    "status": "HELD_NATIVE_EXCLUSIVE_NONBLOCKING",
+    "utc": "2026-09-26T23:32:24.834733+00:00",
+    "pid": 29918,
+    "start_ticks": "82780",
+    "boot_id": "8471bf0e-e7b9-4771-90df-8193de076675",
+    "fd": 3,
+    "fd_inheritable": false,
+    "lock_path": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/delivery.lock",
+    "device": 2096,
+    "inode": 2358670,
+    "bytes": 0,
+    "kernel_lock_rows": [
+      [
+        "106:",
+        "FLOCK",
+        "ADVISORY",
+        "WRITE",
+        "29918",
+        "08:30:2358670",
+        "0",
+        "EOF"
+      ]
+    ],
+    "purpose": "existing Ministry M through S22 delegated delivery lease successor after verified host reboot"
+  },
+  "method": "Fresh alternate index/unreferenced commit/independent clone; complete W/tree/archive/proof byte and mode equality; no object alternates; old proofs/indexes retained"
+}

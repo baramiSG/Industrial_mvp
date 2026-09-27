@@ -1237,6 +1237,11 @@ def _r5_rule(
     )
 
 
+def evaluate_r9s(capability: dict[str, Any]) -> dict[str, Any]:
+    """Return the unchanged R9-S result for one declared capability record."""
+    return _r9s_rule(capability)
+
+
 def _r9s_rule(capability: dict[str, Any]) -> dict[str, Any]:
     same_family = capability.get("same_process_family")
     signals = capability.get("coarse_adjacency_signals")

@@ -1,5 +1,5 @@
 metadata:
-  version: "1.4.0"
+  version: "1.5.0"
   effective_date: "2026-09-03"
   authority: "Industrial Opportunity Resolution Methodology, Sections 2.1, 10 and 11"
 
@@ -43,6 +43,10 @@ synthetic_isolation:
   forbidden_decision_field: real_decision
   display_label: "SIMULATED — NOT MINISTRY EVIDENCE"
   display_label_ar: "محاكاة — ليست بيانات أو أدلة صادرة عن الوزارة"
+  executive_headline: "Demonstration · Simulated Ministry dataset"
+  executive_headline_ar: "عرض توضيحي · مجموعة بيانات وزارية مُحاكاة"
+  reference_economics_condition: "Reference economics assume the planned {increment_kt} kt increment becomes qualified within {months} months. That condition is not yet established for the increment."
+  reference_economics_condition_ar: "تفترض اقتصاديات الحالة المرجعية تأهيل الزيادة المخططة البالغة {increment_kt} ألف طن خلال {months} شهراً. ولم يُثبت تحقق هذا الشرط للزيادة بعد."
 
 simulation_gate:
   basis: CLASS_IF_CONFIRMED

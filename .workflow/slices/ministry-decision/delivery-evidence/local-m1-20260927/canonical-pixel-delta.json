@@ -1,0 +1,57 @@
+{
+  "argv": [
+    "docker",
+    "run",
+    "--rm",
+    "--pull=never",
+    "--network=none",
+    "--user",
+    "1000:1000",
+    "--mount",
+    "type=bind,src=/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/canonical-capture-m1-successor,dst=/e,readonly",
+    "sha256:938b534c8bac0f80012299fc0bba33c00d29f2ade02416bbc1df9d9c028f8112",
+    "python",
+    "-B",
+    "-c",
+    "from pathlib import Path\nfrom PIL import Image,ImageChops\nimport json\nD=Path('/e')\nfor n in json.loads((D/'IMAGE-DELTA.json').read_text())['changed']:\n a=Image.open(D/'prior-baselines'/n).convert('RGB');b=Image.open(D/'captured-baselines'/n).convert('RGB');d=ImageChops.difference(a,b)\n print(json.dumps({'path':n,'prior_size':a.size,'current_size':b.size,'diff_bbox':d.getbbox(),'top_700_pixels_equal':a.crop((0,0,1440,700)).tobytes()==b.crop((0,0,1440,700)).tobytes()}))\n"
+  ],
+  "exit_code": 0,
+  "rows": [
+    {
+      "path": "en/desktop-1440x900/journey-i-graph-evidence-to-change.webp",
+      "prior_size": [
+        1440,
+        900
+      ],
+      "current_size": [
+        1440,
+        900
+      ],
+      "diff_bbox": [
+        1088,
+        802,
+        1346,
+        900
+      ],
+      "top_700_pixels_equal": true
+    },
+    {
+      "path": "ar/desktop-1440x900/journey-i-graph-evidence-to-change.webp",
+      "prior_size": [
+        1440,
+        900
+      ],
+      "current_size": [
+        1440,
+        900
+      ],
+      "diff_bbox": [
+        94,
+        802,
+        550,
+        900
+      ],
+      "top_700_pixels_equal": true
+    }
+  ]
+}

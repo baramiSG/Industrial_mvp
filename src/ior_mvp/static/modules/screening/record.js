@@ -110,6 +110,11 @@ export function renderScreeningRecord(record, queueId, summary, evidence) {
         </div>
       </div>
       ${renderLedger(record)}
+      ${record.deep_assessment ? `<section class="record-block" data-deep-assessment="${escapeHtml(record.deep_assessment.brief_id)}">
+        <h3>${escapeHtml(t("ministry.q3"))}</h3><p>${escapeHtml(t("ministry.h6_scope"))}</p>
+        <p>${technicalToken(record.deep_assessment.hs_revision)} · ${technicalToken(record.deep_assessment.period_year)} · ${technicalToken(record.deep_assessment.brief_id)}</p>
+        <a href="/executive?${new URLSearchParams({ opportunity: record.deep_assessment.opportunity_id })}">${escapeHtml(t("ministry.inspect"))}</a>
+      </section>` : ""}
       ${renderRecordMetrics(record)}
       ${renderRecordExclusions(record)}
       ${renderRecordWarnings(record)}

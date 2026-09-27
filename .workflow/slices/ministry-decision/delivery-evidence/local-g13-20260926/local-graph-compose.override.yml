@@ -1,0 +1,15 @@
+services:
+  industrial-mvp-neo4j:
+    container_name: m-final-graph-20260926-r2-neo4j
+    environment:
+      NEO4J_server_memory_heap_initial__size: 1G
+      NEO4J_server_memory_heap_max__size: 1G
+    ports: !override
+      - "127.0.0.1:7475:7474"
+      - "127.0.0.1:7688:7687"
+volumes:
+  industrial-mvp-neo4j-data:
+    name: m-final-graph-20260926-r2-data
+networks:
+  industrial-mvp-net:
+    name: m-final-graph-20260926-r2-net

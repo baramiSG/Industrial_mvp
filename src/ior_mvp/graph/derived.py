@@ -11,6 +11,9 @@ from .projection import (
     ProjectionAssembler,
     _base_properties,
     _edge,
+    declared_r9s_metrics,
+    public_producer_adjacency,
+    reference_r9s_properties,
 )
 
 
@@ -204,6 +207,7 @@ def _adjacency_edges(
     )
     if not isinstance(r9s, Mapping):
         return
+    _stamp_reference_r9s(assembler, evidence_id, r9s)
     product_id = str(analysis["opportunity_id"])
     producers = sorted(
         {
@@ -225,9 +229,52 @@ def _adjacency_edges(
                 and edge.properties["synthetic_flag"] is False
             }
         )
+    attributed = public_producer_adjacency(analysis)
+    by_evidence = (
+        {
+            tuple(row["evidence_ids"]): row
+            for row in attributed
+        }
+        if attributed is not None
+        else {}
+    )
     for producer in producers:
         if assembler.nodes[producer].label not in {"Plant", "Company"}:
             continue
+        produced = next(
+            (
+                edge
+                for edge in assembler.projection.edges
+                if edge.type == "PRODUCED_BY"
+                and edge.source == product_id
+                and edge.target == producer
+            ),
+            None,
+        )
+        if attributed is not None:
+            if produced is None:
+                continue
+            row = by_evidence.get(
+                tuple(sorted(str(value) for value in produced.properties.get("evidence_ids", [])))
+            )
+            if row is None:
+                continue
+            metrics = {
+                key: value
+                for key, value in row.items()
+                if key != "evidence_ids"
+            }
+            scope = "PRODUCER_DISCLOSURE"
+        else:
+            candidate = assembler.nodes[producer].properties.get("candidate_r9s")
+            if candidate is not None:
+                if analysis["mode"] != "simulated" or producer != f"PLANT-{analysis['scenario_id']}":
+                    raise ValueError("candidate R9-S alias crosses scenario scope")
+                metrics = dict(candidate)
+                scope = "CANDIDATE_DISCOVERY"
+            else:
+                metrics = declared_r9s_metrics(r9s)
+                scope = "DECLARED_ENGINE_INPUT"
         props = _derived_properties(
             assembler.projection,
             identity="PENDING",
@@ -235,19 +282,18 @@ def _adjacency_edges(
             evidence_id=evidence_id,
         )
         props.pop("id")
-        props.update(
-            {
-                "fired": r9s.get("fired"),
-                "execution": r9s.get("execution"),
-                "same_process_family": r9s.get("metrics", {}).get(
-                    "same_process_family"
-                ),
-                "qualifying_signal_count": r9s.get("metrics", {}).get(
-                    "qualifying_signal_count"
-                ),
-                "result_code": r9s.get("result_code"),
-            }
-        )
+        props.update(metrics)
+        if attributed is not None:
+            props["evidence_ids"] = sorted(
+                set(props["evidence_ids"]) | set(row["evidence_ids"])
+                | set(row["signal_evidence_ids"])
+            )
+        if scope == "CANDIDATE_DISCOVERY":
+            props["evidence_ids"] = sorted(set(props["evidence_ids"]) | {
+                f"{analysis['scenario_id']}::candidate_fact::{fact_id}"
+                for fact_id in metrics["fact_ids"]
+            })
+        props["attribution_scope"] = scope
         _edge(
             assembler,
             "ADJACENT_TO",
@@ -256,6 +302,14 @@ def _adjacency_edges(
             props,
             discriminator=str(analysis["mode"]),
         )
+
+
+def _stamp_reference_r9s(
+    assembler: ProjectionAssembler,
+    evidence_id: str,
+    r9s: Mapping[str, Any],
+) -> None:
+    assembler.nodes[evidence_id].properties.update(reference_r9s_properties(r9s))
 
 
 def _route_constraints(

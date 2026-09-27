@@ -14,6 +14,7 @@ from ior_mvp.evidence import synthetic_display_labels
 from ior_mvp.screening.repository import iter_screening_records
 
 from .case_projection import build_steps, build_vectors
+from .candidate_projection import build_candidate_diagnostics
 from .claims import (
     build_authority_references, build_claim_registry, build_decision_projection,
     build_opportunity_reference,
@@ -247,6 +248,10 @@ def build_executive_case(opportunity_id: str) -> ExecutiveCase:
         claim.claim_id: claim.evidence_ids for claim in claims
     }
     evidence_source = simulated if simulated is not None else public
+    candidate_discovery, line_assessment = build_candidate_diagnostics(
+        simulated, opportunity_id, synthetic_scenarios().get(opportunity_id)
+        if simulated is not None else None,
+    )
     return ExecutiveCase(
         schema_version=EXECUTIVE_SCHEMA_VERSION,
         opportunity=build_opportunity_reference(public),
@@ -259,6 +264,8 @@ def build_executive_case(opportunity_id: str) -> ExecutiveCase:
         claims=claims,
         evidence_index=build_evidence_index(evidence_source),
         authority=build_authority_references(public),
+        candidate_discovery=candidate_discovery,
+        line_assessment=line_assessment,
     )
 
 

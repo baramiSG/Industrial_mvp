@@ -64,6 +64,9 @@ SCREENS = (
     "journey-j-executive-simulated-route",
     "journey-j-executive-ministry-unlocks",
     "journey-j-executive-reject",
+    "journey-k-executive-candidate-lines-steel",
+    "journey-k-executive-candidate-lines-polypropylene",
+    "journey-k-executive-candidate-discovery",
 )
 
 
@@ -88,9 +91,86 @@ def test_actual_visual_discovery_binds_am4_capture_dependencies_without_pillow()
         'browser_tests/visual_baselines.py', 'browser_tests/test_visual_baselines.py',
         'browser_tests/graph_pages.py', 'browser_tests/test_graph.py', 'browser_tests/graph_fixtures.py',
         'browser_tests/parity_grammar.py', 'browser_tests/executive_pages.py',
+        'src/ior_mvp/executive/candidate_projection.py',
+        'src/ior_mvp/executive/line_models.py',
+        'src/ior_mvp/cases/assessment_links.py',
+        'src/ior_mvp/screening/api.py',
+        'src/ior_mvp/graph/service.py',
+        'data/synthetic/SYN-MINISTRY-STEEL-001.json',
+        'data/synthetic/SYN-MINISTRY-PP-001.json',
+        'data/snapshots/public/SAU-H0-721049.json',
+        'data/cases/briefs/CASE-BRIEF-SAU-H6-721061-v1.json',
+        'config/thresholds.v1.yaml',
     )
     for path in required:
         assert discovered[path] == hashlib.sha256((PROJECT_ROOT / path).read_bytes()).hexdigest()
+
+
+def test_visual_source_closure_rejects_nested_and_scenario_byte_or_membership_change(
+    tmp_path: Path,
+) -> None:
+    import ast
+    from typing import Any
+
+    source = PROJECT_ROOT / "browser_tests/visual_baselines.py"
+    module = ast.parse(source.read_text(encoding="utf-8"))
+    functions = [node for node in module.body if isinstance(node, ast.FunctionDef)
+                 and node.name in {"_source_hashes", "validate_manifest"}]
+    namespace = {
+        "ROOT": tmp_path, "BASELINE_ROOT": tmp_path / "baselines",
+        "Path": Path, "Any": Any, "json": json,
+        "sha256": lambda path: hashlib.sha256(path.read_bytes()).hexdigest(),
+        "_expected_matrix": lambda: set(), "_font_hashes": lambda: {},
+        "MAX_TOTAL_BYTES": 0,
+    }
+    exec(compile(ast.Module(body=functions, type_ignores=[]), str(source), "exec"), namespace)
+    files = [
+        "src/ior_mvp/executive/candidate_projection.py",
+        "src/ior_mvp/executive/line_models.py",
+        "src/ior_mvp/cases/assessment_links.py",
+        "src/ior_mvp/screening/api.py",
+        "src/ior_mvp/static/index.html", "src/ior_mvp/static/app.js",
+        "src/ior_mvp/static/styles.css", "config/ui_strings.v1.yaml",
+        "data/synthetic/SYN-MINISTRY-STEEL-001.json",
+        "data/snapshots/public/SAU-H0-721049.json",
+        "data/cases/briefs/CASE-BRIEF-SAU-H6-721061-v1.json",
+        *[f"browser_tests/{name}" for name in (
+            "graph_fixtures.py", "graph_pages.py", "test_graph.py",
+            "test_visual_baselines.py", "executive_pages.py", "candidate_pages.py",
+            "harness.py", "pages.py", "dossier_pages.py", "parity_grammar.py",
+            "conftest.py", "visual_baselines.py",
+        )],
+        "scripts/visual_metrics.py", "scripts/check_browser_prerequisites.py",
+        "data/graph/projections/GRAPH-TEMP/projection.json",
+        "data/graph/projections/GRAPH-TEMP/manifest.json",
+    ]
+    for relative in files:
+        path = tmp_path / relative
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text("{}", encoding="utf-8")
+    current = tmp_path / "data/graph/current.json"
+    current.write_text('{"projection_id":"GRAPH-TEMP"}', encoding="utf-8")
+    baseline = tmp_path / "baselines"
+    baseline.mkdir()
+    manifest = baseline / "manifest.json"
+    manifest.write_text(json.dumps({"entries": [], "source_tree": namespace["_source_hashes"](),
+                                    "font_hashes": {}}), encoding="utf-8")
+    (baseline / "manifest.sha256").write_text(
+        hashlib.sha256(manifest.read_bytes()).hexdigest(), encoding="ascii")
+    assert namespace["validate_manifest"](baseline)["entries"] == []
+    for relative in (
+        "src/ior_mvp/executive/candidate_projection.py",
+        "data/synthetic/SYN-MINISTRY-STEEL-001.json",
+    ):
+        target = tmp_path / relative
+        target.write_text("changed", encoding="utf-8")
+        with pytest.raises(ValueError, match="source-tree provenance is stale"):
+            namespace["validate_manifest"](baseline)
+        target.write_text("{}", encoding="utf-8")
+        target.unlink()
+        with pytest.raises(ValueError, match="source-tree provenance is stale"):
+            namespace["validate_manifest"](baseline)
+        target.write_text("{}", encoding="utf-8")
 
 
 def test_pillow_is_an_exact_e2e_only_dependency() -> None:
@@ -110,7 +190,7 @@ def test_pillow_is_an_exact_e2e_only_dependency() -> None:
     ]
 
 
-def test_visual_manifest_has_exact_128_entry_locale_viewport_screen_matrix() -> None:
+def test_visual_manifest_has_exact_140_entry_locale_viewport_screen_matrix() -> None:
     entries = _manifest()["entries"]
     actual = {
         (entry["locale"], entry["viewport"], entry["screen"])
@@ -118,7 +198,7 @@ def test_visual_manifest_has_exact_128_entry_locale_viewport_screen_matrix() -> 
     }
     expected = set(product(LOCALES, VIEWPORTS, SCREENS))
 
-    assert len(entries) == 128
+    assert len(entries) == 140
     assert actual == expected
     assert len(actual) == len(entries)
 
@@ -141,7 +221,7 @@ def test_visual_manifest_and_every_webp_hash_size_dimensions_and_rgb_decode_matc
     assert "browser_tests/graph_pages.py" in payload["source_tree"]
     for source in ("browser_tests/test_graph.py", "src/ior_mvp/static/modules/graph/labels.js", "src/ior_mvp/static/modules/graph/render.js", "src/ior_mvp/static/modules/graph/diagram.js", "src/ior_mvp/static/css/graph.css"):
         assert source in payload["source_tree"]
-    for helper in ("executive_pages.py", "harness.py", "pages.py", "parity_grammar.py", "conftest.py", "visual_baselines.py"):
+    for helper in ("executive_pages.py", "candidate_pages.py", "harness.py", "pages.py", "parity_grammar.py", "conftest.py", "visual_baselines.py"):
         assert f"browser_tests/{helper}" in payload["source_tree"]
     assert "data/graph/current.json" in payload["source_tree"]
     assert any(
@@ -183,7 +263,7 @@ def test_visual_manifest_and_every_webp_hash_size_dimensions_and_rgb_decode_matc
 def test_visual_baseline_files_are_lossless_webp_with_600_kib_and_16_mib_budgets() -> None:
     files = sorted(BASELINE_ROOT.glob("*/*/*.webp"))
 
-    assert len(files) == 128
+    assert len(files) == 140
     assert all(path.read_bytes()[12:16] == b"VP8L" for path in files)
     assert all(path.stat().st_size <= 600 * 1024 for path in files)
     assert sum(path.stat().st_size for path in files) <= 16 * 1024 * 1024
