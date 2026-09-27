@@ -1,6 +1,7 @@
 import {
   escapeHtml,
   sourceIsland,
+  sourceCaption,
   technicalToken,
 } from "../dom.js";
 import { state } from "../state.js";
@@ -97,7 +98,19 @@ function details(graph) {
     : "";
   const error = graph.evidenceError
     ? `<p class="graph-unresolved">${escapeHtml(t("graph.error_body"))}</p>` : "";
-  return `<div class="graph-details">${labels}${provenance(element)}<h5>${escapeHtml(t("graph.evidence_title"))}</h5>${error}${graph.evidenceLoading ? `<p>${escapeHtml(t("graph.loading"))}</p>` : renderEvidenceResult(graph.evidenceResult, graph.context.mode)}</div>`;
+  const scoped = element.properties?.attribution_scope;
+  const rows = scoped && ["CANDIDATE_DISCOVERY", "LINE_DIAGNOSTIC", "DECLARED_ENGINE_INPUT"].includes(scoped)
+    ? [["ministry.slot.scope", element.properties.canonical_entity_id || element.properties.subject_id],
+      ["ministry.rule", element.properties.requirement_item_id],
+      ["ministry.source", element.properties.fact_id || element.properties.fact_ids],
+      ["ministry.current", element.properties.record_values || element.properties.current_recorded],
+      ["ministry.origin.DIRECT_RECORD", element.properties.record_origin || element.properties.finding_origin]]
+      .filter(([, value]) => value !== undefined && value !== null)
+      .map(([key, value]) => `<tr><th>${escapeHtml(key.startsWith("ministry.origin") ? t("ministry.finding") : t(key))}</th><td>${technicalToken(typeof value === "object" ? JSON.stringify(value) : value)}</td></tr>`).join("") : "";
+  const signals = scoped === "PRODUCER_DISCLOSURE" && Array.isArray(element.properties?.signals)
+    ? `<section data-producer-signals><h5>${escapeHtml(t("graph.evidence_title"))}</h5><ul>${element.properties.signals.map((signal) =>
+      `<li>${sourceIsland(signal.description)} · ${technicalToken(signal.signal_type)} · ${signal.evidence_ids.map(technicalToken).join(" · ")}</li>`).join("")}</ul>${sourceCaption()}</section>` : "";
+  return `<div class="graph-details">${labels}${provenance(element)}${signals}${rows ? `<div class="card-body-scroll" role="region" tabindex="0" aria-label="${escapeHtml(t("graph.details_title"))}"><table class="graph-source-table"><tbody>${rows}</tbody></table></div>` : ""}<h5>${escapeHtml(t("graph.evidence_title"))}</h5>${error}${graph.evidenceLoading ? `<p>${escapeHtml(t("graph.loading"))}</p>` : renderEvidenceResult(graph.evidenceResult, graph.context.mode)}</div>`;
 }
 
 function available(graph) {

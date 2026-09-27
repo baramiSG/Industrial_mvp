@@ -1,0 +1,143 @@
+{
+  "scenario_id": "SYN-MINISTRY-PP-001",
+  "scenario_version": "2.0.0",
+  "ground_truth": {
+    "expected_simulation_state": "REJECT",
+    "expected_route_code": 0,
+    "basis": "Core 06 §5.3 planted ground truth; Core 07 §7.4 selects REJECT route 0 when equivalent qualified availability is at least target demand."
+  },
+  "decision_narrative": {
+    "REJECT": {
+      "headline": {
+        "en": "SIMULATED REJECT — no generic specification-adjusted gap",
+        "ar": "رفض مُحاكى — لا فجوة عامة معدّلة بالمواصفة"
+      },
+      "route_label": {
+        "en": "No intervention",
+        "ar": "لا تدخل"
+      },
+      "rationale": {
+        "en": "The simulated internal grade matrix shows equivalent qualified supply above target demand; generic capacity support would be non-additional.",
+        "ar": "تُظهر مصفوفة الدرجات الداخلية المحاكاة عرضاً مؤهلاً مكافئاً يفوق الطلب المستهدف؛ ولن يحقق دعم الطاقة العامة إضافية."
+      },
+      "conditions": [
+        {
+          "en": "Reopen only for a named specialty-grade exception supported by buyer evidence.",
+          "ar": "أعد الفتح فقط لاستثناء درجة متخصصة مسماة تدعمه أدلة من المشترين."
+        }
+      ],
+      "kill_conditions": [
+        {
+          "en": "Any proposed generic-capacity support is stopped while equivalent qualified capacity is available.",
+          "ar": "يُوقف أي دعم مقترح للطاقة العامة ما دامت الطاقة المؤهلة المكافئة متاحة."
+        }
+      ],
+      "competition_finding": {
+        "en": "No new capacity is proposed; redundant support is avoided.",
+        "ar": "لا تُقترح طاقة جديدة؛ ويُتجنّب الدعم الزائد."
+      }
+    },
+    "INVESTIGATE": {
+      "headline": {
+        "en": "SIMULATED INVESTIGATE — one or more gates remain unresolved",
+        "ar": "تحقّق مُحاكى — ما زالت بوابة واحدة أو أكثر غير محسومة"
+      },
+      "route_label": {
+        "en": "Simulation controls did not all pass",
+        "ar": "لم تجتز المحاكاة جميع الضوابط"
+      },
+      "rationale": {
+        "en": "The simulated branch did not satisfy every hard gate.",
+        "ar": "لم يستوف فرع المحاكاة جميع البوابات الصلبة."
+      },
+      "conditions": [],
+      "kill_conditions": []
+    }
+  },
+  "opportunity_id": "SAU-H0-390210",
+  "synthetic_flag": true,
+  "display_label": "SIMULATED — NOT MINISTRY EVIDENCE",
+  "seed_basis": "Public 2024 imports and public producer capacity; synthetic grade allocation is constrained to remain below public producer totals.",
+  "evidence_class": "D",
+  "source": "DEMO_GENERATOR",
+  "synthetic_inputs": {
+    "target_specification": {
+      "name": "Generic injection-grade polypropylene",
+      "application": "general rigid packaging",
+      "customer_qualification_required": false
+    },
+    "demand": {
+      "target_spec_demand_kt": 56.0,
+      "downside_demand_kt": 51.0,
+      "committed_demand_kt": 0.0,
+      "announced_demand_kt": 0.0
+    },
+    "plant_line": {
+      "nameplate_kt": 1170.0,
+      "availability": 0.93,
+      "yield": 0.97,
+      "qualification_share": 0.18,
+      "market_allocation_share": 0.55,
+      "current_utilisation": 0.78
+    },
+    "equivalence": {
+      "domestic_grade_equivalent": true,
+      "qualified_available_kt": 80.0,
+      "binding_market_failure": "none verified"
+    },
+    "capability_states": {
+      "feedstock_chemistry": 0,
+      "core_process_route": 0,
+      "equipment_envelope": 0,
+      "finishing_spec_control": 0,
+      "qa_lab_metrology": 0,
+      "certification_customer_qualification": 0,
+      "capacity_time_window": 0,
+      "utilities_ehs_permitting": 0,
+      "skills_market_integration": 0
+    },
+    "hard_gates": {
+      "polymer_additive_compatibility": "resolved",
+      "conversion_route": "resolved",
+      "tooling": "not applicable to resin production",
+      "performance_requirement": "resolved",
+      "application_qualification": "resolved"
+    },
+    "economics": {
+      "currency": "SAR_m",
+      "support_required": 0.0,
+      "reason": "No verified specification-adjusted gap; capacity support is non-additional."
+    },
+    "evsi": {
+      "route_change_probability": 0.08,
+      "value_difference_m_sar": 25.0,
+      "evidence_cost_m_sar": 3.0,
+      "delay_cost_m_sar": 1.0,
+      "next_fact": "Obtain named specialty-grade exception only if a buyer identifies one"
+    },
+    "class_if_confirmed": {
+      "product_identity": "A",
+      "demand_at_required_specification": "A",
+      "domestic_supply_or_capability": "A",
+      "hard_regulatory_or_process_gate": "A",
+      "basis": "Ministry customs tariff-line descriptions, producer grade matrix and buyer qualification records if confirmed."
+    },
+    "decision_specific_hard_gates": {
+      "named imported grade": "resolved by the synthetic grade matrix",
+      "buyer application and qualification": "resolved by synthetic buyer qualification records",
+      "local grade availability in required volume and timing": "resolved by the synthetic availability matrix"
+    },
+    "hard_exclusion_inputs": {
+      "idle_equivalent_domestic_capacity": {
+        "qualified_idle_capacity_kt": "UNAVAILABLE",
+        "binding_market_failure": false
+      }
+    },
+    "counterfactual": {
+      "q1_incumbent_meets_specification_without_capital": true,
+      "q4_downside_demand_supports_incumbent_and_new_entrant": false,
+      "q5_new_entry_displaces_efficient_domestic_production": true,
+      "q6_technology_jv_superior_to_expansion_or_greenfield": false
+    }
+  }
+}

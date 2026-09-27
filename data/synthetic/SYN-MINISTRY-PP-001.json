@@ -1,6 +1,6 @@
 {
   "scenario_id": "SYN-MINISTRY-PP-001",
-  "scenario_version": "2.0.0",
+  "scenario_version": "2.2.0",
   "ground_truth": {
     "expected_simulation_state": "REJECT",
     "expected_route_code": 0,
@@ -138,6 +138,2562 @@
       "q4_downside_demand_supports_incumbent_and_new_entrant": false,
       "q5_new_entry_displaces_efficient_domestic_production": true,
       "q6_technology_jv_superior_to_expansion_or_greenfield": false
+    },
+    "candidate_register": {
+      "register_id": "REG-MINISTRY-DEMO-001",
+      "version": "1",
+      "as_of": "2026-09-12",
+      "coverage": [
+        {
+          "coverage_id": "COV-REG",
+          "dataset_kind": "REGISTRY",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "subject_type": "PLANT",
+          "covered_subject_ids": [
+            "PLANT-8932de539dd9d7d8",
+            "PLANT-b24ad239aa497c75",
+            "PLANT-5bb27c71985d4b9d",
+            "PLANT-a71d5f8421b4c49d",
+            "PLANT-94eb2d3ff2f08eff",
+            "PLANT-9d6ea91bce253036",
+            "PLANT-8aa26a75aa4f7ed2"
+          ],
+          "completeness": "COMPLETE"
+        },
+        {
+          "coverage_id": "COV-OUT",
+          "dataset_kind": "PRODUCTION_ACTUALS",
+          "window": {
+            "start": "2024-01-01",
+            "end": "2025-01-01"
+          },
+          "subject_type": "PLANT",
+          "covered_subject_ids": [
+            "PLANT-8932de539dd9d7d8",
+            "PLANT-b24ad239aa497c75",
+            "PLANT-5bb27c71985d4b9d",
+            "PLANT-a71d5f8421b4c49d",
+            "PLANT-94eb2d3ff2f08eff",
+            "PLANT-9d6ea91bce253036",
+            "PLANT-8aa26a75aa4f7ed2"
+          ],
+          "completeness": "COMPLETE"
+        },
+        {
+          "coverage_id": "COV-CUS",
+          "dataset_kind": "FACTORY_CUSTOMS",
+          "window": {
+            "start": "2025-01-01",
+            "end": "2026-01-01"
+          },
+          "subject_type": "COMPANY",
+          "covered_subject_ids": [
+            "COMPANY-ed24005b198e52e5",
+            "COMPANY-be995a5e1a723aae",
+            "COMPANY-5ec11968d5800186",
+            "COMPANY-7b3497b64cf80470",
+            "COMPANY-7c27a105b0cfbcbc",
+            "COMPANY-4aecf0dc458c9e93",
+            "COMPANY-18fe4f8ef742608b",
+            "COMPANY-0d9a8df091d316dc"
+          ],
+          "completeness": "COMPLETE"
+        },
+        {
+          "coverage_id": "COV-APP",
+          "dataset_kind": "APPLICATION_TAPE",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "subject_type": "PLANT",
+          "covered_subject_ids": [
+            "PLANT-8932de539dd9d7d8",
+            "PLANT-b24ad239aa497c75",
+            "PLANT-5bb27c71985d4b9d",
+            "PLANT-a71d5f8421b4c49d",
+            "PLANT-94eb2d3ff2f08eff",
+            "PLANT-9d6ea91bce253036",
+            "PLANT-8aa26a75aa4f7ed2"
+          ],
+          "completeness": "COMPLETE"
+        },
+        {
+          "coverage_id": "COV-TECH",
+          "dataset_kind": "TECHNICAL_ENRICHMENT",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "subject_type": "LINE",
+          "covered_subject_ids": [
+            "LINE-7315366f6a9166d8",
+            "LINE-96f1bd96c5c6ccda",
+            "LINE-4fbdbb0b2c107968",
+            "LINE-e403e85a85052861",
+            "LINE-cb9a42384c3523ec"
+          ],
+          "completeness": "COMPLETE"
+        }
+      ],
+      "companies": [
+        {
+          "company_id": "COMPANY-ed24005b198e52e5",
+          "name_en": "Synthetic Steel A",
+          "name_ar": "شركة الصلب أ التوضيحية",
+          "manufacturer_assignment": null
+        },
+        {
+          "company_id": "COMPANY-be995a5e1a723aae",
+          "name_en": "Synthetic Steel B",
+          "name_ar": "شركة الصلب ب التوضيحية",
+          "manufacturer_assignment": null
+        },
+        {
+          "company_id": "COMPANY-5ec11968d5800186",
+          "name_en": "Synthetic Steel C",
+          "name_ar": "شركة الصلب ج التوضيحية",
+          "manufacturer_assignment": null
+        },
+        {
+          "company_id": "COMPANY-7b3497b64cf80470",
+          "name_en": "Synthetic Resin A",
+          "name_ar": "شركة الراتنج أ التوضيحية",
+          "manufacturer_assignment": null
+        },
+        {
+          "company_id": "COMPANY-7c27a105b0cfbcbc",
+          "name_en": "Synthetic Resin B",
+          "name_ar": "شركة الراتنج ب التوضيحية",
+          "manufacturer_assignment": null
+        },
+        {
+          "company_id": "COMPANY-4aecf0dc458c9e93",
+          "name_en": "Synthetic Fertilizer",
+          "name_ar": "شركة الأسمدة التوضيحية",
+          "manufacturer_assignment": null
+        },
+        {
+          "company_id": "COMPANY-18fe4f8ef742608b",
+          "name_en": "Synthetic Importer",
+          "name_ar": "المستورد التوضيحي",
+          "manufacturer_assignment": null
+        },
+        {
+          "company_id": "COMPANY-0d9a8df091d316dc",
+          "name_en": "Synthetic Applicant",
+          "name_ar": "المتقدم التوضيحي",
+          "manufacturer_assignment": null
+        }
+      ],
+      "plants": [
+        {
+          "plant_id": "PLANT-8932de539dd9d7d8",
+          "company_id": "COMPANY-ed24005b198e52e5",
+          "country": "SA",
+          "status": "OPERATING",
+          "registry_fact_ids": [
+            "FACT-REG-PLANT-8932de539dd9d7d8"
+          ]
+        },
+        {
+          "plant_id": "PLANT-b24ad239aa497c75",
+          "company_id": "COMPANY-be995a5e1a723aae",
+          "country": "SA",
+          "status": "OPERATING",
+          "registry_fact_ids": [
+            "FACT-REG-PLANT-b24ad239aa497c75"
+          ]
+        },
+        {
+          "plant_id": "PLANT-5bb27c71985d4b9d",
+          "company_id": "COMPANY-5ec11968d5800186",
+          "country": "SA",
+          "status": "OPERATING",
+          "registry_fact_ids": [
+            "FACT-REG-PLANT-5bb27c71985d4b9d"
+          ]
+        },
+        {
+          "plant_id": "PLANT-a71d5f8421b4c49d",
+          "company_id": "COMPANY-7b3497b64cf80470",
+          "country": "SA",
+          "status": "OPERATING",
+          "registry_fact_ids": [
+            "FACT-REG-PLANT-a71d5f8421b4c49d"
+          ]
+        },
+        {
+          "plant_id": "PLANT-94eb2d3ff2f08eff",
+          "company_id": "COMPANY-7c27a105b0cfbcbc",
+          "country": "SA",
+          "status": "OPERATING",
+          "registry_fact_ids": [
+            "FACT-REG-PLANT-94eb2d3ff2f08eff"
+          ]
+        },
+        {
+          "plant_id": "PLANT-9d6ea91bce253036",
+          "company_id": "COMPANY-4aecf0dc458c9e93",
+          "country": "SA",
+          "status": "OPERATING",
+          "registry_fact_ids": [
+            "FACT-REG-PLANT-9d6ea91bce253036"
+          ]
+        },
+        {
+          "plant_id": "PLANT-8aa26a75aa4f7ed2",
+          "company_id": "COMPANY-0d9a8df091d316dc",
+          "country": "SA",
+          "status": "UNDER_ESTABLISHMENT",
+          "registry_fact_ids": [
+            "FACT-REG-PLANT-8aa26a75aa4f7ed2"
+          ]
+        }
+      ],
+      "lines": [
+        {
+          "line_id": "LINE-7315366f6a9166d8",
+          "plant_id": "PLANT-8932de539dd9d7d8"
+        },
+        {
+          "line_id": "LINE-96f1bd96c5c6ccda",
+          "plant_id": "PLANT-b24ad239aa497c75"
+        },
+        {
+          "line_id": "LINE-4fbdbb0b2c107968",
+          "plant_id": "PLANT-5bb27c71985d4b9d"
+        },
+        {
+          "line_id": "LINE-e403e85a85052861",
+          "plant_id": "PLANT-a71d5f8421b4c49d"
+        },
+        {
+          "line_id": "LINE-cb9a42384c3523ec",
+          "plant_id": "PLANT-94eb2d3ff2f08eff"
+        }
+      ],
+      "facts": [
+        {
+          "fact_id": "FACT-REG-PLANT-8932de539dd9d7d8",
+          "kind": "REGISTRY_ACTIVITY",
+          "dataset_kind": "REGISTRY",
+          "subject_type": "PLANT",
+          "subject_id": "PLANT-8932de539dd9d7d8",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "country": "SA",
+            "status": "OPERATING",
+            "product_family": "coated_steel",
+            "process_route": "HOT_DIP_GALVANISING",
+            "operating_status_asserted_by_registry": true
+          },
+          "origin": "DIRECT_RECORD",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-REG-PLANT-8932de539dd9d7d8",
+              "purpose": "class_d_demonstration",
+              "field": "values"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-OUT-PLANT-8932de539dd9d7d8",
+          "kind": "PRODUCTION_ACTUAL",
+          "dataset_kind": "PRODUCTION_ACTUALS",
+          "subject_type": "PLANT",
+          "subject_id": "PLANT-8932de539dd9d7d8",
+          "window": {
+            "start": "2024-01-01",
+            "end": "2025-01-01"
+          },
+          "values": {
+            "hs_revision": "H6",
+            "hs6": "721049",
+            "production_kind": "OWN_PRODUCTION",
+            "process_family": "coated_steel",
+            "quantity_kt": 200
+          },
+          "origin": "DIRECT_RECORD",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-OUT-PLANT-8932de539dd9d7d8",
+              "purpose": "class_d_demonstration",
+              "field": "values"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-REG-PLANT-b24ad239aa497c75",
+          "kind": "REGISTRY_ACTIVITY",
+          "dataset_kind": "REGISTRY",
+          "subject_type": "PLANT",
+          "subject_id": "PLANT-b24ad239aa497c75",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "country": "SA",
+            "status": "OPERATING",
+            "product_family": "coated_steel",
+            "process_route": "HOT_DIP_GALVANISING",
+            "operating_status_asserted_by_registry": true
+          },
+          "origin": "DIRECT_RECORD",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-REG-PLANT-b24ad239aa497c75",
+              "purpose": "class_d_demonstration",
+              "field": "values"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-OUT-PLANT-b24ad239aa497c75",
+          "kind": "PRODUCTION_ACTUAL",
+          "dataset_kind": "PRODUCTION_ACTUALS",
+          "subject_type": "PLANT",
+          "subject_id": "PLANT-b24ad239aa497c75",
+          "window": {
+            "start": "2024-01-01",
+            "end": "2025-01-01"
+          },
+          "values": {
+            "hs_revision": "H6",
+            "hs6": "721049",
+            "production_kind": "OWN_PRODUCTION",
+            "process_family": "coated_steel",
+            "quantity_kt": 120
+          },
+          "origin": "DIRECT_RECORD",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-OUT-PLANT-b24ad239aa497c75",
+              "purpose": "class_d_demonstration",
+              "field": "values"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-REG-PLANT-5bb27c71985d4b9d",
+          "kind": "REGISTRY_ACTIVITY",
+          "dataset_kind": "REGISTRY",
+          "subject_type": "PLANT",
+          "subject_id": "PLANT-5bb27c71985d4b9d",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "country": "SA",
+            "status": "OPERATING",
+            "product_family": "cold_rolled_sheet",
+            "process_route": "COLD_ROLLING",
+            "operating_status_asserted_by_registry": true
+          },
+          "origin": "DIRECT_RECORD",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-REG-PLANT-5bb27c71985d4b9d",
+              "purpose": "class_d_demonstration",
+              "field": "values"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-OUT-PLANT-5bb27c71985d4b9d",
+          "kind": "PRODUCTION_ACTUAL",
+          "dataset_kind": "PRODUCTION_ACTUALS",
+          "subject_type": "PLANT",
+          "subject_id": "PLANT-5bb27c71985d4b9d",
+          "window": {
+            "start": "2024-01-01",
+            "end": "2025-01-01"
+          },
+          "values": {
+            "hs_revision": "H6",
+            "hs6": "720916",
+            "production_kind": "OWN_PRODUCTION",
+            "process_family": "cold_rolled_sheet",
+            "quantity_kt": 80
+          },
+          "origin": "DIRECT_RECORD",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-OUT-PLANT-5bb27c71985d4b9d",
+              "purpose": "class_d_demonstration",
+              "field": "values"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-REG-PLANT-a71d5f8421b4c49d",
+          "kind": "REGISTRY_ACTIVITY",
+          "dataset_kind": "REGISTRY",
+          "subject_type": "PLANT",
+          "subject_id": "PLANT-a71d5f8421b4c49d",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "country": "SA",
+            "status": "OPERATING",
+            "product_family": "polypropylene_primary_forms",
+            "process_route": "RESIN_PRODUCTION",
+            "operating_status_asserted_by_registry": true
+          },
+          "origin": "DIRECT_RECORD",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-REG-PLANT-a71d5f8421b4c49d",
+              "purpose": "class_d_demonstration",
+              "field": "values"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-OUT-PLANT-a71d5f8421b4c49d",
+          "kind": "PRODUCTION_ACTUAL",
+          "dataset_kind": "PRODUCTION_ACTUALS",
+          "subject_type": "PLANT",
+          "subject_id": "PLANT-a71d5f8421b4c49d",
+          "window": {
+            "start": "2024-01-01",
+            "end": "2025-01-01"
+          },
+          "values": {
+            "hs_revision": "H6",
+            "hs6": "390210",
+            "production_kind": "OWN_PRODUCTION",
+            "process_family": "polypropylene_primary_forms",
+            "quantity_kt": 400
+          },
+          "origin": "DIRECT_RECORD",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-OUT-PLANT-a71d5f8421b4c49d",
+              "purpose": "class_d_demonstration",
+              "field": "values"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-REG-PLANT-94eb2d3ff2f08eff",
+          "kind": "REGISTRY_ACTIVITY",
+          "dataset_kind": "REGISTRY",
+          "subject_type": "PLANT",
+          "subject_id": "PLANT-94eb2d3ff2f08eff",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "country": "SA",
+            "status": "OPERATING",
+            "product_family": "polypropylene_primary_forms",
+            "process_route": "RESIN_PRODUCTION",
+            "operating_status_asserted_by_registry": true
+          },
+          "origin": "DIRECT_RECORD",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-REG-PLANT-94eb2d3ff2f08eff",
+              "purpose": "class_d_demonstration",
+              "field": "values"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-OUT-PLANT-94eb2d3ff2f08eff",
+          "kind": "PRODUCTION_ACTUAL",
+          "dataset_kind": "PRODUCTION_ACTUALS",
+          "subject_type": "PLANT",
+          "subject_id": "PLANT-94eb2d3ff2f08eff",
+          "window": {
+            "start": "2024-01-01",
+            "end": "2025-01-01"
+          },
+          "values": {
+            "hs_revision": "H6",
+            "hs6": "390210",
+            "production_kind": "OWN_PRODUCTION",
+            "process_family": "polypropylene_primary_forms",
+            "quantity_kt": 600
+          },
+          "origin": "DIRECT_RECORD",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-OUT-PLANT-94eb2d3ff2f08eff",
+              "purpose": "class_d_demonstration",
+              "field": "values"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-REG-PLANT-9d6ea91bce253036",
+          "kind": "REGISTRY_ACTIVITY",
+          "dataset_kind": "REGISTRY",
+          "subject_type": "PLANT",
+          "subject_id": "PLANT-9d6ea91bce253036",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "country": "SA",
+            "status": "OPERATING",
+            "product_family": "fertilizers",
+            "process_route": "OTHER",
+            "operating_status_asserted_by_registry": true
+          },
+          "origin": "DIRECT_RECORD",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-REG-PLANT-9d6ea91bce253036",
+              "purpose": "class_d_demonstration",
+              "field": "values"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-OUT-PLANT-9d6ea91bce253036",
+          "kind": "PRODUCTION_ACTUAL",
+          "dataset_kind": "PRODUCTION_ACTUALS",
+          "subject_type": "PLANT",
+          "subject_id": "PLANT-9d6ea91bce253036",
+          "window": {
+            "start": "2024-01-01",
+            "end": "2025-01-01"
+          },
+          "values": {
+            "hs_revision": "H6",
+            "hs6": "310430",
+            "production_kind": "OWN_PRODUCTION",
+            "process_family": "fertilizers",
+            "quantity_kt": 10
+          },
+          "origin": "DIRECT_RECORD",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-OUT-PLANT-9d6ea91bce253036",
+              "purpose": "class_d_demonstration",
+              "field": "values"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-REG-PLANT-8aa26a75aa4f7ed2",
+          "kind": "REGISTRY_ACTIVITY",
+          "dataset_kind": "REGISTRY",
+          "subject_type": "PLANT",
+          "subject_id": "PLANT-8aa26a75aa4f7ed2",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "country": "SA",
+            "status": "UNDER_ESTABLISHMENT",
+            "product_family": "coated_steel",
+            "process_route": "HOT_DIP_GALVANISING",
+            "operating_status_asserted_by_registry": false
+          },
+          "origin": "DIRECT_RECORD",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-REG-PLANT-8aa26a75aa4f7ed2",
+              "purpose": "class_d_demonstration",
+              "field": "values"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-CUS-STEEL-A",
+          "kind": "FACTORY_CUSTOMS",
+          "dataset_kind": "FACTORY_CUSTOMS",
+          "subject_type": "PLANT",
+          "subject_id": "PLANT-8932de539dd9d7d8",
+          "window": {
+            "start": "2025-01-01",
+            "end": "2026-01-01"
+          },
+          "values": {
+            "hs_revision": "H6",
+            "hs6": "790111",
+            "description": "unwrought zinc",
+            "flow": "IMPORT",
+            "quantity_kt": 1,
+            "reexport": false,
+            "transaction_id": "TX-STEEL-A-ZN",
+            "equipment_model_id": null
+          },
+          "origin": "DIRECT_RECORD",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-CUS-STEEL-A",
+              "purpose": "class_d_demonstration",
+              "field": "values"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-CUS-PP-A",
+          "kind": "FACTORY_CUSTOMS",
+          "dataset_kind": "FACTORY_CUSTOMS",
+          "subject_type": "COMPANY",
+          "subject_id": "COMPANY-7b3497b64cf80470",
+          "window": {
+            "start": "2025-01-01",
+            "end": "2026-01-01"
+          },
+          "values": {
+            "hs_revision": "H6",
+            "hs6": "290122",
+            "description": "propene",
+            "flow": "IMPORT",
+            "quantity_kt": 1,
+            "reexport": false,
+            "transaction_id": "TX-PP-A",
+            "equipment_model_id": null
+          },
+          "origin": "DIRECT_RECORD",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-CUS-PP-A",
+              "purpose": "class_d_demonstration",
+              "field": "values"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-CUS-IMP",
+          "kind": "FACTORY_CUSTOMS",
+          "dataset_kind": "FACTORY_CUSTOMS",
+          "subject_type": "COMPANY",
+          "subject_id": "COMPANY-18fe4f8ef742608b",
+          "window": {
+            "start": "2025-01-01",
+            "end": "2026-01-01"
+          },
+          "values": {
+            "hs_revision": "H6",
+            "hs6": "721049",
+            "description": "coated steel coil",
+            "flow": "IMPORT",
+            "quantity_kt": 50,
+            "reexport": false,
+            "transaction_id": "TX-IMP",
+            "equipment_model_id": null
+          },
+          "origin": "DIRECT_RECORD",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-CUS-IMP",
+              "purpose": "class_d_demonstration",
+              "field": "values"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-APP-C",
+          "kind": "APPLICATION",
+          "dataset_kind": "APPLICATION_TAPE",
+          "subject_type": "PLANT",
+          "subject_id": "PLANT-5bb27c71985d4b9d",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "stage": "APPLIED",
+            "reason_code": null,
+            "proposed_activity": "HOT_DIP_GALVANISING",
+            "proposed_capacity_kt": null,
+            "proposed_start_month": null
+          },
+          "origin": "DIRECT_RECORD",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-APP-C",
+              "purpose": "class_d_demonstration",
+              "field": "values"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-APP-PLAN",
+          "kind": "APPLICATION",
+          "dataset_kind": "APPLICATION_TAPE",
+          "subject_type": "PLANT",
+          "subject_id": "PLANT-8aa26a75aa4f7ed2",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "stage": "REJECTED",
+            "reason_code": "MISSING_APPLICATION_DOCUMENTS",
+            "proposed_activity": "HOT_DIP_GALVANISING",
+            "proposed_capacity_kt": 25,
+            "proposed_start_month": null
+          },
+          "origin": "DIRECT_RECORD",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-APP-PLAN",
+              "purpose": "class_d_demonstration",
+              "field": "values"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-WIDTH-LINE-7315366f6a9166d8",
+          "kind": "TECHNICAL_FIELD",
+          "dataset_kind": "TECHNICAL_ENRICHMENT",
+          "subject_type": "LINE",
+          "subject_id": "LINE-7315366f6a9166d8",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "field_id": "width_mm",
+            "value": [
+              600,
+              1300
+            ],
+            "unit": "mm",
+            "requirement_id": "width_mm"
+          },
+          "origin": "ENGINEERING_DECLARATION",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-WIDTH-LINE-7315366f6a9166d8",
+              "purpose": "class_d_demonstration",
+              "field": "values"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-CAP-LINE-7315366f6a9166d8",
+          "kind": "CAPACITY",
+          "dataset_kind": "TECHNICAL_ENRICHMENT",
+          "subject_type": "LINE",
+          "subject_id": "LINE-7315366f6a9166d8",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "nameplate_kt": 250.0,
+            "availability": 0.92,
+            "yield": 0.94,
+            "qualification_share": 0.38,
+            "market_allocation_share": 0.7,
+            "current_utilisation": 0.89
+          },
+          "origin": "ENGINEERING_DECLARATION",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-CAP-LINE-7315366f6a9166d8",
+              "purpose": "class_d_demonstration",
+              "field": "values"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-EFF-LINE-7315366f6a9166d8",
+          "kind": "EFFORT",
+          "dataset_kind": "TECHNICAL_ENRICHMENT",
+          "subject_type": "LINE",
+          "subject_id": "LINE-7315366f6a9166d8",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "feedstock_chemistry": 0,
+            "core_process_route": 0,
+            "equipment_envelope": 1,
+            "finishing_spec_control": 2,
+            "qa_lab_metrology": 0,
+            "certification_customer_qualification": 2,
+            "capacity_time_window": 1,
+            "utilities_ehs_permitting": 0,
+            "skills_market_integration": 0
+          },
+          "origin": "ENGINEERING_DECLARATION",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-EFF-LINE-7315366f6a9166d8",
+              "purpose": "class_d_demonstration",
+              "field": "values"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-QUAL-LINE-7315366f6a9166d8",
+          "kind": "QUALIFICATION",
+          "dataset_kind": "TECHNICAL_ENRICHMENT",
+          "subject_type": "LINE",
+          "subject_id": "LINE-7315366f6a9166d8",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "requirement_id": "customer_qualification",
+            "application": "coastal construction panels",
+            "customer_status": "QUALIFIED",
+            "valid_window_months": [
+              18,
+              36
+            ]
+          },
+          "origin": "ENGINEERING_DECLARATION",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-QUAL-LINE-7315366f6a9166d8",
+              "purpose": "class_d_demonstration",
+              "field": "values"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-WIDTH-LINE-96f1bd96c5c6ccda",
+          "kind": "TECHNICAL_FIELD",
+          "dataset_kind": "TECHNICAL_ENRICHMENT",
+          "subject_type": "LINE",
+          "subject_id": "LINE-96f1bd96c5c6ccda",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "field_id": "width_mm",
+            "value": [
+              600,
+              1100
+            ],
+            "unit": "mm",
+            "requirement_id": "width_mm"
+          },
+          "origin": "ENGINEERING_DECLARATION",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-WIDTH-LINE-96f1bd96c5c6ccda",
+              "purpose": "class_d_demonstration",
+              "field": "values"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-CAP-LINE-96f1bd96c5c6ccda",
+          "kind": "CAPACITY",
+          "dataset_kind": "TECHNICAL_ENRICHMENT",
+          "subject_type": "LINE",
+          "subject_id": "LINE-96f1bd96c5c6ccda",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "nameplate_kt": 150.0,
+            "availability": 0.9,
+            "yield": 0.94,
+            "qualification_share": 0.0,
+            "market_allocation_share": 0.7,
+            "current_utilisation": 0.8
+          },
+          "origin": "ENGINEERING_DECLARATION",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-CAP-LINE-96f1bd96c5c6ccda",
+              "purpose": "class_d_demonstration",
+              "field": "values"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-EFF-LINE-96f1bd96c5c6ccda",
+          "kind": "EFFORT",
+          "dataset_kind": "TECHNICAL_ENRICHMENT",
+          "subject_type": "LINE",
+          "subject_id": "LINE-96f1bd96c5c6ccda",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "feedstock_chemistry": 0,
+            "core_process_route": 0,
+            "equipment_envelope": 1,
+            "finishing_spec_control": 0,
+            "qa_lab_metrology": 0,
+            "certification_customer_qualification": 2,
+            "capacity_time_window": 0,
+            "utilities_ehs_permitting": 0,
+            "skills_market_integration": 0
+          },
+          "origin": "ENGINEERING_DECLARATION",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-EFF-LINE-96f1bd96c5c6ccda",
+              "purpose": "class_d_demonstration",
+              "field": "values"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-QUAL-LINE-96f1bd96c5c6ccda",
+          "kind": "QUALIFICATION",
+          "dataset_kind": "TECHNICAL_ENRICHMENT",
+          "subject_type": "LINE",
+          "subject_id": "LINE-96f1bd96c5c6ccda",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "requirement_id": "customer_qualification",
+            "application": "coastal construction panels",
+            "customer_status": "NOT_QUALIFIED",
+            "valid_window_months": [
+              0,
+              12
+            ]
+          },
+          "origin": "ENGINEERING_DECLARATION",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-QUAL-LINE-96f1bd96c5c6ccda",
+              "purpose": "class_d_demonstration",
+              "field": "values"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-ALLOC-LINE-96f1bd96c5c6ccda",
+          "kind": "ALLOCATION",
+          "dataset_kind": "TECHNICAL_ENRICHMENT",
+          "subject_type": "LINE",
+          "subject_id": "LINE-96f1bd96c5c6ccda",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "qualified_available_kt": 0,
+            "requirement_id": "qualified_quantity",
+            "window_months": [
+              0,
+              12
+            ]
+          },
+          "origin": "ENGINEERING_DECLARATION",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-ALLOC-LINE-96f1bd96c5c6ccda",
+              "purpose": "class_d_demonstration",
+              "field": "values"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-CEIL-LINE-96f1bd96c5c6ccda",
+          "kind": "CEILING",
+          "dataset_kind": "TECHNICAL_ENRICHMENT",
+          "subject_type": "LINE",
+          "subject_id": "LINE-96f1bd96c5c6ccda",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "group_id": "LINE-96f1bd96c5c6ccda",
+            "ceiling_kind": "DECLARED_DESIGN",
+            "value_kt": 150,
+            "basis": "Class D design ceiling"
+          },
+          "origin": "ENGINEERING_DECLARATION",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-CEIL-LINE-96f1bd96c5c6ccda",
+              "purpose": "class_d_demonstration",
+              "field": "values"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-CAP-LINE-4fbdbb0b2c107968",
+          "kind": "CAPACITY",
+          "dataset_kind": "TECHNICAL_ENRICHMENT",
+          "subject_type": "LINE",
+          "subject_id": "LINE-4fbdbb0b2c107968",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "nameplate_kt": 100.0,
+            "availability": null,
+            "yield": null,
+            "qualification_share": null,
+            "market_allocation_share": null,
+            "current_utilisation": null
+          },
+          "origin": "ENGINEERING_DECLARATION",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-CAP-LINE-4fbdbb0b2c107968",
+              "purpose": "class_d_demonstration",
+              "field": "values"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-EFF-LINE-4fbdbb0b2c107968",
+          "kind": "EFFORT",
+          "dataset_kind": "TECHNICAL_ENRICHMENT",
+          "subject_type": "LINE",
+          "subject_id": "LINE-4fbdbb0b2c107968",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "feedstock_chemistry": "U",
+            "core_process_route": "U",
+            "equipment_envelope": "U",
+            "finishing_spec_control": "U",
+            "qa_lab_metrology": "U",
+            "certification_customer_qualification": "U",
+            "capacity_time_window": "U",
+            "utilities_ehs_permitting": "U",
+            "skills_market_integration": "U"
+          },
+          "origin": "ENGINEERING_DECLARATION",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-EFF-LINE-4fbdbb0b2c107968",
+              "purpose": "class_d_demonstration",
+              "field": "values"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-QUAL-LINE-4fbdbb0b2c107968",
+          "kind": "QUALIFICATION",
+          "dataset_kind": "TECHNICAL_ENRICHMENT",
+          "subject_type": "LINE",
+          "subject_id": "LINE-4fbdbb0b2c107968",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "requirement_id": "customer_qualification",
+            "application": "coastal construction panels",
+            "customer_status": "UNKNOWN",
+            "valid_window_months": [
+              0,
+              12
+            ]
+          },
+          "origin": "ENGINEERING_DECLARATION",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-QUAL-LINE-4fbdbb0b2c107968",
+              "purpose": "class_d_demonstration",
+              "field": "values"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-CEIL-LINE-4fbdbb0b2c107968",
+          "kind": "CEILING",
+          "dataset_kind": "TECHNICAL_ENRICHMENT",
+          "subject_type": "LINE",
+          "subject_id": "LINE-4fbdbb0b2c107968",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "group_id": "LINE-4fbdbb0b2c107968",
+            "ceiling_kind": "DECLARED_DESIGN",
+            "value_kt": 100,
+            "basis": "Class D design ceiling"
+          },
+          "origin": "ENGINEERING_DECLARATION",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-CEIL-LINE-4fbdbb0b2c107968",
+              "purpose": "class_d_demonstration",
+              "field": "values"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-MFR-LINE-e403e85a85052861",
+          "kind": "TECHNICAL_FIELD",
+          "dataset_kind": "TECHNICAL_ENRICHMENT",
+          "subject_type": "LINE",
+          "subject_id": "LINE-e403e85a85052861",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "field_id": "mfr_range_g_10min",
+            "value": [
+              8,
+              24
+            ],
+            "unit": "g_10min",
+            "requirement_id": "mfr_range_g_10min"
+          },
+          "origin": "ENGINEERING_DECLARATION",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-MFR-LINE-e403e85a85052861",
+              "purpose": "class_d_demonstration",
+              "field": "values"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-CAP-LINE-e403e85a85052861",
+          "kind": "CAPACITY",
+          "dataset_kind": "TECHNICAL_ENRICHMENT",
+          "subject_type": "LINE",
+          "subject_id": "LINE-e403e85a85052861",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "nameplate_kt": 450.0,
+            "availability": 0.93,
+            "yield": 0.97,
+            "qualification_share": 0.3,
+            "market_allocation_share": 0.7,
+            "current_utilisation": 0.78
+          },
+          "origin": "ENGINEERING_DECLARATION",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-CAP-LINE-e403e85a85052861",
+              "purpose": "class_d_demonstration",
+              "field": "values"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-EFF-LINE-e403e85a85052861",
+          "kind": "EFFORT",
+          "dataset_kind": "TECHNICAL_ENRICHMENT",
+          "subject_type": "LINE",
+          "subject_id": "LINE-e403e85a85052861",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "feedstock_chemistry": 0,
+            "core_process_route": 0,
+            "equipment_envelope": 0,
+            "finishing_spec_control": 0,
+            "qa_lab_metrology": 0,
+            "certification_customer_qualification": 0,
+            "capacity_time_window": 0,
+            "utilities_ehs_permitting": 0,
+            "skills_market_integration": 0
+          },
+          "origin": "ENGINEERING_DECLARATION",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-EFF-LINE-e403e85a85052861",
+              "purpose": "class_d_demonstration",
+              "field": "values"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-QUAL-LINE-e403e85a85052861",
+          "kind": "QUALIFICATION",
+          "dataset_kind": "TECHNICAL_ENRICHMENT",
+          "subject_type": "LINE",
+          "subject_id": "LINE-e403e85a85052861",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "requirement_id": "customer_qualification",
+            "application": "general rigid packaging",
+            "customer_status": "NOT_REQUIRED",
+            "valid_window_months": [
+              0,
+              12
+            ]
+          },
+          "origin": "ENGINEERING_DECLARATION",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-QUAL-LINE-e403e85a85052861",
+              "purpose": "class_d_demonstration",
+              "field": "values"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-ALLOC-LINE-e403e85a85052861",
+          "kind": "ALLOCATION",
+          "dataset_kind": "TECHNICAL_ENRICHMENT",
+          "subject_type": "LINE",
+          "subject_id": "LINE-e403e85a85052861",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "qualified_available_kt": 70,
+            "requirement_id": "qualified_quantity",
+            "window_months": [
+              0,
+              12
+            ]
+          },
+          "origin": "ENGINEERING_DECLARATION",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-ALLOC-LINE-e403e85a85052861",
+              "purpose": "class_d_demonstration",
+              "field": "values"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-MFR-LINE-cb9a42384c3523ec",
+          "kind": "TECHNICAL_FIELD",
+          "dataset_kind": "TECHNICAL_ENRICHMENT",
+          "subject_type": "LINE",
+          "subject_id": "LINE-cb9a42384c3523ec",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "field_id": "mfr_range_g_10min",
+            "value": [
+              2,
+              6
+            ],
+            "unit": "g_10min",
+            "requirement_id": "mfr_range_g_10min"
+          },
+          "origin": "ENGINEERING_DECLARATION",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-MFR-LINE-cb9a42384c3523ec",
+              "purpose": "class_d_demonstration",
+              "field": "values"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-CAP-LINE-cb9a42384c3523ec",
+          "kind": "CAPACITY",
+          "dataset_kind": "TECHNICAL_ENRICHMENT",
+          "subject_type": "LINE",
+          "subject_id": "LINE-cb9a42384c3523ec",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "nameplate_kt": 720.0,
+            "availability": 0.93,
+            "yield": 0.97,
+            "qualification_share": 0.0,
+            "market_allocation_share": 0.55,
+            "current_utilisation": 0.78
+          },
+          "origin": "ENGINEERING_DECLARATION",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-CAP-LINE-cb9a42384c3523ec",
+              "purpose": "class_d_demonstration",
+              "field": "values"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-EFF-LINE-cb9a42384c3523ec",
+          "kind": "EFFORT",
+          "dataset_kind": "TECHNICAL_ENRICHMENT",
+          "subject_type": "LINE",
+          "subject_id": "LINE-cb9a42384c3523ec",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "feedstock_chemistry": 0,
+            "core_process_route": 0,
+            "equipment_envelope": 0,
+            "finishing_spec_control": 1,
+            "qa_lab_metrology": 0,
+            "certification_customer_qualification": 0,
+            "capacity_time_window": 0,
+            "utilities_ehs_permitting": 0,
+            "skills_market_integration": 0
+          },
+          "origin": "ENGINEERING_DECLARATION",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-EFF-LINE-cb9a42384c3523ec",
+              "purpose": "class_d_demonstration",
+              "field": "values"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-QUAL-LINE-cb9a42384c3523ec",
+          "kind": "QUALIFICATION",
+          "dataset_kind": "TECHNICAL_ENRICHMENT",
+          "subject_type": "LINE",
+          "subject_id": "LINE-cb9a42384c3523ec",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "requirement_id": "customer_qualification",
+            "application": "general rigid packaging",
+            "customer_status": "NOT_REQUIRED",
+            "valid_window_months": [
+              0,
+              12
+            ]
+          },
+          "origin": "ENGINEERING_DECLARATION",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-QUAL-LINE-cb9a42384c3523ec",
+              "purpose": "class_d_demonstration",
+              "field": "values"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-ALLOC-LINE-cb9a42384c3523ec",
+          "kind": "ALLOCATION",
+          "dataset_kind": "TECHNICAL_ENRICHMENT",
+          "subject_type": "LINE",
+          "subject_id": "LINE-cb9a42384c3523ec",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "qualified_available_kt": 0,
+            "requirement_id": "qualified_quantity",
+            "window_months": [
+              0,
+              12
+            ]
+          },
+          "origin": "ENGINEERING_DECLARATION",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-ALLOC-LINE-cb9a42384c3523ec",
+              "purpose": "class_d_demonstration",
+              "field": "values"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-SUBSTRATE-LINE-7315366f6a9166d8",
+          "kind": "TECHNICAL_FIELD",
+          "dataset_kind": "TECHNICAL_ENRICHMENT",
+          "subject_type": "LINE",
+          "subject_id": "LINE-7315366f6a9166d8",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "field_id": "substrate",
+            "value": "LOW_CARBON",
+            "unit": "class",
+            "requirement_id": "substrate"
+          },
+          "origin": "ENGINEERING_DECLARATION",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-SUBSTRATE-LINE-7315366f6a9166d8",
+              "purpose": "class_d_demonstration"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-PROCESS_ROUTE-LINE-7315366f6a9166d8",
+          "kind": "TECHNICAL_FIELD",
+          "dataset_kind": "TECHNICAL_ENRICHMENT",
+          "subject_type": "LINE",
+          "subject_id": "LINE-7315366f6a9166d8",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "field_id": "process_route",
+            "value": "HOT_DIP_GALVANISING",
+            "unit": "route",
+            "requirement_id": "process_route"
+          },
+          "origin": "ENGINEERING_DECLARATION",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-PROCESS_ROUTE-LINE-7315366f6a9166d8",
+              "purpose": "class_d_demonstration"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-THICKNESS_MM-LINE-7315366f6a9166d8",
+          "kind": "TECHNICAL_FIELD",
+          "dataset_kind": "TECHNICAL_ENRICHMENT",
+          "subject_type": "LINE",
+          "subject_id": "LINE-7315366f6a9166d8",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "field_id": "thickness_mm",
+            "value": [
+              0.18,
+              3
+            ],
+            "unit": "mm",
+            "requirement_id": "thickness_mm"
+          },
+          "origin": "ENGINEERING_DECLARATION",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-THICKNESS_MM-LINE-7315366f6a9166d8",
+              "purpose": "class_d_demonstration"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-COATING_MASS_G_M2-LINE-7315366f6a9166d8",
+          "kind": "TECHNICAL_FIELD",
+          "dataset_kind": "TECHNICAL_ENRICHMENT",
+          "subject_type": "LINE",
+          "subject_id": "LINE-7315366f6a9166d8",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "field_id": "coating_mass_g_m2",
+            "value": [
+              45,
+              350
+            ],
+            "unit": "g/m2",
+            "requirement_id": "coating_mass_g_m2"
+          },
+          "origin": "ENGINEERING_DECLARATION",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-COATING_MASS_G_M2-LINE-7315366f6a9166d8",
+              "purpose": "class_d_demonstration"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-SURFACE_TREATMENT-LINE-7315366f6a9166d8",
+          "kind": "TECHNICAL_FIELD",
+          "dataset_kind": "TECHNICAL_ENRICHMENT",
+          "subject_type": "LINE",
+          "subject_id": "LINE-7315366f6a9166d8",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "field_id": "surface_treatment",
+            "value": "CHROMATED",
+            "unit": "treatment",
+            "requirement_id": "surface_treatment"
+          },
+          "origin": "ENGINEERING_DECLARATION",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-SURFACE_TREATMENT-LINE-7315366f6a9166d8",
+              "purpose": "class_d_demonstration"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-STANDARD-LINE-7315366f6a9166d8",
+          "kind": "TECHNICAL_FIELD",
+          "dataset_kind": "TECHNICAL_ENRICHMENT",
+          "subject_type": "LINE",
+          "subject_id": "LINE-7315366f6a9166d8",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "field_id": "standard",
+            "value": "SASO-ASTM A653/A653M",
+            "unit": "standard",
+            "requirement_id": "standard"
+          },
+          "origin": "ENGINEERING_DECLARATION",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-STANDARD-LINE-7315366f6a9166d8",
+              "purpose": "class_d_demonstration"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-APPLICATION-LINE-7315366f6a9166d8",
+          "kind": "TECHNICAL_FIELD",
+          "dataset_kind": "TECHNICAL_ENRICHMENT",
+          "subject_type": "LINE",
+          "subject_id": "LINE-7315366f6a9166d8",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "field_id": "application",
+            "value": "coastal construction panels",
+            "unit": "application",
+            "requirement_id": "application"
+          },
+          "origin": "ENGINEERING_DECLARATION",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-APPLICATION-LINE-7315366f6a9166d8",
+              "purpose": "class_d_demonstration"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-SUBSTRATE-LINE-96f1bd96c5c6ccda",
+          "kind": "TECHNICAL_FIELD",
+          "dataset_kind": "TECHNICAL_ENRICHMENT",
+          "subject_type": "LINE",
+          "subject_id": "LINE-96f1bd96c5c6ccda",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "field_id": "substrate",
+            "value": "LOW_CARBON",
+            "unit": "class",
+            "requirement_id": "substrate"
+          },
+          "origin": "ENGINEERING_DECLARATION",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-SUBSTRATE-LINE-96f1bd96c5c6ccda",
+              "purpose": "class_d_demonstration"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-PROCESS_ROUTE-LINE-96f1bd96c5c6ccda",
+          "kind": "TECHNICAL_FIELD",
+          "dataset_kind": "TECHNICAL_ENRICHMENT",
+          "subject_type": "LINE",
+          "subject_id": "LINE-96f1bd96c5c6ccda",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "field_id": "process_route",
+            "value": "HOT_DIP_GALVANISING",
+            "unit": "route",
+            "requirement_id": "process_route"
+          },
+          "origin": "ENGINEERING_DECLARATION",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-PROCESS_ROUTE-LINE-96f1bd96c5c6ccda",
+              "purpose": "class_d_demonstration"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-THICKNESS_MM-LINE-96f1bd96c5c6ccda",
+          "kind": "TECHNICAL_FIELD",
+          "dataset_kind": "TECHNICAL_ENRICHMENT",
+          "subject_type": "LINE",
+          "subject_id": "LINE-96f1bd96c5c6ccda",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "field_id": "thickness_mm",
+            "value": [
+              0.18,
+              3
+            ],
+            "unit": "mm",
+            "requirement_id": "thickness_mm"
+          },
+          "origin": "ENGINEERING_DECLARATION",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-THICKNESS_MM-LINE-96f1bd96c5c6ccda",
+              "purpose": "class_d_demonstration"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-COATING_MASS_G_M2-LINE-96f1bd96c5c6ccda",
+          "kind": "TECHNICAL_FIELD",
+          "dataset_kind": "TECHNICAL_ENRICHMENT",
+          "subject_type": "LINE",
+          "subject_id": "LINE-96f1bd96c5c6ccda",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "field_id": "coating_mass_g_m2",
+            "value": [
+              45,
+              350
+            ],
+            "unit": "g/m2",
+            "requirement_id": "coating_mass_g_m2"
+          },
+          "origin": "ENGINEERING_DECLARATION",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-COATING_MASS_G_M2-LINE-96f1bd96c5c6ccda",
+              "purpose": "class_d_demonstration"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-SURFACE_TREATMENT-LINE-96f1bd96c5c6ccda",
+          "kind": "TECHNICAL_FIELD",
+          "dataset_kind": "TECHNICAL_ENRICHMENT",
+          "subject_type": "LINE",
+          "subject_id": "LINE-96f1bd96c5c6ccda",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "field_id": "surface_treatment",
+            "value": "CHROMATED",
+            "unit": "treatment",
+            "requirement_id": "surface_treatment"
+          },
+          "origin": "ENGINEERING_DECLARATION",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-SURFACE_TREATMENT-LINE-96f1bd96c5c6ccda",
+              "purpose": "class_d_demonstration"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-STANDARD-LINE-96f1bd96c5c6ccda",
+          "kind": "TECHNICAL_FIELD",
+          "dataset_kind": "TECHNICAL_ENRICHMENT",
+          "subject_type": "LINE",
+          "subject_id": "LINE-96f1bd96c5c6ccda",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "field_id": "standard",
+            "value": "SASO-ASTM A653/A653M",
+            "unit": "standard",
+            "requirement_id": "standard"
+          },
+          "origin": "ENGINEERING_DECLARATION",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-STANDARD-LINE-96f1bd96c5c6ccda",
+              "purpose": "class_d_demonstration"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-APPLICATION-LINE-96f1bd96c5c6ccda",
+          "kind": "TECHNICAL_FIELD",
+          "dataset_kind": "TECHNICAL_ENRICHMENT",
+          "subject_type": "LINE",
+          "subject_id": "LINE-96f1bd96c5c6ccda",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "field_id": "application",
+            "value": "coastal construction panels",
+            "unit": "application",
+            "requirement_id": "application"
+          },
+          "origin": "ENGINEERING_DECLARATION",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-APPLICATION-LINE-96f1bd96c5c6ccda",
+              "purpose": "class_d_demonstration"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-POLYMER_FAMILY-LINE-e403e85a85052861",
+          "kind": "TECHNICAL_FIELD",
+          "dataset_kind": "TECHNICAL_ENRICHMENT",
+          "subject_type": "LINE",
+          "subject_id": "LINE-e403e85a85052861",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "field_id": "polymer_family",
+            "value": "PP",
+            "unit": "family",
+            "requirement_id": "polymer_family"
+          },
+          "origin": "ENGINEERING_DECLARATION",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-POLYMER_FAMILY-LINE-e403e85a85052861",
+              "purpose": "class_d_demonstration"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-MANUFACTURING_SCOPE-LINE-e403e85a85052861",
+          "kind": "TECHNICAL_FIELD",
+          "dataset_kind": "TECHNICAL_ENRICHMENT",
+          "subject_type": "LINE",
+          "subject_id": "LINE-e403e85a85052861",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "field_id": "manufacturing_scope",
+            "value": "RESIN_PRODUCTION",
+            "unit": "scope",
+            "requirement_id": "manufacturing_scope"
+          },
+          "origin": "ENGINEERING_DECLARATION",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-MANUFACTURING_SCOPE-LINE-e403e85a85052861",
+              "purpose": "class_d_demonstration"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-GRADE_FAMILY-LINE-e403e85a85052861",
+          "kind": "TECHNICAL_FIELD",
+          "dataset_kind": "TECHNICAL_ENRICHMENT",
+          "subject_type": "LINE",
+          "subject_id": "LINE-e403e85a85052861",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "field_id": "grade_family",
+            "value": "INJECTION_GRADE",
+            "unit": "grade",
+            "requirement_id": "grade_family"
+          },
+          "origin": "ENGINEERING_DECLARATION",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-GRADE_FAMILY-LINE-e403e85a85052861",
+              "purpose": "class_d_demonstration"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-MFR_TEST_CONDITION-LINE-e403e85a85052861",
+          "kind": "TECHNICAL_FIELD",
+          "dataset_kind": "TECHNICAL_ENRICHMENT",
+          "subject_type": "LINE",
+          "subject_id": "LINE-e403e85a85052861",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "field_id": "mfr_test_condition",
+            "value": "MFR_DEMO_230C_2_16KG",
+            "unit": "condition",
+            "requirement_id": "mfr_test_condition"
+          },
+          "origin": "ENGINEERING_DECLARATION",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-MFR_TEST_CONDITION-LINE-e403e85a85052861",
+              "purpose": "class_d_demonstration"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-ADDITIVES_REQUIRED-LINE-e403e85a85052861",
+          "kind": "TECHNICAL_FIELD",
+          "dataset_kind": "TECHNICAL_ENRICHMENT",
+          "subject_type": "LINE",
+          "subject_id": "LINE-e403e85a85052861",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "field_id": "additives_required",
+            "value": false,
+            "unit": "boolean",
+            "requirement_id": "additives_required"
+          },
+          "origin": "ENGINEERING_DECLARATION",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-ADDITIVES_REQUIRED-LINE-e403e85a85052861",
+              "purpose": "class_d_demonstration"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-TOOLING_REQUIRED-LINE-e403e85a85052861",
+          "kind": "TECHNICAL_FIELD",
+          "dataset_kind": "TECHNICAL_ENRICHMENT",
+          "subject_type": "LINE",
+          "subject_id": "LINE-e403e85a85052861",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "field_id": "tooling_required",
+            "value": false,
+            "unit": "boolean",
+            "requirement_id": "tooling_required"
+          },
+          "origin": "ENGINEERING_DECLARATION",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-TOOLING_REQUIRED-LINE-e403e85a85052861",
+              "purpose": "class_d_demonstration"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-APPLICATION-LINE-e403e85a85052861",
+          "kind": "TECHNICAL_FIELD",
+          "dataset_kind": "TECHNICAL_ENRICHMENT",
+          "subject_type": "LINE",
+          "subject_id": "LINE-e403e85a85052861",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "field_id": "application",
+            "value": "general rigid packaging",
+            "unit": "application",
+            "requirement_id": "application"
+          },
+          "origin": "ENGINEERING_DECLARATION",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-APPLICATION-LINE-e403e85a85052861",
+              "purpose": "class_d_demonstration"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-POLYMER_FAMILY-LINE-cb9a42384c3523ec",
+          "kind": "TECHNICAL_FIELD",
+          "dataset_kind": "TECHNICAL_ENRICHMENT",
+          "subject_type": "LINE",
+          "subject_id": "LINE-cb9a42384c3523ec",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "field_id": "polymer_family",
+            "value": "PP",
+            "unit": "family",
+            "requirement_id": "polymer_family"
+          },
+          "origin": "ENGINEERING_DECLARATION",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-POLYMER_FAMILY-LINE-cb9a42384c3523ec",
+              "purpose": "class_d_demonstration"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-MANUFACTURING_SCOPE-LINE-cb9a42384c3523ec",
+          "kind": "TECHNICAL_FIELD",
+          "dataset_kind": "TECHNICAL_ENRICHMENT",
+          "subject_type": "LINE",
+          "subject_id": "LINE-cb9a42384c3523ec",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "field_id": "manufacturing_scope",
+            "value": "RESIN_PRODUCTION",
+            "unit": "scope",
+            "requirement_id": "manufacturing_scope"
+          },
+          "origin": "ENGINEERING_DECLARATION",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-MANUFACTURING_SCOPE-LINE-cb9a42384c3523ec",
+              "purpose": "class_d_demonstration"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-GRADE_FAMILY-LINE-cb9a42384c3523ec",
+          "kind": "TECHNICAL_FIELD",
+          "dataset_kind": "TECHNICAL_ENRICHMENT",
+          "subject_type": "LINE",
+          "subject_id": "LINE-cb9a42384c3523ec",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "field_id": "grade_family",
+            "value": "INJECTION_GRADE",
+            "unit": "grade",
+            "requirement_id": "grade_family"
+          },
+          "origin": "ENGINEERING_DECLARATION",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-GRADE_FAMILY-LINE-cb9a42384c3523ec",
+              "purpose": "class_d_demonstration"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-MFR_TEST_CONDITION-LINE-cb9a42384c3523ec",
+          "kind": "TECHNICAL_FIELD",
+          "dataset_kind": "TECHNICAL_ENRICHMENT",
+          "subject_type": "LINE",
+          "subject_id": "LINE-cb9a42384c3523ec",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "field_id": "mfr_test_condition",
+            "value": "MFR_DEMO_230C_2_16KG",
+            "unit": "condition",
+            "requirement_id": "mfr_test_condition"
+          },
+          "origin": "ENGINEERING_DECLARATION",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-MFR_TEST_CONDITION-LINE-cb9a42384c3523ec",
+              "purpose": "class_d_demonstration"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-ADDITIVES_REQUIRED-LINE-cb9a42384c3523ec",
+          "kind": "TECHNICAL_FIELD",
+          "dataset_kind": "TECHNICAL_ENRICHMENT",
+          "subject_type": "LINE",
+          "subject_id": "LINE-cb9a42384c3523ec",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "field_id": "additives_required",
+            "value": false,
+            "unit": "boolean",
+            "requirement_id": "additives_required"
+          },
+          "origin": "ENGINEERING_DECLARATION",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-ADDITIVES_REQUIRED-LINE-cb9a42384c3523ec",
+              "purpose": "class_d_demonstration"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-TOOLING_REQUIRED-LINE-cb9a42384c3523ec",
+          "kind": "TECHNICAL_FIELD",
+          "dataset_kind": "TECHNICAL_ENRICHMENT",
+          "subject_type": "LINE",
+          "subject_id": "LINE-cb9a42384c3523ec",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "field_id": "tooling_required",
+            "value": false,
+            "unit": "boolean",
+            "requirement_id": "tooling_required"
+          },
+          "origin": "ENGINEERING_DECLARATION",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-TOOLING_REQUIRED-LINE-cb9a42384c3523ec",
+              "purpose": "class_d_demonstration"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-APPLICATION-LINE-cb9a42384c3523ec",
+          "kind": "TECHNICAL_FIELD",
+          "dataset_kind": "TECHNICAL_ENRICHMENT",
+          "subject_type": "LINE",
+          "subject_id": "LINE-cb9a42384c3523ec",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "field_id": "application",
+            "value": "general rigid packaging",
+            "unit": "application",
+            "requirement_id": "application"
+          },
+          "origin": "ENGINEERING_DECLARATION",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-APPLICATION-LINE-cb9a42384c3523ec",
+              "purpose": "class_d_demonstration"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-WINDOW-LINE-7315366f6a9166d8",
+          "kind": "WINDOW",
+          "dataset_kind": "TECHNICAL_ENRICHMENT",
+          "subject_type": "LINE",
+          "subject_id": "LINE-7315366f6a9166d8",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "available_window_months": [
+              18,
+              36
+            ]
+          },
+          "origin": "ENGINEERING_DECLARATION",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-WINDOW-LINE-7315366f6a9166d8",
+              "purpose": "class_d_demonstration"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-WINDOW-LINE-96f1bd96c5c6ccda",
+          "kind": "WINDOW",
+          "dataset_kind": "TECHNICAL_ENRICHMENT",
+          "subject_type": "LINE",
+          "subject_id": "LINE-96f1bd96c5c6ccda",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "available_window_months": [
+              18,
+              36
+            ]
+          },
+          "origin": "ENGINEERING_DECLARATION",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-WINDOW-LINE-96f1bd96c5c6ccda",
+              "purpose": "class_d_demonstration"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-WINDOW-LINE-e403e85a85052861",
+          "kind": "WINDOW",
+          "dataset_kind": "TECHNICAL_ENRICHMENT",
+          "subject_type": "LINE",
+          "subject_id": "LINE-e403e85a85052861",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "available_window_months": [
+              0,
+              24
+            ]
+          },
+          "origin": "ENGINEERING_DECLARATION",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-WINDOW-LINE-e403e85a85052861",
+              "purpose": "class_d_demonstration"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-WINDOW-LINE-cb9a42384c3523ec",
+          "kind": "WINDOW",
+          "dataset_kind": "TECHNICAL_ENRICHMENT",
+          "subject_type": "LINE",
+          "subject_id": "LINE-cb9a42384c3523ec",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "available_window_months": [
+              0,
+              24
+            ]
+          },
+          "origin": "ENGINEERING_DECLARATION",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-WINDOW-LINE-cb9a42384c3523ec",
+              "purpose": "class_d_demonstration"
+            }
+          ],
+          "rule_id": null
+        },
+        {
+          "fact_id": "FACT-CEIL-LINE-7315366f6a9166d8",
+          "kind": "CEILING",
+          "dataset_kind": "TECHNICAL_ENRICHMENT",
+          "subject_type": "LINE",
+          "subject_id": "LINE-7315366f6a9166d8",
+          "window": {
+            "start": "2026-06-30",
+            "end": "2026-07-01"
+          },
+          "values": {
+            "group_id": "CEIL-STEEL-A",
+            "ceiling_kind": "PUBLIC_NAMEPLATE",
+            "value_kt": 250,
+            "basis": "published nameplate reference"
+          },
+          "origin": "ENGINEERING_DECLARATION",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-CEIL-LINE-7315366f6a9166d8",
+              "purpose": "class_d_demonstration"
+            },
+            {
+              "artifact": "data/snapshots/public/SAU-H0-721049.json",
+              "evidence_id": "S-UNICOIL-EPD",
+              "purpose": "public_marginal_reference",
+              "field": "nameplate_source_evidence_id"
+            }
+          ],
+          "rule_id": null
+        }
+      ],
+      "attribution_links": [
+        {
+          "attribution_id": "ATTR-STEEL-A-ZN",
+          "fact_id": "FACT-CUS-STEEL-A",
+          "plant_id": "PLANT-8932de539dd9d7d8",
+          "window": {
+            "start": "2025-01-01",
+            "end": "2026-01-01"
+          },
+          "allocated_quantity": 1,
+          "unit": "kt",
+          "source_refs": [
+            {
+              "pointer": "/synthetic_inputs/candidate_register/facts/FACT-CUS-STEEL-A",
+              "purpose": "class_d_demonstration",
+              "field": "values"
+            }
+          ]
+        }
+      ]
+    },
+    "candidate_lines": {
+      "reference_basis": {
+        "kind": "AGGREGATE",
+        "line_id": null
+      },
+      "requirements_additions": {
+        "mfr_required": [
+          12,
+          20
+        ],
+        "discovery_items": [
+          {
+            "item_id": "target_family"
+          },
+          {
+            "item_id": "operating_factory",
+            "rule_id": "P01",
+            "record_selectors": [
+              [
+                "REGISTRY_ACTIVITY",
+                "operating_status_asserted_by_registry"
+              ]
+            ]
+          },
+          {
+            "item_id": "current_process",
+            "rule_id": "P05",
+            "process_route": "RESIN_PRODUCTION",
+            "record_selectors": [
+              [
+                "REGISTRY_ACTIVITY",
+                "process_route"
+              ]
+            ]
+          },
+          {
+            "item_id": "input_procurement",
+            "rule_id": "P03",
+            "record_selectors": [
+              [
+                "FACTORY_CUSTOMS",
+                "hs6"
+              ]
+            ],
+            "hs_revision": "H6",
+            "admitted_hs6": [
+              "290122"
+            ],
+            "basis": "WCO HS 2022 subheading 2901.22"
+          },
+          {
+            "item_id": "own_output",
+            "rule_id": "P02",
+            "record_selectors": [
+              [
+                "PRODUCTION_ACTUAL",
+                "quantity_kt"
+              ]
+            ]
+          },
+          {
+            "item_id": "equipment_acquisition",
+            "rule_id": "P04",
+            "record_selectors": [
+              [
+                "FACTORY_CUSTOMS",
+                "hs6"
+              ],
+              [
+                "EQUIPMENT_TECHNICAL",
+                "function"
+              ]
+            ],
+            "hs_revision": "H6",
+            "admitted_hs6": [
+              "847720"
+            ],
+            "basis": "WCO HS 2022 subheading 8477.20"
+          },
+          {
+            "item_id": "relevant_certificate",
+            "rule_id": "P07",
+            "scope": null,
+            "record_selectors": [
+              [
+                "CERTIFICATE",
+                "scope"
+              ]
+            ]
+          },
+          {
+            "item_id": "planned_change",
+            "rule_id": "P08",
+            "record_selectors": [
+              [
+                "APPLICATION",
+                "stage"
+              ]
+            ]
+          }
+        ],
+        "polymer_family": "PP",
+        "manufacturing_scope": "RESIN_PRODUCTION",
+        "grade_family": "INJECTION_GRADE",
+        "mfr_test_condition": "MFR_DEMO_230C_2_16KG",
+        "additives_required": false,
+        "tooling_required": false,
+        "application": "general rigid packaging",
+        "customer_qualification_required": false,
+        "detailed_quantity_kt": 56,
+        "request_window_months": [
+          0,
+          12
+        ]
+      },
+      "requirement_items": [
+        {
+          "item_id": "mfr_range_g_10min",
+          "dimension": "mfr_range_g_10min",
+          "field_id": "mfr_range_g_10min",
+          "required_value_ref": "/synthetic_inputs/candidate_lines/requirements_additions/mfr_required",
+          "record_selectors": [
+            [
+              "TECHNICAL_FIELD",
+              "value"
+            ]
+          ],
+          "basis": "modeled PP MFR 12-20 at MFR_DEMO_230C_2_16KG"
+        },
+        {
+          "item_id": "polymer_family",
+          "dimension": "polymer_family",
+          "field_id": "polymer_family",
+          "required_value_ref": "/synthetic_inputs/candidate_lines/requirements_additions/polymer_family",
+          "record_selectors": [
+            [
+              "TECHNICAL_FIELD",
+              "value"
+            ]
+          ],
+          "basis": "class_d_target"
+        },
+        {
+          "item_id": "manufacturing_scope",
+          "dimension": "manufacturing_scope",
+          "field_id": "manufacturing_scope",
+          "required_value_ref": "/synthetic_inputs/candidate_lines/requirements_additions/manufacturing_scope",
+          "record_selectors": [
+            [
+              "TECHNICAL_FIELD",
+              "value"
+            ]
+          ],
+          "basis": "class_d_target"
+        },
+        {
+          "item_id": "grade_family",
+          "dimension": "grade_family",
+          "field_id": "grade_family",
+          "required_value_ref": "/synthetic_inputs/candidate_lines/requirements_additions/grade_family",
+          "record_selectors": [
+            [
+              "TECHNICAL_FIELD",
+              "value"
+            ]
+          ],
+          "basis": "class_d_target"
+        },
+        {
+          "item_id": "mfr_test_condition",
+          "dimension": "mfr_test_condition",
+          "field_id": "mfr_test_condition",
+          "required_value_ref": "/synthetic_inputs/candidate_lines/requirements_additions/mfr_test_condition",
+          "record_selectors": [
+            [
+              "TECHNICAL_FIELD",
+              "value"
+            ]
+          ],
+          "basis": "class_d_target"
+        },
+        {
+          "item_id": "additives_required",
+          "dimension": "additives_required",
+          "field_id": "additives_required",
+          "required_value_ref": "/synthetic_inputs/candidate_lines/requirements_additions/additives_required",
+          "record_selectors": [
+            [
+              "TECHNICAL_FIELD",
+              "value"
+            ]
+          ],
+          "basis": "class_d_target"
+        },
+        {
+          "item_id": "tooling_required",
+          "dimension": "tooling_required",
+          "field_id": "tooling_required",
+          "required_value_ref": "/synthetic_inputs/candidate_lines/requirements_additions/tooling_required",
+          "record_selectors": [
+            [
+              "TECHNICAL_FIELD",
+              "value"
+            ]
+          ],
+          "basis": "class_d_target"
+        },
+        {
+          "item_id": "application",
+          "dimension": "application",
+          "field_id": "application",
+          "required_value_ref": "/synthetic_inputs/candidate_lines/requirements_additions/application",
+          "record_selectors": [
+            [
+              "TECHNICAL_FIELD",
+              "value"
+            ]
+          ],
+          "basis": "class_d_target"
+        }
+      ],
+      "lines": [
+        {
+          "line_id": "LINE-e403e85a85052861",
+          "reference_role": "ALTERNATIVE",
+          "technical_fact_refs": {
+            "mfr_range_g_10min": "FACT-MFR-LINE-e403e85a85052861",
+            "polymer_family": "FACT-POLYMER_FAMILY-LINE-e403e85a85052861",
+            "manufacturing_scope": "FACT-MANUFACTURING_SCOPE-LINE-e403e85a85052861",
+            "grade_family": "FACT-GRADE_FAMILY-LINE-e403e85a85052861",
+            "mfr_test_condition": "FACT-MFR_TEST_CONDITION-LINE-e403e85a85052861",
+            "additives_required": "FACT-ADDITIVES_REQUIRED-LINE-e403e85a85052861",
+            "tooling_required": "FACT-TOOLING_REQUIRED-LINE-e403e85a85052861",
+            "application": "FACT-APPLICATION-LINE-e403e85a85052861"
+          },
+          "capacity_ref": "FACT-CAP-LINE-e403e85a85052861",
+          "qualification_ref": "FACT-QUAL-LINE-e403e85a85052861",
+          "window_ref": "FACT-WINDOW-LINE-e403e85a85052861",
+          "effort_ref": "FACT-EFF-LINE-e403e85a85052861",
+          "capacity_ceiling_ref": null,
+          "availability_basis": "DECLARED_ALLOCATION",
+          "allocation_ref": "FACT-ALLOC-LINE-e403e85a85052861"
+        },
+        {
+          "line_id": "LINE-cb9a42384c3523ec",
+          "reference_role": "ALTERNATIVE",
+          "technical_fact_refs": {
+            "mfr_range_g_10min": "FACT-MFR-LINE-cb9a42384c3523ec",
+            "polymer_family": "FACT-POLYMER_FAMILY-LINE-cb9a42384c3523ec",
+            "manufacturing_scope": "FACT-MANUFACTURING_SCOPE-LINE-cb9a42384c3523ec",
+            "grade_family": "FACT-GRADE_FAMILY-LINE-cb9a42384c3523ec",
+            "mfr_test_condition": "FACT-MFR_TEST_CONDITION-LINE-cb9a42384c3523ec",
+            "additives_required": "FACT-ADDITIVES_REQUIRED-LINE-cb9a42384c3523ec",
+            "tooling_required": "FACT-TOOLING_REQUIRED-LINE-cb9a42384c3523ec",
+            "application": "FACT-APPLICATION-LINE-cb9a42384c3523ec"
+          },
+          "capacity_ref": "FACT-CAP-LINE-cb9a42384c3523ec",
+          "qualification_ref": "FACT-QUAL-LINE-cb9a42384c3523ec",
+          "window_ref": "FACT-WINDOW-LINE-cb9a42384c3523ec",
+          "effort_ref": "FACT-EFF-LINE-cb9a42384c3523ec",
+          "capacity_ceiling_ref": null,
+          "availability_basis": "DECLARED_ALLOCATION",
+          "allocation_ref": "FACT-ALLOC-LINE-cb9a42384c3523ec"
+        }
+      ]
     }
   }
 }

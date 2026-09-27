@@ -24,11 +24,13 @@ def _steel() -> dict:
 
 
 def test_supported_versions_are_2_0_0_and_2_1_0() -> None:
-    assert SUPPORTED_SCENARIO_CONTRACT_VERSIONS == frozenset({"2.0.0", "2.1.0"})
+    assert SUPPORTED_SCENARIO_CONTRACT_VERSIONS == frozenset(
+        {"2.0.0", "2.1.0", "2.2.0"}
+    )
     validate_simulation_contract(_steel())
 
 
-@pytest.mark.parametrize("version", ["1.1.0", "2.2.0"])
+@pytest.mark.parametrize("version", ["1.1.0", "2.3.0"])
 def test_unsupported_versions_rejected(version: str) -> None:
     scenario = _steel()
     scenario["scenario_version"] = version

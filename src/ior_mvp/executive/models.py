@@ -7,6 +7,9 @@ from typing import Literal, Self
 
 from pydantic import Field, model_validator
 
+from .line_models import (
+    CandidateDiagnostic, LineDiagnostic, unavailable_candidates, unavailable_lines,
+)
 from .provenance_models import (
     ClaimReference,
     ClaimStatus,
@@ -354,6 +357,8 @@ class ExecutiveCase(FrozenModel):
     claims: tuple[ClaimReference, ...]
     evidence_index: tuple[EvidenceReference, ...]
     authority: tuple[AuthorityReference, ...]
+    candidate_discovery: CandidateDiagnostic = Field(default_factory=unavailable_candidates)
+    line_assessment: LineDiagnostic = Field(default_factory=unavailable_lines)
 
     @model_validator(mode="after")
     def _validate_contract(self) -> Self:
@@ -418,4 +423,25 @@ class ExecutiveCase(FrozenModel):
                     raise ValueError(
                         "simulated claim evidence metadata is inconsistent"
                     )
+        if self.candidate_discovery.available != self.line_assessment.available:
+            raise ValueError("candidate and line diagnostics must share availability")
+        if self.candidate_discovery.available:
+            scenario_id = self.decisions.simulated.scenario_id
+            if (
+                self.decisions.simulated.availability is not AvailabilityStatus.AVAILABLE
+                or self.candidate_discovery.scenario_id != scenario_id
+                or self.line_assessment.scenario_id != scenario_id
+                or self.candidate_discovery.opportunity_id != self.opportunity.opportunity_id
+            ):
+                raise ValueError("diagnostic scenario differs from executive decision")
+            entity_ids = tuple(row.entity_id for row in self.candidate_discovery.rows)
+            if len(entity_ids) != len(set(entity_ids)):
+                raise ValueError("candidate entity ids must be unique")
+            discovered_lines = {
+                row.entity_id for row in self.candidate_discovery.rows
+                if row.entity_kind == "LINE"
+            }
+            assessed_lines = {row.line_id for row in self.line_assessment.rows}
+            if discovered_lines != assessed_lines:
+                raise ValueError("line diagnostic membership differs from discovery")
         return self

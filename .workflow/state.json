@@ -102,7 +102,7 @@
     "Rotate any credentials in the local git-ignored .env (never tracked, never packaged, never read by the Supervisor).",
     "Optionally move the repository to a GitHub plan with rulesets so the four CI checks become required checks (ADR-007)."
   ],
-  "last_updated": "2026-09-02T07:15:00+03:00",
+  "last_updated": "2026-09-27T00:22:55.372921+00:00",
   "history": [
     {
       "at": "2026-09-02T01:05:00+03:00",
@@ -1308,5 +1308,152 @@
     "prior_failure": "One frozen API-shape fixture failed; unchanged fixture now passes after public-shape correction.",
     "independent_implementation_approval": null,
     "complete_mvp": false
+  },
+  "ministry_decision_m_20260926": {
+    "state": "IMPLEMENTATION_ACCEPTED_READY_FOR_GITHUB_DELIVERY",
+    "branch": "slice/ministry-decision",
+    "base": "bbcfe7836eb4e3c3e71ddd6b95986c45324267d4",
+    "adr": "ADR-033",
+    "records": ".workflow/slices/ministry-decision/",
+    "plan_sha256": "f88287e2f71e54f6ac91ec4635edb1138fb17a160ff59c38e26a396e472868d8",
+    "independent_implementation_approval": {
+      "verdict": "APPROVE_READY_FOR_CI",
+      "review": ".workflow/slices/ministry-decision/delivery-evidence/local-m1-20260927/m1-final-review.md",
+      "sha256": "e86ab22d15da55b1bd6df7fa2453ea4598a7687123723205101dd322087d9a61",
+      "model": "claude-opus-5-5",
+      "effort": "high",
+      "client": "Claude CLI",
+      "material_findings_open": 0
+    },
+    "generation": {
+      "status": "SEVEN_STOCK_GATES_PASS",
+      "projection_id": "GRAPH-SAU-2026-09-12-2e9705ef7423",
+      "engine_run_id": "ENGINE-92a34ff1f60e",
+      "nodes": 1160,
+      "edges": 1248,
+      "snapshot_members": 740,
+      "authority_members": 20,
+      "projection_sha256": "c108e4c18efd9f3aedb6bf03c0db85d8411c55f282dff574f5c9997572323442",
+      "generated_outputs_changed": 6,
+      "canonical_capture": null,
+      "binding_note": "Historical seven-gate pass on the pre-correction source; current source has changed and requires the separately approved regeneration gate."
+    },
+    "post_generation_source_correction": {
+      "finding": "P06 NOT_REQUIRED tooling emitted a fictitious technical-enrichment request despite current=false and needed=false.",
+      "source_path": "src/ior_mvp/candidate_finding_rules.py",
+      "before_sha256": "02bacf211f934186f15d31e11d2e8d930cea13719b495136f45812a591576ecc",
+      "after_sha256": "6b3cf80974809588e6d8c9c47286b4c4effb92f25b347c80eb857234967c8eb3",
+      "scope": "Only the _line_findings request predicate; comparator status and operands, source facts, attribution requests and formal decisions unchanged in focused tests.",
+      "regeneration": "SEVEN_STOCK_GATES_PASS_ON_CORRECTED_SOURCE",
+      "independent_implementation_review": "PENDING"
+    },
+    "corrected_generation": {
+      "status": "SEVEN_STOCK_GATES_PASS",
+      "result_sha256": "2e72babae0cb83daa316f04baa607fcdc60cfa15a0d2050eb1fcd8aaedd1ae85",
+      "projection_id": "GRAPH-SAU-2026-09-12-b325de92eeec",
+      "engine_run_id": "ENGINE-77041b07efbb",
+      "nodes": 1160,
+      "edges": 1248,
+      "snapshot_members": 742,
+      "authority_members": 20,
+      "generated_outputs_changed": 6,
+      "visual_baseline_entries": 128,
+      "canonical_capture": null,
+      "strict_1440_steel_geometry": "EN_AR_PASS; isolated CSS flex-grow removal fails protected EN right and AR left small anchors with button boxes unchanged"
+    },
+    "source_readiness": ".workflow/slices/ministry-decision/SOURCE-READINESS.md",
+    "source_gate_note": "Current M1 source/artifact/local gates complete: 4198 Python, 881 functional/eight visual, seven strict R1 commands, 88 feeds/22 contexts and one graph/recovery gate. Independent Claude approval and delegated implementation/clarity acceptance recorded. Prior c984 rejection remains historical; GitHub and M live Aura pending.",
+    "clarity_acceptance_procedure": ".workflow/slices/ministry-decision/completion.md; existing owner replacement applied once, actual Astra Max rendered assessment included in the same Claude implementation review and accepted under delegation; no human/Ministry endorsement",
+    "f_dependency": {
+      "pr": 42,
+      "merge_commit": "bbcfe7836eb4e3c3e71ddd6b95986c45324267d4",
+      "pr_ci_run": 36228437606,
+      "main_ci_run": 36231946750,
+      "required_jobs": "six SUCCESS on each run"
+    },
+    "remaining": [
+      "PR and all six required hosted checks",
+      "Squash merge and all six green main jobs",
+      "Delivered-runtime M Aura binding/preflight/recovery/concrete GO/live result and acceptance",
+      "Then S20, S21 and S22 including route-8 disposition and final release"
+    ],
+    "record_candidate_tree": null,
+    "complete_mvp": false,
+    "final_local_g13_successor": {
+      "status": "LOCAL_CHECKS_PASS_FULL_BROWSER_AND_FINAL_APPROVAL_PENDING",
+      "projection_id": "GRAPH-SAU-2026-09-12-c9841fe8e850",
+      "engine_run_id": "ENGINE-941521e7a5e5",
+      "nodes": 1160,
+      "edges": 1248,
+      "snapshot_members": 746,
+      "authority_members": 20,
+      "visual_baseline_entries": 140,
+      "visual_source_inputs": 250,
+      "images_byte_equal_to_previous_capture": 140,
+      "visual_baseline_subtree": "9dea0ee08c8c6f198bdf1f0fc904033874685a7a",
+      "pytest_passed": 4184,
+      "pytest_warnings": 1,
+      "strict_r1": "PASS_WITH_WHOLE_M_O_EQUALS_DELIVERED_F_N",
+      "local_graph_gate": "9_GRAPH_1_UI_2_UNAVAILABLE_PASS;EXPECTED_AURA_SKIP",
+      "local_graph_runtime": "external1G_initial_and_max_heap;512MiB_pagecache;unchanged2s_timeout_no_retry;stock_hosted_CI_required",
+      "retained_graph_restored": "GRAPH-SAU-2026-09-12-461bf4840962",
+      "protected_indexes_preserved": 64,
+      "evidence": ".workflow/slices/ministry-decision/test_evidence.md",
+      "binding": ".workflow/slices/ministry-decision/delivery-evidence/local-g13-20260926/candidate-binding.json",
+      "full_browser": "ACTIVE_AT_PREPARATION_NO_RESULT_CLAIMED",
+      "live_aura": "PENDING_FINAL_DELIVERED_RUNTIME_AND_OPERATIONAL_GO",
+      "historical_disposition": "Local gates later passed; final Claude REJECT for M1 public PP attribution. Preserved dated fields are not current status."
+    },
+    "m1_successor": {
+      "status": "INDEPENDENTLY_APPROVED_DELEGATED_ACCEPTANCE_READY_FOR_CI",
+      "proof_commit": "918b8fea3e618b23f27f3acf22fcc0162f2cab97",
+      "candidate_tree": "cf666ced680295073c383dd5046021296e58b361",
+      "source_files": 3546,
+      "projection_id": "GRAPH-SAU-2026-09-12-0a0f601330ca",
+      "engine_run_id": "ENGINE-fa61c740067a",
+      "nodes": 1160,
+      "edges": 1248,
+      "graph_inputs": 240,
+      "snapshot_members": 748,
+      "authority_members": 20,
+      "images": 140,
+      "visual_inputs": 250,
+      "images_unchanged": 138,
+      "images_changed_inspected": 2,
+      "baseline_tree": "9dee92662f04a6de8063431d39e8d1c267f96512",
+      "pytest_passed": 4198,
+      "pytest_warnings": 1,
+      "local_commands_passed": 9,
+      "strict_r1": "PASS_WHOLE_M_O_EQUALS_DELIVERED_F_N",
+      "reference_feed_equal": 88,
+      "reference_contexts": 22,
+      "full_browser": {
+        "functional_passed": 881,
+        "visual_passed": 8,
+        "seconds": 2483.326
+      },
+      "local_graph": {
+        "graph_passed": 9,
+        "ui_passed": 1,
+        "unavailable_passed": 2,
+        "expected_aura_skip": 1,
+        "retained_projection_restored": "GRAPH-SAU-2026-09-12-461bf4840962",
+        "protected_indexes_preserved": 66,
+        "external_heap_initial_and_max": "1G",
+        "source_timeouts_retries_assertions": "unchanged"
+      },
+      "independent_implementation_approval": {
+        "verdict": "APPROVE_READY_FOR_CI",
+        "review": ".workflow/slices/ministry-decision/delivery-evidence/local-m1-20260927/m1-final-review.md",
+        "sha256": "e86ab22d15da55b1bd6df7fa2453ea4598a7687123723205101dd322087d9a61",
+        "model": "claude-opus-5-5",
+        "effort": "high",
+        "client": "Claude CLI",
+        "material_findings_open": 0
+      },
+      "live_aura": "PENDING_DELIVERED_SUBJECT",
+      "evidence": ".workflow/slices/ministry-decision/test_evidence.md",
+      "delegated_acceptance": ".workflow/slices/ministry-decision/delivery-evidence/local-m1-20260927/delegated-implementation-acceptance.json"
+    }
   }
 }

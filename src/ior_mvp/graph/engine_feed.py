@@ -246,19 +246,40 @@ def adjacency_explanation(
         )
     ]
     rows.sort(key=lambda edge: edge.source)
-    first = rows[0].properties if rows else {}
+    nodes = _node_index(projection)
+    subject = opportunity_id if mode == "public" else scenario_id
+    reference = nodes.get(f"ENGINE-EVIDENCE-{subject}-{mode}")
+    ref = reference.properties if reference is not None else {}
+    has_reference = ref.get("attribution_scope") == "REFERENCE_CASE"
+    count = ref.get("r9s_qualifying_signal_count") if has_reference else None
     return {
         "opportunity_id": opportunity_id,
         "mode": mode,
         "scenario_id": scenario_id,
-        "fired": first.get("fired"),
-        "execution": first.get("execution"),
-        "same_process_family": first.get("same_process_family"),
-        "qualifying_signal_count": int(
-            first.get("qualifying_signal_count") or 0
+        "fired": ref.get("r9s_fired") if has_reference else None,
+        "execution": ref.get("r9s_execution") if has_reference else None,
+        "same_process_family": (
+            ref.get("r9s_same_process_family") if has_reference else None
         ),
-        "result_code": first.get("result_code"),
+        "qualifying_signal_count": int(count) if isinstance(count, int) else None,
+        "result_code": ref.get("r9s_result_code") if has_reference else None,
         "producer_ids": [edge.source for edge in rows],
+        "producer_rows": {
+            edge.source: {
+                "fired": edge.properties.get("fired"),
+                "execution": edge.properties.get("execution"),
+                "same_process_family": edge.properties.get("same_process_family"),
+                "qualifying_signal_count": edge.properties.get(
+                    "qualifying_signal_count"
+                ),
+                "attribution_scope": edge.properties.get("attribution_scope"),
+                "result_code": edge.properties.get("result_code"),
+                "evidence_ids": sorted(str(value) for value in edge.properties.get("evidence_ids", [])),
+                "signal_evidence_ids": list(edge.properties.get("signal_evidence_ids", [])),
+                "signals": list(edge.properties.get("signals", [])),
+            }
+            for edge in rows
+        },
         "evidence_ids": sorted(
             {
                 str(value)

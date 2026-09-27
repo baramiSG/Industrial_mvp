@@ -203,9 +203,15 @@ def test_available_view_returns_governed_nodes_and_relationships(
         adjacency.source,
         adjacency.target,
     }
-    assert len(payload["edges"]) == 1
-    assert payload["edges"][0]["id"] == adjacency.key
-    assert payload["edges"][0]["type"] == "ADJACENT_TO"
+    selected_adjacency = [edge for edge in payload["edges"]
+                          if edge["type"] == "ADJACENT_TO"]
+    assert len(selected_adjacency) == 1
+    assert selected_adjacency[0]["id"] == adjacency.key
+    assert all(edge["type"] in {"ADJACENT_TO", "PRODUCED_BY", "USES_PROCESS", "CERTIFIED_TO"}
+               for edge in payload["edges"])
+    assert all(edge["provenance"]["scenario_id"] == "PUBLIC"
+               and edge["provenance"]["synthetic_flag"] is False
+               for edge in payload["edges"])
 
 
 def test_s16b_query_failure_after_available_status_fails_closed(

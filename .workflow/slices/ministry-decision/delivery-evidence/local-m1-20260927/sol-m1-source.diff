@@ -1,0 +1,457 @@
+--- a/docs/ARCHITECTURE_DECISIONS.md
++++ b/docs/ARCHITECTURE_DECISIONS.md
+@@ -1731,3 +1731,11 @@
+ The released G1.2 correction is bounded by `G1-IMPLEMENTATION-RELEASE.json` and the independently approved `PLAN-CORRECTION-GRAPH-INTERACTION-3.md` with its incorporated G1/G1.1 plans. Before editing scenario data, we authorize exactly the `values.application` leaf of five existing `QUALIFICATION` facts in each of the two mirrored scenario 2.2 registers: replace the ambiguous `declared` token by fact ID, with the three Steel-line facts scoped to `coastal construction panels` and the two Resin-line facts scoped to `general rigid packaging` in **both** register copies. Scope follows the line identity; the two registers remain identical. Every other fact leaf, qualification status/window, line, public snapshot, golden expectation, v2.0 archive, and decision rule remains governed by its previous contract. This is a Manifest §7.3 scenario correction; the synthetic subtree pin is determined only from the actual resulting tree by the coordinator.
+ 
+ The source rule uses the typed `customer_qualification` requirement and exact nonempty application for either positive or negative conclusions. Positive support additionally requires window coverage; an exact negative preserves its known-zero quantity and reports a separate window mismatch. Missing qualification remains visible. The same released correction admits distinct visible graph routes for repeated relationships, a focusable scoped-fact region, exact semantic passport selectors, selected P05 operands, and exact reference-only dossier PDF assertions. It makes no public decision, threshold, generator, or authorization change. Generated graph, manifest, canonical visual output, final proof, and independent implementation acceptance remain subsequent gates.
++
++### ADR-033 M1 public producer family correction — 2026-09-26
++
++The prior public graph compared each producer's `process_family` label to the opportunity's `sector_profile`. Those are different vocabularies: the frozen PP disclosures say `polypropylene`, while HS 390210 belongs to the governed `polypropylene_primary_forms` family within the broader `technical_plastics` sector. This produced a false negative for all three PP producer rows. Methodology §4 R9-S requires the same product/process family plus a separate attributed signal; §14 records PP family presence without resolving exact grade, local availability or qualification. This is an observable graph correction under Manifest §7, not a claim of new qualified supply or a behavior-preserving refactor.
++
++For this bounded correction, the graph translates only three exact, case-sensitive source labels: `coated_steel` → `coated_steel`, `polypropylene` → `polypropylene_primary_forms`, and `fabricated_aluminium` → `fabricated_aluminium`. The third label preserves the two existing aluminium producer rows found by the actual repository case loader. Other labels remain unmapped even if they happen to equal a configured family ID; there is no generic identity fallback or sector fallback. The graph resolves the target's exact HS6 through the existing family resolver and validated `config/product_families.v1.yaml` loaded from the selected build root. A known source/target pair compares canonical family IDs; an unmapped source or unavailable target stays null in the scoped row and passes `UNAVAILABLE` to the unchanged R9-S predicate. Shared evidence never becomes a producer-owned signal: SABIC retains its sole `P-SABIC` adjacent-output signal, while Advanced and Tasnee retain zero sole-owned signals. The opportunity reference R9-S ledger, hard gates, formal decisions, economics and routes do not change.
++
++The graph input closure now requires the exact unchanged `src/ior_mvp/screening/__init__.py` and `src/ior_mvp/screening/config.py` files as `ENGINE_IMPLEMENTATION` inputs, because importing the resolver executes both. Their absence fails closed, and their bytes affect generated identity. No other screening module is admitted. The DOCX, other Core files, operating configuration, public/synthetic/golden evidence and rule implementation remain unchanged. The source correction precedes generated graph, manifest, visual capture, fresh freeze and independent implementation review; their actual identities and results must be recorded after the stock gates. If the regenerated token fails strict R1 geometry, the coordinator stops without an M-A4 waiver under the independent M1 plan review.
+--- a/docs/core/02_METHODOLOGY_IMPLEMENTATION_MAP.md
++++ b/docs/core/02_METHODOLOGY_IMPLEMENTATION_MAP.md
+@@ -318,6 +318,7 @@
+ | Governing clause | Implementation home | Required proof |
+ |---|---|---|
+ | §4 R9-S; §6.0 | `candidate_discovery.py` applies the unchanged R9-S screen per attributed plant and composes finite record findings; `rules.py` retains the predicate | Same-source/subject signals, no double-use of a prerequisite, no opportunity-wide producer fanout, ninth-company mutation |
++| §4 R9-S; §14 public producer evidence | `graph.projection._public_analysis` resolves the exact HS6 through the validated, build-root `product_families.v1.yaml`; `public_producer_adjacency` translates only the three exact reviewed source labels `coated_steel`, `polypropylene` and `fabricated_aluminium` to governed family IDs before calling unchanged `evaluate_r9s` per producer | PP SABIC's sole `P-SABIC` signal fires while Advanced/Tasnee receive no shared signal; steel, aluminium and the reference ledger remain unchanged; missing/unmapped family is null/DISABLED rather than false; 3902 primary forms differs from 3920 conversion; both exact `screening/{__init__,config}.py` dependencies are required graph inputs |
+ | §6.0; §6.4 | `candidate_register.py`, `line_contract.py`, `line_comparison.py` validate scenario-local records and guard optional line comparison | Exact reference/period/requirement/field boundaries; no-enrichment and unknown-supply tests; Test 2 states, K, D* and route gates unchanged |
+ | §10.2; evidence boundary | Scenario diagnostics, typed executive projection and graph context preserve DIRECT_RECORD, REVIEWED_INFERENCE, ENGINEERING_DECLARATION or UNKNOWN separately from evidence class | Public omission, Class-D labels, exact source membership, cross-scenario isolation and contradiction negatives |
+ | §§6.0, 10.3 | Bilingual executive Q3 record journey and four-slot next action | Company→plant→line→finding→record scope and EN/AR browser checks |
+--- a/src/ior_mvp/graph/projection.py
++++ b/src/ior_mvp/graph/projection.py
+@@ -26,6 +26,13 @@
+ )
+ from ior_mvp.route_hypotheses import BROWNFIELD_ROUTE_CODE
+ from ior_mvp.rules import evaluate_r9s, evaluate_rules
++from ior_mvp.screening.config import (
++    _load as _load_family_yaml,
++    family_for_hs6,
++    product_families_config,
++    validate_product_families,
++)
++from ior_mvp.trade_metrics import UNAVAILABLE
+ 
+ from .model import (
+     GraphEdge,
+@@ -226,6 +233,27 @@
+ 
+ def discover_inputs(root: Path = PROJECT_ROOT) -> list[dict[str, Any]]:
+     """Return every governed file that can influence this projection."""
++    required_family_helpers = (
++        root / "src/ior_mvp/screening/__init__.py",
++        root / "src/ior_mvp/screening/config.py",
++    )
++    for path in required_family_helpers:
++        if not path.is_file():
++            raise GraphProjectionError(
++                f"Required graph implementation input is missing: {path.relative_to(root)}"
++            )
++    engine_implementation = (
++        *required_family_helpers,
++        *(
++            path
++            for directory in (
++                root / "src/ior_mvp",
++                root / "src/ior_mvp/cases",
++                root / "src/ior_mvp/graph",
++            )
++            for path in directory.glob("*.py")
++        ),
++    )
+     groups: tuple[tuple[str, Iterable[Path]], ...] = (
+         (
+             "PUBLIC_SNAPSHOT",
+@@ -291,18 +319,7 @@
+                 *(root / "config").glob("*.v1.yaml"),
+             ),
+         ),
+-        (
+-            "ENGINE_IMPLEMENTATION",
+-            (
+-                path
+-                for directory in (
+-                    root / "src/ior_mvp",
+-                    root / "src/ior_mvp/cases",
+-                    root / "src/ior_mvp/graph",
+-                )
+-                for path in directory.glob("*.py")
+-            ),
+-        ),
++        ("ENGINE_IMPLEMENTATION", engine_implementation),
+     )
+     rows: list[dict[str, Any]] = []
+     seen: set[str] = set()
+@@ -1896,6 +1913,13 @@
+     return selected
+ 
+ 
++_PUBLIC_SOURCE_FAMILY_IDS = {
++    "coated_steel": "coated_steel",
++    "polypropylene": "polypropylene_primary_forms",
++    "fabricated_aluminium": "fabricated_aluminium",
++}
++
++
+ def public_producer_adjacency(
+     analysis: Mapping[str, Any],
+ ) -> list[dict[str, Any]] | None:
+@@ -1915,16 +1939,24 @@
+         for signal in inputs.get("coarse_adjacency_signals", [])
+         if isinstance(signal, Mapping)
+     ]
+-    sector = inputs.get("sector_profile")
++    target_family_id = inputs.get("target_family_id")
+     rows: list[dict[str, Any]] = []
+     for record in records:
+-        family = record.get("process_family")
++        source_label = record.get("process_family")
++        source_family_id = (
++            _PUBLIC_SOURCE_FAMILY_IDS.get(source_label)
++            if isinstance(source_label, str)
++            else None
++        )
++        same_family = (
++            source_family_id == target_family_id
++            if source_family_id is not None and isinstance(target_family_id, str)
++            else UNAVAILABLE
++        )
+         owned_signals = _sole_record_signals(record, records, signals)
+         result = evaluate_r9s(
+             {
+-                "same_process_family": (
+-                    family == sector if isinstance(family, str) else False
+-                ),
++                "same_process_family": same_family,
+                 "coarse_adjacency_signals": owned_signals,
+                 "unresolved_hard_gates": [],
+                 "profile_hard_gates": {},
+@@ -1949,7 +1981,11 @@
+                 ],
+                 "fired": result.get("fired"),
+                 "execution": result.get("execution"),
+-                "same_process_family": metrics.get("same_process_family"),
++                "same_process_family": (
++                    metrics["same_process_family"]
++                    if isinstance(metrics.get("same_process_family"), bool)
++                    else None
++                ),
+                 "qualifying_signal_count": metrics.get("qualifying_signal_count"),
+                 "result_code": result.get("result_code"),
+             }
+@@ -1961,6 +1997,7 @@
+     case: Mapping[str, Any],
+     *,
+     shared_enabler: dict[str, Any] | None = None,
++    product_families: dict[str, Any] | None = None,
+ ) -> dict[str, Any]:
+     clean_case = {
+         key: deepcopy(value)
+@@ -1980,6 +2017,10 @@
+         capability,
+         shared_enabler=shared_enabler,
+     )
++    governed_families = product_families_config() if product_families is None else product_families
++    validate_product_families(governed_families)
++    hs6 = clean_case["opportunity"].get("hs6")
++    target_family = family_for_hs6(hs6, governed_families) if isinstance(hs6, str) else None
+     r12 = next(row for row in rules if row["rule_id"] == "R12")
+     return {
+         "opportunity_id": clean_case["opportunity"]["id"],
+@@ -1992,6 +2033,9 @@
+         "evidence_needs": r12["metrics"]["evidence_needs"],
+         "attribution_inputs": {
+             "sector_profile": clean_case["opportunity"]["sector_profile"],
++            "target_family_id": (
++                target_family["family_id"] if target_family is not None else None
++            ),
+             "producer_evidence": deepcopy(
+                 clean_case["domestic_capability"].get("producer_evidence", [])
+             ),
+@@ -2046,6 +2090,8 @@
+     from .derived import project_engine_outputs
+ 
+     inputs = discover_inputs(root)
++    product_families = _load_family_yaml(root / "config/product_families.v1.yaml")
++    validate_product_families(product_families)
+     cases, briefs = _load_repository_cases(root)
+     scenarios = {
+         str(record["opportunity_id"]): record
+@@ -2084,6 +2130,7 @@
+     analyses: dict[tuple[str, str], dict[str, Any]] = {
+         (opportunity_id, "public"): _public_analysis(
+             case,
++            product_families=product_families,
+             shared_enabler=shared_enabler_inputs(
+                 projection,
+                 opportunity_id,
+--- a/tests/test_graph_artifact.py
++++ b/tests/test_graph_artifact.py
+@@ -1,7 +1,11 @@
+ from __future__ import annotations
+ 
+ import json
++import hashlib
+ from copy import deepcopy
++from pathlib import Path
++
++import yaml
+ 
+ import pytest
+ 
+@@ -72,6 +76,114 @@
+     assert "config/graph_views.v1.yaml" in paths
+ 
+ 
++_FAMILY_IMPLEMENTATION_INPUTS = {
++    "src/ior_mvp/screening/__init__.py",
++    "src/ior_mvp/screening/config.py",
++}
++
++
++def _alternate_graph_root(tmp_path: Path) -> Path:
++    root = tmp_path / "alternate"
++    root.mkdir()
++    for directory in ("data", "docs"):
++        (root / directory).symlink_to(PROJECT_ROOT / directory, target_is_directory=True)
++    config = root / "config"
++    config.mkdir()
++    for path in (PROJECT_ROOT / "config").iterdir():
++        target = config / path.name
++        if path.name == "product_families.v1.yaml":
++            target.write_bytes(path.read_bytes())
++        else:
++            target.symlink_to(path, target_is_directory=path.is_dir())
++    package = root / "src/ior_mvp"
++    package.mkdir(parents=True)
++    for path in (PROJECT_ROOT / "src/ior_mvp").glob("*.py"):
++        (package / path.name).symlink_to(path)
++    for directory in ("cases", "graph"):
++        (package / directory).symlink_to(
++            PROJECT_ROOT / "src/ior_mvp" / directory, target_is_directory=True
++        )
++    screening = package / "screening"
++    screening.mkdir()
++    for name in ("__init__.py", "config.py"):
++        (screening / name).symlink_to(PROJECT_ROOT / "src/ior_mvp/screening" / name)
++    return root
++
++
++def test_graph_inputs_bind_exact_required_screening_family_helpers() -> None:
++    rows = discover_inputs(PROJECT_ROOT)
++    by_path = {row["path"]: row for row in rows}
++    assert len(rows) == 240
++    assert {
++        path for path in by_path if path.startswith("src/ior_mvp/screening/")
++    } == _FAMILY_IMPLEMENTATION_INPUTS
++    for path in _FAMILY_IMPLEMENTATION_INPUTS:
++        assert by_path[path]["kind"] == "ENGINE_IMPLEMENTATION"
++        assert by_path[path]["sha256"] == hashlib.sha256(
++            (PROJECT_ROOT / path).read_bytes()
++        ).hexdigest()
++
++
++@pytest.mark.parametrize("missing", sorted(_FAMILY_IMPLEMENTATION_INPUTS))
++def test_graph_inputs_fail_closed_when_family_helper_is_missing(tmp_path: Path, missing: str) -> None:
++    root = _alternate_graph_root(tmp_path)
++    (root / missing).unlink()
++    with pytest.raises(ValueError, match="Required graph implementation input"):
++        discover_inputs(root)
++
++
++@pytest.mark.parametrize("changed", sorted(_FAMILY_IMPLEMENTATION_INPUTS))
++def test_changed_family_helper_changes_graph_input_identity(tmp_path: Path, changed: str) -> None:
++    root = _alternate_graph_root(tmp_path)
++    baseline = discover_inputs(root)
++    target = root / changed
++    target.unlink()
++    target.write_bytes((PROJECT_ROOT / changed).read_bytes() + b"\n# isolated graph-input mutation\n")
++    mutated = discover_inputs(root)
++    before = {row["path"]: row for row in baseline}
++    after = {row["path"]: row for row in mutated}
++    assert len(before) == len(after) == 240
++    assert {path for path in before if before[path] != after[path]} == {changed}
++    assert projection_id(baseline, as_of="2026-09-26") != projection_id(mutated, as_of="2026-09-26")
++
++
++def test_graph_build_uses_validated_alternate_root_family_config(
++    tmp_path: Path, projection: GraphProjection, monkeypatch: pytest.MonkeyPatch
++) -> None:
++    from ior_mvp.graph import projection as graph_projection
++
++    root = _alternate_graph_root(tmp_path)
++    original_case_loader = graph_projection._load_repository_cases
++    # Case-brief paths require real in-root files; only configuration differs here.
++    monkeypatch.setattr(
++        graph_projection, "_load_repository_cases",
++        lambda _root: original_case_loader(PROJECT_ROOT),
++    )
++    config_path = root / "config/product_families.v1.yaml"
++    config = yaml.safe_load(config_path.read_text(encoding="utf-8"))
++    config["families"]["polypropylene_primary_forms"]["hs4_headings"] = []
++    config["families"]["polypropylene_primary_forms"]["status"] = "MEMBERSHIP_UNAVAILABLE"
++    config["families"]["technical_plastics_conversion"]["hs4_headings"].append("3902")
++    config_path.write_text(yaml.safe_dump(config, sort_keys=False), encoding="utf-8")
++    changed = build_repository_projection(root)
++
++    def sabic_family(graph: GraphProjection) -> bool | None:
++        rows = [edge for edge in graph.edges if edge.type == "ADJACENT_TO"
++                and edge.source == "COMPANY-f2d406af94a8aac1"
++                and edge.target == "SAU-H0-390210"
++                and edge.properties.get("attribution_scope") == "PRODUCER_DISCLOSURE"]
++        assert len(rows) == 1
++        return rows[0].properties["same_process_family"]
++
++    assert sabic_family(projection) is True
++    assert sabic_family(changed) is False
++    assert projection.projection_id != changed.projection_id
++    config["metadata"]["version"] = "invalid"
++    config_path.write_text(yaml.safe_dump(config, sort_keys=False), encoding="utf-8")
++    with pytest.raises(ValueError, match="product-family version"):
++        build_repository_projection(root)
++
++
+ def test_two_builds_are_byte_identical() -> None:
+     assert canonical_bytes(
+         build_repository_projection(PROJECT_ROOT)
+--- a/tests/test_graph_projection.py
++++ b/tests/test_graph_projection.py
+@@ -898,6 +898,134 @@
+     assert explanation["producer_rows"][unicoil]["qualifying_signal_count"] == 4
+ 
+ 
++def test_public_pp_producer_family_and_sole_owned_signals() -> None:
++    from ior_mvp.graph.engine_feed import adjacency_explanation
++
++    graph = build_repository_projection(PROJECT_ROOT)
++    result = adjacency_explanation(graph, "SAU-H0-390210", branch="public")
++    expected = {
++        "COMPANY-f2d406af94a8aac1": (True, True, 1, "ADJACENT_PLANT_WITH_SIGNALS", ["P-SABIC"]),
++        "COMPANY-0f8e69531f415144": (True, False, 0, "NO_DEFENSIBLE_SIGNAL", []),
++        "COMPANY-f3a50c477f158420": (True, False, 0, "NO_DEFENSIBLE_SIGNAL", []),
++    }
++    assert set(result["producer_rows"]) == set(expected)
++    for producer_id, (family, fired, count, code, signal_ids) in expected.items():
++        row = result["producer_rows"][producer_id]
++        assert row["same_process_family"] is family
++        assert row["fired"] is fired
++        assert row["execution"] == "FULL"
++        assert row["qualifying_signal_count"] == count
++        assert row["result_code"] == code
++        assert row["signal_evidence_ids"] == signal_ids
++        assert {item["evidence_ids"][0] for item in row["signals"]} == set(signal_ids)
++        assert row["attribution_scope"] == "PRODUCER_DISCLOSURE"
++    assert result["fired"] is True
++    assert result["qualifying_signal_count"] == 2
++
++
++def test_public_aluminium_exact_producer_rows_preserve_evidence_and_scope(projection) -> None:
++    expected = {
++        "COMPANY-69d10bdb78064a59": (
++            "REL-86e0f9feaada056b9067", "P-ALUPCO-760429"
++        ),
++        "PRODUCER-public-sau-h6-760429-2026-09-12-2": (
++            "REL-514c0b83c09734657191", "P-TALCO-760429"
++        ),
++    }
++    rows = {
++        edge.source: edge
++        for edge in projection.edges
++        if edge.type == "ADJACENT_TO"
++        and edge.target == "SAU-H6-760429"
++        and edge.properties.get("attribution_scope") == "PRODUCER_DISCLOSURE"
++    }
++    assert set(rows) == set(expected)
++    for producer_id, (key, evidence_id) in expected.items():
++        edge = rows[producer_id]
++        row = edge.properties
++        assert edge.key == key
++        assert row["key"] == key
++        assert row["attribution_scope"] == "PRODUCER_DISCLOSURE"
++        assert row["evidence_ids"] == [
++            "ENGINE-EVIDENCE-SAU-H6-760429-public", evidence_id
++        ]
++        assert row["scenario_id"] == "PUBLIC"
++        assert row["synthetic_flag"] is False
++        assert row["same_process_family"] is True
++        assert row["execution"] == "FULL"
++        assert row["fired"] is False
++        assert row["qualifying_signal_count"] == 0
++        assert row["result_code"] == "NO_DEFENSIBLE_SIGNAL"
++        assert row["signal_evidence_ids"] == []
++        assert row["signals"] == []
++
++
++def test_public_family_aliases_cover_actual_repository_case_loader_inputs() -> None:
++    from ior_mvp.graph.projection import (
++        _PUBLIC_SOURCE_FAMILY_IDS,
++        _load_repository_cases,
++    )
++
++    cases, _briefs = _load_repository_cases(PROJECT_ROOT)
++    labels_by_case = {
++        opportunity_id: [
++            record.get("process_family")
++            for record in case["domestic_capability"].get("producer_evidence", [])
++        ]
++        for opportunity_id, case in cases.items()
++    }
++    assert any(labels_by_case.values())
++    unmapped = [
++        (opportunity_id, label)
++        for opportunity_id, labels in labels_by_case.items()
++        for label in labels
++        if label not in _PUBLIC_SOURCE_FAMILY_IDS
++    ]
++    assert not unmapped
++
++
++@pytest.mark.parametrize(
++    "label",
++    ["technical_plastics", "technical_plastics_conversion", "unmapped_resin", None],
++)
++def test_public_pp_unmapped_source_family_is_unknown_not_false(label) -> None:
++    from ior_mvp.graph.projection import _public_analysis, public_producer_adjacency
++
++    public = deepcopy(get_public_case("SAU-H0-390210"))
++    public["domestic_capability"]["producer_evidence"][0]["process_family"] = label
++    rows = public_producer_adjacency(_public_analysis(public))
++    assert rows is not None
++    sabic = rows[0]
++    assert sabic["same_process_family"] is None
++    assert sabic["execution"] == "DISABLED"
++    assert sabic["fired"] is None
++    assert sabic["qualifying_signal_count"] == 1
++    assert sabic["result_code"] == "NO_DEFENSIBLE_SIGNAL"
++    assert sabic["signal_evidence_ids"] == ["P-SABIC"]
++
++
++def test_public_pp_missing_target_and_conversion_family_do_not_invent_match() -> None:
++    from ior_mvp.graph.projection import _public_analysis, public_producer_adjacency
++    from ior_mvp.screening.config import product_families_config
++
++    public = deepcopy(get_public_case("SAU-H0-390210"))
++    missing = deepcopy(product_families_config())
++    missing["families"]["polypropylene_primary_forms"]["hs4_headings"] = []
++    missing["families"]["polypropylene_primary_forms"]["status"] = "MEMBERSHIP_UNAVAILABLE"
++    unknown = public_producer_adjacency(_public_analysis(public, product_families=missing))
++    assert unknown is not None
++    assert [(row["same_process_family"], row["execution"], row["fired"]) for row in unknown] == [
++        (None, "DISABLED", None), (None, "DISABLED", None), (None, "DISABLED", None)
++    ]
++
++    public["opportunity"]["hs6"] = "392010"
++    conversion = public_producer_adjacency(_public_analysis(public))
++    assert conversion is not None
++    assert [(row["same_process_family"], row["execution"], row["fired"]) for row in conversion] == [
++        (False, "FULL", False), (False, "FULL", False), (False, "FULL", False)
++    ]
++
++
+ def test_public_producer_signal_sources_are_exact_and_inspectable() -> None:
+     from types import SimpleNamespace
+ 

@@ -5,6 +5,7 @@ import { t } from "../i18n.js";
 import { state } from "../state.js";
 import { label } from "./labels.js";
 import { valuesGrid, renderDatasets } from "./summary.js";
+import { renderPublicProducers } from "./resolution.js";
 
 export function narrative(context, simulated = false) {
   const decision = simulated ? context.simulatedAnalysis?.simulation_decision : context.publicAnalysis.real_decision;
@@ -18,7 +19,13 @@ export function renderPublicStep(step, context) {
   if (step.step_id === "SIGNAL") return `<p class="executive-callout">${esc(label("ui", "signal_note"))}</p>${valuesGrid(step.values)}${renderTradeChart({ trade: analysis.trade })}<div class="executive-rule-list">${analysis.rules.map((row) => `<details data-rule="${esc(row.rule_id)}"><summary>${code(row.rule_id)} ${narrativeEntry(row.localized[state.locale].name)} <span class="exec-chip exec-${esc(row.execution)}">${esc(executionLabel(row.execution))}</span></summary>${narrativeEntry(row.localized[state.locale].result, "p")}${narrativeEntry(row.localized[state.locale].decision_effect, "p")}${claimLink(`rule.${row.rule_id}`, context)}</details>`).join("")}</div>`;
   if (step.step_id === "FALSE_POSITIVE_CONTROLS") return `${valuesGrid(step.values)}<h3>${esc(label("ui", "exclusions"))}</h3><div class="executive-rule-list">${analysis.hard_exclusions.map((row) => `<article><p>${code(row.code)} <span class="executive-status">${esc(label("status", row.status))}</span></p><p>${esc(row.localized_narrative[state.locale])}</p></article>`).join("")}</div>`;
   const localized = narrative(context);
-  if (step.step_id === "PUBLIC_CONCLUSION") return `<div class="executive-public">${narrativeEntry(localized.headline, "h3")}${narrativeEntry(localized.rationale, "p")}<p>${esc(label("ui", "public_boundary"))}</p><h4>${esc(label("ui", "hypothesis"))}</h4><p>${step.values.find((row) => row.key === "preferred_route_code").value === null ? esc(label("status", "NOT_CALCULABLE")) : code(step.values.find((row) => row.key === "preferred_route_code").value)}</p>${narrativeEntry(localized.route_label, "p")}<h4>${esc(label("ui", "missing"))}</h4><ul>${localized.missing_facts.map((row) => narrativeEntry(row, "li")).join("")}</ul></div>`;
+  if (step.step_id === "PUBLIC_CONCLUSION") {
+    const hs = analysis.opportunity.hs6;
+    const link = context.executiveCase.decisions.simulated.availability === "AVAILABLE"
+      && !["294110", "294120", "310430", "310510"].includes(hs)
+      ? `<button data-executive-go="SIMULATED_EVIDENCE">${esc(t("ministry.q3"))}</button>` : "";
+    return `<div class="executive-public">${narrativeEntry(localized.headline, "h3")}${narrativeEntry(localized.rationale, "p")}<p>${esc(label("ui", "public_boundary"))}</p><h4>${esc(label("ui", "hypothesis"))}</h4><p>${step.values.find((row) => row.key === "preferred_route_code").value === null ? esc(label("status", "NOT_CALCULABLE")) : code(step.values.find((row) => row.key === "preferred_route_code").value)}</p>${narrativeEntry(localized.route_label, "p")}${renderPublicProducers(context)}${link}<h4>${esc(label("ui", "missing"))}</h4><ul>${localized.missing_facts.map((row) => narrativeEntry(row, "li")).join("")}</ul></div>`;
+  }
   if (step.step_id === "MISSING_MINISTRY_FACTS") return `<ul class="executive-facts">${localized.missing_facts.map((row) => narrativeEntry(row, "li")).join("")}</ul>${renderDatasets(context)}`;
   throw new Error("EXECUTIVE_PUBLIC_STEP_INVALID");
 }

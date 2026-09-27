@@ -11,7 +11,7 @@ from .economics import NATIONAL_VALUE_KEYS
 from .evidence import EvidenceIntegrityError, synthetic_display_labels
 from .public_snapshot import capability_hard_gate_names
 
-SUPPORTED_SCENARIO_CONTRACT_VERSIONS = frozenset({"2.0.0", "2.1.0"})
+SUPPORTED_SCENARIO_CONTRACT_VERSIONS = frozenset({"2.0.0", "2.1.0", "2.2.0"})
 VALID_DECISION_STATES = frozenset({"REJECT", "MONITOR", "INVESTIGATE", "ADVANCE"})
 GOVERNED_SYNTHETIC_INPUT_KEYS = frozenset(
     {
@@ -36,6 +36,8 @@ GOVERNED_SYNTHETIC_INPUT_KEYS = frozenset(
         "counterfactual",
         "competition_inputs",
         "shared_enabler",
+        "candidate_register",
+        "candidate_lines",
     }
 )
 _BROWNFIELD_ROUTE_CODE = 5
@@ -370,6 +372,35 @@ def validate_shared_enabler_consistency(
         dependents.add(opportunity_id)
 
 
+def _validate_candidate_blocks(
+    scenario: dict[str, Any],
+    inputs: dict[str, Any],
+) -> None:
+    """Admit the inline register only on scenario 2.2."""
+    present = "candidate_register" in inputs or "candidate_lines" in inputs
+    version = scenario.get("scenario_version")
+    if version != "2.2.0":
+        if present:
+            raise EvidenceIntegrityError(
+                "candidate_register is permitted only for scenario_version 2.2.0"
+            )
+        return
+    if "candidate_register" not in inputs or "candidate_lines" not in inputs:
+        raise EvidenceIntegrityError(
+            "scenario 2.2.0 requires candidate_register and candidate_lines"
+        )
+    from .candidate_register import validate_candidate_register
+    from .line_contract import validate_candidate_lines
+
+    register = validate_candidate_register(inputs["candidate_register"])
+    validate_candidate_lines(
+        inputs["candidate_lines"],
+        register,
+        scenario=scenario,
+        legacy_pointers=scenario.get("scenario_id") == "SYN-MINISTRY-STEEL-001",
+    )
+
+
 def validate_simulation_contract(scenario: dict[str, Any]) -> None:
     version = scenario.get("scenario_version")
     if version not in SUPPORTED_SCENARIO_CONTRACT_VERSIONS:
@@ -404,6 +435,7 @@ def validate_simulation_contract(scenario: dict[str, Any]) -> None:
             "scenario.synthetic_inputs contains unknown keys: "
             + ", ".join(sorted(unknown))
         )
+    _validate_candidate_blocks(scenario, inputs)
     narratives = _required_mapping(
         scenario,
         "decision_narrative",

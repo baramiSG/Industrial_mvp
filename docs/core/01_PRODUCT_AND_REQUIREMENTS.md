@@ -348,3 +348,9 @@ subset.
   IDs; unsupported claims remain explicitly `UNRESOLVED` with structured need
   codes. Simulated claims are separately branch-qualified and may link only
   valid public rows plus complete current-scenario Class-D evidence.
+
+## 14. Ministry M preliminary decision workspace
+
+The Ministry simulation may expose a finite record-derived preliminary assessment before full Test 2 (governing methodology §6.0). The workspace must keep company, plant and line identities distinct; show the exact target requirement, period, source, field origin and limitation for each finding; and name the next record that could change the decision. A record extract with no match means only not found within its disclosed coverage. The assessment must remain useful without optional equipment inventory or survey enrichment.
+
+Preliminary findings neither assign Test 2 dimension states nor improve K or D*, settle a hard gate, select an intervention or change the public decision. Simulated diagnostic content remains Class D and visibly separated from public conclusions. The executive journey presents the evidence chain in both supported locales while retaining the dossier as the formal decision record. Source: methodology §§6.0, 10.2; approved Ministry M DOMAIN and INTERACTION contracts.

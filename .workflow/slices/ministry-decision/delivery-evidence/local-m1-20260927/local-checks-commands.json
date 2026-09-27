@@ -1,0 +1,136 @@
+[
+  {
+    "name": "sync",
+    "argv": [
+      "/home/barami/.local/bin/uv",
+      "sync",
+      "--locked",
+      "--extra",
+      "dev",
+      "--extra",
+      "graph",
+      "--extra",
+      "e2e"
+    ],
+    "cwd": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/final-candidate-m1-successor/proof",
+    "exit_code": 0,
+    "seconds": 1.62,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "001cf3cf742f0cd8c774d8f94ec6e48d9e79cf260b83d222304a7b75d15379c0"
+  },
+  {
+    "name": "prohibited",
+    "argv": [
+      "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/final-candidate-m1-successor/proof/.venv/bin/python",
+      "-B",
+      "scripts/check_prohibited_files.py"
+    ],
+    "cwd": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/final-candidate-m1-successor/proof",
+    "exit_code": 0,
+    "seconds": 0.918,
+    "stdout_sha256": "6875d24ff5e00cf088e4186d1d1f9a9db968ee2913e3836d22d47760f2808495",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "threshold",
+    "argv": [
+      "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/final-candidate-m1-successor/proof/.venv/bin/python",
+      "-B",
+      "scripts/check_threshold_literals.py"
+    ],
+    "cwd": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/final-candidate-m1-successor/proof",
+    "exit_code": 0,
+    "seconds": 0.32,
+    "stdout_sha256": "1ad72010a403b32f06265283ee6ea124a09c95a44d75ff32b9df5b8d600493f1",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "ui",
+    "argv": [
+      "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/final-candidate-m1-successor/proof/.venv/bin/python",
+      "-B",
+      "scripts/check_ui_contracts.py"
+    ],
+    "cwd": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/final-candidate-m1-successor/proof",
+    "exit_code": 0,
+    "seconds": 0.294,
+    "stdout_sha256": "ad8e224176b362994b66691ad6275399e407dfdc06bb213187e45a6a31d51702",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "es",
+    "argv": [
+      "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/final-candidate-m1-successor/proof/.venv/bin/python",
+      "-B",
+      "scripts/check_es_modules.py",
+      "--node",
+      "node"
+    ],
+    "cwd": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/final-candidate-m1-successor/proof",
+    "exit_code": 0,
+    "seconds": 0.83,
+    "stdout_sha256": "e694b83558825fceba65c5b43fdb469b9087bea5591be203e8472608992720f0",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "compile",
+    "argv": [
+      "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/final-candidate-m1-successor/proof/.venv/bin/python",
+      "-B",
+      "-m",
+      "compileall",
+      "-q",
+      "src",
+      "scripts",
+      "tests",
+      "browser_tests",
+      "graph_tests"
+    ],
+    "cwd": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/final-candidate-m1-successor/proof",
+    "exit_code": 0,
+    "seconds": 0.538,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "integrity",
+    "argv": [
+      "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/final-candidate-m1-successor/proof/.venv/bin/python",
+      "-B",
+      "scripts/verify_integrity.py"
+    ],
+    "cwd": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/final-candidate-m1-successor/proof",
+    "exit_code": 0,
+    "seconds": 0.149,
+    "stdout_sha256": "6b608ffcb9a862f030cf907573fa823e549eba43245c8b2869809be2ca6f0e11",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "pytest",
+    "argv": [
+      "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/final-candidate-m1-successor/proof/.venv/bin/python",
+      "-B",
+      "-m",
+      "pytest",
+      "-q"
+    ],
+    "cwd": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/final-candidate-m1-successor/proof",
+    "exit_code": 0,
+    "seconds": 134.8,
+    "stdout_sha256": "34b8d17efdf721cd2edf04506b58c84f1f8f4541b872a7f44ee0d8cc3e0e9c4d",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "demo-smoke",
+    "argv": [
+      "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/final-candidate-m1-successor/proof/.venv/bin/python",
+      "-B",
+      "scripts/demo_smoke.py"
+    ],
+    "cwd": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/final-candidate-m1-successor/proof",
+    "exit_code": 0,
+    "seconds": 0.246,
+    "stdout_sha256": "90a83a3de7ad0092bab981f4268aab1461582c897e17eeff8087cb568844e4e6",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+]

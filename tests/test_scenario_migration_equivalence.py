@@ -66,7 +66,7 @@ def test_live_2_0_0_preserves_1_1_0_synthetic_inputs(name: str) -> None:
         )
     )
     assert old["scenario_version"] == "1.1.0"
-    assert new["scenario_version"] == "2.0.0"
+    assert new["scenario_version"] == "2.2.0"
     for key in (
         "scenario_id",
         "opportunity_id",

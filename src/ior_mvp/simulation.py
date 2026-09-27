@@ -994,6 +994,10 @@ def simulate(
         capacity,
         thresholds,
     )
+    candidate_discovery, line_assessment = _candidate_diagnostics(
+        public_case,
+        scenario,
+    )
     return {
         "simulation_decision": decision,
         "capacity": capacity,
@@ -1009,7 +1013,42 @@ def simulate(
         "advance_gate": decision["advance_gate"],
         "hard_exclusions": decision["hard_exclusions"],
         "rejection_conditions": decision["rejection_conditions"],
+        "candidate_discovery": candidate_discovery,
+        "line_assessment": line_assessment,
     }
+
+
+def _candidate_diagnostics(
+    public_case: dict[str, Any],
+    scenario: dict[str, Any],
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    """Attach simulated diagnostics without changing either decision branch."""
+    from .candidate_discovery import discover_candidates, unavailable_discovery
+    from .line_comparison import compare_lines, unavailable_lines
+
+    if scenario.get("scenario_version") != "2.2.0":
+        return (
+            unavailable_discovery("NO_REGISTER"),
+            unavailable_lines("NO_LINE_RECORDS"),
+        )
+    inputs = scenario["synthetic_inputs"]
+    register = inputs["candidate_register"]
+    assessment = compare_lines(
+        scenario,
+        register,
+        sector_profile=str(public_case["opportunity"]["sector_profile"]),
+        decision_gates=inputs.get("decision_specific_hard_gates"),
+    )
+    discovery = discover_candidates(
+        register,
+        opportunity_id=str(public_case["opportunity"]["id"]),
+        opportunity_hs6=str(public_case["opportunity"]["hs6"]),
+        candidate_lines=inputs.get("candidate_lines"),
+        scenario_id=str(scenario["scenario_id"]),
+        scenario=scenario,
+        line_assessment=assessment,
+    )
+    return discovery, assessment
 
 
 def evaluate_ground_truth_backtest(

@@ -21,10 +21,12 @@ from browser_tests.graph_pages import (
     assert_selected_graph_passports,
     assert_graph_svg_labels_within_viewbox,
     assert_graph_visible_arrow_endpoints,
+    click_visible_graph_edge,
     install_graph_routes,
     open_graph,
     prepare_graph_capture,
     select_graph_element,
+    select_counted_graph_edge,
     select_graph_view,
     select_native_graph_element,
     select_svg_graph_element,
@@ -35,13 +37,17 @@ from browser_tests.harness import (
     CASES,
     DESKTOP,
     EN,
+    STEEL,
     TABLET,
     BrowserFailureCollector,
     BrowserSession,
     format_axe_violations,
     run_axe,
 )
-from browser_tests.pages import goto_portfolio, locale_bundle, select_case, select_mode
+from browser_tests.pages import (
+    arabic_parity_report, assert_arabic_parity, goto_portfolio,
+    locale_bundle, select_case, select_mode,
+)
 from ior_mvp.decision_engine import analyze
 from ior_mvp.evidence import synthetic_display_labels
 
@@ -73,7 +79,7 @@ def graph_visual_preflight_root() -> Path:
     ]
     assert len(files) == 16
     assert len(graph_baselines) == 16
-    assert len(retained) == 112
+    assert len(retained) == 124
     assert {path.stem for path in files} == GRAPH_REPLACEMENT_SCREENS
     assert all(path.stat().st_size <= 600 * 1024 for path in files)
     retained_bytes = sum(path.stat().st_size for path in retained)
@@ -114,12 +120,15 @@ def test_graph_collapsed_lazy_catalogue_and_views(
     assert page.locator("#graph-view-select option").count() == 4
 
 
+@pytest.mark.parametrize('locale', (EN, AR), ids=lambda value: value.code)
+@pytest.mark.parametrize('width', (390, 1440))
 def test_graph_node_edge_selection_and_passports(
-    browser_session: BrowserSession,
+    browser_session: BrowserSession, locale: Any, width: int,
 ) -> None:
     page = browser_session.page
+    page.set_viewport_size({'width': width, 'height': 900})
     install_graph_routes(page)
-    goto_portfolio(page, "public", EN)
+    goto_portfolio(page, "public", locale)
     open_graph(page)
     select_svg_graph_element(page, "node")
     assert page.locator(".graph-provenance").count() == 1
@@ -130,6 +139,74 @@ def test_graph_node_edge_selection_and_passports(
     assert page.locator(
         ".graph-button-list [data-graph-select='edge'][aria-pressed='true']"
     ).count() == 1
+    for mode, view in (('public', 'adjacency'), ('simulated', 'evidence_to_change')):
+        goto_portfolio(page, mode, locale)
+        open_graph(page)
+        if view != 'adjacency':
+            select_graph_view(page, view)
+        payload = artifact_graph_payload(view, STEEL.id, mode)
+        groups: dict[tuple[str, str], list[dict]] = {}
+        for edge in payload['edges']:
+            groups.setdefault(tuple(sorted((edge['source'], edge['target']))), []).append(edge)
+        repeated = [group for group in groups.values() if len(group) > 1]
+        assert repeated
+        if mode == 'simulated':
+            assert max(len(group) for group in repeated) == 5
+        assert [row.get_attribute('data-graph-id') for row in page.locator('.graph-button-list [data-graph-select="edge"]').all()] == [edge['id'] for edge in payload['edges']]
+        assert_graph_visible_arrow_endpoints(page)
+        assert_graph_caption_edge_clearance(page)
+        for group in repeated:
+            for edge in group:
+                click_visible_graph_edge(page, edge['id'])
+                assert edge['provenance']['evidence_id'] in page.locator('.graph-provenance').inner_text()
+
+
+@pytest.mark.parametrize("locale", (EN, AR), ids=lambda item: item.code)
+def test_public_producer_adjacency_shows_exact_scoped_signals_and_sources(
+    browser_session: BrowserSession, locale: Any,
+) -> None:
+    from types import SimpleNamespace
+
+    from ior_mvp.config import PROJECT_ROOT
+    from ior_mvp.graph.engine_feed import adjacency_explanation
+    from ior_mvp.graph.projection import build_repository_projection
+    from ior_mvp.graph.service import GraphService
+
+    graph = build_repository_projection(PROJECT_ROOT)
+    result = adjacency_explanation(graph, STEEL.id, branch="public")
+    rows = [{"producer_id": producer, "fired": row["fired"]}
+            for producer, row in result["producer_rows"].items()]
+    service = GraphService(
+        SimpleNamespace(target="compose"),
+        artifact_projection_id=graph.projection_id,
+        projection=graph,
+        status_reader=lambda _spec: {"projection_id": graph.projection_id,
+                                      "counts": graph.counts,
+                                      "synthetic_partition": {}},
+        view_reader=lambda *_args: rows,
+    )
+    payload = service.view("adjacency", STEEL.id, "public")
+    source_edge = next(edge for edge in payload["edges"]
+                       if edge["type"] == "ADJACENT_TO"
+                       and edge["properties"]["qualifying_signal_count"] == 4)
+    page = browser_session.page
+    install_graph_routes(
+        page,
+        lambda view, opportunity, mode: payload
+        if (view, opportunity, mode) == ("adjacency", STEEL.id, "public") else None,
+    )
+    goto_portfolio(page, "public", locale)
+    open_graph(page)
+    page.locator(f'[data-graph-select="edge"][data-graph-id="{source_edge["id"]}"]').last.click()
+    signals = page.locator("[data-producer-signals] li")
+    assert signals.count() == 4
+    for signal in source_edge["properties"]["signals"]:
+        assert any(signal["description"] in value for value in signals.all_text_contents())
+    assert "S-UNICOIL-EPD" in page.locator(".graph-details").inner_text()
+    assert "S-UNICOIL-SPEC" in page.locator(".graph-details").inner_text()
+    assert "S-HADEED" not in page.locator(".graph-details").inner_text()
+    page.locator(".graph-passport").first.wait_for()
+    assert page.locator(".graph-passport").count() >= 2
 
 
 def test_graph_related_evidence_and_unresolved_references(
@@ -804,8 +881,28 @@ def test_graph_source_disclosure_mutations_fail_strict_oracles(browser_session: 
             assert_selected_graph_passports(page, AR, 'public', key)
         page.locator('#graph-view').evaluate('(node,html)=>node.innerHTML=html', original)
         assert_selected_graph_passports(page, AR, 'public', key)
+    foil = next(case for case in CASES if case.id == 'SAU-H6-760711')
+    goto_portfolio(page, 'public', AR)
+    select_case(page, foil, 'public', AR)
+    open_graph(page); select_graph_view(page, 'evidence_to_change')
+    payload = artifact_graph_payload('evidence_to_change', foil.id, 'public')
+    wco_key = f'{foil.id}|public|evidence_to_change|edge'
+    wco = select_counted_graph_edge(payload, wco_key)
+    page.locator(f'.graph-button-list [data-graph-id="{wco["id"]}"]').click()
+    page.locator('[data-passport-id="P-WCO-760711"]').wait_for()
+    assert_selected_graph_passports(page, AR, 'public', wco_key)
+    original = page.locator('#graph-view').inner_html()
+    for mutation in (
+        "document.querySelector('[data-passport-id=\"P-WCO-760711\"] h5 .source-language-island').classList.remove('source-language-island')",
+        "document.querySelector('[data-passport-ref] + .source-language-caption').remove()",
+    ):
+        page.evaluate(mutation)
+        with pytest.raises(AssertionError):
+            assert_selected_graph_passports(page, AR, 'public', wco_key)
+        page.locator('#graph-view').evaluate('(node,html)=>node.innerHTML=html', original)
+        assert_selected_graph_passports(page, AR, 'public', wco_key)
     goto_portfolio(page, 'simulated', AR)
-    select_case(page, next(case for case in CASES if case.id == 'SAU-H6-760711'), 'simulated', AR)
+    select_case(page, foil, 'simulated', AR)
     open_graph(page); select_graph_view(page, 'shared_enabler')
     edge = artifact_graph_payload('shared_enabler', 'SAU-H6-760711', 'simulated')['edges'][0]
     page.locator(f'.graph-button-list [data-graph-id="{edge["id"]}"]').click()
@@ -842,7 +939,7 @@ def test_graph_narrow_panel_contains_controls_and_text(browser_session: BrowserS
             assert_graph_panel_contains_controls_and_text(page)
             if scenario == "steel" and mode == "public" and view == "evidence_to_change" and width == 1440:
                 page.evaluate("document.fonts.ready")
-                new_token, old_token = "ENGINE-64e24689a59f", "ENGINE-7ae34188bdec"
+                new_token, old_token = "ENGINE-fa61c740067a", "ENGINE-7ae34188bdec"
                 measure = """() => {
                   const section = document.querySelector('.graph-native-controls > section:nth-child(2)');
                   const buttons = [...section.querySelectorAll('.graph-button-list > button[data-graph-select="edge"]')];
@@ -925,12 +1022,84 @@ def test_graph_narrow_panel_contains_controls_and_text(browser_session: BrowserS
                 assert_selected_graph_passports(page, locale, mode, f'{case_id}|{mode}|{view}|empty')
                 continue
             for kind in ('node', 'edge'):
-                element = next((n for n in payload['nodes'] if n['id'] == case_id), payload['nodes'][0]) if kind == 'node' else payload['edges'][0]
+                key = f'{case_id}|{mode}|{view}|{kind}'
+                if kind == 'node':
+                    matching_nodes = [node for node in payload['nodes'] if node['id'] == case_id]
+                    assert len(matching_nodes) == 1, key
+                    element = matching_nodes[0]
+                else:
+                    element = select_counted_graph_edge(payload, key)
                 button = page.locator(f'.graph-button-list [data-graph-id="{element["id"]}"]')
                 button.focus(); page.keyboard.press('Enter')
                 page.locator('.graph-evidence-results').wait_for()
                 assert button.get_attribute('aria-pressed') == 'true'
-                assert_selected_graph_passports(page, locale, mode, f'{case_id}|{mode}|{view}|{kind}')
+                assert_selected_graph_passports(page, locale, mode, key)
+            if case_id == 'SAU-H6-760711' and mode == 'public' and view == 'evidence_to_change':
+                edge = select_counted_graph_edge(payload, f'{case_id}|public|evidence_to_change|route_economics_zero')
+                button = page.locator(f'.graph-button-list [data-graph-id="{edge["id"]}"]')
+                button.focus(); page.keyboard.press('Enter')
+                page.locator('.graph-evidence-results').wait_for()
+                assert_selected_graph_passports(page, locale, mode, f'{case_id}|public|evidence_to_change|route_economics_zero')
+    if scenario == 'steel' and width == 390:
+        goto_portfolio(page, 'simulated', locale)
+        open_graph(page)
+        payload = artifact_graph_payload('adjacency', case_id, 'simulated')
+        scoped = next(edge for edge in payload['edges']
+                      if edge['properties'].get('attribution_scope') == 'CANDIDATE_DISCOVERY')
+        button = page.locator(f'.graph-button-list [data-graph-id="{scoped["id"]}"]')
+        button.focus(); page.keyboard.press('Enter')
+        page.locator('.graph-details > .card-body-scroll > table.graph-source-table').wait_for()
+        good = assert_graph_panel_contains_controls_and_text(page)
+        assert good['recognized'] == good['sourceTables'] == 1
+        details = page.locator('.graph-details')
+        original = details.inner_html()
+        for mutation, issue in (
+            ('tabindex-removed', 'tabindex'),
+            ('role-removed', 'role'),
+            ('empty-name', 'governed name'),
+            ('overflow-hidden', 'overflow'),
+            ('overflow-clip', 'overflow'),
+            ('wrapper-outside', 'wrapper bounds'),
+            ('source-table-outside', 'source-table count'),
+            ('unreachable-table', 'reachable table element'),
+            ('overwide-nonscroll', 'panel text'),
+        ):
+            scroll_before = page.locator('.graph-details > .card-body-scroll').evaluate('n=>n.scrollLeft')
+            try:
+                page.evaluate("""kind => {
+                  const details=document.querySelector('.graph-details');
+                  const wrapper=details.querySelector(':scope > .card-body-scroll');
+                  const table=wrapper.querySelector(':scope > table.graph-source-table');
+                  if(!wrapper || wrapper.children.length!==1 || !table) throw Error('wrong mutation subject');
+                  if(kind==='tabindex-removed') wrapper.removeAttribute('tabindex');
+                  else if(kind==='role-removed') wrapper.removeAttribute('role');
+                  else if(kind==='empty-name') wrapper.setAttribute('aria-label','');
+                  else if(kind==='overflow-hidden') wrapper.style.overflowX='hidden';
+                  else if(kind==='overflow-clip') wrapper.style.overflowX='clip';
+                  else if(kind==='wrapper-outside') wrapper.style.transform='translateX(1000px)';
+                  else if(kind==='source-table-outside') details.appendChild(table.cloneNode(true));
+                  else if(kind==='unreachable-table') {
+                    const token=table.querySelector('td .technical-token');
+                    if(!token) throw Error('missing technical token');
+                    token.style.position='fixed';token.style.left='10000px';token.style.top='0px';
+                  } else if(kind==='overwide-nonscroll') {
+                    const heading=details.querySelector(':scope > h5');
+                    if(!heading) throw Error('missing non-scroll heading');
+                    heading.style.whiteSpace='nowrap';
+                    heading.textContent+=' WIDE-NONSCROLL-TEXT'.repeat(50);
+                  } else throw Error('unknown mutation');
+                }""", mutation)
+                with pytest.raises(AssertionError, match=issue):
+                    assert_graph_panel_contains_controls_and_text(page)
+            finally:
+                details.evaluate('(node,html)=>{node.innerHTML=html}', original)
+                page.locator('.graph-details > .card-body-scroll').evaluate(
+                    '(node,value)=>{node.scrollLeft=value}', scroll_before
+                )
+                assert details.inner_html() == original
+                assert page.locator('.graph-details > .card-body-scroll').evaluate('n=>n.scrollLeft') == scroll_before
+                restored = assert_graph_panel_contains_controls_and_text(page)
+                assert restored['recognized'] == restored['sourceTables'] == 1
 
 
 @pytest.mark.parametrize("mode", ("public", "simulated"))
@@ -992,6 +1161,30 @@ def test_graph_scroll_region_reaches_both_keyboard_endpoints(browser_session: Br
         page.locator('.graph-passport, .graph-unresolved').first.wait_for()
         assert page.evaluate('document.activeElement.dataset.graphId')==identity
         assert page.evaluate("document.activeElement.getAttribute('aria-pressed')")=='true'
+    if mode == 'simulated':
+        payload = artifact_graph_payload('adjacency', STEEL.id, 'simulated')
+        scoped = next(edge for edge in payload['edges']
+                      if edge['properties'].get('attribution_scope') == 'CANDIDATE_DISCOVERY')
+        button = page.locator(f'.graph-button-list [data-graph-id="{scoped["id"]}"]')
+        button.focus(); page.keyboard.press('Enter')
+        table_region = page.locator('.graph-details .card-body-scroll')
+        expect(table_region).to_have_count(1)
+        expect(table_region).to_have_attribute('role', 'region')
+        expect(table_region).to_have_attribute('aria-label', strings['graph.details_title'])
+        for _ in range(buttons + 3):
+            page.keyboard.press('Tab')
+            if table_region.evaluate('n => document.activeElement === n'):
+                break
+        assert table_region.evaluate('n => document.activeElement === n && n.matches(":focus-visible") && getComputedStyle(n).outlineStyle !== "none"')
+        extent = table_region.evaluate('n => n.scrollWidth - n.clientWidth')
+        assert extent > 0
+        forward = 'ArrowLeft' if locale.code == 'ar' else 'ArrowRight'
+        backward = 'ArrowRight' if locale.code == 'ar' else 'ArrowLeft'
+        for _ in range(60): page.keyboard.press(forward)
+        page.wait_for_function('()=>{const n=document.querySelector(".graph-details .card-body-scroll");return Math.abs(n.scrollLeft)>=n.scrollWidth-n.clientWidth-1}')
+        for _ in range(60): page.keyboard.press(backward)
+        page.wait_for_function('()=>Math.abs(document.querySelector(".graph-details .card-body-scroll").scrollLeft)<1')
+        assert table_region.evaluate('n => document.activeElement === n')
     report=run_axe(page)
     assert not report['violations'],format_axe_violations(report['violations'])
 

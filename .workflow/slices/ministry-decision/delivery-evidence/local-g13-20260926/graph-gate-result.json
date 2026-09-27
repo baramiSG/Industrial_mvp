@@ -1,0 +1,52 @@
+{
+  "status": "PASS_ONE_STOCK_GRAPH_GATE_AND_EXACT_RETAINED_RECOVERY",
+  "utc": "2026-09-26T22:14:55.967335+00:00",
+  "candidate_tree": "fe98722cba6539514772d9009a4db4e1ccbe835b",
+  "proof_commit": "241e4dfd935bee8017c147a0ee65f9308c4a4a19",
+  "projection_id": "GRAPH-SAU-2026-09-12-c9841fe8e850",
+  "engine_id": "ENGINE-941521e7a5e5",
+  "stock_command": [
+    "make",
+    "graph-gate"
+  ],
+  "gate_exit": 0,
+  "test_summary_lines": [
+    "9 passed, 1 skipped, 3 deselected, 2841 warnings in 3.35s",
+    "1 passed, 12 deselected, 549 warnings in 9.31s",
+    "2 passed, 11 deselected, 31 warnings in 0.57s",
+    "GRAPH_UNAVAILABLE_OK"
+  ],
+  "external_runtime_override": {
+    "heap_initial": "1G",
+    "heap_max": "1G",
+    "pagecache_verified_in_actual_debug_log": "512.00MiB",
+    "application_timeout_retry_and_all_assertions": "unchanged",
+    "quiet_owned_jobs_before_gate": true,
+    "pause_warnings_in_inspected_debug_and_neo4j_logs": 0,
+    "causality_limit": "Successful bounded mitigation; original pause root cause was not conclusively established"
+  },
+  "retained": {
+    "id": "42216eec09ddb9d4ad68058d1d1547c1980281fbbeff5a53f8ae145f42ec8d1e",
+    "running_healthy_identity_mounts_config_network_restored": true,
+    "projection_id": "GRAPH-SAU-2026-09-12-461bf4840962",
+    "nodes": 925,
+    "edges": 1045,
+    "partition_valid": true,
+    "provenance_complete": true
+  },
+  "source_preserved": true,
+  "protected_index_count": 64,
+  "protected_indexes_preserved": true,
+  "protected_pid34210_and_lock_preserved": true,
+  "receipt_hashes": {
+    "EXECUTOR-EXIT.json": "213dce55f100d23371cb157326368e52cae9d6f1c74ae196dd1d17f2177a287e",
+    "BOUND-G1-3-PROPOSAL.json": "6a3dd0ba89854690ef818bceffe8544dadb90e2f1c8a7cebfd8b66df417e96bb",
+    "NEO4J-LOG-DIAGNOSTIC.json": "2874c7c5e5e803001c9c208db1168dba82d28b090cbb140c4acbd665ef0f56dc",
+    "execution-g1-3/ci1-result.json": "d3e21e9e2f0b4baedd3dcae9e4b7869a2bcc705181da2176f22c3ed6149c61ea",
+    "execution-g1-3/HOST-RESOURCES-BEFORE.json": "71d382ee920c7635575d500aed732035d36de326b5148de7f0eef9e793d74001",
+    "execution-g1-3/HOST-RESOURCES-AFTER.json": "73c971956c76db189225f8914b83080f5b1d821a8d0ef4e2e6f6e783e2a7e944",
+    "execution-g1-3/RESTORED-GRAPH.json": "8156d58b8d931aff78954a7b40c322fe910203d843b5fe4126a049828469f76d",
+    "execution-g1-3/RESTORED-IDENTITY.json": "478b56d6c2113fe0a4760522594a279da562d2cf2260631d6348889aec16efd4"
+  },
+  "remaining": "Full final browser compare, existing independent Claude approval, stock hosted CI/merge/main and required M live Aura. Local gate is not live Aura proof."
+}

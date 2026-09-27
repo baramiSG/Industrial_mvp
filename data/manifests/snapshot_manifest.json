@@ -1,6 +1,6 @@
 {
   "manifest_version": "1.0",
-  "generated_on": "2026-09-26",
+  "generated_on": "2026-09-27",
   "policy": "Golden cases and synthetic scenarios run only against pinned files in this manifest; case derivation inputs and retained superseded operating-configuration bytes and the governed graph projection are also hash-pinned.",
   "files": [
     {
@@ -125,8 +125,8 @@
     },
     {
       "path": "data/synthetic/SYN-MINISTRY-PP-001.json",
-      "sha256": "0c7a8b94e17be26c6de9764bf1836c490ae2cb031fa14077e2f95de688711580",
-      "bytes": 5828
+      "sha256": "a32cdd46ca45deffac6f5564f4acc6de87bf0ec3abfb245f44ab0d0cf87c3dc4",
+      "bytes": 89897
     },
     {
       "path": "data/synthetic/SYN-MINISTRY-SOP-001.json",
@@ -135,8 +135,8 @@
     },
     {
       "path": "data/synthetic/SYN-MINISTRY-STEEL-001.json",
-      "sha256": "535d66e9c511899e787bfb11558933d0507bf54402068e32c98935d00bd21567",
-      "bytes": 9336
+      "sha256": "655597b11232013fc151006faf1b5da22c0f4dd76a8ee4f361e32162b31ade31",
+      "bytes": 93401
     },
     {
       "path": "data/synthetic/SYN-MINISTRY-STREPTOMYCIN-API-001.json",
@@ -167,6 +167,16 @@
       "path": "data/synthetic/historical/v2_0/SYN-MINISTRY-ALU-PROFILES-001.json",
       "sha256": "a96ae1b49db2c24d538aebdbf3e6109b174e0d9e583d28b5c727c400d378d3e9",
       "bytes": 14657
+    },
+    {
+      "path": "data/synthetic/historical/v2_0/SYN-MINISTRY-PP-001.json",
+      "sha256": "0c7a8b94e17be26c6de9764bf1836c490ae2cb031fa14077e2f95de688711580",
+      "bytes": 5828
+    },
+    {
+      "path": "data/synthetic/historical/v2_0/SYN-MINISTRY-STEEL-001.json",
+      "sha256": "535d66e9c511899e787bfb11558933d0507bf54402068e32c98935d00bd21567",
+      "bytes": 9336
     },
     {
       "path": "data/golden/ar_en_spec_extraction.json",
@@ -3530,8 +3540,28 @@
     },
     {
       "path": "data/graph/current.json",
-      "sha256": "259e6512cc4d6324b9b78dcd7d606ce45e32c09da83f6536bdb06aeee390939b",
+      "sha256": "bec5552fc7107556efbf3af43403d88e5ff2475a8a7ba312d18b6fce891ca948",
       "bytes": 139
+    },
+    {
+      "path": "data/graph/projections/GRAPH-SAU-2026-09-12-0a0f601330ca/manifest.json",
+      "sha256": "5e8498be8e17748a5ba4ceaba9f91600238041951718e1c2a119b6a8498f97a2",
+      "bytes": 228
+    },
+    {
+      "path": "data/graph/projections/GRAPH-SAU-2026-09-12-0a0f601330ca/projection.json",
+      "sha256": "148f91a23f1080134252b2bdc2f5e98ef4e90cc4993baf1402f5e1e1630f60c6",
+      "bytes": 2982902
+    },
+    {
+      "path": "data/graph/projections/GRAPH-SAU-2026-09-12-2e9705ef7423/manifest.json",
+      "sha256": "bcbd969e79d6aa07f0c25b5cd27e5e43db8c54a657a4890bf99364d0aa050dc5",
+      "bytes": 228
+    },
+    {
+      "path": "data/graph/projections/GRAPH-SAU-2026-09-12-2e9705ef7423/projection.json",
+      "sha256": "c108e4c18efd9f3aedb6bf03c0db85d8411c55f282dff574f5c9997572323442",
+      "bytes": 2982076
     },
     {
       "path": "data/graph/projections/GRAPH-SAU-2026-09-12-3ce241f08f7a/manifest.json",
@@ -3594,6 +3624,16 @@
       "bytes": 844574
     },
     {
+      "path": "data/graph/projections/GRAPH-SAU-2026-09-12-b325de92eeec/manifest.json",
+      "sha256": "91bcf5f3f2bf6120b42bbb18c7d82271b50f33df7ffa30105dc4ea83ae88167d",
+      "bytes": 228
+    },
+    {
+      "path": "data/graph/projections/GRAPH-SAU-2026-09-12-b325de92eeec/projection.json",
+      "sha256": "51afd4383007a3a9c23f0a262e22908cf224abdcee5c51df2259a1dd8b566bba",
+      "bytes": 2982076
+    },
+    {
       "path": "data/graph/projections/GRAPH-SAU-2026-09-12-b63159c7bdc1/manifest.json",
       "sha256": "ccf7f3cd6dd3d1b28f93e35c4737871e5bf230c1d3ec82b6ed4162d3754861ba",
       "bytes": 228
@@ -3602,6 +3642,16 @@
       "path": "data/graph/projections/GRAPH-SAU-2026-09-12-b63159c7bdc1/projection.json",
       "sha256": "8922dc32965efd6a99843a7f2826c992370dc1222e148306529ffec6aa28dcdb",
       "bytes": 2215695
+    },
+    {
+      "path": "data/graph/projections/GRAPH-SAU-2026-09-12-c9841fe8e850/manifest.json",
+      "sha256": "eeb89e290dd0f08b549ea7db95f81baf659c1492d8034cc3b8d8106d80a2effe",
+      "bytes": 228
+    },
+    {
+      "path": "data/graph/projections/GRAPH-SAU-2026-09-12-c9841fe8e850/projection.json",
+      "sha256": "984a884c7ec6aa8602a3f3291aaaf2aa26546688b81d0b408f42db384924e888",
+      "bytes": 2982424
     },
     {
       "path": "data/graph/projections/GRAPH-SAU-2026-09-12-ccd1a2abd05c/manifest.json",
@@ -3622,6 +3672,16 @@
       "path": "data/graph/projections/GRAPH-SAU-2026-09-12-e651e7065377/projection.json",
       "sha256": "4cfa9021987486bf5c802c0ab9f18255805b1020447efd9c79906faef17a6295",
       "bytes": 2205195
+    },
+    {
+      "path": "data/graph/projections/GRAPH-SAU-2026-09-12-f507b9dfca06/manifest.json",
+      "sha256": "1bebed2b3b187098a82b9fe073a59ad168fcc3b9b4e8de2519a8467e4067f6ad",
+      "bytes": 228
+    },
+    {
+      "path": "data/graph/projections/GRAPH-SAU-2026-09-12-f507b9dfca06/projection.json",
+      "sha256": "f6012b0803b1e03a9d12406f1b46ccb7452e153d22c041b54ca56b2138445833",
+      "bytes": 2982076
     },
     {
       "path": "data/graph/projections/GRAPH-SAU-2026-09-12-fbc93afb3c6e/manifest.json",
@@ -3654,6 +3714,11 @@
       "bytes": 53945
     },
     {
+      "path": "config/history/evidence_policy.v1-1.4.0.yaml",
+      "sha256": "667d4def45fd11a85f852c8b16c922d781bfc171c46e0f822dd8202d4318de73",
+      "bytes": 1835
+    },
+    {
       "path": "config/history/product_families.v1-1.0.0.yaml",
       "sha256": "841bc5ac732b9f9348495d3594926dea84dd4df7aab134092f81d06b4de7ecd4",
       "bytes": 988
@@ -3672,6 +3737,11 @@
       "path": "config/history/ui_strings.v1-1.4.0.yaml",
       "sha256": "984290f6b6771d54d987a188987a6a50d404984a2c58ef3d32e0d4306de3d432",
       "bytes": 63529
+    },
+    {
+      "path": "config/history/ui_strings.v1-1.7.0.yaml",
+      "sha256": "36934d057c4b330abfd9572acc8b6a1194be7aa20d58f3f898d1495ee2212a6b",
+      "bytes": 151801
     }
   ]
 }

@@ -85,12 +85,18 @@ export function persistLocale(locale) {
 }
 
 export function validateBundle(bundle, locale) {
+  const pair = (value) => value && Object.keys(value).sort().join("|") === "ar|en"
+    && ["en", "ar"].every((key) => typeof value[key] === "string" && value[key].trim() === value[key] && value[key]);
   if (
     bundle?.locale !== locale
     || !isSupportedLocale(bundle.locale)
     || !["ltr", "rtl"].includes(bundle.direction)
     || typeof bundle.strings !== "object"
-    || typeof bundle.synthetic_labels !== "object"
+    || !pair(bundle.synthetic_labels)
+    || !bundle.executive_policy
+    || Object.keys(bundle.executive_policy).sort().join("|") !== "headline|reference_condition"
+    || !pair(bundle.executive_policy.headline)
+    || !pair(bundle.executive_policy.reference_condition)
   ) {
     throw new Error("UI_CATALOGUE_BUNDLE_INVALID");
   }

@@ -295,8 +295,35 @@ def test_dossier_print_media_and_pdf_are_valid(
     assert exported["public_decision"] == analysis["real_decision"]
     complete_text = re.sub(r"\s", "", "\n".join(texts))
     assert case.id in complete_text
-    for passport in analysis["evidence"]:
-        assert passport["evidence_id"] in complete_text
+    current_scenarios = {
+        "SAU-H0-721049": "SYN-MINISTRY-STEEL-001",
+        "SAU-H0-390210": "SYN-MINISTRY-PP-001",
+    }
+    scenario_id = current_scenarios.get(case.id) if mode == "simulated" else None
+    excluded = ({f"{scenario_id}::candidate_register", f"{scenario_id}::candidate_lines"}
+                if scenario_id else set())
+    if excluded:
+        assert excluded <= {row["evidence_id"] for row in analysis["evidence"]}
+    expected_passports = [row for row in analysis["evidence"] if row["evidence_id"] not in excluded]
+    reference_passports = exported["evidence_pack"]["passports"]
+    expected_ids = [row["evidence_id"] for row in expected_passports]
+    reference_ids = [row["evidence_id"] for row in reference_passports]
+    assert expected_ids
+    assert reference_ids
+    assert len(expected_ids) == len(set(expected_ids))
+    assert len(reference_ids) == len(set(reference_ids))
+    assert reference_passports == expected_passports
+    html_response = popup.request.get(popup.url)
+    assert html_response.status == 200
+    html_text = html_response.text()
+    for passport in expected_passports:
+        evidence_id = passport["evidence_id"]
+        assert evidence_id in complete_text
+        assert evidence_id in html_text
+    for evidence_id in excluded:
+        assert evidence_id not in complete_text
+        assert evidence_id not in html_text
+        assert evidence_id not in json.dumps(exported, ensure_ascii=False)
     if mode == "simulated":
         assert all(locale_bundle(locale)["synthetic_labels"]["en"] in text for text in texts)
     else:
@@ -308,10 +335,8 @@ def test_dossier_print_media_and_pdf_are_valid(
         if source_path.exists():
             assert source_path.read_text(encoding="utf-8") == encoded
         source_path.write_text(encoded, encoding="utf-8")
-    html_response = popup.request.get(popup.url)
-    assert html_response.status == 200
     (pdf_dir / f"{case.slug}-{mode}-{locale.code}.html").write_text(
-        html_response.text(), encoding="utf-8"
+        html_text, encoding="utf-8"
     )
     summary_path = (
         pdf_dir / f"{case.slug}-{mode}-{locale.code}-summary.json"

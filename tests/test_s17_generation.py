@@ -51,13 +51,15 @@ def test_in_memory_g17_is_deterministic_and_writes_nothing() -> None:
     assert first == second
     assert first.projection_id == second.projection_id
     assert first.projection_id.startswith("GRAPH-SAU-2026-09-12-")
+    assert first.projection_id == "GRAPH-SAU-2026-09-12-0a0f601330ca"
+    assert first.engine["engine_run_id"] == "ENGINE-fa61c740067a"
     assert first.projection_id == json.loads(
         current_path.read_text(encoding="utf-8")
     )["projection_id"]
-    assert first.counts["nodes"] == 925
-    assert first.counts["edges"] == 1045
+    assert first.counts["nodes"] == 1160
+    assert first.counts["edges"] == 1248
     assert all(path.read_bytes() == content for path, content in before.items())
-    assert len(json.loads(snapshot_manifest.read_text(encoding="utf-8"))["files"]) == 734
+    assert len(json.loads(snapshot_manifest.read_text(encoding="utf-8"))["files"]) == 748
     assert len(json.loads(authority_manifest.read_text(encoding="utf-8"))["files"]) == 20
     print(
         "S17_IN_MEMORY_G17",

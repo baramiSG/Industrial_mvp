@@ -133,11 +133,11 @@ function candidateIsClear(candidate, point, view, geometry) {
   );
   if (geometry.edges.some((edge) => (
     segmentIntersectsBox(box, edge, edgePadding)
-    || boxIntersectsCircle(
+    || (edge.terminal && boxIntersectsCircle(
       box,
       edge.target,
       GRAPH_MARKER_MAX_RADIUS + GRAPH_CAPTION_EDGE_CLEARANCE,
-    )
+    ))
   ))) return false;
   if (geometry.placedBoxes.some((placed) => boxesIntersect(box, placed))) {
     return false;

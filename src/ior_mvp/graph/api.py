@@ -90,11 +90,18 @@ def graph_view(
     opportunity_id: str,
     view_id: str,
     mode: GraphMode = "public",
+    company_id: str | None = None,
+    plant_id: str | None = None,
+    line_id: str | None = None,
+    requirement_item_id: str | None = None,
     service: GraphService = Depends(get_graph_service),
 ) -> dict[str, Any]:
     """Return one governed view or a typed fail-closed payload."""
     try:
-        return service.view(view_id, opportunity_id, mode)
+        return service.view(view_id, opportunity_id, mode, {
+            "company_id": company_id, "plant_id": plant_id,
+            "line_id": line_id, "requirement_item_id": requirement_item_id,
+        })
     except GraphNotFound as exc:
         raise HTTPException(
             status_code=404,

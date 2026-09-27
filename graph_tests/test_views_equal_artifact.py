@@ -57,15 +57,17 @@ def test_view_v1_v4_cypher_equal_artifact_for_every_opportunity_and_mode(
             branch=branch,
         )
         assert [row["producer_id"] for row in live] == artifact["producer_ids"]
-        if live:
+        assert set(artifact["producer_rows"]) == {
+            row["producer_id"] for row in live
+        }
+        for row in live:
+            expected = artifact["producer_rows"][row["producer_id"]]
             for key in (
-                "fired",
-                "execution",
-                "same_process_family",
-                "qualifying_signal_count",
-                "result_code",
+                "fired", "execution", "same_process_family",
+                "qualifying_signal_count", "result_code", "attribution_scope",
+                "signal_evidence_ids", "signals", "evidence_ids",
             ):
-                assert live[0][key] == artifact[key]
+                assert row[key] == expected[key], (opportunity_id, mode, row["producer_id"], key)
 
         live = execute_view(
             connection_spec,

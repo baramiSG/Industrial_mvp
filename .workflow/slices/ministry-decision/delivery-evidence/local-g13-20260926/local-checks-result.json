@@ -1,0 +1,144 @@
+{
+  "status": "PASS",
+  "utc": "2026-09-26T22:10:13.453074+00:00",
+  "candidate_tree": "fe98722cba6539514772d9009a4db4e1ccbe835b",
+  "proof_commit": "241e4dfd935bee8017c147a0ee65f9308c4a4a19",
+  "source_changes": [],
+  "ordinary_index_preserved": true,
+  "commands": [
+    {
+      "name": "sync",
+      "argv": [
+        "/home/barami/.local/bin/uv",
+        "sync",
+        "--locked",
+        "--extra",
+        "dev",
+        "--extra",
+        "graph",
+        "--extra",
+        "e2e"
+      ],
+      "cwd": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/final-candidate-replacement-2/proof",
+      "exit_code": 0,
+      "seconds": 1.682,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "b8d87d66d37c31e42a8967738863d332522e7315cbc0d15cbcf04042b4cd3afd"
+    },
+    {
+      "name": "prohibited",
+      "argv": [
+        "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/final-candidate-replacement-2/proof/.venv/bin/python",
+        "-B",
+        "scripts/check_prohibited_files.py"
+      ],
+      "cwd": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/final-candidate-replacement-2/proof",
+      "exit_code": 0,
+      "seconds": 0.987,
+      "stdout_sha256": "3e1e669e91240e3cd32d37993e8d385af621a12c0eb1af58c6e8d591765cfc13",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "threshold",
+      "argv": [
+        "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/final-candidate-replacement-2/proof/.venv/bin/python",
+        "-B",
+        "scripts/check_threshold_literals.py"
+      ],
+      "cwd": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/final-candidate-replacement-2/proof",
+      "exit_code": 0,
+      "seconds": 0.343,
+      "stdout_sha256": "1ad72010a403b32f06265283ee6ea124a09c95a44d75ff32b9df5b8d600493f1",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "ui",
+      "argv": [
+        "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/final-candidate-replacement-2/proof/.venv/bin/python",
+        "-B",
+        "scripts/check_ui_contracts.py"
+      ],
+      "cwd": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/final-candidate-replacement-2/proof",
+      "exit_code": 0,
+      "seconds": 0.303,
+      "stdout_sha256": "ad8e224176b362994b66691ad6275399e407dfdc06bb213187e45a6a31d51702",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "es",
+      "argv": [
+        "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/final-candidate-replacement-2/proof/.venv/bin/python",
+        "-B",
+        "scripts/check_es_modules.py",
+        "--node",
+        "node"
+      ],
+      "cwd": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/final-candidate-replacement-2/proof",
+      "exit_code": 0,
+      "seconds": 0.866,
+      "stdout_sha256": "e694b83558825fceba65c5b43fdb469b9087bea5591be203e8472608992720f0",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "compile",
+      "argv": [
+        "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/final-candidate-replacement-2/proof/.venv/bin/python",
+        "-B",
+        "-m",
+        "compileall",
+        "-q",
+        "src",
+        "scripts",
+        "tests",
+        "browser_tests",
+        "graph_tests"
+      ],
+      "cwd": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/final-candidate-replacement-2/proof",
+      "exit_code": 0,
+      "seconds": 0.571,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "integrity",
+      "argv": [
+        "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/final-candidate-replacement-2/proof/.venv/bin/python",
+        "-B",
+        "scripts/verify_integrity.py"
+      ],
+      "cwd": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/final-candidate-replacement-2/proof",
+      "exit_code": 0,
+      "seconds": 0.148,
+      "stdout_sha256": "6b608ffcb9a862f030cf907573fa823e549eba43245c8b2869809be2ca6f0e11",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "pytest",
+      "argv": [
+        "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/final-candidate-replacement-2/proof/.venv/bin/python",
+        "-B",
+        "-m",
+        "pytest",
+        "-q"
+      ],
+      "cwd": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/final-candidate-replacement-2/proof",
+      "exit_code": 0,
+      "seconds": 131.437,
+      "stdout_sha256": "ef8dfc88dde73a5f385f0604025e74f82236dfa39341422ccdd20693a1e054ee",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "demo-smoke",
+      "argv": [
+        "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/final-candidate-replacement-2/proof/.venv/bin/python",
+        "-B",
+        "scripts/demo_smoke.py"
+      ],
+      "cwd": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/final-candidate-replacement-2/proof",
+      "exit_code": 0,
+      "seconds": 0.256,
+      "stdout_sha256": "90a83a3de7ad0092bab981f4268aab1461582c897e17eeff8087cb568844e4e6",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ]
+}

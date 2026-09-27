@@ -1,0 +1,54 @@
+{
+  "utc": "2026-09-26T23:48:36.674184+00:00",
+  "status": "ALL_SEVEN_GENERATION_GATES_PASS_EXACT_WRITE_ENVELOPE",
+  "projection_id": "GRAPH-SAU-2026-09-12-0a0f601330ca",
+  "engine_run_id": "ENGINE-fa61c740067a",
+  "counts": {
+    "nodes": 1160,
+    "edges": 1248
+  },
+  "input_count": 240,
+  "snapshot_count": 748,
+  "authority_count": 20,
+  "exact_snapshot_membership_added": [
+    "data/graph/projections/GRAPH-SAU-2026-09-12-0a0f601330ca/manifest.json",
+    "data/graph/projections/GRAPH-SAU-2026-09-12-0a0f601330ca/projection.json"
+  ],
+  "exact_snapshot_membership_removed": [],
+  "changed_existing_snapshot_entries": [
+    "data/graph/current.json"
+  ],
+  "changed_authority_entries": [
+    "docs/core/02_METHODOLOGY_IMPLEMENTATION_MAP.md"
+  ],
+  "all_manifest_hashes_and_sizes_verified": true,
+  "semantic_inspection_sha256": "782979cfcb0fb455e407c354bb19ac55e7bd90a3976de4a386026452641943b4",
+  "outputs": {
+    "data/graph/current.json": {
+      "sha256": "bec5552fc7107556efbf3af43403d88e5ff2475a8a7ba312d18b6fce891ca948",
+      "bytes": 139
+    },
+    "data/graph/projections/GRAPH-SAU-2026-09-12-0a0f601330ca/manifest.json": {
+      "sha256": "5e8498be8e17748a5ba4ceaba9f91600238041951718e1c2a119b6a8498f97a2",
+      "bytes": 228
+    },
+    "data/graph/projections/GRAPH-SAU-2026-09-12-0a0f601330ca/projection.json": {
+      "sha256": "148f91a23f1080134252b2bdc2f5e98ef4e90cc4993baf1402f5e1e1630f60c6",
+      "bytes": 2982902
+    },
+    "data/manifests/snapshot_manifest.json": {
+      "sha256": "34e0d198e2e3a419ca7775f89fb0f8c69cbdf82fe7e5d4af46206d4358b4b387",
+      "bytes": 178869
+    },
+    "docs/authority/00_AUTHORITY_MANIFEST.md": {
+      "sha256": "b055b12343810c6350a4174bb3bc13baf00b0bb9876d1ab744b663280c01dd15",
+      "bytes": 11023
+    },
+    "docs/authority/authority_hashes.json": {
+      "sha256": "15dd48c65969e5dbe8cbffeb5c6b9f4ae5ce4944b4fa0da6538787432d496f74",
+      "bytes": 3540
+    }
+  },
+  "ordinary_index_sha256": "770d3e296985bb61b52211fd365a2b0cad96e8faf512949dfb57f236eb54eaf5",
+  "not_claimed": "Final capture/frozen gates/independent finalapproval/GitHub/live delivery"
+}

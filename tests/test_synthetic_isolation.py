@@ -112,7 +112,7 @@ def test_every_synthetic_row_is_labeled() -> None:
 def test_evidence_policy_declares_the_core_06_metadata_contract() -> None:
     policy = evidence_policy_config()
     isolation = policy["synthetic_isolation"]
-    assert policy["metadata"]["version"] == "1.4.0"
+    assert policy["metadata"]["version"] == "1.5.0"
     assert policy["metadata"]["effective_date"] == "2026-09-03"
     assert policy["simulation_gate"] == {
         "basis": "CLASS_IF_CONFIRMED",
@@ -268,8 +268,8 @@ def test_policy_validation_accepts_additive_s04_metadata(
     scenario = get_synthetic_scenario(opportunity_id)
     assert scenario is not None
     expected_version = (
-        "2.1.0"
-        if opportunity_id in {"SAU-H6-760711", "SAU-H6-760429"}
+        "2.2.0" if opportunity_id in {"SAU-H0-721049", "SAU-H0-390210"}
+        else "2.1.0" if opportunity_id in {"SAU-H6-760711", "SAU-H6-760429"}
         else "2.0.0"
     )
     assert scenario["scenario_version"] == expected_version

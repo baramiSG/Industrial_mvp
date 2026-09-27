@@ -6,6 +6,7 @@ import { loadExecutiveContext } from "./data.js";
 import { mountExecutiveShell, renderHeading, renderJourney, renderStatus, clearContextDisplay, renderFailure } from "./render.js";
 import { handleClaimAction, closeClaimEvidence } from "./evidence.js";
 import { STEP_IDS } from "./labels.js";
+import { selectionKey, validateCandidateSelection } from "./resolution.js";
 
 async function select(selection, history = "push", reload = false) {
   const epoch = nextExecutiveEpoch();
@@ -19,12 +20,14 @@ async function select(selection, history = "push", reload = false) {
   try {
     const [bundle, context] = await Promise.all([
       selection.locale !== state.locale ? fetchLocaleBundle(selection.locale) : Promise.resolve(null),
-      !reload && oldContext?.executiveCase.opportunity.opportunity_id === selection.opportunityId
+      !reload && oldContext?.selectionKey === selectionKey(selection)
         ? Promise.resolve(oldContext) : loadExecutiveContext(selection.opportunityId, executive.summary),
     ]);
     if (!isCurrentExecutiveEpoch(epoch)) return;
     if (history !== "none") writeExecutiveLocation(selection, { replace: history === "replace" });
     if (bundle) applyLocaleBundle(bundle);
+    context.selectionKey = selectionKey(selection);
+    selection.selectionUnavailable = !validateCandidateSelection(selection, context);
     executive.selection = selection;
     executive.context = context;
     executive.pending = null;
@@ -75,7 +78,9 @@ export async function initExecutive() {
   document.addEventListener("change", (event) => {
     if (event.target.id !== "executive-case") return;
     const selection = executive.pending || executive.selection;
-    select({ ...selection, opportunityId: event.target.value, invalidOpportunity: false });
+    select({ ...selection, opportunityId: event.target.value, invalidOpportunity: false,
+      companyId: null, plantId: null, lineId: null, requirementId: null,
+      selectionUnavailable: false });
   });
   document.addEventListener("keydown", (event) => { if (event.key === "Escape") closeClaimEvidence(); });
   document.addEventListener("click", (event) => {
@@ -84,9 +89,18 @@ export async function initExecutive() {
     const step = action?.dataset.executiveStep || action?.dataset.executiveGo;
     const selection = executive.pending || executive.selection;
     if (STEP_IDS.includes(step) && selection) select({ ...selection, stepId: step });
+    const subject = event.target.closest("[data-ministry-company],[data-ministry-plant],[data-ministry-line],[data-ministry-requirement]");
+    if (subject && selection) select({ ...selection,
+      companyId: subject.dataset.ministryCompany ?? selection.companyId,
+      plantId: subject.dataset.ministryPlant ?? (subject.dataset.ministryCompany ? null : selection.plantId),
+      lineId: subject.dataset.ministryLine ?? ((subject.dataset.ministryCompany || subject.dataset.ministryPlant) ? null : selection.lineId),
+      requirementId: subject.dataset.ministryRequirement ?? ((subject.dataset.ministryCompany || subject.dataset.ministryPlant || subject.dataset.ministryLine) ? null : selection.requirementId),
+      selectionUnavailable: false,
+    });
     if (event.target.closest("[data-executive-locale]") && selection) select({ ...selection, locale: targetLocale() });
     if (event.target.closest("[data-executive-retry]")) start();
-    if (event.target.closest("[data-executive-first]")) select({ ...selection, opportunityId: executive.summary.opportunities[0].opportunity_id, invalidOpportunity: false });
+    if (event.target.closest("[data-executive-first]")) select({ ...selection, opportunityId: executive.summary.opportunities[0].opportunity_id, invalidOpportunity: false,
+      companyId: null, plantId: null, lineId: null, requirementId: null, selectionUnavailable: false });
   });
   window.addEventListener("popstate", () => {
     if (!executive.summary) return;

@@ -216,7 +216,7 @@ def test_ui_catalogue_metadata_locales_and_version_are_exact() -> None:
 
     assert payload["metadata"] == {
         "artifact": "industrial-opportunity-ui-strings",
-        "version": "1.7.0",
+        "version": "1.8.0",
         "effective_date": "2026-09-24",
         "authority": (
             "Core 01 NFR-006/NFR-007 and UX GenUI Demo Specification"
@@ -235,7 +235,7 @@ def test_current_ui_catalogue_passes_complete_validator() -> None:
     config.validate_ui_strings(_catalogue())
 
 
-@pytest.mark.parametrize("version", ["1.5.0", "1.6.0", "1.8.0", "1.6", "1.7", None, True, False, 1.6, 1.7])
+@pytest.mark.parametrize("version", ["1.5.0", "1.6.0", "1.7.0", "1.9.0", "1.6", "1.7", None, True, False, 1.6, 1.7])
 def test_ui_catalogue_rejects_non_current_versions(version: object) -> None:
     payload = _catalogue()
     payload["metadata"]["version"] = version
@@ -605,6 +605,30 @@ def test_ui_catalogue_excludes_policy_synthetic_labels() -> None:
     assert policy["display_label_ar"] == EXPECTED_ARABIC_LABEL
 
 
+def test_ministry_disclosure_is_policy_owned_and_bilingual() -> None:
+    from ior_mvp.config import ui_strings_bundle
+    from ior_mvp.evidence import executive_policy_copy
+    policy = yaml.safe_load((PROJECT_ROOT / "config/evidence_policy.v1.yaml").read_text())
+    assert policy["metadata"]["version"] == "1.5.0"
+    assert _catalogue()["metadata"]["version"] == "1.8.0"
+    assert ui_strings_bundle("en")["executive_policy"] == executive_policy_copy()
+    assert ui_strings_bundle("ar")["executive_policy"] == executive_policy_copy()
+    for locale in ("en", "ar"):
+        assert executive_policy_copy()["headline"][locale] not in _catalogue()["strings"][locale].values()
+        assert _placeholders(executive_policy_copy()["reference_condition"][locale]) == {"increment_kt", "months"}
+
+
+@pytest.mark.parametrize("field", ["executive_headline_ar", "reference_economics_condition_ar"])
+def test_ministry_policy_missing_locale_fails_closed(monkeypatch, field) -> None:
+    from copy import deepcopy
+    import ior_mvp.evidence as evidence
+    policy = deepcopy(config.evidence_policy_config())
+    del policy["synthetic_isolation"][field]
+    monkeypatch.setattr(evidence, "evidence_policy_config", lambda: policy)
+    with pytest.raises(evidence.EvidenceIntegrityError):
+        evidence.executive_policy_copy()
+
+
 def test_every_ui_string_usage_resolves_without_unused_keys() -> None:
     result = subprocess.run(
         [sys.executable, str(CHECKER), "--check-catalogue-usage"],
@@ -635,13 +659,14 @@ def test_visible_ui_copy_is_not_hard_coded_outside_catalogue() -> None:
 def test_ui_strings_endpoint_returns_valid_en_and_ar_bundles(
     locale: str,
 ) -> None:
+    from ior_mvp.evidence import executive_policy_copy
     response = TestClient(app).get(f"/api/ui-strings/{locale}")
 
     assert response.status_code == 200
     payload = response.json()
     catalogue = _catalogue()
     assert payload == {
-        "catalogue_version": "1.7.0",
+        "catalogue_version": "1.8.0",
         "locale": locale,
         **catalogue["locales"][locale],
         "strings": catalogue["strings"][locale],
@@ -653,6 +678,7 @@ def test_ui_strings_endpoint_returns_valid_en_and_ar_bundles(
             )["synthetic_isolation"]["display_label"],
             "ar": EXPECTED_ARABIC_LABEL,
         },
+        "executive_policy": executive_policy_copy(),
     }
 
 

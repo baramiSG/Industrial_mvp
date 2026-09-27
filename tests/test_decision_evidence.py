@@ -404,7 +404,7 @@ def _passing_assessments() -> dict[str, dict]:
 def test_evidence_policy_13_advance_gate_is_directly_executable() -> None:
     policy = evidence_policy_config()
 
-    assert policy["metadata"]["version"] == "1.4.0"
+    assert policy["metadata"]["version"] == "1.5.0"
     assert policy["metadata"]["effective_date"] == "2026-09-03"
     assert policy["simulation_gate"] == {
         "basis": "CLASS_IF_CONFIRMED",

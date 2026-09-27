@@ -140,8 +140,12 @@ AR-V01 dossier clipping and TRADE-SCALE-01 explanation/data access remain requir
   those values contain Arabic catalogue prose rather than English
   source-language islands. Only verbatim source spans and classified
   technical values remain directionally isolated LTR islands.
-- Every simulated surface repeats both warning labels from evidence policy
-  1.2.0. Neither label is duplicated in the UI catalogue.
+- Evidence policy 1.5.0 supplies the Executive simulation headline and the
+  synthetic evidence label. The Executive journey shows the data-scoped
+  headline at entry, a compact marker on affected simulated facts, and the
+  full label and provenance in their Details. The independent graph,
+  passports, GenUI, dossier and simulated printed pages retain their full
+  synthetic warnings; the Executive presentation rule does not shorten them.
 - Western (`latn`) digits, Gregorian dates and verbatim source spans are the
   Supervisor-approved S07 presentation defaults. They are owner-amendable
   through the applicable authority change; implementation may not silently

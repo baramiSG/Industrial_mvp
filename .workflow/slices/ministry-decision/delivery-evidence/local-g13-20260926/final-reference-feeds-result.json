@@ -1,0 +1,83 @@
+{
+  "utc": "2026-09-26T22:35:20.906132+00:00",
+  "status": "PASS_OFFLINE_FINAL_REFERENCE_FEEDS_LOCAL_FROZEN_M",
+  "approval": false,
+  "subjects": {
+    "F_base_commit": "bbcfe7836eb4e3c3e71ddd6b95986c45324267d4",
+    "F_archive_sha256": "89236ce19f8bd074e4eda1aa452b68f3975ad9b26194dd1e5fd45ee42869af0d",
+    "F_probe_sha256": "23e03d5470be1df6bb917950722ede8a49df54c5c8db5a7d8358e4bf64ab1afc",
+    "F_projection_id": "GRAPH-SAU-2026-09-12-4152824cfa67",
+    "F_engine_run_id": "ENGINE-64e24689a59f",
+    "F_canonical_sha256": "ab5890d7af3037e548827b17d498a19ebc221eca5df5941f55b18e3a978a1e60",
+    "M_proof_commit": "241e4dfd935bee8017c147a0ee65f9308c4a4a19",
+    "M_tree": "fe98722cba6539514772d9009a4db4e1ccbe835b",
+    "M_projection_id": "GRAPH-SAU-2026-09-12-c9841fe8e850",
+    "M_engine_run_id": "ENGINE-941521e7a5e5",
+    "M_canonical_sha256": "984a884c7ec6aa8602a3f3291aaaf2aa26546688b81d0b408f42db384924e888",
+    "M_nodes": 1160,
+    "M_edges": 1248,
+    "M_saved_input_count": 238
+  },
+  "method": {
+    "copied_probe_sha256": "bf461c01d7acdbd1b45bb40bc15bb33f264b2dfc59143759945b0b2ef4d3f787",
+    "original_probe_sha256": "2d0ac03a4773e527dcdd7cf9f03aab3ab618c805ca9b3c574fa590b5a999dd47",
+    "helper_diff_sha256": "a48d1a334027da2d0828674998d2b998a7dfea481ba914fdb0c037d7a894e085",
+    "copied_compare_sha256": "91d049e3a181c6116897fc8feeb6362af9818c9ce1025ae037589d1568176c7b",
+    "compare_byte_identical_original": true,
+    "final_scoped_source_map_sha256": "ce363509b4f5d8fecd14eacfabd0468f398853d305d38b57a75eb1d49fb3eda4",
+    "final_scoped_source_count": 325,
+    "F_reference_rerun_byte_equal": true,
+    "F_engine_R9S_evaluations": 11,
+    "M_engine_R9S_evaluations": 11,
+    "branch_labelled_reference_entries_each": 22,
+    "generated_edge_key_remaps_verified": {
+      "F": 308,
+      "M": 308
+    }
+  },
+  "checks": {
+    "matrix_guard": "PASS",
+    "literal_cases": 11,
+    "branches": 2,
+    "four_feed_slots": 88,
+    "four_feed_equal": 88,
+    "feed_differences": 0,
+    "reference_ledger_differences": 0,
+    "adjacency_reference_mismatches": 0,
+    "producer_row_delta_contexts": 22,
+    "changed_adjacency_metrics": 18,
+    "semantic_inspection_sha256": "7539f151693eeeacb54521bd70e22fdf940aee29018ecd6b54de47d79e95fa04",
+    "all_three_child_exits_zero": true,
+    "stdout_stderr_receipts": [
+      "F-probe.stdout",
+      "F-probe.stderr",
+      "M-probe.stdout",
+      "M-probe.stderr",
+      "compare.stdout",
+      "compare.stderr"
+    ]
+  },
+  "source_preservation": {
+    "admitted_source_files": 3544,
+    "proof_matches_final_inventory_before_and_after": true,
+    "W_matches_final_inventory_before_and_after": true,
+    "F_saved_input_files_match_archive_source": true,
+    "M_saved_inputs_match_final_inventory": true,
+    "ordinary_index_sha256": "770d3e296985bb61b52211fd365a2b0cad96e8faf512949dfb57f236eb54eaf5",
+    "pid34210_start_ticks": 79799,
+    "lock_inode": 2358670
+  },
+  "existing_closure_limitation": {
+    "all_new_python_in_graph_discovery": false,
+    "outside_graph_discovery": [
+      "src/ior_mvp/executive/candidate_projection.py",
+      "src/ior_mvp/executive/line_models.py"
+    ],
+    "graph_inputs_contain_seven_other_new_backend_modules": true
+  },
+  "limitations": [
+    "Offline local proof only; M is frozen candidate, not merged or live.",
+    "This proves four feeds and 22 branch-keyed R9-S records; only 11 independent R9-S evaluations per probe.",
+    "Live Aura inventory, Cypher producer-row equality, read-routed views and operational GO remain outside this replay."
+  ]
+}

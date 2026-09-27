@@ -831,3 +831,9 @@ Their stable IDs are `decision.simulated` and
 They require at least one exact current-scenario synthetic row and may retain
 only valid public evidence used by the counterfactual. Cross-scenario rows and
 incomplete synthetic metadata fail validation.
+
+## 16. Ministry M register and finding scopes
+
+Scenario 2.2 retains the canonical eight-company register across the two demonstration scenarios while qualifying every synthetic record and derived graph identity by scenario. Company, plant, line, target requirement, fact and coverage identifiers remain distinct. Parentage and attribution must be explicit: a company customs row is not plant evidence without a valid plant link, and a plant row is not an assessed line. Source pointers resolve exact record, field, subject, period and scenario membership; missing optional enrichment is typed absence, while a dangling required pointer is invalid.
+
+Each preliminary finding binds the target requirement, exact subject, source references, assessment window, rule, field origin, limitation and four-slot next-evidence request. DIRECT_RECORD and REVIEWED_INFERENCE are origin labels separate from Class-D synthetic evidence; the latter requires an approved rule and exact supporting assertions. A coverage-scoped NOT_FOUND state does not assert physical absence. Diagnostic candidates do not become chosen reference plants or formal decisions. Source: methodology §§6.0, 10.2; approved Ministry M REGISTER/DISCOVERY contracts.

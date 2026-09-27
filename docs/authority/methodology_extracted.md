@@ -389,7 +389,7 @@ improve a preferred result.</p></th>
 
 | **Rule** | **Name**                          | **Initial operating test**                                                                                                                                                                                                                   | **Result**                                                                                    |
 |----------|-----------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|
-| **R9-S** | Coarse incumbent adjacency screen | A verified Saudi plant operates in the same product/process family plus at least one additional signal: matching feedstock, core process, equipment, adjacent output, relevant certification or imported inputs; no known hard-gate failure. | Open the full Test-2 capability assessment. Do not assign D\* or select a route at screening. |
+| **R9-S** | Coarse incumbent adjacency screen | A verified Saudi plant operates in the same product/process family plus at least one additional signal: matching feedstock, core process, equipment, adjacent output, relevant certification or imported inputs; no known hard-gate failure. | Open the full Test-2 capability assessment. Do not assign D\* or select a route at screening. See §6.0 for preliminary record assessment. |
 | **R10**  | Strategic criticality             | Critical product, material resilience externality or enabling linkages verified by the responsible authority.                                                                                                                                | Run strategic-value case even if market size is modest.                                       |
 | **R11**  | Economic exclusion                | Downside delivered cost is structurally \>25% above import parity with no verified strategic externality or export path.                                                                                                                     | Reject or monitor; do not use incentives to hide structural uncompetitiveness.                |
 | **R12**  | Evidence-value trigger            | Probability that one missing fact changes state/route × value of decision change exceeds evidence cost and delay.                                                                                                                            | Commission targeted evidence only.                                                            |
@@ -583,6 +583,12 @@ priors. They cannot establish whether a particular Saudi plant can
 produce a target specification. The brownfield test therefore compares
 the target process and qualification requirements with line-level
 evidence.
+
+**6.0 Preliminary record assessment**
+
+Before full Test 2, a preliminary assessment may compare identified registry, production, customs, application and technical records with an explicit target requirement. Approved finite mapping rules may identify supported activity or process/input indicators, source-established limitations, and requirements not established within a named evidence boundary. Each conclusion records its subject, period, input facts, rule and field origin. Registration, procurement, exports and investment intentions do not by themselves establish installed, operating or target-qualified capacity. Absence from a record extract means not found within that extract, not physical absence.
+
+This preliminary vector is not a capability-distance estimate. It does not assign dimension states 0–3, increase K, resolve final hard gates, publish D* or choose an intervention. Section 6.4 remains unchanged. Useful preliminary conclusions and targeted records requests do not require an equipment inventory or site survey. Optional producer confirmation, technical records or survey may resolve specific remaining questions. Requests follow disclosed decision dependencies and available-record checks; no numeric accuracy or EVSI is implied.
 
 **6.1 Effective capacity**
 
@@ -1040,6 +1046,8 @@ experts decide.*
 | **Deterministic validation**  | Standards, units, dates, HS codes, ranges and arithmetic are validated outside the language model.                |
 | **Fail-closed hard gates**    | Unresolved product identity, process, regulatory or capacity gates route the case to INVESTIGATE.                 |
 | **Human sign-off**            | Industrial, competition, fiscal and policy reviewers approve the relevant conclusion and any override.            |
+
+Under §10.2, every preliminary field identifies DIRECT_RECORD, REVIEWED_INFERENCE, ENGINEERING_DECLARATION or UNKNOWN origin separately from its evidence class. REVIEWED_INFERENCE requires an approved mapping-rule identity and exact source references; it never denotes automatic technical confirmation. A contradiction remains visible and blocks the affected claim. Preliminary conclusions cannot overwrite declared/confirmed Test2 evidence or either formal decision branch.
 
 **10.3 Autonomous analysis; accountable authorization**
 

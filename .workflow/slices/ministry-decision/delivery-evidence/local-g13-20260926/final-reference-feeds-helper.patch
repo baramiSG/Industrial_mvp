@@ -1,0 +1,18 @@
+--- original/probe.py
++++ final-reference-feed-proof/probe.py
+@@ -2,13 +2,13 @@
+ from pathlib import Path
+ from collections import Counter
+ E=Path(__file__).resolve().parent
+-which=sys.argv[1]; root=E/('delivered-F' if which=='F' else 'source-copy')
++which=sys.argv[1]; root=E/'delivered-F' if which=='F' else Path('/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/final-candidate-replacement-2/proof')
+ sys.path.insert(0,str(root/'src'))
+ from ior_mvp.graph.artifact import load_projection,canonical_bytes,validate_projection
+ from ior_mvp.graph.projection import build_repository_projection,discover_inputs,_load_repository_cases
+ from ior_mvp.graph.engine_feed import adjacency_explanation,evidence_linkage,route_blocking_capability,shared_enabler_inputs,shared_enabler_queue_rows
+ from ior_mvp.rules import evaluate_rules
+-projection=load_projection(root/'data/graph') if which=='F' else build_repository_projection(root)
++projection=load_projection(root/'data/graph')
+ validate_projection(projection)
+ identities={projection.projection_id:'<GENERATED_PROJECTION_ID>',projection.engine['engine_run_id']:'<GENERATED_ENGINE_RUN_ID>'}
+ def norm(value):

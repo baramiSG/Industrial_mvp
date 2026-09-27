@@ -29,7 +29,7 @@ export function renderDatasets(context) {
 export function renderEvsi(context) {
   const summary = context.summary.synthetic_evsi;
   const row = context.evsi;
-  return `<section class="executive-simulation" data-case-evsi data-availability="${esc(row.availability)}"><h3>${esc(label("ui", "evsi"))}</h3>${policyLabels(summary.display_labels)}<p>${esc(label("ui", "evsi_note"))}</p>
+  return `<section class="executive-simulation" data-case-evsi data-availability="${esc(row.availability)}"><h3>${esc(label("ui", "evsi"))}</h3><p>${esc(t("graph.boundary_synthetic"))}</p><p>${esc(label("ui", "evsi_note"))}</p>
     <p>${code(row.scenario_id ?? "UNAVAILABLE")} · ${esc(label("status", row.availability))}</p>
     ${row.availability === "AVAILABLE" ? `<p class="executive-number">${code(number(row.approximate_evsi_m_sar))} ${esc(label("ui", "sar_million"))}</p><details><summary>${esc(label("ui", "next_fact"))}</summary>${sourceCaption()}${sourceIsland(row.next_fact, "p")}<dl><dt>${esc(label("ui", "route_probability"))}</dt><dd>${esc(percent(row.route_change_probability))}</dd></dl></details>` : ""}
     <details><summary>${esc(label("ui", "detail"))}</summary><dl><dt>${esc(label("ui", "available_cases"))}</dt><dd>${code(integer(summary.available_case_count))}</dd><dt>${esc(label("ui", "unavailable_cases"))}</dt><dd>${code(integer(summary.unavailable_case_count))}</dd><dt>${esc(label("ui", "total_evsi"))}</dt><dd>${code(number(summary.total_approximate_evsi_m_sar))}</dd></dl></details></section>`;

@@ -1,0 +1,1909 @@
+{
+  "all_476_input_file_hash_and_size_bindings_verified": true,
+  "authority_basis_sha256_unchanged": "e8455ac8c77630f031de7f1c38ea6feefa30a43905f7da20ae9a300465fba473",
+  "changed_inputs": [
+    {
+      "after": {
+        "bytes": 89897,
+        "kind": "SCENARIO",
+        "path": "data/synthetic/SYN-MINISTRY-PP-001.json",
+        "sha256": "a32cdd46ca45deffac6f5564f4acc6de87bf0ec3abfb245f44ab0d0cf87c3dc4",
+        "version": "2.2.0"
+      },
+      "before": {
+        "bytes": 89810,
+        "kind": "SCENARIO",
+        "path": "data/synthetic/SYN-MINISTRY-PP-001.json",
+        "sha256": "cac33a78000620d42baad084ee751d7768c20547b838c3320133d7fc27cdea77",
+        "version": "2.2.0"
+      },
+      "path": "data/synthetic/SYN-MINISTRY-PP-001.json"
+    },
+    {
+      "after": {
+        "bytes": 93401,
+        "kind": "SCENARIO",
+        "path": "data/synthetic/SYN-MINISTRY-STEEL-001.json",
+        "sha256": "655597b11232013fc151006faf1b5da22c0f4dd76a8ee4f361e32162b31ade31",
+        "version": "2.2.0"
+      },
+      "before": {
+        "bytes": 93314,
+        "kind": "SCENARIO",
+        "path": "data/synthetic/SYN-MINISTRY-STEEL-001.json",
+        "sha256": "bca23268c56987fe1d30e19550a35b0f3863c981f55cd47b000deff006a37f8c",
+        "version": "2.2.0"
+      },
+      "path": "data/synthetic/SYN-MINISTRY-STEEL-001.json"
+    },
+    {
+      "after": {
+        "bytes": 20154,
+        "kind": "ENGINE_IMPLEMENTATION",
+        "path": "src/ior_mvp/candidate_finding_rules.py",
+        "sha256": "3b1111b68bb87cd8554a6ffd245fe0ff7e2186682bc4c6c02985e52cb2ee96a2",
+        "version": "UNAVAILABLE"
+      },
+      "before": {
+        "bytes": 20140,
+        "kind": "ENGINE_IMPLEMENTATION",
+        "path": "src/ior_mvp/candidate_finding_rules.py",
+        "sha256": "56adb6e288b78c2b3a169c6e1dadfa0e9be22a49e3f19ca04d342844b7cb4000",
+        "version": "UNAVAILABLE"
+      },
+      "path": "src/ior_mvp/candidate_finding_rules.py"
+    },
+    {
+      "after": {
+        "bytes": 17034,
+        "kind": "ENGINE_IMPLEMENTATION",
+        "path": "src/ior_mvp/line_comparison.py",
+        "sha256": "da0cb2aec3012200228b337ffc73887e75fafb3aacbaf0f35020ad25093ef63f",
+        "version": "UNAVAILABLE"
+      },
+      "before": {
+        "bytes": 16915,
+        "kind": "ENGINE_IMPLEMENTATION",
+        "path": "src/ior_mvp/line_comparison.py",
+        "sha256": "8db60aa12a948e051a03bf961b4fcc9973ce2ad5259fa1b2aa607ba51dc5eb6e",
+        "version": "UNAVAILABLE"
+      },
+      "path": "src/ior_mvp/line_comparison.py"
+    },
+    {
+      "after": {
+        "bytes": 19867,
+        "kind": "ENGINE_IMPLEMENTATION",
+        "path": "src/ior_mvp/line_contract.py",
+        "sha256": "19010411a23ca719aef5cfc629f179360c578884260b303784340bb3413abe2b",
+        "version": "UNAVAILABLE"
+      },
+      "before": {
+        "bytes": 19302,
+        "kind": "ENGINE_IMPLEMENTATION",
+        "path": "src/ior_mvp/line_contract.py",
+        "sha256": "9572614cdae89a74a49c157de2eaedb8535d96cc4c0bbd5f9f7b140574b67000",
+        "version": "UNAVAILABLE"
+      },
+      "path": "src/ior_mvp/line_contract.py"
+    }
+  ],
+  "counts_equal": {
+    "edges": 1248,
+    "edges_by_type": {
+      "ADJACENT_TO": 21,
+      "CERTIFIED_TO": 1,
+      "CONSTRAINED_BY": 119,
+      "DEPENDS_ON": 198,
+      "HAS_CAPABILITY": 387,
+      "HAS_LINE": 20,
+      "PRODUCED_BY": 18,
+      "QUALIFIED_FOR": 11,
+      "REQUIRES_SPECIFICATION": 44,
+      "SUPPORTED_BY_EVIDENCE": 399,
+      "UNLOCKED_BY": 2,
+      "USED_IN": 22,
+      "USES_PROCESS": 6
+    },
+    "nodes": 1160,
+    "nodes_by_label": {
+      "Application": 22,
+      "Capability": 387,
+      "Certification": 1,
+      "Company": 28,
+      "CustomerSegment": 11,
+      "Decision": 22,
+      "Evidence": 383,
+      "Intervention": 199,
+      "Plant": 27,
+      "Process": 5,
+      "Product": 11,
+      "ProductionLine": 20,
+      "Scenario": 11,
+      "Specification": 22,
+      "Standard": 10,
+      "TariffLine": 1
+    }
+  },
+  "data_leaf_deltas": [
+    {
+      "deltas": [
+        {
+          "after": "coastal construction panels",
+          "before": "declared",
+          "fact_id": "FACT-QUAL-LINE-7315366f6a9166d8",
+          "path": "/synthetic_inputs/candidate_register/facts/21/values/application"
+        },
+        {
+          "after": "coastal construction panels",
+          "before": "declared",
+          "fact_id": "FACT-QUAL-LINE-96f1bd96c5c6ccda",
+          "path": "/synthetic_inputs/candidate_register/facts/25/values/application"
+        },
+        {
+          "after": "coastal construction panels",
+          "before": "declared",
+          "fact_id": "FACT-QUAL-LINE-4fbdbb0b2c107968",
+          "path": "/synthetic_inputs/candidate_register/facts/30/values/application"
+        },
+        {
+          "after": "general rigid packaging",
+          "before": "declared",
+          "fact_id": "FACT-QUAL-LINE-e403e85a85052861",
+          "path": "/synthetic_inputs/candidate_register/facts/35/values/application"
+        },
+        {
+          "after": "general rigid packaging",
+          "before": "declared",
+          "fact_id": "FACT-QUAL-LINE-cb9a42384c3523ec",
+          "path": "/synthetic_inputs/candidate_register/facts/40/values/application"
+        }
+      ],
+      "path": "data/synthetic/SYN-MINISTRY-STEEL-001.json"
+    },
+    {
+      "deltas": [
+        {
+          "after": "coastal construction panels",
+          "before": "declared",
+          "fact_id": "FACT-QUAL-LINE-7315366f6a9166d8",
+          "path": "/synthetic_inputs/candidate_register/facts/21/values/application"
+        },
+        {
+          "after": "coastal construction panels",
+          "before": "declared",
+          "fact_id": "FACT-QUAL-LINE-96f1bd96c5c6ccda",
+          "path": "/synthetic_inputs/candidate_register/facts/25/values/application"
+        },
+        {
+          "after": "coastal construction panels",
+          "before": "declared",
+          "fact_id": "FACT-QUAL-LINE-4fbdbb0b2c107968",
+          "path": "/synthetic_inputs/candidate_register/facts/30/values/application"
+        },
+        {
+          "after": "general rigid packaging",
+          "before": "declared",
+          "fact_id": "FACT-QUAL-LINE-e403e85a85052861",
+          "path": "/synthetic_inputs/candidate_register/facts/35/values/application"
+        },
+        {
+          "after": "general rigid packaging",
+          "before": "declared",
+          "fact_id": "FACT-QUAL-LINE-cb9a42384c3523ec",
+          "path": "/synthetic_inputs/candidate_register/facts/40/values/application"
+        }
+      ],
+      "path": "data/synthetic/SYN-MINISTRY-PP-001.json"
+    }
+  ],
+  "engine_feed_comparison_count": 110,
+  "engine_feed_comparisons": [
+    {
+      "case": "SAU-H0-390210",
+      "equal_after_verified_identity_map": true,
+      "function": "shared_enabler_inputs",
+      "mode": "public"
+    },
+    {
+      "case": "SAU-H0-390210",
+      "equal_after_verified_identity_map": true,
+      "function": "adjacency_explanation",
+      "mode": "public"
+    },
+    {
+      "case": "SAU-H0-390210",
+      "equal_after_verified_identity_map": true,
+      "function": "route_blocking_capability",
+      "mode": "public"
+    },
+    {
+      "case": "SAU-H0-390210",
+      "equal_after_verified_identity_map": true,
+      "function": "evidence_linkage",
+      "mode": "public"
+    },
+    {
+      "case": "SAU-H0-390210",
+      "equal_after_verified_identity_map": true,
+      "function": "shared_enabler_queue_rows",
+      "mode": "public"
+    },
+    {
+      "case": "SAU-H0-390210",
+      "equal_after_verified_identity_map": true,
+      "function": "shared_enabler_inputs",
+      "mode": "simulated"
+    },
+    {
+      "case": "SAU-H0-390210",
+      "equal_after_verified_identity_map": true,
+      "function": "adjacency_explanation",
+      "mode": "simulated"
+    },
+    {
+      "case": "SAU-H0-390210",
+      "equal_after_verified_identity_map": true,
+      "function": "route_blocking_capability",
+      "mode": "simulated"
+    },
+    {
+      "case": "SAU-H0-390210",
+      "equal_after_verified_identity_map": true,
+      "function": "evidence_linkage",
+      "mode": "simulated"
+    },
+    {
+      "case": "SAU-H0-390210",
+      "equal_after_verified_identity_map": true,
+      "function": "shared_enabler_queue_rows",
+      "mode": "simulated"
+    },
+    {
+      "case": "SAU-H0-721049",
+      "equal_after_verified_identity_map": true,
+      "function": "shared_enabler_inputs",
+      "mode": "public"
+    },
+    {
+      "case": "SAU-H0-721049",
+      "equal_after_verified_identity_map": true,
+      "function": "adjacency_explanation",
+      "mode": "public"
+    },
+    {
+      "case": "SAU-H0-721049",
+      "equal_after_verified_identity_map": true,
+      "function": "route_blocking_capability",
+      "mode": "public"
+    },
+    {
+      "case": "SAU-H0-721049",
+      "equal_after_verified_identity_map": true,
+      "function": "evidence_linkage",
+      "mode": "public"
+    },
+    {
+      "case": "SAU-H0-721049",
+      "equal_after_verified_identity_map": true,
+      "function": "shared_enabler_queue_rows",
+      "mode": "public"
+    },
+    {
+      "case": "SAU-H0-721049",
+      "equal_after_verified_identity_map": true,
+      "function": "shared_enabler_inputs",
+      "mode": "simulated"
+    },
+    {
+      "case": "SAU-H0-721049",
+      "equal_after_verified_identity_map": true,
+      "function": "adjacency_explanation",
+      "mode": "simulated"
+    },
+    {
+      "case": "SAU-H0-721049",
+      "equal_after_verified_identity_map": true,
+      "function": "route_blocking_capability",
+      "mode": "simulated"
+    },
+    {
+      "case": "SAU-H0-721049",
+      "equal_after_verified_identity_map": true,
+      "function": "evidence_linkage",
+      "mode": "simulated"
+    },
+    {
+      "case": "SAU-H0-721049",
+      "equal_after_verified_identity_map": true,
+      "function": "shared_enabler_queue_rows",
+      "mode": "simulated"
+    },
+    {
+      "case": "SAU-H6-294110",
+      "equal_after_verified_identity_map": true,
+      "function": "shared_enabler_inputs",
+      "mode": "public"
+    },
+    {
+      "case": "SAU-H6-294110",
+      "equal_after_verified_identity_map": true,
+      "function": "adjacency_explanation",
+      "mode": "public"
+    },
+    {
+      "case": "SAU-H6-294110",
+      "equal_after_verified_identity_map": true,
+      "function": "route_blocking_capability",
+      "mode": "public"
+    },
+    {
+      "case": "SAU-H6-294110",
+      "equal_after_verified_identity_map": true,
+      "function": "evidence_linkage",
+      "mode": "public"
+    },
+    {
+      "case": "SAU-H6-294110",
+      "equal_after_verified_identity_map": true,
+      "function": "shared_enabler_queue_rows",
+      "mode": "public"
+    },
+    {
+      "case": "SAU-H6-294110",
+      "equal_after_verified_identity_map": true,
+      "function": "shared_enabler_inputs",
+      "mode": "simulated"
+    },
+    {
+      "case": "SAU-H6-294110",
+      "equal_after_verified_identity_map": true,
+      "function": "adjacency_explanation",
+      "mode": "simulated"
+    },
+    {
+      "case": "SAU-H6-294110",
+      "equal_after_verified_identity_map": true,
+      "function": "route_blocking_capability",
+      "mode": "simulated"
+    },
+    {
+      "case": "SAU-H6-294110",
+      "equal_after_verified_identity_map": true,
+      "function": "evidence_linkage",
+      "mode": "simulated"
+    },
+    {
+      "case": "SAU-H6-294110",
+      "equal_after_verified_identity_map": true,
+      "function": "shared_enabler_queue_rows",
+      "mode": "simulated"
+    },
+    {
+      "case": "SAU-H6-294120",
+      "equal_after_verified_identity_map": true,
+      "function": "shared_enabler_inputs",
+      "mode": "public"
+    },
+    {
+      "case": "SAU-H6-294120",
+      "equal_after_verified_identity_map": true,
+      "function": "adjacency_explanation",
+      "mode": "public"
+    },
+    {
+      "case": "SAU-H6-294120",
+      "equal_after_verified_identity_map": true,
+      "function": "route_blocking_capability",
+      "mode": "public"
+    },
+    {
+      "case": "SAU-H6-294120",
+      "equal_after_verified_identity_map": true,
+      "function": "evidence_linkage",
+      "mode": "public"
+    },
+    {
+      "case": "SAU-H6-294120",
+      "equal_after_verified_identity_map": true,
+      "function": "shared_enabler_queue_rows",
+      "mode": "public"
+    },
+    {
+      "case": "SAU-H6-294120",
+      "equal_after_verified_identity_map": true,
+      "function": "shared_enabler_inputs",
+      "mode": "simulated"
+    },
+    {
+      "case": "SAU-H6-294120",
+      "equal_after_verified_identity_map": true,
+      "function": "adjacency_explanation",
+      "mode": "simulated"
+    },
+    {
+      "case": "SAU-H6-294120",
+      "equal_after_verified_identity_map": true,
+      "function": "route_blocking_capability",
+      "mode": "simulated"
+    },
+    {
+      "case": "SAU-H6-294120",
+      "equal_after_verified_identity_map": true,
+      "function": "evidence_linkage",
+      "mode": "simulated"
+    },
+    {
+      "case": "SAU-H6-294120",
+      "equal_after_verified_identity_map": true,
+      "function": "shared_enabler_queue_rows",
+      "mode": "simulated"
+    },
+    {
+      "case": "SAU-H6-310430",
+      "equal_after_verified_identity_map": true,
+      "function": "shared_enabler_inputs",
+      "mode": "public"
+    },
+    {
+      "case": "SAU-H6-310430",
+      "equal_after_verified_identity_map": true,
+      "function": "adjacency_explanation",
+      "mode": "public"
+    },
+    {
+      "case": "SAU-H6-310430",
+      "equal_after_verified_identity_map": true,
+      "function": "route_blocking_capability",
+      "mode": "public"
+    },
+    {
+      "case": "SAU-H6-310430",
+      "equal_after_verified_identity_map": true,
+      "function": "evidence_linkage",
+      "mode": "public"
+    },
+    {
+      "case": "SAU-H6-310430",
+      "equal_after_verified_identity_map": true,
+      "function": "shared_enabler_queue_rows",
+      "mode": "public"
+    },
+    {
+      "case": "SAU-H6-310430",
+      "equal_after_verified_identity_map": true,
+      "function": "shared_enabler_inputs",
+      "mode": "simulated"
+    },
+    {
+      "case": "SAU-H6-310430",
+      "equal_after_verified_identity_map": true,
+      "function": "adjacency_explanation",
+      "mode": "simulated"
+    },
+    {
+      "case": "SAU-H6-310430",
+      "equal_after_verified_identity_map": true,
+      "function": "route_blocking_capability",
+      "mode": "simulated"
+    },
+    {
+      "case": "SAU-H6-310430",
+      "equal_after_verified_identity_map": true,
+      "function": "evidence_linkage",
+      "mode": "simulated"
+    },
+    {
+      "case": "SAU-H6-310430",
+      "equal_after_verified_identity_map": true,
+      "function": "shared_enabler_queue_rows",
+      "mode": "simulated"
+    },
+    {
+      "case": "SAU-H6-310510",
+      "equal_after_verified_identity_map": true,
+      "function": "shared_enabler_inputs",
+      "mode": "public"
+    },
+    {
+      "case": "SAU-H6-310510",
+      "equal_after_verified_identity_map": true,
+      "function": "adjacency_explanation",
+      "mode": "public"
+    },
+    {
+      "case": "SAU-H6-310510",
+      "equal_after_verified_identity_map": true,
+      "function": "route_blocking_capability",
+      "mode": "public"
+    },
+    {
+      "case": "SAU-H6-310510",
+      "equal_after_verified_identity_map": true,
+      "function": "evidence_linkage",
+      "mode": "public"
+    },
+    {
+      "case": "SAU-H6-310510",
+      "equal_after_verified_identity_map": true,
+      "function": "shared_enabler_queue_rows",
+      "mode": "public"
+    },
+    {
+      "case": "SAU-H6-310510",
+      "equal_after_verified_identity_map": true,
+      "function": "shared_enabler_inputs",
+      "mode": "simulated"
+    },
+    {
+      "case": "SAU-H6-310510",
+      "equal_after_verified_identity_map": true,
+      "function": "adjacency_explanation",
+      "mode": "simulated"
+    },
+    {
+      "case": "SAU-H6-310510",
+      "equal_after_verified_identity_map": true,
+      "function": "route_blocking_capability",
+      "mode": "simulated"
+    },
+    {
+      "case": "SAU-H6-310510",
+      "equal_after_verified_identity_map": true,
+      "function": "evidence_linkage",
+      "mode": "simulated"
+    },
+    {
+      "case": "SAU-H6-310510",
+      "equal_after_verified_identity_map": true,
+      "function": "shared_enabler_queue_rows",
+      "mode": "simulated"
+    },
+    {
+      "case": "SAU-H6-392010",
+      "equal_after_verified_identity_map": true,
+      "function": "shared_enabler_inputs",
+      "mode": "public"
+    },
+    {
+      "case": "SAU-H6-392010",
+      "equal_after_verified_identity_map": true,
+      "function": "adjacency_explanation",
+      "mode": "public"
+    },
+    {
+      "case": "SAU-H6-392010",
+      "equal_after_verified_identity_map": true,
+      "function": "route_blocking_capability",
+      "mode": "public"
+    },
+    {
+      "case": "SAU-H6-392010",
+      "equal_after_verified_identity_map": true,
+      "function": "evidence_linkage",
+      "mode": "public"
+    },
+    {
+      "case": "SAU-H6-392010",
+      "equal_after_verified_identity_map": true,
+      "function": "shared_enabler_queue_rows",
+      "mode": "public"
+    },
+    {
+      "case": "SAU-H6-392010",
+      "equal_after_verified_identity_map": true,
+      "function": "shared_enabler_inputs",
+      "mode": "simulated"
+    },
+    {
+      "case": "SAU-H6-392010",
+      "equal_after_verified_identity_map": true,
+      "function": "adjacency_explanation",
+      "mode": "simulated"
+    },
+    {
+      "case": "SAU-H6-392010",
+      "equal_after_verified_identity_map": true,
+      "function": "route_blocking_capability",
+      "mode": "simulated"
+    },
+    {
+      "case": "SAU-H6-392010",
+      "equal_after_verified_identity_map": true,
+      "function": "evidence_linkage",
+      "mode": "simulated"
+    },
+    {
+      "case": "SAU-H6-392010",
+      "equal_after_verified_identity_map": true,
+      "function": "shared_enabler_queue_rows",
+      "mode": "simulated"
+    },
+    {
+      "case": "SAU-H6-721012",
+      "equal_after_verified_identity_map": true,
+      "function": "shared_enabler_inputs",
+      "mode": "public"
+    },
+    {
+      "case": "SAU-H6-721012",
+      "equal_after_verified_identity_map": true,
+      "function": "adjacency_explanation",
+      "mode": "public"
+    },
+    {
+      "case": "SAU-H6-721012",
+      "equal_after_verified_identity_map": true,
+      "function": "route_blocking_capability",
+      "mode": "public"
+    },
+    {
+      "case": "SAU-H6-721012",
+      "equal_after_verified_identity_map": true,
+      "function": "evidence_linkage",
+      "mode": "public"
+    },
+    {
+      "case": "SAU-H6-721012",
+      "equal_after_verified_identity_map": true,
+      "function": "shared_enabler_queue_rows",
+      "mode": "public"
+    },
+    {
+      "case": "SAU-H6-721012",
+      "equal_after_verified_identity_map": true,
+      "function": "shared_enabler_inputs",
+      "mode": "simulated"
+    },
+    {
+      "case": "SAU-H6-721012",
+      "equal_after_verified_identity_map": true,
+      "function": "adjacency_explanation",
+      "mode": "simulated"
+    },
+    {
+      "case": "SAU-H6-721012",
+      "equal_after_verified_identity_map": true,
+      "function": "route_blocking_capability",
+      "mode": "simulated"
+    },
+    {
+      "case": "SAU-H6-721012",
+      "equal_after_verified_identity_map": true,
+      "function": "evidence_linkage",
+      "mode": "simulated"
+    },
+    {
+      "case": "SAU-H6-721012",
+      "equal_after_verified_identity_map": true,
+      "function": "shared_enabler_queue_rows",
+      "mode": "simulated"
+    },
+    {
+      "case": "SAU-H6-721061",
+      "equal_after_verified_identity_map": true,
+      "function": "shared_enabler_inputs",
+      "mode": "public"
+    },
+    {
+      "case": "SAU-H6-721061",
+      "equal_after_verified_identity_map": true,
+      "function": "adjacency_explanation",
+      "mode": "public"
+    },
+    {
+      "case": "SAU-H6-721061",
+      "equal_after_verified_identity_map": true,
+      "function": "route_blocking_capability",
+      "mode": "public"
+    },
+    {
+      "case": "SAU-H6-721061",
+      "equal_after_verified_identity_map": true,
+      "function": "evidence_linkage",
+      "mode": "public"
+    },
+    {
+      "case": "SAU-H6-721061",
+      "equal_after_verified_identity_map": true,
+      "function": "shared_enabler_queue_rows",
+      "mode": "public"
+    },
+    {
+      "case": "SAU-H6-721061",
+      "equal_after_verified_identity_map": true,
+      "function": "shared_enabler_inputs",
+      "mode": "simulated"
+    },
+    {
+      "case": "SAU-H6-721061",
+      "equal_after_verified_identity_map": true,
+      "function": "adjacency_explanation",
+      "mode": "simulated"
+    },
+    {
+      "case": "SAU-H6-721061",
+      "equal_after_verified_identity_map": true,
+      "function": "route_blocking_capability",
+      "mode": "simulated"
+    },
+    {
+      "case": "SAU-H6-721061",
+      "equal_after_verified_identity_map": true,
+      "function": "evidence_linkage",
+      "mode": "simulated"
+    },
+    {
+      "case": "SAU-H6-721061",
+      "equal_after_verified_identity_map": true,
+      "function": "shared_enabler_queue_rows",
+      "mode": "simulated"
+    },
+    {
+      "case": "SAU-H6-760429",
+      "equal_after_verified_identity_map": true,
+      "function": "shared_enabler_inputs",
+      "mode": "public"
+    },
+    {
+      "case": "SAU-H6-760429",
+      "equal_after_verified_identity_map": true,
+      "function": "adjacency_explanation",
+      "mode": "public"
+    },
+    {
+      "case": "SAU-H6-760429",
+      "equal_after_verified_identity_map": true,
+      "function": "route_blocking_capability",
+      "mode": "public"
+    },
+    {
+      "case": "SAU-H6-760429",
+      "equal_after_verified_identity_map": true,
+      "function": "evidence_linkage",
+      "mode": "public"
+    },
+    {
+      "case": "SAU-H6-760429",
+      "equal_after_verified_identity_map": true,
+      "function": "shared_enabler_queue_rows",
+      "mode": "public"
+    },
+    {
+      "case": "SAU-H6-760429",
+      "equal_after_verified_identity_map": true,
+      "function": "shared_enabler_inputs",
+      "mode": "simulated"
+    },
+    {
+      "case": "SAU-H6-760429",
+      "equal_after_verified_identity_map": true,
+      "function": "adjacency_explanation",
+      "mode": "simulated"
+    },
+    {
+      "case": "SAU-H6-760429",
+      "equal_after_verified_identity_map": true,
+      "function": "route_blocking_capability",
+      "mode": "simulated"
+    },
+    {
+      "case": "SAU-H6-760429",
+      "equal_after_verified_identity_map": true,
+      "function": "evidence_linkage",
+      "mode": "simulated"
+    },
+    {
+      "case": "SAU-H6-760429",
+      "equal_after_verified_identity_map": true,
+      "function": "shared_enabler_queue_rows",
+      "mode": "simulated"
+    },
+    {
+      "case": "SAU-H6-760711",
+      "equal_after_verified_identity_map": true,
+      "function": "shared_enabler_inputs",
+      "mode": "public"
+    },
+    {
+      "case": "SAU-H6-760711",
+      "equal_after_verified_identity_map": true,
+      "function": "adjacency_explanation",
+      "mode": "public"
+    },
+    {
+      "case": "SAU-H6-760711",
+      "equal_after_verified_identity_map": true,
+      "function": "route_blocking_capability",
+      "mode": "public"
+    },
+    {
+      "case": "SAU-H6-760711",
+      "equal_after_verified_identity_map": true,
+      "function": "evidence_linkage",
+      "mode": "public"
+    },
+    {
+      "case": "SAU-H6-760711",
+      "equal_after_verified_identity_map": true,
+      "function": "shared_enabler_queue_rows",
+      "mode": "public"
+    },
+    {
+      "case": "SAU-H6-760711",
+      "equal_after_verified_identity_map": true,
+      "function": "shared_enabler_inputs",
+      "mode": "simulated"
+    },
+    {
+      "case": "SAU-H6-760711",
+      "equal_after_verified_identity_map": true,
+      "function": "adjacency_explanation",
+      "mode": "simulated"
+    },
+    {
+      "case": "SAU-H6-760711",
+      "equal_after_verified_identity_map": true,
+      "function": "route_blocking_capability",
+      "mode": "simulated"
+    },
+    {
+      "case": "SAU-H6-760711",
+      "equal_after_verified_identity_map": true,
+      "function": "evidence_linkage",
+      "mode": "simulated"
+    },
+    {
+      "case": "SAU-H6-760711",
+      "equal_after_verified_identity_map": true,
+      "function": "shared_enabler_queue_rows",
+      "mode": "simulated"
+    }
+  ],
+  "identity_map_counts": {
+    "Decision": 22,
+    "engine": 1,
+    "projection": 1,
+    "relationship_keys": 308
+  },
+  "input_inventory_count": 238,
+  "input_membership_unchanged": true,
+  "limits": [
+    "No generator or stock manifest command run by this helper.",
+    "No tests, browser, app, service, network, credential access, Git/index/ref changes.",
+    "Rendered count and geometry validation remains pending on the actual successor.",
+    "Graph-projected reference outputs and five engine-feed results compared; full API/domain acceptance is not newly asserted.",
+    "Root retains authority to advance manifest generation; Claude remains independent implementation reviewer."
+  ],
+  "method": "Read-only raw canonical JSON comparison and existing pure artifact/selector/engine-feed functions. Exact string identity map only; no broad prefix normalization. Changed relationship keys matched bijectively against all unchanged non-key properties after verified Decision/engine/projection identity mapping.",
+  "muhasabah": "PASS for bounded read-only semantic inspection and attributed evidence only.",
+  "new": {
+    "current_sha256": "6d0b5798a53344a3dbbea60d59851c8139e687a9fe5ca1ec49acda241f98d5b2",
+    "engine_run_id": "ENGINE-941521e7a5e5",
+    "manifest_sha256": "eeb89e290dd0f08b549ea7db95f81baf659c1492d8034cc3b8d8106d80a2effe",
+    "projection_bytes": 2982424,
+    "projection_id": "GRAPH-SAU-2026-09-12-c9841fe8e850",
+    "projection_sha256": "984a884c7ec6aa8602a3f3291aaaf2aa26546688b81d0b408f42db384924e888"
+  },
+  "old": {
+    "engine_run_id": "ENGINE-a32ccabaaec3",
+    "projection_bytes": 2982076,
+    "projection_id": "GRAPH-SAU-2026-09-12-f507b9dfca06",
+    "projection_sha256": "f6012b0803b1e03a9d12406f1b46ccb7452e153d22c041b54ca56b2138445833"
+  },
+  "other_node_edge_properties_equal": true,
+  "persona": "graph entity-attribution and evidence-provenance diagnostician",
+  "protected_pre_manifest_subjects": {
+    "data/graph/projections/GRAPH-SAU-2026-09-12-f507b9dfca06/manifest.json": {
+      "current_sha256": "1bebed2b3b187098a82b9fe073a59ad168fcc3b9b4e8de2519a8467e4067f6ad",
+      "old_sha256": "1bebed2b3b187098a82b9fe073a59ad168fcc3b9b4e8de2519a8467e4067f6ad"
+    },
+    "data/graph/projections/GRAPH-SAU-2026-09-12-f507b9dfca06/projection.json": {
+      "current_sha256": "f6012b0803b1e03a9d12406f1b46ccb7452e153d22c041b54ca56b2138445833",
+      "old_sha256": "f6012b0803b1e03a9d12406f1b46ccb7452e153d22c041b54ca56b2138445833"
+    },
+    "data/manifests/snapshot_manifest.json": {
+      "current_sha256": "62141965bcc6d87ddf7d6f132e6bc8e0c3281714184bebd8c55a11e60411d16e",
+      "old_sha256": "62141965bcc6d87ddf7d6f132e6bc8e0c3281714184bebd8c55a11e60411d16e"
+    },
+    "docs/authority/authority_hashes.json": {
+      "current_sha256": "43b3378b407b8cdf09978ed10a4f4b74f7a9e2b7526cb22a83fd366aade0933f",
+      "old_sha256": "43b3378b407b8cdf09978ed10a4f4b74f7a9e2b7526cb22a83fd366aade0933f"
+    }
+  },
+  "qualification_owner_bindings": [
+    {
+      "application_after": "coastal construction panels",
+      "application_before": "declared",
+      "edge_key": "REL-37663d1b14687bdd3c4f",
+      "evidence_node": "SYN-MINISTRY-STEEL-001::candidate_fact::FACT-QUAL-LINE-7315366f6a9166d8",
+      "fact_id": "FACT-QUAL-LINE-7315366f6a9166d8",
+      "owner_line": "LINE-SYN-MINISTRY-STEEL-001",
+      "scenario_id": "SYN-MINISTRY-STEEL-001",
+      "subject_id": "LINE-7315366f6a9166d8"
+    },
+    {
+      "application_after": "coastal construction panels",
+      "application_before": "declared",
+      "edge_key": "REL-18c0aeb179308dad2502",
+      "evidence_node": "SYN-MINISTRY-PP-001::candidate_fact::FACT-QUAL-LINE-4fbdbb0b2c107968",
+      "fact_id": "FACT-QUAL-LINE-4fbdbb0b2c107968",
+      "owner_line": "SYN-MINISTRY-PP-001::line::LINE-4fbdbb0b2c107968",
+      "scenario_id": "SYN-MINISTRY-PP-001",
+      "subject_id": "LINE-4fbdbb0b2c107968"
+    },
+    {
+      "application_after": "coastal construction panels",
+      "application_before": "declared",
+      "edge_key": "REL-23418e3890ccc327857f",
+      "evidence_node": "SYN-MINISTRY-PP-001::candidate_fact::FACT-QUAL-LINE-7315366f6a9166d8",
+      "fact_id": "FACT-QUAL-LINE-7315366f6a9166d8",
+      "owner_line": "SYN-MINISTRY-PP-001::line::LINE-7315366f6a9166d8",
+      "scenario_id": "SYN-MINISTRY-PP-001",
+      "subject_id": "LINE-7315366f6a9166d8"
+    },
+    {
+      "application_after": "coastal construction panels",
+      "application_before": "declared",
+      "edge_key": "REL-ea290e89f1d3366524e3",
+      "evidence_node": "SYN-MINISTRY-PP-001::candidate_fact::FACT-QUAL-LINE-96f1bd96c5c6ccda",
+      "fact_id": "FACT-QUAL-LINE-96f1bd96c5c6ccda",
+      "owner_line": "SYN-MINISTRY-PP-001::line::LINE-96f1bd96c5c6ccda",
+      "scenario_id": "SYN-MINISTRY-PP-001",
+      "subject_id": "LINE-96f1bd96c5c6ccda"
+    },
+    {
+      "application_after": "general rigid packaging",
+      "application_before": "declared",
+      "edge_key": "REL-b24f10e792350317a996",
+      "evidence_node": "SYN-MINISTRY-PP-001::candidate_fact::FACT-QUAL-LINE-cb9a42384c3523ec",
+      "fact_id": "FACT-QUAL-LINE-cb9a42384c3523ec",
+      "owner_line": "SYN-MINISTRY-PP-001::line::LINE-cb9a42384c3523ec",
+      "scenario_id": "SYN-MINISTRY-PP-001",
+      "subject_id": "LINE-cb9a42384c3523ec"
+    },
+    {
+      "application_after": "general rigid packaging",
+      "application_before": "declared",
+      "edge_key": "REL-c9eee2c9e458bde63ae7",
+      "evidence_node": "SYN-MINISTRY-PP-001::candidate_fact::FACT-QUAL-LINE-e403e85a85052861",
+      "fact_id": "FACT-QUAL-LINE-e403e85a85052861",
+      "owner_line": "SYN-MINISTRY-PP-001::line::LINE-e403e85a85052861",
+      "scenario_id": "SYN-MINISTRY-PP-001",
+      "subject_id": "LINE-e403e85a85052861"
+    },
+    {
+      "application_after": "coastal construction panels",
+      "application_before": "declared",
+      "edge_key": "REL-4accc0d38b9bef96a0dc",
+      "evidence_node": "SYN-MINISTRY-STEEL-001::candidate_fact::FACT-QUAL-LINE-4fbdbb0b2c107968",
+      "fact_id": "FACT-QUAL-LINE-4fbdbb0b2c107968",
+      "owner_line": "SYN-MINISTRY-STEEL-001::line::LINE-4fbdbb0b2c107968",
+      "scenario_id": "SYN-MINISTRY-STEEL-001",
+      "subject_id": "LINE-4fbdbb0b2c107968"
+    },
+    {
+      "application_after": "coastal construction panels",
+      "application_before": "declared",
+      "edge_key": "REL-ddac71654ea9ba4b7045",
+      "evidence_node": "SYN-MINISTRY-STEEL-001::candidate_fact::FACT-QUAL-LINE-96f1bd96c5c6ccda",
+      "fact_id": "FACT-QUAL-LINE-96f1bd96c5c6ccda",
+      "owner_line": "SYN-MINISTRY-STEEL-001::line::LINE-96f1bd96c5c6ccda",
+      "scenario_id": "SYN-MINISTRY-STEEL-001",
+      "subject_id": "LINE-96f1bd96c5c6ccda"
+    },
+    {
+      "application_after": "general rigid packaging",
+      "application_before": "declared",
+      "edge_key": "REL-d1982cd093aff4c4a691",
+      "evidence_node": "SYN-MINISTRY-STEEL-001::candidate_fact::FACT-QUAL-LINE-cb9a42384c3523ec",
+      "fact_id": "FACT-QUAL-LINE-cb9a42384c3523ec",
+      "owner_line": "SYN-MINISTRY-STEEL-001::line::LINE-cb9a42384c3523ec",
+      "scenario_id": "SYN-MINISTRY-STEEL-001",
+      "subject_id": "LINE-cb9a42384c3523ec"
+    },
+    {
+      "application_after": "general rigid packaging",
+      "application_before": "declared",
+      "edge_key": "REL-067a06fdd07f56a4bb82",
+      "evidence_node": "SYN-MINISTRY-STEEL-001::candidate_fact::FACT-QUAL-LINE-e403e85a85052861",
+      "fact_id": "FACT-QUAL-LINE-e403e85a85052861",
+      "owner_line": "SYN-MINISTRY-STEEL-001::line::LINE-e403e85a85052861",
+      "scenario_id": "SYN-MINISTRY-STEEL-001",
+      "subject_id": "LINE-e403e85a85052861"
+    }
+  ],
+  "selector_count": 11,
+  "selectors": [
+    {
+      "key": "SAU-H0-721049|public|adjacency|edge",
+      "literal_source_count": 10,
+      "selections": [
+        {
+          "evidence_ids": [
+            "ENGINE-EVIDENCE-SAU-H0-721049-public",
+            "S-HADEED"
+          ],
+          "matches": 1,
+          "provenance": {
+            "as_of": "2026-08-31",
+            "evidence_class": "C",
+            "evidence_id": "ENGINE-EVIDENCE-SAU-H0-721049-public",
+            "scenario_id": "PUBLIC",
+            "synthetic_flag": false
+          },
+          "relationship": "REL-c042dfd2087e66bf84d1",
+          "source": "COMPANY-280abef66af82a6c",
+          "subject": "old_f507",
+          "target": "SAU-H0-721049",
+          "type": "ADJACENT_TO"
+        },
+        {
+          "evidence_ids": [
+            "ENGINE-EVIDENCE-SAU-H0-721049-public",
+            "S-HADEED"
+          ],
+          "matches": 1,
+          "provenance": {
+            "as_of": "2026-08-31",
+            "evidence_class": "C",
+            "evidence_id": "ENGINE-EVIDENCE-SAU-H0-721049-public",
+            "scenario_id": "PUBLIC",
+            "synthetic_flag": false
+          },
+          "relationship": "REL-c042dfd2087e66bf84d1",
+          "source": "COMPANY-280abef66af82a6c",
+          "subject": "new_c984",
+          "target": "SAU-H0-721049",
+          "type": "ADJACENT_TO"
+        }
+      ]
+    },
+    {
+      "key": "SAU-H0-721049|public|evidence_to_change|edge",
+      "literal_source_count": 0,
+      "selections": [
+        {
+          "evidence_ids": [],
+          "matches": 1,
+          "provenance": {
+            "as_of": "2026-08-31",
+            "evidence_class": "C",
+            "evidence_id": "ENGINE-EVIDENCE-SAU-H0-721049-public",
+            "scenario_id": "PUBLIC",
+            "synthetic_flag": false
+          },
+          "relationship": "REL-55a6c1821b85a58286f9",
+          "source": "DEC-SAU-H0-721049-public-ENGINE-a32ccabaaec3",
+          "subject": "old_f507",
+          "target": "INT-SAU-H0-721049-route-5",
+          "type": "CONSTRAINED_BY"
+        },
+        {
+          "evidence_ids": [],
+          "matches": 1,
+          "provenance": {
+            "as_of": "2026-08-31",
+            "evidence_class": "C",
+            "evidence_id": "ENGINE-EVIDENCE-SAU-H0-721049-public",
+            "scenario_id": "PUBLIC",
+            "synthetic_flag": false
+          },
+          "relationship": "REL-8e8fe008dcefbcadfb1d",
+          "source": "DEC-SAU-H0-721049-public-ENGINE-941521e7a5e5",
+          "subject": "new_c984",
+          "target": "INT-SAU-H0-721049-route-5",
+          "type": "CONSTRAINED_BY"
+        }
+      ]
+    },
+    {
+      "key": "SAU-H0-721049|simulated|adjacency|edge",
+      "literal_source_count": 2,
+      "selections": [
+        {
+          "evidence_ids": [
+            "ENGINE-EVIDENCE-SYN-MINISTRY-STEEL-001-simulated",
+            "SYN-MINISTRY-STEEL-001::candidate_fact::FACT-CUS-STEEL-A",
+            "SYN-MINISTRY-STEEL-001::candidate_fact::FACT-OUT-PLANT-8932de539dd9d7d8"
+          ],
+          "matches": 1,
+          "provenance": {
+            "as_of": "2026-08-31",
+            "evidence_class": "D",
+            "evidence_id": "ENGINE-EVIDENCE-SYN-MINISTRY-STEEL-001-simulated",
+            "scenario_id": "SYN-MINISTRY-STEEL-001",
+            "synthetic_flag": true
+          },
+          "relationship": "REL-06f5dbd49819715f56ee",
+          "source": "PLANT-SYN-MINISTRY-STEEL-001",
+          "subject": "old_f507",
+          "target": "SAU-H0-721049",
+          "type": "ADJACENT_TO"
+        },
+        {
+          "evidence_ids": [
+            "ENGINE-EVIDENCE-SYN-MINISTRY-STEEL-001-simulated",
+            "SYN-MINISTRY-STEEL-001::candidate_fact::FACT-CUS-STEEL-A",
+            "SYN-MINISTRY-STEEL-001::candidate_fact::FACT-OUT-PLANT-8932de539dd9d7d8"
+          ],
+          "matches": 1,
+          "provenance": {
+            "as_of": "2026-08-31",
+            "evidence_class": "D",
+            "evidence_id": "ENGINE-EVIDENCE-SYN-MINISTRY-STEEL-001-simulated",
+            "scenario_id": "SYN-MINISTRY-STEEL-001",
+            "synthetic_flag": true
+          },
+          "relationship": "REL-06f5dbd49819715f56ee",
+          "source": "PLANT-SYN-MINISTRY-STEEL-001",
+          "subject": "new_c984",
+          "target": "SAU-H0-721049",
+          "type": "ADJACENT_TO"
+        }
+      ]
+    },
+    {
+      "key": "SAU-H0-721049|simulated|route_blocking|edge",
+      "literal_source_count": 2,
+      "selections": [
+        {
+          "evidence_ids": null,
+          "matches": 1,
+          "provenance": {
+            "as_of": "2026-09-12",
+            "evidence_class": "D",
+            "evidence_id": "TEST-ONLY-CLASS-D-BLOCKER",
+            "scenario_id": "TEST-ONLY-S17-BLOCKER",
+            "synthetic_flag": true
+          },
+          "relationship": "TEST-ONLY-ROUTE-BLOCKER-EDGE",
+          "source": "TEST-ONLY-INTERVENTION-5",
+          "subject": "old_f507",
+          "target": "TEST-ONLY-CAPABILITY-CERTIFICATION",
+          "type": "CONSTRAINED_BY"
+        },
+        {
+          "evidence_ids": null,
+          "matches": 1,
+          "provenance": {
+            "as_of": "2026-09-12",
+            "evidence_class": "D",
+            "evidence_id": "TEST-ONLY-CLASS-D-BLOCKER",
+            "scenario_id": "TEST-ONLY-S17-BLOCKER",
+            "synthetic_flag": true
+          },
+          "relationship": "TEST-ONLY-ROUTE-BLOCKER-EDGE",
+          "source": "TEST-ONLY-INTERVENTION-5",
+          "subject": "new_c984",
+          "target": "TEST-ONLY-CAPABILITY-CERTIFICATION",
+          "type": "CONSTRAINED_BY"
+        }
+      ]
+    },
+    {
+      "key": "SAU-H0-721049|simulated|evidence_to_change|edge",
+      "literal_source_count": 2,
+      "selections": [
+        {
+          "evidence_ids": [],
+          "matches": 1,
+          "provenance": {
+            "as_of": "2026-08-31",
+            "evidence_class": "D",
+            "evidence_id": "ENGINE-EVIDENCE-SYN-MINISTRY-STEEL-001-simulated",
+            "scenario_id": "SYN-MINISTRY-STEEL-001",
+            "synthetic_flag": true
+          },
+          "relationship": "REL-81be7355175805bbe957",
+          "source": "DEC-SYN-MINISTRY-STEEL-001-simulated-ENGINE-a32ccabaaec3",
+          "subject": "old_f507",
+          "target": "INT-SYN-MINISTRY-STEEL-001-route-5",
+          "type": "CONSTRAINED_BY"
+        },
+        {
+          "evidence_ids": [],
+          "matches": 1,
+          "provenance": {
+            "as_of": "2026-08-31",
+            "evidence_class": "D",
+            "evidence_id": "ENGINE-EVIDENCE-SYN-MINISTRY-STEEL-001-simulated",
+            "scenario_id": "SYN-MINISTRY-STEEL-001",
+            "synthetic_flag": true
+          },
+          "relationship": "REL-f171b7f0315640eb3c8e",
+          "source": "DEC-SYN-MINISTRY-STEEL-001-simulated-ENGINE-941521e7a5e5",
+          "subject": "new_c984",
+          "target": "INT-SYN-MINISTRY-STEEL-001-route-5",
+          "type": "CONSTRAINED_BY"
+        }
+      ]
+    },
+    {
+      "key": "SAU-H6-760711|public|evidence_to_change|edge",
+      "literal_source_count": 3,
+      "selections": [
+        {
+          "evidence_ids": [
+            "P-WCO-760711"
+          ],
+          "matches": 1,
+          "provenance": {
+            "as_of": "2026-09-12",
+            "evidence_class": "C",
+            "evidence_id": "ENGINE-EVIDENCE-SAU-H6-760711-public",
+            "scenario_id": "PUBLIC",
+            "synthetic_flag": false
+          },
+          "relationship": "REL-e61733c8d0b5fdf44fcb",
+          "source": "DEC-SAU-H6-760711-public-ENGINE-a32ccabaaec3",
+          "subject": "old_f507",
+          "target": "SAU-H6-760711",
+          "type": "CONSTRAINED_BY"
+        },
+        {
+          "evidence_ids": [
+            "P-WCO-760711"
+          ],
+          "matches": 1,
+          "provenance": {
+            "as_of": "2026-09-12",
+            "evidence_class": "C",
+            "evidence_id": "ENGINE-EVIDENCE-SAU-H6-760711-public",
+            "scenario_id": "PUBLIC",
+            "synthetic_flag": false
+          },
+          "relationship": "REL-d1b4397c043cc5f8beb9",
+          "source": "DEC-SAU-H6-760711-public-ENGINE-941521e7a5e5",
+          "subject": "new_c984",
+          "target": "SAU-H6-760711",
+          "type": "CONSTRAINED_BY"
+        }
+      ]
+    },
+    {
+      "key": "SAU-H6-760711|simulated|adjacency|edge",
+      "literal_source_count": 2,
+      "selections": [
+        {
+          "evidence_ids": [
+            "ENGINE-EVIDENCE-SYN-MINISTRY-ALU-FOIL-001-simulated"
+          ],
+          "matches": 1,
+          "provenance": {
+            "as_of": "2026-09-12",
+            "evidence_class": "D",
+            "evidence_id": "ENGINE-EVIDENCE-SYN-MINISTRY-ALU-FOIL-001-simulated",
+            "scenario_id": "SYN-MINISTRY-ALU-FOIL-001",
+            "synthetic_flag": true
+          },
+          "relationship": "REL-dcf8b89ee2cb99d8f522",
+          "source": "PLANT-SYN-MINISTRY-ALU-FOIL-001",
+          "subject": "old_f507",
+          "target": "SAU-H6-760711",
+          "type": "ADJACENT_TO"
+        },
+        {
+          "evidence_ids": [
+            "ENGINE-EVIDENCE-SYN-MINISTRY-ALU-FOIL-001-simulated"
+          ],
+          "matches": 1,
+          "provenance": {
+            "as_of": "2026-09-12",
+            "evidence_class": "D",
+            "evidence_id": "ENGINE-EVIDENCE-SYN-MINISTRY-ALU-FOIL-001-simulated",
+            "scenario_id": "SYN-MINISTRY-ALU-FOIL-001",
+            "synthetic_flag": true
+          },
+          "relationship": "REL-dcf8b89ee2cb99d8f522",
+          "source": "PLANT-SYN-MINISTRY-ALU-FOIL-001",
+          "subject": "new_c984",
+          "target": "SAU-H6-760711",
+          "type": "ADJACENT_TO"
+        }
+      ]
+    },
+    {
+      "key": "SAU-H6-760711|simulated|route_blocking|edge",
+      "literal_source_count": 2,
+      "selections": [
+        {
+          "evidence_ids": null,
+          "matches": 1,
+          "provenance": {
+            "as_of": "2026-09-12",
+            "evidence_class": "D",
+            "evidence_id": "TEST-ONLY-CLASS-D-BLOCKER",
+            "scenario_id": "TEST-ONLY-S17-BLOCKER",
+            "synthetic_flag": true
+          },
+          "relationship": "TEST-ONLY-ROUTE-BLOCKER-EDGE",
+          "source": "TEST-ONLY-INTERVENTION-5",
+          "subject": "old_f507",
+          "target": "TEST-ONLY-CAPABILITY-CERTIFICATION",
+          "type": "CONSTRAINED_BY"
+        },
+        {
+          "evidence_ids": null,
+          "matches": 1,
+          "provenance": {
+            "as_of": "2026-09-12",
+            "evidence_class": "D",
+            "evidence_id": "TEST-ONLY-CLASS-D-BLOCKER",
+            "scenario_id": "TEST-ONLY-S17-BLOCKER",
+            "synthetic_flag": true
+          },
+          "relationship": "TEST-ONLY-ROUTE-BLOCKER-EDGE",
+          "source": "TEST-ONLY-INTERVENTION-5",
+          "subject": "new_c984",
+          "target": "TEST-ONLY-CAPABILITY-CERTIFICATION",
+          "type": "CONSTRAINED_BY"
+        }
+      ]
+    },
+    {
+      "key": "SAU-H6-760711|simulated|shared_enabler|edge",
+      "literal_source_count": 6,
+      "selections": [
+        {
+          "evidence_ids": [
+            "SYN-MINISTRY-ALU-PROFILES-001::shared_enabler"
+          ],
+          "matches": 1,
+          "provenance": {
+            "as_of": "2026-09-12",
+            "evidence_class": "D",
+            "evidence_id": "SYN-MINISTRY-ALU-PROFILES-001::shared_enabler",
+            "scenario_id": "SYN-MINISTRY-ALU-PROFILES-001",
+            "synthetic_flag": true
+          },
+          "relationship": "REL-7b260cb4965a35bb1f20",
+          "source": "SAU-H6-760429",
+          "subject": "old_f507",
+          "target": "ENABLER-SYN-ALU-CASTHOUSE-001",
+          "type": "UNLOCKED_BY"
+        },
+        {
+          "evidence_ids": [
+            "SYN-MINISTRY-ALU-PROFILES-001::shared_enabler"
+          ],
+          "matches": 1,
+          "provenance": {
+            "as_of": "2026-09-12",
+            "evidence_class": "D",
+            "evidence_id": "SYN-MINISTRY-ALU-PROFILES-001::shared_enabler",
+            "scenario_id": "SYN-MINISTRY-ALU-PROFILES-001",
+            "synthetic_flag": true
+          },
+          "relationship": "REL-7b260cb4965a35bb1f20",
+          "source": "SAU-H6-760429",
+          "subject": "new_c984",
+          "target": "ENABLER-SYN-ALU-CASTHOUSE-001",
+          "type": "UNLOCKED_BY"
+        }
+      ]
+    },
+    {
+      "key": "SAU-H6-760711|simulated|evidence_to_change|edge",
+      "literal_source_count": 2,
+      "selections": [
+        {
+          "evidence_ids": [],
+          "matches": 1,
+          "provenance": {
+            "as_of": "2026-09-12",
+            "evidence_class": "D",
+            "evidence_id": "ENGINE-EVIDENCE-SYN-MINISTRY-ALU-FOIL-001-simulated",
+            "scenario_id": "SYN-MINISTRY-ALU-FOIL-001",
+            "synthetic_flag": true
+          },
+          "relationship": "REL-767849ae08a66bf7c0c6",
+          "source": "DEC-SYN-MINISTRY-ALU-FOIL-001-simulated-ENGINE-a32ccabaaec3",
+          "subject": "old_f507",
+          "target": "INT-SYN-MINISTRY-ALU-FOIL-001-route-6",
+          "type": "CONSTRAINED_BY"
+        },
+        {
+          "evidence_ids": [],
+          "matches": 1,
+          "provenance": {
+            "as_of": "2026-09-12",
+            "evidence_class": "D",
+            "evidence_id": "ENGINE-EVIDENCE-SYN-MINISTRY-ALU-FOIL-001-simulated",
+            "scenario_id": "SYN-MINISTRY-ALU-FOIL-001",
+            "synthetic_flag": true
+          },
+          "relationship": "REL-624e93d923a1dc945a08",
+          "source": "DEC-SYN-MINISTRY-ALU-FOIL-001-simulated-ENGINE-941521e7a5e5",
+          "subject": "new_c984",
+          "target": "INT-SYN-MINISTRY-ALU-FOIL-001-route-6",
+          "type": "CONSTRAINED_BY"
+        }
+      ]
+    },
+    {
+      "key": "SAU-H6-760711|public|evidence_to_change|route_economics_zero",
+      "literal_source_count": 0,
+      "selections": [
+        {
+          "evidence_ids": [],
+          "matches": 1,
+          "provenance": {
+            "as_of": "2026-09-12",
+            "evidence_class": "C",
+            "evidence_id": "ENGINE-EVIDENCE-SAU-H6-760711-public",
+            "scenario_id": "PUBLIC",
+            "synthetic_flag": false
+          },
+          "relationship": "REL-0844737f39676af2d164",
+          "source": "DEC-SAU-H6-760711-public-ENGINE-a32ccabaaec3",
+          "subject": "old_f507",
+          "target": "SAU-H6-760711",
+          "type": "CONSTRAINED_BY"
+        },
+        {
+          "evidence_ids": [],
+          "matches": 1,
+          "provenance": {
+            "as_of": "2026-09-12",
+            "evidence_class": "C",
+            "evidence_id": "ENGINE-EVIDENCE-SAU-H6-760711-public",
+            "scenario_id": "PUBLIC",
+            "synthetic_flag": false
+          },
+          "relationship": "REL-db1fd05aaed0c36ee9c7",
+          "source": "DEC-SAU-H6-760711-public-ENGINE-941521e7a5e5",
+          "subject": "new_c984",
+          "target": "SAU-H6-760711",
+          "type": "CONSTRAINED_BY"
+        }
+      ]
+    }
+  ],
+  "semantic_edge_deltas": [
+    {
+      "after": "coastal construction panels",
+      "before": "declared",
+      "path": "/REL-37663d1b14687bdd3c4f/properties/record_values/application"
+    },
+    {
+      "after": "coastal construction panels",
+      "before": "declared",
+      "path": "/REL-18c0aeb179308dad2502/properties/record_values/application"
+    },
+    {
+      "after": "coastal construction panels",
+      "before": "declared",
+      "path": "/REL-23418e3890ccc327857f/properties/record_values/application"
+    },
+    {
+      "after": "coastal construction panels",
+      "before": "declared",
+      "path": "/REL-ea290e89f1d3366524e3/properties/record_values/application"
+    },
+    {
+      "after": "general rigid packaging",
+      "before": "declared",
+      "path": "/REL-b24f10e792350317a996/properties/record_values/application"
+    },
+    {
+      "after": "general rigid packaging",
+      "before": "declared",
+      "path": "/REL-c9eee2c9e458bde63ae7/properties/record_values/application"
+    },
+    {
+      "after": "coastal construction panels",
+      "before": "declared",
+      "path": "/REL-4accc0d38b9bef96a0dc/properties/record_values/application"
+    },
+    {
+      "after": "coastal construction panels",
+      "before": "declared",
+      "path": "/REL-ddac71654ea9ba4b7045/properties/record_values/application"
+    },
+    {
+      "after": "general rigid packaging",
+      "before": "declared",
+      "path": "/REL-d1982cd093aff4c4a691/properties/record_values/application"
+    },
+    {
+      "after": "general rigid packaging",
+      "before": "declared",
+      "path": "/REL-067a06fdd07f56a4bb82/properties/record_values/application"
+    }
+  ],
+  "semantic_node_deltas": [
+    {
+      "after": "coastal construction panels",
+      "before": "declared",
+      "path": "/SYN-MINISTRY-PP-001::candidate_fact::FACT-QUAL-LINE-4fbdbb0b2c107968/properties/record_values/application"
+    },
+    {
+      "after": "coastal construction panels",
+      "before": "declared",
+      "path": "/SYN-MINISTRY-PP-001::candidate_fact::FACT-QUAL-LINE-7315366f6a9166d8/properties/record_values/application"
+    },
+    {
+      "after": "coastal construction panels",
+      "before": "declared",
+      "path": "/SYN-MINISTRY-PP-001::candidate_fact::FACT-QUAL-LINE-96f1bd96c5c6ccda/properties/record_values/application"
+    },
+    {
+      "after": "general rigid packaging",
+      "before": "declared",
+      "path": "/SYN-MINISTRY-PP-001::candidate_fact::FACT-QUAL-LINE-cb9a42384c3523ec/properties/record_values/application"
+    },
+    {
+      "after": "general rigid packaging",
+      "before": "declared",
+      "path": "/SYN-MINISTRY-PP-001::candidate_fact::FACT-QUAL-LINE-e403e85a85052861/properties/record_values/application"
+    },
+    {
+      "after": "coastal construction panels",
+      "before": "declared",
+      "path": "/SYN-MINISTRY-STEEL-001::candidate_fact::FACT-QUAL-LINE-4fbdbb0b2c107968/properties/record_values/application"
+    },
+    {
+      "after": "coastal construction panels",
+      "before": "declared",
+      "path": "/SYN-MINISTRY-STEEL-001::candidate_fact::FACT-QUAL-LINE-7315366f6a9166d8/properties/record_values/application"
+    },
+    {
+      "after": "coastal construction panels",
+      "before": "declared",
+      "path": "/SYN-MINISTRY-STEEL-001::candidate_fact::FACT-QUAL-LINE-96f1bd96c5c6ccda/properties/record_values/application"
+    },
+    {
+      "after": "general rigid packaging",
+      "before": "declared",
+      "path": "/SYN-MINISTRY-STEEL-001::candidate_fact::FACT-QUAL-LINE-cb9a42384c3523ec/properties/record_values/application"
+    },
+    {
+      "after": "general rigid packaging",
+      "before": "declared",
+      "path": "/SYN-MINISTRY-STEEL-001::candidate_fact::FACT-QUAL-LINE-e403e85a85052861/properties/record_values/application"
+    }
+  ],
+  "source_evidence": {
+    "actual_sol_handoff_sha256": "26932214b362c6ede1e300ae789c6921683a409e4347ecba7527edcd9e6c37dd",
+    "data_scope_proof_sha256": "dd61f91935a8b7f9b6e728c863312bd7b5dc287ede93e17804551693a3f9b106",
+    "engine_feed_sha256": "b686afba2df31852241ec514df0d52fe1a3a23d8518dd8c781b088b81eb88d35",
+    "graph_pages_sha256": "72e3101589d764dbbbb47f66ca12ed2c1d7ad27db7ab5eb11eae4d91081e5c76"
+  },
+  "status": "PASS_BOUNDED_SEMANTIC_INSPECTION_NOT_IMPLEMENTATION_APPROVAL",
+  "utc": "2026-09-26T20:39:07.612131+00:00",
+  "verified_identity_map_new_to_old": {
+    "DEC-SAU-H0-390210-public-ENGINE-941521e7a5e5": "DEC-SAU-H0-390210-public-ENGINE-a32ccabaaec3",
+    "DEC-SAU-H0-721049-public-ENGINE-941521e7a5e5": "DEC-SAU-H0-721049-public-ENGINE-a32ccabaaec3",
+    "DEC-SAU-H6-294110-public-ENGINE-941521e7a5e5": "DEC-SAU-H6-294110-public-ENGINE-a32ccabaaec3",
+    "DEC-SAU-H6-294120-public-ENGINE-941521e7a5e5": "DEC-SAU-H6-294120-public-ENGINE-a32ccabaaec3",
+    "DEC-SAU-H6-310430-public-ENGINE-941521e7a5e5": "DEC-SAU-H6-310430-public-ENGINE-a32ccabaaec3",
+    "DEC-SAU-H6-310510-public-ENGINE-941521e7a5e5": "DEC-SAU-H6-310510-public-ENGINE-a32ccabaaec3",
+    "DEC-SAU-H6-392010-public-ENGINE-941521e7a5e5": "DEC-SAU-H6-392010-public-ENGINE-a32ccabaaec3",
+    "DEC-SAU-H6-721012-public-ENGINE-941521e7a5e5": "DEC-SAU-H6-721012-public-ENGINE-a32ccabaaec3",
+    "DEC-SAU-H6-721061-public-ENGINE-941521e7a5e5": "DEC-SAU-H6-721061-public-ENGINE-a32ccabaaec3",
+    "DEC-SAU-H6-760429-public-ENGINE-941521e7a5e5": "DEC-SAU-H6-760429-public-ENGINE-a32ccabaaec3",
+    "DEC-SAU-H6-760711-public-ENGINE-941521e7a5e5": "DEC-SAU-H6-760711-public-ENGINE-a32ccabaaec3",
+    "DEC-SYN-MINISTRY-ALU-FOIL-001-simulated-ENGINE-941521e7a5e5": "DEC-SYN-MINISTRY-ALU-FOIL-001-simulated-ENGINE-a32ccabaaec3",
+    "DEC-SYN-MINISTRY-ALU-PROFILES-001-simulated-ENGINE-941521e7a5e5": "DEC-SYN-MINISTRY-ALU-PROFILES-001-simulated-ENGINE-a32ccabaaec3",
+    "DEC-SYN-MINISTRY-FERT-RETAIL-PACKS-001-simulated-ENGINE-941521e7a5e5": "DEC-SYN-MINISTRY-FERT-RETAIL-PACKS-001-simulated-ENGINE-a32ccabaaec3",
+    "DEC-SYN-MINISTRY-GALVALUME-001-simulated-ENGINE-941521e7a5e5": "DEC-SYN-MINISTRY-GALVALUME-001-simulated-ENGINE-a32ccabaaec3",
+    "DEC-SYN-MINISTRY-PE-FILM-001-simulated-ENGINE-941521e7a5e5": "DEC-SYN-MINISTRY-PE-FILM-001-simulated-ENGINE-a32ccabaaec3",
+    "DEC-SYN-MINISTRY-PENICILLIN-API-001-simulated-ENGINE-941521e7a5e5": "DEC-SYN-MINISTRY-PENICILLIN-API-001-simulated-ENGINE-a32ccabaaec3",
+    "DEC-SYN-MINISTRY-PP-001-simulated-ENGINE-941521e7a5e5": "DEC-SYN-MINISTRY-PP-001-simulated-ENGINE-a32ccabaaec3",
+    "DEC-SYN-MINISTRY-SOP-001-simulated-ENGINE-941521e7a5e5": "DEC-SYN-MINISTRY-SOP-001-simulated-ENGINE-a32ccabaaec3",
+    "DEC-SYN-MINISTRY-STEEL-001-simulated-ENGINE-941521e7a5e5": "DEC-SYN-MINISTRY-STEEL-001-simulated-ENGINE-a32ccabaaec3",
+    "DEC-SYN-MINISTRY-STREPTOMYCIN-API-001-simulated-ENGINE-941521e7a5e5": "DEC-SYN-MINISTRY-STREPTOMYCIN-API-001-simulated-ENGINE-a32ccabaaec3",
+    "DEC-SYN-MINISTRY-TINPLATE-001-simulated-ENGINE-941521e7a5e5": "DEC-SYN-MINISTRY-TINPLATE-001-simulated-ENGINE-a32ccabaaec3",
+    "ENGINE-941521e7a5e5": "ENGINE-a32ccabaaec3",
+    "GRAPH-SAU-2026-09-12-c9841fe8e850": "GRAPH-SAU-2026-09-12-f507b9dfca06",
+    "REL-0061dec102416f39bd67": "REL-81d5341d2f8c6c851ab1",
+    "REL-01f7eefc7fb79bb3cae1": "REL-4928bb58014d765766b3",
+    "REL-0256543cc2733f622a1a": "REL-55b22dc32a18a649d122",
+    "REL-03aefee81de7227f0803": "REL-7bb0f809d73f0f076d3d",
+    "REL-03b54c4f63211a31383a": "REL-920bf2a72085348510a5",
+    "REL-03bec1d67438ea3b3184": "REL-2c1b89bf49cf3cc5a838",
+    "REL-04c1b81728f77d3168ad": "REL-f1e85cdfe6f702de2b68",
+    "REL-04f9fde2d0ed3c590a4f": "REL-1b2d697533779c7e02aa",
+    "REL-05a1d88e9253c09c1377": "REL-9045babee7f6e0a85568",
+    "REL-062e0c1656dc1b5d57cd": "REL-d3d71cbc74649dfa3e1e",
+    "REL-06a43f574995e9e779d3": "REL-ee87da0eab87cdec5aa5",
+    "REL-07e0603dd35b04a901b2": "REL-6c3ed01b30c25a338c19",
+    "REL-086ce727fc3bdb895e31": "REL-abb9246286c20346a1e8",
+    "REL-088e3560b35c115ff6eb": "REL-8181a79614a8003e8e3d",
+    "REL-094b4b55c23146cb22c4": "REL-81366e995aae1a0af289",
+    "REL-0a21a67bfc88fdb3bbe6": "REL-51b5f36de96193db4d45",
+    "REL-0a6f43c2af198cb08939": "REL-87cebcf7d993f145c826",
+    "REL-0c40e812467f91dc7e47": "REL-5f3591190c7e5e9f5462",
+    "REL-0c9b1de570b3366de392": "REL-2b37f764d92c1b902101",
+    "REL-0cf80be84b01720fe82d": "REL-a32c0027649e6a9f491b",
+    "REL-0d778624104b39c807ea": "REL-ff390c3bb1d42329697c",
+    "REL-0e6fa385a8aef204f23e": "REL-1ee77f5a5202b27cdf82",
+    "REL-0f1b8dce1e174440a23a": "REL-32cf1b12325ad3ab67ef",
+    "REL-0fa5fd88a180857771f4": "REL-f6518662336ae3e7e240",
+    "REL-1009f56ad848c08d830d": "REL-e3d7c92db2f0e7338329",
+    "REL-102aaf0c4b5464ea8071": "REL-bacda5f45742c72fe745",
+    "REL-119654cc62a088f310b2": "REL-884b106d1358c8017c26",
+    "REL-11c65bc4a8d34e5d610e": "REL-147202bbb6f78ffc716d",
+    "REL-1302e6b2706a26a15767": "REL-cb5a75781da9c4e8b2c2",
+    "REL-146379b02253740d6b0a": "REL-aaed8a2f23687af60eb5",
+    "REL-16f62f209368f53780ae": "REL-b7810c4d915fc1fc9df2",
+    "REL-173b7202c055bf92a1bc": "REL-db38d99481e128c84475",
+    "REL-176357a1b98696973ab6": "REL-6aeecef7b31ef0d45972",
+    "REL-18053931128283dcb436": "REL-267bb1bacedd6425e528",
+    "REL-18bd00fa8b890430fc8a": "REL-513e44bf6eccb9f38a5e",
+    "REL-18db09f6167bb65639ef": "REL-9119f9e4cc1cf98c891e",
+    "REL-1a3548a8ad9f9f86ecae": "REL-b459749276081e41f836",
+    "REL-1a441bba49cb6c45788d": "REL-4294d7c8513110cecece",
+    "REL-1adb52f391c74f06362d": "REL-e675345460ef9ad7d920",
+    "REL-1d1fc46ba08ef040ec52": "REL-a41f1cd1e34a27f64330",
+    "REL-1d23447fa7f78b694a16": "REL-092e13c29203a529b506",
+    "REL-1e3731c0636d7794b6d6": "REL-2ee3d94d5e57259e8cd5",
+    "REL-2063d127d9e551184056": "REL-b4ffd61a5c33e8a242b0",
+    "REL-21066068847f2edd936b": "REL-d2a86673b6a8bd47e4f6",
+    "REL-218727b1acf57dd2b81a": "REL-aef951cbb05f61f8a15d",
+    "REL-21a49beee325a8bb8f00": "REL-ebd2bbb8124d77e203c1",
+    "REL-22ac358e87d17f1f8413": "REL-877c3efa22d63fdff347",
+    "REL-23ca43268a7873824f25": "REL-a69640006a7544d09371",
+    "REL-25043dec3212443c08ca": "REL-ff46f8c57cd91c587616",
+    "REL-25e549073975cd0173bf": "REL-747303368cf0f73c2ece",
+    "REL-2737c39564779de45822": "REL-d192542db15fcfeed335",
+    "REL-29188660de85061c03a7": "REL-c4e67e6d36fbe11cd02f",
+    "REL-2aaa22a1528c272b5de1": "REL-29a636a6737b230e6751",
+    "REL-2af577cb32e7d0fe6cb1": "REL-92d1c2d8cf42b51d3e67",
+    "REL-2b7ced1229eb93cb5518": "REL-3e7a9c3a83d894c96dc0",
+    "REL-2c807bb7b1b66331a235": "REL-ccbd9f104aa2c4804c66",
+    "REL-2c97b2182e219edcf50e": "REL-c3b7bb05cd1618102ce1",
+    "REL-2ccac7739197bb601af3": "REL-636031c3bfa716c440eb",
+    "REL-2d97c86b8306ba4037d5": "REL-d45522e6799489676deb",
+    "REL-2dae81e445313bcfe6ac": "REL-6af7af51f9e420ccf043",
+    "REL-2e11bea017ec469b2751": "REL-1937572f640a8044d548",
+    "REL-2f8890c6226b56e7fc30": "REL-53bd25c7cbc1f5f46193",
+    "REL-2fbe6dd1d0325b0451c7": "REL-b6a5104c05950e8e625a",
+    "REL-2fed04f985f2437ad25a": "REL-ca9f606c7bfa82d8ebc3",
+    "REL-31b7d52982232f756376": "REL-d51476e9a59fb0d8cad0",
+    "REL-320c62d544e5b3563ce7": "REL-af7e3db0a7fd1023ea85",
+    "REL-34c416814db5a467f606": "REL-6cde290cf362a0613bec",
+    "REL-351a0768c7790ab80a53": "REL-0d0f7bc0cc0fe368c595",
+    "REL-360fa94e52f79f0d5545": "REL-d538a622d38a5a5606cd",
+    "REL-3630e57054544074b161": "REL-6c0a00293a9af5a59594",
+    "REL-36b62b37baedd8fde9bc": "REL-258a043269b7462390c0",
+    "REL-3794ab86422c4057972d": "REL-8b4901a5357eb4d0bca6",
+    "REL-390821e30612b86ef871": "REL-a2e9794590a65f9ecf90",
+    "REL-39d4e96da6a491f31a35": "REL-e4b2adbe25820468946c",
+    "REL-3a0e4ee9a4a47b500a86": "REL-2b67f3aaae44ba1cb616",
+    "REL-3a2cdf4952f1f2ee303e": "REL-eed70806b579c743ecf3",
+    "REL-3af29db6183a5e2ec95b": "REL-3b365573885a080bbe85",
+    "REL-3c942a0f23c1b8ce39fa": "REL-b095413c54bf4c6922fa",
+    "REL-3d12ece69553903205dd": "REL-97f330f9821b7c8ce597",
+    "REL-3f909b822ab0ed706cce": "REL-0df97f1976556c8203a2",
+    "REL-4004c79b61caca481469": "REL-443a720247ecbba29d60",
+    "REL-4014c1001dc18dc3fd7d": "REL-4c966c2311a4544cf8cd",
+    "REL-41b6406405eaa9031c90": "REL-49f8f80780dacceb711f",
+    "REL-42070fa56b490dad9c44": "REL-5333c6599c08d0221304",
+    "REL-42f849ccaa489610c66b": "REL-8ce486e448eee3c04d54",
+    "REL-430aa8b48240708a9c9e": "REL-a95a7669178e5ffc8770",
+    "REL-435d82cc4016e91f991a": "REL-e61f310914229677ca83",
+    "REL-453504f18b97a3184065": "REL-ed611cc1a98b251140e5",
+    "REL-4668b4c01194cad342ff": "REL-04d0367651d3fb76509b",
+    "REL-46e74e395f94cd0089bd": "REL-52468797c3ea5c431403",
+    "REL-47a61594bca0fecad642": "REL-2057d20ac975542c1880",
+    "REL-491a79b2a363723ee4f5": "REL-5ac1d1ff1b5286ebe9f2",
+    "REL-49744283cd1c60aee909": "REL-92943329c2d45d6c3e06",
+    "REL-4ac292ff5a38bffbd343": "REL-a7a68f78e4a3fd178d4e",
+    "REL-4ae3ee63a3931103da54": "REL-f6f2bf41f22c34ca3003",
+    "REL-4b507c41588fd6981ace": "REL-b0205604207bf16b9048",
+    "REL-4cc70aabd104aa2b854f": "REL-9148527f7b409a26f86f",
+    "REL-4d01da9f3dd9794b8d39": "REL-86f07312a537ba64d04d",
+    "REL-4da6135dc9efaea256f2": "REL-1beeb0a4078c29c56e6a",
+    "REL-4ddbedce06c4a7dbfc71": "REL-9786e500b9d085a85b0d",
+    "REL-4e81dbfa1d788e1c5f0e": "REL-af97ff2e522ae9688e7e",
+    "REL-4effa4dad46c24dd2379": "REL-37676f104c266bd68060",
+    "REL-4fab032e5cfd87f4918a": "REL-d93e9ee7a8834208fb65",
+    "REL-4fb2537decca53e5af6b": "REL-ceb9da2e412b36da9558",
+    "REL-512b91a7a03f27b15ec0": "REL-260b25d79e197ea60468",
+    "REL-534206dbc2f510996748": "REL-10050ff76e577ad5088e",
+    "REL-54d0ecc858e01605557c": "REL-d7aade20bf074c7af49a",
+    "REL-54e2c04db38b297bf46d": "REL-d43d3d82894badfed188",
+    "REL-56b5c54af77de0033a44": "REL-2bcacf29a1e5f6ab30fd",
+    "REL-56daf1f185985bedc484": "REL-599c24b61b0df1fffdd4",
+    "REL-5781f165a25a5de7d756": "REL-b12a7e3d0e69e03845c8",
+    "REL-5a4f8cca46a055715bcb": "REL-ddcdf702951f8826483d",
+    "REL-5be412e367129d21809d": "REL-fc781819919335a7eea4",
+    "REL-5c20bdadc02a8d4bca19": "REL-80b94ef420c3b8109c05",
+    "REL-5e387419bfaa83d3dacb": "REL-ba5f110fde5e6c500659",
+    "REL-601209d10b9db72f441e": "REL-bfccb869d38b4330a9b1",
+    "REL-6056aea7492271095338": "REL-2c6d8a00389e5214c966",
+    "REL-608717cda51588b1b96b": "REL-640b4380f701516847e9",
+    "REL-6183227b0583bb37001e": "REL-6844782e9e7f28b269e3",
+    "REL-624e93d923a1dc945a08": "REL-767849ae08a66bf7c0c6",
+    "REL-62873f85a5c54a1e353c": "REL-0d856fa63a2f69d13da7",
+    "REL-635fda4dd2afc47fe5ed": "REL-8c6607911a8ad7c4ed9b",
+    "REL-64b73f9413f795a2c494": "REL-622d18f328aba6a4bb71",
+    "REL-66164c1c2fa57ff86ab5": "REL-28f0e79cad3fd99b4db2",
+    "REL-66c4258e73a22c88b413": "REL-aa7230bb006145b6cf20",
+    "REL-690b5ddfc4aa0dc4c2d6": "REL-8b021b1e1e506f82871b",
+    "REL-698f443bacefe08c919d": "REL-0635e847ef15379ca045",
+    "REL-6a73c001907c63ee25da": "REL-d65c254a5eaeee23ce16",
+    "REL-6a9c9ea789f784c2ba34": "REL-742945270dafe1c21310",
+    "REL-6b6802bdadba9a38d62f": "REL-c812ac0005544ded4a75",
+    "REL-6baab17b6bc59f62fd15": "REL-5badc81a54f9c2293a5b",
+    "REL-6c9c672251efdf73f382": "REL-1904b0046026692afd75",
+    "REL-6cccd9a1111eb5e0303c": "REL-9a09a8f341dff400d374",
+    "REL-6cff47c4e451e0a9664b": "REL-361994f5b9f03d482538",
+    "REL-6d1b46e1308bb4ba2889": "REL-51d2cde372f49d523861",
+    "REL-6f41337d9fe464dd6d99": "REL-e59e1479a0f0a6b79cca",
+    "REL-6f6cfff3158913822237": "REL-9ec2de9fea356e977676",
+    "REL-6f79110a6f2c06d9bd55": "REL-57f6912104c82c3b3739",
+    "REL-707909c8e0c5441f2964": "REL-d268e4eee3b7966f778b",
+    "REL-71945465b86df2661747": "REL-e04bd6e823bd7bb3e262",
+    "REL-7203feb077728ef8cb8b": "REL-191dbf0b0287b4738f82",
+    "REL-731b065ff75caf9f2178": "REL-406d4db5069b1c3cb3e1",
+    "REL-7329e60d056b42c860e8": "REL-72e3bf42d8196a791ed7",
+    "REL-758fb6e1ed4d0c6a622d": "REL-76018e5ada01f14adfff",
+    "REL-7595cd782dfac7c06ecd": "REL-db2b7e4dddde4ef04470",
+    "REL-760102d7d9f379c984ae": "REL-56ffbc35c7372b363114",
+    "REL-7682b5153f2931db0070": "REL-82e8567ffffe4dc0aad6",
+    "REL-7744c2606a90ef3cbba5": "REL-eb4f13d58a69bdcbc835",
+    "REL-77eda3120836f3a9c02d": "REL-05f8aff2bca4a20a971b",
+    "REL-783b671f6657a0f8c2e4": "REL-b054f1c351e9d7667be5",
+    "REL-78dea1cfc4919936bffa": "REL-c5ddd6d165c2c9295888",
+    "REL-78ebd7462804da3f5881": "REL-1740579abf1508eafce0",
+    "REL-79137d94597a658711e8": "REL-95cba91b5ce7a33d73b2",
+    "REL-7ada69b7636975f38d6f": "REL-981f1e376ca3113c0b7b",
+    "REL-7b521215757c3d9a3ebb": "REL-9df2b5a3e69408fb758d",
+    "REL-7bf4d7165bfb8c86761b": "REL-960dcbe5f4c9e7e618ba",
+    "REL-7e74195ba24953d33303": "REL-adde077cf8496c65d1f3",
+    "REL-7f89ff2f7ba11756b8fa": "REL-88077286c06fd7b12235",
+    "REL-803a88f6cb12cbe09c49": "REL-0b286c78393dcf9e9a3f",
+    "REL-80b5c1b7ce31ebda7dd7": "REL-1e308f5b3db5e1b4c9fc",
+    "REL-8179701bb7f2543d8782": "REL-cfe19b885b8c23f0008b",
+    "REL-820fef59ce74e6543d1d": "REL-0f6925072c27250a9f62",
+    "REL-8333539f652cf756f6d2": "REL-bb8cda168336ea09630e",
+    "REL-838457236d87e540c887": "REL-74942a7ac498a7290cd4",
+    "REL-8462fba0813175a6df3a": "REL-812cda64349489a244f9",
+    "REL-861454127e870c3a19c3": "REL-2db0721e8e93c8c7676a",
+    "REL-8735677f2796dbe65101": "REL-b0a9a59da54d12185806",
+    "REL-876b0008200a726dda50": "REL-78c7b473376ad91f4f8c",
+    "REL-8995a03c4dae829e2979": "REL-9ecba683511fa89b0bb8",
+    "REL-89f90c402d4ce884f75d": "REL-3d47129785976a399de6",
+    "REL-8b2ed7ac15917d10cc5a": "REL-3f247f4c9498cebb0577",
+    "REL-8c35ce273c7030a3b1eb": "REL-7c4a4568d889c9f9578d",
+    "REL-8c5d4772acd3a9b69d8f": "REL-764ee5a0dc3bbf2e4e8d",
+    "REL-8d0a018fa26b8a0c8f9c": "REL-6f0cc4d948f908f47801",
+    "REL-8d58b966a694e289feb2": "REL-c6987b2d995a437a7abb",
+    "REL-8e6795675eeab57360b3": "REL-438689091d23738a3eb1",
+    "REL-8e8fe008dcefbcadfb1d": "REL-55a6c1821b85a58286f9",
+    "REL-8f8007609ac7d68b151a": "REL-e8137a9972e128bf3bfa",
+    "REL-90263ab8776f72d44dc2": "REL-19ccd4e3e1517f46c755",
+    "REL-902cab7b64500ba2731a": "REL-6ed9b1c0352f1dce354d",
+    "REL-926976959c861f1a049a": "REL-25f6650aee1876ec0d94",
+    "REL-93a93dd276c51579d50a": "REL-d4a8ace0a097f5b3614e",
+    "REL-9486a17c17b5194f1199": "REL-157574d0e6aff510639e",
+    "REL-9578f1eb81077f42a9c2": "REL-b71160130a791dc17f8d",
+    "REL-957ba8e914ad47e711e3": "REL-65fd9c117ab108c24b9b",
+    "REL-98eb2645dadd9d4a4dda": "REL-b61f46fb11ddc799d0af",
+    "REL-9967984891d45e12283c": "REL-a3e446cfd87fee6f793b",
+    "REL-9a6dab346c6cd5530584": "REL-e99ffc3da6d012c746f0",
+    "REL-9b92d12b52b33e5dcf2e": "REL-4266798b5447a7ef627a",
+    "REL-9c1d8fd2327cfce1e485": "REL-debf8b0049e43a0b4235",
+    "REL-9cbceaac05e4b1be21db": "REL-929abaf74265360323b3",
+    "REL-9cfe154e17b13764fc14": "REL-7f849493deae93a45309",
+    "REL-9d944e6a292c23aa0024": "REL-69095ed89e250b5f144c",
+    "REL-9de9b6e29782f18f4e39": "REL-d7de2a5d92a9fd515da9",
+    "REL-9f08565eedbb6cf3a046": "REL-63965607fe93854aa9bf",
+    "REL-9f82fd960e3ba394a0ca": "REL-72e1f97aa5cd69288243",
+    "REL-9f8f32f1a7243d9f076c": "REL-e3eee4c764af398494ff",
+    "REL-9fa5ec6b4ff535ac1918": "REL-2bfb1a68ea7ad2517189",
+    "REL-9fae33e37fadddb4ecc9": "REL-410c8a0e6067dd81367f",
+    "REL-a0f08059b034b3f0bea2": "REL-0b069fa81a4df0f7e5e8",
+    "REL-a10f19f91246448aa5c3": "REL-c0dab07e4f1ff82bfd40",
+    "REL-a310c71a946d1d339b4c": "REL-7ca3c6c84fe30550ec18",
+    "REL-a3682683454a42aad77f": "REL-923635dfc917186db47f",
+    "REL-a3a23c1ae40e3a0bd25d": "REL-3c3a2b52283b8080a70f",
+    "REL-a3e9ec180f3e50372715": "REL-28a22bea3a715494d32d",
+    "REL-a464a300ea7561ffbacc": "REL-bff4e9e1eda22133cad3",
+    "REL-a56c728eeef11b9ac4f7": "REL-449bee7d8af252597f57",
+    "REL-a65bd7a14b703a3160d9": "REL-477bdae6d35f178a5c2f",
+    "REL-a72fba15b3a8318be2db": "REL-b56f8584fad9c2293492",
+    "REL-ac200fe8a886a99e308b": "REL-707b291239dc363a2bd9",
+    "REL-ac6c831380cc37b98aff": "REL-5ba1c0b2d40b66e209b6",
+    "REL-ad0c79c6c322c37a0844": "REL-416f429e056f0f12f49c",
+    "REL-ae47f3d7b91abb6e9e57": "REL-f8a8f46534fecc2504cf",
+    "REL-ae5841da9254daa34806": "REL-ad6f977e62bc09da34fb",
+    "REL-afa5a9e59b350c40bb40": "REL-cefd1e660323ba58ef98",
+    "REL-afddd0d7978d05133d6e": "REL-4d8ac76d0f5f96329f63",
+    "REL-b179182f909d34f1b47d": "REL-ab5ac5550211770696f7",
+    "REL-b40b97753a26078f0ef1": "REL-5c0bd166407ad92da9dc",
+    "REL-b5aa638673f5b0b5a105": "REL-664f470664fdebcdc5c6",
+    "REL-b95178f5c76caa827f8f": "REL-46da341be2b157c6c333",
+    "REL-bbae8bfc0a194cad649e": "REL-d01f8e80927adec52f27",
+    "REL-bbdc162c9b9c1c5bc030": "REL-6cfc9fea94de3f5c434c",
+    "REL-bd69d0edf5b5ef4db11c": "REL-d8028434fcacd44e8012",
+    "REL-be43c00d16d981703859": "REL-09733ccde41bc84d8ccf",
+    "REL-bf1de8e7636f2c89086f": "REL-d86d03057b69b36c2075",
+    "REL-bf5466ea3aeb767948aa": "REL-72685452ee189b75a21e",
+    "REL-c211174a2a630bbd2556": "REL-91edfd22ae36addd3bc2",
+    "REL-c244f2a6b9bde1c6fff6": "REL-5cedad320528183098cf",
+    "REL-c2eeeb4226c116d8416f": "REL-5652ef32db8590837108",
+    "REL-c312d9b5d77fe8f59a51": "REL-acb5f1244dd6f521b7cc",
+    "REL-c34304009e2de8b34f69": "REL-6ce8e14c06d9013a7c3f",
+    "REL-c42520077c18eb1f39ce": "REL-245c5b0c26f32b250224",
+    "REL-c46c0dd747334ceab8f1": "REL-992b9aa561701235a750",
+    "REL-c4a17fe8f868d319d2a5": "REL-a871a2fb1c1ff87392bb",
+    "REL-c4b9d9a741327cd3c931": "REL-185582ff8e426eda1517",
+    "REL-c52b10b3a76fc8672672": "REL-c20e3ba872cbd9ff2481",
+    "REL-c55a264e4474f70c94db": "REL-acb44c02b87f70b06c16",
+    "REL-c73d2edc6fe85c5f8243": "REL-b646bbe7262c1e40cd45",
+    "REL-c8e4ca2ba5f4446fc446": "REL-c02b1a479190028dad35",
+    "REL-c8ebf90f405aacd46638": "REL-34ef4d8cfe4da2f11a38",
+    "REL-c9843b1887e835e69211": "REL-3603aa3d03fcb507c3e9",
+    "REL-cac74ff0f846b3cdde77": "REL-fa1f85a17f4d7f76d8c7",
+    "REL-cb086dc5e70f126dbc59": "REL-0b9e39126ab22897a3b3",
+    "REL-cbec0080f24a8564cd53": "REL-b35011d37549c0216ddb",
+    "REL-cc0f96cf805dade3bf2f": "REL-dacf11bc48eaff0f445d",
+    "REL-ccc3cfeac7c9adac4f72": "REL-150942cc83729dff1137",
+    "REL-cd7d7e23fb818b850eeb": "REL-f685efbf52eb2e90d0cd",
+    "REL-cdb293cd6d55d94d33ea": "REL-391e9a9e1403fa58edda",
+    "REL-cfa7cdade775d8169d82": "REL-0fe0123f6d734433da08",
+    "REL-d01a775259d344f6d8a5": "REL-165214cd70cecc4a2646",
+    "REL-d15079ccbedff86d466a": "REL-78bd25a51cf7e26ebf9b",
+    "REL-d1b4397c043cc5f8beb9": "REL-e61733c8d0b5fdf44fcb",
+    "REL-d1e2725f34c8e615ece5": "REL-aa5aaba565ba3211fba6",
+    "REL-d4956b7afc1d4127bbcb": "REL-fd4fc03616ec9eb6ca95",
+    "REL-d5c2ed815db53e9e3935": "REL-ae5998b8aa6e613075f7",
+    "REL-d65a87e9d27db93ed2e0": "REL-5ca5896186ef7dde9f43",
+    "REL-d6b3a50754be9ff47be3": "REL-c146895167b60b749125",
+    "REL-d7bc83a3496d383ed4be": "REL-4223425cf1e2cd4c9fcc",
+    "REL-d94c1d4e89e2317f6511": "REL-0bb99ed8ffdbb51f670b",
+    "REL-d976082f0542828d89c1": "REL-e195a8761e0c894470ad",
+    "REL-d9cd495f4474fdc53696": "REL-450423c342fba1c1e891",
+    "REL-dadf3dd05373ab2330de": "REL-3870090b876f4aa4563e",
+    "REL-db1fd05aaed0c36ee9c7": "REL-0844737f39676af2d164",
+    "REL-dbaf5c35cf3c781c02ba": "REL-ca8423b4d1d5600bf232",
+    "REL-dbc404529027d6741ee4": "REL-a6f55196f402be952a1e",
+    "REL-dbc46c90bd6356572947": "REL-a6a233c35bef434db311",
+    "REL-dc192f9aa05567e68645": "REL-c5bc976df8e1b3ac8168",
+    "REL-dc3302f166f2b2e01d76": "REL-849d8ea2f0e292621dfd",
+    "REL-dcd8b74e3d0cff4d11a9": "REL-fca2944e17510c2408a0",
+    "REL-dd671e2fee4222426d8c": "REL-8fe8c1648c21bc052b90",
+    "REL-def449f1e266b50cb0fd": "REL-a184282ed5a65155e57d",
+    "REL-df321bc1ddb75b9db68c": "REL-2b4e0bc257d4669d8c1c",
+    "REL-dfbc7a272ed728fc985a": "REL-2470eb2044f8b2210279",
+    "REL-dfd7bdd09724bf268b4f": "REL-0155b334f1a1d61bc3fc",
+    "REL-dfeb6f42e59201212bde": "REL-ec27fae4ee9e0b5c7efb",
+    "REL-e102fc886beba917e077": "REL-e568abf015230ddf5adb",
+    "REL-e13b9a8dc3d31219fe45": "REL-d654c5dcdff783b2a14b",
+    "REL-e329bd8c493f581b1b46": "REL-7572562f0ac80277f228",
+    "REL-e3c42a9430df6c171885": "REL-6552f288efbf6f307329",
+    "REL-e53a78aa8eb044317b15": "REL-824307c82599b92b9fd0",
+    "REL-e56ae6685ccae8205298": "REL-77ffed23a442fb2c1581",
+    "REL-e68278334f3359a331fe": "REL-2e7c707bc9aeae28b21d",
+    "REL-e6cac07408ef211765da": "REL-e39764247178314cb280",
+    "REL-e822522d106f0b6b5075": "REL-3171e83088737ca63d70",
+    "REL-e846e7290dc9012352a1": "REL-1d661e0374a1e0c2cc6b",
+    "REL-e8a9529045ffa26391d0": "REL-a3aa93a2ff1a0f79d7e1",
+    "REL-e9f428d7eb8945715c97": "REL-5907d1bf22ecc81b3413",
+    "REL-ebc20795297c06de4170": "REL-46f70c4fd0e9dc7b9e7a",
+    "REL-ebc35d69bbbadb900b7f": "REL-e191fd2e9da6cd0e4f80",
+    "REL-ec54492c4585d8c44360": "REL-b0ffe8655982247252c8",
+    "REL-ec67eb80e551d01b0704": "REL-b7b2e8bf32c384244b71",
+    "REL-ecaeb45a6b78970d9fbd": "REL-e1246fae0c3e3e64a4e9",
+    "REL-ed7fc29ebd4b0aa8d9ba": "REL-403105c2e05ae3f14751",
+    "REL-ee84b027e78e214dbfbe": "REL-9f29d6a6ac8f3b694737",
+    "REL-eed55348c289feb56c1a": "REL-1d9df41a1b7504804321",
+    "REL-eee1ac511f5c5d4bff90": "REL-35e4e3e40f6ac69125af",
+    "REL-effdb5d8e433b949c923": "REL-916adc5ba52ebac81228",
+    "REL-f0678053bcdb3dfb0d6d": "REL-1259dd7b1b271454b450",
+    "REL-f1098a51710708e88167": "REL-ef3b197230098895652f",
+    "REL-f171b7f0315640eb3c8e": "REL-81be7355175805bbe957",
+    "REL-f1f67c8c398a52d615e2": "REL-f835df2a22cc5e1e3c95",
+    "REL-f540c33976bb0b965935": "REL-0968d8ff1c7e803c20ce",
+    "REL-f56802e2edfbc28d6017": "REL-09dc34d2c17e7f8ab67a",
+    "REL-f9287dc1a7cde3605513": "REL-978a7a7daf6a54a06c9f",
+    "REL-fb7042a187a13d4dff0e": "REL-3d5c18880a7024b86b04",
+    "REL-fbbe476a89524fd9ce24": "REL-c239e0a5135bc8caae69",
+    "REL-fd1a7d2300145b02a6e2": "REL-39ae4e02154698f4c0ea",
+    "REL-ff11cd399ab78ed93c05": "REL-9c319ec93d4b10632069"
+  }
+}

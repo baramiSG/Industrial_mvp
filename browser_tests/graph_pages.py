@@ -85,9 +85,46 @@ def select_svg_graph_element(page: Any, kind: str, index: int = 0) -> None:
     element = page.locator(
         f".graph-diagram [data-graph-select='{kind}']"
     ).nth(index)
-    element.click()
+    if kind == 'edge' and element.locator(':scope > path.graph-svg-edge-hit').count():
+        click_visible_graph_edge(page, element.get_attribute('data-graph-id'))
+    else:
+        element.click()
     page.locator(".graph-details").wait_for()
     assert "is-selected" in (element.get_attribute("class") or "")
+
+
+def click_visible_graph_edge(page: Any, edge_id: str) -> None:
+    """Use a real pointer at an unobscured point on this exact visible route."""
+    edge = page.locator(f'.graph-svg-edge[data-graph-id="{edge_id}"]')
+    edge.scroll_into_view_if_needed()
+    point = page.evaluate("""identity => {
+      const edge = [...document.querySelectorAll('.graph-svg-edge')]
+        .find(node => node.dataset.graphId === identity);
+      const path = edge?.querySelector(':scope > path.graph-svg-edge-hit');
+      if (!path) return null;
+      const scroll = edge.closest('.graph-visual');
+      for (const fraction of [0.5, 0.45, 0.55, 0.4, 0.6, 0.3, 0.7, 0.2, 0.8]) {
+        const matrix = path.getScreenCTM();
+        if (!matrix) return null;
+        let position = path.getPointAtLength(path.getTotalLength() * fraction)
+          .matrixTransform(matrix);
+        if (scroll) {
+          const bounds = scroll.getBoundingClientRect();
+          scroll.scrollLeft += position.x - (bounds.left + bounds.right) / 2;
+          position = path.getPointAtLength(path.getTotalLength() * fraction)
+            .matrixTransform(path.getScreenCTM());
+        }
+        const top = document.elementFromPoint(position.x, position.y);
+        if (top?.closest('.graph-svg-edge')?.dataset.graphId === identity) {
+          return {x: position.x, y: position.y, fraction};
+        }
+      }
+      return null;
+    }""", edge_id)
+    assert point is not None, f'no unobscured pointer target for {edge_id}'
+    page.mouse.click(point['x'], point['y'])
+    assert 'is-selected' in (edge.get_attribute('class') or ''), (edge_id, point)
+    assert page.locator(f'.graph-button-list [data-graph-id="{edge_id}"]').get_attribute('aria-pressed') == 'true'
 
 
 def select_native_graph_element(
@@ -172,36 +209,49 @@ def assert_graph_visible_arrow_endpoints(page: Any) -> None:
           if (!svg) return {{ ok: false, reason: 'missing diagram' }};
           const radius = {GRAPH_NODE_RADIUS};
           const marker = {GRAPH_MARKER_CLEARANCE};
-          const centers = [...svg.querySelectorAll('.graph-svg-node')].map((node) => {{
+          const centers = new Map([...svg.querySelectorAll('.graph-svg-node')].map((node) => {{
             const match = /translate\\(([^ ]+) ([^)]+)\\)/.exec(node.getAttribute('transform') || '');
-            return {{
+            return [node.dataset.graphId, {{
               x: Number(match?.[1]),
               y: Number(match?.[2]),
-            }};
-          }});
-          const checks = [...svg.querySelectorAll('.graph-svg-edge line')].map((line) => {{
-            const x1 = line.x1.baseVal.value;
-            const y1 = line.y1.baseVal.value;
-            const x2 = line.x2.baseVal.value;
-            const y2 = line.y2.baseVal.value;
-            const segment = Math.hypot(x2 - x1, y2 - y1);
-            if (segment === 0) {{
-              return {{ trimmed: true, segment }};
-            }}
-            const nearest = centers.reduce((best, center) => {{
-              const distance = Math.hypot(center.x - x2, center.y - y2);
-              return distance < best.distance ? {{ distance, center }} : best;
-            }}, {{ distance: Number.POSITIVE_INFINITY, center: null }});
-            const minDistance = radius + marker * 0.5;
-            return {{
-              x2,
-              y2,
-              nearestDistance: nearest.distance,
-              trimmed: nearest.distance >= minDistance,
-            }};
+            }}];
+          }}));
+          const vb = svg.viewBox.baseVal;
+          const edges = [...svg.querySelectorAll('.graph-svg-edge')];
+          const nativeIds = [...document.querySelectorAll('.graph-button-list [data-graph-select="edge"]')]
+            .map(node => node.dataset.graphId).sort();
+          const checks = edges.map(edge => {{
+            const source = centers.get(edge.dataset.graphSource);
+            const target = centers.get(edge.dataset.graphTarget);
+            const lines = [...edge.querySelectorAll(':scope > line')];
+            const segments = lines.map(line => ({{
+              x1: line.x1.baseVal.value, y1: line.y1.baseVal.value,
+              x2: line.x2.baseVal.value, y2: line.y2.baseVal.value,
+              arrow: line.getAttribute('marker-end') === 'url(#graph-arrow)',
+            }}));
+            const first = segments[0], last = segments.at(-1);
+            const finiteInside = segments.every(segment =>
+              [segment.x1, segment.y1, segment.x2, segment.y2].every(Number.isFinite)
+              && [segment.x1, segment.x2].every(x => x >= vb.x && x <= vb.x + vb.width)
+              && [segment.y1, segment.y2].every(y => y >= vb.y && y <= vb.y + vb.height));
+            const connected = segments.slice(1).every((segment, index) =>
+              segment.x1 === segments[index].x2 && segment.y1 === segments[index].y2);
+            const sourceTrim = source && first && Math.abs(
+              Math.hypot(first.x1 - source.x, first.y1 - source.y) - radius
+            ) < 0.01;
+            const targetTrim = target && last && Math.abs(
+              Math.hypot(last.x2 - target.x, last.y2 - target.y) - radius - marker
+            ) < 0.01;
+            return {{id: edge.dataset.graphId, segmentCount: segments.length,
+              finiteInside, connected, sourceTrim, targetTrim,
+              oneTerminalArrow: segments.filter(segment => segment.arrow).length === 1 && last?.arrow,
+              matchedHit: edge.querySelector(':scope > path.graph-svg-edge-hit, :scope > polygon.graph-svg-edge-hit') !== null}};
           }});
           return {{
-            ok: checks.length > 0 && checks.every((row) => row.trimmed),
+            ok: checks.length > 0 && checks.reduce((sum, row) => sum + row.segmentCount, 0) >= checks.length
+              && JSON.stringify(checks.map(row => row.id).sort()) === JSON.stringify(nativeIds)
+              && checks.every(row => row.segmentCount > 0 && row.finiteInside && row.connected
+                && row.sourceTrim && row.targetTrim && row.oneTerminalArrow && row.matchedHit),
             checks,
           }};
         }}"""
@@ -271,7 +321,7 @@ def assert_graph_caption_edge_clearance(page: Any) -> None:
               getComputedStyle(line).strokeWidth
             ) || 0;
             const marker = svg.querySelector('#graph-arrow');
-            const markerRadius = marker
+            const markerRadius = marker && line.getAttribute('marker-end') === 'url(#graph-arrow)'
               ? Math.max(
                   marker.markerWidth.baseVal.value,
                   marker.markerHeight.baseVal.value,
@@ -337,15 +387,63 @@ def prepare_graph_capture(page: Any, view_id: str) -> None:
 
 
 def assert_graph_panel_contains_controls_and_text(page: Any) -> dict:
+    from browser_tests.harness import AR, EN
+    from browser_tests.pages import locale_bundle
+
+    language = (page.locator("html").get_attribute("lang") or "")[:2]
+    assert language in ("en", "ar"), language
+    details_name = locale_bundle(AR if language == "ar" else EN)["strings"]["graph.details_title"]
     page.evaluate("document.fonts.ready")
-    result = page.evaluate("""() => {
+    result = page.evaluate("""expectedName => {
       const panel=document.querySelector('#graph-panel');
       const inner=node=>{const b=node.getBoundingClientRect(),s=getComputedStyle(node);return {left:b.left+parseFloat(s.paddingLeft),right:b.right-parseFloat(s.paddingRight)}};
-      const bounds=inner(panel),outside=[],text=[];
+      const bounds=inner(panel),panelBox=panel.getBoundingClientRect(),outside=[],text=[],structure=[],scoped=[];
+      const tables=[...document.querySelectorAll('.graph-source-table')];
+      const wrappers=[...panel.querySelectorAll('.graph-details > .card-body-scroll')];
+      const recognized=new Map();
+      if(wrappers.length!==tables.length) structure.push({kind:'source-table count',wrappers:wrappers.length,tables:tables.length});
+      for(const wrapper of wrappers) {
+        const direct=[...wrapper.children].filter(child=>child.matches('table.graph-source-table'));
+        if(wrapper.children.length!==1 || direct.length!==1) {
+          structure.push({kind:'direct source-table structure',children:wrapper.children.length,direct:direct.length});
+          continue;
+        }
+        const table=direct[0],box=wrapper.getBoundingClientRect(),style=getComputedStyle(wrapper);
+        if(wrapper.getAttribute('role')!=='region') structure.push({kind:'role',value:wrapper.getAttribute('role')});
+        if(wrapper.getAttribute('tabindex')!=='0') structure.push({kind:'tabindex',value:wrapper.getAttribute('tabindex')});
+        if(!expectedName || wrapper.getAttribute('aria-label')!==expectedName)
+          structure.push({kind:'governed name',value:wrapper.getAttribute('aria-label'),expectedName});
+        if(!['auto','scroll'].includes(style.overflowX)) structure.push({kind:'overflow',value:style.overflowX});
+        if(!wrapper.getClientRects().length || box.width<=0 || box.height<=0 ||
+           box.left<bounds.left-1 || box.right>bounds.right+1 ||
+           box.top<panelBox.top-1 || box.bottom>panelBox.bottom+1)
+          structure.push({kind:'wrapper bounds',box:{left:box.left,right:box.right,top:box.top,bottom:box.bottom},bounds});
+        const extent=wrapper.scrollWidth-wrapper.clientWidth,scroll=wrapper.scrollLeft;
+        const rtl=style.direction==='rtl';
+        if(extent<0 || (rtl ? scroll>1 || scroll< -extent-1 : scroll< -1 || scroll>extent+1))
+          scoped.push({kind:'scroll range',extent,scroll,rtl});
+        const portLeft=box.left+wrapper.clientLeft,portRight=portLeft+wrapper.clientWidth;
+        const reachLeft=rtl ? portRight-wrapper.scrollWidth-scroll : portLeft-scroll;
+        const reachRight=reachLeft+wrapper.scrollWidth;
+        recognized.set(table,{wrapper,reachLeft,reachRight,tableBox:table.getBoundingClientRect()});
+      }
+      if(recognized.size!==tables.length) structure.push({kind:'recognized source-table count',recognized:recognized.size,tables:tables.length});
+      for(const [table,scope] of recognized) {
+        for(const node of [table,...table.querySelectorAll('*')]) {
+          if(!node.getClientRects().length) continue;
+          const box=node.getBoundingClientRect();
+          if(box.width && (box.left<scope.reachLeft-1 || box.right>scope.reachRight+1 ||
+             box.left<scope.tableBox.left-1 || box.right>scope.tableBox.right+1))
+            scoped.push({kind:'reachable table element',tag:node.tagName,left:box.left,right:box.right,
+                         reachLeft:scope.reachLeft,reachRight:scope.reachRight});
+        }
+      }
       for(const node of panel.querySelectorAll('*')) {
         if(node.closest('.graph-visual svg') || !node.getClientRects().length) continue;
+        const table=node.closest('table.graph-source-table');
+        if(table && recognized.has(table)) continue;
         const box=node.getBoundingClientRect();
-        if(box.width && (box.left<bounds.left-1 || box.right>bounds.right+1)) outside.push({tag:node.tagName,id:node.id,class:node.className,left:box.left,right:box.right,bounds});
+        if(box.width && (box.left<bounds.left-1 || box.right>bounds.right+1)) outside.push({kind:'panel bounds',tag:node.tagName,id:node.id,class:node.className,left:box.left,right:box.right,bounds});
       }
       const walker=document.createTreeWalker(panel,NodeFilter.SHOW_TEXT);
       while(walker.nextNode()) {
@@ -353,10 +451,23 @@ def assert_graph_panel_contains_controls_and_text(page: Any) -> dict:
         if(!node.textContent.trim() || parent.closest('svg,select,option') || !parent.getClientRects().length) continue;
         const range=document.createRange();range.selectNodeContents(node);
         const box=inner(parent);
-        for(const rect of range.getClientRects()) if(rect.width && (rect.left<bounds.left-1 || rect.right>bounds.right+1 || rect.left<box.left-1 || rect.right>box.right+1)) text.push({text:node.textContent,left:rect.left,right:rect.right,parent:box,bounds});
+        const table=parent.closest('table.graph-source-table'),scope=recognized.get(table);
+        for(const rect of range.getClientRects()) {
+          if(!rect.width) continue;
+          if(scope) {
+            if(rect.left<scope.reachLeft-1 || rect.right>scope.reachRight+1 ||
+               rect.left<scope.tableBox.left-1 || rect.right>scope.tableBox.right+1 ||
+               rect.left<box.left-1 || rect.right>box.right+1)
+              scoped.push({kind:'reachable table text',value:node.textContent,left:rect.left,right:rect.right,parent:box});
+          } else if(rect.left<bounds.left-1 || rect.right>bounds.right+1 || rect.left<box.left-1 || rect.right>box.right+1)
+            text.push({kind:'panel text',text:node.textContent,left:rect.left,right:rect.right,parent:box,bounds});
+        }
       }
-      return {outside,text,documentOverflow:document.documentElement.scrollWidth>innerWidth};
-    }""")
+      return {outside,text,structure,scoped,recognized:recognized.size,sourceTables:tables.length,
+              documentOverflow:document.documentElement.scrollWidth>innerWidth};
+    }""", details_name)
+    assert result["structure"] == [], result
+    assert result["scoped"] == [], result
     assert result["outside"] == [], result
     assert result["text"] == [], result
     assert result["documentOverflow"] is False, result
@@ -404,7 +515,7 @@ def assert_graph_source_name_disclosures(page: Any, locale: Any) -> None:
 
 # AM4 field-by-field raw-fixture enumeration; independent source/UI review binds its receipt.
 PASSPORT_SOURCE_COUNTS = {
-    'SAU-H0-721049|public|adjacency|node': 30, 'SAU-H0-721049|public|adjacency|edge': 6,
+    'SAU-H0-721049|public|adjacency|node': 30, 'SAU-H0-721049|public|adjacency|edge': 10,
     'SAU-H0-721049|public|route_blocking|empty': 0, 'SAU-H0-721049|public|shared_enabler|empty': 0,
     'SAU-H0-721049|public|evidence_to_change|node': 24, 'SAU-H0-721049|public|evidence_to_change|edge': 0,
     'SAU-H0-721049|simulated|adjacency|node': 25, 'SAU-H0-721049|simulated|adjacency|edge': 2,
@@ -413,12 +524,56 @@ PASSPORT_SOURCE_COUNTS = {
     'SAU-H0-721049|simulated|evidence_to_change|node': 25, 'SAU-H0-721049|simulated|evidence_to_change|edge': 2,
     'SAU-H6-760711|public|adjacency|empty': 0, 'SAU-H6-760711|public|route_blocking|empty': 0,
     'SAU-H6-760711|public|shared_enabler|empty': 0,
-    'SAU-H6-760711|public|evidence_to_change|node': 18, 'SAU-H6-760711|public|evidence_to_change|edge': 0,
+    'SAU-H6-760711|public|evidence_to_change|node': 18, 'SAU-H6-760711|public|evidence_to_change|edge': 3,
     'SAU-H6-760711|simulated|adjacency|node': 19, 'SAU-H6-760711|simulated|adjacency|edge': 2,
     'SAU-H6-760711|simulated|route_blocking|node': 19, 'SAU-H6-760711|simulated|route_blocking|edge': 2,
     'SAU-H6-760711|simulated|shared_enabler|node': 19, 'SAU-H6-760711|simulated|shared_enabler|edge': 6,
     'SAU-H6-760711|simulated|evidence_to_change|node': 19, 'SAU-H6-760711|simulated|evidence_to_change|edge': 2,
+    'SAU-H6-760711|public|evidence_to_change|route_economics_zero': 0,
 }
+
+
+# These ten literal count fixtures bind to relationship meaning, never REL/ENGINE order.
+# A Decision source is resolved from the payload's case and branch properties.
+GRAPH_COUNTED_EDGE_SPECS = {
+    'SAU-H0-721049|public|adjacency|edge': ('ADJACENT_TO', 'COMPANY-280abef66af82a6c', 'SAU-H0-721049', {'attribution_scope': 'PRODUCER_DISCLOSURE'}, ['ENGINE-EVIDENCE-SAU-H0-721049-public', 'S-HADEED'], 'ENGINE-EVIDENCE-SAU-H0-721049-public', 'PUBLIC', False),
+    'SAU-H0-721049|public|evidence_to_change|edge': ('CONSTRAINED_BY', 'Decision', 'INT-SAU-H0-721049-route-5', {'blocked_field': 'route_economics', 'variant': 'plausible_route_economics_unresolved'}, [], 'ENGINE-EVIDENCE-SAU-H0-721049-public', 'PUBLIC', False),
+    'SAU-H0-721049|simulated|adjacency|edge': ('ADJACENT_TO', 'PLANT-SYN-MINISTRY-STEEL-001', 'SAU-H0-721049', {'attribution_scope': 'CANDIDATE_DISCOVERY'}, ['ENGINE-EVIDENCE-SYN-MINISTRY-STEEL-001-simulated', 'SYN-MINISTRY-STEEL-001::candidate_fact::FACT-CUS-STEEL-A', 'SYN-MINISTRY-STEEL-001::candidate_fact::FACT-OUT-PLANT-8932de539dd9d7d8'], 'ENGINE-EVIDENCE-SYN-MINISTRY-STEEL-001-simulated', 'SYN-MINISTRY-STEEL-001', True),
+    'SAU-H0-721049|simulated|route_blocking|edge': ('CONSTRAINED_BY', 'TEST-ONLY-INTERVENTION-5', 'TEST-ONLY-CAPABILITY-CERTIFICATION', {'reason_code': 'TEST_ONLY_CLASS_D_BLOCKER'}, None, 'TEST-ONLY-CLASS-D-BLOCKER', 'TEST-ONLY-S17-BLOCKER', True),
+    'SAU-H0-721049|simulated|evidence_to_change|edge': ('CONSTRAINED_BY', 'Decision', 'INT-SYN-MINISTRY-STEEL-001-route-5', {'blocked_field': 'route_economics', 'variant': 'plausible_route_economics_unresolved'}, [], 'ENGINE-EVIDENCE-SYN-MINISTRY-STEEL-001-simulated', 'SYN-MINISTRY-STEEL-001', True),
+    'SAU-H6-760711|public|evidence_to_change|edge': ('CONSTRAINED_BY', 'Decision', 'SAU-H6-760711', {'blocked_field': 'product_identity', 'variant': 'generic_hs6_only'}, ['P-WCO-760711'], 'ENGINE-EVIDENCE-SAU-H6-760711-public', 'PUBLIC', False),
+    'SAU-H6-760711|simulated|adjacency|edge': ('ADJACENT_TO', 'PLANT-SYN-MINISTRY-ALU-FOIL-001', 'SAU-H6-760711', {'attribution_scope': 'DECLARED_ENGINE_INPUT'}, ['ENGINE-EVIDENCE-SYN-MINISTRY-ALU-FOIL-001-simulated'], 'ENGINE-EVIDENCE-SYN-MINISTRY-ALU-FOIL-001-simulated', 'SYN-MINISTRY-ALU-FOIL-001', True),
+    'SAU-H6-760711|simulated|route_blocking|edge': ('CONSTRAINED_BY', 'TEST-ONLY-INTERVENTION-5', 'TEST-ONLY-CAPABILITY-CERTIFICATION', {'reason_code': 'TEST_ONLY_CLASS_D_BLOCKER'}, None, 'TEST-ONLY-CLASS-D-BLOCKER', 'TEST-ONLY-S17-BLOCKER', True),
+    'SAU-H6-760711|simulated|shared_enabler|edge': ('UNLOCKED_BY', 'SAU-H6-760429', 'ENABLER-SYN-ALU-CASTHOUSE-001', {'constraint_classes_addressed': ['demand_fragmentation_or_offtake'], 'valuation_route_code': 4}, ['SYN-MINISTRY-ALU-PROFILES-001::shared_enabler'], 'SYN-MINISTRY-ALU-PROFILES-001::shared_enabler', 'SYN-MINISTRY-ALU-PROFILES-001', True),
+    'SAU-H6-760711|simulated|evidence_to_change|edge': ('CONSTRAINED_BY', 'Decision', 'INT-SYN-MINISTRY-ALU-FOIL-001-route-6', {'blocked_field': 'route_economics', 'variant': 'route_determination_unresolved'}, [], 'ENGINE-EVIDENCE-SYN-MINISTRY-ALU-FOIL-001-simulated', 'SYN-MINISTRY-ALU-FOIL-001', True),
+    'SAU-H6-760711|public|evidence_to_change|route_economics_zero': ('CONSTRAINED_BY', 'Decision', 'SAU-H6-760711', {'blocked_field': 'route_economics', 'variant': 'route_determination_unresolved'}, [], 'ENGINE-EVIDENCE-SAU-H6-760711-public', 'PUBLIC', False),
+}
+
+
+def select_counted_graph_edge(payload: dict[str, Any], key: str) -> dict[str, Any]:
+    relation, source, target, properties, evidence_ids, evidence_id, scenario_id, synthetic = GRAPH_COUNTED_EDGE_SPECS[key]
+    case_id, mode, _, _ = key.split('|')
+    if source == 'Decision':
+        decisions = [node for node in payload['nodes'] if node['label'] == 'Decision'
+                     and node['properties'].get('opportunity_id') == case_id
+                     and node['properties'].get('mode') == mode
+                     and node['provenance']['evidence_id'] == evidence_id
+                     and node['provenance']['scenario_id'] == scenario_id
+                     and node['provenance']['synthetic_flag'] is synthetic]
+        assert len(decisions) == 1, (key, decisions)
+        source = decisions[0]['id']
+    matches = [edge for edge in payload['edges'] if edge['type'] == relation
+               and edge['source'] == source and edge['target'] == target
+               and all(edge['properties'].get(name) == value for name, value in properties.items())
+               and (edge['properties'].get('evidence_ids', object()) == evidence_ids if evidence_ids is not None
+                    else 'evidence_ids' not in edge['properties'])
+               and edge['provenance']['evidence_id'] == evidence_id
+               and edge['provenance']['scenario_id'] == scenario_id
+               and edge['provenance']['synthetic_flag'] is synthetic]
+    assert len(matches) == 1, (key, matches)
+    if evidence_ids is None:
+        assert matches[0]['id'] == 'TEST-ONLY-ROUTE-BLOCKER-EDGE'
+    return matches[0]
 
 
 def assert_selected_graph_passports(page: Any, locale: Any, mode: str, count_key: str) -> None:
@@ -426,6 +581,19 @@ def assert_selected_graph_passports(page: Any, locale: Any, mode: str, count_key
     from browser_tests.harness import run_axe, format_axe_violations
     if locale.code == 'ar':
         assert_arabic_parity(arabic_parity_report(page, '#graph-view'), expected_source_spans=PASSPORT_SOURCE_COUNTS[count_key])
+    if count_key in GRAPH_COUNTED_EDGE_SPECS:
+        expected = {
+            'SAU-H0-721049|public|adjacency|edge': {'S-HADEED'},
+            'SAU-H6-760711|public|evidence_to_change|edge': {'P-WCO-760711'},
+            'SAU-H6-760711|simulated|shared_enabler|edge': {'SYN-MINISTRY-ALU-PROFILES-001::shared_enabler'},
+        }.get(count_key, set())
+        assert set(page.locator('#graph-view [data-passport-id]').evaluate_all(
+            'rows => rows.map(row => row.dataset.passportId)'
+        )) == expected
+        if not expected:
+            unresolved = page.locator('.graph-unresolved li bdi').all_text_contents()
+            spec = GRAPH_COUNTED_EDGE_SPECS[count_key]
+            assert set(unresolved) == {spec[5], *(spec[4] or [])}
     strings = locale_bundle(locale)['strings']
     for article in page.locator('#graph-view [data-passport-id]').all():
         identity = article.locator('[data-passport-value="opportunity_id"]').inner_text()

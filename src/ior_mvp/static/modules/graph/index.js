@@ -5,22 +5,8 @@ import {
   elementReferences, graphElement, validateGraphCatalogue, validateGraphPayload,
 } from "./model.js";
 import { replaceGraphRoot, renderGraphShell } from "./render.js";
-function context(opportunityId, mode, viewId = "adjacency") {
-  return { opportunityId, mode, viewId };
-}
-function sameContext(left, right) {
-  return left?.opportunityId === right?.opportunityId
-    && left?.mode === right?.mode
-    && left?.viewId === right?.viewId;
-}
-function enabled(props) {
-  return props?.mode === state.mode
-    && props.opportunity_id === state.selectedId
-    && state.analysis?.opportunity?.id === props.opportunity_id
-    && state.analysis?.mode === props.mode
-    && state.manifest?.context?.opportunity_id === props.opportunity_id
-    && state.manifest?.context?.mode === props.mode;
-}
+import { consumeGraphOpenRequest, graphCommitAllowed, graphEnabled,
+  graphRequestContext, sameGraphContext } from "./context.js";
 function replaceGraph() {
   const root = document.getElementById("graph-view");
   if (!root || !state.graph.descriptor) return;
@@ -41,30 +27,24 @@ function clearContent({ collapse = true, nextContext = null } = {}) {
   state.graph.evidenceResult = null;
   state.graph.evidenceResponses = {};
 }
-function commitAllowed(epoch, requested) {
-  return requested.mode === state.mode
-    && requested.opportunityId === state.selectedId
-    && epoch === state.graph.epoch
-    && sameContext(state.graph.context, requested)
-    && enabled(state.graph.descriptor);
-}
 async function fetchView(requested, epoch) {
-  if (!commitAllowed(epoch, requested)) return;
+  if (!graphCommitAllowed(epoch, requested)) return;
   try {
     const payload = validateGraphPayload(
       await getJSON(graphViewEndpoint(
         requested.opportunityId,
         requested.viewId,
         requested.mode,
+        requested,
       )),
       requested,
     );
-    if (!commitAllowed(epoch, requested)) return;
+    if (!graphCommitAllowed(epoch, requested)) return;
     state.graph.payload = payload;
     state.graph.loading = false;
     state.graph.error = null;
   } catch (error) {
-    if (!commitAllowed(epoch, requested)) return;
+    if (!graphCommitAllowed(epoch, requested)) return;
     state.graph.loading = false;
     state.graph.payload = null;
     state.graph.error = {
@@ -73,29 +53,39 @@ async function fetchView(requested, epoch) {
     };
   }
   replaceGraph();
+  if (state.graph.payload?.focus_element_id) {
+    await selectElement("node", state.graph.payload.focus_element_id);
+  }
 }
 async function openGraph() {
-  if (!enabled(state.graph.descriptor)) return;
-  const requested = context(
+  if (!graphEnabled(state.graph.descriptor)) return;
+  const requested = graphRequestContext(
     state.graph.descriptor.opportunity_id,
     state.graph.descriptor.mode,
     state.graph.viewId,
+    state.analysis,
   );
   clearContent({ collapse: false, nextContext: requested });
   state.graph.open = true;
   state.graph.loading = true;
+  if (requested.invalid) {
+    state.graph.loading = false;
+    state.graph.error = { kind: "invalid" };
+    replaceGraph();
+    return;
+  }
   const epoch = state.graph.epoch;
   replaceGraph();
   try {
     const catalogue = state.graph.catalogue || validateGraphCatalogue(
       await getJSON(graphCatalogueEndpoint()),
     );
-    if (!commitAllowed(epoch, requested)) return;
+    if (!graphCommitAllowed(epoch, requested)) return;
     state.graph.catalogue = catalogue;
     replaceGraph();
     await fetchView(requested, epoch);
   } catch (error) {
-    if (!commitAllowed(epoch, requested)) return;
+    if (!graphCommitAllowed(epoch, requested)) return;
     state.graph.loading = false;
     state.graph.error = {
       kind: String(error?.message || "").startsWith("GRAPH_")
@@ -105,22 +95,29 @@ async function openGraph() {
   }
 }
 async function changeView(viewId) {
-  if (!enabled(state.graph.descriptor)
+  if (!graphEnabled(state.graph.descriptor)
     || !state.graph.catalogue?.views.some((row) => row.view_id === viewId)) return;
-  const requested = context(
+  const requested = graphRequestContext(
     state.graph.descriptor.opportunity_id,
     state.graph.descriptor.mode,
     viewId,
+    state.analysis,
   );
   clearContent({ collapse: false, nextContext: requested });
   state.graph.open = true;
   state.graph.loading = true;
+  if (requested.invalid) {
+    state.graph.loading = false;
+    state.graph.error = { kind: "invalid" };
+    replaceGraph();
+    return;
+  }
   const epoch = state.graph.epoch;
   replaceGraph();
   await fetchView(requested, epoch);
 }
 async function selectElement(kind, identity) {
-  if (!enabled(state.graph.descriptor)) return;
+  if (!graphEnabled(state.graph.descriptor)) return;
   const element = graphElement(state.graph.payload, kind, identity);
   if (!element) return;
   state.graph.selected = { kind, identity, element };
@@ -142,14 +139,14 @@ async function selectElement(kind, identity) {
       fetchAnalysis: (id, mode) => getJSON(opportunityEndpoint(id, mode)),
       cache: evidenceResponses,
     });
-    if (!commitAllowed(epoch, requested)
+    if (!graphCommitAllowed(epoch, requested)
       || state.graph.selectionEpoch !== selectionEpoch
       || state.graph.selected?.identity !== identity) return;
     state.graph.evidenceResponses = evidenceResponses;
     state.graph.evidenceResult = result;
     state.graph.evidenceLoading = false;
   } catch {
-    if (!commitAllowed(epoch, requested)
+    if (!graphCommitAllowed(epoch, requested)
       || state.graph.selectionEpoch !== selectionEpoch
       || state.graph.selected?.identity !== identity) return;
     state.graph.evidenceError = true;
@@ -163,10 +160,9 @@ async function selectElement(kind, identity) {
   replaceGraph();
 }
 export function prepareGraphContext(opportunityId, mode) {
-  if (!enabled(state.graph.descriptor)
-    || (state.graph.context
-      && (state.graph.context.opportunityId !== opportunityId
-      || state.graph.context.mode !== mode))) {
+  const next = graphRequestContext(opportunityId, mode, state.graph.viewId, state.analysis);
+  if (!graphEnabled(state.graph.descriptor)
+    || (state.graph.context && !sameGraphContext(state.graph.context, next))) {
     clearContent();
     replaceGraph();
   }
@@ -176,11 +172,14 @@ export function resetGraph() {
   replaceGraph();
 }
 export function renderGraphComponent(props) {
-  return renderGraphShell(props, state.graph, enabled(props));
+  return renderGraphShell(props, state.graph, graphEnabled(props));
 }
 export function mountGraphComponent(props) {
   state.graph.descriptor = props;
-  if (!enabled(props)) clearContent();
+  if (!graphEnabled(props)) clearContent();
+  if (graphEnabled(props) && !state.graph.open && consumeGraphOpenRequest()) {
+    void openGraph();
+  }
 }
 export function rerenderGraph() {
   replaceGraph();

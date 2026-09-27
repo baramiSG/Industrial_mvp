@@ -302,6 +302,8 @@ class GraphService:
         mode: str,
         scenario_id: str,
         rows: list[dict[str, Any]],
+        focus_id: str | None = None,
+        requirement_item_id: str | None = None,
     ) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
         if self.projection is None:
             return [], []
@@ -324,6 +326,49 @@ class GraphService:
                     else edge.properties.get("scenario_id") == scenario_id
                 )
             ]
+            if mode == "public":
+                source_membership = {
+                    edge.source: set(edge.properties.get("evidence_ids", []))
+                    for edge in selected_edges
+                }
+                selected_edges.extend(
+                    edge for edge in self.projection.edges
+                    if edge.properties.get("scenario_id") == "PUBLIC"
+                    and edge.properties.get("synthetic_flag") is False
+                    and (
+                        (edge.type == "PRODUCED_BY"
+                         and edge.source == opportunity_id
+                         and edge.target in producer_ids)
+                        or (edge.type in {"USES_PROCESS", "CERTIFIED_TO"}
+                            and edge.source in producer_ids
+                            and bool(edge.properties.get("evidence_ids"))
+                            and set(edge.properties["evidence_ids"])
+                            <= source_membership.get(edge.source, set()))
+                    )
+                )
+            if focus_id is not None and mode == "simulated":
+                focus = next(node for node in self.projection.nodes if node.id == focus_id)
+                selected_edges.extend(
+                    edge for edge in self.projection.edges
+                    if edge.properties.get("scenario_id") == scenario_id
+                    and edge.properties.get("attribution_scope") in {
+                        "CANDIDATE_DISCOVERY", "LINE_DIAGNOSTIC"
+                    }
+                    and (
+                        (edge.type == "SUPPORTED_BY_EVIDENCE" and edge.source == focus_id)
+                        or (edge.type == "HAS_LINE" and (
+                            edge.source == focus_id or edge.target == focus_id
+                        ))
+                        or (edge.type == "HAS_CAPABILITY"
+                            and focus.label == "ProductionLine"
+                            and edge.source == opportunity_id
+                            and edge.properties.get("canonical_entity_id")
+                            == focus.properties.get("canonical_entity_id")
+                            and (requirement_item_id is None or
+                                 edge.properties.get("requirement_item_id")
+                                 == requirement_item_id))
+                    )
+                )
         elif view_id == "route_blocking":
             pairs = {
                 (str(row["intervention_id"]), str(row["capability_id"]))
@@ -415,6 +460,8 @@ class GraphService:
             )
         )
         node_ids = {opportunity_id}
+        if focus_id is not None:
+            node_ids.add(focus_id)
         for edge in selected_edges:
             node_ids.add(edge.source)
             node_ids.add(edge.target)
@@ -429,11 +476,51 @@ class GraphService:
             self._edge_payload(edge) for edge in selected_edges
         ]
 
+    def _focus_id(
+        self, opportunity_id: str, mode: str, scenario_id: str,
+        context: Mapping[str, str | None] | None,
+    ) -> str | None:
+        if not context or not any(context.values()):
+            return None
+        if mode != "simulated" or self.projection is None:
+            raise GraphNotFound("GRAPH_CONTEXT_NOT_FOUND")
+        company = context.get("company_id")
+        plant = context.get("plant_id")
+        line = context.get("line_id")
+        requirement = context.get("requirement_item_id")
+        if not company or (line and not plant) or (plant and not company):
+            raise GraphNotFound("GRAPH_CONTEXT_NOT_FOUND")
+        scoped = {
+            node.properties.get("canonical_entity_id"): node
+            for node in self.projection.nodes
+            if node.properties.get("scenario_id") == scenario_id
+            and node.properties.get("opportunity_id") == opportunity_id
+            and node.properties.get("attribution_scope") == "CANDIDATE_DISCOVERY"
+            and node.label in {"Company", "Plant", "ProductionLine"}
+        }
+        company_node = scoped.get(company)
+        plant_node = scoped.get(plant) if plant else None
+        line_node = scoped.get(line) if line else None
+        if company_node is None or company_node.label != "Company":
+            raise GraphNotFound("GRAPH_CONTEXT_NOT_FOUND")
+        if plant and (plant_node is None or plant_node.label != "Plant"
+                      or plant_node.properties.get("company_id") != company):
+            raise GraphNotFound("GRAPH_CONTEXT_NOT_FOUND")
+        if line and (line_node is None or line_node.label != "ProductionLine"
+                     or line_node.properties.get("plant_id") != plant
+                     or line_node.properties.get("company_id") != company):
+            raise GraphNotFound("GRAPH_CONTEXT_NOT_FOUND")
+        focus = line_node or plant_node or company_node
+        if requirement and requirement not in focus.properties.get("finding_item_ids", []):
+            raise GraphNotFound("GRAPH_CONTEXT_NOT_FOUND")
+        return focus.id
+
     def view(
         self,
         view_id: str,
         opportunity_id: str,
         mode: str,
+        context: Mapping[str, str | None] | None = None,
     ) -> dict[str, Any]:
         """Execute a fixed live query and return a typed fail-closed payload."""
         if view_id not in {
@@ -449,6 +536,12 @@ class GraphService:
             node.id for node in self.projection.nodes if node.label == "Product"
         }:
             raise GraphNotFound("OPPORTUNITY_NOT_FOUND")
+        scenario_id = self._scenario_id(opportunity_id, mode)
+        focus_id = self._focus_id(opportunity_id, mode, scenario_id, context)
+        selection = {
+            key: context.get(key) if context else None
+            for key in ("company_id", "plant_id", "line_id", "requirement_item_id")
+        }
         state = self.status()
         if state["graph_status"] != "AVAILABLE":
             return {
@@ -464,9 +557,10 @@ class GraphService:
                 "edges": [],
                 "explanation": None,
                 "drilldown": [],
+                "context": selection,
+                "focus_element_id": focus_id,
             }
         assert self.spec is not None
-        scenario_id = self._scenario_id(opportunity_id, mode)
         try:
             rows = self._view_reader(
                 self.spec,
@@ -497,6 +591,8 @@ class GraphService:
                 "edges": [],
                 "explanation": None,
                 "drilldown": [],
+                "context": selection,
+                "focus_element_id": focus_id,
             }
         nodes, edges = self._view_elements(
             view_id,
@@ -504,6 +600,8 @@ class GraphService:
             mode,
             scenario_id,
             rows,
+            focus_id,
+            selection["requirement_item_id"],
         )
         elements = [*nodes, *edges]
         synthetic = any(
@@ -548,8 +646,10 @@ class GraphService:
                         "document_addresses", []
                     ),
                 }
-                for node in nodes
+                for node in elements
             ],
+            "context": selection,
+            "focus_element_id": focus_id,
         }
 
     def shared_enablers(self, mode: str) -> dict[str, Any]:

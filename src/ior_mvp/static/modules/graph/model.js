@@ -1,4 +1,5 @@
 import { EDGE_LABEL_KEYS, FAILURE_KEYS, NODE_LABEL_KEYS } from "./labels.js";
+import { responseMatchesContext } from "./context.js";
 
 export const VIEW_IDS = Object.freeze([
   "adjacency",
@@ -53,6 +54,7 @@ export function validateGraphPayload(payload, context) {
     || payload.view_id !== context.viewId
     || payload.opportunity_id !== context.opportunityId
     || payload.mode !== context.mode
+    || !responseMatchesContext(payload, context)
     || !["AVAILABLE", "GRAPH_UNAVAILABLE"].includes(payload.graph_status)
     || !Array.isArray(payload.nodes)
     || !Array.isArray(payload.edges)
@@ -65,6 +67,19 @@ export function validateGraphPayload(payload, context) {
       throw new Error("GRAPH_RESPONSE_INVALID");
     }
     return payload;
+  }
+  if (context.company_id) {
+    const focus = payload.nodes.find((row) => row.id === payload.focus_element_id);
+    const expected = context.line_id || context.plant_id || context.company_id;
+    if (!focus || focus.properties?.canonical_entity_id !== expected
+      || focus.properties?.attribution_scope !== "CANDIDATE_DISCOVERY"
+      || focus.provenance?.scenario_id === "PUBLIC"
+      || (context.requirement_item_id
+        && !focus.properties.finding_item_ids?.includes(context.requirement_item_id))) {
+      throw new Error("GRAPH_CONTEXT_RESPONSE_INVALID");
+    }
+  } else if (payload.focus_element_id !== null && payload.focus_element_id !== undefined) {
+    throw new Error("GRAPH_CONTEXT_RESPONSE_INVALID");
   }
   if (payload.reason_code !== null || !nonempty(payload.projection_id)) {
     throw new Error("GRAPH_RESPONSE_INVALID");

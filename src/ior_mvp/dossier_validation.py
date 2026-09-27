@@ -10,6 +10,32 @@ class DossierIntegrityError(ValueError):
     """The supplied analytical record and its export context disagree."""
 
 
+EXCLUDED_WORKSPACE_DIAGNOSTICS = frozenset(
+    {
+        "candidate_discovery",
+        "line_assessment",
+        "candidate_register",
+        "candidate_lines",
+    }
+)
+
+
+def reject_workspace_diagnostics(value: Any, path: str = "dossier") -> None:
+    """Keep discovery and line diagnostics out of the rendered dossier."""
+    if isinstance(value, dict):
+        found = EXCLUDED_WORKSPACE_DIAGNOSTICS & set(value)
+        if found:
+            raise DossierIntegrityError(
+                f"Dossier excludes workspace diagnostics at {path}: "
+                + ", ".join(sorted(found))
+            )
+        for key, item in value.items():
+            reject_workspace_diagnostics(item, f"{path}.{key}")
+    elif isinstance(value, list):
+        for index, item in enumerate(value):
+            reject_workspace_diagnostics(item, f"{path}[{index}]")
+
+
 def require_mapping(value: Any, path: str) -> dict:
     if not isinstance(value, dict):
         raise DossierIntegrityError(f'Dossier mapping required: {path}')

@@ -354,3 +354,9 @@ Refusal is `OUT_OF_SCOPE_CONTENT` with `PersonalDataFields` for matched labels o
   is absent. `NO_PUBLIC_TENDER_FOUND` is likewise limited to the recorded
   public-evidence search; it is not proof that no tender or specification
   exists. Missing trade years and unavailable values are never numeric zero.
+
+## 12. Ministry M record boundary
+
+Preliminary discovery consumes the scenario's explicitly supplied registry, production, customs, application and technical records at their stated company, plant or line grain. Exact HS revision/code, flow, period and source membership control any customs-derived process/input indicator. A heading, description match, importer transaction or unlinked company transaction cannot establish a plant's equipment or target-qualified output. Source-linked technical declarations may support a finite reviewed inference, but procurement and intentions do not establish installation or operation.
+
+Coverage applies only to the named extract, fields and window. No match is NOT_FOUND within that boundary, not a negative physical finding; omitted enrichment remains unestablished. Public source pointers may corroborate a field without upgrading a synthetic manufacturer assignment above Class D. Source: methodology §§6.0, 10.2; approved Ministry M REGISTER/DISCOVERY contracts.

@@ -144,6 +144,8 @@ def _evidence_ids(value: Any) -> set[str]:
 
 @router.get("/records/{hs6}")
 def record(hs6: str) -> dict[str, Any]:
+    from ior_mvp.cases.assessment_links import deep_assessment_link
+
     snapshot = repository.screening_snapshot()
     selected = repository.screening_record(hs6)
     if selected is None:
@@ -154,7 +156,11 @@ def record(hs6: str) -> dict[str, Any]:
         for passport in snapshot["evidence_passports"]
         if passport["passport_id"] in ids
     ]
-    return {**selected, "evidence_passports": passports}
+    return {
+        **selected,
+        "evidence_passports": passports,
+        "deep_assessment": deep_assessment_link(selected, snapshot),
+    }
 
 
 @router.get("/evidence")

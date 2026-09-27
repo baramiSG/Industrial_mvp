@@ -5,6 +5,7 @@ from __future__ import annotations
 import importlib
 import json
 import sys
+from copy import deepcopy
 from pathlib import Path
 
 import pytest
@@ -114,6 +115,58 @@ def test_record_drilldown_contract_and_404_unknown_hs6():
     response = _client().get("/api/screening/records/000000")
     assert response.status_code == 404
     assert response.json()["detail"]["code"] == "RECORD_NOT_FOUND"
+
+
+def test_finite_public_brief_bridge_has_nine_exact_h6_links_without_scenario_data():
+    from ior_mvp.cases.assessment_links import deep_assessment_link
+    from ior_mvp.screening import repository
+
+    snapshot = repository.screening_snapshot()
+    linked = []
+    for selected in repository.iter_screening_records():
+        link = deep_assessment_link(selected, snapshot)
+        if link is None:
+            continue
+        assert set(link) == {
+            "opportunity_id", "brief_id", "screening_snapshot_id",
+            "hs_revision", "hs6", "period_year",
+        }
+        assert link["hs_revision"] == "H6"
+        assert link["hs6"] == selected["hs6"]
+        assert link["opportunity_id"] == f"SAU-H6-{selected['hs6']}"
+        assert link["screening_snapshot_id"] == snapshot["snapshot_id"]
+        assert "scenario_id" not in json.dumps(link)
+        linked.append(link["hs6"])
+    assert linked == [
+        "294110", "294120", "310430", "310510", "392010",
+        "721012", "721061", "760429", "760711",
+    ]
+    assert deep_assessment_link(repository.screening_record("721049"), snapshot) is None
+    mismatched = deepcopy(snapshot)
+    mismatched["inputs"]["universe_snapshots"][0]["id"] = "FOREIGN"
+    with pytest.raises(ValueError, match="universe identities"):
+        deep_assessment_link(repository.screening_record("294110"), mismatched)
+    stale = deepcopy(repository.screening_record("294110"))
+    stale["period_year"] = "2023"
+    with pytest.raises(ValueError, match="period"):
+        deep_assessment_link(stale, snapshot)
+    wrong_revision = deepcopy(repository.screening_record("294110"))
+    wrong_revision["hs_revision"] = "H0"
+    with pytest.raises(ValueError, match="public H6"):
+        deep_assessment_link(wrong_revision, snapshot)
+    leaked = deepcopy(repository.screening_record("294110"))
+    leaked["synthetic_flag"] = True
+    with pytest.raises(ValueError, match="public H6"):
+        deep_assessment_link(leaked, snapshot)
+    contaminated = deepcopy(snapshot)
+    contaminated["source_boundary"] = "simulated"
+    with pytest.raises(ValueError, match="public H6"):
+        deep_assessment_link(repository.screening_record("294110"), contaminated)
+    from ior_mvp.executive.service import build_executive_case
+
+    for hs6 in ("294110", "294120", "310430", "310510"):
+        assert deep_assessment_link(repository.screening_record(hs6), snapshot)
+        assert build_executive_case(f"SAU-H6-{hs6}").candidate_discovery.reason == "NO_REGISTER"
 
 
 def test_missing_snapshot_serves_200_unavailable_never_500(monkeypatch):
@@ -340,4 +393,7 @@ def test_existing_three_route_key_sets_are_unchanged():
         "entries",
     }
     assert loaded_record is not None
-    assert set(record_payload) == set(loaded_record) | {"evidence_passports"}
+    assert set(record_payload) == set(loaded_record) | {
+        "evidence_passports", "deep_assessment",
+    }
+    assert record_payload["deep_assessment"] is None

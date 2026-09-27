@@ -8,6 +8,7 @@ import { renderClaimLinks } from "./evidence.js";
 import { renderVectors } from "./summary.js";
 import { narrative } from "./steps.js";
 import { renderRegisteredStep } from "./registry.js";
+import { renderRequirementStrip } from "./resolution.js";
 
 export function analystUrl(opportunityId, mode, view) {
   const query = new URLSearchParams({ opportunity: opportunityId, locale: state.locale });
@@ -27,7 +28,7 @@ export function mountExecutiveShell() {
       </header>
       <main data-executive-main id="executive-content" tabindex="-1" aria-busy="true">
         <div id="executive-heading"></div><div id="executive-status" role="status" aria-live="polite"></div>
-        <div id="executive-integrity"></div><div id="executive-comparison"></div><div id="executive-vectors"></div><div id="executive-body"></div><div id="executive-sources"></div>
+        <div id="executive-integrity"></div><div id="executive-comparison"></div><div id="executive-requirement"></div><div id="executive-vectors"></div><div id="executive-body"></div><div id="executive-sources"></div>
       </main>
     </div>`;
   document.body.classList.remove("app-loading");
@@ -57,13 +58,25 @@ export function renderJourney() {
   const { selection, context } = executive;
   const content = renderRegisteredStep(selection.stepId, context);
   const position = STEP_IDS.indexOf(selection.stepId);
+  const discoveryStep = selection.stepId === "SIMULATED_EVIDENCE";
+  const simulatedStep = ["SIMULATED_EVIDENCE", "ROUTE_COMPARISON", "INTERVENTION", "CONDITIONS_AND_KILL"].includes(selection.stepId);
   const movement = `<div class="executive-movement">${position > 0 ? `<button data-executive-back data-executive-go="${STEP_IDS[position - 1]}">${esc(label("ui", "back"))}</button>` : ""}${position < STEP_IDS.length - 1 ? `<button data-executive-next data-executive-go="${STEP_IDS[position + 1]}">${esc(label("ui", "next"))}</button>` : ""}</div>`;
+  const questions = [
+    ["ministry.q1", STEP_IDS.slice(0, 2)], ["ministry.q2", STEP_IDS.slice(2, 3)],
+    ["ministry.q3", STEP_IDS.slice(3, 5)], ["ministry.q4", STEP_IDS.slice(5, 6)],
+    ["ministry.q5", STEP_IDS.slice(6, 8)],
+  ];
   renderIntegrity(context.summary.integrity);
-  document.getElementById("executive-comparison").innerHTML = renderComparison(context);
-  document.getElementById("executive-vectors").innerHTML = renderVectors(context);
+  const main = document.querySelector("[data-executive-main]");
+  main.setAttribute("data-executive-current-step", selection.stepId);
+  document.getElementById("executive-comparison").innerHTML = renderComparison(context, discoveryStep);
+  document.getElementById("executive-requirement").innerHTML = simulatedStep ? renderRequirementStrip(context) : "";
+  const vectors = renderVectors(context);
+  document.getElementById("executive-vectors").innerHTML = discoveryStep
+    ? `<details data-executive-vectors><summary>${esc(t("ministry.vectors_details"))}</summary>${vectors}</details>` : vectors;
   document.getElementById("executive-body").innerHTML = `<div class="executive-layout">
     <nav class="executive-journey" aria-label="${esc(t("executive.journey"))}"><ol>
-      ${STEP_IDS.map((id, index) => `<li><button data-executive-step="${id}" ${id === selection.stepId ? 'aria-current="step"' : ""}><span>${technicalToken(index + 1)}</span><b>${esc(stepLabel(id))}</b></button></li>`).join("")}
+      ${questions.map(([question, ids], group) => `<li><h3>${technicalToken(group + 1)} · ${esc(t(question))}</h3><ol>${ids.map((id) => `<li><button data-executive-step="${id}" ${id === selection.stepId ? 'aria-current="step"' : ""}><b>${esc(stepLabel(id))}</b></button></li>`).join("")}</ol></li>`).join("")}
     </ol></nav><article class="executive-article" data-active-step="${selection.stepId}" tabindex="-1"><p class="eyebrow">${esc(t("executive.journey"))}</p><h2>${esc(stepLabel(selection.stepId))}</h2>${movement}${content}${renderClaimLinks(context.executiveCase.steps.find((row) => row.step_id === selection.stepId).claim_ids, context)}</article></div>`;
   document.querySelector("[data-executive-main]").setAttribute("data-executive-ready", selection.opportunityId);
   document.querySelector("[data-executive-main]").setAttribute("aria-busy", "false");
@@ -86,18 +99,24 @@ export function renderStatus(key) {
   document.getElementById("executive-status").textContent = key ? t(key) : "";
 }
 
-function renderComparison(context) {
-  return `<div class="executive-comparison">${["public", "simulated"].map((branch) => {
+function renderComparison(context, compact = false) {
+  const active = ["SIMULATED_EVIDENCE", "ROUTE_COMPARISON", "INTERVENTION", "CONDITIONS_AND_KILL"].includes(executive.selection.stepId);
+  const branches = active ? ["public", "simulated"] : ["public"];
+  const headline = active && context.executiveCase.decisions.simulated.availability === "AVAILABLE"
+    ? `<p class="ministry-simulation-headline" data-simulation-headline>${esc(state.ui.executive_policy.headline[state.locale])}</p>` : "";
+  const cards = `<div class="executive-comparison">${branches.map((branch) => {
     const decision = context.executiveCase.decisions[branch];
     const sim = branch === "simulated";
     const available = decision.availability === "AVAILABLE";
     const localized = available ? narrative(context, sim) : null;
-    return `<section class="executive-decision ${sim ? "executive-simulation" : "executive-public"}" data-branch="${decision.branch}" data-state="${esc(decision.state ?? "UNAVAILABLE")}" data-route="${decision.route_code ?? "NOT_CALCULABLE"}"><p class="eyebrow">${esc(label("ui", branch))}</p>${sim && available ? policyLabels(decision.display_labels) : ""}${available ? `<span class="state-chip state-${esc(decision.state)}">${esc(stateLabel(decision.state))}</span>${narrativeEntry(localized.rationale, "p")}<p>${esc(label("ui", "route"))}: ${decision.route_code === null ? esc(label("status", "NOT_CALCULABLE")) : `${technicalToken(decision.route_code)} · ${esc(label("route", String(decision.route_code)))}`}</p>` : `<p>${esc(label("ui", "no_simulation"))}</p>`}${!sim || available ? `<p>${esc(label("ui", sim ? "actual_class" : "confidence"))}: ${technicalToken(sim ? decision.evidence_class : context.publicAnalysis.real_decision.confidence)}</p>` : ""}<small>${esc(label("ui", sim ? "simulation_boundary" : "public_boundary"))}</small>${available ? claimLink(`decision.${branch}`, context) : ""}</section>`;
+    return `<section class="executive-decision ${sim ? "executive-simulation" : "executive-public"}" data-branch="${decision.branch}" data-state="${esc(decision.state ?? "UNAVAILABLE")}" data-route="${decision.route_code ?? "NOT_CALCULABLE"}"><p class="eyebrow">${esc(label("ui", branch))}</p>${sim && available ? `<p>${esc(t("graph.boundary_synthetic"))}</p>` : ""}${available ? `<span class="state-chip state-${esc(decision.state)}">${esc(stateLabel(decision.state))}</span>${narrativeEntry(localized.rationale, "p")}<p>${esc(label("ui", "route"))}: ${decision.route_code === null ? esc(label("status", "NOT_CALCULABLE")) : `${technicalToken(decision.route_code)} · ${esc(label("route", String(decision.route_code)))}`}</p>` : `<p>${esc(label("ui", "no_simulation"))}</p>`}${!sim || available ? `<p>${esc(label("ui", sim ? "actual_class" : "confidence"))}: ${technicalToken(sim ? decision.evidence_class : context.publicAnalysis.real_decision.confidence)}</p>` : ""}<small>${esc(label("ui", sim ? "simulation_boundary" : "public_boundary"))}</small>${available ? claimLink(`decision.${branch}`, context) : ""}</section>`;
   }).join("")}</div>`;
+  return compact ? `${headline}<details data-executive-reference><summary>${esc(t("ministry.reference_details"))}</summary>${cards}</details>`
+    : `${headline}${cards}`;
 }
 
 export function clearContextDisplay() {
-  ["executive-integrity", "executive-comparison", "executive-vectors", "executive-body", "executive-sources"].forEach((id) => document.getElementById(id).replaceChildren());
+  ["executive-integrity", "executive-comparison", "executive-requirement", "executive-vectors", "executive-body", "executive-sources"].forEach((id) => document.getElementById(id).replaceChildren());
   const main = document.querySelector("[data-executive-main]");
   main.removeAttribute("data-executive-ready");
   main.setAttribute("aria-busy", "true");

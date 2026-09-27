@@ -1,0 +1,9 @@
+# M1 actual captured baseline pin — PAUSE
+
+**Status: PAUSE_AFTER_ACTUAL_BASELINE_PIN.** Root's actual capture receipt binds `browser_tests/baselines` to tree `9dee92662f04a6de8063431d39e8d1c267f96512` after eight capture checks and inspection of the changed EN/AR graph images. This handoff adopts that observed tree only; it does not approve the final successor.
+
+`tests/test_frozen_public_evidence_pins.py` has exactly one literal replacement: `9dea0ee08c8c6f198bdf1f0fc904033874685a7a` → `9dee92662f04a6de8063431d39e8d1c267f96512`. `SOURCE-BEFORE.json`, `SOURCE-AFTER.json` and `TASK-ONLY.diff` prove the entire file is its saved preimage with that one substitution. The other three frozen tree pins and all assertions remain unchanged. Ordinary index SHA-256 remains `770d3e296985bb61b52211fd365a2b0cad96e8faf512949dfb57f236eb54eaf5`. No other source, baseline, manifest or documentation file was edited in this step.
+
+Two pure existing checks passed: the four public snapshot `PINS` SHA-256/byte-length assertions (`PUBLIC-BYTES-COMMAND.json`, exit 0) and `test_visual_baseline_provenance_matches_working_tree` (`MANIFEST-PROVENANCE-COMMAND.json`, exit 0, one passed). The HEAD-bound frozen-tree test was not run in W because its HEAD is intentionally behind the captured successor. Root will freeze the actual candidate and run that check, original strict R1 and the remaining gates.
+
+**Sanad:** `/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/ACTUAL-BASELINE-PIN-m1-successor.json`, `/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/canonical-capture-m1-successor/INSPECTION.json`, the exact file transform and test receipts. **Muhasabah:** observed pin only; successor acceptance and strict geometry remain unverified here. **PAUSE.**

@@ -43,9 +43,9 @@ FROZEN_PATHS = (
 
 FROZEN_TREE_OIDS = {
     "data/snapshots/public": "12eace2f822dd1d61d091ae20021187bf15ae00e",
-    "data/synthetic": "ce8e219a574bc8159e82593dd089686e74edb7ef",
+    "data/synthetic": "58cf58e1cf1e6bf20dc7d2567a337bfeb849f494",
     "data/golden": "72618db654110823ec7a8d4dd6415a37e4554e33",
-    "browser_tests/baselines": "dccfb0e104978fbdcbbab54fa1e0f50e63cfe53f",
+    "browser_tests/baselines": "9dee92662f04a6de8063431d39e8d1c267f96512",
 }
 
 # Used only by the depth-1 detector of this repository to prove the object absent.
@@ -54,8 +54,8 @@ _BASE_COMMIT_FOR_ABSENCE_PROOF = (
 )
 
 VISUAL_BASELINE_ROOT = PROJECT_ROOT / "browser_tests" / "baselines" / "v0.3.0"
-VISUAL_BASELINE_ENTRIES = 128
-TOP_LEVEL_MODULE = re.compile(r"^src/ior_mvp/[^/]+\.py$")
+VISUAL_BASELINE_ENTRIES = 140
+PROJECT_MODULE = re.compile(r"^src/ior_mvp/(?:[^/]+/)*[^/]+\.py$")
 
 GIT_EXIT_SUCCESS = 0
 GIT_EXIT_DIFFERS = 1
@@ -184,7 +184,7 @@ def visual_provenance_problems(
     """Mirror the provenance part of the visual oracle without Pillow.
 
     ``browser_tests.visual_baselines.validate_manifest`` (browser gate) pins
-    the SHA-256 of every top-level ``src/ior_mvp/*.py`` module, the static
+    the SHA-256 of every ``src/ior_mvp/**/*.py`` module, the static
     bundle, the vendored fonts and the UI/evidence/narrative configs and fails
     closed on drift. Pillow is an e2e-only dependency, so this PIL-free mirror
     lets the plain pytest gate surface the same drift: a stale manifest digest,
@@ -210,16 +210,16 @@ def visual_provenance_problems(
     pinned_modules = {
         relative
         for relative in payload.get("source_tree", {})
-        if TOP_LEVEL_MODULE.match(relative)
+        if PROJECT_MODULE.match(relative)
     }
     actual_modules = {
         path.relative_to(project_root).as_posix()
-        for path in (project_root / "src" / "ior_mvp").glob("*.py")
+        for path in (project_root / "src" / "ior_mvp").rglob("*.py")
     }
     for relative in sorted(actual_modules - pinned_modules):
-        problems.append(f"top-level module not in visual manifest: {relative}")
+        problems.append(f"project module not in visual manifest: {relative}")
     for relative in sorted(pinned_modules - actual_modules):
-        problems.append(f"pinned top-level module missing: {relative}")
+        problems.append(f"pinned project module missing: {relative}")
     return problems
 
 
@@ -320,16 +320,14 @@ def synthetic_depth_one_clone(tmp_path: Path) -> tuple[Path, dict[str, str], str
 
 
 def test_public_and_synthetic_bytes_unchanged_from_base() -> None:
-    """Keep public/synthetic/golden bytes and S17-authorized visuals immutable."""
+    """Keep public, synthetic, golden and canonical visual roots pinned."""
     for rel, (expected_hash, expected_bytes) in PINS.items():
         path = PROJECT_ROOT / rel
         data = path.read_bytes()
         assert hashlib.sha256(data).hexdigest() == expected_hash
         assert len(data) == expected_bytes
 
-    assert (
-        frozen_tree_problems(PROJECT_ROOT, FROZEN_TREE_OIDS, FROZEN_PATHS) == []
-    )
+    assert frozen_tree_problems(PROJECT_ROOT, FROZEN_TREE_OIDS, FROZEN_PATHS) == []
 
 
 def test_visual_baseline_tree_unchanged_from_base() -> None:
@@ -389,7 +387,7 @@ def test_provenance_check_detects_new_top_level_module(tmp_path: Path) -> None:
     )
     problems = visual_provenance_problems(baseline_root, project_root)
     assert problems == [
-        "top-level module not in visual manifest: src/ior_mvp/zz_unpinned.py"
+        "project module not in visual manifest: src/ior_mvp/zz_unpinned.py"
     ]
 
 

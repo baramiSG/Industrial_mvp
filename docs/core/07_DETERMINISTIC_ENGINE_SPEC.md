@@ -194,6 +194,8 @@ deduplicated; both scoped source lists remain. Methodology §6.4 states
 0/1/2/3/U, λ and Kmin are unchanged. The governing DOCX is unchanged by
 this correction (ADR-032, Manifest §7.4).
 
+ADR-033 adds a preliminary finding vector before Test 2. It reuses the unchanged R9-S predicate per attributed plant and does not assign states 0–3, increase K, publish D* or choose a route. `candidate_discovery.py` and `line_comparison.py` are diagnostic. They do not write `domestic_capability` or either formal decision.
+
 An internal pre-gate value may be returned for diagnostics. The public
 `d_star` and route band remain null whenever a publication condition fails.
 A state `3` on a non-hard-gate dimension remains part of D* and does not by
@@ -710,3 +712,9 @@ claims use all current-scenario rows; route-comparison claims use
 `route_evidence` and `counterfactual` when present. Decision and
 conditions/kill claims use exact evidence IDs carried by the simulated
 decision, its counterfactual row and relevant public-decision evidence.
+
+## 14. Ministry M preliminary computation guard
+
+The §6.0 adapter runs after strict scenario validation: optional guarded line assessments and subject-scoped record findings provide independently supported R9-S signals, then the unchanged predicate determines each plant's final screen. A P02 assertion used to establish the prerequisite cannot be reused as its sole additional signal. P04 galvanising acquisition can support an equipment signal only when exact transaction, technical declaration and plant attribution align; plastics-working context gives no resin-polymerisation credit.
+
+Line comparison keeps theoretical formula operands separate from admitted target supply. Unknown target technical fit, required qualification or time coverage withholds admission; known zero remains zero, not unknown. Full Test 2 continues to use declared states, configured λ/Kmin and hard gates. No preliminary result writes `domestic_capability`, a formal decision, reference economics or route selection. Source: governing methodology §§4 R9-S, 6.0, 6.4; approved Ministry M DOMAIN/REGISTER contracts.

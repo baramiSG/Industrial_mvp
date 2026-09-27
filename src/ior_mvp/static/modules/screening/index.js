@@ -113,6 +113,15 @@ export async function openRecord(hs6) {
   viewNode().innerHTML = escapeHtml(t("screening.loading"));
   const record = await getJSON(screeningRecordEndpoint(hs6));
   if (epoch !== state.screening.requestEpoch) return;
+  const link = record.deep_assessment;
+  if (record.hs6 !== hs6 || (link && (
+    Object.keys(link).sort().join("|") !== "brief_id|hs6|hs_revision|opportunity_id|period_year|screening_snapshot_id"
+    || link.hs6 !== hs6 || link.hs_revision !== "H6"
+    || link.screening_snapshot_id !== state.screening.summary.snapshot_id
+    || link.opportunity_id !== `SAU-H6-${hs6}`
+    || link.brief_id !== `CASE-BRIEF-${link.opportunity_id}-v1`
+    || !/^\d{4}$/.test(link.period_year)
+  ))) throw new Error("SCREENING_DEEP_ASSESSMENT_MISMATCH");
   Object.assign(state.screening, {
     view: "record",
     record,

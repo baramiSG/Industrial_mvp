@@ -1,0 +1,120 @@
+{
+  "utc": "2026-09-26T23:43:42.376653+00:00",
+  "status": "PAUSE_BEFORE_GENERATION",
+  "implementation_approval": false,
+  "plan_addendum_sha256": "4a6e0aa7d1da56449c9a4ac89ae08bf85d63563e8493342fc15a6448b443d746",
+  "actual_claude_plan_review_sha256": "8d567a87221eb56daed4e9112198db2c9e001c7673cee47d4ea0a66d0b7681f8",
+  "source_before": "SOURCE-BEFORE.json",
+  "source_after": "SOURCE-AFTER.json",
+  "task_only_diff": "TASK-ONLY.diff",
+  "task_only_diff_sha256": "b88d3d4feef249d426880a12d09716ded88eccdf294e291259d99617d02d1fdd",
+  "changed_paths": [
+    "docs/ARCHITECTURE_DECISIONS.md",
+    "docs/core/02_METHODOLOGY_IMPLEMENTATION_MAP.md",
+    "src/ior_mvp/graph/projection.py",
+    "tests/test_graph_artifact.py",
+    "tests/test_graph_projection.py"
+  ],
+  "all_other_hashed_inventory_paths_equal": true,
+  "inventory_count": 3544,
+  "content_hashed_count": 3543,
+  "secret_sensitive_metadata_only": [
+    {
+      "path": ".workflow/slices/S18-executive-mode/delivery-evidence/am4/final/task8-prohibited-secret.log.txt",
+      "expected_bytes": 185,
+      "actual_bytes": 185,
+      "expected_mode": "100644",
+      "actual_mode": "100644",
+      "content_not_read_or_hashed": true
+    }
+  ],
+  "protected_groups": {
+    "public_snapshots": {
+      "count": 13,
+      "sha256_and_mode_equal": true
+    },
+    "synthetic": {
+      "count": 17,
+      "sha256_and_mode_equal": true
+    },
+    "golden": {
+      "count": 2,
+      "sha256_and_mode_equal": true
+    },
+    "config": {
+      "count": 19,
+      "sha256_and_mode_equal": true
+    },
+    "authority_docx": {
+      "count": 1,
+      "sha256_and_mode_equal": true
+    },
+    "screening_helpers": {
+      "count": 2,
+      "sha256_and_mode_equal": true
+    }
+  },
+  "ordinary_index_sha256": "770d3e296985bb61b52211fd365a2b0cad96e8faf512949dfb57f236eb54eaf5",
+  "checks": [
+    {
+      "name": "original M1 RED",
+      "command_receipt": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/codex-cli-m1-correction-resume-1/RED-COMMAND.json",
+      "exit_code": 1,
+      "stdout": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/codex-cli-m1-correction-resume-1/RED.stdout",
+      "note": "historical regression failures before original M1 source fix"
+    },
+    {
+      "name": "alternate-root M1 RED",
+      "command_receipt": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/codex-cli-m1-correction-resume-1/RED-ALT-COMMAND.json",
+      "exit_code": 1,
+      "stdout": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/codex-cli-m1-correction-resume-1/RED-ALT.stdout",
+      "note": "historical root-bound family failure before source fix"
+    },
+    {
+      "name": "exact alias closure RED",
+      "command_receipt": "RED-ALIAS-COMMAND.json",
+      "exit_code": 1,
+      "stdout": "RED-ALIAS.stdout",
+      "note": "2 expected failures: omitted aluminium alias and unapproved canonical-ID fallback"
+    },
+    {
+      "name": "exact alias GREEN focus",
+      "command_receipt": "GREEN-FOCUS-COMMAND.json",
+      "exit_code": 0,
+      "stdout": "GREEN-FOCUS.stdout",
+      "passed": 8
+    },
+    {
+      "name": "affected graph golden isolation all-eleven GREEN",
+      "command_receipt": "GREEN-AFFECTED-COMMAND.json",
+      "exit_code": 0,
+      "stdout": "GREEN-AFFECTED.stdout",
+      "passed": 131
+    },
+    {
+      "name": "actual repository case-loader label inventory",
+      "command_receipt": "LOADER-INVENTORY-COMMAND.json",
+      "exit_code": 0,
+      "result": "LOADER-INVENTORY.json",
+      "cases": 11,
+      "producer_records": 7,
+      "labels": {
+        "coated_steel": 2,
+        "fabricated_aluminium": 2,
+        "polypropylene": 3
+      },
+      "unmapped": []
+    }
+  ],
+  "deferred": {
+    "stock_generation": true,
+    "saved_artifact_semantic_acceptance": true,
+    "pins_and_manifests": true,
+    "strict_R1": true,
+    "full_suite_and_integrity": true,
+    "canonical_capture_and_services": true,
+    "independent_implementation_review": true
+  },
+  "non_acceptance_receipt": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/codex-cli-m1-correction-resume-1/SEMANTIC-PREGEN.json",
+  "non_acceptance_reason": "Prior in-memory diagnostic normalization is not the required exact saved-artifact comparison; root will perform the stock successor gate."
+}

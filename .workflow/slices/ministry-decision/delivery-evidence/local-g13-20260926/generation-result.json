@@ -1,0 +1,52 @@
+{
+  "utc": "2026-09-26T20:44:28.780584+00:00",
+  "status": "ALL_SEVEN_GENERATION_GATES_PASS_EXACT_WRITE_ENVELOPE",
+  "projection_id": "GRAPH-SAU-2026-09-12-c9841fe8e850",
+  "engine_run_id": "ENGINE-941521e7a5e5",
+  "counts": {
+    "nodes": 1160,
+    "edges": 1248
+  },
+  "snapshot_count": 746,
+  "authority_count": 20,
+  "exact_snapshot_membership_added": [
+    "data/graph/projections/GRAPH-SAU-2026-09-12-c9841fe8e850/manifest.json",
+    "data/graph/projections/GRAPH-SAU-2026-09-12-c9841fe8e850/projection.json"
+  ],
+  "exact_snapshot_membership_removed": [],
+  "changed_existing_snapshot_entries": [
+    "data/graph/current.json",
+    "data/synthetic/SYN-MINISTRY-PP-001.json",
+    "data/synthetic/SYN-MINISTRY-STEEL-001.json"
+  ],
+  "all_manifest_hashes_and_sizes_verified": true,
+  "semantic_inspection_sha256": "7539f151693eeeacb54521bd70e22fdf940aee29018ecd6b54de47d79e95fa04",
+  "outputs": {
+    "data/graph/current.json": {
+      "sha256": "6d0b5798a53344a3dbbea60d59851c8139e687a9fe5ca1ec49acda241f98d5b2",
+      "bytes": 139
+    },
+    "data/graph/projections/GRAPH-SAU-2026-09-12-c9841fe8e850/manifest.json": {
+      "sha256": "eeb89e290dd0f08b549ea7db95f81baf659c1492d8034cc3b8d8106d80a2effe",
+      "bytes": 228
+    },
+    "data/graph/projections/GRAPH-SAU-2026-09-12-c9841fe8e850/projection.json": {
+      "sha256": "984a884c7ec6aa8602a3f3291aaaf2aa26546688b81d0b408f42db384924e888",
+      "bytes": 2982424
+    },
+    "data/manifests/snapshot_manifest.json": {
+      "sha256": "d2617cf56d63398c25cb5e946de2874e6ccaaaa0ccf180945fb0e0957c522a88",
+      "bytes": 178455
+    },
+    "docs/authority/00_AUTHORITY_MANIFEST.md": {
+      "sha256": "179a0493aecaa67871ec2c137bf0b429a04c6b9a51c16646ccd2396dae221997",
+      "bytes": 11023
+    },
+    "docs/authority/authority_hashes.json": {
+      "sha256": "43b3378b407b8cdf09978ed10a4f4b74f7a9e2b7526cb22a83fd366aade0933f",
+      "bytes": 3540
+    }
+  },
+  "ordinary_index_sha256": "770d3e296985bb61b52211fd365a2b0cad96e8faf512949dfb57f236eb54eaf5",
+  "not_claimed": "Final capture/review/GitHub/live delivery"
+}

@@ -1,7 +1,11 @@
 from __future__ import annotations
 
 import json
+import hashlib
 from copy import deepcopy
+from pathlib import Path
+
+import yaml
 
 import pytest
 
@@ -70,6 +74,114 @@ def test_live_authority_files_are_inputs_without_generated_manifest_cycle() -> N
     )
     assert "docs/core/04_CANONICAL_DATA_MODEL.md" in paths
     assert "config/graph_views.v1.yaml" in paths
+
+
+_FAMILY_IMPLEMENTATION_INPUTS = {
+    "src/ior_mvp/screening/__init__.py",
+    "src/ior_mvp/screening/config.py",
+}
+
+
+def _alternate_graph_root(tmp_path: Path) -> Path:
+    root = tmp_path / "alternate"
+    root.mkdir()
+    for directory in ("data", "docs"):
+        (root / directory).symlink_to(PROJECT_ROOT / directory, target_is_directory=True)
+    config = root / "config"
+    config.mkdir()
+    for path in (PROJECT_ROOT / "config").iterdir():
+        target = config / path.name
+        if path.name == "product_families.v1.yaml":
+            target.write_bytes(path.read_bytes())
+        else:
+            target.symlink_to(path, target_is_directory=path.is_dir())
+    package = root / "src/ior_mvp"
+    package.mkdir(parents=True)
+    for path in (PROJECT_ROOT / "src/ior_mvp").glob("*.py"):
+        (package / path.name).symlink_to(path)
+    for directory in ("cases", "graph"):
+        (package / directory).symlink_to(
+            PROJECT_ROOT / "src/ior_mvp" / directory, target_is_directory=True
+        )
+    screening = package / "screening"
+    screening.mkdir()
+    for name in ("__init__.py", "config.py"):
+        (screening / name).symlink_to(PROJECT_ROOT / "src/ior_mvp/screening" / name)
+    return root
+
+
+def test_graph_inputs_bind_exact_required_screening_family_helpers() -> None:
+    rows = discover_inputs(PROJECT_ROOT)
+    by_path = {row["path"]: row for row in rows}
+    assert len(rows) == 240
+    assert {
+        path for path in by_path if path.startswith("src/ior_mvp/screening/")
+    } == _FAMILY_IMPLEMENTATION_INPUTS
+    for path in _FAMILY_IMPLEMENTATION_INPUTS:
+        assert by_path[path]["kind"] == "ENGINE_IMPLEMENTATION"
+        assert by_path[path]["sha256"] == hashlib.sha256(
+            (PROJECT_ROOT / path).read_bytes()
+        ).hexdigest()
+
+
+@pytest.mark.parametrize("missing", sorted(_FAMILY_IMPLEMENTATION_INPUTS))
+def test_graph_inputs_fail_closed_when_family_helper_is_missing(tmp_path: Path, missing: str) -> None:
+    root = _alternate_graph_root(tmp_path)
+    (root / missing).unlink()
+    with pytest.raises(ValueError, match="Required graph implementation input"):
+        discover_inputs(root)
+
+
+@pytest.mark.parametrize("changed", sorted(_FAMILY_IMPLEMENTATION_INPUTS))
+def test_changed_family_helper_changes_graph_input_identity(tmp_path: Path, changed: str) -> None:
+    root = _alternate_graph_root(tmp_path)
+    baseline = discover_inputs(root)
+    target = root / changed
+    target.unlink()
+    target.write_bytes((PROJECT_ROOT / changed).read_bytes() + b"\n# isolated graph-input mutation\n")
+    mutated = discover_inputs(root)
+    before = {row["path"]: row for row in baseline}
+    after = {row["path"]: row for row in mutated}
+    assert len(before) == len(after) == 240
+    assert {path for path in before if before[path] != after[path]} == {changed}
+    assert projection_id(baseline, as_of="2026-09-26") != projection_id(mutated, as_of="2026-09-26")
+
+
+def test_graph_build_uses_validated_alternate_root_family_config(
+    tmp_path: Path, projection: GraphProjection, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    from ior_mvp.graph import projection as graph_projection
+
+    root = _alternate_graph_root(tmp_path)
+    original_case_loader = graph_projection._load_repository_cases
+    # Case-brief paths require real in-root files; only configuration differs here.
+    monkeypatch.setattr(
+        graph_projection, "_load_repository_cases",
+        lambda _root: original_case_loader(PROJECT_ROOT),
+    )
+    config_path = root / "config/product_families.v1.yaml"
+    config = yaml.safe_load(config_path.read_text(encoding="utf-8"))
+    config["families"]["polypropylene_primary_forms"]["hs4_headings"] = []
+    config["families"]["polypropylene_primary_forms"]["status"] = "MEMBERSHIP_UNAVAILABLE"
+    config["families"]["technical_plastics_conversion"]["hs4_headings"].append("3902")
+    config_path.write_text(yaml.safe_dump(config, sort_keys=False), encoding="utf-8")
+    changed = build_repository_projection(root)
+
+    def sabic_family(graph: GraphProjection) -> bool | None:
+        rows = [edge for edge in graph.edges if edge.type == "ADJACENT_TO"
+                and edge.source == "COMPANY-f2d406af94a8aac1"
+                and edge.target == "SAU-H0-390210"
+                and edge.properties.get("attribution_scope") == "PRODUCER_DISCLOSURE"]
+        assert len(rows) == 1
+        return rows[0].properties["same_process_family"]
+
+    assert sabic_family(projection) is True
+    assert sabic_family(changed) is False
+    assert projection.projection_id != changed.projection_id
+    config["metadata"]["version"] = "invalid"
+    config_path.write_text(yaml.safe_dump(config, sort_keys=False), encoding="utf-8")
+    with pytest.raises(ValueError, match="product-family version"):
+        build_repository_projection(root)
 
 
 def test_two_builds_are_byte_identical() -> None:

@@ -1,0 +1,84 @@
+{
+  "at_utc": "2026-09-27T00:54:53.944508+00:00",
+  "values": {
+    "Id": "42216eec09ddb9d4ad68058d1d1547c1980281fbbeff5a53f8ae145f42ec8d1e",
+    "Name": "/ior-aura-operator-proof-20260923",
+    "Image": "sha256:037cf5756f0135cbfd66b739b6df7c7c4bb100f9ce11602f6f9538e17e02c74d",
+    "Mounts": [
+      {
+        "Type": "bind",
+        "Source": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/overnight-2026-09-23/aura/operator/private-local/neo4j_auth.txt",
+        "Destination": "/run/secrets-source/neo4j_auth",
+        "Mode": "",
+        "RW": false,
+        "Propagation": "rprivate"
+      },
+      {
+        "Type": "volume",
+        "Name": "ior-aura-operator-proof-20260923-data",
+        "Source": "/var/lib/docker/volumes/ior-aura-operator-proof-20260923-data/_data",
+        "Destination": "/data",
+        "Driver": "local",
+        "Mode": "rw",
+        "RW": true,
+        "Propagation": ""
+      },
+      {
+        "Type": "volume",
+        "Name": "b86e57ced19840e03be8ff672db10868376badd0cea6f3f2c844e0f979d66024",
+        "Source": "/var/lib/docker/volumes/b86e57ced19840e03be8ff672db10868376badd0cea6f3f2c844e0f979d66024/_data",
+        "Destination": "/logs",
+        "Driver": "local",
+        "Mode": "",
+        "RW": true,
+        "Propagation": ""
+      }
+    ],
+    "HostConfig.PortBindings": {
+      "7474/tcp": [
+        {
+          "HostIp": "",
+          "HostPort": "7475"
+        }
+      ],
+      "7687/tcp": [
+        {
+          "HostIp": "",
+          "HostPort": "7688"
+        }
+      ]
+    },
+    "HostConfig.NetworkMode": "ior-aura-operator-proof-20260923-net",
+    "NetworkSettings.Networks": {
+      "ior-aura-operator-proof-20260923-net": {
+        "IPAMConfig": null,
+        "Links": null,
+        "Aliases": [
+          "ior-aura-operator-proof-20260923",
+          "industrial-mvp-neo4j"
+        ],
+        "DriverOpts": null,
+        "GwPriority": 0,
+        "NetworkID": "2578393a1ac37ba34f76c9386012b1e6c749a0468d85a8ded9ce9913990c79b9",
+        "EndpointID": "37b08ff150fd621f2fcc468a28543bd40d6074311586fdea1a007352699a5231",
+        "Gateway": "172.24.0.1",
+        "IPAddress": "172.24.0.2",
+        "MacAddress": "36:65:e6:f8:3b:a1",
+        "IPPrefixLen": 16,
+        "IPv6Gateway": "",
+        "GlobalIPv6Address": "",
+        "GlobalIPv6PrefixLen": 0,
+        "DNSNames": [
+          "ior-aura-operator-proof-20260923",
+          "industrial-mvp-neo4j",
+          "42216eec09dd"
+        ]
+      }
+    },
+    "State.Status": "running",
+    "State.Running": true,
+    "State.Health.Status": "healthy"
+  },
+  "non_env_config_sha256": "ac70bfd89c13bab6bacc5c240fdb80e96a324afcebc2abc418825576cf16de34",
+  "credential_exists_mode0600_stat_only": true
+}

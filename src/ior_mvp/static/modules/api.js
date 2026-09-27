@@ -31,8 +31,12 @@ export function graphCatalogueEndpoint() {
   return "/api/graph/catalogue";
 }
 
-export function graphViewEndpoint(id, viewId, mode) {
-  return `/api/graph/opportunities/${encodeURIComponent(id)}/views/${encodeURIComponent(viewId)}?mode=${encodeURIComponent(mode)}`;
+export function graphViewEndpoint(id, viewId, mode, context = {}) {
+  const query = new URLSearchParams({ mode });
+  for (const key of ["company_id", "plant_id", "line_id", "requirement_item_id"]) {
+    if (context[key]) query.set(key, context[key]);
+  }
+  return `/api/graph/opportunities/${encodeURIComponent(id)}/views/${encodeURIComponent(viewId)}?${query}`;
 }
 
 export function dossierEndpoint(id, mode) {

@@ -312,3 +312,15 @@ Any new domain function must be added to this map before implementation review c
 | Arabic/English governed presentation | `config/ui_strings.v1.yaml`1.6.0, executive labels and scoped CSS | Methodology §10.3; Core03§7; existing locale policy | catalogue, full-subtree Arabic parity, keyboard/axe/responsive tests | RTL layout, isolated technical IDs and explicitly attributed verbatim sources |
 
 S18b AM2 maps the source-traceability and bilingual presentation requirements to `graph/labels.js`, `graph/render.js`, `graph/diagram.js` and graph-scoped CSS. Actual stored company names and genuine Arabic names are tested independently; source-caption parity, visible/accessibility disclosure, keyboard navigation and panel containment are presentation proofs, not evidence that a graph service or Aura is available. No canonical graph content, route calculation or evidence class changes.
+
+## Ministry M preliminary assessment mapping
+
+| Governing clause | Implementation home | Required proof |
+|---|---|---|
+| §4 R9-S; §6.0 | `candidate_discovery.py` applies the unchanged R9-S screen per attributed plant and composes finite record findings; `rules.py` retains the predicate | Same-source/subject signals, no double-use of a prerequisite, no opportunity-wide producer fanout, ninth-company mutation |
+| §4 R9-S; §14 public producer evidence | `graph.projection._public_analysis` resolves the exact HS6 through the validated, build-root `product_families.v1.yaml`; `public_producer_adjacency` translates only the three exact reviewed source labels `coated_steel`, `polypropylene` and `fabricated_aluminium` to governed family IDs before calling unchanged `evaluate_r9s` per producer | PP SABIC's sole `P-SABIC` signal fires while Advanced/Tasnee receive no shared signal; steel, aluminium and the reference ledger remain unchanged; missing/unmapped family is null/DISABLED rather than false; 3902 primary forms differs from 3920 conversion; both exact `screening/{__init__,config}.py` dependencies are required graph inputs |
+| §6.0; §6.4 | `candidate_register.py`, `line_contract.py`, `line_comparison.py` validate scenario-local records and guard optional line comparison | Exact reference/period/requirement/field boundaries; no-enrichment and unknown-supply tests; Test 2 states, K, D* and route gates unchanged |
+| §10.2; evidence boundary | Scenario diagnostics, typed executive projection and graph context preserve DIRECT_RECORD, REVIEWED_INFERENCE, ENGINEERING_DECLARATION or UNKNOWN separately from evidence class | Public omission, Class-D labels, exact source membership, cross-scenario isolation and contradiction negatives |
+| §§6.0, 10.3 | Bilingual executive Q3 record journey and four-slot next action | Company→plant→line→finding→record scope and EN/AR browser checks |
+
+This table maps the approved bounded preliminary method. Additional module homes require their separate reviewed admission before they are named as implemented source. Source: governing DOCX amendment and approved Ministry M DOMAIN/DELIVERY contracts.

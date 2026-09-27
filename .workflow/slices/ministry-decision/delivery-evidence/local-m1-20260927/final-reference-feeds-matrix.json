@@ -1,0 +1,132 @@
+{
+  "branch_contexts": 22,
+  "four_feed_slots": 88,
+  "generated_edge_remaps_each_subject": 308,
+  "independent_reference_evaluations_each_subject": 11,
+  "literal_case_ids": [
+    "SAU-H0-390210",
+    "SAU-H0-721049",
+    "SAU-H6-294110",
+    "SAU-H6-294120",
+    "SAU-H6-310430",
+    "SAU-H6-310510",
+    "SAU-H6-392010",
+    "SAU-H6-721012",
+    "SAU-H6-721061",
+    "SAU-H6-760429",
+    "SAU-H6-760711"
+  ],
+  "pp_producer_rows": [
+    {
+      "key": "REL-070cd8848ccebdaf884f",
+      "properties": {
+        "as_of": "2026-08-31",
+        "attribution_scope": "PRODUCER_DISCLOSURE",
+        "derived": true,
+        "engine_run_id": "<GENERATED_ENGINE_RUN_ID>",
+        "evidence_class": "C",
+        "evidence_id": "ENGINE-EVIDENCE-SAU-H0-390210-public",
+        "evidence_ids": [
+          "ENGINE-EVIDENCE-SAU-H0-390210-public",
+          "P-ADVANCED"
+        ],
+        "execution": "FULL",
+        "fired": false,
+        "key": "REL-070cd8848ccebdaf884f",
+        "origin_kind": "ENGINE_RUN",
+        "origin_ref": "PUBLIC-SAU-H0-390210-2026-08-31",
+        "projection_id": "<GENERATED_PROJECTION_ID>",
+        "qualifying_signal_count": 0,
+        "result_code": "NO_DEFENSIBLE_SIGNAL",
+        "same_process_family": true,
+        "scenario_id": "PUBLIC",
+        "signal_evidence_ids": [],
+        "signals": [],
+        "synthetic_flag": false
+      },
+      "source": "COMPANY-0f8e69531f415144",
+      "target": "SAU-H0-390210",
+      "type": "ADJACENT_TO"
+    },
+    {
+      "key": "REL-55809b032e0c11eca88e",
+      "properties": {
+        "as_of": "2026-08-31",
+        "attribution_scope": "PRODUCER_DISCLOSURE",
+        "derived": true,
+        "engine_run_id": "<GENERATED_ENGINE_RUN_ID>",
+        "evidence_class": "C",
+        "evidence_id": "ENGINE-EVIDENCE-SAU-H0-390210-public",
+        "evidence_ids": [
+          "ENGINE-EVIDENCE-SAU-H0-390210-public",
+          "P-SABIC"
+        ],
+        "execution": "FULL",
+        "fired": true,
+        "key": "REL-55809b032e0c11eca88e",
+        "origin_kind": "ENGINE_RUN",
+        "origin_ref": "PUBLIC-SAU-H0-390210-2026-08-31",
+        "projection_id": "<GENERATED_PROJECTION_ID>",
+        "qualifying_signal_count": 1,
+        "result_code": "ADJACENT_PLANT_WITH_SIGNALS",
+        "same_process_family": true,
+        "scenario_id": "PUBLIC",
+        "signal_evidence_ids": [
+          "P-SABIC"
+        ],
+        "signals": [
+          {
+            "description": "broad producer grade portfolios",
+            "evidence_ids": [
+              "P-SABIC"
+            ],
+            "signal_type": "adjacent_output"
+          }
+        ],
+        "synthetic_flag": false
+      },
+      "source": "COMPANY-f2d406af94a8aac1",
+      "target": "SAU-H0-390210",
+      "type": "ADJACENT_TO"
+    },
+    {
+      "key": "REL-f1c754e99c2e18df1bd0",
+      "properties": {
+        "as_of": "2026-08-31",
+        "attribution_scope": "PRODUCER_DISCLOSURE",
+        "derived": true,
+        "engine_run_id": "<GENERATED_ENGINE_RUN_ID>",
+        "evidence_class": "C",
+        "evidence_id": "ENGINE-EVIDENCE-SAU-H0-390210-public",
+        "evidence_ids": [
+          "ENGINE-EVIDENCE-SAU-H0-390210-public",
+          "P-TASNEE"
+        ],
+        "execution": "FULL",
+        "fired": false,
+        "key": "REL-f1c754e99c2e18df1bd0",
+        "origin_kind": "ENGINE_RUN",
+        "origin_ref": "PUBLIC-SAU-H0-390210-2026-08-31",
+        "projection_id": "<GENERATED_PROJECTION_ID>",
+        "qualifying_signal_count": 0,
+        "result_code": "NO_DEFENSIBLE_SIGNAL",
+        "same_process_family": true,
+        "scenario_id": "PUBLIC",
+        "signal_evidence_ids": [],
+        "signals": [],
+        "synthetic_flag": false
+      },
+      "source": "COMPANY-f3a50c477f158420",
+      "target": "SAU-H0-390210",
+      "type": "ADJACENT_TO"
+    }
+  ],
+  "reference_fields": [
+    "execution",
+    "fired",
+    "qualifying_signal_count",
+    "result_code",
+    "same_process_family"
+  ],
+  "status": "PASS"
+}

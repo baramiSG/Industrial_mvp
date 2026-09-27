@@ -5,7 +5,11 @@ from math import isfinite
 from typing import Any
 from .evidence import EvidenceIntegrityError, synthetic_display_labels
 from .scenario_contract import _validate_buyer_allocation
-from .dossier_validation import DossierIntegrityError, require_mapping
+from .dossier_validation import (
+    DossierIntegrityError,
+    reject_workspace_diagnostics,
+    require_mapping,
+)
 
 MISSING=object()
 SCENARIO_FIELDS={
@@ -16,6 +20,21 @@ SCENARIO_FIELDS={
  'economics': ('currency','cash_flows_without_support','hurdle_rate','minimum_efficient_scale_kt','support_instrument','support_required','reason','national_value'),
  'buyer_allocation': ('basis','buyers'),
 }
+# Engine-only and workspace-only inputs are named here so a future block cannot
+# enter the export by being silently ignored at this boundary.
+EXCLUDED_SCENARIO_FIELDS=frozenset({
+ 'capability_states','class_if_confirmed','counterfactual',
+ 'decision_specific_hard_gates','equivalence','evsi','hard_exclusion_inputs',
+ 'hard_gates','shared_enabler','tariff_line_allocation','competition_inputs',
+ 'production_and_retained_flows','candidate_register','candidate_lines',
+})
+ROUTE_INPUT_FIELDS=frozenset({
+ 'basis','binding_constraint','binding_constraint_fully_removed','competition',
+ 'distortion_unacceptable','downside_cash_flows_m_sar','hurdle_rate',
+ 'intervention_proportionate_to_constraint','investment_already_approved_or_financed',
+ 'national_value','policy_prohibition_identified','proceeds_without_intervention',
+ 'route_code','technical_feasibility_confirmed',
+})
 NUMERIC_SCENARIO={
  'plant_line':set(SCENARIO_FIELDS['plant_line']), 'demand':set(SCENARIO_FIELDS['demand']),
  'target_specification':{'coating_mass_g_m2','tin_coating_g_m2','thickness_mm','thickness_um','width_mm'},
@@ -56,6 +75,9 @@ def project_inputs(scenario: dict | None, evidence: list[dict]) -> dict:
     if scenario is None:return {}
     passports={row['evidence_id'] for row in evidence}
     inputs=scenario['synthetic_inputs'];result={};tag=boundary('simulated',scenario)
+    unknown=set(inputs)-set(SCENARIO_FIELDS)-EXCLUDED_SCENARIO_FIELDS-{'route_evidence'}
+    if unknown:
+        raise DossierIntegrityError('Dossier unreviewed scenario blocks: '+', '.join(sorted(unknown)))
     for name,whitelist in SCENARIO_FIELDS.items():
         if name not in inputs:continue
         value=require_mapping(inputs[name],f'scenario.synthetic_inputs.{name}')
@@ -76,7 +98,10 @@ def project_inputs(scenario: dict | None, evidence: list[dict]) -> dict:
                       'evidence_ids':[evidence_id],**tag}
     routes=inputs.get('route_evidence',[])
     if not isinstance(routes,list):raise DossierIntegrityError('Dossier route evidence must be a list')
-    for row in routes:require_mapping(row,'scenario.synthetic_inputs.route_evidence[]')
+    for row in routes:
+        require_mapping(row,'scenario.synthetic_inputs.route_evidence[]')
+        if set(row)-ROUTE_INPUT_FIELDS:
+            raise DossierIntegrityError('Dossier unreviewed route evidence fields')
     selected=[{key:deepcopy(row[key]) for key in ('route_code','downside_cash_flows_m_sar','hurdle_rate','basis') if key in row}
               for row in routes]
     if selected:
@@ -144,13 +169,17 @@ def project_dossier(analysis: dict, scenario: dict | None) -> dict:
     blocks['ledger']['records']['rules']=deepcopy(analysis['rules'])
     blocks['conditions']['records'].update({key:deepcopy(analysis['active_decision'].get(key,[])) for key in ('conditions','kill_conditions','missing_facts')})
     blocks['authority']['records']={key:deepcopy(analysis[key]) for key in ('authority','integrity','snapshot_id','as_of_date')}
-    local_ids={row['evidence_id'] for row in analysis['evidence']}
+    excluded_passports={f"{scenario['scenario_id']}::{name}" for name in ('candidate_register','candidate_lines')} if scenario else set()
+    dossier_passports=[row for row in analysis['evidence'] if row['evidence_id'] not in excluded_passports]
+    local_ids={row['evidence_id'] for row in dossier_passports}
     external=sorted({e for route in analysis['route_hypotheses'] if route.get('route_code')==8 for e in route.get('evidence_ids',[]) if e not in local_ids})
-    pack={'passports':deepcopy(analysis['evidence']),'scenario_inputs':inputs,
+    pack={'passports':deepcopy(dossier_passports),'scenario_inputs':inputs,
           'external_dependencies':[{'evidence_id':e,'status':'EXTERNAL_DEPENDENCY','source_path':'analysis.route_hypotheses[route_code=8].evidence_ids'} for e in external],
           'decision_history':{'status':'NONE_RECORDED','records':[]},'expert_overrides':{'status':'NONE_RECORDED','records':[]},
           'revision_concordance':{'availability':'UNAVAILABLE','source_path':None},
           'specification_source_spans':{'availability':'UNAVAILABLE','records':[]}}
     blocks['evidence']['records']={'local_evidence_ids':sorted(local_ids),'external_dependencies':deepcopy(pack['external_dependencies'])}
-    return {'dossier_version':'2.0.0','public_decision':deepcopy(analysis['real_decision']),
+    dossier={'dossier_version':'2.0.0','public_decision':deepcopy(analysis['real_decision']),
             'blocks':blocks,'evidence_pack':pack}
+    reject_workspace_diagnostics(dossier)
+    return dossier

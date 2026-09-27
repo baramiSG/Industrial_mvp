@@ -1,0 +1,163 @@
+{
+  "status": "PASS",
+  "candidate_tree": "fe98722cba6539514772d9009a4db4e1ccbe835b",
+  "proof_commit": "241e4dfd935bee8017c147a0ee65f9308c4a4a19",
+  "commands": [
+    {
+      "name": "verify-proof-and-create-fresh-r1-root",
+      "argv": [
+        "/usr/bin/python3",
+        "-B",
+        "-c",
+        "import json,subprocess,os\nfrom pathlib import Path\np=Path('/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/final-candidate-replacement-2/proof'); e=Path('/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision'); r=Path('/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/r1-successor-replacement-2')\nb=json.loads((e/'final-candidate-replacement-2/BINDING.json').read_text())\nassert Path(b['proof_root'])==p\nfor expression,key in [('HEAD','proof_commit'),('HEAD^{tree}','candidate_tree')]:\n    assert subprocess.check_output(['git','--no-optional-locks','-C',str(p),'rev-parse',expression],text=True).strip()==b[key]\nassert not r.exists()\nr.mkdir(); (r/'source').mkdir(); (r/'output').mkdir()\nprint('FINAL_PROOF_IDENTITIES_MATCH_RECEIPT_AND_FRESH_R1_ROOT_CREATED')\n"
+      ],
+      "cwd": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision",
+      "exit": 0,
+      "elapsed_seconds": 0.017,
+      "stdout_sha256": "a242479666bdcb4500cb064942667cea90c3968dc1285f9b04bf3b7856e2846f",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "archive-verified-proof-head",
+      "argv": [
+        "git",
+        "--no-optional-locks",
+        "-C",
+        "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/final-candidate-replacement-2/proof",
+        "archive",
+        "--format=tar",
+        "--output=/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/r1-successor-replacement-2/source.tar",
+        "HEAD"
+      ],
+      "cwd": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision",
+      "exit": 0,
+      "elapsed_seconds": 0.709,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "extract-only-permitted-source",
+      "argv": [
+        "tar",
+        "--extract",
+        "--file=/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/r1-successor-replacement-2/source.tar",
+        "--directory=/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/r1-successor-replacement-2/source",
+        "--exclude=.env.example",
+        "--exclude=./.env.example"
+      ],
+      "cwd": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision",
+      "exit": 0,
+      "elapsed_seconds": 0.792,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "bind-actual-source-and-unchanged-helper-schema",
+      "argv": [
+        "/usr/bin/python3",
+        "-B",
+        "-c",
+        "import hashlib,subprocess,sys,tarfile\nfrom pathlib import Path\nf=Path('/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-foundation/replacement-2/r1-successor'); e=Path('/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision'); r=Path('/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/r1-successor-replacement-2')\nsys.path.insert(0,str(f/'helpers'))\nimport compare\ncandidate=compare.parse_json((e/'final-candidate-replacement-2/BINDING.json').read_text())\nassert candidate['proof_root']=='/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/final-candidate-replacement-2/proof'\nfor expression,key in [('HEAD','proof_commit'),('HEAD^{tree}','candidate_tree')]:\n    compare.check(subprocess.check_output(['git','--no-optional-locks','-C',candidate['proof_root'],'rev-parse',expression],text=True).strip()==candidate[key], 'candidate/'+key, 'FINAL_RECEIPT_MISMATCH')\nb=compare.parse_json((f/'RUNTIME-BINDING.json').read_text())\ninventory={}\nfor path in sorted((r/'source').rglob('*')):\n    name=path.relative_to(r/'source').as_posix()\n    compare.valid_path(name,'source/path')\n    compare.check(not path.is_symlink(),'source/path','SYMLINK_FORBIDDEN')\n    if path.is_file(): inventory[name]=hashlib.sha256(path.read_bytes()).hexdigest()\n    else: compare.check(path.is_dir(),'source/path','SPECIAL_FILE_FORBIDDEN')\narchive_inventory={}\nwith tarfile.open(r/'source.tar','r') as archive:\n    for member in archive.getmembers():\n        if member.isdir(): continue\n        compare.check(member.isfile(),'archive/path','ONLY_REGULAR_SOURCE_FILES')\n        if member.name=='.env.example': continue\n        compare.valid_path(member.name,'archive/path')\n        compare.check(member.name not in archive_inventory,'archive/path','DUPLICATE_PATH')\n        archive_inventory[member.name]=hashlib.sha256(archive.extractfile(member).read()).hexdigest()\ncompare.check(inventory==archive_inventory,'source/archive','ARCHIVE_INVENTORY_MISMATCH')\ncurrent=compare.parse_json((r/'source/data/graph/current.json').read_text())\ncompare.check(current['projection_id']=='GRAPH-SAU-2026-09-12-c9841fe8e850','source/projection','WRONG_CURRENT_GRAPH')\nb.update(candidate_tree=candidate['candidate_tree'],proof_commit=candidate['proof_commit'],projection_id='GRAPH-SAU-2026-09-12-c9841fe8e850',old_token='ENGINE-64e24689a59f',new_token='ENGINE-941521e7a5e5',source_inventory=inventory,source_inventory_sha256=compare.digest(inventory))\ncompare.validate_binding(b)\ncompare.write_new(r/'RUNTIME-BINDING.json',b)\nprint('R1_RUNTIME_BINDING_WRITTEN',len(inventory),'source files', 'binding_file_sha256='+hashlib.sha256((r/'RUNTIME-BINDING.json').read_bytes()).hexdigest(), 'binding_canonical_sha256='+compare.digest(b), 'archive_sha256='+hashlib.sha256((r/'source.tar').read_bytes()).hexdigest())\n"
+      ],
+      "cwd": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision",
+      "exit": 0,
+      "elapsed_seconds": 1.114,
+      "stdout_sha256": "222d1eff64d233b3b30a80ea4c0e9a2c574e1d2cefd17256f54a321fbe2da695",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "capture",
+      "argv": [
+        "/usr/bin/docker",
+        "run",
+        "--rm",
+        "--pull=never",
+        "--name",
+        "ior-ministry-m-r1-replacement-2",
+        "--network=none",
+        "--read-only",
+        "--user",
+        "1000:1000",
+        "--shm-size=1g",
+        "--tmpfs",
+        "/tmp:rw,nosuid,nodev,mode=1777",
+        "--workdir",
+        "/workspace",
+        "--env",
+        "HOME=/tmp",
+        "--env",
+        "XDG_CACHE_HOME=/tmp/.cache",
+        "--env",
+        "PLAYWRIGHT_BROWSERS_PATH=/ms-playwright",
+        "--env",
+        "PYTHONDONTWRITEBYTECODE=1",
+        "--env",
+        "PYTHONUNBUFFERED=1",
+        "--env",
+        "PYTHONPATH=/workspace/src",
+        "--env",
+        "IOR_PRODUCER_IMAGE_ID=sha256:938b534c8bac0f80012299fc0bba33c00d29f2ade02416bbc1df9d9c028f8112",
+        "--env",
+        "IOR_PRODUCER_BASE_DIGEST=mcr.microsoft.com/playwright/python:v1.62.0-noble@sha256:aa81288e738725378becba5b3e06cb0f3a7f012a610e87e8d767a090ea3f740d",
+        "--mount",
+        "type=bind,src=/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/r1-successor-replacement-2/source,dst=/workspace,readonly",
+        "--mount",
+        "type=bind,src=/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-foundation/replacement-2/r1-successor/helpers,dst=/r1-helpers,readonly",
+        "--mount",
+        "type=bind,src=/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/r1-successor-replacement-2/RUNTIME-BINDING.json,dst=/r1-binding.json,readonly",
+        "--mount",
+        "type=bind,src=/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/r1-successor-replacement-2/output,dst=/proof",
+        "--entrypoint",
+        "/opt/ior-venv/bin/python",
+        "sha256:938b534c8bac0f80012299fc0bba33c00d29f2ade02416bbc1df9d9c028f8112",
+        "-B",
+        "/r1-helpers/capture.py",
+        "--binding",
+        "/r1-binding.json",
+        "--out",
+        "/proof/measurements"
+      ],
+      "cwd": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision",
+      "exit": 0,
+      "elapsed_seconds": 7.819,
+      "stdout_sha256": "b79d015b3bf79ed5340207de656a352bfb51f0f14f81c5a847bb63f1146f1753",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "within-candidate",
+      "argv": [
+        "/usr/bin/python3",
+        "-B",
+        "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-foundation/replacement-2/r1-successor/helpers/compare.py",
+        "--binding",
+        "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/r1-successor-replacement-2/RUNTIME-BINDING.json",
+        "--measurements",
+        "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/r1-successor-replacement-2/output/measurements",
+        "--out",
+        "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/r1-successor-replacement-2/output/COMPARISON.json"
+      ],
+      "cwd": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision",
+      "exit": 0,
+      "elapsed_seconds": 0.252,
+      "stdout_sha256": "c24b95a8a4dacc2176ce82adb907ff1b974e1e9127b358f3fd375947b75a782c",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "whole-F-reference",
+      "argv": [
+        "/usr/bin/python3",
+        "-B",
+        "-c",
+        "import hashlib,sys\nfrom pathlib import Path\nf=Path('/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-foundation/replacement-2/r1-successor'); r=Path('/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision/r1-successor-replacement-2')\nsys.path.insert(0,str(f/'helpers'))\nimport compare\nexpected={'en':'433fa0aabed03a27aa57c9c26a6ccef4b347f0892df90f9d0cc68a4556b7beca','ar':'831a96071fe7aab1a5b6a37fa7ccc817d229b48a0669d43f23dba1d6a71602e8'}\ncomparison=compare.parse_json((r/'output/COMPARISON.json').read_text())\ncompare.check(comparison['pass'] is True,'M/comparison','R1_MUST_PASS_FIRST')\nfor locale,digest in expected.items():\n    path=f/'output/measurements'/(locale+'-N.json')\n    compare.check(hashlib.sha256(path.read_bytes()).hexdigest()==digest,locale,'F_REFERENCE_HASH')\n    old=compare.parse_json(path.read_text())\n    current=compare.parse_json((r/'output/measurements'/(locale+'-O.json')).read_text())\n    compare.equal(current['measurement'],old['measurement'],locale+'/M-O-vs-F-N','F_GEOMETRY_OR_TEXT_DRIFT')\nprint('M_O_EQUALS_DELIVERED_F_N_BOTH_LOCALES')\n"
+      ],
+      "cwd": "/home/barami/projects/industrial-opportunity-resolution-mvp/.autonomous-workflow/mission-20260925/ministry-decision",
+      "exit": 0,
+      "elapsed_seconds": 0.038,
+      "stdout_sha256": "017363e4644d9bbc27c69c19379b50812d9dfe534d12329ebff43f5832734f90",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "source_changes": [],
+  "ordinary_index_unchanged": true,
+  "utc": "2026-09-26T22:08:07.376237+00:00"
+}

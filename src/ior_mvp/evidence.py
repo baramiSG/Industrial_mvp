@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from copy import deepcopy
 import math
+import re
 from math import isfinite
 from typing import Any, Iterable, Literal
 
@@ -151,6 +152,33 @@ def synthetic_display_labels() -> dict[str, str]:
                 f"display_label_{locale} must be a non-empty string"
             )
     return labels
+
+
+def executive_policy_copy() -> dict[str, dict[str, str]]:
+    """Return complete bilingual executive disclosure from the policy source."""
+    policy = _synthetic_policy()
+    fields = {
+        "headline": ("executive_headline", "executive_headline_ar"),
+        "reference_condition": (
+            "reference_economics_condition", "reference_economics_condition_ar",
+        ),
+    }
+    result: dict[str, dict[str, str]] = {}
+    for label, (en_key, ar_key) in fields.items():
+        en = _required_policy_value(policy, en_key)
+        ar = _required_policy_value(policy, ar_key)
+        if any(not isinstance(value, str) or not value or value.strip() != value
+               for value in (en, ar)):
+            raise EvidenceIntegrityError(f"Executive policy {label} is invalid")
+        if label == "reference_condition" and (
+            set(re.findall(r"\{([a-z_]+)\}", en))
+            != {"increment_kt", "months"}
+            or set(re.findall(r"\{([a-z_]+)\}", ar))
+            != {"increment_kt", "months"}
+        ):
+            raise EvidenceIntegrityError("Executive policy condition placeholders differ")
+        result[label] = {"en": en, "ar": ar}
+    return result
 
 
 def validate_synthetic_scenario(scenario: dict[str, Any]) -> None:
